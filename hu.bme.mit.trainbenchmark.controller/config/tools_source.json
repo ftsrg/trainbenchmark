@@ -1,0 +1,74 @@
+{
+  "sesame": {
+    "url": "https://github.com/FTSRG/trainbenchmark-sesame.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-sesame"
+  },
+  "jena": {
+    "url": "https://github.com/FTSRG/trainbenchmark-jena.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-jena"
+  },
+  "neo4j": {
+    "url": "https://github.com/FTSRG/trainbenchmark-neo4j.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-neo4j"
+  },
+  "java": {
+    "url": "https://github.com/FTSRG/trainbenchmark-java.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-java"
+  },
+  "drools5": {
+    "url": "https://github.com/FTSRG/trainbenchmark-drools.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-drools"
+  },
+  "drools610": {
+    "url": "https://github.com/FTSRG/trainbenchmark-drools.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-drools"
+  },
+  "fourstore": {
+    "url": "https://github.com/FTSRG/trainbenchmark-fourstore.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-fourstore"
+  },
+  "mysql": {
+    "url": "https://github.com/FTSRG/trainbenchmark-mysql.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-mysql"
+  },
+  "postgresql": {
+    "url": "https://github.com/FTSRG/trainbenchmark-postgresql.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-postgresql"
+  },
+  "drools": {
+    "url": "https://github.com/FTSRG/trainbenchmark-drools.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-drools"
+  },
+  "eclipseocl": {
+    "url": "https://github.com/FTSRG/trainbenchmark-eclipseocl.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-eclipseocl"
+  },
+  "emfincquery": {
+    "url": "https://github.com/FTSRG/trainbenchmark-emfincquery.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-emfincquery"
+  }
+}

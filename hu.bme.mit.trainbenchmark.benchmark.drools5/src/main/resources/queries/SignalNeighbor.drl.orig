@@ -1,0 +1,15 @@
+    package Concept
+     
+    query "SignalNeighbor check"
+        route : Route( )
+        
+        sen1A : Sensor( this memberOf route.route_routeDefinition )
+        te1A : Trackelement( this memberOf sen1A.sensor_trackElement )
+        te2A : Trackelement( this memberOf te1A.trackElement_connectsTo)
+        sen2A : Sensor( this memberOf te2A.trackElement_sensor )
+        sigA : Signal( this == route.route_exit )
+        
+        Route( route_routeDefinition contains sen2A, this != route )
+        
+        not Route( route_entry == sigA, route_routeDefinition contains sen2A )
+    end

@@ -1,0 +1,42 @@
+<!--begin.rcode loadRChunks, results='asis', echo=FALSE, cache=FALSE, warning=TRUE
+read_chunk('plotLines.R')
+#read_chunk('functionsM14.R')
+source("functionsM14.R")
+source("configM14.R")
+end.rcode-->
+
+<!--begin.rcode dependencies, results='asis', echo=FALSE, cache=FALSE, warning=FALSE
+end.rcode-->
+  
+<html>
+
+<head>
+<title>TrainBenchmark Results</title>
+</head>
+
+<body>
+
+
+<!--begin.rcode readBasic, results='asis', echo=FALSE, cache=FALSE, warning=FALSE
+end.rcode-->
+
+
+
+<!--begin.rcode detailedBatchM14, results='asis', echo=FALSE, warning=FALSE, fig.width=16, fig.height=7, eval=TRUE
+scenario <- "XForm"
+query <- "RouteSensor"
+dataToPlot <- filterPlotData(data, query, scenario)
+plotALogM14(dataToPlot[["params"]], dataToPlot[["dataQuery"]], "ReadPCheck0", scenario, query);
+plotALogM14(dataToPlot[["params"]], dataToPlot[["dataQuery"]], "SumModifyPSumReCheck", scenario, query);
+plotALogM14(dataToPlot[["params"]], dataToPlot[["dataQuery"]], "SumReCheck", scenario, query);
+
+query <- "PosLength"
+for (query in list("PosLength", "SwitchSensor", "SignalNeighbor")) {
+  filteredData <- filterPlotData(data, query, scenario)
+  plotALogM14Multi(filteredData[["params"]], filteredData[["dataQuery"]], scenario, query)
+}
+end.rcode-->
+
+
+</body>
+</html>

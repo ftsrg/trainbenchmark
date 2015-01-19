@@ -1,0 +1,86 @@
+<!--begin.rcode loadRChunks, results='asis', echo=FALSE, cache=FALSE, warning=TRUE
+source("configs.R")
+read_chunk('plotLines.R')
+end.rcode-->
+
+<!--begin.rcode dependencies, results='hide', echo=FALSE, cache=FALSE, warning=TRUE, message=FALSE, error=FALSE
+end.rcode-->
+  
+<html>
+
+<head>
+<title>TrainBenchmark Results</title>
+</head>
+
+<body>
+<center><h1>Benchmark results of the TrainBenchmark</h1></center>
+
+<center>
+<a href="#sec1">Detailed results of the TrainBenchmark</a><br>
+</center>
+
+<a name="sec1"></a>
+<center><h2>Detailed results of the TrainBenchmark</h2></center>
+
+
+<!--begin.rcode readBasic, results='asis', echo=FALSE, cache=FALSE, warning=FALSE
+end.rcode-->
+
+<!--
+<p>
+Scenarios: -->
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE, eval=FALSE
+cat(levels(data$Scenario), sep=", ")
+end.rcode-->
+<!--
+<br>
+Queries:-->
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE, eval=FALSE
+cat(levels(data$Query), sep=", ")
+end.rcode-->
+<!--
+<br>
+Phases: Read, Check0, SumEdit, SumReCheck, Memory, Read+Check0, SumEdit+SumReCheck, Read+Check0+SumEdit+SumReCheck
+</p>
+-->
+
+<table border=1 align="center">
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+for (scenario in levels(data$Scenario)) {
+  cat(paste("<td align=\"center\" colspan=\"",length(levels(data$Query)),"\">",scenario, sep=""))
+}
+end.rcode-->
+</tr>
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+for (scenario in levels(data$Scenario)) {
+for (query in levels(data$Query)) {
+  cat(paste("<td align=\"center\">",query, sep=""))
+}
+}
+end.rcode-->
+</tr>
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+phases=c("Read", "Check0", "SumEdit", "SumReCheck", "Memory", "ReadPCheck0", "SumModifyPSumReCheck", "SumTime")
+phasesTxt=c("Read", "Check0", "SumEdit", "SumReCheck", "Memory", "R+C0", "SEd+SReChk", "SumTime")
+for (scenario in levels(data$Scenario)) {
+  for (query in levels(data$Query)) {
+    cat("<td align=\"center\">")
+    for (phase in phases) {
+      cat(paste("<a href=#", toAnchor(phase), "_", scenario, "_",query,">",phasesTxt[match(phase,phases)],"</a><br>", sep=""))
+    }
+    cat("</td>")
+  }
+}
+end.rcode-->
+</tr>
+</table>
+
+<!--begin.rcode detailedBatch, results='asis', echo=FALSE, warning=FALSE, fig.width=16, fig.height=7, eval=TRUE
+end.rcode-->
+
+
+</body>
+</html>

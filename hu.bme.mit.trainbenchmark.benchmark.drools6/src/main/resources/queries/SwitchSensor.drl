@@ -1,0 +1,5 @@
+package Concept
+
+query "SwitchSensor check" 
+    switch : Switch( trackElement_sensor.isEmpty() )
+end

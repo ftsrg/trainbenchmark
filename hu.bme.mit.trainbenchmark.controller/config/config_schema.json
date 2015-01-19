@@ -1,0 +1,265 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "scenarios": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "User",
+            "XForm",
+            "Batch"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "string",
+        "enum": [
+          "User",
+          "XForm",
+          "Batch"
+        ]
+      }
+    },
+    "MAVEN_OPTS": {
+      "type": "object",
+      "properties": {
+        "Xmx": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "512m"
+        },
+        "XX:MaxPermSize": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "256m"
+        }
+      }
+    },
+    "JAVA_OPTS": {
+      "type": "object",
+      "properties": {
+        "xmx": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "1g"
+        },
+        "maxPermSize": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "256m"
+        }
+      }
+    },
+    "minSize": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "maxSize": {
+      "type": "integer",
+      "default": 4
+    },
+    "workspacePath": {
+      "type": "string",
+      "default": "."
+    },
+    "measurements": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "timeout": {
+      "type": "string",
+      "pattern": "^[0-9]+[m,h]",
+      "default": "12m"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false
+    },
+    "defaultArgs": {
+      "type": "string"
+    },
+    "queries": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "PosLength",
+            "RouteSensor",
+            "SignalNeighbor",
+            "SwitchSensor",
+            "SegmentLength",
+            "SwitchNodes",
+            "RouteEntry",
+            "RouteRouteDefinition",
+            "TrackElementSensor"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "string",
+        "enum": [
+          "PosLength",
+          "RouteSensor",
+          "SignalNeighbor",
+          "SwitchSensor",
+          "SegmentLength",
+          "SwitchNodes",
+          "RouteEntry",
+          "RouteRouteDefinition",
+          "TrackElementSensor"
+        ]
+      },
+      "default": [
+        "PosLength",
+        "RouteSensor",
+        "SignalNeighbor",
+        "SwitchSensor"
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "drools5",
+                "drools610",
+                "eclipseocl",
+                "emfincquery",
+                "java"
+              ]
+            }
+          ],
+          "additionalItems": {
+            "type": "string",
+            "enum": [
+              "drools5",
+              "drools610",
+              "eclipseocl",
+              "emfincquery",
+              "java"
+            ]
+          }
+        },
+        "format": {
+          "enum": [
+            "emf"
+          ]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "neo4j",
+                "neo4j-ramdisk"
+              ]
+            }
+          ],
+          "additionalItems": {
+            "type": "string",
+            "enum": [
+              "neo4j",
+              "neo4j-ramdisk"
+            ]
+          }
+        },
+        "format": {
+          "enum": [
+            "graph"
+          ]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "fourstore",
+                "fourstore-ramdisk",
+                "sesame",
+                "jena"
+              ]
+            }
+          ],
+          "additionalItems": {
+            "type": "string",
+            "enum": [
+              "fourstore",
+              "fourstore-ramdisk",
+              "sesame",
+              "jena"
+            ]
+          }
+        },
+        "format": {
+          "enum": [
+            "rdf"
+          ]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "mysql",
+                "postgresql"
+              ]
+            }
+          ],
+          "additionalItems": {
+            "type": "string",
+            "enum": [
+              "mysql",
+              "postgresql"
+            ]
+          }
+        },
+        "format": {
+          "enum": [
+            "sql"
+          ]
+        }
+      }
+    }
+  ],
+  "default": {
+    "format": "rdf"
+  }
+}

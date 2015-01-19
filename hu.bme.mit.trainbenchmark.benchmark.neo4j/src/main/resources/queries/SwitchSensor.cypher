@@ -1,0 +1,3 @@
+MATCH (sw:Switch)
+WHERE NOT (sw-[:TRACKELEMENT_SENSOR]->(:Sensor))
+RETURN DISTINCT sw

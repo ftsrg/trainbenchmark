@@ -1,0 +1,9 @@
+package hu.bme.mit.trainbenchmark.pojo
+
+query "RouteSensor check"
+    route : Route()
+    switchPosition : SwitchPosition( ) from route.switchPositions
+    switch : Switch( this == switchPosition.switch )
+    sensor : Sensor( ) from switch.sensors
+    not Sensor(this == sensor, this memberOf route.routeDefinition)
+end

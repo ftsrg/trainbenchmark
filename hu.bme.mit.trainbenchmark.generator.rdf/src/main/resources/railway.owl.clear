@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY swrl "http://www.w3.org/2003/11/swrl#" >
+    <!ENTITY swrlb "http://www.w3.org/2003/11/swrlb#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#"
+     xml:base="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_entry -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_entry">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_exit -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_exit">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_routeDefinition -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_routeDefinition">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_switchPosition -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_switchPosition">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition"/>
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_route"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor_trackElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor_trackElement">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal_actualState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal_actualState">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_route -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_route">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_switch -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_switch">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition"/>
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch_switchPosition"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_switchState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_switchState">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch_actualState -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch_actualState">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch_switchPosition -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch_switchPosition">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement_connectsTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement_connectsTo">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement_sensor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement_sensor">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor"/>
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor_trackElement"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment_length -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment_length">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_entry"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_exit"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route_routeDefinition"/>
+                <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment_length"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Signal_actualState"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_GO"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_STOP"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_FAILURE"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch_actualState"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_switch"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchPosition_switchState"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_FAILURE"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_LEFT"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_RIGHT"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_STRAIGHT"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_FAILURE -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_FAILURE">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_LEFT -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_LEFT">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_RIGHT -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_RIGHT">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_STRAIGHT -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#PointStateKind_STRAIGHT">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SwitchStateKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SensorStateKind_FAILURE -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SensorStateKind_FAILURE"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SensorStateKind_GO -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SensorStateKind_GO"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SensorStateKind_HIGH -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SensorStateKind_HIGH"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_FAILURE -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_FAILURE">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_GO -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_GO">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_STOP -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind_STOP">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#SignalStateKind"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+

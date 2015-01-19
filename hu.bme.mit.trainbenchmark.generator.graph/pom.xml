@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>hu.bme.mit.trainbenchmark</artifactId>
+		<groupId>hu.bme.mit.trainbenchmark</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>hu.bme.mit.trainbenchmark.generator.graph</artifactId>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<faunus.version>0.3.2</faunus.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>hu.bme.mit.trainbenchmark.generator.graph.GraphGeneratorMain</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<!-- TrainBenchmark -->
+
+		<dependency>
+			<groupId>hu.bme.mit.trainbenchmark</groupId>
+			<artifactId>hu.bme.mit.trainbenchmark.config</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>hu.bme.mit.trainbenchmark</groupId>
+			<artifactId>hu.bme.mit.trainbenchmark.generator</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<!-- Graph databases -->
+
+		<dependency>
+			<groupId>com.tinkerpop.blueprints</groupId>
+			<artifactId>blueprints-neo4j2-graph</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thinkaurelius.faunus</groupId>
+			<artifactId>faunus</artifactId>
+			<version>${faunus.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.neo4j.shell</groupId>
+			<artifactId>import-tools</artifactId>
+			<version>2.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+</project>

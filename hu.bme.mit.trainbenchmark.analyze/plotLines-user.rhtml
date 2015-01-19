@@ -1,0 +1,131 @@
+<!--begin.rcode loadRChunks, results='asis', echo=FALSE, cache=FALSE, warning=TRUE
+read_chunk('plotLines.R')
+source("configs.R")
+end.rcode-->
+
+<!--begin.rcode dependencies, results='asis', echo=FALSE, cache=FALSE, warning=FALSE
+end.rcode-->
+  
+<html>
+
+<head>
+<title>TrainBenchmark Results</title>
+</head>
+
+<body>
+<center><h1>Benchmark results of the TrainBenchmark</h1></center>
+
+<center>
+<a href="#sec2">Detailed results of the sequential modifications of the User scenario</a><br>
+<a href="#sec3">Detailed results of the sequential checks and edits</a><br>
+</center>
+
+<a name="sec2"></a>
+<center><h2>Detailed results of the sequential modifications of the User scenario</h2></center>
+
+<!--begin.rcode readUserData, results='asis', echo=FALSE, warning=FALSE, fig.width=16, fig.height=7, eval=TRUE
+end.rcode-->
+
+<!--
+<p>
+Scenarios: User <br>
+Queries: -->
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE, eval=FALSE
+cat(levels(data$Query), sep=", ")
+end.rcode-->
+<!--
+<br>
+Phases: MedianEdit, MedianReCheck, MedianEdit+MedianReCheck
+</p>
+-->
+
+<table border="1" align="center">
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+for (scenario in levels(data$Scenario)) {
+  cat(paste("<td align=\"center\" colspan=\"",length(levels(data$Query)),"\">",scenario, sep=""))
+}
+end.rcode-->
+</tr>
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+for (query in levels(data$Query)) {
+  cat(paste("<td align=\"center\">",query, sep=""))
+}
+end.rcode-->
+</tr>
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+phases=c("MedianEdit", "MedianReCheck", "IncReValidation")
+phasesTxt=c("MeEdit", "MReCheck", "MeEdit+MReCheck")
+for (scenario in levels(data$Scenario)) {
+  for (query in levels(data$Query)) {
+    cat("<td align=\"center\">")
+    for (phase in phases) {
+      cat(paste("<a href=#", toAnchor(phase), "_", scenario, "_",query,">",phasesTxt[match(phase,phases)],"</a><br>", sep=""))
+    }
+    cat("</td>")
+  }
+}
+end.rcode-->
+</tr>
+</table>
+
+<!--begin.rcode detailedUserEditRecheck, results='asis', echo=FALSE, warning=FALSE, fig.width=16, fig.height=7, eval=TRUE
+end.rcode-->
+
+
+<a name="sec3"></a>
+<center><h2>Detailed results of the sequential checks and edits</h2></center>
+
+<table border="1" align="center">
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+for (scenario in levels(data$Scenario)) {
+  cat(paste("<td align=\"center\" colspan=\"",length(levels(data$Query)),"\">",scenario, sep=""))
+}
+end.rcode-->
+</tr>
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+for (query in levels(data$Query)) {
+  cat(paste("<td align=\"center\">",query, sep=""))
+}
+end.rcode-->
+</tr>
+<tr>
+<!--begin.rcode results='asis', echo=FALSE, warning=FALSE
+phases=c("DetCheck", "DetEdit")
+phasesTxt=c("CheckSeries", "EditSeries")
+scenario="User"
+query="SwitchSensor"
+for (scenario in levels(data$Scenario)) {
+  for (query in levels(data$Query)) {
+    cat("<td align=\"center\">")
+    for (phase in phases) {
+      
+      dataQuery <- data[data$Scenario==scenario & data$Query==query,]
+      dataQuery <- dataQuery[dataQuery$Tool %in% drawTools,]
+      maxSize <- max(dataQuery$Size)
+      for(i in maxSize:1) {
+        if (length(unique(dataQuery[dataQuery$Size == i,]$Tool)) == length(drawTools)) {
+          maxSize <- i
+          break
+        }
+      }
+      
+      cat(paste("<a href=#series_", toAnchor(phase), "_", maxSize, "_",query,">",phasesTxt[match(phase,phases)],"</a><br>", sep=""))
+    }
+    cat("</td>")
+  }
+}
+end.rcode-->
+</tr>
+</table>
+
+<!--begin.rcode userSequences, results='asis', echo=FALSE, warning=FALSE, fig.width=16, fig.height=7, eval=TRUE
+end.rcode-->
+
+
+</body>
+</html>

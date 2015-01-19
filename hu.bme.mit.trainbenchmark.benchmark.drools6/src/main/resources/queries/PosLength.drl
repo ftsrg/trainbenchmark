@@ -1,0 +1,5 @@
+package Concept
+
+query "PosLength check"
+   segment : Segment(segment_length <= 0)
+end

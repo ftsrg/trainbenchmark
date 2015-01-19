@@ -1,0 +1,12 @@
+package hu.bme.mit.trainbenchmark.pojo
+
+query "SignalNeighbor check"
+    route : Route( )
+    sen1A : Sensor( ) from route.routeDefinition
+    te1A : TrackElement( ) from sen1A.trackElements
+    te2A : TrackElement( ) from te1A.connectsTo
+    sen2A : Sensor( ) from te2A.sensors
+    sigA : Signal( this == route.exit )
+    Route( routeDefinition contains sen2A, this != route )
+    not Route( entry == sigA, routeDefinition contains sen2A )
+end

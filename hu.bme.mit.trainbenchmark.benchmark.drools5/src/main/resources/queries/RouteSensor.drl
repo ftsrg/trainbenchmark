@@ -1,0 +1,9 @@
+package Concept
+
+query "RouteSensor check"
+    route : Route()
+    switchPosition : SwitchPosition( this memberOf route.route_switchPosition )
+    switch : Switch( this == switchPosition.switchPosition_switch )
+    sensor : Sensor( this memberOf switch.trackElement_sensor )
+    not Sensor(this == sensor, this memberOf route.route_routeDefinition)
+end

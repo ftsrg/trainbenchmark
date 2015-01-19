@@ -1,0 +1,5 @@
+package hu.bme.mit.trainbenchmark.pojo
+
+query "PosLength check"
+   segment : Segment(length <= 0)
+end

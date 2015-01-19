@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+	<artifactId>hu.bme.mit.trainbenchmark</artifactId>
+	<groupId>hu.bme.mit.trainbenchmark</groupId>
+	<version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>hu.bme.mit.trainbenchmark.benchmark.jena</artifactId>
+  
+  <build>
+    <plugins>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+				<archive>
+					<manifest>
+						<addClasspath>true</addClasspath>
+						<classpathPrefix>lib/</classpathPrefix>
+						<mainClass>hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkMain</mainClass>
+					</manifest>
+				</archive>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+  
+  		<!-- TrainBenchmark -->
+	<dependencies>
+		<dependency>
+			<groupId>hu.bme.mit.trainbenchmark</groupId>
+			<artifactId>hu.bme.mit.trainbenchmark.config</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>hu.bme.mit.trainbenchmark</groupId>
+			<artifactId>hu.bme.mit.trainbenchmark.benchmark</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>hu.bme.mit.trainbenchmark</groupId>
+			<artifactId>hu.bme.mit.trainbenchmark.rdf</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<!-- Guava -->
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>15.0</version>
+		</dependency>
+		
+		<!-- Jena -->
+		
+		<dependency>
+    		<groupId>org.apache.jena</groupId>
+    		<artifactId>jena-tdb</artifactId>
+    		<version>1.1.1</version>
+		</dependency>
+		
+		<!-- jackson -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
+	</dependencies>
+</project>

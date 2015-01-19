@@ -1,0 +1,107 @@
+{
+  "sesame": {
+    "name": "rdf",
+    "url": "https://github.com/FTSRG/trainbenchmark-rdf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-rdf"
+  },
+  "jena": {
+    "name": "rdf",
+    "url": "https://github.com/FTSRG/trainbenchmark-rdf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-rdf"
+  },
+  "fourstore": {
+    "name": "rdf",
+    "url": "https://github.com/FTSRG/trainbenchmark-rdf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-rdf"
+  },
+  "mysql": {
+    "name": "sql",
+    "url": "https://github.com/FTSRG/trainbenchmark-sql.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-sql"
+  },
+  "postgresql": {
+    "name": "sql",
+    "url": "https://github.com/FTSRG/trainbenchmark-sql.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-sql"
+  },
+  "java": {
+    "name": "emf",
+    "url": "https://github.com/FTSRG/trainbenchmark-emf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-emf"
+  },
+  "drools5": {
+    "name": "emf",
+    "url": "https://github.com/FTSRG/trainbenchmark-emf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-emf"
+  },
+  "drools610": {
+    "name": "emf",
+    "url": "https://github.com/FTSRG/trainbenchmark-emf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-emf"
+  },
+  "eclipseocl": {
+    "name": "emf",
+    "url": "https://github.com/FTSRG/trainbenchmark-emf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-emf"
+  },
+ "emfincquery": {
+    "name": "emf",
+    "url": "https://github.com/FTSRG/trainbenchmark-emf.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-emf"
+  },
+  "neo4j": {
+    "name": "graph",
+    "url": "https://github.com/FTSRG/trainbenchmark-graph.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-graph"
+  },
+  "rdf": {
+    "name": "core",
+    "url": "https://github.com/FTSRG/trainbenchmark-core.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-core"
+  },
+  "emf": {
+    "name": "core",
+    "url": "https://github.com/FTSRG/trainbenchmark-core.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-core"
+  },
+  "sql": {
+    "name": "core",
+    "url": "https://github.com/FTSRG/trainbenchmark-core.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-core"
+  },
+  "graph": {
+    "name": "core",
+    "url": "https://github.com/FTSRG/trainbenchmark-core.git",
+    "branch": "master",
+    "depth": "50",
+    "folder": "trainbenchmark-core"
+  }
+}

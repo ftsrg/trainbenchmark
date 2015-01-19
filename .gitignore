@@ -1,0 +1,15 @@
+plugin.xml_gen
+bin/
+target/
+tmp/
+.settings/
+MANIFEST.MF_gen
+.DS_Store*
+.metadata
+runtimeInfo
+workspace
+*.~vsdx
+*._trace
+Thumbs.db
+.Rhistory
+results*.txt

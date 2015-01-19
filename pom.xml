@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>hu.bme.mit.trainbenchmark</groupId>
+	<artifactId>hu.bme.mit.trainbenchmark</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<emf.version>2.10.0-v20140514-1158</emf.version>
+	</properties>
+
+	<modules>
+		<module>hu.bme.mit.trainbenchmark.benchmark</module>
+		<module>hu.bme.mit.trainbenchmark.config</module>
+		<module>hu.bme.mit.trainbenchmark.generator</module>
+	</modules>
+
+	<profiles>
+
+		<!-- formats -->
+
+		<profile>
+			<id>graph</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>emf</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emf</module>
+				<module>hu.bme.mit.trainbenchmark.emf</module>
+				<module>hu.bme.mit.trainbenchmark.generator.emf</module>
+				<module>hu.bme.mit.trainbenchmark.model</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>rdf</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.generator.rdf</module>
+				<module>hu.bme.mit.trainbenchmark.rdf</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>sql</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.generator.sql</module>
+				<module>hu.bme.mit.trainbenchmark.sql</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>pojo</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.pojo.drools</module>
+				<module>hu.bme.mit.trainbenchmark.generator.pojo</module>
+				<module>hu.bme.mit.trainbenchmark.pojo</module>
+			</modules>
+		</profile>
+
+		<!-- tools -->
+
+		<profile>
+			<id>drools</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>emfincquery</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>java</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.java</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>jena</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>mysql</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>neo4j</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>sesame</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
+			</modules>
+		</profile>
+
+	</profiles>
+
+</project>
