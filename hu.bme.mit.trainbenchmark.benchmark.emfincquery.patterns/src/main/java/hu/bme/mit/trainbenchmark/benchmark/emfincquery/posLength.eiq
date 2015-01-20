@@ -1,0 +1,10 @@
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery
+
+import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
+
+pattern posLength(Source, Target) =
+{
+	Segment(Source);
+	Segment.Segment_length(Source, Target);
+	check(Target <= 0);
+}
