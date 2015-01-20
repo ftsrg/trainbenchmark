@@ -10,10 +10,6 @@
 	</parent>
 	<artifactId>hu.bme.mit.trainbenchmark.model</artifactId>
 
-	<properties>
-		<emf.version>2.10.0-v20140514-1158</emf.version>
-	</properties>
-
 	<dependencies>
 
 		<!-- EMF -->
