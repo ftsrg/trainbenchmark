@@ -7,20 +7,28 @@ import java.io.IOException;
 
 import com.google.common.collect.Multimap;
 
-public class SegmentLength extends FourStoreJavaBenchmarkCase {
+public class SegmentLength extends FourStoreSimpleBenchmarkCase {
 
+	protected Multimap<Long, Object> properties;
+	
 	@Override
 	public String getName() {
 		return "SegmentLength";
-	}
+	} 
 
 	@Override
 	public void check() throws IOException {
 		bmr.startStopper();
 
-		Multimap<Long, Object> properties = driver.collectProperties(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH);
+		String t = RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH;
+		properties = driver.collectProperties(t);
 
 		bmr.addInvalid(properties.size());
 		bmr.addCheckTime();
+	}
+	
+	@Override
+	public int getResultSize() {
+		return properties.size();
 	}
 }

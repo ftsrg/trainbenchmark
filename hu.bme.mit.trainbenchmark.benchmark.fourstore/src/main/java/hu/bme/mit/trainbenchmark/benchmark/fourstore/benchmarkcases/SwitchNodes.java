@@ -8,8 +8,10 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
-public class SwitchNodes extends FourStoreBenchmarkCase {
+public class SwitchNodes extends FourStoreComplexBenchmarkCase {
 
+	protected Set<Long> switches; 
+	
 	@Override
 	public String getName() {
 		return "SwitchNodes";
@@ -19,10 +21,15 @@ public class SwitchNodes extends FourStoreBenchmarkCase {
 	public void check() throws IOException {
 		bmr.startStopper();
 
-		Set<Long> switches = Sets.newHashSet(driver.collectVertices(RDFConstants.BASE_PREFIX + ModelConstants.SWITCH));
+		switches = Sets.newHashSet(driver.collectVertices(RDFConstants.BASE_PREFIX + ModelConstants.SWITCH));
 
 		bmr.addInvalid(switches.size());
 		bmr.addCheckTime();
 	}
 
+	@Override
+	public int getResultSize() {
+		return switches.size();
+	}
+	
 }

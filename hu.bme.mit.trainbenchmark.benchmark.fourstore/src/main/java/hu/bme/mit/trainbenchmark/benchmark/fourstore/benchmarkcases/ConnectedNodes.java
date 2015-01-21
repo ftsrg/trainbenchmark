@@ -1,16 +1,16 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-
 import java.io.IOException;
 
 import com.google.common.collect.Multimap;
 
-public class ConnectedNodes extends FourStoreJavaBenchmarkCase implements TransformationBenchmarkCase {
+public class ConnectedNodes extends FourStoreSimpleBenchmarkCase {
 
 	protected String name;
 	protected String relationshipName;
 
+	protected Multimap<Long, Long> edges; 
+	
 	public ConnectedNodes(String name, String relationshipName) {
 		this.name = name;
 		this.relationshipName = relationshipName;
@@ -25,14 +25,15 @@ public class ConnectedNodes extends FourStoreJavaBenchmarkCase implements Transf
 	public void check() throws IOException {
 		bmr.startStopper();
 
-		Multimap<Long, Long> nodes = driver.collectEdges(relationshipName);
-
-		bmr.addInvalid(nodes.size());
+		edges = driver.collectEdges(relationshipName);
+		System.out.println(edges);
+		
+		bmr.addInvalid(edges.size());
 		bmr.addCheckTime();
 	}
-
+	
 	@Override
-	public void modify() throws IOException {
+	public int getResultSize() {
+		return edges.size();
 	}
-
 }
