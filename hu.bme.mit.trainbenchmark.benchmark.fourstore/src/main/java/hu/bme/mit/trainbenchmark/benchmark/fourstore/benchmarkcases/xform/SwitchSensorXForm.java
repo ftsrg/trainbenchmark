@@ -4,16 +4,15 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmar
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases.SwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+
+import eu.mondo.driver.graph.util.RDFUtil;
 
 public class SwitchSensorXForm extends SwitchSensor implements TransformationBenchmarkCase {
 
@@ -33,31 +32,21 @@ public class SwitchSensorXForm extends SwitchSensor implements TransformationBen
 		// edit
 		final long startEdit = System.nanoTime();
 
-		final Multimap<Long, Long> edges = ArrayListMultimap.create();
+		final Multimap<String, String> edges = ArrayListMultimap.create();
 		for (int i = 0; i < nElemToModify; i++) {
 			final int rndTarget = random.nextInt(size);
 			final Long switchId = invalids.get(rndTarget);
 
 			// create a new sensor connected to the switch
 			// long sensor = client.insertVertex(SENSOR);
-			// client.insertEdge(aSwitch, sensor, TRACKELEMENT_SENSOR);
+			// driver.insertEdge(aSwitch, sensor, TRACKELEMENT_SENSOR);
 			newSensorId++;
-			edges.put(switchId, newSensorId);
+			String switchURI = RDFUtil.toURI(RDFConstants.BASE_PREFIX, switchId);
+			String newSensorURI = RDFUtil.toURI(RDFConstants.BASE_PREFIX, newSensorId);
+			edges.put(switchURI, newSensorURI);
 		}
 
-		// partitioning
-		final List<Long> sourceVertices = new ArrayList<>(edges.keySet());
-		final List<List<Long>> partition = Lists.partition(sourceVertices, 500);
-		for (final List<Long> sourceVerticesChunk : partition) {
-
-			final Multimap<Long, Long> edgesChunk = ArrayListMultimap.create();
-			for (final Long sourceVertexId : sourceVerticesChunk) {
-				final Collection<Long> targetVertexIds = edges.get(sourceVertexId);
-				edgesChunk.putAll(sourceVertexId, targetVertexIds);
-			}
-
-			driver.insertEdgesWithVertex(edgesChunk, ModelConstants.TRACKELEMENT_SENSOR, ModelConstants.SENSOR);
-		}
+		driver.insertEdgesWithVertex(edges, RDFConstants.BASE_PREFIX + ModelConstants.TRACKELEMENT_SENSOR, RDFConstants.BASE_PREFIX + ModelConstants.SENSOR);
 
 		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);

@@ -10,31 +10,15 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.util;
+package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
-public class UniqRandom extends Random {
+public class RouteRouteDefinition extends ConnectedNodes {
 
-	private static final long serialVersionUID = 1L;
-
-	List<Integer> ints = new ArrayList<Integer>();
-
-	public UniqRandom(long random) {
-		super(random);
+	public RouteRouteDefinition() {
+		super("RouteRouteDefinition", RDFConstants.BASE_PREFIX + ModelConstants.ROUTE_ROUTEDEFINITION);
 	}
 
-	@Override
-	public int nextInt(int n) {
-		int newInt = super.nextInt(n);
-		if (ints.size() == n)
-			ints = new ArrayList<Integer>();
-		while (ints.contains(new Integer(newInt))) {
-			newInt = super.nextInt(n);
-		}
-		ints.add(new Integer(newInt));
-		return newInt;
-	}
 }

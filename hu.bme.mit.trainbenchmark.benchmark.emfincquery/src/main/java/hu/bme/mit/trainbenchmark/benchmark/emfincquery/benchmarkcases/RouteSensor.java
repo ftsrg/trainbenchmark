@@ -34,28 +34,29 @@ public class RouteSensor extends EMFIncQueryBenchmarkCase<Sensor> {
 	public String getName() {
 		return "RouteSensor";
 	}
-	
+
 	@Override
 	public void load() throws IOException {
 		bmr.startStopper();
-		
-		ConceptPackage tmp = ConceptPackage.eINSTANCE;
+
+		ConceptPackage.eINSTANCE.eClass();
 		URI resourceURI = FileBroker.getEMFUri(bc.getBenchmarkArtifact());
 		resourceSet = new ResourceSetImpl();
-		
+
 		try {
 			IncQueryCommon.setEIQOptions(getEIQBC());
-			engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);			
+			engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
 			RouteSensorMatcher patternMatcher = RouteSensorMatcher.on(engine);
 			iqDeltaMonitor = new IQDeltaMonitor<Sensor>(patternMatcher, "Sen");
 		} catch (IncQueryException e) {
 			throw new IOException(e);
 		}
+		
 		resource = resourceSet.getResource(resourceURI, true);
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof IndividualContainer) {
 			pack = (IndividualContainer) resource.getContents().get(0);
 		}
-		
+
 		bmr.setReadTime();
 	}
 
@@ -66,5 +67,5 @@ public class RouteSensor extends EMFIncQueryBenchmarkCase<Sensor> {
 		bmr.addInvalid(invalids.size());
 		bmr.addCheckTime();
 	}
-	
+
 }

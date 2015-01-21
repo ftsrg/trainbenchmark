@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import eu.mondo.driver.fourstore.FourStoreGraphDriverReadWrite;
 
-public abstract class FourStoreJavaBenchmarkCase extends FourStoreBenchmarkCase {
+public abstract class FourStoreSimpleBenchmarkCase extends FourStoreBenchmarkCase {
 
 	@Override
 	public void init(final BenchmarkConfig bc) throws IOException {

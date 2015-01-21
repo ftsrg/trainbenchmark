@@ -39,7 +39,7 @@ public class PosLength extends EMFIncQueryBenchmarkCase<Segment> {
 	public void load() throws IOException {
 		bmr.startStopper();
 		
-		ConceptPackage tmp = ConceptPackage.eINSTANCE;
+		ConceptPackage.eINSTANCE.eClass();
 		URI resourceURI = FileBroker.getEMFUri(bc.getBenchmarkArtifact());
 		resourceSet = new ResourceSetImpl();
 		

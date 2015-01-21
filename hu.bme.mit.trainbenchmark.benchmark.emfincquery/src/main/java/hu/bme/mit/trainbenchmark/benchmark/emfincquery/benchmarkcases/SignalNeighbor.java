@@ -39,7 +39,7 @@ public class SignalNeighbor extends EMFIncQueryBenchmarkCase<Route> {
 	public void load() throws IOException {
 		bmr.startStopper();
 		
-		ConceptPackage tmp = ConceptPackage.eINSTANCE;
+		ConceptPackage.eINSTANCE.eClass();
 		URI resourceURI = FileBroker.getEMFUri(bc.getBenchmarkArtifact());
 		resourceSet = new ResourceSetImpl();
 		
@@ -51,6 +51,7 @@ public class SignalNeighbor extends EMFIncQueryBenchmarkCase<Route> {
 		} catch (IncQueryException e) {
 			throw new IOException(e);
 		}
+		
 		resource = resourceSet.getResource(resourceURI, true);
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof IndividualContainer) {
 			pack = (IndividualContainer) resource.getContents().get(0);
