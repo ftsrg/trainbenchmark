@@ -35,8 +35,7 @@ public abstract class FourStoreComplexBenchmarkCase extends FourStoreBenchmarkCa
 		}
 
 		// run 4store
-		final String connectionString = "fourstore://" + CLUSTERNAME;
-		driver = new FourStoreGraphDriverReadWrite(connectionString);
+		driver = new FourStoreGraphDriverReadWrite(CLUSTERNAME);
 		driver.start();
 	}
 	

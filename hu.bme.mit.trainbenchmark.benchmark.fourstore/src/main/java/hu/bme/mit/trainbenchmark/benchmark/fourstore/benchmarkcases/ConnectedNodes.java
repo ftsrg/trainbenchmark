@@ -26,7 +26,6 @@ public class ConnectedNodes extends FourStoreSimpleBenchmarkCase {
 		bmr.startStopper();
 
 		edges = driver.collectEdges(relationshipName);
-		System.out.println(edges);
 		
 		bmr.addInvalid(edges.size());
 		bmr.addCheckTime();
