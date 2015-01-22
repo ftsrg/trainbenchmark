@@ -125,14 +125,30 @@
         "SignalNeighbor",
         "SwitchSensor"
       ]
-    }
-  },
-  "tools": {
-    "type": "array",
-    "uniqueItems": true,
-    "minItems": 1,
-    "items": [
-      {
+    },
+    "tools": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "drools5",
+            "drools6",
+            "eclipseocl",
+            "emfincquery",
+            "fourstore",
+            "java",
+            "jena",
+            "mysql",
+            "neo4j",
+            "sesame",
+            "postgresql"
+          ]
+        }
+      ],
+      "additionalItems": {
         "type": "string",
         "enum": [
           "drools5",
@@ -147,26 +163,10 @@
           "sesame",
           "postgresql"
         ]
-      }
-    ],
-    "additionalItems": {
-      "type": "string",
-      "enum": [
-        "drools5",
-        "drools6",
-        "eclipseocl",
-        "emfincquery",
-        "fourstore",
-        "java",
-        "jena",
-        "mysql",
-        "neo4j",
-        "sesame",
-        "postgresql"
+      },
+      "default": [
+        "sesame"
       ]
-    },
-    "default": [
-      "sesame"
-    ]
+    }
   }
 }

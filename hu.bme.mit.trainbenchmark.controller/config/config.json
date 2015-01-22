@@ -1,7 +1,7 @@
 {
   "config": {
     "scenarios": [
-      "User", "XForm"
+      "XForm"
     ],
     "MAVEN_OPTS": {
       "Xmx": "512m",
@@ -14,12 +14,12 @@
     "minSize": 1,
     "maxSize": 4,
     "workspacePath": ".",
-    "series": 1,
+    "series": 2,
     "queries": [
-      "SwitchSensor","PosLength"
+      "PosLength"
     ],
     "tools": [
-      "drools6"
+      "emfincquery"
     ]
   }
 }

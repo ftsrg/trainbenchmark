@@ -11,6 +11,7 @@ import handler
 from jsonschema import validate, Draft4Validator
 from jsonschema.exceptions import ValidationError, SchemaError, best_match
 
+
 def is_valid_json(instance_json, schema_json):
     """
     Make a validation check whether the instance_json given parameter is 

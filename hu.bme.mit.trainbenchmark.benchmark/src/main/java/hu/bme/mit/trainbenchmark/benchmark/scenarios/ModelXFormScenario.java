@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.util.JsonSerializer;
 
 import java.io.IOException;
 
@@ -32,7 +33,8 @@ public class ModelXFormScenario implements Scenario<TransformationBenchmarkCase>
 		testCase.destroy();
 
 		final BenchmarkResult bmr = testCase.getBenchmarkResult();
-		System.out.println(bmr);
+		JsonSerializer.serialize(bmr);
+		
 	}
 
 }

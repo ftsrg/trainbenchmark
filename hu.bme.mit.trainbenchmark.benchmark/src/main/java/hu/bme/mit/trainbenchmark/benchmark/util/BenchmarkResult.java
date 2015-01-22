@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"benchmarkConfig", "random"})
 public class BenchmarkResult {
 
 	protected BenchmarkConfig bc;
@@ -52,64 +55,6 @@ public class BenchmarkResult {
 		this.query = query;
 		this.random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
-
-	// @formatter:off
-	@Override
-	public String toString() {
-
-		if (bc == null) {
-			throw new RuntimeException("BenchmarkConfig is not set.");
-		}
-
-		ResultStringBuilder rsb = ResultStringBuilder
-				.builder()
-				.append("RunIndex", bc.getRunIndex())
-				.append("Tool", tool)
-				.append("Query", query)
-				.append("Scenario", bc.getScenario())
-				.append("File", bc.getBenchmarkArtifact())
-				.append("Size", bc.getArtifactSize())
-				.append("NOfModifications", nElemToModifySum)
-				.append("Read", readTime)
-				.append("Check0", (checkTime.size() > 0 ? checkTime.get(0) : "-1"))
-				.append("SumModify", modificationTimeSum)
-				.append("SumReCheck", (checkTime.size() > 1 ? checkTimeSum - checkTime.get(0) : "-1"))
-				.append("SumEdit", editTimeSum)
-				.append("ResultSize1", (checkInvalid.size() > 0 ? checkInvalid.get(0) : "-1"))
-				.append("ResultSizeN", (checkInvalid.size() > 1 ? checkInvalid.get(checkInvalid.size() - 1) : "-1"))
-				.append("Memory", memoryBytes.get(memoryBytes.size() - 1) / 1024)
-				.appendGroup(
-						"Check",
-						ResultStringBuilder
-								.builder()
-								.setN(BenchmarkConfig.getnMax())
-								.appendList("Check", checkTime)
-								.appendGroup(
-										"Edit",
-										ResultStringBuilder
-												.builder()
-												.setN(BenchmarkConfig.getnMax())
-												.appendList("Edit", editTime)
-												.appendGroup(
-														"Invalid",
-														ResultStringBuilder.builder().setN(BenchmarkConfig.getnMax())
-																.appendList("Invalid", checkInvalid))));
-
-		rsb.appendGroup("END", ResultStringBuilder.builder());
-
-		String result = "";
-
-		if (BenchmarkConfig.isGeneratingHeader()) {
-			result += rsb.getHeader().trim() + "\n";
-			BenchmarkConfig.setGeneratingHeader(false);
-		}
-
-		result += rsb.toString().trim();
-
-		return result;
-	}
-
-	// @formatter:on
 
 	public static double round(final double unrounded, final int precision, final int roundingMode) {
 		final BigDecimal bd = new BigDecimal(unrounded);
@@ -159,6 +104,10 @@ public class BenchmarkResult {
 		this.bc = benchmarkConfig;
 	}
 
+	public int getArtifactSize(){
+		return bc.getArtifactSize();
+	}
+	
 	public String getQuery() {
 		return query;
 	}
@@ -166,11 +115,27 @@ public class BenchmarkResult {
 	public Long getReadTime() {
 		return readTime;
 	}
+	
+	public int getRunIndex(){
+		return bc.getRunIndex();
+	}
 
+	public String getScenario(){
+		return bc.getScenario();
+	}
+	
+	public String getTool(){
+		return tool;
+	}
+	
 	public List<Long> getCheckTimes() {
 		return checkTime;
 	}
 
+	public Long getCheckTimeSum() {
+		return checkTimeSum;
+	}
+	
 	public List<Long> getInvalids() {
 		return checkInvalid;
 	}
@@ -195,6 +160,10 @@ public class BenchmarkResult {
 		return editTime;
 	}
 
+	public Long getEditTimeSum() {
+		return editTimeSum;
+	}
+	
 	public void addEditTime() {
 		addEditTime(System.nanoTime() - startTime);
 	}
@@ -237,95 +206,6 @@ public class BenchmarkResult {
 
 	public void setRandom(final Random random) {
 		this.random = random;
-	}
-
-	protected static class ResultStringBuilder {
-
-		protected static final String DEFAULT_SEPARATOR = "\t";
-		protected static final String GROUP_SEPARATOR = " ! ";
-		protected static final String INVALID = "-1";
-
-		protected Integer n;
-
-		protected StringBuilder builder = new StringBuilder();
-		protected StringBuilder header = new StringBuilder();
-
-		public static ResultStringBuilder builder() {
-			return new ResultStringBuilder();
-		}
-
-		public ResultStringBuilder append(String columnHeader, Object object) {
-			return append(columnHeader, object.toString());
-		}
-
-		public ResultStringBuilder append(String columnHeader, String string) {
-
-			// header
-
-			if (header.length() != 0) {
-				header.append(DEFAULT_SEPARATOR);
-			}
-
-			header.append(columnHeader);
-
-			// content
-
-			if (builder.length() != 0) {
-				builder.append(DEFAULT_SEPARATOR);
-			}
-
-			builder.append(string);
-
-			return this;
-		}
-
-		public ResultStringBuilder appendGroup(String groupName, ResultStringBuilder group) {
-
-			// header
-
-			if (header.length() != 0) {
-				header.append(DEFAULT_SEPARATOR);
-			}
-
-			header.append("SEP_" + groupName + DEFAULT_SEPARATOR);
-			header.append(group.getHeader());
-
-			// content
-
-			if (builder.length() != 0) {
-				builder.append(GROUP_SEPARATOR);
-			}
-
-			builder.append(group.toString());
-
-			return this;
-		}
-
-		private ResultStringBuilder setN(Integer n) {
-			this.n = n;
-			return this;
-		}
-
-		public <T> ResultStringBuilder appendList(String listName, List<T> list) {
-			int listSize = list.size();
-			int maxSize = (n == null) ? listSize : n;
-
-			for (int i = 0; i < maxSize; i++) {
-				this.append(listName + "_" + i, (i < listSize) ? list.get(i) : INVALID);
-			}
-
-			return this;
-		}
-
-		@Override
-		public String toString() {
-			return builder.toString();
-		}
-
-		public String getHeader() {
-			return header.toString();
-		}
-
 	}
 
 }
