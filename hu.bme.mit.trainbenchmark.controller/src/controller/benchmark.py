@@ -25,12 +25,12 @@ def run_benchmark(configuration):
     """
     logging.info("benchmark.run_benchmark called.")
     handler.set_working_directory(configuration.path)
-    if (os.path.exists("./trainbenchmark-results") == False):
-        os.mkdir("trainbenchmark-results")
-    if (configuration.tool in eclipse_based):
-        eclipse_based[configuration.tool](configuration)
-        return
-    for series_index in range(1,configuration.measurements + 1):
+    if (os.path.exists("./results") == False):
+        os.mkdir("results")
+    #if (configuration.tool in eclipse_based):
+    #    eclipse_based[configuration.tool](configuration)
+    #    return
+    for series_index in range(1,configuration.series + 1):
         series_str = str(series_index)
         for scenario in configuration.scenarios:
             for size in configuration.sizes:
@@ -48,7 +48,7 @@ def run_benchmark(configuration):
                     subprocess.call(["java", "-Xmx" + xmx, "-XX:MaxPermSize="\
                                      + maxpermsize, "-jar", target,\
                                      "-scenario", scenario,\
-                                     "-seriesCount", str(series_index), \
+                                     "-runIndex", str(series_index), \
                                      "-benchmarkArtifact", benchmark_artifact,\
                                      "-workspacePath", configuration.path,\
                                      "-query", query, "-nMax", "1"])
@@ -70,11 +70,11 @@ def run_eclipse_based_benchmark(configuration):
     else:
         logging.error("Operating System is not supported!")
         return None
-    target = ("./trainbenchmark-{TOOL}/hu.bme.mit.trainbenchmark.benchmark."\
+    target = ("./hu.bme.mit.trainbenchmark.benchmark."\
            + "{TOOL}.product/target/products/hu.bme.mit.trainbenchmark."\
            + "benchmark.{TOOL}.product/{OS}/{WS}/x86_64/eclipse")\
            .format(TOOL=configuration.tool, OS=os, WS=ws)
-    for series_index in range(1,configuration.measurements + 1):
+    for series_index in range(1,configuration.series + 1):
         series_str = str(series_index)
         for scenario in configuration.scenarios:
             for size in configuration.sizes:
@@ -91,7 +91,7 @@ def run_eclipse_based_benchmark(configuration):
                     subprocess.call([target, "-scenario", scenario,\
                                      "-benchmarkArtifact", benchmark_artifact,\
                                      "-workspacePath", configuration.path,\
-                                     "-seriesCount", series_str, \
+                                     "-runIndex", series_str, \
                                      "-query", query ,\
                                      "-nMax", "1", \
                                      "-vmargs", "-Xmx" + xmx, \

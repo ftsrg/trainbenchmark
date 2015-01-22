@@ -19,7 +19,7 @@ class Configuration:
     
     all_repositories = list()
     def __init__(self, scenarios, format, tool, sizes, queries, path,\
-                 measurements, maven_xmx, maven_maxpermsize, java_xmx,\
+                 series, maven_xmx, maven_maxpermsize, java_xmx,\
                  java_maxpermsize):
         self.scenarios = scenarios
         self.format = format
@@ -27,7 +27,7 @@ class Configuration:
         self.sizes = sizes
         self.queries = queries
         self.path = path
-        self.measurements = measurements
+        self.series = series
         self.maven_xmx = maven_xmx 
         self.maven_maxpermsize = maven_maxpermsize
         self.java_xmx = java_xmx
@@ -59,10 +59,10 @@ class Repository:
     """
     def __init__(self, name, url, folder, branch, depth):
         self.name = name
-        self.url = url
-        self.folder = folder
-        self.branch = branch
-        self.depth = depth
+        #self.url = url
+        #self.folder = folder
+        #self.branch = branch
+        #self.depth = depth
         # initialized when a Repository is attached to a Configuration object
         self.path = None
         self.config = None

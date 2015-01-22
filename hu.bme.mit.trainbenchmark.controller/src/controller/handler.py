@@ -75,7 +75,7 @@ def get_package_name(param):
     """
     packages = {
               'drools5': 'drools',
-              'drools610': 'drools'
+              'drools6': 'drools'
              }
     if (param in packages):
         return packages[param]

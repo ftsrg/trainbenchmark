@@ -48,7 +48,7 @@
     "depth": "50",
     "folder": "trainbenchmark-emf"
   },
-  "drools610": {
+  "drools6": {
     "name": "emf",
     "url": "https://github.com/FTSRG/trainbenchmark-emf.git",
     "branch": "master",

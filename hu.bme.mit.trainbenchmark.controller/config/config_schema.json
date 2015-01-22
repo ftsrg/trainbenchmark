@@ -127,139 +127,46 @@
       ]
     }
   },
-  "oneOf": [
-    {
-      "properties": {
-        "tools": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": [
-            {
-              "type": "string",
-              "enum": [
-                "drools5",
-                "drools610",
-                "eclipseocl",
-                "emfincquery",
-                "java"
-              ]
-            }
-          ],
-          "additionalItems": {
-            "type": "string",
-            "enum": [
-              "drools5",
-              "drools610",
-              "eclipseocl",
-              "emfincquery",
-              "java"
-            ]
-          }
-        },
-        "format": {
-          "enum": [
-            "emf"
-          ]
-        }
+  "tools": {
+    "type": "array",
+    "uniqueItems": true,
+    "minItems": 1,
+    "items": [
+      {
+        "type": "string",
+        "enum": [
+          "drools5",
+          "drools6",
+          "eclipseocl",
+          "emfincquery",
+          "fourstore",
+          "java",
+          "jena",
+          "mysql",
+          "neo4j",
+          "sesame",
+          "postgresql"
+        ]
       }
+    ],
+    "additionalItems": {
+      "type": "string",
+      "enum": [
+        "drools5",
+        "drools6",
+        "eclipseocl",
+        "emfincquery",
+        "fourstore",
+        "java",
+        "jena",
+        "mysql",
+        "neo4j",
+        "sesame",
+        "postgresql"
+      ]
     },
-    {
-      "properties": {
-        "tools": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": [
-            {
-              "type": "string",
-              "enum": [
-                "neo4j",
-                "neo4j-ramdisk"
-              ]
-            }
-          ],
-          "additionalItems": {
-            "type": "string",
-            "enum": [
-              "neo4j",
-              "neo4j-ramdisk"
-            ]
-          }
-        },
-        "format": {
-          "enum": [
-            "graph"
-          ]
-        }
-      }
-    },
-    {
-      "properties": {
-        "tools": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": [
-            {
-              "type": "string",
-              "enum": [
-                "fourstore",
-                "fourstore-ramdisk",
-                "sesame",
-                "jena"
-              ]
-            }
-          ],
-          "additionalItems": {
-            "type": "string",
-            "enum": [
-              "fourstore",
-              "fourstore-ramdisk",
-              "sesame",
-              "jena"
-            ]
-          }
-        },
-        "format": {
-          "enum": [
-            "rdf"
-          ]
-        }
-      }
-    },
-    {
-      "properties": {
-        "tools": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": [
-            {
-              "type": "string",
-              "enum": [
-                "mysql",
-                "postgresql"
-              ]
-            }
-          ],
-          "additionalItems": {
-            "type": "string",
-            "enum": [
-              "mysql",
-              "postgresql"
-            ]
-          }
-        },
-        "format": {
-          "enum": [
-            "sql"
-          ]
-        }
-      }
-    }
-  ],
-  "default": {
-    "format": "rdf"
+    "default": [
+      "sesame"
+    ]
   }
 }

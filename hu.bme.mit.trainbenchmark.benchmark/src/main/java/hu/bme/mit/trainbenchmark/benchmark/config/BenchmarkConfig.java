@@ -95,9 +95,9 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 			iterationCount = 10;
 		}
 
-		String seriesCountString = cmd.getOptionValue("seriesCount");
-		if (seriesCountString != null) {
-			runIndex = new Integer(seriesCountString);
+		String runIndexString = cmd.getOptionValue("runIndex");
+		if (runIndexString != null) {
+			runIndex = new Integer(runIndexString);
 		} else {
 			runIndex = -1;
 		}

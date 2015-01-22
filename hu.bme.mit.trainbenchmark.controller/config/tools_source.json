@@ -1,71 +1,76 @@
 {
   "sesame": {
+    "format": "rdf",
     "url": "https://github.com/FTSRG/trainbenchmark-sesame.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-sesame"
   },
   "jena": {
+    "format": "rdf",
     "url": "https://github.com/FTSRG/trainbenchmark-jena.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-jena"
   },
   "neo4j": {
+    "format": "graph",
     "url": "https://github.com/FTSRG/trainbenchmark-neo4j.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-neo4j"
   },
   "java": {
+    "format": "emf",
     "url": "https://github.com/FTSRG/trainbenchmark-java.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-java"
   },
   "drools5": {
+    "format": "emf",
     "url": "https://github.com/FTSRG/trainbenchmark-drools.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-drools"
   },
-  "drools610": {
+  "drools6": {
+    "format": "emf",
     "url": "https://github.com/FTSRG/trainbenchmark-drools.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-drools"
   },
   "fourstore": {
+    "format": "rdf",
     "url": "https://github.com/FTSRG/trainbenchmark-fourstore.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-fourstore"
   },
   "mysql": {
+    "format": "sql",
     "url": "https://github.com/FTSRG/trainbenchmark-mysql.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-mysql"
   },
   "postgresql": {
+    "format": "sql",
     "url": "https://github.com/FTSRG/trainbenchmark-postgresql.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-postgresql"
   },
-  "drools": {
-    "url": "https://github.com/FTSRG/trainbenchmark-drools.git",
-    "branch": "master",
-    "depth": "50",
-    "folder": "trainbenchmark-drools"
-  },
   "eclipseocl": {
+    "format": "emf",
     "url": "https://github.com/FTSRG/trainbenchmark-eclipseocl.git",
     "branch": "master",
     "depth": "50",
     "folder": "trainbenchmark-eclipseocl"
   },
   "emfincquery": {
+    "format": "emf",
     "url": "https://github.com/FTSRG/trainbenchmark-emfincquery.git",
     "branch": "master",
     "depth": "50",
