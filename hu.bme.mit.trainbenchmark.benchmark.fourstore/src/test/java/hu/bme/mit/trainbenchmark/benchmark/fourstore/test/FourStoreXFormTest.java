@@ -10,31 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.util;
+package hu.bme.mit.trainbenchmark.benchmark.fourstore.test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import hu.bme.mit.trainbenchmark.benchmark.test.XFormTest;
 
-public class UniqRandom extends Random {
+public class FourStoreXFormTest extends XFormTest {
 
-	private static final long serialVersionUID = 1L;
-
-	List<Integer> ints = new ArrayList<Integer>();
-
-	public UniqRandom(long random) {
-		super(random);
+	public FourStoreXFormTest() {
+		bi = new FourStoreBenchmarkInitializer();
 	}
 
-	@Override
-	public int nextInt(int n) {
-		int newInt = super.nextInt(n);
-		if (ints.size() == n)
-			ints = new ArrayList<Integer>();
-		while (ints.contains(new Integer(newInt))) {
-			newInt = super.nextInt(n);
-		}
-		ints.add(new Integer(newInt));
-		return newInt;
-	}
 }

@@ -29,7 +29,7 @@ import Concept.IndividualContainer;
 import Concept.Switch;
 
 public class SwitchSensor extends EMFIncQueryBenchmarkCase<Switch> {
-	
+
 	@Override
 	public String getName() {
 		return "SwitchSensor";
@@ -38,14 +38,14 @@ public class SwitchSensor extends EMFIncQueryBenchmarkCase<Switch> {
 	@Override
 	public void load() throws IOException {
 		bmr.startStopper();
-		
-		ConceptPackage tmp = ConceptPackage.eINSTANCE;
+
+		ConceptPackage.eINSTANCE.eClass();
 		URI resourceURI = FileBroker.getEMFUri(bc.getBenchmarkArtifact());
 		resourceSet = new ResourceSetImpl();
-		
+
 		try {
 			IncQueryCommon.setEIQOptions(getEIQBC());
-			engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);			
+			engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
 			SwitchSensorMatcher patternMatcher = SwitchSensorMatcher.on(engine);
 			iqDeltaMonitor = new IQDeltaMonitor<Switch>(patternMatcher, "Individual");
 		} catch (IncQueryException e) {
@@ -55,14 +55,14 @@ public class SwitchSensor extends EMFIncQueryBenchmarkCase<Switch> {
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof IndividualContainer) {
 			pack = (IndividualContainer) resource.getContents().get(0);
 		}
-		
+
 		bmr.setReadTime();
 	}
-	
+
 	@Override
 	public void check() {
 		bmr.startStopper();
-		invalids = new ArrayList<Switch>(iqDeltaMonitor.getMatching());		
+		invalids = new ArrayList<Switch>(iqDeltaMonitor.getMatching());
 		bmr.addInvalid(invalids.size());
 		bmr.addCheckTime();
 	}
