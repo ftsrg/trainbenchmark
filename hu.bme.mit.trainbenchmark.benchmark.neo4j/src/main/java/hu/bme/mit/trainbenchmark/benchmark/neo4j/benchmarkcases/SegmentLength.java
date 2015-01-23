@@ -35,7 +35,7 @@ public class SegmentLength extends Neo4jJavaBenchmarkCase {
 	public void check() {
 		bmr.startStopper();
 
-		Transaction tx = graphDb.beginTx();
+		final Transaction tx = graphDb.beginTx();
 
 		for (final Node t : GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(DynamicLabel.label(ModelConstants.SEGMENT))) {
 			segmentLength.put(t.getId(), (Integer) t.getProperty(ModelConstants.SEGMENT_LENGTH, null));
@@ -51,5 +51,6 @@ public class SegmentLength extends Neo4jJavaBenchmarkCase {
 	public int getResultSize() {
 		return segmentLength.size();
 	}
+
 
 }

@@ -14,8 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.Node;
@@ -24,7 +24,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public class SwitchNodes extends Neo4jJavaBenchmarkCase {
 
-	final Set<Long> switches = new HashSet<>();
+	final List<Long> switches = new ArrayList<>();
 
 	@Override
 	public String getName() {
@@ -35,7 +35,7 @@ public class SwitchNodes extends Neo4jJavaBenchmarkCase {
 	public void check() {
 		bmr.startStopper();
 
-		Transaction tx = graphDb.beginTx();
+		final Transaction tx = graphDb.beginTx();
 
 		for (final Node t : GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(DynamicLabel.label(ModelConstants.SWITCH))) {
 			switches.add(t.getId());

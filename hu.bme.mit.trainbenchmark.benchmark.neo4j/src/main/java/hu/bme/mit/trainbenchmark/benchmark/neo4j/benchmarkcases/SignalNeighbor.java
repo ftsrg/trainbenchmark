@@ -25,8 +25,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SIGNALNEIGHBOR;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicLabel;
@@ -46,7 +45,7 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 	}
 
 	@Override
-	public Set<Node> checkJava() {
+	public List<Node> checkJava() {
 		final Label labelRoute = DynamicLabel.label(ROUTE);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
 		final Label labelSignal = DynamicLabel.label(SIGNAL);
@@ -61,7 +60,7 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR
 				.toUpperCase());
 
-		invalids = new HashSet<>();
+		invalids = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> routes1 = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelRoute);

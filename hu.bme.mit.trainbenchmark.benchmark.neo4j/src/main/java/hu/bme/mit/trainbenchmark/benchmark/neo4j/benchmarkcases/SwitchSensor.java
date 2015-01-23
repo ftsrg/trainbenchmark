@@ -16,8 +16,8 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicLabel;
@@ -37,7 +37,7 @@ public class SwitchSensor extends Neo4jBenchmarkCase {
 	}
 
 	@Override
-	public Set<Node> checkJava() {
+	public List<Node> checkJava() {
 		bmr.startStopper();
 
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
@@ -46,7 +46,7 @@ public class SwitchSensor extends Neo4jBenchmarkCase {
 		final DynamicRelationshipType trackElement_sensorRelationshipType = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR
 				.toUpperCase());
 
-		invalids = new HashSet<>();
+		invalids = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// (switch:Switch)-[TRACKELEMENT_SENSOR]->(Sensor) NAC

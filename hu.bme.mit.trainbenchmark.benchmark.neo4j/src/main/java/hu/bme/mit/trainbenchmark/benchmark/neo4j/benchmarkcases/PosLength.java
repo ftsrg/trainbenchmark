@@ -15,8 +15,8 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.Label;
@@ -33,10 +33,10 @@ public class PosLength extends Neo4jBenchmarkCase {
 	}
 
 	@Override
-	public Set<Node> checkJava() {
+	public List<Node> checkJava() {
 		final Label labelSegment = DynamicLabel.label(SEGMENT);
 
-		invalids = new HashSet<>();
+		invalids = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// Segment.Segment_length

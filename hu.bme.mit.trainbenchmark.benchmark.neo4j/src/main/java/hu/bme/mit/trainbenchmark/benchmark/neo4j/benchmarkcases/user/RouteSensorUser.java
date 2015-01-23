@@ -13,14 +13,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.TrainRelationship;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -30,29 +29,21 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 
 	@Override
 	public void modify() {
-		long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
-		long start = System.nanoTime();
-		long startEdit = 0;
+		final long start = System.nanoTime();
+		final long startEdit = 0;
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// query the model
-			List<Node> routes = getNodesByTypes(graphDb, ModelConstants.ROUTE);
+			final List<Node> routes = getNodesByTypes(graphDb, ModelConstants.ROUTE);
 
-			Random random = bmr.getRandom();
-			int size = routes.size();
-
-			List<Node> itemsToModify = new ArrayList<Node>();
-			for (int i = 0; i < nElemToModify; i++) {
-				int rndTarget = random.nextInt(size);
-				Node route = routes.get(rndTarget);
-				itemsToModify.add(route);
-			}
+			final List<Node> itemsToModify = UserTransformation.pickRouteSensorUser(nElemToModify, routes);
 
 			// edit
-			for (Node route : itemsToModify) {
-				Iterable<Relationship> relationships = route.getRelationships(TrainRelationship.ROUTE_ROUTEDEFINITION);
+			for (final Node route : itemsToModify) {
+				final Iterable<Relationship> relationships = route.getRelationships(TrainRelationship.ROUTE_ROUTEDEFINITION);
 
 				if (relationships.iterator().hasNext()) {
 					relationships.iterator().next().delete();
@@ -62,8 +53,9 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 			tx.success();
 		}
 
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
+
 }

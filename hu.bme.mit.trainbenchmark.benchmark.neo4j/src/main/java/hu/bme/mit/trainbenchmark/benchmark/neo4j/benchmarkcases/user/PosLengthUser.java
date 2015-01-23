@@ -15,12 +15,11 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.PosLength;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
@@ -38,16 +37,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 		try (Transaction tx = graphDb.beginTx()) {
 			// query the model
 			final List<Node> segments = getNodesByTypes(graphDb, SEGMENT);
-
-			final Random random = bmr.getRandom();
-			final int size = segments.size();
-			final List<Node> itemsToModify = new ArrayList<Node>();
-
-			for (int i = 0; i < nElemToModify; i++) {
-				final int rndTarget = random.nextInt(size);
-				final Node segment = segments.get(rndTarget);
-				itemsToModify.add(segment);
-			}
+			final List<Node> itemsToModify = UserTransformation.pickPosLengthUser(nElemToModify, segments);
 
 			// edit
 			startEdit = System.nanoTime();

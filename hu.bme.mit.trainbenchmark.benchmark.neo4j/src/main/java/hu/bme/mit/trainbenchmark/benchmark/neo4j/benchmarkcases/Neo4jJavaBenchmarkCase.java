@@ -22,7 +22,7 @@ import java.io.IOException;
 public abstract class Neo4jJavaBenchmarkCase extends Neo4jBenchmarkCase {
 
 	@Override
-	public void init(BenchmarkConfig bc) throws IOException {
+	public void init(final BenchmarkConfig bc) throws IOException {
 		this.bc = bc;
 		this.nbc = (Neo4jBenchmarkConfig) bc;
 
@@ -35,5 +35,15 @@ public abstract class Neo4jJavaBenchmarkCase extends Neo4jBenchmarkCase {
 		if (bc.isBenchmarkMode()) {
 			Util.freeCache(bc);
 		}
+	}
+
+	@Override
+	public void check() {
+		bmr.startStopper();
+
+		invalids = checkJava();
+
+		bmr.addInvalid(invalids.size());
+		bmr.addCheckTime();
 	}
 }

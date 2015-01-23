@@ -22,9 +22,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicLabel;
@@ -44,7 +42,7 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 	}
 
 	@Override
-	public Set<Node> checkJava() {
+	public List<Node> checkJava() {
 		final Label labelRoute = DynamicLabel.label(ROUTE);
 		final Label labelSwitchPosition = DynamicLabel.label(SWITCHPOSITION);
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
@@ -59,7 +57,7 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION
 				.toUpperCase());
 
-		invalids = new HashSet<>();
+		invalids = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// (route:Route)-[ROUTE_SWITCHPOSITION]->()

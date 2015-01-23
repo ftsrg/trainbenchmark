@@ -30,6 +30,7 @@ public class SignalNeighborUser extends SignalNeighbor implements Transformation
 		final List<Long> routes = driver.collectVertices(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
 		final Multimap<Long, Long> routesEntries = driver.collectEdges(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE_ENTRY);
 
+		// select Random Routes 
 		final Random random = bmr.getRandom();
 		final Multimap<String, String> edgesToRemove = ArrayListMultimap.create();
 
@@ -48,7 +49,7 @@ public class SignalNeighborUser extends SignalNeighbor implements Transformation
 			final String routeURI = RDFUtil.toURI(RDFConstants.BASE_PREFIX, route);
 			
 			final Collection<Long> signals = routesEntries.get(route);
-			for (Long signal : signals) {
+			for (final Long signal : signals) {
 				final String signalURI = RDFUtil.toURI(RDFConstants.BASE_PREFIX, signal);
 				edgesToRemove.put(routeURI, signalURI);
 			}

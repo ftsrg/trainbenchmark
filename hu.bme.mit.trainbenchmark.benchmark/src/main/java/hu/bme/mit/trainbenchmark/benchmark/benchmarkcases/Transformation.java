@@ -9,18 +9,17 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.xform;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.SignalNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-import java.io.IOException;
+import java.util.Random;
 
-public class SignalNeighborXForm extends SignalNeighbor implements TransformationBenchmarkCase {
+public class Transformation {
 
-	@Override
-	public void modify() throws IOException {
-
+	public static Random getRandom() {
+		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
-
+	
 }

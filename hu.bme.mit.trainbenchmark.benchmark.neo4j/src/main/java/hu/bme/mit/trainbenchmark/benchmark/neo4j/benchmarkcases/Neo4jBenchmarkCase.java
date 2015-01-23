@@ -23,15 +23,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.NotImplementedException;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
@@ -50,7 +50,7 @@ public abstract class Neo4jBenchmarkCase implements BenchmarkCase {
 	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
 	protected Neo4jBenchmarkConfig nbc;
-	protected Set<Node> invalids;
+	protected List<Node> invalids;
 
 	protected GraphDatabaseService graphDb;
 	protected String graphDbPath;
@@ -111,8 +111,8 @@ public abstract class Neo4jBenchmarkCase implements BenchmarkCase {
 		bmr.addCheckTime();
 	}
 
-	protected Set<Node> checkJava() {
-		throw new UnsupportedOperationException();
+	protected List<Node> checkJava() {
+		throw new NotImplementedException("");
 	}
 
 	@Override
@@ -155,8 +155,8 @@ public abstract class Neo4jBenchmarkCase implements BenchmarkCase {
 		return list;
 	}
 
-	public Set<Node> runCypherQuery(final GraphDatabaseService graphDb, final String query) {
-		final Set<Node> invalids = new HashSet<>();
+	public List<Node> runCypherQuery(final GraphDatabaseService graphDb, final String query) {
+		final List<Node> invalids = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ExecutionEngine engine = new ExecutionEngine(graphDb);
