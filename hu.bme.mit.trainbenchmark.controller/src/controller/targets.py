@@ -16,8 +16,7 @@ def get_generator_jar(format):
     Return the generate's .jar file's path which belongs to the certain 
     format. The latter is provided by the format parameter.
     """
-    folder = ("./trainbenchmark-{FORMAT}/"\
-           + "hu.bme.mit.trainbenchmark.generator.{FORMAT}/target/"\
+    folder = ("./hu.bme.mit.trainbenchmark.generator.{FORMAT}/target/"\
            ).format(FORMAT=format)
     files = glob.glob(folder + "*.jar")
     if (len(files) >0):
@@ -32,15 +31,13 @@ def get_benchmark_jar(tool):
     Return the benchmark's .jar file's path which belongs to the certain 
     tool. The latter is provided by the tool parameter.
     """
-    folder = ("./trainbenchmark-{PACKAGE}/"\
-               + "hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/"\
-               ).format(PACKAGE=handler.get_package_name(tool),TOOL=tool)
+    folder = ("./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/"\
+              ).format(TOOL=tool)
     files = glob.glob(folder + "*.jar")
     if (len(files) >0):
         target = files[0]
         return target
     else:
-        print("Jar file not found!")
         return None
 
 
@@ -76,4 +73,4 @@ models = {
           }
 
 
-common_models_path = "./trainbenchmark-models"
+common_models_path = "./models"

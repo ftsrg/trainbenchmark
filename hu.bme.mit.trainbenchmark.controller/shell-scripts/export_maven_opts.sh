@@ -1,3 +1,4 @@
+#!/bin/bash
 #*******************************************************************************
 # Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
 # All rights reserved. This program and the accompanying materials
@@ -9,6 +10,4 @@
 #   Benedek Izso - initial API and implementation
 #   Gabor Szarnyas - initial API and implementation
 #*******************************************************************************
-#!/bin/bash
-
 export MAVEN_OPTS="-Xmx$1 -XX:MaxPermSize=$2"

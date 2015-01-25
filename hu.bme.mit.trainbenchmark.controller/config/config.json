@@ -1,0 +1,25 @@
+{
+  "config": {
+    "scenarios": [
+      "XForm"
+    ],
+    "MAVEN_OPTS": {
+      "Xmx": "512m",
+      "XX:MaxPermSize": "256m"
+    },
+    "JAVA_OPTS": {
+      "xmx": "2g",
+      "maxPermSize": "256m"
+    },
+    "minSize": 1,
+    "maxSize": 4,
+    "workspacePath": ".",
+    "series": 2,
+    "queries": [
+      "PosLength"
+    ],
+    "tools": [
+      "emfincquery"
+    ]
+  }
+}

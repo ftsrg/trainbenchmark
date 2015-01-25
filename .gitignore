@@ -13,3 +13,5 @@ workspace
 Thumbs.db
 .Rhistory
 results*.txt
+results/
+.pydevproject

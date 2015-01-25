@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.util.JsonSerializer;
 
 import java.io.IOException;
 
@@ -29,7 +30,7 @@ public class BatchScenario implements Scenario<BenchmarkCase> {
 		testCase.destroy();
 
 		BenchmarkResult bmr = testCase.getBenchmarkResult();
-		System.out.println(bmr);
+		JsonSerializer.serialize(bmr);
 	}
 
 }

@@ -29,15 +29,6 @@ import deps
 import log
 
 
-def git_clone(repo):
-    """
-    Clone a remote repository by git after a Repository object.
-    
-    @param repo: Repository object
-    """
-    subprocess.call(["git", "clone", repo.url, "--branch", repo.branch,\
-                     "--depth", repo.depth])
-
 
 def resolve_dependencies(configurations):
     """
@@ -53,15 +44,6 @@ def resolve_dependencies(configurations):
             if (dependency is not None):
                 if (dependency not in config.get_repositories()):
                     config.add_repository(dependency)
-                    #config.repositories.add(dependency)
-    # change back working directory later, so store it now
-    current_directory = os.getcwd()
-    for config in configurations:
-        handler.set_working_directory(config.path)
-        for repo in config.get_repositories():
-            if (os.path.exists(os.getcwd() + "/" + repo.folder) == False):
-                git_clone(repo)
-    handler.set_working_directory(current_directory)
 
 
 def maven_build(configuration, package):
@@ -82,16 +64,13 @@ def maven_build(configuration, package):
     subprocess.call(["../../shell-scripts/export_maven_opts.sh",\
                     configuration.maven_xmx, \
                     configuration.maven_maxpermsize])
-    # jump to the project parent folder since configuration.path can be relative
-    #handler.set_working_directory("../../../")
     handler.set_working_directory(configuration.path)
-    subprocess.call(["mvn", "clean", "install", "-f",\
-                     "./trainbenchmark-core/pom.xml", "-P",\
+    subprocess.call(["mvn", "clean", "install", "-P",\
                      handler.get_package_name(package)])
     handler.set_working_directory(current_directory)
 
 
-def build_projects(configurations, build_core=True,build_formats=True, \
+def build_projects(configurations, build_core=True, build_formats=True, \
                    build_tools=True):
     """Build the projects.
     """
@@ -102,6 +81,7 @@ def build_projects(configurations, build_core=True,build_formats=True, \
         formats.append(config.format)
     logging.info("Build the following projects:" + tools.__str__() + " - " +\
                   formats.__str__())
+    
     # make a new instance of the static attribute
     # all_repositories contains every Repository which attached to
     # the Configuration object
@@ -123,8 +103,6 @@ def build_projects(configurations, build_core=True,build_formats=True, \
                                             all_repositories[-1].path)
                 maven_build(all_repositories[-1].config, \
 						    all_repositories.pop().name)
-                generate.generate_models(all_repositories[-1].config, \
-                                         basic=True)
             elif (build_tools == True and \
                     all_repositories[-1].name in tools):
                 # install further dependencies if necessary

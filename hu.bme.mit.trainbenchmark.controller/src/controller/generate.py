@@ -16,19 +16,15 @@ import handler
 import loader
 import log
 
-def generate_models(configuration, basic=False):
+def generate_models(configuration):
     """
     Generates the models after the configuration parameter. If basic parameter
     is True, then generates the smallest models only. 
     
     Parameters:
     @param configuration: a Configuration object
-    @param basic: generates only basic models if the value is True
     """
     logging.info("generate.generate_models called.")
-    # change back working directory later, so store it now
-    current_directory = os.getcwd() 
-    # change working directory to this module's location
     handler.set_working_directory(configuration.path)
     target = targets.get_generator_jar(configuration.format)
     if (target is None):
@@ -38,10 +34,6 @@ def generate_models(configuration, basic=False):
     models_path = targets.get_common_model_path()
     if(os.path.exists(models_path) == False):
         os.makedirs(models_path)
-    if (basic == True):
-        generate_basic_models(configuration.format, target, configuration.path)
-        handler.set_working_directory(current_directory)
-        return
     
     for scenario in configuration.scenarios:
         for size in configuration.sizes:
@@ -55,21 +47,6 @@ def generate_models(configuration, basic=False):
                              "XForm" if scenario=="Batch" else scenario, \
                              "-size", size, "-workspacePath", \
                              configuration.path])
-    handler.set_working_directory(current_directory)
-
-
-def generate_basic_models(format, target, path):
-    """Generates the smallest models in every possible scenario.
-    """
-    logging.info("generate.generate_basic_models called.")
-    scenarios = ["User", "XForm"]
-    for scenario in scenarios:
-        logging.info("Generate model:(format" + format + \
-                         ", scenario:" + scenario + ", size:1" + \
-                          ", path:" + path + ")")
-        subprocess.call(["java", "-jar", target, "-scenario", \
-                         scenario, "-size", "1", \
-                         "-workspacePath", path])
 
 
 if (__name__ == "__main__"):
