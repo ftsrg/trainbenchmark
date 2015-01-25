@@ -5,6 +5,7 @@ Created on Nov 25, 2014
 The module is responsible for validation.
 """
 import os
+import logging
 
 import handler
 
@@ -25,22 +26,19 @@ def is_valid_json(instance_json, schema_json):
     try:
         validate(instance_json,schema_json)
     except ValueError as value_error:
-        print("Json file is not valid \n", value_error)
+        logging.error("Json file is not valid \n", value_error)
         return False
     except ValidationError as validation_error:
-        print("A problem has occurred during the validation, here:")
-        # determine the error's first place
-        print(best_match(Draft4Validator(schema_json)\
-                         .iter_errors(instance_json)).message)
+        logging.error("A problem has occurred during the validation, here: "+\
+                      best_match(Draft4Validator(schema_json)\
+                      .iter_errors(instance_json)).message)
         return False
-        #rint(best_match(Draft4Validator(schema_json).iter_errors(instance_json)).message)
-        #print(ErrorTree(Draft4Validator(schema_json).iter_errors(instance_json)))
     except SchemaError:
-        print("The provided schema is malformed.")
+        logging.error("The provided schema is malformed.")
         return False
     
     if (instance_json["minSize"] > instance_json["maxSize"]):
-        print("Maxsize is lower than minsize. Change the "\
+        logging.error("Maxsize is lower than minsize. Change the "\
               "config.json file")
         return False
     
@@ -51,12 +49,12 @@ def is_valid_json(instance_json, schema_json):
     # instance_json["workspacePath"] must be checked relatively
     handler.set_working_directory("../../../")
     if (os.path.exists(instance_json["workspacePath"]) == False):
-        print(instance_json["workspacePath"] +\
+        logging.error(instance_json["workspacePath"] +\
               "is not an existing directory.")
         handler.set_working_directory(current_path);
         return False
     elif(os.path.isdir(instance_json["workspacePath"]) == False):
-        print(instance_json["workspacePath"] + " is not a directory!")
+        logging.error(instance_json["workspacePath"] + " is not a directory!")
         handler.set_working_directory(current_path);
         return False
     handler.set_working_directory(current_path);

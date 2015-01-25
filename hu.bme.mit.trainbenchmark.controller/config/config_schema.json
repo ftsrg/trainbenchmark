@@ -68,22 +68,10 @@
       "type": "string",
       "default": "."
     },
-    "measurements": {
+    "series": {
       "type": "integer",
       "minimum": 1,
       "default": 1
-    },
-    "timeout": {
-      "type": "string",
-      "pattern": "^[0-9]+[m,h]",
-      "default": "12m"
-    },
-    "verbose": {
-      "type": "boolean",
-      "default": false
-    },
-    "defaultArgs": {
-      "type": "string"
     },
     "queries": {
       "type": "array",
