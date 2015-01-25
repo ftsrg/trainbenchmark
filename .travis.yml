@@ -1,3 +1,3 @@
 script:
   - scripts/resolve-dependencies.sh
-  - mvn clean install -DskipTests
+  - scripts/build-without-test.sh

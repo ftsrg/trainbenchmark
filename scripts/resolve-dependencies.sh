@@ -13,7 +13,7 @@ if [ ! -d rdf-graph-drivers ]; then
   git clone https://github.com/FTSRG/rdf-graph-drivers
 fi
 cd rdf-graph-drivers
-scripts/resolve-dependencies
+scripts/resolve-dependencies.sh
 scripts/build.sh
 mvn clean install -P fourstore -DskipTests
 cd ..
