@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.PosLength;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -20,34 +21,23 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PosLengthXForm extends PosLength implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		Random random = bmr.getRandom();
-		int size = invalids.size();
-		List<Integer> itemsToModify = new ArrayList<Integer>();
-		if (size < nElemToModify)
-			nElemToModify = size;
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			Integer segment = invalids.get(rndTarget);
-			itemsToModify.add(segment);
-		}
+		final List<Integer> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Integer segment : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Integer segment : itemsToModify) {
 			try (ResultSet rs = st.executeQuery(String.format("SELECT %s FROM %s WHERE Trackelement_id = %d;",
 					ModelConstants.SEGMENT_LENGTH, ModelConstants.SEGMENT, segment))) {
 				int length = 0;
@@ -57,12 +47,12 @@ public class PosLengthXForm extends PosLength implements TransformationBenchmark
 				length = -1 * (length - 1);
 				st.executeUpdate(String.format("UPDATE %s SET %s = %d WHERE Trackelement_id = %d;", ModelConstants.SEGMENT,
 						ModelConstants.SEGMENT_LENGTH, length, segment));
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				throw new IOException(e);
 			}
 		}
 
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}

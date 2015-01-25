@@ -14,6 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Transformation {
@@ -21,5 +23,22 @@ public class Transformation {
 	public static Random getRandom() {
 		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
-	
+
+	public static <T> List<T> pickRandom(long nElemToModify, final List<T> invalids) {
+		final Random random = getRandom();
+		final int size = invalids.size();
+		final List<T> itemsToModify = new ArrayList<>();
+
+		if (size < nElemToModify) {
+			nElemToModify = size;
+		}
+
+		for (int i = 0; i < nElemToModify; i++) {
+			final int rndTarget = random.nextInt(size);
+			final T segment = new ArrayList<>(invalids).get(rndTarget);
+			itemsToModify.add(segment);
+		}
+		return itemsToModify;
+	}
+
 }

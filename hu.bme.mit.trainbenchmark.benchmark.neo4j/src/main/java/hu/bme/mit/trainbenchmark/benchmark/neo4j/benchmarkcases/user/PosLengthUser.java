@@ -14,8 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.PosLength;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
@@ -37,7 +37,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 		try (Transaction tx = graphDb.beginTx()) {
 			// query the model
 			final List<Node> segments = getNodesByTypes(graphDb, SEGMENT);
-			final List<Node> itemsToModify = UserTransformation.pickPosLengthUser(nElemToModify, segments);
+			final List<Node> itemsToModify = Transformation.pickRandom(nElemToModify, segments);
 
 			// edit
 			startEdit = System.nanoTime();

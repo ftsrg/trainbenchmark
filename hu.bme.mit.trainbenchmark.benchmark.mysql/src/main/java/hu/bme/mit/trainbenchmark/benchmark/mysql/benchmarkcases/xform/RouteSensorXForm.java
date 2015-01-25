@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -19,31 +20,20 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class RouteSensorXForm extends RouteSensor implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
 		final long start = System.nanoTime();
 
-		final Random random = bmr.getRandom();
-		final int size = invalids.size();
-		final List<Integer> itemsToModify = new ArrayList<Integer>();
-		if (size < nElemToModify)
-			nElemToModify = size;
-		for (int i = 0; i < nElemToModify; i++) {
-			final int rndTarget = random.nextInt(size);
-			final Integer sensor = invalids.get(rndTarget);
-			itemsToModify.add(sensor);
-		}
-
+		final List<Integer> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
+		
 		// edit
 		final long startEdit = System.nanoTime();
 		for (final Integer sensor : itemsToModify) {

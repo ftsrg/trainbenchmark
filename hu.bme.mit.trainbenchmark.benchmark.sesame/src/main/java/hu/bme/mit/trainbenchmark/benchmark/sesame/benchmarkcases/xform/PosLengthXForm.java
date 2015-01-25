@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameData;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.PosLength;
@@ -22,9 +23,7 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
@@ -35,48 +34,45 @@ public class PosLengthXForm extends PosLength implements TransformationBenchmark
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		ValueFactory f = myRepository.getValueFactory();
+		final ValueFactory f = myRepository.getValueFactory();
 		try {
 
-			Random random = bmr.getRandom();
-			int size = invalids.size();
-			List<SesameData> itemsToRemove = new ArrayList<SesameData>();
-			for (int i = 0; i < nElemToModify; i++) {
-				int rndTarget = random.nextInt(size);
-				Resource segment = invalids.get(rndTarget);
+			final List<URI> segmentsToModify = Transformation.pickRandom(nElemToModify, invalids);
+			final List<SesameData> itemsToModify = new ArrayList<SesameData>();
+			
+			for (final URI segment : segmentsToModify) {
+				final URI segmentLength = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH);
+				final SesameData jd = new SesameData();
 
-				URI segmentLength = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH);
-				SesameData jd = new SesameData();
-
-				RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, segmentLength, null, true);
+				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, segmentLength, null, true);
 
 				jd.setStatements(statementsToRemove.asList());
 
-				Integer negValue = new Integer(jd.getStatements().get(0).getObject().stringValue());
+				final Integer negValue = new Integer(jd.getStatements().get(0).getObject().stringValue());
 				jd.setResource(segment);
 				jd.setUri(segmentLength);
 				jd.setLiteral(f.createLiteral(-1 * (negValue - 1)));
 
-				itemsToRemove.add(jd);
+				itemsToModify.add(jd);
 			}
 
 			// edit
-			long startEdit = System.nanoTime();
-			for (SesameData jd : itemsToRemove) {
+			final long startEdit = System.nanoTime();
+			for (final SesameData jd : itemsToModify) {
 				con.remove(jd.getStatements());
 				con.add(jd.getResource(), jd.getUri(), jd.getLiteral());
 			}
 			con.commit();
-			long end = System.nanoTime();
+			final long end = System.nanoTime();
 			bmr.addEditTime(end - startEdit);
 			bmr.addModificationTime(end - start);
-		} catch (RepositoryException e) {
+		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
 	}

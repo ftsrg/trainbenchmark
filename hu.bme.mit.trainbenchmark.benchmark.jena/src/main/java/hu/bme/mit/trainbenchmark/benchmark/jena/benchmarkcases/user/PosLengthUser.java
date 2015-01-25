@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.PosLength;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -20,10 +21,7 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -38,47 +36,44 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		ResIterator segmentStatements = model.listSubjectsWithProperty(RDF.type,
+		final ResIterator segmentStatements = model.listSubjectsWithProperty(RDF.type,
 				model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT));
 		List<Resource> segments = new ArrayList<Resource>();
 		segments = segmentStatements.toList();
 
-		Random random = bmr.getRandom();
-		int size = segments.size();
-		Set<Statement> itemsToRemove = new HashSet<Statement>();
-		Set<Statement> itemsToAdd = new HashSet<Statement>();
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			Resource segment = segments.get(rndTarget);
+		final List<Resource> segmentsToModify = Transformation.pickRandom(nElemToModify, segments);
+		final List<Statement> itemsToRemove = new ArrayList<>();
+		final List<Statement> itemsToAdd = new ArrayList<>();
 
-			Selector selector = new SimpleSelector(segment, model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH),
+		for (final Resource segment : segmentsToModify) {
+			final Selector selector = new SimpleSelector(segment, model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH),
 					(RDFNode) null);
 
-			StmtIterator statementsToRemove = model.listStatements(selector);
+			final StmtIterator statementsToRemove = model.listStatements(selector);
 			while (statementsToRemove.hasNext()) {
 				itemsToRemove.add(statementsToRemove.next());
 			}
 
-			Statement newValueStmt = model.createLiteralStatement(segment,
+			final Statement newValueStmt = model.createLiteralStatement(segment,
 					model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH), -1);
 			itemsToAdd.add(newValueStmt);
 		}
 
-		// -- do edit
-		long startEdit = System.nanoTime();
-		for (Statement statementToRemove : itemsToRemove) {
+		// edit
+		final long startEdit = System.nanoTime();
+		for (final Statement statementToRemove : itemsToRemove) {
 			model.remove(statementToRemove);
 		}
-		for (Statement newValueStmt : itemsToAdd) {
+		for (final Statement newValueStmt : itemsToAdd) {
 			model.add(newValueStmt);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}

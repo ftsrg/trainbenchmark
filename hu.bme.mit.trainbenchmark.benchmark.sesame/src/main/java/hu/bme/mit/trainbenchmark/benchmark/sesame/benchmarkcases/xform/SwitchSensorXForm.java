@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameData;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.SwitchSensor;
@@ -22,9 +23,7 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
@@ -37,7 +36,7 @@ public class SwitchSensorXForm extends SwitchSensor implements TransformationBen
 
 	@Override
 	public void modify() throws IOException {
-		final int nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
@@ -45,13 +44,10 @@ public class SwitchSensorXForm extends SwitchSensor implements TransformationBen
 		final ValueFactory f = myRepository.getValueFactory();
 
 		try {
-			final Random random = bmr.getRandom();
-			final int size = invalids.size();
+			final List<URI> switches = Transformation.pickRandom(nElemToModify, invalids);			
 			final List<SesameData> itemsToAdd = new ArrayList<SesameData>();
-			for (int i = 0; i < nElemToModify; i++) {
-				final int rndTarget = random.nextInt(size);
-				final Resource aSwitch = invalids.get(rndTarget);
-
+			
+			for (final URI aSwitch : switches) {
 				SesameData jd;
 
 				// create new switch connected to the sensor

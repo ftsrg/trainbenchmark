@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.SwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.TrainRelationship;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -38,7 +38,7 @@ public class SwitchSensorUser extends SwitchSensor implements TransformationBenc
 		try (Transaction tx = graphDb.beginTx()) {
 			// query the model
 			final List<Node> switches = getNodesByTypes(graphDb, ModelConstants.SWITCH);
-			final List<Node> itemsToModify = UserTransformation.pickSwitchSensorUser(nElemToModify, switches);
+			final List<Node> itemsToModify = Transformation.pickRandom(nElemToModify, switches);
 
 			// edit
 			startEdit = System.nanoTime();

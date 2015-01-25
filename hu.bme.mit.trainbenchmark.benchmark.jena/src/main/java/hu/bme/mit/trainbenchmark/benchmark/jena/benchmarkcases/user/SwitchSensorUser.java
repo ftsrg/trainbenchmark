@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.SwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -20,10 +21,7 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -38,38 +36,34 @@ public class SwitchSensorUser extends SwitchSensor implements TransformationBenc
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
-		ResIterator switchStatements = model.listSubjectsWithProperty(RDF.type,
+		final long start = System.nanoTime();
+		final ResIterator switchStatements = model.listSubjectsWithProperty(RDF.type,
 				model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.SWITCH));
 		List<Resource> switches = new ArrayList<Resource>();
 		switches = switchStatements.toList();
 
-		Random random = bmr.getRandom();
-		int size = switches.size();
-		Set<Statement> itemsToRemove = new HashSet<Statement>();
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			Resource aswitch = switches.get(rndTarget);
-
-			Selector selector = new SimpleSelector(aswitch,
-					model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.TRACKELEMENT_SENSOR), (RDFNode) null);
-			StmtIterator statementsToRemove = model.listStatements(selector);
+		final List<Resource> switchesToModify = Transformation.pickRandom(nElemToModify, switches);
+		final List<Statement> itemsToRemove = new ArrayList<>();
+		for (final Resource aSwitch : switchesToModify) {
+			final Selector selector = new SimpleSelector(aSwitch, model.getProperty(RDFConstants.BASE_PREFIX
+					+ ModelConstants.TRACKELEMENT_SENSOR), (RDFNode) null);
+			final StmtIterator statementsToRemove = model.listStatements(selector);
 
 			while (statementsToRemove.hasNext()) {
 				itemsToRemove.add(statementsToRemove.next());
 			}
 		}
 
-		// -- do edit
-		long startEdit = System.nanoTime();
-		for (Statement statementToRemove : itemsToRemove) {
+		// edit
+		final long startEdit = System.nanoTime();
+		for (final Statement statementToRemove : itemsToRemove) {
 			model.remove(statementToRemove);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 

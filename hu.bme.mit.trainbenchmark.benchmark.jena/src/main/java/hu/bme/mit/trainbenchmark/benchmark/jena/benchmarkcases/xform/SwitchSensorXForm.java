@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.SwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -19,9 +20,8 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -33,36 +33,32 @@ public class SwitchSensorXForm extends SwitchSensor implements TransformationBen
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		Random random = bmr.getRandom();
-		int size = invalids.size();
-		Set<Statement> newStatements = new HashSet<>();
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			Resource aSwitch = invalids.get(rndTarget);
+		final List<Resource> switches = Transformation.pickRandom(nElemToModify, invalids);
+		final List<Statement> newStatements = new ArrayList<>();
+		for (final Resource aSwitch : switches) {
+			final Property trackElement_sensor = model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.TRACKELEMENT_SENSOR);
+			final Property type = model.getProperty(RDFConstants.RDF_TYPE);
+			final Resource sensorType = model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.SENSOR);
 
-			Property trackElement_sensor = model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.TRACKELEMENT_SENSOR);
-			Property type = model.getProperty(RDFConstants.RDF_TYPE);
-			Resource sensorType = model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.SENSOR);
-
-			Resource sensor = model.createResource(RDFConstants.BASE_PREFIX + "x" + newSensorId);
+			final Resource sensor = model.createResource(RDFConstants.BASE_PREFIX + "x" + newSensorId);
 			newSensorId++;
 
 			newStatements.add(model.createStatement(aSwitch, trackElement_sensor, sensor));
 			newStatements.add(model.createStatement(sensor, type, sensorType));
 		}
 
-		// -- do edit
-		long startEdit = System.nanoTime();
-		for (Statement statement : newStatements) {
+		// edit
+		final long startEdit = System.nanoTime();
+		for (final Statement statement : newStatements) {
 			model.add(statement);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 

@@ -1,7 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases.PosLength;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
@@ -18,7 +18,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 
 	@Override
 	public void modify() throws IOException {
-		final int nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// start the modification
@@ -28,7 +28,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 		final List<Long> segments = driver.collectVertices(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT);
 
 		// select random Segments
-		final List<Long> segmentsToModify = UserTransformation.pickPosLengthUser(nElemToModify, segments);
+		final List<Long> segmentsToModify = Transformation.pickRandom(nElemToModify, segments);
 
 		final Map<String, Object> properties = new HashMap<>();
 		for (final Long segment : segmentsToModify) {

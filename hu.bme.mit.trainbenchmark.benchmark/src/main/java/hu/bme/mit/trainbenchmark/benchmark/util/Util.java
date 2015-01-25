@@ -30,12 +30,12 @@ public class Util {
 		}
 	}
 
-	public static void freeCache(TrainBenchmarkConfig bc) throws IOException {
-		String clearCacheCommand = bc.getWorkspacePath() + "/scripts/clear-cache.sh";
+	public static void freeCache(final TrainBenchmarkConfig bc) throws IOException {
+		final String clearCacheCommand = bc.getWorkspacePath() + "/scripts/clear-cache.sh";
 		try {
 			Process child;
 
-			String command = "/bin/sync";
+			final String command = "/bin/sync";
 			child = Runtime.getRuntime().exec(command);
 			child.waitFor();
 			if (child.exitValue() != 0) {
@@ -47,7 +47,7 @@ public class Util {
 			if (child.exitValue() != 0) {
 				throw new InterruptedException("Bad return value: " + child.exitValue());
 			}
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			System.err.println("Maybe running " + clearCacheCommand + " as root is not permitted?");
 			System.err.println("Use the visudo utility to add the following line to the /etc/sudoers file:");
 			System.err.println("user ALL=(ALL) NOPASSWD: " + clearCacheCommand);
@@ -55,18 +55,18 @@ public class Util {
 		}
 	}
 
-	public static String readFile(String file) throws IOException {
+	public static String readFile(final String file) throws IOException {
 		return FileUtils.readFileToString(new File(file));
 	}
 
-	public static void writeFile(String filename, String content) throws IOException {
+	public static void writeFile(final String filename, final String content) throws IOException {
 		BufferedWriter out;
 		out = new BufferedWriter(new FileWriter(filename));
 		out.write(content);
 		out.close();
 	}
 
-	public static int calcModify(BenchmarkConfig bc, int nModify, BenchmarkResult bmr) {
+	public static long calcModify(final BenchmarkConfig bc, final int nModify, final BenchmarkResult bmr) {
 		switch (bc.getModificationMethod()) {
 		case CONSTANT:
 			return nModify;

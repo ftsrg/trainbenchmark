@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.PosLength;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -19,9 +20,8 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -34,28 +34,25 @@ public class PosLengthXForm extends PosLength implements TransformationBenchmark
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		Random random = bmr.getRandom();
-		int size = invalids.size();
-		Set<Statement> itemsToRemove = new HashSet<>();
-		Set<Statement> itemsToAdd = new HashSet<>();
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			Resource segment = invalids.get(rndTarget);
+		final List<Resource> segments = Transformation.pickRandom(nElemToModify, invalids);
+		final List<Statement> itemsToRemove = new ArrayList<>();
+		final List<Statement> itemsToAdd = new ArrayList<>();
 
-			Selector selector = new SimpleSelector(segment, model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH),
+		for (final Resource segment : segments) {
+			final Selector selector = new SimpleSelector(segment, model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH),
 					(RDFNode) null);
 
-			StmtIterator statementsToRemove = model.listStatements(selector);
+			final StmtIterator statementsToRemove = model.listStatements(selector);
 			Statement newValueStmt = null;
 			while (statementsToRemove.hasNext()) {
-				Statement stmt = statementsToRemove.next();
-				Integer length = stmt.getInt();
+				final Statement stmt = statementsToRemove.next();
+				final Integer length = stmt.getInt();
 				itemsToRemove.add(stmt);
 				newValueStmt = model.createLiteralStatement(segment,
 						model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT_LENGTH), -1 * (length - 1));
@@ -65,16 +62,16 @@ public class PosLengthXForm extends PosLength implements TransformationBenchmark
 				itemsToAdd.add(newValueStmt);
 		}
 
-		// -- do edit
-		long startEdit = System.nanoTime();
-		for (Statement statementToRemove : itemsToRemove) {
+		// edit
+		final long startEdit = System.nanoTime();
+		for (final Statement statementToRemove : itemsToRemove) {
 			model.remove(statementToRemove);
 		}
-		for (Statement newValueStmt : itemsToAdd) {
+		for (final Statement newValueStmt : itemsToAdd) {
 			model.add(newValueStmt);
 		}
 
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}

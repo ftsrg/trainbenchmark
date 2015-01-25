@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -19,9 +20,8 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Selector;
@@ -33,37 +33,33 @@ public class RouteSensorXForm extends RouteSensor implements TransformationBench
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		Random random = bmr.getRandom();
-		int size = invalids.size();
-		Set<Statement> itemsToRemove = new HashSet<>();
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			Resource sensor = invalids.get(rndTarget);
+		final List<Resource> sensors = Transformation.pickRandom(nElemToModify, invalids);
+		final List<Statement> itemsToRemove = new ArrayList<>();
+		for (final Resource sensor : sensors) {
+			final Selector selector = new SimpleSelector(null, model.getProperty(RDFConstants.BASE_PREFIX
+					+ ModelConstants.TRACKELEMENT_SENSOR), sensor);
 
-			Selector selector = new SimpleSelector(null, model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.TRACKELEMENT_SENSOR),
-					sensor);
-
-			StmtIterator statementsToRemove = model.listStatements(selector);
+			final StmtIterator statementsToRemove = model.listStatements(selector);
 
 			while (statementsToRemove.hasNext()) {
-				Statement statementToRemove = statementsToRemove.next();
+				final Statement statementToRemove = statementsToRemove.next();
 				itemsToRemove.add(statementToRemove);
 			}
 
 		}
 
-		// -- do edit
-		long startEdit = System.nanoTime();
-		for (Statement statementToRemove : itemsToRemove) {
+		// edit
+		final long startEdit = System.nanoTime();
+		for (final Statement statementToRemove : itemsToRemove) {
 			model.remove(statementToRemove);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 

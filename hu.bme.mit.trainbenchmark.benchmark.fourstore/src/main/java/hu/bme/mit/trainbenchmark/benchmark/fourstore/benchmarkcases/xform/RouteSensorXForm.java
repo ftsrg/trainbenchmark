@@ -1,7 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.xform.XFormTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
@@ -16,13 +16,13 @@ public class RouteSensorXForm extends RouteSensor implements TransformationBench
 
 	@Override
 	public void modify() throws IOException {
-		final int nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// start the modification
 		final long start = System.nanoTime();
-
-		final List<Long> sensorsToRemove = XFormTransformation.pickRouteSensorXForm(nElemToModify, invalids);
+		
+		final List<Long> sensorsToRemove = Transformation.pickRandom(nElemToModify, invalids);
 		final List<String> sensorURIsToRemove = new ArrayList<>();
 		for (final Long id : sensorsToRemove) {
 			sensorURIsToRemove.add(RDFUtil.toURI(RDFConstants.BASE_PREFIX, id));
@@ -30,9 +30,8 @@ public class RouteSensorXForm extends RouteSensor implements TransformationBench
 
 		// edit
 		final long startEdit = System.nanoTime();
-		// this also deletes the incoming TrackElement_sensor edges
 
-		// partitioning
+		// this also deletes the incoming TrackElement_sensor edges
 		driver.deleteVertices(sensorURIsToRemove);
 
 		final long end = System.nanoTime();

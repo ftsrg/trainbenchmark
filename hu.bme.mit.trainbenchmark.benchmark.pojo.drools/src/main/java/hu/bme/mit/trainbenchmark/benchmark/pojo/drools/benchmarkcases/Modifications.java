@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.pojo.drools.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.pojo.Graph;
 import hu.bme.mit.trainbenchmark.pojo.Route;
@@ -21,187 +22,155 @@ import hu.bme.mit.trainbenchmark.pojo.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Modifications {
 
-	public static void modifyModelPosLength(Graph graph, BenchmarkResult bmr, int nElemToModify) {
+	public static void modifyModelPosLength(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		List<Segment> segments = new ArrayList<Segment>();
+		final long start = System.nanoTime();
+		final List<Segment> segments = new ArrayList<Segment>();
 		segments.addAll(graph.getSegments());
-		int size = segments.size();
 
-		List<Segment> itemsToModify = getItemsToModify(bmr, nElemToModify, segments, size);
+		final List<Segment> itemsToModify = Transformation.pickRandom(nElemToModify, segments);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Segment segment : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Segment segment : itemsToModify) {
 			segment.setLength(0);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyModelPosLengthRepair(BenchmarkResult bmr, int nElemToModify, List<Segment> invalids) {
+	public static void modifyModelPosLengthRepair(final BenchmarkResult bmr, final long nElemToModify, final List<Segment> invalids) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		int size = invalids.size();
-		if (size < nElemToModify) {
-			nElemToModify = size;
-		}
+		final long start = System.nanoTime();
 
-		List<Segment> itemsToModify = getItemsToModify(bmr, nElemToModify, invalids, size);
+		final List<Segment> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Segment segment : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Segment segment : itemsToModify) {
 			segment.setLength(-1 * (segment.getLength() - 1));
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	private static <T> List<T> getItemsToModify(BenchmarkResult bmr, int nElemToModify, List<T> items, int size) {
-		Random random = bmr.getRandom();
-		List<T> itemsToModify = new ArrayList<>();
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			T segment = items.get(rndTarget);
-			itemsToModify.add(segment);
-		}
-		return itemsToModify;
-	}
-
-	public static void modifyModelRouteSensor(Graph graph, BenchmarkResult bmr, int nElemToModify) {
+	public static void modifyModelRouteSensor(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		List<Route> routes = new ArrayList<Route>();
+		final long start = System.nanoTime();
+		final List<Route> routes = new ArrayList<Route>();
 		routes.addAll(graph.getRoutes());
-		int size = routes.size();
 
-		List<Route> itemsToModify = getItemsToModify(bmr, nElemToModify, routes, size);
+		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Route route : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Route route : itemsToModify) {
 			if (!route.getRouteDefinition().isEmpty()) {
 				route.removeRouteDefinition(0);
 			}
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyModelRouteSensorRepair(BenchmarkResult bmr, int nElemToModify, List<Sensor> invalids) {
+	public static void modifyModelRouteSensorRepair(final BenchmarkResult bmr, final long nElemToModify, final List<Sensor> invalids) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		int size = invalids.size();
-		if (size < nElemToModify) {
-			nElemToModify = size;
-		}
+		final long start = System.nanoTime();
 
-		List<Sensor> itemsToModify = getItemsToModify(bmr, nElemToModify, invalids, size);
+		final List<Sensor> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Sensor sensor : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Sensor sensor : itemsToModify) {
 			sensor.clearTrackElements();
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyModelSwitchSensor(Graph graph, BenchmarkResult bmr, int nElemToModify) {
+	public static void modifyModelSwitchSensor(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		List<Switch> switches = new ArrayList<Switch>();
+		final long start = System.nanoTime();
+		final List<Switch> switches = new ArrayList<Switch>();
 		switches.addAll(graph.getSwitches());
-		int size = switches.size();
-
-		List<Switch> itemsToModify = getItemsToModify(bmr, nElemToModify, switches, size);
+		
+		final List<Switch> itemsToModify = Transformation.pickRandom(nElemToModify, switches);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Switch aSwitch : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Switch aSwitch : itemsToModify) {
 			if (aSwitch.hasSensors() && !aSwitch.getSensors().isEmpty()) {
 				aSwitch.clearSensors();
 			}
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyModelSwitchSensorRepair(Graph graph, BenchmarkResult bmr, int nElemToModify, List<Switch> invalids) {
+	public static void modifyModelSwitchSensorRepair(final Graph graph, final BenchmarkResult bmr, final long nElemToModify, final List<Switch> invalids) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		int size = invalids.size();
-		if (size < nElemToModify) {
-			nElemToModify = size;
-		}
+		final long start = System.nanoTime();
 
-		List<Switch> itemsToModify = getItemsToModify(bmr, nElemToModify, invalids, size);
-
+		final List<Switch> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
+		
 		// edit
-		long startEdit = System.nanoTime();
-		for (Switch aSwitch : itemsToModify) {
-			Sensor sensor = new Sensor();
+		final long startEdit = System.nanoTime();
+		for (final Switch aSwitch : itemsToModify) {
+			final Sensor sensor = new Sensor();
 			graph.add(sensor);
 			aSwitch.addSensorBidirectionallyAndFire(sensor);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyModelSignalNeighbor(Graph graph, BenchmarkResult bmr, int nElemToModify) {
+	public static void modifyModelSignalNeighbor(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		List<Route> routes = new ArrayList<Route>();
+		final long start = System.nanoTime();
+		final List<Route> routes = new ArrayList<Route>();
 		routes.addAll(graph.getRoutes());
-		int size = routes.size();
 
-		List<Route> itemsToModify = getItemsToModify(bmr, nElemToModify, routes, size);
+		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Route route : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Route route : itemsToModify) {
 			route.setEntry(null);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyModelSignalNeighborRepair(BenchmarkResult bmr, int nElemToModify, List<Route> matchedRoutes) {
+	public static void modifyModelSignalNeighborRepair(final BenchmarkResult bmr, final long nElemToModify, final List<Route> matchedRoutes) {
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
-		int size = matchedRoutes.size();
-		if (size < nElemToModify) {
-			nElemToModify = size;
-		}
+		final long start = System.nanoTime();
 
-		List<Route> itemsToModify = getItemsToModify(bmr, nElemToModify, matchedRoutes, size);
+		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, matchedRoutes);
 
 		// edit
-		long startEdit = System.nanoTime();
-		for (Route route : itemsToModify) {
+		final long startEdit = System.nanoTime();
+		for (final Route route : itemsToModify) {
 			route.setExit(null);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}

@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.SignalNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.TrainRelationship;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -38,7 +38,7 @@ public class SignalNeighborUser extends SignalNeighbor implements Transformation
 		try (Transaction tx = graphDb.beginTx()) {
 			// query the model
 			final List<Node> routes = getNodesByTypes(graphDb, ModelConstants.ROUTE);
-			final List<Node> itemsToModify = UserTransformation.pickSignalNeighborUser(nElemToModify, routes);
+			final List<Node> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
 
 			startEdit = System.nanoTime();
 

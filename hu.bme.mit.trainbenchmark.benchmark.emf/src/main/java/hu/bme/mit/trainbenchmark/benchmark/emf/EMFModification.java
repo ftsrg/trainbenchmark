@@ -12,8 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emf;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.xform.XFormTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ import Concept.Sensor;
 import Concept.Switch;
 
 public class EMFModification {
-	public static void modifyEMFmodelPosLength(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify) {
+	public static void modifyEMFmodelPosLength(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
@@ -40,7 +39,7 @@ public class EMFModification {
 			}
 		}
 
-		final List<Segment> itemsToModify = UserTransformation.pickPosLengthUser(nElemToModify, segments);
+		final List<Segment> itemsToModify = Transformation.pickRandom(nElemToModify, segments);
 
 		// edit
 		final long startEdit = System.nanoTime();
@@ -52,13 +51,13 @@ public class EMFModification {
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyEMFmodelPosLengthRepair(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify,
+	public static void modifyEMFmodelPosLengthRepair(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify,
 			final List<Segment> invalids) {
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
 		final long start = System.nanoTime();
-		final List<Segment> itemsToModify = XFormTransformation.pickPosLengthXForm(nElemToModify, invalids);
+		final List<Segment> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
 		final long startEdit = System.nanoTime();
@@ -70,7 +69,7 @@ public class EMFModification {
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyEMFmodelRouteSensor(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify) {
+	public static void modifyEMFmodelRouteSensor(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 		
 		// modify
@@ -81,7 +80,7 @@ public class EMFModification {
 				routes.add((Route) thing);
 			}
 		}
-		final List<Route> itemsToModify = UserTransformation.pickRouteSensorUser(nElemToModify, routes);
+		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
 
 		// edit
 		final long startEdit = System.nanoTime();
@@ -94,13 +93,13 @@ public class EMFModification {
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyEMFmodelRouteSensorRepair(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify,
+	public static void modifyEMFmodelRouteSensorRepair(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify,
 			final List<Sensor> invalids) {
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
 		final long start = System.nanoTime();
-		final List<Sensor> itemsToModify = XFormTransformation.pickRouteSensorXForm(nElemToModify, invalids);
+		final List<Sensor> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
 		final long startEdit = System.nanoTime();
@@ -112,7 +111,7 @@ public class EMFModification {
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyEMFmodelSwitchSensor(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify) {
+	public static void modifyEMFmodelSwitchSensor(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 		
 		// modify
@@ -123,26 +122,26 @@ public class EMFModification {
 				switches.add((Switch) thing);
 			}
 		}
-		final List<Switch> itemsToModify = UserTransformation.pickSwitchSensorUser(nElemToModify, switches);
+		final List<Switch> itemsToModify = Transformation.pickRandom(nElemToModify, switches);
 		
 		// edit
 		final long startEdit = System.nanoTime();
-		for (final Switch aswitch : itemsToModify) {
-			if (aswitch.getTrackElement_sensor().size() > 0)
-				aswitch.getTrackElement_sensor().clear();
+		for (final Switch aSwitch : itemsToModify) {
+			if (aSwitch.getTrackElement_sensor().size() > 0)
+				aSwitch.getTrackElement_sensor().clear();
 		}
 		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyEMFmodelSwitchSensorRepair(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify,
+	public static void modifyEMFmodelSwitchSensorRepair(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify,
 			final List<Switch> invalids) {
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
 		final long start = System.nanoTime();
-		final List<Switch> itemsToModify = XFormTransformation.pickRouteSensorXForm(nElemToModify, invalids);
+		final List<Switch> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
 		final long startEdit = System.nanoTime();
@@ -157,7 +156,7 @@ public class EMFModification {
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyEMFmodelSignalNeighbor(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify) {
+	public static void modifyEMFmodelSignalNeighbor(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 		bmr.addModifyParams(nElemToModify);
 		
 		// modify
@@ -168,7 +167,7 @@ public class EMFModification {
 				routes.add((Route) thing);
 			}
 		}
-		final List<Route> itemsToModify = UserTransformation.pickSignalNeighborUser(nElemToModify, routes);
+		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
 
 		// edit
 		final long startEdit = System.nanoTime();
@@ -180,13 +179,13 @@ public class EMFModification {
 		bmr.addModificationTime(end - start);
 	}
 
-	public static void modifyEMFmodelSignalNeighborRepair(final IndividualContainer pack, final BenchmarkResult bmr, final int nElemToModify,
+	public static void modifyEMFmodelSignalNeighborRepair(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify,
 			final List<Route> invalids) {
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
 		final long start = System.nanoTime();
-		final List<Route> itemsToModify = XFormTransformation.pickSignalNeighborXForm(nElemToModify, invalids);
+		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
 		final long startEdit = System.nanoTime();

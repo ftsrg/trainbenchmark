@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameData;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.RouteSensor;
@@ -22,7 +23,6 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -36,50 +36,48 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		ValueFactory f = myRepository.getValueFactory();
-		URI routeOC = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
+		final ValueFactory f = myRepository.getValueFactory();
+		final URI routeOC = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
 		RepositoryResult<Statement> routesIter;
 
 		try {
 			routesIter = con.getStatements(null, RDF.TYPE, routeOC, true);
 
-			List<Resource> routes = new ArrayList<Resource>();
-			for (Statement s : routesIter.asList()) {
+			final List<Resource> routes = new ArrayList<Resource>();
+			for (final Statement s : routesIter.asList()) {
 				routes.add(s.getSubject());
 			}
-			Random random = bmr.getRandom();
-			int size = routes.size();
-			List<SesameData> itemsToRemove = new ArrayList<SesameData>();
-			for (int i = 0; i < nElemToModify; i++) {
-				int rndTarget = random.nextInt(size);
-				Resource route = routes.get(rndTarget);
+			
+			final List<Resource> routesToModify = Transformation.pickRandom(nElemToModify, routes);
+			final List<SesameData> itemsToRemove = new ArrayList<SesameData>();
 
-				URI routeDefinition = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
-				RepositoryResult<Statement> statementsToRemove = con.getStatements(route, routeDefinition, null, true);
+			for (final Resource route : routesToModify) {
+				final URI routeDefinition = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
+				final RepositoryResult<Statement> statementsToRemove = con.getStatements(route, routeDefinition, null, true);
 
 				if (statementsToRemove.hasNext()) {
-					Statement statementToRemove = statementsToRemove.next();
-					SesameData jd = new SesameData();
+					final Statement statementToRemove = statementsToRemove.next();
+					final SesameData jd = new SesameData();
 					jd.setStatement(statementToRemove);
 					itemsToRemove.add(jd);
 				}
 			}
 
 			// edit
-			long startEdit = System.nanoTime();
-			for (SesameData jd : itemsToRemove) {
+			final long startEdit = System.nanoTime();
+			for (final SesameData jd : itemsToRemove) {
 				con.remove(jd.getStatement());
 			}
 			con.commit();
-			long end = System.nanoTime();
+			final long end = System.nanoTime();
 			bmr.addEditTime(end - startEdit);
 			bmr.addModificationTime(end - start);
-		} catch (RepositoryException e) {
+		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
 	}

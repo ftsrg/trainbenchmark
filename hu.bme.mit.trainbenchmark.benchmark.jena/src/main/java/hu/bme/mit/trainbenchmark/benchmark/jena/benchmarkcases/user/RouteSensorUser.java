@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -20,10 +21,7 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -38,41 +36,36 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 
 	@Override
 	public void modify() throws IOException {
-		int nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(jbc, jbc.getModificationConstant(), bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
-		long start = System.nanoTime();
+		final long start = System.nanoTime();
 
-		ResIterator routeStatements = model.listSubjectsWithProperty(RDF.type,
+		final ResIterator routeStatements = model.listSubjectsWithProperty(RDF.type,
 				model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE));
-		List<Resource> routes = new ArrayList<Resource>();
-		routes = routeStatements.toList();
+		final List<Resource> routes = routeStatements.toList();
 
-		Random random = bmr.getRandom();
-		int size = routes.size();
-		Set<Statement> itemsToRemove = new HashSet<Statement>();
-		for (int i = 0; i < nElemToModify; i++) {
-			int rndTarget = random.nextInt(size);
-			Resource route = routes.get(rndTarget);
-
-			Selector selector = new SimpleSelector(route,
+		final List<Resource> routesToModify = Transformation.pickRandom(nElemToModify, routes);
+		final List<Statement> itemsToRemove = new ArrayList<>();
+		for (final Resource route : routesToModify) {
+			final Selector selector = new SimpleSelector(route,
 					model.getProperty(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE_ROUTEDEFINITION), (RDFNode) null);
 
-			StmtIterator statementsToRemove = model.listStatements(selector);
+			final StmtIterator statementsToRemove = model.listStatements(selector);
 
 			if (statementsToRemove.hasNext()) {
-				Statement statementToRemove = statementsToRemove.next();
+				final Statement statementToRemove = statementsToRemove.next();
 				itemsToRemove.add(statementToRemove);
 			}
 		}
 
-		// -- do edit
-		long startEdit = System.nanoTime();
-		for (Statement statementToRemove : itemsToRemove) {
+		// edit
+		final long startEdit = System.nanoTime();
+		for (final Statement statementToRemove : itemsToRemove) {
 			model.remove(statementToRemove);
 		}
-		long end = System.nanoTime();
+		final long end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 

@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.xform;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.xform.XFormTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.SignalNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.TrainRelationship;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -35,7 +35,7 @@ public class SignalNeighborXForm extends SignalNeighbor implements Transformatio
 		long startEdit;
 
 		// pick the elements for transformation
-		final List<Node> itemsToModify = XFormTransformation.pickSignalNeighborXForm(nElemToModify, invalids);
+		final List<Node> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// edit

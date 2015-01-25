@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.SwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -22,7 +23,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class SwitchSensorUser extends SwitchSensor implements TransformationBenchmarkCase {
 
@@ -41,14 +41,8 @@ public class SwitchSensorUser extends SwitchSensor implements TransformationBenc
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
-		final Random random = bmr.getRandom();
-		final int size = switches.size();
-		final List<Integer> itemsToModify = new ArrayList<Integer>();
-		for (int i = 0; i < nElemToModify; i++) {
-			final int rndTarget = random.nextInt(size);
-			final Integer aswitch = switches.get(rndTarget);
-			itemsToModify.add(aswitch);
-		}
+
+		final List<Integer> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
 
 		// edit
 		final long startEdit = System.nanoTime();

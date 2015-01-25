@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.TrainRelationship;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -39,7 +39,7 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 			// query the model
 			final List<Node> routes = getNodesByTypes(graphDb, ModelConstants.ROUTE);
 
-			final List<Node> itemsToModify = UserTransformation.pickRouteSensorUser(nElemToModify, routes);
+			final List<Node> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
 
 			// edit
 			for (final Node route : itemsToModify) {
