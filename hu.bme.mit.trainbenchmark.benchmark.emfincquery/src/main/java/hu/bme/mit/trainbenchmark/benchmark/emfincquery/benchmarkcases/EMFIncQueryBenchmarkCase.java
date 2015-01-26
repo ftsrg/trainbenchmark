@@ -21,9 +21,11 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
+import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 import Concept.IndividualContainer;
 
@@ -50,10 +52,12 @@ public abstract class EMFIncQueryBenchmarkCase<T> implements BenchmarkCase {
 	}
 
 	@Override
-	public void init(BenchmarkConfig bc) throws IOException {
+	public void init(final BenchmarkConfig bc) throws IOException {
 		bmr = new BenchmarkResult(getTool(), getName());
 		bmr.setBenchmarkConfig(bc);
 
+		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
+		
 		this.bc = bc;
 		Util.runGC();
 		if (bc.isBenchmarkMode()) {
