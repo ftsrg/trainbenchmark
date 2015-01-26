@@ -32,7 +32,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.java</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.pojo.drools</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
@@ -113,6 +112,13 @@
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>fourstore</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.fourstore</module>
 			</modules>
 		</profile>
 
