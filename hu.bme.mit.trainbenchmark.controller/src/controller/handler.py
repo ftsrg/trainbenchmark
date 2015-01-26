@@ -14,6 +14,7 @@ Functions:
 """
 import json
 import os
+import logging
 
 
 def set_working_directory(path = None):
@@ -32,7 +33,7 @@ def set_working_directory(path = None):
         if (os.path.exists(path) == True):
             os.chdir(path)
         else:
-            print("The given parameter is not a valid directory:"+ path)
+            logging.error("The given parameter is not a valid directory:"+ path)
 
 
 def get_power_of_two(minsize, maxsize):
@@ -60,10 +61,10 @@ def json_decode(json_path):
         with open(json_path) as file:
             json_object = json.load(file)
     except IOError:
-        print("The file does not exist or cannot read:" +\
+        logging.error("The file does not exist or cannot read:" +\
               (os.path.split(json_path))[1])
     except ValueError as value_error:
-        print((os.path.split(json_path))[1] +\
+        logging.error((os.path.split(json_path))[1] +\
               " file is not valid \n", value_error)
     else:
         return json_object
