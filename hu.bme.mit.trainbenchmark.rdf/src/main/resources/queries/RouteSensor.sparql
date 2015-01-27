@@ -13,8 +13,8 @@ WHERE
 	?xSwitch base:TrackElement_sensor ?xSensor .
 
 	OPTIONAL {
-		?xRoute ?Route_routeDefinition ?xSensor .
-		FILTER (sameTerm(base:Route_routeDefinition, ?Route_routeDefinition))
+		?xRoute ?xRoute_routeDefinition ?xSensor .
+		FILTER (sameTerm(base:Route_routeDefinition, ?xRoute_routeDefinition))
 	} .
-	FILTER (!bound(?Route_routeDefinition))
+	FILTER (!bound(?xRoute_routeDefinition))
 }
