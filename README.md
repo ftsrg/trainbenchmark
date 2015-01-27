@@ -1,7 +1,7 @@
-[![Stories in Ready](https://badge.waffle.io/FTSRG/trainbenchmark.png?label=ready&title=Ready)](https://waffle.io/FTSRG/trainbenchmark)
 # Train Benchmark
 
 * Travis: [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
+* Waffle: [![Stories in Ready](https://badge.waffle.io/FTSRG/trainbenchmark.png?label=ready&title=Ready)](https://waffle.io/FTSRG/trainbenchmark)
 * [Sonar](http://build.inf.mit.bme.hu/sonar/dashboard/index/14429)
 
 For theoretical and implementation details, check out the following documents:
