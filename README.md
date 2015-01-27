@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/FTSRG/trainbenchmark.png?label=ready&title=Ready)](https://waffle.io/FTSRG/trainbenchmark)
 # Train Benchmark
 
 * Travis: [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
