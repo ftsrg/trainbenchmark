@@ -132,7 +132,8 @@
             "mysql",
             "neo4j",
             "sesame",
-            "postgresql"
+            "postgresql",
+            "virtuoso"
           ]
         }
       ],
@@ -149,7 +150,8 @@
           "mysql",
           "neo4j",
           "sesame",
-          "postgresql"
+          "postgresql",
+          "virtuoso"
         ]
       },
       "default": [

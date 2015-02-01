@@ -34,6 +34,7 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.pojo.drools</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
@@ -161,6 +162,13 @@
 			<id>sesame</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
+			</modules>
+		</profile>
+		
+		<profile>
+			<id>virtuoso</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 			</modules>
 		</profile>
 

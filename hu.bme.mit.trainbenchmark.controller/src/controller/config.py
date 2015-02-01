@@ -57,12 +57,13 @@ class Configuration:
 class Repository:
     """The class represents a Git repository.
     """
-    def __init__(self, name, url, folder, branch, depth):
+    def __init__(self, name):
         self.name = name
         #self.url = url
         #self.folder = folder
         #self.branch = branch
         #self.depth = depth
+        
         # initialized when a Repository is attached to a Configuration object
         self.path = None
         self.config = None

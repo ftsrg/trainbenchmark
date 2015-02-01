@@ -113,11 +113,12 @@ def get_configs_from_json():
     
     for config in configurations:
         # add a new Repository object to every Configuration
-        config.add_repository(Repository(config.tool,\
-                                         tools_json[config.tool]["url"],\
-                                         tools_json[config.tool]["folder"],\
-                                         tools_json[config.tool]["branch"],\
-                                         tools_json[config.tool]["depth"]))
+        config.add_repository(Repository(config.tool))
+        #config.add_repository(Repository(config.tool,\
+        #                                 tools_json[config.tool]["url"],\
+        #                                 tools_json[config.tool]["folder"],\
+        #                                 tools_json[config.tool]["branch"],\
+        #                                 tools_json[config.tool]["depth"]))
     return configurations
 
 
@@ -142,8 +143,9 @@ def get_dependency(tool):
     else:
         logging.info("A dependency exists: " + tool + "->" + \
                      dependencies_json[tool]["name"] + ".")
-        return Repository(dependencies_json[tool]["name"],\
-                          dependencies_json[tool]["url"],\
-                          dependencies_json[tool]["folder"],\
-                          dependencies_json[tool]["branch"],\
-                          dependencies_json[tool]["depth"])
+        
+        return Repository(dependencies_json[tool]["name"])
+        #                  dependencies_json[tool]["url"],\
+        #                  dependencies_json[tool]["folder"],\
+        #                  dependencies_json[tool]["branch"],\
+        #                  dependencies_json[tool]["depth"])

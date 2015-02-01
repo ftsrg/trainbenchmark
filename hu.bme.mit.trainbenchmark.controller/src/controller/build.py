@@ -65,8 +65,10 @@ def maven_build(configuration, package):
                     configuration.maven_xmx, \
                     configuration.maven_maxpermsize])
     handler.set_working_directory(configuration.path)
+    if (deps.build_unique_tools(package) == False):
+        pass
     subprocess.call(["mvn", "clean", "install", "-P",\
-                     handler.get_package_name(package)])
+                    handler.get_package_name(package)])
     handler.set_working_directory(current_directory)
 
 
@@ -159,6 +161,7 @@ if (__name__ == "__main__"):
     if (args.generate == True):
         for config in configurations:
             generate.generate_models(config)
+            
     if (args.benchmark == True):
         for config in configurations:
             benchmark.run_benchmark(config)
