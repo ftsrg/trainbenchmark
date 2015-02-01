@@ -43,8 +43,7 @@ public class SwitchSensorUser extends SwitchSensor implements TransformationBenc
 		final long start = System.nanoTime();
 		final ResIterator switchStatements = model.listSubjectsWithProperty(RDF.type,
 				model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.SWITCH));
-		List<Resource> switches = new ArrayList<Resource>();
-		switches = switchStatements.toList();
+		final List<Resource> switches = switchStatements.toList();
 
 		final List<Resource> switchesToModify = Transformation.pickRandom(nElemToModify, switches);
 		final List<Statement> itemsToRemove = new ArrayList<>();

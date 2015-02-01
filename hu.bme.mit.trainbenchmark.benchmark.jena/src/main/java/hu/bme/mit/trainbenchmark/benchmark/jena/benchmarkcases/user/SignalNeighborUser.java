@@ -44,8 +44,7 @@ public class SignalNeighborUser extends SignalNeighbor implements Transformation
 
 		final ResIterator switchStatements = model.listSubjectsWithProperty(RDF.type,
 				model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE));
-		List<Resource> routes = new ArrayList<Resource>();
-		routes = switchStatements.toList();
+		final List<Resource> routes = switchStatements.toList();
 
 		final List<Resource> routesToModify = Transformation.pickRandom(nElemToModify, routes);
 		final List<Statement> itemsToRemove = new ArrayList<>();

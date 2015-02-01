@@ -44,8 +44,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 
 		final ResIterator segmentStatements = model.listSubjectsWithProperty(RDF.type,
 				model.getResource(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT));
-		List<Resource> segments = new ArrayList<Resource>();
-		segments = segmentStatements.toList();
+		final List<Resource> segments = segmentStatements.toList();
 
 		final List<Resource> segmentsToModify = Transformation.pickRandom(nElemToModify, segments);
 		final List<Statement> itemsToRemove = new ArrayList<>();
