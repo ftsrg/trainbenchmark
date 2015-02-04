@@ -1,25 +1,27 @@
 {
-  "config": {
-    "scenarios": [
-      "XForm"
-    ],
-    "MAVEN_OPTS": {
-      "Xmx": "512m",
-      "XX:MaxPermSize": "256m"
-    },
-    "JAVA_OPTS": {
-      "xmx": "2g",
-      "maxPermSize": "256m"
-    },
-    "minSize": 1,
-    "maxSize": 4,
-    "workspacePath": ".",
-    "series": 2,
-    "queries": [
-      "PosLength"
-    ],
-    "tools": [
-      "emfincquery"
-    ]
-  }
+  "MAVEN_OPTS": {
+    "Xmx": "512m",
+    "XX:MaxPermSize": "256m"
+  },
+  "JAVA_OPTS": {
+    "xmx": "2g",
+    "maxPermSize": "256m"
+  },
+  "IterationCount": 10,
+  "MinSize": 8,
+  "MaxSize": 8,
+  "ModificationMethod": "constant",
+  "ModificationConstant": 13,
+  "Queries": [
+    "RouteSensor",
+    "SignalNeighbor"
+  ],
+  "Scenarios": [
+    "User"
+  ],
+  "Series": 1,
+  "Tools": [
+    "emfincquery"
+  ],
+  "UniqueConfigurations": []
 }

@@ -37,25 +37,33 @@ def is_valid_json(instance_json, schema_json):
         logging.error("The provided schema is malformed.")
         return False
     
-    if (instance_json["minSize"] > instance_json["maxSize"]):
+    if (instance_json["MinSize"] > instance_json["MaxSize"]):
         logging.error("Maxsize is lower than minsize. Change the "\
               "config.json file")
         return False
+    if (len(instance_json["UniqueConfigurations"]) > 0):
+        for conf in instance_json["UniqueConfigurations"]:
+            if ("MinSize" in conf.keys() and "MaxSize" in conf.keys()):
+                if (conf["MinSize"] > conf["MaxSize"]):
+                    logging.error("Maxsize is lower than minsize. Change the "\
+                                  "config.json file")
+                    
+                
     
     # store the actual working directory to change back later
-    current_path = os.getcwd()
+    #current_path = os.getcwd()
     # set the working directory to this module's path
-    handler.set_working_directory();
+    #handler.set_working_directory();
     # instance_json["workspacePath"] must be checked relatively
-    handler.set_working_directory("../../../")
-    if (os.path.exists(instance_json["workspacePath"]) == False):
-        logging.error(instance_json["workspacePath"] +\
-              "is not an existing directory.")
-        handler.set_working_directory(current_path);
-        return False
-    elif(os.path.isdir(instance_json["workspacePath"]) == False):
-        logging.error(instance_json["workspacePath"] + " is not a directory!")
-        handler.set_working_directory(current_path);
-        return False
-    handler.set_working_directory(current_path);
+    #handler.set_working_directory("../../../")
+    #if (os.path.exists(instance_json["workspacePath"]) == False):
+    #    logging.error(instance_json["workspacePath"] +\
+    #          "is not an existing directory.")
+    #    handler.set_working_directory(current_path);
+    #    return False
+    #elif(os.path.isdir(instance_json["workspacePath"]) == False):
+    #    logging.error(instance_json["workspacePath"] + " is not a directory!")
+    #    handler.set_working_directory(current_path);
+    #    return False
+    #handler.set_working_directory(current_path);
     return True
