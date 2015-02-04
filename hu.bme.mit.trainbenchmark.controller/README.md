@@ -30,7 +30,7 @@ Then it is necessary to install the required external modules for Python. Two op
 In this scenario every necessary external package will be installed globally to the system (e.g. pip, third-party modules). In this case just execute the following script from the `trainbenchmark-controller/init/` directory:
 * `./initialize.py`
 
-Note that root password is required for the successful deployment. As a result, the required third-party python modules will be installed and the Controller can be used already which described in details [here](#Usage)
+Note that root password is required for the successful deployment. As a result, the required third-party python modules will be installed and the Controller can be used already which described in details in [here](#usage)
 
 ####<a name="pyvenv"></a>Install virtual environment (optional)
 
@@ -171,7 +171,7 @@ The most important python modules of trainbenchmark-controller are the following
 
 Important fact that all modules work with the certain tools and formats, which are given in `config/config.json`.
 
-### <a name="Usage"></a>Usage
+### Usage
 After the step of cloning the repository and install the required modules furthermore adjust the configuration file, you are able to build the projects by running the following script from the `trainbenchmark-controller/src/controller` directory, like this:
 `./build.py`
 
