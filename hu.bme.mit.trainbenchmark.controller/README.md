@@ -1,10 +1,10 @@
 #Train Benchmark Controller
 
 ### Overview
-Trainbenchmark-controller is responsible for providing a configuration for Train Benchmark and also support management for building the actual projects, generating the models and also running the benchmark tests. The scripts are written in Python programming language and every process is executed on the base of a `config.json` file. To alter the default configuration of Train Benchmark, just modify `config.json` file. You can find more information about the configuration parameters [below](#Configuration).
+Trainbenchmark-controller is responsible for providing a configuration for Train Benchmark and also support management for building the actual projects, generating the models and also running the benchmark tests. The scripts are written in Python programming language and every process is executed on the base of a `config.json` file. To alter the default configuration of Train Benchmark, just modify `config.json` file. You can find more information about the configuration parameters [below](#configuration).
 
 ### Requirements
-Apart from the fundamental requirements like git, maven etc. (described [here](https://github.com/FTSRG/trainbenchmark-core/blob/master/README.md)) that is also necessary to possess a Python 3 interpreter. In the case of using virtual environment, python3.4 interpreter is necessary. Find further information about virtual environments [here](#pyvenv). All modules were written and tested on Linux Ubuntu operating system, so there is no guarantee yet that the scripts can be perfectly used on Windows.
+Apart from the fundamental requirements like git, maven etc. (described [here](https://github.com/FTSRG/trainbenchmark-core/blob/master/README.md)) that is also necessary to possess a Python 3 interpreter. In the case of using virtual environment, python3.4 interpreter is necessary. Find further information about virtual environments [here](#install-virtual-environment-optional). All modules were written and tested on Linux Ubuntu operating system, so there is no guarantee yet that the scripts can be perfectly used on Windows.
 For executing scripts, there are no restrictions for the actual working directories, which means you can run the modules from any path.
 If any trainbenchmark projects have dependencies to each other, then that must be written in the `config/dependencies.json` file.
 A part of the file can be seen here:
@@ -32,7 +32,7 @@ In this scenario every necessary external package will be installed globally to 
 
 Note that root password is required for the successful deployment. As a result, the required third-party python modules will be installed and the Controller can be used already which described in details in [here](#usage)
 
-####<a name="pyvenv"></a>Install virtual environment (optional)
+#### Install virtual environment (optional)
 
 If you wouldn't like to deploy every external package globally on your system, then use a virtual environment. In this case run the following script from the `trainbenchmark-controller/init/` directory
 * `./initialize_venv.py`
@@ -40,10 +40,10 @@ If you wouldn't like to deploy every external package globally on your system, t
 After this, the python binary and third-party modules will be copied to the 'trainbenchmark-controller/tb-env' directory. Since you are not using the python interpreter globally in this case but locally, you have to activate the virtual environment with the next command:
 * `source tb-env/bin/activate`
 
-After this operation you are able to use the Controller as described [here](#Usage).
+After this operation you are able to use the Controller as described [here](#usage).
 To turn off the environment, execute the `deactivate` command. However, every time, when a new terminal window is opened, the virtual environment must be activated again. That means you have to write the same activation command to be able to use the environment.
 
-### <a name="Configuration"></a>Configuration
+### Configuration
 Every configuration parameter which matters is stored in the `config/config.json` file. A typical structure of it can be seen here:
  
 ```
