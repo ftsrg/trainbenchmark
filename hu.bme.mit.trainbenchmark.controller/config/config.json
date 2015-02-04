@@ -19,7 +19,14 @@
       "PosLength"
     ],
     "tools": [
-      "emfincquery"
+        "emfincquery"
+      , "drools5"
+      , "drools6"
+      , "fourstore"
+      , "java"
+      , "jena"
+      , "neo4j"
+      , "sesame"
     ]
   }
 }
