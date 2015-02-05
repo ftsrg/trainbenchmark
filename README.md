@@ -1,6 +1,6 @@
 # Train Benchmark
 
-* Jenkins: [![Build Status](https://build.inf.mit.bme.hu/jenkins/job/Train-Benchmark/)](https://build.inf.mit.bme.hu/jenkins/job/Train-Benchmark/badge/icon)
+* Jenkins: [![Build Status](https://build.inf.mit.bme.hu/jenkins/buildStatus/icon?job=Train-Benchmark)](https://build.inf.mit.bme.hu/jenkins/job/Train-Benchmark/)
 * Travis: [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
 * Waffle: [![Stories in Ready](https://badge.waffle.io/FTSRG/trainbenchmark.png?label=ready&title=Ready)](https://waffle.io/FTSRG/trainbenchmark)
 * [Sonar](http://build.inf.mit.bme.hu/sonar/dashboard/index/14429)
