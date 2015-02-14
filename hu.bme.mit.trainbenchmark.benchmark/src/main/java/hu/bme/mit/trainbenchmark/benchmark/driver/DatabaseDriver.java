@@ -24,16 +24,17 @@ public abstract class DatabaseDriver {
 	public void finishTransaction() throws IOException {
 	}
 
-	public abstract List<? extends Object> collectVertices(final String type);
+	public abstract List<? extends Object> collectVertices(final String type) throws IOException;
 
-	public abstract void deleteAllOutgoingEdges(final Object node, final String edgeType) throws IOException;
+	public abstract void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException;
 	
-	public abstract void deleteAllIncomingEdges(final Object node, final String edgeType) throws IOException;	
+	public abstract void deleteAllIncomingEdges(final Object vertex, final String edgeType) throws IOException;	
 
 	public abstract void updateProperty(final Object object, final String propertyName,
 			final AttributeOperation attributeOperation) throws IOException;
 
+	public abstract void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException;	
 
+	public abstract void insertVertexWithEdge(Object sourceVertex, String targetVertexType, String edgeType) throws IOException;
 	
-
 }
