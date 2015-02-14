@@ -24,6 +24,6 @@ public class PosLengthXForm extends PosLength implements TransformationBenchmark
 
 	@Override
 	public void modify() throws IOException {
-		modifyModelPosLengthRepair(bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr), invalids);
+		modifyModelPosLengthRepair(bmr, Util.calcModify(bmr), invalids);
 	}
 }

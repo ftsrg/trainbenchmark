@@ -16,17 +16,17 @@ public class RouteSensorXForm extends RouteSensor implements TransformationBench
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// start the modification
 		final long start = System.nanoTime();
-		
+
 		final List<Long> sensorsToRemove = Transformation.pickRandom(nElemToModify, invalids);
 		final List<String> sensorURIsToRemove = new ArrayList<>();
 		for (final Long id : sensorsToRemove) {
 			sensorURIsToRemove.add(RDFUtil.toURI(RDFConstants.BASE_PREFIX, id));
-		} 
+		}
 
 		// edit
 		final long startEdit = System.nanoTime();

@@ -21,6 +21,6 @@ public class SignalNeighborXForm extends SignalNeighbor implements Transformatio
 
 	@Override
 	public void modify() {
-		modifyModelSignalNeighborRepair(bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr), invalids);
+		modifyModelSignalNeighborRepair(bmr, Util.calcModify(bmr), invalids);
 	}
 }

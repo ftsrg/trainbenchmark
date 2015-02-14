@@ -14,7 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
@@ -53,6 +55,7 @@ public abstract class Neo4jBenchmarkCase implements BenchmarkCase {
 	protected List<Node> invalids;
 
 	protected GraphDatabaseService graphDb;
+	protected DatabaseDriver driver;
 	protected String graphDbPath;
 	protected String query;
 
@@ -93,6 +96,7 @@ public abstract class Neo4jBenchmarkCase implements BenchmarkCase {
 
 		// start the database
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(graphDbPath);
+		driver = new Neo4jDriver(graphDb);
 
 		bmr.setReadTime();
 	}
@@ -146,7 +150,7 @@ public abstract class Neo4jBenchmarkCase implements BenchmarkCase {
 		graphDb.shutdown();
 	}
 
-	public List<Node> getNodesByTypes(final GraphDatabaseService graphDb, final String typeName) {
+	public List<Node> getNodesByTypes(final String typeName) {
 		final ResourceIterable<Node> nodes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(DynamicLabel.label(typeName));
 
 		final ResourceIterator<Node> iterator = nodes.iterator();

@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 public class RouteSensorUser extends RouteSensor implements TransformationBenchmarkCase {
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelRouteSensor(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		EMFModification.modifyEMFmodelRouteSensor(pack, bmr, Util.calcModify(bmr));
 	}
 
 }

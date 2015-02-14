@@ -21,6 +21,6 @@ public class SwitchSensorUser extends SwitchSensor implements TransformationBenc
 
 	@Override
 	public void modify() {
-		modifyModelSwitchSensor(graph, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		modifyModelSwitchSensor(graph, bmr, Util.calcModify(bmr));
 	}
 }

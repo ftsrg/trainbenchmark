@@ -28,7 +28,7 @@ public class SwitchSensorXForm extends SwitchSensor implements TransformationBen
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify

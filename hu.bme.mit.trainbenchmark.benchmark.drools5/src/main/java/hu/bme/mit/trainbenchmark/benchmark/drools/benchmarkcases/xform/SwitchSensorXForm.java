@@ -25,7 +25,7 @@ public class SwitchSensorXForm extends SwitchSensor implements TransformationBen
 
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelSwitchSensorRepair(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr),
+		EMFModification.modifyEMFmodelSwitchSensorRepair(pack, bmr, Util.calcModify(bmr),
 				(List<Switch>) invalids);
 	}
 }

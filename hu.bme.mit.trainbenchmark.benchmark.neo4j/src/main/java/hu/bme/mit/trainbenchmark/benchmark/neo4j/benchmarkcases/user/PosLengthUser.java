@@ -12,46 +12,17 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.PosLength;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
-import java.util.List;
-
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Transaction;
+import java.io.IOException;
 
 public class PosLengthUser extends PosLength implements TransformationBenchmarkCase {
 
 	@Override
-	public void modify() {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
-		bmr.addModifyParams(nElemToModify);
-
-		final long start = System.nanoTime();
-		long startEdit = 0;
-
-		try (Transaction tx = graphDb.beginTx()) {
-			// query the model
-			final List<Node> segments = getNodesByTypes(graphDb, SEGMENT);
-			final List<Node> itemsToModify = Transformation.pickRandom(nElemToModify, segments);
-
-			// edit
-			startEdit = System.nanoTime();
-
-			for (final Node segment : itemsToModify) {
-				segment.setProperty(SEGMENT_LENGTH, 0);
-			}
-
-			tx.success();
-		}
-
-		final long end = System.nanoTime();
-		bmr.addEditTime(end - startEdit);
-		bmr.addModificationTime(end - start);
+	public void modify() throws IOException {
+		TransformationDefinition.posLengthUser(bmr, invalids, driver);
 	}
 
 }

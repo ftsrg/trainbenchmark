@@ -36,12 +36,12 @@ public class SwitchSensorXForm extends SwitchSensor implements TransformationBen
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 
-		final ValueFactory f = myRepository.getValueFactory();
+		final ValueFactory f = repository.getValueFactory();
 
 		try {
 			final List<URI> switches = Transformation.pickRandom(nElemToModify, invalids);			

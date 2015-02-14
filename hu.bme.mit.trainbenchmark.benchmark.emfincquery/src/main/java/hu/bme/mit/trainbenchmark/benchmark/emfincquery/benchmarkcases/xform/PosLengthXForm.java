@@ -20,7 +20,7 @@ public class PosLengthXForm extends PosLength implements TransformationBenchmark
 
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelPosLengthRepair(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr), invalids);
+		EMFModification.modifyEMFmodelPosLengthRepair(pack, bmr, Util.calcModify(bmr), invalids);
 	}
 
 }

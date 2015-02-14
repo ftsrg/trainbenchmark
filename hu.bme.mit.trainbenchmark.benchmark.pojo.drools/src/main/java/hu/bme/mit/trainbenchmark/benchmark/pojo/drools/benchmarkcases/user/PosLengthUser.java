@@ -21,7 +21,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 
 	@Override
 	public void modify() {
-		modifyModelPosLength(graph, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		modifyModelPosLength(graph, bmr, Util.calcModify(bmr));
 	}
 
 }

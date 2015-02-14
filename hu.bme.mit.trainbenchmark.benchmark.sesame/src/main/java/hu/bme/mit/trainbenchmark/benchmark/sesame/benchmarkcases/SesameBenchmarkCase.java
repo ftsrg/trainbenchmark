@@ -14,7 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
@@ -47,7 +49,6 @@ public abstract class SesameBenchmarkCase implements BenchmarkCase {
 	public String getTool() {
 		return "Sesame";
 	}
-
 	protected BenchmarkResult bmr;
 	protected SesameBenchmarkConfig sbc;
 	protected BenchmarkConfig bc;
@@ -55,7 +56,8 @@ public abstract class SesameBenchmarkCase implements BenchmarkCase {
 
 	protected TupleQuery tupleQuery;
 	protected RepositoryConnection con;
-	protected Repository myRepository;
+	protected Repository repository;
+	protected DatabaseDriver driver;
 
 	protected String sparqlFilePath;
 	protected String sparqlQuery;
@@ -85,25 +87,27 @@ public abstract class SesameBenchmarkCase implements BenchmarkCase {
 		bmr.startStopper();
 
 		if (sbc.isInferencing()) {
-			myRepository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
+			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {
-			myRepository = new SailRepository(new MemoryStore());
+			repository = new SailRepository(new MemoryStore());
 		}
 
 		try {
-			myRepository.initialize();
+			repository.initialize();
 
 			final File documentFile = new File(bc.getBenchmarkArtifact());
 
-			con = myRepository.getConnection();
+			con = repository.getConnection();
 			con.add(documentFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 
 			final String queryString = Util.readFile(sparqlFilePath);
 			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
-
+			
 		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
+		
+		driver = new SesameDriver(RDFConstants.BASE_PREFIX, con, repository);
 
 		bmr.setReadTime();
 	}

@@ -37,8 +37,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import Concept.ConceptFactory;
 import Concept.ConceptPackage;
 import Concept.IndividualContainer;
-import Concept.SignalStateKind;
-import Concept.SwitchStateKind;
 import Concept.Thing;
 
 public class EMFGenerator extends Generator {

@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.util;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.math.BigDecimal;
@@ -96,7 +95,7 @@ public class BenchmarkResult {
 		this.checkInvalid.add(new Long(invalids));
 	}
 
-	public TrainBenchmarkConfig getBenchmarkConfig() {
+	public BenchmarkConfig getBenchmarkConfig() {
 		return bc;
 	}
 
