@@ -25,30 +25,37 @@ import org.junit.Assert;
 
 public abstract class TransformationTest extends TrainBenchmarkTest {
 
-	protected void testTransformation(final String queryName, final String scenario, final int expectedResultSize1, final int expectedResultSize2)
-			throws ParseException, IOException {
+	protected void testTransformation(final String queryName, final String scenario, final int expectedResultSize1,
+			final int expectedResultSize2) throws ParseException, IOException {
 		final GenericBenchmarkLogic bl = bi.initializeBenchmark(queryName, scenario);
 		testTransformation(bl, expectedResultSize1, expectedResultSize2);
 	}
 
-	protected void testTransformation(final GenericBenchmarkLogic bl, final int expectedResultSize1, final int expectedResultSize2) throws IOException {
+	protected void testTransformation(final GenericBenchmarkLogic bl, final int expectedResultSize1, final int expectedResultSize2)
+			throws IOException {
 		final BenchmarkCase testCase = bl.getTestCase();
 
 		try {
 			testCase.init(bl.getBc());
 			testCase.load();
 			testCase.check();
-					
+
+			// System.out.println(bl.getBc().getQuery());
+			// System.out.println(testCase.getResultSize());
+
 			assertEquals(expectedResultSize1, testCase.getResultSize());
 			((TransformationBenchmarkCase) testCase).modify();
 			testCase.check();
-			
-			// TODO we should remove this inequality as it may prevent the detection of buggy implementations in the user scenario (where errors are injected) 
+
+			// TODO we should remove this inequality as it may prevent the detection of buggy implementations in the user scenario (where
+			// errors are injected)
 			if (expectedResultSize2 > expectedResultSize1) {
 				Assert.assertThat(testCase.getResultSize(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
 			} else {
 				assertEquals(expectedResultSize2, testCase.getResultSize());
 			}
+
+			// System.out.println(testCase.getResultSize());
 		} finally {
 			testCase.destroy();
 		}

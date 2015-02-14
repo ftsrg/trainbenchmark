@@ -27,6 +27,8 @@ import java.util.Random;
 
 public class TransformationDefinition {
 
+	// User
+	
 	public static void posLengthUser(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
 			throws IOException {
 		final long nElemToModify = Util.calcModify(bmr);
@@ -69,7 +71,7 @@ public class TransformationDefinition {
 
 		// edit
 		for (final Object route : itemsToModify) {
-			driver.deleteAllOutgoingEdges(route, ModelConstants.ROUTE_ROUTEDEFINITION);
+			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ROUTEDEFINITION);
 		}
 
 		driver.finishTransaction();
@@ -88,7 +90,7 @@ public class TransformationDefinition {
 		long startEdit = 0;
 
 		driver.beginTransaction();
-		
+
 		// query the model
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.ROUTE);
 		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
@@ -96,7 +98,7 @@ public class TransformationDefinition {
 		startEdit = System.nanoTime();
 
 		for (final Object route : itemsToModify) {
-			driver.deleteAllOutgoingEdges(route, ModelConstants.ROUTE_ENTRY);
+			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ENTRY);
 		}
 
 		driver.finishTransaction();
@@ -131,6 +133,8 @@ public class TransformationDefinition {
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
+
+	// XForm
 
 	public static void posLengthXForm(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
 			throws IOException {
@@ -209,6 +213,35 @@ public class TransformationDefinition {
 		bmr.addModificationTime(end - start);
 	}
 
+	public static void switchSensorXForm(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
+			throws IOException {
+		final long nElemToModify = Util.calcModify(bmr);
+		bmr.addModifyParams(nElemToModify);
+
+		final long start = System.nanoTime();
+		final long startEdit;
+
+		// pick the elements for transformation
+		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
+
+		driver.beginTransaction();
+
+		// edit
+		startEdit = System.nanoTime();
+
+		for (final Object vertex : itemsToModify) {
+			driver.insertVertexWithEdge(vertex, ModelConstants.SENSOR, ModelConstants.TRACKELEMENT_SENSOR);
+		}
+
+		driver.finishTransaction();
+
+		final long end = System.nanoTime();
+		bmr.addEditTime(end - startEdit);
+		bmr.addModificationTime(end - start);
+	}
+
+	// utils
+	
 	public static Random getRandom() {
 		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}

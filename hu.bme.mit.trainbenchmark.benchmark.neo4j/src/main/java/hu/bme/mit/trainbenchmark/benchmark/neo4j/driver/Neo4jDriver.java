@@ -48,33 +48,53 @@ public class Neo4jDriver extends DatabaseDriver {
 
 		return list;
 	}
+
+	@Override
+	public void insertVertexWithEdge(final Object sourceVertex, final String targetVertexType, final String edgeType) throws IOException {
+		final Node sourceNode = (Node) sourceVertex;
+		final Node targetNode = graphDb.createNode();
+
+		// automatic indexing ensures that the new node will be indexed by its type attribute
+		targetNode.addLabel(DynamicLabel.label(targetVertexType));
+		sourceNode.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType.toUpperCase()));
+	}
 	
 	@Override
-	public void deleteAllOutgoingEdges(final Object node, final String edgeType) throws IOException {
-		deleteAllEdges(node, edgeType, true);
+	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
+		deleteEdges(vertex, edgeType, true, true);
 	}
 
 	@Override
-	public void deleteAllIncomingEdges(final Object node, final String edgeType) throws IOException {
-		deleteAllEdges(node, edgeType, false);
+	public void deleteAllIncomingEdges(final Object vertex, final String edgeType) throws IOException {
+		deleteEdges(vertex, edgeType, false, true);
 	}
 
-	protected void deleteAllEdges(final Object node, final String edgeType, final boolean outgoing) {
-		final Node neoNode = (Node) node;
+	@Override
+	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException {
+		deleteEdges(vertex, edgeType, true, false);
+	}
+
+	protected void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) {
+		final Node node = (Node) vertex;
 		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType.toUpperCase());
 		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
-		final Iterable<Relationship> relationships = neoNode.getRelationships(direction, relationshipType);
+		final Iterable<Relationship> relationships = node.getRelationships(direction, relationshipType);
 		for (final Relationship relationship : relationships) {
 			relationship.delete();
+
+			// break if we only want to delete one edge
+			if (!all) {
+				break;
+			}
 		}
 	}
 
 	@Override
-	public void updateProperty(final Object node, final String propertyName, final AttributeOperation attributeOperation)
+	public void updateProperty(final Object vertex, final String propertyName, final AttributeOperation attributeOperation)
 			throws IOException {
-		final Node neoNode = (Node) node;
-		final Integer propertyValue = (Integer) neoNode.getProperty(propertyName);
-		neoNode.setProperty(propertyName, attributeOperation.op(propertyValue));
+		final Node node = (Node) vertex;
+		final Integer propertyValue = (Integer) node.getProperty(propertyName);
+		node.setProperty(propertyName, attributeOperation.op(propertyValue));
 	}
 
 	@Override
