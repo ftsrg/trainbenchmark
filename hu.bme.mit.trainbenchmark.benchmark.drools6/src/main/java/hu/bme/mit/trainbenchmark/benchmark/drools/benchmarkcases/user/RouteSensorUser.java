@@ -21,7 +21,7 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelRouteSensor(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		EMFModification.modifyEMFmodelRouteSensor(pack, bmr, Util.calcModify(bmr));
 	}
 
 }

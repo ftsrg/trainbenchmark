@@ -20,7 +20,7 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// start the modification

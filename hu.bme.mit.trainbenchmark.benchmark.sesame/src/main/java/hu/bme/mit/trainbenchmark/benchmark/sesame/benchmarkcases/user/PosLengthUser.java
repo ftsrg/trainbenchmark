@@ -36,13 +36,13 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 
 		// modify
 		final long start = System.nanoTime();
 
-		final ValueFactory f = myRepository.getValueFactory();
+		final ValueFactory f = repository.getValueFactory();
 		final URI segmentOC = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.SEGMENT);
 		RepositoryResult<Statement> segmentsIter;
 
@@ -66,7 +66,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 
 				jd.setResource(segment);
 				jd.setUri(segmentLength);
-				jd.setLiteral(f.createLiteral(-1));
+				jd.setLiteral(f.createLiteral(0));
 
 				itemsToRemove.add(jd);
 			}

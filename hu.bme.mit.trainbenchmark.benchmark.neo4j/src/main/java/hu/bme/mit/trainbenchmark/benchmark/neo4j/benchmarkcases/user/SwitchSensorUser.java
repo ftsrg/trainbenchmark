@@ -12,51 +12,17 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.user;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.SwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.TrainRelationship;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-import java.util.List;
-
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.Transaction;
+import java.io.IOException;
 
 public class SwitchSensorUser extends SwitchSensor implements TransformationBenchmarkCase {
 
 	@Override
-	public void modify() {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
-		bmr.addModifyParams(nElemToModify);
-
-		final long start = System.nanoTime();
-		long startEdit = 0;
-
-		try (Transaction tx = graphDb.beginTx()) {
-			// query the model
-			final List<Node> switches = getNodesByTypes(graphDb, ModelConstants.SWITCH);
-			final List<Node> itemsToModify = Transformation.pickRandom(nElemToModify, switches);
-
-			// edit
-			startEdit = System.nanoTime();
-
-			for (final Node sw : itemsToModify) {
-				final Iterable<Relationship> relationships = sw.getRelationships(TrainRelationship.TRACKELEMENT_SENSOR);
-
-				for (final Relationship relationship : relationships) {
-					relationship.delete();
-				}
-			}
-
-			tx.success();
-		}
-
-		final long end = System.nanoTime();
-		bmr.addEditTime(end - startEdit);
-		bmr.addModificationTime(end - start);
+	public void modify() throws IOException {
+		TransformationDefinition.switchSensorUser(bmr, invalids, driver);
 	}
 
 }

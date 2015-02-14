@@ -21,7 +21,7 @@ public class SwitchSensorUser extends SwitchSensor implements TransformationBenc
 
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelSwitchSensor(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		EMFModification.modifyEMFmodelSwitchSensor(pack, bmr, Util.calcModify(bmr));
 	}
 
 }

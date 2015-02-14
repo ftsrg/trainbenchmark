@@ -25,7 +25,7 @@ public class RouteSensorXForm extends RouteSensor implements TransformationBench
 
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelRouteSensorRepair(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr),
+		EMFModification.modifyEMFmodelRouteSensorRepair(pack, bmr, Util.calcModify(bmr),
 				(List<Sensor>) invalids);
 	}
 }

@@ -21,7 +21,7 @@ public class SignalNeighborUser extends SignalNeighbor implements Transformation
 
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelSignalNeighbor(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		EMFModification.modifyEMFmodelSignalNeighbor(pack, bmr, Util.calcModify(bmr));
 	}
 
 }

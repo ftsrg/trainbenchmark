@@ -20,6 +20,6 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 public class PosLengthXForm extends PosLength implements TransformationBenchmarkCase {
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelPosLengthRepair(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr), invalids);
+		EMFModification.modifyEMFmodelPosLengthRepair(pack, bmr, Util.calcModify(bmr), invalids);
 	}
 }

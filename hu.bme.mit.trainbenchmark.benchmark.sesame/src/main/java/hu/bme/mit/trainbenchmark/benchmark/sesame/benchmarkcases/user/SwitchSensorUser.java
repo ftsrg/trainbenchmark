@@ -36,12 +36,12 @@ public class SwitchSensorUser extends SwitchSensor implements TransformationBenc
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 
-		final ValueFactory f = myRepository.getValueFactory();
+		final ValueFactory f = repository.getValueFactory();
 		final URI switchOC = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.SWITCH);
 		RepositoryResult<Statement> switchesIter;
 

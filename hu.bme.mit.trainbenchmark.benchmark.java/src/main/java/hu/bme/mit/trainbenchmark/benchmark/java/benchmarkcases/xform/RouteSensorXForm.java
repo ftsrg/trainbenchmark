@@ -18,9 +18,10 @@ import hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 public class RouteSensorXForm extends RouteSensor implements TransformationBenchmarkCase {
+	
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelRouteSensorRepair(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr), invalids);
+		EMFModification.modifyEMFmodelRouteSensorRepair(pack, bmr, Util.calcModify(bmr), invalids);
 	}
 
 }

@@ -36,11 +36,11 @@ public class SignalNeighborUser extends SignalNeighbor implements Transformation
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 		final long start = System.nanoTime();
 
-		final ValueFactory f = myRepository.getValueFactory();
+		final ValueFactory f = repository.getValueFactory();
 		final URI routeOC = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
 		RepositoryResult<Statement> routesIter;
 

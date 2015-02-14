@@ -21,7 +21,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 
 	@Override
 	public void modify() {
-		EMFModification.modifyEMFmodelPosLength(pack, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		EMFModification.modifyEMFmodelPosLength(pack, bmr, Util.calcModify(bmr));
 	}
 
 }
