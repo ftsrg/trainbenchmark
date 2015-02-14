@@ -36,14 +36,14 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bc, bc.getModificationConstant(), bmr);
+		final long nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
-
-		final ValueFactory f = myRepository.getValueFactory();
+		
+		final ValueFactory f = repository.getValueFactory();
 		final URI routeOC = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
-		RepositoryResult<Statement> routesIter;
+		final RepositoryResult<Statement> routesIter;
 
 		try {
 			routesIter = con.getStatements(null, RDF.TYPE, routeOC, true);
@@ -57,7 +57,7 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 			final List<SesameData> itemsToRemove = new ArrayList<SesameData>();
 
 			for (final Resource route : routesToModify) {
-				final URI routeDefinition = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE);
+				final URI routeDefinition = f.createURI(RDFConstants.BASE_PREFIX + ModelConstants.ROUTE_ROUTEDEFINITION);
 				final RepositoryResult<Statement> statementsToRemove = con.getStatements(route, routeDefinition, null, true);
 
 				if (statementsToRemove.hasNext()) {
@@ -67,7 +67,7 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 					itemsToRemove.add(jd);
 				}
 			}
-
+			
 			// edit
 			final long startEdit = System.nanoTime();
 			for (final SesameData jd : itemsToRemove) {
