@@ -13,18 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 import java.util.List;
 
 public class RouteSensor extends TransformationDefinition {
-
-	public RouteSensor(final BenchmarkResult bmr, final DatabaseDriver driver) {
-		super(bmr, driver);
-	}
 
 	@Override
 	protected void lhs() throws IOException {

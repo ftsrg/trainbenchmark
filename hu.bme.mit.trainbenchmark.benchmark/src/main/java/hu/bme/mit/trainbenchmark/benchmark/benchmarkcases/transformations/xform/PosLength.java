@@ -14,21 +14,11 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.xform
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthXFormOperation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
-import java.util.List;
 
 public class PosLength extends TransformationDefinition {
-
-	protected List<? extends Object> invalids;
-	
-	public PosLength(final BenchmarkResult bmr, final DatabaseDriver driver, final List<? extends Object> invalids) {
-		super(bmr, driver);
-		this.invalids = invalids;
-	}
 	
 	@Override
 	protected void lhs() throws IOException {

@@ -24,20 +24,21 @@ import java.util.Random;
 
 public abstract class TransformationDefinition {
 
-	public TransformationDefinition(final BenchmarkResult bmr, final DatabaseDriver driver) {
+	public void initialize(final BenchmarkResult bmr, final DatabaseDriver driver, final List<? extends Object> invalids) {
 		this.bmr = bmr;
 		this.driver = driver;
+		this.invalids = invalids;
 	}
 	
+	protected List<? extends Object> invalids;
 	protected List<? extends Object> itemsToModify;
-		
+	
 	protected long nElemToModify;
 	protected long start;
 	protected long startEdit;
 	protected long end;
 	
 	protected BenchmarkResult bmr;
-	protected List<? extends Object> invalids;
 	protected DatabaseDriver driver;
 	
 	protected abstract void lhs() throws IOException;

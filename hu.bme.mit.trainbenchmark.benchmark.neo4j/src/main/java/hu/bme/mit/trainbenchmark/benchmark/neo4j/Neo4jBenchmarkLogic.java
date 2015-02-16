@@ -29,4 +29,9 @@ public class Neo4jBenchmarkLogic extends GenericBenchmarkLogic {
 		return "neo4j";
 	}
 
+	@Override
+	protected String getToolName() {
+		return "Neo4j";
+	}
+
 }

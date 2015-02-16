@@ -31,4 +31,9 @@ public class SesameBenchmarkLogic extends GenericBenchmarkLogic {
 		return "sesame";
 	}
 
+	@Override
+	protected String getToolName() {
+		return "Sesame";
+	}
+
 }

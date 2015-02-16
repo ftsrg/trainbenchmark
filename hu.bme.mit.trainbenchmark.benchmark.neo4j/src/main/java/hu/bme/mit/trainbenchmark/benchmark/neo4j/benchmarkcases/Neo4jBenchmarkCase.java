@@ -12,9 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -47,15 +46,11 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public abstract class Neo4jBenchmarkCase implements BenchmarkCase {
+public class Neo4jBenchmarkCase extends AbstractTransformationBenchmarkCase<Node> {
 
-	protected BenchmarkResult bmr;
-	protected BenchmarkConfig bc;
 	protected Neo4jBenchmarkConfig nbc;
-	protected List<Node> invalids;
 
 	protected GraphDatabaseService graphDb;
-	protected DatabaseDriver driver;
 	protected String graphDbPath;
 	protected String query;
 

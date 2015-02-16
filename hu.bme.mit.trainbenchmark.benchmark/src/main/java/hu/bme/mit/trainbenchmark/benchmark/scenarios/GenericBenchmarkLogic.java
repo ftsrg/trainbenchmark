@@ -39,12 +39,7 @@ public abstract class GenericBenchmarkLogic {
 	}
 
 	protected BenchmarkCase getTestCase(final ClassLoader classLoader) {
-		String className;
-		if (("XForm".equals(bc.getScenario())) || ("User".equals(bc.getScenario()))) {
-			className = "hu.bme.mit.trainbenchmark.benchmark." + getPackageName() + ".benchmarkcases." + bc.getScenario().toLowerCase() + "." + bc.getQuery();
-		} else {
-			className = "hu.bme.mit.trainbenchmark.benchmark." + getPackageName() + ".benchmarkcases.SesameBenchmarkCase";
-		}
+		final String className = "hu.bme.mit.trainbenchmark.benchmark." + getPackageName() + ".benchmarkcases." + getToolName() + "BenchmarkCase";
 		try {
 			return (BenchmarkCase) classLoader.loadClass(className).newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
@@ -57,4 +52,5 @@ public abstract class GenericBenchmarkLogic {
 	}
 
 	protected abstract String getPackageName();
+	protected abstract String getToolName();
 }
