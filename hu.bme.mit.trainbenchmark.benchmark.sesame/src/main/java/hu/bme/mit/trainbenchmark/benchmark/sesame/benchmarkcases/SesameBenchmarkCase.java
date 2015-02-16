@@ -12,10 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -43,19 +41,18 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> implements TransformationBenchmarkCase {
+public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI> {
 
 	@Override
 	public String getTool() {
 		return "Sesame";
 	}
-	
+
 	protected SesameBenchmarkConfig sbc;
 
 	protected TupleQuery tupleQuery;
 	protected RepositoryConnection con;
 	protected Repository repository;
-	protected DatabaseDriver driver;
 
 	protected String sparqlFilePath;
 	protected String sparqlQuery;
@@ -100,11 +97,11 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> implements T
 
 			final String queryString = Util.readFile(sparqlFilePath);
 			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
-			
+
 		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
-		
+
 		driver = new SesameDriver(RDFConstants.BASE_PREFIX, con, repository);
 
 		bmr.setReadTime();
