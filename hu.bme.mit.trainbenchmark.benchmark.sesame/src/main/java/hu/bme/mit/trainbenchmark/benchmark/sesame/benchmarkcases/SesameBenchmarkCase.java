@@ -12,7 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfig;
@@ -24,7 +25,6 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.openrdf.OpenRDFException;
@@ -43,16 +43,14 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
-public abstract class SesameBenchmarkCase implements BenchmarkCase {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> implements TransformationBenchmarkCase {
 
 	@Override
 	public String getTool() {
 		return "Sesame";
 	}
-	protected BenchmarkResult bmr;
+	
 	protected SesameBenchmarkConfig sbc;
-	protected BenchmarkConfig bc;
-	protected List<URI> invalids;
 
 	protected TupleQuery tupleQuery;
 	protected RepositoryConnection con;
@@ -155,20 +153,6 @@ public abstract class SesameBenchmarkCase implements BenchmarkCase {
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
-	}
-
-	@Override
-	public BenchmarkResult getBenchmarkResult() {
-		return bmr;
-	}
-
-	public List<URI> getInvalids() {
-		return invalids;
-	}
-
-	@Override
-	public int getResultSize() {
-		return invalids.size();
 	}
 
 }

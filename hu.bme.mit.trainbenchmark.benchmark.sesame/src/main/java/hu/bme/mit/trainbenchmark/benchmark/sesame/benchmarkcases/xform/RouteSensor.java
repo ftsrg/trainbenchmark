@@ -13,16 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.xform;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.RouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.SesameBenchmarkCase;
 
 import java.io.IOException;
 
-public class RouteSensorXForm extends RouteSensor implements TransformationBenchmarkCase {
+public class RouteSensor extends SesameBenchmarkCase implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		TransformationDefinition.routeSensorXForm(bmr, invalids, driver);
+		new hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.xform.RouteSensor(bmr, driver, invalids).performTransformation();
 	}
 
 }

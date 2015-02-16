@@ -11,13 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
@@ -25,16 +22,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TransformationDefinition {
+public abstract class TransformationDefinition {
 
-	static long nElemToModify;
-	static long start;
-	static long startEdit;
-	static long end;
+	public TransformationDefinition(final BenchmarkResult bmr, final DatabaseDriver driver) {
+		this.bmr = bmr;
+		this.driver = driver;
+	}
 	
-	// User
+	protected List<? extends Object> itemsToModify;
+		
+	protected long nElemToModify;
+	protected long start;
+	protected long startEdit;
+	protected long end;
+	
+	protected BenchmarkResult bmr;
+	protected List<? extends Object> invalids;
+	protected DatabaseDriver driver;
+	
+	protected abstract void lhs() throws IOException;
+	protected abstract void rhs() throws IOException;	
+	
+	public void performTransformation() throws IOException {
+		initTransformation();
+		driver.beginTransaction();
+		lhs();
+		
+		startEdit();
+		rhs();
+		driver.finishTransaction();
 
-	protected static void initTransformation(final BenchmarkResult bmr) {
+		saveResults();
+	}
+
+	protected void initTransformation() {
 		nElemToModify = Util.calcModify(bmr);
 		bmr.addModifyParams(nElemToModify);
 
@@ -42,185 +63,14 @@ public class TransformationDefinition {
 		startEdit = 0;
 	}
 
-	protected static void saveResults(final BenchmarkResult bmr) {
+	protected void saveResults() {
 		end = System.nanoTime();
 		bmr.addEditTime(end - startEdit);
 		bmr.addModificationTime(end - start);
 	}
 	
-	protected static void startEdit() {
+	protected void startEdit() {
 		startEdit = System.nanoTime();
-	}
-	
-	
-	public static void posLengthUser(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		driver.beginTransaction();
-		
-		// query the model
-		final List<? extends Object> segments = driver.collectVertices(SEGMENT);
-		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, segments);
-
-		startEdit();
-
-		// perform transformation
-		for (final Object segment : itemsToModify) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT_LENGTH, new PosLengthUserOperation());
-		}
-
-		driver.finishTransaction();
-
-		saveResults(bmr);
-	}
-
-	public static void routeSensorUser(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		driver.beginTransaction();
-
-		// query the model
-		final List<? extends Object> routes = driver.collectVertices(ModelConstants.ROUTE);
-		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
-
-		startEdit();
-		
-		// perform transformation
-		for (final Object route : itemsToModify) {
-			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ROUTEDEFINITION);
-		}
-
-		driver.finishTransaction();
-
-		saveResults(bmr);
-	}
-
-	public static void signalNeighborUser(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		driver.beginTransaction();
-
-		// query the model
-		final List<? extends Object> routes = driver.collectVertices(ModelConstants.ROUTE);
-		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
-
-		startEdit();
-
-		// perform transformation
-		for (final Object route : itemsToModify) {
-			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ENTRY);
-		}
-
-		driver.finishTransaction();
-
-		saveResults(bmr);
-	}
-
-	public static void switchSensorUser(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		driver.beginTransaction();
-
-		// query the model
-		final List<? extends Object> switches = driver.collectVertices(ModelConstants.SWITCH);
-		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, switches);
-
-		startEdit();
-
-		// perform transformation
-		for (final Object sw : itemsToModify) {
-			driver.deleteAllOutgoingEdges(sw, ModelConstants.TRACKELEMENT_SENSOR);
-		}
-		driver.finishTransaction();
-
-		saveResults(bmr);
-	}
-
-	// XForm
-
-	public static void posLengthXForm(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		driver.beginTransaction();
-
-		// pick the elements for transformation
-		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
-
-		startEdit();
-		
-		// perform transformation
-		for (final Object segment : itemsToModify) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT_LENGTH, new PosLengthXFormOperation());
-		}
-		driver.finishTransaction();
-
-		saveResults(bmr);
-	}
-
-	public static void routeSensorXForm(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		// pick the elements for transformation
-		final List<? extends Object> itemsToModify = pickRandom(nElemToModify, invalids);
-
-		startEdit();
-
-		// perform transformation
-		driver.beginTransaction();
-		for (final Object sensor : itemsToModify) {
-			driver.deleteAllIncomingEdges(sensor, ModelConstants.TRACKELEMENT_SENSOR);
-		}
-		driver.finishTransaction();
-
-
-		saveResults(bmr);
-	}
-
-	public static void signalNeighborXForm(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		// pick the elements for transformation
-		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
-
-		startEdit();
-		
-		// perform transformation
-		driver.beginTransaction();
-		for (final Object object : itemsToModify) {
-			driver.deleteAllOutgoingEdges(object, ModelConstants.ROUTE_EXIT);
-		}
-
-		driver.finishTransaction();
-
-		saveResults(bmr);
-	}
-
-	public static void switchSensorXForm(final BenchmarkResult bmr, final List<? extends Object> invalids, final DatabaseDriver driver)
-			throws IOException {
-		initTransformation(bmr);
-
-		// pick the elements for transformation
-		final List<? extends Object> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
-
-		startEdit();
-
-		// perform transformation
-		driver.beginTransaction();
-
-		for (final Object vertex : itemsToModify) {
-			driver.insertVertexWithEdge(vertex, ModelConstants.SENSOR, ModelConstants.TRACKELEMENT_SENSOR);
-		}
-
-		driver.finishTransaction();
-
-		saveResults(bmr);
 	}
 
 	// utils

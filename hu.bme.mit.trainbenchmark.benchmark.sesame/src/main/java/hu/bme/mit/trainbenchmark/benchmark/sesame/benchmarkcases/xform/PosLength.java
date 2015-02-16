@@ -13,16 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.xform;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.SwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.SesameBenchmarkCase;
 
 import java.io.IOException;
 
-public class SwitchSensorXForm extends SwitchSensor implements TransformationBenchmarkCase {
+public class PosLength extends SesameBenchmarkCase implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		TransformationDefinition.switchSensorXForm(bmr, invalids, driver);
+		new hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.xform.PosLength(bmr, driver, invalids).performTransformation();
 	}
 
 }
