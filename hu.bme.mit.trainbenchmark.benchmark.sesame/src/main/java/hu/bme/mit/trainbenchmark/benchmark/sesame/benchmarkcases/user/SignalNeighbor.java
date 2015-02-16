@@ -10,19 +10,18 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.xform;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.user;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.PosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.SesameBenchmarkCase;
 
 import java.io.IOException;
 
-public class PosLengthXForm extends PosLength implements TransformationBenchmarkCase {
+public class SignalNeighbor extends SesameBenchmarkCase implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		TransformationDefinition.posLengthXForm(bmr, invalids, driver);
+		new hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user.SignalNeighbor(bmr, driver).performTransformation();
 	}
 
 }

@@ -13,16 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.user;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.PosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases.SesameBenchmarkCase;
 
 import java.io.IOException;
 
-public class PosLengthUser extends PosLength implements TransformationBenchmarkCase {
+public class RouteSensor extends SesameBenchmarkCase implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		TransformationDefinition.posLengthUser(bmr, invalids, driver);
+		new hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user.RouteSensor(bmr, driver).performTransformation();
 	}
 
 }
