@@ -11,12 +11,12 @@ public class FourStoreBenchmarkLogic extends GenericBenchmarkLogic {
 	
 	public FourStoreBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = fsbc = new FourStoreBenchmarkConfig(args);
+		bc = fsbc = new FourStoreBenchmarkConfig(args, getTool());
 	}
 
 	@Override
-	protected String getPackageName() {
-		return "fourstore";
+	protected String getTool() {
+		return "FourStore";
 	}
 	
 }
