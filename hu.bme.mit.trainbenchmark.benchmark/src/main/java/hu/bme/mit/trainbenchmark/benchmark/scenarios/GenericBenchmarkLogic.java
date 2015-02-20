@@ -52,7 +52,7 @@ public abstract class GenericBenchmarkLogic {
 			// else instantiate specific class
 			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + ".benchmarkcases." + bc.getQuery();
 			final Class<?> queryClass = classLoader.loadClass(queryClassName);
-
+			
 			// instantiate generic class if not abstract
 			return (AbstractBenchmarkCase<?>) queryClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {

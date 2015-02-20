@@ -11,8 +11,8 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 	protected boolean showCommandOutput;
 	protected boolean showUpdateCommands;
 
-	public FourStoreBenchmarkConfig(String[] args) throws ParseException {
-		super(args);
+	public FourStoreBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+		super(args, tool);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	@Override
-	public void processArguments(String[] args) throws ParseException {
+	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
 		ramdisk = cmd.hasOption("ramdisk");
