@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -34,7 +34,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 
-public abstract class JenaBenchmarkCase implements BenchmarkCase {
+public abstract class JenaBenchmarkCase implements AbstractBenchmarkCase {
 
 	protected BenchmarkResult bmr;
 	protected JenaBenchmarkConfig jbc;
@@ -101,7 +101,7 @@ public abstract class JenaBenchmarkCase implements BenchmarkCase {
 	}
 
 	@Override
-	public void measureMemory() throws IOException {
+	public void getMemoryUsage() throws IOException {
 		Util.runGC();
 		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}

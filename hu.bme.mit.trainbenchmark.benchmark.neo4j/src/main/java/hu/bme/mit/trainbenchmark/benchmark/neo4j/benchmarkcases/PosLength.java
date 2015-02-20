@@ -36,7 +36,7 @@ public class PosLength extends Neo4jBenchmarkCase {
 	public List<Node> checkJava() {
 		final Label labelSegment = DynamicLabel.label(SEGMENT);
 
-		invalids = new ArrayList<>();
+		results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// Segment.Segment_length
@@ -45,12 +45,12 @@ public class PosLength extends Neo4jBenchmarkCase {
 				final Integer length = (Integer) segment.getProperty(SEGMENT_LENGTH);
 				// <= 0
 				if (length <= 0) {
-					invalids.add(segment);
+					results.add(segment);
 				}
 			}
 		}
 
-		return invalids;
+		return results;
 	}
 
 }

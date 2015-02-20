@@ -13,35 +13,25 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Concept.Segment;
 
 public class PosLength extends JavaBenchmarkCase<Segment> {
 
 	@Override
-	public String getName() {
-		return "PosLength";
-	}
-
-	protected int constraintCheck() {
-		invalids = new ArrayList<Segment>();
-
-		for (Object eObject : pack.getContains()) {
+	protected List<Segment> check() {
+		final List<Segment> invalids = new ArrayList<>();
+		
+		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Segment) {
-				Segment segment = (Segment) eObject;
+				final Segment segment = (Segment) eObject;
 				if (segment.getSegment_length() <= 0)
 					invalids.add(segment);
 			}
 		}
-
-		return invalids.size();
-	}
-
-	@Override
-	public void check() {
-		bmr.startStopper();
-		bmr.addInvalid(constraintCheck());
-		bmr.addCheckTime();
+		
+		return invalids;
 	}
 
 }

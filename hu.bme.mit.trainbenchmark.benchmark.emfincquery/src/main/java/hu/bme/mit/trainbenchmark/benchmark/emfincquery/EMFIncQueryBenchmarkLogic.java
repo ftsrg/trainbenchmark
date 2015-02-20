@@ -30,4 +30,9 @@ public class EMFIncQueryBenchmarkLogic extends GenericBenchmarkLogic {
 		return "emfincquery";
 	}
 
+	@Override
+	protected String getTool() {
+		return "EMFIncQuery";
+	}
+
 }

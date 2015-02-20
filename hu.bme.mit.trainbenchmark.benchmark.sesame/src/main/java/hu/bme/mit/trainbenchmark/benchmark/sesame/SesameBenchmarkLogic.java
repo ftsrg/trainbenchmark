@@ -23,16 +23,11 @@ public class SesameBenchmarkLogic extends GenericBenchmarkLogic {
 
 	public SesameBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = sbc = new SesameBenchmarkConfig(args);
+		bc = sbc = new SesameBenchmarkConfig(args, getTool());
 	}
-
+	
 	@Override
-	protected String getPackageName() {
-		return "sesame";
-	}
-
-	@Override
-	protected String getToolName() {
+	protected String getTool() {
 		return "Sesame";
 	}
 

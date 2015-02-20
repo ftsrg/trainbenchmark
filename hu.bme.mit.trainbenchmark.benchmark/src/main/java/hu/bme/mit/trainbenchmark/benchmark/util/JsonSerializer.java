@@ -7,26 +7,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class JsonSerializer {
-	
-	public static void serialize(BenchmarkResult bmr){
-		ObjectMapper mapper = new ObjectMapper();
+
+	public static void serialize(final BenchmarkResult bmr) throws IOException {
+		final ObjectMapper mapper = new ObjectMapper();
 		// to enable standard indentation ("pretty-printing"):
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		// to allow serialization of "empty" POJOs (no properties to serialize)
 		// (without this setting, an exception is thrown in those cases)
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
-		String scenario = bmr.getScenario();
-		String query = bmr.getQuery();
-		String tool = bmr.getTool();
-		int size = bmr.getArtifactSize();
-		int series = bmr.getRunIndex();
-		String fileName = tool + "-" + scenario + "-" + query + "-Size" + size + "-Index" + series;
-		try {
-			mapper.writeValue(new File("results/" + fileName + ".json"), bmr);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		final String scenario = bmr.getScenario();
+		final String query = bmr.getQuery();
+		final String tool = bmr.getTool();
+		final int size = bmr.getArtifactSize();
+		final int series = bmr.getRunIndex();
+		final String fileName = tool + "-" + scenario + "-" + query + "-Size" + size + "-Index" + series;
+		mapper.writeValue(new File(bmr.getBenchmarkConfig().getWorkspacePath() + "/results/" + fileName + ".json"), bmr);
+
 		System.out.println("Create JSON file: results/" + fileName);
 	}
 }

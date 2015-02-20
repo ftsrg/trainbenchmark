@@ -11,25 +11,31 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IQDeltaMonitor;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryCommon;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryDeltaMonitor;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import hu.bme.mit.trainbenchmark.emf.FileBroker;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import org.apache.log4j.Level;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
+import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
+import Concept.ConceptPackage;
 import Concept.IndividualContainer;
 
-public abstract class EMFIncQueryBenchmarkCase<T> implements BenchmarkCase {
+public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 
 	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
@@ -39,14 +45,18 @@ public abstract class EMFIncQueryBenchmarkCase<T> implements BenchmarkCase {
 	protected ResourceSet resourceSet;
 	protected Resource resource;
 
-	protected List<T> invalids;
-	protected IQDeltaMonitor<T> iqDeltaMonitor;	
+	protected IncQueryDeltaMonitor<T> incqueryDeltaMonitor;	
 	
 	@Override
 	public String getTool() {
 		return "EMF-IncQuery";
 	}
 
+	@Override
+	public String getName() {
+		return "EMFIncQuery";
+	}
+	
 	protected EMFIncQueryBenchmarkConfig getEIQBC() {
 		return (EMFIncQueryBenchmarkConfig) bc;
 	}
@@ -66,7 +76,7 @@ public abstract class EMFIncQueryBenchmarkCase<T> implements BenchmarkCase {
 	}
 
 	@Override
-	public void measureMemory() {
+	public void getMemoryUsage() {
 		Util.runGC();
 		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
@@ -86,10 +96,41 @@ public abstract class EMFIncQueryBenchmarkCase<T> implements BenchmarkCase {
 	public BenchmarkResult getBenchmarkResult() {
 		return bmr;
 	}
-	
+
 	@Override
-	public int getResultSize() {
-		return invalids.size();
+	public void check() {
+		bmr.startStopper();
+		results = new ArrayList<T>(incqueryDeltaMonitor.getMatching());
+		bmr.addInvalid(results.size());
+		bmr.addCheckTime();
+	}
+
+	@Override
+	public void load() throws IOException {
+		bmr.startStopper();
+
+		ConceptPackage.eINSTANCE.eClass();
+		final URI resourceURI = FileBroker.getEMFUri(bc.getBenchmarkArtifact());
+		resourceSet = new ResourceSetImpl();
+
+		try {
+			IncQueryCommon.setEIQOptions(getEIQBC());
+			engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
+//			final M patternMatcher = null; //= engine.getMatcher("posLength");
+//			final PosLengthMatcher patternMatcher = PosLengthMatcher.on(engine);
+
+//			final IQDeltaMonitor<Segment> iqDeltaMonitor = new IQDeltaMonitor<Segment>(patternMatcher, "Individual");
+			final IncQueryDeltaMonitor<T> iqDeltaMonitor = new IncQueryDeltaMonitor<T>(patternMatcher, "Individual");
+		} catch (final IncQueryException e) {
+			throw new IOException(e);
+		}
+		
+		resource = resourceSet.getResource(resourceURI, true);
+		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof IndividualContainer) {
+			pack = (IndividualContainer) resource.getContents().get(0);
+		}
+
+		bmr.setReadTime();
 	}
 
 }

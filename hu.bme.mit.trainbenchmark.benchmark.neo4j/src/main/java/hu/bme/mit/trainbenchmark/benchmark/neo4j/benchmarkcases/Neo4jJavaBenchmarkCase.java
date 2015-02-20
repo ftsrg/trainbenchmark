@@ -12,38 +12,16 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import java.util.List;
 
-import java.io.IOException;
+import org.neo4j.graphdb.Node;
+
 
 public abstract class Neo4jJavaBenchmarkCase extends Neo4jBenchmarkCase {
 
 	@Override
-	public void init(final BenchmarkConfig bc) throws IOException {
-		this.bc = bc;
-		this.nbc = (Neo4jBenchmarkConfig) bc;
-
-		bmr = new BenchmarkResult(getTool(), getName());
-		bmr.setBenchmarkConfig(bc);
-
-		graphDbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
-
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
-	}
-
-	@Override
-	public void check() {
-		bmr.startStopper();
-
-		invalids = checkJava();
-
-		bmr.addInvalid(invalids.size());
-		bmr.addCheckTime();
+	public List<Node> check() {
+		results = checkJava();
+		return results;
 	}
 }

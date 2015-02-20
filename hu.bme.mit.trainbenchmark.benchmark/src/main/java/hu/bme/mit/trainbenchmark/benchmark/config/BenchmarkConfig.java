@@ -30,16 +30,18 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected int runIndex;
 	protected String benchmarkArtifact;
 	protected String query;
+	protected String tool;
 
 	protected static int nMax;
 	protected static boolean generateHeader;
-
+	
 	public int getRunIndex() {
 		return runIndex;
 	}
 
-	public BenchmarkConfig(final String args[]) throws ParseException {
+	public BenchmarkConfig(final String args[], final String tool) throws ParseException {
 		super(args);
+		this.tool = tool;
 	}
 
 	@Override
@@ -174,5 +176,9 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	public static void setGeneratingHeader(final boolean isGeneratingHead) {
 		generateHeader = false;
+	}
+
+	public String getTool() {
+		return tool;
 	}
 }

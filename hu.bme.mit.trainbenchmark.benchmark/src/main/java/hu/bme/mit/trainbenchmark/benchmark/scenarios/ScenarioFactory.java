@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 public class ScenarioFactory {
 
-	public static Scenario<?> getScenarioLogic(String scenario) {
+	public static Scenario<?> getScenarioLogic(final String scenario) {
 		switch (scenario) {
 		case "User":
 			return new UserScenario();

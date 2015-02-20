@@ -12,24 +12,24 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.JsonSerializer;
 
 import java.io.IOException;
 
-public class BatchScenario implements Scenario<BenchmarkCase> {
+public class BatchScenario implements Scenario<AbstractBenchmarkCase<?>> {
 
-	public void runBenchmark(BenchmarkConfig bc, BenchmarkCase testCase) throws IOException {
-		testCase.init(bc);
+	@Override
+	public void runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?> testCase) throws IOException {
+		testCase.benchmarkInit(bc);
 
-		testCase.load();
-		testCase.check();
-		testCase.measureMemory();
-		testCase.destroy();
+		testCase.benchmarkLoad();
+		testCase.benchmarkCheck();
+		testCase.benchmarkDestroy();
 
-		BenchmarkResult bmr = testCase.getBenchmarkResult();
+		final BenchmarkResult bmr = testCase.getBenchmarkResult();
 		JsonSerializer.serialize(bmr);
 	}
 

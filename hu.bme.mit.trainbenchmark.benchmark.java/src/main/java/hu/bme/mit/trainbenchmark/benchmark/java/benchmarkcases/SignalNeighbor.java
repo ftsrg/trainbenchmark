@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Concept.Route;
 import Concept.Sensor;
@@ -22,35 +23,31 @@ import Concept.Trackelement;
 public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 
 	@Override
-	public String getName() {
-		return "SignalNeighbor";
-	}
-
-	private int constraintCheck() {
-
-		invalids = new ArrayList<Route>();
-		for (Object eObject : pack.getContains()) {
+	protected List<Route> check() {
+		final List<Route> invalids = new ArrayList<>();
+		
+		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Route) {
-				Route aRoute = (Route) eObject;
+				final Route aRoute = (Route) eObject;
 				if (!(isValid(aRoute))) {
 					invalids.add(aRoute);
 				}
 			}
 		}
 
-		return invalids.size();
+		return invalids;
 	}
 
-	private boolean isValid(Route route) {
-		Signal exitSignal = route.getRoute_exit();
-		for (Sensor sen1 : route.getRoute_routeDefinition()) {
-			for (Trackelement te1 : sen1.getSensor_trackElement()) {
-				for (Trackelement te2 : te1.getTrackElement_connectsTo()) {
-					for (Sensor sen2 : te2.getTrackElement_sensor()) {
+	private boolean isValid(final Route route) {
+		final Signal exitSignal = route.getRoute_exit();
+		for (final Sensor sen1 : route.getRoute_routeDefinition()) {
+			for (final Trackelement te1 : sen1.getSensor_trackElement()) {
+				for (final Trackelement te2 : te1.getTrackElement_connectsTo()) {
+					for (final Sensor sen2 : te2.getTrackElement_sensor()) {
 						boolean goodSensor = false;
-						for (Object eObject : pack.getContains()) {
+						for (final Object eObject : pack.getContains()) {
 							if (eObject instanceof Route) {
-								Route route2X = (Route) eObject;
+								final Route route2X = (Route) eObject;
 								if ((route2X.getRoute_routeDefinition().contains(sen2)) && (route2X != route)) {
 									goodSensor = true;
 									break;
@@ -58,9 +55,9 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 							}
 						}
 						if (goodSensor) {
-							for (Object eObject : pack.getContains()) {
+							for (final Object eObject : pack.getContains()) {
 								if (eObject instanceof Route) {
-									Route route2 = (Route) eObject;
+									final Route route2 = (Route) eObject;
 									if ((route2.getRoute_routeDefinition().contains(sen2)) && (route2.getRoute_entry() != null)
 											&& (route2.getRoute_entry().equals(exitSignal))) {
 										return true;
@@ -77,13 +74,6 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 		}
 
 		return true;
-	}
-
-	@Override
-	public void check() {
-		bmr.startStopper();
-		bmr.addInvalid(constraintCheck());
-		bmr.addCheckTime();
 	}
 
 }

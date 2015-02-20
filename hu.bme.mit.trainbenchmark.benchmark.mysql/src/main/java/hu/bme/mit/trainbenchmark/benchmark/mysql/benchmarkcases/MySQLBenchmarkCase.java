@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -31,7 +31,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-public abstract class MySQLBenchmarkCase implements BenchmarkCase {
+public abstract class MySQLBenchmarkCase implements AbstractBenchmarkCase {
 
 	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
@@ -121,7 +121,7 @@ public abstract class MySQLBenchmarkCase implements BenchmarkCase {
 	}
 
 	@Override
-	public void measureMemory() throws IOException {
+	public void getMemoryUsage() throws IOException {
 		Util.runGC();
 		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()
 				+ MySQLProcess.getMemoryUsage(bc).getMemory() * 1024);

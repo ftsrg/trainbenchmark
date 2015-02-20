@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.xform;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthXFormOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.NegateAndAddOne;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
@@ -28,7 +28,7 @@ public class PosLength extends TransformationDefinition {
 	@Override
 	protected void rhs() throws IOException {
 		for (final Object segment : itemsToModify) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT_LENGTH, new PosLengthXFormOperation());
+			driver.updateProperty(segment, ModelConstants.SEGMENT_LENGTH, new NegateAndAddOne());
 		}
 	}
 
