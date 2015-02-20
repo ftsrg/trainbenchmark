@@ -12,36 +12,49 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import java.lang.reflect.Modifier;
 
 public abstract class GenericBenchmarkLogic {
 
 	protected BenchmarkConfig bc;
 
-	public GenericBenchmarkLogic(final String[] args) throws ParseException {
-
+	public GenericBenchmarkLogic(final String[] args) {
 	}
 
 	@SuppressWarnings("unchecked")
 	public void runBenchmark() throws IOException {
 		final Scenario scl = ScenarioFactory.getScenarioLogic(bc.getScenario());
-		final BenchmarkCase tc = getTestCase();
+		final AbstractBenchmarkCase<?> tc = getTestCase();
 		scl.runBenchmark(bc, tc);
 	}
 
-	public BenchmarkCase getTestCase() {
+	public AbstractBenchmarkCase<?> getTestCase() {
 		return getTestCase(this.getClass().getClassLoader());
 	}
 
-	protected BenchmarkCase getTestCase(final ClassLoader classLoader) {
-		final String className = "hu.bme.mit.trainbenchmark.benchmark." + getPackageName() + ".benchmarkcases." + getToolName() + "BenchmarkCase";
+	protected AbstractBenchmarkCase<?> getTestCase(final ClassLoader classLoader) {
 		try {
-			return (BenchmarkCase) classLoader.loadClass(className).newInstance();
+			// trying to loading generic class
+			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + ".benchmarkcases." + getTool()
+					+ "BenchmarkCase";
+			final Class<?> clazz = classLoader.loadClass(toolClassName);
+
+			final int modifiers = clazz.getModifiers();
+			// instantiate generic class if not abstract
+			if (!Modifier.isAbstract(modifiers)) {
+				return (AbstractBenchmarkCase<?>) clazz.newInstance();
+			}
+
+			// else instantiate specific class
+			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + ".benchmarkcases." + bc.getQuery();
+			final Class<?> queryClass = classLoader.loadClass(queryClassName);
+
+			// instantiate generic class if not abstract
+			return (AbstractBenchmarkCase<?>) queryClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			throw new UnsupportedOperationException(e);
 		}
@@ -51,6 +64,5 @@ public abstract class GenericBenchmarkLogic {
 		return bc;
 	}
 
-	protected abstract String getPackageName();
-	protected abstract String getToolName();
+	protected abstract String getTool();
 }

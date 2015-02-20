@@ -50,7 +50,8 @@ public class Neo4jDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String targetVertexType, final String edgeType) throws IOException {
+	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
 		final Node sourceNode = (Node) sourceVertex;
 		final Node targetNode = graphDb.createNode();
 
@@ -58,14 +59,14 @@ public class Neo4jDriver extends DatabaseDriver {
 		targetNode.addLabel(DynamicLabel.label(targetVertexType));
 		sourceNode.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType.toUpperCase()));
 	}
-	
+
 	@Override
 	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
 		deleteEdges(vertex, edgeType, true, true);
 	}
 
 	@Override
-	public void deleteAllIncomingEdges(final Object vertex, final String edgeType) throws IOException {
+	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
 		deleteEdges(vertex, edgeType, false, true);
 	}
 
@@ -106,6 +107,11 @@ public class Neo4jDriver extends DatabaseDriver {
 	public void finishTransaction() {
 		tx.success();
 		tx.close();
+	}
+	
+	@Override
+	public void destroy() {
+		graphDb.shutdown();
 	}
 
 }

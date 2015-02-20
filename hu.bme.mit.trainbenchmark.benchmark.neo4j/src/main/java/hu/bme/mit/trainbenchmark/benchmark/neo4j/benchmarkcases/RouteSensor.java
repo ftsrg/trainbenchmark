@@ -57,7 +57,7 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION
 				.toUpperCase());
 
-		invalids = new ArrayList<>();
+		results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// (route:Route)-[ROUTE_SWITCHPOSITION]->()
@@ -85,7 +85,7 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 						for (final Relationship trackElement_sensor : trackElement_sensors) {
 							final Node sensor = trackElement_sensor.getEndNode();
 
-							if (invalids.contains(sensor))
+							if (results.contains(sensor))
 								continue;
 
 							// (sensor:Sensor)<-[ROUTE_ROUTEDEFINITION]-(Route)
@@ -104,7 +104,7 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 							}
 
 							if (!routes2.contains(route)) {
-								invalids.add(sensor);
+								results.add(sensor);
 							}
 						}
 					}
@@ -112,7 +112,7 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 			}
 		}
 
-		return invalids;
+		return results;
 	}
 
 }

@@ -21,12 +21,12 @@ public class JavaBenchmarkLogic extends GenericBenchmarkLogic {
 
 	public JavaBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = new BenchmarkConfig(args);
+		bc = new BenchmarkConfig(args, getTool());
 	}
 
 	@Override
-	protected String getPackageName() {
-		return "java";
+	protected String getTool() {
+		return "Java";
 	}
-
+	
 }

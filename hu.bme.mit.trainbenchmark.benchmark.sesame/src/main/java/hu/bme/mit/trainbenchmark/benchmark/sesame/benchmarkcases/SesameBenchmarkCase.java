@@ -13,16 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.openrdf.OpenRDFException;
@@ -43,11 +42,6 @@ import org.openrdf.sail.memory.MemoryStore;
 
 public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI> {
 
-	@Override
-	public String getTool() {
-		return "Sesame";
-	}
-
 	protected SesameBenchmarkConfig sbc;
 
 	protected TupleQuery tupleQuery;
@@ -62,25 +56,15 @@ public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI
 	}
 
 	@Override
-	public void init(final BenchmarkConfig bc) throws IOException {
-		this.bc = bc;
+	protected void init() throws IOException {
 		this.sbc = (SesameBenchmarkConfig) bc;
-		bmr = new BenchmarkResult(getTool(), getName());
-		bmr.setBenchmarkConfig(bc);
 
 		sparqlFilePath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName() + ".sparql";
 		sparqlQuery = FileUtils.readFileToString(new File(sparqlFilePath));
-
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
 	}
 
 	@Override
 	public void load() throws IOException {
-		bmr.startStopper();
-
 		if (sbc.isInferencing()) {
 			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {
@@ -97,21 +81,17 @@ public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI
 
 			final String queryString = Util.readFile(sparqlFilePath);
 			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
-
 		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
 
 		driver = new SesameDriver(RDFConstants.BASE_PREFIX, con, repository);
-
-		bmr.setReadTime();
 	}
 
 	@Override
-	public void check() throws IOException {
-		bmr.startStopper();
+	public List<URI> check() throws IOException {
+		results = new ArrayList<>();
 		TupleQueryResult queryResults;
-		invalids = new ArrayList<URI>();
 
 		try {
 			queryResults = tupleQuery.evaluate();
@@ -122,7 +102,7 @@ public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI
 					final BindingSet bs = queryResults.next();
 					final Value resultValue = bs.getValue(bindingName);
 					if (resultValue instanceof URI) {
-						invalids.add((URI) resultValue);
+						results.add((URI) resultValue);
 					}
 				}
 			} finally {
@@ -132,15 +112,7 @@ public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI
 			throw new IOException(e);
 		}
 
-		final int numberOfResults = invalids.size();
-		bmr.addInvalid(numberOfResults);
-		bmr.addCheckTime();
-	}
-
-	@Override
-	public void measureMemory() {
-		Util.runGC();
-		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+		return results;
 	}
 
 	@Override

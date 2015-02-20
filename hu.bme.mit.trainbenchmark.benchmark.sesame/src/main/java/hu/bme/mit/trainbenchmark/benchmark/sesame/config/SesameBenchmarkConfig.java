@@ -20,8 +20,8 @@ public class SesameBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
 
-	public SesameBenchmarkConfig(String[] args) throws ParseException {
-		super(args);
+	public SesameBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+		super(args, tool);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class SesameBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	@Override
-	public void processArguments(String[] args) throws ParseException {
+	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
 		inferencing = cmd.hasOption("inferencing");

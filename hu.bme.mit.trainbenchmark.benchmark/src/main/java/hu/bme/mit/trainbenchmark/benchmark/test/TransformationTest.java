@@ -13,8 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import static org.junit.Assert.assertEquals;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
 
 import java.io.IOException;
@@ -33,31 +32,31 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 
 	protected void testTransformation(final GenericBenchmarkLogic bl, final int expectedResultSize1, final int expectedResultSize2)
 			throws IOException {
-		final BenchmarkCase testCase = bl.getTestCase();
-
+		final AbstractTransformationBenchmarkCase<?> testCase = (AbstractTransformationBenchmarkCase<?>) (bl.getTestCase());
+		
 		try {
-			testCase.init(bl.getBc());
-			testCase.load();
-			testCase.check();
+			testCase.benchmarkInit(bl.getBc());
+			testCase.benchmarkLoad();
+			testCase.benchmarkCheck();
 
 			// System.out.println(bl.getBc().getQuery());
 			// System.out.println(testCase.getResultSize());
 
-			assertEquals(expectedResultSize1, testCase.getResultSize());
-			((TransformationBenchmarkCase) testCase).modify();
-			testCase.check();
+			assertEquals(expectedResultSize1, testCase.getResults().size());
+			testCase.benchmarkModify();
+			testCase.benchmarkCheck();
 
 			// TODO we should remove this inequality as it may prevent the detection of buggy implementations in the user scenario (where
 			// errors are injected)
 			if (expectedResultSize2 > expectedResultSize1) {
-				Assert.assertThat(testCase.getResultSize(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
+				Assert.assertThat(testCase.getResults().size(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
 			} else {
-				assertEquals(expectedResultSize2, testCase.getResultSize());
+				assertEquals(expectedResultSize2, testCase.getResults().size());
 			}
 
 			// System.out.println(testCase.getResultSize());
 		} finally {
-			testCase.destroy();
+			testCase.benchmarkDestroy();
 		}
 	}
 

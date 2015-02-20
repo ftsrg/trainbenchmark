@@ -12,29 +12,27 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.JsonSerializer;
 
 import java.io.IOException;
 
-public class ModelXFormScenario implements Scenario<TransformationBenchmarkCase> {
+public class ModelXFormScenario implements Scenario<AbstractTransformationBenchmarkCase<?>> {
 
 	@Override
-	public void runBenchmark(final BenchmarkConfig bc, final TransformationBenchmarkCase testCase) throws IOException {
-		testCase.init(bc);
+	public void runBenchmark(final BenchmarkConfig bc, final AbstractTransformationBenchmarkCase<?> testCase) throws IOException {
+		testCase.benchmarkInit(bc);
 
-		testCase.load();
-		testCase.check();
-		testCase.modify();
-		testCase.check();
-		testCase.measureMemory();
-		testCase.destroy();
+		testCase.benchmarkLoad();
+		testCase.benchmarkCheck();
+		testCase.benchmarkModify();
+		testCase.benchmarkCheck();
+		testCase.benchmarkDestroy();
 
 		final BenchmarkResult bmr = testCase.getBenchmarkResult();
-		JsonSerializer.serialize(bmr);
-		
+		JsonSerializer.serialize(bmr);		
 	}
 
 }

@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools.Drools6BenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
 

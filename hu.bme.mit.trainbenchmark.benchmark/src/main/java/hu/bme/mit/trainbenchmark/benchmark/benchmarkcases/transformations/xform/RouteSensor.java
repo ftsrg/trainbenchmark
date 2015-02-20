@@ -26,7 +26,7 @@ public class RouteSensor extends TransformationDefinition {
 	@Override
 	protected void rhs() throws IOException {
 		for (final Object sensor : itemsToModify) {
-			driver.deleteAllIncomingEdges(sensor, ModelConstants.TRACKELEMENT_SENSOR);
+			driver.deleteAllIncomingEdges(sensor, ModelConstants.TRACKELEMENT_SENSOR, ModelConstants.TRACKELEMENT);
 		}
 	}
 

@@ -60,13 +60,12 @@ public class SesameDriver extends DatabaseDriver {
 	@Override
 	public List<? extends Object> collectVertices(final String type) throws IOException {
 		final URI typeURI = f.createURI(basePrefix + type);
-		RepositoryResult<Statement> iterator;
-
 		final List<Resource> vertices = new ArrayList<Resource>();
 
 		try {
-			iterator = con.getStatements(null, RDF.TYPE, typeURI, true);
-			for (final Statement s : iterator.asList()) {
+			final RepositoryResult<Statement> statements = con.getStatements(null, RDF.TYPE, typeURI, true);
+			while (statements.hasNext()) {
+				final Statement s = statements.next();
 				vertices.add(s.getSubject());
 			}
 		} catch (final RepositoryException e) {
@@ -79,7 +78,7 @@ public class SesameDriver extends DatabaseDriver {
 	long newVertexId = 1000000000;
 
 	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String targetVertexType, final String edgeType) throws IOException {
+	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) throws IOException {
 		final URI sourceVertexURI = (URI) sourceVertex;
 		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
 		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
@@ -106,25 +105,25 @@ public class SesameDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void deleteAllOutgoingEdges(final Object node, final String edgeType) throws IOException {
-		deleteEdges(node, edgeType, true, true);
+	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
+		deleteEdges(vertex, edgeType, true, true);
 	}
 
 	@Override
-	public void deleteAllIncomingEdges(final Object node, final String edgeType) throws IOException {
-		deleteEdges(node, edgeType, false, true);
+	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
+		deleteEdges(vertex, edgeType, false, true);
 	}
 
 	@Override
-	public void deleteOneOutgoingEdge(final Object node, final String edgeType) throws IOException {
-		deleteEdges(node, edgeType, true, false);
+	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException {
+		deleteEdges(vertex, edgeType, true, false);
 	}
 
-	public void deleteEdges(final Object node, final String edgeType, final boolean outgoing, final boolean all) throws IOException {
+	public void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) throws IOException {
 		final List<SesameData> itemsToRemove = new ArrayList<SesameData>();
 
 		final URI edge = f.createURI(basePrefix + edgeType);
-		final URI nodeURI = (URI) node;
+		final URI nodeURI = (URI) vertex;
 		RepositoryResult<Statement> statementsToRemove;
 		try {
 			if (outgoing) {
@@ -133,9 +132,9 @@ public class SesameDriver extends DatabaseDriver {
 				statementsToRemove = con.getStatements(null, edge, nodeURI, true);
 			}
 
-			final List<Statement> statementsToRemoveList = statementsToRemove.asList();
-
-			for (final Statement s : statementsToRemoveList) {
+			while (statementsToRemove.hasNext()) {
+				final Statement s = statementsToRemove.next();
+				
 				final SesameData jd = new SesameData();
 				jd.setStatement(s);
 				itemsToRemove.add(jd);
@@ -155,10 +154,10 @@ public class SesameDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void updateProperty(final Object segment, final String propertyName, final AttributeOperation attributeOperation)
+	public void updateProperty(final Object vertex, final String propertyName, final AttributeOperation attributeOperation)
 			throws IOException {
 		try {
-			final URI nodeURI = (URI) segment;
+			final URI nodeURI = (URI) vertex;
 
 			final URI propertyURI = f.createURI(basePrefix + propertyName);
 			final SesameData jd = new SesameData();

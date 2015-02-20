@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>org.eclipse.incquery</groupId>
 			<artifactId>incquery-runtime</artifactId>
-			<version>0.8.0</version>
+			<version>0.9.0</version>
 		</dependency>
 	</dependencies>
 

@@ -21,8 +21,8 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected boolean ramdisk;
 	protected boolean javaapi;
 
-	public Neo4jBenchmarkConfig(final String[] args) throws ParseException {
-		super(args);
+	public Neo4jBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+		super(args, tool);
 	}
 
 	@Override

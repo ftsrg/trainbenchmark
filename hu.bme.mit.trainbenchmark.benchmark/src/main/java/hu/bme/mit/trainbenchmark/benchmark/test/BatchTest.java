@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import static org.junit.Assert.assertEquals;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
 
 import java.io.IOException;
@@ -22,18 +22,18 @@ import org.apache.commons.cli.ParseException;
 
 public abstract class BatchTest extends TrainBenchmarkTest {
 
-	protected void testQuery(String queryName, int expectedResultSize) throws ParseException, IOException {
-		GenericBenchmarkLogic bl = bi.initializeBenchmark(queryName, "Batch");
+	protected void testQuery(final String queryName, final int expectedResultSize) throws ParseException, IOException {
+		final GenericBenchmarkLogic bl = bi.initializeBenchmark(queryName, "Batch");
 		runQuery(bl, expectedResultSize);
 	}
 
-	protected void runQuery(GenericBenchmarkLogic bl, int expectedResultSize) throws IOException {
-		BenchmarkCase testCase = bl.getTestCase();
-		testCase.init(bl.getBc());
-		testCase.load();
-		testCase.check();
-		assertEquals(expectedResultSize, testCase.getResultSize());
-		testCase.destroy();
+	protected void runQuery(final GenericBenchmarkLogic bl, final int expectedResultSize) throws IOException {
+		final AbstractBenchmarkCase<?> testCase = bl.getTestCase();
+		testCase.benchmarkInit(bl.getBc());
+		testCase.benchmarkLoad();
+		testCase.benchmarkCheck();
+		assertEquals(expectedResultSize, testCase.getResults().size());
+		testCase.benchmarkDestroy();
 	}
 
 }

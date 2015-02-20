@@ -13,10 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 import java.io.BufferedReader;
@@ -51,23 +49,15 @@ public class Neo4jBenchmarkCase extends AbstractTransformationBenchmarkCase<Node
 	protected Neo4jBenchmarkConfig nbc;
 
 	protected GraphDatabaseService graphDb;
-	protected String graphDbPath;
+	protected String dbPath;
 	protected String query;
 
 	@Override
-	public String getTool() {
-		return "Neo4j" + (nbc == null || !nbc.isRamDisk() ? "" : "-ramdisk");
-	}
-
-	@Override
-	public void init(final BenchmarkConfig bc) throws IOException {
-		this.bc = bc;
+	public void init() throws IOException {
+		super.init();
 		this.nbc = (Neo4jBenchmarkConfig) bc;
 
-		bmr = new BenchmarkResult(getTool(), getName());
-		bmr.setBenchmarkConfig(bc);
-
-		graphDbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
+		dbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
 		query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + getName() + ".cypher"));
 
@@ -79,35 +69,28 @@ public class Neo4jBenchmarkCase extends AbstractTransformationBenchmarkCase<Node
 
 	@Override
 	public void load() throws FileNotFoundException, IOException {
-		bmr.startStopper();
-
 		// start with a clean slate: delete old directory
-		if (new File(graphDbPath).exists()) {
-			FileUtils.deleteDirectory(new File(graphDbPath));
+		if (new File(dbPath).exists()) {
+			FileUtils.deleteDirectory(new File(dbPath));
 		}
 
 		// load the database (and shut down)
-		loadGraphMl(bc.getBenchmarkArtifact(), graphDbPath);
+		loadGraphMl(bc.getBenchmarkArtifact(), dbPath);
 
 		// start the database
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(graphDbPath);
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
 		driver = new Neo4jDriver(graphDb);
-
-		bmr.setReadTime();
 	}
 
 	@Override
-	public void check() {
-		bmr.startStopper();
-
+	public List<Node> check() {
 		if (nbc.isJavaApi()) {
-			invalids = checkJava();
+			results = checkJava();
 		} else {
-			invalids = runCypherQuery(graphDb, query);
+			results = runCypherQuery(graphDb, query);
 		}
 
-		bmr.addInvalid(invalids.size());
-		bmr.addCheckTime();
+		return results;
 	}
 
 	protected List<Node> checkJava() {
@@ -115,19 +98,8 @@ public class Neo4jBenchmarkCase extends AbstractTransformationBenchmarkCase<Node
 	}
 
 	@Override
-	public void measureMemory() {
-		Util.runGC();
-		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-	}
-
-	@Override
 	public void destroy() {
 		graphDb.shutdown();
-	}
-
-	@Override
-	public BenchmarkResult getBenchmarkResult() {
-		return bmr;
 	}
 
 	public void loadGraphMl(final String graphMlFile, final String dbPath) throws FileNotFoundException, IOException {
@@ -168,11 +140,6 @@ public class Neo4jBenchmarkCase extends AbstractTransformationBenchmarkCase<Node
 		}
 
 		return invalids;
-	}
-
-	@Override
-	public int getResultSize() {
-		return invalids.size();
 	}
 
 }

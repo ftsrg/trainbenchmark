@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import eu.mondo.driver.fourstore.FourStoreGraphDriverReadWrite;
 
-public abstract class FourStoreBenchmarkCase implements BenchmarkCase {
+public abstract class FourStoreBenchmarkCase implements AbstractBenchmarkCase {
 
 	protected static final String CLUSTERNAME = "trainbenchmark_cluster";
 
@@ -44,7 +44,7 @@ public abstract class FourStoreBenchmarkCase implements BenchmarkCase {
 	}
 
 	@Override
-	public void measureMemory() throws IOException {
+	public void getMemoryUsage() throws IOException {
 
 	}
 

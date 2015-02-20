@@ -21,16 +21,11 @@ public class Neo4jBenchmarkLogic extends GenericBenchmarkLogic {
 
 	public Neo4jBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = new Neo4jBenchmarkConfig(args);
+		bc = new Neo4jBenchmarkConfig(args, getTool());
 	}
 
 	@Override
-	protected String getPackageName() {
-		return "neo4j";
-	}
-
-	@Override
-	protected String getToolName() {
+	protected String getTool() {
 		return "Neo4j";
 	}
 
