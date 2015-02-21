@@ -24,18 +24,18 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 
 	@Override
 	protected List<Route> check() {
-		final List<Route> invalids = new ArrayList<>();
+		results = new ArrayList<>();
 		
 		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Route) {
 				final Route aRoute = (Route) eObject;
 				if (!(isValid(aRoute))) {
-					invalids.add(aRoute);
+					results.add(aRoute);
 				}
 			}
 		}
 
-		return invalids;
+		return results;
 	}
 
 	private boolean isValid(final Route route) {
