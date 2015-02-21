@@ -21,18 +21,18 @@ public class SwitchSensor extends JavaBenchmarkCase<Switch> {
 
 	@Override
 	protected List<Switch> check() {
-		final List<Switch> invalids = new ArrayList<>();
+		results = new ArrayList<>();
 
 		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Switch) {
 				final Switch aSwitch = (Switch) eObject;
 				if (aSwitch.getTrackElement_sensor().isEmpty()) {
-					invalids.add(aSwitch);
+					results.add(aSwitch);
 				}
 			}
 		}
 
-		return invalids;
+		return results;
 	}
 	
 }

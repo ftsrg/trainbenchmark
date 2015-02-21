@@ -24,7 +24,7 @@ public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 
 	@Override
 	protected List<Sensor> check() {
-		final List<Sensor> invalids = new ArrayList<>();
+		results = new ArrayList<>();
 
 		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Sensor) {
@@ -34,7 +34,7 @@ public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 						final Switch aSwitch = (Switch) te;
 						for (final SwitchPosition sp : aSwitch.getSwitch_switchPosition()) {
 							if (!sp.getSwitchPosition_route().getRoute_routeDefinition().contains(sensor)) {
-								invalids.add(sensor);
+								results.add(sensor);
 							}
 						}
 					}
@@ -42,7 +42,7 @@ public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 			}
 		}
 		
-		return invalids;
+		return results;
 	}
 
 }

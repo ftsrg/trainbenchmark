@@ -21,17 +21,17 @@ public class PosLength extends JavaBenchmarkCase<Segment> {
 
 	@Override
 	protected List<Segment> check() {
-		final List<Segment> invalids = new ArrayList<>();
+		results = new ArrayList<>();
 		
 		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Segment) {
 				final Segment segment = (Segment) eObject;
 				if (segment.getSegment_length() <= 0)
-					invalids.add(segment);
+					results.add(segment);
 			}
 		}
 		
-		return invalids;
+		return results;
 	}
 
 }

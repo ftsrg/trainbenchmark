@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.SetToZero;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
@@ -24,7 +23,7 @@ public class PosLength extends TransformationDefinition {
 
 	@Override
 	protected void lhs() throws IOException {
-		final List<? extends Object> segments = driver.collectVertices(SEGMENT);
+		final List<? extends Object> segments = driver.collectVertices(ModelConstants.SEGMENT);
 		itemsToModify = Transformation.pickRandom(nElemToModify, segments);
 	}
 

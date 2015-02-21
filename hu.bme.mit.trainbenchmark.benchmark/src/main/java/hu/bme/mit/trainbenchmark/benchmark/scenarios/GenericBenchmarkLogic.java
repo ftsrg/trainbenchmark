@@ -48,6 +48,7 @@ public abstract class GenericBenchmarkLogic {
 			if (!Modifier.isAbstract(modifiers)) {
 				return (AbstractBenchmarkCase<?>) clazz.newInstance();
 			}
+		
 
 			// else instantiate specific class
 			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + ".benchmarkcases." + bc.getQuery();

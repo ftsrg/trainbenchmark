@@ -32,31 +32,31 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 
 	protected void testTransformation(final GenericBenchmarkLogic bl, final int expectedResultSize1, final int expectedResultSize2)
 			throws IOException {
-		final AbstractTransformationBenchmarkCase<?> testCase = (AbstractTransformationBenchmarkCase<?>) (bl.getTestCase());
+		final AbstractTransformationBenchmarkCase<?> benchmarkCase = (AbstractTransformationBenchmarkCase<?>) (bl.getTestCase());
 		
 		try {
-			testCase.benchmarkInit(bl.getBc());
-			testCase.benchmarkLoad();
-			testCase.benchmarkCheck();
+			benchmarkCase.benchmarkInit(bl.getBc());
+			benchmarkCase.benchmarkLoad();
+			benchmarkCase.benchmarkCheck();
 
 			// System.out.println(bl.getBc().getQuery());
 			// System.out.println(testCase.getResultSize());
 
-			assertEquals(expectedResultSize1, testCase.getResults().size());
-			testCase.benchmarkModify();
-			testCase.benchmarkCheck();
+			assertEquals(expectedResultSize1, benchmarkCase.getResults().size());
+			benchmarkCase.benchmarkModify();
+			benchmarkCase.benchmarkCheck();
 
 			// TODO we should remove this inequality as it may prevent the detection of buggy implementations in the user scenario (where
 			// errors are injected)
 			if (expectedResultSize2 > expectedResultSize1) {
-				Assert.assertThat(testCase.getResults().size(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
+				Assert.assertThat(benchmarkCase.getResults().size(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
 			} else {
-				assertEquals(expectedResultSize2, testCase.getResults().size());
+				assertEquals(expectedResultSize2, benchmarkCase.getResults().size());
 			}
 
 			// System.out.println(testCase.getResultSize());
 		} finally {
-			testCase.benchmarkDestroy();
+			benchmarkCase.benchmarkDestroy();
 		}
 	}
 
