@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Sensor extends Thing {
+public interface Sensor extends RailwayElement {
 	/**
 	 * Returns the value of the '<em><b>Sensor track Element</b></em>' reference list.
 	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.TrackElement}.

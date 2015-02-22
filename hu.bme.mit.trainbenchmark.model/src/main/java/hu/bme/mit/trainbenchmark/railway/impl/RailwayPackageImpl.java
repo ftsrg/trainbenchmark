@@ -2,7 +2,8 @@
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
 
-import hu.bme.mit.trainbenchmark.railway.IndividualContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Route;
@@ -13,7 +14,6 @@ import hu.bme.mit.trainbenchmark.railway.SignalStateKind;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 import hu.bme.mit.trainbenchmark.railway.SwitchStateKind;
-import hu.bme.mit.trainbenchmark.railway.Thing;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -78,7 +78,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass thingEClass = null;
+	private EClass railwayElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,7 +92,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass individualContainerEClass = null;
+	private EClass railwayContainerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -345,8 +345,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getThing() {
-		return thingEClass;
+	public EClass getRailwayElement() {
+		return railwayElementEClass;
 	}
 
 	/**
@@ -372,8 +372,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getIndividualContainer() {
-		return individualContainerEClass;
+	public EClass getRailwayContainer() {
+		return railwayContainerEClass;
 	}
 
 	/**
@@ -381,8 +381,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIndividualContainer_Contains() {
-		return (EReference)individualContainerEClass.getEStructuralFeatures().get(0);
+	public EReference getRailwayContainer_Contains() {
+		return (EReference)railwayContainerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -456,13 +456,13 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		createEAttribute(switchPositionEClass, SWITCH_POSITION__SWITCH_POSITION_SWITCH_STATE);
 		createEReference(switchPositionEClass, SWITCH_POSITION__SWITCH_POSITION_ROUTE);
 
-		thingEClass = createEClass(THING);
+		railwayElementEClass = createEClass(RAILWAY_ELEMENT);
 
 		sensorEClass = createEClass(SENSOR);
 		createEReference(sensorEClass, SENSOR__SENSOR_TRACK_ELEMENT);
 
-		individualContainerEClass = createEClass(INDIVIDUAL_CONTAINER);
-		createEReference(individualContainerEClass, INDIVIDUAL_CONTAINER__CONTAINS);
+		railwayContainerEClass = createEClass(RAILWAY_CONTAINER);
+		createEReference(railwayContainerEClass, RAILWAY_CONTAINER__CONTAINS);
 
 		// Create enums
 		signalStateKindEEnum = createEEnum(SIGNAL_STATE_KIND);
@@ -498,12 +498,12 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 
 		// Add supertypes to classes
 		segmentEClass.getESuperTypes().add(this.getTrackElement());
-		trackElementEClass.getESuperTypes().add(this.getThing());
+		trackElementEClass.getESuperTypes().add(this.getRailwayElement());
 		switchEClass.getESuperTypes().add(this.getTrackElement());
-		routeEClass.getESuperTypes().add(this.getThing());
-		signalEClass.getESuperTypes().add(this.getThing());
-		switchPositionEClass.getESuperTypes().add(this.getThing());
-		sensorEClass.getESuperTypes().add(this.getThing());
+		routeEClass.getESuperTypes().add(this.getRailwayElement());
+		signalEClass.getESuperTypes().add(this.getRailwayElement());
+		switchPositionEClass.getESuperTypes().add(this.getRailwayElement());
+		sensorEClass.getESuperTypes().add(this.getRailwayElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(segmentEClass, Segment.class, "Segment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -531,13 +531,13 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEAttribute(getSwitchPosition_SwitchPosition_switchState(), this.getSwitchStateKind(), "SwitchPosition_switchState", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitchPosition_SwitchPosition_route(), this.getRoute(), this.getRoute_Route_switchPosition(), "SwitchPosition_route", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(thingEClass, Thing.class, "Thing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(railwayElementEClass, RailwayElement.class, "RailwayElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSensor_Sensor_trackElement(), this.getTrackElement(), this.getTrackElement_TrackElement_sensor(), "Sensor_trackElement", null, 0, -1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(individualContainerEClass, IndividualContainer.class, "IndividualContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIndividualContainer_Contains(), this.getThing(), null, "contains", null, 0, -1, IndividualContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(railwayContainerEClass, RailwayContainer.class, "RailwayContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRailwayContainer_Contains(), this.getRailwayElement(), null, "contains", null, 0, -1, RailwayContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(signalStateKindEEnum, SignalStateKind.class, "SignalStateKind");

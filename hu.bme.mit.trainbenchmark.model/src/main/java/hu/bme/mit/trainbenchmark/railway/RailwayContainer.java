@@ -8,24 +8,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Individual Container</b></em>'.
+ * A representation of the model object '<em><b>Container</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.IndividualContainer#getContains <em>Contains</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.RailwayContainer#getContains <em>Contains</em>}</li>
  * </ul>
  * </p>
  *
- * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getIndividualContainer()
+ * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getRailwayContainer()
  * @model
  * @generated
  */
-public interface IndividualContainer extends EObject {
+public interface RailwayContainer extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Contains</b></em>' containment reference list.
-	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.Thing}.
+	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.RailwayElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Contains</em>' containment reference list isn't clear,
@@ -33,10 +33,10 @@ public interface IndividualContainer extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Contains</em>' containment reference list.
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getIndividualContainer_Contains()
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getRailwayContainer_Contains()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Thing> getContains();
+	EList<RailwayElement> getContains();
 
-} // IndividualContainer
+} // RailwayContainer

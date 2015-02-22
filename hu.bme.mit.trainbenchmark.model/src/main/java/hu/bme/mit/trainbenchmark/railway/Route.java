@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Route extends Thing {
+public interface Route extends RailwayElement {
 	/**
 	 * Returns the value of the '<em><b>Route entry</b></em>' reference.
 	 * <!-- begin-user-doc -->

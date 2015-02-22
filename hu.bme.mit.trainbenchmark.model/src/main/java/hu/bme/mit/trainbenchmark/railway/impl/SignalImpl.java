@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class SignalImpl extends ThingImpl implements Signal {
+public class SignalImpl extends RailwayElementImpl implements Signal {
 	/**
 	 * The default value of the '{@link #getSignal_actualState() <em>Signal actual State</em>}' attribute.
 	 * <!-- begin-user-doc -->

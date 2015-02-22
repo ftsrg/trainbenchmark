@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class SwitchPositionImpl extends ThingImpl implements SwitchPosition {
+public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosition {
 	/**
 	 * The cached value of the '{@link #getSwitchPosition_switch() <em>Switch Position switch</em>}' reference.
 	 * <!-- begin-user-doc -->

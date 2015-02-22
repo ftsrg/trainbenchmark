@@ -63,9 +63,9 @@ public class RailwayFactoryImpl extends EFactoryImpl implements RailwayFactory {
 			case RailwayPackage.ROUTE: return createRoute();
 			case RailwayPackage.SIGNAL: return createSignal();
 			case RailwayPackage.SWITCH_POSITION: return createSwitchPosition();
-			case RailwayPackage.THING: return createThing();
+			case RailwayPackage.RAILWAY_ELEMENT: return createRailwayElement();
 			case RailwayPackage.SENSOR: return createSensor();
-			case RailwayPackage.INDIVIDUAL_CONTAINER: return createIndividualContainer();
+			case RailwayPackage.RAILWAY_CONTAINER: return createRailwayContainer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -170,9 +170,9 @@ public class RailwayFactoryImpl extends EFactoryImpl implements RailwayFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Thing createThing() {
-		ThingImpl thing = new ThingImpl();
-		return thing;
+	public RailwayElement createRailwayElement() {
+		RailwayElementImpl railwayElement = new RailwayElementImpl();
+		return railwayElement;
 	}
 
 	/**
@@ -190,9 +190,9 @@ public class RailwayFactoryImpl extends EFactoryImpl implements RailwayFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IndividualContainer createIndividualContainer() {
-		IndividualContainerImpl individualContainer = new IndividualContainerImpl();
-		return individualContainer;
+	public RailwayContainer createRailwayContainer() {
+		RailwayContainerImpl railwayContainer = new RailwayContainerImpl();
+		return railwayContainer;
 	}
 
 	/**

@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.TrainBenchmark.IndividualContainer;
+import hu.bme.mit.trainbenchmark.TrainBenchmark.RailwayContainer;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryCommon;
@@ -37,7 +37,7 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 
 	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
-	protected IndividualContainer pack;
+	protected RailwayContainer pack;
 
 	protected AdvancedIncQueryEngine engine;
 	protected ResourceSet resourceSet;
@@ -119,8 +119,8 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 		}
 		
 		resource = resourceSet.getResource(resourceURI, true);
-		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof IndividualContainer) {
-			pack = (IndividualContainer) resource.getContents().get(0);
+		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
+			pack = (RailwayContainer) resource.getContents().get(0);
 		}
 
 		bmr.setReadTime();

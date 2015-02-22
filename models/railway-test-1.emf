@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<hu.bme.mit.trainbenchmark:IndividualContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hu.bme.mit.trainbenchmark="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl">
+<hu.bme.mit.trainbenchmark:RailwayContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hu.bme.mit.trainbenchmark="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl">
   <contains xsi:type="hu.bme.mit.trainbenchmark:Signal" Signal_actualState="SignalStateKind_GO"/>
   <contains xsi:type="hu.bme.mit.trainbenchmark:Signal" Signal_actualState="SignalStateKind_GO"/>
   <contains xsi:type="hu.bme.mit.trainbenchmark:Route" Route_switchPosition="//@contains.8 //@contains.16 //@contains.18 //@contains.24 //@contains.30 //@contains.38 //@contains.40 //@contains.42 //@contains.50 //@contains.58 //@contains.68 //@contains.78 //@contains.82 //@contains.88 //@contains.96 //@contains.104 //@contains.106 //@contains.108 //@contains.114" Route_exit="//@contains.1" Route_routeDefinition="//@contains.4 //@contains.6 //@contains.10 //@contains.12 //@contains.14 //@contains.20 //@contains.22 //@contains.26 //@contains.28 //@contains.32 //@contains.34 //@contains.36 //@contains.46 //@contains.48 //@contains.52 //@contains.54 //@contains.56 //@contains.60 //@contains.62 //@contains.64 //@contains.66 //@contains.70 //@contains.72 //@contains.74 //@contains.76 //@contains.80 //@contains.84 //@contains.86 //@contains.90 //@contains.94 //@contains.98 //@contains.100 //@contains.110"/>
@@ -170,4 +170,4 @@
   <contains xsi:type="hu.bme.mit.trainbenchmark:Sensor" Sensor_trackElement="//@contains.166 //@contains.168"/>
   <contains xsi:type="hu.bme.mit.trainbenchmark:Segment" TrackElement_sensor="//@contains.167" TrackElement_connectsTo="//@contains.3" Segment_length="885"/>
   <contains xsi:type="hu.bme.mit.trainbenchmark:SwitchPosition" SwitchPosition_switch="//@contains.166" SwitchPosition_switchState="PointStateKind_STRAIGHT" SwitchPosition_route="//@contains.115"/>
-</hu.bme.mit.trainbenchmark:IndividualContainer>
+</hu.bme.mit.trainbenchmark:RailwayContainer>

@@ -92,16 +92,16 @@ public class RailwayAdapterFactory extends AdapterFactoryImpl {
 				return createSwitchPositionAdapter();
 			}
 			@Override
-			public Adapter caseThing(Thing object) {
-				return createThingAdapter();
+			public Adapter caseRailwayElement(RailwayElement object) {
+				return createRailwayElementAdapter();
 			}
 			@Override
 			public Adapter caseSensor(Sensor object) {
 				return createSensorAdapter();
 			}
 			@Override
-			public Adapter caseIndividualContainer(IndividualContainer object) {
-				return createIndividualContainerAdapter();
+			public Adapter caseRailwayContainer(RailwayContainer object) {
+				return createRailwayContainerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -208,16 +208,16 @@ public class RailwayAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link hu.bme.mit.trainbenchmark.railway.Thing <em>Thing</em>}'.
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.trainbenchmark.railway.RailwayElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see hu.bme.mit.trainbenchmark.railway.Thing
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayElement
 	 * @generated
 	 */
-	public Adapter createThingAdapter() {
+	public Adapter createRailwayElementAdapter() {
 		return null;
 	}
 
@@ -236,16 +236,16 @@ public class RailwayAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link hu.bme.mit.trainbenchmark.railway.IndividualContainer <em>Individual Container</em>}'.
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.trainbenchmark.railway.RailwayContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see hu.bme.mit.trainbenchmark.railway.IndividualContainer
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayContainer
 	 * @generated
 	 */
-	public Adapter createIndividualContainerAdapter() {
+	public Adapter createRailwayContainerAdapter() {
 		return null;
 	}
 

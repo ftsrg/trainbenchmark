@@ -19,7 +19,7 @@ package hu.bme.mit.trainbenchmark.railway;
  * @model
  * @generated
  */
-public interface Signal extends Thing {
+public interface Signal extends RailwayElement {
 	/**
 	 * Returns the value of the '<em><b>Signal actual State</b></em>' attribute.
 	 * The literals are from the enumeration {@link hu.bme.mit.trainbenchmark.railway.SignalStateKind}.

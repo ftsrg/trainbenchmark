@@ -58,32 +58,32 @@ public interface RailwayPackage extends EPackage {
 	RailwayPackage eINSTANCE = hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.ThingImpl <em>Thing</em>}' class.
+	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayElementImpl <em>Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see hu.bme.mit.trainbenchmark.railway.impl.ThingImpl
-	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getThing()
+	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayElementImpl
+	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getRailwayElement()
 	 * @generated
 	 */
-	int THING = 6;
+	int RAILWAY_ELEMENT = 6;
 
 	/**
-	 * The number of structural features of the '<em>Thing</em>' class.
+	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int THING_FEATURE_COUNT = 0;
+	int RAILWAY_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The number of operations of the '<em>Thing</em>' class.
+	 * The number of operations of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int THING_OPERATION_COUNT = 0;
+	int RAILWAY_ELEMENT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.TrackElementImpl <em>Track Element</em>}' class.
@@ -102,7 +102,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRACK_ELEMENT__TRACK_ELEMENT_SENSOR = THING_FEATURE_COUNT + 0;
+	int TRACK_ELEMENT__TRACK_ELEMENT_SENSOR = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Track Element connects To</b></em>' reference list.
@@ -111,7 +111,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRACK_ELEMENT__TRACK_ELEMENT_CONNECTS_TO = THING_FEATURE_COUNT + 1;
+	int TRACK_ELEMENT__TRACK_ELEMENT_CONNECTS_TO = RAILWAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Track Element</em>' class.
@@ -120,7 +120,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRACK_ELEMENT_FEATURE_COUNT = THING_FEATURE_COUNT + 2;
+	int TRACK_ELEMENT_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Track Element</em>' class.
@@ -129,7 +129,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRACK_ELEMENT_OPERATION_COUNT = THING_OPERATION_COUNT + 0;
+	int TRACK_ELEMENT_OPERATION_COUNT = RAILWAY_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SegmentImpl <em>Segment</em>}' class.
@@ -267,7 +267,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__ROUTE_ENTRY = THING_FEATURE_COUNT + 0;
+	int ROUTE__ROUTE_ENTRY = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Route switch Position</b></em>' reference list.
@@ -276,7 +276,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__ROUTE_SWITCH_POSITION = THING_FEATURE_COUNT + 1;
+	int ROUTE__ROUTE_SWITCH_POSITION = RAILWAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Route exit</b></em>' reference.
@@ -285,7 +285,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__ROUTE_EXIT = THING_FEATURE_COUNT + 2;
+	int ROUTE__ROUTE_EXIT = RAILWAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Route route Definition</b></em>' reference list.
@@ -294,7 +294,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__ROUTE_ROUTE_DEFINITION = THING_FEATURE_COUNT + 3;
+	int ROUTE__ROUTE_ROUTE_DEFINITION = RAILWAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Route</em>' class.
@@ -303,7 +303,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE_FEATURE_COUNT = THING_FEATURE_COUNT + 4;
+	int ROUTE_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Route</em>' class.
@@ -312,7 +312,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE_OPERATION_COUNT = THING_OPERATION_COUNT + 0;
+	int ROUTE_OPERATION_COUNT = RAILWAY_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SignalImpl <em>Signal</em>}' class.
@@ -331,7 +331,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIGNAL__SIGNAL_ACTUAL_STATE = THING_FEATURE_COUNT + 0;
+	int SIGNAL__SIGNAL_ACTUAL_STATE = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Signal</em>' class.
@@ -340,7 +340,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIGNAL_FEATURE_COUNT = THING_FEATURE_COUNT + 1;
+	int SIGNAL_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Signal</em>' class.
@@ -349,7 +349,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIGNAL_OPERATION_COUNT = THING_OPERATION_COUNT + 0;
+	int SIGNAL_OPERATION_COUNT = RAILWAY_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchPositionImpl <em>Switch Position</em>}' class.
@@ -368,7 +368,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_POSITION__SWITCH_POSITION_SWITCH = THING_FEATURE_COUNT + 0;
+	int SWITCH_POSITION__SWITCH_POSITION_SWITCH = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Switch Position switch State</b></em>' attribute.
@@ -377,7 +377,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_POSITION__SWITCH_POSITION_SWITCH_STATE = THING_FEATURE_COUNT + 1;
+	int SWITCH_POSITION__SWITCH_POSITION_SWITCH_STATE = RAILWAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Switch Position route</b></em>' reference.
@@ -386,7 +386,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_POSITION__SWITCH_POSITION_ROUTE = THING_FEATURE_COUNT + 2;
+	int SWITCH_POSITION__SWITCH_POSITION_ROUTE = RAILWAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Switch Position</em>' class.
@@ -395,7 +395,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_POSITION_FEATURE_COUNT = THING_FEATURE_COUNT + 3;
+	int SWITCH_POSITION_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Switch Position</em>' class.
@@ -404,7 +404,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_POSITION_OPERATION_COUNT = THING_OPERATION_COUNT + 0;
+	int SWITCH_POSITION_OPERATION_COUNT = RAILWAY_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SensorImpl <em>Sensor</em>}' class.
@@ -423,7 +423,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SENSOR__SENSOR_TRACK_ELEMENT = THING_FEATURE_COUNT + 0;
+	int SENSOR__SENSOR_TRACK_ELEMENT = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Sensor</em>' class.
@@ -432,7 +432,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SENSOR_FEATURE_COUNT = THING_FEATURE_COUNT + 1;
+	int SENSOR_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Sensor</em>' class.
@@ -441,17 +441,17 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SENSOR_OPERATION_COUNT = THING_OPERATION_COUNT + 0;
+	int SENSOR_OPERATION_COUNT = RAILWAY_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.IndividualContainerImpl <em>Individual Container</em>}' class.
+	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl <em>Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see hu.bme.mit.trainbenchmark.railway.impl.IndividualContainerImpl
-	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getIndividualContainer()
+	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl
+	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getRailwayContainer()
 	 * @generated
 	 */
-	int INDIVIDUAL_CONTAINER = 8;
+	int RAILWAY_CONTAINER = 8;
 
 	/**
 	 * The feature id for the '<em><b>Contains</b></em>' containment reference list.
@@ -460,25 +460,25 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL_CONTAINER__CONTAINS = 0;
+	int RAILWAY_CONTAINER__CONTAINS = 0;
 
 	/**
-	 * The number of structural features of the '<em>Individual Container</em>' class.
+	 * The number of structural features of the '<em>Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL_CONTAINER_FEATURE_COUNT = 1;
+	int RAILWAY_CONTAINER_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of operations of the '<em>Individual Container</em>' class.
+	 * The number of operations of the '<em>Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL_CONTAINER_OPERATION_COUNT = 0;
+	int RAILWAY_CONTAINER_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.SignalStateKind <em>Signal State Kind</em>}' enum.
@@ -705,14 +705,14 @@ public interface RailwayPackage extends EPackage {
 	EReference getSwitchPosition_SwitchPosition_route();
 
 	/**
-	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.Thing <em>Thing</em>}'.
+	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.RailwayElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Thing</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Thing
+	 * @return the meta object for class '<em>Element</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayElement
 	 * @generated
 	 */
-	EClass getThing();
+	EClass getRailwayElement();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.Sensor <em>Sensor</em>}'.
@@ -736,25 +736,25 @@ public interface RailwayPackage extends EPackage {
 	EReference getSensor_Sensor_trackElement();
 
 	/**
-	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.IndividualContainer <em>Individual Container</em>}'.
+	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.RailwayContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Individual Container</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.IndividualContainer
+	 * @return the meta object for class '<em>Container</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayContainer
 	 * @generated
 	 */
-	EClass getIndividualContainer();
+	EClass getRailwayContainer();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.trainbenchmark.railway.IndividualContainer#getContains <em>Contains</em>}'.
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.trainbenchmark.railway.RailwayContainer#getContains <em>Contains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Contains</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.IndividualContainer#getContains()
-	 * @see #getIndividualContainer()
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayContainer#getContains()
+	 * @see #getRailwayContainer()
 	 * @generated
 	 */
-	EReference getIndividualContainer_Contains();
+	EReference getRailwayContainer_Contains();
 
 	/**
 	 * Returns the meta object for enum '{@link hu.bme.mit.trainbenchmark.railway.SignalStateKind <em>Signal State Kind</em>}'.
@@ -964,14 +964,14 @@ public interface RailwayPackage extends EPackage {
 		EReference SWITCH_POSITION__SWITCH_POSITION_ROUTE = eINSTANCE.getSwitchPosition_SwitchPosition_route();
 
 		/**
-		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.ThingImpl <em>Thing</em>}' class.
+		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayElementImpl <em>Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see hu.bme.mit.trainbenchmark.railway.impl.ThingImpl
-		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getThing()
+		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayElementImpl
+		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getRailwayElement()
 		 * @generated
 		 */
-		EClass THING = eINSTANCE.getThing();
+		EClass RAILWAY_ELEMENT = eINSTANCE.getRailwayElement();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SensorImpl <em>Sensor</em>}' class.
@@ -992,14 +992,14 @@ public interface RailwayPackage extends EPackage {
 		EReference SENSOR__SENSOR_TRACK_ELEMENT = eINSTANCE.getSensor_Sensor_trackElement();
 
 		/**
-		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.IndividualContainerImpl <em>Individual Container</em>}' class.
+		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl <em>Container</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see hu.bme.mit.trainbenchmark.railway.impl.IndividualContainerImpl
-		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getIndividualContainer()
+		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl
+		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getRailwayContainer()
 		 * @generated
 		 */
-		EClass INDIVIDUAL_CONTAINER = eINSTANCE.getIndividualContainer();
+		EClass RAILWAY_CONTAINER = eINSTANCE.getRailwayContainer();
 
 		/**
 		 * The meta object literal for the '<em><b>Contains</b></em>' containment reference list feature.
@@ -1007,7 +1007,7 @@ public interface RailwayPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INDIVIDUAL_CONTAINER__CONTAINS = eINSTANCE.getIndividualContainer_Contains();
+		EReference RAILWAY_CONTAINER__CONTAINS = eINSTANCE.getRailwayContainer_Contains();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.SignalStateKind <em>Signal State Kind</em>}' enum.

@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class TrackElementImpl extends ThingImpl implements TrackElement {
+public class TrackElementImpl extends RailwayElementImpl implements TrackElement {
 	/**
 	 * The cached value of the '{@link #getTrackElement_sensor() <em>Track Element sensor</em>}' reference list.
 	 * <!-- begin-user-doc -->
