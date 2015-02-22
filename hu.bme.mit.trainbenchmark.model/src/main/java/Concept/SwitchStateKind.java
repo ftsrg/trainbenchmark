@@ -1,14 +1,5 @@
-/*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
+/**
+ */
 package Concept;
 
 import java.util.Arrays;
@@ -18,60 +9,63 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc --> A representation of the literals of the enumeration '
- * <em><b>Switch State Kind</b></em>', and utility methods for working with
- * them. <!-- end-user-doc -->
- * 
+ * <!-- begin-user-doc -->
+ * A representation of the literals of the enumeration '<em><b>Switch State Kind</b></em>',
+ * and utility methods for working with them.
+ * <!-- end-user-doc -->
  * @see Concept.ConceptPackage#getSwitchStateKind()
  * @model
  * @generated
  */
 public enum SwitchStateKind implements Enumerator {
 	/**
-	 * The '<em><b>Point State Kind FAILURE</b></em>' literal object. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The '<em><b>Point State Kind FAILURE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #POINT_STATE_KIND_FAILURE_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	POINT_STATE_KIND_FAILURE(0, "PointStateKind_FAILURE", "PointStateKind_FAILURE"),
+
 	/**
-	 * The '<em><b>Point State Kind LEFT</b></em>' literal object. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The '<em><b>Point State Kind LEFT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #POINT_STATE_KIND_LEFT_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	POINT_STATE_KIND_LEFT(1, "PointStateKind_LEFT", "PointStateKind_LEFT"),
+
 	/**
-	 * The '<em><b>Point State Kind RIGHT</b></em>' literal object. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The '<em><b>Point State Kind RIGHT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #POINT_STATE_KIND_RIGHT_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	POINT_STATE_KIND_RIGHT(2, "PointStateKind_RIGHT", "PointStateKind_RIGHT"),
+
 	/**
-	 * The '<em><b>Point State Kind STRAIGHT</b></em>' literal object. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The '<em><b>Point State Kind STRAIGHT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #POINT_STATE_KIND_STRAIGHT_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	POINT_STATE_KIND_STRAIGHT(3, "PointStateKind_STRAIGHT", "PointStateKind_STRAIGHT");
+
 	/**
-	 * The '<em><b>Point State Kind FAILURE</b></em>' literal value. <!--
-	 * begin-user-doc -->
+	 * The '<em><b>Point State Kind FAILURE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Point State Kind FAILURE</b></em>' literal
-	 * object isn't clear, there really should be more of a description here...
+	 * If the meaning of '<em><b>Point State Kind FAILURE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #POINT_STATE_KIND_FAILURE
 	 * @model name="PointStateKind_FAILURE"
 	 * @generated
@@ -80,14 +74,13 @@ public enum SwitchStateKind implements Enumerator {
 	public static final int POINT_STATE_KIND_FAILURE_VALUE = 0;
 
 	/**
-	 * The '<em><b>Point State Kind LEFT</b></em>' literal value. <!--
-	 * begin-user-doc -->
+	 * The '<em><b>Point State Kind LEFT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Point State Kind LEFT</b></em>' literal object
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of '<em><b>Point State Kind LEFT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #POINT_STATE_KIND_LEFT
 	 * @model name="PointStateKind_LEFT"
 	 * @generated
@@ -96,14 +89,13 @@ public enum SwitchStateKind implements Enumerator {
 	public static final int POINT_STATE_KIND_LEFT_VALUE = 1;
 
 	/**
-	 * The '<em><b>Point State Kind RIGHT</b></em>' literal value. <!--
-	 * begin-user-doc -->
+	 * The '<em><b>Point State Kind RIGHT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Point State Kind RIGHT</b></em>' literal object
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of '<em><b>Point State Kind RIGHT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #POINT_STATE_KIND_RIGHT
 	 * @model name="PointStateKind_RIGHT"
 	 * @generated
@@ -112,14 +104,13 @@ public enum SwitchStateKind implements Enumerator {
 	public static final int POINT_STATE_KIND_RIGHT_VALUE = 2;
 
 	/**
-	 * The '<em><b>Point State Kind STRAIGHT</b></em>' literal value. <!--
-	 * begin-user-doc -->
+	 * The '<em><b>Point State Kind STRAIGHT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Point State Kind STRAIGHT</b></em>' literal
-	 * object isn't clear, there really should be more of a description here...
+	 * If the meaning of '<em><b>Point State Kind STRAIGHT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #POINT_STATE_KIND_STRAIGHT
 	 * @model name="PointStateKind_STRAIGHT"
 	 * @generated
@@ -128,26 +119,31 @@ public enum SwitchStateKind implements Enumerator {
 	public static final int POINT_STATE_KIND_STRAIGHT_VALUE = 3;
 
 	/**
-	 * An array of all the '<em><b>Switch State Kind</b></em>' enumerators. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * An array of all the '<em><b>Switch State Kind</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final SwitchStateKind[] VALUES_ARRAY = new SwitchStateKind[] { POINT_STATE_KIND_FAILURE, POINT_STATE_KIND_LEFT,
-			POINT_STATE_KIND_RIGHT, POINT_STATE_KIND_STRAIGHT, };
+	private static final SwitchStateKind[] VALUES_ARRAY =
+		new SwitchStateKind[] {
+			POINT_STATE_KIND_FAILURE,
+			POINT_STATE_KIND_LEFT,
+			POINT_STATE_KIND_RIGHT,
+			POINT_STATE_KIND_STRAIGHT,
+		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Switch State Kind</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>Switch State Kind</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final List<SwitchStateKind> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Switch State Kind</b></em>' literal with the
-	 * specified literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Switch State Kind</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static SwitchStateKind get(String literal) {
@@ -161,9 +157,9 @@ public enum SwitchStateKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Switch State Kind</b></em>' literal with the
-	 * specified name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Switch State Kind</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static SwitchStateKind getByName(String name) {
@@ -177,50 +173,46 @@ public enum SwitchStateKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Switch State Kind</b></em>' literal with the
-	 * specified integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Switch State Kind</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static SwitchStateKind get(int value) {
 		switch (value) {
-		case POINT_STATE_KIND_FAILURE_VALUE:
-			return POINT_STATE_KIND_FAILURE;
-		case POINT_STATE_KIND_LEFT_VALUE:
-			return POINT_STATE_KIND_LEFT;
-		case POINT_STATE_KIND_RIGHT_VALUE:
-			return POINT_STATE_KIND_RIGHT;
-		case POINT_STATE_KIND_STRAIGHT_VALUE:
-			return POINT_STATE_KIND_STRAIGHT;
+			case POINT_STATE_KIND_FAILURE_VALUE: return POINT_STATE_KIND_FAILURE;
+			case POINT_STATE_KIND_LEFT_VALUE: return POINT_STATE_KIND_LEFT;
+			case POINT_STATE_KIND_RIGHT_VALUE: return POINT_STATE_KIND_RIGHT;
+			case POINT_STATE_KIND_STRAIGHT_VALUE: return POINT_STATE_KIND_STRAIGHT;
 		}
 		return null;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private SwitchStateKind(int value, String name, String literal) {
@@ -230,40 +222,41 @@ public enum SwitchStateKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public String toString() {
 		return literal;
 	}
-}
+	
+} //SwitchStateKind

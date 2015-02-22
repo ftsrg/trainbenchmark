@@ -19,7 +19,6 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -80,9 +79,7 @@ public class EMFDriver extends DatabaseDriver {
 	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
 		final EObject object = (EObject) vertex;
 
-		final String sourceClassName = WordUtils.capitalizeFully(sourceVertexType);
-
-		final EClass clazz = (EClass) ConceptPackage.eINSTANCE.getEClassifier(sourceClassName);
+		final EClass clazz = (EClass) ConceptPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = clazz.getEStructuralFeature(edgeType);
 		final EReference reference = (EReference) feature;
 		final EReference oppositeReference = reference.getEOpposite();
@@ -126,8 +123,7 @@ public class EMFDriver extends DatabaseDriver {
 		final EObject targetObject = factory.create(targetClass);
 		
 		// set reference to source object
-		final String sourceClassName = WordUtils.capitalizeFully(sourceVertexType);
-		final EClass sourceClass = (EClass) ConceptPackage.eINSTANCE.getEClassifier(sourceClassName);
+		final EClass sourceClass = (EClass) ConceptPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		final EObject sourceObject = (EObject) sourceVertex;
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceObject.eGet(feature);

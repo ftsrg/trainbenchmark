@@ -18,7 +18,7 @@ import java.util.List;
 import Concept.Sensor;
 import Concept.Switch;
 import Concept.SwitchPosition;
-import Concept.Trackelement;
+import Concept.TrackElement;
 
 public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 
@@ -29,7 +29,7 @@ public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Sensor) {
 				final Sensor sensor = (Sensor) eObject;
-				for (final Trackelement te : sensor.getSensor_trackElement()) {
+				for (final TrackElement te : sensor.getSensor_trackElement()) {
 					if (te instanceof Switch) {
 						final Switch aSwitch = (Switch) te;
 						for (final SwitchPosition sp : aSwitch.getSwitch_switchPosition()) {

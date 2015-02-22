@@ -1,22 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
+/**
+ */
 package Concept.impl;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import Concept.ConceptFactory;
 import Concept.ConceptPackage;
@@ -30,102 +14,110 @@ import Concept.Switch;
 import Concept.SwitchPosition;
 import Concept.SwitchStateKind;
 import Concept.Thing;
-import Concept.Trackelement;
+import Concept.TrackElement;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
- * end-user-doc -->
- * 
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Package</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass segmentEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass trackelementEClass = null;
+	private EClass trackElementEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass switchEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass routeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass signalEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass switchPositionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass thingEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass sensorEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass individualContainerEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EEnum signalStateKindEEnum = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EEnum switchStateKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
-	 * package package URI value.
-	 * <p>
-	 * Note: the correct way to create the package is via the static factory
-	 * method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see Concept.ConceptPackage#eNS_URI
 	 * @see #init()
@@ -136,34 +128,29 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model,
-	 * and for any others upon which it depends.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>
-	 * This method is used to initialize {@link ConceptPackage#eINSTANCE} when
-	 * that field is accessed. Clients should not invoke it directly. Instead,
-	 * they should simply access that field to obtain the package. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <p>This method is used to initialize {@link ConceptPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
 	public static ConceptPackage init() {
-		if (isInited)
-			return (ConceptPackage) EPackage.Registry.INSTANCE.getEPackage(ConceptPackage.eNS_URI);
+		if (isInited) return (ConceptPackage)EPackage.Registry.INSTANCE.getEPackage(ConceptPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ConceptPackageImpl theConceptPackage = (ConceptPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ConceptPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new ConceptPackageImpl());
+		ConceptPackageImpl theConceptPackage = (ConceptPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ConceptPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ConceptPackageImpl());
 
 		isInited = true;
 
@@ -176,14 +163,15 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 		// Mark meta-data to indicate it can't be changed
 		theConceptPackage.freeze();
 
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ConceptPackage.eNS_URI, theConceptPackage);
 		return theConceptPackage;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getSegment() {
@@ -191,44 +179,44 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getSegment_Segment_length() {
-		return (EAttribute) segmentEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)segmentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTrackelement() {
-		return trackelementEClass;
+	public EClass getTrackElement() {
+		return trackElementEClass;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTrackelement_TrackElement_sensor() {
-		return (EReference) trackelementEClass.getEStructuralFeatures().get(0);
+	public EReference getTrackElement_TrackElement_sensor() {
+		return (EReference)trackElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTrackelement_TrackElement_connectsTo() {
-		return (EReference) trackelementEClass.getEStructuralFeatures().get(1);
+	public EReference getTrackElement_TrackElement_connectsTo() {
+		return (EReference)trackElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getSwitch() {
@@ -236,26 +224,26 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getSwitch_Switch_actualState() {
-		return (EAttribute) switchEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)switchEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getSwitch_Switch_switchPosition() {
-		return (EReference) switchEClass.getEStructuralFeatures().get(1);
+		return (EReference)switchEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getRoute() {
@@ -263,44 +251,44 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getRoute_Route_entry() {
-		return (EReference) routeEClass.getEStructuralFeatures().get(0);
+		return (EReference)routeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getRoute_Route_switchPosition() {
-		return (EReference) routeEClass.getEStructuralFeatures().get(1);
+		return (EReference)routeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getRoute_Route_exit() {
-		return (EReference) routeEClass.getEStructuralFeatures().get(2);
+		return (EReference)routeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getRoute_Route_routeDefinition() {
-		return (EReference) routeEClass.getEStructuralFeatures().get(3);
+		return (EReference)routeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getSignal() {
@@ -308,17 +296,17 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getSignal_Signal_actualState() {
-		return (EAttribute) signalEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)signalEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getSwitchPosition() {
@@ -326,35 +314,35 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getSwitchPosition_SwitchPosition_switch() {
-		return (EReference) switchPositionEClass.getEStructuralFeatures().get(0);
+		return (EReference)switchPositionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getSwitchPosition_SwitchPosition_switchState() {
-		return (EAttribute) switchPositionEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)switchPositionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getSwitchPosition_SwitchPosition_route() {
-		return (EReference) switchPositionEClass.getEStructuralFeatures().get(2);
+		return (EReference)switchPositionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getThing() {
@@ -362,8 +350,8 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getSensor() {
@@ -371,17 +359,17 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getSensor_Sensor_trackElement() {
-		return (EReference) sensorEClass.getEStructuralFeatures().get(0);
+		return (EReference)sensorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getIndividualContainer() {
@@ -389,17 +377,17 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getIndividualContainer_Contains() {
-		return (EReference) individualContainerEClass.getEStructuralFeatures().get(0);
+		return (EReference)individualContainerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EEnum getSignalStateKind() {
@@ -407,8 +395,8 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EEnum getSwitchStateKind() {
@@ -416,40 +404,39 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ConceptFactory getConceptFactory() {
-		return (ConceptFactory) getEFactoryInstance();
+		return (ConceptFactory)getEFactoryInstance();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated)
-			return;
+		if (isCreated) return;
 		isCreated = true;
 
 		// Create classes and their features
 		segmentEClass = createEClass(SEGMENT);
 		createEAttribute(segmentEClass, SEGMENT__SEGMENT_LENGTH);
 
-		trackelementEClass = createEClass(TRACKELEMENT);
-		createEReference(trackelementEClass, TRACKELEMENT__TRACK_ELEMENT_SENSOR);
-		createEReference(trackelementEClass, TRACKELEMENT__TRACK_ELEMENT_CONNECTS_TO);
+		trackElementEClass = createEClass(TRACK_ELEMENT);
+		createEReference(trackElementEClass, TRACK_ELEMENT__TRACK_ELEMENT_SENSOR);
+		createEReference(trackElementEClass, TRACK_ELEMENT__TRACK_ELEMENT_CONNECTS_TO);
 
 		switchEClass = createEClass(SWITCH);
 		createEAttribute(switchEClass, SWITCH__SWITCH_ACTUAL_STATE);
@@ -483,22 +470,21 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isInitialized = false;
 
 	/**
-	 * Complete the initialization of the package and its meta-model. This
-	 * method is guarded to have no affect on any invocation but its first. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized)
-			return;
+		if (isInitialized) return;
 		isInitialized = true;
 
 		// Initialize package
@@ -511,9 +497,9 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		segmentEClass.getESuperTypes().add(this.getTrackelement());
-		trackelementEClass.getESuperTypes().add(this.getThing());
-		switchEClass.getESuperTypes().add(this.getTrackelement());
+		segmentEClass.getESuperTypes().add(this.getTrackElement());
+		trackElementEClass.getESuperTypes().add(this.getThing());
+		switchEClass.getESuperTypes().add(this.getTrackElement());
 		routeEClass.getESuperTypes().add(this.getThing());
 		signalEClass.getESuperTypes().add(this.getThing());
 		switchPositionEClass.getESuperTypes().add(this.getThing());
@@ -521,63 +507,37 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(segmentEClass, Segment.class, "Segment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSegment_Segment_length(), ecorePackage.getEInt(), "Segment_length", null, 1, 1, Segment.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSegment_Segment_length(), ecorePackage.getEInt(), "Segment_length", null, 1, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(trackelementEClass, Trackelement.class, "Trackelement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTrackelement_TrackElement_sensor(), this.getSensor(), this.getSensor_Sensor_trackElement(),
-				"TrackElement_sensor", null, 0, -1, Trackelement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrackelement_TrackElement_connectsTo(), this.getTrackelement(), null, "TrackElement_connectsTo", null, 0, -1,
-				Trackelement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(trackElementEClass, TrackElement.class, "TrackElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTrackElement_TrackElement_sensor(), this.getSensor(), this.getSensor_Sensor_trackElement(), "TrackElement_sensor", null, 0, -1, TrackElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrackElement_TrackElement_connectsTo(), this.getTrackElement(), null, "TrackElement_connectsTo", null, 0, -1, TrackElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchEClass, Switch.class, "Switch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSwitch_Switch_actualState(), this.getSwitchStateKind(), "Switch_actualState", null, 1, 1, Switch.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSwitch_Switch_switchPosition(), this.getSwitchPosition(), this.getSwitchPosition_SwitchPosition_switch(),
-				"Switch_switchPosition", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwitch_Switch_actualState(), this.getSwitchStateKind(), "Switch_actualState", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitch_Switch_switchPosition(), this.getSwitchPosition(), this.getSwitchPosition_SwitchPosition_switch(), "Switch_switchPosition", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRoute_Route_entry(), this.getSignal(), null, "Route_entry", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoute_Route_switchPosition(), this.getSwitchPosition(), this.getSwitchPosition_SwitchPosition_route(),
-				"Route_switchPosition", null, 0, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoute_Route_exit(), this.getSignal(), null, "Route_exit", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoute_Route_routeDefinition(), this.getSensor(), null, "Route_routeDefinition", null, 2, -1, Route.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEReference(getRoute_Route_entry(), this.getSignal(), null, "Route_entry", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoute_Route_switchPosition(), this.getSwitchPosition(), this.getSwitchPosition_SwitchPosition_route(), "Route_switchPosition", null, 0, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoute_Route_exit(), this.getSignal(), null, "Route_exit", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoute_Route_routeDefinition(), this.getSensor(), null, "Route_routeDefinition", null, 2, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSignal_Signal_actualState(), this.getSignalStateKind(), "Signal_actualState", null, 1, 1, Signal.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSignal_Signal_actualState(), this.getSignalStateKind(), "Signal_actualState", null, 1, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchPositionEClass, SwitchPosition.class, "SwitchPosition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSwitchPosition_SwitchPosition_switch(), this.getSwitch(), this.getSwitch_Switch_switchPosition(),
-				"SwitchPosition_switch", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSwitchPosition_SwitchPosition_switchState(), this.getSwitchStateKind(), "SwitchPosition_switchState", null, 1, 1,
-				SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getSwitchPosition_SwitchPosition_route(), this.getRoute(), this.getRoute_Route_switchPosition(),
-				"SwitchPosition_route", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitchPosition_SwitchPosition_switch(), this.getSwitch(), this.getSwitch_Switch_switchPosition(), "SwitchPosition_switch", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwitchPosition_SwitchPosition_switchState(), this.getSwitchStateKind(), "SwitchPosition_switchState", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitchPosition_SwitchPosition_route(), this.getRoute(), this.getRoute_Route_switchPosition(), "SwitchPosition_route", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(thingEClass, Thing.class, "Thing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSensor_Sensor_trackElement(), this.getTrackelement(), this.getTrackelement_TrackElement_sensor(),
-				"Sensor_trackElement", null, 0, -1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSensor_Sensor_trackElement(), this.getTrackElement(), this.getTrackElement_TrackElement_sensor(), "Sensor_trackElement", null, 0, -1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(individualContainerEClass, IndividualContainer.class, "IndividualContainer", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIndividualContainer_Contains(), this.getThing(), null, "contains", null, 0, -1, IndividualContainer.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(individualContainerEClass, IndividualContainer.class, "IndividualContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIndividualContainer_Contains(), this.getThing(), null, "contains", null, 0, -1, IndividualContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(signalStateKindEEnum, SignalStateKind.class, "SignalStateKind");
@@ -595,4 +555,4 @@ public class ConceptPackageImpl extends EPackageImpl implements ConceptPackage {
 		createResource(eNS_URI);
 	}
 
-} // ConceptPackageImpl
+} //ConceptPackageImpl

@@ -1,67 +1,48 @@
-/*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
+/**
+ */
 package Concept.impl;
 
 import Concept.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import Concept.ConceptFactory;
-import Concept.ConceptPackage;
-import Concept.IndividualContainer;
-import Concept.Route;
-import Concept.Segment;
-import Concept.Sensor;
-import Concept.Signal;
-import Concept.SignalStateKind;
-import Concept.Switch;
-import Concept.SwitchPosition;
-import Concept.SwitchStateKind;
-import Concept.Thing;
-import Concept.Trackelement;
-
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
- * end-user-doc -->
- * 
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ConceptFactory init() {
 		try {
-			ConceptFactory theConceptFactory = (ConceptFactory) EPackage.Registry.INSTANCE.getEFactory(ConceptPackage.eNS_URI);
+			ConceptFactory theConceptFactory = (ConceptFactory)EPackage.Registry.INSTANCE.getEFactory(ConceptPackage.eNS_URI);
 			if (theConceptFactory != null) {
 				return theConceptFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ConceptFactoryImpl();
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ConceptFactoryImpl() {
@@ -69,73 +50,64 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case ConceptPackage.SEGMENT:
-			return createSegment();
-		case ConceptPackage.TRACKELEMENT:
-			return createTrackelement();
-		case ConceptPackage.SWITCH:
-			return createSwitch();
-		case ConceptPackage.ROUTE:
-			return createRoute();
-		case ConceptPackage.SIGNAL:
-			return createSignal();
-		case ConceptPackage.SWITCH_POSITION:
-			return createSwitchPosition();
-		case ConceptPackage.THING:
-			return createThing();
-		case ConceptPackage.SENSOR:
-			return createSensor();
-		case ConceptPackage.INDIVIDUAL_CONTAINER:
-			return createIndividualContainer();
-		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			case ConceptPackage.SEGMENT: return createSegment();
+			case ConceptPackage.TRACK_ELEMENT: return createTrackElement();
+			case ConceptPackage.SWITCH: return createSwitch();
+			case ConceptPackage.ROUTE: return createRoute();
+			case ConceptPackage.SIGNAL: return createSignal();
+			case ConceptPackage.SWITCH_POSITION: return createSwitchPosition();
+			case ConceptPackage.THING: return createThing();
+			case ConceptPackage.SENSOR: return createSensor();
+			case ConceptPackage.INDIVIDUAL_CONTAINER: return createIndividualContainer();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-		case ConceptPackage.SIGNAL_STATE_KIND:
-			return createSignalStateKindFromString(eDataType, initialValue);
-		case ConceptPackage.SWITCH_STATE_KIND:
-			return createSwitchStateKindFromString(eDataType, initialValue);
-		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			case ConceptPackage.SIGNAL_STATE_KIND:
+				return createSignalStateKindFromString(eDataType, initialValue);
+			case ConceptPackage.SWITCH_STATE_KIND:
+				return createSwitchStateKindFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-		case ConceptPackage.SIGNAL_STATE_KIND:
-			return convertSignalStateKindToString(eDataType, instanceValue);
-		case ConceptPackage.SWITCH_STATE_KIND:
-			return convertSwitchStateKindToString(eDataType, instanceValue);
-		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			case ConceptPackage.SIGNAL_STATE_KIND:
+				return convertSignalStateKindToString(eDataType, instanceValue);
+			case ConceptPackage.SWITCH_STATE_KIND:
+				return convertSwitchStateKindToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Segment createSegment() {
@@ -144,18 +116,18 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Trackelement createTrackelement() {
-		TrackelementImpl trackelement = new TrackelementImpl();
-		return trackelement;
+	public TrackElement createTrackElement() {
+		TrackElementImpl trackElement = new TrackElementImpl();
+		return trackElement;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Switch createSwitch() {
@@ -164,8 +136,8 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Route createRoute() {
@@ -174,8 +146,8 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Signal createSignal() {
@@ -184,8 +156,8 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public SwitchPosition createSwitchPosition() {
@@ -194,8 +166,8 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Thing createThing() {
@@ -204,8 +176,8 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Sensor createSensor() {
@@ -214,8 +186,8 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public IndividualContainer createIndividualContainer() {
@@ -224,21 +196,19 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public SignalStateKind createSignalStateKindFromString(EDataType eDataType, String initialValue) {
 		SignalStateKind result = SignalStateKind.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String convertSignalStateKindToString(EDataType eDataType, Object instanceValue) {
@@ -246,21 +216,19 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public SwitchStateKind createSwitchStateKindFromString(EDataType eDataType, String initialValue) {
 		SwitchStateKind result = SwitchStateKind.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String convertSwitchStateKindToString(EDataType eDataType, Object instanceValue) {
@@ -268,17 +236,17 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ConceptPackage getConceptPackage() {
-		return (ConceptPackage) getEPackage();
+		return (ConceptPackage)getEPackage();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
@@ -287,4 +255,4 @@ public class ConceptFactoryImpl extends EFactoryImpl implements ConceptFactory {
 		return ConceptPackage.eINSTANCE;
 	}
 
-} // ConceptFactoryImpl
+} //ConceptFactoryImpl
