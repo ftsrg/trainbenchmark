@@ -33,7 +33,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_YIyFQ1PbEeCLuajbZvk0sQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_YIw3I1PbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="Metamodel.ecore#//Trackelement"/>
+    <element xmi:type="ecore:EClass" href="Metamodel.ecore#//TrackElement"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YIw3JFPbEeCLuajbZvk0sQ" x="915" y="195"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_YIyFRFPbEeCLuajbZvk0sQ" type="1001">
@@ -197,7 +197,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_YJAuwVPbEeCLuajbZvk0sQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_YJAuwlPbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="Metamodel.ecore#//Trackelement/TrackElement_sensor"/>
+    <element xmi:type="ecore:EReference" href="Metamodel.ecore#//TrackElement/TrackElement_sensor"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_YJAuw1PbEeCLuajbZvk0sQ" points="[0, 0, 4, 129]$[-13, -65, -9, 64]$[-13, -129, -9, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tSmXgFVjEeCO0NYhpg8Zfg" id="(0.660377358490566,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tSmXgVVjEeCO0NYhpg8Zfg" id="(0.7450980392156863,1.0)"/>
@@ -331,7 +331,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_kRxYon5rEeGvq55Z97hjcg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_kRxYo35rEeGvq55Z97hjcg" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="Metamodel.ecore#//Trackelement/TrackElement_connectsTo"/>
+    <element xmi:type="ecore:EReference" href="Metamodel.ecore#//TrackElement/TrackElement_connectsTo"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_kRxYpH5rEeGvq55Z97hjcg" points="[9, 10, -6, 33]$[9, 45, -6, 68]$[60, 45, 45, 68]$[60, -17, 45, 6]$[21, -17, 6, 6]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kSCeYH5rEeGvq55Z97hjcg" id="(0.8157894736842105,0.7619047619047619)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kSCeYX5rEeGvq55Z97hjcg" id="(0.9473684210526315,0.19047619047619047)"/>

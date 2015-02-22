@@ -2,17 +2,17 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Concept" nsURI="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl"
     nsPrefix="Concept">
-  <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//Trackelement">
+  <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//TrackElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Segment_length" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Trackelement" eSuperTypes="#//Thing">
+  <eClassifiers xsi:type="ecore:EClass" name="TrackElement" eSuperTypes="#//Thing">
     <eStructuralFeatures xsi:type="ecore:EReference" name="TrackElement_sensor" upperBound="-1"
         eType="#//Sensor" eOpposite="#//Sensor/Sensor_trackElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="TrackElement_connectsTo"
-        upperBound="-1" eType="#//Trackelement"/>
+        upperBound="-1" eType="#//TrackElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Switch" eSuperTypes="#//Trackelement">
+  <eClassifiers xsi:type="ecore:EClass" name="Switch" eSuperTypes="#//TrackElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Switch_actualState" lowerBound="1"
         eType="#//SwitchStateKind"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Switch_switchPosition"
@@ -43,7 +43,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Thing"/>
   <eClassifiers xsi:type="ecore:EClass" name="Sensor" eSuperTypes="#//Thing">
     <eStructuralFeatures xsi:type="ecore:EReference" name="Sensor_trackElement" upperBound="-1"
-        eType="#//Trackelement" eOpposite="#//Trackelement/TrackElement_sensor"/>
+        eType="#//TrackElement" eOpposite="#//TrackElement/TrackElement_sensor"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SignalStateKind">
     <eLiterals name="SignalStateKind_STOP"/>

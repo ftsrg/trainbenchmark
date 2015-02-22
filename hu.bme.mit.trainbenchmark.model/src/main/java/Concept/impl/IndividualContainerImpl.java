@@ -1,48 +1,43 @@
-/*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
+/**
+ */
 package Concept.impl;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import Concept.ConceptPackage;
 import Concept.IndividualContainer;
 import Concept.Thing;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Individual Container</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Individual Container</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link Concept.impl.IndividualContainerImpl#getContains <em>Contains
- * </em>}</li>
+ *   <li>{@link Concept.impl.IndividualContainerImpl#getContains <em>Contains</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class IndividualContainerImpl extends EObjectImpl implements IndividualContainer {
 	/**
-	 * The cached value of the '{@link #getContains() <em>Contains</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getContains() <em>Contains</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getContains()
 	 * @generated
 	 * @ordered
@@ -50,8 +45,8 @@ public class IndividualContainerImpl extends EObjectImpl implements IndividualCo
 	protected EList<Thing> contains;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected IndividualContainerImpl() {
@@ -59,8 +54,8 @@ public class IndividualContainerImpl extends EObjectImpl implements IndividualCo
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -69,8 +64,8 @@ public class IndividualContainerImpl extends EObjectImpl implements IndividualCo
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<Thing> getContains() {
@@ -81,77 +76,77 @@ public class IndividualContainerImpl extends EObjectImpl implements IndividualCo
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
-			return ((InternalEList<?>) getContains()).basicRemove(otherEnd, msgs);
+			case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+				return ((InternalEList<?>)getContains()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
-			return getContains();
+			case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+				return getContains();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
-			getContains().clear();
-			getContains().addAll((Collection<? extends Thing>) newValue);
-			return;
+			case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+				getContains().clear();
+				getContains().addAll((Collection<? extends Thing>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
-			getContains().clear();
-			return;
+			case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+				getContains().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
-			return contains != null && !contains.isEmpty();
+			case ConceptPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+				return contains != null && !contains.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} // IndividualContainerImpl
+} //IndividualContainerImpl
