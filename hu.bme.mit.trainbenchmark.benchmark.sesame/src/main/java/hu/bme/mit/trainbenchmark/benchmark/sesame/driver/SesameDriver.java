@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameData;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -90,15 +90,11 @@ public class SesameDriver extends DatabaseDriver {
 		try {
 			// insert edge
 			final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
-			final SesameData edgeData = new SesameData();
-			edgeData.setStatement(edgeStatement);
-			con.add(edgeData.getStatement());
+			con.add(edgeStatement);
 
 			// set vertex type
 			final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
-			final SesameData typeData = new SesameData();
-			typeData.setStatement(typeStatement);
-			con.add(typeData.getStatement());
+			con.add(typeStatement);
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
@@ -120,7 +116,7 @@ public class SesameDriver extends DatabaseDriver {
 	}
 
 	public void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) throws IOException {
-		final List<SesameData> itemsToRemove = new ArrayList<SesameData>();
+		final List<Statement> itemsToRemove = new ArrayList<>();
 
 		final URI edge = f.createURI(basePrefix + edgeType);
 		final URI nodeURI = (URI) vertex;
@@ -135,9 +131,7 @@ public class SesameDriver extends DatabaseDriver {
 			while (statementsToRemove.hasNext()) {
 				final Statement s = statementsToRemove.next();
 				
-				final SesameData jd = new SesameData();
-				jd.setStatement(s);
-				itemsToRemove.add(jd);
+				itemsToRemove.add(s);
 
 				// break if we only want to delete one edge
 				if (!all) {
@@ -145,8 +139,8 @@ public class SesameDriver extends DatabaseDriver {
 				}
 			}
 
-			for (final SesameData jd : itemsToRemove) {
-				con.remove(jd.getStatement());
+			for (final Statement s : itemsToRemove) {
+				con.remove(s);
 			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
@@ -157,20 +151,26 @@ public class SesameDriver extends DatabaseDriver {
 	public void updateProperty(final Object vertex, final String propertyName, final AttributeOperation attributeOperation)
 			throws IOException {
 		try {
-			final URI nodeURI = (URI) vertex;
+			final URI vertexURI = (URI) vertex;
+			final URI typeURI = f.createURI(basePrefix + propertyName);
+			final RepositoryResult<Statement> statementsToRemove = con.getStatements(vertexURI, typeURI, null, true);
 
-			final URI propertyURI = f.createURI(basePrefix + propertyName);
-			final SesameData jd = new SesameData();
-			final RepositoryResult<Statement> statementsToRemove = con.getStatements(nodeURI, propertyURI, null, true);
-			jd.setStatements(statementsToRemove.asList());
-			final IntegerMemLiteral integerMemLiteral = (IntegerMemLiteral) jd.getStatements().get(0).getObject();
+			if (!statementsToRemove.hasNext()) {
+				throw new IOException("Property " + propertyName + " not found.");
+			}
+
+			final Statement statement = statementsToRemove.next();
+			con.remove(statement);
+			while (statementsToRemove.hasNext()) {
+				con.remove(statementsToRemove.next());
+			} 
+
+			// get the object of the first removed statement
+			final IntegerMemLiteral integerMemLiteral = (IntegerMemLiteral) statement.getObject();
 			final Integer currentValue = new Integer(integerMemLiteral.stringValue());
-			jd.setResource(nodeURI);
-			jd.setUri(propertyURI);
-			jd.setLiteral(f.createLiteral(attributeOperation.op(currentValue)));
+			final Literal literal = f.createLiteral(attributeOperation.op(currentValue));
 
-			con.remove(jd.getStatements());
-			con.add(jd.getResource(), jd.getUri(), jd.getLiteral());
+			con.add(vertexURI, typeURI, literal);
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
