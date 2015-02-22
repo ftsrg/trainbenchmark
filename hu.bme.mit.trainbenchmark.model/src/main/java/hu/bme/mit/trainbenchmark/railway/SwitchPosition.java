@@ -21,7 +21,7 @@ package hu.bme.mit.trainbenchmark.railway;
  * @model
  * @generated
  */
-public interface SwitchPosition extends Thing {
+public interface SwitchPosition extends RailwayElement {
 	/**
 	 * Returns the value of the '<em><b>Switch Position switch</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_switchPosition <em>Switch switch Position</em>}'.

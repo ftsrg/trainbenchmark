@@ -19,7 +19,7 @@
 //import java.util.List;
 //
 //import hu.bme.mit.trainbenchmark.ConceptFactory;
-//import hu.bme.mit.trainbenchmark.IndividualContainer;
+//import hu.bme.mit.trainbenchmark.RailwayContainer;
 //import hu.bme.mit.trainbenchmark.Route;
 //import hu.bme.mit.trainbenchmark.Segment;
 //import hu.bme.mit.trainbenchmark.Sensor;
@@ -31,12 +31,12 @@
 //	// User
 //	// ------------------------------------------------------------------------------------------
 //
-//	public static void modifyEMFmodelPosLength(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
+//	public static void modifyEMFmodelPosLength(final RailwayContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 //		// modify
 //		final List<Segment> segments = new ArrayList<Segment>();
-//		for (final Object thing : pack.getContains()) {
-//			if (thing instanceof Segment) {
-//				segments.add((Segment) thing);
+//		for (final Object RailwayElement : pack.getContains()) {
+//			if (RailwayElement instanceof Segment) {
+//				segments.add((Segment) RailwayElement);
 //			}
 //		}
 //		final List<Segment> itemsToModify = Transformation.pickRandom(nElemToModify, segments);
@@ -47,12 +47,12 @@
 //		}
 //	}
 //
-//	public static void modifyEMFmodelRouteSensor(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
+//	public static void modifyEMFmodelRouteSensor(final RailwayContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 //		// modify
 //		final List<Route> routes = new ArrayList<Route>();
-//		for (final Object thing : pack.getContains()) {
-//			if (thing instanceof Route) {
-//				routes.add((Route) thing);
+//		for (final Object RailwayElement : pack.getContains()) {
+//			if (RailwayElement instanceof Route) {
+//				routes.add((Route) RailwayElement);
 //			}
 //		}
 //		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
@@ -65,11 +65,11 @@
 //		}
 //	}
 //
-//	public static void modifyEMFmodelSwitchSensor(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
+//	public static void modifyEMFmodelSwitchSensor(final RailwayContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 //		final List<Switch> switches = new ArrayList<Switch>();
-//		for (final Object thing : pack.getContains()) {
-//			if (thing instanceof Switch) {
-//				switches.add((Switch) thing);
+//		for (final Object RailwayElement : pack.getContains()) {
+//			if (RailwayElement instanceof Switch) {
+//				switches.add((Switch) RailwayElement);
 //			}
 //		}
 //		final List<Switch> itemsToModify = Transformation.pickRandom(nElemToModify, switches);
@@ -82,12 +82,12 @@
 //		}
 //	}
 //
-//	public static void modifyEMFmodelSignalNeighbor(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
+//	public static void modifyEMFmodelSignalNeighbor(final RailwayContainer pack, final BenchmarkResult bmr, final long nElemToModify) {
 //		// modify
 //		final List<Route> routes = new ArrayList<Route>();
-//		for (final Object thing : pack.getContains()) {
-//			if (thing instanceof Route) {
-//				routes.add((Route) thing);
+//		for (final Object RailwayElement : pack.getContains()) {
+//			if (RailwayElement instanceof Route) {
+//				routes.add((Route) RailwayElement);
 //			}
 //		}
 //		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, routes);
@@ -102,7 +102,7 @@
 //	// XForm
 //	// ------------------------------------------------------------------------------------------
 //
-//	public static void modifyEMFmodelPosLengthRepair(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify,
+//	public static void modifyEMFmodelPosLengthRepair(final RailwayContainer pack, final BenchmarkResult bmr, final long nElemToModify,
 //			final List<Segment> invalids) {
 //		// modify
 //		final List<Segment> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
@@ -113,7 +113,7 @@
 //		}
 //	}
 //
-//	public static void modifyEMFmodelRouteSensorRepair(final IndividualContainer pack, final BenchmarkResult bmr, final long nElemToModify,
+//	public static void modifyEMFmodelRouteSensorRepair(final RailwayContainer pack, final BenchmarkResult bmr, final long nElemToModify,
 //			final List<Sensor> invalids) {
 //		// modify
 //		final List<Sensor> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
@@ -124,7 +124,7 @@
 //		}
 //	}
 //
-//	public static void modifyEMFmodelSwitchSensorRepair(final IndividualContainer pack, final BenchmarkResult bmr,
+//	public static void modifyEMFmodelSwitchSensorRepair(final RailwayContainer pack, final BenchmarkResult bmr,
 //			final long nElemToModify, final List<Switch> invalids) {
 //		// modify
 //		final List<Switch> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
@@ -138,7 +138,7 @@
 //		}
 //	}
 //
-//	public static void modifyEMFmodelSignalNeighborRepair(final IndividualContainer pack, final BenchmarkResult bmr,
+//	public static void modifyEMFmodelSignalNeighborRepair(final RailwayContainer pack, final BenchmarkResult bmr,
 //			final long nElemToModify, final List<Route> invalids) {
 //		// modify
 //		final List<Route> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);

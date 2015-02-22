@@ -14,11 +14,11 @@ package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.railway.IndividualContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 
 public abstract class JavaBenchmarkCase<T> extends AbstractTransformationBenchmarkCase<T> {
 
-	protected IndividualContainer pack;
+	protected RailwayContainer pack;
 	
 	@Override
 	public void load() {

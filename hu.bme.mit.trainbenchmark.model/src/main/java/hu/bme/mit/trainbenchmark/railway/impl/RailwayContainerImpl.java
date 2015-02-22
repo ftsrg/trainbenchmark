@@ -2,9 +2,9 @@
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
 
-import hu.bme.mit.trainbenchmark.railway.IndividualContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Thing;
 
 import java.util.Collection;
 
@@ -22,18 +22,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Individual Container</b></em>'.
+ * An implementation of the model object '<em><b>Container</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.IndividualContainerImpl#getContains <em>Contains</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getContains <em>Contains</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class IndividualContainerImpl extends MinimalEObjectImpl.Container implements IndividualContainer {
+public class RailwayContainerImpl extends MinimalEObjectImpl.Container implements RailwayContainer {
 	/**
 	 * The cached value of the '{@link #getContains() <em>Contains</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -42,14 +42,14 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Thing> contains;
+	protected EList<RailwayElement> contains;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IndividualContainerImpl() {
+	protected RailwayContainerImpl() {
 		super();
 	}
 
@@ -60,7 +60,7 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return RailwayPackage.Literals.INDIVIDUAL_CONTAINER;
+		return RailwayPackage.Literals.RAILWAY_CONTAINER;
 	}
 
 	/**
@@ -68,9 +68,9 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Thing> getContains() {
+	public EList<RailwayElement> getContains() {
 		if (contains == null) {
-			contains = new EObjectContainmentEList<Thing>(Thing.class, this, RailwayPackage.INDIVIDUAL_CONTAINER__CONTAINS);
+			contains = new EObjectContainmentEList<RailwayElement>(RailwayElement.class, this, RailwayPackage.RAILWAY_CONTAINER__CONTAINS);
 		}
 		return contains;
 	}
@@ -83,7 +83,7 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RailwayPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+			case RailwayPackage.RAILWAY_CONTAINER__CONTAINS:
 				return ((InternalEList<?>)getContains()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -97,7 +97,7 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RailwayPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+			case RailwayPackage.RAILWAY_CONTAINER__CONTAINS:
 				return getContains();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,9 +112,9 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RailwayPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+			case RailwayPackage.RAILWAY_CONTAINER__CONTAINS:
 				getContains().clear();
-				getContains().addAll((Collection<? extends Thing>)newValue);
+				getContains().addAll((Collection<? extends RailwayElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,7 +128,7 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+			case RailwayPackage.RAILWAY_CONTAINER__CONTAINS:
 				getContains().clear();
 				return;
 		}
@@ -143,10 +143,10 @@ public class IndividualContainerImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.INDIVIDUAL_CONTAINER__CONTAINS:
+			case RailwayPackage.RAILWAY_CONTAINER__CONTAINS:
 				return contains != null && !contains.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //IndividualContainerImpl
+} //RailwayContainerImpl

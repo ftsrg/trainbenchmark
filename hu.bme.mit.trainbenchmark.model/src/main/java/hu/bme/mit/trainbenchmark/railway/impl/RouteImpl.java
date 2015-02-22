@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class RouteImpl extends ThingImpl implements Route {
+public class RouteImpl extends RailwayElementImpl implements Route {
 	/**
 	 * The cached value of the '{@link #getRoute_entry() <em>Route entry</em>}' reference.
 	 * <!-- begin-user-doc -->

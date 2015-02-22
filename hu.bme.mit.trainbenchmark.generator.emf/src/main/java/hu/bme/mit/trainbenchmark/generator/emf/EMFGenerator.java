@@ -19,10 +19,10 @@ import hu.bme.mit.trainbenchmark.emf.EMFUtil;
 import hu.bme.mit.trainbenchmark.emf.FileBroker;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.emf.config.EMFGeneratorConfig;
-import hu.bme.mit.trainbenchmark.railway.IndividualContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Thing;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,7 +53,7 @@ public class EMFGenerator extends Generator {
 	protected EMFGeneratorConfig emfGeneratorConfig;
 	protected Resource resource;
 	protected RailwayFactory factory;
-	protected IndividualContainer cont;
+	protected RailwayContainer cont;
 
 	@Override
 	public void initModel() {
@@ -73,7 +73,7 @@ public class EMFGenerator extends Generator {
 		resource.getContents().clear();
 
 		factory = RailwayFactory.eINSTANCE;
-		cont = factory.createIndividualContainer();
+		cont = factory.createRailwayContainer();
 		resource.getContents().add(cont);
 	}
 
@@ -86,21 +86,21 @@ public class EMFGenerator extends Generator {
 	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		final Thing thing = (Thing) RailwayFactory.eINSTANCE.create(clazz);
+		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			setAttribute(clazz, thing, attribute.getKey(), attribute.getValue());
+			setAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
 		}
-		cont.getContains().add(thing);
+		cont.getContains().add(railwayElement);
 
 		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
-			createEdge(outgoingEdge.getKey(), thing, outgoingEdge.getValue());
+			createEdge(outgoingEdge.getKey(), railwayElement, outgoingEdge.getValue());
 		}
 
 		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
-			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), thing);
+			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), railwayElement);
 		}
 
-		return thing;
+		return railwayElement;
 	}
 
 	@Override
@@ -123,10 +123,10 @@ public class EMFGenerator extends Generator {
 	@Override
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		setAttribute(clazz, (Thing) node, key, value);
+		setAttribute(clazz, (RailwayElement) node, key, value);
 	}
 
-	protected void setAttribute(final EClass clazz, final Thing node, final String key, Object value) {
+	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
 		// change the enum value from the
 		// hu.bme.mit.trainbenchmark.constants.SignalStateKind enum to the
 		// hu.bme.mit.trainbenchmark.SignalStateKind enum

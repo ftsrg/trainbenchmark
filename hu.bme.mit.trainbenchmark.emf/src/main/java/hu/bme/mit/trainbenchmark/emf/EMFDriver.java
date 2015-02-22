@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.emf;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.railway.IndividualContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Thing;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
 import java.util.AbstractList;
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class EMFDriver extends DatabaseDriver {
 
-	protected IndividualContainer pack;
+	protected RailwayContainer pack;
 	protected Resource resource; 
 	
 	public EMFDriver(final String modelPath) {
@@ -45,8 +45,8 @@ public class EMFDriver extends DatabaseDriver {
 		final ResourceSet resourceSet = new ResourceSetImpl();
 		resource = resourceSet.getResource(resourceURI, true);
 
-		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof IndividualContainer) {
-			pack = (IndividualContainer) resource.getContents().get(0);
+		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
+			pack = (RailwayContainer) resource.getContents().get(0);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class EMFDriver extends DatabaseDriver {
 		final List<EObject> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		for (final Thing t : pack.getContains()) {
+		for (final RailwayElement t : pack.getContains()) {
 			// if t's type is a descendant of clazz
 			if (clazz.isSuperTypeOf(t.eClass())) {
 				vertices.add(t);
@@ -129,7 +129,7 @@ public class EMFDriver extends DatabaseDriver {
 		references.add(targetObject);		
 	}
 
-	public IndividualContainer getRoot() {
+	public RailwayContainer getRoot() {
 		return pack;
 	}
 

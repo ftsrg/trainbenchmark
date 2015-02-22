@@ -76,13 +76,13 @@ public interface RailwayFactory extends EFactory {
 	SwitchPosition createSwitchPosition();
 
 	/**
-	 * Returns a new object of class '<em>Thing</em>'.
+	 * Returns a new object of class '<em>Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Thing</em>'.
+	 * @return a new object of class '<em>Element</em>'.
 	 * @generated
 	 */
-	Thing createThing();
+	RailwayElement createRailwayElement();
 
 	/**
 	 * Returns a new object of class '<em>Sensor</em>'.
@@ -94,13 +94,13 @@ public interface RailwayFactory extends EFactory {
 	Sensor createSensor();
 
 	/**
-	 * Returns a new object of class '<em>Individual Container</em>'.
+	 * Returns a new object of class '<em>Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Individual Container</em>'.
+	 * @return a new object of class '<em>Container</em>'.
 	 * @generated
 	 */
-	IndividualContainer createIndividualContainer();
+	RailwayContainer createRailwayContainer();
 
 	/**
 	 * Returns the package supported by this factory.
