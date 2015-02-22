@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import Concept.IndividualContainer;
+import hu.bme.mit.trainbenchmark.railway.IndividualContainer;
 
 public abstract class JavaBenchmarkCase<T> extends AbstractTransformationBenchmarkCase<T> {
 

@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.TrainBenchmark.IndividualContainer;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryCommon;
@@ -32,9 +33,6 @@ import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-import Concept.ConceptPackage;
-import Concept.IndividualContainer;
-
 public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 
 	protected BenchmarkResult bmr;
@@ -47,11 +45,6 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 
 	protected IncQueryDeltaMonitor<T> incqueryDeltaMonitor;	
 	
-	@Override
-	public String getTool() {
-		return "EMF-IncQuery";
-	}
-
 	@Override
 	public String getName() {
 		return "EMFIncQuery";

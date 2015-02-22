@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import Concept.Segment;
+import hu.bme.mit.trainbenchmark.Segment;
 
 public class PosLength extends Drools6BenchmarkCase<Segment> {
 

@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import Concept.Switch;
+import hu.bme.mit.trainbenchmark.Switch;
 
 public class SwitchSensor extends Drools6BenchmarkCase<Switch> {
 

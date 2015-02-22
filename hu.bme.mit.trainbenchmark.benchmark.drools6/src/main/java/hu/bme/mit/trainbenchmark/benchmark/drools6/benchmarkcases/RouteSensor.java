@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import Concept.Sensor;
+import hu.bme.mit.trainbenchmark.Sensor;
 
 public class RouteSensor extends Drools6BenchmarkCase<Sensor> {
 

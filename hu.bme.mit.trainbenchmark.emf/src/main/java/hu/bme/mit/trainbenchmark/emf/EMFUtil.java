@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 public class EMFUtil {
 	public static void registerUUIDXMIResourceFactory() {
-		// Register the XMI resource factory for the .concept extension
-		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-		Map<String, Object> m = reg.getExtensionToFactoryMap();
-		m.put("concept", new XMIResourceFactoryImplWithUUID());
+		// register the XMI resource factory for the .emf extension
+		final Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		final Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("emf", new XMIResourceFactoryImplWithUUID());
 	}
 }

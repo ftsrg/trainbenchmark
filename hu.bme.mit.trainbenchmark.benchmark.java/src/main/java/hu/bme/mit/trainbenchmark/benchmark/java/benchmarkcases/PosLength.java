@@ -12,10 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.railway.Segment;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import Concept.Segment;
 
 public class PosLength extends JavaBenchmarkCase<Segment> {
 

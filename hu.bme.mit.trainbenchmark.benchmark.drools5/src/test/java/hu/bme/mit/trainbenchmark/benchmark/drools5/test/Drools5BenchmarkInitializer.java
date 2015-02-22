@@ -21,11 +21,11 @@ import org.apache.commons.cli.ParseException;
 public class Drools5BenchmarkInitializer extends BenchmarkInitializer {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
+	protected GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
 		// @formatter:off
-		String[] args = {
+		final String[] args = {
 				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.concept",
+				"-benchmarkArtifact", "../models/railway-test-1.emf",
 				"-scenario", scenario, 
 				"-workspacePath", "../"
 			};

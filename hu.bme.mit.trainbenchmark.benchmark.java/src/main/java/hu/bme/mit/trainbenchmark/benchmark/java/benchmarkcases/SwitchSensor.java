@@ -12,10 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.railway.Switch;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import Concept.Switch;
 
 public class SwitchSensor extends JavaBenchmarkCase<Switch> {
 

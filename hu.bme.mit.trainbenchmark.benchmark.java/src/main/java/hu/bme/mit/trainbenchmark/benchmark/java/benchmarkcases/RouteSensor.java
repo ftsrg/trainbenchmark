@@ -12,13 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import Concept.Sensor;
-import Concept.Switch;
-import Concept.SwitchPosition;
-import Concept.TrackElement;
 
 public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 
