@@ -13,6 +13,10 @@ package hu.bme.mit.trainbenchmark.emf;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.railway.IndividualContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Thing;
 
 import java.io.IOException;
 import java.util.AbstractList;
@@ -28,18 +32,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import Concept.ConceptFactory;
-import Concept.ConceptPackage;
-import Concept.IndividualContainer;
-import Concept.Thing;
-
 public class EMFDriver extends DatabaseDriver {
 
 	protected IndividualContainer pack;
 	protected Resource resource; 
 	
 	public EMFDriver(final String modelPath) {
-		ConceptPackage.eINSTANCE.eClass();
+		RailwayPackage.eINSTANCE.eClass();
 
 		final URI resourceURI = FileBroker.getEMFUri(modelPath);
 
@@ -55,7 +54,7 @@ public class EMFDriver extends DatabaseDriver {
 	public List<? extends Object> collectVertices(final String type) throws IOException {
 		final List<EObject> vertices = new ArrayList<>();
 
-		final EClass clazz = (EClass) ConceptPackage.eINSTANCE.getEClassifier(type);
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		for (final Thing t : pack.getContains()) {
 			// if t's type is a descendant of clazz
 			if (clazz.isSuperTypeOf(t.eClass())) {
@@ -79,7 +78,7 @@ public class EMFDriver extends DatabaseDriver {
 	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
 		final EObject object = (EObject) vertex;
 
-		final EClass clazz = (EClass) ConceptPackage.eINSTANCE.getEClassifier(sourceVertexType);
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = clazz.getEStructuralFeature(edgeType);
 		final EReference reference = (EReference) feature;
 		final EReference oppositeReference = reference.getEOpposite();
@@ -118,12 +117,12 @@ public class EMFDriver extends DatabaseDriver {
 	@Override
 	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) throws IOException {
 		// create target object
-		final ConceptFactory factory = ConceptFactory.eINSTANCE;
-		final EClass targetClass = (EClass) ConceptPackage.eINSTANCE.getEClassifier(targetVertexType);
+		final RailwayFactory factory = RailwayFactory.eINSTANCE;
+		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
 		final EObject targetObject = factory.create(targetClass);
 		
 		// set reference to source object
-		final EClass sourceClass = (EClass) ConceptPackage.eINSTANCE.getEClassifier(sourceVertexType);
+		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		final EObject sourceObject = (EObject) sourceVertex;
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceObject.eGet(feature);

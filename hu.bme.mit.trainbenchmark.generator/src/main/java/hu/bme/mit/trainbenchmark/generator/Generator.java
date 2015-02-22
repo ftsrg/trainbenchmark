@@ -116,6 +116,8 @@ public abstract class Generator {
 			signalNeighborErrorPercent = 8;
 			switchSetErrorPercent = 10;
 			break;
+		default:
+			throw new UnsupportedOperationException("Scenario not supported.");
 		}
 	}
 

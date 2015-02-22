@@ -24,7 +24,7 @@ public class EMFDriverTest extends DatabaseDriverTest {
 
 	@Override
 	public void init() throws IOException {
-		final String modelPath = "../models/railway-test-1.concept";
+		final String modelPath = "../models/railway-test-1.emf";
 
 		driver = new EMFDriver(modelPath);
 	}

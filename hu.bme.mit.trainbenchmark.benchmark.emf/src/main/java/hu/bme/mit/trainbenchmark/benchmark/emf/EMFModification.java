@@ -18,12 +18,12 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//import Concept.ConceptFactory;
-//import Concept.IndividualContainer;
-//import Concept.Route;
-//import Concept.Segment;
-//import Concept.Sensor;
-//import Concept.Switch;
+//import hu.bme.mit.trainbenchmark.ConceptFactory;
+//import hu.bme.mit.trainbenchmark.IndividualContainer;
+//import hu.bme.mit.trainbenchmark.Route;
+//import hu.bme.mit.trainbenchmark.Segment;
+//import hu.bme.mit.trainbenchmark.Sensor;
+//import hu.bme.mit.trainbenchmark.Switch;
 //
 //public class EMFModification {
 //

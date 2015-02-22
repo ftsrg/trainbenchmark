@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools5.ResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import Concept.Route;
+import hu.bme.mit.trainbenchmark.Route;
 
 public class SignalNeighbor extends Drools5BenchmarkCase<Route> {
 

@@ -12,13 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Signal;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import Concept.Route;
-import Concept.Sensor;
-import Concept.Signal;
-import Concept.Trackelement;
 
 public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 
@@ -41,8 +41,8 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 	private boolean isValid(final Route route) {
 		final Signal exitSignal = route.getRoute_exit();
 		for (final Sensor sen1 : route.getRoute_routeDefinition()) {
-			for (final Trackelement te1 : sen1.getSensor_trackElement()) {
-				for (final Trackelement te2 : te1.getTrackElement_connectsTo()) {
+			for (final TrackElement te1 : sen1.getSensor_trackElement()) {
+				for (final TrackElement te2 : te1.getTrackElement_connectsTo()) {
 					for (final Sensor sen2 : te2.getTrackElement_sensor()) {
 						boolean goodSensor = false;
 						for (final Object eObject : pack.getContains()) {
