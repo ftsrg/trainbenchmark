@@ -86,7 +86,7 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor_trackElement">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement"/>
     </owl:ObjectProperty>
     
 
@@ -149,8 +149,8 @@
     <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement_connectsTo -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement_connectsTo">
-        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement"/>
     </owl:ObjectProperty>
     
 
@@ -160,7 +160,7 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement_sensor">
         <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor"/>
         <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Sensor_trackElement"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement"/>
     </owl:ObjectProperty>
     
 
@@ -224,7 +224,7 @@
     <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Segment_length"/>
@@ -273,7 +273,7 @@
     <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Switch_actualState"/>
@@ -320,9 +320,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement -->
+    <!-- http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Trackelement"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#TrackElement"/>
     
 
 
