@@ -13,11 +13,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.drools5.ResultListener;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import hu.bme.mit.trainbenchmark.Switch;
 
 public class SwitchSensor extends Drools5BenchmarkCase<Switch> {
 

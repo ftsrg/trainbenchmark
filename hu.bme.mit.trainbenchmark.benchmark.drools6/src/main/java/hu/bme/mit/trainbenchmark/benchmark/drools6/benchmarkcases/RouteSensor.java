@@ -13,11 +13,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools6.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import hu.bme.mit.trainbenchmark.Sensor;
 
 public class RouteSensor extends Drools6BenchmarkCase<Sensor> {
 
