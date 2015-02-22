@@ -44,7 +44,6 @@
 				<module>hu.bme.mit.trainbenchmark.generator.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.generator.sql</module>
 				<module>hu.bme.mit.trainbenchmark.generator</module>
-				<module>hu.bme.mit.trainbenchmark.model</module>
 				<module>hu.bme.mit.trainbenchmark.pojo</module>
 				<module>hu.bme.mit.trainbenchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.sql</module>
@@ -77,7 +76,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.generator.emf</module>
-				<module>hu.bme.mit.trainbenchmark.model</module>
 			</modules>
 		</profile>
 
