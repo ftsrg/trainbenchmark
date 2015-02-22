@@ -3,4 +3,4 @@
 cd "$( cd "$( dirname "$0" )" && pwd )/.."
 
 export MAVEN_OPTS="-XX:MaxPermSize=128M"
-mvn clean install -DskipTests
+mvn clean install -P core,emf,graph,rdf,java,neo4j,sesame -DskipTests
