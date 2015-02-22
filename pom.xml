@@ -24,6 +24,7 @@
       			<activeByDefault>true</activeByDefault>
     		</activation>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emf</module>
@@ -106,6 +107,13 @@
 		</profile>
 
 		<!-- tools -->
+
+		<profile>
+			<id>allegro</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
+			</modules>
+		</profile>
 
 		<profile>
 			<id>drools</id>

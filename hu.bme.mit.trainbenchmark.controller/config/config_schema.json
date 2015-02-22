@@ -136,6 +136,7 @@
         {
           "type": "string",
           "enum": [
+            "allegro",
             "drools5",
             "drools6",
             "eclipseocl",
@@ -154,6 +155,7 @@
       "additionalItems": {
         "type": "string",
         "enum": [
+          "allegro",
           "drools5",
           "drools6",
           "eclipseocl",
@@ -181,6 +183,7 @@
           "properties": {
             "Tool": {
               "enum": [
+                "allegro",
                 "drools5",
                 "drools6",
                 "eclipseocl",
@@ -216,6 +219,7 @@
           "properties": {
             "Tool": {
               "enum": [
+                "allegro",
                 "drools5",
                 "drools6",
                 "eclipseocl",

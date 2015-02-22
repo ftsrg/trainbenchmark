@@ -2,6 +2,9 @@
   "sesame": {
     "name": "rdf"
   },
+  "allegro": {
+    "name": "rdf"
+  },
   "jena": {
     "name": "rdf"
   },

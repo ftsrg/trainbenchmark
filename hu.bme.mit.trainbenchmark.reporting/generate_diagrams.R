@@ -44,7 +44,7 @@ save_plot <-function(table, column, title, file_name){
     #  legend.position="right"
     #) #+
     #geom_text(aes_string(label=column))
-  ggsave(plot,file = file_name, width=14, height=7, dpi=192)
+  ggsave(plot,filename = file_name, width=14, height=7, dpi=192)
   print(file_name)
 }
 

@@ -8,10 +8,10 @@
     "maxPermSize": "256m"
   },
   "IterationCount": 10,
-  "MinSize": 8,
+  "MinSize": 1,
   "MaxSize": 8,
   "ModificationMethod": "constant",
-  "ModificationConstant": 13,
+  "ModificationConstant": 10,
   "Queries": [
     "RouteSensor",
     "SignalNeighbor"
@@ -21,7 +21,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "emfincquery"
+    "allegro"
   ],
   "UniqueConfigurations": []
 }

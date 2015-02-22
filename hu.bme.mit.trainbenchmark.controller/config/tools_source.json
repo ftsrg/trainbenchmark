@@ -2,6 +2,9 @@
   "sesame": {
     "format": "rdf"
   },
+  "allegro": {
+    "format": "rdf" 
+  },
   "jena": {
     "format": "rdf"
   },
