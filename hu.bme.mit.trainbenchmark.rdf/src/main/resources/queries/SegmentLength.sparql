@@ -1,7 +1,0 @@
-PREFIX base: <http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#>
-
-SELECT DISTINCT ?a ?b
-WHERE
-{
-	?a base:Segment_length ?b
-}
