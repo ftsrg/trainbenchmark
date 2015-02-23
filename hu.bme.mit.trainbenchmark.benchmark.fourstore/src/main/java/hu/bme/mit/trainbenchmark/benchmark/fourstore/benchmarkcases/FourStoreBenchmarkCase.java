@@ -30,7 +30,7 @@ public class FourStoreBenchmarkCase extends AbstractTransformationBenchmarkCase<
 	}
 
 	@Override
-	public void load() throws IOException {
+	public void read() throws IOException {
 		try {
 			fsDriver.load(modelFilePath);
 		} catch (final InterruptedException e) {

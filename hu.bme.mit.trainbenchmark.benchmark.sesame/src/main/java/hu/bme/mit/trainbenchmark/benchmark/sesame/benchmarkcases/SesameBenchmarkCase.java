@@ -64,7 +64,7 @@ public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI
 	}
 
 	@Override
-	public void load() throws IOException {
+	public void read() throws IOException {
 		if (sbc.isInferencing()) {
 			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {

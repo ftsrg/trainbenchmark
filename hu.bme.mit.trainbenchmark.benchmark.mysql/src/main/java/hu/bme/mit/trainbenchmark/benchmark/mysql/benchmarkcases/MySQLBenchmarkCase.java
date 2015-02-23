@@ -12,10 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 import java.io.File;
@@ -31,10 +30,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-public abstract class MySQLBenchmarkCase implements AbstractBenchmarkCase {
-
-	protected BenchmarkResult bmr;
-	protected BenchmarkConfig bc;
+public abstract class MySQLBenchmarkCase extends AbstractTransformationBenchmarkCase<Long> {
 
 	protected Connection con = null;
 	protected Statement st = null;
@@ -43,93 +39,56 @@ public abstract class MySQLBenchmarkCase implements AbstractBenchmarkCase {
 	protected String user = "root";
 	protected String password = "";
 
-	protected List<Integer> invalids;
-
-	@Override
-	public String getTool() {
-		return "MySQL";
-	}
-
 	protected String getQuery() throws IOException {
 		return FileUtils.readFileToString(new File(bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.sql/src/main/resources/queries/"
 				+ getName() + ".sql"));
 	}
 
 	@Override
-	public void init(BenchmarkConfig bc) throws IOException {
-		this.bc = bc;
-
-		bmr = new BenchmarkResult(getTool(), getName());
-		bmr.setBenchmarkConfig(bc);
-
-		this.bc = bc;
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
-
+	public void init() throws IOException {
 		MySQLProcess.startSQLProcess();
-
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
 	}
 
 	@Override
-	public void load() throws FileNotFoundException, IOException {
-		bmr.startStopper();
-
-		Runtime rt = Runtime.getRuntime();
-		String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + bc.getBenchmarkArtifact() };
+	public void read() throws FileNotFoundException, IOException {
+		final Runtime rt = Runtime.getRuntime();
+		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + bc.getBenchmarkArtifact() };
 
 		try {
-			Process pr = rt.exec(command);
+			final Process pr = rt.exec(command);
 			pr.waitFor();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new IOException(e);
 		}
-
-		bmr.setReadTime();
 
 		try {
 			con = DriverManager.getConnection(url, user, password);
-			st = con.createStatement();
-		} catch (SQLException e) {
+			driver = new MySQLDriver(con);		
+		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
 	}
 
 	@Override
-	public void check() throws IOException {
-		bmr.startStopper();
+	public List<Long> check() throws IOException {
+		results = new ArrayList<>();
 
-		invalids = new ArrayList<Integer>();
-
-		try (ResultSet rs = st.executeQuery(getQuery())) {
-
+		try (ResultSet rs = con.createStatement().executeQuery(getQuery())) {
 			while (rs.next()) {
-				invalids.add(rs.getInt("id"));
+				results.add(rs.getLong("id"));
 			}
 
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
-
-		bmr.addInvalid(invalids.size());
-		bmr.addCheckTime();
+		
+		return results;
 	}
 
 	@Override
-	public void getMemoryUsage() throws IOException {
+	protected long getMemoryUsage() throws IOException {
 		Util.runGC();
-		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()
-				+ MySQLProcess.getMemoryUsage(bc).getMemory() * 1024);
-	}
-
-	@Override
-	public BenchmarkResult getBenchmarkResult() {
-		return bmr;
+		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() + MySQLProcess.getMemoryUsage(bc).getMemory() * 1024;
 	}
 
 	@Override
@@ -141,15 +100,10 @@ public abstract class MySQLBenchmarkCase implements AbstractBenchmarkCase {
 			if (con != null) {
 				con.close();
 			}
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
 		MySQLProcess.stopSQLProcess();
-	}
-
-	@Override
-	public int getResultSize() {
-		return invalids.size();
 	}
 
 }

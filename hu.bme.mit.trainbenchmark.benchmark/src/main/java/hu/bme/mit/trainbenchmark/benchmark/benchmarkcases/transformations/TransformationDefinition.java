@@ -45,35 +45,20 @@ public abstract class TransformationDefinition {
 	protected abstract void rhs() throws IOException;	
 	
 	public void performTransformation() throws IOException {
-		initTransformation();
+		nElemToModify = Util.calcModify(bmr);
+		bmr.addModifiedElementsSize(nElemToModify);
+
+		bmr.restartClock();
 		driver.beginTransaction();
 		lhs();
+		bmr.addLhsTime();
 		
-		startEdit();
+		bmr.restartClock();
 		rhs();
 		driver.finishTransaction();
-
-		saveResults();
-	}
-
-	protected void initTransformation() {
-		nElemToModify = Util.calcModify(bmr);
-		bmr.addModifyParams(nElemToModify);
-
-		start = System.nanoTime();
-		startEdit = 0;
-	}
-
-	protected void saveResults() {
-		end = System.nanoTime();
-		bmr.addEditTime(end - startEdit);
-		bmr.addModificationTime(end - start);
+		bmr.addRhsTime();
 	}
 	
-	protected void startEdit() {
-		startEdit = System.nanoTime();
-	}
-
 	// utils
 	
 	public static Random getRandom() {

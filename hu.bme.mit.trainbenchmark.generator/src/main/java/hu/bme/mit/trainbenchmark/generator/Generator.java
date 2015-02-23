@@ -109,7 +109,7 @@ public abstract class Generator {
 			MAX_Segments = 1;
 			MAX_Routes = 2 * generatorConfig.getSize();
 			MAX_SwitchPositions = 20;
-			MAX_Sensors = 5;
+			MAX_Sensors = 10;
 			posLengthErrorPercent = 10;
 			switchSensorErrorPercent = 4;
 			routeSensorErrorPercent = 10;

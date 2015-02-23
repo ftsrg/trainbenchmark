@@ -65,7 +65,7 @@ public abstract class Drools6BenchmarkCase<T> extends AbstractTransformationBenc
 	}
 
 	@Override
-	public void load() throws FileNotFoundException, IOException {
+	public void read() throws FileNotFoundException, IOException {
 		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
 		driver = emfDriver;
 		final Resource resource = emfDriver.getResource();

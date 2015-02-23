@@ -78,7 +78,8 @@ public class SesameDriver extends DatabaseDriver {
 	long newVertexId = 1000000000;
 
 	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) throws IOException {
+	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
 		final URI sourceVertexURI = (URI) sourceVertex;
 		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
 		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
@@ -115,6 +116,11 @@ public class SesameDriver extends DatabaseDriver {
 		deleteEdges(vertex, edgeType, true, false);
 	}
 
+	@Override
+	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertex, edgeType, true, false);		
+	}
+	
 	public void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) throws IOException {
 		final List<Statement> itemsToRemove = new ArrayList<>();
 
@@ -130,7 +136,7 @@ public class SesameDriver extends DatabaseDriver {
 
 			while (statementsToRemove.hasNext()) {
 				final Statement s = statementsToRemove.next();
-				
+
 				itemsToRemove.add(s);
 
 				// break if we only want to delete one edge
@@ -148,8 +154,8 @@ public class SesameDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void updateProperty(final Object vertex, final String propertyName, final AttributeOperation attributeOperation)
-			throws IOException {
+	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) throws IOException {
 		try {
 			final URI vertexURI = (URI) vertex;
 			final URI typeURI = f.createURI(basePrefix + propertyName);
@@ -163,7 +169,7 @@ public class SesameDriver extends DatabaseDriver {
 			con.remove(statement);
 			while (statementsToRemove.hasNext()) {
 				con.remove(statementsToRemove.next());
-			} 
+			}
 
 			// get the object of the first removed statement
 			final IntegerMemLiteral integerMemLiteral = (IntegerMemLiteral) statement.getObject();

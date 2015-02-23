@@ -71,7 +71,7 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 	@Override
 	public void getMemoryUsage() {
 		Util.runGC();
-		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+		bmr.addMemoryUsage(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
 
 	@Override
@@ -94,12 +94,12 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 	public void check() {
 		bmr.startStopper();
 		results = new ArrayList<T>(incqueryDeltaMonitor.getMatching());
-		bmr.addInvalid(results.size());
+		bmr.addResultSize(results.size());
 		bmr.addCheckTime();
 	}
 
 	@Override
-	public void load() throws IOException {
+	public void read() throws IOException {
 		bmr.startStopper();
 
 		ConceptPackage.eINSTANCE.eClass();

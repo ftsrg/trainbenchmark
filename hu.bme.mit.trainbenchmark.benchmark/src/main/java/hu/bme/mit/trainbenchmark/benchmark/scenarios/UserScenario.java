@@ -15,17 +15,16 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.util.JsonSerializer;
 
 import java.io.IOException;
 
 public class UserScenario implements Scenario<AbstractTransformationBenchmarkCase<?>> {
 
 	@Override
-	public void runBenchmark(final BenchmarkConfig bc, final AbstractTransformationBenchmarkCase<?> testCase) throws IOException {
+	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractTransformationBenchmarkCase<?> testCase) throws IOException {
 		testCase.benchmarkInit(bc);
 
-		testCase.benchmarkLoad();
+		testCase.benchmarkRead();
 		testCase.benchmarkCheck();
 		for (int i = 0; i < bc.getIterationCount(); i++) {
 			testCase.benchmarkModify();
@@ -34,6 +33,8 @@ public class UserScenario implements Scenario<AbstractTransformationBenchmarkCas
 		testCase.benchmarkDestroy();
 
 		final BenchmarkResult bmr = testCase.getBenchmarkResult();
-		JsonSerializer.serialize(bmr);
+		// JsonSerializer.serialize(bmr);
+		System.out.println(bmr);
+		return bmr;
 	}
 }

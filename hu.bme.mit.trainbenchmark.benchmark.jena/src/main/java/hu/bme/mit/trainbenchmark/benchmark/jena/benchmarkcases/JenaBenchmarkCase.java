@@ -66,7 +66,7 @@ public abstract class JenaBenchmarkCase implements AbstractBenchmarkCase {
 	}
 
 	@Override
-	public void load() throws IOException {
+	public void read() throws IOException {
 		bmr.startStopper();
 		model = ModelFactory.createDefaultModel();
 		String documentFilename = jbc.getBenchmarkArtifact();
@@ -96,14 +96,14 @@ public abstract class JenaBenchmarkCase implements AbstractBenchmarkCase {
 		}
 		qexec.close();
 
-		bmr.addInvalid(invalids.size());
+		bmr.addResultSize(invalids.size());
 		bmr.addCheckTime();
 	}
 
 	@Override
 	public void getMemoryUsage() throws IOException {
 		Util.runGC();
-		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+		bmr.addMemoryUsage(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
 
 	@Override

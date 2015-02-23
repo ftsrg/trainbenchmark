@@ -21,12 +21,12 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void posLengthUser() throws ParseException, IOException {
-		testTransformation("PosLength", "User", 4, 5);
+		testTransformation("PosLength", "User", 15, 16);
 	}
 
 	@Test
 	public void routeSensorUser() throws ParseException, IOException {
-		testTransformation("RouteSensor", "User", 2, 3);
+		testTransformation("RouteSensor", "User", 12, 13);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation("SwitchSensor", "User", 7, 8);
+		testTransformation("SwitchSensor", "User", 4, 5);
 	}
 
 }

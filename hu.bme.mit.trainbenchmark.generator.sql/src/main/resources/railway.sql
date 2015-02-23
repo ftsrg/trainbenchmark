@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
 --
 
 CREATE TABLE IF NOT EXISTS `Segment` (
-  `TrackElement_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Segment_length` int(11) NOT NULL,
-  PRIMARY KEY  (`TrackElement_id`)
+  PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
@@ -108,9 +108,9 @@ INSERT INTO `SignalStateKind` (`id`, `text`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Switch` (
-  `TrackElement_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Switch_actualState` int(11) NOT NULL,
-  PRIMARY KEY  (`TrackElement_id`)
+  PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------

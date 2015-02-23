@@ -15,4 +15,6 @@ public interface AttributeOperation {
 
 	public int op(int x);
 	
+	public String sqlUpdate(String name);
+	
 }

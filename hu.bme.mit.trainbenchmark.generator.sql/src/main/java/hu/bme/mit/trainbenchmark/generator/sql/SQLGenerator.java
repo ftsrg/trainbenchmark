@@ -43,7 +43,8 @@ public class SQLGenerator extends Generator {
 	protected BufferedWriter file;
 	protected Long lastNodeId = 1L;
 	protected Map<String, Long> typeId = new HashMap<>();
-
+	protected static final String ID_NAME = "id";
+	
 	public void write(final String s) throws IOException {
 		file.write(s + "\n");
 	}
@@ -87,8 +88,7 @@ public class SQLGenerator extends Generator {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
 
-		final String idName = generateIdName(type);
-		columns.append("`" + idName + "`");
+		columns.append("`" + ID_NAME + "`");
 		values.append(id);
 
 		structuralFeaturesToSQL(attributes, columns, values);
@@ -107,10 +107,6 @@ public class SQLGenerator extends Generator {
 		return id;
 	}
 
-	private String generateIdName(final String type) {
-		return ancestors.containsKey(type) ? ancestors.get(type) + "_id" : "id";
-	}
-
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
 		final String insertQuery = String.format("INSERT INTO `%s` VALUES (%s, %s);", label, from, to);
@@ -119,9 +115,9 @@ public class SQLGenerator extends Generator {
 
 	@Override
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
-		String stringValue = valueToString(value);
+		final String stringValue = valueToString(value);
 		final String updateQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", type, key, stringValue,
-				generateIdName(type), node);
+				ID_NAME, node);
 		write(updateQuery);
 	}
 
@@ -133,7 +129,7 @@ public class SQLGenerator extends Generator {
 			columns.append(", `" + key + "`");
 			values.append(", ");
 
-			String stringValue = valueToString(value);
+			final String stringValue = valueToString(value);
 			values.append(stringValue);
 		}
 	}

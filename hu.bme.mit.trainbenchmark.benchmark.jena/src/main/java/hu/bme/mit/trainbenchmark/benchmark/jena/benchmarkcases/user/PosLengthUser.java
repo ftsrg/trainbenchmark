@@ -37,7 +37,7 @@ public class PosLengthUser extends PosLength implements TransformationBenchmarkC
 	@Override
 	public void modify() throws IOException {
 		final long nElemToModify = Util.calcModify(bmr);
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 
 		// modify
 		final long start = System.nanoTime();

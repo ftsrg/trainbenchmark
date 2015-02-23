@@ -57,12 +57,12 @@ public class RDFGenerator extends Generator {
 		return "RDF";
 	}
 
-	protected RDFGeneratorConfig rdfGeneratorConfig;
 	protected long id = 0;
+	protected RDFGeneratorConfig rdfGeneratorConfig;
 	protected RepositoryConnection con;
 	protected Repository myRepository;
 	protected ValueFactory vf;
-	protected Map<Enum, Resource> resources;
+	protected Map<Enum<?>, Resource> resources;
 
 	@Override
 	public void initModel() throws IOException {
@@ -89,7 +89,7 @@ public class RDFGenerator extends Generator {
 		final Resource pointStateKind_Right    = vf.createURI(BASE_PREFIX + ModelConstants.POINTSTATEKIND_LEFT);
 		final Resource pointStateKind_Failure  = vf.createURI(BASE_PREFIX + ModelConstants.POINTSTATEKIND_LEFT);
 
-		resources = ImmutableMap.<Enum, Resource>builder()
+		resources = ImmutableMap.<Enum<?>, Resource>builder()
 				.put(SignalStateKind.SIGNALSTATEKIND_STOP, signalStateKind_Stop) 
 				.put(SignalStateKind.SIGNALSTATEKIND_FAILURE, signalStateKind_Failure) 
 				.put(SignalStateKind.SIGNALSTATEKIND_GO, signalStateKind_Go)

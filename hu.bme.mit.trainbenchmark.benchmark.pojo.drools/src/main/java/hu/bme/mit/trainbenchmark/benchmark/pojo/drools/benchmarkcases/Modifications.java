@@ -26,7 +26,7 @@ import java.util.List;
 public class Modifications {
 
 	public static void modifyModelPosLength(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 		final List<Segment> segments = new ArrayList<Segment>();
@@ -45,7 +45,7 @@ public class Modifications {
 	}
 
 	public static void modifyModelPosLengthRepair(final BenchmarkResult bmr, final long nElemToModify, final List<Segment> invalids) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 
@@ -62,7 +62,7 @@ public class Modifications {
 	}
 
 	public static void modifyModelRouteSensor(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 		final List<Route> routes = new ArrayList<Route>();
@@ -83,7 +83,7 @@ public class Modifications {
 	}
 
 	public static void modifyModelRouteSensorRepair(final BenchmarkResult bmr, final long nElemToModify, final List<Sensor> invalids) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 
@@ -100,7 +100,7 @@ public class Modifications {
 	}
 
 	public static void modifyModelSwitchSensor(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 		final List<Switch> switches = new ArrayList<Switch>();
@@ -121,7 +121,7 @@ public class Modifications {
 	}
 
 	public static void modifyModelSwitchSensorRepair(final Graph graph, final BenchmarkResult bmr, final long nElemToModify, final List<Switch> invalids) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 
@@ -140,7 +140,7 @@ public class Modifications {
 	}
 
 	public static void modifyModelSignalNeighbor(final Graph graph, final BenchmarkResult bmr, final long nElemToModify) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 		final List<Route> routes = new ArrayList<Route>();
@@ -159,7 +159,7 @@ public class Modifications {
 	}
 
 	public static void modifyModelSignalNeighborRepair(final BenchmarkResult bmr, final long nElemToModify, final List<Route> matchedRoutes) {
-		bmr.addModifyParams(nElemToModify);
+		bmr.addModifiedElementsSize(nElemToModify);
 		// modify
 		final long start = System.nanoTime();
 

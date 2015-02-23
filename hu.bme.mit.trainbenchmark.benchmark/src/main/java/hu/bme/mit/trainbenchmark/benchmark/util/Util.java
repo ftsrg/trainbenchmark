@@ -74,7 +74,7 @@ public class Util {
 		case CONSTANT:
 			return nModify;
 		case RESULT_SET:
-			return bmr.getInvalids().get(0).intValue() / nModify;
+			return bmr.getLastResultSize() / nModify;
 		default:
 			return 0;
 		}

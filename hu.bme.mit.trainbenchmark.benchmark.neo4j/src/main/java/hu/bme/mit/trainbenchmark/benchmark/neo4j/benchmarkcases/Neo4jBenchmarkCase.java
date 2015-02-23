@@ -68,7 +68,7 @@ public class Neo4jBenchmarkCase extends AbstractTransformationBenchmarkCase<Node
 	}
 
 	@Override
-	public void load() throws FileNotFoundException, IOException {
+	public void read() throws FileNotFoundException, IOException {
 		// start with a clean slate: delete old directory
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));

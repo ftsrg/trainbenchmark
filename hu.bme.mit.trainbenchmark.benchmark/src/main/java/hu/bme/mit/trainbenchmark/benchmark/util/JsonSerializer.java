@@ -16,11 +16,11 @@ public class JsonSerializer {
 		// (without this setting, an exception is thrown in those cases)
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
-		final String scenario = bmr.getScenario();
-		final String query = bmr.getQuery();
-		final String tool = bmr.getTool();
-		final int size = bmr.getArtifactSize();
-		final int series = bmr.getRunIndex();
+		final String scenario = bmr.getBenchmarkConfig().getScenario();
+		final String query = bmr.getBenchmarkConfig().getQuery();
+		final String tool = bmr.getBenchmarkConfig().getTool();
+		final int size = bmr.getBenchmarkConfig().getArtifactSize();
+		final int series = bmr.getBenchmarkConfig().getRunIndex();
 		final String fileName = tool + "-" + scenario + "-" + query + "-Size" + size + "-Index" + series;
 		mapper.writeValue(new File(bmr.getBenchmarkConfig().getWorkspacePath() + "/results/" + fileName + ".json"), bmr);
 

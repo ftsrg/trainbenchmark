@@ -31,13 +31,17 @@ public abstract class DatabaseDriver {
 
 	public abstract void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException;
 
-	public abstract void deleteAllIncomingEdges(Object vertex, String edgeType, String sourceVertexType) throws IOException;
-
-	public abstract void updateProperty(final Object vertex, final String propertyName, final AttributeOperation attributeOperation)
+	public abstract void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType)
 			throws IOException;
 
-	public abstract void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException;
+	public abstract void updateProperty(final Object vertex, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) throws IOException;
 
-	public abstract void insertVertexWithEdge(Object sourceVertex, String sourceVertexType, String targetVertexType, String edgeType) throws IOException;
+	public abstract void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException;
+	
+	public abstract void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException;
+
+	public abstract void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException;
 
 }
