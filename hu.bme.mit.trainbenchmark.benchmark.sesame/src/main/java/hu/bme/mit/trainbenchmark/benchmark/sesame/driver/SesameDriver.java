@@ -75,7 +75,7 @@ public class SesameDriver extends DatabaseDriver {
 		return vertices;
 	}
 
-	long newVertexId = 1000000000;
+	protected long newVertexId = 1000000000;
 
 	@Override
 	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,

@@ -17,7 +17,9 @@ ON TrackElement_connectsTo.TrackElement_id_connectsTo = TrackElement_sensor2.Tra
 INNER JOIN Route_routeDefinition AS Route_routeDefinition2
 ON Route_routeDefinition2.Sensor_id = TrackElement_sensor2.Sensor_id
 
-WHERE NOT EXISTS
+WHERE 1=1
+	AND Route1.Route_exit != 0
+	AND NOT EXISTS
 	(SELECT DISTINCT
 
 	Route.id AS xRoute2,
