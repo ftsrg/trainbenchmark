@@ -17,7 +17,7 @@ SET AUTOCOMMIT=0;
 --
 
 CREATE TABLE IF NOT EXISTS `Route` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Route_entry` int(11) NOT NULL,
   `Route_exit` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
 --
 
 CREATE TABLE IF NOT EXISTS `Segment` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Segment_length` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `Segment` (
 --
 
 CREATE TABLE IF NOT EXISTS `Sensor` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `TrackElement_sensor` (
 --
 
 CREATE TABLE IF NOT EXISTS `Signal` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Signal_actualState` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `Signal` (
 --
 
 CREATE TABLE IF NOT EXISTS `SignalStateKind` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(32) NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ENGINE=MEMORY;
@@ -108,7 +108,7 @@ INSERT INTO `SignalStateKind` (`id`, `text`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Switch` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Switch_actualState` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `Switch` (
 --
 
 CREATE TABLE IF NOT EXISTS `SwitchPosition` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Route_switchPosition` int(11) NOT NULL,
   `SwitchPosition_switch` int(11) NOT NULL,
   `SwitchPosition_switchState` int(11) NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `SwitchPosition` (
 --
 
 CREATE TABLE IF NOT EXISTS `SwitchStateKind` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(32) NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ENGINE=MEMORY;
@@ -156,7 +156,7 @@ INSERT INTO `SwitchStateKind` (`id`, `text`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `TrackElement` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
