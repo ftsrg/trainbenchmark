@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.user;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.PosLength;
+import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.RouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
@@ -24,40 +24,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PosLengthUser extends PosLength implements TransformationBenchmarkCase {
+public class RouteSensorUser extends RouteSensor implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bmr);
-		bmr.addModifyParams(nElemToModify);
-
-		// modify
-		final long start = System.nanoTime();
-		final List<Integer> segments = new ArrayList<Integer>();
-
-		try (ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s;", ModelConstants.SEGMENT))) {
-			while (rs.next()) {
-				segments.add(rs.getInt("Trackelement_id"));
-			}
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
-		
-		final List<Integer> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
-
-		// edit
-		final long startEdit = System.nanoTime();
-		for (final Integer segment : itemsToModify) {
-			try {
-				st.executeUpdate(String.format("UPDATE %s SET %s = 0 WHERE Trackelement_id = %d;", ModelConstants.SEGMENT,
-						ModelConstants.SEGMENT_LENGTH, segment));
+		for (final Integer route : itemsToModify) {
+			int routedef_size = 0;
+			try (ResultSet rs = st.executeQuery(String.format("SELECT COUNT(*) FROM %s WHERE Route_id = %d;",
+					ModelConstants.ROUTE_ROUTEDEFINITION, route))) {
+				if (rs.next()) {
+					routedef_size = rs.getInt(1);
+				}
 			} catch (final SQLException e) {
 				throw new IOException(e);
 			}
+			if (routedef_size > 0) {
+				try {
+					st.executeUpdate(String.format("DELETE FROM %s WHERE Route_id = %d LIMIT 1;", ModelConstants.ROUTE_ROUTEDEFINITION,
+							route));
+				} catch (final SQLException e) {
+					throw new IOException(e);
+				}
+			}
 		}
-		final long end = System.nanoTime();
-		bmr.addEditTime(end - startEdit);
-		bmr.addModificationTime(end - start);
 	}
-
 }

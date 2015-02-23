@@ -21,7 +21,7 @@ public abstract class JavaBenchmarkCase<T> extends AbstractTransformationBenchma
 	protected RailwayContainer pack;
 	
 	@Override
-	public void load() {
+	public void read() {
 		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
 		driver = emfDriver;	
 		pack = emfDriver.getRoot();

@@ -47,7 +47,7 @@ public abstract class AbstractBenchmarkCase<T> {
 
 	protected void destroy() throws IOException {}
 
-	protected abstract void load() throws IOException;
+	protected abstract void read() throws IOException;
 
 	protected abstract List<T> check() throws IOException;
 
@@ -70,16 +70,16 @@ public abstract class AbstractBenchmarkCase<T> {
 		destroy();
 	}
 
-	public void benchmarkLoad() throws IOException {
-		bmr.startStopper();
-		load();
+	public void benchmarkRead() throws IOException {
+		bmr.restartClock();
+		read();
 		bmr.setReadTime();
 	}
 
 	public void benchmarkCheck() throws IOException {
-		bmr.startStopper();
+		bmr.restartClock();
 		check();
-		bmr.addInvalid();
+		bmr.addResultSize(results.size());
 		bmr.addCheckTime();
 	}
 

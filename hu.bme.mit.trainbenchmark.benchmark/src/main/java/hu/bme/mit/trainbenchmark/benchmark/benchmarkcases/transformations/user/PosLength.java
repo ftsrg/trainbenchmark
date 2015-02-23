@@ -30,7 +30,7 @@ public class PosLength extends TransformationDefinition {
 	@Override
 	protected void rhs() throws IOException {
 		for (final Object segment : itemsToModify) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT_LENGTH, new SetToZero());
+			driver.updateProperty(segment, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new SetToZero());
 		}
 	}
 

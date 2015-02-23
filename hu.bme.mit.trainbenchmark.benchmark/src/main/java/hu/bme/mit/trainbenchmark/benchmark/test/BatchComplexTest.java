@@ -21,12 +21,12 @@ public abstract class BatchComplexTest extends BatchTest {
 
 	@Test
 	public void posLength() throws ParseException, IOException {
-		testQuery("PosLength", 4);
+		testQuery("PosLength", 15);
 	}
 
 	@Test
 	public void routeSensor() throws ParseException, IOException {
-		testQuery("RouteSensor", 2);
+		testQuery("RouteSensor", 12);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public abstract class BatchComplexTest extends BatchTest {
 
 	@Test
 	public void switchSensor() throws ParseException, IOException {
-		testQuery("SwitchSensor", 7);
+		testQuery("SwitchSensor", 4);
 	}
 
 }

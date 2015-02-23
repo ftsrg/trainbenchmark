@@ -55,7 +55,7 @@ public abstract class DatabaseDriverTest {
 	public void testUpdateProperty() throws IOException {
 		final List<? extends Object> segments = driver.collectVertices(ModelConstants.SEGMENT);
 		for (final Object segment : segments) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT_LENGTH, new SetToZero());
+			driver.updateProperty(segment, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new SetToZero());
 		}
 		
 		final List<? extends Object> segments2 = driver.collectVertices(ModelConstants.SEGMENT);

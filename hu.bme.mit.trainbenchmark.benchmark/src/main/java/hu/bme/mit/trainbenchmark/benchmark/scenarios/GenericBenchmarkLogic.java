@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -29,7 +30,7 @@ public abstract class GenericBenchmarkLogic {
 	public void runBenchmark() throws IOException {
 		final Scenario scl = ScenarioFactory.getScenarioLogic(bc.getScenario());
 		final AbstractBenchmarkCase<?> tc = getTestCase();
-		scl.runBenchmark(bc, tc);
+		final BenchmarkResult bmr = scl.runBenchmark(bc, tc);
 	}
 
 	public AbstractBenchmarkCase<?> getTestCase() {

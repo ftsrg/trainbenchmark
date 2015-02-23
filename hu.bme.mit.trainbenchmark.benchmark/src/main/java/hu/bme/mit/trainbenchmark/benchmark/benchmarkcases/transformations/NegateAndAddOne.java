@@ -17,5 +17,10 @@ public class NegateAndAddOne implements AttributeOperation {
 	public int op(final int x) {
 		return -x + 1;
 	}
+
+	@Override
+	public String sqlUpdate(final String name) {
+		return String.format("%s = -%s + 1", name, name);
+	}
 	
 }

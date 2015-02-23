@@ -14,38 +14,39 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.xform;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.RouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases.SwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
-public class RouteSensorXForm extends RouteSensor implements TransformationBenchmarkCase {
+public class SwitchSensorXForm extends SwitchSensor implements TransformationBenchmarkCase {
 
 	@Override
 	public void modify() throws IOException {
-		final long nElemToModify = Util.calcModify(bmr);
-		bmr.addModifyParams(nElemToModify);
-
-		// modify
-		final long start = System.nanoTime();
-
-		final List<Integer> itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
-		
 		// edit
 		final long startEdit = System.nanoTime();
-		for (final Integer sensor : itemsToModify) {
+		for (final Integer aSwitch : itemsToModify) {
+			int senid = 0;
 			try {
-				st.executeUpdate(String.format("DELETE FROM %s WHERE Sensor_id = %s;", ModelConstants.TRACKELEMENT_SENSOR,
-						sensor.toString()));
+				st.executeUpdate(String.format("INSERT INTO `%s` (`id`) VALUES (%d);", ModelConstants.SENSOR, senid),
+						Statement.RETURN_GENERATED_KEYS);
+			} catch (final SQLException e) {
+				throw new IOException(e);
+			}
+			try (ResultSet rs = st.getGeneratedKeys()) {
+				if (rs.next()) {
+					senid = rs.getInt(1);
+				}
+				st.executeUpdate(String.format("INSERT INTO `%s` (`TrackElement_id`, `Sensor_id`) VALUES (%d, %d);",
+						ModelConstants.TRACKELEMENT_SENSOR, aSwitch, senid));
 			} catch (final SQLException e) {
 				throw new IOException(e);
 			}
 		}
-		final long end = System.nanoTime();
-		bmr.addEditTime(end - startEdit);
-		bmr.addModificationTime(end - start);
 	}
 }

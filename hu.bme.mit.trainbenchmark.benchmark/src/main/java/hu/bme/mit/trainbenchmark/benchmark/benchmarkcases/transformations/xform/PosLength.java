@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import java.io.IOException;
 
 public class PosLength extends TransformationDefinition {
-	
+
 	@Override
 	protected void lhs() throws IOException {
 		itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
@@ -28,7 +28,7 @@ public class PosLength extends TransformationDefinition {
 	@Override
 	protected void rhs() throws IOException {
 		for (final Object segment : itemsToModify) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT_LENGTH, new NegateAndAddOne());
+			driver.updateProperty(segment, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new NegateAndAddOne());
 		}
 	}
 

@@ -110,7 +110,7 @@ public abstract class DroolsPojoBenchmarkCase<T> implements BenchmarkCase {
 	@Override
 	public void measureMemory() {
 		Util.runGC();
-		bmr.addMemoryBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+		bmr.addMemoryUsage(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public abstract class DroolsPojoBenchmarkCase<T> implements BenchmarkCase {
 	@Override
 	public void check() {
 		bmr.startStopper();
-		bmr.addInvalid(checkConstraints());
+		bmr.addResultSize(checkConstraints());
 		bmr.addCheckTime();
 	}
 

@@ -17,5 +17,10 @@ public class SetToZero implements AttributeOperation {
 	public int op(final int x) {
 		return 0;
 	}
+
+	@Override
+	public String sqlUpdate(final String name) {
+		return String.format("%s = 0", name);
+	}
 	
 }

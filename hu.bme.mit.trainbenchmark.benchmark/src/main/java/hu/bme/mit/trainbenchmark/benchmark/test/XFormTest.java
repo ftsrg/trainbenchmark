@@ -21,12 +21,12 @@ public abstract class XFormTest extends TransformationTest {
 
 	@Test
 	public void posLengthXForm() throws ParseException, IOException {
-		testTransformation("PosLength", "XForm", 4, 3);
+		testTransformation("PosLength", "XForm", 15, 14);
 	}
 
 	@Test
 	public void routeSensorXForm() throws ParseException, IOException {
-		testTransformation("RouteSensor", "XForm", 2, 1);
+		testTransformation("RouteSensor", "XForm", 12, 11);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public abstract class XFormTest extends TransformationTest {
 
 	@Test
 	public void switchSensorXForm() throws ParseException, IOException {
-		testTransformation("SwitchSensor", "XForm", 7, 6);
+		testTransformation("SwitchSensor", "XForm", 4, 3);
 	}
 
 }

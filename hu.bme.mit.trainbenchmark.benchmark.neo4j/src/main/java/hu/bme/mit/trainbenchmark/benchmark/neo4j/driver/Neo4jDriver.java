@@ -75,14 +75,22 @@ public class Neo4jDriver extends DatabaseDriver {
 		deleteEdges(vertex, edgeType, true, false);
 	}
 
+	@Override
+	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
+		// for Neo4j, this is the same as deleteOneOutgoingEdge
+		deleteEdges(vertex, edgeType, true, true);		
+	}
+	
 	protected void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) {
 		final Node node = (Node) vertex;
 		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType.toUpperCase());
 		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
 		final Iterable<Relationship> relationships = node.getRelationships(direction, relationshipType);
-		for (final Relationship relationship : relationships) {
-			relationship.delete();
 
+		for (final Relationship relationship : relationships) {
+			System.out.println(relationship);
+			relationship.delete();
+			
 			// break if we only want to delete one edge
 			if (!all) {
 				break;
@@ -91,8 +99,8 @@ public class Neo4jDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void updateProperty(final Object vertex, final String propertyName, final AttributeOperation attributeOperation)
-			throws IOException {
+	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) {
 		final Node node = (Node) vertex;
 		final Integer propertyValue = (Integer) node.getProperty(propertyName);
 		node.setProperty(propertyName, attributeOperation.op(propertyValue));
@@ -108,10 +116,11 @@ public class Neo4jDriver extends DatabaseDriver {
 		tx.success();
 		tx.close();
 	}
-	
+
 	@Override
 	public void destroy() {
 		graphDb.shutdown();
 	}
+
 
 }

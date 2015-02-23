@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test;
 import static org.junit.Assert.assertEquals;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 
@@ -33,10 +34,10 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 	protected void testTransformation(final GenericBenchmarkLogic bl, final int expectedResultSize1, final int expectedResultSize2)
 			throws IOException {
 		final AbstractTransformationBenchmarkCase<?> benchmarkCase = (AbstractTransformationBenchmarkCase<?>) (bl.getTestCase());
-		
+
 		try {
 			benchmarkCase.benchmarkInit(bl.getBc());
-			benchmarkCase.benchmarkLoad();
+			benchmarkCase.benchmarkRead();
 			benchmarkCase.benchmarkCheck();
 
 			// System.out.println(bl.getBc().getQuery());
@@ -48,12 +49,19 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 
 			// TODO we should remove this inequality as it may prevent the detection of buggy implementations in the user scenario (where
 			// errors are injected)
-			if (expectedResultSize2 > expectedResultSize1) {
-				Assert.assertThat(benchmarkCase.getResults().size(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
+			final boolean strict = true;
+			if (strict) {
+				assertEquals(expectedResultSize2, benchmarkCase.getResults().size());		
 			} else {
-				assertEquals(expectedResultSize2, benchmarkCase.getResults().size());
+				if (expectedResultSize2 > expectedResultSize1) {
+					Assert.assertThat(benchmarkCase.getResults().size(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
+				} else {
+					assertEquals(expectedResultSize2, benchmarkCase.getResults().size());
+				}
 			}
 
+			final BenchmarkResult benchmarkResult = benchmarkCase.getBenchmarkResult();
+			System.out.println(benchmarkResult);
 			// System.out.println(testCase.getResultSize());
 		} finally {
 			benchmarkCase.benchmarkDestroy();

@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.emf;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
 import java.util.AbstractList;
@@ -35,8 +35,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 public class EMFDriver extends DatabaseDriver {
 
 	protected RailwayContainer pack;
-	protected Resource resource; 
-	
+	protected Resource resource;
+
 	public EMFDriver(final String modelPath) {
 		RailwayPackage.eINSTANCE.eClass();
 
@@ -88,8 +88,8 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void updateProperty(final Object vertex, final String propertyName, final AttributeOperation attributeOperation)
-			throws IOException {
+	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) {
 		final EObject object = (EObject) vertex;
 		final EStructuralFeature feature = object.eClass().getEStructuralFeature(propertyName);
 
@@ -115,18 +115,24 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) throws IOException {
+	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
+		deleteOneOutgoingEdge(vertex, edgeType);
+	}
+
+	@Override
+	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
 		// create target object
 		final RailwayFactory factory = RailwayFactory.eINSTANCE;
 		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
 		final EObject targetObject = factory.create(targetClass);
-		
+
 		// set reference to source object
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		final EObject sourceObject = (EObject) sourceVertex;
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceObject.eGet(feature);
-		references.add(targetObject);		
+		references.add(targetObject);
 	}
 
 	public RailwayContainer getRoot() {
@@ -134,7 +140,7 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	public Resource getResource() {
-		return resource;		
+		return resource;
 	}
 
 }
