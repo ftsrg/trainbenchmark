@@ -12,11 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,88 +34,58 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 
-public abstract class JenaBenchmarkCase implements AbstractBenchmarkCase {
+public class JenaBenchmarkCase extends AbstractTransformationBenchmarkCase<Resource> {
 
 	protected BenchmarkResult bmr;
-	protected JenaBenchmarkConfig jbc;
-	protected List<Resource> invalids;
+	protected RDFBenchmarkConfig rbc;
 	protected Query query;
 	protected Model model;
+	protected String resultVar;
 
 	@Override
-	public BenchmarkResult getBenchmarkResult() {
-		return bmr;
-	}
+	protected void init() throws IOException {
+		this.rbc = (RDFBenchmarkConfig) bc;
 
-	@Override
-	public String getTool() {
-		return "Jena";
-	}
-
-	@Override
-	public void init(BenchmarkConfig bc) throws IOException {
-		this.jbc = (JenaBenchmarkConfig) bc;
-		bmr = new BenchmarkResult(getTool(), getName());
-		bmr.setBenchmarkConfig(jbc);
-
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
-
+		final String sparqlFilePath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
+				+ ".sparql";
+		query = QueryFactory.read(sparqlFilePath);
+		resultVar = query.getResultVars().get(0);
 	}
 
 	@Override
 	public void read() throws IOException {
-		bmr.startStopper();
 		model = ModelFactory.createDefaultModel();
-		String documentFilename = jbc.getBenchmarkArtifact();
+		final String documentFilename = bc.getBenchmarkArtifact();
 		model.read(documentFilename);
 
 		Reasoner reasoner = null;
-		if (jbc.isInferencing()) {
+		if (rbc.isInferencing()) {
 			reasoner = ReasonerRegistry.getRDFSSimpleReasoner();
 			model = ModelFactory.createInfModel(reasoner, model);
 		}
-		query = QueryFactory.read(jbc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
-				+ ".sparql");
-		bmr.setReadTime();
+		
+		driver = new JenaDriver(RDFConstants.BASE_PREFIX, model);
 	}
 
 	@Override
-	public void check() throws IOException {
-		bmr.startStopper();
+	public List<Resource> check() throws IOException {
+		results = new ArrayList<>();
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, model)) {
+			final ResultSet resultSet = queryExecution.execSelect();
 
-		QueryExecution qexec = QueryExecutionFactory.create(query, model);
-		ResultSet resultSet = qexec.execSelect();
-
-		invalids = new ArrayList<>();
-		while (resultSet.hasNext()) {
-			QuerySolution qs = resultSet.next();
-			invalids.add(qs.getResource(getVariable()));
+			while (resultSet.hasNext()) {
+				final QuerySolution qs = resultSet.next();
+				final Resource resource = qs.getResource(resultVar);
+				results.add(resource);
+			}
 		}
-		qexec.close();
 
-		bmr.addResultSize(invalids.size());
-		bmr.addCheckTime();
-	}
-
-	@Override
-	public void getMemoryUsage() throws IOException {
-		Util.runGC();
-		bmr.addMemoryUsage(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+		return results;
 	}
 
 	@Override
 	public void destroy() throws IOException {
 		model.close();
-
 	}
 
-	public abstract String getVariable();
-
-	@Override
-	public int getResultSize() {
-		return invalids.size();
-	}
 }

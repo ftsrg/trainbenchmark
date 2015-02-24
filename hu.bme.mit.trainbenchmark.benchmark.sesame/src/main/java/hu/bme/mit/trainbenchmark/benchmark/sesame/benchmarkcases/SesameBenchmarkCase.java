@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.config.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
@@ -42,7 +42,7 @@ import org.openrdf.sail.memory.MemoryStore;
 
 public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI> {
 
-	protected SesameBenchmarkConfig sbc;
+	protected RDFBenchmarkConfig sbc;
 
 	protected TupleQuery tupleQuery;
 	protected RepositoryConnection con;
@@ -57,7 +57,7 @@ public class SesameBenchmarkCase extends AbstractTransformationBenchmarkCase<URI
 
 	@Override
 	protected void init() throws IOException {
-		this.sbc = (SesameBenchmarkConfig) bc;
+		this.sbc = (RDFBenchmarkConfig) bc;
 
 		sparqlFilePath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName() + ".sparql";
 		sparqlQuery = FileUtils.readFileToString(new File(sparqlFilePath));

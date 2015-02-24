@@ -12,24 +12,24 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
-import org.apache.commons.cli.ParseException;
-
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
+
+import org.apache.commons.cli.ParseException;
 
 public class JenaBenchmarkLogic extends GenericBenchmarkLogic {
 
-	JenaBenchmarkConfig jbc;
+	protected RDFBenchmarkConfig rbc;
 
 	public JenaBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = jbc = new JenaBenchmarkConfig(args);
+		bc = rbc = new RDFBenchmarkConfig(args, getTool());
 
 	}
 
 	@Override
-	protected String getPackageName() {
-		return "jena";
+	protected String getTool() {
+		return "Jena";
 	}
 
 }

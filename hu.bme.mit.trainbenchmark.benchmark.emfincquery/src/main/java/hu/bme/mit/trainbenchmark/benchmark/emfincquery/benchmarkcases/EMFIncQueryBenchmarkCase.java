@@ -11,18 +11,19 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.TrainBenchmark.RailwayContainer;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryCommon;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryDeltaMonitor;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.emf.FileBroker;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.URI;
@@ -44,34 +45,14 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 	protected Resource resource;
 
 	protected IncQueryDeltaMonitor<T> incqueryDeltaMonitor;	
-	
-	@Override
-	public String getName() {
-		return "EMFIncQuery";
-	}
-	
+		
 	protected EMFIncQueryBenchmarkConfig getEIQBC() {
 		return (EMFIncQueryBenchmarkConfig) bc;
 	}
 
 	@Override
-	public void init(final BenchmarkConfig bc) throws IOException {
-		bmr = new BenchmarkResult(getTool(), getName());
-		bmr.setBenchmarkConfig(bc);
-
+	public void init() throws IOException {
 		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
-		
-		this.bc = bc;
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
-	}
-
-	@Override
-	public void getMemoryUsage() {
-		Util.runGC();
-		bmr.addMemoryUsage(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
 
 	@Override
@@ -82,27 +63,17 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 		engine = null;
 		resource = null;
 		resourceSet = null;
-		Util.runGC();
 	}
 
 	@Override
-	public BenchmarkResult getBenchmarkResult() {
-		return bmr;
-	}
-
-	@Override
-	public void check() {
-		bmr.startStopper();
+	public List<T> check() {
 		results = new ArrayList<T>(incqueryDeltaMonitor.getMatching());
-		bmr.addResultSize(results.size());
-		bmr.addCheckTime();
+		return results;
 	}
 
 	@Override
 	public void read() throws IOException {
-		bmr.startStopper();
-
-		ConceptPackage.eINSTANCE.eClass();
+		RailwayPackage.eINSTANCE.eClass();
 		final URI resourceURI = FileBroker.getEMFUri(bc.getBenchmarkArtifact());
 		resourceSet = new ResourceSetImpl();
 
@@ -122,8 +93,6 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
 			pack = (RailwayContainer) resource.getContents().get(0);
 		}
-
-		bmr.setReadTime();
 	}
 
 }
