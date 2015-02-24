@@ -88,7 +88,6 @@ public class Neo4jDriver extends DatabaseDriver {
 		final Iterable<Relationship> relationships = node.getRelationships(direction, relationshipType);
 
 		for (final Relationship relationship : relationships) {
-			System.out.println(relationship);
 			relationship.delete();
 			
 			// break if we only want to delete one edge

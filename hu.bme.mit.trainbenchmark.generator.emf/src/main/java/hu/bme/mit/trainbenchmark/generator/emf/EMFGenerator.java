@@ -20,9 +20,9 @@ import hu.bme.mit.trainbenchmark.emf.FileBroker;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.emf.config.EMFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
 import java.util.List;

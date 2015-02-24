@@ -21,8 +21,8 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	protected String stubTrimOption;
 	protected boolean deltaMonitor;
 	
-	public EMFIncQueryBenchmarkConfig(String[] args) throws ParseException {
-		super(args);
+	public EMFIncQueryBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+		super(args, tool);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	}
 	
 	@Override
-	public void processArguments(String[] args) throws ParseException {
+	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
 		functionalDependencyOption = cmd.getOptionValue("functionalDependencyOption");

@@ -10,17 +10,17 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.config;
+package hu.bme.mit.trainbenchmark.rdf;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class SesameBenchmarkConfig extends BenchmarkConfig {
+public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
 
-	public SesameBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+	public RDFBenchmarkConfig(final String[] args, final String tool) throws ParseException {
 		super(args, tool);
 	}
 
@@ -41,5 +41,4 @@ public class SesameBenchmarkConfig extends BenchmarkConfig {
 	public boolean isInferencing() {
 		return inferencing;
 	}
-
 }

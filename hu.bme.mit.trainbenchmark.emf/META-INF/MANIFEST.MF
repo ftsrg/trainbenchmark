@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Train Benchmark railway model
+Bundle-SymbolicName: hu.bme.mit.trainbenchmark.emf
+Bundle-Version: 1.0.0.qualifier
+Export-Package: hu.bme.mit.trainbenchmark.emf,
+ hu.bme.mit.trainbenchmark.emf.driver,
+ hu.bme.mit.trainbenchmark.railway,
+ hu.bme.mit.trainbenchmark.railway.impl,
+ hu.bme.mit.trainbenchmark.railway.util
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.9.2"

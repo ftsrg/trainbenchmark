@@ -10,18 +10,18 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.config;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class JenaBenchmarkConfig extends BenchmarkConfig {
+public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
 
-	public JenaBenchmarkConfig(String[] args) throws ParseException {
-		super(args);
+	public RDFBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+		super(args, tool);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class JenaBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	@Override
-	public void processArguments(String[] args) throws ParseException {
+	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
 		inferencing = cmd.hasOption("inferencing");
@@ -41,4 +41,5 @@ public class JenaBenchmarkConfig extends BenchmarkConfig {
 	public boolean isInferencing() {
 		return inferencing;
 	}
+
 }
