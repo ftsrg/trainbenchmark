@@ -2,15 +2,15 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
 import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
 
-pattern switchSensor(Individual) =
+pattern switchSensor(Individual)
 {
 	Switch(Individual);
 	neg find hasSensor(Individual);	
 }
 
-pattern hasSensor(Trackelement) =
+pattern hasSensor(TrackElement)
 {
-	Trackelement(Trackelement);
+	TrackElement(TrackElement);
 	Sensor(Target);
-	Trackelement.TrackElement_sensor(Trackelement, Target);
+	TrackElement.TrackElement_sensor(TrackElement, Target);
 }
