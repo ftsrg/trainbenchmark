@@ -24,12 +24,12 @@ public class PosLength extends TransformationDefinition {
 	@Override
 	protected void lhs() throws IOException {
 		final List<? extends Object> segments = driver.collectVertices(ModelConstants.SEGMENT);
-		itemsToModify = Transformation.pickRandom(nElemToModify, segments);
+		elementsToModify = Transformation.pickRandom(nElementsToModify, segments);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object segment : itemsToModify) {
+		for (final Object segment : elementsToModify) {
 			driver.updateProperty(segment, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new SetToZero());
 		}
 	}

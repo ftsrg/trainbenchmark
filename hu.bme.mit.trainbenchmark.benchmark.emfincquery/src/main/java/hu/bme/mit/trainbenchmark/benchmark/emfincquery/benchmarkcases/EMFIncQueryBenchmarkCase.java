@@ -11,42 +11,39 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryCommon;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryDeltaMonitor;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.emf.FileBroker;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Level;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
+import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
+import org.eclipse.incquery.runtime.api.IPatternMatch;
+import org.eclipse.incquery.runtime.api.IncQueryMatcher;
+import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<T> {
+public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match extends IPatternMatch> extends
+		AbstractTransformationBenchmarkCase<T> {
 
-	protected BenchmarkResult bmr;
-	protected BenchmarkConfig bc;
-	protected RailwayContainer pack;
+	protected Set<T> resultSet = new HashSet<>();
+	protected RailwayContainer container;
 
 	protected AdvancedIncQueryEngine engine;
-	protected ResourceSet resourceSet;
-	protected Resource resource;
+	protected IncQueryMatcher<Match> matcher;
 
-	protected IncQueryDeltaMonitor<T> incqueryDeltaMonitor;	
-		
-	protected EMFIncQueryBenchmarkConfig getEIQBC() {
+	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
 		return (EMFIncQueryBenchmarkConfig) bc;
 	}
 
@@ -57,42 +54,47 @@ public abstract class EMFIncQueryBenchmarkCase<T> extends AbstractBenchmarkCase<
 
 	@Override
 	public void destroy() {
-		if (!engine.isManaged()) {
-			engine.dispose();
-		}
-		engine = null;
-		resource = null;
-		resourceSet = null;
+//		if (!engine.isManaged()) {
+//			engine.dispose();
+//		}
 	}
 
 	@Override
 	public List<T> check() {
-		results = new ArrayList<T>(incqueryDeltaMonitor.getMatching());
+		results = new ArrayList<>(resultSet);
 		return results;
 	}
 
 	@Override
 	public void read() throws IOException {
-		RailwayPackage.eINSTANCE.eClass();
-		final URI resourceURI = FileBroker.getEMFUri(bc.getBenchmarkArtifact());
-		resourceSet = new ResourceSetImpl();
-
-		try {
-			IncQueryCommon.setEIQOptions(getEIQBC());
-			engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
-//			final M patternMatcher = null; //= engine.getMatcher("posLength");
-//			final PosLengthMatcher patternMatcher = PosLengthMatcher.on(engine);
-
-//			final IQDeltaMonitor<Segment> iqDeltaMonitor = new IQDeltaMonitor<Segment>(patternMatcher, "Individual");
-			final IncQueryDeltaMonitor<T> iqDeltaMonitor = new IncQueryDeltaMonitor<T>(patternMatcher, "Individual");
-		} catch (final IncQueryException e) {
-			throw new IOException(e);
-		}
+		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
+		driver = emfDriver;	
+		final Resource resource = emfDriver.getResource();
 		
-		resource = resourceSet.getResource(resourceURI, true);
-		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
-			pack = (RailwayContainer) resource.getContents().get(0);
+		try {
+			IncQueryCommon.setEIQOptions(getEMFIncQueryBenchmarkConfig());
+			final EMFScope emfScope = new EMFScope(resource);
+			engine = AdvancedIncQueryEngine.createUnmanagedEngine(emfScope);
+
+			resultSet = getResultSet();
+			engine.addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<Match>() {
+				@Override
+				public void notifyAppearance(final Match match) {
+					resultSet.add(extract(match));
+				}
+
+				@Override
+				public void notifyDisappearance(final Match match) {
+					resultSet.remove(extract(match));
+				}
+			}, false);
+		} catch (final IncQueryException e) {
+			throw new RuntimeException(e);
 		}
 	}
+
+	protected abstract Set<T> getResultSet() throws IncQueryException;
+	protected abstract IncQueryMatcher<Match> getMatcher() throws IncQueryException;
+	protected abstract T extract(Match match);
 
 }
