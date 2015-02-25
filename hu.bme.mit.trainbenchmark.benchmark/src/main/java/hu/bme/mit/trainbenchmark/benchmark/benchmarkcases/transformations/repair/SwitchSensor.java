@@ -9,16 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.xform;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.NegateAndAddOne;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
-public class PosLength extends TransformationDefinition {
+public class SwitchSensor extends TransformationDefinition {
 
 	@Override
 	protected void lhs() throws IOException {
@@ -27,8 +26,8 @@ public class PosLength extends TransformationDefinition {
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object segment : itemsToModify) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new NegateAndAddOne());
+		for (final Object vertex : itemsToModify) {
+			driver.insertVertexWithEdge(vertex, ModelConstants.TRACKELEMENT, ModelConstants.SENSOR, ModelConstants.TRACKELEMENT_SENSOR);
 		}
 	}
 

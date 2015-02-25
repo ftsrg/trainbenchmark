@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.test;
+package hu.bme.mit.trainbenchmark.benchmark.fourstore.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.XFormTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class JenaXFormTest extends XFormTest {
+public class FourStoreRepairTest extends RepairTest {
 
-	public JenaXFormTest() {
-		bi = new JenaBenchmarkInitializer();
+	public FourStoreRepairTest() {
+		bi = new FourStoreBenchmarkInitializer();
 	}
 
 }

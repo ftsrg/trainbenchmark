@@ -54,9 +54,9 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 
 	@Override
 	public void destroy() {
-		if (!engine.isManaged()) {
-			engine.dispose();
-		}
+//		if (!engine.isManaged()) {
+//			engine.dispose();
+//		}
 	}
 
 	@Override

@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
+package hu.bme.mit.trainbenchmark.benchmark.drools.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.XFormTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class Drools5XFormTest extends XFormTest {
+public class DroolsRepairTest extends RepairTest {
 
-	public Drools5XFormTest() {
-		bi = new Drools5BenchmarkInitializer();
+	public DroolsRepairTest() {
+		bi = new DroolsBenchmarkInitializer();
 	}
 
 }

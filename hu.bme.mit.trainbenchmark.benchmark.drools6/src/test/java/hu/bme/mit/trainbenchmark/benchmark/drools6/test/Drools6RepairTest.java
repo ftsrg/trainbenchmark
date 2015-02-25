@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.XFormTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class Neo4jXFormTest extends XFormTest {
+public class Drools6RepairTest extends RepairTest {
 
-	public Neo4jXFormTest() {
-		bi = new Neo4jBenchmarkInitializer();
+	public Drools6RepairTest() {
+		bi = new Drools6BenchmarkInitializer();
 	}
 
 }

@@ -17,26 +17,26 @@ import java.io.IOException;
 import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
-public abstract class XFormTest extends TransformationTest {
+public abstract class RepairTest extends TransformationTest {
 
 	@Test
-	public void posLengthXForm() throws ParseException, IOException {
-		testTransformation("PosLength", "XForm", 15, 14);
+	public void posLengthRepair() throws ParseException, IOException {
+		testTransformation("PosLength", "Repair", 15, 14);
 	}
 
 	@Test
-	public void routeSensorXForm() throws ParseException, IOException {
-		testTransformation("RouteSensor", "XForm", 12, 11);
+	public void routeSensorRepair() throws ParseException, IOException {
+		testTransformation("RouteSensor", "Repair", 12, 11);
 	}
 
 	@Test
-	public void signalNeighborXForm() throws ParseException, IOException {
-		testTransformation("SignalNeighbor", "XForm", 1, 0);
+	public void signalNeighborRepair() throws ParseException, IOException {
+		testTransformation("SignalNeighbor", "Repair", 1, 0);
 	}
 
 	@Test
-	public void switchSensorXForm() throws ParseException, IOException {
-		testTransformation("SwitchSensor", "XForm", 4, 3);
+	public void switchSensorRepair() throws ParseException, IOException {
+		testTransformation("SwitchSensor", "Repair", 4, 3);
 	}
 
 }

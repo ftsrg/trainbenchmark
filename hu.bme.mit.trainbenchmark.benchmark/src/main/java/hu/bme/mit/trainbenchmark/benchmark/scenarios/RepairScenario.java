@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 
-public class ModelXFormScenario implements Scenario<AbstractTransformationBenchmarkCase<?>> {
+public class RepairScenario implements Scenario<AbstractTransformationBenchmarkCase<?>> {
 
 	@Override
 	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractTransformationBenchmarkCase<?> testCase) throws IOException {

@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.xform;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;

@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
+package hu.bme.mit.trainbenchmark.benchmark.jena.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.XFormTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class MySQLXFormTest extends XFormTest {
+public class JenaRepairTest extends RepairTest {
 
-	public MySQLXFormTest() {
-		bi = new MySQLBenchmarkInitializer();
+	public JenaRepairTest() {
+		bi = new JenaBenchmarkInitializer();
 	}
 
 }

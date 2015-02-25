@@ -28,16 +28,17 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>18.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.eclipse.incquery</groupId>
 			<artifactId>incquery-runtime</artifactId>
 			<version>0.9.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>hu.bme.mit.trainbenchmark</groupId>
+			<artifactId>hu.bme.mit.trainbenchmark.emf.model</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		
 	</dependencies>
 
 	<repositories>

@@ -1,4 +1,4 @@
-package Concept
+package hu.bme.mit.trainbenchmark.railway
 
 query "SwitchSensor check" 
     switch : Switch( trackElement_sensor.isEmpty() )

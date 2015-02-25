@@ -50,7 +50,7 @@ Every configuration parameter which matters is stored in the `config/config.json
 {
   "scenarios": [
     "User",
-    "XForm"
+    "Repair"
   ],
   "MAVEN_OPTS": {
     "Xmx": "512m",
@@ -77,7 +77,7 @@ Every configuration parameter which matters is stored in the `config/config.json
 }
 ```
 The parameters above can contain the following values:
- * scenarios: `Batch`, `User`, `XForm` or these combinations
+ * scenarios: `Batch`, `User`, `Repair` or these combinations
  * the Xmx and maxPermSize attributes must match to this regular expression: `^[0-9]+[m,g]`. For example: 
   ```
   Correct values:
