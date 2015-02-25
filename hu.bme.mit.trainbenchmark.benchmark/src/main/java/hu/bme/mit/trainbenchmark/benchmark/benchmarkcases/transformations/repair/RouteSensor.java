@@ -20,12 +20,12 @@ public class RouteSensor extends TransformationDefinition {
 
 	@Override
 	protected void lhs() throws IOException {
-		itemsToModify = pickRandom(nElemToModify, invalids);
+		elementsToModify = pickRandom(nElementsToModify, elements);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object sensor : itemsToModify) {
+		for (final Object sensor : elementsToModify) {
 			driver.deleteAllIncomingEdges(sensor, ModelConstants.TRACKELEMENT_SENSOR, ModelConstants.TRACKELEMENT);
 		}
 	}
