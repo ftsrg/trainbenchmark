@@ -17,21 +17,27 @@ import handler
 import loader
 import log
 
-def run_benchmark(configuration):
-    """Run the benchmark after the configuration parameter.
+
+def run_benchmark(configurations):
+    """Run the benchmark after the configurations parameter.
     
     Parameters:
-    @param configuration: a Configuration object
+    @param configurations: a list of Configuration objects
     """
     logging.info("benchmark.run_benchmark called.")
-    handler.set_working_directory(configuration.path)
+    handler.set_working_directory(configurations[0].common.path)
     if (os.path.exists("./results") == False):
         os.mkdir("results")
-    #if (configuration.tool in eclipse_based):
-    #    eclipse_based[configuration.tool](configuration)
-    #    return
-    for series_index in range(1,configuration.series + 1):
-        series_str = str(series_index)
+
+    for config in configurations:
+        execute(config)
+    
+
+
+def execute(configuration):
+    """Benchmark function.
+    """
+    for series_index in range(1,configuration.common.series + 1):
         for scenario in configuration.scenarios:
             for size in configuration.sizes:
                 format = configuration.format
@@ -39,8 +45,13 @@ def run_benchmark(configuration):
                                                             scenario,\
                                                             size)
                 target = targets.get_benchmark_jar(configuration.tool)
-                xmx = configuration.java_xmx
-                maxpermsize = configuration.java_maxpermsize
+                xmx = configuration.common.java_xmx
+                maxpermsize = configuration.common.java_maxpermsize
+                path = configuration.common.path
+                modif_method = configuration.common.modif_method
+                modif_constant = str(configuration.common.modif_constant)
+                iter_count = str(configuration.common.iter_count)
+                
                 for query in configuration.queries:
                     logging.info("Run benchmark:(tool:" + configuration.tool + \
                                  ", scenario:" + scenario +\
@@ -50,8 +61,12 @@ def run_benchmark(configuration):
                                      "-scenario", scenario,\
                                      "-runIndex", str(series_index), \
                                      "-benchmarkArtifact", benchmark_artifact,\
-                                     "-workspacePath", configuration.path,\
-                                     "-query", query, "-nMax", "1"])
+                                     "-workspacePath", path,\
+                                     "-query", query,
+                                     "-modificationMethod", modif_method,
+                                     "-modificationConstant", modif_constant,
+                                     "-iterationCount", str(iter_count)
+                                     ])
 
 
 def run_eclipse_based_benchmark(configuration):
@@ -111,6 +126,5 @@ if (__name__ == "__main__"):
     if (configurations is None):
         logging.error("No valid configurations were loaded.")
         sys.exit(1)
-    for config in configurations:
-        run_benchmark(config)
+    run_benchmark(configurations)
 

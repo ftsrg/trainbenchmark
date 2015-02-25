@@ -22,6 +22,18 @@ def install_dependencies(name, path):
         install_deps[name](path)
 
 
+def build_unique_tools(package):
+    """Handle any special build procedure which required by the certain tools.
+    
+    Parameters:
+    @param name: tool identity
+    """
+    if (package in build_deps):
+        build_deps[package](package)
+        return True
+    return False
+
+
 def install_neo4j_deps(path):
     """
     Install gradle then clone/build neo4j-shell-tools and geoff 
@@ -53,6 +65,32 @@ def install_neo4j_deps(path):
     new_file.close()
 
 
+def build_virtuoso(package):
+    """Build virtuso with maven by adding a local library to the process.
+    """
+    #path = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
+    #      "/src/main/resources/"
+    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
+          "/src/main/resources/virt_sesame2.jar" 
+    #subprocess.call(["mvn", "deploy:deploy-file", "-Durl=file:thirdparty", \
+     #                "-Dfile=" + url + file, "-DgroupId=virtuoso",\
+      #               "-DartifactId=virtuoso-sesame2", "-Dversion=2.7.3"\
+       #              "-Dpackaging=jar"])
+    subprocess.call(["mvn", "-P", package, "install:install-file",\
+                     "-Dfile=" + file, "-DgroupId=virtuoso", \
+                     "-DartifactId=virtuoso-sesame2", "-Dversion=2.7.3",\
+                     "-Dpackaging=jar"])
+    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
+          "/src/main/resources/virtjdbc4.jar"
+    subprocess.call(["mvn", "-P", package, "install:install-file",\
+                     "-Dfile=" + file, "-DgroupId=com.virtuoso.virtjdbc4", \
+                     "-DartifactId=virtjdbc4", "-Dversion=3.0",\
+                     "-Dpackaging=jar"])
+
+
 install_deps = {
                 'neo4j':install_neo4j_deps
                 }
+build_deps = {
+               'virtuoso':build_virtuoso
+               }
