@@ -32,7 +32,7 @@ public abstract class TrainBenchmarkConfig {
 	protected String scenario;
 	protected String workspacePath;
 
-	public TrainBenchmarkConfig(String args[]) throws ParseException {
+	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
 
 		if (Arrays.asList(args).contains("-help")) {
@@ -42,7 +42,7 @@ public abstract class TrainBenchmarkConfig {
 
 		try {
 			processArguments(args);
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			printHelp();
 			throw e;
 		}
@@ -50,11 +50,11 @@ public abstract class TrainBenchmarkConfig {
 
 	protected void initOptions() {
 		options.addOption("help", false, "displays this text");
-		options.addOption(requiredOption("scenario", "Batch/User/XForm"));
+		options.addOption(requiredOption("scenario", "Batch/User/Repair"));
 		options.addOption(requiredOption("workspacePath", "path of the Eclipse workspace with all projects"));
 	}
 
-	protected void processArguments(String[] args) throws ParseException {
+	protected void processArguments(final String[] args) throws ParseException {
 		cmd = parser.parse(options, args);
 
 		scenario = cmd.getOptionValue("scenario");
@@ -62,14 +62,14 @@ public abstract class TrainBenchmarkConfig {
 	}
 
 	// shorthand for generating required options
-	protected static Option requiredOption(String name, String description) {
-		Option option = new Option(name, true, description);
+	protected static Option requiredOption(final String name, final String description) {
+		final Option option = new Option(name, true, description);
 		option.setRequired(true);
 		return option;
 	}
 
 	public void printHelp() {
-		HelpFormatter formatter = new HelpFormatter();
+		final HelpFormatter formatter = new HelpFormatter();
 		formatter.setWidth(120);
 
 		formatter.printHelp("java -jar trainbenchmark-project-jarfile.jar [options]", "options:", options, "", false);
@@ -86,7 +86,7 @@ public abstract class TrainBenchmarkConfig {
 
 	public String getVariant() {
 		if ("Batch".equals(scenario))
-			return "-xform-";
+			return "-repair-";
 		return "-" + scenario.toLowerCase() + "-";
 	}
 
