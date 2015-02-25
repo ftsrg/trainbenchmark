@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
 import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
 
-pattern posLength(Source, Target)
+pattern PosLength(Source, Target)
 {
 	Segment(Source);
 	Segment.Segment_length(Source, Target);
