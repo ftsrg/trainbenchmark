@@ -11,7 +11,7 @@
           "type": "string",
           "enum": [
             "User",
-            "XForm",
+            "Repair",
             "Batch"
           ]
         }
@@ -20,7 +20,7 @@
         "type": "string",
         "enum": [
           "User",
-          "XForm",
+          "Repair",
           "Batch"
         ]
       }
