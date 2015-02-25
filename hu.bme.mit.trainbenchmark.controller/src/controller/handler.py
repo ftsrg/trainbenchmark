@@ -45,8 +45,8 @@ def get_power_of_two(minsize, maxsize):
     index = 1
     while (index <= maxsize):
         if (index >= minsize):
-            size_string = str(index)
-            all_size.append(size_string)
+            #size_string = str(index)
+            all_size.append(index)
         index *= 2
     return all_size
 

@@ -1,6 +1,6 @@
 # load .json files and convert into nested lists
 load_results <-function(){
-  files <- dir("../../trainbenchmark-results/", pattern = '\\.json', full.names = TRUE)
+  files <- dir("../results/", pattern = '\\.json', full.names = TRUE)
   lists <- lapply(files,fromJSON)
 }
 

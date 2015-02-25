@@ -10,66 +10,74 @@ class Configuration:
     """
     The class represents a configuration.
     
-    To add a new Repository object to self.repositories, call add_repository()
-    method instead of self.repositories.append().
-    
-    @cvar all_repositories: contains all Repository objects which are attached
-          to any Configuration object
+    @cvar all_dependencies: contains all dependencies of projects
     """
     
-    all_repositories = list()
-    def __init__(self, scenarios, format, tool, sizes, queries, path,\
-                 series, maven_xmx, maven_maxpermsize, java_xmx,\
-                 java_maxpermsize):
-        self.scenarios = scenarios
-        self.format = format
-        self.tool = tool
-        self.sizes = sizes
-        self.queries = queries
-        self.path = path
-        self.series = series
-        self.maven_xmx = maven_xmx 
-        self.maven_maxpermsize = maven_maxpermsize
-        self.java_xmx = java_xmx
-        self.java_maxpermsize = java_maxpermsize
-        self.__repositories = list()
+    all_dependencies = list()
+    def __init__(self):
+        self.scenarios = None
+        self.format = None
+        self.tool = None
+        self.sizes = None
+        self.queries = None
+        self.common = None
+        self.__dependencies = list()
     
     
-    def add_repository(self, repository):
+    def add_dependency(self, dependency):
         """
         Set the configuration repository which represents the tool's location.
         
         Parameters:
         repository: a Repository object
         """
-        repository.path = self.path
-        repository.config = self
-        self.__repositories.append(repository)
-        if (repository in self.all_repositories):
-            self.all_repositories.remove(repository)
-        self.all_repositories.append(repository)
+        #repository.path = self.path
+        #dependency.config = self
+        self.__dependencies.append(dependency)
+        if (dependency in self.all_dependencies):
+            self.all_dependencies.remove(dependency)
+        self.all_dependencies.append(dependency)
 
     
-    def get_repositories(self):
-        return self.__repositories
+    def get_dependencies(self):
+        return self.__dependencies
+
+
+class CommonParameters:
+    """
+    The class represents a container of the common parameters between
+    configurations.
+    """
+    
+    def __init__(self):
+        self.maven_xmx = None 
+        self.maven_maxpermsize = None
+        self.java_xmx = None
+        self.java_maxpermsize = None
+        self.series = None
+        self.modif_method = None
+        self.modif_constant = None
+        self.iter_count = None
+        self.path = None
 
 
 class Repository:
     """The class represents a Git repository.
     """
-    def __init__(self, name, url, folder, branch, depth):
+    def __init__(self, name):
         self.name = name
         #self.url = url
         #self.folder = folder
         #self.branch = branch
         #self.depth = depth
+        
         # initialized when a Repository is attached to a Configuration object
-        self.path = None
+        #self.path = None
         self.config = None
         
     
     def __eq__(self, other):
-        if (self.name == other.name and self.path == other.path):
+        if (self.name == other.name):
             return True
         else:
             return False
