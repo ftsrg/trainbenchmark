@@ -9,15 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test;
 
+package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.XFormTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class EMFIncQueryXFormTest extends XFormTest {
+public class Drools5RepairTest extends RepairTest {
 
-	public EMFIncQueryXFormTest() {
-		bi = new EMFIncQueryBenchmarkInitializer();
+	public Drools5RepairTest() {
+		bi = new Drools5BenchmarkInitializer();
 	}
 
 }

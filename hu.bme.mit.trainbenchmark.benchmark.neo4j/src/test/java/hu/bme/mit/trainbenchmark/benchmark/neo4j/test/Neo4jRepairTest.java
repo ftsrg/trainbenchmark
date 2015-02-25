@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.XFormTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class SesameXFormTest extends XFormTest {
+public class Neo4jRepairTest extends RepairTest {
 
-	public SesameXFormTest() {
-		bi = new SesameBenchmarkInitializer();
+	public Neo4jRepairTest() {
+		bi = new Neo4jBenchmarkInitializer();
 	}
 
 }

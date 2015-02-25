@@ -18,8 +18,8 @@ public class ScenarioFactory {
 		switch (scenario) {
 		case "User":
 			return new UserScenario();
-		case "XForm":
-			return new ModelXFormScenario();
+		case "Repair":
+			return new RepairScenario();
 		case "Batch":
 			return new BatchScenario();
 		default:

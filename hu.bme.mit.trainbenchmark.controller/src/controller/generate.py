@@ -44,7 +44,7 @@ def generate_models(configuration):
             java_maxpermsize = configuration.java_maxpermsize
             subprocess.call(["java", "-Xmx" + java_xmx,"-XX:MaxPermSize=" +\
                              java_maxpermsize, "-jar", target, "-scenario",\
-                             "XForm" if scenario=="Batch" else scenario, \
+                             "Repair" if scenario=="Batch" else scenario, \
                              "-size", size, "-workspacePath", \
                              configuration.path])
 
