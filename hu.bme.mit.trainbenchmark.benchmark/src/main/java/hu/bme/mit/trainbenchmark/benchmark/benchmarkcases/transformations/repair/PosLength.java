@@ -22,12 +22,12 @@ public class PosLength extends TransformationDefinition {
 
 	@Override
 	protected void lhs() throws IOException {
-		itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
+		elementsToModify = Transformation.pickRandom(nElementsToModify, elements);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object segment : itemsToModify) {
+		for (final Object segment : elementsToModify) {
 			driver.updateProperty(segment, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new NegateAndAddOne());
 		}
 	}

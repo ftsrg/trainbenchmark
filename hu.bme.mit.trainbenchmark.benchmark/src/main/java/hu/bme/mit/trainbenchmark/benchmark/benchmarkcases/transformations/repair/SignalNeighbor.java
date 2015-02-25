@@ -21,12 +21,12 @@ public class SignalNeighbor extends TransformationDefinition {
 
 	@Override
 	protected void lhs() throws IOException {
-		itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
+		elementsToModify = Transformation.pickRandom(nElementsToModify, elements);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object object : itemsToModify) {
+		for (final Object object : elementsToModify) {
 			driver.deleteOutgoingEdge(object, ModelConstants.ROUTE, ModelConstants.ROUTE_EXIT);
 		}
 	}

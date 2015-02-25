@@ -21,12 +21,12 @@ public class SwitchSensor extends TransformationDefinition {
 
 	@Override
 	protected void lhs() throws IOException {
-		itemsToModify = Transformation.pickRandom(nElemToModify, invalids);
+		elementsToModify = Transformation.pickRandom(nElementsToModify, elements);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object vertex : itemsToModify) {
+		for (final Object vertex : elementsToModify) {
 			driver.insertVertexWithEdge(vertex, ModelConstants.TRACKELEMENT, ModelConstants.SENSOR, ModelConstants.TRACKELEMENT_SENSOR);
 		}
 	}

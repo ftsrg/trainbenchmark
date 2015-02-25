@@ -23,12 +23,12 @@ public class RouteSensor extends TransformationDefinition {
 	@Override
 	protected void lhs() throws IOException {
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.ROUTE);
-		itemsToModify = Transformation.pickRandom(nElemToModify, routes);
+		elementsToModify = Transformation.pickRandom(nElementsToModify, routes);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object route : itemsToModify) {
+		for (final Object route : elementsToModify) {
 			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ROUTEDEFINITION);
 		}
 	}
