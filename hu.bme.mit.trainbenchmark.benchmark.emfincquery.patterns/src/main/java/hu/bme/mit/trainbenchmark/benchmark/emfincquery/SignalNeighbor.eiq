@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
 import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
 
-pattern signalNeighbor(R1)
+pattern SignalNeighbor(R1)
 {
 	find exitSignalSensor(SigA, R1, Sen1A);
 	find connectingSensors(Sen1A, Sen2A);

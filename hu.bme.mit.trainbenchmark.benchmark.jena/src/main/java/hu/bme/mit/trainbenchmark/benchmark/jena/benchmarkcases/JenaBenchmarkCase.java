@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
@@ -36,16 +35,16 @@ import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 
 public class JenaBenchmarkCase extends AbstractTransformationBenchmarkCase<Resource> {
 
-	protected BenchmarkResult bmr;
-	protected RDFBenchmarkConfig rbc;
 	protected Query query;
 	protected Model model;
 	protected String resultVar;
 
+	protected RDFBenchmarkConfig getRDFBenchmarkConfig() {
+		return (RDFBenchmarkConfig) bc;
+	}
+	
 	@Override
 	protected void init() throws IOException {
-		this.rbc = (RDFBenchmarkConfig) bc;
-
 		final String sparqlFilePath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
 				+ ".sparql";
 		query = QueryFactory.read(sparqlFilePath);
@@ -59,7 +58,7 @@ public class JenaBenchmarkCase extends AbstractTransformationBenchmarkCase<Resou
 		model.read(documentFilename);
 
 		Reasoner reasoner = null;
-		if (rbc.isInferencing()) {
+		if (getRDFBenchmarkConfig().isInferencing()) {
 			reasoner = ReasonerRegistry.getRDFSSimpleReasoner();
 			model = ModelFactory.createInfModel(reasoner, model);
 		}
