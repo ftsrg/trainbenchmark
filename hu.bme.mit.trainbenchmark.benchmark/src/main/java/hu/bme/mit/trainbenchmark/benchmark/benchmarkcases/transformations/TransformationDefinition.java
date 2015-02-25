@@ -65,9 +65,9 @@ public abstract class TransformationDefinition {
 		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
 
-	public static <T> List<T> pickRandom(long nElemToModify, final List<T> invalids) {
+	public static <T> List<T> pickRandom(long nElemToModify, final List<T> elements) {
 		final Random random = getRandom();
-		final int size = invalids.size();
+		final int size = elements.size();
 		final List<T> itemsToModify = new ArrayList<>();
 
 		if (size < nElemToModify) {
@@ -76,7 +76,7 @@ public abstract class TransformationDefinition {
 
 		for (int i = 0; i < nElemToModify; i++) {
 			final int rndTarget = random.nextInt(size);
-			final T segment = new ArrayList<>(invalids).get(rndTarget);
+			final T segment = new ArrayList<>(elements).get(rndTarget);
 			itemsToModify.add(segment);
 		}
 		return itemsToModify;
