@@ -2,21 +2,21 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
 import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
 
-pattern RouteSensor(Sen)
+pattern RouteSensor(sensor)
 {
-	Route(R);
-	SwitchPosition(Sp);
-	Switch(Sw);
-	Sensor(Sen);
+	Route(route);
+	SwitchPosition(switchPosition);
+	Switch(sw);
+	Sensor(sensor);
 	
-	Route.Route_switchPosition(R, Sp);
-	SwitchPosition.SwitchPosition_switch(Sp, Sw);
-	TrackElement.TrackElement_sensor(Sw, Sen);
+	Route.Route_switchPosition(route, switchPosition);
+	SwitchPosition.SwitchPosition_switch(switchPosition, sw);
+	TrackElement.TrackElement_sensor(sw, sensor);
 	
-	neg find head(Sen, R);	
+	neg find inverseRouteDefinition(sensor, route);	
 }
 
-pattern head(Sen, R)
+pattern inverseRouteDefinition(sensor, route)
 {
-	Route.Route_routeDefinition(R, Sen);
+	Route.Route_routeDefinition(route, sensor);
 }
