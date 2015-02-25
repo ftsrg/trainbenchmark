@@ -10,6 +10,10 @@
 	</parent>
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</artifactId>
 
+	<build>
+		<sourceDirectory>src-gen</sourceDirectory>
+	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
