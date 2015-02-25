@@ -66,12 +66,15 @@ public class Util {
 		out.close();
 	}
 
-	public static long calcModify(final BenchmarkConfig bc, final int nModify, final BenchmarkResult bmr) {
+	public static long calcModify(final BenchmarkResult bmr) {
+		final BenchmarkConfig bc = bmr.getBenchmarkConfig();
+		final long nModify = bc.getModificationConstant();
+		
 		switch (bc.getModificationMethod()) {
 		case CONSTANT:
 			return nModify;
 		case RESULT_SET:
-			return bmr.getInvalids().get(0).intValue() / nModify;
+			return bmr.getLastResultSize() / nModify;
 		default:
 			return 0;
 		}

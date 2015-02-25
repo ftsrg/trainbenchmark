@@ -21,12 +21,12 @@ public class MySQLBenchmarkLogic extends GenericBenchmarkLogic {
 
 	public MySQLBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = new BenchmarkConfig(args);
+		bc = new BenchmarkConfig(args, getTool());
 	}
 
 	@Override
-	protected String getPackageName() {
-		return "mysql";
+	protected String getTool() {
+		return "MySQL";
 	}
 
 }

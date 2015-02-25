@@ -19,6 +19,10 @@ import hu.bme.mit.trainbenchmark.emf.EMFUtil;
 import hu.bme.mit.trainbenchmark.emf.FileBroker;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.emf.config.EMFGeneratorConfig;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,13 +38,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import Concept.ConceptFactory;
-import Concept.ConceptPackage;
-import Concept.IndividualContainer;
-import Concept.SignalStateKind;
-import Concept.SwitchStateKind;
-import Concept.Thing;
-
 public class EMFGenerator extends Generator {
 
 	public EMFGenerator(final String args[]) throws ParseException {
@@ -55,15 +52,15 @@ public class EMFGenerator extends Generator {
 
 	protected EMFGeneratorConfig emfGeneratorConfig;
 	protected Resource resource;
-	protected ConceptFactory factory;
-	protected IndividualContainer cont;
+	protected RailwayFactory factory;
+	protected RailwayContainer cont;
 
 	@Override
 	public void initModel() {
 		final String uuidStr = emfGeneratorConfig.isGenUUID() ? "uuid-" : "";
 
 		final String fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + uuidStr
-				+ generatorConfig.getSize() + ".concept";
+				+ generatorConfig.getSize() + ".emf";
 		final URI resourceURI = FileBroker.getEMFUri(fileName);
 
 		if (emfGeneratorConfig.isGenUUID()) {
@@ -75,8 +72,8 @@ public class EMFGenerator extends Generator {
 		resource = resourceSet.createResource(resourceURI);
 		resource.getContents().clear();
 
-		factory = ConceptFactory.eINSTANCE;
-		cont = factory.createIndividualContainer();
+		factory = RailwayFactory.eINSTANCE;
+		cont = factory.createRailwayContainer();
 		resource.getContents().add(cont);
 	}
 
@@ -88,22 +85,22 @@ public class EMFGenerator extends Generator {
 	@Override
 	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
-		final EClass clazz = (EClass) ConceptPackage.eINSTANCE.getEClassifier(type);
-		final Thing thing = (Thing) ConceptFactory.eINSTANCE.create(clazz);
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
+		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			setAttribute(clazz, thing, attribute.getKey(), attribute.getValue());
+			setAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
 		}
-		cont.getContains().add(thing);
+		cont.getContains().add(railwayElement);
 
 		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
-			createEdge(outgoingEdge.getKey(), thing, outgoingEdge.getValue());
+			createEdge(outgoingEdge.getKey(), railwayElement, outgoingEdge.getValue());
 		}
 
 		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
-			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), thing);
+			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), railwayElement);
 		}
 
-		return thing;
+		return railwayElement;
 	}
 
 	@Override
@@ -125,20 +122,20 @@ public class EMFGenerator extends Generator {
 
 	@Override
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
-		final EClass clazz = (EClass) ConceptPackage.eINSTANCE.getEClassifier(type);
-		setAttribute(clazz, (Thing) node, key, value);
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
+		setAttribute(clazz, (RailwayElement) node, key, value);
 	}
 
-	protected void setAttribute(final EClass clazz, final Thing node, final String key, Object value) {
+	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
 		// change the enum value from the
 		// hu.bme.mit.trainbenchmark.constants.SignalStateKind enum to the
-		// Concept.SignalStateKind enum
+		// hu.bme.mit.trainbenchmark.SignalStateKind enum
 		if (SIGNAL_ACTUALSTATE.equals(key)) {
 			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SignalStateKind) value).ordinal();
-			value = Concept.SignalStateKind.get(ordinal);
+			value = hu.bme.mit.trainbenchmark.railway.SignalStateKind.get(ordinal);
 		} else if (SWITCH_ACTUALSTATE.equals(key) || SWITCHPOSITION_SWITCHSTATE.equals(key)) {
 			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SwitchStateKind) value).ordinal();
-			value = Concept.SwitchStateKind.get(ordinal);
+			value = hu.bme.mit.trainbenchmark.railway.SwitchStateKind.get(ordinal);
 		}
 
 		final EStructuralFeature feature = clazz.getEStructuralFeature(key);

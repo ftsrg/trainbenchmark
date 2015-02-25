@@ -21,7 +21,7 @@ public class RouteSensorUser extends RouteSensor implements TransformationBenchm
 
 	@Override
 	public void modify() {
-		modifyModelRouteSensor(graph, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		modifyModelRouteSensor(graph, bmr, Util.calcModify(bmr));
 	}
 
 }

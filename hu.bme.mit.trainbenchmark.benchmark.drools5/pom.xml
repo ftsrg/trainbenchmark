@@ -1,4 +1,5 @@
-	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -38,12 +39,6 @@
 
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
-			<artifactId>hu.bme.mit.trainbenchmark.model</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>hu.bme.mit.trainbenchmark</groupId>
 			<artifactId>hu.bme.mit.trainbenchmark.config</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
@@ -56,13 +51,13 @@
 
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
-			<artifactId>hu.bme.mit.trainbenchmark.benchmark.emf</artifactId>
+			<artifactId>hu.bme.mit.trainbenchmark.emf</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
-			<artifactId>hu.bme.mit.trainbenchmark.emf</artifactId>
+			<artifactId>hu.bme.mit.trainbenchmark.emf.model</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
@@ -114,14 +109,13 @@
 			<version>5.6.0.Final</version>
 		</dependency>
 
-		<!-- testing -->
+		<!-- turn the logger off -->
 
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-nop</artifactId>
+			<version>1.7.10</version>
 		</dependency>
-		
+
 	</dependencies>
 </project>

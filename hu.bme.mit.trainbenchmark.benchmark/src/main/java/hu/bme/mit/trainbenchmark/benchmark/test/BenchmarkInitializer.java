@@ -20,8 +20,4 @@ public abstract class BenchmarkInitializer {
 
 	protected abstract GenericBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException;
 
-	public GenericBenchmarkLogic initializeBenchmark(String queryName) throws ParseException {
-		return initializeBenchmark(queryName);
-	}
-
 }

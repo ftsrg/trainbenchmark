@@ -94,7 +94,7 @@ public abstract class Generator {
 			signalNeighborErrorPercent = 7;
 			switchSetErrorPercent = 2;
 			break;
-		case "XForm":
+		case "Repair":
 			MAX_Segments = 5;
 			MAX_Routes = 20 * generatorConfig.getSize();
 			MAX_SwitchPositions = 20;
@@ -109,13 +109,15 @@ public abstract class Generator {
 			MAX_Segments = 1;
 			MAX_Routes = 2 * generatorConfig.getSize();
 			MAX_SwitchPositions = 20;
-			MAX_Sensors = 5;
+			MAX_Sensors = 10;
 			posLengthErrorPercent = 10;
 			switchSensorErrorPercent = 4;
 			routeSensorErrorPercent = 10;
 			signalNeighborErrorPercent = 8;
 			switchSetErrorPercent = 10;
 			break;
+		default:
+			throw new UnsupportedOperationException("Scenario not supported.");
 		}
 	}
 
@@ -174,6 +176,7 @@ public abstract class Generator {
 						}
 					}
 
+					// TODO inject failures to the model
 					for (int m = 0; m < MAX_Segments; m++) {
 						final int segmentLength = ((nextRandom() < posLengthErrorPercent) ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH);
 

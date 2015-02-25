@@ -12,37 +12,27 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
-import java.util.ArrayList;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
-import Concept.Switch;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SwitchSensor extends JavaBenchmarkCase<Switch> {
 
 	@Override
-	public String getName() {
-		return "SwitchSensor";
-	}
+	protected List<Switch> check() {
+		results = new ArrayList<>();
 
-	private int constraintCheck() {
-		invalids = new ArrayList<Switch>();
-
-		for (Object eObject : pack.getContains()) {
+		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Switch) {
-				Switch aSwitch = (Switch) eObject;
+				final Switch aSwitch = (Switch) eObject;
 				if (aSwitch.getTrackElement_sensor().isEmpty()) {
-					invalids.add(aSwitch);
+					results.add(aSwitch);
 				}
 			}
 		}
 
-		return invalids.size();
+		return results;
 	}
-
-	@Override
-	public void check() {
-		bmr.startStopper();
-		bmr.addInvalid(constraintCheck());
-		bmr.addCheckTime();
-	}
-
+	
 }

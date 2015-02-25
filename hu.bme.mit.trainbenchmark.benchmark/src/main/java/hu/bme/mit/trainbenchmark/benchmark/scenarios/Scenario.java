@@ -12,13 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 
-public interface Scenario<T extends BenchmarkCase> {
+public interface Scenario<T extends AbstractBenchmarkCase<?>> {
 
-	public void runBenchmark(BenchmarkConfig bc, T testCase) throws IOException;
+	public BenchmarkResult runBenchmark(BenchmarkConfig bc, T testCase) throws IOException;
 
 }

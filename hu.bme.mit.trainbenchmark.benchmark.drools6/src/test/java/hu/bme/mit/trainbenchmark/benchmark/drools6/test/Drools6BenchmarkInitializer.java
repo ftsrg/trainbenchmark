@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools.Drools6BenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
 
@@ -21,11 +21,11 @@ import org.apache.commons.cli.ParseException;
 public class Drools6BenchmarkInitializer extends BenchmarkInitializer {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
+	protected GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
 		// @formatter:off
-		String[] args = {
+		final String[] args = {
 				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.concept",
+				"-benchmarkArtifact", "../models/railway-test-1.emf",
 				"-scenario", scenario, 
 				"-workspacePath", "../"
 			};

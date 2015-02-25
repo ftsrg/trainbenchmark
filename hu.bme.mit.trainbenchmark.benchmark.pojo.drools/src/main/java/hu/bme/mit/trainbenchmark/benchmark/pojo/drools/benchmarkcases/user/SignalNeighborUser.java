@@ -21,6 +21,6 @@ public class SignalNeighborUser extends SignalNeighbor implements Transformation
 
 	@Override
 	public void modify() {
-		modifyModelSignalNeighbor(graph, bmr, Util.calcModify(bc, bc.getModificationConstant(), bmr));
+		modifyModelSignalNeighbor(graph, bmr, Util.calcModify(bmr));
 	}
 }

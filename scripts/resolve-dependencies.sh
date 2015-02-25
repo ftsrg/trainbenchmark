@@ -6,7 +6,7 @@ if [ ! -d neo4j-shell-tools ]; then
   git clone https://github.com/szarnyasg/neo4j-shell-tools
 fi
 cd neo4j-shell-tools
-mvn clean install -DskipTests
+scripts/build.sh
 cd ..
 
 if [ ! -d rdf-graph-drivers ]; then

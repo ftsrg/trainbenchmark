@@ -1,4 +1,4 @@
-package Concept
+package hu.bme.mit.trainbenchmark.railway
 
 query "RouteSensor check"
     route : Route()

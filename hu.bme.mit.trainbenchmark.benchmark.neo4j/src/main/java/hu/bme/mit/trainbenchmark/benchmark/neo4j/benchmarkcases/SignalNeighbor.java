@@ -60,12 +60,12 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR
 				.toUpperCase());
 
-		invalids = new ArrayList<>();
+		results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> routes1 = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelRoute);
 			for (final Node route1 : routes1) {
-				if (invalids.contains(route1))
+				if (results.contains(route1))
 					continue;
 
 				// (route1:Route)<-[ROUTE_EXIT]->(signal:Signal)
@@ -154,7 +154,7 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 									}
 
 									if (!hasRoute2) {
-										invalids.add(route1);
+										results.add(route1);
 									}
 								}
 							}
@@ -164,7 +164,7 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 			}
 		}
 
-		return invalids;
+		return results;
 	}
 
 }

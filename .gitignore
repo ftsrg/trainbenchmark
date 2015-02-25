@@ -15,4 +15,5 @@ Thumbs.db
 results*.txt
 results/
 .pydevproject
+deps/
 diagrams/

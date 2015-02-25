@@ -23,23 +23,25 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	// modification constants
 	protected ModificationMethod modificationMethod;
-	protected int modificationConstant;
+	protected long modificationConstant;
 
 	protected boolean benchmarkMode;
 	protected int iterationCount;
 	protected int runIndex;
 	protected String benchmarkArtifact;
 	protected String query;
+	protected String tool;
 
 	protected static int nMax;
 	protected static boolean generateHeader;
-
+	
 	public int getRunIndex() {
 		return runIndex;
 	}
 
-	public BenchmarkConfig(String args[]) throws ParseException {
+	public BenchmarkConfig(final String args[], final String tool) throws ParseException {
 		super(args);
+		this.tool = tool;
 	}
 
 	@Override
@@ -64,7 +66,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		options.addOption("generateHeader", false, "is header generation needed?");
 	}
 
-	public void processArguments(String[] args) throws ParseException {
+	@Override
+	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
 		benchmarkArtifact = cmd.getOptionValue("benchmarkArtifact");
@@ -72,7 +75,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		// queries argument -> testCases list
 		query = cmd.getOptionValue("query");
 
-		String modificationMethodString = cmd.getOptionValue("modificationMethod");
+		final String modificationMethodString = cmd.getOptionValue("modificationMethod");
 		if (modificationMethodString != null) {
 			switch (modificationMethodString) {
 			case "constant":
@@ -88,14 +91,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 			modificationMethod = ModificationMethod.CONSTANT;
 		}
 
-		String iterationCountString = cmd.getOptionValue("iterationCount");
+		final String iterationCountString = cmd.getOptionValue("iterationCount");
 		if (iterationCountString != null) {
 			iterationCount = new Integer(iterationCountString);
 		} else {
 			iterationCount = 10;
 		}
 
-		String runIndexString = cmd.getOptionValue("runIndex");
+		final String runIndexString = cmd.getOptionValue("runIndex");
 		if (runIndexString != null) {
 			runIndex = new Integer(runIndexString);
 		} else {
@@ -105,7 +108,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		modificationConstant = 1;
 		modificationConstant = determineModificationConstant("modificationConstant");
 
-		String benchmarkModeString = cmd.getOptionValue("benchmarkMode");
+		final String benchmarkModeString = cmd.getOptionValue("benchmarkMode");
 		if (benchmarkModeString != null) {
 			benchmarkMode = new Boolean(benchmarkModeString);
 		} else {
@@ -121,9 +124,9 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		generateHeader = cmd.hasOption("generateHeader");
 	}
 
-	private int determineModificationConstant(String optionName) {
+	private long determineModificationConstant(final String optionName) {
 		if (cmd.getOptionValue(optionName) != null) {
-			return new Integer(cmd.getOptionValue(optionName));
+			return new Long(cmd.getOptionValue(optionName));
 		} else {
 			return modificationConstant;
 		}
@@ -133,7 +136,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return modificationMethod;
 	}
 
-	public int getModificationConstant() {
+	public long getModificationConstant() {
 		return modificationConstant;
 	}
 
@@ -150,8 +153,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	}
 
 	public int getArtifactSize() {
-		Pattern pattern = Pattern.compile("-(\\d+)\\.");
-		Matcher matcher = pattern.matcher(benchmarkArtifact);
+		final Pattern pattern = Pattern.compile("-(\\d+)\\.");
+		final Matcher matcher = pattern.matcher(benchmarkArtifact);
 		if (matcher.find()) {
 			return Integer.parseInt(matcher.group(1));
 		} else {
@@ -171,7 +174,11 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return generateHeader;
 	}
 
-	public static void setGeneratingHeader(boolean isGeneratingHead) {
+	public static void setGeneratingHeader(final boolean isGeneratingHead) {
 		generateHeader = false;
+	}
+
+	public String getTool() {
+		return tool;
 	}
 }

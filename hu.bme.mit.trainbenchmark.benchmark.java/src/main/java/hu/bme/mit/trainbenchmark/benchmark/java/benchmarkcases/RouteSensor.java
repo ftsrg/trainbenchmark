@@ -12,47 +12,37 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
-import java.util.ArrayList;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-import Concept.Sensor;
-import Concept.Switch;
-import Concept.SwitchPosition;
-import Concept.Trackelement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 
 	@Override
-	public String getName() {
-		return "RouteSensor";
-	}
+	protected List<Sensor> check() {
+		results = new ArrayList<>();
 
-	protected int constraintCheck() {
-		invalids = new ArrayList<Sensor>();
-
-		for (Object eObject : pack.getContains()) {
+		for (final Object eObject : pack.getContains()) {
 			if (eObject instanceof Sensor) {
-				Sensor sensor = (Sensor) eObject;
-				for (Trackelement te : sensor.getSensor_trackElement()) {
+				final Sensor sensor = (Sensor) eObject;
+				for (final TrackElement te : sensor.getSensor_trackElement()) {
 					if (te instanceof Switch) {
-						Switch aSwitch = (Switch) te;
-						for (SwitchPosition sp : aSwitch.getSwitch_switchPosition()) {
+						final Switch aSwitch = (Switch) te;
+						for (final SwitchPosition sp : aSwitch.getSwitch_switchPosition()) {
 							if (!sp.getSwitchPosition_route().getRoute_routeDefinition().contains(sensor)) {
-								invalids.add(sensor);
+								results.add(sensor);
 							}
 						}
 					}
 				}
 			}
 		}
-
-		return invalids.size();
-	}
-
-	@Override
-	public void check() {
-		bmr.startStopper();
-		bmr.addInvalid(constraintCheck());
-		bmr.addCheckTime();
+		
+		return results;
 	}
 
 }

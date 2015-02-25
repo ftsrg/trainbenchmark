@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Patterns
+Bundle-SymbolicName: hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Export-Package: hu.bme.mit.trainbenchmark.benchmark.emfincquery,
+ hu.bme.mit.trainbenchmark.benchmark.emfincquery.util
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.7.3",
+ hu.bme.mit.trainbenchmark.emf.model;bundle-version="1.0.0"

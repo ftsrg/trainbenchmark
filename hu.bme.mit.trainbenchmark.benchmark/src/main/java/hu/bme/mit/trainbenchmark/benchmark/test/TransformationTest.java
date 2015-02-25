@@ -13,9 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import static org.junit.Assert.assertEquals;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.TransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 
@@ -25,29 +25,46 @@ import org.junit.Assert;
 
 public abstract class TransformationTest extends TrainBenchmarkTest {
 
-	protected void testTransformation(String queryName, String scenario, int expectedResultSize1, int expectedResultSize2)
-			throws ParseException, IOException {
-		GenericBenchmarkLogic bl = bi.initializeBenchmark(queryName, scenario);
+	protected void testTransformation(final String queryName, final String scenario, final int expectedResultSize1,
+			final int expectedResultSize2) throws ParseException, IOException {
+		final GenericBenchmarkLogic bl = bi.initializeBenchmark(queryName, scenario);
 		testTransformation(bl, expectedResultSize1, expectedResultSize2);
 	}
 
-	protected void testTransformation(GenericBenchmarkLogic bl, int expectedResultSize1, int expectedResultSize2) throws IOException {
-		BenchmarkCase testCase = bl.getTestCase();
+	protected void testTransformation(final GenericBenchmarkLogic bl, final int expectedResultSize1, final int expectedResultSize2)
+			throws IOException {
+		final AbstractTransformationBenchmarkCase<?> benchmarkCase = (AbstractTransformationBenchmarkCase<?>) (bl.getTestCase());
 
 		try {
-			testCase.init(bl.getBc());
-			testCase.load();
-			testCase.check();
-			assertEquals(expectedResultSize1, testCase.getResultSize());
-			((TransformationBenchmarkCase) testCase).modify();
-			testCase.check();
-			if (expectedResultSize2 > expectedResultSize1) {
-				Assert.assertThat(testCase.getResultSize(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
+			benchmarkCase.benchmarkInit(bl.getBc());
+			benchmarkCase.benchmarkRead();
+			benchmarkCase.benchmarkCheck();
+
+			// System.out.println(bl.getBc().getQuery());
+			// System.out.println(testCase.getResultSize());
+
+			assertEquals(expectedResultSize1, benchmarkCase.getResults().size());
+			benchmarkCase.benchmarkModify();
+			benchmarkCase.benchmarkCheck();
+
+			// TODO we should remove this inequality as it may prevent the detection of buggy implementations in the user scenario (where
+			// errors are injected)
+			final boolean strict = false;
+			if (strict) {
+				assertEquals(expectedResultSize2, benchmarkCase.getResults().size());		
 			} else {
-				assertEquals(expectedResultSize2, testCase.getResultSize());
+				if (expectedResultSize2 > expectedResultSize1) {
+					Assert.assertThat(benchmarkCase.getResults().size(), Matchers.greaterThanOrEqualTo(expectedResultSize1));
+				} else {
+					assertEquals(expectedResultSize2, benchmarkCase.getResults().size());
+				}
 			}
+
+			final BenchmarkResult benchmarkResult = benchmarkCase.getBenchmarkResult();
+			System.out.println(benchmarkResult);
+			// System.out.println(testCase.getResultSize());
 		} finally {
-			testCase.destroy();
+			benchmarkCase.benchmarkDestroy();
 		}
 	}
 

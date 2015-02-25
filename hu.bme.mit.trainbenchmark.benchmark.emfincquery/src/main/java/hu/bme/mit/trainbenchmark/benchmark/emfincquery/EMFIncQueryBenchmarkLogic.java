@@ -22,12 +22,12 @@ public class EMFIncQueryBenchmarkLogic extends GenericBenchmarkLogic {
 	
 	public EMFIncQueryBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = iqbc = new EMFIncQueryBenchmarkConfig(args);
+		bc = iqbc = new EMFIncQueryBenchmarkConfig(args, getTool());
 	}
 
 	@Override
-	protected String getPackageName() {
-		return "emfincquery";
+	protected String getTool() {
+		return "EMFIncQuery";
 	}
 
 }

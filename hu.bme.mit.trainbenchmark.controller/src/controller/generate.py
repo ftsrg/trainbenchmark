@@ -78,8 +78,8 @@ def prevent_multiple_generation(configurations):
     
     if ("Batch" in unique_scenarios):
         unique_scenarios.remove("Batch")
-    if ("XForm" not in unique_scenarios):
-        unique_scenarios.add("XForm")
+    if ("Repair" not in unique_scenarios):
+        unique_scenarios.add("Repair")
     for s in unique_scenarios:
         formats = dict()
         for f in unique_formats:
@@ -87,7 +87,7 @@ def prevent_multiple_generation(configurations):
             for config in configurations:
                 if (
                     (s in config.scenarios or \
-                    ("Batch" in config.scenarios and s == "XForm")) and \
+                    ("Batch" in config.scenarios and s == "Repair")) and \
                     config.format == f
                     ):
                     sizes = list(set(sizes) | set(config.sizes))
