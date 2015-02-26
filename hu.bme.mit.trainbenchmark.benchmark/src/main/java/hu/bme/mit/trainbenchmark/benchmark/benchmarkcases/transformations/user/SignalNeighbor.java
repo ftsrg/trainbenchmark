@@ -20,14 +20,14 @@ public class SignalNeighbor<T> extends UserTransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		final List<T> routes = driver.collectVertices(ModelConstants.ROUTE);
-		elementsToModify = pickRandom(nElementsToModify, routes, currentResults);
+		final List<T> signals = driver.collectVertices(ModelConstants.SIGNAL);
+		elementsToModify = pickRandom(nElementsToModify, signals, currentResults);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object route : elementsToModify) {
-			driver.deleteOutgoingEdge(route, ModelConstants.ROUTE, ModelConstants.ROUTE_ENTRY);
+		for (final Object signal : elementsToModify) {
+			driver.deleteAllIncomingEdges(signal, ModelConstants.ROUTE_ENTRY, ModelConstants.ROUTE);
 		}
 	}
 

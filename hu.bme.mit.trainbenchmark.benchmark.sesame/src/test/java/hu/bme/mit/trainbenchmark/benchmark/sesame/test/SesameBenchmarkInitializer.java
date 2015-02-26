@@ -21,13 +21,13 @@ import org.apache.commons.cli.ParseException;
 public class SesameBenchmarkInitializer extends BenchmarkInitializer {
 
 	@Override
-	public GenericBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
+	public GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
 		// @formatter:off
-		String[] args = {
+		final String[] args = {
 				"-query", queryName, 
 				"-benchmarkArtifact", "../models/railway-test-1.ttl",
 				"-scenario", scenario, 
-				"-workspacePath", "../" 
+				"-workspacePath", "../"
 			};
 		// @formatter:on
 

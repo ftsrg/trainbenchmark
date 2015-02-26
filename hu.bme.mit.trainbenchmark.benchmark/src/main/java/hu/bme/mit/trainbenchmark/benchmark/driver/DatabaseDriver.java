@@ -38,10 +38,13 @@ public abstract class DatabaseDriver {
 			final AttributeOperation attributeOperation) throws IOException;
 
 	public abstract void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException;
-	
+
 	public abstract void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException;
 
 	public abstract void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException;
+
+	public abstract void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType)
+			throws IOException;
 
 }

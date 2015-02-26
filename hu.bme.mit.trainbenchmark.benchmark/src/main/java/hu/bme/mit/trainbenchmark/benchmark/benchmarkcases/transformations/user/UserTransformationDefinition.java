@@ -27,6 +27,9 @@ public abstract class UserTransformationDefinition<T> extends TransformationDefi
 			nElementsToModify = size;
 		}
 		
+		// System.out.println(elements.size() + " total elements: ");// + elements);
+		// System.out.println(invalids.size() + " invalid elements: ");// + invalids);
+		// System.out.println(valids.size() + " valid elements: ");// + valids);
 		System.out.println(elements.size() + " total elements: " + elements);
 		System.out.println(invalids.size() + " invalid elements: " + invalids);
 		System.out.println(valids.size() + " valid elements: " + valids);
