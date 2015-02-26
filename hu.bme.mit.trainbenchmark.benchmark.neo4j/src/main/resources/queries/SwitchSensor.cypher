@@ -1,3 +1,3 @@
 MATCH (sw:Switch)
-WHERE NOT (sw-[:TRACKELEMENT_SENSOR]->(:Sensor))
+WHERE NOT (sw-[:TrackElement_sensor]->(:Sensor))
 RETURN DISTINCT sw

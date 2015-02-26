@@ -49,7 +49,7 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 
 			// TODO we should remove this inequality as it may prevent the detection of buggy implementations in the user scenario (where
 			// errors are injected)
-			final boolean strict = false;
+			final boolean strict = true;
 			if (strict) {
 				assertEquals(expectedResultSize2, benchmarkCase.getResults().size());		
 			} else {

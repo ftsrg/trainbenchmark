@@ -11,18 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.NegateAndAddOne;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
-public class PosLength extends TransformationDefinition {
+public class PosLength<T> extends RepairTransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementsToModify = Transformation.pickRandom(nElementsToModify, elements);
+		elementsToModify = pickRandom(nElementsToModify, currentResults);
 	}
 
 	@Override

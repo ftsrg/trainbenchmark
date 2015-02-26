@@ -18,20 +18,27 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class TransformationDefinition {
+public abstract class TransformationDefinition<T> {
+	
+//	public static <X> TransformationDefinition<X> factory() {
+//		return new TransformationDefinition<X>();
+//	}
+//	
+//	public TransformationDefinition() {
+//		final TransformationDefinition<Integer> x = new TransformationDefinition<Integer>(Integer.class);
+//	}
 
-	public void initialize(final BenchmarkResult bmr, final DatabaseDriver driver, final List<? extends Object> elements) {
+	public void initialize(final BenchmarkResult bmr, final DatabaseDriver driver, final List<T> currentResults) {
 		this.bmr = bmr;
 		this.driver = driver;
-		this.elements = elements;
+		this.currentResults = currentResults;
 	}
 	
-	protected List<? extends Object> elements;
-	protected List<? extends Object> elementsToModify;
+	protected List<T> currentResults;
+	protected List<T> elementsToModify;
 	
 	protected long nElementsToModify;
 	protected long start;
@@ -63,23 +70,6 @@ public abstract class TransformationDefinition {
 	
 	public static Random getRandom() {
 		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
-	}
-
-	public static <T> List<T> pickRandom(long nElementsToModify, final List<T> elements) {
-		final Random random = getRandom();
-		final int size = elements.size();
-		final List<T> itemsToModify = new ArrayList<>();
-
-		if (size < nElementsToModify) {
-			nElementsToModify = size;
-		}
-
-		for (int i = 0; i < nElementsToModify; i++) {
-			final int rndTarget = random.nextInt(size);
-			final T segment = new ArrayList<>(elements).get(rndTarget);
-			itemsToModify.add(segment);
-		}
-		return itemsToModify;
 	}
 
 }

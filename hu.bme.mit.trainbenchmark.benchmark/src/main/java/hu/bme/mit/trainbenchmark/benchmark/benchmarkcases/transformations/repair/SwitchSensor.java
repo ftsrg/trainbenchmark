@@ -11,17 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
-public class SwitchSensor extends TransformationDefinition {
+public class SwitchSensor<T> extends RepairTransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementsToModify = Transformation.pickRandom(nElementsToModify, elements);
+		elementsToModify = pickRandom(nElementsToModify, currentResults);
 	}
 
 	@Override

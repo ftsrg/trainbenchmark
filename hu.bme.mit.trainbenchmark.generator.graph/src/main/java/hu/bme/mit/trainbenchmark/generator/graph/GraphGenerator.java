@@ -109,7 +109,7 @@ public class GraphGenerator extends Generator {
 
 	private Object enumsToString(Object value) {
 		if (value instanceof Enum) {
-			Enum e = (Enum) value;
+			final Enum e = (Enum) value;
 			value = e.toString();
 		}
 		return value;
@@ -128,12 +128,12 @@ public class GraphGenerator extends Generator {
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) {
 		final Node n = (Node) node;
 
-		Object attributeValue = enumsToString(value);
+		final Object attributeValue = enumsToString(value);
 		n.setProperty(key, attributeValue);
 	}
 
 	protected DynamicRelationshipType relationship(final String label) {
-		return DynamicRelationshipType.withName(label.toUpperCase());
+		return DynamicRelationshipType.withName(label);
 	}
 
 	@Override
