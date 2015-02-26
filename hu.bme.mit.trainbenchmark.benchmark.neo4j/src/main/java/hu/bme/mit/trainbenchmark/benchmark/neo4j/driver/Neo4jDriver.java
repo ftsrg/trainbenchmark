@@ -57,7 +57,7 @@ public class Neo4jDriver extends DatabaseDriver {
 
 		// automatic indexing ensures that the new node will be indexed by its type attribute
 		targetNode.addLabel(DynamicLabel.label(targetVertexType));
-		sourceNode.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType.toUpperCase()));
+		sourceNode.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType));
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class Neo4jDriver extends DatabaseDriver {
 	
 	protected void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) {
 		final Node node = (Node) vertex;
-		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType.toUpperCase());
+		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
 		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
 		final Iterable<Relationship> relationships = node.getRelationships(direction, relationshipType);
 

@@ -27,7 +27,7 @@ public abstract class DatabaseDriver {
 	public void destroy() throws IOException {
 	}
 
-	public abstract List<? extends Object> collectVertices(final String type) throws IOException;
+	public abstract <T> List<T> collectVertices(final String type) throws IOException;
 
 	public abstract void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException;
 

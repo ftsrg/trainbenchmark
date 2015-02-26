@@ -51,14 +51,11 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 		final Label labelSignal = DynamicLabel.label(SIGNAL);
 		final Label labelTrackElement = DynamicLabel.label(TRACKELEMENT);
 
-		final DynamicRelationshipType relationshipTypeRoute_entry = DynamicRelationshipType.withName(ROUTE_ENTRY.toUpperCase());
-		final DynamicRelationshipType relationshipTypeRoute_exit = DynamicRelationshipType.withName(ROUTE_EXIT.toUpperCase());
-		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION
-				.toUpperCase());
-		final DynamicRelationshipType relationshipTypeTrackElement_connectsTo = DynamicRelationshipType.withName(TRACKELEMENT_CONNECTSTO
-				.toUpperCase());
-		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR
-				.toUpperCase());
+		final DynamicRelationshipType relationshipTypeRoute_entry = DynamicRelationshipType.withName(ROUTE_ENTRY);
+		final DynamicRelationshipType relationshipTypeRoute_exit = DynamicRelationshipType.withName(ROUTE_EXIT);
+		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION);
+		final DynamicRelationshipType relationshipTypeTrackElement_connectsTo = DynamicRelationshipType.withName(TRACKELEMENT_CONNECTSTO);
+		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
 
 		results = new ArrayList<>();
 

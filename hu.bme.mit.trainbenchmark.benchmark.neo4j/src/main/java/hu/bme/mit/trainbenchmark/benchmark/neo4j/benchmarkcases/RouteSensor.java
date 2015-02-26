@@ -48,14 +48,10 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
 
-		final DynamicRelationshipType relationshipTypeRoute_switchPosition = DynamicRelationshipType.withName(ROUTE_SWITCHPOSITION
-				.toUpperCase());
-		final DynamicRelationshipType relationshipTypeSwitchPosition_switch = DynamicRelationshipType.withName(SWITCHPOSITION_SWITCH
-				.toUpperCase());
-		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR
-				.toUpperCase());
-		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION
-				.toUpperCase());
+		final DynamicRelationshipType relationshipTypeRoute_switchPosition = DynamicRelationshipType.withName(ROUTE_SWITCHPOSITION);
+		final DynamicRelationshipType relationshipTypeSwitchPosition_switch = DynamicRelationshipType.withName(SWITCHPOSITION_SWITCH);
+		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
+		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION);
 
 		results = new ArrayList<>();
 

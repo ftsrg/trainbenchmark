@@ -9,36 +9,28 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Transformation {
+public abstract class RepairTransformationDefinition<T> extends TransformationDefinition<T> {
 
-	public static Random getRandom() {
-		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
-	}
-
-	public static <T> List<T> pickRandom(long nElementsToModify, final List<T> invalids) {
-		final Random random = getRandom();
-		final int size = invalids.size();
-		final List<T> itemsToModify = new ArrayList<>();
-
+	public List<T> pickRandom(long nElementsToModify, final List<T> currentResults) {
+		final int size = currentResults.size();
 		if (size < nElementsToModify) {
 			nElementsToModify = size;
 		}
 
+		final List<T> elementsToModify = new ArrayList<>();
 		for (int i = 0; i < nElementsToModify; i++) {
-			final int rndTarget = random.nextInt(size);
-			final T segment = new ArrayList<>(invalids).get(rndTarget);
-			itemsToModify.add(segment);
+			final int rndTarget = getRandom().nextInt(size);
+			final T element = currentResults.get(rndTarget);
+			elementsToModify.add(element);
 		}
-		return itemsToModify;
+		return elementsToModify;
 	}
 
 }
