@@ -20,14 +20,14 @@ public class RouteSensor<T> extends UserTransformationDefinition<T> {
 	
 	@Override
 	protected void lhs() throws IOException {
-		final List<T> routes = driver.collectVertices(ModelConstants.ROUTE);
-		elementsToModify = pickRandom(nElementsToModify, routes, currentResults);
+		final List<T> sensors = driver.collectVertices(ModelConstants.SENSOR);
+		elementsToModify = pickRandom(nElementsToModify, sensors, currentResults);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object route : elementsToModify) {
-			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ROUTEDEFINITION);
+		for (final Object sensor : elementsToModify) {
+			driver.deleteAllIncomingEdges(sensor, ModelConstants.ROUTE_ROUTEDEFINITION, ModelConstants.ROUTE);
 		}
 	}
 

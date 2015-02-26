@@ -18,7 +18,6 @@ import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,7 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public List<? extends Object> collectVertices(final String type) throws IOException {
+	public List<? extends Object> collectVertices(final String type) {
 		final List<EObject> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
@@ -66,7 +65,7 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
+	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) {
 		final EObject object = (EObject) vertex;
 		final EStructuralFeature feature = object.eClass().getEStructuralFeature(edgeType);
 		final AbstractList<EObject> features = (AbstractList<EObject>) object.eGet(feature);
@@ -75,7 +74,7 @@ public class EMFDriver extends DatabaseDriver {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
+	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) {
 		final EObject object = (EObject) vertex;
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
@@ -99,7 +98,7 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException {
+	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) {
 		final EObject object = (EObject) vertex;
 		final EStructuralFeature feature = object.eClass().getEStructuralFeature(edgeType);
 
@@ -115,13 +114,13 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
+	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) {
 		deleteOneOutgoingEdge(vertex, edgeType);
 	}
 
 	@Override
 	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
+			final String edgeType) {
 		// create target object
 		final RailwayFactory factory = RailwayFactory.eINSTANCE;
 		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
@@ -133,6 +132,20 @@ public class EMFDriver extends DatabaseDriver {
 		final EObject sourceObject = (EObject) sourceVertex;
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceObject.eGet(feature);
 		references.add(targetObject);
+	}
+	
+
+	@Override
+	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType) {
+		// create target object
+		final RailwayFactory factory = RailwayFactory.eINSTANCE;
+		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(newVertexType);
+		final EObject targetObject = factory.create(targetClass);
+
+		// set reference to source object
+		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(newVertexType);
+		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
+		targetObject.eSet(feature, sourceVertex);
 	}
 
 	public RailwayContainer getRoot() {

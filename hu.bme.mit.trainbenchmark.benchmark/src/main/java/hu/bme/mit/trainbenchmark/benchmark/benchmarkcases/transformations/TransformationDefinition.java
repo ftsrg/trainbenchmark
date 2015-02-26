@@ -22,14 +22,6 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class TransformationDefinition<T> {
-	
-//	public static <X> TransformationDefinition<X> factory() {
-//		return new TransformationDefinition<X>();
-//	}
-//	
-//	public TransformationDefinition() {
-//		final TransformationDefinition<Integer> x = new TransformationDefinition<Integer>(Integer.class);
-//	}
 
 	public void initialize(final BenchmarkResult bmr, final DatabaseDriver driver, final List<T> currentResults) {
 		this.bmr = bmr;

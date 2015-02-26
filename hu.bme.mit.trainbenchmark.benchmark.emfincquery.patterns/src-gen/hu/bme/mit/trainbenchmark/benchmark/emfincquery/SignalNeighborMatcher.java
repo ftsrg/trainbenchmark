@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SignalNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SignalNeighborQuerySpecification;
-import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Signal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +27,7 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern SignalNeighbor(route1)
+ * pattern SignalNeighbor(signal)
  * {
  * 	find exitSignalSensor(signal, route1, sensor1);
  * 	find connectingSensors(sensor1, sensor2);
@@ -62,7 +62,7 @@ public class SignalNeighborMatcher extends BaseMatcher<SignalNeighborMatch> {
     return matcher;
   }
   
-  private final static int POSITION_ROUTE1 = 0;
+  private final static int POSITION_SIGNAL = 0;
   
   private final static Logger LOGGER = IncQueryLoggingUtil.getLogger(SignalNeighborMatcher.class);
   
@@ -99,104 +99,104 @@ public class SignalNeighborMatcher extends BaseMatcher<SignalNeighborMatch> {
   
   /**
    * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
+   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
    * @return matches represented as a SignalNeighborMatch object.
    * 
    */
-  public Collection<SignalNeighborMatch> getAllMatches(final Route pRoute1) {
-    return rawGetAllMatches(new Object[]{pRoute1});
+  public Collection<SignalNeighborMatch> getAllMatches(final Signal pSignal) {
+    return rawGetAllMatches(new Object[]{pSignal});
   }
   
   /**
    * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
    * Neither determinism nor randomness of selection is guaranteed.
-   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
+   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
    * @return a match represented as a SignalNeighborMatch object, or null if no match is found.
    * 
    */
-  public SignalNeighborMatch getOneArbitraryMatch(final Route pRoute1) {
-    return rawGetOneArbitraryMatch(new Object[]{pRoute1});
+  public SignalNeighborMatch getOneArbitraryMatch(final Signal pSignal) {
+    return rawGetOneArbitraryMatch(new Object[]{pSignal});
   }
   
   /**
    * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
    * under any possible substitution of the unspecified parameters (if any).
-   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
+   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
    * @return true if the input is a valid (partial) match of the pattern.
    * 
    */
-  public boolean hasMatch(final Route pRoute1) {
-    return rawHasMatch(new Object[]{pRoute1});
+  public boolean hasMatch(final Signal pSignal) {
+    return rawHasMatch(new Object[]{pSignal});
   }
   
   /**
    * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
+   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
    * @return the number of pattern matches found.
    * 
    */
-  public int countMatches(final Route pRoute1) {
-    return rawCountMatches(new Object[]{pRoute1});
+  public int countMatches(final Signal pSignal) {
+    return rawCountMatches(new Object[]{pSignal});
   }
   
   /**
    * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
+   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
    * @param processor the action that will process each pattern match.
    * 
    */
-  public void forEachMatch(final Route pRoute1, final IMatchProcessor<? super SignalNeighborMatch> processor) {
-    rawForEachMatch(new Object[]{pRoute1}, processor);
+  public void forEachMatch(final Signal pSignal, final IMatchProcessor<? super SignalNeighborMatch> processor) {
+    rawForEachMatch(new Object[]{pSignal}, processor);
   }
   
   /**
    * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
    * Neither determinism nor randomness of selection is guaranteed.
-   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
+   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
    * @param processor the action that will process the selected match.
    * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
    * 
    */
-  public boolean forOneArbitraryMatch(final Route pRoute1, final IMatchProcessor<? super SignalNeighborMatch> processor) {
-    return rawForOneArbitraryMatch(new Object[]{pRoute1}, processor);
+  public boolean forOneArbitraryMatch(final Signal pSignal, final IMatchProcessor<? super SignalNeighborMatch> processor) {
+    return rawForOneArbitraryMatch(new Object[]{pSignal}, processor);
   }
   
   /**
    * Returns a new (partial) match.
    * This can be used e.g. to call the matcher with a partial match.
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
+   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
    * @return the (partial) match object.
    * 
    */
-  public SignalNeighborMatch newMatch(final Route pRoute1) {
-    return SignalNeighborMatch.newMatch(pRoute1);
+  public SignalNeighborMatch newMatch(final Signal pSignal) {
+    return SignalNeighborMatch.newMatch(pSignal);
   }
   
   /**
-   * Retrieve the set of values that occur in matches for route1.
+   * Retrieve the set of values that occur in matches for signal.
    * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
    * 
    */
-  protected Set<Route> rawAccumulateAllValuesOfroute1(final Object[] parameters) {
-    Set<Route> results = new HashSet<Route>();
-    rawAccumulateAllValues(POSITION_ROUTE1, parameters, results);
+  protected Set<Signal> rawAccumulateAllValuesOfsignal(final Object[] parameters) {
+    Set<Signal> results = new HashSet<Signal>();
+    rawAccumulateAllValues(POSITION_SIGNAL, parameters, results);
     return results;
   }
   
   /**
-   * Retrieve the set of values that occur in matches for route1.
+   * Retrieve the set of values that occur in matches for signal.
    * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
    * 
    */
-  public Set<Route> getAllValuesOfroute1() {
-    return rawAccumulateAllValuesOfroute1(emptyArray());
+  public Set<Signal> getAllValuesOfsignal() {
+    return rawAccumulateAllValuesOfsignal(emptyArray());
   }
   
   @Override
   protected SignalNeighborMatch tupleToMatch(final Tuple t) {
     try {
-    	return SignalNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE1));
+    	return SignalNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Signal) t.get(POSITION_SIGNAL));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -206,7 +206,7 @@ public class SignalNeighborMatcher extends BaseMatcher<SignalNeighborMatch> {
   @Override
   protected SignalNeighborMatch arrayToMatch(final Object[] match) {
     try {
-    	return SignalNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE1]);
+    	return SignalNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Signal) match[POSITION_SIGNAL]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -216,7 +216,7 @@ public class SignalNeighborMatcher extends BaseMatcher<SignalNeighborMatch> {
   @Override
   protected SignalNeighborMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SignalNeighborMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE1]);
+    	return SignalNeighborMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Signal) match[POSITION_SIGNAL]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

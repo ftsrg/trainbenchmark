@@ -62,7 +62,7 @@ public final class SignalNeighborQuerySpecification extends BaseGeneratedEMFQuer
   
   @Override
   public SignalNeighborMatch newMatch(final Object... parameters) {
-    return SignalNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) parameters[0]);
+    return SignalNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Signal) parameters[0]);
   }
   
   private static class LazyHolder {
@@ -83,12 +83,12 @@ public final class SignalNeighborQuerySpecification extends BaseGeneratedEMFQuer
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("route1");
+      return Arrays.asList("signal");
     }
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(new PParameter("route1", "hu.bme.mit.trainbenchmark.railway.Route"));
+      return Arrays.asList(new PParameter("signal", "hu.bme.mit.trainbenchmark.railway.Signal"));
     }
     
     @Override
@@ -97,14 +97,14 @@ public final class SignalNeighborQuerySpecification extends BaseGeneratedEMFQuer
       try {
       {
       	PBody body = new PBody(this);
-      	PVariable var_route1 = body.getOrCreateVariableByName("route1");
       	PVariable var_signal = body.getOrCreateVariableByName("signal");
+      	PVariable var_route1 = body.getOrCreateVariableByName("route1");
       	PVariable var_sensor1 = body.getOrCreateVariableByName("sensor1");
       	PVariable var_sensor2 = body.getOrCreateVariableByName("sensor2");
       	PVariable var_route3 = body.getOrCreateVariableByName("route3");
       	PVariable var__route2 = body.getOrCreateVariableByName("_route2");
       	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_route1, "route1")
+      		new ExportedParameter(body, var_signal, "signal")
       	));
       	new PositivePatternCall(body, new FlatTuple(var_signal, var_route1, var_sensor1), ExitSignalSensorQuerySpecification.instance().getInternalQueryRepresentation());
       	new PositivePatternCall(body, new FlatTuple(var_sensor1, var_sensor2), ConnectingSensorsQuerySpecification.instance().getInternalQueryRepresentation());

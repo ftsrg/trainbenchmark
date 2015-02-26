@@ -82,10 +82,15 @@ public class Neo4jDriver extends DatabaseDriver {
 	}
 	
 	protected void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) {
+		System.out.println(edgeType);
+		System.out.println(outgoing);
+		System.out.println(all);
 		final Node node = (Node) vertex;
 		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
 		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
 		final Iterable<Relationship> relationships = node.getRelationships(direction, relationshipType);
+		System.out.println(relationships);
+		System.out.println(node.getId());
 
 		for (final Relationship relationship : relationships) {
 			relationship.delete();
@@ -121,5 +126,14 @@ public class Neo4jDriver extends DatabaseDriver {
 		graphDb.shutdown();
 	}
 
+	@Override
+	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType) throws IOException {
+		final Node sourceNode = (Node) sourceVertex;
+		final Node targetNode = graphDb.createNode();
+
+		// automatic indexing ensures that the new node will be indexed by its type attribute
+		targetNode.addLabel(DynamicLabel.label(newVertexType));
+		targetNode.createRelationshipTo(sourceNode, DynamicRelationshipType.withName(edgeType));		
+	}
 
 }

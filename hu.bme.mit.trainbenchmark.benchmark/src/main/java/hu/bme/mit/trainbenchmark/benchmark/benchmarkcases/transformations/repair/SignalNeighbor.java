@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
-public class SignalNeighbor<T> extends RepairTransformationDefinition<T>  {
+public class SignalNeighbor<T> extends RepairTransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
@@ -24,8 +24,9 @@ public class SignalNeighbor<T> extends RepairTransformationDefinition<T>  {
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object object : elementsToModify) {
-			driver.deleteOutgoingEdge(object, ModelConstants.ROUTE, ModelConstants.ROUTE_EXIT);
+		for (final Object sensor : elementsToModify) {
+			System.out.println(sensor);
+			driver.deleteAllIncomingEdges(sensor, ModelConstants.ROUTE_EXIT, ModelConstants.ROUTE);
 		}
 	}
 
