@@ -24,6 +24,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
@@ -34,6 +35,7 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.pojo.drools</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
@@ -107,6 +109,13 @@
 		<!-- tools -->
 
 		<profile>
+			<id>allegro</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
+			</modules>
+		</profile>
+
+		<profile>
 			<id>drools</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
@@ -161,6 +170,13 @@
 			<id>sesame</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
+			</modules>
+		</profile>
+		
+		<profile>
+			<id>virtuoso</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 			</modules>
 		</profile>
 

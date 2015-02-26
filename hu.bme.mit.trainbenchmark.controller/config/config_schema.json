@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "scenarios": {
+    "Scenarios": {
       "type": "array",
       "uniqueItems": true,
       "minItems": 1,
@@ -11,7 +11,7 @@
           "type": "string",
           "enum": [
             "User",
-            "XForm",
+            "Repair",
             "Batch"
           ]
         }
@@ -20,7 +20,7 @@
         "type": "string",
         "enum": [
           "User",
-          "XForm",
+          "Repair",
           "Batch"
         ]
       }
@@ -55,25 +55,39 @@
         }
       }
     },
-    "minSize": {
+    "IterationCount": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 10
+    },
+    "MinSize": {
       "type": "integer",
       "minimum": 1,
       "default": 1
     },
-    "maxSize": {
+    "MaxSize": {
       "type": "integer",
+      "minimum": 1,
       "default": 4
     },
-    "workspacePath": {
-      "type": "string",
-      "default": "."
+    "ModificationMethod": {
+      "enum": [
+        "constant",
+        "resultSet"
+      ],
+      "default": "constant"
     },
-    "series": {
+    "ModificationConstant": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 10
+    },
+    "Series": {
       "type": "integer",
       "minimum": 1,
       "default": 1
     },
-    "queries": {
+    "Queries": {
       "type": "array",
       "uniqueItems": true,
       "minItems": 1,
@@ -114,7 +128,7 @@
         "SwitchSensor"
       ]
     },
-    "tools": {
+    "Tools": {
       "type": "array",
       "uniqueItems": true,
       "minItems": 1,
@@ -122,6 +136,7 @@
         {
           "type": "string",
           "enum": [
+            "allegro",
             "drools5",
             "drools6",
             "eclipseocl",
@@ -132,13 +147,15 @@
             "mysql",
             "neo4j",
             "sesame",
-            "postgresql"
+            "postgresql",
+            "virtuoso"
           ]
         }
       ],
       "additionalItems": {
         "type": "string",
         "enum": [
+          "allegro",
           "drools5",
           "drools6",
           "eclipseocl",
@@ -149,12 +166,88 @@
           "mysql",
           "neo4j",
           "sesame",
-          "postgresql"
+          "postgresql",
+          "virtuoso"
         ]
       },
       "default": [
         "sesame"
       ]
+    },
+    "UniqueConfigurations": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "required": ["Tool"],
+          "properties": {
+            "Tool": {
+              "enum": [
+                "allegro",
+                "drools5",
+                "drools6",
+                "eclipseocl",
+                "emfincquery",
+                "fourstore",
+                "java",
+                "jena",
+                "mysql",
+                "neo4j",
+                "sesame",
+                "postgresql",
+                "virtuoso"
+              ]
+            },
+           "Queries": {
+              "$ref": "#/properties/Queries"
+			},
+            "Scenarios": {
+              "$ref": "#/properties/Scenarios"
+            },
+            "MinSize": {
+              "$ref": "#/properties/MinSize"
+            },
+            "MaxSize": {
+              "$ref": "#/properties/MaxSize"
+            }
+          }
+        }
+      ],
+      "additionalItems": {
+"type": "object",
+          "required": ["Tool"],
+          "properties": {
+            "Tool": {
+              "enum": [
+                "allegro",
+                "drools5",
+                "drools6",
+                "eclipseocl",
+                "emfincquery",
+                "fourstore",
+                "java",
+                "jena",
+                "mysql",
+                "neo4j",
+                "sesame",
+                "postgresql",
+                "virtuoso"
+              ]
+            },
+           "Queries": {
+              "$ref": "#/properties/Queries"
+			},
+            "Scenarios": {
+              "$ref": "#/properties/Scenarios"
+            },
+            "MinSize": {
+              "$ref": "#/properties/MinSize"
+            },
+            "MaxSize": {
+              "$ref": "#/properties/MaxSize"
+            }
+          }
+      }
     }
   }
 }
