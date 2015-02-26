@@ -49,7 +49,7 @@ def get_model_path(format, scenario, size_str):
     if (format not in models):
         return None
     if (scenario == "Batch"):
-        scnr = "XForm"
+        scnr = "Repair"
     else:
         scnr = scenario
     # first format is the parameter, second is an embedded python function

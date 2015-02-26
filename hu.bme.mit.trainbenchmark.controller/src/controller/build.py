@@ -39,35 +39,24 @@ def resolve_dependencies(configurations):
     @param configurations: a list contain Configuration objects
     """
     for config in configurations:
-        for repo in config.get_repositories():
-            dependency = loader.get_dependency(repo.name)
+        for name in config.get_dependencies():
+            dependency = loader.get_dependency(name)
             if (dependency is not None):
-                if (dependency not in config.get_repositories()):
-                    config.add_repository(dependency)
+                if (dependency not in config.get_dependencies()):
+                    config.add_dependency(dependency)
 
 
-def maven_build(configuration, package):
-    """
-    Run a Maven build after the configuration object parameter and  
-    package name.
+def maven_build(tool):
+    """Run a Maven build after the tool's name.
     
     Parameters:
-    @param configuration: Configuration object
-    @param package: package name
+    @param package: tool name
     """
-    logging.info("Build: " + package)
-    # change back working directory later, so store it now
-    current_directory = os.getcwd() 
-    # change working directory to this module's location
-    handler.set_working_directory()
-    # path is given relatively to this module's location
-    subprocess.call(["../../shell-scripts/export_maven_opts.sh",\
-                    configuration.maven_xmx, \
-                    configuration.maven_maxpermsize])
-    handler.set_working_directory(configuration.path)
+    logging.info("Build: " + tool)
+    deps.build_unique_tools(tool)
     subprocess.call(["mvn", "clean", "install", "-P",\
-                     handler.get_package_name(package)])
-    handler.set_working_directory(current_directory)
+                    handler.get_package_name(tool)])
+    #handler.set_working_directory(current_directory)
 
 
 def build_projects(configurations, build_core=True, build_formats=True, \
@@ -79,39 +68,33 @@ def build_projects(configurations, build_core=True, build_formats=True, \
     for config in configurations:
         tools.append(config.tool)
         formats.append(config.format)
-    logging.info("Build the following projects:" + tools.__str__() + " - " +\
-                  formats.__str__())
-    
+        
     # make a new instance of the static attribute
-    # all_repositories contains every Repository which attached to
-    # the Configuration object
-    all_repositories = configurations[0].all_repositories.copy()
-    while(len(all_repositories) > 0):
-            # first build the top repository in the hierarchy
-            if (build_core == True and \
-                    all_repositories[-1].name not in tools and \
-                    all_repositories[-1].name not in formats):
-                # install further dependencies if necessary
-                deps.install_dependencies(all_repositories[-1].name, \
-                                          all_repositories[-1].path)
-                maven_build(all_repositories[-1].config, \
-						    all_repositories.pop().name)
-            elif (build_formats == True and \
-                    all_repositories[-1].name in formats):
-                # install further dependencies if necessary
-                deps.install_dependencies(all_repositories[-1].name, \
-                                            all_repositories[-1].path)
-                maven_build(all_repositories[-1].config, \
-						    all_repositories.pop().name)
-            elif (build_tools == True and \
-                    all_repositories[-1].name in tools):
-                # install further dependencies if necessary
-                deps.install_dependencies(all_repositories[-1].name, \
-                                          all_repositories[-1].path)
-                maven_build(all_repositories[-1].config, \
-						    all_repositories.pop().name)
-            else:
-                all_repositories.pop()
+    all_dependencies = configurations[0].all_dependencies.copy()
+    if (build_core == False):
+        if ("core" in all_dependencies):
+            all_dependencies.remove("core")
+    if (build_formats == False):
+        for f in formats:
+            if (f in all_dependencies):
+                all_dependencies.remove(f)
+    if (build_tools == False):
+        for t in tools:
+            if (t in all_dependencies):
+                all_dependencies.remove(t)
+    logging.info("Build the following projects: " + all_dependencies.__str__())
+    print("Build the following projects: " + all_dependencies.__str__())
+    path = configurations[0].common.path
+    handler.set_working_directory()
+    subprocess.call(["../../shell-scripts/export_maven_opts.sh",\
+                    configurations[0].common.maven_xmx, \
+                    configurations[0].common.maven_maxpermsize])
+    handler.set_working_directory(path)
+    
+    while (len(all_dependencies) > 0):
+        deps.install_dependencies(all_dependencies[-1], path)
+        maven_build(all_dependencies.pop())
+
 
 
 if (__name__ == "__main__"):
@@ -157,8 +140,8 @@ if (__name__ == "__main__"):
                    args.tools)
     
     if (args.generate == True):
-        for config in configurations:
-            generate.generate_models(config)
+        generate.generate_models(configurations)
+            
     if (args.benchmark == True):
         for config in configurations:
             benchmark.run_benchmark(config)
