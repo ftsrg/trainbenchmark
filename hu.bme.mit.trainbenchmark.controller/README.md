@@ -1,7 +1,7 @@
 #Train Benchmark Controller
 
 ### Overview
-Controller is responsible for providing a configuration for Train Benchmark and also support management for building the actual projects, generating the models and also running the benchmark tests. Every process is executed on the base of a `config.json` file. To alter the default configuration of Train Benchmark, just modify `config.json` file.
+Controller is responsible for providing a configuration for Train Benchmark and also support management for building the actual projects, generating the models and also running the benchmark tests. Every process is executed on the base of a `config.json` file. To alter the default configuration of Train Benchmark, just modify `config.json` file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
 ### Requirements
 * Git
@@ -74,3 +74,7 @@ All in one:
 //OR
 ./build.py -gb
 ```
+
+### Configuration
+
+Read the [wiki](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
