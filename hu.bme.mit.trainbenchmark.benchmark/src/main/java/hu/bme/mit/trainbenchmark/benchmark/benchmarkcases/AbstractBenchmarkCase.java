@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -24,7 +25,7 @@ public abstract class AbstractBenchmarkCase<T> {
 	
 	private BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
-	protected DatabaseDriver driver;
+	protected DatabaseDriver<T> driver;
 	protected List<T> results;
 
 	// simple getters and setters
@@ -41,7 +42,7 @@ public abstract class AbstractBenchmarkCase<T> {
 		return results;
 	}
 
-	// these should be implemented for each tools
+	// these should be implemented for each tool
 
 	protected void init() throws IOException {}
 
@@ -50,6 +51,23 @@ public abstract class AbstractBenchmarkCase<T> {
 	protected abstract void read() throws IOException;
 
 	protected abstract List<T> check() throws IOException;
+
+	public void benchmarkModify() throws IOException {
+		modify();
+	}
+	
+	protected void modify() throws IOException {
+		final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations." + bc.getScenario().toLowerCase()
+				+ "." + bc.getQuery();
+		try {
+			final Class<?> clazz = this.getClass().getClassLoader().loadClass(className);
+			final TransformationDefinition td = (TransformationDefinition) clazz.newInstance();
+			td.initialize(getBenchmarkResult(), driver, results);
+			td.performTransformation();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
 
 	protected long getMemoryUsage() throws IOException {
 		Util.runGC();
@@ -62,8 +80,7 @@ public abstract class AbstractBenchmarkCase<T> {
 		bmr = new BenchmarkResult(bc.getTool(), bc.getQuery());
 		bmr.setBenchmarkConfig(bc);
 		init();
-		
-		runGC(bc);
+		runGC();
 	}
 
 	public void benchmarkDestroy() throws IOException {
@@ -83,7 +100,7 @@ public abstract class AbstractBenchmarkCase<T> {
 		bmr.addCheckTime();
 	}
 
-	protected void runGC(final BenchmarkConfig bc) throws IOException {
+	protected void runGC() throws IOException {
 		Util.runGC();
 		if (bc.isBenchmarkMode()) {
 			Util.freeCache(bc);

@@ -25,7 +25,6 @@ public class SignalNeighbor<T> extends RepairTransformationDefinition<T> {
 	@Override
 	protected void rhs() throws IOException {
 		for (final Object sensor : elementsToModify) {
-			System.out.println(sensor);
 			driver.deleteAllIncomingEdges(sensor, ModelConstants.ROUTE_EXIT, ModelConstants.ROUTE);
 		}
 	}

@@ -26,6 +26,7 @@ public class SignalNeighbor<T> extends UserTransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
+		System.out.println(elementsToModify);
 		for (final Object signal : elementsToModify) {
 			driver.deleteAllIncomingEdges(signal, ModelConstants.ROUTE_ENTRY, ModelConstants.ROUTE);
 		}

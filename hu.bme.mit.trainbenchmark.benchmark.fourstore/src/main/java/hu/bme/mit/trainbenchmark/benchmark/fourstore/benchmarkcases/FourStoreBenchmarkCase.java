@@ -1,9 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.driver.FourStoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import org.apache.commons.io.FileUtils;
 
 import eu.mondo.driver.fourstore.FourStoreGraphDriverReadWrite;
 
-public class FourStoreBenchmarkCase extends AbstractTransformationBenchmarkCase<Long> {
+public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
 	protected static final String CLUSTERNAME = "trainbenchmark_cluster";
 
@@ -58,11 +57,6 @@ public class FourStoreBenchmarkCase extends AbstractTransformationBenchmarkCase<
 
 		sparqlFilePath = getResourceDirectory() + "/queries/" + getName() + ".sparql";
 		sparqlQuery = FileUtils.readFileToString(new File(sparqlFilePath));
-
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
 
 		// run 4store
 		fsDriver = new FourStoreGraphDriverReadWrite(CLUSTERNAME);

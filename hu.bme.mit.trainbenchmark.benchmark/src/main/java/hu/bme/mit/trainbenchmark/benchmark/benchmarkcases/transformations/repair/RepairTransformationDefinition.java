@@ -15,10 +15,12 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public abstract class RepairTransformationDefinition<T> extends TransformationDefinition<T> {
 
 	public List<T> pickRandom(long nElementsToModify, final List<T> currentResults) {
+		final Random random = getRandom();
 		final int size = currentResults.size();
 		if (size < nElementsToModify) {
 			nElementsToModify = size;
@@ -26,7 +28,7 @@ public abstract class RepairTransformationDefinition<T> extends TransformationDe
 
 		final List<T> elementsToModify = new ArrayList<>();
 		for (int i = 0; i < nElementsToModify; i++) {
-			final int rndTarget = getRandom().nextInt(size);
+			final int rndTarget = random.nextInt(size);
 			final T element = currentResults.get(rndTarget);
 			elementsToModify.add(element);
 		}

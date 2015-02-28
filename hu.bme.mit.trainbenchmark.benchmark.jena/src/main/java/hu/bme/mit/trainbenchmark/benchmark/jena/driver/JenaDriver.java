@@ -17,9 +17,17 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -30,18 +38,21 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class JenaDriver extends DatabaseDriver {
+public class JenaDriver extends DatabaseDriver<Resource> {
 
 	protected String basePrefix;
 	protected Model model;
+	protected Query query;
+	protected String resultVar;
 
-	public JenaDriver(final String basePrefix, final Model model) {
+	public JenaDriver(final String basePrefix, final String queryPath) {
 		this.basePrefix = basePrefix;
-		this.model = model;
+		query = QueryFactory.read(queryPath);
+		resultVar = query.getResultVars().get(0);		
 	}
 
 	@Override
-	public List<? extends Object> collectVertices(final String type) throws IOException {
+	public List<Resource> collectVertices(final String type) throws IOException {
 		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type, model.getResource(RDFConstants.BASE_PREFIX + type));
 		final List<Resource> vertices = vertexStatements.toList();
 		return vertices;
@@ -141,6 +152,38 @@ public class JenaDriver extends DatabaseDriver {
 
 		model.add(model.createStatement(targetVertexResource, edge, sourceVertexResource));
 		model.add(model.createStatement(targetVertexResource, RDF.type, vertexType));		
+	}
+
+	@Override
+	public void read(final String modelPath) throws IOException {
+		model = ModelFactory.createDefaultModel();
+		model.read(modelPath);
+	}
+
+	@Override
+	public List<Resource> runQuery() throws IOException {
+		final List<Resource> results = new ArrayList<>();
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, model)) {
+			final ResultSet resultSet = queryExecution.execSelect();
+
+			while (resultSet.hasNext()) {
+				final QuerySolution qs = resultSet.next();
+				final Resource resource = qs.getResource(resultVar);
+				results.add(resource);
+			}
+		}
+
+		return results;
+	}
+
+	@Override
+	public Comparator<Resource> getComparator() {
+		return new JenaComparator();
+	}
+
+	@Override
+	public void destroy() throws IOException {
+		model.close();
 	}
 
 }

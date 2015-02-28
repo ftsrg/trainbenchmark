@@ -23,7 +23,7 @@ public class SwitchSensor extends JavaBenchmarkCase<Switch> {
 	protected List<Switch> check() {
 		results = new ArrayList<>();
 
-		for (final Object eObject : pack.getContains()) {
+		for (final Object eObject : container.getContains()) {
 			if (eObject instanceof Switch) {
 				final Switch aSwitch = (Switch) eObject;
 				if (aSwitch.getTrackElement_sensor().isEmpty()) {

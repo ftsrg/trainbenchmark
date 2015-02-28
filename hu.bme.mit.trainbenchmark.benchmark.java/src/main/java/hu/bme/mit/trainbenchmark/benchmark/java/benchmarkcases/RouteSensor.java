@@ -26,7 +26,7 @@ public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 	protected List<Sensor> check() {
 		results = new ArrayList<>();
 
-		for (final Object eObject : pack.getContains()) {
+		for (final Object eObject : container.getContains()) {
 			if (eObject instanceof Sensor) {
 				final Sensor sensor = (Sensor) eObject;
 				for (final TrackElement te : sensor.getSensor_trackElement()) {

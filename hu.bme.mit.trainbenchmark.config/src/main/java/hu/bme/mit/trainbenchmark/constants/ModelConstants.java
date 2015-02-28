@@ -18,6 +18,8 @@ import com.google.common.collect.ImmutableMap;
 
 public class ModelConstants {
 
+	public static final String ID = "id";
+	
 	// node types
 	public static final String ROUTE = "Route";
 	public static final String SEGMENT = "Segment";
@@ -43,14 +45,14 @@ public class ModelConstants {
 	public static final String SWITCHPOSITION_SWITCHSTATE = "SwitchPosition_switchState";
 
 	// enumeration strings (for RDF-based representations)
-	public static final String SIGNALSTATEKIND_STOP = "SignalStateKind_STOP";
-	public static final String SIGNALSTATEKIND_FAILURE = "SignalStateKind_FAILURE";
-	public static final String SIGNALSTATEKIND_GO = "SignalStateKind_GO";
+	public static final String SIGNALSTATE_STOP = "STOP";
+	public static final String SIGNALSTATE_FAILURE = "FAILURE";
+	public static final String SIGNALSTATE_GO = "GO";
 
-	public static final String POINTSTATEKIND_FAILURE = "PointStateKind_FAILURE";
-	public static final String POINTSTATEKIND_LEFT = "PointStateKind_LEFT";
-	public static final String POINTSTATEKIND_RIGHT = "PointStateKind_RIGHT";
-	public static final String POINTSTATEKIND_STRAIGHT = "PointStateKind_STRAIGHT";
+	public static final String SWITCHSTATE_FAILURE = "FAILURE";
+	public static final String SWITCHSTATE_LEFT = "LEFT";
+	public static final String SWITCHSTATE_RIGHT = "RIGHT";
+	public static final String SWITCHSTATE_STRAIGHT = "STRAIGHT";
 
 	// inheritance
 	public static final Map<String, String> ancestors = ImmutableMap.of(SEGMENT, TRACKELEMENT, SWITCH, TRACKELEMENT);

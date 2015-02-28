@@ -15,10 +15,12 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public abstract class UserTransformationDefinition<T> extends TransformationDefinition<T> {
 
 	public List<T> pickRandom(long nElementsToModify, final List<T> elements, final List<T> invalids) {
+		final Random random = getRandom();
 		final List<T> valids = new ArrayList<>(elements);
 		valids.removeAll(invalids);
 		
@@ -34,14 +36,17 @@ public abstract class UserTransformationDefinition<T> extends TransformationDefi
 		System.out.println(invalids.size() + " invalid elements: " + invalids);
 		System.out.println(valids.size() + " valid elements: " + valids);
 		
+//		System.out.println(size);
+//		System.out.println(nElementsToModify);
 		final List<T> elementsToModify = new ArrayList<>();
 		for (int i = 0; i < nElementsToModify; i++) {
-			final int rndTarget = getRandom().nextInt(size);
+			final int rndTarget = random.nextInt(size);
+//			System.out.println("rndTarget: " + rndTarget);
 			final T element = new ArrayList<>(valids).get(rndTarget);
 			elementsToModify.add(element);
 		}
 		
-		System.out.println(elementsToModify);
+//		System.out.println("Transforming elements: " + elementsToModify.size());
 		return elementsToModify;
 	}
 

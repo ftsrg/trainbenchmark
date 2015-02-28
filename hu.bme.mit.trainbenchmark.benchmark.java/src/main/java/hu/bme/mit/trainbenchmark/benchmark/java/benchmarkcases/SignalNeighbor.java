@@ -26,7 +26,7 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 	protected List<Route> check() {
 		results = new ArrayList<>();
 		
-		for (final Object eObject : pack.getContains()) {
+		for (final Object eObject : container.getContains()) {
 			if (eObject instanceof Route) {
 				final Route aRoute = (Route) eObject;
 				if (!(isValid(aRoute))) {
@@ -45,7 +45,7 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 				for (final TrackElement te2 : te1.getTrackElement_connectsTo()) {
 					for (final Sensor sen2 : te2.getTrackElement_sensor()) {
 						boolean goodSensor = false;
-						for (final Object eObject : pack.getContains()) {
+						for (final Object eObject : container.getContains()) {
 							if (eObject instanceof Route) {
 								final Route route2X = (Route) eObject;
 								if ((route2X.getRoute_routeDefinition().contains(sen2)) && (route2X != route)) {
@@ -55,7 +55,7 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 							}
 						}
 						if (goodSensor) {
-							for (final Object eObject : pack.getContains()) {
+							for (final Object eObject : container.getContains()) {
 								if (eObject instanceof Route) {
 									final Route route2 = (Route) eObject;
 									if ((route2.getRoute_routeDefinition().contains(sen2)) && (route2.getRoute_entry() != null)

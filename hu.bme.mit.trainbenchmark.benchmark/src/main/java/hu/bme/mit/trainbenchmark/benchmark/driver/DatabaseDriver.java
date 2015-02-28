@@ -14,9 +14,10 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
-public abstract class DatabaseDriver {
+public abstract class DatabaseDriver<T> {
 
 	public void beginTransaction() throws IOException {
 	}
@@ -27,7 +28,9 @@ public abstract class DatabaseDriver {
 	public void destroy() throws IOException {
 	}
 
-	public abstract <T> List<T> collectVertices(final String type) throws IOException;
+	public abstract void read(String modelPath) throws IOException;
+
+	public abstract List<T> collectVertices(final String type) throws IOException;
 
 	public abstract void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException;
 
@@ -47,4 +50,7 @@ public abstract class DatabaseDriver {
 	public abstract void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType)
 			throws IOException;
 
+	public abstract List<T> runQuery() throws IOException;
+
+	public abstract Comparator<T> getComparator(); 
 }

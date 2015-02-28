@@ -13,34 +13,49 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.openrdf.OpenRDFException;
 import org.openrdf.model.Literal;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
+import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
+import org.openrdf.repository.sail.SailRepository;
+import org.openrdf.rio.RDFFormat;
+import org.openrdf.sail.memory.MemoryStore;
 import org.openrdf.sail.memory.model.IntegerMemLiteral;
 
-public class SesameDriver extends DatabaseDriver {
+public class SesameDriver extends DatabaseDriver<URI> {
 
 	protected String basePrefix;
+	protected String query;
 	protected RepositoryConnection con;
 	protected Repository repository;
 	protected ValueFactory f;
 
-	public SesameDriver(final String basePrefix, final RepositoryConnection con, final Repository repository) {
+	public SesameDriver(final String basePrefix, final String queryPath) throws IOException {
 		this.basePrefix = basePrefix;
-		this.repository = repository;
-		this.con = con;
+		this.query = FileUtils.readFileToString(new File(queryPath));
 	}
 
 	@Override
@@ -58,15 +73,16 @@ public class SesameDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public List<?> collectVertices(final String type) throws IOException {
+	public List<URI> collectVertices(final String type) throws IOException {
 		final URI typeURI = f.createURI(basePrefix + type);
-		final List<Resource> vertices = new ArrayList<Resource>();
+		final List<URI> vertices = new ArrayList<>();
 
 		try {
 			final RepositoryResult<Statement> statements = con.getStatements(null, RDF.TYPE, typeURI, true);
 			while (statements.hasNext()) {
 				final Statement s = statements.next();
-				vertices.add(s.getSubject());
+				final URI uri = (URI) s.getSubject();
+				vertices.add(uri);
 			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
@@ -76,6 +92,7 @@ public class SesameDriver extends DatabaseDriver {
 	}
 
 	protected long newVertexId = 1000000000;
+	private TupleQuery tupleQuery;
 
 	@Override
 	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
@@ -183,7 +200,8 @@ public class SesameDriver extends DatabaseDriver {
 	}
 
 	@Override
-	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType) throws IOException {
+	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType)
+			throws IOException {
 		final URI sourceVertexURI = (URI) sourceVertex;
 		final URI vertexTypeURI = f.createURI(basePrefix + newVertexType);
 		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
@@ -203,6 +221,72 @@ public class SesameDriver extends DatabaseDriver {
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
+	}
+
+	@Override
+	public void read(final String modelPath) throws IOException {
+		repository = new SailRepository(new MemoryStore());
+		final File modelFile = new File(modelPath);
+
+		try {
+			repository.initialize();
+			con = repository.getConnection();
+			con.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
+		} catch (final OpenRDFException e) {
+			throw new IOException(e);
+		}
+	}
+
+	public List<Long> extractIds(final Collection<URI> elements) {
+		final ArrayList<Long> ids = new ArrayList<Long>();
+		for (final URI uri : elements) {
+			final String idString = uri.getLocalName();
+			final Long id = new Long(idString);
+			ids.add(id);
+		}
+		return ids;
+	}
+
+	@Override
+	public List<URI> runQuery() throws IOException {
+		final List<URI> results = new ArrayList<>();
+		TupleQueryResult queryResults;
+
+		try {
+			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, query);
+			queryResults = tupleQuery.evaluate();
+			try {
+				final String bindingName = queryResults.getBindingNames().get(0);
+
+				while (queryResults.hasNext()) {
+					final BindingSet bs = queryResults.next();
+					final Value resultValue = bs.getValue(bindingName);
+					if (resultValue instanceof URI) {
+						results.add((URI) resultValue);
+					}
+				}
+			} finally {
+				queryResults.close();
+			}
+		} catch (final QueryEvaluationException | RepositoryException | MalformedQueryException e) {
+			throw new IOException(e);
+		}
+
+		return results;
+	}
+
+	@Override
+	public void destroy() throws IOException {
+		try {
+			con.close();
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
+	}
+
+	@Override
+	public Comparator<URI> getComparator() {
+		return new URIComparator();
 	}
 
 }

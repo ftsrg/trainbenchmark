@@ -18,8 +18,10 @@ import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
+import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -31,30 +33,29 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-public class EMFDriver extends DatabaseDriver {
-
-	protected RailwayContainer pack;
+public class EMFDriver extends DatabaseDriver<RailwayElement> {
+	
+	protected RailwayContainer container;
 	protected Resource resource;
 
 	public EMFDriver(final String modelPath) {
 		RailwayPackage.eINSTANCE.eClass();
 
 		final URI resourceURI = FileBroker.getEMFUri(modelPath);
-
 		final ResourceSet resourceSet = new ResourceSetImpl();
 		resource = resourceSet.getResource(resourceURI, true);
 
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
-			pack = (RailwayContainer) resource.getContents().get(0);
+			container = (RailwayContainer) resource.getContents().get(0);
 		}
 	}
 
 	@Override
-	public List<? extends Object> collectVertices(final String type) {
-		final List<EObject> vertices = new ArrayList<>();
+	public List<RailwayElement> collectVertices(final String type) {
+		final List<RailwayElement> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		for (final RailwayElement t : pack.getContains()) {
+		for (final RailwayElement t : container.getContains()) {
 			// if t's type is a descendant of clazz
 			if (clazz.isSuperTypeOf(t.eClass())) {
 				vertices.add(t);
@@ -149,11 +150,26 @@ public class EMFDriver extends DatabaseDriver {
 	}
 
 	public RailwayContainer getRoot() {
-		return pack;
+		return container;
 	}
 
 	public Resource getResource() {
 		return resource;
+	}
+
+	@Override
+	public void read(final String modelPath) throws IOException {
+		
+	}
+
+	@Override
+	public List<RailwayElement> runQuery() throws IOException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Comparator<RailwayElement> getComparator() {
+		return new EMFComparator();
 	}
 
 }

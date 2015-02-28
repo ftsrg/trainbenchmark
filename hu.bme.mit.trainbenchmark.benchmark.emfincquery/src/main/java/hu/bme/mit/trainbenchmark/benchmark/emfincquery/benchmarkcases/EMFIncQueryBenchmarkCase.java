@@ -11,8 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.IncQueryCommon;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryCommon;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
@@ -35,7 +36,7 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match extends IPatternMatch> extends
-		AbstractTransformationBenchmarkCase<T> {
+		AbstractBenchmarkCase<T> {
 
 	protected Set<T> resultSet = new HashSet<>();
 	protected RailwayContainer container;
@@ -53,13 +54,6 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 	}
 
 	@Override
-	public void destroy() {
-//		if (!engine.isManaged()) {
-//			engine.dispose();
-//		}
-	}
-
-	@Override
 	public List<T> check() {
 		results = new ArrayList<>(resultSet);
 		return results;
@@ -67,12 +61,14 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 
 	@Override
 	public void read() throws IOException {
-		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
-		driver = emfDriver;	
+		final String modelPath = bc.getBenchmarkArtifact();
+		final EMFDriver emfDriver = new EMFDriver(modelPath);
+		driver = (DatabaseDriver<T>) emfDriver;
+		
 		final Resource resource = emfDriver.getResource();
 		
 		try {
-			IncQueryCommon.setEIQOptions(getEMFIncQueryBenchmarkConfig());
+			EMFIncQueryCommon.setEIQOptions(getEMFIncQueryBenchmarkConfig());
 			final EMFScope emfScope = new EMFScope(resource);
 			engine = AdvancedIncQueryEngine.createUnmanagedEngine(emfScope);
 

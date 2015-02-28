@@ -12,6 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.constants;
 
-public enum SignalStateKind {
-	SIGNALSTATEKIND_STOP, SIGNALSTATEKIND_FAILURE, SIGNALSTATEKIND_GO
+public enum SignalState {
+	FAILURE, STOP, GO
 }

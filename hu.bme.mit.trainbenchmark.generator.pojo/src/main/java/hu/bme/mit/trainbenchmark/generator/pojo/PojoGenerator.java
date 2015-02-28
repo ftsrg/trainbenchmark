@@ -98,7 +98,7 @@ public class PojoGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+	protected Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
 		Object node = createModelInstance(type);
 

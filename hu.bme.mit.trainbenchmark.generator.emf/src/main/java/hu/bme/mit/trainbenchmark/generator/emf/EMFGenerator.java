@@ -83,10 +83,12 @@ public class EMFGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
+		railwayElement.setId(id);
+		
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
 			setAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
 		}
@@ -113,7 +115,7 @@ public class EMFGenerator extends Generator {
 		final EStructuralFeature edgeType = objectFrom.eClass().getEStructuralFeature(label);
 
 		if (edgeType.isMany()) {
-			final List<Object> l = ((List<Object>) objectFrom.eGet(edgeType));
+			final List<Object> l = (List<Object>) objectFrom.eGet(edgeType);
 			l.add(to);
 		} else {
 			objectFrom.eSet(edgeType, to);
@@ -128,14 +130,14 @@ public class EMFGenerator extends Generator {
 
 	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
 		// change the enum value from the
-		// hu.bme.mit.trainbenchmark.constants.SignalStateKind enum to the
-		// hu.bme.mit.trainbenchmark.SignalStateKind enum
+		// hu.bme.mit.trainbenchmark.constants.SignalState enum to the
+		// hu.bme.mit.trainbenchmark.SignalState enum
 		if (SIGNAL_ACTUALSTATE.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SignalStateKind) value).ordinal();
-			value = hu.bme.mit.trainbenchmark.railway.SignalStateKind.get(ordinal);
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SignalState) value).ordinal();
+			value = hu.bme.mit.trainbenchmark.railway.SignalState.get(ordinal);
 		} else if (SWITCH_ACTUALSTATE.equals(key) || SWITCHPOSITION_SWITCHSTATE.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SwitchStateKind) value).ordinal();
-			value = hu.bme.mit.trainbenchmark.railway.SwitchStateKind.get(ordinal);
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SwitchState) value).ordinal();
+			value = hu.bme.mit.trainbenchmark.railway.SwitchState.get(ordinal);
 		}
 
 		final EStructuralFeature feature = clazz.getEStructuralFeature(key);
