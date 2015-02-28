@@ -12,7 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.ResultListener;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
@@ -37,7 +38,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
-public abstract class Drools5BenchmarkCase<T> extends AbstractTransformationBenchmarkCase<T> {
+public abstract class Drools5BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 
 	protected String fileName;
 	protected LiveQuery query;
@@ -65,7 +66,7 @@ public abstract class Drools5BenchmarkCase<T> extends AbstractTransformationBenc
 	@Override
 	public void read() throws FileNotFoundException, IOException {
 		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
-		driver = emfDriver;
+		driver = (DatabaseDriver<T>) emfDriver;
 		final Resource resource = emfDriver.getResource();
 		
 		// change Drools knowledge base based on EMF notifications

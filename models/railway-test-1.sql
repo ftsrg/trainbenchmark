@@ -18,8 +18,8 @@ SET AUTOCOMMIT=0;
 
 CREATE TABLE IF NOT EXISTS `Route` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Route_entry` int(11) NOT NULL,
-  `Route_exit` int(11) NOT NULL,
+  `Route_entry` int(11),
+  `Route_exit` int(11),
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -170,9 +170,10 @@ CREATE TABLE IF NOT EXISTS `TrackElement_connectsTo` (
   `TrackElement_id` int(11) NOT NULL,
   `TrackElement_id_connectsTo` int(11) NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
+
 INSERT INTO `Signal` (`id`, `Signal_actualState`) VALUES (1, 2);
 INSERT INTO `Signal` (`id`, `Signal_actualState`) VALUES (2, 2);
-INSERT INTO `Route` (`id`, `Route_entry`, `Route_exit`) VALUES (3, 0, 2);
+INSERT INTO `Route` (`id`, `Route_entry`, `Route_exit`) VALUES (3, NULL, 2);
 INSERT INTO `TrackElement` VALUES (4);
 INSERT INTO `Switch` (`id`) VALUES (4);
 INSERT INTO `Sensor` (`id`) VALUES (5);

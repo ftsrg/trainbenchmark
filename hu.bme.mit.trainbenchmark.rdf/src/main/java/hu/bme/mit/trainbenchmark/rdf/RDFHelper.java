@@ -12,10 +12,20 @@
 
 package hu.bme.mit.trainbenchmark.rdf;
 
+
 public class RDFHelper {
 
-	public String brackets(String URL) {
-		return "<" + URL + ">";
+	public static String brackets(final String uri) {
+		return "<" + uri + ">";
+	}
+	
+	public static long extractId(final String uri) {
+		final int hashPosition = uri.lastIndexOf("#");
+		if (hashPosition == -1 || hashPosition == uri.length()) {
+			throw new RuntimeException("Could not extract id from URI: " + uri);
+		}
+		final String localName = uri.substring(hashPosition + 1);
+		return Long.parseLong(localName);
 	}
 
 }

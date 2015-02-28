@@ -173,7 +173,7 @@ public class PojoMarshaller {
 			readNodes(reader, new AbstractXStreamConverter.NodeReader() {
 				public void onNode(HierarchicalStreamReader reader, String name, String value) {
 					if ("actualState".equals(name)) {
-						switchObj.setActualState(SwitchStateKind.valueOf(value));
+						switchObj.setActualState(SwitchState.valueOf(value));
 					} else if ("switchPositions".equals(name)) {
 						List<SwitchPosition> switchPositions = readObjectList(reader, context, SwitchPosition.class);
 						switchObj.setSwitchPositions(switchPositions);
@@ -226,7 +226,7 @@ public class PojoMarshaller {
 					if ("switch".equals(name)) {
 						switchPosition.setSwitch(readObject(reader, context, Switch.class));
 					} else if ("switchState".equals(name)) {
-						switchPosition.setSwitchState(SwitchStateKind.valueOf(value));
+						switchPosition.setSwitchState(SwitchState.valueOf(value));
 					} else if ("route".equals(name)) {
 						switchPosition.setSwitch(readObject(reader, context, Switch.class));
 					}

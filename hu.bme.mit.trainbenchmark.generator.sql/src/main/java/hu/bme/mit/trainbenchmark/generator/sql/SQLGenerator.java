@@ -41,7 +41,6 @@ public class SQLGenerator extends Generator {
 	}
 
 	protected BufferedWriter file;
-	protected Long lastNodeId = 1L;
 	protected Map<String, Long> typeId = new HashMap<>();
 	protected static final String ID_NAME = "id";
 	
@@ -81,10 +80,8 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
-		final Long id = lastNodeId++;
-
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
 
@@ -129,7 +126,7 @@ public class SQLGenerator extends Generator {
 			columns.append(", `" + key + "`");
 			values.append(", ");
 
-			final String stringValue = valueToString(value);
+			final String stringValue = (value.equals(-1L) ? "NULL" : valueToString(value));
 			values.append(stringValue);
 		}
 	}

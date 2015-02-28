@@ -68,13 +68,22 @@ public interface RailwayPackage extends EPackage {
 	int RAILWAY_ELEMENT = 6;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RAILWAY_ELEMENT__ID = 0;
+
+	/**
 	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAILWAY_ELEMENT_FEATURE_COUNT = 0;
+	int RAILWAY_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Element</em>' class.
@@ -94,6 +103,15 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 */
 	int TRACK_ELEMENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACK_ELEMENT__ID = RAILWAY_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Track Element sensor</b></em>' reference list.
@@ -140,6 +158,15 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 */
 	int SEGMENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEGMENT__ID = TRACK_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Track Element sensor</b></em>' reference list.
@@ -195,6 +222,15 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 */
 	int SWITCH = 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH__ID = TRACK_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Track Element sensor</b></em>' reference list.
@@ -261,6 +297,15 @@ public interface RailwayPackage extends EPackage {
 	int ROUTE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUTE__ID = RAILWAY_ELEMENT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Route entry</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -325,6 +370,15 @@ public interface RailwayPackage extends EPackage {
 	int SIGNAL = 4;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGNAL__ID = RAILWAY_ELEMENT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Signal actual State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -360,6 +414,15 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 */
 	int SWITCH_POSITION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_POSITION__ID = RAILWAY_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Switch Position switch</b></em>' reference.
@@ -415,6 +478,15 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 */
 	int SENSOR = 7;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR__ID = RAILWAY_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Sensor track Element</b></em>' reference list.
@@ -481,24 +553,24 @@ public interface RailwayPackage extends EPackage {
 	int RAILWAY_CONTAINER_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.SignalStateKind <em>Signal State Kind</em>}' enum.
+	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.SignalState <em>Signal State</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see hu.bme.mit.trainbenchmark.railway.SignalStateKind
-	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSignalStateKind()
+	 * @see hu.bme.mit.trainbenchmark.railway.SignalState
+	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSignalState()
 	 * @generated
 	 */
-	int SIGNAL_STATE_KIND = 9;
+	int SIGNAL_STATE = 9;
 
 	/**
-	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.SwitchStateKind <em>Switch State Kind</em>}' enum.
+	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.SwitchState <em>Switch State</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see hu.bme.mit.trainbenchmark.railway.SwitchStateKind
-	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSwitchStateKind()
+	 * @see hu.bme.mit.trainbenchmark.railway.SwitchState
+	 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSwitchState()
 	 * @generated
 	 */
-	int SWITCH_STATE_KIND = 10;
+	int SWITCH_STATE = 10;
 
 
 	/**
@@ -715,6 +787,17 @@ public interface RailwayPackage extends EPackage {
 	EClass getRailwayElement();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.trainbenchmark.railway.RailwayElement#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayElement#getId()
+	 * @see #getRailwayElement()
+	 * @generated
+	 */
+	EAttribute getRailwayElement_Id();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.Sensor <em>Sensor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -757,24 +840,24 @@ public interface RailwayPackage extends EPackage {
 	EReference getRailwayContainer_Contains();
 
 	/**
-	 * Returns the meta object for enum '{@link hu.bme.mit.trainbenchmark.railway.SignalStateKind <em>Signal State Kind</em>}'.
+	 * Returns the meta object for enum '{@link hu.bme.mit.trainbenchmark.railway.SignalState <em>Signal State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Signal State Kind</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.SignalStateKind
+	 * @return the meta object for enum '<em>Signal State</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.SignalState
 	 * @generated
 	 */
-	EEnum getSignalStateKind();
+	EEnum getSignalState();
 
 	/**
-	 * Returns the meta object for enum '{@link hu.bme.mit.trainbenchmark.railway.SwitchStateKind <em>Switch State Kind</em>}'.
+	 * Returns the meta object for enum '{@link hu.bme.mit.trainbenchmark.railway.SwitchState <em>Switch State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Switch State Kind</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.SwitchStateKind
+	 * @return the meta object for enum '<em>Switch State</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.SwitchState
 	 * @generated
 	 */
-	EEnum getSwitchStateKind();
+	EEnum getSwitchState();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -974,6 +1057,14 @@ public interface RailwayPackage extends EPackage {
 		EClass RAILWAY_ELEMENT = eINSTANCE.getRailwayElement();
 
 		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RAILWAY_ELEMENT__ID = eINSTANCE.getRailwayElement_Id();
+
+		/**
 		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SensorImpl <em>Sensor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1010,24 +1101,24 @@ public interface RailwayPackage extends EPackage {
 		EReference RAILWAY_CONTAINER__CONTAINS = eINSTANCE.getRailwayContainer_Contains();
 
 		/**
-		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.SignalStateKind <em>Signal State Kind</em>}' enum.
+		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.SignalState <em>Signal State</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see hu.bme.mit.trainbenchmark.railway.SignalStateKind
-		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSignalStateKind()
+		 * @see hu.bme.mit.trainbenchmark.railway.SignalState
+		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSignalState()
 		 * @generated
 		 */
-		EEnum SIGNAL_STATE_KIND = eINSTANCE.getSignalStateKind();
+		EEnum SIGNAL_STATE = eINSTANCE.getSignalState();
 
 		/**
-		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.SwitchStateKind <em>Switch State Kind</em>}' enum.
+		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.SwitchState <em>Switch State</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see hu.bme.mit.trainbenchmark.railway.SwitchStateKind
-		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSwitchStateKind()
+		 * @see hu.bme.mit.trainbenchmark.railway.SwitchState
+		 * @see hu.bme.mit.trainbenchmark.railway.impl.RailwayPackageImpl#getSwitchState()
 		 * @generated
 		 */
-		EEnum SWITCH_STATE_KIND = eINSTANCE.getSwitchStateKind();
+		EEnum SWITCH_STATE = eINSTANCE.getSwitchState();
 
 	}
 

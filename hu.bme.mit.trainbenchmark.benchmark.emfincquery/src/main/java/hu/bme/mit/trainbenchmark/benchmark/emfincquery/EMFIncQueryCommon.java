@@ -17,7 +17,7 @@ import org.eclipse.incquery.runtime.rete.util.Options;
 import org.eclipse.incquery.runtime.rete.util.Options.FunctionalDependencyOption;
 import org.eclipse.incquery.runtime.rete.util.Options.PlanTrimOption;
 
-public class IncQueryCommon {
+public class EMFIncQueryCommon {
 	
 	public static void setEIQOptions(EMFIncQueryBenchmarkConfig iqbc) {
 		if (iqbc.getFunctionalDependencyOption() != null) {

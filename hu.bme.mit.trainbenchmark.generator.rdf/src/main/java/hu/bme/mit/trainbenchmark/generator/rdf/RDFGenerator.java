@@ -16,8 +16,8 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.XSD_PREFIX;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.SignalStateKind;
-import hu.bme.mit.trainbenchmark.constants.SwitchStateKind;
+import hu.bme.mit.trainbenchmark.constants.SignalState;
+import hu.bme.mit.trainbenchmark.constants.SwitchState;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 
@@ -47,6 +47,8 @@ import com.google.common.collect.ImmutableMap;
 
 public class RDFGenerator extends Generator {
 
+	public static String ID_PREFIX = "";
+	
 	public RDFGenerator(final String args[]) throws ParseException {
 		super();
 		generatorConfig = rdfGeneratorConfig = new RDFGeneratorConfig(args);
@@ -57,7 +59,6 @@ public class RDFGenerator extends Generator {
 		return "RDF";
 	}
 
-	protected long id = 0;
 	protected RDFGeneratorConfig rdfGeneratorConfig;
 	protected RepositoryConnection con;
 	protected Repository myRepository;
@@ -80,23 +81,23 @@ public class RDFGenerator extends Generator {
 		}
 
 		// @formatter:off
-		final Resource signalStateKind_Stop    = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATEKIND_STOP);
-		final Resource signalStateKind_Failure = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATEKIND_FAILURE);
-		final Resource signalStateKind_Go      = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATEKIND_GO);
+		final Resource signalState_Stop    = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_STOP);
+		final Resource signalState_Failure = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_FAILURE);
+		final Resource signalState_Go      = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_GO);
 
-		final Resource pointStateKind_Left     = vf.createURI(BASE_PREFIX + ModelConstants.POINTSTATEKIND_LEFT);
-		final Resource pointStateKind_Straight = vf.createURI(BASE_PREFIX + ModelConstants.POINTSTATEKIND_LEFT);
-		final Resource pointStateKind_Right    = vf.createURI(BASE_PREFIX + ModelConstants.POINTSTATEKIND_LEFT);
-		final Resource pointStateKind_Failure  = vf.createURI(BASE_PREFIX + ModelConstants.POINTSTATEKIND_LEFT);
-
+		final Resource switchState_Left     = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
+		final Resource switchState_Straight = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
+		final Resource switchState_Right    = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
+		final Resource switchState_Failure  = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
+	
 		resources = ImmutableMap.<Enum<?>, Resource>builder()
-				.put(SignalStateKind.SIGNALSTATEKIND_STOP, signalStateKind_Stop) 
-				.put(SignalStateKind.SIGNALSTATEKIND_FAILURE, signalStateKind_Failure) 
-				.put(SignalStateKind.SIGNALSTATEKIND_GO, signalStateKind_Go)
-				.put(SwitchStateKind.POINT_STATE_KIND_LEFT, pointStateKind_Left)  
-				.put(SwitchStateKind.POINT_STATE_KIND_STRAIGHT, pointStateKind_Straight)
-				.put(SwitchStateKind.POINT_STATE_KIND_RIGHT, pointStateKind_Right)
-				.put(SwitchStateKind.POINT_STATE_KIND_FAILURE, pointStateKind_Failure)
+				.put(SignalState.STOP, signalState_Stop) 
+				.put(SignalState.FAILURE, signalState_Failure) 
+				.put(SignalState.GO, signalState_Go)
+				.put(SwitchState.LEFT, switchState_Left)  
+				.put(SwitchState.STRAIGHT, switchState_Straight)
+				.put(SwitchState.RIGHT, switchState_Right)
+				.put(SwitchState.FAILURE, switchState_Failure)
 				.build();
 		// @formatter:on		
 	}
@@ -130,8 +131,7 @@ public class RDFGenerator extends Generator {
 	}
 
 	protected Resource addIndividual(final String name, final String type) throws IOException {
-		id++;
-		final Resource owlIndividual = vf.createURI(BASE_PREFIX + "x" + id);
+		final Resource owlIndividual = vf.createURI(BASE_PREFIX + ID_PREFIX + id);
 		final URI relation = vf.createURI(RDF_PREFIX + "type");
 		final Resource owlClass = vf.createURI(BASE_PREFIX + type);
 		final Statement stmt = vf.createStatement(owlIndividual, relation, owlClass);
@@ -165,13 +165,10 @@ public class RDFGenerator extends Generator {
 		}
 	}
 
-	long i = 0;
-
 	@Override
-	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
-		i++;
-		final Object node = addIndividual(type + i, type);
+		final Object node = addIndividual(type + id, type);
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
 			final Object value = attribute.getValue();
 

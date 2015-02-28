@@ -12,6 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.constants;
 
-public enum SwitchStateKind {
-	POINT_STATE_KIND_FAILURE, POINT_STATE_KIND_LEFT, POINT_STATE_KIND_RIGHT, POINT_STATE_KIND_STRAIGHT
+public enum SwitchState {
+	FAILURE, LEFT, RIGHT, STRAIGHT
 }

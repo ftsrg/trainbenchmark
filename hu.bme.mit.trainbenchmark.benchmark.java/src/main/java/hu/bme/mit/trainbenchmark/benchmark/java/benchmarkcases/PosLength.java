@@ -23,7 +23,7 @@ public class PosLength extends JavaBenchmarkCase<Segment> {
 	protected List<Segment> check() {
 		results = new ArrayList<>();
 		
-		for (final Object eObject : pack.getContains()) {
+		for (final Object eObject : container.getContains()) {
 			if (eObject instanceof Segment) {
 				final Segment segment = (Segment) eObject;
 				if (segment.getSegment_length() <= 0)

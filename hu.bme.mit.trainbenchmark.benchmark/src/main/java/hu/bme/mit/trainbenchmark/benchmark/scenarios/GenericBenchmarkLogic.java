@@ -28,7 +28,7 @@ public abstract class GenericBenchmarkLogic {
 
 	@SuppressWarnings("unchecked")
 	public void runBenchmark() throws IOException {
-		final Scenario scl = ScenarioFactory.getScenarioLogic(bc.getScenario());
+		final Scenario scl = ScenarioFactory.getScenario(bc.getScenario());
 		final AbstractBenchmarkCase<?> tc = getTestCase();
 		final BenchmarkResult bmr = scl.runBenchmark(bc, tc);
 	}

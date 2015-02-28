@@ -29,8 +29,8 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_ACTUALSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
-import hu.bme.mit.trainbenchmark.constants.SignalStateKind;
-import hu.bme.mit.trainbenchmark.constants.SwitchStateKind;
+import hu.bme.mit.trainbenchmark.constants.SignalState;
+import hu.bme.mit.trainbenchmark.constants.SwitchState;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
@@ -46,14 +46,17 @@ import com.google.common.collect.ImmutableMap;
 
 public abstract class Generator {
 
+	// id
+	protected long id = 0L;
+
 	// static configuration
 	protected GeneratorConfig generatorConfig;
 
 	// dynamic configuration
-	protected int MAX_Segments;
-	protected int MAX_Routes;
-	protected int MAX_SwitchPositions;
-	protected int MAX_Sensors;
+	protected int maxSegments;
+	protected int maxRoutes;
+	protected int maxSwitchPositions;
+	protected int maxSensors;
 
 	protected int posLengthErrorPercent;
 	protected int switchSensorErrorPercent;
@@ -84,10 +87,10 @@ public abstract class Generator {
 	private void initializeConstants() {
 		switch (generatorConfig.getScenario()) {
 		case "User":
-			MAX_Segments = 5;
-			MAX_Routes = 20 * generatorConfig.getSize();
-			MAX_SwitchPositions = 20;
-			MAX_Sensors = 10;
+			maxSegments = 5;
+			maxRoutes = 20 * generatorConfig.getSize();
+			maxSwitchPositions = 20;
+			maxSensors = 10;
 			posLengthErrorPercent = 2;
 			switchSensorErrorPercent = 2;
 			routeSensorErrorPercent = 2;
@@ -95,10 +98,10 @@ public abstract class Generator {
 			switchSetErrorPercent = 2;
 			break;
 		case "Repair":
-			MAX_Segments = 5;
-			MAX_Routes = 20 * generatorConfig.getSize();
-			MAX_SwitchPositions = 20;
-			MAX_Sensors = 10;
+			maxSegments = 5;
+			maxRoutes = 20 * generatorConfig.getSize();
+			maxSwitchPositions = 20;
+			maxSensors = 10;
 			posLengthErrorPercent = 10;
 			switchSensorErrorPercent = 4;
 			routeSensorErrorPercent = 10;
@@ -106,10 +109,10 @@ public abstract class Generator {
 			switchSetErrorPercent = 10;
 			break;
 		case "Test":
-			MAX_Segments = 1;
-			MAX_Routes = 2 * generatorConfig.getSize();
-			MAX_SwitchPositions = 20;
-			MAX_Sensors = 10;
+			maxSegments = 1;
+			maxRoutes = 2 * generatorConfig.getSize();
+			maxSwitchPositions = 20;
+			maxSensors = 10;
 			posLengthErrorPercent = 10;
 			switchSensorErrorPercent = 4;
 			routeSensorErrorPercent = 10;
@@ -129,45 +132,43 @@ public abstract class Generator {
 		List<Object> firstTracks = null;
 		List<Object> prevTracks = null;
 
-		for (long i = 0; i < MAX_Routes; i++) {
+		for (long i = 0; i < maxRoutes; i++) {
 			beginRoute();
 
 			if (prevSig == null) {
-				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_ACTUALSTATE,
-						SignalStateKind.SIGNALSTATEKIND_GO);
+				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_ACTUALSTATE, SignalState.GO);
 
-				prevSig = createNode(SIGNAL, signalAttributes);
+				prevSig = createVertex(SIGNAL, signalAttributes);
 				firstSig = prevSig;
 			}
 
 			Object sig2;
-			if (i != MAX_Routes - 1) {
-				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_ACTUALSTATE,
-						SignalStateKind.SIGNALSTATEKIND_GO);
+			if (i != maxRoutes - 1) {
+				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_ACTUALSTATE, SignalState.GO);
 
-				sig2 = createNode(SIGNAL, signalAttributes);
+				sig2 = createVertex(SIGNAL, signalAttributes);
 			} else {
 				sig2 = firstSig;
 			}
 
-			final Object entry = (nextRandom() >= signalNeighborErrorPercent) ? prevSig : 0L;
-			final Object exit = (nextRandom() >= signalNeighborErrorPercent) ? sig2 : 0L;
+			final Object entry = (nextRandom() >= signalNeighborErrorPercent) ? prevSig : -1L;
+			final Object exit = (nextRandom() >= signalNeighborErrorPercent) ? sig2 : -1L;
 
 			final ImmutableMap<String, Object> routeReferences = ImmutableMap.<String, Object> of(ROUTE_ENTRY, entry, ROUTE_EXIT, exit);
-			final Object route = createNode(ROUTE, emptyMap, routeReferences);
+			final Object route = createVertex(ROUTE, emptyMap, routeReferences);
 
-			final int swps = random.nextInt(MAX_SwitchPositions);
+			final int swps = random.nextInt(maxSwitchPositions);
 
 			final List<Object> currTracks = new ArrayList<>();
 
 			for (int j = 0; j < swps; j++) {
-				final Object sw = createNode(SWITCH);
+				final Object sw = createVertex(SWITCH);
 				currTracks.add(sw);
 
-				final int sensors = random.nextInt(MAX_Sensors);
+				final int sensors = random.nextInt(maxSensors);
 
 				for (int k = 0; k < sensors; k++) {
-					final Object sen = createNode(SENSOR);
+					final Object sen = createVertex(SENSOR);
 
 					if (nextRandom() >= switchSensorErrorPercent) {
 						createEdge(TRACKELEMENT_SENSOR, sw, sen);
@@ -177,11 +178,11 @@ public abstract class Generator {
 					}
 
 					// TODO inject failures to the model
-					for (int m = 0; m < MAX_Segments; m++) {
+					for (int m = 0; m < maxSegments; m++) {
 						final int segmentLength = ((nextRandom() < posLengthErrorPercent) ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH);
 
 						final Map<String, Object> segmentAttributes = ImmutableMap.<String, Object> of(SEGMENT_LENGTH, segmentLength);
-						final Object seg = createNode(SEGMENT, segmentAttributes);
+						final Object seg = createVertex(SEGMENT, segmentAttributes);
 
 						createEdge(TRACKELEMENT_SENSOR, seg, sen);
 						currTracks.add(seg);
@@ -189,17 +190,17 @@ public abstract class Generator {
 				}
 
 				final int stateNumber = random.nextInt(4);
-				final SwitchStateKind stateEnum = SwitchStateKind.values()[stateNumber];
+				final SwitchState stateEnum = SwitchState.values()[stateNumber];
 				setAttribute(SWITCH, sw, SWITCH_ACTUALSTATE, stateEnum);
 
 				// the errorInjectedState may contain a bad value
 				final int errorInjectedStateNumber = (nextRandom() < switchSetErrorPercent) ? 3 - stateNumber : stateNumber;
-				final SwitchStateKind errorInjectedStateEnum = SwitchStateKind.values()[errorInjectedStateNumber];
+				final SwitchState errorInjectedStateEnum = SwitchState.values()[errorInjectedStateNumber];
 				final ImmutableMap<String, Object> switchPosititonAttributes = ImmutableMap.<String, Object> of(SWITCHPOSITION_SWITCHSTATE,
 						errorInjectedStateEnum);
 				final Map<String, Object> switchPositionOutgoingEdges = ImmutableMap.<String, Object> of(SWITCHPOSITION_SWITCH, sw);
 				final Map<String, Object> switchPositionIncomingEdges = ImmutableMap.<String, Object> of(ROUTE_SWITCHPOSITION, route);
-				createNode(SWITCHPOSITION, switchPosititonAttributes, switchPositionOutgoingEdges, switchPositionIncomingEdges);
+				createVertex(SWITCHPOSITION, switchPosititonAttributes, switchPositionOutgoingEdges, switchPositionIncomingEdges);
 			}
 
 			Object prevte = null;
@@ -216,7 +217,7 @@ public abstract class Generator {
 
 			// Loop the last track element of the last route to the first track
 			// element of the first route.
-			if (i == MAX_Routes - 1) {
+			if (i == maxRoutes - 1) {
 				if (currTracks != null && currTracks.size() > 0 && firstTracks.size() > 0) {
 					createEdge(TRACKELEMENT_CONNECTSTO, currTracks.get(currTracks.size() - 1), firstTracks.get(0));
 				}
@@ -235,30 +236,38 @@ public abstract class Generator {
 
 	protected abstract void persistModel() throws IOException;
 
-	protected abstract Object createNode(String type, Map<String, Object> attributes, Map<String, Object> outgoingEdges,
-			Map<String, Object> incomingEdges) throws IOException;
+	// the createVertex() methods with fewer arguments are final 
+	
+	protected final Object createVertex(final String type) throws IOException {
+		return createVertex(type, emptyMap);
+	}
+
+	protected final Object createVertex(final String type, final Map<String, Object> attributes) throws IOException {
+		return createVertex(type, attributes, emptyMap);
+	}
+
+	protected final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges)
+			throws IOException {
+		return createVertex(type, attributes, outgoingEdges, emptyMap);
+	}
+
+	protected final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+			final Map<String, Object> incomingEdges) throws IOException {
+		id++;
+		return createVertex(id, type, attributes, outgoingEdges, incomingEdges);
+	}
+
+	protected abstract Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException;
 
 	protected abstract void createEdge(String label, Object from, Object to) throws IOException;
 
 	protected abstract void setAttribute(String type, Object node, String key, Object value) throws IOException;
 
-	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges)
-			throws IOException {
-		return createNode(type, attributes, outgoingEdges, emptyMap);
-	}
-
-	protected Object createNode(final String type, final Map<String, Object> attributes) throws IOException {
-		return createNode(type, attributes, emptyMap);
-	}
-
-	protected Object createNode(final String type) throws IOException {
-		return createNode(type, emptyMap);
-	}
-
 	protected void beginRoute() throws IOException {
 	};
 
-	protected void endRoute() {
+	protected void endRoute() throws IOException {
 	}
 
 }

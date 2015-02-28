@@ -12,19 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public abstract class JavaBenchmarkCase<T> extends AbstractTransformationBenchmarkCase<T> {
+public abstract class JavaBenchmarkCase<T extends RailwayElement> extends AbstractBenchmarkCase<T> {
 
-	protected RailwayContainer pack;
-	
+	protected RailwayContainer container;
+
 	@Override
 	public void read() {
 		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
-		driver = emfDriver;	
-		pack = emfDriver.getRoot();
+		driver = (DatabaseDriver<T>) emfDriver;
+		
+		container = emfDriver.getRoot();
 	}
 
 }

@@ -10,10 +10,10 @@ import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Signal;
-import hu.bme.mit.trainbenchmark.railway.SignalStateKind;
+import hu.bme.mit.trainbenchmark.railway.SignalState;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
-import hu.bme.mit.trainbenchmark.railway.SwitchStateKind;
+import hu.bme.mit.trainbenchmark.railway.SwitchState;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -99,14 +99,14 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum signalStateKindEEnum = null;
+	private EEnum signalStateEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum switchStateKindEEnum = null;
+	private EEnum switchStateEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -354,6 +354,15 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRailwayElement_Id() {
+		return (EAttribute)railwayElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSensor() {
 		return sensorEClass;
 	}
@@ -390,8 +399,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getSignalStateKind() {
-		return signalStateKindEEnum;
+	public EEnum getSignalState() {
+		return signalStateEEnum;
 	}
 
 	/**
@@ -399,8 +408,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getSwitchStateKind() {
-		return switchStateKindEEnum;
+	public EEnum getSwitchState() {
+		return switchStateEEnum;
 	}
 
 	/**
@@ -457,6 +466,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		createEReference(switchPositionEClass, SWITCH_POSITION__SWITCH_POSITION_ROUTE);
 
 		railwayElementEClass = createEClass(RAILWAY_ELEMENT);
+		createEAttribute(railwayElementEClass, RAILWAY_ELEMENT__ID);
 
 		sensorEClass = createEClass(SENSOR);
 		createEReference(sensorEClass, SENSOR__SENSOR_TRACK_ELEMENT);
@@ -465,8 +475,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		createEReference(railwayContainerEClass, RAILWAY_CONTAINER__CONTAINS);
 
 		// Create enums
-		signalStateKindEEnum = createEEnum(SIGNAL_STATE_KIND);
-		switchStateKindEEnum = createEEnum(SWITCH_STATE_KIND);
+		signalStateEEnum = createEEnum(SIGNAL_STATE);
+		switchStateEEnum = createEEnum(SWITCH_STATE);
 	}
 
 	/**
@@ -514,7 +524,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEReference(getTrackElement_TrackElement_connectsTo(), this.getTrackElement(), null, "TrackElement_connectsTo", null, 0, -1, TrackElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchEClass, Switch.class, "Switch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSwitch_Switch_actualState(), this.getSwitchStateKind(), "Switch_actualState", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwitch_Switch_actualState(), this.getSwitchState(), "Switch_actualState", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitch_Switch_switchPosition(), this.getSwitchPosition(), this.getSwitchPosition_SwitchPosition_switch(), "Switch_switchPosition", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -524,14 +534,15 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEReference(getRoute_Route_routeDefinition(), this.getSensor(), null, "Route_routeDefinition", null, 2, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSignal_Signal_actualState(), this.getSignalStateKind(), "Signal_actualState", null, 1, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSignal_Signal_actualState(), this.getSignalState(), "Signal_actualState", null, 1, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchPositionEClass, SwitchPosition.class, "SwitchPosition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSwitchPosition_SwitchPosition_switch(), this.getSwitch(), this.getSwitch_Switch_switchPosition(), "SwitchPosition_switch", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSwitchPosition_SwitchPosition_switchState(), this.getSwitchStateKind(), "SwitchPosition_switchState", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwitchPosition_SwitchPosition_switchState(), this.getSwitchState(), "SwitchPosition_switchState", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitchPosition_SwitchPosition_route(), this.getRoute(), this.getRoute_Route_switchPosition(), "SwitchPosition_route", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(railwayElementEClass, RailwayElement.class, "RailwayElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRailwayElement_Id(), ecorePackage.getELong(), "id", null, 0, 1, RailwayElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSensor_Sensor_trackElement(), this.getTrackElement(), this.getTrackElement_TrackElement_sensor(), "Sensor_trackElement", null, 0, -1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -540,16 +551,16 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEReference(getRailwayContainer_Contains(), this.getRailwayElement(), null, "contains", null, 0, -1, RailwayContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(signalStateKindEEnum, SignalStateKind.class, "SignalStateKind");
-		addEEnumLiteral(signalStateKindEEnum, SignalStateKind.SIGNAL_STATE_KIND_STOP);
-		addEEnumLiteral(signalStateKindEEnum, SignalStateKind.SIGNAL_STATE_KIND_FAILURE);
-		addEEnumLiteral(signalStateKindEEnum, SignalStateKind.SIGNAL_STATE_KIND_GO);
+		initEEnum(signalStateEEnum, SignalState.class, "SignalState");
+		addEEnumLiteral(signalStateEEnum, SignalState.FAILURE);
+		addEEnumLiteral(signalStateEEnum, SignalState.STOP);
+		addEEnumLiteral(signalStateEEnum, SignalState.GO);
 
-		initEEnum(switchStateKindEEnum, SwitchStateKind.class, "SwitchStateKind");
-		addEEnumLiteral(switchStateKindEEnum, SwitchStateKind.POINT_STATE_KIND_FAILURE);
-		addEEnumLiteral(switchStateKindEEnum, SwitchStateKind.POINT_STATE_KIND_LEFT);
-		addEEnumLiteral(switchStateKindEEnum, SwitchStateKind.POINT_STATE_KIND_RIGHT);
-		addEEnumLiteral(switchStateKindEEnum, SwitchStateKind.POINT_STATE_KIND_STRAIGHT);
+		initEEnum(switchStateEEnum, SwitchState.class, "SwitchState");
+		addEEnumLiteral(switchStateEEnum, SwitchState.FAILURE);
+		addEEnumLiteral(switchStateEEnum, SwitchState.LEFT);
+		addEEnumLiteral(switchStateEEnum, SwitchState.RIGHT);
+		addEEnumLiteral(switchStateEEnum, SwitchState.STRAIGHT);
 
 		// Create resource
 		createResource(eNS_URI);

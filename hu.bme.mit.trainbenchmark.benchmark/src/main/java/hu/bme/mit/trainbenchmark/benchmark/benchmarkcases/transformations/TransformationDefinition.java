@@ -18,17 +18,12 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public abstract class TransformationDefinition<T> {
 
-	public void initialize(final BenchmarkResult bmr, final DatabaseDriver driver, final List<T> currentResults) {
-		this.bmr = bmr;
-		this.driver = driver;
-		this.currentResults = currentResults;
-	}
-	
 	protected List<T> currentResults;
 	protected List<T> elementsToModify;
 	
@@ -38,7 +33,13 @@ public abstract class TransformationDefinition<T> {
 	protected long end;
 	
 	protected BenchmarkResult bmr;
-	protected DatabaseDriver driver;
+	protected DatabaseDriver<T> driver;
+	
+	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<T> driver, final List<T> currentResults) {
+		this.bmr = bmr;
+		this.driver = driver;
+		this.currentResults = currentResults;
+	}
 	
 	protected abstract void lhs() throws IOException;
 	protected abstract void rhs() throws IOException;	
@@ -47,18 +48,22 @@ public abstract class TransformationDefinition<T> {
 		nElementsToModify = Util.calcModify(bmr);
 		bmr.addModifiedElementsSize(nElementsToModify);
 
+		Collections.sort(currentResults, driver.getComparator());
+		
+		System.out.println("current results:");
+		System.out.println(currentResults);
+		System.out.println("-----");
+		
 		bmr.restartClock();
 		driver.beginTransaction();
 		lhs();
 		bmr.addLhsTime();
-		
+				
 		bmr.restartClock();
 		rhs();
 		driver.finishTransaction();
 		bmr.addRhsTime();
 	}
-	
-	// utils
 	
 	public static Random getRandom() {
 		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);

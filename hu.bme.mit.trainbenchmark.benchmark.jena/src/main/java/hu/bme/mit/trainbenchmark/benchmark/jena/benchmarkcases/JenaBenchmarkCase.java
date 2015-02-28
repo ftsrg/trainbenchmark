@@ -12,79 +12,41 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractTransformationBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.reasoner.Reasoner;
-import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 
-public class JenaBenchmarkCase extends AbstractTransformationBenchmarkCase<Resource> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
 
-	protected Query query;
-	protected Model model;
 	protected String resultVar;
 
 	protected RDFBenchmarkConfig getRDFBenchmarkConfig() {
 		return (RDFBenchmarkConfig) bc;
 	}
-	
+
 	@Override
 	protected void init() throws IOException {
-		final String sparqlFilePath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
+		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
 				+ ".sparql";
-		query = QueryFactory.read(sparqlFilePath);
-		resultVar = query.getResultVars().get(0);
+
+		driver = new JenaDriver(RDFConstants.BASE_PREFIX, queryPath);
 	}
 
 	@Override
 	public void read() throws IOException {
-		model = ModelFactory.createDefaultModel();
-		final String documentFilename = bc.getBenchmarkArtifact();
-		model.read(documentFilename);
-
-		Reasoner reasoner = null;
-		if (getRDFBenchmarkConfig().isInferencing()) {
-			reasoner = ReasonerRegistry.getRDFSSimpleReasoner();
-			model = ModelFactory.createInfModel(reasoner, model);
-		}
-		
-		driver = new JenaDriver(RDFConstants.BASE_PREFIX, model);
+		driver.read(bc.getBenchmarkArtifact());
 	}
 
 	@Override
 	public List<Resource> check() throws IOException {
-		results = new ArrayList<>();
-		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, model)) {
-			final ResultSet resultSet = queryExecution.execSelect();
-
-			while (resultSet.hasNext()) {
-				final QuerySolution qs = resultSet.next();
-				final Resource resource = qs.getResource(resultVar);
-				results.add(resource);
-			}
-		}
-
+		results = driver.runQuery();
 		return results;
-	}
-
-	@Override
-	public void destroy() throws IOException {
-		model.close();
 	}
 
 }

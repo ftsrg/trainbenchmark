@@ -10,119 +10,119 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Signal State Kind</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Signal State</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSignalStateKind()
+ * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSignalState()
  * @model
  * @generated
  */
-public enum SignalStateKind implements Enumerator {
+public enum SignalState implements Enumerator {
 	/**
-	 * The '<em><b>Signal State Kind STOP</b></em>' literal object.
+	 * The '<em><b>FAILURE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SIGNAL_STATE_KIND_STOP_VALUE
+	 * @see #FAILURE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SIGNAL_STATE_KIND_STOP(0, "SignalStateKind_STOP", "SignalStateKind_STOP"),
+	FAILURE(1, "FAILURE", "FAILURE"),
 
 	/**
-	 * The '<em><b>Signal State Kind FAILURE</b></em>' literal object.
+	 * The '<em><b>STOP</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SIGNAL_STATE_KIND_FAILURE_VALUE
+	 * @see #STOP_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SIGNAL_STATE_KIND_FAILURE(1, "SignalStateKind_FAILURE", "SignalStateKind_FAILURE"),
+	STOP(0, "STOP", "STOP"),
 
 	/**
-	 * The '<em><b>Signal State Kind GO</b></em>' literal object.
+	 * The '<em><b>GO</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SIGNAL_STATE_KIND_GO_VALUE
+	 * @see #GO_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SIGNAL_STATE_KIND_GO(2, "SignalStateKind_GO", "SignalStateKind_GO");
+	GO(2, "GO", "GO");
 
 	/**
-	 * The '<em><b>Signal State Kind STOP</b></em>' literal value.
+	 * The '<em><b>FAILURE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Signal State Kind STOP</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>FAILURE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SIGNAL_STATE_KIND_STOP
-	 * @model name="SignalStateKind_STOP"
+	 * @see #FAILURE
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SIGNAL_STATE_KIND_STOP_VALUE = 0;
+	public static final int FAILURE_VALUE = 1;
 
 	/**
-	 * The '<em><b>Signal State Kind FAILURE</b></em>' literal value.
+	 * The '<em><b>STOP</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Signal State Kind FAILURE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>STOP</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SIGNAL_STATE_KIND_FAILURE
-	 * @model name="SignalStateKind_FAILURE"
+	 * @see #STOP
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SIGNAL_STATE_KIND_FAILURE_VALUE = 1;
+	public static final int STOP_VALUE = 0;
 
 	/**
-	 * The '<em><b>Signal State Kind GO</b></em>' literal value.
+	 * The '<em><b>GO</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Signal State Kind GO</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>GO</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SIGNAL_STATE_KIND_GO
-	 * @model name="SignalStateKind_GO"
+	 * @see #GO
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SIGNAL_STATE_KIND_GO_VALUE = 2;
+	public static final int GO_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>Signal State Kind</b></em>' enumerators.
+	 * An array of all the '<em><b>Signal State</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final SignalStateKind[] VALUES_ARRAY =
-		new SignalStateKind[] {
-			SIGNAL_STATE_KIND_STOP,
-			SIGNAL_STATE_KIND_FAILURE,
-			SIGNAL_STATE_KIND_GO,
+	private static final SignalState[] VALUES_ARRAY =
+		new SignalState[] {
+			FAILURE,
+			STOP,
+			GO,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Signal State Kind</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Signal State</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<SignalStateKind> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<SignalState> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Signal State Kind</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Signal State</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static SignalStateKind get(String literal) {
+	public static SignalState get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			SignalStateKind result = VALUES_ARRAY[i];
+			SignalState result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -131,14 +131,14 @@ public enum SignalStateKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Signal State Kind</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Signal State</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static SignalStateKind getByName(String name) {
+	public static SignalState getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			SignalStateKind result = VALUES_ARRAY[i];
+			SignalState result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -147,16 +147,16 @@ public enum SignalStateKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Signal State Kind</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Signal State</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static SignalStateKind get(int value) {
+	public static SignalState get(int value) {
 		switch (value) {
-			case SIGNAL_STATE_KIND_STOP_VALUE: return SIGNAL_STATE_KIND_STOP;
-			case SIGNAL_STATE_KIND_FAILURE_VALUE: return SIGNAL_STATE_KIND_FAILURE;
-			case SIGNAL_STATE_KIND_GO_VALUE: return SIGNAL_STATE_KIND_GO;
+			case FAILURE_VALUE: return FAILURE;
+			case STOP_VALUE: return STOP;
+			case GO_VALUE: return GO;
 		}
 		return null;
 	}
@@ -188,7 +188,7 @@ public enum SignalStateKind implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private SignalStateKind(int value, String name, String literal) {
+	private SignalState(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -232,4 +232,4 @@ public enum SignalStateKind implements Enumerator {
 		return literal;
 	}
 	
-} //SignalStateKind
+} //SignalState

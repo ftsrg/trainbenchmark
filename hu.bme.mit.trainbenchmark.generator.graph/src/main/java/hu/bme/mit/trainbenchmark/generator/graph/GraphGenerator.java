@@ -66,11 +66,17 @@ public class GraphGenerator extends Generator {
 		}
 
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databasePath);
+		
+		// bump the initial id from 0 to 1
+		try (Transaction tx = graphDb.beginTx()) {
+			graphDb.createNode().delete();
+			tx.success();		
+		}
 	}
 
 	@Override
-	protected Object createNode(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
-			final Map<String, Object> incomingEdges) {
+	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		final Node node = graphDb.createNode(DynamicLabel.label(type));
 
 		// this only works for inheritance hierarchies with
@@ -109,7 +115,7 @@ public class GraphGenerator extends Generator {
 
 	private Object enumsToString(Object value) {
 		if (value instanceof Enum) {
-			final Enum e = (Enum) value;
+			final Enum<?> e = (Enum<?>) value;
 			value = e.toString();
 		}
 		return value;

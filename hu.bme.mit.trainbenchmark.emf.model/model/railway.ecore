@@ -14,7 +14,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Switch" eSuperTypes="#//TrackElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Switch_actualState" lowerBound="1"
-        eType="#//SwitchStateKind"/>
+        eType="#//SwitchState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Switch_switchPosition"
         upperBound="-1" eType="#//SwitchPosition" eOpposite="#//SwitchPosition/SwitchPosition_switch"/>
   </eClassifiers>
@@ -30,31 +30,33 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Signal" eSuperTypes="#//RailwayElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Signal_actualState" lowerBound="1"
-        eType="#//SignalStateKind"/>
+        eType="#//SignalState"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SwitchPosition" eSuperTypes="#//RailwayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="SwitchPosition_switch"
         lowerBound="1" eType="#//Switch" eOpposite="#//Switch/Switch_switchPosition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SwitchPosition_switchState"
-        lowerBound="1" eType="#//SwitchStateKind"/>
+        lowerBound="1" eType="#//SwitchState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="SwitchPosition_route" lowerBound="1"
         eType="#//Route" eOpposite="#//Route/Route_switchPosition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RailwayElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RailwayElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sensor" eSuperTypes="#//RailwayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="Sensor_trackElement" upperBound="-1"
         eType="#//TrackElement" eOpposite="#//TrackElement/TrackElement_sensor"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="SignalStateKind">
-    <eLiterals name="SignalStateKind_STOP"/>
-    <eLiterals name="SignalStateKind_FAILURE" value="1"/>
-    <eLiterals name="SignalStateKind_GO" value="2"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="SignalState">
+    <eLiterals name="FAILURE" value="1"/>
+    <eLiterals name="STOP"/>
+    <eLiterals name="GO" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="SwitchStateKind">
-    <eLiterals name="PointStateKind_FAILURE"/>
-    <eLiterals name="PointStateKind_LEFT" value="1"/>
-    <eLiterals name="PointStateKind_RIGHT" value="2"/>
-    <eLiterals name="PointStateKind_STRAIGHT" value="3"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="SwitchState">
+    <eLiterals name="FAILURE"/>
+    <eLiterals name="LEFT" value="1"/>
+    <eLiterals name="RIGHT" value="2"/>
+    <eLiterals name="STRAIGHT" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RailwayContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"

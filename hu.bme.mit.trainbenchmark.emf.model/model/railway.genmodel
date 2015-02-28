@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.trainbenchmark.emf.model/src" modelPluginID="hu.bme.mit.trainbenchmark.emf.model"
-    modelName="Railway" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    operationReflection="true" importOrganizing="true">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.trainbenchmark.emf.model/src/main/java"
+    modelPluginID="hu.bme.mit.trainbenchmark.emf.model" modelName="Railway" modelPluginClass=""
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>railway.ecore</foreignModel>
   <genPackages prefix="Railway" basePackage="hu.bme.mit.trainbenchmark" disposableProviderFactory="true"
-      ecorePackage="railway.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//SignalStateKind">
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalStateKind/SignalStateKind_STOP"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalStateKind/SignalStateKind_FAILURE"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalStateKind/SignalStateKind_GO"/>
+      ecorePackage="railway.ecore#/" publicationLocation="">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//SignalState">
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalState/FAILURE"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalState/STOP"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalState/GO"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//SwitchStateKind">
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchStateKind/PointStateKind_FAILURE"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchStateKind/PointStateKind_LEFT"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchStateKind/PointStateKind_RIGHT"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchStateKind/PointStateKind_STRAIGHT"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//SwitchState">
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/FAILURE"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/LEFT"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/RIGHT"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/STRAIGHT"/>
     </genEnums>
     <genClasses ecoreClass="railway.ecore#//Segment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Segment/Segment_length"/>
