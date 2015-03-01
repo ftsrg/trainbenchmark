@@ -11,23 +11,24 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 import java.util.List;
 
-public class RouteSensor<T> extends UserTransformationDefinition<T> {
+public class RouteSensor<T> extends TransformationDefinition<T> {
 	
 	@Override
 	protected void lhs() throws IOException {
-		final List<T> sensors = driver.collectVertices(ModelConstants.SENSOR);
-		elementsToModify = pickRandom(nElementsToModify, sensors, currentResults);
+		final List<T> routes = driver.collectVertices(ModelConstants.ROUTE);
+		elementsToModify = pickRandom(nElementsToModify, routes);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object sensor : elementsToModify) {
-			driver.deleteAllIncomingEdges(sensor, ModelConstants.ROUTE_ROUTEDEFINITION, ModelConstants.ROUTE);
+		for (final Object route : elementsToModify) {
+			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ROUTEDEFINITION);
 		}
 	}
 

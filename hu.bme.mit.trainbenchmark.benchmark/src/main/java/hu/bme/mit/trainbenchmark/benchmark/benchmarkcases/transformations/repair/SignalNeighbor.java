@@ -11,11 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
-public class SignalNeighbor<T> extends RepairTransformationDefinition<T> {
+public class SignalNeighbor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
@@ -24,8 +25,8 @@ public class SignalNeighbor<T> extends RepairTransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object sensor : elementsToModify) {
-			driver.deleteAllIncomingEdges(sensor, ModelConstants.ROUTE_EXIT, ModelConstants.ROUTE);
+		for (final Object route : elementsToModify) {
+			driver.deleteOutgoingEdge(route, ModelConstants.ROUTE, ModelConstants.ROUTE_EXIT);
 		}
 	}
 
