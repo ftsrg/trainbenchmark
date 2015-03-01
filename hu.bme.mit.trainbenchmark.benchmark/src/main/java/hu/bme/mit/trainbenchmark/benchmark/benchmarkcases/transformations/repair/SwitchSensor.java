@@ -20,7 +20,7 @@ public class SwitchSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementsToModify = pickRandom(nElementsToModify, currentResults);
+		elementCandidates = currentResults;
 	}
 
 	@Override

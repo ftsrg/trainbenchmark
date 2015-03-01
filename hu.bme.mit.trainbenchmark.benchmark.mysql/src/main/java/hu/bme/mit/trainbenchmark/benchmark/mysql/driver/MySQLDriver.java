@@ -146,13 +146,6 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 		}
 	}
 
-
-	@Override
-	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void read(final String modelPath) throws IOException {
 		final Runtime rt = Runtime.getRuntime();

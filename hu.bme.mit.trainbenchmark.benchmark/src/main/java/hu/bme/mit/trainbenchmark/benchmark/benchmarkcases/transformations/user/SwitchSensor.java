@@ -15,14 +15,12 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
-import java.util.List;
 
 public class SwitchSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		final List<T> switches = driver.collectVertices(ModelConstants.SWITCH);
-		elementsToModify = pickRandom(nElementsToModify, switches);
+		elementCandidates = driver.collectVertices(ModelConstants.SWITCH);
 	}
 
 	@Override

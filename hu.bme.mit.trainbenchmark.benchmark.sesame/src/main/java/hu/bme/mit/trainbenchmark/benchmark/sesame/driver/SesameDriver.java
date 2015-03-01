@@ -200,30 +200,6 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	@Override
-	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType)
-			throws IOException {
-		final URI sourceVertexURI = (URI) sourceVertex;
-		final URI vertexTypeURI = f.createURI(basePrefix + newVertexType);
-		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
-
-		// TODO think about alternative solutions
-		final URI targetVertexURI = f.createURI(basePrefix + newVertexType + newVertexId);
-		newVertexId++;
-
-		try {
-			// insert edge
-			final Statement edgeStatement = f.createStatement(targetVertexURI, edgeTypeURI, sourceVertexURI);
-			con.add(edgeStatement);
-
-			// set vertex type
-			final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
-			con.add(typeStatement);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
 	public void read(final String modelPath) throws IOException {
 		repository = new SailRepository(new MemoryStore());
 		final File modelFile = new File(modelPath);

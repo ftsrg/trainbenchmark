@@ -142,20 +142,6 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 	}
 
 	@Override
-	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType) throws IOException {
-		final Resource sourceVertexResource = (Resource) sourceVertex;
-
-		final Property edge = model.getProperty(basePrefix + edgeType);
-		final Resource vertexType = model.getResource(basePrefix + newVertexType);
-
-		final Resource targetVertexResource = model.createResource(basePrefix + "x" + newVertexId);
-		newVertexId++;
-
-		model.add(model.createStatement(targetVertexResource, edge, sourceVertexResource));
-		model.add(model.createStatement(targetVertexResource, RDF.type, vertexType));		
-	}
-
-	@Override
 	public void read(final String modelPath) throws IOException {
 		model = ModelFactory.createDefaultModel();
 		model.read(modelPath);

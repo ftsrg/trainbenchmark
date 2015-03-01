@@ -26,6 +26,7 @@ import java.util.Random;
 public abstract class TransformationDefinition<T> {
 
 	protected List<T> currentResults;
+	protected List<T> elementCandidates;
 	protected List<T> elementsToModify;
 	
 	protected long nElementsToModify;
@@ -49,12 +50,14 @@ public abstract class TransformationDefinition<T> {
 		nElementsToModify = Util.calcModify(bmr);
 		bmr.addModifiedElementsSize(nElementsToModify);
 		
-		Collections.sort(currentResults, driver.getComparator());
-		
 		bmr.restartClock();
 		driver.beginTransaction();
 		lhs();
 		bmr.addLhsTime();
+		
+		// we do not measure this in the benchmark results
+		Collections.sort(elementCandidates, driver.getComparator());
+		elementsToModify = pickRandom(nElementsToModify, elementCandidates);
 				
 		bmr.restartClock();
 		rhs();
@@ -62,9 +65,8 @@ public abstract class TransformationDefinition<T> {
 		bmr.addRhsTime();
 	}
 	
-	public List<T> pickRandom(long nElementsToModify, final List<T> elements) {
-		Collections.sort(elements, driver.getComparator());
-		
+
+	private List<T> pickRandom(long nElementsToModify, final List<T> elements) {
 		final Random random = getRandom();
 		final int size = elements.size();
 		if (size < nElementsToModify) {
