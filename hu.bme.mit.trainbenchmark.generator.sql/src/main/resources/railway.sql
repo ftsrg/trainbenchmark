@@ -17,9 +17,9 @@ SET AUTOCOMMIT=0;
 --
 
 CREATE TABLE IF NOT EXISTS `Route` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Route_entry` int(11),
-  `Route_exit` int(11),
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `Route_entry` bigint,
+  `Route_exit` bigint,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `Route` (
 --
 
 CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
-  `Route_id` int(11) NOT NULL,
-  `Sensor_id` int(11) NOT NULL
+  `Route_id` bigint NOT NULL,
+  `Sensor_id` bigint NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
 --
 
 CREATE TABLE IF NOT EXISTS `Segment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Segment_length` int(11) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `Segment_length` bigint NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `Segment` (
 --
 
 CREATE TABLE IF NOT EXISTS `Sensor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `Sensor` (
 --
 
 CREATE TABLE IF NOT EXISTS `TrackElement_sensor` (
-  `TrackElement_id` int(11) NOT NULL,
-  `Sensor_id` int(11) NOT NULL
+  `TrackElement_id` bigint NOT NULL,
+  `Sensor_id` bigint NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `TrackElement_sensor` (
 --
 
 CREATE TABLE IF NOT EXISTS `Signal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Signal_actualState` int(11) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `Signal_actualState` bigint NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `Signal` (
 --
 
 CREATE TABLE IF NOT EXISTS `SignalStateKind` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `text` varchar(32) NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ENGINE=MEMORY;
@@ -108,8 +108,8 @@ INSERT INTO `SignalStateKind` (`id`, `text`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Switch` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Switch_actualState` int(11) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `Switch_actualState` bigint NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -120,10 +120,10 @@ CREATE TABLE IF NOT EXISTS `Switch` (
 --
 
 CREATE TABLE IF NOT EXISTS `SwitchPosition` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Route_switchPosition` int(11) NOT NULL,
-  `SwitchPosition_switch` int(11) NOT NULL,
-  `SwitchPosition_switchState` int(11) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `Route_switchPosition` bigint NOT NULL,
+  `SwitchPosition_switch` bigint NOT NULL,
+  `SwitchPosition_switchState` bigint NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `SwitchPosition` (
 --
 
 CREATE TABLE IF NOT EXISTS `SwitchStateKind` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `text` varchar(32) NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ENGINE=MEMORY;
@@ -156,7 +156,7 @@ INSERT INTO `SwitchStateKind` (`id`, `text`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `TrackElement` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `TrackElement` (
 --
 
 CREATE TABLE IF NOT EXISTS `TrackElement_connectsTo` (
-  `TrackElement_id` int(11) NOT NULL,
-  `TrackElement_id_connectsTo` int(11) NOT NULL
+  `TrackElement_id` bigint NOT NULL,
+  `TrackElement_id_connectsTo` bigint NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
