@@ -135,20 +135,6 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		references.add(targetObject);
 	}
 	
-
-	@Override
-	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType) {
-		// create target object
-		final RailwayFactory factory = RailwayFactory.eINSTANCE;
-		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(newVertexType);
-		final EObject targetObject = factory.create(targetClass);
-
-		// set reference to source object
-		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(newVertexType);
-		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
-		targetObject.eSet(feature, sourceVertex);
-	}
-
 	public RailwayContainer getRoot() {
 		return container;
 	}

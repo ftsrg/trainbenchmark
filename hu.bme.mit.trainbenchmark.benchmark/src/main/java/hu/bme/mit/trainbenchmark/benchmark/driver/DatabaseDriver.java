@@ -47,9 +47,6 @@ public abstract class DatabaseDriver<T> {
 	public abstract void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException;
 
-	public abstract void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType)
-			throws IOException;
-
 	public abstract List<T> runQuery() throws IOException;
 
 	public abstract Comparator<T> getComparator(); 

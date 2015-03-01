@@ -138,17 +138,6 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	}
 
 	@Override
-	public void insertVertexWithEdgeIncoming(final Object sourceVertex, final String edgeType, final String newVertexType)
-			throws IOException {
-		final Node sourceNode = (Node) sourceVertex;
-		final Node targetNode = graphDb.createNode();
-
-		// automatic indexing ensures that the new node will be indexed by its type attribute
-		targetNode.addLabel(DynamicLabel.label(newVertexType));
-		targetNode.createRelationshipTo(sourceNode, DynamicRelationshipType.withName(edgeType));
-	}
-
-	@Override
 	public void read(final String filePath) throws IOException {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
 
