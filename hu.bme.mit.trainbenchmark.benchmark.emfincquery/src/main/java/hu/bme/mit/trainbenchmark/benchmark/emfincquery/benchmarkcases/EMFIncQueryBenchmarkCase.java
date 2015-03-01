@@ -20,9 +20,7 @@ import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
 import org.apache.log4j.Level;
@@ -38,7 +36,6 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match extends IPatternMatch> extends
 		AbstractBenchmarkCase<T> {
 
-	protected Set<T> resultSet = new HashSet<>();
 	protected RailwayContainer container;
 
 	protected AdvancedIncQueryEngine engine;
@@ -54,8 +51,7 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 	}
 
 	@Override
-	public List<T> check() {
-		results = new ArrayList<>(resultSet);
+	public Collection<T> check() {
 		return results;
 	}
 
@@ -72,16 +68,16 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 			final EMFScope emfScope = new EMFScope(resource);
 			engine = AdvancedIncQueryEngine.createUnmanagedEngine(emfScope);
 
-			resultSet = getResultSet();
+			results = getResultSet();
 			engine.addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<Match>() {
 				@Override
 				public void notifyAppearance(final Match match) {
-					resultSet.add(extract(match));
+					results.add(extract(match));
 				}
 
 				@Override
 				public void notifyDisappearance(final Match match) {
-					resultSet.remove(extract(match));
+					results.remove(extract(match));
 				}
 			}, false);
 		} catch (final IncQueryException e) {

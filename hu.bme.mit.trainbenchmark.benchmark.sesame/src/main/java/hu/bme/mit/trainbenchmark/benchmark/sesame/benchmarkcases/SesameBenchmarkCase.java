@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 import org.openrdf.model.URI;
 
@@ -40,7 +40,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> {
 	}
 
 	@Override
-	public List<URI> check() throws IOException {
+	public Collection<URI> check() throws IOException {
 		results = driver.runQuery();
 		return results;
 	}

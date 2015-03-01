@@ -18,12 +18,12 @@ import hu.bme.mit.trainbenchmark.railway.Signal;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 
 	@Override
-	protected List<Route> check() {
+	protected Collection<Route> check() {
 		results = new ArrayList<>();
 		
 		for (final Object eObject : container.getContains()) {

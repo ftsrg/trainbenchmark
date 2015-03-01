@@ -15,12 +15,12 @@ package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class SwitchSensor extends JavaBenchmarkCase<Switch> {
 
 	@Override
-	protected List<Switch> check() {
+	protected Collection<Switch> check() {
 		results = new ArrayList<>();
 
 		for (final Object eObject : container.getContains()) {

@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
 import hu.bme.mit.trainbenchmark.railway.Route;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class SignalNeighbor extends Drools6BenchmarkCase<Route> {
 
 	@Override
-	protected List<Route> check() {
+	protected Collection<Route> check() {
 		if (query == null) {
 			listener = new ResultListener<Route>("route");
 			query = ksession.openLiveQuery("SignalNeighbor check", new Object[] {}, listener);

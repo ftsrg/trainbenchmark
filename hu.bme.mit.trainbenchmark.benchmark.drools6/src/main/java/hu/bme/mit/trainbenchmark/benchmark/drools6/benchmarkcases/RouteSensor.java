@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class RouteSensor extends Drools6BenchmarkCase<Sensor> {
 
 	@Override
-	protected List<Sensor> check() {
+	protected Collection<Sensor> check() {
 		if (query == null) {
 			listener = new ResultListener<Sensor>("sensor");
 			query = ksession.openLiveQuery("RouteSensor check", new Object[] {}, listener);

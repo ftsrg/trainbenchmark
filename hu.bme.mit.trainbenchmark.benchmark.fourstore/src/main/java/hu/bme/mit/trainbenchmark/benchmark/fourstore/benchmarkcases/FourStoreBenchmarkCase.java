@@ -6,7 +6,7 @@ import hu.bme.mit.trainbenchmark.benchmark.fourstore.driver.FourStoreDriver;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
@@ -33,7 +33,7 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 	}
 
 	@Override
-	public List<Long> check() throws IOException {
+	public Collection<Long> check() throws IOException {
 		results = driver.runQuery();
 		return results;
 	}

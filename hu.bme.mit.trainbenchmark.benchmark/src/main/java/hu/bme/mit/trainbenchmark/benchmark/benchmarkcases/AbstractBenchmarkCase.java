@@ -19,14 +19,14 @@ import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 public abstract class AbstractBenchmarkCase<T> {
 	
 	private BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
 	protected DatabaseDriver<T> driver;
-	protected List<T> results;
+	protected Collection<T> results;
 
 	// simple getters and setters
 	public BenchmarkResult getBenchmarkResult() {
@@ -38,7 +38,7 @@ public abstract class AbstractBenchmarkCase<T> {
 		return bc.getQuery();
 	}
 
-	public List<T> getResults() {
+	public Collection<T> getResults() {
 		return results;
 	}
 
@@ -50,7 +50,7 @@ public abstract class AbstractBenchmarkCase<T> {
 
 	protected abstract void read() throws IOException;
 
-	protected abstract List<T> check() throws IOException;
+	protected abstract Collection<T> check() throws IOException;
 
 	public void benchmarkModify() throws IOException {
 		modify();

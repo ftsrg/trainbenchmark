@@ -25,7 +25,6 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SIGNALNEIGHBOR;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicLabel;
@@ -45,7 +44,7 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 	}
 
 	@Override
-	public List<Node> checkJava() {
+	public Collection<Node> checkJava() {
 		final Label labelRoute = DynamicLabel.label(ROUTE);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
 		final Label labelSignal = DynamicLabel.label(SIGNAL);

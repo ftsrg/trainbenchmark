@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
@@ -44,7 +44,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
 	}
 
 	@Override
-	public List<Resource> check() throws IOException {
+	public Collection<Resource> check() throws IOException {
 		results = driver.runQuery();
 		return results;
 	}

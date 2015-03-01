@@ -17,7 +17,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicLabel;
@@ -37,7 +37,7 @@ public class SwitchSensor extends Neo4jBenchmarkCase {
 	}
 
 	@Override
-	public List<Node> checkJava() {
+	public Collection<Node> checkJava() {
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
 
