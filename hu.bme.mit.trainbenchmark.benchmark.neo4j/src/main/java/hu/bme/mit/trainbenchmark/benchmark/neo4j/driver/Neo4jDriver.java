@@ -15,6 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Attrib
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.Map;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.collections.IteratorUtils;
+import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.Direction;
@@ -50,7 +52,12 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	protected String dbPath;
 	protected String query;
 
-	public Neo4jDriver(final String dbPath, final String query) {
+	public Neo4jDriver(final String dbPath, final String query) throws IOException {
+		// start with a clean slate: delete old directory
+		if (new File(dbPath).exists()) {
+			FileUtils.deleteDirectory(new File(dbPath));
+		}
+
 		// start the database
 		this.dbPath = dbPath;
 		this.query = query;

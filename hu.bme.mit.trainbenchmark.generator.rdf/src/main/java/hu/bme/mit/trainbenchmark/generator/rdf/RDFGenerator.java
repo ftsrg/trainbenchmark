@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.XSD_PREFIX;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
@@ -47,8 +48,6 @@ import com.google.common.collect.ImmutableMap;
 
 public class RDFGenerator extends Generator {
 
-	public static String ID_PREFIX = "";
-	
 	public RDFGenerator(final String args[]) throws ParseException {
 		super();
 		generatorConfig = rdfGeneratorConfig = new RDFGeneratorConfig(args);

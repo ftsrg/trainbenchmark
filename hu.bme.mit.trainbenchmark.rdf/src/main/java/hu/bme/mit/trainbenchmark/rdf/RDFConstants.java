@@ -16,8 +16,8 @@ public interface RDFConstants {
 
 	static final String ONTOLOGYIRI = "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl";
 	static final String BASE_PREFIX = ONTOLOGYIRI + "#";
-	static final String NUMBER_PREFIX = BASE_PREFIX + "x";
-
+	static final String ID_PREFIX = "";
+	
 	static final String XSD_PREFIX = "http://www.w3.org/2001/XMLSchema#";
 	static final String RDF_PREFIX = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 	static final String RDF_TYPE = RDF_PREFIX + "type";
