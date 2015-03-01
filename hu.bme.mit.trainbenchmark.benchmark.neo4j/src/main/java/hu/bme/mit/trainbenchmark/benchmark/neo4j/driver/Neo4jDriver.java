@@ -31,6 +31,7 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
@@ -56,72 +57,6 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	}
 
 	@Override
-	public List<Node> collectVertices(final String type) {
-		final ResourceIterable<Node> nodes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(DynamicLabel.label(type));
-
-		final ResourceIterator<Node> iterator = nodes.iterator();
-		final List<Node> list = IteratorUtils.toList(iterator);
-
-		return list;
-	}
-
-	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		final Node sourceNode = (Node) sourceVertex;
-		final Node targetNode = graphDb.createNode();
-
-		// automatic indexing ensures that the new node will be indexed by its type attribute
-		targetNode.addLabel(DynamicLabel.label(targetVertexType));
-		sourceNode.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType));
-	}
-
-	@Override
-	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, true);
-	}
-
-	@Override
-	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
-		deleteEdges(vertex, edgeType, false, true);
-	}
-
-	@Override
-	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, false);
-	}
-
-	@Override
-	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
-		// for Neo4j, this is the same as deleteOneOutgoingEdge
-		deleteEdges(vertex, edgeType, true, true);
-	}
-
-	protected void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) {
-		final Node node = (Node) vertex;
-		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
-		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
-		final Iterable<Relationship> relationships = node.getRelationships(direction, relationshipType);
-
-		for (final Relationship relationship : relationships) {
-			relationship.delete();
-
-			// break if we only want to delete one edge
-			if (!all) {
-				break;
-			}
-		}
-	}
-
-	@Override
-	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) {
-		final Node node = (Node) vertex;
-		final Integer propertyValue = (Integer) node.getProperty(propertyName);
-		node.setProperty(propertyName, attributeOperation.op(propertyValue));
-	}
-
-	@Override
 	public void beginTransaction() {
 		tx = graphDb.beginTx();
 	}
@@ -130,11 +65,6 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	public void finishTransaction() {
 		tx.success();
 		tx.close();
-	}
-
-	@Override
-	public void destroy() {
-		graphDb.shutdown();
 	}
 
 	@Override
@@ -172,9 +102,96 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	public Comparator<Node> getComparator() {
 		return new NodeComparator();
 	}
-	
+
+	@Override
+	public void destroy() {
+		graphDb.shutdown();
+	}
+
+	// create
+
+	@Override
+	public void insertVertexWithEdge(final List<Node> vertices, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
+		final Label label = DynamicLabel.label(targetVertexType);
+
+		for (final Node vertex : vertices) {
+			final Node targetNode = graphDb.createNode();
+
+			// automatic indexing ensures that the new node will be indexed by its type attribute
+			targetNode.addLabel(label);
+			vertex.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType));
+		}
+	}
+
+	// read
+
+	@Override
+	public List<Node> collectVertices(final String type) {
+		final ResourceIterable<Node> nodes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(DynamicLabel.label(type));
+
+		final ResourceIterator<Node> iterator = nodes.iterator();
+		@SuppressWarnings("unchecked")
+		final List<Node> list = IteratorUtils.toList(iterator);
+		return list;
+	}
+
+	// update
+
+	@Override
+	public void updateProperties(final List<Node> vertices, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) {
+		for (final Node vertex : vertices) {
+			final Integer propertyValue = (Integer) vertex.getProperty(propertyName);
+			vertex.setProperty(propertyName, attributeOperation.op(propertyValue));
+		}
+	}
+
+	// delete
+
+	@Override
+	public void deleteAllIncomingEdges(final List<Node> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, false, true);
+	}
+
+	@Override
+	public void deleteAllOutgoingEdges(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, true);
+	}
+
+	@Override
+	public void deleteOneOutgoingEdge(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, false);
+	}
+
+	@Override
+	public void deleteSingleOutgoingEdge(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
+		// for Neo4j, this is the same as deleteOneOutgoingEdge
+		deleteEdges(vertices, edgeType, true, true);
+	}
+
+	protected void deleteEdges(final List<Node> vertices, final String edgeType, final boolean outgoing, final boolean all) {
+		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
+		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
+
+		for (final Node vertex : vertices) {
+			final Iterable<Relationship> relationships = vertex.getRelationships(direction, relationshipType);
+
+			for (final Relationship relationship : relationships) {
+				relationship.delete();
+
+				// break if we only want to delete one edge
+				if (!all) {
+					break;
+				}
+			}
+		}
+	}
+
+	// utility
+
 	public GraphDatabaseService getGraphDb() {
 		return graphDb;
 	}
-	
+
 }

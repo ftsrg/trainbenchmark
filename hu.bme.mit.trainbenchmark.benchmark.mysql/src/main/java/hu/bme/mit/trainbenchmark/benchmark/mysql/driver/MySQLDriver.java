@@ -50,100 +50,8 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 
 	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(ModelConstants.ROUTE_ENTRY, ModelConstants.ROUTE);
 
-	
 	public MySQLDriver(final String queryPath) throws IOException {
 		query = FileUtils.readFileToString(new File(queryPath));
-	}
-	
-	@Override
-	public List<Long> collectVertices(final String type) throws IOException {
-		final List<Long> results = new ArrayList<>();
-
-		final String query = String.format("SELECT * FROM %s;", type);
-		try (ResultSet rs = con.createStatement().executeQuery(query)) {
-			while (rs.next()) {
-				results.add(rs.getLong("id"));
-			}
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
-
-		return results;
-	}
-
-	@Override
-	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException {
-		deleteOutgoingEdges(vertex, edgeType, false);
-	}
-
-	@Override
-	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
-		deleteOutgoingEdges(vertex, edgeType, true);
-	}
-
-	protected void deleteOutgoingEdges(final Object vertex, final String edgeType, final boolean all) throws IOException {
-		final Long vertexId = (Long) vertex;
-		try {
-			final String q = String.format("DELETE FROM %s WHERE %s = %d" + (all ? "" : " LIMIT 1") + ";", edgeType,
-					EDGE_SOURCE_TYPES.get(edgeType), vertexId);
-			con.createStatement().executeUpdate(q);
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
-		final Long vertexId = (Long) vertex;
-		try {
-			final String q = String.format("UPDATE `%s` SET `%s` = 0 WHERE id = %d;", vertexType, edgeType, vertexId);
-			con.createStatement().executeUpdate(q);
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
-		final Long vertexId = (Long) vertex;
-		try {
-			final String q = String.format("DELETE FROM %s WHERE %s = %d;", edgeType, EDGE_TARGET_TYPES.get(edgeType), vertexId);
-			con.createStatement().executeUpdate(q);
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
-		final Long vertexId = (Long) vertex;
-		try {
-			con.createStatement().executeUpdate(
-					String.format("UPDATE %s SET %s WHERE id = %d;", vertexType, attributeOperation.sqlUpdate(propertyName), vertexId));
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		try {
-			final Long sourceVertexId = (Long) sourceVertex;
-			final Statement st = con.createStatement();
-			st.executeUpdate(String.format("INSERT INTO `%s` VALUES ();", targetVertexType), Statement.RETURN_GENERATED_KEYS);
-
-			try (ResultSet rs = st.getGeneratedKeys()) {
-				if (rs.next()) {
-					final long newVertexId = rs.getLong(1);
-					st.executeUpdate(String.format("INSERT INTO `%s` (`TrackElement_id`, `Sensor_id`) VALUES (%d, %d);", edgeType,
-							sourceVertexId, newVertexId));
-				}
-			}
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
 	}
 
 	@Override
@@ -162,7 +70,7 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 			con = DriverManager.getConnection(url, user, password);
 		} catch (final SQLException e) {
 			throw new IOException(e);
-		}		
+		}
 	}
 
 	@Override
@@ -177,13 +85,13 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
-		
+
 		return results;
 	}
 
 	@Override
 	public Comparator<Long> getComparator() {
-		// a null comparator provides natural ordering 
+		// a null comparator provides natural ordering
 		return null;
 	}
 
@@ -201,5 +109,110 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 		}
 		MySQLProcess.stopSQLProcess();
 	}
-	
+
+	// create
+
+	@Override
+	public void insertVertexWithEdge(final List<Long> sourceVertices, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
+		try {
+			for (final Long sourceVertex : sourceVertices) {
+				final Statement st = con.createStatement();
+				st.executeUpdate(String.format("INSERT INTO `%s` VALUES ();", targetVertexType), Statement.RETURN_GENERATED_KEYS);
+
+				try (ResultSet rs = st.getGeneratedKeys()) {
+					if (rs.next()) {
+						final long newVertexId = rs.getLong(1);
+						st.executeUpdate(String.format("INSERT INTO `%s` (`TrackElement_id`, `Sensor_id`) VALUES (%d, %d);", edgeType,
+								sourceVertex, newVertexId));
+					}
+				}
+			}
+		} catch (final SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
+	// read
+
+	@Override
+	public List<Long> collectVertices(final String type) throws IOException {
+		final List<Long> results = new ArrayList<>();
+
+		final String query = String.format("SELECT * FROM %s;", type);
+		try (ResultSet rs = con.createStatement().executeQuery(query)) {
+			while (rs.next()) {
+				results.add(rs.getLong("id"));
+			}
+		} catch (final SQLException e) {
+			throw new IOException(e);
+		}
+
+		return results;
+	}
+
+	// update
+
+	@Override
+	public void updateProperties(final List<Long> vertices, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) throws IOException {
+		try {
+			for (final Long vertex : vertices) {
+				final String update = String.format("UPDATE %s SET %s WHERE id = %d;", vertexType,
+						attributeOperation.sqlUpdate(propertyName), vertex);
+				con.createStatement().executeUpdate(update);
+			}
+		} catch (final SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
+	// delete
+
+	@Override
+	public void deleteAllIncomingEdges(final List<Long> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+		try {
+			for (final Long vertex : vertices) {
+				final String update = String.format("DELETE FROM %s WHERE %s = %d;", edgeType, EDGE_TARGET_TYPES.get(edgeType), vertex);
+				con.createStatement().executeUpdate(update);
+			}
+		} catch (final SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
+	@Override
+	public void deleteAllOutgoingEdges(final List<Long> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteOutgoingEdges(vertices, edgeType, true);
+	}
+
+	@Override
+	public void deleteOneOutgoingEdge(final List<Long> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteOutgoingEdges(vertices, edgeType, false);
+	}
+
+	@Override
+	public void deleteSingleOutgoingEdge(final List<Long> vertices, final String vertexType, final String edgeType) throws IOException {
+		try {
+			for (final Long vertex : vertices) {
+				final String update = String.format("UPDATE `%s` SET `%s` = 0 WHERE id = %d;", vertexType, edgeType, vertex);
+				con.createStatement().executeUpdate(update);
+			}
+		} catch (final SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
+	protected void deleteOutgoingEdges(final List<Long> vertices, final String edgeType, final boolean all) throws IOException {
+		try {
+			for (final Long vertex : vertices) {
+				final String delete = String.format("DELETE FROM %s WHERE %s = %d" + (all ? "" : " LIMIT 1") + ";", edgeType,
+						EDGE_SOURCE_TYPES.get(edgeType), vertex);
+				con.createStatement().executeUpdate(delete);
+			}
+		} catch (final SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
 }

@@ -50,14 +50,12 @@ public abstract class DatabaseDriverTest {
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.ROUTE);
 		assertEquals(2, routes.size());
 	}
-	
+
 	@Test
 	public void testUpdateProperty() throws IOException {
 		final List<? extends Object> segments = driver.collectVertices(ModelConstants.SEGMENT);
-		for (final Object segment : segments) {
-			driver.updateProperty(segment, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new SetToZero());
-		}
-		
+		driver.updateProperties(segments, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new SetToZero());
+
 		final List<? extends Object> segments2 = driver.collectVertices(ModelConstants.SEGMENT);
 		for (final Object segment : segments2) {
 			assertEquals(0, extractLength(segment));
@@ -68,19 +66,14 @@ public abstract class DatabaseDriverTest {
 	@Test
 	public void testDeleteOutgoingEdges() throws IOException {
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.ROUTE);
-		for (final Object route : routes) {
-			driver.deleteAllOutgoingEdges(route, ModelConstants.ROUTE_ROUTEDEFINITION);
-		}
+		driver.deleteAllOutgoingEdges(routes, ModelConstants.ROUTE, ModelConstants.ROUTE_ROUTEDEFINITION);
 	}
-	
+
 	@Test
 	public void testDeleteIncomingEdges() throws IOException {
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.SENSOR);
-		for (final Object route : routes) {
-			driver.deleteAllIncomingEdges(route, ModelConstants.TRACKELEMENT_SENSOR, ModelConstants.TRACKELEMENT);
-			
-		}
+		driver.deleteAllIncomingEdges(routes, ModelConstants.TRACKELEMENT, ModelConstants.TRACKELEMENT_SENSOR);
 	}
-	
+
 	protected abstract long extractLength(Object segment) throws IOException;
 }

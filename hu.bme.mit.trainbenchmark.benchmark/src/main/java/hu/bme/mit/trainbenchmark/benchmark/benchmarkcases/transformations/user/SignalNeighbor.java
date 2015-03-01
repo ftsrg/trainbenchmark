@@ -25,9 +25,7 @@ public class SignalNeighbor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object route : elementsToModify) {
-			driver.deleteOutgoingEdge(route, ModelConstants.ROUTE, ModelConstants.ROUTE_ENTRY);
-		}
+		driver.deleteSingleOutgoingEdge(elementsToModify, ModelConstants.ROUTE, ModelConstants.ROUTE_ENTRY);
 	}
 
 }

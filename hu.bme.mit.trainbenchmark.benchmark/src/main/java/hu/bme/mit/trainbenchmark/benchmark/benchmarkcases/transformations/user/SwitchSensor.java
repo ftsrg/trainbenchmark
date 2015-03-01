@@ -25,9 +25,7 @@ public class SwitchSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object sw : elementsToModify) {
-			driver.deleteAllOutgoingEdges(sw, ModelConstants.TRACKELEMENT_SENSOR);
-		}
+		driver.deleteAllOutgoingEdges(elementsToModify, ModelConstants.SWITCH, ModelConstants.TRACKELEMENT_SENSOR);
 	}
 
 }

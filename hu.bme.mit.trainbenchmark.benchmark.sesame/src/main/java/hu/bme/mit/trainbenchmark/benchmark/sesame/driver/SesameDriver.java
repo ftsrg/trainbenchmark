@@ -47,6 +47,8 @@ import org.openrdf.sail.memory.model.IntegerMemLiteral;
 
 public class SesameDriver extends DatabaseDriver<URI> {
 
+	protected long newVertexId = 1000000000;
+
 	protected String basePrefix;
 	protected String query;
 	protected RepositoryConnection con;
@@ -74,132 +76,6 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<URI> collectVertices(final String type) throws IOException {
-		final URI typeURI = f.createURI(basePrefix + type);
-		final List<URI> vertices = new ArrayList<>();
-
-		try {
-			final RepositoryResult<Statement> statements = con.getStatements(null, RDF.TYPE, typeURI, true);
-			while (statements.hasNext()) {
-				final Statement s = statements.next();
-				final URI uri = (URI) s.getSubject();
-				vertices.add(uri);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-
-		return vertices;
-	}
-
-	protected long newVertexId = 1000000000;
-
-	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		final URI sourceVertexURI = (URI) sourceVertex;
-		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
-		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
-
-		// TODO think about alternative solutions
-		final URI targetVertexURI = f.createURI(basePrefix + targetVertexType + newVertexId);
-		newVertexId++;
-
-		try {
-			// insert edge
-			final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
-			con.add(edgeStatement);
-
-			// set vertex type
-			final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
-			con.add(typeStatement);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, true);
-	}
-
-	@Override
-	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
-		deleteEdges(vertex, edgeType, false, true);
-	}
-
-	@Override
-	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, false);
-	}
-
-	@Override
-	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, false);
-	}
-
-	public void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) throws IOException {
-		final List<Statement> itemsToRemove = new ArrayList<>();
-
-		final URI edge = f.createURI(basePrefix + edgeType);
-		final URI nodeURI = (URI) vertex;
-		RepositoryResult<Statement> statementsToRemove;
-		try {
-			if (outgoing) {
-				statementsToRemove = con.getStatements(nodeURI, edge, null, true);
-			} else {
-				statementsToRemove = con.getStatements(null, edge, nodeURI, true);
-			}
-
-			while (statementsToRemove.hasNext()) {
-				final Statement s = statementsToRemove.next();
-
-				itemsToRemove.add(s);
-
-				// break if we only want to delete one edge
-				if (!all) {
-					break;
-				}
-			}
-
-			for (final Statement s : itemsToRemove) {
-				con.remove(s);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
-		try {
-			final URI vertexURI = (URI) vertex;
-			final URI typeURI = f.createURI(basePrefix + propertyName);
-			final RepositoryResult<Statement> statementsToRemove = con.getStatements(vertexURI, typeURI, null, true);
-
-			if (!statementsToRemove.hasNext()) {
-				throw new IOException("Property " + propertyName + " not found.");
-			}
-
-			final Statement statement = statementsToRemove.next();
-			con.remove(statement);
-			while (statementsToRemove.hasNext()) {
-				con.remove(statementsToRemove.next());
-			}
-
-			// get the object of the first removed statement
-			final IntegerMemLiteral integerMemLiteral = (IntegerMemLiteral) statement.getObject();
-			final Integer currentValue = new Integer(integerMemLiteral.stringValue());
-			final Literal literal = f.createLiteral(attributeOperation.op(currentValue));
-
-			con.add(vertexURI, typeURI, literal);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
 	public void read(final String modelPath) throws IOException {
 		repository = new SailRepository(new MemoryStore());
 		final File modelFile = new File(modelPath);
@@ -211,16 +87,6 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
-	}
-
-	public List<Long> extractIds(final Collection<URI> elements) {
-		final ArrayList<Long> ids = new ArrayList<Long>();
-		for (final URI uri : elements) {
-			final String idString = uri.getLocalName();
-			final Long id = new Long(idString);
-			ids.add(id);
-		}
-		return ids;
 	}
 
 	@Override
@@ -252,6 +118,11 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	@Override
+	public Comparator<URI> getComparator() {
+		return new URIComparator();
+	}
+
+	@Override
 	public void destroy() throws IOException {
 		try {
 			con.close();
@@ -260,9 +131,154 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		}
 	}
 
+	// create
+
 	@Override
-	public Comparator<URI> getComparator() {
-		return new URIComparator();
+	public void insertVertexWithEdge(final List<URI> sourceVertices, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
+		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
+		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
+
+		try {
+			for (final URI sourceVertexURI : sourceVertices) {
+				// TODO think about alternative solutions
+				final URI targetVertexURI = f.createURI(basePrefix + targetVertexType + newVertexId);
+				newVertexId++;
+
+				// insert edge
+				final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
+				con.add(edgeStatement);
+
+				// set vertex type
+				final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
+				con.add(typeStatement);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
+	}
+
+	// read
+
+	@Override
+	public List<URI> collectVertices(final String type) throws IOException {
+		final URI typeURI = f.createURI(basePrefix + type);
+		final List<URI> vertices = new ArrayList<>();
+
+		try {
+			final RepositoryResult<Statement> statements = con.getStatements(null, RDF.TYPE, typeURI, true);
+			while (statements.hasNext()) {
+				final Statement s = statements.next();
+				final URI uri = (URI) s.getSubject();
+				vertices.add(uri);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
+
+		return vertices;
+	}
+
+	// update
+
+	@Override
+	public void updateProperties(final List<URI> vertices, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) throws IOException {
+		final URI typeURI = f.createURI(basePrefix + propertyName);
+
+		try {
+			for (final URI vertex : vertices) {
+				final RepositoryResult<Statement> statementsToRemove = con.getStatements(vertex, typeURI, null, true);
+
+				if (!statementsToRemove.hasNext()) {
+					throw new IOException("Property " + propertyName + " not found.");
+				}
+
+				final Statement statement = statementsToRemove.next();
+				con.remove(statement);
+				while (statementsToRemove.hasNext()) {
+					con.remove(statementsToRemove.next());
+				}
+
+				// get the object of the first removed statement
+				final IntegerMemLiteral integerMemLiteral = (IntegerMemLiteral) statement.getObject();
+				final Integer currentValue = new Integer(integerMemLiteral.stringValue());
+				final Literal literal = f.createLiteral(attributeOperation.op(currentValue));
+
+				con.add(vertex, typeURI, literal);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
+	}
+
+	// delete
+
+	@Override
+	public void deleteAllIncomingEdges(final List<URI> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, false, true);
+	}
+
+	@Override
+	public void deleteAllOutgoingEdges(final List<URI> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, true);
+	}
+
+	@Override
+	public void deleteOneOutgoingEdge(final List<URI> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, false);
+	}
+
+	@Override
+	public void deleteSingleOutgoingEdge(final List<URI> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, false);
+	}
+
+	protected void deleteEdges(final List<URI> vertices, final String edgeType, final boolean outgoing, final boolean all)
+			throws IOException {
+		final List<Statement> itemsToRemove = new ArrayList<>();
+
+		final URI edge = f.createURI(basePrefix + edgeType);
+
+		try {
+			for (final URI vertex : vertices) {
+				RepositoryResult<Statement> statementsToRemove;
+				if (outgoing) {
+					statementsToRemove = con.getStatements(vertex, edge, null, true);
+				} else {
+					statementsToRemove = con.getStatements(null, edge, vertex, true);
+				}
+
+				while (statementsToRemove.hasNext()) {
+					final Statement s = statementsToRemove.next();
+
+					itemsToRemove.add(s);
+
+					// break if we only want to delete one edge
+					if (!all) {
+						break;
+					}
+				}
+
+				for (final Statement s : itemsToRemove) {
+					con.remove(s);
+				}
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
+	}
+
+	// utility
+
+	protected List<Long> extractIds(final Collection<URI> elements) {
+		final ArrayList<Long> ids = new ArrayList<Long>();
+		for (final URI uri : elements) {
+			final String idString = uri.getLocalName();
+			final Long id = new Long(idString);
+			ids.add(id);
+		}
+		return ids;
 	}
 
 }

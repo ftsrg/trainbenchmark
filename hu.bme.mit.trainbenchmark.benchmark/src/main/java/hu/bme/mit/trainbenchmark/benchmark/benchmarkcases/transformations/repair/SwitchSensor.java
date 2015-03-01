@@ -25,9 +25,8 @@ public class SwitchSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object vertex : elementsToModify) {
-			driver.insertVertexWithEdge(vertex, ModelConstants.TRACKELEMENT, ModelConstants.SENSOR, ModelConstants.TRACKELEMENT_SENSOR);
-		}
+		driver.insertVertexWithEdge(elementsToModify, ModelConstants.TRACKELEMENT, ModelConstants.SENSOR,
+				ModelConstants.TRACKELEMENT_SENSOR);
 	}
 
 }

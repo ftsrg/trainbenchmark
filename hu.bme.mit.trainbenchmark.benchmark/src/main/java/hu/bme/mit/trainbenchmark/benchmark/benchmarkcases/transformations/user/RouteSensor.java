@@ -25,9 +25,7 @@ public class RouteSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		for (final Object route : elementsToModify) {
-			driver.deleteOneOutgoingEdge(route, ModelConstants.ROUTE_ROUTEDEFINITION);
-		}
+		driver.deleteOneOutgoingEdge(elementsToModify, ModelConstants.ROUTE, ModelConstants.ROUTE_ROUTEDEFINITION);
 	}
 
 }
