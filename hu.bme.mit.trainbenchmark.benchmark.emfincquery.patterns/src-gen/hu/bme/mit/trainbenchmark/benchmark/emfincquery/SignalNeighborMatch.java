@@ -1,7 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SignalNeighborQuerySpecification;
-import hu.bme.mit.trainbenchmark.railway.Signal;
+import hu.bme.mit.trainbenchmark.railway.Route;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
@@ -23,37 +23,37 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
  */
 @SuppressWarnings("all")
 public abstract class SignalNeighborMatch extends BasePatternMatch {
-  private Signal fSignal;
+  private Route fRoute1;
   
-  private static List<String> parameterNames = makeImmutableList("signal");
+  private static List<String> parameterNames = makeImmutableList("route1");
   
-  private SignalNeighborMatch(final Signal pSignal) {
-    this.fSignal = pSignal;
+  private SignalNeighborMatch(final Route pRoute1) {
+    this.fRoute1 = pRoute1;
   }
   
   @Override
   public Object get(final String parameterName) {
-    if ("signal".equals(parameterName)) return this.fSignal;
+    if ("route1".equals(parameterName)) return this.fRoute1;
     return null;
   }
   
-  public Signal getSignal() {
-    return this.fSignal;
+  public Route getRoute1() {
+    return this.fRoute1;
   }
   
   @Override
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    if ("signal".equals(parameterName) ) {
-    	this.fSignal = (hu.bme.mit.trainbenchmark.railway.Signal) newValue;
+    if ("route1".equals(parameterName) ) {
+    	this.fRoute1 = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
     	return true;
     }
     return false;
   }
   
-  public void setSignal(final Signal pSignal) {
+  public void setRoute1(final Route pRoute1) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    this.fSignal = pSignal;
+    this.fRoute1 = pRoute1;
   }
   
   @Override
@@ -68,18 +68,18 @@ public abstract class SignalNeighborMatch extends BasePatternMatch {
   
   @Override
   public Object[] toArray() {
-    return new Object[]{fSignal};
+    return new Object[]{fRoute1};
   }
   
   @Override
   public SignalNeighborMatch toImmutable() {
-    return isMutable() ? newMatch(fSignal) : this;
+    return isMutable() ? newMatch(fRoute1) : this;
   }
   
   @Override
   public String prettyPrint() {
     StringBuilder result = new StringBuilder();
-    result.append("\"signal\"=" + prettyPrintValue(fSignal)
+    result.append("\"route1\"=" + prettyPrintValue(fRoute1)
     );
     return result.toString();
   }
@@ -88,7 +88,7 @@ public abstract class SignalNeighborMatch extends BasePatternMatch {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((fSignal == null) ? 0 : fSignal.hashCode());
+    result = prime * result + ((fRoute1 == null) ? 0 : fRoute1.hashCode());
     return result;
   }
   
@@ -109,8 +109,8 @@ public abstract class SignalNeighborMatch extends BasePatternMatch {
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     SignalNeighborMatch other = (SignalNeighborMatch) obj;
-    if (fSignal == null) {if (other.fSignal != null) return false;}
-    else if (!fSignal.equals(other.fSignal)) return false;
+    if (fRoute1 == null) {if (other.fRoute1 != null) return false;}
+    else if (!fRoute1.equals(other.fRoute1)) return false;
     return true;
   }
   
@@ -139,29 +139,29 @@ public abstract class SignalNeighborMatch extends BasePatternMatch {
    * Returns a mutable (partial) match.
    * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
    * 
-   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
+   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static SignalNeighborMatch newMutableMatch(final Signal pSignal) {
-    return new Mutable(pSignal);
+  public static SignalNeighborMatch newMutableMatch(final Route pRoute1) {
+    return new Mutable(pRoute1);
   }
   
   /**
    * Returns a new (partial) match.
    * This can be used e.g. to call the matcher with a partial match.
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-   * @param pSignal the fixed value of pattern parameter signal, or null if not bound.
+   * @param pRoute1 the fixed value of pattern parameter route1, or null if not bound.
    * @return the (partial) match object.
    * 
    */
-  public static SignalNeighborMatch newMatch(final Signal pSignal) {
-    return new Immutable(pSignal);
+  public static SignalNeighborMatch newMatch(final Route pRoute1) {
+    return new Immutable(pRoute1);
   }
   
   private static final class Mutable extends SignalNeighborMatch {
-    Mutable(final Signal pSignal) {
-      super(pSignal);
+    Mutable(final Route pRoute1) {
+      super(pRoute1);
     }
     
     @Override
@@ -171,8 +171,8 @@ public abstract class SignalNeighborMatch extends BasePatternMatch {
   }
   
   private static final class Immutable extends SignalNeighborMatch {
-    Immutable(final Signal pSignal) {
-      super(pSignal);
+    Immutable(final Route pRoute1) {
+      super(pRoute1);
     }
     
     @Override

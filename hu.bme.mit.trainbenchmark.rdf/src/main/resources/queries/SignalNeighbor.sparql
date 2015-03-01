@@ -1,21 +1,21 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?xSig
+SELECT DISTINCT ?xRoute1
 WHERE
 {
-	?xRoute1 base:Route_routeDefinition ?xSen1 .
-	?xTE1 base:TrackElement_sensor ?xSen1 .
-	?xTE1 base:TrackElement_connectsTo ?xTE2 .
-	?xTE2 base:TrackElement_sensor ?xSen2 .
-	?xRoute1 base:Route_exit ?xSig .
+	?xRoute1 base:Route_routeDefinition ?xSensor1 .
+	?xTrackElement1 base:TrackElement_sensor ?xSensor1 .
+	?xTrackElement1 base:TrackElement_connectsTo ?xTrackElement2 .
+	?xTrackElement2 base:TrackElement_sensor ?xSensor2 .
+	?xRoute1 base:Route_exit ?xSignal .
 
-	?xRouteX base:Route_routeDefinition ?xSen2 .
-	FILTER ( ?xRouteX != ?xRoute1 ) .
+	?xRoute3 base:Route_routeDefinition ?xSensor2 .
+	FILTER ( ?xRoute3 != ?xRoute1 ) .
 
 	OPTIONAL {
-		?xRoute2 base:Route_entry ?xSig .
-		?xRoute2 base:Route_routeDefinition ?xSen2 .
+		?xRoute2 base:Route_entry ?xSignal .
+		?xRoute2 base:Route_routeDefinition ?xSensor2 .
 	} .
 	FILTER (!bound(?xRoute2))	
 }

@@ -18,6 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -47,12 +48,8 @@ public abstract class TransformationDefinition<T> {
 	public void performTransformation() throws IOException {
 		nElementsToModify = Util.calcModify(bmr);
 		bmr.addModifiedElementsSize(nElementsToModify);
-
-		Collections.sort(currentResults, driver.getComparator());
 		
-		System.out.println("current results:");
-		System.out.println(currentResults);
-		System.out.println("-----");
+		Collections.sort(currentResults, driver.getComparator());
 		
 		bmr.restartClock();
 		driver.beginTransaction();
@@ -63,6 +60,24 @@ public abstract class TransformationDefinition<T> {
 		rhs();
 		driver.finishTransaction();
 		bmr.addRhsTime();
+	}
+	
+	public List<T> pickRandom(long nElementsToModify, final List<T> elements) {
+		Collections.sort(elements, driver.getComparator());
+		
+		final Random random = getRandom();
+		final int size = elements.size();
+		if (size < nElementsToModify) {
+			nElementsToModify = size;
+		}
+		
+		final List<T> elementsToModify = new ArrayList<>();
+		for (int i = 0; i < nElementsToModify; i++) {
+			final int rndTarget = random.nextInt(size);
+			final T element = elements.get(rndTarget);
+			elementsToModify.add(element);
+		}
+		return elementsToModify;
 	}
 	
 	public static Random getRandom() {

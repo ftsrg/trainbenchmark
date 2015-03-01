@@ -11,11 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
-public class RouteSensor<T> extends RepairTransformationDefinition<T> {
+public class RouteSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {

@@ -11,24 +11,24 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 import java.util.List;
 
-public class SignalNeighbor<T> extends UserTransformationDefinition<T> {
+public class SignalNeighbor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		final List<T> signals = driver.collectVertices(ModelConstants.SIGNAL);
-		elementsToModify = pickRandom(nElementsToModify, signals, currentResults);
+		final List<T> routes = driver.collectVertices(ModelConstants.ROUTE);
+		elementsToModify = pickRandom(nElementsToModify, routes);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		System.out.println(elementsToModify);
-		for (final Object signal : elementsToModify) {
-			driver.deleteAllIncomingEdges(signal, ModelConstants.ROUTE_ENTRY, ModelConstants.ROUTE);
+		for (final Object route : elementsToModify) {
+			driver.deleteOutgoingEdge(route, ModelConstants.ROUTE, ModelConstants.ROUTE_ENTRY);
 		}
 	}
 

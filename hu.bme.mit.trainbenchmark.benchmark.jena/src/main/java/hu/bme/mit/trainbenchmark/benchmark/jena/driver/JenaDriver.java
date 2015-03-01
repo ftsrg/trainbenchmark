@@ -78,6 +78,7 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 		final List<Statement> statementsToRemove = new ArrayList<>();
 		while (edges.hasNext()) {
 			final Statement statementToRemove = edges.next();
+			
 			statementsToRemove.add(statementToRemove);
 
 			if (!all) {
