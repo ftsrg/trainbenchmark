@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.drools5.ResultListener;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class SwitchSensor extends Drools5BenchmarkCase<Switch> {
 
 	@Override
-	protected List<Switch> check() {
+	protected Collection<Switch> check() {
 		if (query == null) {
 			listener = new ResultListener<Switch>("switch");
 			query = ksession.openLiveQuery("SwitchSensor check", new Object[] {}, listener);

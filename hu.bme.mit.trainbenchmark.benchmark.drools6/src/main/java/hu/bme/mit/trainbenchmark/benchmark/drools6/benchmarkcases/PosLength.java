@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class PosLength extends Drools6BenchmarkCase<Segment> {
 
 	@Override
-	protected List<Segment> check() {
+	protected Collection<Segment> check() {
 		if (query == null) {
 			listener = new ResultListener<Segment>("segment");
 			query = ksession.openLiveQuery("PosLength check", new Object[] {}, listener);

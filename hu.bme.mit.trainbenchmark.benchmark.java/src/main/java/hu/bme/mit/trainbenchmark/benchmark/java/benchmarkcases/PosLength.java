@@ -15,12 +15,12 @@ package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class PosLength extends JavaBenchmarkCase<Segment> {
 
 	@Override
-	protected List<Segment> check() {
+	protected Collection<Segment> check() {
 		results = new ArrayList<>();
 		
 		for (final Object eObject : container.getContains()) {

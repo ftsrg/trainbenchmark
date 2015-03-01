@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 public abstract class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
@@ -39,7 +39,7 @@ public abstract class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 	}
 
 	@Override
-	public List<Long> check() throws IOException {
+	public Collection<Long> check() throws IOException {
 		results = driver.runQuery();
 		return results;
 	}

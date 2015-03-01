@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.NotImplementedException;
@@ -55,7 +55,7 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 	}
 
 	@Override
-	public List<Node> check() throws IOException {
+	public Collection<Node> check() throws IOException {
 		if (nbc.isJavaApi()) {
 			results = checkJava();
 		} else {
@@ -65,7 +65,7 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 		return results;
 	}
 
-	protected List<Node> checkJava() {
+	protected Collection<Node> checkJava() {
 		throw new NotImplementedException("");
 	}
 

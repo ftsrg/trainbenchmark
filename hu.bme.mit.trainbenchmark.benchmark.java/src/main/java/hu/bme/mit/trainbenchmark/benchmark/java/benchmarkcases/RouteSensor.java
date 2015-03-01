@@ -18,12 +18,12 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 
 	@Override
-	protected List<Sensor> check() {
+	protected Collection<Sensor> check() {
 		results = new ArrayList<>();
 
 		for (final Object eObject : container.getContains()) {

@@ -12,15 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
-
 
 public abstract class Neo4jJavaBenchmarkCase extends Neo4jBenchmarkCase {
 
 	@Override
-	public List<Node> check() {
+	public Collection<Node> check() {
 		results = checkJava();
 		return results;
 	}

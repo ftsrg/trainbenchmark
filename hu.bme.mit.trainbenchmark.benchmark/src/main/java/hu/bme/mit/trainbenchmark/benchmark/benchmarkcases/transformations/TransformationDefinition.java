@@ -19,52 +19,54 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public abstract class TransformationDefinition<T> {
 
-	protected List<T> currentResults;
-	protected List<T> elementCandidates;
+	protected Collection<T> currentResults;
+	protected Collection<T> elementCandidates;
 	protected List<T> elementsToModify;
-	
+
 	protected long nElementsToModify;
 	protected long start;
 	protected long startEdit;
 	protected long end;
-	
+
 	protected BenchmarkResult bmr;
 	protected DatabaseDriver<T> driver;
-	
-	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<T> driver, final List<T> currentResults) {
+
+	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<T> driver, final Collection<T> currentResults) {
 		this.bmr = bmr;
 		this.driver = driver;
 		this.currentResults = currentResults;
 	}
-	
+
 	protected abstract void lhs() throws IOException;
-	protected abstract void rhs() throws IOException;	
-	
+
+	protected abstract void rhs() throws IOException;
+
 	public void performTransformation() throws IOException {
 		nElementsToModify = Util.calcModify(bmr);
 		bmr.addModifiedElementsSize(nElementsToModify);
-		
+
 		bmr.restartClock();
 		driver.beginTransaction();
 		lhs();
 		bmr.addLhsTime();
-		
+
 		// we do not measure this in the benchmark results
-		Collections.sort(elementCandidates, driver.getComparator());
-		elementsToModify = pickRandom(nElementsToModify, elementCandidates);
-				
+		final List<T> candidatesList = new ArrayList<>(elementCandidates);
+		Collections.sort(candidatesList, driver.getComparator());
+		elementsToModify = pickRandom(nElementsToModify, candidatesList);
+
 		bmr.restartClock();
 		rhs();
 		driver.finishTransaction();
 		bmr.addRhsTime();
 	}
-	
 
 	private List<T> pickRandom(long nElementsToModify, final List<T> elements) {
 		final Random random = getRandom();
@@ -72,7 +74,7 @@ public abstract class TransformationDefinition<T> {
 		if (size < nElementsToModify) {
 			nElementsToModify = size;
 		}
-		
+
 		final List<T> elementsToModify = new ArrayList<>();
 		for (int i = 0; i < nElementsToModify; i++) {
 			final int rndTarget = random.nextInt(size);
@@ -81,7 +83,7 @@ public abstract class TransformationDefinition<T> {
 		}
 		return elementsToModify;
 	}
-	
+
 	public static Random getRandom() {
 		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
