@@ -183,7 +183,7 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 
 	@Override
 	public Comparator<Long> getComparator() {
-		// a null comparator works according to the natural order 
+		// a null comparator provides natural ordering 
 		return null;
 	}
 

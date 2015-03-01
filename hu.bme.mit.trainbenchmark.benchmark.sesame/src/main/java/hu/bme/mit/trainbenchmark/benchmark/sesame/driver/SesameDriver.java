@@ -52,6 +52,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	protected RepositoryConnection con;
 	protected Repository repository;
 	protected ValueFactory f;
+	protected TupleQuery tupleQuery;
 
 	public SesameDriver(final String basePrefix, final String queryPath) throws IOException {
 		this.basePrefix = basePrefix;
@@ -92,7 +93,6 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	protected long newVertexId = 1000000000;
-	private TupleQuery tupleQuery;
 
 	@Override
 	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,

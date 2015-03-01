@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchComplexTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class JavaBatchTest extends BatchComplexTest {
+public class JavaBatchTest extends BatchTest {
 
 	public JavaBatchTest() {
 		bi = new JavaBenchmarkInitializer();

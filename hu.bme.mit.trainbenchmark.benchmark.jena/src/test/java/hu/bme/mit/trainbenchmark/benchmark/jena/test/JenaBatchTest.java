@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
+package hu.bme.mit.trainbenchmark.benchmark.jena.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchComplexTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class MySQLBatchComplexTest extends BatchComplexTest {
+public class JenaBatchTest extends BatchTest {
 
-	public MySQLBatchComplexTest() {
-		bi = new MySQLBenchmarkInitializer();
+	public JenaBatchTest() {
+		bi = new JenaBenchmarkInitializer();
 	}
 
 }
