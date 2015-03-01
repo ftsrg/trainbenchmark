@@ -12,11 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchComplexTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class FourStoreBatchComplexTest extends BatchComplexTest {
+public class FourStoreBatchTest extends BatchTest {
 
-	public FourStoreBatchComplexTest() {
+	public FourStoreBatchTest() {
 		bi = new FourStoreBenchmarkInitializer();
 	}
 

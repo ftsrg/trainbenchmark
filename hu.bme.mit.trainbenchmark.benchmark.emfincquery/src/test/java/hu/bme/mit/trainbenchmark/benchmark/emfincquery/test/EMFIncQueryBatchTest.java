@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchComplexTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class EMFIncQueryBatchTest extends BatchComplexTest {
+public class EMFIncQueryBatchTest extends BatchTest {
 
 	public EMFIncQueryBatchTest() {
 		bi = new EMFIncQueryBenchmarkInitializer();

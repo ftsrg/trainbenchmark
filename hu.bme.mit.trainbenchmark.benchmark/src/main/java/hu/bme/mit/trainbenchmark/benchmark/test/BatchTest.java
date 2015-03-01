@@ -19,6 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
 import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
+import org.junit.Test;
 
 public abstract class BatchTest extends TrainBenchmarkTest {
 
@@ -34,6 +35,26 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 		testCase.benchmarkCheck();
 		assertEquals(expectedResultSize, testCase.getResults().size());
 		testCase.benchmarkDestroy();
+	}
+
+	@Test
+	public void posLength() throws ParseException, IOException {
+		testQuery("PosLength", 15);
+	}
+
+	@Test
+	public void routeSensor() throws ParseException, IOException {
+		testQuery("RouteSensor", 12);
+	}
+
+	@Test
+	public void signalNeighbor() throws ParseException, IOException {
+		testQuery("SignalNeighbor", 1);
+	}
+
+	@Test
+	public void switchSensor() throws ParseException, IOException {
+		testQuery("SwitchSensor", 4);
 	}
 
 }

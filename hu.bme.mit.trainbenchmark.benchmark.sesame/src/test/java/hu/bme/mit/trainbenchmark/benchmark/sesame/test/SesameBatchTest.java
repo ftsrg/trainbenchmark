@@ -12,11 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchComplexTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class SesameBatchComplexTest extends BatchComplexTest {
+public class SesameBatchTest extends BatchTest {
 
-	public SesameBatchComplexTest() {
+	public SesameBatchTest() {
 		bi = new SesameBenchmarkInitializer();
 	}
 

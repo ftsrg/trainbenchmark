@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
+package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchComplexTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class Neo4jBatchComplexTest extends BatchComplexTest {
+public class MySQLBatchTest extends BatchTest {
 
-	public Neo4jBatchComplexTest() {
-		bi = new Neo4jBenchmarkInitializer();
+	public MySQLBatchTest() {
+		bi = new MySQLBenchmarkInitializer();
 	}
 
 }

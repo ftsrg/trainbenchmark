@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.test;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchComplexTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class JenaBatchComplexTest extends BatchComplexTest {
+public class Neo4jBatchTest extends BatchTest {
 
-	public JenaBatchComplexTest() {
-		bi = new JenaBenchmarkInitializer();
+	public Neo4jBatchTest() {
+		bi = new Neo4jBenchmarkInitializer();
 	}
 
 }
