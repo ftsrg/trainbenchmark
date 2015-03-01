@@ -78,7 +78,7 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
+	public void updateProperties(final Object vertex, final String vertexType, final String propertyName,
 			final AttributeOperation attributeOperation) throws IOException {
 
 	}

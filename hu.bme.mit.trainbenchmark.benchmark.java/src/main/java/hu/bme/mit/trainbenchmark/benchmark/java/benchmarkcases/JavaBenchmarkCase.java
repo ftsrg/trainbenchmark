@@ -27,7 +27,7 @@ public abstract class JavaBenchmarkCase<T extends RailwayElement> extends Abstra
 		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
 		driver = (DatabaseDriver<T>) emfDriver;
 		
-		container = emfDriver.getRoot();
+		container = emfDriver.getContainer();
 	}
 
 }

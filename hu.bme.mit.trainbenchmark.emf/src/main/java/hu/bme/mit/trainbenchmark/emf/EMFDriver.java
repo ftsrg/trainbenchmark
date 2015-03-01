@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class EMFDriver extends DatabaseDriver<RailwayElement> {
-	
+
 	protected RailwayContainer container;
 	protected Resource resource;
 
@@ -51,6 +51,45 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	}
 
 	@Override
+	public void read(final String modelPath) throws IOException {
+		throw new UnsupportedOperationException("This should be implemented for all EMF-based query engines");
+	}
+
+	@Override
+	public List<RailwayElement> runQuery() throws IOException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Comparator<RailwayElement> getComparator() {
+		return new EMFComparator();
+	}
+
+	// create
+
+	@Override
+	public void insertVertexWithEdge(final List<RailwayElement> sourceVertices, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) {
+		final RailwayFactory factory = RailwayFactory.eINSTANCE;
+		// get types
+		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
+		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
+		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
+
+		for (final RailwayElement sourceVertex : sourceVertices) {
+			// create target object
+			final EObject targetObject = factory.create(targetClass);
+
+			// set reference to source object
+			@SuppressWarnings("unchecked")
+			final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
+			references.add(targetObject);
+		}
+	}
+
+	// read
+
+	@Override
 	public List<RailwayElement> collectVertices(final String type) {
 		final List<RailwayElement> vertices = new ArrayList<>();
 
@@ -65,97 +104,81 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		return vertices;
 	}
 
+	// update
+
 	@Override
-	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) {
-		final EObject object = (EObject) vertex;
-		final EStructuralFeature feature = object.eClass().getEStructuralFeature(edgeType);
-		final AbstractList<EObject> features = (AbstractList<EObject>) object.eGet(feature);
-		features.clear();
+	public void updateProperties(final List<RailwayElement> vertices, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) {
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(vertexType);
+		final EStructuralFeature feature = clazz.getEStructuralFeature(propertyName);
+
+		for (final RailwayElement vertex : vertices) {
+			final Integer value = (Integer) vertex.eGet(feature);
+			final int newValue = attributeOperation.op(value);
+			vertex.eSet(feature, newValue);
+		}
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) {
-		final EObject object = (EObject) vertex;
+	// delete
 
-		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
-		final EStructuralFeature feature = clazz.getEStructuralFeature(edgeType);
+	@Override
+	public void deleteAllIncomingEdges(final List<RailwayElement> vertices, final String sourceVertexType, final String edgeType) {
+		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
+		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		final EReference reference = (EReference) feature;
 		final EReference oppositeReference = reference.getEOpposite();
 
-		final AbstractList<EObject> outgoingEdges = (AbstractList<EObject>) object.eGet(oppositeReference);
-		outgoingEdges.clear();
-	}
-
-	@Override
-	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) {
-		final EObject object = (EObject) vertex;
-		final EStructuralFeature feature = object.eClass().getEStructuralFeature(propertyName);
-
-		final Integer value = (Integer) object.eGet(feature);
-		final int newValue = attributeOperation.op(value);
-		object.eSet(feature, newValue);
-	}
-
-	@Override
-	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) {
-		final EObject object = (EObject) vertex;
-		final EStructuralFeature feature = object.eClass().getEStructuralFeature(edgeType);
-
-		if (feature.isMany()) {
-			final AbstractList<EObject> features = (AbstractList<EObject>) object.eGet(feature);
-
-			if (features.size() > 0) {
-				features.remove(0);
-			}
-		} else {
-			object.eSet(feature, null);
+		for (final RailwayElement vertex : vertices) {
+			@SuppressWarnings("unchecked")
+			final AbstractList<EObject> outgoingEdges = (AbstractList<EObject>) vertex.eGet(oppositeReference);
+			outgoingEdges.clear();			
 		}
 	}
 
 	@Override
-	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) {
-		deleteOneOutgoingEdge(vertex, edgeType);
+	public void deleteAllOutgoingEdges(final List<RailwayElement> vertices, final String vertexType, final String edgeType) {
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(vertexType);
+		final EStructuralFeature feature = clazz.getEStructuralFeature(edgeType);
+		
+		for (final RailwayElement vertex : vertices) {
+			@SuppressWarnings("unchecked")
+			final AbstractList<EObject> features = (AbstractList<EObject>) vertex.eGet(feature);
+			features.clear();			
+		}
 	}
 
 	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) {
-		// create target object
-		final RailwayFactory factory = RailwayFactory.eINSTANCE;
-		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
-		final EObject targetObject = factory.create(targetClass);
+	public void deleteOneOutgoingEdge(final List<RailwayElement> vertices, final String vertexType, final String edgeType) {
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(vertexType);
+		final EStructuralFeature feature = clazz.getEStructuralFeature(edgeType);
 
-		// set reference to source object
-		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
-		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
-		final EObject sourceObject = (EObject) sourceVertex;
-		final AbstractList<EObject> references = (AbstractList<EObject>) sourceObject.eGet(feature);
-		references.add(targetObject);
+		for (final RailwayElement vertex : vertices) {
+			if (feature.isMany()) {
+				@SuppressWarnings("unchecked")
+				final AbstractList<EObject> features = (AbstractList<EObject>) vertex.eGet(feature);
+
+				if (features.size() > 0) {
+					features.remove(0);
+				}
+			} else {
+				vertex.eSet(feature, null);
+			}
+		}		
 	}
-	
-	public RailwayContainer getRoot() {
+
+	@Override
+	public void deleteSingleOutgoingEdge(final List<RailwayElement> vertices, final String vertexType, final String edgeType) {
+		deleteOneOutgoingEdge(vertices, vertexType, edgeType);
+	}
+
+	// utility
+
+	public RailwayContainer getContainer() {
 		return container;
 	}
 
 	public Resource getResource() {
 		return resource;
-	}
-
-	@Override
-	public void read(final String modelPath) throws IOException {
-		
-	}
-
-	@Override
-	public List<RailwayElement> runQuery() throws IOException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Comparator<RailwayElement> getComparator() {
-		return new EMFComparator();
 	}
 
 }

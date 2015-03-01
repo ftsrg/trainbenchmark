@@ -40,6 +40,8 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class JenaDriver extends DatabaseDriver<Resource> {
 
+	protected long newVertexId = 1000000000;
+
 	protected String basePrefix;
 	protected Model model;
 	protected Query query;
@@ -48,97 +50,7 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 	public JenaDriver(final String basePrefix, final String queryPath) {
 		this.basePrefix = basePrefix;
 		query = QueryFactory.read(queryPath);
-		resultVar = query.getResultVars().get(0);		
-	}
-
-	@Override
-	public List<Resource> collectVertices(final String type) throws IOException {
-		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type, model.getResource(RDFConstants.BASE_PREFIX + type));
-		final List<Resource> vertices = vertexStatements.toList();
-		return vertices;
-	}
-
-	@Override
-	public void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, true);
-	}
-
-	private void deleteEdges(final Object vertex, final String edgeType, final boolean outgoing, final boolean all) {
-		final Resource vertexResource = (Resource) vertex;
-		final Property property = model.getProperty(RDFConstants.BASE_PREFIX + edgeType);
-
-		// @formatter:off
-		final Selector selector = outgoing ? 
-				new SimpleSelector(vertexResource, property, (RDFNode) null) : 
-				new SimpleSelector(null, property, vertexResource);
-		// @formatter:on
-
-		final StmtIterator edges = model.listStatements(selector);
-
-		final List<Statement> statementsToRemove = new ArrayList<>();
-		while (edges.hasNext()) {
-			final Statement statementToRemove = edges.next();
-			
-			statementsToRemove.add(statementToRemove);
-
-			if (!all) {
-				break;
-			}
-		}
-
-		for (final Statement statement : statementsToRemove) {
-			model.remove(statement);
-		}
-	}
-
-	@Override
-	public void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType) throws IOException {
-		deleteEdges(vertex, edgeType, false, true);
-	}
-
-	@Override
-	public void updateProperty(final Object vertex, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
-		final Resource sourceVertexResouce = (Resource) vertex;
-
-		final Property property = model.getProperty(basePrefix + propertyName);
-		final Selector selector = new SimpleSelector(sourceVertexResouce, property, (RDFNode) null);
-
-		final StmtIterator statementsToRemove = model.listStatements(selector);
-		if (statementsToRemove.hasNext()) {
-			final Statement oldStatement = statementsToRemove.next();
-			final Integer value = oldStatement.getInt();
-			final Statement newStatement = model.createLiteralStatement(sourceVertexResouce, property, attributeOperation.op(value));
-			model.remove(oldStatement);
-			model.add(newStatement);
-		}
-	}
-
-	@Override
-	public void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, false);
-	}
-
-	@Override
-	public void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException {
-		deleteEdges(vertex, edgeType, true, true);
-	}
-
-	protected long newVertexId = 1000000000;
-
-	@Override
-	public void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		final Resource sourceVertexResource = (Resource) sourceVertex;
-
-		final Property edge = model.getProperty(basePrefix + edgeType);
-		final Resource vertexType = model.getResource(basePrefix + targetVertexType);
-
-		final Resource targetVertexResource = model.createResource(basePrefix + "x" + newVertexId);
-		newVertexId++;
-
-		model.add(model.createStatement(sourceVertexResource, edge, targetVertexResource));
-		model.add(model.createStatement(targetVertexResource, RDF.type, vertexType));
+		resultVar = query.getResultVars().get(0);
 	}
 
 	@Override
@@ -173,4 +85,97 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 		model.close();
 	}
 
+	// create
+
+	@Override
+	public void insertVertexWithEdge(final List<Resource> sourceVertices, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
+		final Property edge = model.getProperty(basePrefix + edgeType);
+		final Resource vertexType = model.getResource(basePrefix + targetVertexType);
+
+		for (final Resource sourceVertex : sourceVertices) {
+			final Resource targetVertex = model.createResource(basePrefix + "x" + newVertexId);
+			newVertexId++;
+
+			model.add(model.createStatement(sourceVertex, edge, targetVertex));
+			model.add(model.createStatement(targetVertex, RDF.type, vertexType));
+		}
+	}
+
+	// read
+
+	@Override
+	public List<Resource> collectVertices(final String type) throws IOException {
+		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type, model.getResource(RDFConstants.BASE_PREFIX + type));
+		final List<Resource> vertices = vertexStatements.toList();
+		return vertices;
+	}
+
+	// update
+
+	@Override
+	public void updateProperties(final List<Resource> vertices, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) throws IOException {
+		final Property property = model.getProperty(basePrefix + propertyName);
+
+		for (final Resource vertex : vertices) {
+			final Selector selector = new SimpleSelector(vertex, property, (RDFNode) null);
+			final StmtIterator statementsToRemove = model.listStatements(selector);
+			if (statementsToRemove.hasNext()) {
+				final Statement oldStatement = statementsToRemove.next();
+				final Integer value = oldStatement.getInt();
+				final Statement newStatement = model.createLiteralStatement(vertex, property, attributeOperation.op(value));
+				model.remove(oldStatement);
+				model.add(newStatement);
+			}
+		}
+	}
+
+	// delete
+
+	@Override
+	public void deleteAllIncomingEdges(final List<Resource> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, false, true);
+	}
+
+	@Override
+	public void deleteAllOutgoingEdges(final List<Resource> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, true);
+	}
+
+	@Override
+	public void deleteOneOutgoingEdge(final List<Resource> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, false);
+	}
+
+	@Override
+	public void deleteSingleOutgoingEdge(final List<Resource> vertices, final String vertexType, final String edgeType) throws IOException {
+		deleteEdges(vertices, edgeType, true, true);
+	}
+
+	protected void deleteEdges(final List<Resource> vertices, final String edgeType, final boolean outgoing, final boolean all) {
+		final Property property = model.getProperty(RDFConstants.BASE_PREFIX + edgeType);
+
+		for (final Resource vertex : vertices) {
+			final Selector selector = outgoing ? new SimpleSelector(vertex, property, (RDFNode) null) //
+					: new SimpleSelector(null, property, vertex);
+
+			final StmtIterator edges = model.listStatements(selector);
+
+			final List<Statement> statementsToRemove = new ArrayList<>();
+			while (edges.hasNext()) {
+				final Statement statementToRemove = edges.next();
+
+				statementsToRemove.add(statementToRemove);
+
+				if (!all) {
+					break;
+				}
+			}
+
+			for (final Statement statement : statementsToRemove) {
+				model.remove(statement);
+			}
+		}
+	}
 }

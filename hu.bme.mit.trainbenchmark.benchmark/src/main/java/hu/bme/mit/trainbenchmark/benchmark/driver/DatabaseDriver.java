@@ -25,29 +25,38 @@ public abstract class DatabaseDriver<T> {
 	public void finishTransaction() throws IOException {
 	}
 
-	public void destroy() throws IOException {
-	}
-
 	public abstract void read(String modelPath) throws IOException;
-
-	public abstract List<T> collectVertices(final String type) throws IOException;
-
-	public abstract void deleteAllOutgoingEdges(final Object vertex, final String edgeType) throws IOException;
-
-	public abstract void deleteAllIncomingEdges(final Object vertex, final String edgeType, final String sourceVertexType)
-			throws IOException;
-
-	public abstract void updateProperty(final Object vertex, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException;
-
-	public abstract void deleteOneOutgoingEdge(final Object vertex, final String edgeType) throws IOException;
-
-	public abstract void deleteOutgoingEdge(final Object vertex, final String vertexType, final String edgeType) throws IOException;
-
-	public abstract void insertVertexWithEdge(final Object sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException;
 
 	public abstract List<T> runQuery() throws IOException;
 
-	public abstract Comparator<T> getComparator(); 
+	public abstract Comparator<T> getComparator();
+
+	public void destroy() throws IOException {
+	}
+
+	// create
+
+	public abstract void insertVertexWithEdge(final List<T> sourceVertices, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException;
+
+	// read
+
+	public abstract List<T> collectVertices(final String type) throws IOException;
+
+	// update
+
+	public abstract void updateProperties(final List<T> vertices, final String vertexType, final String propertyName,
+			final AttributeOperation attributeOperation) throws IOException;
+
+	// delete
+
+	public abstract void deleteAllIncomingEdges(final List<T> vertices, final String sourceVertexType, final String edgeType) throws IOException;
+
+	public abstract void deleteAllOutgoingEdges(final List<T> vertices, final String vertexType, final String edgeType) throws IOException;
+
+	public abstract void deleteOneOutgoingEdge(final List<T> vertices, final String vertexType, final String edgeType) throws IOException;
+
+	public abstract void deleteSingleOutgoingEdge(final List<T> vertices, final String vertexType, final String edgeType)
+			throws IOException;
+
 }
