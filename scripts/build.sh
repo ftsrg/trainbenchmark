@@ -11,4 +11,4 @@ mvn install:install-file -Dfile=./hu.bme.mit.trainbenchmark.benchmark.virtuoso/s
                      -DartifactId=virtjdbc4 -Dversion=3.0 \
                      -Dpackaging=jar
 
-mvn clean install -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,jena,sesame,mysql --fail-at-end
+mvn clean install -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,fourstore,jena,sesame,mysql --fail-at-end
