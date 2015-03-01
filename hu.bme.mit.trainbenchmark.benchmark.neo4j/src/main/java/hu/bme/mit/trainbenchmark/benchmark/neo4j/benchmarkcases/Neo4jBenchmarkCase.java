@@ -48,11 +48,6 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 
 	@Override
 	public void read() throws FileNotFoundException, IOException {
-		// start with a clean slate: delete old directory
-		if (new File(dbPath).exists()) {
-			FileUtils.deleteDirectory(new File(dbPath));
-		}
-
 		driver = neoDriver = new Neo4jDriver(dbPath, query);
 		neoDriver.read(bc.getBenchmarkArtifact());
 		

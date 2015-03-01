@@ -10,7 +10,6 @@ import java.util.List;
 
 public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
-	protected static final String CLUSTERNAME = "trainbenchmark_cluster";
 	protected FourStoreBenchmarkConfig fsbc;
 
 	@Override
@@ -19,7 +18,7 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
 		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
 				+ ".sparql";
-		driver = new FourStoreDriver(RDFConstants.BASE_PREFIX, queryPath, CLUSTERNAME);
+		driver = new FourStoreDriver(RDFConstants.BASE_PREFIX, queryPath);
 	}
 
 	@Override
