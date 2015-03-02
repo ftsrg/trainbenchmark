@@ -1,3 +1,3 @@
-SELECT id, Segment_length
+SELECT id
 FROM Segment 
 WHERE Segment_length <= 0;

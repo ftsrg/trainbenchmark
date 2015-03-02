@@ -18,7 +18,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_YIvB8VPbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="railway.ecore#//Segment"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YIvB8lPbEeCLuajbZvk0sQ" x="870" y="310"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YIvB8lPbEeCLuajbZvk0sQ" x="876" y="312"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_YIw3IlPbEeCLuajbZvk0sQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_YIxeMFPbEeCLuajbZvk0sQ" type="4001"/>
@@ -40,7 +40,7 @@
     <children xmi:type="notation:Node" xmi:id="_YIysUFPbEeCLuajbZvk0sQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_YIysUVPbEeCLuajbZvk0sQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_YIzTZFPbEeCLuajbZvk0sQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="railway.ecore#//Switch/Switch_actualState"/>
+        <element xmi:type="ecore:EAttribute" href="railway.ecore#//Switch/Switch_currentState"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YIzTZVPbEeCLuajbZvk0sQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_YIysUlPbEeCLuajbZvk0sQ"/>
@@ -54,7 +54,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_YIyFRVPbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="railway.ecore#//Switch"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YIyFRlPbEeCLuajbZvk0sQ" x="560" y="310"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YIyFRlPbEeCLuajbZvk0sQ" x="552" y="312"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_YIz6cFPbEeCLuajbZvk0sQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_YI0hgFPbEeCLuajbZvk0sQ" type="4001"/>
@@ -76,7 +76,7 @@
     <children xmi:type="notation:Node" xmi:id="_YI1voFPbEeCLuajbZvk0sQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_YI1voVPbEeCLuajbZvk0sQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_YI2WsFPbEeCLuajbZvk0sQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="railway.ecore#//Signal/Signal_actualState"/>
+        <element xmi:type="ecore:EAttribute" href="railway.ecore#//Signal/Signal_currentState"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YI2WsVPbEeCLuajbZvk0sQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_YI1volPbEeCLuajbZvk0sQ"/>

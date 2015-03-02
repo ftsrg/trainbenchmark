@@ -251,13 +251,13 @@ public interface RailwayPackage extends EPackage {
 	int SWITCH__TRACK_ELEMENT_CONNECTS_TO = TRACK_ELEMENT__TRACK_ELEMENT_CONNECTS_TO;
 
 	/**
-	 * The feature id for the '<em><b>Switch actual State</b></em>' attribute.
+	 * The feature id for the '<em><b>Switch current State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH__SWITCH_ACTUAL_STATE = TRACK_ELEMENT_FEATURE_COUNT + 0;
+	int SWITCH__SWITCH_CURRENT_STATE = TRACK_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Switch switch Position</b></em>' reference list.
@@ -379,13 +379,13 @@ public interface RailwayPackage extends EPackage {
 	int SIGNAL__ID = RAILWAY_ELEMENT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Signal actual State</b></em>' attribute.
+	 * The feature id for the '<em><b>Signal current State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIGNAL__SIGNAL_ACTUAL_STATE = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
+	int SIGNAL__SIGNAL_CURRENT_STATE = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Signal</em>' class.
@@ -637,15 +637,15 @@ public interface RailwayPackage extends EPackage {
 	EClass getSwitch();
 
 	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_actualState <em>Switch actual State</em>}'.
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_currentState <em>Switch current State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Switch actual State</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_actualState()
+	 * @return the meta object for the attribute '<em>Switch current State</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_currentState()
 	 * @see #getSwitch()
 	 * @generated
 	 */
-	EAttribute getSwitch_Switch_actualState();
+	EAttribute getSwitch_Switch_currentState();
 
 	/**
 	 * Returns the meta object for the reference list '{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_switchPosition <em>Switch switch Position</em>}'.
@@ -723,15 +723,15 @@ public interface RailwayPackage extends EPackage {
 	EClass getSignal();
 
 	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.trainbenchmark.railway.Signal#getSignal_actualState <em>Signal actual State</em>}'.
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.trainbenchmark.railway.Signal#getSignal_currentState <em>Signal current State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Signal actual State</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Signal#getSignal_actualState()
+	 * @return the meta object for the attribute '<em>Signal current State</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.Signal#getSignal_currentState()
 	 * @see #getSignal()
 	 * @generated
 	 */
-	EAttribute getSignal_Signal_actualState();
+	EAttribute getSignal_Signal_currentState();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition <em>Switch Position</em>}'.
@@ -937,12 +937,12 @@ public interface RailwayPackage extends EPackage {
 		EClass SWITCH = eINSTANCE.getSwitch();
 
 		/**
-		 * The meta object literal for the '<em><b>Switch actual State</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Switch current State</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SWITCH__SWITCH_ACTUAL_STATE = eINSTANCE.getSwitch_Switch_actualState();
+		EAttribute SWITCH__SWITCH_CURRENT_STATE = eINSTANCE.getSwitch_Switch_currentState();
 
 		/**
 		 * The meta object literal for the '<em><b>Switch switch Position</b></em>' reference list feature.
@@ -1005,12 +1005,12 @@ public interface RailwayPackage extends EPackage {
 		EClass SIGNAL = eINSTANCE.getSignal();
 
 		/**
-		 * The meta object literal for the '<em><b>Signal actual State</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Signal current State</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SIGNAL__SIGNAL_ACTUAL_STATE = eINSTANCE.getSignal_Signal_actualState();
+		EAttribute SIGNAL__SIGNAL_CURRENT_STATE = eINSTANCE.getSignal_Signal_currentState();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchPositionImpl <em>Switch Position</em>}' class.

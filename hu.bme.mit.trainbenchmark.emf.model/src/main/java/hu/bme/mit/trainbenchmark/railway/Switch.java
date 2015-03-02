@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_actualState <em>Switch actual State</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_currentState <em>Switch current State</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_switchPosition <em>Switch switch Position</em>}</li>
  * </ul>
  * </p>
@@ -23,33 +23,33 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Switch extends TrackElement {
 	/**
-	 * Returns the value of the '<em><b>Switch actual State</b></em>' attribute.
+	 * Returns the value of the '<em><b>Switch current State</b></em>' attribute.
 	 * The literals are from the enumeration {@link hu.bme.mit.trainbenchmark.railway.SwitchState}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Switch actual State</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Switch current State</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Switch actual State</em>' attribute.
+	 * @return the value of the '<em>Switch current State</em>' attribute.
 	 * @see hu.bme.mit.trainbenchmark.railway.SwitchState
-	 * @see #setSwitch_actualState(SwitchState)
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitch_Switch_actualState()
+	 * @see #setSwitch_currentState(SwitchState)
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitch_Switch_currentState()
 	 * @model required="true"
 	 * @generated
 	 */
-	SwitchState getSwitch_actualState();
+	SwitchState getSwitch_currentState();
 
 	/**
-	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_actualState <em>Switch actual State</em>}' attribute.
+	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.Switch#getSwitch_currentState <em>Switch current State</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Switch actual State</em>' attribute.
+	 * @param value the new value of the '<em>Switch current State</em>' attribute.
 	 * @see hu.bme.mit.trainbenchmark.railway.SwitchState
-	 * @see #getSwitch_actualState()
+	 * @see #getSwitch_currentState()
 	 * @generated
 	 */
-	void setSwitch_actualState(SwitchState value);
+	void setSwitch_currentState(SwitchState value);
 
 	/**
 	 * Returns the value of the '<em><b>Switch switch Position</b></em>' reference list.

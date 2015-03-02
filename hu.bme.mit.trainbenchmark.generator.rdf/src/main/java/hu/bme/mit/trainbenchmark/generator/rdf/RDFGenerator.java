@@ -172,7 +172,7 @@ public class RDFGenerator extends Generator {
 			final Object value = attribute.getValue();
 
 			if (attribute.getKey().equals(ModelConstants.SWITCHPOSITION_SWITCHSTATE)
-					|| attribute.getKey().equals(ModelConstants.SIGNAL_ACTUALSTATE)) {
+					|| attribute.getKey().equals(ModelConstants.SIGNAL_CURRENTSTATE)) {
 				addRelation(attribute.getKey(), node, resources.get(value));
 			} else if (value instanceof Integer) {
 				addDataRelation(node, attribute.getKey(), (Integer) value);

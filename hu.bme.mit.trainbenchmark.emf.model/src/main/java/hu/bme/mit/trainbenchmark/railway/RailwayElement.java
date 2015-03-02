@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface RailwayElement extends EObject {
-
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -47,4 +46,5 @@ public interface RailwayElement extends EObject {
 	 * @generated
 	 */
 	void setId(long value);
+
 } // RailwayElement

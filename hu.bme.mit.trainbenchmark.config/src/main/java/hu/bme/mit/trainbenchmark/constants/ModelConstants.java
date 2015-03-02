@@ -31,8 +31,8 @@ public class ModelConstants {
 
 	// attributes
 	public static final String SEGMENT_LENGTH = "Segment_length";
-	public static final String SIGNAL_ACTUALSTATE = "Signal_actualState";
-	public static final String SWITCH_ACTUALSTATE = "Switch_actualState";
+	public static final String SIGNAL_CURRENTSTATE = "Signal_currentState";
+	public static final String SWITCH_CURRENTSTATE = "Switch_currentState";
 
 	// references
 	public static final String ROUTE_EXIT = "Route_exit";

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SignalImpl#getSignal_actualState <em>Signal actual State</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SignalImpl#getSignal_currentState <em>Signal current State</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,24 +27,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class SignalImpl extends RailwayElementImpl implements Signal {
 	/**
-	 * The default value of the '{@link #getSignal_actualState() <em>Signal actual State</em>}' attribute.
+	 * The default value of the '{@link #getSignal_currentState() <em>Signal current State</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSignal_actualState()
+	 * @see #getSignal_currentState()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final SignalState SIGNAL_ACTUAL_STATE_EDEFAULT = SignalState.FAILURE;
+	protected static final SignalState SIGNAL_CURRENT_STATE_EDEFAULT = SignalState.FAILURE;
 
 	/**
-	 * The cached value of the '{@link #getSignal_actualState() <em>Signal actual State</em>}' attribute.
+	 * The cached value of the '{@link #getSignal_currentState() <em>Signal current State</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSignal_actualState()
+	 * @see #getSignal_currentState()
 	 * @generated
 	 * @ordered
 	 */
-	protected SignalState signal_actualState = SIGNAL_ACTUAL_STATE_EDEFAULT;
+	protected SignalState signal_currentState = SIGNAL_CURRENT_STATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,8 +70,8 @@ public class SignalImpl extends RailwayElementImpl implements Signal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SignalState getSignal_actualState() {
-		return signal_actualState;
+	public SignalState getSignal_currentState() {
+		return signal_currentState;
 	}
 
 	/**
@@ -79,11 +79,11 @@ public class SignalImpl extends RailwayElementImpl implements Signal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSignal_actualState(SignalState newSignal_actualState) {
-		SignalState oldSignal_actualState = signal_actualState;
-		signal_actualState = newSignal_actualState == null ? SIGNAL_ACTUAL_STATE_EDEFAULT : newSignal_actualState;
+	public void setSignal_currentState(SignalState newSignal_currentState) {
+		SignalState oldSignal_currentState = signal_currentState;
+		signal_currentState = newSignal_currentState == null ? SIGNAL_CURRENT_STATE_EDEFAULT : newSignal_currentState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SIGNAL__SIGNAL_ACTUAL_STATE, oldSignal_actualState, signal_actualState));
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SIGNAL__SIGNAL_CURRENT_STATE, oldSignal_currentState, signal_currentState));
 	}
 
 	/**
@@ -94,8 +94,8 @@ public class SignalImpl extends RailwayElementImpl implements Signal {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RailwayPackage.SIGNAL__SIGNAL_ACTUAL_STATE:
-				return getSignal_actualState();
+			case RailwayPackage.SIGNAL__SIGNAL_CURRENT_STATE:
+				return getSignal_currentState();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -108,8 +108,8 @@ public class SignalImpl extends RailwayElementImpl implements Signal {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RailwayPackage.SIGNAL__SIGNAL_ACTUAL_STATE:
-				setSignal_actualState((SignalState)newValue);
+			case RailwayPackage.SIGNAL__SIGNAL_CURRENT_STATE:
+				setSignal_currentState((SignalState)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -123,8 +123,8 @@ public class SignalImpl extends RailwayElementImpl implements Signal {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.SIGNAL__SIGNAL_ACTUAL_STATE:
-				setSignal_actualState(SIGNAL_ACTUAL_STATE_EDEFAULT);
+			case RailwayPackage.SIGNAL__SIGNAL_CURRENT_STATE:
+				setSignal_currentState(SIGNAL_CURRENT_STATE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -138,8 +138,8 @@ public class SignalImpl extends RailwayElementImpl implements Signal {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.SIGNAL__SIGNAL_ACTUAL_STATE:
-				return signal_actualState != SIGNAL_ACTUAL_STATE_EDEFAULT;
+			case RailwayPackage.SIGNAL__SIGNAL_CURRENT_STATE:
+				return signal_currentState != SIGNAL_CURRENT_STATE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -154,8 +154,8 @@ public class SignalImpl extends RailwayElementImpl implements Signal {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (Signal_actualState: ");
-		result.append(signal_actualState);
+		result.append(" (Signal_currentState: ");
+		result.append(signal_currentState);
 		result.append(')');
 		return result.toString();
 	}
