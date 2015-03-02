@@ -98,12 +98,7 @@
             "PosLength",
             "RouteSensor",
             "SignalNeighbor",
-            "SwitchSensor",
-            "SegmentLength",
-            "SwitchNodes",
-            "RouteEntry",
-            "RouteRouteDefinition",
-            "TrackElementSensor"
+            "SwitchSensor"
           ]
         }
       ],
@@ -113,12 +108,7 @@
           "PosLength",
           "RouteSensor",
           "SignalNeighbor",
-          "SwitchSensor",
-          "SegmentLength",
-          "SwitchNodes",
-          "RouteEntry",
-          "RouteRouteDefinition",
-          "TrackElementSensor"
+          "SwitchSensor"
         ]
       },
       "default": [
