@@ -3,10 +3,10 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 :1 a :Signal ;
-	:Signal_actualState :GO .
+	:Signal_currentState :GO .
 
 :2 a :Signal ;
-	:Signal_actualState :GO .
+	:Signal_currentState :GO .
 
 :3 a :Route ;
 	:Route_exit :2 .
@@ -81,7 +81,7 @@
 	:Segment_length "126"^^xsd:int ;
 	:TrackElement_sensor :17 .
 
-:4 :Switch_actualState :LEFT .
+:4 :Switch_currentState :LEFT .
 
 :19 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -151,7 +151,7 @@
 	:Segment_length "541"^^xsd:int ;
 	:TrackElement_sensor :31 .
 
-:20 :Switch_actualState :LEFT .
+:20 :Switch_currentState :LEFT .
 
 :33 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -241,7 +241,7 @@
 	:Segment_length "192"^^xsd:int ;
 	:TrackElement_sensor :49 .
 
-:34 :Switch_actualState :LEFT .
+:34 :Switch_currentState :LEFT .
 
 :51 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -250,7 +250,7 @@
 :3 :Route_switchPosition :51 .
 
 :52 a :Switch ;
-	:Switch_actualState :LEFT .
+	:Switch_currentState :LEFT .
 
 :53 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -270,7 +270,7 @@
 	:Segment_length "691"^^xsd:int ;
 	:TrackElement_sensor :55 .
 
-:54 :Switch_actualState :LEFT .
+:54 :Switch_currentState :LEFT .
 
 :57 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -370,7 +370,7 @@
 	:Segment_length "-558"^^xsd:int ;
 	:TrackElement_sensor :75 .
 
-:58 :Switch_actualState :LEFT .
+:58 :Switch_currentState :LEFT .
 
 :77 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -379,7 +379,7 @@
 :3 :Route_switchPosition :77 .
 
 :78 a :Switch ;
-	:Switch_actualState :LEFT .
+	:Switch_currentState :LEFT .
 
 :79 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -409,7 +409,7 @@
 	:Segment_length "144"^^xsd:int ;
 	:TrackElement_sensor :83 .
 
-:80 :Switch_actualState :LEFT .
+:80 :Switch_currentState :LEFT .
 
 :85 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -505,7 +505,7 @@
 	:Segment_length "745"^^xsd:int ;
 	:TrackElement_sensor :103 .
 
-:86 :Switch_actualState :LEFT .
+:86 :Switch_currentState :LEFT .
 
 :105 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -565,7 +565,7 @@
 	:Segment_length "118"^^xsd:int ;
 	:TrackElement_sensor :115 .
 
-:106 :Switch_actualState :LEFT .
+:106 :Switch_currentState :LEFT .
 
 :117 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -663,7 +663,7 @@
 	:Segment_length "962"^^xsd:int ;
 	:TrackElement_sensor :135 .
 
-:118 :Switch_actualState :LEFT .
+:118 :Switch_currentState :LEFT .
 
 :137 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -672,7 +672,7 @@
 :3 :Route_switchPosition :137 .
 
 :138 a :Switch ;
-	:Switch_actualState :LEFT .
+	:Switch_currentState :LEFT .
 
 :139 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -742,7 +742,7 @@
 	:Segment_length "10"^^xsd:int ;
 	:TrackElement_sensor :151 .
 
-:140 :Switch_actualState :LEFT .
+:140 :Switch_currentState :LEFT .
 
 :153 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -840,7 +840,7 @@
 	:Segment_length "713"^^xsd:int ;
 	:TrackElement_sensor :171 .
 
-:154 :Switch_actualState :LEFT .
+:154 :Switch_currentState :LEFT .
 
 :173 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -880,7 +880,7 @@
 	:Segment_length "148"^^xsd:int ;
 	:TrackElement_sensor :179 .
 
-:174 :Switch_actualState :LEFT .
+:174 :Switch_currentState :LEFT .
 
 :181 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -958,7 +958,7 @@
 	:Segment_length "156"^^xsd:int ;
 	:TrackElement_sensor :195 .
 
-:182 :Switch_actualState :LEFT .
+:182 :Switch_currentState :LEFT .
 
 :197 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1032,7 +1032,7 @@
 	:Segment_length "370"^^xsd:int ;
 	:TrackElement_sensor :211 .
 
-:198 :Switch_actualState :LEFT .
+:198 :Switch_currentState :LEFT .
 
 :213 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1052,7 +1052,7 @@
 	:Segment_length "575"^^xsd:int ;
 	:TrackElement_sensor :215 .
 
-:214 :Switch_actualState :LEFT .
+:214 :Switch_currentState :LEFT .
 
 :217 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1108,7 +1108,7 @@
 	:Segment_length "976"^^xsd:int ;
 	:TrackElement_sensor :227 .
 
-:218 :Switch_actualState :LEFT .
+:218 :Switch_currentState :LEFT .
 
 :229 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1406,7 +1406,7 @@
 	:Segment_length "826"^^xsd:int ;
 	:TrackElement_sensor :242 .
 
-:231 :Switch_actualState :LEFT .
+:231 :Switch_currentState :LEFT .
 
 :244 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1494,7 +1494,7 @@
 	:Segment_length "492"^^xsd:int ;
 	:TrackElement_sensor :260 .
 
-:245 :Switch_actualState :LEFT .
+:245 :Switch_currentState :LEFT .
 
 :262 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1584,7 +1584,7 @@
 	:Segment_length "939"^^xsd:int ;
 	:TrackElement_sensor :278 .
 
-:263 :Switch_actualState :LEFT .
+:263 :Switch_currentState :LEFT .
 
 :280 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1634,7 +1634,7 @@
 	:Segment_length "595"^^xsd:int ;
 	:TrackElement_sensor :288 .
 
-:281 :Switch_actualState :LEFT .
+:281 :Switch_currentState :LEFT .
 
 :290 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1702,7 +1702,7 @@
 	:Segment_length "390"^^xsd:int ;
 	:TrackElement_sensor :302 .
 
-:291 :Switch_actualState :LEFT .
+:291 :Switch_currentState :LEFT .
 
 :304 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1732,7 +1732,7 @@
 	:Segment_length "805"^^xsd:int ;
 	:TrackElement_sensor :308 .
 
-:305 :Switch_actualState :LEFT .
+:305 :Switch_currentState :LEFT .
 
 :310 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1762,7 +1762,7 @@
 	:Segment_length "58"^^xsd:int ;
 	:TrackElement_sensor :314 .
 
-:311 :Switch_actualState :LEFT .
+:311 :Switch_currentState :LEFT .
 
 :316 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1848,7 +1848,7 @@
 	:Segment_length "74"^^xsd:int ;
 	:TrackElement_sensor :332 .
 
-:317 :Switch_actualState :LEFT .
+:317 :Switch_currentState :LEFT .
 
 :334 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -1924,7 +1924,7 @@
 	:Segment_length "826"^^xsd:int ;
 	:TrackElement_sensor :348 .
 
-:335 :Switch_actualState :LEFT .
+:335 :Switch_currentState :LEFT .
 
 :350 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2018,7 +2018,7 @@
 	:Segment_length "11"^^xsd:int ;
 	:TrackElement_sensor :368 .
 
-:351 :Switch_actualState :LEFT .
+:351 :Switch_currentState :LEFT .
 
 :370 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2116,7 +2116,7 @@
 	:Segment_length "823"^^xsd:int ;
 	:TrackElement_sensor :388 .
 
-:371 :Switch_actualState :LEFT .
+:371 :Switch_currentState :LEFT .
 
 :390 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2125,7 +2125,7 @@
 :230 :Route_switchPosition :390 .
 
 :391 a :Switch ;
-	:Switch_actualState :LEFT .
+	:Switch_currentState :LEFT .
 
 :392 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2145,7 +2145,7 @@
 	:Segment_length "168"^^xsd:int ;
 	:TrackElement_sensor :394 .
 
-:393 :Switch_actualState :LEFT .
+:393 :Switch_currentState :LEFT .
 
 :396 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2165,7 +2165,7 @@
 	:Segment_length "725"^^xsd:int ;
 	:TrackElement_sensor :398 .
 
-:397 :Switch_actualState :LEFT .
+:397 :Switch_currentState :LEFT .
 
 :400 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2255,7 +2255,7 @@
 	:Segment_length "117"^^xsd:int ;
 	:TrackElement_sensor :416 .
 
-:401 :Switch_actualState :LEFT .
+:401 :Switch_currentState :LEFT .
 
 :418 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2321,7 +2321,7 @@
 	:Segment_length "-624"^^xsd:int ;
 	:TrackElement_sensor :430 .
 
-:419 :Switch_actualState :LEFT .
+:419 :Switch_currentState :LEFT .
 
 :432 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2347,7 +2347,7 @@
 	:Segment_length "776"^^xsd:int ;
 	:TrackElement_sensor :436 .
 
-:433 :Switch_actualState :LEFT .
+:433 :Switch_currentState :LEFT .
 
 :438 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;
@@ -2435,7 +2435,7 @@
 	:Segment_length "937"^^xsd:int ;
 	:TrackElement_sensor :454 .
 
-:439 :Switch_actualState :LEFT .
+:439 :Switch_currentState :LEFT .
 
 :456 a :SwitchPosition ;
 	:SwitchPosition_switchState :LEFT ;

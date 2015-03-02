@@ -21,12 +21,12 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_ACTUALSTATE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_CURRENTSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCHSTATE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_ACTUALSTATE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_CURRENTSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
 import hu.bme.mit.trainbenchmark.constants.SignalState;
@@ -136,7 +136,7 @@ public abstract class Generator {
 			beginRoute();
 
 			if (prevSig == null) {
-				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_ACTUALSTATE, SignalState.GO);
+				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_CURRENTSTATE, SignalState.GO);
 
 				prevSig = createVertex(SIGNAL, signalAttributes);
 				firstSig = prevSig;
@@ -144,7 +144,7 @@ public abstract class Generator {
 
 			Object sig2;
 			if (i != maxRoutes - 1) {
-				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_ACTUALSTATE, SignalState.GO);
+				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_CURRENTSTATE, SignalState.GO);
 
 				sig2 = createVertex(SIGNAL, signalAttributes);
 			} else {
@@ -191,7 +191,7 @@ public abstract class Generator {
 
 				final int stateNumber = random.nextInt(4);
 				final SwitchState stateEnum = SwitchState.values()[stateNumber];
-				setAttribute(SWITCH, sw, SWITCH_ACTUALSTATE, stateEnum);
+				setAttribute(SWITCH, sw, SWITCH_CURRENTSTATE, stateEnum);
 
 				// the errorInjectedState may contain a bad value
 				final int errorInjectedStateNumber = (nextRandom() < switchSetErrorPercent) ? 3 - stateNumber : stateNumber;

@@ -228,7 +228,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSwitch_Switch_actualState() {
+	public EAttribute getSwitch_Switch_currentState() {
 		return (EAttribute)switchEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -300,7 +300,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSignal_Signal_actualState() {
+	public EAttribute getSignal_Signal_currentState() {
 		return (EAttribute)signalEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -448,7 +448,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		createEReference(trackElementEClass, TRACK_ELEMENT__TRACK_ELEMENT_CONNECTS_TO);
 
 		switchEClass = createEClass(SWITCH);
-		createEAttribute(switchEClass, SWITCH__SWITCH_ACTUAL_STATE);
+		createEAttribute(switchEClass, SWITCH__SWITCH_CURRENT_STATE);
 		createEReference(switchEClass, SWITCH__SWITCH_SWITCH_POSITION);
 
 		routeEClass = createEClass(ROUTE);
@@ -458,7 +458,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		createEReference(routeEClass, ROUTE__ROUTE_ROUTE_DEFINITION);
 
 		signalEClass = createEClass(SIGNAL);
-		createEAttribute(signalEClass, SIGNAL__SIGNAL_ACTUAL_STATE);
+		createEAttribute(signalEClass, SIGNAL__SIGNAL_CURRENT_STATE);
 
 		switchPositionEClass = createEClass(SWITCH_POSITION);
 		createEReference(switchPositionEClass, SWITCH_POSITION__SWITCH_POSITION_SWITCH);
@@ -524,7 +524,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEReference(getTrackElement_TrackElement_connectsTo(), this.getTrackElement(), null, "TrackElement_connectsTo", null, 0, -1, TrackElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchEClass, Switch.class, "Switch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSwitch_Switch_actualState(), this.getSwitchState(), "Switch_actualState", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwitch_Switch_currentState(), this.getSwitchState(), "Switch_currentState", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitch_Switch_switchPosition(), this.getSwitchPosition(), this.getSwitchPosition_SwitchPosition_switch(), "Switch_switchPosition", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -534,7 +534,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEReference(getRoute_Route_routeDefinition(), this.getSensor(), null, "Route_routeDefinition", null, 2, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSignal_Signal_actualState(), this.getSignalState(), "Signal_actualState", null, 1, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSignal_Signal_currentState(), this.getSignalState(), "Signal_currentState", null, 1, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchPositionEClass, SwitchPosition.class, "SwitchPosition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSwitchPosition_SwitchPosition_switch(), this.getSwitch(), this.getSwitch_Switch_switchPosition(), "SwitchPosition_switch", null, 1, 1, SwitchPosition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

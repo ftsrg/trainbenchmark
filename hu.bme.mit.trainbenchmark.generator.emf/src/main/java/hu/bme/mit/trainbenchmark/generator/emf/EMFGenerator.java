@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_ACTUALSTATE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_CURRENTSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCHSTATE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_ACTUALSTATE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_CURRENTSTATE;
 import hu.bme.mit.trainbenchmark.emf.EMFUtil;
 import hu.bme.mit.trainbenchmark.emf.FileBroker;
 import hu.bme.mit.trainbenchmark.generator.Generator;
@@ -132,10 +132,10 @@ public class EMFGenerator extends Generator {
 		// change the enum value from the
 		// hu.bme.mit.trainbenchmark.constants.SignalState enum to the
 		// hu.bme.mit.trainbenchmark.SignalState enum
-		if (SIGNAL_ACTUALSTATE.equals(key)) {
+		if (SIGNAL_CURRENTSTATE.equals(key)) {
 			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SignalState) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.SignalState.get(ordinal);
-		} else if (SWITCH_ACTUALSTATE.equals(key) || SWITCHPOSITION_SWITCHSTATE.equals(key)) {
+		} else if (SWITCH_CURRENTSTATE.equals(key) || SWITCHPOSITION_SWITCHSTATE.equals(key)) {
 			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SwitchState) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.SwitchState.get(ordinal);
 		}

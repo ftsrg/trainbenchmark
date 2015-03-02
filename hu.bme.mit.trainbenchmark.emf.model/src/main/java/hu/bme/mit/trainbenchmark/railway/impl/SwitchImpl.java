@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getSwitch_actualState <em>Switch actual State</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getSwitch_currentState <em>Switch current State</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getSwitch_switchPosition <em>Switch switch Position</em>}</li>
  * </ul>
  * </p>
@@ -38,24 +38,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class SwitchImpl extends TrackElementImpl implements Switch {
 	/**
-	 * The default value of the '{@link #getSwitch_actualState() <em>Switch actual State</em>}' attribute.
+	 * The default value of the '{@link #getSwitch_currentState() <em>Switch current State</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSwitch_actualState()
+	 * @see #getSwitch_currentState()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final SwitchState SWITCH_ACTUAL_STATE_EDEFAULT = SwitchState.FAILURE;
+	protected static final SwitchState SWITCH_CURRENT_STATE_EDEFAULT = SwitchState.FAILURE;
 
 	/**
-	 * The cached value of the '{@link #getSwitch_actualState() <em>Switch actual State</em>}' attribute.
+	 * The cached value of the '{@link #getSwitch_currentState() <em>Switch current State</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSwitch_actualState()
+	 * @see #getSwitch_currentState()
 	 * @generated
 	 * @ordered
 	 */
-	protected SwitchState switch_actualState = SWITCH_ACTUAL_STATE_EDEFAULT;
+	protected SwitchState switch_currentState = SWITCH_CURRENT_STATE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSwitch_switchPosition() <em>Switch switch Position</em>}' reference list.
@@ -91,8 +91,8 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SwitchState getSwitch_actualState() {
-		return switch_actualState;
+	public SwitchState getSwitch_currentState() {
+		return switch_currentState;
 	}
 
 	/**
@@ -100,11 +100,11 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSwitch_actualState(SwitchState newSwitch_actualState) {
-		SwitchState oldSwitch_actualState = switch_actualState;
-		switch_actualState = newSwitch_actualState == null ? SWITCH_ACTUAL_STATE_EDEFAULT : newSwitch_actualState;
+	public void setSwitch_currentState(SwitchState newSwitch_currentState) {
+		SwitchState oldSwitch_currentState = switch_currentState;
+		switch_currentState = newSwitch_currentState == null ? SWITCH_CURRENT_STATE_EDEFAULT : newSwitch_currentState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH__SWITCH_ACTUAL_STATE, oldSwitch_actualState, switch_actualState));
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH__SWITCH_CURRENT_STATE, oldSwitch_currentState, switch_currentState));
 	}
 
 	/**
@@ -156,8 +156,8 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH__SWITCH_ACTUAL_STATE:
-				return getSwitch_actualState();
+			case RailwayPackage.SWITCH__SWITCH_CURRENT_STATE:
+				return getSwitch_currentState();
 			case RailwayPackage.SWITCH__SWITCH_SWITCH_POSITION:
 				return getSwitch_switchPosition();
 		}
@@ -173,8 +173,8 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH__SWITCH_ACTUAL_STATE:
-				setSwitch_actualState((SwitchState)newValue);
+			case RailwayPackage.SWITCH__SWITCH_CURRENT_STATE:
+				setSwitch_currentState((SwitchState)newValue);
 				return;
 			case RailwayPackage.SWITCH__SWITCH_SWITCH_POSITION:
 				getSwitch_switchPosition().clear();
@@ -192,8 +192,8 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH__SWITCH_ACTUAL_STATE:
-				setSwitch_actualState(SWITCH_ACTUAL_STATE_EDEFAULT);
+			case RailwayPackage.SWITCH__SWITCH_CURRENT_STATE:
+				setSwitch_currentState(SWITCH_CURRENT_STATE_EDEFAULT);
 				return;
 			case RailwayPackage.SWITCH__SWITCH_SWITCH_POSITION:
 				getSwitch_switchPosition().clear();
@@ -210,8 +210,8 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH__SWITCH_ACTUAL_STATE:
-				return switch_actualState != SWITCH_ACTUAL_STATE_EDEFAULT;
+			case RailwayPackage.SWITCH__SWITCH_CURRENT_STATE:
+				return switch_currentState != SWITCH_CURRENT_STATE_EDEFAULT;
 			case RailwayPackage.SWITCH__SWITCH_SWITCH_POSITION:
 				return switch_switchPosition != null && !switch_switchPosition.isEmpty();
 		}
@@ -228,8 +228,8 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (Switch_actualState: ");
-		result.append(switch_actualState);
+		result.append(" (Switch_currentState: ");
+		result.append(switch_currentState);
 		result.append(')');
 		return result.toString();
 	}

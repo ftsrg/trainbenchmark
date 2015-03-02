@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `TrackElement_sensor` (
 
 CREATE TABLE IF NOT EXISTS `Signal` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `Signal_actualState` bigint NOT NULL,
+  `Signal_currentState` bigint NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -109,7 +109,7 @@ INSERT INTO `SignalStateKind` (`id`, `text`) VALUES
 
 CREATE TABLE IF NOT EXISTS `Switch` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `Switch_actualState` bigint NOT NULL,
+  `Switch_currentState` bigint NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
