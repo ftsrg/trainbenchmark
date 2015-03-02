@@ -63,6 +63,7 @@ public abstract class Generator {
 	protected int routeSensorErrorPercent;
 	protected int signalNeighborErrorPercent;
 	protected int switchSetErrorPercent;
+	protected int connectedSegmentsErrorPercent;
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
@@ -96,6 +97,7 @@ public abstract class Generator {
 			routeSensorErrorPercent = 2;
 			signalNeighborErrorPercent = 7;
 			switchSetErrorPercent = 2;
+			connectedSegmentsErrorPercent = 5;
 			break;
 		case "Repair":
 			maxSegments = 5;
@@ -107,6 +109,7 @@ public abstract class Generator {
 			routeSensorErrorPercent = 10;
 			signalNeighborErrorPercent = 8;
 			switchSetErrorPercent = 10;
+			connectedSegmentsErrorPercent = 5;
 			break;
 		case "Test":
 			maxSegments = 1;
@@ -118,6 +121,7 @@ public abstract class Generator {
 			routeSensorErrorPercent = 10;
 			signalNeighborErrorPercent = 8;
 			switchSetErrorPercent = 10;
+			connectedSegmentsErrorPercent = 5;
 			break;
 		default:
 			throw new UnsupportedOperationException("Scenario not supported.");
@@ -177,15 +181,13 @@ public abstract class Generator {
 						}
 					}
 
-					// TODO inject failures to the model
 					for (int m = 0; m < maxSegments; m++) {
-						final int segmentLength = ((nextRandom() < posLengthErrorPercent) ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH);
-
-						final Map<String, Object> segmentAttributes = ImmutableMap.<String, Object> of(SEGMENT_LENGTH, segmentLength);
-						final Object seg = createVertex(SEGMENT, segmentAttributes);
-
-						createEdge(TRACKELEMENT_SENSOR, seg, sen);
-						currTracks.add(seg);
+						createSegment(currTracks, sen);
+					}
+					
+					// creates another extra segment
+					if (nextRandom() < connectedSegmentsErrorPercent){
+						createSegment(currTracks, sen);
 					}
 				}
 
@@ -232,6 +234,16 @@ public abstract class Generator {
 
 			endRoute();
 		}
+	}
+
+	private void createSegment(final List<Object> currTracks, final Object sen) throws IOException{
+		final int segmentLength = ((nextRandom() < posLengthErrorPercent) ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH);
+
+		final Map<String, Object> segmentAttributes = ImmutableMap.<String, Object> of(SEGMENT_LENGTH, segmentLength);
+		final Object seg = createVertex(SEGMENT, segmentAttributes);
+
+		createEdge(TRACKELEMENT_SENSOR, seg, sen);
+		currTracks.add(seg);
 	}
 
 	protected abstract void persistModel() throws IOException;
