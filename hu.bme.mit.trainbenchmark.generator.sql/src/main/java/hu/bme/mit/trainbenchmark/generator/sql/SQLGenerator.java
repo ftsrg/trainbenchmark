@@ -51,7 +51,7 @@ public class SQLGenerator extends Generator {
 	@Override
 	public void initModel() throws IOException {
 		final File srcFile = new File(generatorConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.generator.sql/src/main/resources/railway.sql");
+				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway.sql");
 		final File destFile = new File(generatorConfig.getInstanceModelPath() + "/railway.sql");
 		FileUtils.copyFile(srcFile, destFile);
 
