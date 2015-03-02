@@ -10,3 +10,5 @@ mvn install:install-file -Dfile=./hu.bme.mit.trainbenchmark.benchmark.virtuoso/s
 export MAVEN_OPTS="-XX:MaxPermSize=128M"
 
 mvn clean install --quiet -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,fourstore,jena,sesame,mysql -DskipTests
+
+echo Build finished.
