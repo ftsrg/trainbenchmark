@@ -38,10 +38,17 @@ public abstract class DatabaseDriver<T> {
 
 	public abstract void insertVertexWithEdge(final List<T> sourceVertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException;
+	
+	public abstract T insertVertexWithEdge(T sourceVertex, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException;
 
+	public abstract void insertEdge(final T sourceVertex, final T targetVertex, final String edgeType);
+	
 	// read
 
 	public abstract List<T> collectVertices(final String type) throws IOException;
+	
+	public abstract List<T> collectOutgoingConnectedVertices(final T sourceVertex, final String targetVertexType, final String edgeType);
 
 	// update
 
@@ -53,7 +60,7 @@ public abstract class DatabaseDriver<T> {
 	public abstract void deleteAllIncomingEdges(final List<T> vertices, final String sourceVertexType, final String edgeType) throws IOException;
 
 	public abstract void deleteAllOutgoingEdges(final List<T> vertices, final String vertexType, final String edgeType) throws IOException;
-
+	
 	public abstract void deleteOneOutgoingEdge(final List<T> vertices, final String vertexType, final String edgeType) throws IOException;
 
 	public abstract void deleteSingleOutgoingEdge(final List<T> vertices, final String vertexType, final String edgeType)
