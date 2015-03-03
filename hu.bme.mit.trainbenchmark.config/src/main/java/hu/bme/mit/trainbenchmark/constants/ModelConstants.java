@@ -45,14 +45,14 @@ public class ModelConstants {
 	public static final String SWITCHPOSITION_SWITCHSTATE = "SwitchPosition_switchState";
 
 	// enumeration strings (for RDF-based representations)
-	public static final String SIGNALSTATE_STOP = "STOP";
-	public static final String SIGNALSTATE_FAILURE = "FAILURE";
-	public static final String SIGNALSTATE_GO = "GO";
+	public static final String SIGNALSTATE_FAILURE = "SIGNALSTATE_FAILURE";
+	public static final String SIGNALSTATE_STOP = "SIGNALSTATE_STOP";
+	public static final String SIGNALSTATE_GO = "SIGNALSTATE_GO";
 
-	public static final String SWITCHSTATE_FAILURE = "FAILURE";
-	public static final String SWITCHSTATE_LEFT = "LEFT";
-	public static final String SWITCHSTATE_RIGHT = "RIGHT";
-	public static final String SWITCHSTATE_STRAIGHT = "STRAIGHT";
+	public static final String SWITCHSTATE_FAILURE = "SWITCHSTATE_FAILURE";
+	public static final String SWITCHSTATE_LEFT = "SWITCHSTATE_LEFT";
+	public static final String SWITCHSTATE_RIGHT = "SWITCHSTATE_RIGHT";
+	public static final String SWITCHSTATE_STRAIGHT = "SWITCHSTATE_STRAIGHT";
 
 	// inheritance
 	public static final Map<String, String> ancestors = ImmutableMap.of(SEGMENT, TRACKELEMENT, SWITCH, TRACKELEMENT);
