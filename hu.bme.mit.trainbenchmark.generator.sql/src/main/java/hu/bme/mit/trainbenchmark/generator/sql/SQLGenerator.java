@@ -43,19 +43,27 @@ public class SQLGenerator extends Generator {
 	protected BufferedWriter file;
 	protected Map<String, Long> typeId = new HashMap<>();
 	protected static final String ID_NAME = "id";
-	
+
 	public void write(final String s) throws IOException {
 		file.write(s + "\n");
 	}
 
 	@Override
 	public void initModel() throws IOException {
-		final File srcFile = new File(generatorConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway.sql");
-		final File destFile = new File(generatorConfig.getInstanceModelPath() + "/railway.sql");
+		// source file (DDL operations)
+		final String srcFilePath = generatorConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway.sql";
+		final File srcFile = new File(srcFilePath);
+
+		// destination file
+		final String destFilePath = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
+				+ generatorConfig.getSize() + ".sql";
+		final File destFile = new File(destFilePath);
+
+		// this overwrites the destination file if it exists
 		FileUtils.copyFile(srcFile, destFile);
 
-		file = new BufferedWriter(new FileWriter(generatorConfig.getInstanceModelPath() + "/railway.sql", true));
+		file = new BufferedWriter(new FileWriter(destFile, true));
 	}
 
 	@Override
@@ -67,21 +75,11 @@ public class SQLGenerator extends Generator {
 		write(String.format("CREATE INDEX Sensor_trackElement_idx2 ON %s (Sensor_id);", ModelConstants.TRACKELEMENT_SENSOR));
 
 		file.close();
-
-		final File srcFile = new File(generatorConfig.getInstanceModelPath() + "/railway.sql");
-		final File destFile = new File(generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
-				+ generatorConfig.getSize() + ".sql");
-
-		if (destFile.exists()) {
-			FileUtils.forceDelete(destFile);
-		}
-
-		FileUtils.moveFile(srcFile, destFile);
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
-			final Map<String, Object> incomingEdges) throws IOException {
+	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
 
@@ -113,8 +111,7 @@ public class SQLGenerator extends Generator {
 	@Override
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", type, key, stringValue,
-				ID_NAME, node);
+		final String updateQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", type, key, stringValue, ID_NAME, node);
 		write(updateQuery);
 	}
 

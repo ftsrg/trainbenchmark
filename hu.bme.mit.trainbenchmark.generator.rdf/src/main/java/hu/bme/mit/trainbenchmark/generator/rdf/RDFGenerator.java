@@ -12,37 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.XSD_PREFIX;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.SignalState;
 import hu.bme.mit.trainbenchmark.constants.SwitchState;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.cli.ParseException;
-import org.openrdf.OpenRDFException;
-import org.openrdf.model.Literal;
-import org.openrdf.model.Resource;
-import org.openrdf.model.Statement;
-import org.openrdf.model.URI;
-import org.openrdf.model.ValueFactory;
-import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
-import org.openrdf.repository.sail.SailRepository;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.helpers.RDFWriterBase;
-import org.openrdf.rio.rdfxml.RDFXMLWriter;
-import org.openrdf.rio.turtle.TurtleWriter;
-import org.openrdf.sail.memory.MemoryStore;
+import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -59,149 +44,98 @@ public class RDFGenerator extends Generator {
 	}
 
 	protected RDFGeneratorConfig rdfGeneratorConfig;
-	protected RepositoryConnection con;
-	protected Repository myRepository;
-	protected ValueFactory vf;
-	protected Map<Enum<?>, Resource> resources;
+	protected BufferedWriter file;
+
+	protected final Map<Object, String> resources = ImmutableMap.<Object, String>builder() //
+			.put(SignalState.FAILURE, ModelConstants.SIGNALSTATE_FAILURE) //
+			.put(SignalState.STOP, ModelConstants.SIGNALSTATE_STOP) // 
+			.put(SignalState.GO, ModelConstants.SIGNALSTATE_GO) //
+			.put(SwitchState.LEFT, ModelConstants.SWITCHSTATE_LEFT) //
+			.put(SwitchState.STRAIGHT, ModelConstants.SWITCHSTATE_STRAIGHT) //
+			.put(SwitchState.RIGHT, ModelConstants.SWITCHSTATE_RIGHT) //
+			.put(SwitchState.FAILURE, ModelConstants.SWITCHSTATE_FAILURE) //
+			.build(); 
 
 	@Override
 	public void initModel() throws IOException {
-		try {
-			myRepository = new SailRepository(new MemoryStore());
-			myRepository.initialize();
+		// source file (DDL operations)
+		final String srcFilePath = generatorConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/header.ttl";
+		final File srcFile = new File(srcFilePath);
 
-			con = myRepository.getConnection();
-			con.setNamespace("", BASE_PREFIX);
-			con.setNamespace("xsd", XSD_PREFIX);
+		// destination file
+		final String destFilePath = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
+				+ generatorConfig.getSize() + ".ttl";
+		final File destFile = new File(destFilePath);
 
-			vf = con.getValueFactory();
-		} catch (final OpenRDFException e) {
-			new IOException(e);
-		}
+		// this overwrites the destination file if it exists
+		FileUtils.copyFile(srcFile, destFile);
 
-		// @formatter:off
-		final Resource signalState_Stop    = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_STOP);
-		final Resource signalState_Failure = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_FAILURE);
-		final Resource signalState_Go      = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_GO);
-
-		final Resource switchState_Left     = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
-		final Resource switchState_Straight = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
-		final Resource switchState_Right    = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
-		final Resource switchState_Failure  = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
-	
-		resources = ImmutableMap.<Enum<?>, Resource>builder()
-				.put(SignalState.STOP, signalState_Stop) 
-				.put(SignalState.FAILURE, signalState_Failure) 
-				.put(SignalState.GO, signalState_Go)
-				.put(SwitchState.LEFT, switchState_Left)  
-				.put(SwitchState.STRAIGHT, switchState_Straight)
-				.put(SwitchState.RIGHT, switchState_Right)
-				.put(SwitchState.FAILURE, switchState_Failure)
-				.build();
-		// @formatter:on		
+		file = new BufferedWriter(new FileWriter(destFile, true));
 	}
 
 	@Override
 	public void persistModel() throws IOException {
-		try {
-			con.commit();
-
-			String fileName;
-			RDFWriterBase writer = null;
-			switch (rdfGeneratorConfig.getRdfFormat()) {
-			case RDFXML:
-				fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-						+ (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "") + ".owl";
-				writer = new RDFXMLWriter(new FileWriter(fileName));
-				break;
-			case TURTLE:
-				fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-						+ ".ttl";
-				writer = new TurtleWriter(new FileWriter(fileName));
-				writer.handleNamespace("", BASE_PREFIX);
-				break;
-			}
-
-			con.export(writer);
-			con.close();
-		} catch (RepositoryException | RDFHandlerException e) {
-			throw new IOException(e);
-		}
-	}
-
-	protected Resource addIndividual(final String name, final String type) throws IOException {
-		final Resource owlIndividual = vf.createURI(BASE_PREFIX + ID_PREFIX + id);
-		final URI relation = vf.createURI(RDF_PREFIX + "type");
-		final Resource owlClass = vf.createURI(BASE_PREFIX + type);
-		final Statement stmt = vf.createStatement(owlIndividual, relation, owlClass);
-		try {
-			con.add(stmt, (Resource) null);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-		return owlIndividual;
-	}
-
-	protected void addRelation(final String label, final Object source, final Object target) throws IOException {
-		final URI relation = vf.createURI(BASE_PREFIX + label);
-		final Statement stmt = vf.createStatement((Resource) source, relation, (Resource) target);
-		try {
-			con.add(stmt, (Resource) null);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	protected void addDataRelation(final Object source, final String relationName, final Integer value) throws IOException {
-		final URI relation = vf.createURI(BASE_PREFIX + relationName);
-
-		final Literal valueLiteral = vf.createLiteral(value);
-		final Statement stmt = vf.createStatement((Resource) source, relation, valueLiteral);
-		try {
-			con.add(stmt, (Resource) null);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
+		file.close();
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
-			final Map<String, Object> incomingEdges) throws IOException {
-		final Object node = addIndividual(type + id, type);
+	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
+
+		// vertex id and type
+		final String triple = String.format(":%s%d a :%s", ID_PREFIX, id, type);
+		final StringBuilder vertex = new StringBuilder(triple);
+
+		// (id)-[]->() attributes
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			final Object value = attribute.getValue();
-
-			if (attribute.getKey().equals(ModelConstants.SWITCHPOSITION_SWITCHSTATE)
-					|| attribute.getKey().equals(ModelConstants.SIGNAL_CURRENTSTATE)) {
-				addRelation(attribute.getKey(), node, resources.get(value));
-			} else if (value instanceof Integer) {
-				addDataRelation(node, attribute.getKey(), (Integer) value);
-			}
+			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(), stringValue(attribute.getValue()));
+			vertex.append(attributeTriple);
 		}
 
+		// (id)-[]->() edges
 		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
-			if (outgoingEdge.getValue() instanceof Resource) {
-				addRelation(outgoingEdge.getKey(), node, outgoingEdge.getValue());
-			}
+			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX, outgoingEdge.getValue());
+			vertex.append(edgeTriple);
 		}
 
+		vertex.append(" .");		
+		write(vertex.toString());
+		
+		// ()-[]->(id) edges
 		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
-			if (incomingEdge.getValue() instanceof Resource) {
-				addRelation(incomingEdge.getKey(), incomingEdge.getValue(), node);
-			}
+			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), id);
 		}
-
-		return node;
+		
+		return id;
 	}
 
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
-		addRelation(label, from, to);
+		final String triple = String.format(":%s%s :%s :%s%s .", ID_PREFIX, from, label, ID_PREFIX, to);
+		write(triple);
 	}
-
+	
 	@Override
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
-		addRelation(key, node, resources.get(value));
+		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
+		write(triple + ".");
+		
+	}
+		
+	private String stringValue(final Object value) {
+		String stringValue;
+		if (value instanceof Integer) {
+			stringValue = String.format("\"%d\"^^xsd:int", value);
+		} else {
+			stringValue = String.format(":%s", resources.get(value));
+		}
+		
+		return stringValue;
 	}
 
+	public void write(final String s) throws IOException {
+		file.write(s + "\n\n");
+	}
+	
 }
