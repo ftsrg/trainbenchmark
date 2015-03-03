@@ -65,6 +65,15 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		return new EMFComparator();
 	}
 
+	// filter
+	
+	@Override
+	public List<RailwayElement> filterVertices(List<RailwayElement> vertices,
+			String vertexType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// create
 
 	@Override
@@ -87,6 +96,21 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		}
 	}
 
+	@Override
+	public RailwayElement insertVertexWithEdge(RailwayElement sourceVertex,
+			String sourceVertexType, String targetVertexType, String edgeType)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertEdge(RailwayElement sourceVertex,
+			RailwayElement targetVertex, String edgeType) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	// read
 
 	@Override
@@ -104,6 +128,21 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		return vertices;
 	}
 
+	@Override
+	public List<RailwayElement> collectOutgoingConnectedVertices(
+			RailwayElement sourceVertex, String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RailwayElement> collectOutgoingFilteredConnectedVertices(
+			RailwayElement sourceVertex, String targetVertexType,
+			String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// update
 
 	@Override
