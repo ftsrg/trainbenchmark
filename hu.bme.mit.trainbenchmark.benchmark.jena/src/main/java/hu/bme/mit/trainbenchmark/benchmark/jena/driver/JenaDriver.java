@@ -85,6 +85,15 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 		model.close();
 	}
 
+	// filter
+	
+	@Override
+	public List<Resource> filterVertices(List<Resource> vertices,
+			String vertexType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// create
 
 	@Override
@@ -102,6 +111,21 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 		}
 	}
 
+	@Override
+	public Resource insertVertexWithEdge(Resource sourceVertex,
+			String sourceVertexType, String targetVertexType, String edgeType)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertEdge(Resource sourceVertex, Resource targetVertex,
+			String edgeType) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	// read
 
 	@Override
@@ -111,6 +135,20 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 		return vertices;
 	}
 
+	@Override
+	public List<Resource> collectOutgoingConnectedVertices(
+			Resource sourceVertex, String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Resource> collectOutgoingFilteredConnectedVertices(
+			Resource sourceVertex, String targetVertexType, String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// update
 
 	@Override
@@ -178,4 +216,5 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 			}
 		}
 	}
+
 }

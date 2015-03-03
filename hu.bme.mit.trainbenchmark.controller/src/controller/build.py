@@ -46,22 +46,33 @@ def resolve_dependencies(configurations):
                     config.add_dependency(dependency)
 
 
-def maven_build(tool):
+def maven_build(tool, skip_tests):
     """Run a Maven build after the tool's name.
     
     Parameters:
     @param package: tool name
+    @param skip_tests: skip JUNIT tests
     """
     logging.info("Build: " + tool)
     deps.build_unique_tools(tool)
-    subprocess.call(["mvn", "clean", "install", "-P",\
-                    handler.get_package_name(tool)])
-    #handler.set_working_directory(current_directory)
+    
+    if (skip_tests):
+        subprocess.call(["mvn", "clean", "install", "-P",\
+                        handler.get_package_name(tool), "-DskipTests"])
+    else:
+        subprocess.call(["mvn", "clean", "install", "-P",\
+                        handler.get_package_name(tool)])
 
 
-def build_projects(configurations, build_core=True, build_formats=True, \
-                   build_tools=True):
+def build_projects(configurations, skip_tests, build_core=True, \
+                   build_formats=True, build_tools=True):
     """Build the projects.
+    
+    @param configurations: a list of Configuraiton objects
+    @param skip_tests: skip JUNIT tests if given
+    @param build_core: builds the core project if given
+    @param build_formats: build the format projects and generators
+    @param build_tools: build the tools projects
     """
     tools = list()
     formats = list()
@@ -93,7 +104,7 @@ def build_projects(configurations, build_core=True, build_formats=True, \
     
     while (len(all_dependencies) > 0):
         deps.install_dependencies(all_dependencies[-1], path)
-        maven_build(all_dependencies.pop())
+        maven_build(all_dependencies.pop(), skip_tests)
 
 
 
@@ -114,6 +125,9 @@ if (__name__ == "__main__"):
     parser.add_argument("-t","--tools",
                         help="just build the tools",
                         action="store_true")
+    parser.add_argument("--skip-tests",
+                        help="skip JUNIT tests",
+                        action="store_true")
 
     args = parser.parse_args()
     log.init_log()
@@ -133,7 +147,7 @@ if (__name__ == "__main__"):
     resolve_dependencies(configurations)
 
     if (build_all == True):
-        build_projects(configurations, build_core=True,\
+        build_projects(configurations,  args.skip_tests, build_core=True,\
                        build_formats=True, build_tools=True)
     else:
         build_projects(configurations, args.core, args.format, \

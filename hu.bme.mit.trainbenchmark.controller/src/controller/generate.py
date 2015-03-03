@@ -4,7 +4,8 @@ Created on Oct 5, 2014
 
 @author: Zsolt Kovari
 
-This module generates the certain models.
+Generates the certain models. Multiple instance generation 
+is prevented.
 """
 import subprocess
 import os
@@ -63,8 +64,9 @@ def generate_models(configurations):
 
 def prevent_multiple_generation(configurations):
     """
-    Gather the common size parameter values between configuration formats and
-    merge them into lists. The lists being stored by the format variable.
+    Gathers the mutual size parameters between configuration formats,
+    scenarios and merge them into dictionaries. The latter is being stored 
+    by the models variable.
     """
     unique_formats = set()
     unique_scenarios = set()

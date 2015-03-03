@@ -98,7 +98,8 @@
             "PosLength",
             "RouteSensor",
             "SignalNeighbor",
-            "SwitchSensor"
+            "SwitchSensor",
+            "ConnectedSegments"
           ]
         }
       ],
@@ -108,7 +109,8 @@
           "PosLength",
           "RouteSensor",
           "SignalNeighbor",
-          "SwitchSensor"
+          "SwitchSensor",
+          "ConnectedSegments"
         ]
       },
       "default": [
@@ -169,7 +171,9 @@
       "items": [
         {
           "type": "object",
-          "required": ["Tool"],
+          "required": [
+            "Tool"
+          ],
           "properties": {
             "Tool": {
               "enum": [
@@ -188,9 +192,9 @@
                 "virtuoso"
               ]
             },
-           "Queries": {
+            "Queries": {
               "$ref": "#/properties/Queries"
-			},
+            },
             "Scenarios": {
               "$ref": "#/properties/Scenarios"
             },
@@ -204,39 +208,41 @@
         }
       ],
       "additionalItems": {
-"type": "object",
-          "required": ["Tool"],
-          "properties": {
-            "Tool": {
-              "enum": [
-                "allegro",
-                "drools5",
-                "drools6",
-                "eclipseocl",
-                "emfincquery",
-                "fourstore",
-                "java",
-                "jena",
-                "mysql",
-                "neo4j",
-                "sesame",
-                "postgresql",
-                "virtuoso"
-              ]
-            },
-           "Queries": {
-              "$ref": "#/properties/Queries"
-			},
-            "Scenarios": {
-              "$ref": "#/properties/Scenarios"
-            },
-            "MinSize": {
-              "$ref": "#/properties/MinSize"
-            },
-            "MaxSize": {
-              "$ref": "#/properties/MaxSize"
-            }
+        "type": "object",
+        "required": [
+          "Tool"
+        ],
+        "properties": {
+          "Tool": {
+            "enum": [
+              "allegro",
+              "drools5",
+              "drools6",
+              "eclipseocl",
+              "emfincquery",
+              "fourstore",
+              "java",
+              "jena",
+              "mysql",
+              "neo4j",
+              "sesame",
+              "postgresql",
+              "virtuoso"
+            ]
+          },
+          "Queries": {
+            "$ref": "#/properties/Queries"
+          },
+          "Scenarios": {
+            "$ref": "#/properties/Scenarios"
+          },
+          "MinSize": {
+            "$ref": "#/properties/MinSize"
+          },
+          "MaxSize": {
+            "$ref": "#/properties/MaxSize"
           }
+        }
       }
     }
   }

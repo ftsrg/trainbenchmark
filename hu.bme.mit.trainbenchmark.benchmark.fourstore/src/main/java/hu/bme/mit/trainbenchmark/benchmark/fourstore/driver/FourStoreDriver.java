@@ -81,6 +81,14 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 		driver.stop();
 	}
 
+	// filter
+	
+	@Override
+	public List<Long> filterVertices(List<Long> vertices, String vertexType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// create
 
 	@Override
@@ -103,6 +111,20 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 		driver.insertEdgesWithVertex(edges, fullEdgeType, fullTargetVertexType);
 	}
 
+	@Override
+	public Long insertVertexWithEdge(Long sourceVertex,
+			String sourceVertexType, String targetVertexType, String edgeType)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertEdge(Long sourceVertex, Long targetVertex, String edgeType) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	// read
 
 	@Override
@@ -110,6 +132,20 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 		return driver.collectVertices(basePrefix + type);
 	}
 
+	@Override
+	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex,
+			String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Long> collectOutgoingFilteredConnectedVertices(
+			Long sourceVertex, String targetVertexType, String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// update
 
 	@Override
