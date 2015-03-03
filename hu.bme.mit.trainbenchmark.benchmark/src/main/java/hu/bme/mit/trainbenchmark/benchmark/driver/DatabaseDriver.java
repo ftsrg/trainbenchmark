@@ -34,6 +34,10 @@ public abstract class DatabaseDriver<T> {
 	public void destroy() throws IOException {
 	}
 
+	// filter
+	
+	public abstract List<T> filterVertices(final List<T> vertices, final String vertexType);
+	
 	// create
 
 	public abstract void insertVertexWithEdge(final List<T> sourceVertices, final String sourceVertexType, final String targetVertexType,
@@ -48,7 +52,10 @@ public abstract class DatabaseDriver<T> {
 
 	public abstract List<T> collectVertices(final String type) throws IOException;
 	
-	public abstract List<T> collectOutgoingConnectedVertices(final T sourceVertex, final String targetVertexType, final String edgeType);
+	public abstract List<T> collectOutgoingConnectedVertices(final T sourceVertex, final String edgeType);
+
+	public abstract List<T> collectOutgoingFilteredConnectedVertices(final T sourceVertex, final String targetVertexType, 
+			final String edgeType);
 
 	// update
 

@@ -19,8 +19,8 @@ public class ConnectedSegments<T> extends TransformationDefinition<T>{
 		List<T> oneHopConnected = new ArrayList<T>();
 		for(final T vertex : elementsToModify){
 			// get the first and only one vertex
-			T oneHopVertex = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO).get(0);
-			T twoHopVertex = driver.collectOutgoingConnectedVertices(oneHopVertex, ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO).get(0);
+			T oneHopVertex = driver.collectOutgoingFilteredConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO).get(0);
+			T twoHopVertex = driver.collectOutgoingFilteredConnectedVertices(oneHopVertex, ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO).get(0);
 		
 			driver.insertEdge(vertex, twoHopVertex, ModelConstants.TRACKELEMENT_CONNECTSTO);
 			

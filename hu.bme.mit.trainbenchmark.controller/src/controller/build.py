@@ -51,20 +51,28 @@ def maven_build(tool, skip_tests):
     
     Parameters:
     @param package: tool name
+    @param skip_tests: skip JUNIT tests
     """
     logging.info("Build: " + tool)
     deps.build_unique_tools(tool)
-    skip = ""
+    
     if (skip_tests):
-        skip = "-DskipTests"
-    subprocess.call(["mvn", "clean", "install", "-P",\
-                    handler.get_package_name(tool), skip])
-    #handler.set_working_directory(current_directory)
+        subprocess.call(["mvn", "clean", "install", "-P",\
+                        handler.get_package_name(tool), "-DskipTests"])
+    else:
+        subprocess.call(["mvn", "clean", "install", "-P",\
+                        handler.get_package_name(tool)])
 
 
 def build_projects(configurations, skip_tests, build_core=True, \
                    build_formats=True, build_tools=True):
     """Build the projects.
+    
+    @param configurations: a list of Configuraiton objects
+    @param skip_tests: skip JUNIT tests if given
+    @param build_core: builds the core project if given
+    @param build_formats: build the format projects and generators
+    @param build_tools: build the tools projects
     """
     tools = list()
     formats = list()
