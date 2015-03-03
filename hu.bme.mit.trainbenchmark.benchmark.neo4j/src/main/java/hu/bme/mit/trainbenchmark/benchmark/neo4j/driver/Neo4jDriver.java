@@ -96,7 +96,6 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 			final ExecutionEngine engine = new ExecutionEngine(graphDb);
 			final ExecutionResult result = engine.execute(query);
 			for (final Map<String, Object> row : result) {
-				System.out.println(row);
 				final Node x = (Node) row.get(result.columns().get(0));
 				results.add(x);
 			}
@@ -115,6 +114,29 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		graphDb.shutdown();
 	}
 
+	// filter
+	
+	@Override
+	public List<Node> filterVertices(List<Node> vertices, String vertexType) {
+		List<Node> matchedVertices = new ArrayList<Node>();
+		for (Node vertex : vertices){
+			if ( match(vertex, vertexType) ){
+				matchedVertices.add(vertex);
+			}
+		}
+		return matchedVertices;
+	}
+	
+	protected boolean match(final Node vertex, final String vertexType){
+		final Iterable<Label> labels = vertex.getLabels();
+		for (Label label : labels){
+			if (vertexType.equals(label.toString())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// create
 
 	@Override
@@ -159,26 +181,40 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	}
 	
 	@Override
-	public List<Node> collectOutgoingConnectedVertices(final Node sourceVertex, final String targetType, final 
+	public List<Node> collectOutgoingConnectedVertices(Node sourceVertex,
 			String edgeType) {
+		return collectConnectedVertices(sourceVertex, edgeType, Direction.OUTGOING, false, null);
+	}
+	
+	@Override
+	public List<Node> collectOutgoingFilteredConnectedVertices(final Node sourceVertex, final String targetVertexType, 
+			final String edgeType) {
+		return collectConnectedVertices(sourceVertex, edgeType, Direction.OUTGOING, true, targetVertexType);
+
+	}
+	
+	protected List<Node> collectConnectedVertices(final Node source, final String edge, final Direction direction, 
+			final boolean filtered, final String targetType){
 		
-		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
+		final RelationshipType relationshipType = DynamicRelationshipType.withName(edge);
 		List<Node> neighbors = new ArrayList<Node>();
-		final Iterable<Relationship> relationships = sourceVertex.getRelationships(
-																			Direction.OUTGOING, 
-																			relationshipType
+		final Iterable<Relationship> relationships = source.getRelationships(
+																			relationshipType,
+																			direction 
 																			);
 		for (final Relationship relationship : relationships) {
 			final Node endNode = relationship.getEndNode(); 
-			final Iterable<Label> labels = endNode.getLabels();
-			for (Label label : labels){
-				if (targetType.equals(label.toString())){
+			if (filtered){
+				if (match(endNode, targetType)){
 					neighbors.add(endNode);
 				}
 			}
+			else {
+				neighbors.add(endNode);
+			}
 		}
-		
 		return neighbors;
+		
 	}
 	
 	// update
@@ -238,7 +274,5 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	public GraphDatabaseService getGraphDb() {
 		return graphDb;
 	}
-
-
 
 }
