@@ -21,8 +21,8 @@ import org.apache.commons.cli.ParseException;
 
 public class GraphGeneratorMain {
 
-	public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
-		Generator generator = new GraphGenerator(args);
+	public static void main(final String[] args) throws ParseException, FileNotFoundException, IOException {
+		final Generator generator = new GraphGenerator(args);
 		generator.generateModels();
 	}
 
