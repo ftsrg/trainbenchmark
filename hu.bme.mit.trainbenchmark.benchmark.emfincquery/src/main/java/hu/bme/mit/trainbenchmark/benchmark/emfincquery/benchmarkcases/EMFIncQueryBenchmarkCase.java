@@ -33,8 +33,7 @@ import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match extends IPatternMatch> extends
-		AbstractBenchmarkCase<T> {
+public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match extends IPatternMatch> extends AbstractBenchmarkCase<T> {
 
 	protected RailwayContainer container;
 
@@ -60,9 +59,9 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 		final String modelPath = bc.getBenchmarkArtifact();
 		final EMFDriver emfDriver = new EMFDriver(modelPath);
 		driver = (DatabaseDriver<T>) emfDriver;
-		
+
 		final Resource resource = emfDriver.getResource();
-		
+
 		try {
 			EMFIncQueryCommon.setEIQOptions(getEMFIncQueryBenchmarkConfig());
 			final EMFScope emfScope = new EMFScope(resource);
@@ -86,7 +85,9 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 	}
 
 	protected abstract Set<T> getResultSet() throws IncQueryException;
+
 	protected abstract IncQueryMatcher<Match> getMatcher() throws IncQueryException;
+
 	protected abstract T extract(Match match);
 
 }
