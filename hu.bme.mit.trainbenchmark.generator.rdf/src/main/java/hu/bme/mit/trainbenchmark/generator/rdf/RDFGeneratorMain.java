@@ -21,8 +21,8 @@ import org.apache.commons.cli.ParseException;
 
 public class RDFGeneratorMain {
 
-	public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
-		Generator generator = new RDFGenerator(args);
+	public static void main(final String[] args) throws ParseException, FileNotFoundException, IOException {
+		final Generator generator = new RDFGenerator(args);
 		generator.generateModels();
 	}
 
