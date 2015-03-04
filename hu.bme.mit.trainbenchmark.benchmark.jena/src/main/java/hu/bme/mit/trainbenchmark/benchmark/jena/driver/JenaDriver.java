@@ -87,13 +87,6 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 
 	// filter
 	
-	@Override
-	public List<Resource> filterVertices(List<Resource> vertices,
-			String vertexType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// create
 
 	@Override
@@ -137,18 +130,11 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 
 	@Override
 	public List<Resource> collectOutgoingConnectedVertices(
-			Resource sourceVertex, String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Resource> collectOutgoingFilteredConnectedVertices(
 			Resource sourceVertex, String targetVertexType, String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	// update
 
 	@Override
