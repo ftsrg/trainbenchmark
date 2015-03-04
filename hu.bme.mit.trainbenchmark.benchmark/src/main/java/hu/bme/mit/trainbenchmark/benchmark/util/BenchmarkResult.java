@@ -15,33 +15,46 @@ package hu.bme.mit.trainbenchmark.benchmark.util;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Stopwatch;
 
-@JsonIgnoreProperties({ "benchmarkConfig", "random" })
 public class BenchmarkResult {
 
+	
 	protected String tool;
 	protected String query;
 	protected BenchmarkConfig bc;
 	protected Stopwatch stopwatch;
 	protected Random random;
 
+	@JsonProperty("ModifiedElements")
 	protected List<Long> modifiedElementsSizes = new ArrayList<>();
+	
+	@JsonProperty("Memory")
 	protected List<Long> memoryUsages = new ArrayList<>();
+	
+	@JsonProperty("Results")
 	protected List<Integer> resultSizes = new ArrayList<>();
 
 	// phase 1
+	@JsonProperty("ReadTime")
 	protected Long readTime;
+	
 	// phase 2
+	@JsonProperty("CheckTimes")
 	protected List<Long> checkTimes = new ArrayList<>();
 	// phase 3
+	@JsonProperty("LHSTimes")
 	protected List<Long> lhsTimes = new ArrayList<>();
+	
+	@JsonProperty("RHSTimes")
 	protected List<Long> rhsTimes = new ArrayList<>();
 
 	public BenchmarkResult(final String tool, final String query) {
@@ -50,6 +63,32 @@ public class BenchmarkResult {
 		this.random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
 
+	
+	// JSON properties
+	@JsonProperty("Size")
+	public int getSize(){
+		return bc.getArtifactSize();
+	}
+	
+	@JsonProperty("Scenario")
+	public String getScenario(){
+		return bc.getScenario();
+	}
+	
+	@JsonProperty("RunIndex")
+	public int getRunIndex(){
+		return bc.getRunIndex();
+	}
+	
+	@JsonProperty("Tool")
+	public String getTool() {
+		return tool;
+	}
+	
+	@JsonProperty("Query")
+	public String getQuery() {
+		return query;
+	}
 	// benchmarkconfig
 
 	public BenchmarkConfig getBenchmarkConfig() {
@@ -142,4 +181,8 @@ public class BenchmarkResult {
 		// @formatter:on
 	}
 
+	public void publish() throws IOException{
+		ResultSerializer.serializeToJSON(this);
+	}
+	
 }
