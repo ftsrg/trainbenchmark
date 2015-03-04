@@ -53,19 +53,20 @@ def write_to_csv(json_objects, csvpath):
             row = dict()
             for h in headers:
                 row.update({h:"NaN"})
-            row.update({"Tool":result["tool"]})
-            row.update({"Size":result["artifactSize"]})
-            row.update({"RunIndex":result["runIndex"]})
-            row.update({"CaseName":result["query"]})
-            row.update({"Scenario":result["scenario"]})
+            row.update({"Tool":result["Tool"]})
+            row.update({"Size":result["Size"]})
+            row.update({"RunIndex":result["RunIndex"]})
+            row.update({"CaseName":result["Query"]})
+            row.update({"Scenario":result["Scenario"]})
             row.update({"PhaseName":"Read"})
             row.update({"MetricName":"Time"})
-            row.update({"MetricValue":result["readTime"]})
+            row.update({"MetricValue":result["ReadTime"]})
             row.update({"Sequence":sequence})
             writer.writerow(row)
             
-            checks = result["checkTimes"]
-            edits = result["editTimes"]
+            checks = result["CheckTimes"]
+            lhs = result["LHSTimes"]
+            rhs = result["RHSTimes"]
             row.update({"PhaseName": "Check"})
             sequence += 1
             row.update({"Sequence":sequence})
@@ -75,11 +76,19 @@ def write_to_csv(json_objects, csvpath):
             
             checks.pop(0)
             for i in range(0,len(checks)):
-                row.update({"PhaseName":"Edit"})
+                row.update({"PhaseName":"LHS"})
                 sequence += 1
                 row.update({"Sequence":sequence})
                 row.update({"MetricName": "Time"})
-                row.update({"MetricValue": edits[i]})
+                row.update({"MetricValue": lhs[i]})
+                
+                writer.writerow(row)
+                
+                row.update({"PhaseName":"RHS"})
+                sequence += 1
+                row.update({"Sequence":sequence})
+                row.update({"MetricName": "Time"})
+                row.update({"MetricValue": rhs[i]})
                 
                 writer.writerow(row)
                 
