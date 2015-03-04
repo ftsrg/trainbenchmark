@@ -13,8 +13,8 @@ import handler
 
 def get_generator_jar(format):
     """
-    Return the generate's .jar file's path which belongs to the certain 
-    format. The latter is provided by the format parameter.
+    Returns the generate's .jar file's path which belongs to the certain 
+    format.
     """
     folder = ("./hu.bme.mit.trainbenchmark.generator.{FORMAT}/target/"\
            ).format(FORMAT=format)
@@ -28,7 +28,7 @@ def get_generator_jar(format):
 
 def get_benchmark_jar(tool):
     """
-    Return the benchmark's .jar file's path which belongs to the certain 
+    Returns the benchmark's .jar file's path which belongs to the certain 
     tool. The latter is provided by the tool parameter.
     """
     folder = ("./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/"\
@@ -43,8 +43,8 @@ def get_benchmark_jar(tool):
 
 def get_model_path(format, scenario, size_str):
     """
-    Return the used models' path by the certain format, scenario 
-    and the actual size.
+    Returns the used models' path repesented by the certain format, scenario 
+    and current size.
     """
     if (format not in models):
         return None
@@ -59,7 +59,7 @@ def get_model_path(format, scenario, size_str):
 
 
 def get_common_model_path():
-    """Return the folder's name where all of the models are stored.
+    """Returns the folder's name where all of the models are stored.
     """
     return common_models_path
 

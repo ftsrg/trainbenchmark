@@ -61,7 +61,7 @@ public abstract class TransformationDefinition<T> {
 		final List<T> candidatesList = new ArrayList<>(elementCandidates);
 		Collections.sort(candidatesList, driver.getComparator());
 		elementsToModify = pickRandom(nElementsToModify, candidatesList);
-
+		
 		bmr.restartClock();
 		rhs();
 		driver.finishTransaction();

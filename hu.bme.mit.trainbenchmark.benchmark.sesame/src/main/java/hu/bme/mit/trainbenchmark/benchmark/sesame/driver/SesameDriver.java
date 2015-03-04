@@ -131,6 +131,14 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		}
 	}
 
+	// filter
+	
+	@Override
+	public List<URI> filterVertices(List<URI> vertices, String vertexType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// create
 
 	@Override
@@ -158,6 +166,20 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		}
 	}
 
+	@Override
+	public URI insertVertexWithEdge(URI sourceVertex, String sourceVertexType,
+			String targetVertexType, String edgeType) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertEdge(URI sourceVertex, URI targetVertex, String edgeType) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	// read
 
 	@Override
@@ -179,6 +201,20 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		return vertices;
 	}
 
+	@Override
+	public List<URI> collectOutgoingConnectedVertices(URI sourceVertex,
+			String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<URI> collectOutgoingFilteredConnectedVertices(URI sourceVertex,
+			String targetVertexType, String edgeType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// update
 
 	@Override
