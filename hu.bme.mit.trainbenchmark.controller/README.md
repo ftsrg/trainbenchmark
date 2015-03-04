@@ -6,7 +6,7 @@ Controller is responsible for providing a configuration for Train Benchmark and 
 ### Requirements
 * Git
 * Maven 3
-* Python 3 (testes with 3.4)
+* Python 3 (tested with 3.4)
 
 In the case of using virtual environment python3.4 interpreter is necessary.
 Find further information about virtual environments [here](#install-virtual-environment-optional).
@@ -27,10 +27,10 @@ Note that root password is required for the successful deployment. As a result, 
 If deploying every external package globally on the system wouldn't be satisfying or feasible, then use a virtual environment. In this case run the following script from the `hu.bme.mit.trainbenchmark.controller/src/controller/init/` directory
 * `./initialize_venv.py`
 
-After this the python binary and third-party modules will be copied to the `./tb-env` folder. Since the Python interpreter is not used globally, but locally, it must be activated every time:
+After this the python binary and third-party modules will be copied to the `./tb-env` folder which is also created automatically. Since the Python interpreter is not used globally, but locally, it must be activated every time:
 * `source tb-env/bin/activate`
 
-After this operation the Controller can be already used as described [here](#usage).
+After this operation the Controller can be already used.
 To turn off the environment, execute the `deactivate` command. However, every time when a new terminal window is opened, the virtual environment must be activated again. That means it is a necessity to write the same activation command again to be able to use the environment.
 
 ### Usage
