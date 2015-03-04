@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.fourstore.driver;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +33,7 @@ import eu.mondo.driver.fourstore.FourStoreGraphDriverReadWrite;
 
 public class FourStoreDriver extends DatabaseDriver<Long> {
 
-	protected long newVertexId = 1000000000;
+	protected Long newVertexId = null;
 
 	protected static final String CLUSTERNAME = "trainbenchmark_cluster";
 
@@ -86,24 +87,48 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	@Override
 	public void insertVertexWithEdge(final List<Long> vertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+		
 		final Multimap<String, String> edges = ArrayListMultimap.create();
 
 		for (final Long vertex : vertices) {
-			final String source = basePrefix + vertex; 
-			final String target = basePrefix + newVertexId;
+			final String source = basePrefix + ID_PREFIX + vertex;
+			final String target = basePrefix + ID_PREFIX + newVertexId;
+			System.out.println(source + "--->" + target);
 			edges.put(source, target);
 			newVertexId++;
 		}
-		
+
 		System.out.println(edges);
-		
+
 		final String fullEdgeType = basePrefix + edgeType;
-		final String fullTargetVertexType = basePrefix + targetVertexType; 
-				
+		final String fullTargetVertexType = basePrefix + targetVertexType;
+
 		driver.insertEdgesWithVertex(edges, fullEdgeType, fullTargetVertexType);
 	}
 
 	// read
+
+	private Long determineNewVertexId() throws IOException {
+		Long id = 50L;
+		// safety measure to avoid infinite loop in case of a driver bug
+		int iterationCount = 1;
+
+		final String askQuery = "PREFIX base: <" + basePrefix + "> " //
+				+ "PREFIX rdf:  <" + RDFConstants.RDF_TYPE + "> " //
+				+ "ASK { base:" + RDFConstants.ID_PREFIX + "%d ?y ?z }";
+		while (iterationCount <= 20 && driver.ask(String.format(askQuery, id))) {
+			id *= 2;
+			iterationCount++;
+		}
+		if (iterationCount > 20) {
+			throw new IOException("Could not generate new unique id.");
+		}
+
+		return id;
+	}
 
 	@Override
 	public List<Long> collectVertices(final String type) throws IOException {
@@ -120,7 +145,7 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 
 		final Multimap<Long, Object> originalValues = driver.collectProperties(fullPropertyName);
 		for (final Long vertex : vertices) {
-			final String key = basePrefix + vertex;
+			final String key = basePrefix + ID_PREFIX + vertex;
 			final int originalValue = (int) originalValues.get(vertex).iterator().next();
 			final int newValue = attributeOperation.op(originalValue);
 			properties.put(key, newValue);
