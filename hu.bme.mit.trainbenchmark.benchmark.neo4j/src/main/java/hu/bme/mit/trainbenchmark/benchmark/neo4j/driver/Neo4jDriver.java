@@ -95,7 +95,6 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		try (Transaction tx = graphDb.beginTx()) {
 			final ExecutionEngine engine = new ExecutionEngine(graphDb);
 			final ExecutionResult result = engine.execute(query);
-
 			for (final Map<String, Object> row : result) {
 				final Node x = (Node) row.get(result.columns().get(0));
 				results.add(x);
@@ -115,22 +114,60 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		graphDb.shutdown();
 	}
 
+	// filter
+	
+	@Override
+	public List<Node> filterVertices(List<Node> vertices, String vertexType) {
+		List<Node> matchedVertices = new ArrayList<Node>();
+		for (Node vertex : vertices){
+			if ( match(vertex, vertexType) ){
+				matchedVertices.add(vertex);
+			}
+		}
+		return matchedVertices;
+	}
+	
+	protected boolean match(final Node vertex, final String vertexType){
+		final Iterable<Label> labels = vertex.getLabels();
+		for (Label label : labels){
+			if (vertexType.equals(label.toString())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// create
 
+	@Override
+	public void insertEdge(Node sourceVertex, Node targetVertex, String edgeType) {
+		final RelationshipType relationship = DynamicRelationshipType.withName(edgeType);
+		sourceVertex.createRelationshipTo(targetVertex, relationship);
+	}
+	
 	@Override
 	public void insertVertexWithEdge(final List<Node> vertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
 		final Label label = DynamicLabel.label(targetVertexType);
-
 		for (final Node vertex : vertices) {
-			final Node targetNode = graphDb.createNode();
-
-			// automatic indexing ensures that the new node will be indexed by its type attribute
-			targetNode.addLabel(label);
-			vertex.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType));
+			insertVertexWithEdge(vertex, edgeType, label);
 		}
 	}
+	
+	@Override
+	public Node insertVertexWithEdge(Node sourceVertex,String sourceVertexType, String targetVertexType, String edgeType)throws IOException {
+		final Label label = DynamicLabel.label(targetVertexType);
+		return (insertVertexWithEdge(sourceVertex, edgeType, label));
+		
+	}
 
+	protected Node insertVertexWithEdge(final Node sourceVertex,final String edgeType, final Label label) {
+		final Node targetNode = graphDb.createNode();
+		targetNode.addLabel(label);
+		sourceVertex.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType));
+		return (targetNode);
+	}
+	
 	// read
 
 	@Override
@@ -142,7 +179,44 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		final List<Node> list = IteratorUtils.toList(iterator);
 		return list;
 	}
+	
+	@Override
+	public List<Node> collectOutgoingConnectedVertices(Node sourceVertex,
+			String edgeType) {
+		return collectConnectedVertices(sourceVertex, edgeType, Direction.OUTGOING, false, null);
+	}
+	
+	@Override
+	public List<Node> collectOutgoingFilteredConnectedVertices(final Node sourceVertex, final String targetVertexType, 
+			final String edgeType) {
+		return collectConnectedVertices(sourceVertex, edgeType, Direction.OUTGOING, true, targetVertexType);
 
+	}
+	
+	protected List<Node> collectConnectedVertices(final Node source, final String edge, final Direction direction, 
+			final boolean filtered, final String targetType){
+		
+		final RelationshipType relationshipType = DynamicRelationshipType.withName(edge);
+		List<Node> neighbors = new ArrayList<Node>();
+		final Iterable<Relationship> relationships = source.getRelationships(
+																			relationshipType,
+																			direction 
+																			);
+		for (final Relationship relationship : relationships) {
+			final Node endNode = relationship.getEndNode(); 
+			if (filtered){
+				if (match(endNode, targetType)){
+					neighbors.add(endNode);
+				}
+			}
+			else {
+				neighbors.add(endNode);
+			}
+		}
+		return neighbors;
+		
+	}
+	
 	// update
 
 	@Override
@@ -176,7 +250,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		// for Neo4j, this is the same as deleteOneOutgoingEdge
 		deleteEdges(vertices, edgeType, true, true);
 	}
-
+	
 	protected void deleteEdges(final List<Node> vertices, final String edgeType, final boolean outgoing, final boolean all) {
 		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
 		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;

@@ -29,8 +29,8 @@ public class BatchScenario implements Scenario<AbstractBenchmarkCase<?>> {
 		testCase.benchmarkDestroy();
 
 		final BenchmarkResult bmr = testCase.getBenchmarkResult();
-		// JsonSerializer.serialize(bmr);
 		System.out.println(bmr);
+		bmr.publish();
 		return bmr;
 	}
 
