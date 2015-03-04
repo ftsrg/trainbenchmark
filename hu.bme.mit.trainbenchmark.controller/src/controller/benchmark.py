@@ -14,7 +14,7 @@ import logging
 
 import targets
 import handler
-import loader
+from loader import Loader
 import log
 
 
@@ -122,7 +122,8 @@ eclipse_based = {
 if (__name__ == "__main__"):
     log.init_log()
     logging.info("Main module:benchmark")
-    configurations = loader.get_configs_from_json()
+    loader = Loader()
+    configurations = loader.load()
     if (configurations is None):
         logging.error("No valid configurations were loaded.")
         sys.exit(1)

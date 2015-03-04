@@ -1,0 +1,30 @@
+{
+  "MAVEN_OPTS": {
+    "Xmx": "512m",
+    "XX:MaxPermSize": "256m"
+  },
+  "JAVA_OPTS": {
+    "xmx": "2g",
+    "maxPermSize": "256m"
+  },
+  "IterationCount": 10,
+  "MinSize": 3,
+  "MaxSize": 17,
+  "ModificationMethod": "constant",
+  "ModificationConstant": 10,
+  "Queries": [
+    "RouteSensor",
+    "SignalNeighbor"
+  ],
+  "Scenarios": [
+    "User",
+    "Repair"
+  ],
+  "Series": 1,
+  "Tools": [
+    "neo4j",
+    "java",
+    "mysql"
+  ],
+  "UniqueConfigurations": []
+}

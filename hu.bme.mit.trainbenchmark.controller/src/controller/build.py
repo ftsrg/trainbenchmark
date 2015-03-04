@@ -23,8 +23,8 @@ import logging
 
 import handler
 import benchmark
-import generate
-import loader
+from generate import Generator
+from loader import Loader
 import deps
 import log
 
@@ -138,8 +138,9 @@ if (__name__ == "__main__"):
     logging.info("Main module: build.py.")
     if (args.core == True or args.format == True or args.tools == True):
         build_all = False
-
-    configurations = loader.get_configs_from_json()
+    
+    loader = Loader()
+    configurations = loader.load()
     if (configurations is None):
         logging.error("No valid configurations were loaded.")
         sys.exit(1)
@@ -150,11 +151,12 @@ if (__name__ == "__main__"):
         build_projects(configurations,  args.skip_tests, build_core=True,\
                        build_formats=True, build_tools=True)
     else:
-        build_projects(configurations, args.core, args.format, \
-                   args.tools)
+        build_projects(configurations, args.skip_tests, args.core, \
+                       args.format, args.tools)
     
     if (args.generate == True):
-        generate.generate_models(configurations)
+        generator = Generator()
+        generator.generate_models(configurations)
             
     if (args.benchmark == True):
         for config in configurations:
