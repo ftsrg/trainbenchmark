@@ -17,10 +17,12 @@ public class ConnectedSegments<T> extends TransformationDefinition<T>{
 	@Override
 	protected void rhs() throws IOException {
 		for (final T vertex : elementsToModify){
-			List<T> neighbors = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.TRACKELEMENT_CONNECTSTO);
-			List <T> segments = driver.filterVertices(neighbors, ModelConstants.SEGMENT);
-			List <T> switchElements = driver.filterVertices(neighbors, ModelConstants.SWITCH);
-			List <T> sensors = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.TRACKELEMENT_SENSOR);
+			List<T> segments = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, 
+																				ModelConstants.TRACKELEMENT_CONNECTSTO);
+			List <T> switchElements = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SWITCH, 
+																				ModelConstants.TRACKELEMENT_CONNECTSTO);
+			List <T> sensors = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SENSOR, 
+																				ModelConstants.TRACKELEMENT_SENSOR);
 			
 			List<T> source = new ArrayList<T>();
 			source.add(vertex);

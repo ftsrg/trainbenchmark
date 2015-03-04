@@ -131,14 +131,6 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		}
 	}
 
-	// filter
-	
-	@Override
-	public List<URI> filterVertices(List<URI> vertices, String vertexType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// create
 
 	@Override
@@ -149,17 +141,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 
 		try {
 			for (final URI sourceVertexURI : sourceVertices) {
-				// TODO think about alternative solutions
-				final URI targetVertexURI = f.createURI(basePrefix + targetVertexType + newVertexId);
-				newVertexId++;
-
-				// insert edge
-				final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
-				con.add(edgeStatement);
-
-				// set vertex type
-				final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
-				con.add(typeStatement);
+				insertVertexWithEdge(sourceVertexURI, vertexTypeURI, targetVertexType, edgeTypeURI); 
 			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
@@ -169,14 +151,40 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	@Override
 	public URI insertVertexWithEdge(URI sourceVertex, String sourceVertexType,
 			String targetVertexType, String edgeType) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
+		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
+		try {
+			return insertVertexWithEdge(sourceVertex, vertexTypeURI, targetVertexType, edgeTypeURI);
+		} catch (RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 
+	protected URI insertVertexWithEdge(final URI sourceVertexURI, final URI vertexTypeURI, 
+			final String targetVertexType, final URI edgeTypeURI) throws RepositoryException{
+		// TODO think about alternative solutions
+		final URI targetVertexURI = f.createURI(basePrefix + "_" + newVertexId);
+		newVertexId++;
+
+		// insert edge
+		final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
+		con.add(edgeStatement);
+
+		// set vertex type
+		final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
+		con.add(typeStatement);
+		return targetVertexURI;
+	}
+	
 	@Override
-	public void insertEdge(URI sourceVertex, URI targetVertex, String edgeType) {
-		// TODO Auto-generated method stub
-		
+	public void insertEdge(URI sourceVertex, URI targetVertex, String edgeType) throws IOException {
+		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
+		final Statement edgeStatement = f.createStatement(sourceVertex, edgeTypeURI, targetVertex);
+		try {
+			con.add(edgeStatement);
+		} catch (RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 	
 	
@@ -202,19 +210,30 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<URI> collectOutgoingConnectedVertices(URI sourceVertex,
-			String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<URI> collectOutgoingConnectedVertices(URI sourceVertex, String targetVertexType,
+			String edgeType) throws IOException {
+		final URI typeURI = f.createURI(basePrefix + targetVertexType);
+		final List<URI> vertices = new ArrayList<>();
+		
+		final URI edgeURI = f.createURI(basePrefix + edgeType);
+		try {
+			RepositoryResult<Statement> statements = con.getStatements(sourceVertex, edgeURI, null, false);
+			while (statements.hasNext()) {
+				final Statement s = statements.next();
+				final URI obj = (URI) s.getObject();
+				RepositoryResult<Statement> statements2 = con.getStatements(obj, RDF.TYPE, typeURI, false); 
+				while (statements2.hasNext()) {
+					final Statement s2 = statements2.next();
+					final URI subject = (URI) s2.getSubject();
+					vertices.add(subject);
+				}
+			}
+		} catch (RepositoryException e) {
+			throw new IOException(e);
+		}
+		return vertices;
 	}
 
-	@Override
-	public List<URI> collectOutgoingFilteredConnectedVertices(URI sourceVertex,
-			String targetVertexType, String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// update
 
 	@Override
