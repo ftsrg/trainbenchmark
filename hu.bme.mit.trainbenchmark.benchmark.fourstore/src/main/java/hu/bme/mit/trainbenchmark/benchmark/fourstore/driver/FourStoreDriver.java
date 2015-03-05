@@ -85,7 +85,7 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	// filter
 	
 	@Override
-	public List<Long> filterVertices(List<Long> vertices, String vertexType) {
+	public List<Long> filterVertices(final List<Long> vertices, final String vertexType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -104,7 +104,6 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 		for (final Long vertex : vertices) {
 			final String source = basePrefix + ID_PREFIX + vertex;
 			final String target = basePrefix + ID_PREFIX + newVertexId;
-			System.out.println(source + "--->" + target);
 			edges.put(source, target);
 			newVertexId++;
 		}
@@ -118,39 +117,20 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public Long insertVertexWithEdge(Long sourceVertex,
-			String sourceVertexType, String targetVertexType, String edgeType)
+	public Long insertVertexWithEdge(final Long sourceVertex,
+			final String sourceVertexType, final String targetVertexType, final String edgeType)
 			throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void insertEdge(Long sourceVertex, Long targetVertex, String edgeType) {
+	public void insertEdge(final Long sourceVertex, final Long targetVertex, final String edgeType) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	// read
-
-	private Long determineNewVertexId() throws IOException {
-		Long id = 50L;
-		// safety measure to avoid infinite loop in case of a driver bug
-		int iterationCount = 1;
-
-		final String askQuery = "PREFIX base: <" + basePrefix + "> " //
-				+ "PREFIX rdf:  <" + RDFConstants.RDF_TYPE + "> " //
-				+ "ASK { base:" + RDFConstants.ID_PREFIX + "%d ?y ?z }";
-		while (iterationCount <= 20 && driver.ask(String.format(askQuery, id))) {
-			id *= 2;
-			iterationCount++;
-		}
-		if (iterationCount > 20) {
-			throw new IOException("Could not generate new unique id.");
-		}
-
-		return id;
-	}
 
 	@Override
 	public List<Long> collectVertices(final String type) throws IOException {
@@ -158,15 +138,15 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex,
-			String edgeType) {
+	public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex,
+			final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Long> collectOutgoingFilteredConnectedVertices(
-			Long sourceVertex, String targetVertexType, String edgeType) {
+			final Long sourceVertex, final String targetVertexType, final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -254,6 +234,27 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	@Override
 	public void deleteSingleOutgoingEdge(final List<Long> vertices, final String vertexType, final String edgeType) throws IOException {
 		deleteAllOutgoingEdges(vertices, vertexType, edgeType);
+	}
+
+	// utility
+	
+	protected Long determineNewVertexId() throws IOException {
+		Long id = 5000L;
+		// safety measure to avoid infinite loop in case of a driver bug
+		int iterationCount = 1;
+
+		final String askQuery = "PREFIX base: <" + basePrefix + "> " //
+				+ "PREFIX rdf:  <" + RDFConstants.RDF_TYPE + "> " //
+				+ "ASK { base:" + RDFConstants.ID_PREFIX + "%d ?y ?z }";
+		while (iterationCount <= 20 && driver.ask(String.format(askQuery, id))) {
+			id *= 2;
+			iterationCount++;
+		}
+		if (iterationCount > 20) {
+			throw new IOException("Could not generate new unique id.");
+		}
+
+		return id;
 	}
 
 }
