@@ -13,13 +13,13 @@ import handler
 
 def get_generator_jar(format):
     """
-    Returns the generate's .jar file's path which belongs to the certain 
+    Returns the generator's .jar file's path which belongs to the certain
     format.
     """
-    folder = ("./hu.bme.mit.trainbenchmark.generator.{FORMAT}/target/"\
-           ).format(FORMAT=format)
+    folder = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/target/" \
+        .format(FORMAT=format)
     files = glob.glob(folder + "*.jar")
-    if (len(files) >0):
+    if len(files) >0:
         target = files[0]
         return target
     else:
@@ -31,10 +31,10 @@ def get_benchmark_jar(tool):
     Returns the benchmark's .jar file's path which belongs to the certain 
     tool. The latter is provided by the tool parameter.
     """
-    folder = ("./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/"\
-              ).format(TOOL=tool)
+    folder = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/" \
+        .format(TOOL=tool)
     files = glob.glob(folder + "*.jar")
-    if (len(files) >0):
+    if len(files) >0:
         target = files[0]
         return target
     else:
@@ -43,18 +43,18 @@ def get_benchmark_jar(tool):
 
 def get_model_path(format, scenario, size_str):
     """
-    Returns the used models' path repesented by the certain format, scenario 
+    Returns the used models' path represented by the certain format, scenario
     and current size.
     """
-    if (format not in models):
+    if format not in models:
         return None
-    if (scenario == "Batch"):
+    if scenario == "Batch":
         scnr = "Repair"
     else:
         scnr = scenario
     # first format is the parameter, second is an embedded python function
-    file = (common_models_path + "/railway-{SCENARIO}-{SIZE}." + \
-            models[format]).format(SCENARIO=scnr.lower(),SIZE=size_str)
+    file = (common_models_path + "/railway-{SCENARIO}-{SIZE}." +
+            models[format]).format(SCENARIO=scnr.lower(), SIZE=size_str)
     return file
 
 

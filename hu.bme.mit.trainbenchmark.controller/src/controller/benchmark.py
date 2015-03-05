@@ -26,23 +26,22 @@ def run_benchmark(configurations):
     """
     logging.info("benchmark.run_benchmark called.")
     handler.set_working_directory(configurations[0].common.path)
-    if (os.path.exists("./results") == False):
+    if not os.path.exists("./results"):
         os.mkdir("results")
 
     for config in configurations:
         execute(config)
     
 
-
 def execute(configuration):
     """Benchmark function.
     """
-    for series_index in range(1,configuration.common.series + 1):
+    for series_index in range(1, configuration.common.series + 1):
         for scenario in configuration.scenarios:
             for size in configuration.sizes:
                 format = configuration.format
-                benchmark_artifact = targets.get_model_path(format,\
-                                                            scenario,\
+                benchmark_artifact = targets.get_model_path(format,
+                                                            scenario,
                                                             size)
                 target = targets.get_benchmark_jar(configuration.tool)
                 xmx = configuration.common.java_xmx
@@ -51,21 +50,20 @@ def execute(configuration):
                 modif_method = configuration.common.modif_method
                 modif_constant = str(configuration.common.modif_constant)
                 iter_count = str(configuration.common.iter_count)
-                
                 for query in configuration.queries:
-                    logging.info("Run benchmark:(tool:" + configuration.tool + \
-                                 ", scenario:" + scenario +\
+                    logging.info("Run benchmark:(tool:" + configuration.tool +
+                                 ", scenario:" + scenario +
                                  ", query:" + query + ", size:" + str(size)+")")
-                    subprocess.call(["java", "-Xmx" + xmx, "-XX:MaxPermSize="\
-                                     + maxpermsize, "-jar", target,\
-                                     "-scenario", scenario,\
-                                     "-runIndex", str(series_index), \
-                                     "-benchmarkArtifact", benchmark_artifact,\
-                                     "-workspacePath", path,\
+                    subprocess.call(["java", "-Xmx" + xmx, "-XX:MaxPermSize=" +
+                                     maxpermsize, "-jar", target,
+                                     "-scenario", scenario,
+                                     "-runIndex", str(series_index),
+                                     "-benchmarkArtifact", benchmark_artifact,
+                                     "-workspacePath", path,
                                      "-query", query,
                                      "-modificationMethod", modif_method,
                                      "-modificationConstant", modif_constant,
-                                     "-iterationCount", str(iter_count)
+                                     "-iterationCount", iter_count
                                      ])
 
 
@@ -76,55 +74,55 @@ def run_eclipse_based_benchmark(configuration):
     @param configuration: a Configuration object
     """
     logging.info("benchmark.run_eclipse_based_benchmark called")
-    if (platform.system() == "Linux"):
+    if platform.system() == "Linux":
         os = "linux"
         ws = "gtk"
-    elif (platform.system() == "Darwin"): #OS X
+    elif platform.system() == "Darwin": #OS X
         os = "macosx"
         ws = "cocoa"
     else:
         logging.error("Operating System is not supported!")
         return None
-    target = ("./hu.bme.mit.trainbenchmark.benchmark."\
-           + "{TOOL}.product/target/products/hu.bme.mit.trainbenchmark."\
-           + "benchmark.{TOOL}.product/{OS}/{WS}/x86_64/eclipse")\
-           .format(TOOL=configuration.tool, OS=os, WS=ws)
-    for series_index in range(1,configuration.series + 1):
+    target = ("./hu.bme.mit.trainbenchmark.benchmark." +
+              "{TOOL}.product/target/products/hu.bme.mit.trainbenchmark." +
+              "benchmark.{TOOL}.product/{OS}/{WS}/x86_64/eclipse")\
+        .format(TOOL=configuration.tool, OS=os, WS=ws)
+    for series_index in range(1, configuration.series + 1):
         series_str = str(series_index)
         for scenario in configuration.scenarios:
             for size in configuration.sizes:
                 format = configuration.format
-                benchmark_artifact = targets.get_model_path(format,\
-                                                            scenario,\
+                benchmark_artifact = targets.get_model_path(format,
+                                                            scenario,
                                                             size)
                 xmx = configuration.java_xmx
                 maxpermsize = configuration.java_maxpermsize
                 for query in configuration.queries:
-                    logging.info("Run benchmark:(tool:" + configuration.tool + \
-                                 ", scenario:" + scenario +\
+                    logging.info("Run benchmark:(tool:" + configuration.tool +
+                                 ", scenario:" + scenario +
                                  ", query:" + query + ", size:" + str(size)+")")
-                    subprocess.call([target, "-scenario", scenario,\
-                                     "-benchmarkArtifact", benchmark_artifact,\
-                                     "-workspacePath", configuration.path,\
-                                     "-runIndex", series_str, \
-                                     "-query", query ,\
-                                     "-nMax", "1", \
-                                     "-vmargs", "-Xmx" + xmx, \
-                                     "-XX:MaxPermSize=" + maxpermsize, \
+                    subprocess.call([target, "-scenario", scenario,
+                                     "-benchmarkArtifact", benchmark_artifact,
+                                     "-workspacePath", configuration.path,
+                                     "-runIndex", series_str,
+                                     "-query", query,
+                                     "-nMax", "1",
+                                     "-vmargs", "-Xmx" + xmx,
+                                     "-XX:MaxPermSize=" + maxpermsize,
                                      ])
 
 
 eclipse_based = {
-                'eclipseocl': run_eclipse_based_benchmark,
-                'emfincquery': run_eclipse_based_benchmark
-                }
+    'eclipseocl': run_eclipse_based_benchmark,
+    'emfincquery': run_eclipse_based_benchmark
+    }
 
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     log.init_log()
     logging.info("Main module:benchmark")
     loader = Loader()
     configurations = loader.load()
-    if (configurations is None):
+    if configurations is None:
         logging.error("No valid configurations were loaded.")
         sys.exit(1)
     run_benchmark(configurations)

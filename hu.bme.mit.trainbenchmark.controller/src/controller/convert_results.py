@@ -31,92 +31,90 @@ def load_results(path):
     return json_objects
 
 
-def write_to_csv(json_objects, csvpath):
+def write_to_csv(results, csvpath):
     """Convert json objects into csv.
     
     Parameters:
-    @param json_objects: a list of json objects 
+    @param results: a list of json objects
     @param csvpath: location of the CSV file
     """
     full_path = os.path.realpath(csvpath)
     path = os.path.split(full_path)
-    if (os.path.exists(path[0]) == False):
-        os.mkdir(path[0])  
+    if not os.path.exists(path[0]):
+        os.mkdir(path[0])
     with open(csvpath, mode='w') as csvfile:
-        headers = ["Size", "PhaseName", "MetricName", "Sequence", \
-                      "MetricValue", "Scenario", "CaseName", "RunIndex", "Tool"]
+        headers = ["Size", "PhaseName", "MetricName", "Sequence",
+                   "MetricValue", "Scenario", "CaseName", "RunIndex", "Tool"]
         writer = csv.DictWriter(csvfile, headers)
         writer.writeheader()
-        
-        for result in json_objects:
+
+        for result in results:
             sequence = 1
             row = dict()
             for h in headers:
-                row.update({h:"NaN"})
-            row.update({"Tool":result["Tool"]})
-            row.update({"Size":result["Size"]})
-            row.update({"RunIndex":result["RunIndex"]})
-            row.update({"CaseName":result["Query"]})
-            row.update({"Scenario":result["Scenario"]})
-            row.update({"PhaseName":"Read"})
-            row.update({"MetricName":"Time"})
-            row.update({"MetricValue":result["ReadTime"]})
-            row.update({"Sequence":sequence})
+                row.update({h: "NaN"})
+            row.update({"Tool": result["Tool"]})
+            row.update({"Size": result["Size"]})
+            row.update({"RunIndex": result["RunIndex"]})
+            row.update({"CaseName": result["Query"]})
+            row.update({"Scenario": result["Scenario"]})
+            row.update({"PhaseName": "Read"})
+            row.update({"MetricName": "Time"})
+            row.update({"MetricValue": result["ReadTime"]})
+            row.update({"Sequence": sequence})
             writer.writerow(row)
-            
+
             checks = result["CheckTimes"]
             lhs = result["LHSTimes"]
             rhs = result["RHSTimes"]
             row.update({"PhaseName": "Check"})
             sequence += 1
-            row.update({"Sequence":sequence})
-            row.update({"MetricName":"Time"})
-            row.update({"MetricValue":checks[0]})
+            row.update({"Sequence": sequence})
+            row.update({"MetricName": "Time"})
+            row.update({"MetricValue": checks[0]})
             writer.writerow(row)
-            
+
             checks.pop(0)
-            for i in range(0,len(checks)):
-                row.update({"PhaseName":"LHS"})
+            for i in range(0, len(checks)):
+                row.update({"PhaseName": "LHS"})
                 sequence += 1
-                row.update({"Sequence":sequence})
+                row.update({"Sequence": sequence})
                 row.update({"MetricName": "Time"})
                 row.update({"MetricValue": lhs[i]})
-                
+
                 writer.writerow(row)
-                
-                row.update({"PhaseName":"RHS"})
+
+                row.update({"PhaseName": "RHS"})
                 sequence += 1
-                row.update({"Sequence":sequence})
+                row.update({"Sequence": sequence})
                 row.update({"MetricName": "Time"})
                 row.update({"MetricValue": rhs[i]})
-                
+
                 writer.writerow(row)
-                
-                row.update({"PhaseName":"ReCheck"})
+
+                row.update({"PhaseName": "ReCheck"})
                 sequence += 1
-                row.update({"Sequence":sequence})
+                row.update({"Sequence": sequence})
                 row.update({"MetricName": "Time"})
                 row.update({"MetricValue": checks[i]})
-                
+
                 writer.writerow(row)
 
 
-if (__name__ == "__main__"):
-    parser = argparse.ArgumentParser( \
-                      formatter_class=argparse.ArgumentDefaultsHelpFormatter \
-                      )
-    parser.add_argument("-c","--csvfile",
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("-c", "--csvfile",
                         default="../../../results/csv/results.csv",
-                        help="Path of the CSV file where the "+\
-                             "results will be merged"
-                        )
-    parser.add_argument("-s","--source",
+                        help="Path of the CSV file where the " +
+                             "results will be merged")
+    parser.add_argument("-s", "--source",
                         default="../../../results/",
                         help="Path of the results json files location."
-                        )
+    )
     args = parser.parse_args()
-    
+
     handler.set_working_directory()
-    json_objects = load_results(args.source)
-    write_to_csv(json_objects, args.csvfile)
+    results = load_results(args.source)
+    write_to_csv(results, args.csvfile)
     print("The results has been written successfully.")

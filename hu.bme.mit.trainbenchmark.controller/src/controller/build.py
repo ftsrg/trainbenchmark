@@ -41,8 +41,8 @@ def resolve_dependencies(configurations):
     for config in configurations:
         for name in config.get_dependencies():
             dependency = loader.get_dependency(name)
-            if (dependency is not None):
-                if (dependency not in config.get_dependencies()):
+            if dependency is not None:
+                if dependency not in config.get_dependencies():
                     config.add_dependency(dependency)
 
 
@@ -55,20 +55,20 @@ def maven_build(tool, skip_tests):
     """
     logging.info("Build: " + tool)
     deps.build_unique_tools(tool)
-    
-    if (skip_tests):
-        subprocess.call(["mvn", "clean", "install", "-P",\
+
+    if skip_tests:
+        subprocess.call(["mvn", "clean", "install", "-P",
                         handler.get_package_name(tool), "-DskipTests"])
     else:
-        subprocess.call(["mvn", "clean", "install", "-P",\
+        subprocess.call(["mvn", "clean", "install", "-P",
                         handler.get_package_name(tool)])
 
 
-def build_projects(configurations, skip_tests, build_core=True, \
+def build_projects(configurations, skip_tests, build_core=True,
                    build_formats=True, build_tools=True):
     """Build the projects.
     
-    @param configurations: a list of Configuraiton objects
+    @param configurations: a list of Configuration objects
     @param skip_tests: skip JUNIT tests if given
     @param build_core: builds the core project if given
     @param build_formats: build the format projects and generators
@@ -79,50 +79,50 @@ def build_projects(configurations, skip_tests, build_core=True, \
     for config in configurations:
         tools.append(config.tool)
         formats.append(config.format)
-        
+
     # make a new instance of the static attribute
     all_dependencies = configurations[0].all_dependencies.copy()
-    if (build_core == False):
-        if ("core" in all_dependencies):
+    if not build_core:
+        if "core" in all_dependencies:
             all_dependencies.remove("core")
-    if (build_formats == False):
+    if not build_formats:
         for f in formats:
-            if (f in all_dependencies):
+            if f in all_dependencies:
                 all_dependencies.remove(f)
-    if (build_tools == False):
+    if not build_tools:
         for t in tools:
-            if (t in all_dependencies):
+            if t in all_dependencies:
                 all_dependencies.remove(t)
     logging.info("Build the following projects: " + all_dependencies.__str__())
     print("Build the following projects: " + all_dependencies.__str__())
     path = configurations[0].common.path
     handler.set_working_directory()
-    subprocess.call(["../../shell-scripts/export_maven_opts.sh",\
-                    configurations[0].common.maven_xmx, \
+    subprocess.call(["../../shell-scripts/export_maven_opts.sh",
+                    configurations[0].common.maven_xmx,
                     configurations[0].common.maven_maxpermsize])
     handler.set_working_directory(path)
-    
-    while (len(all_dependencies) > 0):
+
+    while len(all_dependencies) > 0:
         deps.install_dependencies(all_dependencies[-1], path)
         maven_build(all_dependencies.pop(), skip_tests)
 
 
 
-if (__name__ == "__main__"):
-    parser = argparse.ArgumentParser();
-    parser.add_argument("-g","--generate",
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-g", "--generate",
                         help="generate models too",
                         action="store_true")
-    parser.add_argument("-b","--benchmark",
+    parser.add_argument("-b", "--benchmark",
                         help="run the benchmark tests too",
                         action="store_true")
-    parser.add_argument("-c","--core",
+    parser.add_argument("-c", "--core",
                         help="just build the core",
                         action="store_true")
-    parser.add_argument("-f","--format",
+    parser.add_argument("-f", "--format",
                         help="just build the format",
                         action="store_true")
-    parser.add_argument("-t","--tools",
+    parser.add_argument("-t", "--tools",
                         help="just build the tools",
                         action="store_true")
     parser.add_argument("--skip-tests",
@@ -134,30 +134,30 @@ if (__name__ == "__main__"):
     # set working directory to this file's path
     handler.set_working_directory()
     build_all = True
-    
+
     logging.info("Main module: build.py.")
-    if (args.core == True or args.format == True or args.tools == True):
+    if args.core or args.format or args.tools:
         build_all = False
-    
+
     loader = Loader()
     configurations = loader.load()
-    if (configurations is None):
+    if configurations is None:
         logging.error("No valid configurations were loaded.")
         sys.exit(1)
 
     resolve_dependencies(configurations)
 
-    if (build_all == True):
-        build_projects(configurations,  args.skip_tests, build_core=True,\
+    if build_all:
+        build_projects(configurations,  args.skip_tests, build_core=True,
                        build_formats=True, build_tools=True)
     else:
-        build_projects(configurations, args.skip_tests, args.core, \
+        build_projects(configurations, args.skip_tests, args.core,
                        args.format, args.tools)
-    
-    if (args.generate == True):
+
+    if args.generate:
         generator = Generator()
         generator.generate_models(configurations)
-            
-    if (args.benchmark == True):
+
+    if args.benchmark:
         for config in configurations:
             benchmark.run_benchmark(config)
