@@ -40,7 +40,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class JenaDriver extends DatabaseDriver<Resource> {
 
-	protected long newVertexId = 1000000000;
+	protected Long newVertexId = null;
 
 	protected String basePrefix;
 	protected Model model;
@@ -88,8 +88,8 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 	// filter
 	
 	@Override
-	public List<Resource> filterVertices(List<Resource> vertices,
-			String vertexType) {
+	public List<Resource> filterVertices(final List<Resource> vertices,
+			final String vertexType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -99,6 +99,10 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 	@Override
 	public void insertVertexWithEdge(final List<Resource> sourceVertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+
 		final Property edge = model.getProperty(basePrefix + edgeType);
 		final Resource vertexType = model.getResource(basePrefix + targetVertexType);
 
@@ -112,16 +116,16 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 	}
 
 	@Override
-	public Resource insertVertexWithEdge(Resource sourceVertex,
-			String sourceVertexType, String targetVertexType, String edgeType)
+	public Resource insertVertexWithEdge(final Resource sourceVertex,
+			final String sourceVertexType, final String targetVertexType, final String edgeType)
 			throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void insertEdge(Resource sourceVertex, Resource targetVertex,
-			String edgeType) {
+	public void insertEdge(final Resource sourceVertex, final Resource targetVertex,
+			final String edgeType) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -137,14 +141,14 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 
 	@Override
 	public List<Resource> collectOutgoingConnectedVertices(
-			Resource sourceVertex, String edgeType) {
+			final Resource sourceVertex, final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Resource> collectOutgoingFilteredConnectedVertices(
-			Resource sourceVertex, String targetVertexType, String edgeType) {
+			final Resource sourceVertex, final String targetVertexType, final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -216,5 +220,32 @@ public class JenaDriver extends DatabaseDriver<Resource> {
 			}
 		}
 	}
+	
+	protected Long determineNewVertexId() throws IOException {
+		Long id = 5000L;
+		// safety measure to avoid infinite loop in case of a driver bug
+		int iterationCount = 1;
+
+		final String askQuery = "PREFIX base: <" + basePrefix + "> " //
+				+ "PREFIX rdf:  <" + RDFConstants.RDF_TYPE + "> " //
+				+ "ASK { base:" + RDFConstants.ID_PREFIX + "%d ?y ?z }";
+		while (iterationCount <= 20 && ask(String.format(askQuery, id))) {
+			id *= 2;
+			iterationCount++;
+		}
+		if (iterationCount > 20) {
+			throw new IOException("Could not generate new unique id.");
+		}
+
+		return id;
+	}
+
+	private boolean ask(final String query) {
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, model)) {
+			final boolean result = queryExecution.execAsk();
+			return result;
+		}
+	}
+
 
 }

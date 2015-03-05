@@ -31,6 +31,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.BindingSet;
+import org.openrdf.query.BooleanQuery;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryLanguage;
@@ -47,7 +48,7 @@ import org.openrdf.sail.memory.model.IntegerMemLiteral;
 
 public class SesameDriver extends DatabaseDriver<URI> {
 
-	protected long newVertexId = 1000000000;
+	protected Long newVertexId = null;
 
 	protected String basePrefix;
 	protected String query;
@@ -134,7 +135,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	// filter
 	
 	@Override
-	public List<URI> filterVertices(List<URI> vertices, String vertexType) {
+	public List<URI> filterVertices(final List<URI> vertices, final String vertexType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -144,12 +145,15 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	@Override
 	public void insertVertexWithEdge(final List<URI> sourceVertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+
 		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
 		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
 
 		try {
 			for (final URI sourceVertexURI : sourceVertices) {
-				// TODO think about alternative solutions
 				final URI targetVertexURI = f.createURI(basePrefix + targetVertexType + newVertexId);
 				newVertexId++;
 
@@ -166,15 +170,25 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		}
 	}
 
+	private boolean ask(final String query) throws IOException {
+		try {
+			final BooleanQuery askQuery = con.prepareBooleanQuery(QueryLanguage.SPARQL, query);
+			final boolean result = askQuery.evaluate();
+			return result;
+		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
+			throw new IOException(e);
+		}
+	}
+
 	@Override
-	public URI insertVertexWithEdge(URI sourceVertex, String sourceVertexType,
-			String targetVertexType, String edgeType) throws IOException {
+	public URI insertVertexWithEdge(final URI sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void insertEdge(URI sourceVertex, URI targetVertex, String edgeType) {
+	public void insertEdge(final URI sourceVertex, final URI targetVertex, final String edgeType) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -202,15 +216,15 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<URI> collectOutgoingConnectedVertices(URI sourceVertex,
-			String edgeType) {
+	public List<URI> collectOutgoingConnectedVertices(final URI sourceVertex,
+			final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<URI> collectOutgoingFilteredConnectedVertices(URI sourceVertex,
-			String targetVertexType, String edgeType) {
+	public List<URI> collectOutgoingFilteredConnectedVertices(final URI sourceVertex,
+			final String targetVertexType, final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -315,6 +329,25 @@ public class SesameDriver extends DatabaseDriver<URI> {
 			ids.add(id);
 		}
 		return ids;
+	}
+
+	protected Long determineNewVertexId() throws IOException {
+		Long id = 5000L;
+		// safety measure to avoid infinite loop in case of a driver bug
+		int iterationCount = 1;
+
+		final String askQuery = "PREFIX base: <" + basePrefix + "> " //
+				+ "PREFIX rdf:  <" + RDFConstants.RDF_TYPE + "> " //
+				+ "ASK { base:" + RDFConstants.ID_PREFIX + "%d ?y ?z }";
+		while (iterationCount <= 20 && ask(String.format(askQuery, id))) {
+			id *= 2;
+			iterationCount++;
+		}
+		if (iterationCount > 20) {
+			throw new IOException("Could not generate new unique id.");
+		}
+
+		return id;
 	}
 
 }
