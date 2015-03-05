@@ -17,7 +17,7 @@ import os
 import logging
 
 
-def set_working_directory(path = None):
+def set_working_directory(path=None):
     """
     Set the working directory to this script's folder or to the path
     optional parameter, if that is given.
@@ -25,27 +25,27 @@ def set_working_directory(path = None):
     Parameters:
     @param path: optional parameter, a directory 
     """
-    if (path == None):
+    if path is None:
         full_path = os.path.realpath(__file__)
         path = os.path.split(full_path)
         os.chdir(path[0])
     else:
-        if (os.path.exists(path) == True):
+        if os.path.exists(path):
             os.chdir(path)
         else:
-            logging.error("The given parameter is not a valid directory:"+ path)
+            logging.error("The given parameter is not a valid directory:" +
+                          path)
 
 
 def get_power_of_two(minsize, maxsize):
     """
     Return power of two numbers between minsize and maxsize 
-    in a list as strings.
+    in a list.
     """
     all_size = []
     index = 1
-    while (index <= maxsize):
-        if (index >= minsize):
-            #size_string = str(index)
+    while index <= maxsize:
+        if index >= minsize:
             all_size.append(index)
         index *= 2
     return all_size
@@ -61,11 +61,11 @@ def json_decode(json_path):
         with open(json_path) as file:
             json_object = json.load(file)
     except IOError:
-        logging.error("The file does not exist or cannot read:" +\
-              (os.path.split(json_path))[1])
+        logging.error("The file does not exist or cannot read:" +
+                      (os.path.split(json_path))[1])
     except ValueError as value_error:
-        logging.error((os.path.split(json_path))[1] +\
-              " file is not valid \n", value_error)
+        logging.error((os.path.split(json_path))[1] +
+                      " file is not valid \n", value_error)
     else:
         return json_object
     return None
@@ -75,9 +75,9 @@ def get_package_name(param):
     """Returns a package name which corresponds to the param parameter.
     """
     packages = {
-              'drools5': 'drools',
-              'drools6': 'drools'
-             }
-    if (param in packages):
+        'drools5': 'drools',
+        'drools6': 'drools'
+    }
+    if param in packages:
         return packages[param]
     return param

@@ -14,6 +14,7 @@ class Configuration:
     """
     
     all_dependencies = list()
+
     def __init__(self):
         self.scenarios = None
         self.format = None
@@ -23,7 +24,6 @@ class Configuration:
         self.common = None
         self.__dependencies = list()
     
-    
     def add_dependency(self, dependency):
         """
         Set the configuration repository which represents the tool's location.
@@ -31,14 +31,11 @@ class Configuration:
         Parameters:
         repository: a Repository object
         """
-        #repository.path = self.path
-        #dependency.config = self
         self.__dependencies.append(dependency)
-        if (dependency in self.all_dependencies):
+        if dependency in self.all_dependencies:
             self.all_dependencies.remove(dependency)
         self.all_dependencies.append(dependency)
 
-    
     def get_dependencies(self):
         return self.__dependencies
 
@@ -66,19 +63,12 @@ class Repository:
     """
     def __init__(self, name):
         self.name = name
-        #self.url = url
-        #self.folder = folder
-        #self.branch = branch
-        #self.depth = depth
-        
+
         # initialized when a Repository is attached to a Configuration object
-        #self.path = None
         self.config = None
-        
-    
+
     def __eq__(self, other):
-        if (self.name == other.name):
+        if self.name == other.name:
             return True
         else:
             return False
-   
