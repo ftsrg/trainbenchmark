@@ -13,9 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ public abstract class TransformationDefinition<T> {
 	protected Collection<T> currentResults;
 	protected Collection<T> elementCandidates;
 	protected List<T> elementsToModify;
+	protected Random random;
 
 	protected long nElementsToModify;
 	protected long start;
@@ -38,10 +37,11 @@ public abstract class TransformationDefinition<T> {
 	protected BenchmarkResult bmr;
 	protected DatabaseDriver<T> driver;
 
-	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<T> driver, final Collection<T> currentResults) {
+	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<T> driver, final Collection<T> currentResults, final Random random) {
 		this.bmr = bmr;
 		this.driver = driver;
 		this.currentResults = currentResults;
+		this.random = random;
 	}
 
 	protected abstract void lhs() throws IOException;
@@ -69,7 +69,6 @@ public abstract class TransformationDefinition<T> {
 	}
 
 	private List<T> pickRandom(long nElementsToModify, final List<T> elements) {
-		final Random random = getRandom();
 		final int size = elements.size();
 		if (size < nElementsToModify) {
 			nElementsToModify = size;
@@ -82,10 +81,6 @@ public abstract class TransformationDefinition<T> {
 			elementsToModify.add(element);
 		}
 		return elementsToModify;
-	}
-
-	public static Random getRandom() {
-		return new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
 
 }
