@@ -61,8 +61,6 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 		}
 	}
 
-	// create
-
 	@Override
 	public List<Long> runQuery() throws IOException {
 		final List<Long> results = driver.queryIds(query);
@@ -78,14 +76,6 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 	@Override
 	public void destroy() throws IOException {
 		driver.stop();
-	}
-
-	// filter
-
-	@Override
-	public List<Long> filterVertices(final List<Long> vertices, final String vertexType) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	// create
@@ -135,13 +125,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 	}
 
 	@Override
-	public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex, final String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Long> collectOutgoingFilteredConnectedVertices(final Long sourceVertex, final String targetVertexType, final String edgeType) {
+	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex, String targetVertexType,
+			String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
