@@ -16,14 +16,18 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Random;
 
 public abstract class AbstractBenchmarkCase<T> {
 	
-	private BenchmarkResult bmr;
+	protected Random random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
+	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
 	protected DatabaseDriver<T> driver;
 	protected Collection<T> results;
@@ -62,7 +66,7 @@ public abstract class AbstractBenchmarkCase<T> {
 		try {
 			final Class<?> clazz = this.getClass().getClassLoader().loadClass(className);
 			final TransformationDefinition td = (TransformationDefinition) clazz.newInstance();
-			td.initialize(getBenchmarkResult(), driver, results);
+			td.initialize(getBenchmarkResult(), driver, results, random);
 			td.performTransformation();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			throw new UnsupportedOperationException(e);
