@@ -15,7 +15,6 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -35,7 +34,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
 		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
 				+ ".sparql";
 
-		driver = new JenaDriver(RDFConstants.BASE_PREFIX, queryPath);
+		driver = new JenaDriver(queryPath);
 	}
 
 	@Override

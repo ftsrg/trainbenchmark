@@ -11,9 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
+import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,19 +47,17 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.memory.MemoryStore;
 import org.openrdf.sail.memory.model.IntegerMemLiteral;
 
-public class SesameDriver extends DatabaseDriver<URI> {
+public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	protected Long newVertexId = null;
 
-	protected String basePrefix;
 	protected String query;
 	protected RepositoryConnection con;
 	protected Repository repository;
 	protected ValueFactory f;
 	protected TupleQuery tupleQuery;
 
-	public SesameDriver(final String basePrefix, final String queryPath) throws IOException {
-		this.basePrefix = basePrefix;
+	public SesameDriver(final String queryPath) throws IOException {
 		this.query = FileUtils.readFileToString(new File(queryPath));
 	}
 
@@ -149,12 +148,12 @@ public class SesameDriver extends DatabaseDriver<URI> {
 			newVertexId = determineNewVertexId();
 		}
 
-		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
-		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
+		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
+		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
 
 		try {
 			for (final URI sourceVertexURI : sourceVertices) {
-				final URI targetVertexURI = f.createURI(basePrefix + targetVertexType + newVertexId);
+				final URI targetVertexURI = f.createURI(BASE_PREFIX + targetVertexType + newVertexId);
 				newVertexId++;
 
 				// insert edge
@@ -166,16 +165,6 @@ public class SesameDriver extends DatabaseDriver<URI> {
 				con.add(typeStatement);
 			}
 		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	private boolean ask(final String query) throws IOException {
-		try {
-			final BooleanQuery askQuery = con.prepareBooleanQuery(QueryLanguage.SPARQL, query);
-			final boolean result = askQuery.evaluate();
-			return result;
-		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
 			throw new IOException(e);
 		}
 	}
@@ -198,7 +187,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 
 	@Override
 	public List<URI> collectVertices(final String type) throws IOException {
-		final URI typeURI = f.createURI(basePrefix + type);
+		final URI typeURI = f.createURI(BASE_PREFIX + type);
 		final List<URI> vertices = new ArrayList<>();
 
 		try {
@@ -234,7 +223,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	@Override
 	public void updateProperties(final List<URI> vertices, final String vertexType, final String propertyName,
 			final AttributeOperation attributeOperation) throws IOException {
-		final URI typeURI = f.createURI(basePrefix + propertyName);
+		final URI typeURI = f.createURI(BASE_PREFIX + propertyName);
 
 		try {
 			for (final URI vertex : vertices) {
@@ -288,7 +277,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 			throws IOException {
 		final List<Statement> itemsToRemove = new ArrayList<>();
 
-		final URI edge = f.createURI(basePrefix + edgeType);
+		final URI edge = f.createURI(BASE_PREFIX + edgeType);
 
 		try {
 			for (final URI vertex : vertices) {
@@ -331,23 +320,15 @@ public class SesameDriver extends DatabaseDriver<URI> {
 		return ids;
 	}
 
-	protected Long determineNewVertexId() throws IOException {
-		Long id = 5000L;
-		// safety measure to avoid infinite loop in case of a driver bug
-		int iterationCount = 1;
-
-		final String askQuery = "PREFIX base: <" + basePrefix + "> " //
-				+ "PREFIX rdf:  <" + RDFConstants.RDF_TYPE + "> " //
-				+ "ASK { base:" + RDFConstants.ID_PREFIX + "%d ?y ?z }";
-		while (iterationCount <= 20 && ask(String.format(askQuery, id))) {
-			id *= 2;
-			iterationCount++;
+	@Override
+	protected boolean ask(final String askQuery) throws IOException {
+		try {
+			final BooleanQuery q = con.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
+			final boolean result = q.evaluate();
+			return result;
+		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
+			throw new IOException(e);
 		}
-		if (iterationCount > 20) {
-			throw new IOException("Could not generate new unique id.");
-		}
-
-		return id;
 	}
 
 }
