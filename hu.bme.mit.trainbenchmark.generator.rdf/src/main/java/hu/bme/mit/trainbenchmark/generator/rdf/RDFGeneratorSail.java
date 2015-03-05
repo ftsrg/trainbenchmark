@@ -111,7 +111,7 @@ public class RDFGeneratorSail extends Generator {
 			switch (rdfGeneratorConfig.getRdfFormat()) {
 			case RDFXML:
 				fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-						+ (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "") + ".owl";
+						+ (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "") + ".rdf";
 				writer = new RDFXMLWriter(new FileWriter(fileName));
 				break;
 			case TURTLE:
