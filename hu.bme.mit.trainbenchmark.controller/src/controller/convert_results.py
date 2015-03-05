@@ -44,7 +44,8 @@ def write_to_csv(results, csvpath):
         os.mkdir(path[0])
     with open(csvpath, mode='w') as csvfile:
         headers = ["Size", "PhaseName", "MetricName", "Sequence",
-                   "MetricValue", "Scenario", "CaseName", "RunIndex", "Tool"]
+                   "MetricValue", "Scenario", "CaseName", "RunIndex", "Tool",
+                   "Iteration"]
         writer = csv.DictWriter(csvfile, headers)
         writer.writeheader()
 
@@ -62,6 +63,7 @@ def write_to_csv(results, csvpath):
             row.update({"MetricName": "Time"})
             row.update({"MetricValue": result["ReadTime"]})
             row.update({"Sequence": sequence})
+            row.update({"Iteration": 1})
             writer.writerow(row)
 
             checks = result["CheckTimes"]
@@ -75,12 +77,14 @@ def write_to_csv(results, csvpath):
             writer.writerow(row)
 
             checks.pop(0)
+            iteration = 1
             for i in range(0, len(checks)):
                 row.update({"PhaseName": "LHS"})
                 sequence += 1
                 row.update({"Sequence": sequence})
                 row.update({"MetricName": "Time"})
                 row.update({"MetricValue": lhs[i]})
+                row.update({"Iteration": iteration})
 
                 writer.writerow(row)
 
@@ -89,6 +93,7 @@ def write_to_csv(results, csvpath):
                 row.update({"Sequence": sequence})
                 row.update({"MetricName": "Time"})
                 row.update({"MetricValue": rhs[i]})
+                row.update({"Iteration": iteration})
 
                 writer.writerow(row)
 
@@ -97,8 +102,10 @@ def write_to_csv(results, csvpath):
                 row.update({"Sequence": sequence})
                 row.update({"MetricName": "Time"})
                 row.update({"MetricValue": checks[i]})
+                row.update({"Iteration": iteration})
 
                 writer.writerow(row)
+                iteration += 1
 
 
 if __name__ == "__main__":
