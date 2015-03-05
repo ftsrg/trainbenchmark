@@ -114,33 +114,10 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		graphDb.shutdown();
 	}
 
-	// filter
-	
-	@Override
-	public List<Node> filterVertices(List<Node> vertices, String vertexType) {
-		List<Node> matchedVertices = new ArrayList<Node>();
-		for (Node vertex : vertices){
-			if ( match(vertex, vertexType) ){
-				matchedVertices.add(vertex);
-			}
-		}
-		return matchedVertices;
-	}
-	
-	protected boolean match(final Node vertex, final String vertexType){
-		final Iterable<Label> labels = vertex.getLabels();
-		for (Label label : labels){
-			if (vertexType.equals(label.toString())){
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	// create
 
 	@Override
-	public void insertEdge(Node sourceVertex, Node targetVertex, String edgeType) {
+	public void insertEdge(Node sourceVertex, Node targetVertex, String edgeType)  throws IOException{
 		final RelationshipType relationship = DynamicRelationshipType.withName(edgeType);
 		sourceVertex.createRelationshipTo(targetVertex, relationship);
 	}
@@ -180,41 +157,27 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		return list;
 	}
 	
-	@Override
-	public List<Node> collectOutgoingConnectedVertices(Node sourceVertex,
-			String edgeType) {
-		return collectConnectedVertices(sourceVertex, edgeType, Direction.OUTGOING, false, null);
-	}
 	
 	@Override
-	public List<Node> collectOutgoingFilteredConnectedVertices(final Node sourceVertex, final String targetVertexType, 
-			final String edgeType) {
-		return collectConnectedVertices(sourceVertex, edgeType, Direction.OUTGOING, true, targetVertexType);
-
-	}
-	
-	protected List<Node> collectConnectedVertices(final Node source, final String edge, final Direction direction, 
-			final boolean filtered, final String targetType){
-		
-		final RelationshipType relationshipType = DynamicRelationshipType.withName(edge);
+	public List<Node> collectOutgoingConnectedVertices(final Node sourceVertex, final String targetVertexType, 
+			final String edgeType) throws IOException {
+		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
 		List<Node> neighbors = new ArrayList<Node>();
-		final Iterable<Relationship> relationships = source.getRelationships(
+		final Iterable<Relationship> relationships = sourceVertex.getRelationships(
 																			relationshipType,
-																			direction 
+																			Direction.OUTGOING 
 																			);
 		for (final Relationship relationship : relationships) {
-			final Node endNode = relationship.getEndNode(); 
-			if (filtered){
-				if (match(endNode, targetType)){
+			final Node endNode = relationship.getEndNode();
+			final Iterable<Label> labels = endNode.getLabels();
+			for (Label label : labels){
+				if (targetVertexType.equals(label.toString())){
 					neighbors.add(endNode);
 				}
 			}
-			else {
-				neighbors.add(endNode);
-			}
 		}
 		return neighbors;
-		
+
 	}
 	
 	// update

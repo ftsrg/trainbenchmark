@@ -84,15 +84,6 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 		model.close();
 	}
 
-	// filter
-	
-	@Override
-	public List<Resource> filterVertices(final List<Resource> vertices,
-			final String vertexType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// create
 
 	@Override
@@ -140,18 +131,11 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 	@Override
 	public List<Resource> collectOutgoingConnectedVertices(
-			final Resource sourceVertex, final String edgeType) {
+			Resource sourceVertex, String targetVertexType, String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<Resource> collectOutgoingFilteredConnectedVertices(
-			final Resource sourceVertex, final String targetVertexType, final String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// update
 
 	@Override

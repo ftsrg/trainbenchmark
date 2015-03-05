@@ -131,14 +131,6 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
-	// filter
-	
-	@Override
-	public List<URI> filterVertices(final List<URI> vertices, final String vertexType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// create
 
 	@Override
@@ -153,16 +145,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 		try {
 			for (final URI sourceVertexURI : sourceVertices) {
-				final URI targetVertexURI = f.createURI(BASE_PREFIX + targetVertexType + newVertexId);
-				newVertexId++;
-
-				// insert edge
-				final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
-				con.add(edgeStatement);
-
-				// set vertex type
-				final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
-				con.add(typeStatement);
+				insertVertexWithEdge(sourceVertexURI, vertexTypeURI, targetVertexType, edgeTypeURI); 
 			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
@@ -170,16 +153,44 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public URI insertVertexWithEdge(final URI sourceVertex, final String sourceVertexType,
-			final String targetVertexType, final String edgeType) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+	public URI insertVertexWithEdge(URI sourceVertex, String sourceVertexType,
+			String targetVertexType, String edgeType) throws IOException {
+		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
+		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
+		try {
+			return insertVertexWithEdge(sourceVertex, vertexTypeURI, targetVertexType, edgeTypeURI);
+		} catch (RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 
+	protected URI insertVertexWithEdge(final URI sourceVertexURI, final URI vertexTypeURI, 
+			final String targetVertexType, final URI edgeTypeURI) throws RepositoryException, IOException{
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+		final URI targetVertexURI = f.createURI(BASE_PREFIX + "_" + newVertexId);
+		newVertexId++;
+
+		// insert edge
+		final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
+		con.add(edgeStatement);
+
+		// set vertex type
+		final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
+		con.add(typeStatement);
+		return targetVertexURI;
+	}
+	
 	@Override
-	public void insertEdge(final URI sourceVertex, final URI targetVertex, final String edgeType) {
-		// TODO Auto-generated method stub
-		
+	public void insertEdge(URI sourceVertex, URI targetVertex, String edgeType) throws IOException {
+		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
+		final Statement edgeStatement = f.createStatement(sourceVertex, edgeTypeURI, targetVertex);
+		try {
+			con.add(edgeStatement);
+		} catch (RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 	
 	
@@ -205,19 +216,30 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<URI> collectOutgoingConnectedVertices(final URI sourceVertex,
-			final String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<URI> collectOutgoingConnectedVertices(URI sourceVertex, String targetVertexType,
+			String edgeType) throws IOException {
+		final URI typeURI = f.createURI(BASE_PREFIX + targetVertexType);
+		final List<URI> vertices = new ArrayList<>();
+		
+		final URI edgeURI = f.createURI(BASE_PREFIX + edgeType);
+		try {
+			RepositoryResult<Statement> statements = con.getStatements(sourceVertex, edgeURI, null, false);
+			while (statements.hasNext()) {
+				final Statement s = statements.next();
+				final URI obj = (URI) s.getObject();
+				RepositoryResult<Statement> statements2 = con.getStatements(obj, RDF.TYPE, typeURI, false); 
+				while (statements2.hasNext()) {
+					final Statement s2 = statements2.next();
+					final URI subject = (URI) s2.getSubject();
+					vertices.add(subject);
+				}
+			}
+		} catch (RepositoryException e) {
+			throw new IOException(e);
+		}
+		return vertices;
 	}
 
-	@Override
-	public List<URI> collectOutgoingFilteredConnectedVertices(final URI sourceVertex,
-			final String targetVertexType, final String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// update
 
 	@Override

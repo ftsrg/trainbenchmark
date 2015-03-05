@@ -110,14 +110,6 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 		MySQLProcess.stopSQLProcess();
 	}
 
-	// filter
-	
-	@Override
-	public List<Long> filterVertices(List<Long> vertices, String vertexType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// create
 
 	@Override
@@ -174,19 +166,12 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex,
+	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex, String targetVertexType,
 			String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<Long> collectOutgoingFilteredConnectedVertices(
-			Long sourceVertex, String targetVertexType, String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	// update
 
 	@Override
