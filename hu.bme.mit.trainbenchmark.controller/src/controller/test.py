@@ -11,6 +11,7 @@ from loader import Loader
 from generate import Generator
 import generate
 
+
 class GenerationTest(unittest.TestCase):
     
     @classmethod
@@ -33,7 +34,7 @@ class GenerationTest(unittest.TestCase):
         size = 0
         for scenario in self.models:
             for format in self.models[scenario]:
-                size = size + len(self.models[scenario][format])
+                size += len(self.models[scenario][format])
         return size
     
     def size(self, scenario, format):
@@ -128,5 +129,5 @@ class GenerationTest(unittest.TestCase):
         self.assertEqual(22, self.all_size())
 
 
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     unittest.main(verbosity=2, failfast=False)

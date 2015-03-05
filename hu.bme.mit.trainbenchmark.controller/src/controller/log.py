@@ -19,7 +19,7 @@ def init_log():
     os.makedirs("../../log/dist", exist_ok=True)
     os.makedirs("../../log/all", exist_ok=True)
     
-    if (os.path.exists("../../log/all/logs.txt") == False):
+    if not os.path.exists("../../log/all/logs.txt"):
         open("../../log/all/logs.txt", mode="a").close()
     
     # unique logging file
@@ -27,8 +27,9 @@ def init_log():
     log_file = log_file.replace(" ", "_")
     log_file = log_file.replace(":", "_")
     open(log_file, mode="w").close()
-    logging.basicConfig(filename=log_file, format="[%(levelname)s] " +\
-                        "Module:%(module)s, Message:%(message)s", level=logging.INFO)
+    logging.basicConfig(filename=log_file, format="[%(levelname)s] " +
+                        "Module:%(module)s, Message:%(message)s",
+                        level=logging.INFO)
     
     console_handler = logging.StreamHandler()
     # common logging file
@@ -36,13 +37,11 @@ def init_log():
     
     file_handler.setLevel(logging.INFO)
     console_handler.setLevel(logging.ERROR)
-    c_formatter = logging.Formatter("[%(levelname)s] Module:%(module)s" + \
+    c_formatter = logging.Formatter("[%(levelname)s] Module:%(module)s" +
                                     ", Message:%(message)s")
     console_handler.setFormatter(c_formatter)
-    f_formatter = logging.Formatter("%(asctime)s [%(levelname)s] Module:" + \
+    f_formatter = logging.Formatter("%(asctime)s [%(levelname)s] Module:" +
                                     "%(module)s, Message:%(message)s")
     file_handler.setFormatter(f_formatter)
     logging.getLogger().addHandler(console_handler)
     logging.getLogger().addHandler(file_handler)
-
-

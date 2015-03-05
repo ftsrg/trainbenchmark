@@ -38,9 +38,9 @@ class Generator():
         handler.set_working_directory(path)
         
         models_path = targets.get_common_model_path()
-        if(os.path.exists(models_path) == False):
+        if not os.path.exists(models_path):
             os.makedirs(models_path)
-        if (self.prevented == False):
+        if not self.prevented:
             self.prevent_multiple_generation(configurations)
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(self.models)
@@ -51,25 +51,22 @@ class Generator():
         for scenario in self.models:
             for format in self.models[scenario]:
                 target = targets.get_generator_jar(format)
-                if (target is None):
-                    logging.error("Generator .jar cannot be found of " + \
+                if target is None:
+                    logging.error("Generator .jar cannot be found of " +
                                   format)
                     return None
-                if (len(self.models[scenario][format]) > 0):
+                if len(self.models[scenario][format]) > 0:
                     for size in self.models[scenario][format]:
-                        logging.info("Generate model:(format:" + format + \
-                                     ", scenario:" + scenario + \
-                                     ", size:" + str(size)+ ")") 
-                        subprocess.call(["java", "-Xmx" + java_xmx,\
-                                         "-XX:MaxPermSize=" + \
-                                         java_maxpermsize, "-jar", target, \
-                                         "-scenario", scenario, \
-                                          "-size", str(size), \
-                                          "-workspacePath", path \
-                                        ])
+                        logging.info("Generate model:(format:" + format +
+                                     ", scenario:" + scenario +
+                                     ", size:" + str(size) + ")")
+                        subprocess.call(["java", "-Xmx" + java_xmx,
+                                         "-XX:MaxPermSize=" +
+                                         java_maxpermsize, "-jar", target,
+                                         "-scenario", scenario,
+                                         "-size", str(size),
+                                         "-workspacePath", path])
         
-
-
     def prevent_multiple_generation(self, configurations):
         """
         Gathers the mutual size parameters between configuration formats,
@@ -79,16 +76,16 @@ class Generator():
         unique_formats = set()
         unique_scenarios = set()
         for c in configurations:
-            if (c.format not in unique_formats):
+            if c.format not in unique_formats:
                 unique_formats.add(c.format)
         for c in configurations:
             for s in c.scenarios:
-                if (s not in unique_scenarios):
+                if s not in unique_scenarios:
                     unique_scenarios.add(s)
         
-        if ("Batch" in unique_scenarios):
+        if "Batch" in unique_scenarios:
             unique_scenarios.remove("Batch")
-        if ("Repair" not in unique_scenarios):
+        if "Repair" not in unique_scenarios:
             unique_scenarios.add("Repair")
         for s in unique_scenarios:
             formats = dict()
@@ -96,10 +93,10 @@ class Generator():
                 sizes = list()
                 for config in configurations:
                     if (
-                        (s in config.scenarios or \
-                        ("Batch" in config.scenarios and s == "Repair")) and \
+                        (s in config.scenarios or
+                        ("Batch" in config.scenarios and s == "Repair")) and
                         config.format == f
-                        ):
+                    ):
                         sizes = list(set(sizes) | set(config.sizes))
                     sizes.sort()
                 formats.update({f:sizes})
@@ -108,15 +105,13 @@ class Generator():
         self.prevented = True
             
 
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     log.init_log()
     logging.info("Main module:generate.")
     loader = Loader()
     configurations = loader.load()
-    if (configurations is None):
+    if configurations is None:
         logging.error("No valid configurations were loaded.")
         sys.exit(1)
     generator = Generator()
     generator.generate_models(configurations)
-
-        
