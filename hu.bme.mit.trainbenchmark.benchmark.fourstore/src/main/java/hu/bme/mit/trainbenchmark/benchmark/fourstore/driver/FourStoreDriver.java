@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.driver;
 
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
+import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,24 +31,22 @@ import com.google.common.collect.Multimap;
 
 import eu.mondo.driver.fourstore.FourStoreGraphDriverReadWrite;
 
-public class FourStoreDriver extends DatabaseDriver<Long> {
+public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 
 	protected Long newVertexId = null;
 
 	protected static final String CLUSTERNAME = "trainbenchmark_cluster";
 
 	protected FourStoreGraphDriverReadWrite driver;
-	protected final String basePrefix;
 	protected final String query;
 
-	public FourStoreDriver(final String basePrefix, final String queryPath) throws IOException {
+	public FourStoreDriver(final String queryPath) throws IOException {
 		// start with a clean slate: delete old directory
 		final String dbPath = "/var/lib/4store/" + CLUSTERNAME;
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
 		}
 
-		this.basePrefix = basePrefix;
 		this.query = FileUtils.readFileToString(new File(queryPath));
 		this.driver = new FourStoreGraphDriverReadWrite(CLUSTERNAME);
 		driver.start();
@@ -83,13 +81,13 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	}
 
 	// filter
-	
+
 	@Override
-	public List<Long> filterVertices(List<Long> vertices, String vertexType) {
+	public List<Long> filterVertices(final List<Long> vertices, final String vertexType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	// create
 
 	@Override
@@ -98,90 +96,67 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 		if (newVertexId == null) {
 			newVertexId = determineNewVertexId();
 		}
-		
+
 		final Multimap<String, String> edges = ArrayListMultimap.create();
 
 		for (final Long vertex : vertices) {
-			final String source = basePrefix + ID_PREFIX + vertex;
-			final String target = basePrefix + ID_PREFIX + newVertexId;
-			System.out.println(source + "--->" + target);
+			final String source = BASE_PREFIX + ID_PREFIX + vertex;
+			final String target = BASE_PREFIX + ID_PREFIX + newVertexId;
 			edges.put(source, target);
 			newVertexId++;
 		}
 
 		System.out.println(edges);
 
-		final String fullEdgeType = basePrefix + edgeType;
-		final String fullTargetVertexType = basePrefix + targetVertexType;
+		final String fullEdgeType = BASE_PREFIX + edgeType;
+		final String fullTargetVertexType = BASE_PREFIX + targetVertexType;
 
 		driver.insertEdgesWithVertex(edges, fullEdgeType, fullTargetVertexType);
 	}
 
 	@Override
-	public Long insertVertexWithEdge(Long sourceVertex,
-			String sourceVertexType, String targetVertexType, String edgeType)
-			throws IOException {
+	public Long insertVertexWithEdge(final Long sourceVertex, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void insertEdge(Long sourceVertex, Long targetVertex, String edgeType) {
+	public void insertEdge(final Long sourceVertex, final Long targetVertex, final String edgeType) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	// read
-
-	private Long determineNewVertexId() throws IOException {
-		Long id = 50L;
-		// safety measure to avoid infinite loop in case of a driver bug
-		int iterationCount = 1;
-
-		final String askQuery = "PREFIX base: <" + basePrefix + "> " //
-				+ "PREFIX rdf:  <" + RDFConstants.RDF_TYPE + "> " //
-				+ "ASK { base:" + RDFConstants.ID_PREFIX + "%d ?y ?z }";
-		while (iterationCount <= 20 && driver.ask(String.format(askQuery, id))) {
-			id *= 2;
-			iterationCount++;
-		}
-		if (iterationCount > 20) {
-			throw new IOException("Could not generate new unique id.");
-		}
-
-		return id;
-	}
 
 	@Override
 	public List<Long> collectVertices(final String type) throws IOException {
-		return driver.collectVertices(basePrefix + type);
+		return driver.collectVertices(BASE_PREFIX + type);
 	}
 
 	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex,
-			String edgeType) {
+	public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex, final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Long> collectOutgoingFilteredConnectedVertices(
-			Long sourceVertex, String targetVertexType, String edgeType) {
+	public List<Long> collectOutgoingFilteredConnectedVertices(final Long sourceVertex, final String targetVertexType, final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	// update
 
 	@Override
 	public void updateProperties(final List<Long> vertices, final String vertexType, final String propertyName,
 			final AttributeOperation attributeOperation) throws IOException {
-		final String fullPropertyName = basePrefix + propertyName;
+		final String fullPropertyName = BASE_PREFIX + propertyName;
 		final Map<String, Object> properties = new HashMap<>();
 
 		final Multimap<Long, Object> originalValues = driver.collectProperties(fullPropertyName);
 		for (final Long vertex : vertices) {
-			final String key = basePrefix + ID_PREFIX + vertex;
+			final String key = BASE_PREFIX + ID_PREFIX + vertex;
 			final int originalValue = (int) originalValues.get(vertex).iterator().next();
 			final int newValue = attributeOperation.op(originalValue);
 			properties.put(key, newValue);
@@ -204,10 +179,10 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 		// WHERE {?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
 		// <http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#Route>}
 		// "
-		final String predicateString = String.format("<%s%s>", basePrefix, edgeType);
+		final String predicateString = String.format("<%s%s>", BASE_PREFIX, edgeType);
 
 		for (final Long vertex : vertices) {
-			final String subjectString = String.format("<%s%s%d>", basePrefix, ID_PREFIX, vertex);
+			final String subjectString = String.format("<%s%s%d>", BASE_PREFIX, ID_PREFIX, vertex);
 
 			final String delete = String.format( //
 					"DELETE {%s %s ?z} WHERE {%s %s ?z}", //
@@ -222,15 +197,15 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 		for (final Long vertex : vertices) {
 			final String query = String.format( //
 					"DELETE {?x <%s> <%s%s%d>} WHERE {?x <%s> <%s%s%d>}", //
-					basePrefix + edgeType, basePrefix, ID_PREFIX, vertex, //
-					basePrefix + edgeType, basePrefix, ID_PREFIX, vertex);
+					BASE_PREFIX + edgeType, BASE_PREFIX, ID_PREFIX, vertex, //
+					BASE_PREFIX + edgeType, BASE_PREFIX, ID_PREFIX, vertex);
 			driver.runUpdate(query);
 		}
 	}
 
 	@Override
 	public void deleteOneOutgoingEdge(final List<Long> vertices, final String vertexType, final String edgeType) throws IOException {
-		final Multimap<Long, Long> edges = driver.collectEdges(basePrefix + edgeType);
+		final Multimap<Long, Long> edges = driver.collectEdges(BASE_PREFIX + edgeType);
 
 		for (final Long vertex : vertices) {
 			final Collection<Long> outgoingEdges = edges.get(vertex);
@@ -239,9 +214,9 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 			}
 			final Long targetVertex = outgoingEdges.iterator().next();
 
-			final String subjectString = String.format("<%s%s%d>", basePrefix, ID_PREFIX, vertex);
-			final String predicateString = String.format("<%s%s>", basePrefix, edgeType);
-			final String objectString = String.format("<%s%s%d>", basePrefix, ID_PREFIX, targetVertex);
+			final String subjectString = String.format("<%s%s%d>", BASE_PREFIX, ID_PREFIX, vertex);
+			final String predicateString = String.format("<%s%s>", BASE_PREFIX, edgeType);
+			final String objectString = String.format("<%s%s%d>", BASE_PREFIX, ID_PREFIX, targetVertex);
 
 			final String delete = String.format( //
 					"DELETE {%s %s %s} WHERE {%s %s %s}", //
@@ -254,6 +229,12 @@ public class FourStoreDriver extends DatabaseDriver<Long> {
 	@Override
 	public void deleteSingleOutgoingEdge(final List<Long> vertices, final String vertexType, final String edgeType) throws IOException {
 		deleteAllOutgoingEdges(vertices, vertexType, edgeType);
+	}
+
+	// utility
+
+	protected boolean ask(final String askQuery) throws IOException {
+		return driver.ask(askQuery);
 	}
 
 }

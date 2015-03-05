@@ -11,9 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
+import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,7 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.BindingSet;
+import org.openrdf.query.BooleanQuery;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.QueryLanguage;
@@ -45,19 +47,17 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.memory.MemoryStore;
 import org.openrdf.sail.memory.model.IntegerMemLiteral;
 
-public class SesameDriver extends DatabaseDriver<URI> {
+public class SesameDriver extends RDFDatabaseDriver<URI> {
 
-	protected long newVertexId = 1000000000;
+	protected Long newVertexId = null;
 
-	protected String basePrefix;
 	protected String query;
 	protected RepositoryConnection con;
 	protected Repository repository;
 	protected ValueFactory f;
 	protected TupleQuery tupleQuery;
 
-	public SesameDriver(final String basePrefix, final String queryPath) throws IOException {
-		this.basePrefix = basePrefix;
+	public SesameDriver(final String queryPath) throws IOException {
 		this.query = FileUtils.readFileToString(new File(queryPath));
 	}
 
@@ -134,7 +134,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	// filter
 	
 	@Override
-	public List<URI> filterVertices(List<URI> vertices, String vertexType) {
+	public List<URI> filterVertices(final List<URI> vertices, final String vertexType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -144,13 +144,16 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	@Override
 	public void insertVertexWithEdge(final List<URI> sourceVertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
-		final URI vertexTypeURI = f.createURI(basePrefix + targetVertexType);
-		final URI edgeTypeURI = f.createURI(basePrefix + edgeType);
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+
+		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
+		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
 
 		try {
 			for (final URI sourceVertexURI : sourceVertices) {
-				// TODO think about alternative solutions
-				final URI targetVertexURI = f.createURI(basePrefix + targetVertexType + newVertexId);
+				final URI targetVertexURI = f.createURI(BASE_PREFIX + targetVertexType + newVertexId);
 				newVertexId++;
 
 				// insert edge
@@ -167,14 +170,14 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	@Override
-	public URI insertVertexWithEdge(URI sourceVertex, String sourceVertexType,
-			String targetVertexType, String edgeType) throws IOException {
+	public URI insertVertexWithEdge(final URI sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void insertEdge(URI sourceVertex, URI targetVertex, String edgeType) {
+	public void insertEdge(final URI sourceVertex, final URI targetVertex, final String edgeType) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -184,7 +187,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 
 	@Override
 	public List<URI> collectVertices(final String type) throws IOException {
-		final URI typeURI = f.createURI(basePrefix + type);
+		final URI typeURI = f.createURI(BASE_PREFIX + type);
 		final List<URI> vertices = new ArrayList<>();
 
 		try {
@@ -202,15 +205,15 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<URI> collectOutgoingConnectedVertices(URI sourceVertex,
-			String edgeType) {
+	public List<URI> collectOutgoingConnectedVertices(final URI sourceVertex,
+			final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<URI> collectOutgoingFilteredConnectedVertices(URI sourceVertex,
-			String targetVertexType, String edgeType) {
+	public List<URI> collectOutgoingFilteredConnectedVertices(final URI sourceVertex,
+			final String targetVertexType, final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -220,7 +223,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 	@Override
 	public void updateProperties(final List<URI> vertices, final String vertexType, final String propertyName,
 			final AttributeOperation attributeOperation) throws IOException {
-		final URI typeURI = f.createURI(basePrefix + propertyName);
+		final URI typeURI = f.createURI(BASE_PREFIX + propertyName);
 
 		try {
 			for (final URI vertex : vertices) {
@@ -274,7 +277,7 @@ public class SesameDriver extends DatabaseDriver<URI> {
 			throws IOException {
 		final List<Statement> itemsToRemove = new ArrayList<>();
 
-		final URI edge = f.createURI(basePrefix + edgeType);
+		final URI edge = f.createURI(BASE_PREFIX + edgeType);
 
 		try {
 			for (final URI vertex : vertices) {
@@ -315,6 +318,17 @@ public class SesameDriver extends DatabaseDriver<URI> {
 			ids.add(id);
 		}
 		return ids;
+	}
+
+	@Override
+	protected boolean ask(final String askQuery) throws IOException {
+		try {
+			final BooleanQuery q = con.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
+			final boolean result = q.evaluate();
+			return result;
+		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
+			throw new IOException(e);
+		}
 	}
 
 }
