@@ -27,6 +27,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/zsolt/git/trainbenchmark/hu.bme.mit.trainbenchmark.benchmark.virtuoso/src/main/resources/virt_sesame2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

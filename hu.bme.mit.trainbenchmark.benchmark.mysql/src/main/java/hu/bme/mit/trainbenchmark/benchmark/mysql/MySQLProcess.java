@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.util.Memory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,42 +21,41 @@ import java.io.InputStreamReader;
 
 public class MySQLProcess {
 
-	public static Memory getMemoryUsage(BenchmarkConfig bc) throws IOException {
-		String getMemoryCommand = bc.getWorkspacePath()
+	public static long getMemoryUsage(final BenchmarkConfig bc) throws IOException {
+		final String getMemoryCommand = bc.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.mysql/src/main/resources/scripts/get-mysql-memory.sh";
-		Memory memory = new Memory();
-		Process child = Runtime.getRuntime().exec(getMemoryCommand);
+		final Process child = Runtime.getRuntime().exec(getMemoryCommand);
 
-		InputStream in = child.getInputStream();
-		BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		final InputStream in = child.getInputStream();
+		final BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
-		String vmRssStr = br.readLine();
-		memory.setRss(Integer.parseInt(vmRssStr));
+		final String vmRssStr = br.readLine();
+		final long memoryUsage  = Long.parseLong(vmRssStr);
 
 		in.close();
-		return memory;
+		return memoryUsage;
 	}
 
 	public static void startSQLProcess() throws IOException {
 		stopSQLProcess();
 
-		Runtime rt = Runtime.getRuntime();
-		String[] command = { "sudo", "service", "mysql", "start" };
+		final Runtime rt = Runtime.getRuntime();
+		final String[] command = { "sudo", "service", "mysql", "start" };
 		try {
-			Process pr = rt.exec(command);
+			final Process pr = rt.exec(command);
 			pr.waitFor();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new IOException(e);
 		}
 	}
 
 	public static void stopSQLProcess() throws IOException {
-		Runtime rt = Runtime.getRuntime();
-		String[] command = { "sudo", "service", "mysql", "stop" };
+		final Runtime rt = Runtime.getRuntime();
+		final String[] command = { "sudo", "service", "mysql", "stop" };
 		try {
-			Process pr = rt.exec(command);
+			final Process pr = rt.exec(command);
 			pr.waitFor();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new IOException(e);
 		}
 	}
