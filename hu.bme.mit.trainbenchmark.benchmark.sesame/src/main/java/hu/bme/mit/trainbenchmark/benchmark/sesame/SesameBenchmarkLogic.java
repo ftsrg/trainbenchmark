@@ -13,17 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.config.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
 public class SesameBenchmarkLogic extends GenericBenchmarkLogic {
 
-	protected RDFBenchmarkConfig sbc;
+	protected RDFBenchmarkConfig rbc;
 
 	public SesameBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);
-		bc = sbc = new RDFBenchmarkConfig(args, getTool());
+		bc = rbc = new RDFBenchmarkConfig(args, getTool());
 	}
 	
 	@Override
