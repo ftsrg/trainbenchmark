@@ -131,6 +131,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
+
+	
 	// create
 
 	@Override
@@ -262,8 +264,10 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 				}
 
 				// get the object of the first removed statement
-				final IntegerMemLiteral integerMemLiteral = (IntegerMemLiteral) statement.getObject();
-				final Integer currentValue = new Integer(integerMemLiteral.stringValue());
+//				final IntegerMemLiteral integerMemLiteral = (IntegerMemLiteral) statement.getObject().stringValue();
+				
+//				final Integer currentValue = new Integer(integerMemLiteral.stringValue());
+				final Integer currentValue = new Integer(statement.getObject().stringValue());
 				final Literal literal = f.createLiteral(attributeOperation.op(currentValue));
 
 				con.add(vertex, typeURI, literal);

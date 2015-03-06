@@ -57,13 +57,13 @@ def install_neo4j_deps(path):
 def build_virtuoso(package):
     """Build virtuso with maven by adding a local library to the process.
     """
-    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" +\
+    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
            "/src/main/resources/virt_sesame2.jar"
     subprocess.call(["mvn", "-P", package, "install:install-file",
                      "-Dfile=" + file, "-DgroupId=virtuoso",
                      "-DartifactId=virtuoso-sesame2", "-Dversion=2.7.3",
                      "-Dpackaging=jar"])
-    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" +\
+    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
            "/src/main/resources/virtjdbc4.jar"
     subprocess.call(["mvn", "-P", package, "install:install-file",
                      "-Dfile=" + file, "-DgroupId=com.virtuoso.virtjdbc4",
@@ -71,9 +71,62 @@ def build_virtuoso(package):
                      "-Dpackaging=jar"])
 
 
+def build_allegro(package):
+    print("CALLED")
+    file = "./hu.bme.mit.trainbenchmark.benchmark.allegro" + \
+           "/src/main/resources/agraph-5.0.jar"
+    #org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file
+    subprocess.call(["mvn", "-P", package, "install:install-file",
+                     "-Dfile=" + file, "-DgroupId=com.franz",
+                     "-DartifactId=agraph", "-Dversion=5.0.0",
+                     "-Dpackaging=jar"])
+
+    file = "./hu.bme.mit.trainbenchmark.benchmark.allegro" + \
+           "/src/main/resources/openrdf-sesame-2.7.11-onejar.jar"
+    subprocess.call(["mvn", "-P", package, "install:install-file",
+                     "-Dfile=" + file, "-DgroupId=org.openrdf.sesame",
+                     "-DartifactId=sesame-onejar", "-Dversion=2.7.11",
+                     "-Dpackaging=jar"])
+
+    # file = "./hu.bme.mit.trainbenchmark.benchmark.allegro" + \
+    #        "/src/main/resources/commons-httpclient-3.1.jar"
+    # subprocess.call(["mvn", "-P", package, "install:install-file",
+    #                  "-Dfile=" + file, "-DgroupId=org.apache.httpcomponents",
+    #                  "-DartifactId=httpclient", "-Dversion=3.1.0",
+    #                  "-Dpackaging=jar"])
+
+    file = "./hu.bme.mit.trainbenchmark.benchmark.allegro" + \
+           "/src/main/resources/commons-io-2.4.jar"
+    subprocess.call(["mvn", "-P", package, "install:install-file",
+                     "-Dfile=" + file, "-DgroupId=org.apache.commons",
+                     "-DartifactId=commons.io", "-Dversion=2.4.0",
+                     "-Dpackaging=jar"])
+
+    file = "./hu.bme.mit.trainbenchmark.benchmark.allegro" + \
+           "/src/main/resources/commons-pool-1.5.6.jar"
+    subprocess.call(["mvn", "-P", package, "install:install-file",
+                     "-Dfile=" + file, "-DgroupId=org.apache.commons",
+                     "-DartifactId=commons.pool", "-Dversion=1.5.6",
+                     "-Dpackaging=jar"])
+
+    file = "./hu.bme.mit.trainbenchmark.benchmark.allegro" + \
+           "/src/main/resources/commons-codec-1.3.jar"
+    subprocess.call(["mvn", "-P", package, "install:install-file",
+                     "-Dfile=" + file, "-DgroupId=org.apache.commons",
+                     "-DartifactId=commons.codec", "-Dversion=1.3.0",
+                     "-Dpackaging=jar"])
+    
+    file = "./hu.bme.mit.trainbenchmark.benchmark.allegro" + \
+           "/src/main/resources/json.jar"
+    subprocess.call(["mvn", "-P", package, "install:install-file",
+                     "-Dfile=" + file, "-DgroupId=org.json",
+                     "-DartifactId=json", "-Dversion=1.0.0",
+                     "-Dpackaging=jar"])
+
 install_deps = {
-    'neo4j':install_neo4j_deps
+    'neo4j': install_neo4j_deps
 }
 build_deps = {
-    'virtuoso':build_virtuoso
+    'virtuoso': build_virtuoso,
+    'allegro': build_allegro
 }
