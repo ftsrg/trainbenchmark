@@ -13,15 +13,18 @@
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [
-    "RouteSensor",
-    "SignalNeighbor"
+    "ConnectedSegments",
+    "PosLength",
+    "SwitchSensor"
   ],
   "Scenarios": [
-    "User"
+    "User",
+    "Repair"
   ],
   "Series": 1,
   "Tools": [
-    "sesame"
+    "allegro"
   ],
-  "UniqueConfigurations": []
+  "UniqueConfigurations": [
+	]
 }
