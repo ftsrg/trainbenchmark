@@ -16,30 +16,30 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class RDFBenchmarkConfig extends BenchmarkConfig {
-
-	protected boolean inferencing;
-
-	public RDFBenchmarkConfig(final String[] args, final String tool) throws ParseException {
-		super(args, tool);
-	}
-
-	@Override
-	protected void initOptions() {
-		super.initOptions();
-
-		options.addOption("inferencing", true, "RDF: type of inference");
-	}
-
-	@Override
-	public void processArguments(final String[] args) throws ParseException {
-		super.processArguments(args);
-
-		inferencing = cmd.hasOption("inferencing");
-	}
-
-	public boolean isInferencing() {
-		return inferencing;
-	}
-
-}
+//public class RDFBenchmarkConfig extends BenchmarkConfig {
+//
+//	protected boolean inferencing;
+//
+//	public RDFBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+//		super(args, tool);
+//	}
+//
+//	@Override
+//	protected void initOptions() {
+//		super.initOptions();
+//
+//		options.addOption("inferencing", true, "RDF: type of inference");
+//	}
+//
+//	@Override
+//	public void processArguments(final String[] args) throws ParseException {
+//		super.processArguments(args);
+//
+//		inferencing = cmd.hasOption("inferencing");
+//	}
+//
+//	public boolean isInferencing() {
+//		return inferencing;
+//	}
+//
+//}

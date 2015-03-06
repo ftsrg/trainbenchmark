@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.config.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 import java.io.IOException;
@@ -23,11 +23,11 @@ import org.openrdf.model.URI;
 
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> {
 
-	protected RDFBenchmarkConfig sbc;
+	protected RDFBenchmarkConfig rbc;
 
 	@Override
 	protected void init() throws IOException {
-		this.sbc = (RDFBenchmarkConfig) bc;
+		this.rbc = (RDFBenchmarkConfig) bc;
 
 		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName() + ".sparql";
 		driver = new SesameDriver(queryPath);
