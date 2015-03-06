@@ -57,13 +57,13 @@ def install_neo4j_deps(path):
 def build_virtuoso(package):
     """Build virtuso with maven by adding a local library to the process.
     """
-    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" +\
+    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
            "/src/main/resources/virt_sesame2.jar"
     subprocess.call(["mvn", "-P", package, "install:install-file",
                      "-Dfile=" + file, "-DgroupId=virtuoso",
                      "-DartifactId=virtuoso-sesame2", "-Dversion=2.7.3",
                      "-Dpackaging=jar"])
-    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" +\
+    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
            "/src/main/resources/virtjdbc4.jar"
     subprocess.call(["mvn", "-P", package, "install:install-file",
                      "-Dfile=" + file, "-DgroupId=com.virtuoso.virtjdbc4",
@@ -71,9 +71,18 @@ def build_virtuoso(package):
                      "-Dpackaging=jar"])
 
 
+def build_allegro(package):
+    current_directory = os.getcwd()
+    handler.set_working_directory()
+    handler.set_working_directory("../../shell-scripts/")
+    subprocess.call(["./build_allegro.sh"])
+    
+    handler.set_working_directory(current_directory)
+
 install_deps = {
-    'neo4j':install_neo4j_deps
+    'neo4j': install_neo4j_deps
 }
 build_deps = {
-    'virtuoso':build_virtuoso
+    'virtuoso': build_virtuoso,
+    'allegro': build_allegro
 }
