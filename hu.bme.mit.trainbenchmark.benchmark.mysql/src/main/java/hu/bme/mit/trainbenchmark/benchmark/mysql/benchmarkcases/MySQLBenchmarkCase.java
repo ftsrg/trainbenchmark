@@ -47,7 +47,7 @@ public abstract class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 	@Override
 	protected long getMemoryUsage() throws IOException {
 		Util.runGC();
-		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() + MySQLProcess.getMemoryUsage(bc).getMemory() * 1024;
+		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() + MySQLProcess.getMemoryUsage(bc) * 1024;
 	}
 
 }
