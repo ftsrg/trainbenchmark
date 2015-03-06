@@ -38,7 +38,7 @@ def build_unique_tools(package):
 
 def install_neo4j_deps(path):
     """
-    Clones and builds neo4h-shell-tools and rdf-graph-drivers.
+    Clones and builds neo4j-shell-tools and rdf-graph-drivers.
     """
     # change back working directory later, so store it now
     current_directory = os.getcwd() 
@@ -55,20 +55,13 @@ def install_neo4j_deps(path):
 
 
 def build_virtuoso(package):
-    """Build virtuso with maven by adding a local library to the process.
-    """
-    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
-           "/src/main/resources/virt_sesame2.jar"
-    subprocess.call(["mvn", "-P", package, "install:install-file",
-                     "-Dfile=" + file, "-DgroupId=virtuoso",
-                     "-DartifactId=virtuoso-sesame2", "-Dversion=2.7.3",
-                     "-Dpackaging=jar"])
-    file = "./hu.bme.mit.trainbenchmark.benchmark.virtuoso" + \
-           "/src/main/resources/virtjdbc4.jar"
-    subprocess.call(["mvn", "-P", package, "install:install-file",
-                     "-Dfile=" + file, "-DgroupId=com.virtuoso.virtjdbc4",
-                     "-DartifactId=virtjdbc4", "-Dversion=3.0",
-                     "-Dpackaging=jar"])
+    current_directory = os.getcwd()
+    handler.set_working_directory()
+    handler.set_working_directory("../../shell-scripts/")
+    subprocess.call(["./build_virtuoso.sh"])
+
+    handler.set_working_directory(current_directory)
+
 
 
 def build_allegro(package):
