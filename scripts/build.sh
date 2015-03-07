@@ -6,4 +6,4 @@ export MAVEN_OPTS="-XX:MaxPermSize=128M"
 
 ./scripts/build-artifacts.sh
 
-mvn clean install -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,fourstore,jena,sesame,mysql,allegro --fail-at-end
+mvn clean install -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,fourstore,jena,sesame,mysql,allegro,virtuoso --fail-at-end
