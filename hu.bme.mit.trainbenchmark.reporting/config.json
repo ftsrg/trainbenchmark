@@ -2,17 +2,27 @@
   "Dimensions": {
     "X_Dimensions": {
       "Size": true,
-      "Iteration": true
+      "Iteration": false
     },
     "Groups": {
       "Case": true,
-      "Tool": true
+      "Tool": false
     }
   },
   "Summarize_Functions": [
-    ["ReCheck"],
-    ["Read"],
-    ["LHS", "RHS"]
-    ],
-  "Extension": "png"
+    {
+      "Phases": [
+        "Read",
+        "Check",
+        "ReCheck"
+      ]
+    },
+    {
+      "Phases": [
+        "ReCheck",
+        "LHS"
+      ]
+    }
+  ],
+  "Extension": "pdf"
 }
