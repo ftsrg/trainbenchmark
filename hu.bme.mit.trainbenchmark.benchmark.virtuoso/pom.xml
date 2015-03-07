@@ -30,16 +30,6 @@
     </plugins>
   </build>
   
-  <!--
-  <repositories>
-   
-  	<repository>
-  		<id>thirdparty</id>
-  		<url>file:thirdparty</url>
-  	</repository>
-  
-  </repositories>
-  -->
   <dependencies>
   	
   	<dependency>
@@ -61,10 +51,16 @@
 	</dependency> 
 	
 	<dependency>
-		<groupId>org.openrdf.sesame</groupId>
-		<artifactId>sesame-runtime</artifactId>
-		<version>2.7.9</version>
+		<groupId>hu.bme.mit.trainbenchmark</groupId>
+		<artifactId>hu.bme.mit.trainbenchmark.benchmark.sesame</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</dependency>
+	
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.openrdf.sesame</groupId> -->
+<!-- 		<artifactId>sesame-runtime</artifactId> -->
+<!-- 		<version>2.7.9</version> -->
+<!-- 	</dependency> -->
 	
 	<!-- turn the logger off -->
 
@@ -73,26 +69,7 @@
 		<artifactId>slf4j-nop</artifactId>
 		<version>1.7.10</version>
 	</dependency>
-	
-	<!-- To prevent missing artifact error in Eclipse, use this-->
-	<!--
-	<dependency>
-		<groupId>com.virtuoso.virtjdbc4</groupId>
-		<artifactId>virtjdbc4</artifactId>
-		<version>3.0</version>
-		<scope>system</scope>
-		<systemPath>${basedir}/src/main/resources/virtjdbc4.jar</systemPath>
-	</dependency>
-	
-	<dependency>
-		<groupId>virtuoso</groupId>
-		<artifactId>virtuoso-sesame2</artifactId>
-		<version>2.7.3</version>
-		<scope>system</scope>
-		<systemPath>${basedir}/src/main/resources/virt_sesame2.jar</systemPath>
-	</dependency>
-	-->
-	
+		
 	<!-- Install manually by mvn install:install-file -->
 	<dependency>
  		<groupId>com.virtuoso.virtjdbc4</groupId>

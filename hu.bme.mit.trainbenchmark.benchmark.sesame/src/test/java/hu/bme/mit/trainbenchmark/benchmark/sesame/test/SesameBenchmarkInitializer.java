@@ -30,7 +30,6 @@ public class SesameBenchmarkInitializer extends BenchmarkInitializer {
 				"-workspacePath", "../"
 			};
 		// @formatter:on
-
 		return new SesameBenchmarkLogic(args);
 	}
 

@@ -12,10 +12,9 @@
   "MaxSize": 8,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
-  "Queries": [
-    "ConnectedSegments",
-    "PosLength",
-    "SwitchSensor"
+  "Queries": [ 
+	"PosLength",
+    "ConnectedSegments"
   ],
   "Scenarios": [
     "User",
@@ -23,7 +22,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "allegro"
+    "virtuoso"
   ],
   "UniqueConfigurations": [
 	]
