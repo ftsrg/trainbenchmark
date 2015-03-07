@@ -3,13 +3,13 @@ library("ggplot2",quietly=T, verbose=F, warn.conflicts=FALSE)
 library("plyr", quietly=T, verbose=F, warn.conflicts=FALSE)
 source("functions.R")
 source("plot.R")
+source("constants.R")
 
 
 
 
-resultsPath <- "../results/csv/results.csv"
 results <-read.csv(resultsPath, header=TRUE, sep=',')
-configPath <- "./config.json"
+
 config <- fromJSON(configPath)
 
 if (validConfig(results, config$Summarize_Functions$Phases) == FALSE){
@@ -20,12 +20,7 @@ if (validConfig(results, config$Summarize_Functions$Phases) == FALSE){
 uniqueScenarios <- unique(results$Scenario)
 index <- 0
 settings <- PlotSettings()
-yLabel <- "Time (ms)"
-yAxis <- "Log10"
-# scaling
-results$MetricValue <- results$MetricValue / 10**6
-
-rootPath <- c("../diagrams/")
+results$MetricValue <- results$MetricValue / scaleDivisor
 createFolders(rootPath, uniqueScenarios)
 
 for(func in config$Summarize_Functions$Phases){
