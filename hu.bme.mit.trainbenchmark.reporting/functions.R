@@ -33,6 +33,13 @@ savePlot <-function(results, settings, func, fileName){
   minValue <- min(data$MetricValue)
   maxValue <- max(data$MetricValue)
 
+  if (settings@xDimension == "Size"){
+    xLabels <- getXLabels(artifacts)
+  }
+  else{
+    xLabels <- c(artifacts)
+  }
+  
   plot <- ggplot(data,aes_string(x = settings@xDimension, y = settings@yDimension)) +
     geom_line(aes_string(group = settings@group, colour=settings@group), size=lineSize) + 
     geom_point(aes_string(shape = settings@group, colour=settings@group), size=pointSize) +
@@ -43,10 +50,11 @@ savePlot <-function(results, settings, func, fileName){
     bwTheme
 #     scale_x_log10(breaks = c(artifacts), labels = c(artifacts))
   if (settings@xAxis == "Continuous"){
-    plot <- plot + scale_x_continuous(breaks = c(artifacts), labels = c(artifacts))
+    plot <- plot + scale_x_continuous(breaks = c(artifacts), labels = xLabels)
+#     plot <- plot + scale_x_continuous(breaks = c(artifacts), labels = labels)
   }
   else if (settings@xAxis == "Log10"){
-    plot <- plot + scale_x_log10(breaks = c(artifacts), labels = c(artifacts))
+    plot <- plot + scale_x_log10(breaks = c(artifacts), labels = xLabels)
   }
 
   if (settings@yAxis == "Continuous"){
@@ -99,4 +107,12 @@ concatPhases <- function(phases){
     }
   }
   return(merged)
+}
+
+getXLabels <- function(artifacts){
+  ticks <- c()
+  for(size in artifacts){
+    ticks <- c(ticks, labels[[as.character(size)]])
+  }
+  return(ticks)
 }
