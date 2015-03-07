@@ -1,6 +1,4 @@
 savePlot <-function(results, settings, func, fileName){
-  results$MetricValue <- results$MetricValue / 10**6
-  
   if(length(func) > 1){
     first <- TRUE
     for(phase in func){
@@ -54,4 +52,24 @@ savePlot <-function(results, settings, func, fileName){
   }
   ggsave(plot,filename = fileName, width=14, height=7, dpi=192)
   print(fileName)
+}
+
+validConfig <- function(results, functions){
+  uniquePhases <- unique(results$PhaseName)
+  for(func in functions){
+    if(length(func) > 1){
+      for(phase in func){
+        if(phase %in% uniquePhases == FALSE){
+          return(FALSE)
+        }
+      }
+    }
+    else{
+      if(func %in% uniquePhases == FALSE){
+        return(FALSE)
+      }
+    }
+  }
+  return(TRUE)
+  
 }
