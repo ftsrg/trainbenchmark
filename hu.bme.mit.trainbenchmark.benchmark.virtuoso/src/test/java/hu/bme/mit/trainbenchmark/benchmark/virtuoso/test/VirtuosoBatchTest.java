@@ -12,11 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.UserTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class VirtuosoUserTest extends UserTest {
+public class VirtuosoBatchTest extends BatchTest {
 
-	public VirtuosoUserTest(){
+	public VirtuosoBatchTest() {
 		bi = new VirtuosoBenchmarkInitializer();
 	}
 }
