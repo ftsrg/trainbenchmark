@@ -17,13 +17,19 @@ savePlot <-function(results, settings, func, fileName){
     merged <- subset(results, PhaseName == func)
   }
   
-  if (nrow(merged) == 0) 
+  if (nrow(merged) == 0) {
+    print("Empty merged frame")
     return()
+  }
   if (settings@xDimension == "Size"){
     # summarise the iterations
-    data <- ddply(merged, c("Size", "CaseName", "PhaseName", "Tool", "Scenario", "RunIndex", "MetricName"),
+    data <- ddply(merged, c("Size", "CaseName", "Tool", "Scenario", "RunIndex", "MetricName"),
                   summarize, MetricValue=sum(MetricValue))
-    data <- ddply(data, c("Size", "CaseName", "PhaseName" ,"Tool", "Scenario", "MetricName"),
+    data <- ddply(data, c("Size", "CaseName", "Tool", "Scenario", "MetricName"),
+                  summarize, MetricValue=median(MetricValue))
+  }
+  else if(settings@xDimension == "Iteration"){
+    data <- ddply(merged, c("CaseName", "Tool", "Scenario", "MetricName", "Iteration"),
                   summarize, MetricValue=median(MetricValue))
   }
   artifacts <- unique(data[[settings@xDimension]])
@@ -38,9 +44,14 @@ savePlot <-function(results, settings, func, fileName){
     ) + 
     ylab(settings@yLabel) +
     xlab(settings@xLabel) +
-    ggtitle(label = settings@title) +
-    scale_x_log10(breaks = c(artifacts), labels = c(artifacts))
-  
+    ggtitle(label = settings@title)
+#     scale_x_log10(breaks = c(artifacts), labels = c(artifacts))
+  if (settings@xAxis == "Continuous"){
+    plot <- plot + scale_x_continuous(breaks = c(artifacts), labels = c(artifacts))
+  }
+  else if (settings@xAxis == "Log10"){
+    plot <- plot + scale_x_log10(breaks = c(artifacts), labels = c(artifacts))
+  }
   ggsave(plot,filename = fileName, width=14, height=7, dpi=192)
   print(fileName)
 }
