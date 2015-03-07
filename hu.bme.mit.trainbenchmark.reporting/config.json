@@ -1,0 +1,18 @@
+{
+  "Dimensions": {
+    "X_Dimensions": {
+      "Size": true,
+      "Iteration": false
+    },
+    "Groups": {
+      "Case": true,
+      "Tool": false
+    }
+  },
+  "Summarize_Functions": [
+    ["Recheck"],
+    "Read",
+    ["LHS","RHS"]
+    ],
+  "Extension": "png"
+}
