@@ -26,6 +26,7 @@ for(func in config$Summarize_Functions){
   index <- index + 1
   for(scenario in uniqueScenarios){
     subData1 <- subset(results, Scenario==scenario & MetricName=="Time")
+    
     if (config$Dimensions$Groups$Case){
       uniqueTools <- unique(subData1$Tool)
       for(tool in uniqueTools){
@@ -38,23 +39,40 @@ for(func in config$Summarize_Functions){
           settings <- setDimensions(settings, "Size", "MetricValue")
           settings <- setGroup(settings, "CaseName")
           settings <- setLabels(settings, "Size", "Time (ms)")
-          settings <- setAxis(settings, "log10", "log10")
+          settings <- setAxis(settings, "Log10", "Log10")
           savePlot(subData2, settings, func, fileName)
         }
         
-        if (config$Dimensions$X_Dimensions$Iteration == TRUE){
-          
+        if (config$Dimensions$X_Dimensions$Iteration){
+          uniqueSizes <-unique(subData2$Size)
+          for(size in uniqueSizes){
+            subData3 <- subset(subData2, Size==size)
+            title <- paste(scenario, ", ", tool, ", Size: ", size, ", Function: ", func, " (Y: Log10) (X: Continuous)",
+                           sep='')
+            
+            fileName <- paste(path,scenario, "-", tool, "-Size", size, "-GroupBy-Case-Function", index, ".",
+                              config$Extension, sep='')
+            settings <- setTitle(settings, title)
+            settings <- setDimensions(settings, "Iteration", "MetricValue")
+            settings <- setGroup(settings, "CaseName")
+            settings <- setLabels(settings, "Iterations", "Time (ms)")
+            settings <- setAxis(settings, "Continuous", "Log10")
+
+            savePlot(subData3, settings, func, fileName)
+          }
         } 
       }
     }
-    if (config$Dimensions$Groups$Tool == TRUE){
+    
+    if (config$Dimensions$Groups$Tool){
       uniqueCases <- unique(subData1$CaseName)
       for(case in uniqueCases){
         subData2 <- subset(subData1, CaseName==case)
         
-        if (config$Dimensions$X_Dimensions$Size == TRUE){
+        if (config$Dimensions$X_Dimensions$Size){
           title <- paste(scenario, ", ",case, ": ", func, " (Y: Log10) (X: Log10)", sep='')
-          fileName <- paste(path,scenario, "-", case, "-GroupBy-Tool-Function", index, ".", config$Extension, sep='')
+          fileName <- paste(path,scenario, "-", case, "-GroupBy-Tool-Function", index, ".", 
+                            config$Extension, sep='')
           settings <- setTitle(settings, title)
           settings <- setDimensions(settings, "Size", "MetricValue")
           settings <- setGroup(settings, "Tool")
@@ -63,8 +81,22 @@ for(func in config$Summarize_Functions){
           savePlot(subData2, settings, func, fileName)
         }
         
-        if (config$Dimensions$X_Dimensions$Iteration == TRUE){
-          
+        if (config$Dimensions$X_Dimensions$Iteration){
+          uniqueSizes <-unique(subData2$Size)
+          for(size in uniqueSizes){
+            subData3 <- subset(subData2, Size==size)
+            title <- paste(scenario, ", ", case, ", Size: ", size, ", Function: ", func, " (Y: Log10) (X: Continuous)",
+                           sep='')
+            
+            fileName <- paste(path,scenario, "-", case, "-Size", size, "-GroupBy-Tool-Function", index, ".", 
+                              config$Extension, sep='')
+            settings <- setTitle(settings, title)
+            settings <- setDimensions(settings, "Iteration", "MetricValue")
+            settings <- setGroup(settings, "Tool")
+            settings <- setLabels(settings, "Iterations", "Time (ms)")
+            settings <- setAxis(settings, "Continuous", "Log10")
+            savePlot(subData3, settings, func, fileName)
+          }
         }     
       }
     }
