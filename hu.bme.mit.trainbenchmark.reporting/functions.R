@@ -1,25 +1,30 @@
 savePlot <-function(results, settings, func, fileName){
   results$MetricValue <- results$MetricValue / 10**6
   
-  first <- TRUE
-  for(phase in func){
-    if (first == TRUE){
-      merged <- subset(results, PhaseName == phase) # selection on phase
-      first <- FALSE
+  if(length(func) > 1){
+    first <- TRUE
+    for(phase in func){
+      if (first == TRUE){
+        merged <- subset(results, PhaseName == phase) # selection on phase
+        first <- FALSE
+      }
+      else{
+        merged <- rbind(merged, subset(results, PhaseName == phase)) # merge back
+      }
     }
-    else{
-      merged <- rbind(merged, subset(results, PhaseName == phase)) # merge back
-    }
+  }
+  else{
+    merged <- subset(results, PhaseName == func)
   }
   
   if (nrow(merged) == 0) 
     return()
   if (settings@xDimension == "Size"){
     # summarise the iterations
-    data <- ddply(merged, c("Size", "CaseName", "Tool", "Scenario", "RunIndex", "MetricName"),
-                  summarise, MetricValue=sum(MetricValue))
-    data <- ddply(data, c("Size", "CaseName", "Tool", "Scenario", "MetricName"),
-                  summarise, MetricValue=median(MetricValue))
+    data <- ddply(merged, c("Size", "CaseName", "PhaseName", "Tool", "Scenario", "RunIndex", "MetricName"),
+                  summarize, MetricValue=sum(MetricValue))
+    data <- ddply(data, c("Size", "CaseName", "PhaseName" ,"Tool", "Scenario", "MetricName"),
+                  summarize, MetricValue=median(MetricValue))
   }
   artifacts <- unique(data[[settings@xDimension]])
   #   artifacts <- sort(artifacts)
