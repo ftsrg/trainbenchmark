@@ -19,6 +19,9 @@ if (file.exists(path) == FALSE){
 uniqueScenarios <- unique(results$Scenario)
 index <- 0
 settings <- PlotSettings()
+print(config$Summarize_Functions)
+
+
 for(func in config$Summarize_Functions){
   index <- index + 1
   for(scenario in uniqueScenarios){
@@ -45,12 +48,25 @@ for(func in config$Summarize_Functions){
       }
     }
     if (config$Dimensions$Groups$Tool == TRUE){
-      if (config$Dimensions$X_Dimensions$Size == TRUE){
+      uniqueCases <- unique(subData1$CaseName)
+      for(case in uniqueCases){
+        subData2 <- subset(subData1, CaseName==case)
         
+        if (config$Dimensions$X_Dimensions$Size == TRUE){
+          title <- paste(scenario, ", ",case, ": ", func, " (Y: Log10) (X: Log10)", sep='')
+          fileName <- paste(path,scenario, "-", case, "-GroupBy-Tool-Function", index, ".", config$Extension, sep='')
+          settings <- setTitle(settings, title)
+          settings <- setDimensions(settings, "Size", "MetricValue")
+          settings <- setGroup(settings, "Tool")
+          settings <- setLabels(settings, "Size", "Time (ms)")
+          settings <- setAxis(settings, "log10", "log10")
+          savePlot(subData2, settings, func, fileName)
+        }
+        
+        if (config$Dimensions$X_Dimensions$Iteration == TRUE){
+          
+        }     
       }
-      if (config$Dimensions$X_Dimensions$Iteration == TRUE){
-        
-      }     
     }
   }
 }
