@@ -45,7 +45,6 @@ import org.openrdf.repository.RepositoryResult;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.memory.MemoryStore;
-import org.openrdf.sail.memory.model.IntegerMemLiteral;
 
 public class SesameDriver extends RDFDatabaseDriver<URI> {
 
@@ -125,6 +124,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	@Override
 	public void destroy() throws IOException {
 		try {
+			con.clear();
 			con.close();
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
@@ -138,13 +138,12 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	@Override
 	public void insertVertexWithEdge(final List<URI> sourceVertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
-		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
-		}
-
 		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
 		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
 
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
 		try {
 			for (final URI sourceVertexURI : sourceVertices) {
 				insertVertexWithEdge(sourceVertexURI, vertexTypeURI, targetVertexType, edgeTypeURI); 
@@ -159,6 +158,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 			String targetVertexType, String edgeType) throws IOException {
 		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
 		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
+
 		try {
 			return insertVertexWithEdge(sourceVertex, vertexTypeURI, targetVertexType, edgeTypeURI);
 		} catch (RepositoryException e) {

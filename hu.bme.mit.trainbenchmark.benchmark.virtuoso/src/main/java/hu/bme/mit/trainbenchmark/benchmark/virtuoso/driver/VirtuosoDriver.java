@@ -15,15 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver;
 import java.io.File;
 import java.io.IOException;
 
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.query.TupleQuery;
-import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.OpenRDFException;
-import org.openrdf.query.BindingSet;
-import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.query.QueryLanguage;
-import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
@@ -57,11 +49,10 @@ public class VirtuosoDriver extends SesameDriver{
 			virtuosoRepository.initialize();
 			con = virtuosoRepository.getConnection();
 			con.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
-			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, query);
 		}
 		catch (OpenRDFException e) {
 			throw new IOException(e);
 		}
 	}
-	
+
 }

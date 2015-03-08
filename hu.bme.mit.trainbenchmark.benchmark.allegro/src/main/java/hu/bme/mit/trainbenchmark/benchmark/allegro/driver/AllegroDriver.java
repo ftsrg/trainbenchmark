@@ -17,11 +17,8 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.openrdf.OpenRDFException;
-import org.openrdf.model.URI;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import com.franz.agraph.http.exception.AGHttpException;

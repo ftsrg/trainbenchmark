@@ -15,6 +15,8 @@ import validation
 import handler
 from config import Configuration, Repository, CommonParameters
 
+from jsonschema.exceptions import ValidationError
+
 
 class Loader():
     def __init__(self):
@@ -27,20 +29,22 @@ class Loader():
         Loads a config.json file and run a validation process. 
         If the configurations seem valid, returns a list with 
         Configuration objects. 
-        In the case of invalid config.json file, returns None.
+
         """
         handler.set_working_directory()
         # paths relatively to this script's location        
         schema_json = handler.json_decode(self.schema_path)
         if schema_json is None:
-            logging.error("Problem has occurred during the decoding procedure" +
-                          " with the following file: " + self.schema_path + ".")
-            return None
+            msg = "Problem has occurred during the decoding procedure" + \
+                  " with the following file: " + self.schema_path + "."
+            logging.error(msg)
+            raise IOError(msg)
         tools_json = handler.json_decode(self.tools_path)
         if tools_json is None:
-            logging.error("Problem has occurred during the decoding procedure" +
-                          " with the following file: " + self.tools_path + ".")
-            return None
+            msg = "Problem has occurred during the decoding procedure" + \
+                  " with the following file: " + self.tools_path + "."
+            logging.error(msg)
+            raise IOError(msg)
     
         try:
             with open(self.config_path, mode="r") as file:
@@ -48,25 +52,28 @@ class Loader():
             decoder = json.JSONDecoder(object_pairs_hook=checking_hook)
             config_json = decoder.decode(config_string)
         except IOError:
-            logging.error("The file does not exist or cannot read:" +
-                          (os.path.split(self.config_path))[1])
-            return None
+            msg = "The file does not exist or cannot read:" + \
+                  (os.path.split(self.config_path))[1]
+            logging.error(msg)
+            raise IOError(msg)
         except ValueError as value_error:
-            logging.error((os.path.split(self.config_path))[1] +
-                          " file is not valid \n")
+            msg = (os.path.split(self.config_path))[1] + " file is not valid"
+            logging.error(msg)
             print(value_error)
-            return None
+            raise ValidationError(msg)
         except KeyError as k_error:
-            logging.error("Duplicate key specified.")
+            msg = "Duplicate key specified."
+            logging.error(msg)
             print(k_error)
             print("Modify: " + (os.path.split(self.config_path))[1])
-            return None
+            raise ValidationError(msg)
     
         valid = validation.is_valid_json(config_json, schema_json)
         if not valid:
-            logging.error("Validation failed of " +
-                          (os.path.split(self.config_path))[1] + " file.")
-            return None
+            msg = "Validation failed of " + \
+                  (os.path.split(self.config_path))[1] + " file."
+            logging.error(msg)
+            raise ValidationError(msg)
         
         configurations = list()
         unique_tools = set() 
