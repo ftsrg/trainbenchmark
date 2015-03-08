@@ -7,6 +7,7 @@ The module provides the certain .jar files relative accessible paths for
 instance model generation and benchmark running.
 """
 import glob
+import logging
 
 import handler
 
@@ -19,11 +20,12 @@ def get_generator_jar(format):
     folder = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/target/" \
         .format(FORMAT=format)
     files = glob.glob(folder + "*.jar")
-    if len(files) >0:
+    if len(files) > 0:
         target = files[0]
         return target
     else:
-        return None
+        logging.error("JAR file does not exist of " + format)
+        raise FileNotFoundError("JAR file does not exist of " + format)
 
 
 def get_benchmark_jar(tool):
@@ -34,11 +36,12 @@ def get_benchmark_jar(tool):
     folder = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/" \
         .format(TOOL=tool)
     files = glob.glob(folder + "*.jar")
-    if len(files) >0:
+    if len(files) > 0:
         target = files[0]
         return target
     else:
-        return None
+        logging.error("JAR file does not exist of " + tool)
+        raise FileNotFoundError("JAR file does not exist of " + tool)
 
 
 def get_model_path(format, scenario, size_str):
@@ -52,7 +55,6 @@ def get_model_path(format, scenario, size_str):
         scnr = "Repair"
     else:
         scnr = scenario
-    # first format is the parameter, second is an embedded python function
     file = (common_models_path + "/railway-{SCENARIO}-{SIZE}." +
             models[format]).format(SCENARIO=scnr.lower(), SIZE=size_str)
     return file
@@ -68,7 +70,7 @@ def get_common_model_path():
 models = {
           'rdf': "ttl",
           'graph': "graphml",
-          'emf': "concept",
+          'emf': "emf",
           'sql': "sql"
           }
 

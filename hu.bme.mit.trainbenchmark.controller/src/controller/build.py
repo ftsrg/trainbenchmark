@@ -141,9 +141,6 @@ if __name__ == "__main__":
 
     loader = Loader()
     configurations = loader.load()
-    if configurations is None:
-        logging.error("No valid configurations were loaded.")
-        sys.exit(1)
 
     resolve_dependencies(configurations)
 

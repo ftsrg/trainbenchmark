@@ -99,8 +99,8 @@ class Generator():
                     ):
                         sizes = list(set(sizes) | set(config.sizes))
                     sizes.sort()
-                formats.update({f:sizes})
-            self.models.update({s:formats})
+                formats.update({f: sizes})
+            self.models.update({s: formats})
 
         self.prevented = True
             
@@ -110,8 +110,5 @@ if __name__ == "__main__":
     logging.info("Main module:generate.")
     loader = Loader()
     configurations = loader.load()
-    if configurations is None:
-        logging.error("No valid configurations were loaded.")
-        sys.exit(1)
     generator = Generator()
     generator.generate_models(configurations)

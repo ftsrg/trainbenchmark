@@ -24,14 +24,14 @@ def is_valid_json(instance_json, schema_json):
     @param schema_json: the schema json object  
     """
     try:
-        validate(instance_json,schema_json)
+        validate(instance_json, schema_json)
     except ValueError as value_error:
         logging.error("Json file is not valid \n", value_error)
         return False
-    except ValidationError as validation_error:
-        logging.error("A problem has occurred during the validation, here: "+\
-                      best_match(Draft4Validator(schema_json)\
-                      .iter_errors(instance_json)).message)
+    except ValidationError:
+        logging.error("A problem has occurred during the validation, here: " +
+                      best_match(Draft4Validator(schema_json)
+                                 .iter_errors(instance_json)).message)
         return False
     except SchemaError:
         logging.error("The provided schema is malformed.")

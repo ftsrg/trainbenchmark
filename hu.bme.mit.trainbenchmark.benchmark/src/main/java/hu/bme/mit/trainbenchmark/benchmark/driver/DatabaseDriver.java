@@ -31,8 +31,7 @@ public abstract class DatabaseDriver<T> {
 
 	public abstract Comparator<T> getComparator();
 
-	public void destroy() throws IOException {
-	}
+	public void destroy() throws IOException {}
 
 	// create
 

@@ -44,6 +44,7 @@ def execute(configuration):
                                                             scenario,
                                                             size)
                 target = targets.get_benchmark_jar(configuration.tool)
+
                 xmx = configuration.common.java_xmx
                 maxpermsize = configuration.common.java_maxpermsize
                 path = configuration.common.path
@@ -122,8 +123,5 @@ if __name__ == "__main__":
     logging.info("Main module:benchmark")
     loader = Loader()
     configurations = loader.load()
-    if configurations is None:
-        logging.error("No valid configurations were loaded.")
-        sys.exit(1)
     run_benchmark(configurations)
 
