@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.openrdf.OpenRDFException;
-import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
 import virtuoso.sesame2.driver.VirtuosoRepository;
