@@ -29,6 +29,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -89,19 +90,12 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	@Override
 	public void insertVertexWithEdge(final List<Resource> sourceVertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
-		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
-		}
 
 		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
 		final Resource vertexType = model.getResource(BASE_PREFIX + targetVertexType);
 
 		for (final Resource sourceVertex : sourceVertices) {
-			final Resource targetVertex = model.createResource(BASE_PREFIX + "x" + newVertexId);
-			newVertexId++;
-
-			model.add(model.createStatement(sourceVertex, edge, targetVertex));
-			model.add(model.createStatement(targetVertex, RDF.type, vertexType));
+			insertVertexWithEdge(sourceVertex, vertexType, edge);
 		}
 	}
 
@@ -109,15 +103,33 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	public Resource insertVertexWithEdge(final Resource sourceVertex,
 			final String sourceVertexType, final String targetVertexType, final String edgeType)
 			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
+		final Resource vertexType = model.getResource(BASE_PREFIX + targetVertexType);
+		
+		return insertVertexWithEdge(sourceVertex, vertexType, edge);
 	}
 
+	protected Resource insertVertexWithEdge(final Resource sourceVertex, final Resource vertexType,
+			final Property edge) throws IOException{
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+
+		final Resource targetVertex = model.createResource(BASE_PREFIX + "x" + newVertexId);
+		newVertexId++;
+
+		model.add(model.createStatement(sourceVertex, edge, targetVertex));
+		model.add(model.createStatement(targetVertex, RDF.type, vertexType));
+		
+		return targetVertex;
+	}
+	
 	@Override
 	public void insertEdge(final Resource sourceVertex, final Resource targetVertex,
 			final String edgeType) {
-		// TODO Auto-generated method stub
-		
+		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
+		model.add(model.createStatement(sourceVertex, edge, targetVertex));
 	}
 	
 	// read
@@ -132,8 +144,16 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	@Override
 	public List<Resource> collectOutgoingConnectedVertices(
 			Resource sourceVertex, String targetVertexType, String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		throw new UnsupportedOperationException();
+//		// TODO Auto-generated method stub
+//		Resource targetVertex = model.getResource(BASE_PREFIX + targetVertexType);
+//		Property edge = model.getProperty(BASE_PREFIX + edgeType);
+//		NodeIterator objects = model.listObjectsOfProperty(sourceVertex, edge);
+//		while(objects.hasNext()){
+//			RDFNode ob = objects.next();
+//		}
+//		return null;
 	}
 
 	// update

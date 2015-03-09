@@ -140,13 +140,10 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 			final String edgeType) throws IOException {
 		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
 		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
-
-		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
-		}
+		
 		try {
 			for (final URI sourceVertexURI : sourceVertices) {
-				insertVertexWithEdge(sourceVertexURI, vertexTypeURI, targetVertexType, edgeTypeURI); 
+				insertVertexWithEdge(sourceVertexURI, vertexTypeURI, edgeTypeURI); 
 			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
@@ -160,14 +157,13 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
 
 		try {
-			return insertVertexWithEdge(sourceVertex, vertexTypeURI, targetVertexType, edgeTypeURI);
+			return insertVertexWithEdge(sourceVertex, vertexTypeURI, edgeTypeURI);
 		} catch (RepositoryException e) {
 			throw new IOException(e);
 		}
 	}
 
-	protected URI insertVertexWithEdge(final URI sourceVertexURI, final URI vertexTypeURI, 
-			final String targetVertexType, final URI edgeTypeURI) throws RepositoryException, IOException{
+	protected URI insertVertexWithEdge(final URI sourceVertexURI, final URI vertexTypeURI, final URI edgeTypeURI) throws RepositoryException, IOException{
 		if (newVertexId == null) {
 			newVertexId = determineNewVertexId();
 		}
