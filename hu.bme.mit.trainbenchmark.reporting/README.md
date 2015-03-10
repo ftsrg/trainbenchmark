@@ -37,34 +37,40 @@ Train Benchmark reporting tools
   "Dimensions": {
     "X_Dimensions": {
       "Size": true,
-      "Iteration": false
+      "Iteration": true
     },
     "Groups": {
-      "Case": true,
-      "Tool": false
+      "Query": true,
+      "Tool": true
     }
   },
   "Summarize_Functions": [
     {
       "Phases": [
-        "Read",
-        "Check",
-        "ReCheck"
-      ]
+        "ReCheck",
+        "LHS"
+      ],
+      "Metric": "Time",
+      "Y_Label": "Time (ms)",
+      "Y_Axis_Scale": -6
     },
     {
       "Phases": [
-        "LHS",
-        "RHS"
-      ]
+        "Read"
+      ],
+      "Metric": "Time",
+      "Y_Label": "Time (s)",
+      "Y_Axis_Scale": -9
     }
   ],
-  "Extension": "png"
+  "Extension": ["png", "pdf"]
 }
      ```
-* The first function: `Read+Check+ReCheck`
-* The second one: `LHS+RHS`
+* The first function: `ReCheck+LHS`
+* The second one: `Read`
  
+* Arbitrary number of functions can be declared.
+
 * The dimension and group parameters can be changed independently from each other, which means for example every variable can be `true` at the same time. As a consequent, more diagrams will be generated.
 
 
