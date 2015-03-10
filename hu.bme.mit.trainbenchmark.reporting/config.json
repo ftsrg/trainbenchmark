@@ -2,7 +2,7 @@
   "Dimensions": {
     "X_Dimensions": {
       "Size": true,
-      "Iteration": false
+      "Iteration": true
     },
     "Groups": {
       "Case": true,
@@ -12,17 +12,21 @@
   "Summarize_Functions": [
     {
       "Phases": [
-        "Read",
-        "Check",
-        "ReCheck"
-      ]
+        "ReCheck",
+        "RHS"
+      ],
+      "Metric": "Time",
+      "Y_Label": "Time (ms)",
+      "Y_Axis_Scale": -6
     },
     {
       "Phases": [
-        "ReCheck",
-        "LHS"
-      ]
+        "Read"
+      ],
+      "Metric": "Time",
+      "Y_Label": "Time (ms)",
+      "Y_Axis_Scale": -9
     }
   ],
-  "Extension": "png"
+  "Extension": ["png", "pdf"]
 }

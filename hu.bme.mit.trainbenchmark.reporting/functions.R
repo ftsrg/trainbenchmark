@@ -1,8 +1,10 @@
 source("theme.R")
 
-savePlot <-function(results, settings, func, fileName){
+savePlot <-function(results, settings, phases, fileName){
+  phases <- unlist(phases)
   first <- TRUE
-  for(phase in func){
+  for(phase in phases){
+    
     if (first == TRUE){
       merged <- subset(results, PhaseName == phase) # selection on phase
       first <- FALSE
@@ -23,7 +25,7 @@ savePlot <-function(results, settings, func, fileName){
                   summarize, MetricValue=median(MetricValue))
   }
   else if(settings@xDimension == "Iteration"){
-    data <- ddply(merged, c("Size", "CaseName", "Tool", "Scenario", "RunIndex", "MetricName", "Iteration"),
+    data <- ddply(merged, c("CaseName", "Tool", "Scenario", "RunIndex", "MetricName", "Iteration"),
                   summarize, MetricValue=sum(MetricValue))
     data <- ddply(data, c("CaseName", "Tool", "Scenario", "MetricName", "Iteration"),
                   summarize, MetricValue=median(MetricValue))
@@ -39,7 +41,6 @@ savePlot <-function(results, settings, func, fileName){
   else{
     xLabels <- c(artifacts)
   }
-  
   plot <- ggplot(data,aes_string(x = settings@xDimension, y = settings@yDimension)) +
     geom_line(aes_string(group = settings@group, colour=settings@group), size=lineSize) + 
     geom_point(aes_string(shape = settings@group, colour=settings@group), size=pointSize) +
@@ -50,16 +51,16 @@ savePlot <-function(results, settings, func, fileName){
     bwTheme
 #     scale_x_log10(breaks = c(artifacts), labels = c(artifacts))
   if (settings@xAxis == "Continuous"){
-    plot <- plot + scale_x_continuous(breaks = c(artifacts), labels = xLabels)
-#     plot <- plot + scale_x_continuous(breaks = c(artifacts), labels = labels)
+#     plot <- plot + scale_x_continuous(breaks = seq(min(artifacts), max(artifacts), by=round(max(artifacts)/length(artifacts),0)))
+    plot <- plot + scale_x_continuous(breaks = c(artifacts))
   }
   else if (settings@xAxis == "Log10"){
     plot <- plot + scale_x_log10(breaks = c(artifacts), labels = xLabels)
   }
 
   if (settings@yAxis == "Continuous"){
-    plot <- plot + scale_y_continuous(breaks = seq(minValue, maxValue, by=(maxValue-minValue)/7),
-                                      labels = round(seq(minValue, maxValue, by=(maxValue-minValue)/7),2))
+    plot <- plot + scale_y_continuous(breaks = seq(minValue, maxValue, by=round(maxValue/5,0)),
+                                      labels = seq(minValue, maxValue, by=round(maxValue/5,0)))
   }
   else if (settings@yAxis == "Log10"){
     plot <- plot + scale_y_log10(breaks = round(10^seq(log10(minValue), log10(maxValue), by=((log10(maxValue)-log10(minValue))/7)),7), 
@@ -71,7 +72,7 @@ savePlot <-function(results, settings, func, fileName){
 
 }
 
-validConfig <- function(results, functions){
+validPhase <- function(results, functions){
   uniquePhases <- unique(results$PhaseName)
   for(func in functions){
     for(phase in func){
@@ -81,6 +82,13 @@ validConfig <- function(results, functions){
     }
   }
   return(TRUE)
+}
+
+validMetric <- function(results, metric){
+  if (metric %in% levels(results$MetricName)){
+    return(TRUE)
+  }
+  return(FALSE)
 }
 
 createFolders <- function(rootPath, subFolders){
@@ -96,6 +104,7 @@ createFolders <- function(rootPath, subFolders){
 }
 
 concatPhases <- function(phases){
+  phases <- unlist(phases)
   first <- TRUE
   for(p in phases){
     if(first){
