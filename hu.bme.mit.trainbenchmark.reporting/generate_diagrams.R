@@ -45,12 +45,16 @@ for(row in 1:nrow(config$Summarize_Functions)){
         
         if (config$Dimensions$X_Dimensions$Size){
           title <- paste(tool, ",", scenario, ", Function: ", concatPhases(phases), " (Y: Log10) (X: Log10)", sep='')
-          fileName <- paste(path,scenario, "-", tool, "-GroupBy-Case-",metric, "-Function", index, ".", config$Extension, sep='')
+          
           settings <- setTitle(settings, title)
           settings <- setDimensions(settings, "Size", "MetricValue")
           settings <- setLabels(settings, "Size", config$Summarize_Functions[row,]$Y_Label)
           settings <- setAxis(settings, "Log10", yAxis)
-          savePlot(subData2, settings, phases, fileName)
+          for (extension in config$Extension){
+            fileName <- paste(path,scenario, "-", tool, "-GroupBy-Case-",metric, "-Function", index, ".", 
+                              extension, sep='')
+            savePlot(subData2, settings, phases, fileName)
+          }
         }
         
         if (config$Dimensions$X_Dimensions$Iteration){
@@ -60,14 +64,15 @@ for(row in 1:nrow(config$Summarize_Functions)){
             title <- paste(scenario, ", ", tool, ", Size: ", size, ", Function: ", concatPhases(phases), 
                            " (Y: Log10) (X: Continuous)", sep='')
             
-            fileName <- paste(path,scenario, "-", tool, "-Size", size, "-GroupBy-Case-",metric, "-Function", index, ".",
-                              config$Extension, sep='')
             settings <- setTitle(settings, title)
             settings <- setDimensions(settings, "Iteration", "MetricValue")
             settings <- setLabels(settings, "Iterations", config$Summarize_Functions[row,]$Y_Label)
             settings <- setAxis(settings, "Continuous", yAxis)
-
-            savePlot(subData3, settings, phases, fileName)
+            for (extension in config$Extension){
+              fileName <- paste(path,scenario, "-", tool, "-Size", size, "-GroupBy-Case-",metric, "-Function", index, ".",
+                                extension, sep='')
+              savePlot(subData3, settings, phases, fileName)
+            }
           }
         } 
       }
@@ -81,13 +86,15 @@ for(row in 1:nrow(config$Summarize_Functions)){
         
         if (config$Dimensions$X_Dimensions$Size){
           title <- paste(scenario, ", ",case, ", Function: : ", concatPhases(phases), " (Y: Log10) (X: Log10)", sep='')
-          fileName <- paste(path,scenario, "-", case, "-GroupBy-Tool-",metric, "-Function", index, ".", 
-                            config$Extension, sep='')
           settings <- setTitle(settings, title)
           settings <- setDimensions(settings, "Size", "MetricValue")
           settings <- setLabels(settings, "Size", config$Summarize_Functions[row,]$Y_Label)
           settings <- setAxis(settings, "Log10", yAxis)
-          savePlot(subData2, settings, phases, fileName)
+          for (extension in config$Extension){
+            fileName <- paste(path,scenario, "-", case, "-GroupBy-Tool-",metric, "-Function", index, ".", 
+                              extension, sep='')
+            savePlot(subData2, settings, phases, fileName)
+          }
         }
         
         if (config$Dimensions$X_Dimensions$Iteration){
