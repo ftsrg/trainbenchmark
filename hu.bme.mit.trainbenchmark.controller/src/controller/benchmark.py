@@ -43,7 +43,7 @@ def execute(configuration):
                 benchmark_artifact = targets.get_model_path(format,
                                                             scenario,
                                                             size)
-                target = targets.get_benchmark_jar(configuration.tool)
+                target = targets.get_tool_jar(configuration.tool)
 
                 xmx = configuration.common.java_xmx
                 maxpermsize = configuration.common.java_maxpermsize

@@ -29,7 +29,6 @@ import deps
 import log
 
 
-
 def resolve_dependencies(configurations):
     """
     Resolve the dependencies between repositories after the dependencies.json
@@ -107,7 +106,6 @@ def build_projects(configurations, skip_tests, build_core=True,
         maven_build(all_dependencies.pop(), skip_tests)
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-g", "--generate",
@@ -125,7 +123,7 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--tools",
                         help="just build the tools",
                         action="store_true")
-    parser.add_argument("--skip-tests",
+    parser.add_argument("-s", "--skip-tests",
                         help="skip JUNIT tests",
                         action="store_true")
 

@@ -28,10 +28,9 @@ def get_generator_jar(format):
         raise FileNotFoundError("JAR file does not exist of " + format)
 
 
-def get_benchmark_jar(tool):
+def get_tool_jar(tool):
     """
-    Returns the benchmark's .jar file's path which belongs to the certain 
-    tool. The latter is provided by the tool parameter.
+    Returns the tool's .jar file's path.
     """
     folder = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/" \
         .format(TOOL=tool)

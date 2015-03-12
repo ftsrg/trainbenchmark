@@ -31,10 +31,12 @@ savePlot <-function(results, settings, phases, fileName){
                   summarize, MetricValue=median(MetricValue))
   }
   artifacts <- unique(data[[settings@xDimension]])
-  #   artifacts <- sort(artifacts)
   minValue <- min(data$MetricValue)
   maxValue <- max(data$MetricValue)
-
+  if (minValue == 0){
+    print("The minimum metricvalue equals with 0. The plot cannot be generated.")
+    return()
+  
   if (settings@xDimension == "Size"){
     xLabels <- getXLabels(artifacts)
   }
@@ -49,9 +51,8 @@ savePlot <-function(results, settings, phases, fileName){
     xlab(settings@xLabel) +
     ggtitle(label = settings@title) +
     bwTheme
-#     scale_x_log10(breaks = c(artifacts), labels = c(artifacts))
+
   if (settings@xAxis == "Continuous"){
-#     plot <- plot + scale_x_continuous(breaks = seq(min(artifacts), max(artifacts), by=round(max(artifacts)/length(artifacts),0)))
     plot <- plot + scale_x_continuous(breaks = c(artifacts))
   }
   else if (settings@xAxis == "Log10"){
