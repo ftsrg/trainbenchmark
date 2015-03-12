@@ -155,4 +155,4 @@ if __name__ == "__main__":
 
     if args.benchmark:
         for config in configurations:
-            benchmark.run_benchmark(config)
+            benchmark.run_benchmark(configurations)
