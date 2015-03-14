@@ -83,8 +83,8 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	}
 
 	@Override
-	public RailwayElement insertVertexWithEdge(RailwayElement sourceVertex,
-			String sourceVertexType, String targetVertexType, String edgeType) throws IOException {
+	public RailwayElement insertVertexWithEdge(final RailwayElement sourceVertex,
+			final String sourceVertexType, final String targetVertexType, final String edgeType) throws IOException {
 		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
@@ -93,7 +93,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		return insertVertexWithEdge(sourceVertex, targetClass, feature);
 	}
 	
-	protected RailwayElement insertVertexWithEdge(RailwayElement sourceVertex, EClass targetClass, EStructuralFeature feature){
+	protected RailwayElement insertVertexWithEdge(final RailwayElement sourceVertex, final EClass targetClass, final EStructuralFeature feature){
 		final RailwayFactory factory = RailwayFactory.eINSTANCE;
 		final EObject targetObject = factory.create(targetClass);
 		
@@ -104,7 +104,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
 		
 		//
-		for(EObject ref : references){
+		for(final EObject ref : references){
 			System.out.println("Ref " + ref);
 		}
 		//
@@ -112,16 +112,17 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		references.add(targetObject);
 		
 		//
-		for(EObject ref : references){
+		for(final EObject ref : references){
 			System.out.println("After Insert " + ref);
 		}
 		//
+		container.getContains().add((RailwayElement)targetObject);
 		return (RailwayElement) targetObject;
 	}
 
 	@Override
-	public void insertEdge(RailwayElement sourceVertex, String sourceVertexType, RailwayElement targetVertex, 
-			String edgeType) {
+	public void insertEdge(final RailwayElement sourceVertex, final String sourceVertexType, final RailwayElement targetVertex, 
+			final String edgeType) {
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		
@@ -129,13 +130,13 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		
 		@SuppressWarnings("unchecked")
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
-		for (EObject ref : references){
+		for (final EObject ref : references){
 //			System.out.println("Reference: " + ref);
 		}
 		references.add(targetVertex);
 		
 		// TODO delete later
-		for (EObject ref : references){
+		for (final EObject ref : references){
 //			System.out.println("Inserted reference: " + ref);
 		}
 	}
@@ -159,7 +160,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 
 	@Override
 	public List<RailwayElement> collectOutgoingConnectedVertices(
-			RailwayElement sourceVertex, String sourceVertexType, String targetVertexType, String edgeType) {
+			final RailwayElement sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) {
 		final List<RailwayElement> vertices = new ArrayList<>();
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceVertex.eClass().getEStructuralFeature(edgeType);
@@ -169,7 +170,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		@SuppressWarnings("unchecked")
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
-		for (EObject ref : references){
+		for (final EObject ref : references){
 //			System.out.println("Reference:" + ref);
 			if (clazz.isSuperTypeOf(ref.eClass())){
 				vertices.add((RailwayElement) ref);
@@ -235,7 +236,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 			@SuppressWarnings("unchecked")
 			final AbstractList<EObject> features = (AbstractList<EObject>) vertex.eGet(feature);
 			
-			for(EObject ref : features){
+			for(final EObject ref : features){
 //				System.out.println("Reference: " + ref);
 			}
 			features.clear();
