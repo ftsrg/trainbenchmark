@@ -112,15 +112,10 @@ public abstract class Generator {
 			connectedSegmentsErrorPercent = 5;
 			break;
 		case "Test":
-			maxSegments = 1;
+			maxSegments = 5;
 			maxRoutes = 2 * generatorConfig.getSize();
-			maxSwitchPositions = 20;
+			maxSwitchPositions = 5;
 			maxSensors = 10;
-			posLengthErrorPercent = 10;
-			switchSensorErrorPercent = 4;
-			routeSensorErrorPercent = 10;
-			signalNeighborErrorPercent = 8;
-			switchSetErrorPercent = 10;
 			connectedSegmentsErrorPercent = 5;
 			break;
 		default:

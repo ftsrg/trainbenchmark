@@ -70,36 +70,74 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	@Override
 	public void insertVertexWithEdge(final List<RailwayElement> sourceVertices, final String sourceVertexType,
 			final String targetVertexType, final String edgeType) {
-		final RailwayFactory factory = RailwayFactory.eINSTANCE;
+		
 		// get types
 		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 
+		System.out.println("--------- insert vertex with edge ---------");
 		for (final RailwayElement sourceVertex : sourceVertices) {
-			// create target object
-			final EObject targetObject = factory.create(targetClass);
-
-			// set reference to source object
-			@SuppressWarnings("unchecked")
-			final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
-			references.add(targetObject);
+			insertVertexWithEdge(sourceVertex, targetClass, feature);
 		}
 	}
 
 	@Override
 	public RailwayElement insertVertexWithEdge(RailwayElement sourceVertex,
-			String sourceVertexType, String targetVertexType, String edgeType)
-			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+			String sourceVertexType, String targetVertexType, String edgeType) throws IOException {
+		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
+		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
+		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
+
+		System.out.println("--------- insert vertex with edge ---------");
+		return insertVertexWithEdge(sourceVertex, targetClass, feature);
+	}
+	
+	protected RailwayElement insertVertexWithEdge(RailwayElement sourceVertex, EClass targetClass, EStructuralFeature feature){
+		final RailwayFactory factory = RailwayFactory.eINSTANCE;
+		final EObject targetObject = factory.create(targetClass);
+		
+		System.out.println("Source:" + sourceVertex);
+		
+		// set reference to source object
+		@SuppressWarnings("unchecked")
+		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
+		
+		//
+		for(EObject ref : references){
+			System.out.println("Ref " + ref);
+		}
+		//
+		System.out.println("Target: " + targetObject);
+		references.add(targetObject);
+		
+		//
+		for(EObject ref : references){
+			System.out.println("After Insert " + ref);
+		}
+		//
+		return (RailwayElement) targetObject;
 	}
 
 	@Override
-	public void insertEdge(RailwayElement sourceVertex,
-			RailwayElement targetVertex, String edgeType) {
-		// TODO Auto-generated method stub
+	public void insertEdge(RailwayElement sourceVertex, String sourceVertexType, RailwayElement targetVertex, 
+			String edgeType) {
+		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
+		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		
+//		System.out.println("Source: " + sourceVertex);
+		
+		@SuppressWarnings("unchecked")
+		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
+		for (EObject ref : references){
+//			System.out.println("Reference: " + ref);
+		}
+		references.add(targetVertex);
+		
+		// TODO delete later
+		for (EObject ref : references){
+//			System.out.println("Inserted reference: " + ref);
+		}
 	}
 	
 	// read
@@ -121,9 +159,24 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 
 	@Override
 	public List<RailwayElement> collectOutgoingConnectedVertices(
-			RailwayElement sourceVertex, String targetVertexType, String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
+			RailwayElement sourceVertex, String sourceVertexType, String targetVertexType, String edgeType) {
+		final List<RailwayElement> vertices = new ArrayList<>();
+		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
+		final EStructuralFeature feature = sourceVertex.eClass().getEStructuralFeature(edgeType);
+		
+//		System.out.println("Source: " + sourceVertex);
+		
+		@SuppressWarnings("unchecked")
+		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
+		for (EObject ref : references){
+//			System.out.println("Reference:" + ref);
+			if (clazz.isSuperTypeOf(ref.eClass())){
+				vertices.add((RailwayElement) ref);
+			}
+		}
+		
+		return vertices;
 	}
 
 	// update
@@ -148,9 +201,21 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		final EReference reference = (EReference) feature;
+//		System.out.println("Reference: " + reference);
+		
+//		// 
+//		System.out.println("Ref eResource: " + reference.eResource());
+//		System.out.println("Ref eContainer:" + reference.eContainer());
+//		final EClass source = reference.getEReferenceType();
+//		System.out.println(source);
+//		//
 		final EReference oppositeReference = reference.getEOpposite();
 
 		for (final RailwayElement vertex : vertices) {
+			if(oppositeReference == null)
+				System.out.println("Null oppositereference");
+			if(vertex==null)
+				System.out.println("vertex null");
 			@SuppressWarnings("unchecked")
 			final AbstractList<EObject> outgoingEdges = (AbstractList<EObject>) vertex.eGet(oppositeReference);
 			outgoingEdges.clear();			
@@ -162,10 +227,20 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(vertexType);
 		final EStructuralFeature feature = clazz.getEStructuralFeature(edgeType);
 		
+		
 		for (final RailwayElement vertex : vertices) {
+			
+//			System.out.println("Source: " + vertex);
+			
 			@SuppressWarnings("unchecked")
 			final AbstractList<EObject> features = (AbstractList<EObject>) vertex.eGet(feature);
-			features.clear();			
+			
+			for(EObject ref : features){
+//				System.out.println("Reference: " + ref);
+			}
+			features.clear();
+			
+//			System.out.println("Cleared: " + features);
 		}
 	}
 

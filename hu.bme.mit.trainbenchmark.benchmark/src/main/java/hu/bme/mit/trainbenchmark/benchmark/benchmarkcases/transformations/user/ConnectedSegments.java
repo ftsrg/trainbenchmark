@@ -17,11 +17,11 @@ public class ConnectedSegments<T> extends TransformationDefinition<T>{
 	@Override
 	protected void rhs() throws IOException {
 		for (final T vertex : elementsToModify){
-			List<T> segments = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, 
+			List<T> segments = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.SEGMENT, 
 																				ModelConstants.TRACKELEMENT_CONNECTSTO);
-			List <T> switchElements = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SWITCH, 
+			List <T> switchElements = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.SWITCH, 
 																				ModelConstants.TRACKELEMENT_CONNECTSTO);
-			List <T> sensors = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SENSOR, 
+			List <T> sensors = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.SENSOR, 
 																				ModelConstants.TRACKELEMENT_SENSOR);
 			
 			List<T> source = new ArrayList<T>();
@@ -32,12 +32,12 @@ public class ConnectedSegments<T> extends TransformationDefinition<T>{
 													 ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO);
 			
 			if (segments.size() > 0){
-				driver.insertEdge(inserted, segments.get(0), ModelConstants.TRACKELEMENT_CONNECTSTO);
+				driver.insertEdge(inserted, ModelConstants.SEGMENT, segments.get(0), ModelConstants.TRACKELEMENT_CONNECTSTO);
 			}
 			if (switchElements.size() > 0){
-				driver.insertEdge(inserted, switchElements.get(0), ModelConstants.TRACKELEMENT_CONNECTSTO);
+				driver.insertEdge(inserted, ModelConstants.SEGMENT, switchElements.get(0), ModelConstants.TRACKELEMENT_CONNECTSTO);
 			}
-			driver.insertEdge(inserted, sensors.get(0), ModelConstants.TRACKELEMENT_SENSOR);
+			driver.insertEdge(inserted, ModelConstants.SEGMENT, sensors.get(0), ModelConstants.TRACKELEMENT_SENSOR);
 		}
 	}
 

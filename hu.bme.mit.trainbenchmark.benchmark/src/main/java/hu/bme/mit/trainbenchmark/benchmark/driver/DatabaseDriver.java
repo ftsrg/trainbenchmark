@@ -41,15 +41,15 @@ public abstract class DatabaseDriver<T> {
 	public abstract T insertVertexWithEdge(T sourceVertex, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException;
 
-	public abstract void insertEdge(final T sourceVertex, final T targetVertex, final String edgeType) 
-			throws IOException;
+	public abstract void insertEdge(final T sourceVertex, final String sourceVertexType, final T targetVertex, 
+			final String edgeType) throws IOException;
 	
 	// read
 
 	public abstract List<T> collectVertices(final String type) throws IOException;
 	
-	public abstract List<T> collectOutgoingConnectedVertices(final T sourceVertex, final String targetVertexType, 
-			final String edgeType) throws IOException ;
+	public abstract List<T> collectOutgoingConnectedVertices(final T sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) throws IOException ;
 
 	// update
 
