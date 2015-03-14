@@ -11,4 +11,7 @@
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SignalNeighbor" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.SignalNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SignalNeighbor"/>
   </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments" point="org.eclipse.incquery.runtime.queryspecification">
+    <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments"/>
+  </extension>
 </plugin>

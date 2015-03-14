@@ -9,11 +9,10 @@
   },
   "IterationCount": 10,
   "MinSize": 1,
-  "MaxSize": 8,
+  "MaxSize": 1,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
-	"PosLength",
     "ConnectedSegments"
   ],
   "Scenarios": [
@@ -22,7 +21,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "virtuoso"
+    "emfincquery"
   ],
   "UniqueConfigurations": [
 	]
