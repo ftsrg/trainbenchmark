@@ -117,7 +117,8 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	// create
 
 	@Override
-	public void insertEdge(Node sourceVertex, Node targetVertex, String edgeType)  throws IOException{
+	public void insertEdge(final Node sourceVertex, final String sourceVertexType,
+			Node targetVertex, String edgeType)  throws IOException{
 		final RelationshipType relationship = DynamicRelationshipType.withName(edgeType);
 		sourceVertex.createRelationshipTo(targetVertex, relationship);
 	}
@@ -159,8 +160,8 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	
 	
 	@Override
-	public List<Node> collectOutgoingConnectedVertices(final Node sourceVertex, final String targetVertexType, 
-			final String edgeType) throws IOException {
+	public List<Node> collectOutgoingConnectedVertices(final Node sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) throws IOException {
 		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
 		List<Node> neighbors = new ArrayList<Node>();
 		final Iterable<Relationship> relationships = sourceVertex.getRelationships(
