@@ -112,7 +112,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 	}
 
 	@Override
-	public void insertEdge(final Long sourceVertex, final Long targetVertex, final String edgeType) {
+	public void insertEdge(final Long sourceVertex, final String sourceVertexType, final Long targetVertex, 
+			final String edgeType) throws IOException{
 		// TODO Auto-generated method stub
 
 	}
@@ -125,8 +126,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 	}
 
 	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex, String targetVertexType,
-			String edgeType) {
+	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex, final String sourceVertexType,
+			String targetVertexType, String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}

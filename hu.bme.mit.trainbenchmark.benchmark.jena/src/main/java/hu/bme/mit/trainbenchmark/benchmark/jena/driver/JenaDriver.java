@@ -225,7 +225,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 
 	@Override
-	public void deleteVertex(final Resource vertex) throws IOException {
+	public void deleteVertex(final Resource vertex, final String vertexType) throws IOException {
 		// TODO Auto-generated method stub
 	}
 	

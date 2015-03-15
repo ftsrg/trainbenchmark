@@ -330,7 +330,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public void deleteVertex(URI vertex) throws IOException {
+	public void deleteVertex(final URI vertex, final String vertexType) throws IOException {
 		// TODO Auto-generated method stub
 		try {
 			final RepositoryResult<Statement> statementsToRemove= con.getStatements(vertex, RDF.TYPE, null, false);
