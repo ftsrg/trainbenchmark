@@ -126,7 +126,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 	
 	@Override
-	public void insertEdge(final Resource sourceVertex, final Resource targetVertex,
+	public void insertEdge(final Resource sourceVertex, final String sourceVertexType, final Resource targetVertex,
 			final String edgeType) {
 		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
 		model.add(model.createStatement(sourceVertex, edge, targetVertex));
@@ -143,7 +143,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 	@Override
 	public List<Resource> collectOutgoingConnectedVertices(
-			Resource sourceVertex, String targetVertexType, String edgeType) {
+			Resource sourceVertex, final String sourceVertexType, String targetVertexType, String edgeType) {
 		
 		throw new UnsupportedOperationException();
 //		// TODO Auto-generated method stub
@@ -225,12 +225,15 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 
 	@Override
+	public void deleteVertex(final Resource vertex) throws IOException {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
 	protected boolean ask(final String askQuery) {
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(askQuery, model)) {
 			final boolean result = queryExecution.execAsk();
 			return result;
 		}
 	}
-
-
 }

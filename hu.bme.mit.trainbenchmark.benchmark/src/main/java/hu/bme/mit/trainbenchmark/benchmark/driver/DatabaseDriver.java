@@ -66,5 +66,7 @@ public abstract class DatabaseDriver<T> {
 
 	public abstract void deleteSingleOutgoingEdge(final List<T> vertices, final String vertexType, final String edgeType)
 			throws IOException;
+	
+	public abstract void deleteVertex(final T vertex) throws IOException;
 
 }

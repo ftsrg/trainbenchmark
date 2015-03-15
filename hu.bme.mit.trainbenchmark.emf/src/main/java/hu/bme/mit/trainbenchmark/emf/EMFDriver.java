@@ -218,6 +218,11 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		deleteOneOutgoingEdge(vertices, vertexType, edgeType);
 	}
 
+	@Override
+	public void deleteVertex(final RailwayElement vertex) throws IOException {
+		container.getContains().remove(vertex);
+	}
+	
 	// utility
 
 	public RailwayContainer getContainer() {
@@ -227,5 +232,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	public Resource getResource() {
 		return resource;
 	}
+
+
 
 }

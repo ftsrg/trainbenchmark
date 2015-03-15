@@ -34,6 +34,8 @@ public class ConnectedSegments<T> extends TransformationDefinition<T>{
 			driver.deleteAllOutgoingEdges(oneHopConnected, ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO);
 			
 			driver.deleteAllOutgoingEdges(oneHopConnected, ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_SENSOR);
+			
+			driver.deleteVertex(oneHopVertex);
 		}
 	}
 

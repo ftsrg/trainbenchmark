@@ -233,6 +233,11 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		}
 	}
 
+	@Override
+	public void deleteVertex(Node vertex) throws IOException {
+		vertex.delete();
+	}
+	
 	// utility
 
 	public GraphDatabaseService getGraphDb() {
