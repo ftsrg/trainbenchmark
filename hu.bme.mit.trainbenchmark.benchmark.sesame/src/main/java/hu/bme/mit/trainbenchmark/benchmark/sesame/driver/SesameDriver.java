@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.hamcrest.Condition.Step;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
@@ -328,6 +329,20 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
+	@Override
+	public void deleteVertex(URI vertex) throws IOException {
+		// TODO Auto-generated method stub
+		try {
+			final RepositoryResult<Statement> statementsToRemove= con.getStatements(vertex, RDF.TYPE, null, false);
+			while(statementsToRemove.hasNext()){
+				final Statement s = statementsToRemove.next();
+				con.remove(s);
+			}
+		} catch (RepositoryException e) {
+			throw new IOException();
+		}
+	}
+	
 	// utility
 
 	protected List<Long> extractIds(final Collection<URI> elements) {

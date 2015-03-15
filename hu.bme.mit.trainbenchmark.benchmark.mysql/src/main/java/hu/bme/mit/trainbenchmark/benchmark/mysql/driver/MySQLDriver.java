@@ -134,17 +134,16 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public Long insertVertexWithEdge(Long sourceVertex,
-			String sourceVertexType, String targetVertexType, String edgeType)
+	public Long insertVertexWithEdge(final Long sourceVertex,
+			final String sourceVertexType, final String targetVertexType, final String edgeType)
 			throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void insertEdge(Long sourceVertex, Long targetVertex, String edgeType) {
+	public void insertEdge(Long sourceVertex,final String sourceVertexType, Long targetVertex, String edgeType) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	// read
@@ -166,8 +165,9 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex, String targetVertexType,
-			String edgeType) {
+	public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex,final String sourceVertexType, 
+			final String targetVertexType,
+			final String edgeType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -234,6 +234,12 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
+	}
+
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
