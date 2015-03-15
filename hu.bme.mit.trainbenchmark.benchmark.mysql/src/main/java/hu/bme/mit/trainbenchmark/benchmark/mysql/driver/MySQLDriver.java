@@ -43,10 +43,14 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	protected Connection con;
 	protected Statement st;
 
-	protected static final Map<String, String> EDGE_SOURCE_TYPES = ImmutableMap.of(ModelConstants.TRACKELEMENT_SENSOR, "TrackElement_id",
-			ModelConstants.ROUTE_ROUTEDEFINITION, "Route_id");
+	protected static final Map<String, String> EDGE_SOURCE_TYPES = ImmutableMap.of(
+			ModelConstants.TRACKELEMENT_SENSOR, "TrackElement_id",
+			ModelConstants.ROUTE_ROUTEDEFINITION, "Route_id", 
+			ModelConstants.TRACKELEMENT_CONNECTSTO, "TrackElement_id");
 
-	protected static final Map<String, String> EDGE_TARGET_TYPES = ImmutableMap.of(ModelConstants.TRACKELEMENT_SENSOR, "Sensor_id");
+	protected static final Map<String, String> EDGE_TARGET_TYPES = ImmutableMap.of(
+			ModelConstants.TRACKELEMENT_SENSOR, "Sensor_id",
+			ModelConstants.TRACKELEMENT_CONNECTSTO, "TrackElement_id_connectsTo");
 
 	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(ModelConstants.ROUTE_ENTRY, ModelConstants.ROUTE);
 
@@ -115,21 +119,8 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	@Override
 	public void insertVertexWithEdge(final List<Long> sourceVertices, final String sourceVertexType, final String targetVertexType,
 			final String edgeType) throws IOException {
-		try {
-			for (final Long sourceVertex : sourceVertices) {
-				final Statement st = con.createStatement();
-				st.executeUpdate(String.format("INSERT INTO `%s` VALUES ();", targetVertexType), Statement.RETURN_GENERATED_KEYS);
-
-				try (ResultSet rs = st.getGeneratedKeys()) {
-					if (rs.next()) {
-						final long newVertexId = rs.getLong(1);
-						st.executeUpdate(String.format("INSERT INTO `%s` (`TrackElement_id`, `Sensor_id`) VALUES (%d, %d);", edgeType,
-								sourceVertex, newVertexId));
-					}
-				}
-			}
-		} catch (final SQLException e) {
-			throw new IOException(e);
+		for (final Long sourceVertex : sourceVertices) {
+			insertVertexWithEdge(sourceVertex, sourceVertexType, targetVertexType, edgeType);
 		}
 	}
 
@@ -137,13 +128,35 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	public Long insertVertexWithEdge(final Long sourceVertex,
 			final String sourceVertexType, final String targetVertexType, final String edgeType)
 			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		long newVertexId = -1;
+		try {
+			final Statement st = con.createStatement();
+			st.executeUpdate(String.format("INSERT INTO `%s` VALUES ();", targetVertexType), Statement.RETURN_GENERATED_KEYS);
+
+			try (ResultSet rs = st.getGeneratedKeys()) {
+				if (rs.next()) {
+					newVertexId = rs.getLong(1);
+					st.executeUpdate(String.format("INSERT INTO `%s` (`%s`, `%s`) VALUES (%d, %d);", edgeType,
+							EDGE_SOURCE_TYPES.get(edgeType), EDGE_TARGET_TYPES.get(edgeType),sourceVertex, newVertexId));
+				}
+			}
+		}
+		catch(final SQLException e){
+			throw new IOException(e);
+		}
+		return newVertexId;
 	}
 
 	@Override
-	public void insertEdge(Long sourceVertex,final String sourceVertexType, Long targetVertex, String edgeType) {
-		// TODO Auto-generated method stub
+	public void insertEdge(Long sourceVertex,final String sourceVertexType, Long targetVertex, String edgeType) throws IOException {
+		
+		try {
+			final Statement st = con.createStatement();
+			st.executeUpdate(String.format("INSERT INTO `%s` (`%s`, `%s`) VALUES (%d, %d);", edgeType, 
+					EDGE_SOURCE_TYPES.get(edgeType), EDGE_TARGET_TYPES.get(edgeType), sourceVertex, targetVertex));
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
 	}
 	
 	// read
@@ -166,10 +179,20 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 
 	@Override
 	public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex,final String sourceVertexType, 
-			final String targetVertexType,
-			final String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
+			final String targetVertexType, final String edgeType) throws IOException {
+		final List<Long> results = new ArrayList<>();
+		
+		try {
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(String.format("SELECT * FROM %s WHERE %s = %s;", edgeType, 
+					EDGE_SOURCE_TYPES.get(edgeType), sourceVertex));
+			while (rs.next()){
+				results.add(rs.getLong(2));
+			}
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+		return results;
 	}
 
 	// update
@@ -237,9 +260,13 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public void deleteVertex(final Long vertex) throws IOException {
-		// TODO Auto-generated method stub
+	public void deleteVertex(final Long vertex, final String vertexType) throws IOException {
+		try {
+			Statement statement = con.createStatement();
+			statement.executeUpdate(String.format("DELETE FROM %s WHERE id = %d;", vertexType, vertex));
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
 		
 	}
-
 }

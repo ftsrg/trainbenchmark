@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
 
 CREATE TABLE IF NOT EXISTS `Segment` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `Segment_length` bigint NOT NULL,
+  `Segment_length` bigint NOT NULL DEFAULT 1,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 

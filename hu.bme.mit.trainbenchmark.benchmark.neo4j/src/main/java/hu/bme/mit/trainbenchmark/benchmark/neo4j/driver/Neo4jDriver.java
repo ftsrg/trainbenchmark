@@ -234,7 +234,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	}
 
 	@Override
-	public void deleteVertex(Node vertex) throws IOException {
+	public void deleteVertex(final Node vertex, final String vertexType) throws IOException {
 		vertex.delete();
 	}
 	

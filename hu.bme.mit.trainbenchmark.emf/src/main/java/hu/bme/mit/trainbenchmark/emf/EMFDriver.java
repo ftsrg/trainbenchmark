@@ -219,7 +219,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	}
 
 	@Override
-	public void deleteVertex(final RailwayElement vertex) throws IOException {
+	public void deleteVertex(final RailwayElement vertex, final String vertexType) throws IOException {
 		container.getContains().remove(vertex);
 	}
 	
