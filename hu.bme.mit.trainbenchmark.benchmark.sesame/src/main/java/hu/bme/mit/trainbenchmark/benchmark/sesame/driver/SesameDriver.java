@@ -181,7 +181,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 	
 	@Override
-	public void insertEdge(URI sourceVertex, URI targetVertex, String edgeType) throws IOException {
+	public void insertEdge(final URI sourceVertex, final String sourceVertexType, final URI targetVertex,
+			final String edgeType) throws IOException {
 		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
 		final Statement edgeStatement = f.createStatement(sourceVertex, edgeTypeURI, targetVertex);
 		try {
@@ -214,8 +215,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<URI> collectOutgoingConnectedVertices(URI sourceVertex, String targetVertexType,
-			String edgeType) throws IOException {
+	public List<URI> collectOutgoingConnectedVertices(final URI sourceVertex, final String sourceVertexType, 
+			final String targetVertexType, final String edgeType) throws IOException {
 		final URI typeURI = f.createURI(BASE_PREFIX + targetVertexType);
 		final List<URI> vertices = new ArrayList<>();
 		

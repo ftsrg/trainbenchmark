@@ -100,7 +100,6 @@ public abstract class AbstractBenchmarkCase<T> {
 	public void benchmarkCheck() throws IOException {
 		bmr.restartClock();
 		check();
-		System.out.println(results);
 		bmr.addResultSize(results.size());
 		bmr.addCheckTime();
 	}
