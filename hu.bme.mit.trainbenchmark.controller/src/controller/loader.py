@@ -80,6 +80,7 @@ class Loader():
         
         # common parameters    
         common = CommonParameters()
+        common.generator_args = config_json["Arguments"]["Generator"]
         common.maven_xmx = config_json["MAVEN_OPTS"]["Xmx"]
         common.maven_maxpermsize = config_json["MAVEN_OPTS"]["XX:MaxPermSize"]
         common.java_xmx = config_json["JAVA_OPTS"]["xmx"]
@@ -124,9 +125,6 @@ class Loader():
                     queries = unique["Queries"]
                 else:
                     queries = config_json["Queries"]
-                if "Generator" in unique.keys():
-                    generator_args = unique["Generator"]
-                else:
                     generator_args = config_json["Arguments"]["Generator"]
                 if "Benchmark" in unique.keys():
                     benchmark_args = unique["Benchmark"]
@@ -134,7 +132,6 @@ class Loader():
                     benchmark_args = config_json["Arguments"]["Benchmark"]
 
                 config = Configuration()
-                config.generator_args = generator_args
                 config.benchmark_args = benchmark_args
                 config.tool = unique["Tool"]
                 config.queries = queries
@@ -163,7 +160,6 @@ class Loader():
                 config.sizes = sizes
                 config.common = common
                 config.format = tools_json[tool]["format"]
-                config.generator_args = config_json["Arguments"]["Generator"]
                 config.benchmark_args = config_json["Arguments"]["Benchmark"]
                 
                 configurations.append(config)

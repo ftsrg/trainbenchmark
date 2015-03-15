@@ -46,14 +46,11 @@ class Generator():
         # mutual parameters for every configuration
         java_xmx = configurations[0].common.java_xmx
         java_maxpermsize = configurations[0].common.java_maxpermsize
-        args = configurations.generator_args
+        args = configurations[0].common.generator_args
         for scenario in self.models:
             for format in self.models[scenario]:
                 target = targets.get_generator_jar(format)
-                if target is None:
-                    logging.error("Generator .jar cannot be found of " +
-                                  format)
-                    return None
+
                 if len(self.models[scenario][format]) > 0:
                     for size in self.models[scenario][format]:
                         logging.info("Generate model:(format:" + format +

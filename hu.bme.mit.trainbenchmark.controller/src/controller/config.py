@@ -17,7 +17,6 @@ class Configuration:
     all_dependencies = list()
 
     def __init__(self):
-        self.generator_args = None
         self.benchmark_args = None
         self.scenarios = None
         self.format = None
@@ -52,6 +51,7 @@ class CommonParameters:
     """
     
     def __init__(self):
+        self.generator_args = None
         self.maven_xmx = None 
         self.maven_maxpermsize = None
         self.java_xmx = None
