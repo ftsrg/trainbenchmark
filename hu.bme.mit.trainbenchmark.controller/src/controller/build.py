@@ -21,7 +21,7 @@ import sys
 import argparse
 import logging
 
-import handler
+import util
 import benchmark
 from generate import Generator
 from loader import Loader
@@ -57,10 +57,10 @@ def maven_build(tool, skip_tests):
 
     if skip_tests:
         subprocess.call(["mvn", "clean", "install", "-P",
-                        handler.get_package_name(tool), "-DskipTests"])
+                        util.get_package_name(tool), "-DskipTests"])
     else:
         subprocess.call(["mvn", "clean", "install", "-P",
-                        handler.get_package_name(tool)])
+                        util.get_package_name(tool)])
 
 
 def build_projects(configurations, skip_tests, build_core=True,
@@ -95,11 +95,11 @@ def build_projects(configurations, skip_tests, build_core=True,
     logging.info("Build the following projects: " + all_dependencies.__str__())
     print("Build the following projects: " + all_dependencies.__str__())
     path = configurations[0].common.path
-    handler.set_working_directory()
+    util.set_working_directory()
     subprocess.call(["../../shell-scripts/export_maven_opts.sh",
                     configurations[0].common.maven_xmx,
                     configurations[0].common.maven_maxpermsize])
-    handler.set_working_directory(path)
+    util.set_working_directory(path)
 
     while len(all_dependencies) > 0:
         deps.install_dependencies(all_dependencies[-1], path)
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     log.init_log()
     # set working directory to this file's path
-    handler.set_working_directory()
+    util.set_working_directory()
     build_all = True
 
     logging.info("Main module: build.py.")

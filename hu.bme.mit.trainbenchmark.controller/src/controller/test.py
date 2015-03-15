@@ -10,17 +10,18 @@ import unittest
 from loader import Loader
 from generate import Generator
 import generate
+import util
 
 
 class GenerationTest(unittest.TestCase):
     
     @classmethod
-    def setUpClass(self):
-        self.loader = Loader()
-        self.generator = Generator()
-        self.id = 0
-        self.configs = None
-        self.models = None
+    def setUpClass(cls):
+        cls.loader = Loader()
+        cls.generator = Generator()
+        cls.id = 0
+        cls.configs = None
+        cls.models = None
     
     def load(self):
         self.loader.config_path = "../../tests/" + str(self.id) + ".json"
@@ -39,7 +40,6 @@ class GenerationTest(unittest.TestCase):
     
     def size(self, scenario, format):
         return len(self.models[scenario][format])
-    
     
     def test_generation_1(self):
         self.id = 1
@@ -130,4 +130,5 @@ class GenerationTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    util.set_working_directory()
     unittest.main(verbosity=2, failfast=False)

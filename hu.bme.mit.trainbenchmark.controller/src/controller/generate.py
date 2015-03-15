@@ -4,7 +4,7 @@ Created on Oct 5, 2014
 
 @author: Zsolt Kovari
 
-Generates the certain models. Multiple instance generation 
+Generates the certain models. Multiple instance generation
 is prevented.
 """
 import subprocess
@@ -14,7 +14,7 @@ import logging
 import pprint
 
 import targets
-import handler
+import util
 from loader import Loader
 import log
 
@@ -23,7 +23,6 @@ class Generator():
     def __init__(self):
         self.prevented = False
         self.models = dict()
-
 
     def generate_models(self, configurations):
         """
@@ -35,7 +34,7 @@ class Generator():
         logging.info("generate.generate_models called.")
         
         path = configurations[0].common.path
-        handler.set_working_directory(path)
+        util.set_working_directory(path)
         
         models_path = targets.get_common_model_path()
         if not os.path.exists(models_path):

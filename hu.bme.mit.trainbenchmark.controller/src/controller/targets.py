@@ -9,8 +9,6 @@ instance model generation and benchmark running.
 import glob
 import logging
 
-import handler
-
 
 def get_generator_jar(format):
     """
