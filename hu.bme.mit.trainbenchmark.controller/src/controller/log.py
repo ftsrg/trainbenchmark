@@ -3,19 +3,19 @@ Created on Dec 7, 2014
 
 @author: Zsolt Kovari
 
-A log initialization module.
+A logger initialization module.
 """
 import os
 import time
 import logging
 
-import handler
+import util
 
 
 def init_log():
     """Initialize logger handlers.
     """
-    handler.set_working_directory()
+    util.set_working_directory()
     os.makedirs("../../log/dist", exist_ok=True)
     os.makedirs("../../log/all", exist_ok=True)
     

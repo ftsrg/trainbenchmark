@@ -7,8 +7,6 @@ The module is responsible for validation.
 import os
 import logging
 
-import handler
-
 from jsonschema import validate, Draft4Validator
 from jsonschema.exceptions import ValidationError, SchemaError, best_match
 

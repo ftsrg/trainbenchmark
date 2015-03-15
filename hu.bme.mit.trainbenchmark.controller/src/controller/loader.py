@@ -12,7 +12,7 @@ import json
 import logging
 
 import validation
-import handler
+import util
 from config import Configuration, CommonParameters
 
 from jsonschema.exceptions import ValidationError
@@ -31,15 +31,15 @@ class Loader():
         Configuration objects. 
 
         """
-        handler.set_working_directory()
+        util.set_working_directory()
         # paths relatively to this script's location        
-        schema_json = handler.json_decode(self.schema_path)
+        schema_json = util.json_decode(self.schema_path)
         if schema_json is None:
             msg = "Problem has occurred during the decoding procedure" + \
                   " with the following file: " + self.schema_path + "."
             logging.error(msg)
             raise IOError(msg)
-        tools_json = handler.json_decode(self.tools_path)
+        tools_json = util.json_decode(self.tools_path)
         if tools_json is None:
             msg = "Problem has occurred during the decoding procedure" + \
                   " with the following file: " + self.tools_path + "."
@@ -89,10 +89,10 @@ class Loader():
         common.modif_constant = config_json["ModificationConstant"]
         common.iter_count = config_json["IterationCount"]
         # relatively from this script's path
-        handler.set_working_directory("../../../")
-        path = os.getcwd() # store the absolute path instead of relative
+        util.set_working_directory("../../../")
+        path = os.getcwd()  # store the absolute path instead of relative
         common.path = path
-        handler.set_working_directory()
+        util.set_working_directory()
         
         # tools with unique configuration
         if len(config_json["UniqueConfigurations"]) > 0:
@@ -100,17 +100,17 @@ class Loader():
                 unique_tools.add(unique["Tool"])
                 if "MinSize" in unique.keys():
                     if "MaxSize" in unique.keys():
-                        sizes = handler.get_power_of_two(unique["MinSize"],
-                                                         unique["MaxSize"])
+                        sizes = util.get_power_of_two(unique["MinSize"],
+                                                      unique["MaxSize"])
                     else:
-                        sizes = handler.get_power_of_two(unique["MinSize"],
-                                                         config_json["MaxSize"])
+                        sizes = util.get_power_of_two(unique["MinSize"],
+                                                      config_json["MaxSize"])
                 elif "MaxSize" in unique.keys():
-                    sizes = handler.get_power_of_two(config_json["MinSize"],
-                                                     unique["MaxSize"])
+                    sizes = util.get_power_of_two(config_json["MinSize"],
+                                                  unique["MaxSize"])
                 else:
-                    sizes = handler.get_power_of_two(config_json["MinSize"],
-                                                     config_json["MaxSize"])
+                    sizes = util.get_power_of_two(config_json["MinSize"],
+                                                  config_json["MaxSize"])
                 if len(sizes) == 0:
                     logging.error("Problem with min and maxsize." +
                                   "Too short the range between them.")
@@ -133,7 +133,6 @@ class Loader():
                 else:
                     benchmark_args = config_json["Arguments"]["Benchmark"]
 
-
                 config = Configuration()
                 config.generator_args = generator_args
                 config.benchmark_args = benchmark_args
@@ -148,8 +147,8 @@ class Loader():
         # tools with the default configuration
         for tool in config_json["Tools"]:
             if tool not in unique_tools:
-                sizes = handler.get_power_of_two(config_json["MinSize"],
-                                                 config_json["MaxSize"])
+                sizes = util.get_power_of_two(config_json["MinSize"],
+                                              config_json["MaxSize"])
                 if len(sizes) == 0:
                     logging.error("Problem with min and maxsize." +
                                   "Too short the range between them.")
@@ -174,19 +173,19 @@ class Loader():
 
     def get_dependency(self, tool):
         """
-        Returns the parameter dependency as string. Returns None if
-        there is not an existing dependency for the given parameter.
+        Returns the tool's dependency as string. And returns None in that case
+        if a dependency would not exist.
         """
         # path relatively to this script's location
         current_directory = os.getcwd() 
-        handler.set_working_directory()
+        util.set_working_directory()
         dependencies_path = "../../config/dependencies.json"
-        dependencies_json = handler.json_decode(dependencies_path)
+        dependencies_json = util.json_decode(dependencies_path)
         if dependencies_json is None:
             logging.error("Problem has occurred during the decoding procedure" +
                           " with the following file: " + dependencies_path)
             return None
-        handler.set_working_directory(current_directory)
+        util.set_working_directory(current_directory)
         if tool not in dependencies_json:
             logging.warning("Does not exist a dependency for " + tool + ".")
             return None
@@ -204,4 +203,3 @@ def checking_hook(pairs):
             raise KeyError("Duplicate key specified: %s" % key)
         result[key] = value
     return result
-

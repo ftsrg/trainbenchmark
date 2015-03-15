@@ -3,7 +3,7 @@ Created on Nov 25, 2014
 
 @author: Zsolt Kovari
 
-The module defines Configuration class.
+The module defines Configuration  and CommonParameters class.
 """
 
 
@@ -11,7 +11,7 @@ class Configuration:
     """
     Represents a configuration.
     
-    @cvar all_dependencies: contains all dependencies of the tool
+    @cvar all_dependencies: contains every dependency of the tools
     """
     
     all_dependencies = list()
@@ -29,10 +29,12 @@ class Configuration:
     
     def add_dependency(self, dependency):
         """
-        Set the configuration repository which represents the tool's location.
-        
+        Add a project's identifier to the object's dependencies. The parameter
+        is attached to the all_dependencies variable too, as the last element
+        of the list.
+
         Parameters:
-        repository: a Repository object
+        @param dependency: String variable
         """
         self.__dependencies.append(dependency)
         if dependency in self.all_dependencies:

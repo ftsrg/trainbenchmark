@@ -7,9 +7,9 @@ A helper module, which collects the most frequently used functions
 by the other modules.
 
 Functions:
-    set_working_directory: change the working directory
+    set_working_directory: changes the working directory
     get_power_of_two: creates a list of power of 2 numbers
-    json_decode: load json file to a python json object
+    json_decode: loads json file to a python json object
     get_package_name: returns a corresponding package name
 """
 import json
@@ -19,7 +19,7 @@ import logging
 
 def set_working_directory(path=None):
     """
-    Set the working directory to this script's folder or to the path
+    Sets the working directory to this script's folder or to the path
     optional parameter, if that is given.
     
     Parameters:
@@ -39,7 +39,7 @@ def set_working_directory(path=None):
 
 def get_power_of_two(minsize, maxsize):
     """
-    Return power of two numbers between minsize and maxsize 
+    Returns power of two numbers between minsize and maxsize
     in a list.
     """
     all_size = []
@@ -53,9 +53,8 @@ def get_power_of_two(minsize, maxsize):
 
 def json_decode(json_path):
     """
-    Open a .json file and return as a python json object.
+    Opens a .json file and returns as a python json object.
     The json_path parameter is the path of the file.
-    Return None if a problem has occurred.
     """
     try:
         with open(json_path) as file:

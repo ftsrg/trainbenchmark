@@ -13,7 +13,7 @@ import platform
 import logging
 
 import targets
-import handler
+import util
 from loader import Loader
 import log
 
@@ -25,7 +25,7 @@ def run_benchmark(configurations):
     @param configurations: a list of Configuration objects
     """
     logging.info("benchmark.run_benchmark called.")
-    handler.set_working_directory(configurations[0].common.path)
+    util.set_working_directory(configurations[0].common.path)
     if not os.path.exists("./results"):
         os.mkdir("results")
 
