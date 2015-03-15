@@ -7,6 +7,10 @@
     "xmx": "2g",
     "maxPermSize": "256m"
   },
+  "Arguments": {
+    "Generator": "",
+    "Benchmark": ""
+  },
   "IterationCount": 10,
   "MinSize": 1,
   "MaxSize": 8,
@@ -26,6 +30,7 @@
   "UniqueConfigurations": [
     {
       "Tool": "sesame",
+      "Benchmark": "-inferencing",
       "MinSize": 1,
       "MaxSize": 3,
       "Queries": [

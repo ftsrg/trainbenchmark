@@ -26,7 +26,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
-public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
+public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 
 	protected Neo4jBenchmarkConfig nbc;
 

@@ -13,7 +13,7 @@ import logging
 
 import validation
 import handler
-from config import Configuration, Repository, CommonParameters
+from config import Configuration, CommonParameters
 
 from jsonschema.exceptions import ValidationError
 
@@ -112,7 +112,7 @@ class Loader():
                     sizes = handler.get_power_of_two(config_json["MinSize"],
                                                      config_json["MaxSize"])
                 if len(sizes) == 0:
-                    logging.error("Problem with min and maxsize."+
+                    logging.error("Problem with min and maxsize." +
                                   "Too short the range between them.")
                     return None
                 
@@ -124,7 +124,19 @@ class Loader():
                     queries = unique["Queries"]
                 else:
                     queries = config_json["Queries"]
+                if "Generator" in unique.keys():
+                    generator_args = unique["Generator"]
+                else:
+                    generator_args = config_json["Arguments"]["Generator"]
+                if "Benchmark" in unique.keys():
+                    benchmark_args = unique["Benchmark"]
+                else:
+                    benchmark_args = config_json["Arguments"]["Benchmark"]
+
+
                 config = Configuration()
+                config.generator_args = generator_args
+                config.benchmark_args = benchmark_args
                 config.tool = unique["Tool"]
                 config.queries = queries
                 config.scenarios = scenarios
@@ -152,6 +164,8 @@ class Loader():
                 config.sizes = sizes
                 config.common = common
                 config.format = tools_json[tool]["format"]
+                config.generator_args = config_json["Arguments"]["Generator"]
+                config.benchmark_args = config_json["Arguments"]["Benchmark"]
                 
                 configurations.append(config)
         for config in configurations:
@@ -161,7 +175,7 @@ class Loader():
     def get_dependency(self, tool):
         """
         Returns the parameter dependency as string. Returns None if
-        there is not exist any dependency for the given parameter.
+        there is not an existing dependency for the given parameter.
         """
         # path relatively to this script's location
         current_directory = os.getcwd() 
