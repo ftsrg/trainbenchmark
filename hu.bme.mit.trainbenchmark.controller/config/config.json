@@ -7,21 +7,24 @@
     "xmx": "2g",
     "maxPermSize": "256m"
   },
+  "Arguments": {
+    "Generator": "",
+    "Benchmark": ""
+  },
   "IterationCount": 10,
   "MinSize": 1,
   "MaxSize": 1,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
-    "ConnectedSegments"
+    "RouteSensor"
   ],
   "Scenarios": [
-    "User",
-    "Repair"
+    "Batch"
   ],
   "Series": 1,
   "Tools": [
-    "emfincquery"
+    "sesame"
   ],
   "UniqueConfigurations": [
 	]

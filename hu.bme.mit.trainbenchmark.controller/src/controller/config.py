@@ -3,19 +3,22 @@ Created on Nov 25, 2014
 
 @author: Zsolt Kovari
 
-The module defines Configuration and Repository classes.
+The module defines Configuration class.
 """
+
 
 class Configuration:
     """
-    The class represents a configuration.
+    Represents a configuration.
     
-    @cvar all_dependencies: contains all dependencies of projects
+    @cvar all_dependencies: contains all dependencies of the tool
     """
     
     all_dependencies = list()
 
     def __init__(self):
+        self.generator_args = None
+        self.benchmark_args = None
         self.scenarios = None
         self.format = None
         self.tool = None
@@ -42,7 +45,7 @@ class Configuration:
 
 class CommonParameters:
     """
-    The class represents a container of the common parameters between
+    Represents a container of the common parameters between
     configurations.
     """
     
@@ -56,19 +59,3 @@ class CommonParameters:
         self.modif_constant = None
         self.iter_count = None
         self.path = None
-
-
-class Repository:
-    """The class represents a Git repository.
-    """
-    def __init__(self, name):
-        self.name = name
-
-        # initialized when a Repository is attached to a Configuration object
-        self.config = None
-
-    def __eq__(self, other):
-        if self.name == other.name:
-            return True
-        else:
-            return False

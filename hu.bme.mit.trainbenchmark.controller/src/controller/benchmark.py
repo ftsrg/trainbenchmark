@@ -51,6 +51,7 @@ def execute(configuration):
                 modif_method = configuration.common.modif_method
                 modif_constant = str(configuration.common.modif_constant)
                 iter_count = str(configuration.common.iter_count)
+                args = configuration.benchmark_args
                 for query in configuration.queries:
                     logging.info("Run benchmark:(tool:" + configuration.tool +
                                  ", scenario:" + scenario +
@@ -64,7 +65,8 @@ def execute(configuration):
                                      "-query", query,
                                      "-modificationMethod", modif_method,
                                      "-modificationConstant", modif_constant,
-                                     "-iterationCount", iter_count
+                                     "-iterationCount", iter_count,
+                                     args
                                      ])
 
 

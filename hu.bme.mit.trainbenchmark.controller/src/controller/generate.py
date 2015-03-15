@@ -47,7 +47,7 @@ class Generator():
         # mutual parameters for every configuration
         java_xmx = configurations[0].common.java_xmx
         java_maxpermsize = configurations[0].common.java_maxpermsize
-        
+        args = configurations.generator_args
         for scenario in self.models:
             for format in self.models[scenario]:
                 target = targets.get_generator_jar(format)
@@ -65,7 +65,8 @@ class Generator():
                                          java_maxpermsize, "-jar", target,
                                          "-scenario", scenario,
                                          "-size", str(size),
-                                         "-workspacePath", path])
+                                         "-workspacePath", path,
+                                         args])
         
     def prevent_multiple_generation(self, configurations):
         """
