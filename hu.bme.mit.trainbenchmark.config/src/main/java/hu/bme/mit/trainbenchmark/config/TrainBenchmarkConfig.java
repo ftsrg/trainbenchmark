@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.config;
 
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+
 import java.util.Arrays;
 
 import org.apache.commons.cli.CommandLine;
@@ -85,7 +87,7 @@ public abstract class TrainBenchmarkConfig {
 	}
 
 	public String getVariant() {
-		if ("Batch".equals(scenario))
+		if (ScenarioConstants.BATCH.equals(scenario))
 			return "-repair-";
 		return "-" + scenario.toLowerCase() + "-";
 	}

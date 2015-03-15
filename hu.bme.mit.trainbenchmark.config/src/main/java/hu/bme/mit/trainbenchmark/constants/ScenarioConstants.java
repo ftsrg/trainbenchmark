@@ -9,18 +9,14 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
+package hu.bme.mit.trainbenchmark.constants;
 
-public class NegateAndAddOne implements PropertyOperation {
+public class ScenarioConstants {
 
-	@Override
-	public int op(final int x) {
-		return -x + 1;
-	}
-
-	@Override
-	public String sqlUpdate(final String name) {
-		return String.format("%s = -%s + 1", name, name);
-	}
+	public static final String BATCH = "Batch";
+	public static final String REPAIR = "Repair";
+	public static final String USER = "User";
+	public static final String TEST = "Test";
+	
 	
 }

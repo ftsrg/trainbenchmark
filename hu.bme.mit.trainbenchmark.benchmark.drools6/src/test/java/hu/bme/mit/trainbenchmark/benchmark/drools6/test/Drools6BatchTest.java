@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
+ * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,12 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-public interface AttributeOperation {
+package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
-	public int op(int x);
-	
-	public String sqlUpdate(String name);
-	
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+
+public class Drools6BatchTest extends BatchTest {
+
+	public Drools6BatchTest() {
+		bi = new Drools6BenchmarkInitializer();
+	}
+
 }

@@ -26,7 +26,7 @@ public class PosLength extends Drools5BenchmarkCase<Segment> {
 			listener = new ResultListener<Segment>("segment");
 			query = ksession.openLiveQuery("PosLength check", new Object[] {}, listener);
 		}		
-		results = new ArrayList<Segment>(listener.getMatching());
+		results = new ArrayList<>(listener.getMatching());
 		return results;
 	}
 

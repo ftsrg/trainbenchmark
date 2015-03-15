@@ -29,7 +29,7 @@ public class PosLength extends Drools6BenchmarkCase<Segment> {
 			// activate lazy PHREAK evaluation
 			ksession.fireAllRules();
 		}
-		results = new ArrayList<Segment>(listener.getMatching());
+		results = new ArrayList<>(listener.getMatching());
 		return results;
 	}
 

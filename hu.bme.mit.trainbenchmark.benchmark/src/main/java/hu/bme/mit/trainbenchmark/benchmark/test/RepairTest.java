@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+
 import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
@@ -21,22 +24,27 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void posLengthRepair() throws ParseException, IOException {
-		testTransformation("PosLength", "Repair", 15, 14);
+		testTransformation(QueryConstants.POSLENGTH, ScenarioConstants.REPAIR, 14);
 	}
 
 	@Test
 	public void routeSensorRepair() throws ParseException, IOException {
-		testTransformation("RouteSensor", "Repair", 12, 11);
+		testTransformation(QueryConstants.ROUTESENSOR, ScenarioConstants.REPAIR, 11);
 	}
 
 	@Test
 	public void signalNeighborRepair() throws ParseException, IOException {
-		testTransformation("SignalNeighbor", "Repair", 1, 0);
+		testTransformation(QueryConstants.SIGNALNEIGHBOR, ScenarioConstants.REPAIR, 0);
 	}
 
 	@Test
 	public void switchSensorRepair() throws ParseException, IOException {
-		testTransformation("SwitchSensor", "Repair", 4, 3);
+		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.REPAIR, 3);
+	}
+	
+	@Test
+	public void switchSetRepair() throws ParseException, IOException {
+		testTransformation(QueryConstants.SWITCHSET, ScenarioConstants.REPAIR, 3);
 	}
 
 }

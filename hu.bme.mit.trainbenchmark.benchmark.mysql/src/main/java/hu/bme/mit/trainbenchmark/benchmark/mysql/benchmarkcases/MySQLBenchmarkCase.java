@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 
-public abstract class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
+public class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
 	@Override
 	public void init() throws IOException {

@@ -28,11 +28,6 @@ import org.neo4j.tooling.GlobalGraphOperations;
 public class PosLength extends Neo4jBenchmarkCase {
 
 	@Override
-	public String getName() {
-		return "PosLength";
-	}
-
-	@Override
 	public Collection<Node> checkJava() {
 		final Label labelSegment = DynamicLabel.label(SEGMENT);
 

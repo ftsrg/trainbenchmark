@@ -1,0 +1,23 @@
+PREFIX base: <http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?xSwitchPosition
+WHERE
+{
+    ?xSignal rdf:type base:Signal .
+    ?xRoute rdf:type base:Route .
+    ?xSwitchPosition rdf:type base:SwitchPosition .
+    ?xSwitch rdf:type base:Switch .
+
+    ?xRoute base:Route_entry ?xSignal .
+    ?xRoute base:Route_switchPosition ?xSwitchPosition .
+    ?xSwitchPosition base:SwitchPosition_switch ?xSwitch .
+
+    ?xSignal base:Signal_currentState base:SIGNALSTATE_GO .
+    ?xSwitch base:Switch_currentState ?xSwitchStateSW .
+    ?xSwitchPosition base:SwitchPosition_switchState ?xSwitchStateSWP .
+
+    FILTER (!sameTerm(?xSwitchStateSW, ?xSwitchStateSWP))
+}

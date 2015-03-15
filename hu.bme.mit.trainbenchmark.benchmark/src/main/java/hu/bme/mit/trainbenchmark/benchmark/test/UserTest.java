@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+
 import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
@@ -21,22 +24,27 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void posLengthUser() throws ParseException, IOException {
-		testTransformation("PosLength", "User", 15, 16);
+		testTransformation(QueryConstants.POSLENGTH, ScenarioConstants.USER, 16);
 	}
 
 	@Test
 	public void routeSensorUser() throws ParseException, IOException {
-		testTransformation("RouteSensor", "User", 12, 13);
+		testTransformation(QueryConstants.ROUTESENSOR, ScenarioConstants.USER, 13);
 	}
 
 	@Test
 	public void signalNeighborUser() throws ParseException, IOException {
-		testTransformation("SignalNeighbor", "User", 1, 2);
+		testTransformation(QueryConstants.SIGNALNEIGHBOR, ScenarioConstants.USER, 2);
 	}
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation("SwitchSensor", "User", 4, 5);
+		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 5);
+	}
+	
+	@Test
+	public void switchSetUser() throws ParseException, IOException {
+		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 5);
 	}
 
 }
