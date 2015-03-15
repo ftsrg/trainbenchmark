@@ -26,7 +26,7 @@ public class SignalNeighbor extends Drools5BenchmarkCase<Route> {
 			listener = new ResultListener<Route>("route");
 			query = ksession.openLiveQuery("SignalNeighbor check", new Object[] {}, listener);
 		}		
-		results = new ArrayList<Route>(listener.getMatching());
+		results = new ArrayList<>(listener.getMatching());
 		return results;
 	}
 

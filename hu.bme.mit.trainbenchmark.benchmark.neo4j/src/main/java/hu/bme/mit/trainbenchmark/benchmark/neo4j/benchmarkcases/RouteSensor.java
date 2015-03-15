@@ -38,11 +38,6 @@ import org.neo4j.tooling.GlobalGraphOperations;
 public class RouteSensor extends Neo4jBenchmarkCase {
 
 	@Override
-	public String getName() {
-		return "RouteSensor";
-	}
-
-	@Override
 	public Collection<Node> checkJava() {
 		final Label labelRoute = DynamicLabel.label(ROUTE);
 		final Label labelSwitchPosition = DynamicLabel.label(SWITCHPOSITION);

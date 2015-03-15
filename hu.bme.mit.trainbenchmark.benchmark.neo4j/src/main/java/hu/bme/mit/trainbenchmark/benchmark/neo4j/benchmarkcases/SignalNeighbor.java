@@ -21,7 +21,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SIGNALNEIGHBOR;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,11 +36,6 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class SignalNeighbor extends Neo4jBenchmarkCase {
-
-	@Override
-	public String getName() {
-		return SIGNALNEIGHBOR;
-	}
 
 	@Override
 	public Collection<Node> checkJava() {

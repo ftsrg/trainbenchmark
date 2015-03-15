@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.fourstore.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.File;
@@ -111,12 +111,6 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 		return null;
 	}
 
-	@Override
-	public void insertEdge(final Long sourceVertex, final Long targetVertex, final String edgeType) {
-		// TODO Auto-generated method stub
-
-	}
-
 	// read
 
 	@Override
@@ -124,18 +118,11 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 		return driver.collectVertices(BASE_PREFIX + type);
 	}
 
-	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex, String targetVertexType,
-			String edgeType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	// update
 
 	@Override
 	public void updateProperties(final List<Long> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
+			final PropertyOperation attributeOperation) throws IOException {
 		final String fullPropertyName = BASE_PREFIX + propertyName;
 		final Map<String, Object> properties = new HashMap<>();
 
@@ -218,8 +205,28 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 
 	// utility
 
+	@Override
 	protected boolean ask(final String askQuery) throws IOException {
 		return driver.ask(askQuery);
+	}
+
+	@Override
+	public void insertEdge(final Long sourceVertex, final String sourceVertexType, final Long targetVertex, final String edgeType) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

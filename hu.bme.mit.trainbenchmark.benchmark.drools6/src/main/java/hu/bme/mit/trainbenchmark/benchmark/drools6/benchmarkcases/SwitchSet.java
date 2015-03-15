@@ -13,18 +13,18 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools6.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
-import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SwitchSensor extends Drools6BenchmarkCase<Switch> {
+public class SwitchSet extends Drools6BenchmarkCase<SwitchPosition> {
 
 	@Override
-	protected Collection<Switch> check() {
+	protected Collection<SwitchPosition> check() {
 		if (query == null) {
-			listener = new ResultListener<Switch>("switch");
-			query = ksession.openLiveQuery("SwitchSensor check", new Object[] {}, listener);
+			listener = new ResultListener<SwitchPosition>("switchPosition");
+			query = ksession.openLiveQuery("SwitchSet check", new Object[] {}, listener);
 		} else {
 			// activate lazy PHREAK evaluation
 			ksession.fireAllRules();

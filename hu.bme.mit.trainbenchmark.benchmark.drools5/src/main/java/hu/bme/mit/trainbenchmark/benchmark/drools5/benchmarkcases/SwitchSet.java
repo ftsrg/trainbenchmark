@@ -10,13 +10,24 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
 
-public class SwitchSensor extends MySQLBenchmarkCase {
+import hu.bme.mit.trainbenchmark.benchmark.drools5.ResultListener;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class SwitchSet extends Drools5BenchmarkCase<SwitchPosition> {
 
 	@Override
-	public String getName() {
-		return "SwitchSensor";
+	protected Collection<SwitchPosition> check() {
+		if (query == null) {
+			listener = new ResultListener<SwitchPosition>("switchPosition");
+			query = ksession.openLiveQuery("SwitchSet check", new Object[] {}, listener);
+		}
+		results = new ArrayList<>(listener.getMatching());
+		return results;
 	}
 
 }

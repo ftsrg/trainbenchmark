@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -155,7 +155,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 
 	@Override
 	public void updateProperties(final List<RailwayElement> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) {
+			final PropertyOperation attributeOperation) {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(vertexType);
 		final EStructuralFeature feature = clazz.getEStructuralFeature(propertyName);
 

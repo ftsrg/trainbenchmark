@@ -12,8 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
 
 import java.util.ArrayList;
@@ -29,12 +31,14 @@ import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class SwitchSensor extends Neo4jBenchmarkCase {
+public class SwitchSet extends Neo4jBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
-		final Label labelSensor = DynamicLabel.label(SENSOR);
+		final Label labelSwitchPosition = DynamicLabel.label(SWITCHPOSITION);
+		final Label labelRoute = DynamicLabel.label(ROUTE);
+		final Label labelSignal = DynamicLabel.label(SIGNAL);
 
 		final DynamicRelationshipType trackElement_sensorRelationshipType = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
 
