@@ -118,7 +118,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 
 	@Override
 	public void insertEdge(final Node sourceVertex, final String sourceVertexType,
-			Node targetVertex, String edgeType)  throws IOException{
+			final Node targetVertex, final String edgeType)  throws IOException{
 		final RelationshipType relationship = DynamicRelationshipType.withName(edgeType);
 		sourceVertex.createRelationshipTo(targetVertex, relationship);
 	}
@@ -133,7 +133,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	}
 	
 	@Override
-	public Node insertVertexWithEdge(Node sourceVertex,String sourceVertexType, String targetVertexType, String edgeType)throws IOException {
+	public Node insertVertexWithEdge(final Node sourceVertex,final String sourceVertexType, final String targetVertexType, final String edgeType)throws IOException {
 		final Label label = DynamicLabel.label(targetVertexType);
 		return (insertVertexWithEdge(sourceVertex, edgeType, label));
 		
@@ -163,7 +163,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	public List<Node> collectOutgoingConnectedVertices(final Node sourceVertex, final String sourceVertexType,
 			final String targetVertexType, final String edgeType) throws IOException {
 		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
-		List<Node> neighbors = new ArrayList<Node>();
+		final List<Node> neighbors = new ArrayList<Node>();
 		final Iterable<Relationship> relationships = sourceVertex.getRelationships(
 																			relationshipType,
 																			Direction.OUTGOING 
@@ -171,7 +171,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		for (final Relationship relationship : relationships) {
 			final Node endNode = relationship.getEndNode();
 			final Iterable<Label> labels = endNode.getLabels();
-			for (Label label : labels){
+			for (final Label label : labels){
 				if (targetVertexType.equals(label.toString())){
 					neighbors.add(endNode);
 				}
@@ -242,6 +242,12 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 
 	public GraphDatabaseService getGraphDb() {
 		return graphDb;
+	}
+
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

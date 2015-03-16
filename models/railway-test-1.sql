@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
 
 CREATE TABLE IF NOT EXISTS `Segment` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `Segment_length` bigint NOT NULL,
+  `Segment_length` bigint NOT NULL DEFAULT 1,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -4368,4 +4368,5 @@ COMMIT;
 CREATE INDEX Segment_idx_length ON Segment (Segment_length);
 CREATE INDEX Route_routeDefinition_idx ON Route_routeDefinition (Route_id, Sensor_id);
 CREATE INDEX Sensor_trackElement_idx1 ON TrackElement_sensor (TrackElement_id);
-CREATE INDEX Sensor_trackElement_idx2 ON TrackElement_sensor (Sensor_id);
+CREATE INDEX TrackElement_connectsto_idx1 ON TrackElement_connectsTo (TrackElement_id);
+CREATE INDEX TrackElement_connectsto_idx2 ON TrackElement_connectsTo (TrackElement_id_connectsTo);

@@ -148,13 +148,13 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public void insertEdge(Long sourceVertex,final String sourceVertexType, Long targetVertex, String edgeType) throws IOException {
+	public void insertEdge(final Long sourceVertex,final String sourceVertexType, final Long targetVertex, final String edgeType) throws IOException {
 		
 		try {
 			final Statement st = con.createStatement();
 			st.executeUpdate(String.format("INSERT INTO `%s` (`%s`, `%s`) VALUES (%d, %d);", edgeType, 
 					EDGE_SOURCE_TYPES.get(edgeType), EDGE_TARGET_TYPES.get(edgeType), sourceVertex, targetVertex));
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
 	}
@@ -183,13 +183,13 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 		final List<Long> results = new ArrayList<>();
 		
 		try {
-			Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery(String.format("SELECT * FROM %s WHERE %s = %s;", edgeType, 
+			final Statement statement = con.createStatement();
+			final ResultSet rs = statement.executeQuery(String.format("SELECT * FROM %s WHERE %s = %s;", edgeType, 
 					EDGE_SOURCE_TYPES.get(edgeType), sourceVertex));
 			while (rs.next()){
 				results.add(rs.getLong(2));
 			}
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
 		return results;
@@ -262,11 +262,17 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	@Override
 	public void deleteVertex(final Long vertex, final String vertexType) throws IOException {
 		try {
-			Statement statement = con.createStatement();
+			final Statement statement = con.createStatement();
 			statement.executeUpdate(String.format("DELETE FROM %s WHERE id = %d;", vertexType, vertex));
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
+		
+	}
+
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 }
