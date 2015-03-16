@@ -1,56 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.trainbenchmark.emf.model/src/main/java"
-    modelPluginID="hu.bme.mit.trainbenchmark.emf.model" modelName="Railway" modelPluginClass=""
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+    editorDirectory="/hu.bme.mit.trainbenchmark.emf.model.editor/src" modelPluginID="hu.bme.mit.trainbenchmark.emf.model"
+    modelName="Railway" modelPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    editorPluginID="hu.bme.mit.trainbenchmark.emf.model.editor" operationReflection="true"
+    importOrganizing="true">
   <foreignModel>railway.ecore</foreignModel>
   <genPackages prefix="Railway" basePackage="hu.bme.mit.trainbenchmark" disposableProviderFactory="true"
       ecorePackage="railway.ecore#/" publicationLocation="">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//SignalState">
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalState/FAILURE"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalState/STOP"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SignalState/GO"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//Signal">
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Signal/FAILURE"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Signal/STOP"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Signal/GO"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//SwitchState">
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/FAILURE"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/LEFT"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/RIGHT"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//SwitchState/STRAIGHT"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//Position">
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/FAILURE"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/LEFT"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/RIGHT"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/STRAIGHT"/>
     </genEnums>
     <genClasses ecoreClass="railway.ecore#//Segment">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Segment/Segment_length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Segment/length"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//TrackElement">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//TrackElement/TrackElement_sensor"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//TrackElement/TrackElement_connectsTo"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference railway.ecore#//TrackElement/sensor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//TrackElement/connectsTo"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Switch">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Switch/Switch_currentState"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Switch/Switch_switchPosition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Switch/currentPosition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Switch/positions"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Route">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/Route_entry"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/Route_switchPosition"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/Route_exit"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/Route_routeDefinition"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference railway.ecore#//Route/entry"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Route/follows"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/exit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Route/definedBy"/>
     </genClasses>
-    <genClasses ecoreClass="railway.ecore#//Signal">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Signal/Signal_currentState"/>
+    <genClasses ecoreClass="railway.ecore#//Semaphore">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Semaphore/signal"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//SwitchPosition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//SwitchPosition/SwitchPosition_switch"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//SwitchPosition/SwitchPosition_switchState"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//SwitchPosition/SwitchPosition_route"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//SwitchPosition/switch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//SwitchPosition/position"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference railway.ecore#//SwitchPosition/route"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//RailwayElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//RailwayElement/id"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Sensor">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Sensor/Sensor_trackElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Sensor/elements"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//RailwayContainer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/contains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/invalids"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/semaphores"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/routes"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

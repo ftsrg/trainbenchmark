@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated railway -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="hu.bme.mit.trainbenchmark.railway.presentation.RailwayModelWizardID"
+            name="%_UI_RailwayModelWizard_label"
+            class="hu.bme.mit.trainbenchmark.railway.presentation.RailwayModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/RailwayModelFile.gif">
+         <description>%_UI_RailwayModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated railway -->
+      <editor
+            id="hu.bme.mit.trainbenchmark.railway.presentation.RailwayEditorID"
+            name="%_UI_RailwayEditor_label"
+            icon="icons/full/obj16/RailwayModelFile.gif"
+            extensions="railway"
+            class="hu.bme.mit.trainbenchmark.railway.presentation.RailwayEditor"
+            contributorClass="hu.bme.mit.trainbenchmark.railway.presentation.RailwayActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
