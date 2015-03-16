@@ -62,36 +62,41 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 					final Node switchPosition = route_switchPosition.getEndNode();
 
 					// (switchPosition:SwitchPosition)-[SWITCHPOSITION_SWITCH]->()
-					if (!switchPosition.hasLabel(labelSwitchPosition))
+					if (!switchPosition.hasLabel(labelSwitchPosition)) {
 						continue;
+					}
 					final Iterable<Relationship> switchPosition_switches = switchPosition.getRelationships(Direction.OUTGOING,
 							relationshipTypeSwitchPosition_switch);
 					for (final Relationship switchPosition_switch : switchPosition_switches) {
 						final Node aSwitch = switchPosition_switch.getEndNode();
 
 						// (switch:Switch)-[TRACKELEMENT_SENSOR]->()
-						if (!aSwitch.hasLabel(labelSwitch))
+						if (!aSwitch.hasLabel(labelSwitch)) {
 							continue;
+						}
 						final Iterable<Relationship> trackElement_sensors = aSwitch.getRelationships(Direction.OUTGOING,
 								relationshipTypeTrackElement_sensor);
 						for (final Relationship trackElement_sensor : trackElement_sensors) {
 							final Node sensor = trackElement_sensor.getEndNode();
 
-							if (results.contains(sensor))
+							if (results.contains(sensor)) {
 								continue;
+							}
 
 							// (sensor:Sensor)<-[ROUTE_ROUTEDEFINITION]-(Route)
 							// NAC
-							if (!sensor.hasLabel(labelSensor))
+							if (!sensor.hasLabel(labelSensor)) {
 								continue;
+							}
 							final Iterable<Relationship> route_routeDefinitions = sensor.getRelationships(Direction.INCOMING,
 									relationshipTypeRoute_routeDefinition);
 
 							final List<Node> routes2 = new ArrayList<>();
 							for (final Relationship route_routeDefinition : route_routeDefinitions) {
 								final Node route2 = route_routeDefinition.getStartNode();
-								if (!route2.hasLabel(labelRoute))
+								if (!route2.hasLabel(labelRoute)) {
 									continue;
+								}
 								routes2.add(route2);
 							}
 
