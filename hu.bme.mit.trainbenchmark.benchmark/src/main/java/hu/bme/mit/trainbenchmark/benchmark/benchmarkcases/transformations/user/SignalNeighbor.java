@@ -11,8 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ENTRY;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
@@ -20,12 +21,12 @@ public class SignalNeighbor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(ModelConstants.ROUTE);
+		elementCandidates = driver.collectVertices(ROUTE);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteSingleOutgoingEdge(elementsToModify, ModelConstants.ROUTE, ModelConstants.ROUTE_ENTRY);
+		driver.deleteSingleOutgoingEdge(elementsToModify, ROUTE, ROUTE_ENTRY);
 	}
 
 }

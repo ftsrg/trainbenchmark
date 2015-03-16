@@ -11,23 +11,35 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.SetToZero;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
-public class PosLength<T> extends TransformationDefinition<T> {
+public class SwitchSet<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(SEGMENT);
+		elementCandidates = driver.collectVertices(ModelConstants.SWITCH);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.updateProperties(elementsToModify, SEGMENT, SEGMENT_LENGTH, new SetToZero());
+//		final List<Entry<Switch, SwitchStateKind>> itemsToModify = new ArrayList<Map.Entry<Switch,SwitchStateKind>>();
+//		for () {
+//			final Switch aswitch = switches.get(rndTarget);
+//
+//			final int oldValue = aswitch.getSwitch_actualState().getValue();
+//			final int newValue = (oldValue+1) % 4;
+//			final SwitchStateKind newSSK = SwitchStateKind.get(newValue);
+//			itemsToModify.add(new AbstractMap.SimpleEntry<Switch, SwitchStateKind>(aswitch, newSSK));
+//		}
+//		
+//		for (final Entry<Switch, SwitchStateKind> switchNewSSKPair : itemsToModify) {
+//			final Switch aswitch = switchNewSSKPair.getKey();
+//			final SwitchStateKind newSSK = switchNewSSKPair.getValue();
+//			aswitch.setSwitch_actualState(newSSK);
+//		}
 	}
 
 }

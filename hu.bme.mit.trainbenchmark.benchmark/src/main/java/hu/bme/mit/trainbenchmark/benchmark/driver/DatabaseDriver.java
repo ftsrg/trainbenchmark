@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -49,12 +49,18 @@ public abstract class DatabaseDriver<T> {
 	public abstract List<T> collectVertices(final String type) throws IOException;
 	
 	public abstract List<T> collectOutgoingConnectedVertices(final T sourceVertex, final String sourceVertexType,
-			final String targetVertexType, final String edgeType) throws IOException ;
+			final String targetVertexType, final String edgeType) throws IOException;
 
+//	public abstract Map<T, Object> getProperties(final Collection<T> vertices, final String vertexType, final String propertyName) throws IOException;
+//	
+//	public abstract Map<T, Object> getReferences(final Collection<T> vertices, final String vertexType, final String edgeType) throws IOException;
+	
 	// update
 
 	public abstract void updateProperties(final List<T> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException;
+			final PropertyOperation propertyOperation) throws IOException;
+
+//	public abstract void setProperties(final Map<Object, Object> properties, final String vertexType, final String propertyName) throws IOException;
 
 	// delete
 
@@ -68,5 +74,7 @@ public abstract class DatabaseDriver<T> {
 			throws IOException;
 	
 	public abstract void deleteVertex(final T vertex, final String vertexType) throws IOException;
+
+	public abstract void deleteVertex(final Long vertex) throws IOException;
 
 }

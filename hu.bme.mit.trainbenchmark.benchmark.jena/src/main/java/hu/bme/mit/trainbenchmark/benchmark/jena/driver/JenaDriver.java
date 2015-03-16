@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
@@ -160,7 +160,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 	@Override
 	public void updateProperties(final List<Resource> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
+			final PropertyOperation attributeOperation) throws IOException {
 		final Property property = model.getProperty(BASE_PREFIX + propertyName);
 
 		for (final Resource vertex : vertices) {

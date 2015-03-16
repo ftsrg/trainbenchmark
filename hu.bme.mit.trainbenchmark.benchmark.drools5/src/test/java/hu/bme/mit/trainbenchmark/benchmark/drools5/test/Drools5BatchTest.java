@@ -10,22 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class ScenarioFactory {
+public class Drools5BatchTest extends BatchTest {
 
-	public static Scenario<?> getScenario(final String scenario) {
-		switch (scenario) {
-		case ScenarioConstants.USER:
-			return new UserScenario();
-		case ScenarioConstants.REPAIR:
-			return new RepairScenario();
-		case ScenarioConstants.BATCH:
-			return new BatchScenario();
-		default:
-			throw new UnsupportedOperationException("Invalid scenario.");
-		}
+	public Drools5BatchTest() {
+		bi = new Drools5BenchmarkInitializer();
 	}
+
 }

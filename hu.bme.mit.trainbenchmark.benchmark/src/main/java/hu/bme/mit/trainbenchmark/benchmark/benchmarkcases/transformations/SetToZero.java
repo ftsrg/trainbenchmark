@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-public class SetToZero implements AttributeOperation {
+public class SetToZero implements PropertyOperation {
 	
 	@Override
 	public int op(final int x) {
