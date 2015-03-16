@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated railway -->
       <package
-            uri="http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl"
+            uri="http://www.semanticweb.org/ontologies/2015/trainbenchmark"
             class="hu.bme.mit.trainbenchmark.railway.RailwayPackage"
             genModel="model/railway.genmodel"/>
    </extension>
