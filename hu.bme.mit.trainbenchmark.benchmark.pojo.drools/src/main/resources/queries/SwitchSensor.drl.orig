@@ -1,6 +1,0 @@
-package Concept
-
-query "SwitchSensor check" 
-    switch : Switch( )
-    not ( Sensor( this memberOf switch.trackElement_sensor ) )
-end

@@ -33,7 +33,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.pojo.drools</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
@@ -42,11 +41,8 @@
 				<module>hu.bme.mit.trainbenchmark.emf.model</module>
 				<module>hu.bme.mit.trainbenchmark.generator.emf</module>
 				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
-				<module>hu.bme.mit.trainbenchmark.generator.pojo</module>
-				<module>hu.bme.mit.trainbenchmark.generator.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.generator.sql</module>
 				<module>hu.bme.mit.trainbenchmark.generator</module>
-				<module>hu.bme.mit.trainbenchmark.pojo</module>
 				<module>hu.bme.mit.trainbenchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.sql</module>
 			</modules>
@@ -94,15 +90,6 @@
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.generator.sql</module>
 				<module>hu.bme.mit.trainbenchmark.sql</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>pojo</id>
-			<modules>
-				<module>hu.bme.mit.trainbenchmark.benchmark.pojo.drools</module>
-				<module>hu.bme.mit.trainbenchmark.generator.pojo</module>
-				<module>hu.bme.mit.trainbenchmark.pojo</module>
 			</modules>
 		</profile>
 
