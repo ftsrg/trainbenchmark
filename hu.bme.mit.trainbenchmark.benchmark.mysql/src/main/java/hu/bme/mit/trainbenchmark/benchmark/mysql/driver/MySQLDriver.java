@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
@@ -199,7 +199,7 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 
 	@Override
 	public void updateProperties(final List<Long> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
+			final PropertyOperation attributeOperation) throws IOException {
 		try {
 			for (final Long vertex : vertices) {
 				final String update = String.format("UPDATE %s SET %s WHERE id = %d;", vertexType,

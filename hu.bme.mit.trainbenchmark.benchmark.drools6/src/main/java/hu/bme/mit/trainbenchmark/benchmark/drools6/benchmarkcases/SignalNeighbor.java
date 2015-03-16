@@ -29,7 +29,7 @@ public class SignalNeighbor extends Drools6BenchmarkCase<Route> {
 			// activate lazy PHREAK evaluation
 			ksession.fireAllRules();
 		}
-		results = new ArrayList<Route>(listener.getMatching());
+		results = new ArrayList<>(listener.getMatching());
 		return results;
 	}
 

@@ -29,6 +29,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_CURRENTSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.constants.SignalState;
 import hu.bme.mit.trainbenchmark.constants.SwitchState;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -87,7 +88,7 @@ public abstract class Generator {
 
 	private void initializeConstants() {
 		switch (generatorConfig.getScenario()) {
-		case "User":
+		case ScenarioConstants.USER:
 			maxSegments = 5;
 			maxRoutes = 20 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
@@ -99,7 +100,7 @@ public abstract class Generator {
 			switchSetErrorPercent = 2;
 			connectedSegmentsErrorPercent = 5;
 			break;
-		case "Repair":
+		case ScenarioConstants.REPAIR:
 			maxSegments = 5;
 			maxRoutes = 20 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
@@ -111,11 +112,16 @@ public abstract class Generator {
 			switchSetErrorPercent = 10;
 			connectedSegmentsErrorPercent = 5;
 			break;
-		case "Test":
+		case ScenarioConstants.TEST:
 			maxSegments = 5;
-			maxRoutes = 2 * generatorConfig.getSize();
-			maxSwitchPositions = 5;
+			maxRoutes = 5 * generatorConfig.getSize();
+			maxSwitchPositions = 20;
 			maxSensors = 10;
+			posLengthErrorPercent = 6;
+			switchSensorErrorPercent = 10;
+			routeSensorErrorPercent = 15;
+			signalNeighborErrorPercent = 15;
+			switchSetErrorPercent = 20;
 			connectedSegmentsErrorPercent = 5;
 			break;
 		default:

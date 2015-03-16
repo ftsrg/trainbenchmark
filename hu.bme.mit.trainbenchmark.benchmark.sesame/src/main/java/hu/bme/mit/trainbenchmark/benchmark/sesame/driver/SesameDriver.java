@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
@@ -244,7 +244,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	@Override
 	public void updateProperties(final List<URI> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
+			final PropertyOperation attributeOperation) throws IOException {
 		final URI typeURI = f.createURI(BASE_PREFIX + propertyName);
 
 		try {

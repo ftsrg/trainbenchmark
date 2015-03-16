@@ -26,7 +26,7 @@ public class SwitchSensor extends Drools5BenchmarkCase<Switch> {
 			listener = new ResultListener<Switch>("switch");
 			query = ksession.openLiveQuery("SwitchSensor check", new Object[] {}, listener);
 		}
-		results = new ArrayList<Switch>(listener.getMatching());
+		results = new ArrayList<>(listener.getMatching());
 		return results;
 	}
 

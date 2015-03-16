@@ -11,13 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_EXIT;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 
 import java.io.IOException;
 
-public class SignalNeighbor<T> extends TransformationDefinition<T> {
+public class SwitchSet<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
@@ -26,7 +24,21 @@ public class SignalNeighbor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteSingleOutgoingEdge(elementsToModify, ROUTE, ROUTE_EXIT);
+//		final Map<T, Object> switchPositionProperties = driver.getProperties(elementsToModify, SWITCHPOSITION, SWITCHPOSITION_SWITCH);
+//		final Map<T, Object> switchPositionSwitch = driver.getReferences(elementsToModify, SWITCHPOSITION, SWITCH);
+//		
+//		final Map<Object, Object> newProperties = new HashMap<>(); 
+//		
+//		for (final Entry<T, Object> entry : switchPositionProperties.entrySet()) {
+//			final T switchPosition = entry.getKey();
+//			final Object property = entry.getValue();
+//			
+//			final Object sw = switchPositionSwitch.get(switchPosition);
+//			
+//			newProperties.put(sw, property);
+//		}
+//		
+//		driver.setProperties(newProperties, SWITCH, SWITCH_CURRENTSTATE);
 	}
 
 }

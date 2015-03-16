@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.fourstore.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.File;
@@ -112,8 +112,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 	}
 
 	@Override
-	public void insertEdge(final Long sourceVertex, final String sourceVertexType, final Long targetVertex, 
-			final String edgeType) throws IOException{
+	public void insertEdge(final Long sourceVertex, final String sourceVertexType, final Long targetVertex, final String edgeType)
+			throws IOException {
 		// TODO Auto-generated method stub
 
 	}
@@ -126,9 +126,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 	}
 
 	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex, final String sourceVertexType,
-			String targetVertexType, String edgeType) {
-		// TODO Auto-generated method stub
+	public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) throws IOException {
 		return null;
 	}
 
@@ -136,7 +135,7 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 
 	@Override
 	public void updateProperties(final List<Long> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) throws IOException {
+			final PropertyOperation attributeOperation) throws IOException {
 		final String fullPropertyName = BASE_PREFIX + propertyName;
 		final Map<String, Object> properties = new HashMap<>();
 
@@ -217,8 +216,19 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 		deleteAllOutgoingEdges(vertices, vertexType, edgeType);
 	}
 
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+
+	}
+
+	@Override
+	public void deleteVertex(final Long vertex, final String vertexType) throws IOException {
+
+	}
+
 	// utility
 
+	@Override
 	protected boolean ask(final String askQuery) throws IOException {
 		return driver.ask(askQuery);
 	}

@@ -11,8 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 
@@ -20,12 +21,12 @@ public class SwitchSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(ModelConstants.SWITCH);
+		elementCandidates = driver.collectVertices(SWITCH);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteAllOutgoingEdges(elementsToModify, ModelConstants.SWITCH, ModelConstants.TRACKELEMENT_SENSOR);
+		driver.deleteAllOutgoingEdges(elementsToModify, SWITCH, TRACKELEMENT_SENSOR);
 	}
 
 }

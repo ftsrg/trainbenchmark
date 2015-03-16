@@ -10,22 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.javaapi;
 
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class ScenarioFactory {
+public class Neo4jBatchTest extends BatchTest {
 
-	public static Scenario<?> getScenario(final String scenario) {
-		switch (scenario) {
-		case ScenarioConstants.USER:
-			return new UserScenario();
-		case ScenarioConstants.REPAIR:
-			return new RepairScenario();
-		case ScenarioConstants.BATCH:
-			return new BatchScenario();
-		default:
-			throw new UnsupportedOperationException("Invalid scenario.");
-		}
+	public Neo4jBatchTest() {
+		bi = new Neo4jBenchmarkInitializer();
 	}
+
 }

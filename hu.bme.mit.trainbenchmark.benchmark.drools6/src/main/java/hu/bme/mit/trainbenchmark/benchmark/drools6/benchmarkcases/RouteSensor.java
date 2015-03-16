@@ -29,7 +29,7 @@ public class RouteSensor extends Drools6BenchmarkCase<Sensor> {
 			// activate lazy PHREAK evaluation
 			ksession.fireAllRules();
 		}
-		results = new ArrayList<Sensor>(listener.getMatching());
+		results = new ArrayList<>(listener.getMatching());
 		return results;
 	}
 

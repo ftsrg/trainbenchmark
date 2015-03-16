@@ -21,7 +21,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SIGNALNEIGHBOR;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,11 +36,6 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class SignalNeighbor extends Neo4jBenchmarkCase {
-
-	@Override
-	public String getName() {
-		return SIGNALNEIGHBOR;
-	}
 
 	@Override
 	public Collection<Node> checkJava() {
@@ -61,16 +55,18 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> routes1 = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelRoute);
 			for (final Node route1 : routes1) {
-				if (results.contains(route1))
+				if (results.contains(route1)) {
 					continue;
+				}
 
 				// (route1:Route)<-[ROUTE_EXIT]->(signal:Signal)
 				final Iterable<Relationship> route_exitRelationships = route1.getRelationships(Direction.OUTGOING,
 						relationshipTypeRoute_exit);
 				for (final Relationship route_exit : route_exitRelationships) {
 					final Node signal = route_exit.getEndNode();
-					if (!signal.hasLabel(labelSignal))
+					if (!signal.hasLabel(labelSignal)) {
 						continue;
+					}
 
 					// (route1:Route)-[ROUTE_ROUTEDEFINITION]->(sensor1:Sensor)
 					final Iterable<Relationship> route_routeDefinitions = route1.getRelationships(Direction.OUTGOING,
@@ -83,24 +79,27 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 								relationshipTypeTrackElement_sensor);
 						for (final Relationship trackElement_sensor1 : trackElement_sensors1) {
 							final Node te1 = trackElement_sensor1.getStartNode();
-							if (!te1.hasLabel(labelTrackElement))
+							if (!te1.hasLabel(labelTrackElement)) {
 								continue;
+							}
 
 							// (te1:TrackElement)-[TRACKELEMENT_CONNECTSTO]->(te2:TrackElement)
 							final Iterable<Relationship> trackElement_connectsTos = te1.getRelationships(Direction.OUTGOING,
 									relationshipTypeTrackElement_connectsTo);
 							for (final Relationship trackElement_connectsTo : trackElement_connectsTos) {
 								final Node te2 = trackElement_connectsTo.getEndNode();
-								if (!te2.hasLabel(labelTrackElement))
+								if (!te2.hasLabel(labelTrackElement)) {
 									continue;
+								}
 
 								// (te2:TrackElement)-[TRACKELEMENT_SENSOR]->(sensor2:Sensor)
 								final Iterable<Relationship> trackElement_sensors2 = te2.getRelationships(Direction.OUTGOING,
 										relationshipTypeTrackElement_sensor);
 								for (final Relationship trackElement_sensor2 : trackElement_sensors2) {
 									final Node sensor2 = trackElement_sensor2.getEndNode();
-									if (!sensor2.hasLabel(labelSensor))
+									if (!sensor2.hasLabel(labelSensor)) {
 										continue;
+									}
 
 									final ResourceIterable<Node> routes2 = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(
 											labelRoute);
@@ -112,8 +111,9 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 									boolean route3exists = false;
 									for (final Relationship route_routeDefinition3 : route_routeDefinitions3) {
 										final Node route3 = route_routeDefinition3.getStartNode();
-										if (!route3.hasLabel(labelRoute))
+										if (!route3.hasLabel(labelRoute)) {
 											continue;
+										}
 										if (route1.getId() != route3.getId()) {
 											route3exists = true;
 											break;
@@ -149,7 +149,7 @@ public class SignalNeighbor extends Neo4jBenchmarkCase {
 										}
 									}
 
-									if (!hasRoute2) {
+									if (!hasRoute2 && !results.contains(route1)) {
 										results.add(route1);
 									}
 								}

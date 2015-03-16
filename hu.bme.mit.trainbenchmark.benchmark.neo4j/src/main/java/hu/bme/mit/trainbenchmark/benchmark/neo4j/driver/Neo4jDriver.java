@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.AttributeOperation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 
 import java.io.BufferedReader;
@@ -185,7 +185,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 
 	@Override
 	public void updateProperties(final List<Node> vertices, final String vertexType, final String propertyName,
-			final AttributeOperation attributeOperation) {
+			final PropertyOperation attributeOperation) {
 		for (final Node vertex : vertices) {
 			final Integer propertyValue = (Integer) vertex.getProperty(propertyName);
 			vertex.setProperty(propertyName, attributeOperation.op(propertyValue));
