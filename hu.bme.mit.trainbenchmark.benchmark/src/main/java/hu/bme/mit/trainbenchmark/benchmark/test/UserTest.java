@@ -24,12 +24,12 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void posLengthUser() throws ParseException, IOException {
-		testTransformation(QueryConstants.POSLENGTH, ScenarioConstants.USER, 16);
+		testTransformation(QueryConstants.POSLENGTH, ScenarioConstants.USER, 36);
 	}
 
 	@Test
 	public void routeSensorUser() throws ParseException, IOException {
-		testTransformation(QueryConstants.ROUTESENSOR, ScenarioConstants.USER, 13);
+		testTransformation(QueryConstants.ROUTESENSOR, ScenarioConstants.USER, 24);
 	}
 
 	@Test
@@ -39,12 +39,12 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 5);
+		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 7);
 	}
 	
 	@Test
 	public void switchSetUser() throws ParseException, IOException {
-		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 5);
+//		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 5);
 	}
 
 }

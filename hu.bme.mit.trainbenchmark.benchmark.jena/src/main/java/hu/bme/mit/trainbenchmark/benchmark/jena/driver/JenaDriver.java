@@ -29,7 +29,6 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -143,7 +142,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 	@Override
 	public List<Resource> collectOutgoingConnectedVertices(
-			Resource sourceVertex, final String sourceVertexType, String targetVertexType, String edgeType) {
+			final Resource sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) {
 		
 		throw new UnsupportedOperationException();
 //		// TODO Auto-generated method stub
@@ -235,5 +234,11 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 			final boolean result = queryExecution.execAsk();
 			return result;
 		}
+	}
+
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 }

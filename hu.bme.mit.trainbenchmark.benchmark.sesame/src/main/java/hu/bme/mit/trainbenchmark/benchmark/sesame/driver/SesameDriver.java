@@ -24,7 +24,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.hamcrest.Condition.Step;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
@@ -152,14 +151,14 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public URI insertVertexWithEdge(URI sourceVertex, String sourceVertexType,
-			String targetVertexType, String edgeType) throws IOException {
+	public URI insertVertexWithEdge(final URI sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) throws IOException {
 		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
 		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
 
 		try {
 			return insertVertexWithEdge(sourceVertex, vertexTypeURI, edgeTypeURI);
-		} catch (RepositoryException e) {
+		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
 	}
@@ -188,7 +187,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		final Statement edgeStatement = f.createStatement(sourceVertex, edgeTypeURI, targetVertex);
 		try {
 			con.add(edgeStatement);
-		} catch (RepositoryException e) {
+		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
 	}
@@ -223,18 +222,18 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		
 		final URI edgeURI = f.createURI(BASE_PREFIX + edgeType);
 		try {
-			RepositoryResult<Statement> statements = con.getStatements(sourceVertex, edgeURI, null, false);
+			final RepositoryResult<Statement> statements = con.getStatements(sourceVertex, edgeURI, null, false);
 			while (statements.hasNext()) {
 				final Statement s = statements.next();
 				final URI obj = (URI) s.getObject();
-				RepositoryResult<Statement> statements2 = con.getStatements(obj, RDF.TYPE, typeURI, false); 
+				final RepositoryResult<Statement> statements2 = con.getStatements(obj, RDF.TYPE, typeURI, false); 
 				while (statements2.hasNext()) {
 					final Statement s2 = statements2.next();
 					final URI subject = (URI) s2.getSubject();
 					vertices.add(subject);
 				}
 			}
-		} catch (RepositoryException e) {
+		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
 		return vertices;
@@ -338,7 +337,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 				final Statement s = statementsToRemove.next();
 				con.remove(s);
 			}
-		} catch (RepositoryException e) {
+		} catch (final RepositoryException e) {
 			throw new IOException();
 		}
 	}
@@ -364,6 +363,12 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
 			throw new IOException(e);
 		}
+	}
+
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

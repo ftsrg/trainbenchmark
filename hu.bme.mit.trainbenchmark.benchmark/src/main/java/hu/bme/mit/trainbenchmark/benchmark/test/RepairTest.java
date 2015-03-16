@@ -24,12 +24,12 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void posLengthRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.POSLENGTH, ScenarioConstants.REPAIR, 14);
+		testTransformation(QueryConstants.POSLENGTH, ScenarioConstants.REPAIR, 34);
 	}
 
 	@Test
 	public void routeSensorRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.ROUTESENSOR, ScenarioConstants.REPAIR, 11);
+		testTransformation(QueryConstants.ROUTESENSOR, ScenarioConstants.REPAIR, 22);
 	}
 
 	@Test
@@ -39,12 +39,12 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void switchSensorRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.REPAIR, 3);
+		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.REPAIR, 5);
 	}
 	
 	@Test
 	public void switchSetRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.SWITCHSET, ScenarioConstants.REPAIR, 3);
+//		testTransformation(QueryConstants.SWITCHSET, ScenarioConstants.REPAIR, 3);
 	}
 
 }

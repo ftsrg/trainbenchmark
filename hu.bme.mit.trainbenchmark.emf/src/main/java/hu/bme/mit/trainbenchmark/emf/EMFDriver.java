@@ -233,6 +233,10 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		return resource;
 	}
 
-
+	@Override
+	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
