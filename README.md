@@ -23,7 +23,6 @@ The generator projects are responsible for generating instance models. Currently
 
 * EMF
 * Property graph
-* POJO
 * RDF
 * SQL
 
