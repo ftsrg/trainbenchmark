@@ -36,7 +36,7 @@ public class SwitchSensor extends Neo4jBenchmarkCase {
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
 
-		final DynamicRelationshipType trackElement_sensorRelationshipType = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
+		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
 
 		results = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class SwitchSensor extends Neo4jBenchmarkCase {
 			for (final Node aSwitch : switches) {
 
 				final Iterable<Relationship> trackElement_sensors = aSwitch.getRelationships(Direction.OUTGOING,
-						trackElement_sensorRelationshipType);
+						relationshipTypeTrackElement_sensor);
 
 				boolean hasSensor = false;
 				for (final Relationship trackElement_sensor : trackElement_sensors) {

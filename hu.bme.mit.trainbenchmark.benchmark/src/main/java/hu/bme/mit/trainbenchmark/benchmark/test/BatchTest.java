@@ -63,5 +63,5 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 	public void switchSet() throws ParseException, IOException {
 		testQuery(QueryConstants.SWITCHSET, 5);
 	}
-
+	
 }

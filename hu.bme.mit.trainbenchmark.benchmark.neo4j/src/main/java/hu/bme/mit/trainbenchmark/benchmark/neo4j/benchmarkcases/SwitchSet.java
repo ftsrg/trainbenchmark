@@ -13,10 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_CURRENTSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCH;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.SignalState;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,30 +45,86 @@ public class SwitchSet extends Neo4jBenchmarkCase {
 		final Label labelRoute = DynamicLabel.label(ROUTE);
 		final Label labelSignal = DynamicLabel.label(SIGNAL);
 
-		final DynamicRelationshipType trackElement_sensorRelationshipType = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
+		final DynamicRelationshipType relationshipTypeRoute_entry = DynamicRelationshipType.withName(ROUTE_ENTRY);
+		final DynamicRelationshipType relationshipTypeRoute_switchPosition = DynamicRelationshipType.withName(ROUTE_SWITCHPOSITION);
+		final DynamicRelationshipType relationshipTypeSwitchPosition_switch = DynamicRelationshipType.withName(SWITCHPOSITION_SWITCH);
 
 		results = new ArrayList<>();
 
+		// MATCH
+		// (signal:Signal)<-[:Route_entry]-(route:Route)-[:Route_switchPosition]->(sP:SwitchPosition)-[:SwitchPosition_switch]->(sw:Switch)
+		// WHERE sw.Switch_currentState <> sP.SwitchPosition_switchState
+		// RETURN DISTINCT sP
+
 		try (Transaction tx = graphDb.beginTx()) {
-			// (switch:Switch)-[TRACKELEMENT_SENSOR]->(Sensor) NAC
-			final ResourceIterable<Node> switches = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSwitch);
-			for (final Node aSwitch : switches) {
+			final ResourceIterable<Node> signals = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSignal);
+			for (final Node signal : signals) {
+				// signal.Signal_currentState = "GO"
+				final Object signal_currentState = signal.getProperty(SIGNAL_CURRENTSTATE);
+				if (!SignalState.GO.toString().equals(signal_currentState)) {
+					continue;
+				}
 
-				final Iterable<Relationship> trackElement_sensors = aSwitch.getRelationships(Direction.OUTGOING,
-						trackElement_sensorRelationshipType);
-
-				boolean hasSensor = false;
-				for (final Relationship trackElement_sensor : trackElement_sensors) {
-					final Node sensor = trackElement_sensor.getEndNode();
-					if (sensor.hasLabel(labelSensor)) {
-						hasSensor = true;
-						break;
+				// (signal:Signal)<-[:Route_entry]-(route:Route)
+				final Iterable<Relationship> route_entries = signal.getRelationships(Direction.INCOMING, relationshipTypeRoute_entry);
+				for (final Relationship route_entry : route_entries) {
+					final Node route = route_entry.getStartNode();
+					if (!route.hasLabel(labelRoute)) {
+						continue;
 					}
+
+					// (route:Route)-[:Route_switchPosition]->(sP:SwitchPosition)
+					final Iterable<Relationship> route_switchPositions = route.getRelationships(Direction.OUTGOING,
+							relationshipTypeRoute_switchPosition);
+					for (final Relationship route_switchPosition : route_switchPositions) {
+						final Node sP = route_switchPosition.getEndNode();
+						if (!sP.hasLabel(labelSwitchPosition)) {
+							continue;
+						}
+
+						// (sP:SwitchPosition)-[:SwitchPosition_switch]->(sw:Switch)
+						final Iterable<Relationship> switchPosition_switches = sP.getRelationships(Direction.OUTGOING,
+								relationshipTypeSwitchPosition_switch);
+
+						if (!switchPosition_switches.iterator().hasNext()) {
+							continue;
+						}
+
+						final Node sw = switchPosition_switches.iterator().next().getEndNode();
+						if (!sw.hasLabel(labelSwitch)) {
+							continue;
+						}
+
+						final Object currentState = sw.getProperty(ModelConstants.SWITCH_CURRENTSTATE);
+						final Object switchState = sP.getProperty(ModelConstants.SWITCHPOSITION_SWITCHSTATE);
+
+						if (!currentState.equals(switchState)) {
+							results.add(sP);
+						}
+					}
+
+					// (route:Route)-[:Route_switchPosition]->(sP:SwitchPosition)
+					// route.getRelationships(Direction.OUTGOING);
+
 				}
 
-				if (!hasSensor) {
-					results.add(aSwitch);
-				}
+				// (sP:SwitchPosition)-[:SwitchPosition_switch]->(sw:Switch)
+
+				// final Iterable<Relationship> trackElement_sensors = aSwitch.getRelationships(Direction.OUTGOING,
+				// trackElement_sensorRelationshipType);
+				//
+				// boolean hasSensor = false;
+				// for (final Relationship trackElement_sensor : trackElement_sensors) {
+				// final Node sensor = trackElement_sensor.getEndNode();
+				// if (sensor.hasLabel(labelSensor)) {
+				// hasSensor = true;
+				// break;
+				// }
+				// }
+				//
+				// if (!hasSensor) {
+				// results.add(aSwitch);
+				// }
 			}
 		}
 
