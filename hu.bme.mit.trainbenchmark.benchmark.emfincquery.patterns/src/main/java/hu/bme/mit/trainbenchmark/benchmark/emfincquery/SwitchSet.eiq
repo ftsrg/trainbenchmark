@@ -1,16 +1,16 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
-import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
 
 pattern switchSet(switchPosition)
 {
-	Route.Route_entry(route, semaphore);
-	Route.Route_switchPosition(route, switchPosition);
-	SwitchPosition.SwitchPosition_switch(switchPosition, sw);
+	Route.entry(route, semaphore);
+	Route.follows(route, switchPosition);
+	SwitchPosition.^switch(switchPosition, sw);
 	
-	Signal.Signal_currentState(semaphore, ::GO);
-	SwitchPosition.SwitchPosition_switchState(switchPosition, swPP);
-	Switch.Switch_currentState(sw, swCP);
+	Semaphore.signal(semaphore, ::GO);
+	SwitchPosition.position(switchPosition, swPP);
+	Switch.currentPosition(sw, swCP);
 
 	swPP != swCP;
 }

@@ -12,8 +12,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Signal;
-import hu.bme.mit.trainbenchmark.railway.SignalState;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
@@ -35,14 +35,14 @@ public class SwitchSet extends JavaBenchmarkCase<SwitchPosition> {
 
 			if (eObject instanceof Route) {
 				final Route route = (Route) eObject;
-				final Signal signal = route.getRoute_entry();
-				if (signal == null) {
+				final Semaphore semaphore = route.getEntry();
+				if (semaphore == null) {
 					continue;
 				}
-				if (signal.getSignal_currentState() == SignalState.GO) {
-					for (final SwitchPosition swP : route.getRoute_switchPosition()) {
-						final Switch sw = swP.getSwitchPosition_switch();
-						if (sw.getSwitch_currentState() != swP.getSwitchPosition_switchState()) {
+				if (semaphore.getSignal() == Signal.GO) {
+					for (final SwitchPosition swP : route.getFollows()) {
+						final Switch sw = swP.getSwitch();
+						if (sw.getCurrentPosition() != swP.getPosition()) {
 							results.add(swP);
 						}
 					}

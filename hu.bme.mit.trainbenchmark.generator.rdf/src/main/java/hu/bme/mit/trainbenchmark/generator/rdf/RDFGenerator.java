@@ -80,7 +80,7 @@ public class RDFGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 
 		// vertex id and type

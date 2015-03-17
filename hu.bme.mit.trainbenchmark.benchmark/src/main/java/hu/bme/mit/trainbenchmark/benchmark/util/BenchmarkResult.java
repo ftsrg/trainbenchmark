@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Stopwatch;
 
@@ -174,6 +173,7 @@ public class BenchmarkResult {
 			"-----------------\n" +
 			"Result sizes: " + resultSizes + "\n" +
 			"Read time: " + readTime + "\n" + 	
+			"Check time: " + checkTimes + "\n" + 	
 			"LHS times: " + lhsTimes + "\n" + 	
 			"RHS times: " + rhsTimes + "\n" + 	
 			"Modified elements: " + modifiedElementsSizes 

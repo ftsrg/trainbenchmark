@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
-import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
 
 pattern SwitchSensor(sw)
 {
@@ -10,7 +10,5 @@ pattern SwitchSensor(sw)
 
 pattern hasSensor(sw)
 {
-	TrackElement(sw);
-	Sensor(sensor);
-	TrackElement.TrackElement_sensor(sw, sensor);
+	TrackElement.sensor(sw, _);
 }

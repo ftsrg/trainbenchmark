@@ -20,20 +20,26 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+
 public class RouteSensor extends JavaBenchmarkCase<Sensor> {
 
 	@Override
 	protected Collection<Sensor> check() {
 		results = new ArrayList<>();
 
-		for (final Object eObject : container.getContains()) {
+		final TreeIterator<EObject> contents = container.eAllContents();	
+		while (contents.hasNext()) {
+			final EObject eObject = contents.next();
+
 			if (eObject instanceof Sensor) {
 				final Sensor sensor = (Sensor) eObject;
-				for (final TrackElement te : sensor.getSensor_trackElement()) {
+				for (final TrackElement te : sensor.getElements()) {
 					if (te instanceof Switch) {
-						final Switch aSwitch = (Switch) te;
-						for (final SwitchPosition sp : aSwitch.getSwitch_switchPosition()) {
-							if (!sp.getSwitchPosition_route().getRoute_routeDefinition().contains(sensor)) {
+						final Switch sw = (Switch) te;
+						for (final SwitchPosition swP : sw.getPositions()) {
+							if (!swP.getRoute().getDefinedBy().contains(sensor)) {
 								results.add(sensor);
 							}
 						}

@@ -1,10 +1,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
-import "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl" 
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
 
 pattern PosLength(segment)
 {
-	Segment(segment);
-	Segment.Segment_length(segment, length);
+	Segment.length(segment, length);
 	check(length <= 0);
 }

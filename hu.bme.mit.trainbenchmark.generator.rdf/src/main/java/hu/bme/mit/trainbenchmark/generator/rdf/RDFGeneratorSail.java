@@ -165,7 +165,7 @@ public class RDFGeneratorSail extends Generator {
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
 		final Object node = addIndividual(type + id, type);
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {

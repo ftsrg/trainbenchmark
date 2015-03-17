@@ -13,20 +13,26 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.Signal;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 
 public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 
 	@Override
 	protected Collection<Route> check() {
 		results = new ArrayList<>();
-		
-		for (final Object eObject : container.getContains()) {
+
+		final TreeIterator<EObject> contents = container.eAllContents();
+		while (contents.hasNext()) {
+			final EObject eObject = contents.next();
+
 			if (eObject instanceof Route) {
 				final Route aRoute = (Route) eObject;
 				if (!(isValid(aRoute))) {
@@ -38,37 +44,44 @@ public class SignalNeighbor extends JavaBenchmarkCase<Route> {
 		return results;
 	}
 
-	private boolean isValid(final Route route) {
-		final Signal exitSignal = route.getRoute_exit();
-		for (final Sensor sen1 : route.getRoute_routeDefinition()) {
-			for (final TrackElement te1 : sen1.getSensor_trackElement()) {
-				for (final TrackElement te2 : te1.getTrackElement_connectsTo()) {
-					for (final Sensor sen2 : te2.getTrackElement_sensor()) {
-						boolean goodSensor = false;
-						for (final Object eObject : container.getContains()) {
-							if (eObject instanceof Route) {
-								final Route route2X = (Route) eObject;
-								if ((route2X.getRoute_routeDefinition().contains(sen2)) && (route2X != route)) {
-									goodSensor = true;
-									break;
-								}
-							}
-						}
-						if (goodSensor) {
-							for (final Object eObject : container.getContains()) {
-								if (eObject instanceof Route) {
-									final Route route2 = (Route) eObject;
-									if ((route2.getRoute_routeDefinition().contains(sen2)) && (route2.getRoute_entry() != null)
-											&& (route2.getRoute_entry().equals(exitSignal))) {
-										return true;
-									}
-								}
-							}
-							if (exitSignal != null) {
-								return false;
+	private boolean isValid(final Route route1) {
+		final Semaphore exitSignal = route1.getExit();
+		for (final Sensor sensor1 : route1.getDefinedBy()) {
+			for (final TrackElement te1 : sensor1.getElements()) {
+				for (final TrackElement te2 : te1.getConnectsTo()) {
+					final Sensor sensor2 = te2.getSensor();
+					boolean goodSensor = false;
+
+					final TreeIterator<EObject> contents2 = container.eAllContents();
+					while (contents2.hasNext()) {
+						final EObject eObject = contents2.next();
+
+						if (eObject instanceof Route) {
+							final Route route3 = (Route) eObject;
+							if ((route3.getDefinedBy().contains(sensor2)) && (route3 != route1)) {
+								goodSensor = true;
+								break;
 							}
 						}
 					}
+					if (goodSensor) {
+						final TreeIterator<EObject> contents3 = container.eAllContents();
+						while (contents3.hasNext()) {
+							final EObject eObject = contents3.next();
+
+							if (eObject instanceof Route) {
+								final Route route2 = (Route) eObject;
+								if ((route2.getDefinedBy().contains(sensor2)) && (route2.getEntry() != null)
+										&& (route2.getEntry().equals(exitSignal))) {
+									return true;
+								}
+							}
+						}
+						if (exitSignal != null) {
+							return false;
+						}
+					}
+
 				}
 			}
 		}
