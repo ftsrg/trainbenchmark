@@ -36,7 +36,7 @@ savePlot <-function(results, settings, phases, fileName){
   if (minValue == 0){
     print("The minimum metricvalue equals with 0. The plot cannot be generated.")
     return()
-  
+  }
   if (settings@xDimension == "Size"){
     xLabels <- getXLabels(artifacts)
   }
