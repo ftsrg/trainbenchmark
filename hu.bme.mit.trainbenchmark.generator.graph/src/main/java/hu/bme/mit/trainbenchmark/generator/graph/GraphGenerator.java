@@ -75,7 +75,7 @@ public class GraphGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		final Node node = graphDb.createNode(DynamicLabel.label(type));
 

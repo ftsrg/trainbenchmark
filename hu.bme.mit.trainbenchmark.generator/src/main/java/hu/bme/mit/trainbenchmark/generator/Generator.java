@@ -48,7 +48,7 @@ import com.google.common.collect.ImmutableMap;
 public abstract class Generator {
 
 	// id
-	protected long id = 0L;
+	protected int id = 0;
 
 	// static configuration
 	protected GeneratorConfig generatorConfig;
@@ -270,7 +270,7 @@ public abstract class Generator {
 		return createVertex(id, type, attributes, outgoingEdges, incomingEdges);
 	}
 
-	protected abstract Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+	protected abstract Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException;
 
 	protected abstract void createEdge(String label, Object from, Object to) throws IOException;

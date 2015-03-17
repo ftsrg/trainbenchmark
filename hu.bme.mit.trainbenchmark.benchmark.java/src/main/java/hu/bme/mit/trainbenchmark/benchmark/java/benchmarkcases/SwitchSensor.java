@@ -17,17 +17,23 @@ import hu.bme.mit.trainbenchmark.railway.Switch;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+
 public class SwitchSensor extends JavaBenchmarkCase<Switch> {
 
 	@Override
 	protected Collection<Switch> check() {
 		results = new ArrayList<>();
 
-		for (final Object eObject : container.getContains()) {
+		final TreeIterator<EObject> contents = container.eAllContents();	
+		while (contents.hasNext()) {
+			final EObject eObject = contents.next();
+
 			if (eObject instanceof Switch) {
-				final Switch aSwitch = (Switch) eObject;
-				if (aSwitch.getTrackElement_sensor().isEmpty()) {
-					results.add(aSwitch);
+				final Switch sw = (Switch) eObject;
+				if (sw.getSensor() == null) {
+					results.add(sw);
 				}
 			}
 		}
