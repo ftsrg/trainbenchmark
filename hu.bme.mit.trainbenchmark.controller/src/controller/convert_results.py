@@ -12,7 +12,7 @@ import json
 import csv
 import os
 
-import handler
+import util
 
 
 def load_results(path):
@@ -117,11 +117,10 @@ if __name__ == "__main__":
                              "results will be merged")
     parser.add_argument("-s", "--source",
                         default="../../../results/",
-                        help="Path of the results json files location."
-    )
+                        help="Path of the results json files location.")
     args = parser.parse_args()
 
-    handler.set_working_directory()
+    util.set_working_directory()
     results = load_results(args.source)
     write_to_csv(results, args.csvfile)
     print("The results has been written successfully.")
