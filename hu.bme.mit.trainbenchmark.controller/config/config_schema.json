@@ -138,6 +138,7 @@
             "jena",
             "mysql",
             "neo4j",
+            "orientdb",
             "sesame",
             "postgresql",
             "virtuoso"
@@ -157,6 +158,7 @@
           "jena",
           "mysql",
           "neo4j",
+          "orientdb",
           "sesame",
           "postgresql",
           "virtuoso"
@@ -187,6 +189,7 @@
                 "jena",
                 "mysql",
                 "neo4j",
+                "orientdb",
                 "sesame",
                 "postgresql",
                 "virtuoso"
@@ -225,6 +228,7 @@
               "jena",
               "mysql",
               "neo4j",
+              "orientdb",
               "sesame",
               "postgresql",
               "virtuoso"

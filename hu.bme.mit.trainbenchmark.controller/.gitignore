@@ -5,3 +5,4 @@ src/controller/__pycache__/
 tb-env/
 init/*.zip
 log/
+config/*json~

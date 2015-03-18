@@ -35,6 +35,9 @@
   "neo4j": {
     "name": "graph"
   },
+  "orientdb": {
+    "name": "graph"
+  },
   "virtuoso":{
     "name": "rdf"
   },
