@@ -14,8 +14,8 @@ package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.SignalState;
-import hu.bme.mit.trainbenchmark.constants.SwitchState;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 
@@ -47,13 +47,13 @@ public class RDFGenerator extends Generator {
 	protected BufferedWriter file;
 
 	protected final Map<Object, String> resources = ImmutableMap.<Object, String>builder() //
-			.put(SignalState.FAILURE, ModelConstants.SIGNALSTATE_FAILURE) //
-			.put(SignalState.STOP, ModelConstants.SIGNALSTATE_STOP) // 
-			.put(SignalState.GO, ModelConstants.SIGNALSTATE_GO) //
-			.put(SwitchState.LEFT, ModelConstants.SWITCHSTATE_LEFT) //
-			.put(SwitchState.STRAIGHT, ModelConstants.SWITCHSTATE_STRAIGHT) //
-			.put(SwitchState.RIGHT, ModelConstants.SWITCHSTATE_RIGHT) //
-			.put(SwitchState.FAILURE, ModelConstants.SWITCHSTATE_FAILURE) //
+			.put(Signal.FAILURE, ModelConstants.SIGNAL_FAILURE) //
+			.put(Signal.STOP, ModelConstants.SIGNAL_STOP) // 
+			.put(Signal.GO, ModelConstants.SIGNAL_GO) //
+			.put(Position.LEFT, ModelConstants.SWITCH_LEFT) //
+			.put(Position.STRAIGHT, ModelConstants.SWITCH_STRAIGHT) //
+			.put(Position.RIGHT, ModelConstants.SWITCH_RIGHT) //
+			.put(Position.FAILURE, ModelConstants.SWITCH_FAILURE) //
 			.build(); 
 
 	@Override
@@ -95,6 +95,10 @@ public class RDFGenerator extends Generator {
 
 		// (id)-[]->() edges
 		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
+			if (outgoingEdge.getValue() == null) {
+				continue;
+			}
+
 			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX, outgoingEdge.getValue());
 			vertex.append(edgeTriple);
 		}
@@ -112,7 +116,11 @@ public class RDFGenerator extends Generator {
 
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
+		if (from == null || to == null) {
+			return;
+		}
 		final String triple = String.format(":%s%s :%s :%s%s .", ID_PREFIX, from, label, ID_PREFIX, to);
+		System.out.println(triple);
 		write(triple);
 	}
 	

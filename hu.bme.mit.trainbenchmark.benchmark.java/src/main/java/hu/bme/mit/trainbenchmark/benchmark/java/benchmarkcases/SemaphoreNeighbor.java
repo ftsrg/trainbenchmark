@@ -23,7 +23,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class SignalNeighbor extends JavaBenchmarkCase<Route> {
+public class SemaphoreNeighbor extends JavaBenchmarkCase<Route> {
 
 	@Override
 	protected Collection<Route> check() {

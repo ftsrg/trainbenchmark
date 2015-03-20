@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -98,12 +99,8 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		final EObject targetObject = factory.create(targetClass);
 
 		// set reference to source object
-		@SuppressWarnings("unchecked")
-		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
-		references.add(targetObject);
+		sourceVertex.eSet(feature, targetObject);
 
-		// TODO
-//		container.getContains().add((RailwayElement) targetObject);
 		return (RailwayElement) targetObject;
 	}
 
@@ -125,14 +122,14 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		final List<RailwayElement> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		
+
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
 			// if t's type is a descendant of clazz
 			if (clazz.isSuperTypeOf(eObject.eClass())) {
-				vertices.add((RailwayElement)eObject);
+				vertices.add((RailwayElement) eObject);
 			}
 		}
 
@@ -212,10 +209,18 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 				final AbstractList<EObject> features = (AbstractList<EObject>) vertex.eGet(feature);
 
 				if (features.size() > 0) {
+					final RailwayElement e = (RailwayElement) features.get(0);
+					System.out.println("e: " + e);
 					features.remove(0);
+					container.getInvalids().add(e);
+					final EList<RailwayElement> invalids = container.getInvalids();
+					for (final RailwayElement railwayElement : invalids) {
+						System.out.println(railwayElement);
+					}
 				}
 			} else {
 				vertex.eSet(feature, null);
+				container.getInvalids().add(vertex);
 			}
 		}
 	}

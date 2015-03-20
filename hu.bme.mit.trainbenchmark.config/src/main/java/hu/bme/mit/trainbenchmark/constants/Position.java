@@ -12,6 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.constants;
 
-public enum SwitchState {
+public enum Position {
 	FAILURE, LEFT, RIGHT, STRAIGHT
 }

@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repai
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class SwitchSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.insertVertexWithEdge(elementsToModify, TRACKELEMENT, SENSOR, TRACKELEMENT_SENSOR);
+		driver.insertVertexWithEdge(elementsToModify, TRACKELEMENT, SENSOR, SENSOR_EDGE);
 	}
 
 }

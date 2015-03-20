@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.rdf;
 
 public interface RDFConstants {
 
-	static final String ONTOLOGYIRI = "http://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl";
+	static final String ONTOLOGYIRI = "http://www.semanticweb.org/ontologies/2015/trainbenchmark";
 	static final String BASE_PREFIX = ONTOLOGYIRI + "#";
 	static final String ID_PREFIX = "_";
 	

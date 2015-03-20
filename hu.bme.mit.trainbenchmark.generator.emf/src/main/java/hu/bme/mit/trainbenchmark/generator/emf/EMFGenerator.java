@@ -12,12 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_CURRENTSTATE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.emf.EMFUtil;
 import hu.bme.mit.trainbenchmark.emf.FileBroker;
 import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.emf.config.EMFGeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
@@ -43,30 +44,22 @@ public class EMFGenerator extends Generator {
 
 	public EMFGenerator(final String args[]) throws ParseException {
 		super();
-		generatorConfig = emfGeneratorConfig = new EMFGeneratorConfig(args);
+		generatorConfig = new GeneratorConfig(args);
 	}
 
 	@Override
-	protected String syntax() {
+	public String syntax() {
 		return "EMF";
 	}
-
-	protected EMFGeneratorConfig emfGeneratorConfig;
+	
 	protected Resource resource;
 	protected RailwayFactory factory;
 	protected RailwayContainer container;
 
 	@Override
 	public void initModel() {
-		final String uuidStr = emfGeneratorConfig.isGenUUID() ? "uuid-" : "";
-
-		final String fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + uuidStr
-				+ generatorConfig.getSize() + ".emf";
+		final String fileName = generatorConfig.getInstanceModelPath() + "/railway-" + generatorConfig.getScenario().toLowerCase() + "-" + generatorConfig.getSize() + ".emf";
 		final URI resourceURI = FileBroker.getEMFUri(fileName);
-
-		if (emfGeneratorConfig.isGenUUID()) {
-			EMFUtil.registerUUIDXMIResourceFactory();
-		}
 
 		final ResourceSet resourceSet = new ResourceSetImpl();
 
@@ -89,12 +82,12 @@ public class EMFGenerator extends Generator {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
 		railwayElement.setId(id);
-
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
 			setAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
 		}
+
 		switch (type) {
-		case ModelConstants.SIGNAL:
+		case ModelConstants.SEMAPHORE:
 			container.getSemaphores().add((Semaphore) railwayElement);
 			break;
 		case ModelConstants.ROUTE:
@@ -103,7 +96,7 @@ public class EMFGenerator extends Generator {
 		default:
 			break;
 		}
-
+		
 		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
 			createEdge(outgoingEdge.getKey(), railwayElement, outgoingEdge.getValue());
 		}
@@ -117,7 +110,17 @@ public class EMFGenerator extends Generator {
 
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
-		if (to instanceof Long) {
+		if (from == null) {
+			if (!container.getInvalids().contains(to)) {
+				container.getInvalids().add((RailwayElement) to);
+			}
+			return;
+		}
+
+		if (to == null) {
+			if (!container.getInvalids().contains(from)) {
+				container.getInvalids().add((RailwayElement) from);
+			}
 			return;
 		}
 
@@ -140,13 +143,13 @@ public class EMFGenerator extends Generator {
 
 	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
 		// change the enum value from the
-		// hu.bme.mit.trainbenchmark.ttc.constants.Signal enum to the
-		// hu.bme.mit.trainbenchmark.ttc.railway.Signal enum
-		if (SIGNAL_CURRENTSTATE.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SignalState) value).ordinal();
+		// hu.bme.mit.trainbenchmark.constants.Signal enum to the
+		// hu.bme.mit.trainbenchmark.railway.Signal enum
+		if (SIGNAL.equals(key)) {
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Signal) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.Signal.get(ordinal);
-		} else if (ModelConstants.SWITCH_CURRENTSTATE.equals(key) || ModelConstants.SWITCHPOSITION_SWITCHSTATE.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.SwitchState) value).ordinal();
+		} else if (CURRENTPOSITION.equals(key) || POSITION.equals(key)) {
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Position) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.Position.get(ordinal);
 		}
 

@@ -69,11 +69,11 @@ public class SQLGenerator extends Generator {
 	@Override
 	protected void persistModel() throws IOException {
 		write("COMMIT;");
-		write(String.format("CREATE INDEX Segment_idx_length ON %s (%s);", ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH));
-		write(String.format("CREATE INDEX Route_routeDefinition_idx ON %s (Route_id, Sensor_id);", ModelConstants.ROUTE_ROUTEDEFINITION));
-		write(String.format("CREATE INDEX Sensor_trackElement_idx1 ON %s (TrackElement_id);", ModelConstants.TRACKELEMENT_SENSOR));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx1 ON %s (TrackElement_id);", ModelConstants.TRACKELEMENT_CONNECTSTO));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx2 ON %s (TrackElement_id_connectsTo);", ModelConstants.TRACKELEMENT_CONNECTSTO));
+		write(String.format("CREATE INDEX Segment_idx_length ON %s (%s);", ModelConstants.SEGMENT, ModelConstants.LENGTH));
+		write(String.format("CREATE INDEX Route_routeDefinition_idx ON %s (Route_id, Sensor_id);", ModelConstants.DEFINED_BY));
+		write(String.format("CREATE INDEX Sensor_trackElement_idx1 ON %s (TrackElement_id);", ModelConstants.SENSOR_EDGE));
+		write(String.format("CREATE INDEX TrackElement_connectsto_idx1 ON %s (TrackElement_id);", ModelConstants.CONNECTSTO));
+		write(String.format("CREATE INDEX TrackElement_connectsto_idx2 ON %s (TrackElement_id_connectsTo);", ModelConstants.CONNECTSTO));
 
 		file.close();
 	}

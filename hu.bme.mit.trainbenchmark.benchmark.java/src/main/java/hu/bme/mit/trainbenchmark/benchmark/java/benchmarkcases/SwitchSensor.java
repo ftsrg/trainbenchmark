@@ -37,6 +37,7 @@ public class SwitchSensor extends JavaBenchmarkCase<Switch> {
 				}
 			}
 		}
+		System.out.println(results);
 
 		return results;
 	}
