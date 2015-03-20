@@ -10,22 +10,20 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
+package hu.bme.mit.trainbenchmark.benchmark.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class ScenarioFactory {
+public abstract class TestBenchmarkInitializer<T extends AbstractBenchmarkLogic> {
 
-	public static ScenarioLogic<?> getScenario(final Scenario scenarioName) {
-		switch (scenarioName) {
-		case USER:
-			return new UserScenarioLogic();
-		case REPAIR:
-			return new RepairScenarioLogic();
-		case BATCH:
-			return new BatchScenarioLogic();
-		default:
-			throw new UnsupportedOperationException("Invalid scenario.");
-		}
-	}
+	protected final int size = 1;
+	protected final ModificationMethod modificationMethod = ModificationMethod.CONSTANT;
+	protected final int modificationConstant = 1;
+	protected final int runIndex = 1;
+	protected final int iterationCount = 1;
+	
+	protected abstract T initializeBenchmark(String queryName, Scenario scenario);
+
 }

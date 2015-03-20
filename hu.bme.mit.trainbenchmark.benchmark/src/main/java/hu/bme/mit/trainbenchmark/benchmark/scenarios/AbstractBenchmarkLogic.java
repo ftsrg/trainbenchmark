@@ -14,23 +14,26 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 
-public abstract class GenericBenchmarkLogic {
+public abstract class AbstractBenchmarkLogic {
 
 	protected BenchmarkConfig bc;
 
-	public GenericBenchmarkLogic(final String[] args) {
+	public AbstractBenchmarkLogic() {		
 	}
-
+	
+	public AbstractBenchmarkLogic(final BenchmarkConfig bc) {
+		this.bc = bc;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void runBenchmark() throws IOException {
-		final Scenario scl = ScenarioFactory.getScenario(bc.getScenario());
+		final ScenarioLogic scl = ScenarioFactory.getScenario(bc.getScenario());
 		final AbstractBenchmarkCase<?> tc = getTestCase();
-		final BenchmarkResult bmr = scl.runBenchmark(bc, tc);
+		scl.runBenchmark(bc, tc);
 	}
 
 	public AbstractBenchmarkCase<?> getTestCase() {

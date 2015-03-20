@@ -56,7 +56,7 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 
 	@Override
 	public void read() throws IOException {
-		final String modelPath = bc.getBenchmarkArtifact();
+		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
 		final EMFDriver emfDriver = new EMFDriver(modelPath);
 		driver = (DatabaseDriver<T>) emfDriver;
 

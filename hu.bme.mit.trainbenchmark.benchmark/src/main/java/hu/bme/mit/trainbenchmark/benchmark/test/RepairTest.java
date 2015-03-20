@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.REPAIR;
+import static hu.bme.mit.trainbenchmark.constants.Scenario.REPAIR;
 
 import java.io.IOException;
 

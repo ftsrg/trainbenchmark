@@ -14,10 +14,10 @@ package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
 
 import org.apache.commons.cli.ParseException;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
-public class VirtuosoBenchmarkLogic extends GenericBenchmarkLogic{
+public class VirtuosoBenchmarkLogic extends AbstractBenchmarkLogic{
 
 	public VirtuosoBenchmarkLogic(String[] args) throws ParseException {
 		super(args);

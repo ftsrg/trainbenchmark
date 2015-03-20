@@ -12,25 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
-import org.apache.commons.cli.ParseException;
-
-public class SesameBenchmarkInitializer extends BenchmarkInitializer {
+public class SesameBenchmarkInitializer extends TestBenchmarkInitializer<SesameBenchmarkLogic> {
 
 	@Override
-	public GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
-		// @formatter:off
-		final String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.ttl",
-				"-scenario", scenario, 
-				"-workspacePath", "../"
-			};
-		// @formatter:on
-		return new SesameBenchmarkLogic(args);
+	protected SesameBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig(scenario, size, "Sesame", 1, queryName,
+				iterationCount, modificationMethod, modificationConstant);
+		return new SesameBenchmarkLogic(rbc);
 	}
 
 }

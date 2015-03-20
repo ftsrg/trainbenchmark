@@ -64,8 +64,7 @@ public class RDFGenerator extends Generator {
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
-				+ generatorConfig.getSize() + ".ttl";
+		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + ".ttl";
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -120,7 +119,6 @@ public class RDFGenerator extends Generator {
 			return;
 		}
 		final String triple = String.format(":%s%s :%s :%s%s .", ID_PREFIX, from, label, ID_PREFIX, to);
-		System.out.println(triple);
 		write(triple);
 	}
 	

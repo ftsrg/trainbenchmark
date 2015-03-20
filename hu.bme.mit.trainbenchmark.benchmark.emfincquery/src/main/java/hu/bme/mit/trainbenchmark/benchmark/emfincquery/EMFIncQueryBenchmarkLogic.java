@@ -12,19 +12,24 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 
-public class EMFIncQueryBenchmarkLogic extends GenericBenchmarkLogic {
+public class EMFIncQueryBenchmarkLogic extends AbstractBenchmarkLogic {
 
-	EMFIncQueryBenchmarkConfig iqbc;
+	protected EMFIncQueryBenchmarkConfig iqbc;
 	
 	public EMFIncQueryBenchmarkLogic(final String[] args) throws ParseException {
-		super(args);
+		super();
 		bc = iqbc = new EMFIncQueryBenchmarkConfig(args, getTool());
 	}
 
+	public EMFIncQueryBenchmarkLogic(final EMFIncQueryBenchmarkConfig iqbc) {
+		super(iqbc);
+		this.iqbc = iqbc;
+	}
+	
 	@Override
 	protected String getTool() {
 		return "EMFIncQuery";

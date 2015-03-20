@@ -56,9 +56,8 @@ public class GraphGenerator extends Generator {
 
 	@Override
 	protected void initModel() throws IOException {
-		final String databaseDirectoriesPath = generatorConfig.getInstanceModelPath() + "/neo4j-gen/";
-		final String databasePath = databaseDirectoriesPath + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-				+ ".neo4j";
+		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
+		final String databasePath = databaseDirectoriesPath + "/railway" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
@@ -154,8 +153,7 @@ public class GraphGenerator extends Generator {
 				xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 				tx.success();
 
-				final String fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
-						+ generatorConfig.getSize() + ".graphml";
+				final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
 				FileUtils.writeToFile(new File(fileName), writer.toString().trim(), false);
 			} catch (final XMLStreamException e) {
 				throw new IOException(e);

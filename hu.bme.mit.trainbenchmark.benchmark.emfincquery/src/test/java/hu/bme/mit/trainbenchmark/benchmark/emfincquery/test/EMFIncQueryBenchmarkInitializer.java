@@ -12,25 +12,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import org.apache.commons.cli.ParseException;
-
-public class EMFIncQueryBenchmarkInitializer extends BenchmarkInitializer {
+public class EMFIncQueryBenchmarkInitializer extends TestBenchmarkInitializer<EMFIncQueryBenchmarkLogic> {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
-		// @formatter:off
-		final String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-repair-1.emf",
-				"-scenario", scenario, 
-				"-workspacePath", "../" 
-			};
-		// @formatter:on
-
-		return new EMFIncQueryBenchmarkLogic(args);
+	protected EMFIncQueryBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, "EMFIncQuery", 1, queryName,
+				iterationCount, modificationMethod, modificationConstant);
+		return new EMFIncQueryBenchmarkLogic(eiqbc);
 	}
 
 }

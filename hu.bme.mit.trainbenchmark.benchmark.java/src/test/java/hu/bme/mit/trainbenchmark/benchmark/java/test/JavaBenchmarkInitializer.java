@@ -12,26 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.java.JavaBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import org.apache.commons.cli.ParseException;
-
-public class JavaBenchmarkInitializer extends BenchmarkInitializer {
+public class JavaBenchmarkInitializer extends TestBenchmarkInitializer<JavaBenchmarkLogic> {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
-		// @formatter:off
-		final String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.emf",
-				"-scenario", scenario, 
-				"-workspacePath", "../" 
-			};
-		// @formatter:on
-
-		return new JavaBenchmarkLogic(args);
+	protected JavaBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Java", 1, queryName, iterationCount, modificationMethod,
+				modificationConstant);
+		return new JavaBenchmarkLogic(bc);
 	}
 
 }

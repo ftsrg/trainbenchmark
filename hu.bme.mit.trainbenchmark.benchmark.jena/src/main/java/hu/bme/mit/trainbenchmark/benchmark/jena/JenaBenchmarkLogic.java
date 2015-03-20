@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class JenaBenchmarkLogic extends GenericBenchmarkLogic {
+public class JenaBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	protected RDFBenchmarkConfig rbc;
 

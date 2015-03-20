@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 
-public class RepairScenario implements Scenario<AbstractBenchmarkCase<?>> {
+public class UserScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?>> {
 
 	@Override
 	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?> testCase) throws IOException {
@@ -26,8 +26,10 @@ public class RepairScenario implements Scenario<AbstractBenchmarkCase<?>> {
 
 		testCase.benchmarkRead();
 		testCase.benchmarkCheck();
-		testCase.benchmarkModify();
-		testCase.benchmarkCheck();
+		for (int i = 0; i < bc.getIterationCount(); i++) {
+			testCase.benchmarkModify();
+			testCase.benchmarkCheck();
+		}
 		testCase.benchmarkDestroy();
 
 		final BenchmarkResult bmr = testCase.getBenchmarkResult();
@@ -35,5 +37,4 @@ public class RepairScenario implements Scenario<AbstractBenchmarkCase<?>> {
 		bmr.publish();
 		return bmr;
 	}
-
 }
