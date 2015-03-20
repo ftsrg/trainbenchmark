@@ -13,9 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
 
@@ -28,12 +26,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected boolean benchmarkMode;
 	protected int iterationCount;
 	protected int runIndex;
-	protected String benchmarkArtifact;
 	protected String query;
 	protected String tool;
-
-	protected static int nMax;
-	protected static boolean generateHeader;
 	
 	public int getRunIndex() {
 		return runIndex;
@@ -44,6 +38,17 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.tool = tool;
 	}
 
+	public BenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant) {
+		super(scenario, size);
+		this.tool = tool;
+		this.runIndex = runIndex;
+		this.query = query;
+		this.iterationCount = iterationCount;
+		this.modificationMethod = modificationMethod;
+		this.modificationConstant = modificationConstant;
+	}
+	
 	@Override
 	protected void initOptions() {
 		super.initOptions();
@@ -61,16 +66,11 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 				"options: constant -- modify a fixed number of elements, resultSet -- modify based a number of elements based on the size of the results set");
 		options.addOption("iterationCount", true, "number of modify-check iterations");
 		options.addOption("modificationConstant", true, "modification constant for the modification method");
-
-		options.addOption("nMax", true, "the length of the longest edit iteration");
-		options.addOption("generateHeader", false, "is header generation needed?");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
-
-		benchmarkArtifact = cmd.getOptionValue("benchmarkArtifact");
 
 		// queries argument -> testCases list
 		query = cmd.getOptionValue("query");
@@ -114,14 +114,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		} else {
 			benchmarkMode = false;
 		}
-
-		if (cmd.hasOption("nMax")) {
-			nMax = new Integer(cmd.getOptionValue("nMax"));
-		} else {
-			nMax = 100;
-		}
-
-		generateHeader = cmd.hasOption("generateHeader");
 	}
 
 	private long determineModificationConstant(final String optionName) {
@@ -148,34 +140,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return iterationCount;
 	}
 
-	public String getBenchmarkArtifact() {
-		return benchmarkArtifact;
-	}
-
-	public int getArtifactSize() {
-		final Pattern pattern = Pattern.compile("-(\\d+)\\.");
-		final Matcher matcher = pattern.matcher(benchmarkArtifact);
-		if (matcher.find()) {
-			return Integer.parseInt(matcher.group(1));
-		} else {
-			return -1;
-		}
-	}
-
 	public String getQuery() {
 		return query;
-	}
-
-	public static int getnMax() {
-		return nMax;
-	}
-
-	public static boolean isGeneratingHeader() {
-		return generateHeader;
-	}
-
-	public static void setGeneratingHeader(final boolean isGeneratingHead) {
-		generateHeader = false;
 	}
 
 	public String getTool() {

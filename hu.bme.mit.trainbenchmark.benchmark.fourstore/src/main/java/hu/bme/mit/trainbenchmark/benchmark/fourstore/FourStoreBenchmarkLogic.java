@@ -1,11 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore;
 
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 
-public class FourStoreBenchmarkLogic extends GenericBenchmarkLogic {
+public class FourStoreBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	protected FourStoreBenchmarkConfig fsbc; 
 	

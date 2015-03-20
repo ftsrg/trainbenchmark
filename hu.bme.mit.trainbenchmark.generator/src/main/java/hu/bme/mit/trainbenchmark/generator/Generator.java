@@ -30,7 +30,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
 import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -87,7 +86,7 @@ public abstract class Generator {
 
 	private void initializeConstants() {
 		switch (generatorConfig.getScenario()) {
-		case ScenarioConstants.USER:
+		case USER:
 			maxSegments = 5;
 			maxRoutes = 20 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
@@ -99,7 +98,7 @@ public abstract class Generator {
 			switchSetErrorPercent = 2;
 			connectedSegmentsErrorPercent = 5;
 			break;
-		case ScenarioConstants.REPAIR:
+		case REPAIR:
 			maxSegments = 5;
 			maxRoutes = 20 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
@@ -111,7 +110,7 @@ public abstract class Generator {
 			switchSetErrorPercent = 10;
 			connectedSegmentsErrorPercent = 5;
 			break;
-		case ScenarioConstants.TEST:
+		case TEST:
 			maxSegments = 5;
 			maxRoutes = 5 * generatorConfig.getSize();
 			maxSwitchPositions = 20;

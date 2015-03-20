@@ -24,7 +24,7 @@ public class SemaphoreNeighbor extends Drools6BenchmarkCase<Route> {
 	protected Collection<Route> check() {
 		if (query == null) {
 			listener = new ResultListener<Route>("route");
-			query = ksession.openLiveQuery("SignalNeighbor check", new Object[] {}, listener);
+			query = ksession.openLiveQuery("SemaphoreNeighbor check", new Object[] {}, listener);
 		} else {
 			// activate lazy PHREAK evaluation
 			ksession.fireAllRules();

@@ -13,15 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.allegro.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.allegro.AllegroBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 
 import org.apache.commons.cli.ParseException;
 
-public class AllegroBenchmarkInitializer extends BenchmarkInitializer {
+public class AllegroBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	public GenericBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
+	public AbstractBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
 		// @formatter:off
 		String[] args = {
 				"-query", queryName, 

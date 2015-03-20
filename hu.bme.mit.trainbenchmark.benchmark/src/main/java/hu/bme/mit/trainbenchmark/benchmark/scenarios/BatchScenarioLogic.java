@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 
-public class BatchScenario implements Scenario<AbstractBenchmarkCase<?>> {
+public class BatchScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?>> {
 
 	@Override
 	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?> testCase) throws IOException {

@@ -24,7 +24,7 @@ public class SemaphoreNeighbor extends Drools5BenchmarkCase<Route> {
 	protected Collection<Route> check() {
 		if (query == null) {
 			listener = new ResultListener<Route>("route");
-			query = ksession.openLiveQuery("SignalNeighbor check", new Object[] {}, listener);
+			query = ksession.openLiveQuery("SemaphoreNeighbor check", new Object[] {}, listener);
 		}		
 		results = new ArrayList<>(listener.getMatching());
 		return results;

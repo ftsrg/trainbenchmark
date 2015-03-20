@@ -13,11 +13,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 
-public class Neo4jBenchmarkLogic extends GenericBenchmarkLogic {
+public class Neo4jBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public Neo4jBenchmarkLogic(final String[] args) throws ParseException {
 		super(args);

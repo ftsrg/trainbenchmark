@@ -19,8 +19,8 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSET;
 import static org.junit.Assert.assertEquals;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
 
@@ -55,11 +55,11 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 	}
 
 	protected void testQuery(final String queryName, final int expectedResultSize) throws ParseException, IOException {
-		final GenericBenchmarkLogic bl = bi.initializeBenchmark(queryName, ScenarioConstants.BATCH);
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(queryName, Scenario.BATCH);
 		runQuery(bl, expectedResultSize);
 	}
 
-	protected void runQuery(final GenericBenchmarkLogic bl, final int expectedResultSize) throws IOException {
+	protected void runQuery(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
 		final AbstractBenchmarkCase<?> testCase = bl.getTestCase();
 		testCase.benchmarkInit(bl.getBc());
 		testCase.benchmarkRead();

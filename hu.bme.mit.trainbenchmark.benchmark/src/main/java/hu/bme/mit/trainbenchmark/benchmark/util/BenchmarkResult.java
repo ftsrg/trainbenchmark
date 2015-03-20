@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Stopwatch;
 
 public class BenchmarkResult {
-
 	
 	protected String tool;
 	protected String query;
@@ -61,17 +60,16 @@ public class BenchmarkResult {
 		this.query = query;
 		this.random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	}
-
 	
 	// JSON properties
 	@JsonProperty("Size")
 	public int getSize(){
-		return bc.getArtifactSize();
+		return bc.getSize();
 	}
 	
 	@JsonProperty("Scenario")
 	public String getScenario(){
-		return bc.getScenario();
+		return bc.getScenario().toString();
 	}
 	
 	@JsonProperty("RunIndex")

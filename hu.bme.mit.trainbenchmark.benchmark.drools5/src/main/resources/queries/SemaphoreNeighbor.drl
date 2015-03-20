@@ -1,0 +1,12 @@
+package hu.bme.mit.trainbenchmark.railway
+
+query "SemaphoreNeighbor check"
+    route : Route( )
+    sen1 : Sensor( ) from route.definedBy
+    te1 : TrackElement( ) from sen1.elements
+    te2 : TrackElement( ) from te1.connectsTo
+    sen2 : Sensor( ) from te2.sensor
+    sem : Semaphore( this == route.exit )
+    Route( definedBy contains sen2, this != route )
+    not Route( entry == sem, definedBy contains sen2 )
+end

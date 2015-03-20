@@ -13,15 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 
 import org.apache.commons.cli.ParseException;
 
-public class MySQLBenchmarkInitializer extends BenchmarkInitializer {
+public class MySQLBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
+	protected AbstractBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
 		// @formatter:off
 		String[] args = {
 				"-query", queryName, 

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -210,13 +209,8 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 
 				if (features.size() > 0) {
 					final RailwayElement e = (RailwayElement) features.get(0);
-					System.out.println("e: " + e);
 					features.remove(0);
 					container.getInvalids().add(e);
-					final EList<RailwayElement> invalids = container.getInvalids();
-					for (final RailwayElement railwayElement : invalids) {
-						System.out.println(railwayElement);
-					}
 				}
 			} else {
 				vertex.eSet(feature, null);

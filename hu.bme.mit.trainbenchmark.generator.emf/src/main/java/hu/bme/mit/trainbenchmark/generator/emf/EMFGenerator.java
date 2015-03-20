@@ -51,14 +51,14 @@ public class EMFGenerator extends Generator {
 	public String syntax() {
 		return "EMF";
 	}
-	
+
 	protected Resource resource;
 	protected RailwayFactory factory;
 	protected RailwayContainer container;
 
 	@Override
 	public void initModel() {
-		final String fileName = generatorConfig.getInstanceModelPath() + "/railway-" + generatorConfig.getScenario().toLowerCase() + "-" + generatorConfig.getSize() + ".emf";
+		final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".emf";
 		final URI resourceURI = FileBroker.getEMFUri(fileName);
 
 		final ResourceSet resourceSet = new ResourceSetImpl();
@@ -96,7 +96,7 @@ public class EMFGenerator extends Generator {
 		default:
 			break;
 		}
-		
+
 		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
 			createEdge(outgoingEdge.getKey(), railwayElement, outgoingEdge.getValue());
 		}

@@ -56,8 +56,7 @@ public class SQLGenerator extends Generator {
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
-				+ generatorConfig.getSize() + ".sql";
+		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + ".sql";
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists

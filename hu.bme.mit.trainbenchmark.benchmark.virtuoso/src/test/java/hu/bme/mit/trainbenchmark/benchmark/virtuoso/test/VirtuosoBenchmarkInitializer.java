@@ -14,14 +14,14 @@ package hu.bme.mit.trainbenchmark.benchmark.virtuoso.test;
 
 import org.apache.commons.cli.ParseException;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoBenchmarkLogic;
 
-public class VirtuosoBenchmarkInitializer extends BenchmarkInitializer{
+public class VirtuosoBenchmarkInitializer extends TestBenchmarkInitializer{
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(String queryName,
+	protected AbstractBenchmarkLogic initializeBenchmark(String queryName,
 			String scenario) throws ParseException {
 		// @formatter:off
 		String[] args = {

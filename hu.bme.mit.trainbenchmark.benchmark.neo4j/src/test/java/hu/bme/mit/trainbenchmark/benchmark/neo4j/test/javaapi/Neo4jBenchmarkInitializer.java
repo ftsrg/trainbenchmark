@@ -13,15 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.javaapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 
 import org.apache.commons.cli.ParseException;
 
-public class Neo4jBenchmarkInitializer extends BenchmarkInitializer {
+public class Neo4jBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
+	protected AbstractBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
 		// @formatter:off
 		final String[] args = {
 				"-query", queryName, 

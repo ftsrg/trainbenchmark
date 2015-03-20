@@ -13,15 +13,18 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 
-public class Drools6BenchmarkLogic extends GenericBenchmarkLogic {
+public class Drools6BenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public Drools6BenchmarkLogic(final String[] args) throws ParseException {
-		super(args);
 		bc = new BenchmarkConfig(args, getTool());
+	}
+	
+	public Drools6BenchmarkLogic(final BenchmarkConfig bc) {
+		super(bc);
 	}
 
 	@Override

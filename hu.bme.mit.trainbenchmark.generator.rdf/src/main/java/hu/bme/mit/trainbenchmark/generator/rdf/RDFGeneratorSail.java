@@ -17,8 +17,8 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.XSD_PREFIX;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 
@@ -110,13 +110,11 @@ public class RDFGeneratorSail extends Generator {
 			RDFWriterBase writer = null;
 			switch (rdfGeneratorConfig.getRdfFormat()) {
 			case RDFXML:
-				fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-						+ (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "") + ".rdf";
+				fileName = generatorConfig.getModelPathNameWithoutExtension() + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "") + ".rdf";
 				writer = new RDFXMLWriter(new FileWriter(fileName));
 				break;
 			case TURTLE:
-				fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-						+ ".ttl";
+				fileName = generatorConfig.getModelPathNameWithoutExtension() + ".ttl";
 				writer = new TurtleWriter(new FileWriter(fileName));
 				writer.handleNamespace("", BASE_PREFIX);
 				break;
