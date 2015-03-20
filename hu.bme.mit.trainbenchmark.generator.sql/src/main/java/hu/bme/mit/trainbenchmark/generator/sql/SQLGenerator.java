@@ -104,6 +104,9 @@ public class SQLGenerator extends Generator {
 
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
+		if (from == null || to == null) {
+			return;
+		}
 		final String insertQuery = String.format("INSERT INTO `%s` VALUES (%s, %s);", label, from, to);
 		write(insertQuery);
 	}
@@ -123,11 +126,7 @@ public class SQLGenerator extends Generator {
 			columns.append(", `" + key + "`");
 			values.append(", ");
 
-			if (value == null) {
-				continue;
-			}
-			
-			final String stringValue = (value.equals(-1L) ? "NULL" : valueToString(value));
+			final String stringValue = (value == null ? "NULL" : valueToString(value));
 			values.append(stringValue);
 		}
 	}

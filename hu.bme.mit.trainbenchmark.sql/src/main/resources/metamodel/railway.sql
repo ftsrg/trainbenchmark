@@ -60,10 +60,10 @@ CREATE TABLE IF NOT EXISTS `Sensor` (
 -- --------------------------------------------------------
 
 --
--- Table structure: `TrackElement_sensor`
+-- Table structure: `sensor`
 --
 
-CREATE TABLE IF NOT EXISTS `TrackElement_sensor` (
+CREATE TABLE IF NOT EXISTS `sensor` (
   `TrackElement_id` int NOT NULL,
   `Sensor_id` int NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `Switch` (
 
 CREATE TABLE IF NOT EXISTS `SwitchPosition` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `route` int NOT NULL,
+  `follows` int NOT NULL,
   `switch` int NOT NULL,
   `position` int NOT NULL,
   PRIMARY KEY  (`id`)
