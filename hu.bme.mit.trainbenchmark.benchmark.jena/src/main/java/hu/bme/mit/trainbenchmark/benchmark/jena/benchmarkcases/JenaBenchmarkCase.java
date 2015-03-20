@@ -39,7 +39,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
 
 	@Override
 	public void read() throws IOException {
-		driver.read(bc.getBenchmarkArtifact());
+		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");
 	}
 
 	@Override

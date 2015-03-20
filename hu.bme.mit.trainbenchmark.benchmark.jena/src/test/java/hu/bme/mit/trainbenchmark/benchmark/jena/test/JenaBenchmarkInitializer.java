@@ -13,25 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
-import org.apache.commons.cli.ParseException;
-
-public class JenaBenchmarkInitializer extends TestBenchmarkInitializer {
+public class JenaBenchmarkInitializer extends TestBenchmarkInitializer<JenaBenchmarkLogic> {
 
 	@Override
-	protected AbstractBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
-		// @formatter:off
-		String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.ttl",
-				"-scenario", scenario, 
-				"-workspacePath", "../" 
-			};
-		// @formatter:on
-
-		return new JenaBenchmarkLogic(args);
+	protected JenaBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig(scenario, size, "Jena", 1, queryName,
+				iterationCount, modificationMethod, modificationConstant);
+		return new JenaBenchmarkLogic(rbc);
 	}
 
 }
