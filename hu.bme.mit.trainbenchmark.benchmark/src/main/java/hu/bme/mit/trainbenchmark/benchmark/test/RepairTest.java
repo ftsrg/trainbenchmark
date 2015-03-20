@@ -12,8 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.REPAIR;
 
 import java.io.IOException;
 
@@ -24,27 +27,27 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void posLengthRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.POSLENGTH, ScenarioConstants.REPAIR, 34);
+		testTransformation(POSLENGTH, REPAIR, 485);
 	}
 
 	@Test
 	public void routeSensorRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.ROUTESENSOR, ScenarioConstants.REPAIR, 22);
+		testTransformation(ROUTESENSOR, REPAIR, 17);
 	}
 
 	@Test
-	public void signalNeighborRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.SIGNALNEIGHBOR, ScenarioConstants.REPAIR, 0);
+	public void semaphoreNeighborRepair() throws ParseException, IOException {
+		testTransformation(SEMAPHORENEIGHBOR, REPAIR, 0);
 	}
 
 	@Test
 	public void switchSensorRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.REPAIR, 5);
+		testTransformation(SWITCHSENSOR, REPAIR, 3);
 	}
 	
-	@Test
-	public void switchSetRepair() throws ParseException, IOException {
+//	@Test
+//	public void switchSetRepair() throws ParseException, IOException {
 //		testTransformation(QueryConstants.SWITCHSET, ScenarioConstants.REPAIR, 3);
-	}
+//	}
 
 }

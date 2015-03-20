@@ -24,7 +24,7 @@ public class EMFIncQueryBenchmarkInitializer extends BenchmarkInitializer {
 		// @formatter:off
 		final String[] args = {
 				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.emf",
+				"-benchmarkArtifact", "../models/railway-repair-1.emf",
 				"-scenario", scenario, 
 				"-workspacePath", "../" 
 			};

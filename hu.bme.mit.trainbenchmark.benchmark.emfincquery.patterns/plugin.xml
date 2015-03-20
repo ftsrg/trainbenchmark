@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor" point="org.eclipse.incquery.runtime.queryspecification">
+    <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor"/>
+  </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSet" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSet" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSet"/>
   </extension>
@@ -10,9 +13,6 @@
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength"/>
-  </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SignalNeighbor" point="org.eclipse.incquery.runtime.queryspecification">
-    <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.SignalNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SignalNeighbor"/>
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments"/>

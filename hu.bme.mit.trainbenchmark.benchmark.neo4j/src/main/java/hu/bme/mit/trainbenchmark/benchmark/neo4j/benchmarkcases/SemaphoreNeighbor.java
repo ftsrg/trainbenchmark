@@ -13,14 +13,14 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_EXIT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ROUTEDEFINITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,20 +35,20 @@ import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class SignalNeighbor extends Neo4jBenchmarkCase {
+public class SemaphoreNeighbor extends Neo4jBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
 		final Label labelRoute = DynamicLabel.label(ROUTE);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
-		final Label labelSignal = DynamicLabel.label(SIGNAL);
+		final Label labelSignal = DynamicLabel.label(SEMAPHORE);
 		final Label labelTrackElement = DynamicLabel.label(TRACKELEMENT);
 
-		final DynamicRelationshipType relationshipTypeRoute_entry = DynamicRelationshipType.withName(ROUTE_ENTRY);
-		final DynamicRelationshipType relationshipTypeRoute_exit = DynamicRelationshipType.withName(ROUTE_EXIT);
-		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION);
-		final DynamicRelationshipType relationshipTypeTrackElement_connectsTo = DynamicRelationshipType.withName(TRACKELEMENT_CONNECTSTO);
-		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
+		final DynamicRelationshipType relationshipTypeRoute_entry = DynamicRelationshipType.withName(ENTRY);
+		final DynamicRelationshipType relationshipTypeRoute_exit = DynamicRelationshipType.withName(EXIT);
+		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(DEFINED_BY);
+		final DynamicRelationshipType relationshipTypeTrackElement_connectsTo = DynamicRelationshipType.withName(CONNECTSTO);
+		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(SENSOR_EDGE);
 
 		results = new ArrayList<>();
 

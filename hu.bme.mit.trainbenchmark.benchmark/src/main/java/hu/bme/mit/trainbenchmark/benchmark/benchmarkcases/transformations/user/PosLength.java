@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.SetToZero;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 
@@ -27,7 +27,7 @@ public class PosLength<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.updateProperties(elementsToModify, SEGMENT, SEGMENT_LENGTH, new SetToZero());
+		driver.updateProperties(elementsToModify, SEGMENT, LENGTH, new SetToZero());
 	}
 
 }

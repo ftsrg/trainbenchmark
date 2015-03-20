@@ -54,7 +54,7 @@ public abstract class DatabaseDriverTest {
 	@Test
 	public void testUpdateProperty() throws IOException {
 		final List<? extends Object> segments = driver.collectVertices(ModelConstants.SEGMENT);
-		driver.updateProperties(segments, ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH, new SetToZero());
+		driver.updateProperties(segments, ModelConstants.SEGMENT, ModelConstants.LENGTH, new SetToZero());
 
 		final List<? extends Object> segments2 = driver.collectVertices(ModelConstants.SEGMENT);
 		for (final Object segment : segments2) {
@@ -66,13 +66,13 @@ public abstract class DatabaseDriverTest {
 	@Test
 	public void testDeleteOutgoingEdges() throws IOException {
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.ROUTE);
-		driver.deleteAllOutgoingEdges(routes, ModelConstants.ROUTE, ModelConstants.ROUTE_ROUTEDEFINITION);
+		driver.deleteAllOutgoingEdges(routes, ModelConstants.ROUTE, ModelConstants.DEFINED_BY);
 	}
 
 	@Test
 	public void testDeleteIncomingEdges() throws IOException {
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.SENSOR);
-		driver.deleteAllIncomingEdges(routes, ModelConstants.TRACKELEMENT, ModelConstants.TRACKELEMENT_SENSOR);
+		driver.deleteAllIncomingEdges(routes, ModelConstants.TRACKELEMENT, ModelConstants.SENSOR_EDGE);
 	}
 
 	protected abstract long extractLength(Object segment) throws IOException;

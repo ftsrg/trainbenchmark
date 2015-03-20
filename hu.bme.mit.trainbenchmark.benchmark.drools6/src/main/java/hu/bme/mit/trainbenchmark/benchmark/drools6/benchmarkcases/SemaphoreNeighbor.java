@@ -10,22 +10,25 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools5.ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
 import hu.bme.mit.trainbenchmark.railway.Route;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SignalNeighbor extends Drools5BenchmarkCase<Route> {
+public class SemaphoreNeighbor extends Drools6BenchmarkCase<Route> {
 
 	@Override
 	protected Collection<Route> check() {
 		if (query == null) {
 			listener = new ResultListener<Route>("route");
 			query = ksession.openLiveQuery("SignalNeighbor check", new Object[] {}, listener);
-		}		
+		} else {
+			// activate lazy PHREAK evaluation
+			ksession.fireAllRules();
+		}
 		results = new ArrayList<>(listener.getMatching());
 		return results;
 	}

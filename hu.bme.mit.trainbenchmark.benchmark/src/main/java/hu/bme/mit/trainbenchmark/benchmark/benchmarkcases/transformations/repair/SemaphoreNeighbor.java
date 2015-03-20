@@ -9,24 +9,24 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 
 import java.io.IOException;
 
-public class SignalNeighbor<T> extends TransformationDefinition<T> {
+public class SemaphoreNeighbor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(ROUTE);
+		elementCandidates = currentResults;
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteSingleOutgoingEdge(elementsToModify, ROUTE, ROUTE_ENTRY);
+		driver.deleteSingleOutgoingEdge(elementsToModify, ROUTE, EXIT);
 	}
 
 }

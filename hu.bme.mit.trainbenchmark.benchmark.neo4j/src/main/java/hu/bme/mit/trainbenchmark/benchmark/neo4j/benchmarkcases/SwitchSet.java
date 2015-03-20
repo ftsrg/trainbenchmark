@@ -13,15 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_SWITCHPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_CURRENTSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.SignalState;
+import hu.bme.mit.trainbenchmark.constants.Signal;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,11 +43,11 @@ public class SwitchSet extends Neo4jBenchmarkCase {
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
 		final Label labelSwitchPosition = DynamicLabel.label(SWITCHPOSITION);
 		final Label labelRoute = DynamicLabel.label(ROUTE);
-		final Label labelSignal = DynamicLabel.label(SIGNAL);
+		final Label labelSignal = DynamicLabel.label(SEMAPHORE);
 
-		final DynamicRelationshipType relationshipTypeRoute_entry = DynamicRelationshipType.withName(ROUTE_ENTRY);
-		final DynamicRelationshipType relationshipTypeRoute_switchPosition = DynamicRelationshipType.withName(ROUTE_SWITCHPOSITION);
-		final DynamicRelationshipType relationshipTypeSwitchPosition_switch = DynamicRelationshipType.withName(SWITCHPOSITION_SWITCH);
+		final DynamicRelationshipType relationshipTypeRoute_entry = DynamicRelationshipType.withName(ENTRY);
+		final DynamicRelationshipType relationshipTypeRoute_switchPosition = DynamicRelationshipType.withName(FOLLOWS);
+		final DynamicRelationshipType relationshipTypeSwitchPosition_switch = DynamicRelationshipType.withName(SWITCH_EDGE);
 
 		results = new ArrayList<>();
 
@@ -60,8 +60,8 @@ public class SwitchSet extends Neo4jBenchmarkCase {
 			final ResourceIterable<Node> signals = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSignal);
 			for (final Node signal : signals) {
 				// signal.Signal_currentState = "GO"
-				final Object signal_currentState = signal.getProperty(SIGNAL_CURRENTSTATE);
-				if (!SignalState.GO.toString().equals(signal_currentState)) {
+				final Object signal_currentState = signal.getProperty(SIGNAL);
+				if (!Signal.GO.toString().equals(signal_currentState)) {
 					continue;
 				}
 
@@ -95,8 +95,8 @@ public class SwitchSet extends Neo4jBenchmarkCase {
 							continue;
 						}
 
-						final Object currentState = sw.getProperty(ModelConstants.SWITCH_CURRENTSTATE);
-						final Object switchState = sP.getProperty(ModelConstants.SWITCHPOSITION_SWITCHSTATE);
+						final Object currentState = sw.getProperty(ModelConstants.CURRENTPOSITION);
+						final Object switchState = sP.getProperty(ModelConstants.POSITION);
 
 						if (!currentState.equals(switchState)) {
 							results.add(sP);
