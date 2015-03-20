@@ -12,6 +12,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
 
@@ -25,6 +27,11 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 		super(args, tool);
 	}
 
+	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant) {
+		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+	}
+		
 	@Override
 	protected void initOptions() {
 		super.initOptions();

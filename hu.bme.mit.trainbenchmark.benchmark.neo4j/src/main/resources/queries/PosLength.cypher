@@ -1,3 +1,3 @@
 MATCH (s:Segment)
-WHERE s.Segment_length <= 0
+WHERE s.length <= 0
 RETURN s

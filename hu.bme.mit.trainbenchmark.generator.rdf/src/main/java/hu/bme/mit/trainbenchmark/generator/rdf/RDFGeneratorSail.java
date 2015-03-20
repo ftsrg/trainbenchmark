@@ -17,8 +17,8 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.XSD_PREFIX;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.SignalState;
-import hu.bme.mit.trainbenchmark.constants.SwitchState;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 
@@ -80,23 +80,23 @@ public class RDFGeneratorSail extends Generator {
 		}
 
 		// @formatter:off
-		final Resource signalState_Stop    = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_STOP);
-		final Resource signalState_Failure = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_FAILURE);
-		final Resource signalState_Go      = vf.createURI(BASE_PREFIX + ModelConstants.SIGNALSTATE_GO);
+		final Resource signalState_Stop    = vf.createURI(BASE_PREFIX + ModelConstants.SIGNAL_STOP);
+		final Resource signalState_Failure = vf.createURI(BASE_PREFIX + ModelConstants.SIGNAL_FAILURE);
+		final Resource signalState_Go      = vf.createURI(BASE_PREFIX + ModelConstants.SIGNAL_GO);
 
-		final Resource switchState_Left     = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
-		final Resource switchState_Straight = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
-		final Resource switchState_Right    = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
-		final Resource switchState_Failure  = vf.createURI(BASE_PREFIX + ModelConstants.SWITCHSTATE_LEFT);
+		final Resource switchState_Left     = vf.createURI(BASE_PREFIX + ModelConstants.SWITCH_LEFT);
+		final Resource switchState_Straight = vf.createURI(BASE_PREFIX + ModelConstants.SWITCH_LEFT);
+		final Resource switchState_Right    = vf.createURI(BASE_PREFIX + ModelConstants.SWITCH_LEFT);
+		final Resource switchState_Failure  = vf.createURI(BASE_PREFIX + ModelConstants.SWITCH_LEFT);
 	
 		resources = ImmutableMap.<Enum<?>, Resource>builder()
-				.put(SignalState.STOP, signalState_Stop) 
-				.put(SignalState.FAILURE, signalState_Failure) 
-				.put(SignalState.GO, signalState_Go)
-				.put(SwitchState.LEFT, switchState_Left)  
-				.put(SwitchState.STRAIGHT, switchState_Straight)
-				.put(SwitchState.RIGHT, switchState_Right)
-				.put(SwitchState.FAILURE, switchState_Failure)
+				.put(Signal.STOP, signalState_Stop) 
+				.put(Signal.FAILURE, signalState_Failure) 
+				.put(Signal.GO, signalState_Go)
+				.put(Position.LEFT, switchState_Left)  
+				.put(Position.STRAIGHT, switchState_Straight)
+				.put(Position.RIGHT, switchState_Right)
+				.put(Position.FAILURE, switchState_Failure)
 				.build();
 		// @formatter:on		
 	}
@@ -110,13 +110,11 @@ public class RDFGeneratorSail extends Generator {
 			RDFWriterBase writer = null;
 			switch (rdfGeneratorConfig.getRdfFormat()) {
 			case RDFXML:
-				fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-						+ (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "") + ".rdf";
+				fileName = generatorConfig.getModelPathNameWithoutExtension() + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "") + ".rdf";
 				writer = new RDFXMLWriter(new FileWriter(fileName));
 				break;
 			case TURTLE:
-				fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-						+ ".ttl";
+				fileName = generatorConfig.getModelPathNameWithoutExtension() + ".ttl";
 				writer = new TurtleWriter(new FileWriter(fileName));
 				writer.handleNamespace("", BASE_PREFIX);
 				break;
@@ -165,14 +163,14 @@ public class RDFGeneratorSail extends Generator {
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
 		final Object node = addIndividual(type + id, type);
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
 			final Object value = attribute.getValue();
 
-			if (attribute.getKey().equals(ModelConstants.SWITCHPOSITION_SWITCHSTATE)
-					|| attribute.getKey().equals(ModelConstants.SIGNAL_CURRENTSTATE)) {
+			if (attribute.getKey().equals(ModelConstants.POSITION)
+					|| attribute.getKey().equals(ModelConstants.SIGNAL)) {
 				addRelation(attribute.getKey(), node, resources.get(value));
 			} else if (value instanceof Integer) {
 				addDataRelation(node, attribute.getKey(), (Integer) value);

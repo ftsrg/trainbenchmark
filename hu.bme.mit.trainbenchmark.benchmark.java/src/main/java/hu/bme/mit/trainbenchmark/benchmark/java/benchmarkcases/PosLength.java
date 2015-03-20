@@ -17,16 +17,22 @@ import hu.bme.mit.trainbenchmark.railway.Segment;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+
 public class PosLength extends JavaBenchmarkCase<Segment> {
 
 	@Override
 	protected Collection<Segment> check() {
 		results = new ArrayList<>();
 		
-		for (final Object eObject : container.getContains()) {
+		final TreeIterator<EObject> contents = container.eAllContents();
+		while (contents.hasNext()) {
+			final EObject eObject = contents.next();
+
 			if (eObject instanceof Segment) {
 				final Segment segment = (Segment) eObject;
-				if (segment.getSegment_length() <= 0)
+				if (segment.getLength() <= 0)
 					results.add(segment);
 			}
 		}

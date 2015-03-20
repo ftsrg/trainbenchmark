@@ -12,26 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import org.apache.commons.cli.ParseException;
-
-public class Drools6BenchmarkInitializer extends BenchmarkInitializer {
+public class Drools6BenchmarkInitializer extends TestBenchmarkInitializer<Drools6BenchmarkLogic> {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
-		// @formatter:off
-		final String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.emf",
-				"-scenario", scenario, 
-				"-workspacePath", "../"
-			};
-		// @formatter:on
-
-		return new Drools6BenchmarkLogic(args);
+	protected Drools6BenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Drools6", runIndex, queryName,
+				iterationCount, modificationMethod, modificationConstant);
+		return new Drools6BenchmarkLogic(bc);
 	}
 
 }

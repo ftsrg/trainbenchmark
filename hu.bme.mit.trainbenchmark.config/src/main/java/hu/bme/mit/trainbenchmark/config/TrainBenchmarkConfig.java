@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.config;
 
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.util.Arrays;
 
@@ -31,8 +31,8 @@ public abstract class TrainBenchmarkConfig {
 	protected CommandLine cmd;
 
 	// arguments
-	protected String scenario;
-	protected String workspacePath;
+	protected int size;
+	protected Scenario scenario;
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
@@ -50,17 +50,39 @@ public abstract class TrainBenchmarkConfig {
 		}
 	}
 
+	public TrainBenchmarkConfig(final Scenario scenario, final int size) {
+		this.scenario = scenario;
+		this.size = size;
+	}
+
 	protected void initOptions() {
 		options.addOption("help", false, "displays this text");
 		options.addOption(requiredOption("scenario", "Batch/User/Repair"));
-		options.addOption(requiredOption("workspacePath", "path of the Eclipse workspace with all projects"));
+		options.addOption(requiredOption("size", "model size, e.g. 4"));
 	}
 
 	protected void processArguments(final String[] args) throws ParseException {
 		cmd = parser.parse(options, args);
 
-		scenario = cmd.getOptionValue("scenario");
-		workspacePath = cmd.getOptionValue("workspacePath");
+		final String scenarioString = cmd.getOptionValue("scenario");
+		switch (scenarioString) {
+		case "Test":
+			scenario = Scenario.TEST;
+			break;
+		case "Batch":
+			scenario = Scenario.BATCH;
+			break;
+		case "User":
+			scenario = Scenario.USER;
+			break;
+		case "Repair":
+			scenario = Scenario.REPAIR;
+			break;
+		default:
+			throw new UnsupportedOperationException("Scenario '" + scenarioString + "' not supported.");
+		}
+
+		size = Integer.parseInt(cmd.getOptionValue("size"));
 	}
 
 	// shorthand for generating required options
@@ -78,18 +100,31 @@ public abstract class TrainBenchmarkConfig {
 		System.out.println();
 	}
 
-	public String getScenario() {
+	public Scenario getScenario() {
 		return scenario;
 	}
 
+	public int getSize() {
+		return size;
+	}
+
 	public String getWorkspacePath() {
-		return workspacePath;
+		return "../";
+	}
+	
+	public String getModelPath() {
+		return getWorkspacePath() + "models/";
+	}
+	
+	public String getModelPathNameWithoutExtension() {
+		final String filename = getModelFileNameWithoutExtension();
+		return getModelPath() + filename;
 	}
 
-	public String getVariant() {
-		if (ScenarioConstants.BATCH.equals(scenario))
-			return "-repair-";
-		return "-" + scenario.toLowerCase() + "-";
+	public String getModelFileNameWithoutExtension() {
+		final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase(); 
+		final String filename = "railway-" + variant + "-" + size;
+		return filename;
 	}
-
+	
 }

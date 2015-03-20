@@ -9,19 +9,23 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-
 package hu.bme.mit.trainbenchmark.benchmark.java;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 
-public class JavaBenchmarkLogic extends GenericBenchmarkLogic {
+public class JavaBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public JavaBenchmarkLogic(final String[] args) throws ParseException {
-		super(args);
+		super();
 		bc = new BenchmarkConfig(args, getTool());
+	}
+
+	public JavaBenchmarkLogic(final BenchmarkConfig bc) {
+		super();
+		this.bc = bc;
 	}
 
 	@Override

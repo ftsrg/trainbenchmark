@@ -49,7 +49,7 @@ public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 	@Override
 	public void read() throws FileNotFoundException, IOException {
 		driver = neoDriver = new Neo4jDriver(dbPath, query);
-		neoDriver.read(bc.getBenchmarkArtifact());
+		neoDriver.read(bc.getModelPathNameWithoutExtension() + ".graphml");
 		
 		graphDb = neoDriver.getGraphDb();
 	}

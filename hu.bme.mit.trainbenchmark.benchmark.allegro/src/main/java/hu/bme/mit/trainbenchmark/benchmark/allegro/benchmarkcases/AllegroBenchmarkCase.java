@@ -40,8 +40,7 @@ public class AllegroBenchmarkCase extends AbstractBenchmarkCase<URI>{
 	
 	@Override
 	protected void read() throws IOException {
-		driver.read(bc.getBenchmarkArtifact());
-		
+		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");		
 	}
 
 	@Override

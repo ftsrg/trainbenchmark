@@ -1,7 +1,7 @@
 SELECT SwitchPosition.id AS id
-FROM SwitchPosition, Route, `Signal`, Switch 
-WHERE Route.Route_entry = `Signal`.id 
-  AND Route.id = SwitchPosition.Route_switchPosition
-  AND SwitchPosition.SwitchPosition_switch = Switch.id 
-  AND Switch.Switch_currentState != SwitchPosition.SwitchPosition_switchState 
-  AND `Signal`.Signal_currentState = 2
+FROM SwitchPosition, Route, Semaphore, Switch 
+WHERE Route.entry = Semaphore.id 
+  AND Route.id = SwitchPosition.follows
+  AND SwitchPosition.switch = Switch.id 
+  AND Switch.currentPosition != SwitchPosition.position 
+  AND Semaphore.signal = 2

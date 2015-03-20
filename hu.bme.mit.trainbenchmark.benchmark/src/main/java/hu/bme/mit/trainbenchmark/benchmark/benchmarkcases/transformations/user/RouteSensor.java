@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ROUTEDEFINITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class RouteSensor<T> extends TransformationDefinition<T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteOneOutgoingEdge(elementsToModify, ROUTE, ROUTE_ROUTEDEFINITION);
+		driver.deleteOneOutgoingEdge(elementsToModify, ROUTE, DEFINED_BY);
 	}
 
 }

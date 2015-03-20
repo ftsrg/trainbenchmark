@@ -17,21 +17,21 @@ SET AUTOCOMMIT=0;
 --
 
 CREATE TABLE IF NOT EXISTS `Route` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `Route_entry` bigint,
-  `Route_exit` bigint,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `entry` int,
+  `exit` int,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
 
 --
--- Table structure: `Route_routeDefinition`
+-- Table structure: `definedBy`
 --
 
-CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
-  `Route_id` bigint NOT NULL,
-  `Sensor_id` bigint NOT NULL
+CREATE TABLE IF NOT EXISTS `definedBy` (
+  `Route_id` int NOT NULL,
+  `Sensor_id` int NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `Route_routeDefinition` (
 --
 
 CREATE TABLE IF NOT EXISTS `Segment` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `Segment_length` bigint NOT NULL DEFAULT 1,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `length` int NOT NULL DEFAULT 1,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -53,63 +53,43 @@ CREATE TABLE IF NOT EXISTS `Segment` (
 --
 
 CREATE TABLE IF NOT EXISTS `Sensor` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
 
 --
--- Table structure: `TrackElement_sensor`
+-- Table structure: `sensor`
 --
 
-CREATE TABLE IF NOT EXISTS `TrackElement_sensor` (
-  `TrackElement_id` bigint NOT NULL,
-  `Sensor_id` bigint NOT NULL
+CREATE TABLE IF NOT EXISTS `sensor` (
+  `TrackElement_id` int NOT NULL,
+  `Sensor_id` int NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
 
 --
--- Table structure: `Signal`
+-- Table structure: `Semaphore`
 --
 
-CREATE TABLE IF NOT EXISTS `Signal` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `Signal_currentState` bigint NOT NULL,
+CREATE TABLE IF NOT EXISTS `Semaphore` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `signal` int NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
 
---
--- Table structure: `SignalStateKind`
---
-
-CREATE TABLE IF NOT EXISTS `SignalStateKind` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `text` varchar(32) NOT NULL,
-  PRIMARY KEY  (`id`)
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ENGINE=MEMORY;
-
---
--- Filling table `SignalStateKind`
---
-
-INSERT INTO `SignalStateKind` (`id`, `text`) VALUES
-(1, 'SignalStateKind_STOP'),
-(2, 'SignalStateKind_FAILURE'),
-(3, 'SignalStateKind_GO');
-
--- --------------------------------------------------------
 
 --
 -- Table structure: `Switch`
 --
 
 CREATE TABLE IF NOT EXISTS `Switch` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `Switch_currentState` bigint NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `currentPosition` int NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -120,34 +100,12 @@ CREATE TABLE IF NOT EXISTS `Switch` (
 --
 
 CREATE TABLE IF NOT EXISTS `SwitchPosition` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `Route_switchPosition` bigint NOT NULL,
-  `SwitchPosition_switch` bigint NOT NULL,
-  `SwitchPosition_switchState` bigint NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `follows` int NOT NULL,
+  `switch` int NOT NULL,
+  `position` int NOT NULL,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
-
--- --------------------------------------------------------
-
---
--- Table structure: `SwitchStateKind`
---
-
-CREATE TABLE IF NOT EXISTS `SwitchStateKind` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `text` varchar(32) NOT NULL,
-  PRIMARY KEY  (`id`)
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ENGINE=MEMORY;
-
---
--- Filling table `SwitchStateKind`
---
-
-INSERT INTO `SwitchStateKind` (`id`, `text`) VALUES
-(1, 'PointStateKind_FAILURE'),
-(2, 'PointStateKind_LEFT'),
-(3, 'PointStateKind_RIGHT'),
-(4, 'PointStateKind_STRAIGHT');
 
 -- --------------------------------------------------------
 
@@ -156,7 +114,7 @@ INSERT INTO `SwitchStateKind` (`id`, `text`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `TrackElement` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -166,8 +124,8 @@ CREATE TABLE IF NOT EXISTS `TrackElement` (
 -- Table structure: `TrackElement_connectsTo`
 --
 
-CREATE TABLE IF NOT EXISTS `TrackElement_connectsTo` (
-  `TrackElement_id` bigint NOT NULL,
-  `TrackElement_id_connectsTo` bigint NOT NULL
+CREATE TABLE IF NOT EXISTS `connectsTo` (
+  `TrackElement_id` int NOT NULL,
+  `TrackElement_id_connectsTo` int NOT NULL
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 

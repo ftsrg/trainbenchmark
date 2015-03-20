@@ -1,3 +1,3 @@
-MATCH (r:Route)-[:Route_switchPosition]->(swP:SwitchPosition)-[:SwitchPosition_switch]->(sw:Switch)-[:TrackElement_sensor]->(sen:Sensor)
-WHERE NOT (r)-[:Route_routeDefinition]->(sen)
+MATCH (r:Route)-[:follows]->(swP:SwitchPosition)-[:switch]->(sw:Switch)-[:sensor]->(sen:Sensor)
+WHERE NOT (r)-[:definedBy]->(sen)
 RETURN DISTINCT sen
