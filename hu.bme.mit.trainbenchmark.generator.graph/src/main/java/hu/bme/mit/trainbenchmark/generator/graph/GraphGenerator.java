@@ -122,6 +122,10 @@ public class GraphGenerator extends Generator {
 
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) {
+		if (from == null || to == null) {
+			return;
+		}
+		
 		final Node source = (Node) from;
 		final Node target = (Node) to;
 

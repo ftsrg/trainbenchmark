@@ -12,26 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import org.apache.commons.cli.ParseException;
-
-public class MySQLBenchmarkInitializer extends TestBenchmarkInitializer {
+public class MySQLBenchmarkInitializer extends TestBenchmarkInitializer<MySQLBenchmarkLogic> {
 
 	@Override
-	protected AbstractBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
-		// @formatter:off
-		String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.sql",
-				"-scenario", scenario, 
-				"-workspacePath", "../" 
-			};
-		// @formatter:on
-
-		return new MySQLBenchmarkLogic(args);
+	protected MySQLBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "MySQL", runIndex, queryName,
+				iterationCount, modificationMethod, modificationConstant);
+		return new MySQLBenchmarkLogic(bc);
 	}
 
 }

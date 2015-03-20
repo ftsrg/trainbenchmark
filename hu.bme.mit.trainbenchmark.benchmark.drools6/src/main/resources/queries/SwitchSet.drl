@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.railway
 
 query "SwitchSet check"
-    route : Route( )
-    Semaphore( this == route.entry, signal == Signal.GO )
-    switchPosition : SwitchPosition( this memberOf route.follows, $sw : switch )
+    route : Route( $follows : follows )
+    Semaphore( this == route.entry )
+    switchPosition : SwitchPosition( this memberOf $follows )
     Switch( this == switchPosition.switch, currentPosition.value != switchPosition.position.value )
 end

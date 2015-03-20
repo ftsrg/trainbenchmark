@@ -22,8 +22,7 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
 	@Override
 	public void read() throws IOException {
-		final String modelPath = bc.getBenchmarkArtifact();
-		driver.read(modelPath);
+		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");
 	}
 
 	@Override

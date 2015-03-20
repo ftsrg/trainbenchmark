@@ -123,6 +123,10 @@ public class SQLGenerator extends Generator {
 			columns.append(", `" + key + "`");
 			values.append(", ");
 
+			if (value == null) {
+				continue;
+			}
+			
 			final String stringValue = (value.equals(-1L) ? "NULL" : valueToString(value));
 			values.append(stringValue);
 		}

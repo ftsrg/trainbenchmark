@@ -21,7 +21,7 @@ public class SesameBenchmarkInitializer extends TestBenchmarkInitializer<SesameB
 
 	@Override
 	protected SesameBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig(scenario, size, "Sesame", 1, queryName,
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig(scenario, size, "Sesame", runIndex, queryName,
 				iterationCount, modificationMethod, modificationConstant);
 		return new SesameBenchmarkLogic(rbc);
 	}

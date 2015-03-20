@@ -13,25 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.FourStoreBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import org.apache.commons.cli.ParseException;
-
-public class FourStoreBenchmarkInitializer extends TestBenchmarkInitializer {
+public class FourStoreBenchmarkInitializer extends TestBenchmarkInitializer<FourStoreBenchmarkLogic> {
 
 	@Override
-	protected AbstractBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
-		// @formatter:off
-		String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.ttl",
-				"-scenario", scenario, 
-				"-workspacePath", "../" 
-			};
-		// @formatter:on
-
-		return new FourStoreBenchmarkLogic(args);
+	protected FourStoreBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final FourStoreBenchmarkConfig fsbc = new FourStoreBenchmarkConfig(scenario, size, "FourStore", runIndex, queryName,
+				iterationCount, modificationMethod, modificationConstant);
+		return new FourStoreBenchmarkLogic(fsbc);
 	}
 
 }

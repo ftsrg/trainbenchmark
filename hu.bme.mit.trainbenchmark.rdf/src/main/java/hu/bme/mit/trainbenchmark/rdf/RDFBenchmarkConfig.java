@@ -31,7 +31,6 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 	}
 
-
 	@Override
 	protected void initOptions() {
 		super.initOptions();
