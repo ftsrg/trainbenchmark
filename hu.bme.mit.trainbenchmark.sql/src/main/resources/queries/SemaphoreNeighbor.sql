@@ -2,39 +2,39 @@ SELECT DISTINCT Route1.id
 
 FROM Route AS Route1
 
-INNER JOIN Route_routeDefinition AS Route_routeDefinition1
-ON Route1.id = Route_routeDefinition1.Route_id
+INNER JOIN definedBy AS definedBy1
+ON Route1.id = definedBy1.Route_id
 
-INNER JOIN TrackElement_sensor AS TrackElement_sensor1
-ON Route_routeDefinition1.Sensor_id = TrackElement_sensor1.Sensor_id
+INNER JOIN sensor AS sensor1
+ON definedBy1.Sensor_id = sensor1.Sensor_id
 
-INNER JOIN TrackElement_connectsTo
-ON TrackElement_sensor1.TrackElement_id = TrackElement_connectsTo.TrackElement_id
+INNER JOIN connectsTo
+ON sensor1.TrackElement_id = connectsTo.TrackElement_id
 
-INNER JOIN TrackElement_sensor AS TrackElement_sensor2
-ON TrackElement_connectsTo.TrackElement_id_connectsTo = TrackElement_sensor2.TrackElement_id
+INNER JOIN sensor AS sensor2
+ON connectsTo.TrackElement_id_connectsTo = sensor2.TrackElement_id
 
-INNER JOIN Route_routeDefinition AS Route_routeDefinition2
-ON Route_routeDefinition2.Sensor_id = TrackElement_sensor2.Sensor_id
+INNER JOIN definedBy AS definedBy2
+ON definedBy2.Sensor_id = sensor2.Sensor_id
 
 WHERE 1=1
-	AND Route1.Route_exit != 0
+	AND Route1.exit IS NOT NULL
 	AND NOT EXISTS
 	(SELECT DISTINCT
 
 	Route.id AS xRoute2,
-	Route.Route_entry AS xSem,
-	Route_routeDefinition.Sensor_id AS xSen2
+	Route.entry AS xSem,
+	definedBy.Sensor_id AS xSen2
 
 	FROM
 	Route
 
-	INNER JOIN Route_routeDefinition
-	ON Route_routeDefinition.Route_id = Route.id
+	INNER JOIN definedBy
+	ON definedBy.Route_id = Route.id
 
 	WHERE 1=1
-	  AND Route.Route_entry != 0
-	  AND Route_routeDefinition.Sensor_id = TrackElement_sensor2.Sensor_id
-	  AND Route.Route_entry = Route1.Route_exit
+	  AND Route.entry IS NOT NULL
+	  AND definedBy.Sensor_id = sensor2.Sensor_id
+	  AND Route.entry = Route1.exit
 	)
-AND Route1.id != Route_routeDefinition2.Route_id;
+AND Route1.id != definedBy2.Route_id;

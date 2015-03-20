@@ -12,16 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.allegro;
 
-import org.apache.commons.cli.ParseException;
-
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
+import org.apache.commons.cli.ParseException;
+
 public class AllegroBenchmarkLogic extends AbstractBenchmarkLogic{
 
-	public AllegroBenchmarkLogic(String[] args) throws ParseException {
-		super(args);
-		bc = new RDFBenchmarkConfig(args, getTool());
+	protected RDFBenchmarkConfig rbc;
+	
+	public AllegroBenchmarkLogic(final String[] args) throws ParseException {
+		bc = rbc = new RDFBenchmarkConfig(args, getTool());
+	}
+
+	public AllegroBenchmarkLogic(final RDFBenchmarkConfig rbc) {
+		super(rbc);
+		this.rbc = rbc;
 	}
 
 	@Override
