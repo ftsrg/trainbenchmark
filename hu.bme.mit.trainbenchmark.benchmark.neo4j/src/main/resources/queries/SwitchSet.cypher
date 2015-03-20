@@ -1,4 +1,4 @@
-MATCH (signal:Signal)<-[:Route_entry]-(route:Route)-[:Route_switchPosition]->(sP:SwitchPosition)-[:SwitchPosition_switch]->(sw:Switch)
-WHERE signal.Signal_currentState = "GO"
-  AND sw.Switch_currentState <> sP.SwitchPosition_switchState
+MATCH (semaphore:Semaphore)<-[:entry]-(route:Route)-[:follows]->(sP:SwitchPosition)-[:switch]->(sw:Switch)
+WHERE semaphore.signal = "GO"
+  AND sw.currentPosition <> sP.position
 RETURN DISTINCT sP

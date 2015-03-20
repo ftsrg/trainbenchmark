@@ -56,8 +56,7 @@ public class SQLGenerator extends Generator {
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
-				+ generatorConfig.getSize() + ".sql";
+		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + ".sql";
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -69,17 +68,17 @@ public class SQLGenerator extends Generator {
 	@Override
 	protected void persistModel() throws IOException {
 		write("COMMIT;");
-		write(String.format("CREATE INDEX Segment_idx_length ON %s (%s);", ModelConstants.SEGMENT, ModelConstants.SEGMENT_LENGTH));
-		write(String.format("CREATE INDEX Route_routeDefinition_idx ON %s (Route_id, Sensor_id);", ModelConstants.ROUTE_ROUTEDEFINITION));
-		write(String.format("CREATE INDEX Sensor_trackElement_idx1 ON %s (TrackElement_id);", ModelConstants.TRACKELEMENT_SENSOR));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx1 ON %s (TrackElement_id);", ModelConstants.TRACKELEMENT_CONNECTSTO));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx2 ON %s (TrackElement_id_connectsTo);", ModelConstants.TRACKELEMENT_CONNECTSTO));
+		write(String.format("CREATE INDEX Segment_idx_length ON %s (%s);", ModelConstants.SEGMENT, ModelConstants.LENGTH));
+		write(String.format("CREATE INDEX Route_routeDefinition_idx ON %s (Route_id, Sensor_id);", ModelConstants.DEFINED_BY));
+		write(String.format("CREATE INDEX Sensor_trackElement_idx1 ON %s (TrackElement_id);", ModelConstants.SENSOR_EDGE));
+		write(String.format("CREATE INDEX TrackElement_connectsto_idx1 ON %s (TrackElement_id);", ModelConstants.CONNECTSTO));
+		write(String.format("CREATE INDEX TrackElement_connectsto_idx2 ON %s (TrackElement_id_connectsTo);", ModelConstants.CONNECTSTO));
 
 		file.close();
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
@@ -105,6 +104,9 @@ public class SQLGenerator extends Generator {
 
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
+		if (from == null || to == null) {
+			return;
+		}
 		final String insertQuery = String.format("INSERT INTO `%s` VALUES (%s, %s);", label, from, to);
 		write(insertQuery);
 	}
@@ -124,7 +126,7 @@ public class SQLGenerator extends Generator {
 			columns.append(", `" + key + "`");
 			values.append(", ");
 
-			final String stringValue = (value.equals(-1L) ? "NULL" : valueToString(value));
+			final String stringValue = (value == null ? "NULL" : valueToString(value));
 			values.append(stringValue);
 		}
 	}

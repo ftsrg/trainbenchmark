@@ -12,26 +12,25 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_EXIT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ROUTEDEFINITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL_CURRENTSTATE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCHSTATE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_CURRENTSTATE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
-import hu.bme.mit.trainbenchmark.constants.SignalState;
-import hu.bme.mit.trainbenchmark.constants.SwitchState;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
@@ -39,16 +38,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.google.common.collect.ImmutableMap;
-
 public abstract class Generator {
 
 	// id
-	protected long id = 0L;
+	protected int id = 0;
 
 	// static configuration
 	protected GeneratorConfig generatorConfig;
@@ -62,7 +60,7 @@ public abstract class Generator {
 	protected int posLengthErrorPercent;
 	protected int switchSensorErrorPercent;
 	protected int routeSensorErrorPercent;
-	protected int signalNeighborErrorPercent;
+	protected int semaphoreNeighborErrorPercent;
 	protected int switchSetErrorPercent;
 	protected int connectedSegmentsErrorPercent;
 
@@ -88,7 +86,7 @@ public abstract class Generator {
 
 	private void initializeConstants() {
 		switch (generatorConfig.getScenario()) {
-		case ScenarioConstants.USER:
+		case USER:
 			maxSegments = 5;
 			maxRoutes = 20 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
@@ -96,11 +94,11 @@ public abstract class Generator {
 			posLengthErrorPercent = 2;
 			switchSensorErrorPercent = 2;
 			routeSensorErrorPercent = 2;
-			signalNeighborErrorPercent = 7;
+			semaphoreNeighborErrorPercent = 7;
 			switchSetErrorPercent = 2;
 			connectedSegmentsErrorPercent = 5;
 			break;
-		case ScenarioConstants.REPAIR:
+		case REPAIR:
 			maxSegments = 5;
 			maxRoutes = 20 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
@@ -108,11 +106,11 @@ public abstract class Generator {
 			posLengthErrorPercent = 10;
 			switchSensorErrorPercent = 4;
 			routeSensorErrorPercent = 10;
-			signalNeighborErrorPercent = 8;
+			semaphoreNeighborErrorPercent = 8;
 			switchSetErrorPercent = 10;
 			connectedSegmentsErrorPercent = 5;
 			break;
-		case ScenarioConstants.TEST:
+		case TEST:
 			maxSegments = 5;
 			maxRoutes = 5 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
@@ -120,7 +118,7 @@ public abstract class Generator {
 			posLengthErrorPercent = 6;
 			switchSensorErrorPercent = 10;
 			routeSensorErrorPercent = 15;
-			signalNeighborErrorPercent = 15;
+			semaphoreNeighborErrorPercent = 15;
 			switchSetErrorPercent = 20;
 			connectedSegmentsErrorPercent = 5;
 			break;
@@ -128,129 +126,142 @@ public abstract class Generator {
 			throw new UnsupportedOperationException("Scenario not supported.");
 		}
 	}
-
+	
 	protected abstract void initModel() throws IOException;
 
 	protected void generateModel() throws FileNotFoundException, IOException {
-		Object prevSig = null;
-		Object firstSig = null;
+		Object prevSemaphore = null;
+		Object firstSemaphore = null;
 		List<Object> firstTracks = null;
 		List<Object> prevTracks = null;
 
 		for (long i = 0; i < maxRoutes; i++) {
 			beginRoute();
 
-			if (prevSig == null) {
-				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_CURRENTSTATE, SignalState.GO);
+			if (prevSemaphore == null) {
+				final Map<String, Object> semaphoreAttributes = new HashMap<>();
+				semaphoreAttributes.put(SIGNAL, Signal.GO);
 
-				prevSig = createVertex(SIGNAL, signalAttributes);
-				firstSig = prevSig;
+				prevSemaphore = createVertex(SEMAPHORE, semaphoreAttributes);
+				firstSemaphore = prevSemaphore;
 			}
 
-			Object sig2;
+			Object semaphore2;
 			if (i != maxRoutes - 1) {
-				final Map<String, Object> signalAttributes = ImmutableMap.<String, Object> of(SIGNAL_CURRENTSTATE, SignalState.GO);
-
-				sig2 = createVertex(SIGNAL, signalAttributes);
+				final Map<String, Object> semaphoreAttributes = new HashMap<>();
+				semaphoreAttributes.put(SIGNAL, Signal.GO);
+				semaphore2 = createVertex(SEMAPHORE, semaphoreAttributes);
 			} else {
-				sig2 = firstSig;
+				semaphore2 = firstSemaphore;
 			}
 
-			final Object entry = (nextRandom() >= signalNeighborErrorPercent) ? prevSig : -1L;
-			final Object exit = (nextRandom() >= signalNeighborErrorPercent) ? sig2 : -1L;
+			// the semaphoreNeighborErrorPercent
+			final boolean semaphoreNeighborError1 = nextRandom() < semaphoreNeighborErrorPercent;
+			final Object entry = semaphoreNeighborError1 ? null : prevSemaphore;
+			final Object exit = semaphore2;
 
-			final ImmutableMap<String, Object> routeReferences = ImmutableMap.<String, Object> of(ROUTE_ENTRY, entry, ROUTE_EXIT, exit);
+			final Map<String, Object> routeReferences = new HashMap<>();
+			routeReferences.put(ENTRY, entry);
+			routeReferences.put(EXIT, exit);
+
 			final Object route = createVertex(ROUTE, emptyMap, routeReferences);
 
 			final int swps = random.nextInt(maxSwitchPositions);
-
-			final List<Object> currTracks = new ArrayList<>();
+			final List<Object> currentTrack = new ArrayList<>();
 
 			for (int j = 0; j < swps; j++) {
 				final Object sw = createVertex(SWITCH);
-				currTracks.add(sw);
+				currentTrack.add(sw);
 
-				final int sensors = random.nextInt(maxSensors);
+				final int sensors = random.nextInt(maxSensors - 1) + 1;
 
+				Object lastSensor = null;
 				for (int k = 0; k < sensors; k++) {
-					final Object sen = createVertex(SENSOR);
+					final Object sensor = createVertex(SENSOR);
 
-					if (nextRandom() >= switchSensorErrorPercent) {
-						createEdge(TRACKELEMENT_SENSOR, sw, sen);
-						if (nextRandom() >= routeSensorErrorPercent) {
-							createEdge(ROUTE_ROUTEDEFINITION, route, sen);
-						}
-					}
+					// add "sensors" edge from route to sensor
+					final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
+					final Object sourceRoute = routeSensorError ? null : route;
+					createEdge(DEFINED_BY, sourceRoute, sensor);
 
 					for (int m = 0; m < maxSegments; m++) {
-						createSegment(currTracks, sen);
+						createSegment(currentTrack, sensor);
 					}
 					
-					// creates another extra segment
-					if (nextRandom() < connectedSegmentsErrorPercent){
-						createSegment(currTracks, sen);
-					}
+					lastSensor = sensor;					
 				}
+				// add "sensor" edge from switch to sensor
+				final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
+				final Object targetSensor = switchSensorError ? null : lastSensor;
+				createEdge(SENSOR_EDGE, sw, targetSensor);
 
 				final int stateNumber = random.nextInt(4);
-				final SwitchState stateEnum = SwitchState.values()[stateNumber];
-				setAttribute(SWITCH, sw, SWITCH_CURRENTSTATE, stateEnum);
+				final Position stateEnum = Position.values()[stateNumber];
+				setAttribute(SWITCH, sw, CURRENTPOSITION, stateEnum);
 
 				// the errorInjectedState may contain a bad value
-				final int errorInjectedStateNumber = (nextRandom() < switchSetErrorPercent) ? 3 - stateNumber : stateNumber;
-				final SwitchState errorInjectedStateEnum = SwitchState.values()[errorInjectedStateNumber];
-				final ImmutableMap<String, Object> switchPosititonAttributes = ImmutableMap.<String, Object> of(SWITCHPOSITION_SWITCHSTATE,
-						errorInjectedStateEnum);
-				final Map<String, Object> switchPositionOutgoingEdges = ImmutableMap.<String, Object> of(SWITCHPOSITION_SWITCH, sw);
-				final Map<String, Object> switchPositionIncomingEdges = ImmutableMap.<String, Object> of(ROUTE_SWITCHPOSITION, route);
+				final boolean switchSetError = nextRandom() < switchSetErrorPercent;
+				final int errorInjectedStateNumber = switchSetError ? 3 - stateNumber : stateNumber;
+				final Position errorInjectedStateEnum = Position.values()[errorInjectedStateNumber];
+				final Map<String, Object> switchPosititonAttributes = new HashMap<>();
+				switchPosititonAttributes.put(POSITION, errorInjectedStateEnum);
+
+				final Map<String, Object> switchPositionOutgoingEdges = new HashMap<>();
+				switchPositionOutgoingEdges.put(SWITCH_EDGE, sw);
+
+				final Map<String, Object> switchPositionIncomingEdges = new HashMap<>();
+				switchPositionIncomingEdges.put(FOLLOWS, route);
+
 				createVertex(SWITCHPOSITION, switchPosititonAttributes, switchPositionOutgoingEdges, switchPositionIncomingEdges);
 			}
 
 			Object prevte = null;
-			for (final Object trackelement : currTracks) {
+			for (final Object trackelement : currentTrack) {
 				if (prevte != null) {
-					createEdge(TRACKELEMENT_CONNECTSTO, prevte, trackelement);
+					createEdge(CONNECTSTO, prevte, trackelement);
 				}
 				prevte = trackelement;
 			}
 
-			if (prevTracks != null && prevTracks.size() > 0 && currTracks.size() > 0) {
-				createEdge(TRACKELEMENT_CONNECTSTO, prevTracks.get(prevTracks.size() - 1), currTracks.get(0));
+			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {
+				createEdge(CONNECTSTO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
 			}
 
 			// Loop the last track element of the last route to the first track
 			// element of the first route.
 			if (i == maxRoutes - 1) {
-				if (currTracks != null && currTracks.size() > 0 && firstTracks.size() > 0) {
-					createEdge(TRACKELEMENT_CONNECTSTO, currTracks.get(currTracks.size() - 1), firstTracks.get(0));
+				if (currentTrack != null && currentTrack.size() > 0 && firstTracks.size() > 0) {
+					createEdge(CONNECTSTO, currentTrack.get(currentTrack.size() - 1), firstTracks.get(0));
 				}
 			}
 
 			if (prevTracks == null) {
-				firstTracks = currTracks;
+				firstTracks = currentTrack;
 			}
 
-			prevTracks = currTracks;
-			prevSig = sig2;
+			prevTracks = currentTrack;
+			prevSemaphore = semaphore2;
 
 			endRoute();
 		}
 	}
 
-	private void createSegment(final List<Object> currTracks, final Object sen) throws IOException{
-		final int segmentLength = ((nextRandom() < posLengthErrorPercent) ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH);
+	private void createSegment(final List<Object> currTracks, final Object sen) throws IOException {
+		final boolean posLengthError = nextRandom() < posLengthErrorPercent;
+		final int segmentLength = ((posLengthError ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH)) + 1;
 
-		final Map<String, Object> segmentAttributes = ImmutableMap.<String, Object> of(SEGMENT_LENGTH, segmentLength);
+		final Map<String, Object> segmentAttributes = new HashMap<>();
+		segmentAttributes.put(LENGTH, segmentLength);
 		final Object seg = createVertex(SEGMENT, segmentAttributes);
 
-		createEdge(TRACKELEMENT_SENSOR, seg, sen);
+		createEdge(SENSOR_EDGE, seg, sen);
 		currTracks.add(seg);
 	}
 
 	protected abstract void persistModel() throws IOException;
 
-	// the createVertex() methods with fewer arguments are final 
-	
+	// the createVertex() methods with fewer arguments are final
+
 	protected final Object createVertex(final String type) throws IOException {
 		return createVertex(type, emptyMap);
 	}
@@ -270,7 +281,7 @@ public abstract class Generator {
 		return createVertex(id, type, attributes, outgoingEdges, incomingEdges);
 	}
 
-	protected abstract Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+	protected abstract Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException;
 
 	protected abstract void createEdge(String label, Object from, Object to) throws IOException;

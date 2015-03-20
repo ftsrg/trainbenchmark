@@ -12,16 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
 
-import org.apache.commons.cli.ParseException;
-
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
-public class VirtuosoBenchmarkLogic extends GenericBenchmarkLogic{
+import org.apache.commons.cli.ParseException;
 
-	public VirtuosoBenchmarkLogic(String[] args) throws ParseException {
-		super(args);
-		bc = new RDFBenchmarkConfig(args, getTool());
+public class VirtuosoBenchmarkLogic extends AbstractBenchmarkLogic{
+
+	protected RDFBenchmarkConfig rbc;
+
+	public VirtuosoBenchmarkLogic(final String[] args) throws ParseException {
+		bc = rbc = new RDFBenchmarkConfig(args, getTool());
+	}
+
+	public VirtuosoBenchmarkLogic(final RDFBenchmarkConfig rbc) {
+		super(rbc);
+		this.rbc = rbc;
 	}
 
 	@Override

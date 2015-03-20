@@ -34,8 +34,7 @@ public class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
 	@Override
 	public void read() throws FileNotFoundException, IOException {
-		final String modelPath = bc.getBenchmarkArtifact();
-		driver.read(modelPath);
+		driver.read(bc.getModelPathNameWithoutExtension() + ".sql");
 	}
 
 	@Override

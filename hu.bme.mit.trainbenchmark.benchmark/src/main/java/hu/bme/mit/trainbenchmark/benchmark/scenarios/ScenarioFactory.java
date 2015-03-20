@@ -12,18 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class ScenarioFactory {
 
-	public static Scenario<?> getScenario(final String scenario) {
-		switch (scenario) {
-		case ScenarioConstants.USER:
-			return new UserScenario();
-		case ScenarioConstants.REPAIR:
-			return new RepairScenario();
-		case ScenarioConstants.BATCH:
-			return new BatchScenario();
+	public static ScenarioLogic<?> getScenario(final Scenario scenarioName) {
+		switch (scenarioName) {
+		case USER:
+			return new UserScenarioLogic();
+		case REPAIR:
+			return new RepairScenarioLogic();
+		case BATCH:
+			return new BatchScenarioLogic();
 		default:
 			throw new UnsupportedOperationException("Invalid scenario.");
 		}

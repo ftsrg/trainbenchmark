@@ -13,17 +13,20 @@
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 
-public class MySQLBenchmarkLogic extends GenericBenchmarkLogic {
+public class MySQLBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public MySQLBenchmarkLogic(final String[] args) throws ParseException {
-		super(args);
 		bc = new BenchmarkConfig(args, getTool());
 	}
 
+	public MySQLBenchmarkLogic(final BenchmarkConfig bc) {
+		super(bc);
+	}
+	
 	@Override
 	protected String getTool() {
 		return "MySQL";

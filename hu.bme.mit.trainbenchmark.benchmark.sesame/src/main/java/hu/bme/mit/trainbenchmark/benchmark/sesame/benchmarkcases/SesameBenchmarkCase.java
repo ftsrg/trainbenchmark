@@ -13,8 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -29,13 +29,14 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> {
 	protected void init() throws IOException {
 		this.rbc = (RDFBenchmarkConfig) bc;
 
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName() + ".sparql";
+		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
+				+ ".sparql";
 		driver = new SesameDriver(queryPath);
 	}
 
 	@Override
 	public void read() throws IOException {
-		driver.read(bc.getBenchmarkArtifact());
+		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");
 	}
 
 	@Override

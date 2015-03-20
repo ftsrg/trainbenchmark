@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.VirtuosoDriver;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
+
 import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.URI;
-
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.VirtuosoDriver;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 public class VirtuosoBenchmarkCase extends AbstractBenchmarkCase<URI>{
 
@@ -34,7 +34,7 @@ public class VirtuosoBenchmarkCase extends AbstractBenchmarkCase<URI>{
 
 	@Override
 	protected void read() throws IOException {
-		driver.read(bc.getBenchmarkArtifact());
+		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");
 	}
 
 	@Override

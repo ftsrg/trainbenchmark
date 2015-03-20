@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT_LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class PosLength extends Neo4jBenchmarkCase {
 			// Segment.Segment_length
 			final ResourceIterable<Node> segments = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSegment);
 			for (final Node segment : segments) {
-				final Integer length = (Integer) segment.getProperty(SEGMENT_LENGTH);
+				final Integer length = (Integer) segment.getProperty(LENGTH);
 				// <= 0
 				if (length <= 0) {
 					results.add(segment);

@@ -24,7 +24,8 @@ public abstract class JavaBenchmarkCase<T extends RailwayElement> extends Abstra
 
 	@Override
 	public void read() {
-		final EMFDriver emfDriver = new EMFDriver(bc.getBenchmarkArtifact());
+		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";		
+		final EMFDriver emfDriver = new EMFDriver(modelPath);
 		driver = (DatabaseDriver<T>) emfDriver;
 		
 		container = emfDriver.getContainer();

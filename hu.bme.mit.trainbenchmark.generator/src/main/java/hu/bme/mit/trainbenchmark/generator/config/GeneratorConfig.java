@@ -18,31 +18,18 @@ import org.apache.commons.cli.ParseException;
 
 public class GeneratorConfig extends TrainBenchmarkConfig {
 
-	protected int size;
-
-	public GeneratorConfig(String[] args) throws ParseException {
+	public GeneratorConfig(final String[] args) throws ParseException {
 		super(args);
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
-
-		options.addOption(requiredOption("size", "model size, e.g. 4"));
 	}
 
-	protected void processArguments(String[] args) throws ParseException {
+	@Override
+	protected void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
-
-		size = Integer.parseInt(cmd.getOptionValue("size"));
-	}
-
-	public String getInstanceModelPath() {
-		return workspacePath + "/models";
-	}
-
-	public int getSize() {
-		return size;
 	}
 
 }

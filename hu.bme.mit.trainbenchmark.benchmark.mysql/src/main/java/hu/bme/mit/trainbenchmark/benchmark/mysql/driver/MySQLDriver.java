@@ -44,15 +44,15 @@ public class MySQLDriver extends DatabaseDriver<Long> {
 	protected Statement st;
 
 	protected static final Map<String, String> EDGE_SOURCE_TYPES = ImmutableMap.of(
-			ModelConstants.TRACKELEMENT_SENSOR, "TrackElement_id",
-			ModelConstants.ROUTE_ROUTEDEFINITION, "Route_id", 
-			ModelConstants.TRACKELEMENT_CONNECTSTO, "TrackElement_id");
+			ModelConstants.SENSOR_EDGE, "TrackElement_id",
+			ModelConstants.DEFINED_BY, "Route_id", 
+			ModelConstants.CONNECTSTO, "TrackElement_id");
 
 	protected static final Map<String, String> EDGE_TARGET_TYPES = ImmutableMap.of(
-			ModelConstants.TRACKELEMENT_SENSOR, "Sensor_id",
-			ModelConstants.TRACKELEMENT_CONNECTSTO, "TrackElement_id_connectsTo");
+			ModelConstants.SENSOR_EDGE, "Sensor_id",
+			ModelConstants.CONNECTSTO, "TrackElement_id_connectsTo");
 
-	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(ModelConstants.ROUTE_ENTRY, ModelConstants.ROUTE);
+	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(ModelConstants.ENTRY, ModelConstants.ROUTE);
 
 	public MySQLDriver(final String queryPath) throws IOException {
 		query = FileUtils.readFileToString(new File(queryPath));

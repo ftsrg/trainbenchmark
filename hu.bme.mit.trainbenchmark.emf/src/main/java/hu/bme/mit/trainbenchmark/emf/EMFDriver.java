@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -70,7 +71,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	@Override
 	public void insertVertexWithEdge(final List<RailwayElement> sourceVertices, final String sourceVertexType,
 			final String targetVertexType, final String edgeType) {
-		
+
 		// get types
 		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
@@ -82,39 +83,37 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	}
 
 	@Override
-	public RailwayElement insertVertexWithEdge(final RailwayElement sourceVertex,
-			final String sourceVertexType, final String targetVertexType, final String edgeType) throws IOException {
+	public RailwayElement insertVertexWithEdge(final RailwayElement sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) throws IOException {
 		final EClass targetClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 
 		return insertVertexWithEdge(sourceVertex, targetClass, feature);
 	}
-	
-	protected RailwayElement insertVertexWithEdge(final RailwayElement sourceVertex, final EClass targetClass, final EStructuralFeature feature){
+
+	protected RailwayElement insertVertexWithEdge(final RailwayElement sourceVertex, final EClass targetClass,
+			final EStructuralFeature feature) {
 		final RailwayFactory factory = RailwayFactory.eINSTANCE;
 		final EObject targetObject = factory.create(targetClass);
-		
+
 		// set reference to source object
-		@SuppressWarnings("unchecked")
-		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
-		references.add(targetObject);
-		
-		container.getContains().add((RailwayElement)targetObject);
+		sourceVertex.eSet(feature, targetObject);
+
 		return (RailwayElement) targetObject;
 	}
 
 	@Override
-	public void insertEdge(final RailwayElement sourceVertex, final String sourceVertexType, final RailwayElement targetVertex, 
+	public void insertEdge(final RailwayElement sourceVertex, final String sourceVertexType, final RailwayElement targetVertex,
 			final String edgeType) {
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
-		
+
 		@SuppressWarnings("unchecked")
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
 		references.add(targetVertex);
 	}
-	
+
 	// read
 
 	@Override
@@ -122,10 +121,14 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		final List<RailwayElement> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		for (final RailwayElement t : container.getContains()) {
+
+		final TreeIterator<EObject> contents = container.eAllContents();
+		while (contents.hasNext()) {
+			final EObject eObject = contents.next();
+
 			// if t's type is a descendant of clazz
-			if (clazz.isSuperTypeOf(t.eClass())) {
-				vertices.add(t);
+			if (clazz.isSuperTypeOf(eObject.eClass())) {
+				vertices.add((RailwayElement) eObject);
 			}
 		}
 
@@ -133,21 +136,21 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	}
 
 	@Override
-	public List<RailwayElement> collectOutgoingConnectedVertices(
-			final RailwayElement sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) {
+	public List<RailwayElement> collectOutgoingConnectedVertices(final RailwayElement sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) {
 		final List<RailwayElement> vertices = new ArrayList<>();
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
-		
+
 		@SuppressWarnings("unchecked")
 		final AbstractList<EObject> references = (AbstractList<EObject>) sourceVertex.eGet(feature);
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(targetVertexType);
-		for (final EObject ref : references){
-			if (clazz.isSuperTypeOf(ref.eClass())){
+		for (final EObject ref : references) {
+			if (clazz.isSuperTypeOf(ref.eClass())) {
 				vertices.add((RailwayElement) ref);
 			}
 		}
-		
+
 		return vertices;
 	}
 
@@ -178,7 +181,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 		for (final RailwayElement vertex : vertices) {
 			@SuppressWarnings("unchecked")
 			final AbstractList<EObject> outgoingEdges = (AbstractList<EObject>) vertex.eGet(oppositeReference);
-			outgoingEdges.clear();			
+			outgoingEdges.clear();
 		}
 	}
 
@@ -186,7 +189,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	public void deleteAllOutgoingEdges(final List<RailwayElement> vertices, final String vertexType, final String edgeType) {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(vertexType);
 		final EStructuralFeature feature = clazz.getEStructuralFeature(edgeType);
-		
+
 		for (final RailwayElement vertex : vertices) {
 			@SuppressWarnings("unchecked")
 			final AbstractList<EObject> features = (AbstractList<EObject>) vertex.eGet(feature);
@@ -205,12 +208,15 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 				final AbstractList<EObject> features = (AbstractList<EObject>) vertex.eGet(feature);
 
 				if (features.size() > 0) {
+					final RailwayElement e = (RailwayElement) features.get(0);
 					features.remove(0);
+					container.getInvalids().add(e);
 				}
 			} else {
 				vertex.eSet(feature, null);
+				container.getInvalids().add(vertex);
 			}
-		}		
+		}
 	}
 
 	@Override
@@ -220,9 +226,10 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 
 	@Override
 	public void deleteVertex(final RailwayElement vertex, final String vertexType) throws IOException {
-		container.getContains().remove(vertex);
+		// TODO
+		// container.getContains().remove(vertex);
 	}
-	
+
 	// utility
 
 	public RailwayContainer getContainer() {
@@ -236,7 +243,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	@Override
 	public void deleteVertex(final Long vertex) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

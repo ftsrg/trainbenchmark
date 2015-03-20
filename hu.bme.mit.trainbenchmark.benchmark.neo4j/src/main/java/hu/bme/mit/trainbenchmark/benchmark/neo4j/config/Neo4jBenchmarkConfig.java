@@ -13,23 +13,29 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
-	protected boolean ramdisk;
-	protected boolean javaapi;
+	protected boolean javaApi;
 
 	public Neo4jBenchmarkConfig(final String[] args, final String tool) throws ParseException {
 		super(args, tool);
 	}
 
+	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant, final boolean javaApi) {
+		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+		this.javaApi = javaApi;
+	}
+	
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("ramdisk", false, "run the benchmark on a RAM disk");
 		options.addOption("javaapi", false, "use the faster, low-level Java API for querying");
 	}
 
@@ -37,16 +43,11 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		ramdisk = cmd.hasOption("ramdisk");
-		javaapi = cmd.hasOption("javaapi");
-	}
-
-	public boolean isRamDisk() {
-		return ramdisk;
+		javaApi = cmd.hasOption("javaapi");
 	}
 
 	public boolean isJavaApi() {
-		return javaapi;
+		return javaApi;
 	}
 
 }

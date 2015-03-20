@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +36,7 @@ public class SwitchSensor extends Neo4jBenchmarkCase {
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
 
-		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
+		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(SENSOR_EDGE);
 
 		results = new ArrayList<>();
 

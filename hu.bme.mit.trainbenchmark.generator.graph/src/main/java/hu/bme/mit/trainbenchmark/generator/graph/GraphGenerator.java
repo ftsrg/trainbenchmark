@@ -56,9 +56,8 @@ public class GraphGenerator extends Generator {
 
 	@Override
 	protected void initModel() throws IOException {
-		final String databaseDirectoriesPath = generatorConfig.getInstanceModelPath() + "/neo4j-gen/";
-		final String databasePath = databaseDirectoriesPath + "/railway" + generatorConfig.getVariant() + generatorConfig.getSize()
-				+ ".neo4j";
+		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
+		final String databasePath = databaseDirectoriesPath + "/railway" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
@@ -75,7 +74,7 @@ public class GraphGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createVertex(final long id, final String type, final Map<String, Object> attributes,
+	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		final Node node = graphDb.createNode(DynamicLabel.label(type));
 
@@ -123,6 +122,10 @@ public class GraphGenerator extends Generator {
 
 	@Override
 	protected void createEdge(final String label, final Object from, final Object to) {
+		if (from == null || to == null) {
+			return;
+		}
+		
 		final Node source = (Node) from;
 		final Node target = (Node) to;
 
@@ -154,8 +157,7 @@ public class GraphGenerator extends Generator {
 				xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 				tx.success();
 
-				final String fileName = generatorConfig.getInstanceModelPath() + "/railway" + generatorConfig.getVariant()
-						+ generatorConfig.getSize() + ".graphml";
+				final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
 				FileUtils.writeToFile(new File(fileName), writer.toString().trim(), false);
 			} catch (final XMLStreamException e) {
 				throw new IOException(e);

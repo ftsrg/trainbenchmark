@@ -1,5 +1,5 @@
 package hu.bme.mit.trainbenchmark.railway
 
 query "PosLength check"
-   segment : Segment(segment_length <= 0)
+   segment : Segment(length <= 0)
 end

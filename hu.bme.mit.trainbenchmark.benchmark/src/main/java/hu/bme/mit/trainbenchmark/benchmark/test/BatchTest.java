@@ -12,11 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSET;
 import static org.junit.Assert.assertEquals;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
 
@@ -25,43 +29,43 @@ import org.junit.Test;
 
 public abstract class BatchTest extends TrainBenchmarkTest {
 
+	@Test
+	public void posLength() throws ParseException, IOException {
+		testQuery(POSLENGTH, 486);
+	}
+
+	@Test
+	public void routeSensor() throws ParseException, IOException {
+		testQuery(ROUTESENSOR, 18);
+	}
+
+	@Test
+	public void semaphoreNeighbor() throws ParseException, IOException {
+		testQuery(SEMAPHORENEIGHBOR, 1);
+	}
+
+	@Test
+	public void switchSensor() throws ParseException, IOException {
+		testQuery(SWITCHSENSOR, 4);
+	}
+	
+	@Test
+	public void switchSet() throws ParseException, IOException {
+		testQuery(SWITCHSET, 15);
+	}
+
 	protected void testQuery(final String queryName, final int expectedResultSize) throws ParseException, IOException {
-		final GenericBenchmarkLogic bl = bi.initializeBenchmark(queryName, ScenarioConstants.BATCH);
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(queryName, Scenario.BATCH);
 		runQuery(bl, expectedResultSize);
 	}
 
-	protected void runQuery(final GenericBenchmarkLogic bl, final int expectedResultSize) throws IOException {
+	protected void runQuery(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
 		final AbstractBenchmarkCase<?> testCase = bl.getTestCase();
 		testCase.benchmarkInit(bl.getBc());
 		testCase.benchmarkRead();
 		testCase.benchmarkCheck();
 		assertEquals(expectedResultSize, testCase.getResults().size());
 		testCase.benchmarkDestroy();
-	}
-
-	@Test
-	public void posLength() throws ParseException, IOException {
-		testQuery(QueryConstants.POSLENGTH, 35);
-	}
-
-	@Test
-	public void routeSensor() throws ParseException, IOException {
-		testQuery(QueryConstants.ROUTESENSOR, 23);
-	}
-
-	@Test
-	public void signalNeighbor() throws ParseException, IOException {
-		testQuery(QueryConstants.SIGNALNEIGHBOR, 1);
-	}
-
-	@Test
-	public void switchSensor() throws ParseException, IOException {
-		testQuery(QueryConstants.SWITCHSENSOR, 6);
-	}
-	
-	@Test
-	public void switchSet() throws ParseException, IOException {
-//		testQuery(QueryConstants.SWITCHSET, 5);
 	}
 	
 }

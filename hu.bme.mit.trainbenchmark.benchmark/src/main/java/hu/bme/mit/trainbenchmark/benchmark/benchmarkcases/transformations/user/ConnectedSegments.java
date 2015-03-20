@@ -18,26 +18,26 @@ public class ConnectedSegments<T> extends TransformationDefinition<T>{
 	protected void rhs() throws IOException {
 		for (final T vertex : elementsToModify){
 			List<T> segments = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.SEGMENT, 
-																				ModelConstants.TRACKELEMENT_CONNECTSTO);
+																				ModelConstants.CONNECTSTO);
 			List <T> switchElements = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.SWITCH, 
-																				ModelConstants.TRACKELEMENT_CONNECTSTO);
+																				ModelConstants.CONNECTSTO);
 			List <T> sensors = driver.collectOutgoingConnectedVertices(vertex, ModelConstants.SEGMENT, ModelConstants.SENSOR, 
-																				ModelConstants.TRACKELEMENT_SENSOR);
+																				ModelConstants.SENSOR_EDGE);
 			
 			List<T> source = new ArrayList<T>();
 			source.add(vertex);
-			driver.deleteAllOutgoingEdges(source, ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO);
+			driver.deleteAllOutgoingEdges(source, ModelConstants.SEGMENT, ModelConstants.CONNECTSTO);
 			
 			T inserted = driver.insertVertexWithEdge(vertex, ModelConstants.SEGMENT, 
-													 ModelConstants.SEGMENT, ModelConstants.TRACKELEMENT_CONNECTSTO);
+													 ModelConstants.SEGMENT, ModelConstants.CONNECTSTO);
 			
 			if (segments.size() > 0){
-				driver.insertEdge(inserted, ModelConstants.SEGMENT, segments.get(0), ModelConstants.TRACKELEMENT_CONNECTSTO);
+				driver.insertEdge(inserted, ModelConstants.SEGMENT, segments.get(0), ModelConstants.CONNECTSTO);
 			}
 			if (switchElements.size() > 0){
-				driver.insertEdge(inserted, ModelConstants.SEGMENT, switchElements.get(0), ModelConstants.TRACKELEMENT_CONNECTSTO);
+				driver.insertEdge(inserted, ModelConstants.SEGMENT, switchElements.get(0), ModelConstants.CONNECTSTO);
 			}
-			driver.insertEdge(inserted, ModelConstants.SEGMENT, sensors.get(0), ModelConstants.TRACKELEMENT_SENSOR);
+			driver.insertEdge(inserted, ModelConstants.SEGMENT, sensors.get(0), ModelConstants.SENSOR_EDGE);
 		}
 	}
 

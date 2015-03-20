@@ -13,13 +13,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_ROUTEDEFINITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE_SWITCHPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION_SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,10 +44,10 @@ public class RouteSensor extends Neo4jBenchmarkCase {
 		final Label labelSwitch = DynamicLabel.label(SWITCH);
 		final Label labelSensor = DynamicLabel.label(SENSOR);
 
-		final DynamicRelationshipType relationshipTypeRoute_switchPosition = DynamicRelationshipType.withName(ROUTE_SWITCHPOSITION);
-		final DynamicRelationshipType relationshipTypeSwitchPosition_switch = DynamicRelationshipType.withName(SWITCHPOSITION_SWITCH);
-		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(TRACKELEMENT_SENSOR);
-		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(ROUTE_ROUTEDEFINITION);
+		final DynamicRelationshipType relationshipTypeRoute_switchPosition = DynamicRelationshipType.withName(FOLLOWS);
+		final DynamicRelationshipType relationshipTypeSwitchPosition_switch = DynamicRelationshipType.withName(SWITCH_EDGE);
+		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(SENSOR_EDGE);
+		final DynamicRelationshipType relationshipTypeRoute_routeDefinition = DynamicRelationshipType.withName(DEFINED_BY);
 
 		results = new ArrayList<>();
 

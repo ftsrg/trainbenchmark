@@ -13,26 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.javaapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import org.apache.commons.cli.ParseException;
-
-public class Neo4jBenchmarkInitializer extends BenchmarkInitializer {
+public class Neo4jBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
 
 	@Override
-	protected GenericBenchmarkLogic initializeBenchmark(final String queryName, final String scenario) throws ParseException {
-		// @formatter:off
-		final String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.graphml",
-				"-scenario", scenario, 
-				"-workspacePath", "../",
-				"-javaapi"
-			};
-		// @formatter:on
-
-		return new Neo4jBenchmarkLogic(args);
+	protected Neo4jBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, "Neo4j", runIndex, queryName,
+				iterationCount, modificationMethod, modificationConstant, true);
+		return new Neo4jBenchmarkLogic(rbc);
 	}
 
 }

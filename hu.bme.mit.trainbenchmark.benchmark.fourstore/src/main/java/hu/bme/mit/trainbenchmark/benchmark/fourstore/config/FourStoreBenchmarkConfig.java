@@ -1,12 +1,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
 
 public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 
-	protected boolean ramdisk;
 	protected boolean cluster;
 	protected boolean showCommandOutput;
 	protected boolean showUpdateCommands;
@@ -15,11 +16,15 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 		super(args, tool);
 	}
 
+	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant) {
+		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+	}
+	
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("ramdisk", false, "run the benchmark on a RAM disk");
 		options.addOption("cluster", false, "run the benchmark in a cluster");
 		options.addOption("showCommandOutput", false,
 				"show the results of the command line applications (e.g. 4s-backend, 4s-import)");
@@ -30,16 +35,11 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		ramdisk = cmd.hasOption("ramdisk");
 		cluster = cmd.hasOption("cluster");
 		showCommandOutput = cmd.hasOption("showCommandOutput");
 		showUpdateCommands = cmd.hasOption("showUpdateCommands");
 	}
 
-	public boolean isRamdisk() {
-		return ramdisk;
-	}
-	
 	public boolean isCluster() {
 		return cluster;
 	}

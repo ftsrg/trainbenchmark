@@ -17,7 +17,7 @@ public class QueryConstants {
 	public static final String CONNECTEDSEGMENTS = "ConnectedSegments";
 	public static final String POSLENGTH = "PosLength";
 	public static final String ROUTESENSOR = "RouteSensor";
-	public static final String SIGNALNEIGHBOR = "SignalNeighbor";
+	public static final String SEMAPHORENEIGHBOR = "SemaphoreNeighbor";
 	public static final String SWITCHSENSOR = "SwitchSensor";
 	public static final String SWITCHSET = "SwitchSet";
 

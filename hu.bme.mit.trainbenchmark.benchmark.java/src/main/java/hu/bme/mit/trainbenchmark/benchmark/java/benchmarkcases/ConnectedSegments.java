@@ -1,29 +1,34 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
-
-import hu.bme.mit.trainbenchmark.railway.Segment;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 
 public class ConnectedSegments extends JavaBenchmarkCase<Segment> {
 
-	private int connectedLimit = 5;
+	private final int connectedLimit = 5;
 	
 	@Override
 	protected Collection<Segment> check() throws IOException {
 		results = new ArrayList<>();
 		
-		for (final Object eObject : container.getContains()) {
+		final TreeIterator<EObject> contents = container.eAllContents();	
+		while (contents.hasNext()) {
+			final EObject eObject = contents.next();
+
 			if (eObject instanceof Sensor){
 				final Sensor sensor = (Sensor) eObject;
 				
-				EList<TrackElement> trackElements = sensor.getSensor_trackElement();
-				for (TrackElement element : trackElements){
+				final EList<TrackElement> trackElements = sensor.getElements();
+				for (final TrackElement element : trackElements){
 					if (element instanceof Segment){
 						final Segment firstSegment = (Segment) element;
 						final Segment lastSegment = getConnected(firstSegment, 0);
@@ -32,7 +37,7 @@ public class ConnectedSegments extends JavaBenchmarkCase<Segment> {
 							continue;
 						}
 						
-						final Sensor nextSensor = lastSegment.getTrackElement_sensor().get(0);
+						final Sensor nextSensor = lastSegment.getSensor();
 						
 						if (sensor == nextSensor){
 							results.add(firstSegment);
@@ -46,13 +51,13 @@ public class ConnectedSegments extends JavaBenchmarkCase<Segment> {
 	}
 	
 	
-	protected Segment getConnected(final Segment source, int index){
+	protected Segment getConnected(final Segment source, final int index){
 		if (index == connectedLimit){
 			return source;
 		}
 
-		EList<TrackElement> neighbors = source.getTrackElement_connectsTo();
-		for (TrackElement element : neighbors){
+		final EList<TrackElement> neighbors = source.getConnectsTo();
+		for (final TrackElement element : neighbors){
 			if (element instanceof Segment){
 				return getConnected((Segment)element, index+1);
 			}

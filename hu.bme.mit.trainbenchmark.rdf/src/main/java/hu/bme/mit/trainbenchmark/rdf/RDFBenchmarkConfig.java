@@ -13,6 +13,8 @@
 package hu.bme.mit.trainbenchmark.rdf;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
 
@@ -22,6 +24,11 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	public RDFBenchmarkConfig(final String[] args, final String tool) throws ParseException {
 		super(args, tool);
+	}
+	
+	public RDFBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant) {
+		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 	}
 
 	@Override

@@ -13,25 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.allegro.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.allegro.AllegroBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.GenericBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
-import org.apache.commons.cli.ParseException;
-
-public class AllegroBenchmarkInitializer extends BenchmarkInitializer {
+public class AllegroBenchmarkInitializer extends TestBenchmarkInitializer<AllegroBenchmarkLogic> {
 
 	@Override
-	public GenericBenchmarkLogic initializeBenchmark(String queryName, String scenario) throws ParseException {
-		// @formatter:off
-		String[] args = {
-				"-query", queryName, 
-				"-benchmarkArtifact", "../models/railway-test-1.ttl",
-				"-scenario", scenario, 
-				"-workspacePath", "../" 
-			};
-		// @formatter:on
-		
-		return new AllegroBenchmarkLogic(args);
+	protected AllegroBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig(scenario, size, "Allegro", runIndex, queryName,
+				iterationCount, modificationMethod, modificationConstant);
+		return new AllegroBenchmarkLogic(rbc);
 	}
 
 }
