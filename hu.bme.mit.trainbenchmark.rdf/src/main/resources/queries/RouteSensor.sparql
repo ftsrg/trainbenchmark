@@ -4,14 +4,14 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?xSensor
 WHERE
 {
+	?xRoute base:follows ?xSwitchPosition .
+	?xSwitchPosition base:switch ?xSwitch .
+	?xSwitch base:sensor ?xSensor .
+
 	?xRoute rdf:type base:Route .
 	?xSwitchPosition rdf:type base:SwitchPosition .
 	?xSwitch rdf:type base:Switch .
 	?xSensor rdf:type base:Sensor .
-	
-	?xRoute base:follows ?xSwitchPosition .
-	?xSwitchPosition base:switch ?xSwitch .
-	?xSwitch base:sensor ?xSensor .
 
 	OPTIONAL {
 		?xRoute ?xDefinedBy ?xSensor .

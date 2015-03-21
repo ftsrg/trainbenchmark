@@ -178,7 +178,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	// delete
 
 	@Override
-	public void deleteAllIncomingEdges(final List<Resource> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+	public void deleteIncomingEdge(final List<Resource> vertices, final String sourceVertexType, final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, false, true);
 	}
 

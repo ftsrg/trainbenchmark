@@ -178,7 +178,7 @@ public class FourStoreDriver extends RDFDatabaseDriver<Long> {
 	}
 
 	@Override
-	public void deleteAllIncomingEdges(final List<Long> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+	public void deleteIncomingEdge(final List<Long> vertices, final String sourceVertexType, final String edgeType) throws IOException {
 		for (final Long vertex : vertices) {
 			final String query = String.format( //
 					"DELETE {?x <%s> <%s%s%d>} WHERE {?x <%s> <%s%s%d>}", //

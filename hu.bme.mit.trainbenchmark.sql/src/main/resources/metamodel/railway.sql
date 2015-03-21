@@ -60,17 +60,6 @@ CREATE TABLE IF NOT EXISTS `Sensor` (
 -- --------------------------------------------------------
 
 --
--- Table structure: `sensor`
---
-
-CREATE TABLE IF NOT EXISTS `sensor` (
-  `TrackElement_id` int NOT NULL,
-  `Sensor_id` int NOT NULL
-) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
-
--- --------------------------------------------------------
-
---
 -- Table structure: `Semaphore`
 --
 
@@ -101,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `Switch` (
 
 CREATE TABLE IF NOT EXISTS `SwitchPosition` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `follows` int NOT NULL,
+  `follows` int, -- inverse of the route edge
   `switch` int NOT NULL,
   `position` int NOT NULL,
   PRIMARY KEY  (`id`)
@@ -115,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `SwitchPosition` (
 
 CREATE TABLE IF NOT EXISTS `TrackElement` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `sensor` int,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 

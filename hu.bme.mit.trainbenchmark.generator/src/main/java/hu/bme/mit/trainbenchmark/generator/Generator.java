@@ -46,7 +46,7 @@ import java.util.Random;
 public abstract class Generator {
 
 	// id
-	protected int id = 0;
+	protected int id = 1;
 
 	// static configuration
 	protected GeneratorConfig generatorConfig;
@@ -277,8 +277,9 @@ public abstract class Generator {
 
 	protected final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
+		final Object vertex = createVertex(id, type, attributes, outgoingEdges, incomingEdges);
 		id++;
-		return createVertex(id, type, attributes, outgoingEdges, incomingEdges);
+		return vertex;
 	}
 
 	protected abstract Object createVertex(final int id, final String type, final Map<String, Object> attributes,
