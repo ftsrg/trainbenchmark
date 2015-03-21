@@ -274,7 +274,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	// delete
 
 	@Override
-	public void deleteAllIncomingEdges(final List<URI> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+	public void deleteIncomingEdge(final List<URI> vertices, final String sourceVertexType, final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, false, true);
 	}
 
@@ -312,7 +312,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 					final Statement s = statementsToRemove.next();
 
 					itemsToRemove.add(s);
-
+					System.out.println("deleting " + s);
+					
 					// break if we only want to delete one edge
 					if (!all) {
 						break;

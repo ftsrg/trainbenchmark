@@ -12,8 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ancestors;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
@@ -28,6 +34,8 @@ import java.util.Map.Entry;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
+import com.google.common.collect.ImmutableMap;
+
 public class SQLGenerator extends Generator {
 
 	public SQLGenerator(final String[] args) throws ParseException {
@@ -35,6 +43,9 @@ public class SQLGenerator extends Generator {
 		generatorConfig = new GeneratorConfig(args);
 	}
 
+	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of( //
+			SENSOR_EDGE, TRACKELEMENT);
+	
 	@Override
 	protected String syntax() {
 		return "SQL";
@@ -42,7 +53,6 @@ public class SQLGenerator extends Generator {
 
 	protected BufferedWriter file;
 	protected Map<String, Long> typeId = new HashMap<>();
-	protected static final String ID_NAME = "id";
 
 	public void write(final String s) throws IOException {
 		file.write(s + "\n");
@@ -68,11 +78,10 @@ public class SQLGenerator extends Generator {
 	@Override
 	protected void persistModel() throws IOException {
 		write("COMMIT;");
-		write(String.format("CREATE INDEX Segment_idx_length ON %s (%s);", ModelConstants.SEGMENT, ModelConstants.LENGTH));
-		write(String.format("CREATE INDEX Route_routeDefinition_idx ON %s (Route_id, Sensor_id);", ModelConstants.DEFINED_BY));
-		write(String.format("CREATE INDEX Sensor_trackElement_idx1 ON %s (TrackElement_id);", ModelConstants.SENSOR_EDGE));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx1 ON %s (TrackElement_id);", ModelConstants.CONNECTSTO));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx2 ON %s (TrackElement_id_connectsTo);", ModelConstants.CONNECTSTO));
+		write(String.format("CREATE INDEX Segment_idx_length ON %s (%s);", SEGMENT, LENGTH));
+		write(String.format("CREATE INDEX Route_routeDefinition_idx ON %s (Route_id, Sensor_id);", DEFINED_BY));
+		write(String.format("CREATE INDEX TrackElement_connectsto_idx1 ON %s (TrackElement_id);", CONNECTSTO));
+		write(String.format("CREATE INDEX TrackElement_connectsto_idx2 ON %s (TrackElement_id_connectsTo);", CONNECTSTO));
 
 		file.close();
 	}
@@ -83,7 +92,7 @@ public class SQLGenerator extends Generator {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
 
-		columns.append("`" + ID_NAME + "`");
+		columns.append("`" + ID + "`");
 		values.append(id);
 
 		structuralFeaturesToSQL(attributes, columns, values);
@@ -92,7 +101,7 @@ public class SQLGenerator extends Generator {
 
 		if (ancestors.containsKey(type)) {
 			final String ancestorType = ancestors.get(type);
-			write(String.format("INSERT INTO `%s` VALUES (%s);", ancestorType, id));
+			write(String.format("INSERT INTO `%s` (%s) VALUES (%s);", ancestorType,  ID, id));
 			write(String.format("INSERT INTO `%s` (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
 			final String insertQuery = String.format("INSERT INTO `%s` (%s) VALUES (%s);", type, columns.toString(), values.toString());
@@ -107,14 +116,20 @@ public class SQLGenerator extends Generator {
 		if (from == null || to == null) {
 			return;
 		}
-		final String insertQuery = String.format("INSERT INTO `%s` VALUES (%s, %s);", label, from, to);
+		
+		String insertQuery;
+		if (SENSOR_EDGE.equals(label)) {
+			insertQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", TRACKELEMENT, SENSOR_EDGE, to, ID, from);
+		} else {
+			insertQuery = String.format("INSERT INTO `%s` VALUES (%s, %s);", label, from, to);
+		}
 		write(insertQuery);
 	}
 
 	@Override
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", type, key, stringValue, ID_NAME, node);
+		final String updateQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", type, key, stringValue, ID, node);
 		write(updateQuery);
 	}
 

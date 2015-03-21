@@ -172,7 +172,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	// delete
 
 	@Override
-	public void deleteAllIncomingEdges(final List<RailwayElement> vertices, final String sourceVertexType, final String edgeType) {
+	public void deleteIncomingEdge(final List<RailwayElement> vertices, final String sourceVertexType, final String edgeType) {
 		final EClass sourceClass = (EClass) RailwayPackage.eINSTANCE.getEClassifier(sourceVertexType);
 		final EStructuralFeature feature = sourceClass.getEStructuralFeature(edgeType);
 		final EReference reference = (EReference) feature;
@@ -209,6 +209,8 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 
 				if (features.size() > 0) {
 					final RailwayElement e = (RailwayElement) features.get(0);
+					
+					System.out.println(e);
 					features.remove(0);
 					container.getInvalids().add(e);
 				}

@@ -72,7 +72,7 @@ public abstract class DatabaseDriverTest {
 	@Test
 	public void testDeleteIncomingEdges() throws IOException {
 		final List<? extends Object> routes = driver.collectVertices(ModelConstants.SENSOR);
-		driver.deleteAllIncomingEdges(routes, ModelConstants.TRACKELEMENT, ModelConstants.SENSOR_EDGE);
+		driver.deleteIncomingEdge(routes, ModelConstants.TRACKELEMENT, ModelConstants.SENSOR_EDGE);
 	}
 
 	protected abstract long extractLength(Object segment) throws IOException;
