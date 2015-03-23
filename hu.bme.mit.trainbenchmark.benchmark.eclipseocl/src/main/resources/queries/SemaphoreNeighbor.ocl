@@ -1,0 +1,12 @@
+oclIsKindOf(Route) and self.exit->exists(semaphore | 
+	self.definedBy.elements.connectsTo.sensor->exists(sensor2 | 
+		Route.allInstances()->exists(route3 | 
+			(route3 <> self) and route3.definedBy->includes(sensor2)
+		) 
+		and not (
+			Route.allInstances()->exists(route2 | 
+				route2.definedBy->includes(sensor2) and route2.entry = semaphore
+			)
+		)
+	)
+)

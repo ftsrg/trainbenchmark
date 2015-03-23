@@ -1,0 +1,1 @@
+oclIsKindOf(Sensor) and self.elements->isEmpty()

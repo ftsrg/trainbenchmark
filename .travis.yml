@@ -1,3 +1,3 @@
 script:
   - scripts/resolve-dependencies.sh
-  - scripts/build-travis.sh
+  - scripts/build-without-test.sh --travis

@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.Random;
 
 public abstract class AbstractBenchmarkCase<T> {
-	
+
 	protected Random random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
@@ -48,9 +48,11 @@ public abstract class AbstractBenchmarkCase<T> {
 
 	// these should be implemented for each tool
 
-	protected void init() throws IOException {}
+	protected void init() throws IOException {
+	}
 
-	protected void destroy() throws IOException {}
+	protected void destroy() throws IOException {
+	}
 
 	protected abstract void read() throws IOException;
 
@@ -59,10 +61,10 @@ public abstract class AbstractBenchmarkCase<T> {
 	public void benchmarkModify() throws IOException {
 		modify();
 	}
-	
+
 	protected void modify() throws IOException {
-		final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations." + bc.getScenario().toString().toLowerCase()
-				+ "." + bc.getQuery();
+		final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations."
+				+ bc.getScenario().toString().toLowerCase() + "." + bc.getQuery();
 		try {
 			final Class<?> clazz = this.getClass().getClassLoader().loadClass(className);
 			final TransformationDefinition td = (TransformationDefinition) clazz.newInstance();
@@ -80,7 +82,7 @@ public abstract class AbstractBenchmarkCase<T> {
 
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		this.bc = bc;
-		
+
 		bmr = new BenchmarkResult(bc.getTool(), bc.getQuery());
 		bmr.setBenchmarkConfig(bc);
 		init();
@@ -110,5 +112,5 @@ public abstract class AbstractBenchmarkCase<T> {
 			Util.freeCache(bc);
 		}
 	}
-	
+
 }

@@ -111,6 +111,13 @@
 		</profile>
 
 		<profile>
+			<id>eclipseocl</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.eclipseocl</module>
+			</modules>
+		</profile>
+
+		<profile>
 			<id>fourstore</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.fourstore</module>
