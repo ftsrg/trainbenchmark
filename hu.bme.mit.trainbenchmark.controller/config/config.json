@@ -8,7 +8,7 @@
     "maxPermSize": "64m"
   },
   "Arguments": {
-    "Generator": "",
+    "Generator": "-orientdb",
     "Benchmark": ""
   },
   "IterationCount": 5,
