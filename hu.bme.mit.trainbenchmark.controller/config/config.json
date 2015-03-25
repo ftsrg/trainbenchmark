@@ -1,23 +1,23 @@
 {
   "MAVEN_OPTS": {
-    "Xmx": "512m",
-    "XX:MaxPermSize": "256m"
+    "Xmx": "128m",
+    "XX:MaxPermSize": "64m"
   },
   "JAVA_OPTS": {
-    "xmx": "2g",
-    "maxPermSize": "256m"
+    "xmx": "128m",
+    "maxPermSize": "64m"
   },
   "Arguments": {
     "Generator": "",
     "Benchmark": ""
   },
-  "IterationCount": 10,
+  "IterationCount": 5,
   "MinSize": 1,
   "MaxSize": 1,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
-    "RouteSensor"
+    "PosLength"
   ],
   "Scenarios": [
     "Batch"
