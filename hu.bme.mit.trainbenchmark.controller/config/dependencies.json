@@ -11,6 +11,9 @@
   "fourstore": {
     "name": "rdf"
   },
+  "memsql": {
+    "name": "sql"
+  },
   "mysql": {
     "name": "sql"
   },

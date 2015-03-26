@@ -23,6 +23,9 @@
   "fourstore": {
     "format": "rdf"
   },
+  "memsql": {
+    "format": "sql"
+  },
   "mysql": {
     "format": "sql"
   },

@@ -9,31 +9,31 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
+package hu.bme.mit.trainbenchmark.benchmark.memsql.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
 import hu.bme.mit.trainbenchmark.sql.SQLDatabaseDriver;
 
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySQLDriver extends SQLDatabaseDriver {
+public class MemSQLDriver extends SQLDatabaseDriver {
 
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
 	protected final String user = "root";
 	protected final String password = "";
 
-	public MySQLDriver(String queryPath) throws IOException {
+	public MemSQLDriver(String queryPath) throws IOException {
 		super(queryPath);
 	}
 
 	@Override
-	public void read(final String modelPath) throws IOException {
+	public void read(String modelPath) throws IOException {
+		System.out.println(modelPath);
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "/bin/bash", "-c",
-				"mysql -u " + user + " < " + modelPath };
-
+				"mysql -u " + user + "-h 127.0.0.1 -P 3306 < " + modelPath };
+		// mysql -u root -h 127.0.0.1 -P 3306 --prompt="memsql> "
 		try {
 			final Process pr = rt.exec(command);
 			pr.waitFor();
@@ -60,6 +60,6 @@ public class MySQLDriver extends SQLDatabaseDriver {
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
-		MySQLProcess.stopSQLProcess();
 	}
+
 }
