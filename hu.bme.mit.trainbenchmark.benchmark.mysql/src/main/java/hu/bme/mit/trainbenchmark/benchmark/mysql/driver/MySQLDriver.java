@@ -20,46 +20,46 @@ import java.sql.SQLException;
 
 public class MySQLDriver extends SQLDatabaseDriver {
 
-	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
-	protected final String user = "root";
-	protected final String password = "";
+    protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
+    protected final String user = "root";
+    protected final String password = "";
 
-	public MySQLDriver(String queryPath) throws IOException {
-		super(queryPath);
+    public MySQLDriver(String queryPath) throws IOException {
+	super(queryPath);
+    }
+
+    @Override
+    public void read(final String modelPath) throws IOException {
+	final Runtime rt = Runtime.getRuntime();
+	final String[] command = { "/bin/bash", "-c",
+		"mysql -u " + user + " < " + modelPath };
+
+	try {
+	    final Process pr = rt.exec(command);
+	    pr.waitFor();
+	} catch (final Exception e) {
+	    throw new IOException(e);
 	}
 
-	@Override
-	public void read(final String modelPath) throws IOException {
-		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c",
-				"mysql -u " + user + " < " + modelPath };
-
-		try {
-			final Process pr = rt.exec(command);
-			pr.waitFor();
-		} catch (final Exception e) {
-			throw new IOException(e);
-		}
-
-		try {
-			con = DriverManager.getConnection(url, user, password);
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
+	try {
+	    con = DriverManager.getConnection(url, user, password);
+	} catch (final SQLException e) {
+	    throw new IOException(e);
 	}
+    }
 
-	@Override
-	public void destroy() throws IOException {
-		try {
-			if (st != null) {
-				st.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
-		MySQLProcess.stopSQLProcess();
+    @Override
+    public void destroy() throws IOException {
+	try {
+	    if (st != null) {
+		st.close();
+	    }
+	    if (con != null) {
+		con.close();
+	    }
+	} catch (final SQLException e) {
+	    throw new IOException(e);
 	}
+	MySQLProcess.stopSQLProcess();
+    }
 }
