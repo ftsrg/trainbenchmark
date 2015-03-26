@@ -20,4 +20,6 @@ The username is `root` and the password is empty. Finally, create the `trainbenc
 
 * `memsql> CREATE DATABASE trainbenchmark;`
 
+To stop the server:
+* `sudo killall memsqld`
 
