@@ -147,6 +147,13 @@
 		</profile>
 
 		<profile>
+			<id>memsql</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.memsql</module>
+			</modules>
+		</profile>
+
+		<profile>
 			<id>mysql</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>

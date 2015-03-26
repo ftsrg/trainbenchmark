@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `Semaphore` (
 
 CREATE TABLE IF NOT EXISTS `Switch` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `currentPosition` int NOT NULL,
+  `currentPosition` int,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 

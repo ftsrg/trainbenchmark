@@ -26,9 +26,10 @@ public class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 	@Override
 	public void init() throws IOException {
 		MySQLProcess.startSQLProcess();
-		
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.sql/src/main/resources/queries/"
-		  + getName() + ".sql";
+
+		final String queryPath = bc.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/queries/"
+				+ getName() + ".sql";
 		driver = new MySQLDriver(queryPath);
 	}
 
@@ -46,7 +47,14 @@ public class MySQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 	@Override
 	protected long getMemoryUsage() throws IOException {
 		Util.runGC();
-		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() + MySQLProcess.getMemoryUsage(bc) * 1024;
+		return Runtime.getRuntime().totalMemory()
+				- Runtime.getRuntime().freeMemory()
+				+ MySQLProcess.getMemoryUsage(bc) * 1024;
+	}
+
+	@Override
+	protected void destroy() throws IOException {
+		driver.destroy();
 	}
 
 }
