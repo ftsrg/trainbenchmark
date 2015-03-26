@@ -64,6 +64,7 @@ class Generator():
                                          java_maxpermsize, "-jar", target,
                                          "-scenario", scenario,
                                          "-size", str(size), args])
+                util.set_working_directory("../")
         
     def prevent_multiple_generation(self, configurations):
         """
