@@ -9,26 +9,23 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.memsql;
+package hu.bme.mit.trainbenchmark.benchmark.memsql.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.memsql.MemSQLBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import org.apache.commons.cli.ParseException;
-
-public class MemSQLBenchmarkLogic extends AbstractBenchmarkLogic {
-
-    public MemSQLBenchmarkLogic(final String[] args) throws ParseException {
-	bc = new BenchmarkConfig(args, getTool());
-    }
-
-    public MemSQLBenchmarkLogic(final BenchmarkConfig bc) {
-	super(bc);
-    }
+public class MemSQLBenchmarkInitializer extends
+	TestBenchmarkInitializer<MemSQLBenchmarkLogic> {
 
     @Override
-    protected String getTool() {
-	return "MemSQL";
+    protected MemSQLBenchmarkLogic initializeBenchmark(String queryName,
+	    Scenario scenario) {
+	final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "MySQL",
+		runIndex, queryName, iterationCount, modificationMethod,
+		modificationConstant);
+	return new MemSQLBenchmarkLogic(bc);
     }
 
 }

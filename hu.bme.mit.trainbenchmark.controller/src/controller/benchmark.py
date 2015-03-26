@@ -26,7 +26,6 @@ def run_benchmark(configurations):
     """
     logging.info("benchmark.run_benchmark called.")
     util.set_working_directory(configurations[0].common.path)
-    print(os.getcwd())
     if not os.path.exists("./results"):
         os.mkdir("results")
 
