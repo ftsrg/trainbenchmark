@@ -97,9 +97,10 @@
           "enum": [
             "PosLength",
             "RouteSensor",
-            "SignalNeighbor",
+            "SemaphoreNeighbor",
             "SwitchSensor",
-            "ConnectedSegments"
+            "ConnectedSegments",
+            "SwitchSet"
           ]
         }
       ],
@@ -108,16 +109,18 @@
         "enum": [
           "PosLength",
           "RouteSensor",
-          "SignalNeighbor",
+          "SemaphoreNeighbor",
           "SwitchSensor",
-          "ConnectedSegments"
+          "ConnectedSegments",
+          "SwitchSet"
         ]
       },
       "default": [
         "PosLength",
         "RouteSensor",
-        "SignalNeighbor",
-        "SwitchSensor"
+        "SemaphoreNeighbor",
+        "SwitchSensor",
+        "SwitchSet"
       ]
     },
     "Tools": {
