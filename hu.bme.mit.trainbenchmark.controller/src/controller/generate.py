@@ -36,9 +36,9 @@ class Generator():
         path = configurations[0].common.path
         util.set_working_directory(path)
         
-        models_path = targets.get_common_model_path()
-        if not os.path.exists(models_path):
-            os.makedirs(models_path)
+        # models_path = targets.get_common_model_path()
+        # if not os.path.exists(models_path):
+        #     os.makedirs(models_path)
         if not self.prevented:
             self.prevent_multiple_generation(configurations)
         pp = pprint.PrettyPrinter(indent=4)
@@ -49,6 +49,9 @@ class Generator():
         args = configurations[0].common.generator_args
         for scenario in self.models:
             for format in self.models[scenario]:
+                path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".\
+                    format(FORMAT=format)
+                util.set_working_directory(path)
                 target = targets.get_generator_jar(format)
 
                 if len(self.models[scenario][format]) > 0:
@@ -60,9 +63,7 @@ class Generator():
                                          "-XX:MaxPermSize=" +
                                          java_maxpermsize, "-jar", target,
                                          "-scenario", scenario,
-                                         "-size", str(size),
-                                         "-workspacePath", path,
-                                         args])
+                                         "-size", str(size), args])
         
     def prevent_multiple_generation(self, configurations):
         """
