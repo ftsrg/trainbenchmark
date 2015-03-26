@@ -72,6 +72,7 @@ def execute(configuration):
                                      "-size", str(size),
                                      args
                                      ])
+                util.set_working_directory("../")
 
 
 def run_eclipse_based_benchmark(configuration):
