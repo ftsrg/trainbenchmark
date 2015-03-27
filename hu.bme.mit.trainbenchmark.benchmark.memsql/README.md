@@ -12,7 +12,9 @@ To prevent conflicts with running MySQL services, change the default listening p
 Another opportunity is that to adjust the port number when start the server:
  * `./memsqld -P 3307`
  
-Connect to the MemSQL server by MySQL client tool:
+The Train Benchmark implementation also connects to port `3307`.
+
+An initial step is to create a `trainbenchmark` database. At first, connect to the MemSQL server by MySQL client tool:
  
 * `mysql -u root -h 127.0.0.1 -P 3307 --prompt="memsql> "`
 
@@ -20,6 +22,8 @@ The username is `root` and the password is empty. Finally, create the `trainbenc
 
 * `memsql> CREATE DATABASE trainbenchmark;`
 
-To stop the server:
+After that, the implementation can be already used.
+
+In any case to stop the server, use to following:
 * `sudo killall memsqld`
 
