@@ -1,0 +1,1 @@
+sensors = []; g.V('labels',':Route').out('Route_routeDefinition').fill(sensors).id; g.V('labels',':Route').out('Route_switchPosition').out('SwitchPosition_switch').out('TrackElement_sensor').has('id', T.notin, sensors).id

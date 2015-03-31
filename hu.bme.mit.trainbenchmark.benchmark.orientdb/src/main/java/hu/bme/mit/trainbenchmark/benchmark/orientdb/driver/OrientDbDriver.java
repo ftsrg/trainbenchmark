@@ -11,15 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.driver;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 
 import org.apache.commons.io.FileUtils;
 
