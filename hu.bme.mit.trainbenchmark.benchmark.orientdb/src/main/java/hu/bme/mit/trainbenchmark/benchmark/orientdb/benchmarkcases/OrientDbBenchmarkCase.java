@@ -18,8 +18,7 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<Vertex> {
 	public void init() throws IOException {
 		final String dbPath = bc.getWorkspacePath() + "/models/orient-dbs/railway-database";
 		final String query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.orientdb/src/main/resources/queries/" + getName() + ".txt"));
-		// kiterjesztés .gremlin-re
+				+ "/hu.bme.mit.trainbenchmark.benchmark.orientdb/src/main/resources/queries/" + getName() + ".gremlin"));
 		driver = new OrientDbDriver(dbPath, query);
 	}
 	
