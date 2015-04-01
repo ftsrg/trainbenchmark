@@ -10,14 +10,16 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
-public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<Long> {
+import com.tinkerpop.blueprints.Vertex;
+
+public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<Vertex> {
 	
 	@Override
 	public void init() throws IOException {
 		final String dbPath = bc.getWorkspacePath() + "/models/orient-dbs/railway-database";
 		final String query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.orientdb/src/main/resources/queries/" + getName() + ".txt"));
-		
+		// kiterjesztés .gremlin-re
 		driver = new OrientDbDriver(dbPath, query);
 	}
 	
@@ -28,7 +30,7 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<Long> {
 	}
 
 	@Override
-	protected Collection<Long> check() throws IOException {
+	protected Collection<Vertex> check() throws IOException {
 		results = driver.runQuery();
 		return results;
 	}

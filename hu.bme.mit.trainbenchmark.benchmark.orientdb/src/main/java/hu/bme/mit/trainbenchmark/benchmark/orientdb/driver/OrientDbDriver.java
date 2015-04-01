@@ -18,27 +18,30 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import com.google.common.collect.Lists;
 import com.orientechnologies.orient.graph.gremlin.OCommandGremlin;
 import com.orientechnologies.orient.graph.gremlin.OGremlinHelper;
+import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 
-public class OrientDbDriver extends DatabaseDriver<Long> {
+public class OrientDbDriver extends DatabaseDriver<Vertex> {
 
 	protected OrientGraph graphDb;
 	protected String dbPath;
 	protected String query;
-	
+
 	public OrientDbDriver(String dbPath, final String query) throws IOException {
 		// start with a clean slate: delete old directory
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
 		}
-		
+
 		// start the database
 		this.dbPath = dbPath;
 		this.query = query;
@@ -47,71 +50,42 @@ public class OrientDbDriver extends DatabaseDriver<Long> {
 	@Override
 	public void read(String filePath) throws IOException {
 		graphDb = new OrientGraph("plocal:" + dbPath);
-		try {
-			GraphMLReader graphMLReader = new GraphMLReader(graphDb);
-			graphMLReader.inputGraph(filePath, 100);
-		} catch (Exception e) {
-			throw new IOException(e);
-		}
+		GraphMLReader graphMLReader = new GraphMLReader(graphDb);
+		graphMLReader.inputGraph(filePath, 100);
 	}
 
 	@Override
-	public List<Long> runQuery() throws IOException {
-		List<Long> results = new ArrayList<Long>();
-		
+	public List<Vertex> runQuery() throws IOException {
+		List<Vertex> results = new ArrayList<Vertex>();
+
 		OGremlinHelper.global().create();
-		try {
-			OCommandGremlin gremcomm = new OCommandGremlin(query);
-			results = gremcomm.execute();
-		} catch (Exception e) {
-			new IOException(e);
-		}
-		
+
+		OCommandGremlin gremcomm = new OCommandGremlin(query);
+		results = gremcomm.execute();
+
 		return results;
 	}
 
 	@Override
-	public Comparator<Long> getComparator() {
-		// TODO Auto-generated method stub
-		return null;
+	public Comparator<Vertex> getComparator() {
+		return new VertexComparator();
 	}
-	
+
 	@Override
 	public void destroy() {
 		graphDb.shutdown();
 	}
 
 	@Override
-	public void insertVertexWithEdge(List<Long> sourceVertices,
+	public void insertVertexWithEdge(List<Vertex> sourceVertices,
 			String sourceVertexType, String targetVertexType, String edgeType)
 			throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public Long insertVertexWithEdge(Long sourceVertex,
-			String sourceVertexType, String targetVertexType, String edgeType)
-			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insertEdge(Long sourceVertex, String sourceVertexType,
-			Long targetVertex, String edgeType) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Long> collectVertices(String type) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Long> collectOutgoingConnectedVertices(Long sourceVertex,
+	public Vertex insertVertexWithEdge(Vertex sourceVertex,
 			String sourceVertexType, String targetVertexType, String edgeType)
 			throws IOException {
 		// TODO Auto-generated method stub
@@ -119,51 +93,76 @@ public class OrientDbDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public void updateProperties(List<Long> vertices, String vertexType,
+	public void insertEdge(Vertex sourceVertex, String sourceVertexType,
+			Vertex targetVertex, String edgeType) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Vertex> collectVertices(String type) throws IOException {
+		final Iterable<Vertex> vertices = graphDb.getVertices("labels", type);
+		List<Vertex> list = Lists.newArrayList(vertices);
+		return list;
+	}
+
+	@Override
+	public List<Vertex> collectOutgoingConnectedVertices(Vertex sourceVertex,
+			String sourceVertexType, String targetVertexType, String edgeType)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateProperties(List<Vertex> vertices, String vertexType,
 			String propertyName, PropertyOperation propertyOperation)
 			throws IOException {
-		// TODO Auto-generated method stub
-		
+		for (final Vertex vertex : vertices) {
+			final Integer property = (Integer) vertex.getProperty(propertyName);
+			vertex.setProperty(propertyName, propertyOperation.op(property));
+		}
 	}
 
 	@Override
-	public void deleteAllIncomingEdges(List<Long> vertices,
+	public void deleteAllIncomingEdges(List<Vertex> vertices,
 			String sourceVertexType, String edgeType) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void deleteAllOutgoingEdges(List<Long> vertices, String vertexType,
-			String edgeType) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteOneOutgoingEdge(List<Long> vertices, String vertexType,
-			String edgeType) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteSingleOutgoingEdge(List<Long> vertices,
+	public void deleteAllOutgoingEdges(List<Vertex> vertices,
 			String vertexType, String edgeType) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void deleteVertex(Long vertex, String vertexType) throws IOException {
+	public void deleteOneOutgoingEdge(List<Vertex> vertices, String vertexType,
+			String edgeType) throws IOException {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void deleteSingleOutgoingEdge(List<Vertex> vertices,
+			String vertexType, String edgeType) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteVertex(Vertex vertex, String vertexType)
+			throws IOException {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void deleteVertex(Long vertex) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
