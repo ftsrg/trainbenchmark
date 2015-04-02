@@ -49,6 +49,16 @@ public class OrientDbDriver extends DatabaseDriver<Vertex> {
 	}
 
 	@Override
+	public void beginTransaction() {
+		graphDb.begin();
+	}
+	
+	@Override
+	public void finishTransaction() {
+		graphDb.commit();
+	}
+	
+	@Override
 	public void read(String filePath) throws IOException {
 		graphDb = new OrientGraph("plocal:" + dbPath);
 		GraphMLReader graphMLReader = new GraphMLReader(graphDb);

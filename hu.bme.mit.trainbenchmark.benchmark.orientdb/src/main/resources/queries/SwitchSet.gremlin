@@ -1,2 +1,2 @@
 switchpositions2 = []; g.V('labels',':Signal').has('Signal_currentState', T.eq, 'GO').in('Route_exit').out('Route_switchPosition').fill(switchpositions2).id;
-switchpos = ''; g.V('labels',':Switch:TrackElement').sideEffect{switchpos = it.Switch_currentState}.in('SwitchPosition_switch').has('id', T.in, switchpositions2).filter{it.SwitchPosition_switchState != switchpos}.id
+switchpos = ''; g.V('labels',':Switch:TrackElement').sideEffect{switchpos = it.Switch_currentState}.in('SwitchPosition_switch').has('id', T.in, switchpositions2).filter{it.SwitchPosition_switchState != switchpos}.toList()

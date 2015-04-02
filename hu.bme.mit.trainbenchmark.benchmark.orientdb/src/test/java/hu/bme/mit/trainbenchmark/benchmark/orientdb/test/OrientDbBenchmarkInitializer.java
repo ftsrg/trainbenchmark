@@ -13,7 +13,7 @@ public class OrientDbBenchmarkInitializer extends BenchmarkInitializer {
 		// @formatter:off
 		String[] args = {
 				"-query", queryName,
-				"-benchmarkArtifact", "../models/railway-test-1.graphml",
+				"-benchmarkArtifact", "../models/railway-orienttest-1.graphml",
 				"-scenario", scenario, 
 				"-workspacePath", "../" 
 			};

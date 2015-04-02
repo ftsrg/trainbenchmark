@@ -1,1 +1,1 @@
-g.V('labels',':Switch:TrackElement').except(g.V('labels',':Switch:TrackElement').filter{it.bothE('TrackElement_sensor').hasNext()}.toList()).id
+g.V('labels',':Switch:TrackElement').except(g.V('labels',':Switch:TrackElement').filter{it.bothE('TrackElement_sensor').hasNext()}.toList()).toList()

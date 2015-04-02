@@ -11,27 +11,41 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 
 import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 
 public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<Vertex> {
 	
+	protected OrientGraph graphDb;
+	protected String dbPath;
+	protected String query;
+	
+	protected OrientDbDriver orientDriver;
+	
 	@Override
 	public void init() throws IOException {
-		final String dbPath = bc.getWorkspacePath() + "/models/orient-dbs/railway-database";
-		final String query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
+		super.init();
+		dbPath = bc.getWorkspacePath() + "/models/orient-dbs/railway-database";
+		query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.orientdb/src/main/resources/queries/" + getName() + ".gremlin"));
-		driver = new OrientDbDriver(dbPath, query);
 	}
 	
 	@Override
 	protected void read() throws FileNotFoundException, IOException {
-		final String modelPath = bc.getBenchmarkArtifact();
-		driver.read(modelPath);
+		driver = orientDriver = new OrientDbDriver(dbPath, query);
+		driver.read(bc.getBenchmarkArtifact());
+		
+		graphDb = orientDriver.getGraphDb();
 	}
 
 	@Override
 	protected Collection<Vertex> check() throws IOException {
 		results = driver.runQuery();
 		return results;
+	}
+	
+	@Override
+	protected void destroy() throws IOException {
+		driver.destroy();
 	}
 
 }
