@@ -310,9 +310,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 				while (statementsToRemove.hasNext()) {
 					final Statement s = statementsToRemove.next();
-
 					itemsToRemove.add(s);
-					System.out.println("deleting " + s);
 					
 					// break if we only want to delete one edge
 					if (!all) {

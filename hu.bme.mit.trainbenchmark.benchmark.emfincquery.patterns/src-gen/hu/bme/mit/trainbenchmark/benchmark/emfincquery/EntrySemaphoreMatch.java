@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.EntrySemaphoreSensorQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.EntrySemaphoreQuerySpecification;
+import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
@@ -10,58 +10,63 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
 /**
- * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.emfincquery.entrySemaphoreSensor pattern,
- * to be used in conjunction with {@link EntrySemaphoreSensorMatcher}.
+ * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.emfincquery.entrySemaphore pattern,
+ * to be used in conjunction with {@link EntrySemaphoreMatcher}.
  * 
  * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
  * Each instance is a (possibly partial) substitution of pattern parameters,
  * usable to represent a match of the pattern in the result of a query,
  * or to specify the bound (fixed) input parameters when issuing a query.
  * 
- * @see EntrySemaphoreSensorMatcher
- * @see EntrySemaphoreSensorProcessor
+ * @see EntrySemaphoreMatcher
+ * @see EntrySemaphoreProcessor
  * 
  */
 @SuppressWarnings("all")
-public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
+public abstract class EntrySemaphoreMatch extends BasePatternMatch {
+  private Route fRoute;
+  
   private Semaphore fSemaphore;
   
-  private Sensor fSensor2;
+  private static List<String> parameterNames = makeImmutableList("route", "semaphore");
   
-  private static List<String> parameterNames = makeImmutableList("semaphore", "sensor2");
-  
-  private EntrySemaphoreSensorMatch(final Semaphore pSemaphore, final Sensor pSensor2) {
+  private EntrySemaphoreMatch(final Route pRoute, final Semaphore pSemaphore) {
+    this.fRoute = pRoute;
     this.fSemaphore = pSemaphore;
-    this.fSensor2 = pSensor2;
   }
   
   @Override
   public Object get(final String parameterName) {
+    if ("route".equals(parameterName)) return this.fRoute;
     if ("semaphore".equals(parameterName)) return this.fSemaphore;
-    if ("sensor2".equals(parameterName)) return this.fSensor2;
     return null;
+  }
+  
+  public Route getRoute() {
+    return this.fRoute;
   }
   
   public Semaphore getSemaphore() {
     return this.fSemaphore;
   }
   
-  public Sensor getSensor2() {
-    return this.fSensor2;
-  }
-  
   @Override
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+    if ("route".equals(parameterName) ) {
+    	this.fRoute = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
+    	return true;
+    }
     if ("semaphore".equals(parameterName) ) {
     	this.fSemaphore = (hu.bme.mit.trainbenchmark.railway.Semaphore) newValue;
     	return true;
     }
-    if ("sensor2".equals(parameterName) ) {
-    	this.fSensor2 = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
-    	return true;
-    }
     return false;
+  }
+  
+  public void setRoute(final Route pRoute) {
+    if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+    this.fRoute = pRoute;
   }
   
   public void setSemaphore(final Semaphore pSemaphore) {
@@ -69,37 +74,32 @@ public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
     this.fSemaphore = pSemaphore;
   }
   
-  public void setSensor2(final Sensor pSensor2) {
-    if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    this.fSensor2 = pSensor2;
-  }
-  
   @Override
   public String patternName() {
-    return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.entrySemaphoreSensor";
+    return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.entrySemaphore";
   }
   
   @Override
   public List<String> parameterNames() {
-    return EntrySemaphoreSensorMatch.parameterNames;
+    return EntrySemaphoreMatch.parameterNames;
   }
   
   @Override
   public Object[] toArray() {
-    return new Object[]{fSemaphore, fSensor2};
+    return new Object[]{fRoute, fSemaphore};
   }
   
   @Override
-  public EntrySemaphoreSensorMatch toImmutable() {
-    return isMutable() ? newMatch(fSemaphore, fSensor2) : this;
+  public EntrySemaphoreMatch toImmutable() {
+    return isMutable() ? newMatch(fRoute, fSemaphore) : this;
   }
   
   @Override
   public String prettyPrint() {
     StringBuilder result = new StringBuilder();
-    result.append("\"semaphore\"=" + prettyPrintValue(fSemaphore) + ", ");
+    result.append("\"route\"=" + prettyPrintValue(fRoute) + ", ");
     
-    result.append("\"sensor2\"=" + prettyPrintValue(fSensor2)
+    result.append("\"semaphore\"=" + prettyPrintValue(fSemaphore)
     );
     return result.toString();
   }
@@ -108,8 +108,8 @@ public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((fRoute == null) ? 0 : fRoute.hashCode());
     result = prime * result + ((fSemaphore == null) ? 0 : fSemaphore.hashCode());
-    result = prime * result + ((fSensor2 == null) ? 0 : fSensor2.hashCode());
     return result;
   }
   
@@ -117,7 +117,7 @@ public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
   public boolean equals(final Object obj) {
     if (this == obj)
     	return true;
-    if (!(obj instanceof EntrySemaphoreSensorMatch)) { // this should be infrequent
+    if (!(obj instanceof EntrySemaphoreMatch)) { // this should be infrequent
     	if (obj == null) {
     		return false;
     	}
@@ -129,18 +129,18 @@ public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
     		return false;
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
-    EntrySemaphoreSensorMatch other = (EntrySemaphoreSensorMatch) obj;
+    EntrySemaphoreMatch other = (EntrySemaphoreMatch) obj;
+    if (fRoute == null) {if (other.fRoute != null) return false;}
+    else if (!fRoute.equals(other.fRoute)) return false;
     if (fSemaphore == null) {if (other.fSemaphore != null) return false;}
     else if (!fSemaphore.equals(other.fSemaphore)) return false;
-    if (fSensor2 == null) {if (other.fSensor2 != null) return false;}
-    else if (!fSensor2.equals(other.fSensor2)) return false;
     return true;
   }
   
   @Override
-  public EntrySemaphoreSensorQuerySpecification specification() {
+  public EntrySemaphoreQuerySpecification specification() {
     try {
-    	return EntrySemaphoreSensorQuerySpecification.instance();
+    	return EntrySemaphoreQuerySpecification.instance();
     } catch (IncQueryException ex) {
      	// This cannot happen, as the match object can only be instantiated if the query specification exists
      	throw new IllegalStateException (ex);
@@ -154,7 +154,7 @@ public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
    * @return the empty match.
    * 
    */
-  public static EntrySemaphoreSensorMatch newEmptyMatch() {
+  public static EntrySemaphoreMatch newEmptyMatch() {
     return new Mutable(null, null);
   }
   
@@ -162,31 +162,31 @@ public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
    * Returns a mutable (partial) match.
    * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
    * 
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
    * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
-   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static EntrySemaphoreSensorMatch newMutableMatch(final Semaphore pSemaphore, final Sensor pSensor2) {
-    return new Mutable(pSemaphore, pSensor2);
+  public static EntrySemaphoreMatch newMutableMatch(final Route pRoute, final Semaphore pSemaphore) {
+    return new Mutable(pRoute, pSemaphore);
   }
   
   /**
    * Returns a new (partial) match.
    * This can be used e.g. to call the matcher with a partial match.
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
    * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
-   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
    * @return the (partial) match object.
    * 
    */
-  public static EntrySemaphoreSensorMatch newMatch(final Semaphore pSemaphore, final Sensor pSensor2) {
-    return new Immutable(pSemaphore, pSensor2);
+  public static EntrySemaphoreMatch newMatch(final Route pRoute, final Semaphore pSemaphore) {
+    return new Immutable(pRoute, pSemaphore);
   }
   
-  private static final class Mutable extends EntrySemaphoreSensorMatch {
-    Mutable(final Semaphore pSemaphore, final Sensor pSensor2) {
-      super(pSemaphore, pSensor2);
+  private static final class Mutable extends EntrySemaphoreMatch {
+    Mutable(final Route pRoute, final Semaphore pSemaphore) {
+      super(pRoute, pSemaphore);
     }
     
     @Override
@@ -195,9 +195,9 @@ public abstract class EntrySemaphoreSensorMatch extends BasePatternMatch {
     }
   }
   
-  private static final class Immutable extends EntrySemaphoreSensorMatch {
-    Immutable(final Semaphore pSemaphore, final Sensor pSensor2) {
-      super(pSemaphore, pSensor2);
+  private static final class Immutable extends EntrySemaphoreMatch {
+    Immutable(final Route pRoute, final Semaphore pSemaphore) {
+      super(pRoute, pSemaphore);
     }
     
     @Override

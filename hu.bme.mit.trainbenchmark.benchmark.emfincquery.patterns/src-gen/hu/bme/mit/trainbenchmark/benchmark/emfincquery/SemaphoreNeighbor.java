@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EntrySemaphoreSensorMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EntrySemaphoreMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.EntrySemaphoreSensorQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.EntrySemaphoreQuerySpecification;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SemaphoreNeighborQuerySpecification;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.impl.BaseGeneratedPatternGroup;
@@ -17,7 +17,7 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
  * 
  * <p> From package hu.bme.mit.trainbenchmark.benchmark.emfincquery, the group contains the definition of the following patterns: <ul>
  * <li>SemaphoreNeighbor</li>
- * <li>entrySemaphoreSensor</li>
+ * <li>entrySemaphore</li>
  * </ul>
  * 
  * @see IPatternGroup
@@ -43,7 +43,7 @@ public final class SemaphoreNeighbor extends BaseGeneratedPatternGroup {
   
   private SemaphoreNeighbor() throws IncQueryException {
     querySpecifications.add(SemaphoreNeighborQuerySpecification.instance());
-    querySpecifications.add(EntrySemaphoreSensorQuerySpecification.instance());
+    querySpecifications.add(EntrySemaphoreQuerySpecification.instance());
   }
   
   public SemaphoreNeighborQuerySpecification getSemaphoreNeighbor() throws IncQueryException {
@@ -54,11 +54,11 @@ public final class SemaphoreNeighbor extends BaseGeneratedPatternGroup {
     return SemaphoreNeighborMatcher.on(engine);
   }
   
-  public EntrySemaphoreSensorQuerySpecification getEntrySemaphoreSensor() throws IncQueryException {
-    return EntrySemaphoreSensorQuerySpecification.instance();
+  public EntrySemaphoreQuerySpecification getEntrySemaphore() throws IncQueryException {
+    return EntrySemaphoreQuerySpecification.instance();
   }
   
-  public EntrySemaphoreSensorMatcher getEntrySemaphoreSensor(final IncQueryEngine engine) throws IncQueryException {
-    return EntrySemaphoreSensorMatcher.on(engine);
+  public EntrySemaphoreMatcher getEntrySemaphore(final IncQueryEngine engine) throws IncQueryException {
+    return EntrySemaphoreMatcher.on(engine);
   }
 }

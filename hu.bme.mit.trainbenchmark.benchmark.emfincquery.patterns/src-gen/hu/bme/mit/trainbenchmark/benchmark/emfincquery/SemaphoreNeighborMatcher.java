@@ -30,15 +30,14 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * pattern SemaphoreNeighbor(route1) {
  * 	Route.exit(route1, semaphore);
  * 	Route.definedBy(route1, sensor1);
- * 
- * 	Sensor.elements(sensor1, te1);
- * 	Sensor.elements(sensor2, te2);
+ * 	TrackElement.sensor(te1, sensor1);
  * 	TrackElement.connectsTo(te1, te2);
- * 
- * 	Route.definedBy(route3, sensor2);
- * 	route3 != route1;
+ * 	TrackElement.sensor(te2, sensor2);
+ * 	Route.definedBy(route2, sensor2);
  * 	
- * 	neg find entrySemaphoreSensor(semaphore, sensor2);
+ * 	neg find entrySemaphore(route2, semaphore);
+ * 
+ * 	route1 != route2;
  * }
  * </pre></code>
  * 
