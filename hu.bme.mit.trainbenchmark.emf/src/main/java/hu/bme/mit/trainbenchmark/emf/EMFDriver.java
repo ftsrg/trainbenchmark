@@ -210,7 +210,6 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 				if (features.size() > 0) {
 					final RailwayElement e = (RailwayElement) features.get(0);
 					
-					System.out.println(e);
 					features.remove(0);
 					container.getInvalids().add(e);
 				}

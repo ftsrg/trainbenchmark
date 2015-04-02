@@ -12,33 +12,28 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class PosLength extends Neo4jBenchmarkCase {
+public class PosLength extends Neo4jJavaBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
-		final Label labelSegment = DynamicLabel.label(SEGMENT);
-
-		results = new ArrayList<>();
+		results = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
-			// Segment.Segment_length
+			// Segment
 			final ResourceIterable<Node> segments = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSegment);
 			for (final Node segment : segments) {
 				final Integer length = (Integer) segment.getProperty(LENGTH);
-				// <= 0
+				// Segment.length <= 0
 				if (length <= 0) {
 					results.add(segment);
 				}

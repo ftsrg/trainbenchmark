@@ -48,7 +48,7 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 	public void switchSensor() throws ParseException, IOException {
 		testQuery(SWITCHSENSOR, 4);
 	}
-	
+
 	@Test
 	public void switchSet() throws ParseException, IOException {
 		testQuery(SWITCHSET, 15);
@@ -61,11 +61,14 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 
 	protected void runQuery(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
 		final AbstractBenchmarkCase<?> testCase = bl.getTestCase();
-		testCase.benchmarkInit(bl.getBc());
-		testCase.benchmarkRead();
-		testCase.benchmarkCheck();
-		assertEquals(expectedResultSize, testCase.getResults().size());
-		testCase.benchmarkDestroy();
+		try {
+			testCase.benchmarkInit(bl.getBc());
+			testCase.benchmarkRead();
+			testCase.benchmarkCheck();
+			assertEquals(expectedResultSize, testCase.getResults().size());
+		} finally {
+			testCase.benchmarkDestroy();
+		}
 	}
-	
+
 }

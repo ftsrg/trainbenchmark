@@ -12,45 +12,31 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.DynamicRelationshipType;
-import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class SwitchSensor extends Neo4jBenchmarkCase {
+public class SwitchSensor extends Neo4jJavaBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
-		final Label labelSwitch = DynamicLabel.label(SWITCH);
-		final Label labelSensor = DynamicLabel.label(SENSOR);
-
-		final DynamicRelationshipType relationshipTypeTrackElement_sensor = DynamicRelationshipType.withName(SENSOR_EDGE);
-
-		results = new ArrayList<>();
+		results = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
-			// (switch:Switch)-[TRACKELEMENT_SENSOR]->(Sensor) NAC
+			// (switch:Switch)-[:sensor]->(Sensor) NAC
 			final ResourceIterable<Node> switches = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSwitch);
-			for (final Node aSwitch : switches) {
-
-				final Iterable<Relationship> trackElement_sensors = aSwitch.getRelationships(Direction.OUTGOING,
-						relationshipTypeTrackElement_sensor);
+			for (final Node sw : switches) {
+				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeSensor);
 
 				boolean hasSensor = false;
-				for (final Relationship trackElement_sensor : trackElement_sensors) {
-					final Node sensor = trackElement_sensor.getEndNode();
+				for (final Relationship relationshipSensor : relationshipSensors) {
+					final Node sensor = relationshipSensor.getEndNode();
 					if (sensor.hasLabel(labelSensor)) {
 						hasSensor = true;
 						break;
@@ -58,7 +44,7 @@ public class SwitchSensor extends Neo4jBenchmarkCase {
 				}
 
 				if (!hasSensor) {
-					results.add(aSwitch);
+					results.add(sw);
 				}
 			}
 		}
