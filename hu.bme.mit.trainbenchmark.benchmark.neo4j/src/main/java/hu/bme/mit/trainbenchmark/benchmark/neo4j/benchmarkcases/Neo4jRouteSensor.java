@@ -28,7 +28,7 @@ public class Neo4jRouteSensor extends Neo4jJavaBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
-		results = new HashSet<>();
+		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// (route:Route)-[:follows]->()
@@ -56,7 +56,7 @@ public class Neo4jRouteSensor extends Neo4jJavaBenchmarkCase {
 						for (final Relationship relationshipSensor : relationshipSensors) {
 							final Node sensor = relationshipSensor.getEndNode();
 
-							if (results.contains(sensor)) {
+							if (matches.contains(sensor)) {
 								continue;
 							}
 
@@ -77,7 +77,7 @@ public class Neo4jRouteSensor extends Neo4jJavaBenchmarkCase {
 							}
 
 							if (!routes2.contains(route)) {
-								results.add(sensor);
+								matches.add(sensor);
 							}
 						}
 					}
@@ -85,7 +85,7 @@ public class Neo4jRouteSensor extends Neo4jJavaBenchmarkCase {
 			}
 		}
 
-		return results;
+		return matches;
 	}
 
 }

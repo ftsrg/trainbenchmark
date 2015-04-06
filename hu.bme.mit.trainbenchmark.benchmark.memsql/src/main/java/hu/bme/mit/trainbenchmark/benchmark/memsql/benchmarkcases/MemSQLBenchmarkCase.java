@@ -32,8 +32,8 @@ public class MemSQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
 	@Override
 	protected Collection<Long> check() throws IOException {
-		results = driver.runQuery();
-		return results;
+		matches = driver.runQuery();
+		return matches;
 	}
 
 	@Override

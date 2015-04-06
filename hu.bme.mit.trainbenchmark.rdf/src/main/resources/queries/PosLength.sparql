@@ -1,11 +1,11 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?xSegment
+SELECT DISTINCT ?segment ?length
 WHERE
 {
-	?xSegment rdf:type base:Segment .
-	?xSegment base:length ?xLength .
+	?segment rdf:type base:Segment .
+	?segment base:length ?length .
 
-	FILTER (?xLength <= 0)
+	FILTER (?length <= 0)
 }

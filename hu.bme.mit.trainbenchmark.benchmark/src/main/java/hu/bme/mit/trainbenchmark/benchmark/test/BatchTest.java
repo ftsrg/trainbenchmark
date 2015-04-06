@@ -60,12 +60,12 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 	}
 
 	protected void runQuery(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
-		final AbstractBenchmarkCase<?> testCase = bl.getTestCase();
+		final AbstractBenchmarkCase<?, ?> testCase = bl.getBenchmarkCase();
 		try {
 			testCase.benchmarkInit(bl.getBc());
 			testCase.benchmarkRead();
 			testCase.benchmarkCheck();
-			assertEquals(expectedResultSize, testCase.getResults().size());
+			assertEquals(expectedResultSize, testCase.getMatches().size());
 		} finally {
 			testCase.benchmarkDestroy();
 		}

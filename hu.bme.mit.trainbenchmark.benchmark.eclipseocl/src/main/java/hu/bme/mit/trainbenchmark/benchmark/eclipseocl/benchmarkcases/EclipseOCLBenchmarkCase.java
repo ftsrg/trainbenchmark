@@ -63,7 +63,7 @@ public abstract class EclipseOCLBenchmarkCase<T extends RailwayElement> extends 
 	
 	@Override
 	protected Collection<T> check() {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 		
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
@@ -71,11 +71,11 @@ public abstract class EclipseOCLBenchmarkCase<T extends RailwayElement> extends 
 
 			final Object result = ocl.evaluate(eObject, query);
 			if (result == Boolean.TRUE) {
-				results.add((T) eObject);
+				matches.add((T) eObject);
 			}
 		}
 				
-		return results;
+		return matches;
 	}
 
 

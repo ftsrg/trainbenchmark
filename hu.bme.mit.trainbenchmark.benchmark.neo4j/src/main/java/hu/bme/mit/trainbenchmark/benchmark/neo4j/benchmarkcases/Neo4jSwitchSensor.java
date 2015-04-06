@@ -26,7 +26,7 @@ public class Neo4jSwitchSensor extends Neo4jJavaBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
-		results = new HashSet<>();
+		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// (switch:Switch)-[:sensor]->(Sensor) NAC
@@ -44,12 +44,12 @@ public class Neo4jSwitchSensor extends Neo4jJavaBenchmarkCase {
 				}
 
 				if (!hasSensor) {
-					results.add(sw);
+					matches.add(sw);
 				}
 			}
 		}
 
-		return results;
+		return matches;
 	}
 
 }

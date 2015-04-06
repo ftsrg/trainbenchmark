@@ -12,21 +12,20 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.UserTransformation;
 
 import java.io.IOException;
 
-public class UserSemaphoreNeighbor<T> extends TransformationDefinition<T> {
+public class UserSemaphoreNeighbor<M, T> extends UserTransformation<M, T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(ROUTE);
+		candidatesToModify = driver.collectVertices(ROUTE);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteSingleOutgoingEdge(elementsToModify, ROUTE, ENTRY);
+		driver.semaphoreNeighborUser(objectsToModify);
 	}
 
 }

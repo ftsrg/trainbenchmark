@@ -11,23 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.RepairTransformation;
 
 import java.io.IOException;
 
-public class RepairSwitchSensor<T> extends TransformationDefinition<T> {
-
-	@Override
-	protected void lhs() throws IOException {
-		elementCandidates = currentResults;
-	}
+public class RepairSwitchSensor<M, T> extends RepairTransformation<M, T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.insertVertexWithEdge(elementsToModify, TRACKELEMENT, SENSOR, SENSOR_EDGE);
+		driver.switchSensorRepair(objectsToModify);
 	}
 
 }

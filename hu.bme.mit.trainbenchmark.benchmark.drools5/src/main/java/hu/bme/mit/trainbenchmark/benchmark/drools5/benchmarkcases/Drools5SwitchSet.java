@@ -26,8 +26,8 @@ public class Drools5SwitchSet extends Drools5BenchmarkCase<SwitchPosition> {
 			listener = new Drools5ResultListener<SwitchPosition>("switchPosition");
 			query = ksession.openLiveQuery("SwitchSet check", new Object[] {}, listener);
 		}
-		results = new ArrayList<>(listener.getMatching());
-		return results;
+		matches = new ArrayList<>(listener.getMatching());
+		return matches;
 	}
 
 }

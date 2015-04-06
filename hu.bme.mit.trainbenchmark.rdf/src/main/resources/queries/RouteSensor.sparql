@@ -1,20 +1,20 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?xSensor
+SELECT DISTINCT ?route ?sensor ?swP ?sw
 WHERE
 {
-	?xRoute base:follows ?xSwitchPosition .
-	?xSwitchPosition base:switch ?xSwitch .
-	?xSwitch base:sensor ?xSensor .
+	?route base:follows ?swP .
+	?swP base:switch ?sw .
+	?sw base:sensor ?sensor .
 
-	?xRoute rdf:type base:Route .
-	?xSwitchPosition rdf:type base:SwitchPosition .
-	?xSwitch rdf:type base:Switch .
-	?xSensor rdf:type base:Sensor .
+	?route rdf:type base:Route .
+	?swP rdf:type base:SwitchPosition .
+	?sw rdf:type base:Switch .
+	?sensor rdf:type base:Sensor .
 
 	OPTIONAL {
-		?xRoute ?xDefinedBy ?xSensor .
+		?route ?xDefinedBy ?sensor .
 		FILTER (sameTerm(base:definedBy, ?xDefinedBy))
 	} .
 	FILTER (!bound(?xDefinedBy))

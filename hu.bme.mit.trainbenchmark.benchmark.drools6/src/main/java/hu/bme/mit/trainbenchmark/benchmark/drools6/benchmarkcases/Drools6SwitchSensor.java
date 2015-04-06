@@ -29,8 +29,8 @@ public class Drools6SwitchSensor extends Drools6BenchmarkCase<Switch> {
 			// activate lazy PHREAK evaluation
 			ksession.fireAllRules();
 		}
-		results = new ArrayList<>(listener.getMatching());
-		return results;
+		matches = new ArrayList<>(listener.getMatching());
+		return matches;
 	}
 
 }

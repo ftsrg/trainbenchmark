@@ -26,7 +26,7 @@ public class Neo4jPosLength extends Neo4jJavaBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
-		results = new HashSet<>();
+		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			// Segment
@@ -35,12 +35,12 @@ public class Neo4jPosLength extends Neo4jJavaBenchmarkCase {
 				final Integer length = (Integer) segment.getProperty(LENGTH);
 				// Segment.length <= 0
 				if (length <= 0) {
-					results.add(segment);
+					matches.add(segment);
 				}
 			}
 		}
 
-		return results;
+		return matches;
 	}
 
 }

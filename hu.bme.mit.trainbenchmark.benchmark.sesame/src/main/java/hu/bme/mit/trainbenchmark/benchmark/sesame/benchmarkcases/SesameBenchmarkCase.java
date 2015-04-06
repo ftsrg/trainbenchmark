@@ -20,8 +20,9 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.URI;
+import org.openrdf.query.BindingSet;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<BindingSet, URI> {
 
 	protected RDFBenchmarkConfig rbc;
 
@@ -40,9 +41,9 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<URI> {
 	}
 
 	@Override
-	public Collection<URI> check() throws IOException {
-		results = driver.runQuery();
-		return results;
+	public Collection<BindingSet> check() throws IOException {
+		matches = driver.runQuery();
+		return matches;
 	}
 
 }

@@ -45,8 +45,8 @@ public class AllegroBenchmarkCase extends AbstractBenchmarkCase<URI>{
 
 	@Override
 	protected Collection<URI> check() throws IOException {
-		results = driver.runQuery();
-		return results;
+		matches = driver.runQuery();
+		return matches;
 	}
 
 }

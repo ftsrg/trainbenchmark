@@ -11,22 +11,21 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.UserTransformation;
 
 import java.io.IOException;
 
-public class UserSwitchSensor<T> extends TransformationDefinition<T> {
+public class UserSwitchSensor<M, T> extends UserTransformation<M, T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(SWITCH);
+		candidatesToModify = driver.collectVertices(SWITCH);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteSingleOutgoingEdge(elementsToModify, SWITCH, SENSOR_EDGE);
+		driver.switchSensorUser(objectsToModify);
 	}
 
 }

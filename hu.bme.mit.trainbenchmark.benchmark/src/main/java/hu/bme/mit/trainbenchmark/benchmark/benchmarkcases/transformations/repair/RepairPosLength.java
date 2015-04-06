@@ -11,23 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.NegateAndAddOne;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.RepairTransformation;
 
 import java.io.IOException;
 
-public class RepairPosLength<T> extends TransformationDefinition<T> {
+public class RepairPosLength<M, T> extends RepairTransformation<M, T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = currentResults;
+		candidatesToModify = currentMatches;
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.updateProperties(elementsToModify, SEGMENT, LENGTH, new NegateAndAddOne());
+		driver.posLengthRepair(candidatesToModify);
 	}
 
 }

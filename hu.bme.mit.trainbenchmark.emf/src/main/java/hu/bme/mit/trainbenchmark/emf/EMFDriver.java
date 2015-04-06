@@ -62,7 +62,7 @@ public class EMFDriver extends DatabaseDriver<RailwayElement> {
 	}
 
 	@Override
-	public Comparator<RailwayElement> getComparator() {
+	public Comparator<RailwayElement> getMatchComparator() {
 		return new EMFComparator();
 	}
 

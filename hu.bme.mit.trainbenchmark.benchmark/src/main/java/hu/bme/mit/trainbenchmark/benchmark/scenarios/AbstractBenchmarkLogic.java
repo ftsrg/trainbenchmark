@@ -31,16 +31,17 @@ public abstract class AbstractBenchmarkLogic {
 	
 	@SuppressWarnings("unchecked")
 	public void runBenchmark() throws IOException {
+		@SuppressWarnings("rawtypes")
 		final ScenarioLogic scl = ScenarioFactory.getScenario(bc.getScenario());
-		final AbstractBenchmarkCase<?> tc = getTestCase();
+		final AbstractBenchmarkCase<?, ?> tc = getBenchmarkCase();
 		scl.runBenchmark(bc, tc);
 	}
 
-	public AbstractBenchmarkCase<?> getTestCase() {
+	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
 		return getTestCase(this.getClass().getClassLoader());
 	}
 
-	protected AbstractBenchmarkCase<?> getTestCase(final ClassLoader classLoader) {
+	protected AbstractBenchmarkCase<?, ?> getTestCase(final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
 			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + ".benchmarkcases." + getTool()
@@ -50,7 +51,7 @@ public abstract class AbstractBenchmarkLogic {
 			final int modifiers = clazz.getModifiers();
 			// instantiate generic class if not abstract
 			if (!Modifier.isAbstract(modifiers)) {
-				return (AbstractBenchmarkCase<?>) clazz.newInstance();
+				return (AbstractBenchmarkCase<?, ?>) clazz.newInstance();
 			}
 		
 
@@ -59,7 +60,7 @@ public abstract class AbstractBenchmarkLogic {
 			final Class<?> queryClass = classLoader.loadClass(queryClassName);
 			
 			// instantiate generic class if not abstract
-			return (AbstractBenchmarkCase<?>) queryClass.newInstance();
+			return (AbstractBenchmarkCase<?, ?>) queryClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			throw new UnsupportedOperationException(e);
 		}

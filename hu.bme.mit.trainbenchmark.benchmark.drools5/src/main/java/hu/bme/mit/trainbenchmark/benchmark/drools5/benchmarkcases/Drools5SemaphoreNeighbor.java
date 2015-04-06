@@ -26,8 +26,8 @@ public class Drools5SemaphoreNeighbor extends Drools5BenchmarkCase<Route> {
 			listener = new Drools5ResultListener<Route>("route");
 			query = ksession.openLiveQuery("SemaphoreNeighbor check", new Object[] {}, listener);
 		}		
-		results = new ArrayList<>(listener.getMatching());
-		return results;
+		matches = new ArrayList<>(listener.getMatching());
+		return matches;
 	}
 
 }

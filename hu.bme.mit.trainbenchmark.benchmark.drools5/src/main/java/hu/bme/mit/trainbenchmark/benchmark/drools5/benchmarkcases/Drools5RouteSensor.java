@@ -26,8 +26,8 @@ public class Drools5RouteSensor extends Drools5BenchmarkCase<Sensor> {
 			listener = new Drools5ResultListener<Sensor>("sensor");
 			query = ksession.openLiveQuery("RouteSensor check", new Object[] {}, listener);
 		}
-		results = new ArrayList<>(listener.getMatching());
-		return results;
+		matches = new ArrayList<>(listener.getMatching());
+		return matches;
 	}
 
 }

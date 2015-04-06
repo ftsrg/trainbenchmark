@@ -11,22 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.RepairTransformation;
 
 import java.io.IOException;
 
-public class RepairSemaphoreNeighbor<T> extends TransformationDefinition<T> {
-
-	@Override
-	protected void lhs() throws IOException {
-		elementCandidates = currentResults;
-	}
+public class RepairSemaphoreNeighbor<M, T> extends RepairTransformation<M, T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteSingleOutgoingEdge(elementsToModify, ROUTE, EXIT);
+		driver.semaphoreNeighborRepair(objectsToModify);
 	}
 
 }

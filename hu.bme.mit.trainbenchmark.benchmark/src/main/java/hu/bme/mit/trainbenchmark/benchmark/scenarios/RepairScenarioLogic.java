@@ -18,10 +18,10 @@ import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 
-public class RepairScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?>> {
+public class RepairScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
-	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?> testCase) throws IOException {
+	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?, ?> testCase) throws IOException {
 		testCase.benchmarkInit(bc);
 
 		testCase.benchmarkRead();

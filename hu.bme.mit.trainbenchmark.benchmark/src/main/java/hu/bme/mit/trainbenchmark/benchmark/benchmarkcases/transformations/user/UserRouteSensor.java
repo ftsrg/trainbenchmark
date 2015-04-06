@@ -12,21 +12,20 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.UserTransformation;
 
 import java.io.IOException;
 
-public class UserRouteSensor<T> extends TransformationDefinition<T> {
-	
+public class UserRouteSensor<M, T> extends UserTransformation<M, T> {
+
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(ROUTE);
+		candidatesToModify = driver.collectVertices(ROUTE);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.deleteOneOutgoingEdge(elementsToModify, ROUTE, DEFINED_BY);
+		driver.routeSensorUser(objectsToModify);
 	}
 
 }
