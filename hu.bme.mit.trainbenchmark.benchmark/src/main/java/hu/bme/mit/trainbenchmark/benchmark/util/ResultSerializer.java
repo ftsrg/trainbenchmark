@@ -23,9 +23,9 @@ public class ResultSerializer {
 		final String tool = bmr.getTool();
 		final int size = bmr.getSize();
 		final int runIndex = bmr.getRunIndex();
-		final String fileName = tool + "-" + scenario + "-" + query + "-Size" + size + "-Index" + runIndex;
-		mapper.writeValue(new File(bmr.getBenchmarkConfig().getWorkspacePath() + "/results/" + fileName + ".json"), bmr);
+		final String relativeFilePath = "results/" + tool + "-" + scenario + "-" + query + "-Size" + size + "-Index" + runIndex + ".json";
+		mapper.writeValue(new File(bmr.getBenchmarkConfig().getWorkspacePath() + relativeFilePath), bmr);
 
-		System.out.println("Create JSON file: results/" + fileName);
+		System.out.println("Create JSON file: " + relativeFilePath);
 	}
 }

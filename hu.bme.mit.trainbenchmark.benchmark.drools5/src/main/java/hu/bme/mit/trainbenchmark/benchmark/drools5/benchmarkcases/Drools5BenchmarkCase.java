@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.drools5.ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 import java.io.FileNotFoundException;
@@ -43,7 +43,7 @@ public abstract class Drools5BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 	protected String fileName;
 	protected LiveQuery query;
 	protected StatefulKnowledgeSession ksession;
-	protected ResultListener<T> listener;
+	protected Drools5ResultListener<T> listener;
 	
 	protected KnowledgeBase readKnowledgeBase() throws Exception {
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();

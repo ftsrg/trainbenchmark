@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.drools6.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6ResultListener;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 import java.io.File;
@@ -40,7 +40,7 @@ public abstract class Drools6BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 
 	protected LiveQuery query;
 	protected KieSession ksession;
-	protected ResultListener<T> listener;
+	protected Drools6ResultListener<T> listener;
 
 	protected void readKnowledgeBase() throws Exception {
 		final KieServices kieServices = KieServices.Factory.get();

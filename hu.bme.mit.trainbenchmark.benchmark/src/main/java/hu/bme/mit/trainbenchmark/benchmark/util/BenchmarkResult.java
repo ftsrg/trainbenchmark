@@ -69,7 +69,7 @@ public class BenchmarkResult {
 	
 	@JsonProperty("Scenario")
 	public String getScenario(){
-		return bc.getScenario().toString();
+		return bc.getScenarioName();
 	}
 	
 	@JsonProperty("RunIndex")

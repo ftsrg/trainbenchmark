@@ -64,7 +64,7 @@ public abstract class AbstractBenchmarkCase<T> {
 
 	protected void modify() throws IOException {
 		final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations."
-				+ bc.getScenario().toString().toLowerCase() + "." + bc.getQuery();
+				+ bc.getScenario().toString().toLowerCase() + "." + bc.getScenarioName() + bc.getQuery();
 		try {
 			final Class<?> clazz = this.getClass().getClassLoader().loadClass(className);
 			final TransformationDefinition td = (TransformationDefinition) clazz.newInstance();

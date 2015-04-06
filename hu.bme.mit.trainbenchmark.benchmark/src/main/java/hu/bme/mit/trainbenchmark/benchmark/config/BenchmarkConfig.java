@@ -53,7 +53,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(requiredOption("benchmarkArtifact", "path of the benchmark artifact (instance model or instance model source)"));
 		options.addOption(requiredOption("query", "the query to run, e.g. RouteSensor"));
 
 		options.addOption("benchmarkMode", true, "run benchmark specific (non-functional) procedures, like cleaning the OS cache");
