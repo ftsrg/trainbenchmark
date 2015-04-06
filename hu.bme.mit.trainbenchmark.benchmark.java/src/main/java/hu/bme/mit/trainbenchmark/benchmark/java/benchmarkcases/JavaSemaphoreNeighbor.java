@@ -27,7 +27,7 @@ public class JavaSemaphoreNeighbor extends JavaBenchmarkCase<Route> {
 
 	@Override
 	protected Collection<Route> check() {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
@@ -36,12 +36,12 @@ public class JavaSemaphoreNeighbor extends JavaBenchmarkCase<Route> {
 			if (eObject instanceof Route) {
 				final Route aRoute = (Route) eObject;
 				if (!(isValid(aRoute))) {
-					results.add(aRoute);
+					matches.add(aRoute);
 				}
 			}
 		}
 
-		return results;
+		return matches;
 	}
 
 	private boolean isValid(final Route route1) {

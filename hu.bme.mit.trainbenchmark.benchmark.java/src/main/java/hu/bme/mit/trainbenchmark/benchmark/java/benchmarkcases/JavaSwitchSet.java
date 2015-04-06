@@ -27,7 +27,7 @@ public class JavaSwitchSet extends JavaBenchmarkCase<SwitchPosition> {
 
 	@Override
 	protected Collection<SwitchPosition> check() {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
@@ -43,14 +43,14 @@ public class JavaSwitchSet extends JavaBenchmarkCase<SwitchPosition> {
 					for (final SwitchPosition swP : route.getFollows()) {
 						final Switch sw = swP.getSwitch();
 						if (sw.getCurrentPosition() != swP.getPosition()) {
-							results.add(swP);
+							matches.add(swP);
 						}
 					}
 				}
 			}
 		}
 
-		return results;
+		return matches;
 	}
 
 }

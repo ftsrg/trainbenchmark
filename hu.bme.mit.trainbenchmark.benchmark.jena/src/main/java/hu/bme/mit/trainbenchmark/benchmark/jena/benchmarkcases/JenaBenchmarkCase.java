@@ -44,8 +44,8 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
 
 	@Override
 	public Collection<Resource> check() throws IOException {
-		results = driver.runQuery();
-		return results;
+		matches = driver.runQuery();
+		return matches;
 	}
 
 }

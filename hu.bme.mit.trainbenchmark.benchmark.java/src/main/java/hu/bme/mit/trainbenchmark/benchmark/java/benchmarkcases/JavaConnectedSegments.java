@@ -18,7 +18,7 @@ public class JavaConnectedSegments extends JavaBenchmarkCase<Segment> {
 	
 	@Override
 	protected Collection<Segment> check() throws IOException {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 		
 		final TreeIterator<EObject> contents = container.eAllContents();	
 		while (contents.hasNext()) {
@@ -40,14 +40,14 @@ public class JavaConnectedSegments extends JavaBenchmarkCase<Segment> {
 						final Sensor nextSensor = lastSegment.getSensor();
 						
 						if (sensor == nextSensor){
-							results.add(firstSegment);
+							matches.add(firstSegment);
 						}
 					}
 				}
 			}
 		}
 		
-		return results;
+		return matches;
 	}
 	
 	

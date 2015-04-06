@@ -33,13 +33,13 @@ public class BenchmarkResult {
 	protected Random random;
 
 	@JsonProperty("ModifiedElements")
-	protected List<Long> modifiedElementsSizes = new ArrayList<>();
+	protected List<Long> modifiedMatchCounts = new ArrayList<>();
 	
 	@JsonProperty("Memory")
 	protected List<Long> memoryUsages = new ArrayList<>();
 	
 	@JsonProperty("Results")
-	protected List<Integer> resultSizes = new ArrayList<>();
+	protected List<Integer> matchCounts = new ArrayList<>();
 
 	// phase 1
 	@JsonProperty("ReadTime")
@@ -145,22 +145,22 @@ public class BenchmarkResult {
 
 	// modification parameters
 
-	public void addModifiedElementsSize(final long modifiedElementsSize) {
-		modifiedElementsSizes.add(modifiedElementsSize);
+	public void addModifiedMatchCount(final long modifiedMatchCount) {
+		modifiedMatchCounts.add(modifiedMatchCount);
 	}
 
 	// result sizes
 
-	public void addResultSize(final int size) {
-		resultSizes.add(size);
+	public void addMatchCount(final int matchCount) {
+		matchCounts.add(matchCount);
 	}
 
-	public List<Integer> getResultSizes() {
-		return resultSizes;
+	public List<Integer> getMatchCounts() {
+		return matchCounts;
 	}
 
-	public long getLastResultSize() {
-		return resultSizes.get(resultSizes.size() - 1);
+	public long getLastMatchCount() {
+		return matchCounts.get(matchCounts.size() - 1);
 	}
 
 	@Override
@@ -169,12 +169,12 @@ public class BenchmarkResult {
 		return
 			"Benchmark results\n" +
 			"-----------------\n" +
-			"Result sizes: " + resultSizes + "\n" +
+			"Match counts: " + matchCounts + "\n" +
 			"Read time: " + readTime + "\n" + 	
 			"Check time: " + checkTimes + "\n" + 	
 			"LHS times: " + lhsTimes + "\n" + 	
 			"RHS times: " + rhsTimes + "\n" + 	
-			"Modified elements: " + modifiedElementsSizes 
+			"Modified match counts: " + modifiedMatchCounts 
 			;
 		// @formatter:on
 	}

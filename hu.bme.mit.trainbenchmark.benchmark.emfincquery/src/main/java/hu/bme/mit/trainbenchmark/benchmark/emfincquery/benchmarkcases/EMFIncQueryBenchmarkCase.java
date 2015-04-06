@@ -51,7 +51,7 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 
 	@Override
 	public Collection<T> check() {
-		return results;
+		return matches;
 	}
 
 	@Override
@@ -67,16 +67,16 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 			final EMFScope emfScope = new EMFScope(resource);
 			engine = AdvancedIncQueryEngine.createUnmanagedEngine(emfScope);
 
-			results = getResultSet();
+			matches = getResultSet();
 			engine.addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<Match>() {
 				@Override
 				public void notifyAppearance(final Match match) {
-					results.add(extract(match));
+					matches.add(extract(match));
 				}
 
 				@Override
 				public void notifyDisappearance(final Match match) {
-					results.remove(extract(match));
+					matches.remove(extract(match));
 				}
 			}, false);
 		} catch (final IncQueryException e) {

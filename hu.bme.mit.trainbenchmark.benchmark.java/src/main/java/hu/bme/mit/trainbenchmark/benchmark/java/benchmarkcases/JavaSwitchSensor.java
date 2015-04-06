@@ -24,7 +24,7 @@ public class JavaSwitchSensor extends JavaBenchmarkCase<Switch> {
 
 	@Override
 	protected Collection<Switch> check() {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();	
 		while (contents.hasNext()) {
@@ -33,13 +33,13 @@ public class JavaSwitchSensor extends JavaBenchmarkCase<Switch> {
 			if (eObject instanceof Switch) {
 				final Switch sw = (Switch) eObject;
 				if (sw.getSensor() == null) {
-					results.add(sw);
+					matches.add(sw);
 				}
 			}
 		}
-		System.out.println(results);
+		System.out.println(matches);
 
-		return results;
+		return matches;
 	}
 	
 }

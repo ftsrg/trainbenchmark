@@ -32,8 +32,8 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 
 	@Override
 	public Collection<Long> check() throws IOException {
-		results = driver.runQuery();
-		return results;
+		matches = driver.runQuery();
+		return matches;
 	}
 
 }

@@ -31,7 +31,7 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 	}
 
 	protected void testTransformation(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
-		final AbstractBenchmarkCase<?> benchmarkCase = (bl.getTestCase());
+		final AbstractBenchmarkCase<?, ?> benchmarkCase = (bl.getBenchmarkCase());
 
 		try {
 			benchmarkCase.benchmarkInit(bl.getBc());
@@ -40,7 +40,7 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 			benchmarkCase.benchmarkModify();
 			benchmarkCase.benchmarkCheck();
 
-			final int resultSize = benchmarkCase.getResults().size();
+			final int resultSize = benchmarkCase.getMatches().size();
 			assertEquals(expectedResultSize, resultSize);
 
 			final BenchmarkResult benchmarkResult = benchmarkCase.getBenchmarkResult();

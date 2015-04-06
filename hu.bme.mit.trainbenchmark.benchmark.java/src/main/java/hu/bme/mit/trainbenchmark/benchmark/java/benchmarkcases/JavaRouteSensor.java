@@ -27,7 +27,7 @@ public class JavaRouteSensor extends JavaBenchmarkCase<Sensor> {
 
 	@Override
 	protected Collection<Sensor> check() {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();	
 		while (contents.hasNext()) {
@@ -40,7 +40,7 @@ public class JavaRouteSensor extends JavaBenchmarkCase<Sensor> {
 						final Switch sw = (Switch) te;
 						for (final SwitchPosition swP : sw.getPositions()) {
 							if (!swP.getRoute().getDefinedBy().contains(sensor)) {
-								results.add(sensor);
+								matches.add(sensor);
 							}
 						}
 					}
@@ -48,7 +48,7 @@ public class JavaRouteSensor extends JavaBenchmarkCase<Sensor> {
 			}
 		}
 		
-		return results;
+		return matches;
 	}
 
 }

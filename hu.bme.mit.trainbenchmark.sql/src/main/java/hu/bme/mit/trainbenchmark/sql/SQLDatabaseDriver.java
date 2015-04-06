@@ -74,7 +74,7 @@ public abstract class SQLDatabaseDriver extends DatabaseDriver<Long> {
 	}
 
 	@Override
-	public Comparator<Long> getComparator() {
+	public Comparator<Long> getMatchComparator() {
 		// a null comparator provides natural ordering
 		return null;
 	}

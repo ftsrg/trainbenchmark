@@ -30,7 +30,7 @@ public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
-		results = new HashSet<>();
+		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> semaphores = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSemaphore);
@@ -74,14 +74,14 @@ public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
 						final Object position = sP.getProperty(ModelConstants.POSITION);
 
 						if (!currentPosition.equals(position)) {
-							results.add(sP);
+							matches.add(sP);
 						}
 					}
 				}
 			}
 		}
 
-		return results;
+		return matches;
 	}
 
 }

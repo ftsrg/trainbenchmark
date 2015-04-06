@@ -7,10 +7,19 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 
 import java.io.IOException;
 
-public abstract class RDFDatabaseDriver<T> extends DatabaseDriver<T> {
+public abstract class RDFDatabaseDriver<M, T> extends DatabaseDriver<M, T> {
+	
+	protected static final String VAR_SEMAPHORE = "semaphore";
+	protected static final String VAR_ROUTE = "route";
+	protected static final String VAR_ROUTE2 = "route";
+	protected static final String VAR_SEGMENT = "segment";
+	protected static final String VAR_LENGTH = "length";
+	protected static final String VAR_SENSOR = "sensor";
+	protected static final String VAR_SW = "sw";
 	
 	protected Long determineNewVertexId() throws IOException {
 		Long id = 5000L;
+		
 		// safety measure to avoid infinite loop in case of a driver bug
 		int iterationCount = 1;
 

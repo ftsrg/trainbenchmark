@@ -18,30 +18,35 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public abstract class TransformationDefinition<T> {
+public abstract class Transformation<M, T, O> {
 
-	protected Collection<T> currentResults;
-	protected Collection<T> elementCandidates;
-	protected List<T> elementsToModify;
+	// M: matches
+	// T: elements in the match set
+	// O: transformation object
+
 	protected Random random;
 
-	protected long nElementsToModify;
+	protected Collection<M> currentMatches;
+	protected Collection<O> candidatesToModify;
+	protected List<O> objectsToModify;
+
+	protected long nMatchesToModify;
 	protected long start;
 	protected long startEdit;
 	protected long end;
 
 	protected BenchmarkResult bmr;
-	protected DatabaseDriver<T> driver;
+	protected DatabaseDriver<M, T> driver;
 
-	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<T> driver, final Collection<T> currentResults, final Random random) {
+	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<M, T> driver, final Collection<M> currentMatches,
+			final Random random) {
+		this.random = random;
 		this.bmr = bmr;
 		this.driver = driver;
-		this.currentResults = currentResults;
-		this.random = random;
+		this.currentMatches = currentMatches;
 	}
 
 	protected abstract void lhs() throws IOException;
@@ -49,8 +54,8 @@ public abstract class TransformationDefinition<T> {
 	protected abstract void rhs() throws IOException;
 
 	public void performTransformation() throws IOException {
-		nElementsToModify = Util.calcModify(bmr);
-		bmr.addModifiedElementsSize(nElementsToModify);
+		nMatchesToModify = Util.calcModify(bmr);
+		bmr.addModifiedMatchCount(nMatchesToModify);
 
 		bmr.restartClock();
 		driver.beginTransaction();
@@ -58,29 +63,29 @@ public abstract class TransformationDefinition<T> {
 		bmr.addLhsTime();
 
 		// we do not measure this in the benchmark results
-		final List<T> candidatesList = new ArrayList<>(elementCandidates);
-		Collections.sort(candidatesList, driver.getComparator());
-		elementsToModify = pickRandom(nElementsToModify, candidatesList);
-		
+		final List<O> candidatesList = new ArrayList<>(candidatesToModify);
+		// Collections.sort(candidatesList, driver.getMatchComparator());
+		objectsToModify = pickRandom(nMatchesToModify, candidatesList);
+
 		bmr.restartClock();
 		rhs();
 		driver.finishTransaction();
 		bmr.addRhsTime();
 	}
 
-	private List<T> pickRandom(long nElementsToModify, final List<T> elements) {
-		final int size = elements.size();
-		if (size < nElementsToModify) {
-			nElementsToModify = size;
+	private List<O> pickRandom(long nMatchesToModify, final List<O> matches) {
+		final int size = matches.size();
+		if (size < nMatchesToModify) {
+			nMatchesToModify = size;
 		}
 
-		final List<T> elementsToModify = new ArrayList<>();
-		for (int i = 0; i < nElementsToModify; i++) {
+		final List<O> objects = new ArrayList<>();
+		for (int i = 0; i < nMatchesToModify; i++) {
 			final int rndTarget = random.nextInt(size);
-			final T element = elements.get(rndTarget);
-			elementsToModify.add(element);
+			final O object = matches.get(rndTarget);
+			objects.add(object);
 		}
-		return elementsToModify;
+		return objects;
 	}
 
 }

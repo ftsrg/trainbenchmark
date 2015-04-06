@@ -57,12 +57,12 @@ public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 	@Override
 	public Collection<Node> check() throws IOException {
 		if (nbc.isJavaApi()) {
-			results = checkJava();
+			matches = checkJava();
 		} else {
-			results = neoDriver.runQuery();
+			matches = neoDriver.runQuery();
 		}
 
-		return results;
+		return matches;
 	}
 
 	protected Collection<Node> checkJava() {

@@ -12,22 +12,20 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.SetToZero;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.UserTransformation;
 
 import java.io.IOException;
 
-public class UserPosLength<T> extends TransformationDefinition<T> {
+public class UserPosLength<M, T> extends UserTransformation<M, T> {
 
 	@Override
 	protected void lhs() throws IOException {
-		elementCandidates = driver.collectVertices(SEGMENT);
+		candidatesToModify = driver.collectVertices(SEGMENT);
 	}
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.updateProperties(elementsToModify, SEGMENT, LENGTH, new SetToZero());
+		driver.posLengthUser(objectsToModify);
 	}
 
 }

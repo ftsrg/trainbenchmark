@@ -105,7 +105,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	}
 
 	@Override
-	public Comparator<Node> getComparator() {
+	public Comparator<Node> getMatchComparator() {
 		return new NodeComparator();
 	}
 

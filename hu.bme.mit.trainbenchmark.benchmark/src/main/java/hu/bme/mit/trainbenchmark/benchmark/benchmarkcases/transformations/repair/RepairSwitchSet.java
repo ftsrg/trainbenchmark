@@ -11,34 +11,30 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.RepairTransformation;
 
 import java.io.IOException;
 
-public class RepairSwitchSet<T> extends TransformationDefinition<T> {
-
-	@Override
-	protected void lhs() throws IOException {
-		elementCandidates = currentResults;
-	}
+public class RepairSwitchSet<M, T> extends RepairTransformation<M, T> {
 
 	@Override
 	protected void rhs() throws IOException {
-//		final Map<T, Object> switchPositionProperties = driver.getProperties(elementsToModify, SWITCHPOSITION, SWITCHPOSITION_SWITCH);
-//		final Map<T, Object> switchPositionSwitch = driver.getReferences(elementsToModify, SWITCHPOSITION, SWITCH);
-//		
-//		final Map<Object, Object> newProperties = new HashMap<>(); 
-//		
-//		for (final Entry<T, Object> entry : switchPositionProperties.entrySet()) {
-//			final T switchPosition = entry.getKey();
-//			final Object property = entry.getValue();
-//			
-//			final Object sw = switchPositionSwitch.get(switchPosition);
-//			
-//			newProperties.put(sw, property);
-//		}
-//		
-//		driver.setProperties(newProperties, SWITCH, SWITCH_CURRENTSTATE);
+		driver.switchSensorRepair(objectsToModify);
+		// final Map<T, Object> switchPositionProperties = driver.getProperties(elementsToModify, SWITCHPOSITION, SWITCHPOSITION_SWITCH);
+		// final Map<T, Object> switchPositionSwitch = driver.getReferences(elementsToModify, SWITCHPOSITION, SWITCH);
+		//
+		// final Map<Object, Object> newProperties = new HashMap<>();
+		//
+		// for (final Entry<T, Object> entry : switchPositionProperties.entrySet()) {
+		// final T switchPosition = entry.getKey();
+		// final Object property = entry.getValue();
+		//
+		// final Object sw = switchPositionSwitch.get(switchPosition);
+		//
+		// newProperties.put(sw, property);
+		// }
+		//
+		// driver.setProperties(newProperties, SWITCH, SWITCH_CURRENTSTATE);
 	}
 
 }

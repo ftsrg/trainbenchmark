@@ -24,7 +24,7 @@ public class JavaPosLength extends JavaBenchmarkCase<Segment> {
 
 	@Override
 	protected Collection<Segment> check() {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 		
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
@@ -33,11 +33,11 @@ public class JavaPosLength extends JavaBenchmarkCase<Segment> {
 			if (eObject instanceof Segment) {
 				final Segment segment = (Segment) eObject;
 				if (segment.getLength() <= 0)
-					results.add(segment);
+					matches.add(segment);
 			}
 		}
 		
-		return results;
+		return matches;
 	}
 
 }

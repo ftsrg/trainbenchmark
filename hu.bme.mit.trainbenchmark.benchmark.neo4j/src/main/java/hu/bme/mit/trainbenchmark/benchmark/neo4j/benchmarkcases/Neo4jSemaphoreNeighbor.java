@@ -27,12 +27,12 @@ public class Neo4jSemaphoreNeighbor extends Neo4jJavaBenchmarkCase {
 
 	@Override
 	public Collection<Node> checkJava() {
-		results = new HashSet<>();
+		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> routes1 = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelRoute);
 			for (final Node route1 : routes1) {
-				if (results.contains(route1)) {
+				if (matches.contains(route1)) {
 					continue;
 				}
 
@@ -95,13 +95,13 @@ public class Neo4jSemaphoreNeighbor extends Neo4jJavaBenchmarkCase {
 										final Iterator<Relationship> entriesIterator2 = entries2.iterator();
 										if (!entriesIterator2.hasNext()) {
 											System.out.println("no entry");
-											results.add(route1);
+											matches.add(route1);
 											break;
 										}
 									
 										final Node entrySemaphore = entriesIterator2.next().getEndNode();
 										if (!entrySemaphore.equals(semaphore)) {
-											results.add(route1);
+											matches.add(route1);
 											break;
 										}
 									}
@@ -112,9 +112,9 @@ public class Neo4jSemaphoreNeighbor extends Neo4jJavaBenchmarkCase {
 				}
 			}
 		}
-		System.out.println(results);
+		System.out.println(matches);
 
-		return results;
+		return matches;
 	}
 
 }

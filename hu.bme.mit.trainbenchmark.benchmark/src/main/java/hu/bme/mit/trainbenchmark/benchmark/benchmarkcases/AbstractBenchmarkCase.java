@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationDefinition;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -24,13 +24,13 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Random;
 
-public abstract class AbstractBenchmarkCase<T> {
+public abstract class AbstractBenchmarkCase<M, T> {
 
 	protected Random random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
-	protected DatabaseDriver<T> driver;
-	protected Collection<T> results;
+	protected DatabaseDriver<M, T> driver;
+	protected Collection<M> matches;
 
 	// simple getters and setters
 	public BenchmarkResult getBenchmarkResult() {
@@ -42,8 +42,8 @@ public abstract class AbstractBenchmarkCase<T> {
 		return bc.getQuery();
 	}
 
-	public Collection<T> getResults() {
-		return results;
+	public Collection<M> getMatches() {
+		return matches;
 	}
 
 	// these should be implemented for each tool
@@ -56,7 +56,7 @@ public abstract class AbstractBenchmarkCase<T> {
 
 	protected abstract void read() throws IOException;
 
-	protected abstract Collection<T> check() throws IOException;
+	protected abstract Collection<M> check() throws IOException;
 
 	public void benchmarkModify() throws IOException {
 		modify();
@@ -67,8 +67,8 @@ public abstract class AbstractBenchmarkCase<T> {
 				+ bc.getScenario().toString().toLowerCase() + "." + bc.getScenarioName() + bc.getQuery();
 		try {
 			final Class<?> clazz = this.getClass().getClassLoader().loadClass(className);
-			final TransformationDefinition td = (TransformationDefinition) clazz.newInstance();
-			td.initialize(getBenchmarkResult(), driver, results, random);
+			final Transformation td = (Transformation) clazz.newInstance();
+			td.initialize(getBenchmarkResult(), driver, matches, random);
 			td.performTransformation();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			throw new UnsupportedOperationException(e);
@@ -102,7 +102,7 @@ public abstract class AbstractBenchmarkCase<T> {
 	public void benchmarkCheck() throws IOException {
 		bmr.restartClock();
 		check();
-		bmr.addResultSize(results.size());
+		bmr.addMatchCount(matches.size());
 		bmr.addCheckTime();
 	}
 
