@@ -17,8 +17,8 @@ import org.apache.commons.cli.ParseException;
 
 public class MemSQLBenchmarkMain {
 
-    public static void main(String[] args) throws IOException, ParseException {
-	MemSQLBenchmarkLogic benchmarkLogic = new MemSQLBenchmarkLogic(args);
-	benchmarkLogic.runBenchmark();
-    }
+	public static void main(final String[] args) throws IOException, ParseException {
+		final MemSQLBenchmarkLogic benchmarkLogic = new MemSQLBenchmarkLogic(args);
+		benchmarkLogic.runBenchmark();
+	}
 }
