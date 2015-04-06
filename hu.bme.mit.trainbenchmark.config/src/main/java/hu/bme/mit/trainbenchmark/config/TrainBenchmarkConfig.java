@@ -23,6 +23,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.lang.WordUtils;
 
 public abstract class TrainBenchmarkConfig {
 
@@ -102,6 +103,10 @@ public abstract class TrainBenchmarkConfig {
 
 	public Scenario getScenario() {
 		return scenario;
+	}
+	
+	public String getScenarioName() {
+		return WordUtils.capitalizeFully(scenario.toString());
 	}
 
 	public int getSize() {
