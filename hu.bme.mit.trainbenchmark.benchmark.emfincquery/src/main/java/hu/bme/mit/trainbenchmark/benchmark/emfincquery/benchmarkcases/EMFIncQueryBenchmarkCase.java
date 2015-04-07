@@ -33,6 +33,7 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 public abstract class EMFIncQueryBenchmarkCase<M extends IPatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
 
+	protected EMFIncQueryDriver<M> eiqDriver;
 	protected RailwayContainer container;
 
 	protected AdvancedIncQueryEngine engine;
@@ -55,8 +56,7 @@ public abstract class EMFIncQueryBenchmarkCase<M extends IPatternMatch> extends 
 	@Override
 	public void read() throws IOException {
 		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		final EMFIncQueryDriver<M> eiqDriver = new EMFIncQueryDriver<>(modelPath);
-		driver = eiqDriver;
+		driver = eiqDriver = new EMFIncQueryDriver<>(modelPath);
 
 		final Resource resource = eiqDriver.getResource();
 

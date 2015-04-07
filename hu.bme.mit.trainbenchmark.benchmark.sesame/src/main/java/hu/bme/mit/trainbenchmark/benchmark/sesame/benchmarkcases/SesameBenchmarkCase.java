@@ -24,6 +24,7 @@ import org.openrdf.query.BindingSet;
 
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<BindingSet, URI> {
 
+	protected SesameDriver sesameDriver;
 	protected RDFBenchmarkConfig rbc;
 
 	@Override
@@ -32,7 +33,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<BindingSet, URI> 
 
 		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
 				+ ".sparql";
-		driver = new SesameDriver(queryPath);
+		driver = sesameDriver = new SesameDriver(queryPath);
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<BindingSet, URI> 
 
 	@Override
 	public Collection<BindingSet> check() throws IOException {
-		matches = driver.runQuery();
+		matches = sesameDriver.runQuery();
 		return matches;
 	}
 

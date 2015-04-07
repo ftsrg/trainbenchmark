@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.ArrayList;
@@ -20,23 +21,26 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaPosLength extends JavaBenchmarkCase<Segment> {
+public class JavaPosLength extends JavaBenchmarkCase<JavaPosLengthMatch> {
 
 	@Override
-	protected Collection<Segment> check() {
+	protected Collection<JavaPosLengthMatch> check() {
 		matches = new ArrayList<>();
-		
+
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
+			// (Segment)
 			if (eObject instanceof Segment) {
 				final Segment segment = (Segment) eObject;
-				if (segment.getLength() <= 0)
-					matches.add(segment);
+				// Segment.length <= 0
+				if (segment.getLength() <= 0) {
+					matches.add(new JavaPosLengthMatch(segment));
+				}
 			}
 		}
-		
+
 		return matches;
 	}
 

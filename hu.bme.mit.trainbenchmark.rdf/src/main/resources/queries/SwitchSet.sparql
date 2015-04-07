@@ -3,7 +3,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:  <http://www.w3.org/2002/07/owl#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?semaphore ?route ?swP ?sw
+SELECT DISTINCT ?semaphore ?route ?swP ?sw ?currentPosition ?position
 WHERE
 {
     ?semaphore rdf:type base:Semaphore .
@@ -16,8 +16,8 @@ WHERE
     ?swP base:switch ?sw .
 
     ?semaphore base:signal base:SIGNAL_GO .
-    ?sw base:currentPosition ?swStateSW .
-    ?swP base:position ?swStateSWP .
+    ?sw base:currentPosition ?currentPosition .
+    ?swP base:position ?position .
 
-    FILTER (!sameTerm(?swStateSW, ?swStateSWP))
+    FILTER (!sameTerm(?currentPosition, ?position))
 }

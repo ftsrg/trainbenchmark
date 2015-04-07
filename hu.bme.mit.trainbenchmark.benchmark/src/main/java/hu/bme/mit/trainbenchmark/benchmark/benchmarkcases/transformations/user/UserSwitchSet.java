@@ -26,21 +26,6 @@ public class UserSwitchSet<M, T> extends UserTransformation<M, T> {
 	@Override
 	protected void rhs() throws IOException {
 		driver.switchSetUser(objectsToModify);
-		// final List<Entry<Switch, SwitchStateKind>> itemsToModify = new ArrayList<Map.Entry<Switch,SwitchStateKind>>();
-		// for () {
-		// final Switch aswitch = switches.get(rndTarget);
-		//
-		// final int oldValue = aswitch.getSwitch_actualState().getValue();
-		// final int newValue = (oldValue+1) % 4;
-		// final SwitchStateKind newSSK = SwitchStateKind.get(newValue);
-		// itemsToModify.add(new AbstractMap.SimpleEntry<Switch, SwitchStateKind>(aswitch, newSSK));
-		// }
-		//
-		// for (final Entry<Switch, SwitchStateKind> switchNewSSKPair : itemsToModify) {
-		// final Switch aswitch = switchNewSSKPair.getKey();
-		// final SwitchStateKind newSSK = switchNewSSKPair.getValue();
-		// aswitch.setSwitch_actualState(newSSK);
-		// }
 	}
 
 }
