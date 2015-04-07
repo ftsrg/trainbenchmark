@@ -1,4 +1,4 @@
-SELECT DISTINCT Sensor.id
+SELECT DISTINCT Route.id AS route, Sensor.id AS sensor, SwitchPosition.id AS swP, Switch.id as sw
 FROM Sensor INNER JOIN TrackElement   ON TrackElement.sensor = Sensor.id
             INNER JOIN Switch         ON TrackElement.id = Switch.id
             INNER JOIN SwitchPosition ON SwitchPosition.switch = Switch.id
@@ -7,4 +7,3 @@ FROM Sensor INNER JOIN TrackElement   ON TrackElement.sensor = Sensor.id
                                      AND definedBy.Route_id = Route.id
                                      AND definedBy.Sensor_id = Sensor.id
 WHERE definedBy.Sensor_id IS NULL;
-

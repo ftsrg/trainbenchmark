@@ -18,6 +18,7 @@ import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -39,17 +40,15 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class JenaDriver extends RDFDatabaseDriver<Resource> {
+public class JenaDriver extends RDFDatabaseDriver<QuerySolution, Resource> {
 
 	protected Long newVertexId = null;
 
 	protected Model model;
 	protected Query query;
-	protected String resultVar;
 
 	public JenaDriver(final String queryPath) {
 		query = QueryFactory.read(queryPath);
-		resultVar = query.getResultVars().get(0);
 	}
 
 	@Override
@@ -58,25 +57,18 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 		model.read(modelPath);
 	}
 
-	@Override
-	public List<Resource> runQuery() throws IOException {
-		final List<Resource> results = new ArrayList<>();
+	public List<QuerySolution> runQuery() throws IOException {
+		final List<QuerySolution> results = new ArrayList<>();
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, model)) {
 			final ResultSet resultSet = queryExecution.execSelect();
 
 			while (resultSet.hasNext()) {
 				final QuerySolution qs = resultSet.next();
-				final Resource resource = qs.getResource(resultVar);
-				results.add(resource);
+				results.add(qs);
 			}
 		}
 
 		return results;
-	}
-
-	@Override
-	public Comparator<Resource> getComparator() {
-		return new JenaComparator();
 	}
 
 	@Override
@@ -99,18 +91,16 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 
 	@Override
-	public Resource insertVertexWithEdge(final Resource sourceVertex,
-			final String sourceVertexType, final String targetVertexType, final String edgeType)
-			throws IOException {
-		
+	public Resource insertVertexWithEdge(final Resource sourceVertex, final String sourceVertexType, final String targetVertexType,
+			final String edgeType) throws IOException {
+
 		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
 		final Resource vertexType = model.getResource(BASE_PREFIX + targetVertexType);
-		
+
 		return insertVertexWithEdge(sourceVertex, vertexType, edge);
 	}
 
-	protected Resource insertVertexWithEdge(final Resource sourceVertex, final Resource vertexType,
-			final Property edge) throws IOException{
+	protected Resource insertVertexWithEdge(final Resource sourceVertex, final Resource vertexType, final Property edge) throws IOException {
 		if (newVertexId == null) {
 			newVertexId = determineNewVertexId();
 		}
@@ -120,17 +110,16 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 		model.add(model.createStatement(sourceVertex, edge, targetVertex));
 		model.add(model.createStatement(targetVertex, RDF.type, vertexType));
-		
+
 		return targetVertex;
 	}
-	
+
 	@Override
-	public void insertEdge(final Resource sourceVertex, final String sourceVertexType, final Resource targetVertex,
-			final String edgeType) {
+	public void insertEdge(final Resource sourceVertex, final String sourceVertexType, final Resource targetVertex, final String edgeType) {
 		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
 		model.add(model.createStatement(sourceVertex, edge, targetVertex));
 	}
-	
+
 	// read
 
 	@Override
@@ -141,18 +130,18 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 
 	@Override
-	public List<Resource> collectOutgoingConnectedVertices(
-			final Resource sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) {
-		
+	public List<Resource> collectOutgoingConnectedVertices(final Resource sourceVertex, final String sourceVertexType,
+			final String targetVertexType, final String edgeType) {
+
 		throw new UnsupportedOperationException();
-//		// TODO Auto-generated method stub
-//		Resource targetVertex = model.getResource(BASE_PREFIX + targetVertexType);
-//		Property edge = model.getProperty(BASE_PREFIX + edgeType);
-//		NodeIterator objects = model.listObjectsOfProperty(sourceVertex, edge);
-//		while(objects.hasNext()){
-//			RDFNode ob = objects.next();
-//		}
-//		return null;
+		// // TODO Auto-generated method stub
+		// Resource targetVertex = model.getResource(BASE_PREFIX + targetVertexType);
+		// Property edge = model.getProperty(BASE_PREFIX + edgeType);
+		// NodeIterator objects = model.listObjectsOfProperty(sourceVertex, edge);
+		// while(objects.hasNext()){
+		// RDFNode ob = objects.next();
+		// }
+		// return null;
 	}
 
 	// update
@@ -227,7 +216,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	public void deleteVertex(final Resource vertex, final String vertexType) throws IOException {
 		// TODO Auto-generated method stub
 	}
-	
+
 	@Override
 	protected boolean ask(final String askQuery) {
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(askQuery, model)) {
@@ -239,6 +228,72 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	@Override
 	public void deleteVertex(final Long vertex) throws IOException {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public Comparator<QuerySolution> getMatchComparator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void posLengthRepair(final Collection<QuerySolution> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void routeSensorRepair(final Collection<QuerySolution> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void semaphoreNeighborRepair(final Collection<QuerySolution> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSensorRepair(final Collection<QuerySolution> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSetRepair(final Collection<QuerySolution> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void posLengthUser(final Collection<Resource> segments) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void routeSensorUser(final Collection<Resource> routes) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void semaphoreNeighborUser(final Collection<Resource> routes) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSensorUser(final Collection<Resource> switches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSetUser(final Collection<Resource> switches) throws IOException {
+		// TODO Auto-generated method stub
+
 	}
 }

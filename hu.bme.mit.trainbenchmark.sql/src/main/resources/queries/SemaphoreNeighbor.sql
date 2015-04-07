@@ -1,11 +1,11 @@
 SELECT DISTINCT
-  Route1.id AS id,
   Route1.exit AS semaphore,
+  Route1.id AS route1,
+  Route2.id AS route2,
   TE1.sensor AS sensor1,
-  TE1.id AS te1,
-  TE2.id AS te2,
   TE2.sensor AS sensor2,
-  Route2.id AS route2
+  TE1.id AS te1,
+  TE2.id AS te2
 
 -- route1
 FROM Route AS Route1

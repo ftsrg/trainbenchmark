@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
-import hu.bme.mit.trainbenchmark.sql.SQLDatabaseDriver;
+import hu.bme.mit.trainbenchmark.sql.SQLDriver;
 
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySQLDriver extends SQLDatabaseDriver {
+public class MySQLDriver extends SQLDriver {
 
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
 	protected final String user = "root";

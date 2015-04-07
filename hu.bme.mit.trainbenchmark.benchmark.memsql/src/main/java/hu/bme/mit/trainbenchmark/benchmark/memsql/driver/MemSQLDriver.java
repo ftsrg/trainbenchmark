@@ -11,13 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql.driver;
 
-import hu.bme.mit.trainbenchmark.sql.SQLDatabaseDriver;
+import hu.bme.mit.trainbenchmark.sql.SQLDriver;
 
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MemSQLDriver extends SQLDatabaseDriver {
+public class MemSQLDriver extends SQLDriver {
 
 	protected final String url = "jdbc:mysql://localhost:3307/trainbenchmark";
 	protected final String user = "root";
