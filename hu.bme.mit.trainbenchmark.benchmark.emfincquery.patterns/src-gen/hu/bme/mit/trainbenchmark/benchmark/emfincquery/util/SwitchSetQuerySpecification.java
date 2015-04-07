@@ -57,7 +57,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
   
   @Override
   public SwitchSetMatch newMatch(final Object... parameters) {
-    return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.SwitchPosition) parameters[0]);
+    return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) parameters[0], (hu.bme.mit.trainbenchmark.railway.Route) parameters[1], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) parameters[2], (hu.bme.mit.trainbenchmark.railway.Switch) parameters[3]);
   }
   
   private static class LazyHolder {
@@ -78,12 +78,12 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("switchPosition");
+      return Arrays.asList("semaphore","route","switchPosition","sw");
     }
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(new PParameter("switchPosition", "hu.bme.mit.trainbenchmark.railway.SwitchPosition"));
+      return Arrays.asList(new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore"),new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route"),new PParameter("switchPosition", "hu.bme.mit.trainbenchmark.railway.SwitchPosition"),new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch"));
     }
     
     @Override
@@ -92,15 +92,21 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       try {
       {
       	PBody body = new PBody(this);
-      	PVariable var_switchPosition = body.getOrCreateVariableByName("switchPosition");
-      	PVariable var_route = body.getOrCreateVariableByName("route");
       	PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
+      	PVariable var_route = body.getOrCreateVariableByName("route");
+      	PVariable var_switchPosition = body.getOrCreateVariableByName("switchPosition");
       	PVariable var_sw = body.getOrCreateVariableByName("sw");
       	PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
       	PVariable var_swPP = body.getOrCreateVariableByName("swPP");
       	PVariable var_swCP = body.getOrCreateVariableByName("swCP");
       	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_switchPosition, "switchPosition")
+      		new ExportedParameter(body, var_semaphore, "semaphore"),
+      				
+      		new ExportedParameter(body, var_route, "route"),
+      				
+      		new ExportedParameter(body, var_switchPosition, "switchPosition"),
+      				
+      		new ExportedParameter(body, var_sw, "sw")
       	));
       	new TypeBinary(body, CONTEXT, var_route, var_semaphore, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "entry"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Route.entry");
       	new TypeBinary(body, CONTEXT, var_route, var_switchPosition, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Route.follows");

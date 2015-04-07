@@ -44,10 +44,10 @@ public abstract class UserTest extends TransformationTest {
 	public void switchSensorUser() throws ParseException, IOException {
 		testTransformation(SWITCHSENSOR, USER, 3);
 	}
-	
-//	@Test
-//	public void switchSetUser() throws ParseException, IOException {
-//		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 5);
-//	}
+
+	// @Test
+	// public void switchSetUser() throws ParseException, IOException {
+	// testTransformation(SWITCHSENSOR, USER, 5);
+	// }
 
 }

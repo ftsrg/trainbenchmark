@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
 import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
 
-pattern switchSet(switchPosition)
+pattern switchSet(semaphore, route, switchPosition, sw)
 {
 	Route.entry(route, semaphore);
 	Route.follows(route, switchPosition);

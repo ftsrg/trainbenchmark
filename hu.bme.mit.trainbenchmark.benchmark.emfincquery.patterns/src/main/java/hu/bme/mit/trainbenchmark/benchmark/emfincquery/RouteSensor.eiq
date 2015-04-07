@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
 import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
 
-pattern RouteSensor(sensor)
+pattern RouteSensor(route, sensor, switchPosition, sw)
 {
 	Route.follows(route, switchPosition);
 	SwitchPosition.^switch(switchPosition, sw);

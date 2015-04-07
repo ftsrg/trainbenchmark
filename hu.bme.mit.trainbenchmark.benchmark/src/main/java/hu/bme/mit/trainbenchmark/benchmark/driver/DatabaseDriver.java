@@ -26,7 +26,7 @@ public abstract class DatabaseDriver<M, T> {
 
 	public abstract void read(String modelPath) throws IOException;
 
-	public abstract Collection<M> runQuery() throws IOException;
+	// public abstract Collection<M> runQuery() throws IOException;
 
 	public abstract Comparator<M> getMatchComparator();
 
@@ -97,14 +97,14 @@ public abstract class DatabaseDriver<M, T> {
 	public abstract void switchSetRepair(final Collection<M> matches) throws IOException;
 
 	// user
-	public abstract void posLengthUser(final Collection<T> elements) throws IOException;
+	public abstract void posLengthUser(final Collection<T> segments) throws IOException;
 
-	public abstract void routeSensorUser(final Collection<T> elements) throws IOException;
+	public abstract void routeSensorUser(final Collection<T> routes) throws IOException;
 
-	public abstract void semaphoreNeighborUser(final Collection<T> elements) throws IOException;
+	public abstract void semaphoreNeighborUser(final Collection<T> routes) throws IOException;
 
-	public abstract void switchSensorUser(final Collection<T> elements) throws IOException;
+	public abstract void switchSensorUser(final Collection<T> switches) throws IOException;
 
-	public abstract void switchSetUser(final Collection<T> elements) throws IOException;
+	public abstract void switchSetUser(final Collection<T> switches) throws IOException;
 
 }
