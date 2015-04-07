@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
@@ -23,10 +24,10 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSemaphoreNeighbor extends JavaBenchmarkCase<Route> {
+public class JavaSemaphoreNeighbor extends JavaBenchmarkCase<JavaSemaphoreNeighborMatch> {
 
 	@Override
-	protected Collection<Route> check() {
+	protected Collection<JavaSemaphoreNeighborMatch> check() {
 		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();
@@ -34,59 +35,51 @@ public class JavaSemaphoreNeighbor extends JavaBenchmarkCase<Route> {
 			final EObject eObject = contents.next();
 
 			if (eObject instanceof Route) {
-				final Route aRoute = (Route) eObject;
-				if (!(isValid(aRoute))) {
-					matches.add(aRoute);
-				}
+				final Route route1 = (Route) eObject;
+				checkRoute(route1);
 			}
 		}
 
 		return matches;
 	}
 
-	private boolean isValid(final Route route1) {
-		final Semaphore exitSignal = route1.getExit();
+	private void checkRoute(final Route route1) {
+		final Semaphore semaphore = route1.getExit();
+		if (semaphore == null) {
+			return;
+		}
 		for (final Sensor sensor1 : route1.getDefinedBy()) {
 			for (final TrackElement te1 : sensor1.getElements()) {
 				for (final TrackElement te2 : te1.getConnectsTo()) {
 					final Sensor sensor2 = te2.getSensor();
-					boolean goodSensor = false;
 
-					final TreeIterator<EObject> contents2 = container.eAllContents();
-					while (contents2.hasNext()) {
-						final EObject eObject = contents2.next();
-
-						if (eObject instanceof Route) {
-							final Route route3 = (Route) eObject;
-							if ((route3.getDefinedBy().contains(sensor2)) && (route3 != route1)) {
-								goodSensor = true;
-								break;
-							}
-						}
-					}
-					if (goodSensor) {
-						final TreeIterator<EObject> contents3 = container.eAllContents();
-						while (contents3.hasNext()) {
-							final EObject eObject = contents3.next();
-
-							if (eObject instanceof Route) {
-								final Route route2 = (Route) eObject;
-								if ((route2.getDefinedBy().contains(sensor2)) && (route2.getEntry() != null)
-										&& (route2.getEntry().equals(exitSignal))) {
-									return true;
-								}
-							}
-						}
-						if (exitSignal != null) {
-							return false;
-						}
+					if (sensor2 == null) {
+						continue;
 					}
 
+					// reverse navigation on the (sensor2)<-[definedBy]-(route2) edge
+					final EObject container = sensor2.eContainer();
+					if (!(container instanceof Route)) {
+						continue;
+					}
+
+					final Route route2 = (Route) container;
+
+					// route1 != route2
+					if (route1.equals(route2)) {
+						continue;
+					}
+
+					// (route2)-[entry]->(semaphore) NAC
+					if (!semaphore.equals(route2.getEntry())) {
+						matches.add(new JavaSemaphoreNeighborMatch(semaphore, route1, route2, sensor1, sensor2, te1, te2));
+						return;
+					}
 				}
 			}
 		}
 
-		return true;
+		return;
 	}
 
 }

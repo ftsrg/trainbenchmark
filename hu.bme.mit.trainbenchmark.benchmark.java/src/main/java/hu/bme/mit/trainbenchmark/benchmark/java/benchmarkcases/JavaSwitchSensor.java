@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.ArrayList;
@@ -20,26 +21,28 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSwitchSensor extends JavaBenchmarkCase<Switch> {
+public class JavaSwitchSensor extends JavaBenchmarkCase<JavaSwitchSensorMatch> {
 
 	@Override
-	protected Collection<Switch> check() {
+	protected Collection<JavaSwitchSensorMatch> check() {
 		matches = new ArrayList<>();
 
-		final TreeIterator<EObject> contents = container.eAllContents();	
+		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
+			// (Switch)
 			if (eObject instanceof Switch) {
 				final Switch sw = (Switch) eObject;
+
+				// (Switch)-[sensor]->() NAC
 				if (sw.getSensor() == null) {
-					matches.add(sw);
+					matches.add(new JavaSwitchSensorMatch(sw));
 				}
 			}
 		}
-		System.out.println(matches);
 
 		return matches;
 	}
-	
+
 }

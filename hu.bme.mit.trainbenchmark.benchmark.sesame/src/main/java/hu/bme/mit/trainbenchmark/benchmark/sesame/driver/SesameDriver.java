@@ -11,7 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
@@ -90,7 +97,6 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 		}
 	}
 
-	@Override
 	public List<BindingSet> runQuery() throws IOException {
 		final List<BindingSet> results = new ArrayList<>();
 		TupleQueryResult queryResults;
@@ -99,7 +105,6 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, query);
 			queryResults = tupleQuery.evaluate();
 			try {
-				// final String bindingName = queryResults.getBindingNames().get(0);
 				while (queryResults.hasNext()) {
 					final BindingSet bs = queryResults.next();
 					results.add(bs);
@@ -130,63 +135,6 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 		}
 	}
 
-	// create
-
-	public void insertVertexWithEdge(final List<URI> sourceVertices, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
-		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
-
-		try {
-			for (final URI sourceVertexURI : sourceVertices) {
-				insertVertexWithEdge(sourceVertexURI, vertexTypeURI, edgeTypeURI);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	public URI insertVertexWithEdge(final URI sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		final URI vertexTypeURI = f.createURI(BASE_PREFIX + targetVertexType);
-		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
-
-		try {
-			return insertVertexWithEdge(sourceVertex, vertexTypeURI, edgeTypeURI);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	protected URI insertVertexWithEdge(final URI sourceVertexURI, final URI vertexTypeURI, final URI edgeTypeURI)
-			throws RepositoryException, IOException {
-		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
-		}
-		final URI targetVertexURI = f.createURI(BASE_PREFIX + "_" + newVertexId);
-		newVertexId++;
-
-		// insert edge
-		final Statement edgeStatement = f.createStatement(sourceVertexURI, edgeTypeURI, targetVertexURI);
-		con.add(edgeStatement);
-
-		// set vertex type
-		final Statement typeStatement = f.createStatement(targetVertexURI, RDF.TYPE, vertexTypeURI);
-		con.add(typeStatement);
-		return targetVertexURI;
-	}
-
-	public void insertEdge(final URI sourceVertex, final String sourceVertexType, final URI targetVertex, final String edgeType)
-			throws IOException {
-		final URI edgeTypeURI = f.createURI(BASE_PREFIX + edgeType);
-		final Statement edgeStatement = f.createStatement(sourceVertex, edgeTypeURI, targetVertex);
-		try {
-			con.add(edgeStatement);
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
 	// read
 
 	@Override
@@ -208,41 +156,7 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 		return vertices;
 	}
 
-	// @Override
-	// public List<URI> collectOutgoingConnectedVertices(final URI sourceVertex, final String sourceVertexType, final String
-	// targetVertexType,
-	// final String edgeType) throws IOException {
-	// final URI typeURI = f.createURI(BASE_PREFIX + targetVertexType);
-	// final List<URI> vertices = new ArrayList<>();
-	//
-	// final URI edgeURI = f.createURI(BASE_PREFIX + edgeType);
-	// try {
-	// final RepositoryResult<Statement> statements = con.getStatements(sourceVertex, edgeURI, null, false);
-	// while (statements.hasNext()) {
-	// final Statement s = statements.next();
-	// final URI obj = (URI) s.getObject();
-	// final RepositoryResult<Statement> statements2 = con.getStatements(obj, RDF.TYPE, typeURI, false);
-	// while (statements2.hasNext()) {
-	// final Statement s2 = statements2.next();
-	// final URI subject = (URI) s2.getSubject();
-	// vertices.add(subject);
-	// }
-	// }
-	// } catch (final RepositoryException e) {
-	// throw new IOException(e);
-	// }
-	// return vertices;
-	// }
-
 	// delete
-
-	public void deleteIncomingEdge(final Collection<URI> vertices, final String sourceVertexType, final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, false, true);
-	}
-
-	public void deleteAllOutgoingEdges(final Collection<URI> vertices, final String vertexType, final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, true, true);
-	}
 
 	public void deleteOneOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, true, false);
@@ -300,16 +214,6 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 
 	// utility
 
-	protected List<Long> extractIds(final Collection<URI> elements) {
-		final ArrayList<Long> ids = new ArrayList<Long>();
-		for (final URI uri : elements) {
-			final String idString = uri.getLocalName();
-			final Long id = new Long(idString);
-			ids.add(id);
-		}
-		return ids;
-	}
-
 	@Override
 	protected boolean ask(final String askQuery) throws IOException {
 		try {
@@ -326,21 +230,21 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 	@Override
 	public void posLengthRepair(final Collection<BindingSet> matches) throws IOException {
 		final PosLengthRepairOperation operation = new PosLengthRepairOperation();
-		final URI typeURI = f.createURI(BASE_PREFIX + ModelConstants.LENGTH);
+		final URI lengthProperty = f.createURI(BASE_PREFIX + LENGTH);
 
 		try {
 			for (final BindingSet match : matches) {
 				final Resource segment = (Resource) match.getValue(VAR_SEGMENT);
 				final Value length = match.getValue(VAR_LENGTH);
 
-				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, typeURI, length, true);
+				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, lengthProperty, length, true);
 				while (statementsToRemove.hasNext()) {
 					con.remove(statementsToRemove.next());
 				}
 
 				final Integer lengthInteger = new Integer(length.stringValue());
 				final Literal newLength = f.createLiteral(operation.op(lengthInteger));
-				con.add(segment, typeURI, newLength);
+				con.add(segment, lengthProperty, newLength);
 			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
@@ -349,26 +253,87 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 
 	@Override
 	public void routeSensorRepair(final Collection<BindingSet> matches) throws IOException {
-		// TODO Auto-generated method stub
+		final URI definedBy = f.createURI(BASE_PREFIX + DEFINED_BY);
 
+		try {
+			for (final BindingSet match : matches) {
+				final Resource route = (Resource) match.getValue(VAR_ROUTE);
+				final Resource sensor = (Resource) match.getValue(VAR_SENSOR);
+
+				con.add(route, definedBy, sensor);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 
 	@Override
 	public void semaphoreNeighborRepair(final Collection<BindingSet> matches) throws IOException {
-		// TODO Auto-generated method stub
+		final URI entry = f.createURI(BASE_PREFIX + ENTRY);
 
+		try {
+			for (final BindingSet match : matches) {
+				final Resource route2 = (Resource) match.getValue(VAR_ROUTE2);
+				final Resource semaphore = (Resource) match.getValue(VAR_SEMAPHORE);
+
+				System.out.println(route2);
+				System.out.println(entry);
+				System.out.println(semaphore);
+
+				con.add(route2, entry, semaphore);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 
 	@Override
 	public void switchSensorRepair(final Collection<BindingSet> matches) throws IOException {
-		// TODO Auto-generated method stub
+		final URI sensorEdge = f.createURI(BASE_PREFIX + SENSOR_EDGE);
+		final URI sensorType = f.createURI(BASE_PREFIX + SENSOR);
 
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+
+		try {
+			for (final BindingSet match : matches) {
+				final Resource sw = (Resource) match.getValue(VAR_SW);
+
+				final URI sensorURI = f.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
+				newVertexId++;
+
+				// set vertex type
+				con.add(sensorURI, RDF.TYPE, sensorType);
+				// insert edge
+				con.add(sw, sensorEdge, sensorURI);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 
 	@Override
 	public void switchSetRepair(final Collection<BindingSet> matches) throws IOException {
-		// TODO Auto-generated method stub
+		final URI currentPositionProperty = f.createURI(BASE_PREFIX + CURRENTPOSITION);
 
+		try {
+			for (final BindingSet match : matches) {
+				final Resource sw = (Resource) match.getValue(VAR_SW);
+				final Resource position = (Resource) match.getValue(VAR_POSITION);
+				final Resource currentPosition = (Resource) match.getValue(VAR_CURRENTPOSITION);
+
+				final RepositoryResult<Statement> statementsToRemove = con.getStatements(sw, currentPositionProperty, currentPosition,
+						false);
+				while (statementsToRemove.hasNext()) {
+					con.remove(statementsToRemove.next());
+				}
+
+				con.add(sw, currentPositionProperty, position);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
+		}
 	}
 
 	// user

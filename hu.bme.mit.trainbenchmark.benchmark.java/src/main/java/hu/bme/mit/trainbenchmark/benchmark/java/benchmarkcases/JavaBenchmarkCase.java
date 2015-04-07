@@ -13,22 +13,21 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public abstract class JavaBenchmarkCase<T extends RailwayElement> extends AbstractBenchmarkCase<T> {
+public abstract class JavaBenchmarkCase<M extends JavaMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
 
 	protected RailwayContainer container;
 
 	@Override
 	public void read() {
-		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";		
-		final EMFDriver emfDriver = new EMFDriver(modelPath);
-		driver = (DatabaseDriver<T>) emfDriver;
-		
-		container = emfDriver.getContainer();
+		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
+		final JavaDriver<M> javaDriver = new JavaDriver<>(modelPath);
+		driver = javaDriver;
+
+		container = javaDriver.getContainer();
 	}
 
 }

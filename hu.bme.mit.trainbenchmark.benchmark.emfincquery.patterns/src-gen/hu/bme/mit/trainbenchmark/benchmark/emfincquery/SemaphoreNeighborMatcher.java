@@ -30,7 +30,8 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern semaphoreNeighbor(semaphore, route1, route2, sensor1, sensor2, te1, te2) {
+ * pattern semaphoreNeighbor(semaphore, route1, route2, sensor1, sensor2, te1, te2)
+ * {
  * 	Route.exit(route1, semaphore);
  * 	Route.definedBy(route1, sensor1);
  * 	TrackElement.sensor(te1, sensor1);
