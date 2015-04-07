@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.NegateAndAddOne;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
@@ -325,7 +325,7 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 
 	@Override
 	public void posLengthRepair(final Collection<BindingSet> matches) throws IOException {
-		final NegateAndAddOne operation = new NegateAndAddOne();
+		final PosLengthRepairOperation operation = new PosLengthRepairOperation();
 		final URI typeURI = f.createURI(BASE_PREFIX + ModelConstants.LENGTH);
 
 		try {

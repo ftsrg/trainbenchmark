@@ -12,16 +12,14 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryCommon;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Set;
 
 import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -33,12 +31,12 @@ import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match extends IPatternMatch> extends AbstractBenchmarkCase<T> {
+public abstract class EMFIncQueryBenchmarkCase<M extends IPatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
 
 	protected RailwayContainer container;
 
 	protected AdvancedIncQueryEngine engine;
-	protected IncQueryMatcher<Match> matcher;
+	protected IncQueryMatcher<M> matcher;
 
 	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
 		return (EMFIncQueryBenchmarkConfig) bc;
@@ -50,33 +48,33 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 	}
 
 	@Override
-	public Collection<T> check() {
+	public Collection<M> check() {
 		return matches;
 	}
 
 	@Override
 	public void read() throws IOException {
 		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		final EMFDriver emfDriver = new EMFDriver(modelPath);
-		driver = (DatabaseDriver<T>) emfDriver;
+		final EMFIncQueryDriver<M> eiqDriver = new EMFIncQueryDriver<>(modelPath);
+		driver = eiqDriver;
 
-		final Resource resource = emfDriver.getResource();
+		final Resource resource = eiqDriver.getResource();
 
 		try {
 			EMFIncQueryCommon.setEIQOptions(getEMFIncQueryBenchmarkConfig());
 			final EMFScope emfScope = new EMFScope(resource);
 			engine = AdvancedIncQueryEngine.createUnmanagedEngine(emfScope);
 
-			matches = getResultSet();
-			engine.addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<Match>() {
+			matches = getMatcher().getAllMatches();
+			engine.addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<M>() {
 				@Override
-				public void notifyAppearance(final Match match) {
-					matches.add(extract(match));
+				public void notifyAppearance(final M match) {
+					matches.add(match);
 				}
 
 				@Override
-				public void notifyDisappearance(final Match match) {
-					matches.remove(extract(match));
+				public void notifyDisappearance(final M match) {
+					matches.remove(match);
 				}
 			}, false);
 		} catch (final IncQueryException e) {
@@ -84,10 +82,6 @@ public abstract class EMFIncQueryBenchmarkCase<T extends RailwayElement, Match e
 		}
 	}
 
-	protected abstract Set<T> getResultSet() throws IncQueryException;
-
-	protected abstract IncQueryMatcher<Match> getMatcher() throws IncQueryException;
-
-	protected abstract T extract(Match match);
+	protected abstract IncQueryMatcher<M> getMatcher() throws IncQueryException;
 
 }

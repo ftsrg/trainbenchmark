@@ -16,7 +16,7 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package hu.bme.mit.trainbenchmark.benchmark.emfincquery, the group contains the definition of the following patterns: <ul>
- * <li>SemaphoreNeighbor</li>
+ * <li>semaphoreNeighbor</li>
  * <li>entrySemaphore</li>
  * </ul>
  * 

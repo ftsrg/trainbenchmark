@@ -58,7 +58,7 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
   
   @Override
   public RouteSensorMatch newMatch(final Object... parameters) {
-    return RouteSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0]);
+    return RouteSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) parameters[0], (hu.bme.mit.trainbenchmark.railway.Sensor) parameters[1], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) parameters[2], (hu.bme.mit.trainbenchmark.railway.Switch) parameters[3]);
   }
   
   private static class LazyHolder {
@@ -79,12 +79,12 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("sensor");
+      return Arrays.asList("route","sensor","switchPosition","sw");
     }
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor"));
+      return Arrays.asList(new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route"),new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("switchPosition", "hu.bme.mit.trainbenchmark.railway.SwitchPosition"),new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch"));
     }
     
     @Override
@@ -93,12 +93,18 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
       try {
       {
       	PBody body = new PBody(this);
-      	PVariable var_sensor = body.getOrCreateVariableByName("sensor");
       	PVariable var_route = body.getOrCreateVariableByName("route");
+      	PVariable var_sensor = body.getOrCreateVariableByName("sensor");
       	PVariable var_switchPosition = body.getOrCreateVariableByName("switchPosition");
       	PVariable var_sw = body.getOrCreateVariableByName("sw");
       	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_sensor, "sensor")
+      		new ExportedParameter(body, var_route, "route"),
+      				
+      		new ExportedParameter(body, var_sensor, "sensor"),
+      				
+      		new ExportedParameter(body, var_switchPosition, "switchPosition"),
+      				
+      		new ExportedParameter(body, var_sw, "sw")
       	));
       	new TypeBinary(body, CONTEXT, var_route, var_switchPosition, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Route.follows");
       	new TypeBinary(body, CONTEXT, var_switchPosition, var_sw, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "switch"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/SwitchPosition.switch");

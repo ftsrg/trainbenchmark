@@ -24,7 +24,7 @@ public class RepairPosLength<M, T> extends RepairTransformation<M, T> {
 
 	@Override
 	protected void rhs() throws IOException {
-		driver.posLengthRepair(candidatesToModify);
+		driver.posLengthRepair(objectsToModify);
 	}
 
 }

@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-public class NegateAndAddOne implements PropertyOperation {
+public class PosLengthRepairOperation implements PropertyOperation {
 
 	@Override
 	public int op(final int x) {
