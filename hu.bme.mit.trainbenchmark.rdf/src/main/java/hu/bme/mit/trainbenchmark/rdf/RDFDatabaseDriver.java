@@ -9,17 +9,6 @@ import java.io.IOException;
 
 public abstract class RDFDatabaseDriver<M, T> extends DatabaseDriver<M, T> {
 
-	protected static final String VAR_SEMAPHORE = "semaphore";
-	protected static final String VAR_ROUTE = "route";
-	protected static final String VAR_ROUTE2 = "route2";
-	protected static final String VAR_SEGMENT = "segment";
-	protected static final String VAR_LENGTH = "length";
-	protected static final String VAR_SENSOR = "sensor";
-	protected static final String VAR_SW = "sw";
-	protected static final String VAR_SWP = "swP";
-	protected static final String VAR_POSITION = "position";
-	protected static final String VAR_CURRENTPOSITION = "currentPosition";
-
 	protected Long determineNewVertexId() throws IOException {
 		Long id = 5000L;
 

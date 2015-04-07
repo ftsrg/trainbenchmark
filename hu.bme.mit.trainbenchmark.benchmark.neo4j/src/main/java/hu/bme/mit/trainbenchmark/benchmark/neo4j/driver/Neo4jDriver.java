@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jDriver extends DatabaseDriver<Node> {
+public class Neo4jDriver extends DatabaseDriver<Map<String, Object>, Node> {
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
@@ -88,16 +89,14 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 		}
 	}
 
-	@Override
-	public List<Node> runQuery() throws IOException {
-		final List<Node> results = new ArrayList<>();
+	public List<Map<String, Object>> runQuery() throws IOException {
+		final List<Map<String, Object>> results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ExecutionEngine engine = new ExecutionEngine(graphDb);
 			final ExecutionResult result = engine.execute(query);
 			for (final Map<String, Object> row : result) {
-				final Node x = (Node) row.get(result.columns().get(0));
-				results.add(x);
+				results.add(row);
 			}
 		}
 
@@ -105,8 +104,8 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 	}
 
 	@Override
-	public Comparator<Node> getMatchComparator() {
-		return new NodeComparator();
+	public Comparator<Map<String, Object>> getMatchComparator() {
+		return null;
 	}
 
 	@Override
@@ -222,7 +221,7 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 			if (all) {
 				for (final Relationship relationship : relationships) {
 					relationship.delete();
-				}				
+				}
 			} else {
 				// Finding the relationship with the smallest id. This only supports outgoing edges.
 				Relationship firstRelationship = null;
@@ -230,8 +229,8 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 					if (firstRelationship == null || relationship.getEndNode().getId() < firstRelationship.getEndNode().getId()) {
 						firstRelationship = relationship;
 					}
-				}				
-				
+				}
+
 				if (firstRelationship != null) {
 					firstRelationship.delete();
 				}
@@ -252,6 +251,66 @@ public class Neo4jDriver extends DatabaseDriver<Node> {
 
 	@Override
 	public void deleteVertex(final Long vertex) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void posLengthRepair(final Collection<Map<String, Object>> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void routeSensorRepair(final Collection<Map<String, Object>> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void semaphoreNeighborRepair(final Collection<Map<String, Object>> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSensorRepair(final Collection<Map<String, Object>> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSetRepair(final Collection<Map<String, Object>> matches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void posLengthUser(final Collection<Node> segments) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void routeSensorUser(final Collection<Node> routes) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void semaphoreNeighborUser(final Collection<Node> routes) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSensorUser(final Collection<Node> switches) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void switchSetUser(final Collection<Node> switches) throws IOException {
 		// TODO Auto-generated method stub
 
 	}

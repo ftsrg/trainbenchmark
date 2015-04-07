@@ -21,4 +21,20 @@ public class QueryConstants {
 	public static final String SWITCHSENSOR = "SwitchSensor";
 	public static final String SWITCHSET = "SwitchSet";
 
+	public static final String VAR_CURRENTPOSITION = "currentPosition";
+	public static final String VAR_LENGTH = "length";
+	public static final String VAR_POSITION = "position";
+	public static final String VAR_ROUTE = "route";
+	public static final String VAR_ROUTE1 = "route1";
+	public static final String VAR_ROUTE2 = "route2";
+	public static final String VAR_SEGMENT = "segment";
+	public static final String VAR_SEMAPHORE = "semaphore";
+	public static final String VAR_SENSOR = "sensor";
+	public static final String VAR_SENSOR1 = "sensor1";
+	public static final String VAR_SENSOR2 = "sensor2";
+	public static final String VAR_SW = "sw";
+	public static final String VAR_SWP = "swP";
+	public static final String VAR_TE1 = "te1";
+	public static final String VAR_TE2 = "te2";
+
 }

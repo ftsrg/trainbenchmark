@@ -1,4 +1,4 @@
-SELECT SwitchPosition.id AS id
+SELECT Semaphore.id AS semaphore, Route.id AS route, SwitchPosition.id AS swP, Switch.id AS sw
 FROM SwitchPosition, Route, Semaphore, Switch 
 WHERE Route.entry = Semaphore.id 
   AND Route.id = SwitchPosition.follows
