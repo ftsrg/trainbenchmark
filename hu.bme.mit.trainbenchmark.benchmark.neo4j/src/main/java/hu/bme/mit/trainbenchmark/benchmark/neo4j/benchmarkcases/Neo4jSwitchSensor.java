@@ -12,8 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;
+
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
@@ -25,7 +31,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 public class Neo4jSwitchSensor extends Neo4jJavaBenchmarkCase {
 
 	@Override
-	public Collection<Node> checkJava() {
+	public Collection<Neo4jMatch> checkJava() {
 		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
@@ -44,12 +50,13 @@ public class Neo4jSwitchSensor extends Neo4jJavaBenchmarkCase {
 				}
 
 				if (!hasSensor) {
-					matches.add(sw);
+					final Map<String, Object> match = new HashMap<>();
+					match.put(VAR_SW, sw);
+					matches.add(new Neo4jSwitchSensorMatch(match));
 				}
 			}
 		}
 
 		return matches;
 	}
-
 }

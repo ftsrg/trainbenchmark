@@ -12,9 +12,21 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
+
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
@@ -26,7 +38,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 public class Neo4jSemaphoreNeighbor extends Neo4jJavaBenchmarkCase {
 
 	@Override
-	public Collection<Node> checkJava() {
+	public Collection<Neo4jMatch> checkJava() {
 		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
@@ -93,15 +105,16 @@ public class Neo4jSemaphoreNeighbor extends Neo4jJavaBenchmarkCase {
 										final Iterable<Relationship> entries2 = route2.getRelationships(Direction.OUTGOING,
 												relationshipTypeEntry);
 										final Iterator<Relationship> entriesIterator2 = entries2.iterator();
-										if (!entriesIterator2.hasNext()) {
-											System.out.println("no entry");
-											matches.add(route1);
-											break;
-										}
-									
-										final Node entrySemaphore = entriesIterator2.next().getEndNode();
-										if (!entrySemaphore.equals(semaphore)) {
-											matches.add(route1);
+										if (!entriesIterator2.hasNext() || !entriesIterator2.next().getEndNode().equals(semaphore)) {
+											final Map<String, Object> match = new HashMap<>();
+											match.put(VAR_SEMAPHORE, semaphore);
+											match.put(VAR_ROUTE1, route1);
+											match.put(VAR_ROUTE2, route2);
+											match.put(VAR_SENSOR1, sensor1);
+											match.put(VAR_SENSOR2, sensor2);
+											match.put(VAR_TE1, te1);
+											match.put(VAR_TE2, te2);
+											matches.add(new Neo4jSemaphoreNeighborMatch(match));
 											break;
 										}
 									}
@@ -116,5 +129,4 @@ public class Neo4jSemaphoreNeighbor extends Neo4jJavaBenchmarkCase {
 
 		return matches;
 	}
-
 }

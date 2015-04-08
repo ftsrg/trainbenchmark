@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.NotImplementedException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
@@ -58,7 +57,7 @@ public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatc
 	@Override
 	public Collection<Neo4jMatch> check() throws IOException {
 		if (nbc.isJavaApi()) {
-			// matches = checkJava();
+			matches = checkJava();
 		} else {
 			matches = neoDriver.runQuery(getName());
 		}
@@ -66,9 +65,7 @@ public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatc
 		return matches;
 	}
 
-	protected Collection<Node> checkJava() {
-		throw new NotImplementedException("");
-	}
+	protected abstract Collection<Neo4jMatch> checkJava();
 
 	@Override
 	protected void destroy() throws IOException {

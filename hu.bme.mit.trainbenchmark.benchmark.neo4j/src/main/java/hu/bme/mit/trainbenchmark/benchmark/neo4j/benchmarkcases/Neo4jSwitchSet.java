@@ -13,11 +13,16 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
@@ -29,7 +34,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
 
 	@Override
-	public Collection<Node> checkJava() {
+	public Collection<Neo4jMatch> checkJava() {
 		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
@@ -52,14 +57,13 @@ public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
 					// (route:Route)-[:follows]->(sP:SwitchPosition)
 					final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING, relationshipTypeFollows);
 					for (final Relationship follows : followss) {
-						final Node sP = follows.getEndNode();
-						if (!sP.hasLabel(labelSwitchPosition)) {
+						final Node swP = follows.getEndNode();
+						if (!swP.hasLabel(labelSwitchPosition)) {
 							continue;
 						}
 
-						// (sP:SwitchPosition)-[:switch]->(sw:Switch)
-						final Iterable<Relationship> relationshipSwitches = sP.getRelationships(Direction.OUTGOING,
-								relationshipTypeSwitch);
+						// (swP:SwitchPosition)-[:switch]->(sw:Switch)
+						final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING, relationshipTypeSwitch);
 
 						if (!relationshipSwitches.iterator().hasNext()) {
 							continue;
@@ -71,10 +75,15 @@ public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
 						}
 
 						final Object currentPosition = sw.getProperty(ModelConstants.CURRENTPOSITION);
-						final Object position = sP.getProperty(ModelConstants.POSITION);
+						final Object position = swP.getProperty(ModelConstants.POSITION);
 
 						if (!currentPosition.equals(position)) {
-							matches.add(sP);
+							final Map<String, Object> match = new HashMap<>();
+							match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
+							match.put(QueryConstants.VAR_ROUTE, route);
+							match.put(QueryConstants.VAR_SWP, swP);
+							match.put(QueryConstants.VAR_SWP, sw);
+							matches.add(new Neo4jSwitchSetMatch(match));
 						}
 					}
 				}
@@ -83,5 +92,4 @@ public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
 
 		return matches;
 	}
-
 }
