@@ -12,27 +12,25 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
-import hu.bme.mit.trainbenchmark.sql.SQLDriver;
+import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLBenchmarkCase;
+import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLMatch;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 
-public class MySQLBenchmarkCase extends AbstractBenchmarkCase<SQLMatch, Long> {
+public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
-	SQLDriver sqlDriver;
+	protected SQLDriver sqlDriver;
 
 	@Override
 	public void init() throws IOException {
 		MySQLProcess.startSQLProcess();
-
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.sql/src/main/resources/queries/" + getName() + ".sql";
-		driver = sqlDriver = new MySQLDriver(queryPath);
+		driver = sqlDriver = new MySQLDriver(queryPath());
 	}
 
 	@Override

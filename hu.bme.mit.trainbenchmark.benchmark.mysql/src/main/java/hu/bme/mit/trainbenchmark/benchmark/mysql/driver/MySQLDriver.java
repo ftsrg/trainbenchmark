@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
-import hu.bme.mit.trainbenchmark.sql.SQLDriver;
+import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 
 import java.io.IOException;
 import java.sql.DriverManager;
