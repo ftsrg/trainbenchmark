@@ -11,6 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
@@ -18,6 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 import java.io.BufferedReader;
@@ -37,8 +45,12 @@ import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
+import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
@@ -49,13 +61,19 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jDriver extends DatabaseDriver<Neo4jMatch, Node> {
 
+	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(DEFINED_BY);
+	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
+	protected final RelationshipType sensorEdge = DynamicRelationshipType.withName(SENSOR_EDGE);
+
+	protected final Label sensorLabel = DynamicLabel.label(SENSOR);
+
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
 	protected String dbPath;
 	protected String query;
 
 	public Neo4jDriver(final String dbPath, final String query) throws IOException {
-		// start with a clean slate: delete old directory
+		// delete old directory
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
 		}
@@ -262,64 +280,105 @@ public class Neo4jDriver extends DatabaseDriver<Neo4jMatch, Node> {
 		return graphDb;
 	}
 
+	// repair
+
 	@Override
 	public void posLengthRepair(final Collection<Neo4jMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Neo4jMatch match : matches) {
+			final Neo4jPosLengthMatch plm = (Neo4jPosLengthMatch) match;
+			final Node segment = plm.getSegment();
+			final Integer length = (Integer) segment.getProperty(ModelConstants.LENGTH);
+			segment.setProperty(LENGTH, -length + 1);
+		}
 	}
 
 	@Override
 	public void routeSensorRepair(final Collection<Neo4jMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Neo4jMatch match : matches) {
+			final Neo4jRouteSensorMatch rsm = (Neo4jRouteSensorMatch) match;
+			final Node route = rsm.getRoute();
+			final Node sensor = rsm.getSensor();
+			route.createRelationshipTo(sensor, definedByEdge);
+		}
 	}
 
 	@Override
 	public void semaphoreNeighborRepair(final Collection<Neo4jMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Neo4jMatch match : matches) {
+			final Neo4jSemaphoreNeighborMatch snm = (Neo4jSemaphoreNeighborMatch) match;
+			final Node semaphore = snm.getSemaphore();
+			final Node route2 = snm.getRoute2();
+			route2.createRelationshipTo(semaphore, entryEdge);
+		}
 	}
 
 	@Override
 	public void switchSensorRepair(final Collection<Neo4jMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Neo4jMatch match : matches) {
+			final Neo4jSwitchSensorMatch ssrm = (Neo4jSwitchSensorMatch) match;
+			final Node sw = ssrm.getSw();
+			final Node sensor = graphDb.createNode();
+			sensor.addLabel(sensorLabel);
+			sw.createRelationshipTo(sensor, sensorEdge);
+		}
 	}
 
 	@Override
 	public void switchSetRepair(final Collection<Neo4jMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Neo4jMatch match : matches) {
+			final Neo4jSwitchSetMatch sstm = (Neo4jSwitchSetMatch) match;
+			final Node sw = sstm.getSw();
+			final Node swP = sstm.getSwP();
+			final Object position = swP.getProperty(POSITION);
+			sw.setProperty(CURRENTPOSITION, position);
+		}
 	}
+
+	// user
 
 	@Override
 	public void posLengthUser(final Collection<Node> segments) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Node segment : segments) {
+			segment.setProperty(LENGTH, 0);
+		}
 	}
 
 	@Override
 	public void routeSensorUser(final Collection<Node> routes) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Node route : routes) {
+			final Iterable<Relationship> definedBys = route.getRelationships(definedByEdge);
+			for (final Relationship definedBy : definedBys) {
+				definedBy.delete();
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void semaphoreNeighborUser(final Collection<Node> routes) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Node route : routes) {
+			final Iterable<Relationship> entries = route.getRelationships(entryEdge);
+			for (final Relationship entry : entries) {
+				entry.delete();
+			}
+		}
 	}
 
 	@Override
 	public void switchSensorUser(final Collection<Node> switches) throws IOException {
-		// TODO Auto-generated method stub
-
+		for (final Node sw : switches) {
+			final Iterable<Relationship> sensors = sw.getRelationships(sensorEdge);
+			for (final Relationship sensor : sensors) {
+				sensor.delete();
+			}
+		}
 	}
 
 	@Override
 	public void switchSetUser(final Collection<Node> switches) throws IOException {
-		// TODO Auto-generated method stub
+		for (final Node sw : switches) {
 
+		}
 	}
 
 }
