@@ -61,7 +61,7 @@ public class JavaDriver<M extends JavaMatch> extends EMFDriver<M> {
 	public void switchSetRepair(final Collection<M> matches) throws IOException {
 		for (final M match : matches) {
 			final JavaSwitchSetMatch sstm = (JavaSwitchSetMatch) match;
-			sstm.getSw().setCurrentPosition(sstm.getSwitchPosition().getPosition());
+			sstm.getSw().setCurrentPosition(sstm.getSwP().getPosition());
 		}
 	}
 

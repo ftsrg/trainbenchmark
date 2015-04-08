@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +27,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
-public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
+public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> {
 
 	protected Neo4jBenchmarkConfig nbc;
 
@@ -50,16 +51,16 @@ public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 	public void read() throws FileNotFoundException, IOException {
 		driver = neoDriver = new Neo4jDriver(dbPath, query);
 		neoDriver.read(bc.getModelPathNameWithoutExtension() + ".graphml");
-		
+
 		graphDb = neoDriver.getGraphDb();
 	}
 
 	@Override
-	public Collection<Node> check() throws IOException {
+	public Collection<Neo4jMatch> check() throws IOException {
 		if (nbc.isJavaApi()) {
-			matches = checkJava();
+			// matches = checkJava();
 		} else {
-			matches = neoDriver.runQuery();
+			matches = neoDriver.runQuery(getName());
 		}
 
 		return matches;
@@ -73,5 +74,5 @@ public abstract class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Node> {
 	protected void destroy() throws IOException {
 		driver.destroy();
 	}
-	
+
 }

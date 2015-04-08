@@ -79,12 +79,12 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("route","sensor","switchPosition","sw");
+      return Arrays.asList("route","sensor","swP","sw");
     }
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route"),new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("switchPosition", "hu.bme.mit.trainbenchmark.railway.SwitchPosition"),new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch"));
+      return Arrays.asList(new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route"),new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition"),new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch"));
     }
     
     @Override
@@ -95,19 +95,19 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
       	PBody body = new PBody(this);
       	PVariable var_route = body.getOrCreateVariableByName("route");
       	PVariable var_sensor = body.getOrCreateVariableByName("sensor");
-      	PVariable var_switchPosition = body.getOrCreateVariableByName("switchPosition");
+      	PVariable var_swP = body.getOrCreateVariableByName("swP");
       	PVariable var_sw = body.getOrCreateVariableByName("sw");
       	body.setExportedParameters(Arrays.<ExportedParameter>asList(
       		new ExportedParameter(body, var_route, "route"),
       				
       		new ExportedParameter(body, var_sensor, "sensor"),
       				
-      		new ExportedParameter(body, var_switchPosition, "switchPosition"),
+      		new ExportedParameter(body, var_swP, "swP"),
       				
       		new ExportedParameter(body, var_sw, "sw")
       	));
-      	new TypeBinary(body, CONTEXT, var_route, var_switchPosition, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Route.follows");
-      	new TypeBinary(body, CONTEXT, var_switchPosition, var_sw, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "switch"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/SwitchPosition.switch");
+      	new TypeBinary(body, CONTEXT, var_route, var_swP, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Route.follows");
+      	new TypeBinary(body, CONTEXT, var_swP, var_sw, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "switch"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/SwitchPosition.switch");
       	new TypeBinary(body, CONTEXT, var_sw, var_sensor, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
       	new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseRouteDefinitionQuerySpecification.instance().getInternalQueryRepresentation());
       	bodies.add(body);

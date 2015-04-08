@@ -11,16 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.java.matches;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
-public class JavaSwitchSensorMatch extends JavaMatch {
+public class JavaSwitchSensorMatch extends JavaMatch implements SwitchSensorMatch {
 
 	public JavaSwitchSensorMatch(final Switch sw) {
 		super();
 		match = new RailwayElement[] { sw };
 	}
 
+	@Override
 	public Switch getSw() {
 		return (Switch) match[0];
 	}

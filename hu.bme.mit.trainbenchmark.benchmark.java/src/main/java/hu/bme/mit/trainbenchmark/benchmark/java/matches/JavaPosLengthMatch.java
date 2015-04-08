@@ -11,10 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.java.matches;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
-public class JavaPosLengthMatch extends JavaMatch {
+public class JavaPosLengthMatch extends JavaMatch implements PosLengthMatch {
 
 	public JavaPosLengthMatch(final Segment segment) {
 		super();
