@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.UserTransformation;
 
 import java.io.IOException;
 

@@ -1,6 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.UserTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;

@@ -12,21 +12,24 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.matches;
 
+import hu.bme.mit.trainbenchmark.emf.RailwayElementComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.util.Comparator;
 
-public class JavaMatchComparator implements Comparator<Object> {
-	
+public class JavaMatchComparator implements Comparator<JavaMatch> {
+
+	protected RailwayElementComparator rec = new RailwayElementComparator();
+
 	@Override
-	public int compare(final Object o1, final Object o2) {	
-		final RailwayElement[] m1 = ((JavaMatch) o1).match;
-		final RailwayElement[] m2 = ((JavaMatch) o2).match;
-		for (int i = 0; i < m1.length; i++) {		
+	public int compare(final JavaMatch o1, final JavaMatch o2) {
+		final RailwayElement[] m1 = o1.match;
+		final RailwayElement[] m2 = o2.match;
+		for (int i = 0; i < m1.length; i++) {
 			final RailwayElement t1 = m1[i];
 			final RailwayElement t2 = m2[i];
 
-			final int comparison = t1.getId() - t2.getId();
+			final int comparison = rec.compare(t1, t2);
 			if (comparison != 0) {
 				return comparison;
 			}

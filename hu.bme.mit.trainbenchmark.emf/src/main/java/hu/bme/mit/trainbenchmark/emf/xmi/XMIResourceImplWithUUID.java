@@ -10,26 +10,27 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.emf;
+package hu.bme.mit.trainbenchmark.emf.xmi;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
-public class XMIResourceFactoryImplWithUUID extends XMIResourceFactoryImpl {
+public class XMIResourceImplWithUUID extends XMIResourceImpl {
 
-	public XMIResourceFactoryImplWithUUID() {
+	public XMIResourceImplWithUUID() {
 		super();
+	}
+
+	public XMIResourceImplWithUUID(URI uri) {
+		super(uri);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl#createResource(
-	 * org.eclipse.emf.common.util.URI)
+	 * @see org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl#useUUIDs()
 	 */
-	public Resource createResource(URI uri) {
-		return new XMIResourceImplWithUUID(uri);
+	protected boolean useUUIDs() {
+		return true;
 	}
 }

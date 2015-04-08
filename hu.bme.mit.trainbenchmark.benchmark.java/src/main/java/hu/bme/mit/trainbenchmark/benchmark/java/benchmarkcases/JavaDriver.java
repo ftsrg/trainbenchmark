@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSemaphoreNeighborMatch;
@@ -13,8 +14,11 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Comparator;
 
 public class JavaDriver<M extends JavaMatch> extends EMFDriver<M> {
+
+	protected Comparator<M> matchComparator = (Comparator<M>) new JavaMatchComparator();
 
 	public JavaDriver(final String modelPath) {
 		super(modelPath);
@@ -63,6 +67,11 @@ public class JavaDriver<M extends JavaMatch> extends EMFDriver<M> {
 			final JavaSwitchSetMatch sstm = (JavaSwitchSetMatch) match;
 			sstm.getSw().setCurrentPosition(sstm.getSwP().getPosition());
 		}
+	}
+
+	@Override
+	public Comparator<M> getMatchComparator() {
+		return matchComparator;
 	}
 
 }
