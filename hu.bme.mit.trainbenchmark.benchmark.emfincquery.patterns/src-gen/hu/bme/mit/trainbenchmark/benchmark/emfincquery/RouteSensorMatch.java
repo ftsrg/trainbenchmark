@@ -30,16 +30,16 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
   
   private Sensor fSensor;
   
-  private SwitchPosition fSwitchPosition;
+  private SwitchPosition fSwP;
   
   private Switch fSw;
   
-  private static List<String> parameterNames = makeImmutableList("route", "sensor", "switchPosition", "sw");
+  private static List<String> parameterNames = makeImmutableList("route", "sensor", "swP", "sw");
   
-  private RouteSensorMatch(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwitchPosition, final Switch pSw) {
+  private RouteSensorMatch(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwP, final Switch pSw) {
     this.fRoute = pRoute;
     this.fSensor = pSensor;
-    this.fSwitchPosition = pSwitchPosition;
+    this.fSwP = pSwP;
     this.fSw = pSw;
   }
   
@@ -47,7 +47,7 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
   public Object get(final String parameterName) {
     if ("route".equals(parameterName)) return this.fRoute;
     if ("sensor".equals(parameterName)) return this.fSensor;
-    if ("switchPosition".equals(parameterName)) return this.fSwitchPosition;
+    if ("swP".equals(parameterName)) return this.fSwP;
     if ("sw".equals(parameterName)) return this.fSw;
     return null;
   }
@@ -60,8 +60,8 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
     return this.fSensor;
   }
   
-  public SwitchPosition getSwitchPosition() {
-    return this.fSwitchPosition;
+  public SwitchPosition getSwP() {
+    return this.fSwP;
   }
   
   public Switch getSw() {
@@ -79,8 +79,8 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
     	this.fSensor = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
     	return true;
     }
-    if ("switchPosition".equals(parameterName) ) {
-    	this.fSwitchPosition = (hu.bme.mit.trainbenchmark.railway.SwitchPosition) newValue;
+    if ("swP".equals(parameterName) ) {
+    	this.fSwP = (hu.bme.mit.trainbenchmark.railway.SwitchPosition) newValue;
     	return true;
     }
     if ("sw".equals(parameterName) ) {
@@ -100,9 +100,9 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
     this.fSensor = pSensor;
   }
   
-  public void setSwitchPosition(final SwitchPosition pSwitchPosition) {
+  public void setSwP(final SwitchPosition pSwP) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    this.fSwitchPosition = pSwitchPosition;
+    this.fSwP = pSwP;
   }
   
   public void setSw(final Switch pSw) {
@@ -122,12 +122,12 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
   
   @Override
   public Object[] toArray() {
-    return new Object[]{fRoute, fSensor, fSwitchPosition, fSw};
+    return new Object[]{fRoute, fSensor, fSwP, fSw};
   }
   
   @Override
   public RouteSensorMatch toImmutable() {
-    return isMutable() ? newMatch(fRoute, fSensor, fSwitchPosition, fSw) : this;
+    return isMutable() ? newMatch(fRoute, fSensor, fSwP, fSw) : this;
   }
   
   @Override
@@ -137,7 +137,7 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
     
     result.append("\"sensor\"=" + prettyPrintValue(fSensor) + ", ");
     
-    result.append("\"switchPosition\"=" + prettyPrintValue(fSwitchPosition) + ", ");
+    result.append("\"swP\"=" + prettyPrintValue(fSwP) + ", ");
     
     result.append("\"sw\"=" + prettyPrintValue(fSw)
     );
@@ -150,7 +150,7 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
     int result = 1;
     result = prime * result + ((fRoute == null) ? 0 : fRoute.hashCode());
     result = prime * result + ((fSensor == null) ? 0 : fSensor.hashCode());
-    result = prime * result + ((fSwitchPosition == null) ? 0 : fSwitchPosition.hashCode());
+    result = prime * result + ((fSwP == null) ? 0 : fSwP.hashCode());
     result = prime * result + ((fSw == null) ? 0 : fSw.hashCode());
     return result;
   }
@@ -176,8 +176,8 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
     else if (!fRoute.equals(other.fRoute)) return false;
     if (fSensor == null) {if (other.fSensor != null) return false;}
     else if (!fSensor.equals(other.fSensor)) return false;
-    if (fSwitchPosition == null) {if (other.fSwitchPosition != null) return false;}
-    else if (!fSwitchPosition.equals(other.fSwitchPosition)) return false;
+    if (fSwP == null) {if (other.fSwP != null) return false;}
+    else if (!fSwP.equals(other.fSwP)) return false;
     if (fSw == null) {if (other.fSw != null) return false;}
     else if (!fSw.equals(other.fSw)) return false;
     return true;
@@ -210,13 +210,13 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
    * 
    * @param pRoute the fixed value of pattern parameter route, or null if not bound.
    * @param pSensor the fixed value of pattern parameter sensor, or null if not bound.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
    * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static RouteSensorMatch newMutableMatch(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwitchPosition, final Switch pSw) {
-    return new Mutable(pRoute, pSensor, pSwitchPosition, pSw);
+  public static RouteSensorMatch newMutableMatch(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwP, final Switch pSw) {
+    return new Mutable(pRoute, pSensor, pSwP, pSw);
   }
   
   /**
@@ -225,18 +225,18 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
    * @param pRoute the fixed value of pattern parameter route, or null if not bound.
    * @param pSensor the fixed value of pattern parameter sensor, or null if not bound.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
    * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return the (partial) match object.
    * 
    */
-  public static RouteSensorMatch newMatch(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwitchPosition, final Switch pSw) {
-    return new Immutable(pRoute, pSensor, pSwitchPosition, pSw);
+  public static RouteSensorMatch newMatch(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwP, final Switch pSw) {
+    return new Immutable(pRoute, pSensor, pSwP, pSw);
   }
   
   private static final class Mutable extends RouteSensorMatch {
-    Mutable(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwitchPosition, final Switch pSw) {
-      super(pRoute, pSensor, pSwitchPosition, pSw);
+    Mutable(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwP, final Switch pSw) {
+      super(pRoute, pSensor, pSwP, pSw);
     }
     
     @Override
@@ -246,8 +246,8 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
   }
   
   private static final class Immutable extends RouteSensorMatch {
-    Immutable(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwitchPosition, final Switch pSw) {
-      super(pRoute, pSensor, pSwitchPosition, pSw);
+    Immutable(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwP, final Switch pSw) {
+      super(pRoute, pSensor, pSwP, pSw);
     }
     
     @Override

@@ -11,8 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,14 +36,9 @@ import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
-import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
@@ -46,7 +47,7 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jDriver extends DatabaseDriver<Map<String, Object>, Node> {
+public class Neo4jDriver extends DatabaseDriver<Neo4jMatch, Node> {
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
@@ -89,22 +90,39 @@ public class Neo4jDriver extends DatabaseDriver<Map<String, Object>, Node> {
 		}
 	}
 
-	public List<Map<String, Object>> runQuery() throws IOException {
-		final List<Map<String, Object>> results = new ArrayList<>();
+	public List<Neo4jMatch> runQuery(final String pattern) throws IOException {
+		final List<Neo4jMatch> results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ExecutionEngine engine = new ExecutionEngine(graphDb);
 			final ExecutionResult result = engine.execute(query);
 			for (final Map<String, Object> row : result) {
-				results.add(row);
+				results.add(createMatch(pattern, row));
 			}
 		}
 
 		return results;
 	}
 
+	protected Neo4jMatch createMatch(final String pattern, final Map<String, Object> row) {
+		switch (pattern) {
+		case QueryConstants.POSLENGTH:
+			return new Neo4jPosLengthMatch(row);
+		case QueryConstants.ROUTESENSOR:
+			return new Neo4jRouteSensorMatch(row);
+		case QueryConstants.SEMAPHORENEIGHBOR:
+			return new Neo4jSemaphoreNeighborMatch(row);
+		case QueryConstants.SWITCHSENSOR:
+			return new Neo4jSwitchSensorMatch(row);
+		case QueryConstants.SWITCHSET:
+			return new Neo4jSwitchSetMatch(row);
+		default:
+			throw new UnsupportedOperationException("Pattern not supported: " + pattern);
+		}
+	}
+
 	@Override
-	public Comparator<Map<String, Object>> getMatchComparator() {
+	public Comparator<Neo4jMatch> getMatchComparator() {
 		return null;
 	}
 
@@ -115,36 +133,36 @@ public class Neo4jDriver extends DatabaseDriver<Map<String, Object>, Node> {
 
 	// create
 
-	@Override
-	public void insertEdge(final Node sourceVertex, final String sourceVertexType, final Node targetVertex, final String edgeType)
-			throws IOException {
-		final RelationshipType relationship = DynamicRelationshipType.withName(edgeType);
-		sourceVertex.createRelationshipTo(targetVertex, relationship);
-	}
-
-	@Override
-	public void insertVertexWithEdge(final List<Node> vertices, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		final Label label = DynamicLabel.label(targetVertexType);
-		for (final Node vertex : vertices) {
-			insertVertexWithEdge(vertex, edgeType, label);
-		}
-	}
-
-	@Override
-	public Node insertVertexWithEdge(final Node sourceVertex, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-		final Label label = DynamicLabel.label(targetVertexType);
-		return (insertVertexWithEdge(sourceVertex, edgeType, label));
-
-	}
-
-	protected Node insertVertexWithEdge(final Node sourceVertex, final String edgeType, final Label label) {
-		final Node targetNode = graphDb.createNode();
-		targetNode.addLabel(label);
-		sourceVertex.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType));
-		return (targetNode);
-	}
+	// @Override
+	// public void insertEdge(final Node sourceVertex, final String sourceVertexType, final Node targetVertex, final String edgeType)
+	// throws IOException {
+	// final RelationshipType relationship = DynamicRelationshipType.withName(edgeType);
+	// sourceVertex.createRelationshipTo(targetVertex, relationship);
+	// }
+	//
+	// @Override
+	// public void insertVertexWithEdge(final List<Node> vertices, final String sourceVertexType, final String targetVertexType,
+	// final String edgeType) throws IOException {
+	// final Label label = DynamicLabel.label(targetVertexType);
+	// for (final Node vertex : vertices) {
+	// insertVertexWithEdge(vertex, edgeType, label);
+	// }
+	// }
+	//
+	// @Override
+	// public Node insertVertexWithEdge(final Node sourceVertex, final String sourceVertexType, final String targetVertexType,
+	// final String edgeType) throws IOException {
+	// final Label label = DynamicLabel.label(targetVertexType);
+	// return (insertVertexWithEdge(sourceVertex, edgeType, label));
+	//
+	// }
+	//
+	// protected Node insertVertexWithEdge(final Node sourceVertex, final String edgeType, final Label label) {
+	// final Node targetNode = graphDb.createNode();
+	// targetNode.addLabel(label);
+	// sourceVertex.createRelationshipTo(targetNode, DynamicRelationshipType.withName(edgeType));
+	// return (targetNode);
+	// }
 
 	// read
 
@@ -158,90 +176,85 @@ public class Neo4jDriver extends DatabaseDriver<Map<String, Object>, Node> {
 		return list;
 	}
 
-	@Override
-	public List<Node> collectOutgoingConnectedVertices(final Node sourceVertex, final String sourceVertexType,
-			final String targetVertexType, final String edgeType) throws IOException {
-		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
-		final List<Node> neighbors = new ArrayList<Node>();
-		final Iterable<Relationship> relationships = sourceVertex.getRelationships(relationshipType, Direction.OUTGOING);
-		for (final Relationship relationship : relationships) {
-			final Node endNode = relationship.getEndNode();
-			final Iterable<Label> labels = endNode.getLabels();
-			for (final Label label : labels) {
-				if (targetVertexType.equals(label.toString())) {
-					neighbors.add(endNode);
-				}
-			}
-		}
-		return neighbors;
-
-	}
-
-	// update
-
-	@Override
-	public void updateProperties(final List<Node> vertices, final String vertexType, final String propertyName,
-			final PropertyOperation attributeOperation) {
-		for (final Node vertex : vertices) {
-			final Integer propertyValue = (Integer) vertex.getProperty(propertyName);
-			vertex.setProperty(propertyName, attributeOperation.op(propertyValue));
-		}
-	}
-
-	// delete
-
-	@Override
-	public void deleteIncomingEdge(final List<Node> vertices, final String sourceVertexType, final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, false, true);
-	}
-
-	@Override
-	public void deleteAllOutgoingEdges(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, true, true);
-	}
-
-	@Override
-	public void deleteOneOutgoingEdge(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, true, false);
-	}
-
-	@Override
-	public void deleteSingleOutgoingEdge(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
-		// for Neo4j, this is the same as deleteOneOutgoingEdge
-		deleteEdges(vertices, edgeType, true, true);
-	}
-
-	protected void deleteEdges(final List<Node> vertices, final String edgeType, final boolean outgoing, final boolean all) {
-		final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
-		final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
-
-		for (final Node vertex : vertices) {
-			final Iterable<Relationship> relationships = vertex.getRelationships(direction, relationshipType);
-
-			if (all) {
-				for (final Relationship relationship : relationships) {
-					relationship.delete();
-				}
-			} else {
-				// Finding the relationship with the smallest id. This only supports outgoing edges.
-				Relationship firstRelationship = null;
-				for (final Relationship relationship : relationships) {
-					if (firstRelationship == null || relationship.getEndNode().getId() < firstRelationship.getEndNode().getId()) {
-						firstRelationship = relationship;
-					}
-				}
-
-				if (firstRelationship != null) {
-					firstRelationship.delete();
-				}
-			}
-		}
-	}
-
-	@Override
-	public void deleteVertex(final Node vertex, final String vertexType) throws IOException {
-		vertex.delete();
-	}
+	// @Override
+	// public List<Node> collectOutgoingConnectedVertices(final Node sourceVertex, final String sourceVertexType,
+	// final String targetVertexType, final String edgeType) throws IOException {
+	// final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
+	// final List<Node> neighbors = new ArrayList<Node>();
+	// final Iterable<Relationship> relationships = sourceVertex.getRelationships(relationshipType, Direction.OUTGOING);
+	// for (final Relationship relationship : relationships) {
+	// final Node endNode = relationship.getEndNode();
+	// final Iterable<Label> labels = endNode.getLabels();
+	// for (final Label label : labels) {
+	// if (targetVertexType.equals(label.toString())) {
+	// neighbors.add(endNode);
+	// }
+	// }
+	// }
+	// return neighbors;
+	//
+	// }
+	//
+	// // update
+	//
+	// @Override
+	// public void updateProperties(final List<Node> vertices, final String vertexType, final String propertyName,
+	// final PropertyOperation attributeOperation) {
+	// for (final Node vertex : vertices) {
+	// final Integer propertyValue = (Integer) vertex.getProperty(propertyName);
+	// vertex.setProperty(propertyName, attributeOperation.op(propertyValue));
+	// }
+	// }
+	//
+	// // delete
+	//
+	// @Override
+	// public void deleteIncomingEdge(final List<Node> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+	// deleteEdges(vertices, edgeType, false, true);
+	// }
+	//
+	// @Override
+	// public void deleteAllOutgoingEdges(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
+	// deleteEdges(vertices, edgeType, true, true);
+	// }
+	//
+	// @Override
+	// public void deleteOneOutgoingEdge(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
+	// deleteEdges(vertices, edgeType, true, false);
+	// }
+	//
+	// @Override
+	// public void deleteSingleOutgoingEdge(final List<Node> vertices, final String vertexType, final String edgeType) throws IOException {
+	// // for Neo4j, this is the same as deleteOneOutgoingEdge
+	// deleteEdges(vertices, edgeType, true, true);
+	// }
+	//
+	// protected void deleteEdges(final List<Node> vertices, final String edgeType, final boolean outgoing, final boolean all) {
+	// final RelationshipType relationshipType = DynamicRelationshipType.withName(edgeType);
+	// final Direction direction = outgoing ? Direction.OUTGOING : Direction.INCOMING;
+	//
+	// for (final Node vertex : vertices) {
+	// final Iterable<Relationship> relationships = vertex.getRelationships(direction, relationshipType);
+	//
+	// if (all) {
+	// for (final Relationship relationship : relationships) {
+	// relationship.delete();
+	// }
+	// } else {
+	// // Finding the relationship with the smallest id. This only supports outgoing edges.
+	// Relationship firstRelationship = null;
+	// for (final Relationship relationship : relationships) {
+	// if (firstRelationship == null || relationship.getEndNode().getId() < firstRelationship.getEndNode().getId()) {
+	// firstRelationship = relationship;
+	// }
+	// }
+	//
+	// if (firstRelationship != null) {
+	// firstRelationship.delete();
+	// }
+	// }
+	// }
+	// }
 
 	// utility
 
@@ -250,37 +263,31 @@ public class Neo4jDriver extends DatabaseDriver<Map<String, Object>, Node> {
 	}
 
 	@Override
-	public void deleteVertex(final Long vertex) throws IOException {
+	public void posLengthRepair(final Collection<Neo4jMatch> matches) throws IOException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void posLengthRepair(final Collection<Map<String, Object>> matches) throws IOException {
+	public void routeSensorRepair(final Collection<Neo4jMatch> matches) throws IOException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void routeSensorRepair(final Collection<Map<String, Object>> matches) throws IOException {
+	public void semaphoreNeighborRepair(final Collection<Neo4jMatch> matches) throws IOException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void semaphoreNeighborRepair(final Collection<Map<String, Object>> matches) throws IOException {
+	public void switchSensorRepair(final Collection<Neo4jMatch> matches) throws IOException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void switchSensorRepair(final Collection<Map<String, Object>> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSetRepair(final Collection<Map<String, Object>> matches) throws IOException {
+	public void switchSetRepair(final Collection<Neo4jMatch> matches) throws IOException {
 		// TODO Auto-generated method stub
 
 	}

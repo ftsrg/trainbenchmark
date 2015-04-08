@@ -12,13 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.matches;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class JavaRouteSensorMatch extends JavaMatch {
+public class JavaRouteSensorMatch extends JavaMatch implements RouteSensorMatch {
 
 	public JavaRouteSensorMatch(final Route route, final Sensor sensor, final SwitchPosition switchPosition, final Switch sw) {
 		super();
@@ -33,7 +34,7 @@ public class JavaRouteSensorMatch extends JavaMatch {
 		return (Sensor) match[1];
 	}
 
-	public SwitchPosition getSwitchPosition() {
+	public SwitchPosition getSwP() {
 		return (SwitchPosition) match[2];
 	}
 

@@ -11,31 +11,36 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.java.matches;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class JavaSwitchSetMatch extends JavaMatch {
+public class JavaSwitchSetMatch extends JavaMatch implements SwitchSetMatch {
 
 	public JavaSwitchSetMatch(final Semaphore semaphore, final Route route, final SwitchPosition switchPosition, final Switch sw) {
 		super();
 		match = new RailwayElement[] { semaphore, route, switchPosition, sw };
 	}
 
+	@Override
 	public Semaphore getSemaphore() {
 		return (Semaphore) match[0];
 	}
 
+	@Override
 	public Route getRoute() {
 		return (Route) match[1];
 	}
 
-	public SwitchPosition getSwitchPosition() {
+	@Override
+	public SwitchPosition getSwP() {
 		return (SwitchPosition) match[2];
 	}
 
+	@Override
 	public Switch getSw() {
 		return (Switch) match[3];
 	}
