@@ -13,9 +13,14 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterable;
@@ -25,7 +30,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 public class Neo4jPosLength extends Neo4jJavaBenchmarkCase {
 
 	@Override
-	public Collection<Node> checkJava() {
+	public Collection<Neo4jMatch> checkJava() {
 		matches = new HashSet<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
@@ -35,12 +40,13 @@ public class Neo4jPosLength extends Neo4jJavaBenchmarkCase {
 				final Integer length = (Integer) segment.getProperty(LENGTH);
 				// Segment.length <= 0
 				if (length <= 0) {
-					matches.add(segment);
+					final Map<String, Object> match = new HashMap<>();
+					match.put(VAR_SEGMENT, segment);
+					matches.add(new Neo4jPosLengthMatch(match));
 				}
 			}
 		}
 
 		return matches;
 	}
-
 }
