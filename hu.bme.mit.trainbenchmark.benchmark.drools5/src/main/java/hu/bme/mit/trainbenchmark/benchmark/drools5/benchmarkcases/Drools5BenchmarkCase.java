@@ -13,12 +13,14 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collection;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
@@ -31,6 +33,7 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.FactHandle;
 import org.drools.runtime.rule.LiveQuery;
+import org.drools.runtime.rule.Row;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -38,17 +41,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
-public abstract class Drools5BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
+public class Drools5BenchmarkCase extends AbstractBenchmarkCase<Row, RailwayElement> {
+
+	protected EMFDriver<Row> emfDriver;
 
 	protected String fileName;
 	protected LiveQuery query;
 	protected StatefulKnowledgeSession ksession;
-	protected Drools5ResultListener<T> listener;
-	
+	protected Drools5ResultListener listener;
+
 	protected KnowledgeBase readKnowledgeBase() throws Exception {
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/" + getName()
-				+ ".drl";
+		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/"
+				+ getName() + ".drl";
 		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
 
 		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
@@ -66,10 +71,9 @@ public abstract class Drools5BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 	@Override
 	public void read() throws FileNotFoundException, IOException {
 		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		final EMFDriver emfDriver = new EMFDriver(modelPath);
-		driver = (DatabaseDriver<T>) emfDriver;
+		driver = emfDriver = new Drools5Driver(modelPath);
 		final Resource resource = emfDriver.getResource();
-		
+
 		// change Drools knowledge base based on EMF notifications
 		try {
 			query = null;
@@ -128,6 +132,16 @@ public abstract class Drools5BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 			throw new IOException(e);
 		}
 
+	}
+
+	@Override
+	protected Collection<Row> check() {
+		if (query == null) {
+			listener = new Drools5ResultListener();
+			query = ksession.openLiveQuery(getName(), new Object[] {}, listener);
+		}
+		matches = listener.getMatches();
+		return matches;
 	}
 
 	@Override
