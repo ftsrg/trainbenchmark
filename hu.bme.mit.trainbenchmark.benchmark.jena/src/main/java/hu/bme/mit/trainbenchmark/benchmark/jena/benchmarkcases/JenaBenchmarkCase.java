@@ -19,11 +19,12 @@ import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 import java.io.IOException;
 import java.util.Collection;
 
+import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<QuerySolution, Resource> {
 
-	protected String resultVar;
+	protected JenaDriver jenaDriver;
 
 	protected RDFBenchmarkConfig getRDFBenchmarkConfig() {
 		return (RDFBenchmarkConfig) bc;
@@ -34,7 +35,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
 		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
 				+ ".sparql";
 
-		driver = new JenaDriver(queryPath);
+		driver = jenaDriver = new JenaDriver(queryPath);
 	}
 
 	@Override
@@ -43,9 +44,8 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<Resource> {
 	}
 
 	@Override
-	public Collection<Resource> check() throws IOException {
-		matches = driver.runQuery();
+	public Collection<QuerySolution> check() throws IOException {
+		matches = jenaDriver.runQuery();
 		return matches;
 	}
-
 }
