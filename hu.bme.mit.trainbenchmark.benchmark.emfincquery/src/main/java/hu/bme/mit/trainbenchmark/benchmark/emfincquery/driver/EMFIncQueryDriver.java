@@ -69,7 +69,7 @@ public class EMFIncQueryDriver<M extends IPatternMatch> extends EMFDriver<M> {
 	public void switchSetRepair(final Collection<M> matches) throws IOException {
 		for (final M match : matches) {
 			final SwitchSetMatch ssm = (SwitchSetMatch) match;
-			ssm.getSw().setCurrentPosition(ssm.getSwitchPosition().getPosition());
+			ssm.getSw().setCurrentPosition(ssm.getSwP().getPosition());
 		}
 	}
 

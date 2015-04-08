@@ -16,6 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.USER;
 
 import java.io.IOException;
@@ -42,12 +43,12 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, USER, 3);
+		testTransformation(SWITCHSENSOR, USER, 2);
 	}
 
-	// @Test
-	// public void switchSetUser() throws ParseException, IOException {
-	// testTransformation(SWITCHSENSOR, USER, 5);
-	// }
+	@Test
+	public void switchSetUser() throws ParseException, IOException {
+		testTransformation(SWITCHSET, USER, 7);
+	}
 
 }
