@@ -13,13 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools6.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -35,19 +37,22 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.api.runtime.rule.LiveQuery;
+import org.kie.api.runtime.rule.Row;
 
-public abstract class Drools6BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
+public class Drools6BenchmarkCase<T> extends AbstractBenchmarkCase<Row, RailwayElement> {
+
+	protected EMFDriver<Row> emfDriver;
 
 	protected LiveQuery query;
 	protected KieSession ksession;
-	protected Drools6ResultListener<T> listener;
+	protected Drools6ResultListener listener;
 
 	protected void readKnowledgeBase() throws Exception {
 		final KieServices kieServices = KieServices.Factory.get();
 
 		final KieFileSystem kfs = kieServices.newKieFileSystem();
-		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/" + getName()
-				+ ".drl";
+		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/"
+				+ getName() + ".drl";
 		final File file = new File(queryFile);
 		if (!file.exists()) {
 			throw new IOException("Query file not found: " + queryFile);
@@ -68,8 +73,7 @@ public abstract class Drools6BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 	@Override
 	public void read() throws FileNotFoundException, IOException {
 		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		final EMFDriver emfDriver = new EMFDriver(modelPath);
-		driver = (DatabaseDriver<T>) emfDriver;
+		driver = emfDriver = new Drools6Driver(modelPath);
 		final Resource resource = emfDriver.getResource();
 
 		// change Drools knowledge base based on EMF notifications
@@ -129,7 +133,20 @@ public abstract class Drools6BenchmarkCase<T> extends AbstractBenchmarkCase<T> {
 			throw new IOException(e);
 		}
 	}
-	
+
+	@Override
+	protected Collection<Row> check() {
+		if (query == null) {
+			listener = new Drools6ResultListener();
+			query = ksession.openLiveQuery(getName(), new Object[] {}, listener);
+		} else {
+			// activate lazy PHREAK evaluation
+			ksession.fireAllRules();
+		}
+		matches = listener.getMatches();
+		return matches;
+	}
+
 	@Override
 	public void destroy() {
 		query.close();

@@ -18,59 +18,27 @@ import java.util.Set;
 import org.drools.runtime.rule.Row;
 import org.drools.runtime.rule.ViewChangedEventListener;
 
-public class Drools5ResultListener<T> implements ViewChangedEventListener {
-	String resultVariable;
+public class Drools5ResultListener implements ViewChangedEventListener {
 
-	private Set<T> matching;
-	int added, removed, updated;
+	protected final Set<Row> matches = new HashSet<>();
 
-	public Drools5ResultListener(String resultVariable) {
-		super();
-		matching = new HashSet<T>();
-		this.resultVariable = resultVariable;
-		added = removed = updated = 0;
+	@Override
+	public void rowAdded(final Row row) {
+		matches.add(row);
 	}
 
 	@Override
-	public void rowAdded(Row row) {
-		@SuppressWarnings("unchecked")
-		T result = (T) row.get(resultVariable);
-		matching.add(result);
-		added++;
+	public void rowRemoved(final Row row) {
+		matches.remove(row);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void rowRemoved(Row row) {
-		matching.remove((T) row.get(resultVariable));
-		removed++;
+	public void rowUpdated(final Row row) {
+		matches.add(row);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void rowUpdated(Row row) {
-		matching.add((T) row.get(resultVariable));
-		updated++;
-	}
-
-	public Set<T> getMatching() {
-		return matching;
-	}
-
-	public int getAdded() {
-		return added;
-	}
-
-	public int getRemoved() {
-		return removed;
-	}
-
-	public int getUpdated() {
-		return updated;
-	}
-
-	public int getNumberOfChanges() {
-		return added + removed + updated;
+	public Set<Row> getMatches() {
+		return matches;
 	}
 
 }
