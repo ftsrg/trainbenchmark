@@ -14,10 +14,15 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 
-import org.eclipse.incquery.runtime.api.IPatternMatch;
+import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
-public class EMFIncQueryDriver<M extends IPatternMatch> extends EMFDriver<M> {
+import EMFIncQueryBenchmarkComparator.EMFIncQueryMatchComparator;
+
+public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFDriver<M> {
+
+	protected Comparator<M> matchComparator = (Comparator<M>) new EMFIncQueryMatchComparator();
 
 	public EMFIncQueryDriver(final String modelPath) {
 		super(modelPath);
@@ -71,6 +76,11 @@ public class EMFIncQueryDriver<M extends IPatternMatch> extends EMFDriver<M> {
 			final SwitchSetMatch ssm = (SwitchSetMatch) match;
 			ssm.getSw().setCurrentPosition(ssm.getSwP().getPosition());
 		}
+	}
+
+	@Override
+	public Comparator<M> getMatchComparator() {
+		return matchComparator;
 	}
 
 }

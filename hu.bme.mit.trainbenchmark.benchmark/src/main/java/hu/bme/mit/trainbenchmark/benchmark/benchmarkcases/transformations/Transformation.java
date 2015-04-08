@@ -63,8 +63,7 @@ public abstract class Transformation<M, T, O> {
 		bmr.addLhsTime();
 
 		// we do not measure this in the benchmark results
-		final List<O> candidatesList = new ArrayList<>(candidatesToModify);
-		// Collections.sort(candidatesList, driver.getMatchComparator());
+		final List<O> candidatesList = copyAndSort();
 		objectsToModify = pickRandom(nMatchesToModify, candidatesList);
 
 		bmr.restartClock();
@@ -72,6 +71,8 @@ public abstract class Transformation<M, T, O> {
 		driver.finishTransaction();
 		bmr.addRhsTime();
 	}
+
+	protected abstract List<O> copyAndSort();
 
 	private List<O> pickRandom(long nMatchesToModify, final List<O> matches) {
 		final int size = matches.size();

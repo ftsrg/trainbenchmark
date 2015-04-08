@@ -40,6 +40,7 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 
 	protected RailwayContainer container;
 	protected Resource resource;
+	protected Comparator<RailwayElement> elementComparator;
 
 	public EMFDriver(final String modelPath) {
 		RailwayPackage.eINSTANCE.eClass();
@@ -51,6 +52,8 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
 			container = (RailwayContainer) resource.getContents().get(0);
 		}
+
+		elementComparator = new RailwayElementComparator();
 	}
 
 	@Override
@@ -59,8 +62,8 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 	}
 
 	@Override
-	public Comparator<M> getMatchComparator() {
-		return null;
+	public Comparator<RailwayElement> getElementComparator() {
+		return elementComparator;
 	}
 
 	// read
@@ -123,6 +126,7 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 		for (final RailwayElement railwayElement : routes) {
 			final Route route = (Route) railwayElement;
 			route.setEntry(null);
+			container.getInvalids().add(route);
 		}
 	}
 
@@ -131,6 +135,7 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 		for (final RailwayElement railwayElement : switches) {
 			final Switch sw = (Switch) railwayElement;
 			sw.setSensor(null);
+			container.getInvalids().add(sw);
 		}
 	}
 

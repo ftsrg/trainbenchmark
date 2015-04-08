@@ -43,7 +43,7 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, USER, 2);
+		testTransformation(SWITCHSENSOR, USER, 3);
 	}
 
 	@Test

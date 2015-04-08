@@ -62,11 +62,13 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		modify();
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void modify() throws IOException {
 		final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations."
 				+ bc.getScenario().toString().toLowerCase() + "." + bc.getScenarioName() + bc.getQuery();
 		try {
 			final Class<?> clazz = this.getClass().getClassLoader().loadClass(className);
+			@SuppressWarnings("rawtypes")
 			final Transformation td = (Transformation) clazz.newInstance();
 			td.initialize(getBenchmarkResult(), driver, matches, random);
 			td.performTransformation();

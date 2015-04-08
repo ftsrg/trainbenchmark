@@ -74,8 +74,14 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 	protected ValueFactory f;
 	protected TupleQuery tupleQuery;
 
+	protected Comparator<BindingSet> matchComparator;
+	protected Comparator<URI> elementComparator;
+
 	public SesameDriver(final String queryPath) throws IOException {
 		this.query = FileUtils.readFileToString(new File(queryPath));
+
+		this.matchComparator = new BindingSetComparator();
+		this.elementComparator = new URIComparator();
 	}
 
 	@Override
@@ -130,8 +136,12 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 
 	@Override
 	public Comparator<BindingSet> getMatchComparator() {
-		// return new URIComparator();
-		return null;
+		return matchComparator;
+	}
+
+	@Override
+	public Comparator<URI> getElementComparator() {
+		return elementComparator;
 	}
 
 	@Override

@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.RepairTransformation;
-
 import java.io.IOException;
 
 public class RepairSemaphoreNeighbor<M, T> extends RepairTransformation<M, T> {

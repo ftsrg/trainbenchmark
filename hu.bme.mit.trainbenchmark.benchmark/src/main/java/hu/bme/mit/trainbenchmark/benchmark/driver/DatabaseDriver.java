@@ -30,6 +30,8 @@ public abstract class DatabaseDriver<M, T> {
 
 	public abstract Comparator<M> getMatchComparator();
 
+	public abstract Comparator<T> getElementComparator();
+
 	public void destroy() throws IOException {
 	}
 
@@ -37,55 +39,8 @@ public abstract class DatabaseDriver<M, T> {
 
 	public abstract List<T> collectVertices(final String type) throws IOException;
 
-	// create
-
-	// public abstract void insertVertexWithEdge(final List<T> sourceVertices, final String sourceVertexType, final String targetVertexType,
-	// final String edgeType) throws IOException;
-	//
-	// public abstract T insertVertexWithEdge(T sourceVertex, final String sourceVertexType, final String targetVertexType,
-	// final String edgeType) throws IOException;
-	//
-	// public abstract void insertEdge(final T sourceVertex, final String sourceVertexType, final T targetVertex, final String edgeType)
-	// throws IOException;
-
-	// read
-
-	// public abstract List<T> collectOutgoingConnectedVertices(final T sourceVertex, final String sourceVertexType,
-	// final String targetVertexType, final String edgeType) throws IOException;
-
-	// public abstract Map<T, Object> getProperties(final Collection<T> vertices, final String vertexType, final String propertyName) throws
-	// IOException;
-	//
-	// public abstract Map<T, Object> getReferences(final Collection<T> vertices, final String vertexType, final String edgeType) throws
-	// IOException;
-
-	// update
-
-	// public abstract void updateProperties(final List<T> vertices, final String vertexType, final String propertyName,
-	// final PropertyOperation propertyOperation) throws IOException;
-
-	// public abstract void setProperties(final Map<Object, Object> properties, final String vertexType, final String propertyName) throws
-	// IOException;
-
-	// delete
-
-	// public abstract void deleteIncomingEdge(final Collection<T> vertices, final String sourceVertexType, final String edgeType)
-	// throws IOException;
-	//
-	// public abstract void deleteAllOutgoingEdges(final Collection<T> vertices, final String vertexType, final String edgeType)
-	// throws IOException;
-	//
-	// public abstract void deleteOneOutgoingEdge(final Collection<T> vertices, final String vertexType, final String edgeType)
-	// throws IOException;
-	//
-	// public abstract void deleteSingleOutgoingEdge(final Collection<T> vertices, final String vertexType, final String edgeType)
-	// throws IOException;
-	//
-	// public abstract void deleteVertex(final T vertex, final String vertexType) throws IOException;
-	//
-	// public abstract void deleteVertex(final Long vertex) throws IOException;
-
 	// repair
+
 	public abstract void posLengthRepair(final Collection<M> matches) throws IOException;
 
 	public abstract void routeSensorRepair(final Collection<M> matches) throws IOException;
@@ -97,6 +52,7 @@ public abstract class DatabaseDriver<M, T> {
 	public abstract void switchSetRepair(final Collection<M> matches) throws IOException;
 
 	// user
+
 	public abstract void posLengthUser(final Collection<T> segments) throws IOException;
 
 	public abstract void routeSensorUser(final Collection<T> routes) throws IOException;
