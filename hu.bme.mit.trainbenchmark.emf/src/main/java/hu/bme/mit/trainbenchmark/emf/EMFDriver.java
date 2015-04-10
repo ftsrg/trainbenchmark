@@ -12,22 +12,15 @@
 package hu.bme.mit.trainbenchmark.emf;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
-import hu.bme.mit.trainbenchmark.railway.Position;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Segment;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -95,58 +88,5 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 
 	public Resource getResource() {
 		return resource;
-	}
-
-	// user
-
-	@Override
-	public void posLengthUser(final Collection<RailwayElement> segments) throws IOException {
-		for (final RailwayElement railwayElement : segments) {
-			final Segment segment = (Segment) railwayElement;
-			segment.setLength(0);
-		}
-
-	}
-
-	@Override
-	public void routeSensorUser(final Collection<RailwayElement> routes) throws IOException {
-		for (final RailwayElement railwayElement : routes) {
-			final Route route = (Route) railwayElement;
-			final EList<Sensor> definedBys = route.getDefinedBy();
-
-			// delete the first edge
-			if (definedBys.size() > 0) {
-				definedBys.remove(0);
-			}
-		}
-	}
-
-	@Override
-	public void semaphoreNeighborUser(final Collection<RailwayElement> routes) throws IOException {
-		for (final RailwayElement railwayElement : routes) {
-			final Route route = (Route) railwayElement;
-			route.setEntry(null);
-			container.getInvalids().add(route);
-		}
-	}
-
-	@Override
-	public void switchSensorUser(final Collection<RailwayElement> switches) throws IOException {
-		for (final RailwayElement railwayElement : switches) {
-			final Switch sw = (Switch) railwayElement;
-			sw.setSensor(null);
-			container.getInvalids().add(sw);
-		}
-	}
-
-	@Override
-	public void switchSetUser(final Collection<RailwayElement> switches) throws IOException {
-		for (final RailwayElement railwayElement : switches) {
-			final Switch sw = (Switch) railwayElement;
-			final Position currentPosition = sw.getCurrentPosition();
-			final Position newCurrentPosition = Position.get((currentPosition.ordinal() + 1) % Position.VALUES.size());
-			sw.setCurrentPosition(newCurrentPosition);
-		}
-
 	}
 }

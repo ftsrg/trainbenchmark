@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
@@ -27,9 +28,12 @@ public abstract class Transformation<M, T, O> {
 	// T: elements in the match set
 	// O: transformation object
 
+	protected BenchmarkConfig bc;
+	protected BenchmarkResult bmr;
+	protected DatabaseDriver<M, T> driver;
 	protected Random random;
-
 	protected Collection<M> currentMatches;
+
 	protected Collection<O> candidatesToModify;
 	protected List<O> objectsToModify;
 
@@ -38,12 +42,10 @@ public abstract class Transformation<M, T, O> {
 	protected long startEdit;
 	protected long end;
 
-	protected BenchmarkResult bmr;
-	protected DatabaseDriver<M, T> driver;
-
-	public void initialize(final BenchmarkResult bmr, final DatabaseDriver<M, T> driver, final Collection<M> currentMatches,
-			final Random random) {
+	public void initialize(final BenchmarkConfig bc, final BenchmarkResult bmr, final DatabaseDriver<M, T> driver,
+			final Collection<M> currentMatches, final Random random) {
 		this.random = random;
+		this.bc = bc;
 		this.bmr = bmr;
 		this.driver = driver;
 		this.currentMatches = currentMatches;

@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.google.common.collect.Ordering;
 
-public abstract class RepairTransformation<M, T> extends Transformation<M, T, M> {
+public class RepairTransformation<M, T> extends Transformation<M, T, M> {
 
 	@Override
 	protected void lhs() throws IOException {
@@ -19,6 +19,12 @@ public abstract class RepairTransformation<M, T> extends Transformation<M, T, M>
 		final Ordering<M> ordering = Ordering.from(driver.getMatchComparator());
 		final List<M> sortedMatches = ordering.sortedCopy(candidatesToModify);
 		return sortedMatches;
+	}
+
+	@Override
+	protected void rhs() throws IOException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -13,6 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationAction;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair.RepairTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -62,19 +65,25 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		modify();
 	}
 
+	protected abstract TransformationAction getTransformationAction();
+
 	@SuppressWarnings("unchecked")
 	protected void modify() throws IOException {
 		final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations."
 				+ bc.getScenario().toString().toLowerCase() + "." + bc.getScenarioName() + bc.getQuery();
-		try {
-			final Class<?> clazz = this.getClass().getClassLoader().loadClass(className);
-			@SuppressWarnings("rawtypes")
-			final Transformation td = (Transformation) clazz.newInstance();
-			td.initialize(getBenchmarkResult(), driver, matches, random);
-			td.performTransformation();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			throw new UnsupportedOperationException(e);
+		Transformation transformation;
+		switch (bc.getScenario()) {
+		case REPAIR:
+			transformation = new RepairTransformation<>();
+			break;
+		case USER:
+			transformation = new UserTransformation<>();
+			break;
+		default:
+			throw new UnsupportedOperationException("Scenario " + bc.getScenarioName() + " not supported");
 		}
+		transformation.initialize(bc, getBenchmarkResult(), driver, matches, random);
+		transformation.performTransformation();
 	}
 
 	protected long getMemoryUsage() throws IOException {

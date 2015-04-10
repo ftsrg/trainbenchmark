@@ -71,6 +71,7 @@ public class Neo4jDriver extends DatabaseDriver<Neo4jMatch, Node> {
 	protected GraphDatabaseService graphDb;
 	protected String dbPath;
 	protected String query;
+	protected Comparator<Node> nodeComparator = new NodeComparator();
 
 	public Neo4jDriver(final String dbPath, final String query) throws IOException {
 		// delete old directory
@@ -379,6 +380,11 @@ public class Neo4jDriver extends DatabaseDriver<Neo4jMatch, Node> {
 		for (final Node sw : switches) {
 
 		}
+	}
+
+	@Override
+	public Comparator<Node> getElementComparator() {
+		return nodeComparator;
 	}
 
 }

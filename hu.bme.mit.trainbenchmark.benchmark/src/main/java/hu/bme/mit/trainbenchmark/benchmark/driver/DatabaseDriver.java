@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.driver;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,29 +37,5 @@ public abstract class DatabaseDriver<M, T> {
 	// read
 
 	public abstract List<T> collectVertices(final String type) throws IOException;
-
-	// repair
-
-	public abstract void posLengthRepair(final Collection<M> matches) throws IOException;
-
-	public abstract void routeSensorRepair(final Collection<M> matches) throws IOException;
-
-	public abstract void semaphoreNeighborRepair(final Collection<M> matches) throws IOException;
-
-	public abstract void switchSensorRepair(final Collection<M> matches) throws IOException;
-
-	public abstract void switchSetRepair(final Collection<M> matches) throws IOException;
-
-	// user
-
-	public abstract void posLengthUser(final Collection<T> segments) throws IOException;
-
-	public abstract void routeSensorUser(final Collection<T> routes) throws IOException;
-
-	public abstract void semaphoreNeighborUser(final Collection<T> routes) throws IOException;
-
-	public abstract void switchSensorUser(final Collection<T> switches) throws IOException;
-
-	public abstract void switchSetUser(final Collection<T> switches) throws IOException;
 
 }
