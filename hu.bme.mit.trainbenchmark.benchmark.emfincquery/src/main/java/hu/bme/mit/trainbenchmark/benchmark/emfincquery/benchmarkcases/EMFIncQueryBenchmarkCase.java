@@ -12,14 +12,20 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationAction;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryCommon;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation.EMFIncQueryPosLengthTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation.EMFIncQueryRouteSensorTransformation;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformationAction;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
 
 import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,6 +36,8 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
+
+import com.google.common.collect.ImmutableMap;
 
 public abstract class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
 
@@ -83,5 +91,15 @@ public abstract class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> exten
 	}
 
 	protected abstract IncQueryMatcher<M> getMatcher() throws IncQueryException;
+
+	final Map<String, EMFTransformationAction> transformationAction = ImmutableMap.of( //
+			QueryConstants.POSLENGTH, new EMFIncQueryPosLengthTransformation(), //
+			QueryConstants.ROUTESENSOR, new EMFIncQueryRouteSensorTransformation() //
+			);
+
+	@Override
+	protected TransformationAction getTransformationAction() {
+		return transformationAction.get(bc.getQuery());
+	}
 
 }
