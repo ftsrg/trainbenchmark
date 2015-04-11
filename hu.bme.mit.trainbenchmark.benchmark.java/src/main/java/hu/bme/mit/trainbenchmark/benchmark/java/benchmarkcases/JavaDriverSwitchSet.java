@@ -25,10 +25,10 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSwitchSet extends JavaBenchmarkCase<JavaSwitchSetMatch> {
+public class JavaDriverSwitchSet extends JavaDriver<JavaSwitchSetMatch> {
 
 	@Override
-	protected Collection<JavaSwitchSetMatch> check() {
+	public Collection<JavaSwitchSetMatch> check() {
 		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();

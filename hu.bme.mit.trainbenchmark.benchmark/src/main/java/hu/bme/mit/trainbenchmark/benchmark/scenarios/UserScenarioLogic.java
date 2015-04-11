@@ -27,7 +27,7 @@ public class UserScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?,
 		testCase.benchmarkRead();
 		testCase.benchmarkCheck();
 		for (int i = 0; i < bc.getIterationCount(); i++) {
-			testCase.benchmarkModify();
+			// testCase.benchmarkModify();
 			testCase.benchmarkCheck();
 		}
 		testCase.benchmarkDestroy();

@@ -26,7 +26,7 @@ public class RepairScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<
 
 		testCase.benchmarkRead();
 		testCase.benchmarkCheck();
-		testCase.benchmarkModify();
+		// testCase.benchmarkModify();
 		testCase.benchmarkCheck();
 		testCase.benchmarkDestroy();
 

@@ -35,9 +35,14 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 	protected Resource resource;
 	protected Comparator<RailwayElement> elementComparator;
 
-	public EMFDriver(final String modelPath) {
-		RailwayPackage.eINSTANCE.eClass();
+	public EMFDriver() {
+		elementComparator = new RailwayElementComparator();
+	}
 
+	@Override
+	public void read(final String modelPathWithoutExtension) throws IOException {
+		RailwayPackage.eINSTANCE.eClass();
+		final String modelPath = modelPathWithoutExtension + "." + getExtension();
 		final URI resourceURI = FileBroker.getEMFUri(modelPath);
 		final ResourceSet resourceSet = new ResourceSetImpl();
 		resource = resourceSet.getResource(resourceURI, true);
@@ -45,13 +50,11 @@ public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
 			container = (RailwayContainer) resource.getContents().get(0);
 		}
-
-		elementComparator = new RailwayElementComparator();
 	}
 
 	@Override
-	public void read(final String modelPath) throws IOException {
-		throw new UnsupportedOperationException("This should be implemented for all EMF-based query engines");
+	public String getExtension() {
+		return "emf";
 	}
 
 	@Override

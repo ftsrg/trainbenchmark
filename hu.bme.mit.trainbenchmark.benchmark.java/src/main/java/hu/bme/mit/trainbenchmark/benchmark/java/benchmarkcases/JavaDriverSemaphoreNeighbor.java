@@ -24,10 +24,10 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSemaphoreNeighbor extends JavaBenchmarkCase<JavaSemaphoreNeighborMatch> {
+public class JavaDriverSemaphoreNeighbor extends JavaDriver<JavaSemaphoreNeighborMatch> {
 
 	@Override
-	protected Collection<JavaSemaphoreNeighborMatch> check() {
+	public Collection<JavaSemaphoreNeighborMatch> check() {
 		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();
