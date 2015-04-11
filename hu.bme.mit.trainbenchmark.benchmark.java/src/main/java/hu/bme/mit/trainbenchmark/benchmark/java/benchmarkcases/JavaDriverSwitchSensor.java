@@ -21,10 +21,10 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSwitchSensor extends JavaBenchmarkCase<JavaSwitchSensorMatch> {
+public class JavaDriverSwitchSensor extends JavaDriver<JavaSwitchSensorMatch> {
 
 	@Override
-	protected Collection<JavaSwitchSensorMatch> check() {
+	public Collection<JavaSwitchSensorMatch> check() {
 		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();

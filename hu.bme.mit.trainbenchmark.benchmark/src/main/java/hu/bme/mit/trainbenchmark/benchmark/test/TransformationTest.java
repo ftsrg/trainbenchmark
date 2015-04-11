@@ -37,7 +37,7 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 			benchmarkCase.benchmarkInit(bl.getBc());
 			benchmarkCase.benchmarkRead();
 			benchmarkCase.benchmarkCheck();
-			benchmarkCase.benchmarkModify();
+			// benchmarkCase.benchmarkModify();
 			benchmarkCase.benchmarkCheck();
 
 			final int resultSize = benchmarkCase.getMatches().size();

@@ -21,10 +21,10 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaPosLength extends JavaBenchmarkCase<JavaPosLengthMatch> {
+public class JavaDriverPosLength extends JavaDriver<JavaPosLengthMatch> {
 
 	@Override
-	protected Collection<JavaPosLengthMatch> check() {
+	public Collection<JavaPosLengthMatch> check() {
 		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();

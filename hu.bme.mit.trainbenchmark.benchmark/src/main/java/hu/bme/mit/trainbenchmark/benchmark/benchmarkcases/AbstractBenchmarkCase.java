@@ -12,10 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationAction;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair.RepairTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user.UserTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -57,33 +53,26 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	protected void destroy() throws IOException {
 	}
 
-	protected abstract void read() throws IOException;
+	// protected abstract TransformationAction getTransformationAction();
 
-	protected abstract Collection<M> check() throws IOException;
-
-	public void benchmarkModify() throws IOException {
-		modify();
-	}
-
-	protected abstract TransformationAction getTransformationAction();
-
-	@SuppressWarnings("unchecked")
+	// @SuppressWarnings("unchecked")
 	protected void modify() throws IOException {
-		final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations."
-				+ bc.getScenario().toString().toLowerCase() + "." + bc.getScenarioName() + bc.getQuery();
-		Transformation transformation;
-		switch (bc.getScenario()) {
-		case REPAIR:
-			transformation = new RepairTransformation<>();
-			break;
-		case USER:
-			transformation = new UserTransformation<>();
-			break;
-		default:
-			throw new UnsupportedOperationException("Scenario " + bc.getScenarioName() + " not supported");
-		}
-		transformation.initialize(bc, getBenchmarkResult(), driver, matches, random);
-		transformation.performTransformation();
+		System.out.println("Transformation comes here.");
+		// final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations."
+		// + bc.getScenario().toString().toLowerCase() + "." + bc.getScenarioName() + bc.getQuery();
+		// Transformation transformation;
+		// switch (bc.getScenario()) {
+		// case REPAIR:
+		// transformation = new RepairTransformation<>();
+		// break;
+		// case USER:
+		// transformation = new UserTransformation<>();
+		// break;
+		// default:
+		// throw new UnsupportedOperationException("Scenario " + bc.getScenarioName() + " not supported");
+		// }
+		// transformation.initialize(bc, getBenchmarkResult(), driver, matches, random);
+		// transformation.performTransformation();
 	}
 
 	protected long getMemoryUsage() throws IOException {
@@ -106,13 +95,13 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkRead() throws IOException {
 		bmr.restartClock();
-		read();
+		driver.read(bc.getModelPathNameWithoutExtension());
 		bmr.setReadTime();
 	}
 
 	public void benchmarkCheck() throws IOException {
 		bmr.restartClock();
-		check();
+		matches = driver.check();
 		bmr.addMatchCount(matches.size());
 		bmr.addCheckTime();
 	}

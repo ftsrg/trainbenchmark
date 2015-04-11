@@ -25,10 +25,10 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaRouteSensor extends JavaBenchmarkCase<JavaRouteSensorMatch> {
+public class JavaDriverRouteSensor extends JavaDriver<JavaRouteSensorMatch> {
 
 	@Override
-	protected Collection<JavaRouteSensorMatch> check() {
+	public Collection<JavaRouteSensorMatch> check() {
 		matches = new ArrayList<>();
 
 		final TreeIterator<EObject> contents = container.eAllContents();
