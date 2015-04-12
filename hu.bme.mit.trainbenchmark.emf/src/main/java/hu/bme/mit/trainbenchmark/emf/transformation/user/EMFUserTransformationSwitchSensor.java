@@ -12,7 +12,7 @@ public class EMFUserTransformationSwitchSensor extends EMFUserTransformation {
 	}
 
 	@Override
-	public void transform(final Collection<Object> switches) {
+	public void rhs(final Collection switches) {
 		for (final Object railwayElement : switches) {
 			final Switch sw = (Switch) railwayElement;
 			sw.setSensor(null);

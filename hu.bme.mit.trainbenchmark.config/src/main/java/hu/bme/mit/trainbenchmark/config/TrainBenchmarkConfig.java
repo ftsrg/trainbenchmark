@@ -65,24 +65,7 @@ public abstract class TrainBenchmarkConfig {
 	protected void processArguments(final String[] args) throws ParseException {
 		cmd = parser.parse(options, args);
 
-		final String scenarioString = cmd.getOptionValue("scenario");
-		switch (scenarioString) {
-		case "Test":
-			scenario = Scenario.TEST;
-			break;
-		case "Batch":
-			scenario = Scenario.BATCH;
-			break;
-		case "User":
-			scenario = Scenario.USER;
-			break;
-		case "Repair":
-			scenario = Scenario.REPAIR;
-			break;
-		default:
-			throw new UnsupportedOperationException("Scenario '" + scenarioString + "' not supported.");
-		}
-
+		scenario = Scenario.valueOf(cmd.getOptionValue("scenario").toUpperCase());
 		size = Integer.parseInt(cmd.getOptionValue("size"));
 	}
 
@@ -104,7 +87,7 @@ public abstract class TrainBenchmarkConfig {
 	public Scenario getScenario() {
 		return scenario;
 	}
-	
+
 	public String getScenarioName() {
 		return WordUtils.capitalizeFully(scenario.toString());
 	}
@@ -116,20 +99,20 @@ public abstract class TrainBenchmarkConfig {
 	public String getWorkspacePath() {
 		return "../";
 	}
-	
+
 	public String getModelPath() {
 		return getWorkspacePath() + "models/";
 	}
-	
+
 	public String getModelPathNameWithoutExtension() {
 		final String filename = getModelFileNameWithoutExtension();
 		return getModelPath() + filename;
 	}
 
 	public String getModelFileNameWithoutExtension() {
-		final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase(); 
+		final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase();
 		final String filename = "railway-" + variant + "-" + size;
 		return filename;
 	}
-	
+
 }

@@ -7,13 +7,13 @@ public enum Query {
 	SWITCHSENSOR(QueryConstants.SWITCHSENSOR), //
 	SWITCHSET(QueryConstants.SWITCHSET);
 
-	private String queryString;
+	private String name;
 
-	Query(final String queryString) {
-		this.queryString = queryString;
+	Query(final String name) {
+		this.name = name;
 	}
 
 	public String toString() {
-		return queryString;
+		return name;
 	}
 }

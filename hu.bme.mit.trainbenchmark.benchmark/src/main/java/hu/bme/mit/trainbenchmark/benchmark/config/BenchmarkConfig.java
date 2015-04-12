@@ -73,7 +73,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		super.processArguments(args);
 
 		// queries argument -> testCases list
-		query = Query.valueOf(cmd.getOptionValue("query"));
+		query = Query.valueOf(cmd.getOptionValue("query").toUpperCase());
 
 		final String modificationMethodString = cmd.getOptionValue("modificationMethod");
 		if (modificationMethodString != null) {

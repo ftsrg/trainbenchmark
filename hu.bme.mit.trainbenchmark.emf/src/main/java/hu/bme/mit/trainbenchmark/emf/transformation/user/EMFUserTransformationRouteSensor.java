@@ -15,7 +15,7 @@ public class EMFUserTransformationRouteSensor extends EMFUserTransformation {
 	}
 
 	@Override
-	public void transform(final Collection<Object> routes) {
+	public void rhs(final Collection routes) {
 		for (final Object railwayElement : routes) {
 			final Route route = (Route) railwayElement;
 			final EList<Sensor> definedBys = route.getDefinedBy();

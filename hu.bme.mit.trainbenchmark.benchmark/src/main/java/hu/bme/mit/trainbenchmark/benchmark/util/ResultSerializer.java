@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class ResultSerializer {
 
-	public static void serializeToJSON(final BenchmarkResult bmr) throws IOException {
+	public static void serializeToJSON(final BenchmarkResult br) throws IOException {
 		final ObjectMapper mapper = new ObjectMapper();
 		// to enable standard indentation ("pretty-printing"):
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -20,14 +20,14 @@ public class ResultSerializer {
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		mapper.setVisibilityChecker(mapper.getVisibilityChecker().with(JsonAutoDetect.Visibility.NONE));
 
-		final String scenario = bmr.getScenario();
-		final Query query = bmr.getQuery();
-		final String tool = bmr.getTool();
-		final int size = bmr.getSize();
-		final int runIndex = bmr.getRunIndex();
+		final String scenario = br.getScenario();
+		final Query query = br.getQuery();
+		final String tool = br.getTool();
+		final int size = br.getSize();
+		final int runIndex = br.getRunIndex();
 		final String relativeFilePath = "results/" + tool + "-" + scenario + "-" + query.toString() + "-Size" + size + "-Index" + runIndex
 				+ ".json";
-		mapper.writeValue(new File(bmr.getBenchmarkConfig().getWorkspacePath() + relativeFilePath), bmr);
+		mapper.writeValue(new File(br.getBenchmarkConfig().getWorkspacePath() + relativeFilePath), br);
 
 		System.out.println("Create JSON file: " + relativeFilePath);
 	}

@@ -21,19 +21,20 @@ import java.io.IOException;
 public class RepairScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
-	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?, ?> testCase) throws IOException {
-		testCase.benchmarkInit(bc);
+	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
+		benchmarkCase.benchmarkInit(bc);
+		benchmarkCase.benchmarkInitTransformation();
 
-		testCase.benchmarkRead();
-		testCase.benchmarkCheck();
+		benchmarkCase.benchmarkRead();
+		benchmarkCase.benchmarkCheck();
 		// testCase.benchmarkModify();
-		testCase.benchmarkCheck();
-		testCase.benchmarkDestroy();
+		benchmarkCase.benchmarkCheck();
+		benchmarkCase.benchmarkDestroy();
 
-		final BenchmarkResult bmr = testCase.getBenchmarkResult();
-		System.out.println(bmr);
-		bmr.publish();
-		return bmr;
+		final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
+		System.out.println(br);
+		br.publish();
+		return br;
 	}
 
 }

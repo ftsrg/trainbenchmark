@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationAction;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryCommon;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
@@ -98,7 +98,7 @@ public abstract class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> exten
 			);
 
 	@Override
-	protected TransformationAction getTransformationAction() {
+	protected Transformation getTransformationAction() {
 		return transformationAction.get(bc.getQuery());
 	}
 

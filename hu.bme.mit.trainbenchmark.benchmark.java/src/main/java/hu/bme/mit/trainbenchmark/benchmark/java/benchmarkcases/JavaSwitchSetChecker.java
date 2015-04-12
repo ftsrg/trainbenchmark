@@ -21,6 +21,7 @@ import hu.bme.mit.trainbenchmark.railway.Signal;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -34,6 +35,7 @@ public class JavaSwitchSetChecker extends JavaChecker {
 
 	@Override
 	public Collection<JavaMatch> check() {
+		matches = new ArrayList<>();
 		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();

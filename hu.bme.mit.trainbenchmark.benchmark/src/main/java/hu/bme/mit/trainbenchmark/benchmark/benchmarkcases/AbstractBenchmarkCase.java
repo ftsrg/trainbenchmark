@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
@@ -28,15 +30,17 @@ import java.util.Random;
 public abstract class AbstractBenchmarkCase<M, T> {
 
 	protected Random random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
-	protected BenchmarkResult bmr;
+	protected BenchmarkResult br;
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;
 	protected Checker<M> checker;
 	protected Collection<M> matches;
+	protected TransformationLogic<M, T, ?> transformationLogic;
+	protected Transformation<?> transformation;
 
 	// simple getters and setters
 	public BenchmarkResult getBenchmarkResult() {
-		return bmr;
+		return br;
 	}
 
 	public Collection<M> getMatches() {
@@ -56,28 +60,6 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	protected void destroy() throws IOException {
 	}
 
-	// protected abstract TransformationAction getTransformationAction();
-
-	// @SuppressWarnings("unchecked")
-	protected void modify() throws IOException {
-		System.out.println("Transformation comes here.");
-		// final String className = "hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations."
-		// + bc.getScenario().toString().toLowerCase() + "." + bc.getScenarioName() + bc.getQuery();
-		// Transformation transformation;
-		// switch (bc.getScenario()) {
-		// case REPAIR:
-		// transformation = new RepairTransformation<>();
-		// break;
-		// case USER:
-		// transformation = new UserTransformation<>();
-		// break;
-		// default:
-		// throw new UnsupportedOperationException("Scenario " + bc.getScenarioName() + " not supported");
-		// }
-		// transformation.initialize(bc, getBenchmarkResult(), driver, matches, random);
-		// transformation.performTransformation();
-	}
-
 	protected long getMemoryUsage() throws IOException {
 		Util.runGC();
 		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
@@ -85,29 +67,41 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		this.bc = bc;
+		br = new BenchmarkResult(bc.getTool(), bc.getQuery());
+		br.setBenchmarkConfig(bc);
 
-		bmr = new BenchmarkResult(bc.getTool(), bc.getQuery());
-		bmr.setBenchmarkConfig(bc);
 		init();
+	}
+
+	public void benchmarkInitTransformation() {
+		transformationLogic = TransformationLogic.createTransformationLogic(bc.getScenario());
+		if (transformationLogic != null) {
+			transformationLogic.initialize(bc, br, driver, random);
+		}
+		transformationLogic.setTransformation(transformation);
 	}
 
 	// benchmark methods
 
 	public void benchmarkRead() throws IOException {
-		bmr.restartClock();
+		br.restartClock();
 		driver.read(bc.getModelPathNameWithoutExtension());
-		bmr.setReadTime();
+		br.setReadTime();
 	}
 
 	public void benchmarkCheck() throws IOException {
-		bmr.restartClock();
+		br.restartClock();
 		matches = checker.check();
-		bmr.addMatchCount(matches.size());
-		bmr.addCheckTime();
+		br.addMatchCount(matches.size());
+		br.addCheckTime();
 	}
 
 	public void benchmarkDestroy() throws IOException {
 		destroy();
 	}
 
+	public void benchmarkModify() throws IOException {
+		transformationLogic.performTransformation(matches);
+
+	}
 }
