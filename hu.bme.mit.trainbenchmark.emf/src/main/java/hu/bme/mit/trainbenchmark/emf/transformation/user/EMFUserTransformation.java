@@ -1,10 +1,10 @@
 package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationAction;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public abstract class EMFUserTransformation extends TransformationAction {
+public abstract class EMFUserTransformation extends Transformation {
 
 	protected EMFDriver driver;
 

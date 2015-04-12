@@ -12,7 +12,7 @@ public class EMFUserTransformationPosLength extends EMFUserTransformation {
 	}
 
 	@Override
-	public void transform(final Collection<Object> segments) {
+	public void rhs(final Collection segments) {
 		for (final Object railwayElement : segments) {
 			final Segment segment = (Segment) railwayElement;
 			segment.setLength(0);

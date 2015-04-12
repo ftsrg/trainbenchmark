@@ -5,12 +5,11 @@ import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class JavaChecker extends Checker<JavaMatch> {
 
-	protected final Collection<JavaMatch> matches = new ArrayList<>();
+	protected Collection<JavaMatch> matches;
 	protected final EMFDriver emfDriver;
 
 	public JavaChecker(final EMFDriver emfDriver) {

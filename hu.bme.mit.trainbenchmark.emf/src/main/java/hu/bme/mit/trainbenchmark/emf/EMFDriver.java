@@ -43,6 +43,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		RailwayPackage.eINSTANCE.eClass();
 		final String modelPath = modelPathWithoutExtension + "." + getExtension();
+
 		final URI resourceURI = FileBroker.getEMFUri(modelPath);
 		final ResourceSet resourceSet = new ResourceSetImpl();
 		resource = resourceSet.getResource(resourceURI, true);

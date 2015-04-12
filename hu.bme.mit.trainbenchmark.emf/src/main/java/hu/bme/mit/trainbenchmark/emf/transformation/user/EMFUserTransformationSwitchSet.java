@@ -13,7 +13,7 @@ public class EMFUserTransformationSwitchSet extends EMFUserTransformation {
 	}
 
 	@Override
-	public void transform(final Collection<Object> switches) {
+	public void rhs(final Collection switches) {
 		for (final Object railwayElement : switches) {
 			final Switch sw = (Switch) railwayElement;
 			final Position currentPosition = sw.getCurrentPosition();

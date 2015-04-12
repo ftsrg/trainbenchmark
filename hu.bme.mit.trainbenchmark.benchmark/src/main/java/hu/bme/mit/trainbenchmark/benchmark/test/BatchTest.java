@@ -27,27 +27,27 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 
 	@Test
 	public void posLength() throws ParseException, IOException {
-		testQuery(Query.POSLENGTH, 486);
+		testQuery(Query.POSLENGTH, 411);
 	}
 
 	@Test
 	public void routeSensor() throws ParseException, IOException {
-		testQuery(Query.ROUTESENSOR, 18);
+		testQuery(Query.ROUTESENSOR, 26);
 	}
 
 	@Test
 	public void semaphoreNeighbor() throws ParseException, IOException {
-		testQuery(Query.SEMAPHORENEIGHBOR, 1);
+		testQuery(Query.SEMAPHORENEIGHBOR, 0);
 	}
 
 	@Test
 	public void switchSensor() throws ParseException, IOException {
-		testQuery(Query.SWITCHSENSOR, 4);
+		testQuery(Query.SWITCHSENSOR, 5);
 	}
 
 	@Test
 	public void switchSet() throws ParseException, IOException {
-		testQuery(Query.SWITCHSET, 15);
+		testQuery(Query.SWITCHSET, 11);
 	}
 
 	protected void testQuery(final Query query, final int expectedResultSize) throws ParseException, IOException {
