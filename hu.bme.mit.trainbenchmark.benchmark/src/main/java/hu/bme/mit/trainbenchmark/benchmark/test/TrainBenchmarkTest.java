@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
@@ -20,10 +21,9 @@ import java.io.IOException;
 public abstract class TrainBenchmarkTest {
 
 	protected TestBenchmarkInitializer<?> bi;
-	
-	public AbstractBenchmarkLogic initialize(final String queryName, final String tool, final Scenario scenario) throws IOException {
-		return bi.initializeBenchmark(queryName, scenario);
-	}
 
+	public AbstractBenchmarkLogic initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
+		return bi.initializeBenchmark(query, scenario);
+	}
 
 }

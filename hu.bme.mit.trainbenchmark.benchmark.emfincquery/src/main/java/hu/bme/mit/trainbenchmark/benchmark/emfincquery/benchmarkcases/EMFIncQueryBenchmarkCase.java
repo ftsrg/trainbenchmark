@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation.EMFIncQueryPosLengthTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation.EMFIncQueryRouteSensorTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
-import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformationAction;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
@@ -92,7 +92,7 @@ public abstract class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> exten
 
 	protected abstract IncQueryMatcher<M> getMatcher() throws IncQueryException;
 
-	final Map<String, EMFTransformationAction> transformationAction = ImmutableMap.of( //
+	final Map<String, EMFUserTransformation> transformationAction = ImmutableMap.of( //
 			QueryConstants.POSLENGTH, new EMFIncQueryPosLengthTransformation(), //
 			QueryConstants.ROUTESENSOR, new EMFIncQueryRouteSensorTransformation() //
 			);

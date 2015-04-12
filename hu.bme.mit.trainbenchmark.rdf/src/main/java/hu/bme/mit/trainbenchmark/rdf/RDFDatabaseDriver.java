@@ -3,11 +3,11 @@ package hu.bme.mit.trainbenchmark.rdf;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_TYPE;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.io.IOException;
 
-public abstract class RDFDatabaseDriver<M, T> extends DatabaseDriver<M, T> {
+public abstract class RDFDatabaseDriver<M, T> extends Driver<M, T> {
 
 	protected Long determineNewVertexId() throws IOException {
 		Long id = 5000L;

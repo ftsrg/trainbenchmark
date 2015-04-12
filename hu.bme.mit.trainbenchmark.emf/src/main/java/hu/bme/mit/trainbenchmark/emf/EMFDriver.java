@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
@@ -29,14 +29,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-public abstract class EMFDriver<M> extends DatabaseDriver<M, RailwayElement> {
+public class EMFDriver extends Driver<RailwayElement> {
 
 	protected RailwayContainer container;
 	protected Resource resource;
 	protected Comparator<RailwayElement> elementComparator;
 
 	public EMFDriver() {
-		elementComparator = new RailwayElementComparator();
+		// elementComparator = new RailwayElementComparator();
 	}
 
 	@Override

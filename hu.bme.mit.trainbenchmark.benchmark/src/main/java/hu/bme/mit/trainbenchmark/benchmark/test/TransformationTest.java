@@ -16,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
@@ -24,9 +25,9 @@ import org.apache.commons.cli.ParseException;
 
 public abstract class TransformationTest extends TrainBenchmarkTest {
 
-	protected void testTransformation(final String queryName, final Scenario scenario, final int expectedResultSize) throws ParseException,
+	protected void testTransformation(final Query query, final Scenario scenario, final int expectedResultSize) throws ParseException,
 			IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(queryName, scenario);
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
 		testTransformation(bl, expectedResultSize);
 	}
 

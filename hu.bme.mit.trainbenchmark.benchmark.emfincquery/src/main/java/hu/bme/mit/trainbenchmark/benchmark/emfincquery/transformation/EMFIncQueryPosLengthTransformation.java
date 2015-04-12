@@ -2,14 +2,14 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformationAction;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformation;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class EMFIncQueryPosLengthTransformation extends EMFTransformationAction {
+public class EMFIncQueryPosLengthTransformation extends EMFUserTransformation {
 
 	@Override
 	public void transform(final Collection<Object> matches) throws IOException {
