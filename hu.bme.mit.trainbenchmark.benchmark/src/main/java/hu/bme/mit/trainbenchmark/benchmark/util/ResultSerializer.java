@@ -1,5 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.util;
 
+import hu.bme.mit.trainbenchmark.constants.Query;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -17,13 +19,14 @@ public class ResultSerializer {
 		// (without this setting, an exception is thrown in those cases)
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		mapper.setVisibilityChecker(mapper.getVisibilityChecker().with(JsonAutoDetect.Visibility.NONE));
-		
+
 		final String scenario = bmr.getScenario();
-		final String query = bmr.getQuery();
+		final Query query = bmr.getQuery();
 		final String tool = bmr.getTool();
 		final int size = bmr.getSize();
 		final int runIndex = bmr.getRunIndex();
-		final String relativeFilePath = "results/" + tool + "-" + scenario + "-" + query + "-Size" + size + "-Index" + runIndex + ".json";
+		final String relativeFilePath = "results/" + tool + "-" + scenario + "-" + query.toString() + "-Size" + size + "-Index" + runIndex
+				+ ".json";
 		mapper.writeValue(new File(bmr.getBenchmarkConfig().getWorkspacePath() + relativeFilePath), bmr);
 
 		System.out.println("Create JSON file: " + relativeFilePath);

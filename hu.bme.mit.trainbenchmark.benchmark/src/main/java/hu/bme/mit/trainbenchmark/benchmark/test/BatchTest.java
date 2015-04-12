@@ -12,14 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSET;
 import static org.junit.Assert.assertEquals;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
@@ -31,31 +27,31 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 
 	@Test
 	public void posLength() throws ParseException, IOException {
-		testQuery(POSLENGTH, 486);
+		testQuery(Query.POSLENGTH, 486);
 	}
 
 	@Test
 	public void routeSensor() throws ParseException, IOException {
-		testQuery(ROUTESENSOR, 18);
+		testQuery(Query.ROUTESENSOR, 18);
 	}
 
 	@Test
 	public void semaphoreNeighbor() throws ParseException, IOException {
-		testQuery(SEMAPHORENEIGHBOR, 1);
+		testQuery(Query.SEMAPHORENEIGHBOR, 1);
 	}
 
 	@Test
 	public void switchSensor() throws ParseException, IOException {
-		testQuery(SWITCHSENSOR, 4);
+		testQuery(Query.SWITCHSENSOR, 4);
 	}
 
 	@Test
 	public void switchSet() throws ParseException, IOException {
-		testQuery(SWITCHSET, 15);
+		testQuery(Query.SWITCHSET, 15);
 	}
 
-	protected void testQuery(final String queryName, final int expectedResultSize) throws ParseException, IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(queryName, Scenario.BATCH);
+	protected void testQuery(final Query query, final int expectedResultSize) throws ParseException, IOException {
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, Scenario.BATCH);
 		runQuery(bl, expectedResultSize);
 	}
 

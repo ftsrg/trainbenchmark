@@ -12,12 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.USER;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.IOException;
 
@@ -28,27 +24,27 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void posLengthUser() throws ParseException, IOException {
-		testTransformation(POSLENGTH, USER, 94);
+		testTransformation(Query.POSLENGTH, USER, 94);
 	}
 
 	@Test
 	public void routeSensorUser() throws ParseException, IOException {
-		testTransformation(ROUTESENSOR, USER, 4);
+		testTransformation(Query.ROUTESENSOR, USER, 4);
 	}
 
 	@Test
 	public void semaphoreNeighborUser() throws ParseException, IOException {
-		testTransformation(SEMAPHORENEIGHBOR, USER, 3);
+		testTransformation(Query.SEMAPHORENEIGHBOR, USER, 3);
 	}
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, USER, 3);
+		testTransformation(Query.SWITCHSENSOR, USER, 3);
 	}
 
 	@Test
 	public void switchSetUser() throws ParseException, IOException {
-		testTransformation(SWITCHSET, USER, 7);
+		testTransformation(Query.SWITCHSET, USER, 7);
 	}
 
 }

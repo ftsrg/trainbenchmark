@@ -1,16 +1,20 @@
-package hu.bme.mit.trainbenchmark.emf.transformation;
+package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Position;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.Collection;
 
-public class EMFTransformationSwitchSet extends EMFTransformationAction {
+public class EMFUserTransformationSwitchSet extends EMFUserTransformation {
+
+	public EMFUserTransformationSwitchSet(final EMFDriver driver) {
+		super(driver);
+	}
 
 	@Override
-	public void transform(final Collection<RailwayElement> switches) {
-		for (final RailwayElement railwayElement : switches) {
+	public void transform(final Collection<Object> switches) {
+		for (final Object railwayElement : switches) {
 			final Switch sw = (Switch) railwayElement;
 			final Position currentPosition = sw.getCurrentPosition();
 			final Position newCurrentPosition = Position.get((currentPosition.ordinal() + 1) % Position.VALUES.size());

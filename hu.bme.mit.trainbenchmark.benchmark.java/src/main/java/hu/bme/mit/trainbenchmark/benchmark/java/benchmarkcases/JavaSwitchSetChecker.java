@@ -12,26 +12,29 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Signal;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaDriverSwitchSet extends JavaDriver<JavaSwitchSetMatch> {
+public class JavaSwitchSetChecker extends JavaChecker {
+
+	public JavaSwitchSetChecker(final EMFDriver emfDriver) {
+		super(emfDriver);
+	}
 
 	@Override
-	public Collection<JavaSwitchSetMatch> check() {
-		matches = new ArrayList<>();
-
-		final TreeIterator<EObject> contents = container.eAllContents();
+	public Collection<JavaMatch> check() {
+		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
@@ -60,5 +63,4 @@ public class JavaDriverSwitchSet extends JavaDriver<JavaSwitchSetMatch> {
 
 		return matches;
 	}
-
 }

@@ -13,13 +13,41 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class JavaBenchmarkCase<M extends JavaPosLengthMatch> extends AbstractBenchmarkCase<JavaPosLengthMatch, RailwayElement> {
+import java.io.IOException;
 
-	public JavaBenchmarkCase() {
-		driver = new JavaDriverPosLength();
+public class JavaBenchmarkCase extends AbstractBenchmarkCase<JavaMatch, RailwayElement> {
+
+	@Override
+	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+		super.benchmarkInit(bc);
+
+		final EMFDriver emfDriver = new EMFDriver();
+		driver = emfDriver;
+		checker = JavaChecker.createChecker(emfDriver, bc.getQuery());
+
+		// switch (bc.getQuery()) {
+		// case QueryConstants.POSLENGTH:
+		// driver = (DatabaseDriver<M, RailwayElement>) new JavaDriverPosLength();
+		// break;
+		// case QueryConstants.ROUTESENSOR:
+		// driver = (DatabaseDriver<M, RailwayElement>) new JavaDriverRouteSensor();
+		// break;
+		// case QueryConstants.SEMAPHORENEIGHBOR:
+		// driver = (DatabaseDriver<M, RailwayElement>) new JavaDriverSemaphoreNeighbor();
+		// break;
+		// case QueryConstants.SWITCHSENSOR:
+		// driver = (DatabaseDriver<M, RailwayElement>) new JavaDriverSwitchSensor();
+		// break;
+		// case QueryConstants.SWITCHSET:
+		// driver = (DatabaseDriver<M, RailwayElement>) new JavaDriverSwitchSet();
+		// break;
+		// default:
+		// break;
+		// }
 	}
-
 }

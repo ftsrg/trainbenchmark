@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.sql.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.sql.match.SQLMatch;
@@ -37,7 +37,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.ImmutableMap;
 
-public abstract class SQLDriver extends DatabaseDriver<SQLMatch, Long> {
+public abstract class SQLDriver extends Driver<SQLMatch, Long> {
 
 	protected final String query;
 

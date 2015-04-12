@@ -12,26 +12,29 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaDriverRouteSensor extends JavaDriver<JavaRouteSensorMatch> {
+public class JavaRouteSensorChecker extends JavaChecker {
+
+	public JavaRouteSensorChecker(final EMFDriver emfDriver) {
+		super(emfDriver);
+	}
 
 	@Override
-	public Collection<JavaRouteSensorMatch> check() {
-		matches = new ArrayList<>();
-
-		final TreeIterator<EObject> contents = container.eAllContents();
+	public Collection<JavaMatch> check() {
+		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 

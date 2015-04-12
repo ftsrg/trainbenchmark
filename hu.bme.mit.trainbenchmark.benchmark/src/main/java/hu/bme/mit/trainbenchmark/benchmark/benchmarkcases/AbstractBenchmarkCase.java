@@ -12,11 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
@@ -28,7 +30,8 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	protected Random random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkResult bmr;
 	protected BenchmarkConfig bc;
-	protected DatabaseDriver<M, T> driver;
+	protected Driver<T> driver;
+	protected Checker<M> checker;
 	protected Collection<M> matches;
 
 	// simple getters and setters
@@ -36,13 +39,13 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		return bmr;
 	}
 
-	// shorthands
-	public String getName() {
-		return bc.getQuery();
-	}
-
 	public Collection<M> getMatches() {
 		return matches;
+	}
+
+	// shorthands
+	public Query getQuery() {
+		return bc.getQuery();
 	}
 
 	// these should be implemented for each tool
@@ -86,12 +89,9 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		bmr = new BenchmarkResult(bc.getTool(), bc.getQuery());
 		bmr.setBenchmarkConfig(bc);
 		init();
-		runGC();
 	}
 
-	public void benchmarkDestroy() throws IOException {
-		destroy();
-	}
+	// benchmark methods
 
 	public void benchmarkRead() throws IOException {
 		bmr.restartClock();
@@ -101,16 +101,13 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkCheck() throws IOException {
 		bmr.restartClock();
-		matches = driver.check();
+		matches = checker.check();
 		bmr.addMatchCount(matches.size());
 		bmr.addCheckTime();
 	}
 
-	protected void runGC() throws IOException {
-		Util.runGC();
-		if (bc.isBenchmarkMode()) {
-			Util.freeCache(bc);
-		}
+	public void benchmarkDestroy() throws IOException {
+		destroy();
 	}
 
 }

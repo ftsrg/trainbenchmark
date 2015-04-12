@@ -1,6 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.repair;
-
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
 import java.io.IOException;
 import java.util.List;

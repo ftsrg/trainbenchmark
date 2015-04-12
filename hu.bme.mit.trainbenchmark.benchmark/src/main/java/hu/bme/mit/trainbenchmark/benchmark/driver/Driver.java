@@ -12,13 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.driver;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class DatabaseDriver<M, T> {
+public abstract class Driver<T> {
 
-	protected Collection<M> matches;
+	// these methods should be redefined if required
 
 	public void beginTransaction() throws IOException {
 	}
@@ -26,23 +25,21 @@ public abstract class DatabaseDriver<M, T> {
 	public void finishTransaction() throws IOException {
 	}
 
-	public abstract void read(String modelPathWithoutExtension) throws IOException;
-
-	public abstract Collection<M> check() throws IOException;
-
-	// comparators
-
-	public abstract Comparator<M> getMatchComparator();
-
-	public abstract Comparator<T> getElementComparator();
-
 	public void destroy() throws IOException {
 	}
 
-	public abstract String getExtension();
+	// read methods
 
-	// read
+	public abstract void read(String modelPathWithoutExtension) throws IOException;
 
 	public abstract List<T> collectVertices(final String type) throws IOException;
+
+	// comparator
+
+	public abstract Comparator<T> getElementComparator();
+
+	// extension
+
+	public abstract String getExtension();
 
 }

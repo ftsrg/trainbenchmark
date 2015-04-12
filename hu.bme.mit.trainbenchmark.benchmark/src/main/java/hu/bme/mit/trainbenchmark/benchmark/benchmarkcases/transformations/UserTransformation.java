@@ -1,6 +1,5 @@
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.user;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
