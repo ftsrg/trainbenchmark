@@ -34,7 +34,7 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void signalNeighborRepair() throws ParseException, IOException {
-		testTransformation(QueryConstants.SIGNALNEIGHBOR, ScenarioConstants.REPAIR, 0);
+//		testTransformation(QueryConstants.SIGNALNEIGHBOR, ScenarioConstants.REPAIR, 0);
 	}
 
 	@Test

@@ -34,7 +34,7 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void signalNeighborUser() throws ParseException, IOException {
-		testTransformation(QueryConstants.SIGNALNEIGHBOR, ScenarioConstants.USER, 2);
+// 		testTransformation(QueryConstants.SIGNALNEIGHBOR, ScenarioConstants.USER, 2);
 	}
 
 	@Test

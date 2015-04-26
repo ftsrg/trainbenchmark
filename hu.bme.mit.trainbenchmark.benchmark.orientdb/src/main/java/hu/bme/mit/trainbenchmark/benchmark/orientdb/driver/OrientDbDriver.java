@@ -23,12 +23,17 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.Lists;
+import com.orientechnologies.orient.client.db.ODatabaseHelper;
+import com.orientechnologies.orient.core.db.ODatabase;
+import com.orientechnologies.orient.core.exception.OConcurrentModificationException;
 import com.orientechnologies.orient.graph.gremlin.OCommandGremlin;
 import com.orientechnologies.orient.graph.gremlin.OGremlinHelper;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
+import com.tinkerpop.blueprints.GraphFactory;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
+import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 
 public class OrientDbDriver extends DatabaseDriver<Vertex> {
@@ -67,13 +72,11 @@ public class OrientDbDriver extends DatabaseDriver<Vertex> {
 
 	@Override
 	public List<Vertex> runQuery() throws IOException {
-		List<Vertex> results = new ArrayList<Vertex>();
-
 		OGremlinHelper.global().create();
 
 		OCommandGremlin gremcomm = new OCommandGremlin(query);
-		results = gremcomm.execute();
-
+		List<Vertex> results = gremcomm.execute();
+		
 		return results;
 	}
 
@@ -83,8 +86,8 @@ public class OrientDbDriver extends DatabaseDriver<Vertex> {
 	}
 
 	@Override
-	public void destroy() {
-		graphDb.shutdown();
+	public void destroy() throws IOException {
+		graphDb.drop();
 	}
 
 	// create
@@ -103,22 +106,65 @@ public class OrientDbDriver extends DatabaseDriver<Vertex> {
 			String sourceVertexType, String targetVertexType, String edgeType)
 			throws IOException {
 		Vertex targetVertex = graphDb.addVertex(null);
-		targetVertex.setProperty("labels", targetVertexType);
-		sourceVertex.addEdge(edgeType, targetVertex);
+		int maxRetry = 10;
+		for (int retry = 0; retry < maxRetry; ++retry) {
+			try {
+				targetVertex.setProperty("labels", targetVertexType);
+				sourceVertex.addEdge(edgeType, targetVertex);
+				graphDb.commit();
+				break;
+			} catch(OConcurrentModificationException e) {}
+		}
+		
 		return targetVertex;
 	}
 
 	@Override
 	public void insertEdge(Vertex sourceVertex, String sourceVertexType,
 			Vertex targetVertex, String edgeType) throws IOException {
-		graphDb.addEdge(null, sourceVertex, targetVertex, edgeType);
+		int maxRetry = 10;
+		for (int retry = 0; retry < maxRetry; ++retry) {
+			try {
+				graphDb.addEdge(null, sourceVertex, targetVertex, edgeType);
+				graphDb.commit();
+				break;
+			} catch(OConcurrentModificationException e) {}
+		}
 	}
 
 	// read
 	
+	public String typeTranslator(String type) {
+		String result;
+		switch (type) {
+			case "Segment":
+				result = ":TrackElement:Segment";
+				break;
+			case "Signal":
+				result = ":Signal";
+				break;
+			case "Sensor":
+				result = ":Sensor";
+				break;
+			case "Switch":
+				result = ":Switch:TrackElement";
+				break;
+			case "Route":
+				result = ":Route";
+				break;
+			case "SwitchPosition":
+				result = ":SwitchPosition";
+				break;
+			default:
+				result = type;
+				break;
+		}
+		return result;
+	}
+	
 	@Override
 	public List<Vertex> collectVertices(String type) throws IOException {
-		final Iterable<Vertex> vertices = graphDb.getVertices("labels", type);
+		final Iterable<Vertex> vertices = graphDb.getVertices("labels", typeTranslator(type));
 		List<Vertex> list = Lists.newArrayList(vertices);
 		return list;
 	}
@@ -145,7 +191,15 @@ public class OrientDbDriver extends DatabaseDriver<Vertex> {
 			throws IOException {
 		for (final Vertex vertex : vertices) {
 			final Integer property = (Integer) vertex.getProperty(propertyName);
-			vertex.setProperty(propertyName, propertyOperation.op(property));
+			System.out.println("[ORIENTDB] Vertex: " + vertex.toString() + ", old property: " + property + ", new property: " + propertyOperation.op(property));
+			int maxRetry = 10;
+			for (int retry = 0; retry < maxRetry; ++retry) {
+				try {
+					vertex.setProperty(propertyName, propertyOperation.op(property));
+					graphDb.commit();
+					break;
+				} catch(OConcurrentModificationException e) {}
+			}
 		}
 	}
 	
@@ -174,14 +228,21 @@ public class OrientDbDriver extends DatabaseDriver<Vertex> {
 			String vertexType, String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
-	
+
 	public void deleteEdges(List<Vertex> vertices, String edgeType, boolean outgoing, boolean all) {
 		Direction direction = outgoing ? Direction.OUT : Direction.IN;
 		
 		for (Vertex vertex : vertices) {
 			Iterable<Edge> edges = vertex.getEdges(direction, edgeType);
 			for (Edge edge : edges) {
-				graphDb.removeEdge(edge);
+				int maxRetry = 10;
+				for (int retry = 0; retry < maxRetry; ++retry) {
+					try {
+						edge.remove();
+						graphDb.commit();
+						break;
+					} catch(OConcurrentModificationException e) {}
+				}
 				
 				if (!all) {
 					break;
@@ -194,7 +255,14 @@ public class OrientDbDriver extends DatabaseDriver<Vertex> {
 	@Override
 	public void deleteVertex(Vertex vertex, String vertexType)
 			throws IOException {
-		graphDb.removeVertex(vertex);
+		int maxRetry = 10;
+		for (int retry = 0; retry < maxRetry; ++retry) {
+			try {
+				vertex.remove();
+				graphDb.commit();
+				break;
+			} catch(OConcurrentModificationException e) {}
+		}
 	}
 
 	@Override
