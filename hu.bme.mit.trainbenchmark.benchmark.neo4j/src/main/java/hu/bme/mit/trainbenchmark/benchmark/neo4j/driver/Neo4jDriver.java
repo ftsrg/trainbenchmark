@@ -17,12 +17,11 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -101,34 +100,34 @@ public class Neo4jDriver extends Driver<Node> {
 		}
 	}
 
-	public List<Neo4jMatch> runQuery(final String pattern, final String query) throws IOException {
+	public List<Neo4jMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final List<Neo4jMatch> results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final ExecutionEngine engine = new ExecutionEngine(graphDb);
-			final ExecutionResult result = engine.execute(query);
+			final ExecutionResult result = engine.execute(queryDefinition);
 			for (final Map<String, Object> row : result) {
-				results.add(createMatch(pattern, row));
+				results.add(createMatch(query, row));
 			}
 		}
 
 		return results;
 	}
 
-	protected Neo4jMatch createMatch(final String pattern, final Map<String, Object> row) {
-		switch (pattern) {
-		case QueryConstants.POSLENGTH:
-			return new Neo4jPosLengthMatch(row);
-		case QueryConstants.ROUTESENSOR:
+	protected Neo4jMatch createMatch(final Query query, final Map<String, Object> row) {
+		switch (query) {
+		case POSLENGTH:
+			return new SesamePosLengthMatch(row);
+		case ROUTESENSOR:
 			return new Neo4jRouteSensorMatch(row);
-		case QueryConstants.SEMAPHORENEIGHBOR:
+		case SEMAPHORENEIGHBOR:
 			return new Neo4jSemaphoreNeighborMatch(row);
-		case QueryConstants.SWITCHSENSOR:
+		case SWITCHSENSOR:
 			return new Neo4jSwitchSensorMatch(row);
-		case QueryConstants.SWITCHSET:
+		case SWITCHSET:
 			return new Neo4jSwitchSetMatch(row);
 		default:
-			throw new UnsupportedOperationException("Pattern not supported: " + pattern);
+			throw new UnsupportedOperationException("Query not supported: " + query);
 		}
 	}
 
