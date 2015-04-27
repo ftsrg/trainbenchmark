@@ -1,6 +1,7 @@
 package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
@@ -15,7 +16,7 @@ public class EMFUserTransformationRouteSensor extends EMFUserTransformation {
 	}
 
 	@Override
-	public void rhs(final Collection routes) {
+	public void rhs(final Collection<RailwayElement> routes) {
 		for (final Object railwayElement : routes) {
 			final Route route = (Route) railwayElement;
 			final EList<Sensor> definedBys = route.getDefinedBy();

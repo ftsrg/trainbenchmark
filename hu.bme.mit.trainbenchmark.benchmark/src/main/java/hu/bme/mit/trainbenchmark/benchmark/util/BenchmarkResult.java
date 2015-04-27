@@ -14,12 +14,10 @@ package hu.bme.mit.trainbenchmark.benchmark.util;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,11 +25,17 @@ import com.google.common.base.Stopwatch;
 
 public class BenchmarkResult {
 
-	protected String tool;
-	protected Query query;
 	protected BenchmarkConfig bc;
 	protected Stopwatch stopwatch;
-	protected Random random;
+
+	public BenchmarkResult(final BenchmarkConfig bc) {
+		super();
+		this.bc = bc;
+	}
+
+	public static BenchmarkResult newInstance(final BenchmarkConfig bc) {
+		return new BenchmarkResult(bc);
+	}
 
 	@JsonProperty("ModifiedElements")
 	protected List<Long> modifiedMatchCounts = new ArrayList<>();
@@ -56,12 +60,6 @@ public class BenchmarkResult {
 	@JsonProperty("RHSTimes")
 	protected List<Long> rhsTimes = new ArrayList<>();
 
-	public BenchmarkResult(final String tool, final Query query) {
-		this.tool = tool;
-		this.query = query;
-		this.random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
-	}
-
 	// JSON properties
 	@JsonProperty("Size")
 	public int getSize() {
@@ -80,12 +78,12 @@ public class BenchmarkResult {
 
 	@JsonProperty("Tool")
 	public String getTool() {
-		return tool;
+		return bc.getTool();
 	}
 
 	@JsonProperty("Query")
 	public Query getQuery() {
-		return query;
+		return bc.getQuery();
 	}
 
 	// benchmarkconfig
@@ -129,16 +127,6 @@ public class BenchmarkResult {
 		rhsTimes.add(stopClock());
 	}
 
-	// random
-
-	public void setRandom(final Random random) {
-		this.random = random;
-	}
-
-	public Random getRandom() {
-		return random;
-	}
-
 	// memory usage
 
 	public void addMemoryUsage(final long memoryUsage) {
@@ -171,12 +159,15 @@ public class BenchmarkResult {
 		return
 			"Benchmark results\n" +
 			"-----------------\n" +
+			"Scenario: " + getScenario() + "\n" +
+			"Query: " + getQuery() + "\n" +
+			"Tool: " + getTool() + "\n" +
 			"Match counts: " + matchCounts + "\n" +
 			"Read time: " + readTime + "\n" + 	
 			"Check time: " + checkTimes + "\n" + 	
 			"LHS times: " + lhsTimes + "\n" + 	
 			"RHS times: " + rhsTimes + "\n" + 	
-			"Modified match counts: " + modifiedMatchCounts 
+			"Modified match counts: " + modifiedMatchCounts + "\n" 
 			;
 		// @formatter:on
 	}

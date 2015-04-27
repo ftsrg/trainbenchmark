@@ -33,11 +33,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 
 	protected RailwayContainer container;
 	protected Resource resource;
-	protected Comparator<RailwayElement> elementComparator;
-
-	public EMFDriver() {
-		// elementComparator = new RailwayElementComparator();
-	}
+	protected Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {

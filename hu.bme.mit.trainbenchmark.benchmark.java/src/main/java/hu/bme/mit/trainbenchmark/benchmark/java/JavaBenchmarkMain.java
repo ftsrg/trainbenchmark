@@ -9,7 +9,6 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-
 package hu.bme.mit.trainbenchmark.benchmark.java;
 
 import java.io.IOException;
@@ -18,8 +17,8 @@ import org.apache.commons.cli.ParseException;
 
 public class JavaBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		JavaBenchmarkLogic benchmarkLogic = new JavaBenchmarkLogic(args);
+	public static void main(final String[] args) throws IOException, ParseException {
+		final JavaBenchmarkLogic benchmarkLogic = new JavaBenchmarkLogic(args);
 		benchmarkLogic.runBenchmark();
 	}
 }

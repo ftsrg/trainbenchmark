@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.is;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
@@ -43,7 +43,7 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 			benchmarkCase.benchmarkCheck();
 
 			final int resultSize = benchmarkCase.getMatches().size();
-			assertEquals(expectedResultSize, resultSize);
+			collector.checkThat(expectedResultSize, is(resultSize));
 
 			final BenchmarkResult benchmarkResult = benchmarkCase.getBenchmarkResult();
 			System.out.println(benchmarkResult);
