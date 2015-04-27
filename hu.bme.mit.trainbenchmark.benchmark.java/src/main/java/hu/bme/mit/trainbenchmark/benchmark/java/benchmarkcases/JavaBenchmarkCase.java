@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.java.transformation.repair.JavaTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.java.transformations.JavaTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -32,9 +32,9 @@ public class JavaBenchmarkCase extends AbstractBenchmarkCase<JavaMatch, RailwayE
 
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
-		checker = JavaChecker.createChecker(emfDriver, bc.getQuery());
+		checker = JavaChecker.newInstance(emfDriver, bc.getQuery());
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = JavaTransformation.createTransformation(emfDriver, bc.getQuery(), bc.getScenario());
+			transformation = JavaTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
 		}
 	}
 

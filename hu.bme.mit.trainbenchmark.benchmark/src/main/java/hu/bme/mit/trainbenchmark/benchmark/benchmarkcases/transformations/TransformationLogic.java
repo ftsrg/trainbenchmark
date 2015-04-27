@@ -30,7 +30,7 @@ public abstract class TransformationLogic<M, T, O> {
 	// T: elements in the match set
 	// O: transformation object
 
-	public static TransformationLogic createTransformationLogic(final Scenario scenario, final Comparator comparator) {
+	public static TransformationLogic newInstance(final Scenario scenario, final Comparator comparator) {
 		switch (scenario) {
 		case REPAIR:
 			return new RepairTransformationLogic<>(comparator);

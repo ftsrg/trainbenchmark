@@ -1,4 +1,4 @@
-package EMFIncQueryBenchmarkComparator;
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches;
 
 import hu.bme.mit.trainbenchmark.emf.RailwayElementComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;

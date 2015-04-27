@@ -1,7 +1,8 @@
-package hu.bme.mit.trainbenchmark.benchmark.java.transformation.repair;
+package hu.bme.mit.trainbenchmark.benchmark.java.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.java.transformations.JavaTransformation;
 
 import java.util.Collection;
 
