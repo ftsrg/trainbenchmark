@@ -11,28 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user;
 
-import static hu.bme.mit.trainbenchmark.benchmark.Sesame.constants.SesameConstants.relationshipTypeEntry;
-import hu.bme.mit.trainbenchmark.benchmark.Sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
+import java.io.IOException;
 import java.util.Collection;
 
-import org.Sesame.graphdb.Node;
-import org.Sesame.graphdb.Relationship;
+import org.openrdf.model.URI;
 
 public class SesameTransformationUserSemaphoreNeighbor extends SesameTransformationUser {
 
-	public SesameTransformationUserSemaphoreNeighbor(final SesameDriver neoDriver) {
-		super(neoDriver);
+	public SesameTransformationUserSemaphoreNeighbor(final SesameDriver sesameDriver) {
+		super(sesameDriver);
 	}
 
 	@Override
-	public void rhs(final Collection<Node> routes) {
-		for (final Node route : routes) {
-			final Iterable<Relationship> entries = route.getRelationships(relationshipTypeEntry);
-			for (final Relationship entry : entries) {
-				entry.delete();
-			}
-		}
+	public void rhs(final Collection<URI> routes) throws IOException {
+		sesameDriver.deleteSingleOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.ENTRY);
 	}
 
 }

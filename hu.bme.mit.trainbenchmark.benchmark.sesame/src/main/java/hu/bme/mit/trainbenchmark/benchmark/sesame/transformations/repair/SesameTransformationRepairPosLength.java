@@ -21,9 +21,11 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.Literal;
+import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
+import org.openrdf.model.ValueFactory;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
@@ -35,15 +37,16 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 	}
 
 	@Override
-	public void rhs(final Collection<SesamePosLengthMatch> matches) {
+	public void rhs(final Collection<SesamePosLengthMatch> matches) throws IOException {
 		final RepositoryConnection con = sesameDriver.getConnection();
+		final ValueFactory f = sesameDriver.getValueFactory();
 
 		final PosLengthRepairOperation operation = new PosLengthRepairOperation();
 		final URI lengthProperty = f.createURI(BASE_PREFIX + LENGTH);
 
 		try {
 			for (final SesamePosLengthMatch match : matches) {
-				final Value segment = match.getSegment();
+				final Resource segment = match.getSegment();
 				final Value length = match.getLength();
 
 				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, lengthProperty, length, true);
@@ -59,5 +62,4 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 			throw new IOException(e);
 		}
 	}
-
 }

@@ -11,31 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_POSITION;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
@@ -49,11 +32,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.openrdf.OpenRDFException;
-import org.openrdf.model.Literal;
-import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.BindingSet;
@@ -75,23 +55,29 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	protected Long newVertexId = null;
 
-	protected String queryDefinition;
 	protected RepositoryConnection con;
 	protected Repository repository;
-	protected ValueFactory f;
+	protected ValueFactory vf;
 	protected TupleQuery tupleQuery;
 
 	protected Comparator<BindingSet> matchComparator;
 	protected Comparator<URI> elementComparator;
 
-	public SesameDriver(final String queryPath) throws IOException {
+	protected final String queryDefinition;
+	protected final Query query;
+
+	public SesameDriver(final BenchmarkConfig bc) throws IOException {
+		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + bc.getQuery()
+				+ ".sparql";
+
+		this.query = bc.getQuery();
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 		this.elementComparator = new URIComparator();
 	}
 
 	@Override
 	public void beginTransaction() {
-		f = repository.getValueFactory();
+		vf = repository.getValueFactory();
 	}
 
 	@Override
@@ -117,7 +103,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
-	public List<SesameMatch> runQuery(final Query query) throws IOException {
+	public List<SesameMatch> runQuery() throws IOException {
 		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
 
@@ -159,7 +145,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	@Override
 	public List<URI> collectVertices(final String type) throws IOException {
-		final URI typeURI = f.createURI(BASE_PREFIX + type);
+		final URI typeURI = vf.createURI(BASE_PREFIX + type);
 		final List<URI> vertices = new ArrayList<>();
 
 		try {
@@ -190,7 +176,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 			throws IOException {
 		final List<Statement> itemsToRemove = new ArrayList<>();
 
-		final URI edge = f.createURI(BASE_PREFIX + edgeType);
+		final URI edge = vf.createURI(BASE_PREFIX + edgeType);
 
 		try {
 			for (final URI vertex : vertices) {
@@ -247,151 +233,6 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	// repair
 
-	@Override
-	public void posLengthRepair(final Collection<BindingSet> matches) throws IOException {
-		final PosLengthRepairOperation operation = new PosLengthRepairOperation();
-		final URI lengthProperty = f.createURI(BASE_PREFIX + LENGTH);
-
-		try {
-			for (final BindingSet match : matches) {
-				final Resource segment = (Resource) match.getValue(VAR_SEGMENT);
-				final Value length = match.getValue(VAR_LENGTH);
-
-				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, lengthProperty, length, true);
-				while (statementsToRemove.hasNext()) {
-					con.remove(statementsToRemove.next());
-				}
-
-				final Integer lengthInteger = new Integer(length.stringValue());
-				final Literal newLength = f.createLiteral(operation.op(lengthInteger));
-				con.add(segment, lengthProperty, newLength);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void routeSensorRepair(final Collection<BindingSet> matches) throws IOException {
-		final URI definedBy = f.createURI(BASE_PREFIX + DEFINED_BY);
-
-		try {
-			for (final BindingSet match : matches) {
-				final Resource route = (Resource) match.getValue(VAR_ROUTE);
-				final Resource sensor = (Resource) match.getValue(VAR_SENSOR);
-
-				con.add(route, definedBy, sensor);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void semaphoreNeighborRepair(final Collection<BindingSet> matches) throws IOException {
-		final URI entry = f.createURI(BASE_PREFIX + ENTRY);
-
-		try {
-			for (final BindingSet match : matches) {
-				final Resource route2 = (Resource) match.getValue(VAR_ROUTE2);
-				final Resource semaphore = (Resource) match.getValue(VAR_SEMAPHORE);
-				con.add(route2, entry, semaphore);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void switchSensorRepair(final Collection<BindingSet> matches) throws IOException {
-		final URI sensorEdge = f.createURI(BASE_PREFIX + SENSOR_EDGE);
-		final URI sensorType = f.createURI(BASE_PREFIX + SENSOR);
-
-		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
-		}
-
-		try {
-			for (final BindingSet match : matches) {
-				final Resource sw = (Resource) match.getValue(VAR_SW);
-
-				final URI sensorURI = f.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
-				newVertexId++;
-
-				// set vertex type
-				con.add(sensorURI, RDF.TYPE, sensorType);
-				// insert edge
-				con.add(sw, sensorEdge, sensorURI);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void switchSetRepair(final Collection<BindingSet> matches) throws IOException {
-		final URI currentPositionProperty = f.createURI(BASE_PREFIX + CURRENTPOSITION);
-
-		try {
-			for (final BindingSet match : matches) {
-				final Resource sw = (Resource) match.getValue(VAR_SW);
-				final Resource position = (Resource) match.getValue(VAR_POSITION);
-				final Resource currentPosition = (Resource) match.getValue(VAR_CURRENTPOSITION);
-
-				final RepositoryResult<Statement> statementsToRemove = con.getStatements(sw, currentPositionProperty, currentPosition,
-						false);
-				while (statementsToRemove.hasNext()) {
-					con.remove(statementsToRemove.next());
-				}
-
-				con.add(sw, currentPositionProperty, position);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	// user
-
-	@Override
-	public void posLengthUser(final Collection<URI> segments) throws IOException {
-		final URI typeURI = f.createURI(BASE_PREFIX + ModelConstants.LENGTH);
-		final Literal zeroLiteral = f.createLiteral(0);
-
-		try {
-			for (final URI segment : segments) {
-				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, typeURI, null, true);
-				while (statementsToRemove.hasNext()) {
-					con.remove(statementsToRemove.next());
-				}
-
-				con.add(segment, typeURI, zeroLiteral);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
-	public void routeSensorUser(final Collection<URI> routes) throws IOException {
-		deleteOneOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.DEFINED_BY);
-	}
-
-	@Override
-	public void semaphoreNeighborUser(final Collection<URI> routes) throws IOException {
-		deleteSingleOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.ENTRY);
-	}
-
-	@Override
-	public void switchSensorUser(final Collection<URI> switches) throws IOException {
-		deleteSingleOutgoingEdge(switches, ModelConstants.SWITCH, ModelConstants.SENSOR_EDGE);
-	}
-
-	@Override
-	public void switchSetUser(final Collection<URI> switches) throws IOException {
-
-	}
-
 	protected SesameMatch createMatch(final Query query, final BindingSet bs) {
 		switch (query) {
 		case POSLENGTH:
@@ -411,6 +252,18 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	public RepositoryConnection getConnection() {
 		return con;
+	}
+
+	public ValueFactory getValueFactory() {
+		return vf;
+	}
+
+	public Long getNewVertexId() throws IOException {
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+		newVertexId++;
+		return newVertexId;
 	}
 
 }

@@ -11,10 +11,19 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborMatch;
 
+import java.io.IOException;
 import java.util.Collection;
+
+import org.openrdf.model.Resource;
+import org.openrdf.model.URI;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryException;
 
 public class SesameTransformationRepairSemaphoreNeighbor extends SesameTransformationRepair<SesameSemaphoreNeighborMatch> {
 
@@ -23,11 +32,20 @@ public class SesameTransformationRepairSemaphoreNeighbor extends SesameTransform
 	}
 
 	@Override
-	public void rhs(final Collection<SesameSemaphoreNeighborMatch> matches) {
-		for (final SesameSemaphoreNeighborMatch snm : matches) {
-			final Node semaphore = snm.getSemaphore();
-			final Node route2 = snm.getRoute2();
-			route2.createRelationshipTo(semaphore, relationshipTypeEntry);
+	public void rhs(final Collection<SesameSemaphoreNeighborMatch> matches) throws IOException {
+		final RepositoryConnection con = sesameDriver.getConnection();
+		final ValueFactory vf = sesameDriver.getValueFactory();
+
+		final URI entry = vf.createURI(BASE_PREFIX + ENTRY);
+
+		try {
+			for (final SesameSemaphoreNeighborMatch match : matches) {
+				final Resource route2 = match.getRoute2();
+				final Resource semaphore = match.getSemaphore();
+				con.add(route2, entry, semaphore);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
 		}
 	}
 
