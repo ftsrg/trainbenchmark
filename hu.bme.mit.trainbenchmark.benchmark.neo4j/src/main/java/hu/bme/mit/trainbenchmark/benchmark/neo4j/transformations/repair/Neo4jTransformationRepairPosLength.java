@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
 import java.util.Collection;
@@ -20,8 +21,8 @@ import org.neo4j.graphdb.Node;
 
 public class Neo4jTransformationRepairPosLength extends Neo4jTransformationRepair<Neo4jPosLengthMatch> {
 
-	public Neo4jTransformationRepairPosLength() {
-		super();
+	public Neo4jTransformationRepairPosLength(final Neo4jDriver neoDriver) {
+		super(neoDriver);
 	}
 
 	@Override

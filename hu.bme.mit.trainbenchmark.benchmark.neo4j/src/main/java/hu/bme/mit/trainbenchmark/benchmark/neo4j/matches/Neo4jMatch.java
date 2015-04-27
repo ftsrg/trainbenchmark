@@ -13,6 +13,8 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
 import java.util.Map;
 
+import org.neo4j.graphdb.Node;
+
 public abstract class Neo4jMatch {
 
 	protected Map<String, Object> match;
@@ -20,5 +22,7 @@ public abstract class Neo4jMatch {
 	public Neo4jMatch(final Map<String, Object> match) {
 		this.match = match;
 	}
+
+	public abstract Node[] toArray();
 
 }

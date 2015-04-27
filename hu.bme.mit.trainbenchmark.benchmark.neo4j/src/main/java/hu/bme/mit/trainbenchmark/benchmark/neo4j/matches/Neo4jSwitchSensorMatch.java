@@ -29,4 +29,9 @@ public class Neo4jSwitchSensorMatch extends Neo4jMatch implements SwitchSensorMa
 		return (Node) match.get(VAR_SW);
 	}
 
+	@Override
+	public Node[] toArray() {
+		return new Node[] { getSw() };
+	}
+
 }

@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSemaphoreNeighbor;
@@ -30,35 +31,41 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 	// query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
 	// + "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + getName() + ".cypher"));
 
-	public static Transformation<?> newInstance(final Query query, final Scenario scenario) {
+	protected Neo4jDriver neoDriver;
+
+	protected Neo4jTransformation(final Neo4jDriver neoDriver) {
+		this.neoDriver = neoDriver;
+	}
+
+	public static Transformation<?> newInstance(final Neo4jDriver neoDriver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case POSLENGTH:
-				return new Neo4jTransformationRepairPosLength();
+				return new Neo4jTransformationRepairPosLength(neoDriver);
 			case ROUTESENSOR:
-				return new Neo4jTransformationRepairRouteSensor();
+				return new Neo4jTransformationRepairRouteSensor(neoDriver);
 			case SEMAPHORENEIGHBOR:
-				return new Neo4jTransformationRepairSemaphoreNeighbor();
+				return new Neo4jTransformationRepairSemaphoreNeighbor(neoDriver);
 			case SWITCHSENSOR:
-				return new Neo4jTransformationRepairSwitchSensor();
+				return new Neo4jTransformationRepairSwitchSensor(neoDriver);
 			case SWITCHSET:
-				return new Neo4jTransformationRepairSwitchSet();
+				return new Neo4jTransformationRepairSwitchSet(neoDriver);
 			default:
 				break;
 			}
 		case USER:
 			switch (query) {
 			case POSLENGTH:
-				return new Neo4jTransformationUserPosLength();
+				return new Neo4jTransformationUserPosLength(neoDriver);
 			case ROUTESENSOR:
-				return new Neo4jTransformationUserRouteSensor();
+				return new Neo4jTransformationUserRouteSensor(neoDriver);
 			case SEMAPHORENEIGHBOR:
-				return new Neo4jTransformationUserSemaphoreNeighbor();
+				return new Neo4jTransformationUserSemaphoreNeighbor(neoDriver);
 			case SWITCHSENSOR:
-				return new Neo4jTransformationUserSwitchSensor();
+				return new Neo4jTransformationUserSwitchSensor(neoDriver);
 			case SWITCHSET:
-				return new Neo4jTransformationUserSwitchSet();
+				return new Neo4jTransformationUserSwitchSet(neoDriver);
 			default:
 				break;
 			}
