@@ -1,6 +1,7 @@
-package hu.bme.mit.trainbenchmark.benchmark.java.transformation.repair;
+package hu.bme.mit.trainbenchmark.benchmark.java.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.java.transformations.JavaTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 

@@ -12,40 +12,26 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryCommon;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation.EMFIncQueryPosLengthTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation.EMFIncQueryRouteSensorTransformation;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
+import java.util.Comparator;
 
 import org.apache.log4j.Level;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
-import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
-import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-import org.eclipse.incquery.runtime.emf.EMFScope;
-import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-import com.google.common.collect.ImmutableMap;
-
-public abstract class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
+public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
 
 	protected EMFIncQueryDriver<M> eiqDriver;
 	protected RailwayContainer container;
-
-	protected AdvancedIncQueryEngine engine;
-	protected IncQueryMatcher<M> matcher;
 
 	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
 		return (EMFIncQueryBenchmarkConfig) bc;
@@ -57,49 +43,29 @@ public abstract class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> exten
 	}
 
 	@Override
-	public Collection<M> check() {
-		return matches;
-	}
-
-	@Override
-	public void read() throws IOException {
-		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		driver = eiqDriver = new EMFIncQueryDriver<>(modelPath);
-
-		final Resource resource = eiqDriver.getResource();
-
-		try {
-			EMFIncQueryCommon.setEIQOptions(getEMFIncQueryBenchmarkConfig());
-			final EMFScope emfScope = new EMFScope(resource);
-			engine = AdvancedIncQueryEngine.createUnmanagedEngine(emfScope);
-
-			matches = getMatcher().getAllMatches();
-			engine.addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<M>() {
-				@Override
-				public void notifyAppearance(final M match) {
-					matches.add(match);
-				}
-
-				@Override
-				public void notifyDisappearance(final M match) {
-					matches.remove(match);
-				}
-			}, false);
-		} catch (final IncQueryException e) {
-			throw new RuntimeException(e);
+	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+		super.benchmarkInit(bc);
+		eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
+		driver = eiqDriver;
+		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(eiqDriver, bc.getQuery());
+		checker = eiqChecker;
+		eiqDriver.registerChecker(eiqChecker);
+		if (bc.getScenario() != Scenario.BATCH) {
+			transformation = EMFIncQueryTransformation.newInstance(eiqDriver, bc.getQuery(), bc.getScenario());
 		}
 	}
 
-	protected abstract IncQueryMatcher<M> getMatcher() throws IncQueryException;
-
-	final Map<String, EMFUserTransformation> transformationAction = ImmutableMap.of( //
-			QueryConstants.POSLENGTH, new EMFIncQueryPosLengthTransformation(), //
-			QueryConstants.ROUTESENSOR, new EMFIncQueryRouteSensorTransformation() //
-			);
-
 	@Override
-	protected Transformation getTransformationAction() {
-		return transformationAction.get(bc.getQuery());
+	protected Comparator<?> getComparator() {
+		switch (bc.getScenario()) {
+		case BATCH:
+		case USER:
+			return driver.getElementComparator();
+		case REPAIR:
+			return new EMFIncQueryMatchComparator();
+		default:
+			return null;
+		}
 	}
 
 }

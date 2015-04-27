@@ -1,18 +1,20 @@
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformation;
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class EMFIncQueryPosLengthTransformation extends EMFUserTransformation {
+import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
+
+public class EMFIncQueryTransformationRepairPosLength extends EMFIncQueryTransformation<BasePatternMatch> {
 
 	@Override
-	public void transform(final Collection<Object> matches) throws IOException {
+	public void rhs(final Collection<BasePatternMatch> matches) throws IOException {
 		final PosLengthRepairOperation op = new PosLengthRepairOperation();
 
 		final Collection<Segment> segments = new ArrayList<>();
@@ -21,7 +23,6 @@ public class EMFIncQueryPosLengthTransformation extends EMFUserTransformation {
 			segments.add(plm.getSegment());
 		}
 
-		System.out.println(segments);
 		for (final Segment segment : segments) {
 			final int newLength = op.op(segment.getLength());
 			segment.setLength(newLength);

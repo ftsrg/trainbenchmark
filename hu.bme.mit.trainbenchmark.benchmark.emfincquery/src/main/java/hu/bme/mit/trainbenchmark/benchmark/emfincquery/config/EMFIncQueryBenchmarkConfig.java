@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
@@ -22,16 +23,16 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	protected String functionalDependencyOption;
 	protected String stubTrimOption;
 	protected boolean deltaMonitor;
-	
+
 	public EMFIncQueryBenchmarkConfig(final String[] args, final String tool) throws ParseException {
 		super(args, tool);
 	}
 
-	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
-			final ModificationMethod modificationMethod, final long modificationConstant) {
+	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final Query query,
+			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
 		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 	}
-		
+
 	@Override
 	protected void initOptions() {
 		super.initOptions();
@@ -40,7 +41,7 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 		options.addOption("stubTrimOption", true, "StubTrimOption");
 		options.addOption("noDeltaMonitor", false, "do not use DeltaMonitor");
 	}
-	
+
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
@@ -61,9 +62,9 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	public String getStubTrimOption() {
 		return stubTrimOption;
 	}
-	
+
 	public boolean isDeltaMonitor() {
 		return deltaMonitor;
 	}
-	
+
 }

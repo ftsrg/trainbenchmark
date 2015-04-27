@@ -14,7 +14,7 @@ public abstract class EMFUserTransformation extends Transformation<RailwayElemen
 		this.driver = driver;
 	}
 
-	public static EMFUserTransformation createTransformation(final EMFDriver driver, final Query query) {
+	public static EMFUserTransformation newInstance(final EMFDriver driver, final Query query) {
 		switch (query) {
 		case POSLENGTH:
 			return new EMFUserTransformationPosLength(driver);

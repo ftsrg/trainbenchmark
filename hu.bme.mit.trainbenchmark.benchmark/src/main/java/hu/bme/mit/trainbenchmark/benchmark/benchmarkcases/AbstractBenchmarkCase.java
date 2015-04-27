@@ -73,7 +73,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	}
 
 	public void benchmarkInitTransformation() {
-		transformationLogic = TransformationLogic.createTransformationLogic(bc.getScenario(), getComparator());
+		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(bc, br, driver, random);
 		}

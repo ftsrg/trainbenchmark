@@ -16,7 +16,7 @@ public abstract class JavaChecker extends Checker<JavaMatch> {
 		this.emfDriver = emfDriver;
 	}
 
-	public static JavaChecker createChecker(final EMFDriver driver, final Query query) {
+	public static JavaChecker newInstance(final EMFDriver driver, final Query query) {
 		switch (query) {
 		case POSLENGTH:
 			return new JavaPosLengthChecker(driver);

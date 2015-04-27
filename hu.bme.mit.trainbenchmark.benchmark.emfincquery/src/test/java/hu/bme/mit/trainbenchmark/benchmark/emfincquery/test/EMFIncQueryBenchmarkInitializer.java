@@ -11,8 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
@@ -21,9 +21,9 @@ public class EMFIncQueryBenchmarkInitializer extends TestBenchmarkInitializer<EM
 
 	@Override
 	protected EMFIncQueryBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Java", 1, query, iterationCount, modificationMethod,
-				modificationConstant);
-		return new EMFIncQueryBenchmarkLogic(bc);
+		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, "Java", 1, query, iterationCount,
+				modificationMethod, modificationConstant);
+		return new EMFIncQueryBenchmarkLogic(eiqbc);
 	}
 
 }
