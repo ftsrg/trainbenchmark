@@ -12,8 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSensor;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSwitch;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.relationshipTypeSensor;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;
 
 import java.util.Collection;
@@ -22,18 +25,24 @@ import java.util.HashSet;
 import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jSwitchSensor extends Neo4jJavaBenchmarkCase {
+public class Neo4jSwitchSensorChecker extends Neo4jChecker<Neo4jSwitchSensorMatch> {
+
+	public Neo4jSwitchSensorChecker(final Neo4jDriver neoDriver) {
+		super(neoDriver);
+	}
 
 	@Override
-	public Collection<Neo4jMatch> checkJava() {
-		matches = new HashSet<>();
+	public Collection<Neo4jSwitchSensorMatch> check() {
+		final Collection<Neo4jSwitchSensorMatch> matches = new HashSet<>();
 
+		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (switch:Switch)-[:sensor]->(Sensor) NAC
 			final ResourceIterable<Node> switches = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSwitch);

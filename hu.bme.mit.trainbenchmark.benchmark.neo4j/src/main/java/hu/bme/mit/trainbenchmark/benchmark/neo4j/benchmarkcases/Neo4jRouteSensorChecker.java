@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 
 import java.util.ArrayList;
@@ -27,40 +27,48 @@ import java.util.List;
 import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jRouteSensor extends Neo4jJavaBenchmarkCase {
+public class Neo4jRouteSensorChecker extends Neo4jChecker<Neo4jRouteSensorMatch> {
+
+	public Neo4jRouteSensorChecker(final Neo4jDriver neoDriver) {
+		super(neoDriver);
+	}
 
 	@Override
-	public Collection<Neo4jMatch> checkJava() {
-		matches = new HashSet<>();
+	public Collection<Neo4jRouteSensorMatch> check() {
+		final Collection<Neo4jRouteSensorMatch> matches = new HashSet<>();
 
+		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (route:Route)-[:follows]->()
-			final ResourceIterable<Node> routes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelRoute);
+			final ResourceIterable<Node> routes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(Neo4jConstants.labelRoute);
 			for (final Node route : routes) {
-				final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING, relationshipTypeFollows);
+				final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeFollows);
 
 				for (final Relationship follows : followss) {
 					final Node swP = follows.getEndNode();
 
 					// (swP:switchPosition)-[:switch]->()
-					if (!swP.hasLabel(labelSwitchPosition)) {
+					if (!swP.hasLabel(Neo4jConstants.labelSwitchPosition)) {
 						continue;
 					}
-					final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING, relationshipTypeSwitch);
+					final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING,
+							Neo4jConstants.relationshipTypeSwitch);
 					for (final Relationship relationshipSwitch : relationshipSwitches) {
 						final Node sw = relationshipSwitch.getEndNode();
 
 						// (switch:Switch)-[:sensor]->()
-						if (!sw.hasLabel(labelSwitch)) {
+						if (!sw.hasLabel(Neo4jConstants.labelSwitch)) {
 							continue;
 						}
-						final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeSensor);
+						final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING,
+								Neo4jConstants.relationshipTypeSensor);
 						for (final Relationship relationshipSensor : relationshipSensors) {
 							final Node sensor = relationshipSensor.getEndNode();
 
@@ -69,16 +77,16 @@ public class Neo4jRouteSensor extends Neo4jJavaBenchmarkCase {
 							}
 
 							// (sensor:Sensor)<-[:definedBy]-(Route) NAC
-							if (!sensor.hasLabel(labelSensor)) {
+							if (!sensor.hasLabel(Neo4jConstants.labelSensor)) {
 								continue;
 							}
-							final Iterable<Relationship> definedBys = sensor
-									.getRelationships(Direction.INCOMING, relationshipTypeDefinedBy);
+							final Iterable<Relationship> definedBys = sensor.getRelationships(Direction.INCOMING,
+									Neo4jConstants.relationshipTypeDefinedBy);
 
 							final List<Node> routes2 = new ArrayList<>();
 							for (final Relationship definedBy : definedBys) {
 								final Node route2 = definedBy.getStartNode();
-								if (!route2.hasLabel(labelRoute)) {
+								if (!route2.hasLabel(Neo4jConstants.labelRoute)) {
 									continue;
 								}
 								routes2.add(route2);

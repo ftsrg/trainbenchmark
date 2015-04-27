@@ -12,9 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
 import java.util.Collection;
@@ -22,17 +23,23 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jPosLength extends Neo4jJavaBenchmarkCase {
+public class Neo4jPosLengthChecker extends Neo4jChecker<Neo4jPosLengthMatch> {
+
+	public Neo4jPosLengthChecker(final Neo4jDriver neoDriver) {
+		super(neoDriver);
+	}
 
 	@Override
-	public Collection<Neo4jMatch> checkJava() {
-		matches = new HashSet<>();
+	public Collection<Neo4jPosLengthMatch> check() {
+		final Collection<Neo4jPosLengthMatch> matches = new HashSet<>();
 
+		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// Segment
 			final ResourceIterable<Node> segments = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSegment);

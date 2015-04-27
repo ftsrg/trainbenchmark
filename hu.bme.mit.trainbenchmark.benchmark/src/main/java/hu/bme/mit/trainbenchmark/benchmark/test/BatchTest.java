@@ -17,7 +17,7 @@ import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.is;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -66,7 +66,7 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 			testCase.benchmarkInit(bl.getBc());
 			testCase.benchmarkRead();
 			testCase.benchmarkCheck();
-			assertEquals(expectedResultSize, testCase.getMatches().size());
+			collector.checkThat(expectedResultSize, is(testCase.getMatches().size()));
 		} finally {
 			testCase.benchmarkDestroy();
 		}
