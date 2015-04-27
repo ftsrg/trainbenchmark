@@ -12,8 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelRoute;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSemaphore;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSwitch;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSwitchPosition;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.relationshipTypeEntry;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.relationshipTypeFollows;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.relationshipTypeSwitch;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
@@ -25,18 +32,24 @@ import java.util.HashSet;
 import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
+public class Neo4jSwitchSetChecker extends Neo4jChecker<Neo4jSwitchSetMatch> {
+
+	public Neo4jSwitchSetChecker(final Neo4jDriver neoDriver) {
+		super(neoDriver);
+	}
 
 	@Override
-	public Collection<Neo4jMatch> checkJava() {
-		matches = new HashSet<>();
+	public Collection<Neo4jSwitchSetMatch> check() {
+		final Collection<Neo4jSwitchSetMatch> matches = new HashSet<>();
 
+		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> semaphores = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSemaphore);
 			for (final Node semaphore : semaphores) {
@@ -63,7 +76,8 @@ public class Neo4jSwitchSet extends Neo4jJavaBenchmarkCase {
 						}
 
 						// (swP:SwitchPosition)-[:switch]->(sw:Switch)
-						final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING, relationshipTypeSwitch);
+						final Iterable<Relationship> relationshipSwitches = swP
+								.getRelationships(Direction.OUTGOING, relationshipTypeSwitch);
 
 						if (!relationshipSwitches.iterator().hasNext()) {
 							continue;

@@ -7,9 +7,9 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
-public class EMFIncQueryConnectedSegments extends EMFIncQueryChecker {
+public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryChecker {
 
-	public EMFIncQueryConnectedSegments(final EMFIncQueryDriver<ConnectedSegmentsMatch> eiqDriver) {
+	public EMFIncQueryConnectedSegmentsChecker(final EMFIncQueryDriver<ConnectedSegmentsMatch> eiqDriver) {
 		super(eiqDriver);
 	}
 
