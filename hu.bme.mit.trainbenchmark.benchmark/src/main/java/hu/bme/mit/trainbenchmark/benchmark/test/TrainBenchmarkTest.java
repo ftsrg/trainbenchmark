@@ -18,7 +18,13 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
 
+import org.junit.Rule;
+import org.junit.rules.ErrorCollector;
+
 public abstract class TrainBenchmarkTest {
+
+	@Rule
+	public ErrorCollector collector = new ErrorCollector();
 
 	protected TestBenchmarkInitializer<?> bi;
 

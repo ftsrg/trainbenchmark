@@ -12,6 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
+import static hu.bme.mit.trainbenchmark.constants.Query.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static org.junit.Assert.assertEquals;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
@@ -27,27 +32,27 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 
 	@Test
 	public void posLength() throws ParseException, IOException {
-		testQuery(Query.POSLENGTH, 411);
+		testQuery(POSLENGTH, 411);
 	}
 
 	@Test
 	public void routeSensor() throws ParseException, IOException {
-		testQuery(Query.ROUTESENSOR, 26);
+		testQuery(ROUTESENSOR, 26);
 	}
 
 	@Test
 	public void semaphoreNeighbor() throws ParseException, IOException {
-		testQuery(Query.SEMAPHORENEIGHBOR, 0);
+		testQuery(SEMAPHORENEIGHBOR, 0);
 	}
 
 	@Test
 	public void switchSensor() throws ParseException, IOException {
-		testQuery(Query.SWITCHSENSOR, 5);
+		testQuery(SWITCHSENSOR, 5);
 	}
 
 	@Test
 	public void switchSet() throws ParseException, IOException {
-		testQuery(Query.SWITCHSET, 11);
+		testQuery(SWITCHSET, 11);
 	}
 
 	protected void testQuery(final Query query, final int expectedResultSize) throws ParseException, IOException {

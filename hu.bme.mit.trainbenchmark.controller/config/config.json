@@ -13,7 +13,7 @@
   },
   "IterationCount": 10,
   "MinSize": 1,
-  "MaxSize": 1,
+  "MaxSize": 4096,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 

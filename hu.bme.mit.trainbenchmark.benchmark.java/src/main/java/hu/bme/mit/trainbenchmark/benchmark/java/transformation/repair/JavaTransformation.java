@@ -5,12 +5,14 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationPosLength;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationRouteSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationSwitchSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationSwitchSet;
 
 public abstract class JavaTransformation<M> extends Transformation<M> {
 
 	public static Transformation<?> createTransformation(final EMFDriver driver, final Query query, final Scenario scenario) {
-		System.out.println();
-
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
@@ -32,20 +34,19 @@ public abstract class JavaTransformation<M> extends Transformation<M> {
 			case POSLENGTH:
 				return new EMFUserTransformationPosLength(driver);
 			case ROUTESENSOR:
-				return new EMFUserTransformationPosLength(driver);
+				return new EMFUserTransformationRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new EMFUserTransformationPosLength(driver);
+				return new EMFUserTransformationSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new EMFUserTransformationPosLength(driver);
+				return new EMFUserTransformationSwitchSensor(driver);
 			case SWITCHSET:
-				return new EMFUserTransformationPosLength(driver);
+				return new EMFUserTransformationSwitchSet(driver);
 			default:
 				break;
 			}
 		default:
 			break;
 		}
-		return null;
-		// throw new UnsupportedOperationException("query: " + query.toString() + ", scenario: " + scenario);
+		throw new UnsupportedOperationException("query: " + query.toString() + ", scenario: " + scenario);
 	}
 }

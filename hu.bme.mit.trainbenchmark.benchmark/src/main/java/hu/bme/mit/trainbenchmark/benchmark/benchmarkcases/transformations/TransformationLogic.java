@@ -20,6 +20,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -29,16 +30,20 @@ public abstract class TransformationLogic<M, T, O> {
 	// T: elements in the match set
 	// O: transformation object
 
-	public static TransformationLogic createTransformationLogic(final Scenario scenario) {
+	public static TransformationLogic createTransformationLogic(final Scenario scenario, final Comparator comparator) {
 		switch (scenario) {
 		case REPAIR:
-			return new RepairTransformationLogic<>();
+			return new RepairTransformationLogic<>(comparator);
 		case USER:
-			return new UserTransformationLogic<>();
+			return new UserTransformationLogic<>(comparator);
 		default:
-			return null;
-			// throw new UnsupportedOperationException("Scenario " + scenario + " not supported");
+			throw new UnsupportedOperationException("Scenario " + scenario + " not supported");
 		}
+	}
+
+	protected TransformationLogic(final Comparator comparator) {
+		super();
+		this.comparator = comparator;
 	}
 
 	protected BenchmarkConfig bc;
@@ -48,6 +53,7 @@ public abstract class TransformationLogic<M, T, O> {
 
 	protected Collection<O> candidatesToModify;
 	protected List<O> objectsToModify;
+	protected Comparator<O> comparator;
 
 	protected long nObjectsToModify;
 	protected long start;

@@ -15,11 +15,14 @@ package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.java.transformation.repair.JavaTransformation;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
+import java.util.Comparator;
 
 public class JavaBenchmarkCase extends AbstractBenchmarkCase<JavaMatch, RailwayElement> {
 
@@ -30,7 +33,21 @@ public class JavaBenchmarkCase extends AbstractBenchmarkCase<JavaMatch, RailwayE
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
 		checker = JavaChecker.createChecker(emfDriver, bc.getQuery());
-		transformation = JavaTransformation.createTransformation(emfDriver, bc.getQuery(), bc.getScenario());
+		if (bc.getScenario() != Scenario.BATCH) {
+			transformation = JavaTransformation.createTransformation(emfDriver, bc.getQuery(), bc.getScenario());
+		}
 	}
 
+	@Override
+	protected Comparator<?> getComparator() {
+		switch (bc.getScenario()) {
+		case BATCH:
+		case USER:
+			return driver.getElementComparator();
+		case REPAIR:
+			return new JavaMatchComparator();
+		default:
+			return null;
+		}
+	}
 }

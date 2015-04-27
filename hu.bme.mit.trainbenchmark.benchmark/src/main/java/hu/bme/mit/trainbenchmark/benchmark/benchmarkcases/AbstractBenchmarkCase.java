@@ -25,6 +25,7 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Random;
 
 public abstract class AbstractBenchmarkCase<M, T> {
@@ -67,14 +68,12 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		this.bc = bc;
-		br = new BenchmarkResult(bc.getTool(), bc.getQuery());
-		br.setBenchmarkConfig(bc);
-
+		br = BenchmarkResult.newInstance(bc);
 		init();
 	}
 
 	public void benchmarkInitTransformation() {
-		transformationLogic = TransformationLogic.createTransformationLogic(bc.getScenario());
+		transformationLogic = TransformationLogic.createTransformationLogic(bc.getScenario(), getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(bc, br, driver, random);
 		}
@@ -102,6 +101,8 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkModify() throws IOException {
 		transformationLogic.performTransformation(matches);
-
 	}
+
+	protected abstract Comparator<?> getComparator();
+
 }

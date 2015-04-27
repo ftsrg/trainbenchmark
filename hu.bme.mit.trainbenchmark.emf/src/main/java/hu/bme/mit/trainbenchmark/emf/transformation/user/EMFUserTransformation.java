@@ -3,8 +3,9 @@ package hu.bme.mit.trainbenchmark.emf.transformation.user;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public abstract class EMFUserTransformation extends Transformation {
+public abstract class EMFUserTransformation extends Transformation<RailwayElement> {
 
 	protected EMFDriver driver;
 

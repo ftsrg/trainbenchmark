@@ -17,9 +17,9 @@ import org.apache.commons.cli.ParseException;
 
 public class EMFIncQueryBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		EMFIncQueryBenchmarkLogic benchmarkLogic = new EMFIncQueryBenchmarkLogic(args);
-		benchmarkLogic.runBenchmark();	
+	public static void main(final String[] args) throws IOException, ParseException {
+		final EMFIncQueryBenchmarkLogic benchmarkLogic = new EMFIncQueryBenchmarkLogic(args);
+		benchmarkLogic.runBenchmark();
 	}
-	
+
 }
