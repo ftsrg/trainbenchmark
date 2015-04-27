@@ -14,15 +14,18 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Comparator;
 
 import org.openrdf.model.URI;
-import org.openrdf.query.BindingSet;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<BindingSet, URI> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI> {
 
 	protected SesameDriver sesameDriver;
 	protected RDFBenchmarkConfig rbc;
@@ -31,15 +34,25 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<BindingSet, URI> 
 	protected void init() throws IOException {
 		this.rbc = (RDFBenchmarkConfig) bc;
 
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + bc.getQuery()
-				+ ".sparql";
-		driver = sesameDriver = new SesameDriver(queryPath);
+		driver = sesameDriver = new SesameDriver(bc);
+		checker = new SesameChecker(sesameDriver);
+
+		if (bc.getScenario() != Scenario.BATCH) {
+			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
+		}
 	}
 
 	@Override
-	public Collection<BindingSet> check() throws IOException {
-		matches = sesameDriver.runQuery();
-		return matches;
+	protected Comparator<?> getComparator() {
+		switch (bc.getScenario()) {
+		case BATCH:
+		case USER:
+			return driver.getElementComparator();
+		case REPAIR:
+			return new SesameMatchComparator();
+		default:
+			throw new UnsupportedOperationException();
+		}
 	}
 
 }

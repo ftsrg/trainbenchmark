@@ -11,23 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user;
 
-import hu.bme.mit.trainbenchmark.benchmark.Sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 import java.util.Collection;
 
-import org.Sesame.graphdb.Node;
+import org.apache.commons.lang.NotImplementedException;
+import org.openrdf.model.URI;
 
 public class SesameTransformationUserSwitchSet extends SesameTransformationUser {
 
-	public SesameTransformationUserSwitchSet(final SesameDriver neoDriver) {
-		super(neoDriver);
+	public SesameTransformationUserSwitchSet(final SesameDriver sesameDriver) {
+		super(sesameDriver);
 	}
 
 	@Override
-	public void rhs(final Collection<Node> switches) {
-		for (final Node sw : switches) {
-
-		}
+	public void rhs(final Collection<URI> switches) {
+		throw new NotImplementedException();
 	}
 
 }

@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 
+import org.openrdf.model.Resource;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
@@ -24,8 +25,8 @@ public class SesameSwitchSensorMatch extends SesameMatch implements SwitchSensor
 	}
 
 	@Override
-	public Value getSw() {
-		return bs.getValue(VAR_SW);
+	public Resource getSw() {
+		return (Resource) bs.getValue(VAR_SW);
 	}
 
 	@Override

@@ -11,28 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user;
 
-import static hu.bme.mit.trainbenchmark.benchmark.Sesame.constants.SesameConstants.relationshipTypeSensor;
-import hu.bme.mit.trainbenchmark.benchmark.Sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
+import java.io.IOException;
 import java.util.Collection;
 
-import org.Sesame.graphdb.Node;
-import org.Sesame.graphdb.Relationship;
+import org.openrdf.model.URI;
 
 public class SesameTransformationUserSwitchSensor extends SesameTransformationUser {
 
-	public SesameTransformationUserSwitchSensor(final SesameDriver neoDriver) {
-		super(neoDriver);
+	public SesameTransformationUserSwitchSensor(final SesameDriver sesameDriver) {
+		super(sesameDriver);
 	}
 
 	@Override
-	public void rhs(final Collection<Node> switches) {
-		for (final Node sw : switches) {
-			final Iterable<Relationship> sensors = sw.getRelationships(relationshipTypeSensor);
-			for (final Relationship sensor : sensors) {
-				sensor.delete();
-			}
-		}
+	public void rhs(final Collection<URI> switches) throws IOException {
+		sesameDriver.deleteSingleOutgoingEdge(switches, ModelConstants.SWITCH, ModelConstants.SENSOR_EDGE);
 	}
 
 }

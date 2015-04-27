@@ -37,7 +37,7 @@ public class VirtuosoDriver extends SesameDriver{
 
 	@Override
 	public void beginTransaction() {
-		f = virtuosoRepository.getValueFactory();
+		vf = virtuosoRepository.getValueFactory();
 	}
 	
 	@Override

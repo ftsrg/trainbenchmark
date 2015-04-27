@@ -20,6 +20,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 
+import org.openrdf.model.Resource;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
@@ -30,38 +31,38 @@ public class SesameSemaphoreNeighborMatch extends SesameMatch implements Semapho
 	}
 
 	@Override
-	public Value getSemaphore() {
-		return bs.getValue(VAR_SEMAPHORE);
+	public Resource getSemaphore() {
+		return (Resource) bs.getValue(VAR_SEMAPHORE);
 	}
 
 	@Override
-	public Value getRoute1() {
-		return bs.getValue(VAR_ROUTE1);
+	public Resource getRoute1() {
+		return (Resource) bs.getValue(VAR_ROUTE1);
 	}
 
 	@Override
-	public Value getRoute2() {
-		return bs.getValue(VAR_ROUTE2);
+	public Resource getRoute2() {
+		return (Resource) bs.getValue(VAR_ROUTE2);
 	}
 
 	@Override
-	public Value getSensor1() {
-		return bs.getValue(VAR_SENSOR1);
+	public Resource getSensor1() {
+		return (Resource) bs.getValue(VAR_SENSOR1);
 	}
 
 	@Override
-	public Value getSensor2() {
-		return bs.getValue(VAR_SENSOR2);
+	public Resource getSensor2() {
+		return (Resource) bs.getValue(VAR_SENSOR2);
 	}
 
 	@Override
-	public Value getTe1() {
-		return bs.getValue(VAR_TE1);
+	public Resource getTe1() {
+		return (Resource) bs.getValue(VAR_TE1);
 	}
 
 	@Override
-	public Value getTe2() {
-		return bs.getValue(VAR_TE2);
+	public Resource getTe2() {
+		return (Resource) bs.getValue(VAR_TE2);
 	}
 
 	@Override

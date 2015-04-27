@@ -14,10 +14,12 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 
-public abstract class SesameTransformationUser extends SesameTransformation<Node> {
+import org.openrdf.model.URI;
 
-	protected SesameTransformationUser(final SesameDriver neoDriver) {
-		super(neoDriver);
+public abstract class SesameTransformationUser extends SesameTransformation<URI> {
+
+	protected SesameTransformationUser(final SesameDriver sesameDriver) {
+		super(sesameDriver);
 	}
 
 }

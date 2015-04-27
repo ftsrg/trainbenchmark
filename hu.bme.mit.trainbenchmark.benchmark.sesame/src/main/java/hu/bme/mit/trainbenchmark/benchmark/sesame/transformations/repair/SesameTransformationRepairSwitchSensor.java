@@ -11,10 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSensorMatch;
 
+import java.io.IOException;
 import java.util.Collection;
+
+import org.openrdf.model.Resource;
+import org.openrdf.model.URI;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryException;
 
 public class SesameTransformationRepairSwitchSensor extends SesameTransformationRepair<SesameSwitchSensorMatch> {
 
@@ -23,12 +35,26 @@ public class SesameTransformationRepairSwitchSensor extends SesameTransformation
 	}
 
 	@Override
-	public void rhs(final Collection<SesameSwitchSensorMatch> matches) {
-		for (final SesameSwitchSensorMatch ssm : matches) {
-			final Node sw = ssm.getSw();
-			final Node sensor = neoDriver.getGraphDb().createNode();
-			sensor.addLabel(labelSensor);
-			sw.createRelationshipTo(sensor, relationshipTypeSensor);
+	public void rhs(final Collection<SesameSwitchSensorMatch> matches) throws IOException {
+		final RepositoryConnection con = sesameDriver.getConnection();
+		final ValueFactory vf = sesameDriver.getValueFactory();
+
+		final URI sensorEdge = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
+		final URI sensorType = vf.createURI(BASE_PREFIX + SENSOR);
+
+		try {
+			for (final SesameSwitchSensorMatch match : matches) {
+				final Resource sw = match.getSw();
+
+				final URI sensorURI = vf.createURI(BASE_PREFIX + ID_PREFIX + sesameDriver.getNewVertexId());
+
+				// set vertex type
+				con.add(sensorURI, RDF.TYPE, sensorType);
+				// insert edge
+				con.add(sw, sensorEdge, sensorURI);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
 		}
 	}
 

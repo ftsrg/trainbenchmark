@@ -12,11 +12,21 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
 
+import java.io.IOException;
 import java.util.Collection;
+
+import org.openrdf.model.Resource;
+import org.openrdf.model.Statement;
+import org.openrdf.model.URI;
+import org.openrdf.model.Value;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryException;
+import org.openrdf.repository.RepositoryResult;
 
 public class SesameTransformationRepairSwitchSet extends SesameTransformationRepair<SesameSwitchSetMatch> {
 
@@ -25,12 +35,28 @@ public class SesameTransformationRepairSwitchSet extends SesameTransformationRep
 	}
 
 	@Override
-	public void rhs(final Collection<SesameSwitchSetMatch> matches) {
-		for (final SesameSwitchSetMatch ssm : matches) {
-			final Node sw = ssm.getSw();
-			final Node swP = ssm.getSwP();
-			final Object position = swP.getProperty(POSITION);
-			sw.setProperty(CURRENTPOSITION, position);
+	public void rhs(final Collection<SesameSwitchSetMatch> matches) throws IOException {
+		final RepositoryConnection con = sesameDriver.getConnection();
+		final ValueFactory vf = sesameDriver.getValueFactory();
+
+		final URI currentPositionProperty = vf.createURI(BASE_PREFIX + CURRENTPOSITION);
+
+		try {
+			for (final SesameSwitchSetMatch match : matches) {
+				final Resource sw = match.getSw();
+				final Value position = match.getPosition();
+				final Value currentPosition = match.getCurrentPosition();
+
+				final RepositoryResult<Statement> statementsToRemove = con.getStatements(sw, currentPositionProperty, currentPosition,
+						false);
+				while (statementsToRemove.hasNext()) {
+					con.remove(statementsToRemove.next());
+				}
+
+				con.add(sw, currentPositionProperty, position);
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException(e);
 		}
 	}
 

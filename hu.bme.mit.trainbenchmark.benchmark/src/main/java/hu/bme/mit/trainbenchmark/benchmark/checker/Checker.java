@@ -11,10 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.checker;
 
+import java.io.IOException;
 import java.util.Collection;
 
 public abstract class Checker<M> {
 
-	public abstract Collection<M> check();
+	public abstract Collection<M> check() throws IOException;
 
 }

@@ -17,6 +17,6 @@ public class SesameMatchComparator implements Comparator<SesameMatch> {
 
 	@Override
 	public int compare(final SesameMatch m1, final SesameMatch m2) {
-
+		return 0;
 	}
 }
