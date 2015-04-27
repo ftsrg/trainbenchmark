@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSensor;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.labelSwitch;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.relationshipTypeSensor;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSensor;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSwitch;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSensor;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;

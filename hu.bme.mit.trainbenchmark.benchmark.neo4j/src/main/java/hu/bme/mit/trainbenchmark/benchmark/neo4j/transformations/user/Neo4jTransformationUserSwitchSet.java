@@ -11,26 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 
-public class Neo4jTransformationUserSwitchSet extends Neo4jTransformationUser<Neo4jPosLengthMatch> {
+public class Neo4jTransformationUserSwitchSet extends Neo4jTransformationUser {
 
-	public Neo4jTransformationUserSwitchSet() {
-		super();
+	public Neo4jTransformationUserSwitchSet(final Neo4jDriver neoDriver) {
+		super(neoDriver);
 	}
 
 	@Override
-	public void rhs(final Collection<Neo4jPosLengthMatch> matches) {
-		for (final Neo4jPosLengthMatch plm : matches) {
-			final Node segment = plm.getSegment();
-			final Integer length = (Integer) segment.getProperty(ModelConstants.LENGTH);
-			segment.setProperty(LENGTH, -length + 1);
+	public void rhs(final Collection<Node> switches) {
+		for (final Node sw : switches) {
+
 		}
 	}
 

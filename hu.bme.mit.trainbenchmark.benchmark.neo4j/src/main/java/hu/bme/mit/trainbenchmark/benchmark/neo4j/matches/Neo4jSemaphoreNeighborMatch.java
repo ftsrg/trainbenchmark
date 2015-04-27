@@ -65,4 +65,9 @@ public class Neo4jSemaphoreNeighborMatch extends Neo4jMatch implements Semaphore
 		return (Node) match.get(VAR_TE2);
 	}
 
+	@Override
+	public Node[] toArray() {
+		return new Node[] { getSemaphore(), getRoute1(), getRoute2(), getSensor1(), getSensor2(), getTe1(), getTe2() };
+	}
+
 }

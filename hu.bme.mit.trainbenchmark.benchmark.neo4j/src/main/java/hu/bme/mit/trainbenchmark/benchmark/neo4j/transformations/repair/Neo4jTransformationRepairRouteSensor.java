@@ -11,7 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases.Neo4jConstants.relationshipTypeDefinedBy;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeDefinedBy;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 
 import java.util.Collection;
@@ -20,8 +21,8 @@ import org.neo4j.graphdb.Node;
 
 public class Neo4jTransformationRepairRouteSensor extends Neo4jTransformationRepair<Neo4jRouteSensorMatch> {
 
-	public Neo4jTransformationRepairRouteSensor() {
-		super();
+	public Neo4jTransformationRepairRouteSensor(final Neo4jDriver neoDriver) {
+		super(neoDriver);
 	}
 
 	@Override

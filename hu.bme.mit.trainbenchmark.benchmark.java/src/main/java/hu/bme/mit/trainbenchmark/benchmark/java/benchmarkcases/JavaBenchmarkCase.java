@@ -33,6 +33,7 @@ public class JavaBenchmarkCase extends AbstractBenchmarkCase<JavaMatch, RailwayE
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
 		checker = JavaChecker.newInstance(emfDriver, bc.getQuery());
+
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = JavaTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
 		}
@@ -47,7 +48,8 @@ public class JavaBenchmarkCase extends AbstractBenchmarkCase<JavaMatch, RailwayE
 		case REPAIR:
 			return new JavaMatchComparator();
 		default:
-			return null;
+			throw new UnsupportedOperationException();
 		}
 	}
+
 }

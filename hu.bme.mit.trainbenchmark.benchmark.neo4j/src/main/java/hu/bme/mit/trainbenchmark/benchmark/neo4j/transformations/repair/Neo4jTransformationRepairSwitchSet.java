@@ -11,26 +11,28 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 
-public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformationRepair<Neo4jPosLengthMatch> {
+public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformationRepair<Neo4jSwitchSetMatch> {
 
-	public Neo4jTransformationRepairSwitchSet() {
-		super();
+	public Neo4jTransformationRepairSwitchSet(final Neo4jDriver neoDriver) {
+		super(neoDriver);
 	}
 
 	@Override
-	public void rhs(final Collection<Neo4jPosLengthMatch> matches) {
-		for (final Neo4jPosLengthMatch plm : matches) {
-			final Node segment = plm.getSegment();
-			final Integer length = (Integer) segment.getProperty(ModelConstants.LENGTH);
-			segment.setProperty(LENGTH, -length + 1);
+	public void rhs(final Collection<Neo4jSwitchSetMatch> matches) {
+		for (final Neo4jSwitchSetMatch ssm : matches) {
+			final Node sw = ssm.getSw();
+			final Node swP = ssm.getSwP();
+			final Object position = swP.getProperty(POSITION);
+			sw.setProperty(CURRENTPOSITION, position);
 		}
 	}
 

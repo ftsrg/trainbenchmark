@@ -18,6 +18,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 

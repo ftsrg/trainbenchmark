@@ -47,4 +47,9 @@ public class Neo4jSwitchSetMatch extends Neo4jMatch implements SwitchSetMatch {
 		return (Node) match.get(VAR_SW);
 	}
 
+	@Override
+	public Node[] toArray() {
+		return new Node[] { getSemaphore(), getRoute(), getSwP(), getSw() };
+	}
+
 }
