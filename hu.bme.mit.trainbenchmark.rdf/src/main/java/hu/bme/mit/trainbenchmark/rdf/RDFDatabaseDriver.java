@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.io.IOException;
 
-public abstract class RDFDatabaseDriver<M, T> extends Driver<T> {
+public abstract class RDFDatabaseDriver<T> extends Driver<T> {
 
 	protected Long determineNewVertexId() throws IOException {
 		Long id = 5000L;
@@ -38,6 +38,11 @@ public abstract class RDFDatabaseDriver<M, T> extends Driver<T> {
 		}
 
 		return id;
+	}
+
+	@Override
+	public String getExtension() {
+		return ".ttl";
 	}
 
 	protected abstract boolean ask(String askQuery) throws IOException;

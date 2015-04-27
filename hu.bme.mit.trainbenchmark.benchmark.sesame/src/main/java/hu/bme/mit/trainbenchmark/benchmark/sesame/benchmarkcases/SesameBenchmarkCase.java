@@ -31,14 +31,9 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<BindingSet, URI> 
 	protected void init() throws IOException {
 		this.rbc = (RDFBenchmarkConfig) bc;
 
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
+		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + bc.getQuery()
 				+ ".sparql";
 		driver = sesameDriver = new SesameDriver(queryPath);
-	}
-
-	@Override
-	public void read() throws IOException {
-		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");
 	}
 
 	@Override

@@ -9,16 +9,14 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
 import java.util.Comparator;
 
-import org.openrdf.query.BindingSet;
-
-public class BindingSetComparator implements Comparator<BindingSet> {
+public class SesameMatchComparator implements Comparator<SesameMatch> {
 
 	@Override
-	public int compare(final BindingSet o1, final BindingSet o2) {
-		return 0;
+	public int compare(final SesameMatch m1, final SesameMatch m2) {
+
 	}
 }

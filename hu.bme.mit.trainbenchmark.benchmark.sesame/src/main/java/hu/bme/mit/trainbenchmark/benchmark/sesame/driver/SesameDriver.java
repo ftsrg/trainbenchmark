@@ -29,7 +29,14 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
@@ -64,11 +71,11 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.memory.MemoryStore;
 
-public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
+public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	protected Long newVertexId = null;
 
-	protected String query;
+	protected String queryDefinition;
 	protected RepositoryConnection con;
 	protected Repository repository;
 	protected ValueFactory f;
@@ -78,9 +85,7 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 	protected Comparator<URI> elementComparator;
 
 	public SesameDriver(final String queryPath) throws IOException {
-		this.query = FileUtils.readFileToString(new File(queryPath));
-
-		this.matchComparator = new BindingSetComparator();
+		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 		this.elementComparator = new URIComparator();
 	}
 
@@ -99,9 +104,9 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 	}
 
 	@Override
-	public void read(final String modelPath) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws IOException {
 		repository = new SailRepository(new MemoryStore());
-		final File modelFile = new File(modelPath);
+		final File modelFile = new File(modelPathWithoutExtension + getExtension());
 
 		try {
 			repository.initialize();
@@ -112,17 +117,18 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 		}
 	}
 
-	public List<BindingSet> runQuery() throws IOException {
-		final List<BindingSet> results = new ArrayList<>();
+	public List<SesameMatch> runQuery(final Query query) throws IOException {
+		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
 
 		try {
-			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, query);
+			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
 			queryResults = tupleQuery.evaluate();
 			try {
 				while (queryResults.hasNext()) {
 					final BindingSet bs = queryResults.next();
-					results.add(bs);
+					final SesameMatch match = createMatch(query, bs);
+					results.add(match);
 				}
 			} finally {
 				queryResults.close();
@@ -132,11 +138,6 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 		}
 
 		return results;
-	}
-
-	@Override
-	public Comparator<BindingSet> getMatchComparator() {
-		return matchComparator;
 	}
 
 	@Override
@@ -294,11 +295,6 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 			for (final BindingSet match : matches) {
 				final Resource route2 = (Resource) match.getValue(VAR_ROUTE2);
 				final Resource semaphore = (Resource) match.getValue(VAR_SEMAPHORE);
-
-				System.out.println(route2);
-				System.out.println(entry);
-				System.out.println(semaphore);
-
 				con.add(route2, entry, semaphore);
 			}
 		} catch (final RepositoryException e) {
@@ -394,6 +390,27 @@ public class SesameDriver extends RDFDatabaseDriver<BindingSet, URI> {
 	@Override
 	public void switchSetUser(final Collection<URI> switches) throws IOException {
 
+	}
+
+	protected SesameMatch createMatch(final Query query, final BindingSet bs) {
+		switch (query) {
+		case POSLENGTH:
+			return new SesamePosLengthMatch(bs);
+		case ROUTESENSOR:
+			return new SesameRouteSensorMatch(bs);
+		case SEMAPHORENEIGHBOR:
+			return new SesameSemaphoreNeighborMatch(bs);
+		case SWITCHSENSOR:
+			return new SesameSwitchSensorMatch(bs);
+		case SWITCHSET:
+			return new SesameSwitchSetMatch(bs);
+		default:
+			throw new UnsupportedOperationException("Pattern not supported: " + query);
+		}
+	}
+
+	public RepositoryConnection getConnection() {
+		return con;
 	}
 
 }
