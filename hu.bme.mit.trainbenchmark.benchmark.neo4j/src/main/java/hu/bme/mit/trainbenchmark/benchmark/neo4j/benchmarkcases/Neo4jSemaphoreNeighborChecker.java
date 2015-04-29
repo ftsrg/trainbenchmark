@@ -46,7 +46,7 @@ public class Neo4jSemaphoreNeighborChecker extends Neo4jChecker<Neo4jSemaphoreNe
 	public Collection<Neo4jSemaphoreNeighborMatch> check() {
 		final Collection<Neo4jSemaphoreNeighborMatch> matches = new HashSet<>();
 
-		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
+		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> routes1 = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(Neo4jConstants.labelRoute);
 			for (final Node route1 : routes1) {

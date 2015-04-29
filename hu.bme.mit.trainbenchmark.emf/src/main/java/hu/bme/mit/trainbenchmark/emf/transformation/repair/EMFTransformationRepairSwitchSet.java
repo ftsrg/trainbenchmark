@@ -9,22 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.transformations.repair;
+package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.java.transformations.JavaTransformation;
-import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
 
 import java.util.Collection;
 
-public class JavaTransformationRepairSwitchSensor extends JavaTransformation<JavaSwitchSensorMatch> {
+public class EMFTransformationRepairSwitchSet extends EMFRepairTransformation<EMFSwitchSetMatch> {
 
 	@Override
-	public void rhs(final Collection<JavaSwitchSensorMatch> matches) {
-		for (final JavaSwitchSensorMatch match : matches) {
-			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
-			match.getSw().setSensor(sensor);
+	public void rhs(final Collection<EMFSwitchSetMatch> matches) {
+		for (final EMFSwitchSetMatch match : matches) {
+			match.getSw().setCurrentPosition(match.getSwP().getPosition());
 		}
 	}
 

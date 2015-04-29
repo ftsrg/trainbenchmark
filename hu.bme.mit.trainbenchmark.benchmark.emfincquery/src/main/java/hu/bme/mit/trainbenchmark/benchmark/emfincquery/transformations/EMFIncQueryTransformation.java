@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
+import static hu.bme.mit.trainbenchmark.constants.Scenario.USER;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairRouteSensor;
@@ -20,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EM
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformation;
+import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 
@@ -42,7 +43,7 @@ public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 				break;
 			}
 		case USER:
-			return EMFUserTransformation.newInstance(driver, query);
+			return EMFTransformation.newInstance(driver, query, USER);
 		default:
 			break;
 		}

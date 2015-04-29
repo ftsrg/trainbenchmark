@@ -19,16 +19,13 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-
-public class EMFIncQueryTransformationRepairSwitchSensor extends EMFIncQueryTransformation<BasePatternMatch> {
+public class EMFIncQueryTransformationRepairSwitchSensor extends EMFIncQueryTransformation<SwitchSensorMatch> {
 
 	@Override
-	public void rhs(final Collection<BasePatternMatch> matches) throws IOException {
-		for (final Object match : matches) {
-			final SwitchSensorMatch ssm = (SwitchSensorMatch) match;
+	public void rhs(final Collection<SwitchSensorMatch> matches) throws IOException {
+		for (final SwitchSensorMatch match : matches) {
 			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
-			ssm.getSw().setSensor(sensor);
+			match.getSw().setSensor(sensor);
 		}
 	}
 

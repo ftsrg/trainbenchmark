@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -34,7 +34,7 @@ public class JavaRouteSensorChecker extends JavaChecker {
 	}
 
 	@Override
-	public Collection<JavaMatch> check() {
+	public Collection<EMFMatch> check() {
 		matches = new ArrayList<>();
 		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
@@ -53,7 +53,7 @@ public class JavaRouteSensorChecker extends JavaChecker {
 							final Route route = swP.getRoute();
 							// (Route)-[definedBy]->(Sensor) NAC
 							if (!route.getDefinedBy().contains(sensor)) {
-								final JavaRouteSensorMatch match = new JavaRouteSensorMatch(route, sensor, swP, sw);
+								final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor, swP, sw);
 								matches.add(match);
 							}
 						}

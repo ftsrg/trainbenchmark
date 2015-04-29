@@ -18,7 +18,6 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
@@ -31,7 +30,6 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
 
 	protected EMFIncQueryDriver<M> eiqDriver;
-	protected RailwayContainer container;
 
 	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
 		return (EMFIncQueryBenchmarkConfig) bc;

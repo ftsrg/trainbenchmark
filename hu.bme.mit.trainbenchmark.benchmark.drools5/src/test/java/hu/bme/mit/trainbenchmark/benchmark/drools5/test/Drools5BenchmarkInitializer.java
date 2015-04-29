@@ -15,14 +15,15 @@ package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class Drools5BenchmarkInitializer extends TestBenchmarkInitializer<Drools5BenchmarkLogic> {
 
 	@Override
-	protected Drools5BenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Drools5", runIndex, queryName,
-				iterationCount, modificationMethod, modificationConstant);
+	protected Drools5BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Drools5", runIndex, query, iterationCount, modificationMethod,
+				modificationConstant);
 		return new Drools5BenchmarkLogic(bc);
 	}
 

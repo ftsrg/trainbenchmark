@@ -16,6 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
 import org.openrdf.model.Resource;
+import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
@@ -26,8 +27,8 @@ public class SesamePosLengthMatch extends SesameMatch implements PosLengthMatch 
 	}
 
 	@Override
-	public Resource getSegment() {
-		return (Resource) bs.getValue(VAR_SEGMENT);
+	public URI getSegment() {
+		return (URI) bs.getValue(VAR_SEGMENT);
 	}
 
 	public Value getLength() {
@@ -35,8 +36,8 @@ public class SesamePosLengthMatch extends SesameMatch implements PosLengthMatch 
 	}
 
 	@Override
-	public Value[] toArray() {
-		return new Value[] { getSegment() };
+	public URI[] toArray() {
+		return new URI[] { getSegment() };
 	}
 
 }

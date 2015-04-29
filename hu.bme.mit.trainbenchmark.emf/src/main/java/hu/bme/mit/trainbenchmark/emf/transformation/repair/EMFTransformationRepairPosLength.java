@@ -9,21 +9,20 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.transformations.repair;
+package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaPosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.java.transformations.JavaTransformation;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
 
 import java.util.Collection;
 
-public class JavaTransformationRepairPosLength extends JavaTransformation<JavaPosLengthMatch> {
+public class EMFTransformationRepairPosLength extends EMFRepairTransformation<EMFPosLengthMatch> {
 
 	@Override
-	public void rhs(final Collection<JavaPosLengthMatch> matches) {
+	public void rhs(final Collection<EMFPosLengthMatch> matches) {
 		final PosLengthRepairOperation op = new PosLengthRepairOperation();
 
-		for (final JavaPosLengthMatch match : matches) {
+		for (final EMFPosLengthMatch match : matches) {
 			final int newLength = op.op(match.getSegment().getLength());
 			match.getSegment().setLength(newLength);
 		}

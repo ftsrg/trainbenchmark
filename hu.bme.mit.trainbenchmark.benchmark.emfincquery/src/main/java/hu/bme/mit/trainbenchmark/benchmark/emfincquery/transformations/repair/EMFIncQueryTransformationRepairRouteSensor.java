@@ -17,15 +17,12 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQue
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-
-public class EMFIncQueryTransformationRepairRouteSensor extends EMFIncQueryTransformation<BasePatternMatch> {
+public class EMFIncQueryTransformationRepairRouteSensor extends EMFIncQueryTransformation<RouteSensorMatch> {
 
 	@Override
-	public void rhs(final Collection<BasePatternMatch> matches) throws IOException {
-		for (final Object match : matches) {
-			final RouteSensorMatch rsm = (RouteSensorMatch) match;
-			rsm.getRoute().getDefinedBy().add(rsm.getSensor());
+	public void rhs(final Collection<RouteSensorMatch> matches) throws IOException {
+		for (final RouteSensorMatch match : matches) {
+			match.getRoute().getDefinedBy().add(match.getSensor());
 		}
 
 	}

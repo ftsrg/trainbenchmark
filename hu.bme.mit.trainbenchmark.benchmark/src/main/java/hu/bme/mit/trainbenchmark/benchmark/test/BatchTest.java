@@ -66,7 +66,7 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 			testCase.benchmarkInit(bl.getBc());
 			testCase.benchmarkRead();
 			testCase.benchmarkCheck();
-			collector.checkThat(expectedResultSize, is(testCase.getMatches().size()));
+			collector.checkThat(testCase.getMatches().size(), is(expectedResultSize));
 		} finally {
 			testCase.benchmarkDestroy();
 		}

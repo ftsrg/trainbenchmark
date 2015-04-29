@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.matches;
+package hu.bme.mit.trainbenchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -18,9 +18,9 @@ import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class JavaSemaphoreNeighborMatch extends JavaMatch implements SemaphoreNeighborMatch {
+public class EMFSemaphoreNeighborMatch extends EMFMatch implements SemaphoreNeighborMatch {
 
-	public JavaSemaphoreNeighborMatch(final Semaphore semaphore, final Route route1, final Route route2, final Sensor sensor1,
+	public EMFSemaphoreNeighborMatch(final Semaphore semaphore, final Route route1, final Route route2, final Sensor sensor1,
 			final Sensor sensor2, final TrackElement te1, final TrackElement te2) {
 		super();
 		match = new RailwayElement[] { semaphore, route1, route2, sensor1, sensor2, te1, te2 };

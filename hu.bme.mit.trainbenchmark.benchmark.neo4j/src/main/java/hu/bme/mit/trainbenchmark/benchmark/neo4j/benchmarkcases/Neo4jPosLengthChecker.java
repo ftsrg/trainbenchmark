@@ -39,7 +39,7 @@ public class Neo4jPosLengthChecker extends Neo4jChecker<Neo4jPosLengthMatch> {
 	public Collection<Neo4jPosLengthMatch> check() {
 		final Collection<Neo4jPosLengthMatch> matches = new HashSet<>();
 
-		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
+		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// Segment
 			final ResourceIterable<Node> segments = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSegment);

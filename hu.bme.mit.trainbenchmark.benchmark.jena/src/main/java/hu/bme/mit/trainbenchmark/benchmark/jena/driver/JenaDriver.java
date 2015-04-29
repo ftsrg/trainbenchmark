@@ -18,7 +18,6 @@ import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -237,63 +236,4 @@ public class JenaDriver extends RDFDatabaseDriver<QuerySolution, Resource> {
 		return null;
 	}
 
-	@Override
-	public void posLengthRepair(final Collection<QuerySolution> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void routeSensorRepair(final Collection<QuerySolution> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void semaphoreNeighborRepair(final Collection<QuerySolution> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSensorRepair(final Collection<QuerySolution> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSetRepair(final Collection<QuerySolution> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void posLengthUser(final Collection<Resource> segments) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void routeSensorUser(final Collection<Resource> routes) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void semaphoreNeighborUser(final Collection<Resource> routes) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSensorUser(final Collection<Resource> switches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSetUser(final Collection<Resource> switches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
 }

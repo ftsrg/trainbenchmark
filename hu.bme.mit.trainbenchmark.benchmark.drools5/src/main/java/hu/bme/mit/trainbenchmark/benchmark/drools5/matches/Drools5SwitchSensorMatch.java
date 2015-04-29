@@ -9,20 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.benchmark.java.transformations.JavaTransformation;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
-import java.util.Collection;
+import org.drools.runtime.rule.Row;
 
-public class JavaTransformationRepairSwitchSet extends JavaTransformation<JavaSwitchSetMatch> {
+public class Drools5SwitchSensorMatch extends EMFSwitchSensorMatch {
 
-	@Override
-	public void rhs(final Collection<JavaSwitchSetMatch> matches) {
-		for (final JavaSwitchSetMatch match : matches) {
-			match.getSw().setCurrentPosition(match.getSwP().getPosition());
-		}
+	public Drools5SwitchSensorMatch(final Row match) {
+		super((Switch) match.get(VAR_SW));
 	}
 
 }

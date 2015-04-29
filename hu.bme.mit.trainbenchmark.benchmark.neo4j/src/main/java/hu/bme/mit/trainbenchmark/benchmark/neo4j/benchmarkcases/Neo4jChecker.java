@@ -18,25 +18,25 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 
 public abstract class Neo4jChecker<M extends Neo4jMatch> extends Checker<M> {
 
-	protected final Neo4jDriver neoDriver;
+	protected final Neo4jDriver driver;
 
-	public Neo4jChecker(final Neo4jDriver neoDriver) {
+	public Neo4jChecker(final Neo4jDriver driver) {
 		super();
-		this.neoDriver = neoDriver;
+		this.driver = driver;
 	}
 
-	public static Neo4jChecker newInstance(final Neo4jDriver neoDriver, final Query query) {
+	public static Neo4jChecker newInstance(final Neo4jDriver driver, final Query query) {
 		switch (query) {
 		case POSLENGTH:
-			return new Neo4jPosLengthChecker(neoDriver);
+			return new Neo4jPosLengthChecker(driver);
 		case ROUTESENSOR:
-			return new Neo4jRouteSensorChecker(neoDriver);
+			return new Neo4jRouteSensorChecker(driver);
 		case SEMAPHORENEIGHBOR:
-			return new Neo4jSemaphoreNeighborChecker(neoDriver);
+			return new Neo4jSemaphoreNeighborChecker(driver);
 		case SWITCHSENSOR:
-			return new Neo4jSwitchSensorChecker(neoDriver);
+			return new Neo4jSwitchSensorChecker(driver);
 		case SWITCHSET:
-			return new Neo4jSwitchSetChecker(neoDriver);
+			return new Neo4jSwitchSetChecker(driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}

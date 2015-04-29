@@ -34,8 +34,8 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI>
 	protected void init() throws IOException {
 		this.rbc = (RDFBenchmarkConfig) bc;
 
-		driver = sesameDriver = new SesameDriver(bc);
-		checker = new SesameChecker(sesameDriver);
+		driver = sesameDriver = new SesameDriver();
+		checker = new SesameChecker(sesameDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());

@@ -9,40 +9,25 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.matches;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class JavaSwitchSetMatch extends JavaMatch implements SwitchSetMatch {
+import org.drools.runtime.rule.Row;
 
-	public JavaSwitchSetMatch(final Semaphore semaphore, final Route route, final SwitchPosition switchPosition, final Switch sw) {
-		super();
-		match = new RailwayElement[] { semaphore, route, switchPosition, sw };
-	}
+public class Drools5SwitchSetMatch extends EMFSwitchSetMatch {
 
-	@Override
-	public Semaphore getSemaphore() {
-		return (Semaphore) match[0];
-	}
-
-	@Override
-	public Route getRoute() {
-		return (Route) match[1];
-	}
-
-	@Override
-	public SwitchPosition getSwP() {
-		return (SwitchPosition) match[2];
-	}
-
-	@Override
-	public Switch getSw() {
-		return (Switch) match[3];
+	public Drools5SwitchSetMatch(final Row match) {
+		super((Semaphore) match.get(VAR_SEMAPHORE), (Route) match.get(VAR_ROUTE), (SwitchPosition) match.get(VAR_SWP), (Switch) match
+				.get(VAR_SW));
 	}
 
 }

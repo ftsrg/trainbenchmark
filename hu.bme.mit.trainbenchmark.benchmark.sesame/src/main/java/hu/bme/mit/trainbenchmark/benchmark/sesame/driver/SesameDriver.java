@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
@@ -30,7 +29,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -60,20 +58,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	protected ValueFactory vf;
 	protected TupleQuery tupleQuery;
 
-	protected Comparator<BindingSet> matchComparator;
-	protected Comparator<URI> elementComparator;
-
-	protected final String queryDefinition;
-	protected final Query query;
-
-	public SesameDriver(final BenchmarkConfig bc) throws IOException {
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + bc.getQuery()
-				+ ".sparql";
-
-		this.query = bc.getQuery();
-		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
-		this.elementComparator = new URIComparator();
-	}
+	protected Comparator<URI> elementComparator = new URIComparator();
 
 	@Override
 	public void beginTransaction() {
@@ -103,7 +88,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
-	public List<SesameMatch> runQuery() throws IOException {
+	public List<SesameMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
 

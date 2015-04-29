@@ -17,15 +17,12 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQue
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-
-public class EMFIncQueryTransformationRepairSemaphoreNeighbor extends EMFIncQueryTransformation<BasePatternMatch> {
+public class EMFIncQueryTransformationRepairSemaphoreNeighbor extends EMFIncQueryTransformation<SemaphoreNeighborMatch> {
 
 	@Override
-	public void rhs(final Collection<BasePatternMatch> matches) throws IOException {
-		for (final Object match : matches) {
-			final SemaphoreNeighborMatch snm = (SemaphoreNeighborMatch) match;
-			snm.getRoute2().setEntry(snm.getSemaphore());
+	public void rhs(final Collection<SemaphoreNeighborMatch> matches) throws IOException {
+		for (final SemaphoreNeighborMatch match : matches) {
+			match.getRoute2().setEntry(match.getSemaphore());
 		}
 	}
 

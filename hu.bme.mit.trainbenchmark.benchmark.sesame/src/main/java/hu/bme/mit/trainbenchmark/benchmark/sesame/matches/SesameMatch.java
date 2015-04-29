@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
-import org.openrdf.model.Value;
+import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
 
 public abstract class SesameMatch {
@@ -11,6 +11,6 @@ public abstract class SesameMatch {
 		this.bs = bs;
 	}
 
-	public abstract Value[] toArray();
+	public abstract URI[] toArray();
 
 }

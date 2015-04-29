@@ -9,14 +9,13 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.matches;
+package hu.bme.mit.trainbenchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.util.Arrays;
 
-
-public abstract class JavaMatch {
+public abstract class EMFMatch {
 
 	protected RailwayElement[] match;
 
@@ -40,7 +39,7 @@ public abstract class JavaMatch {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final JavaMatch other = (JavaMatch) obj;
+		final EMFMatch other = (EMFMatch) obj;
 		if (!Arrays.equals(match, other.match))
 			return false;
 		return true;
@@ -48,7 +47,7 @@ public abstract class JavaMatch {
 
 	@Override
 	public String toString() {
-		return "JavaMatch [match=" + Arrays.toString(match) + "]";
+		return "EMFMatch [match=" + Arrays.toString(match) + "]";
 	}
 
 }

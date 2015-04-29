@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class JavaSwitchSensorChecker extends JavaChecker {
 	}
 
 	@Override
-	public Collection<JavaMatch> check() {
+	public Collection<EMFMatch> check() {
 		matches = new ArrayList<>();
 		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
@@ -42,7 +42,7 @@ public class JavaSwitchSensorChecker extends JavaChecker {
 
 				// (Switch)-[sensor]->() NAC
 				if (sw.getSensor() == null) {
-					matches.add(new JavaSwitchSensorMatch(sw));
+					matches.add(new EMFSwitchSensorMatch(sw));
 				}
 			}
 		}

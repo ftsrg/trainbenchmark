@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaPosLengthMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class JavaPosLengthChecker extends JavaChecker {
 	}
 
 	@Override
-	public Collection<JavaMatch> check() {
+	public Collection<EMFMatch> check() {
 		matches = new ArrayList<>();
 		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
@@ -41,7 +41,7 @@ public class JavaPosLengthChecker extends JavaChecker {
 				final Segment segment = (Segment) eObject;
 				// Segment.length <= 0
 				if (segment.getLength() <= 0) {
-					matches.add(new JavaPosLengthMatch(segment));
+					matches.add(new EMFPosLengthMatch(segment));
 				}
 			}
 		}

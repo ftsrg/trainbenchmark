@@ -9,14 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.matches;
+package hu.bme.mit.trainbenchmark.emf.matches;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
-public class JavaConnectedSegmentsMatch extends JavaMatch {
+public class EMFPosLengthMatch extends EMFMatch implements PosLengthMatch {
 
-	public JavaConnectedSegmentsMatch(final Segment segment) {
+	public EMFPosLengthMatch(final Segment segment) {
 		super();
 		match = new RailwayElement[] { segment };
 	}
