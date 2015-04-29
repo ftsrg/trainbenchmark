@@ -51,8 +51,6 @@ import org.openrdf.sail.memory.MemoryStore;
 
 public class SesameDriver extends RDFDatabaseDriver<URI> {
 
-	protected Long newVertexId = null;
-
 	protected RepositoryConnection con;
 	protected Repository repository;
 	protected ValueFactory vf;

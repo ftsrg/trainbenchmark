@@ -20,6 +20,8 @@ import java.io.IOException;
 
 public abstract class RDFDatabaseDriver<T> extends Driver<T> {
 
+	protected Long newVertexId = null;
+
 	protected Long determineNewVertexId() throws IOException {
 		Long id = 5000L;
 
