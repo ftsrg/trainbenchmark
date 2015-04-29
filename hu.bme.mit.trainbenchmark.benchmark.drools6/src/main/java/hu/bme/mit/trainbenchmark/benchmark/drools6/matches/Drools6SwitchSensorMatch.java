@@ -9,17 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools6.driver;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
-import java.util.Comparator;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import org.kie.api.runtime.rule.Row;
 
-public class RowComparator implements Comparator<Row> {
+public class Drools6SwitchSensorMatch extends EMFSwitchSensorMatch {
 
-	@Override
-	public int compare(final Row o1, final Row o2) {
-		return 0;
+	public Drools6SwitchSensorMatch(final Row match) {
+		super((Switch) match.get(VAR_SW));
 	}
 
 }
