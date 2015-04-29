@@ -18,4 +18,7 @@ public abstract class Checker<M> {
 
 	public abstract Collection<M> check() throws IOException;
 
+	public void destroy() {
+	}
+
 }

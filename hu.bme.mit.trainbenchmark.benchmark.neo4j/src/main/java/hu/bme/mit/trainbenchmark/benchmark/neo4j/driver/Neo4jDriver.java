@@ -17,6 +17,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;
@@ -117,7 +118,7 @@ public class Neo4jDriver extends Driver<Node> {
 	protected Neo4jMatch createMatch(final Query query, final Map<String, Object> row) {
 		switch (query) {
 		case POSLENGTH:
-			return new SesamePosLengthMatch(row);
+			return new Neo4jPosLengthMatch(row);
 		case ROUTESENSOR:
 			return new Neo4jRouteSensorMatch(row);
 		case SEMAPHORENEIGHBOR:

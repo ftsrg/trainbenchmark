@@ -42,7 +42,7 @@ public class Neo4jSwitchSensorChecker extends Neo4jChecker<Neo4jSwitchSensorMatc
 	public Collection<Neo4jSwitchSensorMatch> check() {
 		final Collection<Neo4jSwitchSensorMatch> matches = new HashSet<>();
 
-		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
+		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (switch:Switch)-[:sensor]->(Sensor) NAC
 			final ResourceIterable<Node> switches = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSwitch);

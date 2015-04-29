@@ -13,140 +13,43 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatchComparator;
+import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Comparator;
 
-import org.drools.KnowledgeBase;
-import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.KnowledgeBuilder;
-import org.drools.builder.KnowledgeBuilderError;
-import org.drools.builder.KnowledgeBuilderErrors;
-import org.drools.builder.KnowledgeBuilderFactory;
-import org.drools.builder.ResourceType;
-import org.drools.io.ResourceFactory;
-import org.drools.runtime.StatefulKnowledgeSession;
-import org.drools.runtime.rule.FactHandle;
-import org.drools.runtime.rule.LiveQuery;
-import org.drools.runtime.rule.Row;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EContentAdapter;
+public class Drools5BenchmarkCase extends AbstractBenchmarkCase<EMFMatch, RailwayElement> {
 
-public class Drools5BenchmarkCase extends AbstractBenchmarkCase<Row, RailwayElement> {
+	protected Drools5Driver drools5driver;
 
-	protected EMFDriver<Row> emfDriver;
+	@Override
+	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+		super.benchmarkInit(bc);
+		driver = drools5driver = new Drools5Driver(bc);
+		checker = new Drools5Checker(drools5driver, bc.getQuery());
 
-	protected String fileName;
-	protected LiveQuery query;
-	protected StatefulKnowledgeSession ksession;
-	protected Drools5ResultListener listener;
-
-	protected KnowledgeBase readKnowledgeBase() throws Exception {
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/"
-				+ getName() + ".drl";
-		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
-
-		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
-		if (errors.size() > 0) {
-			for (final KnowledgeBuilderError error : errors) {
-				System.err.println(error);
-			}
-			throw new IllegalArgumentException("Could not parse knowledge.");
+		if (bc.getScenario() != Scenario.BATCH) {
+			transformation = EMFTransformation.newInstance(drools5driver, bc.getQuery(), bc.getScenario());
 		}
-		final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-		return kbase;
 	}
 
 	@Override
-	public void read() throws FileNotFoundException, IOException {
-		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		driver = emfDriver = new Drools5Driver(modelPath);
-		final Resource resource = emfDriver.getResource();
-
-		// change Drools knowledge base based on EMF notifications
-		try {
-			query = null;
-
-			final KnowledgeBase kbase = readKnowledgeBase();
-			ksession = kbase.newStatefulKnowledgeSession();
-
-			EObject eObject = null;
-			for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
-				eObject = tIterator.next();
-				ksession.insert(eObject);
-			}
-
-			final EContentAdapter adapter = new EContentAdapter() {
-				@Override
-				public void notifyChanged(final Notification notification) {
-					super.notifyChanged(notification);
-					final EObject notifier = (EObject) notification.getNotifier();
-					final FactHandle notifierFH = ksession.getFactHandle(notifier);
-					final int event = notification.getEventType();
-
-					switch (event) {
-					case Notification.REMOVING_ADAPTER:
-						break;
-					case Notification.MOVE:
-						break; // currently no support for ordering
-					case Notification.ADD:
-					case Notification.ADD_MANY:
-					case Notification.REMOVE:
-					case Notification.REMOVE_MANY:
-					case Notification.RESOLVE:
-					case Notification.UNSET:
-					case Notification.SET:
-						ksession.update(notifierFH, notifier);
-						break;
-					}
-				}
-
-				@Override
-				protected void addAdapter(final Notifier notifier) {
-					super.addAdapter(notifier);
-
-					ksession.insert(notifier);
-				}
-
-				@Override
-				protected void removeAdapter(final Notifier notifier) {
-					super.removeAdapter(notifier);
-
-					final FactHandle changedFH = ksession.getFactHandle(notifier);
-					ksession.retract(changedFH);
-				}
-			};
-			resource.eAdapters().add(adapter);
-		} catch (final Exception e) {
-			throw new IOException(e);
+	protected Comparator<?> getComparator() {
+		switch (bc.getScenario()) {
+		case BATCH:
+		case USER:
+			return driver.getElementComparator();
+		case REPAIR:
+			return new EMFMatchComparator();
+		default:
+			throw new UnsupportedOperationException();
 		}
-
-	}
-
-	@Override
-	protected Collection<Row> check() {
-		if (query == null) {
-			listener = new Drools5ResultListener();
-			query = ksession.openLiveQuery(getName(), new Object[] {}, listener);
-		}
-		matches = listener.getMatches();
-		return matches;
-	}
-
-	@Override
-	public void destroy() {
-		query.close();
 	}
 
 }

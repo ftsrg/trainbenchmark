@@ -9,16 +9,20 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools5.driver;
+package hu.bme.mit.trainbenchmark.emf.matches;
 
-import java.util.Comparator;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
-import org.drools.runtime.rule.Row;
+public class EMFConnectedSegmentsMatch extends EMFMatch {
 
-public class RowComparator implements Comparator<Row> {
-
-	@Override
-	public int compare(final Row o1, final Row o2) {
-		return 0;
+	public EMFConnectedSegmentsMatch(final Segment segment) {
+		super();
+		match = new RailwayElement[] { segment };
 	}
+
+	public Segment getSegment() {
+		return (Segment) match[0];
+	}
+
 }

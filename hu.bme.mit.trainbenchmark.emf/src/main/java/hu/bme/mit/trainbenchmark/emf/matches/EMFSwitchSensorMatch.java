@@ -9,21 +9,22 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.matches;
+package hu.bme.mit.trainbenchmark.emf.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
-public class JavaPosLengthMatch extends JavaMatch implements PosLengthMatch {
+public class EMFSwitchSensorMatch extends EMFMatch implements SwitchSensorMatch {
 
-	public JavaPosLengthMatch(final Segment segment) {
+	public EMFSwitchSensorMatch(final Switch sw) {
 		super();
-		match = new RailwayElement[] { segment };
+		match = new RailwayElement[] { sw };
 	}
 
-	public Segment getSegment() {
-		return (Segment) match[0];
+	@Override
+	public Switch getSw() {
+		return (Switch) match[0];
 	}
 
 }

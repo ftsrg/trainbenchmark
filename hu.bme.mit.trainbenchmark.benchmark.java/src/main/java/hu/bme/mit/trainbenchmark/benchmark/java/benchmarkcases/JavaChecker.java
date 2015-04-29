@@ -12,15 +12,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 import java.util.Collection;
 
-public abstract class JavaChecker extends Checker<JavaMatch> {
+public abstract class JavaChecker extends Checker<EMFMatch> {
 
-	protected Collection<JavaMatch> matches;
+	protected Collection<EMFMatch> matches;
 	protected final EMFDriver emfDriver;
 
 	public JavaChecker(final EMFDriver emfDriver) {

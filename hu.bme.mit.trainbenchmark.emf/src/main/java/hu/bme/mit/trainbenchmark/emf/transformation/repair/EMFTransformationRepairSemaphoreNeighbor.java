@@ -9,20 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
+package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
 
-import java.io.IOException;
 import java.util.Collection;
 
-public class EMFIncQueryTransformationRepairSwitchSet extends EMFIncQueryTransformation<SwitchSetMatch> {
+public class EMFTransformationRepairSemaphoreNeighbor extends EMFRepairTransformation<EMFSemaphoreNeighborMatch> {
 
 	@Override
-	public void rhs(final Collection<SwitchSetMatch> matches) throws IOException {
-		for (final SwitchSetMatch match : matches) {
-			match.getSw().setCurrentPosition(match.getSwP().getPosition());
+	public void rhs(final Collection<EMFSemaphoreNeighborMatch> matches) {
+		for (final EMFSemaphoreNeighborMatch match : matches) {
+			match.getRoute2().setEntry(match.getSemaphore());
 		}
 	}
 

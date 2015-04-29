@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.java.matches;
+package hu.bme.mit.trainbenchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -19,9 +19,9 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class JavaRouteSensorMatch extends JavaMatch implements RouteSensorMatch {
+public class EMFRouteSensorMatch extends EMFMatch implements RouteSensorMatch {
 
-	public JavaRouteSensorMatch(final Route route, final Sensor sensor, final SwitchPosition switchPosition, final Switch sw) {
+	public EMFRouteSensorMatch(final Route route, final Sensor sensor, final SwitchPosition switchPosition, final Switch sw) {
 		super();
 		match = new RailwayElement[] { route, sensor, switchPosition, sw };
 	}

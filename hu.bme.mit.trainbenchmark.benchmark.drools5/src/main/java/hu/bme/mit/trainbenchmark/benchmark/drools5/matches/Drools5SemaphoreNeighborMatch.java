@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
@@ -18,55 +18,19 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-import org.openrdf.model.URI;
-import org.openrdf.query.BindingSet;
+import org.drools.runtime.rule.Row;
 
-public class SesameSemaphoreNeighborMatch extends SesameMatch implements SemaphoreNeighborMatch {
+public class Drools5SemaphoreNeighborMatch extends EMFSemaphoreNeighborMatch {
 
-	public SesameSemaphoreNeighborMatch(final BindingSet bs) {
-		super(bs);
-	}
-
-	@Override
-	public URI getSemaphore() {
-		return (URI) bs.getValue(VAR_SEMAPHORE);
-	}
-
-	@Override
-	public URI getRoute1() {
-		return (URI) bs.getValue(VAR_ROUTE1);
-	}
-
-	@Override
-	public URI getRoute2() {
-		return (URI) bs.getValue(VAR_ROUTE2);
-	}
-
-	@Override
-	public URI getSensor1() {
-		return (URI) bs.getValue(VAR_SENSOR1);
-	}
-
-	@Override
-	public URI getSensor2() {
-		return (URI) bs.getValue(VAR_SENSOR2);
-	}
-
-	@Override
-	public URI getTe1() {
-		return (URI) bs.getValue(VAR_TE1);
-	}
-
-	@Override
-	public URI getTe2() {
-		return (URI) bs.getValue(VAR_TE2);
-	}
-
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getSemaphore(), getRoute1(), getRoute2(), getSensor1(), getSensor2(), getTe1(), getTe2() };
+	public Drools5SemaphoreNeighborMatch(final Row match) {
+		super((Semaphore) match.get(VAR_SEMAPHORE), (Route) match.get(VAR_ROUTE1), (Route) match.get(VAR_ROUTE2), (Sensor) match
+				.get(VAR_SENSOR1), (Sensor) match.get(VAR_SENSOR2), (TrackElement) match.get(VAR_TE1), (TrackElement) match.get(VAR_TE2));
 	}
 
 }

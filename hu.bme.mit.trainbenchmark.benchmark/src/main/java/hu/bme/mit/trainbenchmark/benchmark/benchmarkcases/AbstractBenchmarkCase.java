@@ -97,6 +97,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkDestroy() throws IOException {
 		destroy();
+		checker.destroy();
 	}
 
 	public void benchmarkModify() throws IOException {

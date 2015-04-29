@@ -11,55 +11,118 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools5.driver;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Comparator;
 
-import org.drools.runtime.rule.Row;
+import org.drools.KnowledgeBase;
+import org.drools.KnowledgeBaseFactory;
+import org.drools.builder.KnowledgeBuilder;
+import org.drools.builder.KnowledgeBuilderError;
+import org.drools.builder.KnowledgeBuilderErrors;
+import org.drools.builder.KnowledgeBuilderFactory;
+import org.drools.builder.ResourceType;
+import org.drools.io.ResourceFactory;
+import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.rule.FactHandle;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 
-public class Drools5Driver extends EMFDriver<Row> {
+public class Drools5Driver extends EMFDriver {
 
-	protected Comparator<Row> matchComparator = new RowComparator();
+	protected StatefulKnowledgeSession ksession;
+	protected BenchmarkConfig bc;
 
-	public Drools5Driver(final String modelPath) {
-		super(modelPath);
+	public Drools5Driver(final BenchmarkConfig bc) {
+		super();
+		this.bc = bc;
 	}
 
 	@Override
-	public void posLengthRepair(final Collection<Row> matches) throws IOException {
-		// TODO Auto-generated method stub
+	public void read(final String modelPathWithoutExtension) throws IOException {
+		super.read(modelPathWithoutExtension);
 
+		// change Drools knowledge base based on EMF notifications
+		try {
+			final KnowledgeBase kbase = readKnowledgeBase();
+			ksession = kbase.newStatefulKnowledgeSession();
+
+			EObject eObject = null;
+			for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
+				eObject = tIterator.next();
+				ksession.insert(eObject);
+			}
+
+			final EContentAdapter adapter = new EContentAdapter() {
+				@Override
+				public void notifyChanged(final Notification notification) {
+					super.notifyChanged(notification);
+					final EObject notifier = (EObject) notification.getNotifier();
+					final FactHandle notifierFH = ksession.getFactHandle(notifier);
+					final int event = notification.getEventType();
+
+					switch (event) {
+					case Notification.REMOVING_ADAPTER:
+						break;
+					case Notification.MOVE:
+						break; // currently no support for ordering
+					case Notification.ADD:
+					case Notification.ADD_MANY:
+					case Notification.REMOVE:
+					case Notification.REMOVE_MANY:
+					case Notification.RESOLVE:
+					case Notification.UNSET:
+					case Notification.SET:
+						ksession.update(notifierFH, notifier);
+						break;
+					}
+				}
+
+				@Override
+				protected void addAdapter(final Notifier notifier) {
+					super.addAdapter(notifier);
+
+					ksession.insert(notifier);
+				}
+
+				@Override
+				protected void removeAdapter(final Notifier notifier) {
+					super.removeAdapter(notifier);
+
+					final FactHandle changedFH = ksession.getFactHandle(notifier);
+					ksession.retract(changedFH);
+				}
+			};
+			resource.eAdapters().add(adapter);
+		} catch (final Exception e) {
+			throw new IOException(e);
+		}
 	}
 
-	@Override
-	public void routeSensorRepair(final Collection<Row> matches) throws IOException {
-		// TODO Auto-generated method stub
+	protected KnowledgeBase readKnowledgeBase() throws Exception {
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/"
+				+ bc.getQuery() + ".drl";
+		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
 
+		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
+		if (errors.size() > 0) {
+			for (final KnowledgeBuilderError error : errors) {
+				System.err.println(error);
+			}
+			throw new IllegalArgumentException("Could not parse knowledge.");
+		}
+		final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+		return kbase;
 	}
 
-	@Override
-	public void semaphoreNeighborRepair(final Collection<Row> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSensorRepair(final Collection<Row> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSetRepair(final Collection<Row> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Comparator<Row> getMatchComparator() {
-		return matchComparator;
+	public StatefulKnowledgeSession getKsession() {
+		return ksession;
 	}
 
 }

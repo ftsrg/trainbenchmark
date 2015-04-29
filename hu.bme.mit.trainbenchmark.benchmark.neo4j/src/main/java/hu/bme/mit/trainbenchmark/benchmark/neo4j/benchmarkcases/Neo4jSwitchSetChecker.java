@@ -49,7 +49,7 @@ public class Neo4jSwitchSetChecker extends Neo4jChecker<Neo4jSwitchSetMatch> {
 	public Collection<Neo4jSwitchSetMatch> check() {
 		final Collection<Neo4jSwitchSetMatch> matches = new HashSet<>();
 
-		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
+		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			final ResourceIterable<Node> semaphores = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSemaphore);
 			for (final Node semaphore : semaphores) {

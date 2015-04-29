@@ -14,29 +14,19 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
-import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-
-public class EMFIncQueryTransformationRepairPosLength extends EMFIncQueryTransformation<BasePatternMatch> {
+public class EMFIncQueryTransformationRepairPosLength extends EMFIncQueryTransformation<PosLengthMatch> {
 
 	@Override
-	public void rhs(final Collection<BasePatternMatch> matches) throws IOException {
+	public void rhs(final Collection<PosLengthMatch> matches) throws IOException {
 		final PosLengthRepairOperation op = new PosLengthRepairOperation();
 
-		final Collection<Segment> segments = new ArrayList<>();
-		for (final Object match : matches) {
-			final PosLengthMatch plm = (PosLengthMatch) match;
-			segments.add(plm.getSegment());
-		}
-
-		for (final Segment segment : segments) {
-			final int newLength = op.op(segment.getLength());
-			segment.setLength(newLength);
+		for (final PosLengthMatch match : matches) {
+			final int newLength = op.op(match.getSegment().getLength());
+			match.getSegment().setLength(newLength);
 		}
 	}
 

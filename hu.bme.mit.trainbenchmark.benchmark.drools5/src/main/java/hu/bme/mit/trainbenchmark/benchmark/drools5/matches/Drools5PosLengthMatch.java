@@ -9,20 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.java.transformations.JavaTransformation;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
-import java.util.Collection;
+import org.drools.runtime.rule.Row;
 
-public class JavaTransformationRepairRouteSensor extends JavaTransformation<JavaRouteSensorMatch> {
+public class Drools5PosLengthMatch extends EMFPosLengthMatch {
 
-	@Override
-	public void rhs(final Collection<JavaRouteSensorMatch> matches) {
-		for (final JavaRouteSensorMatch match : matches) {
-			match.getRoute().getDefinedBy().add(match.getSensor());
-		}
+	public Drools5PosLengthMatch(final Row match) {
+		super((Segment) match.get(VAR_SEGMENT));
 	}
 
 }

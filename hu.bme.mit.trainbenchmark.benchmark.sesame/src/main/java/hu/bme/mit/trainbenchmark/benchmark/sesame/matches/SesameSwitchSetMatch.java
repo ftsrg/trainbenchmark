@@ -19,7 +19,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 
-import org.openrdf.model.Resource;
+import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
@@ -30,23 +30,23 @@ public class SesameSwitchSetMatch extends SesameMatch implements SwitchSetMatch 
 	}
 
 	@Override
-	public Resource getSemaphore() {
-		return (Resource) bs.getValue(VAR_SEMAPHORE);
+	public URI getSemaphore() {
+		return (URI) bs.getValue(VAR_SEMAPHORE);
 	}
 
 	@Override
-	public Resource getRoute() {
-		return (Resource) bs.getValue(VAR_ROUTE);
+	public URI getRoute() {
+		return (URI) bs.getValue(VAR_ROUTE);
 	}
 
 	@Override
-	public Resource getSwP() {
-		return (Resource) bs.getValue(VAR_SWP);
+	public URI getSwP() {
+		return (URI) bs.getValue(VAR_SWP);
 	}
 
 	@Override
-	public Resource getSw() {
-		return (Resource) bs.getValue(VAR_SW);
+	public URI getSw() {
+		return (URI) bs.getValue(VAR_SW);
 	}
 
 	public Value getPosition() {
@@ -58,8 +58,8 @@ public class SesameSwitchSetMatch extends SesameMatch implements SwitchSetMatch 
 	}
 
 	@Override
-	public Value[] toArray() {
-		return new Value[] { getSemaphore(), getRoute(), getSwP(), getSw() };
+	public URI[] toArray() {
+		return new URI[] { getSemaphore(), getRoute(), getSwP(), getSw() };
 	}
 
 }

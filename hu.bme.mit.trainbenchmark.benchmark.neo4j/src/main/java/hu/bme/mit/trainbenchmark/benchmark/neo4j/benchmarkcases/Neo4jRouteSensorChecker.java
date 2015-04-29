@@ -45,7 +45,7 @@ public class Neo4jRouteSensorChecker extends Neo4jChecker<Neo4jRouteSensorMatch>
 	public Collection<Neo4jRouteSensorMatch> check() {
 		final Collection<Neo4jRouteSensorMatch> matches = new HashSet<>();
 
-		final GraphDatabaseService graphDb = neoDriver.getGraphDb();
+		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (route:Route)-[:follows]->()
 			final ResourceIterable<Node> routes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(Neo4jConstants.labelRoute);
