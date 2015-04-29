@@ -17,15 +17,13 @@ import java.util.Comparator;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaComparator implements Comparator<Resource> {
+public class ResourceComparator implements Comparator<Resource> {
 
 	@Override
 	public int compare(final Resource r1, final Resource r2) {
-		final String uri1 = r1.getURI();
-		final String uri2 = r2.getURI();
-		final long id1 = RDFHelper.extractId(uri1);
-		final long id2 = RDFHelper.extractId(uri2);
-		
+		final long id1 = RDFHelper.extractId(r1.getURI());
+		final long id2 = RDFHelper.extractId(r2.getURI());
+
 		return Long.compare(id1, id2);
 	}
 

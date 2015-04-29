@@ -31,7 +31,6 @@ public class SesameChecker extends Checker<SesameMatch> {
 	@Override
 	public Collection<SesameMatch> check() throws IOException {
 		return driver.runQuery(query, queryDefinition);
-
 	}
 
 }

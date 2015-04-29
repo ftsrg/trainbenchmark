@@ -14,15 +14,16 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Comparator;
 
-import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCase<QuerySolution, Resource> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource> {
 
 	protected JenaDriver jenaDriver;
 
@@ -32,20 +33,21 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<QuerySolution, Reso
 
 	@Override
 	protected void init() throws IOException {
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
-				+ ".sparql";
-
-		driver = jenaDriver = new JenaDriver(queryPath);
+		driver = jenaDriver = new JenaDriver();
+		checker = new JenaChecker(jenaDriver, bc);
 	}
 
 	@Override
-	public void read() throws IOException {
-		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");
+	protected Comparator<?> getComparator() {
+		switch (bc.getScenario()) {
+		case BATCH:
+		case USER:
+			return driver.getElementComparator();
+		case REPAIR:
+			return new JenaMatchComparator();
+		default:
+			throw new UnsupportedOperationException();
+		}
 	}
 
-	@Override
-	public Collection<QuerySolution> check() throws IOException {
-		matches = jenaDriver.runQuery();
-		return matches;
-	}
 }
