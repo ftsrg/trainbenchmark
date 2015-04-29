@@ -70,4 +70,5 @@ public class Drools5ResultListener implements ViewChangedEventListener {
 			throw new UnsupportedOperationException("Query not supported: " + query);
 		}
 	}
+
 }
