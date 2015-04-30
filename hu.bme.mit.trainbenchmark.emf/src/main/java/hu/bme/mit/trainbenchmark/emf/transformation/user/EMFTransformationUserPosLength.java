@@ -9,18 +9,23 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.emf.transformation.repair;
+package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.Collection;
 
-public class EMFTransformationRepairSemaphoreNeighbor extends EMFTransformationRepair<EMFSemaphoreNeighborMatch> {
+public class EMFTransformationUserPosLength extends EMFTransformationUser<Segment> {
+
+	public EMFTransformationUserPosLength(final EMFDriver driver) {
+		super(driver);
+	}
 
 	@Override
-	public void rhs(final Collection<EMFSemaphoreNeighborMatch> matches) {
-		for (final EMFSemaphoreNeighborMatch match : matches) {
-			match.getRoute2().setEntry(match.getSemaphore());
+	public void rhs(final Collection<Segment> segments) {
+		for (final Segment segment : segments) {
+			segment.setLength(0);
 		}
 	}
 

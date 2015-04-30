@@ -12,23 +12,21 @@
 package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.railway.Position;
-import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.Route;
 
 import java.util.Collection;
 
-public class EMFUserTransformationSwitchSet extends EMFUserTransformation<Switch> {
+public class EMFTransformationUserSemaphoreNeighbor extends EMFTransformationUser<Route> {
 
-	public EMFUserTransformationSwitchSet(final EMFDriver driver) {
+	public EMFTransformationUserSemaphoreNeighbor(final EMFDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void rhs(final Collection<Switch> switches) {
-		for (final Switch sw : switches) {
-			final Position currentPosition = sw.getCurrentPosition();
-			final Position newCurrentPosition = Position.get((currentPosition.ordinal() + 1) % Position.VALUES.size());
-			sw.setCurrentPosition(newCurrentPosition);
+	public void rhs(final Collection<Route> routes) {
+		for (final Route route : routes) {
+			route.setEntry(null);
+			driver.getContainer().getInvalids().add(route);
 		}
 	}
 }

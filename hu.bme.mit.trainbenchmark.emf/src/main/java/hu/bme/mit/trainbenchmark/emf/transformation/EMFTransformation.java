@@ -20,11 +20,11 @@ import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepa
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationPosLength;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationRouteSensor;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationSwitchSensor;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFUserTransformationSwitchSet;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserPosLength;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserRouteSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserSwitchSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserSwitchSet;
 
 public abstract class EMFTransformation<O> extends Transformation<O> {
 
@@ -48,15 +48,15 @@ public abstract class EMFTransformation<O> extends Transformation<O> {
 		case USER:
 			switch (query) {
 			case POSLENGTH:
-				return new EMFUserTransformationPosLength(driver);
+				return new EMFTransformationUserPosLength(driver);
 			case ROUTESENSOR:
-				return new EMFUserTransformationRouteSensor(driver);
+				return new EMFTransformationUserRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new EMFUserTransformationSemaphoreNeighbor(driver);
+				return new EMFTransformationUserSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new EMFUserTransformationSwitchSensor(driver);
+				return new EMFTransformationUserSwitchSensor(driver);
 			case SWITCHSET:
-				return new EMFUserTransformationSwitchSet(driver);
+				return new EMFTransformationUserSwitchSet(driver);
 			default:
 				break;
 			}

@@ -9,31 +9,34 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.jena.match;
+package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_POSITION;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 
 import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaRouteSensorMatch extends JenaMatch implements RouteSensorMatch {
+public class SQLSwitchSetMatch extends SQLMatch implements SwitchSetMatch {
 
-	public JenaRouteSensorMatch(final QuerySolution qs) {
+	public SQLSwitchSetMatch(final QuerySolution qs) {
 		super(qs);
+	}
+
+	@Override
+	public Resource getSemaphore() {
+		return qs.getResource(VAR_SEMAPHORE);
 	}
 
 	@Override
 	public Resource getRoute() {
 		return qs.getResource(VAR_ROUTE);
-	}
-
-	@Override
-	public Resource getSensor() {
-		return qs.getResource(VAR_SENSOR);
 	}
 
 	@Override
@@ -46,9 +49,17 @@ public class JenaRouteSensorMatch extends JenaMatch implements RouteSensorMatch 
 		return qs.getResource(VAR_SW);
 	}
 
+	public Literal getPosition() {
+		return qs.getLiteral(VAR_POSITION);
+	}
+
+	public Literal getCurrentPosition() {
+		return qs.getLiteral(VAR_CURRENTPOSITION);
+	}
+
 	@Override
 	public Resource[] toArray() {
-		return new Resource[] { getRoute(), getSensor(), getSwP(), getSw() };
+		return new Resource[] { getSemaphore(), getRoute(), getSwP(), getSw() };
 	}
 
 }

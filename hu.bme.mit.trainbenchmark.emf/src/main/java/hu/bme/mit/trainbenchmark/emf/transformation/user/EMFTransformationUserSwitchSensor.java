@@ -12,20 +12,21 @@
 package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.Collection;
 
-public class EMFUserTransformationPosLength extends EMFUserTransformation<Segment> {
+public class EMFTransformationUserSwitchSensor extends EMFTransformationUser<Switch> {
 
-	public EMFUserTransformationPosLength(final EMFDriver driver) {
+	public EMFTransformationUserSwitchSensor(final EMFDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void rhs(final Collection<Segment> segments) {
-		for (final Segment segment : segments) {
-			segment.setLength(0);
+	public void rhs(final Collection<Switch> switches) {
+		for (final Switch sw : switches) {
+			sw.setSensor(null);
+			driver.getContainer().getInvalids().add(sw);
 		}
 	}
 

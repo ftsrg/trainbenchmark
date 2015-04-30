@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 public abstract class SQLMatch {
 
+	// due to the iterator-like nature of the java.sql.ResultSet interface, we cannot store the ResultSet and have to copy its contents
 	protected Long[] match;
 
 	public Long[] getMatch() {
