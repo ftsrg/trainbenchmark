@@ -24,14 +24,10 @@ public class MySQLDriver extends SQLDriver {
 	protected final String user = "root";
 	protected final String password = "";
 
-	public MySQLDriver(final String queryPath) throws IOException {
-		super(queryPath);
-	}
-
 	@Override
-	public void read(final String modelPath) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws IOException {
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + modelPath };
+		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + modelPathWithoutExtension + getExtension() };
 
 		try {
 			final Process pr = rt.exec(command);
@@ -61,4 +57,5 @@ public class MySQLDriver extends SQLDriver {
 		}
 		MySQLProcess.stopSQLProcess();
 	}
+
 }

@@ -38,16 +38,8 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 	}
 
 	@Override
-	protected Comparator<?> getComparator() {
-		switch (bc.getScenario()) {
-		case BATCH:
-		case USER:
-			return driver.getElementComparator();
-		case REPAIR:
-			return new JenaMatchComparator();
-		default:
-			throw new UnsupportedOperationException();
-		}
+	protected Comparator<?> getMatchComparator() {
+		return new JenaMatchComparator();
 	}
 
 }

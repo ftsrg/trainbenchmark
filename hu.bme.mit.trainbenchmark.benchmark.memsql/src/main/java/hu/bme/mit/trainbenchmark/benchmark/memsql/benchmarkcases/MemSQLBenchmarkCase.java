@@ -12,19 +12,24 @@
 package hu.bme.mit.trainbenchmark.benchmark.memsql.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.memsql.driver.MemSQLDriver;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLBenchmarkCase;
-import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLChecker;
 
 import java.io.IOException;
 
 public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 
-	protected SQLDriver sqlDriver;
-
 	@Override
 	protected void init() throws IOException {
 		super.init();
-		driver = sqlDriver = new MemSQLDriver(queryPath());
+
+		driver = sqlDriver = new MemSQLDriver();
+		checker = new SQLChecker(sqlDriver, bc);
+
+		if (bc.getScenario() != Scenario.BATCH) {
+			// transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
+		}
 	}
 
 }

@@ -15,33 +15,25 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLBenchmarkCase;
-import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
-import hu.bme.mit.trainbenchmark.sql.match.SQLMatch;
+import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLChecker;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collection;
 
 public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
-	protected SQLDriver sqlDriver;
-
 	@Override
 	public void init() throws IOException {
+		super.init();
 		MySQLProcess.startSQLProcess();
-		driver = sqlDriver = new MySQLDriver(queryPath());
-	}
 
-	@Override
-	public void read() throws FileNotFoundException, IOException {
-		driver.read(bc.getModelPathNameWithoutExtension() + ".sql");
-	}
+		driver = sqlDriver = new MySQLDriver();
+		checker = new SQLChecker(sqlDriver, bc);
 
-	@Override
-	public Collection<SQLMatch> check() throws IOException {
-		matches = sqlDriver.runQuery(getName());
-		return matches;
+		if (bc.getScenario() != Scenario.BATCH) {
+			// transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
+		}
 	}
 
 	@Override
