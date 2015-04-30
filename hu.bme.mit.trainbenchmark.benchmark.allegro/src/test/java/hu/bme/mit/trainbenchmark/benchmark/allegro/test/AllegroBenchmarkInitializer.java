@@ -14,15 +14,16 @@ package hu.bme.mit.trainbenchmark.benchmark.allegro.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.allegro.AllegroBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 public class AllegroBenchmarkInitializer extends TestBenchmarkInitializer<AllegroBenchmarkLogic> {
 
 	@Override
-	protected AllegroBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig(scenario, size, "Allegro", runIndex, queryName,
-				iterationCount, modificationMethod, modificationConstant);
+	protected AllegroBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig(scenario, size, "Allegro", runIndex, query, iterationCount,
+				modificationMethod, modificationConstant);
 		return new AllegroBenchmarkLogic(rbc);
 	}
 

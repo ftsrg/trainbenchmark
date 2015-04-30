@@ -9,16 +9,25 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
-public abstract class SesameTransformationRepair<M extends SesameMatch> extends SesameTransformation<M> {
+import java.util.Collection;
 
-	protected SesameTransformationRepair(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+import org.apache.commons.lang.NotImplementedException;
+
+import com.hp.hpl.jena.rdf.model.Resource;
+
+public class JenaTransformationUserSwitchSet extends JenaTransformationUser {
+
+	public JenaTransformationUserSwitchSet(final JenaDriver jenaDriver) {
+		super(jenaDriver);
+	}
+
+	@Override
+	public void rhs(final Collection<Resource> switches) {
+		throw new NotImplementedException();
 	}
 
 }

@@ -42,6 +42,14 @@ public abstract class RDFDatabaseDriver<T> extends Driver<T> {
 		return id;
 	}
 
+	public Long getNewVertexId() throws IOException {
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+		newVertexId++;
+		return newVertexId;
+	}
+
 	@Override
 	public String getExtension() {
 		return ".ttl";

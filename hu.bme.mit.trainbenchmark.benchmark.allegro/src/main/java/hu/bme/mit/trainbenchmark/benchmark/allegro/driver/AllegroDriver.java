@@ -21,23 +21,23 @@ import java.io.IOException;
 import org.openrdf.OpenRDFException;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
+
 import com.franz.agraph.http.exception.AGHttpException;
 import com.franz.agraph.repository.AGCatalog;
 import com.franz.agraph.repository.AGServer;
 
-
-public class AllegroDriver extends SesameDriver{
+public class AllegroDriver extends SesameDriver {
 
 	protected AGCatalog catalog;
-	
-	// TODO store the parameters below in external configuration file 
+
+	// TODO store the parameters below in external configuration file
 	protected String AGServerURL = "http://localhost:10035";
 	protected String AGServerUsername = "root";
 	protected String AGServerPassword = "root";
 	protected String catalogID = "system";
 	protected String repositoryID = "train";
-	
-	public AllegroDriver(String queryPath) throws IOException {
+
+	public AllegroDriver(final String queryPath) throws IOException {
 		super(queryPath);
 	}
 
@@ -46,17 +46,17 @@ public class AllegroDriver extends SesameDriver{
 		try {
 			con.close();
 			catalog.deleteRepository(repositoryID);
-		} catch (RepositoryException e) {
+		} catch (final RepositoryException e) {
 			throw new IOException();
 		}
 	}
-	
+
 	@Override
-	public void read(String modelPath) throws IOException {
-		AGServer agServer = new AGServer(AGServerURL, AGServerUsername, AGServerPassword);
-		try{
+	public void read(final String modelPath) throws IOException {
+		final AGServer agServer = new AGServer(AGServerURL, AGServerUsername, AGServerPassword);
+		try {
 			catalog = agServer.getCatalog(catalogID);
-		} catch (AGHttpException e){
+		} catch (final AGHttpException e) {
 			throw new IOException(e);
 		}
 		try {
@@ -67,11 +67,11 @@ public class AllegroDriver extends SesameDriver{
 			repository = catalog.createRepository(repositoryID);
 			repository.initialize();
 
-			File modelFile = new File(modelPath);
+			final File modelFile = new File(modelPath);
 
 			con = repository.getConnection();
 			con.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
-		} catch (OpenRDFException e) {
+		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
 	}
