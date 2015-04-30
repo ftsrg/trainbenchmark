@@ -59,6 +59,8 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	}
 
 	protected void destroy() throws IOException {
+		checker.destroy();
+		driver.destroy();
 	}
 
 	protected long getMemoryUsage() throws IOException {
@@ -97,13 +99,24 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkDestroy() throws IOException {
 		destroy();
-		checker.destroy();
 	}
 
 	public void benchmarkModify() throws IOException {
 		transformationLogic.performTransformation(matches);
 	}
 
-	protected abstract Comparator<?> getComparator();
+	protected final Comparator<?> getComparator() {
+		switch (bc.getScenario()) {
+		case BATCH:
+		case USER:
+			return driver.getElementComparator();
+		case REPAIR:
+			return getMatchComparator();
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	protected abstract Comparator<?> getMatchComparator();
 
 }

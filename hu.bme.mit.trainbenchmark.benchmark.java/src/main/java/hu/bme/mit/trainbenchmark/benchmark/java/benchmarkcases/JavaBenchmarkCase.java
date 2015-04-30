@@ -12,19 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatchComparator;
+import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
-import java.util.Comparator;
 
-public class JavaBenchmarkCase extends AbstractBenchmarkCase<EMFMatch, RailwayElement> {
+public class JavaBenchmarkCase extends EMFBenchmarkCase {
 
 	@Override
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
@@ -36,19 +32,6 @@ public class JavaBenchmarkCase extends AbstractBenchmarkCase<EMFMatch, RailwayEl
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
-		}
-	}
-
-	@Override
-	protected Comparator<?> getComparator() {
-		switch (bc.getScenario()) {
-		case BATCH:
-		case USER:
-			return driver.getElementComparator();
-		case REPAIR:
-			return new EMFMatchComparator();
-		default:
-			throw new UnsupportedOperationException();
 		}
 	}
 

@@ -43,16 +43,8 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI>
 	}
 
 	@Override
-	protected Comparator<?> getComparator() {
-		switch (bc.getScenario()) {
-		case BATCH:
-		case USER:
-			return driver.getElementComparator();
-		case REPAIR:
-			return new SesameMatchComparator();
-		default:
-			throw new UnsupportedOperationException();
-		}
+	protected Comparator<?> getMatchComparator() {
+		return new SesameMatchComparator();
 	}
 
 }

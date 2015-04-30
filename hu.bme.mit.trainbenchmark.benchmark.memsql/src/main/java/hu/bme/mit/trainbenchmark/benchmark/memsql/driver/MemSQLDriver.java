@@ -23,10 +23,6 @@ public class MemSQLDriver extends SQLDriver {
 	protected final String user = "root";
 	protected final String password = "";
 
-	public MemSQLDriver(final String queryPath) throws IOException {
-		super(queryPath);
-	}
-
 	@Override
 	public void read(final String modelPath) throws IOException {
 		System.out.println(modelPath);

@@ -13,7 +13,8 @@ package hu.bme.mit.trainbenchmark.sql.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.sql.match.LongComparator;
 import hu.bme.mit.trainbenchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.sql.match.SQLPosLengthMatch;
 import hu.bme.mit.trainbenchmark.sql.match.SQLRouteSensorMatch;
@@ -21,25 +22,19 @@ import hu.bme.mit.trainbenchmark.sql.match.SQLSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.sql.match.SQLSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.sql.match.SQLSwitchSetMatch;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-
 import com.google.common.collect.ImmutableMap;
 
-public abstract class SQLDriver extends Driver<SQLMatch, Long> {
-
-	protected final String query;
+public abstract class SQLDriver extends Driver<Long> {
 
 	protected Connection con;
 	protected Statement st;
@@ -58,16 +53,17 @@ public abstract class SQLDriver extends Driver<SQLMatch, Long> {
 			ModelConstants.ENTRY, ModelConstants.ROUTE, ModelConstants.SENSOR_EDGE, ModelConstants.TRACKELEMENT, ModelConstants.CONNECTSTO,
 			ModelConstants.CONNECTSTO, ModelConstants.DEFINED_BY, ModelConstants.DEFINED_BY);
 
-	public SQLDriver(final String queryPath) throws IOException {
-		query = FileUtils.readFileToString(new File(queryPath));
+	@Override
+	public String getExtension() {
+		return ".sql";
 	}
 
-	public List<SQLMatch> runQuery(final String pattern) throws IOException {
+	public List<SQLMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final List<SQLMatch> results = new ArrayList<>();
 
-		try (ResultSet rs = con.createStatement().executeQuery(query)) {
+		try (ResultSet rs = con.createStatement().executeQuery(queryDefinition)) {
 			while (rs.next()) {
-				final SQLMatch match = createMatch(pattern, rs);
+				final SQLMatch match = createMatch(query, rs);
 				results.add(match);
 			}
 
@@ -78,27 +74,21 @@ public abstract class SQLDriver extends Driver<SQLMatch, Long> {
 		return results;
 	}
 
-	protected SQLMatch createMatch(final String pattern, final ResultSet rs) throws SQLException {
-		switch (pattern) {
-		case QueryConstants.POSLENGTH:
+	protected SQLMatch createMatch(final Query query, final ResultSet rs) throws SQLException {
+		switch (query) {
+		case POSLENGTH:
 			return new SQLPosLengthMatch(rs);
-		case QueryConstants.ROUTESENSOR:
+		case ROUTESENSOR:
 			return new SQLRouteSensorMatch(rs);
-		case QueryConstants.SEMAPHORENEIGHBOR:
+		case SEMAPHORENEIGHBOR:
 			return new SQLSemaphoreNeighborMatch(rs);
-		case QueryConstants.SWITCHSENSOR:
+		case SWITCHSENSOR:
 			return new SQLSwitchSensorMatch(rs);
-		case QueryConstants.SWITCHSET:
+		case SWITCHSET:
 			return new SQLSwitchSetMatch(rs);
 		default:
-			throw new UnsupportedOperationException("Pattern not supported: " + pattern);
+			throw new UnsupportedOperationException("Query not supported: " + query);
 		}
-	}
-
-	@Override
-	public Comparator<SQLMatch> getMatchComparator() {
-		// a null comparator provides natural ordering
-		return null;
 	}
 
 	// create
@@ -169,6 +159,11 @@ public abstract class SQLDriver extends Driver<SQLMatch, Long> {
 		}
 
 		return results;
+	}
+
+	@Override
+	public Comparator<Long> getElementComparator() {
+		return new LongComparator();
 	}
 
 	//
@@ -281,65 +276,4 @@ public abstract class SQLDriver extends Driver<SQLMatch, Long> {
 	//
 	// }
 
-	// repair
-	@Override
-	public void posLengthRepair(final Collection<SQLMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void routeSensorRepair(final Collection<SQLMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void semaphoreNeighborRepair(final Collection<SQLMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSensorRepair(final Collection<SQLMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSetRepair(final Collection<SQLMatch> matches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	// user
-	@Override
-	public void posLengthUser(final Collection<Long> segments) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void routeSensorUser(final Collection<Long> routes) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void semaphoreNeighborUser(final Collection<Long> routes) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSensorUser(final Collection<Long> switches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void switchSetUser(final Collection<Long> switches) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
 }

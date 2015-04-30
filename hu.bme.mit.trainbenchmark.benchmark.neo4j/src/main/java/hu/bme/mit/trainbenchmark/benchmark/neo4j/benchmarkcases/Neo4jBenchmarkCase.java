@@ -50,21 +50,8 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 	}
 
 	@Override
-	protected void destroy() throws IOException {
-		driver.destroy();
-	}
-
-	@Override
-	protected Comparator<?> getComparator() {
-		switch (bc.getScenario()) {
-		case BATCH:
-		case USER:
-			return driver.getElementComparator();
-		case REPAIR:
-			return new Neo4jMatchComparator();
-		default:
-			throw new UnsupportedOperationException();
-		}
+	protected Comparator<?> getMatchComparator() {
+		return new Neo4jMatchComparator();
 	}
 
 }

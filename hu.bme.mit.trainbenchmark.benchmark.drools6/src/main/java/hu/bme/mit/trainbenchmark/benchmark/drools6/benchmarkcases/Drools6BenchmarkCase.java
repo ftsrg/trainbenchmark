@@ -12,19 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatchComparator;
+import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.io.IOException;
-import java.util.Comparator;
 
-public class Drools6BenchmarkCase extends AbstractBenchmarkCase<EMFMatch, RailwayElement> {
+public class Drools6BenchmarkCase extends EMFBenchmarkCase {
 
 	protected Drools6Driver drools6driver;
 
@@ -36,19 +32,6 @@ public class Drools6BenchmarkCase extends AbstractBenchmarkCase<EMFMatch, Railwa
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = EMFTransformation.newInstance(drools6driver, bc.getQuery(), bc.getScenario());
-		}
-	}
-
-	@Override
-	protected Comparator<?> getComparator() {
-		switch (bc.getScenario()) {
-		case BATCH:
-		case USER:
-			return driver.getElementComparator();
-		case REPAIR:
-			return new EMFMatchComparator();
-		default:
-			throw new UnsupportedOperationException();
 		}
 	}
 

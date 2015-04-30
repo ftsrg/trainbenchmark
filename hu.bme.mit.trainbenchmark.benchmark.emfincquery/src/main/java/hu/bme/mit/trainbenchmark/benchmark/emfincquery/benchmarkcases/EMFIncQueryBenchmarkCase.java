@@ -55,16 +55,8 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 	}
 
 	@Override
-	protected Comparator<?> getComparator() {
-		switch (bc.getScenario()) {
-		case BATCH:
-		case USER:
-			return driver.getElementComparator();
-		case REPAIR:
-			return new EMFIncQueryMatchComparator();
-		default:
-			return null;
-		}
+	protected Comparator<?> getMatchComparator() {
+		return new EMFIncQueryMatchComparator();
 	}
 
 }
