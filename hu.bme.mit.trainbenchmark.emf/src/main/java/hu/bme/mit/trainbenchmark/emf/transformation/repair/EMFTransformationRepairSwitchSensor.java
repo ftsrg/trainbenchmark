@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 import java.util.Collection;
 
-public class EMFTransformationRepairSwitchSensor extends EMFRepairTransformation<EMFSwitchSensorMatch> {
+public class EMFTransformationRepairSwitchSensor extends EMFTransformationRepair<EMFSwitchSensorMatch> {
 
 	@Override
 	public void rhs(final Collection<EMFSwitchSensorMatch> matches) {

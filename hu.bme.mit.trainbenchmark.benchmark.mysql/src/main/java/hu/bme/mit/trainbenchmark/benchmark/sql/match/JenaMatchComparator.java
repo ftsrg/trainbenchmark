@@ -9,25 +9,22 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.emf.transformation.user;
+package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.ResourceComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
 
-import java.util.Collection;
+import com.hp.hpl.jena.rdf.model.Resource;
 
-public class EMFUserTransformationSwitchSensor extends EMFUserTransformation<Switch> {
+public class JenaMatchComparator extends MatchComparator<SQLMatch, Resource> {
 
-	public EMFUserTransformationSwitchSensor(final EMFDriver driver) {
-		super(driver);
-	}
+	protected ResourceComparator rc = new ResourceComparator();
 
 	@Override
-	public void rhs(final Collection<Switch> switches) {
-		for (final Switch sw : switches) {
-			sw.setSensor(null);
-			driver.getContainer().getInvalids().add(sw);
-		}
+	public int compare(final SQLMatch o1, final SQLMatch o2) {
+		final Resource[] m1 = o1.toArray();
+		final Resource[] m2 = o2.toArray();
+		return compareArrays(m1, m2, rc);
 	}
 
 }

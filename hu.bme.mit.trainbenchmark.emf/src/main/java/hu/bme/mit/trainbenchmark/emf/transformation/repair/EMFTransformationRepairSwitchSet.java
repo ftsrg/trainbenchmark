@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
 
 import java.util.Collection;
 
-public class EMFTransformationRepairSwitchSet extends EMFRepairTransformation<EMFSwitchSetMatch> {
+public class EMFTransformationRepairSwitchSet extends EMFTransformationRepair<EMFSwitchSetMatch> {
 
 	@Override
 	public void rhs(final Collection<EMFSwitchSetMatch> matches) {

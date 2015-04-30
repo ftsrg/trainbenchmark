@@ -9,24 +9,28 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.emf.transformation.user;
+package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.railway.Route;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 
-import java.util.Collection;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.rdf.model.Resource;
 
-public class EMFUserTransformationSemaphoreNeighbor extends EMFUserTransformation<Route> {
+public class JenaSwitchSensorMatch extends SQLMatch implements SwitchSensorMatch {
 
-	public EMFUserTransformationSemaphoreNeighbor(final EMFDriver driver) {
-		super(driver);
+	public JenaSwitchSensorMatch(final QuerySolution qs) {
+		super(qs);
 	}
 
 	@Override
-	public void rhs(final Collection<Route> routes) {
-		for (final Route route : routes) {
-			route.setEntry(null);
-			driver.getContainer().getInvalids().add(route);
-		}
+	public Resource getSw() {
+		return qs.getResource(VAR_SW);
 	}
+
+	@Override
+	public Resource[] toArray() {
+		return new Resource[] { getSw() };
+	}
+
 }

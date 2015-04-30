@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
 
 import java.util.Collection;
 
-public class EMFTransformationRepairRouteSensor extends EMFRepairTransformation<EMFRouteSensorMatch> {
+public class EMFTransformationRepairRouteSensor extends EMFTransformationRepair<EMFRouteSensorMatch> {
 
 	@Override
 	public void rhs(final Collection<EMFRouteSensorMatch> matches) {

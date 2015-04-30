@@ -9,18 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.jena.match;
+package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaRouteSensorMatch extends JenaMatch implements RouteSensorMatch {
+public class JenaRouteSensorMatch extends SQLMatch implements RouteSensorMatch {
 
 	public JenaRouteSensorMatch(final QuerySolution qs) {
 		super(qs);
@@ -28,22 +25,22 @@ public class JenaRouteSensorMatch extends JenaMatch implements RouteSensorMatch 
 
 	@Override
 	public Resource getRoute() {
-		return qs.getResource(VAR_ROUTE);
+		return qs.getResource(QueryConstants.VAR_ROUTE);
 	}
 
 	@Override
 	public Resource getSensor() {
-		return qs.getResource(VAR_SENSOR);
+		return qs.getResource(QueryConstants.VAR_SENSOR);
 	}
 
 	@Override
 	public Resource getSwP() {
-		return qs.getResource(VAR_SWP);
+		return qs.getResource(QueryConstants.VAR_SWP);
 	}
 
 	@Override
 	public Resource getSw() {
-		return qs.getResource(VAR_SW);
+		return qs.getResource(QueryConstants.VAR_SW);
 	}
 
 	@Override

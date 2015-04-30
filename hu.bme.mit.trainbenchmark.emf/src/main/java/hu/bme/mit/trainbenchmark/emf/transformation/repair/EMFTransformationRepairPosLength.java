@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
 
 import java.util.Collection;
 
-public class EMFTransformationRepairPosLength extends EMFRepairTransformation<EMFPosLengthMatch> {
+public class EMFTransformationRepairPosLength extends EMFTransformationRepair<EMFPosLengthMatch> {
 
 	@Override
 	public void rhs(final Collection<EMFPosLengthMatch> matches) {

@@ -9,19 +9,19 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.emf.transformation.repair;
+package hu.bme.mit.trainbenchmark.sql.match;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
 
-import java.util.Collection;
+public class SQLMatchComparator extends MatchComparator<SQLMatch, Long> {
 
-public class EMFTransformationRepairSemaphoreNeighbor extends EMFTransformationRepair<EMFSemaphoreNeighborMatch> {
+	protected LongComparator lc = new LongComparator();
 
 	@Override
-	public void rhs(final Collection<EMFSemaphoreNeighborMatch> matches) {
-		for (final EMFSemaphoreNeighborMatch match : matches) {
-			match.getRoute2().setEntry(match.getSemaphore());
-		}
+	public int compare(final SQLMatch o1, final SQLMatch o2) {
+		final Long[] m1 = o1.getMatch();
+		final Long[] m2 = o2.getMatch();
+		return compareArrays(m1, m2, lc);
 	}
 
 }

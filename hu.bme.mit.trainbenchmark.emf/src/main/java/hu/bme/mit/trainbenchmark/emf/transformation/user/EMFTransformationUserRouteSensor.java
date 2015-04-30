@@ -19,9 +19,9 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
 
-public class EMFUserTransformationRouteSensor extends EMFUserTransformation<Route> {
+public class EMFTransformationUserRouteSensor extends EMFTransformationUser<Route> {
 
-	public EMFUserTransformationRouteSensor(final EMFDriver driver) {
+	public EMFTransformationUserRouteSensor(final EMFDriver driver) {
 		super(driver);
 	}
 
