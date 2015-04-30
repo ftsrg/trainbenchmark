@@ -15,14 +15,15 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class MySQLBenchmarkInitializer extends TestBenchmarkInitializer<MySQLBenchmarkLogic> {
 
 	@Override
-	protected MySQLBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "MySQL", runIndex, queryName,
-				iterationCount, modificationMethod, modificationConstant);
+	protected MySQLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "MySQL", runIndex, query, iterationCount, modificationMethod,
+				modificationConstant);
 		return new MySQLBenchmarkLogic(bc);
 	}
 
