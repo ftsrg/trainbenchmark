@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
 import java.io.IOException;
+
 import org.apache.commons.cli.ParseException;
 
 public class JenaBenchmarkMain {

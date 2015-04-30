@@ -6,18 +6,17 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?semaphore ?route ?swP ?sw ?currentPosition ?position
 WHERE
 {
+    ?route base:entry ?semaphore .
+    ?route base:follows ?swP .
+    ?swP base:switch ?sw .
+    ?semaphore base:signal base:SIGNAL_GO .
+    ?sw base:currentPosition ?currentPosition .
+    ?swP base:position ?position .
+
     ?semaphore rdf:type base:Semaphore .
     ?route rdf:type base:Route .
     ?swP rdf:type base:SwitchPosition .
     ?sw rdf:type base:Switch .
-
-    ?route base:entry ?semaphore .
-    ?route base:follows ?swP .
-    ?swP base:switch ?sw .
-
-    ?semaphore base:signal base:SIGNAL_GO .
-    ?sw base:currentPosition ?currentPosition .
-    ?swP base:position ?position .
 
     FILTER (!sameTerm(?currentPosition, ?position))
 }

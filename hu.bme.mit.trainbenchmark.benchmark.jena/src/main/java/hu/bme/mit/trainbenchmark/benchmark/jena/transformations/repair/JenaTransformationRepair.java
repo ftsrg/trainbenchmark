@@ -9,16 +9,16 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public abstract class SesameTransformationRepair<M extends SesameMatch> extends SesameTransformation<M> {
+public abstract class JenaTransformationRepair<M extends JenaMatch> extends JenaTransformation<M> {
 
-	protected SesameTransformationRepair(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	protected JenaTransformationRepair(final JenaDriver jenaDriver) {
+		super(jenaDriver);
 	}
 
 }

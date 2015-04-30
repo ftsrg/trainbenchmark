@@ -241,12 +241,4 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		return vf;
 	}
 
-	public Long getNewVertexId() throws IOException {
-		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
-		}
-		newVertexId++;
-		return newVertexId;
-	}
-
 }

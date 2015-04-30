@@ -12,10 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -26,14 +29,21 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Selector;
+import com.hp.hpl.jena.rdf.model.SimpleSelector;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Model model;
+	protected Comparator<Statement> statementComparator = new StatemetComparator();
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
@@ -69,9 +79,58 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 		return vertices;
 	}
 
+	public void deleteIncomingEdge(final Collection<Resource> vertices, final String sourceVertexType, final String edgeType)
+			throws IOException {
+		deleteEdges(vertices, edgeType, false, true);
+	}
+
+	public void deleteAllOutgoingEdges(final Collection<Resource> vertices, final String vertexType, final String edgeType)
+			throws IOException {
+		deleteEdges(vertices, edgeType, true, true);
+	}
+
+	public void deleteOneOutgoingEdge(final Collection<Resource> vertices, final String vertexType, final String edgeType)
+			throws IOException {
+		deleteEdges(vertices, edgeType, true, false);
+	}
+
+	public void deleteSingleOutgoingEdge(final Collection<Resource> vertices, final String vertexType, final String edgeType)
+			throws IOException {
+		deleteEdges(vertices, edgeType, true, true);
+	}
+
+	protected void deleteEdges(final Collection<Resource> vertices, final String edgeType, final boolean outgoing, final boolean all) {
+		final Property property = model.getProperty(RDFConstants.BASE_PREFIX + edgeType);
+
+		for (final Resource vertex : vertices) {
+			final Selector selector = outgoing ? new SimpleSelector(vertex, property, (RDFNode) null) //
+					: new SimpleSelector(null, property, vertex);
+
+			final StmtIterator edges = model.listStatements(selector);
+
+			final List<Statement> statementsToRemove = new ArrayList<>();
+			while (edges.hasNext()) {
+				final Statement edge = edges.next();
+				statementsToRemove.add(edge);
+			}
+
+			Collections.sort(statementsToRemove, statementComparator);
+			for (final Statement statement : statementsToRemove) {
+				model.remove(statement);
+
+				if (!all) {
+					return;
+				}
+			}
+		}
+	}
+
 	@Override
 	protected boolean ask(final String askQuery) throws IOException {
-		return false;
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(askQuery, model)) {
+			final boolean result = queryExecution.execAsk();
+			return result;
+		}
 	}
 
 	@Override
