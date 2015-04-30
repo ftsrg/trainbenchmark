@@ -12,21 +12,19 @@
 package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.Collection;
 
-public class EMFUserTransformationPosLength extends EMFUserTransformation {
+public class EMFUserTransformationPosLength extends EMFUserTransformation<Segment> {
 
 	public EMFUserTransformationPosLength(final EMFDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void rhs(final Collection<RailwayElement> segments) {
-		for (final Object railwayElement : segments) {
-			final Segment segment = (Segment) railwayElement;
+	public void rhs(final Collection<Segment> segments) {
+		for (final Segment segment : segments) {
 			segment.setLength(0);
 		}
 	}
