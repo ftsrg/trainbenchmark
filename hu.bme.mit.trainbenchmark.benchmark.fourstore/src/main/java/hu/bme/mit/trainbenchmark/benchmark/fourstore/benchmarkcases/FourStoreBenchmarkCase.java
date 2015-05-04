@@ -14,45 +14,36 @@ package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.driver.FourStoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.fourstore.matches.FourStoreMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.fourstore.transformations.FourStoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Comparator;
 
-public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<FourStoreMatch, Long> {
+import org.openrdf.model.URI;
+
+public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI> {
 
 	protected FourStoreBenchmarkConfig fsbc;
+	protected FourStoreDriver fourStoreDriver;
 
 	@Override
 	public void init() throws IOException {
 		this.fsbc = (FourStoreBenchmarkConfig) bc;
 
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName()
-				+ ".sparql";
-		driver = new FourStoreDriver(queryPath);
-	}
+		driver = fourStoreDriver = new FourStoreDriver();
+		checker = new FourStoreChecker(fourStoreDriver, fsbc);
 
-	@Override
-	public void read() throws IOException {
-		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");
-	}
-
-	@Override
-	public void destroy() throws IOException {
-		driver.destroy();
-	}
-
-	@Override
-	public Collection<Long> check() throws IOException {
-		matches = driver.runQuery();
-		return matches;
+		if (bc.getScenario() != Scenario.BATCH) {
+			transformation = FourStoreTransformation.newInstance(fourStoreDriver, bc.getQuery(), bc.getScenario());
+		}
 	}
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
-		return new LongMatchComparator();
+		return new SesameMatchComparator();
 	}
 
 }

@@ -101,6 +101,7 @@ public class Neo4jDriver extends Driver<Node> {
 		}
 	}
 
+	@Override
 	public List<Neo4jMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final List<Neo4jMatch> results = new ArrayList<>();
 

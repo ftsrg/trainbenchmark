@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
@@ -22,7 +23,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
@@ -51,9 +51,10 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 		model.read(modelPathWithoutExtension + getExtension());
 	}
 
-	public List<QuerySolution> runQuery(final Query query) throws IOException {
+	@Override
+	public List<QuerySolution> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final List<QuerySolution> results = new ArrayList<>();
-		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, model)) {
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(queryDefinition, model)) {
 			final ResultSet resultSet = queryExecution.execSelect();
 
 			while (resultSet.hasNext()) {

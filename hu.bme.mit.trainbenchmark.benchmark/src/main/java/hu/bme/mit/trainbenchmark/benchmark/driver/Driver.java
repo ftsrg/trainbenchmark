@@ -11,7 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.driver;
 
+import hu.bme.mit.trainbenchmark.constants.Query;
+
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -23,6 +26,9 @@ public abstract class Driver<T> {
 	}
 
 	public void finishTransaction() throws IOException {
+	}
+
+	public void init() throws IOException {
 	}
 
 	public void destroy() throws IOException {
@@ -41,5 +47,7 @@ public abstract class Driver<T> {
 	// extension
 
 	public abstract String getExtension();
+
+	public abstract Collection<?> runQuery(final Query query, final String queryDefinition) throws IOException;
 
 }
