@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
+import static hu.bme.mit.trainbenchmark.constants.Query.CONNECTEDSEGMENTS;
 import static hu.bme.mit.trainbenchmark.constants.Query.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
@@ -25,6 +26,11 @@ import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
 public abstract class UserTest extends TransformationTest {
+
+	@Test
+	public void connectedSegmentsUser() throws ParseException, IOException {
+		testTransformation(CONNECTEDSEGMENTS, USER, 46);
+	}
 
 	@Test
 	public void posLengthUser() throws ParseException, IOException {

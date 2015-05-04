@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.util.UniqRandom;
+import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -30,7 +30,7 @@ import java.util.Random;
 
 public abstract class AbstractBenchmarkCase<M, T> {
 
-	protected Random random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
+	protected Random random = new UniqueRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkResult br;
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;

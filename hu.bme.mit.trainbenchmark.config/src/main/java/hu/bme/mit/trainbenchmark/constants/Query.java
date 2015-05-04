@@ -12,13 +12,6 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum Query {
-	// CONNECTEDSEGMENTS(QueryConstants.POSLENGTH), //
-	// POSLENGTH(QueryConstants.POSLENGTH), //
-	// ROUTESENSOR(QueryConstants.ROUTESENSOR), //
-	// SEMAPHORENEIGHBOR(QueryConstants.SEMAPHORENEIGHBOR), //
-	// SWITCHSENSOR(QueryConstants.SWITCHSENSOR), //
-	// SWITCHSET(QueryConstants.SWITCHSET);
-
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
 	POSLENGTH("PosLength"), //
 	ROUTESENSOR("RouteSensor"), //
