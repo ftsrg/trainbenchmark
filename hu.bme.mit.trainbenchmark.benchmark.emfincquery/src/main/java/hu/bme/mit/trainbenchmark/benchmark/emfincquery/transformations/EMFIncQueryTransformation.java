@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
 import static hu.bme.mit.trainbenchmark.constants.Scenario.USER;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSemaphoreNeighbor;
@@ -29,6 +30,8 @@ public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new EMFIncQueryTransformationRepairConnectedSegments();
 			case POSLENGTH:
 				return new EMFIncQueryTransformationRepairPosLength();
 			case ROUTESENSOR:

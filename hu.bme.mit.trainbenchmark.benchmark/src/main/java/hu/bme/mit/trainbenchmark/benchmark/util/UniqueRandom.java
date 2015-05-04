@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class UniqRandom extends Random {
+public class UniqueRandom extends Random {
 
 	private static final long serialVersionUID = 1L;
 
 	List<Integer> ints = new ArrayList<Integer>();
 
-	public UniqRandom(long random) {
+	public UniqueRandom(long random) {
 		super(random);
 	}
 

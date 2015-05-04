@@ -11,7 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.Query.CONNECTEDSEGMENTS;
+import static hu.bme.mit.trainbenchmark.constants.Query.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.IOException;
@@ -29,13 +37,14 @@ public class UserTransformationLogic<M, T> extends TransformationLogic<M, T, T> 
 		super(comparator);
 	}
 
-	protected static Map<Query, String> VERTEX_TYPES = ImmutableMap.of( //
-			Query.POSLENGTH, ModelConstants.SEGMENT, //
-			Query.ROUTESENSOR, ModelConstants.ROUTE, //
-			Query.SEMAPHORENEIGHBOR, ModelConstants.ROUTE, //
-			Query.SWITCHSENSOR, ModelConstants.SWITCH, //
-			Query.SWITCHSET, ModelConstants.SWITCH //
-			);
+	protected static Map<Query, String> VERTEX_TYPES = ImmutableMap.<Query, String> builder() //
+			.put(POSLENGTH, SEGMENT) //
+			.put(ROUTESENSOR, ROUTE) //
+			.put(SEMAPHORENEIGHBOR, ROUTE) //
+			.put(SWITCHSENSOR, SWITCH) //
+			.put(SWITCHSET, SWITCH) //
+			.put(CONNECTEDSEGMENTS, SEGMENT) //
+			.build();
 
 	@Override
 	protected void lhs(final Collection<M> currentMatches) throws IOException {

@@ -11,23 +11,27 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.io.IOException;
 import java.util.Collection;
 
-public class EMFIncQueryTransformationRepairConnectedSegments extends EMFIncQueryTransformation<PosLengthMatch> {
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+public class EMFIncQueryTransformationRepairConnectedSegments extends EMFIncQueryTransformation<ConnectedSegmentsMatch> {
 
 	@Override
-	public void rhs(final Collection<PosLengthMatch> matches) throws IOException {
-		final PosLengthRepairOperation op = new PosLengthRepairOperation();
+	public void rhs(final Collection<ConnectedSegmentsMatch> matches) throws IOException {
+		for (final ConnectedSegmentsMatch match : matches) {
+			final Segment segment1 = match.getSegment1();
+			final Segment segment2 = match.getSegment2();
+			final Segment segment3 = match.getSegment3();
 
-		for (final PosLengthMatch match : matches) {
-			final int newLength = op.op(match.getSegment().getLength());
-			match.getSegment().setLength(newLength);
+			segment1.getConnectsTo().remove(segment2);
+			segment1.getConnectsTo().add(segment3);
+			EcoreUtil.delete(segment2);
 		}
 	}
-
 }

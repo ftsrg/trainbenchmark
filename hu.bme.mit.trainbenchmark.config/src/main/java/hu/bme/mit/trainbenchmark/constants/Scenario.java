@@ -17,7 +17,7 @@ public enum Scenario {
 	USER("User"), //
 	TEST("Test");
 
-	String name;
+	private String name;
 
 	Scenario(final String name) {
 		this.name = name;

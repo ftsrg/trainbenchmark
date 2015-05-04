@@ -12,7 +12,9 @@
 package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import java.util.Collection;
 
@@ -24,9 +26,17 @@ public class EMFTransformationUserConnectedSegments extends EMFTransformationUse
 
 	@Override
 	public void rhs(final Collection<Segment> segments) {
-		for (final Segment segment : segments) {
-			segment.setLength(0);
+		for (final Segment segment1 : segments) {
+			if (segment1.getConnectsTo().isEmpty()) {
+				continue;
+			}
+			final Segment segmentX = RailwayFactory.eINSTANCE.createSegment();
+			driver.getContainer().getInvalids().add(segmentX);
+
+			final TrackElement segment2 = segment1.getConnectsTo().get(0);
+			segment1.getConnectsTo().remove(segment2);
+			segment1.getConnectsTo().add(segmentX);
+			segmentX.getConnectsTo().add(segment2);
 		}
 	}
-
 }
