@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
@@ -218,6 +219,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	protected SesameMatch createMatch(final Query query, final BindingSet bs) {
 		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new SesameConnectedSegmentsMatch(bs);
 		case POSLENGTH:
 			return new SesamePosLengthMatch(bs);
 		case ROUTESENSOR:

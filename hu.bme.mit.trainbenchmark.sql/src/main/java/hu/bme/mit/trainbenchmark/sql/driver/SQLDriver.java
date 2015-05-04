@@ -12,9 +12,9 @@
 package hu.bme.mit.trainbenchmark.sql.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.sql.match.LongComparator;
 import hu.bme.mit.trainbenchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.sql.match.SQLPosLengthMatch;
 import hu.bme.mit.trainbenchmark.sql.match.SQLRouteSensorMatch;

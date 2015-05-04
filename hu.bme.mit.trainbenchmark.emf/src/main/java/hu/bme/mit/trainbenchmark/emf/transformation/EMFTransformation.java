@@ -15,11 +15,13 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserConnectedSegments;
 import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserPosLength;
 import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserRouteSensor;
 import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserSemaphoreNeighbor;
@@ -32,6 +34,8 @@ public abstract class EMFTransformation<O> extends Transformation<O> {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new EMFTransformationRepairConnectedSegments();
 			case POSLENGTH:
 				return new EMFTransformationRepairPosLength();
 			case ROUTESENSOR:
@@ -47,6 +51,8 @@ public abstract class EMFTransformation<O> extends Transformation<O> {
 			}
 		case USER:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new EMFTransformationUserConnectedSegments(driver);
 			case POSLENGTH:
 				return new EMFTransformationUserPosLength(driver);
 			case ROUTESENSOR:

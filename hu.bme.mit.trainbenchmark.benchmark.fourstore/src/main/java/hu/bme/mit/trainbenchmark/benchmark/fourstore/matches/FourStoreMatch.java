@@ -9,17 +9,10 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.sql.match;
+package hu.bme.mit.trainbenchmark.benchmark.fourstore.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
 
-/**
- * Due to the iterator-like nature of the java.sql.ResultSet interface, we cannot store the ResultSet and have to copy its contents. This is
- * implemented for each match in the subclasses of the SQLMatch class.
- * 
- * @author szarnyasg
- * 
- */
-public abstract class SQLMatch extends LongMatch {
+public abstract class FourStoreMatch extends LongMatch {
 
 }

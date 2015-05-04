@@ -9,17 +9,24 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.sql.match;
+package hu.bme.mit.trainbenchmark.emf.transformation.user;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
-/**
- * Due to the iterator-like nature of the java.sql.ResultSet interface, we cannot store the ResultSet and have to copy its contents. This is
- * implemented for each match in the subclasses of the SQLMatch class.
- * 
- * @author szarnyasg
- * 
- */
-public abstract class SQLMatch extends LongMatch {
+import java.util.Collection;
+
+public class EMFTransformationUserConnectedSegments extends EMFTransformationUser<Segment> {
+
+	public EMFTransformationUserConnectedSegments(final EMFDriver driver) {
+		super(driver);
+	}
+
+	@Override
+	public void rhs(final Collection<Segment> segments) {
+		for (final Segment segment : segments) {
+			segment.setLength(0);
+		}
+	}
 
 }

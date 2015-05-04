@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.sql.match;
+package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 import java.util.Comparator;
 

@@ -9,17 +9,24 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.sql.match;
+package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
+public interface ConnectedSegmentsMatch {
 
-/**
- * Due to the iterator-like nature of the java.sql.ResultSet interface, we cannot store the ResultSet and have to copy its contents. This is
- * implemented for each match in the subclasses of the SQLMatch class.
- * 
- * @author szarnyasg
- * 
- */
-public abstract class SQLMatch extends LongMatch {
+	public Object getSensor1();
+
+	public Object getSensor2();
+
+	public Object getSegment1();
+
+	public Object getSegment2();
+
+	public Object getSegment3();
+
+	public Object getSegment4();
+
+	public Object getSegment5();
+
+	public Object getSegment6();
 
 }

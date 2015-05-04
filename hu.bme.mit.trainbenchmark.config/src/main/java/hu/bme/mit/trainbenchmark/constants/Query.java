@@ -12,11 +12,19 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum Query {
-	POSLENGTH(QueryConstants.POSLENGTH), //
-	ROUTESENSOR(QueryConstants.ROUTESENSOR), //
-	SEMAPHORENEIGHBOR(QueryConstants.SEMAPHORENEIGHBOR), //
-	SWITCHSENSOR(QueryConstants.SWITCHSENSOR), //
-	SWITCHSET(QueryConstants.SWITCHSET);
+	// CONNECTEDSEGMENTS(QueryConstants.POSLENGTH), //
+	// POSLENGTH(QueryConstants.POSLENGTH), //
+	// ROUTESENSOR(QueryConstants.ROUTESENSOR), //
+	// SEMAPHORENEIGHBOR(QueryConstants.SEMAPHORENEIGHBOR), //
+	// SWITCHSENSOR(QueryConstants.SWITCHSENSOR), //
+	// SWITCHSET(QueryConstants.SWITCHSET);
+
+	CONNECTEDSEGMENTS("ConnectedSegments"), //
+	POSLENGTH("PosLength"), //
+	ROUTESENSOR("RouteSensor"), //
+	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
+	SWITCHSENSOR("SwitchSensor"), //
+	SWITCHSET("SwitchSet");
 
 	private String name;
 
@@ -24,6 +32,7 @@ public enum Query {
 		this.name = name;
 	}
 
+	@Override
 	public String toString() {
 		return name;
 	}

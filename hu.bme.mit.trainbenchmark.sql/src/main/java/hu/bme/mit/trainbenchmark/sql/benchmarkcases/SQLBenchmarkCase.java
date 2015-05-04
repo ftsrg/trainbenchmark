@@ -12,9 +12,9 @@
 package hu.bme.mit.trainbenchmark.sql.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLMatch;
-import hu.bme.mit.trainbenchmark.sql.match.SQLMatchComparator;
 
 import java.util.Comparator;
 
@@ -24,7 +24,7 @@ public abstract class SQLBenchmarkCase extends AbstractBenchmarkCase<SQLMatch, L
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
-		return new SQLMatchComparator();
+		return new LongMatchComparator();
 	}
 
 }

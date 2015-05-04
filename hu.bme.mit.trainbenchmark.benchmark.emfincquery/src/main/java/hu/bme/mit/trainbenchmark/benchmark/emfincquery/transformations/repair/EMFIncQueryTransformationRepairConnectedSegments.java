@@ -11,18 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 
 import java.io.IOException;
 import java.util.Collection;
 
-public class EMFIncQueryTransformationRepairRouteSensor extends EMFIncQueryTransformation<RouteSensorMatch> {
+public class EMFIncQueryTransformationRepairConnectedSegments extends EMFIncQueryTransformation<PosLengthMatch> {
 
 	@Override
-	public void rhs(final Collection<RouteSensorMatch> matches) throws IOException {
-		for (final RouteSensorMatch match : matches) {
-			match.getRoute().getDefinedBy().add(match.getSensor());
+	public void rhs(final Collection<PosLengthMatch> matches) throws IOException {
+		final PosLengthRepairOperation op = new PosLengthRepairOperation();
+
+		for (final PosLengthMatch match : matches) {
+			final int newLength = op.op(match.getSegment().getLength());
+			match.getSegment().setLength(newLength);
 		}
 	}
 

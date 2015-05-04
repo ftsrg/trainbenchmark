@@ -32,6 +32,8 @@ public abstract class EMFIncQueryChecker<M extends BasePatternMatch> extends Che
 
 	public static EMFIncQueryChecker newInstance(final EMFIncQueryDriver eiqDriver, final Query query) {
 		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new EMFIncQueryConnectedSegmentsChecker(eiqDriver);
 		case POSLENGTH:
 			return new EMFIncQueryPosLengthChecker(eiqDriver);
 		case ROUTESENSOR:
