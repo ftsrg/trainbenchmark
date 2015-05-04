@@ -12,12 +12,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 
 import java.io.IOException;
 import java.util.Collection;
 
 public class EMFIncQueryTransformationRepairSwitchSet extends EMFIncQueryTransformation<SwitchSetMatch> {
+
+	public EMFIncQueryTransformationRepairSwitchSet(final EMFIncQueryDriver<?> driver) {
+		super(driver);
+	}
 
 	@Override
 	public void rhs(final Collection<SwitchSetMatch> matches) throws IOException {

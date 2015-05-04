@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
@@ -21,6 +22,10 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class EMFIncQueryTransformationRepairConnectedSegments extends EMFIncQueryTransformation<ConnectedSegmentsMatch> {
+
+	public EMFIncQueryTransformationRepairConnectedSegments(final EMFIncQueryDriver<?> driver) {
+		super(driver);
+	}
 
 	@Override
 	public void rhs(final Collection<ConnectedSegmentsMatch> matches) throws IOException {
