@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
 import static hu.bme.mit.trainbenchmark.constants.Scenario.USER;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairRouteSensor;
@@ -21,27 +22,33 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EM
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 
-	public static Transformation<?> newInstance(final EMFDriver driver, final Query query, final Scenario scenario) {
+	protected final EMFIncQueryDriver<?> driver;
+
+	public EMFIncQueryTransformation(final EMFIncQueryDriver<?> driver) {
+		super();
+		this.driver = driver;
+	}
+
+	public static Transformation<?> newInstance(final EMFIncQueryDriver<?> driver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new EMFIncQueryTransformationRepairConnectedSegments();
+				return new EMFIncQueryTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
-				return new EMFIncQueryTransformationRepairPosLength();
+				return new EMFIncQueryTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
-				return new EMFIncQueryTransformationRepairRouteSensor();
+				return new EMFIncQueryTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new EMFIncQueryTransformationRepairSemaphoreNeighbor();
+				return new EMFIncQueryTransformationRepairSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new EMFIncQueryTransformationRepairSwitchSensor();
+				return new EMFIncQueryTransformationRepairSwitchSensor(driver);
 			case SWITCHSET:
-				return new EMFIncQueryTransformationRepairSwitchSet();
+				return new EMFIncQueryTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}
