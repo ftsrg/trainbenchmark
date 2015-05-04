@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.emf;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
@@ -88,5 +89,10 @@ public class EMFDriver extends Driver<RailwayElement> {
 
 	public Resource getResource() {
 		return resource;
+	}
+
+	@Override
+	public List<?> runQuery(final Query query, final String queryDefinition) throws IOException {
+		throw new UnsupportedOperationException("The EMFDriver cannot evaluate queries.");
 	}
 }

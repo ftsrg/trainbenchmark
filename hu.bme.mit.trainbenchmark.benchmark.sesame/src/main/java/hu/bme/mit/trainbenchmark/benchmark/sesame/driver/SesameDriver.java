@@ -12,13 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
@@ -97,7 +91,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 			try {
 				while (queryResults.hasNext()) {
 					final BindingSet bs = queryResults.next();
-					final SesameMatch match = createMatch(query, bs);
+					final SesameMatch match = SesameMatch.createMatch(query, bs);
 					results.add(match);
 				}
 			} finally {
@@ -212,27 +206,6 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 			return result;
 		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
 			throw new IOException(e);
-		}
-	}
-
-	// repair
-
-	protected SesameMatch createMatch(final Query query, final BindingSet bs) {
-		switch (query) {
-		case CONNECTEDSEGMENTS:
-			return new SesameConnectedSegmentsMatch(bs);
-		case POSLENGTH:
-			return new SesamePosLengthMatch(bs);
-		case ROUTESENSOR:
-			return new SesameRouteSensorMatch(bs);
-		case SEMAPHORENEIGHBOR:
-			return new SesameSemaphoreNeighborMatch(bs);
-		case SWITCHSENSOR:
-			return new SesameSwitchSensorMatch(bs);
-		case SWITCHSET:
-			return new SesameSwitchSetMatch(bs);
-		default:
-			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}
 	}
 
