@@ -9,19 +9,21 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.sql.match;
+package hu.bme.mit.trainbenchmark.benchmark.fourstore.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
-public class SQLMatchComparator extends MatchComparator<SQLMatch, Long> {
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-	protected LongComparator lc = new LongComparator();
+public class FourStorePosLengthMatch extends FourStoreMatch {
 
-	@Override
-	public int compare(final SQLMatch o1, final SQLMatch o2) {
-		final Long[] m1 = o1.getMatch();
-		final Long[] m2 = o2.getMatch();
-		return compareArrays(m1, m2, lc);
+	public FourStorePosLengthMatch(final ResultSet rs) throws SQLException {
+		match = new Long[] { rs.getLong(VAR_SEGMENT) };
+	}
+
+	public Long getSegment() {
+		return match[0];
 	}
 
 }

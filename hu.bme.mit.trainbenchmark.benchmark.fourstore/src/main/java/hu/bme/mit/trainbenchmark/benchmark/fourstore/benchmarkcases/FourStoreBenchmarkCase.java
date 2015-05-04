@@ -14,11 +14,14 @@ package hu.bme.mit.trainbenchmark.benchmark.fourstore.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.driver.FourStoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.fourstore.matches.FourStoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Comparator;
 
-public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
+public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<FourStoreMatch, Long> {
 
 	protected FourStoreBenchmarkConfig fsbc;
 
@@ -45,6 +48,11 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<Long> {
 	public Collection<Long> check() throws IOException {
 		matches = driver.runQuery();
 		return matches;
+	}
+
+	@Override
+	protected Comparator<?> getMatchComparator() {
+		return new LongMatchComparator();
 	}
 
 }

@@ -56,7 +56,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
   
   @Override
   public ConnectedSegmentsMatch newMatch(final Object... parameters) {
-    return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Segment) parameters[0]);
+    return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Sensor) parameters[1], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[2], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[3], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[4], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[5], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[6], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[7]);
   }
   
   private static class LazyHolder {
@@ -77,12 +77,12 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("segment");
+      return Arrays.asList("sensor1","sensor2","segment1","segment2","segment3","segment4","segment5","segment6");
     }
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(new PParameter("segment", "hu.bme.mit.trainbenchmark.railway.Segment"));
+      return Arrays.asList(new PParameter("sensor1", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("sensor2", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment2", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment4", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment5", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment6", "hu.bme.mit.trainbenchmark.railway.Segment"));
     }
     
     @Override
@@ -91,29 +91,43 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       try {
       {
       	PBody body = new PBody(this);
-      	PVariable var_segment = body.getOrCreateVariableByName("segment");
-      	PVariable var_seg2 = body.getOrCreateVariableByName("seg2");
-      	PVariable var_seg3 = body.getOrCreateVariableByName("seg3");
-      	PVariable var_seg4 = body.getOrCreateVariableByName("seg4");
-      	PVariable var_seg5 = body.getOrCreateVariableByName("seg5");
-      	PVariable var_seg6 = body.getOrCreateVariableByName("seg6");
       	PVariable var_sensor2 = body.getOrCreateVariableByName("sensor2");
+      	PVariable var_segment1 = body.getOrCreateVariableByName("segment1");
+      	PVariable var_segment2 = body.getOrCreateVariableByName("segment2");
+      	PVariable var_segment3 = body.getOrCreateVariableByName("segment3");
+      	PVariable var_segment4 = body.getOrCreateVariableByName("segment4");
+      	PVariable var_segment5 = body.getOrCreateVariableByName("segment5");
+      	PVariable var_segment6 = body.getOrCreateVariableByName("segment6");
       	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_segment, "segment")
+      		new ExportedParameter(body, var_sensor2, "sensor1"),
+      				
+      		new ExportedParameter(body, var_sensor2, "sensor2"),
+      				
+      		new ExportedParameter(body, var_segment1, "segment1"),
+      				
+      		new ExportedParameter(body, var_segment2, "segment2"),
+      				
+      		new ExportedParameter(body, var_segment3, "segment3"),
+      				
+      		new ExportedParameter(body, var_segment4, "segment4"),
+      				
+      		new ExportedParameter(body, var_segment5, "segment5"),
+      				
+      		new ExportedParameter(body, var_segment6, "segment6")
       	));
-      	new TypeUnary(body, var_segment, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_segment, var_sensor2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
-      	new TypeBinary(body, CONTEXT, var_segment, var_seg2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
-      	new TypeUnary(body, var_seg2, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_seg2, var_seg3, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
-      	new TypeUnary(body, var_seg3, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_seg3, var_seg4, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
-      	new TypeUnary(body, var_seg4, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_seg4, var_seg5, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
-      	new TypeUnary(body, var_seg5, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_seg5, var_seg6, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
-      	new TypeUnary(body, var_seg6, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_seg6, var_sensor2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
+      	new TypeUnary(body, var_segment1, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
+      	new TypeBinary(body, CONTEXT, var_segment1, var_sensor2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
+      	new TypeBinary(body, CONTEXT, var_segment1, var_segment2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
+      	new TypeUnary(body, var_segment2, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
+      	new TypeBinary(body, CONTEXT, var_segment2, var_segment3, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
+      	new TypeUnary(body, var_segment3, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
+      	new TypeBinary(body, CONTEXT, var_segment3, var_segment4, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
+      	new TypeUnary(body, var_segment4, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
+      	new TypeBinary(body, CONTEXT, var_segment4, var_segment5, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
+      	new TypeUnary(body, var_segment5, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
+      	new TypeBinary(body, CONTEXT, var_segment5, var_segment6, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
+      	new TypeUnary(body, var_segment6, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
+      	new TypeBinary(body, CONTEXT, var_segment6, var_sensor2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
       	bodies.add(body);
       }
       	// to silence compiler error

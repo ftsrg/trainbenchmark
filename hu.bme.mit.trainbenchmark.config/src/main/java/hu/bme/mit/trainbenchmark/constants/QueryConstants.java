@@ -14,13 +14,6 @@ package hu.bme.mit.trainbenchmark.constants;
 
 public class QueryConstants {
 
-	public static final String CONNECTEDSEGMENTS = "ConnectedSegments";
-	public static final String POSLENGTH = "PosLength";
-	public static final String ROUTESENSOR = "RouteSensor";
-	public static final String SEMAPHORENEIGHBOR = "SemaphoreNeighbor";
-	public static final String SWITCHSENSOR = "SwitchSensor";
-	public static final String SWITCHSET = "SwitchSet";
-
 	public static final String VAR_CURRENTPOSITION = "currentPosition";
 	public static final String VAR_LENGTH = "length";
 	public static final String VAR_POSITION = "position";
@@ -28,6 +21,12 @@ public class QueryConstants {
 	public static final String VAR_ROUTE1 = "route1";
 	public static final String VAR_ROUTE2 = "route2";
 	public static final String VAR_SEGMENT = "segment";
+	public static final String VAR_SEGMENT1 = "segment1";
+	public static final String VAR_SEGMENT2 = "segment2";
+	public static final String VAR_SEGMENT3 = "segment3";
+	public static final String VAR_SEGMENT4 = "segment4";
+	public static final String VAR_SEGMENT5 = "segment5";
+	public static final String VAR_SEGMENT6 = "segment6";
 	public static final String VAR_SEMAPHORE = "semaphore";
 	public static final String VAR_SENSOR = "sensor";
 	public static final String VAR_SENSOR1 = "sensor1";

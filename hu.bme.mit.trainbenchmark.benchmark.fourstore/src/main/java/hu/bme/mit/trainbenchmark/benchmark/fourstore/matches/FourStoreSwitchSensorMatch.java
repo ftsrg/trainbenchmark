@@ -9,17 +9,21 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.sql.match;
+package hu.bme.mit.trainbenchmark.benchmark.fourstore.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
-/**
- * Due to the iterator-like nature of the java.sql.ResultSet interface, we cannot store the ResultSet and have to copy its contents. This is
- * implemented for each match in the subclasses of the SQLMatch class.
- * 
- * @author szarnyasg
- * 
- */
-public abstract class SQLMatch extends LongMatch {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class FourStoreSwitchSensorMatch extends FourStoreMatch {
+
+	public FourStoreSwitchSensorMatch(final ResultSet rs) throws SQLException {
+		match = new Long[] { rs.getLong(VAR_SW) };
+	}
+
+	public Long getSw() {
+		return match[0];
+	}
 
 }
