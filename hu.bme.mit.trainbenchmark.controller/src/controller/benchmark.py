@@ -63,7 +63,6 @@ def execute(configuration):
                                      maxpermsize, "-jar", target,
                                      "-scenario", scenario,
                                      "-runIndex", str(series_index),
-                                     "-benchmarkArtifact", benchmark_artifact,
                                      "-query", query,
                                      "-modificationMethod", modif_method,
                                      "-modificationConstant", modif_constant,
