@@ -1,4 +1,12 @@
-SELECT DISTINCT Segment.id
+SELECT DISTINCT
+	te1.sensor AS sensor1,
+	te2.sensor AS sensor2,
+	tec1.TrackElement_id AS segment1,
+	tec2.TrackElement_id AS segment2,
+	tec3.TrackElement_id AS segment3,
+	tec4.TrackElement_id AS segment4,
+	tec5.TrackElement_id AS segment5,
+	tec6.TrackElement_id AS segment6
 FROM Segment INNER JOIN connectsTo as tec1 ON Segment.id = tec1.TrackElement_id
 			 INNER JOIN connectsTo as tec2 ON tec1.TrackElement_id_connectsTo = tec2.TrackElement_id
 			 INNER JOIN connectsTo as tec3 ON tec2.TrackElement_id_connectsTo = tec3.TrackElement_id

@@ -16,11 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.sql.match.SQLMatch;
-import hu.bme.mit.trainbenchmark.sql.match.SQLPosLengthMatch;
-import hu.bme.mit.trainbenchmark.sql.match.SQLRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.sql.match.SQLSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.sql.match.SQLSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.sql.match.SQLSwitchSetMatch;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -58,12 +53,13 @@ public abstract class SQLDriver extends Driver<Long> {
 		return ".sql";
 	}
 
+	@Override
 	public List<SQLMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final List<SQLMatch> results = new ArrayList<>();
 
 		try (ResultSet rs = con.createStatement().executeQuery(queryDefinition)) {
 			while (rs.next()) {
-				final SQLMatch match = createMatch(query, rs);
+				final SQLMatch match = SQLMatch.createMatch(query, rs);
 				results.add(match);
 			}
 
@@ -72,23 +68,6 @@ public abstract class SQLDriver extends Driver<Long> {
 		}
 
 		return results;
-	}
-
-	protected SQLMatch createMatch(final Query query, final ResultSet rs) throws SQLException {
-		switch (query) {
-		case POSLENGTH:
-			return new SQLPosLengthMatch(rs);
-		case ROUTESENSOR:
-			return new SQLRouteSensorMatch(rs);
-		case SEMAPHORENEIGHBOR:
-			return new SQLSemaphoreNeighborMatch(rs);
-		case SWITCHSENSOR:
-			return new SQLSwitchSensorMatch(rs);
-		case SWITCHSET:
-			return new SQLSwitchSetMatch(rs);
-		default:
-			throw new UnsupportedOperationException("Query not supported: " + query);
-		}
 	}
 
 	// create

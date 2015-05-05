@@ -23,12 +23,16 @@ import java.io.IOException;
 
 public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
+	public MySQLBenchmarkCase() {
+		super();
+		driver = sqlDriver = new MySQLDriver();
+	}
+
 	@Override
 	public void init() throws IOException {
 		super.init();
 		MySQLProcess.startSQLProcess();
 
-		driver = sqlDriver = new MySQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
