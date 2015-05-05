@@ -15,28 +15,33 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
+import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SQLRouteSensorMatch extends SQLMatch {
+public class SQLRouteSensorMatch extends SQLMatch implements RouteSensorMatch {
 
 	public SQLRouteSensorMatch(final ResultSet rs) throws SQLException {
 		match = new Long[] { rs.getLong(VAR_ROUTE), rs.getLong(VAR_SENSOR), rs.getLong(VAR_SWP), rs.getLong(VAR_SW) };
 	}
 
+	@Override
 	public Long getRoute() {
 		return match[0];
 	}
 
+	@Override
 	public Long getSensor() {
 		return match[1];
 	}
 
-	public Long getSwitchPosition() {
+	@Override
+	public Long getSwP() {
 		return match[2];
 	}
 
+	@Override
 	public Long getSw() {
 		return match[3];
 	}

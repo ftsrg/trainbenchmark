@@ -12,16 +12,18 @@
 package hu.bme.mit.trainbenchmark.sql.match;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SQLSwitchSensorMatch extends SQLMatch {
+public class SQLSwitchSensorMatch extends SQLMatch implements SwitchSensorMatch {
 
 	public SQLSwitchSensorMatch(final ResultSet rs) throws SQLException {
 		match = new Long[] { rs.getLong(VAR_SW) };
 	}
 
+	@Override
 	public Long getSw() {
 		return match[0];
 	}

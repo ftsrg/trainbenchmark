@@ -15,28 +15,33 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SQLSwitchSetMatch extends SQLMatch {
+public class SQLSwitchSetMatch extends SQLMatch implements SwitchSetMatch {
 
 	public SQLSwitchSetMatch(final ResultSet rs) throws SQLException {
 		match = new Long[] { rs.getLong(VAR_SEMAPHORE), rs.getLong(VAR_ROUTE), rs.getLong(VAR_SWP), rs.getLong(VAR_SW) };
 	}
 
+	@Override
 	public Long getSemaphore() {
 		return match[0];
 	}
 
+	@Override
 	public Long getRoute() {
 		return match[1];
 	}
 
-	public Long getSwitchPosition() {
+	@Override
+	public Long getSwP() {
 		return match[2];
 	}
 
+	@Override
 	public Long getSw() {
 		return match[3];
 	}
