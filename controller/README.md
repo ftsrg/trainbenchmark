@@ -17,14 +17,14 @@ It is necessary to install the required external modules for Python. Two options
 
 #### Install globally
 
-In this scenario every necessary external package will be installed globally to the system (e.g. pip, third-party modules). In this case just execute the following script from the `hu.bme.mit.trainbenchmark.controller/src/controller/init/` directory:
+In this scenario every necessary external package will be installed globally to the system (e.g. pip, third-party modules). In this case just execute the following script from the `controller/src/controller/init/` directory:
 * `./initialize.py`
 
 Note that root password is required for the successful deployment. As a result, the required third-party python modules will be installed and the Controller can be used already.
 
 #### Install virtual environment (optional)
 
-If deploying every external package globally on the system wouldn't be satisfying or feasible, then use a virtual environment. In this case run the following script from the `hu.bme.mit.trainbenchmark.controller/src/controller/init/` directory
+If deploying every external package globally on the system wouldn't be satisfying or feasible, then use a virtual environment. In this case run the following script from the `controller/src/controller/init/` directory
 * `./initialize_venv.py`
 
 After this the python binary and third-party modules will be copied to the `./tb-env` folder which is also created automatically. Since the Python interpreter is not used globally, but locally, it must be activated every time:
@@ -35,7 +35,7 @@ To turn off the environment, execute the `deactivate` command. However, every ti
 
 ### Usage
 
-* `cd hu.bme.mit.trainbenchmark.controller/src/controller/`
+* `cd controller/src/controller/`
 
 Build the projects:
 * `./build.py`

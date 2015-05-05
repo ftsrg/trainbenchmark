@@ -12,18 +12,18 @@ Train Benchmark reporting tools
 * Install the required R packages by issuing the following command:
 
     ```bash
-    cd hu.bme.mit.trainbenchmark.reporting/
+    cd reporting/
     sudo R -f install.R
     ```
 * As a consequence, the `ggplot2`, `jsonlite`, `plyr` R packages will be deployed.
 
 ## Usage
     
-* At first, convert the benchmark results by executing the following script from the `/hu.bme.mit.trainbenchmark.controller/src/controller` library:
+* At first, convert the benchmark results by executing the following script from the `controller/src/controller` library:
     
      `./convert_results.py`
 
-* Then adjust the configuration parameters in the `/hu.bme.mit.trainbenchmark.reporting/src/config.json` file.
+* Then adjust the configuration parameters in the `reporting/src/config.json` file.
 * Finally execute the following command from the same directory:
 
      `Rscript generate_diagrams.R` 
@@ -32,7 +32,7 @@ Train Benchmark reporting tools
 
 * An example of the configuration file can be seen below:
 
-     ```
+     ```json
 {
   "Dimensions": {
     "X_Dimensions": {
@@ -77,16 +77,18 @@ Train Benchmark reporting tools
 ## Interactive reporting
 * Apart from the required packages above, another necessity is the Shiny R package. To install it, use the following commands: 
     
-     ```
-     cd hu.bme.mit.trainbenchmark.reporting/src/shiny/
+     ```bash
+     cd reporting/src/shiny/
      sudo R -f install.R
      ```
 * Important prerequisite to convert the result files to an acceptable CSV format. In this case, use the converter Python script again:
  
-    `./hu.bme.mit.trainbenchmark.controller/src/controller/convert_results.py`
+    ```bash
+    controller/src/controller/convert_results.py
+    ```
 
 * Finally, the application can be started: 
     
-      `R -f run.R`
-     
-     
+    ```bash
+    R -f run.R
+    ```
