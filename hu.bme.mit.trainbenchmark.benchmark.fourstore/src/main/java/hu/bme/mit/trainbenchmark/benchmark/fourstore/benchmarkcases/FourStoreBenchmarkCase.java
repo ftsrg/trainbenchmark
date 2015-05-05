@@ -29,11 +29,15 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, U
 	protected FourStoreBenchmarkConfig fsbc;
 	protected FourStoreDriver fourStoreDriver;
 
+	public FourStoreBenchmarkCase() throws IOException {
+		driver = fourStoreDriver = new FourStoreDriver();
+	}
+
 	@Override
 	public void init() throws IOException {
+		super.init();
 		this.fsbc = (FourStoreBenchmarkConfig) bc;
 
-		driver = fourStoreDriver = new FourStoreDriver();
 		checker = new FourStoreChecker(fourStoreDriver, fsbc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
