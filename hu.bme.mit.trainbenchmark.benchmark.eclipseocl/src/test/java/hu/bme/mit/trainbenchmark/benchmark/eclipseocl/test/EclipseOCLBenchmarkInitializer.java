@@ -15,13 +15,14 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.test;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.EclipseOCLBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class EclipseOCLBenchmarkInitializer extends TestBenchmarkInitializer<EclipseOCLBenchmarkLogic> {
 
 	@Override
-	protected EclipseOCLBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "EclipseOCL", 1, queryName, iterationCount, modificationMethod,
+	protected EclipseOCLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "EclipseOCL", 1, query, iterationCount, modificationMethod,
 				modificationConstant);
 		return new EclipseOCLBenchmarkLogic(bc);
 	}
