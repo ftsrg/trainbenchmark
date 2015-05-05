@@ -27,6 +27,8 @@ public abstract class Neo4jChecker<M extends Neo4jMatch> extends Checker<M> {
 
 	public static Neo4jChecker newInstance(final Neo4jDriver driver, final Query query) {
 		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new Neo4jConnectedSegmentsChecker(driver);
 		case POSLENGTH:
 			return new Neo4jPosLengthChecker(driver);
 		case ROUTESENSOR:
