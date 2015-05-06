@@ -115,8 +115,8 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       				
       		new ExportedParameter(body, var_segment6, "segment6")
       	));
-      	new TypeUnary(body, var_segment1, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
       	new TypeBinary(body, CONTEXT, var_segment1, var_sensor2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
+      	new TypeUnary(body, var_segment1, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
       	new TypeBinary(body, CONTEXT, var_segment1, var_segment2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
       	new TypeUnary(body, var_segment2, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
       	new TypeBinary(body, CONTEXT, var_segment2, var_segment3, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");

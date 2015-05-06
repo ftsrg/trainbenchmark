@@ -142,6 +142,7 @@
             "memsql",
             "mysql",
             "neo4j",
+            "orientdb",
             "sesame",
             "postgresql",
             "virtuoso"
@@ -162,6 +163,7 @@
           "memsql",
           "mysql",
           "neo4j",
+          "orientdb",
           "sesame",
           "postgresql",
           "virtuoso"

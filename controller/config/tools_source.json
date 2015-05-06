@@ -11,6 +11,9 @@
   "neo4j": {
     "format": "graph"
   },
+  "orientdb": {
+    "format": "graph"
+  },
   "java": {
     "format": "emf"
   },
