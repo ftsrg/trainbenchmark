@@ -13,7 +13,7 @@
   },
   "IterationCount": 10,
   "MinSize": 1,
-  "MaxSize": 4096,
+  "MaxSize": 2,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
@@ -24,7 +24,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "sesame"
+    "orientdb"
   ],
   "UniqueConfigurations": [
 	]

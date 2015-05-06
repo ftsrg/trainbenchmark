@@ -1,0 +1,4 @@
+SwitchSet = new Table()
+position = ''
+g.V('labels',':SwitchPosition').as('swp').in('follows').as('route').out('entry').has('signal', T.eq, 'GO').as('signal').back('swp').sideEffect{position = it.position}.out('switch').filter{it.currentPosition != position}.as('sw').table(SwitchSet)
+SwitchSet
