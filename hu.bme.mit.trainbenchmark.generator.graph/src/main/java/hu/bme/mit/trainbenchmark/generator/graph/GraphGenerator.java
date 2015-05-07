@@ -156,9 +156,17 @@ public class GraphGenerator extends Generator {
 				final Config config = Config.config();
 				xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 				tx.success();
-
+				
 				final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
-				FileUtils.writeToFile(new File(fileName), writer.toString().trim(), false);
+				
+				String graphmlContent = writer.toString();
+				if (graphGeneratorConfig.isOrientDb()) {
+					graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
+							"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" "
+							+ "attr.name=\"labels\" attr.type=\"string\"/>");
+				}
+				
+				FileUtils.writeToFile(new File(fileName), graphmlContent.trim(), false);
 			} catch (final XMLStreamException e) {
 				throw new IOException(e);
 			}

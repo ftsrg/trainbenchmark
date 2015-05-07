@@ -56,7 +56,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	// these should be implemented for each tool
 
 	protected void init() throws IOException {
-		driver.init();
+		// driver.init();
 	}
 
 	protected void destroy() throws IOException {
