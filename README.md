@@ -5,6 +5,8 @@
 * Waffle: [![Stories in Ready](https://badge.waffle.io/FTSRG/trainbenchmark.png?label=ready&title=Ready)](https://waffle.io/FTSRG/trainbenchmark)
 * [Sonar](http://build.inf.mit.bme.hu/sonar/dashboard/index/14429)
 
+**Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), targeting for EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
+
 For theoretical and implementation details, check out the following documents:
 * [Train Benchmark technical report](https://www.sharelatex.com/github/repos/FTSRG/trainbenchmark-docs/builds/latest/output.pdf) ([GitHub repository](https://github.com/FTSRG/trainbenchmark-docs))
 * [Related publications](http://incquery.net/publications/trainbenchmark)
