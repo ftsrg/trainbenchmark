@@ -29,7 +29,7 @@ import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jPosLengthChecker extends Neo4jChecker<Neo4jPosLengthMatch> {
+public class Neo4jPosLengthChecker extends Neo4jJavaChecker<Neo4jPosLengthMatch> {
 
 	public Neo4jPosLengthChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);

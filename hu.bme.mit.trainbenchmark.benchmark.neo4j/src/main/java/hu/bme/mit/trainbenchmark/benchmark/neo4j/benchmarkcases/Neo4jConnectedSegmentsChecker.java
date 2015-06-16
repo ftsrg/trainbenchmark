@@ -12,19 +12,22 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 
+import java.io.IOException;
 import java.util.Collection;
 
-public class Neo4jConnectedSegmentsChecker extends Neo4jChecker<Neo4jPosLengthMatch> {
+import org.apache.commons.lang.NotImplementedException;
+
+public class Neo4jConnectedSegmentsChecker extends Neo4jJavaChecker<Neo4jMatch> {
 
 	public Neo4jConnectedSegmentsChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 
 	@Override
-	public Collection<Neo4jPosLengthMatch> check() {
-		return null;
+	public Collection<Neo4jMatch> check() throws IOException {
+		throw new NotImplementedException();
 	}
 
 }

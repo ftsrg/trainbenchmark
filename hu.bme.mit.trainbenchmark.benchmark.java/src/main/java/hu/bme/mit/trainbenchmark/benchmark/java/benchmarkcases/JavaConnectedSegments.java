@@ -9,71 +9,88 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-//package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
-//
-//import hu.bme.mit.trainbenchmark.benchmark.java.matches.JavaConnectedSegmentsMatch;
-//import hu.bme.mit.trainbenchmark.railway.Segment;
-//import hu.bme.mit.trainbenchmark.railway.Sensor;
-//import hu.bme.mit.trainbenchmark.railway.TrackElement;
-//
-//import java.io.IOException;
-//import java.util.ArrayList;
-//import java.util.Collection;
-//
-//import org.eclipse.emf.common.util.EList;
-//import org.eclipse.emf.common.util.TreeIterator;
-//import org.eclipse.emf.ecore.EObject;
-//
-//public class JavaConnectedSegments extends JavaBenchmarkCase<JavaConnectedSegmentsMatch> {
-//
-//	private final int connectedLimit = 5;
-//
-//	@Override
-//	protected Collection<JavaConnectedSegmentsMatch> check() throws IOException {
-//		matches = new ArrayList<>();
-//
-//		final TreeIterator<EObject> contents = container.eAllContents();
-//		while (contents.hasNext()) {
-//			final EObject eObject = contents.next();
-//
-//			if (eObject instanceof Sensor) {
-//				final Sensor sensor = (Sensor) eObject;
-//
-//				final EList<TrackElement> trackElements = sensor.getElements();
-//				for (final TrackElement element : trackElements) {
-//					if (element instanceof Segment) {
-//						final Segment firstSegment = (Segment) element;
-//						final Segment lastSegment = getConnected(firstSegment, 0);
-//
-//						if (lastSegment == null) {
-//							continue;
-//						}
-//
-//						final Sensor nextSensor = lastSegment.getSensor();
-//
-//						if (sensor == nextSensor) {
-//							matches.add(null);
-//						}
-//					}
-//				}
-//			}
-//		}
-//
-//		return matches;
-//	}
-//
-//	protected Segment getConnected(final Segment source, final int index) {
-//		if (index == connectedLimit) {
-//			return source;
-//		}
-//
-//		final EList<TrackElement> neighbors = source.getConnectsTo();
-//		for (final TrackElement element : neighbors) {
-//			if (element instanceof Segment) {
-//				return getConnected((Segment) element, index + 1);
-//			}
-//		}
-//		return null;
-//	}
-//
-// }
+package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+
+public class JavaConnectedSegments extends JavaChecker {
+
+	public JavaConnectedSegments(final EMFDriver emfDriver) {
+		super(emfDriver);
+	}
+
+	@Override
+	public Collection<EMFMatch> check() {
+		matches = new ArrayList<>();
+
+		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
+		while (contents.hasNext()) {
+			final EObject eObject = contents.next();
+
+			if (eObject instanceof Sensor) {
+				//sensor
+				final Sensor sensor1 = (Sensor) eObject;
+
+				// segment1
+				for (final TrackElement element1 : sensor1.getElements()) {
+					if (element1 instanceof Segment) {					
+						final Segment segment1 = (Segment) element1;
+						
+						// segment2
+						for (final TrackElement element2 : segment1.getConnectsTo()) {
+							if (element2 instanceof Segment) {
+								final Segment segment2 = (Segment) element2;
+								
+								
+							}							
+						}					
+						
+						
+						
+						if (lastSegment == null) {
+							continue;
+						}
+
+						final Sensor nextSensor = lastSegment.getSensor();
+
+						if (sensor1 == nextSensor) {
+							matches.add(null);
+						}
+						
+						final ConnectedSegmentsMatch csm = new EMFConnectedSegmentsMatch(sensor1, sensor2, segment1, segment2, segment3, segment4, segment5, segment6);
+					}
+				}
+			}
+		}
+
+		return matches;
+	}
+
+	protected Segment getConnected(final Segment source, final int index) {
+		if (index == connectedLimit) {
+			return source;
+		}
+
+		final EList<TrackElement> neighbors = source.getConnectsTo();
+		for (final TrackElement element : neighbors) {
+			if (element instanceof Segment) {
+				return getConnected((Segment) element, index + 1);
+			}
+		}
+		return null;
+	}
+
+}

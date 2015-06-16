@@ -36,7 +36,7 @@ import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jSemaphoreNeighborChecker extends Neo4jChecker<Neo4jSemaphoreNeighborMatch> {
+public class Neo4jSemaphoreNeighborChecker extends Neo4jJavaChecker<Neo4jSemaphoreNeighborMatch> {
 
 	public Neo4jSemaphoreNeighborChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);
