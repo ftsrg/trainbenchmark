@@ -42,7 +42,12 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 
 		dbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
 		driver = neoDriver = new Neo4jDriver(dbPath);
-		checker = Neo4jChecker.newInstance(neoDriver, bc.getQuery());
+		
+		if (nbc.isJavaApi()) {
+			checker = Neo4jJavaChecker.newInstance(neoDriver, bc.getQuery());
+		} else {
+			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
+		}
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());

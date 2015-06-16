@@ -39,7 +39,7 @@ import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jSwitchSetChecker extends Neo4jChecker<Neo4jSwitchSetMatch> {
+public class Neo4jSwitchSetChecker extends Neo4jJavaChecker<Neo4jSwitchSetMatch> {
 
 	public Neo4jSwitchSetChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);

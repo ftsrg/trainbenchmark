@@ -32,7 +32,7 @@ import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jSwitchSensorChecker extends Neo4jChecker<Neo4jSwitchSensorMatch> {
+public class Neo4jSwitchSensorChecker extends Neo4jJavaChecker<Neo4jSwitchSensorMatch> {
 
 	public Neo4jSwitchSensorChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);

@@ -13,9 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 public interface ConnectedSegmentsMatch {
 
-	public Object getSensor1();
-
-	public Object getSensor2();
+	public Object getSensor();
 
 	public Object getSegment1();
 

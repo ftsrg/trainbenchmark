@@ -28,9 +28,6 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public abstract class Neo4jTransformation<M> extends Transformation<M> {
 
-	// query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
-	// + "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + getName() + ".cypher"));
-
 	protected Neo4jDriver neoDriver;
 
 	protected Neo4jTransformation(final Neo4jDriver neoDriver) {

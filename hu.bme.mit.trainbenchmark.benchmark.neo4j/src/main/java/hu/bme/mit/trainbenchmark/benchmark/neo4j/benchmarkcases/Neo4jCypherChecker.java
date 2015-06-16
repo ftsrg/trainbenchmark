@@ -12,36 +12,39 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class Neo4jChecker<M extends Neo4jMatch> extends Checker<M> {
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+
+import org.apache.commons.io.FileUtils;
+
+public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 
 	protected final Neo4jDriver driver;
+	protected final Query query;
+	protected final String queryDefinition;
 
-	public Neo4jChecker(final Neo4jDriver driver) {
+	protected Neo4jCypherChecker(final Neo4jDriver driver, final BenchmarkConfig bc) throws IOException {
 		super();
 		this.driver = driver;
+
+		query = bc.getQuery();
+		queryDefinition = FileUtils.readFileToString(new File(bc.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + bc.getQuery() + ".cypher"));
 	}
 
-	public static Neo4jChecker newInstance(final Neo4jDriver driver, final Query query) {
-		switch (query) {
-		case CONNECTEDSEGMENTS:
-			return new Neo4jConnectedSegmentsChecker(driver);
-		case POSLENGTH:
-			return new Neo4jPosLengthChecker(driver);
-		case ROUTESENSOR:
-			return new Neo4jRouteSensorChecker(driver);
-		case SEMAPHORENEIGHBOR:
-			return new Neo4jSemaphoreNeighborChecker(driver);
-		case SWITCHSENSOR:
-			return new Neo4jSwitchSensorChecker(driver);
-		case SWITCHSET:
-			return new Neo4jSwitchSetChecker(driver);
-		default:
-			throw new UnsupportedOperationException("Query " + query + " not supported");
-		}
+	@Override
+	public Collection<Neo4jMatch> check() throws IOException {
+		return driver.runQuery(Query.CONNECTEDSEGMENTS, queryDefinition);
+	}
+
+	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver neoDriver, final BenchmarkConfig bc) throws IOException {
+		return new Neo4jCypherChecker(neoDriver, bc);
 	}
 
 }
