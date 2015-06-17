@@ -17,8 +17,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT3;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT4;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT5;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT6;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 
 import org.openrdf.model.URI;
@@ -31,13 +30,8 @@ public class SesameConnectedSegmentsMatch extends SesameMatch implements Connect
 	}
 
 	@Override
-	public URI getSensor1() {
-		return (URI) bs.getValue(VAR_SENSOR1);
-	}
-
-	@Override
-	public URI getSensor2() {
-		return (URI) bs.getValue(VAR_SENSOR2);
+	public URI getSensor() {
+		return (URI) bs.getValue(VAR_SENSOR);
 	}
 
 	@Override
@@ -72,8 +66,7 @@ public class SesameConnectedSegmentsMatch extends SesameMatch implements Connect
 
 	@Override
 	public URI[] toArray() {
-		return new URI[] { getSensor1(), getSensor2(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(),
-				getSegment6() };
+		return new URI[] { getSensor(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(), getSegment6() };
 	}
 
 }
