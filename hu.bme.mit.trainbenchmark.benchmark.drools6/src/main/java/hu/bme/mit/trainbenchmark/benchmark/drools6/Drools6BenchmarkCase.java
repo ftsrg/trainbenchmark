@@ -10,28 +10,29 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools5.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.checkers.Drools6Checker;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 import java.io.IOException;
 
-public class Drools5BenchmarkCase extends EMFBenchmarkCase {
+public class Drools6BenchmarkCase extends EMFBenchmarkCase {
 
-	protected Drools5Driver drools5driver;
+	protected Drools6Driver drools6driver;
 
 	@Override
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		super.benchmarkInit(bc);
-		driver = drools5driver = new Drools5Driver(bc);
-		checker = new Drools5Checker(drools5driver, bc.getQuery());
+		driver = drools6driver = new Drools6Driver(bc);
+		checker = new Drools6Checker(drools6driver, bc.getQuery());
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = EMFTransformation.newInstance(drools5driver, bc.getQuery(), bc.getScenario());
+			transformation = EMFTransformation.newInstance(drools6driver, bc.getQuery(), bc.getScenario());
 		}
 	}
 

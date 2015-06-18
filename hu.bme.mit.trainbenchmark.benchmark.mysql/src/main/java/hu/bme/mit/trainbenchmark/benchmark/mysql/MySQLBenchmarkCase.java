@@ -10,9 +10,8 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
-import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Scenario;

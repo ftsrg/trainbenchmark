@@ -9,24 +9,24 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
-public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
+public class EMFIncQuerySwitchSetChecker extends EMFIncQueryChecker<SwitchSetMatch> {
 
-	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryDriver<SemaphoreNeighborMatch> eiqDriver) {
+	public EMFIncQuerySwitchSetChecker(final EMFIncQueryDriver<SwitchSetMatch> eiqDriver) {
 		super(eiqDriver);
 	}
 
 	@Override
-	public IncQueryMatcher<SemaphoreNeighborMatch> getMatcher() throws IncQueryException {
-		return SemaphoreNeighborMatcher.on(eiqDriver.getEngine());
+	public IncQueryMatcher<SwitchSetMatch> getMatcher() throws IncQueryException {
+		return SwitchSetMatcher.on(eiqDriver.getEngine());
 	}
 
 }

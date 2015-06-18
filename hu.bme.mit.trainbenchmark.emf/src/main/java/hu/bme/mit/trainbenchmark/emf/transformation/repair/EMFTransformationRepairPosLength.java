@@ -22,9 +22,9 @@ public class EMFTransformationRepairPosLength extends EMFTransformationRepair<EM
 	public void rhs(final Collection<EMFPosLengthMatch> matches) {
 		final PosLengthRepairOperation op = new PosLengthRepairOperation();
 
-		for (final EMFPosLengthMatch match : matches) {
-			final int newLength = op.op(match.getSegment().getLength());
-			match.getSegment().setLength(newLength);
+		for (final EMFPosLengthMatch plm : matches) {
+			final int newLength = op.op(plm.getSegment().getLength());
+			plm.getSegment().setLength(newLength);
 		}
 	}
 

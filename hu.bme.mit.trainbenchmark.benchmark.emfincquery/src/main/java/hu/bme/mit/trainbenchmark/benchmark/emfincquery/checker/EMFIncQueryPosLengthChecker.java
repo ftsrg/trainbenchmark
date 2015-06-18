@@ -9,24 +9,24 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
-public class EMFIncQueryRouteSensorChecker extends EMFIncQueryChecker<RouteSensorMatch> {
+public class EMFIncQueryPosLengthChecker extends EMFIncQueryChecker<PosLengthMatch> {
 
-	public EMFIncQueryRouteSensorChecker(final EMFIncQueryDriver<RouteSensorMatch> eiqDriver) {
+	public EMFIncQueryPosLengthChecker(final EMFIncQueryDriver<PosLengthMatch> eiqDriver) {
 		super(eiqDriver);
 	}
 
 	@Override
-	public IncQueryMatcher<RouteSensorMatch> getMatcher() throws IncQueryException {
-		return RouteSensorMatcher.on(eiqDriver.getEngine());
+	public IncQueryMatcher<PosLengthMatch> getMatcher() throws IncQueryException {
+		return PosLengthMatcher.on(eiqDriver.getEngine());
 	}
 
 }

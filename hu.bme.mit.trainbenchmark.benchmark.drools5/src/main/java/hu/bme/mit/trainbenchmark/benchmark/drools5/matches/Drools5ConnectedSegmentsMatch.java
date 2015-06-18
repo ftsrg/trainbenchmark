@@ -9,22 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.emf.transformation.repair;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
-import java.util.Collection;
+import org.drools.runtime.rule.Row;
 
-public class EMFTransformationRepairSwitchSensor extends EMFTransformationRepair<EMFSwitchSensorMatch> {
+public class Drools5ConnectedSegmentsMatch extends EMFPosLengthMatch {
 
-	@Override
-	public void rhs(final Collection<EMFSwitchSensorMatch> matches) {
-		for (final EMFSwitchSensorMatch ssnm : matches) {
-			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
-			ssnm.getSw().setSensor(sensor);
-		}
+	public Drools5ConnectedSegmentsMatch(final Row match) {
+		super((Segment) match.get(VAR_SEGMENT));
 	}
 
 }
