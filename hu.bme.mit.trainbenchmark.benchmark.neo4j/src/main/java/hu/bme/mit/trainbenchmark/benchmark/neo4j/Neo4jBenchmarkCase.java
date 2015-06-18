@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jJavaChecker;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
@@ -46,7 +46,7 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 		driver = neoDriver = new Neo4jDriver(dbPath);
 		
 		if (nbc.isJavaApi()) {
-			checker = Neo4jJavaChecker.newInstance(neoDriver, bc.getQuery());
+			checker = Neo4jCoreChecker.newInstance(neoDriver, bc.getQuery());
 		} else {
 			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
 		}

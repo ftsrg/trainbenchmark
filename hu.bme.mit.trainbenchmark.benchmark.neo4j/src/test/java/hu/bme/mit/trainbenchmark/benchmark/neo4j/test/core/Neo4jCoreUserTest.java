@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.javaapi;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.core;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.UserTest;
 
-public class Neo4jJavaBatchTest extends BatchTest {
+public class Neo4jCoreUserTest extends UserTest {
 
-	public Neo4jJavaBatchTest() {
-		bi = new Neo4jJavaBenchmarkInitializer();
+	public Neo4jCoreUserTest() {
+		bi = new Neo4jCoreBenchmarkInitializer();
 	}
 
 }

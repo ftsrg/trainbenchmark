@@ -38,9 +38,9 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
-public class Neo4jSwitchSetChecker extends Neo4jJavaChecker<Neo4jSwitchSetMatch> {
+public class Neo4jCoreSwitchSetChecker extends Neo4jCoreChecker<Neo4jSwitchSetMatch> {
 
-	public Neo4jSwitchSetChecker(final Neo4jDriver neoDriver) {
+	public Neo4jCoreSwitchSetChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 
@@ -68,7 +68,7 @@ public class Neo4jSwitchSetChecker extends Neo4jJavaChecker<Neo4jSwitchSetMatch>
 						continue;
 					}
 
-					// (route:Route)-[:follows]->(sP:SwitchPosition)
+					// (route:Route)-[:follows]->(swP:SwitchPosition)
 					final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING, relationshipTypeFollows);
 					for (final Relationship follows : followss) {
 						final Node swP = follows.getEndNode();
@@ -97,7 +97,7 @@ public class Neo4jSwitchSetChecker extends Neo4jJavaChecker<Neo4jSwitchSetMatch>
 							match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
 							match.put(QueryConstants.VAR_ROUTE, route);
 							match.put(QueryConstants.VAR_SWP, swP);
-							match.put(QueryConstants.VAR_SWP, sw);
+							match.put(QueryConstants.VAR_SW, sw);
 							matches.add(new Neo4jSwitchSetMatch(match));
 						}
 					}

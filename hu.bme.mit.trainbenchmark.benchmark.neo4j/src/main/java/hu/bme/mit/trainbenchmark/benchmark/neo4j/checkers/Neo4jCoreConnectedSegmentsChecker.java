@@ -36,9 +36,9 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
-public class Neo4jConnectedSegmentsChecker extends Neo4jJavaChecker<Neo4jConnectedSegmentsMatch> {
+public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jConnectedSegmentsMatch> {
 
-	public Neo4jConnectedSegmentsChecker(final Neo4jDriver neoDriver) {
+	public Neo4jCoreConnectedSegmentsChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

@@ -34,9 +34,9 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
-public class Neo4jRouteSensorChecker extends Neo4jJavaChecker<Neo4jRouteSensorMatch> {
+public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSensorMatch> {
 
-	public Neo4jRouteSensorChecker(final Neo4jDriver neoDriver) {
+	public Neo4jCoreRouteSensorChecker(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

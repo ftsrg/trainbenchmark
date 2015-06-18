@@ -16,29 +16,29 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class Neo4jJavaChecker<M extends Neo4jMatch> extends Checker<M> {
+public abstract class Neo4jCoreChecker<M extends Neo4jMatch> extends Checker<M> {
 
 	protected final Neo4jDriver driver;
 
-	public Neo4jJavaChecker(final Neo4jDriver driver) {
+	public Neo4jCoreChecker(final Neo4jDriver driver) {
 		super();
 		this.driver = driver;
 	}
 
-	public static Neo4jJavaChecker newInstance(final Neo4jDriver driver, final Query query) {
+	public static Neo4jCoreChecker newInstance(final Neo4jDriver driver, final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new Neo4jConnectedSegmentsChecker(driver);
+			return new Neo4jCoreConnectedSegmentsChecker(driver);
 		case POSLENGTH:
-			return new Neo4jPosLengthChecker(driver);
+			return new Neo4jCorePosLengthChecker(driver);
 		case ROUTESENSOR:
-			return new Neo4jRouteSensorChecker(driver);
+			return new Neo4jCoreRouteSensorChecker(driver);
 		case SEMAPHORENEIGHBOR:
-			return new Neo4jSemaphoreNeighborChecker(driver);
+			return new Neo4jCoreSemaphoreNeighborChecker(driver);
 		case SWITCHSENSOR:
-			return new Neo4jSwitchSensorChecker(driver);
+			return new Neo4jCoreSwitchSensorChecker(driver);
 		case SWITCHSET:
-			return new Neo4jSwitchSetChecker(driver);
+			return new Neo4jCoreSwitchSetChecker(driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}
