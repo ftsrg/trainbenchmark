@@ -40,7 +40,7 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 
 	@Override
 	public Collection<Neo4jMatch> check() throws IOException {
-		return driver.runQuery(Query.CONNECTEDSEGMENTS, queryDefinition);
+		return driver.runQuery(query, queryDefinition);
 	}
 
 	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver neoDriver, final BenchmarkConfig bc) throws IOException {

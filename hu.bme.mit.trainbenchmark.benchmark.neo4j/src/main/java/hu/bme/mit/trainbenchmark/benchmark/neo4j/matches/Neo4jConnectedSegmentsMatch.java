@@ -11,8 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT1;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT2;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT3;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT4;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT5;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT6;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 import java.util.Map;
 
@@ -26,37 +32,37 @@ public class Neo4jConnectedSegmentsMatch extends Neo4jMatch implements Connected
 
 	@Override
 	public Node getSensor() {
-		return (Node) match.get(QueryConstants.VAR_SENSOR);
+		return (Node) match.get(VAR_SENSOR);
 	}
 
 	@Override
 	public Node getSegment1() {
-		return (Node) match.get(QueryConstants.VAR_SEGMENT1);
+		return (Node) match.get(VAR_SEGMENT1);
 	}
 
 	@Override
 	public Node getSegment2() {
-		return (Node) match.get(QueryConstants.VAR_SEGMENT2);
+		return (Node) match.get(VAR_SEGMENT2);
 	}
 
 	@Override
 	public Node getSegment3() {
-		return (Node) match.get(QueryConstants.VAR_SEGMENT3);
+		return (Node) match.get(VAR_SEGMENT3);
 	}
 
 	@Override
 	public Node getSegment4() {
-		return (Node) match.get(QueryConstants.VAR_SEGMENT4);
+		return (Node) match.get(VAR_SEGMENT4);
 	}
 
 	@Override
 	public Node getSegment5() {
-		return (Node) match.get(QueryConstants.VAR_SEGMENT5);
+		return (Node) match.get(VAR_SEGMENT5);
 	}
 
 	@Override
 	public Node getSegment6() {
-		return (Node) match.get(QueryConstants.VAR_SEGMENT6);
+		return (Node) match.get(VAR_SEGMENT6);
 	}
 
 	@Override
