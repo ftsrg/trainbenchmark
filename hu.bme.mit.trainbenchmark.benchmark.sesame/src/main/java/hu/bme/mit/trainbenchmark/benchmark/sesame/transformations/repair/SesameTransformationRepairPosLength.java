@@ -39,10 +39,10 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 	@Override
 	public void rhs(final Collection<SesamePosLengthMatch> matches) throws IOException {
 		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory f = sesameDriver.getValueFactory();
+		final ValueFactory vf = sesameDriver.getValueFactory();
 
 		final PosLengthRepairOperation operation = new PosLengthRepairOperation();
-		final URI lengthProperty = f.createURI(BASE_PREFIX + LENGTH);
+		final URI lengthProperty = vf.createURI(BASE_PREFIX + LENGTH);
 
 		try {
 			for (final SesamePosLengthMatch match : matches) {
@@ -55,7 +55,7 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 				}
 
 				final Integer lengthInteger = new Integer(length.stringValue());
-				final Literal newLength = f.createLiteral(operation.op(lengthInteger));
+				final Literal newLength = vf.createLiteral(operation.op(lengthInteger));
 				con.add(segment, lengthProperty, newLength);
 			}
 		} catch (final RepositoryException e) {

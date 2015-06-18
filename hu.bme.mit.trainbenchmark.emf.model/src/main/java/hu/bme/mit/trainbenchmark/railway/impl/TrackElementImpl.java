@@ -16,11 +16,14 @@ package hu.bme.mit.trainbenchmark.railway.impl;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -39,14 +42,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public abstract class TrackElementImpl extends RailwayElementImpl implements TrackElement {
 	/**
-	 * The cached value of the '{@link #getConnectsTo() <em>Connects To</em>}' reference.
+	 * The cached value of the '{@link #getConnectsTo() <em>Connects To</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getConnectsTo()
 	 * @generated
 	 * @ordered
 	 */
-	protected TrackElement connectsTo;
+	protected EList<TrackElement> connectsTo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,37 +116,11 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TrackElement getConnectsTo() {
-		if (connectsTo != null && connectsTo.eIsProxy()) {
-			InternalEObject oldConnectsTo = (InternalEObject)connectsTo;
-			connectsTo = (TrackElement)eResolveProxy(oldConnectsTo);
-			if (connectsTo != oldConnectsTo) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RailwayPackage.TRACK_ELEMENT__CONNECTS_TO, oldConnectsTo, connectsTo));
-			}
+	public EList<TrackElement> getConnectsTo() {
+		if (connectsTo == null) {
+			connectsTo = new EObjectResolvingEList<TrackElement>(TrackElement.class, this, RailwayPackage.TRACK_ELEMENT__CONNECTS_TO);
 		}
 		return connectsTo;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TrackElement basicGetConnectsTo() {
-		return connectsTo;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setConnectsTo(TrackElement newConnectsTo) {
-		TrackElement oldConnectsTo = connectsTo;
-		connectsTo = newConnectsTo;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.TRACK_ELEMENT__CONNECTS_TO, oldConnectsTo, connectsTo));
 	}
 
 	/**
@@ -201,8 +178,7 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 			case RailwayPackage.TRACK_ELEMENT__SENSOR:
 				return getSensor();
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				if (resolve) return getConnectsTo();
-				return basicGetConnectsTo();
+				return getConnectsTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,7 +196,8 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 				setSensor((Sensor)newValue);
 				return;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				setConnectsTo((TrackElement)newValue);
+				getConnectsTo().clear();
+				getConnectsTo().addAll((Collection<? extends TrackElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -238,7 +215,7 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 				setSensor((Sensor)null);
 				return;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				setConnectsTo((TrackElement)null);
+				getConnectsTo().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -255,7 +232,7 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 			case RailwayPackage.TRACK_ELEMENT__SENSOR:
 				return getSensor() != null;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				return connectsTo != null;
+				return connectsTo != null && !connectsTo.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

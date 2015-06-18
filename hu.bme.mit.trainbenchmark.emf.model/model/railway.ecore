@@ -9,7 +9,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="TrackElement" abstract="true" eSuperTypes="#//RailwayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sensor" eType="#//Sensor"
         eOpposite="#//Sensor/elements"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connectsTo" eType="#//TrackElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectsTo" upperBound="-1"
+        eType="#//TrackElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Switch" eSuperTypes="#//TrackElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentPosition" lowerBound="1"
