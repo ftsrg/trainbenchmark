@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.javaapi;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.core;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class Neo4jJavaBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
+public class Neo4jCoreBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
 
 	@Override
 	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {

@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.sesame.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
