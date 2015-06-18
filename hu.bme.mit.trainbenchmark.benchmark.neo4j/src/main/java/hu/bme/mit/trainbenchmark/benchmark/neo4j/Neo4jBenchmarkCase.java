@@ -10,9 +10,11 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jJavaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;

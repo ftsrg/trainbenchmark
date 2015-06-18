@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelRoute;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSemaphore;
@@ -35,9 +35,8 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.ResourceIterable;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jSwitchSetChecker extends Neo4jJavaChecker<Neo4jSwitchSetMatch> {
 
@@ -51,8 +50,10 @@ public class Neo4jSwitchSetChecker extends Neo4jJavaChecker<Neo4jSwitchSetMatch>
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			final ResourceIterable<Node> semaphores = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSemaphore);
-			for (final Node semaphore : semaphores) {
+			final ResourceIterator<Node> semaphores = graphDb.findNodes(labelSemaphore);
+			while (semaphores.hasNext()) {
+				final Node semaphore = semaphores.next();
+				
 				// semaphore.signal = "GO"
 				final Object signal = semaphore.getProperty(SIGNAL);
 				if (!Signal.GO.toString().equals(signal)) {

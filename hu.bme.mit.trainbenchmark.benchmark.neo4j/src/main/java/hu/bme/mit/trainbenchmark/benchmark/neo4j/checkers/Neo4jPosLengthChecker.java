@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
@@ -25,9 +25,8 @@ import java.util.Map;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.ResourceIterable;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jPosLengthChecker extends Neo4jJavaChecker<Neo4jPosLengthMatch> {
 
@@ -42,8 +41,9 @@ public class Neo4jPosLengthChecker extends Neo4jJavaChecker<Neo4jPosLengthMatch>
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// Segment
-			final ResourceIterable<Node> segments = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSegment);
-			for (final Node segment : segments) {
+			final ResourceIterator<Node> segments = graphDb.findNodes(labelSegment);
+			while (segments.hasNext()) {
+				final Node segment = segments.next();
 				final Integer length = (Integer) segment.getProperty(LENGTH);
 				// Segment.length <= 0
 				if (length <= 0) {
