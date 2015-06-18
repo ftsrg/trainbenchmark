@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
@@ -32,9 +32,8 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.ResourceIterable;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jSemaphoreNeighborChecker extends Neo4jJavaChecker<Neo4jSemaphoreNeighborMatch> {
 
@@ -48,8 +47,9 @@ public class Neo4jSemaphoreNeighborChecker extends Neo4jJavaChecker<Neo4jSemapho
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			final ResourceIterable<Node> routes1 = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(Neo4jConstants.labelRoute);
-			for (final Node route1 : routes1) {
+			final ResourceIterator<Node> routes1 = graphDb.findNodes(Neo4jConstants.labelRoute);
+			while (routes1.hasNext()) {
+				final Node route1 = routes1.next();
 				if (matches.contains(route1)) {
 					continue;
 				}

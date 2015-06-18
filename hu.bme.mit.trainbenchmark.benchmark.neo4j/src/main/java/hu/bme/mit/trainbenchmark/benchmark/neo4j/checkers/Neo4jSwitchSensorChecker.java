@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSensor;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSwitch;
@@ -28,9 +28,8 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.ResourceIterable;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jSwitchSensorChecker extends Neo4jJavaChecker<Neo4jSwitchSensorMatch> {
 
@@ -45,8 +44,9 @@ public class Neo4jSwitchSensorChecker extends Neo4jJavaChecker<Neo4jSwitchSensor
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (switch:Switch)-[:sensor]->(Sensor) NAC
-			final ResourceIterable<Node> switches = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(labelSwitch);
-			for (final Node sw : switches) {
+			final ResourceIterator<Node> switches = graphDb.findNodes(labelSwitch);
+			while (switches.hasNext()) {
+				final Node sw = switches.next();
 				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeSensor);
 
 				boolean hasSensor = false;

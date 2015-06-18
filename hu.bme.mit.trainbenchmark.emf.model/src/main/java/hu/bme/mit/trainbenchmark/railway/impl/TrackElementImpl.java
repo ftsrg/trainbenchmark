@@ -16,20 +16,11 @@ package hu.bme.mit.trainbenchmark.railway.impl;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -48,14 +39,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public abstract class TrackElementImpl extends RailwayElementImpl implements TrackElement {
 	/**
-	 * The cached value of the '{@link #getConnectsTo() <em>Connects To</em>}' reference list.
+	 * The cached value of the '{@link #getConnectsTo() <em>Connects To</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getConnectsTo()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TrackElement> connectsTo;
+	protected TrackElement connectsTo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,11 +113,37 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TrackElement> getConnectsTo() {
-		if (connectsTo == null) {
-			connectsTo = new EObjectResolvingEList<TrackElement>(TrackElement.class, this, RailwayPackage.TRACK_ELEMENT__CONNECTS_TO);
+	public TrackElement getConnectsTo() {
+		if (connectsTo != null && connectsTo.eIsProxy()) {
+			InternalEObject oldConnectsTo = (InternalEObject)connectsTo;
+			connectsTo = (TrackElement)eResolveProxy(oldConnectsTo);
+			if (connectsTo != oldConnectsTo) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RailwayPackage.TRACK_ELEMENT__CONNECTS_TO, oldConnectsTo, connectsTo));
+			}
 		}
 		return connectsTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TrackElement basicGetConnectsTo() {
+		return connectsTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConnectsTo(TrackElement newConnectsTo) {
+		TrackElement oldConnectsTo = connectsTo;
+		connectsTo = newConnectsTo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.TRACK_ELEMENT__CONNECTS_TO, oldConnectsTo, connectsTo));
 	}
 
 	/**
@@ -184,7 +201,8 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 			case RailwayPackage.TRACK_ELEMENT__SENSOR:
 				return getSensor();
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				return getConnectsTo();
+				if (resolve) return getConnectsTo();
+				return basicGetConnectsTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,8 +220,7 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 				setSensor((Sensor)newValue);
 				return;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				getConnectsTo().clear();
-				getConnectsTo().addAll((Collection<? extends TrackElement>)newValue);
+				setConnectsTo((TrackElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -221,7 +238,7 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 				setSensor((Sensor)null);
 				return;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				getConnectsTo().clear();
+				setConnectsTo((TrackElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -238,7 +255,7 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 			case RailwayPackage.TRACK_ELEMENT__SENSOR:
 				return getSensor() != null;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
-				return connectsTo != null && !connectsTo.isEmpty();
+				return connectsTo != null;
 		}
 		return super.eIsSet(featureID);
 	}

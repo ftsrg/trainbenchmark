@@ -44,47 +44,53 @@ public class JavaConnectedSegmentsChecker extends JavaChecker {
 
 				// segment1
 				for (final TrackElement element1 : sensor.getElements()) {
-					if (!(element1 instanceof Segment))
+					if (!(element1 instanceof Segment)) {
 						continue;
+					}
 					final Segment segment1 = (Segment) element1;
 
 					// segment2
 					for (final TrackElement element2 : segment1.getConnectsTo()) {
-						if (!(element2 instanceof Segment))
+						if (!(element2 instanceof Segment)) {
 							continue;
+						}
 						final Segment segment2 = (Segment) element2;
 
 						// segment3
 						for (final TrackElement element3 : segment2.getConnectsTo()) {
-							if (!(element3 instanceof Segment))
+							if (!(element3 instanceof Segment)) {
 								continue;
+							}
 							final Segment segment3 = (Segment) element3;
 
 							// segment4
 							for (final TrackElement element4 : segment3.getConnectsTo()) {
-								if (!(element4 instanceof Segment))
+								if (!(element4 instanceof Segment)) {
 									continue;
+								}
 								final Segment segment4 = (Segment) element4;
 
 								// segment5
 								for (final TrackElement element5 : segment4.getConnectsTo()) {
-									if (!(element5 instanceof Segment))
+									if (!(element5 instanceof Segment)) {
 										continue;
+									}
 									final Segment segment5 = (Segment) element5;
 
 									// segment6
 									for (final TrackElement element6 : segment5.getConnectsTo()) {
-										if (!(element6 instanceof Segment))
+										if (!(element6 instanceof Segment)) {
 											continue;
+										}
 										final Segment segment6 = (Segment) element6;
 
 										if (segment6.getSensor() != sensor) {
 											continue;
 										}
-										
+
 										// segment6.getSensor == sensor
 										final EMFConnectedSegmentsMatch csm = new EMFConnectedSegmentsMatch(sensor, segment1, segment2,
-												segment3, segment4, segment5, segment6);										
+												segment3, segment4, segment5, segment6);
 										matches.add(csm);
 									}
 								}

@@ -44,7 +44,7 @@ public abstract class AbstractBenchmarkLogic {
 	protected AbstractBenchmarkCase<?, ?> getTestCase(final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
-			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + ".benchmarkcases." + getTool()
+			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + "." + getTool()
 					+ "BenchmarkCase";
 			final Class<?> clazz = classLoader.loadClass(toolClassName);
 
@@ -56,7 +56,7 @@ public abstract class AbstractBenchmarkLogic {
 		
 
 			// else instantiate specific class
-			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + ".benchmarkcases." + getTool() + bc.getQuery();
+			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + "." + getTool() + bc.getQuery();
 			final Class<?> queryClass = classLoader.loadClass(queryClassName);
 			
 			// instantiate generic class if not abstract
