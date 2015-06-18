@@ -13,6 +13,8 @@
  */
 package hu.bme.mit.trainbenchmark.railway;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -61,29 +63,19 @@ public interface TrackElement extends RailwayElement {
 	void setSensor(Sensor value);
 
 	/**
-	 * Returns the value of the '<em><b>Connects To</b></em>' reference.
+	 * Returns the value of the '<em><b>Connects To</b></em>' reference list.
+	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.TrackElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Connects To</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Connects To</em>' reference.
-	 * @see #setConnectsTo(TrackElement)
+	 * @return the value of the '<em>Connects To</em>' reference list.
 	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getTrackElement_ConnectsTo()
 	 * @model
 	 * @generated
 	 */
-	TrackElement getConnectsTo();
-
-	/**
-	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.TrackElement#getConnectsTo <em>Connects To</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Connects To</em>' reference.
-	 * @see #getConnectsTo()
-	 * @generated
-	 */
-	void setConnectsTo(TrackElement value);
+	EList<TrackElement> getConnectsTo();
 
 } // TrackElement

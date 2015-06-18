@@ -134,7 +134,7 @@ public interface RailwayPackage extends EPackage {
 	int TRACK_ELEMENT__SENSOR = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Connects To</b></em>' reference.
+	 * The feature id for the '<em><b>Connects To</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -189,7 +189,7 @@ public interface RailwayPackage extends EPackage {
 	int SEGMENT__SENSOR = TRACK_ELEMENT__SENSOR;
 
 	/**
-	 * The feature id for the '<em><b>Connects To</b></em>' reference.
+	 * The feature id for the '<em><b>Connects To</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -253,7 +253,7 @@ public interface RailwayPackage extends EPackage {
 	int SWITCH__SENSOR = TRACK_ELEMENT__SENSOR;
 
 	/**
-	 * The feature id for the '<em><b>Connects To</b></em>' reference.
+	 * The feature id for the '<em><b>Connects To</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -645,10 +645,10 @@ public interface RailwayPackage extends EPackage {
 	EReference getTrackElement_Sensor();
 
 	/**
-	 * Returns the meta object for the reference '{@link hu.bme.mit.trainbenchmark.railway.TrackElement#getConnectsTo <em>Connects To</em>}'.
+	 * Returns the meta object for the reference list '{@link hu.bme.mit.trainbenchmark.railway.TrackElement#getConnectsTo <em>Connects To</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Connects To</em>'.
+	 * @return the meta object for the reference list '<em>Connects To</em>'.
 	 * @see hu.bme.mit.trainbenchmark.railway.TrackElement#getConnectsTo()
 	 * @see #getTrackElement()
 	 * @generated
@@ -970,7 +970,7 @@ public interface RailwayPackage extends EPackage {
 		EReference TRACK_ELEMENT__SENSOR = eINSTANCE.getTrackElement_Sensor();
 
 		/**
-		 * The meta object literal for the '<em><b>Connects To</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Connects To</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

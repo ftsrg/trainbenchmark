@@ -27,5 +27,13 @@ public class RDFHelper {
 			throw new RuntimeException("Could not extract id from URI: " + uri, e);
 		}
 	}
-
+	
+	public static String addEnumPrefix(final Enum<?> e) { 
+		return e.getClass().getSimpleName().toUpperCase() + "_" + e.toString();
+	}
+	
+	public static String removePrefix(final Class<?> enumClass, final String name) { 
+		return name.replace(enumClass.getSimpleName().toUpperCase() + "_", "");
+	}
+	
 }
