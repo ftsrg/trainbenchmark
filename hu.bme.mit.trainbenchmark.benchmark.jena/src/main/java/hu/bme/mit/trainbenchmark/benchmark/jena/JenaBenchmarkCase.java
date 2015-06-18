@@ -10,9 +10,10 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.jena;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;

@@ -9,22 +9,16 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.emf.transformation.repair;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
 
-import java.util.Collection;
+import org.kie.api.runtime.rule.Row;
 
-public class EMFTransformationRepairSwitchSensor extends EMFTransformationRepair<EMFSwitchSensorMatch> {
+public class Drools6ConnectedSegmentsMatch extends EMFConnectedSegmentsMatch {
 
-	@Override
-	public void rhs(final Collection<EMFSwitchSensorMatch> matches) {
-		for (final EMFSwitchSensorMatch ssnm : matches) {
-			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
-			ssnm.getSw().setSensor(sensor);
-		}
+	public Drools6ConnectedSegmentsMatch(final Row match) {
+		
 	}
 
 }

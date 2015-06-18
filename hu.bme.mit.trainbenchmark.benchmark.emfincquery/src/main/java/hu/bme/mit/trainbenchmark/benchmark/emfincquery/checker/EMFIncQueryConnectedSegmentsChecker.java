@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatcher;

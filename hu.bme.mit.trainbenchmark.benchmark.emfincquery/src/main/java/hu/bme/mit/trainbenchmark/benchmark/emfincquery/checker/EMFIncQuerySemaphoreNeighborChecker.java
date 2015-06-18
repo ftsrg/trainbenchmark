@@ -9,24 +9,24 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
-public class EMFIncQueryPosLengthChecker extends EMFIncQueryChecker<PosLengthMatch> {
+public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
 
-	public EMFIncQueryPosLengthChecker(final EMFIncQueryDriver<PosLengthMatch> eiqDriver) {
+	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryDriver<SemaphoreNeighborMatch> eiqDriver) {
 		super(eiqDriver);
 	}
 
 	@Override
-	public IncQueryMatcher<PosLengthMatch> getMatcher() throws IncQueryException {
-		return PosLengthMatcher.on(eiqDriver.getEngine());
+	public IncQueryMatcher<SemaphoreNeighborMatch> getMatcher() throws IncQueryException {
+		return SemaphoreNeighborMatcher.on(eiqDriver.getEngine());
 	}
 
 }

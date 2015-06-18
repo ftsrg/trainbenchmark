@@ -15,12 +15,15 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
 
 import java.util.Collection;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 public class EMFTransformationRepairConnectedSegments extends EMFTransformationRepair<EMFConnectedSegmentsMatch> {
 
 	@Override
 	public void rhs(final Collection<EMFConnectedSegmentsMatch> matches) {
-		for (final EMFConnectedSegmentsMatch match : matches) {
-			System.out.println(match.getSegment1().getConnectsTo());
+		for (final EMFConnectedSegmentsMatch csm : matches) {
+			EcoreUtil.delete(csm.getSegment2());
+			csm.getSegment1().getConnectsTo().add(csm.getSegment3());
 		}
 	}
 }

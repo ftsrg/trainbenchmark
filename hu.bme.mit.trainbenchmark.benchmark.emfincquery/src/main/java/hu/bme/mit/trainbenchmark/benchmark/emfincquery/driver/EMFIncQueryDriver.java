@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryCommon;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.benchmarkcases.EMFIncQueryChecker;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
