@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.javaapi;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.cypher;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.UserTest;
 
-public class Neo4jRepairTest extends RepairTest {
+public class Neo4jCypherUserTest extends UserTest {
 
-	public Neo4jRepairTest() {
-		bi = new Neo4jBenchmarkInitializer();
+	public Neo4jCypherUserTest() {
+		bi = new Neo4jCypherBenchmarkInitializer();
 	}
 
 }

@@ -26,43 +26,38 @@ public class SQLConnectedSegmentsMatch extends SQLMatch implements ConnectedSegm
 	}
 
 	@Override
-	public Long getSensor1() {
+	public Long getSensor() {
 		return match[0];
 	}
 
 	@Override
-	public Long getSensor2() {
+	public Long getSegment1() {
 		return match[1];
 	}
 
 	@Override
-	public Long getSegment1() {
+	public Long getSegment2() {
 		return match[2];
 	}
 
 	@Override
-	public Long getSegment2() {
+	public Long getSegment3() {
 		return match[3];
 	}
 
 	@Override
-	public Long getSegment3() {
+	public Long getSegment4() {
 		return match[4];
 	}
 
 	@Override
-	public Long getSegment4() {
+	public Long getSegment5() {
 		return match[5];
 	}
 
 	@Override
-	public Long getSegment5() {
-		return match[6];
-	}
-
-	@Override
 	public Long getSegment6() {
-		return match[7];
+		return match[6];
 	}
 
 }

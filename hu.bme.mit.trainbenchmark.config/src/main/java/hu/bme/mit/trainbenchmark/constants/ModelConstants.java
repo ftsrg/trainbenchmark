@@ -44,16 +44,6 @@ public class ModelConstants {
 	public static final String SENSOR_EDGE = "sensor";
 	public static final String SWITCH_EDGE = "switch";
 
-	// enumeration strings (for RDF-based representations)
-	public static final String SIGNAL_FAILURE = "SIGNAL_FAILURE";
-	public static final String SIGNAL_STOP = "SIGNAL_STOP";
-	public static final String SIGNAL_GO = "SIGNAL_GO";
-
-	public static final String SWITCH_FAILURE = "SWITCH_FAILURE";
-	public static final String SWITCH_LEFT = "SWITCH_LEFT";
-	public static final String SWITCH_RIGHT = "SWITCH_RIGHT";
-	public static final String SWITCH_STRAIGHT = "SWITCH_STRAIGHT";
-
 	// inheritance
 	public static final Map<String, String> ancestors = ImmutableMap.of(SEGMENT, TRACKELEMENT, SWITCH, TRACKELEMENT);
 

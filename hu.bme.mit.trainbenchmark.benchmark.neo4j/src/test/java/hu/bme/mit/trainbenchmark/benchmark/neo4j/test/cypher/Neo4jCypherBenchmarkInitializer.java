@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.javaapi;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.cypher;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -18,13 +18,13 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class Neo4jBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
+public class Neo4jCypherBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
 
 	@Override
 	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, "Neo4j", runIndex, query, iterationCount,
-				modificationMethod, modificationConstant, true);
-		return new Neo4jBenchmarkLogic(rbc);
+		final Neo4jBenchmarkConfig nbc = new Neo4jBenchmarkConfig(scenario, size, "Neo4j", 1, query, iterationCount, modificationMethod,
+				modificationConstant, false);
+		return new Neo4jBenchmarkLogic(nbc);
 	}
 
 }
