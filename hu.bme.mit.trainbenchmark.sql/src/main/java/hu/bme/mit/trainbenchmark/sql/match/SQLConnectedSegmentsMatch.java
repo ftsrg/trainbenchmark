@@ -20,7 +20,8 @@ import java.sql.SQLException;
 public class SQLConnectedSegmentsMatch extends SQLMatch implements ConnectedSegmentsMatch {
 
 	public SQLConnectedSegmentsMatch(final ResultSet rs) throws SQLException {
-		match = new Long[] { rs.getLong(QueryConstants.VAR_SENSOR1), rs.getLong(QueryConstants.VAR_SENSOR2),
+		match = new Long[] {
+				rs.getLong(QueryConstants.VAR_SENSOR), //
 				rs.getLong(QueryConstants.VAR_SEGMENT1), rs.getLong(QueryConstants.VAR_SEGMENT2), rs.getLong(QueryConstants.VAR_SEGMENT3),
 				rs.getLong(QueryConstants.VAR_SEGMENT4), rs.getLong(QueryConstants.VAR_SEGMENT5), rs.getLong(QueryConstants.VAR_SEGMENT6) };
 	}
