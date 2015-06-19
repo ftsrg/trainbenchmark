@@ -12,13 +12,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLSwitchSetMatch;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQLSwitchSetMatch> {
 
@@ -27,13 +29,18 @@ public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQ
 	}
 
 	@Override
-	public void rhs(final Collection<SQLSwitchSetMatch> matches) {
-		for (final SQLSwitchSetMatch sstm : matches) {
-			final Node sw = sstm.getSw();
-			final Node swP = sstm.getSwP();
-			final Object position = swP.getProperty(POSITION);
-			sw.setProperty(CURRENTPOSITION, position);
+	public void rhs(final Collection<SQLSwitchSetMatch> matches) throws IOException {
+		for (final SQLSwitchSetMatch match : matches) {
+			try {
+				final String update = String.format("" + //
+						"UPDATE " + SWITCH + " " + //
+						"INNER JOIN " + SWITCHPOSITION + " ON " + SWITCH + ".id = " + SWITCHPOSITION + ".switch " + //
+						"SET " + SWITCH + "." + CURRENTPOSITION + " = " + SWITCHPOSITION + ".position " + //
+						"WHERE " + SWITCH + "." + ID + " = " + match.getSw() + ";");
+				sqlDriver.getConnection().createStatement().executeUpdate(update);
+			} catch (final SQLException e) {
+				throw new IOException(e);
+			}
 		}
 	}
-
 }

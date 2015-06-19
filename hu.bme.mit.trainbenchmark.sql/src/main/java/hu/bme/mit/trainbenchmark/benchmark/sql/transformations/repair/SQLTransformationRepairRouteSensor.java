@@ -11,12 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.ID_POSTFIX;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLRouteSensorMatch;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationRepairRouteSensor extends SQLTransformationRepair<SQLRouteSensorMatch> {
 
@@ -25,12 +29,17 @@ public class SQLTransformationRepairRouteSensor extends SQLTransformationRepair<
 	}
 
 	@Override
-	public void rhs(final Collection<SQLRouteSensorMatch> matches) {
-		for (final SQLRouteSensorMatch rsm : matches) {
-			final Node route = rsm.getRoute();
-			final Node sensor = rsm.getSensor();
-			route.createRelationshipTo(sensor, relationshipTypeDefinedBy);
+	public void rhs(final Collection<SQLRouteSensorMatch> matches) throws IOException {
+		for (final SQLRouteSensorMatch match : matches) {
+			try {
+				final String update = String.format("" + //
+						"INSERT INTO `%s` (`%s`, `%s`) " + //
+						"VALUES (%d, %d);", //
+						DEFINED_BY, ROUTE + ID_POSTFIX, ModelConstants.SENSOR + ID_POSTFIX, match.getRoute(), match.getSensor());
+				sqlDriver.getConnection().createStatement().executeUpdate(update);
+			} catch (final SQLException e) {
+				throw new IOException(e);
+			}
 		}
 	}
-
 }

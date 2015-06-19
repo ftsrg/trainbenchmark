@@ -11,12 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.ID_POSTFIX;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLSemaphoreNeighborMatch;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationRepair<SQLSemaphoreNeighborMatch> {
 
@@ -25,11 +29,17 @@ public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<SQLSemaphoreNeighborMatch> matches) {
+	public void rhs(final Collection<SQLSemaphoreNeighborMatch> matches) throws IOException {
 		for (final SQLSemaphoreNeighborMatch snm : matches) {
-			final Node semaphore = snm.getSemaphore();
-			final Node route2 = snm.getRoute2();
-			route2.createRelationshipTo(semaphore, relationshipTypeEntry);
+			try {
+				final String update = String.format("" + //
+						"INSERT INTO `%s` (`%s`, `%s`) " + //
+						"VALUES (%d, %d);", //
+						DEFINED_BY, ROUTE + ID_POSTFIX, ModelConstants.SENSOR + ID_POSTFIX, snm.getRoute2(), snm.getSemaphore());
+				sqlDriver.getConnection().createStatement().executeUpdate(update);
+			} catch (final SQLException e) {
+				throw new IOException(e);
+			}
 		}
 	}
 

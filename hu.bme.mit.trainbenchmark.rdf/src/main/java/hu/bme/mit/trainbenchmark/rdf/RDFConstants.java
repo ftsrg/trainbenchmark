@@ -25,16 +25,4 @@ public interface RDFConstants {
 	static final String SPARQL_BASE_PREFIX = "PREFIX base: <" + BASE_PREFIX + "> ";
 	static final String SPARQL_RDF_PREFIX = "PREFIX rdf: <" + RDF_PREFIX + "> ";
 
-	// enumeration strings (for RDF-based representations)
-//	public static final String SIGNAL_FAILURE = "SIGNAL_FAILURE";
-//	public static final String SIGNAL_STOP = "SIGNAL_STOP";
-//	public static final String SIGNAL_GO = "SIGNAL_GO";
-//
-//	public static final String SWITCH_FAILURE = "SWITCH_FAILURE";
-//	public static final String SWITCH_LEFT = "SWITCH_LEFT";
-//	public static final String SWITCH_RIGHT = "SWITCH_RIGHT";
-//	public static final String SWITCH_STRAIGHT = "SWITCH_STRAIGHT";
-
-
-	
 }
