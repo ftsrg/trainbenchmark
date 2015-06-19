@@ -56,12 +56,16 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	// these should be implemented for each tool
 
 	protected void init() throws IOException {
-		
+
 	}
 
 	protected void destroy() throws IOException {
-		checker.destroy();
-		driver.destroy();
+		if (checker != null) {
+			checker.destroy();
+		}
+		if (driver != null) {
+			driver.destroy();
+		}
 	}
 
 	protected long getMemoryUsage() throws IOException {
