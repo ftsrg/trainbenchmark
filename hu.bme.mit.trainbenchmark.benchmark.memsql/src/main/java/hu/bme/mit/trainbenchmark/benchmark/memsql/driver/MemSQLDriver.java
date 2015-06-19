@@ -36,7 +36,7 @@ public class MemSQLDriver extends SQLDriver {
 		}
 
 		try {
-			con = DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, user, password);
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
@@ -45,11 +45,11 @@ public class MemSQLDriver extends SQLDriver {
 	@Override
 	public void destroy() throws IOException {
 		try {
-			if (st != null) {
-				st.close();
+			if (statement != null) {
+				statement.close();
 			}
-			if (con != null) {
-				con.close();
+			if (connection != null) {
+				connection.close();
 			}
 		} catch (final SQLException e) {
 			throw new IOException(e);

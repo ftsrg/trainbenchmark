@@ -31,7 +31,7 @@ public class SQLTransformationUserPosLength extends SQLTransformationUser {
 		for (final Long segment : segments) {
 			try {
 				final String update = String.format("UPDATE %s SET %s = 0 WHERE `%s` = %d;", SEGMENT, LENGTH, ID, segment);
-				sqlDriver.getCon().createStatement().executeUpdate(update);
+				sqlDriver.getConnection().createStatement().executeUpdate(update);
 			} catch (final SQLException e) {
 				throw new IOException(e);
 			}

@@ -11,12 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.ID_POSTFIX;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLConnectedSegmentsMatch;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationRepairConnectedSegments extends SQLTransformationRepair<SQLConnectedSegmentsMatch> {
 
@@ -25,17 +33,43 @@ public class SQLTransformationRepairConnectedSegments extends SQLTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<SQLConnectedSegmentsMatch> matches) {
-		for (final SQLConnectedSegmentsMatch csm : matches) {
-			// delete segment2 with all its relationships
-			final Node segment2 = csm.getSegment2();
-			for (final Relationship relationship : segment2.getRelationships()) {
-				relationship.delete();
+	public void rhs(final Collection<SQLConnectedSegmentsMatch> matches) throws IOException {
+		for (final SQLConnectedSegmentsMatch match : matches) {
+			try {
+				// segment2 node as segment
+				final String deleteSegment2 = String.format("" + //
+						"DELETE FROM `%s` " + //
+						"WHERE `%s` = %d;", //
+						SEGMENT, ID, match.getSegment2());
+				// segment2 node as TrackELement and sensor edge
+				final String deleteSegment2TrackElement = String.format("" + //
+						"DELETE FROM `%s` " + //
+						"WHERE `%s` = %d;", //
+						TRACKELEMENT, ID, match.getSegment2());
+				// (segment1)-[:connectsTo]->(segment2) edge
+				final String deleteConnectsTo1 = String.format("" + //
+						"DELETE FROM `%s` " + //
+						"WHERE `TrackElement_id` = %d AND `TrackElement_id_connectsTo` = %d;", //
+						CONNECTSTO, match.getSegment1(), match.getSegment2());
+				// (segment2)-[:connectsTo]->(segment3) edge
+				final String deleteConnectsTo2 = String.format("" + //
+						"DELETE FROM `%s` " + //
+						"WHERE `TrackElement_id` = %d  AND `TrackElement_id_connectsTo` = %d;", //
+						CONNECTSTO, match.getSegment2(), match.getSegment3());
+				// insert connectsTo edge
+				final String insertConnectsTo = String.format("" + //
+						"INSERT INTO `%s` (`%s`, `%s`) " + //
+						"VALUES (%d, %d);", //
+						DEFINED_BY, ROUTE + ID_POSTFIX, ModelConstants.SENSOR + ID_POSTFIX, match.getSegment1(), match.getSegment3());
+
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteSegment2);
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteSegment2TrackElement);
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteConnectsTo1);
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteConnectsTo2);
+				sqlDriver.getConnection().createStatement().executeUpdate(insertConnectsTo);
+			} catch (final SQLException e) {
+				throw new IOException(e);
 			}
-			segment2.delete();
-			// (segment1)-[:connectsTo]->(segment3)
-			csm.getSegment1().createRelationshipTo(csm.getSegment3(), relationshipTypeConnectsTo);
 		}
 	}
-
 }

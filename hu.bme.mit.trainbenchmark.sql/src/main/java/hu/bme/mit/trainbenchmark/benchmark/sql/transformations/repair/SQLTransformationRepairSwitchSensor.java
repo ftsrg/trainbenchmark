@@ -11,12 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLSwitchSensorMatch;
 
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair<SQLSwitchSensorMatch> {
 
@@ -25,11 +31,29 @@ public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair
 	}
 
 	@Override
-	public void rhs(final Collection<SQLSwitchSensorMatch> matches) {
-		for (final SQLSwitchSensorMatch ssnm : matches) {
-			final Node sw = ssnm.getSw();
-			final Node sensor = sqlDriver.getGraphDb().createNode(labelSensor);
-			sw.createRelationshipTo(sensor, relationshipTypeSensor);
+	public void rhs(final Collection<SQLSwitchSensorMatch> matches) throws IOException {
+		for (final SQLSwitchSensorMatch match : matches) {
+			long newVertexId = -1;
+			try {
+				final String create = String.format("INSERT INTO `%s` VALUES ();", SENSOR);
+				final Statement statement = sqlDriver.getConnection().createStatement();
+				statement.executeUpdate(create, Statement.RETURN_GENERATED_KEYS);
+
+				try (ResultSet rs = statement.getGeneratedKeys()) {
+					if (rs.next()) {
+						// get the id of the new vertex
+						newVertexId = rs.getLong(1);
+
+						String update;
+						update = String.format("UPDATE `%s` SET `%s` = %d WHERE `%s` = %d;", TRACKELEMENT, SENSOR_EDGE, newVertexId, ID,
+								match.getSw());
+
+						statement.executeUpdate(update);
+					}
+				}
+			} catch (final SQLException e) {
+				throw new IOException(e);
+			}
 		}
 	}
 
