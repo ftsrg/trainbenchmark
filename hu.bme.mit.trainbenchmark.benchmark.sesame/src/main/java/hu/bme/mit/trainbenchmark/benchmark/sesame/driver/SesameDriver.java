@@ -46,7 +46,7 @@ import org.openrdf.sail.memory.MemoryStore;
 
 public class SesameDriver extends RDFDatabaseDriver<URI> {
 
-	protected RepositoryConnection con;
+	protected RepositoryConnection connection;
 	protected Repository repository;
 	protected ValueFactory vf;
 	protected TupleQuery tupleQuery;
@@ -61,7 +61,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	@Override
 	public void finishTransaction() throws IOException {
 		try {
-			con.commit();
+			connection.commit();
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
@@ -74,19 +74,20 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 		try {
 			repository.initialize();
-			con = repository.getConnection();
-			con.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
+			connection = repository.getConnection();
+			connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
 	}
 
+	@Override
 	public List<SesameMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
 
 		try {
-			tupleQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
+			tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
 			queryResults = tupleQuery.evaluate();
 			try {
 				while (queryResults.hasNext()) {
@@ -112,8 +113,10 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	@Override
 	public void destroy() throws IOException {
 		try {
-			con.clear();
-			con.close();
+			if (connection != null) {
+				connection.clear();
+				connection.close();
+			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);
 		}
@@ -127,7 +130,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		final List<URI> vertices = new ArrayList<>();
 
 		try {
-			final RepositoryResult<Statement> statements = con.getStatements(null, RDF.TYPE, typeURI, true);
+			final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
 			while (statements.hasNext()) {
 				final Statement s = statements.next();
 				final URI uri = (URI) s.getSubject();
@@ -160,9 +163,9 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 			for (final URI vertex : vertices) {
 				RepositoryResult<Statement> statementsToRemove;
 				if (outgoing) {
-					statementsToRemove = con.getStatements(vertex, edge, null, true);
+					statementsToRemove = connection.getStatements(vertex, edge, null, true);
 				} else {
-					statementsToRemove = con.getStatements(null, edge, vertex, true);
+					statementsToRemove = connection.getStatements(null, edge, vertex, true);
 				}
 
 				while (statementsToRemove.hasNext()) {
@@ -176,7 +179,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 				}
 
 				for (final Statement s : itemsToRemove) {
-					con.remove(s);
+					connection.remove(s);
 				}
 			}
 		} catch (final RepositoryException e) {
@@ -184,24 +187,13 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
-	public void deleteVertex(final URI vertex, final String vertexType) throws IOException {
-		try {
-			final RepositoryResult<Statement> statementsToRemove = con.getStatements(vertex, RDF.TYPE, null, false);
-			while (statementsToRemove.hasNext()) {
-				final Statement s = statementsToRemove.next();
-				con.remove(s);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException();
-		}
-	}
 
 	// utility
 
 	@Override
 	protected boolean ask(final String askQuery) throws IOException {
 		try {
-			final BooleanQuery q = con.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
+			final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
 			final boolean result = q.evaluate();
 			return result;
 		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
@@ -210,7 +202,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	public RepositoryConnection getConnection() {
-		return con;
+		return connection;
 	}
 
 	public ValueFactory getValueFactory() {

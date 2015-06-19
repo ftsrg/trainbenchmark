@@ -44,7 +44,7 @@ public class AllegroDriver extends SesameDriver {
 	@Override
 	public void destroy() throws IOException {
 		try {
-			con.close();
+			connection.close();
 			catalog.deleteRepository(repositoryID);
 		} catch (final RepositoryException e) {
 			throw new IOException();
@@ -69,8 +69,8 @@ public class AllegroDriver extends SesameDriver {
 
 			final File modelFile = new File(modelPath);
 
-			con = repository.getConnection();
-			con.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
+			connection = repository.getConnection();
+			connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
