@@ -69,6 +69,10 @@ public abstract class SQLDriver extends Driver<Long> {
 
 		return results;
 	}
+	
+	public Connection getCon() {
+		return con;
+	}
 
 	// create
 	//
