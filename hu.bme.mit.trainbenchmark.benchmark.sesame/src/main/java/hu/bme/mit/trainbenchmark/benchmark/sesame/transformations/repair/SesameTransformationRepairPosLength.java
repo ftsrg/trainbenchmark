@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
 
@@ -41,7 +40,6 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
-		final PosLengthRepairOperation operation = new PosLengthRepairOperation();
 		final URI lengthProperty = vf.createURI(BASE_PREFIX + LENGTH);
 
 		try {
@@ -55,7 +53,8 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 				}
 
 				final Integer lengthInteger = new Integer(length.stringValue());
-				final Literal newLength = vf.createLiteral(operation.op(lengthInteger));
+				final Integer newLengthInteger = -lengthInteger + 1;
+				final Literal newLength = vf.createLiteral(newLengthInteger);
 				con.add(segment, lengthProperty, newLength);
 			}
 		} catch (final RepositoryException e) {

@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
@@ -27,10 +26,8 @@ public class EMFIncQueryTransformationRepairPosLength extends EMFIncQueryTransfo
 
 	@Override
 	public void rhs(final Collection<PosLengthMatch> matches) throws IOException {
-		final PosLengthRepairOperation op = new PosLengthRepairOperation();
-
 		for (final PosLengthMatch match : matches) {
-			final int newLength = op.op(match.getSegment().getLength());
+			final int newLength = -match.getSegment().getLength() + 1;
 			match.getSegment().setLength(newLength);
 		}
 	}

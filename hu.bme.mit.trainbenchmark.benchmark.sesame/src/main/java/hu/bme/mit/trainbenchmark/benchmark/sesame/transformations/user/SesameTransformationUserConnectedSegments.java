@@ -43,11 +43,11 @@ public class SesameTransformationUserConnectedSegments extends SesameTransformat
 
 		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTSTO);
 		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
-		
+
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
-		
-		for (final URI segment1 : segments) {
-			try {
+
+		try {
+			for (final URI segment1 : segments) {
 				final RepositoryResult<Statement> connectsToEdges0 = connection.getStatements(segment1, connectsTo, null, true);
 				if (!connectsToEdges0.hasNext()) {
 					continue;
@@ -58,13 +58,13 @@ public class SesameTransformationUserConnectedSegments extends SesameTransformat
 				}
 				final Statement connectsToEdge0 = connectsToEdges0.next();
 				final Statement sensorEdge = sensorEdges.next();
-				
+
 				final Value segment3 = connectsToEdge0.getObject();
 				final Value sensor = sensorEdge.getObject();
-				
+
 				// delete (segment1)-[:connectsTo]->(segment3) edge
 				connection.remove(connectsToEdge0);
-				
+
 				// create (segment2) node
 				final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + sesameDriver.getNewVertexId());
 				connection.add(segment2, RDF.TYPE, segmentType);
@@ -74,9 +74,9 @@ public class SesameTransformationUserConnectedSegments extends SesameTransformat
 				connection.add(segment2, connectsTo, segment3);
 				// (segment1)-[:sensor]->(sensor)
 				connection.add(segment1, sensorEdgeType, sensor);
-			} catch (final RepositoryException e) {
-				throw new IOException();
 			}
+		} catch (final RepositoryException e) {
+			throw new IOException();
 		}
 	}
 
