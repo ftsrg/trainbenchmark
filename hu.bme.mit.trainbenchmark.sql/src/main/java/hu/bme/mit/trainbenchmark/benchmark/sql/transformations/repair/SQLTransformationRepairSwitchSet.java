@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.match.SQLSwitchSetMatch;
 
@@ -34,8 +33,7 @@ public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQ
 			try {
 				final String update = String.format("" + //
 						"UPDATE " + SWITCH + " " + //
-						"INNER JOIN " + SWITCHPOSITION + " ON " + SWITCH + ".id = " + SWITCHPOSITION + ".switch " + //
-						"SET " + SWITCH + "." + CURRENTPOSITION + " = " + SWITCHPOSITION + ".position " + //
+						"SET " + SWITCH + "." + CURRENTPOSITION + " = " + match.getPosition() + " " + //
 						"WHERE " + SWITCH + "." + ID + " = " + match.getSw() + ";");
 				sqlDriver.getConnection().createStatement().executeUpdate(update);
 			} catch (final SQLException e) {

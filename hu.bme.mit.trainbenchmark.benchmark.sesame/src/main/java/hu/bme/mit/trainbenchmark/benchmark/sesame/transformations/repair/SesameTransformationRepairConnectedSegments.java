@@ -38,10 +38,10 @@ public class SesameTransformationRepairConnectedSegments extends SesameTransform
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
 		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTSTO);
-		
-		for (final SesameConnectedSegmentsMatch match : matches) {
-			try {
-				// delete segment2 by removing all (segment2, _, _) and (_, _, segment2) triples  
+
+		try {
+			for (final SesameConnectedSegmentsMatch match : matches) {
+				// delete segment2 by removing all (segment2, _, _) and (_, _, segment2) triples
 				final RepositoryResult<Statement> outgoingEdges = con.getStatements(match.getSegment2(), null, null, true);
 				while (outgoingEdges.hasNext()) {
 					con.remove(outgoingEdges.next());
@@ -53,10 +53,10 @@ public class SesameTransformationRepairConnectedSegments extends SesameTransform
 
 				// insert (segment1)-[:connectsTo]->(segment3) edge
 				con.add(match.getSegment1(), connectsTo, match.getSegment3());
-			} catch (final RepositoryException e) {
-				throw new IOException();
-			}			
+			}
+		} catch (final RepositoryException e) {
+			throw new IOException();
 		}
 	}
-	
+
 }

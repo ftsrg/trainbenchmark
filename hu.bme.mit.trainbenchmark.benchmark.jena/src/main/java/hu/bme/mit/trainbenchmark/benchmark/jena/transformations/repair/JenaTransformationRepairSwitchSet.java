@@ -11,13 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchSetMatch;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import org.apache.commons.lang.NotImplementedException;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class JenaTransformationRepairSwitchSet extends JenaTransformationRepair<JenaSwitchSetMatch> {
 
@@ -27,7 +31,15 @@ public class JenaTransformationRepairSwitchSet extends JenaTransformationRepair<
 
 	@Override
 	public void rhs(final Collection<JenaSwitchSetMatch> matches) throws IOException {
-		throw new NotImplementedException();
+		final Model model = jenaDriver.getModel();
+		final Property currentPositionProperty = model.getProperty(BASE_PREFIX + CURRENTPOSITION);
+
+		for (final JenaSwitchSetMatch match : matches) {
+			final Resource sw = match.getSw();
+
+			model.remove(sw, currentPositionProperty, match.getCurrentPosition());
+			model.add(sw, currentPositionProperty, match.getPosition());
+		}
 	}
 
 }

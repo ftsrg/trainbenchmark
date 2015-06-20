@@ -36,17 +36,19 @@ public class JenaTransformationUserPosLength extends JenaTransformationUser {
 	@Override
 	public void rhs(final Collection<Resource> segments) throws IOException {
 		final Model model = jenaDriver.getModel();
-		final Property property = model.getProperty(BASE_PREFIX + ModelConstants.LENGTH);
+		final Property lengthProperty = model.getProperty(BASE_PREFIX + ModelConstants.LENGTH);
 
 		for (final Resource segment : segments) {
-			final Selector selector = new SimpleSelector(segment, property, (RDFNode) null);
+			final Selector selector = new SimpleSelector(segment, lengthProperty, (RDFNode) null);
 			final StmtIterator statementsToRemove = model.listStatements(selector);
-			if (statementsToRemove.hasNext()) {
-				final Statement oldStatement = statementsToRemove.next();
-				model.remove(oldStatement);
-				final Statement newStatement = model.createLiteralStatement(segment, property, 0);
-				model.add(newStatement);
+			if (!statementsToRemove.hasNext()) {
+				continue;
+
 			}
+			final Statement oldStatement = statementsToRemove.next();
+			model.remove(oldStatement);
+			final Statement newStatement = model.createLiteralStatement(segment, lengthProperty, 0);
+			model.add(newStatement);
 		}
 	}
 

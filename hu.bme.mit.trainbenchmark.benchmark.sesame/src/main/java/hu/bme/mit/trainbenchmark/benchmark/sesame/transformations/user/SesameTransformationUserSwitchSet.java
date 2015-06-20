@@ -61,6 +61,8 @@ public class SesameTransformationUserSwitchSet extends SesameTransformationUser 
 				final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
 				final String newCurrentPositionString  = RDFHelper.addEnumPrefix(newCurrentPosition);
 				final Literal newCurrentPositionLiteral = vf.createLiteral(newCurrentPositionString);
+				
+				// set new value
 				con.add(sw, currentPositionProperty, newCurrentPositionLiteral);
 			}
 		} catch (final RepositoryException e) {

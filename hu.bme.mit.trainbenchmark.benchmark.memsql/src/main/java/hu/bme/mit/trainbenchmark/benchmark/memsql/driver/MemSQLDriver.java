@@ -45,9 +45,6 @@ public class MemSQLDriver extends SQLDriver {
 	@Override
 	public void destroy() throws IOException {
 		try {
-			if (statement != null) {
-				statement.close();
-			}
 			if (connection != null) {
 				connection.close();
 			}
