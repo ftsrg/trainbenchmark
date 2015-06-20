@@ -11,11 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationUserSwitchSensor extends SQLTransformationUser {
 
@@ -24,11 +28,31 @@ public class SQLTransformationUserSwitchSensor extends SQLTransformationUser {
 	}
 
 	@Override
-	public void rhs(final Collection<Long> switches) {
-		for (final Node sw : switches) {
-			final Iterable<Relationship> sensors = sw.getRelationships(relationshipTypeSensor);
-			for (final Relationship sensor : sensors) {
-				sensor.delete();
+	public void rhs(final Collection<Long> switches) throws IOException {
+		for (final Long sw : switches) {
+			try {
+				// sensor
+				final String deleteSensor = String.format("" + //
+						"DELETE `" + SENSOR + "` FROM `" + SENSOR + "` " + //
+						"INNER JOIN `" + TRACKELEMENT + "` " + //
+						"ON Sensor.id = TrackElement.sensor " + //
+						"WHERE TrackElement.id = " + sw + ";");
+				// trackElement
+				final String deleteTrackElement = String.format("" + //
+						"DELETE FROM `" + TRACKELEMENT + "` " + //
+						"WHERE `" + ID + "` = " + sw + ";");
+				// definedBy
+				final String deleteDefinedBy = String.format("" + //
+						"DELETE `" + DEFINED_BY + "` FROM `" + DEFINED_BY + "` " + //
+						"INNER JOIN `" + TRACKELEMENT + "` " + //
+						"ON definedBy.sensor_id = TrackElement.sensor " + //
+						"WHERE TrackElement.id = " + sw + ";");
+
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteSensor);
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteTrackElement);
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
+			} catch (final SQLException e) {
+				throw new IOException(e);
 			}
 		}
 	}

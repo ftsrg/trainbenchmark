@@ -11,11 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationUserRouteSensor extends SQLTransformationUser {
 
@@ -24,12 +25,18 @@ public class SQLTransformationUserRouteSensor extends SQLTransformationUser {
 	}
 
 	@Override
-	public void rhs(final Collection<Long> routes) {
-		for (final Node route : routes) {
-			final Iterable<Relationship> definedBys = route.getRelationships(relationshipTypeDefinedBy);
-			for (final Relationship definedBy : definedBys) {
-				definedBy.delete();
-				break;
+	public void rhs(final Collection<Long> routes) throws IOException {
+		for (final Long route : routes) {
+			try {
+				// (route)-[:definedBy]->(sensor) edge
+				final String deleteDefinedBy = String.format("" + //
+						"DELETE FROM `%s` " + //
+						"WHERE `Route_id` = %d " + //
+						"LIMIT 1;", //
+						DEFINED_BY, route);
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
+			} catch (final SQLException e) {
+				throw new IOException(e);
 			}
 		}
 	}

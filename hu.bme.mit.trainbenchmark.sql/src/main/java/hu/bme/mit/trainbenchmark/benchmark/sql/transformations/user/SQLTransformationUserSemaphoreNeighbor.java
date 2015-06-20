@@ -11,11 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationUserSemaphoreNeighbor extends SQLTransformationUser {
 
@@ -24,11 +27,18 @@ public class SQLTransformationUserSemaphoreNeighbor extends SQLTransformationUse
 	}
 
 	@Override
-	public void rhs(final Collection<Long> routes) {
-		for (final Node route : routes) {
-			final Iterable<Relationship> entries = route.getRelationships(relationshipTypeEntry);
-			for (final Relationship entry : entries) {
-				entry.delete();
+	public void rhs(final Collection<Long> routes) throws IOException {
+		for (final Long route : routes) {
+			try {
+				// (route)-[:entry]->(semaphore) edge
+				final String deleteDefinedBy = String.format("" + //
+						"UPDATE `%s` " + //
+						"SET `%s` = NULL " + //
+						"WHERE `%s` = %d;", //
+						ROUTE, ENTRY, ID, route);
+				sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
+			} catch (final SQLException e) {
+				throw new IOException(e);
 			}
 		}
 	}

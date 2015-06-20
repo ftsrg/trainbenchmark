@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.Position;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
-
-import javax.xml.soap.Node;
 
 public class SQLTransformationUserSwitchSet extends SQLTransformationUser {
 
@@ -27,12 +27,14 @@ public class SQLTransformationUserSwitchSet extends SQLTransformationUser {
 	}
 
 	@Override
-	public void rhs(final Collection<Long> switches) {
-		for (final Node sw : switches) {
-			final String currentPositionString = (String) sw.getProperty(ModelConstants.CURRENTPOSITION);
-			final Position currentPosition = Position.valueOf(currentPositionString);
-			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
-			sw.setProperty(CURRENTPOSITION, newCurrentPosition.toString());
+	public void rhs(final Collection<Long> switches) throws IOException {
+		for (final Long sw : switches) {
+			try {
+				final String update = String.format("UPDATE %s SET %s = MOD(%s + 1, 4) WHERE `%s` = %d;", SWITCH, CURRENTPOSITION, CURRENTPOSITION, ID, sw);
+				sqlDriver.getConnection().createStatement().executeUpdate(update);
+			} catch (final SQLException e) {
+				throw new IOException(e);
+			}
 		}
 	}
 
