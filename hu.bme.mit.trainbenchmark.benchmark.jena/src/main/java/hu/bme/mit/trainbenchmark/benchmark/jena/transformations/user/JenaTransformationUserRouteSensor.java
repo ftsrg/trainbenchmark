@@ -11,8 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -27,7 +28,7 @@ public class JenaTransformationUserRouteSensor extends JenaTransformationUser {
 
 	@Override
 	public void rhs(final Collection<Resource> routes) throws IOException {
-		jenaDriver.deleteOneOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.DEFINED_BY);
+		jenaDriver.deleteOneOutgoingEdge(routes, ROUTE, DEFINED_BY);
 	}
 
 }

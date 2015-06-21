@@ -48,25 +48,28 @@ public class SesameTransformationUserConnectedSegments extends SesameTransformat
 
 		try {
 			for (final URI segment1 : segments) {
+				// get (segment3) node
 				final RepositoryResult<Statement> connectsToEdges0 = connection.getStatements(segment1, connectsTo, null, true);
 				if (!connectsToEdges0.hasNext()) {
 					continue;
 				}
+				final Statement connectsToEdge0 = connectsToEdges0.next();
+				final Value segment3 = connectsToEdge0.getObject();
+
+				// get (sensor) node
 				final RepositoryResult<Statement> sensorEdges = connection.getStatements(segment1, sensorEdgeType, null, true);
 				if (!sensorEdges.hasNext()) {
 					continue;
 				}
-				final Statement connectsToEdge0 = connectsToEdges0.next();
 				final Statement sensorEdge = sensorEdges.next();
-
-				final Value segment3 = connectsToEdge0.getObject();
 				final Value sensor = sensorEdge.getObject();
 
 				// delete (segment1)-[:connectsTo]->(segment3) edge
 				connection.remove(connectsToEdge0);
 
 				// create (segment2) node
-				final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + sesameDriver.getNewVertexId());
+				final Long newVertexId = sesameDriver.getNewVertexId();
+				final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
 				connection.add(segment2, RDF.TYPE, segmentType);
 				// (segment1)-[:connectsTo]->(segment2)
 				connection.add(segment1, connectsTo, segment2);

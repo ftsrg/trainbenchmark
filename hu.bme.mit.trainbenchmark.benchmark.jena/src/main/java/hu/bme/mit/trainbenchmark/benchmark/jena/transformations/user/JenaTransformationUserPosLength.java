@@ -11,9 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -36,16 +36,16 @@ public class JenaTransformationUserPosLength extends JenaTransformationUser {
 	@Override
 	public void rhs(final Collection<Resource> segments) throws IOException {
 		final Model model = jenaDriver.getModel();
-		final Property lengthProperty = model.getProperty(BASE_PREFIX + ModelConstants.LENGTH);
+		final Property lengthProperty = model.getProperty(BASE_PREFIX + LENGTH);
 
 		for (final Resource segment : segments) {
 			final Selector selector = new SimpleSelector(segment, lengthProperty, (RDFNode) null);
-			final StmtIterator statementsToRemove = model.listStatements(selector);
-			if (!statementsToRemove.hasNext()) {
+			final StmtIterator oldStatements = model.listStatements(selector);
+			if (!oldStatements.hasNext()) {
 				continue;
 
 			}
-			final Statement oldStatement = statementsToRemove.next();
+			final Statement oldStatement = oldStatements.next();
 			model.remove(oldStatement);
 			final Statement newStatement = model.createLiteralStatement(segment, lengthProperty, 0);
 			model.add(newStatement);
