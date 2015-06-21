@@ -28,20 +28,6 @@ public abstract class SQLDriver extends Driver<Long> {
 
 	protected Connection connection;
 
-	// protected static final Map<String, String> EDGE_SOURCE_TYPES = ImmutableMap.of( //
-	// ModelConstants.SENSOR_EDGE, "id", //
-	// ModelConstants.DEFINED_BY, "Route_id", //
-	// ModelConstants.CONNECTSTO, "TrackElement_id");
-	//
-	// protected static final Map<String, String> EDGE_TARGET_TYPES = ImmutableMap.of( //
-	// ModelConstants.SENSOR_EDGE, "sensor", //
-	// ModelConstants.CONNECTSTO, "TrackElement_id_connectsTo");
-	//
-	// protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(
-	// //
-	// ModelConstants.ENTRY, ModelConstants.ROUTE, ModelConstants.SENSOR_EDGE, ModelConstants.TRACKELEMENT, ModelConstants.CONNECTSTO,
-	// ModelConstants.CONNECTSTO, ModelConstants.DEFINED_BY, ModelConstants.DEFINED_BY);
-
 	@Override
 	public String getExtension() {
 		return ".sql";
@@ -68,8 +54,6 @@ public abstract class SQLDriver extends Driver<Long> {
 		return connection;
 	}
 
-	// create
-
 	// read
 
 	@Override
@@ -92,24 +76,5 @@ public abstract class SQLDriver extends Driver<Long> {
 	public Comparator<Long> getElementComparator() {
 		return new LongComparator();
 	}
-
-	//
-	// @Override
-	// public List<Long> collectOutgoingConnectedVertices(final Long sourceVertex, final String sourceVertexType,
-	// final String targetVertexType, final String edgeType) throws IOException {
-	// final List<Long> results = new ArrayList<>();
-	//
-	// try {
-	// final Statement statement = con.createStatement();
-	// final ResultSet rs = statement.executeQuery(String.format("SELECT * FROM `%s` WHERE `%s` = %s;", EDGE_TABLE.get(edgeType),
-	// EDGE_SOURCE_TYPES.get(edgeType), sourceVertex));
-	// while (rs.next()) {
-	// results.add(rs.getLong(2));
-	// }
-	// } catch (final SQLException e) {
-	// throw new IOException(e);
-	// }
-	// return results;
-	//
 
 }
