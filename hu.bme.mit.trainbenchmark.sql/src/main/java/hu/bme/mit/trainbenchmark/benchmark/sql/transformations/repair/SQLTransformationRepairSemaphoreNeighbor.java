@@ -42,5 +42,4 @@ public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationR
 			}
 		}
 	}
-
 }

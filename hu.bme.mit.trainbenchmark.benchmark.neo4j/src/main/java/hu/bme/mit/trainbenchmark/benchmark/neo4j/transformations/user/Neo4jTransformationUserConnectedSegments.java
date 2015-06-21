@@ -33,7 +33,6 @@ public class Neo4jTransformationUserConnectedSegments extends Neo4jTransformatio
 	public void rhs(final Collection<Node> segments) {
 		for (final Node segment1 : segments) {
 			final Iterable<Relationship> sensors = segment1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeSensor);
-
 			if (!sensors.iterator().hasNext()) {
 				continue;
 			}
@@ -48,7 +47,7 @@ public class Neo4jTransformationUserConnectedSegments extends Neo4jTransformatio
 			final Relationship connectsTo = segment3s.iterator().next();
 			final Node segment3 = connectsTo.getEndNode();
 
-			// transformation			
+			// transformation
 			connectsTo.delete();
 			final Node segment2 = neoDriver.getGraphDb().createNode(labelSegment);
 			segment1.createRelationshipTo(segment2, relationshipTypeConnectsTo);
