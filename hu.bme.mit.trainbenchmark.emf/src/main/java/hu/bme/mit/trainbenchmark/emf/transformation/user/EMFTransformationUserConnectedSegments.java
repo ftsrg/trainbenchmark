@@ -30,13 +30,13 @@ public class EMFTransformationUserConnectedSegments extends EMFTransformationUse
 			if (segment1.getConnectsTo().isEmpty()) {
 				continue;
 			}
-			final Segment segmentX = RailwayFactory.eINSTANCE.createSegment();
-			driver.getContainer().getInvalids().add(segmentX);
+			final Segment segment2 = RailwayFactory.eINSTANCE.createSegment();
+			driver.getContainer().getInvalids().add(segment2);
 
-			final TrackElement segment2 = segment1.getConnectsTo().get(0);
-			segment1.getConnectsTo().remove(segment2);
-			segment1.getConnectsTo().add(segmentX);
-			segmentX.getConnectsTo().add(segment2);
+			final TrackElement segment3 = segment1.getConnectsTo().get(0);
+			segment1.getConnectsTo().remove(segment3);
+			segment1.getConnectsTo().add(segment2);
+			segment2.getConnectsTo().add(segment3);
 		}
 	}
 }

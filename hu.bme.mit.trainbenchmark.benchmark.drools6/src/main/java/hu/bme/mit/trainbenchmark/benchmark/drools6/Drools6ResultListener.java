@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
+import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SemaphoreNeighborMatch;
@@ -56,6 +57,8 @@ public class Drools6ResultListener implements ViewChangedEventListener {
 
 	private EMFMatch createMatch(final Query query, final Row row) {
 		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new Drools6ConnectedSegmentsMatch(row);
 		case POSLENGTH:
 			return new Drools6PosLengthMatch(row);
 		case ROUTESENSOR:

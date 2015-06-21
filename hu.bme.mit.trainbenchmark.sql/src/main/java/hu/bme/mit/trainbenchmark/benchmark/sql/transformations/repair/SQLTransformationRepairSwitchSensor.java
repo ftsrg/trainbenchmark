@@ -33,7 +33,6 @@ public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair
 	@Override
 	public void rhs(final Collection<SQLSwitchSensorMatch> matches) throws IOException {
 		for (final SQLSwitchSensorMatch match : matches) {
-			long newVertexId = -1;
 			try {
 				final String create = String.format("INSERT INTO `%s` VALUES ();", SENSOR);
 				final Statement statement = sqlDriver.getConnection().createStatement();
@@ -42,7 +41,7 @@ public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair
 				try (ResultSet rs = statement.getGeneratedKeys()) {
 					if (rs.next()) {
 						// get the id of the new vertex
-						newVertexId = rs.getLong(1);
+						final long newVertexId = rs.getLong(1);
 
 						String update;
 						update = String.format("UPDATE `%s` SET `%s` = %d WHERE `%s` = %d;", TRACKELEMENT, SENSOR_EDGE, newVertexId, ID,

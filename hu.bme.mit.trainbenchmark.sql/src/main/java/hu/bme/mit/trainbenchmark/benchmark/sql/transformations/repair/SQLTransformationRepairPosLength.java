@@ -42,5 +42,4 @@ public class SQLTransformationRepairPosLength extends SQLTransformationRepair<SQ
 			}
 		}
 	}
-
 }

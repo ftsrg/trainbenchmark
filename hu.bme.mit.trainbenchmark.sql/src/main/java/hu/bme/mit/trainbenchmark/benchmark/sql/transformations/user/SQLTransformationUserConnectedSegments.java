@@ -11,8 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 
 public class SQLTransformationUserConnectedSegments extends SQLTransformationUser {
@@ -22,31 +32,80 @@ public class SQLTransformationUserConnectedSegments extends SQLTransformationUse
 	}
 
 	@Override
-	public void rhs(final Collection<Long> segments) {
-		for (final Node segment1 : segments) {
-			final Iterable<Relationship> sensors = segment1.getRelationships(Direction.OUTGOING, SQLConstants.relationshipTypeSensor);
+	public void rhs(final Collection<Long> segments) throws IOException {
+		final Connection connection = sqlDriver.getConnection();
 
-			if (!sensors.iterator().hasNext()) {
-				continue;
+		for (final Long segment1 : segments) {
+			try {
+				// get (segment3) node
+				final String querySegment3 = String.format("" + //
+						"SELECT `TrackElement_id_connectsTo` " + //
+						"FROM `%s` " + //
+						"WHERE `TrackElement_id` = %s;", CONNECTSTO, segment1);
+				final ResultSet resultSetSegment3 = connection.createStatement().executeQuery(querySegment3);
+				if (!resultSetSegment3.next()) {
+					continue;
+				}
+				final long segment3 = resultSetSegment3.getLong(1);
+
+				// get (sensor) node
+				final String querySensor = String.format("" + //
+						"SELECT `%s` " + //
+						"FROM `%s` " + //
+						"WHERE `%s` = %s;", SENSOR_EDGE, TRACKELEMENT, ID, segment1);
+				final ResultSet resultSetSensor = connection.createStatement().executeQuery(querySensor);
+				if (!resultSetSensor.next()) {
+					continue;
+				}
+				final long sensor = resultSetSensor.getLong(1);
+
+				// delete (segment1)-[:connectsTo]->(segment2) edge
+				final String deleteConnectsTo0 = String.format("" + //
+						"DELETE FROM `%s` " + //
+						"WHERE `TrackElement_id` = %d;", //
+						CONNECTSTO, segment1);
+				connection.createStatement().executeUpdate(deleteConnectsTo0);
+
+				// insert new segment as a TrackElement and retrieve its id
+				// also insert the (segment2)-[:sensor]->(sensor) edge
+				final String insertSegment2TrackElement = String.format("" + //
+						"INSERT INTO `%s` (`%s`) " + //
+						"VALUES (%d);", //
+						TRACKELEMENT, SENSOR_EDGE, //
+						sensor);
+				final Statement statement = connection.createStatement();
+				statement.executeUpdate(insertSegment2TrackElement, Statement.RETURN_GENERATED_KEYS);
+
+				try (ResultSet rs3 = statement.getGeneratedKeys()) {
+					if (rs3.next()) {
+						// get the id of the new vertex
+						final long segment2 = rs3.getLong(1);
+
+						// insert (segment2) node
+						final String insertSegment2 = String.format("" + //
+								"INSERT INTO `%s` (`%s`) " + //
+								"VALUES (%d);", //
+								SEGMENT, ID, //
+								segment2);
+						// insert (segment1)-[:connectsTo]->(segment3) edge
+						final String insertConnectsTo1 = String.format("" + //
+								"INSERT INTO `%s` (`TrackElement_id`, `TrackElement_id_connectsTo`) " + //
+								"VALUES (%d, %d);", //
+								CONNECTSTO, segment1, segment2);
+						// insert (segment1)-[:connectsTo]->(segment3) edge
+						final String insertConnectsTo2 = String.format("" + //
+								"INSERT INTO `%s` (`TrackElement_id`, `TrackElement_id_connectsTo`) " + //
+								"VALUES (%d, %d);", //
+								CONNECTSTO, segment2, segment3);
+						connection.createStatement().executeUpdate(insertSegment2);
+						connection.createStatement().executeUpdate(insertConnectsTo1);
+						connection.createStatement().executeUpdate(insertConnectsTo2);
+						connection.createStatement().executeUpdate(insertConnectsTo2);
+					}
+				}
+			} catch (final SQLException e) {
+				throw new IOException(e);
 			}
-
-			final Node sensor = sensors.iterator().next().getEndNode();
-			final Iterable<Relationship> segment3s = segment1.getRelationships(Direction.OUTGOING,
-					SQLConstants.relationshipTypeConnectsTo);
-
-			if (!segment3s.iterator().hasNext()) {
-				continue;
-			}
-			final Relationship connectsTo = segment3s.iterator().next();
-			final Node segment3 = connectsTo.getEndNode();
-
-			// transformation			
-			connectsTo.delete();
-			final Node segment2 = sqlDriver.getGraphDb().createNode(labelSegment);
-			segment1.createRelationshipTo(segment2, relationshipTypeConnectsTo);
-			segment2.createRelationshipTo(segment3, relationshipTypeConnectsTo);
-			segment2.createRelationshipTo(sensor, relationshipTypeSensor);
 		}
 	}
-
 }
