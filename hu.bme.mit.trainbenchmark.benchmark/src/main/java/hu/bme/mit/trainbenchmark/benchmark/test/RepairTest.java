@@ -12,10 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.CONNECTEDSEGMENTS;
+import static hu.bme.mit.trainbenchmark.constants.Query.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.REPAIR;
 
 import java.io.IOException;
@@ -26,13 +28,18 @@ import org.junit.Test;
 public abstract class RepairTest extends TransformationTest {
 
 	@Test
+	public void connectedSegmentsRepair() throws ParseException, IOException {
+		testTransformation(CONNECTEDSEGMENTS, REPAIR, 44);
+	}
+
+	@Test
 	public void posLengthRepair() throws ParseException, IOException {
-		testTransformation(POSLENGTH, REPAIR, 485);
+		testTransformation(POSLENGTH, REPAIR, 410);
 	}
 
 	@Test
 	public void routeSensorRepair() throws ParseException, IOException {
-		testTransformation(ROUTESENSOR, REPAIR, 17);
+		testTransformation(ROUTESENSOR, REPAIR, 25);
 	}
 
 	@Test
@@ -42,12 +49,12 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void switchSensorRepair() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, REPAIR, 3);
+		testTransformation(SWITCHSENSOR, REPAIR, 4);
 	}
-	
-//	@Test
-//	public void switchSetRepair() throws ParseException, IOException {
-//		testTransformation(QueryConstants.SWITCHSET, ScenarioConstants.REPAIR, 3);
-//	}
+
+	@Test
+	public void switchSetRepair() throws ParseException, IOException {
+		testTransformation(SWITCHSET, REPAIR, 10);
+	}
 
 }

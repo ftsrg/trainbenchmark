@@ -15,14 +15,15 @@ package hu.bme.mit.trainbenchmark.benchmark.fourstore.test;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.FourStoreBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class FourStoreBenchmarkInitializer extends TestBenchmarkInitializer<FourStoreBenchmarkLogic> {
 
 	@Override
-	protected FourStoreBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
-		final FourStoreBenchmarkConfig fsbc = new FourStoreBenchmarkConfig(scenario, size, "FourStore", runIndex, queryName,
-				iterationCount, modificationMethod, modificationConstant);
+	protected FourStoreBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final FourStoreBenchmarkConfig fsbc = new FourStoreBenchmarkConfig(scenario, size, "FourStore", runIndex, query, iterationCount,
+				modificationMethod, modificationConstant);
 		return new FourStoreBenchmarkLogic(fsbc);
 	}
 

@@ -166,6 +166,13 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
 			</modules>
 		</profile>
+		
+		<profile>
+			<id>orientdb</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module>
+			</modules>
+		</profile>
 
 		<profile>
 			<id>sesame</id>

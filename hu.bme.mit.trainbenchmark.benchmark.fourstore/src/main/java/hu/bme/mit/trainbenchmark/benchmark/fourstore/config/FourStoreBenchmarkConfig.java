@@ -1,7 +1,19 @@
+/*******************************************************************************
+ * Copyright (c) 2010-2015, Gabor Szarnyas, Benedek Izso, Istvan Rath and Daniel Varro
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Benedek Izso - initial API and implementation
+ *   Gabor Szarnyas - initial API and implementation
+ *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
@@ -16,18 +28,17 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 		super(args, tool);
 	}
 
-	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
-			final ModificationMethod modificationMethod, final long modificationConstant) {
+	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final Query query,
+			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
 		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 	}
-	
+
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
 		options.addOption("cluster", false, "run the benchmark in a cluster");
-		options.addOption("showCommandOutput", false,
-				"show the results of the command line applications (e.g. 4s-backend, 4s-import)");
+		options.addOption("showCommandOutput", false, "show the results of the command line applications (e.g. 4s-backend, 4s-import)");
 		options.addOption("showUpdateCommands", false, "show 4s-update commands");
 	}
 

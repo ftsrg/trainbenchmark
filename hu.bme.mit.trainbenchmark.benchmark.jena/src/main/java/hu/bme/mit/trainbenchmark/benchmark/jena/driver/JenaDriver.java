@@ -12,19 +12,19 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PropertyOperation;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -41,33 +41,25 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
-	protected Long newVertexId = null;
-
+	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Model model;
-	protected Query query;
-	protected String resultVar;
-
-	public JenaDriver(final String queryPath) {
-		query = QueryFactory.read(queryPath);
-		resultVar = query.getResultVars().get(0);
-	}
+	protected Comparator<Statement> statementComparator = new StatemetComparator();
 
 	@Override
-	public void read(final String modelPath) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws IOException {
 		model = ModelFactory.createDefaultModel();
-		model.read(modelPath);
+		model.read(modelPathWithoutExtension + getExtension());
 	}
 
 	@Override
-	public List<Resource> runQuery() throws IOException {
-		final List<Resource> results = new ArrayList<>();
-		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, model)) {
+	public List<QuerySolution> runQuery(final Query query, final String queryDefinition) throws IOException {
+		final List<QuerySolution> results = new ArrayList<>();
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(queryDefinition, model)) {
 			final ResultSet resultSet = queryExecution.execSelect();
 
 			while (resultSet.hasNext()) {
 				final QuerySolution qs = resultSet.next();
-				final Resource resource = qs.getResource(resultVar);
-				results.add(resource);
+				results.add(qs);
 			}
 		}
 
@@ -75,62 +67,10 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 
 	@Override
-	public Comparator<Resource> getComparator() {
-		return new JenaComparator();
-	}
-
-	@Override
 	public void destroy() throws IOException {
 		model.close();
 	}
 
-	// create
-
-	@Override
-	public void insertVertexWithEdge(final List<Resource> sourceVertices, final String sourceVertexType, final String targetVertexType,
-			final String edgeType) throws IOException {
-
-		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
-		final Resource vertexType = model.getResource(BASE_PREFIX + targetVertexType);
-
-		for (final Resource sourceVertex : sourceVertices) {
-			insertVertexWithEdge(sourceVertex, vertexType, edge);
-		}
-	}
-
-	@Override
-	public Resource insertVertexWithEdge(final Resource sourceVertex,
-			final String sourceVertexType, final String targetVertexType, final String edgeType)
-			throws IOException {
-		
-		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
-		final Resource vertexType = model.getResource(BASE_PREFIX + targetVertexType);
-		
-		return insertVertexWithEdge(sourceVertex, vertexType, edge);
-	}
-
-	protected Resource insertVertexWithEdge(final Resource sourceVertex, final Resource vertexType,
-			final Property edge) throws IOException{
-		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
-		}
-
-		final Resource targetVertex = model.createResource(BASE_PREFIX + "x" + newVertexId);
-		newVertexId++;
-
-		model.add(model.createStatement(sourceVertex, edge, targetVertex));
-		model.add(model.createStatement(targetVertex, RDF.type, vertexType));
-		
-		return targetVertex;
-	}
-	
-	@Override
-	public void insertEdge(final Resource sourceVertex, final String sourceVertexType, final Resource targetVertex,
-			final String edgeType) {
-		final Property edge = model.getProperty(BASE_PREFIX + edgeType);
-		model.add(model.createStatement(sourceVertex, edge, targetVertex));
-	}
-	
 	// read
 
 	@Override
@@ -140,64 +80,27 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 		return vertices;
 	}
 
-	@Override
-	public List<Resource> collectOutgoingConnectedVertices(
-			final Resource sourceVertex, final String sourceVertexType, final String targetVertexType, final String edgeType) {
-		
-		throw new UnsupportedOperationException();
-//		// TODO Auto-generated method stub
-//		Resource targetVertex = model.getResource(BASE_PREFIX + targetVertexType);
-//		Property edge = model.getProperty(BASE_PREFIX + edgeType);
-//		NodeIterator objects = model.listObjectsOfProperty(sourceVertex, edge);
-//		while(objects.hasNext()){
-//			RDFNode ob = objects.next();
-//		}
-//		return null;
-	}
-
-	// update
-
-	@Override
-	public void updateProperties(final List<Resource> vertices, final String vertexType, final String propertyName,
-			final PropertyOperation attributeOperation) throws IOException {
-		final Property property = model.getProperty(BASE_PREFIX + propertyName);
-
-		for (final Resource vertex : vertices) {
-			final Selector selector = new SimpleSelector(vertex, property, (RDFNode) null);
-			final StmtIterator statementsToRemove = model.listStatements(selector);
-			if (statementsToRemove.hasNext()) {
-				final Statement oldStatement = statementsToRemove.next();
-				final Integer value = oldStatement.getInt();
-				final Statement newStatement = model.createLiteralStatement(vertex, property, attributeOperation.op(value));
-				model.remove(oldStatement);
-				model.add(newStatement);
-			}
-		}
-	}
-
-	// delete
-
-	@Override
-	public void deleteIncomingEdge(final List<Resource> vertices, final String sourceVertexType, final String edgeType) throws IOException {
+	public void deleteIncomingEdge(final Collection<Resource> vertices, final String sourceVertexType, final String edgeType)
+			throws IOException {
 		deleteEdges(vertices, edgeType, false, true);
 	}
 
-	@Override
-	public void deleteAllOutgoingEdges(final List<Resource> vertices, final String vertexType, final String edgeType) throws IOException {
+	public void deleteAllOutgoingEdges(final Collection<Resource> vertices, final String vertexType, final String edgeType)
+			throws IOException {
 		deleteEdges(vertices, edgeType, true, true);
 	}
 
-	@Override
-	public void deleteOneOutgoingEdge(final List<Resource> vertices, final String vertexType, final String edgeType) throws IOException {
+	public void deleteOneOutgoingEdge(final Collection<Resource> vertices, final String vertexType, final String edgeType)
+			throws IOException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
-	@Override
-	public void deleteSingleOutgoingEdge(final List<Resource> vertices, final String vertexType, final String edgeType) throws IOException {
+	public void deleteSingleOutgoingEdge(final Collection<Resource> vertices, final String vertexType, final String edgeType)
+			throws IOException {
 		deleteEdges(vertices, edgeType, true, true);
 	}
 
-	protected void deleteEdges(final List<Resource> vertices, final String edgeType, final boolean outgoing, final boolean all) {
+	protected void deleteEdges(final Collection<Resource> vertices, final String edgeType, final boolean outgoing, final boolean all) {
 		final Property property = model.getProperty(RDFConstants.BASE_PREFIX + edgeType);
 
 		for (final Resource vertex : vertices) {
@@ -208,28 +111,23 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 			final List<Statement> statementsToRemove = new ArrayList<>();
 			while (edges.hasNext()) {
-				final Statement statementToRemove = edges.next();
-
-				statementsToRemove.add(statementToRemove);
-
-				if (!all) {
-					break;
-				}
+				final Statement edge = edges.next();
+				statementsToRemove.add(edge);
 			}
 
+			Collections.sort(statementsToRemove, statementComparator);
 			for (final Statement statement : statementsToRemove) {
 				model.remove(statement);
+
+				if (!all) {
+					return;
+				}
 			}
 		}
 	}
 
 	@Override
-	public void deleteVertex(final Resource vertex, final String vertexType) throws IOException {
-		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	protected boolean ask(final String askQuery) {
+	protected boolean ask(final String askQuery) throws IOException {
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(askQuery, model)) {
 			final boolean result = queryExecution.execAsk();
 			return result;
@@ -237,8 +135,12 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 
 	@Override
-	public void deleteVertex(final Long vertex) throws IOException {
-		// TODO Auto-generated method stub
-		
+	public Comparator<Resource> getElementComparator() {
+		return elementComparator;
 	}
+
+	public Model getModel() {
+		return model;
+	}
+
 }

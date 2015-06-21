@@ -1,0 +1,47 @@
+{
+  "sesame": {
+    "format": "rdf"
+  },
+  "allegro": {
+    "format": "rdf" 
+  },
+  "jena": {
+    "format": "rdf"
+  },
+  "neo4j": {
+    "format": "graph"
+  },
+  "orientdb": {
+    "format": "graph"
+  },
+  "java": {
+    "format": "emf"
+  },
+  "drools5": {
+    "format": "emf"
+  },
+  "drools6": {
+    "format": "emf"
+  },
+  "fourstore": {
+    "format": "rdf"
+  },
+  "memsql": {
+    "format": "sql"
+  },
+  "mysql": {
+    "format": "sql"
+  },
+  "postgresql": {
+    "format": "sql"
+  },
+  "eclipseocl": {
+    "format": "emf"
+  },
+  "emfincquery": {
+    "format": "emf"
+  },
+  "virtuoso":{
+    "format": "rdf"
+  }
+}

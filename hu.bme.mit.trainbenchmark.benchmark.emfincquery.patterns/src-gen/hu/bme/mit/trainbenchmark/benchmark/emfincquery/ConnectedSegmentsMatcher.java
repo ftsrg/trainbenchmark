@@ -3,6 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.ConnectedSegmentsQuerySpecification;
 import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,15 +28,15 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern ConnectedSegments(segment : Segment)
+ * pattern ConnectedSegments(sensor1, sensor2, segment1, segment2, segment3, segment4, segment5, segment6)
  * {
- * 	Segment.sensor(segment, sensor1);
- * 	Segment.connectsTo(segment, seg2);
- * 	Segment.connectsTo(seg2,    seg3);
- * 	Segment.connectsTo(seg3,    seg4);
- * 	Segment.connectsTo(seg4,    seg5);
- * 	Segment.connectsTo(seg5,    seg6);
- * 	Segment.sensor(seg6, sensor2);
+ * 	Segment.sensor(segment1, sensor1);
+ * 	Segment.connectsTo(segment1, segment2);
+ * 	Segment.connectsTo(segment2, segment3);
+ * 	Segment.connectsTo(segment3, segment4);
+ * 	Segment.connectsTo(segment4, segment5);
+ * 	Segment.connectsTo(segment5, segment6);
+ * 	Segment.sensor(segment6, sensor2);
  * 	sensor1 == sensor2;
  * }
  * </pre></code>
@@ -65,7 +66,21 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
     return matcher;
   }
   
-  private final static int POSITION_SEGMENT = 0;
+  private final static int POSITION_SENSOR1 = 0;
+  
+  private final static int POSITION_SENSOR2 = 1;
+  
+  private final static int POSITION_SEGMENT1 = 2;
+  
+  private final static int POSITION_SEGMENT2 = 3;
+  
+  private final static int POSITION_SEGMENT3 = 4;
+  
+  private final static int POSITION_SEGMENT4 = 5;
+  
+  private final static int POSITION_SEGMENT5 = 6;
+  
+  private final static int POSITION_SEGMENT6 = 7;
   
   private final static Logger LOGGER = IncQueryLoggingUtil.getLogger(ConnectedSegmentsMatcher.class);
   
@@ -102,104 +117,509 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
   
   /**
    * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-   * @param pSegment the fixed value of pattern parameter segment, or null if not bound.
+   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
+   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
+   * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
+   * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
+   * @param pSegment4 the fixed value of pattern parameter segment4, or null if not bound.
+   * @param pSegment5 the fixed value of pattern parameter segment5, or null if not bound.
+   * @param pSegment6 the fixed value of pattern parameter segment6, or null if not bound.
    * @return matches represented as a ConnectedSegmentsMatch object.
    * 
    */
-  public Collection<ConnectedSegmentsMatch> getAllMatches(final Segment pSegment) {
-    return rawGetAllMatches(new Object[]{pSegment});
+  public Collection<ConnectedSegmentsMatch> getAllMatches(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawGetAllMatches(new Object[]{pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6});
   }
   
   /**
    * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
    * Neither determinism nor randomness of selection is guaranteed.
-   * @param pSegment the fixed value of pattern parameter segment, or null if not bound.
+   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
+   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
+   * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
+   * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
+   * @param pSegment4 the fixed value of pattern parameter segment4, or null if not bound.
+   * @param pSegment5 the fixed value of pattern parameter segment5, or null if not bound.
+   * @param pSegment6 the fixed value of pattern parameter segment6, or null if not bound.
    * @return a match represented as a ConnectedSegmentsMatch object, or null if no match is found.
    * 
    */
-  public ConnectedSegmentsMatch getOneArbitraryMatch(final Segment pSegment) {
-    return rawGetOneArbitraryMatch(new Object[]{pSegment});
+  public ConnectedSegmentsMatch getOneArbitraryMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawGetOneArbitraryMatch(new Object[]{pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6});
   }
   
   /**
    * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
    * under any possible substitution of the unspecified parameters (if any).
-   * @param pSegment the fixed value of pattern parameter segment, or null if not bound.
+   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
+   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
+   * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
+   * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
+   * @param pSegment4 the fixed value of pattern parameter segment4, or null if not bound.
+   * @param pSegment5 the fixed value of pattern parameter segment5, or null if not bound.
+   * @param pSegment6 the fixed value of pattern parameter segment6, or null if not bound.
    * @return true if the input is a valid (partial) match of the pattern.
    * 
    */
-  public boolean hasMatch(final Segment pSegment) {
-    return rawHasMatch(new Object[]{pSegment});
+  public boolean hasMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawHasMatch(new Object[]{pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6});
   }
   
   /**
    * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-   * @param pSegment the fixed value of pattern parameter segment, or null if not bound.
+   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
+   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
+   * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
+   * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
+   * @param pSegment4 the fixed value of pattern parameter segment4, or null if not bound.
+   * @param pSegment5 the fixed value of pattern parameter segment5, or null if not bound.
+   * @param pSegment6 the fixed value of pattern parameter segment6, or null if not bound.
    * @return the number of pattern matches found.
    * 
    */
-  public int countMatches(final Segment pSegment) {
-    return rawCountMatches(new Object[]{pSegment});
+  public int countMatches(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawCountMatches(new Object[]{pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6});
   }
   
   /**
    * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-   * @param pSegment the fixed value of pattern parameter segment, or null if not bound.
+   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
+   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
+   * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
+   * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
+   * @param pSegment4 the fixed value of pattern parameter segment4, or null if not bound.
+   * @param pSegment5 the fixed value of pattern parameter segment5, or null if not bound.
+   * @param pSegment6 the fixed value of pattern parameter segment6, or null if not bound.
    * @param processor the action that will process each pattern match.
    * 
    */
-  public void forEachMatch(final Segment pSegment, final IMatchProcessor<? super ConnectedSegmentsMatch> processor) {
-    rawForEachMatch(new Object[]{pSegment}, processor);
+  public void forEachMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6, final IMatchProcessor<? super ConnectedSegmentsMatch> processor) {
+    rawForEachMatch(new Object[]{pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6}, processor);
   }
   
   /**
    * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
    * Neither determinism nor randomness of selection is guaranteed.
-   * @param pSegment the fixed value of pattern parameter segment, or null if not bound.
+   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
+   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
+   * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
+   * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
+   * @param pSegment4 the fixed value of pattern parameter segment4, or null if not bound.
+   * @param pSegment5 the fixed value of pattern parameter segment5, or null if not bound.
+   * @param pSegment6 the fixed value of pattern parameter segment6, or null if not bound.
    * @param processor the action that will process the selected match.
    * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
    * 
    */
-  public boolean forOneArbitraryMatch(final Segment pSegment, final IMatchProcessor<? super ConnectedSegmentsMatch> processor) {
-    return rawForOneArbitraryMatch(new Object[]{pSegment}, processor);
+  public boolean forOneArbitraryMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6, final IMatchProcessor<? super ConnectedSegmentsMatch> processor) {
+    return rawForOneArbitraryMatch(new Object[]{pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6}, processor);
   }
   
   /**
    * Returns a new (partial) match.
    * This can be used e.g. to call the matcher with a partial match.
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-   * @param pSegment the fixed value of pattern parameter segment, or null if not bound.
+   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
+   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
+   * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
+   * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
+   * @param pSegment4 the fixed value of pattern parameter segment4, or null if not bound.
+   * @param pSegment5 the fixed value of pattern parameter segment5, or null if not bound.
+   * @param pSegment6 the fixed value of pattern parameter segment6, or null if not bound.
    * @return the (partial) match object.
    * 
    */
-  public ConnectedSegmentsMatch newMatch(final Segment pSegment) {
-    return ConnectedSegmentsMatch.newMatch(pSegment);
+  public ConnectedSegmentsMatch newMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return ConnectedSegmentsMatch.newMatch(pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
   }
   
   /**
-   * Retrieve the set of values that occur in matches for segment.
+   * Retrieve the set of values that occur in matches for sensor1.
    * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
    * 
    */
-  protected Set<Segment> rawAccumulateAllValuesOfsegment(final Object[] parameters) {
-    Set<Segment> results = new HashSet<Segment>();
-    rawAccumulateAllValues(POSITION_SEGMENT, parameters, results);
+  protected Set<Sensor> rawAccumulateAllValuesOfsensor1(final Object[] parameters) {
+    Set<Sensor> results = new HashSet<Sensor>();
+    rawAccumulateAllValues(POSITION_SENSOR1, parameters, results);
     return results;
   }
   
   /**
-   * Retrieve the set of values that occur in matches for segment.
+   * Retrieve the set of values that occur in matches for sensor1.
    * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
    * 
    */
-  public Set<Segment> getAllValuesOfsegment() {
-    return rawAccumulateAllValuesOfsegment(emptyArray());
+  public Set<Sensor> getAllValuesOfsensor1() {
+    return rawAccumulateAllValuesOfsensor1(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sensor1.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Sensor> getAllValuesOfsensor1(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsensor1(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sensor1.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Sensor> getAllValuesOfsensor1(final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawAccumulateAllValuesOfsensor1(new Object[]{
+    null, 
+    pSensor2, 
+    pSegment1, 
+    pSegment2, 
+    pSegment3, 
+    pSegment4, 
+    pSegment5, 
+    pSegment6
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sensor2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Sensor> rawAccumulateAllValuesOfsensor2(final Object[] parameters) {
+    Set<Sensor> results = new HashSet<Sensor>();
+    rawAccumulateAllValues(POSITION_SENSOR2, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sensor2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Sensor> getAllValuesOfsensor2() {
+    return rawAccumulateAllValuesOfsensor2(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sensor2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Sensor> getAllValuesOfsensor2(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsensor2(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sensor2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Sensor> getAllValuesOfsensor2(final Sensor pSensor1, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawAccumulateAllValuesOfsensor2(new Object[]{
+    pSensor1, 
+    null, 
+    pSegment1, 
+    pSegment2, 
+    pSegment3, 
+    pSegment4, 
+    pSegment5, 
+    pSegment6
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment1.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Segment> rawAccumulateAllValuesOfsegment1(final Object[] parameters) {
+    Set<Segment> results = new HashSet<Segment>();
+    rawAccumulateAllValues(POSITION_SEGMENT1, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment1.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment1() {
+    return rawAccumulateAllValuesOfsegment1(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment1.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment1(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsegment1(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment1.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment1(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawAccumulateAllValuesOfsegment1(new Object[]{
+    pSensor1, 
+    pSensor2, 
+    null, 
+    pSegment2, 
+    pSegment3, 
+    pSegment4, 
+    pSegment5, 
+    pSegment6
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Segment> rawAccumulateAllValuesOfsegment2(final Object[] parameters) {
+    Set<Segment> results = new HashSet<Segment>();
+    rawAccumulateAllValues(POSITION_SEGMENT2, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment2() {
+    return rawAccumulateAllValuesOfsegment2(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment2(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsegment2(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment2.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment2(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawAccumulateAllValuesOfsegment2(new Object[]{
+    pSensor1, 
+    pSensor2, 
+    pSegment1, 
+    null, 
+    pSegment3, 
+    pSegment4, 
+    pSegment5, 
+    pSegment6
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment3.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Segment> rawAccumulateAllValuesOfsegment3(final Object[] parameters) {
+    Set<Segment> results = new HashSet<Segment>();
+    rawAccumulateAllValues(POSITION_SEGMENT3, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment3.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment3() {
+    return rawAccumulateAllValuesOfsegment3(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment3.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment3(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsegment3(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment3.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment3(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return rawAccumulateAllValuesOfsegment3(new Object[]{
+    pSensor1, 
+    pSensor2, 
+    pSegment1, 
+    pSegment2, 
+    null, 
+    pSegment4, 
+    pSegment5, 
+    pSegment6
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment4.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Segment> rawAccumulateAllValuesOfsegment4(final Object[] parameters) {
+    Set<Segment> results = new HashSet<Segment>();
+    rawAccumulateAllValues(POSITION_SEGMENT4, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment4.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment4() {
+    return rawAccumulateAllValuesOfsegment4(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment4.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment4(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsegment4(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment4.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment4(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment5, final Segment pSegment6) {
+    return rawAccumulateAllValuesOfsegment4(new Object[]{
+    pSensor1, 
+    pSensor2, 
+    pSegment1, 
+    pSegment2, 
+    pSegment3, 
+    null, 
+    pSegment5, 
+    pSegment6
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment5.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Segment> rawAccumulateAllValuesOfsegment5(final Object[] parameters) {
+    Set<Segment> results = new HashSet<Segment>();
+    rawAccumulateAllValues(POSITION_SEGMENT5, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment5.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment5() {
+    return rawAccumulateAllValuesOfsegment5(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment5.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment5(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsegment5(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment5.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment5(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment6) {
+    return rawAccumulateAllValuesOfsegment5(new Object[]{
+    pSensor1, 
+    pSensor2, 
+    pSegment1, 
+    pSegment2, 
+    pSegment3, 
+    pSegment4, 
+    null, 
+    pSegment6
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment6.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Segment> rawAccumulateAllValuesOfsegment6(final Object[] parameters) {
+    Set<Segment> results = new HashSet<Segment>();
+    rawAccumulateAllValues(POSITION_SEGMENT6, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment6.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment6() {
+    return rawAccumulateAllValuesOfsegment6(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment6.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment6(final ConnectedSegmentsMatch partialMatch) {
+    return rawAccumulateAllValuesOfsegment6(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for segment6.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Segment> getAllValuesOfsegment6(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5) {
+    return rawAccumulateAllValuesOfsegment6(new Object[]{
+    pSensor1, 
+    pSensor2, 
+    pSegment1, 
+    pSegment2, 
+    pSegment3, 
+    pSegment4, 
+    pSegment5, 
+    null
+    });
   }
   
   @Override
   protected ConnectedSegmentsMatch tupleToMatch(final Tuple t) {
     try {
-    	return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT));
+    	return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) t.get(POSITION_SENSOR1), (hu.bme.mit.trainbenchmark.railway.Sensor) t.get(POSITION_SENSOR2), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT1), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT2), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT3), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT4), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT5), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT6));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -209,7 +629,7 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
   @Override
   protected ConnectedSegmentsMatch arrayToMatch(final Object[] match) {
     try {
-    	return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT]);
+    	return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR1], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR2], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT1], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT2], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT3], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT4], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT5], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT6]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -219,7 +639,7 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
   @Override
   protected ConnectedSegmentsMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return ConnectedSegmentsMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT]);
+    	return ConnectedSegmentsMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR1], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR2], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT1], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT2], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT3], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT4], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT5], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT6]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

@@ -12,65 +12,66 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
+import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5ConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import org.drools.runtime.rule.Row;
 import org.drools.runtime.rule.ViewChangedEventListener;
 
-public class Drools5ResultListener<T> implements ViewChangedEventListener {
-	String resultVariable;
+public class Drools5ResultListener implements ViewChangedEventListener {
 
-	private Set<T> matching;
-	int added, removed, updated;
+	protected Query query;
+	protected final Set<EMFMatch> matches = new HashSet<>();
 
-	public Drools5ResultListener(String resultVariable) {
-		super();
-		matching = new HashSet<T>();
-		this.resultVariable = resultVariable;
-		added = removed = updated = 0;
+	public Drools5ResultListener(final Query query) {
+		this.query = query;
 	}
 
 	@Override
-	public void rowAdded(Row row) {
-		@SuppressWarnings("unchecked")
-		T result = (T) row.get(resultVariable);
-		matching.add(result);
-		added++;
+	public void rowAdded(final Row row) {
+		matches.add(createMatch(query, row));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void rowRemoved(Row row) {
-		matching.remove((T) row.get(resultVariable));
-		removed++;
+	public void rowRemoved(final Row row) {
+		matches.remove(createMatch(query, row));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void rowUpdated(Row row) {
-		matching.add((T) row.get(resultVariable));
-		updated++;
+	public void rowUpdated(final Row row) {
+		matches.add(createMatch(query, row));
 	}
 
-	public Set<T> getMatching() {
-		return matching;
+	public Set<EMFMatch> getMatches() {
+		return matches;
 	}
 
-	public int getAdded() {
-		return added;
-	}
-
-	public int getRemoved() {
-		return removed;
-	}
-
-	public int getUpdated() {
-		return updated;
-	}
-
-	public int getNumberOfChanges() {
-		return added + removed + updated;
+	private EMFMatch createMatch(final Query query, final Row row) {
+		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new Drools5ConnectedSegmentsMatch(row);
+		case POSLENGTH:
+			return new Drools5PosLengthMatch(row);
+		case ROUTESENSOR:
+			return new Drools5RouteSensorMatch(row);
+		case SEMAPHORENEIGHBOR:
+			return new Drools5SemaphoreNeighborMatch(row);
+		case SWITCHSENSOR:
+			return new Drools5SwitchSensorMatch(row);
+		case SWITCHSET:
+			return new Drools5SwitchSetMatch(row);
+		default:
+			throw new UnsupportedOperationException("Query not supported: " + query);
+		}
 	}
 
 }

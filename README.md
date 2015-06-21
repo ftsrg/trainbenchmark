@@ -68,3 +68,7 @@ Please note that the Windows version of the benchmark is not complete (e.g. 4sto
 The projects are developed and tested with **Eclipse Kepler**. In Eclipse Luna you may experience problems if you wish to edit the EMF metamodel.
 
 To import and develop the Train Benchmark, you need the m2e Eclipse plugin, included in Eclipse for Java developers. If you use another distribution (e.g. Eclipse Modeling), you can install it from the Kepler update site or the m2e update site (<http://download.eclipse.org/technology/m2e/releases>).
+
+### Naming conventions
+
+To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Java implementation are named `JavaBenchmarkCase`, `JavaPosLength`, `JavaPosLengthMatch`, `JavaPosLengthTransformation`, while the classes in the EMF-IncQuery implementation are named `EMFIncQueryBenchmarkCase`, `EMFIncQueryPosLength`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.

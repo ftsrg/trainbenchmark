@@ -12,10 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.CONNECTEDSEGMENTS;
+import static hu.bme.mit.trainbenchmark.constants.Query.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.USER;
 
 import java.io.IOException;
@@ -26,13 +28,18 @@ import org.junit.Test;
 public abstract class UserTest extends TransformationTest {
 
 	@Test
+	public void connectedSegmentsUser() throws ParseException, IOException {
+		testTransformation(CONNECTEDSEGMENTS, USER, 46);
+	}
+
+	@Test
 	public void posLengthUser() throws ParseException, IOException {
-		testTransformation(POSLENGTH, USER, 94);
+		testTransformation(POSLENGTH, USER, 78);
 	}
 
 	@Test
 	public void routeSensorUser() throws ParseException, IOException {
-		testTransformation(ROUTESENSOR, USER, 4);
+		testTransformation(ROUTESENSOR, USER, 2);
 	}
 
 	@Test
@@ -42,12 +49,12 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, USER, 3);
+		testTransformation(SWITCHSENSOR, USER, 2);
 	}
-	
-//	@Test
-//	public void switchSetUser() throws ParseException, IOException {
-//		testTransformation(QueryConstants.SWITCHSENSOR, ScenarioConstants.USER, 5);
-//	}
+
+	@Test
+	public void switchSetUser() throws ParseException, IOException {
+		testTransformation(SWITCHSET, USER, 3);
+	}
 
 }

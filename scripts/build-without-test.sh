@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cd "$( cd "$( dirname "$0" )" && pwd )/.."
-export MAVEN_OPTS="-XX:MaxPermSize=128M"
+
+export MAVEN_OPTS="-Xmx2G"
 ./scripts/build-artifacts.sh
 
 if [[ $1 == "--travis" ]]; then

@@ -2,15 +2,13 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery
 
 import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
 
-pattern ConnectedSegments(segment : Segment)
+pattern ConnectedSegments(sensor, segment1, segment2, segment3, segment4, segment5, segment6)
 {
-	Segment.sensor(segment, sensor1);
-	Segment.connectsTo(segment, seg2);
-	Segment.connectsTo(seg2, seg3);
-	Segment.connectsTo(seg3, seg4);
-	Segment.connectsTo(seg4, seg5);
-	Segment.connectsTo(seg5, seg6);
-	Segment.sensor(seg6, sensor2);
-	sensor1 == sensor2;
+	Segment.sensor(segment1, sensor);
+	Segment.connectsTo(segment1, segment2);
+	Segment.connectsTo(segment2, segment3);
+	Segment.connectsTo(segment3, segment4);
+	Segment.connectsTo(segment4, segment5);
+	Segment.connectsTo(segment5, segment6);
+	Segment.sensor(segment6, sensor);
 }
-

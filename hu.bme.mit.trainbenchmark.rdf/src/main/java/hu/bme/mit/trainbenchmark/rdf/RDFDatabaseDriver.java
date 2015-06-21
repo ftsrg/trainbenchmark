@@ -1,16 +1,30 @@
+/*******************************************************************************
+ * Copyright (c) 2010-2015, Gabor Szarnyas, Benedek Izso, Istvan Rath and Daniel Varro
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Benedek Izso - initial API and implementation
+ *   Gabor Szarnyas - initial API and implementation
+ *******************************************************************************/
 package hu.bme.mit.trainbenchmark.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_TYPE;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.io.IOException;
 
-public abstract class RDFDatabaseDriver<T> extends DatabaseDriver<T> {
-	
+public abstract class RDFDatabaseDriver<T> extends Driver<T> {
+
+	protected Long newVertexId = null;
+
 	protected Long determineNewVertexId() throws IOException {
 		Long id = 5000L;
+
 		// safety measure to avoid infinite loop in case of a driver bug
 		int iterationCount = 1;
 
@@ -27,7 +41,20 @@ public abstract class RDFDatabaseDriver<T> extends DatabaseDriver<T> {
 
 		return id;
 	}
-	
+
+	public Long getNewVertexId() throws IOException {
+		if (newVertexId == null) {
+			newVertexId = determineNewVertexId();
+		}
+		newVertexId++;
+		return newVertexId;
+	}
+
+	@Override
+	public String getExtension() {
+		return ".ttl";
+	}
+
 	protected abstract boolean ask(String askQuery) throws IOException;
-	
+
 }

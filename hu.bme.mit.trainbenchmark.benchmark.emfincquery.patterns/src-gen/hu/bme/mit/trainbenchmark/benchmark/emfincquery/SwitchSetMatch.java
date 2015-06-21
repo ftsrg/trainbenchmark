@@ -1,6 +1,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SwitchSetQuerySpecification;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 import java.util.Arrays;
 import java.util.List;
@@ -23,37 +26,88 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
  */
 @SuppressWarnings("all")
 public abstract class SwitchSetMatch extends BasePatternMatch {
-  private SwitchPosition fSwitchPosition;
+  private Semaphore fSemaphore;
   
-  private static List<String> parameterNames = makeImmutableList("switchPosition");
+  private Route fRoute;
   
-  private SwitchSetMatch(final SwitchPosition pSwitchPosition) {
-    this.fSwitchPosition = pSwitchPosition;
+  private SwitchPosition fSwP;
+  
+  private Switch fSw;
+  
+  private static List<String> parameterNames = makeImmutableList("semaphore", "route", "swP", "sw");
+  
+  private SwitchSetMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    this.fSemaphore = pSemaphore;
+    this.fRoute = pRoute;
+    this.fSwP = pSwP;
+    this.fSw = pSw;
   }
   
   @Override
   public Object get(final String parameterName) {
-    if ("switchPosition".equals(parameterName)) return this.fSwitchPosition;
+    if ("semaphore".equals(parameterName)) return this.fSemaphore;
+    if ("route".equals(parameterName)) return this.fRoute;
+    if ("swP".equals(parameterName)) return this.fSwP;
+    if ("sw".equals(parameterName)) return this.fSw;
     return null;
   }
   
-  public SwitchPosition getSwitchPosition() {
-    return this.fSwitchPosition;
+  public Semaphore getSemaphore() {
+    return this.fSemaphore;
+  }
+  
+  public Route getRoute() {
+    return this.fRoute;
+  }
+  
+  public SwitchPosition getSwP() {
+    return this.fSwP;
+  }
+  
+  public Switch getSw() {
+    return this.fSw;
   }
   
   @Override
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    if ("switchPosition".equals(parameterName) ) {
-    	this.fSwitchPosition = (hu.bme.mit.trainbenchmark.railway.SwitchPosition) newValue;
+    if ("semaphore".equals(parameterName) ) {
+    	this.fSemaphore = (hu.bme.mit.trainbenchmark.railway.Semaphore) newValue;
+    	return true;
+    }
+    if ("route".equals(parameterName) ) {
+    	this.fRoute = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
+    	return true;
+    }
+    if ("swP".equals(parameterName) ) {
+    	this.fSwP = (hu.bme.mit.trainbenchmark.railway.SwitchPosition) newValue;
+    	return true;
+    }
+    if ("sw".equals(parameterName) ) {
+    	this.fSw = (hu.bme.mit.trainbenchmark.railway.Switch) newValue;
     	return true;
     }
     return false;
   }
   
-  public void setSwitchPosition(final SwitchPosition pSwitchPosition) {
+  public void setSemaphore(final Semaphore pSemaphore) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    this.fSwitchPosition = pSwitchPosition;
+    this.fSemaphore = pSemaphore;
+  }
+  
+  public void setRoute(final Route pRoute) {
+    if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+    this.fRoute = pRoute;
+  }
+  
+  public void setSwP(final SwitchPosition pSwP) {
+    if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+    this.fSwP = pSwP;
+  }
+  
+  public void setSw(final Switch pSw) {
+    if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+    this.fSw = pSw;
   }
   
   @Override
@@ -68,18 +122,24 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
   
   @Override
   public Object[] toArray() {
-    return new Object[]{fSwitchPosition};
+    return new Object[]{fSemaphore, fRoute, fSwP, fSw};
   }
   
   @Override
   public SwitchSetMatch toImmutable() {
-    return isMutable() ? newMatch(fSwitchPosition) : this;
+    return isMutable() ? newMatch(fSemaphore, fRoute, fSwP, fSw) : this;
   }
   
   @Override
   public String prettyPrint() {
     StringBuilder result = new StringBuilder();
-    result.append("\"switchPosition\"=" + prettyPrintValue(fSwitchPosition)
+    result.append("\"semaphore\"=" + prettyPrintValue(fSemaphore) + ", ");
+    
+    result.append("\"route\"=" + prettyPrintValue(fRoute) + ", ");
+    
+    result.append("\"swP\"=" + prettyPrintValue(fSwP) + ", ");
+    
+    result.append("\"sw\"=" + prettyPrintValue(fSw)
     );
     return result.toString();
   }
@@ -88,7 +148,10 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((fSwitchPosition == null) ? 0 : fSwitchPosition.hashCode());
+    result = prime * result + ((fSemaphore == null) ? 0 : fSemaphore.hashCode());
+    result = prime * result + ((fRoute == null) ? 0 : fRoute.hashCode());
+    result = prime * result + ((fSwP == null) ? 0 : fSwP.hashCode());
+    result = prime * result + ((fSw == null) ? 0 : fSw.hashCode());
     return result;
   }
   
@@ -109,8 +172,14 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     SwitchSetMatch other = (SwitchSetMatch) obj;
-    if (fSwitchPosition == null) {if (other.fSwitchPosition != null) return false;}
-    else if (!fSwitchPosition.equals(other.fSwitchPosition)) return false;
+    if (fSemaphore == null) {if (other.fSemaphore != null) return false;}
+    else if (!fSemaphore.equals(other.fSemaphore)) return false;
+    if (fRoute == null) {if (other.fRoute != null) return false;}
+    else if (!fRoute.equals(other.fRoute)) return false;
+    if (fSwP == null) {if (other.fSwP != null) return false;}
+    else if (!fSwP.equals(other.fSwP)) return false;
+    if (fSw == null) {if (other.fSw != null) return false;}
+    else if (!fSw.equals(other.fSw)) return false;
     return true;
   }
   
@@ -132,36 +201,42 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
    * 
    */
   public static SwitchSetMatch newEmptyMatch() {
-    return new Mutable(null);
+    return new Mutable(null, null, null, null);
   }
   
   /**
    * Returns a mutable (partial) match.
    * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
    * 
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static SwitchSetMatch newMutableMatch(final SwitchPosition pSwitchPosition) {
-    return new Mutable(pSwitchPosition);
+  public static SwitchSetMatch newMutableMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return new Mutable(pSemaphore, pRoute, pSwP, pSw);
   }
   
   /**
    * Returns a new (partial) match.
    * This can be used e.g. to call the matcher with a partial match.
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return the (partial) match object.
    * 
    */
-  public static SwitchSetMatch newMatch(final SwitchPosition pSwitchPosition) {
-    return new Immutable(pSwitchPosition);
+  public static SwitchSetMatch newMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return new Immutable(pSemaphore, pRoute, pSwP, pSw);
   }
   
   private static final class Mutable extends SwitchSetMatch {
-    Mutable(final SwitchPosition pSwitchPosition) {
-      super(pSwitchPosition);
+    Mutable(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+      super(pSemaphore, pRoute, pSwP, pSw);
     }
     
     @Override
@@ -171,8 +246,8 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
   }
   
   private static final class Immutable extends SwitchSetMatch {
-    Immutable(final SwitchPosition pSwitchPosition) {
-      super(pSwitchPosition);
+    Immutable(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+      super(pSemaphore, pRoute, pSwP, pSw);
     }
     
     @Override

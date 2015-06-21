@@ -1,0 +1,258 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Scenarios": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "User",
+            "Repair",
+            "Batch"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "string",
+        "enum": [
+          "User",
+          "Repair",
+          "Batch"
+        ]
+      }
+    },
+    "MAVEN_OPTS": {
+      "type": "object",
+      "properties": {
+        "Xmx": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "512m"
+        },
+        "XX:MaxPermSize": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "256m"
+        }
+      }
+    },
+    "JAVA_OPTS": {
+      "type": "object",
+      "properties": {
+        "xmx": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "1g"
+        },
+        "maxPermSize": {
+          "type": "string",
+          "pattern": "^[0-9]+[m,g]",
+          "default": "256m"
+        }
+      }
+    },
+    "IterationCount": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 10
+    },
+    "MinSize": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "MaxSize": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 4
+    },
+    "ModificationMethod": {
+      "enum": [
+        "constant",
+        "resultSet"
+      ],
+      "default": "constant"
+    },
+    "ModificationConstant": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 10
+    },
+    "Series": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "Queries": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "PosLength",
+            "RouteSensor",
+            "SemaphoreNeighbor",
+            "SwitchSensor",
+            "ConnectedSegments",
+            "SwitchSet"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "string",
+        "enum": [
+          "PosLength",
+          "RouteSensor",
+          "SemaphoreNeighbor",
+          "SwitchSensor",
+          "ConnectedSegments",
+          "SwitchSet"
+        ]
+      },
+      "default": [
+        "PosLength",
+        "RouteSensor",
+        "SemaphoreNeighbor",
+        "SwitchSensor",
+        "SwitchSet"
+      ]
+    },
+    "Tools": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "allegro",
+            "drools5",
+            "drools6",
+            "eclipseocl",
+            "emfincquery",
+            "fourstore",
+            "java",
+            "jena",
+            "memsql",
+            "mysql",
+            "neo4j",
+            "orientdb",
+            "sesame",
+            "postgresql",
+            "virtuoso"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "string",
+        "enum": [
+          "allegro",
+          "drools5",
+          "drools6",
+          "eclipseocl",
+          "emfincquery",
+          "fourstore",
+          "java",
+          "jena",
+          "memsql",
+          "mysql",
+          "neo4j",
+          "orientdb",
+          "sesame",
+          "postgresql",
+          "virtuoso"
+        ]
+      },
+      "default": [
+        "sesame"
+      ]
+    },
+    "UniqueConfigurations": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "required": [
+            "Tool"
+          ],
+          "properties": {
+            "Tool": {
+              "enum": [
+                "allegro",
+                "drools5",
+                "drools6",
+                "eclipseocl",
+                "emfincquery",
+                "fourstore",
+                "java",
+                "jena",
+                "memsql",
+                "mysql",
+                "neo4j",
+                "sesame",
+                "postgresql",
+                "virtuoso"
+              ]
+            },
+            "Queries": {
+              "$ref": "#/properties/Queries"
+            },
+            "Scenarios": {
+              "$ref": "#/properties/Scenarios"
+            },
+            "MinSize": {
+              "$ref": "#/properties/MinSize"
+            },
+            "MaxSize": {
+              "$ref": "#/properties/MaxSize"
+            }
+          }
+        }
+      ],
+      "additionalItems": {
+        "type": "object",
+        "required": [
+          "Tool"
+        ],
+        "properties": {
+          "Tool": {
+            "enum": [
+              "allegro",
+              "drools5",
+              "drools6",
+              "eclipseocl",
+              "emfincquery",
+              "fourstore",
+              "java",
+              "jena",
+              "memsql",
+              "mysql",
+              "neo4j",
+              "sesame",
+              "postgresql",
+              "virtuoso"
+            ]
+          },
+          "Queries": {
+            "$ref": "#/properties/Queries"
+          },
+          "Scenarios": {
+            "$ref": "#/properties/Scenarios"
+          },
+          "MinSize": {
+            "$ref": "#/properties/MinSize"
+          },
+          "MaxSize": {
+            "$ref": "#/properties/MaxSize"
+          }
+        }
+      }
+    }
+  }
+}

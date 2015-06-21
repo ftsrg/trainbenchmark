@@ -11,34 +11,25 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.memsql.driver.MemSQLDriver;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLBenchmarkCase;
+import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLChecker;
 
 import java.io.IOException;
-import java.util.Collection;
 
-public class MemSQLBenchmarkCase extends AbstractBenchmarkCase<Long> {
+public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 
 	@Override
 	protected void init() throws IOException {
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.sql/src/main/resources/queries/" + getName() + ".sql";
-		driver = new MemSQLDriver(queryPath);
-	}
+		super.init();
 
-	@Override
-	protected void read() throws IOException {
-		driver.read(bc.getModelPathNameWithoutExtension() + ".sql");
-	}
+		driver = sqlDriver = new MemSQLDriver();
+		checker = new SQLChecker(sqlDriver, bc);
 
-	@Override
-	protected Collection<Long> check() throws IOException {
-		results = driver.runQuery();
-		return results;
-	}
-
-	@Override
-	protected void destroy() throws IOException {
-		driver.destroy();
+		if (bc.getScenario() != Scenario.BATCH) {
+			// transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
+		}
 	}
 
 }

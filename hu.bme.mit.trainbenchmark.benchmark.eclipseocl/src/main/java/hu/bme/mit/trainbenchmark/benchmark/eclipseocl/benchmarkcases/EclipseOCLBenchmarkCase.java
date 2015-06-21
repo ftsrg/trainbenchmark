@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.driver.DatabaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
@@ -41,7 +41,7 @@ public abstract class EclipseOCLBenchmarkCase<T extends RailwayElement> extends 
 	public void read() {
 		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
 		final EMFDriver emfDriver = new EMFDriver(modelPath);
-		driver = (DatabaseDriver<T>) emfDriver;
+		driver = (Driver<T>) emfDriver;
 
 		container = emfDriver.getContainer();
 	}
@@ -63,7 +63,7 @@ public abstract class EclipseOCLBenchmarkCase<T extends RailwayElement> extends 
 	
 	@Override
 	protected Collection<T> check() {
-		results = new ArrayList<>();
+		matches = new ArrayList<>();
 		
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
@@ -71,11 +71,11 @@ public abstract class EclipseOCLBenchmarkCase<T extends RailwayElement> extends 
 
 			final Object result = ocl.evaluate(eObject, query);
 			if (result == Boolean.TRUE) {
-				results.add((T) eObject);
+				matches.add((T) eObject);
 			}
 		}
 				
-		return results;
+		return matches;
 	}
 
 
