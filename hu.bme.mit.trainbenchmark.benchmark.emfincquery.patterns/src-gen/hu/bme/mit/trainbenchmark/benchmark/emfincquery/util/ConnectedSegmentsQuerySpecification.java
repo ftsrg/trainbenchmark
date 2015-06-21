@@ -56,7 +56,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
   
   @Override
   public ConnectedSegmentsMatch newMatch(final Object... parameters) {
-    return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Sensor) parameters[1], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[2], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[3], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[4], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[5], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[6], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[7]);
+    return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[1], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[2], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[3], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[4], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[5], (hu.bme.mit.trainbenchmark.railway.Segment) parameters[6]);
   }
   
   private static class LazyHolder {
@@ -77,12 +77,12 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("sensor1","sensor2","segment1","segment2","segment3","segment4","segment5","segment6");
+      return Arrays.asList("sensor","segment1","segment2","segment3","segment4","segment5","segment6");
     }
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(new PParameter("sensor1", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("sensor2", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment2", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment4", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment5", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment6", "hu.bme.mit.trainbenchmark.railway.Segment"));
+      return Arrays.asList(new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor"),new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment2", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment4", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment5", "hu.bme.mit.trainbenchmark.railway.Segment"),new PParameter("segment6", "hu.bme.mit.trainbenchmark.railway.Segment"));
     }
     
     @Override
@@ -91,7 +91,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       try {
       {
       	PBody body = new PBody(this);
-      	PVariable var_sensor2 = body.getOrCreateVariableByName("sensor2");
+      	PVariable var_sensor = body.getOrCreateVariableByName("sensor");
       	PVariable var_segment1 = body.getOrCreateVariableByName("segment1");
       	PVariable var_segment2 = body.getOrCreateVariableByName("segment2");
       	PVariable var_segment3 = body.getOrCreateVariableByName("segment3");
@@ -99,9 +99,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       	PVariable var_segment5 = body.getOrCreateVariableByName("segment5");
       	PVariable var_segment6 = body.getOrCreateVariableByName("segment6");
       	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_sensor2, "sensor1"),
-      				
-      		new ExportedParameter(body, var_sensor2, "sensor2"),
+      		new ExportedParameter(body, var_sensor, "sensor"),
       				
       		new ExportedParameter(body, var_segment1, "segment1"),
       				
@@ -116,7 +114,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       		new ExportedParameter(body, var_segment6, "segment6")
       	));
       	new TypeUnary(body, var_segment1, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_segment1, var_sensor2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
+      	new TypeBinary(body, CONTEXT, var_segment1, var_sensor, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
       	new TypeBinary(body, CONTEXT, var_segment1, var_segment2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
       	new TypeUnary(body, var_segment2, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
       	new TypeBinary(body, CONTEXT, var_segment2, var_segment3, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
@@ -127,7 +125,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       	new TypeUnary(body, var_segment5, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
       	new TypeBinary(body, CONTEXT, var_segment5, var_segment6, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.connectsTo");
       	new TypeUnary(body, var_segment6, getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment");
-      	new TypeBinary(body, CONTEXT, var_segment6, var_sensor2, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
+      	new TypeBinary(body, CONTEXT, var_segment6, var_sensor, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/TrackElement.sensor");
       	bodies.add(body);
       }
       	// to silence compiler error
