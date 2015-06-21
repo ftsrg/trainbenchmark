@@ -28,7 +28,8 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern entrySemaphore(route, semaphore) {
+ * pattern entrySemaphore(route, semaphore)
+ * {
  * 	Route.entry(route, semaphore);
  * }
  * </pre></code>

@@ -13,79 +13,79 @@
 package hu.bme.mit.trainbenchmark.benchmark.util;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Stopwatch;
 
 public class BenchmarkResult {
-	
-	protected String tool;
-	protected String query;
+
 	protected BenchmarkConfig bc;
 	protected Stopwatch stopwatch;
-	protected Random random;
+
+	public BenchmarkResult(final BenchmarkConfig bc) {
+		super();
+		this.bc = bc;
+	}
+
+	public static BenchmarkResult newInstance(final BenchmarkConfig bc) {
+		return new BenchmarkResult(bc);
+	}
 
 	@JsonProperty("ModifiedElements")
-	protected List<Long> modifiedElementsSizes = new ArrayList<>();
-	
+	protected List<Long> modifiedMatchCounts = new ArrayList<>();
+
 	@JsonProperty("Memory")
 	protected List<Long> memoryUsages = new ArrayList<>();
-	
+
 	@JsonProperty("Results")
-	protected List<Integer> resultSizes = new ArrayList<>();
+	protected List<Integer> matchCounts = new ArrayList<>();
 
 	// phase 1
 	@JsonProperty("ReadTime")
 	protected Long readTime;
-	
+
 	// phase 2
 	@JsonProperty("CheckTimes")
 	protected List<Long> checkTimes = new ArrayList<>();
 	// phase 3
 	@JsonProperty("LHSTimes")
 	protected List<Long> lhsTimes = new ArrayList<>();
-	
+
 	@JsonProperty("RHSTimes")
 	protected List<Long> rhsTimes = new ArrayList<>();
 
-	public BenchmarkResult(final String tool, final String query) {
-		this.tool = tool;
-		this.query = query;
-		this.random = new UniqRandom(TrainBenchmarkConstants.RANDOM_SEED);
-	}
-	
 	// JSON properties
 	@JsonProperty("Size")
-	public int getSize(){
+	public int getSize() {
 		return bc.getSize();
 	}
-	
+
 	@JsonProperty("Scenario")
-	public String getScenario(){
+	public String getScenario() {
 		return bc.getScenarioName();
 	}
-	
+
 	@JsonProperty("RunIndex")
-	public int getRunIndex(){
+	public int getRunIndex() {
 		return bc.getRunIndex();
 	}
-	
+
 	@JsonProperty("Tool")
 	public String getTool() {
-		return tool;
+		return bc.getTool();
 	}
-	
+
 	@JsonProperty("Query")
-	public String getQuery() {
-		return query;
+	public Query getQuery() {
+		return bc.getQuery();
 	}
+
 	// benchmarkconfig
 
 	public BenchmarkConfig getBenchmarkConfig() {
@@ -127,16 +127,6 @@ public class BenchmarkResult {
 		rhsTimes.add(stopClock());
 	}
 
-	// random
-
-	public void setRandom(final Random random) {
-		this.random = random;
-	}
-
-	public Random getRandom() {
-		return random;
-	}
-
 	// memory usage
 
 	public void addMemoryUsage(final long memoryUsage) {
@@ -145,22 +135,22 @@ public class BenchmarkResult {
 
 	// modification parameters
 
-	public void addModifiedElementsSize(final long modifiedElementsSize) {
-		modifiedElementsSizes.add(modifiedElementsSize);
+	public void addModifiedMatchCount(final long modifiedMatchCount) {
+		modifiedMatchCounts.add(modifiedMatchCount);
 	}
 
 	// result sizes
 
-	public void addResultSize(final int size) {
-		resultSizes.add(size);
+	public void addMatchCount(final int matchCount) {
+		matchCounts.add(matchCount);
 	}
 
-	public List<Integer> getResultSizes() {
-		return resultSizes;
+	public List<Integer> getMatchCounts() {
+		return matchCounts;
 	}
 
-	public long getLastResultSize() {
-		return resultSizes.get(resultSizes.size() - 1);
+	public long getLastMatchCount() {
+		return matchCounts.get(matchCounts.size() - 1);
 	}
 
 	@Override
@@ -169,18 +159,21 @@ public class BenchmarkResult {
 		return
 			"Benchmark results\n" +
 			"-----------------\n" +
-			"Result sizes: " + resultSizes + "\n" +
+			"Scenario: " + getScenario() + "\n" +
+			"Query: " + getQuery() + "\n" +
+			"Tool: " + getTool() + "\n" +
+			"Match counts: " + matchCounts + "\n" +
 			"Read time: " + readTime + "\n" + 	
 			"Check time: " + checkTimes + "\n" + 	
 			"LHS times: " + lhsTimes + "\n" + 	
 			"RHS times: " + rhsTimes + "\n" + 	
-			"Modified elements: " + modifiedElementsSizes 
+			"Modified match counts: " + modifiedMatchCounts + "\n" 
 			;
 		// @formatter:on
 	}
 
-	public void publish() throws IOException{
+	public void publish() throws IOException {
 		ResultSerializer.serializeToJSON(this);
 	}
-	
+
 }

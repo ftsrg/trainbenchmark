@@ -13,11 +13,9 @@
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
+import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,8 +26,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
-
-import com.google.common.collect.ImmutableMap;
 
 public class RDFGenerator extends Generator {
 
@@ -45,16 +41,6 @@ public class RDFGenerator extends Generator {
 
 	protected RDFGeneratorConfig rdfGeneratorConfig;
 	protected BufferedWriter file;
-
-	protected final Map<Object, String> resources = ImmutableMap.<Object, String>builder() //
-			.put(Signal.FAILURE, ModelConstants.SIGNAL_FAILURE) //
-			.put(Signal.STOP, ModelConstants.SIGNAL_STOP) // 
-			.put(Signal.GO, ModelConstants.SIGNAL_GO) //
-			.put(Position.LEFT, ModelConstants.SWITCH_LEFT) //
-			.put(Position.STRAIGHT, ModelConstants.SWITCH_STRAIGHT) //
-			.put(Position.RIGHT, ModelConstants.SWITCH_RIGHT) //
-			.put(Position.FAILURE, ModelConstants.SWITCH_FAILURE) //
-			.build(); 
 
 	@Override
 	public void initModel() throws IOException {
@@ -130,14 +116,14 @@ public class RDFGenerator extends Generator {
 	}
 		
 	private String stringValue(final Object value) {
-		String stringValue;
 		if (value instanceof Integer) {
-			stringValue = String.format("\"%d\"^^xsd:int", value);
+			return String.format("\"%d\"^^xsd:int", value);
+		} if (value instanceof Enum<?>) {
+			final Enum<?> e = (Enum<?>) value;
+			return String.format(":%s", RDFHelper.addEnumPrefix(e));
 		} else {
-			stringValue = String.format(":%s", resources.get(value));
+			return value.toString();
 		}
-		
-		return stringValue;
 	}
 
 	public void write(final String s) throws IOException {

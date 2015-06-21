@@ -1,21 +1,21 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?xRoute1
+SELECT DISTINCT ?semaphore ?route1 ?route2 ?sensor1 ?sensor2 ?te1 ?te2
 WHERE
 {
-	?xRoute1 base:exit ?xSemaphore .
-	?xRoute1 base:definedBy ?xSensor1 .
-	?xTrackElement1 base:sensor ?xSensor1 .
-	?xTrackElement1 base:connectsTo ?xTrackElement2 .
-	?xTrackElement2 base:sensor ?xSensor2 .
-	?xRoute2 base:definedBy ?xSensor2 .
+	?route1 base:exit ?semaphore .
+	?route1 base:definedBy ?sensor1 .
+	?te1 base:sensor ?sensor1 .
+	?te1 base:connectsTo ?te2 .
+	?te2 base:sensor ?sensor2 .
+	?route2 base:definedBy ?sensor2 .
 
-	FILTER ( ?xRoute1 != ?xRoute2 ) .
+	FILTER ( ?route1 != ?route2 ) .
 
 	OPTIONAL {
-		?xRoute2 ?xEntry ?xSemaphore .
-		FILTER (sameTerm(base:entry, ?xEntry))
+		?route2 ?entry ?semaphore .
+		FILTER (sameTerm(base:entry, ?entry))
 	} .
-	FILTER (!bound(?xEntry))
+	FILTER (!bound(?entry))
 }

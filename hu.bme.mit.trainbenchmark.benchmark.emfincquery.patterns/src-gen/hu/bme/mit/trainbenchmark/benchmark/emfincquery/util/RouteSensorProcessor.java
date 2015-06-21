@@ -1,7 +1,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.util;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 import org.eclipse.incquery.runtime.api.IMatchProcessor;
 
 /**
@@ -14,13 +17,16 @@ import org.eclipse.incquery.runtime.api.IMatchProcessor;
 public abstract class RouteSensorProcessor implements IMatchProcessor<RouteSensorMatch> {
   /**
    * Defines the action that is to be executed on each match.
+   * @param pRoute the value of pattern parameter route in the currently processed match
    * @param pSensor the value of pattern parameter sensor in the currently processed match
+   * @param pSwP the value of pattern parameter swP in the currently processed match
+   * @param pSw the value of pattern parameter sw in the currently processed match
    * 
    */
-  public abstract void process(final Sensor pSensor);
+  public abstract void process(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwP, final Switch pSw);
   
   @Override
   public void process(final RouteSensorMatch match) {
-    process(match.getSensor());
+    process(match.getRoute(), match.getSensor(), match.getSwP(), match.getSw());
   }
 }

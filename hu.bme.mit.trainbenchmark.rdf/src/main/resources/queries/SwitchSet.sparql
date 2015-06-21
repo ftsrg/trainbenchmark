@@ -3,21 +3,20 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:  <http://www.w3.org/2002/07/owl#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?xSwitchPosition
+SELECT DISTINCT ?semaphore ?route ?swP ?sw ?currentPosition ?position
 WHERE
 {
-    ?xSemaphore rdf:type base:Semaphore .
-    ?xRoute rdf:type base:Route .
-    ?xSwitchPosition rdf:type base:SwitchPosition .
-    ?xSwitch rdf:type base:Switch .
+    ?route base:entry ?semaphore .
+    ?route base:follows ?swP .
+    ?swP base:switch ?sw .
+    ?semaphore base:signal base:SIGNAL_GO .
+    ?sw base:currentPosition ?currentPosition .
+    ?swP base:position ?position .
 
-    ?xRoute base:entry ?xSemaphore .
-    ?xRoute base:follows ?xSwitchPosition .
-    ?xSwitchPosition base:switch ?xSwitch .
+    ?semaphore rdf:type base:Semaphore .
+    ?route rdf:type base:Route .
+    ?swP rdf:type base:SwitchPosition .
+    ?sw rdf:type base:Switch .
 
-    ?xSemaphore base:signal base:SIGNAL_GO .
-    ?xSwitch base:currentPosition ?xSwitchStateSW .
-    ?xSwitchPosition base:position ?xSwitchStateSWP .
-
-    FILTER (!sameTerm(?xSwitchStateSW, ?xSwitchStateSWP))
+    FILTER (!sameTerm(?currentPosition, ?position))
 }

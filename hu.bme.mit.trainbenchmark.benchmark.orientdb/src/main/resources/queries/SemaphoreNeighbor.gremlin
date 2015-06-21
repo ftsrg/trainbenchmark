@@ -1,0 +1,4 @@
+SemaphoreNeighbor = new Table()
+sig = []
+g.V('labels',':Route').as('route1').out('exit').as('signal').store(sig).back('route1').out('definedBy').as('sensor1').in('sensor').as('te1').out('connectsTo').as('te2').out('sensor').as('sensor2').in('definedBy').except('route1').as('route2').or(_().filter{!it.outE('entry').hasNext()},_().out('entry').except(sig)).table(SemaphoreNeighbor)
+SemaphoreNeighbor

@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import org.apache.commons.cli.ParseException;
@@ -26,9 +27,9 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected boolean benchmarkMode;
 	protected int iterationCount;
 	protected int runIndex;
-	protected String query;
+	protected Query query;
 	protected String tool;
-	
+
 	public int getRunIndex() {
 		return runIndex;
 	}
@@ -38,8 +39,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.tool = tool;
 	}
 
-	public BenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final String query, final int iterationCount,
-			final ModificationMethod modificationMethod, final long modificationConstant) {
+	public BenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final Query query,
+			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
 		super(scenario, size);
 		this.tool = tool;
 		this.runIndex = runIndex;
@@ -48,7 +49,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.modificationMethod = modificationMethod;
 		this.modificationConstant = modificationConstant;
 	}
-	
+
 	@Override
 	protected void initOptions() {
 		super.initOptions();
@@ -72,7 +73,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		super.processArguments(args);
 
 		// queries argument -> testCases list
-		query = cmd.getOptionValue("query");
+		query = Query.valueOf(cmd.getOptionValue("query").toUpperCase());
 
 		final String modificationMethodString = cmd.getOptionValue("modificationMethod");
 		if (modificationMethodString != null) {
@@ -139,7 +140,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return iterationCount;
 	}
 
-	public String getQuery() {
+	public Query getQuery() {
 		return query;
 	}
 

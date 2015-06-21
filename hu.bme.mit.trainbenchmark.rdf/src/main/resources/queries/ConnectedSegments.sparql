@@ -1,25 +1,22 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?xSegment1
+SELECT DISTINCT ?sensor ?segment1 ?segment2 ?segment3 ?segment4 ?segment5 ?segment6 
 WHERE
 {
-	?xSensor1 rdf:type base:Sensor .
-	?xSensor2 rdf:type base:Sensor .
-	?xSegment1 rdf:type base:Segment .
-	?xSegment1 base:TrackElement_sensor ?xSensor1 .
-	?xSegment2 rdf:type base:Segment .
-	?xSegment3 rdf:type base:Segment .
-	?xSegment4 rdf:type base:Segment .
-	?xSegment5 rdf:type base:Segment .
-	?xSegment6 rdf:type base:Segment .
-	
-	?xSegment1 base:TrackElement_connectsTo ?xSegment2 .
-	?xSegment2 base:TrackElement_connectsTo ?xSegment3 .
-	?xSegment3 base:TrackElement_connectsTo ?xSegment4 .
-	?xSegment4 base:TrackElement_connectsTo ?xSegment5 .
-	?xSegment5 base:TrackElement_connectsTo ?xSegment6 .
-	?xSegment6 base:TrackElement_sensor ?xSensor2 .
+	?segment1 base:sensor ?sensor .
+	?segment1 base:connectsTo ?segment2 .
+	?segment2 base:connectsTo ?segment3 .
+	?segment3 base:connectsTo ?segment4 .
+	?segment4 base:connectsTo ?segment5 .
+	?segment5 base:connectsTo ?segment6 .
+	?segment6 base:sensor ?sensor .
 
-	FILTER (?xSensor1 = ?xSensor2)
+	?sensor rdf:type base:Sensor .
+	?segment1 rdf:type base:Segment .
+	?segment2 rdf:type base:Segment .
+	?segment3 rdf:type base:Segment .
+	?segment4 rdf:type base:Segment .
+	?segment5 rdf:type base:Segment .
+	?segment6 rdf:type base:Segment .
 }

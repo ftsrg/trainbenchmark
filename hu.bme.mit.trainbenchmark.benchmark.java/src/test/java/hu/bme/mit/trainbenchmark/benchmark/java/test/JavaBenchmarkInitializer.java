@@ -15,13 +15,14 @@ package hu.bme.mit.trainbenchmark.benchmark.java.test;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.java.JavaBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class JavaBenchmarkInitializer extends TestBenchmarkInitializer<JavaBenchmarkLogic> {
 
 	@Override
-	protected JavaBenchmarkLogic initializeBenchmark(final String queryName, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Java", 1, queryName, iterationCount, modificationMethod,
+	protected JavaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Java", 1, query, iterationCount, modificationMethod,
 				modificationConstant);
 		return new JavaBenchmarkLogic(bc);
 	}

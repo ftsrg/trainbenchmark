@@ -1,14 +1,14 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?xSwitch
+SELECT DISTINCT ?sw
 WHERE
 {
-	?xSwitch rdf:type base:Switch .
+	?sw rdf:type base:Switch .
 
 	OPTIONAL { 
-		?xSensor rdf:type base:Sensor .
-		?xSwitch base:sensor ?xSensor .
+		?sensor rdf:type base:Sensor .
+		?sw base:sensor ?sensor .
 	} .
-	FILTER (!bound(?xSensor))
+	FILTER (!bound(?sensor))
 }

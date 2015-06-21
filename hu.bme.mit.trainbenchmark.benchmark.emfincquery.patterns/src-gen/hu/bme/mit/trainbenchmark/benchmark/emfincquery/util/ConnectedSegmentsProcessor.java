@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.util;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 import org.eclipse.incquery.runtime.api.IMatchProcessor;
 
 /**
@@ -14,13 +15,20 @@ import org.eclipse.incquery.runtime.api.IMatchProcessor;
 public abstract class ConnectedSegmentsProcessor implements IMatchProcessor<ConnectedSegmentsMatch> {
   /**
    * Defines the action that is to be executed on each match.
-   * @param pSegment the value of pattern parameter segment in the currently processed match
+   * @param pSensor1 the value of pattern parameter sensor1 in the currently processed match
+   * @param pSensor2 the value of pattern parameter sensor2 in the currently processed match
+   * @param pSegment1 the value of pattern parameter segment1 in the currently processed match
+   * @param pSegment2 the value of pattern parameter segment2 in the currently processed match
+   * @param pSegment3 the value of pattern parameter segment3 in the currently processed match
+   * @param pSegment4 the value of pattern parameter segment4 in the currently processed match
+   * @param pSegment5 the value of pattern parameter segment5 in the currently processed match
+   * @param pSegment6 the value of pattern parameter segment6 in the currently processed match
    * 
    */
-  public abstract void process(final Segment pSegment);
+  public abstract void process(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6);
   
   @Override
   public void process(final ConnectedSegmentsMatch match) {
-    process(match.getSegment());
+    process(match.getSensor1(), match.getSensor2(), match.getSegment1(), match.getSegment2(), match.getSegment3(), match.getSegment4(), match.getSegment5(), match.getSegment6());
   }
 }

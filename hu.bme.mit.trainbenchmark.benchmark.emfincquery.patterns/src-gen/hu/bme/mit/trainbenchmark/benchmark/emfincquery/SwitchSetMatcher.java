@@ -2,6 +2,9 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SwitchSetQuerySpecification;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,17 +30,17 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern switchSet(switchPosition)
+ * pattern switchSet(semaphore, route, swP, sw)
  * {
  * 	Route.entry(route, semaphore);
- * 	Route.follows(route, switchPosition);
- * 	SwitchPosition.^switch(switchPosition, sw);
+ * 	Route.follows(route, swP);
+ * 	SwitchPosition.^switch(swP, sw);
  * 	
  * 	Semaphore.signal(semaphore, ::GO);
- * 	SwitchPosition.position(switchPosition, swPP);
- * 	Switch.currentPosition(sw, swCP);
+ * 	SwitchPosition.position(swP, swpPosition);
+ * 	Switch.currentPosition(sw, swCurrentPosition);
  * 
- * 	swPP != swCP;
+ * 	swpPosition != swCurrentPosition;
  * }
  * </pre></code>
  * 
@@ -66,7 +69,13 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
     return matcher;
   }
   
-  private final static int POSITION_SWITCHPOSITION = 0;
+  private final static int POSITION_SEMAPHORE = 0;
+  
+  private final static int POSITION_ROUTE = 1;
+  
+  private final static int POSITION_SWP = 2;
+  
+  private final static int POSITION_SW = 3;
   
   private final static Logger LOGGER = IncQueryLoggingUtil.getLogger(SwitchSetMatcher.class);
   
@@ -103,104 +112,277 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return matches represented as a SwitchSetMatch object.
    * 
    */
-  public Collection<SwitchSetMatch> getAllMatches(final SwitchPosition pSwitchPosition) {
-    return rawGetAllMatches(new Object[]{pSwitchPosition});
+  public Collection<SwitchSetMatch> getAllMatches(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return rawGetAllMatches(new Object[]{pSemaphore, pRoute, pSwP, pSw});
   }
   
   /**
    * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
    * Neither determinism nor randomness of selection is guaranteed.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return a match represented as a SwitchSetMatch object, or null if no match is found.
    * 
    */
-  public SwitchSetMatch getOneArbitraryMatch(final SwitchPosition pSwitchPosition) {
-    return rawGetOneArbitraryMatch(new Object[]{pSwitchPosition});
+  public SwitchSetMatch getOneArbitraryMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return rawGetOneArbitraryMatch(new Object[]{pSemaphore, pRoute, pSwP, pSw});
   }
   
   /**
    * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
    * under any possible substitution of the unspecified parameters (if any).
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return true if the input is a valid (partial) match of the pattern.
    * 
    */
-  public boolean hasMatch(final SwitchPosition pSwitchPosition) {
-    return rawHasMatch(new Object[]{pSwitchPosition});
+  public boolean hasMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return rawHasMatch(new Object[]{pSemaphore, pRoute, pSwP, pSw});
   }
   
   /**
    * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return the number of pattern matches found.
    * 
    */
-  public int countMatches(final SwitchPosition pSwitchPosition) {
-    return rawCountMatches(new Object[]{pSwitchPosition});
+  public int countMatches(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return rawCountMatches(new Object[]{pSemaphore, pRoute, pSwP, pSw});
   }
   
   /**
    * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @param processor the action that will process each pattern match.
    * 
    */
-  public void forEachMatch(final SwitchPosition pSwitchPosition, final IMatchProcessor<? super SwitchSetMatch> processor) {
-    rawForEachMatch(new Object[]{pSwitchPosition}, processor);
+  public void forEachMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw, final IMatchProcessor<? super SwitchSetMatch> processor) {
+    rawForEachMatch(new Object[]{pSemaphore, pRoute, pSwP, pSw}, processor);
   }
   
   /**
    * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
    * Neither determinism nor randomness of selection is guaranteed.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @param processor the action that will process the selected match.
    * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
    * 
    */
-  public boolean forOneArbitraryMatch(final SwitchPosition pSwitchPosition, final IMatchProcessor<? super SwitchSetMatch> processor) {
-    return rawForOneArbitraryMatch(new Object[]{pSwitchPosition}, processor);
+  public boolean forOneArbitraryMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw, final IMatchProcessor<? super SwitchSetMatch> processor) {
+    return rawForOneArbitraryMatch(new Object[]{pSemaphore, pRoute, pSwP, pSw}, processor);
   }
   
   /**
    * Returns a new (partial) match.
    * This can be used e.g. to call the matcher with a partial match.
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-   * @param pSwitchPosition the fixed value of pattern parameter switchPosition, or null if not bound.
+   * @param pSemaphore the fixed value of pattern parameter semaphore, or null if not bound.
+   * @param pRoute the fixed value of pattern parameter route, or null if not bound.
+   * @param pSwP the fixed value of pattern parameter swP, or null if not bound.
+   * @param pSw the fixed value of pattern parameter sw, or null if not bound.
    * @return the (partial) match object.
    * 
    */
-  public SwitchSetMatch newMatch(final SwitchPosition pSwitchPosition) {
-    return SwitchSetMatch.newMatch(pSwitchPosition);
+  public SwitchSetMatch newMatch(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return SwitchSetMatch.newMatch(pSemaphore, pRoute, pSwP, pSw);
   }
   
   /**
-   * Retrieve the set of values that occur in matches for switchPosition.
+   * Retrieve the set of values that occur in matches for semaphore.
    * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
    * 
    */
-  protected Set<SwitchPosition> rawAccumulateAllValuesOfswitchPosition(final Object[] parameters) {
-    Set<SwitchPosition> results = new HashSet<SwitchPosition>();
-    rawAccumulateAllValues(POSITION_SWITCHPOSITION, parameters, results);
+  protected Set<Semaphore> rawAccumulateAllValuesOfsemaphore(final Object[] parameters) {
+    Set<Semaphore> results = new HashSet<Semaphore>();
+    rawAccumulateAllValues(POSITION_SEMAPHORE, parameters, results);
     return results;
   }
   
   /**
-   * Retrieve the set of values that occur in matches for switchPosition.
+   * Retrieve the set of values that occur in matches for semaphore.
    * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
    * 
    */
-  public Set<SwitchPosition> getAllValuesOfswitchPosition() {
-    return rawAccumulateAllValuesOfswitchPosition(emptyArray());
+  public Set<Semaphore> getAllValuesOfsemaphore() {
+    return rawAccumulateAllValuesOfsemaphore(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for semaphore.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Semaphore> getAllValuesOfsemaphore(final SwitchSetMatch partialMatch) {
+    return rawAccumulateAllValuesOfsemaphore(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for semaphore.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Semaphore> getAllValuesOfsemaphore(final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
+    return rawAccumulateAllValuesOfsemaphore(new Object[]{
+    null, 
+    pRoute, 
+    pSwP, 
+    pSw
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for route.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Route> rawAccumulateAllValuesOfroute(final Object[] parameters) {
+    Set<Route> results = new HashSet<Route>();
+    rawAccumulateAllValues(POSITION_ROUTE, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for route.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Route> getAllValuesOfroute() {
+    return rawAccumulateAllValuesOfroute(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for route.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Route> getAllValuesOfroute(final SwitchSetMatch partialMatch) {
+    return rawAccumulateAllValuesOfroute(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for route.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Route> getAllValuesOfroute(final Semaphore pSemaphore, final SwitchPosition pSwP, final Switch pSw) {
+    return rawAccumulateAllValuesOfroute(new Object[]{
+    pSemaphore, 
+    null, 
+    pSwP, 
+    pSw
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for swP.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<SwitchPosition> rawAccumulateAllValuesOfswP(final Object[] parameters) {
+    Set<SwitchPosition> results = new HashSet<SwitchPosition>();
+    rawAccumulateAllValues(POSITION_SWP, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for swP.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<SwitchPosition> getAllValuesOfswP() {
+    return rawAccumulateAllValuesOfswP(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for swP.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<SwitchPosition> getAllValuesOfswP(final SwitchSetMatch partialMatch) {
+    return rawAccumulateAllValuesOfswP(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for swP.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<SwitchPosition> getAllValuesOfswP(final Semaphore pSemaphore, final Route pRoute, final Switch pSw) {
+    return rawAccumulateAllValuesOfswP(new Object[]{
+    pSemaphore, 
+    pRoute, 
+    null, 
+    pSw
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sw.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set<Switch> rawAccumulateAllValuesOfsw(final Object[] parameters) {
+    Set<Switch> results = new HashSet<Switch>();
+    rawAccumulateAllValues(POSITION_SW, parameters, results);
+    return results;
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sw.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Switch> getAllValuesOfsw() {
+    return rawAccumulateAllValuesOfsw(emptyArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sw.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Switch> getAllValuesOfsw(final SwitchSetMatch partialMatch) {
+    return rawAccumulateAllValuesOfsw(partialMatch.toArray());
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for sw.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set<Switch> getAllValuesOfsw(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP) {
+    return rawAccumulateAllValuesOfsw(new Object[]{
+    pSemaphore, 
+    pRoute, 
+    pSwP, 
+    null
+    });
   }
   
   @Override
   protected SwitchSetMatch tupleToMatch(final Tuple t) {
     try {
-    	return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.SwitchPosition) t.get(POSITION_SWITCHPOSITION));
+    	return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) t.get(POSITION_SEMAPHORE), (hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE), (hu.bme.mit.trainbenchmark.railway.SwitchPosition) t.get(POSITION_SWP), (hu.bme.mit.trainbenchmark.railway.Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -210,7 +392,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   @Override
   protected SwitchSetMatch arrayToMatch(final Object[] match) {
     try {
-    	return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWITCHPOSITION]);
+    	return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWP], (hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -220,7 +402,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   @Override
   protected SwitchSetMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SwitchSetMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWITCHPOSITION]);
+    	return SwitchSetMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWP], (hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

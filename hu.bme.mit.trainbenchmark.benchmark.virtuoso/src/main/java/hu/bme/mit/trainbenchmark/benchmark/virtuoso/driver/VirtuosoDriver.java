@@ -37,7 +37,7 @@ public class VirtuosoDriver extends SesameDriver{
 
 	@Override
 	public void beginTransaction() {
-		f = virtuosoRepository.getValueFactory();
+		vf = virtuosoRepository.getValueFactory();
 	}
 	
 	@Override
@@ -46,8 +46,8 @@ public class VirtuosoDriver extends SesameDriver{
 		final File modelFile = new File(modelPath);
 		try {
 			virtuosoRepository.initialize();
-			con = virtuosoRepository.getConnection();
-			con.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
+			connection = virtuosoRepository.getConnection();
+			connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 		}
 		catch (OpenRDFException e) {
 			throw new IOException(e);

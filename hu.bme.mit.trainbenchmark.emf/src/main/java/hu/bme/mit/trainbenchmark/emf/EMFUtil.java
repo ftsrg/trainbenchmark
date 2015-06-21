@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.emf;
 
+import hu.bme.mit.trainbenchmark.emf.xmi.XMIResourceFactoryImplWithUUID;
+
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;

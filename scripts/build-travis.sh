@@ -2,7 +2,6 @@
 
 cd "$( cd "$( dirname "$0" )" && pwd )/.."
 
-export MAVEN_OPTS="-XX:MaxPermSize=128M"
 ./scripts/build-artifacts.sh
 
 echo Running quiet build.

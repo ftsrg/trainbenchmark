@@ -1,3 +1,3 @@
-MATCH (s:Segment)
-WHERE s.length <= 0
-RETURN s
+MATCH (segment:Segment)
+WHERE segment.length <= 0
+RETURN segment
