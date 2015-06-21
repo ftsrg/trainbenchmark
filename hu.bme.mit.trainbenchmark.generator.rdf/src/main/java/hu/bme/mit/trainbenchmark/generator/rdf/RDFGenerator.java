@@ -42,16 +42,6 @@ public class RDFGenerator extends Generator {
 	protected RDFGeneratorConfig rdfGeneratorConfig;
 	protected BufferedWriter file;
 
-//	protected final Map<Object, String> resources = ImmutableMap.<Object, String>builder() //
-//			.put(Signal.FAILURE, ModelConstants.SIGNAL_FAILURE) //
-//			.put(Signal.STOP, ModelConstants.SIGNAL_STOP) // 
-//			.put(Signal.GO, ModelConstants.SIGNAL_GO) //
-//			.put(Position.LEFT, ModelConstants.SWITCH_LEFT) //
-//			.put(Position.STRAIGHT, ModelConstants.SWITCH_STRAIGHT) //
-//			.put(Position.RIGHT, ModelConstants.SWITCH_RIGHT) //
-//			.put(Position.FAILURE, ModelConstants.SWITCH_FAILURE) //
-//			.build(); 
-
 	@Override
 	public void initModel() throws IOException {
 		// source file (DDL operations)
@@ -126,7 +116,6 @@ public class RDFGenerator extends Generator {
 	}
 		
 	private String stringValue(final Object value) {
-		final String stringValue;
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^xsd:int", value);
 		} if (value instanceof Enum<?>) {
