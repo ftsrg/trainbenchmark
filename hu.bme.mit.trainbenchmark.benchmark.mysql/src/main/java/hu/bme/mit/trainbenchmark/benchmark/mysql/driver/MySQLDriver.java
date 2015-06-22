@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.google.common.base.Joiner;
+
 public class MySQLDriver extends SQLDriver {
 
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
@@ -28,17 +30,14 @@ public class MySQLDriver extends SQLDriver {
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + modelPathWithoutExtension + getExtension() };
-
+		final Joiner j = Joiner.on(" ");
+		System.out.println(j.join(command));
+		
 		try {
 			final Process pr = rt.exec(command);
 			pr.waitFor();
-		} catch (final Exception e) {
-			throw new IOException(e);
-		}
-
-		try {
 			connection = DriverManager.getConnection(url, user, password);
-		} catch (final SQLException e) {
+		} catch (final SQLException | InterruptedException e) {
 			throw new IOException(e);
 		}
 	}
