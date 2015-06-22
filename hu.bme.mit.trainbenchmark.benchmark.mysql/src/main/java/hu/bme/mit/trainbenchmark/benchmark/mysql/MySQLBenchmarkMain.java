@@ -15,21 +15,55 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql;
 import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
-
-import com.google.common.base.Joiner;
+import org.apache.commons.io.IOUtils;
 
 public class MySQLBenchmarkMain {
 
 	public static void main(final String[] args) throws IOException, ParseException, InterruptedException {
-//		 final MySQLBenchmarkLogic benchmarkLogic = new MySQLBenchmarkLogic(args);
-//		 benchmarkLogic.runBenchmark();
-		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c", "mysql -u root < ../models/railway-user-1.sql" };
-		final Joiner j = Joiner.on(" ");
-		System.out.println(j.join(command));
+		// final MySQLBenchmarkLogic benchmarkLogic = new MySQLBenchmarkLogic(args);
+		// benchmarkLogic.runBenchmark();
+		{
+			final Runtime rt = Runtime.getRuntime();
+			final String[] command = { "sudo", "service", "mysql", "stop" };
+			try {
+				final Process pr = rt.exec(command);
+				pr.waitFor();
+				System.out.println("stop " + pr.exitValue());
+			} catch (final Exception e) {
+				throw new IOException(e);
+			}
 
-		final Process pr = rt.exec(command);
-		pr.waitFor();
+		}
+
+		{
+			final Runtime rt = Runtime.getRuntime();
+			final String[] command = { "sudo", "service", "mysql", "start" };
+			try {
+				final Process pr = rt.exec(command);
+				pr.waitFor();
+				System.out.println("start " + pr.exitValue());
+			} catch (final Exception e) {
+				throw new IOException(e);
+			}
+		}
+
+		{
+			System.out.println("read");
+			final Runtime rt = Runtime.getRuntime();
+			final String[] command = { "/bin/bash", "-c", "mysql -u root < ../models/railway-repair-1.sql" };
+
+			try {
+				final Process pr = rt.exec(command);
+				pr.waitFor();
+				final String output = IOUtils.toString(pr.getInputStream());
+				System.out.println(pr.exitValue());
+				System.out.println(output);
+				System.out.println("ok");
+				System.exit(0);
+			} catch (final InterruptedException e) {
+				throw new IOException(e);
+			}
+		}
 	}
 
 }

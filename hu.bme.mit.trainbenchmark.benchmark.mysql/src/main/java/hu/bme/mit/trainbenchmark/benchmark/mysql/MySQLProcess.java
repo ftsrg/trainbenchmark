@@ -39,14 +39,15 @@ public class MySQLProcess {
 	public static void startSQLProcess() throws IOException {
 		stopSQLProcess();
 
-		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "sudo", "service", "mysql", "start" };
-		try {
-			final Process pr = rt.exec(command);
-			pr.waitFor();
-		} catch (final Exception e) {
-			throw new IOException(e);
-		}
+//		final Runtime rt = Runtime.getRuntime();
+//		final String[] command = { "sudo", "service", "mysql", "start" };
+//		try {
+//			final Process pr = rt.exec(command);
+//			pr.waitFor();
+//			System.out.println("start " + pr.exitValue());
+//		} catch (final Exception e) {
+//			throw new IOException(e);
+//		}
 	}
 
 	public static void stopSQLProcess() throws IOException {
@@ -55,6 +56,7 @@ public class MySQLProcess {
 		try {
 			final Process pr = rt.exec(command);
 			pr.waitFor();
+			System.out.println("stop " + pr.exitValue());
 		} catch (final Exception e) {
 			throw new IOException(e);
 		}
