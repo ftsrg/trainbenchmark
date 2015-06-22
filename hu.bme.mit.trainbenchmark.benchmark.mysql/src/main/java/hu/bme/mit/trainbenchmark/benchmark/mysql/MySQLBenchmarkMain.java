@@ -50,7 +50,7 @@ public class MySQLBenchmarkMain {
 		{
 			System.out.println("read");
 			final Runtime rt = Runtime.getRuntime();
-			final String[] command = { "/bin/bash", "-c", "mysql -u root < ../models/railway-repair-1.sql" };
+			final String[] command = { "/bin/bash", "-c", "mysql -u root < ../models/railway-user-1.sql" };
 
 			try {
 				final Process pr = rt.exec(command);
