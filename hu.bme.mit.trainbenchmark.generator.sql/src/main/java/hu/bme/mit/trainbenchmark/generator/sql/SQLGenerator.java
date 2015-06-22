@@ -92,7 +92,7 @@ public class SQLGenerator extends Generator {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
 
-		columns.append("`" + ID + "`");
+		columns.append("\"" + ID + "\"");
 		values.append(id);
 
 		structuralFeaturesToSQL(attributes, columns, values);
@@ -101,10 +101,10 @@ public class SQLGenerator extends Generator {
 
 		if (ancestors.containsKey(type)) {
 			final String ancestorType = ancestors.get(type);
-			write(String.format("INSERT INTO `%s` (%s) VALUES (%s);", ancestorType,  ID, id));
-			write(String.format("INSERT INTO `%s` (%s) VALUES (%s);", type, columns.toString(), values.toString()));
+			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", ancestorType,  ID, id));
+			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
-			final String insertQuery = String.format("INSERT INTO `%s` (%s) VALUES (%s);", type, columns.toString(), values.toString());
+			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());
 			write(insertQuery.toString());
 		}
 
@@ -119,9 +119,9 @@ public class SQLGenerator extends Generator {
 		
 		String insertQuery;
 		if (SENSOR_EDGE.equals(label)) {
-			insertQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", TRACKELEMENT, SENSOR_EDGE, to, ID, from);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, SENSOR_EDGE, to, ID, from);
 		} else {
-			insertQuery = String.format("INSERT INTO `%s` VALUES (%s, %s);", label, from, to);
+			insertQuery = String.format("INSERT INTO \"%s\" VALUES (%s, %s);", label, from, to);
 		}
 		write(insertQuery);
 	}
@@ -129,7 +129,7 @@ public class SQLGenerator extends Generator {
 	@Override
 	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE `%s` SET `%s` = %s WHERE `%s` = %s;", type, key, stringValue, ID, node);
+		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key, stringValue, ID, node);
 		write(updateQuery);
 	}
 
@@ -138,7 +138,7 @@ public class SQLGenerator extends Generator {
 			final String key = entry.getKey();
 			final Object value = entry.getValue();
 
-			columns.append(", `" + key + "`");
+			columns.append(", \"" + key + "\"");
 			values.append(", ");
 
 			final String stringValue = (value == null ? "NULL" : valueToString(value));
