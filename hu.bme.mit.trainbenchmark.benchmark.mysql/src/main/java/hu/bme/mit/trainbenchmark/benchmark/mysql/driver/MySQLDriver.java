@@ -15,10 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
 import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
 
 import java.io.IOException;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import com.google.common.base.Joiner;
 
 public class MySQLDriver extends SQLDriver {
 
@@ -28,18 +25,24 @@ public class MySQLDriver extends SQLDriver {
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
+//		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + modelPathWithoutExtension + getExtension() };
+		System.out.println("read");
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + modelPathWithoutExtension + getExtension() };
-		final Joiner j = Joiner.on(" ");
-		System.out.println(j.join(command));
+		final String[] command = { "/bin/bash", "-c", "mysql -u root < ../models/railway-user-1.sql" };
 		
 		try {
-			final Process pr = rt.exec(command);
+			final Process pr = rt.exec(command);			
 			pr.waitFor();
-			connection = DriverManager.getConnection(url, user, password);
-		} catch (final SQLException | InterruptedException e) {
+			System.out.println(pr.exitValue());
+			System.out.println("ok2");
+			System.exit(0);
+		} catch (final InterruptedException e) {
 			throw new IOException(e);
 		}
+//			connection = DriverManager.getConnection(url, user, password);
+//		} catch (final SQLException | InterruptedException e) {
+//			throw new IOException(e);
+//		}
 	}
 
 	@Override
