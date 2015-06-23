@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import org.neo4j.graphdb.Node;
@@ -25,4 +26,9 @@ public abstract class Neo4jMatch {
 
 	public abstract Node[] toArray();
 
+	@Override
+	public String toString() {
+		return "Neo4jMatch [match=" + Arrays.toString(toArray()) + "]";
+	}
+	
 }

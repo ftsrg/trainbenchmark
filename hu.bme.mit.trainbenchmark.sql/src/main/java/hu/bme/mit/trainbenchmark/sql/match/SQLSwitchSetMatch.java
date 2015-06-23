@@ -11,6 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.sql.match;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_POSITION;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
@@ -23,7 +25,8 @@ import java.sql.SQLException;
 public class SQLSwitchSetMatch extends SQLMatch implements SwitchSetMatch {
 
 	public SQLSwitchSetMatch(final ResultSet rs) throws SQLException {
-		match = new Long[] { rs.getLong(VAR_SEMAPHORE), rs.getLong(VAR_ROUTE), rs.getLong(VAR_SWP), rs.getLong(VAR_SW) };
+		match = new Long[] { rs.getLong(VAR_SEMAPHORE), rs.getLong(VAR_ROUTE), rs.getLong(VAR_SWP), rs.getLong(VAR_SW),
+				rs.getLong(VAR_POSITION), rs.getLong(VAR_CURRENTPOSITION) };
 	}
 
 	@Override
@@ -44,6 +47,14 @@ public class SQLSwitchSetMatch extends SQLMatch implements SwitchSetMatch {
 	@Override
 	public Long getSw() {
 		return match[3];
+	}
+
+	public Long getPosition() {
+		return match[4];
+	}
+
+	public Long getCurrentPosition() {
+		return match[5];
 	}
 
 }

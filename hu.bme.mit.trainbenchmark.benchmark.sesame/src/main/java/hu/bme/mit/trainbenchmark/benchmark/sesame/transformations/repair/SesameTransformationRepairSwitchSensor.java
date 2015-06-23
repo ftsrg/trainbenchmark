@@ -39,19 +39,19 @@ public class SesameTransformationRepairSwitchSensor extends SesameTransformation
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
-		final URI sensorEdge = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
+		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
 		final URI sensorType = vf.createURI(BASE_PREFIX + SENSOR);
 
 		try {
 			for (final SesameSwitchSensorMatch match : matches) {
 				final Resource sw = match.getSw();
 
-				final URI sensorURI = vf.createURI(BASE_PREFIX + ID_PREFIX + sesameDriver.getNewVertexId());
+				final URI sensor = vf.createURI(BASE_PREFIX + ID_PREFIX + sesameDriver.getNewVertexId());
 
 				// set vertex type
-				con.add(sensorURI, RDF.TYPE, sensorType);
+				con.add(sensor, RDF.TYPE, sensorType);
 				// insert edge
-				con.add(sw, sensorEdge, sensorURI);
+				con.add(sw, sensorEdgeType, sensor);
 			}
 		} catch (final RepositoryException e) {
 			throw new IOException(e);

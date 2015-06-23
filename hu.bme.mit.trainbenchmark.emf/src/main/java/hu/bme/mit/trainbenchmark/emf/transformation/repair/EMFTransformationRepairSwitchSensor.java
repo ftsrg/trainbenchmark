@@ -21,9 +21,9 @@ public class EMFTransformationRepairSwitchSensor extends EMFTransformationRepair
 
 	@Override
 	public void rhs(final Collection<EMFSwitchSensorMatch> matches) {
-		for (final EMFSwitchSensorMatch match : matches) {
+		for (final EMFSwitchSensorMatch ssnm : matches) {
 			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
-			match.getSw().setSensor(sensor);
+			ssnm.getSw().setSensor(sensor);
 		}
 	}
 

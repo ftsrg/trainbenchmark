@@ -20,7 +20,6 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 
 import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public class JenaSwitchSetMatch extends JenaMatch implements SwitchSetMatch {
@@ -49,12 +48,12 @@ public class JenaSwitchSetMatch extends JenaMatch implements SwitchSetMatch {
 		return qs.getResource(VAR_SW);
 	}
 
-	public Literal getPosition() {
-		return qs.getLiteral(VAR_POSITION);
+	public Resource getPosition() {
+		return qs.getResource(VAR_POSITION);
 	}
 
-	public Literal getCurrentPosition() {
-		return qs.getLiteral(VAR_CURRENTPOSITION);
+	public Resource getCurrentPosition() {
+		return qs.getResource(VAR_CURRENTPOSITION);
 	}
 
 	@Override

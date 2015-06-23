@@ -28,9 +28,6 @@ public abstract class Driver<T> {
 	public void finishTransaction() throws IOException {
 	}
 
-	public void init() throws IOException {
-	}
-
 	public void destroy() throws IOException {
 	}
 

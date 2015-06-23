@@ -18,9 +18,9 @@ import org.apache.commons.cli.ParseException;
 
 public class MySQLBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		MySQLBenchmarkLogic benchmarkLogic = new MySQLBenchmarkLogic(args);
-		benchmarkLogic.runBenchmark();
+	public static void main(final String[] args) throws IOException, ParseException, InterruptedException {
+		 final MySQLBenchmarkLogic benchmarkLogic = new MySQLBenchmarkLogic(args);
+		 benchmarkLogic.runBenchmark();
 	}
 
 }

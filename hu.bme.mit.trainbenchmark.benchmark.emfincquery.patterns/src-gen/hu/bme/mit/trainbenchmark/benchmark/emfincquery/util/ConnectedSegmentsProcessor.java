@@ -15,8 +15,7 @@ import org.eclipse.incquery.runtime.api.IMatchProcessor;
 public abstract class ConnectedSegmentsProcessor implements IMatchProcessor<ConnectedSegmentsMatch> {
   /**
    * Defines the action that is to be executed on each match.
-   * @param pSensor1 the value of pattern parameter sensor1 in the currently processed match
-   * @param pSensor2 the value of pattern parameter sensor2 in the currently processed match
+   * @param pSensor the value of pattern parameter sensor in the currently processed match
    * @param pSegment1 the value of pattern parameter segment1 in the currently processed match
    * @param pSegment2 the value of pattern parameter segment2 in the currently processed match
    * @param pSegment3 the value of pattern parameter segment3 in the currently processed match
@@ -25,10 +24,10 @@ public abstract class ConnectedSegmentsProcessor implements IMatchProcessor<Conn
    * @param pSegment6 the value of pattern parameter segment6 in the currently processed match
    * 
    */
-  public abstract void process(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6);
+  public abstract void process(final Sensor pSensor, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6);
   
   @Override
   public void process(final ConnectedSegmentsMatch match) {
-    process(match.getSensor1(), match.getSensor2(), match.getSegment1(), match.getSegment2(), match.getSegment3(), match.getSegment4(), match.getSegment5(), match.getSegment6());
+    process(match.getSensor(), match.getSegment1(), match.getSegment2(), match.getSegment3(), match.getSegment4(), match.getSegment5(), match.getSegment6());
   }
 }

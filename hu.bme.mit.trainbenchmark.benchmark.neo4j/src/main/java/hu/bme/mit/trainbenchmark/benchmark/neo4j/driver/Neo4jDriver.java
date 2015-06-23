@@ -16,6 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
@@ -54,7 +55,7 @@ import org.neo4j.shell.tools.imp.util.MapNodeCache;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jDriver extends Driver<Node> {
-
+	
 	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(DEFINED_BY);
 	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
 	protected final RelationshipType sensorEdge = DynamicRelationshipType.withName(SENSOR_EDGE);
@@ -118,6 +119,8 @@ public class Neo4jDriver extends Driver<Node> {
 
 	protected Neo4jMatch createMatch(final Query query, final Map<String, Object> row) {
 		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new Neo4jConnectedSegmentsMatch(row);
 		case POSLENGTH:
 			return new Neo4jPosLengthMatch(row);
 		case ROUTESENSOR:

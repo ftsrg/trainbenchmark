@@ -24,9 +24,7 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
  */
 @SuppressWarnings("all")
 public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
-  private Sensor fSensor1;
-  
-  private Sensor fSensor2;
+  private Sensor fSensor;
   
   private Segment fSegment1;
   
@@ -40,11 +38,10 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   
   private Segment fSegment6;
   
-  private static List<String> parameterNames = makeImmutableList("sensor1", "sensor2", "segment1", "segment2", "segment3", "segment4", "segment5", "segment6");
+  private static List<String> parameterNames = makeImmutableList("sensor", "segment1", "segment2", "segment3", "segment4", "segment5", "segment6");
   
-  private ConnectedSegmentsMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
-    this.fSensor1 = pSensor1;
-    this.fSensor2 = pSensor2;
+  private ConnectedSegmentsMatch(final Sensor pSensor, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    this.fSensor = pSensor;
     this.fSegment1 = pSegment1;
     this.fSegment2 = pSegment2;
     this.fSegment3 = pSegment3;
@@ -55,8 +52,7 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   
   @Override
   public Object get(final String parameterName) {
-    if ("sensor1".equals(parameterName)) return this.fSensor1;
-    if ("sensor2".equals(parameterName)) return this.fSensor2;
+    if ("sensor".equals(parameterName)) return this.fSensor;
     if ("segment1".equals(parameterName)) return this.fSegment1;
     if ("segment2".equals(parameterName)) return this.fSegment2;
     if ("segment3".equals(parameterName)) return this.fSegment3;
@@ -66,12 +62,8 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
     return null;
   }
   
-  public Sensor getSensor1() {
-    return this.fSensor1;
-  }
-  
-  public Sensor getSensor2() {
-    return this.fSensor2;
+  public Sensor getSensor() {
+    return this.fSensor;
   }
   
   public Segment getSegment1() {
@@ -101,12 +93,8 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   @Override
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    if ("sensor1".equals(parameterName) ) {
-    	this.fSensor1 = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
-    	return true;
-    }
-    if ("sensor2".equals(parameterName) ) {
-    	this.fSensor2 = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
+    if ("sensor".equals(parameterName) ) {
+    	this.fSensor = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
     	return true;
     }
     if ("segment1".equals(parameterName) ) {
@@ -136,14 +124,9 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
     return false;
   }
   
-  public void setSensor1(final Sensor pSensor1) {
+  public void setSensor(final Sensor pSensor) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    this.fSensor1 = pSensor1;
-  }
-  
-  public void setSensor2(final Sensor pSensor2) {
-    if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-    this.fSensor2 = pSensor2;
+    this.fSensor = pSensor;
   }
   
   public void setSegment1(final Segment pSegment1) {
@@ -188,20 +171,18 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   
   @Override
   public Object[] toArray() {
-    return new Object[]{fSensor1, fSensor2, fSegment1, fSegment2, fSegment3, fSegment4, fSegment5, fSegment6};
+    return new Object[]{fSensor, fSegment1, fSegment2, fSegment3, fSegment4, fSegment5, fSegment6};
   }
   
   @Override
   public ConnectedSegmentsMatch toImmutable() {
-    return isMutable() ? newMatch(fSensor1, fSensor2, fSegment1, fSegment2, fSegment3, fSegment4, fSegment5, fSegment6) : this;
+    return isMutable() ? newMatch(fSensor, fSegment1, fSegment2, fSegment3, fSegment4, fSegment5, fSegment6) : this;
   }
   
   @Override
   public String prettyPrint() {
     StringBuilder result = new StringBuilder();
-    result.append("\"sensor1\"=" + prettyPrintValue(fSensor1) + ", ");
-    
-    result.append("\"sensor2\"=" + prettyPrintValue(fSensor2) + ", ");
+    result.append("\"sensor\"=" + prettyPrintValue(fSensor) + ", ");
     
     result.append("\"segment1\"=" + prettyPrintValue(fSegment1) + ", ");
     
@@ -222,8 +203,7 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((fSensor1 == null) ? 0 : fSensor1.hashCode());
-    result = prime * result + ((fSensor2 == null) ? 0 : fSensor2.hashCode());
+    result = prime * result + ((fSensor == null) ? 0 : fSensor.hashCode());
     result = prime * result + ((fSegment1 == null) ? 0 : fSegment1.hashCode());
     result = prime * result + ((fSegment2 == null) ? 0 : fSegment2.hashCode());
     result = prime * result + ((fSegment3 == null) ? 0 : fSegment3.hashCode());
@@ -250,10 +230,8 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     ConnectedSegmentsMatch other = (ConnectedSegmentsMatch) obj;
-    if (fSensor1 == null) {if (other.fSensor1 != null) return false;}
-    else if (!fSensor1.equals(other.fSensor1)) return false;
-    if (fSensor2 == null) {if (other.fSensor2 != null) return false;}
-    else if (!fSensor2.equals(other.fSensor2)) return false;
+    if (fSensor == null) {if (other.fSensor != null) return false;}
+    else if (!fSensor.equals(other.fSensor)) return false;
     if (fSegment1 == null) {if (other.fSegment1 != null) return false;}
     else if (!fSegment1.equals(other.fSegment1)) return false;
     if (fSegment2 == null) {if (other.fSegment2 != null) return false;}
@@ -287,15 +265,14 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
    * 
    */
   public static ConnectedSegmentsMatch newEmptyMatch() {
-    return new Mutable(null, null, null, null, null, null, null, null);
+    return new Mutable(null, null, null, null, null, null, null);
   }
   
   /**
    * Returns a mutable (partial) match.
    * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
    * 
-   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
-   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSensor the fixed value of pattern parameter sensor, or null if not bound.
    * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
    * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
    * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
@@ -305,16 +282,15 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static ConnectedSegmentsMatch newMutableMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
-    return new Mutable(pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
+  public static ConnectedSegmentsMatch newMutableMatch(final Sensor pSensor, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return new Mutable(pSensor, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
   }
   
   /**
    * Returns a new (partial) match.
    * This can be used e.g. to call the matcher with a partial match.
    * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-   * @param pSensor1 the fixed value of pattern parameter sensor1, or null if not bound.
-   * @param pSensor2 the fixed value of pattern parameter sensor2, or null if not bound.
+   * @param pSensor the fixed value of pattern parameter sensor, or null if not bound.
    * @param pSegment1 the fixed value of pattern parameter segment1, or null if not bound.
    * @param pSegment2 the fixed value of pattern parameter segment2, or null if not bound.
    * @param pSegment3 the fixed value of pattern parameter segment3, or null if not bound.
@@ -324,13 +300,13 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
    * @return the (partial) match object.
    * 
    */
-  public static ConnectedSegmentsMatch newMatch(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
-    return new Immutable(pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
+  public static ConnectedSegmentsMatch newMatch(final Sensor pSensor, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+    return new Immutable(pSensor, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
   }
   
   private static final class Mutable extends ConnectedSegmentsMatch {
-    Mutable(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
-      super(pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
+    Mutable(final Sensor pSensor, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+      super(pSensor, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
     }
     
     @Override
@@ -340,8 +316,8 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   }
   
   private static final class Immutable extends ConnectedSegmentsMatch {
-    Immutable(final Sensor pSensor1, final Sensor pSensor2, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
-      super(pSensor1, pSensor2, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
+    Immutable(final Sensor pSensor, final Segment pSegment1, final Segment pSegment2, final Segment pSegment3, final Segment pSegment4, final Segment pSegment5, final Segment pSegment6) {
+      super(pSensor, pSegment1, pSegment2, pSegment3, pSegment4, pSegment5, pSegment6);
     }
     
     @Override

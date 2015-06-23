@@ -214,10 +214,10 @@
 
 :_4 :sensor :_41 .
 
-:_4 :currentPosition :SWITCH_RIGHT.
+:_4 :currentPosition :POSITION_RIGHT.
 
 :_47 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_4 .
 
 :_3 :follows :_47 .
@@ -458,10 +458,10 @@
 
 :_48 :sensor :_91 .
 
-:_48 :currentPosition :SWITCH_LEFT.
+:_48 :currentPosition :POSITION_LEFT.
 
 :_97 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_48 .
 
 :_3 :follows :_97 .
@@ -528,10 +528,10 @@
 
 :_98 :sensor :_105 .
 
-:_98 :currentPosition :SWITCH_FAILURE.
+:_98 :currentPosition :POSITION_FAILURE.
 
 :_111 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_98 .
 
 :_3 :follows :_111 .
@@ -656,10 +656,10 @@
 
 :_112 :sensor :_131 .
 
-:_112 :currentPosition :SWITCH_RIGHT.
+:_112 :currentPosition :POSITION_RIGHT.
 
 :_137 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_112 .
 
 :_3 :follows :_137 .
@@ -840,10 +840,10 @@
 
 :_138 :sensor :_169 .
 
-:_138 :currentPosition :SWITCH_RIGHT.
+:_138 :currentPosition :POSITION_RIGHT.
 
 :_175 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_138 .
 
 :_3 :follows :_175 .
@@ -966,10 +966,10 @@
 
 :_176 :sensor :_195 .
 
-:_176 :currentPosition :SWITCH_STRAIGHT.
+:_176 :currentPosition :POSITION_STRAIGHT.
 
 :_201 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_176 .
 
 :_3 :follows :_201 .
@@ -1237,10 +1237,10 @@
 
 :_202 :sensor :_251 .
 
-:_202 :currentPosition :SWITCH_LEFT.
+:_202 :currentPosition :POSITION_LEFT.
 
 :_257 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_202 .
 
 :_3 :follows :_257 .
@@ -1394,10 +1394,10 @@
 
 :_258 :sensor :_283 .
 
-:_258 :currentPosition :SWITCH_STRAIGHT.
+:_258 :currentPosition :POSITION_STRAIGHT.
 
 :_289 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_258 .
 
 :_3 :follows :_289 .
@@ -1491,10 +1491,10 @@
 
 :_290 :sensor :_303 .
 
-:_290 :currentPosition :SWITCH_LEFT.
+:_290 :currentPosition :POSITION_LEFT.
 
 :_309 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_290 .
 
 :_3 :follows :_309 .
@@ -1532,10 +1532,10 @@
 
 :_310 :sensor :_311 .
 
-:_310 :currentPosition :SWITCH_LEFT.
+:_310 :currentPosition :POSITION_LEFT.
 
 :_317 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_310 .
 
 :_3 :follows :_317 .
@@ -1716,10 +1716,10 @@
 
 :_354 :sensor :_349 .
 
-:_318 :currentPosition :SWITCH_FAILURE.
+:_318 :currentPosition :POSITION_FAILURE.
 
 :_355 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_318 .
 
 :_3 :follows :_355 .
@@ -1813,10 +1813,10 @@
 
 :_356 :sensor :_369 .
 
-:_356 :currentPosition :SWITCH_FAILURE.
+:_356 :currentPosition :POSITION_FAILURE.
 
 :_375 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_356 .
 
 :_3 :follows :_375 .
@@ -1852,10 +1852,10 @@
 
 :_376 :sensor :_377 .
 
-:_376 :currentPosition :SWITCH_STRAIGHT.
+:_376 :currentPosition :POSITION_STRAIGHT.
 
 :_383 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_376 .
 
 :_3 :follows :_383 .
@@ -2012,10 +2012,10 @@
 
 :_384 :sensor :_409 .
 
-:_384 :currentPosition :SWITCH_STRAIGHT.
+:_384 :currentPosition :POSITION_STRAIGHT.
 
 :_416 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_384 .
 
 :_3 :follows :_416 .
@@ -2281,10 +2281,10 @@
 
 :_417 :sensor :_466 .
 
-:_417 :currentPosition :SWITCH_FAILURE.
+:_417 :currentPosition :POSITION_FAILURE.
 
 :_472 a :SwitchPosition ;
-	:position :SWITCH_FAILURE ;
+	:position :POSITION_FAILURE ;
 	:switch :_417 .
 
 :_3 :follows :_472 .
@@ -3176,10 +3176,10 @@
 
 :_475 :sensor :_494 .
 
-:_475 :currentPosition :SWITCH_RIGHT.
+:_475 :currentPosition :POSITION_RIGHT.
 
 :_500 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_475 .
 
 :_474 :follows :_500 .
@@ -3329,10 +3329,10 @@
 
 :_501 :sensor :_526 .
 
-:_501 :currentPosition :SWITCH_RIGHT.
+:_501 :currentPosition :POSITION_RIGHT.
 
 :_532 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_501 .
 
 :_474 :follows :_532 .
@@ -3645,10 +3645,10 @@
 
 :_535 :sensor :_572 .
 
-:_535 :currentPosition :SWITCH_LEFT.
+:_535 :currentPosition :POSITION_LEFT.
 
 :_578 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_535 .
 
 :_534 :follows :_578 .
@@ -3852,10 +3852,10 @@
 
 :_579 :sensor :_616 .
 
-:_579 :currentPosition :SWITCH_STRAIGHT.
+:_579 :currentPosition :POSITION_STRAIGHT.
 
 :_622 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_579 .
 
 :_534 :follows :_622 .
@@ -4007,10 +4007,10 @@
 
 :_623 :sensor :_648 .
 
-:_623 :currentPosition :SWITCH_LEFT.
+:_623 :currentPosition :POSITION_LEFT.
 
 :_654 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_623 .
 
 :_534 :follows :_654 .
@@ -4105,10 +4105,10 @@
 
 :_674 :sensor :_669 .
 
-:_655 :currentPosition :SWITCH_FAILURE.
+:_655 :currentPosition :POSITION_FAILURE.
 
 :_675 a :SwitchPosition ;
-	:position :SWITCH_FAILURE ;
+	:position :POSITION_FAILURE ;
 	:switch :_655 .
 
 :_534 :follows :_675 .
@@ -4146,10 +4146,10 @@
 
 :_676 :sensor :_677 .
 
-:_676 :currentPosition :SWITCH_LEFT.
+:_676 :currentPosition :POSITION_LEFT.
 
 :_683 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_676 .
 
 :_534 :follows :_683 .
@@ -4187,10 +4187,10 @@
 
 :_684 :sensor :_685 .
 
-:_684 :currentPosition :SWITCH_LEFT.
+:_684 :currentPosition :POSITION_LEFT.
 
 :_691 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_684 .
 
 :_534 :follows :_691 .
@@ -4434,10 +4434,10 @@
 
 :_692 :sensor :_736 .
 
-:_692 :currentPosition :SWITCH_LEFT.
+:_692 :currentPosition :POSITION_LEFT.
 
 :_742 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_692 .
 
 :_534 :follows :_742 .
@@ -4618,10 +4618,10 @@
 
 :_743 :sensor :_774 .
 
-:_743 :currentPosition :SWITCH_FAILURE.
+:_743 :currentPosition :POSITION_FAILURE.
 
 :_780 a :SwitchPosition ;
-	:position :SWITCH_FAILURE ;
+	:position :POSITION_FAILURE ;
 	:switch :_743 .
 
 :_534 :follows :_780 .
@@ -4831,10 +4831,10 @@
 
 :_781 :sensor :_818 .
 
-:_781 :currentPosition :SWITCH_STRAIGHT.
+:_781 :currentPosition :POSITION_STRAIGHT.
 
 :_824 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_781 .
 
 :_534 :follows :_824 .
@@ -4901,10 +4901,10 @@
 
 :_825 :sensor :_832 .
 
-:_825 :currentPosition :SWITCH_STRAIGHT.
+:_825 :currentPosition :POSITION_STRAIGHT.
 
 :_838 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_825 .
 
 :_534 :follows :_838 .
@@ -5000,10 +5000,10 @@
 
 :_839 :sensor :_852 .
 
-:_839 :currentPosition :SWITCH_STRAIGHT.
+:_839 :currentPosition :POSITION_STRAIGHT.
 
 :_858 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_839 .
 
 :_534 :follows :_858 .
@@ -5184,10 +5184,10 @@
 
 :_859 :sensor :_890 .
 
-:_859 :currentPosition :SWITCH_LEFT.
+:_859 :currentPosition :POSITION_LEFT.
 
 :_896 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_859 .
 
 :_534 :follows :_896 .
@@ -5878,10 +5878,10 @@
 
 :_899 :sensor :_912 .
 
-:_899 :currentPosition :SWITCH_STRAIGHT.
+:_899 :currentPosition :POSITION_STRAIGHT.
 
 :_918 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_899 .
 
 :_898 :follows :_918 .
@@ -6058,10 +6058,10 @@
 
 :_955 :sensor :_950 .
 
-:_919 :currentPosition :SWITCH_STRAIGHT.
+:_919 :currentPosition :POSITION_STRAIGHT.
 
 :_956 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_919 .
 
 :_898 :follows :_956 .
@@ -6215,10 +6215,10 @@
 
 :_957 :sensor :_982 .
 
-:_957 :currentPosition :SWITCH_LEFT.
+:_957 :currentPosition :POSITION_LEFT.
 
 :_988 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_957 .
 
 :_898 :follows :_988 .
@@ -6457,10 +6457,10 @@
 
 :_1037 :sensor :_1032 .
 
-:_989 :currentPosition :SWITCH_LEFT.
+:_989 :currentPosition :POSITION_LEFT.
 
 :_1038 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_989 .
 
 :_898 :follows :_1038 .
@@ -6726,10 +6726,10 @@
 
 :_1039 :sensor :_1088 .
 
-:_1039 :currentPosition :SWITCH_RIGHT.
+:_1039 :currentPosition :POSITION_RIGHT.
 
 :_1094 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_1039 .
 
 :_898 :follows :_1094 .
@@ -7322,10 +7322,10 @@
 
 :_1096 :sensor :_1146 .
 
-:_1096 :currentPosition :SWITCH_LEFT.
+:_1096 :currentPosition :POSITION_LEFT.
 
 :_1152 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_1096 .
 
 :_1095 :follows :_1152 .
@@ -7589,10 +7589,10 @@
 
 :_1153 :sensor :_1202 .
 
-:_1153 :currentPosition :SWITCH_FAILURE.
+:_1153 :currentPosition :POSITION_FAILURE.
 
 :_1208 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_1153 .
 
 :_1095 :follows :_1208 .
@@ -7659,10 +7659,10 @@
 
 :_1209 :sensor :_1216 .
 
-:_1209 :currentPosition :SWITCH_FAILURE.
+:_1209 :currentPosition :POSITION_FAILURE.
 
 :_1222 a :SwitchPosition ;
-	:position :SWITCH_FAILURE ;
+	:position :POSITION_FAILURE ;
 	:switch :_1209 .
 
 :_1095 :follows :_1222 .
@@ -7899,10 +7899,10 @@
 
 :_1223 :sensor :_1266 .
 
-:_1223 :currentPosition :SWITCH_RIGHT.
+:_1223 :currentPosition :POSITION_RIGHT.
 
 :_1272 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_1223 .
 
 :_1095 :follows :_1272 .
@@ -7969,10 +7969,10 @@
 
 :_1273 :sensor :_1280 .
 
-:_1273 :currentPosition :SWITCH_FAILURE.
+:_1273 :currentPosition :POSITION_FAILURE.
 
 :_1286 a :SwitchPosition ;
-	:position :SWITCH_FAILURE ;
+	:position :POSITION_FAILURE ;
 	:switch :_1273 .
 
 :_1095 :follows :_1286 .
@@ -8066,10 +8066,10 @@
 
 :_1287 :sensor :_1300 .
 
-:_1287 :currentPosition :SWITCH_LEFT.
+:_1287 :currentPosition :POSITION_LEFT.
 
 :_1306 a :SwitchPosition ;
-	:position :SWITCH_LEFT ;
+	:position :POSITION_LEFT ;
 	:switch :_1287 .
 
 :_1095 :follows :_1306 .
@@ -8107,10 +8107,10 @@
 
 :_1307 :sensor :_1308 .
 
-:_1307 :currentPosition :SWITCH_STRAIGHT.
+:_1307 :currentPosition :POSITION_STRAIGHT.
 
 :_1314 a :SwitchPosition ;
-	:position :SWITCH_FAILURE ;
+	:position :POSITION_FAILURE ;
 	:switch :_1307 .
 
 :_1095 :follows :_1314 .
@@ -8148,10 +8148,10 @@
 
 :_1315 :sensor :_1316 .
 
-:_1315 :currentPosition :SWITCH_LEFT.
+:_1315 :currentPosition :POSITION_LEFT.
 
 :_1322 a :SwitchPosition ;
-	:position :SWITCH_RIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_1315 .
 
 :_1095 :follows :_1322 .
@@ -8189,10 +8189,10 @@
 
 :_1323 :sensor :_1324 .
 
-:_1323 :currentPosition :SWITCH_STRAIGHT.
+:_1323 :currentPosition :POSITION_STRAIGHT.
 
 :_1330 a :SwitchPosition ;
-	:position :SWITCH_STRAIGHT ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_1323 .
 
 :_1095 :follows :_1330 .

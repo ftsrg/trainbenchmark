@@ -61,7 +61,7 @@ public class GraphGenerator extends Generator {
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
-			FileUtils.deleteRecursively(new File(databasePath));
+			FileUtils.deleteDirectory(new File(databasePath));
 		}
 
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databasePath);
@@ -156,7 +156,7 @@ public class GraphGenerator extends Generator {
 				final Config config = Config.config();
 				xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 				tx.success();
-				
+
 				final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
 				
 				String graphmlContent = writer.toString();

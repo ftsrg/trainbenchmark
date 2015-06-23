@@ -15,10 +15,6 @@ public class RDFUtil {
 		}
 	}
 
-	public static String toURI(final String prefix, final long id) {
-		return prefix + "x" + id;
-	}
-	
 	public static String toLiteral(final Object o) {
 		final URI uri = new URIImpl("http://www.w3.org/2001/XMLSchema#int");
 		final Literal lit = new LiteralImpl(o.toString(), uri);

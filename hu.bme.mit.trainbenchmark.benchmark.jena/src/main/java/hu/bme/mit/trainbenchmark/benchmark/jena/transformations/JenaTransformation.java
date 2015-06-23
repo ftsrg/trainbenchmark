@@ -13,11 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserSemaphoreNeighbor;
@@ -38,6 +40,8 @@ public abstract class JenaTransformation<M> extends Transformation<M> {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new JenaTransformationRepairConnectedSegments(jenaDriver);
 			case POSLENGTH:
 				return new JenaTransformationRepairPosLength(jenaDriver);
 			case ROUTESENSOR:
@@ -53,6 +57,8 @@ public abstract class JenaTransformation<M> extends Transformation<M> {
 			}
 		case USER:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new JenaTransformationUserConnectedSegments(jenaDriver);
 			case POSLENGTH:
 				return new JenaTransformationUserPosLength(jenaDriver);
 			case ROUTESENSOR:

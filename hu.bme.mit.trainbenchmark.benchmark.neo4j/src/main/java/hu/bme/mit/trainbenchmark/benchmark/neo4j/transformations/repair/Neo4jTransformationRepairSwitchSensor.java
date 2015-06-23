@@ -28,10 +28,9 @@ public class Neo4jTransformationRepairSwitchSensor extends Neo4jTransformationRe
 
 	@Override
 	public void rhs(final Collection<Neo4jSwitchSensorMatch> matches) {
-		for (final Neo4jSwitchSensorMatch ssm : matches) {
-			final Node sw = ssm.getSw();
-			final Node sensor = neoDriver.getGraphDb().createNode();
-			sensor.addLabel(labelSensor);
+		for (final Neo4jSwitchSensorMatch ssnm : matches) {
+			final Node sw = ssnm.getSw();
+			final Node sensor = neoDriver.getGraphDb().createNode(labelSensor);
 			sw.createRelationshipTo(sensor, relationshipTypeSensor);
 		}
 	}

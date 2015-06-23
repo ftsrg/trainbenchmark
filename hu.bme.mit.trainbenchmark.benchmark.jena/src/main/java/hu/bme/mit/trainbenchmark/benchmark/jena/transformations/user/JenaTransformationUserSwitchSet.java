@@ -11,13 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 import java.util.Collection;
 
-import org.apache.commons.lang.NotImplementedException;
-
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Selector;
+import com.hp.hpl.jena.rdf.model.SimpleSelector;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 public class JenaTransformationUserSwitchSet extends JenaTransformationUser {
 
@@ -27,7 +36,34 @@ public class JenaTransformationUserSwitchSet extends JenaTransformationUser {
 
 	@Override
 	public void rhs(final Collection<Resource> switches) {
-		throw new NotImplementedException();
+		final Model model = jenaDriver.getModel();
+		final Property currentPositionProperty = model.getProperty(BASE_PREFIX + CURRENTPOSITION);
+
+		for (final Resource sw : switches) {
+			final Selector selector = new SimpleSelector(sw, currentPositionProperty, (RDFNode) null);
+			final StmtIterator statementsToRemove = model.listStatements(selector);
+			if (!statementsToRemove.hasNext()) {
+				continue;
+
+			}
+			
+			// delete old statement
+			final Statement oldStatement = statementsToRemove.next();
+			model.remove(oldStatement);
+
+			// get next enum value
+			final Resource object = oldStatement.getObject().asResource();
+			final String currentPositionRDFString = object.getLocalName();
+			final String currentPositionString = RDFHelper.removePrefix(Position.class, currentPositionRDFString);
+			final Position currentPosition = Position.valueOf(currentPositionString);
+			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
+			final String newCurrentPositionString  = RDFHelper.addEnumPrefix(newCurrentPosition);
+
+			// set new value			
+			final Statement newStatement = model.createLiteralStatement(sw, currentPositionProperty, newCurrentPositionString);
+			model.add(newStatement);
+
+		}
 	}
 
 }
