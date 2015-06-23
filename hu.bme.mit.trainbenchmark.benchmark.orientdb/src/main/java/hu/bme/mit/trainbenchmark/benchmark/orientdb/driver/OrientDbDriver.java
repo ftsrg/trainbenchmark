@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.Lists;
+import com.orientechnologies.common.log.OLogManager;
 import com.orientechnologies.orient.core.exception.OConcurrentModificationException;
 import com.orientechnologies.orient.graph.gremlin.OCommandGremlin;
 import com.orientechnologies.orient.graph.gremlin.OGremlinHelper;
@@ -50,13 +51,15 @@ public class OrientDbDriver extends Driver<Vertex> {
 			try {
 				graphDb.commit();
 				break;
-			} catch (final OConcurrentModificationException e) {
-			}
+			} catch (final OConcurrentModificationException e) {}
 		}
 	}
 
 	@Override
 	public void read(final String filePath) throws IOException {
+		OLogManager.instance().setWarnEnabled(false);
+		OLogManager.instance().setInfoEnabled(false);
+		OLogManager.instance().setDebugEnabled(false);
 		graphDb = new OrientGraph("plocal:" + dbPath);
 		final GraphMLReader graphMLReader = new GraphMLReader(graphDb);
 		graphMLReader.inputGraph(filePath + ".graphml", 100);

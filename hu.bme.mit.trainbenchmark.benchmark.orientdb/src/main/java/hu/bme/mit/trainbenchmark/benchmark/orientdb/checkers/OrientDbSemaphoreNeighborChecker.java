@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.orientdb.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.orientdb.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbSemaphoreNeighborMatch;
