@@ -1,0 +1,3 @@
+ConnectedSegments = new Table()
+g.V('labels',':Sensor').as('sensor').in('sensor').as('segment1').out('connectsTo').as('segment2').out('connectsTo').as('segment3').out('connectsTo').as('segment4').out('connectsTo').as('segment5').out('connectsTo').as('segment6').out('sensor').retain('sensor').table(ConnectedSegments)
+ConnectedSegments

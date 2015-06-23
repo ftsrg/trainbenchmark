@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.orientdb.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.orientdb.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
@@ -18,6 +18,8 @@ public abstract class OrientDbChecker<M extends OrientDbMatch> extends Checker<M
 
 	public static OrientDbChecker newInstance(final OrientDbDriver driver, final Query query) {
 		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new OrientDbConnectedSegmentsChecker(driver);
 		case POSLENGTH:
 			return new OrientDbPosLengthChecker(driver);
 		case ROUTESENSOR:
