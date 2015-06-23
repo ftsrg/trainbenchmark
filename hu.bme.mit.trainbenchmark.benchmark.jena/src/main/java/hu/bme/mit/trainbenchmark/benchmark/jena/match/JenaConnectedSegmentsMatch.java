@@ -17,8 +17,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT3;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT4;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT5;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT6;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 
 import com.hp.hpl.jena.query.QuerySolution;
@@ -31,13 +30,8 @@ public class JenaConnectedSegmentsMatch extends JenaMatch implements ConnectedSe
 	}
 
 	@Override
-	public Resource getSensor1() {
-		return qs.getResource(VAR_SENSOR1);
-	}
-
-	@Override
-	public Resource getSensor2() {
-		return qs.getResource(VAR_SENSOR2);
+	public Resource getSensor() {
+		return qs.getResource(VAR_SENSOR);
 	}
 
 	@Override
@@ -72,8 +66,7 @@ public class JenaConnectedSegmentsMatch extends JenaMatch implements ConnectedSe
 
 	@Override
 	public Resource[] toArray() {
-		return new Resource[] { getSensor1(), getSensor2(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(),
-				getSegment6() };
+		return new Resource[] { getSensor(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(), getSegment6() };
 	}
 
 }

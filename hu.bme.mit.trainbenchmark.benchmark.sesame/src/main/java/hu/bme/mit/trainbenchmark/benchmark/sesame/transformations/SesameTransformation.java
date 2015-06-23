@@ -13,11 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserSemaphoreNeighbor;
@@ -38,6 +40,8 @@ public abstract class SesameTransformation<M> extends Transformation<M> {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new SesameTransformationRepairConnectedSegments(sesameDriver);
 			case POSLENGTH:
 				return new SesameTransformationRepairPosLength(sesameDriver);
 			case ROUTESENSOR:
@@ -53,6 +57,8 @@ public abstract class SesameTransformation<M> extends Transformation<M> {
 			}
 		case USER:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new SesameTransformationUserConnectedSegments(sesameDriver);
 			case POSLENGTH:
 				return new SesameTransformationUserPosLength(sesameDriver);
 			case ROUTESENSOR:

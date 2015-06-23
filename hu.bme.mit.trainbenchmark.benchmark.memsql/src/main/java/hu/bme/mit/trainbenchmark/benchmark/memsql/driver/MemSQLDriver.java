@@ -24,10 +24,10 @@ public class MemSQLDriver extends SQLDriver {
 	protected final String password = "";
 
 	@Override
-	public void read(final String modelPath) throws IOException {
-		System.out.println(modelPath);
+	public void read(final String modelPathWithoutExtension) throws IOException {
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " -h 127.0.0.1 -P 3307 --prompt='memsql> '< " + modelPath };
+		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " -h 127.0.0.1 -P 3307 --prompt='memsql> '< " + modelPathWithoutExtension + getExtension() };
+
 		try {
 			final Process pr = rt.exec(command);
 			pr.waitFor();
@@ -36,7 +36,7 @@ public class MemSQLDriver extends SQLDriver {
 		}
 
 		try {
-			con = DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, user, password);
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
@@ -45,11 +45,8 @@ public class MemSQLDriver extends SQLDriver {
 	@Override
 	public void destroy() throws IOException {
 		try {
-			if (st != null) {
-				st.close();
-			}
-			if (con != null) {
-				con.close();
+			if (connection != null) {
+				connection.close();
 			}
 		} catch (final SQLException e) {
 			throw new IOException(e);

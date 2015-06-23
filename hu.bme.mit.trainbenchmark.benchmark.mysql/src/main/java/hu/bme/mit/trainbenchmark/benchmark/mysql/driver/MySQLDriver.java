@@ -28,7 +28,7 @@ public class MySQLDriver extends SQLDriver {
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + modelPathWithoutExtension + getExtension() };
-
+		
 		try {
 			final Process pr = rt.exec(command);
 			pr.waitFor();
@@ -37,7 +37,7 @@ public class MySQLDriver extends SQLDriver {
 		}
 
 		try {
-			con = DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, user, password);
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
@@ -46,11 +46,8 @@ public class MySQLDriver extends SQLDriver {
 	@Override
 	public void destroy() throws IOException {
 		try {
-			if (st != null) {
-				st.close();
-			}
-			if (con != null) {
-				con.close();
+			if (connection != null) {
+				connection.close();
 			}
 		} catch (final SQLException e) {
 			throw new IOException(e);

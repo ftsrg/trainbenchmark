@@ -11,7 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.Position;
 
 import java.util.Collection;
 
@@ -26,7 +29,10 @@ public class Neo4jTransformationUserSwitchSet extends Neo4jTransformationUser {
 	@Override
 	public void rhs(final Collection<Node> switches) {
 		for (final Node sw : switches) {
-
+			final String currentPositionString = (String) sw.getProperty(ModelConstants.CURRENTPOSITION);
+			final Position currentPosition = Position.valueOf(currentPositionString);
+			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
+			sw.setProperty(CURRENTPOSITION, newCurrentPosition.toString());
 		}
 	}
 

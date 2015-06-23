@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.PosLengthRepairOperation;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
 
 import java.util.Collection;
@@ -20,11 +19,9 @@ public class EMFTransformationRepairPosLength extends EMFTransformationRepair<EM
 
 	@Override
 	public void rhs(final Collection<EMFPosLengthMatch> matches) {
-		final PosLengthRepairOperation op = new PosLengthRepairOperation();
-
-		for (final EMFPosLengthMatch match : matches) {
-			final int newLength = op.op(match.getSegment().getLength());
-			match.getSegment().setLength(newLength);
+		for (final EMFPosLengthMatch plm : matches) {
+			final int newLength = -plm.getSegment().getLength() + 1;
+			plm.getSegment().setLength(newLength);
 		}
 	}
 

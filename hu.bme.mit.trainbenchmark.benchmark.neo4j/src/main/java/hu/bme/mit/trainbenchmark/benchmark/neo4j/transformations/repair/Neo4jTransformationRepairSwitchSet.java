@@ -28,9 +28,9 @@ public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformationRepai
 
 	@Override
 	public void rhs(final Collection<Neo4jSwitchSetMatch> matches) {
-		for (final Neo4jSwitchSetMatch ssm : matches) {
-			final Node sw = ssm.getSw();
-			final Node swP = ssm.getSwP();
+		for (final Neo4jSwitchSetMatch sstm : matches) {
+			final Node sw = sstm.getSw();
+			final Node swP = sstm.getSwP();
 			final Object position = swP.getProperty(POSITION);
 			sw.setProperty(CURRENTPOSITION, position);
 		}

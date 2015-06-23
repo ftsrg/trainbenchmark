@@ -33,7 +33,7 @@ import com.google.common.collect.Ordering;
 
 public class UserTransformationLogic<M, T> extends TransformationLogic<M, T, T> {
 
-	protected UserTransformationLogic(final Comparator comparator) {
+	protected UserTransformationLogic(final Comparator<?> comparator) {
 		super(comparator);
 	}
 

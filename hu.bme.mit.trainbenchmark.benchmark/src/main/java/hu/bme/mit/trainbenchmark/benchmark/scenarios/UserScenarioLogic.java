@@ -25,17 +25,18 @@ public class UserScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?,
 		benchmarkCase.benchmarkInit(bc);
 		benchmarkCase.benchmarkInitTransformation();
 
-		benchmarkCase.benchmarkRead();
-		benchmarkCase.benchmarkCheck();
-		for (int i = 0; i < bc.getIterationCount(); i++) {
-			benchmarkCase.benchmarkModify();
-			benchmarkCase.benchmarkCheck();
-		}
-		benchmarkCase.benchmarkDestroy();
-
-		final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-		System.out.println(br);
-		br.publish();
-		return br;
+//		benchmarkCase.benchmarkRead();
+//		benchmarkCase.benchmarkCheck();
+//		for (int i = 0; i < bc.getIterationCount(); i++) {
+//			benchmarkCase.benchmarkModify();
+//			benchmarkCase.benchmarkCheck();
+//		}
+//		benchmarkCase.benchmarkDestroy();
+//
+//		final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
+//		System.out.println(br);
+//		br.publish();
+//		return br;
+		return null;
 	}
 }

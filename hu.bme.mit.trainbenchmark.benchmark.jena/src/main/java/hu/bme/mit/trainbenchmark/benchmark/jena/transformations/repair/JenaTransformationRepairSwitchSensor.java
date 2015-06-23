@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchSensorMatch;
 
@@ -40,7 +41,7 @@ public class JenaTransformationRepairSwitchSensor extends JenaTransformationRepa
 		for (final JenaSwitchSensorMatch match : matches) {
 			final Resource sw = match.getSw();
 			final Long newVertexId = jenaDriver.getNewVertexId();
-			final Resource sensor = model.createResource(BASE_PREFIX + "x" + newVertexId);
+			final Resource sensor = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
 
 			model.add(model.createStatement(sw, sensorEdge, sensor));
 			model.add(model.createStatement(sensor, RDF.type, sensorType));

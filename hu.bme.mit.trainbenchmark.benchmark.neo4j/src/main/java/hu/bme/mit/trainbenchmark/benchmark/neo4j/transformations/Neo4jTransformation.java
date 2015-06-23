@@ -13,11 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserSemaphoreNeighbor;
@@ -27,9 +29,6 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public abstract class Neo4jTransformation<M> extends Transformation<M> {
-
-	// query = FileUtils.readFileToString(new File(bc.getWorkspacePath()
-	// + "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + getName() + ".cypher"));
 
 	protected Neo4jDriver neoDriver;
 
@@ -41,6 +40,8 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new Neo4jTransformationRepairConnectedSegments(neoDriver);				
 			case POSLENGTH:
 				return new Neo4jTransformationRepairPosLength(neoDriver);
 			case ROUTESENSOR:
@@ -56,6 +57,8 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 			}
 		case USER:
 			switch (query) {
+			case CONNECTEDSEGMENTS:
+				return new Neo4jTransformationUserConnectedSegments(neoDriver);				
 			case POSLENGTH:
 				return new Neo4jTransformationUserPosLength(neoDriver);
 			case ROUTESENSOR:

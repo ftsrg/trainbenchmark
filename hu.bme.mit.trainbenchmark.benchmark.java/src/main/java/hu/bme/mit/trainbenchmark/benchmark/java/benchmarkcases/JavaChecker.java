@@ -29,6 +29,8 @@ public abstract class JavaChecker extends Checker<EMFMatch> {
 
 	public static JavaChecker newInstance(final EMFDriver driver, final Query query) {
 		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new JavaConnectedSegmentsChecker(driver);
 		case POSLENGTH:
 			return new JavaPosLengthChecker(driver);
 		case ROUTESENSOR:
