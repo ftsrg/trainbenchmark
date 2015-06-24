@@ -11,7 +11,7 @@ fi
 
 time mvn clean install $QUIET -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,fourstore,jena,sesame,mysql,allegro,virtuoso,eclipseocl,memsql -DskipTests
 if [[ $1 == "travis" && $? != 0 ]]; then
-	exit $?
+	exit 1
 fi
 
 echo Build finished.
