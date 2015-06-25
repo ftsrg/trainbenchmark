@@ -9,28 +9,24 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.Reflect.Helper;
+import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.ecore.OCL.Helper;
-import org.eclipse.ocl.ecore.OCLExpression;
+import org.eclipse.ocl.expressions.OCLExpression;
 
-public abstract class EclipseOCLBenchmarkCase<T extends RailwayElement> extends AbstractBenchmarkCase<T> {
+public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase {
 
 	protected RailwayContainer container;
 
@@ -61,22 +57,4 @@ public abstract class EclipseOCLBenchmarkCase<T extends RailwayElement> extends 
 		}
 	}
 	
-	@Override
-	protected Collection<T> check() {
-		matches = new ArrayList<>();
-		
-		final TreeIterator<EObject> contents = container.eAllContents();
-		while (contents.hasNext()) {
-			final EObject eObject = contents.next();
-
-			final Object result = ocl.evaluate(eObject, query);
-			if (result == Boolean.TRUE) {
-				matches.add((T) eObject);
-			}
-		}
-				
-		return matches;
-	}
-
-
 }
