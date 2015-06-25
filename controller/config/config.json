@@ -1,11 +1,9 @@
 {
   "MAVEN_OPTS": {
-    "Xmx": "512m",
-    "XX:MaxPermSize": "256m"
+    "Xmx": "512m"
   },
   "JAVA_OPTS": {
-    "xmx": "2g",
-    "maxPermSize": "256m"
+    "Xmx": "2g"
   },
   "Arguments": {
     "Generator": "",
@@ -13,7 +11,7 @@
   },
   "IterationCount": 10,
   "MinSize": 1,
-  "MaxSize": 2,
+  "MaxSize": 512,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
@@ -24,7 +22,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "orientdb"
+    "mysql"
   ],
   "UniqueConfigurations": [
 	]

@@ -11,50 +11,34 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLChecker;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
-import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 import java.io.IOException;
 
-import org.eclipse.emf.common.util.Reflect.Helper;
-import org.eclipse.ocl.OCL;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.expressions.OCLExpression;
-
 public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase {
 
-	protected RailwayContainer container;
-
-	protected OCL ocl;
-	protected OCLExpression query;
-
 	@Override
-	public void read() {
-		final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		final EMFDriver emfDriver = new EMFDriver(modelPath);
-		driver = (Driver<T>) emfDriver;
+	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+		super.benchmarkInit(bc);
 
-		container = emfDriver.getContainer();
-	}
+		// final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
+		// final EMFDriver emfDriver = new EMFDriver(modelPath);
+		// driver = (Driver<T>) emfDriver;
+		// container = emfDriver.getContainer();
 
-	@Override
-	protected void init() throws IOException {
-		ocl = OCL.newInstance();
-		final String oclConstraint = Util.readFile(bc.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + getName() + ".ocl");
+		final EMFDriver emfDriver = new EMFDriver();
+		driver = emfDriver;
+		checker = new EclipseOCLChecker(bc);
 
-		final Helper helper = ocl.createOCLHelper();
-		helper.setContext(RailwayPackage.eINSTANCE.getSegment());
-		try {
-			query = helper.createQuery(oclConstraint);
-		} catch (final ParserException e) {
-			throw new IOException(e);
+		if (bc.getScenario() != Scenario.BATCH) {
+			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
 		}
 	}
-	
+
 }

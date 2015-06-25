@@ -1,7 +1,5 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>hu.bme.mit.trainbenchmark</artifactId>
@@ -21,12 +19,11 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.benchmark.java.EclipseOCLBenchmarkMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.benchmark.eclipseocl.EclipseOCLBenchmark</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -67,48 +64,49 @@
 
 		<!-- <dependency> -->
 		<!-- <groupId>org.eclipse.ocl</groupId> -->
-		<!-- <artifactId>org.eclipse.ocl.ecore</artifactId> -->
-		<!-- <version>3.3.0.v20130520-1222</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.eclipse.ocl</groupId> -->
 		<!-- <artifactId>org.eclipse.ocl.common</artifactId> -->
-		<!-- <version>1.1.0.v20130531-0544</version> -->
+		<!-- <version>1.2.0.v20140610-0641</version> -->
 		<!-- </dependency> -->
 
 		<!-- <dependency> -->
 		<!-- <groupId>org.eclipse.ocl</groupId> -->
-		<!-- <artifactId>org.eclipse.ocl</artifactId> -->
-		<!-- <version>3.3.0.v20130909-1552</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>lpg.runtime</groupId> -->
-		<!-- <artifactId>java</artifactId> -->
-		<!-- <version>2.0.17-v201004271640</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.eclipse.ocl</groupId> -->
-		<!-- <artifactId>org.eclipse.ocl</artifactId> -->
-		<!-- <version>3.4.2.v20140725-2242</version> -->
+		<!-- <artifactId>org.eclipse.ocl.ecore</artifactId> -->
+		<!-- <version>3.3.100.v20140610-0641</version> -->
 		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.eclipse.ocl</groupId>
 			<artifactId>org.eclipse.ocl.ecore</artifactId>
-			<version>3.3.100.v20140610-0641</version>
+			<version>3.3.0.v20130520-1222</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.ocl</groupId>
+			<artifactId>org.eclipse.ocl.common</artifactId>
+			<version>1.1.0.v20130531-0544</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.ocl</groupId>
+			<artifactId>org.eclipse.ocl</artifactId>
+			<version>3.3.0.v20130909-1552</version>
+		</dependency>
+
+		<dependency>
+			<groupId>lpg.runtime</groupId>
+			<artifactId>java</artifactId>
+			<version>2.0.17-v201004271640</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.ocl</groupId>
+			<artifactId>org.eclipse.ocl</artifactId>
+			<version>3.4.2.v20140725-2242</version>
 		</dependency>
 
 	</dependencies>
 
 	<repositories>
-		<!-- <repository> -->
-		<!-- <id>acceleo</id> -->
-		<!-- <name>Acceleo Repository (with EMF)</name> -->
-		<!-- <url>https://repo.eclipse.org/content/groups/acceleo</url> -->
-		<!-- </repository> -->
 		<repository>
 			<id>acceleo</id>
 			<name>Acceleo Repository (with EMF)</name>

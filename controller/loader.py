@@ -20,9 +20,9 @@ from jsonschema.exceptions import ValidationError
 
 class Loader():
     def __init__(self):
-        self.config_path = "../../config/config.json"
-        self.schema_path = "../../config/config_schema.json"
-        self.tools_path = "../../config/tools_source.json"
+        self.config_path = "config/config.json"
+        self.schema_path = "config/config_schema.json"
+        self.tools_path = "config/tools_source.json"
 
     def load(self):
         """
@@ -82,15 +82,13 @@ class Loader():
         common = CommonParameters()
         common.generator_args = config_json["Arguments"]["Generator"]
         common.maven_xmx = config_json["MAVEN_OPTS"]["Xmx"]
-        common.maven_maxpermsize = config_json["MAVEN_OPTS"]["XX:MaxPermSize"]
-        common.java_xmx = config_json["JAVA_OPTS"]["xmx"]
-        common.java_maxpermsize = config_json["JAVA_OPTS"]["maxPermSize"]
+        common.java_xmx = config_json["JAVA_OPTS"]["Xmx"]
         common.series = config_json["Series"]
         common.modif_method = config_json["ModificationMethod"]
         common.modif_constant = config_json["ModificationConstant"]
         common.iter_count = config_json["IterationCount"]
         # relatively from this script's path
-        util.set_working_directory("../../../")
+        util.set_working_directory("../")
         path = os.getcwd()  # store the absolute path instead of relative
         common.path = path
         util.set_working_directory()
@@ -175,7 +173,7 @@ class Loader():
         # path relatively to this script's location
         current_directory = os.getcwd() 
         util.set_working_directory()
-        dependencies_path = "../../config/dependencies.json"
+        dependencies_path = "config/dependencies.json"
         dependencies_json = util.json_decode(dependencies_path)
         if dependencies_json is None:
             logging.error("Problem has occurred during the decoding procedure" +
