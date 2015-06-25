@@ -18,8 +18,8 @@ public class OrientDbTransformationUserSemaphoreNeighbor extends OrientDbTransfo
 	@Override
 	public void rhs(final Collection<Vertex> routes) {
 		for (final Vertex route : routes) {
-			final Iterable<Edge> entries = route.getEdges(Direction.OUT, relationshipTypeEntry);
-			for (Edge entry : entries) {
+			final Iterable<Edge> entries = route.getEdges(Direction.BOTH, relationshipTypeEntry);
+			for (final Edge entry : entries) {
 				entry.remove();
 			}
 		}
