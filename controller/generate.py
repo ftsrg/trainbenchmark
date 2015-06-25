@@ -45,7 +45,6 @@ class Generator():
         pp.pprint(self.models)
         # mutual parameters for every configuration
         java_xmx = configurations[0].common.java_xmx
-        java_maxpermsize = configurations[0].common.java_maxpermsize
         args = configurations[0].common.generator_args
         for scenario in self.models:
             for format in self.models[scenario]:
@@ -60,8 +59,7 @@ class Generator():
                                      ", scenario:" + scenario +
                                      ", size:" + str(size) + ")")
                         subprocess.call(["java", "-Xmx" + java_xmx,
-                                         "-XX:MaxPermSize=" +
-                                         java_maxpermsize, "-jar", target,
+                                         "-jar", target,
                                          "-scenario", scenario,
                                          "-size", str(size), args])
                 util.set_working_directory("../")

@@ -24,7 +24,7 @@ class GenerationTest(unittest.TestCase):
         cls.models = None
     
     def load(self):
-        self.loader.config_path = "../../tests/" + str(self.id) + ".json"
+        self.loader.config_path = "tests/" + str(self.id) + ".json"
         self.configs = self.loader.load()
     
     def prevent(self):

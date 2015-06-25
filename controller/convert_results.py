@@ -112,11 +112,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-c", "--csvfile",
-                        default="../../../results/csv/results.csv",
+                        default="../results/csv/results.csv",
                         help="Path of the CSV file where the " +
                              "results will be merged")
     parser.add_argument("-s", "--source",
-                        default="../../../results/",
+                        default="../results/",
                         help="Path of the results json files location.")
     args = parser.parse_args()
 

@@ -45,10 +45,10 @@ def install_neo4j_deps(path):
     # change working directory to this module's location
     util.set_working_directory()
     # jump to the project parent folder since path can be relative
-    if os.path.exists("../../../../neo4j-shell-tools"):
+    if os.path.exists("../../neo4j-shell-tools"):
         logging.info("Neo4j-shell-tools has been deployed.")
     else:
-        util.set_working_directory("../../shell-scripts/")
+        util.set_working_directory("shell-scripts/")
         subprocess.call(["./install_neo4j.sh"])
     # Set the working directory to this script's folder.
     util.set_working_directory(current_directory)
@@ -59,7 +59,7 @@ def build_virtuoso(package):
     """
     current_directory = os.getcwd()
     util.set_working_directory()
-    util.set_working_directory("../../shell-scripts/")
+    util.set_working_directory("shell-scripts/")
     subprocess.call(["./build_virtuoso.sh"])
 
     util.set_working_directory(current_directory)
@@ -70,7 +70,7 @@ def build_allegro(package):
     """
     current_directory = os.getcwd()
     util.set_working_directory()
-    util.set_working_directory("../../shell-scripts/")
+    util.set_working_directory("shell-scripts/")
     subprocess.call(["./build_allegro.sh"])
     
     util.set_working_directory(current_directory)
