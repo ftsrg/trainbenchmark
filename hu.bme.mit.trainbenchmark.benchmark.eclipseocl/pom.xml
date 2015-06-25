@@ -65,33 +65,50 @@
 
 		<!-- OCL -->
 
+		<!-- <dependency> -->
+		<!-- <groupId>org.eclipse.ocl</groupId> -->
+		<!-- <artifactId>org.eclipse.ocl.ecore</artifactId> -->
+		<!-- <version>3.3.0.v20130520-1222</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.eclipse.ocl</groupId> -->
+		<!-- <artifactId>org.eclipse.ocl.common</artifactId> -->
+		<!-- <version>1.1.0.v20130531-0544</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.eclipse.ocl</groupId> -->
+		<!-- <artifactId>org.eclipse.ocl</artifactId> -->
+		<!-- <version>3.3.0.v20130909-1552</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>lpg.runtime</groupId> -->
+		<!-- <artifactId>java</artifactId> -->
+		<!-- <version>2.0.17-v201004271640</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.eclipse.ocl</groupId> -->
+		<!-- <artifactId>org.eclipse.ocl</artifactId> -->
+		<!-- <version>3.4.2.v20140725-2242</version> -->
+		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>org.eclipse.ocl</groupId>
 			<artifactId>org.eclipse.ocl.ecore</artifactId>
-			<version>3.3.0.v20130520-1222</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.ocl</groupId>
-			<artifactId>org.eclipse.ocl.common</artifactId>
-			<version>1.1.0.v20130531-0544</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.ocl</groupId>
-			<artifactId>org.eclipse.ocl</artifactId>
-			<version>3.3.0.v20130909-1552</version>
-		</dependency>
-
-		<dependency>
-			<groupId>lpg.runtime</groupId>
-			<artifactId>java</artifactId>
-			<version>2.0.17-v201004271640</version>
+			<version>3.3.100.v20140610-0641</version>
 		</dependency>
 
 	</dependencies>
 
 	<repositories>
+		<!-- <repository> -->
+		<!-- <id>acceleo</id> -->
+		<!-- <name>Acceleo Repository (with EMF)</name> -->
+		<!-- <url>https://repo.eclipse.org/content/groups/acceleo</url> -->
+		<!-- </repository> -->
 		<repository>
 			<id>acceleo</id>
 			<name>Acceleo Repository (with EMF)</name>
