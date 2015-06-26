@@ -13,9 +13,9 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,27 +25,29 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;
 
-public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
+public class EclipseOCLRouteSensorChecker extends EclipseOCLChecker<EMFRouteSensorMatch> {
 
-	public EclipseOCLPosLengthChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public EclipseOCLRouteSensorChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
 		super(driver, bc);
 	}
 
 	@Override
 	protected EClassifier getContext() {
-		return RailwayPackage.eINSTANCE.getSegment();
+		return RailwayPackage.eINSTANCE.getRoute();
 	}
 
 	@Override
-	public Collection<EMFPosLengthMatch> check() {
+	public Collection<EMFRouteSensorMatch> check() {
 		matches = new ArrayList<>();
 
 		final Object evaluate = queryEvaluator.evaluate(driver.getContainer());
 		final Bag bag = (Bag) evaluate;
+		System.out.println(bag.size());
 		for (final Object object : bag) {
 			final Tuple tuple = (Tuple) object;
-			final Object segment = tuple.getValue("segment");
-			matches.add(new EMFPosLengthMatch((Segment) segment));
+			System.out.println(tuple);
+			final Sensor sensor = (Sensor) tuple.getValue("sensor");
+//			matches.add(new EMFRouteSensorMatch((Segment) segment));
 		}
 
 		return matches;

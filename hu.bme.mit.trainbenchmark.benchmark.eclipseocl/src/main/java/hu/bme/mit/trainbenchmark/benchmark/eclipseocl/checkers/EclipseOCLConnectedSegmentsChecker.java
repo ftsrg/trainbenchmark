@@ -20,14 +20,13 @@ import hu.bme.mit.trainbenchmark.railway.Segment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.ocl.util.Bag;
-import org.eclipse.ocl.util.Tuple;
 
-public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
+public class EclipseOCLConnectedSegmentsChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
 
-	public EclipseOCLPosLengthChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public EclipseOCLConnectedSegmentsChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
 		super(driver, bc);
 	}
 
@@ -40,12 +39,9 @@ public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMa
 	public Collection<EMFPosLengthMatch> check() {
 		matches = new ArrayList<>();
 
-		final Object evaluate = queryEvaluator.evaluate(driver.getContainer());
-		final Bag bag = (Bag) evaluate;
-		for (final Object object : bag) {
-			final Tuple tuple = (Tuple) object;
-			final Object segment = tuple.getValue("segment");
-			matches.add(new EMFPosLengthMatch((Segment) segment));
+		final Set<Segment> results = (Set<Segment>) queryEvaluator.evaluate(driver.getContainer());
+		for (final Segment segment : results) {
+			matches.add(new EMFPosLengthMatch(segment));
 		}
 
 		return matches;
