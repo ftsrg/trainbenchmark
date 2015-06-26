@@ -13,18 +13,22 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.ocl.util.Bag;
+import org.eclipse.ocl.util.Tuple;
 
-public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
+public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLChecker<EMFSemaphoreNeighborMatch> {
 
 	public EclipseOCLSemaphoreNeighborChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
 		super(driver, bc);
@@ -36,12 +40,20 @@ public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLChecker<EMFPos
 	}
 
 	@Override
-	public Collection<EMFPosLengthMatch> check() {
+	public Collection<EMFSemaphoreNeighborMatch> check() {
 		matches = new ArrayList<>();
 
-		final Set<Segment> results = (Set<Segment>) queryEvaluator.evaluate(driver.getContainer());
-		for (final Segment segment : results) {
-			matches.add(new EMFPosLengthMatch(segment));
+		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
+		for (final Tuple<?, ?> tuple : bag) {
+			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphoreneighbor");
+			final Route route1 = (Route) tuple.getValue("route1");
+			final Route route2 = (Route) tuple.getValue("route2");
+			final Sensor sensor1 = (Sensor) tuple.getValue("sensor1");
+			final Sensor sensor2 = (Sensor) tuple.getValue("sensor2");
+			final TrackElement te1 = (TrackElement) tuple.getValue("te1");
+			final TrackElement te2 = (TrackElement) tuple.getValue("te2");
+						
+			matches.add(new EMFSemaphoreNeighborMatch(semaphore, route1, route2, sensor1, sensor2, te1, te2));
 		}
 
 		return matches;

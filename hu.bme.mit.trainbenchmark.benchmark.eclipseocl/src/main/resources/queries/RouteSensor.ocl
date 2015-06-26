@@ -3,7 +3,9 @@ Route.allInstances()->collect(
 		swP | swP.switch->collect(
 			sw | sw.sensor->select(
 				sensor | route.definedBy->excludes(sensor)
-			)->collect(sensor | Tuple{route = route, sensor = sensor, swP = swP, sw = sw})
+			)->collect(
+				sensor | Tuple{route = route, sensor = sensor, swP = swP, sw = sw}
+			)
 		)
 	)
 )

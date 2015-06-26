@@ -1,1 +1,5 @@
-Switch.allInstances()->select(sw | sw.sensor = null)->collect(sw | Tuple{sw = sw})
+Switch.allInstances()->select(
+	sw | sw.sensor = null
+)->collect(
+	sw | Tuple{sw = sw}
+)

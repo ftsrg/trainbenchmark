@@ -1,1 +1,17 @@
-Segment.allInstances()->select(s | s.length <= 0)
+Sensor.allInstances()->collect(
+	sensor | sensor.elements->select(oclIsKindOf(Segment))->collect(
+		segment1 | segment1.connectsTo->select(oclIsKindOf(Segment))->collect(
+			segment2 | segment2.connectsTo->select(oclIsKindOf(Segment))->collect(
+				segment3 | segment3.connectsTo->select(oclIsKindOf(Segment))->collect(
+					segment4 | segment4.connectsTo->select(oclIsKindOf(Segment))->collect(
+						segment5 | segment5.connectsTo->select(oclIsKindOf(Segment))->select(
+							segment6 | segment6.sensor = sensor
+						)->collect(
+							segment6 | Tuple{sensor = sensor, segment1 = segment1, segment2 = segment2, segment3 = segment3, segment4 = segment4, segment5 = segment5, segment6 = segment6}
+						)
+					)
+				)
+			)
+		)
+	)
+)
