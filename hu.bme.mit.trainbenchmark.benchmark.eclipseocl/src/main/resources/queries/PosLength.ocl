@@ -1,1 +1,1 @@
-oclIsKindOf(Segment) and length <= 0
+Segment.allInstances()->select(s | s.length <= 0)

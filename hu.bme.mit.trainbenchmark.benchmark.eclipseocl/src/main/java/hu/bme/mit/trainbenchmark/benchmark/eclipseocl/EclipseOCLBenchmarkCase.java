@@ -27,14 +27,9 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchm
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		super.benchmarkInit(bc);
 
-		// final String modelPath = bc.getModelPathNameWithoutExtension() + ".emf";
-		// final EMFDriver emfDriver = new EMFDriver(modelPath);
-		// driver = (Driver<T>) emfDriver;
-		// container = emfDriver.getContainer();
-
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
-		checker = new EclipseOCLChecker(bc);
+		checker = new EclipseOCLChecker(emfDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
