@@ -18,16 +18,16 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 import java.util.Collection;
 
-public abstract class JavaChecker extends Checker<EMFMatch> {
+public abstract class JavaChecker<T extends EMFMatch> extends Checker<T> {
 
-	protected Collection<EMFMatch> matches;
+	protected Collection<T> matches;
 	protected final EMFDriver emfDriver;
 
 	public JavaChecker(final EMFDriver emfDriver) {
 		this.emfDriver = emfDriver;
 	}
 
-	public static JavaChecker newInstance(final EMFDriver driver, final Query query) {
+	public static JavaChecker<?> newInstance(final EMFDriver driver, final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new JavaConnectedSegmentsChecker(driver);

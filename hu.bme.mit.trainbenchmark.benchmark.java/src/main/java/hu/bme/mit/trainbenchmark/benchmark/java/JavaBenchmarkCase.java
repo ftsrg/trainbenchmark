@@ -12,11 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java;
 
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases.JavaChecker;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 import java.io.IOException;
@@ -29,7 +31,7 @@ public class JavaBenchmarkCase extends EMFBenchmarkCase {
 
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
-		checker = JavaChecker.newInstance(emfDriver, bc.getQuery());
+		checker = (Checker<EMFMatch>) JavaChecker.newInstance(emfDriver, bc.getQuery());
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());

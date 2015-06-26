@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
@@ -27,14 +26,14 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSwitchSetChecker extends JavaChecker {
+public class JavaSwitchSetChecker extends JavaChecker<EMFSwitchSetMatch> {
 
 	public JavaSwitchSetChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 
 	@Override
-	public Collection<EMFMatch> check() {
+	public Collection<EMFSwitchSetMatch> check() {
 		matches = new ArrayList<>();
 		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
