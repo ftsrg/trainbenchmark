@@ -1,0 +1,1 @@
+Segment.allInstances()->select(s | s.length <= 0)
