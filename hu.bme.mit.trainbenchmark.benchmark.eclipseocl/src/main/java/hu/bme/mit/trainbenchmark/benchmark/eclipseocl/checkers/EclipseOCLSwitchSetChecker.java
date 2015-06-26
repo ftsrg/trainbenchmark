@@ -45,7 +45,7 @@ public class EclipseOCLSwitchSetChecker extends EclipseOCLChecker<EMFSwitchSetMa
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
 		for (final Tuple<?, ?> tuple : bag) {
-			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphoreneighbor");
+			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphore");
 			final Route route = (Route) tuple.getValue("route");
 			final SwitchPosition swP = (SwitchPosition) tuple.getValue("swP");
 			final Switch sw = (Switch) tuple.getValue("sw");

@@ -45,14 +45,13 @@ public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLChecker<EMFSem
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
 		for (final Tuple<?, ?> tuple : bag) {
-			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphoreneighbor");
+			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphore");
 			final Route route1 = (Route) tuple.getValue("route1");
 			final Route route2 = (Route) tuple.getValue("route2");
 			final Sensor sensor1 = (Sensor) tuple.getValue("sensor1");
 			final Sensor sensor2 = (Sensor) tuple.getValue("sensor2");
 			final TrackElement te1 = (TrackElement) tuple.getValue("te1");
 			final TrackElement te2 = (TrackElement) tuple.getValue("te2");
-						
 			matches.add(new EMFSemaphoreNeighborMatch(semaphore, route1, route2, sensor1, sensor2, te1, te2));
 		}
 
