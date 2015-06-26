@@ -15,7 +15,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,16 +43,15 @@ public class EclipseOCLRouteSensorChecker extends EclipseOCLChecker<EMFRouteSens
 	public Collection<EMFRouteSensorMatch> check() {
 		matches = new ArrayList<>();
 
-		final Object evaluate = queryEvaluator.evaluate(driver.getContainer());
-		final Bag bag = (Bag) evaluate;
-		System.out.println(bag.size());
-		for (final Object object : bag) {
-			final Tuple tuple = (Tuple) object;
-			System.out.println(tuple);
+		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
+		for (final Tuple<?, ?> tuple : bag) {
+			final Route route = (Route) tuple.getValue("route");
 			final Sensor sensor = (Sensor) tuple.getValue("sensor");
-//			matches.add(new EMFRouteSensorMatch((Segment) segment));
+			final SwitchPosition swP = (SwitchPosition) tuple.getValue("swP");
+			final Switch sw = (Switch) tuple.getValue("sw");
+			matches.add(new EMFRouteSensorMatch(route, sensor, swP, sw));
 		}
-
+		
 		return matches;
 	}
 

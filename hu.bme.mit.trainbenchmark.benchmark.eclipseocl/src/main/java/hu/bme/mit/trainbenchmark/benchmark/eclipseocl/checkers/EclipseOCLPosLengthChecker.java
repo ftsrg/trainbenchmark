@@ -40,12 +40,10 @@ public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMa
 	public Collection<EMFPosLengthMatch> check() {
 		matches = new ArrayList<>();
 
-		final Object evaluate = queryEvaluator.evaluate(driver.getContainer());
-		final Bag bag = (Bag) evaluate;
-		for (final Object object : bag) {
-			final Tuple tuple = (Tuple) object;
-			final Object segment = tuple.getValue("segment");
-			matches.add(new EMFPosLengthMatch((Segment) segment));
+		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
+		for (final Tuple<?, ?> tuple : bag) {
+			final Segment segment = (Segment) tuple.getValue("segment");
+			matches.add(new EMFPosLengthMatch(segment));
 		}
 
 		return matches;
