@@ -17,23 +17,20 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCL.Helper;
 import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.ecore.OCLExpression;
 
-public class EclipseOCLChecker extends Checker<EMFMatch> {
+public abstract class EclipseOCLChecker<T extends EMFMatch> extends Checker<T> {
 
-	protected Collection<EMFMatch> matches;
+	protected Collection<T> matches;
 	protected OCL ocl;
 	protected Query queryEvaluator;
 	protected RailwayContainer container;
@@ -48,8 +45,8 @@ public class EclipseOCLChecker extends Checker<EMFMatch> {
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
-		helper.setContext(RailwayPackage.eINSTANCE.getSegment());
 		try {
+			helper.setContext(getContext());
 			final OCLExpression query = helper.createQuery(oclQuery);
 			queryEvaluator = ocl.createQuery(query);
 		} catch (final ParserException e) {
@@ -57,18 +54,25 @@ public class EclipseOCLChecker extends Checker<EMFMatch> {
 		}
 	}
 
-	@Override
-	public Collection<EMFMatch> check() {
-		matches = new ArrayList<>();
-
-//		final TreeIterator<EObject> contents = driver.getContainer().eAllContents();
-		final Object evaluate = queryEvaluator.evaluate(driver.getContainer());
-		System.out.println(evaluate);
-		System.out.println(evaluate.getClass());
-		final Set<Segment> results = (Set<Segment>) evaluate;
-		System.out.println(results.size());
-		
-
-		return matches;
-	}
+	protected abstract EClassifier getContext();
+	
+	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+		switch (bc.getQuery()) {
+		case CONNECTEDSEGMENTS:
+			return new EclipseOCLPosLengthChecker(driver, bc);
+		case POSLENGTH:
+			return new EclipseOCLPosLengthChecker(driver, bc);
+		case ROUTESENSOR:
+			return new EclipseOCLPosLengthChecker(driver, bc);
+		case SEMAPHORENEIGHBOR:
+			return new EclipseOCLPosLengthChecker(driver, bc);
+		case SWITCHSENSOR:
+			return new EclipseOCLSwitchSensorChecker(driver, bc);
+		case SWITCHSET:
+			return new EclipseOCLPosLengthChecker(driver, bc);
+		default:
+			throw new UnsupportedOperationException("Query " + bc.getQuery() + " not supported");
+		}
+	}	
+	
 }
