@@ -59,17 +59,17 @@ public abstract class EclipseOCLChecker<T extends EMFMatch> extends Checker<T> {
 	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
 		switch (bc.getQuery()) {
 		case CONNECTEDSEGMENTS:
-			return new EclipseOCLPosLengthChecker(driver, bc);
+			return new EclipseOCLConnectedSegmentsChecker(driver, bc);
 		case POSLENGTH:
 			return new EclipseOCLPosLengthChecker(driver, bc);
 		case ROUTESENSOR:
-			return new EclipseOCLPosLengthChecker(driver, bc);
+			return new EclipseOCLRouteSensorChecker(driver, bc);
 		case SEMAPHORENEIGHBOR:
-			return new EclipseOCLPosLengthChecker(driver, bc);
+			return new EclipseOCLSemaphoreNeighborChecker(driver, bc);
 		case SWITCHSENSOR:
 			return new EclipseOCLSwitchSensorChecker(driver, bc);
 		case SWITCHSET:
-			return new EclipseOCLPosLengthChecker(driver, bc);
+			return new EclipseOCLSwitchSetChecker(driver, bc);
 		default:
 			throw new UnsupportedOperationException("Query " + bc.getQuery() + " not supported");
 		}
