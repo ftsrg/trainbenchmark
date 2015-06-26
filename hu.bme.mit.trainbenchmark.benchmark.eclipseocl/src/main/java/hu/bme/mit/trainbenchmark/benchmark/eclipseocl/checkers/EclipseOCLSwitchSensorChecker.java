@@ -20,9 +20,10 @@ import hu.bme.mit.trainbenchmark.railway.Switch;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.ocl.util.Bag;
+import org.eclipse.ocl.util.Tuple;
 
 public class EclipseOCLSwitchSensorChecker extends EclipseOCLChecker<EMFSwitchSensorMatch> {
 
@@ -39,8 +40,9 @@ public class EclipseOCLSwitchSensorChecker extends EclipseOCLChecker<EMFSwitchSe
 	public Collection<EMFSwitchSensorMatch> check() {
 		matches = new ArrayList<>();
 
-		final Set<Switch> results = (Set<Switch>) queryEvaluator.evaluate(driver.getContainer());
-		for (final Switch sw : results) {
+		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
+		for (final Tuple<?, ?> tuple : bag) {
+			final Switch sw = (Switch) tuple.getValue("sw");
 			matches.add(new EMFSwitchSensorMatch(sw));
 		}
 
