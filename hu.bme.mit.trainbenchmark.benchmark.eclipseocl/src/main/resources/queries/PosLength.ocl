@@ -1,1 +1,5 @@
-Segment.allInstances()->select(segment | segment.length <= 0)->collect(segment | Tuple{segment = segment})
+Segment.allInstances()->select(
+	segment | segment.length <= 0
+)->collect(
+	segment | Tuple{segment = segment}
+)

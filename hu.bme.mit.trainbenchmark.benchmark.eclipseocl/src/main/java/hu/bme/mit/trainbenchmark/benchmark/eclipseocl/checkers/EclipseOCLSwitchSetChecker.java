@@ -13,18 +13,22 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.ocl.util.Bag;
+import org.eclipse.ocl.util.Tuple;
 
-public class EclipseOCLSwitchSetChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
+public class EclipseOCLSwitchSetChecker extends EclipseOCLChecker<EMFSwitchSetMatch> {
 
 	public EclipseOCLSwitchSetChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
 		super(driver, bc);
@@ -32,16 +36,20 @@ public class EclipseOCLSwitchSetChecker extends EclipseOCLChecker<EMFPosLengthMa
 
 	@Override
 	protected EClassifier getContext() {
-		return RailwayPackage.eINSTANCE.getSegment();
+		return RailwayPackage.eINSTANCE.getRoute();
 	}
 
 	@Override
-	public Collection<EMFPosLengthMatch> check() {
+	public Collection<EMFSwitchSetMatch> check() {
 		matches = new ArrayList<>();
 
-		final Set<Segment> results = (Set<Segment>) queryEvaluator.evaluate(driver.getContainer());
-		for (final Segment segment : results) {
-			matches.add(new EMFPosLengthMatch(segment));
+		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
+		for (final Tuple<?, ?> tuple : bag) {
+			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphoreneighbor");
+			final Route route = (Route) tuple.getValue("route");
+			final SwitchPosition swP = (SwitchPosition) tuple.getValue("swP");
+			final Switch sw = (Switch) tuple.getValue("sw");
+			matches.add(new EMFSwitchSetMatch(semaphore, route, swP, sw));
 		}
 
 		return matches;
