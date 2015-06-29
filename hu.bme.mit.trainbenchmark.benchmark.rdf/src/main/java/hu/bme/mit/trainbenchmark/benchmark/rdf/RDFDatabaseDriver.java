@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.rdf;
+package hu.bme.mit.trainbenchmark.benchmark.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;

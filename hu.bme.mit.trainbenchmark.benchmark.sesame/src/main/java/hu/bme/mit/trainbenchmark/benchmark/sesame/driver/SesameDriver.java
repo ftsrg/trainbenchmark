@@ -12,10 +12,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
-import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.File;
 import java.io.IOException;

@@ -23,7 +23,7 @@ public class SesameChecker extends Checker<SesameMatch> {
 		this.driver = driver;
 		this.query = bc.getQuery();
 
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + bc.getQuery()
+		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + bc.getQuery()
 				+ ".sparql";
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}

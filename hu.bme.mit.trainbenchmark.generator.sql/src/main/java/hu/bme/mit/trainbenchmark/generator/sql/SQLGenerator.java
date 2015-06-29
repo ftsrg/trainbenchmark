@@ -12,11 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ancestors;
@@ -28,6 +24,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -60,29 +57,32 @@ public class SQLGenerator extends Generator {
 
 	@Override
 	public void initModel() throws IOException {
-		// source file (DDL operations)
-		final String srcFilePath = generatorConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway.sql";
-		final File srcFile = new File(srcFilePath);
+		// header file (DDL operations)
+		final String headerFilePath = generatorConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-header.sql";
+		final File headerFile = new File(headerFilePath);
 
 		// destination file
 		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + ".sql";
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
-		FileUtils.copyFile(srcFile, destFile);
+		FileUtils.copyFile(headerFile, destFile);
 
 		file = new BufferedWriter(new FileWriter(destFile, true));
 	}
 
 	@Override
 	protected void persistModel() throws IOException {
-		write("COMMIT;");
-		write(String.format("CREATE INDEX Segment_idx_length ON %s (%s);", SEGMENT, LENGTH));
-		write(String.format("CREATE INDEX Route_routeDefinition_idx ON %s (Route_id, Sensor_id);", DEFINED_BY));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx1 ON %s (TrackElement_id);", CONNECTSTO));
-		write(String.format("CREATE INDEX TrackElement_connectsto_idx2 ON %s (TrackElement_id_connectsTo);", CONNECTSTO));
-
+		final String footerFilePath = generatorConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
+		final File footerFile = new File(footerFilePath);
+		
+		final List<String> lines = FileUtils.readLines(footerFile);
+		for (final String line : lines) {
+			write(line);
+		}
+		
 		file.close();
 	}
 

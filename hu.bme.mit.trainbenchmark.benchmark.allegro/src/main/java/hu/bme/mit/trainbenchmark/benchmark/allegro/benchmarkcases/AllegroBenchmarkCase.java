@@ -12,8 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.allegro.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.allegro.driver.AllegroDriver;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import java.io.IOException;
@@ -21,9 +20,8 @@ import java.util.Collection;
 
 import org.openrdf.model.URI;
 
-public class AllegroBenchmarkCase extends AbstractBenchmarkCase<URI>{
+public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 
-	
 	protected RDFBenchmarkConfig rdfConfig;
 
 	public String getResourceDirectory() {
@@ -31,12 +29,6 @@ public class AllegroBenchmarkCase extends AbstractBenchmarkCase<URI>{
 	}
 
 	
-	@Override
-	protected void init() throws IOException {
-		this.rdfConfig = (RDFBenchmarkConfig) bc;
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + getName() + ".sparql";
-		driver = new AllegroDriver(queryPath);
-	}
 	
 	@Override
 	protected void read() throws IOException {

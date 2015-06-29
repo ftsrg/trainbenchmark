@@ -13,8 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.VirtuosoDriver;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import java.io.IOException;
 import java.util.Collection;
