@@ -16,6 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 import java.io.IOException;
 
+import com.bigdata.rdf.model.BigdataValueFactoryImpl;
 import com.bigdata.rdf.sail.remote.BigdataSailFactory;
 
 public class BlazegraphDriver extends SesameDriver {
@@ -24,9 +25,15 @@ public class BlazegraphDriver extends SesameDriver {
 	protected final int BLAZEGRAPH_PORT = 9999;
 
 	@Override
+	public void beginTransaction() {
+		vf = BigdataValueFactoryImpl.getInstance("");
+	}
+	
+	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		repository = BigdataSailFactory.connect(BLAZEGRAPH_INSTANCE, BLAZEGRAPH_PORT);
 		load(modelPathWithoutExtension);
 	}
+	
 
 }
