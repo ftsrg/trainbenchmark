@@ -20,9 +20,9 @@ import java.util.Collection;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaTransformationUserSwitchSensor extends JenaTransformationUser {
+public class JenaTransformationInjectSwitchSensor extends JenaTransformationInject {
 
-	public JenaTransformationUserSwitchSensor(final JenaDriver jenaDriver) {
+	public JenaTransformationInjectSwitchSensor(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 

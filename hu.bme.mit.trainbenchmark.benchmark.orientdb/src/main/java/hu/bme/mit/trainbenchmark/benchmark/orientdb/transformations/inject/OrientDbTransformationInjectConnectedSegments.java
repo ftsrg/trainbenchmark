@@ -12,9 +12,9 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
-public class OrientDbTransformationUserConnectedSegments extends OrientDbTransformationUser {
+public class OrientDbTransformationInjectConnectedSegments extends OrientDbTransformationInject {
 
-	public OrientDbTransformationUserConnectedSegments(final OrientDbDriver orientDriver) {
+	public OrientDbTransformationInjectConnectedSegments(final OrientDbDriver orientDriver) {
 		super(orientDriver);
 	}
 

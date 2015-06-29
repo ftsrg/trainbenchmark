@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransforma
 
 import org.neo4j.graphdb.Node;
 
-public abstract class Neo4jTransformationUser extends Neo4jTransformation<Node> {
+public abstract class Neo4jTransformationInject extends Neo4jTransformation<Node> {
 
-	protected Neo4jTransformationUser(final Neo4jDriver neoDriver) {
+	protected Neo4jTransformationInject(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

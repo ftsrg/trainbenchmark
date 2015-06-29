@@ -27,9 +27,9 @@ import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
-public class JenaTransformationUserPosLength extends JenaTransformationUser {
+public class JenaTransformationInjectPosLength extends JenaTransformationInject {
 
-	public JenaTransformationUserPosLength(final JenaDriver jenaDriver) {
+	public JenaTransformationInjectPosLength(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 

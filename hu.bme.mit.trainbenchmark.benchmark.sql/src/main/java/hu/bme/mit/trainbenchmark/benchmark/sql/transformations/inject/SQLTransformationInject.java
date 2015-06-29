@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 
-public abstract class SQLTransformationUser extends SQLTransformation<Long> {
+public abstract class SQLTransformationInject extends SQLTransformation<Long> {
 
-	protected SQLTransformationUser(final SQLDriver sqlDriver) {
+	protected SQLTransformationInject(final SQLDriver sqlDriver) {
 		super(sqlDriver);
 	}
 

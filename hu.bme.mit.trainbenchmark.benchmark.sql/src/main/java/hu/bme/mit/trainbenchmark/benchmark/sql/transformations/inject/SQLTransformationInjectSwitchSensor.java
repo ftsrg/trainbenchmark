@@ -21,9 +21,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class SQLTransformationUserSwitchSensor extends SQLTransformationUser {
+public class SQLTransformationInjectSwitchSensor extends SQLTransformationInject {
 
-	public SQLTransformationUserSwitchSensor(final SQLDriver sqlDriver) {
+	public SQLTransformationInjectSwitchSensor(final SQLDriver sqlDriver) {
 		super(sqlDriver);
 	}
 

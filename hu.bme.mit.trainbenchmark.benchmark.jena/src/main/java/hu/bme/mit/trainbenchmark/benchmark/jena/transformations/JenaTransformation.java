@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairRouteSensor;
@@ -58,17 +58,17 @@ public abstract class JenaTransformation<M> extends Transformation<M> {
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new JenaTransformationUserConnectedSegments(jenaDriver);
+				return new JenaTransformationInjectConnectedSegments(jenaDriver);
 			case POSLENGTH:
-				return new JenaTransformationUserPosLength(jenaDriver);
+				return new JenaTransformationInjectPosLength(jenaDriver);
 			case ROUTESENSOR:
-				return new JenaTransformationUserRouteSensor(jenaDriver);
+				return new JenaTransformationInjectRouteSensor(jenaDriver);
 			case SEMAPHORENEIGHBOR:
-				return new JenaTransformationUserSemaphoreNeighbor(jenaDriver);
+				return new JenaTransformationInjectSemaphoreNeighbor(jenaDriver);
 			case SWITCHSENSOR:
-				return new JenaTransformationUserSwitchSensor(jenaDriver);
+				return new JenaTransformationInjectSwitchSensor(jenaDriver);
 			case SWITCHSET:
-				return new JenaTransformationUserSwitchSet(jenaDriver);
+				return new JenaTransformationInjectSwitchSet(jenaDriver);
 			default:
 				break;
 			}

@@ -26,9 +26,9 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
-public class SesameTransformationUserPosLength extends SesameTransformationUser {
+public class SesameTransformationInjectPosLength extends SesameTransformationInject {
 
-	public SesameTransformationUserPosLength(final SesameDriver sesameDriver) {
+	public SesameTransformationInjectPosLength(final SesameDriver sesameDriver) {
 		super(sesameDriver);
 	}
 

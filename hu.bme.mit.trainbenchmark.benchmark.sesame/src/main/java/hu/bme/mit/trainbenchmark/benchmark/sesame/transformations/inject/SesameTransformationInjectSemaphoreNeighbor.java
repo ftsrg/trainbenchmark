@@ -19,9 +19,9 @@ import java.util.Collection;
 
 import org.openrdf.model.URI;
 
-public class SesameTransformationUserSemaphoreNeighbor extends SesameTransformationUser {
+public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransformationInject {
 
-	public SesameTransformationUserSemaphoreNeighbor(final SesameDriver sesameDriver) {
+	public SesameTransformationInjectSemaphoreNeighbor(final SesameDriver sesameDriver) {
 		super(sesameDriver);
 	}
 

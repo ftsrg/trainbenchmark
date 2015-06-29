@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class SQLTransformationUserPosLength extends SQLTransformationUser {
+public class SQLTransformationInjectPosLength extends SQLTransformationInject {
 
-	public SQLTransformationUserPosLength(final SQLDriver sqlDriver) {
+	public SQLTransformationInjectPosLength(final SQLDriver sqlDriver) {
 		super(sqlDriver);
 	}
 

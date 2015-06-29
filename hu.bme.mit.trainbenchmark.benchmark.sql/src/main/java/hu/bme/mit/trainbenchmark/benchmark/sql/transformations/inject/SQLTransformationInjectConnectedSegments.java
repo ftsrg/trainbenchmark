@@ -25,9 +25,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 
-public class SQLTransformationUserConnectedSegments extends SQLTransformationUser {
+public class SQLTransformationInjectConnectedSegments extends SQLTransformationInject {
 
-	public SQLTransformationUserConnectedSegments(final SQLDriver sqlDriver) {
+	public SQLTransformationInjectConnectedSegments(final SQLDriver sqlDriver) {
 		super(sqlDriver);
 	}
 

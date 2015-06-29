@@ -15,12 +15,12 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserSwitchSet;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairRouteSensor;
@@ -52,17 +52,17 @@ public abstract class EMFTransformation<O> extends Transformation<O> {
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new EMFTransformationUserConnectedSegments(driver);
+				return new EMFTransformationInjectConnectedSegments(driver);
 			case POSLENGTH:
-				return new EMFTransformationUserPosLength(driver);
+				return new EMFTransformationInjectPosLength(driver);
 			case ROUTESENSOR:
-				return new EMFTransformationUserRouteSensor(driver);
+				return new EMFTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new EMFTransformationUserSemaphoreNeighbor(driver);
+				return new EMFTransformationInjectSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new EMFTransformationUserSwitchSensor(driver);
+				return new EMFTransformationInjectSwitchSensor(driver);
 			case SWITCHSET:
-				return new EMFTransformationUserSwitchSet(driver);
+				return new EMFTransformationInjectSwitchSet(driver);
 			default:
 				break;
 			}

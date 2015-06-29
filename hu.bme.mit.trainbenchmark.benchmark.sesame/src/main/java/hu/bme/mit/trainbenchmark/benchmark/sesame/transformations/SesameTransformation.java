@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairRouteSensor;
@@ -58,17 +58,17 @@ public abstract class SesameTransformation<M> extends Transformation<M> {
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new SesameTransformationUserConnectedSegments(sesameDriver);
+				return new SesameTransformationInjectConnectedSegments(sesameDriver);
 			case POSLENGTH:
-				return new SesameTransformationUserPosLength(sesameDriver);
+				return new SesameTransformationInjectPosLength(sesameDriver);
 			case ROUTESENSOR:
-				return new SesameTransformationUserRouteSensor(sesameDriver);
+				return new SesameTransformationInjectRouteSensor(sesameDriver);
 			case SEMAPHORENEIGHBOR:
-				return new SesameTransformationUserSemaphoreNeighbor(sesameDriver);
+				return new SesameTransformationInjectSemaphoreNeighbor(sesameDriver);
 			case SWITCHSENSOR:
-				return new SesameTransformationUserSwitchSensor(sesameDriver);
+				return new SesameTransformationInjectSwitchSensor(sesameDriver);
 			case SWITCHSET:
-				return new SesameTransformationUserSwitchSet(sesameDriver);
+				return new SesameTransformationInjectSwitchSet(sesameDriver);
 			default:
 				break;
 			}

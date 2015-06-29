@@ -8,9 +8,9 @@ import java.util.Collection;
 
 import com.tinkerpop.blueprints.Vertex;
 
-public class OrientDbTransformationUserSwitchSet extends OrientDbTransformationUser {
+public class OrientDbTransformationInjectSwitchSet extends OrientDbTransformationInject {
 
-	public OrientDbTransformationUserSwitchSet(final OrientDbDriver orientDriver) {
+	public OrientDbTransformationInjectSwitchSet(final OrientDbDriver orientDriver) {
 		super(orientDriver);
 	}
 

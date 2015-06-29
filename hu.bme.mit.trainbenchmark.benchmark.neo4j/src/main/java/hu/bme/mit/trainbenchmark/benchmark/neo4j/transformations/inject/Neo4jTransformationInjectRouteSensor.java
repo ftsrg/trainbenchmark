@@ -19,9 +19,9 @@ import java.util.Collection;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
-public class Neo4jTransformationUserRouteSensor extends Neo4jTransformationUser {
+public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformationInject {
 
-	public Neo4jTransformationUserRouteSensor(final Neo4jDriver neoDriver) {
+	public Neo4jTransformationInjectRouteSensor(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

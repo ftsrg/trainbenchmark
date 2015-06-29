@@ -28,9 +28,9 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
-public class SesameTransformationUserSwitchSet extends SesameTransformationUser {
+public class SesameTransformationInjectSwitchSet extends SesameTransformationInject {
 
-	public SesameTransformationUserSwitchSet(final SesameDriver sesameDriver) {
+	public SesameTransformationInjectSwitchSet(final SesameDriver sesameDriver) {
 		super(sesameDriver);
 	}
 

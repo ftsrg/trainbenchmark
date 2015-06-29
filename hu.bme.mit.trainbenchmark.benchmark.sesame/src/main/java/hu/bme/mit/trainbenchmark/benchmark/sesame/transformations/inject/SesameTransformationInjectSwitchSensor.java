@@ -19,9 +19,9 @@ import java.util.Collection;
 
 import org.openrdf.model.URI;
 
-public class SesameTransformationUserSwitchSensor extends SesameTransformationUser {
+public class SesameTransformationInjectSwitchSensor extends SesameTransformationInject {
 
-	public SesameTransformationUserSwitchSensor(final SesameDriver sesameDriver) {
+	public SesameTransformationInjectSwitchSensor(final SesameDriver sesameDriver) {
 		super(sesameDriver);
 	}
 

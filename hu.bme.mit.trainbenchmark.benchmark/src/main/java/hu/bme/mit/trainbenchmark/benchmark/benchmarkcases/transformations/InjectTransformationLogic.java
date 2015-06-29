@@ -31,9 +31,9 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Ordering;
 
-public class UserTransformationLogic<M, T> extends TransformationLogic<M, T, T> {
+public class InjectTransformationLogic<M, T> extends TransformationLogic<M, T, T> {
 
-	protected UserTransformationLogic(final Comparator<?> comparator) {
+	protected InjectTransformationLogic(final Comparator<?> comparator) {
 		super(comparator);
 	}
 

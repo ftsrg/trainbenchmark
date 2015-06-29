@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransfor
 
 import org.openrdf.model.URI;
 
-public abstract class SesameTransformationUser extends SesameTransformation<URI> {
+public abstract class SesameTransformationInject extends SesameTransformation<URI> {
 
-	protected SesameTransformationUser(final SesameDriver sesameDriver) {
+	protected SesameTransformationInject(final SesameDriver sesameDriver) {
 		super(sesameDriver);
 	}
 

@@ -2,12 +2,12 @@ package hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationUserSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair.OrientDbTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair.OrientDbTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair.OrientDbTransformationRepairRouteSensor;
@@ -47,17 +47,17 @@ public abstract class OrientDbTransformation<M> extends Transformation<M> {
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new OrientDbTransformationUserConnectedSegments(orientDriver);
+				return new OrientDbTransformationInjectConnectedSegments(orientDriver);
 			case POSLENGTH:
-				return new OrientDbTransformationUserPosLength(orientDriver);
+				return new OrientDbTransformationInjectPosLength(orientDriver);
 			case ROUTESENSOR:
-				return new OrientDbTransformationUserRouteSensor(orientDriver);
+				return new OrientDbTransformationInjectRouteSensor(orientDriver);
 			case SEMAPHORENEIGHBOR:
-				return new OrientDbTransformationUserSemaphoreNeighbor(orientDriver);
+				return new OrientDbTransformationInjectSemaphoreNeighbor(orientDriver);
 			case SWITCHSENSOR:
-				return new OrientDbTransformationUserSwitchSensor(orientDriver);
+				return new OrientDbTransformationInjectSwitchSensor(orientDriver);
 			case SWITCHSET:
-				return new OrientDbTransformationUserSwitchSet(orientDriver);
+				return new OrientDbTransformationInjectSwitchSet(orientDriver);
 			default:
 				break;
 			}

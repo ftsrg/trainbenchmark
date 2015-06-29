@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformati
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public abstract class JenaTransformationUser extends JenaTransformation<Resource> {
+public abstract class JenaTransformationInject extends JenaTransformation<Resource> {
 
-	protected JenaTransformationUser(final JenaDriver jenaDriver) {
+	protected JenaTransformationInject(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 
