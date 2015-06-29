@@ -13,18 +13,18 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.user.JenaTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -55,7 +55,7 @@ public abstract class JenaTransformation<M> extends Transformation<M> {
 			default:
 				break;
 			}
-		case USER:
+		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new JenaTransformationUserConnectedSegments(jenaDriver);

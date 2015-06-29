@@ -15,18 +15,18 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserConnectedSegments;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserPosLength;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserRouteSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserSwitchSensor;
+import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.emf.transformation.user.EMFTransformationUserSwitchSet;
 
 public abstract class EMFTransformation<O> extends Transformation<O> {
 
@@ -49,7 +49,7 @@ public abstract class EMFTransformation<O> extends Transformation<O> {
 			default:
 				break;
 			}
-		case USER:
+		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new EMFTransformationUserConnectedSegments(driver);
