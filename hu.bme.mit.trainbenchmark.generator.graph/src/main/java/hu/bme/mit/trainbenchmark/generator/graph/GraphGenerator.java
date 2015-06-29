@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.DynamicRelationshipType;
@@ -33,7 +34,6 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.kernel.impl.util.FileUtils;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
@@ -57,7 +57,7 @@ public class GraphGenerator extends Generator {
 	@Override
 	protected void initModel() throws IOException {
 		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
-		final String databasePath = databaseDirectoriesPath + "/railway" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
+		final String databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
@@ -65,11 +65,11 @@ public class GraphGenerator extends Generator {
 		}
 
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databasePath);
-		
+
 		// bump the initial id from 0 to 1
 		try (Transaction tx = graphDb.beginTx()) {
 			graphDb.createNode().delete();
-			tx.success();		
+			tx.success();
 		}
 	}
 
@@ -125,7 +125,7 @@ public class GraphGenerator extends Generator {
 		if (from == null || to == null) {
 			return;
 		}
-		
+
 		final Node source = (Node) from;
 		final Node target = (Node) to;
 
@@ -158,15 +158,16 @@ public class GraphGenerator extends Generator {
 				tx.success();
 
 				final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
-				
+
 				String graphmlContent = writer.toString();
-				if (graphGeneratorConfig.isOrientDb()) {
-					graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
-							"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" "
-							+ "attr.name=\"labels\" attr.type=\"string\"/>");
-				}
-				
-				FileUtils.writeToFile(new File(fileName), graphmlContent.trim(), false);
+				// this is required to be compatibile with OrientDB
+				graphmlContent = graphmlContent
+						.replaceAll(
+								//
+								"<graph id=\"G\" edgedefault=\"directed\">",
+								"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
+
+				FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
 			} catch (final XMLStreamException e) {
 				throw new IOException(e);
 			}

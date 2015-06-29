@@ -21,7 +21,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ancestors;
 import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,7 +40,7 @@ public class SQLGenerator extends Generator {
 
 	public SQLGenerator(final String[] args) throws ParseException {
 		super();
-		generatorConfig = new GeneratorConfig(args);
+		generatorConfig = new SQLGeneratorConfig(args);
 	}
 
 	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of( //

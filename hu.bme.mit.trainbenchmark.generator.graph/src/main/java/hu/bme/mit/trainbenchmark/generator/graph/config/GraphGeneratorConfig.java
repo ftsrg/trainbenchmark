@@ -18,28 +18,8 @@ import org.apache.commons.cli.ParseException;
 
 public class GraphGeneratorConfig extends GeneratorConfig {
 
-	protected boolean orientdb;
-
-	public GraphGeneratorConfig(String[] args) throws ParseException {
+	public GraphGeneratorConfig(final String[] args) throws ParseException {
 		super(args);
-	}
-
-	@Override
-	protected void initOptions() {
-		super.initOptions();
-
-		options.addOption("orientdb", false, "generate graphml for orientdb");
-	}
-
-	@Override
-	public void processArguments(String[] args) throws ParseException {
-		super.processArguments(args);
-		
-		orientdb = cmd.hasOption("orientdb");
-	}
-	
-	public boolean isOrientDb() {
-		return orientdb;
 	}
 
 }

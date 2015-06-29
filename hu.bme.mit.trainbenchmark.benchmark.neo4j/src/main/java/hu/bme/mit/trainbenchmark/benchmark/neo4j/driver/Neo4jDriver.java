@@ -38,8 +38,6 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.io.FileUtils;
-import org.neo4j.cypher.javacompat.ExecutionEngine;
-import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -48,6 +46,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.ResourceIterator;
+import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
@@ -55,7 +54,7 @@ import org.neo4j.shell.tools.imp.util.MapNodeCache;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jDriver extends Driver<Node> {
-	
+
 	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(DEFINED_BY);
 	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
 	protected final RelationshipType sensorEdge = DynamicRelationshipType.withName(SENSOR_EDGE);
@@ -107,9 +106,9 @@ public class Neo4jDriver extends Driver<Node> {
 		final List<Neo4jMatch> results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
-			final ExecutionEngine engine = new ExecutionEngine(graphDb);
-			final ExecutionResult result = engine.execute(queryDefinition);
-			for (final Map<String, Object> row : result) {
+			final Result executionResult = graphDb.execute(queryDefinition);
+			while (executionResult.hasNext()) {
+				final Map<String, Object> row = executionResult.next();
 				results.add(createMatch(query, row));
 			}
 		}
