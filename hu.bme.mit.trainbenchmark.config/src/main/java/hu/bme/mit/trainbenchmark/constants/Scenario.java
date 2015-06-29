@@ -14,8 +14,7 @@ package hu.bme.mit.trainbenchmark.constants;
 public enum Scenario {
 	BATCH("Batch"), //
 	REPAIR("Repair"), //
-	USER("User"), //
-	TEST("Test");
+	USER("User");
 
 	private String name;
 

@@ -110,18 +110,6 @@ public abstract class Generator {
 			switchSetErrorPercent = 10;
 			connectedSegmentsErrorPercent = 5;
 			break;
-		case TEST:
-			maxSegments = 5;
-			maxRoutes = 5 * generatorConfig.getSize();
-			maxSwitchPositions = 20;
-			maxSensors = 10;
-			posLengthErrorPercent = 6;
-			switchSensorErrorPercent = 10;
-			routeSensorErrorPercent = 15;
-			semaphoreNeighborErrorPercent = 15;
-			switchSetErrorPercent = 20;
-			connectedSegmentsErrorPercent = 5;
-			break;
 		default:
 			throw new UnsupportedOperationException("Scenario not supported.");
 		}

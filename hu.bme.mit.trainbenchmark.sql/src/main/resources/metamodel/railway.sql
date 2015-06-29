@@ -1,4 +1,4 @@
-SET GLOBAL sql_mode = 'ANSI';
+SET SESSION sql_mode = 'ANSI_QUOTES';
 --
 -- Database: "trainbenchmark"
 --
