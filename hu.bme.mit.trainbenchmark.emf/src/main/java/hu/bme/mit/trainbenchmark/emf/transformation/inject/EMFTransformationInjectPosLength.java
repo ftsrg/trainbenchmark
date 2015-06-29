@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.Collection;
 
-public class EMFTransformationUserPosLength extends EMFTransformationUser<Segment> {
+public class EMFTransformationInjectPosLength extends EMFTransformationInject<Segment> {
 
-	public EMFTransformationUserPosLength(final EMFDriver driver) {
+	public EMFTransformationInjectPosLength(final EMFDriver driver) {
 		super(driver);
 	}
 

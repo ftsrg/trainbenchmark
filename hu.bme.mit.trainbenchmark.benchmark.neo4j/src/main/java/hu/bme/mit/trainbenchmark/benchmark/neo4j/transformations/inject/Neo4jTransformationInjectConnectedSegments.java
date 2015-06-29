@@ -23,9 +23,9 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
-public class Neo4jTransformationUserConnectedSegments extends Neo4jTransformationUser {
+public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformationInject {
 
-	public Neo4jTransformationUserConnectedSegments(final Neo4jDriver neoDriver) {
+	public Neo4jTransformationInjectConnectedSegments(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

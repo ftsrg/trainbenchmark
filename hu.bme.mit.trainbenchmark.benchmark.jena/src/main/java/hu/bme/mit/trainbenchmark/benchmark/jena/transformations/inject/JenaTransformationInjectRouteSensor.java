@@ -20,9 +20,9 @@ import java.util.Collection;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaTransformationUserRouteSensor extends JenaTransformationUser {
+public class JenaTransformationInjectRouteSensor extends JenaTransformationInject {
 
-	public JenaTransformationUserRouteSensor(final JenaDriver jenaDriver) {
+	public JenaTransformationInjectRouteSensor(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 

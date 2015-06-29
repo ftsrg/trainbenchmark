@@ -18,9 +18,9 @@ import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 
-public class Neo4jTransformationUserPosLength extends Neo4jTransformationUser {
+public class Neo4jTransformationInjectPosLength extends Neo4jTransformationInject {
 
-	public Neo4jTransformationUserPosLength(final Neo4jDriver neoDriver) {
+	public Neo4jTransformationInjectPosLength(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

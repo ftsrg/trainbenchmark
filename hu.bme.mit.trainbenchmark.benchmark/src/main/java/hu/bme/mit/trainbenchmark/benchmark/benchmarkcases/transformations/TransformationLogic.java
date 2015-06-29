@@ -35,7 +35,7 @@ public abstract class TransformationLogic<M, T, O> {
 		case REPAIR:
 			return new RepairTransformationLogic<>(comparator);
 		case INJECT:
-			return new UserTransformationLogic<>(comparator);
+			return new InjectTransformationLogic<>(comparator);
 		default:
 			throw new UnsupportedOperationException("Scenario " + scenario + " not supported");
 		}

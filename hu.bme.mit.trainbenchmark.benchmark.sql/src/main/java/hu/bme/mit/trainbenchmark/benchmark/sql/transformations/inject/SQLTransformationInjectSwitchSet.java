@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class SQLTransformationUserSwitchSet extends SQLTransformationUser {
+public class SQLTransformationInjectSwitchSet extends SQLTransformationInject {
 
-	public SQLTransformationUserSwitchSet(final SQLDriver sqlDriver) {
+	public SQLTransformationInjectSwitchSet(final SQLDriver sqlDriver) {
 		super(sqlDriver);
 	}
 

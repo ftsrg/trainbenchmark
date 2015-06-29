@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.railway.Route;
 
 import java.util.Collection;
 
-public class EMFTransformationUserSemaphoreNeighbor extends EMFTransformationUser<Route> {
+public class EMFTransformationInjectSemaphoreNeighbor extends EMFTransformationInject<Route> {
 
-	public EMFTransformationUserSemaphoreNeighbor(final EMFDriver driver) {
+	public EMFTransformationInjectSemaphoreNeighbor(final EMFDriver driver) {
 		super(driver);
 	}
 

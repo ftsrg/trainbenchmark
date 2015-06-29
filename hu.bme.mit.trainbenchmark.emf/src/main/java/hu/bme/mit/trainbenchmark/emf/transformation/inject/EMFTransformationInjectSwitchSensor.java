@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import java.util.Collection;
 
-public class EMFTransformationUserSwitchSensor extends EMFTransformationUser<Switch> {
+public class EMFTransformationInjectSwitchSensor extends EMFTransformationInject<Switch> {
 
-	public EMFTransformationUserSwitchSensor(final EMFDriver driver) {
+	public EMFTransformationInjectSwitchSensor(final EMFDriver driver) {
 		super(driver);
 	}
 

@@ -20,9 +20,9 @@ import java.util.Collection;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaTransformationUserSemaphoreNeighbor extends JenaTransformationUser {
+public class JenaTransformationInjectSemaphoreNeighbor extends JenaTransformationInject {
 
-	public JenaTransformationUserSemaphoreNeighbor(final JenaDriver jenaDriver) {
+	public JenaTransformationInjectSemaphoreNeighbor(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 

@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairRouteSensor;
@@ -58,17 +58,17 @@ public abstract class SQLTransformation<M> extends Transformation<M> {
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new SQLTransformationUserConnectedSegments(sqlDriver);				
+				return new SQLTransformationInjectConnectedSegments(sqlDriver);				
 			case POSLENGTH:
-				return new SQLTransformationUserPosLength(sqlDriver);
+				return new SQLTransformationInjectPosLength(sqlDriver);
 			case ROUTESENSOR:
-				return new SQLTransformationUserRouteSensor(sqlDriver);
+				return new SQLTransformationInjectRouteSensor(sqlDriver);
 			case SEMAPHORENEIGHBOR:
-				return new SQLTransformationUserSemaphoreNeighbor(sqlDriver);
+				return new SQLTransformationInjectSemaphoreNeighbor(sqlDriver);
 			case SWITCHSENSOR:
-				return new SQLTransformationUserSwitchSensor(sqlDriver);
+				return new SQLTransformationInjectSwitchSensor(sqlDriver);
 			case SWITCHSET:
-				return new SQLTransformationUserSwitchSet(sqlDriver);
+				return new SQLTransformationInjectSwitchSet(sqlDriver);
 			default:
 				break;
 			}

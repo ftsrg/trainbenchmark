@@ -18,9 +18,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class SQLTransformationUserRouteSensor extends SQLTransformationUser {
+public class SQLTransformationInjectRouteSensor extends SQLTransformationInject {
 
-	public SQLTransformationUserRouteSensor(final SQLDriver sqlDriver) {
+	public SQLTransformationInjectRouteSensor(final SQLDriver sqlDriver) {
 		super(sqlDriver);
 	}
 

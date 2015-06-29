@@ -7,9 +7,9 @@ import java.util.Collection;
 
 import com.tinkerpop.blueprints.Vertex;
 
-public class OrientDbTransformationUserPosLength extends OrientDbTransformationUser {
+public class OrientDbTransformationInjectPosLength extends OrientDbTransformationInject {
 
-	public OrientDbTransformationUserPosLength(final OrientDbDriver orientDriver) {
+	public OrientDbTransformationInjectPosLength(final OrientDbDriver orientDriver) {
 		super(orientDriver);
 	}
 

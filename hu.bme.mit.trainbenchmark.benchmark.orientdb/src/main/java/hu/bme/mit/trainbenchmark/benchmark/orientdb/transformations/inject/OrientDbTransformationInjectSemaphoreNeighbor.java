@@ -9,9 +9,9 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
-public class OrientDbTransformationUserSemaphoreNeighbor extends OrientDbTransformationUser{
+public class OrientDbTransformationInjectSemaphoreNeighbor extends OrientDbTransformationInject{
 
-	public OrientDbTransformationUserSemaphoreNeighbor(final OrientDbDriver orientDriver) {
+	public OrientDbTransformationInjectSemaphoreNeighbor(final OrientDbDriver orientDriver) {
 		super(orientDriver);
 	}
 

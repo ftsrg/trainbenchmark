@@ -5,9 +5,9 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.OrientDbTran
 
 import com.tinkerpop.blueprints.Vertex;
 
-public abstract class OrientDbTransformationUser extends OrientDbTransformation<Vertex> {
+public abstract class OrientDbTransformationInject extends OrientDbTransformation<Vertex> {
 
-	protected OrientDbTransformationUser(final OrientDbDriver orientDriver) {
+	protected OrientDbTransformationInject(final OrientDbDriver orientDriver) {
 		super(orientDriver);
 	}
 	

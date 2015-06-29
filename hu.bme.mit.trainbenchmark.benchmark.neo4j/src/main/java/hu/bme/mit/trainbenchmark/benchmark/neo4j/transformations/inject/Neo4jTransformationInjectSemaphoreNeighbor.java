@@ -19,9 +19,9 @@ import java.util.Collection;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
-public class Neo4jTransformationUserSemaphoreNeighbor extends Neo4jTransformationUser {
+public class Neo4jTransformationInjectSemaphoreNeighbor extends Neo4jTransformationInject {
 
-	public Neo4jTransformationUserSemaphoreNeighbor(final Neo4jDriver neoDriver) {
+	public Neo4jTransformationInjectSemaphoreNeighbor(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

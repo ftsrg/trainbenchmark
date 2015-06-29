@@ -29,9 +29,9 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class JenaTransformationUserConnectedSegments extends JenaTransformationUser {
+public class JenaTransformationInjectConnectedSegments extends JenaTransformationInject {
 
-	public JenaTransformationUserConnectedSegments(final JenaDriver jenaDriver) {
+	public JenaTransformationInjectConnectedSegments(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 

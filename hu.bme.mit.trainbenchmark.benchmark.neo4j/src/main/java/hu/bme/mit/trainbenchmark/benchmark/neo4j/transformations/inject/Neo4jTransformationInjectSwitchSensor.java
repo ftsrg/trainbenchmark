@@ -19,9 +19,9 @@ import java.util.Collection;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
-public class Neo4jTransformationUserSwitchSensor extends Neo4jTransformationUser {
+public class Neo4jTransformationInjectSwitchSensor extends Neo4jTransformationInject {
 
-	public Neo4jTransformationUserSwitchSensor(final Neo4jDriver neoDriver) {
+	public Neo4jTransformationInjectSwitchSensor(final Neo4jDriver neoDriver) {
 		super(neoDriver);
 	}
 

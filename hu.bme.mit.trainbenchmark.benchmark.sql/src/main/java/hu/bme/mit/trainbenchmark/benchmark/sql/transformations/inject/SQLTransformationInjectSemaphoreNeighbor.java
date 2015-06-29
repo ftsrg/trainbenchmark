@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class SQLTransformationUserSemaphoreNeighbor extends SQLTransformationUser {
+public class SQLTransformationInjectSemaphoreNeighbor extends SQLTransformationInject {
 
-	public SQLTransformationUserSemaphoreNeighbor(final SQLDriver sqlDriver) {
+	public SQLTransformationInjectSemaphoreNeighbor(final SQLDriver sqlDriver) {
 		super(sqlDriver);
 	}
 

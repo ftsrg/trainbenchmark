@@ -18,9 +18,9 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import java.util.Collection;
 
-public class EMFTransformationUserConnectedSegments extends EMFTransformationUser<Segment> {
+public class EMFTransformationInjectConnectedSegments extends EMFTransformationInject<Segment> {
 
-	public EMFTransformationUserConnectedSegments(final EMFDriver driver) {
+	public EMFTransformationInjectConnectedSegments(final EMFDriver driver) {
 		super(driver);
 	}
 

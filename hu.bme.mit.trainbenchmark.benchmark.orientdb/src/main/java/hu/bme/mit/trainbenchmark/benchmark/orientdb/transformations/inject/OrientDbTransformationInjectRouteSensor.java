@@ -9,9 +9,9 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
-public class OrientDbTransformationUserRouteSensor extends OrientDbTransformationUser {
+public class OrientDbTransformationInjectRouteSensor extends OrientDbTransformationInject {
 
-	public OrientDbTransformationUserRouteSensor(final OrientDbDriver orientDriver) {
+	public OrientDbTransformationInjectRouteSensor(final OrientDbDriver orientDriver) {
 		super(orientDriver);
 	}
 	

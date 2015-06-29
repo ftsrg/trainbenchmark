@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairRouteSensor;
@@ -58,17 +58,17 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new Neo4jTransformationUserConnectedSegments(neoDriver);				
+				return new Neo4jTransformationInjectConnectedSegments(neoDriver);				
 			case POSLENGTH:
-				return new Neo4jTransformationUserPosLength(neoDriver);
+				return new Neo4jTransformationInjectPosLength(neoDriver);
 			case ROUTESENSOR:
-				return new Neo4jTransformationUserRouteSensor(neoDriver);
+				return new Neo4jTransformationInjectRouteSensor(neoDriver);
 			case SEMAPHORENEIGHBOR:
-				return new Neo4jTransformationUserSemaphoreNeighbor(neoDriver);
+				return new Neo4jTransformationInjectSemaphoreNeighbor(neoDriver);
 			case SWITCHSENSOR:
-				return new Neo4jTransformationUserSwitchSensor(neoDriver);
+				return new Neo4jTransformationInjectSwitchSensor(neoDriver);
 			case SWITCHSET:
-				return new Neo4jTransformationUserSwitchSet(neoDriver);
+				return new Neo4jTransformationInjectSwitchSet(neoDriver);
 			default:
 				break;
 			}

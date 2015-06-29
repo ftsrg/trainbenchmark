@@ -30,9 +30,9 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
-public class SesameTransformationUserConnectedSegments extends SesameTransformationUser {
+public class SesameTransformationInjectConnectedSegments extends SesameTransformationInject {
 
-	public SesameTransformationUserConnectedSegments(final SesameDriver sesameDriver) {
+	public SesameTransformationInjectConnectedSegments(final SesameDriver sesameDriver) {
 		super(sesameDriver);
 	}
 

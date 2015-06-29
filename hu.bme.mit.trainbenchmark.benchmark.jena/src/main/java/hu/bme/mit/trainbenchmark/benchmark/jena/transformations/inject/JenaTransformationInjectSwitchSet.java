@@ -28,9 +28,9 @@ import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
-public class JenaTransformationUserSwitchSet extends JenaTransformationUser {
+public class JenaTransformationInjectSwitchSet extends JenaTransformationInject {
 
-	public JenaTransformationUserSwitchSet(final JenaDriver jenaDriver) {
+	public JenaTransformationInjectSwitchSet(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 
