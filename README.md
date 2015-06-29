@@ -14,7 +14,7 @@ For theoretical and implementation details, check out the following documents:
 ## Prerequisites
 
 * 64-bit operating system (we recommend Ubuntu-based Linux systems)
-* [Oracle JDK](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
+* [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 
 ## Projects
