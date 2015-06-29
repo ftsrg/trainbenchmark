@@ -10,35 +10,33 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.allegro.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.allegro;
 
+import hu.bme.mit.trainbenchmark.benchmark.allegro.driver.AllegroDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
-import java.util.Collection;
-
-import org.openrdf.model.URI;
 
 public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 
-	protected RDFBenchmarkConfig rdfConfig;
+	@Override
+	protected void init() throws IOException {
+		this.rbc = (RDFBenchmarkConfig) bc;
 
-	public String getResourceDirectory() {
-		return bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/";
+		driver = sesameDriver = new AllegroDriver();
+		checker = new SesameChecker(sesameDriver, bc);
+
+		if (bc.getScenario() != Scenario.BATCH) {
+			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
+		}
 	}
+
 
 	
 	
-	@Override
-	protected void read() throws IOException {
-		driver.read(bc.getModelPathNameWithoutExtension() + ".ttl");		
-	}
-
-	@Override
-	protected Collection<URI> check() throws IOException {
-		matches = driver.runQuery();
-		return matches;
-	}
 
 }
