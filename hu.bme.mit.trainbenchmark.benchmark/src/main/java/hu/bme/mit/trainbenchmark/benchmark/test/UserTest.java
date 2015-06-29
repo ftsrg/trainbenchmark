@@ -29,12 +29,12 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void connectedSegmentsUser() throws ParseException, IOException {
-		testTransformation(CONNECTEDSEGMENTS, USER, 46);
+		testTransformation(CONNECTEDSEGMENTS, USER, 5);
 	}
 
 	@Test
 	public void posLengthUser() throws ParseException, IOException {
-		testTransformation(POSLENGTH, USER, 78);
+		testTransformation(POSLENGTH, USER, 22);
 	}
 
 	@Test
@@ -44,17 +44,17 @@ public abstract class UserTest extends TransformationTest {
 
 	@Test
 	public void semaphoreNeighborUser() throws ParseException, IOException {
-		testTransformation(SEMAPHORENEIGHBOR, USER, 3);
+		testTransformation(SEMAPHORENEIGHBOR, USER, 2);
 	}
 
 	@Test
 	public void switchSensorUser() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, USER, 2);
+		testTransformation(SWITCHSENSOR, USER, 1);
 	}
 
 	@Test
 	public void switchSetUser() throws ParseException, IOException {
-		testTransformation(SWITCHSET, USER, 3);
+		testTransformation(SWITCHSET, USER, 1);
 	}
 
 }
