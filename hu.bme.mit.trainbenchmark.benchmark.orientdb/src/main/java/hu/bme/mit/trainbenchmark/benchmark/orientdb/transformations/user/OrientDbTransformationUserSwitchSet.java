@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.user;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
+import hu.bme.mit.trainbenchmark.constants.Position;
 
 import java.util.Collection;
 
@@ -16,27 +17,10 @@ public class OrientDbTransformationUserSwitchSet extends OrientDbTransformationU
 	@Override
 	public void rhs(final Collection<Vertex> switches) {
 		for (final Vertex sw : switches) {
-			final String currentPosition = sw.getProperty(CURRENTPOSITION);
-			String nextPosition;
-			switch(currentPosition) {
-				case "FAILURE":
-					nextPosition = "LEFT";
-					break;
-				case "LEFT":
-					nextPosition = "RIGHT";
-					break;
-				case "RIGHT":
-					nextPosition = "STRAIGHT";
-					break;
-				case "STRAIGHT":
-					nextPosition = "FAILURE";
-					break;
-				default:
-					nextPosition = "";
-					break;
-			}
-			
-			sw.setProperty(CURRENTPOSITION, nextPosition);
+			final String currentPositionString = sw.getProperty(CURRENTPOSITION);
+			final Position currentPosition = Position.valueOf(currentPositionString);
+			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];			
+			sw.setProperty(CURRENTPOSITION, newCurrentPosition.toString());
 		}
 	}
 	

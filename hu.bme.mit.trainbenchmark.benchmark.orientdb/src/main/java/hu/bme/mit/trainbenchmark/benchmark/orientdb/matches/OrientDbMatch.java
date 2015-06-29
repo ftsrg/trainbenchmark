@@ -17,8 +17,8 @@ public abstract class OrientDbMatch {
 
 	public static OrientDbMatch createMatch(final Query query, final Row row) {
 		switch (query) {
-		// case CONNECTEDSEGMENTS:
-		// return new OrientDbConnectedSegmentsMatch(row);
+		case CONNECTEDSEGMENTS:
+			return new OrientDbConnectedSegmentsMatch(row);
 		case POSLENGTH:
 			return new OrientDbPosLengthMatch(row);
 		case ROUTESENSOR:

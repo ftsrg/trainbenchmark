@@ -25,7 +25,6 @@ import java.util.Map.Entry;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.DynamicRelationshipType;
@@ -34,6 +33,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.kernel.impl.util.FileUtils;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
@@ -158,7 +158,15 @@ public class GraphGenerator extends Generator {
 				tx.success();
 
 				final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
-				FileUtils.write(new File(fileName), writer.toString().trim(), false);
+				
+				String graphmlContent = writer.toString();
+				if (graphGeneratorConfig.isOrientDb()) {
+					graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
+							"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" "
+							+ "attr.name=\"labels\" attr.type=\"string\"/>");
+				}
+				
+				FileUtils.writeToFile(new File(fileName), graphmlContent.trim(), false);
 			} catch (final XMLStreamException e) {
 				throw new IOException(e);
 			}
