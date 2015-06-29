@@ -5,7 +5,7 @@
 * Waffle: [![Stories in Ready](https://badge.waffle.io/FTSRG/trainbenchmark.png?label=ready&title=Ready)](https://waffle.io/FTSRG/trainbenchmark)
 * [Sonar](http://build.inf.mit.bme.hu/sonar/dashboard/index/14429)
 
-**Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
+**Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
 
 For theoretical and implementation details, check out the following documents:
 * [Train Benchmark technical report](https://www.sharelatex.com/github/repos/FTSRG/trainbenchmark-docs/builds/latest/output.pdf) ([GitHub repository](https://github.com/FTSRG/trainbenchmark-docs))
@@ -14,7 +14,7 @@ For theoretical and implementation details, check out the following documents:
 ## Prerequisites
 
 * 64-bit operating system (we recommend Ubuntu-based Linux systems)
-* [Oracle JDK 7](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#oracle-jdk-7) (JDK 8 is not supported yet)
+* [Oracle JDK](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 
 ## Projects
