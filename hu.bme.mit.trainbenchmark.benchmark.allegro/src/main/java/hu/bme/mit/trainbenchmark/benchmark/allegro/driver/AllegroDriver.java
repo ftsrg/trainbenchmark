@@ -32,14 +32,10 @@ public class AllegroDriver extends SesameDriver {
 
 	// TODO store the parameters below in external configuration file
 	protected String AGServerURL = "http://localhost:10035";
-	protected String AGServerUsername = "root";
-	protected String AGServerPassword = "root";
+	protected String AGServerUsername = "super";
+	protected String AGServerPassword = "super";
 	protected String catalogID = "system";
 	protected String repositoryID = "train";
-
-	public AllegroDriver(final String queryPath) throws IOException {
-		super(queryPath);
-	}
 
 	@Override
 	public void destroy() throws IOException {
@@ -67,7 +63,7 @@ public class AllegroDriver extends SesameDriver {
 			repository = catalog.createRepository(repositoryID);
 			repository.initialize();
 
-			final File modelFile = new File(modelPath);
+			final File modelFile = new File(modelPath + getExtension());
 
 			connection = repository.getConnection();
 			connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);

@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.allegro;
 
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 

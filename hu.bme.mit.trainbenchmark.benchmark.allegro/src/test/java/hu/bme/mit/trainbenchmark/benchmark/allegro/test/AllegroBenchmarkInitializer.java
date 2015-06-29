@@ -13,10 +13,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.allegro.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.allegro.AllegroBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 public class AllegroBenchmarkInitializer extends TestBenchmarkInitializer<AllegroBenchmarkLogic> {
 

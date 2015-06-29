@@ -23,34 +23,31 @@ import org.openrdf.rio.RDFFormat;
 
 import virtuoso.sesame2.driver.VirtuosoRepository;
 
-public class VirtuosoDriver extends SesameDriver{
+public class VirtuosoDriver extends SesameDriver {
 
 	private final String VIRTUOSO_INSTANCE = "localhost";
 	private final String VIRTUOSO_PORT = "1111";
 	private final String VIRTUOSO_USERNAME = "dba";
 	private final String VIRTUOSO_PASSWORD = "dba";
-	
+
 	protected VirtuosoRepository virtuosoRepository;
-	
-	public VirtuosoDriver(String queryPath) throws IOException {
-		super(queryPath);
-	}
 
 	@Override
 	public void beginTransaction() {
 		vf = virtuosoRepository.getValueFactory();
 	}
-	
+
 	@Override
-	public void read(String modelPath) throws IOException {
-		virtuosoRepository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT, VIRTUOSO_USERNAME, VIRTUOSO_PASSWORD);
-		final File modelFile = new File(modelPath);
+	public void read(final String modelPath) throws IOException {
+		virtuosoRepository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT, VIRTUOSO_USERNAME,
+				VIRTUOSO_PASSWORD);
+		
+		final File modelFile = new File(modelPath + getExtension());
 		try {
 			virtuosoRepository.initialize();
 			connection = virtuosoRepository.getConnection();
 			connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
-		}
-		catch (OpenRDFException e) {
+		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
 	}
