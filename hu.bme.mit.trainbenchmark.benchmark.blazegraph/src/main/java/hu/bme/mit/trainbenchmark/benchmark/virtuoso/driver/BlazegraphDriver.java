@@ -16,19 +16,16 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 import java.io.IOException;
 
-import virtuoso.sesame2.driver.VirtuosoRepository;
+import com.bigdata.rdf.sail.remote.BigdataSailFactory;
 
-public class VirtuosoDriver extends SesameDriver {
+public class BlazegraphDriver extends SesameDriver {
 
-	private final String VIRTUOSO_INSTANCE = "localhost";
-	private final String VIRTUOSO_PORT = "1111";
-	private final String VIRTUOSO_USERNAME = "dba";
-	private final String VIRTUOSO_PASSWORD = "dba";
+	protected final String BLAZEGRAPH_INSTANCE = "localhost";
+	protected final int BLAZEGRAPH_PORT = 9999;
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
-		repository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT, VIRTUOSO_USERNAME,
-				VIRTUOSO_PASSWORD);
+		repository = BigdataSailFactory.connect(BLAZEGRAPH_INSTANCE, BLAZEGRAPH_PORT);
 		load(modelPathWithoutExtension);
 	}
 

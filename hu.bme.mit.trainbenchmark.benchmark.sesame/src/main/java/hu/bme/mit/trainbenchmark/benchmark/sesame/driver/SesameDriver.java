@@ -70,6 +70,10 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		repository = new SailRepository(new MemoryStore());
+		load(modelPathWithoutExtension);
+	}
+
+	protected void load(final String modelPathWithoutExtension) throws IOException {
 		final File modelFile = new File(modelPathWithoutExtension + getExtension());
 
 		try {

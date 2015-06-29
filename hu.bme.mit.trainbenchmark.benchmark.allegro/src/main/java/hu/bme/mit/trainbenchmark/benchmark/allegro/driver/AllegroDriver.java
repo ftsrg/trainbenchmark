@@ -13,16 +13,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.allegro.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.openrdf.OpenRDFException;
 import org.openrdf.repository.RepositoryException;
-import org.openrdf.rio.RDFFormat;
 
-import com.franz.agraph.http.exception.AGHttpException;
 import com.franz.agraph.repository.AGCatalog;
 import com.franz.agraph.repository.AGServer;
 
@@ -30,7 +26,6 @@ public class AllegroDriver extends SesameDriver {
 
 	protected AGCatalog catalog;
 
-	// TODO store the parameters below in external configuration file
 	protected String AGServerURL = "http://localhost:10035";
 	protected String AGServerUsername = "super";
 	protected String AGServerPassword = "super";
@@ -48,27 +43,18 @@ public class AllegroDriver extends SesameDriver {
 	}
 
 	@Override
-	public void read(final String modelPath) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws IOException {
 		final AGServer agServer = new AGServer(AGServerURL, AGServerUsername, AGServerPassword);
 		try {
 			catalog = agServer.getCatalog(catalogID);
-		} catch (final AGHttpException e) {
-			throw new IOException(e);
-		}
-		try {
 			if (catalog.hasRepository(repositoryID)) {
 				catalog.deleteRepository(repositoryID);
 			}
-
 			repository = catalog.createRepository(repositoryID);
-			repository.initialize();
-
-			final File modelFile = new File(modelPath + getExtension());
-
-			connection = repository.getConnection();
-			connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 		} catch (final OpenRDFException e) {
 			throw new IOException(e);
 		}
+
+		load(modelPathWithoutExtension);
 	}
 }
