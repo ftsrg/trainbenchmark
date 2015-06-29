@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
-import static hu.bme.mit.trainbenchmark.constants.Scenario.USER;
+import static hu.bme.mit.trainbenchmark.constants.Scenario.INJECT;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
@@ -52,8 +52,8 @@ public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 			default:
 				break;
 			}
-		case USER:
-			return EMFTransformation.newInstance(driver, query, USER);
+		case INJECT:
+			return EMFTransformation.newInstance(driver, query, INJECT);
 		default:
 			break;
 		}

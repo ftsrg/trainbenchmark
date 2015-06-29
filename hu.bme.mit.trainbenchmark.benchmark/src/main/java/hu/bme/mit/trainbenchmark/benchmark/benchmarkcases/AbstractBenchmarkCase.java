@@ -107,7 +107,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	protected final Comparator<?> getComparator() {
 		switch (bc.getScenario()) {
 		case BATCH:
-		case USER:
+		case INJECT:
 			return driver.getElementComparator();
 		case REPAIR:
 			return getMatchComparator();

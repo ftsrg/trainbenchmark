@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel VarroScenario
+ * Copyright (c) 2010-2015, Gabor Szarnyas, Benedek Izso, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,21 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 
-public enum Scenario {
-	BATCH("Batch"), //
-	INJECT("Inject"), //
-	REPAIR("Repair");
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 
-	private String name;
+public abstract class SQLTransformationUser extends SQLTransformation<Long> {
 
-	Scenario(final String name) {
-		this.name = name;
+	protected SQLTransformationUser(final SQLDriver sqlDriver) {
+		super(sqlDriver);
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
 }

@@ -13,18 +13,18 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.user.Neo4jTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -55,7 +55,7 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 			default:
 				break;
 			}
-		case USER:
+		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new Neo4jTransformationUserConnectedSegments(neoDriver);				

@@ -10,22 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.cypher;
 
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class ScenarioFactory {
+public class Neo4jCypherInjectTest extends InjectTest {
 
-	public static ScenarioLogic<?> getScenario(final Scenario scenarioName) {
-		switch (scenarioName) {
-		case INJECT:
-			return new UserScenarioLogic();
-		case REPAIR:
-			return new RepairScenarioLogic();
-		case BATCH:
-			return new BatchScenarioLogic();
-		default:
-			throw new UnsupportedOperationException("Invalid scenario.");
-		}
+	public Neo4jCypherInjectTest() {
+		bi = new Neo4jCypherBenchmarkInitializer();
 	}
+
 }

@@ -9,23 +9,13 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.memsql.test;
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+public class MemSQLInjectTest extends InjectTest {
 
-public class ScenarioFactory {
-
-	public static ScenarioLogic<?> getScenario(final Scenario scenarioName) {
-		switch (scenarioName) {
-		case INJECT:
-			return new UserScenarioLogic();
-		case REPAIR:
-			return new RepairScenarioLogic();
-		case BATCH:
-			return new BatchScenarioLogic();
-		default:
-			throw new UnsupportedOperationException("Invalid scenario.");
-		}
-	}
+    public MemSQLInjectTest() {
+	bi = new MemSQLBenchmarkInitializer();
+    }
 }

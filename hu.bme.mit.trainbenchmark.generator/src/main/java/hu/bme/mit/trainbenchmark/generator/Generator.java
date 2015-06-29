@@ -86,7 +86,7 @@ public abstract class Generator {
 
 	private void initializeConstants() {
 		switch (generatorConfig.getScenario()) {
-		case USER:
+		case INJECT:
 			maxSegments = 5;
 			maxRoutes = 5 * generatorConfig.getSize();
 			maxSwitchPositions = 20;

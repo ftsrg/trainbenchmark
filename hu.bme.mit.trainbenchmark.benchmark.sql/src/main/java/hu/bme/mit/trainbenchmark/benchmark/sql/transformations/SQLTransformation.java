@@ -13,18 +13,18 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user.SQLTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user.SQLTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user.SQLTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user.SQLTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user.SQLTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.user.SQLTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -55,7 +55,7 @@ public abstract class SQLTransformation<M> extends Transformation<M> {
 			default:
 				break;
 			}
-		case USER:
+		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new SQLTransformationUserConnectedSegments(sqlDriver);				

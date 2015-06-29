@@ -13,18 +13,18 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.user.SesameTransformationUserSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -55,7 +55,7 @@ public abstract class SesameTransformation<M> extends Transformation<M> {
 			default:
 				break;
 			}
-		case USER:
+		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new SesameTransformationUserConnectedSegments(sesameDriver);

@@ -9,23 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test;
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class ScenarioFactory {
+public class EMFIncQueryInjectTest extends InjectTest {
 
-	public static ScenarioLogic<?> getScenario(final Scenario scenarioName) {
-		switch (scenarioName) {
-		case INJECT:
-			return new UserScenarioLogic();
-		case REPAIR:
-			return new RepairScenarioLogic();
-		case BATCH:
-			return new BatchScenarioLogic();
-		default:
-			throw new UnsupportedOperationException("Invalid scenario.");
-		}
+	public EMFIncQueryInjectTest() {
+		bi = new EMFIncQueryBenchmarkInitializer();
 	}
+
 }
