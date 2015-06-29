@@ -50,7 +50,7 @@
 
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
-			<artifactId>hu.bme.mit.trainbenchmark.sql</artifactId>
+			<artifactId>hu.bme.mit.trainbenchmark.benchmark.sql</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 
 		</dependency>

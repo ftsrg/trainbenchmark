@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql.driver;
 
-import hu.bme.mit.trainbenchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
 import java.io.IOException;
 import java.sql.DriverManager;

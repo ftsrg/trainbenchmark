@@ -34,6 +34,7 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
@@ -149,6 +150,7 @@
 		<profile>
 			<id>memsql</id>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.memsql</module>
 			</modules>
 		</profile>
@@ -156,6 +158,7 @@
 		<profile>
 			<id>mysql</id>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 			</modules>
 		</profile>
@@ -165,8 +168,16 @@
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
 			</modules>
+		</profile>		
+
+		<profile>
+			<id>postgresql</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.postgresql</module>
+			</modules>
 		</profile>
-		
+
 		<profile>
 			<id>orientdb</id>
 			<modules>

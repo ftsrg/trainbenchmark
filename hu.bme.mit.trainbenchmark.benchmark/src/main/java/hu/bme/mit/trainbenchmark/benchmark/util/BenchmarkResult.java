@@ -24,7 +24,6 @@ public class BenchmarkResult {
 	private static final String CHECK = "check";
 	private static final String RECHECK = "recheck";
 	private static final String READ = "read";
-	private static final String MEMORY = "memory";
 	private static final String TIME = "time";
 
 	protected String tool;
@@ -33,7 +32,6 @@ public class BenchmarkResult {
 	protected long startTime;
 
 	protected int runIndex;
-
 	protected final String SEPARATOR = "\t";
 
 	protected List<Long> modifiedElementsSizes = new ArrayList<>();
@@ -45,10 +43,8 @@ public class BenchmarkResult {
 	protected Long readMemory;
 	// phase 2
 	protected List<Long> checkTimes = new ArrayList<>();
-	protected List<Long> checkMemory = new ArrayList<>();
 	// phase 3
 	protected List<Long> repairTimes = new ArrayList<>();
-	protected List<Long> repairMemory = new ArrayList<>();
 
 	public BenchmarkResult(final BenchmarkConfig bc) {
 		this.bc = bc;
@@ -60,6 +56,10 @@ public class BenchmarkResult {
 		return bc;
 	}
 
+	public static BenchmarkResult newInstance(final BenchmarkConfig bc) {
+		return new BenchmarkResult(bc);
+	}
+	
 	public void setBenchmarkConfig(final BenchmarkConfig bc) {
 		this.bc = bc;
 	}
@@ -172,9 +172,16 @@ public class BenchmarkResult {
 		builder.append(value);
 
 		// newline
-		// builder.append(System.lineSeparator());
+		builder.append(System.lineSeparator());
 	}
 
+	public void publish(final boolean includeHeader) {
+		if (includeHeader) {
+			System.out.println("Scenario	RunIndex	Tool	Size	Query	PhaseName	Iteration	MetricName	MetricValue");
+		}
+		System.out.print(toString());
+	}
+	
 	// protected BenchmarkConfig bc;
 	// protected Stopwatch stopwatch;
 	//
@@ -183,10 +190,6 @@ public class BenchmarkResult {
 	// this.bc = bc;
 	// }
 	//
-	public static BenchmarkResult newInstance(final BenchmarkConfig bc) {
-		return new BenchmarkResult(bc);
-	}
-
 	//
 	// @JsonProperty("ModifiedElements")
 	// protected List<Long> modifiedMatchCounts = new ArrayList<>();
@@ -304,34 +307,8 @@ public class BenchmarkResult {
 	// return matchCounts.get(matchCounts.size() - 1);
 	// }
 	//
-	// @Override
-	// public String toString() {
-//		// @formatter:off
-//		return
-//			"Benchmark results\n" +
-//			"-----------------\n" +
-//			"Scenario: " + getScenario() + "\n" +
-//			"Query: " + getQuery() + "\n" +
-//			"Tool: " + getTool() + "\n" +
-//			"Match counts: " + matchCounts + "\n" +
-//			"Read time: " + readTime + "\n" + 	
-//			"Check time: " + checkTimes + "\n" + 	
-//			"LHS times: " + lhsTimes + "\n" + 	
-//			"RHS times: " + rhsTimes + "\n" + 	
-//			"Modified match counts: " + modifiedMatchCounts + "\n" 
-//			;
-//		// @formatter:on
-	// }
-	//
 	// public void publish() throws IOException {
 	// ResultSerializer.serializeToJSON(this);
 	// }
-
-	public void publish(final boolean includeHeader) {
-		if (includeHeader) {
-			System.out.println("Scenario	RunIndex	Tool	Size	Query	PhaseName	Iteration	MetricName	MetricValue");
-		}
-		System.out.println(toString());
-	}
 
 }
