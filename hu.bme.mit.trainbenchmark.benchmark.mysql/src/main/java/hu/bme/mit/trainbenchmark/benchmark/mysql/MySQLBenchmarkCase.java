@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLChecker;
@@ -38,12 +37,6 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
 		}
-	}
-
-	@Override
-	protected long getMemoryUsage() throws IOException {
-		Util.runGC();
-		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() + MySQLProcess.getMemoryUsage(bc) * 1024;
 	}
 
 	@Override

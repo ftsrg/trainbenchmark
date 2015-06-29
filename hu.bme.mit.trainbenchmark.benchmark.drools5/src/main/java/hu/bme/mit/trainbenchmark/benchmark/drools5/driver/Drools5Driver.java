@@ -112,7 +112,7 @@ public class Drools5Driver extends EMFDriver {
 		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		if (errors.size() > 0) {
 			for (final KnowledgeBuilderError error : errors) {
-				System.err.println(error);
+				throw new IOException("Error encountered while reading knowledge base: " + error);
 			}
 			throw new IllegalArgumentException("Could not parse knowledge.");
 		}

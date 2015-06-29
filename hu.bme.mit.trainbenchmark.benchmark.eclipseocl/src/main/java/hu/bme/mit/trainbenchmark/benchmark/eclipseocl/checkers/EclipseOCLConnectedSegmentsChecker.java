@@ -52,8 +52,6 @@ public class EclipseOCLConnectedSegmentsChecker extends EclipseOCLChecker<EMFCon
 			final Segment segment6 = (Segment) tuple.getValue("segment6");
 			final EMFConnectedSegmentsMatch match = new EMFConnectedSegmentsMatch(sensor, segment1, segment2, segment3, segment4, segment5, segment6);
 			matches.add(match);
-			System.out.println(match);
-
 		}
 
 		return matches;

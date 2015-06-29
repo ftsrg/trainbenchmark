@@ -4,7 +4,5 @@ cd "$( cd "$( dirname "$0" )" && pwd )/.."
 
 export MAVEN_OPTS="-Xmx2G"
 
-./scripts/build-artifacts.sh
-
-mvn clean install -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,jena,sesame,mysql,eclipseocl --fail-at-end
+mvn clean install -P core,emf,graph,rdf,sql,drools,eclipseocl,emfincquery,java,jena,mysql,neo4j,orientdb,sesame --fail-at-end
 #,memsql,allegro,virtuoso

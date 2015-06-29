@@ -19,7 +19,6 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
@@ -68,11 +67,6 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		}
 	}
 
-	protected long getMemoryUsage() throws IOException {
-		Util.runGC();
-		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-	}
-
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		this.bc = bc;
 		br = BenchmarkResult.newInstance(bc);
@@ -98,7 +92,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	public void benchmarkCheck() throws IOException {
 		br.restartClock();
 		matches = checker.check();
-		br.addMatchCount(matches.size());
+		br.addResultSize(matches.size());
 		br.addCheckTime();
 	}
 

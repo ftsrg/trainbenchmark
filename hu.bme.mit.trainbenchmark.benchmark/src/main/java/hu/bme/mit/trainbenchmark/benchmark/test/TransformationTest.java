@@ -45,8 +45,8 @@ public abstract class TransformationTest extends TrainBenchmarkTest {
 			final int resultSize = benchmarkCase.getMatches().size();
 			collector.checkThat(resultSize, equalTo(expectedResultSize));
 
-			final BenchmarkResult benchmarkResult = benchmarkCase.getBenchmarkResult();
-			System.out.println(benchmarkResult);
+			final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
+			br.publish(true);
 		} finally {
 			benchmarkCase.benchmarkDestroy();
 		}
