@@ -13,10 +13,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 public class JenaBenchmarkInitializer extends TestBenchmarkInitializer<JenaBenchmarkLogic> {
 

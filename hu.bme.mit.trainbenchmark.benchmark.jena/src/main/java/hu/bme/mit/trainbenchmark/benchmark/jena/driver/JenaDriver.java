@@ -12,9 +12,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDatabaseDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
-import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +68,9 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 	@Override
 	public void destroy() throws IOException {
-		model.close();
+		if (model != null) {
+			model.close();
+		}
 	}
 
 	// read

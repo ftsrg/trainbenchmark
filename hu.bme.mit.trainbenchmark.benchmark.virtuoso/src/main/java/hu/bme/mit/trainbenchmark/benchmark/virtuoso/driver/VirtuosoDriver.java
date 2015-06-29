@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver;
 
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -19,8 +22,6 @@ import org.openrdf.OpenRDFException;
 import org.openrdf.rio.RDFFormat;
 
 import virtuoso.sesame2.driver.VirtuosoRepository;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 public class VirtuosoDriver extends SesameDriver{
 

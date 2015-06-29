@@ -23,7 +23,7 @@ public class SQLChecker extends Checker<SQLMatch> {
 		this.driver = driver;
 		this.query = bc.getQuery();
 
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.sql/src/main/resources/queries/" + bc.getQuery()
+		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.sql/src/main/resources/queries/" + bc.getQuery()
 				+ ".sql";
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}

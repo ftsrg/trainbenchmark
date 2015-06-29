@@ -12,11 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.rdf.RDFBenchmarkConfig;
 
 public class VirtuosoBenchmarkInitializer extends TestBenchmarkInitializer<VirtuosoBenchmarkLogic> {
 

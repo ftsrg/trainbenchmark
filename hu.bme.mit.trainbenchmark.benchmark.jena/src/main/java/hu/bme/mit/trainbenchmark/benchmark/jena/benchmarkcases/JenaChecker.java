@@ -23,12 +23,13 @@ public class JenaChecker extends Checker<JenaMatch> {
 	protected Query query;
 	protected hu.bme.mit.trainbenchmark.constants.Query tbQuery;
 
-	public JenaChecker(final JenaDriver jenaDriver, final BenchmarkConfig bc) {
+	public JenaChecker(final JenaDriver jenaDriver, final BenchmarkConfig bc) throws IOException {
 		super();
 		this.jenaDriver = jenaDriver;
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + bc.getQuery()
+		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + bc.getQuery()
 				+ ".sparql";
 		tbQuery = bc.getQuery();
+		
 		query = QueryFactory.read(queryPath);
 	}
 
