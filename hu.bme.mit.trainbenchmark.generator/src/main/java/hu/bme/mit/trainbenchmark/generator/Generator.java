@@ -88,27 +88,27 @@ public abstract class Generator {
 		switch (generatorConfig.getScenario()) {
 		case USER:
 			maxSegments = 5;
-			maxRoutes = 20 * generatorConfig.getSize();
+			maxRoutes = 5 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
 			maxSensors = 10;
-			posLengthErrorPercent = 2;
-			switchSensorErrorPercent = 2;
-			routeSensorErrorPercent = 2;
-			semaphoreNeighborErrorPercent = 7;
-			switchSetErrorPercent = 2;
 			connectedSegmentsErrorPercent = 5;
+			posLengthErrorPercent = 2;
+			routeSensorErrorPercent = 4;
+			semaphoreNeighborErrorPercent = 7;
+			switchSensorErrorPercent = 2;
+			switchSetErrorPercent = 8;
 			break;
 		case REPAIR:
 			maxSegments = 5;
-			maxRoutes = 20 * generatorConfig.getSize();
+			maxRoutes = 5 * generatorConfig.getSize();
 			maxSwitchPositions = 20;
 			maxSensors = 10;
+			connectedSegmentsErrorPercent = 5;
 			posLengthErrorPercent = 10;
-			switchSensorErrorPercent = 4;
 			routeSensorErrorPercent = 10;
 			semaphoreNeighborErrorPercent = 8;
+			switchSensorErrorPercent = 4;
 			switchSetErrorPercent = 10;
-			connectedSegmentsErrorPercent = 5;
 			break;
 		default:
 			throw new UnsupportedOperationException("Scenario not supported.");

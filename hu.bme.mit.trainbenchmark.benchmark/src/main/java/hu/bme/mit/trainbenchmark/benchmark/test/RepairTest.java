@@ -29,17 +29,17 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void connectedSegmentsRepair() throws ParseException, IOException {
-		testTransformation(CONNECTEDSEGMENTS, REPAIR, 44);
+		testTransformation(CONNECTEDSEGMENTS, REPAIR, 3);
 	}
 
 	@Test
 	public void posLengthRepair() throws ParseException, IOException {
-		testTransformation(POSLENGTH, REPAIR, 410);
+		testTransformation(POSLENGTH, REPAIR, 91);
 	}
 
 	@Test
 	public void routeSensorRepair() throws ParseException, IOException {
-		testTransformation(ROUTESENSOR, REPAIR, 25);
+		testTransformation(ROUTESENSOR, REPAIR, 6);
 	}
 
 	@Test
@@ -49,12 +49,12 @@ public abstract class RepairTest extends TransformationTest {
 
 	@Test
 	public void switchSensorRepair() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, REPAIR, 4);
+		testTransformation(SWITCHSENSOR, REPAIR, 2);
 	}
 
 	@Test
 	public void switchSetRepair() throws ParseException, IOException {
-		testTransformation(SWITCHSET, REPAIR, 10);
+		testTransformation(SWITCHSET, REPAIR, 1);
 	}
 
 }
