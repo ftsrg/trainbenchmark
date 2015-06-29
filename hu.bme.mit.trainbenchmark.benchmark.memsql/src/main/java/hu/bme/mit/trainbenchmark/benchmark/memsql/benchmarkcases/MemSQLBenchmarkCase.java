@@ -12,9 +12,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.memsql.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.memsql.driver.MemSQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLBenchmarkCase;
-import hu.bme.mit.trainbenchmark.sql.benchmarkcases.SQLChecker;
 
 import java.io.IOException;
 
