@@ -74,7 +74,7 @@ public class Util {
 		case CONSTANT:
 			return nModify;
 		case RESULT_SET:
-			return br.getLastMatchCount() / nModify;
+			return br.getLastResultSize() / nModify;
 		default:
 			return 0;
 		}

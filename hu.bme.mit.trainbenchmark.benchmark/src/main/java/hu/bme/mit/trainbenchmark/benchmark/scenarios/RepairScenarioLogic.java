@@ -32,8 +32,7 @@ public class RepairScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<
 		benchmarkCase.benchmarkDestroy();
 
 		final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-		System.out.println(br);
-		br.publish();
+		br.publish(true);
 		return br;
 	}
 

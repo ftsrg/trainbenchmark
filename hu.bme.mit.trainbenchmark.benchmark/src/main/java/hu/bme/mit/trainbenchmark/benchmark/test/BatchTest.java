@@ -21,6 +21,7 @@ import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static org.hamcrest.Matchers.is;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -30,6 +31,29 @@ import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
 public abstract class BatchTest extends TrainBenchmarkTest {
+
+	protected void testQuery(final Query query, final int expectedResultSize) throws ParseException, IOException {
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, Scenario.BATCH);
+		runQuery(bl, expectedResultSize);
+	}
+
+	protected void runQuery(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
+		final AbstractBenchmarkCase<?, ?> benchmarkCase = bl.getBenchmarkCase();
+
+		try {
+			benchmarkCase.benchmarkInit(bl.getBc());
+			benchmarkCase.benchmarkRead();
+			benchmarkCase.benchmarkCheck();
+			
+			final int resultSize = benchmarkCase.getMatches().size();
+			collector.checkThat(resultSize, is(expectedResultSize));
+
+			final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
+			br.publish(true);
+		} finally {
+			benchmarkCase.benchmarkDestroy();
+		}
+	}
 
 	@Test
 	public void connectedSegments() throws ParseException, IOException {
@@ -60,22 +84,5 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 	public void switchSet() throws ParseException, IOException {
 		testQuery(SWITCHSET, 11);
 	}
-
-	protected void testQuery(final Query query, final int expectedResultSize) throws ParseException, IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, Scenario.BATCH);
-		runQuery(bl, expectedResultSize);
-	}
-
-	protected void runQuery(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
-		final AbstractBenchmarkCase<?, ?> testCase = bl.getBenchmarkCase();
-		try {
-			testCase.benchmarkInit(bl.getBc());
-			testCase.benchmarkRead();
-			testCase.benchmarkCheck();
-			collector.checkThat(testCase.getMatches().size(), is(expectedResultSize));
-		} finally {
-			testCase.benchmarkDestroy();
-		}
-	}
-
+	
 }

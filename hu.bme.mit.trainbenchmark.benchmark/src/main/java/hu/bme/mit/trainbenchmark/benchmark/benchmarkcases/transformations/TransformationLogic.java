@@ -72,12 +72,12 @@ public abstract class TransformationLogic<M, T, O> {
 
 	public void performTransformation(final Collection<M> currentMatches) throws IOException {
 		nObjectsToModify = Util.calcModify(br);
-		br.addModifiedMatchCount(nObjectsToModify);
+		br.addModifiedElementsSize(nObjectsToModify);
 
 		br.restartClock();
 		driver.beginTransaction();
 		lhs(currentMatches);
-		br.addLhsTime();
+		br.addCheckTime();
 
 		// we do not measure this in the benchmark results
 		final List<O> candidatesList = copyAndSort();
@@ -86,7 +86,7 @@ public abstract class TransformationLogic<M, T, O> {
 		br.restartClock();
 		transformation.rhs(objectsToModify);
 		driver.finishTransaction();
-		br.addRhsTime();
+		br.addTransformationTime();
 	}
 
 	protected abstract List<O> copyAndSort();
