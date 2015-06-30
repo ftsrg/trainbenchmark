@@ -28,32 +28,32 @@ import org.junit.Test;
 public abstract class InjectTest extends TransformationTest {
 
 	@Test
-	public void connectedSegmentsUser() throws ParseException, IOException {
+	public void connectedSegmentsInject() throws ParseException, IOException {
 		testTransformation(CONNECTEDSEGMENTS, INJECT, 5);
 	}
 
 	@Test
-	public void posLengthUser() throws ParseException, IOException {
+	public void posLengthInject() throws ParseException, IOException {
 		testTransformation(POSLENGTH, INJECT, 22);
 	}
 
 	@Test
-	public void routeSensorUser() throws ParseException, IOException {
+	public void routeSensorInject() throws ParseException, IOException {
 		testTransformation(ROUTESENSOR, INJECT, 2);
 	}
 
 	@Test
-	public void semaphoreNeighborUser() throws ParseException, IOException {
+	public void semaphoreNeighborInject() throws ParseException, IOException {
 		testTransformation(SEMAPHORENEIGHBOR, INJECT, 2);
 	}
 
 	@Test
-	public void switchSensorUser() throws ParseException, IOException {
+	public void switchSensorInject() throws ParseException, IOException {
 		testTransformation(SWITCHSENSOR, INJECT, 1);
 	}
 
 	@Test
-	public void switchSetUser() throws ParseException, IOException {
+	public void switchSetInject() throws ParseException, IOException {
 		testTransformation(SWITCHSET, INJECT, 1);
 	}
 

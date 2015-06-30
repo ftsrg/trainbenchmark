@@ -19,7 +19,7 @@ public class ScenarioFactory {
 	public static ScenarioLogic<?> getScenario(final Scenario scenarioName) {
 		switch (scenarioName) {
 		case INJECT:
-			return new UserScenarioLogic();
+			return new InjectScenarioLogic();
 		case REPAIR:
 			return new RepairScenarioLogic();
 		case BATCH:

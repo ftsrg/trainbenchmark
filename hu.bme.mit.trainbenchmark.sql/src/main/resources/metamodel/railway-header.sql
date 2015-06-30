@@ -10,7 +10,7 @@ DROP DATABASE IF EXISTS "trainbenchmark";
 CREATE DATABASE "trainbenchmark";
 USE "trainbenchmark";
 
-SET AUTOCOMMIT=0;
+START TRANSACTION;
 -- --------------------------------------------------------
 
 --
@@ -20,7 +20,7 @@ SET AUTOCOMMIT=0;
 CREATE TABLE IF NOT EXISTS "Route" (
   "id" int NOT NULL AUTO_INCREMENT,
   "entry" int,
-  "exit" int, -- exit is a reserved keyword in MySQL
+  "exit" int,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS "Route" (
 
 CREATE TABLE IF NOT EXISTS "definedBy" (
   "Route_id" int NOT NULL,
-  "Sensor_id" int NOT NULL
+  "Sensor_id" int NOT NULL,
+  PRIMARY KEY  ("Route_id", "Sensor_id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
@@ -117,6 +118,7 @@ CREATE TABLE IF NOT EXISTS "TrackElement" (
 
 CREATE TABLE IF NOT EXISTS "connectsTo" (
   "TrackElement_id" int NOT NULL,
-  "TrackElement_id_connectsTo" int NOT NULL
+  "TrackElement_id_connectsTo" int NOT NULL,
+  PRIMARY KEY  ("TrackElement_id", "TrackElement_id_connectsTo")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 

@@ -13,58 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.util;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
 
 public class Util {
-
-	public static void runGC() {
-		for (int i = 0; i < 5; ++i) {
-			Runtime.getRuntime().gc();
-		}
-	}
-
-	public static void freeCache(final TrainBenchmarkConfig bc) throws IOException {
-		final String clearCacheCommand = bc.getWorkspacePath() + "/scripts/clear-cache.sh";
-		try {
-			Process child;
-
-			final String command = "/bin/sync";
-			child = Runtime.getRuntime().exec(command);
-			child.waitFor();
-			if (child.exitValue() != 0) {
-				throw new InterruptedException("Bad return value: " + child.exitValue());
-			}
-
-			child = Runtime.getRuntime().exec("sudo -n " + clearCacheCommand);
-			child.waitFor();
-			if (child.exitValue() != 0) {
-				throw new InterruptedException("Bad return value: " + child.exitValue());
-			}
-		} catch (final InterruptedException e) {
-			System.err.println("Maybe running " + clearCacheCommand + " as root is not permitted?");
-			System.err.println("Use the visudo utility to add the following line to the /etc/sudoers file:");
-			System.err.println("user ALL=(ALL) NOPASSWD: " + clearCacheCommand);
-			throw new IOException(e);
-		}
-	}
-
-	public static String readFile(final String file) throws IOException {
-		return FileUtils.readFileToString(new File(file));
-	}
-
-	public static void writeFile(final String filename, final String content) throws IOException {
-		BufferedWriter out;
-		out = new BufferedWriter(new FileWriter(filename));
-		out.write(content);
-		out.close();
-	}
 
 	public static long calcModify(final BenchmarkResult br) {
 		final BenchmarkConfig bc = br.getBenchmarkConfig();

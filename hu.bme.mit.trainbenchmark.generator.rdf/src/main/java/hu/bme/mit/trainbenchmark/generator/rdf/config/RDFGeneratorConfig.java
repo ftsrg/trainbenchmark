@@ -19,10 +19,13 @@ import org.apache.commons.cli.ParseException;
 
 public class RDFGeneratorConfig extends GeneratorConfig {
 
+	protected static final String FORMAT = "format";
+	protected static final String METAMODEL = "metamodel";
+	
 	protected boolean metamodel;
 	protected RDFFormat rdfFormat;
 
-	public RDFGeneratorConfig(String[] args) throws ParseException {
+	public RDFGeneratorConfig(final String[] args) throws ParseException {
 		super(args);
 	}
 
@@ -30,18 +33,18 @@ public class RDFGeneratorConfig extends GeneratorConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("metamodel", false, "generate metamodel and container object and relations for RDF TBox");
-		options.addOption("format", true, "the format of the RDF output: turtle (default), rdfxml");
+		options.addOption(METAMODEL, false, "generate metamodel and container object and relations for RDF TBox");
+		options.addOption(FORMAT, true, "the format of the RDF output: turtle (default), rdfxml");
 	}
 
 	@Override
-	protected void processArguments(String[] args) throws ParseException {
+	protected void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		metamodel = cmd.hasOption("metamodel");
+		metamodel = cmd.hasOption(METAMODEL);
 
-		if (cmd.hasOption("format")) {
-			switch (cmd.getOptionValue("format")) {
+		if (cmd.hasOption(FORMAT)) {
+			switch (cmd.getOptionValue(FORMAT)) {
 			case "turtle":
 				rdfFormat = RDFFormat.TURTLE;
 				break;
