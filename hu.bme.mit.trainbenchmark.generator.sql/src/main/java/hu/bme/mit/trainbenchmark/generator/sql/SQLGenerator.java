@@ -16,14 +16,15 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ancestors;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
+import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,25 +37,25 @@ import com.google.common.collect.ImmutableMap;
 public class SQLGenerator extends Generator {
 
 	protected SQLGeneratorConfig sqlGeneratorConfig;
-
+	protected String sqlRawPath; 
+	protected String sqlDumpPath; 
+	
 	public SQLGenerator(final String[] args) throws ParseException {
 		super();
 		generatorConfig = sqlGeneratorConfig = new SQLGeneratorConfig(args);
 	}
 
-	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of( //
-			SENSOR_EDGE, TRACKELEMENT);
+	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(SENSOR_EDGE, TRACKELEMENT);
 
 	@Override
 	protected String syntax() {
 		return "SQL";
 	}
 
-	protected BufferedWriter file;
-	protected Map<String, Long> typeId = new HashMap<>();
+	protected BufferedWriter writer;
 
 	public void write(final String s) throws IOException {
-		file.write(s + "\n");
+		writer.write(s + "\n");
 	}
 
 	@Override
@@ -67,13 +68,14 @@ public class SQLGenerator extends Generator {
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + ".sql";
-		final File destFile = new File(destFilePath);
+		sqlRawPath = generatorConfig.getModelPathNameWithoutExtension() + "-raw.sql";
+		sqlDumpPath = generatorConfig.getModelPathNameWithoutExtension() + ".sql";
+		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
-		FileUtils.copyFile(headerFile, destFile);
+		FileUtils.copyFile(headerFile, sqlRawFile);
 
-		file = new BufferedWriter(new FileWriter(destFile, true));
+		writer = new BufferedWriter(new FileWriter(sqlRawFile, true));
 	}
 
 	@Override
@@ -87,7 +89,27 @@ public class SQLGenerator extends Generator {
 			write(line);
 		}
 
-		file.close();
+		writer.close();
+
+		compact();
+	}
+
+	public void compact() throws IOException {
+		MySQLProcess.stopSQLProcess();
+		MySQLProcess.startSQLProcess();
+		
+		try {
+			final Runtime rt = Runtime.getRuntime();
+			final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };
+			final Process processLoad = rt.exec(commandLoad);
+			processLoad.waitFor();
+		
+			final String[] commandDump = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark > " + sqlDumpPath };
+			final Process processDump = rt.exec(commandDump);
+			processDump.waitFor();
+		} catch (final InterruptedException e) {
+			throw new IOException(e);
+		}
 	}
 
 	@Override

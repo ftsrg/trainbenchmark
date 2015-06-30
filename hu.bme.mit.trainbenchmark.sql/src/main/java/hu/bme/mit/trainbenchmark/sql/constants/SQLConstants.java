@@ -11,8 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.sql.constants;
 
-public interface SQLConstants {
+public class SQLConstants {
 	
-	static final String ID_POSTFIX = "_id";
-
+	public static final String ID_POSTFIX = "_id";
+	public static final String USER = "root";
+	public static final String PASSWORD = "";
+	
 }
