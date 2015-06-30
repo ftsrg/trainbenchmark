@@ -38,10 +38,10 @@ public abstract class AbstractBenchmarkLogic {
 	}
 
 	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
-		return getTestCase(this.getClass().getClassLoader());
+		return getConcreteBenchmarkCase(this.getClass().getClassLoader());
 	}
 
-	protected AbstractBenchmarkCase<?, ?> getTestCase(final ClassLoader classLoader) {
+	protected AbstractBenchmarkCase<?, ?> getConcreteBenchmarkCase(final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
 			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + "." + getTool()
