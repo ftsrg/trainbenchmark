@@ -29,15 +29,17 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
+			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant, final boolean localSearch) {
 		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+		this.localSearch = localSearch;
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(LOCALSEARCH, false, "uses the local search strategy for pattern matching");	}
+		options.addOption(LOCALSEARCH, false, "uses the local search strategy for pattern matching");
+	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
@@ -49,12 +51,7 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	public boolean isLocalSearch() {
 		return localSearch;
 	}
-	
-	@Override
-	public String getClassName() {
-		return EMFINCQUERY;
-	}
-	
+
 	@Override
 	public String getTool() {
 		if (isLocalSearch()) {

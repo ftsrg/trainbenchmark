@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
@@ -20,8 +21,8 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 
 public class EMFIncQueryPosLengthChecker extends EMFIncQueryChecker<PosLengthMatch> {
 
-	public EMFIncQueryPosLengthChecker(final EMFIncQueryDriver<PosLengthMatch> eiqDriver) {
-		super(eiqDriver);
+	public EMFIncQueryPosLengthChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver<PosLengthMatch> eiqDriver) {
+		super(eiqbc, eiqDriver);
 	}
 
 	@Override

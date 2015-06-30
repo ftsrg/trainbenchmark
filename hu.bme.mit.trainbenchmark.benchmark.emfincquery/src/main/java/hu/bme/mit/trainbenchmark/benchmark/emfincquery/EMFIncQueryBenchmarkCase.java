@@ -45,8 +45,9 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		super.benchmarkInit(bc);
 		
+		final EMFIncQueryBenchmarkConfig eiqbc = (EMFIncQueryBenchmarkConfig) bc;
 		driver = eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
-		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(eiqDriver, bc.getQuery());
+		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(eiqbc, eiqDriver, bc.getQuery());
 		checker = eiqChecker;
 		eiqDriver.registerChecker(eiqChecker);
 
