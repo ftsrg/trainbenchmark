@@ -22,17 +22,12 @@ public class Neo4jBenchmarkLogic extends AbstractBenchmarkLogic {
 	Neo4jBenchmarkConfig nbc;
 	
 	public Neo4jBenchmarkLogic(final String[] args) throws ParseException {
-		bc = nbc = new Neo4jBenchmarkConfig(args, getTool());
+		bc = nbc = new Neo4jBenchmarkConfig(args);
 	}
 
 	public Neo4jBenchmarkLogic(final Neo4jBenchmarkConfig nbc) {
 		super(nbc);
 		this.nbc = nbc;
-	}
-	
-	@Override
-	protected String getTool() {
-		return "Neo4j";
 	}
 
 }

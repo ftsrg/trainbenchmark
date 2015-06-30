@@ -22,17 +22,12 @@ public class JenaBenchmarkLogic extends AbstractBenchmarkLogic {
 	protected RDFBenchmarkConfig rbc;
 
 	public JenaBenchmarkLogic(final String[] args) throws ParseException {
-		bc = rbc = new RDFBenchmarkConfig(args, getTool());
+		bc = rbc = new RDFBenchmarkConfig(args, "Jena");
 	}
 
 	public JenaBenchmarkLogic(final RDFBenchmarkConfig rbc) {
 		super(rbc);
 		this.rbc = rbc;
-	}
-
-	@Override
-	protected String getTool() {
-		return "Jena";
 	}
 
 }

@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -30,11 +31,12 @@ public abstract class AbstractBenchmarkLogic {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void runBenchmark() throws IOException {
+	public BenchmarkResult runBenchmark() throws IOException {
 		@SuppressWarnings("rawtypes")
 		final ScenarioLogic scl = ScenarioFactory.getScenario(bc.getScenario());
 		final AbstractBenchmarkCase<?, ?> tc = getBenchmarkCase();
-		scl.runBenchmark(bc, tc);
+		final BenchmarkResult br = scl.runBenchmark(bc, tc);
+		return br;
 	}
 
 	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
@@ -44,7 +46,7 @@ public abstract class AbstractBenchmarkLogic {
 	protected AbstractBenchmarkCase<?, ?> getConcreteBenchmarkCase(final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
-			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + "." + getTool()
+			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "." + bc.getClassName()
 					+ "BenchmarkCase";
 			final Class<?> clazz = classLoader.loadClass(toolClassName);
 
@@ -55,7 +57,7 @@ public abstract class AbstractBenchmarkLogic {
 			}
 
 			// else instantiate specific class
-			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + getTool().toLowerCase() + "." + getTool() + bc.getQuery();
+			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "." + bc.getClassName() + bc.getQuery();
 			final Class<?> queryClass = classLoader.loadClass(queryClassName);
 			
 			// instantiate generic class if not abstract
@@ -69,5 +71,4 @@ public abstract class AbstractBenchmarkLogic {
 		return bc;
 	}
 
-	protected abstract String getTool();
 }

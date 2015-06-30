@@ -25,36 +25,36 @@ import java.io.IOException;
 import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
-public abstract class InjectTest extends TransformationTest {
+public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
 	public void connectedSegmentsInject() throws ParseException, IOException {
-		testTransformation(CONNECTEDSEGMENTS, INJECT, 5);
+		testQuery(CONNECTEDSEGMENTS, INJECT, 5);
 	}
 
 	@Test
 	public void posLengthInject() throws ParseException, IOException {
-		testTransformation(POSLENGTH, INJECT, 22);
+		testQuery(POSLENGTH, INJECT, 22);
 	}
 
 	@Test
 	public void routeSensorInject() throws ParseException, IOException {
-		testTransformation(ROUTESENSOR, INJECT, 2);
+		testQuery(ROUTESENSOR, INJECT, 2);
 	}
 
 	@Test
 	public void semaphoreNeighborInject() throws ParseException, IOException {
-		testTransformation(SEMAPHORENEIGHBOR, INJECT, 2);
+		testQuery(SEMAPHORENEIGHBOR, INJECT, 2);
 	}
 
 	@Test
 	public void switchSensorInject() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, INJECT, 1);
+		testQuery(SWITCHSENSOR, INJECT, 1);
 	}
 
 	@Test
 	public void switchSetInject() throws ParseException, IOException {
-		testTransformation(SWITCHSET, INJECT, 1);
+		testQuery(SWITCHSET, INJECT, 1);
 	}
 
 }

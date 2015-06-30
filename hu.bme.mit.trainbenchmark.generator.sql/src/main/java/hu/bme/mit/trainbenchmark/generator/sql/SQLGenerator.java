@@ -37,10 +37,10 @@ import com.google.common.collect.ImmutableMap;
 public class SQLGenerator extends Generator {
 
 	protected SQLGeneratorConfig sqlGeneratorConfig;
-	protected String sqlRawPath; 
+	protected String sqlRawPath;
 	protected String sqlDumpPath;
 	protected String sqlPostgreDumpPath;
-	
+
 	public SQLGenerator(final String[] args) throws ParseException {
 		super();
 		generatorConfig = sqlGeneratorConfig = new SQLGeneratorConfig(args);
@@ -99,20 +99,22 @@ public class SQLGenerator extends Generator {
 	public void compact() throws IOException {
 		MySQLProcess.stopSQLProcess();
 		MySQLProcess.startSQLProcess();
-		
+
 		try {
 			final Runtime rt = Runtime.getRuntime();
 			final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };
 			final Process processLoad = rt.exec(commandLoad);
 			processLoad.waitFor();
-		
-			final String[] commandDump = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > " + sqlDumpPath };
+
+			final String[] commandDump = { "/bin/bash", "-c",
+					"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > " + sqlDumpPath };
 			final Process processDump = rt.exec(commandDump);
 			processDump.waitFor();
-			
-			final String[] commandDumpPostgre = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --compatible=postgresql > " + sqlPostgreDumpPath };
-			final Process processDumpPostgre = rt.exec(commandDumpPostgre);
-			processDumpPostgre.waitFor();
+
+			// final String[] commandDumpPostgre = { "/bin/bash", "-c", "mysqldump -u " + USER +
+			// " --databases trainbenchmark --skip-dump-date --compatible=postgresql > " + sqlPostgreDumpPath };
+			// final Process processDumpPostgre = rt.exec(commandDumpPostgre);
+			// processDumpPostgre.waitFor();
 
 		} catch (final InterruptedException e) {
 			throw new IOException(e);

@@ -19,16 +19,11 @@ import org.apache.commons.cli.ParseException;
 public class MemSQLBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public MemSQLBenchmarkLogic(final String[] args) throws ParseException {
-		bc = new BenchmarkConfig(args, getTool());
+		bc = new BenchmarkConfig(args, "MemSQL");
 	}
 
 	public MemSQLBenchmarkLogic(final BenchmarkConfig bc) {
 		super(bc);
-	}
-
-	@Override
-	protected String getTool() {
-		return "MemSQL";
 	}
 
 }

@@ -22,7 +22,7 @@ public class EclipseOCLBenchmarkInitializer extends TestBenchmarkInitializer<Ecl
 
 	@Override
 	protected EclipseOCLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "EclipseOCL", 1, query, iterationCount, modificationMethod,
+		final BenchmarkConfig bc = new BenchmarkConfig("EclipseOCL", scenario, size, 1, query, iterationCount, modificationMethod,
 				modificationConstant);
 		return new EclipseOCLBenchmarkLogic(bc);
 	}

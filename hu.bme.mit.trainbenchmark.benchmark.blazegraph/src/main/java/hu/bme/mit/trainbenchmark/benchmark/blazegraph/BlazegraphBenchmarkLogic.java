@@ -22,17 +22,12 @@ public class BlazegraphBenchmarkLogic extends AbstractBenchmarkLogic{
 	protected RDFBenchmarkConfig rbc;
 
 	public BlazegraphBenchmarkLogic(final String[] args) throws ParseException {
-		bc = rbc = new RDFBenchmarkConfig(args, getTool());
+		bc = rbc = new RDFBenchmarkConfig(args, "Blazegraph");
 	}
 
 	public BlazegraphBenchmarkLogic(final RDFBenchmarkConfig rbc) {
 		super(rbc);
 		this.rbc = rbc;
-	}
-
-	@Override
-	protected String getTool() {
-		return "Blazegraph";
 	}
 
 }

@@ -20,16 +20,11 @@ import org.apache.commons.cli.ParseException;
 public class Drools6BenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public Drools6BenchmarkLogic(final String[] args) throws ParseException {
-		bc = new BenchmarkConfig(args, getTool());
+		bc = new BenchmarkConfig(args, "Drools6");
 	}
 	
 	public Drools6BenchmarkLogic(final BenchmarkConfig bc) {
 		super(bc);
-	}
-
-	@Override
-	protected String getTool() {
-		return "Drools6";
 	}
 
 }

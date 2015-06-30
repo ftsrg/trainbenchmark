@@ -20,17 +20,12 @@ public class EclipseOCLBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public EclipseOCLBenchmarkLogic(final String[] args) throws ParseException {
 		super();
-		bc = new BenchmarkConfig(args, getTool());
+		bc = new BenchmarkConfig(args, "EclipseOCL");
 	}
 
 	public EclipseOCLBenchmarkLogic(final BenchmarkConfig bc) {
 		super();
 		this.bc = bc;
-	}
-
-	@Override
-	protected String getTool() {
-		return "EclipseOCL";
 	}
 	
 }

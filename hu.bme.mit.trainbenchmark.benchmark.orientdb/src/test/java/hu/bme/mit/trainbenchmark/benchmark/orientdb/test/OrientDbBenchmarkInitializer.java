@@ -9,8 +9,8 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 public class OrientDbBenchmarkInitializer extends TestBenchmarkInitializer<OrientDbBenchmarkLogic>{
 
 	@Override
-	protected OrientDbBenchmarkLogic initializeBenchmark(Query query, Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario,  size, "OrientDb", runIndex, query, iterationCount, modificationMethod, modificationConstant);
+	protected OrientDbBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig("OrientDb", scenario,  size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 		return new OrientDbBenchmarkLogic(bc);
 	}
 

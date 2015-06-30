@@ -21,15 +21,16 @@ import org.apache.commons.cli.ParseException;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
+	private static final String NEO4J = "Neo4j";
 	protected boolean javaApi;
 
-	public Neo4jBenchmarkConfig(final String[] args, final String tool) throws ParseException {
-		super(args, tool);
+	public Neo4jBenchmarkConfig(final String[] args) throws ParseException {
+		super(args, NEO4J);
 	}
 
-	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final Query query,
+	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
 			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant, final boolean javaApi) {
-		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+		super(NEO4J, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 		this.javaApi = javaApi;
 	}
 

@@ -21,7 +21,7 @@ public class EMFIncQueryBenchmarkInitializer extends TestBenchmarkInitializer<EM
 
 	@Override
 	protected EMFIncQueryBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, "EMF-IncQuery", 1, query, iterationCount,
+		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query, iterationCount,
 				modificationMethod, modificationConstant);
 		return new EMFIncQueryBenchmarkLogic(eiqbc);
 	}

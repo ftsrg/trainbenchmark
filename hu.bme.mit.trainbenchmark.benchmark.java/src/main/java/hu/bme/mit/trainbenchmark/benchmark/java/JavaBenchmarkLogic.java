@@ -20,17 +20,12 @@ public class JavaBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public JavaBenchmarkLogic(final String[] args) throws ParseException {
 		super();
-		bc = new BenchmarkConfig(args, getTool());
+		bc = new BenchmarkConfig(args, "Java");
 	}
 
 	public JavaBenchmarkLogic(final BenchmarkConfig bc) {
 		super();
 		this.bc = bc;
-	}
-
-	@Override
-	protected String getTool() {
-		return "Java";
 	}
 	
 }

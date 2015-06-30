@@ -10,6 +10,10 @@
 	</parent>
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</artifactId>
 
+	<properties>
+		<emfincquery.version>1.0.0-SNAPSHOT</emfincquery.version>
+	</properties>
+
 	<build>
 		<sourceDirectory>src-gen</sourceDirectory>
 	</build>
@@ -30,8 +34,15 @@
 		<dependency>
 			<groupId>org.eclipse.incquery</groupId>
 			<artifactId>incquery-runtime</artifactId>
-			<version>0.9.0</version>
+			<version>${emfincquery.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.incquery</groupId>
+			<artifactId>org.eclipse.incquery.runtime.localsearch</artifactId>
+			<version>${emfincquery.version}</version>
+		</dependency>
+		
 		
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
@@ -44,7 +55,7 @@
 	<repositories>
 		<repository>
 			<id>emf-incquery</id>
-			<url>https://repo.eclipse.org/content/repositories/emf-incquery-releases/</url>
+			<url>https://repo.eclipse.org/content/repositories/emf-incquery-snapshots/</url>
 		</repository>
 	</repositories>
 
