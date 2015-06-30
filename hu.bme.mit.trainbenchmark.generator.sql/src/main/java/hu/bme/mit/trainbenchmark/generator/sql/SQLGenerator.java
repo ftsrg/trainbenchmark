@@ -35,14 +35,16 @@ import com.google.common.collect.ImmutableMap;
 
 public class SQLGenerator extends Generator {
 
+	protected SQLGeneratorConfig sqlGeneratorConfig;
+
 	public SQLGenerator(final String[] args) throws ParseException {
 		super();
-		generatorConfig = new SQLGeneratorConfig(args);
+		generatorConfig = sqlGeneratorConfig = new SQLGeneratorConfig(args);
 	}
 
 	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of( //
 			SENSOR_EDGE, TRACKELEMENT);
-	
+
 	@Override
 	protected String syntax() {
 		return "SQL";
@@ -58,8 +60,10 @@ public class SQLGenerator extends Generator {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFilePath = generatorConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-header.sql";
+		final String headerFileDirectory = generatorConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
+		final String headerFilePath = headerFileDirectory
+				+ (sqlGeneratorConfig.isMemSQL() ? "railway-header-memsql.sql" : "railway-header.sql");
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
@@ -77,12 +81,12 @@ public class SQLGenerator extends Generator {
 		final String footerFilePath = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
-		
+
 		final List<String> lines = FileUtils.readLines(footerFile);
 		for (final String line : lines) {
 			write(line);
 		}
-		
+
 		file.close();
 	}
 
@@ -101,7 +105,7 @@ public class SQLGenerator extends Generator {
 
 		if (ancestors.containsKey(type)) {
 			final String ancestorType = ancestors.get(type);
-			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", ancestorType,  ID, id));
+			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", ancestorType, ID, id));
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
 			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());
@@ -116,7 +120,7 @@ public class SQLGenerator extends Generator {
 		if (from == null || to == null) {
 			return;
 		}
-		
+
 		String insertQuery;
 		if (SENSOR_EDGE.equals(label)) {
 			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, SENSOR_EDGE, to, ID, from);

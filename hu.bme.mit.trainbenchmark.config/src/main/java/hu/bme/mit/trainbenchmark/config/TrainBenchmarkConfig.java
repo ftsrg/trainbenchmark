@@ -58,7 +58,7 @@ public abstract class TrainBenchmarkConfig {
 
 	protected void initOptions() {
 		options.addOption("help", false, "displays this text");
-		options.addOption(requiredOption("scenario", "Batch/User/Repair"));
+		options.addOption(requiredOption("scenario", "Batch/Inject/Repair"));
 		options.addOption(requiredOption("size", "model size, e.g. 4"));
 	}
 
