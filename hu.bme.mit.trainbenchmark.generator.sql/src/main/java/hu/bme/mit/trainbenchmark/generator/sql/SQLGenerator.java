@@ -110,7 +110,7 @@ public class SQLGenerator extends Generator {
 			final Process processDump = rt.exec(commandDump);
 			processDump.waitFor();
 			
-			final String[] commandDumpPostgre = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --compatible=posgresql > " + sqlPostgreDumpPath };
+			final String[] commandDumpPostgre = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --compatible=postgresql > " + sqlPostgreDumpPath };
 			final Process processDumpPostgre = rt.exec(commandDumpPostgre);
 			processDumpPostgre.waitFor();
 
