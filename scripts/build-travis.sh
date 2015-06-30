@@ -2,8 +2,6 @@
 
 cd "$( cd "$( dirname "$0" )" && pwd )/.."
 
-./scripts/build-artifacts.sh
-
-echo Running quiet build.
-time mvn clean install --quiet -P core,emf,graph,rdf,sql,java,drools,emfincquery,neo4j,fourstore,jena,sesame,mysql,allegro,virtuoso,memsql -DskipTests || exit 1
-echo Build finished.
+#echo Running quiet build.
+time mvn clean install -P core,emf,graph,rdf,sql,drools,eclipseocl,emfincquery,java,jena,mysql,neo4j,orientdb,sesame -DskipTests || exit 1
+#echo Build finished.
