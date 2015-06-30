@@ -9,15 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test;
 
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.incremental;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class EMFIncQueryRepairTest extends RepairTest {
+public class EMFIncQueryBatchTestIncremental extends BatchTest {
 
-	public EMFIncQueryRepairTest() {
-		bi = new EMFIncQueryBenchmarkInitializer();
+	public EMFIncQueryBatchTestIncremental() {
+		bi = new EMFIncQueryBenchmarkInitializerIncremental();
 	}
 
 }
