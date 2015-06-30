@@ -22,17 +22,12 @@ public class VirtuosoBenchmarkLogic extends AbstractBenchmarkLogic{
 	protected RDFBenchmarkConfig rbc;
 
 	public VirtuosoBenchmarkLogic(final String[] args) throws ParseException {
-		bc = rbc = new RDFBenchmarkConfig(args, getTool());
+		bc = rbc = new RDFBenchmarkConfig(args, "Virtuoso");
 	}
 
 	public VirtuosoBenchmarkLogic(final RDFBenchmarkConfig rbc) {
 		super(rbc);
 		this.rbc = rbc;
-	}
-
-	@Override
-	protected String getTool() {
-		return "Virtuoso";
 	}
 
 }

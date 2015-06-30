@@ -22,17 +22,12 @@ public class EMFIncQueryBenchmarkLogic extends AbstractBenchmarkLogic {
 	
 	public EMFIncQueryBenchmarkLogic(final String[] args) throws ParseException {
 		super();
-		bc = eiqbc = new EMFIncQueryBenchmarkConfig(args, getTool());
+		bc = eiqbc = new EMFIncQueryBenchmarkConfig(args);
 	}
 
 	public EMFIncQueryBenchmarkLogic(final EMFIncQueryBenchmarkConfig iqbc) {
 		super(iqbc);
 		this.eiqbc = iqbc;
-	}
-	
-	@Override
-	protected String getTool() {
-		return "EMFIncQuery";
 	}
 
 }

@@ -20,16 +20,11 @@ import org.apache.commons.cli.ParseException;
 public class MySQLBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public MySQLBenchmarkLogic(final String[] args) throws ParseException {
-		bc = new BenchmarkConfig(args, getTool());
+		bc = new BenchmarkConfig(args, "MySQL");
 	}
 
 	public MySQLBenchmarkLogic(final BenchmarkConfig bc) {
 		super(bc);
-	}
-	
-	@Override
-	protected String getTool() {
-		return "MySQL";
 	}
 
 }

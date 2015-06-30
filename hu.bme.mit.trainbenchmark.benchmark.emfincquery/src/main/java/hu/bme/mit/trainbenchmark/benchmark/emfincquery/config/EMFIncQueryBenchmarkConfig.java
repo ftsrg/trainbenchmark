@@ -20,51 +20,48 @@ import org.apache.commons.cli.ParseException;
 
 public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 
-	protected String functionalDependencyOption;
-	protected String stubTrimOption;
-	protected boolean deltaMonitor;
+	private static final String EMFINCQUERY = "EMFIncQuery";
+	private static final String LOCALSEARCH = "localSearch";
+	private boolean localSearch;
 
-	public EMFIncQueryBenchmarkConfig(final String[] args, final String tool) throws ParseException {
-		super(args, tool);
+	public EMFIncQueryBenchmarkConfig(final String[] args) throws ParseException {
+		super(args, EMFINCQUERY);
 	}
 
-	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final Query query,
+	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
 			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
-		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("functionalDependencyOption", true, "FunctionalDependencyOption");
-		options.addOption("stubTrimOption", true, "StubTrimOption");
-		options.addOption("noDeltaMonitor", false, "do not use DeltaMonitor");
-	}
+		options.addOption(LOCALSEARCH, false, "uses the local search strategy for pattern matching");	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		functionalDependencyOption = cmd.getOptionValue("functionalDependencyOption");
-		stubTrimOption = cmd.getOptionValue("stubTrimOption");
-		if (cmd.hasOption("noDeltaMonitor")) {
-			deltaMonitor = false;
+		localSearch = cmd.hasOption(LOCALSEARCH);
+	}
+
+	public boolean isLocalSearch() {
+		return localSearch;
+	}
+	
+	@Override
+	public String getClassName() {
+		return EMFINCQUERY;
+	}
+	
+	@Override
+	public String getTool() {
+		if (isLocalSearch()) {
+			return "EMFIncQuery-LocalSearch";
 		} else {
-			deltaMonitor = true;
+			return "EMFIncQuery-Incremental";
 		}
-	}
-
-	public String getFunctionalDependencyOption() {
-		return functionalDependencyOption;
-	}
-
-	public String getStubTrimOption() {
-		return stubTrimOption;
-	}
-
-	public boolean isDeltaMonitor() {
-		return deltaMonitor;
 	}
 
 }

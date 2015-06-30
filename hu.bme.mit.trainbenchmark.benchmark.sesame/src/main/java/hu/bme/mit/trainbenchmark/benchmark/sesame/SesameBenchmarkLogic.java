@@ -22,7 +22,7 @@ public class SesameBenchmarkLogic extends AbstractBenchmarkLogic {
 	protected RDFBenchmarkConfig rbc;
 
 	public SesameBenchmarkLogic(final String[] args) throws ParseException {
-		bc = rbc = new RDFBenchmarkConfig(args, getTool());
+		bc = rbc = new RDFBenchmarkConfig(args, "Sesame");
 	}
 
 	public SesameBenchmarkLogic(final RDFBenchmarkConfig rbc) {
@@ -30,9 +30,4 @@ public class SesameBenchmarkLogic extends AbstractBenchmarkLogic {
 		this.rbc = rbc;
 	}
 	
-	@Override
-	protected String getTool() {
-		return "Sesame";
-	}
-
 }

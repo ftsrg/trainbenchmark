@@ -28,21 +28,21 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected int iterationCount;
 	protected int runIndex;
 	protected Query query;
-	protected String tool;
+	protected String className;
 
 	public int getRunIndex() {
 		return runIndex;
 	}
 
-	public BenchmarkConfig(final String args[], final String tool) throws ParseException {
+	public BenchmarkConfig(final String args[], final String className) throws ParseException {
 		super(args);
-		this.tool = tool;
+		this.className = className;
 	}
 
-	public BenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final Query query,
+	public BenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex, final Query query,
 			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
 		super(scenario, size);
-		this.tool = tool;
+		this.className = className;
 		this.runIndex = runIndex;
 		this.query = query;
 		this.iterationCount = iterationCount;
@@ -144,7 +144,11 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return query;
 	}
 
+	public String getClassName() {
+		return className;
+	}
+	
 	public String getTool() {
-		return tool;
+		return getClassName();
 	}
 }

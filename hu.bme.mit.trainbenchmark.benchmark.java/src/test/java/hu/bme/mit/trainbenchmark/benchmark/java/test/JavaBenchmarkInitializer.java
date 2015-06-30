@@ -22,7 +22,7 @@ public class JavaBenchmarkInitializer extends TestBenchmarkInitializer<JavaBench
 
 	@Override
 	protected JavaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "Java", 1, query, iterationCount, modificationMethod,
+		final BenchmarkConfig bc = new BenchmarkConfig("Java", scenario, size, 1, query, iterationCount, modificationMethod,
 				modificationConstant);
 		return new JavaBenchmarkLogic(bc);
 	}

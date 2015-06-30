@@ -22,7 +22,7 @@ public class MySQLBenchmarkInitializer extends TestBenchmarkInitializer<MySQLBen
 
 	@Override
 	protected MySQLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig(scenario, size, "MySQL", runIndex, query, iterationCount, modificationMethod,
+		final BenchmarkConfig bc = new BenchmarkConfig("MySQL", scenario, size, runIndex, query, iterationCount, modificationMethod,
 				modificationConstant);
 		return new MySQLBenchmarkLogic(bc);
 	}
