@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.UserTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class FourStoreInjectTest extends UserTest {
+public class FourStoreInjectTest extends InjectTest {
 
 	public FourStoreInjectTest() {
 		bi = new FourStoreBenchmarkInitializer();

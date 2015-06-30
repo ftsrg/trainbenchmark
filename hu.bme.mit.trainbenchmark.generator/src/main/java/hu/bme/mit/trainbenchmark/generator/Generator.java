@@ -45,7 +45,6 @@ import java.util.Random;
 
 public abstract class Generator {
 
-	// id
 	protected int id = 1;
 
 	// static configuration

@@ -12,29 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class MySQLProcess {
-
-	public static long getMemoryUsage(final BenchmarkConfig bc) throws IOException {
-		final String getMemoryCommand = bc.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.mysql/src/main/resources/scripts/get-mysql-memory.sh";
-		final Process child = Runtime.getRuntime().exec(getMemoryCommand);
-
-		final InputStream in = child.getInputStream();
-		final BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
-		final String vmRssStr = br.readLine();
-		final long memoryUsage  = Long.parseLong(vmRssStr);
-
-		in.close();
-		return memoryUsage;
-	}
 
 	public static void startSQLProcess() throws IOException {
 		stopSQLProcess();
