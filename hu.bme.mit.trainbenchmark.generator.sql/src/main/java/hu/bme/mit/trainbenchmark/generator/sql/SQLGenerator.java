@@ -38,7 +38,8 @@ public class SQLGenerator extends Generator {
 
 	protected SQLGeneratorConfig sqlGeneratorConfig;
 	protected String sqlRawPath; 
-	protected String sqlDumpPath; 
+	protected String sqlDumpPath;
+	protected String sqlPostgreDumpPath;
 	
 	public SQLGenerator(final String[] args) throws ParseException {
 		super();
@@ -70,6 +71,7 @@ public class SQLGenerator extends Generator {
 		// destination file
 		sqlRawPath = generatorConfig.getModelPathNameWithoutExtension() + "-raw.sql";
 		sqlDumpPath = generatorConfig.getModelPathNameWithoutExtension() + ".sql";
+		sqlPostgreDumpPath = generatorConfig.getModelPathNameWithoutExtension() + "-posgres.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -104,9 +106,14 @@ public class SQLGenerator extends Generator {
 			final Process processLoad = rt.exec(commandLoad);
 			processLoad.waitFor();
 		
-			final String[] commandDump = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark > " + sqlDumpPath };
+			final String[] commandDump = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > " + sqlDumpPath };
 			final Process processDump = rt.exec(commandDump);
 			processDump.waitFor();
+			
+			final String[] commandDumpPostgre = { "/bin/bash", "-c", "mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --compatible=posgresql > " + sqlPostgreDumpPath };
+			final Process processDumpPostgre = rt.exec(commandDumpPostgre);
+			processDumpPostgre.waitFor();
+
 		} catch (final InterruptedException e) {
 			throw new IOException(e);
 		}
