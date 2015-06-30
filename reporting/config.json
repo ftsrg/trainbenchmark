@@ -1,32 +1,22 @@
 {
-  "Dimensions": {
-    "X_Dimensions": {
-      "Size": true,
-      "Iteration": true
-    },
-    "Groups": {
-      "Case": true,
-      "Tool": true
-    }
-  },
-  "Summarize_Functions": [
+  "Plot": [
     {
-      "Phases": [
-        "ReCheck",
-        "RHS"
+      "X_Dimension": "Size",
+      "Legend": "CaseName",
+      "Summarize_Function": [
+        "Transformation"
       ],
-      "Metric": "Time",
-      "Y_Label": "Time (ms)",
-      "Y_Axis_Scale": -6
-    },
-    {
-      "Phases": [
-        "Read"
+      "Title": "SCENARIO CASENAME TOOL",
+      "Metrics": [
+        "Time"
       ],
-      "Metric": "Time",
+      "Metric_Scale": -6,
+      "Min_Iteration": 1,
+      "Max_Iteration": -1,
       "Y_Label": "Time (ms)",
-      "Y_Axis_Scale": -9
+      "X_Axis_Scale": "factor",
+      "Y_Axis_Scale": "log2",
+      "Extensions": "png"
     }
-  ],
-  "Extension": ["png", "pdf"]
+  ]
 }
