@@ -11,8 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLProcess;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.PASSWORD;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -21,13 +23,11 @@ import java.sql.SQLException;
 public class MySQLDriver extends SQLDriver {
 
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
-	protected final String user = "root";
-	protected final String password = "";
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " < " + modelPathWithoutExtension + getExtension() };
+		final String[] command = { "/bin/bash", "-c", "mysql -u " + USER + " < " + modelPathWithoutExtension + getExtension() };
 
 		try {
 			final Process pr = rt.exec(command);
@@ -37,7 +37,7 @@ public class MySQLDriver extends SQLDriver {
 		}
 
 		try {
-			connection = DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, USER, PASSWORD);
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}

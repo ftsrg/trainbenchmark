@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql;
+package hu.bme.mit.trainbenchmark.sql.process;
 
 import java.io.IOException;
 
@@ -24,6 +24,9 @@ public class MySQLProcess {
 		try {
 			final Process pr = rt.exec(command);
 			pr.waitFor();
+			if (pr.exitValue() != 0) {
+				throw new Exception("Failed to start MySQL process");
+			}
 		} catch (final Exception e) {
 			throw new IOException(e);
 		}
@@ -35,6 +38,9 @@ public class MySQLProcess {
 		try {
 			final Process pr = rt.exec(command);
 			pr.waitFor();
+//			if (pr.exitValue() != 0) {
+//				throw new Exception("Failed to stop MySQL process");
+//			}
 		} catch (final Exception e) {
 			throw new IOException(e);
 		}

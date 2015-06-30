@@ -17,6 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 import java.io.IOException;
 
