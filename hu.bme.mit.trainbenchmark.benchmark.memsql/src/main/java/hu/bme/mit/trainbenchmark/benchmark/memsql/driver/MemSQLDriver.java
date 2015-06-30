@@ -26,7 +26,8 @@ public class MemSQLDriver extends SQLDriver {
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c", "mysql -u " + user + " -h 127.0.0.1 -P 3307 --prompt='memsql> '< " + modelPathWithoutExtension + getExtension() };
+		final String[] command = { "/bin/bash", "-c",
+				"mysql -u " + user + " -h 127.0.0.1 -P 3307 --prompt='memsql> '< " + modelPathWithoutExtension + getExtension() };
 
 		try {
 			final Process pr = rt.exec(command);

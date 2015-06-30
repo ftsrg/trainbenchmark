@@ -9,11 +9,12 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.memsql.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.memsql;
 
 import hu.bme.mit.trainbenchmark.benchmark.memsql.driver.MemSQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 		checker = new SQLChecker(sqlDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			// transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
+			transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
 		}
 	}
 

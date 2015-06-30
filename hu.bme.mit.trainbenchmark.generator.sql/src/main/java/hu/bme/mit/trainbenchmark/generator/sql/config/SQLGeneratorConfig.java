@@ -17,8 +17,30 @@ import org.apache.commons.cli.ParseException;
 
 public class SQLGeneratorConfig extends GeneratorConfig {
 
+	protected static final String MEMSQL = "memsql";
+	
+	protected boolean memSQL;
+	
 	public SQLGeneratorConfig(final String[] args) throws ParseException {
 		super(args);
+	}
+	
+	@Override
+	protected void initOptions() {
+		super.initOptions();
+
+		options.addOption(MEMSQL, false, "generate model for MemSQL");
+	}
+
+	@Override
+	protected void processArguments(final String[] args) throws ParseException {
+		super.processArguments(args);
+
+		memSQL = cmd.hasOption(MEMSQL);
+	}
+
+	public boolean isMemSQL() {
+		return memSQL;
 	}
 
 }

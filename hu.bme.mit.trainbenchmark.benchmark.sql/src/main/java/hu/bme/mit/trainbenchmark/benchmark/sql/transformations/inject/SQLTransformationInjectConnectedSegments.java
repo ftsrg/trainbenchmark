@@ -100,7 +100,6 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 						connection.createStatement().executeUpdate(insertSegment2);
 						connection.createStatement().executeUpdate(insertConnectsTo1);
 						connection.createStatement().executeUpdate(insertConnectsTo2);
-						connection.createStatement().executeUpdate(insertConnectsTo2);
 					}
 				}
 			} catch (final SQLException e) {
