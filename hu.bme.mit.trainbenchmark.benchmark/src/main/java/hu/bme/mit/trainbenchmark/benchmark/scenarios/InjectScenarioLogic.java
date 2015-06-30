@@ -13,28 +13,45 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import eu.mondo.sam.core.results.CaseDescriptor;
+import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-import java.io.IOException;
-
-public class InjectScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
+public class InjectScenarioLogic extends BenchmarkScenario implements
+		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
-	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
-		benchmarkCase.benchmarkInit(bc);
-		benchmarkCase.benchmarkInitTransformation();
+	public void build() {
+		// TODO Auto-generated method stub
 
-		benchmarkCase.benchmarkRead();
-		benchmarkCase.benchmarkCheck();
-		for (int i = 0; i < bc.getIterationCount(); i++) {
-			benchmarkCase.benchmarkModify();
-			benchmarkCase.benchmarkCheck();
-		}
-		benchmarkCase.benchmarkDestroy();
-
-		final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-		br.publish(true);
-		return br;
 	}
+
+	@Override
+	public CaseDescriptor getCaseDescriptor() {
+		CaseDescriptor descriptor = new CaseDescriptor();
+		descriptor.setCaseName(caseName);
+		descriptor.setTool(tool);
+		descriptor.setScenario("Inject");
+		descriptor.setSize(size);
+		descriptor.setRunIndex(runIndex);
+		return descriptor;
+	}
+
+	// @Override
+	// public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final
+	// AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
+	// benchmarkCase.benchmarkInit(bc);
+	// benchmarkCase.benchmarkInitTransformation();
+	//
+	// benchmarkCase.benchmarkRead();
+	// benchmarkCase.benchmarkCheck();
+	// for (int i = 0; i < bc.getIterationCount(); i++) {
+	// benchmarkCase.benchmarkModify();
+	// benchmarkCase.benchmarkCheck();
+	// }
+	// benchmarkCase.benchmarkDestroy();
+	//
+	// final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
+	// br.publish(true);
+	// return br;
+	// }
 }
