@@ -32,23 +32,29 @@ import org.junit.Test;
 
 public abstract class BatchTest extends TrainBenchmarkTest {
 
-	protected void testQuery(final Query query, final int expectedResultSize) throws ParseException, IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, Scenario.BATCH);
+	protected void testQuery(final Query query, final int expectedResultSize)
+			throws ParseException, IOException {
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query,
+				Scenario.BATCH);
 		runQuery(bl, expectedResultSize);
 	}
 
-	protected void runQuery(final AbstractBenchmarkLogic bl, final int expectedResultSize) throws IOException {
-		final AbstractBenchmarkCase<?, ?> benchmarkCase = bl.getBenchmarkCase();
+	protected void runQuery(final AbstractBenchmarkLogic bl,
+			final int expectedResultSize) throws IOException {
+		final AbstractBenchmarkCase<?, ?> benchmarkCase = bl
+				.getBenchmarkCase();
 
 		try {
 			benchmarkCase.benchmarkInit(bl.getBc());
-			benchmarkCase.benchmarkRead();
-			benchmarkCase.benchmarkCheck();
-			
-			final int resultSize = benchmarkCase.getMatches().size();
+			// benchmarkCase.benchmarkRead();
+			// benchmarkCase.benchmarkCheck();
+
+			final int resultSize = benchmarkCase.getMatches()
+					.size();
 			collector.checkThat(resultSize, is(expectedResultSize));
 
-			final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
+			final BenchmarkResult br = benchmarkCase
+					.getBenchmarkResult();
 			br.publish(true);
 		} finally {
 			benchmarkCase.benchmarkDestroy();
@@ -84,5 +90,5 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 	public void switchSet() throws ParseException, IOException {
 		testQuery(SWITCHSET, 2);
 	}
-	
+
 }
