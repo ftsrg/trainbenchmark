@@ -1,6 +1,6 @@
 .project
 .pydevproject
-src/controller/__pycache__/
+__pycache__/*
 .Rhistory
 tb-env/
 init/*.zip
