@@ -49,7 +49,6 @@ def execute(configuration):
 
                 target = targets.get_tool_jar(configuration.tool)
                 xmx = configuration.common.java_xmx
-                maxpermsize = configuration.common.java_maxpermsize
                 modif_method = configuration.common.modif_method
                 modif_constant = str(configuration.common.modif_constant)
                 iter_count = str(configuration.common.iter_count)
@@ -59,8 +58,7 @@ def execute(configuration):
                     logging.info("Run benchmark:(tool:" + configuration.tool +
                                  ", scenario:" + scenario +
                                  ", query:" + query + ", size:" + str(size)+")")
-                    subprocess.call(["java", "-Xmx" + xmx, "-XX:MaxPermSize=" +
-                                     maxpermsize, "-jar", target,
+                    subprocess.call(["java", "-Xmx" + xmx, "-jar", target,
                                      "-scenario", scenario,
                                      "-runIndex", str(series_index),
                                      "-query", query,

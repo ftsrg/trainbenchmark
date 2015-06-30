@@ -10,7 +10,7 @@
         {
           "type": "string",
           "enum": [
-            "User",
+            "Inject",
             "Repair",
             "Batch"
           ]
@@ -19,7 +19,7 @@
       "additionalItems": {
         "type": "string",
         "enum": [
-          "User",
+          "Inject",
           "Repair",
           "Batch"
         ]

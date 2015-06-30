@@ -11,18 +11,19 @@
   },
   "IterationCount": 10,
   "MinSize": 1,
-  "MaxSize": 512,
+  "MaxSize": 16,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
-    "RouteSensor"
+    "PosLength"
   ],
   "Scenarios": [
-    "Batch"
+    "Repair",
+    "Inject"
   ],
   "Series": 1,
   "Tools": [
-    "mysql"
+    "sesame"
   ],
   "UniqueConfigurations": [
 	]

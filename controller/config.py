@@ -52,10 +52,8 @@ class CommonParameters:
     
     def __init__(self):
         self.generator_args = None
-        self.maven_xmx = None 
-        self.maven_maxpermsize = None
+        self.maven_xmx = None
         self.java_xmx = None
-        self.java_maxpermsize = None
         self.series = None
         self.modif_method = None
         self.modif_constant = None

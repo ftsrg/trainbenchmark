@@ -97,8 +97,7 @@ def build_projects(configurations, skip_tests, build_core=True,
     path = configurations[0].common.path
     util.set_working_directory()
     subprocess.call(["shell-scripts/export_maven_opts.sh",
-                    configurations[0].common.maven_xmx,
-                    configurations[0].common.maven_maxpermsize])
+                    configurations[0].common.maven_xmx])
     util.set_working_directory(path)
 
     while len(all_dependencies) > 0:
