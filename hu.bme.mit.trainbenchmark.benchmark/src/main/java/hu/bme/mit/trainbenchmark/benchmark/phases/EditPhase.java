@@ -20,9 +20,9 @@ import eu.mondo.sam.core.DataToken;
 import eu.mondo.sam.core.phases.AtomicPhase;
 import eu.mondo.sam.core.results.PhaseResult;
 
-public class DestroyPhase extends AtomicPhase {
+public class EditPhase extends AtomicPhase {
 
-	public DestroyPhase(String phaseName) {
+	public EditPhase(String phaseName) {
 		super(phaseName);
 	}
 
@@ -30,7 +30,8 @@ public class DestroyPhase extends AtomicPhase {
 	public void execute(DataToken token, PhaseResult phaseResult) {
 		TrainBenchmarkDataToken trainToken = ((TrainBenchmarkDataToken) token);
 		try {
-			trainToken.getBenchmarkCase().benchmarkDestroy();
+			trainToken.getBenchmarkCase().benchmarkModify(
+					phaseResult);
 		} catch (IOException e) {
 			throw new RuntimeException();
 		}

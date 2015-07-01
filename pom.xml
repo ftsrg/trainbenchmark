@@ -58,7 +58,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.generator</module>
-				<module>../mondo-sam</module>
 			</modules>
 		</profile>
 

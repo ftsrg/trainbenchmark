@@ -15,15 +15,14 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.ModifyPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.EditPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
-import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public class RepairScenarioLogic extends BenchmarkScenario implements
+public class RepairScenarioLogic extends
 		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
@@ -31,8 +30,8 @@ public class RepairScenarioLogic extends BenchmarkScenario implements
 		SequencePhase seq = new SequencePhase();
 		CheckPhase check = new CheckPhase("Check");
 		seq.addPhases(new InitializationPhase("Init"),
-				new InitTransformation("InitTransformation"),
-				new ReadPhase("Read"), check, new ModifyPhase(
+				new InitTransformationPhase("InitTransformation"),
+				new ReadPhase("Read"), check, new EditPhase(
 						"Modify"), check,
 				new DestroyPhase("Destroy"));
 		rootPhase = seq;
