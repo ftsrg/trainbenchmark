@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -26,6 +25,7 @@ import java.util.Random;
 
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
+import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.PhaseResult;
 
 public abstract class TransformationLogic<M, T, O> {
@@ -68,10 +68,8 @@ public abstract class TransformationLogic<M, T, O> {
 	protected Transformation<O> transformation;
 
 	public void initialize(final BenchmarkConfig bc,
-			final BenchmarkResult br, final Driver<T> driver,
-			final Random random) {
+			final Driver<T> driver, final Random random) {
 		this.bc = bc;
-		this.br = br;
 		this.driver = driver;
 		this.random = random;
 	}
@@ -84,7 +82,7 @@ public abstract class TransformationLogic<M, T, O> {
 		TimeMetric lhs = new TimeMetric("LHS");
 		TimeMetric rhs = new TimeMetric("RHS");
 		ScalarMetric modified = new ScalarMetric("Modified");
-		nObjectsToModify = Util.calcModify(br);
+		nObjectsToModify = Util.calcModify(bc, currentMatches.size());
 		modified.setValue(nObjectsToModify);
 
 		lhs.startMeasure();

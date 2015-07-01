@@ -16,15 +16,14 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class Util {
 
-	public static long calcModify(final BenchmarkResult br) {
-		final BenchmarkConfig bc = br.getBenchmarkConfig();
+	public static long calcModify(BenchmarkConfig bc, int resultSize) {
 		final long nModify = bc.getModificationConstant();
-		
+
 		switch (bc.getModificationMethod()) {
 		case CONSTANT:
 			return nModify;
 		case RESULT_SET:
-			return br.getLastResultSize() / nModify;
+			return resultSize / nModify;
 		default:
 			return 0;
 		}
