@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import static org.hamcrest.Matchers.equalTo;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -24,6 +23,11 @@ import org.apache.commons.cli.ParseException;
 import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
 
+import eu.mondo.sam.core.results.BenchmarkResult;
+import eu.mondo.sam.core.results.JsonSerializer;
+import eu.mondo.sam.core.results.MetricResult;
+import eu.mondo.sam.core.results.PhaseResult;
+
 public abstract class TrainBenchmarkTest {
 
 	@Rule
@@ -31,18 +35,36 @@ public abstract class TrainBenchmarkTest {
 
 	protected TestBenchmarkInitializer<?> bi;
 
-	public AbstractBenchmarkLogic initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
+	public AbstractBenchmarkLogic initialize(final Query query,
+			final String tool, final Scenario scenario)
+			throws IOException {
 		return bi.initializeBenchmark(query, scenario);
 	}
 
-	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws ParseException, IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
+	protected void testQuery(final Query query, final Scenario scenario,
+			final int expectedResultSize) throws ParseException,
+			IOException {
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query,
+				scenario);
 		runQuery(bl, expectedResultSize);
 	}
 
-	private void runQuery(final AbstractBenchmarkLogic bl, final long expectedResultSize) throws IOException {
+	private void runQuery(final AbstractBenchmarkLogic bl,
+			final long expectedResultSize) throws IOException {
+		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult br = bl.runBenchmark();
-		collector.checkThat(br.getLastResultSize(), equalTo(expectedResultSize));	
+		long lastResultSize = 0;
+		for (PhaseResult pr : br.getPhaseResults()) {
+			String name = pr.getPhaseName();
+			if ("Check".equals(name) || "Recheck".equals(name)) {
+				for (MetricResult m : pr.getMetrics()) {
+					if ("Matches".equals(m.getName())) {
+						lastResultSize = Long
+								.parseLong(m.getValue());
+					}
+				}
+			}
+		}
+		collector.checkThat(lastResultSize, equalTo(expectedResultSize));
 	}
-
 }

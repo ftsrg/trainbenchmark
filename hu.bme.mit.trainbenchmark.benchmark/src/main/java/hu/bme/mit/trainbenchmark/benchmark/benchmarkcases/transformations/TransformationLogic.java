@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -24,20 +23,27 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+import eu.mondo.sam.core.metrics.ScalarMetric;
+import eu.mondo.sam.core.metrics.TimeMetric;
+import eu.mondo.sam.core.results.BenchmarkResult;
+import eu.mondo.sam.core.results.PhaseResult;
+
 public abstract class TransformationLogic<M, T, O> {
 
 	// M: matches
 	// T: elements in the match set
 	// O: transformation object
 
-	public static TransformationLogic newInstance(final Scenario scenario, final Comparator comparator) {
+	public static TransformationLogic newInstance(final Scenario scenario,
+			final Comparator comparator) {
 		switch (scenario) {
 		case REPAIR:
 			return new RepairTransformationLogic<>(comparator);
 		case INJECT:
 			return new InjectTransformationLogic<>(comparator);
 		default:
-			throw new UnsupportedOperationException("Scenario " + scenario + " not supported");
+			throw new UnsupportedOperationException("Scenario "
+					+ scenario + " not supported");
 		}
 	}
 
@@ -61,32 +67,39 @@ public abstract class TransformationLogic<M, T, O> {
 	protected long end;
 	protected Transformation<O> transformation;
 
-	public void initialize(final BenchmarkConfig bc, final BenchmarkResult br, final Driver<T> driver, final Random random) {
+	public void initialize(final BenchmarkConfig bc,
+			final Driver<T> driver, final Random random) {
 		this.bc = bc;
-		this.br = br;
 		this.driver = driver;
 		this.random = random;
 	}
 
-	protected abstract void lhs(final Collection<M> currentMatches) throws IOException;
+	protected abstract void lhs(final Collection<M> currentMatches)
+			throws IOException;
 
-	public void performTransformation(final Collection<M> currentMatches) throws IOException {
-		nObjectsToModify = Util.calcModify(br);
-		br.addModifiedElementsSize(nObjectsToModify);
+	public void performTransformation(PhaseResult phaseResult,
+			final Collection<M> currentMatches) throws IOException {
+		TimeMetric lhs = new TimeMetric("LHS");
+		TimeMetric rhs = new TimeMetric("RHS");
+		ScalarMetric modified = new ScalarMetric("Modified");
+		nObjectsToModify = Util.calcModify(bc, currentMatches.size());
+		modified.setValue(nObjectsToModify);
 
-		br.restartClock();
+		lhs.startMeasure();
 		driver.beginTransaction();
 		lhs(currentMatches);
-		br.addCheckTime();
+		lhs.stopMeasure();
 
 		// we do not measure this in the benchmark results
 		final List<O> candidatesList = copyAndSort();
 		objectsToModify = pickRandom(nObjectsToModify, candidatesList);
 
-		br.restartClock();
+		rhs.startMeasure();
 		transformation.rhs(objectsToModify);
 		driver.finishTransaction();
-		br.addTransformationTime();
+		rhs.stopMeasure();
+
+		phaseResult.addMetrics(lhs, rhs, modified);
 	}
 
 	protected abstract List<O> copyAndSort();

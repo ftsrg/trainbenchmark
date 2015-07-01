@@ -13,28 +13,48 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
+import eu.mondo.sam.core.phases.IterationPhase;
+import eu.mondo.sam.core.phases.SequencePhase;
+import eu.mondo.sam.core.results.CaseDescriptor;
 
-import java.io.IOException;
-
-public class InjectScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
+public class InjectScenarioLogic extends
+		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
-	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
-		benchmarkCase.benchmarkInit(bc);
-		benchmarkCase.benchmarkInitTransformation();
+	public void build() {
+		IterationPhase iter = new IterationPhase(
+				benchmarkConfig.getIterationCount());
+		SequencePhase seq = new SequencePhase();
+		SequencePhase innerSeq = new SequencePhase();
 
-		benchmarkCase.benchmarkRead();
-		benchmarkCase.benchmarkCheck();
-		for (int i = 0; i < bc.getIterationCount(); i++) {
-			benchmarkCase.benchmarkModify();
-			benchmarkCase.benchmarkCheck();
-		}
-		benchmarkCase.benchmarkDestroy();
+		TransformationPhase edit = new TransformationPhase("Edit");
+		CheckPhase check = new CheckPhase("Recheck");
 
-		final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-		br.publish(true);
-		return br;
+		innerSeq.addPhases(edit, check);
+		iter.setPhase(innerSeq);
+		seq.addPhases(new InitializationPhase("Init"),
+				new InitTransformationPhase(
+						"InitTransformation"),
+				new ReadPhase("Read"), new CheckPhase("Check"),
+				iter, new DestroyPhase("Destroy"));
+		rootPhase = seq;
+
+	}
+
+	@Override
+	public CaseDescriptor getCaseDescriptor() {
+		CaseDescriptor descriptor = new CaseDescriptor();
+		descriptor.setCaseName(caseName);
+		descriptor.setTool(tool);
+		descriptor.setScenario("Inject");
+		descriptor.setSize(size);
+		descriptor.setRunIndex(runIndex);
+		return descriptor;
 	}
 }

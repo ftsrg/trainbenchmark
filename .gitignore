@@ -16,4 +16,4 @@ results*.txt
 results/
 .pydevproject
 deps/
-diagrams/
+diagrams/*

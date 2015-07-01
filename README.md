@@ -17,6 +17,9 @@ For theoretical and implementation details, check out the following documents:
 * [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 
+Besides these requirements, it is also necessary to clone and build the [MONDO-SAM](https://github.com/FTSRG/mondo-sam) project. The easiest way is to run the following script from the `trainbenchmark/scripts` directory:
+* `./resolve-dependencies.sh`
+
 ## Projects
 
 ### Generator projects
