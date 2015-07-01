@@ -20,9 +20,9 @@ import eu.mondo.sam.core.DataToken;
 import eu.mondo.sam.core.phases.AtomicPhase;
 import eu.mondo.sam.core.results.PhaseResult;
 
-public class EditPhase extends AtomicPhase {
+public class TransformationPhase extends AtomicPhase {
 
-	public EditPhase(String phaseName) {
+	public TransformationPhase(String phaseName) {
 		super(phaseName);
 	}
 

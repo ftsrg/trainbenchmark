@@ -17,8 +17,8 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.EditPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
 
@@ -29,10 +29,12 @@ public class RepairScenarioLogic extends
 	public void build() {
 		SequencePhase seq = new SequencePhase();
 		CheckPhase check = new CheckPhase("Check");
+		CheckPhase recheck = new CheckPhase("Recheck");
 		seq.addPhases(new InitializationPhase("Init"),
-				new InitTransformationPhase("InitTransformation"),
-				new ReadPhase("Read"), check, new EditPhase(
-						"Modify"), check,
+				new InitTransformationPhase(
+						"InitTransformation"),
+				new ReadPhase("Read"), check,
+				new TransformationPhase("Edit"), recheck,
 				new DestroyPhase("Destroy"));
 		rootPhase = seq;
 

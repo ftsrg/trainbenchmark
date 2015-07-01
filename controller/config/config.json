@@ -9,21 +9,21 @@
     "Generator": "",
     "Benchmark": ""
   },
-  "IterationCount": 10,
+  "IterationCount": 3,
   "MinSize": 1,
   "MaxSize": 16,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
-    "PosLength"
+    "ConnectedSegments"
   ],
   "Scenarios": [
-    "Repair",
-    "Inject"
+    "Batch"
   ],
   "Series": 1,
   "Tools": [
-    "sesame"
+    "emfincquery"
+
   ],
   "UniqueConfigurations": [
 	]

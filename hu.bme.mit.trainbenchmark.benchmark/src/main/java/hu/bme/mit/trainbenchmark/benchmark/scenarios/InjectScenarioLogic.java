@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.EditPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
@@ -33,16 +33,16 @@ public class InjectScenarioLogic extends
 		SequencePhase seq = new SequencePhase();
 		SequencePhase innerSeq = new SequencePhase();
 
-		CheckPhase check = new CheckPhase("Check");
-		EditPhase edit = new EditPhase("Edit");
+		TransformationPhase edit = new TransformationPhase("Edit");
+		CheckPhase check = new CheckPhase("Recheck");
 
 		innerSeq.addPhases(edit, check);
 		iter.setPhase(innerSeq);
 		seq.addPhases(new InitializationPhase("Init"),
 				new InitTransformationPhase(
 						"InitTransformation"),
-				new ReadPhase("Read"), check, iter,
-				new DestroyPhase("Destroy"));
+				new ReadPhase("Read"), new CheckPhase("Check"),
+				iter, new DestroyPhase("Destroy"));
 		rootPhase = seq;
 
 	}
