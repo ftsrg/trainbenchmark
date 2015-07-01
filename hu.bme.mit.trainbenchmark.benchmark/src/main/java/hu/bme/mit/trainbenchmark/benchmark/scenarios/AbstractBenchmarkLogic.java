@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
+ * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 
 import eu.mondo.sam.core.BenchmarkEngine;
+import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
 public abstract class AbstractBenchmarkLogic {
@@ -34,11 +35,12 @@ public abstract class AbstractBenchmarkLogic {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void runBenchmark() throws IOException {
+	public BenchmarkResult runBenchmark() throws IOException {
 		@SuppressWarnings("rawtypes")
 		final ScenarioLogic scl = ScenarioFactory.getScenario(bc
 				.getScenario());
 		final AbstractBenchmarkCase<?, ?> tc = getBenchmarkCase();
+
 		scl.setBenchmarkConfig(bc);
 		scl.initializeDescriptor();
 
@@ -49,7 +51,7 @@ public abstract class AbstractBenchmarkLogic {
 		token.setConfig(bc);
 
 		engine.runBenchmark(scenario, token);
-
+		return engine.getBenchmarkResult();
 	}
 
 	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
@@ -62,9 +64,9 @@ public abstract class AbstractBenchmarkLogic {
 		try {
 			// trying to loading generic class
 			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark."
-					+ getTool().toLowerCase()
+					+ bc.getClassName().toLowerCase()
 					+ "."
-					+ getTool() + "BenchmarkCase";
+					+ bc.getClassName() + "BenchmarkCase";
 			final Class<?> clazz = classLoader
 					.loadClass(toolClassName);
 
@@ -76,10 +78,11 @@ public abstract class AbstractBenchmarkLogic {
 			}
 
 			// else instantiate specific class
+
 			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark."
-					+ getTool().toLowerCase()
+					+ bc.getClassName().toLowerCase()
 					+ "."
-					+ getTool() + bc.getQuery();
+					+ bc.getClassName() + bc.getQuery();
 			final Class<?> queryClass = classLoader
 					.loadClass(queryClassName);
 
@@ -96,5 +99,4 @@ public abstract class AbstractBenchmarkLogic {
 		return bc;
 	}
 
-	protected abstract String getTool();
 }

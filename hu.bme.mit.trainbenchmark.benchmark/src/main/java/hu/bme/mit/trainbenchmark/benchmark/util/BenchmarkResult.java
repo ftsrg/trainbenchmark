@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
+ * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -35,12 +35,10 @@ public class BenchmarkResult {
 	protected final String SEPARATOR = "\t";
 
 	protected List<Long> modifiedElementsSizes = new ArrayList<>();
-	protected List<Long> memoryUsages = new ArrayList<>();
 	protected List<Integer> resultSizes = new ArrayList<>();
 
 	// phase 1
 	protected Long readTime;
-	protected Long readMemory;
 	// phase 2
 	protected List<Long> checkTimes = new ArrayList<>();
 	// phase 3
@@ -81,10 +79,6 @@ public class BenchmarkResult {
 		readTime = stopClock();
 	}
 
-	public void setReadMemory(final long memoryUsage) {
-		readMemory = memoryUsage;
-	}
-
 	// phase 2
 	public void addCheckTime() {
 		checkTimes.add(stopClock());
@@ -93,12 +87,6 @@ public class BenchmarkResult {
 	// phase 3
 	public void addTransformationTime() {
 		repairTimes.add(stopClock());
-	}
-
-	// memory usage
-
-	public void addMemoryUsage(final long memoryUsage) {
-		memoryUsages.add(memoryUsage);
 	}
 
 	// modification parameters
@@ -181,134 +169,5 @@ public class BenchmarkResult {
 		}
 		System.out.print(toString());
 	}
-	
-	// protected BenchmarkConfig bc;
-	// protected Stopwatch stopwatch;
-	//
-	// public BenchmarkResult(final BenchmarkConfig bc) {
-	// super();
-	// this.bc = bc;
-	// }
-	//
-	//
-	// @JsonProperty("ModifiedElements")
-	// protected List<Long> modifiedMatchCounts = new ArrayList<>();
-	//
-	// @JsonProperty("Memory")
-	// protected List<Long> memoryUsages = new ArrayList<>();
-	//
-	// @JsonProperty("Results")
-	// protected List<Integer> matchCounts = new ArrayList<>();
-	//
-	// // phase 1
-	// @JsonProperty("ReadTime")
-	// protected Long readTime;
-	//
-	// // phase 2
-	// @JsonProperty("CheckTimes")
-	// protected List<Long> checkTimes = new ArrayList<>();
-	// // phase 3
-	// @JsonProperty("LHSTimes")
-	// protected List<Long> lhsTimes = new ArrayList<>();
-	//
-	// @JsonProperty("RHSTimes")
-	// protected List<Long> rhsTimes = new ArrayList<>();
-	//
-	// // JSON properties
-	// @JsonProperty("Size")
-	// public int getSize() {
-	// return bc.getSize();
-	// }
-	//
-	// @JsonProperty("Scenario")
-	// public String getScenario() {
-	// return bc.getScenarioName();
-	// }
-	//
-	// @JsonProperty("RunIndex")
-	// public int getRunIndex() {
-	// return bc.getRunIndex();
-	// }
-	//
-	// @JsonProperty("Tool")
-	// public String getTool() {
-	// return bc.getTool();
-	// }
-	//
-	// @JsonProperty("Query")
-	// public Query getQuery() {
-	// return bc.getQuery();
-	// }
-	//
-	// // benchmarkconfig
-	//
-	// public BenchmarkConfig getBenchmarkConfig() {
-	// return bc;
-	// }
-	//
-	// public void setBenchmarkConfig(final BenchmarkConfig bc) {
-	// this.bc = bc;
-	// }
-	//
-	// // timing
-	//
-	// public void restartClock() {
-	// stopwatch = Stopwatch.createStarted();
-	// }
-	//
-	// public long stopClock() {
-	// stopwatch.stop();
-	// final long nanos = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-	// return nanos;
-	// }
-	//
-	// // phase 1
-	// public void setReadTime() {
-	// readTime = stopClock();
-	// }
-	//
-	// // phase 2
-	// public void addCheckTime() {
-	// checkTimes.add(stopClock());
-	// }
-	//
-	// // phase 3
-	// public void addLhsTime() {
-	// lhsTimes.add(stopClock());
-	// }
-	//
-	// public void addRhsTime() {
-	// rhsTimes.add(stopClock());
-	// }
-	//
-	// // memory usage
-	//
-	// public void addMemoryUsage(final long memoryUsage) {
-	// memoryUsages.add(memoryUsage);
-	// }
-	//
-	// // modification parameters
-	//
-	// public void addModifiedMatchCount(final long modifiedMatchCount) {
-	// modifiedMatchCounts.add(modifiedMatchCount);
-	// }
-	//
-	// // result sizes
-	//
-	// public void addMatchCount(final int matchCount) {
-	// matchCounts.add(matchCount);
-	// }
-	//
-	// public List<Integer> getMatchCounts() {
-	// return matchCounts;
-	// }
-	//
-	// public long getLastMatchCount() {
-	// return matchCounts.get(matchCounts.size() - 1);
-	// }
-	//
-	// public void publish() throws IOException {
-	// ResultSerializer.serializeToJSON(this);
-	// }
 
 }

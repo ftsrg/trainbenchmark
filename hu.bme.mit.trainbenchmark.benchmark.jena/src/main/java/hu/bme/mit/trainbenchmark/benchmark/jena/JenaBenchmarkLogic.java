@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
+ * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,17 +22,12 @@ public class JenaBenchmarkLogic extends AbstractBenchmarkLogic {
 	protected RDFBenchmarkConfig rbc;
 
 	public JenaBenchmarkLogic(final String[] args) throws ParseException {
-		bc = rbc = new RDFBenchmarkConfig(args, getTool());
+		bc = rbc = new RDFBenchmarkConfig(args, "Jena");
 	}
 
 	public JenaBenchmarkLogic(final RDFBenchmarkConfig rbc) {
 		super(rbc);
 		this.rbc = rbc;
-	}
-
-	@Override
-	protected String getTool() {
-		return "Jena";
 	}
 
 }

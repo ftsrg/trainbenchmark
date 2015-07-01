@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2014, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
+ * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,7 +22,7 @@ public class Neo4jCypherBenchmarkInitializer extends TestBenchmarkInitializer<Ne
 
 	@Override
 	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final Neo4jBenchmarkConfig nbc = new Neo4jBenchmarkConfig(scenario, size, "Neo4j", 1, query, iterationCount, modificationMethod,
+		final Neo4jBenchmarkConfig nbc = new Neo4jBenchmarkConfig(scenario, size, 1, query, iterationCount, modificationMethod,
 				modificationConstant, false);
 		return new Neo4jBenchmarkLogic(nbc);
 	}
