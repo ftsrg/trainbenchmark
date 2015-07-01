@@ -24,6 +24,7 @@ import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
 
 import eu.mondo.sam.core.results.BenchmarkResult;
+import eu.mondo.sam.core.results.JsonSerializer;
 import eu.mondo.sam.core.results.MetricResult;
 import eu.mondo.sam.core.results.PhaseResult;
 
@@ -50,6 +51,7 @@ public abstract class TrainBenchmarkTest {
 
 	private void runQuery(final AbstractBenchmarkLogic bl,
 			final long expectedResultSize) throws IOException {
+		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult br = bl.runBenchmark();
 		long lastResultSize = 0;
 		for (PhaseResult pr : br.getPhaseResults()) {
