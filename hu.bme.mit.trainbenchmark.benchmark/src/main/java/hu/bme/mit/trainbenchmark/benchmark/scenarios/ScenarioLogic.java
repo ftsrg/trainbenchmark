@@ -13,10 +13,26 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public interface ScenarioLogic<T extends AbstractBenchmarkCase<?, ?>> {
+public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?>>
+		extends BenchmarkScenario {
 
-    // public BenchmarkResult runBenchmark(BenchmarkConfig bc, T testCase)
-    // throws IOException;
+	protected BenchmarkConfig benchmarkConfig;
 
+	public BenchmarkConfig getBenchmarkConfig() {
+		return benchmarkConfig;
+	}
+
+	public void setBenchmarkConfig(BenchmarkConfig benchmarkConfig) {
+		this.benchmarkConfig = benchmarkConfig;
+	}
+
+	public void initializeDescriptor() {
+		caseName = benchmarkConfig.getQuery().toString();
+		size = benchmarkConfig.getSize();
+		tool = benchmarkConfig.getTool();
+		runIndex = benchmarkConfig.getRunIndex();
+	}
 }

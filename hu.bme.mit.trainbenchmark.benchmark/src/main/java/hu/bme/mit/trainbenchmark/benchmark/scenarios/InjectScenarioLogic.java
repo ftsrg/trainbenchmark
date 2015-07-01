@@ -13,15 +13,37 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.EditPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
+import eu.mondo.sam.core.phases.IterationPhase;
+import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
-import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public class InjectScenarioLogic extends BenchmarkScenario implements
+public class InjectScenarioLogic extends
 		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
 	public void build() {
-		// TODO Auto-generated method stub
+		IterationPhase iter = new IterationPhase(
+				benchmarkConfig.getIterationCount());
+		SequencePhase seq = new SequencePhase();
+		SequencePhase innerSeq = new SequencePhase();
+
+		CheckPhase check = new CheckPhase("Check");
+		EditPhase edit = new EditPhase("Edit");
+
+		innerSeq.addPhases(edit, check);
+		iter.setPhase(innerSeq);
+		seq.addPhases(new InitializationPhase("Init"),
+				new InitTransformationPhase(
+						"InitTransformation"),
+				new ReadPhase("Read"), check, iter,
+				new DestroyPhase("Destroy"));
+		rootPhase = seq;
 
 	}
 
@@ -35,23 +57,4 @@ public class InjectScenarioLogic extends BenchmarkScenario implements
 		descriptor.setRunIndex(runIndex);
 		return descriptor;
 	}
-
-	// @Override
-	// public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final
-	// AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
-	// benchmarkCase.benchmarkInit(bc);
-	// benchmarkCase.benchmarkInitTransformation();
-	//
-	// benchmarkCase.benchmarkRead();
-	// benchmarkCase.benchmarkCheck();
-	// for (int i = 0; i < bc.getIterationCount(); i++) {
-	// benchmarkCase.benchmarkModify();
-	// benchmarkCase.benchmarkCheck();
-	// }
-	// benchmarkCase.benchmarkDestroy();
-	//
-	// final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-	// br.publish(true);
-	// return br;
-	// }
 }

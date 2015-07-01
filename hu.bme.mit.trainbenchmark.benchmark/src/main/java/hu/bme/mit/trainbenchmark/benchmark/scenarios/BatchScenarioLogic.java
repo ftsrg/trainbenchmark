@@ -19,43 +19,43 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
-import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public class BatchScenarioLogic extends BenchmarkScenario implements
-	ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
+public class BatchScenarioLogic extends
+		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
-    // @Override
-    // public BenchmarkResult runBenchmark(final BenchmarkConfig bc,
-    // final AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
-    // // benchmarkCase.benchmarkInit(bc);
-    //
-    // benchmarkCase.benchmarkRead();
-    // benchmarkCase.benchmarkCheck();
-    // benchmarkCase.benchmarkDestroy();
-    //
-    // final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-    // br.publish(true);
-    // return br;
-    // }
+	// @Override
+	// public BenchmarkResult runBenchmark(final BenchmarkConfig bc,
+	// final AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
+	// // benchmarkCase.benchmarkInit(bc);
+	//
+	// benchmarkCase.benchmarkRead();
+	// benchmarkCase.benchmarkCheck();
+	// benchmarkCase.benchmarkDestroy();
+	//
+	// final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
+	// br.publish(true);
+	// return br;
+	// }
 
-    @Override
-    public void build() {
-	SequencePhase seq = new SequencePhase();
-	seq.addPhases(new InitializationPhase("Init"), new ReadPhase("Read"),
-		new CheckPhase("Check"), new DestroyPhase("Destroy"));
-	rootPhase = seq;
+	@Override
+	public void build() {
+		SequencePhase seq = new SequencePhase();
+		seq.addPhases(new InitializationPhase("Init"), new ReadPhase(
+				"Read"), new CheckPhase("Check"),
+				new DestroyPhase("Destroy"));
+		rootPhase = seq;
 
-    }
+	}
 
-    @Override
-    public CaseDescriptor getCaseDescriptor() {
-	CaseDescriptor descriptor = new CaseDescriptor();
-	descriptor.setCaseName(caseName);
-	descriptor.setTool(tool);
-	descriptor.setScenario("Batch");
-	descriptor.setSize(size);
-	descriptor.setRunIndex(runIndex);
-	return descriptor;
-    }
+	@Override
+	public CaseDescriptor getCaseDescriptor() {
+		CaseDescriptor descriptor = new CaseDescriptor();
+		descriptor.setCaseName(caseName);
+		descriptor.setTool(tool);
+		descriptor.setScenario("Batch");
+		descriptor.setSize(size);
+		descriptor.setRunIndex(runIndex);
+		return descriptor;
+	}
 
 }
