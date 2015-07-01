@@ -13,27 +13,42 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
+import eu.mondo.sam.core.phases.SequencePhase;
+import eu.mondo.sam.core.results.CaseDescriptor;
 
-import java.io.IOException;
-
-public class RepairScenarioLogic implements ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
+public class RepairScenarioLogic extends
+		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
-	public BenchmarkResult runBenchmark(final BenchmarkConfig bc, final AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
-		benchmarkCase.benchmarkInit(bc);
-		benchmarkCase.benchmarkInitTransformation();
+	public void build() {
+		SequencePhase seq = new SequencePhase();
+		CheckPhase check = new CheckPhase("Check");
+		CheckPhase recheck = new CheckPhase("Recheck");
+		seq.addPhases(new InitializationPhase("Init"),
+				new InitTransformationPhase(
+						"InitTransformation"),
+				new ReadPhase("Read"), check,
+				new TransformationPhase("Edit"), recheck,
+				new DestroyPhase("Destroy"));
+		rootPhase = seq;
 
-		benchmarkCase.benchmarkRead();
-		benchmarkCase.benchmarkCheck();
-		benchmarkCase.benchmarkModify();
-		benchmarkCase.benchmarkCheck();
-		benchmarkCase.benchmarkDestroy();
+	}
 
-		final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-		br.publish(true);
-		return br;
+	@Override
+	public CaseDescriptor getCaseDescriptor() {
+		CaseDescriptor descriptor = new CaseDescriptor();
+		descriptor.setCaseName(caseName);
+		descriptor.setTool(tool);
+		descriptor.setScenario("Repair");
+		descriptor.setSize(size);
+		descriptor.setRunIndex(runIndex);
+		return descriptor;
 	}
 
 }
