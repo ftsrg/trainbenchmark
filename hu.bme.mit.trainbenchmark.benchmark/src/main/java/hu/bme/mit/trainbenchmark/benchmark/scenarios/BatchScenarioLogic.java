@@ -23,20 +23,6 @@ import eu.mondo.sam.core.results.CaseDescriptor;
 public class BatchScenarioLogic extends
 		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
-	// @Override
-	// public BenchmarkResult runBenchmark(final BenchmarkConfig bc,
-	// final AbstractBenchmarkCase<?, ?> benchmarkCase) throws IOException {
-	// // benchmarkCase.benchmarkInit(bc);
-	//
-	// benchmarkCase.benchmarkRead();
-	// benchmarkCase.benchmarkCheck();
-	// benchmarkCase.benchmarkDestroy();
-	//
-	// final BenchmarkResult br = benchmarkCase.getBenchmarkResult();
-	// br.publish(true);
-	// return br;
-	// }
-
 	@Override
 	public void build() {
 		SequencePhase seq = new SequencePhase();

@@ -55,7 +55,8 @@ public abstract class TrainBenchmarkTest {
 		final BenchmarkResult br = bl.runBenchmark();
 		long lastResultSize = 0;
 		for (PhaseResult pr : br.getPhaseResults()) {
-			if ("Check".equals(pr.getPhaseName())) {
+			String name = pr.getPhaseName();
+			if ("Check".equals(name) || "Recheck".equals(name)) {
 				for (MetricResult m : pr.getMetrics()) {
 					if ("Matches".equals(m.getName())) {
 						lastResultSize = Long
