@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2015, Gabor Szarnyas, Benedek Izso, Istvan Rath and Daniel Varro
+ * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
@@ -20,8 +21,8 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 
 public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
 
-	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryDriver<SemaphoreNeighborMatch> eiqDriver) {
-		super(eiqDriver);
+	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver<SemaphoreNeighborMatch> eiqDriver) {
+		super(eiqbc, eiqDriver);
 	}
 
 	@Override
