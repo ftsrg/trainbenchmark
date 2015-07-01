@@ -17,7 +17,6 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.util.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -35,18 +34,12 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	protected Random random = new UniqueRandom(
 			TrainBenchmarkConstants.RANDOM_SEED);
-	protected BenchmarkResult br;
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;
 	protected Checker<M> checker;
 	protected Collection<M> matches;
 	protected TransformationLogic<M, T, ?> transformationLogic;
 	protected Transformation<?> transformation;
-
-	// simple getters and setters
-	public BenchmarkResult getBenchmarkResult() {
-		return br;
-	}
 
 	public Collection<M> getMatches() {
 		return matches;
@@ -74,7 +67,6 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
 		this.bc = bc;
-		br = BenchmarkResult.newInstance(bc);
 		init();
 	}
 
@@ -82,7 +74,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		transformationLogic = TransformationLogic.newInstance(
 				bc.getScenario(), getComparator());
 		if (transformationLogic != null) {
-			transformationLogic.initialize(bc, br, driver, random);
+			transformationLogic.initialize(bc, driver, random);
 		}
 		transformationLogic.setTransformation(transformation);
 	}
