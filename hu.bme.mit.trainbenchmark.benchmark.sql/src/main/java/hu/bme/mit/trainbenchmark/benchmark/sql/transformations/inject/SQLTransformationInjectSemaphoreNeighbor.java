@@ -31,11 +31,10 @@ public class SQLTransformationInjectSemaphoreNeighbor extends SQLTransformationI
 		for (final Long route : routes) {
 			try {
 				// (route)-[:entry]->(semaphore) edge
-				final String deleteDefinedBy = String.format("" + //
-						"UPDATE `%s` " + //
-						"SET `%s` = NULL " + //
-						"WHERE `%s` = %d;", //
-						ROUTE, ENTRY, ID, route);
+				final String deleteDefinedBy = "" + //
+						"UPDATE " + ROUTE + " " + //
+						"SET " + ENTRY + " = NULL " + //
+						"WHERE " + ID + " = " + route + ";";
 				sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
 			} catch (final SQLException e) {
 				throw new IOException(e);

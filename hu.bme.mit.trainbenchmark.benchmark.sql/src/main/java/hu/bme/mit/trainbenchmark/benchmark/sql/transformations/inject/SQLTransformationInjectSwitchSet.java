@@ -30,12 +30,14 @@ public class SQLTransformationInjectSwitchSet extends SQLTransformationInject {
 	public void rhs(final Collection<Long> switches) throws IOException {
 		for (final Long sw : switches) {
 			try {
-				final String update = String.format("UPDATE %s SET %s = MOD(%s + 1, 4) WHERE `%s` = %d;", SWITCH, CURRENTPOSITION, CURRENTPOSITION, ID, sw);
+				final String update = "" + //
+						"UPDATE " + SWITCH + " " + //
+						"SET " + CURRENTPOSITION + " = MOD(" + CURRENTPOSITION + " + 1, 4) " + //
+						"WHERE " + ID + " = " + sw + ";";
 				sqlDriver.getConnection().createStatement().executeUpdate(update);
 			} catch (final SQLException e) {
 				throw new IOException(e);
 			}
 		}
 	}
-
 }
