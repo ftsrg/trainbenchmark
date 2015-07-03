@@ -117,9 +117,9 @@ CREATE TABLE IF NOT EXISTS "TrackElement" (
 --
 
 CREATE TABLE IF NOT EXISTS "connectsTo" (
-  "TrackElement_id" int NOT NULL,
-  "TrackElement_id_connectsTo" int NOT NULL,
-  PRIMARY KEY  ("TrackElement_id", "TrackElement_id_connectsTo")
+  "TrackElement1" int NOT NULL,
+  "TrackElement2" int NOT NULL,
+  PRIMARY KEY  ("TrackElement1", "TrackElement2")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 INSERT INTO "Semaphore" ("id", "signal") VALUES (1, 2);
@@ -4907,5 +4907,5 @@ INSERT INTO "connectsTo" VALUES (1329, 4);
 COMMIT;
 CREATE INDEX segment_length_idx ON "Segment" ("length");
 CREATE INDEX definedBy_idx ON "definedBy" ("Route_id", "Sensor_id");
-CREATE INDEX connectsto_idx1 ON "connectsTo" ("TrackElement_id");
-CREATE INDEX connectsto_idx2 ON "connectsTo" ("TrackElement_id_connectsTo");
+CREATE INDEX connectsTo_idx1 ON "connectsTo" ("TrackElement1");
+CREATE INDEX connectsTo_idx2 ON "connectsTo" ("TrackElement1");

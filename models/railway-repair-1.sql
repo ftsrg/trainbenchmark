@@ -202,11 +202,11 @@ DROP TABLE IF EXISTS `connectsTo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `connectsTo` (
-  `TrackElement_id` int(11) NOT NULL,
-  `TrackElement_id_connectsTo` int(11) NOT NULL,
-  PRIMARY KEY (`TrackElement_id`,`TrackElement_id_connectsTo`),
-  KEY `connectsto_idx1` (`TrackElement_id`),
-  KEY `connectsto_idx2` (`TrackElement_id_connectsTo`)
+  `TrackElement1` int(11) NOT NULL,
+  `TrackElement2` int(11) NOT NULL,
+  PRIMARY KEY (`TrackElement1`,`TrackElement2`),
+  KEY `connectsTo_idx1` (`TrackElement1`),
+  KEY `connectsTo_idx2` (`TrackElement1`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

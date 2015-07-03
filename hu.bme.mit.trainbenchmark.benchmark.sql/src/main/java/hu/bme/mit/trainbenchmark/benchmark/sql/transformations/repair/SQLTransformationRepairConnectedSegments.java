@@ -49,12 +49,12 @@ public class SQLTransformationRepairConnectedSegments extends SQLTransformationR
 				// (segment1)-[:connectsTo]->(segment2) edge
 				final String deleteConnectsTo1 = String.format("" + //
 						"DELETE FROM `%s` " + //
-						"WHERE `TrackElement_id` = %d AND `TrackElement_id_connectsTo` = %d;", //
+						"WHERE `TrackElement1` = %d AND `TrackElement2` = %d;", //
 						CONNECTSTO, match.getSegment1(), match.getSegment2());
 				// (segment2)-[:connectsTo]->(segment3) edge
 				final String deleteConnectsTo2 = String.format("" + //
 						"DELETE FROM `%s` " + //
-						"WHERE `TrackElement_id` = %d  AND `TrackElement_id_connectsTo` = %d;", //
+						"WHERE `TrackElement1` = %d  AND `TrackElement2` = %d;", //
 						CONNECTSTO, match.getSegment2(), match.getSegment3());
 				// insert (segment1)-[:connectsTo]->(segment3) edge
 				final String insertConnectsTo = String.format("" + //

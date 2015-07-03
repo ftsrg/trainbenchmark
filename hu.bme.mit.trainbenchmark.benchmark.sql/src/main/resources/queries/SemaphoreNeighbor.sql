@@ -18,11 +18,11 @@ ON definedBy1.Sensor_id = TE1.sensor
 
 -- te1
 INNER JOIN connectsTo
-ON TE1.id = connectsTo.TrackElement_id
+ON TE1.id = connectsTo.TrackElement1
 
 -- te2
 INNER JOIN TrackElement AS TE2
-ON connectsTo.TrackElement_id_connectsTo = TE2.id
+ON connectsTo.TrackElement2 = TE2.id
 
 -- sensor2
 INNER JOIN definedBy AS definedBy2
