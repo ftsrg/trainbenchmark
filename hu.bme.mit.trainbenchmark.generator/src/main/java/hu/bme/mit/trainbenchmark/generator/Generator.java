@@ -72,7 +72,7 @@ public abstract class Generator {
 	protected static final Map<String, Object> emptyMap = Collections.emptyMap();
 	protected static int MAX_SEGMENT_LENGTH = 1000;
 
-	public void generateModels() throws FileNotFoundException, IOException {
+	public void generateModels() throws Exception {
 		System.out.print("Generating instance model, generator: " + syntax() + ", size: " + generatorConfig.getSize() + "... ");
 		initializeConstants();
 		initModel();
@@ -250,7 +250,7 @@ public abstract class Generator {
 		currTracks.add(seg);
 	}
 
-	protected abstract void persistModel() throws IOException;
+	protected abstract void persistModel() throws Exception;
 
 	// the createVertex() methods with fewer arguments are final
 

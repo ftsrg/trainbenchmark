@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.Resource;
@@ -35,28 +34,23 @@ public class SesameTransformationRepairSwitchSet extends SesameTransformationRep
 	}
 
 	@Override
-	public void rhs(final Collection<SesameSwitchSetMatch> matches) throws IOException {
+	public void rhs(final Collection<SesameSwitchSetMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
 		final URI currentPositionProperty = vf.createURI(BASE_PREFIX + CURRENTPOSITION);
 
-		try {
-			for (final SesameSwitchSetMatch match : matches) {
-				final Resource sw = match.getSw();
-				final Value position = match.getPosition();
-				final Value currentPosition = match.getCurrentPosition();
+		for (final SesameSwitchSetMatch match : matches) {
+			final Resource sw = match.getSw();
+			final Value position = match.getPosition();
+			final Value currentPosition = match.getCurrentPosition();
 
-				final RepositoryResult<Statement> statementsToRemove = con.getStatements(sw, currentPositionProperty, currentPosition,
-						false);
-				while (statementsToRemove.hasNext()) {
-					con.remove(statementsToRemove.next());
-				}
-
-				con.add(sw, currentPositionProperty, position);
+			final RepositoryResult<Statement> statementsToRemove = con.getStatements(sw, currentPositionProperty, currentPosition, false);
+			while (statementsToRemove.hasNext()) {
+				con.remove(statementsToRemove.next());
 			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+
+			con.add(sw, currentPositionProperty, position);
 		}
 	}
 

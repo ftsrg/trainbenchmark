@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.repository.RepositoryException;
 
 public class SesameChecker extends Checker<SesameMatch> {
 
@@ -40,7 +43,7 @@ public class SesameChecker extends Checker<SesameMatch> {
 	}
 
 	@Override
-	public Collection<SesameMatch> check() throws IOException {
+	public Collection<SesameMatch> check() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		return driver.runQuery(query, queryDefinition);
 	}
 

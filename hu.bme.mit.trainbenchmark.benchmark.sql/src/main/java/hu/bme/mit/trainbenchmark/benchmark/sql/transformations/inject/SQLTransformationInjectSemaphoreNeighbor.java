@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -27,18 +26,14 @@ public class SQLTransformationInjectSemaphoreNeighbor extends SQLTransformationI
 	}
 
 	@Override
-	public void rhs(final Collection<Long> routes) throws IOException {
+	public void rhs(final Collection<Long> routes) throws SQLException {
 		for (final Long route : routes) {
-			try {
-				// (route)-[:entry]->(semaphore) edge
-				final String deleteDefinedBy = "" + //
-						"UPDATE " + ROUTE + " " + //
-						"SET " + ENTRY + " = NULL " + //
-						"WHERE " + ID + " = " + route + ";";
-				sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			// (route)-[:entry]->(semaphore) edge
+			final String deleteDefinedBy = "" + //
+					"UPDATE " + ROUTE + " " + //
+					"SET " + ENTRY + " = NULL " + //
+					"WHERE " + ID + " = " + route + ";";
+			sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
 		}
 	}
 

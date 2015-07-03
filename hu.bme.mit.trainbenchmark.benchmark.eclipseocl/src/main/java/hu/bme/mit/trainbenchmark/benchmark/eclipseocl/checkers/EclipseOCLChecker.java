@@ -37,7 +37,7 @@ public abstract class EclipseOCLChecker<T extends EMFMatch> extends Checker<T> {
 	protected RailwayContainer container;
 	protected EMFDriver driver;
 
-	public EclipseOCLChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public EclipseOCLChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException, ParserException {
 		super();
 		this.driver = driver;
 
@@ -46,18 +46,14 @@ public abstract class EclipseOCLChecker<T extends EMFMatch> extends Checker<T> {
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
-		try {
-			helper.setContext(getContext());
-			final OCLExpression query = helper.createQuery(oclQuery);
-			queryEvaluator = ocl.createQuery(query);
-		} catch (final ParserException e) {
-			throw new IOException(e);
-		}
+		helper.setContext(getContext());
+		final OCLExpression query = helper.createQuery(oclQuery);
+		queryEvaluator = ocl.createQuery(query);
 	}
 
 	protected abstract EClassifier getContext();
 
-	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		switch (bc.getQuery()) {
 		case CONNECTEDSEGMENTS:
 			return new EclipseOCLConnectedSegmentsChecker(driver, bc);

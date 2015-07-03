@@ -18,7 +18,6 @@ import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -28,7 +27,7 @@ import org.eclipse.ocl.util.Tuple;
 
 public class EclipseOCLConnectedSegmentsChecker extends EclipseOCLChecker<EMFConnectedSegmentsMatch> {
 
-	public EclipseOCLConnectedSegmentsChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public EclipseOCLConnectedSegmentsChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		super(driver, bc);
 	}
 

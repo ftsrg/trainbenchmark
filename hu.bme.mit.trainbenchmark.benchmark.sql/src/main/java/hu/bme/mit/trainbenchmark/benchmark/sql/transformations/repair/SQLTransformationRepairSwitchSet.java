@@ -17,7 +17,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSetMatch;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -28,17 +27,13 @@ public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQ
 	}
 
 	@Override
-	public void rhs(final Collection<SQLSwitchSetMatch> matches) throws IOException {
+	public void rhs(final Collection<SQLSwitchSetMatch> matches) throws SQLException {
 		for (final SQLSwitchSetMatch match : matches) {
-			try {
-				final String update = String.format("" + //
-						"UPDATE " + SWITCH + " " + //
-						"SET " + SWITCH + "." + CURRENTPOSITION + " = " + match.getPosition() + " " + //
-						"WHERE " + SWITCH + "." + ID + " = " + match.getSw() + ";");
-				sqlDriver.getConnection().createStatement().executeUpdate(update);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			final String update = String.format("" + //
+					"UPDATE " + SWITCH + " " + //
+					"SET " + SWITCH + "." + CURRENTPOSITION + " = " + match.getPosition() + " " + //
+					"WHERE " + SWITCH + "." + ID + " = " + match.getSw() + ";");
+			sqlDriver.getConnection().createStatement().executeUpdate(update);
 		}
 	}
 }

@@ -15,7 +15,6 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.Literal;
@@ -33,24 +32,20 @@ public class SesameTransformationInjectPosLength extends SesameTransformationInj
 	}
 
 	@Override
-	public void rhs(final Collection<URI> segments) throws IOException {
+	public void rhs(final Collection<URI> segments) throws RepositoryException {
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
 		final URI typeURI = vf.createURI(BASE_PREFIX + ModelConstants.LENGTH);
 		final Literal zeroLiteral = vf.createLiteral(0);
 
-		try {
-			for (final URI segment : segments) {
-				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, typeURI, null, true);
-				while (statementsToRemove.hasNext()) {
-					con.remove(statementsToRemove.next());
-				}
-
-				con.add(segment, typeURI, zeroLiteral);
+		for (final URI segment : segments) {
+			final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, typeURI, null, true);
+			while (statementsToRemove.hasNext()) {
+				con.remove(statementsToRemove.next());
 			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+
+			con.add(segment, typeURI, zeroLiteral);
 		}
 	}
 

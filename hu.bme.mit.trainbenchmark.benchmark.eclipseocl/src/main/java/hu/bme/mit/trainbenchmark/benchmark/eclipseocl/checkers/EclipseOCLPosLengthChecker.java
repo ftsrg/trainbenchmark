@@ -17,7 +17,6 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -27,7 +26,7 @@ import org.eclipse.ocl.util.Tuple;
 
 public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
 
-	public EclipseOCLPosLengthChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public EclipseOCLPosLengthChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		super(driver, bc);
 	}
 

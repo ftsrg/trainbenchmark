@@ -146,31 +146,27 @@ public class GraphGenerator extends Generator {
 	}
 
 	@Override
-	protected void persistModel() throws IOException {
-		try {
+	protected void persistModel() throws IOException, XMLStreamException {
+		try (Transaction tx = graphDb.beginTx()) {
 			final ProgressReporter reporter = new ProgressReporter(null, null);
 
-			try (Transaction tx = graphDb.beginTx()) {
-				final StringWriter writer = new StringWriter();
-				final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
-				final Config config = Config.config();
-				xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
-				tx.success();
+			final StringWriter writer = new StringWriter();
+			final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
+			final Config config = Config.config();
+			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
+			tx.success();
 
-				final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
+			final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
 
-				String graphmlContent = writer.toString();
-				// this is required to be compatibile with OrientDB
-				graphmlContent = graphmlContent
-						.replaceAll(
-								//
-								"<graph id=\"G\" edgedefault=\"directed\">",
-								"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
+			String graphmlContent = writer.toString();
+			// this is required to be compatibile with OrientDB
+			graphmlContent = graphmlContent
+					.replaceAll(
+							//
+							"<graph id=\"G\" edgedefault=\"directed\">",
+							"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
 
-				FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
-			} catch (final XMLStreamException e) {
-				throw new IOException(e);
-			}
+			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
 		} finally {
 			graphDb.shutdown();
 		}

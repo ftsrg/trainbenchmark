@@ -17,7 +17,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSemaphoreNeighborMatch;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -28,18 +27,14 @@ public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<SQLSemaphoreNeighborMatch> matches) throws IOException {
+	public void rhs(final Collection<SQLSemaphoreNeighborMatch> matches) throws SQLException {
 		for (final SQLSemaphoreNeighborMatch snm : matches) {
-			try {
-				final String update = String.format("" + //
-						"UPDATE `%s` " + //
-						"SET `%s` = %d " + //
-						"WHERE `%s` = %d;", //
-						ROUTE, ENTRY, snm.getSemaphore(), ID, snm.getRoute2());
-				sqlDriver.getConnection().createStatement().executeUpdate(update);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			final String update = String.format("" + //
+					"UPDATE `%s` " + //
+					"SET `%s` = %d " + //
+					"WHERE `%s` = %d;", //
+					ROUTE, ENTRY, snm.getSemaphore(), ID, snm.getRoute2());
+			sqlDriver.getConnection().createStatement().executeUpdate(update);
 		}
 	}
 }

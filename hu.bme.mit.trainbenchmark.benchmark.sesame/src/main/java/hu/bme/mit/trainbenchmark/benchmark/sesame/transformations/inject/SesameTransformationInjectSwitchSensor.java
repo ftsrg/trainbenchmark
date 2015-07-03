@@ -14,10 +14,10 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.URI;
+import org.openrdf.repository.RepositoryException;
 
 public class SesameTransformationInjectSwitchSensor extends SesameTransformationInject {
 
@@ -26,7 +26,7 @@ public class SesameTransformationInjectSwitchSensor extends SesameTransformation
 	}
 
 	@Override
-	public void rhs(final Collection<URI> switches) throws IOException {
+	public void rhs(final Collection<URI> switches) throws RepositoryException {
 		sesameDriver.deleteSingleOutgoingEdge(switches, ModelConstants.SWITCH, ModelConstants.SENSOR_EDGE);
 	}
 

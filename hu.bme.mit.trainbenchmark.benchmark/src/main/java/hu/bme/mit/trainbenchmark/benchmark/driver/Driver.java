@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
 
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -22,20 +21,20 @@ public abstract class Driver<T> {
 
 	// these methods should be redefined if required
 
-	public void beginTransaction() throws IOException {
+	public void beginTransaction() throws Exception {
 	}
 
-	public void finishTransaction() throws IOException {
+	public void finishTransaction() throws Exception {
 	}
 
-	public void destroy() throws IOException {
+	public void destroy() throws Exception {
 	}
 
 	// read methods
 
-	public abstract void read(String modelPathWithoutExtension) throws IOException;
+	public abstract void read(String modelPathWithoutExtension) throws Exception;
 
-	public abstract List<T> collectVertices(final String type) throws IOException;
+	public abstract List<T> collectVertices(final String type) throws Exception;
 
 	// comparator
 
@@ -45,6 +44,6 @@ public abstract class Driver<T> {
 
 	public abstract String getExtension();
 
-	public abstract Collection<?> runQuery(final Query query, final String queryDefinition) throws IOException;
+	public abstract Collection<?> runQuery(final Query query, final String queryDefinition) throws Exception;
 
 }

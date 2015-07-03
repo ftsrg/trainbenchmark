@@ -13,27 +13,23 @@
 package hu.bme.mit.trainbenchmark.benchmark.phases;
 
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
-
-import java.io.IOException;
-
 import eu.mondo.sam.core.DataToken;
 import eu.mondo.sam.core.phases.AtomicPhase;
 import eu.mondo.sam.core.results.PhaseResult;
 
 public class InitializationPhase extends AtomicPhase {
 
-	public InitializationPhase(String phaseName) {
+	public InitializationPhase(final String phaseName) {
 		super(phaseName);
 	}
 
 	@Override
-	public void execute(DataToken token, PhaseResult phaseResult) {
-		TrainBenchmarkDataToken trainToken = ((TrainBenchmarkDataToken) token);
+	public void execute(final DataToken token, final PhaseResult phaseResult) {
+		final TrainBenchmarkDataToken trainToken = ((TrainBenchmarkDataToken) token);
 		try {
-			trainToken.getBenchmarkCase().benchmarkInit(
-					trainToken.getConfig());
-		} catch (IOException e) {
-			throw new RuntimeException();
+			trainToken.getBenchmarkCase().benchmarkInit(trainToken.getConfig());
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 

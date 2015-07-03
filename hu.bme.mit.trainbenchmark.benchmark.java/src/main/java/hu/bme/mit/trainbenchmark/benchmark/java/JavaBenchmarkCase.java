@@ -21,12 +21,10 @@ import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-import java.io.IOException;
-
 public class JavaBenchmarkCase extends EMFBenchmarkCase {
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
 		super.benchmarkInit(bc);
 
 		final EMFDriver emfDriver = new EMFDriver();

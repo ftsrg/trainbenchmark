@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.Literal;
@@ -36,29 +35,25 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 	}
 
 	@Override
-	public void rhs(final Collection<SesamePosLengthMatch> matches) throws IOException {
+	public void rhs(final Collection<SesamePosLengthMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
 		final URI lengthProperty = vf.createURI(BASE_PREFIX + LENGTH);
 
-		try {
-			for (final SesamePosLengthMatch match : matches) {
-				final Resource segment = match.getSegment();
-				final Value length = match.getLength();
+		for (final SesamePosLengthMatch match : matches) {
+			final Resource segment = match.getSegment();
+			final Value length = match.getLength();
 
-				final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, lengthProperty, length, true);
-				while (statementsToRemove.hasNext()) {
-					con.remove(statementsToRemove.next());
-				}
-
-				final Integer lengthInteger = new Integer(length.stringValue());
-				final Integer newLengthInteger = -lengthInteger + 1;
-				final Literal newLength = vf.createLiteral(newLengthInteger);
-				con.add(segment, lengthProperty, newLength);
+			final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, lengthProperty, length, true);
+			while (statementsToRemove.hasNext()) {
+				con.remove(statementsToRemove.next());
 			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+
+			final Integer lengthInteger = new Integer(length.stringValue());
+			final Integer newLengthInteger = -lengthInteger + 1;
+			final Literal newLength = vf.createLiteral(newLengthInteger);
+			con.add(segment, lengthProperty, newLength);
 		}
 	}
 }

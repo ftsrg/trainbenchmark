@@ -11,9 +11,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.driver;
 
 import static hu.bme.mit.trainbenchmark.benchmark.fourstore.driver.RDFUtil.brackets;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.URIComparator;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.rdf.RDFDatabaseDriver;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,12 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.io.FileUtils;
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
-import org.openrdf.query.TupleQueryResultHandlerException;
-import org.openrdf.query.resultio.QueryResultParseException;
 import org.openrdf.query.resultio.text.tsv.SPARQLResultsTSVParser;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -63,7 +60,6 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		return new URIComparator();
 	}
 
-	@Override
 	public void init() throws FileNotFoundException, IOException {
 		UnixUtils.execResourceScript("4s-start.sh", environment, showCommandOutput);
 	}
@@ -97,7 +93,7 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		return runQuery(queryDefinition);
 	}
 
-	protected Collection<BindingSet> runQuery(final String queryDefinition) throws IOException, ExecuteException {
+	protected Collection<BindingSet> runQuery(final String queryDefinition) throws Exception {
 		final String command = String.format("4s-query $FOURSTORE_CLUSTER_NAME -f text -s -1 '%s'", queryDefinition);
 		if (showCommands) {
 			System.out.println(command);
@@ -107,11 +103,7 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		parser.setQueryResultHandler(bindingSetCollector);
 
 		final InputStream is = UnixUtils.execToStream(command, environment);
-		try {
-			parser.parse(is);
-		} catch (TupleQueryResultHandlerException | QueryResultParseException e) {
-			throw new IOException(e);
-		}
+		parser.parse(is);
 		final Collection<BindingSet> bindingSets = bindingSetCollector.getBindingSets();
 
 		return bindingSets;

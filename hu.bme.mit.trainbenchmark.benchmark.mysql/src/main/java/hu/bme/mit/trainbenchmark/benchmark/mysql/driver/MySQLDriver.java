@@ -25,32 +25,19 @@ public class MySQLDriver extends SQLDriver {
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "/bin/bash", "-c", "mysql -u " + USER + " < " + modelPathWithoutExtension + getExtension() };
 
-		try {
-			final Process pr = rt.exec(command);
-			pr.waitFor();
-		} catch (final Exception e) {
-			throw new IOException(e);
-		}
-
-		try {
-			connection = DriverManager.getConnection(url, USER, PASSWORD);
-		} catch (final SQLException e) {
-			throw new IOException(e);
-		}
+		final Process pr = rt.exec(command);
+		pr.waitFor();
+		connection = DriverManager.getConnection(url, USER, PASSWORD);
 	}
 
 	@Override
-	public void destroy() throws IOException {
-		try {
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (final SQLException e) {
-			throw new IOException(e);
+	public void destroy() throws SQLException, IOException, InterruptedException {
+		if (connection != null) {
+			connection.close();
 		}
 		MySQLProcess.stopSQLProcess();
 	}

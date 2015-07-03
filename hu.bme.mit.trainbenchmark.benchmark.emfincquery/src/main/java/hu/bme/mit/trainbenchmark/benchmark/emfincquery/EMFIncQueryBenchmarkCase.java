@@ -42,7 +42,7 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 	}
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
 		super.benchmarkInit(bc);
 		
 		final EMFIncQueryBenchmarkConfig eiqbc = (EMFIncQueryBenchmarkConfig) bc;

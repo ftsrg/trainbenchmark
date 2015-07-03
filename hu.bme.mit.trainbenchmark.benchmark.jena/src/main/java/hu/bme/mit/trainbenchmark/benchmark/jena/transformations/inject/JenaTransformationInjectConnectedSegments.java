@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -36,7 +35,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 	}
 
 	@Override
-	public void rhs(final Collection<Resource> segments) throws IOException {
+	public void rhs(final Collection<Resource> segments) throws Exception {
 		final Model model = jenaDriver.getModel();
 		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTSTO);
 		final Property sensorEdgeProperty = model.getProperty(BASE_PREFIX + ModelConstants.SENSOR_EDGE);
