@@ -16,5 +16,11 @@ public class SQLConstants {
 	public static final String ID_POSTFIX = "_id";
 	public static final String USER = "root";
 	public static final String PASSWORD = "";
+
+	public static final String CONNECTSTO_TRACKELEMENT1 = "TrackElement1";
+	public static final String CONNECTSTO_TRACKELEMENT2 = "TrackElement2";
+	
+	public static final String ROUTE_ID = "Route_id";
+	public static final String SENSOR_ID = "Sensor_id";
 	
 }

@@ -16,6 +16,8 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.CONNECTSTO_TRACKELEMENT1;
+import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.CONNECTSTO_TRACKELEMENT2;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
 import java.io.IOException;
@@ -38,10 +40,10 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 		for (final Long segment1 : segments) {
 			try {
 				// get (segment3) node
-				final String querySegment3 = String.format("" + //
-						"SELECT `TrackElement2` " + //
-						"FROM `%s` " + //
-						"WHERE `TrackElement1` = %s;", CONNECTSTO, segment1);
+				final String querySegment3 = "" + //
+						"SELECT " + CONNECTSTO_TRACKELEMENT2 + " " + //
+						"FROM " + CONNECTSTO + " " + //
+						"WHERE " + CONNECTSTO_TRACKELEMENT1 + " = " + segment1 + ";";
 				final ResultSet resultSetSegment3 = connection.createStatement().executeQuery(querySegment3);
 				if (!resultSetSegment3.next()) {
 					continue;
@@ -49,10 +51,10 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 				final long segment3 = resultSetSegment3.getLong(1);
 
 				// get (sensor) node
-				final String querySensor = String.format("" + //
-						"SELECT `%s` " + //
-						"FROM `%s` " + //
-						"WHERE `%s` = %s;", SENSOR_EDGE, TRACKELEMENT, ID, segment1);
+				final String querySensor = "" + //
+						"SELECT " + SENSOR_EDGE + " " + //
+						"FROM " + TRACKELEMENT + " " + //
+						"WHERE " + ID + " = " + segment1 + ";";
 				final ResultSet resultSetSensor = connection.createStatement().executeQuery(querySensor);
 				if (!resultSetSensor.next()) {
 					continue;
@@ -60,19 +62,16 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 				final long sensor = resultSetSensor.getLong(1);
 
 				// delete (segment1)-[:connectsTo]->(segment2) edge
-				final String deleteConnectsTo0 = String.format("" + //
-						"DELETE FROM `%s` " + //
-						"WHERE `TrackElement1` = %d;", //
-						CONNECTSTO, segment1);
+				final String deleteConnectsTo0 = "" + //
+						"DELETE FROM " + CONNECTSTO + " " + //
+						"WHERE " + CONNECTSTO_TRACKELEMENT1 + " = " + segment1 + ";";
 				connection.createStatement().executeUpdate(deleteConnectsTo0);
 
 				// insert new segment as a TrackElement and retrieve its id
 				// also insert the (segment2)-[:sensor]->(sensor) edge
-				final String insertSegment2TrackElement = String.format("" + //
-						"INSERT INTO `%s` (`%s`) " + //
-						"VALUES (%d);", //
-						TRACKELEMENT, SENSOR_EDGE, //
-						sensor);
+				final String insertSegment2TrackElement = "" + //
+						"INSERT INTO " + TRACKELEMENT + " (" + SENSOR_EDGE + ") " + //
+						"VALUES (" + sensor + ");";
 				final Statement statement = connection.createStatement();
 				statement.executeUpdate(insertSegment2TrackElement, Statement.RETURN_GENERATED_KEYS);
 
@@ -82,21 +81,17 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 						final long segment2 = rs3.getLong(1);
 
 						// insert (segment2) node
-						final String insertSegment2 = String.format("" + //
-								"INSERT INTO `%s` (`%s`) " + //
-								"VALUES (%d);", //
-								SEGMENT, ID, //
-								segment2);
+						final String insertSegment2 = "" + //
+								"INSERT INTO " + SEGMENT + " (" + ID + ") " + //
+								"VALUES (" + segment2 + ");";
 						// insert (segment1)-[:connectsTo]->(segment3) edge
-						final String insertConnectsTo1 = String.format("" + //
-								"INSERT INTO `%s` (`TrackElement1`, `TrackElement2`) " + //
-								"VALUES (%d, %d);", //
-								CONNECTSTO, segment1, segment2);
+						final String insertConnectsTo1 = "" + //
+								"INSERT INTO " + CONNECTSTO + " " + //
+								"VALUES (" + segment1 + ", " + segment2 + ");"; // );
 						// insert (segment1)-[:connectsTo]->(segment3) edge
-						final String insertConnectsTo2 = String.format("" + //
-								"INSERT INTO `%s` (`TrackElement1`, `TrackElement2`) " + //
-								"VALUES (%d, %d);", //
-								CONNECTSTO, segment2, segment3);
+						final String insertConnectsTo2 = "" + //
+								"INSERT INTO " + CONNECTSTO + " " + //
+								"VALUES (" + segment2 + ", " + segment3 + ");";
 						connection.createStatement().executeUpdate(insertSegment2);
 						connection.createStatement().executeUpdate(insertConnectsTo1);
 						connection.createStatement().executeUpdate(insertConnectsTo2);

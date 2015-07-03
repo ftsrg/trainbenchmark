@@ -32,21 +32,21 @@ public class SQLTransformationInjectSwitchSensor extends SQLTransformationInject
 		for (final Long sw : switches) {
 			try {
 				// sensor
-				final String deleteSensor = String.format("" + //
+				final String deleteSensor = "" + //
 						"DELETE `" + SENSOR + "` FROM `" + SENSOR + "` " + //
 						"INNER JOIN `" + TRACKELEMENT + "` " + //
 						"ON Sensor.id = TrackElement.sensor " + //
-						"WHERE TrackElement.id = " + sw + ";");
+						"WHERE TrackElement.id = " + sw + ";";
 				// trackElement
-				final String deleteTrackElement = String.format("" + //
+				final String deleteTrackElement = "" + //
 						"DELETE FROM `" + TRACKELEMENT + "` " + //
-						"WHERE `" + ID + "` = " + sw + ";");
+						"WHERE `" + ID + "` = " + sw + ";";
 				// definedBy
-				final String deleteDefinedBy = String.format("" + //
+				final String deleteDefinedBy = "" + //
 						"DELETE `" + DEFINED_BY + "` FROM `" + DEFINED_BY + "` " + //
 						"INNER JOIN `" + TRACKELEMENT + "` " + //
 						"ON definedBy.sensor_id = TrackElement.sensor " + //
-						"WHERE TrackElement.id = " + sw + ";");
+						"WHERE TrackElement.id = " + sw + ";";
 
 				sqlDriver.getConnection().createStatement().executeUpdate(deleteSensor);
 				sqlDriver.getConnection().createStatement().executeUpdate(deleteTrackElement);
