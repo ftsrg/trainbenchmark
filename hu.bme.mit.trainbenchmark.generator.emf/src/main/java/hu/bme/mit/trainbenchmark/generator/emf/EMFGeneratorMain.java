@@ -14,14 +14,9 @@ package hu.bme.mit.trainbenchmark.generator.emf;
 
 import hu.bme.mit.trainbenchmark.generator.Generator;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
-
 public class EMFGeneratorMain {
 
-	public static void main(final String[] args) throws ParseException, FileNotFoundException, IOException {
+	public static void main(final String[] args) throws Exception {
 		final Generator generator = new EMFGenerator(args);
 		generator.generateModels();
 	}

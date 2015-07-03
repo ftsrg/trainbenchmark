@@ -16,7 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +33,7 @@ public abstract class SQLDriver extends Driver<Long> {
 	}
 
 	@Override
-	public List<SQLMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
+	public List<SQLMatch> runQuery(final Query query, final String queryDefinition) throws SQLException  {
 		final List<SQLMatch> results = new ArrayList<>();
 
 		try (ResultSet rs = connection.createStatement().executeQuery(queryDefinition)) {
@@ -42,9 +41,6 @@ public abstract class SQLDriver extends Driver<Long> {
 				final SQLMatch match = SQLMatch.createMatch(query, rs);
 				results.add(match);
 			}
-
-		} catch (final SQLException e) {
-			throw new IOException(e);
 		}
 
 		return results;
@@ -57,7 +53,7 @@ public abstract class SQLDriver extends Driver<Long> {
 	// read
 
 	@Override
-	public List<Long> collectVertices(final String type) throws IOException {
+	public List<Long> collectVertices(final String type) throws SQLException {
 		final List<Long> results = new ArrayList<>();
 
 		final String query = String.format("SELECT * FROM `%s`;", type);
@@ -65,8 +61,6 @@ public abstract class SQLDriver extends Driver<Long> {
 			while (rs.next()) {
 				results.add(rs.getLong("id"));
 			}
-		} catch (final SQLException e) {
-			throw new IOException(e);
 		}
 
 		return results;

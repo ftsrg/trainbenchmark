@@ -129,7 +129,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 	}
 
 	@Override
-	protected boolean ask(final String askQuery) throws IOException {
+	protected boolean ask(final String askQuery) {
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(askQuery, model)) {
 			final boolean result = queryExecution.execAsk();
 			return result;

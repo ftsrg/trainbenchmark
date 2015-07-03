@@ -42,6 +42,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
+import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.memory.MemoryStore;
 
 public class SesameDriver extends RDFDatabaseDriver<URI> {
@@ -59,51 +60,40 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public void finishTransaction() throws IOException {
-		try {
-			connection.commit();
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
-		}
+	public void finishTransaction() throws RepositoryException {
+		connection.commit();
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException, OpenRDFException {
 		repository = new SailRepository(new MemoryStore());
 		load(modelPathWithoutExtension);
 	}
 
-	protected void load(final String modelPathWithoutExtension) throws IOException {
+	protected void load(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException {
 		final File modelFile = new File(modelPathWithoutExtension + getExtension());
 
-		try {
-			repository.initialize();
-			connection = repository.getConnection();
-			connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
-		} catch (final OpenRDFException e) {
-			throw new IOException(e);
-		}
+		repository.initialize();
+		connection = repository.getConnection();
+		connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
 
 	@Override
-	public List<SesameMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
+	public List<SesameMatch> runQuery(final Query query, final String queryDefinition) throws RepositoryException, MalformedQueryException,
+			QueryEvaluationException {
 		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
 
+		tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
+		queryResults = tupleQuery.evaluate();
 		try {
-			tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
-			queryResults = tupleQuery.evaluate();
-			try {
-				while (queryResults.hasNext()) {
-					final BindingSet bs = queryResults.next();
-					final SesameMatch match = SesameMatch.createMatch(query, bs);
-					results.add(match);
-				}
-			} finally {
-				queryResults.close();
+			while (queryResults.hasNext()) {
+				final BindingSet bs = queryResults.next();
+				final SesameMatch match = SesameMatch.createMatch(query, bs);
+				results.add(match);
 			}
-		} catch (final QueryEvaluationException | RepositoryException | MalformedQueryException e) {
-			throw new IOException(e);
+		} finally {
+			queryResults.close();
 		}
 
 		return results;
@@ -115,33 +105,25 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public void destroy() throws IOException {
-		try {
-			if (connection != null) {
-				connection.clear();
-				connection.close();
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+	public void destroy() throws RepositoryException {
+		if (connection != null) {
+			connection.clear();
+			connection.close();
 		}
 	}
 
 	// read
 
 	@Override
-	public List<URI> collectVertices(final String type) throws IOException {
+	public List<URI> collectVertices(final String type) throws RepositoryException {
 		final URI typeURI = vf.createURI(BASE_PREFIX + type);
 		final List<URI> vertices = new ArrayList<>();
 
-		try {
-			final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
-			while (statements.hasNext()) {
-				final Statement s = statements.next();
-				final URI uri = (URI) s.getSubject();
-				vertices.add(uri);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+		final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
+		while (statements.hasNext()) {
+			final Statement s = statements.next();
+			final URI uri = (URI) s.getSubject();
+			vertices.add(uri);
 		}
 
 		return vertices;
@@ -149,60 +131,53 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	// delete
 
-	public void deleteOneOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType) throws IOException {
+	public void deleteOneOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
+			throws RepositoryException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
-	public void deleteSingleOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType) throws IOException {
+	public void deleteSingleOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
+			throws RepositoryException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
 	protected void deleteEdges(final Collection<URI> vertices, final String edgeType, final boolean outgoing, final boolean all)
-			throws IOException {
+			throws RepositoryException {
 		final List<Statement> itemsToRemove = new ArrayList<>();
 
 		final URI edge = vf.createURI(BASE_PREFIX + edgeType);
 
-		try {
-			for (final URI vertex : vertices) {
-				RepositoryResult<Statement> statementsToRemove;
-				if (outgoing) {
-					statementsToRemove = connection.getStatements(vertex, edge, null, true);
-				} else {
-					statementsToRemove = connection.getStatements(null, edge, vertex, true);
-				}
+		for (final URI vertex : vertices) {
+			RepositoryResult<Statement> statementsToRemove;
+			if (outgoing) {
+				statementsToRemove = connection.getStatements(vertex, edge, null, true);
+			} else {
+				statementsToRemove = connection.getStatements(null, edge, vertex, true);
+			}
 
-				while (statementsToRemove.hasNext()) {
-					final Statement s = statementsToRemove.next();
-					itemsToRemove.add(s);
+			while (statementsToRemove.hasNext()) {
+				final Statement s = statementsToRemove.next();
+				itemsToRemove.add(s);
 
-					// break if we only want to delete one edge
-					if (!all) {
-						break;
-					}
-				}
-
-				for (final Statement s : itemsToRemove) {
-					connection.remove(s);
+				// break if we only want to delete one edge
+				if (!all) {
+					break;
 				}
 			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+
+			for (final Statement s : itemsToRemove) {
+				connection.remove(s);
+			}
 		}
 	}
-
 
 	// utility
 
 	@Override
-	protected boolean ask(final String askQuery) throws IOException {
-		try {
-			final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
-			final boolean result = q.evaluate();
-			return result;
-		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
-			throw new IOException(e);
-		}
+	protected boolean ask(final String askQuery) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+		final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
+		final boolean result = q.evaluate();
+		return result;
 	}
 
 	public RepositoryConnection getConnection() {

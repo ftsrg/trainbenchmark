@@ -27,6 +27,7 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class Neo4jDriver extends Driver<Node> {
 	}
 
 	@Override
-	public void read(final String filePath) throws IOException {
+	public void read(final String filePath) throws FileNotFoundException, XMLStreamException {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
 
 		try (Transaction tx = graphDb.beginTx()) {
@@ -96,8 +97,6 @@ public class Neo4jDriver extends Driver<Node> {
 			xmlGraphMLReader.nodeLabels(true);
 			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath + getExtension())), MapNodeCache.usingHashMap());
 			tx.success();
-		} catch (final XMLStreamException e) {
-			throw new IOException(e);
 		}
 	}
 

@@ -16,7 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -35,7 +34,8 @@ public abstract class EMFIncQueryChecker<M extends BasePatternMatch> extends Che
 		this.eiqDriver = eiqDriver;
 	}
 
-	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver eiqDriver, final Query query) {
+	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver eiqDriver,
+			final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new EMFIncQueryConnectedSegmentsChecker(eiqbc, eiqDriver);
@@ -55,15 +55,11 @@ public abstract class EMFIncQueryChecker<M extends BasePatternMatch> extends Che
 	}
 
 	@Override
-	public Collection<M> check() throws IOException {
+	public Collection<M> check() throws IncQueryException {
 		if (eiqbc.isLocalSearch()) {
-			try {
-				matches = new ArrayList<>();
-				for (final M match : getMatcher().getAllMatches()) {
-					matches.add(match);
-				}
-			} catch (final IncQueryException e) {
-				throw new IOException(e);
+			matches = new ArrayList<>();
+			for (final M match : getMatcher().getAllMatches()) {
+				matches.add(match);
 			}
 		}
 		return matches;

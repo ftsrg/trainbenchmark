@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -27,17 +26,13 @@ public class SQLTransformationInjectSwitchSet extends SQLTransformationInject {
 	}
 
 	@Override
-	public void rhs(final Collection<Long> switches) throws IOException {
+	public void rhs(final Collection<Long> switches) throws SQLException {
 		for (final Long sw : switches) {
-			try {
-				final String update = "" + //
-						"UPDATE " + SWITCH + " " + //
-						"SET " + CURRENTPOSITION + " = MOD(" + CURRENTPOSITION + " + 1, 4) " + //
-						"WHERE " + ID + " = " + sw + ";";
-				sqlDriver.getConnection().createStatement().executeUpdate(update);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			final String update = "" + //
+					"UPDATE " + SWITCH + " " + //
+					"SET " + CURRENTPOSITION + " = MOD(" + CURRENTPOSITION + " + 1, 4) " + //
+					"WHERE " + ID + " = " + sw + ";";
+			sqlDriver.getConnection().createStatement().executeUpdate(update);
 		}
 	}
 }

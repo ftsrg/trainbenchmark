@@ -19,8 +19,6 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-import java.io.IOException;
-
 public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 	public MySQLBenchmarkCase() {
@@ -29,7 +27,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 	}
 
 	@Override
-	public void init() throws IOException {
+	public void init() throws Exception {
 		super.init();
 		MySQLProcess.startSQLProcess();
 
@@ -41,7 +39,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 	}
 
 	@Override
-	protected void destroy() throws IOException {
+	protected void destroy() throws Exception {
 		driver.destroy();
 	}
 

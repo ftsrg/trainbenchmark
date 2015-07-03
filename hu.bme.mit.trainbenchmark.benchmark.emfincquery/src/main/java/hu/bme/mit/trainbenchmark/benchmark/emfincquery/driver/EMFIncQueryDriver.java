@@ -25,7 +25,6 @@ import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.emf.EMFScope;
-import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.extensibility.QueryBackendRegistry;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackend;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
@@ -43,50 +42,44 @@ public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFDriver {
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
 
-		try {
-			if (eiqbc.isLocalSearch()) {
-				// When running local search, make sure the factory is registered
+		if (eiqbc.isLocalSearch()) {
+			// When running local search, make sure the factory is registered
 
-				final Iterable<Entry<Class<? extends IQueryBackend>, IQueryBackendFactory>> factories = QueryBackendRegistry.getInstance()
-						.getAllKnownFactories();
-				boolean registered = false;
-				for (final Entry<Class<? extends IQueryBackend>, IQueryBackendFactory> entry : factories) {
-					if (entry.getKey().equals(LocalSearchBackend.class)) {
-						registered = true;
-					}
+			final Iterable<Entry<Class<? extends IQueryBackend>, IQueryBackendFactory>> factories = QueryBackendRegistry.getInstance()
+					.getAllKnownFactories();
+			boolean registered = false;
+			for (final Entry<Class<? extends IQueryBackend>, IQueryBackendFactory> entry : factories) {
+				if (entry.getKey().equals(LocalSearchBackend.class)) {
+					registered = true;
 				}
-				if (!registered) {
-					QueryBackendRegistry.getInstance().registerQueryBackendFactory(LocalSearchBackend.class,
-							new LocalSearchBackendFactory());
-				}
-
+			}
+			if (!registered) {
+				QueryBackendRegistry.getInstance().registerQueryBackendFactory(LocalSearchBackend.class, new LocalSearchBackendFactory());
 			}
 
-			final EMFScope emfScope = new EMFScope(resource);
-			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
+		}
 
-			final IncQueryMatcher<M> matcher = checker.getMatcher();
-			final Collection<M> matches = matcher.getAllMatches();
-			checker.setMatches(matches);
-			if (!eiqbc.isLocalSearch()) {
-				engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<M>() {
-					@Override
-					public void notifyAppearance(final M match) {
-						matches.add(match);
-					}
+		final EMFScope emfScope = new EMFScope(resource);
+		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
 
-					@Override
-					public void notifyDisappearance(final M match) {
-						matches.remove(match);
-					}
-				}, false);
-			}
+		final IncQueryMatcher<M> matcher = checker.getMatcher();
+		final Collection<M> matches = matcher.getAllMatches();
+		checker.setMatches(matches);
+		if (!eiqbc.isLocalSearch()) {
+			engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<M>() {
+				@Override
+				public void notifyAppearance(final M match) {
+					matches.add(match);
+				}
 
-		} catch (final IncQueryException e) {
-			throw new RuntimeException(e);
+				@Override
+				public void notifyDisappearance(final M match) {
+					matches.remove(match);
+				}
+			}, false);
 		}
 	}
 

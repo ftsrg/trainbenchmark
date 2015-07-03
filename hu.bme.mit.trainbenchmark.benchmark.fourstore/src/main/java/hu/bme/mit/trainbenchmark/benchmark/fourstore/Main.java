@@ -11,7 +11,7 @@ import org.openrdf.query.resultio.QueryResultParseException;
 import org.openrdf.query.resultio.text.tsv.SPARQLResultsTSVParser;
 import org.openrdf.query.resultio.text.tsv.SPARQLResultsTSVParserFactory;
 
-public class main {
+public class Main {
 
 	public static void main(final String[] args) throws TupleQueryResultHandlerException, QueryResultParseException, IOException {
 		final SPARQLResultsTSVParserFactory f = new SPARQLResultsTSVParserFactory();

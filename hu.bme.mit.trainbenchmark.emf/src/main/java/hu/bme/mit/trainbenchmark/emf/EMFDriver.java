@@ -37,7 +37,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 	protected Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws Exception {
 		RailwayPackage.eINSTANCE.eClass();
 		final String modelPath = modelPathWithoutExtension + "." + getExtension();
 

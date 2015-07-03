@@ -15,7 +15,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.ROUTE_ID;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -26,18 +25,14 @@ public class SQLTransformationInjectRouteSensor extends SQLTransformationInject 
 	}
 
 	@Override
-	public void rhs(final Collection<Long> routes) throws IOException {
+	public void rhs(final Collection<Long> routes) throws SQLException {
 		for (final Long route : routes) {
-			try {
-				// (route)-[:definedBy]->(sensor) edge
-				final String deleteDefinedBy = "" + //
-						"DELETE FROM " + DEFINED_BY + " " + //
-						"WHERE " + ROUTE_ID + " = " + route + " " + //
-						"LIMIT 1;";
-				sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			// (route)-[:definedBy]->(sensor) edge
+			final String deleteDefinedBy = "" + //
+					"DELETE FROM " + DEFINED_BY + " " + //
+					"WHERE " + ROUTE_ID + " = " + route + " " + //
+					"LIMIT 1;";
+			sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
 		}
 	}
 

@@ -18,7 +18,6 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.Statement;
@@ -27,7 +26,6 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
 public class SesameTransformationInjectConnectedSegments extends SesameTransformationInject {
@@ -37,7 +35,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 	}
 
 	@Override
-	public void rhs(final Collection<URI> segments) throws IOException {
+	public void rhs(final Collection<URI> segments) throws Exception {
 		final RepositoryConnection connection = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
@@ -46,40 +44,36 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
 
-		try {
-			for (final URI segment1 : segments) {
-				// get (segment3) node
-				final RepositoryResult<Statement> connectsToEdges0 = connection.getStatements(segment1, connectsTo, null, true);
-				if (!connectsToEdges0.hasNext()) {
-					continue;
-				}
-				final Statement connectsToEdge0 = connectsToEdges0.next();
-				final Value segment3 = connectsToEdge0.getObject();
-
-				// get (sensor) node
-				final RepositoryResult<Statement> sensorEdges = connection.getStatements(segment1, sensorEdgeType, null, true);
-				if (!sensorEdges.hasNext()) {
-					continue;
-				}
-				final Statement sensorEdge = sensorEdges.next();
-				final Value sensor = sensorEdge.getObject();
-
-				// delete (segment1)-[:connectsTo]->(segment3) edge
-				connection.remove(connectsToEdge0);
-
-				// create (segment2) node
-				final Long newVertexId = sesameDriver.getNewVertexId();
-				final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
-				connection.add(segment2, RDF.TYPE, segmentType);
-				// (segment1)-[:connectsTo]->(segment2)
-				connection.add(segment1, connectsTo, segment2);
-				// (segment2)-[:connectsTo]->(segment3)
-				connection.add(segment2, connectsTo, segment3);
-				// (segment1)-[:sensor]->(sensor)
-				connection.add(segment1, sensorEdgeType, sensor);
+		for (final URI segment1 : segments) {
+			// get (segment3) node
+			final RepositoryResult<Statement> connectsToEdges0 = connection.getStatements(segment1, connectsTo, null, true);
+			if (!connectsToEdges0.hasNext()) {
+				continue;
 			}
-		} catch (final RepositoryException e) {
-			throw new IOException();
+			final Statement connectsToEdge0 = connectsToEdges0.next();
+			final Value segment3 = connectsToEdge0.getObject();
+
+			// get (sensor) node
+			final RepositoryResult<Statement> sensorEdges = connection.getStatements(segment1, sensorEdgeType, null, true);
+			if (!sensorEdges.hasNext()) {
+				continue;
+			}
+			final Statement sensorEdge = sensorEdges.next();
+			final Value sensor = sensorEdge.getObject();
+
+			// delete (segment1)-[:connectsTo]->(segment3) edge
+			connection.remove(connectsToEdge0);
+
+			// create (segment2) node
+			final Long newVertexId = sesameDriver.getNewVertexId();
+			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
+			connection.add(segment2, RDF.TYPE, segmentType);
+			// (segment1)-[:connectsTo]->(segment2)
+			connection.add(segment1, connectsTo, segment2);
+			// (segment2)-[:connectsTo]->(segment3)
+			connection.add(segment2, connectsTo, segment3);
+			// (segment1)-[:sensor]->(sensor)
+			connection.add(segment1, sensorEdgeType, sensor);
 		}
 	}
 

@@ -21,7 +21,6 @@ import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Random;
@@ -52,11 +51,11 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	// these should be implemented for each tool
 
-	protected void init() throws IOException {
+	protected void init() throws Exception {
 
 	}
 
-	protected void destroy() throws IOException {
+	protected void destroy() throws Exception {
 		if (checker != null) {
 			checker.destroy();
 		}
@@ -65,7 +64,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		}
 	}
 
-	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
 		this.bc = bc;
 		init();
 	}
@@ -81,17 +80,17 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	// benchmark methods
 
-	public void benchmarkRead(PhaseResult phaseResult) throws IOException {
-		TimeMetric timer = new TimeMetric("Time");
+	public void benchmarkRead(final PhaseResult phaseResult) throws Exception {
+		final TimeMetric timer = new TimeMetric("Time");
 		timer.startMeasure();
 		driver.read(bc.getModelPathNameWithoutExtension());
 		timer.stopMeasure();
 		phaseResult.addMetrics(timer);
 	}
 
-	public void benchmarkCheck(PhaseResult phaseResult) throws IOException {
-		TimeMetric timer = new TimeMetric("Time");
-		ScalarMetric results = new ScalarMetric("Matches");
+	public void benchmarkCheck(final PhaseResult phaseResult) throws Exception {
+		final TimeMetric timer = new TimeMetric("Time");
+		final ScalarMetric results = new ScalarMetric("Matches");
 		timer.startMeasure();
 		matches = checker.check();
 		timer.stopMeasure();
@@ -99,11 +98,11 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		phaseResult.addMetrics(timer, results);
 	}
 
-	public void benchmarkDestroy() throws IOException {
+	public void benchmarkDestroy() throws Exception {
 		destroy();
 	}
 
-	public void benchmarkModify(PhaseResult phaseResult) throws IOException {
+	public void benchmarkModify(final PhaseResult phaseResult) throws Exception {
 		transformationLogic.performTransformation(phaseResult, matches);
 	}
 

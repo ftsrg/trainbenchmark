@@ -20,7 +20,6 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,7 +29,7 @@ import org.eclipse.ocl.util.Tuple;
 
 public class EclipseOCLRouteSensorChecker extends EclipseOCLChecker<EMFRouteSensorMatch> {
 
-	public EclipseOCLRouteSensorChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public EclipseOCLRouteSensorChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		super(driver, bc);
 	}
 

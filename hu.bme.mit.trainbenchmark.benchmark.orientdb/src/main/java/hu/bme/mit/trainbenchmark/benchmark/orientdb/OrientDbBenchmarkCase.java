@@ -19,11 +19,10 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatchCompara
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.OrientDbTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import java.io.IOException;
 import java.util.Comparator;
 
-import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 
 public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, Vertex> {
 
@@ -34,7 +33,7 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, 
 	protected OrientDbDriver orientDriver;
 
 	@Override
-	public void init() throws IOException {
+	public void init() throws Exception {
 		super.init();
 
 		dbPath = bc.getWorkspacePath() + "models/orient-dbs/railway-database";

@@ -15,7 +15,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -26,14 +25,10 @@ public class SQLTransformationInjectPosLength extends SQLTransformationInject {
 	}
 
 	@Override
-	public void rhs(final Collection<Long> segments) throws IOException {
+	public void rhs(final Collection<Long> segments) throws SQLException {
 		for (final Long segment : segments) {
-			try {
-				final String update = "UPDATE "+ SEGMENT + " SET " + LENGTH + " = 0 WHERE " + LENGTH + " = " + segment + ";";
-				sqlDriver.getConnection().createStatement().executeUpdate(update);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			final String update = "UPDATE " + SEGMENT + " SET " + LENGTH + " = 0 WHERE " + LENGTH + " = " + segment + ";";
+			sqlDriver.getConnection().createStatement().executeUpdate(update);
 		}
 	}
 

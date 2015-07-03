@@ -22,7 +22,7 @@ public abstract class RDFDatabaseDriver<T> extends Driver<T> {
 
 	protected Long newVertexId = null;
 
-	protected Long determineNewVertexId() throws IOException {
+	protected Long determineNewVertexId() throws Exception {
 		Long id = 5000L;
 
 		// safety measure to avoid infinite loop in case of a driver bug
@@ -42,7 +42,7 @@ public abstract class RDFDatabaseDriver<T> extends Driver<T> {
 		return id;
 	}
 
-	public Long getNewVertexId() throws IOException {
+	public Long getNewVertexId() throws Exception {
 		if (newVertexId == null) {
 			newVertexId = determineNewVertexId();
 		}
@@ -55,6 +55,6 @@ public abstract class RDFDatabaseDriver<T> extends Driver<T> {
 		return ".ttl";
 	}
 
-	protected abstract boolean ask(String askQuery) throws IOException;
+	protected abstract boolean ask(String askQuery) throws Exception;
 
 }

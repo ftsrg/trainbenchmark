@@ -18,7 +18,6 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -29,17 +28,13 @@ public class SQLTransformationRepairRouteSensor extends SQLTransformationRepair<
 	}
 
 	@Override
-	public void rhs(final Collection<SQLRouteSensorMatch> matches) throws IOException {
+	public void rhs(final Collection<SQLRouteSensorMatch> matches) throws SQLException {
 		for (final SQLRouteSensorMatch match : matches) {
-			try {
-				final String update = String.format("" + //
-						"INSERT INTO `%s` (`%s`, `%s`) " + //
-						"VALUES (%d, %d);", //
-						DEFINED_BY, ROUTE + ID_POSTFIX, ModelConstants.SENSOR + ID_POSTFIX, match.getRoute(), match.getSensor());
-				sqlDriver.getConnection().createStatement().executeUpdate(update);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			final String update = String.format("" + //
+					"INSERT INTO `%s` (`%s`, `%s`) " + //
+					"VALUES (%d, %d);", //
+					DEFINED_BY, ROUTE + ID_POSTFIX, ModelConstants.SENSOR + ID_POSTFIX, match.getRoute(), match.getSensor());
+			sqlDriver.getConnection().createStatement().executeUpdate(update);
 		}
 	}
 }

@@ -16,6 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 import java.io.IOException;
 
+import org.openrdf.repository.RepositoryException;
+import org.openrdf.rio.RDFParseException;
+
 import virtuoso.sesame2.driver.VirtuosoRepository;
 
 public class VirtuosoDriver extends SesameDriver {
@@ -26,7 +29,7 @@ public class VirtuosoDriver extends SesameDriver {
 	private final String VIRTUOSO_PASSWORD = "dba";
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException {
 		repository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT, VIRTUOSO_USERNAME,
 				VIRTUOSO_PASSWORD);
 		load(modelPathWithoutExtension);

@@ -17,12 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import java.io.IOException;
-
 public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 
 	@Override
-	protected void init() throws IOException {
+	protected void init() throws Exception {
 		super.init();
 
 		driver = sqlDriver = new MemSQLDriver();

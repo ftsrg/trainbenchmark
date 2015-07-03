@@ -16,34 +16,23 @@ import java.io.IOException;
 
 public class MySQLProcess {
 
-	public static void startSQLProcess() throws IOException {
+	public static void startSQLProcess() throws IOException, InterruptedException {
 		stopSQLProcess();
 
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "sudo", "service", "mysql", "start" };
-		try {
-			final Process pr = rt.exec(command);
-			pr.waitFor();
-			if (pr.exitValue() != 0) {
-				throw new Exception("Failed to start MySQL process");
-			}
-		} catch (final Exception e) {
-			throw new IOException(e);
+		final Process pr = rt.exec(command);
+		pr.waitFor();
+		if (pr.exitValue() != 0) {
+			throw new IOException("Failed to start MySQL process");
 		}
 	}
 
-	public static void stopSQLProcess() throws IOException {
+	public static void stopSQLProcess() throws IOException, InterruptedException {
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "sudo", "service", "mysql", "stop" };
-		try {
-			final Process pr = rt.exec(command);
-			pr.waitFor();
-//			if (pr.exitValue() != 0) {
-//				throw new Exception("Failed to stop MySQL process");
-//			}
-		} catch (final Exception e) {
-			throw new IOException(e);
-		}
+		final Process pr = rt.exec(command);
+		pr.waitFor();
 	}
 
 }

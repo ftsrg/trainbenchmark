@@ -18,7 +18,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSensorMatch;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,27 +30,23 @@ public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair
 	}
 
 	@Override
-	public void rhs(final Collection<SQLSwitchSensorMatch> matches) throws IOException {
+	public void rhs(final Collection<SQLSwitchSensorMatch> matches) throws SQLException {
 		for (final SQLSwitchSensorMatch match : matches) {
-			try {
-				final String create = String.format("INSERT INTO `%s` VALUES ();", SENSOR);
-				final Statement statement = sqlDriver.getConnection().createStatement();
-				statement.executeUpdate(create, Statement.RETURN_GENERATED_KEYS);
+			final String create = String.format("INSERT INTO `%s` VALUES ();", SENSOR);
+			final Statement statement = sqlDriver.getConnection().createStatement();
+			statement.executeUpdate(create, Statement.RETURN_GENERATED_KEYS);
 
-				try (ResultSet rs = statement.getGeneratedKeys()) {
-					if (rs.next()) {
-						// get the id of the new vertex
-						final long newVertexId = rs.getLong(1);
+			try (ResultSet rs = statement.getGeneratedKeys()) {
+				if (rs.next()) {
+					// get the id of the new vertex
+					final long newVertexId = rs.getLong(1);
 
-						String update;
-						update = String.format("UPDATE `%s` SET `%s` = %d WHERE `%s` = %d;", TRACKELEMENT, SENSOR_EDGE, newVertexId, ID,
-								match.getSw());
+					String update;
+					update = String.format("UPDATE `%s` SET `%s` = %d WHERE `%s` = %d;", TRACKELEMENT, SENSOR_EDGE, newVertexId, ID,
+							match.getSw());
 
-						statement.executeUpdate(update);
-					}
+					statement.executeUpdate(update);
 				}
-			} catch (final SQLException e) {
-				throw new IOException(e);
 			}
 		}
 	}

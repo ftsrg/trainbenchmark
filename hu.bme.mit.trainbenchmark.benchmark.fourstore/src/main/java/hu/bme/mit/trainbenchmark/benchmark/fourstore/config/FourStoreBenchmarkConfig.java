@@ -20,17 +20,19 @@ import org.apache.commons.cli.ParseException;
 
 public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 
+	protected static final String FOURSTORE = "FourStore";
+
 	protected boolean cluster;
 	protected boolean showCommandOutput;
 	protected boolean showUpdateCommands;
-
+	
 	public FourStoreBenchmarkConfig(final String[] args, final String tool) throws ParseException {
 		super(args, tool);
 	}
 
-	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final String tool, final int runIndex, final Query query,
+	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
 			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
-		super(scenario, size, tool, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+		super(FOURSTORE, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 	}
 
 	@Override

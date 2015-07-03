@@ -17,7 +17,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLPosLengthMatch;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -28,18 +27,14 @@ public class SQLTransformationRepairPosLength extends SQLTransformationRepair<SQ
 	}
 
 	@Override
-	public void rhs(final Collection<SQLPosLengthMatch> matches) throws IOException {
+	public void rhs(final Collection<SQLPosLengthMatch> matches) throws SQLException {
 		for (final SQLPosLengthMatch match : matches) {
-			try {
-				final String update = String.format("" + //
-						"UPDATE %s " + //
-						"SET %s = -%s + 1 " + //
-						"WHERE `%s` = %d;", //
-						SEGMENT, LENGTH, LENGTH, ID, match.getSegment());
-				sqlDriver.getConnection().createStatement().executeUpdate(update);
-			} catch (final SQLException e) {
-				throw new IOException(e);
-			}
+			final String update = String.format("" + //
+					"UPDATE %s " + //
+					"SET %s = -%s + 1 " + //
+					"WHERE `%s` = %d;", //
+					SEGMENT, LENGTH, LENGTH, ID, match.getSegment());
+			sqlDriver.getConnection().createStatement().executeUpdate(update);
 		}
 	}
 }

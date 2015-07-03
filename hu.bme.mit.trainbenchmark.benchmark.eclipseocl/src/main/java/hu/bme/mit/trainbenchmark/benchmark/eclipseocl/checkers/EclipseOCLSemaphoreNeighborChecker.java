@@ -20,7 +20,6 @@ import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,7 +29,7 @@ import org.eclipse.ocl.util.Tuple;
 
 public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLChecker<EMFSemaphoreNeighborMatch> {
 
-	public EclipseOCLSemaphoreNeighborChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException {
+	public EclipseOCLSemaphoreNeighborChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		super(driver, bc);
 	}
 

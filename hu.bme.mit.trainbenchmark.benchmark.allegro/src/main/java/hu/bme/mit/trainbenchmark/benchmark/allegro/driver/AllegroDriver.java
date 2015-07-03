@@ -33,27 +33,19 @@ public class AllegroDriver extends SesameDriver {
 	protected String repositoryID = "train";
 
 	@Override
-	public void destroy() throws IOException {
-		try {
-			connection.close();
-			catalog.deleteRepository(repositoryID);
-		} catch (final RepositoryException e) {
-			throw new IOException();
-		}
+	public void destroy() throws RepositoryException {
+		connection.close();
+		catalog.deleteRepository(repositoryID);
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException {
+	public void read(final String modelPathWithoutExtension) throws RepositoryException, OpenRDFException, IOException {
 		final AGServer agServer = new AGServer(AGServerURL, AGServerUsername, AGServerPassword);
-		try {
-			catalog = agServer.getCatalog(catalogID);
-			if (catalog.hasRepository(repositoryID)) {
-				catalog.deleteRepository(repositoryID);
-			}
-			repository = catalog.createRepository(repositoryID);
-		} catch (final OpenRDFException e) {
-			throw new IOException(e);
+		catalog = agServer.getCatalog(catalogID);
+		if (catalog.hasRepository(repositoryID)) {
+			catalog.deleteRepository(repositoryID);
 		}
+		repository = catalog.createRepository(repositoryID);
 
 		load(modelPathWithoutExtension);
 	}

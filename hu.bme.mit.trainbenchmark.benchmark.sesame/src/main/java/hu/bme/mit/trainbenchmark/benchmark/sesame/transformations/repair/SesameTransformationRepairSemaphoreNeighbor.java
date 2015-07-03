@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborMatch;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.Resource;
@@ -32,20 +31,16 @@ public class SesameTransformationRepairSemaphoreNeighbor extends SesameTransform
 	}
 
 	@Override
-	public void rhs(final Collection<SesameSemaphoreNeighborMatch> matches) throws IOException {
+	public void rhs(final Collection<SesameSemaphoreNeighborMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
 		final URI entry = vf.createURI(BASE_PREFIX + ENTRY);
 
-		try {
-			for (final SesameSemaphoreNeighborMatch match : matches) {
-				final Resource route2 = match.getRoute2();
-				final Resource semaphore = match.getSemaphore();
-				con.add(route2, entry, semaphore);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+		for (final SesameSemaphoreNeighborMatch match : matches) {
+			final Resource route2 = match.getRoute2();
+			final Resource semaphore = match.getSemaphore();
+			con.add(route2, entry, semaphore);
 		}
 	}
 

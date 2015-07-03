@@ -13,8 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
@@ -22,7 +22,6 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import java.io.IOException;
 import java.util.Comparator;
 
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -38,7 +37,7 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 	protected Neo4jDriver neoDriver;
 
 	@Override
-	public void init() throws IOException {
+	public void init() throws Exception {
 		super.init();
 		this.nbc = (Neo4jBenchmarkConfig) bc;
 

@@ -19,6 +19,7 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
@@ -40,7 +41,7 @@ public class SQLChecker extends Checker<SQLMatch> {
 	}
 
 	@Override
-	public Collection<SQLMatch> check() throws IOException {
+	public Collection<SQLMatch> check() throws SQLException {
 		return driver.runQuery(query, queryDefinition);
 	}
 

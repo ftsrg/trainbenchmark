@@ -21,7 +21,7 @@ import org.apache.commons.cli.ParseException;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
-	private static final String NEO4J = "Neo4j";
+	protected static final String NEO4J = "Neo4j";
 	protected boolean javaApi;
 
 	public Neo4jBenchmarkConfig(final String[] args) throws ParseException {

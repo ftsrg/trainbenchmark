@@ -81,7 +81,7 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected void persistModel() throws IOException {
+	protected void persistModel() throws IOException, InterruptedException {
 		final String footerFilePath = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
@@ -96,23 +96,19 @@ public class SQLGenerator extends Generator {
 		compact();
 	}
 
-	public void compact() throws IOException {
+	public void compact() throws IOException, InterruptedException {
 		MySQLProcess.stopSQLProcess();
 		MySQLProcess.startSQLProcess();
 
-		try {
-			final Runtime rt = Runtime.getRuntime();
-			final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };
-			final Process processLoad = rt.exec(commandLoad);
-			processLoad.waitFor();
+		final Runtime rt = Runtime.getRuntime();
+		final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };
+		final Process processLoad = rt.exec(commandLoad);
+		processLoad.waitFor();
 
-			final String[] commandDump = { "/bin/bash", "-c",
-					"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > " + sqlDumpPath };
-			final Process processDump = rt.exec(commandDump);
-			processDump.waitFor();
-		} catch (final InterruptedException e) {
-			throw new IOException(e);
-		}
+		final String[] commandDump = { "/bin/bash", "-c",
+				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > " + sqlDumpPath };
+		final Process processDump = rt.exec(commandDump);
+		processDump.waitFor();
 	}
 
 	@Override

@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.openrdf.model.Resource;
@@ -32,21 +31,17 @@ public class SesameTransformationRepairRouteSensor extends SesameTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<SesameRouteSensorMatch> matches) throws IOException {
+	public void rhs(final Collection<SesameRouteSensorMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
 		final URI definedBy = vf.createURI(BASE_PREFIX + DEFINED_BY);
 
-		try {
-			for (final SesameRouteSensorMatch match : matches) {
-				final Resource route = match.getRoute();
-				final Resource sensor = match.getSensor();
+		for (final SesameRouteSensorMatch match : matches) {
+			final Resource route = match.getRoute();
+			final Resource sensor = match.getSensor();
 
-				con.add(route, definedBy, sensor);
-			}
-		} catch (final RepositoryException e) {
-			throw new IOException(e);
+			con.add(route, definedBy, sensor);
 		}
 	}
 

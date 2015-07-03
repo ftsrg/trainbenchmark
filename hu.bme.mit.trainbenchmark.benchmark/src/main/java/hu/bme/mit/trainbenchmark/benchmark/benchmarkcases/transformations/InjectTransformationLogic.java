@@ -22,7 +22,6 @@ import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -47,7 +46,7 @@ public class InjectTransformationLogic<M, T> extends TransformationLogic<M, T, T
 			.build();
 
 	@Override
-	protected void lhs(final Collection<M> currentMatches) throws IOException {
+	protected void lhs(final Collection<M> currentMatches) throws Exception {
 		final String vertexType = VERTEX_TYPES.get(bc.getQuery());
 		candidatesToModify = driver.collectVertices(vertexType);
 	}

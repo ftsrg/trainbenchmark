@@ -19,14 +19,12 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-import java.io.IOException;
-
 public class Drools5BenchmarkCase extends EMFBenchmarkCase {
 
 	protected Drools5Driver drools5driver;
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws IOException {
+	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
 		super.benchmarkInit(bc);
 		driver = drools5driver = new Drools5Driver(bc);
 		checker = new Drools5Checker(drools5driver, bc.getQuery());
