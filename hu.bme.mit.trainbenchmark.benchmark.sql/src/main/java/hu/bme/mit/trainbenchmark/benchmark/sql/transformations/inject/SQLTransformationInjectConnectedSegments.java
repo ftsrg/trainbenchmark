@@ -39,9 +39,9 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 			try {
 				// get (segment3) node
 				final String querySegment3 = String.format("" + //
-						"SELECT `TrackElement_id_connectsTo` " + //
+						"SELECT `TrackElement2` " + //
 						"FROM `%s` " + //
-						"WHERE `TrackElement_id` = %s;", CONNECTSTO, segment1);
+						"WHERE `TrackElement1` = %s;", CONNECTSTO, segment1);
 				final ResultSet resultSetSegment3 = connection.createStatement().executeQuery(querySegment3);
 				if (!resultSetSegment3.next()) {
 					continue;
@@ -62,7 +62,7 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 				// delete (segment1)-[:connectsTo]->(segment2) edge
 				final String deleteConnectsTo0 = String.format("" + //
 						"DELETE FROM `%s` " + //
-						"WHERE `TrackElement_id` = %d;", //
+						"WHERE `TrackElement1` = %d;", //
 						CONNECTSTO, segment1);
 				connection.createStatement().executeUpdate(deleteConnectsTo0);
 
@@ -89,12 +89,12 @@ public class SQLTransformationInjectConnectedSegments extends SQLTransformationI
 								segment2);
 						// insert (segment1)-[:connectsTo]->(segment3) edge
 						final String insertConnectsTo1 = String.format("" + //
-								"INSERT INTO `%s` (`TrackElement_id`, `TrackElement_id_connectsTo`) " + //
+								"INSERT INTO `%s` (`TrackElement1`, `TrackElement2`) " + //
 								"VALUES (%d, %d);", //
 								CONNECTSTO, segment1, segment2);
 						// insert (segment1)-[:connectsTo]->(segment3) edge
 						final String insertConnectsTo2 = String.format("" + //
-								"INSERT INTO `%s` (`TrackElement_id`, `TrackElement_id_connectsTo`) " + //
+								"INSERT INTO `%s` (`TrackElement1`, `TrackElement2`) " + //
 								"VALUES (%d, %d);", //
 								CONNECTSTO, segment2, segment3);
 						connection.createStatement().executeUpdate(insertSegment2);

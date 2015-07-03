@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS "TrackElement" (
 --
 
 CREATE TABLE IF NOT EXISTS "connectsTo" (
-  "TrackElement_id" int NOT NULL,
-  "TrackElement_id_connectsTo" int NOT NULL,
-  PRIMARY KEY  ("TrackElement_id", "TrackElement_id_connectsTo")
+  "TrackElement1" int NOT NULL,
+  "TrackElement2" int NOT NULL,
+  PRIMARY KEY  ("TrackElement1", "TrackElement2")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 

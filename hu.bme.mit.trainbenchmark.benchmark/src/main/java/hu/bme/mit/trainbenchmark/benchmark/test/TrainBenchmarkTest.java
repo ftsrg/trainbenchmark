@@ -35,32 +35,25 @@ public abstract class TrainBenchmarkTest {
 
 	protected TestBenchmarkInitializer<?> bi;
 
-	public AbstractBenchmarkLogic initialize(final Query query,
-			final String tool, final Scenario scenario)
-			throws IOException {
+	public AbstractBenchmarkLogic initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
 		return bi.initializeBenchmark(query, scenario);
 	}
 
-	protected void testQuery(final Query query, final Scenario scenario,
-			final int expectedResultSize) throws ParseException,
-			IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query,
-				scenario);
+	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws ParseException, IOException {
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, expectedResultSize);
 	}
 
-	private void runQuery(final AbstractBenchmarkLogic bl,
-			final long expectedResultSize) throws IOException {
+	private void runQuery(final AbstractBenchmarkLogic bl, final long expectedResultSize) throws IOException {
 		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult br = bl.runBenchmark();
 		long lastResultSize = 0;
-		for (PhaseResult pr : br.getPhaseResults()) {
-			String name = pr.getPhaseName();
+		for (final PhaseResult pr : br.getPhaseResults()) {
+			final String name = pr.getPhaseName();
 			if ("Check".equals(name) || "Recheck".equals(name)) {
-				for (MetricResult m : pr.getMetrics()) {
+				for (final MetricResult m : pr.getMetrics()) {
 					if ("Matches".equals(m.getName())) {
-						lastResultSize = Long
-								.parseLong(m.getValue());
+						lastResultSize = Long.parseLong(m.getValue());
 					}
 				}
 			}
