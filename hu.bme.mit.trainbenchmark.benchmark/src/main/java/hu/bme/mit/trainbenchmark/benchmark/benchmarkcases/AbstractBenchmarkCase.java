@@ -31,8 +31,7 @@ import eu.mondo.sam.core.results.PhaseResult;
 
 public abstract class AbstractBenchmarkCase<M, T> {
 
-	protected Random random = new UniqueRandom(
-			TrainBenchmarkConstants.RANDOM_SEED);
+	protected Random random = new UniqueRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;
 	protected Checker<M> checker;
@@ -70,8 +69,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	}
 
 	public void benchmarkInitTransformation() {
-		transformationLogic = TransformationLogic.newInstance(
-				bc.getScenario(), getComparator());
+		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(bc, driver, random);
 		}

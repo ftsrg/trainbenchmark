@@ -11,24 +11,38 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import org.apache.commons.io.FileUtils;
+
 public class SQLTransformationInjectPosLength extends SQLTransformationInject {
 
-	public SQLTransformationInjectPosLength(final SQLDriver sqlDriver) {
+	protected final String updateQuery;
+	protected PreparedStatement preparedUpdateStatement;
+	
+	public SQLTransformationInjectPosLength(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
 		super(sqlDriver);
+
+		final String updatePath = getTransformationDirectory(bc) + "InjectPosLength.sql";
+		updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 
 	@Override
 	public void rhs(final Collection<Long> segments) throws SQLException {
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+		}
+
 		for (final Long segment : segments) {
-			final String update = "UPDATE " + SEGMENT + " SET " + LENGTH + " = 0 WHERE " + LENGTH + " = " + segment + ";";
-			sqlDriver.getConnection().createStatement().executeUpdate(update);
+			preparedUpdateStatement.setLong(1, segment);
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 

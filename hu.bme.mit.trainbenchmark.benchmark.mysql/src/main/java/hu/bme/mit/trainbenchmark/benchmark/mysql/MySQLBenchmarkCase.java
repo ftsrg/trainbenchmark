@@ -34,7 +34,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 		checker = new SQLChecker(sqlDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
+			transformation = SQLTransformation.newInstance(sqlDriver, bc);
 		}
 	}
 

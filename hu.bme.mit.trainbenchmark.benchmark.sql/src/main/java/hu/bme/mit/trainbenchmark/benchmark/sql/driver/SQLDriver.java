@@ -17,6 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,18 +26,24 @@ import java.util.List;
 
 public abstract class SQLDriver extends Driver<Long> {
 
+	protected String queryDefinition;
 	protected Connection connection;
-
+	protected PreparedStatement preparedQuery;
+	
 	@Override
 	public String getExtension() {
 		return ".sql";
 	}
-
+	
 	@Override
 	public List<SQLMatch> runQuery(final Query query, final String queryDefinition) throws SQLException  {
 		final List<SQLMatch> results = new ArrayList<>();
 
-		try (ResultSet rs = connection.createStatement().executeQuery(queryDefinition)) {
+		if (preparedQuery == null) {
+			preparedQuery = connection.prepareStatement(queryDefinition);
+		}
+		
+		try (ResultSet rs = preparedQuery.executeQuery()) {
 			while (rs.next()) {
 				final SQLMatch match = SQLMatch.createMatch(query, rs);
 				results.add(match);
@@ -69,6 +76,10 @@ public abstract class SQLDriver extends Driver<Long> {
 	@Override
 	public Comparator<Long> getElementComparator() {
 		return new LongComparator();
+	}
+
+	public String getResourceDirectory() {
+		return "/hu.bme.mit.trainbenchmark.benchmark.sql/src/main/resources/";
 	}
 
 }
