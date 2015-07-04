@@ -11,14 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 
+import java.io.IOException;
+
 public abstract class SQLTransformationRepair<M extends SQLMatch> extends SQLTransformation<M> {
 
-	protected SQLTransformationRepair(final SQLDriver sqlDriver) {
-		super(sqlDriver);
+	protected SQLTransformationRepair(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
+		super(sqlDriver, bc);
 	}
 
 }

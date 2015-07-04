@@ -18,7 +18,8 @@ WHERE TrackElement1 = @segment1 AND TrackElement2 = @segment3;
 
 -- insert new node (segment2) as a TrackElement and retrieve its id
 -- also insert the (segment2)-[:sensor]->(sensor) edge
-INSERT INTO TrackElement (sensor) VALUES (@sensor);
+INSERT INTO TrackElement (sensor)
+VALUES (@sensor);
 SET @segment2 :=
 	(SELECT LAST_INSERT_ID());
 

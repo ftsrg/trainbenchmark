@@ -11,30 +11,30 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSemaphoreNeighborMatch;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
 public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationRepair<SQLSemaphoreNeighborMatch> {
 
-	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver sqlDriver) {
-		super(sqlDriver);
+	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
+		super(sqlDriver, bc);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLSemaphoreNeighborMatch> matches) throws SQLException {
-		for (final SQLSemaphoreNeighborMatch snm : matches) {
-			final String update = String.format("" + //
-					"UPDATE `%s` " + //
-					"SET `%s` = %d " + //
-					"WHERE `%s` = %d;", //
-					ROUTE, ENTRY, snm.getSemaphore(), ID, snm.getRoute2());
-			sqlDriver.getConnection().createStatement().executeUpdate(update);
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+		}
+
+		for (final SQLSemaphoreNeighborMatch match : matches) {
+			preparedUpdateStatement.setLong(1, match.getSemaphore());
+			preparedUpdateStatement.setLong(2, match.getRoute2());
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 }

@@ -11,29 +11,30 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSetMatch;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
 public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQLSwitchSetMatch> {
 
-	public SQLTransformationRepairSwitchSet(final SQLDriver sqlDriver) {
-		super(sqlDriver);
+	public SQLTransformationRepairSwitchSet(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
+		super(sqlDriver, bc);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLSwitchSetMatch> matches) throws SQLException {
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+		}
+
 		for (final SQLSwitchSetMatch match : matches) {
-			final String update = String.format("" + //
-					"UPDATE " + SWITCH + " " + //
-					"SET " + SWITCH + "." + CURRENTPOSITION + " = " + match.getPosition() + " " + //
-					"WHERE " + SWITCH + "." + ID + " = " + match.getSw() + ";");
-			sqlDriver.getConnection().createStatement().executeUpdate(update);
+			preparedUpdateStatement.setLong(1, match.getPosition());
+			preparedUpdateStatement.setLong(2, match.getSw());
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 }

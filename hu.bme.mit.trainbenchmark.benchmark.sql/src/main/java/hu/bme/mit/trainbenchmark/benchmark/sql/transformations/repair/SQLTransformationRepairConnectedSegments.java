@@ -11,60 +11,31 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.ID_POSTFIX;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
 public class SQLTransformationRepairConnectedSegments extends SQLTransformationRepair<SQLConnectedSegmentsMatch> {
 
-	public SQLTransformationRepairConnectedSegments(final SQLDriver sqlDriver) {
-		super(sqlDriver);
+	public SQLTransformationRepairConnectedSegments(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
+		super(sqlDriver, bc);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLConnectedSegmentsMatch> matches) throws SQLException {
-		for (final SQLConnectedSegmentsMatch match : matches) {
-			// segment2 node as segment
-			final String deleteSegment2 = String.format("" + //
-					"DELETE FROM `%s` " + //
-					"WHERE `%s` = %d;", //
-					SEGMENT, ID, match.getSegment2());
-			// segment2 node as TrackELement and sensor edge
-			final String deleteSegment2TrackElement = String.format("" + //
-					"DELETE FROM `%s` " + //
-					"WHERE `%s` = %d;", //
-					TRACKELEMENT, ID, match.getSegment2());
-			// (segment1)-[:connectsTo]->(segment2) edge
-			final String deleteConnectsTo1 = String.format("" + //
-					"DELETE FROM `%s` " + //
-					"WHERE `TrackElement1` = %d AND `TrackElement2` = %d;", //
-					CONNECTSTO, match.getSegment1(), match.getSegment2());
-			// (segment2)-[:connectsTo]->(segment3) edge
-			final String deleteConnectsTo2 = String.format("" + //
-					"DELETE FROM `%s` " + //
-					"WHERE `TrackElement1` = %d  AND `TrackElement2` = %d;", //
-					CONNECTSTO, match.getSegment2(), match.getSegment3());
-			// insert (segment1)-[:connectsTo]->(segment3) edge
-			final String insertConnectsTo = String.format("" + //
-					"INSERT INTO `%s` (`%s`, `%s`) " + //
-					"VALUES (%d, %d);", //
-					DEFINED_BY, ROUTE + ID_POSTFIX, ModelConstants.SENSOR + ID_POSTFIX, match.getSegment1(), match.getSegment3());
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+		}
 
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteSegment2);
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteSegment2TrackElement);
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteConnectsTo1);
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteConnectsTo2);
-			sqlDriver.getConnection().createStatement().executeUpdate(insertConnectsTo);
+		for (final SQLConnectedSegmentsMatch match : matches) {
+			preparedUpdateStatement.setLong(1, match.getSegment1());
+			preparedUpdateStatement.setLong(2, match.getSegment2());
+			preparedUpdateStatement.setLong(3, match.getSegment3());
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 }
