@@ -11,28 +11,39 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.ROUTE_ID;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import org.apache.commons.io.FileUtils;
+
 public class SQLTransformationInjectRouteSensor extends SQLTransformationInject {
 
-	public SQLTransformationInjectRouteSensor(final SQLDriver sqlDriver) {
+	protected final String updateQuery;
+	protected PreparedStatement preparedUpdateStatement;
+
+	public SQLTransformationInjectRouteSensor(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
 		super(sqlDriver);
+
+		final String updatePath = getTransformationDirectory(bc) + "InjectRouteSensor.sql";
+		updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 
 	@Override
 	public void rhs(final Collection<Long> routes) throws SQLException {
 		for (final Long route : routes) {
-			// (route)-[:definedBy]->(sensor) edge
-			final String deleteDefinedBy = "" + //
-					"DELETE FROM " + DEFINED_BY + " " + //
-					"WHERE " + ROUTE_ID + " = " + route + " " + //
-					"LIMIT 1;";
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
+			// (route)-[:entry]->(semaphore) edge
+			if (preparedUpdateStatement == null) {
+				preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+			}
+
+			preparedUpdateStatement.setLong(1, route);
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 

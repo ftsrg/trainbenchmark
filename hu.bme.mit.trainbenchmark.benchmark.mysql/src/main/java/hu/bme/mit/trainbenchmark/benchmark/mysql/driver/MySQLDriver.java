@@ -22,7 +22,7 @@ import java.sql.SQLException;
 
 public class MySQLDriver extends SQLDriver {
 
-	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark";
+	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true";
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {

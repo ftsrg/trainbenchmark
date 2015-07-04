@@ -11,44 +11,40 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import org.apache.commons.io.FileUtils;
+
 public class SQLTransformationInjectSwitchSensor extends SQLTransformationInject {
 
-	public SQLTransformationInjectSwitchSensor(final SQLDriver sqlDriver) {
+	protected final String updateQuery;
+	protected PreparedStatement preparedUpdateStatement;
+
+	public SQLTransformationInjectSwitchSensor(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
 		super(sqlDriver);
+	
+		final String updatePath = getTransformationDirectory(bc) + "InjectSwitchSensor.sql";
+		updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 
 	@Override
 	public void rhs(final Collection<Long> switches) throws SQLException {
 		for (final Long sw : switches) {
-			// sensor
-			final String deleteSensor = "" + //
-					"DELETE `" + SENSOR + "` FROM `" + SENSOR + "` " + //
-					"INNER JOIN `" + TRACKELEMENT + "` " + //
-					"ON Sensor.id = TrackElement.sensor " + //
-					"WHERE TrackElement.id = " + sw + ";";
-			// trackElement
-			final String deleteTrackElement = "" + //
-					"DELETE FROM `" + TRACKELEMENT + "` " + //
-					"WHERE `" + ID + "` = " + sw + ";";
-			// definedBy
-			final String deleteDefinedBy = "" + //
-					"DELETE `" + DEFINED_BY + "` FROM `" + DEFINED_BY + "` " + //
-					"INNER JOIN `" + TRACKELEMENT + "` " + //
-					"ON definedBy.sensor_id = TrackElement.sensor " + //
-					"WHERE TrackElement.id = " + sw + ";";
+			if (preparedUpdateStatement == null) {
+				preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+			}
 
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteSensor);
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteTrackElement);
-			sqlDriver.getConnection().createStatement().executeUpdate(deleteDefinedBy);
+			preparedUpdateStatement.setLong(1, sw);
+			preparedUpdateStatement.setLong(2, sw);
+			preparedUpdateStatement.setLong(3, sw);
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 
