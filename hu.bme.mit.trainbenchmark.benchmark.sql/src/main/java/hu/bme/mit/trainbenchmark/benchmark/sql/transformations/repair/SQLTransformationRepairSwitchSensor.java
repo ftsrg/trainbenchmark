@@ -11,43 +11,29 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSensorMatch;
 
-import java.sql.ResultSet;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Collection;
 
 public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair<SQLSwitchSensorMatch> {
 
-	public SQLTransformationRepairSwitchSensor(final SQLDriver sqlDriver) {
-		super(sqlDriver);
+	public SQLTransformationRepairSwitchSensor(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
+		super(sqlDriver, bc);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLSwitchSensorMatch> matches) throws SQLException {
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+		}
+
 		for (final SQLSwitchSensorMatch match : matches) {
-			final String create = String.format("INSERT INTO `%s` VALUES ();", SENSOR);
-			final Statement statement = sqlDriver.getConnection().createStatement();
-			statement.executeUpdate(create, Statement.RETURN_GENERATED_KEYS);
-
-			try (ResultSet rs = statement.getGeneratedKeys()) {
-				if (rs.next()) {
-					// get the id of the new vertex
-					final long newVertexId = rs.getLong(1);
-
-					String update;
-					update = String.format("UPDATE `%s` SET `%s` = %d WHERE `%s` = %d;", TRACKELEMENT, SENSOR_EDGE, newVertexId, ID,
-							match.getSw());
-
-					statement.executeUpdate(update);
-				}
-			}
+			preparedUpdateStatement.setLong(1, match.getSw());
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 

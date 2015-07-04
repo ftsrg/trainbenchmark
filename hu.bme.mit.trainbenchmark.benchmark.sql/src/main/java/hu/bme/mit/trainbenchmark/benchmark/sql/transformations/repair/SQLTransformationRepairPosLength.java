@@ -11,30 +11,29 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLPosLengthMatch;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
 public class SQLTransformationRepairPosLength extends SQLTransformationRepair<SQLPosLengthMatch> {
 
-	public SQLTransformationRepairPosLength(final SQLDriver sqlDriver) {
-		super(sqlDriver);
+	public SQLTransformationRepairPosLength(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
+		super(sqlDriver, bc);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLPosLengthMatch> matches) throws SQLException {
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+		}
+
 		for (final SQLPosLengthMatch match : matches) {
-			final String update = String.format("" + //
-					"UPDATE %s " + //
-					"SET %s = -%s + 1 " + //
-					"WHERE `%s` = %d;", //
-					SEGMENT, LENGTH, LENGTH, ID, match.getSegment());
-			sqlDriver.getConnection().createStatement().executeUpdate(update);
+			preparedUpdateStatement.setLong(1, match.getSegment());
+			preparedUpdateStatement.executeUpdate();
 		}
 	}
 }
