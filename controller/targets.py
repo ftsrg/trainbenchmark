@@ -19,28 +19,27 @@ def get_generator_jar(format):
     #     .format(FORMAT=format)
     folder = "./target/"
     files = glob.glob(folder + "*.jar")
-    if len(files) > 0:
-        target = files[0]
-        return target
-    else:
-        logging.error("JAR file does not exist of " + format)
-        raise FileNotFoundError("JAR file does not exist of " + format)
+    for f in files:
+        if "-sources.jar" not in f:
+            return f
+
+    logging.error("JAR file does not exist of " + format)
+    raise FileNotFoundError("JAR file does not exist of " + format)
 
 
 def get_tool_jar(tool):
     """
     Returns the tool's .jar file's path.
     """
-    #folder = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/" \
+    # folder = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/target/" \
     #    .format(TOOL=tool)
     folder = "./target/"
     files = glob.glob(folder + "*.jar")
-    if len(files) > 0:
-        target = files[0]
-        return target
-    else:
-        logging.error("JAR file does not exist of " + tool)
-        raise FileNotFoundError("JAR file does not exist of " + tool)
+    for f in files:
+        if "-sources.jar" not in f:
+            return f
+    logging.error("JAR file does not exist of " + tool)
+    raise FileNotFoundError("JAR file does not exist of " + tool)
 
 
 def get_model_path(format, scenario, size_str):
