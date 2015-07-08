@@ -17,11 +17,16 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class OrientDbBenchmarkInitializer extends TestBenchmarkInitializer<OrientDbBenchmarkLogic>{
+public class OrientDbBenchmarkInitializer extends
+		TestBenchmarkInitializer<OrientDbBenchmarkLogic> {
 
 	@Override
-	protected OrientDbBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("OrientDb", scenario,  size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+	protected OrientDbBenchmarkLogic initializeBenchmark(final Query query,
+			final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig("OrientDb",
+				scenario, size, runIndex, query,
+				iterationCount, modificationMethod,
+				modificationConstant, false);
 		return new OrientDbBenchmarkLogic(bc);
 	}
 

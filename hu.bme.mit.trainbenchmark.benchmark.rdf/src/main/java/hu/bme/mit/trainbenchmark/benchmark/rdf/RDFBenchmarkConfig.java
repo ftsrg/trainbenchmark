@@ -23,13 +23,20 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
 
-	public RDFBenchmarkConfig(final String[] args, final String className) throws ParseException {
+	public RDFBenchmarkConfig(final String[] args, final String className)
+			throws ParseException {
 		super(args, className);
 	}
 
-	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
-		super(className, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+	public RDFBenchmarkConfig(final String className,
+			final Scenario scenario, final int size,
+			final int runIndex, final Query query,
+			final int iterationCount,
+			final ModificationMethod modificationMethod,
+			final long modificationConstant) {
+		super(className, scenario, size, runIndex, query,
+				iterationCount, modificationMethod,
+				modificationConstant, false);
 	}
 
 	@Override

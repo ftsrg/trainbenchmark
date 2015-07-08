@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.CalculateModelMetricsPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
@@ -26,9 +27,12 @@ public class BatchScenarioLogic extends
 	@Override
 	public void build() {
 		SequencePhase seq = new SequencePhase();
+		CalculateModelMetricsPhase calculateModelMetrics = new CalculateModelMetricsPhase();
+		calculateModelMetrics.setAnalyze(benchmarkConfig.isAnalyze());
+
 		seq.addPhases(new InitializationPhase("Init"), new ReadPhase(
-				"Read"), new CheckPhase("Check"),
-				new DestroyPhase("Destroy"));
+				"Read"), calculateModelMetrics, new CheckPhase(
+				"Check"), new DestroyPhase("Destroy"));
 		rootPhase = seq;
 
 	}

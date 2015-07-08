@@ -18,12 +18,16 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class Drools5BenchmarkInitializer extends TestBenchmarkInitializer<Drools5BenchmarkLogic> {
+public class Drools5BenchmarkInitializer extends
+		TestBenchmarkInitializer<Drools5BenchmarkLogic> {
 
 	@Override
-	protected Drools5BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("Drools5", scenario, size, runIndex, query, iterationCount, modificationMethod,
-				modificationConstant);
+	protected Drools5BenchmarkLogic initializeBenchmark(final Query query,
+			final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig("Drools5",
+				scenario, size, runIndex, query,
+				iterationCount, modificationMethod,
+				modificationConstant, false);
 		return new Drools5BenchmarkLogic(bc);
 	}
 

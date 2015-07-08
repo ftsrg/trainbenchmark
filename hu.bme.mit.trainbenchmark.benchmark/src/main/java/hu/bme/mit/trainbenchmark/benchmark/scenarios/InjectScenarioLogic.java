@@ -13,12 +13,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.CalculateModelMetricsPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 import eu.mondo.sam.core.phases.IterationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
@@ -38,11 +39,17 @@ public class InjectScenarioLogic extends
 
 		innerSeq.addPhases(edit, check);
 		iter.setPhase(innerSeq);
+
+		CalculateModelMetricsPhase calculateModelMetrics = new CalculateModelMetricsPhase();
+		calculateModelMetrics.setAnalyze(benchmarkConfig.isAnalyze());
+
 		seq.addPhases(new InitializationPhase("Init"),
 				new InitTransformationPhase(
 						"InitTransformation"),
-				new ReadPhase("Read"), new CheckPhase("Check"),
-				iter, new DestroyPhase("Destroy"));
+				new ReadPhase("Read"), calculateModelMetrics,
+				new CheckPhase("Check"), iter,
+				new DestroyPhase("Destroy"));
+
 		rootPhase = seq;
 
 	}

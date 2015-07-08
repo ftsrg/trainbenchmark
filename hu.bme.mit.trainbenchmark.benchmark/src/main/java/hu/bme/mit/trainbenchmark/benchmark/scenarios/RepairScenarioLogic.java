@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.CalculateModelMetricsPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
@@ -30,11 +31,15 @@ public class RepairScenarioLogic extends
 		SequencePhase seq = new SequencePhase();
 		CheckPhase check = new CheckPhase("Check");
 		CheckPhase recheck = new CheckPhase("Recheck");
+		CalculateModelMetricsPhase calculateModelMetrics = new CalculateModelMetricsPhase();
+		calculateModelMetrics.setAnalyze(benchmarkConfig.isAnalyze());
+
 		seq.addPhases(new InitializationPhase("Init"),
 				new InitTransformationPhase(
 						"InitTransformation"),
 				new ReadPhase("Read"), check,
-				new TransformationPhase("Edit"), recheck,
+				calculateModelMetrics, new TransformationPhase(
+						"Edit"), recheck,
 				new DestroyPhase("Destroy"));
 		rootPhase = seq;
 

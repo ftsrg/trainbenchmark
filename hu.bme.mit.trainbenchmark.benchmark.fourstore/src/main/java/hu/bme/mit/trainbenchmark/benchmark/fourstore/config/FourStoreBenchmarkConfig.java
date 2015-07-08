@@ -25,23 +25,34 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 	protected boolean cluster;
 	protected boolean showCommandOutput;
 	protected boolean showUpdateCommands;
-	
-	public FourStoreBenchmarkConfig(final String[] args, final String tool) throws ParseException {
+
+	public FourStoreBenchmarkConfig(final String[] args, final String tool)
+			throws ParseException {
 		super(args, tool);
 	}
 
-	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
-		super(FOURSTORE, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+	public FourStoreBenchmarkConfig(final Scenario scenario,
+			final int size, final int runIndex, final Query query,
+			final int iterationCount,
+			final ModificationMethod modificationMethod,
+			final long modificationConstant) {
+		super(FOURSTORE, scenario, size, runIndex, query,
+				iterationCount, modificationMethod,
+				modificationConstant, false);
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("cluster", false, "run the benchmark in a cluster");
-		options.addOption("showCommandOutput", false, "show the results of the command line applications (e.g. 4s-backend, 4s-import)");
-		options.addOption("showUpdateCommands", false, "show 4s-update commands");
+		options.addOption("cluster", false,
+				"run the benchmark in a cluster");
+		options.addOption(
+				"showCommandOutput",
+				false,
+				"show the results of the command line applications (e.g. 4s-backend, 4s-import)");
+		options.addOption("showUpdateCommands", false,
+				"show 4s-update commands");
 	}
 
 	@Override

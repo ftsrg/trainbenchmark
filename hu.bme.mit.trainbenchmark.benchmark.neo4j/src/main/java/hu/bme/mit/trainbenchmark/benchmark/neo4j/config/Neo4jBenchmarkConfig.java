@@ -28,9 +28,13 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 		super(args, NEO4J);
 	}
 
-	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant, final boolean javaApi) {
-		super(NEO4J, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+	public Neo4jBenchmarkConfig(final Scenario scenario, final int size,
+			final int runIndex, final Query query,
+			final int iterationCount,
+			final ModificationMethod modificationMethod,
+			final long modificationConstant, final boolean javaApi) {
+		super(NEO4J, scenario, size, runIndex, query, iterationCount,
+				modificationMethod, modificationConstant, false);
 		this.javaApi = javaApi;
 	}
 
@@ -38,7 +42,8 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("javaapi", false, "use the faster, low-level Java API for querying");
+		options.addOption("javaapi", false,
+				"use the faster, low-level Java API for querying");
 	}
 
 	@Override
