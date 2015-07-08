@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.Analyzer;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
@@ -25,19 +27,22 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Random;
 
+import eu.mondo.sam.core.metrics.BenchmarkMetric;
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
 import eu.mondo.sam.core.results.PhaseResult;
 
 public abstract class AbstractBenchmarkCase<M, T> {
 
-	protected Random random = new UniqueRandom(TrainBenchmarkConstants.RANDOM_SEED);
+	protected Random random = new UniqueRandom(
+			TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;
 	protected Checker<M> checker;
 	protected Collection<M> matches;
 	protected TransformationLogic<M, T, ?> transformationLogic;
 	protected Transformation<?> transformation;
+	protected Analyzer<Driver<T>> analyzer;
 
 	public Collection<M> getMatches() {
 		return matches;
@@ -68,8 +73,21 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		init();
 	}
 
+	public void benchmarkInitAnalyzer() {
+		analyzer.initializeMetrics(driver);
+		analyzer.attachMetrics();
+	};
+
+	public void calculateModelMetrics(final PhaseResult phaseResult) {
+		analyzer.calculateAll();
+		for (ConcreteMetric<?> m : analyzer.getMetrics()) {
+			phaseResult.addMetrics((BenchmarkMetric) m);
+		}
+	}
+
 	public void benchmarkInitTransformation() {
-		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
+		transformationLogic = TransformationLogic.newInstance(
+				bc.getScenario(), getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(bc, driver, random);
 		}
@@ -78,7 +96,8 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	// benchmark methods
 
-	public void benchmarkRead(final PhaseResult phaseResult) throws Exception {
+	public void benchmarkRead(final PhaseResult phaseResult)
+			throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		timer.startMeasure();
 		driver.read(bc.getModelPathNameWithoutExtension());
@@ -86,7 +105,8 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		phaseResult.addMetrics(timer);
 	}
 
-	public void benchmarkCheck(final PhaseResult phaseResult) throws Exception {
+	public void benchmarkCheck(final PhaseResult phaseResult)
+			throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		final ScalarMetric results = new ScalarMetric("Matches");
 		timer.startMeasure();
@@ -100,7 +120,8 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		destroy();
 	}
 
-	public void benchmarkModify(final PhaseResult phaseResult) throws Exception {
+	public void benchmarkModify(final PhaseResult phaseResult)
+			throws Exception {
 		transformationLogic.performTransformation(phaseResult, matches);
 	}
 

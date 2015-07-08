@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -36,23 +37,31 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 
 	protected Neo4jDriver neoDriver;
 
+	protected Neo4jModelAnalyzer analyzer;
+
 	@Override
 	public void init() throws Exception {
 		super.init();
 		this.nbc = (Neo4jBenchmarkConfig) bc;
 
-		dbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
+		dbPath = bc.getWorkspacePath()
+				+ "/models/neo4j-dbs/railway-database";
 		driver = neoDriver = new Neo4jDriver(dbPath);
-		
+
 		if (nbc.isJavaApi()) {
-			checker = Neo4jCoreChecker.newInstance(neoDriver, bc.getQuery());
+			checker = Neo4jCoreChecker.newInstance(neoDriver,
+					bc.getQuery());
 		} else {
 			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
 		}
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());
+			transformation = Neo4jTransformation.newInstance(
+					neoDriver, bc.getQuery(),
+					bc.getScenario());
 		}
+
+		analyzer = new Neo4jModelAnalyzer();
 	}
 
 	@Override
