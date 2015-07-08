@@ -32,7 +32,7 @@ import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
 import eu.mondo.sam.core.results.PhaseResult;
 
-public abstract class AbstractBenchmarkCase<M, T> {
+public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	protected Random random = new UniqueRandom(
 			TrainBenchmarkConstants.RANDOM_SEED);
@@ -42,7 +42,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	protected Collection<M> matches;
 	protected TransformationLogic<M, T, ?> transformationLogic;
 	protected Transformation<?> transformation;
-	protected Analyzer<Driver<T>> analyzer;
+	protected Analyzer<D> analyzer;
 
 	public Collection<M> getMatches() {
 		return matches;
@@ -74,7 +74,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 	}
 
 	public void benchmarkInitAnalyzer() {
-		analyzer.initializeMetrics(driver);
+		analyzer.initializeMetrics((D) driver);
 		analyzer.attachMetrics();
 	};
 

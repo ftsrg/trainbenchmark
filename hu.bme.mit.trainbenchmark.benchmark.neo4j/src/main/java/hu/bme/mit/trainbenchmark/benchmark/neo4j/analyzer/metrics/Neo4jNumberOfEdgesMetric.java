@@ -16,6 +16,7 @@ public class Neo4jNumberOfEdgesMetric extends Neo4jConcreteMetric {
 
 	@Override
 	public void calculate() {
+		beginTransaction();
 		Iterable<Relationship> relationships = graphOperations
 				.getAllRelationships();
 		Iterator<Relationship> iterator = relationships.iterator();
@@ -24,6 +25,7 @@ public class Neo4jNumberOfEdgesMetric extends Neo4jConcreteMetric {
 			iterator.next();
 			numberOfEdges++;
 		}
+		finishTransaction();
 	}
 
 	@Override

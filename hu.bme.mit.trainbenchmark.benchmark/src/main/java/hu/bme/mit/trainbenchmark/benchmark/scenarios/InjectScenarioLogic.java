@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.CalculateModelMetricsPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
@@ -25,7 +24,7 @@ import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
 
 public class InjectScenarioLogic extends
-		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
+		ScenarioLogic<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
@@ -40,14 +39,13 @@ public class InjectScenarioLogic extends
 		innerSeq.addPhases(edit, check);
 		iter.setPhase(innerSeq);
 
-		CalculateModelMetricsPhase calculateModelMetrics = new CalculateModelMetricsPhase();
-		calculateModelMetrics.setAnalyze(benchmarkConfig.isAnalyze());
+		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
 		seq.addPhases(new InitializationPhase("Init"),
 				new InitTransformationPhase(
 						"InitTransformation"),
-				new ReadPhase("Read"), calculateModelMetrics,
-				new CheckPhase("Check"), iter,
+				new ReadPhase("Read"), initMetrics,
+				calcMetrics, new CheckPhase("Check"), iter,
 				new DestroyPhase("Destroy"));
 
 		rootPhase = seq;

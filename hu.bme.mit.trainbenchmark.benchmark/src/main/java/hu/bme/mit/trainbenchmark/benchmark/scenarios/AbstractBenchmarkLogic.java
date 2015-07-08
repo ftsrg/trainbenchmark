@@ -39,7 +39,7 @@ public abstract class AbstractBenchmarkLogic {
 		@SuppressWarnings("rawtypes")
 		final ScenarioLogic scl = ScenarioFactory.getScenario(bc
 				.getScenario());
-		final AbstractBenchmarkCase<?, ?> tc = getBenchmarkCase();
+		final AbstractBenchmarkCase<?, ?, ?> tc = getBenchmarkCase();
 
 		scl.setBenchmarkConfig(bc);
 		scl.initializeDescriptor();
@@ -54,12 +54,12 @@ public abstract class AbstractBenchmarkLogic {
 		return engine.getBenchmarkResult();
 	}
 
-	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
+	public AbstractBenchmarkCase<?, ?, ?> getBenchmarkCase() {
 		return getConcreteBenchmarkCase(this.getClass()
 				.getClassLoader());
 	}
 
-	protected AbstractBenchmarkCase<?, ?> getConcreteBenchmarkCase(
+	protected AbstractBenchmarkCase<?, ?, ?> getConcreteBenchmarkCase(
 			final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
@@ -73,7 +73,7 @@ public abstract class AbstractBenchmarkLogic {
 			final int modifiers = clazz.getModifiers();
 			// instantiate generic class if not abstract
 			if (!Modifier.isAbstract(modifiers)) {
-				return (AbstractBenchmarkCase<?, ?>) clazz
+				return (AbstractBenchmarkCase<?, ?, ?>) clazz
 						.newInstance();
 			}
 
@@ -87,7 +87,7 @@ public abstract class AbstractBenchmarkLogic {
 					.loadClass(queryClassName);
 
 			// instantiate generic class if not abstract
-			return (AbstractBenchmarkCase<?, ?>) queryClass
+			return (AbstractBenchmarkCase<?, ?, ?>) queryClass
 					.newInstance();
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException e) {

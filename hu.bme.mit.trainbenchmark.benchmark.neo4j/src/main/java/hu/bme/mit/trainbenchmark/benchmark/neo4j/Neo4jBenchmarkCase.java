@@ -28,7 +28,8 @@ import java.util.Comparator;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
-public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> {
+public class Neo4jBenchmarkCase extends
+		AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver> {
 
 	protected Neo4jBenchmarkConfig nbc;
 
@@ -36,8 +37,6 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 	protected String dbPath;
 
 	protected Neo4jDriver neoDriver;
-
-	protected Neo4jModelAnalyzer analyzer;
 
 	@Override
 	public void init() throws Exception {

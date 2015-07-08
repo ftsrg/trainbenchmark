@@ -4,8 +4,6 @@ public abstract class Metric {
 
 	private ConcreteMetric<?> concreteMetric;
 
-	protected static Metric instance = null;
-
 	private String identifier;
 
 	protected Metric(String identifier) {
@@ -20,7 +18,7 @@ public abstract class Metric {
 		return concreteMetric;
 	}
 
-	public void attachConcreteMetric(ConcreteMetric<?> concreteMetric) {
+	public void attachConcreteMetric(final ConcreteMetric<?> concreteMetric) {
 		this.concreteMetric = concreteMetric;
 		this.concreteMetric.setMetricName(identifier);
 	}

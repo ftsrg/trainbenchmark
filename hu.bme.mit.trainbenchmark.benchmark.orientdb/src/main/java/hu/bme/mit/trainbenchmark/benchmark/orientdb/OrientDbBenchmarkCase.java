@@ -24,7 +24,8 @@ import java.util.Comparator;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 
-public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, Vertex> {
+public class OrientDbBenchmarkCase extends
+		AbstractBenchmarkCase<OrientDbMatch, Vertex, OrientDbDriver> {
 
 	protected OrientGraph graphDb;
 	protected String dbPath;
@@ -36,13 +37,18 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, 
 	public void init() throws Exception {
 		super.init();
 
-		dbPath = bc.getWorkspacePath() + "models/orient-dbs/railway-database";
-		benchmarkDir = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
+		dbPath = bc.getWorkspacePath()
+				+ "models/orient-dbs/railway-database";
+		benchmarkDir = bc.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
 		driver = orientDriver = new OrientDbDriver(dbPath, benchmarkDir);
-		checker = OrientDbChecker.newInstance(orientDriver, bc.getQuery());
+		checker = OrientDbChecker.newInstance(orientDriver,
+				bc.getQuery());
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = OrientDbTransformation.newInstance(orientDriver, bc.getQuery(), bc.getScenario());
+			transformation = OrientDbTransformation.newInstance(
+					orientDriver, bc.getQuery(),
+					bc.getScenario());
 		}
 	}
 
@@ -50,5 +56,5 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, 
 	protected Comparator<?> getMatchComparator() {
 		return new OrientDbMatchComparator();
 	}
-	
+
 }

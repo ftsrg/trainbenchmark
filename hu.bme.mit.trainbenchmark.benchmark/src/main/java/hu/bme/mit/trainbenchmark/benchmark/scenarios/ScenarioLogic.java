@@ -14,12 +14,17 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.phases.MetricsCalculationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.MetricsInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.ModelMetricsCalculationPhase;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?>>
+public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?, ?>>
 		extends BenchmarkScenario {
 
 	protected BenchmarkConfig benchmarkConfig;
+	protected MetricsCalculationPhase initMetrics;
+	protected MetricsCalculationPhase calcMetrics;
 
 	public BenchmarkConfig getBenchmarkConfig() {
 		return benchmarkConfig;
@@ -34,5 +39,16 @@ public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?>>
 		size = benchmarkConfig.getSize();
 		tool = benchmarkConfig.getTool();
 		runIndex = benchmarkConfig.getRunIndex();
+	}
+
+	protected void createMetricsCalculationPhases(final boolean analyze) {
+		initMetrics = new MetricsCalculationPhase();
+		calcMetrics = new MetricsCalculationPhase();
+		initMetrics.setAnalyze(analyze);
+		calcMetrics.setAnalyze(analyze);
+		initMetrics.setPhase(new MetricsInitializationPhase(
+				"InitMetrics"));
+		calcMetrics.setPhase(new ModelMetricsCalculationPhase(
+				"CalcModelMetrics"));
 	}
 }

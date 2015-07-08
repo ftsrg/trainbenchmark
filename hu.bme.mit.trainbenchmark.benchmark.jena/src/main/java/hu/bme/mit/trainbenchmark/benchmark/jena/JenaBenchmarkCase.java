@@ -26,7 +26,8 @@ import java.util.Comparator;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource> {
+public class JenaBenchmarkCase extends
+		AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver> {
 
 	protected JenaDriver jenaDriver;
 
@@ -40,7 +41,9 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 		checker = new JenaChecker(jenaDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = JenaTransformation.newInstance(jenaDriver, bc.getQuery(), bc.getScenario());
+			transformation = JenaTransformation.newInstance(
+					jenaDriver, bc.getQuery(),
+					bc.getScenario());
 		}
 	}
 

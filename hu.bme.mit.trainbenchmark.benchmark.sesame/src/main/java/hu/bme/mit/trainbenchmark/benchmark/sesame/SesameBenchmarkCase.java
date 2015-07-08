@@ -26,7 +26,8 @@ import java.util.Comparator;
 
 import org.openrdf.model.URI;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI> {
+public class SesameBenchmarkCase extends
+		AbstractBenchmarkCase<SesameMatch, URI, SesameDriver> {
 
 	protected SesameDriver sesameDriver;
 	protected RDFBenchmarkConfig rbc;
@@ -39,7 +40,9 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI>
 		checker = new SesameChecker(sesameDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
+			transformation = SesameTransformation.newInstance(
+					sesameDriver, bc.getQuery(),
+					bc.getScenario());
 		}
 	}
 

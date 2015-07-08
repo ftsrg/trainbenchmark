@@ -18,7 +18,7 @@ import eu.mondo.sam.core.DataToken;
 
 public class TrainBenchmarkDataToken implements DataToken {
 
-	private AbstractBenchmarkCase<?, ?> benchmarkCase;
+	private AbstractBenchmarkCase<?, ?, ?> benchmarkCase;
 
 	private BenchmarkConfig config;
 
@@ -30,11 +30,12 @@ public class TrainBenchmarkDataToken implements DataToken {
 	public void destroy() {
 	}
 
-	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
+	public AbstractBenchmarkCase<?, ?, ?> getBenchmarkCase() {
 		return benchmarkCase;
 	}
 
-	public void setBenchmarkCase(AbstractBenchmarkCase<?, ?> benchmarkCase) {
+	public void setBenchmarkCase(
+			AbstractBenchmarkCase<?, ?, ?> benchmarkCase) {
 		this.benchmarkCase = benchmarkCase;
 	}
 

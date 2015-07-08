@@ -28,7 +28,9 @@ import org.apache.log4j.Level;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
+public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
+		extends
+		AbstractBenchmarkCase<M, RailwayElement, EMFIncQueryDriver<BasePatternMatch>> {
 
 	protected EMFIncQueryDriver<M> eiqDriver;
 
@@ -44,15 +46,19 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 	@Override
 	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
 		super.benchmarkInit(bc);
-		
+
 		final EMFIncQueryBenchmarkConfig eiqbc = (EMFIncQueryBenchmarkConfig) bc;
-		driver = eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
-		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(eiqbc, eiqDriver, bc.getQuery());
+		driver = eiqDriver = new EMFIncQueryDriver(
+				getEMFIncQueryBenchmarkConfig());
+		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker
+				.newInstance(eiqbc, eiqDriver, bc.getQuery());
 		checker = eiqChecker;
 		eiqDriver.registerChecker(eiqChecker);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = EMFIncQueryTransformation.newInstance(eiqDriver, bc.getQuery(), bc.getScenario());
+			transformation = EMFIncQueryTransformation.newInstance(
+					eiqDriver, bc.getQuery(),
+					bc.getScenario());
 		}
 	}
 

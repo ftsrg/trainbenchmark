@@ -4,6 +4,7 @@ import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public abstract class Neo4jConcreteMetric extends ConcreteMetric<Neo4jDriver> {
@@ -12,10 +13,21 @@ public abstract class Neo4jConcreteMetric extends ConcreteMetric<Neo4jDriver> {
 
 	protected GlobalGraphOperations graphOperations;
 
+	protected Transaction tx;
+
 	public Neo4jConcreteMetric(Neo4jDriver driver) {
 		super(driver);
 		database = driver.getGraphDb();
 		graphOperations = GlobalGraphOperations.at(database);
+	}
+
+	public void beginTransaction() {
+		tx = database.beginTx();
+	}
+
+	public void finishTransaction() {
+		tx.success();
+		tx.close();
 	}
 
 	public GraphDatabaseService getDatabase() {

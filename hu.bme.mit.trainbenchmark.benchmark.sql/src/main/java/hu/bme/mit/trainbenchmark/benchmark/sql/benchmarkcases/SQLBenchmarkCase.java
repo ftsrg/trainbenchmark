@@ -18,7 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 
 import java.util.Comparator;
 
-public abstract class SQLBenchmarkCase extends AbstractBenchmarkCase<SQLMatch, Long> {
+public abstract class SQLBenchmarkCase extends
+		AbstractBenchmarkCase<SQLMatch, Long, SQLDriver> {
 
 	protected SQLDriver sqlDriver;
 

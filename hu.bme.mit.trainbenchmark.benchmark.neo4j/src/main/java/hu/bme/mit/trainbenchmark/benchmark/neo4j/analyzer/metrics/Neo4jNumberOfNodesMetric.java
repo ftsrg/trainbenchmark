@@ -17,6 +17,7 @@ public class Neo4jNumberOfNodesMetric extends Neo4jConcreteMetric {
 
 	@Override
 	public void calculate() {
+		beginTransaction();
 		ResourceIterable<Node> nodes = graphOperations.getAllNodes();
 		Iterator<Node> iterator = nodes.iterator();
 		numOfNodes = 0;
@@ -24,6 +25,7 @@ public class Neo4jNumberOfNodesMetric extends Neo4jConcreteMetric {
 			iterator.next();
 			numOfNodes++;
 		}
+		finishTransaction();
 	}
 
 	@Override
