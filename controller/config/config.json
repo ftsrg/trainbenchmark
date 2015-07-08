@@ -9,6 +9,7 @@
     "Generator": "",
     "Benchmark": ""
   },
+  "Analyze": true,
   "IterationCount": 3,
   "MinSize": 1,
   "MaxSize": 16,
@@ -22,7 +23,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "sesame"
+    "neo4j"
 
   ],
   "UniqueConfigurations": [

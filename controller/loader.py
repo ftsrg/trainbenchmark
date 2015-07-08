@@ -87,6 +87,7 @@ class Loader():
         common.modif_method = config_json["ModificationMethod"]
         common.modif_constant = config_json["ModificationConstant"]
         common.iter_count = config_json["IterationCount"]
+        common.analyze = config_json["Analyze"]
         # relatively from this script's path
         util.set_working_directory("../")
         path = os.getcwd()  # store the absolute path instead of relative
