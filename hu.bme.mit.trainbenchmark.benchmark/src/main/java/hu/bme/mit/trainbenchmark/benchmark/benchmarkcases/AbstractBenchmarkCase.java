@@ -79,10 +79,15 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	};
 
 	public void calculateModelMetrics(final PhaseResult phaseResult) {
+		TimeMetric timer = new TimeMetric("CalculationTime");
+		timer.startMeasure();
 		analyzer.calculateAll();
+		timer.stopMeasure();
+		phaseResult.addMetrics(timer);
 		for (ConcreteMetric<?> m : analyzer.getMetrics()) {
 			phaseResult.addMetrics((BenchmarkMetric) m);
 		}
+
 	}
 
 	public void benchmarkInitTransformation() {

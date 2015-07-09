@@ -10,26 +10,26 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sql.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
-public class SQLNumberOfNodesMetric extends ConcreteMetric<SQLDriver> {
+public class Neo4jMaximumDegreeDistributionMetric extends
+		Neo4jDegreeDistributionMetric {
 
-	public SQLNumberOfNodesMetric(SQLDriver driver) {
+	protected double numberOfMaximumDegree;
+
+	protected double maximumDegreeDistribution;
+
+	public Neo4jMaximumDegreeDistributionMetric(Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void calculate(final MetricToken token) {
-	}
-
-	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
+	public void calculate(MetricToken token) {
+		calculateDegreeDistribution(token.getMaximumDegree(),
+				token.getNumberOfNodes());
 	}
 
 }

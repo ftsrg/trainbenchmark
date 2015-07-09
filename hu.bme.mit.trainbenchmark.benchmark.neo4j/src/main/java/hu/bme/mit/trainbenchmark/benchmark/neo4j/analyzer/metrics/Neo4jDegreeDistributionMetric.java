@@ -12,36 +12,46 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Iterator;
 
 import org.neo4j.graphdb.Node;
 
-public class Neo4jNumberOfNodesMetric extends Neo4jConcreteMetric {
+public abstract class Neo4jDegreeDistributionMetric extends Neo4jConcreteMetric {
 
-	protected int numberOfNodes;
+	protected double numberOfDegree;
 
-	public Neo4jNumberOfNodesMetric(Neo4jDriver driver) {
+	protected double degreeDistribution;
+
+	public Neo4jDegreeDistributionMetric(Neo4jDriver driver) {
 		super(driver);
 	}
 
-	@Override
-	public void calculate(final MetricToken token) {
+	protected void calculateDegreeDistribution(final double degree,
+			final int numberOfNodes) {
 		beginTransaction();
+		BigDecimal roundedDegree = new BigDecimal(degree);
+		roundedDegree = roundedDegree.setScale(0, RoundingMode.HALF_UP);
+
+		numberOfDegree = 0;
 		Iterator<Node> iterator = getNodesIterator();
-		numberOfNodes = 0;
 		while (iterator.hasNext()) {
-			iterator.next();
-			numberOfNodes++;
+			if (iterator.next().getDegree() == roundedDegree
+					.intValue()) {
+				numberOfDegree++;
+			}
 		}
+		degreeDistribution = numberOfDegree / numberOfNodes;
+
 		finishTransaction();
-		token.setNumberOfNodes(numberOfNodes);
 	}
 
 	@Override
 	public String getValue() {
-		return Integer.toString(numberOfNodes);
+		return Double.toString(degreeDistribution);
 	}
+
 }

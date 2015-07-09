@@ -10,26 +10,43 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sql.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
-public class SQLNumberOfNodesMetric extends ConcreteMetric<SQLDriver> {
+import java.util.Iterator;
 
-	public SQLNumberOfNodesMetric(SQLDriver driver) {
+import org.neo4j.graphdb.Node;
+
+public class Neo4jMaximumDegreeMetric extends Neo4jConcreteMetric {
+
+	protected double maximumDegree;
+
+	public Neo4jMaximumDegreeMetric(Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void calculate(final MetricToken token) {
+	public void calculate(MetricToken token) {
+		maximumDegree = 0;
+
+		beginTransaction();
+		Iterator<Node> iterator = getNodesIterator();
+		while (iterator.hasNext()) {
+			double currentDegree = iterator.next().getDegree();
+			if (currentDegree > maximumDegree) {
+				maximumDegree = currentDegree;
+			}
+		}
+		token.setMaximumDegree(maximumDegree);
+		finishTransaction();
+
 	}
 
 	@Override
 	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return Double.toString(maximumDegree);
 	}
 
 }

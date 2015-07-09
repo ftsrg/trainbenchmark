@@ -10,26 +10,21 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sql.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+public class AverageDegreeDistributionMetric extends Metric {
 
-public class SQLNumberOfNodesMetric extends ConcreteMetric<SQLDriver> {
+	protected static AverageDegreeDistributionMetric instance = null;
 
-	public SQLNumberOfNodesMetric(SQLDriver driver) {
-		super(driver);
+	protected AverageDegreeDistributionMetric(String identifier) {
+		super(identifier);
 	}
 
-	@Override
-	public void calculate(final MetricToken token) {
+	public static Metric instance() {
+		if (instance == null) {
+			instance = new AverageDegreeDistributionMetric(
+					"AvgDegreeDist");
+		}
+		return instance;
 	}
-
-	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
