@@ -13,42 +13,108 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.AverageDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.AverageDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.MaximumDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.MaximumDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.NumberOfEdgesMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.NumberOfNodesMetric;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.Neo4jAverageDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.Neo4jAverageDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.Neo4jMaximumDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.Neo4jMaximumDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.Neo4jNumberOfEdgesMetric;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.Neo4jNumberOfNodesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+
+import java.util.Iterator;
+
+import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.ResourceIterable;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 
-	@Override
-	public void attachConcreteMetrics(Neo4jDriver driver) {
-		NumberOfNodesMetric.instance().attachConcreteMetric(
-				new Neo4jNumberOfNodesMetric(driver));
-		NumberOfEdgesMetric.instance().attachConcreteMetric(
-				new Neo4jNumberOfEdgesMetric(driver));
-		AverageDegreeMetric.instance().attachConcreteMetric(
-				new Neo4jAverageDegreeMetric(driver));
-		MaximumDegreeMetric.instance().attachConcreteMetric(
-				new Neo4jMaximumDegreeMetric(driver));
-		AverageDegreeDistributionMetric
-				.instance()
-				.attachConcreteMetric(
-						new Neo4jAverageDegreeDistributionMetric(
-								driver));
-		MaximumDegreeDistributionMetric
-				.instance()
-				.attachConcreteMetric(
-						new Neo4jMaximumDegreeDistributionMetric(
-								driver));
+	protected GraphDatabaseService database;
 
+	protected GlobalGraphOperations graphOperations;
+
+	protected Transaction tx;
+
+	public Neo4jModelAnalyzer(Neo4jDriver driver) {
+		super(driver);
 	}
+
+	public void beginTransaction() {
+		tx = database.beginTx();
+	}
+
+	public void finishTransaction() {
+		tx.success();
+		tx.close();
+	}
+
+	public GraphDatabaseService getDatabase() {
+		return database;
+	}
+
+	public GlobalGraphOperations getGraphOperations() {
+		return graphOperations;
+	}
+
+	@Override
+	public void calculateMetrics() {
+		database = driver.getGraphDb();
+		graphOperations = GlobalGraphOperations.at(database);
+		numberOfNodes = 0;
+		numberOfEdges = 0;
+		numberOfAverageDegree = 0;
+		numberOfMaximumDegree = 0;
+
+		beginTransaction();
+
+		ResourceIterable<Node> nodes = graphOperations.getAllNodes();
+
+		double currentDegree = 0;
+
+		Iterator<Node> iterator = nodes.iterator();
+
+		Node node;
+		while (iterator.hasNext()) {
+			numberOfNodes++;
+
+			node = iterator.next();
+
+			currentDegree = node.getDegree(Direction.BOTH);
+			changeMaximumDegree(EdgeDirection.BOTH, currentDegree);
+			increaseNumberOfEdges(EdgeDirection.BOTH, currentDegree);
+
+			currentDegree = node.getDegree(Direction.OUTGOING);
+			changeMaximumDegree(EdgeDirection.OUTGOING,
+					currentDegree);
+			increaseNumberOfEdges(EdgeDirection.OUTGOING,
+					currentDegree);
+		}
+
+		calculateNumberOfDegrees(nodes);
+
+		finishTransaction();
+	}
+
+	private void calculateNumberOfDegrees(ResourceIterable<Node> nodes) {
+		double currentDegree;
+		Iterator<Node> iterator;
+
+		calculateAverageDegree(EdgeDirection.BOTH);
+		int roundedDegree = roundAverageDegree(EdgeDirection.BOTH);
+
+		calculateAverageDegree(EdgeDirection.OUTGOING);
+		int roundedOutgoingDegree = roundAverageDegree(EdgeDirection.OUTGOING);
+
+		iterator = nodes.iterator();
+		while (iterator.hasNext()) {
+			currentDegree = iterator.next().getDegree(
+					Direction.BOTH);
+			changeNumberOfDegrees(EdgeDirection.BOTH,
+					currentDegree, roundedDegree);
+
+			currentDegree = iterator.next().getDegree(
+					Direction.OUTGOING);
+			changeNumberOfDegrees(EdgeDirection.OUTGOING,
+					currentDegree, roundedOutgoingDegree);
+		}
+	}
+
 }

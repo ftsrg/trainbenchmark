@@ -12,35 +12,46 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public abstract class Analyzer<D extends Driver<?>> {
 
-	protected ArrayList<ConcreteMetric<?>> metrics;
+	protected D driver;
 
-	protected HashMap<String, String> results;
+	protected ArrayList<Metric> metrics;
+
+	public Analyzer(D driver) {
+		this.driver = driver;
+	}
 
 	public void calculateAll() {
-		MetricToken token = new MetricToken();
-		for (ConcreteMetric<?> m : metrics) {
-			m.calculate(token);
+		calculateMetrics();
+		for (Metric m : metrics) {
+			m.calculate();
 		}
 	}
 
-	public ArrayList<ConcreteMetric<?>> getMetrics() {
+	public abstract void calculateMetrics();
+
+	public abstract void initializeMetrics();
+
+	public ArrayList<Metric> getMetrics() {
 		return metrics;
 	}
 
-	public void setMetrics(ArrayList<ConcreteMetric<?>> metrics) {
+	public void setMetrics(ArrayList<Metric> metrics) {
 		this.metrics = metrics;
 	}
 
-	public abstract void collectConcreteMetrics();
+	public D getDriver() {
+		return driver;
+	}
 
-	public abstract void attachConcreteMetrics(D driver);
+	public void setDriver(D driver) {
+		this.driver = driver;
+	}
+
 }

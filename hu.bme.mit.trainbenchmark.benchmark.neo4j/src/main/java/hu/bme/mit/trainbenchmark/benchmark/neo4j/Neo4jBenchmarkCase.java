@@ -60,7 +60,7 @@ public class Neo4jBenchmarkCase extends
 					bc.getScenario());
 		}
 
-		analyzer = new Neo4jModelAnalyzer();
+		analyzer = new Neo4jModelAnalyzer(neoDriver);
 	}
 
 	@Override

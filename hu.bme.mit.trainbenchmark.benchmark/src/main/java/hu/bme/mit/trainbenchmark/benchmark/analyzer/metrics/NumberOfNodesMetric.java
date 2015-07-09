@@ -12,30 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import eu.mondo.sam.core.metrics.BenchmarkMetric;
+public class NumberOfNodesMetric extends Metric {
 
-public abstract class ConcreteMetric<D extends Driver<?>> extends
-		BenchmarkMetric {
-
-	protected D driver;
-
-	public ConcreteMetric(D driver) {
-		this.driver = driver;
-	}
-
-	public ConcreteMetric(D driver, String identifier) {
+	public NumberOfNodesMetric(String identifier) {
 		super(identifier);
-		this.driver = driver;
 	}
 
-	public abstract void calculate(final MetricToken token);
-
-	public D getDriver() {
-		return driver;
+	@Override
+	public void calculate() {
+		metricValue = analyzer.getNumberOfNodes();
 	}
 
-	public void setDriver(D driver) {
-		this.driver = driver;
-	}
 }

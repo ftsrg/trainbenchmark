@@ -10,20 +10,34 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
-public class NumberOfEdgesMetric extends Metric {
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
+import eu.mondo.sam.core.metrics.BenchmarkMetric;
 
-	protected static NumberOfEdgesMetric instance = null;
+public abstract class Metric extends BenchmarkMetric {
 
-	protected NumberOfEdgesMetric(String identifier) {
+	protected static ModelAnalyzer<?> analyzer;
+
+	protected double metricValue;
+
+	public Metric(String identifier) {
 		super(identifier);
 	}
 
-	public static Metric instance() {
-		if (instance == null) {
-			instance = new NumberOfEdgesMetric("NumOfEdges");
-		}
-		return instance;
+	public abstract void calculate();
+
+	public static ModelAnalyzer<?> getAnalyzer() {
+		return analyzer;
 	}
+
+	public static void setAnalyzer(ModelAnalyzer<?> analyzer) {
+		Metric.analyzer = analyzer;
+	}
+
+	@Override
+	public String getValue() {
+		return Double.toString(metricValue);
+	}
+
 }

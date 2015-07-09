@@ -10,26 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sql.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-public class SQLNumberOfNodesMetric extends ConcreteMetric<SQLDriver> {
+public class MaximumDegreeDistributionMetric extends Metric {
 
-	public SQLNumberOfNodesMetric(SQLDriver driver) {
-		super(driver);
+	private EdgeDirection direction;
+
+	public MaximumDegreeDistributionMetric(String identifier,
+			EdgeDirection direction) {
+		super(identifier);
+		this.direction = direction;
 	}
 
 	@Override
-	public void calculate(final MetricToken token) {
+	public void calculate() {
+		metricValue = analyzer.getNumberOfMaximumDegree(direction)
+				/ analyzer.getNumberOfNodes();
 	}
-
-	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

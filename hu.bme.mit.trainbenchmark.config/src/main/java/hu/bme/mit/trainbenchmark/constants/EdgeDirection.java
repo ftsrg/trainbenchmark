@@ -10,27 +10,8 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sql.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.constants;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
-
-public class SQLNumberOfEdgesMetric extends ConcreteMetric<SQLDriver> {
-
-	public SQLNumberOfEdgesMetric(SQLDriver driver) {
-		super(driver);
-	}
-
-	@Override
-	public void calculate(final MetricToken token) {
-		// return null;
-	}
-
-	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+public enum EdgeDirection {
+	OUTGOING, BOTH
 }

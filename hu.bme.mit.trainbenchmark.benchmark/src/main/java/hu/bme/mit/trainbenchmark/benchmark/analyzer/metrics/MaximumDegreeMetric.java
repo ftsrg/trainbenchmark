@@ -10,21 +10,21 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
-public class AverageDegreeDistributionMetric extends Metric {
+import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-	protected static AverageDegreeDistributionMetric instance = null;
+public class MaximumDegreeMetric extends Metric {
 
-	protected AverageDegreeDistributionMetric(String identifier) {
+	private EdgeDirection direction;
+
+	public MaximumDegreeMetric(String identifier, EdgeDirection direction) {
 		super(identifier);
+		this.direction = direction;
 	}
 
-	public static Metric instance() {
-		if (instance == null) {
-			instance = new AverageDegreeDistributionMetric(
-					"AvgDegreeDist");
-		}
-		return instance;
+	@Override
+	public void calculate() {
+		metricValue = analyzer.getMaximumDegree(direction);
 	}
 }

@@ -12,32 +12,223 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.AverageDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.AverageDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.MaximumDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.MaximumDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.NumberOfEdgesMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts.NumberOfNodesMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeDistributionMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeDistributionMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfEdgesMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfNodesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
-	@Override
-	public void collectConcreteMetrics() {
-		if (metrics == null) {
-			metrics = new ArrayList<ConcreteMetric<?>>();
-		}
-		metrics.add(NumberOfNodesMetric.instance().getConcreteMetric());
-		metrics.add(NumberOfEdgesMetric.instance().getConcreteMetric());
-		metrics.add(AverageDegreeMetric.instance().getConcreteMetric());
-		metrics.add(MaximumDegreeMetric.instance().getConcreteMetric());
-		metrics.add(AverageDegreeDistributionMetric.instance()
-				.getConcreteMetric());
-		metrics.add(MaximumDegreeDistributionMetric.instance()
-				.getConcreteMetric());
+	protected double numberOfNodes;
+
+	protected double numberOfEdges;
+
+	protected double numberOfOutgoingEdges;
+
+	protected double maximumDegree;
+
+	protected double averageDegree;
+
+	protected double numberOfMaximumDegree;
+
+	protected double numberOfAverageDegree;
+
+	protected double maximumOutgoingDegree;
+
+	protected double averageOutgoingDegree;
+
+	protected double numberOfMaximumOutgoingDegree;
+
+	protected double numberOfAverageOutgoingDegree;
+
+	public ModelAnalyzer(D driver) {
+		super(driver);
 	}
 
+	@Override
+	public void initializeMetrics() {
+		if (metrics == null) {
+			metrics = new ArrayList<Metric>();
+		}
+		Metric.setAnalyzer(this);
+		metrics.add(new NumberOfNodesMetric("NumOfNodes"));
+		metrics.add(new NumberOfEdgesMetric("NumOfEdges",
+				EdgeDirection.BOTH));
+		metrics.add(new AverageDegreeMetric("AvgDegree",
+				EdgeDirection.BOTH));
+		metrics.add(new MaximumDegreeMetric("MaxDegree",
+				EdgeDirection.BOTH));
+		metrics.add(new AverageDegreeDistributionMetric(
+				"AvgDegreeDist", EdgeDirection.BOTH));
+		metrics.add(new MaximumDegreeDistributionMetric(
+				"MaxDegreeDist", EdgeDirection.BOTH));
+		metrics.add(new NumberOfEdgesMetric("NumOfOutgoingEdges",
+				EdgeDirection.OUTGOING));
+		metrics.add(new AverageDegreeMetric("AvgOutgoingDegree",
+				EdgeDirection.OUTGOING));
+		metrics.add(new MaximumDegreeMetric("MaxOutgoingDegree",
+				EdgeDirection.OUTGOING));
+		metrics.add(new AverageDegreeDistributionMetric(
+				"AvgOutgoingDegreeDist", EdgeDirection.OUTGOING));
+		metrics.add(new MaximumDegreeDistributionMetric(
+				"MaxOutgoingDegreeDist", EdgeDirection.OUTGOING));
+	}
+
+	protected void calculateAverageDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			averageDegree = numberOfEdges * 2 / numberOfNodes;
+			break;
+		case OUTGOING:
+			averageOutgoingDegree = numberOfOutgoingEdges
+					/ numberOfNodes;
+			break;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	public double getNumberOfNodes() {
+		return numberOfNodes;
+	}
+
+	public double getNumberOfEdges(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			return numberOfEdges;
+		case OUTGOING:
+			return numberOfOutgoingEdges;
+		default:
+			throw new UnsupportedOperationException();
+		}
+
+	}
+
+	protected void increaseNumberOfEdges(final EdgeDirection direction,
+			final double value) {
+		switch (direction) {
+		case BOTH:
+			numberOfEdges += value;
+			break;
+		case OUTGOING:
+			numberOfOutgoingEdges += value;
+			break;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	public double getMaximumDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			return maximumDegree;
+		case OUTGOING:
+			return maximumOutgoingDegree;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	protected void changeMaximumDegree(final EdgeDirection direction,
+			final double degree) {
+		switch (direction) {
+		case BOTH:
+			maximumDegree = degree > maximumDegree ? degree
+					: maximumDegree;
+			break;
+		case OUTGOING:
+			maximumOutgoingDegree = degree > maximumOutgoingDegree ? degree
+					: maximumOutgoingDegree;
+			break;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	protected void changeNumberOfDegrees(final EdgeDirection direction,
+			final double value, final int roundedAverage) {
+		switch (direction) {
+		case BOTH:
+			if (value == roundedAverage) {
+				numberOfAverageDegree++;
+			} else if (value == maximumDegree) {
+				numberOfMaximumDegree++;
+			}
+			break;
+		case OUTGOING:
+			if (value == roundedAverage) {
+				numberOfAverageOutgoingDegree++;
+			} else if (value == maximumOutgoingDegree) {
+				numberOfMaximumOutgoingDegree++;
+			}
+			break;
+		default:
+			throw new UnsupportedOperationException();
+		}
+
+	}
+
+	public double getAverageDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			return averageDegree;
+		case OUTGOING:
+			return averageOutgoingDegree;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	protected int roundAverageDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH: {
+			BigDecimal roundedDegree = new BigDecimal(
+					getAverageDegree(EdgeDirection.BOTH));
+			roundedDegree = roundedDegree.setScale(0,
+					RoundingMode.HALF_UP);
+			return roundedDegree.intValue();
+		}
+
+		case OUTGOING: {
+			BigDecimal roundedOutgoingDegree = new BigDecimal(
+					getAverageDegree(EdgeDirection.OUTGOING));
+			roundedOutgoingDegree = roundedOutgoingDegree.setScale(
+					0, RoundingMode.HALF_UP);
+			return roundedOutgoingDegree.intValue();
+		}
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	public double getNumberOfMaximumDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			return numberOfMaximumDegree;
+		case OUTGOING:
+			return numberOfMaximumOutgoingDegree;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	public double getNumberOfAverageDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			return numberOfAverageDegree;
+		case OUTGOING:
+			return numberOfAverageOutgoingDegree;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
 }

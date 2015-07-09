@@ -12,7 +12,7 @@
   "Analyze": true,
   "IterationCount": 3,
   "MinSize": 1,
-  "MaxSize": 16,
+  "MaxSize": 1,
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
