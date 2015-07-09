@@ -51,10 +51,10 @@ public abstract class Generator {
 	protected GeneratorConfig generatorConfig;
 
 	// dynamic configuration
-	protected int maxSegments;
+	protected int maxSegments = 5;
 	protected int maxRoutes;
-	protected int maxSwitchPositions;
-	protected int maxSensors;
+	protected int maxSwitchPositions = 20;
+	protected int maxSensors = 10;
 
 	protected int posLengthErrorPercent;
 	protected int switchSensorErrorPercent;
@@ -84,12 +84,12 @@ public abstract class Generator {
 	protected abstract String syntax();
 
 	private void initializeConstants() {
+		maxRoutes = 5 * generatorConfig.getSize();
 		switch (generatorConfig.getScenario()) {
+		case BATCH:
+			// set all error percents to 0 
+			break;
 		case INJECT:
-			maxSegments = 5;
-			maxRoutes = 5 * generatorConfig.getSize();
-			maxSwitchPositions = 20;
-			maxSensors = 10;
 			connectedSegmentsErrorPercent = 5;
 			posLengthErrorPercent = 2;
 			routeSensorErrorPercent = 4;
@@ -98,10 +98,6 @@ public abstract class Generator {
 			switchSetErrorPercent = 8;
 			break;
 		case REPAIR:
-			maxSegments = 5;
-			maxRoutes = 5 * generatorConfig.getSize();
-			maxSwitchPositions = 20;
-			maxSensors = 10;
 			connectedSegmentsErrorPercent = 5;
 			posLengthErrorPercent = 10;
 			routeSensorErrorPercent = 10;

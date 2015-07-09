@@ -29,32 +29,32 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 
 	@Test
 	public void connectedSegments() throws ParseException, IOException {
-		testQuery(CONNECTEDSEGMENTS, BATCH, 4);
+		testQuery(CONNECTEDSEGMENTS, BATCH, 0);
 	}
 
 	@Test
 	public void posLength() throws ParseException, IOException {
-		testQuery(POSLENGTH, BATCH, 92);
+		testQuery(POSLENGTH, BATCH, 0);
 	}
 
 	@Test
 	public void routeSensor() throws ParseException, IOException {
-		testQuery(ROUTESENSOR, BATCH, 7);
+		testQuery(ROUTESENSOR, BATCH, 0);
 	}
 
 	@Test
 	public void semaphoreNeighbor() throws ParseException, IOException {
-		testQuery(SEMAPHORENEIGHBOR, BATCH, 1);
+		testQuery(SEMAPHORENEIGHBOR, BATCH, 0);
 	}
 
 	@Test
 	public void switchSensor() throws ParseException, IOException {
-		testQuery(SWITCHSENSOR, BATCH, 3);
+		testQuery(SWITCHSENSOR, BATCH, 0);
 	}
 
 	@Test
 	public void switchSet() throws ParseException, IOException {
-		testQuery(SWITCHSET, BATCH, 2);
+		testQuery(SWITCHSET, BATCH, 0);
 	}
 
 }
