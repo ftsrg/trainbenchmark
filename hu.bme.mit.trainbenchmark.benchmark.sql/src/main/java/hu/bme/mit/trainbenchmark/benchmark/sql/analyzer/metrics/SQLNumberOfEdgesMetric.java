@@ -1,6 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.analyzer.metrics;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 
 public class SQLNumberOfEdgesMetric extends ConcreteMetric<SQLDriver> {
@@ -10,7 +11,7 @@ public class SQLNumberOfEdgesMetric extends ConcreteMetric<SQLDriver> {
 	}
 
 	@Override
-	public void calculate() {
+	public void calculate(final MetricToken token) {
 		// return null;
 	}
 

@@ -8,11 +8,13 @@ import java.util.Iterator;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterable;
 
-public class Neo4jNumberOfNodesMetric extends Neo4jConcreteMetric {
+public class Neo4jAverageDegreeMetric extends Neo4jConcreteMetric {
 
-	protected int numberOfNodes;
+	protected double averageDegree;
 
-	public Neo4jNumberOfNodesMetric(Neo4jDriver driver) {
+	protected double sumDegree;
+
+	public Neo4jAverageDegreeMetric(Neo4jDriver driver) {
 		super(driver);
 	}
 
@@ -21,17 +23,17 @@ public class Neo4jNumberOfNodesMetric extends Neo4jConcreteMetric {
 		beginTransaction();
 		ResourceIterable<Node> nodes = graphOperations.getAllNodes();
 		Iterator<Node> iterator = nodes.iterator();
-		numberOfNodes = 0;
 		while (iterator.hasNext()) {
-			iterator.next();
-			numberOfNodes++;
+			sumDegree += iterator.next().getDegree();
 		}
+		averageDegree = sumDegree / token.getNumberOfNodes();
 		finishTransaction();
-		token.setNumberOfNodes(numberOfNodes);
+
 	}
 
 	@Override
 	public String getValue() {
-		return Integer.toString(numberOfNodes);
+		return Double.toString(averageDegree);
 	}
+
 }

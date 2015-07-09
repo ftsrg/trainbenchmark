@@ -1,4 +1,6 @@
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts;
+
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.ConcreteMetric;
 
 public abstract class Metric {
 

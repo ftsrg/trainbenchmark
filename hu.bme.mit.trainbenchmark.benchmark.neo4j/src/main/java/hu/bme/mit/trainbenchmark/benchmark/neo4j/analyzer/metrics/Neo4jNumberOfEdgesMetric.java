@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics;
 
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MetricToken;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import java.util.Iterator;
@@ -15,7 +16,7 @@ public class Neo4jNumberOfEdgesMetric extends Neo4jConcreteMetric {
 	}
 
 	@Override
-	public void calculate() {
+	public void calculate(final MetricToken token) {
 		beginTransaction();
 		Iterable<Relationship> relationships = graphOperations
 				.getAllRelationships();
@@ -26,6 +27,7 @@ public class Neo4jNumberOfEdgesMetric extends Neo4jConcreteMetric {
 			numberOfEdges++;
 		}
 		finishTransaction();
+		token.setNumberOfEdges(numberOfEdges);
 	}
 
 	@Override

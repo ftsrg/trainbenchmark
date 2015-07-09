@@ -17,7 +17,7 @@ public abstract class ConcreteMetric<D extends Driver<?>> extends
 		this.driver = driver;
 	}
 
-	public abstract void calculate();
+	public abstract void calculate(final MetricToken token);
 
 	public D getDriver() {
 		return driver;

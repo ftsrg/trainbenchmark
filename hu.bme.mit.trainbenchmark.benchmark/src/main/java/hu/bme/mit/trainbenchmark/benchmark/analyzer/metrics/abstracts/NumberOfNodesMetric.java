@@ -1,4 +1,5 @@
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.abstracts;
+
 
 public class NumberOfNodesMetric extends Metric {
 

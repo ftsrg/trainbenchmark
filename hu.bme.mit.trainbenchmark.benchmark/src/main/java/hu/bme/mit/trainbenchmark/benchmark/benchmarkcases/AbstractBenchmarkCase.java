@@ -74,8 +74,8 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	public void benchmarkInitAnalyzer() {
-		analyzer.initializeMetrics((D) driver);
-		analyzer.attachMetrics();
+		analyzer.attachConcreteMetrics((D) driver);
+		analyzer.collectConcreteMetrics();
 	};
 
 	public void calculateModelMetrics(final PhaseResult phaseResult) {
