@@ -29,32 +29,32 @@ public abstract class RepairTest extends TrainBenchmarkTest {
 
 	@Test
 	public void connectedSegmentsRepair() throws ParseException, IOException {
-		testQuery(CONNECTEDSEGMENTS, REPAIR, 3);
+		testTransformation(CONNECTEDSEGMENTS, REPAIR, 4, 3);
 	}
 
 	@Test
 	public void posLengthRepair() throws ParseException, IOException {
-		testQuery(POSLENGTH, REPAIR, 91);
+		testTransformation(POSLENGTH, REPAIR, 92, 91);
 	}
 
 	@Test
 	public void routeSensorRepair() throws ParseException, IOException {
-		testQuery(ROUTESENSOR, REPAIR, 6);
+		testTransformation(ROUTESENSOR, REPAIR, 7, 6);
 	}
 
 	@Test
 	public void semaphoreNeighborRepair() throws ParseException, IOException {
-		testQuery(SEMAPHORENEIGHBOR, REPAIR, 0);
+		testTransformation(SEMAPHORENEIGHBOR, REPAIR, 1, 0);
 	}
 
 	@Test
 	public void switchSensorRepair() throws ParseException, IOException {
-		testQuery(SWITCHSENSOR, REPAIR, 2);
+		testTransformation(SWITCHSENSOR, REPAIR, 3, 2);
 	}
 
 	@Test
 	public void switchSetRepair() throws ParseException, IOException {
-		testQuery(SWITCHSET, REPAIR, 1);
+		testTransformation(SWITCHSET, REPAIR, 2, 1);
 	}
 
 }

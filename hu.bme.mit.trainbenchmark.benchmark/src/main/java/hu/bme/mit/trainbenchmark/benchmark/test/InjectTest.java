@@ -29,32 +29,32 @@ public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
 	public void connectedSegmentsInject() throws ParseException, IOException {
-		testQuery(CONNECTEDSEGMENTS, INJECT, 5);
+		testTransformation(CONNECTEDSEGMENTS, INJECT, 4, 5);
 	}
 
 	@Test
 	public void posLengthInject() throws ParseException, IOException {
-		testQuery(POSLENGTH, INJECT, 22);
+		testTransformation(POSLENGTH, INJECT, 21, 22);
 	}
 
 	@Test
 	public void routeSensorInject() throws ParseException, IOException {
-		testQuery(ROUTESENSOR, INJECT, 2);
+		testTransformation(ROUTESENSOR, INJECT, 2, 2);
 	}
 
 	@Test
 	public void semaphoreNeighborInject() throws ParseException, IOException {
-		testQuery(SEMAPHORENEIGHBOR, INJECT, 2);
+		testTransformation(SEMAPHORENEIGHBOR, INJECT, 1, 2);
 	}
 
 	@Test
 	public void switchSensorInject() throws ParseException, IOException {
-		testQuery(SWITCHSENSOR, INJECT, 1);
+		testTransformation(SWITCHSENSOR, INJECT, 0, 1);
 	}
 
 	@Test
 	public void switchSetInject() throws ParseException, IOException {
-		testQuery(SWITCHSET, INJECT, 1);
+		testTransformation(SWITCHSET, INJECT, 1, 1);
 	}
 
 }

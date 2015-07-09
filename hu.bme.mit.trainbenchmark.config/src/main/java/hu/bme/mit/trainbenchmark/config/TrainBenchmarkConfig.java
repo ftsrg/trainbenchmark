@@ -110,7 +110,7 @@ public abstract class TrainBenchmarkConfig {
 	}
 
 	public String getModelFileNameWithoutExtension() {
-		final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase();
+		final String variant = scenario.toString().toLowerCase();
 		final String filename = "railway-" + variant + "-" + size;
 		return filename;
 	}

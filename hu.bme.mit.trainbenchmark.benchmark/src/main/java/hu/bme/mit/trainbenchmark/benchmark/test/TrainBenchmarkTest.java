@@ -18,10 +18,14 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.cli.ParseException;
 import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
+
+import com.google.common.collect.ImmutableList;
 
 import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.JsonSerializer;
@@ -41,23 +45,32 @@ public abstract class TrainBenchmarkTest {
 
 	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws ParseException, IOException {
 		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
-		runQuery(bl, expectedResultSize);
+		runQuery(bl, ImmutableList.of(expectedResultSize));
 	}
 
-	private void runQuery(final AbstractBenchmarkLogic bl, final long expectedResultSize) throws IOException {
+	protected void testTransformation(final Query query, final Scenario scenario, final int expectedResultSize1, final int expectedResultSize2) throws ParseException, IOException {
+		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
+		runQuery(bl, ImmutableList.of(expectedResultSize1, expectedResultSize2));
+	}
+
+	private void runQuery(final AbstractBenchmarkLogic bl, final List<Integer> expectedResultSizes) throws IOException {
 		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult br = bl.runBenchmark();
-		long lastResultSize = 0;
+		
+		final List<Integer> resultSizes = new ArrayList<>();
 		for (final PhaseResult pr : br.getPhaseResults()) {
 			final String name = pr.getPhaseName();
 			if ("Check".equals(name) || "Recheck".equals(name)) {
 				for (final MetricResult m : pr.getMetrics()) {
 					if ("Matches".equals(m.getName())) {
-						lastResultSize = Long.parseLong(m.getValue());
+						final Integer resultSize = Integer.parseInt(m.getValue());
+						resultSizes.add(resultSize);
 					}
 				}
 			}
 		}
-		collector.checkThat(lastResultSize, equalTo(expectedResultSize));
+		for (int i = 0; i < expectedResultSizes.size(); i++) {
+			collector.checkThat(resultSizes.get(i), equalTo(expectedResultSizes.get(i)));
+		}		
 	}
 }
