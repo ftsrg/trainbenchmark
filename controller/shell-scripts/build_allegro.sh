@@ -17,3 +17,5 @@ mvn install:install-file -Dfile=../../hu.bme.mit.trainbenchmark.benchmark.allegr
 mvn install:install-file -Dfile=../../hu.bme.mit.trainbenchmark.benchmark.allegro/src/main/resources/json.jar -DgroupId=org.json \
                      -DartifactId=json -Dversion=1.0.0 \
                      -Dpackaging=jar
+mvn clean install -f ../../pom.xml -P sesame -DskipTests
+
