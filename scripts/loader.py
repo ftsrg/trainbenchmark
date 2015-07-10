@@ -20,19 +20,19 @@ from jsonschema.exceptions import ValidationError
 
 class Loader():
     def __init__(self):
-        self.config_path = "config/config.json"
-        self.schema_path = "config/config_schema.json"
-        self.tools_path = "config/tools_source.json"
+        self.config_path = "../config/config.json"
+        self.schema_path = "../config/config_schema.json"
+        self.tools_path = "../config/tools_source.json"
 
     def load(self):
         """
-        Loads a config.json file and run a validation process. 
-        If the configurations seem valid, returns a list with 
-        Configuration objects. 
+        Loads a config.json file and run a validation process.
+        If the configurations seem valid, returns a list with
+        Configuration objects.
 
         """
         util.set_working_directory()
-        # paths relatively to this script's location        
+        # paths relatively to this script's location
         schema_json = util.json_decode(self.schema_path)
         if schema_json is None:
             msg = "Problem has occurred during the decoding procedure" + \
@@ -45,7 +45,7 @@ class Loader():
                   " with the following file: " + self.tools_path + "."
             logging.error(msg)
             raise IOError(msg)
-    
+
         try:
             with open(self.config_path, mode="r") as file:
                 config_string = file.read()
@@ -67,18 +67,18 @@ class Loader():
             print(k_error)
             print("Modify: " + (os.path.split(self.config_path))[1])
             raise ValidationError(msg)
-    
+
         valid = validation.is_valid_json(config_json, schema_json)
         if not valid:
             msg = "Validation failed of " + \
                   (os.path.split(self.config_path))[1] + " file."
             logging.error(msg)
             raise ValidationError(msg)
-        
+
         configurations = list()
-        unique_tools = set() 
-        
-        # common parameters    
+        unique_tools = set()
+
+        # common parameters
         common = CommonParameters()
         common.generator_args = config_json["Arguments"]["Generator"]
         common.maven_xmx = config_json["MAVEN_OPTS"]["Xmx"]
@@ -92,7 +92,7 @@ class Loader():
         path = os.getcwd()  # store the absolute path instead of relative
         common.path = path
         util.set_working_directory()
-        
+
         # tools with unique configuration
         if len(config_json["UniqueConfigurations"]) > 0:
             for unique in config_json["UniqueConfigurations"]:
@@ -114,7 +114,7 @@ class Loader():
                     logging.error("Problem with min and maxsize." +
                                   "Too short the range between them.")
                     return None
-                
+
                 if "Scenarios" in unique.keys():
                     scenarios = unique["Scenarios"]
                 else:
@@ -138,7 +138,7 @@ class Loader():
                 config.common = common
                 config.format = tools_json[unique["Tool"]]["format"]
                 configurations.append(config)
-        
+
         # tools with the default configuration
         for tool in config_json["Tools"]:
             if tool not in unique_tools:
@@ -150,7 +150,7 @@ class Loader():
                     return None
                 scenarios = config_json["Scenarios"]
                 queries = config_json["Queries"]
-                
+
                 config = Configuration()
                 config.tool = tool
                 config.queries = queries
@@ -159,7 +159,7 @@ class Loader():
                 config.common = common
                 config.format = tools_json[tool]["format"]
                 config.benchmark_args = config_json["Arguments"]["Benchmark"]
-                
+
                 configurations.append(config)
         for config in configurations:
             config.add_dependency(config.tool)
@@ -171,9 +171,9 @@ class Loader():
         if a dependency would not exist.
         """
         # path relatively to this script's location
-        current_directory = os.getcwd() 
+        current_directory = os.getcwd()
         util.set_working_directory()
-        dependencies_path = "config/dependencies.json"
+        dependencies_path = "../config/dependencies.json"
         dependencies_json = util.json_decode(dependencies_path)
         if dependencies_json is None:
             logging.error("Problem has occurred during the decoding procedure" +
@@ -186,9 +186,9 @@ class Loader():
         else:
             logging.info("A dependency exists: " + tool + "->" +
                          dependencies_json[tool]["name"] + ".")
-            
+
             return dependencies_json[tool]["name"]
-        
+
 
 def checking_hook(pairs):
     result = dict()
