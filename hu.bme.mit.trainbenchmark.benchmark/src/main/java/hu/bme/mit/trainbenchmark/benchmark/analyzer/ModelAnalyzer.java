@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.HigherDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
@@ -50,6 +51,10 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	protected double numberOfAverageOutgoingDegree;
 
+	protected double numberOfHigherDegree;
+
+	protected double numberOfHigherOutgoingDegree;
+
 	public ModelAnalyzer(D driver) {
 		super(driver);
 	}
@@ -81,6 +86,10 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 				"AvgOutgoingDegreeDist", EdgeDirection.OUTGOING));
 		metrics.add(new MaximumDegreeDistributionMetric(
 				"MaxOutgoingDegreeDist", EdgeDirection.OUTGOING));
+		metrics.add(new HigherDegreeDistributionMetric("HigherDegree",
+				EdgeDirection.BOTH));
+		metrics.add(new HigherDegreeDistributionMetric(
+				"HigherOutgoingDegree", EdgeDirection.OUTGOING));
 	}
 
 	protected void calculateAverageDegree(final EdgeDirection direction) {
@@ -163,12 +172,20 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 			} else if (value == maximumDegree) {
 				numberOfMaximumDegree++;
 			}
+
+			if (value >= roundedAverage) {
+				numberOfHigherDegree++;
+			}
 			break;
 		case OUTGOING:
 			if (value == roundedAverage) {
 				numberOfAverageOutgoingDegree++;
 			} else if (value == maximumOutgoingDegree) {
 				numberOfMaximumOutgoingDegree++;
+			}
+
+			if (value >= roundedAverage) {
+				numberOfHigherOutgoingDegree++;
 			}
 			break;
 		default:
@@ -231,4 +248,16 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 			throw new UnsupportedOperationException();
 		}
 	}
+
+	public double getNumberOfHigherDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			return numberOfHigherDegree;
+		case OUTGOING:
+			return numberOfHigherOutgoingDegree;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
 }
