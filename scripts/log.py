@@ -18,10 +18,10 @@ def init_log():
     util.set_working_directory()
     os.makedirs("log/dist", exist_ok=True)
     os.makedirs("log/all", exist_ok=True)
-    
+
     if not os.path.exists("log/all/logs.txt"):
         open("log/all/logs.txt", mode="a").close()
-    
+
     # unique logging file
     log_file = "log/dist/" + time.strftime("%Y-%m-%d %H:%M:%S") + ".txt"
     log_file = log_file.replace(" ", "_")
@@ -30,11 +30,11 @@ def init_log():
     logging.basicConfig(filename=log_file, format="[%(levelname)s] " +
                         "Module:%(module)s, Message:%(message)s",
                         level=logging.INFO)
-    
+
     console_handler = logging.StreamHandler()
     # common logging file
     file_handler = logging.FileHandler("log/all/logs.txt")
-    
+
     file_handler.setLevel(logging.INFO)
     console_handler.setLevel(logging.ERROR)
     c_formatter = logging.Formatter("[%(levelname)s] Module:%(module)s" +
