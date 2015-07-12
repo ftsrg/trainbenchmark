@@ -65,12 +65,14 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException, OpenRDFException {
+	public void read(final String modelPathWithoutExtension) throws RepositoryException,
+			RDFParseException, IOException, OpenRDFException {
 		repository = new SailRepository(new MemoryStore());
 		load(modelPathWithoutExtension);
 	}
 
-	protected void load(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException {
+	protected void load(final String modelPathWithoutExtension) throws RepositoryException,
+			RDFParseException, IOException {
 		final File modelFile = new File(modelPathWithoutExtension + getExtension());
 
 		repository.initialize();
@@ -79,7 +81,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<SesameMatch> runQuery(final Query query, final String queryDefinition) throws RepositoryException, MalformedQueryException,
+	public List<SesameMatch> runQuery(final Query query, final String queryDefinition)
+			throws RepositoryException, MalformedQueryException,
 			QueryEvaluationException {
 		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
@@ -119,7 +122,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		final URI typeURI = vf.createURI(BASE_PREFIX + type);
 		final List<URI> vertices = new ArrayList<>();
 
-		final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
+		final RepositoryResult<Statement> statements = connection.getStatements(null,
+				RDF.TYPE, typeURI, true);
 		while (statements.hasNext()) {
 			final Statement s = statements.next();
 			final URI uri = (URI) s.getSubject();
@@ -131,18 +135,18 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	// delete
 
-	public void deleteOneOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
-			throws RepositoryException {
+	public void deleteOneOutgoingEdge(final Collection<URI> vertices, final String vertexType,
+			final String edgeType) throws RepositoryException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
-	public void deleteSingleOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
-			throws RepositoryException {
+	public void deleteSingleOutgoingEdge(final Collection<URI> vertices,
+			final String vertexType, final String edgeType) throws RepositoryException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
-	protected void deleteEdges(final Collection<URI> vertices, final String edgeType, final boolean outgoing, final boolean all)
-			throws RepositoryException {
+	protected void deleteEdges(final Collection<URI> vertices, final String edgeType,
+			final boolean outgoing, final boolean all) throws RepositoryException {
 		final List<Statement> itemsToRemove = new ArrayList<>();
 
 		final URI edge = vf.createURI(BASE_PREFIX + edgeType);
@@ -150,9 +154,11 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		for (final URI vertex : vertices) {
 			RepositoryResult<Statement> statementsToRemove;
 			if (outgoing) {
-				statementsToRemove = connection.getStatements(vertex, edge, null, true);
+				statementsToRemove = connection.getStatements(vertex, edge, null,
+						true);
 			} else {
-				statementsToRemove = connection.getStatements(null, edge, vertex, true);
+				statementsToRemove = connection.getStatements(null, edge, vertex,
+						true);
 			}
 
 			while (statementsToRemove.hasNext()) {
@@ -174,8 +180,10 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	// utility
 
 	@Override
-	protected boolean ask(final String askQuery) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-		final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
+	protected boolean ask(final String askQuery) throws RepositoryException,
+			MalformedQueryException, QueryEvaluationException {
+		final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL,
+				askQuery);
 		final boolean result = q.evaluate();
 		return result;
 	}

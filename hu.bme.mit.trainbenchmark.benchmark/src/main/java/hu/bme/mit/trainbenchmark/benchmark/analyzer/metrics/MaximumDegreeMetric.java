@@ -16,11 +16,8 @@ import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class MaximumDegreeMetric extends Metric {
 
-	private EdgeDirection direction;
-
 	public MaximumDegreeMetric(String identifier, EdgeDirection direction) {
-		super(identifier);
-		this.direction = direction;
+		super(identifier, direction);
 	}
 
 	@Override

@@ -14,8 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DensityMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.HigherDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfEdgesMetric;
@@ -33,7 +33,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	protected double numberOfEdges;
 
-	protected double numberOfOutgoingEdges;
+	protected double numberOfNodesWithOutgoingDegrees;
 
 	protected double maximumDegree;
 
@@ -66,74 +66,47 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		}
 		Metric.setAnalyzer(this);
 		metrics.add(new NumberOfNodesMetric("NumOfNodes"));
-		metrics.add(new NumberOfEdgesMetric("NumOfEdges",
-				EdgeDirection.BOTH));
-		metrics.add(new AverageDegreeMetric("AvgDegree",
-				EdgeDirection.BOTH));
-		metrics.add(new MaximumDegreeMetric("MaxDegree",
-				EdgeDirection.BOTH));
-		metrics.add(new AverageDegreeDistributionMetric(
-				"AvgDegreeDist", EdgeDirection.BOTH));
-		metrics.add(new MaximumDegreeDistributionMetric(
-				"MaxDegreeDist", EdgeDirection.BOTH));
-		metrics.add(new NumberOfEdgesMetric("NumOfOutgoingEdges",
+		metrics.add(new NumberOfEdgesMetric("NumOfEdges"));
+		metrics.add(new AverageDegreeMetric("AvgDegree", EdgeDirection.BOTH));
+		metrics.add(new MaximumDegreeMetric("MaxDegree", EdgeDirection.BOTH));
+		metrics.add(new AverageDegreeDistributionMetric("AvgDegreeDist", EdgeDirection.BOTH));
+
+		metrics.add(new AverageDegreeMetric("AvgOutgoingDegree", EdgeDirection.OUTGOING));
+		metrics.add(new MaximumDegreeMetric("MaxOutgoingDegree", EdgeDirection.OUTGOING));
+		metrics.add(new AverageDegreeDistributionMetric("AvgOutgoingDegreeDist",
 				EdgeDirection.OUTGOING));
-		metrics.add(new AverageDegreeMetric("AvgOutgoingDegree",
+
+		metrics.add(new HigherDegreeDistributionMetric("HigherDegree", EdgeDirection.BOTH));
+		metrics.add(new HigherDegreeDistributionMetric("HigherOutgoingDegree",
 				EdgeDirection.OUTGOING));
-		metrics.add(new MaximumDegreeMetric("MaxOutgoingDegree",
-				EdgeDirection.OUTGOING));
-		metrics.add(new AverageDegreeDistributionMetric(
-				"AvgOutgoingDegreeDist", EdgeDirection.OUTGOING));
-		metrics.add(new MaximumDegreeDistributionMetric(
-				"MaxOutgoingDegreeDist", EdgeDirection.OUTGOING));
-		metrics.add(new HigherDegreeDistributionMetric("HigherDegree",
-				EdgeDirection.BOTH));
-		metrics.add(new HigherDegreeDistributionMetric(
-				"HigherOutgoingDegree", EdgeDirection.OUTGOING));
+
+		metrics.add(new DensityMetric("Density", EdgeDirection.BOTH));
+		metrics.add(new DensityMetric("DensityWithOutgoing", EdgeDirection.OUTGOING));
 	}
 
 	protected void calculateAverageDegree(final EdgeDirection direction) {
 		switch (direction) {
 		case BOTH:
-			averageDegree = numberOfEdges * 2 / numberOfNodes;
+			averageDegree = numberOfEdges / numberOfNodes;
 			break;
 		case OUTGOING:
-			averageOutgoingDegree = numberOfOutgoingEdges
-					/ numberOfNodes;
+			averageOutgoingDegree = numberOfEdges / numberOfNodesWithOutgoingDegrees;
 			break;
 		default:
 			throw new UnsupportedOperationException();
 		}
+	}
+
+	public double getNumberOfNodes(final boolean withOutgoingDegree) {
+		return withOutgoingDegree ? numberOfNodesWithOutgoingDegrees : numberOfNodes;
 	}
 
 	public double getNumberOfNodes() {
 		return numberOfNodes;
 	}
 
-	public double getNumberOfEdges(final EdgeDirection direction) {
-		switch (direction) {
-		case BOTH:
-			return numberOfEdges;
-		case OUTGOING:
-			return numberOfOutgoingEdges;
-		default:
-			throw new UnsupportedOperationException();
-		}
-
-	}
-
-	protected void increaseNumberOfEdges(final EdgeDirection direction,
-			final double value) {
-		switch (direction) {
-		case BOTH:
-			numberOfEdges += value;
-			break;
-		case OUTGOING:
-			numberOfOutgoingEdges += value;
-			break;
-		default:
-			throw new UnsupportedOperationException();
-		}
+	public double getNumberOfEdges() {
+		return numberOfEdges;
 	}
 
 	public double getMaximumDegree(final EdgeDirection direction) {
@@ -147,12 +120,10 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		}
 	}
 
-	protected void changeMaximumDegree(final EdgeDirection direction,
-			final double degree) {
+	protected void changeMaximumDegree(final EdgeDirection direction, final double degree) {
 		switch (direction) {
 		case BOTH:
-			maximumDegree = degree > maximumDegree ? degree
-					: maximumDegree;
+			maximumDegree = degree > maximumDegree ? degree : maximumDegree;
 			break;
 		case OUTGOING:
 			maximumOutgoingDegree = degree > maximumOutgoingDegree ? degree
@@ -163,8 +134,8 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		}
 	}
 
-	protected void changeNumberOfDegrees(final EdgeDirection direction,
-			final double value, final int roundedAverage) {
+	protected void changeNumberOfDegrees(final EdgeDirection direction, final double value,
+			final int roundedAverage) {
 		switch (direction) {
 		case BOTH:
 			if (value == roundedAverage) {
@@ -206,25 +177,9 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 	}
 
 	protected int roundAverageDegree(final EdgeDirection direction) {
-		switch (direction) {
-		case BOTH: {
-			BigDecimal roundedDegree = new BigDecimal(
-					getAverageDegree(EdgeDirection.BOTH));
-			roundedDegree = roundedDegree.setScale(0,
-					RoundingMode.HALF_UP);
-			return roundedDegree.intValue();
-		}
-
-		case OUTGOING: {
-			BigDecimal roundedOutgoingDegree = new BigDecimal(
-					getAverageDegree(EdgeDirection.OUTGOING));
-			roundedOutgoingDegree = roundedOutgoingDegree.setScale(
-					0, RoundingMode.HALF_UP);
-			return roundedOutgoingDegree.intValue();
-		}
-		default:
-			throw new UnsupportedOperationException();
-		}
+		BigDecimal roundedDegree = new BigDecimal(getAverageDegree(direction));
+		roundedDegree = roundedDegree.setScale(0, RoundingMode.HALF_UP);
+		return roundedDegree.intValue();
 	}
 
 	public double getNumberOfMaximumDegree(final EdgeDirection direction) {

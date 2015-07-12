@@ -59,16 +59,15 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 		database = driver.getGraphDb();
 		graphOperations = GlobalGraphOperations.at(database);
 		numberOfNodes = 0;
+		numberOfNodesWithOutgoingDegrees = 0;
 		numberOfEdges = 0;
 		numberOfAverageDegree = 0;
 		numberOfMaximumDegree = 0;
+		double currentDegree = 0;
 
 		beginTransaction();
 
 		ResourceIterable<Node> nodes = graphOperations.getAllNodes();
-
-		double currentDegree = 0;
-
 		Iterator<Node> iterator = nodes.iterator();
 
 		Node node;
@@ -79,13 +78,13 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 
 			currentDegree = node.getDegree(Direction.BOTH);
 			changeMaximumDegree(EdgeDirection.BOTH, currentDegree);
-			increaseNumberOfEdges(EdgeDirection.BOTH, currentDegree);
 
 			currentDegree = node.getDegree(Direction.OUTGOING);
-			changeMaximumDegree(EdgeDirection.OUTGOING,
-					currentDegree);
-			increaseNumberOfEdges(EdgeDirection.OUTGOING,
-					currentDegree);
+			if (currentDegree > 0) {
+				numberOfNodesWithOutgoingDegrees++;
+			}
+			changeMaximumDegree(EdgeDirection.OUTGOING, currentDegree);
+			numberOfEdges += currentDegree;
 		}
 
 		calculateNumberOfDegrees(nodes);
@@ -96,6 +95,7 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 	private void calculateNumberOfDegrees(ResourceIterable<Node> nodes) {
 		double currentDegree;
 		Iterator<Node> iterator;
+		Node node;
 
 		calculateAverageDegree(EdgeDirection.BOTH);
 		int roundedDegree = roundAverageDegree(EdgeDirection.BOTH);
@@ -105,15 +105,13 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 
 		iterator = nodes.iterator();
 		while (iterator.hasNext()) {
-			currentDegree = iterator.next().getDegree(
-					Direction.BOTH);
-			changeNumberOfDegrees(EdgeDirection.BOTH,
-					currentDegree, roundedDegree);
+			node = iterator.next();
+			currentDegree = node.getDegree(Direction.BOTH);
+			changeNumberOfDegrees(EdgeDirection.BOTH, currentDegree, roundedDegree);
 
-			currentDegree = iterator.next().getDegree(
-					Direction.OUTGOING);
-			changeNumberOfDegrees(EdgeDirection.OUTGOING,
-					currentDegree, roundedOutgoingDegree);
+			currentDegree = node.getDegree(Direction.OUTGOING);
+			changeNumberOfDegrees(EdgeDirection.OUTGOING, currentDegree,
+					roundedOutgoingDegree);
 		}
 	}
 

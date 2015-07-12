@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
+import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 import eu.mondo.sam.core.metrics.BenchmarkMetric;
 
 public abstract class Metric extends BenchmarkMetric {
@@ -21,8 +22,14 @@ public abstract class Metric extends BenchmarkMetric {
 
 	protected double metricValue;
 
-	public Metric(String identifier) {
+	protected EdgeDirection direction;
+
+	protected boolean withOutgoingDegree;
+
+	public Metric(String identifier, EdgeDirection direction) {
 		super(identifier);
+		this.direction = direction;
+		withOutgoingDegree = (direction == EdgeDirection.OUTGOING);
 	}
 
 	public abstract void calculate();

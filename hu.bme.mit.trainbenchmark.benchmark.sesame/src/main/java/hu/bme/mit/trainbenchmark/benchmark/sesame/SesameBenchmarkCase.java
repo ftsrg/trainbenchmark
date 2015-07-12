@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
@@ -26,11 +27,11 @@ import java.util.Comparator;
 
 import org.openrdf.model.URI;
 
-public class SesameBenchmarkCase extends
-		AbstractBenchmarkCase<SesameMatch, URI, SesameDriver> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver> {
 
 	protected SesameDriver sesameDriver;
 	protected RDFBenchmarkConfig rbc;
+	protected SesameModelAnalyzer sesameAnalyzer;
 
 	@Override
 	protected void init() throws IOException {
@@ -40,10 +41,11 @@ public class SesameBenchmarkCase extends
 		checker = new SesameChecker(sesameDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = SesameTransformation.newInstance(
-					sesameDriver, bc.getQuery(),
-					bc.getScenario());
+			transformation = SesameTransformation.newInstance(sesameDriver,
+					bc.getQuery(), bc.getScenario());
 		}
+		analyzer = sesameAnalyzer = new SesameModelAnalyzer(sesameDriver);
+		sesameAnalyzer.setBenchmarkConfig(rbc);
 	}
 
 	@Override

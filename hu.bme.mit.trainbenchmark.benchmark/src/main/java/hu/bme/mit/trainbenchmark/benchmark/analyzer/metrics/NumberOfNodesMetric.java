@@ -12,10 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
+import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+
 public class NumberOfNodesMetric extends Metric {
 
 	public NumberOfNodesMetric(String identifier) {
-		super(identifier);
+		super(identifier, EdgeDirection.BOTH);
 	}
 
 	@Override

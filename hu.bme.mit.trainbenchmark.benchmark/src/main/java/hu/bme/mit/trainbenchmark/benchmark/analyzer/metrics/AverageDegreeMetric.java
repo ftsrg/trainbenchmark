@@ -16,11 +16,8 @@ import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class AverageDegreeMetric extends Metric {
 
-	private EdgeDirection direction;
-
 	public AverageDegreeMetric(String identifier, EdgeDirection direction) {
-		super(identifier);
-		this.direction = direction;
+		super(identifier, direction);
 	}
 
 	@Override

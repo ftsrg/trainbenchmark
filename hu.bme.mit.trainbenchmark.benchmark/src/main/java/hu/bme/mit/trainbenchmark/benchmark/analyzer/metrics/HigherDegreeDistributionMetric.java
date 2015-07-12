@@ -16,18 +16,15 @@ import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class HigherDegreeDistributionMetric extends Metric {
 
-	private EdgeDirection direction;
+	public HigherDegreeDistributionMetric(String identifier, EdgeDirection direction) {
+		super(identifier, direction);
 
-	public HigherDegreeDistributionMetric(String identifier,
-			EdgeDirection direction) {
-		super(identifier);
-		this.direction = direction;
 	}
 
 	@Override
 	public void calculate() {
 		metricValue = analyzer.getNumberOfHigherDegree(direction)
-				/ analyzer.getNumberOfNodes();
+				/ analyzer.getNumberOfNodes(withOutgoingDegree);
 	}
 
 }
