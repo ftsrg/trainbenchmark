@@ -73,7 +73,8 @@ public abstract class Generator {
 	protected static int MAX_SEGMENT_LENGTH = 1000;
 
 	public void generateModels() throws Exception {
-		System.out.print("Generating instance model, generator: " + syntax() + ", size: " + generatorConfig.getSize() + "... ");
+		System.out.print("Generating instance model, generator: " + syntax() + ", scenario: " + generatorConfig.getScenarioName()
+				+ ", size: " + generatorConfig.getSize() + "... ");
 		initializeConstants();
 		initModel();
 		generateModel();
@@ -87,7 +88,7 @@ public abstract class Generator {
 		maxRoutes = 5 * generatorConfig.getSize();
 		switch (generatorConfig.getScenario()) {
 		case BATCH:
-			// set all error percents to 0 
+			// set all error percents to 0
 			break;
 		case INJECT:
 			connectedSegmentsErrorPercent = 5;

@@ -2,10 +2,10 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
 <graph id="G" edgedefault="directed">
 <key id="labels" for="node" attr.name="labels" attr.type="string"/>
-<key id="position" for="node" attr.name="position" attr.type="string"/>
-<key id="length" for="node" attr.name="length" attr.type="int"/>
-<key id="signal" for="node" attr.name="signal" attr.type="string"/>
 <key id="currentPosition" for="node" attr.name="currentPosition" attr.type="string"/>
+<key id="length" for="node" attr.name="length" attr.type="int"/>
+<key id="position" for="node" attr.name="position" attr.type="string"/>
+<key id="signal" for="node" attr.name="signal" attr.type="string"/>
 <node id="n1" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
 <node id="n2" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
 <node id="n3" labels=":Route"><data key="labels">:Route</data></node>

@@ -23,7 +23,7 @@ class Loader():
     config_path = "config/config.json"
     schema_path = "config/config_schema.json"
     tools_path = "config/tools_source.json"
-    dependencies_path = "config/dependencies.json"
+    dependencies_path = "config/formats.json"
 
     def load(self):
         """
@@ -85,28 +85,22 @@ class Loader():
 
         return config
 
-    def get_dependency(self, tool):
+    def get_format(self, tool):
         """
-        Returns the tool's dependency as string. And returns None in that case
-        if a dependency would not exist.
+        Returns the tool's format as string.
         """
         # path relatively to this script's location
         current_directory = os.getcwd()
         util.set_working_directory()
-        dependencies_json = util.json_decode(self.dependencies_path)
-        if dependencies_json is None:
-            logging.error("Problem has occurred during the decoding procedure" +
+        formats_json = util.json_decode(self.dependencies_path)
+        if formats_json is None:
+            raise IOError("Problem has occurred during the decoding procedure" +
                           " with the following file: " + self.dependencies_path)
-            return None
         util.set_working_directory(current_directory)
-        if tool not in dependencies_json:
-            logging.warning("Dependency for " + tool + " does not exist.")
-            return None
+        if tool not in formats_json:
+            raise IOError("Format for " + tool + " not specified.")
         else:
-            logging.info("A dependency exists: " + tool + "->" +
-                         dependencies_json[tool]["name"] + ".")
-
-            return dependencies_json[tool]["name"]
+            return formats_json[tool]["format"]
 
 
 def checking_hook(pairs):
