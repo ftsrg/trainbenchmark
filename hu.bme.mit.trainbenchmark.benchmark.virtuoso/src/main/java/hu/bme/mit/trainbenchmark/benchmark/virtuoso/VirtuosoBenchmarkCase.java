@@ -31,8 +31,10 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 		checker = new SesameChecker(sesameDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
+			transformation = SesameTransformation.newInstance(sesameDriver,
+					bc.getQuery(), bc.getScenario());
 		}
+		initAnalyzer();
 	}
 
 }

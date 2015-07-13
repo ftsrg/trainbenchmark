@@ -39,8 +39,10 @@ public class AllegroDriver extends SesameDriver {
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws RepositoryException, OpenRDFException, IOException {
-		final AGServer agServer = new AGServer(AGServerURL, AGServerUsername, AGServerPassword);
+	public void read(final String modelPathWithoutExtension) throws RepositoryException,
+			OpenRDFException, IOException {
+		final AGServer agServer = new AGServer(AGServerURL, AGServerUsername,
+				AGServerPassword);
 		catalog = agServer.getCatalog(catalogID);
 		if (catalog.hasRepository(repositoryID)) {
 			catalog.deleteRepository(repositoryID);

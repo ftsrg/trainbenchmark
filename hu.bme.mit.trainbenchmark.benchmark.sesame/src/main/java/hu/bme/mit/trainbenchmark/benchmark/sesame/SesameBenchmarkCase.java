@@ -44,6 +44,10 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 			transformation = SesameTransformation.newInstance(sesameDriver,
 					bc.getQuery(), bc.getScenario());
 		}
+		initAnalyzer();
+	}
+
+	protected void initAnalyzer() {
 		analyzer = sesameAnalyzer = new SesameModelAnalyzer(sesameDriver);
 		sesameAnalyzer.setBenchmarkConfig(rbc);
 	}
