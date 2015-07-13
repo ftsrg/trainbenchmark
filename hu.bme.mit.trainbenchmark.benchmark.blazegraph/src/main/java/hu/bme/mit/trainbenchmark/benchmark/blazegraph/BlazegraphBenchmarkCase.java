@@ -12,11 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
+import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.BlazegraphDriver;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 import java.io.IOException;
