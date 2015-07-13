@@ -27,9 +27,9 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.java</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
@@ -98,6 +98,7 @@
 		</profile>
 
 		<!-- tools -->
+		<!-- there should be a specific build profile for each tool -->
 
 		<profile>
 			<id>allegro</id>
@@ -107,9 +108,15 @@
 		</profile>
 
 		<profile>
-			<id>drools</id>
+			<id>drools5</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>drools6</id>
+			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
 			</modules>
 		</profile>
@@ -122,9 +129,9 @@
 		</profile>
 
 		<profile>
-			<id>fourstore</id>
+			<id>emfapi</id>
 			<modules>
-				<module>hu.bme.mit.trainbenchmark.benchmark.fourstore</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
 			</modules>
 		</profile>
 
@@ -136,12 +143,6 @@
 			</modules>
 		</profile>
 
-		<profile>
-			<id>java</id>
-			<modules>
-				<module>hu.bme.mit.trainbenchmark.benchmark.java</module>
-			</modules>
-		</profile>
 
 		<profile>
 			<id>jena</id>
