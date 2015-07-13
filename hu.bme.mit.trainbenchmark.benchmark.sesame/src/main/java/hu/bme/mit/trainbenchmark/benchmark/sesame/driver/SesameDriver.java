@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDatabaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -43,6 +44,7 @@ import org.openrdf.repository.RepositoryResult;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
+import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
 public class SesameDriver extends RDFDatabaseDriver<URI> {
@@ -51,9 +53,15 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	protected Repository repository;
 	protected ValueFactory vf;
 	protected TupleQuery tupleQuery;
+	protected final RDFBenchmarkConfig rdfbc;
 
 	protected Comparator<URI> elementComparator = new URIComparator();
 
+	public SesameDriver(final RDFBenchmarkConfig rdfbc) {
+		super();
+		this.rdfbc = rdfbc;
+	}
+	
 	@Override
 	public void beginTransaction() {
 		vf = repository.getValueFactory();
@@ -66,7 +74,11 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException, OpenRDFException {
-		repository = new SailRepository(new MemoryStore());
+		if (rdfbc.isInferencing()) {
+			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));			
+		} else {
+			repository = new SailRepository(new MemoryStore());
+		}
 		load(modelPathWithoutExtension);
 	}
 
