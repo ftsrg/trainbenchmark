@@ -1,7 +1,4 @@
 {
-  "MAVEN_OPTS": {
-    "Xmx": "512m"
-  },
   "JAVA_OPTS": {
     "Xmx": "2g"
   },
@@ -9,22 +6,37 @@
     "Generator": "",
     "Benchmark": ""
   },
-  "IterationCount": 3,
   "MinSize": 1,
-  "MaxSize": 16,
-  "ModificationMethod": "constant",
-  "ModificationConstant": 10,
-  "Queries": [ 
-    "ConnectedSegments"
+  "MaxSize": 2,
+  "Runs": 2,
+  "IterationCount": 3,
+  "Queries": [
+    "PosLength",
+    "SwitchSet"
+  ],
+  "_AllQueriesComment": "The _AllQueries field is not used by the framework.",
+  "_AllQueries": [
+    "ConnectedSegments",
+    "RouteSensor",
+    "SemaphoreNeighbor",
+    "SwitchSensor"
   ],
   "Scenarios": [
-    "Batch"
+    "Batch",
+    "Inject",
+    "Repair"
   ],
   "Series": 1,
   "Tools": [
-    "emfincquery"
-
+    "emfapi",
+    "mysql",
+    "neo4j",
+    "sesame"
   ],
-  "UniqueConfigurations": [
-	]
+  "_AllToolsComment": "The _AllTools field is not used by the framework.",
+  "_AllTools": [
+    "drools5",
+    "jena"
+  ],
+  "Timeout": 600
 }

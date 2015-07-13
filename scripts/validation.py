@@ -39,10 +39,4 @@ def is_valid_json(instance_json, schema_json):
         logging.error("Maxsize is lower than minsize. Change the " +
                       "config.json file")
         return False
-    if len(instance_json["UniqueConfigurations"]) > 0:
-        for conf in instance_json["UniqueConfigurations"]:
-            if "MinSize" in conf.keys() and "MaxSize" in conf.keys():
-                if conf["MinSize"] > conf["MaxSize"]:
-                    logging.error("Maxsize is lower than minsize. Change the " +
-                                  "config.json file")
     return True

@@ -1,27 +1,6 @@
 {
-  "sesame": {
-    "name": "rdf"
-  },
   "allegro": {
     "name": "rdf"
-  },
-  "jena": {
-    "name": "rdf"
-  },
-  "fourstore": {
-    "name": "rdf"
-  },
-  "memsql": {
-    "name": "sql"
-  },
-  "mysql": {
-    "name": "sql"
-  },
-  "postgresql": {
-    "name": "sql"
-  },
-  "java": {
-    "name": "emf"
   },
   "drools5": {
     "name": "emf"
@@ -32,8 +11,17 @@
   "eclipseocl": {
     "name": "emf"
   },
- "emfincquery": {
+  "emfapi": {
     "name": "emf"
+  },
+  "emfincquery": {
+    "name": "emf"
+  },
+  "jena": {
+    "name": "rdf"
+  },
+  "mysql": {
+    "name": "sql"
   },
   "neo4j": {
     "name": "graph"
@@ -41,19 +29,10 @@
   "orientdb": {
     "name": "graph"
   },
-  "virtuoso":{
+  "sesame": {
     "name": "rdf"
   },
-  "rdf": {
-    "name": "core"
-  },
-  "emf": {
-    "name": "core"
-  },
-  "sql": {
-    "name": "core"
-  },
-  "graph": {
-    "name": "core"
+  "virtuoso":{
+    "name": "rdf"
   }
 }
