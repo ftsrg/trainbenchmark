@@ -43,15 +43,6 @@ def build(configurations, skip_tests):
     profiles_arg = ",".join(profiles)
     print(profiles_arg)
 
-    #path = configurations[0].common.path
-    #make a new instance of the static attribute
-    #all_dependencies = configurations[0].all_dependencies.copy()
-    #logging.info("Build the following projects: " + all_dependencies.__str__())
-    #print("Build the following projects: " + all_dependencies.__str__())
-    #path = configurations[0].common.path
-    #util.set_working_directory()
-    #util.set_working_directory(path)
-
     cmd = ["mvn", "clean", "install", "-P", profiles_arg]
     if skip_tests:
         cmd.append("-DskipTests")
