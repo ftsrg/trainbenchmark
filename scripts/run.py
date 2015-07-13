@@ -12,15 +12,11 @@ SzG:
 This script assumes that the required dependencies are available from either 
 the local Maven repository or the Maven Central Repository.
 """
-import os
 import subprocess
-import sys
 import argparse
 
 import util
 from loader import Loader
-import deps
-import targets
 
 
 def flatten(lst):
@@ -54,7 +50,7 @@ def generate(formats, scenarios, sizes):
         for format in formats:
             path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
             util.set_working_directory(path)
-            target = targets.get_generator_jar(format)
+            target = util.get_generator_jar(format)
             for size in sizes:
                 print("Generate model: <format: " + format +
                       ", scenario: " + scenario +
@@ -72,7 +68,7 @@ def measure(tools, scenarios, sizes, queries):
     for tool in tools:
         path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
         util.set_working_directory(path)
-        target = targets.get_tool_jar(tool)
+        target = util.get_tool_jar(tool)
 
         for scenario in scenarios:
             for size in sizes:
