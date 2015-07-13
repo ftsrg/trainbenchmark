@@ -29,13 +29,13 @@ import org.openrdf.model.URI;
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI> {
 
 	protected SesameDriver sesameDriver;
-	protected RDFBenchmarkConfig rbc;
+	protected RDFBenchmarkConfig rdfbc;
 
 	@Override
 	protected void init() throws IOException {
-		this.rbc = (RDFBenchmarkConfig) bc;
+		this.rdfbc = (RDFBenchmarkConfig) bc;
 
-		driver = sesameDriver = new SesameDriver();
+		driver = sesameDriver = new SesameDriver(rdfbc);
 		checker = new SesameChecker(sesameDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {

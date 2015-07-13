@@ -21,6 +21,7 @@ import org.apache.commons.cli.ParseException;
 
 public class RDFBenchmarkConfig extends BenchmarkConfig {
 
+	protected static final String INFERENCING = "inferencing";
 	protected boolean inferencing;
 
 	public RDFBenchmarkConfig(final String[] args, final String className) throws ParseException {
@@ -36,14 +37,14 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("inferencing", true, "RDF: type of inference");
+		options.addOption(INFERENCING, true, "RDF: type of inference");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		inferencing = cmd.hasOption("inferencing");
+		inferencing = cmd.hasOption(INFERENCING);
 	}
 
 	public boolean isInferencing() {

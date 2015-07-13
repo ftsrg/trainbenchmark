@@ -25,7 +25,7 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
 	protected void init() throws IOException {
-		this.rbc = (RDFBenchmarkConfig) bc;
+		this.rdfbc = (RDFBenchmarkConfig) bc;
 
 		driver = sesameDriver = new VirtuosoDriver();
 		checker = new SesameChecker(sesameDriver, bc);

@@ -25,7 +25,7 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
 	protected void init() throws IOException {
-		this.rbc = (RDFBenchmarkConfig) bc;
+		this.rdfbc = (RDFBenchmarkConfig) bc;
 
 		driver = sesameDriver = new BlazegraphDriver();
 		checker = new SesameChecker(sesameDriver, bc);

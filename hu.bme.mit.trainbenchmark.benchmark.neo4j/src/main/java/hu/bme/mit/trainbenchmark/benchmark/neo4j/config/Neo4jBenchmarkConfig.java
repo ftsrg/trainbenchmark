@@ -22,6 +22,8 @@ import org.apache.commons.cli.ParseException;
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	protected static final String NEO4J = "Neo4j";
+	protected static final String JAVAAPI = "javaapi";
+
 	protected boolean javaApi;
 
 	public Neo4jBenchmarkConfig(final String[] args) throws ParseException {
@@ -38,14 +40,14 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("javaapi", false, "use the faster, low-level Java API for querying");
+		options.addOption(JAVAAPI, false, "use the faster, low-level Java API for querying");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		javaApi = cmd.hasOption("javaapi");
+		javaApi = cmd.hasOption(JAVAAPI);
 	}
 
 	public boolean isJavaApi() {

@@ -20,9 +20,10 @@ import org.apache.commons.cli.ParseException;
 
 public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 
-	private static final String EMFINCQUERY = "EMFIncQuery";
-	private static final String LOCALSEARCH = "localSearch";
-	private boolean localSearch;
+	protected static final String EMFINCQUERY = "EMFIncQuery";
+	protected static final String LOCALSEARCH = "localSearch";
+	
+	protected boolean localSearch;
 
 	public EMFIncQueryBenchmarkConfig(final String[] args) throws ParseException {
 		super(args, EMFINCQUERY);
