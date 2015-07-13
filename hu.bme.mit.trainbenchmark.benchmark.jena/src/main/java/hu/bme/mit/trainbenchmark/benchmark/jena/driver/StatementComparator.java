@@ -16,7 +16,7 @@ import java.util.Comparator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 
-public class StatemetComparator implements Comparator<Statement> {
+public class StatementComparator implements Comparator<Statement> {
 
 	protected final ResourceComparator resourceComparator = new ResourceComparator();
 

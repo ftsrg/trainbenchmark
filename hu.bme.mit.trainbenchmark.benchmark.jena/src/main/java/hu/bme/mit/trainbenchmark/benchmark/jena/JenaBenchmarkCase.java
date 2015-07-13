@@ -13,7 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaChecker;
+import hu.bme.mit.trainbenchmark.benchmark.jena.analyzer.JenaModelAnalyzer;
+import hu.bme.mit.trainbenchmark.benchmark.jena.checkers.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
@@ -26,10 +27,11 @@ import java.util.Comparator;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaBenchmarkCase extends
-		AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver> {
 
 	protected JenaDriver jenaDriver;
+	protected RDFBenchmarkConfig rbc;
+	protected JenaModelAnalyzer jenaModelAnalyzer;
 
 	protected RDFBenchmarkConfig getRDFBenchmarkConfig() {
 		return (RDFBenchmarkConfig) bc;
@@ -37,14 +39,16 @@ public class JenaBenchmarkCase extends
 
 	@Override
 	protected void init() throws IOException {
+		rbc = (RDFBenchmarkConfig) bc;
 		driver = jenaDriver = new JenaDriver();
 		checker = new JenaChecker(jenaDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = JenaTransformation.newInstance(
-					jenaDriver, bc.getQuery(),
+			transformation = JenaTransformation.newInstance(jenaDriver, bc.getQuery(),
 					bc.getScenario());
 		}
+		analyzer = jenaModelAnalyzer = new JenaModelAnalyzer(jenaDriver);
+		jenaModelAnalyzer.setBenchmarkConfig(rbc);
 	}
 
 	@Override

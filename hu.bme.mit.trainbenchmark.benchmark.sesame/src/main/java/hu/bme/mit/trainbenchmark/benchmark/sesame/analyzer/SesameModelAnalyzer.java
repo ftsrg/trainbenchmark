@@ -12,15 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.analyzer.RDFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
@@ -30,37 +25,15 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
-public class SesameModelAnalyzer extends ModelAnalyzer<SesameDriver> {
-
-	private String getDegreesQuery;
-
-	private String getTriples;
-
-	private RDFBenchmarkConfig benchmarkConfig;
+public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 
 	public SesameModelAnalyzer(SesameDriver driver) {
 		super(driver);
 	}
 
-	private void initQueries() {
-		String degreesQueryPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegrees.sparql";
-		String triplesQueryPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetTriples.sparql";
-		try {
-			getDegreesQuery = FileUtils.readFileToString(new File(degreesQueryPath));
-			getTriples = FileUtils.readFileToString(new File(triplesQueryPath));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	@Override
 	public void calculateMetrics() {
 		initQueries();
-		numberOfNodesWithOutgoingDegrees = 0;
-		numberOfNodes = 0;
-		numberOfEdges = 0;
 
 		RepositoryConnection connection = driver.getConnection();
 		try {
@@ -124,14 +97,6 @@ public class SesameModelAnalyzer extends ModelAnalyzer<SesameDriver> {
 			degree += Double.parseDouble(set.getValue("indegree").stringValue());
 			changeNumberOfDegrees(EdgeDirection.BOTH, degree, roundedDegree);
 		}
-	}
-
-	public RDFBenchmarkConfig getBenchmarkConfig() {
-		return benchmarkConfig;
-	}
-
-	public void setBenchmarkConfig(RDFBenchmarkConfig benchmarkConfig) {
-		this.benchmarkConfig = benchmarkConfig;
 	}
 
 }

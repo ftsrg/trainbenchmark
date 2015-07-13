@@ -43,7 +43,7 @@ public class JenaDriver extends RDFDatabaseDriver<Resource> {
 
 	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Model model;
-	protected Comparator<Statement> statementComparator = new StatemetComparator();
+	protected Comparator<Statement> statementComparator = new StatementComparator();
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {

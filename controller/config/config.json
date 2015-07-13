@@ -23,7 +23,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "neo4j"
+    "jena"
 
   ],
   "UniqueConfigurations": [
