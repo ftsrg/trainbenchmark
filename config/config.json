@@ -7,31 +7,36 @@
     "Benchmark": ""
   },
   "MinSize": 1,
-  "MaxSize": 2,
+  "MaxSize": 1,
   "Runs": 2,
   "IterationCount": 3,
   "Queries": [
-    "PosLength",
     "SwitchSet"
   ],
   "_AllQueriesComment": "The _AllQueries field is not used by the framework.",
   "_AllQueries": [
     "ConnectedSegments",
+    "PosLength",
     "RouteSensor",
     "SemaphoreNeighbor",
     "SwitchSensor"
   ],
   "Scenarios": [
+    "Inject"
+  ],
+  "_AllScenariosComment": "The _AllScenarios field is not used by the framework.",
+  "_AllScenarios": [
     "Batch",
-    "Inject",
     "Repair"
   ],
   "Series": 1,
   "Tools": [
     "emfapi",
+    "emfincquery",
     "mysql",
     "neo4j",
-    "sesame"
+    "sesame",
+    "jena"
   ],
   "_AllToolsComment": "The _AllTools field is not used by the framework.",
   "_AllTools": [

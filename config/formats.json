@@ -1,0 +1,38 @@
+{
+  "allegro": {
+    "format": "rdf"
+  },
+  "drools5": {
+    "format": "emf"
+  },
+  "drools6": {
+    "format": "emf"
+  },
+  "eclipseocl": {
+    "format": "emf"
+  },
+  "emfapi": {
+    "format": "emf"
+  },
+  "emfincquery": {
+    "format": "emf"
+  },
+  "jena": {
+    "format": "rdf"
+  },
+  "mysql": {
+    "format": "sql"
+  },
+  "neo4j": {
+    "format": "graph"
+  },
+  "orientdb": {
+    "format": "graph"
+  },
+  "sesame": {
+    "format": "rdf"
+  },
+  "virtuoso":{
+    "format": "rdf"
+  }
+}
