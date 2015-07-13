@@ -33,6 +33,12 @@ public abstract class RDFModelAnalyzer<D extends Driver<?>> extends ModelAnalyze
 
 	protected RDFBenchmarkConfig benchmarkConfig;
 
+	@Override
+	public void initializeMetrics() {
+		initQueries();
+		super.initializeMetrics();
+	}
+
 	protected void initQueries() {
 		String degreesQueryPath = benchmarkConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegrees.sparql";

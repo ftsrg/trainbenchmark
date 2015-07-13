@@ -84,6 +84,23 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		metrics.add(new DensityMetric("DensityWithOutgoing", EdgeDirection.OUTGOING));
 	}
 
+	@Override
+	public void resetMetrics() {
+		numberOfNodes = 0;
+		numberOfEdges = 0;
+		numberOfNodesWithOutgoingDegrees = 0;
+
+		maximumDegree = 0;
+		numberOfMaximumDegree = 0;
+		numberOfAverageDegree = 0;
+
+		numberOfMaximumOutgoingDegree = 0;
+		numberOfAverageOutgoingDegree = 0;
+		numberOfHigherDegree = 0;
+		numberOfHigherOutgoingDegree = 0;
+
+	}
+
 	protected void calculateAverageDegree(final EdgeDirection direction) {
 		switch (direction) {
 		case BOTH:

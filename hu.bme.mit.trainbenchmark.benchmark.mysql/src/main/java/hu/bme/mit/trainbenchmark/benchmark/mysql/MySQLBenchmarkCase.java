@@ -28,7 +28,6 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 	@Override
 	public void init() throws Exception {
-		super.init();
 		MySQLProcess.startSQLProcess();
 
 		checker = new SQLChecker(sqlDriver, bc);

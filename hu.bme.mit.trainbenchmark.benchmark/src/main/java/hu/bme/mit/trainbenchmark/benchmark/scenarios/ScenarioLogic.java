@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.phases.MetricsCalculationPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.MetricsInitializationPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.ModelMetricsCalculationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.MetricsCalculationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.MetricsInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.ModelMetricsCalculationPhase;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
 public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?, ?>>

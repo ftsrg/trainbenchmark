@@ -31,7 +31,6 @@ public class JenaModelAnalyzer extends RDFModelAnalyzer<JenaDriver> {
 	@Override
 	public void calculateMetrics() {
 		Model model = driver.getModel();
-		initQueries();
 
 		QueryExecution queryExecution = QueryExecutionFactory.create(getTriples, model);
 		ResultSet resultSet = queryExecution.execSelect();

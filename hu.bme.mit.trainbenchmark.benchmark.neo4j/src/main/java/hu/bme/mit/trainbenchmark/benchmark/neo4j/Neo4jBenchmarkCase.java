@@ -28,8 +28,7 @@ import java.util.Comparator;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
-public class Neo4jBenchmarkCase extends
-		AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver> {
+public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver> {
 
 	protected Neo4jBenchmarkConfig nbc;
 
@@ -40,23 +39,19 @@ public class Neo4jBenchmarkCase extends
 
 	@Override
 	public void init() throws Exception {
-		super.init();
 		this.nbc = (Neo4jBenchmarkConfig) bc;
 
-		dbPath = bc.getWorkspacePath()
-				+ "/models/neo4j-dbs/railway-database";
+		dbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
 		driver = neoDriver = new Neo4jDriver(dbPath);
 
 		if (nbc.isJavaApi()) {
-			checker = Neo4jCoreChecker.newInstance(neoDriver,
-					bc.getQuery());
+			checker = Neo4jCoreChecker.newInstance(neoDriver, bc.getQuery());
 		} else {
 			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
 		}
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = Neo4jTransformation.newInstance(
-					neoDriver, bc.getQuery(),
+			transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(),
 					bc.getScenario());
 		}
 

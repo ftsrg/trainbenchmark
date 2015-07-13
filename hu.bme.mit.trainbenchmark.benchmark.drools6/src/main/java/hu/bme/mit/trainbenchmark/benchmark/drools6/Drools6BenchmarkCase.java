@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.checkers.Drools6Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
@@ -24,13 +23,13 @@ public class Drools6BenchmarkCase extends EMFBenchmarkCase {
 	protected Drools6Driver drools6driver;
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
+	public void init() throws Exception {
 		driver = drools6driver = new Drools6Driver(bc);
 		checker = new Drools6Checker(drools6driver, bc.getQuery());
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = EMFTransformation.newInstance(drools6driver, bc.getQuery(), bc.getScenario());
+			transformation = EMFTransformation.newInstance(drools6driver,
+					bc.getQuery(), bc.getScenario());
 		}
 	}
 

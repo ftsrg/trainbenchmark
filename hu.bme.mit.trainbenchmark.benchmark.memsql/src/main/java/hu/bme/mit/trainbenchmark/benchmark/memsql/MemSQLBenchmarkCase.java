@@ -21,8 +21,6 @@ public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 
 	@Override
 	protected void init() throws Exception {
-		super.init();
-
 		driver = sqlDriver = new MemSQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
 

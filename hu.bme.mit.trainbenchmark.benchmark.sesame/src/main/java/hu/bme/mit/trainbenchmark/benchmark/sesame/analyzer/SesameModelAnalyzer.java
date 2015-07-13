@@ -33,8 +33,6 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 
 	@Override
 	public void calculateMetrics() {
-		initQueries();
-
 		RepositoryConnection connection = driver.getConnection();
 		try {
 			TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL,

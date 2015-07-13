@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.phases;
+package hu.bme.mit.trainbenchmark.benchmark.phases.analyzis;
 
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import eu.mondo.sam.core.DataToken;

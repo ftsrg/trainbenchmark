@@ -38,6 +38,8 @@ public abstract class Analyzer<D extends Driver<?>> {
 
 	public abstract void initializeMetrics();
 
+	public abstract void resetMetrics();
+
 	public ArrayList<Metric> getMetrics() {
 		return metrics;
 	}

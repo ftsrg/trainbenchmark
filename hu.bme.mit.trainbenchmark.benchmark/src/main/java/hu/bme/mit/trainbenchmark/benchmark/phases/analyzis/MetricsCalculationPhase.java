@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.phases;
+package hu.bme.mit.trainbenchmark.benchmark.phases.analyzis;
 
 import eu.mondo.sam.core.phases.OptionalPhase;
 

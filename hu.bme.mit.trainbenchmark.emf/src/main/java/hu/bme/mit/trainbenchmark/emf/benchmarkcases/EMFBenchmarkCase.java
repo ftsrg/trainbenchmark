@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 import java.util.Comparator;
 
-public class EMFBenchmarkCase extends
+public abstract class EMFBenchmarkCase extends
 		AbstractBenchmarkCase<EMFMatch, RailwayElement, EMFDriver> {
 
 	@Override

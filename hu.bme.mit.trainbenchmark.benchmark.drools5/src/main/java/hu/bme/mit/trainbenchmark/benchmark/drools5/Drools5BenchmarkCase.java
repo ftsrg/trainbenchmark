@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.checkers.Drools5Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
@@ -24,13 +23,13 @@ public class Drools5BenchmarkCase extends EMFBenchmarkCase {
 	protected Drools5Driver drools5driver;
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
+	public void init() throws Exception {
 		driver = drools5driver = new Drools5Driver(bc);
 		checker = new Drools5Checker(drools5driver, bc.getQuery());
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = EMFTransformation.newInstance(drools5driver, bc.getQuery(), bc.getScenario());
+			transformation = EMFTransformation.newInstance(drools5driver,
+					bc.getQuery(), bc.getScenario());
 		}
 	}
 

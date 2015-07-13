@@ -34,8 +34,7 @@ import eu.mondo.sam.core.results.PhaseResult;
 
 public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
-	protected Random random = new UniqueRandom(
-			TrainBenchmarkConstants.RANDOM_SEED);
+	protected Random random = new UniqueRandom(TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;
 	protected Checker<M> checker;
@@ -55,9 +54,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	// these should be implemented for each tool
 
-	protected void init() throws Exception {
-
-	}
+	protected abstract void init() throws Exception;
 
 	protected void destroy() throws Exception {
 		if (checker != null) {
@@ -79,6 +76,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	public void calculateModelMetrics(final PhaseResult phaseResult) {
 		TimeMetric timer = new TimeMetric("CalculationTime");
+		analyzer.resetMetrics();
 
 		timer.startMeasure();
 		analyzer.calculateAll();
@@ -92,8 +90,8 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	public void benchmarkInitTransformation() {
-		transformationLogic = TransformationLogic.newInstance(
-				bc.getScenario(), getComparator());
+		transformationLogic = TransformationLogic.newInstance(bc.getScenario(),
+				getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(bc, driver, random);
 		}
@@ -102,8 +100,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	// benchmark methods
 
-	public void benchmarkRead(final PhaseResult phaseResult)
-			throws Exception {
+	public void benchmarkRead(final PhaseResult phaseResult) throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		timer.startMeasure();
 		driver.read(bc.getModelPathNameWithoutExtension());
@@ -111,8 +108,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 		phaseResult.addMetrics(timer);
 	}
 
-	public void benchmarkCheck(final PhaseResult phaseResult)
-			throws Exception {
+	public void benchmarkCheck(final PhaseResult phaseResult) throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		final ScalarMetric results = new ScalarMetric("Matches");
 		timer.startMeasure();
@@ -126,8 +122,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 		destroy();
 	}
 
-	public void benchmarkModify(final PhaseResult phaseResult)
-			throws Exception {
+	public void benchmarkModify(final PhaseResult phaseResult) throws Exception {
 		transformationLogic.performTransformation(phaseResult, matches);
 	}
 
