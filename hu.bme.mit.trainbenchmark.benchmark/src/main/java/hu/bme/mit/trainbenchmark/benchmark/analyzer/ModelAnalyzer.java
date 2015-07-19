@@ -37,23 +37,23 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	protected double maximumDegree;
 
-	protected double averageDegree;
+	private double averageDegree;
 
-	protected double numberOfMaximumDegree;
+	private double numberOfMaximumDegree;
 
-	protected double numberOfAverageDegree;
+	private double numberOfAverageDegree;
 
-	protected double maximumOutgoingDegree;
+	private double maximumOutgoingDegree;
 
-	protected double averageOutgoingDegree;
+	private double averageOutgoingDegree;
 
-	protected double numberOfMaximumOutgoingDegree;
+	private double numberOfMaximumOutgoingDegree;
 
-	protected double numberOfAverageOutgoingDegree;
+	private double numberOfAverageOutgoingDegree;
 
-	protected double numberOfHigherDegree;
+	private double numberOfHigherDegree;
 
-	protected double numberOfHigherOutgoingDegree;
+	private double numberOfHigherOutgoingDegree;
 
 	public ModelAnalyzer(D driver) {
 		super(driver);
@@ -114,29 +114,6 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		}
 	}
 
-	public double getNumberOfNodes(final boolean withOutgoingDegree) {
-		return withOutgoingDegree ? numberOfNodesWithOutgoingDegrees : numberOfNodes;
-	}
-
-	public double getNumberOfNodes() {
-		return numberOfNodes;
-	}
-
-	public double getNumberOfEdges() {
-		return numberOfEdges;
-	}
-
-	public double getMaximumDegree(final EdgeDirection direction) {
-		switch (direction) {
-		case BOTH:
-			return maximumDegree;
-		case OUTGOING:
-			return maximumOutgoingDegree;
-		default:
-			throw new UnsupportedOperationException();
-		}
-	}
-
 	protected void changeMaximumDegree(final EdgeDirection direction, final double degree) {
 		switch (direction) {
 		case BOTH:
@@ -182,6 +159,35 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	}
 
+	protected int roundAverageDegree(final EdgeDirection direction) {
+		BigDecimal roundedDegree = new BigDecimal(getAverageDegree(direction));
+		roundedDegree = roundedDegree.setScale(0, RoundingMode.HALF_UP);
+		return roundedDegree.intValue();
+	}
+
+	public double getNumberOfNodes(final boolean withOutgoingDegree) {
+		return withOutgoingDegree ? numberOfNodesWithOutgoingDegrees : numberOfNodes;
+	}
+
+	public double getNumberOfNodes() {
+		return numberOfNodes;
+	}
+
+	public double getNumberOfEdges() {
+		return numberOfEdges;
+	}
+
+	public double getMaximumDegree(final EdgeDirection direction) {
+		switch (direction) {
+		case BOTH:
+			return maximumDegree;
+		case OUTGOING:
+			return maximumOutgoingDegree;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
 	public double getAverageDegree(final EdgeDirection direction) {
 		switch (direction) {
 		case BOTH:
@@ -191,12 +197,6 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		default:
 			throw new UnsupportedOperationException();
 		}
-	}
-
-	protected int roundAverageDegree(final EdgeDirection direction) {
-		BigDecimal roundedDegree = new BigDecimal(getAverageDegree(direction));
-		roundedDegree = roundedDegree.setScale(0, RoundingMode.HALF_UP);
-		return roundedDegree.intValue();
 	}
 
 	public double getNumberOfMaximumDegree(final EdgeDirection direction) {

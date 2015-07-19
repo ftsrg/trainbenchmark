@@ -19,7 +19,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.benchmark.eclipseocl.EclipseOCLBenchmark</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.benchmark.eclipseocl.EclipseOCLBenchmarkMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

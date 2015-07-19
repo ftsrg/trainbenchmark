@@ -58,11 +58,6 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 	public void calculateMetrics() {
 		database = driver.getGraphDb();
 		graphOperations = GlobalGraphOperations.at(database);
-		numberOfNodes = 0;
-		numberOfNodesWithOutgoingDegrees = 0;
-		numberOfEdges = 0;
-		numberOfAverageDegree = 0;
-		numberOfMaximumDegree = 0;
 		double currentDegree = 0;
 
 		beginTransaction();

@@ -22,7 +22,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.benchmark.drools.Drools6BenchmarkMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

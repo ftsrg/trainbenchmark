@@ -19,11 +19,11 @@
     "ConnectedSegments"
   ],
   "Scenarios": [
-    "Batch"
+    "Inject"
   ],
   "Series": 1,
   "Tools": [
-    "java"
+    "emfincquery"
 
   ],
   "UniqueConfigurations": [

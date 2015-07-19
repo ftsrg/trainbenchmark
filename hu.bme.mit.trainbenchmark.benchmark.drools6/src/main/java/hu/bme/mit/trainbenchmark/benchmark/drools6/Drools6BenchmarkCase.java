@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.drools6;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.checkers.Drools6Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.emf.analyzer.EMFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
@@ -31,6 +32,7 @@ public class Drools6BenchmarkCase extends EMFBenchmarkCase {
 			transformation = EMFTransformation.newInstance(drools6driver,
 					bc.getQuery(), bc.getScenario());
 		}
+		analyzer = new EMFModelAnalyzer(drools6driver);
 	}
 
 }

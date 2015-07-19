@@ -11,26 +11,25 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.Analyzer;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.emf.analyzer.EMFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-import java.io.IOException;
 import java.util.Comparator;
 
 import org.apache.log4j.Level;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
-		extends
-		AbstractBenchmarkCase<M, RailwayElement, EMFIncQueryDriver<BasePatternMatch>> {
+public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends
+		AbstractBenchmarkCase<M, RailwayElement, EMFIncQueryDriver<M>> {
 
 	protected EMFIncQueryDriver<M> eiqDriver;
 
@@ -39,27 +38,20 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
 	}
 
 	@Override
-	public void init() throws IOException {
-		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
-	}
-
-	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
-
+	public void init() throws Exception {
 		final EMFIncQueryBenchmarkConfig eiqbc = (EMFIncQueryBenchmarkConfig) bc;
-		driver = eiqDriver = new EMFIncQueryDriver(
-				getEMFIncQueryBenchmarkConfig());
-		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker
-				.newInstance(eiqbc, eiqDriver, bc.getQuery());
+		driver = eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
+		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(eiqbc,
+				eiqDriver, bc.getQuery());
 		checker = eiqChecker;
 		eiqDriver.registerChecker(eiqChecker);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = EMFIncQueryTransformation.newInstance(
-					eiqDriver, bc.getQuery(),
-					bc.getScenario());
+			transformation = EMFIncQueryTransformation.newInstance(eiqDriver,
+					bc.getQuery(), bc.getScenario());
 		}
+		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
+		analyzer = (Analyzer) new EMFModelAnalyzer(eiqDriver);
 	}
 
 	@Override
