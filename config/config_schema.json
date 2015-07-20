@@ -82,7 +82,7 @@
       "minimum": 1,
       "default": 10
     },
-    "Series": {
+    "Runs": {
       "type": "integer",
       "minimum": 1,
       "default": 1

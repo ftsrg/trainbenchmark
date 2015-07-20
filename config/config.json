@@ -8,7 +8,7 @@
   },
   "MinSize": 1,
   "MaxSize": 1,
-  "Runs": 2,
+  "Runs": 1,
   "IterationCount": 3,
   "Queries": [
     "SwitchSet"
@@ -29,7 +29,6 @@
     "Batch",
     "Repair"
   ],
-  "Series": 1,
   "Tools": [
     "emfapi",
     "emfincquery",
@@ -43,5 +42,23 @@
     "drools5",
     "jena"
   ],
-  "Timeout": 600
+  "Timeout": 600,
+  "OptionalArguments": {
+    "emfincquery": [
+      "",
+      "localsearch"
+    ],
+    "jena": [
+      "",
+      "inferencing"
+    ],
+    "neo4j": [
+      "",
+      "javaapi"
+    ],
+    "sesame": [
+      "",
+      "inferencing"
+    ]
+  }
 }

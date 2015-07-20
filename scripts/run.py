@@ -62,27 +62,37 @@ def generate(formats, scenarios, sizes):
             util.set_working_directory("..")
 
 
-def measure(tools, scenarios, sizes, queries):
+def measure(tools, scenarios, sizes, queries, optional_arguments: dict):
     """Benchmark function.
     """
     for tool in tools:
-        path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
-        util.set_working_directory(path)
-        target = util.get_tool_jar(tool)
+        if tool in optional_arguments:
+            args = optional_arguments[tool]
+        else:
+            args = [""]
 
-        for scenario in scenarios:
-            for size in sizes:
-                for query in queries:
-                    print("Run benchmark: <tool: " + tool +
-                          ", scenario: " + scenario +
-                          ", query: " + query +
-                          ", size: " + str(size) + ">")
-                    subprocess.call(["java", "-Xmx" + java_xmx, "-jar", target,
-                                     "-scenario", scenario,
-                                     "-query", query,
-                                     "-size", str(size)
-                                     ])
-        util.set_working_directory("..")
+        for arg in args:
+            path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
+            util.set_working_directory(path)
+            target = util.get_tool_jar(tool)
+
+            for scenario in scenarios:
+                for size in sizes:
+                    for query in queries:
+                        print("Run benchmark: <tool: " + tool +
+                              ", scenario: " + scenario +
+                              ", query: " + query +
+                              ", size: " + str(size) +
+                              (", arg: " + arg if arg != "" else "") +
+                              ">")
+                        cmd = ["java", "-Xmx" + java_xmx, "-jar", target,
+                               "-scenario", scenario,
+                               "-query", query,
+                               "-size", str(size),
+                               arg
+                               ]
+                        subprocess.call(cmd)
+            util.set_working_directory("..")
 
 
 if __name__ == "__main__":
@@ -124,4 +134,4 @@ if __name__ == "__main__":
     if args.generate:
         generate(formats, config.scenarios, config.sizes)
     if args.measure:
-        measure(config.tools, config.scenarios, config.sizes, config.queries)
+        measure(config.tools, config.scenarios, config.sizes, config.queries, config.optional_arguments)
