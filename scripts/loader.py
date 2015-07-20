@@ -82,6 +82,7 @@ class Loader():
         config.scenarios = config_json["Scenarios"]
         config.sizes = util.get_power_of_two(config_json["MinSize"], config_json["MaxSize"])
         config.tools = config_json["Tools"]
+        config.optional_arguments = config_json["OptionalArguments"]
 
         return config
 
