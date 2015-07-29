@@ -1,5 +1,7 @@
 # Train Benchmark
 
+[![Join the chat at https://gitter.im/FTSRG/trainbenchmark](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FTSRG/trainbenchmark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
 
 **Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
