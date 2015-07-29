@@ -1,6 +1,6 @@
 # Train Benchmark
 
-* Travis: [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
+[![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
 
 **Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
 
@@ -32,13 +32,22 @@ The generator projects are responsible for generating instance models. Currently
 
 The benchmark projects are responsible for running the benchmarks.
 
-* Drools
-* EMF-IncQuery
-* Java
-* Jena
-* MySQL
-* Neo4j
-* Sesame
+* EMF
+  * Drools 5 & 6
+  * EMF API
+  * EMF-IncQuery
+  * Eclipse OCL
+* Property graph
+  * Neo4j
+  * OrientDB
+* RDF
+  * Allegro
+  * Blazegraph
+  * Jena
+  * Sesame
+  * Virtuoso
+* SQL
+  * MySQL
 
 ## Getting started
 
