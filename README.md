@@ -1,9 +1,6 @@
 # Train Benchmark
 
-* Jenkins: [![Build Status](https://build.inf.mit.bme.hu/jenkins/buildStatus/icon?job=Train-Benchmark)](https://build.inf.mit.bme.hu/jenkins/job/Train-Benchmark/)
 * Travis: [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
-* Waffle: [![Stories in Ready](https://badge.waffle.io/FTSRG/trainbenchmark.png?label=ready&title=Ready)](https://waffle.io/FTSRG/trainbenchmark)
-* [Sonar](http://build.inf.mit.bme.hu/sonar/dashboard/index/14429)
 
 **Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
 
