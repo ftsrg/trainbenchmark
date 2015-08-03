@@ -25,7 +25,7 @@ SET @segment2 :=
 
 -- insert (segment2) node as a Segment
 INSERT INTO Segment (id)
-VALUES (@segent2);
+VALUES (@segment2);
 
 -- insert (segment1)-[:connectsTo]->(segment3) edge
 INSERT INTO connectsTo

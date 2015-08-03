@@ -22,8 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
 
-public class RepairScenarioLogic extends
-		ScenarioLogic<AbstractBenchmarkCase<?, ?, ?>> {
+public class RepairScenarioLogic extends ScenarioLogic<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
@@ -32,12 +31,10 @@ public class RepairScenarioLogic extends
 		CheckPhase recheck = new CheckPhase("Recheck");
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"),
-				new InitTransformationPhase(
-						"InitTransformation"),
-				new ReadPhase("Read"), check, initMetrics,
-				calcMetrics, new TransformationPhase("Edit"),
-				recheck, new DestroyPhase("Destroy"));
+		seq.addPhases(new InitializationPhase("Init"), new InitTransformationPhase(
+				"InitTransformation"), new ReadPhase("Read"), initMetrics,
+				calcMetrics, check, new TransformationPhase("Edit"), recheck,
+				new DestroyPhase("Destroy"));
 		rootPhase = seq;
 
 	}
