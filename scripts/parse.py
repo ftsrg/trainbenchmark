@@ -13,85 +13,119 @@ def parse(results, filename):
         tiploc_key = "TiplocV1"
         seg_key = "schedule_segment"
         loc_key = "schedule_location"
+        locations = list()
 
         for obj in data:
+            # associations
             if assoc_key in obj.keys():
                 uid = get_value(obj, assoc_key, "main_train_uid")
                 assoc_uid = get_value(obj, assoc_key, "assoc_train_uid")
-                category = get_value(obj, assoc_key, "category")
-                location = get_value(obj, assoc_key, "location")
-                stp_indicator = get_value(obj, assoc_key, "CIF_stp_indicator")
 
                 if uid not in results[trains].keys():
-                    new_train(results, uid, assoc_label, location_label)
+                    new_train(results, uid)
+                if not contain(results[trains][uid][assoc_label],
+                               "AssociationUID", assoc_uid):
+                    new_association(results, uid, assoc_uid,
+                                    obj, assoc_key)
 
-                    new_association(results, uid, assoc_label, assoc_uid,
-                                    category, location, stp_indicator)
-                elif not contain(results[trains][uid][assoc_label],
-                                 "AssociationUID", assoc_uid):
-                    new_association(results, uid, assoc_label, assoc_uid,
-                                    category, location, stp_indicator)
-
+            # locations
             if tiploc_key in obj.keys():
                 tiploc_code = get_value(obj, tiploc_key, "tiploc_code")
                 stanox = get_value(obj, tiploc_key, "stanox")
                 nalco = get_value(obj, tiploc_key, "nalco")
 
-                if tiploc_code not in results[location_label].keys():
-                    new_location(results, tiploc_code, nalco, stanox)
+                new_location(results, tiploc_code)
+                extend_location(results, tiploc_code, nalco, stanox)
 
+            # schedules
             if schedule_key in obj.keys():
                 uid = get_value(obj, schedule_key, "CIF_train_uid")
-                status = get_value(obj, schedule_key, "train_status")
-                start_date = get_value(obj, schedule_key, "schedule_start_date")
-                transaction = get_value(obj, schedule_key, "transaction_type")
-                stp_indicator = get_value(obj, schedule_key,
-                                          "CIF_stp_indicator")
+
                 if uid not in results[trains].keys():
-                    new_train(results, uid, assoc_label, location_label)
-                    extend_train(results, start_date, status, stp_indicator,
-                                 transaction, uid)
-                elif "Status" not in results[trains][uid].keys():
-                    extend_train(results, start_date, status, stp_indicator,
-                                 transaction, uid)
+                    new_train(results, uid)
 
                 if seg_key in obj[schedule_key].keys():
                     if loc_key in obj[schedule_key][seg_key].keys():
+                        locations.clear()
                         for loc in obj[schedule_key][seg_key][loc_key]:
-                            if not contain(results[trains][uid][location_label],
-                                           "TiplocCode", loc["tiploc_code"]
-                                           ):
-                                results[trains][uid][location_label].append(
-                                              {"Type": loc["location_type"],
-                                               "TiplocCode": loc["tiploc_code"]
-                                               })
-
-
-def new_location(results, tiploc_code, nalco, stanox):
-    results[location_label].update({tiploc_code: dict()})
-    results[location_label][tiploc_code].update({
-        "Code": tiploc_code,
-        "Stanox": stanox,
-        "Nalco": nalco
-    })
-
-
-def extend_train(results, start_date, status, stp_indicator, transaction, uid):
-    results[trains][uid].update({"Status": status,
-                                 "StartDate": start_date,
-                                 "Transaction": transaction,
-                                 "STPIndicator": stp_indicator
+                            locations.append(
+                                {"Type": loc["location_type"],
+                                 "TiplocCode": loc["tiploc_code"]
                                  })
+                new_schedule(results, obj, uid, schedule_key, locations)
 
 
-def new_association(results, main_uid, assoc_label, assoc_uid, category,
-                    location, stp_indicator):
-    association = results[trains][main_uid][assoc_label]
-    association.append({"AssociationUID": assoc_uid,
-                        "Category": category,
-                        "Location": location,
-                        "STPIndicator": stp_indicator
-                        })
+def attach_locations(results):
+    locations = list()
+    for uid in results[trains]:
+        locations.clear()
+        for sch in results[trains][uid][schedule_label]:
+            prev = None
+            for loc in sch[location_label]:
+                if prev is not None:
+                    new_location_neighbor(results, prev, loc["TiplocCode"])
+                prev = loc["TiplocCode"]
+
+
+def new_location(results, tiploc_code):
+    if tiploc_code not in results[location_label].keys():
+        results[location_label].update({tiploc_code: dict()})
+
+
+def extend_location(results, tiploc_code, nalco, stanox):
+    if "Code" not in results[location_label][tiploc_code].keys():
+        results[location_label][tiploc_code]["Code"] = tiploc_code
+        results[location_label][tiploc_code]["Stanox"] = stanox
+        results[location_label][tiploc_code]["Nalco"] = nalco
+
+
+def new_location_neighbor(results, prev_loc, current_loc):
+    if neighbors not in results[location_label][prev_loc].keys():
+        results[location_label][prev_loc][neighbors] = list()
+    if current_loc not in results[location_label][prev_loc][neighbors]:
+        results[location_label][prev_loc][neighbors].append(current_loc)
+
+
+def new_train(results, uid):
+    results[trains].update({uid: dict()})
+    results[trains][uid].update({"UID": uid})
+    results[trains][uid].update({assoc_label: list()})
+    results[trains][uid].update({schedule_label: list()})
+
+
+def new_schedule(results, obj, uid, schedule_key, locations):
+    status = get_value(obj, schedule_key, "train_status")
+    start_date = get_value(obj, schedule_key, "schedule_start_date")
+    transaction = get_value(obj, schedule_key, "transaction_type")
+    stp_indicator = get_value(obj, schedule_key, "CIF_stp_indicator")
+    schedule_days_runs = get_value(obj, schedule_key, "schedule_days_runs")
+
+    results[trains][uid][schedule_label].append({
+        "Status": status,
+        "StartDate": start_date,
+        "Transaction": transaction,
+        "STPIndicator": stp_indicator,
+        "Days": schedule_days_runs,
+        location_label: list()
+    })
+    for l in locations:
+        # append locations to the last one schedule object
+        results[trains][uid][schedule_label][-1][location_label].append(l)
+
+
+def new_association(results, main_uid, assoc_uid, obj, assoc_key):
+    category = get_value(obj, assoc_key, "category")
+    location = get_value(obj, assoc_key, "location")
+    # stp_indicator = get_value(obj, assoc_key, "CIF_stp_indicator")
+    assoc_days = get_value(obj, assoc_key, "assoc_days")
+
+    results[trains][main_uid][assoc_label].append(
+                        {"AssociationUID": assoc_uid,
+                         "Category": category,
+                         "Location": location,
+                         # "STPIndicator": stp_indicator,
+                         "Days": assoc_days
+                         })
 
 
 def contain(dicts, key, value):
@@ -105,13 +139,6 @@ def contain(dicts, key, value):
             if d[key] == value:
                 return True
     return False
-
-
-def new_train(results, uid, assoc_label, location_label):
-    results[trains].update({uid: dict()})
-    results[trains][uid].update({"UID": uid})
-    results[trains][uid].update({assoc_label: list()})
-    results[trains][uid].update({location_label: list()})
 
 
 def get_value(data, *keys):
@@ -143,36 +170,75 @@ def describe(results):
     n_assoc = 0
     n_visited_locs = 0
     n_undefined_locs = 0
+    n_schedules = 0
+    n_neighbors = 0
+    neighbors_dict = dict()
     n_empty_status = 0
     n_empty_indicator = 0
     n_empty_start_date = 0
+    n_empty_stanox = 0
+    n_empty_nalco = 0
+
     for uid in results[trains]:
         n_assoc += len(results[trains][uid][assoc_label])
-        n_visited_locs += len(results[trains][uid][location_label])
-        for loc in results[trains][uid][location_label]:
-            if loc["TiplocCode"] not in results[location_label].keys():
-                n_undefined_locs += 1
-        n_empty_status += 1 if results[trains][uid]["Status"] == " " else 0
-        n_empty_indicator += 1 if results[trains][uid]["STPIndicator"] == " " \
-            else 0
-        n_empty_start_date += 1 if results[trains][uid]["StartDate"] == " " \
-            else 0
-        n_empty_status += 1 if results[trains][uid]["Status"] is None else 0
-        n_empty_indicator += 1 if results[trains][uid]["STPIndicator"] is None \
-            else 0
-        n_empty_start_date += 1 if results[trains][uid]["StartDate"] is None \
-            else 0
+        # n_visited_locs += len(results[trains][uid][location_label])
+        n_schedules += len(results[trains][uid][schedule_label])
+
+        for sch in results[trains][uid][schedule_label]:
+            prev_loc = None
+            for loc in sch[location_label]:
+                n_visited_locs += 1
+                if loc["TiplocCode"] not in results[location_label].keys():
+                    n_undefined_locs += 1
+                if prev_loc is not None:
+                    if prev_loc not in neighbors_dict.keys():
+                        neighbors_dict.update({prev_loc: list()})
+                    if loc["TiplocCode"] not in neighbors_dict[prev_loc]:
+                        neighbors_dict[prev_loc].append(loc["TiplocCode"])
+                prev_loc = loc["TiplocCode"]
+
+            n_empty_status += increase_if_empty(sch, "Status")
+            n_empty_indicator += increase_if_empty(sch, "STPIndicator")
+            n_empty_start_date += increase_if_empty(sch, "StartDate")
+
+    for loc in results[location_label]:
+        if results[location_label][loc]["Stanox"] is None:
+            n_empty_stanox += 1
+        if results[location_label][loc]["Nalco"] is None:
+            n_empty_nalco += 1
+        if neighbors in results[location_label][loc].keys():
+            n_neighbors += len(results[location_label][loc][neighbors])
+
     print("Number of associations: " + str(n_assoc))
     print("Number of visited locations: " + str(n_visited_locs))
+    print("Number of schedules: " + str(n_schedules))
     print("Number of undefined locations: " + str(n_undefined_locs))
+    print("Number of neighbors: " + str(n_neighbors))
     print("Number of empty status: " + str(n_empty_status))
     print("Number of empty indicators: " + str(n_empty_indicator))
     print("Number of empty start dates: " + str(n_empty_start_date))
+    print("Number of empty stanox: " + str(n_empty_stanox))
+    print("Number of empty nalco: " + str(n_empty_nalco))
+
+    all_neighbors = 0
+    for k in neighbors_dict.keys():
+        all_neighbors += len(neighbors_dict[k])
+    print(all_neighbors)
 
 
+def increase_if_empty(sch, key):
+    value = 0
+    value += 1 if sch[key] == " " else 0
+    value += 1 if sch[key] is None else 0
+    return value
+
+
+# important labels in the output file
 trains = "Trains"
 assoc_label = "Associations"
 location_label = "Locations"
+schedule_label = "Schedules"
+neighbors = "Neighbors"
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -181,20 +247,23 @@ if __name__ == "__main__":
                         action="store_true")
     args = parser.parse_args()
     filenames = glob.glob("./schedules*.json")
-    schedule = dict()
-    schedule.update({trains: dict()})
-    schedule.update({location_label: dict()})
+    filenames.sort()
+    results = dict()
+    results.update({trains: dict()})
+    results.update({location_label: dict()})
 
     if not args.describe:
         for f in filenames:
-            print(f)
-            parse(schedule, f)
-
+            print("Process: " + f)
+            parse(results, f)
+        print("Attach neighbors:")
+        attach_locations(results)
+        print("Done.")
         print("Writing the results: ")
-        with open("./results3.json", mode="w") as output:
-            json.dump(obj=schedule, fp=output, indent=2, allow_nan=True)
+        with open("./results.json", mode="w") as output:
+            json.dump(obj=results, fp=output, indent=1, allow_nan=True)
         print("Done.")
     else:
-        with open("./results3.json") as file:
-            schedule = json.load(file)
-            describe(schedule)
+        with open("./results.json") as file:
+            results = json.load(file)
+            describe(results)
