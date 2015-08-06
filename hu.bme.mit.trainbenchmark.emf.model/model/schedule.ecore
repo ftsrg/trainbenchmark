@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="schedule" nsURI="http://www.semanticweb.org/ontologies/2015/trainbenchmark/schedule"
+    nsPrefix="hu.bme.mit.trainbenchmark">
+  <eClassifiers xsi:type="ecore:EClass" name="TrainContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trains" lowerBound="1"
+        upperBound="-1" eType="#//Train" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Schedule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destinations" lowerBound="1"
+        upperBound="-1" eType="#//Station" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//TrainStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transaction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="days" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="planning" eType="#//SchedulePlanning"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
+        eType="#//Station" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" lowerBound="1"
+        eType="#//Station" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Train">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schedules" lowerBound="1"
+        upperBound="-1" eType="#//Schedule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//Association" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uid" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Station">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="neighbors" lowerBound="1"
+        upperBound="-1" eType="#//Station"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stanox" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nalco" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
+        eType="#//Station"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associative" lowerBound="1"
+        eType="#//Train"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="#//AssociationCategory"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="days" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AssociationCategory">
+    <eLiterals name="JOIN"/>
+    <eLiterals name="DIVIDE" value="1"/>
+    <eLiterals name="NEXT" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TrainStatus">
+    <eLiterals name="FREIGHT"/>
+    <eLiterals name="PASSENGER" value="1"/>
+    <eLiterals name="SHIP" value="2"/>
+    <eLiterals name="BUS" value="3"/>
+    <eLiterals name="TRIP" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SchedulePlanning">
+    <eLiterals name="PERMANENT"/>
+    <eLiterals name="SHORT_TERM" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

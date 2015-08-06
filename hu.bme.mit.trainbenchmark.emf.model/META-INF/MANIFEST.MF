@@ -9,7 +9,10 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: hu.bme.mit.trainbenchmark.railway,
  hu.bme.mit.trainbenchmark.railway.impl,
- hu.bme.mit.trainbenchmark.railway.util
+ hu.bme.mit.trainbenchmark.railway.util,
+ hu.bme.mit.trainbenchmark.schedule,
+ hu.bme.mit.trainbenchmark.schedule.impl,
+ hu.bme.mit.trainbenchmark.schedule.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;bundle-version="2.9.2";visibility:=reexport
 Bundle-ActivationPolicy: lazy

@@ -14,4 +14,12 @@
             genModel="model/railway.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated schedule -->
+      <package
+            uri="http://www.semanticweb.org/ontologies/2015/trainbenchmark/schedule"
+            class="hu.bme.mit.trainbenchmark.schedule.SchedulePackage"
+            genModel="model/schedule.genmodel"/>
+   </extension>
+
 </plugin>

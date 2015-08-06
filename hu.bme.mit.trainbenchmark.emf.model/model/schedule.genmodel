@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.trainbenchmark.emf.model/src" modelPluginID="hu.bme.mit.trainbenchmark.emf.model"
+    modelName="Schedule" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>schedule.ecore</foreignModel>
+  <genPackages prefix="Schedule" basePackage="hu.bme.mit.trainbenchmark" disposableProviderFactory="true"
+      ecorePackage="schedule.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="schedule.ecore#//AssociationCategory">
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//AssociationCategory/JOIN"/>
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//AssociationCategory/DIVIDE"/>
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//AssociationCategory/NEXT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="schedule.ecore#//TrainStatus">
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//TrainStatus/FREIGHT"/>
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//TrainStatus/PASSENGER"/>
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//TrainStatus/SHIP"/>
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//TrainStatus/BUS"/>
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//TrainStatus/TRIP"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="schedule.ecore#//SchedulePlanning">
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//SchedulePlanning/PERMANENT"/>
+      <genEnumLiterals ecoreEnumLiteral="schedule.ecore#//SchedulePlanning/SHORT_TERM"/>
+    </genEnums>
+    <genClasses ecoreClass="schedule.ecore#//TrainContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference schedule.ecore#//TrainContainer/trains"/>
+    </genClasses>
+    <genClasses ecoreClass="schedule.ecore#//Schedule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference schedule.ecore#//Schedule/destinations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Schedule/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Schedule/startDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Schedule/transaction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Schedule/days"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Schedule/planning"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference schedule.ecore#//Schedule/origin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference schedule.ecore#//Schedule/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="schedule.ecore#//Train">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference schedule.ecore#//Train/schedules"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference schedule.ecore#//Train/associations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Train/uid"/>
+    </genClasses>
+    <genClasses ecoreClass="schedule.ecore#//Station">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference schedule.ecore#//Station/neighbors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Station/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Station/stanox"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Station/nalco"/>
+    </genClasses>
+    <genClasses ecoreClass="schedule.ecore#//Association">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference schedule.ecore#//Association/location"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference schedule.ecore#//Association/associative"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Association/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute schedule.ecore#//Association/days"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
