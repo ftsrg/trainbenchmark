@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.RailwayGenerator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
@@ -27,7 +28,7 @@ import java.util.Map.Entry;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
-public class RDFGenerator extends Generator {
+public class RDFGenerator extends RailwayGenerator {
 
 	public RDFGenerator(final String args[]) throws ParseException {
 		super();

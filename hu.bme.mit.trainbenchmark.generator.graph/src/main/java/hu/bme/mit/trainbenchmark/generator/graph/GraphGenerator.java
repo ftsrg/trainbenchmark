@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.generator.graph;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.RailwayGenerator;
 import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
 
 import java.io.File;
@@ -38,7 +39,7 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
-public class GraphGenerator extends Generator {
+public class GraphGenerator extends RailwayGenerator {
 
 	public GraphGenerator(final String args[]) throws ParseException {
 		super();

@@ -18,7 +18,7 @@ public class GraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
 		final Generator generator = new GraphGenerator(args);
-		generator.generateModels();
+		generator.generate();
 	}
 
 }

@@ -10,15 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.emf;
+package hu.bme.mit.trainbenchmark.generator;
 
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-public class EMFGeneratorMain {
+public abstract class ScheduleGenerator extends Generator{
 
-	public static void main(final String[] args) throws Exception {
-		final Generator generator = new EMFGenerator(args);
-		generator.generate();
+	@Override
+	protected void generateModel() throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
 	}
-
+	
+	public void parseModel() {
+		
+	}
+	
+	
+	
 }

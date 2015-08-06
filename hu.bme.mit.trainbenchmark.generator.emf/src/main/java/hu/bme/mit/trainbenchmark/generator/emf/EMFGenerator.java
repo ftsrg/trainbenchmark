@@ -18,6 +18,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.emf.FileBroker;
 import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.RailwayGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -40,7 +41,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-public class EMFGenerator extends Generator {
+public class EMFGenerator extends RailwayGenerator {
 
 	public EMFGenerator(final String args[]) throws ParseException {
 		super();

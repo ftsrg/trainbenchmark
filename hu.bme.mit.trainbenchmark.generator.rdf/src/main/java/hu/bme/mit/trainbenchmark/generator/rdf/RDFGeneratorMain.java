@@ -18,7 +18,7 @@ public class RDFGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
 		final Generator generator = new RDFGenerator(args);
-		generator.generateModels();
+		generator.generate();
 	}
 
 }

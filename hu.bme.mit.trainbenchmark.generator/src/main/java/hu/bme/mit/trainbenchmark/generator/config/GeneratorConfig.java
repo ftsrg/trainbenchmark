@@ -18,6 +18,8 @@ import org.apache.commons.cli.ParseException;
 
 public class GeneratorConfig extends TrainBenchmarkConfig {
 
+	protected String modelType;
+	
 	public GeneratorConfig(final String[] args) throws ParseException {
 		super(args);
 	}
@@ -25,11 +27,15 @@ public class GeneratorConfig extends TrainBenchmarkConfig {
 	@Override
 	protected void initOptions() {
 		super.initOptions();
+		options.addOption(requiredOption("model", 
+				"the type of the model"));
 	}
 
 	@Override
 	protected void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
+		modelType = cmd
+				.getOptionValue("model");
 	}
 
 }
