@@ -60,3 +60,4 @@ class CommonParameters:
         self.iter_count = None
         self.path = None
         self.analyze = None
+        self.model = None

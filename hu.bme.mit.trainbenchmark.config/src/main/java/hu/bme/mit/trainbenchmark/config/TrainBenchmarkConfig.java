@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.config;
 
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ModelType;
 
 import java.util.Arrays;
 
@@ -34,6 +35,7 @@ public abstract class TrainBenchmarkConfig {
 	// arguments
 	protected int size;
 	protected Scenario scenario;
+	protected ModelType modelType;
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
@@ -60,6 +62,7 @@ public abstract class TrainBenchmarkConfig {
 		options.addOption("help", false, "displays this text");
 		options.addOption(requiredOption("scenario", "Batch/Inject/Repair"));
 		options.addOption(requiredOption("size", "model size, e.g. 4"));
+		options.addOption(requiredOption("model", "the type of the model"));
 	}
 
 	protected void processArguments(final String[] args) throws ParseException {
@@ -67,6 +70,7 @@ public abstract class TrainBenchmarkConfig {
 
 		scenario = Scenario.valueOf(cmd.getOptionValue("scenario").toUpperCase());
 		size = Integer.parseInt(cmd.getOptionValue("size"));
+		modelType = ModelType.valueOf(cmd.getOptionValue("model").toUpperCase().replace("-", "_"));
 	}
 
 	// shorthand for generating required options
@@ -104,15 +108,28 @@ public abstract class TrainBenchmarkConfig {
 		return getWorkspacePath() + "models/";
 	}
 
+	public ModelType getModelType() {
+		return modelType;
+	}
+	
+	public void setModelType(ModelType modelType) {
+		this.modelType = modelType;
+	}
+	
 	public String getModelPathNameWithoutExtension() {
 		final String filename = getModelFileNameWithoutExtension();
 		return getModelPath() + filename;
 	}
 
 	public String getModelFileNameWithoutExtension() {
-		final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase();
-		final String filename = "railway-" + variant + "-" + size;
-		return filename;
+		switch (modelType) {
+		case SCHEDULE_REAL: 
+			return "schedule-real";
+		default:
+			final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase();
+			final String filename = "railway-" + variant + "-" + size;
+			return filename;
+		}
 	}
 
 }

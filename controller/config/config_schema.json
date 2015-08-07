@@ -25,6 +25,13 @@
         ]
       }
     },
+    "Model": {
+     "enum": [
+        "Railway",
+        "Schedule-Real"
+      ],
+      "default": "constant"
+    },
     "MAVEN_OPTS": {
       "type": "object",
       "properties": {
