@@ -39,11 +39,11 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
-public class GraphGenerator extends RailwayGenerator {
+public class GraphRailwayGenerator extends RailwayGenerator {
 
-	public GraphGenerator(final String args[]) throws ParseException {
+	public GraphRailwayGenerator(GraphGeneratorConfig generatorConfig){
 		super();
-		generatorConfig = graphGeneratorConfig = new GraphGeneratorConfig(args);
+		this.generatorConfig = generatorConfig;
 	}
 
 	@Override
@@ -77,37 +77,41 @@ public class GraphGenerator extends RailwayGenerator {
 	@Override
 	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
-		final Node node = graphDb.createNode(DynamicLabel.label(type));
+		final Node node;
+		try (Transaction tx = graphDb.beginTx()) {
+			node = graphDb.createNode(DynamicLabel.label(type));
 
-		// this only works for inheritance hierarchies with
-		if (ModelConstants.ancestors.containsKey(type)) {
-			final String ancestor = ModelConstants.ancestors.get(type);
-			node.addLabel(DynamicLabel.label(ancestor));
-		}
-
-		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			final String key = attribute.getKey();
-			Object value = attribute.getValue();
-
-			// convert the value to string if it's an enum
-			value = enumsToString(value);
-			node.setProperty(key, value);
-		}
-
-		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
-			final String label = outgoingEdge.getKey();
-			if (outgoingEdge.getValue() instanceof Node) {
-				final Node targetNode = (Node) outgoingEdge.getValue();
-				node.createRelationshipTo(targetNode, relationship(label));
+			// this only works for inheritance hierarchies with
+			if (ModelConstants.ancestors.containsKey(type)) {
+				final String ancestor = ModelConstants.ancestors.get(type);
+				node.addLabel(DynamicLabel.label(ancestor));
 			}
-		}
 
-		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
-			final String label = incomingEdge.getKey();
-			if (incomingEdge.getValue() instanceof Node) {
-				final Node sourceNode = (Node) incomingEdge.getValue();
-				sourceNode.createRelationshipTo(node, relationship(label));
+			for (final Entry<String, Object> attribute : attributes.entrySet()) {
+				final String key = attribute.getKey();
+				Object value = attribute.getValue();
+
+				// convert the value to string if it's an enum
+				value = enumsToString(value);
+				node.setProperty(key, value);
 			}
+
+			for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
+				final String label = outgoingEdge.getKey();
+				if (outgoingEdge.getValue() instanceof Node) {
+					final Node targetNode = (Node) outgoingEdge.getValue();
+					node.createRelationshipTo(targetNode, relationship(label));
+				}
+			}
+
+			for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
+				final String label = incomingEdge.getKey();
+				if (incomingEdge.getValue() instanceof Node) {
+					final Node sourceNode = (Node) incomingEdge.getValue();
+					sourceNode.createRelationshipTo(node, relationship(label));
+				}
+			}
+			tx.success();
 		}
 
 		return node;

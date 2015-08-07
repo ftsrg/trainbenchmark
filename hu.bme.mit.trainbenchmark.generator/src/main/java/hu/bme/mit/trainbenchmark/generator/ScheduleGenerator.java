@@ -12,21 +12,44 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class ScheduleGenerator extends Generator{
 
 	@Override
 	protected void generateModel() throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		
 	}
 	
-	public void parseModel() {
-		
+	@Override
+	public void generate() throws Exception {
+		switch (generatorConfig.getModelType()){
+		case SCHEDULE_REAL:
+			initModel();
+			parseModel();
+			persistModel();
+			break;
+		default:
+			generateModel();
+			persistModel();
+		}
 	}
-	
-	
+
+	public void parseModel() throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(new File(generatorConfig.getModelPathNameWithoutExtension() + ".json"));
+
+		JsonNode trains = root.get("Trains");
+		for (JsonNode train : trains) {
+			createVertex(ScheduleConstants.TRAIN);
+		}
+	}
 	
 }

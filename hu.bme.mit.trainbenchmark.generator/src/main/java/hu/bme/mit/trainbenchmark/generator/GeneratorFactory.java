@@ -10,31 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.config;
+package hu.bme.mit.trainbenchmark.generator;
 
-import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.ModelType;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-import org.apache.commons.cli.ParseException;
+public abstract class GeneratorFactory {
 
-public class GeneratorConfig extends TrainBenchmarkConfig {
-
+	protected GeneratorConfig generatorConfig;
 	
+	public GeneratorFactory(GeneratorConfig generatorConfig) {
+		this.generatorConfig = generatorConfig;
+	}
 	
-	public GeneratorConfig(final String[] args) throws ParseException {
-		super(args);
+	public Generator getGenerator() {
+		switch (generatorConfig.getModelType()) {
+		case SCHEDULE_REAL:
+			return getScheduleGenerator();
+		default:
+			return getRailwayGenerator();
+		}
 	}
-
-	@Override
-	protected void initOptions() {
-		super.initOptions();
-		
-	}
-
-	@Override
-	protected void processArguments(final String[] args) throws ParseException {
-		super.processArguments(args);
-		
-	}
-
+	
+	protected abstract Generator getRailwayGenerator();
+	
+	protected abstract Generator getScheduleGenerator();
 }
