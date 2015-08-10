@@ -28,10 +28,10 @@ sudo apt-get install python3-pip
 In this scenario every necessary external package will be installed globally to the system (e.g. pip, third-party modules). In this case just execute the following script from the `scripts/init/` directory:
 
 ```bash
-./initialize.py
+sudo ./initialize.py
 ```
 
-Note that root password is required for the successful deployment. As a result, the required third-party python modules will be installed and the Controller can be used already.
+As a result, the required third-party python modules will be installed and the Controller can be used already.
 
 #### Install virtual environment (optional)
 
@@ -75,14 +75,6 @@ Benchmarking:
 ```bash
 ./run.py -m
 ```
-
-Build and generate the models instantly:
-
-```bash
-./run.py --generate
-# or the shorter version
-./run.py -g
- ```
 
 It is also feasible to build only some parts of the Train Benchmark:
 
