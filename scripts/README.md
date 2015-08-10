@@ -49,45 +49,9 @@ To turn off the environment, execute the `deactivate` command. However, every ti
 
 ### Usage
 
-```bash
-cd scripts/
-```
-
-Build the projects:
-
-```bash
-./run.py -b
-```
-
-Generate the models:
-
-```bash
-./run.py -g
-```
-
-The generated models will be created under the `models` directory in the root folder of the Train Benchmark.
-
-Benchmarking:
-
-```bash
-./run.py -m
-```
-
-It is also feasible to build only some parts of the Train Benchmark:
-
-```bash
-./run.py --tools
-# or
-./run.py --tools --format
-```
-For more information read the module's help page: `./run.py -h`
-
-All in one:
-
-```bash
-./run.py --generate --benchmark
-# or
-./run.py -g -b
-# or
-./run.py -gb
-```
+The `scripts` directory contains the `run.py` script which is used for the following purposes:
+* `run.py -b` -- builds the projects
+* `run.py -b -s` -- builds the projects without testing
+* `run.py -g` -- generates the instance models
+* `run.py -m` -- runs the benchmark
+* `run.py -h` -- displays the help
