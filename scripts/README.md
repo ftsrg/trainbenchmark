@@ -17,6 +17,12 @@ Find further information about virtual environments [here](#install-virtual-envi
 
 It is necessary to install the required external modules for Python. Two options exist. The first one is installing packages globally and the second one is installing everything into a virtual environment.
 
+Install `pip3`:
+
+```bash
+sudo apt-get install python3-pip
+```
+
 #### Install globally
 
 In this scenario every necessary external package will be installed globally to the system (e.g. pip, third-party modules). In this case just execute the following script from the `scripts/init/` directory:
