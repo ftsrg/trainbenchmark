@@ -1,8 +1,6 @@
-# Train Benchmark Controller scripts
+### Scripts
 
-### Overview
-
-The controller is responsible for providing a configuration for Train Benchmark and also support management for building the actual projects, generating the models and also running the benchmark tests. Every process is executed on the base of a `config.json` file. To alter the default configuration of Train Benchmark, just modify `config.json` file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
+The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.json` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
 ### Requirements
 
@@ -10,8 +8,7 @@ The controller is responsible for providing a configuration for Train Benchmark 
 * Maven 3
 * Python 3 (tested with 3.4)
 
-In the case of using virtual environment python3.4 interpreter is necessary.
-Find further information about virtual environments [here](#install-virtual-environment-optional).
+In the case of using virtual environment a Python 3.4 interpreter is necessary. For further information about virtual environments, read [here](#install-virtual-environment-optional).
 
 ### Installation guide
 
@@ -94,7 +91,3 @@ All in one:
 # or
 ./run.py -gb
 ```
-
-### Configuration
-
-Read the [wiki](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
