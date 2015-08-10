@@ -1,8 +1,6 @@
-# Train Benchmark Controller scripts
+### Scripts
 
-### Overview
-
-The controller is responsible for providing a configuration for Train Benchmark and also support management for building the actual projects, generating the models and also running the benchmark tests. Every process is executed on the base of a `config.json` file. To alter the default configuration of Train Benchmark, just modify `config.json` file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
+The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.json` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
 ### Requirements
 
@@ -10,22 +8,27 @@ The controller is responsible for providing a configuration for Train Benchmark 
 * Maven 3
 * Python 3 (tested with 3.4)
 
-In the case of using virtual environment python3.4 interpreter is necessary.
-Find further information about virtual environments [here](#install-virtual-environment-optional).
+In the case of using virtual environment a Python 3.4 interpreter is necessary. For further information about virtual environments, read [here](#install-virtual-environment-optional).
 
 ### Installation guide
 
 It is necessary to install the required external modules for Python. Two options exist. The first one is installing packages globally and the second one is installing everything into a virtual environment.
+
+Install `pip3`:
+
+```bash
+sudo apt-get install python3-pip
+```
 
 #### Install globally
 
 In this scenario every necessary external package will be installed globally to the system (e.g. pip, third-party modules). In this case just execute the following script from the `scripts/init/` directory:
 
 ```bash
-./initialize.py
+sudo ./initialize.py
 ```
 
-Note that root password is required for the successful deployment. As a result, the required third-party python modules will be installed and the Controller can be used already.
+As a result, the required third-party python modules will be installed and the Controller can be used already.
 
 #### Install virtual environment (optional)
 
@@ -46,57 +49,9 @@ To turn off the environment, execute the `deactivate` command. However, every ti
 
 ### Usage
 
-```bash
-cd scripts/
-```
-
-Build the projects:
-
-```bash
-./run.py -b
-```
-
-Generate the models:
-
-```bash
-./run.py -g
-```
-
-The generated models will be created under the `models` directory in the root folder of the Train Benchmark.
-
-Benchmarking:
-
-```bash
-./run.py -m
-```
-
-Build and generate the models instantly:
-
-```bash
-./run.py --generate
-# or the shorter version
-./run.py -g
- ```
-
-It is also feasible to build only some parts of the Train Benchmark:
-
-```bash
-./run.py --tools
-# or
-./run.py --tools --format
-```
-For more information read the module's help page: `./run.py -h`
-
-All in one:
-
-```bash
-./run.py --generate --benchmark
-# or
-./run.py -g -b
-# or
-./run.py -gb
-```
-
-### Configuration
-
-Read the [wiki](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
+The `scripts` directory contains the `run.py` script which is used for the following purposes:
+* `run.py -b` -- builds the projects
+* `run.py -b -s` -- builds the projects without testing
+* `run.py -g` -- generates the instance models
+* `run.py -m` -- runs the benchmark
+* `run.py -h` -- displays the help
