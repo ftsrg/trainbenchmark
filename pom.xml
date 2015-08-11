@@ -32,7 +32,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
@@ -50,11 +49,12 @@
 		</profile>
 
 		<profile>
-			<id>thirdparty</id>
+			<id>notest</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 			</modules>
