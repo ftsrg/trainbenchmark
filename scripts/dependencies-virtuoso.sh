@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$( cd "$( dirname "$0" )" && pwd )/.."
+
 mvn install:install-file \
        -Dfile=./hu.bme.mit.trainbenchmark.benchmark.virtuoso/src/main/resources/virt_sesame2.jar \
        -DgroupId=virtuoso \

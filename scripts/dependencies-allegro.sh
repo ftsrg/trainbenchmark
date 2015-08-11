@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$( cd "$( dirname "$0" )" && pwd )/.."
+
 mvn install:install-file \
        -Dfile=./hu.bme.mit.trainbenchmark.benchmark.allegro/src/main/resources/agraph-5.0.jar \
        -DgroupId=com.franz \
