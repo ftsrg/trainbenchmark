@@ -1,6 +1,6 @@
 {
   "JAVA_OPTS": {
-    "Xmx": "2g"
+    "Xmx": "2G"
   },
   "Arguments": {
     "Generator": "",

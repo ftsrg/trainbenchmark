@@ -4,11 +4,6 @@ Created on Sep 28, 2014
 
 @author: Zsolt Kovari
 
-The module is responsible for resolving the dependencies between repositories,
-furthermore build the projects with Maven. With the optional arguments,
-there is an opportunity to generate the models and run the benchmark tests.
-
-SzG:
 This script assumes that the required dependencies are available from either 
 the local Maven repository or the Maven Central Repository.
 """
@@ -20,11 +15,6 @@ from loader import Loader
 
 
 def build(formats, tools, skip_tests):
-    """Build the projects.
-    
-    @param configurations: a list of Configuration objects
-    @param skip_tests: skip JUnit tests if given
-    """
     profiles = {"core"}
     profiles = profiles.union(formats)
     profiles = profiles.union(tools)
@@ -37,11 +27,15 @@ def build(formats, tools, skip_tests):
     subprocess.call(cmd)
 
 
-def generate(formats, scenarios, sizes):
-    """
-    Generates the models after the configurations parameter.
-    """
+def build_ci():
+    cmd_ci = ["mvn", "clean", "install", "-P", "ci"]
+    subprocess.call(cmd_ci)
+    # skip the tests for tools with third-party dependencies
+    cmd_thirdparty = ["mvn", "clean", "install", "-P", "thirdparty", "-DskipTests"]
+    subprocess.call(cmd_thirdparty)
 
+
+def generate(formats, scenarios, sizes):
     for scenario in scenarios:
         for format in formats:
             path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
@@ -59,8 +53,6 @@ def generate(formats, scenarios, sizes):
 
 
 def measure(tools, scenarios, sizes, queries, optional_arguments: dict):
-    """Benchmark function.
-    """
     for tool in tools:
         if tool in optional_arguments:
             args = optional_arguments[tool]
@@ -93,8 +85,11 @@ def measure(tools, scenarios, sizes, queries, optional_arguments: dict):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--ci",
+                        help="CI build",
+                        action="store_true")
     parser.add_argument("-b", "--build",
-                        help="build the project",
+                        help="build the projects",
                         action="store_true")
     parser.add_argument("-g", "--generate",
                         help="generate models",
@@ -116,8 +111,6 @@ if __name__ == "__main__":
     for tool in config.tools:
         formats.add(loader.get_format(tool))
 
-    java_xmx = "2g"
-
     # if there are no args, execute a full sequence
     # with the test and the visualization/reporting
     no_args = all(val is False for val in vars(args).values())
@@ -125,9 +118,11 @@ if __name__ == "__main__":
         args.build = True
         args.generate = True
         args.measure = True
+    if args.ci:
+        build_ci()
     if args.build:
         build(formats, config.tools, args.skip_tests)
     if args.generate:
         generate(formats, config.scenarios, config.sizes)
     if args.measure:
-        measure(config.tools, config.scenarios, config.sizes, config.queries, config.optional_arguments)
+        measure(config.tools, config.scenarios, config.sizes, config.queries, config.optional_arguments, config.java_opts)

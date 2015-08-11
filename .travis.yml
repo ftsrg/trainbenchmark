@@ -4,4 +4,7 @@ python:
   - "3.4"
 script:
   - scripts/dep-mondo-sam.sh
-  - scripts/run.py
+  - scripts/dep-neo4j.sh
+  - scripts/dep-allegro.sh
+  - scripts/dep-virtuoso.sh
+  - scripts/run.py --ci
