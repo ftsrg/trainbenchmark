@@ -3,6 +3,4 @@ language: python
 python:
   - "3.4"
 script:
-  - scripts/resolve-dependencies.sh
-  - scripts/init/initialize.py
   - scripts/run.py

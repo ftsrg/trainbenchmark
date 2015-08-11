@@ -18,7 +18,7 @@ For theoretical and implementation details, check out the following documents:
 Besides these requirements, it is also necessary to clone and build the [MONDO-SAM](https://github.com/FTSRG/mondo-sam) project. The easiest way is to run the following script:
 
 ```bash
-scripts/resolve-dependencies.sh
+scripts/dependencies-mondo-sam.sh
 ```
 
 ## Projects
@@ -55,29 +55,15 @@ The benchmark projects are responsible for running the benchmarks.
 
 ## Getting started
 
-To get familiar with the Train Benchmark, we recommend to try an existing implementation, e.g. the Sesame implementation.
-
-## Platform dependencies
-
-#### Linux
-
-Make sure you have Maven 3 on the path.
-
-```bash
-mvn --version
-```
-
-### Scripts
-
 The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.json` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
-#### Installation guide
+### Installation guide
 
 ```bash
 scripts/initialize.sh
 ```
 
-#### Usage
+### Usage
 
 The `scripts` directory contains the `run.py` script which is used for the following purposes:
 * `run.py -b` -- build the projects
