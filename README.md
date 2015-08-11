@@ -13,9 +13,13 @@ For theoretical and implementation details, check out the following documents:
 * 64-bit operating system (we recommend Ubuntu-based Linux systems)
 * [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
+* Python 3
 
-Besides these requirements, it is also necessary to clone and build the [MONDO-SAM](https://github.com/FTSRG/mondo-sam) project. The easiest way is to run the following script from the `trainbenchmark/scripts` directory:
-* `./resolve-dependencies.sh`
+Besides these requirements, it is also necessary to clone and build the [MONDO-SAM](https://github.com/FTSRG/mondo-sam) project. The easiest way is to run the following script:
+
+```bash
+scripts/resolve-dependencies.sh
+```
 
 ## Projects
 
@@ -60,23 +64,33 @@ To get familiar with the Train Benchmark, we recommend to try an existing implem
 Make sure you have Maven 3 on the path.
 
 ```bash
-$ mvn --version
+mvn --version
 ```
 
-#### Windows
+### Scripts
 
-Please note that the Windows version of the benchmark is not complete (e.g. 4store is not available on Windows) and is not maintained actively.
+The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.json` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
-* [Cygwin](http://www.cygwin.com/) is required to run the shell scripts.
-* Make sure the `JAVA_HOME` environment variable is set to the folder of the JDK.
-* Due to legacy [limitations](http://msdn.microsoft.com/en-us/library/aa365247), Eclipse applications do no support paths longer than 260 characters. This causes the following error: `The Eclipse executable launcher was unable to locate its companion shared library`.
-  To work around this, on Windows the build script moves the generated Eclipse application products higher in the directory structure and the benchmark script calls the applications accordingly.
+#### Installation guide
+
+```bash
+scripts/initialize.sh
+```
+
+#### Usage
+
+The `scripts` directory contains the `run.py` script which is used for the following purposes:
+* `run.py -b` -- build the projects
+* `run.py -b -s` -- build the projects without testing
+* `run.py -g` -- generates the instance models
+* `run.py -m` -- runs the benchmark
+* `run.py -h` -- displays the help
 
 ### Importing to Eclipse
 
-The projects are developed and tested with **Eclipse Kepler**. In Eclipse Luna you may experience problems if you wish to edit the EMF metamodel.
+The projects are developed and tested with **Eclipse Mars**.
 
-To import and develop the Train Benchmark, you need the m2e Eclipse plugin, included in Eclipse for Java developers. If you use another distribution (e.g. Eclipse Modeling), you can install it from the Kepler update site or the m2e update site (<http://download.eclipse.org/technology/m2e/releases>).
+To import and develop the Train Benchmark, you need the m2e Eclipse plugin, included in Eclipse for Java developers. If you use another distribution (e.g. Eclipse Modeling), you can install it from the Mars update site or the m2e update site (<http://download.eclipse.org/technology/m2e/releases>).
 
 ### Naming conventions
 
