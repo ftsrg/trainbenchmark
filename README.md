@@ -70,7 +70,7 @@ Please note that the Windows version of the benchmark is not complete (e.g. 4sto
 * [Cygwin](http://www.cygwin.com/) is required to run the shell scripts.
 * Make sure the `JAVA_HOME` environment variable is set to the folder of the JDK.
 * Due to legacy [limitations](http://msdn.microsoft.com/en-us/library/aa365247), Eclipse applications do no support paths longer than 260 characters. This causes the following error: `The Eclipse executable launcher was unable to locate its companion shared library`.
-  To work around this, on Windows the build script moves the generated Eclpise application products higher in the directory structure and the benchmark script calls the applications accordingly.
+  To work around this, on Windows the build script moves the generated Eclipse application products higher in the directory structure and the benchmark script calls the applications accordingly.
 
 ### Importing to Eclipse
 
