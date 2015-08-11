@@ -19,10 +19,6 @@ import util
 from loader import Loader
 
 
-def flatten(lst):
-    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
-
-
 def build(formats, tools, skip_tests):
     """Build the projects.
     
