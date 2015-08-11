@@ -17,6 +17,10 @@ import logging
 import glob
 
 
+def flatten(lst):
+    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
+
+
 def set_working_directory(path=None):
     """
     Sets the working directory to this script's folder or to the path
