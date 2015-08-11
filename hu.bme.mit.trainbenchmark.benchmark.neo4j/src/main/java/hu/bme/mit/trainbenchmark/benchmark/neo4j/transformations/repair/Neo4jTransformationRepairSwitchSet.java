@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
+
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 
 public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformationRepair<Neo4jSwitchSetMatch> {
 
@@ -30,8 +30,7 @@ public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformationRepai
 	public void rhs(final Collection<Neo4jSwitchSetMatch> matches) {
 		for (final Neo4jSwitchSetMatch sstm : matches) {
 			final Node sw = sstm.getSw();
-			final Node swP = sstm.getSwP();
-			final Object position = swP.getProperty(POSITION);
+			final String position = sstm.getPosition();
 			sw.setProperty(CURRENTPOSITION, position);
 		}
 	}

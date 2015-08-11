@@ -15,11 +15,13 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 
 import java.util.Map;
 
 import org.neo4j.graphdb.Node;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 public class Neo4jSwitchSetMatch extends Neo4jMatch implements SwitchSetMatch {
 
@@ -45,6 +47,14 @@ public class Neo4jSwitchSetMatch extends Neo4jMatch implements SwitchSetMatch {
 	@Override
 	public Node getSw() {
 		return (Node) match.get(VAR_SW);
+	}
+
+	public String getCurrentPosition() {
+		return (String) match.get(QueryConstants.VAR_CURRENTPOSITION);
+	}
+
+	public String getPosition() {
+		return (String) match.get(QueryConstants.VAR_POSITION);
 	}
 
 	@Override
