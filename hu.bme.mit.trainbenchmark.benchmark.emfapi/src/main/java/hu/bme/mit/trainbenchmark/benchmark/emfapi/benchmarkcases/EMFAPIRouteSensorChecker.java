@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
@@ -26,9 +26,9 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaRouteSensorChecker extends JavaChecker<EMFRouteSensorMatch> {
+public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch> {
 
-	public JavaRouteSensorChecker(final EMFDriver emfDriver) {
+	public EMFAPIRouteSensorChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 

@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
@@ -26,9 +26,9 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSwitchSetChecker extends JavaChecker<EMFSwitchSetMatch> {
+public class EMFAPISwitchSetChecker extends EMFAPIChecker<EMFSwitchSetMatch> {
 
-	public JavaSwitchSetChecker(final EMFDriver emfDriver) {
+	public EMFAPISwitchSetChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 

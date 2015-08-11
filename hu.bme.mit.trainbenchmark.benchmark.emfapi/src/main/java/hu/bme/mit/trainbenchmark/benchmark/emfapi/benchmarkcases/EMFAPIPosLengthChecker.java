@@ -10,11 +10,11 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,30 +22,30 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSwitchSensorChecker extends JavaChecker<EMFSwitchSensorMatch> {
+public class EMFAPIPosLengthChecker extends EMFAPIChecker<EMFPosLengthMatch> {
 
-	public JavaSwitchSensorChecker(final EMFDriver emfDriver) {
+	public EMFAPIPosLengthChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 
 	@Override
-	public Collection<EMFSwitchSensorMatch> check() {
+	public Collection<EMFPosLengthMatch> check() {
 		matches = new ArrayList<>();
 		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// (Switch)
-			if (eObject instanceof Switch) {
-				final Switch sw = (Switch) eObject;
-
-				// (Switch)-[sensor]->() NAC
-				if (sw.getSensor() == null) {
-					matches.add(new EMFSwitchSensorMatch(sw));
+			// (Segment)
+			if (eObject instanceof Segment) {
+				final Segment segment = (Segment) eObject;
+				// Segment.length <= 0
+				if (segment.getLength() <= 0) {
+					matches.add(new EMFPosLengthMatch(segment));
 				}
 			}
 		}
 
 		return matches;
 	}
+
 }
