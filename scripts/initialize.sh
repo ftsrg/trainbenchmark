@@ -1,6 +1,5 @@
 #!/bin/bash
 
 sudo apt-get install python3-setuptools
-python3 ./ez_setup.py
-easy_install pip
-pip3 install -r ../init/requirements.txt
+sudo easy_install3 pip
+sudo pip3 install -r requirements.txt
