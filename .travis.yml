@@ -3,4 +3,5 @@ language: python
 python:
   - "3.4"
 script:
+  - scripts/dep-mondo-sam.sh
   - scripts/run.py
