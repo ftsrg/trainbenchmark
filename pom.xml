@@ -19,12 +19,11 @@
 	<profiles>
 
 		<profile>
-			<id>all</id>
+			<id>ci</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
-				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
@@ -33,10 +32,10 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
@@ -47,6 +46,17 @@
 				<module>hu.bme.mit.trainbenchmark.generator</module>
 				<module>hu.bme.mit.trainbenchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.sql</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>thirdparty</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 			</modules>
 		</profile>
 

@@ -12,8 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.allegro.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-
 import java.io.IOException;
 
 import org.openrdf.OpenRDFException;
@@ -21,6 +19,9 @@ import org.openrdf.repository.RepositoryException;
 
 import com.franz.agraph.repository.AGCatalog;
 import com.franz.agraph.repository.AGServer;
+
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 public class AllegroDriver extends SesameDriver {
 
@@ -31,6 +32,10 @@ public class AllegroDriver extends SesameDriver {
 	protected String AGServerPassword = "super";
 	protected String catalogID = "system";
 	protected String repositoryID = "train";
+
+	public AllegroDriver(final RDFBenchmarkConfig rdfbc) {
+		super(rdfbc);
+	}
 
 	@Override
 	public void destroy() throws RepositoryException {

@@ -12,13 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-
 import java.io.IOException;
 
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import virtuoso.sesame2.driver.VirtuosoRepository;
 
 public class VirtuosoDriver extends SesameDriver {
@@ -28,10 +28,15 @@ public class VirtuosoDriver extends SesameDriver {
 	private final String VIRTUOSO_USERNAME = "dba";
 	private final String VIRTUOSO_PASSWORD = "dba";
 
+	public VirtuosoDriver(final RDFBenchmarkConfig rdfbc) {
+		super(rdfbc);
+	}
+
 	@Override
-	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException {
-		repository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT, VIRTUOSO_USERNAME,
-				VIRTUOSO_PASSWORD);
+	public void read(final String modelPathWithoutExtension)
+			throws RepositoryException, RDFParseException, IOException {
+		repository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT,
+				VIRTUOSO_USERNAME, VIRTUOSO_PASSWORD);
 		load(modelPathWithoutExtension);
 	}
 
