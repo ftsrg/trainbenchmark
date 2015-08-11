@@ -32,8 +32,6 @@
   "Tools": [
     "emfapi",
     "emfincquery",
-    "mysql",
-    "neo4j",
     "sesame",
     "jena"
   ],
