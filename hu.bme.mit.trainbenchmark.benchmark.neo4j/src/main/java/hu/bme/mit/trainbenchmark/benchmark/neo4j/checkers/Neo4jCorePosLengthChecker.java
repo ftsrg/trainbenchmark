@@ -14,9 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,6 +26,9 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
+
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
 public class Neo4jCorePosLengthChecker extends Neo4jCoreChecker<Neo4jPosLengthMatch> {
 
@@ -49,6 +51,7 @@ public class Neo4jCorePosLengthChecker extends Neo4jCoreChecker<Neo4jPosLengthMa
 				if (length <= 0) {
 					final Map<String, Object> match = new HashMap<>();
 					match.put(VAR_SEGMENT, segment);
+					match.put(VAR_LENGTH, length);
 					matches.add(new Neo4jPosLengthMatch(match));
 				}
 			}
