@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
@@ -25,9 +25,9 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaSemaphoreNeighborChecker extends JavaChecker<EMFSemaphoreNeighborMatch> {
+public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNeighborMatch> {
 
-	public JavaSemaphoreNeighborChecker(final EMFDriver emfDriver) {
+	public EMFAPISemaphoreNeighborChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 

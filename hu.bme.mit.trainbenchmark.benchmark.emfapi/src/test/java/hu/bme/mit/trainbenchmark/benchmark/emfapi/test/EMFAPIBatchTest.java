@@ -9,16 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java;
 
-import java.io.IOException;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class JavaBenchmarkMain {
+public class EMFAPIBatchTest extends BatchTest {
 
-	public static void main(final String[] args) throws IOException, ParseException {
-		final JavaBenchmarkLogic benchmarkLogic = new JavaBenchmarkLogic(args);
-		benchmarkLogic.runBenchmark();
+	public EMFAPIBatchTest() {
+		bi = new EMFAPIBenchmarkInitializer();
 	}
+
 }

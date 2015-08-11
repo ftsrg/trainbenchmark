@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
@@ -23,9 +23,9 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-public class JavaConnectedSegmentsChecker extends JavaChecker<EMFConnectedSegmentsMatch> {
+public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSegmentsMatch> {
 
-	public JavaConnectedSegmentsChecker(final EMFDriver emfDriver) {
+	public EMFAPIConnectedSegmentsChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 

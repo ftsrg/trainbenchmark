@@ -10,21 +10,21 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.java.test;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.java.JavaBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.EMFAPIBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class JavaBenchmarkInitializer extends TestBenchmarkInitializer<JavaBenchmarkLogic> {
+public class EMFAPIBenchmarkInitializer extends TestBenchmarkInitializer<EMFAPIBenchmarkLogic> {
 
 	@Override
-	protected JavaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("Java", scenario, size, 1, query, iterationCount, modificationMethod,
-				modificationConstant);
-		return new JavaBenchmarkLogic(bc);
+	protected EMFAPIBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig("EMFAPI", scenario, size, 1, query, iterationCount,
+				modificationMethod, modificationConstant);
+		return new EMFAPIBenchmarkLogic(bc);
 	}
 
 }

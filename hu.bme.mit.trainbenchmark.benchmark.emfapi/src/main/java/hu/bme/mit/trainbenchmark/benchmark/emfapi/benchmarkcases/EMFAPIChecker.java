@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -18,29 +18,29 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 import java.util.Collection;
 
-public abstract class JavaChecker<T extends EMFMatch> extends Checker<T> {
+public abstract class EMFAPIChecker<T extends EMFMatch> extends Checker<T> {
 
 	protected Collection<T> matches;
 	protected final EMFDriver emfDriver;
 
-	public JavaChecker(final EMFDriver emfDriver) {
+	public EMFAPIChecker(final EMFDriver emfDriver) {
 		this.emfDriver = emfDriver;
 	}
 
-	public static JavaChecker<?> newInstance(final EMFDriver driver, final Query query) {
+	public static EMFAPIChecker<?> newInstance(final EMFDriver driver, final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new JavaConnectedSegmentsChecker(driver);
+			return new EMFAPIConnectedSegmentsChecker(driver);
 		case POSLENGTH:
-			return new JavaPosLengthChecker(driver);
+			return new EMFAPIPosLengthChecker(driver);
 		case ROUTESENSOR:
-			return new JavaRouteSensorChecker(driver);
+			return new EMFAPIRouteSensorChecker(driver);
 		case SEMAPHORENEIGHBOR:
-			return new JavaSemaphoreNeighborChecker(driver);
+			return new EMFAPISemaphoreNeighborChecker(driver);
 		case SWITCHSENSOR:
-			return new JavaSwitchSensorChecker(driver);
+			return new EMFAPISwitchSensorChecker(driver);
 		case SWITCHSET:
-			return new JavaSwitchSetChecker(driver);
+			return new EMFAPISwitchSetChecker(driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}

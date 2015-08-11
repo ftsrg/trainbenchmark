@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.java.test;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class JavaRepairTest extends RepairTest {
+public class EMFAPIRepairTest extends RepairTest {
 
-	public JavaRepairTest() {
-		bi = new JavaBenchmarkInitializer();
+	public EMFAPIRepairTest() {
+		bi = new EMFAPIBenchmarkInitializer();
 	}
 
 }
