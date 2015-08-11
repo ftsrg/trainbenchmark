@@ -8,19 +8,6 @@ For theoretical and implementation details, check out the following documents:
 * [Train Benchmark technical report](https://www.sharelatex.com/github/repos/FTSRG/trainbenchmark-docs/builds/latest/output.pdf) ([GitHub repository](https://github.com/FTSRG/trainbenchmark-docs))
 * [Related publications](http://incquery.net/publications/trainbenchmark)
 
-## Prerequisites
-
-* 64-bit operating system (we recommend Ubuntu-based Linux systems)
-* [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
-* [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
-* Python 3
-
-Besides these requirements, it is also necessary to clone and build the [MONDO-SAM](https://github.com/FTSRG/mondo-sam) project. The easiest way is to run the following script:
-
-```bash
-scripts/dependencies-mondo-sam.sh
-```
-
 ## Projects
 
 ### Generator projects
@@ -57,7 +44,22 @@ The benchmark projects are responsible for running the benchmarks.
 
 The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.json` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
+### Prerequisites
+
+* 64-bit operating system (we recommend Ubuntu-based Linux systems)
+* [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
+* [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
+* Python 3
+
 ### Installation guide
+
+Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam):
+
+```bash
+scripts/dep-mondo-sam.sh`
+```
+
+Initialize the Python environment:
 
 ```bash
 scripts/initialize.sh
