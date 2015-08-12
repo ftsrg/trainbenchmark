@@ -17,21 +17,22 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 public abstract class GeneratorFactory {
 
 	protected GeneratorConfig generatorConfig;
-	
+
 	public GeneratorFactory(GeneratorConfig generatorConfig) {
 		this.generatorConfig = generatorConfig;
 	}
-	
-	public Generator getGenerator() {
+
+	public SyntheticGenerator getSyntheticGenerator() {
 		switch (generatorConfig.getModelType()) {
-		case SCHEDULE_REAL:
-			return getScheduleGenerator();
+		case RAILWAY:
+			return new RailwayGenerator(getRailwayFormatGenerator());
 		default:
-			return getRailwayGenerator();
+			return new ScheduleGenerator(getScheduleFormatGenerator()) {
+			};
 		}
 	}
-	
-	protected abstract Generator getRailwayGenerator();
-	
-	protected abstract Generator getScheduleGenerator();
+
+	protected abstract FormatGenerator getRailwayFormatGenerator();
+
+	protected abstract FormatGenerator getScheduleFormatGenerator();
 }

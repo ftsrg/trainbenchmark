@@ -10,16 +10,18 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph.config;
+package hu.bme.mit.trainbenchmark.generator;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+public abstract class SyntheticGenerator extends Generator {
 
-import org.apache.commons.cli.ParseException;
+	protected FormatGenerator fg;
 
-public class GraphGeneratorConfig extends GeneratorConfig {
+	public abstract void generate() throws Exception;
 
-	public GraphGeneratorConfig(final String[] args) throws ParseException {
-		super(args);
+	protected abstract void initializeConstants();
+
+	public SyntheticGenerator(final FormatGenerator formatGenerator) {
+		this.fg = formatGenerator;
 	}
 
 }

@@ -12,15 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph;
 
-import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.SyntheticGenerator;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class GraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final GraphGeneratorConfig generatorConfig = new GraphGeneratorConfig(args);
+		final GeneratorConfig generatorConfig = new GeneratorConfig(args);
 		final GraphGeneratorFactory factory = new GraphGeneratorFactory(generatorConfig);
-		final Generator generator = factory.getGenerator();
+		final SyntheticGenerator generator = factory.getSyntheticGenerator();
 		generator.generate();
 	}
 

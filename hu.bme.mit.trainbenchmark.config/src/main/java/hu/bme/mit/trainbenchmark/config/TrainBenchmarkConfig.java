@@ -125,6 +125,8 @@ public abstract class TrainBenchmarkConfig {
 		switch (modelType) {
 		case SCHEDULE_REAL: 
 			return "schedule-real";
+		case SCHEDULE_SCALE_FREE:
+			return "schedule-scale-" + size;
 		default:
 			final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase();
 			final String filename = "railway-" + variant + "-" + size;

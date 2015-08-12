@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.RailwayGenerator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
@@ -67,7 +66,8 @@ public class RDFGenerator extends RailwayGenerator {
 
 	@Override
 	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
-			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges)
+			throws IOException {
 
 		// vertex id and type
 		final String triple = String.format(":%s%d a :%s", ID_PREFIX, id, type);
@@ -75,7 +75,8 @@ public class RDFGenerator extends RailwayGenerator {
 
 		// (id)-[]->() attributes
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(), stringValue(attribute.getValue()));
+			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(),
+					stringValue(attribute.getValue()));
 			vertex.append(attributeTriple);
 		}
 
@@ -85,18 +86,19 @@ public class RDFGenerator extends RailwayGenerator {
 				continue;
 			}
 
-			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX, outgoingEdge.getValue());
+			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX,
+					outgoingEdge.getValue());
 			vertex.append(edgeTriple);
 		}
 
-		vertex.append(" .");		
+		vertex.append(" .");
 		write(vertex.toString());
-		
+
 		// ()-[]->(id) edges
 		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
 			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), id);
 		}
-		
+
 		return id;
 	}
 
@@ -108,18 +110,19 @@ public class RDFGenerator extends RailwayGenerator {
 		final String triple = String.format(":%s%s :%s :%s%s .", ID_PREFIX, from, label, ID_PREFIX, to);
 		write(triple);
 	}
-	
+
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	protected void setAttribute(final String type, final Object node, final String key, final Object value)
+			throws IOException {
 		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
 		write(triple + ".");
-		
 	}
-		
+
 	private String stringValue(final Object value) {
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^xsd:int", value);
-		} if (value instanceof Enum<?>) {
+		}
+		if (value instanceof Enum<?>) {
 			final Enum<?> e = (Enum<?>) value;
 			return String.format(":%s", RDFHelper.addEnumPrefix(e));
 		} else {
@@ -130,5 +133,5 @@ public class RDFGenerator extends RailwayGenerator {
 	public void write(final String s) throws IOException {
 		file.write(s + "\n\n");
 	}
-	
+
 }

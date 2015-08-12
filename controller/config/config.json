@@ -13,6 +13,7 @@
   "IterationCount": 3,
   "MinSize": 1,
   "MaxSize": 1,
+  "Model": "Schedule-Scale-Free",
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
@@ -23,7 +24,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "emfincquery"
+    "neo4j"
 
   ],
   "UniqueConfigurations": [

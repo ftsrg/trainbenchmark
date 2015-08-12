@@ -13,9 +13,8 @@
 package hu.bme.mit.trainbenchmark.generator.graph;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.RailwayGenerator;
-import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +24,6 @@ import java.util.Map.Entry;
 
 import javax.xml.stream.XMLStreamException;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
 import org.neo4j.graphdb.DynamicLabel;
@@ -39,26 +37,26 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
-public class GraphRailwayGenerator extends RailwayGenerator {
+public class GraphFormatGenerator extends FormatGenerator {
 
-	public GraphRailwayGenerator(GraphGeneratorConfig generatorConfig){
-		super();
+	public GraphFormatGenerator(GeneratorConfig generatorConfig) {
 		this.generatorConfig = generatorConfig;
 	}
+
+	protected GraphDatabaseService graphDb;
+
+	protected Transaction tx;
 
 	@Override
 	protected String syntax() {
 		return "graph";
 	}
 
-	protected GraphGeneratorConfig graphGeneratorConfig;
-	protected GraphDatabaseService graphDb;
-	protected Transaction tx;
-
 	@Override
 	protected void initModel() throws IOException {
 		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
-		final String databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
+		final String databasePath = databaseDirectoriesPath + "/"
+				+ generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
@@ -134,8 +132,11 @@ public class GraphRailwayGenerator extends RailwayGenerator {
 		final Node source = (Node) from;
 		final Node target = (Node) to;
 
-		final RelationshipType relationshipType = relationship(label);
-		source.createRelationshipTo(target, relationshipType);
+		try (Transaction tx = graphDb.beginTx()) {
+			final RelationshipType relationshipType = relationship(label);
+			source.createRelationshipTo(target, relationshipType);
+			tx.success();
+		}
 	}
 
 	@Override
@@ -167,8 +168,8 @@ public class GraphRailwayGenerator extends RailwayGenerator {
 			// this is required to be compatibile with OrientDB
 			graphmlContent = graphmlContent
 					.replaceAll(
-							//
-							"<graph id=\"G\" edgedefault=\"directed\">",
+					//
+					"<graph id=\"G\" edgedefault=\"directed\">",
 							"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
 
 			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
@@ -178,12 +179,12 @@ public class GraphRailwayGenerator extends RailwayGenerator {
 	}
 
 	@Override
-	protected void beginRoute() throws IOException {
+	protected void startTransaction() throws IOException {
 		tx = graphDb.beginTx();
 	}
 
 	@Override
-	protected void endRoute() {
+	protected void endTransaction() {
 		tx.success();
 		tx.close();
 	}

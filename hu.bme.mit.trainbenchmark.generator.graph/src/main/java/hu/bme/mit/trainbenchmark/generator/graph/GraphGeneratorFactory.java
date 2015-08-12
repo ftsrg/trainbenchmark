@@ -12,29 +12,24 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph;
 
-import org.apache.commons.cli.ParseException;
-
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
-import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class GraphGeneratorFactory extends GeneratorFactory{
+public class GraphGeneratorFactory extends GeneratorFactory {
 
-	protected GraphGeneratorConfig graphGeneratorConfig;
-	
-	public GraphGeneratorFactory(GraphGeneratorConfig generatorConfig) throws ParseException {
+	public GraphGeneratorFactory(GeneratorConfig generatorConfig) {
 		super(generatorConfig);
-		this.graphGeneratorConfig = generatorConfig;
 	}
 
 	@Override
-	protected Generator getRailwayGenerator() {
-		return new GraphRailwayGenerator(graphGeneratorConfig);
+	protected FormatGenerator getRailwayFormatGenerator() {
+		return new GraphFormatGenerator(generatorConfig);
 	}
 
 	@Override
-	protected Generator getScheduleGenerator() {
-		return new GraphScheduleGenerator(graphGeneratorConfig, new GraphRailwayGenerator(graphGeneratorConfig));
+	protected FormatGenerator getScheduleFormatGenerator() {
+		return getRailwayFormatGenerator();
 	}
 
 }
