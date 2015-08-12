@@ -25,10 +25,9 @@ public abstract class GeneratorFactory {
 	public SyntheticGenerator getSyntheticGenerator() {
 		switch (generatorConfig.getModelType()) {
 		case RAILWAY:
-			return new RailwayGenerator(getRailwayFormatGenerator());
+			return new RailwayGenerator(getRailwayFormatGenerator(), generatorConfig);
 		default:
-			return new ScheduleGenerator(getScheduleFormatGenerator()) {
-			};
+			return new ScheduleGenerator(getScheduleFormatGenerator(), generatorConfig);
 		}
 	}
 

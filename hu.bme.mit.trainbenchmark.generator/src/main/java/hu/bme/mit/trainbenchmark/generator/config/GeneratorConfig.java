@@ -13,14 +13,11 @@
 package hu.bme.mit.trainbenchmark.generator.config;
 
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.ModelType;
 
 import org.apache.commons.cli.ParseException;
 
 public class GeneratorConfig extends TrainBenchmarkConfig {
 
-	
-	
 	public GeneratorConfig(final String[] args) throws ParseException {
 		super(args);
 	}
@@ -28,13 +25,12 @@ public class GeneratorConfig extends TrainBenchmarkConfig {
 	@Override
 	protected void initOptions() {
 		super.initOptions();
-		
 	}
 
 	@Override
 	protected void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
-		
+
 	}
 
 }

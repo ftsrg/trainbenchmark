@@ -16,6 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.DES
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,8 +58,8 @@ public class ScheduleGenerator extends SyntheticGenerator {
 	 */
 	protected int m;
 
-	public ScheduleGenerator(FormatGenerator formatGenerator) {
-		super(formatGenerator);
+	public ScheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
+		super(formatGenerator, generatorConfig);
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public class ScheduleGenerator extends SyntheticGenerator {
 			indices.addAll(getRandomElements(stations, m));
 			for (Integer index : indices) {
 				schedules.add(new Node(fg.createVertex(SCHEDULE), 0));
-				fg.createEdge(DESTINATIONS, schedules.getLast(), stations.get(index).obj);
+				fg.createEdge(DESTINATIONS, schedules.getLast().obj, stations.get(index).obj);
 				stations.get(index).degree++;
 				stationDegrees++;
 				schedules.getLast().degree++;

@@ -31,6 +31,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.constants.Signal;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -56,8 +57,8 @@ public class RailwayGenerator extends SyntheticGenerator {
 
 	protected static int MAX_SEGMENT_LENGTH = 1000;
 
-	public RailwayGenerator(FormatGenerator formatGenerator) {
-		super(formatGenerator);
+	public RailwayGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
+		super(formatGenerator, generatorConfig);
 	}
 
 	protected int nextRandom() {

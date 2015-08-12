@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+
 public abstract class SyntheticGenerator extends Generator {
 
 	protected FormatGenerator fg;
@@ -20,8 +22,9 @@ public abstract class SyntheticGenerator extends Generator {
 
 	protected abstract void initializeConstants();
 
-	public SyntheticGenerator(final FormatGenerator formatGenerator) {
+	public SyntheticGenerator(final FormatGenerator formatGenerator, final GeneratorConfig generatorConfig) {
 		this.fg = formatGenerator;
+		this.generatorConfig = generatorConfig;
 	}
 
 }
