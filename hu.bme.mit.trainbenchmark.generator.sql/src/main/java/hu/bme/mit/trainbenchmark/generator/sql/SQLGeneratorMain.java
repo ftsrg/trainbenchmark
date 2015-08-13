@@ -12,13 +12,16 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.SyntheticGenerator;
+import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
 
 public class SQLGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Generator generator = new SQLGenerator(args);
-		generator.generateModels();
+		final SQLGeneratorConfig generatorConfig = new SQLGeneratorConfig(args);
+		final SQLGeneratorFactory factory = new SQLGeneratorFactory(generatorConfig);
+		final SyntheticGenerator generator = factory.getSyntheticGenerator();
+		generator.generate();
 	}
 
 }

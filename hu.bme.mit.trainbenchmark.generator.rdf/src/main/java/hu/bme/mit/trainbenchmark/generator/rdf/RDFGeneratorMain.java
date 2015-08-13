@@ -12,12 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.SyntheticGenerator;
+import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 
 public class RDFGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Generator generator = new RDFGenerator(args);
+		final RDFGeneratorConfig generatorConfig = new RDFGeneratorConfig(args);
+		final RDFGeneratorFactory factory = new RDFGeneratorFactory(generatorConfig);
+		final SyntheticGenerator generator = factory.getSyntheticGenerator();
 		generator.generate();
 	}
 

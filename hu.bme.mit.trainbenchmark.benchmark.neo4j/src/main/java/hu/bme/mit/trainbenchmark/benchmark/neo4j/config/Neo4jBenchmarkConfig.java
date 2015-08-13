@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -28,13 +29,12 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 		super(args, NEO4J);
 	}
 
-	public Neo4jBenchmarkConfig(final Scenario scenario, final int size,
-			final int runIndex, final Query query,
-			final int iterationCount,
-			final ModificationMethod modificationMethod,
-			final long modificationConstant, final boolean javaApi) {
-		super(NEO4J, scenario, size, runIndex, query, iterationCount,
-				modificationMethod, modificationConstant, false);
+	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final int runIndex,
+			final Query query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant,
+			final boolean javaApi, final ModelType modelType) {
+		super(NEO4J, scenario, size, runIndex, query, iterationCount, modificationMethod,
+				modificationConstant, false, modelType);
 		this.javaApi = javaApi;
 	}
 
@@ -42,8 +42,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption("javaapi", false,
-				"use the faster, low-level Java API for querying");
+		options.addOption("javaapi", false, "use the faster, low-level Java API for querying");
 	}
 
 	@Override

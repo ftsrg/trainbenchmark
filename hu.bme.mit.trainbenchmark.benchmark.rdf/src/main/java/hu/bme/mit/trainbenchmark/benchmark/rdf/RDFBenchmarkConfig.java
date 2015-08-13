@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -23,20 +24,16 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
 
-	public RDFBenchmarkConfig(final String[] args, final String className)
-			throws ParseException {
+	public RDFBenchmarkConfig(final String[] args, final String className) throws ParseException {
 		super(args, className);
 	}
 
-	public RDFBenchmarkConfig(final String className,
-			final Scenario scenario, final int size,
-			final int runIndex, final Query query,
-			final int iterationCount,
-			final ModificationMethod modificationMethod,
-			final long modificationConstant) {
-		super(className, scenario, size, runIndex, query,
-				iterationCount, modificationMethod,
-				modificationConstant, false);
+	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size,
+			final int runIndex, final Query query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant,
+			final ModelType modelType) {
+		super(className, scenario, size, runIndex, query, iterationCount, modificationMethod,
+				modificationConstant, false, modelType);
 	}
 
 	@Override

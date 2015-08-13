@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator;
+package hu.bme.mit.trainbenchmark.generator.concretes.railway;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
@@ -31,6 +31,8 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.constants.Signal;
+import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
+import hu.bme.mit.trainbenchmark.generator.SyntheticGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 import java.io.FileNotFoundException;
@@ -65,16 +67,17 @@ public class RailwayGenerator extends SyntheticGenerator {
 		return random.nextInt(100);
 	}
 
-	@Override
-	public void generate() throws Exception {
-		System.out.print("Generating instance model, generator: " + fg.syntax() + ", size: "
-				+ generatorConfig.getSize() + "... ");
-		initializeConstants();
-		fg.initModel();
-		generateModel();
-		fg.persistModel();
-		System.out.println("Done.");
-	}
+	// @Override
+	// public void generate() throws Exception {
+	// System.out.print("Generating instance model, generator: " +
+	// fg.syntax() + ", size: "
+	// + generatorConfig.getSize() + "... ");
+	// initializeConstants();
+	// fg.initModel();
+	// generateModel();
+	// fg.persistModel();
+	// System.out.println("Done.");
+	// }
 
 	@Override
 	protected void initializeConstants() {

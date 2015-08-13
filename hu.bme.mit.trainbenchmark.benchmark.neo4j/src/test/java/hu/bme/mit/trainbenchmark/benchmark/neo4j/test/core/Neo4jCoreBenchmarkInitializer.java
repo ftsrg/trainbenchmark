@@ -22,8 +22,8 @@ public class Neo4jCoreBenchmarkInitializer extends TestBenchmarkInitializer<Neo4
 
 	@Override
 	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, runIndex, query, iterationCount,
-				modificationMethod, modificationConstant, true);
+		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, runIndex, query,
+				iterationCount, modificationMethod, modificationConstant, true, model);
 		return new Neo4jBenchmarkLogic(rbc);
 	}
 

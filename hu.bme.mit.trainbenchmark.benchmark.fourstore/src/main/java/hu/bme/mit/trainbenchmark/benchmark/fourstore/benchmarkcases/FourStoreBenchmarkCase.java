@@ -34,14 +34,14 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, U
 	}
 
 	@Override
-	public void init() throws IOException {
-		super.init();
+	protected void init() throws Exception {
 		this.fsbc = (FourStoreBenchmarkConfig) bc;
 
 		checker = new FourStoreChecker(fourStoreDriver, fsbc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
-			transformation = FourStoreTransformation.newInstance(fourStoreDriver, bc.getQuery(), bc.getScenario());
+			transformation = FourStoreTransformation.newInstance(fourStoreDriver, bc.getQuery(),
+					bc.getScenario());
 		}
 	}
 

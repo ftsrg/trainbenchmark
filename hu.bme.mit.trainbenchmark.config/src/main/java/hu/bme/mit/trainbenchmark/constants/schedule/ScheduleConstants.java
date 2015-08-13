@@ -15,13 +15,13 @@ package hu.bme.mit.trainbenchmark.constants.schedule;
 public class ScheduleConstants {
 
 	public static final String ID = "id";
-	
+
 	// node types
 	public static final String TRAIN = "Train";
 	public static final String SCHEDULE = "Schedule";
 	public static final String STATION = "Station";
 	public static final String ASSOCIATION = "Association";
-	
+
 	// attributes
 	public static final String TRAIN_UID = "uid";
 	public static final String CATEGORY = "category";
@@ -33,7 +33,7 @@ public class ScheduleConstants {
 	public static final String CODE = "code";
 	public static final String STANOX = "stanox";
 	public static final String NALCO = "nalco";
-	
+
 	// references
 	public static final String SCHEDULES = "schedules";
 	public static final String ASSOCIATIONS = "associations";
@@ -41,6 +41,6 @@ public class ScheduleConstants {
 	public static final String ORIGIN = "origin";
 	public static final String TERMINAL = "terminal";
 	public static final String DESTINATIONS = "destinations";
-	public static final String LOCATIONS = "locations";
+	public static final String LOCATION = "location";
 	public static final String NEIGHBORS = "neighbors";
 }

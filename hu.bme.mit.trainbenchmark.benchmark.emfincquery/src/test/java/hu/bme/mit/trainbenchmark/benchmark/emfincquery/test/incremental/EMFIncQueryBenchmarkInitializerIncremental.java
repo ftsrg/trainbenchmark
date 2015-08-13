@@ -17,12 +17,13 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class EMFIncQueryBenchmarkInitializerIncremental extends TestBenchmarkInitializer<EMFIncQueryBenchmarkLogic> {
+public class EMFIncQueryBenchmarkInitializerIncremental extends
+		TestBenchmarkInitializer<EMFIncQueryBenchmarkLogic> {
 
 	@Override
 	protected EMFIncQueryBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query, iterationCount,
-				modificationMethod, modificationConstant, false);
+		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, 1,
+				query, iterationCount, modificationMethod, modificationConstant, false, model);
 		return new EMFIncQueryBenchmarkLogic(eiqbc);
 	}
 

@@ -17,7 +17,8 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ancestors;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
@@ -29,27 +30,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.ImmutableMap;
 
-public class SQLGenerator extends Generator {
+public class SQLFormatGenerator extends FormatGenerator {
 
 	protected SQLGeneratorConfig sqlGeneratorConfig;
 	protected String sqlRawPath;
 	protected String sqlDumpPath;
 	protected String sqlPostgreDumpPath;
 
-	public SQLGenerator(final String[] args) throws ParseException {
-		super();
-		generatorConfig = sqlGeneratorConfig = new SQLGeneratorConfig(args);
+	public SQLFormatGenerator(final GeneratorConfig generatorConfig) {
+		this.generatorConfig = sqlGeneratorConfig = (SQLGeneratorConfig) generatorConfig;
 	}
 
 	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(SENSOR_EDGE, TRACKELEMENT);
 
 	@Override
-	protected String syntax() {
+	public String syntax() {
 		return "SQL";
 	}
 
@@ -81,7 +80,7 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected void persistModel() throws IOException, InterruptedException {
+	public void persistModel() throws IOException, InterruptedException {
 		final String footerFilePath = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
@@ -105,15 +104,19 @@ public class SQLGenerator extends Generator {
 		final Process processLoad = rt.exec(commandLoad);
 		processLoad.waitFor();
 
-		final String[] commandDump = { "/bin/bash", "-c",
-				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > " + sqlDumpPath };
+		final String[] commandDump = {
+				"/bin/bash",
+				"-c",
+				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > "
+						+ sqlDumpPath };
 		final Process processDump = rt.exec(commandDump);
 		processDump.waitFor();
 	}
 
 	@Override
-	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
-			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
+	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges)
+			throws IOException {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
 
@@ -127,9 +130,11 @@ public class SQLGenerator extends Generator {
 		if (ancestors.containsKey(type)) {
 			final String ancestorType = ancestors.get(type);
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", ancestorType, ID, id));
-			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
+			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(),
+					values.toString()));
 		} else {
-			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());
+			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type,
+					columns.toString(), values.toString());
 			write(insertQuery.toString());
 		}
 
@@ -137,14 +142,15 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
+	public void createEdge(final String label, final Object from, final Object to) throws IOException {
 		if (from == null || to == null) {
 			return;
 		}
 
 		String insertQuery;
 		if (SENSOR_EDGE.equals(label)) {
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, SENSOR_EDGE, to, ID, from);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT,
+					SENSOR_EDGE, to, ID, from);
 		} else {
 			insertQuery = String.format("INSERT INTO \"%s\" VALUES (%s, %s);", label, from, to);
 		}
@@ -152,13 +158,16 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value)
+			throws IOException {
 		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key, stringValue, ID, node);
+		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key,
+				stringValue, ID, node);
 		write(updateQuery);
 	}
 
-	protected void structuralFeaturesToSQL(final Map<String, Object> attributes, final StringBuilder columns, final StringBuilder values) {
+	protected void structuralFeaturesToSQL(final Map<String, Object> attributes, final StringBuilder columns,
+			final StringBuilder values) {
 		for (final Entry<String, Object> entry : attributes.entrySet()) {
 			final String key = entry.getKey();
 			final Object value = entry.getValue();
@@ -184,6 +193,18 @@ public class SQLGenerator extends Generator {
 			stringValue = value.toString();
 		}
 		return stringValue;
+	}
+
+	@Override
+	public void startTransaction() throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void endTransaction() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

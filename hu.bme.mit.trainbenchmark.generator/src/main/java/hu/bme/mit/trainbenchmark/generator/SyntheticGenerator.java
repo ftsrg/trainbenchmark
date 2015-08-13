@@ -14,11 +14,11 @@ package hu.bme.mit.trainbenchmark.generator;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
+import java.io.IOException;
+
 public abstract class SyntheticGenerator extends Generator {
 
 	protected FormatGenerator fg;
-
-	public abstract void generate() throws Exception;
 
 	protected abstract void initializeConstants();
 
@@ -26,5 +26,16 @@ public abstract class SyntheticGenerator extends Generator {
 		this.fg = formatGenerator;
 		this.generatorConfig = generatorConfig;
 	}
+
+	public void generate() throws Exception {
+		fg.initModel();
+		initializeConstants();
+		fg.startTransaction();
+		generateModel();
+		fg.endTransaction();
+		fg.persistModel();
+	}
+
+	protected abstract void generateModel() throws IOException;
 
 }

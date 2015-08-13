@@ -13,7 +13,8 @@
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.generator.RailwayGenerator;
+import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
@@ -24,18 +25,16 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
-public class RDFGenerator extends RailwayGenerator {
+public class RDFFormatGenerator extends FormatGenerator {
 
-	public RDFGenerator(final String args[]) throws ParseException {
-		super();
-		generatorConfig = rdfGeneratorConfig = new RDFGeneratorConfig(args);
+	public RDFFormatGenerator(GeneratorConfig generatorConfig) {
+		this.generatorConfig = rdfGeneratorConfig = (RDFGeneratorConfig) generatorConfig;
 	}
 
 	@Override
-	protected String syntax() {
+	public String syntax() {
 		return "RDF";
 	}
 
@@ -65,7 +64,7 @@ public class RDFGenerator extends RailwayGenerator {
 	}
 
 	@Override
-	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges)
 			throws IOException {
 
@@ -103,7 +102,7 @@ public class RDFGenerator extends RailwayGenerator {
 	}
 
 	@Override
-	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
+	public void createEdge(final String label, final Object from, final Object to) throws IOException {
 		if (from == null || to == null) {
 			return;
 		}
@@ -112,7 +111,7 @@ public class RDFGenerator extends RailwayGenerator {
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value)
+	public void setAttribute(final String type, final Object node, final String key, final Object value)
 			throws IOException {
 		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
 		write(triple + ".");
@@ -132,6 +131,18 @@ public class RDFGenerator extends RailwayGenerator {
 
 	public void write(final String s) throws IOException {
 		file.write(s + "\n\n");
+	}
+
+	@Override
+	public void startTransaction() throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void endTransaction() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

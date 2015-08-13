@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.cli.ParseException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -40,11 +39,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-public class EMFGenerator extends FormatGenerator {
+public class EMFRailwayGenerator extends FormatGenerator {
 
-	public EMFGenerator(final String args[]) throws ParseException {
-		super();
-		generatorConfig = new GeneratorConfig(args);
+	public EMFRailwayGenerator(GeneratorConfig generatorConfig) {
+		this.generatorConfig = generatorConfig;
 	}
 
 	@Override
@@ -77,17 +75,14 @@ public class EMFGenerator extends FormatGenerator {
 	}
 
 	@Override
-	protected Object createVertex(final int id, final String type,
-			final Map<String, Object> attributes,
-			final Map<String, Object> outgoingEdges,
-			final Map<String, Object> incomingEdges) throws IOException {
+	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges)
+			throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE
-				.create(clazz);
+		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
 		railwayElement.setId(id);
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			setAttribute(clazz, railwayElement, attribute.getKey(),
-					attribute.getValue());
+			setAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
 		}
 
 		switch (type) {
@@ -113,8 +108,7 @@ public class EMFGenerator extends FormatGenerator {
 	}
 
 	@Override
-	protected void createEdge(final String label, final Object from, final Object to)
-			throws IOException {
+	public void createEdge(final String label, final Object from, final Object to) throws IOException {
 		if (from == null) {
 			if (!container.getInvalids().contains(to)) {
 				container.getInvalids().add((RailwayElement) to);
@@ -130,8 +124,7 @@ public class EMFGenerator extends FormatGenerator {
 		}
 
 		final EObject objectFrom = (EObject) from;
-		final EStructuralFeature edgeType = objectFrom.eClass()
-				.getEStructuralFeature(label);
+		final EStructuralFeature edgeType = objectFrom.eClass().getEStructuralFeature(label);
 
 		if (edgeType.isMany()) {
 			final List<Object> l = (List<Object>) objectFrom.eGet(edgeType);
@@ -142,29 +135,38 @@ public class EMFGenerator extends FormatGenerator {
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key,
-			final Object value) throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value)
+			throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		setAttribute(clazz, (RailwayElement) node, key, value);
 	}
 
-	protected void setAttribute(final EClass clazz, final RailwayElement node,
-			final String key, Object value) {
+	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
 		// change the enum value from the
 		// hu.bme.mit.trainbenchmark.constants.Signal enum to the
 		// hu.bme.mit.trainbenchmark.railway.Signal enum
 		if (SIGNAL.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Signal) value)
-					.ordinal();
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Signal) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.Signal.get(ordinal);
 		} else if (CURRENTPOSITION.equals(key) || POSITION.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Position) value)
-					.ordinal();
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Position) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.Position.get(ordinal);
 		}
 
 		final EStructuralFeature feature = clazz.getEStructuralFeature(key);
 		node.eSet(feature, value);
+	}
+
+	@Override
+	public void startTransaction() throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void endTransaction() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

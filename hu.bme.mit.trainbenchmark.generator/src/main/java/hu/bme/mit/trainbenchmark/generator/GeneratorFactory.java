@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
+import hu.bme.mit.trainbenchmark.generator.concretes.railway.RailwayGenerator;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RealModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.ScaleFreeGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public abstract class GeneratorFactory {
@@ -24,10 +27,12 @@ public abstract class GeneratorFactory {
 
 	public SyntheticGenerator getSyntheticGenerator() {
 		switch (generatorConfig.getModelType()) {
-		case RAILWAY:
-			return new RailwayGenerator(getRailwayFormatGenerator(), generatorConfig);
+		case SCHEDULE_SCALE_FREE:
+			return new ScaleFreeGenerator(getScheduleFormatGenerator(), generatorConfig);
+		case SCHEDULE_REAL:
+			return new RealModelGenerator(getScheduleFormatGenerator(), generatorConfig);
 		default:
-			return new ScheduleGenerator(getScheduleFormatGenerator(), generatorConfig);
+			return new RailwayGenerator(getRailwayFormatGenerator(), generatorConfig);
 		}
 	}
 

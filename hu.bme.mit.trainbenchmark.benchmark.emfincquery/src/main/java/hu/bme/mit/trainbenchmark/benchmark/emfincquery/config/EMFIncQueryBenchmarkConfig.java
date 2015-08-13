@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -24,20 +25,16 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	private static final String LOCALSEARCH = "localSearch";
 	private boolean localSearch;
 
-	public EMFIncQueryBenchmarkConfig(final String[] args)
-			throws ParseException {
+	public EMFIncQueryBenchmarkConfig(final String[] args) throws ParseException {
 		super(args, EMFINCQUERY);
 	}
 
-	public EMFIncQueryBenchmarkConfig(final Scenario scenario,
-			final int size, final int runIndex, final Query query,
-			final int iterationCount,
-			final ModificationMethod modificationMethod,
-			final long modificationConstant,
-			final boolean localSearch) {
-		super(EMFINCQUERY, scenario, size, runIndex, query,
-				iterationCount, modificationMethod,
-				modificationConstant, false);
+	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex,
+			final Query query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant,
+			final boolean localSearch, final ModelType modelType) {
+		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, modificationMethod,
+				modificationConstant, false, modelType);
 		this.localSearch = localSearch;
 	}
 
@@ -45,8 +42,7 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(LOCALSEARCH, false,
-				"uses the local search strategy for pattern matching");
+		options.addOption(LOCALSEARCH, false, "uses the local search strategy for pattern matching");
 	}
 
 	@Override

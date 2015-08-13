@@ -18,15 +18,12 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class EclipseOCLBenchmarkInitializer extends
-		TestBenchmarkInitializer<EclipseOCLBenchmarkLogic> {
+public class EclipseOCLBenchmarkInitializer extends TestBenchmarkInitializer<EclipseOCLBenchmarkLogic> {
 
 	@Override
-	protected EclipseOCLBenchmarkLogic initializeBenchmark(
-			final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("EclipseOCL",
-				scenario, size, 1, query, iterationCount,
-				modificationMethod, modificationConstant, false);
+	protected EclipseOCLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig("EclipseOCL", scenario, size, 1, query,
+				iterationCount, modificationMethod, modificationConstant, false, model);
 		return new EclipseOCLBenchmarkLogic(bc);
 	}
 

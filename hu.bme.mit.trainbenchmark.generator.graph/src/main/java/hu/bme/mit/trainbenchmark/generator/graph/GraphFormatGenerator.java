@@ -48,12 +48,12 @@ public class GraphFormatGenerator extends FormatGenerator {
 	protected Transaction tx;
 
 	@Override
-	protected String syntax() {
+	public String syntax() {
 		return "graph";
 	}
 
 	@Override
-	protected void initModel() throws IOException {
+	public void initModel() throws IOException {
 		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
 		final String databasePath = databaseDirectoriesPath + "/"
 				+ generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
@@ -73,44 +73,44 @@ public class GraphFormatGenerator extends FormatGenerator {
 	}
 
 	@Override
-	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		final Node node;
-		try (Transaction tx = graphDb.beginTx()) {
-			node = graphDb.createNode(DynamicLabel.label(type));
+		// try (Transaction tx = graphDb.beginTx()) {
+		node = graphDb.createNode(DynamicLabel.label(type));
 
-			// this only works for inheritance hierarchies with
-			if (ModelConstants.ancestors.containsKey(type)) {
-				final String ancestor = ModelConstants.ancestors.get(type);
-				node.addLabel(DynamicLabel.label(ancestor));
-			}
-
-			for (final Entry<String, Object> attribute : attributes.entrySet()) {
-				final String key = attribute.getKey();
-				Object value = attribute.getValue();
-
-				// convert the value to string if it's an enum
-				value = enumsToString(value);
-				node.setProperty(key, value);
-			}
-
-			for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
-				final String label = outgoingEdge.getKey();
-				if (outgoingEdge.getValue() instanceof Node) {
-					final Node targetNode = (Node) outgoingEdge.getValue();
-					node.createRelationshipTo(targetNode, relationship(label));
-				}
-			}
-
-			for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
-				final String label = incomingEdge.getKey();
-				if (incomingEdge.getValue() instanceof Node) {
-					final Node sourceNode = (Node) incomingEdge.getValue();
-					sourceNode.createRelationshipTo(node, relationship(label));
-				}
-			}
-			tx.success();
+		// this only works for inheritance hierarchies with
+		if (ModelConstants.ancestors.containsKey(type)) {
+			final String ancestor = ModelConstants.ancestors.get(type);
+			node.addLabel(DynamicLabel.label(ancestor));
 		}
+
+		for (final Entry<String, Object> attribute : attributes.entrySet()) {
+			final String key = attribute.getKey();
+			Object value = attribute.getValue();
+
+			// convert the value to string if it's an enum
+			value = enumsToString(value);
+			node.setProperty(key, value);
+		}
+
+		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
+			final String label = outgoingEdge.getKey();
+			if (outgoingEdge.getValue() instanceof Node) {
+				final Node targetNode = (Node) outgoingEdge.getValue();
+				node.createRelationshipTo(targetNode, relationship(label));
+			}
+		}
+
+		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
+			final String label = incomingEdge.getKey();
+			if (incomingEdge.getValue() instanceof Node) {
+				final Node sourceNode = (Node) incomingEdge.getValue();
+				sourceNode.createRelationshipTo(node, relationship(label));
+			}
+		}
+		// tx.success();
+		// }
 
 		return node;
 	}
@@ -124,7 +124,7 @@ public class GraphFormatGenerator extends FormatGenerator {
 	}
 
 	@Override
-	protected void createEdge(final String label, final Object from, final Object to) {
+	public void createEdge(final String label, final Object from, final Object to) {
 		if (from == null || to == null) {
 			return;
 		}
@@ -132,15 +132,15 @@ public class GraphFormatGenerator extends FormatGenerator {
 		final Node source = (Node) from;
 		final Node target = (Node) to;
 
-		try (Transaction tx = graphDb.beginTx()) {
-			final RelationshipType relationshipType = relationship(label);
-			source.createRelationshipTo(target, relationshipType);
-			tx.success();
-		}
+		// try (Transaction tx = graphDb.beginTx()) {
+		final RelationshipType relationshipType = relationship(label);
+		source.createRelationshipTo(target, relationshipType);
+		// tx.success();
+		// }
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value) {
+	public void setAttribute(final String type, final Object node, final String key, final Object value) {
 		final Node n = (Node) node;
 
 		final Object attributeValue = enumsToString(value);
@@ -152,17 +152,19 @@ public class GraphFormatGenerator extends FormatGenerator {
 	}
 
 	@Override
-	protected void persistModel() throws IOException, XMLStreamException {
+	public void persistModel() throws IOException, XMLStreamException {
 		try (Transaction tx = graphDb.beginTx()) {
 			final ProgressReporter reporter = new ProgressReporter(null, null);
 
 			final StringWriter writer = new StringWriter();
 			final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
 			final Config config = Config.config();
-			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
+			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter,
+					config.withTypes());
 			tx.success();
 
-			final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
+			final String fileName = generatorConfig.getModelPathNameWithoutExtension()
+					+ ".graphml";
 
 			String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB
@@ -179,12 +181,12 @@ public class GraphFormatGenerator extends FormatGenerator {
 	}
 
 	@Override
-	protected void startTransaction() throws IOException {
+	public void startTransaction() throws IOException {
 		tx = graphDb.beginTx();
 	}
 
 	@Override
-	protected void endTransaction() {
+	public void endTransaction() {
 		tx.success();
 		tx.close();
 	}

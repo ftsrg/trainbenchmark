@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -35,18 +36,15 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return runIndex;
 	}
 
-	public BenchmarkConfig(final String args[], final String className)
-			throws ParseException {
+	public BenchmarkConfig(final String args[], final String className) throws ParseException {
 		super(args);
 		this.className = className;
 	}
 
-	public BenchmarkConfig(final String className, final Scenario scenario,
-			final int size, final int runIndex, final Query query,
-			final int iterationCount,
-			final ModificationMethod modificationMethod,
-			final long modificationConstant,
-			final boolean calculateMetrics) {
+	public BenchmarkConfig(final String className, final Scenario scenario, final int size,
+			final int runIndex, final Query query, final int iterationCount,
+			final ModificationMethod modificationMethod, final long modificationConstant,
+			final boolean calculateMetrics, final ModelType modelType) {
 		super(scenario, size);
 		this.className = className;
 		this.runIndex = runIndex;
@@ -55,33 +53,28 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.modificationMethod = modificationMethod;
 		this.modificationConstant = modificationConstant;
 		this.analyze = calculateMetrics;
+		this.modelType = modelType;
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(requiredOption("query",
-				"the query to run, e.g. RouteSensor"));
+		options.addOption(requiredOption("query", "the query to run, e.g. RouteSensor"));
 
-		options.addOption(
-				"benchmarkMode",
-				true,
+		options.addOption("benchmarkMode", true,
 				"run benchmark specific (non-functional) procedures, like cleaning the OS cache");
-		options.addOption("runIndex", true,
-				"index of the run in the benchmark series");
+		options.addOption("runIndex", true, "index of the run in the benchmark series");
 
 		// modification constants
 		options.addOption(
 				"modificationMethod",
 				true,
 				"options: constant -- modify a fixed number of elements, resultSet -- modify based a number of elements based on the size of the results set");
-		options.addOption("iterationCount", true,
-				"number of modify-check iterations");
+		options.addOption("iterationCount", true, "number of modify-check iterations");
 		options.addOption("modificationConstant", true,
 				"modification constant for the modification method");
-		options.addOption("analyze", false,
-				"flag for calculating metrics");
+		options.addOption("analyze", false, "flag for calculating metrics");
 	}
 
 	@Override
@@ -91,8 +84,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		// queries argument -> testCases list
 		query = Query.valueOf(cmd.getOptionValue("query").toUpperCase());
 
-		final String modificationMethodString = cmd
-				.getOptionValue("modificationMethod");
+		final String modificationMethodString = cmd.getOptionValue("modificationMethod");
 		if (modificationMethodString != null) {
 			switch (modificationMethodString) {
 			case "constant":
@@ -102,15 +94,13 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 				modificationMethod = ModificationMethod.RESULT_SET;
 				break;
 			default:
-				throw new ParseException(
-						"Invalid modification method specified");
+				throw new ParseException("Invalid modification method specified");
 			}
 		} else {
 			modificationMethod = ModificationMethod.CONSTANT;
 		}
 
-		final String iterationCountString = cmd
-				.getOptionValue("iterationCount");
+		final String iterationCountString = cmd.getOptionValue("iterationCount");
 		if (iterationCountString != null) {
 			iterationCount = new Integer(iterationCountString);
 		} else {
@@ -127,8 +117,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		modificationConstant = 1;
 		modificationConstant = determineModificationConstant("modificationConstant");
 
-		final String benchmarkModeString = cmd
-				.getOptionValue("benchmarkMode");
+		final String benchmarkModeString = cmd.getOptionValue("benchmarkMode");
 		if (benchmarkModeString != null) {
 			benchmarkMode = new Boolean(benchmarkModeString);
 		} else {

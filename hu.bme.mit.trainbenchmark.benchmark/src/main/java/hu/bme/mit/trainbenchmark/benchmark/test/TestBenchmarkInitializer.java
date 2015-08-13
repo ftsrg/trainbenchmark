@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -24,6 +25,7 @@ public abstract class TestBenchmarkInitializer<T extends AbstractBenchmarkLogic>
 	protected final int modificationConstant = 1;
 	protected final int runIndex = 1;
 	protected final int iterationCount = 1;
+	protected final ModelType model = ModelType.RAILWAY;
 
 	protected abstract T initializeBenchmark(Query query, Scenario scenario);
 

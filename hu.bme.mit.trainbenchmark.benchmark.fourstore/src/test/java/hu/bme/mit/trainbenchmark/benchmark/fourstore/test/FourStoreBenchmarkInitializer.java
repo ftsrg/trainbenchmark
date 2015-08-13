@@ -18,16 +18,13 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class FourStoreBenchmarkInitializer extends
-		TestBenchmarkInitializer<FourStoreBenchmarkLogic> {
+public class FourStoreBenchmarkInitializer extends TestBenchmarkInitializer<FourStoreBenchmarkLogic> {
 
 	@Override
-	protected FourStoreBenchmarkLogic initializeBenchmark(
-			final Query query, final Scenario scenario) {
-		final FourStoreBenchmarkConfig fsbc = new FourStoreBenchmarkConfig(
-				scenario, size, "FourStore", runIndex, query,
-				iterationCount, modificationMethod,
-				modificationConstant);
+	protected FourStoreBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final FourStoreBenchmarkConfig fsbc = new FourStoreBenchmarkConfig(scenario, size,
+				"FourStore", runIndex, query, iterationCount, modificationMethod,
+				modificationConstant, model);
 		return new FourStoreBenchmarkLogic(fsbc);
 	}
 
