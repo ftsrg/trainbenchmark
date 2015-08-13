@@ -14,10 +14,10 @@ import util
 from loader import Loader
 
 
-def build(formats, tools, skip_tests):
+def build(config, formats, skip_tests):
     profiles = {"core"}
     profiles = profiles.union(formats)
-    profiles = profiles.union(tools)
+    profiles = profiles.union(config.tools)
 
     profiles_arg = ",".join(profiles)
 
@@ -35,27 +35,27 @@ def build_ci():
     subprocess.check_call(cmd_notest)
 
 
-def generate(formats, scenarios, sizes):
-    for scenario in scenarios:
+def generate(config, formats):
+    for scenario in config.scenarios:
         for format in formats:
             path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
             util.set_working_directory(path)
             target = util.get_generator_jar(format)
-            for size in sizes:
+            for size in config.sizes:
                 print("Generate model: <format: " + format +
                       ", scenario: " + scenario +
                       ", size: " + str(size) + ">")
-                subprocess.call(["java", "-Xmx" + java_xmx,
+                subprocess.call(["java", "-Xmx" + config.java_opts["Xmx"],
                                  "-jar", target,
                                  "-scenario", scenario,
                                  "-size", str(size)])
             util.set_working_directory("..")
 
 
-def measure(tools, scenarios, sizes, queries, optional_arguments: dict):
-    for tool in tools:
-        if tool in optional_arguments:
-            args = optional_arguments[tool]
+def measure(config):
+    for tool in config.tools:
+        if tool in config.optional_arguments:
+            args = config.optional_arguments[tool]
         else:
             args = [""]
 
@@ -64,16 +64,16 @@ def measure(tools, scenarios, sizes, queries, optional_arguments: dict):
             util.set_working_directory(path)
             target = util.get_tool_jar(tool)
 
-            for scenario in scenarios:
-                for size in sizes:
-                    for query in queries:
+            for scenario in config.scenarios:
+                for size in config.sizes:
+                    for query in config.queries:
                         print("Run benchmark: <tool: " + tool +
                               ", scenario: " + scenario +
                               ", query: " + query +
                               ", size: " + str(size) +
                               (", arg: " + arg if arg != "" else "") +
                               ">")
-                        cmd = ["java", "-Xmx" + java_xmx, "-jar", target,
+                        cmd = ["java", "-Xmx" + config.java_opts["Xmx"], "-jar", target,
                                "-scenario", scenario,
                                "-query", query,
                                "-size", str(size),
@@ -121,8 +121,8 @@ if __name__ == "__main__":
     if args.ci:
         build_ci()
     if args.build:
-        build(formats, config.tools, args.skip_tests)
+        build(config, formats, args.skip_tests)
     if args.generate:
-        generate(formats, config.scenarios, config.sizes)
+        generate(config, formats)
     if args.measure:
-        measure(config.tools, config.scenarios, config.sizes, config.queries, config.optional_arguments, config.java_opts)
+        measure(config)
