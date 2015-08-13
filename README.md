@@ -51,6 +51,13 @@ The framework provides a set of scripts for building the projects, generating th
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 * Python 3
 
+Certain tools need to be installed manually:
+
+* Allegro
+* Blazegraph
+* MySQL: `sudo apt-get install mysql-server`
+* Virtuoso
+
 ### Installation guide
 
 Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam):
