@@ -16,8 +16,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.emf.FileBroker;
-import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -31,47 +29,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-public class EMFRailwayGenerator extends FormatGenerator {
+public class EMFRailwayGenerator extends EMFFormatGenerator {
 
-	public EMFRailwayGenerator(GeneratorConfig generatorConfig) {
-		this.generatorConfig = generatorConfig;
-	}
-
-	@Override
-	public String syntax() {
-		return "EMF";
-	}
-
-	protected Resource resource;
 	protected RailwayFactory factory;
 	protected RailwayContainer container;
 
-	@Override
-	public void initModel() {
-		final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".emf";
-		final URI resourceURI = FileBroker.getEMFUri(fileName);
-
-		final ResourceSet resourceSet = new ResourceSetImpl();
-
-		resource = resourceSet.createResource(resourceURI);
-		resource.getContents().clear();
-
-		factory = RailwayFactory.eINSTANCE;
-		container = factory.createRailwayContainer();
-		resource.getContents().add(container);
+	public EMFRailwayGenerator(GeneratorConfig generatorConfig) {
+		super(generatorConfig);
 	}
 
 	@Override
-	public void persistModel() throws IOException {
-		resource.save(null);
+	protected void initializeFactory() {
+		factory = RailwayFactory.eINSTANCE;
+	}
+
+	@Override
+	protected EObject getContainer() {
+		container = factory.createRailwayContainer();
+		return container;
 	}
 
 	@Override
@@ -141,7 +120,8 @@ public class EMFRailwayGenerator extends FormatGenerator {
 		setAttribute(clazz, (RailwayElement) node, key, value);
 	}
 
-	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
+	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key,
+			Object value) {
 		// change the enum value from the
 		// hu.bme.mit.trainbenchmark.constants.Signal enum to the
 		// hu.bme.mit.trainbenchmark.railway.Signal enum
@@ -155,18 +135,6 @@ public class EMFRailwayGenerator extends FormatGenerator {
 
 		final EStructuralFeature feature = clazz.getEStructuralFeature(key);
 		node.eSet(feature, value);
-	}
-
-	@Override
-	public void startTransaction() throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void endTransaction() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

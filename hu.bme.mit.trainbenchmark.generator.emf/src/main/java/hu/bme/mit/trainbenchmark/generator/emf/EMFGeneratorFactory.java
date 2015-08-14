@@ -29,7 +29,7 @@ public class EMFGeneratorFactory extends GeneratorFactory {
 
 	@Override
 	protected FormatGenerator getScheduleFormatGenerator() {
-		return getRailwayFormatGenerator();
+		return new EMFScheduleGenerator(generatorConfig);
 	}
 
 }
