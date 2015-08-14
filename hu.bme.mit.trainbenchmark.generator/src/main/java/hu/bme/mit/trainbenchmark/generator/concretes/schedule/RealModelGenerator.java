@@ -133,6 +133,7 @@ public class RealModelGenerator extends ScheduleGenerator {
 			for (JsonNode assoc : train.get("Associations")) {
 				assocCode = assoc.get("AssociationUID").textValue();
 				if (!trains.containsKey(assocCode)) {
+					attributes.clear();
 					attributes.put(TRAIN_UID, assocCode);
 					trains.put(assocCode, fg.createVertex(TRAIN, attributes));
 				}
