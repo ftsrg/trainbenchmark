@@ -13,11 +13,15 @@
 package hu.bme.mit.trainbenchmark.generator.emf;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.schedule.AssociationCategory;
 import hu.bme.mit.trainbenchmark.schedule.ScheduleFactory;
 import hu.bme.mit.trainbenchmark.schedule.SchedulePackage;
+import hu.bme.mit.trainbenchmark.schedule.SchedulePlanning;
 import hu.bme.mit.trainbenchmark.schedule.Train;
 import hu.bme.mit.trainbenchmark.schedule.TrainContainer;
+import hu.bme.mit.trainbenchmark.schedule.TrainStatus;
 
 import java.io.IOException;
 import java.util.List;
@@ -99,6 +103,14 @@ public class EMFScheduleGenerator extends EMFFormatGenerator {
 	}
 
 	protected void setAttribute(final EClass clazz, final EObject node, final String key, Object value) {
+		if (ScheduleConstants.PLANNING.equals(key)) {
+			value = SchedulePlanning.get(((String) value).toUpperCase());
+		} else if (ScheduleConstants.STATUS.equals(key)) {
+			value = TrainStatus.get(((String) value).toUpperCase());
+		} else if (ScheduleConstants.CATEGORY.equals(key)) {
+			value = AssociationCategory.get(((String) value).toUpperCase());
+		}
+
 		final EStructuralFeature feature = clazz.getEStructuralFeature(key);
 		node.eSet(feature, value);
 	}
