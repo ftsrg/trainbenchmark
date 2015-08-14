@@ -16,7 +16,9 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
@@ -76,7 +78,6 @@ public class GraphFormatGenerator extends FormatGenerator {
 	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		final Node node;
-		// try (Transaction tx = graphDb.beginTx()) {
 		node = graphDb.createNode(DynamicLabel.label(type));
 
 		// this only works for inheritance hierarchies with
@@ -109,8 +110,6 @@ public class GraphFormatGenerator extends FormatGenerator {
 				sourceNode.createRelationshipTo(node, relationship(label));
 			}
 		}
-		// tx.success();
-		// }
 
 		return node;
 	}
@@ -132,11 +131,8 @@ public class GraphFormatGenerator extends FormatGenerator {
 		final Node source = (Node) from;
 		final Node target = (Node) to;
 
-		// try (Transaction tx = graphDb.beginTx()) {
 		final RelationshipType relationshipType = relationship(label);
 		source.createRelationshipTo(target, relationshipType);
-		// tx.success();
-		// }
 	}
 
 	@Override
@@ -167,14 +163,22 @@ public class GraphFormatGenerator extends FormatGenerator {
 					+ ".graphml";
 
 			String graphmlContent = writer.toString();
-			// this is required to be compatibile with OrientDB
-			graphmlContent = graphmlContent
-					.replaceAll(
-					//
-					"<graph id=\"G\" edgedefault=\"directed\">",
-							"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
 
-			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
+			// this is required to be compatibile with OrientDB
+			// graphmlContent = graphmlContent
+			// .replaceAll(
+			//	"<graph id=\"G\" edgedefault=\"directed\">",
+			//	"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
+
+			// FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
+			File file = new File(fileName);
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file, false));
+			// FileUtils.writeStringToFile(new File(fileName), graphmlContent);
+			for (int i = 0; i < graphmlContent.length(); i++) {
+				char c = graphmlContent.charAt(i);
+				bw.write(c);
+			}
+			bw.close();
 		} finally {
 			graphDb.shutdown();
 		}
