@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATIONS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATIVE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.CATEGORY;
@@ -24,6 +25,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.NEI
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ORIGIN;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.PLANNING;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULES;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STANOX;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.START_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
@@ -32,7 +34,6 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TER
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN_UID;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRANSACTION;
-import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -94,6 +95,7 @@ public class RealModelGenerator extends ScheduleGenerator {
 		Map<String, Object> outgoing = new HashMap<>();
 		Map<String, Object> incoming = new HashMap<>();
 		String assocCode;
+		String tiplocCode;
 		for (JsonNode train : root.get("Trains")) {
 			code = train.get("UID").textValue();
 			attributes.clear();
@@ -109,20 +111,25 @@ public class RealModelGenerator extends ScheduleGenerator {
 					attributes.put(TRANSACTION, getText(schedule, "Transaction"));
 					attributes.put(DAYS, getText(schedule, "Days"));
 					attributes.put(PLANNING, resolveStatus(schedule, true));
-					newSchedule = fg.createVertex(SCHEDULE, attributes);
+
+					incoming.clear();
+					incoming.put(SCHEDULES, trains.get(code));
+					newSchedule = fg.createVertex(SCHEDULE, attributes, emptyMap,
+							incoming);
 					for (JsonNode loc : schedule.get("Locations")) {
+						tiplocCode = getText(loc, "TiplocCode");
 						switch (getText(loc, "Type")) {
 						case "LO":
-							fg.createEdge(ORIGIN, newSchedule, stations
-									.get(getText(loc, "TiplocCode")));
+							fg.createEdge(ORIGIN, newSchedule,
+									stations.get(tiplocCode));
 							break;
 						case "LI":
-							fg.createEdge(DESTINATIONS, newSchedule, stations
-									.get(getText(loc, "TiplocCode")));
+							fg.createEdge(DESTINATIONS, newSchedule,
+									stations.get(tiplocCode));
 							break;
 						case "LT":
-							fg.createEdge(TERMINAL, newSchedule, stations
-									.get(getText(loc, "TiplocCode")));
+							fg.createEdge(TERMINAL, newSchedule,
+									stations.get(tiplocCode));
 							break;
 
 						}
@@ -146,7 +153,7 @@ public class RealModelGenerator extends ScheduleGenerator {
 				outgoing.put(LOCATION, stations.get(assoc.get("Location").textValue()));
 				incoming.put(ASSOCIATIONS, trains.get(code));
 
-				fg.createVertex(ScheduleConstants.ASSOCIATION, attributes, outgoing, incoming);
+				fg.createVertex(ASSOCIATION, attributes, outgoing, incoming);
 			}
 		}
 	}
