@@ -12,8 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.CATEGORY;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.PLANNING;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.START_DATE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATUS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
-import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.schedule.AssociationCategory;
 import hu.bme.mit.trainbenchmark.schedule.ScheduleFactory;
@@ -24,6 +27,8 @@ import hu.bme.mit.trainbenchmark.schedule.TrainContainer;
 import hu.bme.mit.trainbenchmark.schedule.TrainStatus;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,9 +41,11 @@ public class EMFScheduleGenerator extends EMFFormatGenerator {
 
 	protected TrainContainer container;
 	protected ScheduleFactory factory;
+	private SimpleDateFormat formatter;
 
 	public EMFScheduleGenerator(GeneratorConfig generatorConfig) {
 		super(generatorConfig);
+		formatter = new SimpleDateFormat("yyyy-MM-dd");
 	}
 
 	@Override
@@ -103,12 +110,23 @@ public class EMFScheduleGenerator extends EMFFormatGenerator {
 	}
 
 	protected void setAttribute(final EClass clazz, final EObject node, final String key, Object value) {
-		if (ScheduleConstants.PLANNING.equals(key)) {
+		if (value == null) {
+			value = "";
+		}
+		if (PLANNING.equals(key)) {
 			value = SchedulePlanning.get(((String) value).toUpperCase());
-		} else if (ScheduleConstants.STATUS.equals(key)) {
+		} else if (STATUS.equals(key)) {
 			value = TrainStatus.get(((String) value).toUpperCase());
-		} else if (ScheduleConstants.CATEGORY.equals(key)) {
+		} else if (CATEGORY.equals(key)) {
 			value = AssociationCategory.get(((String) value).toUpperCase());
+		}
+
+		if (START_DATE.equals(key)) {
+			try {
+				value = formatter.parse((String) value);
+			} catch (ParseException e) {
+				throw new RuntimeException("Wrong date format!");
+			}
 		}
 
 		final EStructuralFeature feature = clazz.getEStructuralFeature(key);

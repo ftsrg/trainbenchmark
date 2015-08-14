@@ -166,7 +166,7 @@ public class RealModelGenerator extends ScheduleGenerator {
 		String status = node.get("Status").textValue();
 		if (resolvePlanning) {
 			if (status.matches("^[12345]")) {
-				return "ShortTerm";
+				return "Short_Term";
 			} else {
 				return "Permanent";
 			}
@@ -183,7 +183,7 @@ public class RealModelGenerator extends ScheduleGenerator {
 			case "T":
 				return "Trip";
 			default:
-				return "";
+				return "Passenger";
 			}
 		}
 	}
