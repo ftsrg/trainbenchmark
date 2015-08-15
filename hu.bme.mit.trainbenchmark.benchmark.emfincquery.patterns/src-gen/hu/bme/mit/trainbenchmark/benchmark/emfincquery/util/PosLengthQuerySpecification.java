@@ -6,19 +6,24 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatcher;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.impl.BaseGeneratedEMFPQuery;
 import org.eclipse.incquery.runtime.api.impl.BaseGeneratedEMFQuerySpecification;
+import org.eclipse.incquery.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.incquery.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.matchers.psystem.IExpressionEvaluator;
 import org.eclipse.incquery.runtime.matchers.psystem.IValueProvider;
 import org.eclipse.incquery.runtime.matchers.psystem.PBody;
 import org.eclipse.incquery.runtime.matchers.psystem.PVariable;
+import org.eclipse.incquery.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.incquery.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.incquery.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation;
-import org.eclipse.incquery.runtime.matchers.psystem.basicenumerables.TypeBinary;
+import org.eclipse.incquery.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.incquery.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.incquery.runtime.matchers.psystem.queries.QueryInitializationException;
+import org.eclipse.incquery.runtime.matchers.tuple.FlatTuple;
 
 /**
  * A pattern-specific query specification that can instantiate PosLengthMatcher in a type-safe way.
@@ -95,10 +100,13 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
       	PBody body = new PBody(this);
       	PVariable var_segment = body.getOrCreateVariableByName("segment");
       	PVariable var_length = body.getOrCreateVariableByName("length");
+      	PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       	body.setExportedParameters(Arrays.<ExportedParameter>asList(
       		new ExportedParameter(body, var_segment, "segment")
       	));
-      	new TypeBinary(body, CONTEXT, var_segment, var_length, getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment", "length"), "http://www.semanticweb.org/ontologies/2015/trainbenchmark/Segment.length");
+      	new TypeConstraint(body, new FlatTuple(var_segment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+      	new TypeConstraint(body, new FlatTuple(var_segment, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment", "length")));
+      	new Equality(body, var__virtual_0_, var_length);
       new ExpressionEvaluation(body, new IExpressionEvaluator() {
       	
       	@Override
