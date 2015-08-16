@@ -31,7 +31,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 		checker = new SQLChecker(sqlDriver, bc);
 
-		transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
+		transformation = SQLTransformation.newInstance(sqlDriver, bc);
 	}
 
 	@Override

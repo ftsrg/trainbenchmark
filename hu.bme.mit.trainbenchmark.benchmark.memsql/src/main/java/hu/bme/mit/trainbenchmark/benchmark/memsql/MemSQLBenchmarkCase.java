@@ -23,7 +23,7 @@ public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 		driver = sqlDriver = new MemSQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
 
-		transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
+		transformation = SQLTransformation.newInstance(sqlDriver, bc);
 	}
 
 }

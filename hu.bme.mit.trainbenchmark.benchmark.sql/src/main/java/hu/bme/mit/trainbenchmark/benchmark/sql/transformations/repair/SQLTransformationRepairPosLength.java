@@ -11,10 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLPosLengthMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -22,9 +21,9 @@ import java.util.Collection;
 
 public class SQLTransformationRepairPosLength extends SQLTransformationRepair<SQLPosLengthMatch> {
 
-	public SQLTransformationRepairPosLength(final SQLDriver sqlDriver, final Query query,
-			final ScenarioConstants scenario) throws IOException {
-		super(sqlDriver, query, scenario);
+	public SQLTransformationRepairPosLength(final SQLDriver sqlDriver, final BenchmarkConfig bc)
+			throws IOException {
+		super(sqlDriver, bc);
 	}
 
 	@Override

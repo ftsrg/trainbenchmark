@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -22,9 +23,9 @@ import java.util.Collection;
 
 public class SQLTransformationRepairRouteSensor extends SQLTransformationRepair<SQLRouteSensorMatch> {
 
-	public SQLTransformationRepairRouteSensor(final SQLDriver sqlDriver, final Query query,
-			final ScenarioConstants scenario) throws IOException {
-		super(sqlDriver, query, scenario);
+	public SQLTransformationRepairRouteSensor(final SQLDriver sqlDriver, final BenchmarkConfig bc)
+			throws IOException {
+		super(sqlDriver, bc);
 	}
 
 	@Override
