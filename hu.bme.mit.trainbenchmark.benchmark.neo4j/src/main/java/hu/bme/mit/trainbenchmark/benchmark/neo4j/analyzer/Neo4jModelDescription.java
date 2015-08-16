@@ -54,7 +54,7 @@ public class Neo4jModelDescription extends ModelDescription<Neo4jDriver> {
 			if (degreeDistributions.containsKey(degree)) {
 				count = degreeDistributions.get(degree);
 				count++;
-				degreeDistributions.replace(degree, count);
+				degreeDistributions.put(degree, count);
 			} else {
 				degreeDistributions.put(degree, 1.0);
 			}
