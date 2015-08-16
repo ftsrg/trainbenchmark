@@ -90,6 +90,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 			modificationMethod = ModificationMethod.CONSTANT;
 		}
 
+		runs = new Integer(cmd.getOptionValue(RUNS));
+
 		final String iterationCountString = cmd.getOptionValue(ITERATION_COUNT);
 		if (iterationCountString != null) {
 			iterationCount = new Integer(iterationCountString);
@@ -122,6 +124,10 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	public Query getQuery() {
 		return query;
+	}
+
+	public int getRuns() {
+		return runs;
 	}
 
 	public String getClassName() {
