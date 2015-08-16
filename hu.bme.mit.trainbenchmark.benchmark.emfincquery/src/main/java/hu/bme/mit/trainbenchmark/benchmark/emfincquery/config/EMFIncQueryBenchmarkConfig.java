@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
 import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import org.apache.commons.cli.ParseException;
 
@@ -29,7 +29,7 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 		super(args, EMFINCQUERY);
 	}
 
-	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex,
+	public EMFIncQueryBenchmarkConfig(final ScenarioConstants scenario, final int size, final int runIndex,
 			final Query query, final int iterationCount,
 			final ModificationMethod modificationMethod, final long modificationConstant,
 			final boolean localSearch, final ModelType modelType) {

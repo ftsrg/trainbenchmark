@@ -15,12 +15,12 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.memsql.MemSQLBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class MemSQLBenchmarkInitializer extends TestBenchmarkInitializer<MemSQLBenchmarkLogic> {
 
 	@Override
-	protected MemSQLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected MemSQLBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
 		final BenchmarkConfig bc = new BenchmarkConfig("MemSQL", scenario, size, runIndex, query,
 				iterationCount, modificationMethod, modificationConstant, false, model);
 		return new MemSQLBenchmarkLogic(bc);

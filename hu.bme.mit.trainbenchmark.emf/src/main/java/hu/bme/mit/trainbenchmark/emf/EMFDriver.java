@@ -45,7 +45,8 @@ public class EMFDriver extends Driver<RailwayElement> {
 		final ResourceSet resourceSet = new ResourceSetImpl();
 		resource = resourceSet.getResource(resourceURI, true);
 
-		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
+		if (resource.getContents().size() > 0
+				&& resource.getContents().get(0) instanceof RailwayContainer) {
 			container = (RailwayContainer) resource.getContents().get(0);
 		}
 	}
@@ -59,8 +60,6 @@ public class EMFDriver extends Driver<RailwayElement> {
 	public Comparator<RailwayElement> getElementComparator() {
 		return elementComparator;
 	}
-
-	// read
 
 	@Override
 	public List<RailwayElement> collectVertices(final String type) {

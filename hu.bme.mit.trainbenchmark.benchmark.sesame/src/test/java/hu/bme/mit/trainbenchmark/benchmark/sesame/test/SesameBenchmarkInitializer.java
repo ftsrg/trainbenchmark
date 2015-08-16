@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class SesameBenchmarkInitializer extends TestBenchmarkInitializer<SesameBenchmarkLogic> {
 
 	@Override
-	protected SesameBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected SesameBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Sesame", scenario, size, runIndex,
 				query, iterationCount, modificationMethod, modificationConstant, model);
 		return new SesameBenchmarkLogic(rbc);

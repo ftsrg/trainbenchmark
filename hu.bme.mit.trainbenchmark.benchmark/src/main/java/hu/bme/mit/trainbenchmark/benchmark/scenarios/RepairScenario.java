@@ -15,23 +15,26 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
 
-public class BatchScenarioLogic extends
-		ScenarioLogic<AbstractBenchmarkCase<?, ?, ?>> {
+public class RepairScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
 		SequencePhase seq = new SequencePhase();
+		CheckPhase check = new CheckPhase("Check");
+		CheckPhase recheck = new CheckPhase("Recheck");
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"), new ReadPhase(
-				"Read"), initMetrics, calcMetrics,
-				new CheckPhase("Check"), new DestroyPhase(
-						"Destroy"));
+		seq.addPhases(new InitializationPhase("Init"), new InitTransformationPhase(
+				"InitTransformation"), new ReadPhase("Read"), initMetrics,
+				calcMetrics, check, new TransformationPhase("Edit"), recheck,
+				new DestroyPhase("Destroy"));
 		rootPhase = seq;
 
 	}
@@ -41,7 +44,7 @@ public class BatchScenarioLogic extends
 		CaseDescriptor descriptor = new CaseDescriptor();
 		descriptor.setCaseName(caseName);
 		descriptor.setTool(tool);
-		descriptor.setScenario("Batch");
+		descriptor.setScenario("Repair");
 		descriptor.setSize(size);
 		descriptor.setRunIndex(runIndex);
 		return descriptor;

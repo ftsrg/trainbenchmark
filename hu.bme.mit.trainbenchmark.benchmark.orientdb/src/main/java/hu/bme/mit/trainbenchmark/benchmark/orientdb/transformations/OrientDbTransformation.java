@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair.Orien
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair.OrientDbTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair.OrientDbTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public abstract class OrientDbTransformation<M> extends Transformation<M> {
 
@@ -36,7 +36,7 @@ public abstract class OrientDbTransformation<M> extends Transformation<M> {
 		this.orientDriver = orientDriver;
 	}
 
-	public static Transformation<?> newInstance(final OrientDbDriver orientDriver, final Query query, final Scenario scenario) {
+	public static Transformation<?> newInstance(final OrientDbDriver orientDriver, final Query query, final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

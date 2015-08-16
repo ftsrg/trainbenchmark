@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameT
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public abstract class SesameTransformation<M> extends Transformation<M> {
 
@@ -36,7 +36,7 @@ public abstract class SesameTransformation<M> extends Transformation<M> {
 		this.sesameDriver = sesameDriver;
 	}
 
-	public static Transformation<?> newInstance(final SesameDriver sesameDriver, final Query query, final Scenario scenario) {
+	public static Transformation<?> newInstance(final SesameDriver sesameDriver, final Query query, final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

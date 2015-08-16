@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import org.apache.commons.cli.ParseException;
 
@@ -41,7 +41,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.className = className;
 	}
 
-	public BenchmarkConfig(final String className, final Scenario scenario, final int size,
+	public BenchmarkConfig(final String className, final ScenarioConstants scenario, final int size,
 			final int runIndex, final Query query, final int iterationCount,
 			final ModificationMethod modificationMethod, final long modificationConstant,
 			final boolean calculateMetrics, final ModelType modelType) {

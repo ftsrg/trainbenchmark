@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class Neo4jCypherBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
 
 	@Override
-	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
 		final Neo4jBenchmarkConfig nbc = new Neo4jBenchmarkConfig(scenario, size, 1, query,
 				iterationCount, modificationMethod, modificationConstant, false, model);
 		return new Neo4jBenchmarkLogic(nbc);

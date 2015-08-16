@@ -19,22 +19,35 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
+import eu.mondo.sam.core.phases.IterationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
 
-public class RepairScenarioLogic extends ScenarioLogic<AbstractBenchmarkCase<?, ?, ?>> {
+public class InjectScenario extends
+		Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
+		IterationPhase iter = new IterationPhase(
+				benchmarkConfig.getIterationCount());
 		SequencePhase seq = new SequencePhase();
-		CheckPhase check = new CheckPhase("Check");
-		CheckPhase recheck = new CheckPhase("Recheck");
+		SequencePhase innerSeq = new SequencePhase();
+
+		TransformationPhase edit = new TransformationPhase("Edit");
+		CheckPhase check = new CheckPhase("Recheck");
+
+		innerSeq.addPhases(edit, check);
+		iter.setPhase(innerSeq);
+
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"), new InitTransformationPhase(
-				"InitTransformation"), new ReadPhase("Read"), initMetrics,
-				calcMetrics, check, new TransformationPhase("Edit"), recheck,
+		seq.addPhases(new InitializationPhase("Init"),
+				new InitTransformationPhase(
+						"InitTransformation"),
+				new ReadPhase("Read"), initMetrics,
+				calcMetrics, new CheckPhase("Check"), iter,
 				new DestroyPhase("Destroy"));
+
 		rootPhase = seq;
 
 	}
@@ -44,10 +57,9 @@ public class RepairScenarioLogic extends ScenarioLogic<AbstractBenchmarkCase<?, 
 		CaseDescriptor descriptor = new CaseDescriptor();
 		descriptor.setCaseName(caseName);
 		descriptor.setTool(tool);
-		descriptor.setScenario("Repair");
+		descriptor.setScenario("Inject");
 		descriptor.setSize(size);
 		descriptor.setRunIndex(runIndex);
 		return descriptor;
 	}
-
 }

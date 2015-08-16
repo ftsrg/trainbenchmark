@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.VirtuosoDriver;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.io.IOException;
 
@@ -30,7 +30,7 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 		driver = sesameDriver = new VirtuosoDriver();
 		checker = new SesameChecker(sesameDriver, bc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario() != ScenarioConstants.BATCH) {
 			transformation = SesameTransformation.newInstance(sesameDriver,
 					bc.getQuery(), bc.getScenario());
 		}

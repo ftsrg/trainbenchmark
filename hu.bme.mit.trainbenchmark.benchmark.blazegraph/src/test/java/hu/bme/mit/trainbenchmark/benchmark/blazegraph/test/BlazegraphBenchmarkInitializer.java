@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.blazegraph.BlazegraphBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class BlazegraphBenchmarkInitializer extends TestBenchmarkInitializer<BlazegraphBenchmarkLogic> {
 
 	@Override
-	protected BlazegraphBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected BlazegraphBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Blazegraph", scenario, size, runIndex, query, iterationCount,
 				modificationMethod, modificationConstant);
 		return new BlazegraphBenchmarkLogic(rbc);

@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTra
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public abstract class Neo4jTransformation<M> extends Transformation<M> {
 
@@ -36,7 +36,7 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 		this.neoDriver = neoDriver;
 	}
 
-	public static Transformation<?> newInstance(final Neo4jDriver neoDriver, final Query query, final Scenario scenario) {
+	public static Transformation<?> newInstance(final Neo4jDriver neoDriver, final Query query, final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

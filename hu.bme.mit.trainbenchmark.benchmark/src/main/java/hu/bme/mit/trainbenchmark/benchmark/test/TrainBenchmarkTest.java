@@ -13,9 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import static org.hamcrest.Matchers.equalTo;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.io.IOException;
 
@@ -35,11 +35,11 @@ public abstract class TrainBenchmarkTest {
 
 	protected TestBenchmarkInitializer<?> bi;
 
-	public AbstractBenchmarkLogic initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
+	public AbstractBenchmarkLogic initialize(final Query query, final String tool, final ScenarioConstants scenario) throws IOException {
 		return bi.initializeBenchmark(query, scenario);
 	}
 
-	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws ParseException, IOException {
+	protected void testQuery(final Query query, final ScenarioConstants scenario, final int expectedResultSize) throws ParseException, IOException {
 		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, expectedResultSize);
 	}

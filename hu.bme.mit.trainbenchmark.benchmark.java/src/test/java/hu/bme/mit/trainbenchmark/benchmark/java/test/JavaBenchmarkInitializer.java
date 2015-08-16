@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.java.JavaBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class JavaBenchmarkInitializer extends TestBenchmarkInitializer<JavaBenchmarkLogic> {
 
 	@Override
-	protected JavaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected JavaBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
 		final BenchmarkConfig bc = new BenchmarkConfig("Java", scenario, size, 1, query,
 				iterationCount, modificationMethod, modificationConstant, false, model);
 		return new JavaBenchmarkLogic(bc);

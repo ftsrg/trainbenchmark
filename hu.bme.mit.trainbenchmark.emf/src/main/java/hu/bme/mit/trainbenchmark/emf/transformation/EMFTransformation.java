@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.emf.transformation;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectPosLength;
@@ -30,7 +30,7 @@ import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepa
 
 public abstract class EMFTransformation<O> extends Transformation<O> {
 
-	public static EMFTransformation newInstance(final EMFDriver driver, final Query query, final Scenario scenario) {
+	public static EMFTransformation newInstance(final EMFDriver driver, final Query query, final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.emf.analyzer.EMFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
@@ -46,7 +46,7 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends
 		checker = eiqChecker;
 		eiqDriver.registerChecker(eiqChecker);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario() != ScenarioConstants.BATCH) {
 			transformation = EMFIncQueryTransformation.newInstance(eiqDriver,
 					bc.getQuery(), bc.getScenario());
 		}

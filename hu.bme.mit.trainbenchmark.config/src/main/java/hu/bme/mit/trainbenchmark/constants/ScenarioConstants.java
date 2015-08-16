@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.constants;
 
-public enum Scenario {
+public enum ScenarioConstants {
 	BATCH("Batch"), //
 	INJECT("Inject"), //
 	REPAIR("Repair");
 
 	private String name;
 
-	Scenario(final String name) {
+	ScenarioConstants(final String name) {
 		this.name = name;
 	}
 

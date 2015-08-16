@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -43,7 +43,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 		driver = jenaDriver = new JenaDriver();
 		checker = new JenaChecker(jenaDriver, bc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario() != ScenarioConstants.BATCH) {
 			transformation = JenaTransformation.newInstance(jenaDriver, bc.getQuery(),
 					bc.getScenario());
 		}

@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
+import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 

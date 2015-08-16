@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
-import static hu.bme.mit.trainbenchmark.constants.Scenario.INJECT;
+import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.INJECT;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EM
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
@@ -33,7 +33,7 @@ public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 		this.driver = driver;
 	}
 
-	public static Transformation<?> newInstance(final EMFIncQueryDriver<?> driver, final Query query, final Scenario scenario) {
+	public static Transformation<?> newInstance(final EMFIncQueryDriver<?> driver, final Query query, final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.config;
 
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.constants.ModelType;
 
 import java.util.Arrays;
@@ -34,7 +34,7 @@ public abstract class TrainBenchmarkConfig {
 
 	// arguments
 	protected int size;
-	protected Scenario scenario;
+	protected ScenarioConstants scenario;
 	protected ModelType modelType;
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
@@ -53,7 +53,7 @@ public abstract class TrainBenchmarkConfig {
 		}
 	}
 
-	public TrainBenchmarkConfig(final Scenario scenario, final int size) {
+	public TrainBenchmarkConfig(final ScenarioConstants scenario, final int size) {
 		this.scenario = scenario;
 		this.size = size;
 	}
@@ -68,7 +68,7 @@ public abstract class TrainBenchmarkConfig {
 	protected void processArguments(final String[] args) throws ParseException {
 		cmd = parser.parse(options, args);
 
-		scenario = Scenario.valueOf(cmd.getOptionValue("scenario").toUpperCase());
+		scenario = ScenarioConstants.valueOf(cmd.getOptionValue("scenario").toUpperCase());
 		size = Integer.parseInt(cmd.getOptionValue("size"));
 		modelType = ModelType.valueOf(cmd.getOptionValue("model").toUpperCase().replace("-", "_"));
 	}
@@ -88,7 +88,7 @@ public abstract class TrainBenchmarkConfig {
 		System.out.println();
 	}
 
-	public Scenario getScenario() {
+	public ScenarioConstants getScenario() {
 		return scenario;
 	}
 
@@ -128,7 +128,7 @@ public abstract class TrainBenchmarkConfig {
 		case SCHEDULE_SCALE_FREE:
 			return "schedule-scale-" + size;
 		default:
-			final String variant = (scenario == Scenario.BATCH) ? "repair" : scenario.toString().toLowerCase();
+			final String variant = (scenario == ScenarioConstants.BATCH) ? "repair" : scenario.toString().toLowerCase();
 			final String filename = "railway-" + variant + "-" + size;
 			return filename;
 		}

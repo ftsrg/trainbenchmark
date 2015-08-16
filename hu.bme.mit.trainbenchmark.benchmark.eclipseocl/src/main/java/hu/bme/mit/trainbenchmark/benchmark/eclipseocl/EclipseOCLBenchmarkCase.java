@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLChecker;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.analyzer.EMFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
@@ -29,7 +29,7 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchm
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, bc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario() != ScenarioConstants.BATCH) {
 			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(),
 					bc.getScenario());
 		}

@@ -10,10 +10,12 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
+package hu.bme.mit.trainbenchmark.benchmark;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.ScenarioFactory;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.Scenario;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 
 import java.io.IOException;
@@ -37,7 +39,7 @@ public abstract class AbstractBenchmarkLogic {
 	@SuppressWarnings("unchecked")
 	public BenchmarkResult runBenchmark() throws IOException {
 		@SuppressWarnings("rawtypes")
-		final ScenarioLogic scl = ScenarioFactory.getScenario(bc
+		final Scenario scl = ScenarioFactory.getScenario(bc
 				.getScenario());
 		final AbstractBenchmarkCase<?, ?, ?> tc = getBenchmarkCase();
 

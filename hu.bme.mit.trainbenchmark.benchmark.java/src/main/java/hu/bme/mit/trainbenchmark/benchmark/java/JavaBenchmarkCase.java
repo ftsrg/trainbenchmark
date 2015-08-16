@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.java;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases.JavaChecker;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.analyzer.EMFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
@@ -29,7 +29,7 @@ public class JavaBenchmarkCase extends EMFBenchmarkCase {
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) JavaChecker.newInstance(emfDriver, bc.getQuery());
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario() != ScenarioConstants.BATCH) {
 			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(),
 					bc.getScenario());
 		}

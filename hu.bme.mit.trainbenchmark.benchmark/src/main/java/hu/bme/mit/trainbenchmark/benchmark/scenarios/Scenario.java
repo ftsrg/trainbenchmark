@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.MetricsInitialization
 import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.ModelMetricsCalculationPhase;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?, ?>>
+public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>>
 		extends BenchmarkScenario {
 
 	protected BenchmarkConfig benchmarkConfig;

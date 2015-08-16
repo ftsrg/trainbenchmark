@@ -24,7 +24,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "java"
+    "neo4j"
 
   ],
   "UniqueConfigurations": [

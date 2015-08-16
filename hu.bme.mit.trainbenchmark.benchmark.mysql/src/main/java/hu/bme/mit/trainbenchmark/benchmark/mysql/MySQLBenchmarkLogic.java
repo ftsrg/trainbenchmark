@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
+import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 import org.apache.commons.cli.ParseException;
 

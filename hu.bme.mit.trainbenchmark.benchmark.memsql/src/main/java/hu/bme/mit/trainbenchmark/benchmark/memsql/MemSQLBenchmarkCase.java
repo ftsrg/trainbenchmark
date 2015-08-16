@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.memsql.driver.MemSQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 
@@ -24,7 +24,7 @@ public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 		driver = sqlDriver = new MemSQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario() != ScenarioConstants.BATCH) {
 			transformation = SQLTransformation.newInstance(sqlDriver, bc);
 		}
 	}

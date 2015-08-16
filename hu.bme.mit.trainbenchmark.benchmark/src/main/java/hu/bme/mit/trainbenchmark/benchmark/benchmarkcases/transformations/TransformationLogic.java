@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public abstract class TransformationLogic<M, T, O> {
 	// T: elements in the match set
 	// O: transformation object
 
-	public static TransformationLogic newInstance(final Scenario scenario, final Comparator comparator) {
+	public static TransformationLogic newInstance(final ScenarioConstants scenario, final Comparator comparator) {
 		switch (scenario) {
 		case REPAIR:
 			return new RepairTransformationLogic<>(comparator);

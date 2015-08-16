@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class MySQLBenchmarkInitializer extends TestBenchmarkInitializer<MySQLBenchmarkLogic> {
 
 	@Override
-	protected MySQLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected MySQLBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
 		final BenchmarkConfig bc = new BenchmarkConfig("MySQL", scenario, size, runIndex, query,
 				iterationCount, modificationMethod, modificationConstant, false, model);
 		return new MySQLBenchmarkLogic(bc);

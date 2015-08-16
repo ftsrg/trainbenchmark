@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 public class JenaBenchmarkInitializer extends TestBenchmarkInitializer<JenaBenchmarkLogic> {
 
 	@Override
-	protected JenaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected JenaBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query,
 				iterationCount, modificationMethod, modificationConstant, model);
 		return new JenaBenchmarkLogic(rbc);
