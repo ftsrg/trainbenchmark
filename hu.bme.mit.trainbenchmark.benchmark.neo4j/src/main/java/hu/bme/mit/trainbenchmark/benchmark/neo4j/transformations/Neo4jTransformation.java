@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectPosLength;
@@ -36,12 +37,18 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 		this.neoDriver = neoDriver;
 	}
 
-	public static Transformation<?> newInstance(final Neo4jDriver neoDriver, final Query query, final ScenarioConstants scenario) {
+	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+			final ScenarioConstants scenario) {
+		return newConcreteInstance((Neo4jDriver) driver, query, scenario);
+	}
+
+	protected static Transformation<?> newConcreteInstance(Neo4jDriver neoDriver, final Query query,
+			final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new Neo4jTransformationRepairConnectedSegments(neoDriver);				
+				return new Neo4jTransformationRepairConnectedSegments(neoDriver);
 			case POSLENGTH:
 				return new Neo4jTransformationRepairPosLength(neoDriver);
 			case ROUTESENSOR:
@@ -58,7 +65,7 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new Neo4jTransformationInjectConnectedSegments(neoDriver);				
+				return new Neo4jTransformationInjectConnectedSegments(neoDriver);
 			case POSLENGTH:
 				return new Neo4jTransformationInjectPosLength(neoDriver);
 			case ROUTESENSOR:
@@ -75,6 +82,7 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);
+		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: "
+				+ scenario);
 	}
 }

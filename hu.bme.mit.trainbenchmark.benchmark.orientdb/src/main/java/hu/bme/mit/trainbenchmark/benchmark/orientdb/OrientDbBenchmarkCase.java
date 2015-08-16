@@ -17,15 +17,13 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatch;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.OrientDbTransformation;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.util.Comparator;
 
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 
-public class OrientDbBenchmarkCase extends
-		AbstractBenchmarkCase<OrientDbMatch, Vertex, OrientDbDriver> {
+public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, Vertex, OrientDbDriver> {
 
 	protected OrientGraph graphDb;
 	protected String dbPath;
@@ -36,15 +34,12 @@ public class OrientDbBenchmarkCase extends
 	@Override
 	public void init() throws Exception {
 		dbPath = bc.getWorkspacePath() + "models/orient-dbs/railway-database";
-		benchmarkDir = bc.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
+		benchmarkDir = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
 		driver = orientDriver = new OrientDbDriver(dbPath, benchmarkDir);
 		checker = OrientDbChecker.newInstance(orientDriver, bc.getQuery());
 
-		if (bc.getScenario() != ScenarioConstants.BATCH) {
-			transformation = OrientDbTransformation.newInstance(orientDriver,
-					bc.getQuery(), bc.getScenario());
-		}
+		transformation = OrientDbTransformation.newInstance(orientDriver, bc.getQuery(),
+				bc.getScenario());
 	}
 
 	@Override

@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
 import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.INJECT;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
@@ -33,7 +34,13 @@ public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 		this.driver = driver;
 	}
 
-	public static Transformation<?> newInstance(final EMFIncQueryDriver<?> driver, final Query query, final ScenarioConstants scenario) {
+	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+			final ScenarioConstants scenario) {
+		return newConcreteInstance((EMFIncQueryDriver) driver, query, scenario);
+	}
+
+	protected static Transformation<?> newConcreteInstance(final EMFIncQueryDriver<?> driver,
+			final Query query, final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
@@ -57,6 +64,7 @@ public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);
+		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: "
+				+ scenario);
 	}
 }

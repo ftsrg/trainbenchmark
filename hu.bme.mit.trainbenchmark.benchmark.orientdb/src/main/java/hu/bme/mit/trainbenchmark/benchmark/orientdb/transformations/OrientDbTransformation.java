@@ -9,9 +9,11 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectPosLength;
@@ -36,7 +38,13 @@ public abstract class OrientDbTransformation<M> extends Transformation<M> {
 		this.orientDriver = orientDriver;
 	}
 
-	public static Transformation<?> newInstance(final OrientDbDriver orientDriver, final Query query, final ScenarioConstants scenario) {
+	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+			final ScenarioConstants scenario) {
+		return newConcreteInstance((OrientDbDriver) driver, query, scenario);
+	}
+
+	protected static Transformation<?> newConcreteInstance(final OrientDbDriver orientDriver,
+			final Query query, final ScenarioConstants scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
@@ -75,7 +83,8 @@ public abstract class OrientDbTransformation<M> extends Transformation<M> {
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);
+		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: "
+				+ scenario);
 	}
-	
+
 }

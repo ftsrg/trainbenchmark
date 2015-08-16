@@ -16,7 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 public class MySQLBenchmarkCase extends SQLBenchmarkCase {
@@ -32,9 +31,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 		checker = new SQLChecker(sqlDriver, bc);
 
-		if (bc.getScenario() != ScenarioConstants.BATCH) {
-			transformation = SQLTransformation.newInstance(sqlDriver, bc);
-		}
+		transformation = SQLTransformation.newInstance(sqlDriver, bc.getQuery(), bc.getScenario());
 	}
 
 	@Override

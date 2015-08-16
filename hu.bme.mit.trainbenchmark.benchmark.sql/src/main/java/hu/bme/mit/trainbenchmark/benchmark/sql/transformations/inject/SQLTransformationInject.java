@@ -11,9 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,8 +22,9 @@ import java.util.Collection;
 
 public class SQLTransformationInject extends SQLTransformation<Long> {
 
-	public SQLTransformationInject(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		super(sqlDriver, bc);
+	public SQLTransformationInject(final SQLDriver sqlDriver, final Query query,
+			final ScenarioConstants scenario) throws IOException {
+		super(sqlDriver, query, scenario);
 	}
 
 	@Override
@@ -36,5 +38,5 @@ public class SQLTransformationInject extends SQLTransformation<Long> {
 			preparedUpdateStatement.executeUpdate();
 		}
 	}
-	
+
 }

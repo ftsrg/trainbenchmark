@@ -21,9 +21,10 @@ import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 public class AllegroBenchmarkInitializer extends TestBenchmarkInitializer<AllegroBenchmarkLogic> {
 
 	@Override
-	protected AllegroBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Allegro", scenario, size, runIndex, query, iterationCount,
-				modificationMethod, modificationConstant);
+	protected AllegroBenchmarkLogic initializeBenchmark(final Query query,
+			final ScenarioConstants scenario) {
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Allegro", scenario, size, runIndex,
+				query, iterationCount, modificationMethod, modificationConstant, model);
 		return new AllegroBenchmarkLogic(rbc);
 	}
 

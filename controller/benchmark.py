@@ -53,6 +53,7 @@ def execute(configuration):
                 modif_constant = str(configuration.common.modif_constant)
                 iter_count = str(configuration.common.iter_count)
                 analyze = configuration.common.analyze
+                model = configurations[0].common.model
                 args = configuration.benchmark_args
 
                 for query in configuration.queries:
@@ -61,6 +62,7 @@ def execute(configuration):
                                  ", query:" + query + ", size:" + str(size)+")")
                     subprocess.call(["java", "-Xmx" + xmx, "-jar", target,
                                      "-scenario", scenario,
+                                     "-model", model,
                                      "-runIndex", str(series_index),
                                      "-query", query,
                                      "-modificationMethod", modif_method,

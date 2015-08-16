@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInject;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairConnectedSegments;
@@ -21,6 +22,8 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransfo
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,43 +37,55 @@ public abstract class SQLTransformation<M> extends Transformation<M> {
 	protected SQLDriver sqlDriver;
 	protected BenchmarkConfig bc;
 	protected final String updateQuery;
-		
-	protected SQLTransformation(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		this.sqlDriver = sqlDriver;
-		this.bc = bc;
 
-		final String updatePath = getTransformationDirectory() + bc.getScenarioName() + bc.getQuery() + ".sql";
+	protected SQLTransformation(final SQLDriver sqlDriver, final Query query,
+			final ScenarioConstants scenario) throws IOException {
+		this.sqlDriver = sqlDriver;
+
+		final String updatePath = getTransformationDirectory() + scenario + query + ".sql";
 		updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
-	
+
 	protected String getTransformationDirectory() {
 		return bc.getWorkspacePath() + sqlDriver.getResourceDirectory() + "transformations/";
 	}
 
-	public static Transformation<?> newInstance(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		switch (bc.getScenario()) {
+	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+			final ScenarioConstants scenario) {
+		try {
+			return newConcreteInstance((SQLDriver) driver, query, scenario);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected static Transformation<?> newConcreteInstance(final SQLDriver sqlDriver, final Query query,
+			final ScenarioConstants scenario) throws IOException {
+		switch (scenario) {
 		case REPAIR:
-			switch (bc.getQuery()) {
+			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new SQLTransformationRepairConnectedSegments(sqlDriver, bc);				
+				return new SQLTransformationRepairConnectedSegments(sqlDriver, query,
+						scenario);
 			case POSLENGTH:
-				return new SQLTransformationRepairPosLength(sqlDriver, bc);
+				return new SQLTransformationRepairPosLength(sqlDriver, query, scenario);
 			case ROUTESENSOR:
-				return new SQLTransformationRepairRouteSensor(sqlDriver, bc);
+				return new SQLTransformationRepairRouteSensor(sqlDriver, query, scenario);
 			case SEMAPHORENEIGHBOR:
-				return new SQLTransformationRepairSemaphoreNeighbor(sqlDriver, bc);
+				return new SQLTransformationRepairSemaphoreNeighbor(sqlDriver, query,
+						scenario);
 			case SWITCHSENSOR:
-				return new SQLTransformationRepairSwitchSensor(sqlDriver, bc);
+				return new SQLTransformationRepairSwitchSensor(sqlDriver, query, scenario);
 			case SWITCHSET:
-				return new SQLTransformationRepairSwitchSet(sqlDriver, bc);
+				return new SQLTransformationRepairSwitchSet(sqlDriver, query, scenario);
 			default:
 				break;
 			}
 		case INJECT:
-			return new SQLTransformationInject(sqlDriver, bc);				
+			return new SQLTransformationInject(sqlDriver, query, scenario);
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + bc.getQuery() + ", scenario: " + bc.getScenario());
+		throw new UnsupportedOperationException("Query: " + query + ", scenario: " + scenario);
 	}
 }

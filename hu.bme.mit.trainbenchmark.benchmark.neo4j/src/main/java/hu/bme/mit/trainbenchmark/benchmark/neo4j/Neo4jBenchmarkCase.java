@@ -21,7 +21,6 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.util.Comparator;
 
@@ -50,10 +49,7 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node, 
 			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
 		}
 
-		if (bc.getScenario() != ScenarioConstants.BATCH) {
-			transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(),
-					bc.getScenario());
-		}
+		transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());
 
 		analyzer = new Neo4jModelAnalyzer(neoDriver);
 	}
