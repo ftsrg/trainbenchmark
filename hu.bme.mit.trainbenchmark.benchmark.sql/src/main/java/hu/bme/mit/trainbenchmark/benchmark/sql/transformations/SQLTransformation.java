@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInject;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairConnectedSegments;
@@ -50,17 +49,11 @@ public abstract class SQLTransformation<M> extends Transformation<M> {
 		return bc.getWorkspacePath() + sqlDriver.getResourceDirectory() + "transformations/";
 	}
 
-	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
-			final ScenarioConstants scenario) {
-		try {
-			return newConcreteInstance((SQLDriver) driver, query, scenario);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	protected static Transformation<?> newConcreteInstance(final SQLDriver sqlDriver, final Query query,
+	public static Transformation<?> newInstance(final SQLDriver sqlDriver, final Query query,
 			final ScenarioConstants scenario) throws IOException {
+		if (!hasTransformation(scenario)) {
+			return null;
+		}
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectPosLength;
@@ -37,13 +36,11 @@ public abstract class Neo4jTransformation<M> extends Transformation<M> {
 		this.neoDriver = neoDriver;
 	}
 
-	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+	public static Transformation<?> newInstance(Neo4jDriver neoDriver, final Query query,
 			final ScenarioConstants scenario) {
-		return newConcreteInstance((Neo4jDriver) driver, query, scenario);
-	}
-
-	protected static Transformation<?> newConcreteInstance(Neo4jDriver neoDriver, final Query query,
-			final ScenarioConstants scenario) {
+		if (!hasTransformation(scenario)) {
+			return null;
+		}
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

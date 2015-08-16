@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject.OrientDbTransformationInjectPosLength;
@@ -38,13 +37,11 @@ public abstract class OrientDbTransformation<M> extends Transformation<M> {
 		this.orientDriver = orientDriver;
 	}
 
-	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+	public static Transformation<?> newInstance(final OrientDbDriver orientDriver, final Query query,
 			final ScenarioConstants scenario) {
-		return newConcreteInstance((OrientDbDriver) driver, query, scenario);
-	}
-
-	protected static Transformation<?> newConcreteInstance(final OrientDbDriver orientDriver,
-			final Query query, final ScenarioConstants scenario) {
+		if (!hasTransformation(scenario)) {
+			return null;
+		}
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

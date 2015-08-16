@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectPosLength;
@@ -37,13 +36,11 @@ public abstract class JenaTransformation<M> extends Transformation<M> {
 		this.jenaDriver = jenaDriver;
 	}
 
-	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+	public static Transformation<?> newInstance(final JenaDriver jenaDriver, final Query query,
 			final ScenarioConstants scenario) {
-		return newConcreteInstance((JenaDriver) driver, query, scenario);
-	}
-
-	protected static Transformation<?> newConcreteInstance(final JenaDriver jenaDriver,
-			final Query query, final ScenarioConstants scenario) {
+		if (!hasTransformation(scenario)) {
+			return null;
+		}
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

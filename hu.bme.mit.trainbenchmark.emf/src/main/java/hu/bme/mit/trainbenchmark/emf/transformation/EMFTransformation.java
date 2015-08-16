@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.emf.transformation;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
@@ -31,13 +30,11 @@ import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepa
 
 public abstract class EMFTransformation<O> extends Transformation<O> {
 
-	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+	public static EMFTransformation<?> newInstance(final EMFDriver driver, final Query query,
 			final ScenarioConstants scenario) {
-		return newConcreteInstance((EMFDriver) driver, query, scenario);
-	}
-
-	protected static EMFTransformation<?> newConcreteInstance(final EMFDriver driver, final Query query,
-			final ScenarioConstants scenario) {
+		if (!hasTransformation(scenario)) {
+			return null;
+		}
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

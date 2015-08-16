@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectPosLength;
@@ -37,13 +36,11 @@ public abstract class SesameTransformation<M> extends Transformation<M> {
 		this.sesameDriver = sesameDriver;
 	}
 
-	protected static Transformation<?> newConcreteInstance(Driver driver, final Query query,
+	public static Transformation<?> newInstance(final SesameDriver sesameDriver, final Query query,
 			final ScenarioConstants scenario) {
-		return newConcreteInstance((SesameDriver) driver, query, scenario);
-	}
-
-	protected static Transformation<?> newConcreteInstance(final SesameDriver sesameDriver,
-			final Query query, final ScenarioConstants scenario) {
+		if (!hasTransformation(scenario)) {
+			return null;
+		}
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

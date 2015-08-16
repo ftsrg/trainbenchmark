@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.util.Collection;
@@ -20,30 +18,22 @@ import java.util.Collection;
 public abstract class Transformation<O> {
 
 	// As the transformations are implemented on a wide range of technologies, they may throw any exception.
-	// Using "throws Exception" is generally considered bad practice in production systems, however, it is acceptible in the benchmark code.
+	// Using "throws Exception" is generally considered bad practice in production systems, however, it is acceptable in the benchmark code.
 	public abstract void rhs(Collection<O> objects) throws Exception;
 
-	public static Transformation<?> newInstance(final Driver driver, final Query query,
-			final ScenarioConstants scenario) {
+	protected static boolean hasTransformation(final ScenarioConstants scenario) {
 		switch (scenario) {
 		case ANALYSIS:
-			return null;
+			return false;
 		case BATCH:
-			return null;
+			return false;
 		case INJECT:
-			return newConcreteInstance(driver, query, scenario);
+			return true;
 		case REPAIR:
-			return newConcreteInstance(driver, query, scenario);
+			return true;
 		default:
-			throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: "
-					+ scenario);
+			throw new UnsupportedOperationException("Scenario: " + scenario);
 		}
-	}
-
-	protected static Transformation<?> newConcreteInstance(final Driver driver, final Query query,
-			final ScenarioConstants scenario) {
-		throw new UnsupportedOperationException(
-				"The method must be defined by the inherited classes!");
 	}
 
 }
