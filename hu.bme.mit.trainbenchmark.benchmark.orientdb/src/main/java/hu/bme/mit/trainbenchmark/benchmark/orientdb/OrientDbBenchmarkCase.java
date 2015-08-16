@@ -47,4 +47,9 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, 
 		return new OrientDbMatchComparator();
 	}
 
+	@Override
+	protected void initAnalyzer() {
+
+	}
+
 }

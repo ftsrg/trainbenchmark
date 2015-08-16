@@ -13,35 +13,29 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.AnalyzerInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.DescriptionInitializationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 
-public class RepairScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
+public class DescribeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
 		SequencePhase seq = new SequencePhase();
-		CheckPhase check = new CheckPhase("Check");
-		CheckPhase recheck = new CheckPhase("Recheck");
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"), new InitTransformationPhase(
-				"InitTransformation"), new AnalyzerInitializationPhase("AnalyzerInit"),
-				new ReadPhase("Read"), initMetrics, calcMetrics, check,
-				new TransformationPhase("Edit"), recheck, new DestroyPhase("Destroy"));
+		seq.addPhases(new InitializationPhase("Init"),
+				new DescriptionInitializationPhase("DescInit"), new ReadPhase("Read"),
+				initMetrics, calcMetrics, new DestroyPhase("Destroy"));
 		rootPhase = seq;
 
 	}
 
 	@Override
 	public String getName() {
-		return "Repair";
+		return "Describe";
 	}
 
 }

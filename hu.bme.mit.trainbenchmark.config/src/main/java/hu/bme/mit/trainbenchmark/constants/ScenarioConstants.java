@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.constants;
 public enum ScenarioConstants {
 	ANALYSIS("Analysis"), // 
 	BATCH("Batch"), //
+	DESCRIBE("Describe"), //
 	INJECT("Inject"), //
 	REPAIR("Repair");
 

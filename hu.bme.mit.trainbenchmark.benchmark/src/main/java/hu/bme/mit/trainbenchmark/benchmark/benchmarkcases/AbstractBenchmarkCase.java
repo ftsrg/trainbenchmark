@@ -56,6 +56,10 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	protected abstract void init() throws Exception;
 
+	protected abstract void initAnalyzer();
+
+	protected abstract void initDescription();
+
 	protected void destroy() throws Exception {
 		if (checker != null) {
 			checker.destroy();
@@ -71,6 +75,14 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	public void benchmarkInitAnalyzer() {
+		initAnalyzer();
+	}
+
+	public void benchmarkInitDescription() {
+		initDescription();
+	}
+
+	public void benchmarkInitMetrics() {
 		analyzer.initializeMetrics();
 	};
 
@@ -90,8 +102,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	public void benchmarkInitTransformation() {
-		transformationLogic = TransformationLogic.newInstance(bc.getScenario(),
-				getComparator());
+		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(bc, driver, random);
 		}

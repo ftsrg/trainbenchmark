@@ -20,11 +20,11 @@
     "ConnectedSegments"
   ],
   "Scenarios": [
-    "Analysis"
+    "Describe"
   ],
   "Series": 1,
   "Tools": [
-    "virtuoso"
+    "neo4j"
 
   ],
   "UniqueConfigurations": [

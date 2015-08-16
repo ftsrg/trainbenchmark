@@ -22,13 +22,20 @@ import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public class JavaBenchmarkCase extends EMFBenchmarkCase {
 
+	protected EMFDriver emfDriver;
+
 	@Override
 	public void init() throws Exception {
-		final EMFDriver emfDriver = new EMFDriver();
+		emfDriver = new EMFDriver();
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) JavaChecker.newInstance(emfDriver, bc.getQuery());
 
 		transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
+
+	}
+
+	@Override
+	protected void initAnalyzer() {
 		analyzer = new EMFModelAnalyzer(emfDriver);
 	}
 

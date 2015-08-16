@@ -20,12 +20,14 @@ public class ScenarioFactory {
 		switch (scenarioName) {
 		case ANALYSIS:
 			return new AnalysisScenario();
+		case BATCH:
+			return new BatchScenario();
+		case DESCRIBE:
+			return new DescribeScenario();
 		case INJECT:
 			return new InjectScenario();
 		case REPAIR:
 			return new RepairScenario();
-		case BATCH:
-			return new BatchScenario();
 		default:
 			throw new UnsupportedOperationException("Invalid scenario.");
 		}

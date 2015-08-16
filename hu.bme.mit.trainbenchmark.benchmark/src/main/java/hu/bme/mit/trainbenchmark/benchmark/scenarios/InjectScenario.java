@@ -19,17 +19,15 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.AnalyzerInitializationPhase;
 import eu.mondo.sam.core.phases.IterationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
-import eu.mondo.sam.core.results.CaseDescriptor;
 
-public class InjectScenario extends
-		Scenario<AbstractBenchmarkCase<?, ?, ?>> {
+public class InjectScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
-		IterationPhase iter = new IterationPhase(
-				benchmarkConfig.getIterationCount());
+		IterationPhase iter = new IterationPhase(benchmarkConfig.getIterationCount());
 		SequencePhase seq = new SequencePhase();
 		SequencePhase innerSeq = new SequencePhase();
 
@@ -41,25 +39,18 @@ public class InjectScenario extends
 
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"),
-				new InitTransformationPhase(
-						"InitTransformation"),
-				new ReadPhase("Read"), initMetrics,
-				calcMetrics, new CheckPhase("Check"), iter,
-				new DestroyPhase("Destroy"));
+		seq.addPhases(new InitializationPhase("Init"), new InitTransformationPhase(
+				"InitTransformation"), new AnalyzerInitializationPhase("AnalyzerInit"),
+				new ReadPhase("Read"), initMetrics, calcMetrics, new CheckPhase("Check"),
+				iter, new DestroyPhase("Destroy"));
 
 		rootPhase = seq;
 
 	}
 
 	@Override
-	public CaseDescriptor getCaseDescriptor() {
-		CaseDescriptor descriptor = new CaseDescriptor();
-		descriptor.setCaseName(caseName);
-		descriptor.setTool(tool);
-		descriptor.setScenario("Inject");
-		descriptor.setSize(size);
-		descriptor.setRunIndex(runIndex);
-		return descriptor;
+	public String getName() {
+		return "Inject";
 	}
+
 }

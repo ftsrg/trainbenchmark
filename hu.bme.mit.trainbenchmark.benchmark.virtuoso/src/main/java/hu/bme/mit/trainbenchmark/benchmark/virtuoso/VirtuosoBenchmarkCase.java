@@ -31,7 +31,6 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 
 		transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(),
 				bc.getScenario());
-		initAnalyzer();
 	}
 
 }

@@ -17,10 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.MetricsCalculationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.MetricsInitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.ModelMetricsCalculationPhase;
+import eu.mondo.sam.core.results.CaseDescriptor;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>>
-		extends BenchmarkScenario {
+public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>> extends BenchmarkScenario {
 
 	protected BenchmarkConfig benchmarkConfig;
 	protected MetricsCalculationPhase initMetrics;
@@ -46,9 +46,20 @@ public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>>
 		calcMetrics = new MetricsCalculationPhase();
 		initMetrics.setAnalyze(analyze);
 		calcMetrics.setAnalyze(analyze);
-		initMetrics.setPhase(new MetricsInitializationPhase(
-				"InitMetrics"));
-		calcMetrics.setPhase(new ModelMetricsCalculationPhase(
-				"CalcModelMetrics"));
+		initMetrics.setPhase(new MetricsInitializationPhase("InitMetrics"));
+		calcMetrics.setPhase(new ModelMetricsCalculationPhase("CalcModelMetrics"));
 	}
+
+	@Override
+	public CaseDescriptor getCaseDescriptor() {
+		CaseDescriptor descriptor = new CaseDescriptor();
+		descriptor.setCaseName(caseName);
+		descriptor.setTool(tool);
+		descriptor.setScenario(getName());
+		descriptor.setSize(size);
+		descriptor.setRunIndex(runIndex);
+		return descriptor;
+	}
+
+	public abstract String getName();
 }

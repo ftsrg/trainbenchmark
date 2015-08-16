@@ -16,44 +16,35 @@ import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class Analyzer<D extends Driver<?>> {
+public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> {
 
-	protected D driver;
+	protected Map<Integer, Double> degreeDistributions;
 
-	protected ArrayList<Metric> metrics;
-
-	public Analyzer(D driver) {
-		this.driver = driver;
+	public ModelDescription(D driver) {
+		super(driver);
 	}
 
+	@Override
+	public void initializeMetrics() {
+		degreeDistributions = new HashMap<>();
+		if (metrics == null) {
+			metrics = new ArrayList<Metric>();
+		}
+
+	}
+
+	@Override
+	public void resetMetrics() {
+		degreeDistributions.clear();
+
+	}
+
+	@Override
 	public void calculateAll() {
 		calculateMetrics();
-		for (Metric m : metrics) {
-			m.calculate();
-		}
-	}
-
-	protected abstract void calculateMetrics();
-
-	public abstract void initializeMetrics();
-
-	public abstract void resetMetrics();
-
-	public ArrayList<Metric> getMetrics() {
-		return metrics;
-	}
-
-	public void setMetrics(ArrayList<Metric> metrics) {
-		this.metrics = metrics;
-	}
-
-	public D getDriver() {
-		return driver;
-	}
-
-	public void setDriver(D driver) {
-		this.driver = driver;
 	}
 
 }

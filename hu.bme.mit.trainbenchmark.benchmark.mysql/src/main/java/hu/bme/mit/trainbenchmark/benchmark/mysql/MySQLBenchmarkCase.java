@@ -39,4 +39,8 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 		driver.destroy();
 	}
 
+	@Override
+	protected void initAnalyzer() {
+	}
+
 }

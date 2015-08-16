@@ -31,7 +31,6 @@ public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 
 		transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(),
 				bc.getScenario());
-		initAnalyzer();
 	}
 
 }

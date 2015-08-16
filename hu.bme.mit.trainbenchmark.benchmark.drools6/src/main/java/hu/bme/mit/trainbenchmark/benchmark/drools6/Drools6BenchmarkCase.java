@@ -29,6 +29,11 @@ public class Drools6BenchmarkCase extends EMFBenchmarkCase {
 
 		transformation = EMFTransformation
 				.newInstance(drools6driver, bc.getQuery(), bc.getScenario());
+
+	}
+
+	@Override
+	protected void initAnalyzer() {
 		analyzer = new EMFModelAnalyzer(drools6driver);
 	}
 

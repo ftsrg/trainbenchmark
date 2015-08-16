@@ -43,13 +43,23 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 		checker = new JenaChecker(jenaDriver, bc);
 
 		transformation = JenaTransformation.newInstance(jenaDriver, bc.getQuery(), bc.getScenario());
-		analyzer = jenaModelAnalyzer = new JenaModelAnalyzer(jenaDriver);
-		jenaModelAnalyzer.setBenchmarkConfig(rbc);
 	}
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
 		return new JenaMatchComparator();
+	}
+
+	@Override
+	protected void initAnalyzer() {
+		analyzer = jenaModelAnalyzer = new JenaModelAnalyzer(jenaDriver);
+		jenaModelAnalyzer.setBenchmarkConfig(rbc);
+	}
+
+	@Override
+	protected void initDescription() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

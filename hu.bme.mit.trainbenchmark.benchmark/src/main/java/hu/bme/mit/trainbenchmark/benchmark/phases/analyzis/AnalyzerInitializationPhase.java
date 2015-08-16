@@ -17,16 +17,16 @@ import eu.mondo.sam.core.DataToken;
 import eu.mondo.sam.core.phases.AtomicPhase;
 import eu.mondo.sam.core.results.PhaseResult;
 
-public class MetricsInitializationPhase extends AtomicPhase {
+public class AnalyzerInitializationPhase extends AtomicPhase {
 
-	public MetricsInitializationPhase(String phaseName) {
+	public AnalyzerInitializationPhase(String phaseName) {
 		super(phaseName);
 	}
 
 	@Override
 	public void execute(DataToken token, PhaseResult phaseResult) {
 		final TrainBenchmarkDataToken trainToken = ((TrainBenchmarkDataToken) token);
-		trainToken.getBenchmarkCase().benchmarkInitMetrics();
+		trainToken.getBenchmarkCase().benchmarkInitAnalyzer();
 	}
 
 }

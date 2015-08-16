@@ -22,13 +22,19 @@ import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase {
 
+	private EMFDriver emfDriver;
+
 	@Override
 	public void init() throws Exception {
-		final EMFDriver emfDriver = new EMFDriver();
+		emfDriver = new EMFDriver();
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, bc);
 
 		transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
+	}
+
+	@Override
+	protected void initAnalyzer() {
 		analyzer = new EMFModelAnalyzer(emfDriver);
 	}
 

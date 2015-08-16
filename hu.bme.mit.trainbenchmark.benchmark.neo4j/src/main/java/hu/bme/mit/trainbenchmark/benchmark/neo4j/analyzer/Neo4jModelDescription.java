@@ -9,26 +9,20 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
-import java.util.Comparator;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelDescription;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
-public abstract class SQLBenchmarkCase extends AbstractBenchmarkCase<SQLMatch, Long, SQLDriver> {
+public class Neo4jModelDescription extends ModelDescription<Neo4jDriver> {
 
-	protected SQLDriver sqlDriver;
-
-	@Override
-	protected Comparator<?> getMatchComparator() {
-		return new LongMatchComparator();
+	public Neo4jModelDescription(Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override
-	protected void initDescription() {
+	public void calculateMetrics() {
 		// TODO Auto-generated method stub
 
 	}

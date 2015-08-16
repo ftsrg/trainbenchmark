@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jModelAnalyzer;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jModelDescription;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -51,12 +52,22 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node, 
 
 		transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());
 
-		analyzer = new Neo4jModelAnalyzer(neoDriver);
 	}
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
 		return new Neo4jMatchComparator();
+	}
+
+	@Override
+	protected void initAnalyzer() {
+		analyzer = new Neo4jModelAnalyzer(neoDriver);
+	}
+
+	@Override
+	protected void initDescription() {
+		analyzer = new Neo4jModelDescription(neoDriver);
+
 	}
 
 }

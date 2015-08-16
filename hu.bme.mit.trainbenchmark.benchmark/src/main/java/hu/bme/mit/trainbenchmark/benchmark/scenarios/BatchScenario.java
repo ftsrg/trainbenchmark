@@ -17,34 +17,27 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.AnalyzerInitializationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
-import eu.mondo.sam.core.results.CaseDescriptor;
 
-public class BatchScenario extends
-		Scenario<AbstractBenchmarkCase<?, ?, ?>> {
+public class BatchScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
 		SequencePhase seq = new SequencePhase();
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"), new ReadPhase(
-				"Read"), initMetrics, calcMetrics,
-				new CheckPhase("Check"), new DestroyPhase(
-						"Destroy"));
+		seq.addPhases(new InitializationPhase("Init"),
+				new AnalyzerInitializationPhase("AnalyzerInit"), new ReadPhase("Read"),
+				initMetrics, calcMetrics, new CheckPhase("Check"),
+				new DestroyPhase("Destroy"));
 		rootPhase = seq;
 
 	}
 
 	@Override
-	public CaseDescriptor getCaseDescriptor() {
-		CaseDescriptor descriptor = new CaseDescriptor();
-		descriptor.setCaseName(caseName);
-		descriptor.setTool(tool);
-		descriptor.setScenario("Batch");
-		descriptor.setSize(size);
-		descriptor.setRunIndex(runIndex);
-		return descriptor;
+	public String getName() {
+		return "Batch";
 	}
 
 }

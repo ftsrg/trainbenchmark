@@ -44,6 +44,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 		initAnalyzer();
 	}
 
+	@Override
 	protected void initAnalyzer() {
 		analyzer = sesameAnalyzer = new SesameModelAnalyzer(sesameDriver);
 		sesameAnalyzer.setBenchmarkConfig(rbc);
@@ -52,6 +53,12 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	@Override
 	protected Comparator<?> getMatchComparator() {
 		return new SesameMatchComparator();
+	}
+
+	@Override
+	protected void initDescription() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

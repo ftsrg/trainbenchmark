@@ -26,4 +26,9 @@ public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 		transformation = SQLTransformation.newInstance(sqlDriver, bc);
 	}
 
+	@Override
+	protected void initAnalyzer() {
+
+	}
+
 }

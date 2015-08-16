@@ -48,12 +48,23 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends
 		transformation = EMFIncQueryTransformation.newInstance(eiqDriver, bc.getQuery(),
 				bc.getScenario());
 		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
-		analyzer = (Analyzer) new EMFModelAnalyzer(eiqDriver);
+
 	}
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
 		return new EMFIncQueryMatchComparator();
+	}
+
+	@Override
+	protected void initAnalyzer() {
+		analyzer = (Analyzer) new EMFModelAnalyzer(eiqDriver);
+	}
+
+	@Override
+	protected void initDescription() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

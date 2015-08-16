@@ -27,6 +27,8 @@ public abstract class Transformation<O> {
 			return false;
 		case BATCH:
 			return false;
+		case DESCRIBE:
+			return false;
 		case INJECT:
 			return true;
 		case REPAIR:
