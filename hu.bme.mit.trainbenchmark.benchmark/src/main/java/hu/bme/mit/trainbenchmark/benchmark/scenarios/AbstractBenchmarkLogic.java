@@ -12,16 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
-
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 
 public abstract class AbstractBenchmarkLogic {
 
@@ -37,60 +36,50 @@ public abstract class AbstractBenchmarkLogic {
 	@SuppressWarnings("unchecked")
 	public BenchmarkResult runBenchmark() throws IOException {
 		@SuppressWarnings("rawtypes")
-		final ScenarioLogic scl = ScenarioFactory.getScenario(bc
-				.getScenario());
+		final ScenarioLogic scl = ScenarioFactory.getScenario(bc.getScenario());
 		final AbstractBenchmarkCase<?, ?> tc = getBenchmarkCase();
 
 		scl.setBenchmarkConfig(bc);
 		scl.initializeDescriptor();
 
-		BenchmarkEngine engine = new BenchmarkEngine();
-		TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
-		BenchmarkScenario scenario = ((BenchmarkScenario) scl);
+		final BenchmarkEngine engine = new BenchmarkEngine();
+		final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
+		final BenchmarkScenario scenario = (scl);
 		token.setBenchmarkCase(tc);
 		token.setConfig(bc);
 
-		engine.runBenchmark(scenario, token);
+		for (int i = 1; i <= bc.getRuns(); i++) {
+			engine.runBenchmark(scenario, token);
+		}
+
 		return engine.getBenchmarkResult();
 	}
 
 	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
-		return getConcreteBenchmarkCase(this.getClass()
-				.getClassLoader());
+		return getConcreteBenchmarkCase(this.getClass().getClassLoader());
 	}
 
-	protected AbstractBenchmarkCase<?, ?> getConcreteBenchmarkCase(
-			final ClassLoader classLoader) {
+	protected AbstractBenchmarkCase<?, ?> getConcreteBenchmarkCase(final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
-			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark."
-					+ bc.getClassName().toLowerCase()
-					+ "."
+			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "."
 					+ bc.getClassName() + "BenchmarkCase";
-			final Class<?> clazz = classLoader
-					.loadClass(toolClassName);
+			final Class<?> clazz = classLoader.loadClass(toolClassName);
 
 			final int modifiers = clazz.getModifiers();
 			// instantiate generic class if not abstract
 			if (!Modifier.isAbstract(modifiers)) {
-				return (AbstractBenchmarkCase<?, ?>) clazz
-						.newInstance();
+				return (AbstractBenchmarkCase<?, ?>) clazz.newInstance();
 			}
 
 			// else instantiate specific class
-
-			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark."
-					+ bc.getClassName().toLowerCase()
-					+ "."
+			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "."
 					+ bc.getClassName() + bc.getQuery();
-			final Class<?> queryClass = classLoader
-					.loadClass(queryClassName);
+			final Class<?> queryClass = classLoader.loadClass(queryClassName);
 
 			// instantiate generic class if not abstract
-			return (AbstractBenchmarkCase<?, ?>) queryClass
-					.newInstance();
-		} catch (InstantiationException | IllegalAccessException
-				| ClassNotFoundException e) {
+			return (AbstractBenchmarkCase<?, ?>) queryClass.newInstance();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			throw new UnsupportedOperationException(e);
 		}
 	}
