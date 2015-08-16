@@ -12,12 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DegreeDistribution;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> {
 
@@ -45,6 +47,8 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	@Override
 	public void calculateAll() {
 		calculateMetrics();
+		for (Entry<Integer, Double> entry : degreeDistributions.entrySet()) {
+			metrics.add(new DegreeDistribution(entry));
+		}
 	}
-
 }
