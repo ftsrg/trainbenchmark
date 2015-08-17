@@ -7,9 +7,9 @@
     "Benchmark": ""
   },
   "MinSize": 1,
-  "MaxSize": 1,
-  "Runs": 1,
-  "IterationCount": 3,
+  "MaxSize": 4,
+  "Runs": 5,
+  "IterationCount": 10,
   "Queries": [
     "SwitchSet"
   ],
@@ -26,19 +26,20 @@
   ],
   "_AllScenariosComment": "The _AllScenarios field is not used by the framework.",
   "_AllScenarios": [
-    "Batch",
-    "Repair"
+    "Batch"
   ],
   "Tools": [
+    "drools5",
+    "drools6",
     "emfapi",
     "emfincquery",
+    "jena",
     "sesame",
-    "jena"
+    "neo4j"
+    "mysql",
   ],
   "_AllToolsComment": "The _AllTools field is not used by the framework.",
   "_AllTools": [
-    "drools5",
-    "jena"
   ],
   "Timeout": 600,
   "OptionalArguments": {

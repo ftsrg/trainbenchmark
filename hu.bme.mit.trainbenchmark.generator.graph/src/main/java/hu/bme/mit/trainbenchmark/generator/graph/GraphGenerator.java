@@ -12,10 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph;
 
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -38,6 +34,10 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
+
 public class GraphGenerator extends Generator {
 
 	public GraphGenerator(final String args[]) throws ParseException {
@@ -57,7 +57,8 @@ public class GraphGenerator extends Generator {
 	@Override
 	protected void initModel() throws IOException {
 		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
-		final String databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
+		final String databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension()
+				+ ".neo4j";
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
@@ -160,11 +161,8 @@ public class GraphGenerator extends Generator {
 
 			String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB
-			graphmlContent = graphmlContent
-					.replaceAll(
-							//
-							"<graph id=\"G\" edgedefault=\"directed\">",
-							"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
+			graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
+					"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
 
 			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
 		} finally {
