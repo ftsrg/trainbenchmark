@@ -35,30 +35,35 @@ def build_ci():
 
 
 def generate(config, formats):
-    for scenario in config["scenarios"]:
-        for format in formats:
-            path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
-            util.set_working_directory(path)
-            target = util.get_generator_jar(format)
-            for size in config["sizes"]:
-                cmd = ["java", "-Xmx" + config["java_opts"]["xmx"],
-                     "-jar", target,
-                     "-scenario", scenario,
-                     "-size", str(size)]
-                try:
-                    subprocess.check_call(cmd)
-                except subprocess.CalledProcessError:
-                    print("An error occured during model generation, skipping larger sizes for this scenario/format.")
-                    break
-            util.set_working_directory("..")
+    for format in formats:
+        for scenario in config["scenarios"]:
+            args = [""]
+            if format in config["generator_optional_arguments"]:
+                args.append("-" + config["generator_optional_arguments"]["rdf"][0])
+
+            for arg in args:
+                path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
+                util.set_working_directory(path)
+                target = util.get_generator_jar(format)
+                for size in config["sizes"]:
+                    cmd = ["java", "-Xmx" + config["java_opts"]["xmx"],
+                         "-jar", target,
+                         "-scenario", scenario,
+                         "-size", str(size),
+                       arg]
+                    try:
+                        subprocess.check_call(cmd)
+                    except subprocess.CalledProcessError:
+                        print("An error occured during model generation, skipping larger sizes for this scenario/format.")
+                        break
+                util.set_working_directory("..")
 
 
 def measure(config):
     for tool in config["tools"]:
-        #if tool in config["optional_arguments"]:
-        #    args = config.optional_arguments[tool]
-        #else:
         args = [""]
+        if tool in config["benchmark_optional_arguments"]:
+            args.append("-" + config["benchmark_optional_arguments"]["rdf"][0])
 
         for arg in args:
             path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
@@ -129,9 +134,9 @@ if __name__ == "__main__":
     # with the test and the visualization/reporting
     no_args = all(val is False for val in vars(args).values())
     if no_args:
-        args.build = True
+        #args.build = True
         args.generate = True
-        args.measure = True
+        #args.measure = True
     if args.ci:
         build_ci()
     if args.build:
