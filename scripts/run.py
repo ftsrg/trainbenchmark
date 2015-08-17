@@ -42,9 +42,9 @@ def generate(config, formats):
             util.set_working_directory(path)
             target = util.get_generator_jar(format)
             for size in config.sizes:
-                print("Generate model: <format: " + format +
+                print("Generate model -- format: " + format +
                       ", scenario: " + scenario +
-                      ", size: " + str(size) + ">")
+                      ", size: " + str(size))
                 subprocess.call(["java", "-Xmx" + config.java_opts["Xmx"],
                                  "-jar", target,
                                  "-scenario", scenario,
@@ -67,18 +67,19 @@ def measure(config):
             for scenario in config.scenarios:
                 for size in config.sizes:
                     for query in config.queries:
-                        print("Run benchmark: <tool: " + tool +
+                        print("Run benchmark -- " +
+                              "runs: " + str(config.runs) +
+                              ", tool: " + tool +
                               ", scenario: " + scenario +
                               ", query: " + query +
                               ", size: " + str(size) +
-                              (", arg: " + arg if arg != "" else "") +
-                              ">")
+                              (", arg: " + arg if arg != "" else ""))
                         cmd = ["java", "-Xmx" + config.java_opts["Xmx"], "-jar", target,
+                               "-runs", str(config.runs),
                                "-scenario", scenario,
                                "-query", query,
                                "-size", str(size),
-                               arg
-                               ]
+                               arg]
                         subprocess.call(cmd)
             util.set_working_directory("..")
 
