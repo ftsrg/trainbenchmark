@@ -13,12 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
 
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.PASSWORD;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
-import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 public class MySQLDriver extends SQLDriver {
 
@@ -27,7 +28,8 @@ public class MySQLDriver extends SQLDriver {
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c", "mysql -u " + USER + " < " + modelPathWithoutExtension + getExtension() };
+		final String[] command = { "/bin/bash", "-c",
+				"mysql -u " + USER + " < " + modelPathWithoutExtension + getExtension() };
 
 		final Process pr = rt.exec(command);
 		pr.waitFor();

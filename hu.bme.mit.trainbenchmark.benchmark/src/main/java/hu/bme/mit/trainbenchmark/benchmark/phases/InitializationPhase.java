@@ -12,10 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.phases;
 
-import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import eu.mondo.sam.core.DataToken;
 import eu.mondo.sam.core.phases.AtomicPhase;
 import eu.mondo.sam.core.results.PhaseResult;
+import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 
 public class InitializationPhase extends AtomicPhase {
 

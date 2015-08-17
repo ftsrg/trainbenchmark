@@ -23,7 +23,6 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 	public MySQLBenchmarkCase() {
 		super();
-		driver = sqlDriver = new MySQLDriver();
 	}
 
 	@Override
@@ -31,6 +30,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 		super.init();
 		MySQLProcess.startSQLProcess();
 
+		driver = sqlDriver = new MySQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
 
 		if (bc.getScenario() != Scenario.BATCH) {

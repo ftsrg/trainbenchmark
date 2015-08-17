@@ -41,17 +41,14 @@ def generate(config, formats):
             util.set_working_directory(path)
             target = util.get_generator_jar(format)
             for size in config["sizes"]:
-                print("Generate model -- format: " + format +
-                      ", scenario: " + scenario +
-                      ", size: " + str(size))
                 cmd = ["java", "-Xmx" + config["java_opts"]["xmx"],
-                                 "-jar", target,
-                                 "-scenario", scenario,
-                                 "-size", str(size)]
+                     "-jar", target,
+                     "-scenario", scenario,
+                     "-size", str(size)]
                 try:
                     subprocess.check_call(cmd)
-                except:
-                    print("An error occured during generation for size " + str(size) + ", skipping larger sizes for this scenario/format.")
+                except subprocess.CalledProcessError:
+                    print("An error occured during model generation, skipping larger sizes for this scenario/format.")
                     break
             util.set_working_directory("..")
 
@@ -86,8 +83,11 @@ def measure(config):
                                arg]
                         try:
                             subprocess.check_call(cmd)
-                        except:
-                            print("An error occured during the benchmark for size " + str(size) + ", skipping larger sizes for this tool/scenario/query.")
+                        except subprocess.TimeoutExpired:
+                            print("Timeout, skipping larger sizes for this tool/scenario/query.")
+                            break
+                        except subprocess.CalledProcessError:
+                            print("An error occured, skipping larger sizes for this tool/scenario/query.")
                             break
             util.set_working_directory("..")
 
