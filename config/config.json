@@ -34,9 +34,9 @@
     "emfapi",
     "emfincquery",
     "jena",
-    "sesame",
-    "neo4j"
     "mysql",
+    "neo4j",
+    "sesame"
   ],
   "_AllToolsComment": "The _AllTools field is not used by the framework.",
   "_AllTools": [
