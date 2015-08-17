@@ -9,15 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.incremental;
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class SesameBatchTest extends BatchTest {
+public class EMFIncQueryInjectIncrementalTest extends InjectTest {
 
-	public SesameBatchTest() {
-		bi = new SesameBenchmarkInitializer();
+	public EMFIncQueryInjectIncrementalTest() {
+		bi = new EMFIncQueryBenchmarkInitializerIncremental();
 	}
 
 }

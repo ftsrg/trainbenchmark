@@ -12,11 +12,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.incremental;
 
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class EMFIncQueryInjectTestIncremental extends InjectTest {
+public class EMFIncQueryRepairIncrementalTest extends RepairTest {
 
-	public EMFIncQueryInjectTestIncremental() {
+	public EMFIncQueryRepairIncrementalTest() {
 		bi = new EMFIncQueryBenchmarkInitializerIncremental();
 	}
 

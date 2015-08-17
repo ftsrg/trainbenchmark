@@ -12,6 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
+import java.io.IOException;
+import java.util.Comparator;
+
+import org.openrdf.model.URI;
+
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
@@ -20,11 +25,6 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-
-import java.io.IOException;
-import java.util.Comparator;
-
-import org.openrdf.model.URI;
 
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI> {
 

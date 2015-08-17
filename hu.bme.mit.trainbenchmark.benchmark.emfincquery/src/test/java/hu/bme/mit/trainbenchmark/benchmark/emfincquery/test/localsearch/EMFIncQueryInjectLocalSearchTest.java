@@ -12,12 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.localsearch;
 
 
-import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class EMFIncQueryRepairTestLocalSearch extends RepairTest {
+public class EMFIncQueryInjectLocalSearchTest extends InjectTest {
 
-	public EMFIncQueryRepairTestLocalSearch() {
-		bi = new EMFIncQueryBenchmarkInitializerLocalSearch();
+	public EMFIncQueryInjectLocalSearchTest() {
+		bi = new EMFIncQueryBenchmarkLocalSearchInitializer();
 	}
 
 }

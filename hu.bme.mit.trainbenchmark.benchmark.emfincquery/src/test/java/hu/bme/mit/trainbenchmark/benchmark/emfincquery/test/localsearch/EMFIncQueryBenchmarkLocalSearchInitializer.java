@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class EMFIncQueryBenchmarkInitializerLocalSearch extends TestBenchmarkInitializer<EMFIncQueryBenchmarkLogic> {
+public class EMFIncQueryBenchmarkLocalSearchInitializer extends TestBenchmarkInitializer<EMFIncQueryBenchmarkLogic> {
 
 	@Override
 	protected EMFIncQueryBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
