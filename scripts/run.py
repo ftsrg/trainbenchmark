@@ -10,14 +10,13 @@ the local Maven repository or the Maven Central Repository.
 import subprocess
 import argparse
 
+import yaml
 import util
-from loader import Loader
-
 
 def build(config, formats, skip_tests):
     profiles = {"core"}
     profiles = profiles.union(formats)
-    profiles = profiles.union(config.tools)
+    profiles = profiles.union(config["tools"])
 
     profiles_arg = ",".join(profiles)
 
@@ -36,16 +35,16 @@ def build_ci():
 
 
 def generate(config, formats):
-    for scenario in config.scenarios:
+    for scenario in config["scenarios"]:
         for format in formats:
             path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
             util.set_working_directory(path)
             target = util.get_generator_jar(format)
-            for size in config.sizes:
+            for size in config["sizes"]:
                 print("Generate model -- format: " + format +
                       ", scenario: " + scenario +
                       ", size: " + str(size))
-                cmd = ["java", "-Xmx" + config.java_opts["Xmx"],
+                cmd = ["java", "-Xmx" + config["java_opts"]["xmx"],
                                  "-jar", target,
                                  "-scenario", scenario,
                                  "-size", str(size)]
@@ -58,29 +57,29 @@ def generate(config, formats):
 
 
 def measure(config):
-    for tool in config.tools:
-        if tool in config.optional_arguments:
-            args = config.optional_arguments[tool]
-        else:
-            args = [""]
+    for tool in config["tools"]:
+        #if tool in config["optional_arguments"]:
+        #    args = config.optional_arguments[tool]
+        #else:
+        args = [""]
 
         for arg in args:
             path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
             util.set_working_directory(path)
             target = util.get_tool_jar(tool)
 
-            for scenario in config.scenarios:
-                for query in config.queries:
-                    for size in config.sizes:
+            for scenario in config["scenarios"]:
+                for query in config["queries"]:
+                    for size in config["sizes"]:
                         print("Run benchmark -- " +
-                              "runs: " + str(config.runs) +
+                              "runs: " + str(config["runs"]) +
                               ", tool: " + tool +
                               ", scenario: " + scenario +
                               ", query: " + query +
                               ", size: " + str(size) +
                               (", arg: " + arg if arg != "" else ""))
-                        cmd = ["java", "-Xmx" + config.java_opts["Xmx"], "-jar", target,
-                               "-runs", str(config.runs),
+                        cmd = ["java", "-Xmx" + config["java_opts"]["xmx"], "-jar", target,
+                               "-runs", str(config["runs"]),
                                "-scenario", scenario,
                                "-query", query,
                                "-size", str(size),
@@ -114,12 +113,17 @@ if __name__ == "__main__":
 
     # set working directory to this file's path
     util.set_working_directory()
-    loader = Loader()
-    config = loader.load()
+
+    with open("config/config.yml", 'r') as stream:
+        config = yaml.load(stream)
+    config["sizes"] = util.get_power_of_two(config["minsize"], config["maxsize"])
+
+    with open("config/formats.yml", 'r') as stream:
+        tool_formats = yaml.load(stream)
 
     formats = set()
-    for tool in config.tools:
-        formats.add(loader.get_format(tool))
+    for tool in config["tools"]:
+        formats.add(tool_formats[tool])
 
     # if there are no args, execute a full sequence
     # with the test and the visualization/reporting

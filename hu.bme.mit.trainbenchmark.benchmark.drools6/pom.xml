@@ -9,7 +9,7 @@
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.drools6</artifactId>
 
 	<properties>
-		<drools.version>6.1.0.Final</drools.version>
+		<drools.version>6.3.0.CR1</drools.version>
 	</properties>
 	<build>
 		<plugins>
@@ -22,7 +22,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.benchmark.drools.Drools6BenchmarkMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

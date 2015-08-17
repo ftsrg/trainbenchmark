@@ -1,0 +1,27 @@
+java_opts:
+  xmx: 2G
+minsize: 1
+maxsize: 1
+runs: 1
+iterationcount: 10
+timeout: 600
+queries:
+  - ConnectedSegments
+  - PosLength
+  - RouteSensor
+  - SemaphoreNeighbor
+  - SwitchSet
+  - SwitchSensor
+scenarios:
+#  - Batch
+  - Inject
+#  - Repair
+tools:
+  - drools5
+  - drools6
+  - emfapi
+  - emfincquery
+  - jena
+  - mysql
+  - neo4j
+  - sesame
