@@ -9,15 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.localsearch;
 
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+public class EMFIncQueryBatchLocalSearchTest extends BatchTest {
 
-public class EMFIncQueryInjectTestLocalSearch extends InjectTest {
-
-	public EMFIncQueryInjectTestLocalSearch() {
-		bi = new EMFIncQueryBenchmarkInitializerLocalSearch();
+	public EMFIncQueryBatchLocalSearchTest() {
+		bi = new EMFIncQueryBenchmarkLocalSearchInitializer();
 	}
 
 }

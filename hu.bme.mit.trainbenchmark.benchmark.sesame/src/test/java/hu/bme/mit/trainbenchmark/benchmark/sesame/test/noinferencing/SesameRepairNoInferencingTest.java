@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.incremental;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.test.noinferencing;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class EMFIncQueryBatchTestIncremental extends BatchTest {
+public class SesameRepairNoInferencingTest extends RepairTest {
 
-	public EMFIncQueryBatchTestIncremental() {
-		bi = new EMFIncQueryBenchmarkInitializerIncremental();
+	public SesameRepairNoInferencingTest() {
+		bi = new SesameBenchmarkNoInferencingInitializer();
 	}
 
 }

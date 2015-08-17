@@ -9,15 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.localsearch;
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class SesameRepairTest extends RepairTest {
+public class EMFIncQueryRepairLocalSearchTest extends RepairTest {
 
-	public SesameRepairTest() {
-		bi = new SesameBenchmarkInitializer();
+	public EMFIncQueryRepairLocalSearchTest() {
+		bi = new EMFIncQueryBenchmarkLocalSearchInitializer();
 	}
 
 }

@@ -16,8 +16,6 @@ WHERE
 	?route2 rdf:type base:Route .
 	?sensor1 rdf:type base:Sensor .
 	?sensor2 rdf:type base:Sensor .
-	?te1 rdf:type base:TrackElement .
-	?te2 rdf:type base:TrackElement .
 
 	FILTER (?route1 != ?route2) .
 

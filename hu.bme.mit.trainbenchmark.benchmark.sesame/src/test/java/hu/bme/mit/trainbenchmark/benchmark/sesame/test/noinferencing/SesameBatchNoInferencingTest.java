@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.localsearch;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.test.noinferencing;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class EMFIncQueryBatchTestLocalSearch extends BatchTest {
+public class SesameBatchNoInferencingTest extends BatchTest {
 
-	public EMFIncQueryBatchTestLocalSearch() {
-		bi = new EMFIncQueryBenchmarkInitializerLocalSearch();
+	public SesameBatchNoInferencingTest() {
+		bi = new SesameBenchmarkNoInferencingInitializer();
 	}
 
 }

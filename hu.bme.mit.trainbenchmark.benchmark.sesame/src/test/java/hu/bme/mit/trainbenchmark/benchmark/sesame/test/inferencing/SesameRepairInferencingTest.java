@@ -9,15 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.incremental;
 
+package hu.bme.mit.trainbenchmark.benchmark.sesame.test.inferencing;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class EMFIncQueryRepairTestIncremental extends RepairTest {
+public class SesameRepairInferencingTest extends RepairTest {
 
-	public EMFIncQueryRepairTestIncremental() {
-		bi = new EMFIncQueryBenchmarkInitializerIncremental();
+	public SesameRepairInferencingTest() {
+		bi = new SesameBenchmarkInferencingInitializer();
 	}
 
 }

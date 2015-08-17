@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.rdf;
 
+import org.apache.commons.cli.ParseException;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-
-import org.apache.commons.cli.ParseException;
 
 public class RDFBenchmarkConfig extends BenchmarkConfig {
 
@@ -28,16 +28,18 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 		super(args, className);
 	}
 
-	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
+	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex,
+			final Query query, final int iterationCount, final ModificationMethod modificationMethod,
+			final long modificationConstant, final boolean inferencing) {
 		super(className, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+		this.inferencing = inferencing;
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(INFERENCING, true, "RDF: type of inference");
+		options.addOption(INFERENCING, false, "Use type inferencing");
 	}
 
 	@Override
