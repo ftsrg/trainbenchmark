@@ -43,6 +43,7 @@
 				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
 				<module>hu.bme.mit.trainbenchmark.generator.sql</module>
 				<module>hu.bme.mit.trainbenchmark.generator</module>
+				<module>hu.bme.mit.trainbenchmark.graph</module>
 				<module>hu.bme.mit.trainbenchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.sql</module>
 			</modules>
@@ -77,6 +78,7 @@
 			<id>graph</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
+				<module>hu.bme.mit.trainbenchmark.graph</module>
 			</modules>
 		</profile>
 
@@ -153,7 +155,6 @@
 			</modules>
 		</profile>
 
-
 		<profile>
 			<id>jena</id>
 			<modules>
@@ -179,6 +180,7 @@
 			<id>neo4j</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
+				<module>hu.bme.mit.trainbenchmark.graph</module>
 			</modules>
 		</profile>
 
