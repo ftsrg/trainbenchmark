@@ -20,20 +20,16 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.COD
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.DAYS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.DESTINATIONS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.LOCATION;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.NALCO;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.NEIGHBORS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ORIGIN;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.PLANNING;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULES;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STANOX;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.START_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATUS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TERMINAL;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN_UID;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRANSACTION;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -72,9 +68,9 @@ public class RealModelGenerator extends ScheduleGenerator {
 		// create station nodes and attach attributes
 		for (JsonNode station : root.get("Locations")) {
 			code = getText(station, "Code");
-			attributes.put(STANOX, getText(station, "Stanox"));
+			// attributes.put(STANOX, getText(station, "Stanox"));
 			attributes.put(CODE, code);
-			attributes.put(NALCO, getText(station, "Nalco"));
+			// attributes.put(NALCO, getText(station, "Nalco"));
 			stations.put(code, fg.createVertex(STATION, attributes));
 			attributes.clear();
 		}
@@ -107,8 +103,8 @@ public class RealModelGenerator extends ScheduleGenerator {
 				for (JsonNode schedule : train.get("Schedules")) {
 					attributes.clear();
 					attributes.put(STATUS, resolveStatus(schedule, false));
-					attributes.put(START_DATE, getText(schedule, "StartDate"));
-					attributes.put(TRANSACTION, getText(schedule, "Transaction"));
+					// attributes.put(START_DATE, getText(schedule, "StartDate"));
+					// attributes.put(TRANSACTION, getText(schedule, "Transaction"));
 					attributes.put(DAYS, getText(schedule, "Days"));
 					attributes.put(PLANNING, resolveStatus(schedule, true));
 
@@ -156,6 +152,11 @@ public class RealModelGenerator extends ScheduleGenerator {
 				fg.createVertex(ASSOCIATION, attributes, outgoing, incoming);
 			}
 		}
+		outgoing.clear();
+		incoming.clear();
+		attributes.clear();
+		stations.clear();
+		trains.clear();
 	}
 
 	private String getText(final JsonNode node, final String key) {

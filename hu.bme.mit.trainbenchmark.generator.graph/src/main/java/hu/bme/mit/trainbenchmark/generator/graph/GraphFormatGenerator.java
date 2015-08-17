@@ -12,14 +12,17 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelType.SCHEDULE_REAL;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,6 +31,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
+import org.neo4j.cypher.export.SubGraphExporter;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -150,38 +154,44 @@ public class GraphFormatGenerator extends FormatGenerator {
 	@Override
 	public void persistModel() throws IOException, XMLStreamException {
 		try (Transaction tx = graphDb.beginTx()) {
-			final ProgressReporter reporter = new ProgressReporter(null, null);
-
-			final StringWriter writer = new StringWriter();
-			final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
-			final Config config = Config.config();
-			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter,
-					config.withTypes());
-			tx.success();
-
-			final String fileName = generatorConfig.getModelPathNameWithoutExtension()
-					+ ".graphml";
-
-			String graphmlContent = writer.toString();
-
-			// this is required to be compatibile with OrientDB
-			// graphmlContent = graphmlContent
-			// .replaceAll(
-			//	"<graph id=\"G\" edgedefault=\"directed\">",
-			//	"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
-
-			// FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
-			File file = new File(fileName);
-			BufferedWriter bw = new BufferedWriter(new FileWriter(file, false));
-			// FileUtils.writeStringToFile(new File(fileName), graphmlContent);
-			for (int i = 0; i < graphmlContent.length(); i++) {
-				char c = graphmlContent.charAt(i);
-				bw.write(c);
+			if (generatorConfig.getModelType() == SCHEDULE_REAL) {
+				exportCypher();
+			} else {
+				exportGraphml();
 			}
-			bw.close();
 		} finally {
 			graphDb.shutdown();
 		}
+	}
+
+	protected void exportCypher() throws FileNotFoundException {
+		final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".cypher";
+
+		SubGraphExporter subGraphExporter = new SubGraphExporter(new DatabaseSubGraph(graphDb));
+		subGraphExporter.export(new PrintWriter(new File(fileName)));
+	}
+
+	protected void exportGraphml() throws IOException, XMLStreamException {
+		final ProgressReporter reporter = new ProgressReporter(null, null);
+
+		final StringWriter writer = new StringWriter();
+		final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
+		final Config config = Config.config();
+
+		xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
+		tx.success();
+
+		final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
+
+		String graphmlContent = writer.toString();
+
+		File file = new File(fileName);
+		BufferedWriter bw = new BufferedWriter(new FileWriter(file, false));
+		for (int i = 0; i < graphmlContent.length(); i++) {
+			char c = graphmlContent.charAt(i);
+			bw.write(c);
+		}
+		bw.close();
 	}
 
 	@Override
