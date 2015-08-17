@@ -1,4 +1,3 @@
 @prefix : <http://www.semanticweb.org/ontologies/2015/trainbenchmark#> .
-
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 

@@ -12,18 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-import hu.bme.mit.trainbenchmark.generator.rdf.RDFFormat;
-
 import org.apache.commons.cli.ParseException;
+
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class RDFGeneratorConfig extends GeneratorConfig {
 
-	protected static final String FORMAT = "format";
 	protected static final String METAMODEL = "metamodel";
-	
 	protected boolean metamodel;
-	protected RDFFormat rdfFormat;
 
 	public RDFGeneratorConfig(final String[] args) throws ParseException {
 		super(args);
@@ -34,7 +30,6 @@ public class RDFGeneratorConfig extends GeneratorConfig {
 		super.initOptions();
 
 		options.addOption(METAMODEL, false, "generate metamodel and container object and relations for RDF TBox");
-		options.addOption(FORMAT, true, "the format of the RDF output: turtle (default), rdfxml");
 	}
 
 	@Override
@@ -42,29 +37,10 @@ public class RDFGeneratorConfig extends GeneratorConfig {
 		super.processArguments(args);
 
 		metamodel = cmd.hasOption(METAMODEL);
-
-		if (cmd.hasOption(FORMAT)) {
-			switch (cmd.getOptionValue(FORMAT)) {
-			case "turtle":
-				rdfFormat = RDFFormat.TURTLE;
-				break;
-			case "rdfxml":
-				rdfFormat = RDFFormat.RDFXML;
-				break;
-			default:
-				throw new ParseException("Unsupported format for RDF generator.");
-			}
-		} else {
-			rdfFormat = RDFFormat.TURTLE;
-		}
 	}
 
 	public boolean isMetamodel() {
 		return metamodel;
-	}
-
-	public RDFFormat getRdfFormat() {
-		return rdfFormat;
 	}
 
 }

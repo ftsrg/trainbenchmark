@@ -13,9 +13,6 @@
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
-import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,6 +24,10 @@ import java.util.Map.Entry;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
+import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
+import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
+
 public class RDFGenerator extends Generator {
 
 	public RDFGenerator(final String args[]) throws ParseException {
@@ -36,7 +37,7 @@ public class RDFGenerator extends Generator {
 
 	@Override
 	protected String syntax() {
-		return "RDF";
+		return "RDF" + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "");
 	}
 
 	protected RDFGeneratorConfig rdfGeneratorConfig;
@@ -44,9 +45,11 @@ public class RDFGenerator extends Generator {
 
 	@Override
 	public void initModel() throws IOException {
-		// source file (DDL operations)
+		// source file
+		final String postfix = rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "";
 		final String srcFilePath = generatorConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/header.ttl";
+				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix + ".ttl";
+
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
@@ -74,7 +77,8 @@ public class RDFGenerator extends Generator {
 
 		// (id)-[]->() attributes
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(), stringValue(attribute.getValue()));
+			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(),
+					stringValue(attribute.getValue()));
 			vertex.append(attributeTriple);
 		}
 
@@ -84,18 +88,19 @@ public class RDFGenerator extends Generator {
 				continue;
 			}
 
-			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX, outgoingEdge.getValue());
+			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX,
+					outgoingEdge.getValue());
 			vertex.append(edgeTriple);
 		}
 
-		vertex.append(" .");		
+		vertex.append(" .");
 		write(vertex.toString());
-		
+
 		// ()-[]->(id) edges
 		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
 			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), id);
 		}
-		
+
 		return id;
 	}
 
@@ -107,18 +112,20 @@ public class RDFGenerator extends Generator {
 		final String triple = String.format(":%s%s :%s :%s%s .", ID_PREFIX, from, label, ID_PREFIX, to);
 		write(triple);
 	}
-	
+
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	protected void setAttribute(final String type, final Object node, final String key, final Object value)
+			throws IOException {
 		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
 		write(triple + ".");
-		
+
 	}
-		
+
 	private String stringValue(final Object value) {
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^xsd:int", value);
-		} if (value instanceof Enum<?>) {
+		}
+		if (value instanceof Enum<?>) {
 			final Enum<?> e = (Enum<?>) value;
 			return String.format(":%s", RDFHelper.addEnumPrefix(e));
 		} else {
@@ -129,5 +136,5 @@ public class RDFGenerator extends Generator {
 	public void write(final String s) throws IOException {
 		file.write(s + "\n\n");
 	}
-	
+
 }

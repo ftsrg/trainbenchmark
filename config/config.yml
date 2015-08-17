@@ -1,27 +1,45 @@
+minsize: 1
+maxsize: 2
 java_opts:
   xmx: 2G
-minsize: 1
-maxsize: 1
+# number of runs for the same tool/scenario/query/size
+
 runs: 1
+# number of modify-recheck iterations
 iterationcount: 10
+# timeout for the benchmark processes
 timeout: 600
+
 queries:
-  - ConnectedSegments
+#  - ConnectedSegments
   - PosLength
-  - RouteSensor
-  - SemaphoreNeighbor
-  - SwitchSet
-  - SwitchSensor
+#  - RouteSensor
+#  - SemaphoreNeighbor
+#  - SwitchSet
+#  - SwitchSensor
+
 scenarios:
 #  - Batch
   - Inject
-#  - Repair
+  - Repair
+
 tools:
-  - drools5
-  - drools6
-  - emfapi
-  - emfincquery
-  - jena
-  - mysql
-  - neo4j
+#  - drools5
+#  - drools6
+#  - emfapi
+#  - emfincquery
+#  - jena
+#  - mysql
+#  - neo4j
   - sesame
+
+# optional arguments. for example, neo4j is invoked with and without the javaapi argument as well.
+generator_optional_arguments:
+  rdf:
+  - metamodel
+
+benchmark_optional_arguments:
+  neo4j:
+  - javaapi
+  sesame:
+  - inferencing
