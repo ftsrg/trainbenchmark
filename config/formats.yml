@@ -1,0 +1,13 @@
+allegro: rdf
+drools5: emf
+drools6: emf
+eclipseocl: emf
+emfapi: emf
+emfincquery: emf
+jena: rdf
+mysql: sql
+neo4j: graph
+orientdb: graph
+postgresql: sql
+sesame: rdf
+virtuoso: rdf

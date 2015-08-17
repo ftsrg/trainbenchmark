@@ -9,9 +9,7 @@ by the other modules.
 Functions:
     set_working_directory: changes the working directory
     get_power_of_two: creates a list of power of 2 numbers
-    json_decode: loads json file to a python json object
 """
-import json
 import os
 import logging
 import glob
@@ -56,25 +54,6 @@ def get_power_of_two(min_size, max_size):
         raise RuntimeError('The range between minsize and maxsize is too short.')
 
     return all_sizes
-
-
-def json_decode(json_path):
-    """
-    Opens a .json file and returns as a python json object.
-    The json_path parameter is the path of the file.
-    """
-    try:
-        with open(json_path) as file:
-            json_object = json.load(file)
-    except IOError:
-        logging.error("The file does not exist or cannot read: " +
-                      (os.path.split(json_path))[1])
-    except ValueError as value_error:
-        logging.error((os.path.split(json_path))[1] +
-                      " file is not valid \n", value_error)
-    else:
-        return json_object
-    return None
 
 
 def get_generator_jar(format):
