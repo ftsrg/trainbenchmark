@@ -11,11 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,25 +19,30 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
+import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
+import hu.bme.mit.trainbenchmark.constants.Query;
+
 public abstract class SQLDriver extends Driver<Long> {
 
 	protected String queryDefinition;
 	protected Connection connection;
 	protected PreparedStatement preparedQuery;
-	
+
 	@Override
 	public String getExtension() {
 		return ".sql";
 	}
-	
+
 	@Override
-	public List<SQLMatch> runQuery(final Query query, final String queryDefinition) throws SQLException  {
+	public List<SQLMatch> runQuery(final Query query, final String queryDefinition) throws SQLException {
 		final List<SQLMatch> results = new ArrayList<>();
 
 		if (preparedQuery == null) {
 			preparedQuery = connection.prepareStatement(queryDefinition);
 		}
-		
+
 		try (ResultSet rs = preparedQuery.executeQuery()) {
 			while (rs.next()) {
 				final SQLMatch match = SQLMatch.createMatch(query, rs);
