@@ -15,7 +15,9 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelType.SCHEDULE_REAL;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
@@ -27,7 +29,6 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ import org.neo4j.shell.tools.imp.util.MapNodeCache;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jDriver extends Driver<Node> {
+
+	protected Neo4jBenchmarkConfig benchmarkConfig;
 
 	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(DEFINED_BY);
 	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
@@ -89,13 +92,23 @@ public class Neo4jDriver extends Driver<Node> {
 	}
 
 	@Override
-	public void read(final String filePath) throws FileNotFoundException, XMLStreamException {
+	public void read(final String filePath) throws XMLStreamException, IOException {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
-
 		try (Transaction tx = graphDb.beginTx()) {
-			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
-			xmlGraphMLReader.nodeLabels(true);
-			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath + getExtension())), MapNodeCache.usingHashMap());
+			if (benchmarkConfig.getModelType() == SCHEDULE_REAL) {
+				try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath
+						+ ".cypher")))) {
+					String line;
+					while ((line = br.readLine()) != null) {
+						graphDb.execute(line);
+					}
+				}
+			} else {
+				final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
+				xmlGraphMLReader.nodeLabels(true);
+				xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath
+						+ getExtension())), MapNodeCache.usingHashMap());
+			}
 			tx.success();
 		}
 	}
@@ -143,7 +156,8 @@ public class Neo4jDriver extends Driver<Node> {
 
 	@Override
 	public List<Node> collectVertices(final String type) {
-		final ResourceIterable<Node> nodes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(DynamicLabel.label(type));
+		final ResourceIterable<Node> nodes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(
+				DynamicLabel.label(type));
 
 		final ResourceIterator<Node> iterator = nodes.iterator();
 		@SuppressWarnings("unchecked")
@@ -165,6 +179,14 @@ public class Neo4jDriver extends Driver<Node> {
 	@Override
 	public String getExtension() {
 		return ".graphml";
+	}
+
+	public void setBenchmarkConfig(Neo4jBenchmarkConfig benchmarkConfig) {
+		this.benchmarkConfig = benchmarkConfig;
+	}
+
+	public Neo4jBenchmarkConfig getBenchmarkConfig() {
+		return benchmarkConfig;
 	}
 
 }
