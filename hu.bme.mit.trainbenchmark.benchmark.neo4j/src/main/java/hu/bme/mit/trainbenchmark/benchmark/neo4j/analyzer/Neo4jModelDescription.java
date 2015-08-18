@@ -47,17 +47,10 @@ public class Neo4jModelDescription extends ModelDescription<Neo4jDriver> {
 
 		Node node;
 		int degree;
-		double count;
 		while (iterator.hasNext()) {
 			node = iterator.next();
 			degree = node.getDegree();
-			if (degreeDistributions.containsKey(degree)) {
-				count = degreeDistributions.get(degree);
-				count++;
-				degreeDistributions.put(degree, count);
-			} else {
-				degreeDistributions.put(degree, 1.0);
-			}
+			addDegree(ALL, degree);
 		}
 		tx.success();
 		tx.close();

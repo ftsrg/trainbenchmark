@@ -23,7 +23,13 @@ import java.util.Map.Entry;
 
 public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> {
 
-	protected Map<Integer, Double> degreeDistributions;
+	/**
+	 * The first key is the type of the objects. Every one of the them contains another Map that includes
+	 * the degrees of the nodes and their distributions.
+	 */
+	protected Map<String, Map<Integer, Double>> degreeDistributions;
+
+	protected String ALL = "All";
 
 	public ModelDescription(D driver) {
 		super(driver);
@@ -47,8 +53,31 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	@Override
 	public void calculateAll() {
 		calculateMetrics();
-		for (Entry<Integer, Double> entry : degreeDistributions.entrySet()) {
-			metrics.add(new DegreeDistribution(entry));
+		for (String type : degreeDistributions.keySet()) {
+			for (Entry<Integer, Double> entry : degreeDistributions.get(type).entrySet()) {
+				metrics.add(new DegreeDistribution(entry));
+			}
 		}
+	}
+
+	protected void addDegree(String type, int degree) {
+		if (!degreeDistributions.containsKey(type)) {
+			degreeDistributions.put(type, new HashMap<Integer, Double>());
+		}
+		Map<Integer, Double> dists = degreeDistributions.get(type);
+		double count;
+
+		if (dists.containsKey(degree)) {
+			count = dists.get(degree);
+			count++;
+			dists.put(degree, count);
+		} else {
+			dists.put(degree, 1.0);
+		}
+
+		if (!type.equals(ALL)) {
+			addDegree(ALL, degree);
+		}
+
 	}
 }

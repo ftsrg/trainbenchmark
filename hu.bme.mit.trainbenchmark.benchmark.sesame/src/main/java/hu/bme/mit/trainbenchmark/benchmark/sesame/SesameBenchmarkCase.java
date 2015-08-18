@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameModelAnalyzer;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameModelDescription;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
@@ -31,6 +32,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	protected SesameDriver sesameDriver;
 	protected RDFBenchmarkConfig rbc;
 	protected SesameModelAnalyzer sesameAnalyzer;
+	protected SesameModelDescription sesameDescription;
 
 	@Override
 	protected void init() throws IOException {
@@ -57,8 +59,8 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 
 	@Override
 	protected void initDescription() {
-		// TODO Auto-generated method stub
-
+		analyzer = sesameDescription = new SesameModelDescription(sesameDriver);
+		sesameDescription.setBenchmarkConfig(rbc);
 	}
 
 }
