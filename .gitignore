@@ -8,12 +8,9 @@ MANIFEST.MF_gen
 .metadata
 runtimeInfo
 workspace
-*.~vsdx
 *._trace
 Thumbs.db
 .Rhistory
-results*.txt
-results/
 .pydevproject
 deps/
 diagrams/*
