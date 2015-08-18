@@ -11,11 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,31 +23,31 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 
-public class JenaChecker extends Checker<JenaMatch> {
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
+
+public class JenaChecker extends RDFChecker<JenaMatch> {
 
 	protected JenaDriver jenaDriver;
-	protected Query query;
-	protected hu.bme.mit.trainbenchmark.constants.Query tbQuery;
+	protected Query jenaQuery;
 
-	public JenaChecker(final JenaDriver jenaDriver, final BenchmarkConfig bc) throws IOException {
-		super();
+	public JenaChecker(final JenaDriver jenaDriver, final RDFBenchmarkConfig rdfbc) throws IOException {
+		super(rdfbc);
 		this.jenaDriver = jenaDriver;
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + bc.getQuery()
-				+ ".sparql";
-		tbQuery = bc.getQuery();
-		
-		query = QueryFactory.read(queryPath);
+		this.jenaQuery = QueryFactory.read(queryPath);
 	}
 
 	@Override
 	public Collection<JenaMatch> check() throws IOException {
 		final List<JenaMatch> matches = new ArrayList<>();
-		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, jenaDriver.getModel())) {
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(jenaQuery, jenaDriver.getModel())) {
 			final ResultSet resultSet = queryExecution.execSelect();
 
 			while (resultSet.hasNext()) {
 				final QuerySolution qs = resultSet.next();
-				final JenaMatch match = JenaMatch.createMatch(tbQuery, qs);
+				final JenaMatch match = JenaMatch.createMatch(query, qs);
 				matches.add(match);
 			}
 		}

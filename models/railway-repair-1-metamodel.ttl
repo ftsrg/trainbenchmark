@@ -1,5 +1,346 @@
 @prefix : <http://www.semanticweb.org/ontologies/2015/trainbenchmark#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@base <http://www.semanticweb.org/ontologies/2015/trainbenchmark#> .
+
+<http://www.semanticweb.org/ontologies/2015/trainbenchmark#> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##connectsTo
+
+:connectsTo rdf:type owl:ObjectProperty ;
+            
+            rdfs:domain :TrackElement ;
+            
+            rdfs:range :TrackElement .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##definedBy
+
+:definedBy rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :Route ;
+           
+           rdfs:range :Sensor .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##elements
+
+:elements rdf:type owl:ObjectProperty ;
+          
+          rdfs:domain :Sensor ;
+          
+          rdfs:range :TrackElement .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##entry
+
+:entry rdf:type owl:ObjectProperty ;
+       
+       rdfs:domain :Route ;
+       
+       rdfs:range :Semaphore .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##exit
+
+:exit rdf:type owl:ObjectProperty ;
+      
+      rdfs:domain :Route ;
+      
+      rdfs:range :Semaphore .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##follows
+
+:follows rdf:type owl:ObjectProperty ;
+         
+         rdfs:domain :Route ;
+         
+         rdfs:range :SwitchPosition ;
+         
+         owl:inverseOf :route .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##position
+
+:position rdf:type owl:ObjectProperty ;
+          
+          rdfs:range :Position ;
+          
+          rdfs:domain :Switch ,
+                      :SwitchPosition .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##positions
+
+:positions rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :Switch ;
+           
+           rdfs:range :SwitchPosition .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##route
+
+:route rdf:type owl:ObjectProperty ;
+       
+       rdfs:range :Route ;
+       
+       rdfs:domain :SwitchPosition .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##sensor
+
+:sensor rdf:type owl:ObjectProperty ;
+        
+        rdfs:range :Sensor ;
+        
+        rdfs:domain :TrackElement ;
+        
+        owl:inverseOf :elements .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##signal
+
+:signal rdf:type owl:ObjectProperty ;
+        
+        rdfs:domain :Semaphore ;
+        
+        rdfs:range :SignalState .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##switch
+
+:switch rdf:type owl:ObjectProperty ;
+        
+        rdfs:range :Switch ;
+        
+        rdfs:domain :SwitchPosition ;
+        
+        owl:inverseOf :positions .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Segment_length
+
+:Segment_length rdf:type owl:DatatypeProperty ;
+                
+                rdfs:domain :Segment ;
+                
+                rdfs:range xsd:int .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Position
+
+:Position rdf:type owl:Class ;
+          
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:oneOf ( :POSITION_STRAIGHT
+                                            :POSITION_LEFT
+                                            :POSITION_FAILURE
+                                            :POSITION_RIGHT
+                                          )
+                              ] .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Route
+
+:Route rdf:type owl:Class ;
+       
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :entry ;
+                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :exit ;
+                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :definedBy ;
+                         owl:minCardinality "2"^^xsd:nonNegativeInteger
+                       ] .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Segment
+
+:Segment rdf:type owl:Class ;
+         
+         rdfs:subClassOf :TrackElement ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :Segment_length ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Semaphore
+
+:Semaphore rdf:type owl:Class ;
+           
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :signal ;
+                             owl:cardinality "1"^^xsd:nonNegativeInteger
+                           ] .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Sensor
+
+:Sensor rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##SignalState
+
+:SignalState rdf:type owl:Class ;
+             
+             owl:equivalentClass [ rdf:type owl:Class ;
+                                   owl:oneOf ( :SIGNAL_FAILURE
+                                               :SIGNAL_GO
+                                               :SIGNAL_STOP
+                                             )
+                                 ] .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Switch
+
+:Switch rdf:type owl:Class ;
+        
+        rdfs:subClassOf :TrackElement ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :position ;
+                          owl:cardinality "1"^^xsd:nonNegativeInteger
+                        ] .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##SwitchPosition
+
+:SwitchPosition rdf:type owl:Class ;
+                
+                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty :position ;
+                                  owl:cardinality "1"^^xsd:nonNegativeInteger
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :switch ;
+                                  owl:cardinality "1"^^xsd:nonNegativeInteger
+                                ] .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##TrackElement
+
+:TrackElement rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##POSITION_FAILURE
+
+:POSITION_FAILURE rdf:type :Position ,
+                           owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##POSITION_LEFT
+
+:POSITION_LEFT rdf:type :Position ,
+                        owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##POSITION_RIGHT
+
+:POSITION_RIGHT rdf:type :Position ,
+                         owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##POSITION_STRAIGHT
+
+:POSITION_STRAIGHT rdf:type :Position ,
+                            owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##SIGNAL_FAILURE
+
+:SIGNAL_FAILURE rdf:type :SignalState ,
+                         owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##SIGNAL_GO
+
+:SIGNAL_GO rdf:type :SignalState ,
+                    owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##SIGNAL_STOP
+
+:SIGNAL_STOP rdf:type :SignalState ,
+                      owl:NamedIndividual .
+
+
+
+
+###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
 
 :_1 a :Semaphore ;
 	:signal :SIGNAL_GO .
@@ -13,8 +354,6 @@
 :_4 a :Switch .
 
 :_5 a :Sensor .
-
-:_3 :definedBy :_5 .
 
 :_6 a :Segment ;
 	:length "358"^^xsd:int .
@@ -51,7 +390,7 @@
 :_12 :sensor :_11 .
 
 :_13 a :Segment ;
-	:length "137"^^xsd:int .
+	:length "-135"^^xsd:int .
 
 :_13 :sensor :_11 .
 
@@ -61,7 +400,7 @@
 :_14 :sensor :_11 .
 
 :_15 a :Segment ;
-	:length "979"^^xsd:int .
+	:length "-977"^^xsd:int .
 
 :_15 :sensor :_11 .
 
@@ -435,7 +774,7 @@
 :_3 :definedBy :_91 .
 
 :_92 a :Segment ;
-	:length "620"^^xsd:int .
+	:length "-618"^^xsd:int .
 
 :_92 :sensor :_91 .
 
@@ -455,7 +794,7 @@
 :_95 :sensor :_91 .
 
 :_96 a :Segment ;
-	:length "322"^^xsd:int .
+	:length "-320"^^xsd:int .
 
 :_96 :sensor :_91 .
 
@@ -566,7 +905,7 @@
 :_117 :sensor :_113 .
 
 :_118 a :Segment ;
-	:length "617"^^xsd:int .
+	:length "-615"^^xsd:int .
 
 :_118 :sensor :_113 .
 
@@ -580,7 +919,7 @@
 :_120 :sensor :_119 .
 
 :_121 a :Segment ;
-	:length "186"^^xsd:int .
+	:length "-184"^^xsd:int .
 
 :_121 :sensor :_119 .
 
@@ -723,7 +1062,7 @@
 :_149 :sensor :_145 .
 
 :_150 a :Segment ;
-	:length "771"^^xsd:int .
+	:length "-769"^^xsd:int .
 
 :_150 :sensor :_145 .
 
@@ -764,12 +1103,12 @@
 :_158 :sensor :_157 .
 
 :_159 a :Segment ;
-	:length "852"^^xsd:int .
+	:length "-850"^^xsd:int .
 
 :_159 :sensor :_157 .
 
 :_160 a :Segment ;
-	:length "36"^^xsd:int .
+	:length "-34"^^xsd:int .
 
 :_160 :sensor :_157 .
 
@@ -854,8 +1193,6 @@
 :_176 a :Switch .
 
 :_177 a :Sensor .
-
-:_3 :definedBy :_177 .
 
 :_178 a :Segment ;
 	:length "160"^^xsd:int .
@@ -1042,7 +1379,7 @@
 :_3 :definedBy :_215 .
 
 :_216 a :Segment ;
-	:length "314"^^xsd:int .
+	:length "-312"^^xsd:int .
 
 :_216 :sensor :_215 .
 
@@ -1144,7 +1481,7 @@
 :_236 :sensor :_233 .
 
 :_237 a :Segment ;
-	:length "593"^^xsd:int .
+	:length "-591"^^xsd:int .
 
 :_237 :sensor :_233 .
 
@@ -1168,7 +1505,7 @@
 :_241 :sensor :_239 .
 
 :_242 a :Segment ;
-	:length "514"^^xsd:int .
+	:length "-512"^^xsd:int .
 
 :_242 :sensor :_239 .
 
@@ -1354,7 +1691,7 @@
 :_279 :sensor :_277 .
 
 :_280 a :Segment ;
-	:length "500"^^xsd:int .
+	:length "-498"^^xsd:int .
 
 :_280 :sensor :_277 .
 
@@ -1429,7 +1766,7 @@
 :_294 :sensor :_291 .
 
 :_295 a :Segment ;
-	:length "554"^^xsd:int .
+	:length "-552"^^xsd:int .
 
 :_295 :sensor :_291 .
 
@@ -1440,15 +1777,13 @@
 
 :_297 a :Sensor .
 
-:_3 :definedBy :_297 .
-
 :_298 a :Segment ;
 	:length "690"^^xsd:int .
 
 :_298 :sensor :_297 .
 
 :_299 a :Segment ;
-	:length "855"^^xsd:int .
+	:length "-853"^^xsd:int .
 
 :_299 :sensor :_297 .
 
@@ -1472,7 +1807,7 @@
 :_3 :definedBy :_303 .
 
 :_304 a :Segment ;
-	:length "569"^^xsd:int .
+	:length "-567"^^xsd:int .
 
 :_304 :sensor :_303 .
 
@@ -1583,7 +1918,7 @@
 :_3 :definedBy :_325 .
 
 :_326 a :Segment ;
-	:length "917"^^xsd:int .
+	:length "-915"^^xsd:int .
 
 :_326 :sensor :_325 .
 
@@ -1723,8 +2058,6 @@
 
 :_354 :sensor :_349 .
 
-:_318 :sensor :_349 .
-
 :_318 :currentPosition :POSITION_FAILURE.
 
 :_355 a :SwitchPosition ;
@@ -1736,8 +2069,6 @@
 :_356 a :Switch .
 
 :_357 a :Sensor .
-
-:_3 :definedBy :_357 .
 
 :_358 a :Segment ;
 	:length "116"^^xsd:int .
@@ -1798,7 +2129,7 @@
 :_3 :definedBy :_369 .
 
 :_370 a :Segment ;
-	:length "132"^^xsd:int .
+	:length "-130"^^xsd:int .
 
 :_370 :sensor :_369 .
 
@@ -1827,7 +2158,7 @@
 :_356 :currentPosition :POSITION_FAILURE.
 
 :_375 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_STRAIGHT ;
 	:switch :_356 .
 
 :_3 :follows :_375 .
@@ -1835,8 +2166,6 @@
 :_376 a :Switch .
 
 :_377 a :Sensor .
-
-:_3 :definedBy :_377 .
 
 :_378 a :Segment ;
 	:length "316"^^xsd:int .
@@ -1993,8 +2322,6 @@
 
 :_409 a :Sensor .
 
-:_3 :definedBy :_409 .
-
 :_410 a :Segment ;
 	:length "659"^^xsd:int .
 
@@ -2016,7 +2343,7 @@
 :_413 :sensor :_409 .
 
 :_414 a :Segment ;
-	:length "793"^^xsd:int .
+	:length "-791"^^xsd:int .
 
 :_414 :sensor :_409 .
 
@@ -2042,7 +2369,7 @@
 :_3 :definedBy :_418 .
 
 :_419 a :Segment ;
-	:length "779"^^xsd:int .
+	:length "-777"^^xsd:int .
 
 :_419 :sensor :_418 .
 
@@ -2155,8 +2482,6 @@
 
 :_442 a :Sensor .
 
-:_3 :definedBy :_442 .
-
 :_443 a :Segment ;
 	:length "78"^^xsd:int .
 
@@ -2168,7 +2493,7 @@
 :_444 :sensor :_442 .
 
 :_445 a :Segment ;
-	:length "510"^^xsd:int .
+	:length "-508"^^xsd:int .
 
 :_445 :sensor :_442 .
 
@@ -2271,20 +2596,18 @@
 
 :_466 a :Sensor .
 
-:_3 :definedBy :_466 .
-
 :_467 a :Segment ;
 	:length "38"^^xsd:int .
 
 :_467 :sensor :_466 .
 
 :_468 a :Segment ;
-	:length "598"^^xsd:int .
+	:length "-596"^^xsd:int .
 
 :_468 :sensor :_466 .
 
 :_469 a :Segment ;
-	:length "172"^^xsd:int .
+	:length "-170"^^xsd:int .
 
 :_469 :sensor :_466 .
 
@@ -3097,7 +3420,7 @@
 :_479 :sensor :_476 .
 
 :_480 a :Segment ;
-	:length "393"^^xsd:int .
+	:length "-391"^^xsd:int .
 
 :_480 :sensor :_476 .
 
@@ -3174,7 +3497,7 @@
 :_495 :sensor :_494 .
 
 :_496 a :Segment ;
-	:length "316"^^xsd:int .
+	:length "-314"^^xsd:int .
 
 :_496 :sensor :_494 .
 
@@ -3189,7 +3512,7 @@
 :_498 :sensor :_494 .
 
 :_499 a :Segment ;
-	:length "808"^^xsd:int .
+	:length "-806"^^xsd:int .
 
 :_499 :sensor :_494 .
 
@@ -3235,8 +3558,6 @@
 :_507 :sensor :_502 .
 
 :_508 a :Sensor .
-
-:_474 :definedBy :_508 .
 
 :_509 a :Segment ;
 	:length "387"^^xsd:int .
@@ -3541,7 +3862,7 @@
 :_551 :sensor :_548 .
 
 :_552 a :Segment ;
-	:length "214"^^xsd:int .
+	:length "-212"^^xsd:int .
 
 :_552 :sensor :_548 .
 
@@ -3773,7 +4094,7 @@
 :_599 :sensor :_598 .
 
 :_600 a :Segment ;
-	:length "845"^^xsd:int .
+	:length "-843"^^xsd:int .
 
 :_600 :sensor :_598 .
 
@@ -3812,7 +4133,7 @@
 :_607 :sensor :_604 .
 
 :_608 a :Segment ;
-	:length "630"^^xsd:int .
+	:length "-628"^^xsd:int .
 
 :_608 :sensor :_604 .
 
@@ -3822,8 +4143,6 @@
 :_609 :sensor :_604 .
 
 :_610 a :Sensor .
-
-:_534 :definedBy :_610 .
 
 :_611 a :Segment ;
 	:length "911"^^xsd:int .
@@ -3892,8 +4211,6 @@
 :_623 a :Switch .
 
 :_624 a :Sensor .
-
-:_534 :definedBy :_624 .
 
 :_625 a :Segment ;
 	:length "32"^^xsd:int .
@@ -4058,7 +4375,7 @@
 :_657 :sensor :_656 .
 
 :_658 a :Segment ;
-	:length "131"^^xsd:int .
+	:length "-129"^^xsd:int .
 
 :_658 :sensor :_656 .
 
@@ -4138,8 +4455,6 @@
 
 :_674 :sensor :_669 .
 
-:_655 :sensor :_669 .
-
 :_655 :currentPosition :POSITION_FAILURE.
 
 :_675 a :SwitchPosition ;
@@ -4165,7 +4480,7 @@
 :_679 :sensor :_677 .
 
 :_680 a :Segment ;
-	:length "883"^^xsd:int .
+	:length "-881"^^xsd:int .
 
 :_680 :sensor :_677 .
 
@@ -4196,12 +4511,12 @@
 :_534 :definedBy :_685 .
 
 :_686 a :Segment ;
-	:length "551"^^xsd:int .
+	:length "-549"^^xsd:int .
 
 :_686 :sensor :_685 .
 
 :_687 a :Segment ;
-	:length "942"^^xsd:int .
+	:length "-940"^^xsd:int .
 
 :_687 :sensor :_685 .
 
@@ -4266,7 +4581,7 @@
 :_534 :definedBy :_699 .
 
 :_700 a :Segment ;
-	:length "11"^^xsd:int .
+	:length "-9"^^xsd:int .
 
 :_700 :sensor :_699 .
 
@@ -4416,7 +4731,7 @@
 :_534 :definedBy :_730 .
 
 :_731 a :Segment ;
-	:length "809"^^xsd:int .
+	:length "-807"^^xsd:int .
 
 :_731 :sensor :_730 .
 
@@ -4431,7 +4746,7 @@
 :_733 :sensor :_730 .
 
 :_734 a :Segment ;
-	:length "81"^^xsd:int .
+	:length "-79"^^xsd:int .
 
 :_734 :sensor :_730 .
 
@@ -4583,7 +4898,7 @@
 :_764 :sensor :_762 .
 
 :_765 a :Segment ;
-	:length "543"^^xsd:int .
+	:length "-541"^^xsd:int .
 
 :_765 :sensor :_762 .
 
@@ -4607,17 +4922,17 @@
 :_769 :sensor :_768 .
 
 :_770 a :Segment ;
-	:length "156"^^xsd:int .
+	:length "-154"^^xsd:int .
 
 :_770 :sensor :_768 .
 
 :_771 a :Segment ;
-	:length "479"^^xsd:int .
+	:length "-477"^^xsd:int .
 
 :_771 :sensor :_768 .
 
 :_772 a :Segment ;
-	:length "514"^^xsd:int .
+	:length "-512"^^xsd:int .
 
 :_772 :sensor :_768 .
 
@@ -4627,8 +4942,6 @@
 :_773 :sensor :_768 .
 
 :_774 a :Sensor .
-
-:_534 :definedBy :_774 .
 
 :_775 a :Segment ;
 	:length "39"^^xsd:int .
@@ -4646,7 +4959,7 @@
 :_777 :sensor :_774 .
 
 :_778 a :Segment ;
-	:length "211"^^xsd:int .
+	:length "-209"^^xsd:int .
 
 :_778 :sensor :_774 .
 
@@ -4706,7 +5019,7 @@
 :_789 :sensor :_788 .
 
 :_790 a :Segment ;
-	:length "550"^^xsd:int .
+	:length "-548"^^xsd:int .
 
 :_790 :sensor :_788 .
 
@@ -4785,8 +5098,6 @@
 
 :_806 a :Sensor .
 
-:_534 :definedBy :_806 .
-
 :_807 a :Segment ;
 	:length "439"^^xsd:int .
 
@@ -4827,7 +5138,7 @@
 :_814 :sensor :_812 .
 
 :_815 a :Segment ;
-	:length "105"^^xsd:int .
+	:length "-103"^^xsd:int .
 
 :_815 :sensor :_812 .
 
@@ -4977,7 +5288,7 @@
 :_844 :sensor :_840 .
 
 :_845 a :Segment ;
-	:length "940"^^xsd:int .
+	:length "-938"^^xsd:int .
 
 :_845 :sensor :_840 .
 
@@ -5129,7 +5440,7 @@
 :_875 :sensor :_872 .
 
 :_876 a :Segment ;
-	:length "547"^^xsd:int .
+	:length "-545"^^xsd:int .
 
 :_876 :sensor :_872 .
 
@@ -5192,13 +5503,11 @@
 :_888 :sensor :_884 .
 
 :_889 a :Segment ;
-	:length "625"^^xsd:int .
+	:length "-623"^^xsd:int .
 
 :_889 :sensor :_884 .
 
 :_890 a :Sensor .
-
-:_534 :definedBy :_890 .
 
 :_891 a :Segment ;
 	:length "132"^^xsd:int .
@@ -5866,7 +6175,7 @@
 :_898 :definedBy :_906 .
 
 :_907 a :Segment ;
-	:length "11"^^xsd:int .
+	:length "-9"^^xsd:int .
 
 :_907 :sensor :_906 .
 
@@ -5936,7 +6245,7 @@
 :_898 :definedBy :_920 .
 
 :_921 a :Segment ;
-	:length "887"^^xsd:int .
+	:length "-885"^^xsd:int .
 
 :_921 :sensor :_920 .
 
@@ -6058,7 +6367,7 @@
 :_946 :sensor :_944 .
 
 :_947 a :Segment ;
-	:length "488"^^xsd:int .
+	:length "-486"^^xsd:int .
 
 :_947 :sensor :_944 .
 
@@ -6100,8 +6409,6 @@
 	:length "281"^^xsd:int .
 
 :_955 :sensor :_950 .
-
-:_919 :sensor :_950 .
 
 :_919 :currentPosition :POSITION_STRAIGHT.
 
@@ -6167,7 +6474,7 @@
 :_968 :sensor :_964 .
 
 :_969 a :Segment ;
-	:length "894"^^xsd:int .
+	:length "-892"^^xsd:int .
 
 :_969 :sensor :_964 .
 
@@ -6215,7 +6522,7 @@
 :_978 :sensor :_976 .
 
 :_979 a :Segment ;
-	:length "130"^^xsd:int .
+	:length "-128"^^xsd:int .
 
 :_979 :sensor :_976 .
 
@@ -6519,7 +6826,7 @@
 :_898 :definedBy :_1040 .
 
 :_1041 a :Segment ;
-	:length "525"^^xsd:int .
+	:length "-523"^^xsd:int .
 
 :_1041 :sensor :_1040 .
 
@@ -6558,7 +6865,7 @@
 :_1048 :sensor :_1046 .
 
 :_1049 a :Segment ;
-	:length "412"^^xsd:int .
+	:length "-410"^^xsd:int .
 
 :_1049 :sensor :_1046 .
 
@@ -6597,7 +6904,7 @@
 :_1056 :sensor :_1052 .
 
 :_1057 a :Segment ;
-	:length "890"^^xsd:int .
+	:length "-888"^^xsd:int .
 
 :_1057 :sensor :_1052 .
 
@@ -6648,7 +6955,7 @@
 :_1067 :sensor :_1064 .
 
 :_1068 a :Segment ;
-	:length "921"^^xsd:int .
+	:length "-919"^^xsd:int .
 
 :_1068 :sensor :_1064 .
 
@@ -6662,12 +6969,12 @@
 :_898 :definedBy :_1070 .
 
 :_1071 a :Segment ;
-	:length "939"^^xsd:int .
+	:length "-937"^^xsd:int .
 
 :_1071 :sensor :_1070 .
 
 :_1072 a :Segment ;
-	:length "950"^^xsd:int .
+	:length "-948"^^xsd:int .
 
 :_1072 :sensor :_1070 .
 
@@ -6745,8 +7052,6 @@
 :_1087 :sensor :_1082 .
 
 :_1088 a :Sensor .
-
-:_898 :definedBy :_1088 .
 
 :_1089 a :Segment ;
 	:length "7"^^xsd:int .
@@ -7143,7 +7448,7 @@
 :_1095 :definedBy :_1103 .
 
 :_1104 a :Segment ;
-	:length "393"^^xsd:int .
+	:length "-391"^^xsd:int .
 
 :_1104 :sensor :_1103 .
 
@@ -7172,7 +7477,7 @@
 :_1095 :definedBy :_1109 .
 
 :_1110 a :Segment ;
-	:length "271"^^xsd:int .
+	:length "-269"^^xsd:int .
 
 :_1110 :sensor :_1109 .
 
@@ -7187,7 +7492,7 @@
 :_1112 :sensor :_1109 .
 
 :_1113 a :Segment ;
-	:length "409"^^xsd:int .
+	:length "-407"^^xsd:int .
 
 :_1113 :sensor :_1109 .
 
@@ -7284,14 +7589,14 @@
 :_1132 :sensor :_1128 .
 
 :_1133 a :Segment ;
-	:length "431"^^xsd:int .
+	:length "-429"^^xsd:int .
 
 :_1133 :sensor :_1128 .
 
 :_1134 a :Sensor .
 
 :_1135 a :Segment ;
-	:length "481"^^xsd:int .
+	:length "-479"^^xsd:int .
 
 :_1135 :sensor :_1134 .
 
@@ -7352,7 +7657,7 @@
 :_1147 :sensor :_1146 .
 
 :_1148 a :Segment ;
-	:length "527"^^xsd:int .
+	:length "-525"^^xsd:int .
 
 :_1148 :sensor :_1146 .
 
@@ -7551,7 +7856,7 @@
 :_1188 :sensor :_1184 .
 
 :_1189 a :Segment ;
-	:length "547"^^xsd:int .
+	:length "-545"^^xsd:int .
 
 :_1189 :sensor :_1184 .
 
@@ -7583,8 +7888,6 @@
 :_1195 :sensor :_1190 .
 
 :_1196 a :Sensor .
-
-:_1095 :definedBy :_1196 .
 
 :_1197 a :Segment ;
 	:length "691"^^xsd:int .
@@ -7621,7 +7924,7 @@
 :_1203 :sensor :_1202 .
 
 :_1204 a :Segment ;
-	:length "366"^^xsd:int .
+	:length "-364"^^xsd:int .
 
 :_1204 :sensor :_1202 .
 
@@ -7754,7 +8057,7 @@
 :_1095 :definedBy :_1230 .
 
 :_1231 a :Segment ;
-	:length "445"^^xsd:int .
+	:length "-443"^^xsd:int .
 
 :_1231 :sensor :_1230 .
 
@@ -7774,7 +8077,7 @@
 :_1234 :sensor :_1230 .
 
 :_1235 a :Segment ;
-	:length "4"^^xsd:int .
+	:length "-2"^^xsd:int .
 
 :_1235 :sensor :_1230 .
 
@@ -7849,7 +8152,7 @@
 :_1250 :sensor :_1248 .
 
 :_1251 a :Segment ;
-	:length "859"^^xsd:int .
+	:length "-857"^^xsd:int .
 
 :_1251 :sensor :_1248 .
 
@@ -7868,7 +8171,7 @@
 :_1095 :definedBy :_1254 .
 
 :_1255 a :Segment ;
-	:length "314"^^xsd:int .
+	:length "-312"^^xsd:int .
 
 :_1255 :sensor :_1254 .
 
@@ -7907,7 +8210,7 @@
 :_1262 :sensor :_1260 .
 
 :_1263 a :Segment ;
-	:length "337"^^xsd:int .
+	:length "-335"^^xsd:int .
 
 :_1263 :sensor :_1260 .
 
@@ -8141,7 +8444,7 @@
 :_1309 :sensor :_1308 .
 
 :_1310 a :Segment ;
-	:length "312"^^xsd:int .
+	:length "-310"^^xsd:int .
 
 :_1310 :sensor :_1308 .
 
@@ -8165,7 +8468,7 @@
 :_1307 :currentPosition :POSITION_STRAIGHT.
 
 :_1314 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_1307 .
 
 :_1095 :follows :_1314 .

@@ -10,21 +10,21 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.test.inferencing;
+package hu.bme.mit.trainbenchmark.benchmark.jena.inferencing.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SesameBenchmarkInferencingInitializer extends TestBenchmarkInitializer<SesameBenchmarkLogic> {
+public class JenaBenchmarkInferencingInitializer extends TestBenchmarkInitializer<JenaBenchmarkLogic> {
 
 	@Override
-	protected SesameBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Sesame", scenario, size, runIndex, query, iterationCount,
-				modificationMethod, modificationConstant, true);
-		return new SesameBenchmarkLogic(rbc);
+	protected JenaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount, modificationMethod,
+				modificationConstant, true);
+		return new JenaBenchmarkLogic(rbc);
 	}
 
 }

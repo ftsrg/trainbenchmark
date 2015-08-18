@@ -10,21 +10,21 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso.test;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.noinferencing.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class VirtuosoBenchmarkInitializer extends TestBenchmarkInitializer<VirtuosoBenchmarkLogic> {
+public class SesameBenchmarkNoInferencingInitializer extends TestBenchmarkInitializer<SesameBenchmarkLogic> {
 
 	@Override
-	protected VirtuosoBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Virtuoso", scenario, size, runIndex, query, iterationCount,
+	protected SesameBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Sesame", scenario, size, runIndex, query, iterationCount,
 				modificationMethod, modificationConstant, false);
-		return new VirtuosoBenchmarkLogic(rbc);
+		return new SesameBenchmarkLogic(rbc);
 	}
 
 }

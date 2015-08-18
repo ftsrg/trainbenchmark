@@ -53,7 +53,7 @@ public class RDFGenerator extends Generator {
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + ".ttl";
+		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + postfix + ".ttl";
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -77,8 +77,7 @@ public class RDFGenerator extends Generator {
 
 		// (id)-[]->() attributes
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {
-			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(),
-					stringValue(attribute.getValue()));
+			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(), stringValue(attribute.getValue()));
 			vertex.append(attributeTriple);
 		}
 
@@ -88,8 +87,7 @@ public class RDFGenerator extends Generator {
 				continue;
 			}
 
-			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX,
-					outgoingEdge.getValue());
+			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX, outgoingEdge.getValue());
 			vertex.append(edgeTriple);
 		}
 
@@ -114,8 +112,7 @@ public class RDFGenerator extends Generator {
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value)
-			throws IOException {
+	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
 		write(triple + ".");
 

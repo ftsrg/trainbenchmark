@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.test.noinferencing;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.inferencing.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkLogic;
@@ -18,12 +18,12 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SesameBenchmarkNoInferencingInitializer extends TestBenchmarkInitializer<SesameBenchmarkLogic> {
+public class SesameBenchmarkInferencingInitializer extends TestBenchmarkInitializer<SesameBenchmarkLogic> {
 
 	@Override
 	protected SesameBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Sesame", scenario, size, runIndex, query, iterationCount,
-				modificationMethod, modificationConstant, false);
+				modificationMethod, modificationConstant, true);
 		return new SesameBenchmarkLogic(rbc);
 	}
 

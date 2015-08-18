@@ -42,7 +42,7 @@ public abstract class Driver<T> {
 
 	// extension
 
-	public abstract String getExtension();
+	public abstract String getPostfix();
 
 	public abstract Collection<?> runQuery(final Query query, final String queryDefinition) throws Exception;
 

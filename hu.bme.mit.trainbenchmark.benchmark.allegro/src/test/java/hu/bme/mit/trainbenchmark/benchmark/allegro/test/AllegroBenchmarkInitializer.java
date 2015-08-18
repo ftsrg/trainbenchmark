@@ -23,7 +23,7 @@ public class AllegroBenchmarkInitializer extends TestBenchmarkInitializer<Allegr
 	@Override
 	protected AllegroBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Allegro", scenario, size, runIndex, query, iterationCount,
-				modificationMethod, modificationConstant);
+				modificationMethod, modificationConstant, false);
 		return new AllegroBenchmarkLogic(rbc);
 	}
 

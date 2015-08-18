@@ -29,7 +29,7 @@ public class MySQLDriver extends SQLDriver {
 	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "/bin/bash", "-c",
-				"mysql -u " + USER + " < " + modelPathWithoutExtension + getExtension() };
+				"mysql -u " + USER + " < " + modelPathWithoutExtension + getPostfix() };
 
 		final Process pr = rt.exec(command);
 		pr.waitFor();

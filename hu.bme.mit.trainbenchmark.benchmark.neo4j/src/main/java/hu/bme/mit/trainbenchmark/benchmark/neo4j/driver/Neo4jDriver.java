@@ -95,7 +95,7 @@ public class Neo4jDriver extends Driver<Node> {
 		try (Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 			xmlGraphMLReader.nodeLabels(true);
-			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath + getExtension())), MapNodeCache.usingHashMap());
+			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath + getPostfix())), MapNodeCache.usingHashMap());
 			tx.success();
 		}
 	}
@@ -163,7 +163,7 @@ public class Neo4jDriver extends Driver<Node> {
 	}
 
 	@Override
-	public String getExtension() {
+	public String getPostfix() {
 		return ".graphml";
 	}
 
