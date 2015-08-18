@@ -45,6 +45,8 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 	protected String getDegreesAssociationsQuery;
 	protected String getDegreesTrainsToSchedulesQuery;
 	protected String getDegreesTrainsToAssociationsQuery;
+	protected String getNumberOfClassesQuery;
+	protected String getStationsOfSchedulesQuery;
 
 	private RepositoryConnection connection;
 
@@ -56,30 +58,69 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 	protected void calculateMetrics() {
 		connection = driver.getConnection();
 		initQueries();
-		calculateDegrees(STATION);
-		calculateDegrees(TRAIN);
-		calculateDegrees(SCHEDULE);
-		calculateDegrees(ASSOCIATION);
-		calculateDegrees(ASSOCIATIONS);
-		calculateDegrees(SCHEDULES);
-
-	}
-
-	private void calculateDegrees(final String type) {
 		try {
-			TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, getQuery(type));
-			TupleQueryResult results = query.evaluate();
+			calculateDegrees(STATION);
+			calculateDegrees(TRAIN);
+			calculateDegrees(SCHEDULE);
+			calculateDegrees(ASSOCIATION);
+			calculateDegrees(ASSOCIATIONS);
+			calculateDegrees(SCHEDULES);
 
-			BindingSet set;
-			int degree;
-			while (results.hasNext()) {
-				set = results.next();
-				degree = Integer.parseInt(set.getValue("degree").stringValue());
-				addDegree(type, degree);
-			}
+			calculateElements();
+
+			calculateRepetitiveSchedules();
 		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
 			throw new RuntimeException(e);
 		}
+
+	}
+
+	private void calculateDegrees(final String type) throws QueryEvaluationException,
+			RepositoryException, MalformedQueryException {
+		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, getQuery(type));
+		TupleQueryResult results = query.evaluate();
+
+		BindingSet set;
+		int degree;
+		while (results.hasNext()) {
+			set = results.next();
+			degree = Integer.parseInt(set.getValue("degree").stringValue());
+			addDegree(type, degree);
+		}
+
+	}
+
+	private void calculateElements() throws QueryEvaluationException, RepositoryException,
+			MalformedQueryException {
+		TupleQuery query = connection
+				.prepareTupleQuery(QueryLanguage.SPARQL, getNumberOfClassesQuery);
+		TupleQueryResult results = query.evaluate();
+
+		BindingSet set;
+		String clazz;
+		while (results.hasNext()) {
+			set = results.next();
+			clazz = set.getValue("class").stringValue();
+			// remove URI
+			clazz = clazz.substring(clazz.indexOf("#") + 1);
+			numberOfElements.put(clazz, Integer.parseInt(set.getValue("count").stringValue()));
+		}
+	}
+
+	private void calculateRepetitiveSchedules() throws QueryEvaluationException, RepositoryException,
+			MalformedQueryException {
+		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL,
+				getStationsOfSchedulesQuery);
+		TupleQueryResult results = query.evaluate();
+
+		BindingSet set;
+		while (results.hasNext()) {
+			set = results.next();
+			addStationOfSchedule(set.getValue("schedule").stringValue(), set.getValue("station")
+					.stringValue());
+		}
+		checkRepetitiveSchedules();
+
 	}
 
 	private String getQuery(final String type) {
@@ -102,18 +143,18 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 	}
 
 	private void initQueries() {
-		String getDegreesStationsPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfStations.sparql";
-		String getDegreesTrainsPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfTrains.sparql";
-		String getDegreesSchedulesPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfSchedules.sparql";
-		String getDegreesAssociationsPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfAssociations.sparql";
-		String getDegreesTrainsToSchedulesPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfTrainsToSchedules.sparql";
-		String getDegreesTrainsToAssociationsPath = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfTrainsToAssociations.sparql";
+		String queryPath = benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/";
+		String getDegreesStationsPath = queryPath + "GetDegreesOfStations.sparql";
+		String getDegreesTrainsPath = queryPath + "GetDegreesOfTrains.sparql";
+		String getDegreesSchedulesPath = queryPath + "GetDegreesOfSchedules.sparql";
+		String getDegreesAssociationsPath = queryPath + "GetDegreesOfAssociations.sparql";
+		String getDegreesTrainsToSchedulesPath = queryPath + "GetDegreesOfTrainsToSchedules.sparql";
+		String getDegreesTrainsToAssociationsPath = queryPath
+				+ "GetDegreesOfTrainsToAssociations.sparql";
+		String getNumberOfClassesPath = queryPath + "GetNumberOfClasses.sparql";
+		String getStationsOfSchedulesPath = queryPath + "GetStationsOfSchedules.sparql";
+
 		try {
 			getDegreesStationsQuery = FileUtils
 					.readFileToString(new File(getDegreesStationsPath));
@@ -126,6 +167,10 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 					getDegreesTrainsToSchedulesPath));
 			getDegreesTrainsToAssociationsQuery = FileUtils.readFileToString(new File(
 					getDegreesTrainsToAssociationsPath));
+			getNumberOfClassesQuery = FileUtils
+					.readFileToString(new File(getNumberOfClassesPath));
+			getStationsOfSchedulesQuery = FileUtils.readFileToString(new File(
+					getStationsOfSchedulesPath));
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);

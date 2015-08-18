@@ -17,11 +17,13 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import eu.mondo.sam.core.metrics.BenchmarkMetric;
 import eu.mondo.sam.core.metrics.CompositeMetric;
+import eu.mondo.sam.core.metrics.ScalarMetric;
 
 public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> {
 
@@ -30,6 +32,12 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	 * the degrees of the nodes and their distributions.
 	 */
 	protected Map<String, Map<Integer, Double>> degreeDistributions;
+
+	protected Map<String, Integer> numberOfElements;
+
+	protected Map<String, List<String>> stationsOfSchedules;
+
+	protected int repetitiveSchedules;
 
 	protected String ALL = "All";
 
@@ -40,6 +48,9 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	@Override
 	public void initializeMetrics() {
 		degreeDistributions = new HashMap<>();
+		numberOfElements = new HashMap<>();
+		stationsOfSchedules = new HashMap<>();
+		repetitiveSchedules = 0;
 		if (metrics == null) {
 			metrics = new ArrayList<BenchmarkMetric>();
 		}
@@ -62,6 +73,14 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 			}
 			metrics.add(compositeMetric);
 		}
+		for (String key : numberOfElements.keySet()) {
+			ScalarMetric metric = new ScalarMetric(key + "-elements");
+			metric.setValue(numberOfElements.get(key));
+			metrics.add(metric);
+		}
+		ScalarMetric repetitive = new ScalarMetric("Repetitive");
+		repetitive.setValue(repetitiveSchedules);
+		metrics.add(repetitive);
 	}
 
 	protected void addDegree(final String type, final int degree) {
@@ -83,5 +102,32 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 			addDegree(ALL, degree);
 		}
 
+	}
+
+	protected void addStationOfSchedule(final String schedule, final String station) {
+		if (!stationsOfSchedules.containsKey(schedule)) {
+			stationsOfSchedules.put(schedule, new ArrayList<String>());
+		}
+		stationsOfSchedules.get(schedule).add(station);
+	}
+
+	protected void checkRepetitiveSchedules() {
+		for (Entry<String, List<String>> entry : stationsOfSchedules.entrySet()) {
+			if (match(entry.getKey(), entry.getValue())) {
+				repetitiveSchedules++;
+			}
+
+		}
+	}
+
+	private boolean match(final String key, final List<String> values) {
+		for (Entry<String, List<String>> entry : stationsOfSchedules.entrySet()) {
+			if (!entry.getKey().equals(key)) {
+				if (entry.getValue().equals(values)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

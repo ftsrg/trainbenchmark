@@ -56,7 +56,6 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 
 	@Override
 	public void beginTransaction() {
-		vf = repository.getValueFactory();
 	}
 
 	@Override
@@ -78,12 +77,12 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		repository.initialize();
 		connection = repository.getConnection();
 		connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
+		vf = repository.getValueFactory();
 	}
 
 	@Override
 	public List<SesameMatch> runQuery(final Query query, final String queryDefinition)
-			throws RepositoryException, MalformedQueryException,
-			QueryEvaluationException {
+			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
 
@@ -122,8 +121,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		final URI typeURI = vf.createURI(BASE_PREFIX + type);
 		final List<URI> vertices = new ArrayList<>();
 
-		final RepositoryResult<Statement> statements = connection.getStatements(null,
-				RDF.TYPE, typeURI, true);
+		final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE,
+				typeURI, true);
 		while (statements.hasNext()) {
 			final Statement s = statements.next();
 			final URI uri = (URI) s.getSubject();
@@ -140,8 +139,8 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
-	public void deleteSingleOutgoingEdge(final Collection<URI> vertices,
-			final String vertexType, final String edgeType) throws RepositoryException {
+	public void deleteSingleOutgoingEdge(final Collection<URI> vertices, final String vertexType,
+			final String edgeType) throws RepositoryException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
@@ -154,11 +153,9 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		for (final URI vertex : vertices) {
 			RepositoryResult<Statement> statementsToRemove;
 			if (outgoing) {
-				statementsToRemove = connection.getStatements(vertex, edge, null,
-						true);
+				statementsToRemove = connection.getStatements(vertex, edge, null, true);
 			} else {
-				statementsToRemove = connection.getStatements(null, edge, vertex,
-						true);
+				statementsToRemove = connection.getStatements(null, edge, vertex, true);
 			}
 
 			while (statementsToRemove.hasNext()) {
@@ -180,10 +177,9 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 	// utility
 
 	@Override
-	protected boolean ask(final String askQuery) throws RepositoryException,
-			MalformedQueryException, QueryEvaluationException {
-		final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL,
-				askQuery);
+	protected boolean ask(final String askQuery) throws RepositoryException, MalformedQueryException,
+			QueryEvaluationException {
+		final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
 		final boolean result = q.evaluate();
 		return result;
 	}
