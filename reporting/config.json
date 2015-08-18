@@ -4,7 +4,10 @@
       "X_Dimension": "Size",
       "Legend": "CaseName",
       "Summarize_Function": [
-        "Check"
+        "Read",
+        "Check",
+        "Edit",
+        "Recheck"
       ],
       "Title": "SCENARIO CASENAME TOOL",
       "Metrics": [
@@ -16,7 +19,7 @@
       "Y_Label": "Time (ms)",
       "X_Axis_Scale": "factor",
       "Y_Axis_Scale": "log2",
-      "Extension": "png"
+      "Extension": "pdf"
     }
   ]
 }
