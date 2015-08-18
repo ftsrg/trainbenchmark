@@ -12,12 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
+import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class DensityMetric extends Metric {
 
-	public DensityMetric(String identifier, EdgeDirection direction) {
-		super(identifier, direction);
+	public DensityMetric(EdgeDirection direction) {
+		super(direction);
 	}
 
 	@Override
@@ -27,4 +28,12 @@ public class DensityMetric extends Metric {
 		metricValue /= (numOfNodes - 1);
 	}
 
+	@Override
+	protected String getIdentifier() {
+		if (direction == BOTH) {
+			return "Density";
+		} else {
+			return "DensityWithOutgoing";
+		}
+	}
 }

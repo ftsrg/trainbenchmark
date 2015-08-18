@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.phases.analyzis;
+package hu.bme.mit.trainbenchmark.benchmark.phases.analysis;
 
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import eu.mondo.sam.core.DataToken;

@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
+import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
+import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.OUTGOING;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DensityMetric;
@@ -67,22 +69,21 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 			metrics = new ArrayList<BenchmarkMetric>();
 		}
 		Metric.setAnalyzer(this);
-		metrics.add(new NumberOfNodesMetric("NumOfNodes"));
-		metrics.add(new NumberOfEdgesMetric("NumOfEdges"));
-		metrics.add(new AverageDegreeMetric("AvgDegree", EdgeDirection.BOTH));
-		metrics.add(new MaximumDegreeMetric("MaxDegree", EdgeDirection.BOTH));
-		metrics.add(new AverageDegreeDistributionMetric("AvgDegreeDist", EdgeDirection.BOTH));
+		metrics.add(new NumberOfNodesMetric());
+		metrics.add(new NumberOfEdgesMetric());
+		metrics.add(new AverageDegreeMetric(BOTH));
+		metrics.add(new MaximumDegreeMetric(BOTH));
+		metrics.add(new AverageDegreeDistributionMetric(BOTH));
 
-		metrics.add(new AverageDegreeMetric("AvgOutgoingDegree", EdgeDirection.OUTGOING));
-		metrics.add(new MaximumDegreeMetric("MaxOutgoingDegree", EdgeDirection.OUTGOING));
-		metrics.add(new AverageDegreeDistributionMetric("AvgOutgoingDegreeDist",
-				EdgeDirection.OUTGOING));
+		metrics.add(new AverageDegreeMetric(OUTGOING));
+		metrics.add(new MaximumDegreeMetric(OUTGOING));
+		metrics.add(new AverageDegreeDistributionMetric(OUTGOING));
 
-		metrics.add(new HigherDegreeDistributionMetric("HigherDegree", EdgeDirection.BOTH));
-		metrics.add(new HigherDegreeDistributionMetric("HigherOutgoingDegree", EdgeDirection.OUTGOING));
+		metrics.add(new HigherDegreeDistributionMetric(BOTH));
+		metrics.add(new HigherDegreeDistributionMetric(OUTGOING));
 
-		metrics.add(new DensityMetric("Density", EdgeDirection.BOTH));
-		metrics.add(new DensityMetric("DensityWithOutgoing", EdgeDirection.OUTGOING));
+		metrics.add(new DensityMetric(BOTH));
+		metrics.add(new DensityMetric(OUTGOING));
 	}
 
 	@Override

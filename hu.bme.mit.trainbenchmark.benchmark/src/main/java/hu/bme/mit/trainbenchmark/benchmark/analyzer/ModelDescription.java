@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DegreeDistribution;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	 * The first key is the type of the objects. Every one of the them contains another Map that includes
 	 * the degrees of the nodes and their distributions.
 	 */
-	protected Map<String, Map<Integer, Double>> degreeDistributions;
+	protected Map<String, Map<Integer, Integer>> degreeDistributions;
 
 	protected Map<String, Integer> numberOfElements;
 
@@ -68,8 +67,10 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 		calculateMetrics();
 		for (String type : degreeDistributions.keySet()) {
 			CompositeMetric compositeMetric = new CompositeMetric(type);
-			for (Entry<Integer, Double> entry : degreeDistributions.get(type).entrySet()) {
-				compositeMetric.addMetric(new DegreeDistribution(entry));
+			for (Entry<Integer, Integer> entry : degreeDistributions.get(type).entrySet()) {
+				ScalarMetric scalarMetric = new ScalarMetric(entry.getKey().toString());
+				scalarMetric.setValue(entry.getValue());
+				compositeMetric.addMetric(scalarMetric);
 			}
 			metrics.add(compositeMetric);
 		}
@@ -85,17 +86,17 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 
 	protected void addDegree(final String type, final int degree) {
 		if (!degreeDistributions.containsKey(type)) {
-			degreeDistributions.put(type, new HashMap<Integer, Double>());
+			degreeDistributions.put(type, new HashMap<Integer, Integer>());
 		}
-		Map<Integer, Double> dists = degreeDistributions.get(type);
-		double count;
+		Map<Integer, Integer> dists = degreeDistributions.get(type);
+		int count = 0;
 
 		if (dists.containsKey(degree)) {
 			count = dists.get(degree);
 			count++;
 			dists.put(degree, count);
 		} else {
-			dists.put(degree, 1.0);
+			dists.put(degree, 1);
 		}
 
 		if (!type.equals(ALL)) {

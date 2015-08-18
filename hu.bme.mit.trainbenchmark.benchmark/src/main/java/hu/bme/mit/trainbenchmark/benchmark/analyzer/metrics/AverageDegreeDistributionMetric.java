@@ -12,17 +12,27 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
+import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class AverageDegreeDistributionMetric extends Metric {
 
-	public AverageDegreeDistributionMetric(String identifier, EdgeDirection direction) {
-		super(identifier, direction);
+	public AverageDegreeDistributionMetric(EdgeDirection direction) {
+		super(direction);
 	}
 
 	@Override
 	public void calculate() {
 		metricValue = analyzer.getNumberOfAverageDegree(direction)
 				/ analyzer.getNumberOfNodes(withOutgoingDegree);
+	}
+
+	@Override
+	protected String getIdentifier() {
+		if (direction == BOTH) {
+			return "AvgDegreeDist";
+		} else {
+			return "AvgOutgoingDegreeDist";
+		}
 	}
 }

@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.phases.analyzis;
+package hu.bme.mit.trainbenchmark.benchmark.phases.analysis;
 
 import eu.mondo.sam.core.phases.OptionalPhase;
 

@@ -26,13 +26,15 @@ public abstract class Metric extends BenchmarkMetric {
 
 	protected boolean withOutgoingDegree;
 
-	public Metric(String identifier, EdgeDirection direction) {
-		super(identifier);
+	public Metric(EdgeDirection direction) {
+		metricName = getIdentifier();
 		this.direction = direction;
 		withOutgoingDegree = (direction == EdgeDirection.OUTGOING);
 	}
 
 	public abstract void calculate();
+
+	protected abstract String getIdentifier();
 
 	public static ModelAnalyzer<?> getAnalyzer() {
 		return analyzer;

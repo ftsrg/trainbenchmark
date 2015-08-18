@@ -16,12 +16,17 @@ import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class NumberOfEdgesMetric extends Metric {
 
-	public NumberOfEdgesMetric(String identifier) {
-		super(identifier, EdgeDirection.BOTH);
+	public NumberOfEdgesMetric() {
+		super(EdgeDirection.BOTH);
 	}
 
 	@Override
 	public void calculate() {
 		metricValue = analyzer.getNumberOfEdges();
+	}
+
+	@Override
+	protected String getIdentifier() {
+		return "NumOfEdges";
 	}
 }

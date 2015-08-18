@@ -12,16 +12,26 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
+import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class MaximumDegreeMetric extends Metric {
 
-	public MaximumDegreeMetric(String identifier, EdgeDirection direction) {
-		super(identifier, direction);
+	public MaximumDegreeMetric(EdgeDirection direction) {
+		super(direction);
 	}
 
 	@Override
 	public void calculate() {
 		metricValue = analyzer.getMaximumDegree(direction);
+	}
+
+	@Override
+	protected String getIdentifier() {
+		if (direction == BOTH) {
+			return "MaxDegree";
+		} else {
+			return "MaxOutgoingDegree";
+		}
 	}
 }

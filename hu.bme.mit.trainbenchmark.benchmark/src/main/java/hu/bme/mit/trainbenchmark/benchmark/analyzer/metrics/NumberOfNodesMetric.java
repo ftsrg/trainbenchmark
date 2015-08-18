@@ -16,8 +16,8 @@ import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class NumberOfNodesMetric extends Metric {
 
-	public NumberOfNodesMetric(String identifier) {
-		super(identifier, EdgeDirection.BOTH);
+	public NumberOfNodesMetric() {
+		super(EdgeDirection.BOTH);
 	}
 
 	@Override
@@ -25,4 +25,8 @@ public class NumberOfNodesMetric extends Metric {
 		metricValue = analyzer.getNumberOfNodes();
 	}
 
+	@Override
+	protected String getIdentifier() {
+		return "NumOfNodes";
+	}
 }

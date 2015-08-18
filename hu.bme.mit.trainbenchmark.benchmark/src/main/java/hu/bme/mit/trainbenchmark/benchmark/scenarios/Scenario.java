@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.MetricsCalculationPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.MetricsInitializationPhase;
-import hu.bme.mit.trainbenchmark.benchmark.phases.analyzis.ModelMetricsCalculationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.MetricsCalculationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.MetricsInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.ModelMetricsCalculationPhase;
 import eu.mondo.sam.core.results.CaseDescriptor;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 

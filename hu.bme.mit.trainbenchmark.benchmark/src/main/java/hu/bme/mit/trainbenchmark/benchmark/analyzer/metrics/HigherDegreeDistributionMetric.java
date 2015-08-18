@@ -12,12 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
+import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class HigherDegreeDistributionMetric extends Metric {
 
-	public HigherDegreeDistributionMetric(String identifier, EdgeDirection direction) {
-		super(identifier, direction);
+	public HigherDegreeDistributionMetric(EdgeDirection direction) {
+		super(direction);
 
 	}
 
@@ -27,4 +28,12 @@ public class HigherDegreeDistributionMetric extends Metric {
 				/ analyzer.getNumberOfNodes(withOutgoingDegree);
 	}
 
+	@Override
+	protected String getIdentifier() {
+		if (direction == BOTH) {
+			return "HigherDegree";
+		} else {
+			return "HigherOutgoingDegree";
+		}
+	}
 }
