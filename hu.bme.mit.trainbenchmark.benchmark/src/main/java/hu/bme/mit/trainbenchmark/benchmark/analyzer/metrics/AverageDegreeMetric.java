@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
-import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 public class AverageDegreeMetric extends Metric {
@@ -28,10 +27,13 @@ public class AverageDegreeMetric extends Metric {
 
 	@Override
 	protected String getIdentifier() {
-		if (direction == BOTH) {
+		switch (direction) {
+		case OUTGOING:
 			return "AvgDegree";
-		} else {
+		case BOTH:
 			return "AvgOutgoingDegree";
+		default:
+			throw new IllegalArgumentException("Illegal direction!");
 		}
 	}
 }

@@ -12,15 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageClusteringCoefficientMetric;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
@@ -55,6 +62,18 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 	}
 
 	@Override
+	public void initializeMetrics() {
+		super.initializeMetrics();
+		AverageClusteringCoefficientMetric cluster = new AverageClusteringCoefficientMetric();
+		AverageClusteringCoefficientMetric clusterWithType = new AverageClusteringCoefficientMetric(
+				ScheduleConstants.STATION);
+		cluster.initName();
+		clusterWithType.initName();
+		metrics.add(cluster);
+		metrics.add(clusterWithType);
+	}
+
+	@Override
 	public void calculateMetrics() {
 		database = driver.getGraphDb();
 		graphOperations = GlobalGraphOperations.at(database);
@@ -75,6 +94,8 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 			changeMaximumDegree(EdgeDirection.BOTH, currentDegree);
 
 			currentDegree = node.getDegree(Direction.OUTGOING);
+			determineClustering(node);
+
 			if (currentDegree > 0) {
 				numberOfNodesWithOutgoingDegrees++;
 			}
@@ -85,6 +106,33 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 		calculateNumberOfDegrees(nodes);
 
 		finishTransaction();
+	}
+
+	private void determineClustering(final Node node) {
+		Iterable<Relationship> relations = node.getRelationships(Direction.OUTGOING);
+		// use Set to avoid storing the same node more than one
+		Set<Node> neighbors = new HashSet<>();
+
+		for (Relationship relationship : relations) {
+			neighbors.add(relationship.getEndNode());
+		}
+
+		int connected = 0;
+		for (Node n : neighbors) {
+			for (Relationship r : n.getRelationships(Direction.OUTGOING)) {
+				Node end = r.getEndNode();
+				if (end != n && neighbors.contains(end)) {
+					connected++;
+				}
+			}
+		}
+		for (Label l : node.getLabels()) {
+			if (l.name().equals(STATION)) {
+				addClusteringCoefficient(connected, neighbors.size(), STATION);
+				return;
+			}
+		}
+		addClusteringCoefficient(connected, neighbors.size());
 	}
 
 	private void calculateNumberOfDegrees(ResourceIterable<Node> nodes) {
@@ -105,8 +153,7 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 			changeNumberOfDegrees(EdgeDirection.BOTH, currentDegree, roundedDegree);
 
 			currentDegree = node.getDegree(Direction.OUTGOING);
-			changeNumberOfDegrees(EdgeDirection.OUTGOING, currentDegree,
-					roundedOutgoingDegree);
+			changeNumberOfDegrees(EdgeDirection.OUTGOING, currentDegree, roundedOutgoingDegree);
 		}
 	}
 

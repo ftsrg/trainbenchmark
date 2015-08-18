@@ -14,25 +14,46 @@ package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-public class HigherDegreeDistributionMetric extends Metric {
+import java.util.List;
 
-	public HigherDegreeDistributionMetric(EdgeDirection direction) {
-		super(direction);
+public class AverageClusteringCoefficientMetric extends Metric {
 
+	private String type;
+
+	public AverageClusteringCoefficientMetric(String type) {
+		super(EdgeDirection.OUTGOING);
+		this.type = type;
+	}
+
+	public AverageClusteringCoefficientMetric() {
+		super(EdgeDirection.OUTGOING);
+		type = null;
 	}
 
 	@Override
 	public void calculate() {
-		metricValue = analyzer.getNumberOfHigherDegree(direction)
-				/ analyzer.getNumberOfNodes(withOutgoingDegree);
+		List<Double> values;
+		if (type == null) {
+			values = analyzer.getClusteringCoefficients();
+		} else {
+			values = analyzer.getClusteringCoefficients(type);
+		}
+
+		double sumCoef = 0.0;
+		for (Double coef : values) {
+			sumCoef += coef;
+		}
+		metricValue = sumCoef / values.size();
+
 	}
 
 	@Override
 	protected String getIdentifier() {
-		if (direction == EdgeDirection.BOTH) {
-			return "HigherDegree";
+		if (type == null) {
+			return "AvgClustering";
 		} else {
-			return "HigherOutgoingDegree";
+			return "AvgClustering" + type;
 		}
 	}
+
 }

@@ -23,7 +23,7 @@ public abstract class Transformation<O> {
 
 	protected static boolean hasTransformation(final ScenarioConstants scenario) {
 		switch (scenario) {
-		case ANALYSIS:
+		case ANALYZE:
 			return false;
 		case BATCH:
 			return false;

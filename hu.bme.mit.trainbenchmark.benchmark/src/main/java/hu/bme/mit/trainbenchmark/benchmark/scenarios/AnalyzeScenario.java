@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.AnalyzerInitializationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 
-public class AnalysisScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
+public class AnalyzeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {
@@ -35,7 +35,7 @@ public class AnalysisScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public String getName() {
-		return "Analysis";
+		return "Analyze";
 	}
 
 }

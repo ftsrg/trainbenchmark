@@ -18,8 +18,8 @@ public class ScenarioFactory {
 
 	public static Scenario<?> getScenario(final ScenarioConstants scenarioName) {
 		switch (scenarioName) {
-		case ANALYSIS:
-			return new AnalysisScenario();
+		case ANALYZE:
+			return new AnalyzeScenario();
 		case BATCH:
 			return new BatchScenario();
 		case DESCRIBE:

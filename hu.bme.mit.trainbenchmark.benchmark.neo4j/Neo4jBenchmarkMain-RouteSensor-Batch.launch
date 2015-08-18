@@ -8,7 +8,7 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkMain"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-size 1 -query RouteSensor -scenario Describe -model Schedule-Scale-Free -analyze"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-size 1 -query RouteSensor -scenario Analyze -model Schedule-Scale-Free -analyze"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="hu.bme.mit.trainbenchmark.benchmark.neo4j"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
 </launchConfiguration>

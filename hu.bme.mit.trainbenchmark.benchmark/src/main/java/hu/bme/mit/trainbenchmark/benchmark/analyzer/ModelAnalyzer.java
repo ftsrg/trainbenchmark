@@ -28,6 +28,9 @@ import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import eu.mondo.sam.core.metrics.BenchmarkMetric;
 
@@ -59,6 +62,10 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	private double numberOfHigherOutgoingDegree;
 
+	private Map<String, List<Double>> clusteringCoefficients;
+
+	private String ALL = "All";
+
 	public ModelAnalyzer(D driver) {
 		super(driver);
 	}
@@ -84,6 +91,12 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 		metrics.add(new DensityMetric(BOTH));
 		metrics.add(new DensityMetric(OUTGOING));
+
+		clusteringCoefficients = new HashMap<String, List<Double>>();
+
+		for (BenchmarkMetric m : metrics) {
+			((Metric) m).initName();
+		}
 	}
 
 	@Override
@@ -100,6 +113,8 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		numberOfAverageOutgoingDegree = 0;
 		numberOfHigherDegree = 0;
 		numberOfHigherOutgoingDegree = 0;
+
+		clusteringCoefficients.clear();
 
 	}
 
@@ -165,6 +180,28 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		BigDecimal roundedDegree = new BigDecimal(getAverageDegree(direction));
 		roundedDegree = roundedDegree.setScale(0, RoundingMode.HALF_UP);
 		return roundedDegree.intValue();
+	}
+
+	protected void addClusteringCoefficient(final int connectedNeighbors, final int numberOfNeighbors,
+			final String type) {
+		if (!clusteringCoefficients.containsKey(type)) {
+			clusteringCoefficients.put(type, new ArrayList<Double>());
+		}
+		if (numberOfNeighbors == 1) {
+			return;
+		}
+		double coef = connectedNeighbors / numberOfNeighbors;
+		coef /= (numberOfNeighbors - 1);
+		clusteringCoefficients.get(type).add(coef);
+
+		if (!type.equals(ALL)) {
+			addClusteringCoefficient(connectedNeighbors, numberOfNeighbors, ALL);
+		}
+
+	}
+
+	protected void addClusteringCoefficient(final int connectedNeighbors, final int numberOfNeighbors) {
+		addClusteringCoefficient(connectedNeighbors, numberOfNeighbors, ALL);
 	}
 
 	public double getNumberOfNodes(final boolean withOutgoingDegree) {
@@ -234,4 +271,15 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		}
 	}
 
+	public List<Double> getClusteringCoefficients() {
+		return getClusteringCoefficients(ALL);
+	}
+
+	public List<Double> getClusteringCoefficients(final String type) {
+		if (!clusteringCoefficients.containsKey(type)) {
+			throw new RuntimeException("Key is not found in the clusteringCoefficients Map: "
+					+ type);
+		}
+		return clusteringCoefficients.get(type);
+	}
 }

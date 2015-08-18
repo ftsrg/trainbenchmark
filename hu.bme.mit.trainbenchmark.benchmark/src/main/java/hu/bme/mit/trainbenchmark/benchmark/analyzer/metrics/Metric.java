@@ -27,7 +27,6 @@ public abstract class Metric extends BenchmarkMetric {
 	protected boolean withOutgoingDegree;
 
 	public Metric(EdgeDirection direction) {
-		metricName = getIdentifier();
 		this.direction = direction;
 		withOutgoingDegree = (direction == EdgeDirection.OUTGOING);
 	}
@@ -35,6 +34,10 @@ public abstract class Metric extends BenchmarkMetric {
 	public abstract void calculate();
 
 	protected abstract String getIdentifier();
+
+	public void initName() {
+		metricName = getIdentifier();
+	}
 
 	public static ModelAnalyzer<?> getAnalyzer() {
 		return analyzer;
