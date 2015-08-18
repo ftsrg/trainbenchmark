@@ -17,11 +17,13 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.util.ArrayList;
 
+import eu.mondo.sam.core.metrics.BenchmarkMetric;
+
 public abstract class Analyzer<D extends Driver<?>> {
 
 	protected D driver;
 
-	protected ArrayList<Metric> metrics;
+	protected ArrayList<BenchmarkMetric> metrics;
 
 	public Analyzer(D driver) {
 		this.driver = driver;
@@ -29,8 +31,8 @@ public abstract class Analyzer<D extends Driver<?>> {
 
 	public void calculateAll() {
 		calculateMetrics();
-		for (Metric m : metrics) {
-			m.calculate();
+		for (BenchmarkMetric m : metrics) {
+			((Metric) m).calculate();
 		}
 	}
 
@@ -40,11 +42,11 @@ public abstract class Analyzer<D extends Driver<?>> {
 
 	public abstract void resetMetrics();
 
-	public ArrayList<Metric> getMetrics() {
+	public ArrayList<BenchmarkMetric> getMetrics() {
 		return metrics;
 	}
 
-	public void setMetrics(ArrayList<Metric> metrics) {
+	public void setMetrics(ArrayList<BenchmarkMetric> metrics) {
 		this.metrics = metrics;
 	}
 

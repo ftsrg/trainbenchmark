@@ -27,6 +27,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
+import eu.mondo.sam.core.metrics.BenchmarkMetric;
+
 public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	protected double numberOfNodes;
@@ -62,7 +64,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 	@Override
 	public void initializeMetrics() {
 		if (metrics == null) {
-			metrics = new ArrayList<Metric>();
+			metrics = new ArrayList<BenchmarkMetric>();
 		}
 		Metric.setAnalyzer(this);
 		metrics.add(new NumberOfNodesMetric("NumOfNodes"));
@@ -77,8 +79,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 				EdgeDirection.OUTGOING));
 
 		metrics.add(new HigherDegreeDistributionMetric("HigherDegree", EdgeDirection.BOTH));
-		metrics.add(new HigherDegreeDistributionMetric("HigherOutgoingDegree",
-				EdgeDirection.OUTGOING));
+		metrics.add(new HigherDegreeDistributionMetric("HigherOutgoingDegree", EdgeDirection.OUTGOING));
 
 		metrics.add(new DensityMetric("Density", EdgeDirection.BOTH));
 		metrics.add(new DensityMetric("DensityWithOutgoing", EdgeDirection.OUTGOING));

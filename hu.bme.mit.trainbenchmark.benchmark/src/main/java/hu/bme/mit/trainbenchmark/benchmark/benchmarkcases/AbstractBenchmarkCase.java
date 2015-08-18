@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.Analyzer;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
@@ -95,8 +94,8 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 		timer.stopMeasure();
 
 		phaseResult.addMetrics(timer);
-		for (Metric m : analyzer.getMetrics()) {
-			phaseResult.addMetrics((BenchmarkMetric) m);
+		for (BenchmarkMetric m : analyzer.getMetrics()) {
+			phaseResult.addMetrics(m);
 		}
 
 	}

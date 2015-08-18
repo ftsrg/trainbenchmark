@@ -13,13 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DegreeDistribution;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import eu.mondo.sam.core.metrics.BenchmarkMetric;
+import eu.mondo.sam.core.metrics.CompositeMetric;
 
 public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> {
 
@@ -39,7 +41,7 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	public void initializeMetrics() {
 		degreeDistributions = new HashMap<>();
 		if (metrics == null) {
-			metrics = new ArrayList<Metric>();
+			metrics = new ArrayList<BenchmarkMetric>();
 		}
 
 	}
@@ -54,13 +56,16 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	public void calculateAll() {
 		calculateMetrics();
 		for (String type : degreeDistributions.keySet()) {
+			System.out.println(type);
+			CompositeMetric compositeMetric = new CompositeMetric(type);
 			for (Entry<Integer, Double> entry : degreeDistributions.get(type).entrySet()) {
-				metrics.add(new DegreeDistribution(entry));
+				compositeMetric.addMetric(new DegreeDistribution(entry));
 			}
+			metrics.add(compositeMetric);
 		}
 	}
 
-	protected void addDegree(String type, int degree) {
+	protected void addDegree(final String type, final int degree) {
 		if (!degreeDistributions.containsKey(type)) {
 			degreeDistributions.put(type, new HashMap<Integer, Double>());
 		}
