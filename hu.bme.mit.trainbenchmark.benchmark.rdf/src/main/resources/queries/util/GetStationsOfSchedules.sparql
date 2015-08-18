@@ -1,12 +1,10 @@
 PREFIX  base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT  ?schedule ?p ?station
+SELECT  ?schedule ?station
 WHERE
   { 
     { ?schedule rdf:type base:Schedule}
     { ?station rdf:type base:Station}
-    { ?schedule ?p ?station
-      FILTER ( ?p != base:destinations )
-    }
+    { ?schedule ?p ?station}
   }
