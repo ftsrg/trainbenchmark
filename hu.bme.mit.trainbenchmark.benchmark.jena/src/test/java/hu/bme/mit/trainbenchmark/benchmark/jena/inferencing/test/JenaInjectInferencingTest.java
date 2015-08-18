@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.test;
+package hu.bme.mit.trainbenchmark.benchmark.jena.inferencing.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class JenaInjectTest extends InjectTest {
+public class JenaInjectInferencingTest extends InjectTest {
 
-	public JenaInjectTest() {
-		bi = new JenaBenchmarkInitializer();
+	public JenaInjectInferencingTest() {
+		bi = new JenaBenchmarkInferencingInitializer();
 	}
 
 }

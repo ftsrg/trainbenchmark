@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.test.noinferencing;
+package hu.bme.mit.trainbenchmark.benchmark.jena.noinferencing.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class SesameBatchNoInferencingTest extends BatchTest {
+public class JenaBatchNoInferencingTest extends BatchTest {
 
-	public SesameBatchNoInferencingTest() {
-		bi = new SesameBenchmarkNoInferencingInitializer();
+	public JenaBatchNoInferencingTest() {
+		bi = new JenaBenchmarkNoInferencingInitializer();
 	}
 
 }

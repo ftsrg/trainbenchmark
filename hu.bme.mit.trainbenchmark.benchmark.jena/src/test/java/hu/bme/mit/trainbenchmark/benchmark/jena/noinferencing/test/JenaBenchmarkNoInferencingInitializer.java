@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.test;
+package hu.bme.mit.trainbenchmark.benchmark.jena.noinferencing.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
@@ -18,12 +18,12 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class JenaBenchmarkInitializer extends TestBenchmarkInitializer<JenaBenchmarkLogic> {
+public class JenaBenchmarkNoInferencingInitializer extends TestBenchmarkInitializer<JenaBenchmarkLogic> {
 
 	@Override
 	protected JenaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount, modificationMethod,
-				modificationConstant);
+				modificationConstant, false);
 		return new JenaBenchmarkLogic(rbc);
 	}
 

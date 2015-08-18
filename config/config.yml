@@ -1,5 +1,5 @@
 minsize: 1
-maxsize: 2
+maxsize: 1
 java_opts:
   xmx: 2G
 
@@ -19,18 +19,18 @@ queries:
 #- SwitchSensor
 
 scenarios:
-#- Batch
+- Batch
 - Inject
 - Repair
 
 tools:
-#- drools5
+- drools5
 #- drools6
-#- emfapi
+- emfapi
 #- emfincquery
 #- jena
-#- mysql
-#- neo4j
+- mysql
+- neo4j
 - sesame
 
 # optional arguments. for example, neo4j is invoked with and without the javaapi argument as well.

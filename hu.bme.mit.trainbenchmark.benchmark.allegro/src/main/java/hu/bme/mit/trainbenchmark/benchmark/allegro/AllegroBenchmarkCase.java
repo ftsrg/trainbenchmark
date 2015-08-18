@@ -28,7 +28,7 @@ public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 		this.rdfbc = (RDFBenchmarkConfig) bc;
 
 		driver = sesameDriver = new AllegroDriver(rdfbc);
-		checker = new SesameChecker(sesameDriver, bc);
+		checker = new SesameChecker(sesameDriver, rdfbc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());

@@ -31,7 +31,7 @@ public abstract class SQLDriver extends Driver<Long> {
 	protected PreparedStatement preparedQuery;
 
 	@Override
-	public String getExtension() {
+	public String getPostfix() {
 		return ".sql";
 	}
 

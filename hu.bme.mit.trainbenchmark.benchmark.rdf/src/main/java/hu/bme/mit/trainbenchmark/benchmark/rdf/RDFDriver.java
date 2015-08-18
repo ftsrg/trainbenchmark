@@ -14,13 +14,20 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_TYPE;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 import java.io.IOException;
 
-public abstract class RDFDatabaseDriver<T> extends Driver<T> {
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+
+public abstract class RDFDriver<T> extends Driver<T> {
 
 	protected Long newVertexId = null;
+	protected RDFBenchmarkConfig rdfbc;
+
+	public RDFDriver(final RDFBenchmarkConfig rdfbc) {
+		super();
+		this.rdfbc = rdfbc;
+	}
 
 	protected Long determineNewVertexId() throws Exception {
 		Long id = 5000L;
@@ -51,8 +58,12 @@ public abstract class RDFDatabaseDriver<T> extends Driver<T> {
 	}
 
 	@Override
-	public String getExtension() {
-		return ".ttl";
+	public String getPostfix() {
+		if (rdfbc.isInferencing()) {
+			return "-metamodel.ttl";
+		} else {
+			return ".ttl";
+		}
 	}
 
 	protected abstract boolean ask(String askQuery) throws Exception;

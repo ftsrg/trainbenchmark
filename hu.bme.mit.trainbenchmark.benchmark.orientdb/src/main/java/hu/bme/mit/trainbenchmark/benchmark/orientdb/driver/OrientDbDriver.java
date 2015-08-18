@@ -150,7 +150,7 @@ public class OrientDbDriver extends Driver<Vertex> {
 	}
 
 	@Override
-	public String getExtension() {
+	public String getPostfix() {
 		return ".graphml";
 	}
 

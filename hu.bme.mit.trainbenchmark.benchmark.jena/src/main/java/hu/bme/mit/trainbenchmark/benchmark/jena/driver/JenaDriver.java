@@ -12,9 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDatabaseDriver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,16 +36,25 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class JenaDriver extends RDFDatabaseDriver<Resource> {
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
+
+public class JenaDriver extends RDFDriver<Resource> {
 
 	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Model model;
 	protected Comparator<Statement> statementComparator = new StatemetComparator();
 
+	public JenaDriver(final RDFBenchmarkConfig rdfbc) {
+		super(rdfbc);
+	}
+
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
 		model = ModelFactory.createDefaultModel();
-		model.read(modelPathWithoutExtension + getExtension());
+		model.read(modelPathWithoutExtension + getPostfix());
 	}
 
 	@Override

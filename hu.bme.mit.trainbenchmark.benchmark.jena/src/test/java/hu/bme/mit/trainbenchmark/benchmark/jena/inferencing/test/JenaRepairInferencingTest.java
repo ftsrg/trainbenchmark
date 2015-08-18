@@ -10,14 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.test.inferencing;
+package hu.bme.mit.trainbenchmark.benchmark.jena.inferencing.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class SesameInjectInferencingTest extends InjectTest {
+public class JenaRepairInferencingTest extends RepairTest {
 
-	public SesameInjectInferencingTest() {
-		bi = new SesameBenchmarkInferencingInitializer();
+	public JenaRepairInferencingTest() {
+		bi = new JenaBenchmarkInferencingInitializer();
 	}
 
 }

@@ -39,7 +39,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		RailwayPackage.eINSTANCE.eClass();
-		final String modelPath = modelPathWithoutExtension + "." + getExtension();
+		final String modelPath = modelPathWithoutExtension + "." + getPostfix();
 
 		final URI resourceURI = FileBroker.getEMFUri(modelPath);
 		final ResourceSet resourceSet = new ResourceSetImpl();
@@ -51,7 +51,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 	}
 
 	@Override
-	public String getExtension() {
+	public String getPostfix() {
 		return "emf";
 	}
 
