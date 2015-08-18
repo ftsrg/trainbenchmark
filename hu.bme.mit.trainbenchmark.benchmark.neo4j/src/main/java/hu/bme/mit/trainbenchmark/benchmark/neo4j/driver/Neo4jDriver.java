@@ -94,16 +94,33 @@ public class Neo4jDriver extends Driver<Node> {
 	@Override
 	public void read(final String filePath) throws XMLStreamException, IOException {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
-		try (Transaction tx = graphDb.beginTx()) {
-			if (benchmarkConfig.getModelType() == SCHEDULE_REAL) {
-				try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath
-						+ ".cypher")))) {
-					String line;
-					while ((line = br.readLine()) != null) {
-						graphDb.execute(line);
+
+		if (benchmarkConfig.getModelType() == SCHEDULE_REAL) {
+			try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath
+					+ ".cypher")))) {
+				String line;
+				int count = 0;
+				Transaction tx = graphDb.beginTx();
+				while ((line = br.readLine()) != null) {
+					if (count == 0) {
+						tx = graphDb.beginTx();
 					}
+					graphDb.execute(line);
+					count++;
+					if (count == 100_000) {
+						tx.success();
+						tx.close();
+						count = 0;
+					}
+
 				}
-			} else {
+				if (count != 0) {
+					tx.success();
+					tx.close();
+				}
+			}
+		} else {
+			try (Transaction tx = graphDb.beginTx()) {
 				final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 				xmlGraphMLReader.nodeLabels(true);
 				xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath
