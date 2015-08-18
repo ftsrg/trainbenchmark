@@ -40,6 +40,8 @@ import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
 
 public class GraphGenerator extends Generator {
 
+	protected String databasePath;
+
 	public GraphGenerator(final String args[]) throws ParseException {
 		super();
 		generatorConfig = graphGeneratorConfig = new GraphGeneratorConfig(args);
@@ -57,8 +59,7 @@ public class GraphGenerator extends Generator {
 	@Override
 	protected void initModel() throws IOException {
 		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
-		final String databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension()
-				+ ".neo4j";
+		databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
@@ -167,6 +168,11 @@ public class GraphGenerator extends Generator {
 			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
 		} finally {
 			graphDb.shutdown();
+
+			// cleanup: delete the database directory
+			if (new File(databasePath).exists()) {
+				FileUtils.deleteDirectory(new File(databasePath));
+			}
 		}
 	}
 
