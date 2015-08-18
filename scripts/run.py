@@ -73,13 +73,13 @@ def measure(config):
             for scenario in config["scenarios"]:
                 for query in config["queries"]:
                     for size in config["sizes"]:
-                        print("Run benchmark -- " +
+                        print("Running benchmark... " +
                               "runs: " + str(config["runs"]) +
                               ", tool: " + tool +
                               ", scenario: " + scenario +
                               ", query: " + query +
                               ", size: " + str(size) +
-                              (", arg: " + arg if arg != "" else ""))
+                              (", argument: " + arg if arg != "" else ""))
                         cmd = ["java", "-Xmx" + config["java_opts"]["xmx"], "-jar", target,
                                "-runs", str(config["runs"]),
                                "-scenario", scenario,
@@ -87,7 +87,7 @@ def measure(config):
                                "-size", str(size),
                                arg]
                         try:
-                            subprocess.check_call(cmd)
+                            subprocess.check_output(cmd, timeout=config["timeout"])
                         except subprocess.TimeoutExpired:
                             print("Timeout, skipping larger sizes for this tool/scenario/query.")
                             break
