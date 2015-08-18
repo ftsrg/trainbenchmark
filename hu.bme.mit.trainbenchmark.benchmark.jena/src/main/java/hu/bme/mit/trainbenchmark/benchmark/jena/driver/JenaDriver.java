@@ -34,6 +34,8 @@ import com.hp.hpl.jena.rdf.model.Selector;
 import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
@@ -53,8 +55,17 @@ public class JenaDriver extends RDFDriver<Resource> {
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException {
-		model = ModelFactory.createDefaultModel();
-		model.read(modelPathWithoutExtension + getPostfix());
+		final String modelPath = modelPathWithoutExtension + getPostfix();
+		final Model defaultModel = ModelFactory.createDefaultModel();
+		defaultModel.read(modelPath);
+
+		// run inferencing if required
+		if (rdfbc.isInferencing()) {
+			final Reasoner reasoner = ReasonerRegistry.getRDFSSimpleReasoner();
+			model = ModelFactory.createInfModel(reasoner, defaultModel);
+		} else {
+			model = defaultModel;
+		}
 	}
 
 	@Override

@@ -42,6 +42,7 @@ public class JenaChecker extends RDFChecker<JenaMatch> {
 	@Override
 	public Collection<JenaMatch> check() throws IOException {
 		final List<JenaMatch> matches = new ArrayList<>();
+
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(jenaQuery, jenaDriver.getModel())) {
 			final ResultSet resultSet = queryExecution.execSelect();
 

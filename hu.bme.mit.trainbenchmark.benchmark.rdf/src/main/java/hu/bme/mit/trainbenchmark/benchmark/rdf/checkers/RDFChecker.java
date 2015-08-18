@@ -26,7 +26,6 @@ public abstract class RDFChecker<M> extends Checker<M> {
 		query = rdfbc.getQuery();
 
 		final String queryDirectory = rdfbc.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/";
-
 		final String inferencingQueryPath = queryDirectory + rdfbc.getQuery() + "-inferencing.sparql";
 		final String noInferencingQueryPath = queryDirectory + rdfbc.getQuery() + ".sparql";
 

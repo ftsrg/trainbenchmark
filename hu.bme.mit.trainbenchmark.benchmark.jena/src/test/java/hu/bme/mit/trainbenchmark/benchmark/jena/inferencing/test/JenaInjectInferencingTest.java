@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
+ * Benedek Izso - initial API and implementation
+ * Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.inferencing.test;

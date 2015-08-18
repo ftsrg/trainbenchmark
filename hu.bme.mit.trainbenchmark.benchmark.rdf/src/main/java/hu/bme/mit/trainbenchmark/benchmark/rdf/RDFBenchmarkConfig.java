@@ -28,9 +28,9 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 		super(args, className);
 	}
 
-	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex,
-			final Query query, final int iterationCount, final ModificationMethod modificationMethod,
-			final long modificationConstant, final boolean inferencing) {
+	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex, final Query query,
+			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant,
+			final boolean inferencing) {
 		super(className, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 		this.inferencing = inferencing;
 	}
@@ -51,5 +51,10 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	public boolean isInferencing() {
 		return inferencing;
+	}
+
+	@Override
+	public String getTool() {
+		return super.getTool() + (isInferencing() ? "-inferencing" : "");
 	}
 }
