@@ -134,9 +134,10 @@ if __name__ == "__main__":
     # with the test and the visualization/reporting
     no_args = all(val is False for val in vars(args).values())
     if no_args:
-        #args.build = True
+        args.build = True
         args.generate = True
-        #args.measure = True
+        args.measure = True
+    
     if args.ci:
         build_ci()
     if args.build:
