@@ -63,7 +63,7 @@ def measure(config):
     for tool in config["tools"]:
         args = [""]
         if tool in config["benchmark_optional_arguments"]:
-            args.append("-" + config["benchmark_optional_arguments"]["rdf"][0])
+            args.append("-" + config["benchmark_optional_arguments"][tool][0])
 
         for arg in args:
             path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
