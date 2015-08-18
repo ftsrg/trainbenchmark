@@ -125,8 +125,8 @@ public class Neo4jDriver extends Driver<Node> {
 				xmlGraphMLReader.nodeLabels(true);
 				xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath
 						+ getExtension())), MapNodeCache.usingHashMap());
+				tx.success();
 			}
-			tx.success();
 		}
 	}
 
