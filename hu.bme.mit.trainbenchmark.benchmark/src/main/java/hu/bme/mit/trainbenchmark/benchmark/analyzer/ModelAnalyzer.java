@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
 import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.OUTGOING;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageClusteringCoefficientMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DensityMetric;
@@ -24,6 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfEdgesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfNodesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -92,6 +94,8 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		metrics.add(new DensityMetric(BOTH));
 		metrics.add(new DensityMetric(OUTGOING));
 
+		metrics.add(new AverageClusteringCoefficientMetric());
+		metrics.add(new AverageClusteringCoefficientMetric(ScheduleConstants.STATION));
 		clusteringCoefficients = new HashMap<String, List<Double>>();
 
 		for (BenchmarkMetric m : metrics) {
@@ -276,10 +280,6 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 	}
 
 	public List<Double> getClusteringCoefficients(final String type) {
-		if (!clusteringCoefficients.containsKey(type)) {
-			throw new RuntimeException("Key is not found in the clusteringCoefficients Map: "
-					+ type);
-		}
 		return clusteringCoefficients.get(type);
 	}
 }

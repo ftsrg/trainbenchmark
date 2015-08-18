@@ -14,10 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageClusteringCoefficientMetric;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
-import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -59,18 +57,6 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 
 	public GlobalGraphOperations getGraphOperations() {
 		return graphOperations;
-	}
-
-	@Override
-	public void initializeMetrics() {
-		super.initializeMetrics();
-		AverageClusteringCoefficientMetric cluster = new AverageClusteringCoefficientMetric();
-		AverageClusteringCoefficientMetric clusterWithType = new AverageClusteringCoefficientMetric(
-				ScheduleConstants.STATION);
-		cluster.initName();
-		clusterWithType.initName();
-		metrics.add(cluster);
-		metrics.add(clusterWithType);
 	}
 
 	@Override

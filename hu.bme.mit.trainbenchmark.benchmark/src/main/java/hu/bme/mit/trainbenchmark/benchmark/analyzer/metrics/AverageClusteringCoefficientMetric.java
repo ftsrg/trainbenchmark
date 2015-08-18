@@ -39,6 +39,10 @@ public class AverageClusteringCoefficientMetric extends Metric {
 			values = analyzer.getClusteringCoefficients(type);
 		}
 
+		if (values == null) {
+			metricValue = 0;
+			return;
+		}
 		double sumCoef = 0.0;
 		for (Double coef : values) {
 			sumCoef += coef;
