@@ -22,11 +22,11 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 	public MySQLBenchmarkCase() {
 		super();
-		driver = sqlDriver = new MySQLDriver();
 	}
 
 	@Override
 	public void init() throws Exception {
+		driver = sqlDriver = new MySQLDriver();
 		MySQLProcess.startSQLProcess();
 
 		checker = new SQLChecker(sqlDriver, bc);
