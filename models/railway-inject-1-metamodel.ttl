@@ -28,6 +28,16 @@
 
 
 
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##currentPosition
+
+:currentPosition rdf:type owl:ObjectProperty ;
+          
+          rdfs:range :Position ;
+          
+          rdfs:domain :Switch .
+
+
+
 ###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##definedBy
 
 :definedBy rdf:type owl:ObjectProperty ;
@@ -86,8 +96,7 @@
           
           rdfs:range :Position ;
           
-          rdfs:domain :Switch ,
-                      :SwitchPosition .
+          rdfs:domain :SwitchPosition .
 
 
 
