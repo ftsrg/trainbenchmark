@@ -56,7 +56,6 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	public void calculateAll() {
 		calculateMetrics();
 		for (String type : degreeDistributions.keySet()) {
-			System.out.println(type);
 			CompositeMetric compositeMetric = new CompositeMetric(type);
 			for (Entry<Integer, Double> entry : degreeDistributions.get(type).entrySet()) {
 				compositeMetric.addMetric(new DegreeDistribution(entry));

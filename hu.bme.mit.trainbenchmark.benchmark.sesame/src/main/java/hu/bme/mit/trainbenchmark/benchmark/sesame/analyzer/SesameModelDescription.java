@@ -13,7 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATIONS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULES;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelDescription;
@@ -41,6 +43,8 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 	protected String getDegreesTrainsQuery;
 	protected String getDegreesSchedulesQuery;
 	protected String getDegreesAssociationsQuery;
+	protected String getDegreesTrainsToSchedulesQuery;
+	protected String getDegreesTrainsToAssociationsQuery;
 
 	private RepositoryConnection connection;
 
@@ -56,6 +60,8 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 		calculateDegrees(TRAIN);
 		calculateDegrees(SCHEDULE);
 		calculateDegrees(ASSOCIATION);
+		calculateDegrees(ASSOCIATIONS);
+		calculateDegrees(SCHEDULES);
 
 	}
 
@@ -86,6 +92,10 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 			return getDegreesSchedulesQuery;
 		case ASSOCIATION:
 			return getDegreesAssociationsQuery;
+		case ASSOCIATIONS:
+			return getDegreesTrainsToAssociationsQuery;
+		case SCHEDULES:
+			return getDegreesTrainsToSchedulesQuery;
 		default:
 			throw new IllegalArgumentException("Unsupported query type!");
 		}
@@ -100,6 +110,10 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfSchedules.sparql";
 		String getDegreesAssociationsPath = benchmarkConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfAssociations.sparql";
+		String getDegreesTrainsToSchedulesPath = benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfTrainsToSchedules.sparql";
+		String getDegreesTrainsToAssociationsPath = benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/util/GetDegreesOfTrainsToAssociations.sparql";
 		try {
 			getDegreesStationsQuery = FileUtils
 					.readFileToString(new File(getDegreesStationsPath));
@@ -108,6 +122,11 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 					getDegreesSchedulesPath));
 			getDegreesAssociationsQuery = FileUtils.readFileToString(new File(
 					getDegreesAssociationsPath));
+			getDegreesTrainsToSchedulesQuery = FileUtils.readFileToString(new File(
+					getDegreesTrainsToSchedulesPath));
+			getDegreesTrainsToAssociationsQuery = FileUtils.readFileToString(new File(
+					getDegreesTrainsToAssociationsPath));
+
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
