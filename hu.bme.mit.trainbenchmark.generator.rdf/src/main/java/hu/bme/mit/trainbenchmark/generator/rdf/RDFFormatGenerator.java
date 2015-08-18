@@ -85,8 +85,8 @@ public class RDFFormatGenerator extends FormatGenerator {
 				continue;
 			}
 
-			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX,
-					outgoingEdge.getValue());
+			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(),
+					ID_PREFIX, outgoingEdge.getValue());
 			vertex.append(edgeTriple);
 		}
 
@@ -106,7 +106,8 @@ public class RDFFormatGenerator extends FormatGenerator {
 		if (from == null || to == null) {
 			return;
 		}
-		final String triple = String.format(":%s%s :%s :%s%s .", ID_PREFIX, from, label, ID_PREFIX, to);
+		final String triple = String.format(":%s%s :%s :%s%s .", ID_PREFIX, from, label, ID_PREFIX,
+				to);
 		write(triple);
 	}
 
@@ -120,6 +121,9 @@ public class RDFFormatGenerator extends FormatGenerator {
 	private String stringValue(final Object value) {
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^xsd:int", value);
+		}
+		if (value instanceof String) {
+			return String.format("\"%s\"^^xsd:string", value);
 		}
 		if (value instanceof Enum<?>) {
 			final Enum<?> e = (Enum<?>) value;
