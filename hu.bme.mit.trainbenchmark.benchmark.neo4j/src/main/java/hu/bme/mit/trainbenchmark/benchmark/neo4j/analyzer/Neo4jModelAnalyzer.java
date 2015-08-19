@@ -14,17 +14,26 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.AverageShortestPathMetric;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
+import org.neo4j.graphalgo.GraphAlgoFactory;
+import org.neo4j.graphalgo.PathFinder;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Path;
+import org.neo4j.graphdb.PathExpanders;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.Transaction;
@@ -37,6 +46,8 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 	protected GlobalGraphOperations graphOperations;
 
 	protected Transaction tx;
+
+	protected AverageShortestPathMetric shortestPathMetric;
 
 	public Neo4jModelAnalyzer(Neo4jDriver driver) {
 		super(driver);
@@ -51,12 +62,18 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 		tx.close();
 	}
 
-	public GraphDatabaseService getDatabase() {
-		return database;
+	@Override
+	public void initializeMetrics() {
+		super.initializeMetrics();
+		shortestPathMetric = new AverageShortestPathMetric();
+		shortestPathMetric.initName();
+		metrics.add(shortestPathMetric);
 	}
 
-	public GlobalGraphOperations getGraphOperations() {
-		return graphOperations;
+	@Override
+	public void resetMetrics() {
+		super.resetMetrics();
+		shortestPathMetric.clear();
 	}
 
 	@Override
@@ -71,10 +88,17 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 		Iterator<Node> iterator = nodes.iterator();
 
 		Node node;
+		List<Long> stations = new ArrayList<>();
 		while (iterator.hasNext()) {
 			numberOfNodes++;
 
 			node = iterator.next();
+
+			for (Label l : node.getLabels()) {
+				if (l.name().equals(STATION)) {
+					stations.add(node.getId());
+				}
+			}
 
 			currentDegree = node.getDegree(Direction.BOTH);
 			changeMaximumDegree(EdgeDirection.BOTH, currentDegree);
@@ -88,6 +112,8 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 			changeMaximumDegree(EdgeDirection.OUTGOING, currentDegree);
 			numberOfEdges += currentDegree;
 		}
+
+		calculateShortestPaths(stations);
 
 		calculateNumberOfDegrees(nodes);
 
@@ -119,6 +145,35 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 			}
 		}
 		addClusteringCoefficient(connected, neighbors.size());
+	}
+
+	private void calculateShortestPaths(List<Long> stations) {
+		if (stations.size() == 0) {
+			return;
+		}
+		Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+		long sourceID;
+		long targetID;
+		Node sourceNode;
+		Node targetNode;
+		int i = 0;
+		while (i < 1000) {
+			sourceID = stations.get(random.nextInt(stations.size()));
+			targetID = stations.get(random.nextInt(stations.size()));
+			if (sourceID != targetID) {
+				sourceNode = database.getNodeById(sourceID);
+				targetNode = database.getNodeById(targetID);
+				PathFinder<Path> finder = GraphAlgoFactory.shortestPath(
+						PathExpanders.forDirection(Direction.OUTGOING),
+						shortestPathMetric.getMaxDepth());
+				Path path = finder.findSinglePath(sourceNode, targetNode);
+				if (path != null) {
+					shortestPathMetric.add(path.length());
+					i++;
+				}
+			}
+
+		}
 	}
 
 	private void calculateNumberOfDegrees(ResourceIterable<Node> nodes) {
