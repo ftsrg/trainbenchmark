@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics.AverageShortestPathMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageShortestPathMetric;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -60,20 +60,6 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 	public void finishTransaction() {
 		tx.success();
 		tx.close();
-	}
-
-	@Override
-	public void initializeMetrics() {
-		super.initializeMetrics();
-		shortestPathMetric = new AverageShortestPathMetric();
-		shortestPathMetric.initName();
-		metrics.add(shortestPathMetric);
-	}
-
-	@Override
-	public void resetMetrics() {
-		super.resetMetrics();
-		shortestPathMetric.clear();
 	}
 
 	@Override
@@ -157,7 +143,7 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 		Node sourceNode;
 		Node targetNode;
 		int i = 0;
-		while (i < 1000) {
+		while (i < shortestPathMetric.getPairs()) {
 			sourceID = stations.get(random.nextInt(stations.size()));
 			targetID = stations.get(random.nextInt(stations.size()));
 			if (sourceID != targetID) {

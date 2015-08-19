@@ -10,9 +10,8 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 import java.util.ArrayList;
@@ -24,10 +23,13 @@ public class AverageShortestPathMetric extends Metric {
 
 	private int maxDepth;
 
+	private int pairs;
+
 	public AverageShortestPathMetric() {
 		super(EdgeDirection.OUTGOING);
 		shortestPaths = new ArrayList<Integer>();
 		maxDepth = 50;
+		pairs = 1000;
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class AverageShortestPathMetric extends Metric {
 			metricValue = 0;
 			return;
 		}
-		int sum = 0;
+		double sum = 0.0;
 		for (Integer distance : shortestPaths) {
 			sum += distance;
 		}
@@ -64,6 +66,14 @@ public class AverageShortestPathMetric extends Metric {
 
 	public void setMaxDepth(int maxDepth) {
 		this.maxDepth = maxDepth;
+	}
+
+	public int getPairs() {
+		return pairs;
+	}
+
+	public void setPairs(int pairs) {
+		this.pairs = pairs;
 	}
 
 }

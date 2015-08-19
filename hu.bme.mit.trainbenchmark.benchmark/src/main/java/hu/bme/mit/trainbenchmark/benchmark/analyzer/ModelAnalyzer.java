@@ -17,6 +17,7 @@ import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.OUTGOING;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageClusteringCoefficientMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageShortestPathMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DensityMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.HigherDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeMetric;
@@ -64,6 +65,8 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	private double numberOfHigherOutgoingDegree;
 
+	protected AverageShortestPathMetric shortestPathMetric;
+
 	private Map<String, List<Double>> clusteringCoefficients;
 
 	private String ALL = "All";
@@ -97,6 +100,9 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		metrics.add(new AverageClusteringCoefficientMetric());
 		metrics.add(new AverageClusteringCoefficientMetric(ScheduleConstants.STATION));
 		clusteringCoefficients = new HashMap<String, List<Double>>();
+
+		shortestPathMetric = new AverageShortestPathMetric();
+		metrics.add(shortestPathMetric);
 
 		for (BenchmarkMetric m : metrics) {
 			((Metric) m).initName();

@@ -16,8 +16,16 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STA
 import hu.bme.mit.trainbenchmark.benchmark.rdf.analyzer.RDFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 
 import org.openrdf.model.Statement;
@@ -38,6 +46,7 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 
 	protected ValueFactory vf;
 	protected RepositoryConnection connection;
+	protected List<URI> stations;
 
 	public SesameModelAnalyzer(SesameDriver driver) {
 		super(driver);
@@ -47,6 +56,7 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 	public void calculateMetrics() {
 		connection = driver.getConnection();
 		vf = driver.getValueFactory();
+		stations = new ArrayList<URI>();
 		try {
 			TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, getTriples);
 			TupleQueryResult results = query.evaluate();
@@ -60,13 +70,15 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 			results = query.evaluate();
 			calculateNumberOfDegrees(results);
 
+			calculateShortestPaths();
+
 		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
 			throw new RuntimeException(e);
 		}
 
 	}
 
-	private void calculateDegrees(TupleQueryResult results) throws QueryEvaluationException,
+	protected void calculateDegrees(TupleQueryResult results) throws QueryEvaluationException,
 			RepositoryException, MalformedQueryException {
 		double degree = 0;
 		BindingSet set;
@@ -75,6 +87,7 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 			set = results.next();
 			degree = Double.parseDouble(set.getValue("outdegree").stringValue());
 			determineClustering(vf.createURI(set.getValue("x").stringValue()));
+			addStations(vf.createURI(set.getValue("x").stringValue()));
 			numberOfNodesWithOutgoingDegrees += degree > 0 ? 1 : 0;
 			numberOfNodes++;
 
@@ -87,21 +100,16 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 		calculateAverageDegree(EdgeDirection.OUTGOING);
 	}
 
-	private void determineClustering(final URI subject) throws RepositoryException,
+	protected void determineClustering(final URI subject) throws RepositoryException,
 			MalformedQueryException, QueryEvaluationException {
-		String queryString = buildNeighborQuery(subject);
-		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
-		TupleQueryResult result = query.evaluate();
 
 		Set<String> neighbors = new HashSet<>();
-		while (result.hasNext()) {
-			neighbors.add(result.next().getValue("o").stringValue());
-		}
-
+		neighbors = getNeighbors(subject);
 		if (neighbors.size() == 0) {
 			return;
 		}
 
+		TupleQueryResult result;
 		int connected = 0;
 		for (String n : neighbors) {
 			result = connection.prepareTupleQuery(QueryLanguage.SPARQL,
@@ -112,19 +120,105 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 				}
 			}
 		}
-		URI clazz;
-		RepositoryResult<Statement> types = connection.getStatements(subject, RDF.TYPE, null, false);
-		while (types.hasNext()) {
-			if (cutPrefix(types.next().getObject().stringValue()).equals(STATION)) {
-				addClusteringCoefficient(connected, neighbors.size(), STATION);
-				return;
-			}
+		if (isType(subject, STATION)) {
+			addClusteringCoefficient(connected, neighbors.size(), STATION);
+		} else {
+			addClusteringCoefficient(connected, neighbors.size());
 		}
-		addClusteringCoefficient(connected, neighbors.size());
 
 	}
 
-	private void calculateEdges(TupleQueryResult results) throws QueryEvaluationException {
+	protected void addStations(final URI subject) throws RepositoryException {
+		if (isType(subject, STATION)) {
+			stations.add(subject);
+		}
+	}
+
+	protected void calculateShortestPaths() throws QueryEvaluationException, RepositoryException,
+			MalformedQueryException {
+		if (stations.size() == 0) {
+			return;
+		}
+		Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+		int i = 0;
+		URI source;
+		URI target;
+		int length;
+		while (i < shortestPathMetric.getPairs()) {
+			source = stations.get(random.nextInt(stations.size()));
+			target = stations.get(random.nextInt(stations.size()));
+			if (source != target) {
+				length = determinePath(source, target);
+				if (length != 0) {
+					shortestPathMetric.add(length);
+					i++;
+				}
+			}
+		}
+	}
+
+	protected int determinePath(final URI source, final URI target) throws QueryEvaluationException,
+			RepositoryException, MalformedQueryException {
+		return determinePath(source, target, shortestPathMetric.getMaxDepth());
+	}
+
+	protected int determinePath(final URI source, final URI target, final int maxDepth)
+			throws QueryEvaluationException, RepositoryException, MalformedQueryException {
+		Queue<Entry<String, Integer>> queue = new LinkedList<>();
+		queue.add(new AbstractMap.SimpleEntry<String, Integer>(source.stringValue(), 0));
+		Entry<String, Integer> first;
+		Set<String> checked = new HashSet<>();
+
+		int depth;
+		String node;
+		while (!queue.isEmpty()) {
+			first = queue.poll();
+			depth = first.getValue();
+			node = first.getKey();
+			if (depth >= maxDepth) {
+				return 0;
+			}
+			if (node.equals(target.stringValue())) {
+				return depth;
+			}
+			checked.add(node);
+			for (String n : getNeighbors(vf.createURI(node))) {
+				if (n.equals(target.stringValue())) {
+					return depth + 1;
+				}
+				if (!checked.contains(n)) {
+					queue.add(new AbstractMap.SimpleEntry<String, Integer>(n, depth + 1));
+				}
+			}
+
+		}
+		return 0;
+	}
+
+	protected Set<String> getNeighbors(final URI source) throws QueryEvaluationException,
+			RepositoryException, MalformedQueryException {
+		String queryString = buildNeighborQuery(source);
+		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
+		TupleQueryResult result = query.evaluate();
+
+		Set<String> neighbors = new HashSet<>();
+		while (result.hasNext()) {
+			neighbors.add(result.next().getValue("o").stringValue());
+		}
+		return neighbors;
+	}
+
+	protected boolean isType(final URI subject, final String type) throws RepositoryException {
+		RepositoryResult<Statement> types = connection.getStatements(subject, RDF.TYPE, null, false);
+		while (types.hasNext()) {
+			if (cutPrefix(types.next().getObject().stringValue()).equals(type)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected void calculateEdges(TupleQueryResult results) throws QueryEvaluationException {
 		BindingSet set;
 		while (results.hasNext()) {
 			set = results.next();
@@ -143,7 +237,8 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 		return queryString;
 	}
 
-	private void calculateNumberOfDegrees(final TupleQueryResult results) throws QueryEvaluationException {
+	protected void calculateNumberOfDegrees(final TupleQueryResult results)
+			throws QueryEvaluationException {
 		BindingSet set;
 		double degree = 0;
 		int roundedDegree = roundAverageDegree(EdgeDirection.BOTH);
