@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageShortestPathMetric;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -46,8 +45,6 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 	protected GlobalGraphOperations graphOperations;
 
 	protected Transaction tx;
-
-	protected AverageShortestPathMetric shortestPathMetric;
 
 	public Neo4jModelAnalyzer(Neo4jDriver driver) {
 		super(driver);
