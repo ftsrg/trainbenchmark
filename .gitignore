@@ -17,3 +17,5 @@ results/
 .pydevproject
 deps/
 diagrams/*
+/analysis/*.png
+/analysis/*.json
