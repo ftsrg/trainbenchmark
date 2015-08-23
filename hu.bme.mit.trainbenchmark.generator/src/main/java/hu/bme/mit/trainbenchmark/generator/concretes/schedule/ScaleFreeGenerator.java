@@ -36,9 +36,6 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 	protected int sizeStep;
 
-	/**
-	 * The number of initially created isolated nodes. It must be higher than m.
-	 */
 	protected int initStations;
 
 	protected int maxNumberOfStations;
@@ -46,11 +43,6 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 	protected int maxNumberOfTrains;
 
 	protected int associationPercent;
-
-	/**
-	 * The number of edges that will be drawn for every new attached node.
-	 */
-	protected int m;
 
 	private int stationDegrees;
 
@@ -66,13 +58,12 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 	@Override
 	protected void initializeConstants() {
-		sizeStep = 40;
-		maxNodes = generatorConfig.getSize() * sizeStep;
-		m = 5;
-		maxNumberOfStations = 20;
-		maxNumberOfTrains = 10;
-		associationPercent = 20;
-		initStations = 5;
+		sizeStep = 5000;
+		maxNodes = (int) (sizeStep * Math.pow(2, generatorConfig.getSize() - 1));
+		maxNumberOfStations = (int) (maxNodes * 0.018);
+		maxNumberOfTrains = (int) (maxNodes * 0.3566);
+		associationPercent = 2;
+		initStations = 50;
 		stationDegrees = 0;
 		scheduleDegrees = 0;
 		stations = new ArrayList<Node>();
@@ -89,14 +80,16 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		while (nodes < maxNodes) {
 			if (stations.size() < maxNumberOfStations) {
 				addStation();
-				newStationConnections(NEIGHBORS, lastSt(), m);
+				newStationConnections(NEIGHBORS, lastSt(), getNeighborsNumber());
 			}
 			addSchedule();
-			newStationConnections(DESTINATIONS, lastSch(), m);
+			newStationConnections(DESTINATIONS, lastSch(), getDestinationsNumber());
 		}
 
 		transformStationConnections();
 		attachTrains();
+		stations.clear();
+		schedules.clear();
 		System.out.println("Done!");
 	}
 
@@ -149,7 +142,8 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 			if (node.conn.size() > 1) {
 				fg.createEdge(ORIGIN, node.obj, stations.get(node.conn.get(0)).obj);
 				for (int i = 1; i < node.conn.size() - 1; i++) {
-					fg.createEdge(DESTINATIONS, node.obj, stations.get(node.conn.get(i)).obj);
+					fg.createEdge(DESTINATIONS, node.obj,
+							stations.get(node.conn.get(i)).obj);
 				}
 				// make a terminal connection to the last element of connected stations (conn)
 				fg.createEdge(TERMINAL, node.obj, stations.get(node.lastConn()).obj);
@@ -182,7 +176,8 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 					}
 					outgoing.put(LOCATION, ((Node) getRandomElement(stations)).obj);
 					outgoing.put(ScheduleConstants.ASSOCIATIVE, associative);
-					incoming.put(ScheduleConstants.ASSOCIATIONS, trains.get(trains.size() - 1));
+					incoming.put(ScheduleConstants.ASSOCIATIONS,
+							trains.get(trains.size() - 1));
 					fg.createVertex(ASSOCIATION, emptyMap, outgoing, incoming);
 				}
 
@@ -212,7 +207,8 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 				// if the last connected station to the schedule does not belong to the target station, then
 				// create a new neighbor connection
 				int lastConnIndex = schedules.get(source).lastConn();
-				if (lastConnIndex != target && !stations.get(lastConnIndex).conn.contains(target)) {
+				if (lastConnIndex != target
+						&& !stations.get(lastConnIndex).conn.contains(target)) {
 					increaseDegree(STATION, lastConnIndex);
 					increaseDegree(STATION, target);
 					stations.get(lastConnIndex).conn.add(target);
@@ -222,6 +218,43 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 			break;
 		default:
 			throw new IllegalStateException("Illegal type of connection!");
+		}
+	}
+
+	private int getNeighborsNumber() {
+		return random.nextInt(2) + 1;
+	}
+
+	private int getDestinationsNumber() {
+		int percent = random.nextInt(1000);
+		if (percent < 2 && stations.size() > 150) {
+			// generate between 100-150
+			return random.nextInt(51) + 100;
+		} else if (percent < 42 && stations.size() > 100) {
+			// generate between 50-99
+			return random.nextInt(50) + 50;
+		} else { // generate between 2-49
+			percent = random.nextInt(100);
+			if (percent < 42) {
+				// generate between 2-11
+				return random.nextInt(10) + 2;
+			} else {
+				percent = random.nextInt(100);
+				if (percent < 4) {
+					// 41 - 49
+					return random.nextInt(9) + 41;
+				} else if (percent < 14) {
+					// 31 - 40
+					return random.nextInt(10) + 31;
+				} else if (percent < 42) {
+					// 21 - 30
+					return random.nextInt(10) + 21;
+				} else {
+					// 11 - 20
+					return random.nextInt(10) + 11;
+				}
+			}
+
 		}
 	}
 

@@ -8,8 +8,12 @@ analyze <- function(metrics, maxElement, type) {
     maxElement <- as.numeric(maxElement)
   }
   frame <- getFrame(metrics)
-  allDegree <- sum(ddply(frame, c("MetricName", "MetricValue"), summarise,
-                         All = MetricName * MetricValue)$All)
+  frame <- ddply(frame, c("MetricName", "MetricValue"), summarise,
+                 All = MetricName * MetricValue)
+  allDegree <- sum(frame$All)
+  if (type == "Schedule") {
+    calculateDegrees(frame, type, maxElement)
+  }
   frame$MetricValue <- frame$MetricValue / maxElement
   fit <- fit_power_law(sort(frame$MetricValue, decreasing = T), implementation = "plfit")
   cat(type, " alpha: ", fit$alpha, "\n")
@@ -18,7 +22,27 @@ analyze <- function(metrics, maxElement, type) {
   cat(type, " sum degree: ", allDegree, "\n")
   avgDegree <- allDegree / maxElement
   
-  cat(type, " average degree : ", avgDegree, "\n")
+  cat(type, " average degree : ", avgDegree, "\n\n")
+}
+
+calcSumOfDegrees <- function(frame, min, max, type, maxElement) {
+  value <- (sum(frame[which(frame[["MetricName"]] < max & frame[["MetricName"]] >= min),]$MetricValue))
+  percent <- value / maxElement
+  cat(type, " number of degrees between ", min, " and ", max, ": ", value, ", percentage: ", 
+      percent, "\n")
+  return(value)
+}
+
+calculateDegrees <- function(frame, type, maxElement) {
+  sum = calcSumOfDegrees(frame, 1, 50, type, maxElement)
+  calcSumOfDegrees(frame, 2, 11, type, sum)
+  sum <- calcSumOfDegrees(frame, 11, 50, type, sum)
+  calcSumOfDegrees(frame, 11, 21, type, sum)
+  calcSumOfDegrees(frame, 21, 31, type, sum)
+  calcSumOfDegrees(frame, 31, 41, type, sum)
+  calcSumOfDegrees(frame, 41, 50, type, sum)
+  calcSumOfDegrees(frame, 50, 100, type, maxElement)
+  calcSumOfDegrees(frame, 100, 160, type, maxElement)
 }
 
 
