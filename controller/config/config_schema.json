@@ -10,7 +10,7 @@
         {
           "type": "string",
           "enum": [
-            "Analysis",
+            "Analyze",
             "Describe",
             "Inject",
             "Repair",
@@ -21,7 +21,7 @@
       "additionalItems": {
         "type": "string",
         "enum": [
-          "Analysis",
+          "Analyze",
           "Describe",
           "Inject",
           "Repair",
