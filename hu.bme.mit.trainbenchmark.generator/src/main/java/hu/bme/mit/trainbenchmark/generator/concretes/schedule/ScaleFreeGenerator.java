@@ -76,6 +76,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		System.out.print("Generate scale-free model...");
 		initializationStep();
 
+		nodes += maxNumberOfTrains;
 		// generate station and schedule nodes plus the connections between them
 		while (nodes < maxNodes) {
 			if (stations.size() < maxNumberOfStations) {
