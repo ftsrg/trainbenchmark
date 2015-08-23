@@ -44,13 +44,13 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 	protected int associationPercent;
 
-	private int stationDegrees;
+	protected int stationDegrees;
 
-	private int scheduleDegrees;
+	protected int maxDegree;
 
-	private ArrayList<Node> stations;
+	protected ArrayList<Node> stations;
 
-	private ArrayList<Node> schedules;
+	protected ArrayList<Node> schedules;
 
 	public ScaleFreeGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -65,7 +65,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		associationPercent = 2;
 		initStations = 50;
 		stationDegrees = 0;
-		scheduleDegrees = 0;
+		maxDegree = -1;
 		stations = new ArrayList<Node>();
 		schedules = new ArrayList<Node>();
 
@@ -85,7 +85,6 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 			addSchedule();
 			newStationConnections(DESTINATIONS, lastSch(), getDestinationsNumber());
 		}
-
 		transformStationConnections();
 		attachTrains();
 		stations.clear();
@@ -108,26 +107,25 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		final ArrayList<Integer> indices = new ArrayList<>();
 		int percent = 0;
 		int degree = 0;
+		int index = 0;
 
 		while (true) {
-			for (Integer index : getRandomIndices(stations, stations.size() / 2)) {
-				degree = stations.get(index).degree;
-				// connect automatically to isolated nodes
-				if (degree == 0 && valid(connection, index)) {
-					indices.add(index);
-					addStationConnection(connection, sourceIndex, index);
-				} else {
-					percent = getPercent(connection);
-					if (degree >= percent) {
-						if (!indices.contains(index)) {
-							indices.add(index);
-							addStationConnection(connection, sourceIndex, index);
-						}
+			index = getRandomIndex(stations);
+			degree = ((Node) stations.get(index)).degree;
+			if (degree == 0 && valid(connection, index)) {
+				indices.add(index);
+				addStationConnection(connection, sourceIndex, index);
+			} else {
+				percent = getPercent();
+				if (degree >= percent) {
+					if (!indices.contains(index)) {
+						indices.add(index);
+						addStationConnection(connection, sourceIndex, index);
 					}
 				}
-				if (indices.size() == amount) {
-					return;
-				}
+			}
+			if (indices.size() == amount) {
+				return;
 			}
 		}
 	}
@@ -258,14 +256,11 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private int getPercent(final String connection) {
-		switch (connection) {
-		case NEIGHBORS:
+	private int getPercent() {
+		if (maxDegree <= 2) {
 			return random.nextInt(stationDegrees);
-		case DESTINATIONS:
-			return random.nextInt(stationDegrees + scheduleDegrees);
-		default:
-			throw new IllegalStateException("Illegal type of connection!");
+		} else {
+			return random.nextInt(maxDegree);
 		}
 	}
 
@@ -289,10 +284,19 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		case STATION:
 			stations.get(index).degree++;
 			stationDegrees++;
+			if (maxDegree == -1) { // search maximum degree and its index
+				maxDegree = stations.get(0).degree;
+				for (int i = 1; i < stations.size(); i++) {
+					if (stations.get(i).degree > maxDegree) {
+						maxDegree = stations.get(i).degree;
+					}
+				}
+			} else if (stations.get(index).degree > maxDegree) {
+				maxDegree = stations.get(index).degree;
+			}
 			break;
 		case SCHEDULE:
 			schedules.get(index).degree++;
-			scheduleDegrees++;
 			break;
 		default:
 			throw new IllegalStateException("Illegal type of node!");

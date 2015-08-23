@@ -60,6 +60,13 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 	}
 
+	protected int getRandomIndex(final ArrayList<?> list) {
+		if (list.size() == 0) {
+			throw new IllegalArgumentException("The list parameter is empty");
+		}
+		return random.nextInt(list.size());
+	}
+
 	protected class Node {
 
 		public Object obj;
