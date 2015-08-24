@@ -90,3 +90,27 @@ To import and develop the Train Benchmark, you need the m2e Eclipse plugin, incl
 ### Naming conventions
 
 To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Java implementation are named `JavaBenchmarkCase`, `JavaPosLength`, `JavaPosLengthMatch`, `JavaPosLengthTransformation`, while the classes in the EMF-IncQuery implementation are named `EMFIncQueryBenchmarkCase`, `EMFIncQueryPosLength`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
+
+## Reporting tools
+
+### Convert the results
+
+It is possible to convert the measurement results from JSON to CSV with the following script:
+
+```bash
+scripts/convert_results.sh
+```
+
+### Interactive reporting
+
+In order to use the interactive interface in MONDO-SAM, run the following:
+
+```bash
+scripts/interactive.sh
+```
+ 
+For further information, read the [instructions](https://github.com/FTSRG/mondo-sam/blob/master/README.md).
+
+### Generating diagrams
+
+Adjust the `reporting/config.json` file and run the `scripts/report.sh` script. Read about the possible configuration values in the [wiki page](https://github.com/FTSRG/mondo-sam/wiki/Reporting).
