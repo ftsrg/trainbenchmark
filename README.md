@@ -98,7 +98,7 @@ To avoid confusion between the different implementations, we decided to use the 
 It is possible to convert the measurement results from JSON to CSV with the following script:
 
 ```bash
-scripts/convert_results.sh
+scripts/convert-results.sh
 ```
 
 ### Interactive reporting
@@ -113,4 +113,4 @@ For further information, read the [instructions](https://github.com/FTSRG/mondo-
 
 ### Generating diagrams
 
-Adjust the `reporting/config.json` file and run the `scripts/report.sh` script. Read about the possible configuration values in the [wiki page](https://github.com/FTSRG/mondo-sam/wiki/Reporting).
+Adjust the `config/reporting.json` file and run the `scripts/report.sh` script. The possible configuration values are listed in the [MONDO-SAM wiki](https://github.com/FTSRG/mondo-sam/wiki/Reporting).
