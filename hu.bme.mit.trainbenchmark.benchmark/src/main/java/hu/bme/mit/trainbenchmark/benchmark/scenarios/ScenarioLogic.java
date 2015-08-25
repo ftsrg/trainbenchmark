@@ -32,6 +32,5 @@ public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?>> exten
 		caseName = benchmarkConfig.getQuery().toString();
 		size = benchmarkConfig.getSize();
 		tool = benchmarkConfig.getTool();
-
 	}
 }

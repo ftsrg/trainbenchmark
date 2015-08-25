@@ -17,7 +17,6 @@ import java.lang.reflect.Modifier;
 
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.results.BenchmarkResult;
-import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
@@ -36,19 +35,19 @@ public abstract class AbstractBenchmarkLogic {
 	@SuppressWarnings("unchecked")
 	public BenchmarkResult runBenchmark() throws IOException {
 		@SuppressWarnings("rawtypes")
-		final ScenarioLogic scl = ScenarioFactory.getScenario(bc.getScenario());
+		final ScenarioLogic scenario = ScenarioFactory.getScenario(bc.getScenario());
 		final AbstractBenchmarkCase<?, ?> tc = getBenchmarkCase();
 
-		scl.setBenchmarkConfig(bc);
-		scl.initializeDescriptor();
+		scenario.setBenchmarkConfig(bc);
+		scenario.initializeDescriptor();
 
 		final BenchmarkEngine engine = new BenchmarkEngine();
 		final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
-		final BenchmarkScenario scenario = (scl);
 		token.setBenchmarkCase(tc);
 		token.setConfig(bc);
 
 		for (int i = 1; i <= bc.getRuns(); i++) {
+			scenario.setRunIndex(i);
 			engine.runBenchmark(scenario, token);
 		}
 
@@ -62,8 +61,8 @@ public abstract class AbstractBenchmarkLogic {
 	protected AbstractBenchmarkCase<?, ?> getConcreteBenchmarkCase(final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
-			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "."
-					+ bc.getClassName() + "BenchmarkCase";
+			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "." + bc.getClassName()
+					+ "BenchmarkCase";
 			final Class<?> clazz = classLoader.loadClass(toolClassName);
 
 			final int modifiers = clazz.getModifiers();
@@ -73,8 +72,8 @@ public abstract class AbstractBenchmarkLogic {
 			}
 
 			// else instantiate specific class
-			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "."
-					+ bc.getClassName() + bc.getQuery();
+			final String queryClassName = "hu.bme.mit.trainbenchmark.benchmark." + bc.getClassName().toLowerCase() + "." + bc.getClassName()
+					+ bc.getQuery();
 			final Class<?> queryClass = classLoader.loadClass(queryClassName);
 
 			// instantiate generic class if not abstract
