@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
+import eu.mondo.sam.core.phases.IterationPhase;
+import eu.mondo.sam.core.phases.SequencePhase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
@@ -19,36 +21,27 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
-import eu.mondo.sam.core.phases.SequencePhase;
-import eu.mondo.sam.core.results.CaseDescriptor;
 
-public class RepairScenarioLogic extends
-		ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
+public class TransformationScenarioLogic extends ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
 
 	@Override
 	public void build() {
-		SequencePhase seq = new SequencePhase();
-		CheckPhase check = new CheckPhase("Check");
-		CheckPhase recheck = new CheckPhase("Recheck");
-		seq.addPhases(new InitializationPhase("Init"),
-				new InitTransformationPhase(
-						"InitTransformation"),
-				new ReadPhase("Read"), check,
-				new TransformationPhase("Edit"), recheck,
+		final IterationPhase iteration = new IterationPhase(benchmarkConfig.getIterationCount());
+		final SequencePhase sequence = new SequencePhase();
+		final SequencePhase iterationSequence = new SequencePhase();
+
+		final TransformationPhase transformation = new TransformationPhase("Transformation");
+		final CheckPhase recheck = new CheckPhase("Recheck");
+
+		iterationSequence.addPhases(transformation, recheck);
+		iteration.setPhase(iterationSequence);
+		sequence.addPhases(new InitializationPhase("Init"), //
+				new InitTransformationPhase("InitTransformation"), //
+				new ReadPhase("Read"), //
+				new CheckPhase("Check"), //
+				iteration, //
 				new DestroyPhase("Destroy"));
-		rootPhase = seq;
-
-	}
-
-	@Override
-	public CaseDescriptor getCaseDescriptor() {
-		CaseDescriptor descriptor = new CaseDescriptor();
-		descriptor.setCaseName(caseName);
-		descriptor.setTool(tool);
-		descriptor.setScenario("Repair");
-		descriptor.setSize(size);
-		descriptor.setRunIndex(runIndex);
-		return descriptor;
+		rootPhase = sequence;
 	}
 
 }
