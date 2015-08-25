@@ -111,11 +111,12 @@
         {
           "type": "string",
           "enum": [
+            "ConnectedSegments",
             "PosLength",
             "RouteSensor",
+            "ScheduleStatus",
             "SemaphoreNeighbor",
             "SwitchSensor",
-            "ConnectedSegments",
             "SwitchSet"
           ]
         }
@@ -123,21 +124,15 @@
       "additionalItems": {
         "type": "string",
         "enum": [
+          "ConnectedSegments",
           "PosLength",
           "RouteSensor",
+          "ScheduleStatus",
           "SemaphoreNeighbor",
           "SwitchSensor",
-          "ConnectedSegments",
           "SwitchSet"
         ]
-      },
-      "default": [
-        "PosLength",
-        "RouteSensor",
-        "SemaphoreNeighbor",
-        "SwitchSensor",
-        "SwitchSet"
-      ]
+      }
     },
     "Tools": {
       "type": "array",
