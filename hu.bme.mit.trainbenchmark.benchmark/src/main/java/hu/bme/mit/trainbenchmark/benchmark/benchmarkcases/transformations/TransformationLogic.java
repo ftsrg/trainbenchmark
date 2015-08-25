@@ -11,11 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -26,6 +21,10 @@ import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
 import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.PhaseResult;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public abstract class TransformationLogic<M, T, O> {
 
@@ -73,27 +72,27 @@ public abstract class TransformationLogic<M, T, O> {
 	protected abstract void lhs(final Collection<M> currentMatches) throws Exception;
 
 	public void performTransformation(final PhaseResult phaseResult, final Collection<M> currentMatches) throws Exception {
-		final TimeMetric lhs = new TimeMetric("LHS");
-		final TimeMetric rhs = new TimeMetric("RHS");
+		final TimeMetric transformationMetric = new TimeMetric("Time");
+
 		final ScalarMetric modified = new ScalarMetric("Modified");
 		nObjectsToModify = Util.calcModify(bc, currentMatches.size());
 		modified.setValue(nObjectsToModify);
 
-		lhs.startMeasure();
+		transformationMetric.startMeasure();
 		driver.beginTransaction();
 		lhs(currentMatches);
-		lhs.stopMeasure();
+		transformationMetric.stopMeasure();
 
 		// we do not measure this in the benchmark results
 		final List<O> candidatesList = copyAndSort();
 		objectsToModify = pickRandom(nObjectsToModify, candidatesList);
 
-		rhs.startMeasure();
+		transformationMetric.continueMeasure();
 		transformation.rhs(objectsToModify);
 		driver.finishTransaction();
-		rhs.stopMeasure();
+		transformationMetric.stopMeasure();
 
-		phaseResult.addMetrics(lhs, rhs, modified);
+		phaseResult.addMetrics(transformationMetric, modified);
 	}
 
 	protected abstract List<O> copyAndSort();
