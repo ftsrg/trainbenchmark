@@ -192,6 +192,16 @@ public class RealModelGenerator extends ScheduleGenerator {
 				return "Ship";
 			case "T":
 				return "Trip";
+			case "1":
+				return "Passenger";
+			case "2":
+				return "Freight";
+			case "3":
+				return "Trip";
+			case "4":
+				return "Ship";
+			case "5":
+				return "Bus";
 			default:
 				return "Passenger";
 			}
