@@ -41,6 +41,7 @@ public abstract class SesameMatch {
 			return new SesameSwitchSensorMatch(bs);
 		case SWITCHSET:
 			return new SesameSwitchSetMatch(bs);
+		case SCHEDULESHORTTERMSTATUS:
 		case SCHEDULEDAYS:
 		case SCHEDULEPLANNING:
 		case ASSOCIATIONCATEGORIES:
