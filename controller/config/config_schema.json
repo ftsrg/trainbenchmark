@@ -111,9 +111,13 @@
         {
           "type": "string",
           "enum": [
+            "AssociationCategories",
+            "AssociationDays",
             "ConnectedSegments",
             "PosLength",
             "RouteSensor",
+            "ScheduleDays",
+            "SchedulePlanning",
             "ScheduleStatus",
             "SemaphoreNeighbor",
             "SwitchSensor",
@@ -124,9 +128,13 @@
       "additionalItems": {
         "type": "string",
         "enum": [
+          "AssociationCategories",
+          "AssociationDays",
           "ConnectedSegments",
           "PosLength",
           "RouteSensor",
+          "ScheduleDays",
+          "SchedulePlanning",
           "ScheduleStatus",
           "SemaphoreNeighbor",
           "SwitchSensor",
