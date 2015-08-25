@@ -13,6 +13,8 @@
 package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ASSOCIATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.CATEGORY;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DAYS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DESTINATIONS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.LOCATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
@@ -20,6 +22,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULES;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATUS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TERMINAL;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
@@ -94,7 +97,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 	}
 
 	private void addSchedule() throws IOException {
-		schedules.add(new Node(fg.createVertex(SCHEDULE), 0));
+		schedules.add(new Node(fg.createVertex(SCHEDULE, getScheduleAttributes()), 0));
 		nodes++;
 	}
 
@@ -177,7 +180,8 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 					outgoing.put(ScheduleModelConstants.ASSOCIATIVE, associative);
 					incoming.put(ScheduleModelConstants.ASSOCIATIONS,
 							trains.get(trains.size() - 1));
-					fg.createVertex(ASSOCIATION, emptyMap, outgoing, incoming);
+					fg.createVertex(ASSOCIATION, getAssociationAttributes(), outgoing,
+							incoming);
 				}
 
 			} else {
@@ -302,6 +306,94 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		default:
 			throw new IllegalStateException("Illegal type of node!");
 		}
+	}
+
+	private Map<String, Object> getAssociationAttributes() {
+		Map<String, Object> attributes = new HashMap<>();
+		int percent = random.nextInt(100);
+		if (percent < 8) {
+			attributes.put(CATEGORY, "Divide");
+		} else if (percent < 32) {
+			attributes.put(CATEGORY, "Join");
+		} else {
+			attributes.put(CATEGORY, "Next");
+		}
+
+		percent = random.nextInt(100);
+		if (percent < 1) {
+			attributes.put(DAYS, "0100000");
+		} else if (percent < 3) {
+			attributes.put(DAYS, "0000100");
+		} else if (percent < 22) {
+			attributes.put(DAYS, "0000001");
+		} else if (percent < 33) {
+			attributes.put(DAYS, "1000000");
+		} else if (percent < 66) {
+			attributes.put(DAYS, "0000010");
+		} else if (percent < 94) {
+			attributes.put(DAYS, "1111100");
+		} else {
+			attributes.put(DAYS, getRandomBinary());
+		}
+		return attributes;
+	}
+
+	private String getRandomBinary() {
+		int value = random.nextInt(128);
+		String binary = Integer.toBinaryString(value);
+		if (binary.length() < 7) {
+			int length = binary.length();
+			for (int i = 0; i < 7 - length; i++) {
+				binary = "0".concat(binary);
+			}
+		}
+		return binary;
+	}
+
+	private Map<String, Object> getScheduleAttributes() {
+		Map<String, Object> attributes = new HashMap<>();
+		int percent = random.nextInt(1000);
+
+		if (percent < 1) {
+			attributes.put(STATUS, "Ship");
+		} else if (percent < 5) {
+			attributes.put(STATUS, "Trip");
+		} else if (percent < 25) {
+			attributes.put(STATUS, "Bus");
+		} else if (percent < 75) {
+			attributes.put(STATUS, "Freight");
+		} else {
+			attributes.put(STATUS, "Passenger");
+		}
+
+		percent = random.nextInt(100);
+		if (percent < 1) {
+			attributes.put(DAYS, "0010000");
+		} else if (percent < 2) {
+			attributes.put(DAYS, "0001000");
+		} else if (percent < 4) {
+			attributes.put(DAYS, "0000100");
+		} else if (percent < 6) {
+			attributes.put(DAYS, "1111000");
+		} else if (percent < 7) {
+			attributes.put(DAYS, "1111110");
+		} else if (percent < 8) {
+			attributes.put(DAYS, "0100000");
+		} else if (percent < 10) {
+			attributes.put(DAYS, "0111100");
+		} else if (percent < 20) {
+			attributes.put(DAYS, "1000000");
+		} else if (percent < 36) {
+			attributes.put(DAYS, "1111100");
+		} else if (percent < 65) {
+			attributes.put(DAYS, "0000010");
+		} else if (percent < 98) {
+			attributes.put(DAYS, "0000001");
+		} else {
+			attributes.put(DAYS, getRandomBinary());
+		}
+
+		return attributes;
 	}
 
 	private int lastSch() {

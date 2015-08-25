@@ -210,7 +210,7 @@ public class RealModelGenerator extends ScheduleGenerator {
 		case "NP":
 			return "Next";
 		default:
-			return "Join";
+			return "Next";
 		}
 	}
 }
