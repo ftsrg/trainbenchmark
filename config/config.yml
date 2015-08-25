@@ -25,10 +25,10 @@ scenarios:
 
 tools:
 - drools5
-#- drools6
+- drools6
 - emfapi
-#- emfincquery
-#- jena
+- emfincquery
+- jena
 - mysql
 - neo4j
 - sesame
@@ -45,3 +45,5 @@ benchmark_optional_arguments:
   - inferencing
   sesame:
   - inferencing
+  emfincquery:
+  - localsearch
