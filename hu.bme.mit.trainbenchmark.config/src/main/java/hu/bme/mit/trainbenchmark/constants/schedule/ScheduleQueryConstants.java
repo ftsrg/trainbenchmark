@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.constants.schedule;
 
-public class ScheduleQueryConstans {
+public class ScheduleQueryConstants {
 
-	public static final String VAR_STATUS = "status";
+	public static final String VAR_ATTRIBUTE = "attribute";
 	public static final String VAR_COUNT = "count";
 }

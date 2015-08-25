@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule;
 
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleQueryConstans.VAR_COUNT;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleQueryConstans.VAR_STATUS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleQueryConstants.VAR_COUNT;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleQueryConstants.VAR_ATTRIBUTE;
 import hu.bme.mit.trainbenchmark.benchmark.matches.schedule.ScheduleAttributeCountMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 
@@ -33,7 +33,7 @@ public class SesameScheduleAttributeCountMatch extends SesameMatch implements Sc
 
 	@Override
 	public URI getAttribute() {
-		return (URI) bs.getValue(VAR_STATUS);
+		return (URI) bs.getValue(VAR_ATTRIBUTE);
 	}
 
 	@Override
