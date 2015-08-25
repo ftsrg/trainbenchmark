@@ -53,7 +53,7 @@ def execute(configuration):
                 modif_constant = str(configuration.common.modif_constant)
                 iter_count = str(configuration.common.iter_count)
                 analyze = configuration.common.analyze
-                model = configurations[0].common.model
+                model = configuration.common.model
                 args = configuration.benchmark_args
 
                 for query in configuration.queries:
