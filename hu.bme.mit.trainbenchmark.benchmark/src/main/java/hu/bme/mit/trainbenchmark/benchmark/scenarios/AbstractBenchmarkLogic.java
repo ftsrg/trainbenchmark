@@ -17,6 +17,8 @@ import java.lang.reflect.Modifier;
 
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.results.BenchmarkResult;
+import eu.mondo.sam.core.results.JsonSerializer;
+import eu.mondo.sam.core.results.ResultSerializer;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
@@ -42,6 +44,8 @@ public abstract class AbstractBenchmarkLogic {
 		scenario.initializeDescriptor();
 
 		final BenchmarkEngine engine = new BenchmarkEngine();
+		final ResultSerializer serializer = new JsonSerializer();
+		engine.getBenchmarkResult().addSerializer(serializer);
 		final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
 		token.setBenchmarkCase(tc);
 		token.setConfig(bc);
