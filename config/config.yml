@@ -4,7 +4,7 @@ java_opts:
   xmx: 2G
 
 # number of runs for the same tool/scenario/query/size
-runs: 1
+runs: 5
 # number of modify-recheck iterations
 iterationcount: 10
 # timeout for the benchmark processes
@@ -40,6 +40,8 @@ generator_optional_arguments:
 
 benchmark_optional_arguments:
   neo4j:
-  - javaapi
+  - coreapi
+  jena:
+  - inferencing
   sesame:
   - inferencing

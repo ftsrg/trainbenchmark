@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.core;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class Neo4jCoreBatchTest extends BatchTest {
+public class Neo4jCoreAPIRepairTest extends RepairTest {
 
-	public Neo4jCoreBatchTest() {
-		bi = new Neo4jCoreBenchmarkInitializer();
+	public Neo4jCoreAPIRepairTest() {
+		bi = new Neo4jCoreAPIBenchmarkInitializer();
 	}
 
 }

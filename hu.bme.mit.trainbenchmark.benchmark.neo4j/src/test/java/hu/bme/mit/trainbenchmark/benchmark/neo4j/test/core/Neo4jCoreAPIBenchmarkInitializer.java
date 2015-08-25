@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class Neo4jCoreBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
+public class Neo4jCoreAPIBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
 
 	@Override
 	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
