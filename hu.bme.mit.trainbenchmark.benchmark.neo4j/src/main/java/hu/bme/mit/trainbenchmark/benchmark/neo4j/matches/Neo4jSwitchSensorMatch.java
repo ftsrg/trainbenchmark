@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SW;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 
 import java.util.Map;

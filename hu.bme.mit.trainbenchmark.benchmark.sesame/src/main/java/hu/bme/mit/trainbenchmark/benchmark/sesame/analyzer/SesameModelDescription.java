@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer;
 
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATION;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATIONS;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULE;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULES;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ASSOCIATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ASSOCIATIONS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULES;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelDescription;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;

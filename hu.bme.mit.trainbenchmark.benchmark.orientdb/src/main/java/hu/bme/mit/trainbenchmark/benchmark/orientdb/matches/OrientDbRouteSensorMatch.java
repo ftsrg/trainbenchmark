@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SW;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SWP;
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 
 import com.tinkerpop.blueprints.Vertex;

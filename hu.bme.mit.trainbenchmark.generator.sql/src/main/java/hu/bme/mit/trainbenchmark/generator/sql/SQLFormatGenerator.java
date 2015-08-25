@@ -12,10 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ancestors;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.ID;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.TRACKELEMENT;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.ancestors;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;

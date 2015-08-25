@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class JenaTransformationRepairConnectedSegments extends JenaTransformatio
 	@Override
 	public void rhs(final Collection<JenaConnectedSegmentsMatch> matches) throws IOException {
 		final Model model = jenaDriver.getModel();
-		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.LENGTH);
+		final Property connectsToProperty = model.getProperty(BASE_PREFIX + RailwayModelConstants.LENGTH);
 
 		for (final JenaConnectedSegmentsMatch match : matches) {
 			final Resource segment2 = match.getSegment2();

@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.constants.schedule;
 
-public class ScheduleConstants {
+public class ScheduleModelConstants {
 
 	public static final String ID = "id";
 

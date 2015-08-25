@@ -10,9 +10,9 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.constants.railway;
 
-public class QueryConstants {
+public class RailwayQueryConstants {
 
 	public static final String VAR_CURRENTPOSITION = "currentPosition";
 	public static final String VAR_LENGTH = "length";

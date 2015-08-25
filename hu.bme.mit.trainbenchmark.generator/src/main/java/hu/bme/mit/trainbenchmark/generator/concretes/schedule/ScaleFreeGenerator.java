@@ -12,17 +12,17 @@
 
 package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ASSOCIATION;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.DESTINATIONS;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.LOCATION;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.NEIGHBORS;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.ORIGIN;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULE;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.SCHEDULES;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TERMINAL;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
-import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ASSOCIATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DESTINATIONS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.LOCATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ORIGIN;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULES;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TERMINAL;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -174,8 +174,8 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 						}
 					}
 					outgoing.put(LOCATION, ((Node) getRandomElement(stations)).obj);
-					outgoing.put(ScheduleConstants.ASSOCIATIVE, associative);
-					incoming.put(ScheduleConstants.ASSOCIATIONS,
+					outgoing.put(ScheduleModelConstants.ASSOCIATIVE, associative);
+					incoming.put(ScheduleModelConstants.ASSOCIATIONS,
 							trains.get(trains.size() - 1));
 					fg.createVertex(ASSOCIATION, emptyMap, outgoing, incoming);
 				}

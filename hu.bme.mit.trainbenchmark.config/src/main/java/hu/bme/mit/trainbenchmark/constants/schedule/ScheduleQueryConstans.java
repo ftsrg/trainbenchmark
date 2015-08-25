@@ -10,8 +10,10 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.constants.schedule;
 
-public enum Position {
-	FAILURE, LEFT, RIGHT, STRAIGHT
+public class ScheduleQueryConstans {
+
+	public static final String VAR_STATUS = "status";
+	public static final String VAR_COUNT = "count";
 }

@@ -11,8 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SWITCH;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
 import java.io.IOException;

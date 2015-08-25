@@ -11,20 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.constants;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.EXIT;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SWITCHPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SWITCH_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.TRACKELEMENT;
 
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.DynamicRelationshipType;

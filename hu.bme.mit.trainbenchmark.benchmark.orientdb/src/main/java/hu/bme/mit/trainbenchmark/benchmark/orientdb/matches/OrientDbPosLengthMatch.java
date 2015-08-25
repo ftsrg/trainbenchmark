@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEGMENT;
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
 import com.tinkerpop.blueprints.Vertex;

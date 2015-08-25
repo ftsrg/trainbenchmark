@@ -91,6 +91,9 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 		try {
 			while (queryResults.hasNext()) {
 				final BindingSet bs = queryResults.next();
+				System.out.println(bs.getBindingNames());
+//				System.out.println(bs.getValue("status").stringValue());
+				System.out.println(bs.getValue("count").stringValue());
 				final SesameMatch match = SesameMatch.createMatch(query, bs);
 				results.add(match);
 			}

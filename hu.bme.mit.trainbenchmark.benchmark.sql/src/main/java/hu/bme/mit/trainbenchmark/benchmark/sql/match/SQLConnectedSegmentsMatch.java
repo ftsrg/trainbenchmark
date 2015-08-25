@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,9 +21,9 @@ public class SQLConnectedSegmentsMatch extends SQLMatch implements ConnectedSegm
 
 	public SQLConnectedSegmentsMatch(final ResultSet rs) throws SQLException {
 		match = new Long[] {
-				rs.getLong(QueryConstants.VAR_SENSOR), //
-				rs.getLong(QueryConstants.VAR_SEGMENT1), rs.getLong(QueryConstants.VAR_SEGMENT2), rs.getLong(QueryConstants.VAR_SEGMENT3),
-				rs.getLong(QueryConstants.VAR_SEGMENT4), rs.getLong(QueryConstants.VAR_SEGMENT5), rs.getLong(QueryConstants.VAR_SEGMENT6) };
+				rs.getLong(RailwayQueryConstants.VAR_SENSOR), //
+				rs.getLong(RailwayQueryConstants.VAR_SEGMENT1), rs.getLong(RailwayQueryConstants.VAR_SEGMENT2), rs.getLong(RailwayQueryConstants.VAR_SEGMENT3),
+				rs.getLong(RailwayQueryConstants.VAR_SEGMENT4), rs.getLong(RailwayQueryConstants.VAR_SEGMENT5), rs.getLong(RailwayQueryConstants.VAR_SEGMENT6) };
 	}
 
 	@Override

@@ -11,13 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_ROUTE1;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_ROUTE2;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SENSOR1;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SENSOR2;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_TE1;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_TE2;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;

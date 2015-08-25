@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer;
 
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.analyzer.RDFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;

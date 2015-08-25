@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.CURRENTPOSITION;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.Position;
 
 import java.util.Collection;
 
@@ -29,7 +29,7 @@ public class Neo4jTransformationInjectSwitchSet extends Neo4jTransformationInjec
 	@Override
 	public void rhs(final Collection<Node> switches) {
 		for (final Node sw : switches) {
-			final String currentPositionString = (String) sw.getProperty(ModelConstants.CURRENTPOSITION);
+			final String currentPositionString = (String) sw.getProperty(RailwayModelConstants.CURRENTPOSITION);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
 			sw.setProperty(CURRENTPOSITION, newCurrentPosition.toString());

@@ -12,10 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SW;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SWP;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;

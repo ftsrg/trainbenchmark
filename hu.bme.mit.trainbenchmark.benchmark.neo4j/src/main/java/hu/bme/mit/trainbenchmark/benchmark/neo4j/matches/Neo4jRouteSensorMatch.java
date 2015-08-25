@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants;
 
 import java.util.Map;
 
@@ -26,22 +26,22 @@ public class Neo4jRouteSensorMatch extends Neo4jMatch implements RouteSensorMatc
 
 	@Override
 	public Node getRoute() {
-		return (Node) match.get(QueryConstants.VAR_ROUTE);
+		return (Node) match.get(RailwayQueryConstants.VAR_ROUTE);
 	}
 
 	@Override
 	public Node getSensor() {
-		return (Node) match.get(QueryConstants.VAR_SENSOR);
+		return (Node) match.get(RailwayQueryConstants.VAR_SENSOR);
 	}
 
 	@Override
 	public Node getSwP() {
-		return (Node) match.get(QueryConstants.VAR_SWP);
+		return (Node) match.get(RailwayQueryConstants.VAR_SWP);
 	}
 
 	@Override
 	public Node getSw() {
-		return (Node) match.get(QueryConstants.VAR_SW);
+		return (Node) match.get(RailwayQueryConstants.VAR_SW);
 	}
 
 	@Override

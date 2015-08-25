@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
 
 import java.util.Collection;
 
@@ -37,9 +37,9 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 	@Override
 	public void rhs(final Collection<Resource> segments) throws Exception {
 		final Model model = jenaDriver.getModel();
-		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTSTO);
-		final Property sensorEdgeProperty = model.getProperty(BASE_PREFIX + ModelConstants.SENSOR_EDGE);
-		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
+		final Property connectsToProperty = model.getProperty(BASE_PREFIX + RailwayModelConstants.CONNECTSTO);
+		final Property sensorEdgeProperty = model.getProperty(BASE_PREFIX + RailwayModelConstants.SENSOR_EDGE);
+		final Property segmentType = model.getProperty(BASE_PREFIX + RailwayModelConstants.SEGMENT);
 
 		for (final Resource segment1 : segments) {
 			// get (segment3) node

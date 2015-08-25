@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
@@ -28,9 +29,9 @@ public class AnalyzeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 		seq.addPhases(new InitializationPhase("Init"),
 				new AnalyzerInitializationPhase("AnalyzerInit"), new ReadPhase("Read"),
-				initMetrics, calcMetrics, new DestroyPhase("Destroy"));
+				initMetrics, calcMetrics, new CheckPhase("Check"),
+				new DestroyPhase("Destroy"));
 		rootPhase = seq;
-
 	}
 
 	@Override

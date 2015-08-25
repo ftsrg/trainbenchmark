@@ -12,11 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.CATEGORY;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.PLANNING;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.START_DATE;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATUS;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.TRAIN;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.CATEGORY;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.PLANNING;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.START_DATE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATUS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.schedule.AssociationCategory;
 import hu.bme.mit.trainbenchmark.schedule.ScheduleFactory;

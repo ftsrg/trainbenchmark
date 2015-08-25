@@ -11,8 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEGMENT;
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
 import com.hp.hpl.jena.query.QuerySolution;

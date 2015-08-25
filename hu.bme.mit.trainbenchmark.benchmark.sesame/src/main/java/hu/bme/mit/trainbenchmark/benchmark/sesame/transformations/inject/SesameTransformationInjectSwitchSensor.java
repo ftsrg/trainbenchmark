@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
 
 import java.util.Collection;
 
@@ -27,7 +27,7 @@ public class SesameTransformationInjectSwitchSensor extends SesameTransformation
 
 	@Override
 	public void rhs(final Collection<URI> switches) throws RepositoryException {
-		sesameDriver.deleteSingleOutgoingEdge(switches, ModelConstants.SWITCH, ModelConstants.SENSOR_EDGE);
+		sesameDriver.deleteSingleOutgoingEdge(switches, RailwayModelConstants.SWITCH, RailwayModelConstants.SENSOR_EDGE);
 	}
 
 }

@@ -12,10 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SIGNAL;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -65,10 +65,10 @@ public class EMFRailwayGenerator extends EMFFormatGenerator {
 		}
 
 		switch (type) {
-		case ModelConstants.SEMAPHORE:
+		case RailwayModelConstants.SEMAPHORE:
 			container.getSemaphores().add((Semaphore) railwayElement);
 			break;
-		case ModelConstants.ROUTE:
+		case RailwayModelConstants.ROUTE:
 			container.getRoutes().add((Route) railwayElement);
 			break;
 		default:
@@ -126,10 +126,10 @@ public class EMFRailwayGenerator extends EMFFormatGenerator {
 		// hu.bme.mit.trainbenchmark.constants.Signal enum to the
 		// hu.bme.mit.trainbenchmark.railway.Signal enum
 		if (SIGNAL.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Signal) value).ordinal();
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.railway.Signal) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.Signal.get(ordinal);
 		} else if (CURRENTPOSITION.equals(key) || POSITION.equals(key)) {
-			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.Position) value).ordinal();
+			final int ordinal = ((hu.bme.mit.trainbenchmark.constants.railway.Position) value).ordinal();
 			value = hu.bme.mit.trainbenchmark.railway.Position.get(ordinal);
 		}
 

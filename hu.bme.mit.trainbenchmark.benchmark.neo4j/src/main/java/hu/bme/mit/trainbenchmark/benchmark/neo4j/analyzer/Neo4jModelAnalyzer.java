@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer;
 
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants.STATION;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;

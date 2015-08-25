@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.generator.graph;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelType.SCHEDULE_REAL;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
@@ -85,8 +85,8 @@ public class GraphFormatGenerator extends FormatGenerator {
 		node = graphDb.createNode(DynamicLabel.label(type));
 
 		// this only works for inheritance hierarchies with
-		if (ModelConstants.ancestors.containsKey(type)) {
-			final String ancestor = ModelConstants.ancestors.get(type);
+		if (RailwayModelConstants.ancestors.containsKey(type)) {
+			final String ancestor = RailwayModelConstants.ancestors.get(type);
 			node.addLabel(DynamicLabel.label(ancestor));
 		}
 

@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.constants.railway;
 
 public enum Signal {
 	FAILURE, STOP, GO

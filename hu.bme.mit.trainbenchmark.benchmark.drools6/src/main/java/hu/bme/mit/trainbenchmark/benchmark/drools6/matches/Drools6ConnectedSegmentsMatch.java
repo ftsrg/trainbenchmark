@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
@@ -21,10 +21,10 @@ import org.kie.api.runtime.rule.Row;
 public class Drools6ConnectedSegmentsMatch extends EMFConnectedSegmentsMatch {
 
 	public Drools6ConnectedSegmentsMatch(final Row match) {
-		super((Sensor) match.get(QueryConstants.VAR_SENSOR), (Segment) match.get(QueryConstants.VAR_SEGMENT1), (Segment) match
-				.get(QueryConstants.VAR_SEGMENT2), (Segment) match.get(QueryConstants.VAR_SEGMENT3), (Segment) match
-				.get(QueryConstants.VAR_SEGMENT4), (Segment) match.get(QueryConstants.VAR_SEGMENT5), (Segment) match
-				.get(QueryConstants.VAR_SEGMENT6));
+		super((Sensor) match.get(RailwayQueryConstants.VAR_SENSOR), (Segment) match.get(RailwayQueryConstants.VAR_SEGMENT1), (Segment) match
+				.get(RailwayQueryConstants.VAR_SEGMENT2), (Segment) match.get(RailwayQueryConstants.VAR_SEGMENT3), (Segment) match
+				.get(RailwayQueryConstants.VAR_SEGMENT4), (Segment) match.get(RailwayQueryConstants.VAR_SEGMENT5), (Segment) match
+				.get(RailwayQueryConstants.VAR_SEGMENT6));
 	}
 
 }

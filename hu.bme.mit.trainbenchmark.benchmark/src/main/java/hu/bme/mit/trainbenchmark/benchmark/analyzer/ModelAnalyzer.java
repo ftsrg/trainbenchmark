@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfEdgesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfNodesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
-import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleConstants;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -98,7 +98,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		metrics.add(new DensityMetric(OUTGOING));
 
 		metrics.add(new AverageClusteringCoefficientMetric());
-		metrics.add(new AverageClusteringCoefficientMetric(ScheduleConstants.STATION));
+		metrics.add(new AverageClusteringCoefficientMetric(ScheduleModelConstants.STATION));
 		clusteringCoefficients = new HashMap<String, List<Double>>();
 
 		shortestPathMetric = new AverageShortestPathMetric();

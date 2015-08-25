@@ -17,7 +17,8 @@ public enum Query {
 	ROUTESENSOR("RouteSensor"), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SWITCHSENSOR("SwitchSensor"), //
-	SWITCHSET("SwitchSet");
+	SWITCHSET("SwitchSet"), //
+	SCHEDULESTATUS("ScheduleStatus");
 
 	private String name;
 

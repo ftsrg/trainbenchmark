@@ -19,12 +19,12 @@ import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeEntry;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeFollows;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSwitch;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.SIGNAL;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
-import hu.bme.mit.trainbenchmark.constants.Signal;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.Signal;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -89,15 +89,15 @@ public class Neo4jCoreSwitchSetChecker extends Neo4jCoreChecker<Neo4jSwitchSetMa
 							continue;
 						}
 
-						final Object currentPosition = sw.getProperty(ModelConstants.CURRENTPOSITION);
-						final Object position = swP.getProperty(ModelConstants.POSITION);
+						final Object currentPosition = sw.getProperty(RailwayModelConstants.CURRENTPOSITION);
+						final Object position = swP.getProperty(RailwayModelConstants.POSITION);
 
 						if (!currentPosition.equals(position)) {
 							final Map<String, Object> match = new HashMap<>();
-							match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
-							match.put(QueryConstants.VAR_ROUTE, route);
-							match.put(QueryConstants.VAR_SWP, swP);
-							match.put(QueryConstants.VAR_SW, sw);
+							match.put(RailwayQueryConstants.VAR_SEMAPHORE, semaphore);
+							match.put(RailwayQueryConstants.VAR_ROUTE, route);
+							match.put(RailwayQueryConstants.VAR_SWP, swP);
+							match.put(RailwayQueryConstants.VAR_SW, sw);
 							matches.add(new Neo4jSwitchSetMatch(match));
 						}
 					}

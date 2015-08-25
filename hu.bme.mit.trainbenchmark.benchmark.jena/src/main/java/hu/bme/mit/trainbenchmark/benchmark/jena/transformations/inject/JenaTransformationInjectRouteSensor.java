@@ -11,8 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants.ROUTE;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
 import java.io.IOException;

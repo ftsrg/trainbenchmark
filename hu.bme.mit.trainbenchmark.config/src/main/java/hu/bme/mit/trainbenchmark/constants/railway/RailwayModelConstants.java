@@ -10,13 +10,13 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.constants.railway;
 
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
-public class ModelConstants {
+public class RailwayModelConstants {
 
 	public static final String ID = "id";
 	

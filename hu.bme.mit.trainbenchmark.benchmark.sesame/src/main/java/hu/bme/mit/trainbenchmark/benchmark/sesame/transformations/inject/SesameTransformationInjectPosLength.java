@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.railway.RailwayModelConstants;
 
 import java.util.Collection;
 
@@ -36,7 +36,7 @@ public class SesameTransformationInjectPosLength extends SesameTransformationInj
 		final RepositoryConnection con = sesameDriver.getConnection();
 		final ValueFactory vf = sesameDriver.getValueFactory();
 
-		final URI typeURI = vf.createURI(BASE_PREFIX + ModelConstants.LENGTH);
+		final URI typeURI = vf.createURI(BASE_PREFIX + RailwayModelConstants.LENGTH);
 		final Literal zeroLiteral = vf.createLiteral(0);
 
 		for (final URI segment : segments) {
