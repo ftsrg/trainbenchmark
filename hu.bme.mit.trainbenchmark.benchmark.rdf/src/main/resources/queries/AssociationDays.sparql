@@ -1,0 +1,9 @@
+PREFIX  base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?days (COUNT(?association) AS ?count)
+WHERE
+  { ?association rdf:type base:Association .
+    ?association base:days ?days
+  }
+GROUP BY ?days
