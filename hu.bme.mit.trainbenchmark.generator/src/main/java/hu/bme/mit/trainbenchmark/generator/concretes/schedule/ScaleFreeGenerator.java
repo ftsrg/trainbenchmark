@@ -19,8 +19,11 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.LOCATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ORIGIN;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.PERMANENT;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.PLANNING;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULES;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SHORTTERM;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATUS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TERMINAL;
@@ -356,14 +359,19 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 		if (percent < 1) {
 			attributes.put(STATUS, "Ship");
+			attributes.put(PLANNING, PERMANENT);
 		} else if (percent < 5) {
 			attributes.put(STATUS, "Trip");
+			addPlanning(attributes, 20);
 		} else if (percent < 25) {
 			attributes.put(STATUS, "Bus");
+			addPlanning(attributes, 80);
 		} else if (percent < 75) {
 			attributes.put(STATUS, "Freight");
+			addPlanning(attributes, 17);
 		} else {
 			attributes.put(STATUS, "Passenger");
+			addPlanning(attributes, 13);
 		}
 
 		percent = random.nextInt(100);
@@ -394,6 +402,15 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 
 		return attributes;
+	}
+
+	private void addPlanning(Map<String, Object> attributes, final int percent) {
+		int v = random.nextInt(100);
+		if (v < percent) {
+			attributes.put(PLANNING, SHORTTERM);
+		} else {
+			attributes.put(PLANNING, PERMANENT);
+		}
 	}
 
 	private int lastSch() {

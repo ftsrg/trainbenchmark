@@ -43,4 +43,8 @@ public class ScheduleModelConstants {
 	public static final String DESTINATIONS = "destinations";
 	public static final String LOCATION = "location";
 	public static final String NEIGHBORS = "neighbors";
+
+	// attribute values
+	public static final String SHORTTERM = "Short_Term";
+	public static final String PERMANENT = "Permanent";
 }
