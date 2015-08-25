@@ -18,7 +18,11 @@ public enum Query {
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SWITCHSENSOR("SwitchSensor"), //
 	SWITCHSET("SwitchSet"), //
-	SCHEDULESTATUS("ScheduleStatus");
+	SCHEDULESTATUS("ScheduleStatus"), //
+	SCHEDULEDAYS("ScheduleDays"), //
+	SCHEDULEPLANNING("SchedulePlanning"), //
+	ASSOCIATIONDAYS("AssociationDays"), //
+	ASSOCIATIONCATEGORIES("AssociationCategories");
 
 	private String name;
 

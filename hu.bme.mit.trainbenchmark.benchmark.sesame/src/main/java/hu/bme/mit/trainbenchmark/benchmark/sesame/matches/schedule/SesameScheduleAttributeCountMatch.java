@@ -14,32 +14,30 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleQueryConstans.VAR_COUNT;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleQueryConstans.VAR_STATUS;
-import hu.bme.mit.trainbenchmark.benchmark.matches.schedule.ScheduleStatusMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.schedule.ScheduleAttributeCountMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
 
-public class SesameScheduleStatusMatch extends SesameMatch implements ScheduleStatusMatch {
+public class SesameScheduleAttributeCountMatch extends SesameMatch implements ScheduleAttributeCountMatch {
 
-	public SesameScheduleStatusMatch(BindingSet bs) {
+	public SesameScheduleAttributeCountMatch(BindingSet bs) {
 		super(bs);
 	}
 
 	@Override
 	public URI[] toArray() {
-		return new URI[] { getStatus(), getCount() };
+		return new URI[] { getAttribute(), getCount() };
 	}
 
 	@Override
-	public URI getStatus() {
-		System.out.println(bs.getValue(VAR_STATUS).stringValue());
+	public URI getAttribute() {
 		return (URI) bs.getValue(VAR_STATUS);
 	}
 
 	@Override
 	public URI getCount() {
-		System.out.println(bs.getValue(VAR_COUNT).stringValue());
 		return (URI) bs.getValue(VAR_COUNT);
 	}
 

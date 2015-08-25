@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameScheduleStatusMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameScheduleAttributeCountMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
 import org.openrdf.model.URI;
@@ -41,8 +41,12 @@ public abstract class SesameMatch {
 			return new SesameSwitchSensorMatch(bs);
 		case SWITCHSET:
 			return new SesameSwitchSetMatch(bs);
+		case SCHEDULEDAYS:
+		case SCHEDULEPLANNING:
+		case ASSOCIATIONCATEGORIES:
+		case ASSOCIATIONDAYS:
 		case SCHEDULESTATUS:
-			return new SesameScheduleStatusMatch(bs);
+			return new SesameScheduleAttributeCountMatch(bs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}
