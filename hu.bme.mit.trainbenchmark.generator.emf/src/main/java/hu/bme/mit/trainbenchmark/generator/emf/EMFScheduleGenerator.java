@@ -19,10 +19,12 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.schedule.AssociationCategory;
-import hu.bme.mit.trainbenchmark.schedule.ScheduleContainer;
 import hu.bme.mit.trainbenchmark.schedule.ScheduleFactory;
 import hu.bme.mit.trainbenchmark.schedule.SchedulePackage;
 import hu.bme.mit.trainbenchmark.schedule.SchedulePlanning;
+import hu.bme.mit.trainbenchmark.schedule.Train;
+import hu.bme.mit.trainbenchmark.schedule.TrainContainer;
+import hu.bme.mit.trainbenchmark.schedule.TrainStatus;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -37,7 +39,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 public class EMFScheduleGenerator extends EMFFormatGenerator {
 
-	protected ScheduleContainer container;
+	protected TrainContainer container;
 	protected ScheduleFactory factory;
 	private SimpleDateFormat formatter;
 
@@ -53,7 +55,7 @@ public class EMFScheduleGenerator extends EMFFormatGenerator {
 
 	@Override
 	protected EObject getContainer() {
-		container = factory.createScheduleContainer();
+		container = factory.createTrainContainer();
 		return container;
 	}
 

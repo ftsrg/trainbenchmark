@@ -1,0 +1,289 @@
+/**
+ */
+package hu.bme.mit.trainbenchmark.schedule;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.common.util.Enumerator;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the literals of the enumeration '<em><b>Train Status</b></em>',
+ * and utility methods for working with them.
+ * <!-- end-user-doc -->
+ * @see hu.bme.mit.trainbenchmark.schedule.SchedulePackage#getTrainStatus()
+ * @model
+ * @generated
+ */
+public enum TrainStatus implements Enumerator {
+	/**
+	 * The '<em><b>FREIGHT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FREIGHT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FREIGHT(0, "FREIGHT", "FREIGHT"),
+
+	/**
+	 * The '<em><b>PASSENGER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PASSENGER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PASSENGER(1, "PASSENGER", "PASSENGER"),
+
+	/**
+	 * The '<em><b>SHIP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SHIP_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SHIP(2, "SHIP", "SHIP"),
+
+	/**
+	 * The '<em><b>BUS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BUS_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	BUS(3, "BUS", "BUS"),
+
+	/**
+	 * The '<em><b>TRIP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TRIP_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	TRIP(4, "TRIP", "TRIP");
+
+	/**
+	 * The '<em><b>FREIGHT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>FREIGHT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FREIGHT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FREIGHT_VALUE = 0;
+
+	/**
+	 * The '<em><b>PASSENGER</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>PASSENGER</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #PASSENGER
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PASSENGER_VALUE = 1;
+
+	/**
+	 * The '<em><b>SHIP</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SHIP</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SHIP
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SHIP_VALUE = 2;
+
+	/**
+	 * The '<em><b>BUS</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>BUS</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #BUS
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BUS_VALUE = 3;
+
+	/**
+	 * The '<em><b>TRIP</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>TRIP</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #TRIP
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRIP_VALUE = 4;
+
+	/**
+	 * An array of all the '<em><b>Train Status</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static final TrainStatus[] VALUES_ARRAY =
+		new TrainStatus[] {
+			FREIGHT,
+			PASSENGER,
+			SHIP,
+			BUS,
+			TRIP,
+		};
+
+	/**
+	 * A public read-only list of all the '<em><b>Train Status</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final List<TrainStatus> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+
+	/**
+	 * Returns the '<em><b>Train Status</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static TrainStatus get(String literal) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			TrainStatus result = VALUES_ARRAY[i];
+			if (result.toString().equals(literal)) {
+				return result;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the '<em><b>Train Status</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static TrainStatus getByName(String name) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			TrainStatus result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the '<em><b>Train Status</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static TrainStatus get(int value) {
+		switch (value) {
+			case FREIGHT_VALUE: return FREIGHT;
+			case PASSENGER_VALUE: return PASSENGER;
+			case SHIP_VALUE: return SHIP;
+			case BUS_VALUE: return BUS;
+			case TRIP_VALUE: return TRIP;
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
+
+	/**
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private TrainStatus(int value, String name, String literal) {
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+	
+} //TrainStatus
