@@ -10,119 +10,171 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Association Category</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Status</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see hu.bme.mit.trainbenchmark.schedule.SchedulePackage#getAssociationCategory()
+ * @see hu.bme.mit.trainbenchmark.schedule.SchedulePackage#getStatus()
  * @model
  * @generated
  */
-public enum AssociationCategory implements Enumerator {
+public enum Status implements Enumerator {
         /**
-         * The '<em><b>JOIN</b></em>' literal object.
+         * The '<em><b>FREIGHT</b></em>' literal object.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see #JOIN_VALUE
+         * @see #FREIGHT_VALUE
          * @generated
          * @ordered
          */
-        JOIN(0, "JOIN", "JOIN"),
+        FREIGHT(0, "FREIGHT", "FREIGHT"),
 
         /**
-         * The '<em><b>DIVIDE</b></em>' literal object.
+         * The '<em><b>PASSENGER</b></em>' literal object.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see #DIVIDE_VALUE
+         * @see #PASSENGER_VALUE
          * @generated
          * @ordered
          */
-        DIVIDE(1, "DIVIDE", "DIVIDE"),
+        PASSENGER(1, "PASSENGER", "PASSENGER"),
 
         /**
-         * The '<em><b>NEXT</b></em>' literal object.
+         * The '<em><b>SHIP</b></em>' literal object.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see #NEXT_VALUE
+         * @see #SHIP_VALUE
          * @generated
          * @ordered
          */
-        NEXT(2, "NEXT", "NEXT");
+        SHIP(2, "SHIP", "SHIP"),
 
         /**
-         * The '<em><b>JOIN</b></em>' literal value.
+         * The '<em><b>BUS</b></em>' literal object.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see #BUS_VALUE
+         * @generated
+         * @ordered
+         */
+        BUS(3, "BUS", "BUS"),
+
+        /**
+         * The '<em><b>TRIP</b></em>' literal object.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see #TRIP_VALUE
+         * @generated
+         * @ordered
+         */
+        TRIP(4, "TRIP", "TRIP");
+
+        /**
+         * The '<em><b>FREIGHT</b></em>' literal value.
          * <!-- begin-user-doc -->
          * <p>
-         * If the meaning of '<em><b>JOIN</b></em>' literal object isn't clear,
+         * If the meaning of '<em><b>FREIGHT</b></em>' literal object isn't clear,
          * there really should be more of a description here...
          * </p>
          * <!-- end-user-doc -->
-         * @see #JOIN
+         * @see #FREIGHT
          * @model
          * @generated
          * @ordered
          */
-        public static final int JOIN_VALUE = 0;
+        public static final int FREIGHT_VALUE = 0;
 
         /**
-         * The '<em><b>DIVIDE</b></em>' literal value.
+         * The '<em><b>PASSENGER</b></em>' literal value.
          * <!-- begin-user-doc -->
          * <p>
-         * If the meaning of '<em><b>DIVIDE</b></em>' literal object isn't clear,
+         * If the meaning of '<em><b>PASSENGER</b></em>' literal object isn't clear,
          * there really should be more of a description here...
          * </p>
          * <!-- end-user-doc -->
-         * @see #DIVIDE
+         * @see #PASSENGER
          * @model
          * @generated
          * @ordered
          */
-        public static final int DIVIDE_VALUE = 1;
+        public static final int PASSENGER_VALUE = 1;
 
         /**
-         * The '<em><b>NEXT</b></em>' literal value.
+         * The '<em><b>SHIP</b></em>' literal value.
          * <!-- begin-user-doc -->
          * <p>
-         * If the meaning of '<em><b>NEXT</b></em>' literal object isn't clear,
+         * If the meaning of '<em><b>SHIP</b></em>' literal object isn't clear,
          * there really should be more of a description here...
          * </p>
          * <!-- end-user-doc -->
-         * @see #NEXT
+         * @see #SHIP
          * @model
          * @generated
          * @ordered
          */
-        public static final int NEXT_VALUE = 2;
+        public static final int SHIP_VALUE = 2;
 
         /**
-         * An array of all the '<em><b>Association Category</b></em>' enumerators.
+         * The '<em><b>BUS</b></em>' literal value.
+         * <!-- begin-user-doc -->
+         * <p>
+         * If the meaning of '<em><b>BUS</b></em>' literal object isn't clear,
+         * there really should be more of a description here...
+         * </p>
+         * <!-- end-user-doc -->
+         * @see #BUS
+         * @model
+         * @generated
+         * @ordered
+         */
+        public static final int BUS_VALUE = 3;
+
+        /**
+         * The '<em><b>TRIP</b></em>' literal value.
+         * <!-- begin-user-doc -->
+         * <p>
+         * If the meaning of '<em><b>TRIP</b></em>' literal object isn't clear,
+         * there really should be more of a description here...
+         * </p>
+         * <!-- end-user-doc -->
+         * @see #TRIP
+         * @model
+         * @generated
+         * @ordered
+         */
+        public static final int TRIP_VALUE = 4;
+
+        /**
+         * An array of all the '<em><b>Status</b></em>' enumerators.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        private static final AssociationCategory[] VALUES_ARRAY =
-                new AssociationCategory[] {
-                        JOIN,
-                        DIVIDE,
-                        NEXT,
+        private static final Status[] VALUES_ARRAY =
+                new Status[] {
+                        FREIGHT,
+                        PASSENGER,
+                        SHIP,
+                        BUS,
+                        TRIP,
                 };
 
         /**
-         * A public read-only list of all the '<em><b>Association Category</b></em>' enumerators.
+         * A public read-only list of all the '<em><b>Status</b></em>' enumerators.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        public static final List<AssociationCategory> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+        public static final List<Status> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
         /**
-         * Returns the '<em><b>Association Category</b></em>' literal with the specified literal value.
+         * Returns the '<em><b>Status</b></em>' literal with the specified literal value.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        public static AssociationCategory get(String literal) {
+        public static Status get(String literal) {
                 for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-                        AssociationCategory result = VALUES_ARRAY[i];
+                        Status result = VALUES_ARRAY[i];
                         if (result.toString().equals(literal)) {
                                 return result;
                         }
@@ -131,14 +183,14 @@ public enum AssociationCategory implements Enumerator {
         }
 
         /**
-         * Returns the '<em><b>Association Category</b></em>' literal with the specified name.
+         * Returns the '<em><b>Status</b></em>' literal with the specified name.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        public static AssociationCategory getByName(String name) {
+        public static Status getByName(String name) {
                 for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-                        AssociationCategory result = VALUES_ARRAY[i];
+                        Status result = VALUES_ARRAY[i];
                         if (result.getName().equals(name)) {
                                 return result;
                         }
@@ -147,16 +199,18 @@ public enum AssociationCategory implements Enumerator {
         }
 
         /**
-         * Returns the '<em><b>Association Category</b></em>' literal with the specified integer value.
+         * Returns the '<em><b>Status</b></em>' literal with the specified integer value.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        public static AssociationCategory get(int value) {
+        public static Status get(int value) {
                 switch (value) {
-                        case JOIN_VALUE: return JOIN;
-                        case DIVIDE_VALUE: return DIVIDE;
-                        case NEXT_VALUE: return NEXT;
+                        case FREIGHT_VALUE: return FREIGHT;
+                        case PASSENGER_VALUE: return PASSENGER;
+                        case SHIP_VALUE: return SHIP;
+                        case BUS_VALUE: return BUS;
+                        case TRIP_VALUE: return TRIP;
                 }
                 return null;
         }
@@ -188,7 +242,7 @@ public enum AssociationCategory implements Enumerator {
          * <!-- end-user-doc -->
          * @generated
          */
-        private AssociationCategory(int value, String name, String literal) {
+        private Status(int value, String name, String literal) {
                 this.value = value;
                 this.name = name;
                 this.literal = literal;
@@ -232,4 +286,4 @@ public enum AssociationCategory implements Enumerator {
                 return literal;
         }
         
-} //AssociationCategory
+} //Status

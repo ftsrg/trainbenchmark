@@ -23,20 +23,20 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface TrainContainer extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Trains</b></em>' containment reference list.
-	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.schedule.Train}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Trains</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Trains</em>' containment reference list.
-	 * @see hu.bme.mit.trainbenchmark.schedule.SchedulePackage#getTrainContainer_Trains()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	EList<Train> getTrains();
+        /**
+         * Returns the value of the '<em><b>Trains</b></em>' containment reference list.
+         * The list contents are of type {@link hu.bme.mit.trainbenchmark.schedule.Train}.
+         * <!-- begin-user-doc -->
+         * <p>
+         * If the meaning of the '<em>Trains</em>' containment reference list isn't clear,
+         * there really should be more of a description here...
+         * </p>
+         * <!-- end-user-doc -->
+         * @return the value of the '<em>Trains</em>' containment reference list.
+         * @see hu.bme.mit.trainbenchmark.schedule.SchedulePackage#getTrainContainer_Trains()
+         * @model containment="true" required="true"
+         * @generated
+         */
+        EList<Train> getTrains();
 
 } // TrainContainer

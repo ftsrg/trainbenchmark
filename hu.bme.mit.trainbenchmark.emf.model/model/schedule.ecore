@@ -7,17 +7,20 @@
         upperBound="-1" eType="#//Train" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Schedule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="destinations" lowerBound="1"
-        upperBound="-1" eType="#//Station" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//TrainStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destinations" upperBound="-1"
+        eType="#//Station" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//Status"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transaction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="days" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="planning" eType="#//SchedulePlanning"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
-        eType="#//Station" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" lowerBound="1"
-        eType="#//Station" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="origin" eType="#//Station"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" eType="#//Station"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stpIndicator" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Train">
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedules" lowerBound="1"
@@ -30,10 +33,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="neighbors" lowerBound="1"
         upperBound="-1" eType="#//Station"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stanox" unique="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nalco" unique="false" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association">
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
@@ -42,13 +41,19 @@
         eType="#//Train"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="#//AssociationCategory"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="days" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stpIndicator" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AssociationCategory">
     <eLiterals name="JOIN"/>
     <eLiterals name="DIVIDE" value="1"/>
     <eLiterals name="NEXT" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="TrainStatus">
+  <eClassifiers xsi:type="ecore:EEnum" name="Status">
     <eLiterals name="FREIGHT"/>
     <eLiterals name="PASSENGER" value="1"/>
     <eLiterals name="SHIP" value="2"/>

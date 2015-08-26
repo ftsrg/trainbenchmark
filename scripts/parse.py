@@ -101,7 +101,6 @@ def new_schedule(results, obj, uid, schedule_key, locations):
     schedule_days_runs = get_value(obj, schedule_key, "schedule_days_runs")
 
     results[trains][uid][schedule_label].append({
-        "UID": uid,
         "Status": status,
         "StartDate": start_date,
         "EndDate": end_date,
