@@ -96,14 +96,15 @@ def new_train(results, uid):
 def new_schedule(results, obj, uid, schedule_key, locations):
     status = get_value(obj, schedule_key, "train_status")
     start_date = get_value(obj, schedule_key, "schedule_start_date")
-    transaction = get_value(obj, schedule_key, "transaction_type")
+    end_date = get_value(obj, schedule_key, "schedule_end_date")
     stp_indicator = get_value(obj, schedule_key, "CIF_stp_indicator")
     schedule_days_runs = get_value(obj, schedule_key, "schedule_days_runs")
 
     results[trains][uid][schedule_label].append({
+        "UID": uid,
         "Status": status,
         "StartDate": start_date,
-        "Transaction": transaction,
+        "EndDate": end_date,
         "STPIndicator": stp_indicator,
         "Days": schedule_days_runs,
         location_label: list()
@@ -116,15 +117,19 @@ def new_schedule(results, obj, uid, schedule_key, locations):
 def new_association(results, main_uid, assoc_uid, obj, assoc_key):
     category = get_value(obj, assoc_key, "category")
     location = get_value(obj, assoc_key, "location")
-    # stp_indicator = get_value(obj, assoc_key, "CIF_stp_indicator")
+    stp_indicator = get_value(obj, assoc_key, "CIF_stp_indicator")
     assoc_days = get_value(obj, assoc_key, "assoc_days")
+    start_date = get_value(obj, assoc_key, "assoc_start_date")
+    end_date = get_value(obj, assoc_key, "assoc_end_date")
 
     results[trains][main_uid][assoc_label].append(
                         {"AssociationUID": assoc_uid,
                          "Category": category,
                          "Location": location,
-                         # "STPIndicator": stp_indicator,
-                         "Days": assoc_days
+                         "STPIndicator": stp_indicator,
+                         "Days": assoc_days,
+                         "StartDate": start_date,
+                         "EndDate": end_date
                          })
 
 
