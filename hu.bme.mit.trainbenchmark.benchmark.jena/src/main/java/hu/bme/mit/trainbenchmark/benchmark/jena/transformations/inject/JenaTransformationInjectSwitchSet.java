@@ -13,9 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 import java.util.Collection;
 
@@ -27,6 +24,10 @@ import com.hp.hpl.jena.rdf.model.Selector;
 import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 public class JenaTransformationInjectSwitchSet extends JenaTransformationInject {
 
@@ -46,21 +47,22 @@ public class JenaTransformationInjectSwitchSet extends JenaTransformationInject 
 				continue;
 
 			}
-			
+
 			// delete old statement
 			final Statement oldStatement = statementsToRemove.next();
 			model.remove(oldStatement);
 
 			// get next enum value
-			final Resource object = oldStatement.getObject().asResource();
-			final String currentPositionRDFString = object.getLocalName();
+			final Resource currentPositionResource = oldStatement.getObject().asResource();
+			final String currentPositionRDFString = currentPositionResource.getLocalName();
 			final String currentPositionString = RDFHelper.removePrefix(Position.class, currentPositionRDFString);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
-			final String newCurrentPositionString  = RDFHelper.addEnumPrefix(newCurrentPosition);
+			final String newCurrentPositionString = RDFHelper.addEnumPrefix(newCurrentPosition);
+			final Resource newCurrentPositionResource = model.createResource(BASE_PREFIX + newCurrentPositionString);
 
-			// set new value			
-			final Statement newStatement = model.createLiteralStatement(sw, currentPositionProperty, newCurrentPositionString);
+			// set new value
+			final Statement newStatement = model.createLiteralStatement(sw, currentPositionProperty, newCurrentPositionResource);
 			model.add(newStatement);
 
 		}
