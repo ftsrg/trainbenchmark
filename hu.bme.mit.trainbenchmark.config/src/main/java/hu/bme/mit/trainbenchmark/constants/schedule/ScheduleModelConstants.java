@@ -47,4 +47,9 @@ public class ScheduleModelConstants {
 	// attribute values
 	public static final String SHORTTERM = "Short_Term";
 	public static final String PERMANENT = "Permanent";
+	public static final String INDICATOR_C = "C";
+	public static final String INDICATOR_N = "N";
+	public static final String INDICATOR_O = "O";
+	public static final String INDICATOR_P = "P";
+
 }

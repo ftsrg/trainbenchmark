@@ -17,6 +17,10 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DAYS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DESTINATIONS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.END_DATE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.INDICATOR_C;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.INDICATOR_N;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.INDICATOR_O;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.INDICATOR_P;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.LOCATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ORIGIN;
@@ -326,7 +330,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 			attributes.put(CATEGORY, "Next");
 		}
 
-		attributes.put(STP_INDICATOR, "C");
+		addIndicator(attributes);
 
 		addRandomDates(attributes);
 
@@ -368,21 +372,21 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		if (percent < 1) {
 			attributes.put(STATUS, "Ship");
 			attributes.put(PLANNING, PERMANENT);
-			attributes.put(STP_INDICATOR, "P");
 		} else if (percent < 5) {
 			attributes.put(STATUS, "Trip");
-			addPlanningAndIndicator(attributes, 20);
+			addPlanning(attributes, 20);
 		} else if (percent < 25) {
 			attributes.put(STATUS, "Bus");
-			addPlanningAndIndicator(attributes, 80);
+			addPlanning(attributes, 80);
 		} else if (percent < 75) {
 			attributes.put(STATUS, "Freight");
-			addPlanningAndIndicator(attributes, 17);
+			addPlanning(attributes, 17);
 		} else {
 			attributes.put(STATUS, "Passenger");
-			addPlanningAndIndicator(attributes, 13);
+			addPlanning(attributes, 13);
 		}
 
+		addIndicator(attributes);
 		addRandomDates(attributes);
 
 		percent = random.nextInt(100);
@@ -415,18 +419,44 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		return attributes;
 	}
 
-	private void addPlanningAndIndicator(Map<String, Object> attributes, final int percent) {
-		int v = random.nextInt(100);
-		if (v < percent) {
+	private void addPlanning(final Map<String, Object> attributes, final int percent) {
+		int planningPercent = random.nextInt(100);
+		if (planningPercent < percent) {
 			attributes.put(PLANNING, SHORTTERM);
-			attributes.put(STP_INDICATOR, "O");
 		} else {
 			attributes.put(PLANNING, PERMANENT);
-			attributes.put(STP_INDICATOR, "P");
 		}
 	}
 
-	private void addRandomDates(Map<String, Object> attributes) {
+	private void addIndicator(final Map<String, Object> attributes) {
+		int percent = random.nextInt(100);
+		if (!attributes.containsKey(PLANNING)) {
+			if (percent < 12) {
+				attributes.put(STP_INDICATOR, INDICATOR_C);
+			} else if (percent < 35) {
+				attributes.put(STP_INDICATOR, INDICATOR_N);
+			} else if (percent < 60) {
+				attributes.put(STP_INDICATOR, INDICATOR_O);
+			} else {
+				attributes.put(STP_INDICATOR, INDICATOR_P);
+			}
+			return;
+		}
+		if (attributes.get(PLANNING) == PERMANENT) {
+			if (percent < 23) {
+				attributes.put(STP_INDICATOR, INDICATOR_C);
+			} else {
+				attributes.put(STP_INDICATOR, INDICATOR_P);
+			}
+		} else if (percent < 46) {
+			attributes.put(STP_INDICATOR, INDICATOR_N);
+		} else {
+			attributes.put(STP_INDICATOR, INDICATOR_O);
+		}
+
+	}
+
+	private void addRandomDates(final Map<String, Object> attributes) {
 		int startYear = random.nextInt(2) + 2014;
 		int endYear = startYear;
 		int startDay = random.nextInt(365) + 1;
