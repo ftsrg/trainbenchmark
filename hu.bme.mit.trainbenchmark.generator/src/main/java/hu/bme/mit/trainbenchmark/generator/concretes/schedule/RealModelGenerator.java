@@ -16,18 +16,21 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ASSOCIATIONS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ASSOCIATIVE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.CATEGORY;
-import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.CODE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DAYS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DESTINATIONS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.END_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.LOCATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ORIGIN;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.PLANNING;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULES;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.START_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATUS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STP_INDICATOR;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TERMINAL;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TIPLOC_CODE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN_UID;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
@@ -68,9 +71,7 @@ public class RealModelGenerator extends ScheduleGenerator {
 		// create station nodes and attach attributes
 		for (JsonNode station : root.get("Locations")) {
 			code = getText(station, "Code");
-			// attributes.put(STANOX, getText(station, "Stanox"));
-			attributes.put(CODE, code);
-			// attributes.put(NALCO, getText(station, "Nalco"));
+			attributes.put(TIPLOC_CODE, code);
 			stations.put(code, fg.createVertex(STATION, attributes));
 			attributes.clear();
 		}
@@ -103,10 +104,11 @@ public class RealModelGenerator extends ScheduleGenerator {
 				for (JsonNode schedule : train.get("Schedules")) {
 					attributes.clear();
 					attributes.put(STATUS, resolveStatus(schedule, false));
-					// attributes.put(START_DATE, getText(schedule, "StartDate"));
-					// attributes.put(TRANSACTION, getText(schedule, "Transaction"));
+					attributes.put(START_DATE, getText(schedule, "StartDate"));
+					attributes.put(END_DATE, getText(schedule, "EndDate"));
 					attributes.put(DAYS, getText(schedule, "Days"));
 					attributes.put(PLANNING, resolveStatus(schedule, true));
+					attributes.put(STP_INDICATOR, getText(schedule, "STPIndicator"));
 
 					incoming.clear();
 					incoming.put(SCHEDULES, trains.get(code));
@@ -145,6 +147,9 @@ public class RealModelGenerator extends ScheduleGenerator {
 				attributes.clear();
 				attributes.put(DAYS, getText(assoc, "Days"));
 				attributes.put(CATEGORY, resolveCategory(assoc));
+				attributes.put(START_DATE, getText(assoc, "StartDate"));
+				attributes.put(END_DATE, getText(assoc, "EndDate"));
+				attributes.put(STP_INDICATOR, getText(assoc, "STPIndicator"));
 				outgoing.put(ASSOCIATIVE, trains.get(assocCode));
 				outgoing.put(LOCATION, stations.get(assoc.get("Location").textValue()));
 				incoming.put(ASSOCIATIONS, trains.get(code));

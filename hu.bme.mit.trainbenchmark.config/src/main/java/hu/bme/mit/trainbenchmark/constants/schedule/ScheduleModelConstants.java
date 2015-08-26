@@ -28,11 +28,11 @@ public class ScheduleModelConstants {
 	public static final String DAYS = "days";
 	public static final String STATUS = "status";
 	public static final String START_DATE = "startDate";
+	public static final String END_DATE = "endDate";
+	public static final String STP_INDICATOR = "stpIndicator";
 	public static final String TRANSACTION = "transaction";
 	public static final String PLANNING = "planning";
-	public static final String CODE = "code";
-	public static final String STANOX = "stanox";
-	public static final String NALCO = "nalco";
+	public static final String TIPLOC_CODE = "code";
 
 	// references
 	public static final String SCHEDULES = "schedules";

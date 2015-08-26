@@ -22,9 +22,9 @@ import hu.bme.mit.trainbenchmark.schedule.AssociationCategory;
 import hu.bme.mit.trainbenchmark.schedule.ScheduleFactory;
 import hu.bme.mit.trainbenchmark.schedule.SchedulePackage;
 import hu.bme.mit.trainbenchmark.schedule.SchedulePlanning;
+import hu.bme.mit.trainbenchmark.schedule.Status;
 import hu.bme.mit.trainbenchmark.schedule.Train;
 import hu.bme.mit.trainbenchmark.schedule.TrainContainer;
-import hu.bme.mit.trainbenchmark.schedule.TrainStatus;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -116,7 +116,7 @@ public class EMFScheduleGenerator extends EMFFormatGenerator {
 		if (PLANNING.equals(key)) {
 			value = SchedulePlanning.get(((String) value).toUpperCase());
 		} else if (STATUS.equals(key)) {
-			value = TrainStatus.get(((String) value).toUpperCase());
+			value = Status.get(((String) value).toUpperCase());
 		} else if (CATEGORY.equals(key)) {
 			value = AssociationCategory.get(((String) value).toUpperCase());
 		}
