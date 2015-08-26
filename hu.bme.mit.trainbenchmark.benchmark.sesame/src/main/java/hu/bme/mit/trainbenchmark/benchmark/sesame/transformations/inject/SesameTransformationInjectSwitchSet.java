@@ -13,19 +13,19 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 import java.util.Collection;
 
-import org.openrdf.model.Literal;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
+
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 public class SesameTransformationInjectSwitchSet extends SesameTransformationInject {
 
@@ -52,16 +52,16 @@ public class SesameTransformationInjectSwitchSet extends SesameTransformationInj
 			con.remove(oldStatement);
 
 			// get next enum value
-			final URI object = (URI) oldStatement.getObject();
-			final String currentPositionRDFString = object.getLocalName();
+			final URI currentPositionURI = (URI) oldStatement.getObject();
+			final String currentPositionRDFString = currentPositionURI.getLocalName();
 			final String currentPositionString = RDFHelper.removePrefix(Position.class, currentPositionRDFString);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
 			final String newCurrentPositionString = RDFHelper.addEnumPrefix(newCurrentPosition);
-			final Literal newCurrentPositionLiteral = vf.createLiteral(newCurrentPositionString);
+			final URI newCurrentPositionUri = vf.createURI(BASE_PREFIX + newCurrentPositionString);
 
 			// set new value
-			con.add(sw, currentPositionProperty, newCurrentPositionLiteral);
+			con.add(sw, currentPositionProperty, newCurrentPositionUri);
 		}
 	}
 
