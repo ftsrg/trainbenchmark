@@ -43,6 +43,7 @@ public abstract class SesameMatch {
 			return new SesameSwitchSetMatch(bs);
 		case SCHEDULESHORTTERMSTATUS:
 		case SCHEDULEDAYS:
+		case SCHEDULEINDICATOR:
 		case SCHEDULEPLANNING:
 		case ASSOCIATIONCATEGORIES:
 		case ASSOCIATIONDAYS:

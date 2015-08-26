@@ -21,6 +21,7 @@ public enum Query {
 	SCHEDULESHORTTERMSTATUS("ScheduleShortTermStatus"), //
 	SCHEDULESTATUS("ScheduleStatus"), //
 	SCHEDULEDAYS("ScheduleDays"), //
+	SCHEDULEINDICATOR("ScheduleIndicator"), //
 	SCHEDULEPLANNING("SchedulePlanning"), //
 	ASSOCIATIONDAYS("AssociationDays"), //
 	ASSOCIATIONCATEGORIES("AssociationCategories");

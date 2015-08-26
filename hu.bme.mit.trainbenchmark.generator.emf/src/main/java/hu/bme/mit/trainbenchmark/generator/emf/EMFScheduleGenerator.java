@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.generator.emf;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.CATEGORY;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.END_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.PLANNING;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.START_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATUS;
@@ -121,7 +122,7 @@ public class EMFScheduleGenerator extends EMFFormatGenerator {
 			value = AssociationCategory.get(((String) value).toUpperCase());
 		}
 
-		if (START_DATE.equals(key)) {
+		if (START_DATE.equals(key) || END_DATE.equals(key)) {
 			try {
 				value = formatter.parse((String) value);
 			} catch (ParseException e) {

@@ -16,6 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.CATEGORY;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DAYS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DESTINATIONS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.END_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.LOCATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.ORIGIN;
@@ -24,8 +25,10 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULES;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SHORTTERM;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.START_DATE;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATUS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STP_INDICATOR;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TERMINAL;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
@@ -35,6 +38,7 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -322,6 +326,10 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 			attributes.put(CATEGORY, "Next");
 		}
 
+		attributes.put(STP_INDICATOR, "C");
+
+		addRandomDates(attributes);
+
 		percent = random.nextInt(100);
 		if (percent < 1) {
 			attributes.put(DAYS, "0100000");
@@ -360,19 +368,22 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		if (percent < 1) {
 			attributes.put(STATUS, "Ship");
 			attributes.put(PLANNING, PERMANENT);
+			attributes.put(STP_INDICATOR, "P");
 		} else if (percent < 5) {
 			attributes.put(STATUS, "Trip");
-			addPlanning(attributes, 20);
+			addPlanningAndIndicator(attributes, 20);
 		} else if (percent < 25) {
 			attributes.put(STATUS, "Bus");
-			addPlanning(attributes, 80);
+			addPlanningAndIndicator(attributes, 80);
 		} else if (percent < 75) {
 			attributes.put(STATUS, "Freight");
-			addPlanning(attributes, 17);
+			addPlanningAndIndicator(attributes, 17);
 		} else {
 			attributes.put(STATUS, "Passenger");
-			addPlanning(attributes, 13);
+			addPlanningAndIndicator(attributes, 13);
 		}
+
+		addRandomDates(attributes);
 
 		percent = random.nextInt(100);
 		if (percent < 1) {
@@ -404,13 +415,50 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		return attributes;
 	}
 
-	private void addPlanning(Map<String, Object> attributes, final int percent) {
+	private void addPlanningAndIndicator(Map<String, Object> attributes, final int percent) {
 		int v = random.nextInt(100);
 		if (v < percent) {
 			attributes.put(PLANNING, SHORTTERM);
+			attributes.put(STP_INDICATOR, "O");
 		} else {
 			attributes.put(PLANNING, PERMANENT);
+			attributes.put(STP_INDICATOR, "P");
 		}
+	}
+
+	private void addRandomDates(Map<String, Object> attributes) {
+		int startYear = random.nextInt(2) + 2014;
+		int endYear = startYear;
+		int startDay = random.nextInt(365) + 1;
+		int endDay = random.nextInt(365);
+		if (startDay > endDay) {
+			endYear++;
+		}
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, startYear);
+		calendar.set(Calendar.DAY_OF_YEAR, startDay);
+		attributes.put(START_DATE,
+				createDate(startYear, calendar.get(Calendar.MONTH),
+						calendar.get(Calendar.DAY_OF_MONTH)));
+
+		calendar.set(Calendar.YEAR, endYear);
+		calendar.set(Calendar.DAY_OF_YEAR, endDay);
+		attributes.put(END_DATE,
+				createDate(endYear, calendar.get(Calendar.MONTH),
+						calendar.get(Calendar.DAY_OF_MONTH)));
+	}
+
+	private String createDate(final int year, final int month, final int day) {
+		String m = Integer.toString(month);
+		String d = Integer.toString(day);
+		if (m.length() == 1) {
+			m = "0".concat(m);
+		}
+		if (d.length() == 1) {
+			d = "0".concat(d);
+		}
+		return Integer.toString(year) + "-" + m + "-" + d;
 	}
 
 	private int lastSch() {
