@@ -12,7 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +65,8 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 	}
 
 	@Override
-	public void calculateAll() {
+	public void calculateAll(final BenchmarkConfig benchmarkConfig,
+			final TrainBenchmarkCaseDescriptor descriptor) {
 		calculateMetrics();
 		for (String type : degreeDistributions.keySet()) {
 			CompositeMetric compositeMetric = new CompositeMetric(type);

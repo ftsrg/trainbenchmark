@@ -14,6 +14,11 @@ package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.ModelAnalyzer;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+
+import java.util.List;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import eu.mondo.sam.core.metrics.BenchmarkMetric;
 
 public abstract class Metric extends BenchmarkMetric {
@@ -34,6 +39,19 @@ public abstract class Metric extends BenchmarkMetric {
 	public abstract void calculate();
 
 	protected abstract String getIdentifier();
+
+	public void loadValue(final JsonNode root) {
+		List<JsonNode> nodes = root.get("PhaseResults").findValues("Metrics");
+		for (JsonNode metrics : nodes) {
+			for (JsonNode metric : metrics) {
+				if (metric.get("MetricName").asText().equals(getIdentifier())) {
+					metricValue = metric.get("MetricValue").asDouble();
+				}
+
+			}
+		}
+
+	}
 
 	public void initName() {
 		metricName = getIdentifier();

@@ -58,9 +58,12 @@ public abstract class AbstractBenchmarkLogic {
 		BenchmarkEngine engine = new BenchmarkEngine();
 		TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
 		BenchmarkResult result = new BenchmarkResult();
-		result.addAllPublishers(getPublishers(scenario.getCaseDescriptor()));
+		TrainBenchmarkCaseDescriptor caseDescriptor = scenario.getCaseDescriptor();
+		result.addAllPublishers(getPublishers(caseDescriptor));
+
 		token.setBenchmarkCase(tc);
 		token.setConfig(bc);
+		token.setDescriptor(caseDescriptor);
 
 		engine.runBenchmark(result, scenario, token);
 		return result;
@@ -105,7 +108,7 @@ public abstract class AbstractBenchmarkLogic {
 		if (bc.getScenario().equals(ANALYZE) || bc.getScenario().equals(DESCRIBE)) {
 			AnalysisJsonPublisher analysisPublisher = new AnalysisJsonPublisher(
 					new AnalysisFilenameFactory(descriptor));
-			analysisPublisher.setResultPath("../results/analysis/");
+			analysisPublisher.setResultPath(bc.getAnalysisPath());
 			publishers.add(analysisPublisher);
 		}
 		return publishers;

@@ -31,6 +31,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected Query query;
 	protected String className;
 	protected boolean analyze;
+	protected String analysisPath = "../results/analysis/";
 
 	public int getRunIndex() {
 		return runIndex;
@@ -169,6 +170,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	public void setAnalyze(boolean analyze) {
 		this.analyze = analyze;
+	}
+
+	public String getAnalysisPath() {
+		return analysisPath;
+	}
+
+	public void setAnalysisPath(String analysisPath) {
+		this.analysisPath = analysisPath;
 	}
 
 }

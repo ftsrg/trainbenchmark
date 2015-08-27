@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.token;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 import eu.mondo.sam.core.DataToken;
 
 public class TrainBenchmarkDataToken implements DataToken {
@@ -21,6 +22,8 @@ public class TrainBenchmarkDataToken implements DataToken {
 	private AbstractBenchmarkCase<?, ?, ?> benchmarkCase;
 
 	private BenchmarkConfig config;
+
+	private TrainBenchmarkCaseDescriptor descriptor;
 
 	@Override
 	public void init() {
@@ -34,8 +37,7 @@ public class TrainBenchmarkDataToken implements DataToken {
 		return benchmarkCase;
 	}
 
-	public void setBenchmarkCase(
-			AbstractBenchmarkCase<?, ?, ?> benchmarkCase) {
+	public void setBenchmarkCase(AbstractBenchmarkCase<?, ?, ?> benchmarkCase) {
 		this.benchmarkCase = benchmarkCase;
 	}
 
@@ -45,6 +47,14 @@ public class TrainBenchmarkDataToken implements DataToken {
 
 	public void setConfig(BenchmarkConfig config) {
 		this.config = config;
+	}
+
+	public TrainBenchmarkCaseDescriptor getDescriptor() {
+		return descriptor;
+	}
+
+	public void setDescriptor(TrainBenchmarkCaseDescriptor descriptor) {
+		this.descriptor = descriptor;
 	}
 
 }

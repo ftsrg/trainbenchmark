@@ -26,7 +26,7 @@ public class ModelMetricsCalculationPhase extends AtomicPhase {
 	@Override
 	public void execute(DataToken token, PhaseResult phaseResult) {
 		final TrainBenchmarkDataToken trainToken = ((TrainBenchmarkDataToken) token);
-		trainToken.getBenchmarkCase().calculateModelMetrics(phaseResult);
+		trainToken.getBenchmarkCase().calculateModelMetrics(phaseResult, trainToken.getDescriptor());
 	}
 
 }

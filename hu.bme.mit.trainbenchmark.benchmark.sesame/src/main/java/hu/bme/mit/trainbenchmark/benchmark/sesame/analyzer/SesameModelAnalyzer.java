@@ -86,8 +86,10 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 		while (results.hasNext()) {
 			set = results.next();
 			degree = Double.parseDouble(set.getValue("outdegree").stringValue());
-			determineClustering(vf.createURI(set.getValue("x").stringValue()));
-			addStations(vf.createURI(set.getValue("x").stringValue()));
+			if (set.getValue("x").stringValue().contains(":")) {
+				determineClustering(vf.createURI(set.getValue("x").stringValue()));
+				addStations(vf.createURI(set.getValue("x").stringValue()));
+			}
 			numberOfNodesWithOutgoingDegrees += degree > 0 ? 1 : 0;
 			numberOfNodes++;
 

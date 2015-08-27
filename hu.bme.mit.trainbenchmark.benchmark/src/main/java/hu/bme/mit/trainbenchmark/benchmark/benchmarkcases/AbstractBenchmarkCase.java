@@ -18,6 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -85,12 +86,13 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 		analyzer.initializeMetrics();
 	};
 
-	public void calculateModelMetrics(final PhaseResult phaseResult) {
+	public void calculateModelMetrics(final PhaseResult phaseResult,
+			final TrainBenchmarkCaseDescriptor descriptor) {
 		TimeMetric timer = new TimeMetric("CalculationTime");
 		analyzer.resetMetrics();
 
 		timer.startMeasure();
-		analyzer.calculateAll();
+		analyzer.calculateAll(bc, descriptor);
 		timer.stopMeasure();
 
 		phaseResult.addMetrics(timer);

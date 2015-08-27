@@ -13,9 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisFilenameFactory;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.mondo.sam.core.metrics.BenchmarkMetric;
 
@@ -29,10 +37,25 @@ public abstract class Analyzer<D extends Driver<?>> {
 		this.driver = driver;
 	}
 
-	public void calculateAll() {
-		calculateMetrics();
-		for (BenchmarkMetric m : metrics) {
-			((Metric) m).calculate();
+	public void calculateAll(final BenchmarkConfig benchmarkConfig,
+			final TrainBenchmarkCaseDescriptor descriptor) {
+		AnalysisFilenameFactory factory = new AnalysisFilenameFactory(descriptor);
+		File file = new File(benchmarkConfig.getAnalysisPath() + factory.getFilename() + ".json");
+		if (file.exists()) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				JsonNode root = mapper.readTree(file);
+				for (BenchmarkMetric m : metrics) {
+					((Metric) m).loadValue(root);
+				}
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		} else {
+			calculateMetrics();
+			for (BenchmarkMetric m : metrics) {
+				((Metric) m).calculate();
+			}
 		}
 	}
 
