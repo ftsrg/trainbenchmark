@@ -114,8 +114,10 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 
 	protected void checkRepetitiveSchedules() {
 		for (Entry<String, List<String>> entry : stationsOfSchedules.entrySet()) {
-			if (match(entry.getKey(), entry.getValue())) {
-				repetitiveSchedules++;
+			if (!entry.getValue().isEmpty()) {
+				if (match(entry.getKey(), entry.getValue())) {
+					repetitiveSchedules++;
+				}
 			}
 
 		}
