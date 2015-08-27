@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.MetricsCalculationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.MetricsInitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.ModelMetricsCalculationPhase;
-import eu.mondo.sam.core.results.CaseDescriptor;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
 public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>> extends BenchmarkScenario {
@@ -51,13 +51,14 @@ public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>> extends
 	}
 
 	@Override
-	public CaseDescriptor getCaseDescriptor() {
-		CaseDescriptor descriptor = new CaseDescriptor();
+	public TrainBenchmarkCaseDescriptor getCaseDescriptor() {
+		TrainBenchmarkCaseDescriptor descriptor = new TrainBenchmarkCaseDescriptor();
 		descriptor.setCaseName(caseName);
 		descriptor.setTool(tool);
 		descriptor.setScenario(getName());
 		descriptor.setSize(size);
 		descriptor.setRunIndex(runIndex);
+		descriptor.setModel(benchmarkConfig.getModelType().toString());
 		return descriptor;
 	}
 

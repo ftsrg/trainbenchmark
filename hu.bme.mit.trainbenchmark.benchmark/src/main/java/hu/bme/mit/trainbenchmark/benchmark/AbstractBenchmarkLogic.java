@@ -12,21 +12,28 @@
 
 package hu.bme.mit.trainbenchmark.benchmark;
 
+import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.ANALYZE;
+import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.DESCRIBE;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisFilenameFactory;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisJsonPublisher;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.Scenario;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.ScenarioFactory;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.publishers.CommandLinePublisher;
 import eu.mondo.sam.core.publishers.DefaultFilenameFactory;
 import eu.mondo.sam.core.publishers.JsonPublisher;
+import eu.mondo.sam.core.publishers.Publisher;
 import eu.mondo.sam.core.results.BenchmarkResult;
-import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
 public abstract class AbstractBenchmarkLogic {
 
@@ -42,19 +49,16 @@ public abstract class AbstractBenchmarkLogic {
 	@SuppressWarnings("unchecked")
 	public BenchmarkResult runBenchmark() throws IOException {
 		@SuppressWarnings("rawtypes")
-		final Scenario scl = ScenarioFactory.getScenario(bc.getScenario());
+		final Scenario scenario = ScenarioFactory.getScenario(bc.getScenario());
 		final AbstractBenchmarkCase<?, ?, ?> tc = getBenchmarkCase();
 
-		scl.setBenchmarkConfig(bc);
-		scl.initializeDescriptor();
+		scenario.setBenchmarkConfig(bc);
+		scenario.initializeDescriptor();
 
 		BenchmarkEngine engine = new BenchmarkEngine();
 		TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
-		BenchmarkScenario scenario = ((BenchmarkScenario) scl);
 		BenchmarkResult result = new BenchmarkResult();
-		result.addPublisher(new JsonPublisher(
-				new DefaultFilenameFactory(scenario.getCaseDescriptor())));
-		result.addPublisher(new CommandLinePublisher());
+		result.addAllPublishers(getPublishers(scenario.getCaseDescriptor()));
 		token.setBenchmarkCase(tc);
 		token.setConfig(bc);
 
@@ -94,7 +98,20 @@ public abstract class AbstractBenchmarkLogic {
 		}
 	}
 
-	public BenchmarkConfig getBc() {
+	protected List<Publisher> getPublishers(final TrainBenchmarkCaseDescriptor descriptor) {
+		List<Publisher> publishers = new ArrayList<>();
+		publishers.add(new JsonPublisher(new DefaultFilenameFactory(descriptor)));
+		publishers.add(new CommandLinePublisher());
+		if (bc.getScenario().equals(ANALYZE) || bc.getScenario().equals(DESCRIBE)) {
+			AnalysisJsonPublisher analysisPublisher = new AnalysisJsonPublisher(
+					new AnalysisFilenameFactory(descriptor));
+			analysisPublisher.setResultPath("../results/analysis/");
+			publishers.add(analysisPublisher);
+		}
+		return publishers;
+	}
+
+	public BenchmarkConfig getBenchmarkConfig() {
 		return bc;
 	}
 
