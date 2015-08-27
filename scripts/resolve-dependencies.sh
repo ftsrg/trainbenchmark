@@ -9,7 +9,7 @@ cd neo4j-shell-tools
 mvn clean install -DskipTests
 cd ..
 if [ ! -d mondo-sam ]; then
-  git clone https://github.com/FTSRG/mondo-sam.git --branch metrics
+  git clone https://github.com/FTSRG/mondo-sam.git --branch issue-9
 fi
 cd mondo-sam
 mvn clean install -DskipTests
