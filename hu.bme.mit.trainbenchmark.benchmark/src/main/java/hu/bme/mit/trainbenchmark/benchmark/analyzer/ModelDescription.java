@@ -115,18 +115,17 @@ public abstract class ModelDescription<D extends Driver<?>> extends Analyzer<D> 
 		stationsOfSchedules.get(schedule).add(station);
 	}
 
-	protected void checkRepetitiveSchedules() {
-		for (Entry<String, List<String>> entry : stationsOfSchedules.entrySet()) {
-			if (!entry.getValue().isEmpty()) {
-				if (match(entry.getKey(), entry.getValue())) {
-					repetitiveSchedules++;
-				}
-			}
-
+	protected void checkRepetitiveSchedules(final String schedule) {
+		if (stationsOfSchedules.get(schedule).size() == 0) {
+			return;
+		}
+		if (match(schedule, stationsOfSchedules.get(schedule))) {
+			repetitiveSchedules++;
+			stationsOfSchedules.remove(schedule);
 		}
 	}
 
-	private boolean match(final String key, final List<String> values) {
+	protected boolean match(final String key, final List<String> values) {
 		for (Entry<String, List<String>> entry : stationsOfSchedules.entrySet()) {
 			if (!entry.getKey().equals(key)) {
 				if (entry.getValue().equals(values)) {

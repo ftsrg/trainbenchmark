@@ -8,3 +8,4 @@ WHERE
     { ?station rdf:type base:Station}
     { ?schedule ?p ?station}
   }
+ORDER BY ?schedule

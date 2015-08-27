@@ -114,12 +114,20 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 		TupleQueryResult results = query.evaluate();
 
 		BindingSet set;
+		String prevSchedule = null;
+		String schedule;
 		while (results.hasNext()) {
 			set = results.next();
-			addStationOfSchedule(set.getValue("schedule").stringValue(), set.getValue("station")
-					.stringValue());
+			schedule = set.getValue("schedule").stringValue();
+			if (prevSchedule == null) {
+				prevSchedule = schedule;
+			}
+			addStationOfSchedule(schedule, set.getValue("station").stringValue());
+			if (!schedule.equals(prevSchedule)) {
+				checkRepetitiveSchedules(prevSchedule);
+				prevSchedule = schedule;
+			}
 		}
-		checkRepetitiveSchedules();
 
 	}
 
