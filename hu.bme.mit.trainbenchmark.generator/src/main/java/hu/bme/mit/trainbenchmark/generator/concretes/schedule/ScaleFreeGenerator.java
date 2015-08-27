@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ScaleFreeGenerator extends ScheduleGenerator {
@@ -56,15 +57,23 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 	protected int maxNumberOfTrains;
 
+	protected int maxNumberOfSchedules;
+
+	protected int maxNumberOfRepetitiveSchedules;
+
 	protected int associationPercent;
 
 	protected int stationDegrees;
 
 	protected int maxDegree;
 
+	protected double repetitiveScheduleFactor;
+
 	protected ArrayList<Node> stations;
 
 	protected ArrayList<Node> schedules;
+
+	protected Map<Integer, List<Integer>> schedulesOfDestinations;
 
 	public ScaleFreeGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -76,13 +85,16 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		maxNodes = (int) (sizeStep * Math.pow(2, generatorConfig.getSize() - 1));
 		maxNumberOfStations = (int) (maxNodes * 0.018);
 		maxNumberOfTrains = (int) (maxNodes * 0.3566);
+		maxNumberOfSchedules = maxNodes - maxNumberOfStations - maxNumberOfTrains;
 		associationPercent = 2;
 		initStations = 50;
 		stationDegrees = 0;
+		repetitiveScheduleFactor = 0.48;
+		maxNumberOfRepetitiveSchedules = (int) (maxNumberOfSchedules * repetitiveScheduleFactor);
 		maxDegree = -1;
 		stations = new ArrayList<Node>();
 		schedules = new ArrayList<Node>();
-
+		schedulesOfDestinations = new HashMap<Integer, List<Integer>>();
 	}
 
 	@Override
@@ -90,15 +102,24 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		System.out.print("Generate scale-free model...");
 		initializationStep();
 
-		nodes += maxNumberOfTrains;
+//		nodes += maxNumberOfTrains;
 		// generate station and schedule nodes plus the connections between them
-		while (nodes < maxNodes) {
+		while (nodes < maxNumberOfSchedules) {
 			if (stations.size() < maxNumberOfStations) {
 				addStation();
-				newStationConnections(NEIGHBORS, lastSt(), getNeighborsNumber());
+//				newStationConnections(NEIGHBORS, lastSt(), getNeighborsNumber());
 			}
 			addSchedule();
-			newStationConnections(DESTINATIONS, lastSch(), getDestinationsNumber());
+			int destinations = getDestinationsNumber();
+			if (nodes < maxNumberOfSchedules - maxNumberOfRepetitiveSchedules) {
+				if (!schedulesOfDestinations.containsKey(destinations)) {
+					schedulesOfDestinations.put(destinations, new ArrayList<Integer>());
+				}
+				schedulesOfDestinations.get(destinations).add(lastSch());
+				newStationConnections(DESTINATIONS, lastSch(), destinations);
+			} else {
+				addRepetitiveScheduleConnections(lastSch(), destinations);
+			}
 		}
 		transformStationConnections();
 		attachTrains();
@@ -142,6 +163,27 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 			if (indices.size() == amount) {
 				return;
 			}
+		}
+	}
+
+	private void addRepetitiveScheduleConnections(final int sourceIndex, int destinations) {
+		while (true) {
+			if (!schedulesOfDestinations.containsKey(destinations)) {
+				destinations--;
+				if (destinations < 2) {
+					destinations = random.nextInt(schedulesOfDestinations.size()) + 2;
+				}
+			} else {
+				List<Integer> scheduleIndices = schedulesOfDestinations.get(destinations);
+				int index = random.nextInt(scheduleIndices.size());
+				for (Integer c : schedules.get(index).conn) {
+					increaseDegree(SCHEDULE, sourceIndex);
+					increaseDegree(STATION, c);
+					schedules.get(sourceIndex).conn.add(c);
+				}
+				return;
+			}
+
 		}
 	}
 
@@ -235,9 +277,9 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private int getNeighborsNumber() {
-		return random.nextInt(2) + 1;
-	}
+//	private int getNeighborsNumber() {
+//		return random.nextInt(2) + 1;
+//	}
 
 	private int getDestinationsNumber() {
 		int percent = random.nextInt(1000);
