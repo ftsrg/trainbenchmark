@@ -103,9 +103,22 @@ public abstract class AbstractBenchmarkLogic {
 
 	protected List<Publisher> getPublishers(final TrainBenchmarkCaseDescriptor descriptor) {
 		List<Publisher> publishers = new ArrayList<>();
-		publishers.add(new JsonPublisher(new DefaultFilenameFactory(descriptor)));
 		publishers.add(new CommandLinePublisher());
-		if (bc.getScenario().equals(ANALYZE) || bc.getScenario().equals(DESCRIBE)) {
+		if (bc.getScenario().equals(DESCRIBE)) {
+			AnalysisFilenameFactory analysisFilenameFactory = new AnalysisFilenameFactory(
+					descriptor);
+			analysisFilenameFactory.setOverride(true);
+
+			JsonPublisher describePublisher = new JsonPublisher(analysisFilenameFactory);
+			describePublisher.setResultPath(bc.getDescribePath());
+			publishers.add(describePublisher);
+			return publishers;
+		}
+
+		publishers.add(new JsonPublisher(new DefaultFilenameFactory(descriptor)));
+
+		if (bc.getScenario().equals(ANALYZE)) {
+			// don't override the results
 			AnalysisJsonPublisher analysisPublisher = new AnalysisJsonPublisher(
 					new AnalysisFilenameFactory(descriptor));
 			analysisPublisher.setResultPath(bc.getAnalysisPath());

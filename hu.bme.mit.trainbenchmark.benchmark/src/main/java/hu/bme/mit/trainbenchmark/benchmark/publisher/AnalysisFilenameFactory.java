@@ -18,14 +18,33 @@ public class AnalysisFilenameFactory implements FilenameFactory {
 
 	protected TrainBenchmarkCaseDescriptor descriptor;
 
+	protected boolean override;
+
 	public AnalysisFilenameFactory(TrainBenchmarkCaseDescriptor descriptor) {
 		this.descriptor = descriptor;
+		override = false;
 	}
 
 	@Override
 	public String getFilename() {
 		return descriptor.getTool() + "-" + descriptor.getModel() + "-" + descriptor.getScenario()
 				+ "-" + descriptor.getSize();
+	}
+
+	public boolean isOverride() {
+		return override;
+	}
+
+	public void setOverride(boolean override) {
+		this.override = override;
+	}
+
+	public TrainBenchmarkCaseDescriptor getDescriptor() {
+		return descriptor;
+	}
+
+	public void setDescriptor(TrainBenchmarkCaseDescriptor descriptor) {
+		this.descriptor = descriptor;
 	}
 
 }

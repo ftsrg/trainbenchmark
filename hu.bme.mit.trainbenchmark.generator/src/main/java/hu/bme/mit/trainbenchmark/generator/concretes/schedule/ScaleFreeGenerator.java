@@ -282,6 +282,15 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 //	}
 
 	private int getDestinationsNumber() {
+
+//		double y = random.nextDouble();
+//		double n = -3.0;
+//		double x0 = 2.0;
+//		double x1 = 150.0;
+//		double x = Math.pow((Math.pow(x1, n + 1) - Math.pow(x0, n + 1)) * y + Math.pow(x0, n + 1),
+//				1 / (n + 1));
+//		System.out.println((int) x);
+
 		int percent = random.nextInt(1000);
 		if (percent < 2 && stations.size() > 150) {
 			// generate between 100-150
