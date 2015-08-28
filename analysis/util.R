@@ -15,7 +15,11 @@ getFrame <- function (metrics) {
 }
 
 loadData <- function () {
-  data <- fromJSON("./description-data.json")
+  args <- commandArgs(trailingOnly = TRUE)
+  if(!is.na(args[1])){
+    path <- args[1]
+  }
+  data <- fromJSON(path)
   return(data)
 }
 

@@ -213,7 +213,8 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		Map<String, Object> incoming = new HashMap<>();
 		Map<String, Object> outgoing = new HashMap<>();
 		ArrayList<Object> trains = new ArrayList<>();
-		Object associative;
+		Object associativeTrain;
+		Object mainTrain;
 
 		for (Node node : schedules) {
 			if (numOfTrains > maxNumberOfTrains) {
@@ -222,17 +223,17 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 				if (random.nextInt(100) <= associationPercent) {
 					outgoing.clear();
 					incoming.clear();
-					// choose a distinct train randomly
+					// choose distinct trains randomly
 					while (true) {
-						associative = getRandomElement(trains);
-						if (trains.get(trains.size() - 1) != associative) {
+						associativeTrain = getRandomElement(trains);
+						mainTrain = getRandomElement(trains);
+						if (mainTrain != associativeTrain) {
 							break;
 						}
 					}
 					outgoing.put(LOCATION, ((Node) getRandomElement(stations)).obj);
-					outgoing.put(ScheduleModelConstants.ASSOCIATIVE, associative);
-					incoming.put(ScheduleModelConstants.ASSOCIATIONS,
-							trains.get(trains.size() - 1));
+					outgoing.put(ScheduleModelConstants.ASSOCIATIVE, associativeTrain);
+					incoming.put(ScheduleModelConstants.ASSOCIATIONS, mainTrain);
 					fg.createVertex(ASSOCIATION, getAssociationAttributes(), outgoing,
 							incoming);
 				}
