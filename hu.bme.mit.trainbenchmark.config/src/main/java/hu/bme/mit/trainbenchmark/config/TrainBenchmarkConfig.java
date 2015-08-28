@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.config;
 
-import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 import hu.bme.mit.trainbenchmark.constants.ModelType;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import java.util.Arrays;
 
@@ -84,7 +84,8 @@ public abstract class TrainBenchmarkConfig {
 		final HelpFormatter formatter = new HelpFormatter();
 		formatter.setWidth(120);
 
-		formatter.printHelp("java -jar trainbenchmark-project-jarfile.jar [options]", "options:", options, "", false);
+		formatter.printHelp("java -jar trainbenchmark-project-jarfile.jar [options]", "options:",
+				options, "", false);
 		System.out.println();
 	}
 
@@ -111,11 +112,11 @@ public abstract class TrainBenchmarkConfig {
 	public ModelType getModelType() {
 		return modelType;
 	}
-	
+
 	public void setModelType(ModelType modelType) {
 		this.modelType = modelType;
 	}
-	
+
 	public String getModelPathNameWithoutExtension() {
 		final String filename = getModelFileNameWithoutExtension();
 		return getModelPath() + filename;
@@ -123,14 +124,23 @@ public abstract class TrainBenchmarkConfig {
 
 	public String getModelFileNameWithoutExtension() {
 		switch (modelType) {
-		case SCHEDULE_REAL: 
+		case SCHEDULE_REAL:
 			return "schedule-real";
 		case SCHEDULE_SCALE_FREE:
 			return "schedule-scale-" + size;
-		default:
-			final String variant = (scenario == ScenarioConstants.BATCH) ? "repair" : scenario.toString().toLowerCase();
+		case SCHEDULE_SCALE_FREE_CHAR:
+			return "schedule-scale-char" + size;
+		case SCHEDULE_SCALE_FREE_HET:
+			return "schedule-scale-het" + size;
+		case SCHEDULE_SCALE_FREE_HOM:
+			return "schedule-scale-hom" + size;
+		case RAILWAY:
+			final String variant = (scenario == ScenarioConstants.BATCH) ? "repair" : scenario
+					.toString().toLowerCase();
 			final String filename = "railway-" + variant + "-" + size;
 			return filename;
+		default:
+			throw new IllegalArgumentException("Invalid model type: " + modelType);
 		}
 	}
 

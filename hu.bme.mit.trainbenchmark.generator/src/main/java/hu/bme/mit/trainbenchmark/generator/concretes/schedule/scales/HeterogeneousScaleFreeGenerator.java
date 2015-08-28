@@ -10,26 +10,17 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator;
+package hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales;
 
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.ScaleFreeGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+public class HeterogeneousScaleFreeGenerator extends ScaleFreeGenerator {
 
-public abstract class Generator {
-
-	protected int id = 1;
-
-	protected static final Map<String, Object> emptyMap = Collections.emptyMap();
-
-	protected static final List<Integer> emptyList = Collections.emptyList();
-
-	protected GeneratorConfig generatorConfig;
-
-	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	public HeterogeneousScaleFreeGenerator(FormatGenerator formatGenerator,
+			GeneratorConfig generatorConfig) {
+		super(formatGenerator, generatorConfig);
+	}
 
 }

@@ -99,27 +99,11 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 	@Override
 	protected void generateModel() throws IOException {
-		System.out.print("Generate scale-free model...");
+		printMessage();
 		initializationStep();
-
-//		nodes += maxNumberOfTrains;
-		// generate station and schedule nodes plus the connections between them
 		while (nodes < maxNumberOfSchedules) {
-			if (stations.size() < maxNumberOfStations) {
-				addStation();
-//				newStationConnections(NEIGHBORS, lastSt(), getNeighborsNumber());
-			}
-			addSchedule();
-			int destinations = getDestinationsNumber();
-			if (nodes < maxNumberOfSchedules - maxNumberOfRepetitiveSchedules) {
-				if (!schedulesOfDestinations.containsKey(destinations)) {
-					schedulesOfDestinations.put(destinations, new ArrayList<Integer>());
-				}
-				schedulesOfDestinations.get(destinations).add(lastSch());
-				newStationConnections(DESTINATIONS, lastSch(), destinations);
-			} else {
-				addRepetitiveScheduleConnections(lastSch(), destinations);
-			}
+			generateStations();
+			generateSchedules();
 		}
 		transformStationConnections();
 		attachTrains();
@@ -128,18 +112,46 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		System.out.println("Done!");
 	}
 
-	private void addSchedule() throws IOException {
+	protected void printMessage() {
+		System.out.print("Generate scale-free model...");
+	}
+
+	protected void generateStations() throws IOException {
+		if (stations.size() < maxNumberOfStations) {
+			addStation();
+			newStationConnections(NEIGHBORS, lastSt(), getNeighborsNumber());
+		}
+	}
+
+	protected void generateSchedules() throws IOException {
+		addSchedule();
+		int destinations = getDestinationsNumber();
+		if (nodes < maxNumberOfSchedules - maxNumberOfRepetitiveSchedules) {
+			if (!schedulesOfDestinations.containsKey(destinations)) {
+				schedulesOfDestinations.put(destinations, new ArrayList<Integer>());
+			}
+			schedulesOfDestinations.get(destinations).add(lastSch());
+			newStationConnections(DESTINATIONS, lastSch(), destinations);
+		} else {
+			addRepetitiveScheduleConnections(lastSch(), destinations);
+		}
+	}
+
+	protected void addSchedule() throws IOException {
 		schedules.add(new Node(fg.createVertex(SCHEDULE, getScheduleAttributes()), 0));
 		nodes++;
 	}
 
-	private void addStation() throws IOException {
+	protected void addStation() throws IOException {
 		stations.add(new Node(fg.createVertex(STATION), 0));
 		nodes++;
 	}
 
-	private void newStationConnections(final String connection, final int sourceIndex, final int amount)
+	protected void newStationConnections(final String connection, final int sourceIndex, final int amount)
 			throws IOException {
+		if (amount == 0) {
+			return;
+		}
 		final ArrayList<Integer> indices = new ArrayList<>();
 		int percent = 0;
 		int degree = 0;
@@ -166,7 +178,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private void addRepetitiveScheduleConnections(final int sourceIndex, int destinations) {
+	protected void addRepetitiveScheduleConnections(final int sourceIndex, int destinations) {
 		while (true) {
 			if (!schedulesOfDestinations.containsKey(destinations)) {
 				destinations--;
@@ -187,7 +199,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private void transformStationConnections() throws IOException {
+	protected void transformStationConnections() throws IOException {
 		for (Node node : stations) {
 			for (Integer index : node.conn) {
 				fg.createEdge(NEIGHBORS, node.obj, stations.get(index).obj);
@@ -208,7 +220,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private void attachTrains() throws IOException {
+	protected void attachTrains() throws IOException {
 		int numOfTrains = 1;
 		Map<String, Object> incoming = new HashMap<>();
 		Map<String, Object> outgoing = new HashMap<>();
@@ -249,7 +261,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 	}
 
-	private void addStationConnection(final String connection, final int source, final int target)
+	protected void addStationConnection(final String connection, final int source, final int target)
 			throws IOException {
 		switch (connection) {
 		case NEIGHBORS:
@@ -278,20 +290,11 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-//	private int getNeighborsNumber() {
-//		return random.nextInt(2) + 1;
-//	}
+	protected int getNeighborsNumber() {
+		return 0;
+	}
 
-	private int getDestinationsNumber() {
-
-//		double y = random.nextDouble();
-//		double n = -3.0;
-//		double x0 = 2.0;
-//		double x1 = 150.0;
-//		double x = Math.pow((Math.pow(x1, n + 1) - Math.pow(x0, n + 1)) * y + Math.pow(x0, n + 1),
-//				1 / (n + 1));
-//		System.out.println((int) x);
-
+	protected int getDestinationsNumber() {
 		int percent = random.nextInt(1000);
 		if (percent < 2 && stations.size() > 150) {
 			// generate between 100-150
@@ -324,7 +327,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private int getPercent() {
+	protected int getPercent() {
 		if (maxDegree <= 2) {
 			return random.nextInt(stationDegrees);
 		} else {
@@ -332,13 +335,13 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private void initializationStep() throws IOException {
+	protected void initializationStep() throws IOException {
 		for (int i = 0; i < initStations; i++) {
 			addStation();
 		}
 	}
 
-	private boolean valid(final String connection, final int index) {
+	protected boolean valid(final String connection, final int index) {
 		if (connection == NEIGHBORS) {
 			if (lastSt() == index) {
 				return false;
@@ -347,7 +350,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		return true;
 	}
 
-	private void increaseDegree(final String type, final Integer index) {
+	protected void increaseDegree(final String type, final Integer index) {
 		switch (type) {
 		case STATION:
 			stations.get(index).degree++;
@@ -371,7 +374,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private Map<String, Object> getAssociationAttributes() {
+	protected Map<String, Object> getAssociationAttributes() {
 		Map<String, Object> attributes = new HashMap<>();
 		int percent = random.nextInt(100);
 		if (percent < 8) {
@@ -405,7 +408,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		return attributes;
 	}
 
-	private String getRandomBinary() {
+	protected String getRandomBinary() {
 		int value = random.nextInt(128);
 		String binary = Integer.toBinaryString(value);
 		if (binary.length() < 7) {
@@ -417,7 +420,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		return binary;
 	}
 
-	private Map<String, Object> getScheduleAttributes() {
+	protected Map<String, Object> getScheduleAttributes() {
 		Map<String, Object> attributes = new HashMap<>();
 		int percent = random.nextInt(1000);
 
@@ -471,7 +474,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		return attributes;
 	}
 
-	private void addPlanning(final Map<String, Object> attributes, final int percent) {
+	protected void addPlanning(final Map<String, Object> attributes, final int percent) {
 		int planningPercent = random.nextInt(100);
 		if (planningPercent < percent) {
 			attributes.put(PLANNING, SHORTTERM);
@@ -480,7 +483,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		}
 	}
 
-	private void addIndicator(final Map<String, Object> attributes) {
+	protected void addIndicator(final Map<String, Object> attributes) {
 		int percent = random.nextInt(100);
 		if (!attributes.containsKey(PLANNING)) {
 			if (percent < 12) {
@@ -508,7 +511,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 
 	}
 
-	private void addRandomDates(final Map<String, Object> attributes) {
+	protected void addRandomDates(final Map<String, Object> attributes) {
 		int startYear = random.nextInt(2) + 2014;
 		int endYear = startYear;
 		int startDay = random.nextInt(365) + 1;
@@ -531,7 +534,7 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 						calendar.get(Calendar.DAY_OF_MONTH)));
 	}
 
-	private String createDate(final int year, final int month, final int day) {
+	protected String createDate(final int year, final int month, final int day) {
 		String m = Integer.toString(month);
 		String d = Integer.toString(day);
 		if (m.length() == 1) {
@@ -543,11 +546,11 @@ public class ScaleFreeGenerator extends ScheduleGenerator {
 		return Integer.toString(year) + "-" + m + "-" + d;
 	}
 
-	private int lastSch() {
+	protected int lastSch() {
 		return schedules.size() - 1;
 	}
 
-	private int lastSt() {
+	protected int lastSt() {
 		return stations.size() - 1;
 	}
 

@@ -58,7 +58,7 @@ public abstract class EMFFormatGenerator extends FormatGenerator {
 
 	@Override
 	public void startTransaction() throws IOException {
-
+		// empty
 	}
 
 	@Override
