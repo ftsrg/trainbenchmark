@@ -32,4 +32,28 @@ public abstract class Generator {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public GeneratorConfig getGeneratorConfig() {
+		return generatorConfig;
+	}
+
+	public void setGeneratorConfig(GeneratorConfig generatorConfig) {
+		this.generatorConfig = generatorConfig;
+	}
+
+	public Random getRandom() {
+		return random;
+	}
+
+	public void setRandom(Random random) {
+		this.random = random;
+	}
+
 }

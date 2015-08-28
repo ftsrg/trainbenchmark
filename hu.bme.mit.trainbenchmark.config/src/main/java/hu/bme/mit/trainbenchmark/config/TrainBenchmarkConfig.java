@@ -126,14 +126,16 @@ public abstract class TrainBenchmarkConfig {
 		switch (modelType) {
 		case SCHEDULE_REAL:
 			return "schedule-real";
+		case SCHEDULE_RANDOM:
+			return "schedule-random-" + size;
 		case SCHEDULE_SCALE_FREE:
 			return "schedule-scale-" + size;
 		case SCHEDULE_SCALE_FREE_CHAR:
-			return "schedule-scale-char" + size;
+			return "schedule-scale-char-" + size;
 		case SCHEDULE_SCALE_FREE_HET:
-			return "schedule-scale-het" + size;
+			return "schedule-scale-het-" + size;
 		case SCHEDULE_SCALE_FREE_HOM:
-			return "schedule-scale-hom" + size;
+			return "schedule-scale-hom-" + size;
 		case RAILWAY:
 			final String variant = (scenario == ScenarioConstants.BATCH) ? "repair" : scenario
 					.toString().toLowerCase();

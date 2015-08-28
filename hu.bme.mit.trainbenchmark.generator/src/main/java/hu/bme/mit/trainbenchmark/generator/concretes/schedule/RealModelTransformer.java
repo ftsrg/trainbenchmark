@@ -34,7 +34,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN_UID;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
-import hu.bme.mit.trainbenchmark.generator.ScheduleGenerator;
+import hu.bme.mit.trainbenchmark.generator.SyntheticGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 import java.io.File;
@@ -45,9 +45,9 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class RealModelGenerator extends ScheduleGenerator {
+public class RealModelTransformer extends SyntheticGenerator {
 
-	public RealModelGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
+	public RealModelTransformer(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
 	}
 
@@ -228,4 +228,5 @@ public class RealModelGenerator extends ScheduleGenerator {
 			return "Next";
 		}
 	}
+
 }

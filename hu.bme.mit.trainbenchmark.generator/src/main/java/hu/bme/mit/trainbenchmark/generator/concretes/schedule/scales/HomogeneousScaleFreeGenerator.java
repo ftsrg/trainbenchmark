@@ -13,15 +13,19 @@
 package hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
-import hu.bme.mit.trainbenchmark.generator.concretes.schedule.ScaleFreeGenerator;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.HomogeneousScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.util.Node;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class HomogeneousScaleFreeGenerator extends ScaleFreeGenerator {
+public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator implements ScaleFreeModel {
+
+	protected ScaleFreeGenerator sfg;
 
 	public HomogeneousScaleFreeGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -33,91 +37,51 @@ public class HomogeneousScaleFreeGenerator extends ScaleFreeGenerator {
 	}
 
 	@Override
+	protected void initializeConstants() {
+		super.initializeConstants();
+		sfg = new ScaleFreeGenerator(this);
+		sfg.initializeConstants();
+	}
+
+	@Override
+	protected void initializationStep() throws IOException {
+		sfg.initializationStep();
+	}
+
+	@Override
+	protected void generateStations() throws IOException {
+		while (currentNodes < maxNumberOfStations) {
+			addStation();
+			sfg.newStationConnections(NEIGHBORS, lastSt(), getNeighborsNumber());
+
+		}
+	}
+
+	@Override
 	protected int getNeighborsNumber() {
 		return 2;
 	}
 
 	@Override
-	protected int getDestinationsNumber() {
-		double y = random.nextDouble();
-		double n = -3.0;
-		double x0 = 2.0;
-		double x1 = 150.0;
-		double x = Math.pow((Math.pow(x1, n + 1) - Math.pow(x0, n + 1)) * y + Math.pow(x0, n + 1),
-				1 / (n + 1));
-		return (int) x;
+	protected void addDestination(int sourceIndex, Integer targetIndex) {
+		super.addDestination(sourceIndex, targetIndex);
+		sfg.increaseDegree(SCHEDULE, sourceIndex);
+		sfg.increaseDegree(STATION, targetIndex);
 	}
 
 	@Override
-	protected void generateSchedules() throws IOException {
-		if (nodes >= maxNumberOfStations) {
-			super.generateSchedules();
-		}
+	public ArrayList<Node> getStations() {
+		return stations;
 	}
 
 	@Override
-	protected void newStationConnections(final String connection, final int sourceIndex, final int amount)
-			throws IOException {
-		if (connection.equals(NEIGHBORS)) {
-			super.newStationConnections(connection, sourceIndex, amount);
-			return;
-		}
-		if (amount == 0) {
-			return;
-		}
-		int tries = 0;
-		int maxTries = 10;
-		int stationIndex;
-		List<Integer> stationIndices;
-		while (tries < maxTries) {
-			stationIndex = getRandomIndex(stations);
-			// choose a random station that has neighbors for sure
-			if (stations.get(stationIndex).conn.size() == 0) {
-				continue;
-			}
-			stationIndices = findPath(connection, sourceIndex, amount, stationIndex);
-			if (stationIndices.size() != amount) {
-				if (tries == maxTries - 1) {
-					for (Integer index : stationIndices) {
-						addStationConnection(connection, sourceIndex, index);
-					}
-					return;
-				}
-				tries++;
-			} else {
-				for (Integer index : stationIndices) {
-					addStationConnection(connection, sourceIndex, index);
-				}
-				return;
-			}
-
-		}
-
+	public ArrayList<Node> getSchedules() {
+		return schedules;
 	}
 
-	protected List<Integer> findPath(final String connection, final int sourceIndex, final int amount,
-			final int stationIndex) {
-		List<Integer> stationIndices = new ArrayList<Integer>();
-		// first station in the path
-		Node station = stations.get(stationIndex);
-		int pathSize = 1; // station is the first node in the path, thus, the path starts from 1
-		int index = stationIndex;
-		int tries = 0; // avoid infinite loop
-		int maxTries = 10;
-		while (pathSize <= amount && tries < maxTries) {
-			// if there are no further neighbors
-			if (station.conn.size() == 0) {
-				return stationIndices;
-			}
-			index = (int) getRandomElement(station.conn);
-			if (stationIndices.contains(index)) {
-				tries++;
-				continue;
-			}
-			station = stations.get(index);
-			stationIndices.add(index);
-			pathSize++;
-		}
-		return stationIndices;
+	@Override
+	public void addNewStation() throws IOException {
+		addStation();
 	}
+
 }

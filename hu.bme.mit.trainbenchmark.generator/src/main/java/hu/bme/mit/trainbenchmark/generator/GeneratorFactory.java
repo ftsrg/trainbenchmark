@@ -13,8 +13,8 @@
 package hu.bme.mit.trainbenchmark.generator;
 
 import hu.bme.mit.trainbenchmark.generator.concretes.railway.RailwayGenerator;
-import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RealModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.concretes.schedule.ScaleFreeGenerator;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RandomScheduleGenerator;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RealModelTransformer;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales.HeterogeneousScaleFreeGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales.HomogeneousScaleFreeGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales.RealCharacteristicScaleFreeGenerator;
@@ -30,8 +30,8 @@ public abstract class GeneratorFactory {
 
 	public SyntheticGenerator getSyntheticGenerator() {
 		switch (generatorConfig.getModelType()) {
-		case SCHEDULE_SCALE_FREE:
-			return new ScaleFreeGenerator(getScheduleFormatGenerator(), generatorConfig);
+		case SCHEDULE_RANDOM:
+			return new RandomScheduleGenerator(getScheduleFormatGenerator(), generatorConfig);
 		case SCHEDULE_SCALE_FREE_HOM:
 			return new HomogeneousScaleFreeGenerator(getScheduleFormatGenerator(),
 					generatorConfig);
@@ -42,7 +42,7 @@ public abstract class GeneratorFactory {
 			return new RealCharacteristicScaleFreeGenerator(getScheduleFormatGenerator(),
 					generatorConfig);
 		case SCHEDULE_REAL:
-			return new RealModelGenerator(getScheduleFormatGenerator(), generatorConfig);
+			return new RealModelTransformer(getScheduleFormatGenerator(), generatorConfig);
 		case RAILWAY:
 			return new RailwayGenerator(getRailwayFormatGenerator(), generatorConfig);
 		default:

@@ -10,29 +10,15 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator;
-
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+package hu.bme.mit.trainbenchmark.generator.util;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public abstract class ScheduleGenerator extends SyntheticGenerator {
+public class RandomElementsProvider {
 
-	/**
-	 * It equals to the sizeStep * size of the model.
-	 */
-	protected int maxNodes;
-
-	/**
-	 * Represents the current number of nodes.
-	 */
-	protected int nodes;
-
-	public ScheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
-		super(formatGenerator, generatorConfig);
-	}
-
-	protected ArrayList<Integer> getRandomIndices(final ArrayList<?> list, final int amount) {
+	public static ArrayList<Integer> getRandomIndices(final Random random, final ArrayList<?> list,
+			final int amount) {
 		final int size = list.size();
 		if (amount > size) {
 			throw new IllegalArgumentException("Amount is bigger than the size of the list!");
@@ -52,7 +38,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 	}
 
-	protected Object getRandomElement(final ArrayList<?> list) {
+	public static Object getRandomElement(final Random random, final ArrayList<?> list) {
 		if (list.size() == 0) {
 			throw new IllegalArgumentException("The list parameter is empty");
 		}
@@ -60,32 +46,24 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 	}
 
-	protected int getRandomIndex(final ArrayList<?> list) {
+	public static int getRandomDisjunctIndex(final Random random, final ArrayList<?> list,
+			final int original) {
+		if (list.size() < 1) {
+			throw new IllegalArgumentException(
+					"The list parameter must contain more than 1 value.");
+		}
+		while (true) {
+			int index = getRandomIndex(random, list);
+			if (original != index) {
+				return index;
+			}
+		}
+	}
+
+	public static int getRandomIndex(final Random random, final ArrayList<?> list) {
 		if (list.size() == 0) {
 			throw new IllegalArgumentException("The list parameter is empty");
 		}
 		return random.nextInt(list.size());
-	}
-
-	protected class Node {
-
-		public Object obj;
-
-		public int degree;
-
-		/**
-		 * The indices of the connected nodes.
-		 */
-		public ArrayList<Integer> conn;
-
-		public Node(Object obj, int degree) {
-			this.obj = obj;
-			this.degree = degree;
-			this.conn = new ArrayList<Integer>();
-		}
-
-		public int lastConn() {
-			return conn.get(conn.size() - 1);
-		}
 	}
 }

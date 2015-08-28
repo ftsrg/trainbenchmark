@@ -20,12 +20,14 @@ public abstract class SyntheticGenerator extends Generator {
 
 	protected FormatGenerator fg;
 
-	protected abstract void initializeConstants();
-
 	public SyntheticGenerator(final FormatGenerator formatGenerator, final GeneratorConfig generatorConfig) {
 		this.fg = formatGenerator;
 		this.generatorConfig = generatorConfig;
 	}
+
+	protected abstract void initializeConstants();
+
+	protected abstract void generateModel() throws IOException;
 
 	public void generate() throws Exception {
 		fg.initModel();
@@ -36,6 +38,18 @@ public abstract class SyntheticGenerator extends Generator {
 		fg.persistModel();
 	}
 
-	protected abstract void generateModel() throws IOException;
+	protected double getPowerLawValue(final double uniformRandom, double exponent, double minBound,
+			double maxBound) {
+		return Math.pow((Math.pow(maxBound, exponent + 1) - Math.pow(minBound, exponent + 1))
+				* uniformRandom + Math.pow(minBound, exponent + 1), 1 / (exponent + 1));
+	}
+
+	public FormatGenerator getFormatGenerator() {
+		return fg;
+	}
+
+	public void setFormatGenerator(FormatGenerator formatGenerator) {
+		this.fg = formatGenerator;
+	}
 
 }
