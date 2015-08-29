@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.PosLengthMatch;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Literal;

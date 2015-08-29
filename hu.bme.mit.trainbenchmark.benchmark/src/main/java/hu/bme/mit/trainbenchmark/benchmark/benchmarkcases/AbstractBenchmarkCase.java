@@ -25,6 +25,7 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import eu.mondo.sam.core.metrics.BenchmarkMetric;
@@ -128,6 +129,14 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 		timer.stopMeasure();
 		results.setValue(matches.size());
 		phaseResult.addMetrics(timer, results);
+	}
+
+	public void benchmarkProcessMatches(final PhaseResult phaseResult) {
+		for (Entry<String, Object> entry : checker.processMatches(matches).entrySet()) {
+			ScalarMetric matchResult = new ScalarMetric(entry.getKey());
+			matchResult.setValue((long) entry.getValue());
+			phaseResult.addMetrics(matchResult);
+		}
 	}
 
 	public void benchmarkDestroy() throws Exception {

@@ -9,22 +9,10 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.matches;
+package hu.bme.mit.trainbenchmark.benchmark.matches.railway;
 
-public interface ConnectedSegmentsMatch {
+public interface PosLengthMatch {
 
-	public Object getSensor();
-
-	public Object getSegment1();
-
-	public Object getSegment2();
-
-	public Object getSegment3();
-
-	public Object getSegment4();
-
-	public Object getSegment5();
-
-	public Object getSegment6();
+	public Object getSegment();
 
 }

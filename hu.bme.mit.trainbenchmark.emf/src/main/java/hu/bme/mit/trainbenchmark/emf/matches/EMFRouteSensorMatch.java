@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.emf.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;

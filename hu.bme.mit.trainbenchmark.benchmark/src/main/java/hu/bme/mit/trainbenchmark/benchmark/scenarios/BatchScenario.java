@@ -27,11 +27,17 @@ public class BatchScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 		SequencePhase seq = new SequencePhase();
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
+		// @formatter:off
 		seq.addPhases(new InitializationPhase("Init"),
-				new AnalyzerInitializationPhase("AnalyzerInit"), new ReadPhase("Read"),
-				initMetrics, calcMetrics, new CheckPhase("Check"),
-				new DestroyPhase("Destroy"));
+				new AnalyzerInitializationPhase("AnalyzerInit"), 
+				new ReadPhase("Read"),
+				initMetrics, 
+				calcMetrics, 
+				new CheckPhase("Check"),
+				new DestroyPhase("Destroy")
+		);
 		rootPhase = seq;
+		// @formatter:on
 
 	}
 

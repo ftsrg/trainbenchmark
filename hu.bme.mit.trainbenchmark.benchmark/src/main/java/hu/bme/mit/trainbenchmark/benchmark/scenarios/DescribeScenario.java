@@ -26,10 +26,16 @@ public class DescribeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 		SequencePhase seq = new SequencePhase();
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
+		// @formatter:off
 		seq.addPhases(new InitializationPhase("Init"),
-				new DescriptionInitializationPhase("DescInit"), new ReadPhase("Read"),
-				initMetrics, calcMetrics, new DestroyPhase("Destroy"));
+				new DescriptionInitializationPhase("DescInit"), 
+				new ReadPhase("Read"),
+				initMetrics, 
+				calcMetrics, 
+				new DestroyPhase("Destroy")
+		);
 		rootPhase = seq;
+		// @formatter:on
 
 	}
 

@@ -15,7 +15,7 @@ import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.SwitchSetMatch;
 
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.pipes.util.structures.Row;

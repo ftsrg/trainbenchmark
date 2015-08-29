@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;

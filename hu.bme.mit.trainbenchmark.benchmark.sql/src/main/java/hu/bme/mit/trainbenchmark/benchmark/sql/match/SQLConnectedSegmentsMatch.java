@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants;
 
 import java.sql.ResultSet;

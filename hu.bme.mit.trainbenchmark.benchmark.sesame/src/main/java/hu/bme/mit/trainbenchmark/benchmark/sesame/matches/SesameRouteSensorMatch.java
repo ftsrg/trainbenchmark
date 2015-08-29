@@ -15,7 +15,7 @@ import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.RouteSensorMatch;
 
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;

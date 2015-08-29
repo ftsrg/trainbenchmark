@@ -15,7 +15,7 @@ import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.RouteSensorMatch;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Resource;

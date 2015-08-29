@@ -41,7 +41,8 @@ public class Drools5Checker extends Checker<EMFMatch> {
 	public Collection<EMFMatch> check() throws IOException {
 		if (liveQuery == null) {
 			listener = new Drools5ResultListener(query);
-			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);
+			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {},
+					listener);
 		}
 		matches = listener.getMatches();
 		return matches;

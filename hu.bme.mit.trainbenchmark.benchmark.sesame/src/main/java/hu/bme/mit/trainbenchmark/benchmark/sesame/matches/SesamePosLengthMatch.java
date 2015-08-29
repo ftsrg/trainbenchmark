@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.PosLengthMatch;
 
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;

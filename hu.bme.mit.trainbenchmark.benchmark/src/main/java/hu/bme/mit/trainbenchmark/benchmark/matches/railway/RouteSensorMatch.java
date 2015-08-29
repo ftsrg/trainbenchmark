@@ -9,29 +9,16 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
+package hu.bme.mit.trainbenchmark.benchmark.matches.railway;
 
-import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.matches.railway.PosLengthMatch;
+public interface RouteSensorMatch {
 
-import java.util.Map;
+	public Object getRoute();
 
-import org.neo4j.graphdb.Node;
+	public Object getSensor();
 
-public class Neo4jPosLengthMatch extends Neo4jMatch implements PosLengthMatch {
+	public Object getSwP();
 
-	public Neo4jPosLengthMatch(final Map<String, Object> match) {
-		super(match);
-	}
-
-	@Override
-	public Node getSegment() {
-		return (Node) match.get(VAR_SEGMENT);
-	}
-
-	@Override
-	public Node[] toArray() {
-		return new Node[] { getSegment() };
-	}
+	public Object getSw();
 
 }

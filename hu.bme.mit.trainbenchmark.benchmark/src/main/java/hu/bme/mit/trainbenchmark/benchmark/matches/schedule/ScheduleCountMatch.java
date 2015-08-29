@@ -9,10 +9,10 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public interface SwitchSensorMatch {
+package hu.bme.mit.trainbenchmark.benchmark.matches.schedule;
 
-	public Object getSw();
+public interface ScheduleCountMatch {
 
+	public Object getCount();
 }

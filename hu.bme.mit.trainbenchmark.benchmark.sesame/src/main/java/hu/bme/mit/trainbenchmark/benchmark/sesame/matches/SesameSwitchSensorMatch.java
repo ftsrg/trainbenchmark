@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SW;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.SwitchSensorMatch;
 
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;

@@ -11,11 +11,27 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.checker;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.MatchProcessor;
+
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Checker<M> {
-	
+
 	public abstract Collection<M> check() throws Exception;
+
+//	public abstract Map<String, Object> processMatches(final Collection<M> matches);
+
+	public Map<String, Object> processMatches(Collection<M> matches) {
+		Map<String, Object> processedMatches = new HashMap<String, Object>();
+		for (M match : matches) {
+			if (match instanceof MatchProcessor) {
+				processedMatches.putAll(((MatchProcessor) match).process());
+			}
+		}
+		return processedMatches;
+	}
 
 	public void destroy() {
 	}

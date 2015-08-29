@@ -9,16 +9,22 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.matches;
+package hu.bme.mit.trainbenchmark.benchmark.matches.railway;
 
-public interface RouteSensorMatch {
+public interface SemaphoreNeighborMatch {
 
-	public Object getRoute();
+	public Object getSemaphore();
 
-	public Object getSensor();
+	public Object getRoute1();
 
-	public Object getSwP();
+	public Object getRoute2();
 
-	public Object getSw();
+	public Object getSensor1();
+
+	public Object getSensor2();
+
+	public Object getTe1();
+
+	public Object getTe2();
 
 }

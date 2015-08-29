@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.PosLengthMatch;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

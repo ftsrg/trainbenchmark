@@ -39,11 +39,18 @@ public class InjectScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"), new InitTransformationPhase(
-				"InitTransformation"), new AnalyzerInitializationPhase("AnalyzerInit"),
-				new ReadPhase("Read"), initMetrics, calcMetrics, new CheckPhase("Check"),
-				iter, new DestroyPhase("Destroy"));
-
+		// @formatter:off
+		seq.addPhases(new InitializationPhase("Init"), 
+				new InitTransformationPhase("InitTransformation"), 
+				new AnalyzerInitializationPhase("AnalyzerInit"),
+				new ReadPhase("Read"), 
+				initMetrics, 
+				calcMetrics, 
+				new CheckPhase("Check"),
+				iter, 
+				new DestroyPhase("Destroy")
+		);
+		// @formatter:on
 		rootPhase = seq;
 
 	}

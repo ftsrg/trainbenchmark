@@ -31,10 +31,20 @@ public class RepairScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 		CheckPhase recheck = new CheckPhase("Recheck");
 		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
-		seq.addPhases(new InitializationPhase("Init"), new InitTransformationPhase(
-				"InitTransformation"), new AnalyzerInitializationPhase("AnalyzerInit"),
-				new ReadPhase("Read"), initMetrics, calcMetrics, check,
-				new TransformationPhase("Edit"), recheck, new DestroyPhase("Destroy"));
+		// @formatter:off
+		seq.addPhases(new InitializationPhase("Init"), 
+				new InitTransformationPhase(
+				"InitTransformation"), 
+				new AnalyzerInitializationPhase("AnalyzerInit"),
+				new ReadPhase("Read"), 
+				initMetrics, 
+				calcMetrics, 
+				check,
+				new TransformationPhase("Edit"), 
+				recheck, 
+				new DestroyPhase("Destroy")
+		);
+		// @formatter:on
 		rootPhase = seq;
 
 	}

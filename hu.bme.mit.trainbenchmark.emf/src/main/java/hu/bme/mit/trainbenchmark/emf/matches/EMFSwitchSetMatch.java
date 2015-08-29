@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;

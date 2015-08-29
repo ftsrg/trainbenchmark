@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants;
 
 import java.util.Map;

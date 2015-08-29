@@ -9,6 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+
 package hu.bme.mit.trainbenchmark.benchmark.sesame.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
@@ -37,13 +38,15 @@ public class SesameChecker extends Checker<SesameMatch> {
 		this.driver = driver;
 		this.query = bc.getQuery();
 
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + bc.getQuery()
-				+ ".sparql";
+		final String queryPath = bc.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/"
+				+ bc.getQuery() + ".sparql";
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 
 	@Override
-	public Collection<SesameMatch> check() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+	public Collection<SesameMatch> check() throws RepositoryException, MalformedQueryException,
+			QueryEvaluationException {
 		return driver.runQuery(query, queryDefinition);
 	}
 

@@ -18,7 +18,7 @@ import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.railway.RailwayQueryConstants.VAR_TE2;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.railway.SemaphoreNeighborMatch;
 
 import java.util.Map;
 
