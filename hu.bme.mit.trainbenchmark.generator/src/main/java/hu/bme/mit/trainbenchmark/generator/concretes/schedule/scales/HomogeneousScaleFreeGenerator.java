@@ -53,7 +53,11 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 		while (currentNodes < maxNumberOfStations) {
 			addStation();
 			sfg.newStationConnections(NEIGHBORS, lastSt(), getNeighborsNumber());
-
+		}
+		for (int i = 0; i < stations.size(); i++) {
+			if (stations.get(i).conn.isEmpty()) {
+				sfg.newStationConnections(NEIGHBORS, i, getNeighborsNumber());
+			}
 		}
 	}
 
@@ -63,10 +67,13 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 	}
 
 	@Override
-	protected void addDestination(int sourceIndex, Integer targetIndex) {
-		super.addDestination(sourceIndex, targetIndex);
-		sfg.increaseDegree(SCHEDULE, sourceIndex);
-		sfg.increaseDegree(STATION, targetIndex);
+	protected boolean addDestination(final int sourceIndex, final int targetIndex) {
+		if (super.addDestination(sourceIndex, targetIndex)) {
+			sfg.increaseDegree(SCHEDULE, sourceIndex);
+			sfg.increaseDegree(STATION, targetIndex);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -82,6 +89,11 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 	@Override
 	public void addNewStation() throws IOException {
 		addStation();
+	}
+
+	@Override
+	public boolean addNewNeighbor(final int sourceIndex, final int targetIndex) {
+		return addNeighbor(sourceIndex, targetIndex);
 	}
 
 }

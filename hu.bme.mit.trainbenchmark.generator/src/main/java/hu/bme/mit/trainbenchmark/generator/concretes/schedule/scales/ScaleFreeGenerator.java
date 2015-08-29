@@ -64,20 +64,20 @@ public class ScaleFreeGenerator extends Generator {
 		final ArrayList<Integer> indices = new ArrayList<>();
 		int percent = 0;
 		int degree = 0;
-		int index = 0;
+		int targetIndex = 0;
 
 		while (true) {
-			index = RandomElementsProvider.getRandomIndex(random, stations);
-			degree = ((Node) stations.get(index)).degree;
-			if (degree == 0 && valid(connection, index)) {
-				indices.add(index);
-				addStationConnection(connection, sourceIndex, index);
+			targetIndex = RandomElementsProvider.getRandomIndex(random, stations);
+			degree = ((Node) stations.get(targetIndex)).degree;
+			if (degree == 0 && sourceIndex != targetIndex) {
+				indices.add(targetIndex);
+				addStationConnection(connection, sourceIndex, targetIndex);
 			} else {
 				percent = getPercent();
 				if (degree >= percent) {
-					if (!indices.contains(index)) {
-						indices.add(index);
-						addStationConnection(connection, sourceIndex, index);
+					if (!indices.contains(targetIndex)) {
+						indices.add(targetIndex);
+						addStationConnection(connection, sourceIndex, targetIndex);
 					}
 				}
 			}
@@ -91,9 +91,14 @@ public class ScaleFreeGenerator extends Generator {
 			throws IOException {
 		switch (connection) {
 		case NEIGHBORS:
+			// add twice
 			increaseDegree(STATION, source);
 			increaseDegree(STATION, target);
-			stations.get(source).conn.add(target);
+			model.addNewNeighbor(source, target);
+
+			increaseDegree(STATION, source);
+			increaseDegree(STATION, target);
+			model.addNewNeighbor(target, source);
 			break;
 		case DESTINATIONS:
 			increaseDegree(SCHEDULE, source);
@@ -106,10 +111,10 @@ public class ScaleFreeGenerator extends Generator {
 						&& !stations.get(lastConnIndex).conn.contains(target)) {
 					increaseDegree(STATION, lastConnIndex);
 					increaseDegree(STATION, target);
-					stations.get(lastConnIndex).conn.add(target);
+					model.addNewNeighbor(lastConnIndex, target);
 				}
 			}
-			schedules.get(source).conn.add(target);
+			model.addNewNeighbor(source, target);
 			break;
 		default:
 			throw new IllegalStateException("Illegal type of connection!");

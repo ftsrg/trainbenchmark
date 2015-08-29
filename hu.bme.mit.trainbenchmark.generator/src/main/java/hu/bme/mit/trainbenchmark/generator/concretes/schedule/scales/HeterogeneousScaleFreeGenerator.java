@@ -14,6 +14,8 @@ package hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.DESTINATIONS;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.NEIGHBORS;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.SCHEDULE;
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.HeterogeneousScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -74,6 +76,16 @@ public class HeterogeneousScaleFreeGenerator extends HeterogeneousScheduleGenera
 	}
 
 	@Override
+	protected boolean addDestination(final int sourceIndex, final int targetIndex) {
+		if (super.addDestination(sourceIndex, targetIndex)) {
+			sfg.increaseDegree(SCHEDULE, sourceIndex);
+			sfg.increaseDegree(STATION, targetIndex);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	protected int getNeighborsNumber() {
 		return 0;
 	}
@@ -91,6 +103,11 @@ public class HeterogeneousScaleFreeGenerator extends HeterogeneousScheduleGenera
 	@Override
 	public void addNewStation() throws IOException {
 		addStation();
+	}
+
+	@Override
+	public boolean addNewNeighbor(final int sourceIndex, final int targetIndex) {
+		return addNeighbor(sourceIndex, targetIndex);
 	}
 
 }

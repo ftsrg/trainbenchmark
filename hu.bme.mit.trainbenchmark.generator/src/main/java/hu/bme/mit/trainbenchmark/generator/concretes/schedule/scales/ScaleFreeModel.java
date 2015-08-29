@@ -24,4 +24,6 @@ public interface ScaleFreeModel {
 	public ArrayList<Node> getSchedules();
 
 	public void addNewStation() throws IOException;
+
+	public boolean addNewNeighbor(final int sourceIndex, final int targetIndex);
 }

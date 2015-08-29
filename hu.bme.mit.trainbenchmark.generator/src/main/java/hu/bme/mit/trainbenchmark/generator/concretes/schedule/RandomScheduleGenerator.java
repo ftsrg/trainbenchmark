@@ -77,7 +77,8 @@ public class RandomScheduleGenerator extends HomogeneousScheduleGenerator {
 					sourceIndex);
 			if (!connected(sourceIndex, stationIndex)) {
 				if (random.nextDouble() < p * numberOfRandomStations) {
-					stations.get(sourceIndex).conn.add(stationIndex);
+					addNeighbor(sourceIndex, stationIndex);
+					addNeighbor(stationIndex, sourceIndex);
 				}
 				// increment anyway
 				i++;

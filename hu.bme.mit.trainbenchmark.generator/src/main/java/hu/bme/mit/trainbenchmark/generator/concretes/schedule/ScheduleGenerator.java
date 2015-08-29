@@ -154,8 +154,18 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		}
 	}
 
-	protected void addDestination(final int sourceIndex, Integer targetIndex) {
-		schedules.get(sourceIndex).conn.add(targetIndex);
+	protected boolean addNeighbor(final int sourceIndex, final int targetIndex) {
+		if (stations.get(sourceIndex).conn.contains(targetIndex)) {
+			return false;
+		}
+		return stations.get(sourceIndex).conn.add(targetIndex);
+	}
+
+	protected boolean addDestination(final int sourceIndex, final int targetIndex) {
+		if (schedules.get(sourceIndex).conn.contains(targetIndex)) {
+			return false;
+		}
+		return schedules.get(sourceIndex).conn.add(targetIndex);
 	}
 
 	protected void transformStationConnections() throws IOException {
