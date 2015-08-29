@@ -52,8 +52,8 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		int tries = 0;
 		int maxTries = 10;
 		int stationIndex;
+		List<Integer> bestTriedStations = null;
 		List<Integer> stationIndices;
-		System.out.println(amount + "---------------------");
 		while (tries < maxTries) {
 			stationIndex = RandomElementsProvider.getRandomIndex(random, stations);
 			// choose a random station that has neighbors for sure
@@ -62,14 +62,26 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 			}
 			stationIndices = findPath(sourceIndex, amount, stationIndex);
 			if (stationIndices.size() != amount) {
-				System.out.println("size: " + stationIndices.size());
-				System.out.println(tries);
 
 				if (tries == maxTries - 1) {
-					for (Integer index : stationIndices) {
-						addDestination(sourceIndex, index);
+					if (bestTriedStations.size() > stationIndices.size()) {
+						for (Integer index : bestTriedStations) {
+							addDestination(sourceIndex, index);
+						}
+					} else {
+						for (Integer index : stationIndices) {
+							addDestination(sourceIndex, index);
+						}
+
 					}
 					return;
+				}
+				if (bestTriedStations == null) {
+					bestTriedStations = stationIndices;
+				} else {
+					if (bestTriedStations.size() < stationIndices.size()) {
+						bestTriedStations = stationIndices;
+					}
 				}
 				tries++;
 			} else {
