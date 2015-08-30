@@ -51,45 +51,46 @@ public class RealCharacteristicScaleFreeGenerator extends HeterogeneousScaleFree
 
 	@Override
 	protected int getDestinationsNumber() {
-		int percent = random.nextInt(1000);
-		if (percent < 2 && stations.size() > 150) {
+		double chance = random.nextDouble();
+		if (chance < 0.00137 && stations.size() > 150) {
 			// generate between 100-150
 //			return random.nextInt(51) + 100;
 			return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 100, 150);
-		} else if (percent < 42 && stations.size() > 100) {
+		} else if (chance < 0.03537 && stations.size() > 100) {
 			// generate between 50-99
 //			return random.nextInt(50) + 50;
 			return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 51, 99);
 		} else { // generate between 2-49
-			percent = random.nextInt(100);
-			if (percent < 42) {
-				// generate between 2-11
-//				return random.nextInt(10) + 2;
-				return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 2, 11);
-			} else {
-				percent = random.nextInt(100);
-				if (percent < 4) {
-					// 41 - 49
-//					return random.nextInt(9) + 41;
-					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-							41, 49);
-				} else if (percent < 14) {
-					// 31 - 40
-//					return random.nextInt(10) + 31;
-					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-							31, 40);
-				} else if (percent < 42) {
-					// 21 - 30
-//					return random.nextInt(10) + 21;
-					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-							21, 30);
-				} else {
-					// 11 - 20
-//					return random.nextInt(10) + 11;
-					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-							11, 20);
-				}
-			}
+			chance = random.nextDouble();
+			return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 2, 50);
+//			if (chance < 42) {
+//				// generate between 2-11
+////				return random.nextInt(10) + 2;
+//				return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 2, 11);
+//			} else {
+//				chance = random.nextInt(100);
+//				if (chance < 4) {
+//					// 41 - 49
+////					return random.nextInt(9) + 41;
+//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
+//							41, 49);
+//				} else if (chance < 14) {
+//					// 31 - 40
+////					return random.nextInt(10) + 31;
+//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
+//							31, 40);
+//				} else if (chance < 42) {
+//					// 21 - 30
+////					return random.nextInt(10) + 21;
+//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
+//							21, 30);
+//				} else {
+//					// 11 - 20
+////					return random.nextInt(10) + 11;
+//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
+//							11, 20);
+//				}
+//			}
 
 		}
 	}
