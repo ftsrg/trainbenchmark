@@ -114,7 +114,7 @@ public class ScaleFreeGenerator extends Generator {
 					model.addNewNeighbor(lastConnIndex, target);
 				}
 			}
-			model.addNewNeighbor(source, target);
+			model.addNewDestination(source, target);
 			break;
 		default:
 			throw new IllegalStateException("Illegal type of connection!");
@@ -162,37 +162,37 @@ public class ScaleFreeGenerator extends Generator {
 		}
 	}
 
-	protected int getDestinationsNumber() {
-		int percent = random.nextInt(1000);
-		if (percent < 2 && stations.size() > 150) {
-			// generate between 100-150
-			return random.nextInt(51) + 100;
-		} else if (percent < 42 && stations.size() > 100) {
-			// generate between 50-99
-			return random.nextInt(50) + 50;
-		} else { // generate between 2-49
-			percent = random.nextInt(100);
-			if (percent < 42) {
-				// generate between 2-11
-				return random.nextInt(10) + 2;
-			} else {
-				percent = random.nextInt(100);
-				if (percent < 4) {
-					// 41 - 49
-					return random.nextInt(9) + 41;
-				} else if (percent < 14) {
-					// 31 - 40
-					return random.nextInt(10) + 31;
-				} else if (percent < 42) {
-					// 21 - 30
-					return random.nextInt(10) + 21;
-				} else {
-					// 11 - 20
-					return random.nextInt(10) + 11;
-				}
-			}
-
-		}
-	}
+//	protected int getDestinationsNumber() {
+//		int percent = random.nextInt(1000);
+//		if (percent < 2 && stations.size() > 150) {
+//			// generate between 100-150
+//			return random.nextInt(51) + 100;
+//		} else if (percent < 42 && stations.size() > 100) {
+//			// generate between 50-99
+//			return random.nextInt(50) + 50;
+//		} else { // generate between 2-49
+//			percent = random.nextInt(100);
+//			if (percent < 42) {
+//				// generate between 2-11
+//				return random.nextInt(10) + 2;
+//			} else {
+//				percent = random.nextInt(100);
+//				if (percent < 4) {
+//					// 41 - 49
+//					return random.nextInt(9) + 41;
+//				} else if (percent < 14) {
+//					// 31 - 40
+//					return random.nextInt(10) + 31;
+//				} else if (percent < 42) {
+//					// 21 - 30
+//					return random.nextInt(10) + 21;
+//				} else {
+//					// 11 - 20
+//					return random.nextInt(10) + 11;
+//				}
+//			}
+//
+//		}
+//	}
 
 }

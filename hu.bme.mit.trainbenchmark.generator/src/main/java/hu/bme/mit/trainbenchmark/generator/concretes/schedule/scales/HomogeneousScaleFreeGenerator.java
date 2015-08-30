@@ -96,4 +96,9 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 		return addNeighbor(sourceIndex, targetIndex);
 	}
 
+	@Override
+	public boolean addNewDestination(int sourceIndex, int targetIndex) {
+		return addDestination(sourceIndex, targetIndex);
+	}
+
 }
