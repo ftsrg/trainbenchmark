@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class RealCharacteristicScaleFreeGenerator extends HeterogeneousScaleFreeGenerator {
+public class RealCharacteristicScaleFreeGenerator extends HomogeneousScaleFreeGenerator {
 
 	protected double powerLawExponent;
 
@@ -35,63 +35,16 @@ public class RealCharacteristicScaleFreeGenerator extends HeterogeneousScaleFree
 		powerLawExponent = -3;
 	}
 
-//	/**
-//	 * Keeps an approximately 1.75 average degree between stations.
-//	 */
+	/**
+	 * Keeps an approximately 1.75 average degree between stations.
+	 */
 	@Override
 	protected int getNeighborsNumber() {
-//		int percent = random.nextInt(100);
-//		if (percent < 25) {
-//			return 1;
-//		} else {
-//			return 2;
-//		}
-		return 0;
-	}
-
-	@Override
-	protected int getDestinationsNumber() {
-		double chance = random.nextDouble();
-		if (chance < 0.00137 && stations.size() > 150) {
-			// generate between 100-150
-//			return random.nextInt(51) + 100;
-			return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 100, 150);
-		} else if (chance < 0.03537 && stations.size() > 100) {
-			// generate between 50-99
-//			return random.nextInt(50) + 50;
-			return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 51, 99);
-		} else { // generate between 2-49
-			chance = random.nextDouble();
-			return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 2, 50);
-//			if (chance < 42) {
-//				// generate between 2-11
-////				return random.nextInt(10) + 2;
-//				return (int) getPowerLawValue(random.nextDouble(), powerLawExponent, 2, 11);
-//			} else {
-//				chance = random.nextInt(100);
-//				if (chance < 4) {
-//					// 41 - 49
-////					return random.nextInt(9) + 41;
-//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-//							41, 49);
-//				} else if (chance < 14) {
-//					// 31 - 40
-////					return random.nextInt(10) + 31;
-//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-//							31, 40);
-//				} else if (chance < 42) {
-//					// 21 - 30
-////					return random.nextInt(10) + 21;
-//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-//							21, 30);
-//				} else {
-//					// 11 - 20
-////					return random.nextInt(10) + 11;
-//					return (int) getPowerLawValue(random.nextDouble(), powerLawExponent,
-//							11, 20);
-//				}
-//			}
-
+		int percent = random.nextInt(100);
+		if (percent < 25) {
+			return 1;
+		} else {
+			return 2;
 		}
 	}
 

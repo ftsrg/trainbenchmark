@@ -68,7 +68,7 @@ public class SesameModelDescription extends ModelDescription<SesameDriver> {
 
 			calculateElements();
 
-			calculateRepetitiveSchedules();
+			//calculateRepetitiveSchedules();
 		} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
 			throw new RuntimeException(e);
 		}

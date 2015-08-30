@@ -19,7 +19,9 @@ import hu.bme.mit.trainbenchmark.generator.util.RandomElementsProvider;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 
@@ -60,21 +62,21 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 			if (stations.get(stationIndex).conn.size() == 0) {
 				continue;
 			}
-			stationIndices = findPath(sourceIndex, amount, stationIndex);
+			stationIndices = findPath(stationIndex, amount);
 			if (stationIndices.size() != amount) {
-
 				if (tries == maxTries - 1) {
-					if (bestTriedStations.size() > stationIndices.size()) {
+					if (bestTriedStations.size() >= stationIndices.size()) {
 						for (Integer index : bestTriedStations) {
 							addDestination(sourceIndex, index);
 						}
-					} else {
+						return;
+					} else if (stationIndices.size() < bestTriedStations.size()) {
 						for (Integer index : stationIndices) {
 							addDestination(sourceIndex, index);
 						}
+						return;
 
 					}
-					return;
 				}
 				if (bestTriedStations == null) {
 					bestTriedStations = stationIndices;
@@ -94,7 +96,78 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		}
 	}
 
-	protected List<Integer> findPath(final int sourceIndex, final int amount, final int stationIndex) {
+	protected List<Integer> findPath(final int sourceIndex, final int maxDepth) {
+		List<Integer> queue = new ArrayList<Integer>();
+		queue.add(sourceIndex);
+
+		int depth = 1;
+		Map<Integer, Map<String, Integer>> checked = new HashMap<Integer, Map<String, Integer>>();
+		checked.put(sourceIndex, new HashMap<String, Integer>());
+		checked.get(sourceIndex).put("Depth", depth);
+		checked.get(sourceIndex).put("Prev", -1); // non-existing previous index
+		List<Integer> path = new ArrayList<Integer>();
+		int currentIndex = -1; // dummy init
+		while (!queue.isEmpty()) {
+			currentIndex = queue.get(0);
+			queue.remove(0);
+			depth = checked.get(currentIndex).get("Depth");
+			if (depth == maxDepth) {
+				break;
+			}
+			for (Integer neighbor : stations.get(currentIndex).conn) {
+				// exclude loop
+				if (neighbor != currentIndex) {
+					if (!checked.containsKey(neighbor)) {
+						checked.put(neighbor, new HashMap<String, Integer>());
+					}
+					if (checked.containsKey(neighbor)) {
+						if (!validNeighbor(checked, currentIndex, neighbor)) {
+							continue;
+						}
+
+					}
+					queue.add(0, neighbor);
+					// override previously checked nodes
+					checked.get(neighbor).put("Depth", depth + 1);
+					checked.get(neighbor).put("Prev", currentIndex);
+
+				}
+			}
+
+		}
+
+		path.add(currentIndex);
+		int i = 0;
+		while (i <= maxDepth) {
+			currentIndex = checked.get(currentIndex).get("Prev");
+			if (currentIndex == -1) {
+				break;
+			}
+			path.add(currentIndex);
+			i++;
+		}
+
+		return path;
+	}
+
+	protected boolean validNeighbor(final Map<Integer, Map<String, Integer>> checked,
+			final int currentIndex, final Integer neighbor) {
+		int prevIndex;
+		int current = currentIndex;
+		while (true) {
+			prevIndex = checked.get(current).get("Prev");
+
+			if (prevIndex == neighbor) {
+				return false;
+			}
+			if (prevIndex == -1) {
+				return true;
+			}
+			current = prevIndex;
+		}
+	}
+
+	protected List<Integer> findPath2(final int sourceIndex, final int amount, final int stationIndex) {
 		List<Integer> stationIndices = new ArrayList<Integer>();
 		// first station in the path
 		Node station = stations.get(stationIndex);

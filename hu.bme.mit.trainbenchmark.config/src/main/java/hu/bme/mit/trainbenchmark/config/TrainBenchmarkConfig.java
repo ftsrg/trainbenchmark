@@ -136,6 +136,8 @@ public abstract class TrainBenchmarkConfig {
 			return "schedule-scale-het-" + size;
 		case SCHEDULE_SCALE_FREE_HOM:
 			return "schedule-scale-hom-" + size;
+		case SCHEDULE_WATTS_STROGATZ:
+			return "schedule-watts-strogatz-" + size;
 		case RAILWAY:
 			final String variant = (scenario == ScenarioConstants.BATCH) ? "repair" : scenario
 					.toString().toLowerCase();

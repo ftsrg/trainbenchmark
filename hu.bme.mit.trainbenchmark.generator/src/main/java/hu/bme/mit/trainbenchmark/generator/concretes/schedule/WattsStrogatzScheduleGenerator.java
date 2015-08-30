@@ -19,6 +19,10 @@ import java.io.IOException;
 
 public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator {
 
+	protected double p;
+
+	protected int K;
+
 	public WattsStrogatzScheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
 	}
@@ -30,21 +34,47 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 	}
 
 	@Override
+	protected void initializeConstants() {
+		super.initializeConstants();
+		K = 4;
+		p = 0.001;
+	}
+
+	@Override
 	protected void initializationStep() throws IOException {
-		// TODO Auto-generated method stub
+		while (currentNodes < maxNumberOfStations) {
+			addStation();
+		}
 
 	}
 
 	@Override
 	protected void generateStations() throws IOException {
-		// TODO Auto-generated method stub
+		for (int source = 0; source < stations.size(); source++) {
+			for (int offset = 1; offset <= getNeighborsNumber(); offset++) {
+				addNeighbor(source, offset);
+				addNeighbor(source, offset * -1);
+			}
+		}
 
 	}
 
 	@Override
+	protected boolean addNeighbor(final int sourceIndex, final int offset) {
+		int target = sourceIndex + offset;
+		if (target >= stations.size()) {
+			// jump to the beginning
+			target = offset - (stations.size() - sourceIndex);
+		} else if (target < 0) {
+			// jump to the ending, in this case offset must be negative
+			target = stations.size() + offset;
+		}
+		return super.addNeighbor(sourceIndex, target);
+	}
+
+	@Override
 	protected int getNeighborsNumber() {
-		// TODO Auto-generated method stub
-		return 0;
+		return K / 2;
 	}
 
 }

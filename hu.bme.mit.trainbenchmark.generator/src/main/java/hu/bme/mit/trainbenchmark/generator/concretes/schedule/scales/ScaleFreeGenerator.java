@@ -44,7 +44,7 @@ public class ScaleFreeGenerator extends Generator {
 	}
 
 	public void initializeConstants() {
-		initStations = 50;
+		initStations = 5;
 		stationDegrees = 0;
 		maxDegree = -1;
 

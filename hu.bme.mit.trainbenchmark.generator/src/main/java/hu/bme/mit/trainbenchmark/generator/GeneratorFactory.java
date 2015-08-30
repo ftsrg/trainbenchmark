@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.generator;
 import hu.bme.mit.trainbenchmark.generator.concretes.railway.RailwayGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RandomScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RealModelTransformer;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.WattsStrogatzScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales.HeterogeneousScaleFreeGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales.HomogeneousScaleFreeGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.scales.RealCharacteristicScaleFreeGenerator;
@@ -43,6 +44,9 @@ public abstract class GeneratorFactory {
 					generatorConfig);
 		case SCHEDULE_REAL:
 			return new RealModelTransformer(getScheduleFormatGenerator(), generatorConfig);
+		case SCHEDULE_WATTS_STROGATZ:
+			return new WattsStrogatzScheduleGenerator(getScheduleFormatGenerator(),
+					generatorConfig);
 		case RAILWAY:
 			return new RailwayGenerator(getRailwayFormatGenerator(), generatorConfig);
 		default:

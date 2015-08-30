@@ -190,14 +190,21 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	}
 
 	protected int getDestinationsNumber() {
-		double uniformRandom = random.nextDouble();
 		double exponent = -3.0;
 		double x0 = 2.0;
-		double x1 = 150.0;
-		if (x1 > stations.size()) {
-			x1 = stations.size() / 2;
+//		double x1 = 150.0;
+//		if (x1 > stations.size()) {
+//			x1 = stations.size() / 2;
+//		}
+		double x1 = generatorConfig.getSize() * 19;
+		int x = 0;
+		while (true) {
+			double uniformRandom = random.nextDouble();
+			x = (int) getPowerLawValue(uniformRandom, -1.55, x0, x1);
+			if (x <= x1) {
+				break;
+			}
 		}
-		double x = getPowerLawValue(uniformRandom, exponent, x0, x1);
 		return (int) x;
 	}
 
