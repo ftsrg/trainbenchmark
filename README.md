@@ -99,6 +99,7 @@ It is possible to convert the measurement results from JSON to CSV with the foll
 
 ```bash
 scripts/convert-results.sh
+scripts/report.sh
 ```
 
 ### Interactive reporting
