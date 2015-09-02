@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf.checkers;
 
-import java.io.File;
-
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -25,16 +23,8 @@ public abstract class RDFChecker<M> extends Checker<M> {
 	public RDFChecker(final RDFBenchmarkConfig rdfbc) {
 		query = rdfbc.getQuery();
 
-		final String queryDirectory = rdfbc.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/";
-		final String inferencingQueryPath = queryDirectory + rdfbc.getQuery() + "-inferencing.sparql";
-		final String noInferencingQueryPath = queryDirectory + rdfbc.getQuery() + ".sparql";
-
-		// if we use inferencing mode and there is a specific query available, we use that
-		if (rdfbc.isInferencing() && new File(inferencingQueryPath).exists()) {
-			queryPath = inferencingQueryPath;
-		} else {
-			queryPath = noInferencingQueryPath;
-		}
+		queryPath = rdfbc.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + rdfbc.getQuery()
+				+ ".sparql";
 	}
 
 }

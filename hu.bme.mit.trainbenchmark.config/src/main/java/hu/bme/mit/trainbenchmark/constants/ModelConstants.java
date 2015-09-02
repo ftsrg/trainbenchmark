@@ -45,6 +45,6 @@ public class ModelConstants {
 	public static final String SWITCH_EDGE = "switch";
 
 	// inheritance
-	public static final Map<String, String> ancestors = ImmutableMap.of(SEGMENT, TRACKELEMENT, SWITCH, TRACKELEMENT);
+	public static final Map<String, String> SUPERTYPES = ImmutableMap.of(SEGMENT, TRACKELEMENT, SWITCH, TRACKELEMENT);
 
 }

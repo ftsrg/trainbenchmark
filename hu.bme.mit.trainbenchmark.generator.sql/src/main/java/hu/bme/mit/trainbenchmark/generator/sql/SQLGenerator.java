@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.generator.sql;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ancestors;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
@@ -124,8 +124,8 @@ public class SQLGenerator extends Generator {
 		structuralFeaturesToSQL(outgoingEdges, columns, values);
 		structuralFeaturesToSQL(incomingEdges, columns, values);
 
-		if (ancestors.containsKey(type)) {
-			final String ancestorType = ancestors.get(type);
+		if (SUPERTYPES.containsKey(type)) {
+			final String ancestorType = SUPERTYPES.get(type);
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", ancestorType, ID, id));
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
