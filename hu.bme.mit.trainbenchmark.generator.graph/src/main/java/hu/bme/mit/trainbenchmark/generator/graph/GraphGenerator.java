@@ -81,8 +81,8 @@ public class GraphGenerator extends Generator {
 		final Node node = graphDb.createNode(DynamicLabel.label(type));
 
 		// this only works for inheritance hierarchies with
-		if (ModelConstants.ancestors.containsKey(type)) {
-			final String ancestor = ModelConstants.ancestors.get(type);
+		if (ModelConstants.SUPERTYPES.containsKey(type)) {
+			final String ancestor = ModelConstants.SUPERTYPES.get(type);
 			node.addLabel(DynamicLabel.label(ancestor));
 		}
 

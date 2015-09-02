@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.Generator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
@@ -74,6 +75,15 @@ public class RDFGenerator extends Generator {
 		// vertex id and type
 		final String triple = String.format(":%s%d a :%s", ID_PREFIX, id, type);
 		final StringBuilder vertex = new StringBuilder(triple);
+
+		// if the metamodel is not included, we manually insert the inferenced triples
+		if (!rdfGeneratorConfig.isMetamodel()) {
+			if (ModelConstants.SUPERTYPES.containsKey(type)) {
+				final String superType = ModelConstants.SUPERTYPES.get(type);
+				final String superTypeTriple = String.format("  ;\n\ta :%s", superType);
+				vertex.append(superTypeTriple);
+			}
+		}
 
 		// (id)-[]->() attributes
 		for (final Entry<String, Object> attribute : attributes.entrySet()) {

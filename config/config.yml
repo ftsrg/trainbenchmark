@@ -12,25 +12,25 @@ timeout: 600
 
 queries:
 #- ConnectedSegments
-- PosLength
+#- PosLength
 #- RouteSensor
 #- SemaphoreNeighbor
-#- SwitchSet
 #- SwitchSensor
+- SwitchSet
 
 scenarios:
-- Batch
+#- Batch
 - Inject
-- Repair
+#- Repair
 
 tools:
-- drools5
-- drools6
-- emfapi
-- emfincquery
+#- drools5
+#- drools6
+#- emfapi
+#- emfincquery
 - jena
-- mysql
-- neo4j
+#- mysql
+#- neo4j
 - sesame
 
 # optional arguments. for example, neo4j is invoked with and without the javaapi argument as well.
