@@ -44,6 +44,7 @@ public abstract class Driver<T> {
 
 	public abstract String getExtension();
 
-	public abstract Collection<?> runQuery(final Query query, final String queryDefinition) throws Exception;
+	public abstract Collection<?> runQuery(final Query query, final String queryDefinition)
+			throws Exception;
 
 }

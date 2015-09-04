@@ -30,8 +30,8 @@ import org.openrdf.repository.RepositoryException;
 public class SesameChecker extends Checker<SesameMatch> {
 
 	protected final SesameDriver driver;
-	protected final Query query;
-	protected final String queryDefinition;
+	protected Query query;
+	protected String queryDefinition;
 
 	public SesameChecker(final SesameDriver driver, final BenchmarkConfig bc) throws IOException {
 		super();
@@ -48,6 +48,14 @@ public class SesameChecker extends Checker<SesameMatch> {
 	public Collection<SesameMatch> check() throws RepositoryException, MalformedQueryException,
 			QueryEvaluationException {
 		return driver.runQuery(query, queryDefinition);
+	}
+
+	public String getQueryDefinition() {
+		return queryDefinition;
+	}
+
+	public void setQueryDefinition(String queryDefinition) {
+		this.queryDefinition = queryDefinition;
 	}
 
 }

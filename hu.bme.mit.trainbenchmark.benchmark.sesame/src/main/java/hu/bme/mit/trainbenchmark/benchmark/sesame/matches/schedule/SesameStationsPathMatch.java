@@ -1,15 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
-
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule;
 
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleQueryConstants.VAR_COUNT;
@@ -25,10 +13,9 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-public class SesameScheduleCheckLoopNeighborsMatch extends SesameMatch implements ScheduleCountMatch,
-		MatchProcessor {
+public class SesameStationsPathMatch extends SesameMatch implements ScheduleCountMatch, MatchProcessor {
 
-	public SesameScheduleCheckLoopNeighborsMatch(BindingSet bs) {
+	public SesameStationsPathMatch(BindingSet bs) {
 		super(bs);
 	}
 
@@ -50,7 +37,7 @@ public class SesameScheduleCheckLoopNeighborsMatch extends SesameMatch implement
 		if (count instanceof Literal) {
 			value = ((Literal) count).longValue();
 		}
-		processed.put("LoopNeighbors", value);
+		processed.put("Paths", value);
 		return processed;
 	}
 

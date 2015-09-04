@@ -87,6 +87,12 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 		analyzer.initializeMetrics();
 	};
 
+	public void benchmarkInitQuery() throws Exception {
+		if (this instanceof VersatileBenchmarkCase) {
+			((VersatileBenchmarkCase) this).modify(bc.getQueryInitializer());
+		}
+	}
+
 	public void calculateModelMetrics(final PhaseResult phaseResult,
 			final TrainBenchmarkCaseDescriptor descriptor) {
 		TimeMetric timer = new TimeMetric("CalculationTime");

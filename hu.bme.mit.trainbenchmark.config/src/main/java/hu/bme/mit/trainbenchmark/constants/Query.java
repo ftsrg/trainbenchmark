@@ -25,6 +25,7 @@ public enum Query {
 	SCHEDULEDAYS("ScheduleDays"), //
 	SCHEDULEINDICATOR("ScheduleIndicator"), //
 	SCHEDULEPLANNING("SchedulePlanning"), //
+	STATIONSPATH("StationsPath"), //
 	ASSOCIATIONDAYS("AssociationDays"), //
 	ASSOCIATIONCATEGORIES("AssociationCategories");
 

@@ -25,10 +25,10 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-public class SesameScheduleCheckIsolatedStationsMatch extends SesameMatch implements ScheduleCountMatch,
+public class SesameCheckIsolatedStationsMatch extends SesameMatch implements ScheduleCountMatch,
 		MatchProcessor {
 
-	public SesameScheduleCheckIsolatedStationsMatch(BindingSet bs) {
+	public SesameCheckIsolatedStationsMatch(BindingSet bs) {
 		super(bs);
 	}
 

@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
 import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.query.SesameQueryInitializer;
 
 import org.apache.commons.cli.ParseException;
 
@@ -23,11 +24,13 @@ public class SesameBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	public SesameBenchmarkLogic(final String[] args) throws ParseException {
 		bc = rbc = new RDFBenchmarkConfig(args, "Sesame");
+		rbc.setQueryInitializer(new SesameQueryInitializer(rbc.getQuery()));
 	}
 
 	public SesameBenchmarkLogic(final RDFBenchmarkConfig rbc) {
 		super(rbc);
 		this.rbc = rbc;
+		this.rbc.setQueryInitializer(new SesameQueryInitializer(rbc.getQuery()));
 	}
-	
+
 }
