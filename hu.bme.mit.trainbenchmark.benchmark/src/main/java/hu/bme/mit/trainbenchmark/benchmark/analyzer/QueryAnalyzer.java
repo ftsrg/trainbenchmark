@@ -59,8 +59,8 @@ public abstract class QueryAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	@Override
 	public void resetMetrics() {
-		for (Entry e : queryMetrics.entrySet()) {
-			((QueryMetric) e.getValue()).reset();
+		for (Entry<String, QueryMetric> e : queryMetrics.entrySet()) {
+			e.getValue().reset();
 		}
 
 	}

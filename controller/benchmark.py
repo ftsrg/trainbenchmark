@@ -52,7 +52,6 @@ def execute(configuration):
                 modif_method = configuration.common.modif_method
                 modif_constant = str(configuration.common.modif_constant)
                 iter_count = str(configuration.common.iter_count)
-                analyze = configuration.common.analyze
                 model = configuration.common.model
                 args = configuration.benchmark_args
 
@@ -69,7 +68,6 @@ def execute(configuration):
                                      "-modificationConstant", modif_constant,
                                      "-iterationCount", iter_count,
                                      "-size", str(size),
-                                     "-analyze" if analyze else "",
                                      args
                                      ])
                 util.set_working_directory("../")

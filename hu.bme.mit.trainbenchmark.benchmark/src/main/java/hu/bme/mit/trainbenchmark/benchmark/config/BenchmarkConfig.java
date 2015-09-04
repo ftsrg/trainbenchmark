@@ -31,7 +31,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected int runIndex;
 	protected Query query;
 	protected String className;
-	protected boolean analyze;
 	protected String analysisPath = "../results/analysis/";
 	protected String describePath = "../results/describe/";
 	protected QueryInitializer queryInitializer;
@@ -56,7 +55,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.iterationCount = iterationCount;
 		this.modificationMethod = modificationMethod;
 		this.modificationConstant = modificationConstant;
-		this.analyze = calculateMetrics;
 		this.modelType = modelType;
 	}
 
@@ -78,7 +76,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		options.addOption("iterationCount", true, "number of modify-check iterations");
 		options.addOption("modificationConstant", true,
 				"modification constant for the modification method");
-		options.addOption("analyze", false, "flag for calculating metrics");
 	}
 
 	@Override
@@ -130,8 +127,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		} else {
 			benchmarkMode = false;
 		}
-
-		analyze = cmd.hasOption("analyze");
 	}
 
 	private long determineModificationConstant(final String optionName) {
@@ -168,14 +163,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	public String getTool() {
 		return getClassName();
-	}
-
-	public boolean isAnalyze() {
-		return analyze;
-	}
-
-	public void setAnalyze(boolean analyze) {
-		this.analyze = analyze;
 	}
 
 	public String getAnalysisPath() {

@@ -71,10 +71,6 @@
         }
       }
     },
-    "Analyze": {
-      "type": "boolean",
-      "default": false
-    },
     "IterationCount": {
       "type": "integer",
       "minimum": 1,

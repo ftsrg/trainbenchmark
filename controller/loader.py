@@ -87,7 +87,6 @@ class Loader():
         common.modif_method = config_json["ModificationMethod"]
         common.modif_constant = config_json["ModificationConstant"]
         common.iter_count = config_json["IterationCount"]
-        common.analyze = config_json["Analyze"]
         common.model = config_json["Model"]
 
         # relatively from this script's path
