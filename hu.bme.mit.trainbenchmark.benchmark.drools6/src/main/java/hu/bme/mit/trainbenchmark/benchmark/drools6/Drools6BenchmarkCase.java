@@ -12,13 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.checkers.Drools6Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.emf.analyzer.EMFModelAnalyzer;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class Drools6BenchmarkCase extends EMFBenchmarkCase {
+public class Drools6BenchmarkCase extends EMFBenchmarkCase implements AnalyzedBenchmarkCase {
 
 	protected Drools6Driver drools6driver;
 
@@ -33,8 +34,8 @@ public class Drools6BenchmarkCase extends EMFBenchmarkCase {
 	}
 
 	@Override
-	protected void initAnalyzer() {
-		analyzer = new EMFModelAnalyzer(drools6driver);
+	public void initAnalyzer() {
+		modelAnalyzer = new EMFModelAnalyzer(drools6driver);
 	}
 
 }

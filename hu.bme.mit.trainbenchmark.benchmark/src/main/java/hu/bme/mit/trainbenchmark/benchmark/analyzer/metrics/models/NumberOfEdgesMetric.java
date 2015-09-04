@@ -10,28 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models;
 
-import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-public class MaximumDegreeMetric extends Metric {
+public class NumberOfEdgesMetric extends ModelMetric {
 
-	public MaximumDegreeMetric(EdgeDirection direction) {
-		super(direction);
+	public NumberOfEdgesMetric() {
+		super(EdgeDirection.BOTH);
 	}
 
 	@Override
 	public void calculate() {
-		metricValue = analyzer.getMaximumDegree(direction);
+		metricValue = analyzer.getNumberOfEdges();
 	}
 
 	@Override
 	protected String getIdentifier() {
-		if (direction == BOTH) {
-			return "MaxDegree";
-		} else {
-			return "MaxOutgoingDegree";
-		}
+		return "NumOfEdges";
 	}
 }

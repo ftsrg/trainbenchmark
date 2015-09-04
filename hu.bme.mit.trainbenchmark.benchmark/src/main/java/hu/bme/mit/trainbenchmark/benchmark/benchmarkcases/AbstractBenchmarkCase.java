@@ -13,6 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.Analyzer;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.DescribedBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.VersatileBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
@@ -42,7 +45,8 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	protected Collection<M> matches;
 	protected TransformationLogic<M, T, ?> transformationLogic;
 	protected Transformation<?> transformation;
-	protected Analyzer<D> analyzer;
+	protected Analyzer<D> modelAnalyzer;
+	protected Analyzer<D> queryAnalyzer;
 
 	public Collection<M> getMatches() {
 		return matches;
@@ -56,10 +60,6 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	// these should be implemented for each tool
 
 	protected abstract void init() throws Exception;
-
-	protected abstract void initAnalyzer();
-
-	protected abstract void initDescription();
 
 	protected void destroy() throws Exception {
 		if (checker != null) {
@@ -76,15 +76,22 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	public void benchmarkInitAnalyzer() {
-		initAnalyzer();
+		if (this instanceof AnalyzedBenchmarkCase) {
+			((AnalyzedBenchmarkCase) this).initAnalyzer();
+		}
 	}
 
 	public void benchmarkInitDescription() {
-		initDescription();
+		if (this instanceof DescribedBenchmarkCase) {
+			((DescribedBenchmarkCase) this).initDescription();
+		}
 	}
 
 	public void benchmarkInitMetrics() {
-		analyzer.initializeMetrics();
+		modelAnalyzer.initializeMetrics();
+		if (queryAnalyzer != null) {
+			queryAnalyzer.initializeMetrics();
+		}
 	};
 
 	public void benchmarkInitQuery() throws Exception {
@@ -95,18 +102,30 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	public void calculateModelMetrics(final PhaseResult phaseResult,
 			final TrainBenchmarkCaseDescriptor descriptor) {
-		TimeMetric timer = new TimeMetric("CalculationTime");
-		analyzer.resetMetrics();
+		if (this instanceof AnalyzedBenchmarkCase || this instanceof DescribedBenchmarkCase) {
+			TimeMetric timer = new TimeMetric("CalculationTime");
+			modelAnalyzer.resetMetrics();
 
-		timer.startMeasure();
-		analyzer.calculateAll(bc, descriptor);
-		timer.stopMeasure();
+			timer.startMeasure();
+			modelAnalyzer.calculateAll(bc, descriptor);
+			timer.stopMeasure();
 
-		phaseResult.addMetrics(timer);
-		for (BenchmarkMetric m : analyzer.getMetrics()) {
-			phaseResult.addMetrics(m);
+			phaseResult.addMetrics(timer);
+			for (BenchmarkMetric m : modelAnalyzer.getMetrics()) {
+				phaseResult.addMetrics(m);
+			}
 		}
+	}
 
+	public void calculateQueryMetrics(final PhaseResult phaseResult,
+			final TrainBenchmarkCaseDescriptor descriptor) {
+		if (this instanceof AnalyzedBenchmarkCase) {
+			queryAnalyzer.resetMetrics();
+			queryAnalyzer.calculateAll(bc, descriptor);
+			for (BenchmarkMetric m : queryAnalyzer.getMetrics()) {
+				phaseResult.addMetrics(m);
+			}
+		}
 	}
 
 	public void benchmarkInitTransformation() {

@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.analyzer.JenaModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.jena.checkers.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
@@ -26,7 +27,8 @@ import java.util.Comparator;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver> implements
+		AnalyzedBenchmarkCase {
 
 	protected JenaDriver jenaDriver;
 	protected RDFBenchmarkConfig rbc;
@@ -51,15 +53,9 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 	}
 
 	@Override
-	protected void initAnalyzer() {
-		analyzer = jenaModelAnalyzer = new JenaModelAnalyzer(jenaDriver);
+	public void initAnalyzer() {
+		modelAnalyzer = jenaModelAnalyzer = new JenaModelAnalyzer(jenaDriver);
 		jenaModelAnalyzer.setBenchmarkConfig(rbc);
-	}
-
-	@Override
-	protected void initDescription() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

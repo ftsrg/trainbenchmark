@@ -37,15 +37,11 @@ public class InjectScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 		innerSeq.addPhases(edit, check);
 		iter.setPhase(innerSeq);
 
-		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
-
 		// @formatter:off
 		seq.addPhases(new InitializationPhase("Init"), 
 				new InitTransformationPhase("InitTransformation"), 
 				new AnalyzerInitializationPhase("AnalyzerInit"),
 				new ReadPhase("Read"), 
-				initMetrics, 
-				calcMetrics, 
 				new CheckPhase("Check"),
 				iter, 
 				new DestroyPhase("Destroy")

@@ -29,7 +29,6 @@ public class RepairScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 		SequencePhase seq = new SequencePhase();
 		CheckPhase check = new CheckPhase("Check");
 		CheckPhase recheck = new CheckPhase("Recheck");
-		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
 		// @formatter:off
 		seq.addPhases(new InitializationPhase("Init"), 
@@ -37,8 +36,6 @@ public class RepairScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 				"InitTransformation"), 
 				new AnalyzerInitializationPhase("AnalyzerInit"),
 				new ReadPhase("Read"), 
-				initMetrics, 
-				calcMetrics, 
 				check,
 				new TransformationPhase("Edit"), 
 				recheck, 

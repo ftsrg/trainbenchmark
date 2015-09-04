@@ -10,13 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models;
 
-import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
+import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-import java.io.IOException;
+public class NumberOfNodesMetric extends ModelMetric {
 
-public interface VersatileBenchmarkCase {
+	public NumberOfNodesMetric() {
+		super(EdgeDirection.BOTH);
+	}
 
-	public void modify(final QueryInitializer queryInitializer) throws IOException;
+	@Override
+	public void calculate() {
+		metricValue = analyzer.getNumberOfNodes();
+	}
+
+	@Override
+	protected String getIdentifier() {
+		return "NumOfNodes";
+	}
 }

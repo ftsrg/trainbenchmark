@@ -20,6 +20,9 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.MatchProcessingPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.QueryInitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.AnalyzerInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.MetricsInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.ModelMetricsCalculationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.QueryMetricsCalculationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
 import eu.mondo.sam.core.phases.IterationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
@@ -29,10 +32,15 @@ public class AnalyzeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 	@Override
 	public void build() {
 		SequencePhase seq = new SequencePhase();
-		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 		SequencePhase sequenceInIteration = new SequencePhase();
-		sequenceInIteration.addPhases(new QueryInitializationPhase("QueryInit"), new CheckPhase(
-				"Check"));
+		// @formatter:off
+		sequenceInIteration.addPhases(
+				new QueryInitializationPhase("QueryInit"), 
+				new CheckPhase("Check"), 
+				new QueryMetricsCalculationPhase("CalcQueryMetrics")
+		);
+		// @formatter:on
+
 		QueryInitializer initializer = benchmarkConfig.getQueryInitializer();
 		int maxIteration = initializer == null ? 1 : initializer.getQueryBuilder()
 				.getNumberOfQueries();
@@ -44,8 +52,8 @@ public class AnalyzeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 		seq.addPhases(new InitializationPhase("Init"),
 				new AnalyzerInitializationPhase("AnalyzerInit"), 
 				new ReadPhase("Read"),
-				initMetrics, 
-				calcMetrics, 
+				new MetricsInitializationPhase("InitMetrics"), 
+				new ModelMetricsCalculationPhase("CalcModelMetrics"), 
 				queryIteration, 
 				new MatchProcessingPhase("Matches"), 
 				new DestroyPhase("Destroy")

@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLChecker;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
@@ -20,7 +21,8 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase {
+public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase implements
+		AnalyzedBenchmarkCase {
 
 	private EMFDriver emfDriver;
 
@@ -34,8 +36,8 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchm
 	}
 
 	@Override
-	protected void initAnalyzer() {
-		analyzer = new EMFModelAnalyzer(emfDriver);
+	public void initAnalyzer() {
+		modelAnalyzer = new EMFModelAnalyzer(emfDriver);
 	}
 
 }

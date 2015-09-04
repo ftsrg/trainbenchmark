@@ -14,16 +14,16 @@ package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
 import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.OUTGOING;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageClusteringCoefficientMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.AverageShortestPathMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.DensityMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.HigherDegreeDistributionMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.MaximumDegreeMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfEdgesMetric;
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.NumberOfNodesMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageClusteringCoefficientMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageDegreeDistributionMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageDegreeMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageShortestPathMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.DensityMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.HigherDegreeDistributionMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.MaximumDegreeMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.ModelMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.NumberOfEdgesMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.NumberOfNodesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
@@ -80,7 +80,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		if (metrics == null) {
 			metrics = new ArrayList<BenchmarkMetric>();
 		}
-		Metric.setAnalyzer(this);
+		ModelMetric.setAnalyzer(this);
 		metrics.add(new NumberOfNodesMetric());
 		metrics.add(new NumberOfEdgesMetric());
 		metrics.add(new AverageDegreeMetric(BOTH));
@@ -105,7 +105,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		metrics.add(shortestPathMetric);
 
 		for (BenchmarkMetric m : metrics) {
-			((Metric) m).initName();
+			((ModelMetric) m).initName();
 		}
 	}
 

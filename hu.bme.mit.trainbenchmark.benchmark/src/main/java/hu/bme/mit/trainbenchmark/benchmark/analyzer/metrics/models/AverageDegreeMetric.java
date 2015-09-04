@@ -10,29 +10,30 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models;
 
-import static hu.bme.mit.trainbenchmark.constants.EdgeDirection.BOTH;
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-public class AverageDegreeDistributionMetric extends Metric {
+public class AverageDegreeMetric extends ModelMetric {
 
-	public AverageDegreeDistributionMetric(EdgeDirection direction) {
+	public AverageDegreeMetric(EdgeDirection direction) {
 		super(direction);
 	}
 
 	@Override
 	public void calculate() {
-		metricValue = analyzer.getNumberOfAverageDegree(direction)
-				/ analyzer.getNumberOfNodes(withOutgoingDegree);
+		metricValue = analyzer.getAverageDegree(direction);
 	}
 
 	@Override
 	protected String getIdentifier() {
-		if (direction == BOTH) {
-			return "AvgDegreeDist";
-		} else {
-			return "AvgOutgoingDegreeDist";
+		switch (direction) {
+		case OUTGOING:
+			return "AvgDegree";
+		case BOTH:
+			return "AvgOutgoingDegree";
+		default:
+			throw new IllegalArgumentException("Illegal direction!");
 		}
 	}
 }

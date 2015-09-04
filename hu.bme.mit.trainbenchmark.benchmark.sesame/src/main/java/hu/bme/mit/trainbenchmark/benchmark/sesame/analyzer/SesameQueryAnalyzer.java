@@ -10,29 +10,15 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer;
 
-import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.analyzer.RDFQueryAnalyzer;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
-public class HigherDegreeDistributionMetric extends Metric {
+public class SesameQueryAnalyzer extends RDFQueryAnalyzer<SesameDriver> {
 
-	public HigherDegreeDistributionMetric(EdgeDirection direction) {
-		super(direction);
-
+	public SesameQueryAnalyzer(SesameDriver driver) {
+		super(driver);
 	}
 
-	@Override
-	public void calculate() {
-		metricValue = analyzer.getNumberOfHigherDegree(direction)
-				/ analyzer.getNumberOfNodes(withOutgoingDegree);
-	}
-
-	@Override
-	protected String getIdentifier() {
-		if (direction == EdgeDirection.BOTH) {
-			return "HigherDegree";
-		} else {
-			return "HigherOutgoingDegree";
-		}
-	}
 }

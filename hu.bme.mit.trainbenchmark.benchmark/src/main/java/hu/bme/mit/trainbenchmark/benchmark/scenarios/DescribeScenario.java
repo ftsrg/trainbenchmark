@@ -17,6 +17,8 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.DescriptionInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.MetricsInitializationPhase;
+import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.ModelMetricsCalculationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 
 public class DescribeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
@@ -24,14 +26,13 @@ public class DescribeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
 	@Override
 	public void build() {
 		SequencePhase seq = new SequencePhase();
-		createMetricsCalculationPhases(benchmarkConfig.isAnalyze());
 
 		// @formatter:off
 		seq.addPhases(new InitializationPhase("Init"),
 				new DescriptionInitializationPhase("DescInit"), 
 				new ReadPhase("Read"),
-				initMetrics, 
-				calcMetrics, 
+				new MetricsInitializationPhase("InitMetrics"), 
+				new ModelMetricsCalculationPhase("CalcModelMetrics"),
 				new DestroyPhase("Destroy")
 		);
 		rootPhase = seq;

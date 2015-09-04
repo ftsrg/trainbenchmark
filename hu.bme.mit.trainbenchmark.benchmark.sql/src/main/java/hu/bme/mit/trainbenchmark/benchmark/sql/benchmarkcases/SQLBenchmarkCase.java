@@ -27,10 +27,4 @@ public abstract class SQLBenchmarkCase extends AbstractBenchmarkCase<SQLMatch, L
 		return new LongMatchComparator();
 	}
 
-	@Override
-	protected void initDescription() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

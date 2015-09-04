@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
-import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.ModelMetric;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisFilenameFactory;
@@ -46,7 +46,7 @@ public abstract class Analyzer<D extends Driver<?>> {
 			try {
 				JsonNode root = mapper.readTree(file);
 				for (BenchmarkMetric m : metrics) {
-					((Metric) m).loadValue(root);
+					((ModelMetric) m).loadValue(root);
 				}
 			} catch (IOException e) {
 				throw new RuntimeException(e);
@@ -54,7 +54,7 @@ public abstract class Analyzer<D extends Driver<?>> {
 		} else {
 			calculateMetrics();
 			for (BenchmarkMetric m : metrics) {
-				((Metric) m).calculate();
+				((ModelMetric) m).calculate();
 			}
 		}
 	}

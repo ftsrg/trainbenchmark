@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.java;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.java.benchmarkcases.JavaChecker;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
@@ -20,7 +21,7 @@ import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class JavaBenchmarkCase extends EMFBenchmarkCase {
+public class JavaBenchmarkCase extends EMFBenchmarkCase implements AnalyzedBenchmarkCase {
 
 	protected EMFDriver emfDriver;
 
@@ -35,8 +36,8 @@ public class JavaBenchmarkCase extends EMFBenchmarkCase {
 	}
 
 	@Override
-	protected void initAnalyzer() {
-		analyzer = new EMFModelAnalyzer(emfDriver);
+	public void initAnalyzer() {
+		modelAnalyzer = new EMFModelAnalyzer(emfDriver);
 	}
 
 }

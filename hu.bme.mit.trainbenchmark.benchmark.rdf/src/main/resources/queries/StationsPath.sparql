@@ -3,9 +3,9 @@ PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT  (COUNT(?o) AS ?count)
 WHERE
-  { ?s rdf:type base:Station
-    FILTER ( ?s = base:_1 )
-    ?o rdf:type base:Station
-    FILTER ( ?o = base:_3 )
+  { ?s rdf:type base:Station .
+    FILTER ( ?s = base:_1 ) .
+    ?o rdf:type base:Station .
+    FILTER ( ?o = base:_3 ) .
     ?s (^base:destinations|^base:origin |^base:terminal) / (base:destinations | base:origin | base:terminal) ?o
   }

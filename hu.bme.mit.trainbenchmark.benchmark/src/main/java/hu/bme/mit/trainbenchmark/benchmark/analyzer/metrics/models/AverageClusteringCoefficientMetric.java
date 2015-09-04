@@ -10,13 +10,13 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models;
 
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
 import java.util.List;
 
-public class AverageClusteringCoefficientMetric extends Metric {
+public class AverageClusteringCoefficientMetric extends ModelMetric {
 
 	private String type;
 

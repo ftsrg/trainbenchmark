@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.Analyzer;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
@@ -28,7 +29,8 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends
-		AbstractBenchmarkCase<M, RailwayElement, EMFIncQueryDriver<M>> {
+		AbstractBenchmarkCase<M, RailwayElement, EMFIncQueryDriver<M>> implements
+		AnalyzedBenchmarkCase {
 
 	protected EMFIncQueryDriver<M> eiqDriver;
 
@@ -57,14 +59,8 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends
 	}
 
 	@Override
-	protected void initAnalyzer() {
-		analyzer = (Analyzer) new EMFModelAnalyzer(eiqDriver);
-	}
-
-	@Override
-	protected void initDescription() {
-		// TODO Auto-generated method stub
-
+	public void initAnalyzer() {
+		modelAnalyzer = (Analyzer) new EMFModelAnalyzer(eiqDriver);
 	}
 
 }

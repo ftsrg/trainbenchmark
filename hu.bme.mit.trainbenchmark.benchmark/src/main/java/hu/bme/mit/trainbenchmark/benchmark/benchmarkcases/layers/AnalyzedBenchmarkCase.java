@@ -10,23 +10,9 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics;
+package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers;
 
-import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
+public interface AnalyzedBenchmarkCase {
 
-public class NumberOfNodesMetric extends Metric {
-
-	public NumberOfNodesMetric() {
-		super(EdgeDirection.BOTH);
-	}
-
-	@Override
-	public void calculate() {
-		metricValue = analyzer.getNumberOfNodes();
-	}
-
-	@Override
-	protected String getIdentifier() {
-		return "NumOfNodes";
-	}
+	public void initAnalyzer();
 }

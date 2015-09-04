@@ -13,6 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.DescribedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jModelDescription;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
@@ -28,7 +30,8 @@ import java.util.Comparator;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
-public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver> {
+public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver> implements
+		AnalyzedBenchmarkCase, DescribedBenchmarkCase {
 
 	protected Neo4jBenchmarkConfig nbc;
 
@@ -61,13 +64,13 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node, 
 	}
 
 	@Override
-	protected void initAnalyzer() {
-		analyzer = new Neo4jModelAnalyzer(neoDriver);
+	public void initAnalyzer() {
+		modelAnalyzer = new Neo4jModelAnalyzer(neoDriver);
 	}
 
 	@Override
-	protected void initDescription() {
-		analyzer = new Neo4jModelDescription(neoDriver);
+	public void initDescription() {
+		modelAnalyzer = new Neo4jModelDescription(neoDriver);
 
 	}
 

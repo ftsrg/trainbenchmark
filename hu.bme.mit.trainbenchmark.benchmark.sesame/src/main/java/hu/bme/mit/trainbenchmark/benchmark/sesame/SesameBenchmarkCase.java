@@ -13,11 +13,14 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.VersatileBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.DescribedBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.VersatileBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameModelDescription;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameQueryAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
@@ -30,11 +33,12 @@ import java.util.Comparator;
 import org.openrdf.model.URI;
 
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver> implements
-		VersatileBenchmarkCase {
+		VersatileBenchmarkCase, AnalyzedBenchmarkCase, DescribedBenchmarkCase {
 
 	protected SesameDriver sesameDriver;
 	protected RDFBenchmarkConfig rbc;
-	protected SesameModelAnalyzer sesameAnalyzer;
+	protected SesameModelAnalyzer sesameModelAnalyzer;
+	protected SesameQueryAnalyzer sesameQueryAnalyzer;
 	protected SesameModelDescription sesameDescription;
 	protected SesameChecker sesameChecker;
 
@@ -50,9 +54,11 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	protected void initAnalyzer() {
-		analyzer = sesameAnalyzer = new SesameModelAnalyzer(sesameDriver);
-		sesameAnalyzer.setBenchmarkConfig(rbc);
+	public void initAnalyzer() {
+		modelAnalyzer = sesameModelAnalyzer = new SesameModelAnalyzer(sesameDriver);
+		sesameModelAnalyzer.setBenchmarkConfig(rbc);
+		queryAnalyzer = sesameQueryAnalyzer = new SesameQueryAnalyzer(sesameDriver);
+		sesameQueryAnalyzer.setQueryString(sesameChecker.getQueryDefinition());
 	}
 
 	@Override
@@ -61,8 +67,8 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	protected void initDescription() {
-		analyzer = sesameDescription = new SesameModelDescription(sesameDriver);
+	public void initDescription() {
+		modelAnalyzer = sesameDescription = new SesameModelDescription(sesameDriver);
 		sesameDescription.setBenchmarkConfig(rbc);
 	}
 
