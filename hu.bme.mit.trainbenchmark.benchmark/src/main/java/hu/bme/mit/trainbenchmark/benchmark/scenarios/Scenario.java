@@ -21,7 +21,7 @@ import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 public abstract class Scenario<T extends BenchmarkCase<?, ?, ?>> extends BenchmarkScenario {
 
 	protected BenchmarkConfig benchmarkConfig;
-	protected TrainBenchmarkCaseDescriptor caseDescriptor;
+	protected final TrainBenchmarkCaseDescriptor caseDescriptor = new TrainBenchmarkCaseDescriptor();
 	protected BenchmarkCase<?, ?, Driver<T>> benchmarkCase;
 
 	public BenchmarkConfig getBenchmarkConfig() {
@@ -41,9 +41,6 @@ public abstract class Scenario<T extends BenchmarkCase<?, ?, ?>> extends Benchma
 
 	@Override
 	public TrainBenchmarkCaseDescriptor getCaseDescriptor() {
-		if (caseDescriptor == null) {
-			caseDescriptor = new TrainBenchmarkCaseDescriptor();
-		}
 		caseDescriptor.setCaseName(caseName);
 		caseDescriptor.setTool(tool);
 		caseDescriptor.setScenario(getName());
