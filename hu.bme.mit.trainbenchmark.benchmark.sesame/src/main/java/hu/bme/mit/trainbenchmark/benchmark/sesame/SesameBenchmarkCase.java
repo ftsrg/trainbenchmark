@@ -12,11 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.DescribedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.VersatileBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.analyzer.SesameModelDescription;
@@ -32,7 +31,7 @@ import java.util.Comparator;
 
 import org.openrdf.model.URI;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver> implements
+public class SesameBenchmarkCase extends BenchmarkCase<SesameMatch, URI, SesameDriver> implements
 		VersatileBenchmarkCase, AnalyzedBenchmarkCase, DescribedBenchmarkCase {
 
 	protected SesameDriver sesameDriver;
@@ -44,13 +43,13 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 
 	@Override
 	protected void init() throws IOException {
-		this.rbc = (RDFBenchmarkConfig) bc;
+		this.rbc = (RDFBenchmarkConfig) benchmarkConfig;
 
 		driver = sesameDriver = new SesameDriver();
-		sesameChecker = (SesameChecker) (checker = new SesameChecker(sesameDriver, bc));
+		sesameChecker = (SesameChecker) (checker = new SesameChecker(sesameDriver, benchmarkConfig));
 
-		transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(),
-				bc.getScenario());
+		transformation = SesameTransformation.newInstance(sesameDriver, benchmarkConfig.getQuery(),
+				benchmarkConfig.getScenario());
 	}
 
 	@Override
@@ -73,10 +72,11 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public void modify(final QueryInitializer queryInitializer) throws IOException {
+	public void modify() throws IOException {
 		final String query = queryInitializer.resolveQuery(rbc.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/",
 				".sparql");
 		sesameChecker.setQueryDefinition(query);
+		sesameQueryAnalyzer.setQueryString(query);
 	}
 }

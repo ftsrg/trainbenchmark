@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -33,7 +32,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected String className;
 	protected String analysisPath = "../results/analysis/";
 	protected String describePath = "../results/describe/";
-	protected QueryInitializer queryInitializer;
 
 	public int getRunIndex() {
 		return runIndex;
@@ -84,9 +82,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 		// queries argument -> testCases list
 		query = Query.valueOf(cmd.getOptionValue("query").toUpperCase());
-		if (queryInitializer != null) {
-			queryInitializer.setQuery(query);
-		}
 
 		final String modificationMethodString = cmd.getOptionValue("modificationMethod");
 		if (modificationMethodString != null) {
@@ -181,11 +176,4 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.describePath = describePath;
 	}
 
-	public QueryInitializer getQueryInitializer() {
-		return queryInitializer;
-	}
-
-	public void setQueryInitializer(QueryInitializer queryInitializer) {
-		this.queryInitializer = queryInitializer;
-	}
 }

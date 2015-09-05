@@ -29,9 +29,9 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 		driver = sqlDriver = new MySQLDriver();
 		MySQLProcess.startSQLProcess();
 
-		checker = new SQLChecker(sqlDriver, bc);
+		checker = new SQLChecker(sqlDriver, benchmarkConfig);
 
-		transformation = SQLTransformation.newInstance(sqlDriver, bc);
+		transformation = SQLTransformation.newInstance(sqlDriver, benchmarkConfig);
 	}
 
 	@Override

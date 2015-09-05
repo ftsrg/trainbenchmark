@@ -12,14 +12,17 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 
-public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>> extends BenchmarkScenario {
+public abstract class Scenario<T extends BenchmarkCase<?, ?, ?>> extends BenchmarkScenario {
 
 	protected BenchmarkConfig benchmarkConfig;
+	protected TrainBenchmarkCaseDescriptor caseDescriptor;
+	protected BenchmarkCase<?, ?, Driver<T>> benchmarkCase;
 
 	public BenchmarkConfig getBenchmarkConfig() {
 		return benchmarkConfig;
@@ -38,15 +41,26 @@ public abstract class Scenario<T extends AbstractBenchmarkCase<?, ?, ?>> extends
 
 	@Override
 	public TrainBenchmarkCaseDescriptor getCaseDescriptor() {
-		TrainBenchmarkCaseDescriptor descriptor = new TrainBenchmarkCaseDescriptor();
-		descriptor.setCaseName(caseName);
-		descriptor.setTool(tool);
-		descriptor.setScenario(getName());
-		descriptor.setSize(size);
-		descriptor.setRunIndex(runIndex);
-		descriptor.setModel(benchmarkConfig.getModelType().toString());
-		return descriptor;
+		if (caseDescriptor == null) {
+			caseDescriptor = new TrainBenchmarkCaseDescriptor();
+		}
+		caseDescriptor.setCaseName(caseName);
+		caseDescriptor.setTool(tool);
+		caseDescriptor.setScenario(getName());
+		caseDescriptor.setSize(size);
+		caseDescriptor.setRunIndex(runIndex);
+		caseDescriptor.setModel(benchmarkConfig.getModelType().toString());
+		return caseDescriptor;
 	}
 
 	public abstract String getName();
+
+	public BenchmarkCase<?, ?, Driver<T>> getBenchmarkCase() {
+		return benchmarkCase;
+	}
+
+	public void setBenchmarkCase(BenchmarkCase<?, ?, Driver<T>> benchmarkCase) {
+		this.benchmarkCase = benchmarkCase;
+	}
+
 }

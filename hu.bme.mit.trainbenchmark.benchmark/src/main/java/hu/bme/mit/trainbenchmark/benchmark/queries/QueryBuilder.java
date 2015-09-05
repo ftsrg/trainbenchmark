@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public interface QueryBuilder {
 
-	public abstract String createQuery(final String queryPath, final String extension) throws IOException;
+	public abstract String nextQuery(final String queryPath, final String extension) throws IOException;
 
 	public int getNumberOfQueries();
 

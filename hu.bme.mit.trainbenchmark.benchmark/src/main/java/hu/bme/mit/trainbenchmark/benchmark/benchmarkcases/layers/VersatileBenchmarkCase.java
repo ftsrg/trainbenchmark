@@ -12,11 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers;
 
-import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
-
 import java.io.IOException;
 
 public interface VersatileBenchmarkCase {
 
-	public void modify(final QueryInitializer queryInitializer) throws IOException;
+	public void modify() throws IOException;
+
 }

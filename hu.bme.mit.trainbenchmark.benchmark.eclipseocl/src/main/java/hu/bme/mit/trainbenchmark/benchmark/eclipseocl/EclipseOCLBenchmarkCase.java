@@ -30,9 +30,10 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchm
 	public void init() throws Exception {
 		emfDriver = new EMFDriver();
 		driver = emfDriver;
-		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, bc);
+		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, benchmarkConfig);
 
-		transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
+		transformation = EMFTransformation.newInstance(emfDriver, benchmarkConfig.getQuery(),
+				benchmarkConfig.getScenario());
 	}
 
 	@Override

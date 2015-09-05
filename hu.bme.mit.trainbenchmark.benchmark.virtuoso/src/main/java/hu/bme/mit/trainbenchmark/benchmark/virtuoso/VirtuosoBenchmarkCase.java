@@ -24,13 +24,13 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
 	protected void init() throws IOException {
-		this.rbc = (RDFBenchmarkConfig) bc;
+		this.rbc = (RDFBenchmarkConfig) benchmarkConfig;
 
 		driver = sesameDriver = new VirtuosoDriver();
-		checker = new SesameChecker(sesameDriver, bc);
+		checker = new SesameChecker(sesameDriver, benchmarkConfig);
 
-		transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(),
-				bc.getScenario());
+		transformation = SesameTransformation.newInstance(sesameDriver, benchmarkConfig.getQuery(),
+				benchmarkConfig.getScenario());
 	}
 
 }

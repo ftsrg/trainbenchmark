@@ -34,7 +34,6 @@ public class SesameChecker extends Checker<SesameMatch> {
 	protected String queryDefinition;
 
 	public SesameChecker(final SesameDriver driver, final BenchmarkConfig bc) throws IOException {
-		super();
 		this.driver = driver;
 		this.query = bc.getQuery();
 

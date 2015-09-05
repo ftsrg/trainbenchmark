@@ -25,13 +25,14 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
 	protected void init() throws IOException {
-		this.rbc = (RDFBenchmarkConfig) bc;
+		this.rbc = (RDFBenchmarkConfig) benchmarkConfig;
 
 		driver = sesameDriver = new BlazegraphDriver();
-		checker = new SesameChecker(sesameDriver, bc);
+		checker = new SesameChecker(sesameDriver, benchmarkConfig);
 
-		if (bc.getScenario() != ScenarioConstants.BATCH) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
+		if (benchmarkConfig.getScenario() != ScenarioConstants.BATCH) {
+			transformation = SesameTransformation.newInstance(sesameDriver,
+					benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 		}
 	}
 

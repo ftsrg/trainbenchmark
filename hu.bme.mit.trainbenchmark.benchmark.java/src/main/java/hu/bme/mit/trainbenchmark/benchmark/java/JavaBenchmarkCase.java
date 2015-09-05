@@ -29,9 +29,10 @@ public class JavaBenchmarkCase extends EMFBenchmarkCase implements AnalyzedBench
 	public void init() throws Exception {
 		emfDriver = new EMFDriver();
 		driver = emfDriver;
-		checker = (Checker<EMFMatch>) JavaChecker.newInstance(emfDriver, bc.getQuery());
+		checker = (Checker<EMFMatch>) JavaChecker.newInstance(emfDriver, benchmarkConfig.getQuery());
 
-		transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
+		transformation = EMFTransformation.newInstance(emfDriver, benchmarkConfig.getQuery(),
+				benchmarkConfig.getScenario());
 
 	}
 

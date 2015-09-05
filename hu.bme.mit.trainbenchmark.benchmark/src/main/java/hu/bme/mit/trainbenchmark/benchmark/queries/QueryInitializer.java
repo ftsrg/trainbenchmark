@@ -21,6 +21,7 @@ public class QueryInitializer {
 
 	protected Query query;
 	protected QueryBuilder queryBuilder;
+	protected int modelSize;
 
 	public QueryInitializer(final Query query) {
 		this.query = query;
@@ -30,13 +31,13 @@ public class QueryInitializer {
 		if (queryBuilder == null) {
 			createBuilder();
 		}
-		return queryBuilder.createQuery(queryPath, extension);
+		return queryBuilder.nextQuery(queryPath, extension);
 	}
 
 	protected void createBuilder() {
 		switch (query) {
 		case STATIONSPATH:
-			queryBuilder = new StationsPathQueryBuilder();
+			queryBuilder = new StationsPathQueryBuilder(modelSize);
 			break;
 		default:
 			throw new IllegalArgumentException("Query is not supported: " + query);

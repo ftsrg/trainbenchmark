@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.orientdb;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.checkers.OrientDbChecker;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatch;
@@ -23,7 +23,7 @@ import java.util.Comparator;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 
-public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, Vertex, OrientDbDriver> {
+public class OrientDbBenchmarkCase extends BenchmarkCase<OrientDbMatch, Vertex, OrientDbDriver> {
 
 	protected OrientGraph graphDb;
 	protected String dbPath;

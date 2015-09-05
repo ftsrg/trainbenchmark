@@ -22,6 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
+import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -36,10 +37,10 @@ import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
 import eu.mondo.sam.core.results.PhaseResult;
 
-public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
+public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 
 	protected Random random = new UniqueRandom(TrainBenchmarkConstants.RANDOM_SEED);
-	protected BenchmarkConfig bc;
+	protected BenchmarkConfig benchmarkConfig;
 	protected Driver<T> driver;
 	protected Checker<M> checker;
 	protected Collection<M> matches;
@@ -47,6 +48,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	protected Transformation<?> transformation;
 	protected Analyzer<D> modelAnalyzer;
 	protected Analyzer<D> queryAnalyzer;
+	protected QueryInitializer queryInitializer;
 
 	public Collection<M> getMatches() {
 		return matches;
@@ -54,7 +56,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	// shorthands
 	public Query getQuery() {
-		return bc.getQuery();
+		return benchmarkConfig.getQuery();
 	}
 
 	// these should be implemented for each tool
@@ -71,7 +73,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		this.bc = bc;
+		this.benchmarkConfig = bc;
 		init();
 	}
 
@@ -96,7 +98,10 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 
 	public void benchmarkInitQuery() throws Exception {
 		if (this instanceof VersatileBenchmarkCase) {
-			((VersatileBenchmarkCase) this).modify(bc.getQueryInitializer());
+			if (queryInitializer == null) {
+				queryInitializer = new QueryInitializer(benchmarkConfig.getQuery());
+			}
+			((VersatileBenchmarkCase) this).modify();
 		}
 	}
 
@@ -107,7 +112,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 			modelAnalyzer.resetMetrics();
 
 			timer.startMeasure();
-			modelAnalyzer.calculateAll(bc, descriptor);
+			modelAnalyzer.calculateAll(benchmarkConfig, descriptor);
 			timer.stopMeasure();
 
 			phaseResult.addMetrics(timer);
@@ -121,7 +126,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 			final TrainBenchmarkCaseDescriptor descriptor) {
 		if (this instanceof AnalyzedBenchmarkCase) {
 			queryAnalyzer.resetMetrics();
-			queryAnalyzer.calculateAll(bc, descriptor);
+			queryAnalyzer.calculateAll(benchmarkConfig, descriptor);
 			for (BenchmarkMetric m : queryAnalyzer.getMetrics()) {
 				phaseResult.addMetrics(m);
 			}
@@ -129,9 +134,10 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	public void benchmarkInitTransformation() {
-		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
+		transformationLogic = TransformationLogic.newInstance(benchmarkConfig.getScenario(),
+				getComparator());
 		if (transformationLogic != null) {
-			transformationLogic.initialize(bc, driver, random);
+			transformationLogic.initialize(benchmarkConfig, driver, random);
 		}
 		transformationLogic.setTransformation(transformation);
 	}
@@ -141,7 +147,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	public void benchmarkRead(final PhaseResult phaseResult) throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		timer.startMeasure();
-		driver.read(bc.getModelPathNameWithoutExtension());
+		driver.read(benchmarkConfig.getModelPathNameWithoutExtension());
 		timer.stopMeasure();
 		phaseResult.addMetrics(timer);
 	}
@@ -173,7 +179,7 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	protected final Comparator<?> getComparator() {
-		switch (bc.getScenario()) {
+		switch (benchmarkConfig.getScenario()) {
 		case BATCH:
 		case INJECT:
 			return driver.getElementComparator();
@@ -185,5 +191,24 @@ public abstract class AbstractBenchmarkCase<M, T, D extends Driver<T>> {
 	}
 
 	protected abstract Comparator<?> getMatchComparator();
+
+	public QueryInitializer getQueryInitializer() {
+		if (queryInitializer == null) {
+			queryInitializer = new QueryInitializer(benchmarkConfig.getQuery());
+		}
+		return queryInitializer;
+	}
+
+	public void setQueryInitializer(QueryInitializer queryInitializer) {
+		this.queryInitializer = queryInitializer;
+	}
+
+	public BenchmarkConfig getBenchmarkConfig() {
+		return benchmarkConfig;
+	}
+
+	public void setBenchmarkConfig(BenchmarkConfig benchmarkConfig) {
+		this.benchmarkConfig = benchmarkConfig;
+	}
 
 }

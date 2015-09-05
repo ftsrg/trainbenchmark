@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 
 import java.util.Comparator;
 
-public abstract class SQLBenchmarkCase extends AbstractBenchmarkCase<SQLMatch, Long, SQLDriver> {
+public abstract class SQLBenchmarkCase extends BenchmarkCase<SQLMatch, Long, SQLDriver> {
 
 	protected SQLDriver sqlDriver;
 

@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark;
 
 import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.ANALYZE;
 import static hu.bme.mit.trainbenchmark.constants.ScenarioConstants.DESCRIBE;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisFilenameFactory;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisJsonPublisher;
@@ -50,9 +50,11 @@ public abstract class AbstractBenchmarkLogic {
 	public BenchmarkResult runBenchmark() throws IOException {
 		@SuppressWarnings("rawtypes")
 		final Scenario scenario = ScenarioFactory.getScenario(bc.getScenario());
-		final AbstractBenchmarkCase<?, ?, ?> tc = getBenchmarkCase();
+		final BenchmarkCase<?, ?, ?> benchmarkCase = getBenchmarkCase();
+		benchmarkCase.setBenchmarkConfig(bc);
 
 		scenario.setBenchmarkConfig(bc);
+		scenario.setBenchmarkCase(benchmarkCase);
 		scenario.initializeDescriptor();
 
 		BenchmarkEngine engine = new BenchmarkEngine();
@@ -61,19 +63,22 @@ public abstract class AbstractBenchmarkLogic {
 		TrainBenchmarkCaseDescriptor caseDescriptor = scenario.getCaseDescriptor();
 		result.addAllPublishers(getPublishers(caseDescriptor));
 
-		token.setBenchmarkCase(tc);
+		token.setBenchmarkCase(benchmarkCase);
 		token.setConfig(bc);
 		token.setDescriptor(caseDescriptor);
 
-		engine.runBenchmark(result, scenario, token);
+		for (int i = 1; i <= bc.getRunIndex(); i++) {
+			scenario.setRunIndex(i);
+			engine.runBenchmark(result, scenario, token);
+		}
 		return result;
 	}
 
-	public AbstractBenchmarkCase<?, ?, ?> getBenchmarkCase() {
+	public BenchmarkCase<?, ?, ?> getBenchmarkCase() {
 		return getConcreteBenchmarkCase(this.getClass().getClassLoader());
 	}
 
-	protected AbstractBenchmarkCase<?, ?, ?> getConcreteBenchmarkCase(final ClassLoader classLoader) {
+	protected BenchmarkCase<?, ?, ?> getConcreteBenchmarkCase(final ClassLoader classLoader) {
 		try {
 			// trying to loading generic class
 			final String toolClassName = "hu.bme.mit.trainbenchmark.benchmark."
@@ -84,7 +89,7 @@ public abstract class AbstractBenchmarkLogic {
 			final int modifiers = clazz.getModifiers();
 			// instantiate generic class if not abstract
 			if (!Modifier.isAbstract(modifiers)) {
-				return (AbstractBenchmarkCase<?, ?, ?>) clazz.newInstance();
+				return (BenchmarkCase<?, ?, ?>) clazz.newInstance();
 			}
 
 			// else instantiate specific class
@@ -95,7 +100,7 @@ public abstract class AbstractBenchmarkLogic {
 			final Class<?> queryClass = classLoader.loadClass(queryClassName);
 
 			// instantiate generic class if not abstract
-			return (AbstractBenchmarkCase<?, ?, ?>) queryClass.newInstance();
+			return (BenchmarkCase<?, ?, ?>) queryClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			throw new UnsupportedOperationException(e);
 		}

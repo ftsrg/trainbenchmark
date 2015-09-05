@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.MetricsInitialization
 import hu.bme.mit.trainbenchmark.benchmark.phases.analysis.ModelMetricsCalculationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
 
-public class DescribeScenario extends Scenario<AbstractBenchmarkCase<?, ?, ?>> {
+public class DescribeScenario extends Scenario<BenchmarkCase<?, ?, ?>> {
 
 	@Override
 	public void build() {

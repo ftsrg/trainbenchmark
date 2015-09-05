@@ -25,11 +25,11 @@ public class Drools6BenchmarkCase extends EMFBenchmarkCase implements AnalyzedBe
 
 	@Override
 	public void init() throws Exception {
-		driver = drools6driver = new Drools6Driver(bc);
-		checker = new Drools6Checker(drools6driver, bc.getQuery());
+		driver = drools6driver = new Drools6Driver(benchmarkConfig);
+		checker = new Drools6Checker(drools6driver, benchmarkConfig.getQuery());
 
-		transformation = EMFTransformation
-				.newInstance(drools6driver, bc.getQuery(), bc.getScenario());
+		transformation = EMFTransformation.newInstance(drools6driver, benchmarkConfig.getQuery(),
+				benchmarkConfig.getScenario());
 
 	}
 

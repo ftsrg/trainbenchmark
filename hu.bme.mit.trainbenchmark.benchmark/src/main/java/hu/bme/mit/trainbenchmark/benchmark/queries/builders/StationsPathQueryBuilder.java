@@ -21,14 +21,29 @@ import org.apache.commons.io.FileUtils;
 
 public class StationsPathQueryBuilder implements QueryBuilder {
 
+	protected int iteration;
+	protected int maxNumberOfQueries;
+
+	public StationsPathQueryBuilder(final int modelSize) {
+		iteration = 0;
+		maxNumberOfQueries = 5;
+	}
+
 	@Override
-	public String createQuery(final String queryPath, final String extension) throws IOException {
-		return FileUtils.readFileToString(new File(queryPath + "StationsPath" + extension));
+	public String nextQuery(final String queryPath, final String extension) throws IOException {
+		String rawQuery = FileUtils
+				.readFileToString(new File(queryPath + "StationsPath" + extension));
+		iteration++;
+		return inject(rawQuery);
 	}
 
 	@Override
 	public int getNumberOfQueries() {
-		return 1;
+		return maxNumberOfQueries;
+	}
+
+	protected String inject(String rawQuery) {
+		return String.format(rawQuery, "3", "25");
 	}
 
 }
