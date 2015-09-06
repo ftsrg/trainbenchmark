@@ -21,6 +21,7 @@ import java.util.ListIterator;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.sparql.core.TriplePath;
+import com.hp.hpl.jena.sparql.syntax.ElementFilter;
 import com.hp.hpl.jena.sparql.syntax.ElementPathBlock;
 import com.hp.hpl.jena.sparql.syntax.ElementVisitorBase;
 import com.hp.hpl.jena.sparql.syntax.ElementWalker;
@@ -46,6 +47,12 @@ public class RDFQueryAnalyzer<D extends Driver<?>> extends QueryAnalyzer<D> {
 					navigationsMetric.increase();
 				}
 			}
+
+			@Override
+			public void visit(ElementFilter el) {
+				getFiltersMetric().increase(el.getExpr().getVarsMentioned().size());
+			}
+
 		});
 
 	}
