@@ -10,16 +10,13 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame;
+package hu.bme.mit.trainbenchmark.constants.schedule;
 
-import java.io.IOException;
+public class ScheduleGeneratorConstants {
 
-import org.apache.commons.cli.ParseException;
+	public static final double stationsProportion = 0.018;
+	public static final double trainsProportion = 0.3566;
+	public static final double repetitiveScheduleFactor = 0.48;
+	public static final int sizeStep = 5000;
 
-public class SesameBenchmarkMain {
-
-	public static void main(String[] args) throws IOException, ParseException {
-		SesameBenchmarkLogic benchmarkLogic = new SesameBenchmarkLogic(args);
-		benchmarkLogic.runBenchmark();
-	}
 }

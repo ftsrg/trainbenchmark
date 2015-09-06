@@ -12,12 +12,21 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.queries;
 
-import java.io.IOException;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public interface QueryBuilder {
+import java.io.IOException;
+import java.util.Random;
+
+public abstract class QueryBuilder {
+
+	protected final Random random;
 
 	public abstract String nextQuery(final String queryPath, final String extension) throws IOException;
 
-	public int getNumberOfQueries();
+	public abstract int getNumberOfQueries();
+
+	public QueryBuilder() {
+		random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	}
 
 }

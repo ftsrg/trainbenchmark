@@ -1,11 +1,15 @@
 PREFIX  base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT  (COUNT(?o) AS ?count)
+SELECT  (COUNT(?targetStation) AS ?count)
 WHERE
-  { ?s rdf:type base:Station .
-    FILTER ( ?s = base:_%s ) .
-    ?o rdf:type base:Station .
-    FILTER ( ?o = base:_%s ) .
-    ?s (^base:destinations|^base:origin |^base:terminal) / (base:destinations | base:origin | base:terminal) ?o
+  { ?sourceStation rdf:type base:Station .
+    FILTER ( ?sourceStation = base:_%s ) .
+    ?targetStation rdf:type base:Station .
+    FILTER ( ?targetStation = base:_%s ) .
+    ?sourceStation (^base:destinations | ^base:origin | ^base:terminal) ?schedule1 .
+	?schedule1 (base:destinations | base:origin | base:terminal) ?station1 .
+    ?station1 (^base:destinations | ^base:origin | ^base:terminal) ?schedule2 .
+    ?schedule1 (base:destinations | base:origin | base:terminal) ?targetStation .
+    ?schedule2 (base:destinations | base:origin | base:terminal) ?targetStation .
   }

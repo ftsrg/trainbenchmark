@@ -38,8 +38,8 @@ public abstract class SyntheticGenerator extends Generator {
 		fg.persistModel();
 	}
 
-	protected double getPowerLawValue(final double uniformRandom, double exponent, double minBound,
-			double maxBound) {
+	protected double getPowerLawValue(final double uniformRandom, final double exponent,
+			final double minBound, final double maxBound) {
 		return Math.pow((Math.pow(maxBound, exponent + 1) - Math.pow(minBound, exponent + 1))
 				* uniformRandom + Math.pow(minBound, exponent + 1), 1 / (exponent + 1));
 	}

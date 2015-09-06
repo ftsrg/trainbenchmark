@@ -30,7 +30,6 @@ public class GeneratorConfig extends TrainBenchmarkConfig {
 	@Override
 	protected void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
-
 	}
 
 }

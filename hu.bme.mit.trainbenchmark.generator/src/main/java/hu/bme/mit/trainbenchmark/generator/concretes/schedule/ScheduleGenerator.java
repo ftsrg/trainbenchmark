@@ -35,6 +35,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STP_INDICATOR;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TERMINAL;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleGeneratorConstants;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.SyntheticGenerator;
@@ -97,13 +98,13 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 	@Override
 	protected void initializeConstants() {
-		sizeStep = 5000;
+		sizeStep = ScheduleGeneratorConstants.sizeStep;
 		maxNodes = (int) (sizeStep * Math.pow(2, generatorConfig.getSize() - 1));
-		maxNumberOfStations = (int) (maxNodes * 0.018);
-		maxNumberOfTrains = (int) (maxNodes * 0.3566);
+		maxNumberOfStations = (int) (maxNodes * ScheduleGeneratorConstants.stationsProportion);
+		maxNumberOfTrains = (int) (maxNodes * ScheduleGeneratorConstants.trainsProportion);
 		maxNumberOfSchedules = maxNodes - maxNumberOfStations - maxNumberOfTrains;
 		associationPercent = 2;
-		repetitiveScheduleFactor = 0.48;
+		repetitiveScheduleFactor = ScheduleGeneratorConstants.repetitiveScheduleFactor;
 		maxNumberOfRepetitiveSchedules = (int) (maxNumberOfSchedules * repetitiveScheduleFactor);
 		stations = new ArrayList<Node>();
 		schedules = new ArrayList<Node>();
