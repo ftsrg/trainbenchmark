@@ -87,8 +87,11 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 			set = results.next();
 			degree = Double.parseDouble(set.getValue("outdegree").stringValue());
 			if (set.getValue("x").stringValue().contains(":")) {
-				determineClustering(vf.createURI(set.getValue("x").stringValue()));
-				addStations(vf.createURI(set.getValue("x").stringValue()));
+				if (isType(vf.createURI(set.getValue("x").stringValue()), STATION)) {
+					determineClustering(vf.createURI(set.getValue("x").stringValue()));
+					addStations(vf.createURI(set.getValue("x").stringValue()));
+				}
+
 			}
 			numberOfNodesWithOutgoingDegrees += degree > 0 ? 1 : 0;
 			numberOfNodes++;
@@ -96,7 +99,6 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 			changeMaximumDegree(EdgeDirection.OUTGOING, degree);
 			degree += Double.parseDouble(set.getValue("indegree").stringValue());
 			changeMaximumDegree(EdgeDirection.BOTH, degree);
-
 		}
 		calculateAverageDegree(EdgeDirection.BOTH);
 		calculateAverageDegree(EdgeDirection.OUTGOING);
@@ -122,18 +124,14 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 				}
 			}
 		}
-		if (isType(subject, STATION)) {
-			addClusteringCoefficient(connected, neighbors.size(), STATION);
-		} else {
-			addClusteringCoefficient(connected, neighbors.size());
-		}
+		addClusteringCoefficient(connected, neighbors.size(), STATION);
 
 	}
 
 	protected void addStations(final URI subject) throws RepositoryException {
-		if (isType(subject, STATION)) {
-			stations.add(subject);
-		}
+//		if (isType(subject, STATION)) {
+		stations.add(subject);
+//		}
 	}
 
 	protected void calculateShortestPaths() throws QueryEvaluationException, RepositoryException,
