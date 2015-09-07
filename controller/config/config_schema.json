@@ -124,6 +124,7 @@
             "ScheduleShortTermStatus",
             "ScheduleStatus",
             "SemaphoreNeighbor",
+            "StationsPath",
             "SwitchSensor",
             "SwitchSet"
           ]
@@ -145,6 +146,7 @@
           "ScheduleShortTermStatus",
           "ScheduleStatus",
           "SemaphoreNeighbor",
+          "StationsPath",
           "SwitchSensor",
           "SwitchSet"
         ]
