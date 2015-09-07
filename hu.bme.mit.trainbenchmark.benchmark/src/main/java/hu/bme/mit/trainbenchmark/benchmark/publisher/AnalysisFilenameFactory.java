@@ -27,8 +27,7 @@ public class AnalysisFilenameFactory implements FilenameFactory {
 
 	@Override
 	public String getFilename() {
-		return descriptor.getTool() + "-" + descriptor.getModel() + "-" + descriptor.getScenario()
-				+ "-" + descriptor.getSize();
+		return descriptor.getModel() + "-" + descriptor.getScenario() + "-" + descriptor.getSize();
 	}
 
 	public boolean isOverride() {
