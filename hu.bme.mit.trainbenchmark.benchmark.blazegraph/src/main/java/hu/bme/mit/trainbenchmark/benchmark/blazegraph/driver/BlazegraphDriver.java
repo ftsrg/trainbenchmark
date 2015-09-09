@@ -43,4 +43,10 @@ public class BlazegraphDriver extends SesameDriver {
 		load(modelPathWithoutExtension);
 	}
 
+	@Override
+	public void destroy() throws RepositoryException {
+		super.destroy();
+		repository.shutDown();
+	}
+
 }
