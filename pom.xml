@@ -120,6 +120,13 @@
 		</profile>
 
 		<profile>
+			<id>blazegraph</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.blazegraph</module>
+			</modules>
+		</profile>
+
+		<profile>
 			<id>drools5</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
