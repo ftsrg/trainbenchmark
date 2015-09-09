@@ -1,4 +1,5 @@
 allegro: rdf
+blazgraph: rdf
 drools5: emf
 drools6: emf
 eclipseocl: emf
