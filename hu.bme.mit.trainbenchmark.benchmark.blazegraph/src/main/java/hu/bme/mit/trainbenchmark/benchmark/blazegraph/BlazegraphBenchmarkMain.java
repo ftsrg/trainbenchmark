@@ -21,7 +21,6 @@ public class BlazegraphBenchmarkMain {
 	public static void main(final String[] args) throws ParseException, IOException {
 		final BlazegraphBenchmarkLogic benchmarkLogic = new BlazegraphBenchmarkLogic(args);
 		benchmarkLogic.runBenchmark();
-		System.exit(0);
 	}
 
 }

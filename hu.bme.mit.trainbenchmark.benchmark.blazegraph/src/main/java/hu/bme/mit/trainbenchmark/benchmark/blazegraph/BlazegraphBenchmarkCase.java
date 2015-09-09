@@ -14,6 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
 import java.io.IOException;
 
+import org.openrdf.repository.RepositoryException;
+
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
@@ -24,7 +26,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
-	protected void init() throws IOException {
+	protected void init() throws IOException, RepositoryException {
 		this.rdfbc = (RDFBenchmarkConfig) bc;
 
 		driver = sesameDriver = new BlazegraphDriver(rdfbc);

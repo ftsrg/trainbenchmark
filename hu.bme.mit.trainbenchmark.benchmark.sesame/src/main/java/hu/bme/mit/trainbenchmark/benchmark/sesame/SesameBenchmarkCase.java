@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
-import java.io.IOException;
 import java.util.Comparator;
 
 import org.openrdf.model.URI;
@@ -32,7 +31,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI>
 	protected RDFBenchmarkConfig rdfbc;
 
 	@Override
-	protected void init() throws IOException {
+	protected void init() throws Exception {
 		this.rdfbc = (RDFBenchmarkConfig) bc;
 
 		driver = sesameDriver = new SesameDriver(rdfbc);

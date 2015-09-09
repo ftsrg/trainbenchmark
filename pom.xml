@@ -24,6 +24,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.blazegraph</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
@@ -116,6 +117,7 @@
 			<id>allegro</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 			</modules>
 		</profile>
 
@@ -123,6 +125,7 @@
 			<id>blazegraph</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.blazegraph</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 			</modules>
 		</profile>
 
@@ -215,6 +218,7 @@
 		<profile>
 			<id>virtuoso</id>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
 			</modules>
 		</profile>
