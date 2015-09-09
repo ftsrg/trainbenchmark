@@ -129,9 +129,7 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 	}
 
 	protected void addStations(final URI subject) throws RepositoryException {
-//		if (isType(subject, STATION)) {
 		stations.add(subject);
-//		}
 	}
 
 	protected void calculateShortestPaths() throws QueryEvaluationException, RepositoryException,

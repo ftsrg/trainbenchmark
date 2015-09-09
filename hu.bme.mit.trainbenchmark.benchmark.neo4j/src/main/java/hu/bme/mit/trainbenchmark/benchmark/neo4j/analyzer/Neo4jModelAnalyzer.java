@@ -153,7 +153,14 @@ public class Neo4jModelAnalyzer extends ModelAnalyzer<Neo4jDriver> {
 				if (path != null) {
 					shortestPathMetric.add(path.length());
 					i++;
+					for (Node node : path.nodes()) {
+						if (node != sourceNode && node != targetNode) {
+							betweennessMetric.addBetweenness(Long.toString(node
+									.getId()));
+						}
+					}
 				}
+
 			}
 
 		}

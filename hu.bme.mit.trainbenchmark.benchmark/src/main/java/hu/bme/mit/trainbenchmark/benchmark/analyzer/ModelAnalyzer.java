@@ -18,6 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageCluste
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageDegreeMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.AverageShortestPathMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.BetweennessMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.DensityMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.HigherDegreeDistributionMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models.MaximumDegreeMetric;
@@ -67,6 +68,8 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	protected AverageShortestPathMetric shortestPathMetric;
 
+	protected BetweennessMetric betweennessMetric;
+
 	private Map<String, List<Double>> clusteringCoefficients;
 
 	private String ALL = "All";
@@ -104,6 +107,9 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		shortestPathMetric = new AverageShortestPathMetric();
 		metrics.add(shortestPathMetric);
 
+		betweennessMetric = new BetweennessMetric();
+		metrics.add(betweennessMetric);
+
 		for (BenchmarkMetric m : metrics) {
 			((ModelMetric) m).initName();
 		}
@@ -125,6 +131,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		numberOfHigherOutgoingDegree = 0;
 
 		clusteringCoefficients.clear();
+		betweennessMetric.clear();
 
 	}
 
@@ -287,5 +294,9 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 	public List<Double> getClusteringCoefficients(final String type) {
 		return clusteringCoefficients.get(type);
+	}
+
+	public AverageShortestPathMetric getShortestPathMetric() {
+		return shortestPathMetric;
 	}
 }

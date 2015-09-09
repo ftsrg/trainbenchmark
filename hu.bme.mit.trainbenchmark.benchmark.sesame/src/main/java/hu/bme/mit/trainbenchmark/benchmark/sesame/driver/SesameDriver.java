@@ -85,7 +85,7 @@ public class SesameDriver extends RDFDatabaseDriver<URI> {
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final List<SesameMatch> results = new ArrayList<>();
 		TupleQueryResult queryResults;
-
+		System.out.println(queryDefinition);
 		tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
 		queryResults = tupleQuery.evaluate();
 		try {

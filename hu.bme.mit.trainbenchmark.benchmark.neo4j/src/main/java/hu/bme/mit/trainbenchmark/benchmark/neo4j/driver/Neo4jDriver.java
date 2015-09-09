@@ -159,6 +159,8 @@ public class Neo4jDriver extends Driver<Node> {
 			return new Neo4jSwitchSensorMatch(row);
 		case SWITCHSET:
 			return new Neo4jSwitchSetMatch(row);
+		case STATIONSPATH:
+			return null;
 		default:
 			throw new UnsupportedOperationException("Query not supported: " + query);
 		}

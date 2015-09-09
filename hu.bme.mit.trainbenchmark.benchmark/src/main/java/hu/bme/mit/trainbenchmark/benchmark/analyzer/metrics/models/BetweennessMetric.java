@@ -14,66 +14,47 @@ package hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.models;
 
 import hu.bme.mit.trainbenchmark.constants.EdgeDirection;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
-public class AverageShortestPathMetric extends ModelMetric {
+public class BetweennessMetric extends ModelMetric {
 
-	private List<Integer> shortestPaths;
+	private Map<String, Integer> betweennessValues;
 
-	private int maxDepth;
-
-	private int pairs;
-
-	public AverageShortestPathMetric() {
+	public BetweennessMetric() {
 		super(EdgeDirection.OUTGOING);
-		shortestPaths = new ArrayList<Integer>();
-		maxDepth = 50;
-		pairs = 300;
+		betweennessValues = new HashMap<String, Integer>();
 	}
 
 	@Override
 	public void calculate() {
-		if (shortestPaths.size() == 0) {
-			metricValue = 0;
-			return;
-		}
+		double pairs = analyzer.getShortestPathMetric().getPairs();
 		double sum = 0.0;
-		for (Integer distance : shortestPaths) {
-			sum += distance;
+		for (Entry<String, Integer> entry : betweennessValues.entrySet()) {
+			sum += (entry.getValue() / pairs);
 		}
-		metricValue = sum / shortestPaths.size();
+		metricValue = sum / betweennessValues.size();
 
-	}
-
-	public boolean add(Integer e) {
-		return shortestPaths.add(e);
-	}
-
-	public void clear() {
-		shortestPaths.clear();
-		metricValue = 0;
 	}
 
 	@Override
 	protected String getIdentifier() {
-		return "AvgShortestPath";
+		return "Betweenness";
 	}
 
-	public int getMaxDepth() {
-		return maxDepth;
+	public void clear() {
+		betweennessValues.clear();
 	}
 
-	public void setMaxDepth(int maxDepth) {
-		this.maxDepth = maxDepth;
-	}
-
-	public int getPairs() {
-		return pairs;
-	}
-
-	public void setPairs(int pairs) {
-		this.pairs = pairs;
+	public void addBetweenness(final String nodeID) {
+		if (!betweennessValues.containsKey(nodeID)) {
+			betweennessValues.put(nodeID, 1);
+		} else {
+			int value = betweennessValues.get(nodeID);
+			value++;
+			betweennessValues.put(nodeID, value);
+		}
 	}
 
 }

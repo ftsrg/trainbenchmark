@@ -11,19 +11,19 @@
   },
   "IterationCount": 3,
   "MinSize": 1,
-  "MaxSize": 1,
-  "Model": "Schedule-Scale-Free",
+  "MaxSize": 4,
+  "Model": "Schedule-Scale-Free-Char",
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
   "Queries": [ 
-    "ConnectedSegments"
+    "StationsPath"
   ],
   "Scenarios": [
     "Analyze"
   ],
   "Series": 1,
   "Tools": [
-    "sesame"
+    "neo4j"
 
   ],
   "UniqueConfigurations": [
