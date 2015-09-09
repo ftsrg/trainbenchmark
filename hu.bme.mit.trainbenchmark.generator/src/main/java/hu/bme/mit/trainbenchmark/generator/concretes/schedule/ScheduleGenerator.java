@@ -198,11 +198,10 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	protected int getDestinationsNumber() {
 		double exponent = -3.0;
 		double x0 = 2.0;
-//		double x1 = 150.0;
-//		if (x1 > stations.size()) {
-//			x1 = stations.size() / 2;
-//		}
 		double x1 = generatorConfig.getSize() * 19;
+		if (x1 > stations.size()) {
+			x1 = stations.size() / 2;
+		}
 		int x = 0;
 		while (true) {
 			double uniformRandom = random.nextDouble();
