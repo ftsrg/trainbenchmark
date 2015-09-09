@@ -162,6 +162,11 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		return stations.get(sourceIndex).conn.add(targetIndex);
 	}
 
+	protected boolean removeNeighbor(final int sourceIndex, final int targetIndex) {
+		// cast int to Integer, since we remove an Object from the ArrayList instead removing an index
+		return (stations.get(sourceIndex).conn).remove((Integer) targetIndex);
+	}
+
 	protected boolean addDestination(final int sourceIndex, final int targetIndex) {
 		if (schedules.get(sourceIndex).conn.contains(targetIndex)) {
 			return false;

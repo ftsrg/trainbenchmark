@@ -14,13 +14,15 @@ package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.util.RandomElementsProvider;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator {
 
 	protected double p;
-
 	protected int K;
 
 	public WattsStrogatzScheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
@@ -52,15 +54,15 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 	protected void generateStations() throws IOException {
 		for (int source = 0; source < stations.size(); source++) {
 			for (int offset = 1; offset <= getNeighborsNumber(); offset++) {
-				addNeighbor(source, offset);
-				addNeighbor(source, offset * -1);
+				addNeighborWithOffset(source, offset);
+				addNeighborWithOffset(source, offset * -1);
 			}
 		}
+		rewireNeighbors();
 
 	}
 
-	@Override
-	protected boolean addNeighbor(final int sourceIndex, final int offset) {
+	protected boolean addNeighborWithOffset(final int sourceIndex, final int offset) {
 		int target = sourceIndex + offset;
 		if (target >= stations.size()) {
 			// jump to the beginning
@@ -70,6 +72,35 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 			target = stations.size() + offset;
 		}
 		return super.addNeighbor(sourceIndex, target);
+	}
+
+	protected void rewireNeighbors() {
+		List<Integer> removedNeighbors = new ArrayList<Integer>();
+		List<Integer> addedNeighbors = new ArrayList<Integer>();
+		for (int i = 0; i < stations.size(); i++) {
+			removedNeighbors.clear();
+			addedNeighbors.clear();
+			for (Integer targetIndex : stations.get(i).conn) {
+				if (random.nextDouble() < p) {
+					int newTargetIndex = i;
+					while (i == newTargetIndex) {
+						newTargetIndex = RandomElementsProvider
+								.getRandomDisjunctIndex(random, stations,
+										targetIndex);
+					}
+					addedNeighbors.add(newTargetIndex);
+					removedNeighbors.add(targetIndex);
+				}
+			}
+			for (Integer target : removedNeighbors) {
+				removeNeighbor(i, target);
+				removeNeighbor(target, i);
+			}
+			for (Integer target : addedNeighbors) {
+				addNeighbor(i, target);
+				addNeighbor(target, i);
+			}
+		}
 	}
 
 	@Override
