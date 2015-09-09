@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
+import java.io.IOException;
+
+import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.BlazegraphDriver;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-
-import java.io.IOException;
 
 public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
@@ -27,8 +27,8 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 	protected void init() throws IOException {
 		this.rdfbc = (RDFBenchmarkConfig) bc;
 
-		driver = sesameDriver = new BlazegraphDriver();
-		checker = new SesameChecker(sesameDriver, bc);
+		driver = sesameDriver = new BlazegraphDriver(rdfbc);
+		checker = new SesameChecker(sesameDriver, rdfbc);
 
 		if (bc.getScenario() != Scenario.BATCH) {
 			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());

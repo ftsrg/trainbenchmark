@@ -24,6 +24,8 @@ scenarios:
 #- Repair
 
 tools:
+#- allegro
+#- blazegraph
 #- drools5
 #- drools6
 #- emfapi
@@ -32,6 +34,7 @@ tools:
 #- mysql
 #- neo4j
 - sesame
+#- virtuoso
 
 # optional arguments. for example, neo4j is invoked with and without the javaapi argument as well.
 generator_optional_arguments:
