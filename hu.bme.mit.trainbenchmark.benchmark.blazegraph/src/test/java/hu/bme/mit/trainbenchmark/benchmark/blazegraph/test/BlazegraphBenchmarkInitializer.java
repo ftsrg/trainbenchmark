@@ -23,7 +23,7 @@ public class BlazegraphBenchmarkInitializer extends TestBenchmarkInitializer<Bla
 	@Override
 	protected BlazegraphBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Blazegraph", scenario, size, runIndex, query, iterationCount,
-				modificationMethod, modificationConstant);
+				modificationMethod, modificationConstant, false);
 		return new BlazegraphBenchmarkLogic(rbc);
 	}
 
