@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.orientdb;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class OrientDbBenchmarkLogic extends AbstractBenchmarkLogic {
+public class OrientDbBenchmarkLogic extends BenchmarkLogic {
 	
 	public OrientDbBenchmarkLogic(final String[] args) throws ParseException {
 		bc = new BenchmarkConfig(args, "OrientDb");

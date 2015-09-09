@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class EMFIncQueryBenchmarkLogic extends AbstractBenchmarkLogic {
+public class EMFIncQueryBenchmarkLogic extends BenchmarkLogic {
 
 	protected EMFIncQueryBenchmarkConfig eiqbc;
 	

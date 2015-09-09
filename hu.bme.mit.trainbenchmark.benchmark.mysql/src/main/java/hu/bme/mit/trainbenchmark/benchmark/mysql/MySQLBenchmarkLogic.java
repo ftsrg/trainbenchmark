@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class MySQLBenchmarkLogic extends AbstractBenchmarkLogic {
+public class MySQLBenchmarkLogic extends BenchmarkLogic {
 
 	public MySQLBenchmarkLogic(final String[] args) throws ParseException {
 		bc = new BenchmarkConfig(args, "MySQL");

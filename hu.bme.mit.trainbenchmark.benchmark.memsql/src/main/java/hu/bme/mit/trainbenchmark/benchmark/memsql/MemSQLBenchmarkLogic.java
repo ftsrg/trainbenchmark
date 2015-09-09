@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class MemSQLBenchmarkLogic extends AbstractBenchmarkLogic {
+public class MemSQLBenchmarkLogic extends BenchmarkLogic {
 
 	public MemSQLBenchmarkLogic(final String[] args) throws ParseException {
 		bc = new BenchmarkConfig(args, "MemSQL");

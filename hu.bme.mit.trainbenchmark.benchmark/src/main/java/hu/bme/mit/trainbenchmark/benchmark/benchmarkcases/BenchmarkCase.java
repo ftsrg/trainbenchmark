@@ -23,6 +23,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
 import hu.bme.mit.trainbenchmark.benchmark.queries.QueryInitializer;
+import hu.bme.mit.trainbenchmark.benchmark.task.EvaluationTask;
 import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -31,6 +32,12 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import eu.mondo.sam.core.metrics.BenchmarkMetric;
 import eu.mondo.sam.core.metrics.ScalarMetric;
@@ -155,10 +162,20 @@ public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 	public void benchmarkCheck(final PhaseResult phaseResult) throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		final ScalarMetric results = new ScalarMetric("Matches");
+
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		EvaluationTask<M> task = new EvaluationTask<M>(checker);
+		Future<Collection<M>> future = executor.submit(task);
 		timer.startMeasure();
-		matches = checker.check();
+		try {
+			matches = future.get(10, TimeUnit.SECONDS);
+		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+			e.printStackTrace();
+		}
 		timer.stopMeasure();
-		results.setValue(matches.size());
+		if (matches != null) {
+			results.setValue(matches.size());
+		}
 		phaseResult.addMetrics(timer, results);
 	}
 

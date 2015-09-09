@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.java;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class JavaBenchmarkLogic extends AbstractBenchmarkLogic {
+public class JavaBenchmarkLogic extends BenchmarkLogic {
 
 	public JavaBenchmarkLogic(final String[] args) throws ParseException {
 		super();

@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class VirtuosoBenchmarkLogic extends AbstractBenchmarkLogic{
+public class VirtuosoBenchmarkLogic extends BenchmarkLogic{
 
 	protected RDFBenchmarkConfig rbc;
 

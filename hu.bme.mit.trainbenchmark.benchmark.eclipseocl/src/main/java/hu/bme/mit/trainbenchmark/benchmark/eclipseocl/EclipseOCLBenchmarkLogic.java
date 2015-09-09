@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class EclipseOCLBenchmarkLogic extends AbstractBenchmarkLogic {
+public class EclipseOCLBenchmarkLogic extends BenchmarkLogic {
 
 	public EclipseOCLBenchmarkLogic(final String[] args) throws ParseException {
 		super();

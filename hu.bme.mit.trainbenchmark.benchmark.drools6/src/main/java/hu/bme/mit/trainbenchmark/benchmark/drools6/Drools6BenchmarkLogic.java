@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class Drools6BenchmarkLogic extends AbstractBenchmarkLogic {
+public class Drools6BenchmarkLogic extends BenchmarkLogic {
 
 	public Drools6BenchmarkLogic(final String[] args) throws ParseException {
 		bc = new BenchmarkConfig(args, "Drools6");

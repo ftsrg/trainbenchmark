@@ -35,14 +35,14 @@ import eu.mondo.sam.core.publishers.JsonPublisher;
 import eu.mondo.sam.core.publishers.Publisher;
 import eu.mondo.sam.core.results.BenchmarkResult;
 
-public abstract class AbstractBenchmarkLogic {
+public abstract class BenchmarkLogic {
 
 	protected BenchmarkConfig bc;
 
-	public AbstractBenchmarkLogic() {
+	public BenchmarkLogic() {
 	}
 
-	public AbstractBenchmarkLogic(final BenchmarkConfig bc) {
+	public BenchmarkLogic(final BenchmarkConfig bc) {
 		this.bc = bc;
 	}
 

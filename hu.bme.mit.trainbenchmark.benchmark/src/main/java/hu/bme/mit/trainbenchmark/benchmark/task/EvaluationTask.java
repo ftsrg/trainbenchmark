@@ -10,24 +10,24 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.allegro;
+package hu.bme.mit.trainbenchmark.benchmark.task;
 
-import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 
-import org.apache.commons.cli.ParseException;
+import java.util.Collection;
+import java.util.concurrent.Callable;
 
-public class AllegroBenchmarkLogic extends BenchmarkLogic{
+public class EvaluationTask<M> implements Callable<Collection<M>> {
 
-	protected RDFBenchmarkConfig rbc;
-	
-	public AllegroBenchmarkLogic(final String[] args) throws ParseException {
-		bc = rbc = new RDFBenchmarkConfig(args, "Allegro");
+	protected Checker<M> checker;
+
+	public EvaluationTask(Checker<M> checker) {
+		this.checker = checker;
 	}
 
-	public AllegroBenchmarkLogic(final RDFBenchmarkConfig rbc) {
-		super(rbc);
-		this.rbc = rbc;
+	@Override
+	public Collection<M> call() throws Exception {
+		return checker.check();
 	}
 
 }

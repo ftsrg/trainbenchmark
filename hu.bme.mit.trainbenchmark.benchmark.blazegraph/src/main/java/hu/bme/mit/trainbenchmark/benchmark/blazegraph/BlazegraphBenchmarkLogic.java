@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 
 import org.apache.commons.cli.ParseException;
 
-public class BlazegraphBenchmarkLogic extends AbstractBenchmarkLogic{
+public class BlazegraphBenchmarkLogic extends BenchmarkLogic{
 
 	protected RDFBenchmarkConfig rbc;
 

@@ -25,6 +25,9 @@ public abstract class Checker<M> {
 
 	public Map<String, Object> processMatches(Collection<M> matches) {
 		Map<String, Object> processedMatches = new HashMap<String, Object>();
+		if (matches == null) {
+			return processedMatches;
+		}
 		for (M match : matches) {
 			if (match instanceof MatchProcessor) {
 				processedMatches.putAll(((MatchProcessor) match).process());

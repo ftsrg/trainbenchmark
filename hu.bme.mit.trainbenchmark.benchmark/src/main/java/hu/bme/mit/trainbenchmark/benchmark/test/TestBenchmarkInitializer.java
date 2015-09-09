@@ -12,13 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
 import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
-public abstract class TestBenchmarkInitializer<T extends AbstractBenchmarkLogic> {
+public abstract class TestBenchmarkInitializer<T extends BenchmarkLogic> {
 
 	protected final int size = 1;
 	protected final ModificationMethod modificationMethod = ModificationMethod.CONSTANT;
