@@ -1,6 +1,6 @@
 # Train Benchmark Virtuoso implementation
 
-Install Virtuoso with the following command (on Ubuntu-based systems):
+Install Virtuoso:
 
 ```bash
 sudo apt-get install virtuoso-server
