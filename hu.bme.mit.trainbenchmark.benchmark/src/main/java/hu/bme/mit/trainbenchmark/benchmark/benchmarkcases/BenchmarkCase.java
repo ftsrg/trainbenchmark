@@ -171,6 +171,8 @@ public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 			matches = future.get(10, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 			e.printStackTrace();
+		} finally {
+			executor.shutdown();
 		}
 		timer.stopMeasure();
 		if (matches != null) {
