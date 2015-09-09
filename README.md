@@ -54,7 +54,6 @@ The framework provides a set of scripts for building the projects, generating th
 Certain tools need to be installed manually:
 
 * [Allegro](hu.bme.mit.trainbenchmark.benchmark.allegro)
-* [Blazegraph](hu.bme.mit.trainbenchmark.benchmark.blazegraph)
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql)
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso)
 
