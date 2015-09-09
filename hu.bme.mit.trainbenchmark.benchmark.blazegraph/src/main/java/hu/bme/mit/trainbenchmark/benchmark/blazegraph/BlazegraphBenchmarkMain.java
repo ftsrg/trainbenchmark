@@ -18,9 +18,10 @@ import org.apache.commons.cli.ParseException;
 
 public class BlazegraphBenchmarkMain {
 
-	public static void main(String[] args) throws ParseException, IOException {
-		BlazegraphBenchmarkLogic benchmarkLogic = new BlazegraphBenchmarkLogic(args);
+	public static void main(final String[] args) throws ParseException, IOException {
+		final BlazegraphBenchmarkLogic benchmarkLogic = new BlazegraphBenchmarkLogic(args);
 		benchmarkLogic.runBenchmark();
+		System.exit(0);
 	}
 
 }
