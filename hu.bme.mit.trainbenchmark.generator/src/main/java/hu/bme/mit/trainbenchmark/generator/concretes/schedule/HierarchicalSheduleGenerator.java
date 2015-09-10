@@ -28,6 +28,7 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected int clusterSize;
 	protected Cluster rootCluster;
 	protected int maxIterations;
+	protected int numberOfClones;
 
 	public HierarchicalSheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -41,8 +42,10 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	@Override
 	protected void initializeConstants() {
 		super.initializeConstants();
+		numberOfClones = 4;
 		clusterSize = 5;
-		maxIterations = 2;
+		maxIterations = (int) (Math.log10(maxNumberOfStations / (double) clusterSize) / Math
+				.log10(numberOfClones + 1)) + 1;
 		Cluster.numberOfNodes = clusterSize;
 		Cluster.maxID = maxNumberOfStations;
 	}
@@ -79,7 +82,7 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 
 	protected void buildClusters(final int iteration) {
 		List<Cluster> copiedClusters = new ArrayList<Cluster>();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < numberOfClones; i++) {
 			try {
 				copiedClusters.add(rootCluster.copy());
 			} catch (SizeLimitExceededException e) {
