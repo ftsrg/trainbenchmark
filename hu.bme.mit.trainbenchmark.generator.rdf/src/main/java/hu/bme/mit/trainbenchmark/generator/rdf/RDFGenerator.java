@@ -26,23 +26,24 @@ import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.GraphSerializer;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
-public class RDFGenerator extends Generator {
+public class RDFGenerator extends Generator implements GraphSerializer {
 
 	public RDFGenerator(final String args[]) throws ParseException {
 		super();
 		generatorConfig = rdfGeneratorConfig = new RDFGeneratorConfig(args);
 	}
 
+	protected RDFGeneratorConfig rdfGeneratorConfig;
+	protected BufferedWriter file;
+
 	@Override
 	protected String syntax() {
 		return "RDF" + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "");
 	}
-
-	protected RDFGeneratorConfig rdfGeneratorConfig;
-	protected BufferedWriter file;
 
 	@Override
 	public void initModel() throws IOException {
@@ -128,7 +129,11 @@ public class RDFGenerator extends Generator {
 
 	}
 
-	private String stringValue(final Object value) {
+	protected void write(final String s) throws IOException {
+		file.write(s + "\n\n");
+	}
+
+	protected String stringValue(final Object value) {
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^xsd:int", value);
 		}
@@ -138,10 +143,6 @@ public class RDFGenerator extends Generator {
 		} else {
 			return value.toString();
 		}
-	}
-
-	public void write(final String s) throws IOException {
-		file.write(s + "\n\n");
 	}
 
 }
