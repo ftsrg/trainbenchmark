@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.constants;
 
 public enum ModelType {
 	RAILWAY("Railway"), //
+	SCHEDULE_HIERARCHICAL("Schedule-Hierarchical"), //
 	SCHEDULE_RANDOM("Schedule-Random"), //
 	SCHEDULE_REAL("Schedule-Real"), //
 	SCHEDULE_SCALE_FREE("Schedule-Scale-Free"), //

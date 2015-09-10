@@ -124,6 +124,8 @@ public abstract class TrainBenchmarkConfig {
 
 	public String getModelFileNameWithoutExtension() {
 		switch (modelType) {
+		case SCHEDULE_HIERARCHICAL:
+			return "schedule-hierarchical-" + size;
 		case SCHEDULE_REAL:
 			return "schedule-real";
 		case SCHEDULE_RANDOM:

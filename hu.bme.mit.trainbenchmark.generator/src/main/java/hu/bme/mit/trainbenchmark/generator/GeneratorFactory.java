@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.generator;
 
 import hu.bme.mit.trainbenchmark.generator.concretes.railway.RailwayGenerator;
+import hu.bme.mit.trainbenchmark.generator.concretes.schedule.HierarchicalSheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RandomScheduleGenerator;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.RealModelTransformer;
 import hu.bme.mit.trainbenchmark.generator.concretes.schedule.WattsStrogatzScheduleGenerator;
@@ -31,6 +32,8 @@ public abstract class GeneratorFactory {
 
 	public SyntheticGenerator getSyntheticGenerator() {
 		switch (generatorConfig.getModelType()) {
+		case SCHEDULE_HIERARCHICAL:
+			return new HierarchicalSheduleGenerator(getScheduleFormatGenerator(), generatorConfig);
 		case SCHEDULE_RANDOM:
 			return new RandomScheduleGenerator(getScheduleFormatGenerator(), generatorConfig);
 		case SCHEDULE_SCALE_FREE_HOM:
