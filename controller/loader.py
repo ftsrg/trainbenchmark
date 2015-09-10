@@ -87,7 +87,8 @@ class Loader():
         common.modif_method = config_json["ModificationMethod"]
         common.modif_constant = config_json["ModificationConstant"]
         common.iter_count = config_json["IterationCount"]
-        common.model = config_json["Model"]
+        common.models = config_json["Model"]
+        common.submodels = config_json["Submodel"]
 
         # relatively from this script's path
         util.set_working_directory("../")

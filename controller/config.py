@@ -59,4 +59,5 @@ class CommonParameters:
         self.modif_constant = None
         self.iter_count = None
         self.path = None
-        self.model = None
+        self.models = None
+        self.submodels = None

@@ -26,7 +26,8 @@ public class RealCharacteristicScaleFreeGenerator extends HomogeneousScaleFreeGe
 
 	@Override
 	protected void printMessage() {
-		System.out.print("Generate real charasteristic scale-free model...");
+		System.out.print("Generate real charasteristic scale-free model " + submodel + ", size: "
+				+ generatorConfig.getSize() + "...");
 	}
 
 	@Override

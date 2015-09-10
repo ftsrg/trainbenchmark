@@ -47,7 +47,7 @@ def get_power_of_two(minsize, maxsize):
     while index <= maxsize:
         if index >= minsize:
             all_size.append(index)
-        index *= 2
+        index += 1
     return all_size
 
 

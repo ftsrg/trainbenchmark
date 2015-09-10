@@ -42,7 +42,8 @@ public class HeterogeneousScaleFreeGenerator extends HeterogeneousScheduleGenera
 
 	@Override
 	protected void printMessage() {
-		System.out.print("Generate heterogeneous scale-free model...");
+		System.out.print("Generate heterogeneous scale-free model " + submodel + ", size: "
+				+ generatorConfig.getSize() + "...");
 
 	}
 

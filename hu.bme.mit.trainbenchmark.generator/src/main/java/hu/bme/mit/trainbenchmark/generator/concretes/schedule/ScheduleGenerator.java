@@ -37,6 +37,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleGeneratorConstants;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleSubmodels;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.SyntheticGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -52,35 +53,22 @@ import java.util.Map;
 
 public abstract class ScheduleGenerator extends SyntheticGenerator {
 
-	/**
-	 * It equals to the sizeStep * size of the model.
-	 */
 	protected int maxNodes;
-
-	/**
-	 * Represents the current number of nodes.
-	 */
 	protected int currentNodes;
-
 	protected int sizeStep;
-
 	protected int maxNumberOfStations;
-
 	protected int maxNumberOfTrains;
-
 	protected int maxNumberOfSchedules;
-
 	protected int maxNumberOfRepetitiveSchedules;
-
 	protected int associationPercent;
-
 	protected double repetitiveScheduleFactor;
 
 	protected ArrayList<Node> stations;
-
 	protected ArrayList<Node> schedules;
 
 	protected Map<Integer, List<Integer>> schedulesOfDestinations;
+
+	protected ScheduleSubmodels submodel;
 
 	public ScheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -109,6 +97,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		stations = new ArrayList<Node>();
 		schedules = new ArrayList<Node>();
 		schedulesOfDestinations = new HashMap<Integer, List<Integer>>();
+		submodel = generatorConfig.getSubmodel();
 	}
 
 	@Override

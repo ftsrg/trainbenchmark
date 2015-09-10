@@ -46,26 +46,25 @@ class Generator():
         # mutual parameters for every configuration
         java_xmx = configurations[0].common.java_xmx
         args = configurations[0].common.generator_args
-        model = configurations[0].common.model
+        models = configurations[0].common.models
+        submodels = configurations[0].common.submodels
         for scenario in self.models:
             for format in self.models[scenario]:
-                path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".\
-                    format(FORMAT=format)
-                util.set_working_directory(path)
-                target = targets.get_generator_jar(format)
-
-                if len(self.models[scenario][format]) > 0:
-                    for size in self.models[scenario][format]:
-                        logging.info("Generate model:(format:" + format +
-                                     ", scenario:" + scenario +
-                                     ", size:" + str(size) + ")")
-                        subprocess.call(["java", "-Xmx" + java_xmx,
-                                         "-jar", target,
-                                         "-scenario", scenario,
-                                         "-size", str(size),
-                                         "-model", model,
-                                         args])
-                util.set_working_directory("../")
+                for size in self.models[scenario][format]:
+                    for model in models:
+                        for sub in submodels:
+                            path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/". \
+                                format(FORMAT=format)
+                            util.set_working_directory(path)
+                            target = targets.get_generator_jar(format)
+                            subprocess.call(["java", "-Xmx" + java_xmx,
+                                             "-jar", target,
+                                             "-scenario", scenario,
+                                             "-size", str(size),
+                                             "-model", model,
+                                             "-subModel", sub,
+                                             args])
+                            util.set_working_directory("../")
         
     def prevent_multiple_generation(self, configurations):
         """

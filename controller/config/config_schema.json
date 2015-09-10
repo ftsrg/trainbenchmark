@@ -30,17 +30,64 @@
       }
     },
     "Model": {
-      "enum": [
-        "Railway",
-        "Schedule-Hierarchical",
-        "Schedule-Random",
-        "Schedule-Real",
-        "Schedule-Scale-Free",
-        "Schedule-Scale-Free-Char",
-        "Schedule-Scale-Free-Het",
-        "Schedule-Scale-Free-Hom"
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "Railway",
+            "Schedule-Hierarchical",
+            "Schedule-Random",
+            "Schedule-Real",
+            "Schedule-Scale-Free",
+            "Schedule-Scale-Free-Char",
+            "Schedule-Scale-Free-Het",
+            "Schedule-Scale-Free-Hom"
+          ]
+        }
       ],
-      "default": "Railway"
+      "additionalItems": {
+        "type": "string",
+        "enum": [
+          "Railway",
+          "Schedule-Hierarchical",
+          "Schedule-Random",
+          "Schedule-Real",
+          "Schedule-Scale-Free",
+          "Schedule-Scale-Free-Char",
+          "Schedule-Scale-Free-Het",
+          "Schedule-Scale-Free-Hom"
+        ]
+      }
+    },
+    "Submodel": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        }
+      ],
+      "additionalItems": {
+        "type": "string",
+        "enum": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ]
+      }
     },
     "MAVEN_OPTS": {
       "type": "object",

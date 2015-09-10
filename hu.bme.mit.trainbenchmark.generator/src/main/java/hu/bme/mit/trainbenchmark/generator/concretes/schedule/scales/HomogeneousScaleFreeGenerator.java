@@ -33,7 +33,8 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 
 	@Override
 	protected void printMessage() {
-		System.out.print("Generate homogeneous scale-free model...");
+		System.out.print("Generate homogeneous scale-free model " + submodel + ", size: "
+				+ generatorConfig.getSize() + "...");
 	}
 
 	@Override

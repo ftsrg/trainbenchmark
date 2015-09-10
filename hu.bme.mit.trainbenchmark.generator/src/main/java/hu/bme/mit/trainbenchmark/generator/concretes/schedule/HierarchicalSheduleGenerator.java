@@ -36,7 +36,8 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 
 	@Override
 	protected void printMessage() {
-		System.out.print("Generate hierarchical schedule model...");
+		System.out.print("Generate hierarchical schedule model " + submodel + ", size: "
+				+ generatorConfig.getSize() + "...");
 	}
 
 	@Override

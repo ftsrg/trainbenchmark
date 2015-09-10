@@ -36,41 +36,43 @@ def run_benchmark(configurations):
 def execute(configuration):
     """Benchmark function.
     """
+    models = configuration.common.models
+    submodels = configuration.common.submodels
     for series_index in range(1, configuration.common.series + 1):
         for scenario in configuration.scenarios:
             for size in configuration.sizes:
-                format = configuration.format
-                path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".\
-                    format(TOOL=configuration.tool)
-                util.set_working_directory(path)
-                # benchmark_artifact = targets.get_model_path(format,
-                #                                             scenario,
-                #                                             size)
+                for model in models:
+                    for sub in submodels:
+                        format = configuration.format
+                        path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".\
+                            format(TOOL=configuration.tool)
+                        util.set_working_directory(path)
 
-                target = targets.get_tool_jar(configuration.tool)
-                xmx = configuration.common.java_xmx
-                modif_method = configuration.common.modif_method
-                modif_constant = str(configuration.common.modif_constant)
-                iter_count = str(configuration.common.iter_count)
-                model = configuration.common.model
-                args = configuration.benchmark_args
+                        target = targets.get_tool_jar(configuration.tool)
+                        xmx = configuration.common.java_xmx
+                        modif_method = configuration.common.modif_method
+                        modif_constant = str(configuration.common.modif_constant)
+                        iter_count = str(configuration.common.iter_count)
 
-                for query in configuration.queries:
-                    logging.info("Run benchmark:(tool:" + configuration.tool +
-                                 ", scenario:" + scenario +
-                                 ", query:" + query + ", size:" + str(size)+")")
-                    subprocess.call(["java", "-Xmx" + xmx, "-jar", target,
-                                     "-scenario", scenario,
-                                     "-model", model,
-                                     "-runIndex", str(series_index),
-                                     "-query", query,
-                                     "-modificationMethod", modif_method,
-                                     "-modificationConstant", modif_constant,
-                                     "-iterationCount", iter_count,
-                                     "-size", str(size),
-                                     args
-                                     ])
-                util.set_working_directory("../")
+                        args = configuration.benchmark_args
+
+                        for query in configuration.queries:
+                            logging.info("Run benchmark:(tool:" + configuration.tool +
+                                         ", scenario:" + scenario +
+                                        ", query:" + query + ", size:" + str(size)+")")
+                            subprocess.call(["java", "-Xmx" + xmx, "-jar", target,
+                                             "-scenario", scenario,
+                                             "-model", model,
+                                             "-subModel", sub,
+                                             "-runIndex", str(series_index),
+                                             "-query", query,
+                                             "-modificationMethod", modif_method,
+                                             "-modificationConstant", modif_constant,
+                                             "-iterationCount", iter_count,
+                                             "-size", str(size),
+                                             args
+                                             ])
+                        util.set_working_directory("../")
 
 
 # def run_eclipse_based_benchmark(configuration):

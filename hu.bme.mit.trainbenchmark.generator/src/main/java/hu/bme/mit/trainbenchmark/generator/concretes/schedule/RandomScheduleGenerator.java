@@ -30,7 +30,8 @@ public class RandomScheduleGenerator extends HomogeneousScheduleGenerator {
 
 	@Override
 	protected void printMessage() {
-		System.out.print("Generate random model...");
+		System.out.print("Generate random model " + submodel + ", size: " + generatorConfig.getSize()
+				+ "...");
 
 	}
 

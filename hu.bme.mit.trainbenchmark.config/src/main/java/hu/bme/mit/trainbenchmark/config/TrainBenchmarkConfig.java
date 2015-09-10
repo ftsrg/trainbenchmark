@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.config;
 
 import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleSubmodels;
 
 import java.util.Arrays;
 
@@ -36,6 +37,7 @@ public abstract class TrainBenchmarkConfig {
 	protected int size;
 	protected ScenarioConstants scenario;
 	protected ModelType modelType;
+	protected ScheduleSubmodels submodel;
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
@@ -63,6 +65,7 @@ public abstract class TrainBenchmarkConfig {
 		options.addOption(requiredOption("scenario", "Batch/Inject/Repair"));
 		options.addOption(requiredOption("size", "model size, e.g. 4"));
 		options.addOption(requiredOption("model", "the type of the model"));
+		options.addOption("subModel", true, "the subtype of the model");
 	}
 
 	protected void processArguments(final String[] args) throws ParseException {
@@ -71,6 +74,12 @@ public abstract class TrainBenchmarkConfig {
 		scenario = ScenarioConstants.valueOf(cmd.getOptionValue("scenario").toUpperCase());
 		size = Integer.parseInt(cmd.getOptionValue("size"));
 		modelType = ModelType.valueOf(cmd.getOptionValue("model").toUpperCase().replace("-", "_"));
+		final String model = cmd.getOptionValue("subModel");
+		if (model != null) {
+			submodel = ScheduleSubmodels.valueOf(model);
+		} else {
+			submodel = ScheduleSubmodels.valueOf("A");
+		}
 	}
 
 	// shorthand for generating required options
@@ -122,24 +131,32 @@ public abstract class TrainBenchmarkConfig {
 		return getModelPath() + filename;
 	}
 
+	public ScheduleSubmodels getSubmodel() {
+		return submodel;
+	}
+
+	public void setSubmodel(ScheduleSubmodels submodel) {
+		this.submodel = submodel;
+	}
+
 	public String getModelFileNameWithoutExtension() {
 		switch (modelType) {
 		case SCHEDULE_HIERARCHICAL:
-			return "schedule-hierarchical-" + size;
+			return "schedule-hierarchical-" + submodel + "-" + size;
 		case SCHEDULE_REAL:
 			return "schedule-real";
 		case SCHEDULE_RANDOM:
-			return "schedule-random-" + size;
+			return "schedule-random-" + submodel + "-" + size;
 		case SCHEDULE_SCALE_FREE:
-			return "schedule-scale-" + size;
+			return "schedule-scale-" + submodel + "-" + size;
 		case SCHEDULE_SCALE_FREE_CHAR:
-			return "schedule-scale-char-" + size;
+			return "schedule-scale-char-" + submodel + "-" + size;
 		case SCHEDULE_SCALE_FREE_HET:
-			return "schedule-scale-het-" + size;
+			return "schedule-scale-het-" + submodel + "-" + size;
 		case SCHEDULE_SCALE_FREE_HOM:
-			return "schedule-scale-hom-" + size;
+			return "schedule-scale-hom-" + submodel + "-" + size;
 		case SCHEDULE_WATTS_STROGATZ:
-			return "schedule-watts-strogatz-" + size;
+			return "schedule-watts-strogatz-" + submodel + "-" + size;
 		case RAILWAY:
 			final String variant = (scenario == ScenarioConstants.BATCH) ? "repair" : scenario
 					.toString().toLowerCase();

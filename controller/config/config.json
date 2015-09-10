@@ -12,10 +12,18 @@
   "IterationCount": 3,
   "MinSize": 1,
   "MaxSize": 4,
-  "Model": "Schedule-Scale-Free-Char",
+  "Model": [
+    "Schedule-Random",
+    "Schedule-Scale-Free-Char"
+  ],
+  "Submodel": [
+    "A",
+    "B",
+    "C"
+  ],
   "ModificationMethod": "constant",
   "ModificationConstant": 10,
-  "Queries": [ 
+  "Queries": [
     "StationsPath"
   ],
   "Scenarios": [
@@ -23,9 +31,7 @@
   ],
   "Series": 1,
   "Tools": [
-    "neo4j"
-
+    "sesame"
   ],
-  "UniqueConfigurations": [
-	]
+  "UniqueConfigurations": []
 }

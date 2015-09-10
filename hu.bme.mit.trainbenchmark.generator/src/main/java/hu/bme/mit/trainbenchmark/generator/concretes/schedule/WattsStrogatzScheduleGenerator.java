@@ -31,7 +31,8 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 
 	@Override
 	protected void printMessage() {
-		System.out.print("Generate Watts-Strogatz model...");
+		System.out.print("Generate Watts-Strogatz model " + submodel + ", size: "
+				+ generatorConfig.getSize() + "...");
 
 	}
 
