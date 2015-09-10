@@ -16,29 +16,44 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.naming.SizeLimitExceededException;
+
 public class Cluster {
 
 	public static int numberOfNodes = 5;
 
-	public static int id = 0;
-
 	public static int maxID;
 
-	public List<Node> diagonals;
+	protected static int id = 0;
 
-	public Node center;
+	protected List<Node> diagonals;
 
-	public List<Cluster> subClusters;
+	protected Node center;
+
+	protected List<Cluster> subClusters;
 
 	public Cluster() {
 		diagonals = new ArrayList<Node>();
 		subClusters = new ArrayList<Cluster>();
 	}
 
-	public void build() {
+	public void build() throws SizeLimitExceededException {
 		center = createNode();
 		for (int i = 0; i < numberOfNodes - 1; i++) {
-			diagonals.add(createNode());
+			try {
+				diagonals.add(createNode());
+			} catch (SizeLimitExceededException e) {
+				for (Node source : diagonals) {
+					for (Node target : diagonals) {
+						if (source != target) {
+							source.conn.add(target.id);
+							source.conn.add(center.id);
+						}
+					}
+					center.conn.add(source.id);
+				}
+				return;
+			}
 		}
 		for (Node source : diagonals) {
 			for (Node target : diagonals) {
@@ -49,25 +64,25 @@ public class Cluster {
 			}
 			center.conn.add(source.id);
 		}
+
 	}
 
-	public Cluster copy(final int maxDepth) {
-		return copy(maxDepth, 0);
-	}
-
-	public Cluster copy(final int maxDepth, int iteration) {
+	public Cluster copy() throws SizeLimitExceededException {
 		Cluster newCluster = new Cluster();
 		newCluster.build();
 		Cluster newSubCluster;
-		iteration++;
 		for (Cluster c : subClusters) {
-			newSubCluster = c.copy(maxDepth);
+			try {
+				newSubCluster = c.copy();
+			} catch (SizeLimitExceededException e) {
+				return newCluster;
+			}
 			newCluster.subClusters.add(newSubCluster);
 			if (newSubCluster.subClusters.isEmpty()) {
 				drawEdges(newSubCluster, newCluster.center);
 			} else {
 				List<Cluster> deepestClusters = new ArrayList<Cluster>();
-				newSubCluster.getDeepestClusters(deepestClusters, iteration, maxDepth);
+				newSubCluster.getDeepestClusters(deepestClusters);
 				for (Cluster cl : deepestClusters) {
 					drawEdges(cl, newCluster.center);
 				}
@@ -112,6 +127,18 @@ public class Cluster {
 		}
 	}
 
+	public void getDeepestClusters(final List<Cluster> deepestClusters) {
+		if (subClusters == null) {
+			deepestClusters.add(this);
+		}
+		if (subClusters.isEmpty()) {
+			deepestClusters.add(this);
+		}
+		for (Cluster c : subClusters) {
+			c.getDeepestClusters(deepestClusters);
+		}
+	}
+
 	public List<Node> getNodes() {
 		List<Node> nodes = new ArrayList<Node>();
 		nodes.add(center);
@@ -124,11 +151,15 @@ public class Cluster {
 
 	}
 
-	public Node createNode() {
+	public Node createNode() throws SizeLimitExceededException {
 		return createNode(0);
 	}
 
-	public Node createNode(int degree) {
+	public Node createNode(int degree) throws SizeLimitExceededException {
+		if (id >= maxID) {
+			throw new SizeLimitExceededException(
+					"The maximum number of identifiers are exceeded: " + maxID);
+		}
 		Node n = new Node(degree, id);
 		id++;
 		return n;

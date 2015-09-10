@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.SizeLimitExceededException;
+
 public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 
 	protected int clusterSize;
@@ -48,7 +50,11 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	@Override
 	protected void initializationStep() throws IOException {
 		rootCluster = new Cluster();
-		rootCluster.build();
+		try {
+			rootCluster.build();
+		} catch (SizeLimitExceededException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -74,7 +80,11 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected void buildClusters(final int iteration) {
 		List<Cluster> copiedClusters = new ArrayList<Cluster>();
 		for (int i = 0; i < 4; i++) {
-			copiedClusters.add(rootCluster.copy(iteration));
+			try {
+				copiedClusters.add(rootCluster.copy());
+			} catch (SizeLimitExceededException e) {
+				break;
+			}
 		}
 		for (Cluster cl : copiedClusters) {
 			rootCluster.addSubCluster(cl, iteration);
