@@ -19,7 +19,10 @@ import java.util.List;
 public class Cluster {
 
 	public static int numberOfNodes = 5;
+
 	public static int id = 0;
+
+	public static int maxID;
 
 	public List<Node> diagonals;
 
@@ -48,14 +51,28 @@ public class Cluster {
 		}
 	}
 
-	public Cluster copy() {
+	public Cluster copy(final int maxDepth) {
+		return copy(maxDepth, 0);
+	}
+
+	public Cluster copy(final int maxDepth, int iteration) {
 		Cluster newCluster = new Cluster();
 		newCluster.build();
 		Cluster newSubCluster;
+		iteration++;
 		for (Cluster c : subClusters) {
-			newSubCluster = c.copy();
+			newSubCluster = c.copy(maxDepth);
 			newCluster.subClusters.add(newSubCluster);
-			drawEdges(newSubCluster, newCluster.center);
+			if (newSubCluster.subClusters.isEmpty()) {
+				drawEdges(newSubCluster, newCluster.center);
+			} else {
+				List<Cluster> deepestClusters = new ArrayList<Cluster>();
+				newSubCluster.getDeepestClusters(deepestClusters, iteration, maxDepth);
+				for (Cluster cl : deepestClusters) {
+					drawEdges(cl, newCluster.center);
+				}
+
+			}
 
 		}
 		return newCluster;

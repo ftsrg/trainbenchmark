@@ -18,6 +18,7 @@ import hu.bme.mit.trainbenchmark.generator.util.Cluster;
 import hu.bme.mit.trainbenchmark.generator.util.Node;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
@@ -39,8 +40,9 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected void initializeConstants() {
 		super.initializeConstants();
 		clusterSize = 5;
-		maxIterations = 5;
+		maxIterations = 2;
 		Cluster.numberOfNodes = clusterSize;
+		Cluster.maxID = maxNumberOfStations;
 	}
 
 	@Override
@@ -70,14 +72,13 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	}
 
 	protected void buildClusters(final int iteration) {
-		Cluster copyCluster1 = rootCluster.copy();
-		Cluster copyCluster2 = rootCluster.copy();
-		Cluster copyCluster3 = rootCluster.copy();
-		Cluster copyCluster4 = rootCluster.copy();
-		rootCluster.addSubCluster(copyCluster1, iteration);
-		rootCluster.addSubCluster(copyCluster2, iteration);
-		rootCluster.addSubCluster(copyCluster3, iteration);
-		rootCluster.addSubCluster(copyCluster4, iteration);
+		List<Cluster> copiedClusters = new ArrayList<Cluster>();
+		for (int i = 0; i < 4; i++) {
+			copiedClusters.add(rootCluster.copy(iteration));
+		}
+		for (Cluster cl : copiedClusters) {
+			rootCluster.addSubCluster(cl, iteration);
+		}
 
 	}
 
