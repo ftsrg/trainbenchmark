@@ -19,7 +19,6 @@ import java.util.Arrays;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
@@ -67,7 +66,8 @@ public abstract class TrainBenchmarkConfig {
 
 	protected void initOptions() {
 		options.addOption(HELP, false, "displays this text");
-		options.addOption(requiredOption(SCENARIO, "specifies the scenario, e.g. Batch/Inject/Repair/Test"));
+		options.addOption(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair/Test");
+		options.getOption(SCENARIO).setRequired(true);
 		options.addOption(SIZE, true, "specifies model size, e.g. 4");
 		options.addOption(QUERY, true, "specifies the query, e.g. RouteSensor");
 	}
@@ -85,13 +85,6 @@ public abstract class TrainBenchmarkConfig {
 		if (cmd.hasOption(SIZE)) {
 			size = Integer.parseInt(cmd.getOptionValue(SIZE));
 		}
-	}
-
-	// shorthand for generating required options
-	protected static Option requiredOption(final String name, final String description) {
-		final Option option = new Option(name, true, description);
-		option.setRequired(true);
-		return option;
 	}
 
 	public void printHelp() {
