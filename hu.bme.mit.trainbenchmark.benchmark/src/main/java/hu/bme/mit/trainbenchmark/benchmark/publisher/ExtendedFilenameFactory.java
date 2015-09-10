@@ -25,7 +25,8 @@ public class ExtendedFilenameFactory extends DefaultFilenameFactory {
 
 	@Override
 	public String getFilename() {
-		return tbCaseDescriptor.getModel() + "-" + super.getFilename();
+		return tbCaseDescriptor.getModel() + "-" + tbCaseDescriptor.getSubmodel() + "-"
+				+ super.getFilename();
 	}
 
 }

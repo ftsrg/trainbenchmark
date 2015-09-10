@@ -47,6 +47,7 @@ public abstract class Scenario<T extends BenchmarkCase<?, ?, ?>> extends Benchma
 		caseDescriptor.setSize(size);
 		caseDescriptor.setRunIndex(runIndex);
 		caseDescriptor.setModel(benchmarkConfig.getModelType().toString());
+		caseDescriptor.setSubmodel(benchmarkConfig.getSubmodel().toString());
 		return caseDescriptor;
 	}
 

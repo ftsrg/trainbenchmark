@@ -21,12 +21,23 @@ public class TrainBenchmarkCaseDescriptor extends CaseDescriptor {
 	@JsonProperty("Model")
 	protected String model;
 
+	@JsonProperty("Submodel")
+	protected String submodel;
+
 	public String getModel() {
 		return model;
 	}
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+	public String getSubmodel() {
+		return submodel;
+	}
+
+	public void setSubmodel(String submodel) {
+		this.submodel = submodel;
 	}
 
 }
