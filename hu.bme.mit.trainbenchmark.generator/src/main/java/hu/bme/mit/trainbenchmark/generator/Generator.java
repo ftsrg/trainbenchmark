@@ -46,14 +46,17 @@ import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public abstract class Generator {
+public class Generator {
 
-	protected int id = 1;
-
-	// static configuration
+	protected final TrainBenchmarkSerializer serializer;
 	protected GeneratorConfig generatorConfig;
 
-	// dynamic configuration
+	public Generator(final TrainBenchmarkSerializer serializer, final GeneratorConfig generatorConfig) {
+		this.serializer = serializer;
+		this.generatorConfig = generatorConfig;
+	}
+
+	// configuration
 	protected int maxSegments = 5;
 	protected int maxRoutes;
 	protected int maxSwitchPositions = 20;
@@ -72,13 +75,12 @@ public abstract class Generator {
 		return random.nextInt(100);
 	}
 
-	protected static final Map<String, Object> emptyMap = Collections.emptyMap();
 	protected static int MAX_SEGMENT_LENGTH = 1000;
 
 	public void generateModels() throws Exception {
 		final StringBuilder messageBuilder = new StringBuilder();
 		messageBuilder.append("Generating instance model, ");
-		messageBuilder.append("generator: " + syntax() + ", ");
+		messageBuilder.append("generator: " + serializer.syntax() + ", ");
 		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
 		if (generatorConfig.getScenario() == MINIMAL) {
 			messageBuilder.append("query: " + generatorConfig.getQuery());
@@ -88,13 +90,13 @@ public abstract class Generator {
 		messageBuilder.append("... ");
 		System.out.print(messageBuilder.toString());
 		initializeConstants();
-		initModel();
+		serializer.initModel();
 		if (generatorConfig.getScenario() == Scenario.MINIMAL) {
 
 		} else {
 			generateModel();
 		}
-		persistModel();
+		serializer.persistModel();
 		System.out.println("Done.");
 	}
 
@@ -135,13 +137,13 @@ public abstract class Generator {
 		List<Object> prevTracks = null;
 
 		for (long i = 0; i < maxRoutes; i++) {
-			beginRoute();
+			serializer.beginTransaction();
 
 			if (prevSemaphore == null) {
 				final Map<String, Object> semaphoreAttributes = new HashMap<>();
 				semaphoreAttributes.put(SIGNAL, Signal.GO);
 
-				prevSemaphore = createVertex(SEMAPHORE, semaphoreAttributes);
+				prevSemaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
 				firstSemaphore = prevSemaphore;
 			}
 
@@ -149,7 +151,7 @@ public abstract class Generator {
 			if (i != maxRoutes - 1) {
 				final Map<String, Object> semaphoreAttributes = new HashMap<>();
 				semaphoreAttributes.put(SIGNAL, Signal.GO);
-				semaphore2 = createVertex(SEMAPHORE, semaphoreAttributes);
+				semaphore2 = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
 			} else {
 				semaphore2 = firstSemaphore;
 			}
@@ -163,25 +165,25 @@ public abstract class Generator {
 			routeReferences.put(ENTRY, entry);
 			routeReferences.put(EXIT, exit);
 
-			final Object route = createVertex(ROUTE, emptyMap, routeReferences);
+			final Object route = serializer.createVertex(ROUTE, Collections.<String, Object> emptyMap(), routeReferences);
 
 			final int swps = random.nextInt(maxSwitchPositions);
 			final List<Object> currentTrack = new ArrayList<>();
 
 			for (int j = 0; j < swps; j++) {
-				final Object sw = createVertex(SWITCH);
+				final Object sw = serializer.createVertex(SWITCH);
 				currentTrack.add(sw);
 
 				final int sensors = random.nextInt(maxSensors - 1) + 1;
 
 				Object lastSensor = null;
 				for (int k = 0; k < sensors; k++) {
-					final Object sensor = createVertex(SENSOR);
+					final Object sensor = serializer.createVertex(SENSOR);
 
 					// add "sensors" edge from route to sensor
 					final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
 					final Object sourceRoute = routeSensorError ? null : route;
-					createEdge(DEFINED_BY, sourceRoute, sensor);
+					serializer.createEdge(DEFINED_BY, sourceRoute, sensor);
 
 					for (int m = 0; m < maxSegments; m++) {
 						createSegment(currentTrack, sensor);
@@ -197,11 +199,11 @@ public abstract class Generator {
 				// add "sensor" edge from switch to sensor
 				final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
 				final Object targetSensor = switchSensorError ? null : lastSensor;
-				createEdge(SENSOR_EDGE, sw, targetSensor);
+				serializer.createEdge(SENSOR_EDGE, sw, targetSensor);
 
 				final int stateNumber = random.nextInt(4);
 				final Position stateEnum = Position.values()[stateNumber];
-				setAttribute(SWITCH, sw, CURRENTPOSITION, stateEnum);
+				serializer.setAttribute(SWITCH, sw, CURRENTPOSITION, stateEnum);
 
 				// the errorInjectedState may contain a bad value
 				final boolean switchSetError = nextRandom() < switchSetErrorPercent;
@@ -216,26 +218,27 @@ public abstract class Generator {
 				final Map<String, Object> switchPositionIncomingEdges = new HashMap<>();
 				switchPositionIncomingEdges.put(FOLLOWS, route);
 
-				createVertex(SWITCHPOSITION, switchPosititonAttributes, switchPositionOutgoingEdges, switchPositionIncomingEdges);
+				serializer.createVertex(SWITCHPOSITION, switchPosititonAttributes, switchPositionOutgoingEdges,
+						switchPositionIncomingEdges);
 			}
 
 			Object prevte = null;
 			for (final Object trackelement : currentTrack) {
 				if (prevte != null) {
-					createEdge(CONNECTSTO, prevte, trackelement);
+					serializer.createEdge(CONNECTSTO, prevte, trackelement);
 				}
 				prevte = trackelement;
 			}
 
 			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {
-				createEdge(CONNECTSTO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
+				serializer.createEdge(CONNECTSTO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
 			}
 
 			// Loop the last track element of the last route to the first track
 			// element of the first route.
 			if (i == maxRoutes - 1) {
 				if (currentTrack != null && currentTrack.size() > 0 && firstTracks.size() > 0) {
-					createEdge(CONNECTSTO, currentTrack.get(currentTrack.size() - 1), firstTracks.get(0));
+					serializer.createEdge(CONNECTSTO, currentTrack.get(currentTrack.size() - 1), firstTracks.get(0));
 				}
 			}
 
@@ -246,7 +249,7 @@ public abstract class Generator {
 			prevTracks = currentTrack;
 			prevSemaphore = semaphore2;
 
-			endRoute();
+			serializer.endTransaction();
 		}
 	}
 
@@ -256,53 +259,10 @@ public abstract class Generator {
 
 		final Map<String, Object> segmentAttributes = new HashMap<>();
 		segmentAttributes.put(LENGTH, segmentLength);
-		final Object seg = createVertex(SEGMENT, segmentAttributes);
+		final Object seg = serializer.createVertex(SEGMENT, segmentAttributes);
 
-		createEdge(SENSOR_EDGE, seg, sen);
+		serializer.createEdge(SENSOR_EDGE, seg, sen);
 		currTracks.add(seg);
 	}
-
-	// the createVertex() methods with fewer arguments are final
-
-	protected final Object createVertex(final String type) throws IOException {
-		return createVertex(type, emptyMap);
-	}
-
-	protected final Object createVertex(final String type, final Map<String, Object> attributes) throws IOException {
-		return createVertex(type, attributes, emptyMap);
-	}
-
-	protected final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges)
-			throws IOException {
-		return createVertex(type, attributes, outgoingEdges, emptyMap);
-	}
-
-	protected final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
-			final Map<String, Object> incomingEdges) throws IOException {
-		final Object vertex = createVertex(id, type, attributes, outgoingEdges, incomingEdges);
-		id++;
-		return vertex;
-	}
-
-	//
-
-	protected abstract String syntax();
-
-	protected abstract void initModel() throws IOException;
-
-	protected abstract void persistModel() throws Exception;
-
-	protected abstract Object createVertex(final int id, final String type, final Map<String, Object> attributes,
-			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException;
-
-	protected abstract void createEdge(String label, Object from, Object to) throws IOException;
-
-	protected abstract void setAttribute(String type, Object node, String key, Object value) throws IOException;
-
-	protected void beginRoute() throws IOException {
-	};
-
-	protected void endRoute() throws IOException {
-	};
 
 }

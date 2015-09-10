@@ -21,27 +21,25 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.GraphSerializer;
+import hu.bme.mit.trainbenchmark.generator.TrainBenchmarkSerializer;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
-public class RDFGenerator extends Generator implements GraphSerializer {
+public class RDFSerializer extends TrainBenchmarkSerializer {
 
-	public RDFGenerator(final String args[]) throws ParseException {
-		super();
-		generatorConfig = rdfGeneratorConfig = new RDFGeneratorConfig(args);
-	}
-
-	protected RDFGeneratorConfig rdfGeneratorConfig;
+	protected final RDFGeneratorConfig rdfGeneratorConfig;
 	protected BufferedWriter file;
 
+	public RDFSerializer(final RDFGeneratorConfig rdfGeneratorConfig) {
+		super();
+		this.rdfGeneratorConfig = rdfGeneratorConfig;
+	}
+
 	@Override
-	protected String syntax() {
+	public String syntax() {
 		return "RDF" + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "");
 	}
 
@@ -49,13 +47,13 @@ public class RDFGenerator extends Generator implements GraphSerializer {
 	public void initModel() throws IOException {
 		// source file
 		final String postfix = rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "";
-		final String srcFilePath = generatorConfig.getWorkspacePath()
+		final String srcFilePath = rdfGeneratorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix + ".ttl";
 
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = generatorConfig.getModelPathNameWithoutExtension() + postfix + ".ttl";
+		final String destFilePath = rdfGeneratorConfig.getModelPathNameWithoutExtension() + postfix + ".ttl";
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -70,7 +68,7 @@ public class RDFGenerator extends Generator implements GraphSerializer {
 	}
 
 	@Override
-	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 
 		// vertex id and type
@@ -114,7 +112,7 @@ public class RDFGenerator extends Generator implements GraphSerializer {
 	}
 
 	@Override
-	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
+	public void createEdge(final String label, final Object from, final Object to) throws IOException {
 		if (from == null || to == null) {
 			return;
 		}
@@ -123,7 +121,7 @@ public class RDFGenerator extends Generator implements GraphSerializer {
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
 		write(triple + ".");
 

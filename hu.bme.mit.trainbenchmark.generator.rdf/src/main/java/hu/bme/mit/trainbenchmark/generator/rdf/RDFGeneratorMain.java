@@ -13,11 +13,14 @@
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 
 public class RDFGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Generator generator = new RDFGenerator(args);
+		final RDFGeneratorConfig rdfGeneratorConfig = new RDFGeneratorConfig(args);
+		final RDFSerializer rdfSerializer = new RDFSerializer(rdfGeneratorConfig);
+		final Generator generator = new Generator(rdfSerializer, rdfGeneratorConfig);
 		generator.generateModels();
 	}
 

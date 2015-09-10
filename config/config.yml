@@ -19,9 +19,9 @@ queries:
 - SwitchSet
 
 scenarios:
-#- Batch
+- Batch
 - Inject
-#- Repair
+- Repair
 
 tools:
 #- allegro
@@ -29,10 +29,10 @@ tools:
 #- drools5
 #- drools6
 #- emfapi
-#- emfincquery
+- emfincquery
 #- jena
-#- mysql
-#- neo4j
+- mysql
+- neo4j
 #- sesame
 #- virtuoso
 
