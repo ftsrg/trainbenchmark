@@ -29,10 +29,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
-import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.constants.Signal;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import static hu.bme.mit.trainbenchmark.constants.Scenario.MINIMAL;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,6 +39,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.Signal;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public abstract class Generator {
 
@@ -56,12 +59,12 @@ public abstract class Generator {
 	protected int maxSwitchPositions = 20;
 	protected int maxSensors = 10;
 
-	protected int posLengthErrorPercent;
-	protected int switchSensorErrorPercent;
-	protected int routeSensorErrorPercent;
-	protected int semaphoreNeighborErrorPercent;
-	protected int switchSetErrorPercent;
-	protected int connectedSegmentsErrorPercent;
+	protected int posLengthErrorPercent = 0;
+	protected int switchSensorErrorPercent = 0;
+	protected int routeSensorErrorPercent = 0;
+	protected int semaphoreNeighborErrorPercent = 0;
+	protected int switchSetErrorPercent = 0;
+	protected int connectedSegmentsErrorPercent = 0;
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
@@ -73,21 +76,35 @@ public abstract class Generator {
 	protected static int MAX_SEGMENT_LENGTH = 1000;
 
 	public void generateModels() throws Exception {
-		System.out.print("Generating instance model, generator: " + syntax() + ", scenario: " + generatorConfig.getScenarioName()
-				+ ", size: " + generatorConfig.getSize() + "... ");
+		final StringBuilder messageBuilder = new StringBuilder();
+		messageBuilder.append("Generating instance model, ");
+		messageBuilder.append("generator: " + syntax() + ", ");
+		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
+		if (generatorConfig.getScenario() == MINIMAL) {
+			messageBuilder.append("query: " + generatorConfig.getQuery());
+		} else {
+			messageBuilder.append("size: " + generatorConfig.getSize());
+		}
+		messageBuilder.append("... ");
+		System.out.print(messageBuilder.toString());
 		initializeConstants();
 		initModel();
-		generateModel();
+		if (generatorConfig.getScenario() == Scenario.MINIMAL) {
+
+		} else {
+			generateModel();
+		}
 		persistModel();
 		System.out.println("Done.");
 	}
 
-	protected abstract String syntax();
-
-	private void initializeConstants() {
+	protected void initializeConstants() {
 		maxRoutes = 5 * generatorConfig.getSize();
 		switch (generatorConfig.getScenario()) {
 		case BATCH:
+			// set all error percents to 0
+			break;
+		case MINIMAL:
 			// set all error percents to 0
 			break;
 		case INJECT:
@@ -110,8 +127,6 @@ public abstract class Generator {
 			throw new UnsupportedOperationException("Scenario not supported.");
 		}
 	}
-
-	protected abstract void initModel() throws IOException;
 
 	protected void generateModel() throws FileNotFoundException, IOException {
 		Object prevSemaphore = null;
@@ -247,8 +262,6 @@ public abstract class Generator {
 		currTracks.add(seg);
 	}
 
-	protected abstract void persistModel() throws Exception;
-
 	// the createVertex() methods with fewer arguments are final
 
 	protected final Object createVertex(final String type) throws IOException {
@@ -271,6 +284,14 @@ public abstract class Generator {
 		return vertex;
 	}
 
+	//
+
+	protected abstract String syntax();
+
+	protected abstract void initModel() throws IOException;
+
+	protected abstract void persistModel() throws Exception;
+
 	protected abstract Object createVertex(final int id, final String type, final Map<String, Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException;
 
@@ -282,6 +303,6 @@ public abstract class Generator {
 	};
 
 	protected void endRoute() throws IOException {
-	}
+	};
 
 }
