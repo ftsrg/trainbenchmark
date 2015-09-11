@@ -35,6 +35,7 @@ import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstant
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STP_INDICATOR;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TERMINAL;
 import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.TRAIN;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleGeneratorConstants;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants;
 import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleSubmodels;
@@ -50,6 +51,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public abstract class ScheduleGenerator extends SyntheticGenerator {
 
@@ -62,6 +64,8 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	protected int maxNumberOfRepetitiveSchedules;
 	protected int associationPercent;
 	protected double repetitiveScheduleFactor;
+
+	protected Random deterministicRandom;
 
 	protected ArrayList<Node> stations;
 	protected ArrayList<Node> schedules;
@@ -98,6 +102,8 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		schedules = new ArrayList<Node>();
 		schedulesOfDestinations = new HashMap<Integer, List<Integer>>();
 		submodel = generatorConfig.getSubmodel();
+
+		deterministicRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	}
 
 	@Override
@@ -130,11 +136,12 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 			if (!schedulesOfDestinations.containsKey(destinations)) {
 				destinations--;
 				if (destinations < 2) {
-					destinations = random.nextInt(schedulesOfDestinations.size()) + 2;
+					destinations = deterministicRandom.nextInt(schedulesOfDestinations
+							.size()) + 2;
 				}
 			} else {
 				List<Integer> scheduleIndices = schedulesOfDestinations.get(destinations);
-				int index = random.nextInt(scheduleIndices.size());
+				int index = deterministicRandom.nextInt(scheduleIndices.size());
 				for (Integer c : schedules.get(index).conn) {
 					addDestination(sourceIndex, c);
 				}
@@ -193,7 +200,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		}
 		int x = 0;
 		while (true) {
-			double uniformRandom = random.nextDouble();
+			double uniformRandom = deterministicRandom.nextDouble();
 			x = (int) getPowerLawValue(uniformRandom, -1.55, x0, x1);
 			if (x <= x1) {
 				break;
@@ -212,25 +219,24 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 		for (Node node : schedules) {
 			if (numOfTrains > maxNumberOfTrains) {
-				fg.createEdge(SCHEDULES,
-						RandomElementsProvider.getRandomElement(random, trains),
-						node.obj);
+				fg.createEdge(SCHEDULES, RandomElementsProvider.getRandomElement(
+						deterministicRandom, trains), node.obj);
 
-				if (random.nextInt(100) <= associationPercent) {
+				if (deterministicRandom.nextInt(100) <= associationPercent) {
 					outgoing.clear();
 					incoming.clear();
 					// choose distinct trains randomly
 					while (true) {
 						associativeTrain = RandomElementsProvider.getRandomElement(
-								random, trains);
-						mainTrain = RandomElementsProvider.getRandomElement(random,
-								trains);
+								deterministicRandom, trains);
+						mainTrain = RandomElementsProvider.getRandomElement(
+								deterministicRandom, trains);
 						if (mainTrain != associativeTrain) {
 							break;
 						}
 					}
 					outgoing.put(LOCATION, ((Node) RandomElementsProvider
-							.getRandomElement(random, stations)).obj);
+							.getRandomElement(deterministicRandom, stations)).obj);
 					outgoing.put(ScheduleModelConstants.ASSOCIATIVE, associativeTrain);
 					incoming.put(ScheduleModelConstants.ASSOCIATIONS, mainTrain);
 					fg.createVertex(ASSOCIATION, getAssociationAttributes(), outgoing,
@@ -250,7 +256,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 	protected Map<String, Object> getAssociationAttributes() {
 		Map<String, Object> attributes = new HashMap<>();
-		int percent = random.nextInt(100);
+		int percent = deterministicRandom.nextInt(100);
 		if (percent < 8) {
 			attributes.put(CATEGORY, "Divide");
 		} else if (percent < 32) {
@@ -263,7 +269,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 		addRandomDates(attributes);
 
-		percent = random.nextInt(100);
+		percent = deterministicRandom.nextInt(100);
 		if (percent < 1) {
 			attributes.put(DAYS, "0100000");
 		} else if (percent < 3) {
@@ -283,7 +289,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	}
 
 	protected String getRandomBinary() {
-		int value = random.nextInt(128);
+		int value = deterministicRandom.nextInt(128);
 		String binary = Integer.toBinaryString(value);
 		if (binary.length() < 7) {
 			int length = binary.length();
@@ -296,7 +302,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 	protected Map<String, Object> getScheduleAttributes() {
 		Map<String, Object> attributes = new HashMap<>();
-		int percent = random.nextInt(1000);
+		int percent = deterministicRandom.nextInt(1000);
 
 		if (percent < 1) {
 			attributes.put(STATUS, "Ship");
@@ -318,7 +324,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		addIndicator(attributes);
 		addRandomDates(attributes);
 
-		percent = random.nextInt(100);
+		percent = deterministicRandom.nextInt(100);
 		if (percent < 1) {
 			attributes.put(DAYS, "0010000");
 		} else if (percent < 2) {
@@ -349,7 +355,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	}
 
 	protected void addPlanning(final Map<String, Object> attributes, final int percent) {
-		int planningPercent = random.nextInt(100);
+		int planningPercent = deterministicRandom.nextInt(100);
 		if (planningPercent < percent) {
 			attributes.put(PLANNING, SHORTTERM);
 		} else {
@@ -358,7 +364,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	}
 
 	protected void addIndicator(final Map<String, Object> attributes) {
-		int percent = random.nextInt(100);
+		int percent = deterministicRandom.nextInt(100);
 		if (!attributes.containsKey(PLANNING)) {
 			if (percent < 12) {
 				attributes.put(STP_INDICATOR, INDICATOR_C);
@@ -386,10 +392,10 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	}
 
 	protected void addRandomDates(final Map<String, Object> attributes) {
-		int startYear = random.nextInt(2) + 2014;
+		int startYear = deterministicRandom.nextInt(2) + 2014;
 		int endYear = startYear;
-		int startDay = random.nextInt(365) + 1;
-		int endDay = random.nextInt(365);
+		int startDay = deterministicRandom.nextInt(365) + 1;
+		int endDay = deterministicRandom.nextInt(365);
 		if (startDay > endDay) {
 			endYear++;
 		}
