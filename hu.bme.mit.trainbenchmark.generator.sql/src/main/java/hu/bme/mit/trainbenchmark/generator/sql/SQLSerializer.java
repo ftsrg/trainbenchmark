@@ -30,11 +30,11 @@ import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.ImmutableMap;
 
-import hu.bme.mit.trainbenchmark.generator.TrainBenchmarkSerializer;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-public class SQLSerializer extends TrainBenchmarkSerializer {
+public class SQLSerializer extends ModelSerializer {
 
 	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(SENSOR_EDGE, TRACKELEMENT);
 	protected final SQLGeneratorConfig sqlGeneratorConfig;

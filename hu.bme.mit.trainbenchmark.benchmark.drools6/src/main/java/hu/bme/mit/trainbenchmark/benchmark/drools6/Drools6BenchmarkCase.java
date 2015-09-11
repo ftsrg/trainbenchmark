@@ -29,7 +29,7 @@ public class Drools6BenchmarkCase extends EMFBenchmarkCase {
 		driver = drools6driver = new Drools6Driver(bc);
 		checker = new Drools6Checker(drools6driver, bc.getQuery());
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = EMFTransformation.newInstance(drools6driver, bc.getQuery(), bc.getScenario());
 		}
 	}

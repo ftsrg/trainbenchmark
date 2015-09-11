@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.emf.FileBroker;
-import hu.bme.mit.trainbenchmark.generator.TrainBenchmarkSerializer;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -40,7 +40,7 @@ import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 
-public class EMFSerializer extends TrainBenchmarkSerializer {
+public class EMFSerializer extends ModelSerializer {
 
 	protected final GeneratorConfig generatorConfig;
 

@@ -12,7 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
+import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
 
 public class SQLGeneratorMain {
@@ -20,8 +21,8 @@ public class SQLGeneratorMain {
 	public static void main(final String[] args) throws Exception {
 		final SQLGeneratorConfig sqlGeneratorConfig = new SQLGeneratorConfig(args);
 		final SQLSerializer sqlSerializer = new SQLSerializer(sqlGeneratorConfig);
-		final Generator generator = new Generator(sqlSerializer, sqlGeneratorConfig);
-		generator.generateModels();
+		final ModelGenerator generator = GeneratorFactory.createGenerator(sqlSerializer, sqlGeneratorConfig);
+		generator.generateModel();
 	}
 
 }

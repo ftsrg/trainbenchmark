@@ -1,0 +1,31 @@
+@prefix : <http://www.semanticweb.org/ontologies/2015/trainbenchmark#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:_1 a :Semaphore .
+
+:_2 a :Route .
+
+:_3 a :Route .
+
+:_4 a :Sensor .
+
+:_5 a :Sensor .
+
+:_6 a :Segment  ;
+	a :TrackElement .
+
+:_7 a :Segment  ;
+	a :TrackElement .
+
+:_2 :exit :_1 .
+
+:_2 :definedBy :_4 .
+
+:_3 :definedBy :_5 .
+
+:_6 :sensor :_4 .
+
+:_7 :sensor :_5 .
+
+:_6 :connectsTo :_7 .
+
