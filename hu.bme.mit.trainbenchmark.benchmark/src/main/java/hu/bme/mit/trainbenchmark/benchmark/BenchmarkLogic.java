@@ -20,6 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisFilenameFactory;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.AnalysisJsonPublisher;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.ExtendedFilenameFactory;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
+import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCommandLinePublisher;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.Scenario;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.ScenarioFactory;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
@@ -30,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.mondo.sam.core.BenchmarkEngine;
-import eu.mondo.sam.core.publishers.CommandLinePublisher;
 import eu.mondo.sam.core.publishers.JsonPublisher;
 import eu.mondo.sam.core.publishers.Publisher;
 import eu.mondo.sam.core.results.BenchmarkResult;
@@ -106,7 +106,7 @@ public abstract class BenchmarkLogic {
 
 	protected List<Publisher> getPublishers(final TrainBenchmarkCaseDescriptor descriptor) {
 		List<Publisher> publishers = new ArrayList<>();
-		publishers.add(new CommandLinePublisher());
+		publishers.add(new TrainBenchmarkCommandLinePublisher());
 		if (bc.getScenario().equals(DESCRIBE)) {
 			AnalysisFilenameFactory analysisFilenameFactory = new AnalysisFilenameFactory(
 					descriptor);

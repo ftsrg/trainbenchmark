@@ -37,7 +37,6 @@ public class DescribeScenario extends Scenario<BenchmarkCase<?, ?, ?>> {
 		);
 		rootPhase = seq;
 		// @formatter:on
-
 	}
 
 	@Override
