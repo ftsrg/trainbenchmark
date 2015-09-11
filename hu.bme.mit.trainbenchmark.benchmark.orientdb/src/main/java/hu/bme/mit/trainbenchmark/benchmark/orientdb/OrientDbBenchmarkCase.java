@@ -41,7 +41,7 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, 
 		driver = orientDriver = new OrientDbDriver(dbPath, benchmarkDir);
 		checker = OrientDbChecker.newInstance(orientDriver, bc.getQuery());
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = OrientDbTransformation.newInstance(orientDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

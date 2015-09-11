@@ -37,7 +37,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 		driver = jenaDriver = new JenaDriver(rdfbc);
 		checker = new JenaChecker(jenaDriver, rdfbc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = JenaTransformation.newInstance(jenaDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

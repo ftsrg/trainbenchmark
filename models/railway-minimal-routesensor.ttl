@@ -1,0 +1,18 @@
+@prefix : <http://www.semanticweb.org/ontologies/2015/trainbenchmark#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:_1 a :Route .
+
+:_2 a :Sensor .
+
+:_3 a :SwitchPosition .
+
+:_4 a :Switch  ;
+	a :TrackElement .
+
+:_1 :follows :_3 .
+
+:_3 :switch :_4 .
+
+:_4 :sensor :_2 .
+

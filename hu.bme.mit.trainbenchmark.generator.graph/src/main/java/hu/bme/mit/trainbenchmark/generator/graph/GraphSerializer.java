@@ -34,11 +34,11 @@ import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.TrainBenchmarkSerializer;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
 
-public class GraphSerializer extends TrainBenchmarkSerializer {
+public class GraphSerializer extends ModelSerializer {
 
 	protected final GeneratorConfig generatorConfig;
 	protected String databasePath;

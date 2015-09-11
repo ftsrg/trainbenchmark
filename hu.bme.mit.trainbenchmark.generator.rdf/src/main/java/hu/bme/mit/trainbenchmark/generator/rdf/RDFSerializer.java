@@ -24,11 +24,11 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.TrainBenchmarkSerializer;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
-public class RDFSerializer extends TrainBenchmarkSerializer {
+public class RDFSerializer extends ModelSerializer {
 
 	protected final RDFGeneratorConfig rdfGeneratorConfig;
 	protected BufferedWriter file;

@@ -10,22 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.scenarios;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.inferencing.test;
 
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-public class ScenarioFactory {
+public class SesameMinimalInferencingTest extends MinimalTest {
 
-	public static ScenarioLogic<?> getScenario(final Scenario scenarioName) {
-		switch (scenarioName) {
-		case INJECT:
-		case REPAIR:
-			return new TransformationScenarioLogic();
-		case BATCH:
-		case MINIMAL:
-			return new BatchScenarioLogic();
-		default:
-			throw new UnsupportedOperationException("Invalid scenario.");
-		}
+	public SesameMinimalInferencingTest() {
+		bi = new SesameBenchmarkInferencingInitializer();
 	}
+
 }

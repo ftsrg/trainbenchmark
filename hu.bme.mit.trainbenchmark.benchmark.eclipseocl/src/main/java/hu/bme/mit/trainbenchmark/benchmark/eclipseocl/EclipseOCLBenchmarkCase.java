@@ -31,7 +31,7 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchm
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, bc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

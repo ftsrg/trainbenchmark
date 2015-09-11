@@ -1,16 +1,4 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
-
-package hu.bme.mit.trainbenchmark.generator;
+package hu.bme.mit.trainbenchmark.generator.scalable;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
@@ -29,7 +17,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.Scenario.MINIMAL;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,22 +28,16 @@ import java.util.Map;
 import java.util.Random;
 
 import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class Generator {
+public class ScalableModelGenerator extends ModelGenerator {
 
-	protected final TrainBenchmarkSerializer serializer;
-	protected GeneratorConfig generatorConfig;
+	public static final int MAX_SEGMENT_LENGTH = 1000;
 
-	public Generator(final TrainBenchmarkSerializer serializer, final GeneratorConfig generatorConfig) {
-		this.serializer = serializer;
-		this.generatorConfig = generatorConfig;
-	}
-
-	// configuration
 	protected int maxSegments = 5;
 	protected int maxRoutes;
 	protected int maxSwitchPositions = 20;
@@ -71,42 +52,12 @@ public class Generator {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
-	protected int nextRandom() {
-		return random.nextInt(100);
-	}
+	public ScalableModelGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
+		super(serializer, generatorConfig);
 
-	protected static int MAX_SEGMENT_LENGTH = 1000;
-
-	public void generateModels() throws Exception {
-		final StringBuilder messageBuilder = new StringBuilder();
-		messageBuilder.append("Generating instance model, ");
-		messageBuilder.append("generator: " + serializer.syntax() + ", ");
-		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
-		if (generatorConfig.getScenario() == MINIMAL) {
-			messageBuilder.append("query: " + generatorConfig.getQuery());
-		} else {
-			messageBuilder.append("size: " + generatorConfig.getSize());
-		}
-		messageBuilder.append("... ");
-		System.out.print(messageBuilder.toString());
-		initializeConstants();
-		serializer.initModel();
-		if (generatorConfig.getScenario() == Scenario.MINIMAL) {
-
-		} else {
-			generateModel();
-		}
-		serializer.persistModel();
-		System.out.println("Done.");
-	}
-
-	protected void initializeConstants() {
 		maxRoutes = 5 * generatorConfig.getSize();
 		switch (generatorConfig.getScenario()) {
 		case BATCH:
-			// set all error percents to 0
-			break;
-		case MINIMAL:
 			// set all error percents to 0
 			break;
 		case INJECT:
@@ -130,7 +81,12 @@ public class Generator {
 		}
 	}
 
-	protected void generateModel() throws FileNotFoundException, IOException {
+	protected int nextRandom() {
+		return random.nextInt(100);
+	}
+
+	@Override
+	protected void constructModel() throws FileNotFoundException, IOException {
 		Object prevSemaphore = null;
 		Object firstSemaphore = null;
 		List<Object> firstTracks = null;

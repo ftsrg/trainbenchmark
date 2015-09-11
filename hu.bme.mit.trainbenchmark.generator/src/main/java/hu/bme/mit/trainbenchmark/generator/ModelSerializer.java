@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-public abstract class TrainBenchmarkSerializer {
+public abstract class ModelSerializer {
 
 	protected int id = 1;
 
@@ -16,21 +16,21 @@ public abstract class TrainBenchmarkSerializer {
 
 	// the createVertex() methods with fewer arguments are final
 
-	protected final Object createVertex(final String type) throws IOException {
+	public final Object createVertex(final String type) throws IOException {
 		return createVertex(type, Collections.<String, Object> emptyMap(), Collections.<String, Object> emptyMap(),
 				Collections.<String, Object> emptyMap());
 	}
 
-	protected final Object createVertex(final String type, final Map<String, Object> attributes) throws IOException {
+	public final Object createVertex(final String type, final Map<String, Object> attributes) throws IOException {
 		return createVertex(type, attributes, Collections.<String, Object> emptyMap(), Collections.<String, Object> emptyMap());
 	}
 
-	protected final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges)
+	public final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges)
 			throws IOException {
 		return createVertex(type, attributes, outgoingEdges, Collections.<String, Object> emptyMap());
 	}
 
-	protected final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
+	public final Object createVertex(final String type, final Map<String, Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
 		final Object vertex = createVertex(id, type, attributes, outgoingEdges, incomingEdges);
 		id++;
