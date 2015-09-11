@@ -22,7 +22,7 @@ public class MinimalSemaphoreNeighborGenerator extends MinimalModelGenerator {
 	}
 
 	@Override
-	protected void constructModel() throws FileNotFoundException, IOException {
+	protected void buildPatternModel() throws FileNotFoundException, IOException {
 		final Object semaphore = serializer.createVertex(SEMAPHORE);
 		final Object route1 = serializer.createVertex(ROUTE);
 		final Object route2 = serializer.createVertex(ROUTE);

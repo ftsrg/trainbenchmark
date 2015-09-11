@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hu.bme.mit.trainbenchmark:RailwayContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:hu.bme.mit.trainbenchmark="http://www.semanticweb.org/ontologies/2015/trainbenchmark">
+  <semaphores id="1" signal="GO"/>
+  <routes id="2" entry="//@semaphores.0">
+    <follows id="3" position="LEFT"/>
+  </routes>
+</hu.bme.mit.trainbenchmark:RailwayContainer>
