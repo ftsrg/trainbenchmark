@@ -25,13 +25,13 @@ scenarios:
 
 tools:
 #- allegro
-- blazegraph
+#- blazegraph
 #- drools5
 #- drools6
 #- emfapi
 - emfincquery
-#- jena
-- mysql
+- jena
+#- mysql
 - neo4j
 #- sesame
 #- virtuoso

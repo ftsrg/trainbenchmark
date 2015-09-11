@@ -18,7 +18,7 @@ public class MinimalConnectedSegmentsGenerator extends MinimalModelGenerator {
 	}
 
 	@Override
-	protected void constructModel() throws FileNotFoundException, IOException {
+	protected void buildPatternModel() throws FileNotFoundException, IOException {
 		final Object sensor = serializer.createVertex(SENSOR);
 		final Object segment1 = serializer.createVertex(SEGMENT);
 		final Object segment2 = serializer.createVertex(SEGMENT);

@@ -30,7 +30,7 @@ public class MinimalSwitchSetGenerator extends MinimalModelGenerator {
 	}
 
 	@Override
-	protected void constructModel() throws FileNotFoundException, IOException {
+	protected void buildPatternModel() throws FileNotFoundException, IOException {
 		final Map<String, Object> semaphoreProperties = ImmutableMap.of(SIGNAL, GO);
 		final Object semaphore = serializer.createVertex(SEMAPHORE, semaphoreProperties);
 		final Object route = serializer.createVertex(ROUTE);

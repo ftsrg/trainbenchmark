@@ -19,7 +19,7 @@ public class MinimalPosLengthGenerator extends MinimalModelGenerator {
 	}
 
 	@Override
-	protected void constructModel() throws FileNotFoundException, IOException {
+	protected void buildPatternModel() throws FileNotFoundException, IOException {
 		final Map<String, Object> segmentAttributes = ImmutableMap.of(LENGTH, -1);
 		serializer.createVertex(SEGMENT, segmentAttributes);
 	}

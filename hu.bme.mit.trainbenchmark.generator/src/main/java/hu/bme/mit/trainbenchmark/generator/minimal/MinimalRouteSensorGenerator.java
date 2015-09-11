@@ -21,7 +21,7 @@ public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 	}
 
 	@Override
-	protected void constructModel() throws FileNotFoundException, IOException {
+	protected void buildPatternModel() throws FileNotFoundException, IOException {
 		final Object route = serializer.createVertex(ROUTE);
 		final Object sensor = serializer.createVertex(SENSOR);
 		final Object swP = serializer.createVertex(SWITCHPOSITION);

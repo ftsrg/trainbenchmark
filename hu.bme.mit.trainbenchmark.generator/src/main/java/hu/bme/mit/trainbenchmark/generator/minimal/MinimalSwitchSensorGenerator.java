@@ -15,7 +15,7 @@ public class MinimalSwitchSensorGenerator extends MinimalModelGenerator {
 	}
 
 	@Override
-	protected void constructModel() throws FileNotFoundException, IOException {
+	protected void buildPatternModel() throws FileNotFoundException, IOException {
 		serializer.createVertex(SWITCH);
 	}
 
