@@ -204,7 +204,7 @@ public abstract class ModelAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 		if (!clusteringCoefficients.containsKey(type)) {
 			clusteringCoefficients.put(type, new ArrayList<Double>());
 		}
-		if (numberOfNeighbors == 1) {
+		if (numberOfNeighbors == 1 || numberOfNeighbors == 0) {
 			return;
 		}
 		double coef = connectedNeighbors / numberOfNeighbors;

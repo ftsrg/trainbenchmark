@@ -56,13 +56,11 @@ public abstract class BenchmarkLogic {
 		scenario.setBenchmarkConfig(bc);
 		scenario.setBenchmarkCase(benchmarkCase);
 		scenario.initializeDescriptor();
-
 		BenchmarkEngine engine = new BenchmarkEngine();
 		TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
 		BenchmarkResult result = new BenchmarkResult();
 		TrainBenchmarkCaseDescriptor caseDescriptor = scenario.getCaseDescriptor();
 		result.addAllPublishers(getPublishers(caseDescriptor));
-
 		token.setBenchmarkCase(benchmarkCase);
 		token.setConfig(bc);
 		token.setDescriptor(caseDescriptor);

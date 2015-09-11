@@ -43,7 +43,7 @@ public class AnalyzeScenario extends Scenario<BenchmarkCase<?, ?, ?>> {
 		// @formatter:on
 
 		QueryInitializer initializer = benchmarkCase.getQueryInitializer();
-		int maxIteration = initializer == null ? 1 : initializer.getQueryBuilder()
+		int maxIteration = initializer.getQueryBuilder() == null ? 1 : initializer.getQueryBuilder()
 				.getNumberOfQueries();
 
 		IterationPhase queryIteration = new IterationPhase(maxIteration);
