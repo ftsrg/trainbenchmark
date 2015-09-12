@@ -58,6 +58,7 @@ public abstract class TrainBenchmarkConfig {
 	public TrainBenchmarkConfig(final ScenarioConstants scenario, final int size) {
 		this.scenario = scenario;
 		this.size = size;
+		this.submodel = ScheduleSubmodels.valueOf("A");
 	}
 
 	protected void initOptions() {
