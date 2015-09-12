@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
 public class VirtuosoInjectTest extends InjectTest {
 
-	public VirtuosoInjectTest(){
+	public VirtuosoInjectTest() {
 		bi = new VirtuosoBenchmarkInitializer();
 	}
 }

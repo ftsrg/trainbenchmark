@@ -39,7 +39,8 @@ def generate(config, formats):
         for scenario in config["scenarios"]:
             args = [""]
             if format in config["generator_optional_arguments"]:
-                args.append("-" + config["generator_optional_arguments"]["rdf"][0])
+                for optional_argument in config["generator_optional_arguments"][format]:
+                    args.append("-" + optional_argument)
 
             for arg in args:
                 path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
@@ -63,7 +64,8 @@ def measure(config):
     for tool in config["tools"]:
         args = [""]
         if tool in config["benchmark_optional_arguments"]:
-            args.append("-" + config["benchmark_optional_arguments"][tool][0])
+            for optional_argument in config["benchmark_optional_arguments"][tool]:
+                args.append("-" + optional_argument)
 
         for arg in args:
             path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)

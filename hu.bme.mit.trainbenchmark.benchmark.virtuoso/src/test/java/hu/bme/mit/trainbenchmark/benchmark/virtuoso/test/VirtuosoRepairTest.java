@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.virtuoso.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-public class VirtuosoRepairTest extends RepairTest{
+public class VirtuosoRepairTest extends RepairTest {
 
-	public VirtuosoRepairTest(){
+	public VirtuosoRepairTest() {
 		bi = new VirtuosoBenchmarkInitializer();
 	}
 }

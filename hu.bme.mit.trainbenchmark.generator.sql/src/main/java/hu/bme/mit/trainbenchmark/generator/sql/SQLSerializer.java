@@ -14,12 +14,9 @@ package hu.bme.mit.trainbenchmark.generator.sql;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
-import hu.bme.mit.trainbenchmark.generator.Generator;
-import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
-import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,31 +26,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.ImmutableMap;
 
-public class SQLGenerator extends Generator {
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
+import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-	protected SQLGeneratorConfig sqlGeneratorConfig;
+public class SQLSerializer extends ModelSerializer {
+
+	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(SENSOR_EDGE, TRACKELEMENT);
+	protected final SQLGeneratorConfig sqlGeneratorConfig;
+
 	protected String sqlRawPath;
 	protected String sqlDumpPath;
 	protected String sqlPostgreDumpPath;
+	protected BufferedWriter writer;
 
-	public SQLGenerator(final String[] args) throws ParseException {
+	public SQLSerializer(final SQLGeneratorConfig sqlGeneratorConfig) {
 		super();
-		generatorConfig = sqlGeneratorConfig = new SQLGeneratorConfig(args);
+		this.sqlGeneratorConfig = sqlGeneratorConfig;
 	}
-
-	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(SENSOR_EDGE, TRACKELEMENT);
 
 	@Override
-	protected String syntax() {
+	public String syntax() {
 		return "SQL";
 	}
-
-	protected BufferedWriter writer;
 
 	public void write(final String s) throws IOException {
 		writer.write(s + "\n");
@@ -62,16 +61,16 @@ public class SQLGenerator extends Generator {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFileDirectory = generatorConfig.getWorkspacePath()
+		final String headerFileDirectory = sqlGeneratorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
 		final String headerFilePath = headerFileDirectory
 				+ (sqlGeneratorConfig.isMemSQL() ? "railway-header-memsql.sql" : "railway-header.sql");
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		sqlRawPath = generatorConfig.getModelPathNameWithoutExtension() + "-raw.sql";
-		sqlDumpPath = generatorConfig.getModelPathNameWithoutExtension() + ".sql";
-		sqlPostgreDumpPath = generatorConfig.getModelPathNameWithoutExtension() + "-posgres.sql";
+		sqlRawPath = sqlGeneratorConfig.getModelPathNameWithoutExtension() + "-raw.sql";
+		sqlDumpPath = sqlGeneratorConfig.getModelPathNameWithoutExtension() + ".sql";
+		sqlPostgreDumpPath = sqlGeneratorConfig.getModelPathNameWithoutExtension() + "-posgres.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -81,8 +80,8 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = generatorConfig.getWorkspacePath()
+	public void persistModel() throws IOException, InterruptedException {
+		final String footerFilePath = sqlGeneratorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
@@ -112,7 +111,7 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
@@ -126,7 +125,7 @@ public class SQLGenerator extends Generator {
 
 		if (SUPERTYPES.containsKey(type)) {
 			final String ancestorType = SUPERTYPES.get(type);
-			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", ancestorType, ID, id));
+			write(String.format("INSERT INTO \"%s\" (\"%s\") VALUES (%s);", ancestorType, ID, id));
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
 			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());
@@ -137,7 +136,7 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected void createEdge(final String label, final Object from, final Object to) throws IOException {
+	public void createEdge(final String label, final Object from, final Object to) throws IOException {
 		if (from == null || to == null) {
 			return;
 		}
@@ -152,14 +151,15 @@ public class SQLGenerator extends Generator {
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
 		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key, stringValue, ID, node);
 		write(updateQuery);
 	}
 
-	protected void structuralFeaturesToSQL(final Map<String, Object> attributes, final StringBuilder columns, final StringBuilder values) {
-		for (final Entry<String, Object> entry : attributes.entrySet()) {
+	protected void structuralFeaturesToSQL(final Map<String, ? extends Object> attributes, final StringBuilder columns,
+			final StringBuilder values) {
+		for (final Entry<String, ? extends Object> entry : attributes.entrySet()) {
 			final String key = entry.getKey();
 			final Object value = entry.getValue();
 

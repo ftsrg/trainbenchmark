@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
 public class MemSQLInjectTest extends InjectTest {
 
-    public MemSQLInjectTest() {
-	bi = new MemSQLBenchmarkInitializer();
-    }
+	public MemSQLInjectTest() {
+		bi = new MemSQLBenchmarkInitializer();
+	}
 }
