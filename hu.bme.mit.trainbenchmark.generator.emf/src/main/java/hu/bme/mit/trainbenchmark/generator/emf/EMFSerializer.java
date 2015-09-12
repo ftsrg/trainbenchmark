@@ -79,12 +79,12 @@ public class EMFSerializer extends ModelSerializer {
 	}
 
 	@Override
-	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
 		railwayElement.setId(id);
-		for (final Entry<String, Object> attribute : attributes.entrySet()) {
+		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			setAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
 		}
 

@@ -111,7 +111,7 @@ public class SQLSerializer extends ModelSerializer {
 	}
 
 	@Override
-	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
@@ -157,8 +157,9 @@ public class SQLSerializer extends ModelSerializer {
 		write(updateQuery);
 	}
 
-	protected void structuralFeaturesToSQL(final Map<String, Object> attributes, final StringBuilder columns, final StringBuilder values) {
-		for (final Entry<String, Object> entry : attributes.entrySet()) {
+	protected void structuralFeaturesToSQL(final Map<String, ? extends Object> attributes, final StringBuilder columns,
+			final StringBuilder values) {
+		for (final Entry<String, ? extends Object> entry : attributes.entrySet()) {
 			final String key = entry.getKey();
 			final Object value = entry.getValue();
 

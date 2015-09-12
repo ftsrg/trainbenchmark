@@ -68,7 +68,7 @@ public class RDFSerializer extends ModelSerializer {
 	}
 
 	@Override
-	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 
 		// vertex id and type
@@ -85,7 +85,7 @@ public class RDFSerializer extends ModelSerializer {
 		}
 
 		// (id)-[]->() attributes
-		for (final Entry<String, Object> attribute : attributes.entrySet()) {
+		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(), stringValue(attribute.getValue()));
 			vertex.append(attributeTriple);
 		}

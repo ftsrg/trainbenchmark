@@ -77,7 +77,7 @@ public class GraphSerializer extends ModelSerializer {
 	}
 
 	@Override
-	public Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		final Node node = graphDb.createNode(DynamicLabel.label(type));
 
@@ -87,7 +87,7 @@ public class GraphSerializer extends ModelSerializer {
 			node.addLabel(DynamicLabel.label(ancestor));
 		}
 
-		for (final Entry<String, Object> attribute : attributes.entrySet()) {
+		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String key = attribute.getKey();
 			Object value = attribute.getValue();
 
