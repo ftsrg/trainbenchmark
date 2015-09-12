@@ -4,13 +4,12 @@ PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT  ?x (( COUNT(?o) + COUNT(?s) ) AS ?degree)
 WHERE
   { { ?x rdf:type base:Station}
-      { ?x ?p ?o
-        FILTER ( ( ! isLiteral(?o) ) && ( ?p != rdf:type ) )
+      { ?x base:neighbors ?o
+        FILTER ( ( ! isLiteral(?o) ) )
       }
     UNION
       { { ?x rdf:type base:Station}
-        { ?s ?p2 ?x
-          FILTER ( ?p2 != rdf:type )
+        { ?s base:neighbors ?x
         }
       }
   }
