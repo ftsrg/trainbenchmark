@@ -43,8 +43,24 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	@Override
 	protected void initializeConstants() {
 		super.initializeConstants();
+		switch (generatorConfig.getSubmodel()) {
+		case A:
+			clusterSize = 3;
+			break;
+		case B:
+			clusterSize = 5;
+			break;
+		case C:
+			clusterSize = 7;
+			break;
+		case D:
+			clusterSize = 9;
+			break;
+		case E:
+			clusterSize = 11;
+			break;
+		}
 		numberOfClones = 4;
-		clusterSize = 5;
 		maxIterations = (int) (Math.log10(maxNumberOfStations / (double) clusterSize) / Math
 				.log10(numberOfClones + 1)) + 1;
 		Cluster.numberOfNodes = clusterSize;
