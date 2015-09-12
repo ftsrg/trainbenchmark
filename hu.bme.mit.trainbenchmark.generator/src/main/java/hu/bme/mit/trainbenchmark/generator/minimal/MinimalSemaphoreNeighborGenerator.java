@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.generator.minimal;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
@@ -32,6 +33,8 @@ public class MinimalSemaphoreNeighborGenerator extends MinimalModelGenerator {
 		final Object te2 = serializer.createVertex(SEGMENT);
 
 		serializer.createEdge(EXIT, route1, semaphore);
+		// this is required by the EMF serializer to fix the containment hierarchy
+		serializer.createEdge(ENTRY, route2, null);
 		serializer.createEdge(DEFINED_BY, route1, sensor1);
 		serializer.createEdge(DEFINED_BY, route2, sensor2);
 		serializer.createEdge(SENSOR_EDGE, te1, sensor1);

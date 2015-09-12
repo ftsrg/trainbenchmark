@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-public class MemSQLBatchTest extends BatchTest {
+public class MemSQLMinimalTest extends MinimalTest {
 
-	public MemSQLBatchTest() {
+	public MemSQLMinimalTest() {
 		bi = new MemSQLBenchmarkInitializer();
 	}
 }

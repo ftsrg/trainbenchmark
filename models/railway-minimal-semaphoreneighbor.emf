@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hu.bme.mit.trainbenchmark:RailwayContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hu.bme.mit.trainbenchmark="http://www.semanticweb.org/ontologies/2015/trainbenchmark">
+  <invalids xsi:type="hu.bme.mit.trainbenchmark:Route" id="3">
+    <definedBy id="5">
+      <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="7"/>
+    </definedBy>
+  </invalids>
+  <semaphores id="1"/>
+  <routes id="2" exit="//@semaphores.0">
+    <definedBy id="4">
+      <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="6" connectsTo="//@invalids.0/@definedBy.0/@elements.0"/>
+    </definedBy>
+  </routes>
+</hu.bme.mit.trainbenchmark:RailwayContainer>

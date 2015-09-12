@@ -11,11 +11,11 @@ iterationcount: 10
 timeout: 600
 
 queries:
-#- ConnectedSegments
-#- PosLength
-#- RouteSensor
-#- SemaphoreNeighbor
-#- SwitchSensor
+- ConnectedSegments
+- PosLength
+- RouteSensor
+- SemaphoreNeighbor
+- SwitchSensor
 - SwitchSet
 
 scenarios:

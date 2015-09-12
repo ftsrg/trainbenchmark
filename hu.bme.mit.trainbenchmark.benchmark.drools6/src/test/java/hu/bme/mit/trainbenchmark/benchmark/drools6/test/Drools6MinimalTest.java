@@ -9,13 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.memsql.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
-public class MemSQLBatchTest extends BatchTest {
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-	public MemSQLBatchTest() {
-		bi = new MemSQLBenchmarkInitializer();
+public class Drools6MinimalTest extends MinimalTest {
+
+	public Drools6MinimalTest() {
+		bi = new Drools6BenchmarkInitializer();
 	}
+
 }
