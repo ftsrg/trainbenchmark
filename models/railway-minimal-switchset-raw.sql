@@ -123,13 +123,10 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 INSERT INTO "Semaphore" ("id", "signal") VALUES (1, 2);
-INSERT INTO "Route" ("id") VALUES (2);
-INSERT INTO "SwitchPosition" ("id", "position") VALUES (3, 1);
-INSERT INTO "TrackElement" (id) VALUES (4);
-INSERT INTO "Switch" ("id", "currentPosition") VALUES (4, 2);
-INSERT INTO "entry" VALUES (2, 1);
-INSERT INTO "follows" VALUES (2, 3);
-INSERT INTO "switch" VALUES (3, 4);
+INSERT INTO "Route" ("id", "entry") VALUES (2, 1);
+INSERT INTO "TrackElement" ("id") VALUES (3);
+INSERT INTO "Switch" ("id", "currentPosition") VALUES (3, 2);
+INSERT INTO "SwitchPosition" ("id", "position", "switch", "follows") VALUES (4, 1, 3, 2);
 
 COMMIT;
 CREATE INDEX segment_length_idx ON "Segment" ("length");

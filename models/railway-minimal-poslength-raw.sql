@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
   PRIMARY KEY  ("TrackElement1", "TrackElement2")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
-INSERT INTO "TrackElement" (id) VALUES (1);
+INSERT INTO "TrackElement" ("id") VALUES (1);
 INSERT INTO "Segment" ("id", "length") VALUES (1, -1);
 
 COMMIT;
