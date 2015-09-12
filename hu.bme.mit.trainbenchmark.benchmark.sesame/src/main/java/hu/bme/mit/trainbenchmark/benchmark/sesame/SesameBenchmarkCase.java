@@ -73,10 +73,13 @@ public class SesameBenchmarkCase extends BenchmarkCase<SesameMatch, URI, SesameD
 
 	@Override
 	public void modify() throws IOException {
-		final String query = queryInitializer.resolveQuery(rbc.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/",
-				".sparql");
-		sesameChecker.setQueryDefinition(query);
-		sesameQueryAnalyzer.setQueryString(query);
+		if (benchmarkConfig.isVersatile()) {
+			final String query = queryInitializer
+					.resolveQuery(rbc.getWorkspacePath()
+							+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/",
+							".sparql");
+			sesameChecker.setQueryDefinition(query);
+			sesameQueryAnalyzer.setQueryString(query);
+		}
 	}
 }

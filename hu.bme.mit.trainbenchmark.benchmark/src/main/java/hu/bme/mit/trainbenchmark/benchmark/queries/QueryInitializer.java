@@ -39,8 +39,6 @@ public class QueryInitializer {
 		case STATIONSPATH:
 			queryBuilder = new StationsPathQueryBuilder(modelSize);
 			break;
-		case SCHEDULESTATUS:
-			break;
 		default:
 			throw new IllegalArgumentException("Query is not supported: " + query);
 		}
@@ -51,9 +49,6 @@ public class QueryInitializer {
 	}
 
 	public QueryBuilder getQueryBuilder() {
-		if (queryBuilder == null) {
-			createBuilder();
-		}
 		return queryBuilder;
 	}
 

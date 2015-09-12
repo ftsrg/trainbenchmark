@@ -32,6 +32,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected String className;
 	protected String analysisPath = "../results/analysis/";
 	protected String describePath = "../results/describe/";
+	protected boolean versatile;
 
 	public int getRunIndex() {
 		return runIndex;
@@ -74,6 +75,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		options.addOption("iterationCount", true, "number of modify-check iterations");
 		options.addOption("modificationConstant", true,
 				"modification constant for the modification method");
+		options.addOption("versatile", false, "dynamic query");
 	}
 
 	@Override
@@ -122,6 +124,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		} else {
 			benchmarkMode = false;
 		}
+		versatile = cmd.hasOption("versatile");
 	}
 
 	private long determineModificationConstant(final String optionName) {
@@ -174,6 +177,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	public void setDescribePath(String describePath) {
 		this.describePath = describePath;
+	}
+
+	public boolean isVersatile() {
+		return versatile;
+	}
+
+	public void setVersatile(boolean versatile) {
+		this.versatile = versatile;
 	}
 
 }
