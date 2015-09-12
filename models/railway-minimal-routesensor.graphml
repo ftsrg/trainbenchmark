@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+<graph id="G" edgedefault="directed">
+<key id="labels" for="node" attr.name="labels" attr.type="string"/>
+<node id="n1" labels=":Route"><data key="labels">:Route</data></node>
+<node id="n2" labels=":Sensor"><data key="labels">:Sensor</data></node>
+<node id="n3" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data></node>
+<node id="n4" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data></node>
+<edge id="e0" source="n4" target="n3" label="switch"><data key="label">switch</data></edge>
+<edge id="e1" source="n1" target="n4" label="follows"><data key="label">follows</data></edge>
+<edge id="e2" source="n3" target="n2" label="sensor"><data key="label">sensor</data></edge>
+</graph>
+</graphml>

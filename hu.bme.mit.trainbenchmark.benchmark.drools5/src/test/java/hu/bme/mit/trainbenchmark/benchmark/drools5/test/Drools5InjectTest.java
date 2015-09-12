@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-public class Drools5InjectTest extends InjectTest {
+public class Drools5InjectTest extends MinimalTest {
 
 	public Drools5InjectTest() {
 		bi = new Drools5BenchmarkInitializer();

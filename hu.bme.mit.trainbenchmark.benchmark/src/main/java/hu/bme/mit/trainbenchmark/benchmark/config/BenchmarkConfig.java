@@ -20,11 +20,10 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class BenchmarkConfig extends TrainBenchmarkConfig {
 
-	private static final String RUNS = "runs";
-	private static final String QUERY = "query";
-	private static final String MODIFICATION_CONSTANT = "modificationConstant";
-	private static final String ITERATION_COUNT = "iterationCount";
-	private static final String MODIFICATION_METHOD = "modificationMethod";
+	protected static final String RUNS = "runs";
+	protected static final String MODIFICATION_CONSTANT = "modificationConstant";
+	protected static final String ITERATION_COUNT = "iterationCount";
+	protected static final String MODIFICATION_METHOD = "modificationMethod";
 
 	// modification constants
 	protected ModificationMethod modificationMethod;
@@ -33,7 +32,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected boolean benchmarkMode;
 	protected int iterationCount;
 	protected int runs;
-	protected Query query;
 	protected String className;
 
 	public BenchmarkConfig(final String args[], final String className) throws ParseException {
@@ -41,9 +39,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.className = className;
 	}
 
-	public BenchmarkConfig(final String className, final Scenario scenario, final int size, final int runs,
-			final Query query, final int iterationCount, final ModificationMethod modificationMethod,
-			final long modificationConstant) {
+	public BenchmarkConfig(final String className, final Scenario scenario, final int size, final int runs, final Query query,
+			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
 		super(scenario, size);
 		this.className = className;
 		this.runs = runs;
@@ -57,8 +54,12 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(requiredOption(QUERY, "the query to run, e.g. RouteSensor"));
-		options.addOption(requiredOption(RUNS, "number of runs"));
+		// the "size" and "query" options are required for the BenchmarkConfig but not required for the GeneratorConfig
+		options.getOption(SIZE).setRequired(true);
+		options.getOption(QUERY).setRequired(true);
+
+		options.addOption(RUNS, true, "number of runs");
+		options.getOption(RUNS).setRequired(true);
 
 		// modification constants
 		options.addOption(MODIFICATION_METHOD, true,
@@ -70,9 +71,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
-
-		// queries argument -> testCases list
-		query = Query.valueOf(cmd.getOptionValue(QUERY).toUpperCase());
 
 		final String modificationMethodString = cmd.getOptionValue(MODIFICATION_METHOD);
 		if (modificationMethodString != null) {
@@ -120,10 +118,6 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	public int getIterationCount() {
 		return iterationCount;
-	}
-
-	public Query getQuery() {
-		return query;
 	}
 
 	public int getRuns() {

@@ -12,13 +12,17 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph;
 
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
+import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class GraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Generator generator = new GraphGenerator(args);
-		generator.generateModels();
+		final GeneratorConfig generatorConfig = new GeneratorConfig(args);
+		final GraphSerializer graphSerializer = new GraphSerializer(generatorConfig);
+		final ModelGenerator generator = GeneratorFactory.createGenerator(graphSerializer, generatorConfig);
+		generator.generateModel();
 	}
 
 }

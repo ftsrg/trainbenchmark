@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hu.bme.mit.trainbenchmark:RailwayContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hu.bme.mit.trainbenchmark="http://www.semanticweb.org/ontologies/2015/trainbenchmark">
+  <invalids xsi:type="hu.bme.mit.trainbenchmark:Sensor" id="2">
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="3" positions="//@routes.0/@follows.0"/>
+  </invalids>
+  <routes id="1">
+    <follows id="4" switch="//@invalids.0/@elements.0"/>
+  </routes>
+</hu.bme.mit.trainbenchmark:RailwayContainer>
