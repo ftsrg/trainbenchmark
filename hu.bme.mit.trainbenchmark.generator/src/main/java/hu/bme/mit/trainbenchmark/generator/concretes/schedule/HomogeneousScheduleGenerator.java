@@ -14,14 +14,15 @@ package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-import hu.bme.mit.trainbenchmark.generator.util.Node;
 import hu.bme.mit.trainbenchmark.generator.util.RandomElementsProvider;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 
@@ -65,6 +66,11 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 			stationIndices = findPath(stationIndex, amount);
 			if (stationIndices.size() != amount) {
 				if (tries == maxTries - 1) {
+					System.out.println("");
+					System.out.print("amount: " + amount);
+					System.out.print("best: " + bestTriedStations.size());
+					System.out.println("current: " + stationIndices.size());
+					System.out.println(bestTriedStations);
 					if (bestTriedStations.size() >= stationIndices.size()) {
 						for (Integer index : bestTriedStations) {
 							addDestination(sourceIndex, index);
@@ -97,57 +103,46 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 	}
 
 	protected List<Integer> findPath(final int sourceIndex, final int maxDepth) {
-		List<Integer> queue = new ArrayList<Integer>();
+//		List<Integer> queue = new ArrayList<Integer>();
+		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(sourceIndex);
 
-		int depth = 1;
-		Map<Integer, Map<String, Integer>> checked = new HashMap<Integer, Map<String, Integer>>();
-		checked.put(sourceIndex, new HashMap<String, Integer>());
-		checked.get(sourceIndex).put("Depth", depth);
-		checked.get(sourceIndex).put("Prev", -1); // non-existing previous index
-		List<Integer> path = new ArrayList<Integer>();
+		int depth = 0;
+		Map<Integer, Vertex> checked = new HashMap<>();
+		checked.put(sourceIndex, new Vertex());
+		checked.get(sourceIndex).depth = depth;
 		int currentIndex = -1; // dummy init
 		while (!queue.isEmpty()) {
-			currentIndex = queue.get(0);
-			queue.remove(0);
-			depth = checked.get(currentIndex).get("Depth");
+			currentIndex = queue.poll();
+			depth = checked.get(currentIndex).depth;
 			if (depth == maxDepth) {
 				break;
 			}
 			for (Integer neighbor : stations.get(currentIndex).conn) {
-				// exclude loop
 				if (neighbor != currentIndex) {
 					if (!checked.containsKey(neighbor)) {
-						checked.put(neighbor, new HashMap<String, Integer>());
-					}
-					if (checked.containsKey(neighbor)) {
-						if (!validNeighbor(checked, currentIndex, neighbor)) {
-							continue;
+						checked.put(neighbor, new Vertex());
+						checked.get(neighbor).depth = depth + 1;
+						checked.get(neighbor).prev
+								.addAll(checked.get(currentIndex).prev);
+						checked.get(neighbor).prev.add(currentIndex);
+						queue.add(neighbor);
+					} else {
+						if (!checked.get(currentIndex).prev.contains(neighbor)) {
+							if (depth >= checked.get(neighbor).depth) {
+								checked.get(neighbor).depth = depth + 1;
+								checked.get(neighbor).prev.clear();
+								checked.get(neighbor).prev.addAll(checked
+										.get(currentIndex).prev);
+								checked.get(neighbor).prev.add(currentIndex);
+								queue.add(neighbor);
+							}
 						}
-
 					}
-					queue.add(0, neighbor);
-					// override previously checked nodes
-					checked.get(neighbor).put("Depth", depth + 1);
-					checked.get(neighbor).put("Prev", currentIndex);
-
 				}
 			}
-
 		}
-
-		path.add(currentIndex);
-		int i = 0;
-		while (i <= maxDepth) {
-			currentIndex = checked.get(currentIndex).get("Prev");
-			if (currentIndex == -1) {
-				break;
-			}
-			path.add(currentIndex);
-			i++;
-		}
-
-		return path;
+		return checked.get(currentIndex).prev;
 	}
 
 	protected boolean validNeighbor(final Map<Integer, Map<String, Integer>> checked,
@@ -167,29 +162,15 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		}
 	}
 
-	protected List<Integer> findPath2(final int sourceIndex, final int amount, final int stationIndex) {
-		List<Integer> stationIndices = new ArrayList<Integer>();
-		// first station in the path
-		Node station = stations.get(stationIndex);
-		int pathSize = 1; // station is the first node in the path, thus, the path starts from 1
-		int index = stationIndex;
-		int tries = 0; // avoid infinite loop
-		int maxTries = 10;
-		while (pathSize <= amount && tries < maxTries) {
-			// if there are no further neighbors
-			if (station.conn.size() == 0) {
-				return stationIndices;
-			}
-			index = (int) RandomElementsProvider.getRandomElement(random, station.conn);
-			if (stationIndices.contains(index)) {
-				tries++;
-				continue;
-			}
-			station = stations.get(index);
-			stationIndices.add(index);
-			pathSize++;
+	protected class Vertex {
+
+		protected int depth;
+
+		protected List<Integer> prev;
+
+		protected Vertex() {
+			prev = new ArrayList<Integer>();
 		}
-		return stationIndices;
 	}
 
 }

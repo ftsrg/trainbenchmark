@@ -60,6 +60,20 @@ public class RandomElementsProvider {
 		}
 	}
 
+	public static Object getRandomDisjunctElement(final Random random, final ArrayList<?> list,
+			final Object original) {
+		if (list.size() < 1) {
+			throw new IllegalArgumentException(
+					"The list parameter must contain more than 1 value.");
+		}
+		while (true) {
+			int index = getRandomIndex(random, list);
+			if (original != list.get(index)) {
+				return list.get(index);
+			}
+		}
+	}
+
 	public static int getRandomIndex(final Random random, final ArrayList<?> list) {
 		if (list.size() == 0) {
 			throw new IllegalArgumentException("The list parameter is empty");

@@ -60,7 +60,6 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 		try {
 			TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, getTriples);
 			TupleQueryResult results = query.evaluate();
-
 			calculateEdges(results);
 
 			query = connection.prepareTupleQuery(QueryLanguage.SPARQL, getDegreesQuery);
