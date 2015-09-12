@@ -124,12 +124,10 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
 
 INSERT INTO "Route" ("id") VALUES (1);
 INSERT INTO "Sensor" ("id") VALUES (2);
-INSERT INTO "SwitchPosition" ("id") VALUES (3);
-INSERT INTO "TrackElement" (id) VALUES (4);
-INSERT INTO "Switch" ("id") VALUES (4);
-INSERT INTO "follows" VALUES (1, 3);
-INSERT INTO "switch" VALUES (3, 4);
-UPDATE "TrackElement" SET "sensor" = 2 WHERE "id" = 4;
+INSERT INTO "TrackElement" ("id") VALUES (3);
+INSERT INTO "Switch" ("id") VALUES (3);
+INSERT INTO "SwitchPosition" ("id", "switch", "follows") VALUES (4, 3, 1);
+UPDATE "TrackElement" SET "sensor" = 2 WHERE "id" = 3;
 
 COMMIT;
 CREATE INDEX segment_length_idx ON "Segment" ("length");

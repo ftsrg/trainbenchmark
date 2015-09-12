@@ -123,17 +123,17 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 INSERT INTO "Sensor" ("id") VALUES (1);
-INSERT INTO "TrackElement" (id) VALUES (2);
+INSERT INTO "TrackElement" ("id") VALUES (2);
 INSERT INTO "Segment" ("id") VALUES (2);
-INSERT INTO "TrackElement" (id) VALUES (3);
+INSERT INTO "TrackElement" ("id") VALUES (3);
 INSERT INTO "Segment" ("id") VALUES (3);
-INSERT INTO "TrackElement" (id) VALUES (4);
+INSERT INTO "TrackElement" ("id") VALUES (4);
 INSERT INTO "Segment" ("id") VALUES (4);
-INSERT INTO "TrackElement" (id) VALUES (5);
+INSERT INTO "TrackElement" ("id") VALUES (5);
 INSERT INTO "Segment" ("id") VALUES (5);
-INSERT INTO "TrackElement" (id) VALUES (6);
+INSERT INTO "TrackElement" ("id") VALUES (6);
 INSERT INTO "Segment" ("id") VALUES (6);
-INSERT INTO "TrackElement" (id) VALUES (7);
+INSERT INTO "TrackElement" ("id") VALUES (7);
 INSERT INTO "Segment" ("id") VALUES (7);
 INSERT INTO "connectsTo" VALUES (2, 3);
 INSERT INTO "connectsTo" VALUES (3, 4);
@@ -141,6 +141,10 @@ INSERT INTO "connectsTo" VALUES (4, 5);
 INSERT INTO "connectsTo" VALUES (5, 6);
 INSERT INTO "connectsTo" VALUES (6, 7);
 UPDATE "TrackElement" SET "sensor" = 1 WHERE "id" = 2;
+UPDATE "TrackElement" SET "sensor" = 1 WHERE "id" = 3;
+UPDATE "TrackElement" SET "sensor" = 1 WHERE "id" = 4;
+UPDATE "TrackElement" SET "sensor" = 1 WHERE "id" = 5;
+UPDATE "TrackElement" SET "sensor" = 1 WHERE "id" = 6;
 UPDATE "TrackElement" SET "sensor" = 1 WHERE "id" = 7;
 
 COMMIT;
