@@ -125,7 +125,7 @@ public class SQLSerializer extends ModelSerializer {
 
 		if (SUPERTYPES.containsKey(type)) {
 			final String ancestorType = SUPERTYPES.get(type);
-			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", ancestorType, ID, id));
+			write(String.format("INSERT INTO \"%s\" (\"%s\") VALUES (%s);", ancestorType, ID, id));
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
 			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());

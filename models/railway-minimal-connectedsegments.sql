@@ -186,7 +186,7 @@ CREATE TABLE `TrackElement` (
 
 LOCK TABLES `TrackElement` WRITE;
 /*!40000 ALTER TABLE `TrackElement` DISABLE KEYS */;
-INSERT INTO `TrackElement` VALUES (2,1),(3,NULL),(4,NULL),(5,NULL),(6,NULL),(7,1);
+INSERT INTO `TrackElement` VALUES (2,1),(3,1),(4,1),(5,1),(6,1),(7,1);
 /*!40000 ALTER TABLE `TrackElement` ENABLE KEYS */;
 UNLOCK TABLES;
 
