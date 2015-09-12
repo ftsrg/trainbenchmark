@@ -17,6 +17,7 @@ import static hu.bme.mit.trainbenchmark.constants.Signal.GO;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
@@ -32,18 +33,26 @@ public class MinimalSwitchSetGenerator extends MinimalModelGenerator {
 
 	@Override
 	protected void buildPatternModel() throws FileNotFoundException, IOException {
-		final Map<String, ? extends Object> semaphoreProperties = ImmutableMap.of(SIGNAL, GO);
-		final Map<String, ? extends Object> swPProperties = ImmutableMap.of(POSITION, LEFT);
-		final Map<String, ? extends Object> swProperties = ImmutableMap.of(CURRENTPOSITION, RIGHT);
 
+		// semaphore
+		final Map<String, ? extends Object> semaphoreProperties = ImmutableMap.of(SIGNAL, GO);
 		final Object semaphore = serializer.createVertex(SEMAPHORE, semaphoreProperties);
-		final Object route = serializer.createVertex(ROUTE);
-		final Object swP = serializer.createVertex(SWITCHPOSITION, swPProperties);
+
+		// route
+		final Map<String, Object> routeOutgoingEdges = ImmutableMap.of(ENTRY, semaphore);
+		final Map<String, ? extends Object> emptyMap = Collections.emptyMap();
+		final Object route = serializer.createVertex(ROUTE, emptyMap, routeOutgoingEdges);
+
+		// sw
+		final Map<String, ? extends Object> swProperties = ImmutableMap.of(CURRENTPOSITION, RIGHT);
 		final Object sw = serializer.createVertex(SWITCH, swProperties);
 
-		serializer.createEdge(ENTRY, route, semaphore);
-		serializer.createEdge(FOLLOWS, route, swP);
-		serializer.createEdge(SWITCH_EDGE, swP, sw);
+		// swP
+		final Map<String, ? extends Object> swPProperties = ImmutableMap.of(POSITION, LEFT);
+		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(SWITCH_EDGE, sw);
+		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
+		final Object swP = serializer.createVertex(SWITCHPOSITION, swPProperties, swPOutgoingEdges, swPIncomingEdges);
+
 		serializer.createEdge(SENSOR_EDGE, sw, null);
 	}
 

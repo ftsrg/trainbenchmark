@@ -33,7 +33,8 @@ public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 
 		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(SWITCH_EDGE, sw);
 		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
-		final Object swP = serializer.createVertex(SWITCHPOSITION, Collections.emptyMap(), swPOutgoingEdges, swPIncomingEdges);
+		final Map<String, ? extends Object> emptyMap = Collections.emptyMap();
+		final Object swP = serializer.createVertex(SWITCHPOSITION, emptyMap, swPOutgoingEdges, swPIncomingEdges);
 
 		serializer.createEdge(SENSOR_EDGE, sw, sensor);
 		// this is required by the EMF serializer to fix the containment hierarchy
