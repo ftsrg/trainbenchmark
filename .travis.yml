@@ -6,5 +6,6 @@ script:
   - scripts/dep-mondo-sam.sh
   - scripts/dep-neo4j.sh
   - scripts/dep-allegro.sh
+  - scripts/dep-incqueryd-core.sh
   - scripts/dep-virtuoso.sh
   - scripts/run.py --ci

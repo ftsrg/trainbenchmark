@@ -25,11 +25,12 @@ scenarios:
 
 tools:
 #- allegro
-- blazegraph
+#- blazegraph
 #- drools5
 #- drools6
 #- emfapi
 #- emfincquery
+- iqdcore
 #- jena
 #- mysql
 #- neo4j
