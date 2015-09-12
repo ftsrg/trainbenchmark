@@ -21,7 +21,7 @@ public class MinimalPosLengthGenerator extends MinimalModelGenerator {
 
 	@Override
 	protected void buildPatternModel() throws FileNotFoundException, IOException {
-		final Map<String, Object> segmentAttributes = ImmutableMap.of(LENGTH, -1);
+		final Map<String, ? extends Object> segmentAttributes = ImmutableMap.of(LENGTH, -1);
 		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
 
 		// this is required by the EMF serializer to fix the containment hierarchy
