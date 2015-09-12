@@ -355,13 +355,12 @@
 
 :_2 a :Sensor .
 
-:_3 a :SwitchPosition .
+:_3 a :Switch .
 
-:_4 a :Switch .
+:_4 a :SwitchPosition ;
+	:switch :_3 .
 
-:_1 :follows :_3 .
+:_1 :follows :_4 .
 
-:_3 :switch :_4 .
-
-:_4 :sensor :_2 .
+:_3 :sensor :_2 .
 

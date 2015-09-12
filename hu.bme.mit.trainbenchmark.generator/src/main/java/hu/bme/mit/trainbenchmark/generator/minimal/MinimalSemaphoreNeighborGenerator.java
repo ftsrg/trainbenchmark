@@ -12,6 +12,10 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -25,14 +29,17 @@ public class MinimalSemaphoreNeighborGenerator extends MinimalModelGenerator {
 	@Override
 	protected void buildPatternModel() throws FileNotFoundException, IOException {
 		final Object semaphore = serializer.createVertex(SEMAPHORE);
-		final Object route1 = serializer.createVertex(ROUTE);
+
+		final Map<String, Object> routeOutgoingEdges = ImmutableMap.of(EXIT, semaphore);
+		final Map<String, ? extends Object> emptyMap = Collections.emptyMap();
+		final Object route1 = serializer.createVertex(ROUTE, emptyMap, routeOutgoingEdges);
+
 		final Object route2 = serializer.createVertex(ROUTE);
 		final Object sensor1 = serializer.createVertex(SENSOR);
 		final Object sensor2 = serializer.createVertex(SENSOR);
 		final Object te1 = serializer.createVertex(SEGMENT);
 		final Object te2 = serializer.createVertex(SEGMENT);
 
-		serializer.createEdge(EXIT, route1, semaphore);
 		// this is required by the EMF serializer to fix the containment hierarchy
 		serializer.createEdge(ENTRY, route2, null);
 		serializer.createEdge(DEFINED_BY, route1, sensor1);

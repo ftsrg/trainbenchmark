@@ -4,18 +4,16 @@
 :_1 a :Semaphore ;
 	:signal :SIGNAL_GO .
 
-:_2 a :Route .
+:_2 a :Route ;
+	:entry :_1 .
 
-:_3 a :SwitchPosition ;
-	:position :POSITION_LEFT .
-
-:_4 a :Switch  ;
+:_3 a :Switch  ;
 	a :TrackElement ;
 	:currentPosition :POSITION_RIGHT .
 
-:_2 :entry :_1 .
+:_4 a :SwitchPosition ;
+	:position :POSITION_LEFT ;
+	:switch :_3 .
 
-:_2 :follows :_3 .
-
-:_3 :switch :_4 .
+:_2 :follows :_4 .
 

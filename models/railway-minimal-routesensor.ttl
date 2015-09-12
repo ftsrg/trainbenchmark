@@ -5,14 +5,13 @@
 
 :_2 a :Sensor .
 
-:_3 a :SwitchPosition .
-
-:_4 a :Switch  ;
+:_3 a :Switch  ;
 	a :TrackElement .
 
-:_1 :follows :_3 .
+:_4 a :SwitchPosition ;
+	:switch :_3 .
 
-:_3 :switch :_4 .
+:_1 :follows :_4 .
 
-:_4 :sensor :_2 .
+:_3 :sensor :_2 .
 

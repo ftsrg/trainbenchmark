@@ -117,11 +117,11 @@ public class ScalableModelGenerator extends ModelGenerator {
 			final Object entry = semaphoreNeighborError1 ? null : prevSemaphore;
 			final Object exit = semaphore2;
 
-			final Map<String, Object> routeReferences = new HashMap<>();
-			routeReferences.put(ENTRY, entry);
-			routeReferences.put(EXIT, exit);
+			final Map<String, Object> routeOutgoingEdges = new HashMap<>();
+			routeOutgoingEdges.put(ENTRY, entry);
+			routeOutgoingEdges.put(EXIT, exit);
 
-			final Object route = serializer.createVertex(ROUTE, Collections.<String, Object> emptyMap(), routeReferences);
+			final Object route = serializer.createVertex(ROUTE, Collections.<String, Object> emptyMap(), routeOutgoingEdges);
 
 			final int swps = random.nextInt(maxSwitchPositions);
 			final List<Object> currentTrack = new ArrayList<>();

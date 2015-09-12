@@ -3,7 +3,8 @@
 
 :_1 a :Semaphore .
 
-:_2 a :Route .
+:_2 a :Route ;
+	:exit :_1 .
 
 :_3 a :Route .
 
@@ -16,8 +17,6 @@
 
 :_7 a :Segment  ;
 	a :TrackElement .
-
-:_2 :exit :_1 .
 
 :_2 :definedBy :_4 .
 
