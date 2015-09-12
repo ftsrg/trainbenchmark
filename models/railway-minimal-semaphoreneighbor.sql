@@ -44,7 +44,7 @@ CREATE TABLE `Route` (
 
 LOCK TABLES `Route` WRITE;
 /*!40000 ALTER TABLE `Route` DISABLE KEYS */;
-INSERT INTO `Route` VALUES (2,NULL,NULL),(3,NULL,NULL);
+INSERT INTO `Route` VALUES (2,NULL,1),(3,NULL,NULL);
 /*!40000 ALTER TABLE `Route` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,8 @@ DROP TABLE IF EXISTS `Segment`;
 CREATE TABLE `Segment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `length` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `segment_length_idx` (`length`)
 ) ENGINE=MEMORY AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,7 +188,7 @@ CREATE TABLE `TrackElement` (
 
 LOCK TABLES `TrackElement` WRITE;
 /*!40000 ALTER TABLE `TrackElement` DISABLE KEYS */;
-INSERT INTO `TrackElement` VALUES (6,NULL),(7,NULL);
+INSERT INTO `TrackElement` VALUES (6,4),(7,5);
 /*!40000 ALTER TABLE `TrackElement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +202,9 @@ DROP TABLE IF EXISTS `connectsTo`;
 CREATE TABLE `connectsTo` (
   `TrackElement1` int(11) NOT NULL,
   `TrackElement2` int(11) NOT NULL,
-  PRIMARY KEY (`TrackElement1`,`TrackElement2`)
+  PRIMARY KEY (`TrackElement1`,`TrackElement2`),
+  KEY `connectsTo_idx1` (`TrackElement1`),
+  KEY `connectsTo_idx2` (`TrackElement1`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -211,6 +214,7 @@ CREATE TABLE `connectsTo` (
 
 LOCK TABLES `connectsTo` WRITE;
 /*!40000 ALTER TABLE `connectsTo` DISABLE KEYS */;
+INSERT INTO `connectsTo` VALUES (6,7);
 /*!40000 ALTER TABLE `connectsTo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +228,8 @@ DROP TABLE IF EXISTS `definedBy`;
 CREATE TABLE `definedBy` (
   `Route_id` int(11) NOT NULL,
   `Sensor_id` int(11) NOT NULL,
-  PRIMARY KEY (`Route_id`,`Sensor_id`)
+  PRIMARY KEY (`Route_id`,`Sensor_id`),
+  KEY `definedBy_idx` (`Route_id`,`Sensor_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -234,6 +239,7 @@ CREATE TABLE `definedBy` (
 
 LOCK TABLES `definedBy` WRITE;
 /*!40000 ALTER TABLE `definedBy` DISABLE KEYS */;
+INSERT INTO `definedBy` VALUES (2,4),(3,5);
 /*!40000 ALTER TABLE `definedBy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

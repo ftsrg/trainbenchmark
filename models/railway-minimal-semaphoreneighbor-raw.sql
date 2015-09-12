@@ -123,15 +123,14 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 INSERT INTO "Semaphore" ("id") VALUES (1);
-INSERT INTO "Route" ("id") VALUES (2);
+INSERT INTO "Route" ("id", "exit") VALUES (2, 1);
 INSERT INTO "Route" ("id") VALUES (3);
 INSERT INTO "Sensor" ("id") VALUES (4);
 INSERT INTO "Sensor" ("id") VALUES (5);
-INSERT INTO "TrackElement" (id) VALUES (6);
+INSERT INTO "TrackElement" ("id") VALUES (6);
 INSERT INTO "Segment" ("id") VALUES (6);
-INSERT INTO "TrackElement" (id) VALUES (7);
+INSERT INTO "TrackElement" ("id") VALUES (7);
 INSERT INTO "Segment" ("id") VALUES (7);
-INSERT INTO "exit" VALUES (2, 1);
 INSERT INTO "definedBy" VALUES (2, 4);
 INSERT INTO "definedBy" VALUES (3, 5);
 UPDATE "TrackElement" SET "sensor" = 4 WHERE "id" = 6;
