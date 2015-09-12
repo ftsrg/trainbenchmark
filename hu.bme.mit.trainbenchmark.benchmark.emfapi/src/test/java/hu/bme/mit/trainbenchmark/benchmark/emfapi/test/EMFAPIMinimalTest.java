@@ -9,13 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.memsql.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
-public class MemSQLBatchTest extends BatchTest {
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-	public MemSQLBatchTest() {
-		bi = new MemSQLBenchmarkInitializer();
+public class EMFAPIMinimalTest extends MinimalTest {
+
+	public EMFAPIMinimalTest() {
+		bi = new EMFAPIBenchmarkInitializer();
 	}
+
 }

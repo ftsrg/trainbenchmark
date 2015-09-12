@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.generator.minimal;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
@@ -30,6 +31,8 @@ public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 		serializer.createEdge(FOLLOWS, route, swP);
 		serializer.createEdge(SWITCH_EDGE, swP, sw);
 		serializer.createEdge(SENSOR_EDGE, sw, sensor);
+		// this is required by the EMF serializer to fix the containment hierarchy
+		serializer.createEdge(DEFINED_BY, null, sensor);
 	}
 
 }

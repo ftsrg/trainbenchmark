@@ -9,13 +9,14 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.memsql.test;
+package hu.bme.mit.trainbenchmark.benchmark.orientdb.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-public class MemSQLBatchTest extends BatchTest {
+public class OrientDbMinimalTest extends MinimalTest {
 
-	public MemSQLBatchTest() {
-		bi = new MemSQLBenchmarkInitializer();
+	public OrientDbMinimalTest() {
+		bi = new OrientDbBenchmarkInitializer();
 	}
+
 }

@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
 public class MemSQLRepairTest extends RepairTest {
 
-    public MemSQLRepairTest() {
-	bi = new MemSQLBenchmarkInitializer();
-    }
+	public MemSQLRepairTest() {
+		bi = new MemSQLBenchmarkInitializer();
+	}
 }

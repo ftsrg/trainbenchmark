@@ -9,13 +9,14 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.memsql.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+package hu.bme.mit.trainbenchmark.benchmark.blazegraph.test;
 
-public class MemSQLBatchTest extends BatchTest {
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-	public MemSQLBatchTest() {
-		bi = new MemSQLBenchmarkInitializer();
+public class BlazegraphMinimalTest extends InjectTest {
+
+	public BlazegraphMinimalTest() {
+		bi = new BlazegraphBenchmarkInitializer();
 	}
 }
