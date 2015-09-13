@@ -2,7 +2,7 @@ sudo: required
 language: java
 jdk:
   - oraclejdk8
-script:
+install:
   - scripts/initialize.sh
   - scripts/dep-mondo-sam.sh
   - scripts/dep-neo4j.sh
