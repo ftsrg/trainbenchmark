@@ -2,6 +2,6 @@
 
 cd "$( cd "$( dirname "$0" )" && pwd )"
 
-sudo apt-get install -y python3 python3-setuptools
-sudo easy_install3 pip
+wget https://bootstrap.pypa.io/get-pip.py
+python3 get-pip.py
 sudo pip3 install -r ../requirements.txt
