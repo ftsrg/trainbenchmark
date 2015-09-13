@@ -1,8 +1,9 @@
 sudo: required
-language: python
-python:
-  - "3.4"
+language: java
+jdk:
+  - oraclejdk8
 script:
+  - scripts/initialize.sh
   - scripts/dep-mondo-sam.sh
   - scripts/dep-neo4j.sh
   - scripts/dep-allegro.sh
