@@ -1,9 +1,9 @@
 sudo: required
-language: java
-jdk:
-  - oraclejdk8
+language: python
+python:
+  - "3.4"
 script:
-  - scripts/initialize.sh
+  - jdk_switcher use oraclejdk8
   - scripts/dep-mondo-sam.sh
   - scripts/dep-neo4j.sh
   - scripts/dep-allegro.sh
