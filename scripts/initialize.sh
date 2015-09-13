@@ -2,6 +2,7 @@
 
 cd "$( cd "$( dirname "$0" )" && pwd )"
 
+sudo apt-get -y update
 sudo apt-get install -y python3
 wget https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py
