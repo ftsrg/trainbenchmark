@@ -49,9 +49,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
+import java.util.Set;
 
 public abstract class ScheduleGenerator extends SyntheticGenerator {
 
@@ -116,6 +120,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		transformStationConnections();
 		attachTrains();
 
+		checkConnectivity();
 		stations.clear();
 		schedules.clear();
 		System.out.println("Done!");
@@ -207,6 +212,30 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 			}
 		}
 		return (int) x;
+	}
+
+	protected void checkConnectivity() {
+		Set<Node> checked = new HashSet<>();
+		Queue<Node> queue = new LinkedList<>();
+		queue.add(stations.get(0));
+		Node currentNode;
+		Node neighborNode;
+		while (!queue.isEmpty()) {
+			currentNode = queue.poll();
+			for (Integer neighbor : currentNode.conn) {
+				neighborNode = stations.get(neighbor);
+				if (neighborNode != currentNode && !checked.contains(neighborNode)) {
+					queue.add(neighborNode);
+				}
+				checked.add(neighborNode);
+			}
+			if (checked.size() == stations.size()) {
+				return;
+			}
+		}
+		if (checked.size() != stations.size()) {
+			throw new RuntimeException();
+		}
 	}
 
 	protected void attachTrains() throws IOException {
