@@ -47,9 +47,9 @@ public class Cluster {
 					for (Node target : diagonals) {
 						if (source != target) {
 							source.conn.add(target.id);
-							source.conn.add(center.id);
 						}
 					}
+					source.conn.add(center.id);
 					center.conn.add(source.id);
 				}
 				return;
@@ -68,29 +68,29 @@ public class Cluster {
 	}
 
 	public Cluster copy() throws SizeLimitExceededException {
-		Cluster newCluster = new Cluster();
-		newCluster.build();
-		Cluster newSubCluster;
+		Cluster rootCluster = new Cluster();
+		rootCluster.build();
+		Cluster newSubCluster = null;
 		for (Cluster c : subClusters) {
 			try {
 				newSubCluster = c.copy();
 			} catch (SizeLimitExceededException e) {
-				return newCluster;
+				return rootCluster;
 			}
-			newCluster.subClusters.add(newSubCluster);
+			rootCluster.subClusters.add(newSubCluster);
 			if (newSubCluster.subClusters.isEmpty()) {
-				drawEdges(newSubCluster, newCluster.center);
+				drawEdges(newSubCluster, rootCluster.center);
 			} else {
 				List<Cluster> deepestClusters = new ArrayList<Cluster>();
 				newSubCluster.getDeepestClusters(deepestClusters);
 				for (Cluster cl : deepestClusters) {
-					drawEdges(cl, newCluster.center);
+					drawEdges(cl, rootCluster.center);
 				}
 
 			}
 
 		}
-		return newCluster;
+		return rootCluster;
 
 	}
 
@@ -104,6 +104,9 @@ public class Cluster {
 	public void addSubCluster(final Cluster cluster, int maxDepth) {
 		List<Cluster> deepestClusters = new ArrayList<Cluster>();
 		cluster.getDeepestClusters(deepestClusters, 0, maxDepth);
+		if (deepestClusters.isEmpty()) {
+			cluster.getDeepestClusters(deepestClusters);
+		}
 		for (Cluster cl : deepestClusters) {
 			drawEdges(cl, center);
 		}
