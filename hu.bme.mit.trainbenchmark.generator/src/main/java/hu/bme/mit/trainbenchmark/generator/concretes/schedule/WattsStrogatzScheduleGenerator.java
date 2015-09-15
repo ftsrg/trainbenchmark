@@ -24,6 +24,9 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 
 	protected double p;
 	protected int K;
+	protected int minDegree;
+	protected int maxDegree;
+	protected double minDegreePercent;
 
 	public WattsStrogatzScheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -39,8 +42,12 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 	@Override
 	protected void initializeConstants() {
 		super.initializeConstants();
-		K = 4;
-		p = 0.001;
+		double edges = getEstimatedNumberOfNeighbors();
+		double averageDegree = edges / maxNumberOfStations;
+		minDegree = (int) averageDegree;
+		maxDegree = (int) averageDegree + 1;
+		minDegreePercent = 1 - (averageDegree - minDegree);
+		p = 0.000;
 	}
 
 	@Override
@@ -53,9 +60,21 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 
 	@Override
 	protected void generateStations() throws IOException {
+		int backward = 0;
+		int forward = 0;
 		for (int source = 0; source < stations.size(); source++) {
-			for (int offset = 1; offset <= getNeighborsNumber(); offset++) {
+			int neighbors = getNeighborsNumber();
+			if (neighbors % 2 == 0) {
+				backward = neighbors / 2;
+				forward = neighbors / 2;
+			} else {
+				backward = neighbors / 2;
+				forward = neighbors / 2 + 1;
+			}
+			for (int offset = 1; offset <= forward; offset++) {
 				addNeighborWithOffset(source, offset);
+			}
+			for (int offset = 1; offset <= backward; offset++) {
 				addNeighborWithOffset(source, offset * -1);
 			}
 		}
@@ -106,7 +125,11 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 
 	@Override
 	protected int getNeighborsNumber() {
-		return K / 2;
+		if (random.nextDouble() < minDegreePercent) {
+			return minDegree;
+		} else {
+			return maxDegree;
+		}
 	}
 
 }
