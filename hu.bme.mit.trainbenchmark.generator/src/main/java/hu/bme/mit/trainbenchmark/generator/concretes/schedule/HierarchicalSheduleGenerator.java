@@ -31,7 +31,8 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected int maxIterations;
 	protected double maxIterationsDouble;
 	protected int numberOfClones;
-	protected double expected;
+
+//	protected double expected;
 
 	public HierarchicalSheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -47,10 +48,10 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected void initializeConstants() {
 		super.initializeConstants();
 		initClusters();
-		expected = getEstimatedNumberOfNeighbors();
+//		expected = estimateNumberOfNeighbors();
 	}
 
-	public void initClusters() {
+	protected void initClusters() {
 		clusterSize = calculateClusterSize(generatorConfig.getSubmodel());
 
 		numberOfClones = 4;
@@ -64,7 +65,7 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected int calculateClusterSize(final ScheduleSubmodels subModel) {
 		switch (subModel) {
 		case A:
-			return 2;
+			return 3;
 		case B:
 			return 5;
 		case C:
@@ -83,7 +84,7 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 				.log10(numberOfClones + 1)) + 1;
 	}
 
-	public double getEstimatedNumberOfNeighbors() {
+	protected double estimateNumberOfNeighbors() {
 		int k = maxIterations;
 		double possibleStations = Math.pow(numberOfClones + 1, k) * clusterSize;
 		double expected = calculateClusters(k) * 2 * (maxNumberOfStations / possibleStations);
@@ -103,12 +104,10 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 
 	protected double calculateClusters(int k) {
 		if (k == 0) {
-			double v = (clusterSize * (clusterSize - 1)) / 2;
-			return v;
+			return (clusterSize * (clusterSize - 1)) / 2;
 		}
-		double v = (numberOfClones + 1) * calculateClusters(k - 1) + Math.pow(numberOfClones, k)
+		return (numberOfClones + 1) * calculateClusters(k - 1) + Math.pow(numberOfClones, k)
 				* (clusterSize - 1);
-		return v;
 	}
 
 	@Override

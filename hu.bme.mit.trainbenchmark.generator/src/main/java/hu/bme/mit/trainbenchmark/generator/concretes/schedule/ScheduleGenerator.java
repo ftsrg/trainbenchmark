@@ -67,12 +67,14 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	protected int maxNumberOfSchedules;
 	protected int maxNumberOfRepetitiveSchedules;
 	protected int associationPercent;
+	protected int neighbors = 0;
 	protected double repetitiveScheduleFactor;
 
 	protected Random deterministicRandom;
 
 	protected ArrayList<Node> stations;
 	protected ArrayList<Node> schedules;
+	protected Set<Node> checked;
 
 	protected Map<Integer, List<Integer>> schedulesOfDestinations;
 
@@ -116,13 +118,17 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 		initializationStep();
 		generateStations();
+		if (!checkConnectivity()) {
+			throw new RuntimeException("The network of stations is not connected!"
+					+ checked.size() + " not equal to " + stations.size());
+		}
 		generateSchedules();
 		transformStationConnections();
 		attachTrains();
 
-		checkConnectivity();
 		stations.clear();
 		schedules.clear();
+		System.out.println(neighbors);
 		System.out.println("Done!");
 	}
 
@@ -160,6 +166,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		if (stations.get(sourceIndex).conn.contains(targetIndex)) {
 			return false;
 		}
+		neighbors++;
 		return stations.get(sourceIndex).conn.add(targetIndex);
 	}
 
@@ -196,10 +203,16 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		}
 	}
 
+	protected double getEstimatedNumberOfNeighbors() {
+		HierarchicalSheduleGenerator hsg = new HierarchicalSheduleGenerator(fg, generatorConfig);
+		hsg.initializeConstants();
+		return hsg.estimateNumberOfNeighbors();
+	}
+
 	protected int getDestinationsNumber() {
 		double exponent = -3.0;
 		double x0 = 2.0;
-		double x1 = generatorConfig.getSize() * 9;
+		double x1 = generatorConfig.getSize() * 8;
 		if (x1 > stations.size()) {
 			x1 = stations.size() / 2;
 		}
@@ -214,8 +227,8 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 		return (int) x;
 	}
 
-	protected void checkConnectivity() {
-		Set<Node> checked = new HashSet<>();
+	protected boolean checkConnectivity() {
+		checked = new HashSet<>();
 		Queue<Node> queue = new LinkedList<>();
 		queue.add(stations.get(0));
 		Node currentNode;
@@ -230,12 +243,10 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 				checked.add(neighborNode);
 			}
 			if (checked.size() == stations.size()) {
-				return;
+				return true;
 			}
 		}
-		if (checked.size() != stations.size()) {
-			throw new RuntimeException();
-		}
+		return false;
 	}
 
 	protected void attachTrains() throws IOException {

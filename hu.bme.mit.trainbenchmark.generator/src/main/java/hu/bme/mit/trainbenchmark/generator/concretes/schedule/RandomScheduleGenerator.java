@@ -12,17 +12,20 @@
 
 package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
+import static hu.bme.mit.trainbenchmark.constants.schedule.ScheduleModelConstants.STATION;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.util.Node;
 import hu.bme.mit.trainbenchmark.generator.util.RandomElementsProvider;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RandomScheduleGenerator extends HomogeneousScheduleGenerator {
 
 	protected double p;
-
 	protected int numberOfRandomStations;
+	protected int numberOfEdges;
 
 	public RandomScheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -38,31 +41,43 @@ public class RandomScheduleGenerator extends HomogeneousScheduleGenerator {
 	@Override
 	protected void initializeConstants() {
 		super.initializeConstants();
-		p = 0.002;
-		for (int i = 4; i > 0; i--) {
-			int value = (int) Math.pow(10, i);
-			if (p * value < 1.0) {
-				numberOfRandomStations = value;
-				break;
-			}
-		}
+		double edges = getEstimatedNumberOfNeighbors();
+		p = edges / binomial(maxNumberOfStations, 2);
+		p /= 4;
 
 	}
 
 	@Override
 	protected void initializationStep() throws IOException {
-		while (currentNodes < maxNumberOfStations) {
-			addStation();
-		}
-		if (numberOfRandomStations > stations.size()) {
-			numberOfRandomStations = stations.size() / 2;
-		}
 	}
 
 	@Override
 	protected void generateStations() throws IOException {
+		while (currentNodes < maxNumberOfStations) {
+			currentNodes++;
+			stations.add(new Node(0, currentNodes));
+		}
+
 		for (int i = 0; i < stations.size(); i++) {
 			newNeighbors(i);
+		}
+		if (!checkConnectivity()) {
+			ArrayList<Node> isolated = new ArrayList<Node>(stations);
+			isolated.removeAll(checked);
+			int targetIndex;
+			int i = 0;
+			while (i < isolated.size()) {
+				targetIndex = RandomElementsProvider.getRandomDisjunctIndex(random, stations,
+						isolated.get(i).id);
+				if (!isolated.contains(stations.get(targetIndex))) {
+					addNeighbor(stations.indexOf(isolated.get(i)), targetIndex);
+					addNeighbor(targetIndex, stations.indexOf(isolated.get(i)));
+					i++;
+				}
+			}
+		}
+		for (Node node : stations) {
+			node.obj = fg.createVertex(STATION);
 		}
 	}
 
@@ -72,29 +87,24 @@ public class RandomScheduleGenerator extends HomogeneousScheduleGenerator {
 	}
 
 	protected void newNeighbors(final int sourceIndex) {
-		int i = 0;
-		while (i < numberOfRandomStations) {
-			int stationIndex = RandomElementsProvider.getRandomDisjunctIndex(random, stations,
-					sourceIndex);
-			if (!connected(sourceIndex, stationIndex)) {
-				if (random.nextDouble() < p * numberOfRandomStations) {
-					addNeighbor(sourceIndex, stationIndex);
-					addNeighbor(stationIndex, sourceIndex);
+		for (int i = 0; i < stations.size(); i++) {
+			if (sourceIndex != i) {
+				if (random.nextDouble() < p) {
+					addNeighbor(sourceIndex, i);
+					addNeighbor(i, sourceIndex);
 				}
-				// increment anyway
-				i++;
 			}
 		}
 	}
 
-	protected boolean connected(final int sourceIndex, final int targetIndex) {
-		if (stations.get(sourceIndex).conn.contains(targetIndex)) {
-			return true;
-		}
-		if (stations.get(targetIndex).conn.contains(sourceIndex)) {
-			return true;
-		}
-		return false;
+	protected long binomial(int n, int k) {
+		if (k > n - k)
+			k = n - k;
+
+		long b = 1;
+		for (int i = 1, m = n; i <= k; i++, m--)
+			b = b * m / i;
+		return b;
 	}
 
 }
