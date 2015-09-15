@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleSubmodels;
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.util.Cluster;
@@ -28,7 +29,9 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected int clusterSize;
 	protected Cluster rootCluster;
 	protected int maxIterations;
+	protected double maxIterationsDouble;
 	protected int numberOfClones;
+	protected double expected;
 
 	public HierarchicalSheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -43,28 +46,69 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	@Override
 	protected void initializeConstants() {
 		super.initializeConstants();
-		switch (generatorConfig.getSubmodel()) {
-		case A:
-			clusterSize = 3;
-			break;
-		case B:
-			clusterSize = 5;
-			break;
-		case C:
-			clusterSize = 7;
-			break;
-		case D:
-			clusterSize = 9;
-			break;
-		case E:
-			clusterSize = 11;
-			break;
-		}
+		initClusters();
+		expected = getEstimatedNumberOfNeighbors();
+	}
+
+	public void initClusters() {
+		clusterSize = calculateClusterSize(generatorConfig.getSubmodel());
+
 		numberOfClones = 4;
-		maxIterations = (int) (Math.log10(maxNumberOfStations / (double) clusterSize) / Math
-				.log10(numberOfClones + 1)) + 1;
+		maxIterationsDouble = calculateIterations();
+		maxIterations = (int) maxIterationsDouble;
+
 		Cluster.numberOfNodes = clusterSize;
 		Cluster.maxID = maxNumberOfStations;
+	}
+
+	protected int calculateClusterSize(final ScheduleSubmodels subModel) {
+		switch (subModel) {
+		case A:
+			return 2;
+		case B:
+			return 5;
+		case C:
+			return 7;
+		case D:
+			return 9;
+		case E:
+			return 11;
+		default:
+			throw new IllegalArgumentException("Not supported submodel: " + subModel);
+		}
+	}
+
+	protected double calculateIterations() {
+		return (Math.log10(maxNumberOfStations / (double) clusterSize) / Math
+				.log10(numberOfClones + 1)) + 1;
+	}
+
+	public double getEstimatedNumberOfNeighbors() {
+		int k = maxIterations;
+		double possibleStations = Math.pow(numberOfClones + 1, k) * clusterSize;
+		double expected = calculateClusters(k) * 2 * (maxNumberOfStations / possibleStations);
+		if (generatorConfig.getSize() <= 4) {
+			if (maxIterationsDouble - maxIterations <= 0.31) {
+				expected *= 0.92;
+			} else if (maxIterationsDouble - maxIterations < 0.5) {
+				expected *= 0.96;
+			}
+		} else if (generatorConfig.getSize() == 5) {
+			if (maxIterationsDouble - maxIterations <= 0.31) {
+				expected *= 0.96;
+			}
+		}
+		return expected;
+	}
+
+	protected double calculateClusters(int k) {
+		if (k == 0) {
+			double v = (clusterSize * (clusterSize - 1)) / 2;
+			return v;
+		}
+		double v = (numberOfClones + 1) * calculateClusters(k - 1) + Math.pow(numberOfClones, k)
+				* (clusterSize - 1);
+		return v;
 	}
 
 	@Override
@@ -94,7 +138,6 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 				addNeighbor(node.id, target);
 			}
 		}
-
 	}
 
 	protected void buildClusters(final int iteration) {

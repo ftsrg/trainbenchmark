@@ -59,9 +59,9 @@ public class Cluster {
 			for (Node target : diagonals) {
 				if (source != target) {
 					source.conn.add(target.id);
-					source.conn.add(center.id);
 				}
 			}
+			source.conn.add(center.id);
 			center.conn.add(source.id);
 		}
 
