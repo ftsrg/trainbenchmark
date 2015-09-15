@@ -31,7 +31,7 @@ public class EMFAPIBenchmarkCase extends EMFBenchmarkCase {
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) EMFAPIChecker.newInstance(emfDriver, bc.getQuery());
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

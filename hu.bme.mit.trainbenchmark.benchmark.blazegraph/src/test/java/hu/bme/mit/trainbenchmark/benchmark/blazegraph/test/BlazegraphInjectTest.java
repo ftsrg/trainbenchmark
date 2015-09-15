@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
 public class BlazegraphInjectTest extends InjectTest {
 
-	public BlazegraphInjectTest(){
+	public BlazegraphInjectTest() {
 		bi = new BlazegraphBenchmarkInitializer();
 	}
 }

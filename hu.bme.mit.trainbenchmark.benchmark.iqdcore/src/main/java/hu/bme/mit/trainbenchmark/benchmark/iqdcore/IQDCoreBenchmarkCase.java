@@ -36,8 +36,10 @@ public class IQDCoreBenchmarkCase extends
 		iqdInput = new WildcardInput(messageSize);
 		driver = new IQDCoreReader(rdfbc, iqdInput);
 		checker = new IQDCoreChecker(iqdInput, rdfbc);
-		transformation = IQDCoreTransformation.newInstance(iqdInput,
+		if (bc.getScenario().hasTranformation()) {
+			transformation = IQDCoreTransformation.newInstance(iqdInput,
 					bc.getQuery(), bc.getScenario());
+		}
 	}
 
 	@Override

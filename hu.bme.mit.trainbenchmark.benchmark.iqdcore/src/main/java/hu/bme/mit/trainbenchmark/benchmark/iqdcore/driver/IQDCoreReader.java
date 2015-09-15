@@ -11,18 +11,15 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public class IQDCoreReader extends RDFDriver<Long> {
+public class IQDCoreReader extends Driver<Long> {
 	TrainbenchmarkReader reader;
 	ResourceComparator comparator;
+	private WildcardInput input;
 	public IQDCoreReader(RDFBenchmarkConfig rdfbc, WildcardInput input) {
-		super(rdfbc);
+		super();
+		this.input = input;
 		reader = new TrainbenchmarkReader(input);
 		comparator = new ResourceComparator();
-	}
-
-	@Override
-	protected boolean ask(String askQuery) throws Exception {
-		return false;
 	}
 
 	@Override
@@ -32,7 +29,7 @@ public class IQDCoreReader extends RDFDriver<Long> {
 
 	@Override
 	public List<Long> collectVertices(String type) throws Exception {
-		return null;
+		return (List<Long>) input.multiValueAttributes().apply(type).keysIterator().toList();
 	}
 
 	@Override
@@ -43,6 +40,11 @@ public class IQDCoreReader extends RDFDriver<Long> {
 	@Override
 	public Collection<?> runQuery(Query query, String queryDefinition)
 			throws Exception {
-		return null;
+		throw new UnsupportedOperationException("");
+	}
+
+	@Override
+	public String getPostfix() {
+		return ".ttl";
 	}
 }

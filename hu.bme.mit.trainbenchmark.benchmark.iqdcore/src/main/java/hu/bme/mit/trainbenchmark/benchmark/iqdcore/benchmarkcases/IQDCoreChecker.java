@@ -68,7 +68,7 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 	@Override
 	public Collection<IQDCoreMatch> check() throws IOException {
 		final List<IQDCoreMatch> matches = new ArrayList<>();
-
+		
 		Iterator<Vector<Object>> resultIterator = checker.getResults()
 				.iterator();
 		while (resultIterator.hasNext()) {
