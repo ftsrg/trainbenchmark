@@ -10,8 +10,7 @@ if __name__ == "__main__":
     with open("config/config.yml", 'r') as stream:
         config = yaml.load(stream)
 
-#    formats = ["emf", "graph", "rdf", "sql"]
-    formats = ["sql"]
+    formats = ["emf", "graph", "rdf", "sql"]
 
     for format in formats:
         for query in config["queries"]:
