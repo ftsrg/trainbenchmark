@@ -40,7 +40,7 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, U
 
 		checker = new FourStoreChecker(fourStoreDriver, fsbc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = FourStoreTransformation.newInstance(fourStoreDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

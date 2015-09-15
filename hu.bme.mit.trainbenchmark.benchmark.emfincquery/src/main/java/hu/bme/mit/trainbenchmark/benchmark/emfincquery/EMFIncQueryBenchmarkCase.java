@@ -51,7 +51,7 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 		checker = eiqChecker;
 		eiqDriver.registerChecker(eiqChecker);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = EMFIncQueryTransformation.newInstance(eiqDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

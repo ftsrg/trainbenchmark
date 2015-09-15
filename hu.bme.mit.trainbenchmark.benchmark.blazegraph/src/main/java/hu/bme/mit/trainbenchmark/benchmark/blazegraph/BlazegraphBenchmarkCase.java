@@ -32,7 +32,7 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 		driver = sesameDriver = new BlazegraphDriver(rdfbc);
 		checker = new SesameChecker(sesameDriver, rdfbc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+    if (bc.getScenario().hasTranformation()) {
 			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

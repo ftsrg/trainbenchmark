@@ -20,7 +20,6 @@ import java.util.Map.Entry;
 
 import javax.xml.stream.XMLStreamException;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
 import org.neo4j.graphdb.DynamicLabel;
@@ -35,29 +34,31 @@ import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.Generator;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
 
-public class GraphGenerator extends Generator {
+public class GraphSerializer extends ModelSerializer {
 
+	protected final GeneratorConfig generatorConfig;
 	protected String databasePath;
-
-	public GraphGenerator(final String args[]) throws ParseException {
-		super();
-		generatorConfig = graphGeneratorConfig = new GraphGeneratorConfig(args);
-	}
-
-	@Override
-	protected String syntax() {
-		return "graph";
-	}
 
 	protected GraphGeneratorConfig graphGeneratorConfig;
 	protected GraphDatabaseService graphDb;
 	protected Transaction tx;
 
+	public GraphSerializer(final GeneratorConfig generatorConfig) {
+		super();
+		this.generatorConfig = generatorConfig;
+	}
+
 	@Override
-	protected void initModel() throws IOException {
+	public String syntax() {
+		return "graph";
+	}
+
+	@Override
+	public void initModel() throws IOException {
 		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
 		databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
@@ -76,7 +77,7 @@ public class GraphGenerator extends Generator {
 	}
 
 	@Override
-	protected Object createVertex(final int id, final String type, final Map<String, Object> attributes,
+	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		final Node node = graphDb.createNode(DynamicLabel.label(type));
 
@@ -86,7 +87,7 @@ public class GraphGenerator extends Generator {
 			node.addLabel(DynamicLabel.label(ancestor));
 		}
 
-		for (final Entry<String, Object> attribute : attributes.entrySet()) {
+		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String key = attribute.getKey();
 			Object value = attribute.getValue();
 
@@ -123,7 +124,7 @@ public class GraphGenerator extends Generator {
 	}
 
 	@Override
-	protected void createEdge(final String label, final Object from, final Object to) {
+	public void createEdge(final String label, final Object from, final Object to) {
 		if (from == null || to == null) {
 			return;
 		}
@@ -136,19 +137,19 @@ public class GraphGenerator extends Generator {
 	}
 
 	@Override
-	protected void setAttribute(final String type, final Object node, final String key, final Object value) {
+	public void setAttribute(final String type, final Object node, final String key, final Object value) {
 		final Node n = (Node) node;
 
 		final Object attributeValue = enumsToString(value);
 		n.setProperty(key, attributeValue);
 	}
 
-	protected DynamicRelationshipType relationship(final String label) {
+	public DynamicRelationshipType relationship(final String label) {
 		return DynamicRelationshipType.withName(label);
 	}
 
 	@Override
-	protected void persistModel() throws IOException, XMLStreamException {
+	public void persistModel() throws IOException, XMLStreamException {
 		try (Transaction tx = graphDb.beginTx()) {
 			final ProgressReporter reporter = new ProgressReporter(null, null);
 
@@ -177,12 +178,12 @@ public class GraphGenerator extends Generator {
 	}
 
 	@Override
-	protected void beginRoute() throws IOException {
+	public void beginTransaction() throws IOException {
 		tx = graphDb.beginTx();
 	}
 
 	@Override
-	protected void endRoute() {
+	public void endTransaction() {
 		tx.success();
 		tx.close();
 	}

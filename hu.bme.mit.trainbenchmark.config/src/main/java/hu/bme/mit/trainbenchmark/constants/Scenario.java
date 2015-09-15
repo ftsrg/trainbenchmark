@@ -14,7 +14,8 @@ package hu.bme.mit.trainbenchmark.constants;
 public enum Scenario {
 	BATCH("Batch"), //
 	INJECT("Inject"), //
-	REPAIR("Repair");
+	REPAIR("Repair"), //
+	MINIMAL("Minimal");
 
 	private String name;
 
@@ -25,5 +26,13 @@ public enum Scenario {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public boolean hasTranformation() {
+		if (this == BATCH || this == MINIMAL) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

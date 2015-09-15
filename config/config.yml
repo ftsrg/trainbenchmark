@@ -11,17 +11,17 @@ iterationcount: 10
 timeout: 600
 
 queries:
-#- ConnectedSegments
-#- PosLength
-#- RouteSensor
-#- SemaphoreNeighbor
-#- SwitchSensor
+- ConnectedSegments
+- PosLength
+- RouteSensor
+- SemaphoreNeighbor
+- SwitchSensor
 - SwitchSet
 
 scenarios:
-#- Batch
-- Inject
-#- Repair
+- Batch
+#- Inject
+- Repair
 
 tools:
 #- allegro
@@ -31,6 +31,8 @@ tools:
 #- emfapi
 #- emfincquery
 - iqdcore
+#- jena
+#- emfincquery
 #- jena
 #- mysql
 #- neo4j

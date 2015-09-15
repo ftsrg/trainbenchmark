@@ -50,7 +50,7 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
 		}
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

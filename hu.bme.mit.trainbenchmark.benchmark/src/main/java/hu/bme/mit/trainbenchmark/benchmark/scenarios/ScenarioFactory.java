@@ -22,6 +22,7 @@ public class ScenarioFactory {
 		case REPAIR:
 			return new TransformationScenarioLogic();
 		case BATCH:
+		case MINIMAL:
 			return new BatchScenarioLogic();
 		default:
 			throw new UnsupportedOperationException("Invalid scenario.");

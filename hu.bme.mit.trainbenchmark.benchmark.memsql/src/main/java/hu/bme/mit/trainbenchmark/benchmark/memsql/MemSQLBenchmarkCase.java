@@ -26,7 +26,7 @@ public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
 		driver = sqlDriver = new MemSQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+    if (bc.getScenario().hasTranformation()) {
 			transformation = SQLTransformation.newInstance(sqlDriver, bc);
 		}
 	}

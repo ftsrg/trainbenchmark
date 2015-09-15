@@ -37,7 +37,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI>
 		driver = sesameDriver = new SesameDriver(rdfbc);
 		checker = new SesameChecker(sesameDriver, rdfbc);
 
-		if (bc.getScenario() != Scenario.BATCH) {
+		if (bc.getScenario().hasTranformation()) {
 			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
 		}
 	}

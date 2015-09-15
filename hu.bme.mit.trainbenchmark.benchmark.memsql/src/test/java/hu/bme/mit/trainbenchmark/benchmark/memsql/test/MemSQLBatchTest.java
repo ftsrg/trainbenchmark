@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class MemSQLBatchTest extends BatchTest {
 
-    public MemSQLBatchTest() {
-	bi = new MemSQLBenchmarkInitializer();
-    }
+	public MemSQLBatchTest() {
+		bi = new MemSQLBenchmarkInitializer();
+	}
 }
