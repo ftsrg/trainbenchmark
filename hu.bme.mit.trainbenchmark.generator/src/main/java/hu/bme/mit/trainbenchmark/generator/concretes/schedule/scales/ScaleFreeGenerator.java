@@ -44,7 +44,11 @@ public class ScaleFreeGenerator extends Generator {
 	}
 
 	public void initializeConstants() {
-		initStations = 5;
+		if (model.getMaxNewNeighbors() > 5) {
+			initStations = model.getMaxNewNeighbors();
+		} else {
+			initStations = 5;
+		}
 		stationDegrees = 0;
 		maxDegree = -1;
 
@@ -69,15 +73,18 @@ public class ScaleFreeGenerator extends Generator {
 		while (true) {
 			targetIndex = RandomElementsProvider.getRandomIndex(random, stations);
 			degree = ((Node) stations.get(targetIndex)).degree;
-			if (degree == 0 && sourceIndex != targetIndex) {
-				indices.add(targetIndex);
-				addStationConnection(connection, sourceIndex, targetIndex);
-			} else {
-				percent = getPercent();
-				if (degree >= percent) {
-					if (!indices.contains(targetIndex)) {
-						indices.add(targetIndex);
-						addStationConnection(connection, sourceIndex, targetIndex);
+			if (sourceIndex != targetIndex) {
+				if (degree == 0) {
+					indices.add(targetIndex);
+					addStationConnection(connection, sourceIndex, targetIndex);
+				} else {
+					percent = getPercent();
+					if (degree >= percent) {
+						if (!indices.contains(targetIndex)) {
+							indices.add(targetIndex);
+							addStationConnection(connection, sourceIndex,
+									targetIndex);
+						}
 					}
 				}
 			}

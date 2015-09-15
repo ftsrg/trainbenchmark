@@ -28,4 +28,6 @@ public interface ScaleFreeModel {
 	public boolean addNewNeighbor(final int sourceIndex, final int targetIndex);
 
 	public boolean addNewDestination(final int sourceIndex, final int targetIndex);
+
+	public int getMaxNewNeighbors();
 }

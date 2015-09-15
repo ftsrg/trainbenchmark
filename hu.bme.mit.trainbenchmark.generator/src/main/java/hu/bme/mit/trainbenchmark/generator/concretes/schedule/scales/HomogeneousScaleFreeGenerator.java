@@ -26,6 +26,10 @@ import java.util.ArrayList;
 public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator implements ScaleFreeModel {
 
 	protected ScaleFreeGenerator sfg;
+	protected double averageDegree;
+	protected int minDegree;
+	protected double minDegreePercent;
+	protected int maxDegree;
 
 	public HomogeneousScaleFreeGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
@@ -40,6 +44,11 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 	@Override
 	protected void initializeConstants() {
 		super.initializeConstants();
+		double edges = getEstimatedNumberOfNeighbors() / 2;
+		averageDegree = edges / maxNumberOfStations;
+		minDegree = (int) averageDegree;
+		maxDegree = (int) averageDegree + 1;
+		minDegreePercent = 1 - (averageDegree - minDegree);
 		sfg = new ScaleFreeGenerator(this);
 		sfg.initializeConstants();
 	}
@@ -64,7 +73,11 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 
 	@Override
 	protected int getNeighborsNumber() {
-		return 2;
+		if (random.nextDouble() < minDegreePercent) {
+			return minDegree;
+		} else {
+			return maxDegree;
+		}
 	}
 
 	@Override
@@ -100,6 +113,11 @@ public class HomogeneousScaleFreeGenerator extends HomogeneousScheduleGenerator 
 	@Override
 	public boolean addNewDestination(int sourceIndex, int targetIndex) {
 		return addDestination(sourceIndex, targetIndex);
+	}
+
+	@Override
+	public int getMaxNewNeighbors() {
+		return maxDegree;
 	}
 
 }

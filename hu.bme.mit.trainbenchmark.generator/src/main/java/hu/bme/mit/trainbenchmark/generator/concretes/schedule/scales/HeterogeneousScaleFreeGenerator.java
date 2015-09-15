@@ -116,4 +116,9 @@ public class HeterogeneousScaleFreeGenerator extends HeterogeneousScheduleGenera
 		return addDestination(sourceIndex, targetIndex);
 	}
 
+	@Override
+	public int getMaxNewNeighbors() {
+		return 0;
+	}
+
 }
