@@ -29,12 +29,12 @@ public class IQDCoreTransformationRepairConnectedSegments extends IQDCoreTransfo
 	@Override
 	public void rhs(final Collection<IQDCoreConnectedSegmentsMatch> matches) throws IOException {
 		Transaction transaction = input.newTransaction();
-		for (final IQDCoreConnectedSegmentsMatch match : matches) {			
+		for (final IQDCoreConnectedSegmentsMatch match : matches) {
 			transaction.remove(match.getSegment1(), CONNECTSTO, match.getSegment2());
 			transaction.remove(match.getSegment2(), CONNECTSTO, match.getSegment3());
 			transaction.add(match.getSegment1(), CONNECTSTO, match.getSegment3());
 			
-			transaction.remove(match.getSegment2(), SENSOR, match.getSensor());
+			transaction.remove(match.getSegment2(), "sensor", match.getSensor());
 		}
 		input.processTransaction(transaction);
 	}
