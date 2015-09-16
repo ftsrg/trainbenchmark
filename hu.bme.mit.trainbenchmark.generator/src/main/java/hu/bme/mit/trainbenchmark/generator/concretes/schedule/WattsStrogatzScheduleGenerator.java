@@ -47,7 +47,7 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 		minDegree = (int) averageDegree;
 		maxDegree = (int) averageDegree + 1;
 		minDegreePercent = 1 - (averageDegree - minDegree);
-		p = 0.000;
+		p = 0.01;
 	}
 
 	@Override
