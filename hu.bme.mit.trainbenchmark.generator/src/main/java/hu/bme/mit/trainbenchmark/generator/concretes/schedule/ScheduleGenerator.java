@@ -212,7 +212,7 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 	protected int getDestinationsNumber() {
 		double exponent = -3.0;
 		double x0 = 2.0;
-		double x1 = generatorConfig.getSize() * 8.3;
+		double x1 = generatorConfig.getSize() * 7;
 		if (x1 > stations.size()) {
 			x1 = stations.size() / 2;
 		}

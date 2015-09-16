@@ -53,7 +53,7 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 			return;
 		}
 		int tries = 0;
-		int maxTries = 10;
+		int maxTries = 50;
 		int stationIndex;
 		List<Integer> bestTriedStations = null;
 		List<Integer> stationIndices;
@@ -103,7 +103,6 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 	}
 
 	protected List<Integer> findPath(final int sourceIndex, final int maxDepth) {
-//		List<Integer> queue = new ArrayList<Integer>();
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(sourceIndex);
 
@@ -112,13 +111,24 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		checked.put(sourceIndex, new Vertex());
 		checked.get(sourceIndex).depth = depth;
 		int currentIndex = -1; // dummy init
+		List<Integer> exploredRandomNeighbors = new ArrayList<Integer>();
 		while (!queue.isEmpty()) {
 			currentIndex = queue.poll();
 			depth = checked.get(currentIndex).depth;
 			if (depth == maxDepth) {
 				break;
 			}
-			for (Integer neighbor : stations.get(currentIndex).conn) {
+			exploredRandomNeighbors.clear();
+			for (Integer n : stations.get(currentIndex).conn) {
+				int neighbor = (int) RandomElementsProvider.getRandomElement(random,
+						stations.get(currentIndex).conn);
+				while (exploredRandomNeighbors.contains(neighbor)
+						&& exploredRandomNeighbors.size() < stations
+								.get(currentIndex).conn.size()) {
+					neighbor = (int) RandomElementsProvider.getRandomElement(random,
+							stations.get(currentIndex).conn);
+				}
+				exploredRandomNeighbors.add(neighbor);
 				if (neighbor != currentIndex) {
 					if (!checked.containsKey(neighbor)) {
 						checked.put(neighbor, new Vertex());
@@ -127,6 +137,7 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 								.addAll(checked.get(currentIndex).prev);
 						checked.get(neighbor).prev.add(currentIndex);
 						queue.add(neighbor);
+						checked.get(currentIndex).next.add(neighbor);
 					} else {
 						if (!checked.get(currentIndex).prev.contains(neighbor)) {
 							if (depth >= checked.get(neighbor).depth) {
@@ -135,6 +146,7 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 								checked.get(neighbor).prev.addAll(checked
 										.get(currentIndex).prev);
 								checked.get(neighbor).prev.add(currentIndex);
+								revisitNeighbors(checked, neighbor);
 								queue.add(neighbor);
 							}
 						}
@@ -143,6 +155,24 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 			}
 		}
 		return checked.get(currentIndex).prev;
+	}
+
+	protected void revisitNeighbors(Map<Integer, Vertex> checked, int neighbor) {
+		int depth = checked.get(neighbor).depth;
+		if (!checked.get(neighbor).next.isEmpty()) {
+			for (Integer nextIndex : checked.get(neighbor).next) {
+				if (!checked.get(neighbor).prev.contains(nextIndex)) {
+					checked.get(nextIndex).prev.clear();
+					checked.get(nextIndex).prev.addAll(checked.get(neighbor).prev);
+					checked.get(nextIndex).prev.add(neighbor);
+					checked.get(nextIndex).depth = depth + 1;
+				}
+			}
+			for (Integer nextIndex : checked.get(neighbor).next) {
+				revisitNeighbors(checked, nextIndex);
+			}
+
+		}
 	}
 
 	protected boolean validNeighbor(final Map<Integer, Map<String, Integer>> checked,
@@ -167,9 +197,11 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		protected int depth;
 
 		protected List<Integer> prev;
+		protected List<Integer> next;
 
 		protected Vertex() {
 			prev = new ArrayList<Integer>();
+			next = new ArrayList<Integer>();
 		}
 	}
 
