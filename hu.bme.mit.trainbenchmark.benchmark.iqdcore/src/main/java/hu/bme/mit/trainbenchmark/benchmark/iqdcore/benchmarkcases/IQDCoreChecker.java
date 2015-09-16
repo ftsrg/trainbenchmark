@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases;
 
-import hu.bme.mit.IQDcore.WildcardInput;
-import hu.bme.mit.IQDcore.trainbenchmark.ConnectedSegments;
-import hu.bme.mit.IQDcore.trainbenchmark.PosLength;
-import hu.bme.mit.IQDcore.trainbenchmark.RouteSensor;
-import hu.bme.mit.IQDcore.trainbenchmark.SemaphoreNeighbor;
-import hu.bme.mit.IQDcore.trainbenchmark.SwitchSensor;
-import hu.bme.mit.IQDcore.trainbenchmark.SwitchSet;
-import hu.bme.mit.IQDcore.trainbenchmark.TrainbenchmarkQuery;
+import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incquerydcore.trainbenchmark.ConnectedSegments;
+import hu.bme.mit.incquerydcore.trainbenchmark.PosLength;
+import hu.bme.mit.incquerydcore.trainbenchmark.RouteSensor;
+import hu.bme.mit.incquerydcore.trainbenchmark.SemaphoreNeighbor;
+import hu.bme.mit.incquerydcore.trainbenchmark.SwitchSensor;
+import hu.bme.mit.incquerydcore.trainbenchmark.SwitchSet;
+import hu.bme.mit.incquerydcore.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;

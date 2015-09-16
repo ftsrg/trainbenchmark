@@ -13,8 +13,8 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import hu.bme.mit.IQDcore.WildcardInput;
-import hu.bme.mit.IQDcore.WildcardInput.Transaction;
+import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
 
 import java.io.IOException;

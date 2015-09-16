@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
-import hu.bme.mit.IQDcore.WildcardInput;
+import hu.bme.mit.incquerydcore.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreReader;
