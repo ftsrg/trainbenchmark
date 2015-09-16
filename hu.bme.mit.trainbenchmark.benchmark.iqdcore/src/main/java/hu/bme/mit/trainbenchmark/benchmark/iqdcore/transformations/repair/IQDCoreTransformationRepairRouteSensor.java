@@ -12,8 +12,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
-import hu.bme.mit.IQDcore.WildcardInput;
-import hu.bme.mit.IQDcore.WildcardInput.Transaction;
+import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreRouteSensorMatch;
 
 import java.io.IOException;
