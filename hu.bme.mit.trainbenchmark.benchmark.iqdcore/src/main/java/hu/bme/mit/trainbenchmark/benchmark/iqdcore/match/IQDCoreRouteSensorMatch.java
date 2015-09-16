@@ -21,24 +21,24 @@ public class IQDCoreRouteSensorMatch extends IQDCoreMatch implements RouteSensor
 	}
 
 	@Override
-	public Long getRoute() {
+	public Long getSwP() {
 		return (Long) qs.apply(0);
 	}
 
-	@Override
-	public Long getSensor() {
-		return (Long) qs.apply(1);
-	}
+    @Override
+    public Long getSw() {
+        return (Long) qs.apply(1);
+    }
 
 	@Override
-	public Long getSwP() {
-		return (Long) qs.apply(2);
-	}
+	public Long getRoute() { return (Long) qs.apply(2); }
 
 	@Override
-	public Long getSw() {
-		return (Long) qs.apply(3);
-	}
+	public Long getSensor() { return (Long) qs.apply(3); }
+
+
+
+
 
 	@Override
 	public Long[] toArray() {
