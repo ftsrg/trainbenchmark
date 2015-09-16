@@ -25,6 +25,7 @@
 			</activation>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.blazegraph</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.generator</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
@@ -109,6 +110,7 @@
 		<profile>
 			<id>blazegraph</id>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.blazegraph</module>
 			</modules>
 		</profile>

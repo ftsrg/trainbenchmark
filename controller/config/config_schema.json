@@ -211,6 +211,7 @@
           "type": "string",
           "enum": [
             "allegro",
+            "blazegraph",
             "drools5",
             "drools6",
             "eclipseocl",
@@ -232,6 +233,7 @@
         "type": "string",
         "enum": [
           "allegro",
+          "blazegraph",
           "drools5",
           "drools6",
           "eclipseocl",
@@ -264,6 +266,7 @@
             "Tool": {
               "enum": [
                 "allegro",
+                "blazegraph",
                 "drools5",
                 "drools6",
                 "eclipseocl",
@@ -303,6 +306,7 @@
           "Tool": {
             "enum": [
               "allegro",
+              "blazegraph",
               "drools5",
               "drools6",
               "eclipseocl",

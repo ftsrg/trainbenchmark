@@ -5,6 +5,9 @@
   "allegro": {
     "name": "rdf"
   },
+  "blazegraph": {
+     "name": "rdf"
+  },
   "jena": {
     "name": "rdf"
   },
