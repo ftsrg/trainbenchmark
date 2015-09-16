@@ -53,8 +53,8 @@ public class StationsPathQueryBuilder extends QueryBuilder {
 		int sourceID = 0;
 		int targetID = 0;
 		while (sourceID == targetID) {
-			sourceID = random.nextInt(maxNumberOfStations);
-			targetID = random.nextInt(maxNumberOfStations);
+			sourceID = random.nextInt(maxNumberOfStations) + 1;
+			targetID = random.nextInt(maxNumberOfStations) + 1;
 		}
 		return String.format(rawQuery, sourceID, targetID);
 	}

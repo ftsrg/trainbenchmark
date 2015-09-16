@@ -106,7 +106,8 @@ public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 	public void benchmarkInitQuery() throws Exception {
 		if (this instanceof VersatileBenchmarkCase) {
 			if (queryInitializer == null) {
-				queryInitializer = new QueryInitializer(benchmarkConfig.getQuery());
+				queryInitializer = new QueryInitializer(benchmarkConfig.getQuery(),
+						benchmarkConfig.getSize());
 			}
 			((VersatileBenchmarkCase) this).modify();
 		}
@@ -168,7 +169,7 @@ public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 		Future<Collection<M>> future = executor.submit(task);
 		timer.startMeasure();
 		try {
-			matches = future.get(10, TimeUnit.SECONDS);
+			matches = future.get(180, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 			e.printStackTrace();
 		} finally {
@@ -213,7 +214,8 @@ public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 
 	public QueryInitializer getQueryInitializer() {
 		if (queryInitializer == null) {
-			queryInitializer = new QueryInitializer(benchmarkConfig.getQuery());
+			queryInitializer = new QueryInitializer(benchmarkConfig.getQuery(),
+					benchmarkConfig.getSize());
 		}
 		return queryInitializer;
 	}

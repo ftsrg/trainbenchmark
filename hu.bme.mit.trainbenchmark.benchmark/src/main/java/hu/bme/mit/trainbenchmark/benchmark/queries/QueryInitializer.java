@@ -23,8 +23,9 @@ public class QueryInitializer {
 	protected QueryBuilder queryBuilder;
 	protected int modelSize;
 
-	public QueryInitializer(final Query query) {
+	public QueryInitializer(final Query query, final int modelSize) {
 		this.query = query;
+		this.modelSize = modelSize;
 	}
 
 	public String resolveQuery(final String queryPath, final String extension) throws IOException {
@@ -49,6 +50,9 @@ public class QueryInitializer {
 	}
 
 	public QueryBuilder getQueryBuilder() {
+		if (queryBuilder == null) {
+			createBuilder();
+		}
 		return queryBuilder;
 	}
 
