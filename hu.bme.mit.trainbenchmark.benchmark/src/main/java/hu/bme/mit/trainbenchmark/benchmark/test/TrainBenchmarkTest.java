@@ -69,7 +69,7 @@ public abstract class TrainBenchmarkTest {
 				}
 			}
 		}
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < expectedResultSizes.size(); i++) {
 			collector.checkThat(resultSizes.get(i), equalTo(expectedResultSizes.get(i)));
 		}		
 	}
