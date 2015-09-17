@@ -21,6 +21,7 @@ public class IQDCoreBenchmarkMain {
 	public static void main(String[] args) throws IOException, ParseException {
 		IQDCoreBenchmarkLogic benchmarkLogic = new IQDCoreBenchmarkLogic(args);
 		benchmarkLogic.runBenchmark();
+        return;
 	}
 
 }
