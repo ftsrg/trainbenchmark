@@ -34,8 +34,9 @@ public class IQDCoreBenchmarkCase extends
 		this.rdfbc = (RDFBenchmarkConfig) bc;
 		int messageSize = 16;
 		iqdInput = new WildcardInput(messageSize);
-		driver = new IQDCoreReader(rdfbc, iqdInput);
-		checker = new IQDCoreChecker(iqdInput, rdfbc);
+		IQDCoreChecker iqdCoreChecker= new IQDCoreChecker(iqdInput, rdfbc);
+		checker = iqdCoreChecker;
+		driver = new IQDCoreReader(rdfbc, iqdInput, iqdCoreChecker);
 		if (bc.getScenario().hasTranformation()) {
 			transformation = IQDCoreTransformation.newInstance(iqdInput,
 					bc.getQuery(), bc.getScenario());

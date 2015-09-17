@@ -1,8 +1,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver;
 
 import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incquerydcore.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.incquerydcore.trainbenchmark.TrainbenchmarkReader;
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
@@ -14,10 +18,13 @@ public class IQDCoreReader extends Driver<Long> {
 	TrainbenchmarkReader reader;
 	ResourceComparator comparator;
 	private WildcardInput input;
-	public IQDCoreReader(RDFBenchmarkConfig rdfbc, WildcardInput input) {
+    private IQDCoreChecker query;
+
+    public IQDCoreReader(RDFBenchmarkConfig rdfbc, WildcardInput input, IQDCoreChecker query) {
 		super();
 		this.input = input;
-		reader = new TrainbenchmarkReader(input);
+        this.query = query;
+        reader = new TrainbenchmarkReader(input);
 		comparator = new ResourceComparator();
 	}
 
@@ -46,4 +53,9 @@ public class IQDCoreReader extends Driver<Long> {
 	public String getPostfix() {
 		return ".ttl";
 	}
+
+	@Override
+	public void destroy() {
+        query.shutdown();
+    }
 }

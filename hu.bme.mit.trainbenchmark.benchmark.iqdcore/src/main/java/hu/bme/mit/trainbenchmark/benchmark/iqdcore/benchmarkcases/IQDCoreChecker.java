@@ -78,4 +78,7 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 		}
 		return matches;
 	}
+	public void shutdown() {
+		checker.shutdown();
+	}
 }
