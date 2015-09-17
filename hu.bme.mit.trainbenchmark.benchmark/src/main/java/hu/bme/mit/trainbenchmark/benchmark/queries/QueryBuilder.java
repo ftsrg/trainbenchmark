@@ -19,14 +19,27 @@ import java.util.Random;
 
 public abstract class QueryBuilder {
 
+	protected int iteration;
+	protected int maxNumberOfQueries;
 	protected final Random random;
 
 	public abstract String nextQuery(final String queryPath, final String extension) throws IOException;
 
-	public abstract int getNumberOfQueries();
-
 	public QueryBuilder() {
 		random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+		iteration = 1;
+	}
+
+	public int getNumberOfQueries() {
+		return maxNumberOfQueries;
+	}
+
+	public int getIteration() {
+		return iteration;
+	}
+
+	public void setIteration(int iteration) {
+		this.iteration = iteration;
 	}
 
 }

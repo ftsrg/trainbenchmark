@@ -14,15 +14,15 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule;
 
 import org.openrdf.query.BindingSet;
 
-public class SesameCheckIsolatedStationsMatch extends SesameScheduleCountMatchProcessor {
+public class SesameScheduleNavigationsMatch extends SesameScheduleCountMatchProcessor {
 
-	public SesameCheckIsolatedStationsMatch(BindingSet bs) {
+	public SesameScheduleNavigationsMatch(BindingSet bs) {
 		super(bs);
 	}
 
 	@Override
 	protected String getProcessedName() {
-		return "Paths";
+		return "Stations";
 	}
 
 }

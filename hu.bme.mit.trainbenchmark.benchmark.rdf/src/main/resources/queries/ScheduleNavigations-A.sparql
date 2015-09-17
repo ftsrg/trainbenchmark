@@ -1,0 +1,10 @@
+PREFIX  base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ( COUNT(*) AS ?count)
+WHERE
+  { ?association rdf:type base:Association .
+    ?association base:days ?days
+    FILTER ( ?days = "1111100" )
+    ?association base:location ?station1 .
+  }

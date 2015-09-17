@@ -18,8 +18,10 @@ public enum Query {
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SWITCHSENSOR("SwitchSensor"), //
 	SWITCHSET("SwitchSet"), //
+	SCHEDULEATTRIBUTES("ScheduleAttributes"), //
 	SCHEDULECHECKISOLATEDSTATIONS("ScheduleCheckIsolatedStations"), //
 	SCHEDULECHECKLOOPNEIGHBORS("ScheduleCheckLoopNeighbors"), //
+	SCHEDULENAVIGATIONS("ScheduleNavigations"), //
 	SCHEDULESHORTTERMSTATUS("ScheduleShortTermStatus"), //
 	SCHEDULESTATUS("ScheduleStatus"), //
 	SCHEDULEDAYS("ScheduleDays"), //

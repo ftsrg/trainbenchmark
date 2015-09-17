@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.queries;
 
+import hu.bme.mit.trainbenchmark.benchmark.queries.builders.ScheduleNavigationsQueryBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.queries.builders.StationsPathQueryBuilder;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
@@ -40,8 +41,11 @@ public class QueryInitializer {
 		case STATIONSPATH:
 			queryBuilder = new StationsPathQueryBuilder(modelSize);
 			break;
+		case SCHEDULENAVIGATIONS:
+			queryBuilder = new ScheduleNavigationsQueryBuilder();
+			break;
 		default:
-			throw new IllegalArgumentException("Query is not supported: " + query);
+//			throw new IllegalArgumentException("Query is not supported: " + query);
 		}
 	}
 

@@ -14,6 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameAttributeCountMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameCheckIsolatedStationsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameCheckLoopNeighborsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameScheduleAttributesMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameScheduleNavigationsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.schedule.SesameStationsPathMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
@@ -46,6 +48,8 @@ public abstract class SesameMatch {
 			return new SesameSwitchSetMatch(bs);
 		case STATIONSPATH:
 			return new SesameStationsPathMatch(bs);
+		case SCHEDULEATTRIBUTES:
+			return new SesameScheduleAttributesMatch(bs);
 		case SCHEDULESHORTTERMSTATUS:
 		case SCHEDULEDAYS:
 		case SCHEDULEINDICATOR:
@@ -58,7 +62,8 @@ public abstract class SesameMatch {
 			return new SesameCheckIsolatedStationsMatch(bs);
 		case SCHEDULECHECKLOOPNEIGHBORS:
 			return new SesameCheckLoopNeighborsMatch(bs);
-
+		case SCHEDULENAVIGATIONS:
+			return new SesameScheduleNavigationsMatch(bs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}
