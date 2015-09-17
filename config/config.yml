@@ -20,7 +20,7 @@ queries:
 
 scenarios:
 - Batch
-- Inject
+#- Inject
 - Repair
 
 tools:
@@ -29,11 +29,14 @@ tools:
 #- drools5
 #- drools6
 #- emfapi
-- emfincquery
-- jena
+#- emfincquery
+#- iqdcore
+#- jena
+#- emfincquery
+#- jena
 #- mysql
-- neo4j
-#- sesame
+#- neo4j
+- sesame
 #- virtuoso
 
 # optional arguments. for example, neo4j is invoked with and without the javaapi argument as well.

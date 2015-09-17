@@ -5,6 +5,7 @@ drools6: emf
 eclipseocl: emf
 emfapi: emf
 emfincquery: emf
+iqdcore: rdf
 jena: rdf
 mysql: sql
 neo4j: graph
