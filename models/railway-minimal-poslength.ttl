@@ -3,11 +3,5 @@
 
 :_1 a :Segment  ;
 	a :TrackElement ;
-	:length "120"^^xsd:int .
-
-:_2 a :Switch  ;
-	a :TrackElement ;
-	:currentPosition :POSITION_LEFT .
-
-:_1 :connectsTo :_2 .
+	:length "-1"^^xsd:int .
 

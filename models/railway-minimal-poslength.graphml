@@ -2,10 +2,7 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
 <graph id="G" edgedefault="directed">
 <key id="labels" for="node" attr.name="labels" attr.type="string"/>
-<key id="currentPosition" for="node" attr.name="currentPosition" attr.type="string"/>
 <key id="length" for="node" attr.name="length" attr.type="int"/>
-<node id="n1" labels=":Segment:TrackElement"><data key="labels">:Segment:TrackElement</data><data key="length">120</data></node>
-<node id="n2" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="currentPosition">LEFT</data></node>
-<edge id="e0" source="n1" target="n2" label="connectsTo"><data key="label">connectsTo</data></edge>
+<node id="n1" labels=":Segment:TrackElement"><data key="labels">:Segment:TrackElement</data><data key="length">-1</data></node>
 </graph>
 </graphml>
