@@ -163,9 +163,9 @@
 #################################################################
 
 
-###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##Segment_length
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##length
 
-:Segment_length rdf:type owl:DatatypeProperty ;
+:length rdf:type owl:DatatypeProperty ;
                 
                 rdfs:domain :Segment ;
                 
@@ -221,7 +221,7 @@
          
          rdfs:subClassOf :TrackElement ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :Segment_length ;
+                           owl:onProperty :length ;
                            owl:cardinality "1"^^xsd:nonNegativeInteger
                          ] .
 
@@ -263,7 +263,7 @@
         
         rdfs:subClassOf :TrackElement ,
                         [ rdf:type owl:Restriction ;
-                          owl:onProperty :position ;
+                          owl:onProperty :currentPosition ;
                           owl:cardinality "1"^^xsd:nonNegativeInteger
                         ] .
 

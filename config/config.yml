@@ -20,22 +20,20 @@ queries:
 
 scenarios:
 - Batch
-#- Inject
+- Inject
 - Repair
 
 tools:
 #- allegro
-#- blazegraph
-#- drools5
-#- drools6
-#- emfapi
-#- emfincquery
+- blazegraph
+- drools5
+- drools6
+- emfapi
+- emfincquery
 #- iqdcore
-#- jena
-#- emfincquery
-#- jena
-#- mysql
-#- neo4j
+- jena
+- mysql
+- neo4j
 - sesame
 #- virtuoso
 
