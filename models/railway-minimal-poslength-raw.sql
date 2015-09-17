@@ -123,7 +123,10 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 INSERT INTO "TrackElement" ("id") VALUES (1);
-INSERT INTO "Segment" ("id", "length") VALUES (1, -1);
+INSERT INTO "Segment" ("id", "length") VALUES (1, 120);
+INSERT INTO "TrackElement" ("id") VALUES (2);
+INSERT INTO "Switch" ("id", "currentPosition") VALUES (2, 1);
+INSERT INTO "connectsTo" VALUES (1, 2);
 
 COMMIT;
 CREATE INDEX segment_length_idx ON "Segment" ("length");

@@ -54,7 +54,7 @@
 		<profile>
 			<id>notest</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module>
