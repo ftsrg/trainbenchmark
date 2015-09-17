@@ -39,7 +39,6 @@ public class ScheduleNavigationsQueryBuilder extends QueryBuilder {
 		iteration++;
 		querySubtype = (QuerySubtypes) EnumUtils.getEnum(QuerySubtypes.class,
 				querySubtype.getValue() + 1);
-		System.out.println(query);
 		return query;
 	}
 
