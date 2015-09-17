@@ -3,14 +3,13 @@ PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT  (COUNT(?targetStation) AS ?count)
 WHERE
-  { ?sourceStation rdf:type base:Station .
+  {
     FILTER ( ?sourceStation = base:_%s ) .
-    ?targetStation rdf:type base:Station .
     FILTER ( ?targetStation = base:_%s ) .
-    ?sourceStation (^base:destinations | ^base:origin | ^base:terminal) ?schedule1 .
-    ?schedule1 (base:destinations | base:origin | base:terminal) ?station1
+    ?schedule1 base:destinations ?sourceStation .
+    ?schedule1 base:destinations ?station1
     FILTER ( ?station1 != ?sourceStation) .
-    ?station1 (^base:destinations | ^base:origin | ^base:terminal) ?schedule2 .
-    ?schedule1 (base:destinations | base:origin | base:terminal) ?targetStation .
-    ?schedule2 (base:destinations | base:origin | base:terminal) ?targetStation .
+    ?schedule2 base:destinations ?station1 .
+    ?schedule1 base:destinations ?targetStation .
+    ?schedule2 base:destinations ?targetStation .
   }

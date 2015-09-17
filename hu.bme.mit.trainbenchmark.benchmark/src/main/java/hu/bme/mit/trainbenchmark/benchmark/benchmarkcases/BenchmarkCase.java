@@ -170,7 +170,7 @@ public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 		timer.startMeasure();
 		try {
 			matches = future.get(300, TimeUnit.SECONDS);
-		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+		} catch (InterruptedException | TimeoutException e) {
 			future.cancel(true);
 			System.out.println("Timeout");
 		} finally {
