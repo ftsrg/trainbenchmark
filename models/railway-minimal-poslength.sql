@@ -68,7 +68,7 @@ CREATE TABLE `Segment` (
 
 LOCK TABLES `Segment` WRITE;
 /*!40000 ALTER TABLE `Segment` DISABLE KEYS */;
-INSERT INTO `Segment` VALUES (1,-1);
+INSERT INTO `Segment` VALUES (1,120);
 /*!40000 ALTER TABLE `Segment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `Switch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `currentPosition` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,6 +137,7 @@ CREATE TABLE `Switch` (
 
 LOCK TABLES `Switch` WRITE;
 /*!40000 ALTER TABLE `Switch` DISABLE KEYS */;
+INSERT INTO `Switch` VALUES (2,1);
 /*!40000 ALTER TABLE `Switch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +177,7 @@ CREATE TABLE `TrackElement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sensor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +186,7 @@ CREATE TABLE `TrackElement` (
 
 LOCK TABLES `TrackElement` WRITE;
 /*!40000 ALTER TABLE `TrackElement` DISABLE KEYS */;
-INSERT INTO `TrackElement` VALUES (1,NULL);
+INSERT INTO `TrackElement` VALUES (1,NULL),(2,NULL);
 /*!40000 ALTER TABLE `TrackElement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,6 +212,7 @@ CREATE TABLE `connectsTo` (
 
 LOCK TABLES `connectsTo` WRITE;
 /*!40000 ALTER TABLE `connectsTo` DISABLE KEYS */;
+INSERT INTO `connectsTo` VALUES (1,2);
 /*!40000 ALTER TABLE `connectsTo` ENABLE KEYS */;
 UNLOCK TABLES;
 
