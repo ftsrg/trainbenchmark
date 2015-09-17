@@ -13,9 +13,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.analyzer;
 
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.Metric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.queries.ConstantsMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.queries.FiltersMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.queries.NavigationsMetric;
 import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.queries.QueryMetric;
+import hu.bme.mit.trainbenchmark.benchmark.analyzer.metrics.queries.VariablesMetric;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCaseDescriptor;
@@ -29,8 +31,11 @@ import eu.mondo.sam.core.metrics.BenchmarkMetric;
 
 public abstract class QueryAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
-	private NavigationsMetric navigationsMetric;
-	private FiltersMetric filtersMetric;
+	protected NavigationsMetric navigationsMetric;
+	protected FiltersMetric filtersMetric;
+	protected VariablesMetric variablesMetric;
+	protected ConstantsMetric constantsMetric;
+
 	protected Map<String, QueryMetric> queryMetrics;
 
 	public QueryAnalyzer(D driver) {
@@ -52,8 +57,13 @@ public abstract class QueryAnalyzer<D extends Driver<?>> extends Analyzer<D> {
 
 		navigationsMetric = new NavigationsMetric();
 		filtersMetric = new FiltersMetric();
+		variablesMetric = new VariablesMetric();
+		constantsMetric = new ConstantsMetric();
+
 		metrics.add(navigationsMetric);
 		metrics.add(filtersMetric);
+		metrics.add(variablesMetric);
+		metrics.add(constantsMetric);
 
 		for (BenchmarkMetric m : metrics) {
 			((Metric) m).initName();

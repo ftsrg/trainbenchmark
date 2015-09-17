@@ -50,7 +50,9 @@ public class RDFQueryAnalyzer<D extends Driver<?>> extends QueryAnalyzer<D> {
 
 			@Override
 			public void visit(ElementFilter el) {
-				getFiltersMetric().increase(el.getExpr().getVarsMentioned().size());
+				filtersMetric.increase();
+				variablesMetric.increase(el.getExpr().getVarsMentioned().size());
+				constantsMetric.increase(el.getExpr().isConstant() ? 1 : 0);
 			}
 
 		});
