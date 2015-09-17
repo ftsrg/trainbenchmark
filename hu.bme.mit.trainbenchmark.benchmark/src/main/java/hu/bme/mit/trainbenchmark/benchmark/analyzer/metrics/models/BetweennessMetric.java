@@ -30,11 +30,13 @@ public class BetweennessMetric extends ModelMetric {
 	@Override
 	public void calculate() {
 		double pairs = analyzer.getShortestPathMetric().getPairs();
-		double sum = 0.0;
+		metricValue = 0;
 		for (Entry<String, Integer> entry : betweennessValues.entrySet()) {
-			sum += (entry.getValue() / pairs);
+			if (entry.getValue() > metricValue) {
+				metricValue = entry.getValue();
+			}
 		}
-		metricValue = sum / betweennessValues.size();
+		metricValue /= pairs;
 
 	}
 
