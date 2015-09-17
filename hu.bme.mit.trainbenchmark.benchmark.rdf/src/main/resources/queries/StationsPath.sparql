@@ -8,13 +8,9 @@ WHERE
     ?targetStation rdf:type base:Station .
     FILTER ( ?targetStation = base:_%s ) .
     ?sourceStation (^base:destinations | ^base:origin | ^base:terminal) ?schedule1 .
-	?schedule1 (base:destinations | base:origin | base:terminal) ?station1
-	FILTER ( ?station1 != ?sourceStation) .
+    ?schedule1 (base:destinations | base:origin | base:terminal) ?station1
+    FILTER ( ?station1 != ?sourceStation) .
     ?station1 (^base:destinations | ^base:origin | ^base:terminal) ?schedule2 .
-	?schedule2 (base:destinations | base:origin | base:terminal) ?station2 .
-    ?station2 (^base:destinations | ^base:origin | ^base:terminal) ?schedule3 .
-	FILTER ( ?station2 != ?sourceStation) .
     ?schedule1 (base:destinations | base:origin | base:terminal) ?targetStation .
     ?schedule2 (base:destinations | base:origin | base:terminal) ?targetStation .
-    ?schedule3 (base:destinations | base:origin | base:terminal) ?targetStation .
   }
