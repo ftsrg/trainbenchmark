@@ -16,13 +16,11 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFParseException;
 
@@ -38,7 +36,7 @@ public class BlazegraphDriver extends SesameDriver {
 		final Properties props = loadProperties("/blazegraph.properties");
 		// instantiate a sail
 		final String journalFile = (String) props.get("com.bigdata.journal.AbstractJournal.file");
-		FileUtils.deleteQuietly(new File(journalFile));
+//		FileUtils.deleteQuietly(new File(journalFile));
 
 		sail = new BigdataSail(props);
 		repository = new BigdataSailRepository(sail);
