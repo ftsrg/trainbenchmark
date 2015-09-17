@@ -29,7 +29,7 @@ public class StationsPathQueryBuilder extends QueryBuilder {
 
 	public StationsPathQueryBuilder(final int modelSize) {
 		iteration = 1;
-		maxNumberOfQueries = 20;
+		maxNumberOfQueries = 50;
 		int maxNodes = (int) (ScheduleGeneratorConstants.sizeStep * Math.pow(2, modelSize - 1));
 		maxNumberOfStations = (int) (maxNodes * ScheduleGeneratorConstants.stationsProportion);
 //		querySubtype = QuerySubtypes.QUERY_A;
