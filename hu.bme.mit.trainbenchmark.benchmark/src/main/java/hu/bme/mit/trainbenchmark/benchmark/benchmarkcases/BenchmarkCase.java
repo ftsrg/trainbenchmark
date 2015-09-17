@@ -169,9 +169,10 @@ public abstract class BenchmarkCase<M, T, D extends Driver<T>> {
 		Future<Collection<M>> future = executor.submit(task);
 		timer.startMeasure();
 		try {
-			matches = future.get(180, TimeUnit.SECONDS);
+			matches = future.get(120, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			e.printStackTrace();
+			future.cancel(true);
+			System.out.println("Timeout");
 		} finally {
 			executor.shutdown();
 		}
