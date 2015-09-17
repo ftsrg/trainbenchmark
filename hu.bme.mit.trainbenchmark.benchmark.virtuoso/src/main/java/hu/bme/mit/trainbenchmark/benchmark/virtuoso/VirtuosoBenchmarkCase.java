@@ -27,7 +27,7 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 		this.rbc = (RDFBenchmarkConfig) benchmarkConfig;
 
 		driver = sesameDriver = new VirtuosoDriver();
-		checker = new SesameChecker(sesameDriver, benchmarkConfig);
+		checker = sesameChecker = new SesameChecker(sesameDriver, benchmarkConfig);
 
 		transformation = SesameTransformation.newInstance(sesameDriver, benchmarkConfig.getQuery(),
 				benchmarkConfig.getScenario());
