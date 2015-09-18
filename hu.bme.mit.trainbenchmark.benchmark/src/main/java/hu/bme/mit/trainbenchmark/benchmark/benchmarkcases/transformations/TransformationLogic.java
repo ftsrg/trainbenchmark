@@ -11,11 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
@@ -102,11 +98,10 @@ public abstract class TransformationLogic<M, T, O> {
 		if (size < nMatchesToModify) {
 			nMatchesToModify = size;
 		}
-
+		Collections.shuffle(matches, random);
 		final List<O> objects = new ArrayList<>();
 		for (int i = 0; i < nMatchesToModify; i++) {
-			final int rndTarget = random.nextInt(size);
-			final O object = matches.get(rndTarget);
+			final O object = matches.get(i);
 			objects.add(object);
 		}
 		return objects;

@@ -29,12 +29,12 @@ public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
 	public void connectedSegmentsInject() throws ParseException, IOException {
-		testTransformation(CONNECTEDSEGMENTS, INJECT, 4, 5);
+		testTransformation(CONNECTEDSEGMENTS, INJECT, 4, 6);
 	}
 
 	@Test
 	public void posLengthInject() throws ParseException, IOException {
-		testTransformation(POSLENGTH, INJECT, 21, 22);
+		testTransformation(POSLENGTH, INJECT, 21, 23);
 	}
 
 	@Test
@@ -49,12 +49,12 @@ public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
 	public void switchSensorInject() throws ParseException, IOException {
-		testTransformation(SWITCHSENSOR, INJECT, 0, 1);
+		testTransformation(SWITCHSENSOR, INJECT, 0, 2);
 	}
 
 	@Test
 	public void switchSetInject() throws ParseException, IOException {
-		testTransformation(SWITCHSET, INJECT, 1, 1);
+		testTransformation(SWITCHSET, INJECT, 1, 3);
 	}
 
 }
