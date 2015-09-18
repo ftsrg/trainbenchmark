@@ -37,8 +37,12 @@ public class ScheduleNavigationsQueryBuilder extends QueryBuilder {
 		String query = FileUtils.readFileToString(new File(queryPath + queryName + "-"
 				+ querySubtype.getName() + extension));
 		iteration++;
-		querySubtype = (QuerySubtypes) EnumUtils.getEnum(QuerySubtypes.class,
-				querySubtype.getValue() + 1);
+		if (querySubtype.getName() == "E") {
+			querySubtype = QuerySubtypes.QUERY_A;
+		} else {
+			querySubtype = (QuerySubtypes) EnumUtils.getEnum(QuerySubtypes.class,
+					querySubtype.getValue() + 1);
+		}
 		return query;
 	}
 
