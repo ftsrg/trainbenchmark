@@ -22,15 +22,16 @@ public class UniqueRandom extends Random {
 
 	List<Integer> ints = new ArrayList<Integer>();
 
-	public UniqueRandom(long random) {
+	public UniqueRandom(final long random) {
 		super(random);
 	}
 
 	@Override
-	public int nextInt(int n) {
+	public int nextInt(final int n) {
 		int newInt = super.nextInt(n);
-		if (ints.size() == n)
+		if (ints.size() >= n) {
 			ints = new ArrayList<Integer>();
+		}
 		while (ints.contains(new Integer(newInt))) {
 			newInt = super.nextInt(n);
 		}
