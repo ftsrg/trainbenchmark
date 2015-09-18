@@ -17,7 +17,6 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.util.UniqueRandom;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
@@ -31,7 +30,7 @@ import eu.mondo.sam.core.results.PhaseResult;
 
 public abstract class AbstractBenchmarkCase<M, T> {
 
-	protected Random random = new UniqueRandom(TrainBenchmarkConstants.RANDOM_SEED);
+	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;
 	protected Checker<M> checker;

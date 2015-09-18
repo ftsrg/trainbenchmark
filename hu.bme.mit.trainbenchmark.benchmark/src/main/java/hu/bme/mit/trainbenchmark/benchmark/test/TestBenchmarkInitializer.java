@@ -21,7 +21,7 @@ public abstract class TestBenchmarkInitializer<T extends AbstractBenchmarkLogic>
 
 	protected final int size = 1;
 	protected final ModificationMethod modificationMethod = ModificationMethod.CONSTANT;
-	protected final int modificationConstant = 1;
+	protected final int modificationConstant = 2;
 	protected final int runIndex = 1;
 	protected final int iterationCount = 1;
 
