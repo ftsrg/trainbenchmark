@@ -18,6 +18,7 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.RDF_TYPE;
 import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 public abstract class RDFDriver<T> extends Driver<T> {
 
@@ -59,11 +60,7 @@ public abstract class RDFDriver<T> extends Driver<T> {
 
 	@Override
 	public String getPostfix() {
-		if (rdfbc.isInferencing()) {
-			return "-metamodel.ttl";
-		} else {
-			return ".ttl";
-		}
+		return RDFHelper.getPostfix(rdfbc.isInferencing());
 	}
 
 	protected abstract boolean ask(String askQuery) throws Exception;

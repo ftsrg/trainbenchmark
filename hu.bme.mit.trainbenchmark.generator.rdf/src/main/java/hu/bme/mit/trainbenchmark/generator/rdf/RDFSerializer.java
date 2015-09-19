@@ -40,13 +40,13 @@ public class RDFSerializer extends ModelSerializer {
 
 	@Override
 	public String syntax() {
-		return "RDF" + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "");
+		return "RDF" + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "-inferred");
 	}
 
 	@Override
 	public void initModel() throws IOException {
 		// source file
-		final String postfix = rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "";
+		final String postfix = rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "-inferred";
 		final String srcFilePath = rdfGeneratorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix + ".ttl";
 
