@@ -10,3 +10,5 @@ install:
   - scripts/dep-incqueryd-core.sh
   - scripts/dep-virtuoso.sh
   - scripts/run.py --ci
+notifications:
+  slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
