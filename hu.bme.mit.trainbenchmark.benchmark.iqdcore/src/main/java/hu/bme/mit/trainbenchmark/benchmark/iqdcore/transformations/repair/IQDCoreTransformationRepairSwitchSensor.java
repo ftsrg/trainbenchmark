@@ -10,13 +10,15 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
+
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+
+import java.util.Collection;
+
 import hu.bme.mit.incquerydcore.WildcardInput;
 import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSensorMatch;
-
-import java.util.Collection;
 
 public class IQDCoreTransformationRepairSwitchSensor extends IQDCoreTransformationRepair<IQDCoreSwitchSensorMatch> {
 
@@ -26,7 +28,7 @@ public class IQDCoreTransformationRepairSwitchSensor extends IQDCoreTransformati
 
 	@Override
 	public void rhs(final Collection<IQDCoreSwitchSensorMatch> matches) throws Exception {
-		Transaction transaction = input.newTransaction();
+		final Transaction transaction = input.newTransaction();
 		for (final IQDCoreSwitchSensorMatch match : matches) {
 			final long sw = match.getSw();
 			final long sensorID = input.newKey();

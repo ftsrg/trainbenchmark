@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-import hu.bme.mit.IQDcore.WildcardInput;
-import hu.bme.mit.IQDcore.trainbenchmark.TrainbenchmarkReader;
+import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incquerydcore.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;

@@ -12,10 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
+import org.apache.commons.cli.ParseException;
+
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
-
-import org.apache.commons.cli.ParseException;
 
 public class IQDCoreBenchmarkLogic extends AbstractBenchmarkLogic {
 

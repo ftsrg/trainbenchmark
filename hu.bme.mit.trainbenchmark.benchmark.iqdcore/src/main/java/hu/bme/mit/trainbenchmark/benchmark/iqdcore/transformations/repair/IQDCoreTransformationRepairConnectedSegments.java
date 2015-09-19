@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
 
 import java.io.IOException;
 import java.util.Collection;
+
+import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
 
 public class IQDCoreTransformationRepairConnectedSegments extends IQDCoreTransformationRepair<IQDCoreConnectedSegmentsMatch> {
 
@@ -28,12 +28,12 @@ public class IQDCoreTransformationRepairConnectedSegments extends IQDCoreTransfo
 
 	@Override
 	public void rhs(final Collection<IQDCoreConnectedSegmentsMatch> matches) throws IOException {
-		Transaction transaction = input.newTransaction();
+		final Transaction transaction = input.newTransaction();
 		for (final IQDCoreConnectedSegmentsMatch match : matches) {
 			transaction.remove(match.getSegment1(), CONNECTSTO, match.getSegment2());
 			transaction.remove(match.getSegment2(), CONNECTSTO, match.getSegment3());
 			transaction.add(match.getSegment1(), CONNECTSTO, match.getSegment3());
-			
+
 			transaction.remove(match.getSegment2(), "sensor", match.getSensor());
 		}
 		input.processTransaction(transaction);

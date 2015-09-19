@@ -12,12 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSetMatch;
 
 import java.io.IOException;
 import java.util.Collection;
+
+import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSetMatch;
 
 public class IQDCoreTransformationRepairSwitchSet extends IQDCoreTransformationRepair<IQDCoreSwitchSetMatch> {
 
@@ -27,7 +28,7 @@ public class IQDCoreTransformationRepairSwitchSet extends IQDCoreTransformationR
 
 	@Override
 	public void rhs(final Collection<IQDCoreSwitchSetMatch> matches) throws IOException {
-		Transaction transaction = input.newTransaction();
+		final Transaction transaction = input.newTransaction();
 		for (final IQDCoreSwitchSetMatch match : matches) {
 			final Long sw = match.getSw();
 
