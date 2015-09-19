@@ -46,7 +46,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	public BenchmarkConfig(final String className, final ScenarioConstants scenario, final int size,
 			final int runIndex, final Query query, final int iterationCount,
 			final ModificationMethod modificationMethod, final long modificationConstant,
-			final boolean calculateMetrics, final ModelType modelType) {
+			final ModelType modelType) {
 		super(scenario, size);
 		this.className = className;
 		this.runIndex = runIndex;

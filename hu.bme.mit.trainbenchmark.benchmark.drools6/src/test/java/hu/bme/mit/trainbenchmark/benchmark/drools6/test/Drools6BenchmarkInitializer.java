@@ -21,9 +21,10 @@ import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 public class Drools6BenchmarkInitializer extends TestBenchmarkInitializer<Drools6BenchmarkLogic> {
 
 	@Override
-	protected Drools6BenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
+	protected Drools6BenchmarkLogic initializeBenchmark(final Query query,
+			final ScenarioConstants scenario) {
 		final BenchmarkConfig bc = new BenchmarkConfig("Drools6", scenario, size, runIndex, query,
-				iterationCount, modificationMethod, modificationConstant, false, model);
+				iterationCount, modificationMethod, modificationConstant, model);
 		return new Drools6BenchmarkLogic(bc);
 	}
 

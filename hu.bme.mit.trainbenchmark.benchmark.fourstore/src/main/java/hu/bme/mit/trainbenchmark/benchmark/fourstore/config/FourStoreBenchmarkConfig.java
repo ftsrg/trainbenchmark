@@ -11,15 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.ModelType;
 import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 
 import org.apache.commons.cli.ParseException;
 
-public class FourStoreBenchmarkConfig extends BenchmarkConfig {
+public class FourStoreBenchmarkConfig extends RDFBenchmarkConfig {
 
 	protected static final String FOURSTORE = "FourStore";
 
@@ -31,12 +31,12 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 		super(args, tool);
 	}
 
-	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final int runIndex,
+	public FourStoreBenchmarkConfig(final ScenarioConstants scenario, final int size, final int runIndex,
 			final Query query, final int iterationCount,
 			final ModificationMethod modificationMethod, final long modificationConstant,
 			final ModelType modelType) {
 		super(FOURSTORE, scenario, size, runIndex, query, iterationCount, modificationMethod,
-				modificationConstant, false, modelType);
+				modificationConstant, modelType);
 	}
 
 	@Override

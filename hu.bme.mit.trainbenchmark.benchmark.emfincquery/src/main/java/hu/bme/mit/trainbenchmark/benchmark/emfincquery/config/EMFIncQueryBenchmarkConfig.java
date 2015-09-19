@@ -29,12 +29,12 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 		super(args, EMFINCQUERY);
 	}
 
-	public EMFIncQueryBenchmarkConfig(final ScenarioConstants scenario, final int size, final int runIndex,
-			final Query query, final int iterationCount,
+	public EMFIncQueryBenchmarkConfig(final ScenarioConstants scenario, final int size,
+			final int runIndex, final Query query, final int iterationCount,
 			final ModificationMethod modificationMethod, final long modificationConstant,
 			final boolean localSearch, final ModelType modelType) {
 		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, modificationMethod,
-				modificationConstant, false, modelType);
+				modificationConstant, modelType);
 		this.localSearch = localSearch;
 	}
 

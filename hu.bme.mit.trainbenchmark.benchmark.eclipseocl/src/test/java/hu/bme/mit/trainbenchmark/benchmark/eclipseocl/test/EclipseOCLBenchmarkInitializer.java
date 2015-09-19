@@ -21,9 +21,10 @@ import hu.bme.mit.trainbenchmark.constants.ScenarioConstants;
 public class EclipseOCLBenchmarkInitializer extends TestBenchmarkInitializer<EclipseOCLBenchmarkLogic> {
 
 	@Override
-	protected EclipseOCLBenchmarkLogic initializeBenchmark(final Query query, final ScenarioConstants scenario) {
+	protected EclipseOCLBenchmarkLogic initializeBenchmark(final Query query,
+			final ScenarioConstants scenario) {
 		final BenchmarkConfig bc = new BenchmarkConfig("EclipseOCL", scenario, size, 1, query,
-				iterationCount, modificationMethod, modificationConstant, false, model);
+				iterationCount, modificationMethod, modificationConstant, model);
 		return new EclipseOCLBenchmarkLogic(bc);
 	}
 

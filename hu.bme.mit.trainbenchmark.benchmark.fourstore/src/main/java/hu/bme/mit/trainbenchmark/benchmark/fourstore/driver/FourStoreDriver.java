@@ -30,7 +30,6 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
-import org.openrdf.query.resultio.text.tsv.SPARQLResultsTSVParser;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
@@ -46,7 +45,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 
 	protected boolean showCommands = false;
 	protected boolean showCommandOutput = false;
-	protected final Map<String, String> environment = ImmutableMap.of("FOURSTORE_CLUSTER_NAME", CLUSTERNAME);
+	protected final Map<String, String> environment = ImmutableMap.of("FOURSTORE_CLUSTER_NAME",
+			CLUSTERNAME);
 
 	public FourStoreDriver() throws IOException {
 		final String dbPath = "/var/lib/4store/" + CLUSTERNAME;
@@ -77,7 +77,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 			throw new FileNotFoundException(modelPath);
 		}
 
-		UnixUtils.execResourceScript("4s-import.sh", modelFile.getAbsolutePath(), environment, showCommandOutput);
+		UnixUtils.execResourceScript("4s-import.sh", modelFile.getAbsolutePath(), environment,
+				showCommandOutput);
 	}
 
 	public void setShowCommandOutput(final boolean showCommandOutput) {
@@ -86,30 +87,32 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 
 	protected final String ID_PREFIX = "_";
 
-	protected final SPARQLResultsTSVParser parser = new SPARQLResultsTSVParser();
+//	protected final SPARQLResultsTSVParser parser = new SPARQLResultsTSVParser();
 
 	@Override
-	public Collection<BindingSet> runQuery(final Query query, final String queryDefinition) throws IOException {
+	public Collection<BindingSet> runQuery(final Query query, final String queryDefinition)
+			throws Exception {
 		return runQuery(queryDefinition);
 	}
 
 	protected Collection<BindingSet> runQuery(final String queryDefinition) throws Exception {
-		final String command = String.format("4s-query $FOURSTORE_CLUSTER_NAME -f text -s -1 '%s'", queryDefinition);
+		final String command = String.format("4s-query $FOURSTORE_CLUSTER_NAME -f text -s -1 '%s'",
+				queryDefinition);
 		if (showCommands) {
 			System.out.println(command);
 		}
 
 		final BindingSetCollector bindingSetCollector = new BindingSetCollector();
-		parser.setQueryResultHandler(bindingSetCollector);
+//		parser.setQueryResultHandler(bindingSetCollector);
 
 		final InputStream is = UnixUtils.execToStream(command, environment);
-		parser.parse(is);
+//		parser.parse(is);
 		final Collection<BindingSet> bindingSets = bindingSetCollector.getBindingSets();
 
 		return bindingSets;
 	}
 
-	public List<Long> queryIds(final String query) throws IOException {
+	public List<Long> queryIds(final String query) throws Exception {
 		final Collection<BindingSet> bindingSets = runQuery(query);
 
 		System.out.println(bindingSets);
@@ -131,8 +134,9 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public List<URI> collectVertices(final String type) throws IOException {
-		final String queryDefinition = String.format(SPARQL_RDF_PREFIX + "SELECT ?a WHERE { ?a rdf:type %s }", RDFUtil.brackets(type));
+	public List<URI> collectVertices(final String type) throws Exception {
+		final String queryDefinition = String.format(SPARQL_RDF_PREFIX
+				+ "SELECT ?a WHERE { ?a rdf:type %s }", RDFUtil.brackets(type));
 		final Collection<BindingSet> ids = runQuery(queryDefinition);
 
 		final List<URI> vertices = new LinkedList<>();
@@ -143,7 +147,7 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 	}
 
 	@Override
-	public boolean ask(final String query) throws IOException {
+	public boolean ask(final String query) throws Exception {
 		final Collection<BindingSet> bindingSet = runQuery(query);
 		// final String line = reader.readLine();
 		//
@@ -185,11 +189,13 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
-	private void insertVerticesPartition(final Collection<String> uris, final String type) throws IOException {
+	private void insertVerticesPartition(final Collection<String> uris, final String type)
+			throws IOException {
 		final StringBuilder insertQueryBuilder = new StringBuilder(SPARQL_RDF_PREFIX);
 		insertQueryBuilder.append("INSERT DATA {");
 		for (final String uri : uris) {
-			insertQueryBuilder.append(String.format(". %s rdf:type %s", brackets(uri), brackets(type)));
+			insertQueryBuilder.append(String.format(". %s rdf:type %s", brackets(uri),
+					brackets(type)));
 		}
 		insertQueryBuilder.append("}");
 
@@ -199,7 +205,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 
 	// insert edges
 
-	public void insertEdge(final String sourceVertexURI, final String targetVertexURI, final String type) throws IOException {
+	public void insertEdge(final String sourceVertexURI, final String targetVertexURI, final String type)
+			throws IOException {
 		final Multimap<String, String> edges = HashMultimap.create();
 		edges.put(sourceVertexURI, targetVertexURI);
 		insertEdges(edges, type);
@@ -211,7 +218,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		}
 
 		final ArrayList<String> sourceVertices = new ArrayList<>(edges.keySet());
-		final List<List<String>> sourceVerticesPartitions = Lists.partition(sourceVertices, PARTITION_SIZE);
+		final List<List<String>> sourceVerticesPartitions = Lists.partition(sourceVertices,
+				PARTITION_SIZE);
 		for (final List<String> sourceVerticesPartition : sourceVerticesPartitions) {
 
 			final Multimap<String, String> edgePartition = ArrayListMultimap.create();
@@ -224,7 +232,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
-	private void insertEdgesPartition(final Multimap<String, String> edges, final String type) throws IOException {
+	private void insertEdgesPartition(final Multimap<String, String> edges, final String type)
+			throws IOException {
 		final StringBuilder insertQueryBuilder = new StringBuilder("INSERT DATA {");
 		edgesToTriples(edges, type, insertQueryBuilder);
 		insertQueryBuilder.append("}");
@@ -235,21 +244,22 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 
 	// insert edges with verties
 
-	public void insertEdgeWithVertex(final String sourceURI, final String targetURI, final String edgeType, final String targetVertexType)
-			throws IOException {
+	public void insertEdgeWithVertex(final String sourceURI, final String targetURI,
+			final String edgeType, final String targetVertexType) throws IOException {
 		final Multimap<String, String> edges = HashMultimap.create();
 		edges.put(sourceURI, targetURI);
 		insertEdgesWithVertex(edges, edgeType, targetVertexType);
 	}
 
-	public void insertEdgesWithVertex(final Multimap<String, String> edges, final String edgeType, final String targetVertexType)
-			throws IOException {
+	public void insertEdgesWithVertex(final Multimap<String, String> edges, final String edgeType,
+			final String targetVertexType) throws IOException {
 		if (edges.isEmpty()) {
 			return;
 		}
 
 		final ArrayList<String> sourceVertices = new ArrayList<>(edges.keySet());
-		final List<List<String>> sourceVerticesPartitions = Lists.partition(sourceVertices, PARTITION_SIZE);
+		final List<List<String>> sourceVerticesPartitions = Lists.partition(sourceVertices,
+				PARTITION_SIZE);
 		for (final List<String> sourceVerticesPartition : sourceVerticesPartitions) {
 
 			final Multimap<String, String> edgePartition = ArrayListMultimap.create();
@@ -263,13 +273,14 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 
 	}
 
-	private void insertEdgesWithVertexPartition(final Multimap<String, String> edges, final String edgeType, final String targetVertexType)
-			throws IOException {
+	private void insertEdgesWithVertexPartition(final Multimap<String, String> edges,
+			final String edgeType, final String targetVertexType) throws IOException {
 		final StringBuilder insertQueryBuilder = new StringBuilder(SPARQL_RDF_PREFIX);
 		insertQueryBuilder.append("INSERT DATA {");
 		edgesToTriples(edges, edgeType, insertQueryBuilder);
 		for (final String targetVertex : edges.values()) {
-			insertQueryBuilder.append(String.format(". %s rdf:type %s", brackets(targetVertex), brackets(targetVertexType)));
+			insertQueryBuilder.append(String.format(". %s rdf:type %s", brackets(targetVertex),
+					brackets(targetVertexType)));
 		}
 		insertQueryBuilder.append("}");
 
@@ -279,13 +290,15 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 
 	// update properties
 
-	public void updateProperty(final String vertex, final String type, final Object value) throws IOException {
+	public void updateProperty(final String vertex, final String type, final Object value)
+			throws IOException {
 		final Map<String, Object> properties = new HashMap<>();
 		properties.put(vertex, value);
 		updateProperties(properties, type);
 	}
 
-	public void updateProperties(final Map<String, Object> properties, final String type) throws IOException {
+	public void updateProperties(final Map<String, Object> properties, final String type)
+			throws IOException {
 		if (properties.isEmpty()) {
 			return;
 		}
@@ -305,7 +318,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		}
 	}
 
-	private void updatePropertiesPartition(final Map<String, Object> properties, final String type) throws IOException {
+	private void updatePropertiesPartition(final Map<String, Object> properties, final String type)
+			throws IOException {
 		final StringBuilder updateQueryBuilder = new StringBuilder(SPARQL_RDF_PREFIX);
 		int i = 0;
 
@@ -314,8 +328,9 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 			final String vertex = property.getKey();
 
 			i++;
-			updateQueryBuilder.append(String.format("DELETE { %s %s ?a%d } WHERE { %s %s ?a%d }; ", brackets(vertex), brackets(type), i,
-					brackets(vertex), brackets(type), i));
+			updateQueryBuilder.append(String.format(
+					"DELETE { %s %s ?a%d } WHERE { %s %s ?a%d }; ", brackets(vertex),
+					brackets(type), i, brackets(vertex), brackets(type), i));
 		}
 
 		// insert
@@ -329,7 +344,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 			}
 			final String vertex = property.getKey();
 			final String value = RDFUtil.toLiteral(property.getValue());
-			updateQueryBuilder.append(String.format(" %s %s %s ", brackets(vertex), brackets(type), value));
+			updateQueryBuilder.append(String.format(" %s %s %s ", brackets(vertex),
+					brackets(type), value));
 		}
 		updateQueryBuilder.append("}");
 
@@ -366,12 +382,14 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 			// DELETE WHERE { x } not yet supported, use DELETE { x } WHERE { x }
 			i++;
 			// delete "incoming edges"
-			deleteQueryBuilder.append(String.format("DELETE { ?a%d ?b%d %s } WHERE { ?a%d ?b%d %s }; ", i, i, brackets(vertex), i, i,
-					brackets(vertex)));
+			deleteQueryBuilder.append(String.format(
+					"DELETE { ?a%d ?b%d %s } WHERE { ?a%d ?b%d %s }; ", i, i,
+					brackets(vertex), i, i, brackets(vertex)));
 			i++;
 			// delete "outgoing edges" and "properties"
-			deleteQueryBuilder.append(String.format("DELETE { %s ?a%d ?b%d } WHERE { %s ?a%d ?b%d }; ", brackets(vertex), i, i,
-					brackets(vertex), i, i));
+			deleteQueryBuilder.append(String.format(
+					"DELETE { %s ?a%d ?b%d } WHERE { %s ?a%d ?b%d }; ", brackets(vertex),
+					i, i, brackets(vertex), i, i));
 		}
 
 		runUpdate(deleteQueryBuilder.toString());
@@ -379,7 +397,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 
 	// delete edges
 
-	public void deleteEdge(final String sourceVertexURI, final String targetVertexURI, final String type) throws IOException {
+	public void deleteEdge(final String sourceVertexURI, final String targetVertexURI, final String type)
+			throws IOException {
 		final Multimap<String, String> edges = HashMultimap.create();
 		edges.put(sourceVertexURI, targetVertexURI);
 		deleteEdges(edges, type);
@@ -393,7 +412,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		deleteEdgesPartition(edges, type);
 	}
 
-	private void deleteEdgesPartition(final Multimap<String, String> edges, final String type) throws IOException {
+	private void deleteEdgesPartition(final Multimap<String, String> edges, final String type)
+			throws IOException {
 		final StringBuilder deleteQueryBuilder = new StringBuilder("DELETE DATA {");
 		edgesToTriples(edges, type, deleteQueryBuilder);
 		deleteQueryBuilder.append("}");
@@ -418,7 +438,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 		return insertQueryBuilder;
 	}
 
-	protected void edgesToTriples(final Multimap<String, String> edges, final String edgeLabel, final StringBuilder insertQueryBuilder) {
+	protected void edgesToTriples(final Multimap<String, String> edges, final String edgeLabel,
+			final StringBuilder insertQueryBuilder) {
 		boolean first = true;
 		for (final Entry<String, String> edge : edges.entries()) {
 			if (first) {
@@ -429,7 +450,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 			final String sourceVertex = edge.getKey();
 			final String targetVertex = edge.getValue();
 
-			insertQueryBuilder.append(String.format(" %s %s %s ", brackets(sourceVertex), brackets(edgeLabel), brackets(targetVertex)));
+			insertQueryBuilder.append(String.format(" %s %s %s ", brackets(sourceVertex),
+					brackets(edgeLabel), brackets(targetVertex)));
 		}
 	}
 

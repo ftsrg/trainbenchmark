@@ -34,7 +34,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 			final ModificationMethod modificationMethod, final long modificationConstant,
 			final boolean javaApi, final ModelType modelType) {
 		super(NEO4J, scenario, size, runIndex, query, iterationCount, modificationMethod,
-				modificationConstant, false, modelType);
+				modificationConstant, modelType);
 		this.javaApi = javaApi;
 	}
 

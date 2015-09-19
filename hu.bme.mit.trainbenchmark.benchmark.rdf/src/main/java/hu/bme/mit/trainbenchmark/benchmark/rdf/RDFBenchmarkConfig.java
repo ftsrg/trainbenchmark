@@ -33,7 +33,7 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 			final ModificationMethod modificationMethod, final long modificationConstant,
 			final ModelType modelType) {
 		super(className, scenario, size, runIndex, query, iterationCount, modificationMethod,
-				modificationConstant, false, modelType);
+				modificationConstant, modelType);
 	}
 
 	@Override
