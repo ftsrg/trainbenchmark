@@ -27,7 +27,7 @@ def build(config, formats, skip_tests):
 
 
 def build_ci():
-    cmd_ci = ["mvn", "clean", "install", "-P", "ci"]
+    cmd_ci = ["mvn", "clean", "install", "-P", "ci", "--fail-at-end"]
     subprocess.check_call(cmd_ci)
     # skip the tests for tools with third-party dependencies
     cmd_notest = ["mvn", "clean", "install", "-P", "notest", "-DskipTests"]
