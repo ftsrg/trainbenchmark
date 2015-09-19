@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
+import java.io.IOException;
+import java.util.Comparator;
+
 import hu.bme.mit.incquerydcore.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
@@ -20,9 +23,6 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-
-import java.io.IOException;
-import java.util.Comparator;
 
 public class IQDCoreBenchmarkCase extends
 		AbstractBenchmarkCase<IQDCoreMatch, Long> {

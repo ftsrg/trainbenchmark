@@ -11,6 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import hu.bme.mit.incquerydcore.WildcardInput;
 import hu.bme.mit.incquerydcore.trainbenchmark.ConnectedSegments;
 import hu.bme.mit.incquerydcore.trainbenchmark.PosLength;
@@ -22,12 +27,6 @@ import hu.bme.mit.incquerydcore.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import scala.collection.Iterator;
 import scala.collection.immutable.Vector;
 
@@ -36,8 +35,7 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 	protected WildcardInput iqdInput;
 	protected TrainbenchmarkQuery checker;
 
-	public IQDCoreChecker(final WildcardInput iqdDriver,
-			final RDFBenchmarkConfig rdfbc) throws IOException {
+	public IQDCoreChecker(final WildcardInput iqdDriver, final RDFBenchmarkConfig rdfbc) throws IOException {
 		super(rdfbc);
 		this.iqdInput = iqdDriver;
 		switch (rdfbc.getQuery()) {
@@ -68,9 +66,8 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 	@Override
 	public Collection<IQDCoreMatch> check() throws IOException {
 		final List<IQDCoreMatch> matches = new ArrayList<>();
-		
-		Iterator<Vector<Object>> resultIterator = checker.getResults()
-				.iterator();
+
+		final Iterator<Vector<Object>> resultIterator = checker.getResults().iterator();
 		while (resultIterator.hasNext()) {
 			final Vector<Object> qs = resultIterator.next();
 			final IQDCoreMatch match = IQDCoreMatch.createMatch(query, qs);
@@ -78,6 +75,7 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 		}
 		return matches;
 	}
+
 	public void shutdown() {
 		checker.shutdown();
 	}

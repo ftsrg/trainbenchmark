@@ -30,7 +30,7 @@ public abstract class IQDCoreTransformation<M> extends Transformation<M> {
 		this.input = input;
 	}
 
-	public static Transformation<?> newInstance(WildcardInput input, final Query query, final Scenario scenario) {
+	public static Transformation<?> newInstance(final WildcardInput input, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case BATCH:
 		case REPAIR:
