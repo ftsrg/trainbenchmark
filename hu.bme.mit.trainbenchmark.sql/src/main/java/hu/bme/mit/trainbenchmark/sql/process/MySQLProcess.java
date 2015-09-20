@@ -20,11 +20,18 @@ public class MySQLProcess {
 		stopSQLProcess();
 
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "sudo", "service", "mysql", "start" };
-		final Process pr = rt.exec(command);
-		pr.waitFor();
-		if (pr.exitValue() != 0) {
+		final String[] commandStart = { "sudo", "service", "mysql", "start" };
+		final Process prStart = rt.exec(commandStart);
+		prStart.waitFor();
+		if (prStart.exitValue() != 0) {
 			throw new IOException("Failed to start MySQL process");
+		}
+
+		final String[] commandSetHeapSize = { "/bin/bash", "-c", "echo \"SET GLOBAL max_heap_table_size=1073741824;\" | mysql -u root" };
+		final Process processSetHeapSize = rt.exec(commandSetHeapSize);
+		processSetHeapSize.waitFor();
+		if (prStart.exitValue() != 0) {
+			throw new IOException("Failed to set max_heap_table_size");
 		}
 	}
 
