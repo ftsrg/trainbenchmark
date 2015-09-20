@@ -20,9 +20,9 @@ public class Util {
 		final long nModify = bc.getModificationConstant();
 
 		switch (bc.getModificationMethod()) {
-		case CONSTANT:
+		case FIXED:
 			return nModify;
-		case RESULT_SET:
+		case PROPORTIONAL:
 			return resultSize / nModify;
 		default:
 			return 0;
