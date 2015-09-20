@@ -3,7 +3,8 @@ language: java
 jdk:
   - oraclejdk8
 install:
-  - scripts/initialize.sh
+  - scripts/init-config.sh
+  - scripts/init-python.sh
   - scripts/dep-mondo-sam.sh
   - scripts/dep-neo4j.sh
   - scripts/dep-allegro.sh

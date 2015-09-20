@@ -68,7 +68,13 @@ scripts/dep-mondo-sam.sh`
 Initialize the Python environment:
 
 ```bash
-scripts/initialize.sh
+scripts/init-python.sh
+```
+
+Initialize the configuration file:
+
+```bash
+scripts/init-config.sh
 ```
 
 ### Usage
