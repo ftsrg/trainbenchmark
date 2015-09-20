@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.PASSWORD;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -28,11 +29,18 @@ public class MySQLDriver extends SQLDriver {
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
 		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "/bin/bash", "-c",
-				"mysql -u " + USER + " < " + modelPathWithoutExtension + getPostfix() };
+		final String modelPath = modelPathWithoutExtension + getPostfix();
+		final File modelFile = new File(modelPath);
+		if (!modelFile.exists()) {
+			throw new IOException("Model does not exist: " + modelPath);
+		}
+		final String[] command = { "/bin/bash", "-c", "mysql -u " + USER + " < " + modelPath };
 
 		final Process pr = rt.exec(command);
 		pr.waitFor();
+		if (pr.exitValue() != 0) {
+			throw new IOException("MySQL process returned non-zero exit value: " + pr.exitValue());
+		}
 		connection = DriverManager.getConnection(url, USER, PASSWORD);
 	}
 
