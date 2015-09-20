@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 public abstract class TestBenchmarkInitializer<T extends AbstractBenchmarkLogic> {
 
 	protected final int size = 1;
-	protected final ModificationMethod modificationMethod = ModificationMethod.CONSTANT;
+	protected final ModificationMethod modificationMethod = ModificationMethod.FIXED;
 	protected final int modificationConstant = 2;
 	protected final int runIndex = 1;
 	protected final int iterationCount = 1;

@@ -63,7 +63,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 		// modification constants
 		options.addOption(MODIFICATION_METHOD, true,
-				"options: constant -- modify a fixed number of elements, resultSet -- modify based a number of elements based on the size of the results set");
+				"options: fixed -- modify a fixed number of elements, proportional -- modify based a number of elements based on the size of the results set");
 		options.addOption(ITERATION_COUNT, true, "number of modify-check iterations");
 		options.addOption(MODIFICATION_CONSTANT, true, "modification constant for the modification method");
 	}
@@ -75,17 +75,17 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		final String modificationMethodString = cmd.getOptionValue(MODIFICATION_METHOD);
 		if (modificationMethodString != null) {
 			switch (modificationMethodString) {
-			case "constant":
-				modificationMethod = ModificationMethod.CONSTANT;
+			case "fixed":
+				modificationMethod = ModificationMethod.FIXED;
 				break;
-			case "resultSet":
-				modificationMethod = ModificationMethod.RESULT_SET;
+			case "proportional":
+				modificationMethod = ModificationMethod.PROPORTIONAL;
 				break;
 			default:
 				throw new ParseException("Invalid modification method specified");
 			}
 		} else {
-			modificationMethod = ModificationMethod.CONSTANT;
+			modificationMethod = ModificationMethod.FIXED;
 		}
 
 		runs = new Integer(cmd.getOptionValue(RUNS));
