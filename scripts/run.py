@@ -20,7 +20,7 @@ def build(config, formats, skip_tests):
 
     profiles_arg = ",".join(profiles)
 
-    cmd = ["mvn", "clean", "install", "-P", profiles_arg]
+    cmd = ["mvn", "clean", "install", "-P", profiles_arg, "--fail-at-end"]
     if skip_tests:
         cmd.append("-DskipTests")
     subprocess.check_call(cmd)
@@ -30,7 +30,7 @@ def build_ci():
     cmd_ci = ["mvn", "clean", "install", "-P", "ci", "--fail-at-end"]
     subprocess.check_call(cmd_ci)
     # skip the tests for tools with third-party dependencies
-    cmd_notest = ["mvn", "clean", "install", "-P", "notest", "-DskipTests"]
+    cmd_notest = ["mvn", "clean", "install", "-P", "notest", "-DskipTests", "--fail-at-end"]
     subprocess.check_call(cmd_notest)
 
 
