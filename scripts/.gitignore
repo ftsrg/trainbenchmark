@@ -5,3 +5,4 @@ __pycache__/*
 tb-env/
 init/*.zip
 log/
+get-pip.py
