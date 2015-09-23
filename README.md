@@ -47,9 +47,20 @@ The framework provides a set of scripts for building the projects, generating th
 ### Prerequisites
 
 * 64-bit operating system (we recommend Ubuntu-based Linux systems)
+
+### Environment
+
 * [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 * Python 3
+
+Provided that you start with a fresh Ubuntu server installation, you may use the provided install scripts:
+
+```bash
+scripts/init-jdk.sh && \
+scripts/init-maven.sh && \
+scripts/init-python.sh
+```
 
 Certain tools need to be installed manually:
 
@@ -57,24 +68,14 @@ Certain tools need to be installed manually:
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql)
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso)
 
+
 ### Installation guide
 
-Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam):
+Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam) and initialize the configuration file:
 
 ```bash
-scripts/dep-mondo-sam.sh`
-```
-
-Initialize the Python environment:
-
-```bash
-scripts/init-python.sh
-```
-
-Initialize the configuration file:
-
-```bash
-scripts/init-config.sh
+scripts/init-config.sh && \
+scripts/dep-mondo-sam.sh
 ```
 
 ### Usage
