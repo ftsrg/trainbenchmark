@@ -42,7 +42,7 @@ The benchmark projects are responsible for running the benchmarks.
 
 ## Getting started
 
-The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.json` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
+The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.yml` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
 ### Installation guide
 
