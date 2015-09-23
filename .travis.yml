@@ -3,13 +3,15 @@ language: java
 jdk:
   - oraclejdk8
 install:
+# initializations
   - scripts/init-config.sh
   - scripts/init-python.sh
-  - scripts/dep-mondo-sam.sh
-  - scripts/dep-neo4j.sh
+  - scripts/init-mondo-sam.sh
+# dependencies
   - scripts/dep-allegro.sh
-  - scripts/dep-incqueryd-core.sh
+  - scripts/dep-neo4j.sh
   - scripts/dep-virtuoso.sh
+  - scripts/dep-iqdcore.sh
   - scripts/run.py --ci
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
