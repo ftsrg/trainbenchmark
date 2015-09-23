@@ -48,9 +48,9 @@ The framework provides a set of scripts for building the projects, generating th
 
 The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linux systems.
 
-
-
 ### Environment
+
+Make sure that you have the following environments.
 
 * [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
@@ -64,17 +64,23 @@ Provided that you start with a fresh Ubuntu server installation, you may use the
 scripts/init-jdk.sh && \
 scripts/init-maven.sh && \
 scripts/init-python.sh && \
-scripts/dep-mondo-sam.sh \
-scripts/init-config.sh &&
+scripts/init-mondo-sam.sh && \
+scripts/init-config.sh
 ```
 
-Certain tools need to be installed manually:
+Certain tools need to be installed manually. For details, please follow their README file:
 
 * [Allegro](hu.bme.mit.trainbenchmark.benchmark.allegro)
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql)
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso)
 
 Certain tools have dependencies that should be installed, either by buildin from source or by deploying them to your local Maven repository.
+
+```bash
+scripts/dep-allegro.sh && \
+scripts/dep-neo4j.sh && \
+scripts/dep-virtuoso.sh
+```
 
 ### Usage
 
