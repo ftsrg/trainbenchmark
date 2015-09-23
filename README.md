@@ -44,9 +44,11 @@ The benchmark projects are responsible for running the benchmarks.
 
 The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.json` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
 
-### Prerequisites
+### Installation guide
 
-* 64-bit operating system (we recommend Ubuntu-based Linux systems)
+The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linux systems.
+
+
 
 ### Environment
 
@@ -54,12 +56,16 @@ The framework provides a set of scripts for building the projects, generating th
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 * Python 3
 
+Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam) and initialize the configuration file.
+
 Provided that you start with a fresh Ubuntu server installation, you may use the provided install scripts:
 
 ```bash
 scripts/init-jdk.sh && \
 scripts/init-maven.sh && \
-scripts/init-python.sh
+scripts/init-python.sh && \
+scripts/dep-mondo-sam.sh \
+scripts/init-config.sh &&
 ```
 
 Certain tools need to be installed manually:
@@ -68,15 +74,7 @@ Certain tools need to be installed manually:
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql)
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso)
 
-
-### Installation guide
-
-Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam) and initialize the configuration file:
-
-```bash
-scripts/init-config.sh && \
-scripts/dep-mondo-sam.sh
-```
+Certain tools have dependencies that should be installed, either by buildin from source or by deploying them to your local Maven repository.
 
 ### Usage
 
