@@ -13,6 +13,9 @@ import argparse
 import yaml
 import util
 
+import os
+import glob
+
 def build(config, formats, skip_tests):
     profiles = {"core"}
     profiles = profiles.union(formats)
@@ -75,6 +78,12 @@ def measure(config):
             for scenario in config["scenarios"]:
                 for query in config["queries"]:
                     for size in config["sizes"]:
+                        
+                        # remove all files in the temporary results directory
+                        prev_files = glob.glob('../results/json/*')
+                        for f in prev_files:
+                            os.remove(f)
+
                         print("Running benchmark... " +
                               "runs: " + str(config["runs"]) +
                               ", tool: " + tool +
@@ -96,6 +105,13 @@ def measure(config):
                         except subprocess.CalledProcessError:
                             print("An error occured, skipping larger sizes for this tool/scenario/query.")
                             break
+
+                        # if the runs were successful, move all files to the results
+                        result_files = glob.glob('../results/json/*')
+                        for f in result_files:
+                            name = os.path.basename(f)
+                            os.rename(f, '../results/completed/' + name)
+
             util.set_working_directory("..")
 
 
