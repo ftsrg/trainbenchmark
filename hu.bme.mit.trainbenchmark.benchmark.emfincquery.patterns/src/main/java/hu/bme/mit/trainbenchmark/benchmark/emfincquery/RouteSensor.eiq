@@ -8,10 +8,10 @@ pattern RouteSensor(route, sensor, swP, sw)
 	SwitchPosition.^switch(swP, sw);
 	TrackElement.sensor(sw, sensor);
 	
-	neg find inverseRouteDefinition(sensor, route);	
+	neg find inverseDefinedBy(sensor, route);	
 }
 
-pattern inverseRouteDefinition(sensor, route)
+pattern inverseDefinedBy(sensor, route)
 {
 	Route.definedBy(route, sensor);
 }

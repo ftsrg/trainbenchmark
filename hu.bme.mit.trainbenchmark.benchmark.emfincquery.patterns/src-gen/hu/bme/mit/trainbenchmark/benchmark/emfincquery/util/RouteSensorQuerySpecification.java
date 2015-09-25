@@ -3,7 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.util;
 import com.google.common.collect.Sets;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseRouteDefinitionQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseDefinedByQuerySpecification;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -122,7 +122,7 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
       	new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
       	new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor")));
       	new Equality(body, var__virtual_2_, var_sensor);
-      	new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseRouteDefinitionQuerySpecification.instance().getInternalQueryRepresentation());
+      	new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseDefinedByQuerySpecification.instance().getInternalQueryRepresentation());
       	bodies.add(body);
       }
       	// to silence compiler error

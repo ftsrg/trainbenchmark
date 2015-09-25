@@ -11,29 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Segment;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;
+
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EclipseOCLConnectedSegmentsChecker extends EclipseOCLChecker<EMFConnectedSegmentsMatch> {
 
 	public EclipseOCLConnectedSegmentsChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		super(driver, bc);
-	}
-
-	@Override
-	protected EClassifier getContext() {
-		return RailwayPackage.eINSTANCE.getSensor();
 	}
 
 	@Override
@@ -49,7 +42,8 @@ public class EclipseOCLConnectedSegmentsChecker extends EclipseOCLChecker<EMFCon
 			final Segment segment4 = (Segment) tuple.getValue("segment4");
 			final Segment segment5 = (Segment) tuple.getValue("segment5");
 			final Segment segment6 = (Segment) tuple.getValue("segment6");
-			final EMFConnectedSegmentsMatch match = new EMFConnectedSegmentsMatch(sensor, segment1, segment2, segment3, segment4, segment5, segment6);
+			final EMFConnectedSegmentsMatch match = new EMFConnectedSegmentsMatch(sensor, segment1, segment2, segment3, segment4, segment5,
+					segment6);
 			matches.add(match);
 		}
 

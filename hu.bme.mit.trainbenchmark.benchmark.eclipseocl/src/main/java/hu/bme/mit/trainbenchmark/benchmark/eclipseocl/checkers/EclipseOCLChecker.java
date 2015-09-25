@@ -11,23 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCL.Helper;
 import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.ecore.OCLExpression;
+
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 public abstract class EclipseOCLChecker<T extends EMFMatch> extends Checker<T> {
 
@@ -46,12 +46,10 @@ public abstract class EclipseOCLChecker<T extends EMFMatch> extends Checker<T> {
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
-		helper.setContext(getContext());
+		helper.setContext(RailwayPackage.eINSTANCE.getRailwayContainer());
 		final OCLExpression query = helper.createQuery(oclQuery);
 		queryEvaluator = ocl.createQuery(query);
 	}
-
-	protected abstract EClassifier getContext();
 
 	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		switch (bc.getQuery()) {
