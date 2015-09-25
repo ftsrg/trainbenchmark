@@ -11,31 +11,24 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.eclipse.ocl.util.Bag;
+import org.eclipse.ocl.util.Tuple;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.ocl.util.Bag;
-import org.eclipse.ocl.util.Tuple;
-
 public class EclipseOCLSwitchSetChecker extends EclipseOCLChecker<EMFSwitchSetMatch> {
 
 	public EclipseOCLSwitchSetChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		super(driver, bc);
-	}
-
-	@Override
-	protected EClassifier getContext() {
-		return RailwayPackage.eINSTANCE.getRoute();
 	}
 
 	@Override

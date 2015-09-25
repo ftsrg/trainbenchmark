@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseRouteDefinitionQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseDefinedByQuerySpecification;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import java.util.Arrays;
@@ -10,27 +10,27 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
 /**
- * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseRouteDefinition pattern,
- * to be used in conjunction with {@link InverseRouteDefinitionMatcher}.
+ * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseDefinedBy pattern,
+ * to be used in conjunction with {@link InverseDefinedByMatcher}.
  * 
  * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
  * Each instance is a (possibly partial) substitution of pattern parameters,
  * usable to represent a match of the pattern in the result of a query,
  * or to specify the bound (fixed) input parameters when issuing a query.
  * 
- * @see InverseRouteDefinitionMatcher
- * @see InverseRouteDefinitionProcessor
+ * @see InverseDefinedByMatcher
+ * @see InverseDefinedByProcessor
  * 
  */
 @SuppressWarnings("all")
-public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
+public abstract class InverseDefinedByMatch extends BasePatternMatch {
   private Sensor fSensor;
   
   private Route fRoute;
   
   private static List<String> parameterNames = makeImmutableList("sensor", "route");
   
-  private InverseRouteDefinitionMatch(final Sensor pSensor, final Route pRoute) {
+  private InverseDefinedByMatch(final Sensor pSensor, final Route pRoute) {
     this.fSensor = pSensor;
     this.fRoute = pRoute;
   }
@@ -76,12 +76,12 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
   
   @Override
   public String patternName() {
-    return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseRouteDefinition";
+    return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseDefinedBy";
   }
   
   @Override
   public List<String> parameterNames() {
-    return InverseRouteDefinitionMatch.parameterNames;
+    return InverseDefinedByMatch.parameterNames;
   }
   
   @Override
@@ -90,7 +90,7 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
   }
   
   @Override
-  public InverseRouteDefinitionMatch toImmutable() {
+  public InverseDefinedByMatch toImmutable() {
     return isMutable() ? newMatch(fSensor, fRoute) : this;
   }
   
@@ -117,7 +117,7 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
   public boolean equals(final Object obj) {
     if (this == obj)
     	return true;
-    if (!(obj instanceof InverseRouteDefinitionMatch)) { // this should be infrequent
+    if (!(obj instanceof InverseDefinedByMatch)) { // this should be infrequent
     	if (obj == null) {
     		return false;
     	}
@@ -129,7 +129,7 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
     		return false;
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
-    InverseRouteDefinitionMatch other = (InverseRouteDefinitionMatch) obj;
+    InverseDefinedByMatch other = (InverseDefinedByMatch) obj;
     if (fSensor == null) {if (other.fSensor != null) return false;}
     else if (!fSensor.equals(other.fSensor)) return false;
     if (fRoute == null) {if (other.fRoute != null) return false;}
@@ -138,9 +138,9 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
   }
   
   @Override
-  public InverseRouteDefinitionQuerySpecification specification() {
+  public InverseDefinedByQuerySpecification specification() {
     try {
-    	return InverseRouteDefinitionQuerySpecification.instance();
+    	return InverseDefinedByQuerySpecification.instance();
     } catch (IncQueryException ex) {
      	// This cannot happen, as the match object can only be instantiated if the query specification exists
      	throw new IllegalStateException (ex);
@@ -154,7 +154,7 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
    * @return the empty match.
    * 
    */
-  public static InverseRouteDefinitionMatch newEmptyMatch() {
+  public static InverseDefinedByMatch newEmptyMatch() {
     return new Mutable(null, null);
   }
   
@@ -167,7 +167,7 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static InverseRouteDefinitionMatch newMutableMatch(final Sensor pSensor, final Route pRoute) {
+  public static InverseDefinedByMatch newMutableMatch(final Sensor pSensor, final Route pRoute) {
     return new Mutable(pSensor, pRoute);
   }
   
@@ -180,11 +180,11 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
    * @return the (partial) match object.
    * 
    */
-  public static InverseRouteDefinitionMatch newMatch(final Sensor pSensor, final Route pRoute) {
+  public static InverseDefinedByMatch newMatch(final Sensor pSensor, final Route pRoute) {
     return new Immutable(pSensor, pRoute);
   }
   
-  private static final class Mutable extends InverseRouteDefinitionMatch {
+  private static final class Mutable extends InverseDefinedByMatch {
     Mutable(final Sensor pSensor, final Route pRoute) {
       super(pSensor, pRoute);
     }
@@ -195,7 +195,7 @@ public abstract class InverseRouteDefinitionMatch extends BasePatternMatch {
     }
   }
   
-  private static final class Immutable extends InverseRouteDefinitionMatch {
+  private static final class Immutable extends InverseDefinedByMatch {
     Immutable(final Sensor pSensor, final Route pRoute) {
       super(pSensor, pRoute);
     }

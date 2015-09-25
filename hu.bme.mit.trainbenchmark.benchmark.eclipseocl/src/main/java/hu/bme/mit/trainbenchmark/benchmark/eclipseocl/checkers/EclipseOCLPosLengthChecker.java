@@ -11,28 +11,21 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Segment;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;
+
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
 
 	public EclipseOCLPosLengthChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
 		super(driver, bc);
-	}
-
-	@Override
-	protected EClassifier getContext() {
-		return RailwayPackage.eINSTANCE.getSegment();
 	}
 
 	@Override

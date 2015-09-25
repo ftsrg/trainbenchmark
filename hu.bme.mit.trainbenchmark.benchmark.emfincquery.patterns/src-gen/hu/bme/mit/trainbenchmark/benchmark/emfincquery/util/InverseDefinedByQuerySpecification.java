@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.util;
 
 import com.google.common.collect.Sets;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseRouteDefinitionMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseRouteDefinitionMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseDefinedByMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseDefinedByMatcher;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -23,15 +23,15 @@ import org.eclipse.incquery.runtime.matchers.psystem.queries.QueryInitialization
 import org.eclipse.incquery.runtime.matchers.tuple.FlatTuple;
 
 /**
- * A pattern-specific query specification that can instantiate InverseRouteDefinitionMatcher in a type-safe way.
+ * A pattern-specific query specification that can instantiate InverseDefinedByMatcher in a type-safe way.
  * 
- * @see InverseRouteDefinitionMatcher
- * @see InverseRouteDefinitionMatch
+ * @see InverseDefinedByMatcher
+ * @see InverseDefinedByMatch
  * 
  */
 @SuppressWarnings("all")
-public final class InverseRouteDefinitionQuerySpecification extends BaseGeneratedEMFQuerySpecification<InverseRouteDefinitionMatcher> {
-  private InverseRouteDefinitionQuerySpecification() {
+public final class InverseDefinedByQuerySpecification extends BaseGeneratedEMFQuerySpecification<InverseDefinedByMatcher> {
+  private InverseDefinedByQuerySpecification() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -40,7 +40,7 @@ public final class InverseRouteDefinitionQuerySpecification extends BaseGenerate
    * @throws IncQueryException if the pattern definition could not be loaded
    * 
    */
-  public static InverseRouteDefinitionQuerySpecification instance() throws IncQueryException {
+  public static InverseDefinedByQuerySpecification instance() throws IncQueryException {
     try{
     	return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -49,34 +49,34 @@ public final class InverseRouteDefinitionQuerySpecification extends BaseGenerate
   }
   
   @Override
-  protected InverseRouteDefinitionMatcher instantiate(final IncQueryEngine engine) throws IncQueryException {
-    return InverseRouteDefinitionMatcher.on(engine);
+  protected InverseDefinedByMatcher instantiate(final IncQueryEngine engine) throws IncQueryException {
+    return InverseDefinedByMatcher.on(engine);
   }
   
   @Override
-  public InverseRouteDefinitionMatch newEmptyMatch() {
-    return InverseRouteDefinitionMatch.newEmptyMatch();
+  public InverseDefinedByMatch newEmptyMatch() {
+    return InverseDefinedByMatch.newEmptyMatch();
   }
   
   @Override
-  public InverseRouteDefinitionMatch newMatch(final Object... parameters) {
-    return InverseRouteDefinitionMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Route) parameters[1]);
+  public InverseDefinedByMatch newMatch(final Object... parameters) {
+    return InverseDefinedByMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Route) parameters[1]);
   }
   
   private static class LazyHolder {
-    private final static InverseRouteDefinitionQuerySpecification INSTANCE = make();
+    private final static InverseDefinedByQuerySpecification INSTANCE = make();
     
-    public static InverseRouteDefinitionQuerySpecification make() {
-      return new InverseRouteDefinitionQuerySpecification();					
+    public static InverseDefinedByQuerySpecification make() {
+      return new InverseDefinedByQuerySpecification();					
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static InverseRouteDefinitionQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private final static InverseDefinedByQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseRouteDefinition";
+      return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseDefinedBy";
     }
     
     @Override
