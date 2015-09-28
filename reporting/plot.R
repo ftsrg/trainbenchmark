@@ -34,16 +34,20 @@ derived.times <- ddply(
     recheck = sum(Recheck)
 )
 
+# adjust the function
+f = median
+#f = min
+
 derived.times <- ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName"), 
     summarize, 
-    initial.validation = median(initial.validation), 
-    revalidation = median(revalidation),
-    read = median(read),
-    check = median(check),
-    transformation = median(transformation),
-    recheck = median(recheck)
+    initial.validation = f(initial.validation),
+    revalidation = f(revalidation),
+    read = f(read),
+    check = f(check),
+    transformation = f(transformation),
+    recheck = f(recheck)
 )
 
 plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("initial.validation", "revalidation", "read", "check", "transformation", "recheck"))
