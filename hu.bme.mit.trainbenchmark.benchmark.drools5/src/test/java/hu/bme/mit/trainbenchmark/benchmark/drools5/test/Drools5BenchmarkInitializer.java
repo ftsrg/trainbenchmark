@@ -22,8 +22,8 @@ public class Drools5BenchmarkInitializer extends TestBenchmarkInitializer<Drools
 
 	@Override
 	protected Drools5BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("Drools5", scenario, size, runIndex, query, iterationCount, modificationMethod,
-				modificationConstant);
+		final BenchmarkConfig bc = new BenchmarkConfig("Drools5", scenario, size, runIndex, query, iterationCount, transformationStrategy,
+				transformationConstant);
 		return new Drools5BenchmarkLogic(bc);
 	}
 

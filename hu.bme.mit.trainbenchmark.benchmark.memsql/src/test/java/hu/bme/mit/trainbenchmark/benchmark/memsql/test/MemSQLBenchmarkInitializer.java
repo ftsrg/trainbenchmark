@@ -21,8 +21,8 @@ public class MemSQLBenchmarkInitializer extends TestBenchmarkInitializer<MemSQLB
 
 	@Override
 	protected MemSQLBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("MemSQL", scenario, size, runIndex, query, iterationCount, modificationMethod,
-				modificationConstant);
+		final BenchmarkConfig bc = new BenchmarkConfig("MemSQL", scenario, size, runIndex, query, iterationCount, transformationStrategy,
+				transformationConstant);
 		return new MemSQLBenchmarkLogic(bc);
 	}
 

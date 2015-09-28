@@ -21,7 +21,7 @@ public class OrientDbBenchmarkInitializer extends TestBenchmarkInitializer<Orien
 
 	@Override
 	protected OrientDbBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("OrientDb", scenario,  size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+		final BenchmarkConfig bc = new BenchmarkConfig("OrientDb", scenario,  size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 		return new OrientDbBenchmarkLogic(bc);
 	}
 

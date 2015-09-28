@@ -12,6 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.constants;
 
-public enum TransformationStategy {
+public enum TransformationStrategy {
 	FIXED, PROPORTIONAL,
 }

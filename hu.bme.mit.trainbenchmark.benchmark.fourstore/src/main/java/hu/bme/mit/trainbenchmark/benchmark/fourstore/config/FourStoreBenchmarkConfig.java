@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.config;
 
+import org.apache.commons.cli.ParseException;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 
@@ -25,14 +25,14 @@ public class FourStoreBenchmarkConfig extends BenchmarkConfig {
 	protected boolean cluster;
 	protected boolean showCommandOutput;
 	protected boolean showUpdateCommands;
-	
+
 	public FourStoreBenchmarkConfig(final String[] args, final String tool) throws ParseException {
 		super(args, tool);
 	}
 
 	public FourStoreBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
-		super(FOURSTORE, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
+			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant) {
+		super(FOURSTORE, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 	}
 
 	@Override

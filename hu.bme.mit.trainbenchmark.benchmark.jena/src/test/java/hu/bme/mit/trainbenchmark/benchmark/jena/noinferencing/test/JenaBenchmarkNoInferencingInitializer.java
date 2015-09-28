@@ -22,8 +22,8 @@ public class JenaBenchmarkNoInferencingInitializer extends TestBenchmarkInitiali
 
 	@Override
 	protected JenaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount, modificationMethod,
-				modificationConstant, false);
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount, transformationStrategy,
+				transformationConstant, false);
 		return new JenaBenchmarkLogic(rbc);
 	}
 
