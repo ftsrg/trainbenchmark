@@ -18,3 +18,4 @@ diagrams/*
 log/
 catalog-v*.xml
 .RData
+.Rproj.user

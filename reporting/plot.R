@@ -20,13 +20,30 @@ times <- dcast(times,
 
 derived.times <- times
 derived.times$read.and.check <- derived.times$Check + derived.times$Read
-derived.times$transform.and.recheck <- derived.times$Transformation + derived.times$Recheck
+derived.times$transformation.and.recheck <- derived.times$Transformation + derived.times$Recheck
 
 derived.times
-derived.times <- ddply(.data = derived.times, .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName", "RunIndex"), summarize, initial.validation = sum(read.and.check, na.rm = TRUE), revalidation = sum(transform.and.recheck))
-derived.times <- ddply(.data = derived.times, .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName"), summarize, initial.validation = median(initial.validation), revalidation = median(revalidation))
+derived.times <- ddply(
+    .data = derived.times, 
+    .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName", "RunIndex"), 
+    summarize, 
+    initial.validation = sum(read.and.check, na.rm = TRUE), 
+    transformation = sum(Transformation),
+    recheck = sum(Recheck),
+    revalidation = sum(transformation.and.recheck)
+)
 
-plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("initial.validation", "revalidation"))
+derived.times <- ddply(
+    .data = derived.times, 
+    .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName"), 
+    summarize, 
+    initial.validation = median(initial.validation), 
+    transformation = median(transformation),
+    recheck = median(recheck),
+    revalidation = median(revalidation)
+)
+
+plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("initial.validation", "transformation", "recheck", "revalidation"))
 
 trainBenchmarkPlot <- function(df, scenario, variable) {
   df <- df[df$Scenario == scenario & df$variable == variable, ]
@@ -58,6 +75,10 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
 
 trainBenchmarkPlot(plottimes, "Batch", "initial.validation")
 trainBenchmarkPlot(plottimes, "Inject", "initial.validation")
+trainBenchmarkPlot(plottimes, "Inject", "transformation")
+trainBenchmarkPlot(plottimes, "Inject", "recheck")
 trainBenchmarkPlot(plottimes, "Inject", "revalidation")
 trainBenchmarkPlot(plottimes, "Repair", "initial.validation")
+trainBenchmarkPlot(plottimes, "Repair", "transformation")
+trainBenchmarkPlot(plottimes, "Repair", "recheck")
 trainBenchmarkPlot(plottimes, "Repair", "revalidation")
