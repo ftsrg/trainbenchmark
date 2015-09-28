@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.config;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.TransformationStategy;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -30,7 +30,7 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant,
+			final int iterationCount, final TransformationStategy modificationMethod, final long modificationConstant,
 			final boolean localSearch) {
 		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 		this.localSearch = localSearch;

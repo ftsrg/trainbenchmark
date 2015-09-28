@@ -10,8 +10,8 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.config;
+package hu.bme.mit.trainbenchmark.constants;
 
-public enum ModificationMethod {
+public enum TransformationStategy {
 	FIXED, PROPORTIONAL,
 }
