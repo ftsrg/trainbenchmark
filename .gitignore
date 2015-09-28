@@ -17,3 +17,4 @@ diagrams/*
 .idea
 log/
 catalog-v*.xml
+.RData
