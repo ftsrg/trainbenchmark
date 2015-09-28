@@ -19,18 +19,19 @@ times <- dcast(times,
                value.var = "MetricValue")
 
 derived.times <- times
-derived.times$read.and.check <- derived.times$Check + derived.times$Read
+derived.times$read.and.check <- derived.times$Read + derived.times$Check
 derived.times$transformation.and.recheck <- derived.times$Transformation + derived.times$Recheck
 
-derived.times
 derived.times <- ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName", "RunIndex"), 
-    summarize, 
+    summarize,
     initial.validation = sum(read.and.check, na.rm = TRUE), 
+    revalidation = sum(transformation.and.recheck),
+    read = sum(Read, na.rm = TRUE),
+    check = sum(Check, na.rm = TRUE),
     transformation = sum(Transformation),
-    recheck = sum(Recheck),
-    revalidation = sum(transformation.and.recheck)
+    recheck = sum(Recheck)
 )
 
 derived.times <- ddply(
@@ -38,18 +39,21 @@ derived.times <- ddply(
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName"), 
     summarize, 
     initial.validation = median(initial.validation), 
+    revalidation = median(revalidation),
+    read = median(read),
+    check = median(check),
     transformation = median(transformation),
-    recheck = median(recheck),
-    revalidation = median(revalidation)
+    recheck = median(recheck)
 )
 
-plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("initial.validation", "transformation", "recheck", "revalidation"))
+plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("initial.validation", "revalidation", "read", "check", "transformation", "recheck"))
+
+# plot
 
 trainBenchmarkPlot <- function(df, scenario, variable) {
   df <- df[df$Scenario == scenario & df$variable == variable, ]
-  print(head(df))
-  df <- melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
   #print(head(df))
+  df <- melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
   
   ys = -10:10
   ybreaks = 10^ys
@@ -73,12 +77,24 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
   ggsave(file=paste("figures/", scenario, "-", variableFilename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
 }
 
+# aggregated plots
+
 trainBenchmarkPlot(plottimes, "Batch", "initial.validation")
+
 trainBenchmarkPlot(plottimes, "Inject", "initial.validation")
+trainBenchmarkPlot(plottimes, "Inject", "revalidation")
+
+trainBenchmarkPlot(plottimes, "Repair", "initial.validation")
+trainBenchmarkPlot(plottimes, "Repair", "revalidation")
+
+# detailed plots
+
+trainBenchmarkPlot(plottimes, "Inject", "read")
+trainBenchmarkPlot(plottimes, "Inject", "check")
 trainBenchmarkPlot(plottimes, "Inject", "transformation")
 trainBenchmarkPlot(plottimes, "Inject", "recheck")
-trainBenchmarkPlot(plottimes, "Inject", "revalidation")
-trainBenchmarkPlot(plottimes, "Repair", "initial.validation")
+
+trainBenchmarkPlot(plottimes, "Repair", "read")
+trainBenchmarkPlot(plottimes, "Repair", "check")
 trainBenchmarkPlot(plottimes, "Repair", "transformation")
 trainBenchmarkPlot(plottimes, "Repair", "recheck")
-trainBenchmarkPlot(plottimes, "Repair", "revalidation")
