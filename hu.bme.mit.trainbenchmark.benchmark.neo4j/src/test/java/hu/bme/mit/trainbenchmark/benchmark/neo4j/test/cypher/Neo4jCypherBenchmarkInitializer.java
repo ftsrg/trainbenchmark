@@ -22,8 +22,8 @@ public class Neo4jCypherBenchmarkInitializer extends TestBenchmarkInitializer<Ne
 
 	@Override
 	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final Neo4jBenchmarkConfig nbc = new Neo4jBenchmarkConfig(scenario, size, 1, query, iterationCount, modificationMethod,
-				modificationConstant, false);
+		final Neo4jBenchmarkConfig nbc = new Neo4jBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
+				transformationConstant, false);
 		return new Neo4jBenchmarkLogic(nbc);
 	}
 

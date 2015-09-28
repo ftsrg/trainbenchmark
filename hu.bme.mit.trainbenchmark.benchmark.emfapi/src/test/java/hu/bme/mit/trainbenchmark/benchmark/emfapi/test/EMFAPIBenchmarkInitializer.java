@@ -23,7 +23,7 @@ public class EMFAPIBenchmarkInitializer extends TestBenchmarkInitializer<EMFAPIB
 	@Override
 	protected EMFAPIBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final BenchmarkConfig bc = new BenchmarkConfig("EMFAPI", scenario, size, 1, query, iterationCount,
-				modificationMethod, modificationConstant);
+				transformationStrategy, transformationConstant);
 		return new EMFAPIBenchmarkLogic(bc);
 	}
 

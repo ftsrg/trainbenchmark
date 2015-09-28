@@ -22,7 +22,7 @@ public class EMFIncQueryBenchmarkLocalSearchInitializer extends TestBenchmarkIni
 	@Override
 	protected EMFIncQueryBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query, iterationCount,
-				modificationMethod, modificationConstant, true);
+				transformationStrategy, transformationConstant, true);
 		return new EMFIncQueryBenchmarkLogic(eiqbc);
 	}
 

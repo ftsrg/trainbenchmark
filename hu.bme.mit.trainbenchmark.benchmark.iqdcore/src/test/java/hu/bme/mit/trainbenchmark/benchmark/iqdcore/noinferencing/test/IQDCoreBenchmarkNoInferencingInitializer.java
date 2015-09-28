@@ -22,8 +22,8 @@ public class IQDCoreBenchmarkNoInferencingInitializer extends TestBenchmarkIniti
 
 	@Override
 	protected IQDCoreBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("IQDCore", scenario, size, 1, query, iterationCount, modificationMethod,
-				modificationConstant, false);
+		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("IQDCore", scenario, size, 1, query, iterationCount, transformationStrategy,
+				transformationConstant, false);
 		return new IQDCoreBenchmarkLogic(rbc);
 	}
 

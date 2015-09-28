@@ -17,7 +17,7 @@ import org.apache.commons.cli.ParseException;
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.constants.TransformationStategy;
+import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class BenchmarkConfig extends TrainBenchmarkConfig {
 
@@ -29,8 +29,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	// this must be specified by the user
 	protected int runs;
 
-	// modification constants
-	protected TransformationStategy transformationStrategy = TransformationStategy.FIXED;
+	// constants for trhe transformation
+	protected TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
 	protected long transformationConstant = 1;
 	protected int iterationCount = 10;
 
@@ -42,7 +42,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	}
 
 	public BenchmarkConfig(final String className, final Scenario scenario, final int size, final int runs, final Query query,
-			final int iterationCount, final TransformationStategy transformationStrategy, final long transformationConstant) {
+			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant) {
 		super(scenario, size);
 		this.className = className;
 		this.runs = runs;
@@ -63,7 +63,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		options.addOption(RUNS, true, "number of runs");
 		options.getOption(RUNS).setRequired(true);
 
-		// modification constants
+		// constants for the transformation
 		options.addOption(ITERATION_COUNT, true, "number of transformation-recheck iterations");
 		options.addOption(TRANSFORMATION_STRATEGY, true,
 				"options: fixed -- modify a fixed number of elements, proportional -- modify a percentage of the elements based on the size of the results set");
@@ -75,23 +75,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		if (cmd.hasOption(TRANSFORMATION_STRATEGY)) {
-			switch (cmd.getOptionValue(TRANSFORMATION_STRATEGY)) {
-			case "fixed":
-				transformationStrategy = TransformationStategy.FIXED;
-				break;
-			case "proportional":
-				transformationStrategy = TransformationStategy.PROPORTIONAL;
-				break;
-			default:
-				throw new ParseException("Invalid modification method specified");
-			}
-		}
-
 		runs = new Integer(cmd.getOptionValue(RUNS));
 
 		if (cmd.hasOption(ITERATION_COUNT)) {
 			iterationCount = new Integer(cmd.getOptionValue(ITERATION_COUNT));
+		}
+
+		if (cmd.hasOption(TRANSFORMATION_STRATEGY)) {
+			transformationStrategy = TransformationStrategy.valueOf(cmd.getOptionValue(TRANSFORMATION_STRATEGY).toUpperCase());
 		}
 
 		if (cmd.hasOption(TRANSFORMATION_CONSTANT)) {
@@ -99,11 +90,11 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		}
 	}
 
-	public TransformationStategy getModificationMethod() {
+	public TransformationStrategy getTransformationStrategy() {
 		return transformationStrategy;
 	}
 
-	public long getModificationConstant() {
+	public long getTransformationConstant() {
 		return transformationConstant;
 	}
 

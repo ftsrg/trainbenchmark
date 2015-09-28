@@ -23,7 +23,7 @@ public class FourStoreBenchmarkInitializer extends TestBenchmarkInitializer<Four
 	@Override
 	protected FourStoreBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final FourStoreBenchmarkConfig fsbc = new FourStoreBenchmarkConfig(scenario, size, "FourStore", runIndex, query, iterationCount,
-				modificationMethod, modificationConstant);
+				transformationStrategy, transformationConstant);
 		return new FourStoreBenchmarkLogic(fsbc);
 	}
 

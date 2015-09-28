@@ -17,15 +17,15 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 public class Util {
 
 	public static long calcModify(final BenchmarkConfig bc, final int resultSize) {
-		final long nModify = bc.getModificationConstant();
+		final long nModify = bc.getTransformationConstant();
 
-		switch (bc.getModificationMethod()) {
+		switch (bc.getTransformationStrategy()) {
 		case FIXED:
 			return nModify;
 		case PROPORTIONAL:
 			return resultSize / nModify;
 		default:
-			throw new UnsupportedOperationException("Modification method " + bc.getModificationMethod() + " not supported.");
+			throw new UnsupportedOperationException("Transformation strategy " + bc.getTransformationStrategy() + " not supported.");
 		}
 	}
 
