@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.config.ModificationMethod;
+import hu.bme.mit.trainbenchmark.constants.TransformationStategy;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -31,7 +31,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query, final int iterationCount,
-			final ModificationMethod modificationMethod, final long modificationConstant, final boolean coreApi) {
+			final TransformationStategy modificationMethod, final long modificationConstant, final boolean coreApi) {
 		super(NEO4J, scenario, size, runIndex, query, iterationCount, modificationMethod, modificationConstant);
 		this.coreApi = coreApi;
 	}

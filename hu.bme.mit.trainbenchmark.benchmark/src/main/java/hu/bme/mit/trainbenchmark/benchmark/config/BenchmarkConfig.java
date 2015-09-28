@@ -17,20 +17,21 @@ import org.apache.commons.cli.ParseException;
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.TransformationStategy;
 
 public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	protected static final String RUNS = "runs";
-	protected static final String MODIFICATION_CONSTANT = "modificationConstant";
 	protected static final String ITERATION_COUNT = "iterationCount";
-	protected static final String MODIFICATION_METHOD = "modificationMethod";
+	protected static final String TRANSFORMATION_CONSTANT = "transformationConstant";
+	protected static final String TRANSFORMATION_STRATEGY = "transformationStrategy";
 
 	// this must be specified by the user
 	protected int runs;
 
 	// modification constants
-	protected ModificationMethod modificationMethod = ModificationMethod.FIXED;
-	protected long modificationConstant = 1;
+	protected TransformationStategy transformationStrategy = TransformationStategy.FIXED;
+	protected long transformationConstant = 1;
 	protected int iterationCount = 10;
 
 	protected String className;
@@ -41,14 +42,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	}
 
 	public BenchmarkConfig(final String className, final Scenario scenario, final int size, final int runs, final Query query,
-			final int iterationCount, final ModificationMethod modificationMethod, final long modificationConstant) {
+			final int iterationCount, final TransformationStategy transformationStrategy, final long transformationConstant) {
 		super(scenario, size);
 		this.className = className;
 		this.runs = runs;
 		this.query = query;
 		this.iterationCount = iterationCount;
-		this.modificationMethod = modificationMethod;
-		this.modificationConstant = modificationConstant;
+		this.transformationStrategy = transformationStrategy;
+		this.transformationConstant = transformationConstant;
 	}
 
 	@Override
@@ -63,23 +64,24 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		options.getOption(RUNS).setRequired(true);
 
 		// modification constants
-		options.addOption(MODIFICATION_METHOD, true,
-				"options: fixed -- modify a fixed number of elements, proportional -- modify based a number of elements based on the size of the results set");
-		options.addOption(ITERATION_COUNT, true, "number of modify-check iterations");
-		options.addOption(MODIFICATION_CONSTANT, true, "modification constant for the modification method");
+		options.addOption(ITERATION_COUNT, true, "number of transformation-recheck iterations");
+		options.addOption(TRANSFORMATION_STRATEGY, true,
+				"options: fixed -- modify a fixed number of elements, proportional -- modify a percentage of the elements based on the size of the results set");
+		options.addOption(TRANSFORMATION_CONSTANT, true,
+				"transformation constant for the transformation method (number of elements for fixed strategy, percentage for proportional strategy)");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		if (cmd.hasOption(MODIFICATION_METHOD)) {
-			switch (cmd.getOptionValue(MODIFICATION_METHOD)) {
+		if (cmd.hasOption(TRANSFORMATION_STRATEGY)) {
+			switch (cmd.getOptionValue(TRANSFORMATION_STRATEGY)) {
 			case "fixed":
-				modificationMethod = ModificationMethod.FIXED;
+				transformationStrategy = TransformationStategy.FIXED;
 				break;
 			case "proportional":
-				modificationMethod = ModificationMethod.PROPORTIONAL;
+				transformationStrategy = TransformationStategy.PROPORTIONAL;
 				break;
 			default:
 				throw new ParseException("Invalid modification method specified");
@@ -92,17 +94,17 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 			iterationCount = new Integer(cmd.getOptionValue(ITERATION_COUNT));
 		}
 
-		if (cmd.hasOption(MODIFICATION_CONSTANT)) {
-			modificationConstant = new Long(cmd.getOptionValue(MODIFICATION_CONSTANT));
+		if (cmd.hasOption(TRANSFORMATION_CONSTANT)) {
+			transformationConstant = new Long(cmd.getOptionValue(TRANSFORMATION_CONSTANT));
 		}
 	}
 
-	public ModificationMethod getModificationMethod() {
-		return modificationMethod;
+	public TransformationStategy getModificationMethod() {
+		return transformationStrategy;
 	}
 
 	public long getModificationConstant() {
-		return modificationConstant;
+		return transformationConstant;
 	}
 
 	public int getIterationCount() {
