@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class Util {
 
-	public static long calcModify(BenchmarkConfig bc, int resultSize) {
+	public static long calcModify(final BenchmarkConfig bc, final int resultSize) {
 		final long nModify = bc.getModificationConstant();
 
 		switch (bc.getModificationMethod()) {
@@ -25,7 +25,7 @@ public class Util {
 		case PROPORTIONAL:
 			return resultSize / nModify;
 		default:
-			return 0;
+			throw new UnsupportedOperationException("Modification method " + bc.getModificationMethod() + " not supported.");
 		}
 	}
 

@@ -25,13 +25,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected static final String ITERATION_COUNT = "iterationCount";
 	protected static final String MODIFICATION_METHOD = "modificationMethod";
 
-	// modification constants
-	protected ModificationMethod modificationMethod;
-	protected long modificationConstant;
-
-	protected boolean benchmarkMode;
-	protected int iterationCount;
+	// this must be specified by the user
 	protected int runs;
+
+	// modification constants
+	protected ModificationMethod modificationMethod = ModificationMethod.FIXED;
+	protected long modificationConstant = 1;
+	protected int iterationCount = 10;
+
 	protected String className;
 
 	public BenchmarkConfig(final String args[], final String className) throws ParseException {
@@ -72,9 +73,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		final String modificationMethodString = cmd.getOptionValue(MODIFICATION_METHOD);
-		if (modificationMethodString != null) {
-			switch (modificationMethodString) {
+		if (cmd.hasOption(MODIFICATION_METHOD)) {
+			switch (cmd.getOptionValue(MODIFICATION_METHOD)) {
 			case "fixed":
 				modificationMethod = ModificationMethod.FIXED;
 				break;
@@ -84,27 +84,16 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 			default:
 				throw new ParseException("Invalid modification method specified");
 			}
-		} else {
-			modificationMethod = ModificationMethod.FIXED;
 		}
 
 		runs = new Integer(cmd.getOptionValue(RUNS));
 
-		final String iterationCountString = cmd.getOptionValue(ITERATION_COUNT);
-		if (iterationCountString != null) {
-			iterationCount = new Integer(iterationCountString);
-		} else {
-			iterationCount = 10;
+		if (cmd.hasOption(ITERATION_COUNT)) {
+			iterationCount = new Integer(cmd.getOptionValue(ITERATION_COUNT));
 		}
 
-		modificationConstant = determineModificationConstant(MODIFICATION_CONSTANT);
-	}
-
-	private long determineModificationConstant(final String optionName) {
-		if (cmd.getOptionValue(optionName) != null) {
-			return new Long(cmd.getOptionValue(optionName));
-		} else {
-			return 1;
+		if (cmd.hasOption(MODIFICATION_CONSTANT)) {
+			modificationConstant = new Long(cmd.getOptionValue(MODIFICATION_CONSTANT));
 		}
 	}
 

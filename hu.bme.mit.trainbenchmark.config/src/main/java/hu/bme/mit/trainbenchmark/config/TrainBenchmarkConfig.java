@@ -66,7 +66,7 @@ public abstract class TrainBenchmarkConfig {
 
 	protected void initOptions() {
 		options.addOption(HELP, false, "displays this text");
-		options.addOption(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair/Test");
+		options.addOption(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
 		options.getOption(SCENARIO).setRequired(true);
 		options.addOption(SIZE, true, "specifies model size, e.g. 4");
 		options.addOption(QUERY, true, "specifies the query, e.g. RouteSensor");
@@ -78,7 +78,6 @@ public abstract class TrainBenchmarkConfig {
 		scenario = Scenario.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
 
 		if (cmd.hasOption(QUERY)) {
-			// queries argument -> testCases list
 			query = Query.valueOf(cmd.getOptionValue(QUERY).toUpperCase());
 		}
 
