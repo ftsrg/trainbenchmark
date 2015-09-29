@@ -16,6 +16,9 @@ import util
 import os
 import glob
 
+import smtplib
+from email.mime.text import MIMEText
+
 def build(config, formats, skip_tests):
     profiles = {"core"}
     profiles = profiles.union(formats)
@@ -115,6 +118,24 @@ def measure(config):
             util.set_working_directory("..")
 
 
+def send_mail(config):
+    if "email" in config:
+        address = config["email"]["address"]
+        password = config["email"]["password"]
+        host = config["email"]["host"]
+
+        msg = MIMEText("<helpful information about the run>")
+        msg["Subject"] = "Trainbenchmark measurement ready"
+        msg["From"] = address
+        msg["To"] = address
+        
+        session = smtplib.SMTP(host)	 
+        session.ehlo()
+        session.starttls()
+        session.login(address, password)
+        session.sendmail(from_addr=address, to_addrs=[address], msg=msg.as_string())
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--ci",
@@ -164,3 +185,4 @@ if __name__ == "__main__":
         generate(config, formats)
     if args.measure:
         measure(config)
+        send_mail(config)
