@@ -19,3 +19,5 @@ log/
 catalog-v*.xml
 .RData
 .Rproj.user
+*.tar.gz
+*.zip
