@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
@@ -58,10 +59,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 		// the "size" and "query" options are required for the BenchmarkConfig but not required for the GeneratorConfig
 		options.getOption(SIZE).setRequired(true);
-		options.getOption(QUERY).setRequired(true);
+		final Option queryOption = options.getOption(QUERY);
+		queryOption.setRequired(true);
+		options.addOption(queryOption);
 
 		options.addOption(RUNS, true, "number of runs");
-		options.getOption(RUNS).setRequired(true);
+		final Option runOption = options.getOption(RUNS);
+		runOption.setRequired(true);
+		options.addOption(runOption);
 
 		// constants for the transformation
 		options.addOption(ITERATION_COUNT, true, "number of transformation-recheck iterations");

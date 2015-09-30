@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.config;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 
@@ -29,11 +29,23 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 		super(args, EMFINCQUERY);
 	}
 
+	// for Hawk
+	protected EMFIncQueryBenchmarkConfig(final String[] args, final String className) throws ParseException {
+		super(args, className);
+	}
+
 	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
 			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant,
 			final boolean localSearch) {
 		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 		this.localSearch = localSearch;
+	}
+
+	// for Hawk
+	protected EMFIncQueryBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex,
+			final Query query, final int iterationCount, final TransformationStrategy transformationStrategy,
+			final long transformationConstant, final boolean localSearch) {
+		super(className, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 	}
 
 	@Override

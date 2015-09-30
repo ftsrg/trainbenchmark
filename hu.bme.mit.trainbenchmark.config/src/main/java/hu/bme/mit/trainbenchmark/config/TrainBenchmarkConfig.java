@@ -19,6 +19,7 @@ import java.util.Arrays;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
@@ -66,8 +67,11 @@ public abstract class TrainBenchmarkConfig {
 
 	protected void initOptions() {
 		options.addOption(HELP, false, "displays this text");
-		options.addOption(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
-		options.getOption(SCENARIO).setRequired(true);
+
+		final Option scenarioOption = new Option(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
+		scenarioOption.setRequired(true);
+		options.addOption(scenarioOption);
+
 		options.addOption(SIZE, true, "specifies model size, e.g. 4");
 		options.addOption(QUERY, true, "specifies the query, e.g. RouteSensor");
 	}

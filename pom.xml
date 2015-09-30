@@ -167,11 +167,18 @@
 		</profile>
 		
 		<profile>
+			<id>hawk</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.hawk</module>
+			</modules>
+		</profile>
+
+		<profile>
 			<id>iqdcore</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.iqdcore</module>
 			</modules>
-        </profile>
+		</profile>
 		
 		<profile>
 			<id>jena</id>
