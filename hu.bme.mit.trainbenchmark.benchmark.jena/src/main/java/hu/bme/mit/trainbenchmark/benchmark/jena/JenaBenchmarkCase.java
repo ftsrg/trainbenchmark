@@ -30,8 +30,6 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 
 	@Override
 	protected void initialize() throws Exception {
-		super.initialize();
-
 		final RDFBenchmarkConfig rdfbc = (RDFBenchmarkConfig) bc;
 		driver = jenaDriver = new JenaDriver(rdfbc);
 		checker = new JenaChecker(jenaDriver, rdfbc);

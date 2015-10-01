@@ -32,7 +32,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.hawk</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.iqdcore</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>

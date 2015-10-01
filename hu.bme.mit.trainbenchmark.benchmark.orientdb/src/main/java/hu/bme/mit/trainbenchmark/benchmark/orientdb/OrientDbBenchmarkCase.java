@@ -33,8 +33,6 @@ public class OrientDbBenchmarkCase extends AbstractBenchmarkCase<OrientDbMatch, 
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
-
 		dbPath = bc.getWorkspacePath() + "models/orient-dbs/railway-database";
 		benchmarkDir = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
 		driver = orientDriver = new OrientDbDriver(dbPath, benchmarkDir);

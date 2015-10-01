@@ -35,7 +35,6 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
 		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
 
 		driver = eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());

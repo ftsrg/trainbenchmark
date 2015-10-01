@@ -24,40 +24,18 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public abstract class AbstractBenchmarkCase<M, T> {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	protected TransformationLogic<M, T, ?> transformationLogic;
+	protected Transformation<?> transformation;
+
 	protected BenchmarkConfig bc;
 	protected Driver<T> driver;
 	protected Checker<M> checker;
 	protected Collection<M> matches;
-	protected TransformationLogic<M, T, ?> transformationLogic;
-	protected Transformation<?> transformation;
-
-	public Collection<M> getMatches() {
-		return matches;
-	}
-
-	// shorthands
-	public Query getQuery() {
-		return bc.getQuery();
-	}
-
-	// these should be implemented for each tool
-
-	/**
-	 * Override this method to initialize the benchmark case
-	 * 
-	 * @throws Exception
-	 */
-	protected void initialize() throws Exception {
-	}
-
-	protected void destroy() throws Exception {
-	}
 
 	public final void benchmarkInitialize(final BenchmarkConfig bc) throws Exception {
 		this.bc = bc;
@@ -100,11 +78,6 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		if (driver != null) {
 			driver.destroy();
 		}
-		destroy();
-	}
-
-	public final void benchmarkModify(final PhaseResult phaseResult) throws Exception {
-		transformationLogic.performTransformation(phaseResult, matches);
 	}
 
 	protected final Comparator<?> getComparator() {
@@ -118,6 +91,18 @@ public abstract class AbstractBenchmarkCase<M, T> {
 			throw new UnsupportedOperationException();
 		}
 	}
+
+	public final void benchmarkModify(final PhaseResult phaseResult) throws Exception {
+		transformationLogic.performTransformation(phaseResult, matches);
+	}
+
+	public final Collection<M> getMatches() {
+		return matches;
+	}
+
+	// these should be implemented for each tool
+
+	protected abstract void initialize() throws Exception;
 
 	protected abstract Comparator<?> getMatchComparator();
 

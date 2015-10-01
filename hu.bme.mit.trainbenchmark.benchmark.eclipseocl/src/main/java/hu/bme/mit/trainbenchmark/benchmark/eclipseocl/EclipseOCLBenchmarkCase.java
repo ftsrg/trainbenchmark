@@ -23,8 +23,6 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchm
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
-
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, bc);
