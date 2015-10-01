@@ -96,8 +96,7 @@ public class SQLSerializer extends ModelSerializer {
 	}
 
 	public void compact() throws IOException, InterruptedException {
-		MySQLProcess.stopSQLProcess();
-		MySQLProcess.startSQLProcess();
+		MySQLProcess.startServer();
 
 		final Runtime rt = Runtime.getRuntime();
 		final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };

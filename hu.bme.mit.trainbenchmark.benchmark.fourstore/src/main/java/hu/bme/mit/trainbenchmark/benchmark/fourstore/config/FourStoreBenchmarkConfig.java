@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.fourstore.config;
 
 import org.apache.commons.cli.ParseException;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
-public class FourStoreBenchmarkConfig extends BenchmarkConfig {
+public class FourStoreBenchmarkConfig extends RDFBenchmarkConfig {
 
 	protected static final String FOURSTORE = "FourStore";
 

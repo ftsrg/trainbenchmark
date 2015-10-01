@@ -16,8 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
@@ -26,9 +24,8 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 	}
 
 	@Override
-	public void init() throws Exception {
-		super.init();
-		MySQLProcess.startSQLProcess();
+	public void initialize() throws Exception {
+		super.initialize();
 
 		driver = sqlDriver = new MySQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
@@ -36,11 +33,6 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 		if (bc.getScenario().hasTranformation()) {
 			transformation = SQLTransformation.newInstance(sqlDriver, bc);
 		}
-	}
-
-	@Override
-	protected void destroy() throws Exception {
-		driver.destroy();
 	}
 
 }

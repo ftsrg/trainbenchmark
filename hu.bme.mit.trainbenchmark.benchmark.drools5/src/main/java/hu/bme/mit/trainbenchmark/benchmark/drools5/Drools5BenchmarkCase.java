@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.checkers.Drools5Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
@@ -23,8 +22,8 @@ public class Drools5BenchmarkCase extends EMFBenchmarkCase {
 	protected Drools5Driver drools5driver;
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
+	public void initialize() throws Exception {
+		super.initialize();
 		driver = drools5driver = new Drools5Driver(bc);
 		checker = new Drools5Checker(drools5driver, bc.getQuery());
 

@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
-import java.io.IOException;
 import java.util.Comparator;
 
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -24,16 +23,16 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource> {
 
 	protected JenaDriver jenaDriver;
-	protected RDFBenchmarkConfig rdfbc;
 
 	@Override
-	protected void init() throws IOException {
-		this.rdfbc = (RDFBenchmarkConfig) bc;
+	protected void initialize() throws Exception {
+		super.initialize();
+
+		final RDFBenchmarkConfig rdfbc = (RDFBenchmarkConfig) bc;
 		driver = jenaDriver = new JenaDriver(rdfbc);
 		checker = new JenaChecker(jenaDriver, rdfbc);
 

@@ -53,7 +53,6 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 				matches.remove(match);
 			}
 		}, false);
-
 	}
 
 }

@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
-import java.io.IOException;
 import java.util.Comparator;
 
 import org.apache.log4j.Level;
@@ -19,7 +18,6 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
@@ -36,13 +34,9 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 	}
 
 	@Override
-	public void init() throws IOException {
+	public void initialize() throws Exception {
+		super.initialize();
 		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
-	}
-
-	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
 
 		driver = eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
 		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getEMFIncQueryBenchmarkConfig(), eiqDriver, bc.getQuery());
