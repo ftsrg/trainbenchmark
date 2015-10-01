@@ -16,8 +16,9 @@ import java.io.IOException;
 
 public class MySQLProcess {
 
-	public static void startSQLProcess() throws IOException, InterruptedException {
-		stopSQLProcess();
+	public static void startServer() throws IOException, InterruptedException {
+		// make sure MySQL is not running
+		stopServer();
 
 		final Runtime rt = Runtime.getRuntime();
 		final String[] commandStart = { "sudo", "service", "mysql", "start" };
@@ -27,6 +28,7 @@ public class MySQLProcess {
 			throw new IOException("Failed to start MySQL process");
 		}
 
+		// increase the heap size to avoid "table full" errors
 		final String[] commandSetHeapSize = { "/bin/bash", "-c", "echo \"SET GLOBAL max_heap_table_size=1073741824;\" | mysql -u root" };
 		final Process processSetHeapSize = rt.exec(commandSetHeapSize);
 		processSetHeapSize.waitFor();
@@ -35,7 +37,7 @@ public class MySQLProcess {
 		}
 	}
 
-	public static void stopSQLProcess() throws IOException, InterruptedException {
+	public static void stopServer() throws IOException, InterruptedException {
 		final Runtime rt = Runtime.getRuntime();
 		final String[] command = { "sudo", "service", "mysql", "stop" };
 		final Process pr = rt.exec(command);

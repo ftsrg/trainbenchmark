@@ -48,27 +48,26 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	// these should be implemented for each tool
 
-	protected void init() throws Exception {
-
+	/**
+	 * Override this method to initialize the benchmark case
+	 * 
+	 * @throws Exception
+	 */
+	protected void initialize() throws Exception {
 	}
 
 	protected void destroy() throws Exception {
-		if (checker != null) {
-			checker.destroy();
-		}
-		if (driver != null) {
-			driver.destroy();
-		}
 	}
 
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
+	public final void benchmarkInitialize(final BenchmarkConfig bc) throws Exception {
 		this.bc = bc;
-		init();
+		initialize();
+		driver.initialize();
 	}
 
-	public void benchmarkInitTransformation() {
+	public final void benchmarkInitializeTransformation() {
 		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
-		if (transformationLogic != null) {
+		if (bc.getScenario().hasTranformation()) {
 			transformationLogic.initialize(bc, driver, random);
 		}
 		transformationLogic.setTransformation(transformation);
@@ -76,7 +75,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	// benchmark methods
 
-	public void benchmarkRead(final PhaseResult phaseResult) throws Exception {
+	public final void benchmarkRead(final PhaseResult phaseResult) throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		timer.startMeasure();
 		driver.read(bc.getModelPathNameWithoutExtension());
@@ -84,7 +83,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		phaseResult.addMetrics(timer);
 	}
 
-	public void benchmarkCheck(final PhaseResult phaseResult) throws Exception {
+	public final void benchmarkCheck(final PhaseResult phaseResult) throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		final ScalarMetric results = new ScalarMetric("Matches");
 		timer.startMeasure();
@@ -94,11 +93,17 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		phaseResult.addMetrics(timer, results);
 	}
 
-	public void benchmarkDestroy() throws Exception {
+	public final void benchmarkDestroy() throws Exception {
+		if (checker != null) {
+			checker.destroy();
+		}
+		if (driver != null) {
+			driver.destroy();
+		}
 		destroy();
 	}
 
-	public void benchmarkModify(final PhaseResult phaseResult) throws Exception {
+	public final void benchmarkModify(final PhaseResult phaseResult) throws Exception {
 		transformationLogic.performTransformation(phaseResult, matches);
 	}
 

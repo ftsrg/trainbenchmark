@@ -25,20 +25,20 @@
 			</activation>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark</module>
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.blazegraph</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.drools5</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.drools6</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module> -->
+				<module>hu.bme.mit.trainbenchmark.benchmark.blazegraph</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.hawk</module>
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.iqdcore</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.jena</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.mysql</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.rdf</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.sesame</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.sql</module> -->
+				<module>hu.bme.mit.trainbenchmark.benchmark.iqdcore</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.rdf</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.emf.model</module>

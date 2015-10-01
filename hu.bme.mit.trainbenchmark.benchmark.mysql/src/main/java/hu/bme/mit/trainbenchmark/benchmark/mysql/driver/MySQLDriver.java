@@ -45,11 +45,17 @@ public class MySQLDriver extends SQLDriver {
 	}
 
 	@Override
+	public void initialize() throws Exception {
+		MySQLProcess.startServer();
+	}
+
+	@Override
 	public void destroy() throws SQLException, IOException, InterruptedException {
 		if (connection != null) {
 			connection.close();
 		}
-		MySQLProcess.stopSQLProcess();
+
+		MySQLProcess.stopServer();
 	}
 
 }

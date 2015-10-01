@@ -13,9 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EMFAPIChecker;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
@@ -24,8 +22,8 @@ import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 public class EMFAPIBenchmarkCase extends EMFBenchmarkCase {
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
+	public void initialize() throws Exception {
+		super.initialize();
 
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
