@@ -12,21 +12,18 @@
 package hu.bme.mit.trainbenchmark.benchmark.hawk;
 
 import java.io.IOException;
-import java.util.Comparator;
 
-import org.apache.log4j.Level;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.driver.HawkDriver;
 
 public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBenchmarkCase<M> {
 
-	protected HawkDriver<M> eiqDriver;
+	protected HawkDriver<M> hawkDriver;
 
 	protected HawkBenchmarkConfig getHawkBenchmarkConfig() {
 		return (HawkBenchmarkConfig) bc;
@@ -35,18 +32,18 @@ public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBe
 	@Override
 	public void init() throws IOException {
 		super.init();
-		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
 	}
 
 	@Override
 	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
 		super.benchmarkInit(bc);
 
-	}
+		final HawkBenchmarkConfig hbc = (HawkBenchmarkConfig) bc;
+		driver = eiqDriver = hawkDriver = new HawkDriver<>(hbc);
+		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getHawkBenchmarkConfig(), hawkDriver, bc.getQuery());
+		checker = eiqChecker;
 
-	@Override
-	protected Comparator<?> getMatchComparator() {
-		return new EMFIncQueryMatchComparator();
+		hawkDriver.registerChecker(eiqChecker);
 	}
 
 }

@@ -11,10 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map.Entry;
@@ -30,6 +26,10 @@ import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchB
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
+
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFDriver {
 
