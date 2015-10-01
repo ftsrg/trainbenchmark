@@ -30,6 +30,8 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	// this must be specified by the user
 	protected int runs;
 
+	protected final String toolName;
+
 	// constants for trhe transformation
 	protected TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
 	protected long transformationConstant = 1;
@@ -37,15 +39,15 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	protected String className;
 
-	public BenchmarkConfig(final String args[], final String className) throws ParseException {
+	public BenchmarkConfig(final String toolName, final String args[]) throws ParseException {
 		super(args);
-		this.className = className;
+		this.toolName = toolName;
 	}
 
-	public BenchmarkConfig(final String className, final Scenario scenario, final int size, final int runs, final Query query,
+	public BenchmarkConfig(final String toolName, final Scenario scenario, final int size, final int runs, final Query query,
 			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant) {
 		super(scenario, size);
-		this.className = className;
+		this.toolName = toolName;
 		this.runs = runs;
 		this.query = query;
 		this.iterationCount = iterationCount;
@@ -111,11 +113,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return runs;
 	}
 
-	public String getClassName() {
-		return className;
-	}
-
-	public String getTool() {
-		return getClassName();
+	public String getToolName() {
+		return toolName;
 	}
 }

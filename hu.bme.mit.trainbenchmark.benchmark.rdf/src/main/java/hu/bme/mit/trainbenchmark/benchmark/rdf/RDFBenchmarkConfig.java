@@ -15,17 +15,17 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	protected static final String INFERENCING = "inferencing";
 	protected boolean inferencing;
 
-	public RDFBenchmarkConfig(final String[] args, final String className) throws ParseException {
-		super(args, className);
+	public RDFBenchmarkConfig(final String[] args, final String toolName) throws ParseException {
+		super(toolName, args);
 	}
 
 	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex, final Query query,
@@ -54,7 +54,7 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	@Override
-	public String getTool() {
-		return super.getTool() + (isInferencing() ? "-Inferencing" : "-NoInferencing");
+	public String getToolName() {
+		return super.getToolName() + (isInferencing() ? "-Inferencing" : "-NoInferencing");
 	}
 }

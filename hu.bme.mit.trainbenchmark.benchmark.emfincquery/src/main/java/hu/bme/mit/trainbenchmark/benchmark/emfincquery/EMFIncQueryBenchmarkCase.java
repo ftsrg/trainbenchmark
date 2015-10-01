@@ -17,7 +17,8 @@ import org.apache.log4j.Level;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
@@ -25,7 +26,8 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchC
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
+public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
+		extends AbstractBenchmarkCaseRunner<M, RailwayElement, EMFIncQueryDriver<M>> {
 
 	protected EMFIncQueryDriver<M> eiqDriver;
 
@@ -41,15 +43,16 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getEMFIncQueryBenchmarkConfig(), eiqDriver, bc.getQuery());
 		checker = eiqChecker;
 		eiqDriver.registerChecker(eiqChecker);
-
-		if (bc.getScenario().hasTranformation()) {
-			transformation = EMFIncQueryTransformation.newInstance(eiqDriver, bc.getQuery(), bc.getScenario());
-		}
 	}
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
 		return new EMFIncQueryMatchComparator();
+	}
+
+	@Override
+	protected Transformation<?> getTransformation() {
+		return EMFIncQueryTransformation.newInstance(eiqDriver, bc.getQuery(), bc.getScenario());
 	}
 
 }

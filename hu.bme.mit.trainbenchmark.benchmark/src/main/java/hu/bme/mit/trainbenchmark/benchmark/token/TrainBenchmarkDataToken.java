@@ -13,13 +13,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.token;
 
 import eu.mondo.sam.core.DataToken;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class TrainBenchmarkDataToken implements DataToken {
 
-	protected AbstractBenchmarkCase<?, ?> benchmarkCase;
-	protected BenchmarkConfig config;
+	protected AbstractBenchmarkCaseRunner<?, ?, ?> benchmarkCaseRunner;
+	protected BenchmarkConfig benchmarkConfig;
 
 	@Override
 	public void init() {
@@ -29,20 +29,20 @@ public class TrainBenchmarkDataToken implements DataToken {
 	public void destroy() {
 	}
 
-	public AbstractBenchmarkCase<?, ?> getBenchmarkCase() {
-		return benchmarkCase;
+	public AbstractBenchmarkCaseRunner<?, ?, ?> getBenchmarkCase() {
+		return benchmarkCaseRunner;
 	}
 
-	public void setBenchmarkCase(final AbstractBenchmarkCase<?, ?> benchmarkCase) {
-		this.benchmarkCase = benchmarkCase;
+	public void setBenchmarkCaseRunner(final AbstractBenchmarkCaseRunner<?, ?, ?> benchmarkCaseRunner) {
+		this.benchmarkCaseRunner = benchmarkCaseRunner;
 	}
 
-	public BenchmarkConfig getConfig() {
-		return config;
+	public BenchmarkConfig getBenchmarkConfig() {
+		return benchmarkConfig;
 	}
 
-	public void setConfig(final BenchmarkConfig config) {
-		this.config = config;
+	public void setBenchmarkConfig(final BenchmarkConfig config) {
+		this.benchmarkConfig = config;
 	}
 
 }

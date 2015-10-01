@@ -16,11 +16,15 @@ import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+
 public class MySQLBenchmarkMain {
 
 	public static void main(final String[] args) throws IOException, ParseException, InterruptedException {
-		 final MySQLBenchmarkLogic benchmarkLogic = new MySQLBenchmarkLogic(args);
-		 benchmarkLogic.runBenchmark();
+		final BenchmarkConfig bc = new BenchmarkConfig("MySQL", args);
+		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new MySQLBenchmarkCase());
+		benchmarkLogic.runBenchmark();
 	}
 
 }

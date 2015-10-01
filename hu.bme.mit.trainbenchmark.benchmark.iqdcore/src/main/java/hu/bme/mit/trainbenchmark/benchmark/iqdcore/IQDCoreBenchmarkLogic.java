@@ -15,9 +15,9 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 
-public class IQDCoreBenchmarkLogic extends AbstractBenchmarkLogic {
+public class IQDCoreBenchmarkLogic extends BenchmarkLogic {
 
 	protected RDFBenchmarkConfig rbc;
 

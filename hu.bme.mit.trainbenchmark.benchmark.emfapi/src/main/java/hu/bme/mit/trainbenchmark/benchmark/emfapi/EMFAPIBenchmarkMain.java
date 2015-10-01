@@ -15,10 +15,14 @@ import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+
 public class EMFAPIBenchmarkMain {
 
 	public static void main(final String[] args) throws IOException, ParseException {
-		final EMFAPIBenchmarkLogic benchmarkLogic = new EMFAPIBenchmarkLogic(args);
+		final BenchmarkConfig bc = new BenchmarkConfig("EMF API", args);
+		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new EMFAPIBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 }

@@ -12,12 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
+import java.io.IOException;
 import java.util.Comparator;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -26,7 +28,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 
-public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> {
+public class Neo4jBenchmarkCase extends AbstractBenchmarkCaseRunner<Neo4jMatch, Node, Neo4jDriver> {
 
 	protected GraphDatabaseService graphDb;
 	protected String dbPath;
@@ -44,10 +46,11 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 		} else {
 			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
 		}
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	protected Transformation<?> getTransformation() throws IOException {
+		return Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());
 	}
 
 	@Override

@@ -11,19 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.incremental;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class EMFIncQueryBenchmarkInitializerIncremental extends TestBenchmarkInitializer<EMFIncQueryBenchmarkLogic> {
+public class EMFIncQueryBenchmarkInitializerIncremental extends TestBenchmarkInitializer {
 
 	@Override
-	protected EMFIncQueryBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query, iterationCount,
 				transformationStrategy, transformationConstant, false);
-		return new EMFIncQueryBenchmarkLogic(eiqbc);
+		return new BenchmarkLogic(eiqbc, new EMFIncQueryBenchmarkCase());
 	}
 
 }

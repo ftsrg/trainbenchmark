@@ -26,12 +26,12 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	protected boolean localSearch;
 
 	public EMFIncQueryBenchmarkConfig(final String[] args) throws ParseException {
-		super(args, EMFINCQUERY);
+		super(EMFINCQUERY, args);
 	}
 
 	// for Hawk
-	protected EMFIncQueryBenchmarkConfig(final String[] args, final String className) throws ParseException {
-		super(args, className);
+	protected EMFIncQueryBenchmarkConfig(final String[] args, final String toolName) throws ParseException {
+		super(toolName, args);
 	}
 
 	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
@@ -67,7 +67,7 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	@Override
-	public String getTool() {
+	public String getToolName() {
 		if (isLocalSearch()) {
 			return "EMFIncQuery-LocalSearch";
 		} else {

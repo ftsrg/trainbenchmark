@@ -16,10 +16,14 @@ import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+
 public class VirtuosoBenchmarkMain {
 
-	public static void main(String[] args) throws ParseException, IOException {
-		VirtuosoBenchmarkLogic benchmarkLogic = new VirtuosoBenchmarkLogic(args);
+	public static void main(final String[] args) throws ParseException, IOException {
+		final RDFBenchmarkConfig rdfbc = new RDFBenchmarkConfig(args, "Virtuoso");
+		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(rdfbc, new VirtuosoBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

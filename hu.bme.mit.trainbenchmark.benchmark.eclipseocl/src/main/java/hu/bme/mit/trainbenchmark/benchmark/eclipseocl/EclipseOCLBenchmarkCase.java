@@ -11,6 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
+import java.io.IOException;
+
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLChecker;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
@@ -19,17 +22,17 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase {
+public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase<EMFDriver> {
 
 	@Override
 	public void initialize() throws Exception {
-		final EMFDriver emfDriver = new EMFDriver();
-		driver = emfDriver;
-		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, bc);
+		driver = new EMFDriver();
+		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(driver, bc);
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	protected Transformation<?> getTransformation() throws IOException {
+		return EMFTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 
 }

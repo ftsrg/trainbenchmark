@@ -12,12 +12,17 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
+import java.io.IOException;
+import java.util.Comparator;
+
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 
-public class MySQLBenchmarkCase extends SQLBenchmarkCase {
+public class MySQLBenchmarkCase extends SQLBenchmarkCase<MySQLDriver> {
 
 	public MySQLBenchmarkCase() {
 		super();
@@ -25,12 +30,18 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 	@Override
 	public void initialize() throws Exception {
-		driver = sqlDriver = new MySQLDriver();
-		checker = new SQLChecker(sqlDriver, bc);
+		driver = new MySQLDriver();
+		checker = new SQLChecker(driver, bc);
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = SQLTransformation.newInstance(sqlDriver, bc);
-		}
+	@Override
+	protected Transformation<?> getTransformation() throws IOException {
+		return SQLTransformation.newInstance(driver, bc);
+	}
+
+	@Override
+	protected Comparator<?> getMatchComparator() {
+		return new LongMatchComparator();
 	}
 
 }

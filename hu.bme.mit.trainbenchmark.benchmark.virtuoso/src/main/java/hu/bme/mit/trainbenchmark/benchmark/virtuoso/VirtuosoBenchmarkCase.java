@@ -12,9 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
 
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.VirtuosoDriver;
 
 public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
@@ -23,12 +23,9 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 	protected void initialize() throws Exception {
 		super.initialize();
 
-		driver = sesameDriver = new VirtuosoDriver(rdfbc);
-		checker = new SesameChecker(sesameDriver, rdfbc);
-
-		if (bc.getScenario().hasTranformation()) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
-		}
+		final RDFBenchmarkConfig rdfbc = (RDFBenchmarkConfig) bc;
+		driver = new VirtuosoDriver(rdfbc);
+		checker = new SesameChecker(driver, rdfbc);
 	}
 
 }

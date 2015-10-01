@@ -12,19 +12,20 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.test.core;
 
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class Neo4jCoreAPIBenchmarkInitializer extends TestBenchmarkInitializer<Neo4jBenchmarkLogic> {
+public class Neo4jCoreAPIBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected Neo4jBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, runIndex, query, iterationCount,
-				transformationStrategy, transformationConstant, true);
-		return new Neo4jBenchmarkLogic(rbc);
+	protected BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, runIndex, query, iterationCount, transformationStrategy,
+				transformationConstant, true);
+		return new BenchmarkLogic(rbc, new Neo4jBenchmarkCase());
 	}
 
 }

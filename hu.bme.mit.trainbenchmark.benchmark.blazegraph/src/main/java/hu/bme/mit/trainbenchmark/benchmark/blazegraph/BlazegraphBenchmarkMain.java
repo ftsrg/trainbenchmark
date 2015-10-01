@@ -16,10 +16,14 @@ import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+
 public class BlazegraphBenchmarkMain {
 
 	public static void main(final String[] args) throws ParseException, IOException {
-		final BlazegraphBenchmarkLogic benchmarkLogic = new BlazegraphBenchmarkLogic(args);
+		final RDFBenchmarkConfig bc = new RDFBenchmarkConfig(args, "Blazegraph");
+		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new BlazegraphBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 
