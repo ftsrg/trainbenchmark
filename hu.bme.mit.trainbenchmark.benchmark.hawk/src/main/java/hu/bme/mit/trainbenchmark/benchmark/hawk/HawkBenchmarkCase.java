@@ -20,17 +20,16 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.driver.HawkDriver;
-import hu.bme.mit.trainbenchmark.benchmark.hawk.matches.HawkMatchComparator;
 
 public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBenchmarkCase<M> {
 
 	protected HawkDriver<M> eiqDriver;
 
-	@Override
-	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
-		return (EMFIncQueryBenchmarkConfig) bc;
+	protected HawkBenchmarkConfig getHawkBenchmarkConfig() {
+		return (HawkBenchmarkConfig) bc;
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBe
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
-		return new HawkMatchComparator();
+		return new EMFIncQueryMatchComparator();
 	}
 
 }

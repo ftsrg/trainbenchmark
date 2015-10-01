@@ -9,15 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.incremental;
 
+package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class EMFIncQueryInjectIncrementalTest extends InjectTest {
+public class HawkBatchIncrementalTest extends BatchTest {
 
-	public EMFIncQueryInjectIncrementalTest() {
-		bi = new EMFIncQueryBenchmarkInitializerIncremental();
+	public HawkBatchIncrementalTest() {
+		bi = new HawkBenchmarkInitializer();
 	}
 
 }
