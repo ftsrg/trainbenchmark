@@ -9,15 +9,14 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test.localsearch;
+package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+public class HawkRepairIncrementalTest extends RepairTest {
 
-public class EMFIncQueryInjectLocalSearchTest extends InjectTest {
-
-	public EMFIncQueryInjectLocalSearchTest() {
-		bi = new EMFIncQueryBenchmarkLocalSearchInitializer();
+	public HawkRepairIncrementalTest() {
+		bi = new HawkBenchmarkInitializer();
 	}
 
 }
