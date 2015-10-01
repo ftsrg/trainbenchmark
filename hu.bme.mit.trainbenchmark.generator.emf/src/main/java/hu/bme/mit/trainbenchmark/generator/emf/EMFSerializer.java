@@ -60,7 +60,7 @@ public class EMFSerializer extends ModelSerializer {
 
 	@Override
 	public void initModel() {
-		final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".emf";
+		final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".xmi";
 		final URI resourceURI = FileBroker.getEMFUri(fileName);
 
 		final ResourceSet resourceSet = new ResourceSetImpl();

@@ -11,12 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -29,6 +23,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 public class EMFDriver extends Driver<RailwayElement> {
 
@@ -52,7 +52,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 
 	@Override
 	public String getPostfix() {
-		return "emf";
+		return "xmi";
 	}
 
 	@Override
