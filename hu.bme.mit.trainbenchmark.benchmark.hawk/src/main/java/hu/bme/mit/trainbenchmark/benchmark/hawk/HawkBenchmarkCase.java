@@ -39,7 +39,7 @@ public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBe
 		super.benchmarkInit(bc);
 
 		final HawkBenchmarkConfig hbc = (HawkBenchmarkConfig) bc;
-		driver = eiqDriver = hawkDriver = new HawkDriver<>(hbc);
+		driver = hawkDriver = new HawkDriver<>(hbc);
 		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getHawkBenchmarkConfig(), hawkDriver, bc.getQuery());
 		checker = eiqChecker;
 
