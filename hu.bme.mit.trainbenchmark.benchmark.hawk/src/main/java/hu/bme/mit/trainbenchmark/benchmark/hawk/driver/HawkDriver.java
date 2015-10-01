@@ -11,22 +11,49 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.driver;
 
-import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
+import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
+import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
+import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
+import org.eclipse.incquery.runtime.api.IncQueryEngine;
+import org.eclipse.incquery.runtime.api.IncQueryMatcher;
+import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
+import org.eclipse.incquery.runtime.emf.EMFScope;
+
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 
-public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryDriver<M> {
+public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDriver<M> {
 
 	protected HawkBenchmarkConfig hbc;
 
 	public HawkDriver(final HawkBenchmarkConfig hbc) {
-		super(hbc);
 		this.hbc = hbc;
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
+
+		final EMFScope emfScope = new EMFScope(resource);
+		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
+
+		final IncQueryMatcher<M> matcher = checker.getMatcher();
+		final Collection<M> matches = matcher.getAllMatches();
+		checker.setMatches(matches);
+
+		engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<M>() {
+			@Override
+			public void notifyAppearance(final M match) {
+				matches.add(match);
+			}
+
+			@Override
+			public void notifyDisappearance(final M match) {
+				matches.remove(match);
+			}
+		}, false);
+
 	}
+
 }
