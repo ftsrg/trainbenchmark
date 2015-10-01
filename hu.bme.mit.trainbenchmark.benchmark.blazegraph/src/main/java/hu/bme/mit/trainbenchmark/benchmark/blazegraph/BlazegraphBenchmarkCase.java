@@ -12,7 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
@@ -23,12 +25,14 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 	protected void initialize() throws Exception {
 		super.initialize();
 
-		driver = sesameDriver = new BlazegraphDriver(rdfbc);
-		checker = new SesameChecker(sesameDriver, rdfbc);
+		final RDFBenchmarkConfig rdfbc = (RDFBenchmarkConfig) bc;
+		driver = new BlazegraphDriver(rdfbc);
+		checker = new SesameChecker(driver, rdfbc);
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	protected Transformation<?> getTransformation() {
+		return SesameTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 
 }

@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
-public abstract class TestBenchmarkInitializer<T extends AbstractBenchmarkLogic> {
+public abstract class TestBenchmarkInitializer {
 
 	protected final int size = 1;
 	protected final TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
@@ -25,6 +25,6 @@ public abstract class TestBenchmarkInitializer<T extends AbstractBenchmarkLogic>
 	protected final int runIndex = 1;
 	protected final int iterationCount = 1;
 
-	protected abstract T initializeBenchmark(Query query, Scenario scenario);
+	protected abstract BenchmarkLogic initializeBenchmark(Query query, Scenario scenario);
 
 }

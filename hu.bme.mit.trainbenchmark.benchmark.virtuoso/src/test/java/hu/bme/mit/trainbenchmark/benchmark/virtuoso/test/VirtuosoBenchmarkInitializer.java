@@ -13,18 +13,19 @@
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoBenchmarkCase;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class VirtuosoBenchmarkInitializer extends TestBenchmarkInitializer<VirtuosoBenchmarkLogic> {
+public class VirtuosoBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected VirtuosoBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Virtuoso", scenario, size, runIndex, query, iterationCount,
+	protected BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final RDFBenchmarkConfig rdfbc = new RDFBenchmarkConfig("Virtuoso", scenario, size, runIndex, query, iterationCount,
 				transformationStrategy, transformationConstant, false);
-		return new VirtuosoBenchmarkLogic(rbc);
+		return new BenchmarkLogic(rdfbc, new VirtuosoBenchmarkCase());
 	}
 
 }

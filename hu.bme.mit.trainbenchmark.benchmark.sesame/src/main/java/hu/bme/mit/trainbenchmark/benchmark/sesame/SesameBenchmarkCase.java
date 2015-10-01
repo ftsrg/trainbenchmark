@@ -16,7 +16,8 @@ import java.util.Comparator;
 
 import org.openrdf.model.URI;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
@@ -24,26 +25,23 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI> {
-
-	protected SesameDriver sesameDriver;
-	protected RDFBenchmarkConfig rdfbc;
+public class SesameBenchmarkCase extends AbstractBenchmarkCaseRunner<SesameMatch, URI, SesameDriver> {
 
 	@Override
 	protected void initialize() throws Exception {
-		this.rdfbc = (RDFBenchmarkConfig) bc;
-
-		driver = sesameDriver = new SesameDriver(rdfbc);
-		checker = new SesameChecker(sesameDriver, rdfbc);
-
-		if (bc.getScenario().hasTranformation()) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
-		}
+		final RDFBenchmarkConfig rdfbc = (RDFBenchmarkConfig) bc;
+		driver = new SesameDriver(rdfbc);
+		checker = new SesameChecker(driver, rdfbc);
 	}
 
 	@Override
 	protected Comparator<?> getMatchComparator() {
 		return new SesameMatchComparator();
+	}
+
+	@Override
+	protected Transformation<?> getTransformation() {
+		return SesameTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 
 }

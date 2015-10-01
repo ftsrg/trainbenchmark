@@ -15,6 +15,8 @@ package hu.bme.mit.trainbenchmark.benchmark.allegro;
 import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.benchmark.allegro.driver.AllegroDriver;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
@@ -23,14 +25,14 @@ public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
 	protected void initialize() throws IOException {
-		this.initialize();
+		final RDFBenchmarkConfig rdfbc = (RDFBenchmarkConfig) bc;
+		driver = new AllegroDriver(rdfbc);
+		checker = new SesameChecker(driver, rdfbc);
+	}
 
-		driver = sesameDriver = new AllegroDriver(rdfbc);
-		checker = new SesameChecker(sesameDriver, rdfbc);
-
-		if (bc.getScenario().hasTranformation()) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	protected Transformation<?> getTransformation() {
+		return SesameTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 
 }

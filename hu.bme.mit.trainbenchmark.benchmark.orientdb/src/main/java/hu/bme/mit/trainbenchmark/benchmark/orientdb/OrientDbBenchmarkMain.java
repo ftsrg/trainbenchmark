@@ -15,10 +15,14 @@ import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+
 public class OrientDbBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		OrientDbBenchmarkLogic benchmarkLogic = new OrientDbBenchmarkLogic(args);
+	public static void main(final String[] args) throws IOException, ParseException {
+		final BenchmarkConfig bc = new BenchmarkConfig("OrientDB", args);
+		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new OrientDbBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

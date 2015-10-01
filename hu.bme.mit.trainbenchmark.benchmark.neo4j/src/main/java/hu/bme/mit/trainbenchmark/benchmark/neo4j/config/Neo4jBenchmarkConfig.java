@@ -15,9 +15,9 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
@@ -27,7 +27,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected boolean coreApi;
 
 	public Neo4jBenchmarkConfig(final String[] args) throws ParseException {
-		super(args, NEO4J);
+		super(NEO4J, args);
 	}
 
 	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query, final int iterationCount,
@@ -55,7 +55,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	@Override
-	public String getTool() {
-		return super.getTool() + (isCoreApi() ? "-CoreAPI" : "-Cypher");
+	public String getToolName() {
+		return super.getToolName() + (isCoreApi() ? "-CoreAPI" : "-Cypher");
 	}
 }

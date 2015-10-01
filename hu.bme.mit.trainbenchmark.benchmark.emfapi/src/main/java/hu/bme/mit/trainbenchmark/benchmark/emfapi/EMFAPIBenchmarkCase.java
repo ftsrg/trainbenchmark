@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EMFAPIChecker;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
@@ -19,17 +20,19 @@ import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class EMFAPIBenchmarkCase extends EMFBenchmarkCase {
+public class EMFAPIBenchmarkCase extends EMFBenchmarkCase<EMFDriver> {
+
+	protected EMFDriver emfDriver;
 
 	@Override
 	public void initialize() throws Exception {
-		final EMFDriver emfDriver = new EMFDriver();
-		driver = emfDriver;
+		driver = emfDriver = new EMFDriver();
 		checker = (Checker<EMFMatch>) EMFAPIChecker.newInstance(emfDriver, bc.getQuery());
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	protected Transformation<?> getTransformation() {
+		return EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
 	}
 
 }

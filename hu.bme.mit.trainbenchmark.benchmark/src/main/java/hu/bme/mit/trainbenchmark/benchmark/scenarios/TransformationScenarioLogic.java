@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import eu.mondo.sam.core.phases.IterationPhase;
 import eu.mondo.sam.core.phases.SequencePhase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
 import hu.bme.mit.trainbenchmark.benchmark.phases.CheckPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitTransformationPhase;
@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 
-public class TransformationScenarioLogic extends ScenarioLogic<AbstractBenchmarkCase<?, ?>> {
+public class TransformationScenarioLogic extends ScenarioLogic<AbstractBenchmarkCaseRunner<?, ?, ?>> {
 
 	@Override
 	public void build() {

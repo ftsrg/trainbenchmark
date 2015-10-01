@@ -12,19 +12,20 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.inferencing.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class JenaBenchmarkInferencingInitializer extends TestBenchmarkInitializer<JenaBenchmarkLogic> {
+public class JenaBenchmarkInferencingInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected JenaBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+	protected BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount, transformationStrategy,
 				transformationConstant, true);
-		return new JenaBenchmarkLogic(rbc);
+		return new BenchmarkLogic(rbc, new JenaBenchmarkCase());
 	}
 
 }

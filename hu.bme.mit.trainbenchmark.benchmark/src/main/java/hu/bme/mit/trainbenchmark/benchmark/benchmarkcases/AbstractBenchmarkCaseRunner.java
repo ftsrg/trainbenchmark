@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Random;
@@ -26,16 +27,16 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public abstract class AbstractBenchmarkCase<M, T> {
+public abstract class AbstractBenchmarkCaseRunner<TMatch, TElement, TDriver extends Driver<TElement>> {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
-	protected TransformationLogic<M, T, ?> transformationLogic;
-	protected Transformation<?> transformation;
-
+	protected TransformationLogic<TMatch, TElement, ?> transformationLogic;
 	protected BenchmarkConfig bc;
-	protected Driver<T> driver;
-	protected Checker<M> checker;
-	protected Collection<M> matches;
+
+	protected Transformation<?> transformation;
+	protected TDriver driver;
+	protected Checker<TMatch> checker;
+	protected Collection<TMatch> matches;
 
 	public final void benchmarkInitialize(final BenchmarkConfig bc) throws Exception {
 		this.bc = bc;
@@ -43,11 +44,10 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		driver.initialize();
 	}
 
-	public final void benchmarkInitializeTransformation() {
+	public final void benchmarkInitializeTransformation() throws IOException {
+		transformation = getTransformation();
 		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
-		if (bc.getScenario().hasTranformation()) {
-			transformationLogic.initialize(bc, driver, random);
-		}
+		transformationLogic.initialize(bc, driver, random);
 		transformationLogic.setTransformation(transformation);
 	}
 
@@ -96,7 +96,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 		transformationLogic.performTransformation(phaseResult, matches);
 	}
 
-	public final Collection<M> getMatches() {
+	public final Collection<TMatch> getMatches() {
 		return matches;
 	}
 
@@ -104,6 +104,7 @@ public abstract class AbstractBenchmarkCase<M, T> {
 
 	protected abstract void initialize() throws Exception;
 
-	protected abstract Comparator<?> getMatchComparator();
+	protected abstract Transformation<?> getTransformation() throws IOException;
 
+	protected abstract Comparator<?> getMatchComparator();
 }

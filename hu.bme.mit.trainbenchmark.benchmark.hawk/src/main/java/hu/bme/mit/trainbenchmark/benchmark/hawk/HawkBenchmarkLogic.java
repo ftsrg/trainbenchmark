@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.hawk;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 
-public class HawkBenchmarkLogic extends AbstractBenchmarkLogic {
+public class HawkBenchmarkLogic extends BenchmarkLogic {
 
 	protected HawkBenchmarkConfig hbc;
 

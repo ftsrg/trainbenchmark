@@ -12,12 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
+import java.io.IOException;
+
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.checkers.Drools5Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class Drools5BenchmarkCase extends EMFBenchmarkCase {
+public class Drools5BenchmarkCase extends EMFBenchmarkCase<Drools5Driver> {
 
 	protected Drools5Driver drools5driver;
 
@@ -25,10 +28,11 @@ public class Drools5BenchmarkCase extends EMFBenchmarkCase {
 	public void initialize() throws Exception {
 		driver = drools5driver = new Drools5Driver(bc);
 		checker = new Drools5Checker(drools5driver, bc.getQuery());
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = EMFTransformation.newInstance(drools5driver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	protected Transformation getTransformation() throws IOException {
+		return EMFTransformation.newInstance(drools5driver, bc.getQuery(), bc.getScenario());
 	}
 
 }

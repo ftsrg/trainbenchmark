@@ -16,10 +16,14 @@ import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+
 public class SesameBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		SesameBenchmarkLogic benchmarkLogic = new SesameBenchmarkLogic(args);
+	public static void main(final String[] args) throws IOException, ParseException {
+		final RDFBenchmarkConfig bc = new RDFBenchmarkConfig(args, "Sesame");
+		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new SesameBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 
