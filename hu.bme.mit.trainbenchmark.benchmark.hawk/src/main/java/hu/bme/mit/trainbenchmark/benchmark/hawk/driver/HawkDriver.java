@@ -16,12 +16,17 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 
-public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryDriver<BasePatternMatch> {
+public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryDriver<M> {
 
 	protected HawkBenchmarkConfig hbc;
 
 	public HawkDriver(final HawkBenchmarkConfig hbc) {
 		super(hbc);
 		this.hbc = hbc;
+	}
+
+	@Override
+	public void read(final String modelPathWithoutExtension) throws Exception {
+		super.read(modelPathWithoutExtension);
 	}
 }

@@ -12,14 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
-
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Random;
@@ -27,6 +19,13 @@ import java.util.Random;
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
 import eu.mondo.sam.core.results.PhaseResult;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public abstract class AbstractBenchmarkCase<M, T> {
 

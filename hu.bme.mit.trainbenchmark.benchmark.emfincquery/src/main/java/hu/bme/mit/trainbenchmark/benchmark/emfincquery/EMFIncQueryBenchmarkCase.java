@@ -11,6 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
+import java.io.IOException;
+import java.util.Comparator;
+
+import org.apache.log4j.Level;
+import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
+import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
+
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
@@ -18,15 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-
-import java.io.IOException;
-import java.util.Comparator;
-
-import org.apache.log4j.Level;
-import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCase<M, RailwayElement> {
 
@@ -44,10 +43,9 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch> extends Abstra
 	@Override
 	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
 		super.benchmarkInit(bc);
-		
-		final EMFIncQueryBenchmarkConfig eiqbc = (EMFIncQueryBenchmarkConfig) bc;
+
 		driver = eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
-		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(eiqbc, eiqDriver, bc.getQuery());
+		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getEMFIncQueryBenchmarkConfig(), eiqDriver, bc.getQuery());
 		checker = eiqChecker;
 		eiqDriver.registerChecker(eiqChecker);
 
