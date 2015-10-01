@@ -25,7 +25,7 @@ public class CheckPhase extends AtomicPhase {
 
 	@Override
 	public void execute(final DataToken token, final PhaseResult phaseResult) {
-		final TrainBenchmarkDataToken trainToken = ((TrainBenchmarkDataToken) token);
+		final TrainBenchmarkDataToken trainToken = (TrainBenchmarkDataToken) token;
 		try {
 			trainToken.getBenchmarkCase().benchmarkCheck(phaseResult);
 		} catch (final Exception e) {

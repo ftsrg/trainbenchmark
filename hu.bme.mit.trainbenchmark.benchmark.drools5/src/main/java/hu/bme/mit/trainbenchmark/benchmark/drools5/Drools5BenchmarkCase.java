@@ -23,7 +23,6 @@ public class Drools5BenchmarkCase extends EMFBenchmarkCase {
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
 		driver = drools5driver = new Drools5Driver(bc);
 		checker = new Drools5Checker(drools5driver, bc.getQuery());
 

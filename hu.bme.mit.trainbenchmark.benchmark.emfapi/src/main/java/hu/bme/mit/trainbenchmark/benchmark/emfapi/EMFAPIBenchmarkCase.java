@@ -23,8 +23,6 @@ public class EMFAPIBenchmarkCase extends EMFBenchmarkCase {
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
-
 		final EMFDriver emfDriver = new EMFDriver();
 		driver = emfDriver;
 		checker = (Checker<EMFMatch>) EMFAPIChecker.newInstance(emfDriver, bc.getQuery());

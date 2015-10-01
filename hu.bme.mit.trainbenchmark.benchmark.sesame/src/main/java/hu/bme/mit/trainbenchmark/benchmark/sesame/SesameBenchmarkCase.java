@@ -31,7 +31,6 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI>
 
 	@Override
 	protected void initialize() throws Exception {
-		super.initialize();
 		this.rdfbc = (RDFBenchmarkConfig) bc;
 
 		driver = sesameDriver = new SesameDriver(rdfbc);

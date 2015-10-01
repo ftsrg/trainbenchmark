@@ -25,8 +25,6 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase {
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
-
 		driver = sqlDriver = new MySQLDriver();
 		checker = new SQLChecker(sqlDriver, bc);
 

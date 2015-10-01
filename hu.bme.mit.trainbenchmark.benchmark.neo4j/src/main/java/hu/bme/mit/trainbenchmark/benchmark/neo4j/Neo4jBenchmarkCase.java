@@ -35,8 +35,6 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCase<Neo4jMatch, Node> 
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
-
 		dbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
 		driver = neoDriver = new Neo4jDriver(dbPath);
 

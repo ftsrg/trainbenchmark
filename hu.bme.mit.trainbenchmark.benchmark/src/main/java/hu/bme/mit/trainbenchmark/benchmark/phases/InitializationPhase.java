@@ -25,7 +25,7 @@ public class InitializationPhase extends AtomicPhase {
 
 	@Override
 	public void execute(final DataToken token, final PhaseResult phaseResult) {
-		final TrainBenchmarkDataToken trainToken = ((TrainBenchmarkDataToken) token);
+		final TrainBenchmarkDataToken trainToken = (TrainBenchmarkDataToken) token;
 		try {
 			trainToken.getBenchmarkCase().benchmarkInitialize(trainToken.getConfig());
 		} catch (final Exception e) {
