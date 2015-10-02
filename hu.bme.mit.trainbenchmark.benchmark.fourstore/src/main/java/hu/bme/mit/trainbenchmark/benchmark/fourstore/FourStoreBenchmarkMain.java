@@ -15,10 +15,14 @@ import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
 
+import hu.bme.mit.trainbenchmark.benchmark.fourstore.config.FourStoreBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+
 public class FourStoreBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		FourStoreBenchmarkLogic benchmarkLogic = new FourStoreBenchmarkLogic(args);
+	public static void main(final String[] args) throws IOException, ParseException {
+		final FourStoreBenchmarkConfig bc = new FourStoreBenchmarkConfig(args, "FourStoreBenchmark");
+		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new FourStoreBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 
