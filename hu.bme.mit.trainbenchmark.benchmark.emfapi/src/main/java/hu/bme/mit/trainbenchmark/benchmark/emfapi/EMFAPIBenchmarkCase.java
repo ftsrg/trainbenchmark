@@ -14,13 +14,14 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EMFAPIChecker;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class EMFAPIBenchmarkCase extends EMFBenchmarkCase<EMFDriver> {
+public class EMFAPIBenchmarkCase extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig> {
 
 	protected EMFDriver emfDriver;
 

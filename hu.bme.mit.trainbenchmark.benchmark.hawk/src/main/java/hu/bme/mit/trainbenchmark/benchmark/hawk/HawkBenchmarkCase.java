@@ -38,7 +38,8 @@ import uk.ac.york.mondo.integration.api.utils.APIUtils;
 import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
 import uk.ac.york.mondo.integration.hawk.emf.HawkResourceFactoryImpl;
 
-public class HawkBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCaseRunner<M, RailwayElement, HawkDriver<M>> {
+public class HawkBenchmarkCase<M extends BasePatternMatch>
+		extends AbstractBenchmarkCaseRunner<M, RailwayElement, HawkDriver<M>, HawkBenchmarkConfig> {
 
 	private static final String ECORE_METAMODEL = "hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
 	private static final String WORKSPACE_PATH = "/home/szarnyasg/git/trainbenchmark/";
@@ -51,12 +52,12 @@ public class HawkBenchmarkCase<M extends BasePatternMatch> extends AbstractBench
 	protected HawkDriver<M> hawkDriver;
 
 	protected HawkBenchmarkConfig getHawkBenchmarkConfig() {
-		return (HawkBenchmarkConfig) bc;
+		return bc;
 	}
 
 	@Override
 	public void initialize() throws Exception {
-		final HawkBenchmarkConfig hbc = (HawkBenchmarkConfig) bc;
+		final HawkBenchmarkConfig hbc = bc;
 		driver = hawkDriver = new HawkDriver<>(hbc);
 		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getHawkBenchmarkConfig(), hawkDriver, bc.getQuery());
 		checker = eiqChecker;

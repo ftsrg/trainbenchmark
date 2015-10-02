@@ -28,7 +28,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 
-public class Neo4jBenchmarkCase extends AbstractBenchmarkCaseRunner<Neo4jMatch, Node, Neo4jDriver> {
+public class Neo4jBenchmarkCase extends AbstractBenchmarkCaseRunner<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig> {
 
 	protected GraphDatabaseService graphDb;
 	protected String dbPath;
@@ -40,7 +40,7 @@ public class Neo4jBenchmarkCase extends AbstractBenchmarkCaseRunner<Neo4jMatch, 
 		dbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
 		driver = neoDriver = new Neo4jDriver(dbPath);
 
-		final Neo4jBenchmarkConfig nbc = (Neo4jBenchmarkConfig) bc;
+		final Neo4jBenchmarkConfig nbc = bc;
 		if (nbc.isCoreApi()) {
 			checker = Neo4jCoreChecker.newInstance(neoDriver, bc.getQuery());
 		} else {

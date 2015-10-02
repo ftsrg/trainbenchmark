@@ -18,21 +18,21 @@ import java.util.List;
 
 import com.google.common.collect.Ordering;
 
-public class RepairTransformationLogic<M, T> extends TransformationLogic<M, T, M> {
+public class RepairTransformationLogic<TMatch, TElement> extends TransformationLogic<TMatch, TElement, TMatch> {
 
-	protected RepairTransformationLogic(final Comparator comparator) {
+	protected RepairTransformationLogic(final Comparator<TMatch> comparator) {
 		super(comparator);
 	}
 
 	@Override
-	protected void lhs(final Collection<M> currentMatches) throws IOException {
+	protected void lhs(final Collection<TMatch> currentMatches) throws IOException {
 		candidatesToModify = currentMatches;
 	}
 
 	@Override
-	protected List<M> copyAndSort() {
-		final Ordering<M> ordering = Ordering.from(comparator);
-		final List<M> sortedMatches = ordering.sortedCopy(candidatesToModify);
+	protected List<TMatch> copyAndSort() {
+		final Ordering<TMatch> ordering = Ordering.from(comparator);
+		final List<TMatch> sortedMatches = ordering.sortedCopy(candidatesToModify);
 		return sortedMatches;
 	}
 }

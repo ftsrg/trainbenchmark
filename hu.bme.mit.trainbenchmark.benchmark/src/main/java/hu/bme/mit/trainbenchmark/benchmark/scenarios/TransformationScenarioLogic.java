@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.TransformationPhase;
 
-public class TransformationScenarioLogic extends ScenarioLogic<AbstractBenchmarkCaseRunner<?, ?, ?>> {
+public class TransformationScenarioLogic extends ScenarioLogic<AbstractBenchmarkCaseRunner<?, ?, ?, ?>> {
 
 	@Override
 	public void build() {
