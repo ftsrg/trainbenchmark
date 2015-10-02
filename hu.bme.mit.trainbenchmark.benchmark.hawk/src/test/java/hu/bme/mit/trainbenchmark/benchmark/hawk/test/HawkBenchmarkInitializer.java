@@ -11,19 +11,21 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.hawk.HawkBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.hawk.HawkBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class HawkBenchmarkInitializer extends TestBenchmarkInitializer<HawkBenchmarkLogic> {
+public class HawkBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected HawkBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final HawkBenchmarkConfig hbc = new HawkBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
+	protected BenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig hbc = new HawkBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
 				transformationConstant);
-		return new HawkBenchmarkLogic(hbc);
+		return new BenchmarkLogic(hbc, new HawkBenchmarkCase<>());
 	}
 
 }

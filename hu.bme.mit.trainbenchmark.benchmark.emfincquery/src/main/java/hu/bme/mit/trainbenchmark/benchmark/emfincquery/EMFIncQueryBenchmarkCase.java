@@ -29,8 +29,6 @@ import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
 		extends AbstractBenchmarkCaseRunner<M, RailwayElement, EMFIncQueryDriver<M>> {
 
-	protected EMFIncQueryDriver<M> eiqDriver;
-
 	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
 		return (EMFIncQueryBenchmarkConfig) bc;
 	}
@@ -39,10 +37,10 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
 	public void initialize() throws Exception {
 		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
 
-		driver = eiqDriver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
-		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getEMFIncQueryBenchmarkConfig(), eiqDriver, bc.getQuery());
+		driver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
+		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getEMFIncQueryBenchmarkConfig(), driver, bc.getQuery());
 		checker = eiqChecker;
-		eiqDriver.registerChecker(eiqChecker);
+		driver.registerChecker(eiqChecker);
 	}
 
 	@Override
@@ -52,7 +50,7 @@ public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
 
 	@Override
 	protected Transformation<?> getTransformation() {
-		return EMFIncQueryTransformation.newInstance(eiqDriver, bc.getQuery(), bc.getScenario());
+		return EMFIncQueryTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 
 }

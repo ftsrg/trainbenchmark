@@ -41,9 +41,4 @@ public class HawkBenchmarkConfig extends EMFIncQueryBenchmarkConfig {
 		super.processArguments(args);
 	}
 
-	@Override
-	public String getTool() {
-		return "Hawk";
-	}
-
 }

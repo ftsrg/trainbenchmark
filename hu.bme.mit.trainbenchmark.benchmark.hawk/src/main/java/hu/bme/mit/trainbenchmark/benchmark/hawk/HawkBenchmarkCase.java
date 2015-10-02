@@ -11,8 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -21,10 +23,12 @@ import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.driver.HawkDriver;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import uk.ac.york.mondo.integration.api.Credentials;
 import uk.ac.york.mondo.integration.api.Hawk.Client;
 import uk.ac.york.mondo.integration.api.HawkInstance;
@@ -34,7 +38,7 @@ import uk.ac.york.mondo.integration.api.utils.APIUtils;
 import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
 import uk.ac.york.mondo.integration.hawk.emf.HawkResourceFactoryImpl;
 
-public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBenchmarkCase<M> {
+public class HawkBenchmarkCase<M extends BasePatternMatch> extends AbstractBenchmarkCaseRunner<M, RailwayElement, HawkDriver<M>> {
 
 	private static final String ECORE_METAMODEL = "hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
 	private static final String WORKSPACE_PATH = "/home/szarnyasg/git/trainbenchmark/";
@@ -52,8 +56,6 @@ public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBe
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
-
 		final HawkBenchmarkConfig hbc = (HawkBenchmarkConfig) bc;
 		driver = hawkDriver = new HawkDriver<>(hbc);
 		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getHawkBenchmarkConfig(), hawkDriver, bc.getQuery());
@@ -96,6 +98,16 @@ public class HawkBenchmarkCase<M extends BasePatternMatch> extends EMFIncQueryBe
 
 		client.addRepository(HAWK_INSTANCE, repository, credentials);
 
+	}
+
+	@Override
+	protected Transformation<?> getTransformation() throws IOException {
+		return null;
+	}
+
+	@Override
+	protected Comparator<?> getMatchComparator() {
+		return null;// EMFIncQueryTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 
 }
