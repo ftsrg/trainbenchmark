@@ -13,12 +13,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.token;
 
 import eu.mondo.sam.core.DataToken;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
-public class TrainBenchmarkDataToken implements DataToken {
+public class TrainBenchmarkDataToken<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>>
+		implements DataToken {
 
-	protected AbstractBenchmarkCaseRunner<?, ?, ?, ?, ?> benchmarkCaseRunner;
+	protected BenchmarkRunner<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkRunner;
 	protected BenchmarkConfig benchmarkConfig;
 
 	@Override
@@ -29,20 +32,16 @@ public class TrainBenchmarkDataToken implements DataToken {
 	public void destroy() {
 	}
 
-	public AbstractBenchmarkCaseRunner<?, ?, ?, ?, ?> getBenchmarkCase() {
-		return benchmarkCaseRunner;
-	}
-
-	public void setBenchmarkCaseRunner(final AbstractBenchmarkCaseRunner<?, ?, ?, ?, ?> benchmarkCaseRunner) {
-		this.benchmarkCaseRunner = benchmarkCaseRunner;
+	public void setBenchmarkRunner(final BenchmarkRunner<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkRunner) {
+		this.benchmarkRunner = benchmarkRunner;
 	}
 
 	public BenchmarkConfig getBenchmarkConfig() {
-		return benchmarkConfig;
+		return benchmarkRunner.getBenchmarkConfig();
 	}
 
-	public void setBenchmarkConfig(final BenchmarkConfig config) {
-		this.benchmarkConfig = config;
+	public BenchmarkRunner<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> getBenchmarkRunner() {
+		return benchmarkRunner;
 	}
 
 }

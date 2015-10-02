@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class EMFIncQueryBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final EMFIncQueryBenchmarkConfig bc = new EMFIncQueryBenchmarkConfig(args);
-		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new EMFIncQueryBenchmarkCase());
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new EMFIncQueryBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

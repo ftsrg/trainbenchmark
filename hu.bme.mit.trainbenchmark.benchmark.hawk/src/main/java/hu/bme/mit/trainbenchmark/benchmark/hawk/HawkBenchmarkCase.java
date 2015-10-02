@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
@@ -40,7 +40,7 @@ import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
 import uk.ac.york.mondo.integration.hawk.emf.HawkResourceFactoryImpl;
 
 public class HawkBenchmarkCase<M extends BasePatternMatch>
-		extends AbstractBenchmarkCaseRunner<M, RailwayElement, HawkDriver<M>, HawkBenchmarkConfig, EMFIncQueryChecker<M>> {
+		extends AbstractBenchmarkCase<M, RailwayElement, HawkDriver<M>, HawkBenchmarkConfig, EMFIncQueryChecker<M>> {
 
 	private static final String ECORE_METAMODEL = "hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
 	private static final String WORKSPACE_PATH = "/home/szarnyasg/git/trainbenchmark/";
@@ -105,7 +105,7 @@ public class HawkBenchmarkCase<M extends BasePatternMatch>
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	protected Comparator<?> createMatchComparator() {
 		return null;// EMFIncQueryTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 

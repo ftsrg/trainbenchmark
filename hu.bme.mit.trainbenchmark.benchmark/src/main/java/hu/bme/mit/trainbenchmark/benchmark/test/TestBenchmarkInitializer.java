@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
@@ -25,6 +25,6 @@ public abstract class TestBenchmarkInitializer {
 	protected final int runIndex = 1;
 	protected final int iterationCount = 1;
 
-	protected abstract BenchmarkLogic initializeBenchmark(Query query, Scenario scenario);
+	protected abstract BenchmarkRunner initializeBenchmark(Query query, Scenario scenario);
 
 }

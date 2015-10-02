@@ -15,9 +15,8 @@ import java.io.IOException;
 import java.util.Comparator;
 
 import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.checkers.OrientDbChecker;
@@ -27,30 +26,29 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatchCompara
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.OrientDbTransformation;
 
 public class OrientDbBenchmarkCase
-		extends AbstractBenchmarkCaseRunner<OrientDbMatch, Vertex, OrientDbDriver, BenchmarkConfig, OrientDbChecker<OrientDbMatch>> {
-
-	protected OrientGraph graphDb;
-	protected String dbPath;
-	protected String benchmarkDir;
-
-	protected OrientDbDriver orientDriver;
+		extends AbstractBenchmarkCase<OrientDbMatch, Vertex, OrientDbDriver, BenchmarkConfig, OrientDbChecker<OrientDbMatch>> {
 
 	@Override
-	public void initialize() throws Exception {
-		dbPath = bc.getWorkspacePath() + "models/orient-dbs/railway-database";
-		benchmarkDir = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
-		driver = orientDriver = new OrientDbDriver(dbPath, benchmarkDir);
-		checker = OrientDbChecker.newInstance(orientDriver, bc.getQuery());
+	public OrientDbDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+		final String dbPath = benchmarkConfig.getWorkspacePath() + "models/orient-dbs/railway-database";
+		final String benchmarkDir = benchmarkConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
+		return new OrientDbDriver(dbPath, benchmarkDir);
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	public OrientDbChecker<OrientDbMatch> createChecker(final BenchmarkConfig benchmarkConfig, final OrientDbDriver driver)
+			throws Exception {
+		return OrientDbChecker.newInstance(driver, benchmarkConfig.getQuery());
+	}
+
+	@Override
+	public Comparator<?> createMatchComparator() {
 		return new OrientDbMatchComparator();
 	}
 
 	@Override
-	protected Transformation<?> getTransformation() throws IOException {
-		return OrientDbTransformation.newInstance(orientDriver, bc.getQuery(), bc.getScenario());
+	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final OrientDbDriver driver) throws IOException {
+		return OrientDbTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 }

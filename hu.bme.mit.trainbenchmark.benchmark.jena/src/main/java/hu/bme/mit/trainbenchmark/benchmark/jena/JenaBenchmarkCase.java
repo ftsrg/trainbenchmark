@@ -12,11 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
+import java.io.IOException;
 import java.util.Comparator;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
@@ -25,21 +26,25 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCaseRunner<JenaMatch, Resource, JenaDriver, RDFBenchmarkConfig, JenaChecker> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RDFBenchmarkConfig, JenaChecker> {
 
 	@Override
-	protected void initialize() throws Exception {
-		driver = new JenaDriver(bc);
-		checker = new JenaChecker(driver, bc);
+	public JenaDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+		return new JenaDriver(benchmarkConfig);
 	}
 
 	@Override
-	protected Transformation<?> getTransformation() {
-		return JenaTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
+	public JenaChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver) throws Exception {
+		return new JenaChecker(driver, benchmarkConfig);
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	public Transformation<?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver) throws IOException {
+		return JenaTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+	}
+
+	@Override
+	public Comparator<?> createMatchComparator() {
 		return new JenaMatchComparator();
 	}
 

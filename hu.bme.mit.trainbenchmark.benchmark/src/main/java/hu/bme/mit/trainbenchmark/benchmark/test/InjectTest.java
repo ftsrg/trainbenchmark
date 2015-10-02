@@ -20,40 +20,37 @@ import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.INJECT;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
 public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
-	public void connectedSegmentsInject() throws ParseException, IOException {
+	public void connectedSegmentsInject() throws Exception {
 		testTransformation(CONNECTEDSEGMENTS, INJECT, 4, 6);
 	}
 
 	@Test
-	public void posLengthInject() throws ParseException, IOException {
+	public void posLengthInject() throws Exception {
 		testTransformation(POSLENGTH, INJECT, 21, 23);
 	}
 
 	@Test
-	public void routeSensorInject() throws ParseException, IOException {
+	public void routeSensorInject() throws Exception {
 		testTransformation(ROUTESENSOR, INJECT, 2, 2);
 	}
 
 	@Test
-	public void semaphoreNeighborInject() throws ParseException, IOException {
+	public void semaphoreNeighborInject() throws Exception {
 		testTransformation(SEMAPHORENEIGHBOR, INJECT, 1, 2);
 	}
 
 	@Test
-	public void switchSensorInject() throws ParseException, IOException {
+	public void switchSensorInject() throws Exception {
 		testTransformation(SWITCHSENSOR, INJECT, 0, 2);
 	}
 
 	@Test
-	public void switchSetInject() throws ParseException, IOException {
+	public void switchSetInject() throws Exception {
 		testTransformation(SWITCHSET, INJECT, 1, 3);
 	}
 

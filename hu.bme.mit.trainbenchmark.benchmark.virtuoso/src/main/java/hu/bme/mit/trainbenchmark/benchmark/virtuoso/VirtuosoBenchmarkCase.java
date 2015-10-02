@@ -15,17 +15,19 @@ package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.VirtuosoDriver;
 
 public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
-	protected void initialize() throws Exception {
-		super.initialize();
+	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+		return new VirtuosoDriver(benchmarkConfig);
+	}
 
-		final RDFBenchmarkConfig rdfbc = (RDFBenchmarkConfig) bc;
-		driver = new VirtuosoDriver(rdfbc);
-		checker = new SesameChecker(driver, rdfbc);
+	@Override
+	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws Exception {
+		return new SesameChecker(driver, benchmarkConfig);
 	}
 
 }

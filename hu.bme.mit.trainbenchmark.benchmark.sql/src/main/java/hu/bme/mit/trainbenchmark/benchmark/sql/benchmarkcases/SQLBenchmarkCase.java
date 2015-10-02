@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 
 public abstract class SQLBenchmarkCase<TSQLDriver extends SQLDriver>
-		extends AbstractBenchmarkCaseRunner<SQLMatch, Long, TSQLDriver, BenchmarkConfig, SQLChecker> {
+		extends AbstractBenchmarkCase<SQLMatch, Long, TSQLDriver, BenchmarkConfig, SQLChecker> {
 
 }
