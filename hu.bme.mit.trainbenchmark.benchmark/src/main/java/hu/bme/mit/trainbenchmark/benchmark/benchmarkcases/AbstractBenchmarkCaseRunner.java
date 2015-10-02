@@ -27,7 +27,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public abstract class AbstractBenchmarkCaseRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig> {
+public abstract class AbstractBenchmarkCaseRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected TransformationLogic<TMatch, TElement, ?> transformationLogic;

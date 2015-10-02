@@ -23,7 +23,8 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig> {
+public class EclipseOCLBenchmarkCase<T extends RailwayElement>
+		extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig, EclipseOCLChecker<EMFMatch>> {
 
 	@Override
 	public void initialize() throws Exception {

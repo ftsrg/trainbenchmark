@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.DestroyPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.InitializationPhase;
 import hu.bme.mit.trainbenchmark.benchmark.phases.ReadPhase;
 
-public class BatchScenarioLogic extends ScenarioLogic<AbstractBenchmarkCaseRunner<?, ?, ?, ?>> {
+public class BatchScenarioLogic extends ScenarioLogic<AbstractBenchmarkCaseRunner<?, ?, ?, ?, ?>> {
 
 	@Override
 	public void build() {

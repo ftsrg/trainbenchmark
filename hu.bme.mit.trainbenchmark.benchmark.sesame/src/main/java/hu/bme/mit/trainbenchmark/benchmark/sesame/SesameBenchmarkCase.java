@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCaseRunner<SesameMatch, URI, SesameDriver, RDFBenchmarkConfig> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCaseRunner<SesameMatch, URI, SesameDriver, RDFBenchmarkConfig, SesameChecker> {
 
 	@Override
 	protected void initialize() throws Exception {

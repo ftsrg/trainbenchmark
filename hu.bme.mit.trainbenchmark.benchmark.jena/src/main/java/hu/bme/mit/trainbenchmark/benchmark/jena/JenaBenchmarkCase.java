@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCaseRunner<JenaMatch, Resource, JenaDriver, RDFBenchmarkConfig> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCaseRunner<JenaMatch, Resource, JenaDriver, RDFBenchmarkConfig, JenaChecker> {
 
 	@Override
 	protected void initialize() throws Exception {
