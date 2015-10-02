@@ -25,13 +25,13 @@ import hu.bme.mit.trainbenchmark.benchmark.fourstore.transformations.FourStoreTr
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 
-public class FourStoreBenchmarkCase extends AbstractBenchmarkCaseRunner<SesameMatch, URI, FourStoreDriver> {
+public class FourStoreBenchmarkCase extends AbstractBenchmarkCaseRunner<SesameMatch, URI, FourStoreDriver, FourStoreBenchmarkConfig> {
 
 	protected FourStoreDriver fourStoreDriver;
 
 	@Override
 	public void initialize() throws IOException {
-		final FourStoreBenchmarkConfig fsbc = (FourStoreBenchmarkConfig) bc;
+		final FourStoreBenchmarkConfig fsbc = bc;
 
 		driver = new FourStoreDriver(fsbc);
 		checker = new FourStoreChecker(fourStoreDriver, fsbc);

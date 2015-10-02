@@ -27,11 +27,11 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public abstract class AbstractBenchmarkCaseRunner<TMatch, TElement, TDriver extends Driver<TElement>> {
+public abstract class AbstractBenchmarkCaseRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig> {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected TransformationLogic<TMatch, TElement, ?> transformationLogic;
-	protected BenchmarkConfig bc;
+	protected TBenchmarkConfig bc;
 
 	protected Transformation<?> transformation;
 	protected TDriver driver;
@@ -39,14 +39,14 @@ public abstract class AbstractBenchmarkCaseRunner<TMatch, TElement, TDriver exte
 	protected Collection<TMatch> matches;
 
 	public final void benchmarkInitialize(final BenchmarkConfig bc) throws Exception {
-		this.bc = bc;
+		this.bc = (TBenchmarkConfig) bc;
 		initialize();
 		driver.initialize();
 	}
 
 	public final void benchmarkInitializeTransformation() throws IOException {
 		transformation = getTransformation();
-		transformationLogic = TransformationLogic.newInstance(bc.getScenario(), getComparator());
+		transformationLogic = (TransformationLogic<TMatch, TElement, ?>) TransformationLogic.newInstance(bc.getScenario(), getComparator());
 		transformationLogic.initialize(bc, driver, random);
 		transformationLogic.setTransformation(transformation);
 	}

@@ -27,7 +27,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQue
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EMFIncQueryBenchmarkCase<M extends BasePatternMatch>
-		extends AbstractBenchmarkCaseRunner<M, RailwayElement, EMFIncQueryDriver<M>> {
+		extends AbstractBenchmarkCaseRunner<M, RailwayElement, EMFIncQueryDriver<M>, EMFIncQueryBenchmarkConfig> {
 
 	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
 		return (EMFIncQueryBenchmarkConfig) bc;

@@ -17,7 +17,7 @@ import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public abstract class ScenarioLogic<T extends AbstractBenchmarkCaseRunner<?, ?, ?>> extends BenchmarkScenario {
+public abstract class ScenarioLogic<T extends AbstractBenchmarkCaseRunner<?, ?, ?, ?>> extends BenchmarkScenario {
 
 	protected BenchmarkConfig benchmarkConfig;
 
@@ -31,7 +31,7 @@ public abstract class ScenarioLogic<T extends AbstractBenchmarkCaseRunner<?, ?, 
 
 	public void initializeDescriptor() {
 		caseName = benchmarkConfig.getQuery().toString();
-		size = benchmarkConfig.getSize();
+		size = benchmarkConfigA.getSize();
 		tool = benchmarkConfig.getToolName();
 	}
 

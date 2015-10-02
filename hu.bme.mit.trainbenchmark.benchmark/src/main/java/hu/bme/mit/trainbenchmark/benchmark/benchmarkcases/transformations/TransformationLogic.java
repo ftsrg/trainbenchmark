@@ -11,7 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
@@ -22,13 +27,13 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class TransformationLogic<M, T, O> {
+public abstract class TransformationLogic<TMatch, TElement, TTransformationObject> {
 
 	// M: matches
 	// T: elements in the match set
 	// O: transformation object
 
-	public static TransformationLogic newInstance(final Scenario scenario, final Comparator comparator) {
+	public static TransformationLogic<?, ?, ?> newInstance(final Scenario scenario, final Comparator<?> comparator) {
 		switch (scenario) {
 		case REPAIR:
 			return new RepairTransformationLogic<>(comparator);
@@ -39,35 +44,35 @@ public abstract class TransformationLogic<M, T, O> {
 		}
 	}
 
-	protected TransformationLogic(final Comparator comparator) {
+	protected TransformationLogic(final Comparator<TTransformationObject> comparator) {
 		super();
 		this.comparator = comparator;
 	}
 
 	protected BenchmarkConfig bc;
 	protected BenchmarkResult br;
-	protected Driver<T> driver;
+	protected Driver<TElement> driver;
 	protected Random random;
 
-	protected Collection<O> candidatesToModify;
-	protected List<O> objectsToModify;
-	protected Comparator<O> comparator;
+	protected Collection<TTransformationObject> candidatesToModify;
+	protected List<TTransformationObject> objectsToModify;
+	protected Comparator<TTransformationObject> comparator;
 
 	protected long nObjectsToModify;
 	protected long start;
 	protected long startEdit;
 	protected long end;
-	protected Transformation<O> transformation;
+	protected Transformation<TTransformationObject> transformation;
 
-	public void initialize(final BenchmarkConfig bc, final Driver<T> driver, final Random random) {
+	public void initialize(final BenchmarkConfig bc, final Driver<TElement> driver, final Random random) {
 		this.bc = bc;
 		this.driver = driver;
 		this.random = random;
 	}
 
-	protected abstract void lhs(final Collection<M> currentMatches) throws Exception;
+	protected abstract void lhs(final Collection<TMatch> currentMatches) throws Exception;
 
-	public void performTransformation(final PhaseResult phaseResult, final Collection<M> currentMatches) throws Exception {
+	public void performTransformation(final PhaseResult phaseResult, final Collection<TMatch> currentMatches) throws Exception {
 		final TimeMetric transformationMetric = new TimeMetric("Time");
 
 		final ScalarMetric modified = new ScalarMetric("Modified");
@@ -80,7 +85,7 @@ public abstract class TransformationLogic<M, T, O> {
 		transformationMetric.stopMeasure();
 
 		// we do not measure this in the benchmark results
-		final List<O> candidatesList = copyAndSort();
+		final List<TTransformationObject> candidatesList = copyAndSort();
 		objectsToModify = pickRandom(nObjectsToModify, candidatesList);
 
 		transformationMetric.continueMeasure();
@@ -91,24 +96,24 @@ public abstract class TransformationLogic<M, T, O> {
 		phaseResult.addMetrics(transformationMetric, modified);
 	}
 
-	protected abstract List<O> copyAndSort();
+	protected abstract List<TTransformationObject> copyAndSort();
 
-	private List<O> pickRandom(long nMatchesToModify, final List<O> matches) {
+	private List<TTransformationObject> pickRandom(long nMatchesToModify, final List<TTransformationObject> matches) {
 		final int size = matches.size();
 		if (size < nMatchesToModify) {
 			nMatchesToModify = size;
 		}
 		Collections.shuffle(matches, random);
-		final List<O> objects = new ArrayList<>();
+		final List<TTransformationObject> objects = new ArrayList<>();
 		for (int i = 0; i < nMatchesToModify; i++) {
-			final O object = matches.get(i);
+			final TTransformationObject object = matches.get(i);
 			objects.add(object);
 		}
 		return objects;
 	}
 
 	public void setTransformation(final Transformation<?> transformation) {
-		this.transformation = (Transformation<O>) transformation;
+		this.transformation = (Transformation<TTransformationObject>) transformation;
 	}
 
 }

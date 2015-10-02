@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class TrainBenchmarkDataToken implements DataToken {
 
-	protected AbstractBenchmarkCaseRunner<?, ?, ?> benchmarkCaseRunner;
+	protected AbstractBenchmarkCaseRunner<?, ?, ?, ?> benchmarkCaseRunner;
 	protected BenchmarkConfig benchmarkConfig;
 
 	@Override
@@ -29,11 +29,11 @@ public class TrainBenchmarkDataToken implements DataToken {
 	public void destroy() {
 	}
 
-	public AbstractBenchmarkCaseRunner<?, ?, ?> getBenchmarkCase() {
+	public AbstractBenchmarkCaseRunner<?, ?, ?, ?> getBenchmarkCase() {
 		return benchmarkCaseRunner;
 	}
 
-	public void setBenchmarkCaseRunner(final AbstractBenchmarkCaseRunner<?, ?, ?> benchmarkCaseRunner) {
+	public void setBenchmarkCaseRunner(final AbstractBenchmarkCaseRunner<?, ?, ?, ?> benchmarkCaseRunner) {
 		this.benchmarkCaseRunner = benchmarkCaseRunner;
 	}
 
