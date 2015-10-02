@@ -12,8 +12,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
 import static hu.bme.mit.trainbenchmark.constants.Scenario.INJECT;
+
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairRouteSensor;
@@ -26,14 +27,14 @@ import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public abstract class EMFIncQueryTransformation<M> extends Transformation<M> {
 
-	protected final EMFIncQueryDriver<?> driver;
+	protected final EMFIncQueryBaseDriver<?> driver;
 
-	public EMFIncQueryTransformation(final EMFIncQueryDriver<?> driver) {
+	public EMFIncQueryTransformation(final EMFIncQueryBaseDriver<?> driver) {
 		super();
 		this.driver = driver;
 	}
 
-	public static Transformation<?> newInstance(final EMFIncQueryDriver<?> driver, final Query query, final Scenario scenario) {
+	public static Transformation<?> newInstance(final EMFIncQueryBaseDriver<?> driver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

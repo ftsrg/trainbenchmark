@@ -11,18 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
-import java.io.IOException;
-import java.util.Collection;
-
 public class EMFIncQueryTransformationRepairSwitchSensor extends EMFIncQueryTransformation<SwitchSensorMatch> {
 
-	public EMFIncQueryTransformationRepairSwitchSensor(final EMFIncQueryDriver<?> driver) {
+	public EMFIncQueryTransformationRepairSwitchSensor(final EMFIncQueryBaseDriver<?> driver) {
 		super(driver);
 	}
 
