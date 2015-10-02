@@ -26,7 +26,8 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatch;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.OrientDbTransformation;
 
-public class OrientDbBenchmarkCase extends AbstractBenchmarkCaseRunner<OrientDbMatch, Vertex, OrientDbDriver, BenchmarkConfig> {
+public class OrientDbBenchmarkCase
+		extends AbstractBenchmarkCaseRunner<OrientDbMatch, Vertex, OrientDbDriver, BenchmarkConfig, OrientDbChecker<OrientDbMatch>> {
 
 	protected OrientGraph graphDb;
 	protected String dbPath;

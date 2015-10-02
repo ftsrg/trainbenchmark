@@ -25,6 +25,7 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.driver.HawkDriver;
@@ -39,7 +40,7 @@ import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
 import uk.ac.york.mondo.integration.hawk.emf.HawkResourceFactoryImpl;
 
 public class HawkBenchmarkCase<M extends BasePatternMatch>
-		extends AbstractBenchmarkCaseRunner<M, RailwayElement, HawkDriver<M>, HawkBenchmarkConfig> {
+		extends AbstractBenchmarkCaseRunner<M, RailwayElement, HawkDriver<M>, HawkBenchmarkConfig, EMFIncQueryChecker<M>> {
 
 	private static final String ECORE_METAMODEL = "hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
 	private static final String WORKSPACE_PATH = "/home/szarnyasg/git/trainbenchmark/";
@@ -57,12 +58,9 @@ public class HawkBenchmarkCase<M extends BasePatternMatch>
 
 	@Override
 	public void initialize() throws Exception {
-		final HawkBenchmarkConfig hbc = bc;
-		driver = hawkDriver = new HawkDriver<>(hbc);
-		final EMFIncQueryChecker eiqChecker = EMFIncQueryChecker.newInstance(getHawkBenchmarkConfig(), hawkDriver, bc.getQuery());
-		checker = eiqChecker;
-
-		hawkDriver.registerChecker(eiqChecker);
+		driver = hawkDriver = new HawkDriver<>(bc);
+		checker = (Checker<M>) EMFIncQueryChecker.newInstance(getHawkBenchmarkConfig(), hawkDriver, bc.getQuery());
+		hawkDriver.registerChecker((EMFIncQueryChecker<M>) checker);
 
 		final Client client = APIUtils.connectToHawk(HAWK_URL, ThriftProtocol.TUPLE);
 		try {

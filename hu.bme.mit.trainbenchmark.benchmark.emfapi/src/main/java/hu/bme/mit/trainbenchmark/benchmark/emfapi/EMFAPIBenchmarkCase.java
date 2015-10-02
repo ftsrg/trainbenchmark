@@ -21,13 +21,13 @@ import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class EMFAPIBenchmarkCase extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig> {
+public class EMFAPIBenchmarkCase extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig, Checker<EMFMatch>> {
 
 	protected EMFDriver emfDriver;
 
 	@Override
 	public void initialize() throws Exception {
-		driver = emfDriver = new EMFDriver();
+		driver = new EMFDriver();
 		checker = (Checker<EMFMatch>) EMFAPIChecker.newInstance(emfDriver, bc.getQuery());
 	}
 
