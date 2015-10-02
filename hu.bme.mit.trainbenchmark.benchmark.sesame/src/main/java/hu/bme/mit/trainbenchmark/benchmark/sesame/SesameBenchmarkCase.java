@@ -12,11 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
+import java.io.IOException;
 import java.util.Comparator;
 
 import org.openrdf.model.URI;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
@@ -25,22 +26,25 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCaseRunner<SesameMatch, URI, SesameDriver, RDFBenchmarkConfig, SesameChecker> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RDFBenchmarkConfig, SesameChecker> {
 
 	@Override
-	protected void initialize() throws Exception {
-		driver = new SesameDriver(bc);
-		checker = new SesameChecker(driver, bc);
+	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+		return new SesameDriver(benchmarkConfig);
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws Exception {
+		return new SesameChecker(driver, benchmarkConfig);
+	}
+
+	@Override
+	public Comparator<?> createMatchComparator() {
 		return new SesameMatchComparator();
 	}
 
 	@Override
-	protected Transformation<?> getTransformation() {
-		return SesameTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
+	public Transformation<?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws IOException {
+		return SesameTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
-
 }

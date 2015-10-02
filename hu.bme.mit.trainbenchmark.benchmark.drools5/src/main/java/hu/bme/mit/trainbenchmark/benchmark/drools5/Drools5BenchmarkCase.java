@@ -23,17 +23,19 @@ import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public class Drools5BenchmarkCase extends EMFBenchmarkCase<Drools5Driver, BenchmarkConfig, Drools5Checker> {
 
-	protected Drools5Driver drools5driver;
-
 	@Override
-	public void initialize() throws Exception {
-		driver = drools5driver = new Drools5Driver(bc);
-		checker = new Drools5Checker(drools5driver, bc.getQuery());
+	public Drools5Driver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+		return new Drools5Driver(benchmarkConfig);
 	}
 
 	@Override
-	protected Transformation<?> getTransformation() throws IOException {
-		return EMFTransformation.newInstance(drools5driver, bc.getQuery(), bc.getScenario());
+	public Drools5Checker createChecker(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver) {
+		return new Drools5Checker(driver, benchmarkConfig.getQuery());
+	}
+
+	@Override
+	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver) throws IOException {
+		return EMFTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 }

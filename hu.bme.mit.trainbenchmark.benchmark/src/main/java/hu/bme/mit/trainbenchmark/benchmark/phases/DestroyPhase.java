@@ -27,7 +27,7 @@ public class DestroyPhase extends AtomicPhase {
 	public void execute(final DataToken token, final PhaseResult phaseResult) {
 		final TrainBenchmarkDataToken trainToken = (TrainBenchmarkDataToken) token;
 		try {
-			trainToken.getBenchmarkCase().benchmarkDestroy();
+			trainToken.getBenchmarkRunner().destroy();
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}

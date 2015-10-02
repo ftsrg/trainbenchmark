@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.cli.ParseException;
 import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
 
@@ -28,7 +27,7 @@ import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.JsonSerializer;
 import eu.mondo.sam.core.results.MetricResult;
 import eu.mondo.sam.core.results.PhaseResult;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
@@ -39,22 +38,22 @@ public abstract class TrainBenchmarkTest {
 
 	protected TestBenchmarkInitializer bi;
 
-	public BenchmarkLogic initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
+	public BenchmarkRunner initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
 		return bi.initializeBenchmark(query, scenario);
 	}
 
-	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws ParseException, IOException {
-		final BenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
+	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws Exception {
+		final BenchmarkRunner bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, ImmutableList.of(expectedResultSize));
 	}
 
 	protected void testTransformation(final Query query, final Scenario scenario, final int expectedResultSize1,
-			final int expectedResultSize2) throws ParseException, IOException {
-		final BenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
+			final int expectedResultSize2) throws Exception {
+		final BenchmarkRunner bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, ImmutableList.of(expectedResultSize1, expectedResultSize2));
 	}
 
-	private void runQuery(final BenchmarkLogic benchmarkLogic, final List<Integer> expectedResultSizes) throws IOException {
+	private void runQuery(final BenchmarkRunner benchmarkLogic, final List<Integer> expectedResultSizes) throws Exception {
 		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult benchmarkResult = benchmarkLogic.runBenchmark();
 

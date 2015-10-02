@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver;
 import java.util.Collection;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Level;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
 import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
@@ -25,6 +26,7 @@ import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchB
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 
@@ -34,6 +36,12 @@ public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFIncQueryBa
 
 	public EMFIncQueryDriver(final EMFIncQueryBenchmarkConfig eiqbc) {
 		this.eiqbc = eiqbc;
+	}
+
+	@Override
+	public void initialize() throws Exception {
+		super.initialize();
+		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
 	}
 
 	@Override

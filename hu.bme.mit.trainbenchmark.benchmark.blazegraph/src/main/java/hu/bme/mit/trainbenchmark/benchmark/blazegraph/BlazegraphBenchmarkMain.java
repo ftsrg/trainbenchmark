@@ -12,18 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
-
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class BlazegraphBenchmarkMain {
 
-	public static void main(final String[] args) throws ParseException, IOException {
+	public static void main(final String[] args) throws Exception {
 		final RDFBenchmarkConfig bc = new RDFBenchmarkConfig(args, "Blazegraph");
-		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new BlazegraphBenchmarkCase());
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new BlazegraphBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

@@ -15,10 +15,9 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 import java.io.IOException;
 import java.util.Comparator;
 
-import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
@@ -30,33 +29,30 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 
 public class Neo4jBenchmarkCase<Neo4jChecker>
-		extends AbstractBenchmarkCaseRunner<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, Checker<Neo4jMatch>> {
-
-	protected GraphDatabaseService graphDb;
-	protected String dbPath;
-
-	protected Neo4jDriver neoDriver;
+		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, Checker<Neo4jMatch>> {
 
 	@Override
-	public void initialize() throws Exception {
-		dbPath = bc.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
-		driver = neoDriver = new Neo4jDriver(dbPath);
+	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
+		final String dbPath = benchmarkConfig.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
+		return new Neo4jDriver(dbPath);
+	}
 
-		final Neo4jBenchmarkConfig nbc = bc;
-		if (nbc.isCoreApi()) {
-			checker = Neo4jCoreChecker.newInstance(neoDriver, bc.getQuery());
+	@Override
+	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver) throws Exception {
+		if (benchmarkConfig.isCoreApi()) {
+			return Neo4jCoreChecker.newInstance(driver, benchmarkConfig.getQuery());
 		} else {
-			checker = Neo4jCypherChecker.newInstance(neoDriver, bc);
+			return Neo4jCypherChecker.newInstance(driver, benchmarkConfig);
 		}
 	}
 
 	@Override
-	protected Transformation<?> getTransformation() throws IOException {
-		return Neo4jTransformation.newInstance(neoDriver, bc.getQuery(), bc.getScenario());
+	public Transformation<?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver) throws IOException {
+		return Neo4jTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	public Comparator<?> createMatchComparator() {
 		return new Neo4jMatchComparator();
 	}
 

@@ -11,15 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
+import java.io.IOException;
 import java.util.Comparator;
 
-import org.apache.log4j.Level;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
@@ -28,29 +26,31 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQue
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
-		AbstractBenchmarkCaseRunner<TMatch, RailwayElement, EMFIncQueryDriver<TMatch>, EMFIncQueryBenchmarkConfig, EMFIncQueryChecker<TMatch>> {
+		AbstractBenchmarkCase<TMatch, RailwayElement, EMFIncQueryDriver<TMatch>, EMFIncQueryBenchmarkConfig, EMFIncQueryChecker<TMatch>> {
 
-	protected EMFIncQueryBenchmarkConfig getEMFIncQueryBenchmarkConfig() {
-		return bc;
+	@Override
+	public EMFIncQueryDriver<TMatch> createDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) throws Exception {
+		return new EMFIncQueryDriver(benchmarkConfig);
 	}
 
 	@Override
-	public void initialize() throws Exception {
-		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
-
-		driver = new EMFIncQueryDriver(getEMFIncQueryBenchmarkConfig());
-		checker = (Checker<TMatch>) EMFIncQueryChecker.newInstance(getEMFIncQueryBenchmarkConfig(), driver, bc.getQuery());
-		driver.registerChecker((EMFIncQueryChecker<TMatch>) checker);
+	public EMFIncQueryChecker<TMatch> createChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+			final EMFIncQueryDriver<TMatch> driver) throws Exception {
+		final EMFIncQueryChecker<TMatch> checker = (EMFIncQueryChecker<TMatch>) EMFIncQueryChecker.newInstance(benchmarkConfig, driver,
+				benchmarkConfig.getQuery());
+		driver.registerChecker(checker);
+		return checker;
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	public Transformation<?> createTransformation(final EMFIncQueryBenchmarkConfig benchmarkConfig, final EMFIncQueryDriver<TMatch> driver)
+			throws IOException {
+		return EMFIncQueryTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+	}
+
+	@Override
+	public Comparator<?> createMatchComparator() {
 		return new EMFIncQueryMatchComparator();
-	}
-
-	@Override
-	protected Transformation<?> getTransformation() {
-		return EMFIncQueryTransformation.newInstance(driver, bc.getQuery(), bc.getScenario());
 	}
 
 }

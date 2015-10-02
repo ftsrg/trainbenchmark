@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Comparator;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
@@ -29,18 +30,22 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase<MySQLDriver> {
 	}
 
 	@Override
-	public void initialize() throws Exception {
-		driver = new MySQLDriver();
-		checker = new SQLChecker(driver, bc);
+	public MySQLDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+		return new MySQLDriver();
 	}
 
 	@Override
-	protected Transformation<?> getTransformation() throws IOException {
-		return SQLTransformation.newInstance(driver, bc);
+	public SQLChecker createChecker(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws Exception {
+		return new SQLChecker(driver, benchmarkConfig);
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws IOException {
+		return SQLTransformation.newInstance(driver, benchmarkConfig);
+	}
+
+	@Override
+	public Comparator<?> createMatchComparator() {
 		return new LongMatchComparator();
 	}
 

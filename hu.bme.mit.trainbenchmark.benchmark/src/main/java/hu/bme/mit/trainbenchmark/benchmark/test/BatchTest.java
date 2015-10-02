@@ -20,40 +20,37 @@ import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.BATCH;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
 public abstract class BatchTest extends TrainBenchmarkTest {
 
 	@Test
-	public void connectedSegments() throws ParseException, IOException {
+	public void connectedSegments() throws Exception {
 		testQuery(CONNECTEDSEGMENTS, BATCH, 0);
 	}
 
 	@Test
-	public void posLength() throws ParseException, IOException {
+	public void posLength() throws Exception {
 		testQuery(POSLENGTH, BATCH, 0);
 	}
 
 	@Test
-	public void routeSensor() throws ParseException, IOException {
+	public void routeSensor() throws Exception {
 		testQuery(ROUTESENSOR, BATCH, 0);
 	}
 
 	@Test
-	public void semaphoreNeighbor() throws ParseException, IOException {
+	public void semaphoreNeighbor() throws Exception {
 		testQuery(SEMAPHORENEIGHBOR, BATCH, 0);
 	}
 
 	@Test
-	public void switchSensor() throws ParseException, IOException {
+	public void switchSensor() throws Exception {
 		testQuery(SWITCHSENSOR, BATCH, 0);
 	}
 
 	@Test
-	public void switchSet() throws ParseException, IOException {
+	public void switchSet() throws Exception {
 		testQuery(SWITCHSET, BATCH, 0);
 	}
 
