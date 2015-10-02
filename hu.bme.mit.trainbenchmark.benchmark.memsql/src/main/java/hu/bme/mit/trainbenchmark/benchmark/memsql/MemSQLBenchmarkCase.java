@@ -11,21 +11,30 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql;
 
+import java.io.IOException;
+import java.util.Comparator;
+
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.memsql.driver.MemSQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 
-public class MemSQLBenchmarkCase extends SQLBenchmarkCase {
+public class MemSQLBenchmarkCase extends SQLBenchmarkCase<MemSQLDriver> {
 
 	@Override
 	protected void initialize() throws Exception {
-		driver = sqlDriver = new MemSQLDriver();
-		checker = new SQLChecker(sqlDriver, bc);
+		driver = new MemSQLDriver();
+		checker = new SQLChecker(driver, bc);
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = SQLTransformation.newInstance(sqlDriver, bc);
-		}
+	@Override
+	protected Transformation<?> getTransformation() throws IOException {
+		return null;
+	}
+
+	@Override
+	protected Comparator<?> getMatchComparator() {
+		return null;
 	}
 
 }
