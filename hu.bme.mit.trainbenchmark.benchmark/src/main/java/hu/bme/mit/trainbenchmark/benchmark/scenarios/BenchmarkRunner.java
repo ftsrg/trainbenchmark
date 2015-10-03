@@ -92,7 +92,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	public final void read(final PhaseResult phaseResult) throws Exception {
 		final TimeMetric timer = new TimeMetric("Time");
 		timer.startMeasure();
-		driver.read(benchmarkConfig.getModelPathNameWithoutExtension());
+		driver.read(benchmarkConfig.getModelPathWithoutExtension());
 		timer.stopMeasure();
 		phaseResult.addMetrics(timer);
 	}
