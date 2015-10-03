@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd "$( cd "$( dirname "$0" )" && pwd )"
+cd "$( cd "$( dirname "$0" )" && pwd )/.."
 
-cd ../config
-cp config-default.yml config.yml
+cp config/default-config.yml config/config.yml

@@ -10,7 +10,10 @@ runs: 5
 iterationcount: 10
 # timeout for the benchmark processes
 timeout: 600
-
+#email:
+#  address: trainbenchmark@gmail.com
+#  password: iliketrains
+#  host: smtp.gmail.com:587
 queries:
 - ConnectedSegments
 - PosLength
