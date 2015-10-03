@@ -16,6 +16,10 @@ import util
 import os
 import glob
 
+def flatten(lst):
+    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
+
+
 def build(config, formats, skip_tests):
     profiles = {"core"}
     profiles = profiles.union(formats)
@@ -50,11 +54,12 @@ def generate(config, formats):
                 util.set_working_directory(path)
                 target = util.get_generator_jar(format)
                 for size in config["sizes"]:
-                    cmd = ["java", "-Xmx" + config["java_opts"]["xmx"],
+                    cmd = flatten(["java", 
+                         config["java_opts"],
                          "-jar", target,
                          "-scenario", scenario,
                          "-size", str(size),
-                       arg]
+                       arg])
                     try:
                         subprocess.check_call(cmd)
                     except subprocess.CalledProcessError:
@@ -91,12 +96,14 @@ def measure(config):
                               ", query: " + query +
                               ", size: " + str(size) +
                               (", argument: " + arg if arg != "" else ""))
-                        cmd = ["java", "-Xmx" + config["java_opts"]["xmx"], "-jar", target,
+                        cmd = flatten(["java",
+                               config["java_opts"],
+                               "-jar", target,
                                "-runs", str(config["runs"]),
                                "-scenario", scenario,
                                "-query", query,
                                "-size", str(size),
-                               arg]
+                               arg])
                         try:
                             subprocess.check_output(cmd, timeout=config["timeout"])
                         except subprocess.TimeoutExpired:
