@@ -12,22 +12,40 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
-import org.apache.commons.cli.ParseException;
+import java.io.File;
+import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.io.IOUtils;
+
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
 public class IQDCoreBenchmarkLogic extends AbstractBenchmarkLogic {
 
-	protected RDFBenchmarkConfig rbc;
+	protected IQDCoreBenchmarkConfig iqdbc;
 
 	public IQDCoreBenchmarkLogic(final String[] args) throws ParseException {
-		bc = rbc = new RDFBenchmarkConfig(args, "IQDCore");
+		bc = iqdbc = new IQDCoreBenchmarkConfig(args);
+		setCPUAffinity();
 	}
 
-	public IQDCoreBenchmarkLogic(final RDFBenchmarkConfig rbc) {
+	public IQDCoreBenchmarkLogic(final IQDCoreBenchmarkConfig rbc) {
 		super(rbc);
-		this.rbc = rbc;
+		this.iqdbc = rbc;
+		setCPUAffinity();
+	}
+	public void setCPUAffinity() {
+		if (iqdbc.isCPURestricted()) {
+			String cpulist = iqdbc.getCpuList();
+			try {
+				int pid = Integer.parseInt(new File("/proc/self").getCanonicalFile().getName());
+				Runtime.getRuntime().exec(String.format("taskset -a -p -c %s %d", cpulist, pid));
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(-1);
+			}
+		}
 	}
 
 }
