@@ -63,7 +63,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 	// read
 
 	@Override
-	public List<RailwayElement> collectVertices(final String type) {
+	public List<RailwayElement> collectVertices(final String type) throws Exception {
 		final List<RailwayElement> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);

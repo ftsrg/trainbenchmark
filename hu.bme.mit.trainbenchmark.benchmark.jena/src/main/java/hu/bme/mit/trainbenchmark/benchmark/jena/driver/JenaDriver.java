@@ -45,8 +45,9 @@ import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 public class JenaDriver extends RDFDriver<Resource> {
 
-	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Model model;
+
+	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Comparator<Statement> statementComparator = new StatemetComparator();
 
 	public JenaDriver(final RDFBenchmarkConfig rdfbc) {
