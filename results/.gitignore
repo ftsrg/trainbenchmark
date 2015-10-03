@@ -1,3 +1,5 @@
 *.csv
 *.json
 !.gitignore
+completed/*
+!completed/.gitignore
