@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.hawk.driver;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -133,6 +134,10 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 				matches.remove(match);
 			}
 		}, false);
+	}
+
+	public void persist() throws IOException {
+		resource.save(null);
 	}
 
 }

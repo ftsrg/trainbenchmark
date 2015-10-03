@@ -11,10 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.inject;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Route;
-
-import java.util.Collection;
 
 public class EMFTransformationInjectSemaphoreNeighbor extends EMFTransformationInject<Route> {
 
@@ -23,7 +24,7 @@ public class EMFTransformationInjectSemaphoreNeighbor extends EMFTransformationI
 	}
 
 	@Override
-	public void rhs(final Collection<Route> routes) {
+	public void rhs(final Collection<Route> routes) throws IOException {
 		for (final Route route : routes) {
 			route.setEntry(null);
 			driver.getContainer().getInvalids().add(route);
