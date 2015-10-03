@@ -11,11 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.driver;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
@@ -40,9 +42,8 @@ import uk.ac.york.mondo.integration.hawk.emf.HawkResourceFactoryImpl;
 
 public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDriver<M> {
 
-	private static final String ECORE_METAMODEL = "hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
-	private static final String WORKSPACE_PATH = "/home/szarnyasg/git/trainbenchmark/";
-	private static final String MODEL_REPOSITORY = "/home/szarnyasg/mondo/myrepository";
+	private static final String ECORE_METAMODEL = "/hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
+	private static final String HAWK_REPOSITORY = "/models/hawkrepository";
 	private static final String PASSWORD = "admin";
 	private static final String HAWK_INSTANCE = "trainbenchmark";
 	private static final String HAWK_ADDRESS = "localhost:8080/thrift/hawk/tuple";
@@ -57,6 +58,21 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
+
+		final File workspaceFile = new File(hbc.getWorkspacePath());
+		final String workspacePath = workspaceFile.getAbsolutePath();
+
+		final String ecoreMetamodel = workspacePath + ECORE_METAMODEL;
+		final String hawkRepository = workspacePath + HAWK_REPOSITORY;
+
+		// remove the directory
+		final File hawkRepositoryFile = new File(hawkRepository);
+		FileUtils.deleteDirectory(hawkRepositoryFile);
+
+		final String modelPathNameWithoutExtension = hbc.getModelPathWithoutExtension() + getPostfix();
+		System.out.println(modelPathNameWithoutExtension);
+
+		// FileUtils.moveFile(srcFile, destFile);
 		final Client client = APIUtils.connectToHawk(HAWK_URL, ThriftProtocol.TUPLE);
 		try {
 			client.startInstance(HAWK_INSTANCE, PASSWORD);
@@ -64,7 +80,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 			client.createInstance(HAWK_INSTANCE, PASSWORD);
 		}
 
-		final java.io.File file = new java.io.File(WORKSPACE_PATH + ECORE_METAMODEL);
+		final java.io.File file = new java.io.File(ecoreMetamodel);
 		final uk.ac.york.mondo.integration.api.File thriftFile = APIUtils.convertJavaFileToThriftFile(file);
 
 		outer: do {
@@ -88,7 +104,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		client.registerMetamodels(HAWK_INSTANCE, Arrays.asList(thriftFile));
 
 		final Credentials credentials = new Credentials("dummy", "dummy");
-		final Repository repository = new Repository(MODEL_REPOSITORY, "org.hawk.localfolder.LocalFolder");
+		final Repository repository = new Repository(HAWK_REPOSITORY, "org.hawk.localfolder.LocalFolder");
 
 		client.addRepository(HAWK_INSTANCE, repository, credentials);
 

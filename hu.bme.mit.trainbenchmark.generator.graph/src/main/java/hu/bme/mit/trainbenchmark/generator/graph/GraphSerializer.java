@@ -159,7 +159,7 @@ public class GraphSerializer extends ModelSerializer {
 			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 			tx.success();
 
-			final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
+			final String fileName = generatorConfig.getModelPathWithoutExtension() + ".graphml";
 
 			String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB

@@ -53,7 +53,7 @@ public class RDFSerializer extends ModelSerializer {
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = rdfGeneratorConfig.getModelPathNameWithoutExtension() + postfix + ".ttl";
+		final String destFilePath = rdfGeneratorConfig.getModelPathWithoutExtension() + postfix + ".ttl";
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
