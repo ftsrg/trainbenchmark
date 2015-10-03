@@ -59,7 +59,7 @@ public class GraphSerializer extends ModelSerializer {
 
 	@Override
 	public void initModel() throws IOException {
-		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
+		final String databaseDirectoriesPath = generatorConfig.getModelsPath() + "/neo4j-gen/";
 		databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories

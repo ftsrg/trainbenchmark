@@ -43,7 +43,7 @@ import uk.ac.york.mondo.integration.hawk.emf.HawkResourceFactoryImpl;
 public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDriver<M> {
 
 	private static final String ECORE_METAMODEL = "/hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
-	private static final String HAWK_REPOSITORY = "/models/hawkrepository";
+	private static final String HAWK_REPOSITORY = "/models/hawkrepository/";
 	private static final String PASSWORD = "admin";
 	private static final String HAWK_INSTANCE = "trainbenchmark";
 	private static final String HAWK_ADDRESS = "localhost:8080/thrift/hawk/tuple";
@@ -59,20 +59,21 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 	public void initialize() throws Exception {
 		super.initialize();
 
-		final File workspaceFile = new File(hbc.getWorkspacePath());
-		final String workspacePath = workspaceFile.getAbsolutePath();
+		final File workspaceRelativePath = new File(hbc.getWorkspacePath());
+		final String workspacePath = workspaceRelativePath.getAbsolutePath();
 
-		final String ecoreMetamodel = workspacePath + ECORE_METAMODEL;
-		final String hawkRepository = workspacePath + HAWK_REPOSITORY;
+		final String ecoreMetamodelPath = workspacePath + ECORE_METAMODEL;
+		final String hawkRepositoryPath = workspacePath + HAWK_REPOSITORY;
 
-		// remove the directory
-		final File hawkRepositoryFile = new File(hawkRepository);
+		// remove the repository
+		final File hawkRepositoryFile = new File(hawkRepositoryPath);
 		FileUtils.deleteDirectory(hawkRepositoryFile);
 
-		final String modelPathNameWithoutExtension = hbc.getModelPathWithoutExtension() + getPostfix();
-		System.out.println(modelPathNameWithoutExtension);
+		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
+		final File modelFile = new File(modelPath);
 
-		// FileUtils.moveFile(srcFile, destFile);
+		FileUtils.copyFileToDirectory(modelFile, hawkRepositoryFile);
+
 		final Client client = APIUtils.connectToHawk(HAWK_URL, ThriftProtocol.TUPLE);
 		try {
 			client.startInstance(HAWK_INSTANCE, PASSWORD);
@@ -80,7 +81,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 			client.createInstance(HAWK_INSTANCE, PASSWORD);
 		}
 
-		final java.io.File file = new java.io.File(ecoreMetamodel);
+		final java.io.File file = new java.io.File(ecoreMetamodelPath);
 		final uk.ac.york.mondo.integration.api.File thriftFile = APIUtils.convertJavaFileToThriftFile(file);
 
 		outer: do {

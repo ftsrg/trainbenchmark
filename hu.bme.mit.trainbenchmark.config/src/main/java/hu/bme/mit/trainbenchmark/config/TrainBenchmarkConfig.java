@@ -114,13 +114,13 @@ public abstract class TrainBenchmarkConfig {
 		return "../";
 	}
 
-	public String getModelPath() {
+	public String getModelsPath() {
 		return getWorkspacePath() + "models/";
 	}
 
 	public String getModelPathWithoutExtension() {
 		final String filename = getModelFileNameWithoutExtension();
-		return getModelPath() + filename;
+		return getModelsPath() + filename;
 	}
 
 	public String getModelFileNameWithoutExtension() {
