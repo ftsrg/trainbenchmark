@@ -68,6 +68,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		checker = benchmarkCase.createChecker(benchmarkConfig, driver);
 
 		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
+			System.out.println(i);
 			scenario.setRunIndex(i);
 			engine.runBenchmark(scenario, token);
 		}

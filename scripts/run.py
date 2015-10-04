@@ -109,7 +109,7 @@ def measure(config):
                                "-size", str(size),
                                arg])
                         try:
-                            subprocess.check_output(cmd, timeout=config["timeout"])
+                            subprocess.check_call(cmd, timeout=config["timeout"])
                         except subprocess.TimeoutExpired:
                             print("Timeout, skipping larger sizes for this tool/scenario/query.")
                             break
