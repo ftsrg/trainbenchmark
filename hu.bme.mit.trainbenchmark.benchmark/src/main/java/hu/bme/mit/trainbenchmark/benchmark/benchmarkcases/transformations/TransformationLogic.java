@@ -79,16 +79,14 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		nObjectsToModify = Util.calcModify(bc, currentMatches.size());
 		modified.setValue(nObjectsToModify);
 
-		transformationMetric.startMeasure();
 		driver.beginTransaction();
 		lhs(currentMatches);
-		transformationMetric.stopMeasure();
 
 		// we do not measure this in the benchmark results
 		final List<TTransformationObject> candidatesList = copyAndSort();
 		objectsToModify = pickRandom(nObjectsToModify, candidatesList);
 
-		transformationMetric.continueMeasure();
+		transformationMetric.startMeasure();
 		transformation.rhs(objectsToModify);
 		driver.finishTransaction();
 		transformationMetric.stopMeasure();
