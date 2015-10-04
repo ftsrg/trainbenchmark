@@ -34,7 +34,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	// constants for trhe transformation
 	protected TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
-	protected long transformationConstant = 1;
+	protected long transformationConstant = 10;
 	protected int iterationCount = 10;
 
 	protected String className;

@@ -69,9 +69,9 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	@Override
 	public String getToolName() {
 		if (isLocalSearch()) {
-			return "EMFIncQuery-LocalSearch";
+			return "EMFIncQuery-(Local-Search)";
 		} else {
-			return "EMFIncQuery-Incremental";
+			return "EMFIncQuery-(Incremental)";
 		}
 	}
 
