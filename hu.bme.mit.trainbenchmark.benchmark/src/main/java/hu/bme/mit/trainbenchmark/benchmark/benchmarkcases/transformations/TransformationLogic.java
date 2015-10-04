@@ -18,8 +18,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.base.Stopwatch;
-
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
 import eu.mondo.sam.core.results.BenchmarkResult;
@@ -81,29 +79,19 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		nObjectsToModify = Util.calcModify(bc, currentMatches.size());
 		modified.setValue(nObjectsToModify);
 
-		final Stopwatch swlhs = Stopwatch.createStarted();
-
 		transformationMetric.startMeasure();
 		driver.beginTransaction();
 		lhs(currentMatches);
 		transformationMetric.stopMeasure();
 
-		// System.out.print("lhs = " + swlhs.elapsed(TimeUnit.MILLISECONDS) + " ms");
-
-		final Stopwatch swrhs = Stopwatch.createStarted();
-
 		// we do not measure this in the benchmark results
 		final List<TTransformationObject> candidatesList = copyAndSort();
 		objectsToModify = pickRandom(nObjectsToModify, candidatesList);
 
-		// System.out.print(transformationMetric.getValue() + " ");
 		transformationMetric.continueMeasure();
 		transformation.rhs(objectsToModify);
 		driver.finishTransaction();
 		transformationMetric.stopMeasure();
-		// System.out.println(transformationMetric.getValue());
-
-		// System.out.println("\t rhs = " + swrhs.elapsed(TimeUnit.MILLISECONDS) + " ms");
 
 		phaseResult.addMetrics(transformationMetric, modified);
 	}

@@ -23,7 +23,6 @@ public abstract class EMFIncQueryBaseDriver<M extends BasePatternMatch> extends 
 
 	protected EMFIncQueryChecker<M> checker;
 	protected AdvancedIncQueryEngine engine;
-	protected boolean first = true;
 
 	public void registerChecker(final EMFIncQueryChecker<M> checker) throws IOException {
 		this.checker = checker;
@@ -34,10 +33,8 @@ public abstract class EMFIncQueryBaseDriver<M extends BasePatternMatch> extends 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		final NavigationHelper navigationHelper = EMFScope.extractUnderlyingEMFIndex(engine);
 
-		if (first) {
-			navigationHelper.registerEClasses(Sets.newHashSet(clazz));
-			first = false;
-		}
+		// register the class (won't register it twice)
+		navigationHelper.registerEClasses(Sets.newHashSet(clazz));
 
 		final Set<EObject> instances = navigationHelper.getAllInstances(clazz);
 		final List<RailwayElement> vertices = new ArrayList<>();
