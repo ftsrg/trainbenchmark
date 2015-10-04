@@ -56,6 +56,6 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	@Override
 	public String getToolName() {
-		return super.getToolName() + (isCoreApi() ? "-Core-API" : "-Cypher");
+		return super.getToolName() + (isCoreApi() ? "_Core_API" : "_Cypher");
 	}
 }
