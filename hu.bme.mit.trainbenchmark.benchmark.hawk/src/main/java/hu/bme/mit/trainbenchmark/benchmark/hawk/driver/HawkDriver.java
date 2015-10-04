@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
@@ -32,6 +31,7 @@ import org.eclipse.incquery.runtime.emf.EMFScope;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import uk.ac.york.mondo.integration.api.Credentials;
 import uk.ac.york.mondo.integration.api.Hawk.Client;
 import uk.ac.york.mondo.integration.api.HawkInstance;
@@ -51,6 +51,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 	private static final String HAWK_URL = "http://" + HAWK_ADDRESS;
 
 	protected HawkBenchmarkConfig hbc;
+	protected String hawkRepositoryPath;
 
 	public HawkDriver(final HawkBenchmarkConfig hbc) {
 		this.hbc = hbc;
@@ -63,18 +64,25 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		final File workspaceRelativePath = new File(hbc.getWorkspacePath());
 		final String workspacePath = workspaceRelativePath.getAbsolutePath();
 
-		final String ecoreMetamodelPath = workspacePath + ECORE_METAMODEL;
-		final String hawkRepositoryPath = workspacePath + HAWK_REPOSITORY;
+		hawkRepositoryPath = workspacePath + HAWK_REPOSITORY;
+		cleanRepository(hawkRepositoryPath);
+		connectToHawk(workspacePath);
+	}
 
+	protected void cleanRepository(final String hawkRepositoryPath) throws IOException {
 		// remove the repository
 		final File hawkRepositoryFile = new File(hawkRepositoryPath);
 		FileUtils.deleteDirectory(hawkRepositoryFile);
+	}
 
-		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
+	protected void copyModelToHawk(final String hawkRepositoryPath, final String modelPath) throws IOException {
 		final File modelFile = new File(modelPath);
 
+		final File hawkRepositoryFile = new File(hawkRepositoryPath);
 		FileUtils.copyFileToDirectory(modelFile, hawkRepositoryFile);
+	}
 
+	protected void connectToHawk(final String workspacePath) throws Exception {
 		final Client client = APIUtils.connectToHawk(HAWK_URL, ThriftProtocol.TUPLE);
 		try {
 			client.startInstance(HAWK_INSTANCE, PASSWORD);
@@ -82,6 +90,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 			client.createInstance(HAWK_INSTANCE, PASSWORD);
 		}
 
+		final String ecoreMetamodelPath = workspacePath + ECORE_METAMODEL;
 		final java.io.File file = new java.io.File(ecoreMetamodelPath);
 		final uk.ac.york.mondo.integration.api.File thriftFile = APIUtils.convertJavaFileToThriftFile(file);
 
@@ -99,7 +108,8 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		final ResourceSetImpl resourceSet = new ResourceSetImpl();
 		final Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
 		resourceFactoryRegistry.getProtocolToFactoryMap().put("hawk+http", new HawkResourceFactoryImpl());
-		final Resource resource = resourceSet.createResource(
+		// set the Resource in the EMFDriver
+		resource = resourceSet.createResource(
 				URI.createURI("hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE + "&subscribe=true&durability=temporary"));
 		resource.load(Collections.emptyMap());
 
@@ -109,13 +119,17 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		final Repository repository = new Repository(HAWK_REPOSITORY, "org.hawk.localfolder.LocalFolder");
 
 		client.addRepository(HAWK_INSTANCE, repository, credentials);
-
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
-		super.read(modelPathWithoutExtension);
+		RailwayPackage.eINSTANCE.eClass();
+		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
 
+		// copy the model to the hawk repository to allow Hawk to load the model
+		copyModelToHawk(hawkRepositoryPath, modelPath);
+
+		// TODO: wait for finishing the operation
 		final EMFScope emfScope = new EMFScope(resource);
 		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
 
