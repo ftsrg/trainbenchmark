@@ -38,12 +38,12 @@ public class InjectTransformationLogic<TMatch, TElement> extends TransformationL
 	}
 
 	protected static Map<Query, String> VERTEX_TYPES = ImmutableMap.<Query, String> builder() //
+			.put(CONNECTEDSEGMENTS, SEGMENT) //
 			.put(POSLENGTH, SEGMENT) //
 			.put(ROUTESENSOR, ROUTE) //
 			.put(SEMAPHORENEIGHBOR, ROUTE) //
 			.put(SWITCHSENSOR, SWITCH) //
 			.put(SWITCHSET, SWITCH) //
-			.put(CONNECTEDSEGMENTS, SEGMENT) //
 			.build();
 
 	@Override
