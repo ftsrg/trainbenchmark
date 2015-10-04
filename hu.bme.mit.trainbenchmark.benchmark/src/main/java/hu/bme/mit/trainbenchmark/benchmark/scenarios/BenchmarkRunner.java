@@ -64,11 +64,9 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
 		token.setBenchmarkRunner(this);
 
-		driver = benchmarkCase.createDriver(benchmarkConfig);
-		checker = benchmarkCase.createChecker(benchmarkConfig, driver);
-
 		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
-			System.out.println(i);
+			driver = benchmarkCase.createDriver(benchmarkConfig);
+			checker = benchmarkCase.createChecker(benchmarkConfig, driver);
 			scenario.setRunIndex(i);
 			engine.runBenchmark(scenario, token);
 		}
