@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 
-	protected static final String EMFINCQUERY = "EMFIncQuery";
+	protected static final String EMFINCQUERY = "EMF-IncQuery";
 	protected static final String LOCALSEARCH = "localsearch";
 
 	protected boolean localSearch;
@@ -69,9 +69,9 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	@Override
 	public String getToolName() {
 		if (isLocalSearch()) {
-			return "EMFIncQuery-(Local-Search)";
+			return super.getToolName() + "_(Local_Search)";
 		} else {
-			return "EMFIncQuery-(Incremental)";
+			return super.getToolName() + "_(Incremental)";
 		}
 	}
 

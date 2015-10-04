@@ -25,7 +25,9 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Ordering;
 
@@ -49,7 +51,9 @@ public class InjectTransformationLogic<TMatch, TElement> extends TransformationL
 	@Override
 	protected void lhs(final Collection<TMatch> currentMatches) throws Exception {
 		final String vertexType = VERTEX_TYPES.get(bc.getQuery());
+		final Stopwatch swlhs = Stopwatch.createStarted();
 		candidatesToModify = driver.collectVertices(vertexType);
+		System.out.println("lhs = " + swlhs.elapsed(TimeUnit.MILLISECONDS) + " ms");
 	}
 
 	@Override

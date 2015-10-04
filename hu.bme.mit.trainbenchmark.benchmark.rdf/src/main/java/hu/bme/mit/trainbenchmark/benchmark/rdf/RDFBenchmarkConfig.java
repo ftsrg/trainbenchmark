@@ -55,6 +55,6 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 
 	@Override
 	public String getToolName() {
-		return super.getToolName() + (isInferencing() ? "-(Inferencing)" : "-(No-Inferencing)");
+		return super.getToolName() + (isInferencing() ? "_(Inferencing)" : "_(No_Inferencing)");
 	}
 }
