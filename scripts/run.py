@@ -73,18 +73,18 @@ def generate(config, formats):
 
 
 def measure(config):
-    for tool in config["tools"]:
-        args = [""]
-        if tool in config["benchmark_optional_arguments"]:
-            for optional_argument in config["benchmark_optional_arguments"][tool]:
-                args.append("-" + optional_argument)
+    for scenario in config["scenarios"]:
+        for tool in config["tools"]:
+            args = [""]
+            if tool in config["benchmark_optional_arguments"]:
+                for optional_argument in config["benchmark_optional_arguments"][tool]:
+                    args.append("-" + optional_argument)
 
-        for arg in args:
-            path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
-            util.set_working_directory(path)
-            target = util.get_tool_jar(tool)
+            for arg in args:
+                path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
+                util.set_working_directory(path)
+                target = util.get_tool_jar(tool)
 
-            for scenario in config["scenarios"]:
                 for query in config["queries"]:
                     for size in config["sizes"]:
                         

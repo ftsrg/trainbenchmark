@@ -26,7 +26,7 @@ derived.times <- ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName", "RunIndex"), 
     summarize,
-    load.and.check = sum(read.and.check, na.rm = TRUE), 
+    read.and.check = sum(read.and.check, na.rm = TRUE), 
     transformation.and.recheck = sum(transformation.and.recheck),
     read = sum(Read, na.rm = TRUE),
     check = sum(Check, na.rm = TRUE),
@@ -42,7 +42,7 @@ derived.times <- ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName"), 
     summarize, 
-    load.and.check = f(load.and.check),
+    read.and.check = f(read.and.check),
     transformation.and.recheck = f(transformation.and.recheck),
     read = f(read),
     check = f(check),
@@ -50,7 +50,7 @@ derived.times <- ddply(
     recheck = f(recheck)
 )
 
-plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("load.and.check", "transformation.and.recheck", "read", "check", "transformation", "recheck"))
+plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("read.and.check", "transformation.and.recheck", "read", "check", "transformation", "recheck"))
 
 # plot
 
@@ -83,12 +83,12 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
 
 # aggregated plots
 
-#trainBenchmarkPlot(plottimes, "Batch", "load.and.check")
+#trainBenchmarkPlot(plottimes, "Batch", "read.and.check")
 
-#trainBenchmarkPlot(plottimes, "Inject", "load.and.check")
-#trainBenchmarkPlot(plottimes, "Inject", "transformation.and.recheck")
+trainBenchmarkPlot(plottimes, "Inject", "read.and.check")
+trainBenchmarkPlot(plottimes, "Inject", "transformation.and.recheck")
 
-#trainBenchmarkPlot(plottimes, "Repair", "load.and.check")
+#trainBenchmarkPlot(plottimes, "Repair", "read.and.check")
 #trainBenchmarkPlot(plottimes, "Repair", "transformation.and.recheck")
 
 # detailed plots
