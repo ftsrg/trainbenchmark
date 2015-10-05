@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class HawkRepairIncrementalTest extends RepairTest {
+public class HawkInjectTest extends InjectTest {
 
-	public HawkRepairIncrementalTest() {
+	public HawkInjectTest() {
 		bi = new HawkBenchmarkInitializer();
 	}
 
