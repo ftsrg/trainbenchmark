@@ -39,7 +39,8 @@ import uk.ac.york.mondo.integration.api.HawkInstanceNotFound;
 import uk.ac.york.mondo.integration.api.Repository;
 import uk.ac.york.mondo.integration.api.utils.APIUtils;
 import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
-import uk.ac.york.mondo.integration.hawk.emf.HawkResourceFactoryImpl;
+import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceFactoryImpl;
+import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceImpl;
 
 public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDriver<M> {
 
@@ -52,6 +53,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 
 	protected HawkBenchmarkConfig hbc;
 	protected String hawkRepositoryPath;
+	private Client client;
 
 	public HawkDriver(final HawkBenchmarkConfig hbc) {
 		this.hbc = hbc;
@@ -83,7 +85,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 	}
 
 	protected void connectToHawk(final String workspacePath) throws Exception {
-		final Client client = APIUtils.connectToHawk(HAWK_URL, ThriftProtocol.TUPLE);
+		client = APIUtils.connectToHawk(HAWK_URL, ThriftProtocol.TUPLE);
 		try {
 			client.startInstance(HAWK_INSTANCE, PASSWORD);
 		} catch (final HawkInstanceNotFound ex) {
@@ -109,6 +111,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		final Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
 		resourceFactoryRegistry.getProtocolToFactoryMap().put("hawk+http", new HawkResourceFactoryImpl());
 		// set the Resource in the EMFDriver
+		RailwayPackage.eINSTANCE.eClass();
 		resource = resourceSet.createResource(
 				URI.createURI("hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE + "&subscribe=true&durability=temporary"));
 		resource.load(Collections.emptyMap());
@@ -116,20 +119,25 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		client.registerMetamodels(HAWK_INSTANCE, Arrays.asList(thriftFile));
 
 		final Credentials credentials = new Credentials("dummy", "dummy");
-		final Repository repository = new Repository(HAWK_REPOSITORY, "org.hawk.localfolder.LocalFolder");
+		final Repository repository = new Repository(hawkRepositoryPath, "org.hawk.localfolder.LocalFolder");
 
 		client.addRepository(HAWK_INSTANCE, repository, credentials);
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
-		RailwayPackage.eINSTANCE.eClass();
 		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
+
+		final HawkResourceImpl hawkResource = (HawkResourceImpl) resource;
+		final TrainBenchmarkHawkChangeEventHandler handler = new TrainBenchmarkHawkChangeEventHandler();
+		hawkResource.addChangeEventHandler(handler);
 
 		// copy the model to the hawk repository to allow Hawk to load the model
 		copyModelToHawk(hawkRepositoryPath, modelPath);
 
-		// TODO: wait for finishing the operation
+		client.syncInstance(HAWK_INSTANCE);
+		handler.await();
+
 		final EMFScope emfScope = new EMFScope(resource);
 		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
 
