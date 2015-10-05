@@ -75,14 +75,11 @@ def generate(config, formats):
 def measure(config):
     for scenario in config["scenarios"]:
         transformation_arguments = []
-        (scenarioName, ) = scenario.keys()
-        (value, ) = scenario.values()
-
-        if value is not None:
-            for k, v in value.items():
-                print(k, v)
-                transformation_arguments.append("-" + k)
-                transformation_arguments.append(str(v))
+        for (scenario_name, scenario_arguments) in scenario.items():
+            if scenario_arguments is not None:
+                for arg, value in scenario_arguments.items():
+                    transformation_arguments.append("-" + arg)
+                    transformation_arguments.append(str(value))
 
         for tool in config["tools"]:
             args = [""]
@@ -106,7 +103,7 @@ def measure(config):
                         print("Running benchmark... " +
                               "runs: " + str(config["runs"]) +
                               ", tool: " + tool +
-                              ", scenario: " + scenarioName +
+                              ", scenario: " + scenario_name +
                               ", query: " + query +
                               ", size: " + str(size) +
                               (", argument: " + arg if arg != "" else ""))
@@ -114,11 +111,12 @@ def measure(config):
                                config["java_opts"],
                                "-jar", target,
                                "-runs", str(config["runs"]),
-                               "-scenario", scenarioName,
+                               "-scenario", scenario_name,
                                "-query", query,
                                "-size", str(size),
                                transformation_arguments,
                                arg])
+                        print(cmd)
                         try:
                             subprocess.check_call(cmd, timeout=config["timeout"])
                         except subprocess.TimeoutExpired:
