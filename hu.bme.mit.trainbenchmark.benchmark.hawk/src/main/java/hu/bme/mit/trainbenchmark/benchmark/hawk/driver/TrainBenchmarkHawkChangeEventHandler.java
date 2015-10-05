@@ -1,5 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.hawk.driver;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
+
 import uk.ac.york.mondo.integration.api.HawkAttributeRemovalEvent;
 import uk.ac.york.mondo.integration.api.HawkAttributeUpdateEvent;
 import uk.ac.york.mondo.integration.api.HawkModelElementAdditionEvent;
@@ -12,7 +15,7 @@ import uk.ac.york.mondo.integration.hawk.emf.IHawkChangeEventHandler;
 
 public class TrainBenchmarkHawkChangeEventHandler implements IHawkChangeEventHandler {
 
-	private volatile boolean finished = false;
+	private final CompletableFuture<Boolean> syncEnd = new CompletableFuture<>();
 
 	@Override
 	public void handle(final HawkModelElementAdditionEvent arg0) {
@@ -46,7 +49,7 @@ public class TrainBenchmarkHawkChangeEventHandler implements IHawkChangeEventHan
 
 	@Override
 	public void handle(final HawkAttributeUpdateEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Aujarto-generated method stub
 
 	}
 
@@ -58,14 +61,11 @@ public class TrainBenchmarkHawkChangeEventHandler implements IHawkChangeEventHan
 
 	@Override
 	public synchronized void handle(final HawkSynchronizationEndEvent arg0) {
-		finished = true;
-		notifyAll();
+		syncEnd.complete(true);
 	}
 
-	public synchronized void await() throws InterruptedException {
-		while (!finished) {
-			wait(2000);
-		}
+	public Future<Boolean> getSyncEnd() {
+		return syncEnd;
 	}
 
 }
