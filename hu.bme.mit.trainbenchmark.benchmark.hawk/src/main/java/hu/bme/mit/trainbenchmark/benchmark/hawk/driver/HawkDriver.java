@@ -20,7 +20,9 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
 import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
@@ -31,6 +33,7 @@ import org.eclipse.incquery.runtime.emf.EMFScope;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import uk.ac.york.mondo.integration.api.Credentials;
 import uk.ac.york.mondo.integration.api.Hawk.Client;
@@ -89,7 +92,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		try {
 			client.startInstance(HAWK_INSTANCE, PASSWORD);
 		} catch (final HawkInstanceNotFound ex) {
-			client.createInstance(HAWK_INSTANCE, PASSWORD);
+			client.createInstance(HAWK_INSTANCE, PASSWORD, 0, 0);
 		}
 
 		final String ecoreMetamodelPath = workspacePath + ECORE_METAMODEL;
@@ -157,6 +160,13 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 				matches.remove(match);
 			}
 		}, false);
+
+		final ResourceSet resourceSet = resource.getResourceSet();
+		for (final Resource r : resourceSet.getResources()) {
+			if (r.getContents().size() > 0 && r.getContents().get(0) instanceof RailwayContainer) {
+				container = (RailwayContainer) r.getContents().get(0);
+			}
+		}
 	}
 
 	public void persist() throws IOException {
