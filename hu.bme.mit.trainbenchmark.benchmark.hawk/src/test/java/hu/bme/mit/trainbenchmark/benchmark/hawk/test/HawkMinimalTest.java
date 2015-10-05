@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
  * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-public class HawkInjectIncrementalTest extends InjectTest {
+public class HawkMinimalTest extends MinimalTest {
 
-	public HawkInjectIncrementalTest() {
+	public HawkMinimalTest() {
 		bi = new HawkBenchmarkInitializer();
 	}
 
