@@ -116,7 +116,7 @@ def measure(config):
                                "-size", str(size),
                                transformation_arguments,
                                arg])
-                        print(cmd)
+                        
                         try:
                             subprocess.check_call(cmd, timeout=config["timeout"])
                         except subprocess.TimeoutExpired:
