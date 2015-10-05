@@ -24,13 +24,12 @@ queries:
 
 scenarios:
 - Batch:
-
 - Inject:
-  - -transformationStrategy fixed
-  - -transformationConstant 10
+    transformationStrategy: fixed
+    transformationConstant: 10
 - Repair:
-  - -transformationStrategy proportional
-  - -transformationConstant 10
+    transformationStrategy: proportional
+    transformationConstant: 10
 
 tools:
 #- allegro
