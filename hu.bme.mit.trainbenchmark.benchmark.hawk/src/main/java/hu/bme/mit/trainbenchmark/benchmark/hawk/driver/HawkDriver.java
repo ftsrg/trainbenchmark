@@ -112,8 +112,8 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		resourceFactoryRegistry.getProtocolToFactoryMap().put("hawk+http", new HawkResourceFactoryImpl());
 		// set the Resource in the EMFDriver
 		RailwayPackage.eINSTANCE.eClass();
-		resource = resourceSet.createResource(
-				URI.createURI("hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE + "&subscribe=true&durability=temporary"));
+		resource = resourceSet.createResource(URI.createURI("hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE
+				+ "&subscribe=true&durability=temporary&clientID=hu.trainbenchmark" + System.nanoTime()));
 		resource.load(Collections.emptyMap());
 
 		client.registerMetamodels(HAWK_INSTANCE, Arrays.asList(thriftFile));
