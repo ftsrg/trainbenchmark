@@ -23,13 +23,14 @@ queries:
 - SwitchSet
 
 scenarios:
-- Batch
-- Inject
-  transformation_strategy: fixed
-  transformation_constant: 10
-- Repair
-  transformation_strategy: proportional
-  transformation_constant: 10
+- Batch:
+
+- Inject:
+  - -transformationStrategy fixed
+  - -transformationConstant 10
+- Repair:
+  - -transformationStrategy proportional
+  - -transformationConstant 10
 
 tools:
 #- allegro
