@@ -136,9 +136,10 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		copyModelToHawk(hawkRepositoryPath, modelPath);
 
 		client.syncInstance(HAWK_INSTANCE);
-		handler.await();
+		// waiting for Hawk to finish
+		handler.getSyncEnd().get();
 
-		final EMFScope emfScope = new EMFScope(resource);
+		final EMFScope emfScope = new EMFScope(hawkResource.getResourceSet());
 		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
 
 		final IncQueryMatcher<M> matcher = checker.getMatcher();
@@ -160,6 +161,12 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 
 	public void persist() throws IOException {
 		resource.save(null);
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		super.destroy();
+		resource.unload();
 	}
 
 }

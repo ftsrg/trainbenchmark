@@ -20,10 +20,12 @@ import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.MINIMAL;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public abstract class MinimalTest extends TrainBenchmarkTest {
 
+	@Ignore
 	@Test
 	public void connectedSegments() throws Exception {
 		testQuery(CONNECTEDSEGMENTS, MINIMAL, 1);
@@ -34,21 +36,25 @@ public abstract class MinimalTest extends TrainBenchmarkTest {
 		testQuery(POSLENGTH, MINIMAL, 1);
 	}
 
+	@Ignore
 	@Test
 	public void routeSensor() throws Exception {
 		testQuery(ROUTESENSOR, MINIMAL, 1);
 	}
 
+	@Ignore
 	@Test
 	public void semaphoreNeighbor() throws Exception {
 		testQuery(SEMAPHORENEIGHBOR, MINIMAL, 1);
 	}
 
+	@Ignore
 	@Test
 	public void switchSensor() throws Exception {
 		testQuery(SWITCHSENSOR, MINIMAL, 1);
 	}
 
+	@Ignore
 	@Test
 	public void switchSet() throws Exception {
 		testQuery(SWITCHSET, MINIMAL, 1);

@@ -44,31 +44,7 @@
 		<dependency>
 			<groupId>uk.ac.york.mondo.integration.hawk</groupId>
 			<artifactId>emf</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>artemis-server</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>artemis-core-client</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.20.0-GA</version>
+			<version>1.0.0-201510051218</version>
 		</dependency>
 
 		<dependency>
@@ -77,6 +53,11 @@
 			<version>3.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
