@@ -44,13 +44,7 @@
 		<dependency>
 			<groupId>uk.ac.york.mondo.integration.hawk</groupId>
 			<artifactId>emf</artifactId>
-			<version>1.0.0-201510051218</version>
-		</dependency>
-
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>3.1</version>
+			<version>1.0.0-201510051803</version>
 		</dependency>
 
 		<dependency>
