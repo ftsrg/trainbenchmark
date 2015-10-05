@@ -74,6 +74,16 @@ def generate(config, formats):
 
 def measure(config):
     for scenario in config["scenarios"]:
+        transformation_arguments = []
+        (scenarioName, ) = scenario.keys()
+        (value, ) = scenario.values()
+
+        if value is not None:
+            for k, v in value.items():
+                print(k, v)
+                transformation_arguments.append("-" + k)
+                transformation_arguments.append(str(v))
+
         for tool in config["tools"]:
             args = [""]
             if tool in config["benchmark_optional_arguments"]:
@@ -96,7 +106,7 @@ def measure(config):
                         print("Running benchmark... " +
                               "runs: " + str(config["runs"]) +
                               ", tool: " + tool +
-                              ", scenario: " + scenario +
+                              ", scenario: " + scenarioName +
                               ", query: " + query +
                               ", size: " + str(size) +
                               (", argument: " + arg if arg != "" else ""))
@@ -104,9 +114,10 @@ def measure(config):
                                config["java_opts"],
                                "-jar", target,
                                "-runs", str(config["runs"]),
-                               "-scenario", scenario,
+                               "-scenario", scenarioName,
                                "-query", query,
                                "-size", str(size),
+                               transformation_arguments,
                                arg])
                         try:
                             subprocess.check_call(cmd, timeout=config["timeout"])
@@ -133,7 +144,7 @@ def send_mail(config):
         host = config["email"]["host"]
 
         msg = MIMEText("<helpful information about the run>")
-        msg["Subject"] = "Trainbenchmark measurement ready"
+        msg["Subject"] = "Train Benchmark measurement ready"
         msg["From"] = address
         msg["To"] = address
         
