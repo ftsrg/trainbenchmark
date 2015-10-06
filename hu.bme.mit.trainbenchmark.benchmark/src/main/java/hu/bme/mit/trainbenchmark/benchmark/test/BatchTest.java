@@ -23,7 +23,7 @@ import static hu.bme.mit.trainbenchmark.constants.Scenario.BATCH;
 import org.junit.Test;
 
 public abstract class BatchTest extends TrainBenchmarkTest {
-
+	
 	@Test
 	public void connectedSegments() throws Exception {
 		testQuery(CONNECTEDSEGMENTS, BATCH, 0);

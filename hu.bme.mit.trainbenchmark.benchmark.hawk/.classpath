@@ -27,5 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/hu.bme.mit.mondo.integration.incquery.hawk"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
