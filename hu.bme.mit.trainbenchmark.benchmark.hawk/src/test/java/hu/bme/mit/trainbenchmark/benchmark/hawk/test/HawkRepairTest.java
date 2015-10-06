@@ -11,12 +11,21 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
+import java.util.Collection;
+
+import org.junit.runners.Parameterized.Parameters;
+
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
 public class HawkRepairTest extends RepairTest {
 
-	public HawkRepairTest() {
-		bi = new HawkBenchmarkInitializer();
+	@Parameters
+	public static Collection<Object[]> data() {
+	    return HawkBenchmarkInitializer.getTestParameters();
+	}
+	
+	public HawkRepairTest(final boolean useHawkResource) {
+		bi = new HawkBenchmarkInitializer(useHawkResource);
 	}
 
 }

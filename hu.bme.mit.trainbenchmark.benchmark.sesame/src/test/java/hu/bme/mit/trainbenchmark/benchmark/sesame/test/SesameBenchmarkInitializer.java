@@ -24,14 +24,14 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SesameBenchmarkInitializer extends TestBenchmarkInitializer {
 
-	public static Collection<Object[]> getTestParameters() {
-		return Arrays.asList(new Object[][] { { true }, { false } });
-	}
-
 	protected boolean inferencing;
 
 	public SesameBenchmarkInitializer(boolean inferencing) {
 		this.inferencing = inferencing;
+	}
+
+	public static Collection<Object[]> getTestParameters() {
+		return Arrays.asList(new Object[][] { { true }, { false } });
 	}
 
 	@Override

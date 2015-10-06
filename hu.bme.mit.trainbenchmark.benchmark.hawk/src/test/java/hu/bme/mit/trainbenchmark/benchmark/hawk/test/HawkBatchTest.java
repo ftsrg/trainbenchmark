@@ -12,12 +12,21 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
+import java.util.Collection;
+
+import org.junit.runners.Parameterized.Parameters;
+
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class HawkBatchTest extends BatchTest {
 
-	public HawkBatchTest() {
-		bi = new HawkBenchmarkInitializer();
+	@Parameters
+	public static Collection<Object[]> data() {
+	    return HawkBenchmarkInitializer.getTestParameters();
+	}
+	
+	public HawkBatchTest(final boolean useHawkResource) {
+		bi = new HawkBenchmarkInitializer(useHawkResource);
 	}
 
 }

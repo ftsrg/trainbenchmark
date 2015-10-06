@@ -30,8 +30,9 @@ public class HawkBenchmarkConfig extends EMFIncQueryBenchmarkConfig {
 	}
 
 	public HawkBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query, final int iterationCount,
-			final TransformationStrategy transformationStrategy, final long transformationConstant) {
+			final TransformationStrategy transformationStrategy, final long transformationConstant, final boolean useHawkResource) {
 		super(HAWK, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant, false);
+		this.useHawkScope = useHawkResource;
 	}
 
 	@Override
