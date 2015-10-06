@@ -20,9 +20,11 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Random;
@@ -164,7 +166,8 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 		Queue<Entry<String, Integer>> queue = new LinkedList<>();
 		queue.add(new AbstractMap.SimpleEntry<String, Integer>(source.stringValue(), 0));
 		Entry<String, Integer> first;
-		Set<String> checked = new HashSet<>();
+		// id + previous id
+		Map<String, String> checked = new HashMap<>();
 
 		int depth;
 		String node;
@@ -178,12 +181,18 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 			if (node.equals(target.stringValue())) {
 				return depth;
 			}
-			checked.add(node);
+
 			for (String n : getNeighbors(vf.createURI(node))) {
 				if (n.equals(target.stringValue())) {
+					String current = node;
+					while (!current.equals(source.stringValue())) {
+						betweennessMetric.addBetweenness(current);
+						current = checked.get(current);
+					}
 					return depth + 1;
 				}
-				if (!checked.contains(n)) {
+				if (!checked.containsKey(n)) {
+					checked.put(n, node);
 					queue.add(new AbstractMap.SimpleEntry<String, Integer>(n, depth + 1));
 				}
 			}

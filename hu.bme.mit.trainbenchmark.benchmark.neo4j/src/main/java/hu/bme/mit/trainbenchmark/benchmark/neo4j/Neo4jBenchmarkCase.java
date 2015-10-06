@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.DescribedBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.VersatileBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jModelAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jModelDescription;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.analyzer.Neo4jQueryAnalyzer;
@@ -26,13 +27,14 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 
+import java.io.IOException;
 import java.util.Comparator;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
 public class Neo4jBenchmarkCase extends BenchmarkCase<Neo4jMatch, Node, Neo4jDriver> implements
-		AnalyzedBenchmarkCase, DescribedBenchmarkCase {
+		AnalyzedBenchmarkCase, DescribedBenchmarkCase, VersatileBenchmarkCase {
 
 	protected Neo4jBenchmarkConfig nbc;
 
@@ -74,6 +76,20 @@ public class Neo4jBenchmarkCase extends BenchmarkCase<Neo4jMatch, Node, Neo4jDri
 	@Override
 	public void initDescription() {
 		modelAnalyzer = new Neo4jModelDescription(neoDriver);
+
+	}
+
+	@Override
+	public void modify() throws IOException {
+		if (benchmarkConfig.isVersatile()) {
+			final String query = queryInitializer
+					.resolveQuery(nbc.getWorkspacePath()
+							+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/",
+							".cypher");
+			if (checker instanceof Neo4jCypherChecker) {
+				((Neo4jCypherChecker) checker).setQueryDefinition(query);
+			}
+		}
 
 	}
 
