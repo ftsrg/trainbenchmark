@@ -93,21 +93,21 @@ public final class EntrySemaphoreQuerySpecification extends BaseGeneratedEMFQuer
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      {
-      	PBody body = new PBody(this);
-      	PVariable var_route = body.getOrCreateVariableByName("route");
-      	PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
-      	PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_route, "route"),
-      				
-      		new ExportedParameter(body, var_semaphore, "semaphore")
-      	));
-      	new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      	new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "entry")));
-      	new Equality(body, var__virtual_0_, var_semaphore);
-      	bodies.add(body);
-      }
+      	{
+      		PBody body = new PBody(this);
+      		PVariable var_route = body.getOrCreateVariableByName("route");
+      		PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
+      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+      			new ExportedParameter(body, var_route, "route"),
+      			
+      			new ExportedParameter(body, var_semaphore, "semaphore")
+      		));
+      		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "entry")));
+      		new Equality(body, var__virtual_0_, var_semaphore);
+      		bodies.add(body);
+      	}
       	// to silence compiler error
       	if (false) throw new IncQueryException("Never", "happens");
       } catch (IncQueryException ex) {

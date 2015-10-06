@@ -95,36 +95,36 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      {
-      	PBody body = new PBody(this);
-      	PVariable var_route = body.getOrCreateVariableByName("route");
-      	PVariable var_sensor = body.getOrCreateVariableByName("sensor");
-      	PVariable var_swP = body.getOrCreateVariableByName("swP");
-      	PVariable var_sw = body.getOrCreateVariableByName("sw");
-      	PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      	PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-      	PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-      	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_route, "route"),
-      				
-      		new ExportedParameter(body, var_sensor, "sensor"),
-      				
-      		new ExportedParameter(body, var_swP, "swP"),
-      				
-      		new ExportedParameter(body, var_sw, "sw")
-      	));
-      	new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      	new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows")));
-      	new Equality(body, var__virtual_0_, var_swP);
-      	new TypeConstraint(body, new FlatTuple(var_swP), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
-      	new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "switch")));
-      	new Equality(body, var__virtual_1_, var_sw);
-      	new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
-      	new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor")));
-      	new Equality(body, var__virtual_2_, var_sensor);
-      	new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseDefinedByQuerySpecification.instance().getInternalQueryRepresentation());
-      	bodies.add(body);
-      }
+      	{
+      		PBody body = new PBody(this);
+      		PVariable var_route = body.getOrCreateVariableByName("route");
+      		PVariable var_sensor = body.getOrCreateVariableByName("sensor");
+      		PVariable var_swP = body.getOrCreateVariableByName("swP");
+      		PVariable var_sw = body.getOrCreateVariableByName("sw");
+      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+      		PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+      		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+      			new ExportedParameter(body, var_route, "route"),
+      			
+      			new ExportedParameter(body, var_sensor, "sensor"),
+      			
+      			new ExportedParameter(body, var_swP, "swP"),
+      			
+      			new ExportedParameter(body, var_sw, "sw")
+      		));
+      		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows")));
+      		new Equality(body, var__virtual_0_, var_swP);
+      		new TypeConstraint(body, new FlatTuple(var_swP), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
+      		new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "switch")));
+      		new Equality(body, var__virtual_1_, var_sw);
+      		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+      		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor")));
+      		new Equality(body, var__virtual_2_, var_sensor);
+      		new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseDefinedByQuerySpecification.instance().getInternalQueryRepresentation());
+      		bodies.add(body);
+      	}
       	// to silence compiler error
       	if (false) throw new IncQueryException("Never", "happens");
       } catch (IncQueryException ex) {
