@@ -21,7 +21,9 @@ public enum ModelType {
 	SCHEDULE_SCALE_FREE_CHAR("Schedule-Scale-Free-Char"), //
 	SCHEDULE_SCALE_FREE_HET("Schedule-Scale-Free-Het"), //
 	SCHEDULE_SCALE_FREE_HOM("Schedule-Scale-Free-Hom"), //
-	SCHEDULE_WATTS_STROGATZ("Schedule-Watts-Strogatz");
+	SCHEDULE_WATTS_STROGATZ_0001("Schedule-Watts-Strogatz-0001"), //
+	SCHEDULE_WATTS_STROGATZ_001("Schedule-Watts-Strogatz-001"), //
+	SCHEDULE_WATTS_STROGATZ_01("Schedule-Watts-Strogatz-01");
 
 	private String type;
 

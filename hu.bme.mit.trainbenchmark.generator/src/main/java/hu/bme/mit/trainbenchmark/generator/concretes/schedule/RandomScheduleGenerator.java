@@ -44,7 +44,6 @@ public class RandomScheduleGenerator extends HomogeneousScheduleGenerator {
 		double edges = getEstimatedNumberOfNeighbors();
 		p = edges / binomial(maxNumberOfStations, 2);
 		p /= 4;
-
 	}
 
 	@Override

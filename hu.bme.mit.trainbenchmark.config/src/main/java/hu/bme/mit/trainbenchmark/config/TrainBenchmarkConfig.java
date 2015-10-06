@@ -156,8 +156,12 @@ public abstract class TrainBenchmarkConfig {
 			return "schedule-scale-het-" + submodel + "-" + size;
 		case SCHEDULE_SCALE_FREE_HOM:
 			return "schedule-scale-hom-" + submodel + "-" + size;
-		case SCHEDULE_WATTS_STROGATZ:
-			return "schedule-watts-strogatz-" + submodel + "-" + size;
+		case SCHEDULE_WATTS_STROGATZ_001:
+			return "schedule-watts-strogatz-001" + submodel + "-" + size;
+		case SCHEDULE_WATTS_STROGATZ_01:
+			return "schedule-watts-strogatz-01" + submodel + "-" + size;
+		case SCHEDULE_WATTS_STROGATZ_0001:
+			return "schedule-watts-strogatz-0001" + submodel + "-" + size;
 		case RAILWAY:
 			final String variant = (scenario == ScenarioConstants.BATCH) ? "repair" : scenario
 					.toString().toLowerCase();

@@ -19,3 +19,4 @@ deps/
 diagrams/*
 /analysis/*.png
 /analysis/*.json
+/analysis/*.pdf

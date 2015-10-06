@@ -47,9 +47,15 @@ public abstract class GeneratorFactory {
 					generatorConfig);
 		case SCHEDULE_REAL:
 			return new RealModelTransformer(getScheduleFormatGenerator(), generatorConfig);
-		case SCHEDULE_WATTS_STROGATZ:
+		case SCHEDULE_WATTS_STROGATZ_01:
 			return new WattsStrogatzScheduleGenerator(getScheduleFormatGenerator(),
-					generatorConfig);
+					generatorConfig, 0.1);
+		case SCHEDULE_WATTS_STROGATZ_001:
+			return new WattsStrogatzScheduleGenerator(getScheduleFormatGenerator(),
+					generatorConfig, 0.01);
+		case SCHEDULE_WATTS_STROGATZ_0001:
+			return new WattsStrogatzScheduleGenerator(getScheduleFormatGenerator(),
+					generatorConfig, 0.001);
 		case RAILWAY:
 			return new RailwayGenerator(getRailwayFormatGenerator(), generatorConfig);
 		default:

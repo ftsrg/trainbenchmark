@@ -45,7 +45,9 @@
             "Schedule-Scale-Free-Char",
             "Schedule-Scale-Free-Het",
             "Schedule-Scale-Free-Hom",
-            "Schedule-Watts-Strogatz"
+            "Schedule-Watts-Strogatz-01",
+            "Schedule-Watts-Strogatz-001",
+            "Schedule-Watts-Strogatz-0001"
           ]
         }
       ],
@@ -60,7 +62,9 @@
           "Schedule-Scale-Free-Char",
           "Schedule-Scale-Free-Het",
           "Schedule-Scale-Free-Hom",
-          "Schedule-Watts-Strogatz"
+          "Schedule-Watts-Strogatz-01",
+          "Schedule-Watts-Strogatz-001",
+          "Schedule-Watts-Strogatz-0001"
         ]
       }
     },
