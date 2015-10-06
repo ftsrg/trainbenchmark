@@ -23,15 +23,15 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class Neo4jBenchmarkInitializer extends TestBenchmarkInitializer {
-
-	public static Collection<Object[]> getTestParameters() {
-		return Arrays.asList(new Object[][] { { true }, { false } });
-	}
 	
 	protected boolean coreApi;
 
 	public Neo4jBenchmarkInitializer(boolean coreApi) {
 		this.coreApi = coreApi;
+	}
+
+	public static Collection<Object[]> getTestParameters() {
+		return Arrays.asList(new Object[][] { { true }, { false } });
 	}
 	
 	@Override

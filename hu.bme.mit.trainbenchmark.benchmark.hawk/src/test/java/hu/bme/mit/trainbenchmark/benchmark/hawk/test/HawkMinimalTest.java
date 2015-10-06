@@ -11,12 +11,21 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
+import java.util.Collection;
+
+import org.junit.runners.Parameterized.Parameters;
+
 import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
 public class HawkMinimalTest extends MinimalTest {
 
-	public HawkMinimalTest() {
-		bi = new HawkBenchmarkInitializer();
+	@Parameters
+	public static Collection<Object[]> data() {
+	    return HawkBenchmarkInitializer.getTestParameters();
+	}
+	
+	public HawkMinimalTest(final boolean useHawkResource) {
+		bi = new HawkBenchmarkInitializer(useHawkResource);
 	}
 
 }

@@ -11,6 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.hawk.test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.HawkBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
@@ -21,10 +24,20 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class HawkBenchmarkInitializer extends TestBenchmarkInitializer {
 
+	protected boolean useHawkResource;
+	
+	public HawkBenchmarkInitializer(boolean useHawkResource) {
+		this.useHawkResource = useHawkResource;
+	}
+	
+	public static List<Object[]> getTestParameters() {
+		return Arrays.asList(new Object[][] { { true }, { false } });
+	}
+	
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
 		final BenchmarkConfig hbc = new HawkBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
-				transformationConstant);
+				transformationConstant, useHawkResource);
 		return new BenchmarkRunner(hbc, new HawkBenchmarkCase<>());
 	}
 

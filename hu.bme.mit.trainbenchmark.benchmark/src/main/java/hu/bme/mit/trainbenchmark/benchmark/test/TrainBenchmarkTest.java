@@ -16,12 +16,15 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import com.google.common.collect.ImmutableList;
 
@@ -36,21 +39,23 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 @RunWith(Parameterized.class)
 public abstract class TrainBenchmarkTest {
 
-//	@Parameters
-//	public static Collection<Object[]> data() {
-//		return Arrays.asList(new Object[][] { { } });
-//	}
-	
+	@Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] { {} });
+	}
+
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
 
 	protected TestBenchmarkInitializer bi;
 
-	public BenchmarkRunner initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
+	public BenchmarkRunner initialize(final Query query, final String tool, final Scenario scenario)
+			throws IOException {
 		return bi.initializeBenchmark(query, scenario);
 	}
 
-	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws Exception {
+	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize)
+			throws Exception {
 		final BenchmarkRunner bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, ImmutableList.of(expectedResultSize));
 	}
@@ -61,7 +66,8 @@ public abstract class TrainBenchmarkTest {
 		runQuery(bl, ImmutableList.of(expectedResultSize1, expectedResultSize2));
 	}
 
-	private void runQuery(final BenchmarkRunner benchmarkLogic, final List<Integer> expectedResultSizes) throws Exception {
+	private void runQuery(final BenchmarkRunner benchmarkLogic, final List<Integer> expectedResultSizes)
+			throws Exception {
 		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult benchmarkResult = benchmarkLogic.runBenchmark();
 
