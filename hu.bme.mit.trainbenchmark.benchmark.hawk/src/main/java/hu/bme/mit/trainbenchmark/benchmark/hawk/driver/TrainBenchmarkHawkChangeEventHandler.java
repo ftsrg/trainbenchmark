@@ -5,6 +5,8 @@ import java.util.concurrent.Future;
 
 import uk.ac.york.mondo.integration.api.HawkAttributeRemovalEvent;
 import uk.ac.york.mondo.integration.api.HawkAttributeUpdateEvent;
+import uk.ac.york.mondo.integration.api.HawkFileAdditionEvent;
+import uk.ac.york.mondo.integration.api.HawkFileRemovalEvent;
 import uk.ac.york.mondo.integration.api.HawkModelElementAdditionEvent;
 import uk.ac.york.mondo.integration.api.HawkModelElementRemovalEvent;
 import uk.ac.york.mondo.integration.api.HawkReferenceAdditionEvent;
@@ -18,54 +20,50 @@ public class TrainBenchmarkHawkChangeEventHandler implements IHawkChangeEventHan
 	private final CompletableFuture<Boolean> syncEnd = new CompletableFuture<>();
 
 	@Override
-	public void handle(final HawkModelElementAdditionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handle(final HawkModelElementRemovalEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handle(final HawkReferenceRemovalEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handle(final HawkReferenceAdditionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handle(final HawkAttributeRemovalEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handle(final HawkAttributeUpdateEvent arg0) {
-		// TODO Aujarto-generated method stub
-
-	}
-
-	@Override
-	public void handle(final HawkSynchronizationStartEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public synchronized void handle(final HawkSynchronizationEndEvent arg0) {
 		syncEnd.complete(true);
 	}
 
 	public Future<Boolean> getSyncEnd() {
 		return syncEnd;
+	}
+
+	// there methods are NOPs
+
+	@Override
+	public void handle(final HawkModelElementAdditionEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkModelElementRemovalEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkReferenceRemovalEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkReferenceAdditionEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkAttributeRemovalEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkAttributeUpdateEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkSynchronizationStartEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkFileAdditionEvent arg0) {
+	}
+
+	@Override
+	public void handle(final HawkFileRemovalEvent arg0) {
 	}
 
 }
