@@ -31,6 +31,7 @@ import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.emf.EMFScope;
 
+import hu.bme.mit.mondo.integration.incquery.hawk.HawkScope;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
@@ -115,6 +116,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		resourceFactoryRegistry.getProtocolToFactoryMap().put("hawk+http", new HawkResourceFactoryImpl());
 		// set the Resource in the EMFDriver
 		RailwayPackage.eINSTANCE.eClass();
+
 		resource = resourceSet.createResource(URI.createURI("hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE
 				+ "&subscribe=true&durability=temporary&clientID=hu.trainbenchmark" + System.nanoTime()));
 		resource.load(Collections.emptyMap());
@@ -142,9 +144,14 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		// waiting for Hawk to finish
 		handler.getSyncEnd().get();
 
-		final EMFScope emfScope = new EMFScope(hawkResource.getResourceSet());
-		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
-
+		if (hbc.isUseHawkScope()) {
+			final EMFScope emfScope = new EMFScope(hawkResource.getResourceSet());
+			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
+		} else {
+			final HawkScope emfScope = new HawkScope(hawkResource.getResourceSet());
+			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
+		}
+		
 		final IncQueryMatcher<M> matcher = checker.getMatcher();
 		final Collection<M> matches = matcher.getAllMatches();
 		checker.setMatches(matches);

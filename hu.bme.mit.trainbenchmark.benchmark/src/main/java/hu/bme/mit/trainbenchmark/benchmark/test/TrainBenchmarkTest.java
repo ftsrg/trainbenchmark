@@ -20,6 +20,8 @@ import java.util.List;
 
 import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import com.google.common.collect.ImmutableList;
 
@@ -31,8 +33,14 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
+@RunWith(Parameterized.class)
 public abstract class TrainBenchmarkTest {
 
+//	@Parameters
+//	public static Collection<Object[]> data() {
+//		return Arrays.asList(new Object[][] { { } });
+//	}
+	
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
 

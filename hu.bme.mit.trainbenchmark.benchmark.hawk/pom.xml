@@ -47,6 +47,12 @@
 			<version>1.0.0-201510061139</version>
 		</dependency>
 
+		<!-- <dependency> -->
+		<!-- <groupId>hu.bme.mit.mondo.integration.hawk</groupId> -->
+		<!-- <artifactId>incquery</artifactId> -->
+		<!-- <version>1.0.0-201510061139</version> -->
+		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>

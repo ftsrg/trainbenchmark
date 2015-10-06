@@ -23,7 +23,7 @@ import static hu.bme.mit.trainbenchmark.constants.Scenario.INJECT;
 import org.junit.Test;
 
 public abstract class InjectTest extends TrainBenchmarkTest {
-
+	
 	@Test
 	public void connectedSegmentsInject() throws Exception {
 		testTransformation(CONNECTEDSEGMENTS, INJECT, 4, 6);

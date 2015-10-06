@@ -21,6 +21,9 @@ import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 public class HawkBenchmarkConfig extends EMFIncQueryBenchmarkConfig {
 
 	protected static final String HAWK = "Hawk";
+	protected static final String USE_HAWK_SCOPE = "useHawkScope";
+	
+	protected boolean useHawkScope;
 
 	public HawkBenchmarkConfig(final String[] args) throws ParseException {
 		super(args, HAWK);
@@ -34,11 +37,19 @@ public class HawkBenchmarkConfig extends EMFIncQueryBenchmarkConfig {
 	@Override
 	protected void initOptions() {
 		super.initOptions();
+		
+		options.addOption(USE_HAWK_SCOPE, false, "Use the HawkScope (should be faster)");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
+		
+		useHawkScope = options.hasOption(USE_HAWK_SCOPE);
+	}
+	
+	public boolean isUseHawkScope() {
+		return useHawkScope;
 	}
 
 }

@@ -23,7 +23,7 @@ import static hu.bme.mit.trainbenchmark.constants.Scenario.REPAIR;
 import org.junit.Test;
 
 public abstract class RepairTest extends TrainBenchmarkTest {
-
+	
 	@Test
 	public void connectedSegmentsRepair() throws Exception {
 		testTransformation(CONNECTEDSEGMENTS, REPAIR, 4, 2);
