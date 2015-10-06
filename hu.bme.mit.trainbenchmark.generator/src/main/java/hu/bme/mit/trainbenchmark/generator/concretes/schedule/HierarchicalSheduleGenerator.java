@@ -67,15 +67,15 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 		case A:
 			return 3;
 		case B:
-			return 5;
+			return 4;
 		case C:
-			return 7;
+			return 5;
 		case D:
-			return 9;
+			return 6;
 		case E:
-			return 11;
+			return 7;
 		default:
-			throw new IllegalArgumentException("Not supported submodel: " + subModel);
+			throw new IllegalArgumentException("The submodel is not supported: " + subModel);
 		}
 	}
 
