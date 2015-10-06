@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>uk.ac.york.mondo.integration.hawk</groupId>
 			<artifactId>emf</artifactId>
-			<version>1.0.0-201510051803</version>
+			<version>1.0.0-201510061139</version>
 		</dependency>
 
 		<dependency>
