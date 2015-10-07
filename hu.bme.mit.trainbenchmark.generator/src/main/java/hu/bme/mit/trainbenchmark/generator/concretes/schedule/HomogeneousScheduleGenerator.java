@@ -31,11 +31,9 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 	@Override
 	protected void generateSchedules() throws IOException {
 		int numberOfSchedules = 0;
-		System.out.println("schedules");
 		while (numberOfSchedules < maxNumberOfSchedules) {
 			addSchedule();
 			numberOfSchedules++;
-			System.out.println(numberOfSchedules);
 			int numberOfDestinations = getDestinationsNumber();
 			if (numberOfSchedules < maxNumberOfSchedules - maxNumberOfRepetitiveSchedules) {
 				if (!schedulesOfDestinations.containsKey(numberOfDestinations)) {
@@ -60,7 +58,6 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		List<Integer> bestTriedStations = null;
 		List<Integer> stationIndices;
 		while (tries < maxTries) {
-			System.out.println("tries: " + tries + "amo: " + amount);
 			stationIndex = RandomElementsProvider.getRandomIndex(random, stations);
 			// choose a random station that has neighbors for sure
 			if (stations.get(stationIndex).conn.size() == 0) {
@@ -114,29 +111,15 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		checked.put(sourceIndex, new Vertex());
 		checked.get(sourceIndex).depth = depth;
 		int currentIndex = -1; // dummy init
-		List<Integer> exploredRandomNeighbors = new ArrayList<Integer>();
 		while (!queue.isEmpty()) {
-//			System.out.println("q");
-			currentIndex = queue.get(queue.size() - 1);
-			queue.remove(queue.size() - 1);
+			currentIndex = queue.get(0);
+			queue.remove(0);
 			depth = checked.get(currentIndex).depth;
-//			System.out.println("d: " + depth);
 			if (depth == maxDepth) {
-//				System.out.println("break");
 				break;
 			}
-//			exploredRandomNeighbors.clear();
 			for (Integer neighborIndex : stations.get(currentIndex).conn) {
-//				int neighbor = (int) RandomElementsProvider.getRandomElement(random,
-//						stations.get(currentIndex).conn);
-//				// always get a new neighbor
-//				while (exploredRandomNeighbors.contains(neighbor)
-//						&& exploredRandomNeighbors.size() < stations
-//								.get(currentIndex).conn.size()) {
-//					neighbor = (int) RandomElementsProvider.getRandomElement(random,
-//							stations.get(currentIndex).conn);
-//				}
-//				exploredRandomNeighbors.add(neighbor);
+
 				if (neighborIndex != currentIndex) {
 					if (!checked.containsKey(neighborIndex)) {
 						checked.put(neighborIndex, new Vertex());
