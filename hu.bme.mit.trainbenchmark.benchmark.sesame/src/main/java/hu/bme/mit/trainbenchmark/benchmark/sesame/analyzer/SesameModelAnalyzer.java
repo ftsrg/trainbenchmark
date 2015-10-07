@@ -84,13 +84,17 @@ public class SesameModelAnalyzer extends RDFModelAnalyzer<SesameDriver> {
 		double degree = 0;
 		BindingSet set;
 
+		Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 		while (results.hasNext()) {
 			set = results.next();
 			degree = Double.parseDouble(set.getValue("outdegree").stringValue());
 			if (set.getValue("x").stringValue().contains(":")) {
 				if (isType(vf.createURI(set.getValue("x").stringValue()), STATION)) {
-					determineClustering(vf.createURI(set.getValue("x").stringValue()));
-					addStations(vf.createURI(set.getValue("x").stringValue()));
+					if (random.nextDouble() < 0.05) {
+						determineClustering(vf.createURI(set.getValue("x")
+								.stringValue()));
+						addStations(vf.createURI(set.getValue("x").stringValue()));
+					}
 				}
 
 			}

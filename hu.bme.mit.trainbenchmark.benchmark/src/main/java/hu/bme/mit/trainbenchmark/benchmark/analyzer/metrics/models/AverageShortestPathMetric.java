@@ -29,7 +29,7 @@ public class AverageShortestPathMetric extends ModelMetric {
 		super(EdgeDirection.OUTGOING);
 		shortestPaths = new ArrayList<Integer>();
 		maxDepth = 50;
-		pairs = 300;
+		pairs = 100;
 	}
 
 	@Override

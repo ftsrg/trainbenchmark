@@ -32,10 +32,12 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 
 	@Override
 	protected void generateSchedules() throws IOException {
-		while (currentNodes < maxNumberOfSchedules) {
+		int numberOfSchedules = 0;
+		while (numberOfSchedules < maxNumberOfSchedules) {
 			addSchedule();
+			numberOfSchedules++;
 			int numberOfDestinations = getDestinationsNumber();
-			if (currentNodes < maxNumberOfSchedules - maxNumberOfRepetitiveSchedules) {
+			if (numberOfSchedules < maxNumberOfSchedules - maxNumberOfRepetitiveSchedules) {
 				if (!schedulesOfDestinations.containsKey(numberOfDestinations)) {
 					schedulesOfDestinations.put(numberOfDestinations,
 							new ArrayList<Integer>());

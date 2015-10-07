@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.constants.schedule;
 
 public class ScheduleGeneratorConstants {
 
-	public static final double stationsProportion = 0.018;
-	public static final double trainsProportion = 0.3566;
-	public static final double repetitiveScheduleFactor = 0.48;
-	public static final int sizeStep = 5000;
+	public static double stationsProportion = 0.018;
+	public static double trainsProportion = 0.3566;
+	public static double repetitiveScheduleFactor = 0.48;
+	public static int sizeStep = 5000;
 
 }
