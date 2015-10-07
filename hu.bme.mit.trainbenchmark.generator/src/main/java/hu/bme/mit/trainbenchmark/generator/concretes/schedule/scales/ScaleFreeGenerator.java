@@ -153,6 +153,9 @@ public class ScaleFreeGenerator extends Generator {
 	}
 
 	protected int getPercent() {
+		if (stations.size() > 5000) {
+			return random.nextInt(maxDegree);
+		}
 		return random.nextInt(stationDegrees);
 	}
 
