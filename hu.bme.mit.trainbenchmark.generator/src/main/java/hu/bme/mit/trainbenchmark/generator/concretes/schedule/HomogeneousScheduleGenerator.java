@@ -19,10 +19,8 @@ import hu.bme.mit.trainbenchmark.generator.util.RandomElementsProvider;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 
@@ -33,9 +31,11 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 	@Override
 	protected void generateSchedules() throws IOException {
 		int numberOfSchedules = 0;
+		System.out.println("schedules");
 		while (numberOfSchedules < maxNumberOfSchedules) {
 			addSchedule();
 			numberOfSchedules++;
+			System.out.println(numberOfSchedules);
 			int numberOfDestinations = getDestinationsNumber();
 			if (numberOfSchedules < maxNumberOfSchedules - maxNumberOfRepetitiveSchedules) {
 				if (!schedulesOfDestinations.containsKey(numberOfDestinations)) {
@@ -55,11 +55,12 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 			return;
 		}
 		int tries = 0;
-		int maxTries = 50;
+		int maxTries = 10;
 		int stationIndex;
 		List<Integer> bestTriedStations = null;
 		List<Integer> stationIndices;
 		while (tries < maxTries) {
+			System.out.println("tries: " + tries + "amo: " + amount);
 			stationIndex = RandomElementsProvider.getRandomIndex(random, stations);
 			// choose a random station that has neighbors for sure
 			if (stations.get(stationIndex).conn.size() == 0) {
@@ -105,7 +106,7 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 	}
 
 	protected List<Integer> findPath(final int sourceIndex, final int maxDepth) {
-		Queue<Integer> queue = new LinkedList<Integer>();
+		List<Integer> queue = new ArrayList<Integer>();
 		queue.add(sourceIndex);
 
 		int depth = 0;
@@ -115,41 +116,47 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		int currentIndex = -1; // dummy init
 		List<Integer> exploredRandomNeighbors = new ArrayList<Integer>();
 		while (!queue.isEmpty()) {
-			currentIndex = queue.poll();
+//			System.out.println("q");
+			currentIndex = queue.get(queue.size() - 1);
+			queue.remove(queue.size() - 1);
 			depth = checked.get(currentIndex).depth;
+//			System.out.println("d: " + depth);
 			if (depth == maxDepth) {
+//				System.out.println("break");
 				break;
 			}
-			exploredRandomNeighbors.clear();
-			for (Integer n : stations.get(currentIndex).conn) {
-				int neighbor = (int) RandomElementsProvider.getRandomElement(random,
-						stations.get(currentIndex).conn);
-				while (exploredRandomNeighbors.contains(neighbor)
-						&& exploredRandomNeighbors.size() < stations
-								.get(currentIndex).conn.size()) {
-					neighbor = (int) RandomElementsProvider.getRandomElement(random,
-							stations.get(currentIndex).conn);
-				}
-				exploredRandomNeighbors.add(neighbor);
-				if (neighbor != currentIndex) {
-					if (!checked.containsKey(neighbor)) {
-						checked.put(neighbor, new Vertex());
-						checked.get(neighbor).depth = depth + 1;
-						checked.get(neighbor).prev
-								.addAll(checked.get(currentIndex).prev);
-						checked.get(neighbor).prev.add(currentIndex);
-						queue.add(neighbor);
-						checked.get(currentIndex).next.add(neighbor);
+//			exploredRandomNeighbors.clear();
+			for (Integer neighborIndex : stations.get(currentIndex).conn) {
+//				int neighbor = (int) RandomElementsProvider.getRandomElement(random,
+//						stations.get(currentIndex).conn);
+//				// always get a new neighbor
+//				while (exploredRandomNeighbors.contains(neighbor)
+//						&& exploredRandomNeighbors.size() < stations
+//								.get(currentIndex).conn.size()) {
+//					neighbor = (int) RandomElementsProvider.getRandomElement(random,
+//							stations.get(currentIndex).conn);
+//				}
+//				exploredRandomNeighbors.add(neighbor);
+				if (neighborIndex != currentIndex) {
+					if (!checked.containsKey(neighborIndex)) {
+						checked.put(neighborIndex, new Vertex());
+						checked.get(neighborIndex).depth = depth + 1;
+						checked.get(neighborIndex).prev.addAll(checked
+								.get(currentIndex).prev);
+						checked.get(neighborIndex).prev.add(currentIndex);
+						queue.add(neighborIndex);
+						checked.get(currentIndex).next.add(neighborIndex);
 					} else {
-						if (!checked.get(currentIndex).prev.contains(neighbor)) {
-							if (depth >= checked.get(neighbor).depth) {
-								checked.get(neighbor).depth = depth + 1;
-								checked.get(neighbor).prev.clear();
-								checked.get(neighbor).prev.addAll(checked
-										.get(currentIndex).prev);
-								checked.get(neighbor).prev.add(currentIndex);
-								revisitNeighbors(checked, neighbor);
-								queue.add(neighbor);
+						if (!checked.get(currentIndex).prev.contains(neighborIndex)) {
+							if (depth >= checked.get(neighborIndex).depth) {
+								checked.get(neighborIndex).depth = depth + 1;
+								checked.get(neighborIndex).prev.clear();
+								checked.get(neighborIndex).prev
+										.addAll(checked.get(currentIndex).prev);
+								checked.get(neighborIndex).prev
+										.add(currentIndex);
+								revisitNeighbors(checked, neighborIndex);
+								queue.add(neighborIndex);
 							}
 						}
 					}

@@ -96,9 +96,9 @@ public abstract class ScheduleGenerator extends SyntheticGenerator {
 
 	@Override
 	protected void initializeConstants() {
-		ScheduleGeneratorConstants.stationsProportion = 0.4;
-		ScheduleGeneratorConstants.sizeStep = 10000;
-		ScheduleGeneratorConstants.trainsProportion = 0.25;
+		ScheduleGeneratorConstants.stationsProportion = 0.8;
+		ScheduleGeneratorConstants.sizeStep = 5000;
+		ScheduleGeneratorConstants.trainsProportion = 0.09;
 
 		sizeStep = ScheduleGeneratorConstants.sizeStep;
 		maxNodes = (int) (sizeStep * Math.pow(2, generatorConfig.getSize() - 1));
