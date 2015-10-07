@@ -156,4 +156,11 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 		return 0;
 	}
 
+	@Override
+	protected int popElement(List<Integer> queue) {
+		int index = queue.get(0);
+		queue.remove(0);
+		return index;
+	}
+
 }

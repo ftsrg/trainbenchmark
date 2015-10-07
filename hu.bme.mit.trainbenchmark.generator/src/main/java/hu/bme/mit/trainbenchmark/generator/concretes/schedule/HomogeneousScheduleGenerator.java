@@ -112,8 +112,8 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 		checked.get(sourceIndex).depth = depth;
 		int currentIndex = -1; // dummy init
 		while (!queue.isEmpty()) {
-			currentIndex = queue.get(0);
-			queue.remove(0);
+			currentIndex = popElement(queue);
+
 			depth = checked.get(currentIndex).depth;
 			if (depth == maxDepth) {
 				break;
@@ -147,6 +147,12 @@ public abstract class HomogeneousScheduleGenerator extends ScheduleGenerator {
 			}
 		}
 		return checked.get(currentIndex).prev;
+	}
+
+	protected int popElement(List<Integer> queue) {
+		int index = queue.get(queue.size() - 1);
+		queue.remove(queue.size() - 1);
+		return index;
 	}
 
 	protected void revisitNeighbors(Map<Integer, Vertex> checked, int neighbor) {
