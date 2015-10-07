@@ -31,7 +31,7 @@ public class HawkBenchmarkInitializer extends TestBenchmarkInitializer {
 	}
 	
 	public static List<Object[]> getTestParameters() {
-		return Arrays.asList(new Object[][] { { true }, { false } });
+		return Arrays.asList(new Object[][] { { true } });
 	}
 	
 	@Override

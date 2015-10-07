@@ -117,8 +117,13 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		// set the Resource in the EMFDriver
 		RailwayPackage.eINSTANCE.eClass();
 
-		resource = resourceSet.createResource(URI.createURI("hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE
-				+ "&subscribe=true&durability=temporary&clientID=hu.trainbenchmark" + System.nanoTime()));
+		String hawkURI = "hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE
+				+ "&subscribe=true&durability=temporary&clientID=hu.trainbenchmark" + System.nanoTime();
+		if (hbc.isUseHawkScope()) {
+			hawkURI += "&loadingMode=lazy_children";
+		}
+		
+		resource = resourceSet.createResource(URI.createURI(hawkURI));
 		resource.load(Collections.emptyMap());
 
 		client.registerMetamodels(HAWK_INSTANCE, Arrays.asList(thriftFile));
@@ -145,10 +150,10 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		handler.getSyncEnd().get();
 
 		if (hbc.isUseHawkScope()) {
-			final EMFScope emfScope = new EMFScope(hawkResource.getResourceSet());
-			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
+			final HawkScope hawkScope = new HawkScope(hawkResource.getResourceSet(), client);
+			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(hawkScope));
 		} else {
-			final HawkScope emfScope = new HawkScope(hawkResource.getResourceSet());
+			final EMFScope emfScope = new EMFScope(hawkResource.getResourceSet());
 			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
 		}
 		
@@ -185,5 +190,5 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		super.destroy();
 		resource.unload();
 	}
-
+	
 }
