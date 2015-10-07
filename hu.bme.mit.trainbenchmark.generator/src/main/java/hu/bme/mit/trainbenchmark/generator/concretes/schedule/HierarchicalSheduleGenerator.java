@@ -32,8 +32,6 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected double maxIterationsDouble;
 	protected int numberOfClones;
 
-//	protected double expected;
-
 	public HierarchicalSheduleGenerator(FormatGenerator formatGenerator, GeneratorConfig generatorConfig) {
 		super(formatGenerator, generatorConfig);
 	}
@@ -48,7 +46,6 @@ public class HierarchicalSheduleGenerator extends HomogeneousScheduleGenerator {
 	protected void initializeConstants() {
 		super.initializeConstants();
 		initClusters();
-//		expected = estimateNumberOfNeighbors();
 	}
 
 	protected void initClusters() {

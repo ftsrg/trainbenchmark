@@ -95,6 +95,10 @@ public class Cluster {
 	}
 
 	public void drawEdges(Cluster cluster, Node center) {
+		if (cluster.diagonals.isEmpty()) {
+			cluster.center.conn.add(center.id);
+			center.conn.add(cluster.center.id);
+		}
 		for (Node n : cluster.diagonals) {
 			n.conn.add(center.id);
 			center.conn.add(n.id);
