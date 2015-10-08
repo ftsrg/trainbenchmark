@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
-import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
-
 import java.util.Comparator;
 
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Resource;
+
+import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 public class ResourceComparator implements Comparator<Resource> {
 

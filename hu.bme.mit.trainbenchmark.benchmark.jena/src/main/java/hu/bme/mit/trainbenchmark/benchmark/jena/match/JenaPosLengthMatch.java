@@ -13,11 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Resource;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
 public class JenaPosLengthMatch extends JenaMatch implements PosLengthMatch {
 

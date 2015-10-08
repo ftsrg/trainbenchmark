@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
 import java.util.Comparator;
 
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
 
-public class StatemetComparator implements Comparator<Statement> {
+public class StatementComparator implements Comparator<Statement> {
 
 	protected final ResourceComparator resourceComparator = new ResourceComparator();
 

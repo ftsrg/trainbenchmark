@@ -18,10 +18,11 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT4;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT5;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT6;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Resource;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 
 public class JenaConnectedSegmentsMatch extends JenaMatch implements ConnectedSegmentsMatch {
 
