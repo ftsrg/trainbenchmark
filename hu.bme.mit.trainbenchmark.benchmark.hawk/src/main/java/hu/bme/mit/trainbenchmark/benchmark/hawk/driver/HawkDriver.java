@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -175,8 +176,11 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 
 		final ResourceSet resourceSet = resource.getResourceSet();
 		for (final Resource r : resourceSet.getResources()) {
-			if (r.getContents().size() > 0 && r.getContents().get(0) instanceof RailwayContainer) {
-				container = (RailwayContainer) r.getContents().get(0);
+			for (EObject eObject : r.getContents()) {
+				if (eObject instanceof RailwayContainer) {
+					container = (RailwayContainer) eObject;
+					break;
+				}
 			}
 		}
 	}
