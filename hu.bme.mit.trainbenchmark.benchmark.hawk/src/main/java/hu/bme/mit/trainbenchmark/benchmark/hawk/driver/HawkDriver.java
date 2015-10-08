@@ -59,6 +59,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 	protected HawkBenchmarkConfig hbc;
 	protected String hawkRepositoryPath;
 	private Client client;
+	private TrainBenchmarkHawkChangeEventHandler handler;
 
 	public HawkDriver(final HawkBenchmarkConfig hbc) {
 		this.hbc = hbc;
@@ -140,7 +141,8 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
 
 		final HawkResourceImpl hawkResource = (HawkResourceImpl) resource;
-		final TrainBenchmarkHawkChangeEventHandler handler = new TrainBenchmarkHawkChangeEventHandler();
+		handler = new TrainBenchmarkHawkChangeEventHandler();
+		handler.reset();
 		hawkResource.addChangeEventHandler(handler);
 
 		// copy the model to the hawk repository to allow Hawk to load the model
@@ -187,6 +189,13 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 
 	public void persist() throws IOException {
 		resource.save(null);
+		try {
+			handler.reset();
+			client.syncInstance(HAWK_INSTANCE);
+			handler.getSyncEnd().get();
+		} catch (Exception e) {
+			throw new IOException(e);
+		}
 	}
 
 	@Override

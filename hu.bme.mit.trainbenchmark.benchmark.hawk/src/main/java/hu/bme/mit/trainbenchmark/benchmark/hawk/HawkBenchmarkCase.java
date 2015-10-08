@@ -20,9 +20,9 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.driver.HawkDriver;
+import hu.bme.mit.trainbenchmark.benchmark.hawk.transformation.HawkTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class HawkBenchmarkCase<M extends BasePatternMatch>
@@ -44,7 +44,7 @@ public class HawkBenchmarkCase<M extends BasePatternMatch>
 	@Override
 	public Transformation<?> createTransformation(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<M> driver)
 			throws IOException {
-		return EMFIncQueryTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+		return HawkTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 	@Override

@@ -15,10 +15,15 @@ import uk.ac.york.mondo.integration.api.HawkSynchronizationEndEvent;
 import uk.ac.york.mondo.integration.api.HawkSynchronizationStartEvent;
 import uk.ac.york.mondo.integration.hawk.emf.IHawkChangeEventHandler;
 
+// TODO extends HCEA
 public class TrainBenchmarkHawkChangeEventHandler implements IHawkChangeEventHandler {
 
-	private final CompletableFuture<Boolean> syncEnd = new CompletableFuture<>();
+	private CompletableFuture<Boolean> syncEnd;
 
+	public void reset() {
+		syncEnd = new CompletableFuture<Boolean>();
+	}
+	
 	@Override
 	public synchronized void handle(final HawkSynchronizationEndEvent arg0) {
 		syncEnd.complete(true);
