@@ -95,4 +95,9 @@ public class EMFDriver extends Driver<RailwayElement> {
 	public List<?> runQuery(final Query query, final String queryDefinition) throws IOException {
 		throw new UnsupportedOperationException("The EMFDriver cannot evaluate queries.");
 	}
+
+	public void persist() throws IOException {
+		resource.save(null);
+	}
+
 }

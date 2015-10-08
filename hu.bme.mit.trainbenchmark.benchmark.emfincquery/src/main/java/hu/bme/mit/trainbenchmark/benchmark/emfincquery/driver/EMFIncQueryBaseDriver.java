@@ -20,4 +20,5 @@ public abstract class EMFIncQueryBaseDriver<M extends BasePatternMatch> extends 
 	public AdvancedIncQueryEngine getEngine() {
 		return engine;
 	}
+	
 }
