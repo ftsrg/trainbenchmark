@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -48,11 +47,6 @@ public abstract class TrainBenchmarkTest {
 	public ErrorCollector collector = new ErrorCollector();
 
 	protected TestBenchmarkInitializer bi;
-
-	public BenchmarkRunner initialize(final Query query, final String tool, final Scenario scenario)
-			throws IOException {
-		return bi.initializeBenchmark(query, scenario);
-	}
 
 	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize)
 			throws Exception {
