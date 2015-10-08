@@ -85,15 +85,24 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
 
 #trainBenchmarkPlot(plottimes, "Batch", "read.and.check")
 
-trainBenchmarkPlot(plottimes, "Inject", "read.and.check")
-trainBenchmarkPlot(plottimes, "Inject", "transformation.and.recheck")
 
 #trainBenchmarkPlot(plottimes, "Repair", "read.and.check")
 #trainBenchmarkPlot(plottimes, "Repair", "transformation.and.recheck")
 
 # detailed plots
 
-trainBenchmarkPlot(plottimes, "Inject", "read")
-trainBenchmarkPlot(plottimes, "Inject", "check")
-trainBenchmarkPlot(plottimes, "Inject", "transformation")
-trainBenchmarkPlot(plottimes, "Inject", "recheck")
+batch.scenarios = c("Batch")
+transformation.scenarios = c("Inject", "Repair")
+
+for (scenario in c(batch.scenarios, transformation.scenarios)) {
+  trainBenchmarkPlot(plottimes, scenario, "read")
+  trainBenchmarkPlot(plottimes, scenario, "check")
+  trainBenchmarkPlot(plottimes, scenario, "read.and.check")
+}
+
+for (scenario in transformation.scenarios) {
+  trainBenchmarkPlot(plottimes, scenario, "transformation")
+  trainBenchmarkPlot(plottimes, scenario, "recheck")
+  trainBenchmarkPlot(plottimes, scenario, "transformation.and.recheck")
+}
+
