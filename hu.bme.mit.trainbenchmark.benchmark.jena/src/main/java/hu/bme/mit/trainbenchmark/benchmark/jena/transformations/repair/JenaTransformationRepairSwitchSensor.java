@@ -15,15 +15,16 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchSensorMatch;
 
 import java.util.Collection;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
+
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchSensorMatch;
 
 public class JenaTransformationRepairSwitchSensor extends JenaTransformationRepair<JenaSwitchSensorMatch> {
 

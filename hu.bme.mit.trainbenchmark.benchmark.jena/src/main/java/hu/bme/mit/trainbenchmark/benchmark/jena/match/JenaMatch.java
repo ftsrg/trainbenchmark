@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Resource;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Resource;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 public abstract class JenaMatch {
 

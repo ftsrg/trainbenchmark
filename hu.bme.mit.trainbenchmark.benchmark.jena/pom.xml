@@ -1,39 +1,39 @@
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-	<artifactId>hu.bme.mit.trainbenchmark</artifactId>
-	<groupId>hu.bme.mit.trainbenchmark</groupId>
-	<version>1.0.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>hu.bme.mit.trainbenchmark.benchmark.jena</artifactId>
-  
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>hu.bme.mit.trainbenchmark</artifactId>
+		<groupId>hu.bme.mit.trainbenchmark</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>hu.bme.mit.trainbenchmark.benchmark.jena</artifactId>
+
 	<build>
-    	<plugins>
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-						<archive>
-							<manifest>
-								<addClasspath>true</addClasspath>
-								<classpathPrefix>lib/</classpathPrefix>
-								<mainClass>hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkMain</mainClass>
-							</manifest>
-						</archive>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkMain</mainClass>
+						</manifest>
+					</archive>
 				</configuration>
 			</plugin>
-	      
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
-  
-  		<!-- TrainBenchmark -->
+
+	<!-- TrainBenchmark -->
 	<dependencies>
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
@@ -52,14 +52,14 @@
 			<artifactId>hu.bme.mit.trainbenchmark.benchmark.rdf</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
-				
+
 		<!-- Jena -->
-		
+
 		<dependency>
-    		<groupId>org.apache.jena</groupId>
-    		<artifactId>jena-querybuilder</artifactId>
-    		<version>2.13.0</version>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-querybuilder</artifactId>
+			<version>3.0.0</version>
 		</dependency>
-		
+
 	</dependencies>
 </project>
