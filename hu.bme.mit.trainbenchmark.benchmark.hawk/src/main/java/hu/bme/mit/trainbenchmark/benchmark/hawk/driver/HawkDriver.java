@@ -203,5 +203,5 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		super.destroy();
 		resource.unload();
 	}
-	
+
 }

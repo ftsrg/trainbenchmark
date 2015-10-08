@@ -113,5 +113,4 @@ public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFIncQueryBa
 		return vertices;
 	}
 
-
 }

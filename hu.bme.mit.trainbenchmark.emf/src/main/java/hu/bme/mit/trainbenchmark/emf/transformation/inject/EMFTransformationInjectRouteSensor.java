@@ -33,7 +33,9 @@ public class EMFTransformationInjectRouteSensor extends EMFTransformationInject<
 
 			// delete the first edge
 			if (definedBys.size() > 0) {
+				Sensor sensor = definedBys.get(0);
 				definedBys.remove(0);
+				driver.getContainer().getInvalids().add(sensor);
 			}
 		}
 	}

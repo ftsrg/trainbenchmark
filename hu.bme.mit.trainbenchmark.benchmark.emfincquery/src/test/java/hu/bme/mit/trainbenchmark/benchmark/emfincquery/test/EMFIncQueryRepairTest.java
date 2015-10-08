@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.test;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
@@ -22,7 +21,7 @@ public class EMFIncQueryRepairTest extends RepairTest {
 
 	@Parameters
 	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { { true }, { false } });
+	    return EMFIncQueryBenchmarkInitializer.getTestParameters();
 	}
 
 	public EMFIncQueryRepairTest(final boolean localSearch) {
