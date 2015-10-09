@@ -12,35 +12,41 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
+import java.io.IOException;
+import java.util.Comparator;
+
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
-import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-public class MySQLBenchmarkCase extends SQLBenchmarkCase {
+public class MySQLBenchmarkCase extends SQLBenchmarkCase<MySQLDriver> {
 
 	public MySQLBenchmarkCase() {
 		super();
 	}
 
 	@Override
-	public void init() throws Exception {
-		super.init();
-		MySQLProcess.startSQLProcess();
-
-		driver = sqlDriver = new MySQLDriver();
-		checker = new SQLChecker(sqlDriver, bc);
-
-		if (bc.getScenario().hasTranformation()) {
-			transformation = SQLTransformation.newInstance(sqlDriver, bc);
-		}
+	public MySQLDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+		return new MySQLDriver();
 	}
 
 	@Override
-	protected void destroy() throws Exception {
-		driver.destroy();
+	public SQLChecker createChecker(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws Exception {
+		return new SQLChecker(driver, benchmarkConfig);
+	}
+
+	@Override
+	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws IOException {
+		return SQLTransformation.newInstance(driver, benchmarkConfig);
+	}
+
+	@Override
+	public Comparator<?> createMatchComparator() {
+		return new LongMatchComparator();
 	}
 
 }

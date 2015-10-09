@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class VirtuosoBenchmarkMain {
 
-	public static void main(String[] args) throws ParseException, IOException {
-		VirtuosoBenchmarkLogic benchmarkLogic = new VirtuosoBenchmarkLogic(args);
+	public static void main(final String[] args) throws Exception {
+		final RDFBenchmarkConfig rdfbc = new RDFBenchmarkConfig(args, "Virtuoso");
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(rdfbc, new VirtuosoBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

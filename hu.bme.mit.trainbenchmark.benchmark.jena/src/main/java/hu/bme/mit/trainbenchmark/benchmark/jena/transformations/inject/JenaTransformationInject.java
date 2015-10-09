@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
+import org.apache.jena.rdf.model.Resource;
+
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
-
-import com.hp.hpl.jena.rdf.model.Resource;
 
 public abstract class JenaTransformationInject extends JenaTransformation<Resource> {
 

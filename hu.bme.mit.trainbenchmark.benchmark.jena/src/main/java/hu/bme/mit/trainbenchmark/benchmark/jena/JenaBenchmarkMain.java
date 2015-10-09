@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class JenaBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		JenaBenchmarkLogic benchmarkLogic = new JenaBenchmarkLogic(args);
+	public static void main(final String[] args) throws Exception {
+		final RDFBenchmarkConfig bc = new RDFBenchmarkConfig(args, "Jena3");
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new JenaBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

@@ -59,7 +59,7 @@ public class GraphSerializer extends ModelSerializer {
 
 	@Override
 	public void initModel() throws IOException {
-		final String databaseDirectoriesPath = generatorConfig.getModelPath() + "/neo4j-gen/";
+		final String databaseDirectoriesPath = generatorConfig.getModelsPath() + "/neo4j-gen/";
 		databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories
@@ -159,7 +159,7 @@ public class GraphSerializer extends ModelSerializer {
 			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 			tx.success();
 
-			final String fileName = generatorConfig.getModelPathNameWithoutExtension() + ".graphml";
+			final String fileName = generatorConfig.getModelPathWithoutExtension() + ".graphml";
 
 			String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB

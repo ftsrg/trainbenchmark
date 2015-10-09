@@ -11,17 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
-
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+
 public class EMFIncQuerySwitchSetChecker extends EMFIncQueryChecker<SwitchSetMatch> {
 
-	public EMFIncQuerySwitchSetChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver<SwitchSetMatch> eiqDriver) {
+	public EMFIncQuerySwitchSetChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<SwitchSetMatch> eiqDriver) {
 		super(eiqbc, eiqDriver);
 	}
 

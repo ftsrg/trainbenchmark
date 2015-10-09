@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.driver;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
-
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 public abstract class Driver<T> {
 
@@ -25,6 +25,9 @@ public abstract class Driver<T> {
 	}
 
 	public void finishTransaction() throws Exception {
+	}
+
+	public void initialize() throws Exception {
 	}
 
 	public void destroy() throws Exception {

@@ -11,36 +11,49 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import org.apache.log4j.Level;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
 import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
+import org.eclipse.incquery.runtime.base.api.NavigationHelper;
 import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.extensibility.QueryBackendRegistry;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackend;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
-public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFDriver {
+import com.google.common.collect.Sets;
+
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+
+public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDriver<M> {
 
 	protected EMFIncQueryBenchmarkConfig eiqbc;
-	protected AdvancedIncQueryEngine engine;
-	protected EMFIncQueryChecker<M> checker;
 
 	public EMFIncQueryDriver(final EMFIncQueryBenchmarkConfig eiqbc) {
 		this.eiqbc = eiqbc;
 	}
 
+	@Override
+	public void initialize() throws Exception {
+		super.initialize();
+		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
+	}
+	
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
@@ -83,12 +96,21 @@ public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFDriver {
 		}
 	}
 
-	public void registerChecker(final EMFIncQueryChecker<M> checker) throws IOException {
-		this.checker = checker;
-	}
+	@Override
+	public List<RailwayElement> collectVertices(final String type) throws Exception {
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
+		final NavigationHelper navigationHelper = EMFScope.extractUnderlyingEMFIndex(engine);
 
-	public AdvancedIncQueryEngine getEngine() {
-		return engine;
+		// register the class (won't register it twice)
+		navigationHelper.registerEClasses(Sets.newHashSet(clazz));
+
+		final Set<EObject> instances = navigationHelper.getAllInstances(clazz);
+		final List<RailwayElement> vertices = new ArrayList<>();
+		for (final EObject instance : instances) {
+			vertices.add((RailwayElement) instance);
+		}
+
+		return vertices;
 	}
 
 }

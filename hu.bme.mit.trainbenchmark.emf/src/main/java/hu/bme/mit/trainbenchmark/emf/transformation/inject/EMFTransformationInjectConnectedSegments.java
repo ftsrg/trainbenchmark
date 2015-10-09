@@ -11,12 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.inject;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
-import java.util.Collection;
 
 public class EMFTransformationInjectConnectedSegments extends EMFTransformationInject<Segment> {
 
@@ -25,7 +26,7 @@ public class EMFTransformationInjectConnectedSegments extends EMFTransformationI
 	}
 
 	@Override
-	public void rhs(final Collection<Segment> segments) {
+	public void rhs(final Collection<Segment> segments) throws IOException {
 		for (final Segment segment1 : segments) {
 			if (segment1.getConnectsTo().isEmpty()) {
 				continue;

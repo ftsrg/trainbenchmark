@@ -107,7 +107,7 @@ def get_common_model_path():
 extensions = {
           'rdf': "ttl",
           'graph': "graphml",
-          'emf': "emf",
+          'emf': "xmi",
           'sql': "sql"
           }
 

@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class EclipseOCLBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		EclipseOCLBenchmarkLogic benchmarkLogic = new EclipseOCLBenchmarkLogic(args);
+	public static void main(final String[] args) throws Exception {
+		final BenchmarkConfig bc = new BenchmarkConfig("Eclipse OCL", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new EclipseOCLBenchmarkCase<>());
 		benchmarkLogic.runBenchmark();
 	}
 }

@@ -5,5 +5,5 @@ Bundle-SymbolicName: hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns;si
 Bundle-Version: 1.0.0.qualifier
 Export-Package: hu.bme.mit.trainbenchmark.benchmark.emfincquery,
  hu.bme.mit.trainbenchmark.benchmark.emfincquery.util
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.7.3",
- hu.bme.mit.trainbenchmark.emf.model;bundle-version="1.0.0"
+Require-Bundle: hu.bme.mit.trainbenchmark.emf.model;bundle-version="1.0.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.9.0"

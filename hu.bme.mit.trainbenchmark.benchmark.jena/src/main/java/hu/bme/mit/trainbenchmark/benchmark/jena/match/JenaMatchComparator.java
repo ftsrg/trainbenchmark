@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 
+import org.apache.jena.rdf.model.Resource;
+
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.ResourceComparator;
 import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
-
-import com.hp.hpl.jena.rdf.model.Resource;
 
 public class JenaMatchComparator extends MatchComparator<JenaMatch, Resource> {
 

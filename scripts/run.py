@@ -19,6 +19,11 @@ import glob
 import smtplib
 from email.mime.text import MIMEText
 
+
+def flatten(lst):
+    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
+
+
 def build(config, formats, skip_tests):
     profiles = {"core"}
     profiles = profiles.union(formats)
@@ -53,11 +58,12 @@ def generate(config, formats):
                 util.set_working_directory(path)
                 target = util.get_generator_jar(format)
                 for size in config["sizes"]:
-                    cmd = ["java", "-Xmx" + config["java_opts"]["xmx"],
+                    cmd = flatten(["java", 
+                         config["java_opts"],
                          "-jar", target,
                          "-scenario", scenario,
                          "-size", str(size),
-                       arg]
+                       arg])
                     try:
                         subprocess.check_call(cmd)
                     except subprocess.CalledProcessError:
@@ -67,18 +73,25 @@ def generate(config, formats):
 
 
 def measure(config):
-    for tool in config["tools"]:
-        args = [""]
-        if tool in config["benchmark_optional_arguments"]:
-            for optional_argument in config["benchmark_optional_arguments"][tool]:
-                args.append("-" + optional_argument)
+    for scenario in config["scenarios"]:
+        transformation_arguments = []
+        for (scenario_name, scenario_arguments) in scenario.items():
+            if scenario_arguments is not None:
+                for arg, value in scenario_arguments.items():
+                    transformation_arguments.append("-" + arg)
+                    transformation_arguments.append(str(value))
 
-        for arg in args:
-            path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
-            util.set_working_directory(path)
-            target = util.get_tool_jar(tool)
+        for tool in config["tools"]:
+            args = [""]
+            if tool in config["benchmark_optional_arguments"]:
+                for optional_argument in config["benchmark_optional_arguments"][tool]:
+                    args.append("-" + optional_argument)
 
-            for scenario in config["scenarios"]:
+            for arg in args:
+                path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
+                util.set_working_directory(path)
+                target = util.get_tool_jar(tool)
+
                 for query in config["queries"]:
                     for size in config["sizes"]:
                         
@@ -90,18 +103,22 @@ def measure(config):
                         print("Running benchmark... " +
                               "runs: " + str(config["runs"]) +
                               ", tool: " + tool +
-                              ", scenario: " + scenario +
+                              ", scenario: " + scenario_name +
                               ", query: " + query +
                               ", size: " + str(size) +
                               (", argument: " + arg if arg != "" else ""))
-                        cmd = ["java", "-Xmx" + config["java_opts"]["xmx"], "-jar", target,
+                        cmd = flatten(["java",
+                               config["java_opts"],
+                               "-jar", target,
                                "-runs", str(config["runs"]),
-                               "-scenario", scenario,
+                               "-scenario", scenario_name,
                                "-query", query,
                                "-size", str(size),
-                               arg]
+                               transformation_arguments,
+                               arg])
+                        
                         try:
-                            subprocess.check_output(cmd, timeout=config["timeout"])
+                            subprocess.check_call(cmd, timeout=config["timeout"])
                         except subprocess.TimeoutExpired:
                             print("Timeout, skipping larger sizes for this tool/scenario/query.")
                             break
@@ -125,7 +142,7 @@ def send_mail(config):
         host = config["email"]["host"]
 
         msg = MIMEText("<helpful information about the run>")
-        msg["Subject"] = "Trainbenchmark measurement ready"
+        msg["Subject"] = "Train Benchmark measurement ready"
         msg["From"] = address
         msg["To"] = address
         

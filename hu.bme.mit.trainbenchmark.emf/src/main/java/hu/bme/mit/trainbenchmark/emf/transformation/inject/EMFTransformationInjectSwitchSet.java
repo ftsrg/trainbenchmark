@@ -11,11 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.inject;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Position;
 import hu.bme.mit.trainbenchmark.railway.Switch;
-
-import java.util.Collection;
 
 public class EMFTransformationInjectSwitchSet extends EMFTransformationInject<Switch> {
 
@@ -24,7 +25,7 @@ public class EMFTransformationInjectSwitchSet extends EMFTransformationInject<Sw
 	}
 
 	@Override
-	public void rhs(final Collection<Switch> switches) {
+	public void rhs(final Collection<Switch> switches) throws IOException {
 		for (final Switch sw : switches) {
 			final Position currentPosition = sw.getCurrentPosition();
 			final Position newCurrentPosition = Position.get((currentPosition.ordinal() + 1) % Position.VALUES.size());

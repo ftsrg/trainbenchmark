@@ -12,15 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class MySQLBenchmarkMain {
 
-	public static void main(final String[] args) throws IOException, ParseException, InterruptedException {
-		 final MySQLBenchmarkLogic benchmarkLogic = new MySQLBenchmarkLogic(args);
-		 benchmarkLogic.runBenchmark();
+	public static void main(final String[] args) throws Exception {
+		final BenchmarkConfig bc = new BenchmarkConfig("MySQL", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new MySQLBenchmarkCase());
+		benchmarkLogic.runBenchmark();
 	}
 
 }

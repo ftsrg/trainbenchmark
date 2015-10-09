@@ -11,17 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
-
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+
 public class EMFIncQueryRouteSensorChecker extends EMFIncQueryChecker<RouteSensorMatch> {
 
-	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver<RouteSensorMatch> eiqDriver) {
+	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<RouteSensorMatch> eiqDriver) {
 		super(eiqbc, eiqDriver);
 	}
 

@@ -93,19 +93,19 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      {
-      	PBody body = new PBody(this);
-      	PVariable var_sw = body.getOrCreateVariableByName("sw");
-      	PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
-      	PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_sw, "sw")
-      	));
-      	new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
-      	new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor")));
-      	new Equality(body, var__virtual_0_, var___0_);
-      	bodies.add(body);
-      }
+      	{
+      		PBody body = new PBody(this);
+      		PVariable var_sw = body.getOrCreateVariableByName("sw");
+      		PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+      			new ExportedParameter(body, var_sw, "sw")
+      		));
+      		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+      		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor")));
+      		new Equality(body, var__virtual_0_, var___0_);
+      		bodies.add(body);
+      	}
       	// to silence compiler error
       	if (false) throw new IncQueryException("Never", "happens");
       } catch (IncQueryException ex) {

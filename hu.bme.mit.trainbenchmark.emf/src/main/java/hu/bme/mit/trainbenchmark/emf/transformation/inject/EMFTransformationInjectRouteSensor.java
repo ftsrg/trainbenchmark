@@ -11,13 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.inject;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-
+import java.io.IOException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EMFTransformationInjectRouteSensor extends EMFTransformationInject<Route> {
 
@@ -26,13 +27,15 @@ public class EMFTransformationInjectRouteSensor extends EMFTransformationInject<
 	}
 
 	@Override
-	public void rhs(final Collection<Route> routes) {
+	public void rhs(final Collection<Route> routes) throws IOException {
 		for (final Route route : routes) {
 			final EList<Sensor> definedBys = route.getDefinedBy();
 
 			// delete the first edge
 			if (definedBys.size() > 0) {
+				Sensor sensor = definedBys.get(0);
 				definedBys.remove(0);
+				driver.getContainer().getInvalids().add(sensor);
 			}
 		}
 	}

@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.allegro;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class AllegroBenchmarkMain {
-	
-	public static void main(String[] args) throws ParseException, IOException{
-		AllegroBenchmarkLogic allegroBenchmarkLogic = new AllegroBenchmarkLogic(args);
+
+	public static void main(final String[] args) throws Exception {
+		final RDFBenchmarkConfig rdfbc = new RDFBenchmarkConfig(args, "AllegroGraph");
+		final BenchmarkRunner allegroBenchmarkLogic = new BenchmarkRunner(rdfbc, new AllegroBenchmarkCase());
 		allegroBenchmarkLogic.runBenchmark();
 	}
 }

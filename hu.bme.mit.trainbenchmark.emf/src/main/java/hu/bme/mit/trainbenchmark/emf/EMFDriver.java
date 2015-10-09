@@ -11,12 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -30,6 +24,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+
 public class EMFDriver extends Driver<RailwayElement> {
 
 	protected RailwayContainer container;
@@ -39,7 +39,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		RailwayPackage.eINSTANCE.eClass();
-		final String modelPath = modelPathWithoutExtension + "." + getPostfix();
+		final String modelPath = modelPathWithoutExtension + getPostfix();
 
 		final URI resourceURI = FileBroker.getEMFUri(modelPath);
 		final ResourceSet resourceSet = new ResourceSetImpl();
@@ -52,7 +52,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 
 	@Override
 	public String getPostfix() {
-		return "emf";
+		return ".xmi";
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class EMFDriver extends Driver<RailwayElement> {
 	// read
 
 	@Override
-	public List<RailwayElement> collectVertices(final String type) {
+	public List<RailwayElement> collectVertices(final String type) throws Exception {
 		final List<RailwayElement> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
@@ -95,4 +95,9 @@ public class EMFDriver extends Driver<RailwayElement> {
 	public List<?> runQuery(final Query query, final String queryDefinition) throws IOException {
 		throw new UnsupportedOperationException("The EMFDriver cannot evaluate queries.");
 	}
+
+	public void persist() throws IOException {
+		resource.save(null);
+	}
+
 }

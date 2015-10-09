@@ -18,10 +18,11 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Resource;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 
 public class JenaSemaphoreNeighborMatch extends JenaMatch implements SemaphoreNeighborMatch {
 

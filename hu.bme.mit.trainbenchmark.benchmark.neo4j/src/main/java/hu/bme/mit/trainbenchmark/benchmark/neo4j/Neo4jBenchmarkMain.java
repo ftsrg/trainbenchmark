@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class Neo4jBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		Neo4jBenchmarkLogic benchmarkLogic = new Neo4jBenchmarkLogic(args);
+	public static void main(final String[] args) throws Exception {
+		final Neo4jBenchmarkConfig bc = new Neo4jBenchmarkConfig(args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new Neo4jBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

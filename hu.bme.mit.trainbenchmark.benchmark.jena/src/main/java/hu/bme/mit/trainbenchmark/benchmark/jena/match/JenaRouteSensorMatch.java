@@ -15,10 +15,11 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Resource;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 
 public class JenaRouteSensorMatch extends JenaMatch implements RouteSensorMatch {
 

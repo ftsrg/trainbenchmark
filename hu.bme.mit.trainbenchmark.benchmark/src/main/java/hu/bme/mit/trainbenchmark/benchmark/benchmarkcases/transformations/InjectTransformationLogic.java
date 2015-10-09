@@ -20,7 +20,6 @@ import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
-import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -30,31 +29,33 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Ordering;
 
-public class InjectTransformationLogic<M, T> extends TransformationLogic<M, T, T> {
+import hu.bme.mit.trainbenchmark.constants.Query;
 
-	protected InjectTransformationLogic(final Comparator<?> comparator) {
+public class InjectTransformationLogic<TMatch, TElement> extends TransformationLogic<TMatch, TElement, TElement> {
+
+	protected InjectTransformationLogic(final Comparator<TElement> comparator) {
 		super(comparator);
 	}
 
 	protected static Map<Query, String> VERTEX_TYPES = ImmutableMap.<Query, String> builder() //
+			.put(CONNECTEDSEGMENTS, SEGMENT) //
 			.put(POSLENGTH, SEGMENT) //
 			.put(ROUTESENSOR, ROUTE) //
 			.put(SEMAPHORENEIGHBOR, ROUTE) //
 			.put(SWITCHSENSOR, SWITCH) //
 			.put(SWITCHSET, SWITCH) //
-			.put(CONNECTEDSEGMENTS, SEGMENT) //
 			.build();
 
 	@Override
-	protected void lhs(final Collection<M> currentMatches) throws Exception {
+	protected void lhs(final Collection<TMatch> currentMatches) throws Exception {
 		final String vertexType = VERTEX_TYPES.get(bc.getQuery());
 		candidatesToModify = driver.collectVertices(vertexType);
 	}
 
 	@Override
-	protected List<T> copyAndSort() {
-		final Ordering<T> ordering = Ordering.from(comparator);
-		final List<T> sortedMatches = ordering.sortedCopy(candidatesToModify);
+	protected List<TElement> copyAndSort() {
+		final Ordering<TElement> ordering = Ordering.from(comparator);
+		final List<TElement> sortedMatches = ordering.sortedCopy(candidatesToModify);
 		return sortedMatches;
 	}
 

@@ -11,16 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
-
 import java.io.IOException;
 import java.util.Collection;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
+
 public class EMFIncQueryTransformationRepairSemaphoreNeighbor extends EMFIncQueryTransformation<SemaphoreNeighborMatch> {
 
-	public EMFIncQueryTransformationRepairSemaphoreNeighbor(final EMFIncQueryDriver<?> driver) {
+	public EMFIncQueryTransformationRepairSemaphoreNeighbor(final EMFIncQueryBaseDriver<?> driver) {
 		super(driver);
 	}
 

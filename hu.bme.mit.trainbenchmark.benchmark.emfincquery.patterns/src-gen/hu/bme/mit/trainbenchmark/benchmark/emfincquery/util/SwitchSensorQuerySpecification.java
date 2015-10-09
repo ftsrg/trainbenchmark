@@ -93,16 +93,16 @@ public final class SwitchSensorQuerySpecification extends BaseGeneratedEMFQueryS
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      {
-      	PBody body = new PBody(this);
-      	PVariable var_sw = body.getOrCreateVariableByName("sw");
-      	body.setExportedParameters(Arrays.<ExportedParameter>asList(
-      		new ExportedParameter(body, var_sw, "sw")
-      	));
-      	new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch")));
-      	new NegativePatternCall(body, new FlatTuple(var_sw), HasSensorQuerySpecification.instance().getInternalQueryRepresentation());
-      	bodies.add(body);
-      }
+      	{
+      		PBody body = new PBody(this);
+      		PVariable var_sw = body.getOrCreateVariableByName("sw");
+      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+      			new ExportedParameter(body, var_sw, "sw")
+      		));
+      		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch")));
+      		new NegativePatternCall(body, new FlatTuple(var_sw), HasSensorQuerySpecification.instance().getInternalQueryRepresentation());
+      		bodies.add(body);
+      	}
       	// to silence compiler error
       	if (false) throw new IncQueryException("Never", "happens");
       } catch (IncQueryException ex) {

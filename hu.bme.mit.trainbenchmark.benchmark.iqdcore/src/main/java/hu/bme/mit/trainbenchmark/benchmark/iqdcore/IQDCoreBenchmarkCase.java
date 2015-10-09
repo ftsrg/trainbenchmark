@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Comparator;
 
 import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCaseRunner;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreReader;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransf
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 
 public class IQDCoreBenchmarkCase extends
-		AbstractBenchmarkCase<IQDCoreMatch, Long> {
+		AbstractBenchmarkCaseRunner<IQDCoreMatch, Long> {
 	protected WildcardInput iqdInput;
 	protected RDFBenchmarkConfig rdfbc;
 
