@@ -10,19 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test.cpurestricted;
 
-import java.io.IOException;
+import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
-import org.apache.commons.cli.ParseException;
+public class IQDCoreBatchMinimalNoInferencingCPURestrictedTest extends MinimalTest {
 
-public class IQDCoreBenchmarkMain {
-
-	public static void main(String[] args) throws IOException, ParseException {
-		IQDCoreBenchmarkLogic benchmarkLogic = new IQDCoreBenchmarkLogic(args);
-		benchmarkLogic.runBenchmark();
-		System.exit(0);
-		return;
+	public IQDCoreBatchMinimalNoInferencingCPURestrictedTest() {
+		bi = new IQDCoreBenchmarkNoInferencingCPURestrictedInitializer();
 	}
 
 }

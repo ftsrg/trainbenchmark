@@ -15,9 +15,9 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
 
-public class IQDCoreBenchmarkLogic extends BenchmarkLogic {
+public class IQDCoreBenchmarkLogic extends AbstractBenchmarkLogic {
 
 	protected RDFBenchmarkConfig rbc;
 
@@ -25,9 +25,22 @@ public class IQDCoreBenchmarkLogic extends BenchmarkLogic {
 		bc = rbc = new RDFBenchmarkConfig(args, "IQDCore");
 	}
 
-	public IQDCoreBenchmarkLogic(final RDFBenchmarkConfig rbc) {
+	public IQDCoreBenchmarkLogic(final IQDCoreBenchmarkConfig rbc) {
 		super(rbc);
-		this.rbc = rbc;
+		this.iqdbc = rbc;
+		setCPUAffinity();
+	}
+	public void setCPUAffinity() {
+		if (iqdbc.isCPURestricted()) {
+			String cpulist = iqdbc.getCpuList();
+			try {
+				int pid = Integer.parseInt(new File("/proc/self").getCanonicalFile().getName());
+				Runtime.getRuntime().exec(String.format("taskset -a -p -c %s %d", cpulist, pid));
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(-1);
+			}
+		}
 	}
 
 }
