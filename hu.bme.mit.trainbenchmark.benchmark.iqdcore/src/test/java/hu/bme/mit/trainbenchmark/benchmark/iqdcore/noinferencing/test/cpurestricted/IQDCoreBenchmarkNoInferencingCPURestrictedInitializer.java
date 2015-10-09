@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test.cpurestricted;
 
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDCoreBenchmarkLogic;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
@@ -18,12 +18,12 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class IQDCoreBenchmarkNoInferencingInitializer extends TestBenchmarkInitializer<IQDCoreBenchmarkLogic> {
+public class IQDCoreBenchmarkNoInferencingCPURestrictedInitializer extends TestBenchmarkInitializer<IQDCoreBenchmarkLogic> {
 
 	@Override
 	protected IQDCoreBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
 		final IQDCoreBenchmarkConfig rbc = new IQDCoreBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
-				transformationConstant, null);
+				transformationConstant, "0");
 		return new IQDCoreBenchmarkLogic(rbc);
 	}
 

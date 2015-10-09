@@ -125,3 +125,14 @@ For further information, read the [instructions](https://github.com/FTSRG/mondo-
 ### Generating diagrams
 
 Adjust the `config/reporting.json` file and run the `scripts/report.sh` script. The possible configuration values are listed in the [MONDO-SAM wiki](https://github.com/FTSRG/mondo-sam/wiki/Reporting).
+
+## Instance models
+
+The Train Benchmark provides two sorts of instance models:
+
+* **Minimal models**, used only for testing
+* **Scalable models**, used both for testing and benchmarking
+
+The **minimal models** contain only a few (8-10) model elements to provide simple models for development and testing.
+
+The **scalable models** are generated for each scenario in sizes denoted by the powers of two, e.g. `railway-repair-1`, `railway-repair-2`, `railway-repair-4`, etc.
