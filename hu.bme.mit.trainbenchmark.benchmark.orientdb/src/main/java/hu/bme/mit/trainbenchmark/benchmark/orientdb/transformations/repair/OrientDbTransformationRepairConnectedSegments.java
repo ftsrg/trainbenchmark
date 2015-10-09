@@ -24,8 +24,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationRepairConnectedSegments extends OrientDbTransformationRepair<OrientDbConnectedSegmentsMatch> {
 
-	public OrientDbTransformationRepairConnectedSegments(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationRepairConnectedSegments(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

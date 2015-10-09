@@ -13,9 +13,9 @@ package hu.bme.mit.trainbenchmark.benchmark.checker;
 
 import java.util.Collection;
 
-public abstract class Checker<M> {
+public abstract class Checker<TMatch> {
 	
-	public abstract Collection<M> check() throws Exception;
+	public abstract Collection<TMatch> check() throws Exception;
 
 	public void destroy() {
 	}

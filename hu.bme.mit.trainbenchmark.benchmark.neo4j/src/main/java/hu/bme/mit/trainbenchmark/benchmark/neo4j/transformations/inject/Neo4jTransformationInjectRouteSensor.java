@@ -21,8 +21,8 @@ import org.neo4j.graphdb.Relationship;
 
 public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformationInject {
 
-	public Neo4jTransformationInjectRouteSensor(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationInjectRouteSensor(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

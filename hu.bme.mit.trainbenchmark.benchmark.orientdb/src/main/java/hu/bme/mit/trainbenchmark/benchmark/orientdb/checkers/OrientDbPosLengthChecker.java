@@ -25,8 +25,8 @@ import com.tinkerpop.pipes.util.structures.Row;
 
 public class OrientDbPosLengthChecker extends OrientDbChecker<OrientDbPosLengthMatch> {
 
-	public OrientDbPosLengthChecker(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbPosLengthChecker(final OrientDbDriver driver) {
+		super(driver);
 	}
 	
 	@Override

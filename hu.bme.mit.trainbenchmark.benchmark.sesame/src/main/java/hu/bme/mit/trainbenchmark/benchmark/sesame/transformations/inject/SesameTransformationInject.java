@@ -18,8 +18,8 @@ import org.openrdf.model.URI;
 
 public abstract class SesameTransformationInject extends SesameTransformation<URI> {
 
-	protected SesameTransformationInject(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	protected SesameTransformationInject(final SesameDriver driver) {
+		super(driver);
 	}
 
 }

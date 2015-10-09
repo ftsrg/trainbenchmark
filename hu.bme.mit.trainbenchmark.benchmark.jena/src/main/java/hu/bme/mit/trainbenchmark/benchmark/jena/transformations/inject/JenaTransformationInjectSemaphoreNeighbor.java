@@ -23,13 +23,13 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
 public class JenaTransformationInjectSemaphoreNeighbor extends JenaTransformationInject {
 
-	public JenaTransformationInjectSemaphoreNeighbor(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationInjectSemaphoreNeighbor(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<Resource> routes) throws IOException {
-		jenaDriver.deleteSingleOutgoingEdge(routes, ROUTE, ENTRY);
+		driver.deleteSingleOutgoingEdge(routes, ROUTE, ENTRY);
 	}
 
 }

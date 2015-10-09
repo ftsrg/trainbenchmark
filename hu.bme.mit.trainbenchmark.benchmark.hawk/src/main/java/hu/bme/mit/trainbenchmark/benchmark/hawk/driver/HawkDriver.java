@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
@@ -47,7 +49,7 @@ import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
 import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceFactoryImpl;
 import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceImpl;
 
-public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDriver<M> {
+public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch> {
 
 	private static final String ECORE_METAMODEL = "/hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
 	private static final String HAWK_REPOSITORY = "/models/hawkrepository/";
@@ -59,7 +61,7 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 	protected HawkBenchmarkConfig hbc;
 	protected String hawkRepositoryPath;
 	private Client client;
-	private TrainBenchmarkHawkChangeEventHandler handler;
+	private HawkResourceImpl hawkResource;
 
 	public HawkDriver(final HawkBenchmarkConfig hbc) {
 		this.hbc = hbc;
@@ -140,17 +142,14 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
 
-		final HawkResourceImpl hawkResource = (HawkResourceImpl) resource;
-		handler = new TrainBenchmarkHawkChangeEventHandler();
-		handler.reset();
-		hawkResource.addChangeEventHandler(handler);
+		hawkResource = (HawkResourceImpl) resource;
+		
 
 		// copy the model to the hawk repository to allow Hawk to load the model
 		copyModelToHawk(hawkRepositoryPath, modelPath);
 
 		client.syncInstance(HAWK_INSTANCE);
-		// waiting for Hawk to finish
-		handler.getSyncEnd().get();
+		waitForSync(hawkResource);
 
 		if (hbc.isUseHawkScope()) {
 			final HawkScope hawkScope = new HawkScope(hawkResource.getResourceSet(), client);
@@ -160,18 +159,18 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
 		}
 		
-		final IncQueryMatcher<M> matcher = checker.getMatcher();
-		final Collection<M> matches = matcher.getAllMatches();
+		final IncQueryMatcher<TMatch> matcher = checker.getMatcher();
+		final Collection<TMatch> matches = matcher.getAllMatches();
 		checker.setMatches(matches);
 
-		engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<M>() {
+		engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<TMatch>() {
 			@Override
-			public void notifyAppearance(final M match) {
+			public void notifyAppearance(final TMatch match) {
 				matches.add(match);
 			}
 
 			@Override
-			public void notifyDisappearance(final M match) {
+			public void notifyDisappearance(final TMatch match) {
 				matches.remove(match);
 			}
 		}, false);
@@ -187,12 +186,23 @@ public class HawkDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDrive
 		}
 	}
 
+	private void waitForSync(final HawkResourceImpl hawkResource) throws InterruptedException, ExecutionException {
+		CompletableFuture<Boolean> syncEnd = new CompletableFuture<Boolean>();
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				syncEnd.complete(true);
+			}
+		};
+		hawkResource.addSyncEndListener(runnable);
+		syncEnd.get();
+		hawkResource.removeSyncEndListener(runnable);
+	}
+
 	public void persist() throws IOException {
-		resource.save(null);
 		try {
-			handler.reset();
 			client.syncInstance(HAWK_INSTANCE);
-			handler.getSyncEnd().get();
+			waitForSync(hawkResource);
 		} catch (Exception e) {
 			throw new IOException(e);
 		}

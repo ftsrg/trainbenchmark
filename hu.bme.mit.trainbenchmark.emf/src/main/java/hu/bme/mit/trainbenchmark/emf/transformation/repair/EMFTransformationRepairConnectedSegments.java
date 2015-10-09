@@ -11,13 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
-
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
+
 public class EMFTransformationRepairConnectedSegments extends EMFTransformationRepair<EMFConnectedSegmentsMatch> {
+
+	public EMFTransformationRepairConnectedSegments(EMFDriver driver) {
+		super(driver);
+	}
 
 	@Override
 	public void rhs(final Collection<EMFConnectedSegmentsMatch> matches) {

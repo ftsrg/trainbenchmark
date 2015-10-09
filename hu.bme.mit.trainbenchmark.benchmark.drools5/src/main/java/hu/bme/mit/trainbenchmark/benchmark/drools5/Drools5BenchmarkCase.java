@@ -34,7 +34,7 @@ public class Drools5BenchmarkCase extends EMFBenchmarkCase<Drools5Driver, Benchm
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver) throws IOException {
 		return EMFTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 

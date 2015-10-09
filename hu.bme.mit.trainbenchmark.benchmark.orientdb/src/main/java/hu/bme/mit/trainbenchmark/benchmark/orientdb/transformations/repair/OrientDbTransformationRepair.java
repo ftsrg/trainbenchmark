@@ -15,10 +15,10 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatch;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.OrientDbTransformation;
 
-public abstract class OrientDbTransformationRepair<M extends OrientDbMatch> extends OrientDbTransformation<M> {
+public abstract class OrientDbTransformationRepair<TMatch extends OrientDbMatch> extends OrientDbTransformation<TMatch> {
 
-	protected OrientDbTransformationRepair(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	protected OrientDbTransformationRepair(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 }

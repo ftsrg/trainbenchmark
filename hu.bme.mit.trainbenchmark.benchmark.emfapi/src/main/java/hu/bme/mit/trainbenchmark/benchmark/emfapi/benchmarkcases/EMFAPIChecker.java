@@ -18,9 +18,9 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
-public abstract class EMFAPIChecker<T extends EMFMatch> extends Checker<T> {
+public abstract class EMFAPIChecker<TMatch extends EMFMatch> extends Checker<TMatch> {
 
-	protected Collection<T> matches;
+	protected Collection<TMatch> matches;
 	protected final EMFDriver emfDriver;
 
 	public EMFAPIChecker(final EMFDriver emfDriver) {

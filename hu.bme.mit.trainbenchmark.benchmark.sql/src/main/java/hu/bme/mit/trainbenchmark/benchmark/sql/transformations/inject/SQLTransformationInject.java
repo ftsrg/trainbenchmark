@@ -21,14 +21,14 @@ import java.util.Collection;
 
 public class SQLTransformationInject extends SQLTransformation<Long> {
 
-	public SQLTransformationInject(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		super(sqlDriver, bc);
+	public SQLTransformationInject(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
+		super(driver, bc);
 	}
 
 	@Override
 	public void rhs(final Collection<Long> elements) throws SQLException {
 		if (preparedUpdateStatement == null) {
-			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}
 
 		for (final Long element : elements) {

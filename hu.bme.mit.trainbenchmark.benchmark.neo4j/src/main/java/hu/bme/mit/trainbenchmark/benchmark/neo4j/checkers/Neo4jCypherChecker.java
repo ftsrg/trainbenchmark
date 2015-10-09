@@ -43,8 +43,8 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 		return driver.runQuery(query, queryDefinition);
 	}
 
-	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver neoDriver, final BenchmarkConfig bc) throws IOException {
-		return new Neo4jCypherChecker(neoDriver, bc);
+	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver driver, final BenchmarkConfig bc) throws IOException {
+		return new Neo4jCypherChecker(driver, bc);
 	}
 
 }

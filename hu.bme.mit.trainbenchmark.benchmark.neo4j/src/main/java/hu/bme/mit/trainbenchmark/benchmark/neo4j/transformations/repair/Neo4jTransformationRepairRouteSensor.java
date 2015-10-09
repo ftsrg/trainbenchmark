@@ -21,8 +21,8 @@ import org.neo4j.graphdb.Node;
 
 public class Neo4jTransformationRepairRouteSensor extends Neo4jTransformationRepair<Neo4jRouteSensorMatch> {
 
-	public Neo4jTransformationRepairRouteSensor(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationRepairRouteSensor(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

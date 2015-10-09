@@ -28,47 +28,45 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair.Orien
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class OrientDbTransformation<M> extends Transformation<M> {
+public abstract class OrientDbTransformation<TObject> extends Transformation<TObject, OrientDbDriver> {
 
-	protected OrientDbDriver orientDriver;
-
-	protected OrientDbTransformation(final OrientDbDriver orientDriver) {
-		this.orientDriver = orientDriver;
+	protected OrientDbTransformation(final OrientDbDriver driver) {
+		super(driver);
 	}
 
-	public static Transformation<?> newInstance(final OrientDbDriver orientDriver, final Query query, final Scenario scenario) {
+	public static Transformation<?, ?> newInstance(final OrientDbDriver driver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new OrientDbTransformationRepairConnectedSegments(orientDriver);
+				return new OrientDbTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
-				return new OrientDbTransformationRepairPosLength(orientDriver);
+				return new OrientDbTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
-				return new OrientDbTransformationRepairRouteSensor(orientDriver);
+				return new OrientDbTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new OrientDbTransformationRepairSemaphoreNeighbor(orientDriver);
+				return new OrientDbTransformationRepairSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new OrientDbTransformationRepairSwitchSensor(orientDriver);
+				return new OrientDbTransformationRepairSwitchSensor(driver);
 			case SWITCHSET:
-				return new OrientDbTransformationRepairSwitchSet(orientDriver);
+				return new OrientDbTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new OrientDbTransformationInjectConnectedSegments(orientDriver);
+				return new OrientDbTransformationInjectConnectedSegments(driver);
 			case POSLENGTH:
-				return new OrientDbTransformationInjectPosLength(orientDriver);
+				return new OrientDbTransformationInjectPosLength(driver);
 			case ROUTESENSOR:
-				return new OrientDbTransformationInjectRouteSensor(orientDriver);
+				return new OrientDbTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new OrientDbTransformationInjectSemaphoreNeighbor(orientDriver);
+				return new OrientDbTransformationInjectSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new OrientDbTransformationInjectSwitchSensor(orientDriver);
+				return new OrientDbTransformationInjectSwitchSensor(driver);
 			case SWITCHSET:
-				return new OrientDbTransformationInjectSwitchSet(orientDriver);
+				return new OrientDbTransformationInjectSwitchSet(driver);
 			default:
 				break;
 			}

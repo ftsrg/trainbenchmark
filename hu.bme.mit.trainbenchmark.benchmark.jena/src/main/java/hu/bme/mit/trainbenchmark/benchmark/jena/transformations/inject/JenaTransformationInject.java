@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformati
 
 public abstract class JenaTransformationInject extends JenaTransformation<Resource> {
 
-	protected JenaTransformationInject(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	protected JenaTransformationInject(final JenaDriver driver) {
+		super(driver);
 	}
 
 }

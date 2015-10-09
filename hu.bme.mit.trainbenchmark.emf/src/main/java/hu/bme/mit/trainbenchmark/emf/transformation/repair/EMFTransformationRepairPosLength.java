@@ -11,11 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
-
 import java.util.Collection;
 
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+
 public class EMFTransformationRepairPosLength extends EMFTransformationRepair<EMFPosLengthMatch> {
+
+	public EMFTransformationRepairPosLength(EMFDriver driver) {
+		super(driver);
+	}
 
 	@Override
 	public void rhs(final Collection<EMFPosLengthMatch> matches) {

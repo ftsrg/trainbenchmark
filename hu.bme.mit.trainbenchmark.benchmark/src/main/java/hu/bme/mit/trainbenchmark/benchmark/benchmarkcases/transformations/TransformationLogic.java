@@ -62,7 +62,7 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	protected long start;
 	protected long startEdit;
 	protected long end;
-	protected Transformation<TTransformationObject> transformation;
+	protected Transformation<TTransformationObject, Driver<TElement>> transformation;
 
 	public void initialize(final BenchmarkConfig bc, final Driver<TElement> driver, final Random random) {
 		this.bc = bc;
@@ -110,8 +110,8 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		return objects;
 	}
 
-	public void setTransformation(final Transformation<?> transformation) {
-		this.transformation = (Transformation<TTransformationObject>) transformation;
+	public void setTransformation(final Transformation<?, ?> transformation) {
+		this.transformation = (Transformation<TTransformationObject, Driver<TElement>>) transformation;
 	}
 
 }

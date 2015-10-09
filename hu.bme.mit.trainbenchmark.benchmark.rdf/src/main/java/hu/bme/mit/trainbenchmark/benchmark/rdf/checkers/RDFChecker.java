@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class RDFChecker<M> extends Checker<M> {
+public abstract class RDFChecker<TMatch> extends Checker<TMatch> {
 
 	protected final Query query;
 	protected final String queryPath;

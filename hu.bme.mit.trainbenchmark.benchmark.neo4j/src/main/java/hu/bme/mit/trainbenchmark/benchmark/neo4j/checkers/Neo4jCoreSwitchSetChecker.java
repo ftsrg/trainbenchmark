@@ -41,8 +41,8 @@ import hu.bme.mit.trainbenchmark.constants.Signal;
 
 public class Neo4jCoreSwitchSetChecker extends Neo4jCoreChecker<Neo4jSwitchSetMatch> {
 
-	public Neo4jCoreSwitchSetChecker(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jCoreSwitchSetChecker(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

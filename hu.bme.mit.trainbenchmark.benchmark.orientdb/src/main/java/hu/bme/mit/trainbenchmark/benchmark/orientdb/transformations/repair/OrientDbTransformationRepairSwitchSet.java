@@ -22,8 +22,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationRepairSwitchSet extends OrientDbTransformationRepair<OrientDbSwitchSetMatch>{
 
-	public OrientDbTransformationRepairSwitchSet(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationRepairSwitchSet(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

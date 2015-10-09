@@ -26,14 +26,14 @@ import org.openrdf.repository.RepositoryException;
 
 public class SesameTransformationRepairRouteSensor extends SesameTransformationRepair<SesameRouteSensorMatch> {
 
-	public SesameTransformationRepairRouteSensor(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationRepairRouteSensor(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<SesameRouteSensorMatch> matches) throws RepositoryException {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI definedBy = vf.createURI(BASE_PREFIX + DEFINED_BY);
 

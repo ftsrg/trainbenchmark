@@ -15,10 +15,10 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 
-public abstract class SesameTransformationRepair<M extends SesameMatch> extends SesameTransformation<M> {
+public abstract class SesameTransformationRepair<TMatch extends SesameMatch> extends SesameTransformation<TMatch> {
 
-	protected SesameTransformationRepair(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	protected SesameTransformationRepair(final SesameDriver driver) {
+		super(driver);
 	}
 
 }

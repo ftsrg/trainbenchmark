@@ -30,13 +30,13 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
 public class JenaTransformationInjectPosLength extends JenaTransformationInject {
 
-	public JenaTransformationInjectPosLength(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationInjectPosLength(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<Resource> segments) throws IOException {
-		final Model model = jenaDriver.getModel();
+		final Model model = driver.getModel();
 		final Property lengthProperty = model.getProperty(BASE_PREFIX + LENGTH);
 
 		for (final Resource segment : segments) {
