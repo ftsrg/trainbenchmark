@@ -23,13 +23,13 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
 public class JenaTransformationInjectRouteSensor extends JenaTransformationInject {
 
-	public JenaTransformationInjectRouteSensor(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationInjectRouteSensor(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<Resource> routes) throws IOException {
-		jenaDriver.deleteOneOutgoingEdge(routes, ROUTE, DEFINED_BY);
+		driver.deleteOneOutgoingEdge(routes, ROUTE, DEFINED_BY);
 	}
 
 }

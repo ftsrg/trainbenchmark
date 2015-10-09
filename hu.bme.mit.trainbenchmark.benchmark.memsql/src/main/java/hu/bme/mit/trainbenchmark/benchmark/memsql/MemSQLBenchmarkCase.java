@@ -33,7 +33,7 @@ public class MemSQLBenchmarkCase extends SQLBenchmarkCase<MemSQLDriver> {
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final MemSQLDriver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final MemSQLDriver driver) throws IOException {
 		return null;
 	}
 

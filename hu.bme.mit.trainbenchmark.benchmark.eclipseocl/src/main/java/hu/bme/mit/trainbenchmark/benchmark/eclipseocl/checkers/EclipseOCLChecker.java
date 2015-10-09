@@ -29,9 +29,9 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public abstract class EclipseOCLChecker<T extends EMFMatch> extends Checker<T> {
+public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker<TMatch> {
 
-	protected Collection<T> matches;
+	protected Collection<TMatch> matches;
 	protected OCL ocl;
 	protected Query queryEvaluator;
 	protected RailwayContainer container;

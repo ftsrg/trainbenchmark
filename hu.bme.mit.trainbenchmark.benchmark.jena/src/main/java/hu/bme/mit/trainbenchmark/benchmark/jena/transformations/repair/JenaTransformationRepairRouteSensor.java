@@ -26,13 +26,13 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaRouteSensorMatch;
 
 public class JenaTransformationRepairRouteSensor extends JenaTransformationRepair<JenaRouteSensorMatch> {
 
-	public JenaTransformationRepairRouteSensor(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationRepairRouteSensor(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<JenaRouteSensorMatch> matches) throws IOException {
-		final Model model = jenaDriver.getModel();
+		final Model model = driver.getModel();
 
 		final Property definedBy = model.getProperty(BASE_PREFIX + DEFINED_BY);
 		for (final JenaRouteSensorMatch match : matches) {

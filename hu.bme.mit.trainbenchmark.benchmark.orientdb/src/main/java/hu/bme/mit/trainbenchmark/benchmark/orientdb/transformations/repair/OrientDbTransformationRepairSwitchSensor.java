@@ -22,15 +22,15 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationRepairSwitchSensor extends OrientDbTransformationRepair<OrientDbSwitchSensorMatch>{
 
-	public OrientDbTransformationRepairSwitchSensor(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationRepairSwitchSensor(final OrientDbDriver driver) {
+		super(driver);
 	}
 	
 	@Override
 	public void rhs(final Collection<OrientDbSwitchSensorMatch> matches) {
 		for (OrientDbSwitchSensorMatch ssm : matches) {
 			final Vertex sw = ssm.getSw();
-			final Vertex sensor = orientDriver.getGraphDb().addVertex(null);
+			final Vertex sensor = driver.getGraphDb().addVertex(null);
 			sensor.setProperty("labels", labelSensor);
 			sw.addEdge(relationshipTypeSensor, sensor);
 		}

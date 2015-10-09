@@ -47,7 +47,7 @@ public class OrientDbBenchmarkCase
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final OrientDbDriver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final OrientDbDriver driver) throws IOException {
 		return OrientDbTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 

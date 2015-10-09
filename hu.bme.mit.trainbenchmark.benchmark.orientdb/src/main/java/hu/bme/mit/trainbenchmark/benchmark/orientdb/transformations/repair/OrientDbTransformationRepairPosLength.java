@@ -21,8 +21,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationRepairPosLength extends OrientDbTransformationRepair<OrientDbPosLengthMatch> {
 
-	public OrientDbTransformationRepairPosLength(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationRepairPosLength(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

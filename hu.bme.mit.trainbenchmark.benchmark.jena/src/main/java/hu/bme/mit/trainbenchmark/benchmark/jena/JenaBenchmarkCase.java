@@ -39,7 +39,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver) throws IOException {
+	public Transformation<?, JenaDriver> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver) throws IOException {
 		return JenaTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 

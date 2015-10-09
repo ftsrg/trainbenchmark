@@ -14,8 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeConnectsTo;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSensor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import java.util.Collection;
 
@@ -23,10 +21,13 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+
 public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformationInject {
 
-	public Neo4jTransformationInjectConnectedSegments(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationInjectConnectedSegments(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 
 			// transformation
 			connectsTo.delete();
-			final Node segment2 = neoDriver.getGraphDb().createNode(labelSegment);
+			final Node segment2 = driver.getGraphDb().createNode(labelSegment);
 			segment1.createRelationshipTo(segment2, relationshipTypeConnectsTo);
 			segment2.createRelationshipTo(segment3, relationshipTypeConnectsTo);
 			segment2.createRelationshipTo(sensor, relationshipTypeSensor);

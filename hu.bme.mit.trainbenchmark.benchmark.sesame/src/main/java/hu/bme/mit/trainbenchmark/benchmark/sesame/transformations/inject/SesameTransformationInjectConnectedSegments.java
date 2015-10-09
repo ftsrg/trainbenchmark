@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 import java.util.Collection;
 
@@ -28,16 +27,18 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+
 public class SesameTransformationInjectConnectedSegments extends SesameTransformationInject {
 
-	public SesameTransformationInjectConnectedSegments(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationInjectConnectedSegments(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<URI> segments) throws Exception {
-		final RepositoryConnection connection = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection connection = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTSTO);
 		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
@@ -65,7 +66,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 			connection.remove(connectsToEdge0);
 
 			// create (segment2) node
-			final Long newVertexId = sesameDriver.getNewVertexId();
+			final Long newVertexId = driver.getNewVertexId();
 			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
 			connection.add(segment2, RDF.TYPE, segmentType);
 			// (segment1)-[:connectsTo]->(segment2)

@@ -15,10 +15,10 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 
-public abstract class Neo4jTransformationRepair<M extends Neo4jMatch> extends Neo4jTransformation<M> {
+public abstract class Neo4jTransformationRepair<TMatch extends Neo4jMatch> extends Neo4jTransformation<TMatch> {
 
-	protected Neo4jTransformationRepair(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	protected Neo4jTransformationRepair(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 }

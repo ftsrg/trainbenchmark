@@ -28,19 +28,19 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchSensorMatch;
 
 public class JenaTransformationRepairSwitchSensor extends JenaTransformationRepair<JenaSwitchSensorMatch> {
 
-	public JenaTransformationRepairSwitchSensor(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationRepairSwitchSensor(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<JenaSwitchSensorMatch> matches) throws Exception {
-		final Model model = jenaDriver.getModel();
+		final Model model = driver.getModel();
 		final Property sensorEdge = model.getProperty(BASE_PREFIX + SENSOR_EDGE);
 		final Resource sensorType = model.getResource(BASE_PREFIX + SENSOR);
 
 		for (final JenaSwitchSensorMatch match : matches) {
 			final Resource sw = match.getSw();
-			final Long newVertexId = jenaDriver.getNewVertexId();
+			final Long newVertexId = driver.getNewVertexId();
 			final Resource sensor = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
 
 			model.add(model.createStatement(sw, sensorEdge, sensor));

@@ -11,6 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+
+import org.apache.commons.io.FileUtils;
+
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
@@ -22,21 +28,15 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransfo
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSet;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.PreparedStatement;
-
-import org.apache.commons.io.FileUtils;
-
-public abstract class SQLTransformation<M> extends Transformation<M> {
+public abstract class SQLTransformation<TObject> extends Transformation<TObject, SQLDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
-	protected SQLDriver sqlDriver;
+	protected SQLDriver driver;
 	protected BenchmarkConfig bc;
 	protected final String updateQuery;
 		
-	protected SQLTransformation(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		this.sqlDriver = sqlDriver;
+	protected SQLTransformation(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
+		super(driver);
 		this.bc = bc;
 
 		final String updatePath = getTransformationDirectory() + bc.getScenarioName() + bc.getQuery() + ".sql";
@@ -44,30 +44,30 @@ public abstract class SQLTransformation<M> extends Transformation<M> {
 	}
 	
 	protected String getTransformationDirectory() {
-		return bc.getWorkspacePath() + sqlDriver.getResourceDirectory() + "transformations/";
+		return bc.getWorkspacePath() + driver.getResourceDirectory() + "transformations/";
 	}
 
-	public static Transformation<?> newInstance(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
+	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
 		switch (bc.getScenario()) {
 		case REPAIR:
 			switch (bc.getQuery()) {
 			case CONNECTEDSEGMENTS:
-				return new SQLTransformationRepairConnectedSegments(sqlDriver, bc);				
+				return new SQLTransformationRepairConnectedSegments(driver, bc);				
 			case POSLENGTH:
-				return new SQLTransformationRepairPosLength(sqlDriver, bc);
+				return new SQLTransformationRepairPosLength(driver, bc);
 			case ROUTESENSOR:
-				return new SQLTransformationRepairRouteSensor(sqlDriver, bc);
+				return new SQLTransformationRepairRouteSensor(driver, bc);
 			case SEMAPHORENEIGHBOR:
-				return new SQLTransformationRepairSemaphoreNeighbor(sqlDriver, bc);
+				return new SQLTransformationRepairSemaphoreNeighbor(driver, bc);
 			case SWITCHSENSOR:
-				return new SQLTransformationRepairSwitchSensor(sqlDriver, bc);
+				return new SQLTransformationRepairSwitchSensor(driver, bc);
 			case SWITCHSET:
-				return new SQLTransformationRepairSwitchSet(sqlDriver, bc);
+				return new SQLTransformationRepairSwitchSet(driver, bc);
 			default:
 				break;
 			}
 		case INJECT:
-			return new SQLTransformationInject(sqlDriver, bc);				
+			return new SQLTransformationInject(driver, bc);				
 		default:
 			break;
 		}

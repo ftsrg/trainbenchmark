@@ -10,6 +10,10 @@
 	</parent>
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.hawk</artifactId>
 
+	<properties>
+		<hawk.version>1.0.0-201510091603</hawk.version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -44,14 +48,8 @@
 		<dependency>
 			<groupId>uk.ac.york.mondo.integration.hawk</groupId>
 			<artifactId>emf</artifactId>
-			<version>1.0.0-201510071056</version>
+			<version>${hawk.version}</version>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>hu.bme.mit.mondo.integration.hawk</groupId> -->
-		<!-- <artifactId>incquery</artifactId> -->
-		<!-- <version>1.0.0-201510071056</version> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.slf4j</groupId>

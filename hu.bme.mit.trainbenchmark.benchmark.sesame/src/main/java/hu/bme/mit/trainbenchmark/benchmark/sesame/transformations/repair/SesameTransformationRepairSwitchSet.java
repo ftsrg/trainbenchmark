@@ -29,14 +29,14 @@ import org.openrdf.repository.RepositoryResult;
 
 public class SesameTransformationRepairSwitchSet extends SesameTransformationRepair<SesameSwitchSetMatch> {
 
-	public SesameTransformationRepairSwitchSet(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationRepairSwitchSet(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<SesameSwitchSetMatch> matches) throws RepositoryException {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI currentPositionProperty = vf.createURI(BASE_PREFIX + CURRENTPOSITION);
 

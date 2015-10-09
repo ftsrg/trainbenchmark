@@ -31,13 +31,13 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class JenaTransformationInjectConnectedSegments extends JenaTransformationInject {
 
-	public JenaTransformationInjectConnectedSegments(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationInjectConnectedSegments(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<Resource> segments) throws Exception {
-		final Model model = jenaDriver.getModel();
+		final Model model = driver.getModel();
 		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTSTO);
 		final Property sensorEdgeProperty = model.getProperty(BASE_PREFIX + ModelConstants.SENSOR_EDGE);
 		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
@@ -65,7 +65,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 			model.remove(connectsToEdge0);
 
 			// create (segment2) node
-			final Long newVertexId = jenaDriver.getNewVertexId();
+			final Long newVertexId = driver.getNewVertexId();
 			final Resource segment2 = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
 
 			model.add(model.createStatement(segment2, RDF.type, segmentType));

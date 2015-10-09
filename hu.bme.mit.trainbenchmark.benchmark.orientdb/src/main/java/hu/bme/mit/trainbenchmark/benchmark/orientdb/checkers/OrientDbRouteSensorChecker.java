@@ -25,8 +25,8 @@ import com.tinkerpop.pipes.util.structures.Row;
 
 public class OrientDbRouteSensorChecker extends OrientDbChecker<OrientDbRouteSensorMatch> {
 
-	public OrientDbRouteSensorChecker(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbRouteSensorChecker(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

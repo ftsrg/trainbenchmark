@@ -29,14 +29,14 @@ import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 public class SesameTransformationInjectSwitchSet extends SesameTransformationInject {
 
-	public SesameTransformationInjectSwitchSet(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationInjectSwitchSet(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<URI> switches) throws RepositoryException {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI currentPositionProperty = vf.createURI(BASE_PREFIX + CURRENTPOSITION);
 

@@ -22,8 +22,8 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
 public class Neo4jTransformationRepairPosLength extends Neo4jTransformationRepair<Neo4jPosLengthMatch> {
 
-	public Neo4jTransformationRepairPosLength(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationRepairPosLength(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

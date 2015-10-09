@@ -40,7 +40,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFIncQueryBaseDriver<M> {
+public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch> {
 
 	protected EMFIncQueryBenchmarkConfig eiqbc;
 
@@ -78,18 +78,18 @@ public class EMFIncQueryDriver<M extends BasePatternMatch> extends EMFIncQueryBa
 		final EMFScope emfScope = new EMFScope(resource);
 		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
 
-		final IncQueryMatcher<M> matcher = checker.getMatcher();
-		final Collection<M> matches = matcher.getAllMatches();
+		final IncQueryMatcher<TMatch> matcher = checker.getMatcher();
+		final Collection<TMatch> matches = matcher.getAllMatches();
 		checker.setMatches(matches);
 		if (!eiqbc.isLocalSearch()) {
-			engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<M>() {
+			engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<TMatch>() {
 				@Override
-				public void notifyAppearance(final M match) {
+				public void notifyAppearance(final TMatch match) {
 					matches.add(match);
 				}
 
 				@Override
-				public void notifyDisappearance(final M match) {
+				public void notifyDisappearance(final TMatch match) {
 					matches.remove(match);
 				}
 			}, false);

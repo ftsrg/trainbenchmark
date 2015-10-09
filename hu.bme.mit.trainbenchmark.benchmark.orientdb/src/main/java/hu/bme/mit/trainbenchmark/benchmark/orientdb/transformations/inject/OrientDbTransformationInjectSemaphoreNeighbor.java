@@ -22,8 +22,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationInjectSemaphoreNeighbor extends OrientDbTransformationInject{
 
-	public OrientDbTransformationInjectSemaphoreNeighbor(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationInjectSemaphoreNeighbor(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

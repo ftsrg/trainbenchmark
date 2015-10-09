@@ -28,47 +28,45 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTrans
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class JenaTransformation<M> extends Transformation<M> {
+public abstract class JenaTransformation<TObject> extends Transformation<TObject, JenaDriver> {
 
-	protected JenaDriver jenaDriver;
-
-	protected JenaTransformation(final JenaDriver jenaDriver) {
-		this.jenaDriver = jenaDriver;
+	protected JenaTransformation(final JenaDriver driver) {
+		super(driver);
 	}
 
-	public static Transformation<?> newInstance(final JenaDriver jenaDriver, final Query query, final Scenario scenario) {
+	public static Transformation<?, JenaDriver> newInstance(final JenaDriver driver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new JenaTransformationRepairConnectedSegments(jenaDriver);
+				return new JenaTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
-				return new JenaTransformationRepairPosLength(jenaDriver);
+				return new JenaTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
-				return new JenaTransformationRepairRouteSensor(jenaDriver);
+				return new JenaTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new JenaTransformationRepairSemaphoreNeighbor(jenaDriver);
+				return new JenaTransformationRepairSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new JenaTransformationRepairSwitchSensor(jenaDriver);
+				return new JenaTransformationRepairSwitchSensor(driver);
 			case SWITCHSET:
-				return new JenaTransformationRepairSwitchSet(jenaDriver);
+				return new JenaTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new JenaTransformationInjectConnectedSegments(jenaDriver);
+				return new JenaTransformationInjectConnectedSegments(driver);
 			case POSLENGTH:
-				return new JenaTransformationInjectPosLength(jenaDriver);
+				return new JenaTransformationInjectPosLength(driver);
 			case ROUTESENSOR:
-				return new JenaTransformationInjectRouteSensor(jenaDriver);
+				return new JenaTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new JenaTransformationInjectSemaphoreNeighbor(jenaDriver);
+				return new JenaTransformationInjectSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new JenaTransformationInjectSwitchSensor(jenaDriver);
+				return new JenaTransformationInjectSwitchSensor(driver);
 			case SWITCHSET:
-				return new JenaTransformationInjectSwitchSet(jenaDriver);
+				return new JenaTransformationInjectSwitchSet(driver);
 			default:
 				break;
 			}

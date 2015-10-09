@@ -32,13 +32,13 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class JenaTransformationRepairConnectedSegments extends JenaTransformationRepair<JenaConnectedSegmentsMatch> {
 
-	public JenaTransformationRepairConnectedSegments(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationRepairConnectedSegments(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<JenaConnectedSegmentsMatch> matches) throws IOException {
-		final Model model = jenaDriver.getModel();
+		final Model model = driver.getModel();
 		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.LENGTH);
 
 		for (final JenaConnectedSegmentsMatch match : matches) {

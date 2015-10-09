@@ -28,47 +28,45 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameT
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class SesameTransformation<M> extends Transformation<M> {
+public abstract class SesameTransformation<TObject> extends Transformation<TObject, SesameDriver> {
 
-	protected SesameDriver sesameDriver;
-
-	protected SesameTransformation(final SesameDriver sesameDriver) {
-		this.sesameDriver = sesameDriver;
+	protected SesameTransformation(final SesameDriver driver) {
+		super(driver);
 	}
 
-	public static Transformation<?> newInstance(final SesameDriver sesameDriver, final Query query, final Scenario scenario) {
+	public static Transformation<?, ?> newInstance(final SesameDriver driver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new SesameTransformationRepairConnectedSegments(sesameDriver);
+				return new SesameTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
-				return new SesameTransformationRepairPosLength(sesameDriver);
+				return new SesameTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
-				return new SesameTransformationRepairRouteSensor(sesameDriver);
+				return new SesameTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new SesameTransformationRepairSemaphoreNeighbor(sesameDriver);
+				return new SesameTransformationRepairSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new SesameTransformationRepairSwitchSensor(sesameDriver);
+				return new SesameTransformationRepairSwitchSensor(driver);
 			case SWITCHSET:
-				return new SesameTransformationRepairSwitchSet(sesameDriver);
+				return new SesameTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new SesameTransformationInjectConnectedSegments(sesameDriver);
+				return new SesameTransformationInjectConnectedSegments(driver);
 			case POSLENGTH:
-				return new SesameTransformationInjectPosLength(sesameDriver);
+				return new SesameTransformationInjectPosLength(driver);
 			case ROUTESENSOR:
-				return new SesameTransformationInjectRouteSensor(sesameDriver);
+				return new SesameTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new SesameTransformationInjectSemaphoreNeighbor(sesameDriver);
+				return new SesameTransformationInjectSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new SesameTransformationInjectSwitchSensor(sesameDriver);
+				return new SesameTransformationInjectSwitchSensor(driver);
 			case SWITCHSET:
-				return new SesameTransformationInjectSwitchSet(sesameDriver);
+				return new SesameTransformationInjectSwitchSet(driver);
 			default:
 				break;
 			}

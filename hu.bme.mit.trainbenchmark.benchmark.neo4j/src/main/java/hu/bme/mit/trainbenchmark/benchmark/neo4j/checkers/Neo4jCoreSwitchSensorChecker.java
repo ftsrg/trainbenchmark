@@ -33,8 +33,8 @@ import org.neo4j.graphdb.Transaction;
 
 public class Neo4jCoreSwitchSensorChecker extends Neo4jCoreChecker<Neo4jSwitchSensorMatch> {
 
-	public Neo4jCoreSwitchSensorChecker(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jCoreSwitchSensorChecker(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override
