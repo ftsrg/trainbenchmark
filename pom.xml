@@ -11,8 +11,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<emf.version>2.10.0-v20140514-1158</emf.version>
 	</properties>
 
@@ -31,7 +31,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.iqdcore</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
@@ -57,9 +56,9 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.allegro</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module>
+				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module> -->
+				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.allegro</module> -->
+				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module> -->
 			</modules>
 		</profile>
 
@@ -165,14 +164,21 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
 			</modules>
 		</profile>
-		
+
+		<profile>
+			<id>hawk</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.hawk</module>
+			</modules>
+		</profile>
+
 		<profile>
 			<id>iqdcore</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.iqdcore</module>
 			</modules>
-        </profile>
-		
+		</profile>
+
 		<profile>
 			<id>jena</id>
 			<modules>

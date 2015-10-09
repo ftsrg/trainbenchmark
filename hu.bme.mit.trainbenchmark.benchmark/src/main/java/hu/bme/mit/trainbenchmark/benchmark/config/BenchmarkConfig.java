@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
@@ -29,22 +30,24 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	// this must be specified by the user
 	protected int runs;
 
+	protected final String toolName;
+
 	// constants for trhe transformation
 	protected TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
-	protected long transformationConstant = 1;
+	protected long transformationConstant = 10;
 	protected int iterationCount = 10;
 
 	protected String className;
 
-	public BenchmarkConfig(final String args[], final String className) throws ParseException {
+	public BenchmarkConfig(final String toolName, final String args[]) throws ParseException {
 		super(args);
-		this.className = className;
+		this.toolName = toolName;
 	}
 
-	public BenchmarkConfig(final String className, final Scenario scenario, final int size, final int runs, final Query query,
+	public BenchmarkConfig(final String toolName, final Scenario scenario, final int size, final int runs, final Query query,
 			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant) {
 		super(scenario, size);
-		this.className = className;
+		this.toolName = toolName;
 		this.runs = runs;
 		this.query = query;
 		this.iterationCount = iterationCount;
@@ -58,10 +61,14 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 		// the "size" and "query" options are required for the BenchmarkConfig but not required for the GeneratorConfig
 		options.getOption(SIZE).setRequired(true);
-		options.getOption(QUERY).setRequired(true);
+		final Option queryOption = options.getOption(QUERY);
+		queryOption.setRequired(true);
+		options.addOption(queryOption);
 
 		options.addOption(RUNS, true, "number of runs");
-		options.getOption(RUNS).setRequired(true);
+		final Option runOption = options.getOption(RUNS);
+		runOption.setRequired(true);
+		options.addOption(runOption);
 
 		// constants for the transformation
 		options.addOption(ITERATION_COUNT, true, "number of transformation-recheck iterations");
@@ -106,11 +113,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		return runs;
 	}
 
-	public String getClassName() {
-		return className;
-	}
-
-	public String getTool() {
-		return getClassName();
+	public String getToolName() {
+		return toolName;
 	}
 }

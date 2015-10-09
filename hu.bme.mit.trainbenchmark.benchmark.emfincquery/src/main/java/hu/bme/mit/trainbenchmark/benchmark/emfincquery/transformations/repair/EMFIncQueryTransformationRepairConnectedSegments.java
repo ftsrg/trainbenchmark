@@ -11,19 +11,19 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
-import hu.bme.mit.trainbenchmark.railway.Segment;
-
 import java.io.IOException;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+
 public class EMFIncQueryTransformationRepairConnectedSegments extends EMFIncQueryTransformation<ConnectedSegmentsMatch> {
 
-	public EMFIncQueryTransformationRepairConnectedSegments(final EMFIncQueryDriver<?> driver) {
+	public EMFIncQueryTransformationRepairConnectedSegments(final EMFIncQueryBaseDriver<?> driver) {
 		super(driver);
 	}
 

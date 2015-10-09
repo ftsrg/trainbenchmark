@@ -11,29 +11,33 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import java.io.IOException;
+
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLChecker;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOCLBenchmarkCase<T extends RailwayElement> extends EMFBenchmarkCase {
+public class EclipseOCLBenchmarkCase<T extends RailwayElement>
+		extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig, EclipseOCLChecker<EMFMatch>> {
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
+	public EMFDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+		return new EMFDriver();
+	}
 
-		final EMFDriver emfDriver = new EMFDriver();
-		driver = emfDriver;
-		checker = (Checker<EMFMatch>) EclipseOCLChecker.newInstance(emfDriver, bc);
+	@Override
+	public EclipseOCLChecker<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver) throws Exception {
+		return (EclipseOCLChecker<EMFMatch>) EclipseOCLChecker.newInstance(driver, benchmarkConfig);
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = EMFTransformation.newInstance(emfDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver) throws IOException {
+		return EMFTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 }

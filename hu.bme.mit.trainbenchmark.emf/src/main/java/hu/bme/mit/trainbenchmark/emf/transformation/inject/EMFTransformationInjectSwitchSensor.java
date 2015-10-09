@@ -11,10 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.inject;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Switch;
-
-import java.util.Collection;
 
 public class EMFTransformationInjectSwitchSensor extends EMFTransformationInject<Switch> {
 
@@ -23,7 +24,7 @@ public class EMFTransformationInjectSwitchSensor extends EMFTransformationInject
 	}
 
 	@Override
-	public void rhs(final Collection<Switch> switches) {
+	public void rhs(final Collection<Switch> switches) throws IOException {
 		for (final Switch sw : switches) {
 			sw.setSensor(null);
 			driver.getContainer().getInvalids().add(sw);

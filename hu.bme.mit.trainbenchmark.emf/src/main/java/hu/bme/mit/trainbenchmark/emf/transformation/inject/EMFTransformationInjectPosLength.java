@@ -11,10 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.inject;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Segment;
-
-import java.util.Collection;
 
 public class EMFTransformationInjectPosLength extends EMFTransformationInject<Segment> {
 
@@ -23,7 +24,7 @@ public class EMFTransformationInjectPosLength extends EMFTransformationInject<Se
 	}
 
 	@Override
-	public void rhs(final Collection<Segment> segments) {
+	public void rhs(final Collection<Segment> segments) throws IOException {
 		for (final Segment segment : segments) {
 			segment.setLength(0);
 		}

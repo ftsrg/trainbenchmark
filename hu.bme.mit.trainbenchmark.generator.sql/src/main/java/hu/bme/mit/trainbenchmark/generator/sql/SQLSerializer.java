@@ -68,9 +68,9 @@ public class SQLSerializer extends ModelSerializer {
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		sqlRawPath = sqlGeneratorConfig.getModelPathNameWithoutExtension() + "-raw.sql";
-		sqlDumpPath = sqlGeneratorConfig.getModelPathNameWithoutExtension() + ".sql";
-		sqlPostgreDumpPath = sqlGeneratorConfig.getModelPathNameWithoutExtension() + "-posgres.sql";
+		sqlRawPath = sqlGeneratorConfig.getModelPathWithoutExtension() + "-raw.sql";
+		sqlDumpPath = sqlGeneratorConfig.getModelPathWithoutExtension() + ".sql";
+		sqlPostgreDumpPath = sqlGeneratorConfig.getModelPathWithoutExtension() + "-posgres.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -96,8 +96,7 @@ public class SQLSerializer extends ModelSerializer {
 	}
 
 	public void compact() throws IOException, InterruptedException {
-		MySQLProcess.stopSQLProcess();
-		MySQLProcess.startSQLProcess();
+		MySQLProcess.startServer();
 
 		final Runtime rt = Runtime.getRuntime();
 		final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };

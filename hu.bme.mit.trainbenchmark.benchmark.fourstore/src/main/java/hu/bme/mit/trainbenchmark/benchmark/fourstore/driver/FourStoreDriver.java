@@ -11,9 +11,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.fourstore.driver;
 
 import static hu.bme.mit.trainbenchmark.benchmark.fourstore.driver.RDFUtil.brackets;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDatabaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.URIComparator;
-import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +35,12 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-public class FourStoreDriver extends RDFDatabaseDriver<URI> {
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.URIComparator;
+import hu.bme.mit.trainbenchmark.constants.Query;
+
+public class FourStoreDriver extends RDFDriver<URI> {
 
 	protected static final String RDF_PREFIX = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 	protected static final String SPARQL_RDF_PREFIX = "PREFIX rdf: <" + RDF_PREFIX + "> ";
@@ -48,7 +50,8 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 	protected boolean showCommandOutput = false;
 	protected final Map<String, String> environment = ImmutableMap.of("FOURSTORE_CLUSTER_NAME", CLUSTERNAME);
 
-	public FourStoreDriver() throws IOException {
+	public FourStoreDriver(final RDFBenchmarkConfig rdfbc) throws IOException {
+		super(rdfbc);
 		final String dbPath = "/var/lib/4store/" + CLUSTERNAME;
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
@@ -366,12 +369,12 @@ public class FourStoreDriver extends RDFDatabaseDriver<URI> {
 			// DELETE WHERE { x } not yet supported, use DELETE { x } WHERE { x }
 			i++;
 			// delete "incoming edges"
-			deleteQueryBuilder.append(String.format("DELETE { ?a%d ?b%d %s } WHERE { ?a%d ?b%d %s }; ", i, i, brackets(vertex), i, i,
-					brackets(vertex)));
+			deleteQueryBuilder.append(
+					String.format("DELETE { ?a%d ?b%d %s } WHERE { ?a%d ?b%d %s }; ", i, i, brackets(vertex), i, i, brackets(vertex)));
 			i++;
 			// delete "outgoing edges" and "properties"
-			deleteQueryBuilder.append(String.format("DELETE { %s ?a%d ?b%d } WHERE { %s ?a%d ?b%d }; ", brackets(vertex), i, i,
-					brackets(vertex), i, i));
+			deleteQueryBuilder.append(
+					String.format("DELETE { %s ?a%d ?b%d } WHERE { %s ?a%d ?b%d }; ", brackets(vertex), i, i, brackets(vertex), i, i));
 		}
 
 		runUpdate(deleteQueryBuilder.toString());

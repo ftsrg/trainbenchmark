@@ -66,6 +66,8 @@ public abstract class EMFTransformation<O> extends Transformation<O> {
 			default:
 				break;
 			}
+		default:
+			break;
 		}
 		throw new UnsupportedOperationException("Query " + query + " not supported");
 	}

@@ -15,35 +15,36 @@ package hu.bme.mit.trainbenchmark.benchmark.jena;
 import java.io.IOException;
 import java.util.Comparator;
 
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource> {
-
-	protected JenaDriver jenaDriver;
-	protected RDFBenchmarkConfig rdfbc;
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RDFBenchmarkConfig, JenaChecker> {
 
 	@Override
-	protected void init() throws IOException {
-		this.rdfbc = (RDFBenchmarkConfig) bc;
-		driver = jenaDriver = new JenaDriver(rdfbc);
-		checker = new JenaChecker(jenaDriver, rdfbc);
-
-		if (bc.getScenario().hasTranformation()) {
-			transformation = JenaTransformation.newInstance(jenaDriver, bc.getQuery(), bc.getScenario());
-		}
+	public JenaDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+		return new JenaDriver(benchmarkConfig);
 	}
 
 	@Override
-	protected Comparator<?> getMatchComparator() {
+	public JenaChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver) throws Exception {
+		return new JenaChecker(driver, benchmarkConfig);
+	}
+
+	@Override
+	public Transformation<?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver) throws IOException {
+		return JenaTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+	}
+
+	@Override
+	public Comparator<?> createMatchComparator() {
 		return new JenaMatchComparator();
 	}
 

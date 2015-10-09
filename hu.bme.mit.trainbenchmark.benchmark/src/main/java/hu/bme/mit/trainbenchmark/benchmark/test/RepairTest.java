@@ -20,40 +20,37 @@ import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
 import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.Scenario.REPAIR;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
 public abstract class RepairTest extends TrainBenchmarkTest {
-
+	
 	@Test
-	public void connectedSegmentsRepair() throws ParseException, IOException {
+	public void connectedSegmentsRepair() throws Exception {
 		testTransformation(CONNECTEDSEGMENTS, REPAIR, 4, 2);
 	}
 
 	@Test
-	public void posLengthRepair() throws ParseException, IOException {
+	public void posLengthRepair() throws Exception {
 		testTransformation(POSLENGTH, REPAIR, 92, 90);
 	}
 
 	@Test
-	public void routeSensorRepair() throws ParseException, IOException {
+	public void routeSensorRepair() throws Exception {
 		testTransformation(ROUTESENSOR, REPAIR, 7, 5);
 	}
 
 	@Test
-	public void semaphoreNeighborRepair() throws ParseException, IOException {
+	public void semaphoreNeighborRepair() throws Exception {
 		testTransformation(SEMAPHORENEIGHBOR, REPAIR, 1, 0);
 	}
 
 	@Test
-	public void switchSensorRepair() throws ParseException, IOException {
+	public void switchSensorRepair() throws Exception {
 		testTransformation(SWITCHSENSOR, REPAIR, 3, 1);
 	}
 
 	@Test
-	public void switchSetRepair() throws ParseException, IOException {
+	public void switchSetRepair() throws Exception {
 		testTransformation(SWITCHSET, REPAIR, 2, 0);
 	}
 

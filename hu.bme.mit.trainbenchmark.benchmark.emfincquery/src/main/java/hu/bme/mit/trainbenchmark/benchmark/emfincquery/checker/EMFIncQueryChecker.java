@@ -11,11 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -23,18 +18,23 @@ import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+
 public abstract class EMFIncQueryChecker<M extends BasePatternMatch> extends Checker<M> {
 
 	protected Collection<M> matches;
-	protected final EMFIncQueryDriver<M> eiqDriver;
+	protected final EMFIncQueryBaseDriver<M> eiqDriver;
 	protected final EMFIncQueryBenchmarkConfig eiqbc;
 
-	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver<M> eiqDriver) {
+	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<M> eiqDriver) {
 		this.eiqbc = eiqbc;
 		this.eiqDriver = eiqDriver;
 	}
 
-	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryDriver eiqDriver,
+	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver eiqDriver,
 			final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:

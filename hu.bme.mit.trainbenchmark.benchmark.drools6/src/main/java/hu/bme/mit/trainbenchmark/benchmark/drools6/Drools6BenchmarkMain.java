@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class Drools6BenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		Drools6BenchmarkLogic benchmarkLogic = new Drools6BenchmarkLogic(args);
+	public static void main(final String[] args) throws Exception {
+		final BenchmarkConfig bc = new BenchmarkConfig("Drools6", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new Drools6BenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

@@ -11,16 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
-
 import java.io.IOException;
 import java.util.Collection;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
+
 public class EMFIncQueryTransformationRepairPosLength extends EMFIncQueryTransformation<PosLengthMatch> {
 
-	public EMFIncQueryTransformationRepairPosLength(final EMFIncQueryDriver<?> driver) {
+	public EMFIncQueryTransformationRepairPosLength(final EMFIncQueryBaseDriver<?> driver) {
 		super(driver);
 	}
 

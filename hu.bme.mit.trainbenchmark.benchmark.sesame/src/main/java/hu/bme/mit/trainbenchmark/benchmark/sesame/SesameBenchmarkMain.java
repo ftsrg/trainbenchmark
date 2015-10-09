@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class SesameBenchmarkMain {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		SesameBenchmarkLogic benchmarkLogic = new SesameBenchmarkLogic(args);
+	public static void main(final String[] args) throws Exception {
+		final RDFBenchmarkConfig bc = new RDFBenchmarkConfig(args, "Sesame");
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new SesameBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

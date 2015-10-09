@@ -12,10 +12,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Resource;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 
 public class JenaSwitchSensorMatch extends JenaMatch implements SwitchSensorMatch {
 

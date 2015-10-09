@@ -11,7 +11,7 @@ times <- subset(results, MetricName == "Time")
 times$MetricValue <- times$MetricValue / 10^9
 
 # replace hyphen with space in tool names
-times$Tool <- gsub('-', ' ', times$Tool)
+times$Tool <- gsub('_', ' ', times$Tool)
 
 # long table to wide table
 times <- dcast(times,
@@ -26,8 +26,8 @@ derived.times <- ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName", "RunIndex"), 
     summarize,
-    initial.validation = sum(read.and.check, na.rm = TRUE), 
-    revalidation = sum(transformation.and.recheck),
+    read.and.check = sum(read.and.check, na.rm = TRUE), 
+    transformation.and.recheck = sum(transformation.and.recheck),
     read = sum(Read, na.rm = TRUE),
     check = sum(Check, na.rm = TRUE),
     transformation = sum(Transformation),
@@ -42,15 +42,15 @@ derived.times <- ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName"), 
     summarize, 
-    initial.validation = f(initial.validation),
-    revalidation = f(revalidation),
+    read.and.check = f(read.and.check),
+    transformation.and.recheck = f(transformation.and.recheck),
     read = f(read),
     check = f(check),
     transformation = f(transformation),
     recheck = f(recheck)
 )
 
-plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("initial.validation", "revalidation", "read", "check", "transformation", "recheck"))
+plottimes <- melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("read.and.check", "transformation.and.recheck", "read", "check", "transformation", "recheck"))
 
 # plot
 
@@ -78,27 +78,31 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
   print(base)
   
   variableFilename <- gsub("\\.", "-", variable)
-  ggsave(file=paste("figures/", scenario, "-", variableFilename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
+  ggsave(file=paste("../diagrams/", scenario, "-", variableFilename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
 }
 
 # aggregated plots
 
-trainBenchmarkPlot(plottimes, "Batch", "initial.validation")
+#trainBenchmarkPlot(plottimes, "Batch", "read.and.check")
 
-trainBenchmarkPlot(plottimes, "Inject", "initial.validation")
-trainBenchmarkPlot(plottimes, "Inject", "revalidation")
 
-trainBenchmarkPlot(plottimes, "Repair", "initial.validation")
-trainBenchmarkPlot(plottimes, "Repair", "revalidation")
+#trainBenchmarkPlot(plottimes, "Repair", "read.and.check")
+#trainBenchmarkPlot(plottimes, "Repair", "transformation.and.recheck")
 
 # detailed plots
 
-trainBenchmarkPlot(plottimes, "Inject", "read")
-trainBenchmarkPlot(plottimes, "Inject", "check")
-trainBenchmarkPlot(plottimes, "Inject", "transformation")
-trainBenchmarkPlot(plottimes, "Inject", "recheck")
+batch.scenarios = c("Batch")
+transformation.scenarios = c("Inject", "Repair")
 
-trainBenchmarkPlot(plottimes, "Repair", "read")
-trainBenchmarkPlot(plottimes, "Repair", "check")
-trainBenchmarkPlot(plottimes, "Repair", "transformation")
-trainBenchmarkPlot(plottimes, "Repair", "recheck")
+for (scenario in c(batch.scenarios, transformation.scenarios)) {
+  trainBenchmarkPlot(plottimes, scenario, "read")
+  trainBenchmarkPlot(plottimes, scenario, "check")
+  trainBenchmarkPlot(plottimes, scenario, "read.and.check")
+}
+
+for (scenario in transformation.scenarios) {
+  trainBenchmarkPlot(plottimes, scenario, "transformation")
+  trainBenchmarkPlot(plottimes, scenario, "recheck")
+  trainBenchmarkPlot(plottimes, scenario, "transformation.and.recheck")
+}
+

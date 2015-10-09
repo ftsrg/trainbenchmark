@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class MemSQLBenchmarkMain {
 
-	public static void main(final String[] args) throws IOException, ParseException {
-		final MemSQLBenchmarkLogic benchmarkLogic = new MemSQLBenchmarkLogic(args);
+	public static void main(final String[] args) throws Exception {
+		final BenchmarkConfig bc = new BenchmarkConfig("MemSQL", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new MemSQLBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 }

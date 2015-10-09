@@ -12,25 +12,30 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
+import java.io.IOException;
+
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.checkers.Drools5Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class Drools5BenchmarkCase extends EMFBenchmarkCase {
-
-	protected Drools5Driver drools5driver;
+public class Drools5BenchmarkCase extends EMFBenchmarkCase<Drools5Driver, BenchmarkConfig, Drools5Checker> {
 
 	@Override
-	public void benchmarkInit(final BenchmarkConfig bc) throws Exception {
-		super.benchmarkInit(bc);
-		driver = drools5driver = new Drools5Driver(bc);
-		checker = new Drools5Checker(drools5driver, bc.getQuery());
+	public Drools5Driver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+		return new Drools5Driver(benchmarkConfig);
+	}
 
-		if (bc.getScenario().hasTranformation()) {
-			transformation = EMFTransformation.newInstance(drools5driver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	public Drools5Checker createChecker(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver) {
+		return new Drools5Checker(driver, benchmarkConfig.getQuery());
+	}
+
+	@Override
+	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver) throws IOException {
+		return EMFTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 }

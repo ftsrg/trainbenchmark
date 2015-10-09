@@ -14,19 +14,24 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.config;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 
-	protected static final String EMFINCQUERY = "EMFIncQuery";
+	protected static final String EMFINCQUERY = "EMF-IncQuery";
 	protected static final String LOCALSEARCH = "localsearch";
 
 	protected boolean localSearch;
 
 	public EMFIncQueryBenchmarkConfig(final String[] args) throws ParseException {
-		super(args, EMFINCQUERY);
+		super(EMFINCQUERY, args);
+	}
+
+	// for Hawk
+	protected EMFIncQueryBenchmarkConfig(final String[] args, final String toolName) throws ParseException {
+		super(toolName, args);
 	}
 
 	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
@@ -34,6 +39,13 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 			final boolean localSearch) {
 		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 		this.localSearch = localSearch;
+	}
+
+	// for Hawk
+	protected EMFIncQueryBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex,
+			final Query query, final int iterationCount, final TransformationStrategy transformationStrategy,
+			final long transformationConstant, final boolean localSearch) {
+		super(className, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 	}
 
 	@Override
@@ -55,11 +67,11 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	@Override
-	public String getTool() {
+	public String getToolName() {
 		if (isLocalSearch()) {
-			return "EMFIncQuery-LocalSearch";
+			return super.getToolName() + "_(Local_Search)";
 		} else {
-			return "EMFIncQuery-Incremental";
+			return super.getToolName() + "_(Incremental)";
 		}
 	}
 

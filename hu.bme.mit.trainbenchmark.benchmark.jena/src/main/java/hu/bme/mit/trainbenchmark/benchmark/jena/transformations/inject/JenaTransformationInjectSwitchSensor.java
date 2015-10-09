@@ -13,12 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Resource;
+
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 
 public class JenaTransformationInjectSwitchSensor extends JenaTransformationInject {
 

@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
+import java.util.Collection;
+
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
-
-import java.util.Collection;
 
 public abstract class EMFAPIChecker<T extends EMFMatch> extends Checker<T> {
 

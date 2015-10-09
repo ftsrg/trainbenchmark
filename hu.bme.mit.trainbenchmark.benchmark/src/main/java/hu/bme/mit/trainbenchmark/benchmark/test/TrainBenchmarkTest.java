@@ -13,17 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import static org.hamcrest.Matchers.equalTo;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.AbstractBenchmarkLogic;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.cli.ParseException;
 import org.junit.Rule;
 import org.junit.rules.ErrorCollector;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import com.google.common.collect.ImmutableList;
 
@@ -31,34 +31,42 @@ import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.JsonSerializer;
 import eu.mondo.sam.core.results.MetricResult;
 import eu.mondo.sam.core.results.PhaseResult;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
+@RunWith(Parameterized.class)
 public abstract class TrainBenchmarkTest {
+
+	@Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] { {} });
+	}
 
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
 
-	protected TestBenchmarkInitializer<?> bi;
+	protected TestBenchmarkInitializer bi;
 
-	public AbstractBenchmarkLogic initialize(final Query query, final String tool, final Scenario scenario) throws IOException {
-		return bi.initializeBenchmark(query, scenario);
-	}
-
-	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize) throws ParseException, IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
+	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize)
+			throws Exception {
+		final BenchmarkRunner bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, ImmutableList.of(expectedResultSize));
 	}
 
-	protected void testTransformation(final Query query, final Scenario scenario, final int expectedResultSize1, final int expectedResultSize2) throws ParseException, IOException {
-		final AbstractBenchmarkLogic bl = bi.initializeBenchmark(query, scenario);
+	protected void testTransformation(final Query query, final Scenario scenario, final int expectedResultSize1,
+			final int expectedResultSize2) throws Exception {
+		final BenchmarkRunner bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, ImmutableList.of(expectedResultSize1, expectedResultSize2));
 	}
 
-	private void runQuery(final AbstractBenchmarkLogic bl, final List<Integer> expectedResultSizes) throws IOException {
+	private void runQuery(final BenchmarkRunner benchmarkLogic, final List<Integer> expectedResultSizes)
+			throws Exception {
 		JsonSerializer.setResultPath("../results/test/");
-		final BenchmarkResult br = bl.runBenchmark();
-		
+		final BenchmarkResult benchmarkResult = benchmarkLogic.runBenchmark();
+
 		final List<Integer> resultSizes = new ArrayList<>();
-		for (final PhaseResult pr : br.getPhaseResults()) {
+		for (final PhaseResult pr : benchmarkResult.getPhaseResults()) {
 			final String name = pr.getPhaseName();
 			if ("Check".equals(name) || "Recheck".equals(name)) {
 				for (final MetricResult m : pr.getMetrics()) {
@@ -71,6 +79,6 @@ public abstract class TrainBenchmarkTest {
 		}
 		for (int i = 0; i < expectedResultSizes.size(); i++) {
 			collector.checkThat(resultSizes.get(i), equalTo(expectedResultSizes.get(i)));
-		}		
+		}
 	}
 }

@@ -14,27 +14,23 @@ package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
 import java.io.IOException;
 
-import org.openrdf.repository.RepositoryException;
-
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
-	protected void init() throws IOException, RepositoryException {
-		this.rdfbc = (RDFBenchmarkConfig) bc;
+	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+		return new BlazegraphDriver(benchmarkConfig);
+	}
 
-		driver = sesameDriver = new BlazegraphDriver(rdfbc);
-		checker = new SesameChecker(sesameDriver, rdfbc);
-
-    if (bc.getScenario().hasTranformation()) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	public Transformation<?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws IOException {
+		return SesameTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 }

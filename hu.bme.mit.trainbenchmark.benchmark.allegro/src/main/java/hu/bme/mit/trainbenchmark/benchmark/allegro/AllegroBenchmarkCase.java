@@ -15,24 +15,28 @@ package hu.bme.mit.trainbenchmark.benchmark.allegro;
 import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.benchmark.allegro.driver.AllegroDriver;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
-	protected void init() throws IOException {
-		this.rdfbc = (RDFBenchmarkConfig) bc;
+	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+		return new AllegroDriver(benchmarkConfig);
+	}
 
-		driver = sesameDriver = new AllegroDriver(rdfbc);
-		checker = new SesameChecker(sesameDriver, rdfbc);
+	@Override
+	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws Exception {
+		return new SesameChecker(driver, benchmarkConfig);
+	}
 
-    if (bc.getScenario().hasTranformation()) {
-			transformation = SesameTransformation.newInstance(sesameDriver, bc.getQuery(), bc.getScenario());
-		}
+	@Override
+	public Transformation<?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws IOException {
+		return SesameTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 }

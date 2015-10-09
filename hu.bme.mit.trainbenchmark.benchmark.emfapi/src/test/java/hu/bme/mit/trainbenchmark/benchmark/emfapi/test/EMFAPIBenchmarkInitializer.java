@@ -13,18 +13,19 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.EMFAPIBenchmarkLogic;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.EMFAPIBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class EMFAPIBenchmarkInitializer extends TestBenchmarkInitializer<EMFAPIBenchmarkLogic> {
+public class EMFAPIBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected EMFAPIBenchmarkLogic initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("EMFAPI", scenario, size, 1, query, iterationCount,
-				transformationStrategy, transformationConstant);
-		return new EMFAPIBenchmarkLogic(bc);
+	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
+		final BenchmarkConfig bc = new BenchmarkConfig("EMFAPI", scenario, size, 1, query, iterationCount, transformationStrategy,
+				transformationConstant);
+		return new BenchmarkRunner(bc, new EMFAPIBenchmarkCase());
 	}
 
 }
