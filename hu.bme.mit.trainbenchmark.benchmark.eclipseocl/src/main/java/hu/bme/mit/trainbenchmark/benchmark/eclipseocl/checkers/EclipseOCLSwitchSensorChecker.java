@@ -24,8 +24,8 @@ import hu.bme.mit.trainbenchmark.railway.Switch;
 
 public class EclipseOCLSwitchSensorChecker extends EclipseOCLChecker<EMFSwitchSensorMatch> {
 
-	public EclipseOCLSwitchSensorChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
-		super(driver, bc);
+	public EclipseOCLSwitchSensorChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class BlazegraphBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig bc = new RDFBenchmarkConfig(args, "Blazegraph");
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new BlazegraphBenchmarkCase());
+		final RDFBenchmarkConfig rdfBenchmarkConfig = new RDFBenchmarkConfig(args, "Blazegraph");
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(rdfBenchmarkConfig, new BlazegraphBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

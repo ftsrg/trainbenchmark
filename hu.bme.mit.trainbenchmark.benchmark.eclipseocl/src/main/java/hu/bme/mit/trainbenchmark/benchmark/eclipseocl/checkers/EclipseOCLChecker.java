@@ -37,12 +37,12 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 	protected RailwayContainer container;
 	protected EMFDriver driver;
 
-	public EclipseOCLChecker(final EMFDriver driver, final BenchmarkConfig bc) throws IOException, ParserException {
+	public EclipseOCLChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, ParserException {
 		super();
 		this.driver = driver;
 
-		final String oclQuery = FileUtils.readFileToString(new File(bc.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + bc.getQuery() + ".ocl"));
+		final String oclQuery = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".ocl"));
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
@@ -51,22 +51,22 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 		queryEvaluator = ocl.createQuery(query);
 	}
 
-	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
-		switch (bc.getQuery()) {
+	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
+		switch (benchmarkConfig.getQuery()) {
 		case CONNECTEDSEGMENTS:
-			return new EclipseOCLConnectedSegmentsChecker(driver, bc);
+			return new EclipseOCLConnectedSegmentsChecker(driver, benchmarkConfig);
 		case POSLENGTH:
-			return new EclipseOCLPosLengthChecker(driver, bc);
+			return new EclipseOCLPosLengthChecker(driver, benchmarkConfig);
 		case ROUTESENSOR:
-			return new EclipseOCLRouteSensorChecker(driver, bc);
+			return new EclipseOCLRouteSensorChecker(driver, benchmarkConfig);
 		case SEMAPHORENEIGHBOR:
-			return new EclipseOCLSemaphoreNeighborChecker(driver, bc);
+			return new EclipseOCLSemaphoreNeighborChecker(driver, benchmarkConfig);
 		case SWITCHSENSOR:
-			return new EclipseOCLSwitchSensorChecker(driver, bc);
+			return new EclipseOCLSwitchSensorChecker(driver, benchmarkConfig);
 		case SWITCHSET:
-			return new EclipseOCLSwitchSetChecker(driver, bc);
+			return new EclipseOCLSwitchSetChecker(driver, benchmarkConfig);
 		default:
-			throw new UnsupportedOperationException("Query " + bc.getQuery() + " not supported");
+			throw new UnsupportedOperationException("Query " + benchmarkConfig.getQuery() + " not supported");
 		}
 	}
 

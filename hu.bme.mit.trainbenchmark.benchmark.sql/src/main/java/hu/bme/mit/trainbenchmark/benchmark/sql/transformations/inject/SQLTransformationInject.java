@@ -21,8 +21,8 @@ import java.util.Collection;
 
 public class SQLTransformationInject extends SQLTransformation<Long> {
 
-	public SQLTransformationInject(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
-		super(driver, bc);
+	public SQLTransformationInject(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

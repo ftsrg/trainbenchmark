@@ -44,7 +44,7 @@ public class HawkBenchmarkCase<TMatch extends BasePatternMatch>
 	@Override
 	public Transformation<?, ?> createTransformation(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<TMatch> driver)
 			throws IOException {
-		return HawkTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+		return HawkTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario(), benchmarkConfig);
 	}
 
 	@Override

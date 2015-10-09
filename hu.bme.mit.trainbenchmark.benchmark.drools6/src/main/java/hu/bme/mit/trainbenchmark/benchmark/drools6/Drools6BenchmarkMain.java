@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class Drools6BenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig bc = new BenchmarkConfig("Drools6", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new Drools6BenchmarkCase());
+		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Drools6", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new Drools6BenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

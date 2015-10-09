@@ -32,12 +32,12 @@ import org.kie.api.runtime.rule.FactHandle;
 
 public class Drools6Driver extends EMFDriver {
 
-	protected BenchmarkConfig bc;
-	protected KieSession ksession;
+	protected BenchmarkConfig benchmarkConfig;
+	protected KieSession kieSession;
 
-	public Drools6Driver(final BenchmarkConfig bc) {
+	public Drools6Driver(final BenchmarkConfig benchmarkConfig) {
 		super();
-		this.bc = bc;
+		this.benchmarkConfig = benchmarkConfig;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class Drools6Driver extends EMFDriver {
 		EObject eObject = null;
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
 			eObject = tIterator.next();
-			ksession.insert(eObject);
+			kieSession.insert(eObject);
 		}
 
 		final EContentAdapter adapter = new EContentAdapter() {
@@ -58,7 +58,7 @@ public class Drools6Driver extends EMFDriver {
 			public void notifyChanged(final Notification notification) {
 				super.notifyChanged(notification);
 				final EObject notifier = (EObject) notification.getNotifier();
-				final FactHandle notifierFH = ksession.getFactHandle(notifier);
+				final FactHandle notifierFH = kieSession.getFactHandle(notifier);
 				final int event = notification.getEventType();
 
 				switch (event) {
@@ -73,7 +73,7 @@ public class Drools6Driver extends EMFDriver {
 				case Notification.RESOLVE:
 				case Notification.UNSET:
 				case Notification.SET:
-					ksession.update(notifierFH, notifier);
+					kieSession.update(notifierFH, notifier);
 					break;
 				}
 			}
@@ -82,15 +82,15 @@ public class Drools6Driver extends EMFDriver {
 			protected void addAdapter(final Notifier notifier) {
 				super.addAdapter(notifier);
 
-				ksession.insert(notifier);
+				kieSession.insert(notifier);
 			}
 
 			@Override
 			protected void removeAdapter(final Notifier notifier) {
 				super.removeAdapter(notifier);
 
-				final FactHandle changedFH = ksession.getFactHandle(notifier);
-				ksession.delete(changedFH);
+				final FactHandle changedFactHandle = kieSession.getFactHandle(notifier);
+				kieSession.delete(changedFactHandle);
 			}
 		};
 		resource.eAdapters().add(adapter);
@@ -100,8 +100,8 @@ public class Drools6Driver extends EMFDriver {
 		final KieServices kieServices = KieServices.Factory.get();
 
 		final KieFileSystem kfs = kieServices.newKieFileSystem();
-		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/"
-				+ bc.getQuery() + ".drl";
+		final String queryFile = benchmarkConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/"
+				+ benchmarkConfig.getQuery() + ".drl";
 		final File file = new File(queryFile);
 		if (!file.exists()) {
 			throw new IOException("Query file not found: " + queryFile);
@@ -115,11 +115,11 @@ public class Drools6Driver extends EMFDriver {
 		}
 
 		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
-		ksession = kContainer.newKieSession();
+		kieSession = kContainer.newKieSession();
 	}
 
 	public KieSession getKsession() {
-		return ksession;
+		return kieSession;
 	}
 
 }

@@ -12,15 +12,15 @@ public class HawkPreparedTransformation extends HawkTransformation<Object> {
 	public HawkPreparedTransformation(HawkDriver<?> driver, Query query, Scenario scenario, HawkBenchmarkConfig hbc) {
 		super(driver);
 		
-		hbc.getWorkspacePath()
+		String model = hbc.getModelFileNameWithoutExtension() + "-" + query.toString().toLowerCase() + driver.getPostfix();
+		System.out.println(model);
 		
 	}
 
 	@Override
 	public void rhs(Collection<Object> objects) throws Exception {
 		// use the prepared files to perform the transformation
-		
-		
+		driver.waitForSync();
 	}
 
 }

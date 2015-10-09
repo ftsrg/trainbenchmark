@@ -27,8 +27,8 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 public class EclipseOCLRouteSensorChecker extends EclipseOCLChecker<EMFRouteSensorMatch> {
 
-	public EclipseOCLRouteSensorChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
-		super(driver, bc);
+	public EclipseOCLRouteSensorChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override
