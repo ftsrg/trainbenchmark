@@ -39,7 +39,7 @@ public class HawkBenchmarkConfig extends EMFIncQueryBenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 		
-		options.addOption(USE_HAWK_SCOPE, false, "Use the HawkScope (should be faster)");
+		options.addOption(USE_HAWK_SCOPE, false, "Use the HawkScope implementation");
 	}
 
 	@Override
@@ -52,5 +52,7 @@ public class HawkBenchmarkConfig extends EMFIncQueryBenchmarkConfig {
 	public boolean isUseHawkScope() {
 		return useHawkScope;
 	}
+	
+	
 
 }

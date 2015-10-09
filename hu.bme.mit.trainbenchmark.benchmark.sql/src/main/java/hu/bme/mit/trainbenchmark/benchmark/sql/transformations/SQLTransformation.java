@@ -31,7 +31,6 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransfo
 public abstract class SQLTransformation<TObject> extends Transformation<TObject, SQLDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
-	protected SQLDriver driver;
 	protected BenchmarkConfig bc;
 	protected final String updateQuery;
 		
