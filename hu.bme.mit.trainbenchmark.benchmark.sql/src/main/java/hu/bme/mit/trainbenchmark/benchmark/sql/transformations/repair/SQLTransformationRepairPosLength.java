@@ -21,8 +21,8 @@ import java.util.Collection;
 
 public class SQLTransformationRepairPosLength extends SQLTransformationRepair<SQLPosLengthMatch> {
 
-	public SQLTransformationRepairPosLength(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
-		super(driver, bc);
+	public SQLTransformationRepairPosLength(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

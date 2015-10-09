@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class MySQLBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig bc = new BenchmarkConfig("MySQL", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new MySQLBenchmarkCase());
+		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("MySQL", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new MySQLBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

@@ -11,18 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSetMatch;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSetMatch;
+
 public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQLSwitchSetMatch> {
 
-	public SQLTransformationRepairSwitchSet(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
-		super(driver, bc);
+	public SQLTransformationRepairSwitchSet(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

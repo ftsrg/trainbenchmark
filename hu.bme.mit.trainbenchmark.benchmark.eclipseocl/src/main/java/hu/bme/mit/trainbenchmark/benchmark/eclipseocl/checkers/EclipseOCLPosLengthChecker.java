@@ -24,8 +24,8 @@ import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMatch> {
 
-	public EclipseOCLPosLengthChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
-		super(driver, bc);
+	public EclipseOCLPosLengthChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

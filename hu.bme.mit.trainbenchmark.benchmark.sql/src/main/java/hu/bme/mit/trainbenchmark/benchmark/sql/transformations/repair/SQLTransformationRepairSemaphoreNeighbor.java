@@ -21,8 +21,8 @@ import java.util.Collection;
 
 public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationRepair<SQLSemaphoreNeighborMatch> {
 
-	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
-		super(driver, bc);
+	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

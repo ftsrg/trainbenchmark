@@ -27,8 +27,8 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLChecker<EMFSemaphoreNeighborMatch> {
 
-	public EclipseOCLSemaphoreNeighborChecker(final EMFDriver driver, final BenchmarkConfig bc) throws Exception {
-		super(driver, bc);
+	public EclipseOCLSemaphoreNeighborChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

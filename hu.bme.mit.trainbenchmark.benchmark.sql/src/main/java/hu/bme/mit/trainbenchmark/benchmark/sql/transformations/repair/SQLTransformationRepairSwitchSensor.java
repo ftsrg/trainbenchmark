@@ -21,8 +21,8 @@ import java.util.Collection;
 
 public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair<SQLSwitchSensorMatch> {
 
-	public SQLTransformationRepairSwitchSensor(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
-		super(driver, bc);
+	public SQLTransformationRepairSwitchSensor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override

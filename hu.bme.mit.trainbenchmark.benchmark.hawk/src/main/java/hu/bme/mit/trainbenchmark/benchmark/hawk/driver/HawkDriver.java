@@ -149,7 +149,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		copyModelToHawk(hawkRepositoryPath, modelPath);
 
 		client.syncInstance(HAWK_INSTANCE);
-		waitForSync(hawkResource);
+		waitForSync();
 
 		if (hbc.isUseHawkScope()) {
 			final HawkScope hawkScope = new HawkScope(hawkResource.getResourceSet(), client);
@@ -186,7 +186,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		}
 	}
 
-	private void waitForSync(final HawkResourceImpl hawkResource) throws InterruptedException, ExecutionException {
+	public void waitForSync() throws InterruptedException, ExecutionException {
 		CompletableFuture<Boolean> syncEnd = new CompletableFuture<Boolean>();
 		Runnable runnable = new Runnable() {
 			@Override
@@ -202,7 +202,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 	public void persist() throws IOException {
 		try {
 			client.syncInstance(HAWK_INSTANCE);
-			waitForSync(hawkResource);
+			waitForSync();
 		} catch (Exception e) {
 			throw new IOException(e);
 		}

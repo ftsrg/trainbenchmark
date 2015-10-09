@@ -31,45 +31,45 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransfo
 public abstract class SQLTransformation<TObject> extends Transformation<TObject, SQLDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
-	protected BenchmarkConfig bc;
+	protected BenchmarkConfig benchmarkConfig;
 	protected final String updateQuery;
 		
-	protected SQLTransformation(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
+	protected SQLTransformation(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
 		super(driver);
-		this.bc = bc;
+		this.benchmarkConfig = benchmarkConfig;
 
-		final String updatePath = getTransformationDirectory() + bc.getScenarioName() + bc.getQuery() + ".sql";
+		final String updatePath = getTransformationDirectory() + benchmarkConfig.getScenarioName() + benchmarkConfig.getQuery() + ".sql";
 		updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 	
 	protected String getTransformationDirectory() {
-		return bc.getWorkspacePath() + driver.getResourceDirectory() + "transformations/";
+		return benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "transformations/";
 	}
 
-	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig bc) throws IOException {
-		switch (bc.getScenario()) {
+	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		switch (benchmarkConfig.getScenario()) {
 		case REPAIR:
-			switch (bc.getQuery()) {
+			switch (benchmarkConfig.getQuery()) {
 			case CONNECTEDSEGMENTS:
-				return new SQLTransformationRepairConnectedSegments(driver, bc);				
+				return new SQLTransformationRepairConnectedSegments(driver, benchmarkConfig);				
 			case POSLENGTH:
-				return new SQLTransformationRepairPosLength(driver, bc);
+				return new SQLTransformationRepairPosLength(driver, benchmarkConfig);
 			case ROUTESENSOR:
-				return new SQLTransformationRepairRouteSensor(driver, bc);
+				return new SQLTransformationRepairRouteSensor(driver, benchmarkConfig);
 			case SEMAPHORENEIGHBOR:
-				return new SQLTransformationRepairSemaphoreNeighbor(driver, bc);
+				return new SQLTransformationRepairSemaphoreNeighbor(driver, benchmarkConfig);
 			case SWITCHSENSOR:
-				return new SQLTransformationRepairSwitchSensor(driver, bc);
+				return new SQLTransformationRepairSwitchSensor(driver, benchmarkConfig);
 			case SWITCHSET:
-				return new SQLTransformationRepairSwitchSet(driver, bc);
+				return new SQLTransformationRepairSwitchSet(driver, benchmarkConfig);
 			default:
 				break;
 			}
 		case INJECT:
-			return new SQLTransformationInject(driver, bc);				
+			return new SQLTransformationInject(driver, benchmarkConfig);				
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + bc.getQuery() + ", scenario: " + bc.getScenario());
+		throw new UnsupportedOperationException("Query: " + benchmarkConfig.getQuery() + ", scenario: " + benchmarkConfig.getScenario());
 	}
 }

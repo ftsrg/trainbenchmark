@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.hawk.transformation;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.hawk.config.HawkBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.driver.HawkDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
@@ -25,8 +26,8 @@ public abstract class HawkTransformation<TObject> extends Transformation<TObject
 	}
 
 	public static Transformation<?, ?> newInstance(final HawkDriver<?> driver, final Query query,
-			final Scenario scenario) {
-		return new HawkPreparedTransformation(driver, query, scenario);
+			final Scenario scenario, HawkBenchmarkConfig hbc) {
+		return new HawkPreparedTransformation(driver, query, scenario, hbc);
 		
 		// switch (scenario) {
 		// case REPAIR:
