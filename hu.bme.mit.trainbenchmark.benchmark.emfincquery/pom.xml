@@ -22,6 +22,7 @@
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkMain</mainClass>
+							<useUniqueVersions>false</useUniqueVersions>
 						</manifest>
 					</archive>
 				</configuration>
