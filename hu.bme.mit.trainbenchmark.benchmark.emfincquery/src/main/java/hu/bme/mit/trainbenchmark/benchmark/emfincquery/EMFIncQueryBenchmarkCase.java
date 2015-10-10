@@ -43,7 +43,7 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final EMFIncQueryBenchmarkConfig benchmarkConfig, final EMFIncQueryDriver<TMatch> driver)
+	public Transformation<?, ?> createTransformation(final EMFIncQueryBenchmarkConfig benchmarkConfig, final EMFIncQueryDriver<TMatch> driver)
 			throws IOException {
 		return EMFIncQueryTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}

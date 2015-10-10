@@ -21,8 +21,8 @@ import org.neo4j.graphdb.Node;
 
 public class Neo4jTransformationRepairSemaphoreNeighbor extends Neo4jTransformationRepair<Neo4jSemaphoreNeighborMatch> {
 
-	public Neo4jTransformationRepairSemaphoreNeighbor(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationRepairSemaphoreNeighbor(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

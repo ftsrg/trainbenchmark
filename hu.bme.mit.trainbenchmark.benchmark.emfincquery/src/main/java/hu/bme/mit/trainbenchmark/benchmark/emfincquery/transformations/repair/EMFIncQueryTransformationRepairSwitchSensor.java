@@ -14,6 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair;
 import java.io.IOException;
 import java.util.Collection;
 
+import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
+
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
@@ -22,7 +24,7 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EMFIncQueryTransformationRepairSwitchSensor extends EMFIncQueryTransformation<SwitchSensorMatch> {
 
-	public EMFIncQueryTransformationRepairSwitchSensor(final EMFIncQueryBaseDriver<?> driver) {
+	public EMFIncQueryTransformationRepairSwitchSensor(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver) {
 		super(driver);
 	}
 

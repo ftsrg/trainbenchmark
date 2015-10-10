@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class HawkBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig bc = new HawkBenchmarkConfig(args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new HawkBenchmarkCase<>());
+		final BenchmarkConfig benchmarkConfig = new HawkBenchmarkConfig(args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new HawkBenchmarkCase<>());
 		benchmarkLogic.runBenchmark();
 	}
 

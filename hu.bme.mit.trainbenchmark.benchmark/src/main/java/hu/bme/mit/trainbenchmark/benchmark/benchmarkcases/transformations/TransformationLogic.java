@@ -49,8 +49,8 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		this.comparator = comparator;
 	}
 
-	protected BenchmarkConfig bc;
-	protected BenchmarkResult br;
+	protected BenchmarkConfig benchmarkConfig;
+	protected BenchmarkResult benchmarkResult;
 	protected Driver<TElement> driver;
 	protected Random random;
 
@@ -58,14 +58,14 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	protected List<TTransformationObject> objectsToModify;
 	protected Comparator<TTransformationObject> comparator;
 
-	protected long nObjectsToModify;
+	protected long numberOfObjectsToModify;
 	protected long start;
 	protected long startEdit;
 	protected long end;
-	protected Transformation<TTransformationObject> transformation;
+	protected Transformation<TTransformationObject, Driver<TElement>> transformation;
 
-	public void initialize(final BenchmarkConfig bc, final Driver<TElement> driver, final Random random) {
-		this.bc = bc;
+	public void initialize(final BenchmarkConfig benchmarkConfig, final Driver<TElement> driver, final Random random) {
+		this.benchmarkConfig = benchmarkConfig;
 		this.driver = driver;
 		this.random = random;
 	}
@@ -76,15 +76,15 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		final TimeMetric transformationMetric = new TimeMetric("Time");
 
 		final ScalarMetric modified = new ScalarMetric("Modified");
-		nObjectsToModify = Util.calcModify(bc, currentMatches.size());
-		modified.setValue(nObjectsToModify);
+		numberOfObjectsToModify = Util.calcNumberOfObjectsToModify(benchmarkConfig, currentMatches.size());
+		modified.setValue(numberOfObjectsToModify);
 
 		driver.beginTransaction();
 		lhs(currentMatches);
 
 		// we do not measure this in the benchmark results
 		final List<TTransformationObject> candidatesList = copyAndSort();
-		objectsToModify = pickRandom(nObjectsToModify, candidatesList);
+		objectsToModify = pickRandom(numberOfObjectsToModify, candidatesList);
 
 		transformationMetric.startMeasure();
 		transformation.rhs(objectsToModify);
@@ -110,8 +110,8 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		return objects;
 	}
 
-	public void setTransformation(final Transformation<?> transformation) {
-		this.transformation = (Transformation<TTransformationObject>) transformation;
+	public void setTransformation(final Transformation<?, ?> transformation) {
+		this.transformation = (Transformation<TTransformationObject, Driver<TElement>>) transformation;
 	}
 
 }

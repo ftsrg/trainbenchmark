@@ -28,24 +28,28 @@ import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepa
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.emf.transformation.repair.EMFTransformationRepairSwitchSet;
 
-public abstract class EMFTransformation<O> extends Transformation<O> {
+public abstract class EMFTransformation<TObject, TDriver extends EMFDriver> extends Transformation<TObject, TDriver> {
 
-	public static EMFTransformation newInstance(final EMFDriver driver, final Query query, final Scenario scenario) {
+	public EMFTransformation(TDriver driver) {
+		super(driver);
+	}
+
+	public static EMFTransformation<?, ?> newInstance(final EMFDriver driver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new EMFTransformationRepairConnectedSegments();
+				return new EMFTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
-				return new EMFTransformationRepairPosLength();
+				return new EMFTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
-				return new EMFTransformationRepairRouteSensor();
+				return new EMFTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new EMFTransformationRepairSemaphoreNeighbor();
+				return new EMFTransformationRepairSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new EMFTransformationRepairSwitchSensor();
+				return new EMFTransformationRepairSwitchSensor(driver);
 			case SWITCHSET:
-				return new EMFTransformationRepairSwitchSet();
+				return new EMFTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}

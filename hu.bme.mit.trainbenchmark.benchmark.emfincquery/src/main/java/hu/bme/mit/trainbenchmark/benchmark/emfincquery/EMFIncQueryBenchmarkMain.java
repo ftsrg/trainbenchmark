@@ -17,8 +17,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class EMFIncQueryBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final EMFIncQueryBenchmarkConfig bc = new EMFIncQueryBenchmarkConfig(args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new EMFIncQueryBenchmarkCase());
+		final EMFIncQueryBenchmarkConfig benchmarkConfig = new EMFIncQueryBenchmarkConfig(args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new EMFIncQueryBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

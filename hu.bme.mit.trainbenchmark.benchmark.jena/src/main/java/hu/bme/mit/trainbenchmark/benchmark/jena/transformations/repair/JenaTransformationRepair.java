@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public abstract class JenaTransformationRepair<M extends JenaMatch> extends JenaTransformation<M> {
+public abstract class JenaTransformationRepair<TMatch extends JenaMatch> extends JenaTransformation<TMatch> {
 
 	protected JenaTransformationRepair(final JenaDriver jenaDriver) {
 		super(jenaDriver);

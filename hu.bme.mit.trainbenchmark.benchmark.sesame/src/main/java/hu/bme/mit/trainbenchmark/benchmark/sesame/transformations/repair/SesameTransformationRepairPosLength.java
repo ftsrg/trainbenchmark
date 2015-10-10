@@ -30,14 +30,14 @@ import org.openrdf.repository.RepositoryResult;
 
 public class SesameTransformationRepairPosLength extends SesameTransformationRepair<SesamePosLengthMatch> {
 
-	public SesameTransformationRepairPosLength(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationRepairPosLength(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<SesamePosLengthMatch> matches) throws RepositoryException {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI lengthProperty = vf.createURI(BASE_PREFIX + LENGTH);
 

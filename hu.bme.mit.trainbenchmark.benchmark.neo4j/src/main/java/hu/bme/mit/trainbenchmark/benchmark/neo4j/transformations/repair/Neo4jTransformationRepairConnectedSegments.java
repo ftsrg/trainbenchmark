@@ -22,8 +22,8 @@ import org.neo4j.graphdb.Relationship;
 
 public class Neo4jTransformationRepairConnectedSegments extends Neo4jTransformationRepair<Neo4jConnectedSegmentsMatch> {
 
-	public Neo4jTransformationRepairConnectedSegments(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationRepairConnectedSegments(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

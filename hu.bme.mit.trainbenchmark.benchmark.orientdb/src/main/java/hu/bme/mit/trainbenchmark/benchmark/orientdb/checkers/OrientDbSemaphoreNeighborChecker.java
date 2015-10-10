@@ -25,8 +25,8 @@ import com.tinkerpop.pipes.util.structures.Row;
 
 public class OrientDbSemaphoreNeighborChecker extends OrientDbChecker<OrientDbSemaphoreNeighborMatch> {
 
-	public OrientDbSemaphoreNeighborChecker(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbSemaphoreNeighborChecker(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class OrientDbChecker<M extends OrientDbMatch> extends Checker<M> {
+public abstract class OrientDbChecker<TMatch extends OrientDbMatch> extends Checker<TMatch> {
 
 	protected final OrientDbDriver driver;
 	protected String queryPath;

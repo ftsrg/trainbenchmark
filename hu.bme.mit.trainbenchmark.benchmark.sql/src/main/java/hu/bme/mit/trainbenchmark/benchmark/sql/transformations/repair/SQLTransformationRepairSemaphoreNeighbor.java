@@ -21,14 +21,14 @@ import java.util.Collection;
 
 public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationRepair<SQLSemaphoreNeighborMatch> {
 
-	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		super(sqlDriver, bc);
+	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLSemaphoreNeighborMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
-			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}
 
 		for (final SQLSemaphoreNeighborMatch match : matches) {

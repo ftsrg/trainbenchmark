@@ -35,7 +35,7 @@ public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver) throws IOException {
 		return SesameTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 

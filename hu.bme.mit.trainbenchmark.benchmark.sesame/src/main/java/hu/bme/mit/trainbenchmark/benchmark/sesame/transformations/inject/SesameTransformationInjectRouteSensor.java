@@ -11,23 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-
 import java.util.Collection;
 
 import org.openrdf.model.URI;
 import org.openrdf.repository.RepositoryException;
 
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+
 public class SesameTransformationInjectRouteSensor extends SesameTransformationInject {
 
-	public SesameTransformationInjectRouteSensor(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationInjectRouteSensor(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<URI> routes) throws RepositoryException {
-		sesameDriver.deleteOneOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.DEFINED_BY);
+		driver.deleteOneOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.DEFINED_BY);
 	}
 
 }

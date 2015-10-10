@@ -17,8 +17,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class EMFAPIBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig bc = new BenchmarkConfig("EMF_API", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new EMFAPIBenchmarkCase());
+		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("EMF_API", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new EMFAPIBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 }

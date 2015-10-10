@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class Neo4jCoreChecker<M extends Neo4jMatch> extends Checker<M> {
+public abstract class Neo4jCoreChecker<TMatch extends Neo4jMatch> extends Checker<TMatch> {
 
 	protected final Neo4jDriver driver;
 

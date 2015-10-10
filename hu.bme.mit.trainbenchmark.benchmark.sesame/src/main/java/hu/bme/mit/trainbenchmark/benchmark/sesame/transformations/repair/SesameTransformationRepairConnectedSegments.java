@@ -13,8 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsMatch;
 
 import java.util.Collection;
 
@@ -25,16 +23,19 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsMatch;
+
 public class SesameTransformationRepairConnectedSegments extends SesameTransformationRepair<SesameConnectedSegmentsMatch> {
 
-	public SesameTransformationRepairConnectedSegments(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationRepairConnectedSegments(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<SesameConnectedSegmentsMatch> matches) throws RepositoryException {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTSTO);
 		for (final SesameConnectedSegmentsMatch match : matches) {

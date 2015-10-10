@@ -21,8 +21,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationInjectSwitchSet extends OrientDbTransformationInject {
 
-	public OrientDbTransformationInjectSwitchSet(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationInjectSwitchSet(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

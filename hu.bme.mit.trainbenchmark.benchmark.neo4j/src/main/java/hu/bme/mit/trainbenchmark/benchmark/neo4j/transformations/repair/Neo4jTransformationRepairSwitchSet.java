@@ -22,8 +22,8 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 
 public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformationRepair<Neo4jSwitchSetMatch> {
 
-	public Neo4jTransformationRepairSwitchSet(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationRepairSwitchSet(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

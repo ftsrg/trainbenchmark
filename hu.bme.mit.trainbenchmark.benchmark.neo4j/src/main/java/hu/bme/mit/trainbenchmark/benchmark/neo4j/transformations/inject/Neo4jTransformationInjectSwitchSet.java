@@ -22,8 +22,8 @@ import org.neo4j.graphdb.Node;
 
 public class Neo4jTransformationInjectSwitchSet extends Neo4jTransformationInject {
 
-	public Neo4jTransformationInjectSwitchSet(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jTransformationInjectSwitchSet(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

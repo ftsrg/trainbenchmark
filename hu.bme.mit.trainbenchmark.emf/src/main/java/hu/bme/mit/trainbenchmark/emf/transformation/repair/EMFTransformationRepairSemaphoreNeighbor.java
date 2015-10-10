@@ -11,11 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
-
 import java.util.Collection;
 
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
+
 public class EMFTransformationRepairSemaphoreNeighbor extends EMFTransformationRepair<EMFSemaphoreNeighborMatch> {
+
+	public EMFTransformationRepairSemaphoreNeighbor(EMFDriver driver) {
+		super(driver);
+	}
 
 	@Override
 	public void rhs(final Collection<EMFSemaphoreNeighborMatch> matches) {

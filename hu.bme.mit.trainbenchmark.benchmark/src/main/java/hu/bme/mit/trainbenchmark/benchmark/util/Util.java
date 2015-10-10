@@ -16,16 +16,16 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class Util {
 
-	public static long calcModify(final BenchmarkConfig bc, final int resultSize) {
-		final long nModify = bc.getTransformationConstant();
+	public static long calcNumberOfObjectsToModify(final BenchmarkConfig benchmarkConfig, final int resultSize) {
+		final long transformationConstant = benchmarkConfig.getTransformationConstant();
 
-		switch (bc.getTransformationStrategy()) {
+		switch (benchmarkConfig.getTransformationStrategy()) {
 		case FIXED:
-			return nModify;
+			return transformationConstant;
 		case PROPORTIONAL:
-			return resultSize / nModify;
+			return resultSize / transformationConstant;
 		default:
-			throw new UnsupportedOperationException("Transformation strategy " + bc.getTransformationStrategy() + " not supported.");
+			throw new UnsupportedOperationException("Transformation strategy " + benchmarkConfig.getTransformationStrategy() + " not supported.");
 		}
 	}
 

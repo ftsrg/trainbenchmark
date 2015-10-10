@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools5.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-
 import java.io.IOException;
 
 import org.drools.KnowledgeBase;
@@ -32,14 +29,17 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+
 public class Drools5Driver extends EMFDriver {
 
 	protected StatefulKnowledgeSession ksession;
-	protected BenchmarkConfig bc;
+	protected BenchmarkConfig benchmarkConfig;
 
-	public Drools5Driver(final BenchmarkConfig bc) {
+	public Drools5Driver(final BenchmarkConfig benchmarkConfig) {
 		super();
-		this.bc = bc;
+		this.benchmarkConfig = benchmarkConfig;
 	}
 
 	@Override
@@ -101,8 +101,8 @@ public class Drools5Driver extends EMFDriver {
 
 	protected KnowledgeBase readKnowledgeBase() throws Exception {
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/"
-				+ bc.getQuery() + ".drl";
+		final String queryFile = benchmarkConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/"
+				+ benchmarkConfig.getQuery() + ".drl";
 		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
 
 		final KnowledgeBuilderErrors errors = kbuilder.getErrors();

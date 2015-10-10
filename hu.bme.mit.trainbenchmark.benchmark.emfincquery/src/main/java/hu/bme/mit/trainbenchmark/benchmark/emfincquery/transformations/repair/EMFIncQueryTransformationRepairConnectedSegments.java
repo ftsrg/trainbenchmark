@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
@@ -23,7 +24,7 @@ import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EMFIncQueryTransformationRepairConnectedSegments extends EMFIncQueryTransformation<ConnectedSegmentsMatch> {
 
-	public EMFIncQueryTransformationRepairConnectedSegments(final EMFIncQueryBaseDriver<?> driver) {
+	public EMFIncQueryTransformationRepairConnectedSegments(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver) {
 		super(driver);
 	}
 

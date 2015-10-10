@@ -12,17 +12,18 @@
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.benchmark.orientdb.constants.OrientDbConstants.relationshipTypeDefinedBy;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbRouteSensorMatch;
 
 import java.util.Collection;
 
 import com.tinkerpop.blueprints.Vertex;
 
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbRouteSensorMatch;
+
 public class OrientDbTransformationRepairRouteSensor extends OrientDbTransformationRepair<OrientDbRouteSensorMatch> {
 
-	public OrientDbTransformationRepairRouteSensor(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationRepairRouteSensor(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

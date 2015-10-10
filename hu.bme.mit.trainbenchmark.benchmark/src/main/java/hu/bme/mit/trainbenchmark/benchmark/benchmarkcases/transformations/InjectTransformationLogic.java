@@ -48,7 +48,7 @@ public class InjectTransformationLogic<TMatch, TElement> extends TransformationL
 
 	@Override
 	protected void lhs(final Collection<TMatch> currentMatches) throws Exception {
-		final String vertexType = VERTEX_TYPES.get(bc.getQuery());
+		final String vertexType = VERTEX_TYPES.get(benchmarkConfig.getQuery());
 		candidatesToModify = driver.collectVertices(vertexType);
 	}
 

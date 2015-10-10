@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class JenaBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig bc = new RDFBenchmarkConfig(args, "Jena3");
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new JenaBenchmarkCase());
+		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig(args, "Jena");
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new JenaBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

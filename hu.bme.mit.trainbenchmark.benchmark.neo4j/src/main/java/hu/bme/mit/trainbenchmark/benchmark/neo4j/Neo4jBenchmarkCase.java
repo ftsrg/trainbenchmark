@@ -38,7 +38,8 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 
 	@Override
-	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver) throws Exception {
+	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver)
+			throws Exception {
 		if (benchmarkConfig.isCoreApi()) {
 			return Neo4jCoreChecker.newInstance(driver, benchmarkConfig.getQuery());
 		} else {
@@ -47,7 +48,8 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig,
+			final Neo4jDriver driver) throws IOException {
 		return Neo4jTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 

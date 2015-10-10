@@ -17,7 +17,7 @@ import java.util.List;
 
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class Driver<T> {
+public abstract class Driver<TMatch> {
 
 	// these methods should be redefined if required
 
@@ -37,11 +37,11 @@ public abstract class Driver<T> {
 
 	public abstract void read(String modelPathWithoutExtension) throws Exception;
 
-	public abstract List<T> collectVertices(final String type) throws Exception;
+	public abstract List<TMatch> collectVertices(final String type) throws Exception;
 
 	// comparator
 
-	public abstract Comparator<T> getElementComparator();
+	public abstract Comparator<TMatch> getElementComparator();
 
 	// extension
 

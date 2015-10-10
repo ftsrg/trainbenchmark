@@ -11,6 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+
+import org.apache.commons.io.FileUtils;
+
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
@@ -22,55 +28,48 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransfo
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSet;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.PreparedStatement;
-
-import org.apache.commons.io.FileUtils;
-
-public abstract class SQLTransformation<M> extends Transformation<M> {
+public abstract class SQLTransformation<TObject> extends Transformation<TObject, SQLDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
-	protected SQLDriver sqlDriver;
-	protected BenchmarkConfig bc;
+	protected BenchmarkConfig benchmarkConfig;
 	protected final String updateQuery;
 		
-	protected SQLTransformation(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		this.sqlDriver = sqlDriver;
-		this.bc = bc;
+	protected SQLTransformation(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver);
+		this.benchmarkConfig = benchmarkConfig;
 
-		final String updatePath = getTransformationDirectory() + bc.getScenarioName() + bc.getQuery() + ".sql";
+		final String updatePath = getTransformationDirectory() + benchmarkConfig.getScenarioName() + benchmarkConfig.getQuery() + ".sql";
 		updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 	
 	protected String getTransformationDirectory() {
-		return bc.getWorkspacePath() + sqlDriver.getResourceDirectory() + "transformations/";
+		return benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "transformations/";
 	}
 
-	public static Transformation<?> newInstance(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		switch (bc.getScenario()) {
+	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		switch (benchmarkConfig.getScenario()) {
 		case REPAIR:
-			switch (bc.getQuery()) {
+			switch (benchmarkConfig.getQuery()) {
 			case CONNECTEDSEGMENTS:
-				return new SQLTransformationRepairConnectedSegments(sqlDriver, bc);				
+				return new SQLTransformationRepairConnectedSegments(driver, benchmarkConfig);				
 			case POSLENGTH:
-				return new SQLTransformationRepairPosLength(sqlDriver, bc);
+				return new SQLTransformationRepairPosLength(driver, benchmarkConfig);
 			case ROUTESENSOR:
-				return new SQLTransformationRepairRouteSensor(sqlDriver, bc);
+				return new SQLTransformationRepairRouteSensor(driver, benchmarkConfig);
 			case SEMAPHORENEIGHBOR:
-				return new SQLTransformationRepairSemaphoreNeighbor(sqlDriver, bc);
+				return new SQLTransformationRepairSemaphoreNeighbor(driver, benchmarkConfig);
 			case SWITCHSENSOR:
-				return new SQLTransformationRepairSwitchSensor(sqlDriver, bc);
+				return new SQLTransformationRepairSwitchSensor(driver, benchmarkConfig);
 			case SWITCHSET:
-				return new SQLTransformationRepairSwitchSet(sqlDriver, bc);
+				return new SQLTransformationRepairSwitchSet(driver, benchmarkConfig);
 			default:
 				break;
 			}
 		case INJECT:
-			return new SQLTransformationInject(sqlDriver, bc);				
+			return new SQLTransformationInject(driver, benchmarkConfig);				
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + bc.getQuery() + ", scenario: " + bc.getScenario());
+		throw new UnsupportedOperationException("Query: " + benchmarkConfig.getQuery() + ", scenario: " + benchmarkConfig.getScenario());
 	}
 }

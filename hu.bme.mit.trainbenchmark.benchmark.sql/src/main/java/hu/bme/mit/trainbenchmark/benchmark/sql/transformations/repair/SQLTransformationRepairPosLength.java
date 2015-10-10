@@ -21,14 +21,14 @@ import java.util.Collection;
 
 public class SQLTransformationRepairPosLength extends SQLTransformationRepair<SQLPosLengthMatch> {
 
-	public SQLTransformationRepairPosLength(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		super(sqlDriver, bc);
+	public SQLTransformationRepairPosLength(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLPosLengthMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
-			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}
 
 		for (final SQLPosLengthMatch match : matches) {

@@ -36,7 +36,7 @@ public class EMFAPIBenchmarkCase extends EMFBenchmarkCase<EMFDriver, BenchmarkCo
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver) throws IOException {
 		return EMFTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
