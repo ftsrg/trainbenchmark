@@ -132,7 +132,7 @@ def measure(config):
                             name = os.path.basename(f)
                             os.rename(f, '../results/completed/' + name)
 
-            util.set_working_directory("..")
+                util.set_working_directory("..")
 
 
 def send_mail(config):
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
     with open("config/config.yml", 'r') as stream:
         config = yaml.load(stream)
-    config["sizes"] = util.get_power_of_two(config["minsize"], config["maxsize"])
+    config["sizes"] = util.get_power_of_two(config["min_size"], config["max_size"])
 
     with open("config/formats.yml", 'r') as stream:
         tool_formats = yaml.load(stream)

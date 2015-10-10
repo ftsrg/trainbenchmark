@@ -42,7 +42,7 @@ The benchmark projects are responsible for running the benchmarks.
 
 ## Getting started
 
-The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark. The configuration is stored in the `config.yml` file. To alter the default configuration, just edit this file. Find more information [here](https://github.com/FTSRG/trainbenchmark/wiki/Configuration).
+The framework provides a set of scripts for building the projects, generating the instance models and running the benchmark.
 
 ### Installation guide
 
@@ -83,6 +83,8 @@ scripts/dep-virtuoso.sh
 ```
 
 ### Usage
+
+The `scripts/init-config.sh` script initializes the `config/config.yml` file. This file defines the configuration for the benchmark. The documentation is provided as comments in the file.
 
 The `scripts` directory contains the `run.py` script which is used for the following purposes:
 * `run.py -b` -- build the projects

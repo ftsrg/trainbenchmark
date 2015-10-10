@@ -1,19 +1,27 @@
-minsize: 1
-maxsize: 1
+# Specify the minimum and maximum sizes for the scalable models.
+# The models are generated in sizes of powers of two,
+# e.g. if min_size = 1 and max_size = 8, the generated model sizes are 1, 2, 4 and 8.
+min_size: 1
+max_size: 1
+
+# Specify the options for the Java virtual machine. The options are copied to the "java" command invoking the JVM.
 java_opts:
   - -Xms2G
   - -Xmx2G
 
-# number of runs for the same tool/scenario/query/size
+# Number of runs for the same tool/scenario/query/size.
 runs: 5
-# number of modify-recheck iterations
-iterationcount: 10
-# timeout for the benchmark processes
+
+# Timeout for the benchmark processes.
 timeout: 600
+
+# Uncomment this if you would like to receive an email if the benchmark is finished.
 #email:
 #  address: trainbenchmark@gmail.com
-#  password: iliketrains
+#  password: 
 #  host: smtp.gmail.com:587
+
+# Specify the queries to run.
 queries:
 - ConnectedSegments
 - PosLength
@@ -22,15 +30,20 @@ queries:
 - SwitchSensor
 - SwitchSet
 
+# Specify the scenarios for the benchmark and the generator.
+# You may also specify the benchmark arguments for each scenario.
 scenarios:
 - Batch:
 - Inject:
     transformationStrategy: fixed
     transformationConstant: 10
+    iterationCount: 10
 - Repair:
     transformationStrategy: proportional
     transformationConstant: 10
+    iterationCount: 10
 
+# Specify the name of the tools to run.
 tools:
 #- allegro
 - blazegraph
@@ -38,6 +51,7 @@ tools:
 - drools6
 - emfapi
 - emfincquery
+#- hawk
 #- iqdcore
 - jena
 - mysql
@@ -45,11 +59,13 @@ tools:
 - sesame
 #- virtuoso
 
-# optional arguments. for example, neo4j is invoked with and without the javaapi argument as well.
+# Optional arguments for the generator.
 generator_optional_arguments:
   rdf:
   - metamodel
 
+# Optional arguments for the benchmark.
+# For example, the neo4j tool is invoked with and without the coreapi argument as well.
 benchmark_optional_arguments:
   neo4j:
   - coreapi
