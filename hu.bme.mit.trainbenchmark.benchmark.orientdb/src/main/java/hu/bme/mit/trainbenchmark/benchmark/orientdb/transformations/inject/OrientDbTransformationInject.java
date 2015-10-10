@@ -18,8 +18,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public abstract class OrientDbTransformationInject extends OrientDbTransformation<Vertex> {
 
-	protected OrientDbTransformationInject(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	protected OrientDbTransformationInject(final OrientDbDriver driver) {
+		super(driver);
 	}
 	
 }

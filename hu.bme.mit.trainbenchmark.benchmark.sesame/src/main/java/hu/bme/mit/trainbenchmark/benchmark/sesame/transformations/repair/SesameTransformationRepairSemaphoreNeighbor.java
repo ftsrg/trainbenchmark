@@ -26,14 +26,14 @@ import org.openrdf.repository.RepositoryException;
 
 public class SesameTransformationRepairSemaphoreNeighbor extends SesameTransformationRepair<SesameSemaphoreNeighborMatch> {
 
-	public SesameTransformationRepairSemaphoreNeighbor(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationRepairSemaphoreNeighbor(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<SesameSemaphoreNeighborMatch> matches) throws RepositoryException {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI entry = vf.createURI(BASE_PREFIX + ENTRY);
 

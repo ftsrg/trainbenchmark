@@ -22,9 +22,9 @@ public class OrientDbBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig bc = new BenchmarkConfig("OrientDb", scenario, size, runIndex, query, iterationCount, transformationStrategy,
+		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("OrientDb", scenario, size, runIndex, query, iterationCount, transformationStrategy,
 				transformationConstant);
-		return new BenchmarkRunner(bc, new OrientDbBenchmarkCase());
+		return new BenchmarkRunner(benchmarkConfig, new OrientDbBenchmarkCase());
 	}
 
 }

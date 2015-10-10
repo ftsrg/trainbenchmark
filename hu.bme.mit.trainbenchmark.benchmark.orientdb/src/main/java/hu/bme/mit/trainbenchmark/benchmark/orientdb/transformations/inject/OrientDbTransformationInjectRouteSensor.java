@@ -22,8 +22,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationInjectRouteSensor extends OrientDbTransformationInject {
 
-	public OrientDbTransformationInjectRouteSensor(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationInjectRouteSensor(final OrientDbDriver driver) {
+		super(driver);
 	}
 	
 	@Override

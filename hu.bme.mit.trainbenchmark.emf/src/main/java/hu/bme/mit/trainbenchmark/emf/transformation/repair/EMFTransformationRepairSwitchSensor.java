@@ -11,13 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
+import java.util.Collection;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
-import java.util.Collection;
-
 public class EMFTransformationRepairSwitchSensor extends EMFTransformationRepair<EMFSwitchSensorMatch> {
+
+	public EMFTransformationRepairSwitchSensor(EMFDriver driver) {
+		super(driver);
+	}
 
 	@Override
 	public void rhs(final Collection<EMFSwitchSensorMatch> matches) {

@@ -39,7 +39,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	protected final TBenchmarkConfig benchmarkConfig;
 	protected final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkCase;
 
-	protected Transformation<?> transformation;
+	protected Transformation<?, ?> transformation;
 	protected TransformationLogic<TMatch, TElement, ?> transformationLogic;
 	protected TDriver driver;
 	protected Checker<TMatch> checker;

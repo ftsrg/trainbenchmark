@@ -36,8 +36,8 @@ import org.neo4j.graphdb.Transaction;
 
 public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSensorMatch> {
 
-	public Neo4jCoreRouteSensorChecker(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jCoreRouteSensorChecker(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

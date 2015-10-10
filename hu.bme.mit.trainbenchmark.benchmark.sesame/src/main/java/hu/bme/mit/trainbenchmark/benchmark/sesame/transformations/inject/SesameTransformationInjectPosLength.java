@@ -12,8 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 import java.util.Collection;
 
@@ -25,16 +23,19 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+
 public class SesameTransformationInjectPosLength extends SesameTransformationInject {
 
-	public SesameTransformationInjectPosLength(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationInjectPosLength(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<URI> segments) throws RepositoryException {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI typeURI = vf.createURI(BASE_PREFIX + ModelConstants.LENGTH);
 		final Literal zeroLiteral = vf.createLiteral(0);

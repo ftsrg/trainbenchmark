@@ -13,10 +13,16 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
 import java.util.Collection;
 
-public abstract class Transformation<O> {
+public abstract class Transformation<TObject, TDriver> {
+
+	protected TDriver driver;
+	
+	public Transformation(TDriver driver) {
+		this.driver = driver;
+	}
 
 	// As the transformations are implemented on a wide range of technologies, they may throw any exception.
 	// Using "throws Exception" is generally considered bad practice in production systems, however, it is acceptible in the benchmark code.
-	public abstract void rhs(Collection<O> objects) throws Exception;
+	public abstract void rhs(Collection<TObject> objects) throws Exception;
 
 }

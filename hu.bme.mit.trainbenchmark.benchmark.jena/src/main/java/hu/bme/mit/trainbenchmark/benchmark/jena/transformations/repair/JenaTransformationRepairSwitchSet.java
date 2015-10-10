@@ -26,13 +26,13 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchSetMatch;
 
 public class JenaTransformationRepairSwitchSet extends JenaTransformationRepair<JenaSwitchSetMatch> {
 
-	public JenaTransformationRepairSwitchSet(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationRepairSwitchSet(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<JenaSwitchSetMatch> matches) throws IOException {
-		final Model model = jenaDriver.getModel();
+		final Model model = driver.getModel();
 		final Property currentPositionProperty = model.getProperty(BASE_PREFIX + CURRENTPOSITION);
 
 		for (final JenaSwitchSetMatch match : matches) {

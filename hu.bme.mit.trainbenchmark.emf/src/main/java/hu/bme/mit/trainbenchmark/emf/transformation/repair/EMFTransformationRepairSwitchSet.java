@@ -11,11 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.emf.transformation.repair;
 
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
-
 import java.util.Collection;
 
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
+
 public class EMFTransformationRepairSwitchSet extends EMFTransformationRepair<EMFSwitchSetMatch> {
+
+	public EMFTransformationRepairSwitchSet(EMFDriver driver) {
+		super(driver);
+	}
 
 	@Override
 	public void rhs(final Collection<EMFSwitchSetMatch> matches) {

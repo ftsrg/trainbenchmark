@@ -25,26 +25,26 @@ import hu.bme.mit.trainbenchmark.benchmark.hawk.driver.HawkDriver;
 import hu.bme.mit.trainbenchmark.benchmark.hawk.transformation.HawkTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class HawkBenchmarkCase<M extends BasePatternMatch>
-		extends AbstractBenchmarkCase<M, RailwayElement, HawkDriver<M>, HawkBenchmarkConfig, EMFIncQueryChecker<M>> {
+public class HawkBenchmarkCase<TMatch extends BasePatternMatch>
+		extends AbstractBenchmarkCase<TMatch, RailwayElement, HawkDriver<TMatch>, HawkBenchmarkConfig, EMFIncQueryChecker<TMatch>> {
 
 	@Override
-	public HawkDriver<M> createDriver(final HawkBenchmarkConfig benchmarkConfig) throws Exception {
+	public HawkDriver<TMatch> createDriver(final HawkBenchmarkConfig benchmarkConfig) throws Exception {
 		return new HawkDriver<>(benchmarkConfig);
 	}
 
 	@Override
-	public EMFIncQueryChecker<M> createChecker(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<M> driver) throws Exception {
-		final EMFIncQueryChecker<M> checker = (EMFIncQueryChecker<M>) EMFIncQueryChecker.newInstance(benchmarkConfig, driver,
+	public EMFIncQueryChecker<TMatch> createChecker(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<TMatch> driver) throws Exception {
+		final EMFIncQueryChecker<TMatch> checker = (EMFIncQueryChecker<TMatch>) EMFIncQueryChecker.newInstance(benchmarkConfig, driver,
 				benchmarkConfig.getQuery());
 		driver.registerChecker(checker);
 		return checker;
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<M> driver)
+	public Transformation<?, ?> createTransformation(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<TMatch> driver)
 			throws IOException {
-		return HawkTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+		return HawkTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario(), benchmarkConfig);
 	}
 
 	@Override

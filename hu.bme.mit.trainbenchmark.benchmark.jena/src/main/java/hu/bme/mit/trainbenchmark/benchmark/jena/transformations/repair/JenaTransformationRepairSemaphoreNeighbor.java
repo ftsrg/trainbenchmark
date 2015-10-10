@@ -26,13 +26,13 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSemaphoreNeighborMatch
 
 public class JenaTransformationRepairSemaphoreNeighbor extends JenaTransformationRepair<JenaSemaphoreNeighborMatch> {
 
-	public JenaTransformationRepairSemaphoreNeighbor(final JenaDriver jenaDriver) {
-		super(jenaDriver);
+	public JenaTransformationRepairSemaphoreNeighbor(final JenaDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<JenaSemaphoreNeighborMatch> matches) throws IOException {
-		final Model model = jenaDriver.getModel();
+		final Model model = driver.getModel();
 
 		final Property entry = model.getProperty(BASE_PREFIX + ENTRY);
 		for (final JenaSemaphoreNeighborMatch match : matches) {

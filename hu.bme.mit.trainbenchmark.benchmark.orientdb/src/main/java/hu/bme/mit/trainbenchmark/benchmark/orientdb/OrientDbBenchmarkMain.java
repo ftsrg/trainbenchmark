@@ -17,8 +17,8 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class OrientDbBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig bc = new BenchmarkConfig("OrientDB", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(bc, new OrientDbBenchmarkCase());
+		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("OrientDB", args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new OrientDbBenchmarkCase());
 		benchmarkLogic.runBenchmark();
 	}
 

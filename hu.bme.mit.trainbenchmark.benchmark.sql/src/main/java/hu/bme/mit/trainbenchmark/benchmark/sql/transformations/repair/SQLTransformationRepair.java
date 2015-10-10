@@ -18,10 +18,10 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation
 
 import java.io.IOException;
 
-public abstract class SQLTransformationRepair<M extends SQLMatch> extends SQLTransformation<M> {
+public abstract class SQLTransformationRepair<TMatch extends SQLMatch> extends SQLTransformation<TMatch> {
 
-	protected SQLTransformationRepair(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		super(sqlDriver, bc);
+	protected SQLTransformationRepair(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 }

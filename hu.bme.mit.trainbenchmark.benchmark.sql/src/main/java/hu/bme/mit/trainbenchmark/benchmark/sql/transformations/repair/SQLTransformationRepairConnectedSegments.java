@@ -21,14 +21,14 @@ import java.util.Collection;
 
 public class SQLTransformationRepairConnectedSegments extends SQLTransformationRepair<SQLConnectedSegmentsMatch> {
 
-	public SQLTransformationRepairConnectedSegments(final SQLDriver sqlDriver, final BenchmarkConfig bc) throws IOException {
-		super(sqlDriver, bc);
+	public SQLTransformationRepairConnectedSegments(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(driver, benchmarkConfig);
 	}
 
 	@Override
 	public void rhs(final Collection<SQLConnectedSegmentsMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
-			preparedUpdateStatement = sqlDriver.getConnection().prepareStatement(updateQuery);
+			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}
 
 		for (final SQLConnectedSegmentsMatch match : matches) {

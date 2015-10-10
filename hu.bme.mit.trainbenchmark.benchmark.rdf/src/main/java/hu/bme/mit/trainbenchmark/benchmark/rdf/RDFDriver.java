@@ -20,7 +20,7 @@ import java.io.IOException;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
-public abstract class RDFDriver<T> extends Driver<T> {
+public abstract class RDFDriver<TMatch> extends Driver<TMatch> {
 
 	protected Long newVertexId = null;
 	protected RDFBenchmarkConfig rdfbc;

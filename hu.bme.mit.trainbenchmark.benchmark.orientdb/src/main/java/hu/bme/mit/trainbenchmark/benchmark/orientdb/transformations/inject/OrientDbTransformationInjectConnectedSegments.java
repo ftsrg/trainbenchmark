@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.orientdb.transformations.inject;
 import static hu.bme.mit.trainbenchmark.benchmark.orientdb.constants.OrientDbConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.benchmark.orientdb.constants.OrientDbConstants.relationshipTypeConnectsTo;
 import static hu.bme.mit.trainbenchmark.benchmark.orientdb.constants.OrientDbConstants.relationshipTypeSensor;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -23,10 +22,12 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
+
 public class OrientDbTransformationInjectConnectedSegments extends OrientDbTransformationInject {
 
-	public OrientDbTransformationInjectConnectedSegments(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationInjectConnectedSegments(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class OrientDbTransformationInjectConnectedSegments extends OrientDbTrans
 			
 			// transformation
 			connectsTo.remove();
-			final Vertex segment2 = orientDriver.getGraphDb().addVertex(null);
+			final Vertex segment2 = driver.getGraphDb().addVertex(null);
 			segment2.setProperty("labels", labelSegment);
 			segment1.addEdge(relationshipTypeConnectsTo, segment2);
 			segment2.addEdge(relationshipTypeConnectsTo, segment3);

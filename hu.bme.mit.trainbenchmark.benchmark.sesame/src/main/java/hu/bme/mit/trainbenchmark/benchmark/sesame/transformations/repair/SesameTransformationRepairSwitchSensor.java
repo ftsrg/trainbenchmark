@@ -28,14 +28,14 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class SesameTransformationRepairSwitchSensor extends SesameTransformationRepair<SesameSwitchSensorMatch> {
 
-	public SesameTransformationRepairSwitchSensor(final SesameDriver sesameDriver) {
-		super(sesameDriver);
+	public SesameTransformationRepairSwitchSensor(final SesameDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public void rhs(final Collection<SesameSwitchSensorMatch> matches) throws Exception {
-		final RepositoryConnection con = sesameDriver.getConnection();
-		final ValueFactory vf = sesameDriver.getValueFactory();
+		final RepositoryConnection con = driver.getConnection();
+		final ValueFactory vf = driver.getValueFactory();
 
 		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
 		final URI sensorType = vf.createURI(BASE_PREFIX + SENSOR);
@@ -43,7 +43,7 @@ public class SesameTransformationRepairSwitchSensor extends SesameTransformation
 		for (final SesameSwitchSensorMatch match : matches) {
 			final Resource sw = match.getSw();
 
-			final URI sensor = vf.createURI(BASE_PREFIX + ID_PREFIX + sesameDriver.getNewVertexId());
+			final URI sensor = vf.createURI(BASE_PREFIX + ID_PREFIX + driver.getNewVertexId());
 
 			// set vertex type
 			con.add(sensor, RDF.TYPE, sensorType);

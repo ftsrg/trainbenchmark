@@ -28,47 +28,45 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTra
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class Neo4jTransformation<M> extends Transformation<M> {
+public abstract class Neo4jTransformation<TObject> extends Transformation<TObject, Neo4jDriver> {
 
-	protected Neo4jDriver neoDriver;
-
-	protected Neo4jTransformation(final Neo4jDriver neoDriver) {
-		this.neoDriver = neoDriver;
+	protected Neo4jTransformation(final Neo4jDriver driver) {
+		super(driver);
 	}
 
-	public static Transformation<?> newInstance(final Neo4jDriver neoDriver, final Query query, final Scenario scenario) {
+	public static Transformation<?, ?> newInstance(final Neo4jDriver driver, final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new Neo4jTransformationRepairConnectedSegments(neoDriver);				
+				return new Neo4jTransformationRepairConnectedSegments(driver);				
 			case POSLENGTH:
-				return new Neo4jTransformationRepairPosLength(neoDriver);
+				return new Neo4jTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
-				return new Neo4jTransformationRepairRouteSensor(neoDriver);
+				return new Neo4jTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new Neo4jTransformationRepairSemaphoreNeighbor(neoDriver);
+				return new Neo4jTransformationRepairSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new Neo4jTransformationRepairSwitchSensor(neoDriver);
+				return new Neo4jTransformationRepairSwitchSensor(driver);
 			case SWITCHSET:
-				return new Neo4jTransformationRepairSwitchSet(neoDriver);
+				return new Neo4jTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new Neo4jTransformationInjectConnectedSegments(neoDriver);				
+				return new Neo4jTransformationInjectConnectedSegments(driver);				
 			case POSLENGTH:
-				return new Neo4jTransformationInjectPosLength(neoDriver);
+				return new Neo4jTransformationInjectPosLength(driver);
 			case ROUTESENSOR:
-				return new Neo4jTransformationInjectRouteSensor(neoDriver);
+				return new Neo4jTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new Neo4jTransformationInjectSemaphoreNeighbor(neoDriver);
+				return new Neo4jTransformationInjectSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new Neo4jTransformationInjectSwitchSensor(neoDriver);
+				return new Neo4jTransformationInjectSwitchSensor(driver);
 			case SWITCHSET:
-				return new Neo4jTransformationInjectSwitchSet(neoDriver);
+				return new Neo4jTransformationInjectSwitchSet(driver);
 			default:
 				break;
 			}

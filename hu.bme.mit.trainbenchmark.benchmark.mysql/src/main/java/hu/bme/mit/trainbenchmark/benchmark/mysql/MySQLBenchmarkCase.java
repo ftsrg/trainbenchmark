@@ -40,7 +40,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase<MySQLDriver> {
 	}
 
 	@Override
-	public Transformation<?> createTransformation(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws IOException {
 		return SQLTransformation.newInstance(driver, benchmarkConfig);
 	}
 

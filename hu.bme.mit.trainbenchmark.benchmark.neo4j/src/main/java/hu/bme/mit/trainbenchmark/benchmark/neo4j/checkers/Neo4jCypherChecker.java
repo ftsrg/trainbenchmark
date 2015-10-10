@@ -29,13 +29,13 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 	protected final Query query;
 	protected final String queryDefinition;
 
-	protected Neo4jCypherChecker(final Neo4jDriver driver, final BenchmarkConfig bc) throws IOException {
+	protected Neo4jCypherChecker(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
 		super();
 		this.driver = driver;
 
-		query = bc.getQuery();
-		queryDefinition = FileUtils.readFileToString(new File(bc.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + bc.getQuery() + ".cypher"));
+		query = benchmarkConfig.getQuery();
+		queryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".cypher"));
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 		return driver.runQuery(query, queryDefinition);
 	}
 
-	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver neoDriver, final BenchmarkConfig bc) throws IOException {
-		return new Neo4jCypherChecker(neoDriver, bc);
+	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+		return new Neo4jCypherChecker(driver, benchmarkConfig);
 	}
 
 }

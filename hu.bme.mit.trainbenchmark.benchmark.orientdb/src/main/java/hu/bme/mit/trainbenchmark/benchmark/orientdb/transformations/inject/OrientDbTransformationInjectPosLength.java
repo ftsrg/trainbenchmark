@@ -20,8 +20,8 @@ import com.tinkerpop.blueprints.Vertex;
 
 public class OrientDbTransformationInjectPosLength extends OrientDbTransformationInject {
 
-	public OrientDbTransformationInjectPosLength(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbTransformationInjectPosLength(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

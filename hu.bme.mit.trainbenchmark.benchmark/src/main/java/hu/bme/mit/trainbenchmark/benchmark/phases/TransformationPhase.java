@@ -27,7 +27,6 @@ public class TransformationPhase extends AtomicPhase {
 	public void execute(final DataToken token, final PhaseResult phaseResult) {
 		final TrainBenchmarkDataToken trainToken = (TrainBenchmarkDataToken) token;
 		try {
-			trainToken.getBenchmarkRunner().initializeTransformation();
 			trainToken.getBenchmarkRunner().transform(phaseResult);
 		} catch (final Exception e) {
 			throw new RuntimeException(e);

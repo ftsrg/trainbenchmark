@@ -30,12 +30,12 @@ public class SQLChecker extends Checker<SQLMatch> {
 	protected final Query query;
 	protected final String queryDefinition;
 
-	public SQLChecker(final SQLDriver driver, final BenchmarkConfig bc) throws IOException, SQLException {
+	public SQLChecker(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, SQLException {
 		super();
 		this.driver = driver;
-		this.query = bc.getQuery();
+		this.query = benchmarkConfig.getQuery();
 
-		final String queryPath = bc.getWorkspacePath() + driver.getResourceDirectory() + "queries/" + bc.getQuery() + ".sql";
+		final String queryPath = benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "queries/" + benchmarkConfig.getQuery() + ".sql";
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 

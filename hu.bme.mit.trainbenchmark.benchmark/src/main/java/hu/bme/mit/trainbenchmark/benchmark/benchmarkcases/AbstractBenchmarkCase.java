@@ -26,7 +26,7 @@ public abstract class AbstractBenchmarkCase<TMatch, TElement, TDriver extends Dr
 
 	public abstract TChecker createChecker(TBenchmarkConfig benchmarkConfig, TDriver driver) throws Exception;
 
-	public abstract Transformation<?> createTransformation(TBenchmarkConfig benchmarkConfig, TDriver driver) throws IOException;
+	public abstract Transformation<?, ?> createTransformation(TBenchmarkConfig benchmarkConfig, TDriver driver) throws IOException;
 
 	public abstract Comparator<?> createMatchComparator();
 

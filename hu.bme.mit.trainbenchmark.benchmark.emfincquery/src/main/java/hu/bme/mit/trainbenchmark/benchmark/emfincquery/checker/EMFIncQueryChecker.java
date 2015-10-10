@@ -23,13 +23,13 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class EMFIncQueryChecker<M extends BasePatternMatch> extends Checker<M> {
+public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends Checker<TMatch> {
 
-	protected Collection<M> matches;
-	protected final EMFIncQueryBaseDriver<M> eiqDriver;
+	protected Collection<TMatch> matches;
+	protected final EMFIncQueryBaseDriver<TMatch> eiqDriver;
 	protected final EMFIncQueryBenchmarkConfig eiqbc;
 
-	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<M> eiqDriver) {
+	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<TMatch> eiqDriver) {
 		this.eiqbc = eiqbc;
 		this.eiqDriver = eiqDriver;
 	}
@@ -55,20 +55,20 @@ public abstract class EMFIncQueryChecker<M extends BasePatternMatch> extends Che
 	}
 
 	@Override
-	public Collection<M> check() throws IncQueryException {
+	public Collection<TMatch> check() throws IncQueryException {
 		if (eiqbc.isLocalSearch()) {
 			matches = new ArrayList<>();
-			for (final M match : getMatcher().getAllMatches()) {
+			for (final TMatch match : getMatcher().getAllMatches()) {
 				matches.add(match);
 			}
 		}
 		return matches;
 	}
 
-	public void setMatches(final Collection<M> matches) {
+	public void setMatches(final Collection<TMatch> matches) {
 		this.matches = matches;
 	}
 
-	public abstract IncQueryMatcher<M> getMatcher() throws IncQueryException;
+	public abstract IncQueryMatcher<TMatch> getMatcher() throws IncQueryException;
 
 }

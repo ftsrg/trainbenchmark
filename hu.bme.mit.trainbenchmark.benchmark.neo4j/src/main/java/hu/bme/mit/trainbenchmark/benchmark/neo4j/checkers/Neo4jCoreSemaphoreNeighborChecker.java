@@ -37,8 +37,8 @@ import org.neo4j.graphdb.Transaction;
 
 public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSemaphoreNeighborMatch> {
 
-	public Neo4jCoreSemaphoreNeighborChecker(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jCoreSemaphoreNeighborChecker(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override

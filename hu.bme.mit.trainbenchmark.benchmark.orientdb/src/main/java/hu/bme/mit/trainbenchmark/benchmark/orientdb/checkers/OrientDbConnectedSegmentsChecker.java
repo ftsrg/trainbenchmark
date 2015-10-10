@@ -25,8 +25,8 @@ import com.tinkerpop.pipes.util.structures.Row;
 
 public class OrientDbConnectedSegmentsChecker extends OrientDbChecker<OrientDbConnectedSegmentsMatch> {
 
-	public OrientDbConnectedSegmentsChecker(final OrientDbDriver orientDriver) {
-		super(orientDriver);
+	public OrientDbConnectedSegmentsChecker(final OrientDbDriver driver) {
+		super(driver);
 	}
 
 	@Override

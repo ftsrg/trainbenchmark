@@ -38,8 +38,8 @@ import org.neo4j.graphdb.Transaction;
 
 public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jConnectedSegmentsMatch> {
 
-	public Neo4jCoreConnectedSegmentsChecker(final Neo4jDriver neoDriver) {
-		super(neoDriver);
+	public Neo4jCoreConnectedSegmentsChecker(final Neo4jDriver driver) {
+		super(driver);
 	}
 
 	@Override
