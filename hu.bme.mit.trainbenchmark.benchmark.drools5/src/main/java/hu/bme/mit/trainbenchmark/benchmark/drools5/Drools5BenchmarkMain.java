@@ -19,8 +19,8 @@ public class Drools5BenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Drools5", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new Drools5BenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new Drools5BenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

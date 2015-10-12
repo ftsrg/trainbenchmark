@@ -19,8 +19,8 @@ public class Neo4jBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final Neo4jBenchmarkConfig benchmarkConfig = new Neo4jBenchmarkConfig(args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new Neo4jBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new Neo4jBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

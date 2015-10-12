@@ -19,8 +19,8 @@ public class VirtuosoBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final RDFBenchmarkConfig rdfbc = new RDFBenchmarkConfig(args, "Virtuoso");
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(rdfbc, new VirtuosoBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(rdfbc, new VirtuosoBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

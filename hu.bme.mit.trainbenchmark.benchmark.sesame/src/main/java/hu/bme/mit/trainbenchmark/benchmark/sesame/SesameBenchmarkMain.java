@@ -19,8 +19,8 @@ public class SesameBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig(args, "Sesame");
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new SesameBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new SesameBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

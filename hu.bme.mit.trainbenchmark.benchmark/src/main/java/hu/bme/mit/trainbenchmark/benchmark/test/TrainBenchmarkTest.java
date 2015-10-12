@@ -60,10 +60,10 @@ public abstract class TrainBenchmarkTest {
 		runQuery(bl, ImmutableList.of(expectedResultSize1, expectedResultSize2));
 	}
 
-	private void runQuery(final BenchmarkRunner benchmarkLogic, final List<Integer> expectedResultSizes)
+	private void runQuery(final BenchmarkRunner benchmarkRunner, final List<Integer> expectedResultSizes)
 			throws Exception {
 		JsonSerializer.setResultPath("../results/test/");
-		final BenchmarkResult benchmarkResult = benchmarkLogic.runBenchmark();
+		final BenchmarkResult benchmarkResult = benchmarkRunner.runBenchmark();
 
 		final List<Integer> resultSizes = new ArrayList<>();
 		for (final PhaseResult pr : benchmarkResult.getPhaseResults()) {

@@ -19,7 +19,7 @@ public class EclipseOCLBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Eclipse OCL", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new EclipseOCLBenchmarkCase<>());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new EclipseOCLBenchmarkCase<>());
+		benchmarkRunner.runBenchmark();
 	}
 }

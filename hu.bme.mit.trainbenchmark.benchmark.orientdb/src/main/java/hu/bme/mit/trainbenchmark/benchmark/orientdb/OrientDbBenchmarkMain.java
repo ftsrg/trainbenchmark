@@ -18,8 +18,8 @@ public class OrientDbBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("OrientDB", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new OrientDbBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new OrientDbBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }
