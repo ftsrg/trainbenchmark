@@ -11,9 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -97,20 +95,15 @@ public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQu
 	}
 
 	@Override
-	public List<RailwayElement> collectVertices(final String type) throws Exception {
+	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		final NavigationHelper navigationHelper = EMFScope.extractUnderlyingEMFIndex(engine);
 
 		// register the class (won't register it twice)
 		navigationHelper.registerEClasses(Sets.newHashSet(clazz));
 
-		final Set<EObject> instances = navigationHelper.getAllInstances(clazz);
-		final List<RailwayElement> vertices = new ArrayList<>();
-		for (final EObject instance : instances) {
-			vertices.add((RailwayElement) instance);
-		}
-
-		return vertices;
+		final Set<? extends EObject> instances = navigationHelper.getAllInstances(clazz);
+		return (Collection<RailwayElement>) instances;
 	}
 
 }

@@ -13,11 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class Driver<TMatch> {
+public abstract class Driver<TElement> {
 
 	// these methods should be redefined if required
 
@@ -37,11 +36,11 @@ public abstract class Driver<TMatch> {
 
 	public abstract void read(String modelPathWithoutExtension) throws Exception;
 
-	public abstract List<TMatch> collectVertices(final String type) throws Exception;
+	public abstract Collection<TElement> collectVertices(final String type) throws Exception;
 
 	// comparator
 
-	public abstract Comparator<TMatch> getElementComparator();
+	public abstract Comparator<TElement> getElementComparator();
 
 	// extension
 

@@ -78,8 +78,8 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 	public final void initializeTransformation() throws IOException {
 		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver);
-		transformationLogic = (TransformationLogic<TMatch, TElement, ?>) TransformationLogic.newInstance(benchmarkConfig.getScenario(),
-				getComparator());
+		transformationLogic = (TransformationLogic<TMatch, TElement, ?>) TransformationLogic
+				.newInstance(benchmarkConfig.getScenario(), getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(benchmarkConfig, driver, random);
 		}

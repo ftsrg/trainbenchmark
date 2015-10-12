@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.emf;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -63,8 +64,8 @@ public class EMFDriver extends Driver<RailwayElement> {
 	// read
 
 	@Override
-	public List<RailwayElement> collectVertices(final String type) throws Exception {
-		final List<RailwayElement> vertices = new ArrayList<>();
+	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
+		final Collection<RailwayElement> vertices = new ArrayList<>();
 
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 
