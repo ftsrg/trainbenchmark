@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
@@ -57,10 +56,7 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 	@Override
 	public Collection<TMatch> check() throws IncQueryException {
 		if (eiqbc.isLocalSearch()) {
-			matches = new ArrayList<>();
-			for (final TMatch match : getMatcher().getAllMatches()) {
-				matches.add(match);
-			}
+			matches = getMatcher().getAllMatches();
 		}
 		return matches;
 	}
