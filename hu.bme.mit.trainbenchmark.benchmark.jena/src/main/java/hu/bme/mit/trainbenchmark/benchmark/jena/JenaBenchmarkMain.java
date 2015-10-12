@@ -19,8 +19,8 @@ public class JenaBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig(args, "Jena");
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new JenaBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new JenaBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

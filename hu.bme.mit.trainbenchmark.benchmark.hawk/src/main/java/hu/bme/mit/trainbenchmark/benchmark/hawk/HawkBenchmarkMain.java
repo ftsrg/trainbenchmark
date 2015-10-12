@@ -19,8 +19,8 @@ public class HawkBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new HawkBenchmarkConfig(args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new HawkBenchmarkCase<>());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new HawkBenchmarkCase<>());
+		benchmarkRunner.runBenchmark();
 	}
 
 }
