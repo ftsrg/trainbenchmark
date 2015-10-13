@@ -12,18 +12,19 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNeighborMatch> {
 
@@ -38,10 +39,12 @@ public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNe
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			if (eObject instanceof Route) {
-				final Route route1 = (Route) eObject;
-				checkRoute(route1);
+			if (!RailwayPackage.eINSTANCE.getRoute().isInstance(eObject)) {
+				continue;
 			}
+
+			final Route route1 = (Route) eObject;
+			checkRoute(route1);
 		}
 
 		return matches;
@@ -62,12 +65,12 @@ public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNe
 					}
 
 					// reverse navigation on the (sensor2)<-[definedBy]-(route2) edge
-					final EObject container = sensor2.eContainer();
-					if (!(container instanceof Route)) {
+					final EObject route2object = sensor2.eContainer();
+					if (!RailwayPackage.eINSTANCE.getRoute().isInstance(route2object)) {
 						continue;
 					}
 
-					final Route route2 = (Route) container;
+					final Route route2 = (Route) route2object;
 
 					// route1 != route2
 					if (route1.equals(route2)) {
