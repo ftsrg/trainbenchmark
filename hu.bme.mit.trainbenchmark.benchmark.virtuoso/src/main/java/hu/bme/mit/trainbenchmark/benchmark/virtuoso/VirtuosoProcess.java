@@ -16,7 +16,6 @@ public class VirtuosoProcess {
 	public static void startServer() throws IOException, InterruptedException {
 		final String commandStart = SCRIPT_DIRECTORY + "start-virtuoso.sh";
 		Util.executeCommand(commandStart, "Failed to start Virtuoso process");
-
 	}
 
 	public static void stopServer() throws IOException, InterruptedException {
