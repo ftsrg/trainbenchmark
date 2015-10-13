@@ -18,7 +18,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
@@ -66,8 +65,8 @@ public abstract class SQLDriver<TBenchmarkConfig extends BenchmarkConfig> extend
 	// read
 
 	@Override
-	public List<Long> collectVertices(final String type) throws SQLException {
-		final List<Long> results = new ArrayList<>();
+	public Collection<Long> collectVertices(final String type) throws SQLException {
+		final Collection<Long> results = new ArrayList<>();
 
 		final String query = String.format("SELECT * FROM `%s`;", type);
 		try (ResultSet rs = connection.createStatement().executeQuery(query)) {
