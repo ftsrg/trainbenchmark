@@ -14,31 +14,20 @@ package hu.bme.mit.trainbenchmark.sql.process;
 
 import java.io.IOException;
 
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
+import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 public class MySQLProcess {
 
-	public static void startServer() throws IOException, InterruptedException {
-		final String commandStart = "../hu.bme.mit.trainbenchmark.sql/scripts/start-mysql.sh";
-		final CommandLine commandLine = new CommandLine(commandStart);
-		final DefaultExecutor executor = new DefaultExecutor();
-		final int exitValue = executor.execute(commandLine);
+	private static final String SCRIPT_DIRECTORY = "../hu.bme.mit.trainbenchmark.sql/scripts/";
 
-		if (exitValue != 0) {
-			throw new IOException("Failed to start MySQL process");
-		}
+	public static void startServer() throws IOException, InterruptedException {
+		final String commandStart = SCRIPT_DIRECTORY + "start-mysql.sh";
+		Util.executeCommand(commandStart, "Failed to start MySQL process");
 	}
 
 	public static void stopServer() throws IOException, InterruptedException {
-		final String commandStart = "../hu.bme.mit.trainbenchmark.sql/scripts/stop-mysql.sh";
-		final CommandLine commandLine = new CommandLine(commandStart);
-		final DefaultExecutor executor = new DefaultExecutor();
-		final int exitValue = executor.execute(commandLine);
-
-		if (exitValue != 0) {
-			throw new IOException("Failed to start MySQL process");
-		}
+		final String commandStart = SCRIPT_DIRECTORY + "stop-mysql.sh";
+		Util.executeCommand(commandStart, "Failed to stop MySQL process");
 	}
 
 }

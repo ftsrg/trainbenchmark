@@ -19,6 +19,7 @@ import org.openrdf.rio.RDFParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoProcess;
 import virtuoso.sesame2.driver.VirtuosoRepository;
 
 public class VirtuosoDriver extends SesameDriver<RDFBenchmarkConfig> {
@@ -33,10 +34,25 @@ public class VirtuosoDriver extends SesameDriver<RDFBenchmarkConfig> {
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension)
-			throws RepositoryException, RDFParseException, IOException {
-		repository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT,
-				VIRTUOSO_USERNAME, VIRTUOSO_PASSWORD);
+	public void initialize() throws Exception {
+		super.initialize();
+
+		VirtuosoProcess.stopServer();
+		VirtuosoProcess.clean();
+		VirtuosoProcess.startServer();
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		super.destroy();
+
+		VirtuosoProcess.stopServer();
+	}
+
+	@Override
+	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException {
+		repository = new VirtuosoRepository("jdbc:virtuoso://" + VIRTUOSO_INSTANCE + ":" + VIRTUOSO_PORT, VIRTUOSO_USERNAME,
+				VIRTUOSO_PASSWORD);
 		load(modelPathWithoutExtension);
 	}
 
