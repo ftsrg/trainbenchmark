@@ -50,13 +50,13 @@ public class OrientDbDriver extends Driver<Vertex, BenchmarkConfig> {
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-		
+
 		// delete old directory
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
 		}
 	}
-	
+
 	@Override
 	public void beginTransaction() {
 		graphDb.begin();
@@ -68,7 +68,8 @@ public class OrientDbDriver extends Driver<Vertex, BenchmarkConfig> {
 			try {
 				graphDb.commit();
 				break;
-			} catch (final OConcurrentModificationException e) {}
+			} catch (final OConcurrentModificationException e) {
+			}
 		}
 	}
 
@@ -98,8 +99,7 @@ public class OrientDbDriver extends Driver<Vertex, BenchmarkConfig> {
 
 	@Override
 	public Collection<?> runQuery(final Query query, final String queryDefinition) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Queries not supported");
 	}
 
 	@Override
