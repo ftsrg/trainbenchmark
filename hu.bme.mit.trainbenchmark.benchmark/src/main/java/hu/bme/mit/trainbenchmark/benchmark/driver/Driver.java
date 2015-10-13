@@ -22,6 +22,7 @@ import hu.bme.mit.trainbenchmark.constants.Query;
  * @author szarnyasg
  *
  * @param <TElement> the type of the individual model elements
+ * @param <TBenchmarkConfig> the type of the benchmark configuration used by the benchmark
  */
 public abstract class Driver<TElement, TBenchmarkConfig> {
 

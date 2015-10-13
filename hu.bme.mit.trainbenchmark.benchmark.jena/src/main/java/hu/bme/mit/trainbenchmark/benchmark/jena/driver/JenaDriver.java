@@ -94,9 +94,9 @@ public class JenaDriver extends RDFDriver<Resource, RDFBenchmarkConfig> {
 	// read
 
 	@Override
-	public List<Resource> collectVertices(final String type) throws IOException {
+	public Collection<Resource> collectVertices(final String type) throws IOException {
 		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type, model.getResource(BASE_PREFIX + type));
-		final List<Resource> vertices = vertexStatements.toList();
+		final Collection<Resource> vertices = vertexStatements.toList();
 		return vertices;
 	}
 

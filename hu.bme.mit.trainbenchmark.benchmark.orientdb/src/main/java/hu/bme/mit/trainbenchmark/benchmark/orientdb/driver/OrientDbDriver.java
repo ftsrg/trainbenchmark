@@ -39,7 +39,7 @@ public class OrientDbDriver extends Driver<Vertex, BenchmarkConfig> {
 	protected OrientGraph graphDb;
 	protected String dbPath;
 	protected String benchmarkDir;
-	protected Comparator<Vertex> vertexComparator = new VertexComparator();
+	protected final Comparator<Vertex> vertexComparator = new VertexComparator();
 
 	public OrientDbDriver(final BenchmarkConfig benchmarkConfig) throws IOException {
 		super(benchmarkConfig);
@@ -138,10 +138,10 @@ public class OrientDbDriver extends Driver<Vertex, BenchmarkConfig> {
 	// read
 
 	@Override
-	public List<Vertex> collectVertices(final String type) {
-		final Iterable<Vertex> vertices = graphDb.getVertices("labels", typeTranslator(type));
-		final List<Vertex> list = Lists.newArrayList(vertices);
-		return list;
+	public Collection<Vertex> collectVertices(final String type) {
+		final Iterable<Vertex> iterable = graphDb.getVertices("labels", typeTranslator(type));
+		final Collection<Vertex> vertices = Lists.newArrayList(iterable);
+		return vertices;
 	}
 
 	// utility

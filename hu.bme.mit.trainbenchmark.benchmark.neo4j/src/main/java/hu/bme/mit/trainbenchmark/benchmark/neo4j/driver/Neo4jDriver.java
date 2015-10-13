@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
@@ -37,14 +36,12 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
-import org.neo4j.tooling.GlobalGraphOperations;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -126,14 +123,12 @@ public class Neo4jDriver extends Driver<Node, Neo4jBenchmarkConfig> {
 	// read
 
 	@Override
-	public List<Node> collectVertices(final String type) {
-		final ResourceIterable<Node> nodes = GlobalGraphOperations.at(graphDb)
-				.getAllNodesWithLabel(DynamicLabel.label(type));
+	public Collection<Node> collectVertices(final String type) {
+		final ResourceIterator<Node> iterator = graphDb.findNodes(DynamicLabel.label(type));
 
-		final ResourceIterator<Node> iterator = nodes.iterator();
 		@SuppressWarnings("unchecked")
-		final List<Node> list = IteratorUtils.toList(iterator);
-		return list;
+		final Collection<Node> vertices = IteratorUtils.toList(iterator);
+		return vertices;
 	}
 
 	// utility

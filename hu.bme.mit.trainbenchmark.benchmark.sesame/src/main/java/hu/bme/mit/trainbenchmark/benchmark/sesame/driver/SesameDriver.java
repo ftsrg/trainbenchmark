@@ -124,9 +124,9 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 	// read
 
 	@Override
-	public List<URI> collectVertices(final String type) throws RepositoryException {
+	public Collection<URI> collectVertices(final String type) throws RepositoryException {
 		final URI typeURI = vf.createURI(BASE_PREFIX + type);
-		final List<URI> vertices = new ArrayList<>();
+		final Collection<URI> vertices = new ArrayList<>();
 
 		final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
 		while (statements.hasNext()) {
