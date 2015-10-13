@@ -27,16 +27,16 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 public class IQDCoreBenchmarkCase extends
 		AbstractBenchmarkCaseRunner<IQDCoreMatch, Long> {
 	protected WildcardInput iqdInput;
-	protected RDFBenchmarkConfig rdfbc;
+	protected RDFBenchmarkConfig benchmarkConfig;
 
 	@Override
 	protected void init() throws IOException {
-		this.rdfbc = (RDFBenchmarkConfig) bc;
+		this.benchmarkConfig = (RDFBenchmarkConfig) bc;
 		int messageSize = 16;
 		iqdInput = new WildcardInput(messageSize);
-		IQDCoreChecker iqdCoreChecker= new IQDCoreChecker(iqdInput, rdfbc);
+		IQDCoreChecker iqdCoreChecker= new IQDCoreChecker(iqdInput, benchmarkConfig);
 		checker = iqdCoreChecker;
-		driver = new IQDCoreReader(rdfbc, iqdInput, iqdCoreChecker);
+		driver = new IQDCoreReader(benchmarkConfig, iqdInput, iqdCoreChecker);
 		if (bc.getScenario().hasTranformation()) {
 			transformation = IQDCoreTransformation.newInstance(iqdInput,
 					bc.getQuery(), bc.getScenario());

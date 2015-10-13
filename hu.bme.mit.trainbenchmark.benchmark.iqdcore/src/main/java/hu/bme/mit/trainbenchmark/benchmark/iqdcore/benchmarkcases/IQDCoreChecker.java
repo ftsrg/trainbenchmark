@@ -35,10 +35,10 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 	protected WildcardInput iqdInput;
 	protected TrainbenchmarkQuery checker;
 
-	public IQDCoreChecker(final WildcardInput iqdDriver, final RDFBenchmarkConfig rdfbc) throws IOException {
-		super(rdfbc);
+	public IQDCoreChecker(final WildcardInput iqdDriver, final RDFBenchmarkConfig benchmarkConfig) throws IOException {
+		super(benchmarkConfig);
 		this.iqdInput = iqdDriver;
-		switch (rdfbc.getQuery()) {
+		switch (benchmarkConfig.getQuery()) {
 		case CONNECTEDSEGMENTS:
 			this.checker = new ConnectedSegments();
 			break;

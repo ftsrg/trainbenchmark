@@ -26,8 +26,8 @@ public abstract class HawkTransformation<TObject> extends Transformation<TObject
 	}
 
 	public static Transformation<?, ?> newInstance(final HawkDriver<?> driver, final Query query,
-			final Scenario scenario, HawkBenchmarkConfig hbc) {
-		return new HawkPreparedTransformation(driver, query, scenario, hbc);
+			final Scenario scenario, HawkBenchmarkConfig benchmarkConfig) {
+		return new HawkPreparedTransformation(driver, query, scenario, benchmarkConfig);
 		
 		// switch (scenario) {
 		// case REPAIR:

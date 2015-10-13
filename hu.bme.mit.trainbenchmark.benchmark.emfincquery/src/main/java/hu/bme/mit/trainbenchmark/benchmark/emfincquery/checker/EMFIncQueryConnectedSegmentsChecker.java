@@ -21,14 +21,14 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 
 public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryChecker<ConnectedSegmentsMatch> {
 
-	public EMFIncQueryConnectedSegmentsChecker(final EMFIncQueryBenchmarkConfig eiqbc,
-			final EMFIncQueryBaseDriver<ConnectedSegmentsMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
-		super(eiqbc, eiqDriver);
+	public EMFIncQueryConnectedSegmentsChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+			final EMFIncQueryBaseDriver<ConnectedSegmentsMatch, EMFIncQueryBenchmarkConfig> driver) {
+		super(benchmarkConfig, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<ConnectedSegmentsMatch> getMatcher() throws IncQueryException {
-		return ConnectedSegmentsMatcher.on(eiqDriver.getEngine());
+		return ConnectedSegmentsMatcher.on(driver.getEngine());
 	}
 
 }

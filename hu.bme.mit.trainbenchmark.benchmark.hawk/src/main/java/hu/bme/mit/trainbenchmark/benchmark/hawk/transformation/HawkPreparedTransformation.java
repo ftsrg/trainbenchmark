@@ -15,10 +15,10 @@ public class HawkPreparedTransformation extends HawkTransformation<Object> {
 	private final String invalidModelPath;
 	private final String modelPath;
 
-	public HawkPreparedTransformation(final HawkDriver<?> driver, final Query query, final Scenario scenario, final HawkBenchmarkConfig hbc) {
+	public HawkPreparedTransformation(final HawkDriver<?> driver, final Query query, final Scenario scenario, final HawkBenchmarkConfig benchmarkConfig) {
 		super(driver);
-		invalidModelPath = hbc.getWorkspacePath() + "invalid-models/" + hbc.getModelFileNameWithoutExtension() + "-" + query.toString().toLowerCase() + driver.getPostfix();
-		modelPath = driver.getHawkRepositoryPath() + hbc.getModelFileNameWithoutExtension() + driver.getPostfix();
+		invalidModelPath = benchmarkConfig.getWorkspacePath() + "invalid-models/" + hbc.getModelFileNameWithoutExtension() + "-" + query.toString().toLowerCase() + driver.getPostfix();
+		modelPath = driver.getHawkRepositoryPath() + benchmarkConfig.getModelFileNameWithoutExtension() + driver.getPostfix();
 	}
 
 	@Override

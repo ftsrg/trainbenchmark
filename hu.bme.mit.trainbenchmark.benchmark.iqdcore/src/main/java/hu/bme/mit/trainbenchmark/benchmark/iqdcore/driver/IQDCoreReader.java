@@ -18,7 +18,7 @@ public class IQDCoreReader extends Driver<Long> {
 	private final WildcardInput input;
 	private final IQDCoreChecker query;
 
-	public IQDCoreReader(final RDFBenchmarkConfig rdfbc, final WildcardInput input, final IQDCoreChecker query) {
+	public IQDCoreReader(final RDFBenchmarkConfig benchmarkConfig, final WildcardInput input, final IQDCoreChecker query) {
 		super();
 		this.input = input;
 		this.query = query;
