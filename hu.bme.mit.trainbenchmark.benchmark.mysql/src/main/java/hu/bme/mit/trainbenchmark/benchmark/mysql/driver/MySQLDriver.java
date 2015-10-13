@@ -39,6 +39,7 @@ public class MySQLDriver extends SQLDriver<BenchmarkConfig> {
 		if (!modelFile.exists()) {
 			throw new IOException("Model does not exist: " + modelPath);
 		}
+
 		final String[] command = { "/bin/bash", "-c", "mysql -u " + USER + " < " + modelPath };
 
 		final Process pr = rt.exec(command);
@@ -51,6 +52,8 @@ public class MySQLDriver extends SQLDriver<BenchmarkConfig> {
 
 	@Override
 	public void initialize() throws Exception {
+		MySQLProcess.stopServer();
+		MySQLProcess.clean();
 		MySQLProcess.startServer();
 	}
 
