@@ -41,7 +41,7 @@
 
 	<dependencies>
 
-		<!-- TrainBenchmark -->
+		<!-- Train Benchmark -->
 
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
@@ -106,7 +106,6 @@
 			<artifactId>slf4j-nop</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-
 
 	</dependencies>
 </project>
