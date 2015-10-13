@@ -21,6 +21,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.thrift.TException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -43,6 +44,7 @@ import uk.ac.york.mondo.integration.api.Credentials;
 import uk.ac.york.mondo.integration.api.Hawk.Client;
 import uk.ac.york.mondo.integration.api.HawkInstance;
 import uk.ac.york.mondo.integration.api.HawkInstanceNotFound;
+import uk.ac.york.mondo.integration.api.HawkInstanceNotRunning;
 import uk.ac.york.mondo.integration.api.Repository;
 import uk.ac.york.mondo.integration.api.utils.APIUtils;
 import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
@@ -147,7 +149,6 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		// copy the model to the hawk repository to allow Hawk to load the model
 		copyModelToHawk(hawkRepositoryPath, modelPath);
 
-		client.syncInstance(HAWK_INSTANCE);
 		waitForSync();
 
 		if (benchmarkConfig.isUseHawkScope()) {
@@ -185,7 +186,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		}
 	}
 
-	public void waitForSync() throws InterruptedException, ExecutionException {
+	public void waitForSync() throws InterruptedException, ExecutionException, HawkInstanceNotFound, HawkInstanceNotRunning, TException {
 		final CompletableFuture<Boolean> syncEnd = new CompletableFuture<Boolean>();
 		final Runnable runnable = new Runnable() {
 			@Override
@@ -194,6 +195,8 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 			}
 		};
 		hawkResource.addSyncEndListener(runnable);
+		client.syncInstance(HAWK_INSTANCE);
+
 		syncEnd.get();
 		hawkResource.removeSyncEndListener(runnable);
 	}
@@ -201,7 +204,6 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 	@Override
 	public void persist() throws IOException {
 		try {
-			client.syncInstance(HAWK_INSTANCE);
 			waitForSync();
 		} catch (final Exception e) {
 			throw new IOException(e);
@@ -214,4 +216,8 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		resource.unload();
 	}
 
+	public String getHawkRepositoryPath() {
+		return hawkRepositoryPath;
+	}
+	
 }
