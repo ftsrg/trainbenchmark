@@ -12,19 +12,20 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.Switch;
-import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch> {
 
@@ -40,11 +41,11 @@ public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch>
 			final EObject eObject = contents.next();
 
 			// (Sensor)
-			if (eObject instanceof Sensor) {
+			if (RailwayPackage.eINSTANCE.getSensor().isInstance(eObject)) {
 				final Sensor sensor = (Sensor) eObject;
 				// (Sensor)<-[sensor]-(Switch)
 				for (final TrackElement te : sensor.getElements()) {
-					if (te instanceof Switch) {
+					if (RailwayPackage.eINSTANCE.getSwitch().isInstance(te)) {
 						final Switch sw = (Switch) te;
 						// (Switch)<-[switch]-(SwitchPosition)
 						for (final SwitchPosition swP : sw.getPositions()) {

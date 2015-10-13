@@ -12,19 +12,20 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
-import hu.bme.mit.trainbenchmark.railway.Signal;
-import hu.bme.mit.trainbenchmark.railway.Switch;
-import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Signal;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 public class EMFAPISwitchSetChecker extends EMFAPIChecker<EMFSwitchSetMatch> {
 
@@ -40,23 +41,25 @@ public class EMFAPISwitchSetChecker extends EMFAPIChecker<EMFSwitchSetMatch> {
 			final EObject eObject = contents.next();
 
 			// (Route)
-			if (eObject instanceof Route) {
-				final Route route = (Route) eObject;
-				// (Route)-[entry]->(semaphore)
-				final Semaphore semaphore = route.getEntry();
-				if (semaphore == null) {
-					continue;
-				}
-				// semaphore.signal == GO
-				if (semaphore.getSignal() == Signal.GO) {
-					// (Route)-[follows]->(SwitchPosition)
-					for (final SwitchPosition switchPosition : route.getFollows()) {
-						// (SwitchPosition)-[switch]->(Switch)
-						final Switch sw = switchPosition.getSwitch();
-						// sw.currentPosition != swP.position
-						if (sw.getCurrentPosition() != switchPosition.getPosition()) {
-							matches.add(new EMFSwitchSetMatch(semaphore, route, switchPosition, sw));
-						}
+			if (!RailwayPackage.eINSTANCE.getRoute().isInstance(eObject)) {
+				continue;
+			}
+
+			final Route route = (Route) eObject;
+			// (Route)-[entry]->(semaphore)
+			final Semaphore semaphore = route.getEntry();
+			if (semaphore == null) {
+				continue;
+			}
+			// semaphore.signal == GO
+			if (semaphore.getSignal() == Signal.GO) {
+				// (Route)-[follows]->(SwitchPosition)
+				for (final SwitchPosition switchPosition : route.getFollows()) {
+					// (SwitchPosition)-[switch]->(Switch)
+					final Switch sw = switchPosition.getSwitch();
+					// sw.currentPosition != swP.position
+					if (sw.getCurrentPosition() != switchPosition.getPosition()) {
+						matches.add(new EMFSwitchSetMatch(semaphore, route, switchPosition, sw));
 					}
 				}
 			}
