@@ -12,6 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.util;
 
+import java.io.IOException;
+
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class Util {
@@ -25,7 +31,19 @@ public class Util {
 		case PROPORTIONAL:
 			return resultSize / transformationConstant;
 		default:
-			throw new UnsupportedOperationException("Transformation strategy " + benchmarkConfig.getTransformationStrategy() + " not supported.");
+			throw new UnsupportedOperationException(
+					"Transformation strategy " + benchmarkConfig.getTransformationStrategy() + " not supported.");
+		}
+	}
+
+	public static int executeCommand(final String commandStart, final String exceptionMessage) throws ExecuteException, IOException {
+		final CommandLine commandLine = new CommandLine(commandStart);
+		final DefaultExecutor executor = new DefaultExecutor();
+		try {
+			final int exitValue = executor.execute(commandLine);
+			return exitValue;
+		} catch (final ExecuteException e) {
+			throw new ExecuteException(exceptionMessage, e.getExitValue());
 		}
 	}
 

@@ -92,7 +92,7 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 	public Collection<SesameMatch> runQuery(final Query query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final Collection<SesameMatch> results = new ArrayList<>();
-		
+
 		final TupleQuery tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
 		final TupleQueryResult queryResults = tupleQuery.evaluate();
 		try {
@@ -114,7 +114,7 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 	}
 
 	@Override
-	public void destroy() throws RepositoryException {
+	public void destroy() throws Exception {
 		if (connection != null) {
 			connection.clear();
 			connection.close();
