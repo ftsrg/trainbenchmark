@@ -11,11 +11,13 @@
 	<artifactId>hu.bme.mit.trainbenchmark.graph</artifactId>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.neo4j.shell</groupId>
 			<artifactId>import-tools</artifactId>
 			<version>2.2</version>
-		</dependency>		
+		</dependency>
+		
 	</dependencies>
 
 </project>

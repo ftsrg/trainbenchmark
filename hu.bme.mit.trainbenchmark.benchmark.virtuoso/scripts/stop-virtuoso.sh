@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo service mysql stop
+sudo service virtuoso-opensource-6.1 stop

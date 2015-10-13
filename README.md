@@ -53,7 +53,7 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
 
 Make sure that you have the following environments.
 
-* [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
+* [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 * Python 3
 
