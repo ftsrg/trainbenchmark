@@ -45,7 +45,6 @@ scenarios:
 
 # Specify the name of the tools to run.
 tools:
-#- allegro
 - blazegraph
 - drools5
 - drools6
