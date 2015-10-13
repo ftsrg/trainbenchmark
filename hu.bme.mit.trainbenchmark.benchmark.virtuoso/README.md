@@ -6,4 +6,4 @@ Install Virtuoso:
 sudo apt-get install virtuoso-server
 ```
 
-Subsequently, adjust both the username and password of root to `dba`.
+Set the password of the administrator to `dba`.

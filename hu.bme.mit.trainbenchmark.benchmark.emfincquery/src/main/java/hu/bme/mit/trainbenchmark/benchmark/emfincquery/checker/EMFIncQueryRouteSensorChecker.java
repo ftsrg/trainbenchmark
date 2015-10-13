@@ -21,7 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 
 public class EMFIncQueryRouteSensorChecker extends EMFIncQueryChecker<RouteSensorMatch> {
 
-	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<RouteSensorMatch> eiqDriver) {
+	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBenchmarkConfig eiqbc,
+			final EMFIncQueryBaseDriver<RouteSensorMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
 		super(eiqbc, eiqDriver);
 	}
 

@@ -19,10 +19,15 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-public class MySQLDriver extends SQLDriver {
+public class MySQLDriver extends SQLDriver<BenchmarkConfig> {
+
+	public MySQLDriver(final BenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
+	}
 
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true";
 

@@ -49,7 +49,7 @@ import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
 import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceFactoryImpl;
 import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceImpl;
 
-public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch> {
+public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch, HawkBenchmarkConfig> {
 
 	private static final String ECORE_METAMODEL = "/hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
 	private static final String HAWK_REPOSITORY = "/models/hawkrepository/";
@@ -58,20 +58,19 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 	private static final String HAWK_ADDRESS = "localhost:8080/thrift/hawk/tuple";
 	private static final String HAWK_URL = "http://" + HAWK_ADDRESS;
 
-	protected HawkBenchmarkConfig hbc;
 	protected String hawkRepositoryPath;
 	private Client client;
 	private HawkResourceImpl hawkResource;
 
-	public HawkDriver(final HawkBenchmarkConfig hbc) {
-		this.hbc = hbc;
+	public HawkDriver(final HawkBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
 	}
 
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
 
-		final File workspaceRelativePath = new File(hbc.getWorkspacePath());
+		final File workspaceRelativePath = new File(benchmarkConfig.getWorkspacePath());
 		final String workspacePath = workspaceRelativePath.getAbsolutePath();
 
 		hawkRepositoryPath = workspacePath + HAWK_REPOSITORY;
@@ -123,7 +122,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 
 		String hawkURI = "hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE
 				+ "&subscribe=true&durability=temporary&clientID=hu.trainbenchmark" + System.nanoTime();
-		if (hbc.isUseHawkScope()) {
+		if (benchmarkConfig.isUseHawkScope()) {
 			hawkURI += "&loadingMode=lazy_children";
 		}
 		
@@ -140,7 +139,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
-		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
+		final String modelPath = benchmarkConfig.getModelPathWithoutExtension() + getPostfix();
 
 		hawkResource = (HawkResourceImpl) resource;
 		
@@ -151,7 +150,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		client.syncInstance(HAWK_INSTANCE);
 		waitForSync();
 
-		if (hbc.isUseHawkScope()) {
+		if (benchmarkConfig.isUseHawkScope()) {
 			final HawkScope hawkScope = new HawkScope(hawkResource.getResourceSet(), client);
 			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(hawkScope));
 		} else {
@@ -177,7 +176,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 
 		final ResourceSet resourceSet = resource.getResourceSet();
 		for (final Resource r : resourceSet.getResources()) {
-			for (EObject eObject : r.getContents()) {
+			for (final EObject eObject : r.getContents()) {
 				if (eObject instanceof RailwayContainer) {
 					container = (RailwayContainer) eObject;
 					break;
@@ -187,8 +186,8 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 	}
 
 	public void waitForSync() throws InterruptedException, ExecutionException {
-		CompletableFuture<Boolean> syncEnd = new CompletableFuture<Boolean>();
-		Runnable runnable = new Runnable() {
+		final CompletableFuture<Boolean> syncEnd = new CompletableFuture<Boolean>();
+		final Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
 				syncEnd.complete(true);
@@ -199,11 +198,12 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		hawkResource.removeSyncEndListener(runnable);
 	}
 
+	@Override
 	public void persist() throws IOException {
 		try {
 			client.syncInstance(HAWK_INSTANCE);
 			waitForSync();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new IOException(e);
 		}
 	}

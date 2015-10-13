@@ -23,20 +23,23 @@ import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
-public class EMFAPIBenchmarkCase extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig, Checker<EMFMatch>> {
+public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
+		extends EMFBenchmarkCase<EMFDriver<TBenchmarkConfig>, TBenchmarkConfig, Checker<EMFMatch>> {
 
 	@Override
 	public EMFDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new EMFDriver();
+		return new EMFDriver(benchmarkConfig);
 	}
 
 	@Override
-	public Checker<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver) throws Exception {
+	public Checker<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver)
+			throws Exception {
 		return (Checker<EMFMatch>) EMFAPIChecker.newInstance(driver, benchmarkConfig.getQuery());
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver) throws IOException {
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver)
+			throws IOException {
 		return EMFTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 

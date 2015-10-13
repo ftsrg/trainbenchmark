@@ -27,13 +27,14 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class TransformationLogic<TMatch, TElement, TTransformationObject> {
+// TODO Javadoc
+public abstract class TransformationLogic<TMatch, TElement, TTransformationObject, TBenchmarkConfig extends BenchmarkConfig> {
 
-	// M: matches
-	// T: elements in the match set
-	// O: transformation object
+	// TMatch: matches
+	// TElement: elements in the match set
+	// TTransformationObject: transformation object
 
-	public static TransformationLogic<?, ?, ?> newInstance(final Scenario scenario, final Comparator<?> comparator) {
+	public static TransformationLogic<?, ?, ?, ?> newInstance(final Scenario scenario, final Comparator<?> comparator) {
 		switch (scenario) {
 		case REPAIR:
 			return new RepairTransformationLogic<>(comparator);
@@ -49,9 +50,9 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		this.comparator = comparator;
 	}
 
-	protected BenchmarkConfig benchmarkConfig;
+	protected TBenchmarkConfig benchmarkConfig;
 	protected BenchmarkResult benchmarkResult;
-	protected Driver<TElement> driver;
+	protected Driver<TElement, TBenchmarkConfig> driver;
 	protected Random random;
 
 	protected Collection<TTransformationObject> candidatesToModify;
@@ -62,9 +63,9 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	protected long start;
 	protected long startEdit;
 	protected long end;
-	protected Transformation<TTransformationObject, Driver<TElement>> transformation;
+	protected Transformation<TTransformationObject, Driver<TElement, TBenchmarkConfig>> transformation;
 
-	public void initialize(final BenchmarkConfig benchmarkConfig, final Driver<TElement> driver, final Random random) {
+	public void initialize(final TBenchmarkConfig benchmarkConfig, final Driver<TElement, TBenchmarkConfig> driver, final Random random) {
 		this.benchmarkConfig = benchmarkConfig;
 		this.driver = driver;
 		this.random = random;
@@ -111,7 +112,7 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	}
 
 	public void setTransformation(final Transformation<?, ?> transformation) {
-		this.transformation = (Transformation<TTransformationObject, Driver<TElement>>) transformation;
+		this.transformation = (Transformation<TTransformationObject, Driver<TElement, TBenchmarkConfig>>) transformation;
 	}
 
 }

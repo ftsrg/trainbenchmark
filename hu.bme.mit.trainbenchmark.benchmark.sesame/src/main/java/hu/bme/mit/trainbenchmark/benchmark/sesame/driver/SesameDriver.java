@@ -48,17 +48,16 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
-public class SesameDriver extends RDFDriver<URI> {
+public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends RDFDriver<URI, TBenchmarkConfig> {
 
 	protected RepositoryConnection connection;
 	protected Repository repository;
 	protected ValueFactory vf;
-	protected TupleQuery tupleQuery;
 
-	protected Comparator<URI> elementComparator = new URIComparator();
+	protected final Comparator<URI> elementComparator = new URIComparator();
 
-	public SesameDriver(final RDFBenchmarkConfig rdfbc) {
-		super(rdfbc);
+	public SesameDriver(final TBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
 	}
 
 	@Override
@@ -73,7 +72,7 @@ public class SesameDriver extends RDFDriver<URI> {
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException, OpenRDFException {
-		if (rdfbc.isInferencing()) {
+		if (benchmarkConfig.isInferencing()) {
 			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {
 			repository = new SailRepository(new MemoryStore());
@@ -90,13 +89,12 @@ public class SesameDriver extends RDFDriver<URI> {
 	}
 
 	@Override
-	public List<SesameMatch> runQuery(final Query query, final String queryDefinition)
+	public Collection<SesameMatch> runQuery(final Query query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-		final List<SesameMatch> results = new ArrayList<>();
-		TupleQueryResult queryResults;
-
-		tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
-		queryResults = tupleQuery.evaluate();
+		final Collection<SesameMatch> results = new ArrayList<>();
+		
+		final TupleQuery tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryDefinition);
+		final TupleQueryResult queryResults = tupleQuery.evaluate();
 		try {
 			while (queryResults.hasNext()) {
 				final BindingSet bs = queryResults.next();

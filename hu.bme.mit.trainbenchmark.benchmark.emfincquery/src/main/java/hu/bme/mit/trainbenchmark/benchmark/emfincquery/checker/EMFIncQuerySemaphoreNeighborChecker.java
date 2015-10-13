@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
 
 	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryBenchmarkConfig eiqbc,
-			final EMFIncQueryBaseDriver<SemaphoreNeighborMatch> eiqDriver) {
+			final EMFIncQueryBaseDriver<SemaphoreNeighborMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
 		super(eiqbc, eiqDriver);
 	}
 

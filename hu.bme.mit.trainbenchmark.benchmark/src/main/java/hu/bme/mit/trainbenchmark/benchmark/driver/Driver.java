@@ -16,8 +16,21 @@ import java.util.Comparator;
 
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class Driver<TElement> {
+/**
+ * Superclass for the drivers used in the benchmark.
+ *  
+ * @author szarnyasg
+ *
+ * @param <TElement> the type of the individual model elements
+ */
+public abstract class Driver<TElement, TBenchmarkConfig> {
 
+	protected final TBenchmarkConfig benchmarkConfig;
+	
+	public Driver(final TBenchmarkConfig benchmarkConfig) {
+		this.benchmarkConfig = benchmarkConfig;
+	}
+	
 	// these methods should be redefined if required
 
 	public void beginTransaction() throws Exception {

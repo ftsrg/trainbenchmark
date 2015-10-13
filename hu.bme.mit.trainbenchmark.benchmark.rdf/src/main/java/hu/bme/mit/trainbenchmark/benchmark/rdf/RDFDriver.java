@@ -20,14 +20,13 @@ import java.io.IOException;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
-public abstract class RDFDriver<TMatch> extends Driver<TMatch> {
+public abstract class RDFDriver<TElement, TBenchmarkConfig extends RDFBenchmarkConfig>
+		extends Driver<TElement, TBenchmarkConfig> {
 
 	protected Long newVertexId = null;
-	protected RDFBenchmarkConfig rdfbc;
 
-	public RDFDriver(final RDFBenchmarkConfig rdfbc) {
-		super();
-		this.rdfbc = rdfbc;
+	public RDFDriver(final TBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
 	}
 
 	protected Long determineNewVertexId() throws Exception {
@@ -60,7 +59,7 @@ public abstract class RDFDriver<TMatch> extends Driver<TMatch> {
 
 	@Override
 	public String getPostfix() {
-		return RDFHelper.getPostfix(rdfbc.isInferencing());
+		return RDFHelper.getPostfix(benchmarkConfig.isInferencing());
 	}
 
 	protected abstract boolean ask(String askQuery) throws Exception;

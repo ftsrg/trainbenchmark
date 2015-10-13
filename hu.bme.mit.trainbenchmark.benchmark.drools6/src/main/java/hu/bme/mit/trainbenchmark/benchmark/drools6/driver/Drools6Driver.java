@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools6.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -30,16 +27,18 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 
-public class Drools6Driver extends EMFDriver {
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-	protected BenchmarkConfig benchmarkConfig;
+public class Drools6Driver extends EMFDriver<BenchmarkConfig> {
+
 	protected KieSession kieSession;
 
 	public Drools6Driver(final BenchmarkConfig benchmarkConfig) {
-		super();
-		this.benchmarkConfig = benchmarkConfig;
+		super(benchmarkConfig);
 	}
 
+	// TODO load drl file sooner
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);

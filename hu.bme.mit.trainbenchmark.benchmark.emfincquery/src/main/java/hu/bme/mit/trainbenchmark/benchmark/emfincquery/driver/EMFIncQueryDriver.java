@@ -38,12 +38,10 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch> {
+public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> {
 
-	protected EMFIncQueryBenchmarkConfig eiqbc;
-
-	public EMFIncQueryDriver(final EMFIncQueryBenchmarkConfig eiqbc) {
-		this.eiqbc = eiqbc;
+	public EMFIncQueryDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
 	}
 
 	@Override
@@ -56,7 +54,7 @@ public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQu
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
 
-		if (eiqbc.isLocalSearch()) {
+		if (benchmarkConfig.isLocalSearch()) {
 			// When running local search, make sure the factory is registered
 
 			final Iterable<Entry<Class<? extends IQueryBackend>, IQueryBackendFactory>> factories = QueryBackendRegistry.getInstance()
@@ -79,7 +77,7 @@ public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQu
 		final IncQueryMatcher<TMatch> matcher = checker.getMatcher();
 		final Collection<TMatch> matches = matcher.getAllMatches();
 		checker.setMatches(matches);
-		if (!eiqbc.isLocalSearch()) {
+		if (!benchmarkConfig.isLocalSearch()) {
 			engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<TMatch>() {
 				@Override
 				public void notifyAppearance(final TMatch match) {

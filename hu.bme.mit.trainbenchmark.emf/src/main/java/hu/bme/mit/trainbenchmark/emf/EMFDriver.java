@@ -25,18 +25,23 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class EMFDriver extends Driver<RailwayElement> {
+public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<RailwayElement, TBenchmarkConfig> {
 
 	protected RailwayContainer container;
 	protected Resource resource;
-	protected Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
+	private final Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
 
+	public EMFDriver(final TBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
+	}
+	
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		RailwayPackage.eINSTANCE.eClass();

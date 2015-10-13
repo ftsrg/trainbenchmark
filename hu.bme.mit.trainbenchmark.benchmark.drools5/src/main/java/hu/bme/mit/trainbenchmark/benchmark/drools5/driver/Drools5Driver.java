@@ -32,14 +32,12 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public class Drools5Driver extends EMFDriver {
+public class Drools5Driver extends EMFDriver<BenchmarkConfig> {
 
 	protected StatefulKnowledgeSession ksession;
-	protected BenchmarkConfig benchmarkConfig;
 
 	public Drools5Driver(final BenchmarkConfig benchmarkConfig) {
-		super();
-		this.benchmarkConfig = benchmarkConfig;
+		super(benchmarkConfig);
 	}
 
 	@Override
@@ -48,6 +46,7 @@ public class Drools5Driver extends EMFDriver {
 
 		// change Drools knowledge base based on EMF notifications
 		final KnowledgeBase kbase = readKnowledgeBase();
+		// TODO load drl file sooner?
 		ksession = kbase.newStatefulKnowledgeSession();
 
 		EObject eObject = null;

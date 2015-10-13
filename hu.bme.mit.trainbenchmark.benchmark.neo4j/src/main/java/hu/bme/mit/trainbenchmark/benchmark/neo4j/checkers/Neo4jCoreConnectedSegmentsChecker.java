@@ -18,14 +18,11 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT4;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT5;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT6;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -36,6 +33,10 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
+
 public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jConnectedSegmentsMatch> {
 
 	public Neo4jCoreConnectedSegmentsChecker(final Neo4jDriver driver) {
@@ -44,7 +45,7 @@ public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jCon
 
 	@Override
 	public Collection<Neo4jConnectedSegmentsMatch> check() throws IOException {
-		final Collection<Neo4jConnectedSegmentsMatch> matches = new HashSet<>();
+		final Collection<Neo4jConnectedSegmentsMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
