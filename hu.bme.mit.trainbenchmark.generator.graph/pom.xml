@@ -9,11 +9,6 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>hu.bme.mit.trainbenchmark.generator.graph</artifactId>
-	<url>http://maven.apache.org</url>
-
-	<properties>
-		<faunus.version>0.3.2</faunus.version>
-	</properties>
 
 	<build>
 		<plugins>
@@ -42,12 +37,6 @@
 	<dependencies>
 
 		<!-- Train Benchmark -->
-
-		<dependency>
-			<groupId>hu.bme.mit.trainbenchmark</groupId>
-			<artifactId>hu.bme.mit.trainbenchmark.config</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
 
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>

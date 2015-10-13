@@ -9,7 +9,6 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>hu.bme.mit.trainbenchmark.generator</artifactId>
-	<url>http://maven.apache.org</url>
 
 	<dependencies>
 
