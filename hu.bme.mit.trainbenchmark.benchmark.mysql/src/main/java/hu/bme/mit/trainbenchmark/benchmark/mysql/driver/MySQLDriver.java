@@ -52,7 +52,11 @@ public class MySQLDriver extends SQLDriver<BenchmarkConfig> {
 
 	@Override
 	public void initialize() throws Exception {
-		MySQLProcess.stopServer();
+		try {
+			MySQLProcess.stopServer();
+		} catch (final Exception e) {
+			// do nothing
+		}
 		MySQLProcess.clean();
 		MySQLProcess.startServer();
 	}
