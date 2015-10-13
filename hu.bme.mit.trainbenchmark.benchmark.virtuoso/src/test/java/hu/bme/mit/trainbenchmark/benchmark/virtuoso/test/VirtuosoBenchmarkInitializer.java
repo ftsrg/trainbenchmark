@@ -23,9 +23,9 @@ public class VirtuosoBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
-		final RDFBenchmarkConfig rdfbc = new RDFBenchmarkConfig("Virtuoso", scenario, size, runIndex, query, iterationCount,
+		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", scenario, size, runIndex, query, iterationCount,
 				transformationStrategy, transformationConstant, false);
-		return new BenchmarkRunner(rdfbc, new VirtuosoBenchmarkCase());
+		return new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
 	}
 
 }

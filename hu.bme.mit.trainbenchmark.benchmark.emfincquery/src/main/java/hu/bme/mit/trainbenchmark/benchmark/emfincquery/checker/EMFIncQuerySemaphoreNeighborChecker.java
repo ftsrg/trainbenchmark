@@ -21,14 +21,14 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 
 public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
 
-	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryBenchmarkConfig eiqbc,
-			final EMFIncQueryBaseDriver<SemaphoreNeighborMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
-		super(eiqbc, eiqDriver);
+	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+			final EMFIncQueryBaseDriver<SemaphoreNeighborMatch, EMFIncQueryBenchmarkConfig> driver) {
+		super(benchmarkConfig, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<SemaphoreNeighborMatch> getMatcher() throws IncQueryException {
-		return SemaphoreNeighborMatcher.on(eiqDriver.getEngine());
+		return SemaphoreNeighborMatcher.on(driver.getEngine());
 	}
 
 }

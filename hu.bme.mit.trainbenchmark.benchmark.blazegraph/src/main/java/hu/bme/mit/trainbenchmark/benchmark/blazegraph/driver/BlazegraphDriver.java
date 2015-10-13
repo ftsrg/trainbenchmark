@@ -29,12 +29,13 @@ import com.bigdata.rdf.sail.BigdataSailRepository;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
-public class BlazegraphDriver extends SesameDriver {
+public class BlazegraphDriver extends SesameDriver<RDFBenchmarkConfig> {
 
 	protected final BigdataSail sail;
 
-	public BlazegraphDriver(final RDFBenchmarkConfig rdfbc) throws IOException, RepositoryException {
-		super(rdfbc);
+	public BlazegraphDriver(final RDFBenchmarkConfig benchmarkConfig) throws IOException, RepositoryException {
+		super(benchmarkConfig);
+
 		// load journal properties from resources
 		final Properties props = loadProperties("/blazegraph.properties");
 		// instantiate a sail
@@ -57,7 +58,7 @@ public class BlazegraphDriver extends SesameDriver {
 	}
 
 	@Override
-	public void destroy() throws RepositoryException {
+	public void destroy() throws Exception {
 		super.destroy();
 		repository.shutDown();
 	}
