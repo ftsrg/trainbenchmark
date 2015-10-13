@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,24 +30,33 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 import com.tinkerpop.pipes.util.structures.Row;
 
-public class OrientDbDriver extends Driver<Vertex> {
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+
+public class OrientDbDriver extends Driver<Vertex, BenchmarkConfig> {
 
 	protected OrientGraph graphDb;
 	protected String dbPath;
 	protected String benchmarkDir;
 	protected Comparator<Vertex> vertexComparator = new VertexComparator();
 
-	public OrientDbDriver(final String dbPath, final String benchmarkDir) throws IOException {
+	public OrientDbDriver(final BenchmarkConfig benchmarkConfig) throws IOException {
+		super(benchmarkConfig);
+		this.dbPath = benchmarkConfig.getWorkspacePath() + "models/orient-dbs/railway-database";
+		this.benchmarkDir = benchmarkConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
+	}
+
+	@Override
+	public void initialize() throws Exception {
+		super.initialize();
+		
 		// delete old directory
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
 		}
-
-		// start the database
-		this.dbPath = dbPath;
-		this.benchmarkDir = benchmarkDir;
 	}
-
+	
 	@Override
 	public void beginTransaction() {
 		graphDb.begin();

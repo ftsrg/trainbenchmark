@@ -21,7 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 
 public class EMFIncQuerySwitchSetChecker extends EMFIncQueryChecker<SwitchSetMatch> {
 
-	public EMFIncQuerySwitchSetChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<SwitchSetMatch> eiqDriver) {
+	public EMFIncQuerySwitchSetChecker(final EMFIncQueryBenchmarkConfig eiqbc,
+			final EMFIncQueryBaseDriver<SwitchSetMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
 		super(eiqbc, eiqDriver);
 	}
 

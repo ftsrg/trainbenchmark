@@ -25,10 +25,10 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends Checker<TMatch> {
 
 	protected Collection<TMatch> matches;
-	protected final EMFIncQueryBaseDriver<TMatch> eiqDriver;
+	protected final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> eiqDriver;
 	protected final EMFIncQueryBenchmarkConfig eiqbc;
 
-	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<TMatch> eiqDriver) {
+	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
 		this.eiqbc = eiqbc;
 		this.eiqDriver = eiqDriver;
 	}

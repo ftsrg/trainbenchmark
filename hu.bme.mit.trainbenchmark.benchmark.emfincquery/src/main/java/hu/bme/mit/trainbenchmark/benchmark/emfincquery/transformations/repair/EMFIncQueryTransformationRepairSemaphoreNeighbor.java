@@ -17,12 +17,13 @@ import java.util.Collection;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 
 public class EMFIncQueryTransformationRepairSemaphoreNeighbor extends EMFIncQueryTransformation<SemaphoreNeighborMatch> {
 
-	public EMFIncQueryTransformationRepairSemaphoreNeighbor(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver) {
+	public EMFIncQueryTransformationRepairSemaphoreNeighbor(final EMFIncQueryBaseDriver<? extends BasePatternMatch, EMFIncQueryBenchmarkConfig> driver) {
 		super(driver);
 	}
 

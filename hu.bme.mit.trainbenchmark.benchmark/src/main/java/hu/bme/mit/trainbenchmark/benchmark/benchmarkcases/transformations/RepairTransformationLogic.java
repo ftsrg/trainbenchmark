@@ -18,7 +18,9 @@ import java.util.List;
 
 import com.google.common.collect.Ordering;
 
-public class RepairTransformationLogic<TMatch, TElement> extends TransformationLogic<TMatch, TElement, TMatch> {
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+
+public class RepairTransformationLogic<TMatch, TElement, TBenchmarkConfig extends BenchmarkConfig> extends TransformationLogic<TMatch, TElement, TMatch, TBenchmarkConfig> {
 
 	protected RepairTransformationLogic(final Comparator<TMatch> comparator) {
 		super(comparator);

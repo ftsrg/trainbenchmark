@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryChecker<ConnectedSegmentsMatch> {
 
 	public EMFIncQueryConnectedSegmentsChecker(final EMFIncQueryBenchmarkConfig eiqbc,
-			final EMFIncQueryBaseDriver<ConnectedSegmentsMatch> eiqDriver) {
+			final EMFIncQueryBaseDriver<ConnectedSegmentsMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
 		super(eiqbc, eiqDriver);
 	}
 

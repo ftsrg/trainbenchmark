@@ -21,7 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 
 public class EMFIncQueryPosLengthChecker extends EMFIncQueryChecker<PosLengthMatch> {
 
-	public EMFIncQueryPosLengthChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<PosLengthMatch> eiqDriver) {
+	public EMFIncQueryPosLengthChecker(final EMFIncQueryBenchmarkConfig eiqbc,
+			final EMFIncQueryBaseDriver<PosLengthMatch, EMFIncQueryBenchmarkConfig> eiqDriver) {
 		super(eiqbc, eiqDriver);
 	}
 

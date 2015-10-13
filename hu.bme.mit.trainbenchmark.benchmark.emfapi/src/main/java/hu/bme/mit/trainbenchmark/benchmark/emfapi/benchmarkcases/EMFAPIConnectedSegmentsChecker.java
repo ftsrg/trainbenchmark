@@ -11,17 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.railway.Segment;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSegmentsMatch> {
 
@@ -40,9 +41,12 @@ public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSe
 			if (eObject instanceof Sensor) {
 				// sensor
 				final Sensor sensor = (Sensor) eObject;
-
+		
 				// segment1
 				for (final TrackElement element1 : sensor.getElements()) {
+					if (element1.eClass().getClassifierID() == RailwayPackage.SEGMENT__ID) {
+						// TODO
+					}
 					if (!(element1 instanceof Segment)) {
 						continue;
 					}

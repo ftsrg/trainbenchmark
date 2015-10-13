@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 
-public abstract class SQLBenchmarkCase<TSQLDriver extends SQLDriver>
-		extends AbstractBenchmarkCase<SQLMatch, Long, TSQLDriver, BenchmarkConfig, SQLChecker> {
+public abstract class SQLBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig, TSQLDriver extends SQLDriver<TBenchmarkConfig>>
+		extends AbstractBenchmarkCase<SQLMatch, Long, TSQLDriver, TBenchmarkConfig, SQLChecker> {
 
 }
