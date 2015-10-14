@@ -90,6 +90,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		final File modelFile = new File(modelPath);
 
 		final File hawkRepositoryFile = new File(hawkRepositoryPath);
+		FileUtils.deleteQuietly(hawkRepositoryFile);
 		FileUtils.copyFileToDirectory(modelFile, hawkRepositoryFile);
 	}
 
@@ -134,9 +135,19 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		client.registerMetamodels(HAWK_INSTANCE, Arrays.asList(thriftFile));
 
 		final Credentials credentials = new Credentials("dummy", "dummy");
-		final Repository repository = new Repository(hawkRepositoryPath, "org.hawk.localfolder.LocalFolder");
 
-		client.addRepository(HAWK_INSTANCE, repository, credentials);
+		// We only create the repository if we don't have it already
+		final Repository newRepository = new Repository(hawkRepositoryPath, "org.hawk.localfolder.LocalFolder");
+		boolean bAlreadyExists = false;
+		for (Repository r : client.listRepositories(HAWK_INSTANCE)) {
+			if (r.equals(newRepository)) {
+				bAlreadyExists = true;
+				break;
+			}
+		}
+		if (!bAlreadyExists) {
+			client.addRepository(HAWK_INSTANCE, newRepository, credentials);
+		}
 	}
 
 	@Override
