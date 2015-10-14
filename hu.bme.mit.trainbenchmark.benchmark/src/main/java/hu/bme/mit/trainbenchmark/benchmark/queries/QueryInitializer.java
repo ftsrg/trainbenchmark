@@ -42,7 +42,7 @@ public class QueryInitializer {
 			queryBuilder = new StationsPathQueryBuilder(modelSize);
 			break;
 		case SCHEDULENAVIGATIONS:
-			queryBuilder = new ScheduleNavigationsQueryBuilder();
+			queryBuilder = new ScheduleNavigationsQueryBuilder(modelSize);
 			break;
 		default:
 //			throw new IllegalArgumentException("Query is not supported: " + query);

@@ -24,6 +24,7 @@ import hu.bme.mit.trainbenchmark.benchmark.publisher.TrainBenchmarkCommandLinePu
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.Scenario;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.ScenarioFactory;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
+import hu.bme.mit.trainbenchmark.constants.schedule.ScheduleGeneratorConstants;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -64,6 +65,10 @@ public abstract class BenchmarkLogic {
 		token.setBenchmarkCase(benchmarkCase);
 		token.setConfig(bc);
 		token.setDescriptor(caseDescriptor);
+		// temporary
+		ScheduleGeneratorConstants.stationsProportion = 0.8;
+		ScheduleGeneratorConstants.sizeStep = 5000;
+		ScheduleGeneratorConstants.trainsProportion = 0.09;
 
 		for (int i = 1; i <= bc.getRunIndex(); i++) {
 			scenario.setRunIndex(i);
