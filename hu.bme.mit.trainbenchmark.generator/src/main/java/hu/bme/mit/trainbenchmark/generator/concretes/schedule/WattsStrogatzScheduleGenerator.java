@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.generator.concretes.schedule;
 
 import hu.bme.mit.trainbenchmark.generator.FormatGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.util.Node;
 import hu.bme.mit.trainbenchmark.generator.util.RandomElementsProvider;
 
 import java.io.IOException;
@@ -81,6 +82,22 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 		}
 		rewireNeighbors();
 
+		if (!checkConnectivity()) {
+			ArrayList<Node> isolated = new ArrayList<Node>(stations);
+			isolated.removeAll(checked);
+			int targetIndex;
+			int i = 0;
+			while (i < isolated.size()) {
+				targetIndex = RandomElementsProvider.getRandomDisjunctIndex(random, stations,
+						isolated.get(i).id);
+				if (!isolated.contains(stations.get(targetIndex))) {
+					addNeighbor(stations.indexOf(isolated.get(i)), targetIndex);
+					addNeighbor(targetIndex, stations.indexOf(isolated.get(i)));
+					i++;
+				}
+			}
+		}
+
 	}
 
 	protected boolean addNeighborWithOffset(final int sourceIndex, final int offset) {
@@ -89,7 +106,7 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 			// jump to the beginning
 			target = offset - (stations.size() - sourceIndex);
 		} else if (target < 0) {
-			// jump to the ending, in this case offset must be negative
+			// jump to the ending, in this case the offset must be negative
 			target = stations.size() + offset;
 		}
 		return super.addNeighbor(sourceIndex, target);
@@ -113,13 +130,13 @@ public class WattsStrogatzScheduleGenerator extends HomogeneousScheduleGenerator
 					removedNeighbors.add(targetIndex);
 				}
 			}
-			for (Integer target : removedNeighbors) {
-				removeNeighbor(i, target);
-				removeNeighbor(target, i);
+			for (Integer oldTarget : removedNeighbors) {
+				removeNeighbor(i, oldTarget);
+				removeNeighbor(oldTarget, i);
 			}
-			for (Integer target : addedNeighbors) {
-				addNeighbor(i, target);
-				addNeighbor(target, i);
+			for (Integer newTarget : addedNeighbors) {
+				addNeighbor(i, newTarget);
+				addNeighbor(newTarget, i);
 			}
 		}
 	}
