@@ -36,14 +36,14 @@ public class EMFAPISwitchSensorChecker extends EMFAPIChecker<EMFSwitchSensorMatc
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// (Switch)
+			// (sw:Switch)
 			if (!RailwayPackage.eINSTANCE.getSwitch().isInstance(eObject)) {
 				continue;
 			}
 
 			final Switch sw = (Switch) eObject;
 
-			// (Switch)-[sensor]->() NAC
+			// (sw)-[:sensor]->() NAC
 			if (sw.getSensor() == null) {
 				matches.add(new EMFSwitchSensorMatch(sw));
 			}

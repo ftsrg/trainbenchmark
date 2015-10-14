@@ -25,7 +25,6 @@ import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch> {
 
@@ -40,23 +39,27 @@ public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch>
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// (Sensor)
-			if (RailwayPackage.eINSTANCE.getSensor().isInstance(eObject)) {
-				final Sensor sensor = (Sensor) eObject;
-				// (Sensor)<-[sensor]-(Switch)
-				for (final TrackElement te : sensor.getElements()) {
-					if (RailwayPackage.eINSTANCE.getSwitch().isInstance(te)) {
-						final Switch sw = (Switch) te;
-						// (Switch)<-[switch]-(SwitchPosition)
-						for (final SwitchPosition swP : sw.getPositions()) {
-							// (SwitchPosition)<-[follows]-(Route)
-							final Route route = swP.getRoute();
-							// (Route)-[definedBy]->(Sensor) NAC
-							if (!route.getDefinedBy().contains(sensor)) {
-								final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor, swP, sw);
-								matches.add(match);
-							}
-						}
+			// (route:Route)
+			if (RailwayPackage.eINSTANCE.getRoute().isInstance(eObject)) {
+				final Route route = (Route) eObject;
+				// (route)-[:follows]->(swP:SwitchPosition)
+				for (final SwitchPosition swP : route.getFollows()) {
+					// (swP:switchPosition)-[:switch]->(sw:Switch)
+					final Switch sw = swP.getSwitch();
+					if (sw == null) {
+						continue;
+					}
+					
+					// (switch:Switch)-[:sensor]->(sensor:Sensor)
+					final Sensor sensor = sw.getSensor();
+					if (sensor == null) {
+						continue;
+					}
+
+					// (route)-[:definedBy]->(sensor) NAC
+					if (!route.getDefinedBy().contains(sensor)) {
+						final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor, swP, sw);
+						matches.add(match);
 					}
 				}
 			}

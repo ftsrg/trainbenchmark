@@ -42,12 +42,13 @@ public class Neo4jCorePosLengthChecker extends Neo4jCoreChecker<Neo4jPosLengthMa
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			// Segment
+			// (segment:Segment)
 			final ResourceIterator<Node> segments = graphDb.findNodes(labelSegment);
 			while (segments.hasNext()) {
 				final Node segment = segments.next();
 				final Integer length = (Integer) segment.getProperty(LENGTH);
-				// Segment.length <= 0
+				
+				// segment.length <= 0
 				if (length <= 0) {
 					final Map<String, Object> match = new HashMap<>();
 					match.put(VAR_SEGMENT, segment);
