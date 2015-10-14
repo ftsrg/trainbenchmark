@@ -4,10 +4,12 @@ PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT  ( COUNT(*) AS ?count)
 WHERE
   { ?association rdf:type base:Association .
-    ?association base:days ?days
-    FILTER ( ?days = "1111100" )
     ?association base:location ?station1 .
     ?station1 base:neighbors ?station2 .
-    ?station2 base:neighbors ?station3 .
-    ?station3 base:neighbors ?station4 .
+    ?station2 base:neighbors ?station3
+    FILTER (?station1 != ?station3) .
+    ?station3 base:neighbors ?station4
+    FILTER (?station1 != ?station4 && ?station2 != ?station4) .
+    ?station4 base:neighbors ?station5
+    FILTER (?station1 != ?station5 && ?station2 != ?station5 && ?station3 != ?station5) .
   }
