@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EMFAPIPosLengthChecker extends EMFAPIChecker<EMFPosLengthMatch> {
 
-	public EMFAPIPosLengthChecker(final EMFDriver emfDriver) {
+	public EMFAPIPosLengthChecker(final EMFDriver<?> emfDriver) {
 		super(emfDriver);
 	}
 
@@ -36,10 +36,11 @@ public class EMFAPIPosLengthChecker extends EMFAPIChecker<EMFPosLengthMatch> {
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// (Segment)
+			// (segment:Segment)
 			if (RailwayPackage.eINSTANCE.getSegment().isInstance(eObject)) {
 				final Segment segment = (Segment) eObject;
-				// Segment.length <= 0
+				
+				// segment.length <= 0
 				if (segment.getLength() <= 0) {
 					matches.add(new EMFPosLengthMatch(segment));
 				}

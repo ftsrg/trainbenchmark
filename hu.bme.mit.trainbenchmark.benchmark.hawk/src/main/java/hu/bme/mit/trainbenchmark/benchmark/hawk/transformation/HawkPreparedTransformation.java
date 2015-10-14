@@ -17,7 +17,7 @@ public class HawkPreparedTransformation extends HawkTransformation<Object> {
 
 	public HawkPreparedTransformation(final HawkDriver<?> driver, final Query query, final Scenario scenario, final HawkBenchmarkConfig benchmarkConfig) {
 		super(driver);
-		invalidModelPath = benchmarkConfig.getWorkspacePath() + "invalid-models/" + hbc.getModelFileNameWithoutExtension() + "-" + query.toString().toLowerCase() + driver.getPostfix();
+		invalidModelPath = benchmarkConfig.getWorkspacePath() + "invalid-models/" + benchmarkConfig.getModelFileNameWithoutExtension() + "-" + query.toString().toLowerCase() + driver.getPostfix();
 		modelPath = driver.getHawkRepositoryPath() + benchmarkConfig.getModelFileNameWithoutExtension() + driver.getPostfix();
 	}
 

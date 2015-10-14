@@ -40,22 +40,22 @@ public class EMFAPISwitchSetChecker extends EMFAPIChecker<EMFSwitchSetMatch> {
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// (Route)
+			// (route:Route)
 			if (!RailwayPackage.eINSTANCE.getRoute().isInstance(eObject)) {
 				continue;
 			}
 
 			final Route route = (Route) eObject;
-			// (Route)-[entry]->(semaphore)
+			// (route:Route)-[:entry]->(semaphore:Semaphore)
 			final Semaphore semaphore = route.getEntry();
 			if (semaphore == null) {
 				continue;
 			}
 			// semaphore.signal == GO
 			if (semaphore.getSignal() == Signal.GO) {
-				// (Route)-[follows]->(SwitchPosition)
+				// (route:Route)-[:follows]->(swP:SwitchPosition)
 				for (final SwitchPosition switchPosition : route.getFollows()) {
-					// (SwitchPosition)-[switch]->(Switch)
+					// (swP:SwitchPosition)-[:switch]->(sw:Switch)
 					final Switch sw = switchPosition.getSwitch();
 					// sw.currentPosition != swP.position
 					if (sw.getCurrentPosition() != switchPosition.getPosition()) {

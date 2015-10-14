@@ -50,66 +50,84 @@ public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jCon
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 
-			// (sensor:Sensor)<-[:sensor]-()
+			// (sensor:Sensor)
 			final ResourceIterator<Node> sensors = graphDb.findNodes(Neo4jConstants.labelSensor);
 			while (sensors.hasNext()) {
 				final Node sensor = sensors.next();
+				
+				// (sensor:Sensor)<-[:sensor]-(segment1:Segment)
 				final Iterator<Relationship> sensorEdges1 = sensor.getRelationships(Direction.INCOMING,
 						Neo4jConstants.relationshipTypeSensor).iterator();			
 				while (sensorEdges1.hasNext()) {
-					final Node te1 = sensorEdges1.next().getStartNode();
-					
-					if (!te1.hasLabel(Neo4jConstants.labelSegment)) {
+					final Node segment1 = sensorEdges1.next().getStartNode();
+					if (!segment1.hasLabel(Neo4jConstants.labelSegment)) {
 						continue;
 					}
 					
-					// te1 is a Segment
-					final Node segment1 = te1;
-					
-					// (segment1:Segment)-[:connectsTo]->()
-
+					// (segment1:Segment)-[:connectsTo]->(segment2:Segment)
 					final Iterator<Relationship> connectsTo1s = segment1.getRelationships(Direction.OUTGOING,
 							Neo4jConstants.relationshipTypeConnectsTo).iterator();
 					if (!connectsTo1s.hasNext()) {
 						continue;
 					}
 
-					// (segment2:Segment)-[:connectsTo]->()
 					final Node segment2 = connectsTo1s.next().getEndNode();
+					if (!segment2.hasLabel(Neo4jConstants.labelSegment)) {
+						continue;
+					}
+
+					// (segment2:Segment)-[:connectsTo]->(segment3:Segment)
 					final Iterator<Relationship> connectsTo2s = segment2.getRelationships(Direction.OUTGOING,
 							Neo4jConstants.relationshipTypeConnectsTo).iterator();
 					if (!connectsTo2s.hasNext()) {
 						continue;
 					}
 
-					// (segment3:Segment)-[:connectsTo]->()
 					final Node segment3 = connectsTo2s.next().getEndNode();
+					if (!segment3.hasLabel(Neo4jConstants.labelSegment)) {
+						continue;
+					}
+
+					// (segment3:Segment)-[:connectsTo]->(segment4:Segment)
 					final Iterator<Relationship> connectsTo3s = segment3.getRelationships(Direction.OUTGOING,
 							Neo4jConstants.relationshipTypeConnectsTo).iterator();
 					if (!connectsTo3s.hasNext()) {
 						continue;
 					}
 
-					// (segment4:Segment)-[:connectsTo]->()
 					final Node segment4 = connectsTo3s.next().getEndNode();
+					if (!segment4.hasLabel(Neo4jConstants.labelSegment)) {
+						continue;
+					}
+
+					// (segment4:Segment)-[:connectsTo]->(segment5:Segment)
 					final Iterator<Relationship> connectsTo4s = segment4.getRelationships(Direction.OUTGOING,
 							Neo4jConstants.relationshipTypeConnectsTo).iterator();
 					if (!connectsTo4s.hasNext()) {
 						continue;
 					}
 
-					// (segment5:Segment)-[:connectsTo]->()
 					final Node segment5 = connectsTo4s.next().getEndNode();
+					if (!segment5.hasLabel(Neo4jConstants.labelSegment)) {
+						continue;
+					}
+
+					// (segment5:Segment)-[:connectsTo]->(segment6:Segment)
 					final Iterator<Relationship> connectsTo5s = segment5.getRelationships(Direction.OUTGOING,
 							Neo4jConstants.relationshipTypeConnectsTo).iterator();
 					if (!connectsTo5s.hasNext()) {
 						continue;
 					}
 
-					// (segment6:Segment)-[:connectsTo]->()
 					final Node segment6 = connectsTo5s.next().getEndNode();
+					if (!segment6.hasLabel(Neo4jConstants.labelSegment)) {
+						continue;
+					}
+
+					// (segment6:Segment)-[:sensor]->(sensor:Sensor)
 					final Iterator<Relationship> sensorEdges2 = segment6.getRelationships(Direction.OUTGOING,
 							Neo4jConstants.relationshipTypeSensor).iterator();
+					
 					if (!sensorEdges2.hasNext()) {
 						continue;
 					}

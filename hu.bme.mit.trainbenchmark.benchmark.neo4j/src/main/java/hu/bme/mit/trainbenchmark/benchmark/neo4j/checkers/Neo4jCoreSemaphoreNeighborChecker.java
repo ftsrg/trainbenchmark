@@ -55,7 +55,7 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 					continue;
 				}
 
-				// (route1:Route)<-[:exit]->(semaphore:Semaphore)
+				// (route1:Route)-[:exit]->(semaphore:Semaphore)
 				final Iterable<Relationship> exits = route1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeExit);
 				for (final Relationship exit : exits) {
 					final Node semaphore = exit.getEndNode();

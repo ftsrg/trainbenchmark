@@ -51,25 +51,27 @@ public class Neo4jCoreSwitchSetChecker extends Neo4jCoreChecker<Neo4jSwitchSetMa
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			final ResourceIterator<Node> semaphores = graphDb.findNodes(labelSemaphore);
-			while (semaphores.hasNext()) {
-				final Node semaphore = semaphores.next();
+			// (route:Route)
+			final ResourceIterator<Node> routes = graphDb.findNodes(labelRoute);
+			while (routes.hasNext()) {
+				final Node route = routes.next();
 
-				// semaphore.signal = "GO"
-				final Object signal = semaphore.getProperty(SIGNAL);
-				if (!Signal.GO.toString().equals(signal)) {
-					continue;
-				}
-
-				// (semaphore:Semaphore)<-[:entry]-(route:Route)
-				final Iterable<Relationship> entries = semaphore.getRelationships(Direction.INCOMING,
+				// (route:Route)-[:entry]->(semaphore:Semaphore)
+				final Iterable<Relationship> entries = route.getRelationships(Direction.OUTGOING,
 						relationshipTypeEntry);
+				
 				for (final Relationship entry : entries) {
-					final Node route = entry.getStartNode();
-					if (!route.hasLabel(labelRoute)) {
+					final Node semaphore = entry.getEndNode();
+					if (!semaphore.hasLabel(labelSemaphore)) {
 						continue;
 					}
 
+					// semaphore.signal = "GO"
+					final Object signal = semaphore.getProperty(SIGNAL);
+					if (!Signal.GO.toString().equals(signal)) {
+						continue;
+					}
+				
 					// (route:Route)-[:follows]->(swP:SwitchPosition)
 					final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING,
 							relationshipTypeFollows);

@@ -2,9 +2,6 @@
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensor" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensor" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensor"/>
   </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" point="org.eclipse.incquery.runtime.queryspecification">
-    <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength"/>
-  </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegments"/>
   </extension>
@@ -16,5 +13,8 @@
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor"/>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" point="org.eclipse.incquery.runtime.queryspecification">
+    <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength"/>
   </extension>
 </plugin>

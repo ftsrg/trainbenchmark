@@ -44,10 +44,12 @@ public class Neo4jCoreSwitchSensorChecker extends Neo4jCoreChecker<Neo4jSwitchSe
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			// (switch:Switch)-[:sensor]->(Sensor) NAC
 			final ResourceIterator<Node> switches = graphDb.findNodes(labelSwitch);
 			while (switches.hasNext()) {
+				// (sw:Switch)
 				final Node sw = switches.next();
+				
+				// (sw)-[:sensor]->(Sensor) NAC
 				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeSensor);
 
 				boolean hasSensor = false;
