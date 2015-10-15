@@ -18,7 +18,7 @@ public class MemSQLBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("MemSQL", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new MemSQLBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new MemSQLBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 }

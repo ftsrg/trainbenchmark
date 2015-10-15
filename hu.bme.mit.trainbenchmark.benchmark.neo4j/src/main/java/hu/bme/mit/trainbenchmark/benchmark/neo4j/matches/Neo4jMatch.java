@@ -16,6 +16,8 @@ import java.util.Map;
 
 import org.neo4j.graphdb.Node;
 
+import hu.bme.mit.trainbenchmark.constants.Query;
+
 public abstract class Neo4jMatch {
 
 	protected Map<String, Object> match;
@@ -29,6 +31,25 @@ public abstract class Neo4jMatch {
 	@Override
 	public String toString() {
 		return "Neo4jMatch [match=" + Arrays.toString(toArray()) + "]";
+	}
+	
+	public static Neo4jMatch createMatch(final Query query, final Map<String, Object> row) {
+		switch (query) {
+		case CONNECTEDSEGMENTS:
+			return new Neo4jConnectedSegmentsMatch(row);
+		case POSLENGTH:
+			return new Neo4jPosLengthMatch(row);
+		case ROUTESENSOR:
+			return new Neo4jRouteSensorMatch(row);
+		case SEMAPHORENEIGHBOR:
+			return new Neo4jSemaphoreNeighborMatch(row);
+		case SWITCHSENSOR:
+			return new Neo4jSwitchSensorMatch(row);
+		case SWITCHSET:
+			return new Neo4jSwitchSetMatch(row);
+		default:
+			throw new UnsupportedOperationException("Query not supported: " + query);
+		}
 	}
 	
 }

@@ -30,9 +30,7 @@ public class OrientDbBenchmarkCase
 
 	@Override
 	public OrientDbDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		final String dbPath = benchmarkConfig.getWorkspacePath() + "models/orient-dbs/railway-database";
-		final String benchmarkDir = benchmarkConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.orientdb";
-		return new OrientDbDriver(dbPath, benchmarkDir);
+		return new OrientDbDriver(benchmarkConfig);
 	}
 
 	@Override

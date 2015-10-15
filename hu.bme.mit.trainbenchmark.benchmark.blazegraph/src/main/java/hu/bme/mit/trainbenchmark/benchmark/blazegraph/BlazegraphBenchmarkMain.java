@@ -19,8 +19,8 @@ public class BlazegraphBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final RDFBenchmarkConfig rdfBenchmarkConfig = new RDFBenchmarkConfig(args, "Blazegraph");
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(rdfBenchmarkConfig, new BlazegraphBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(rdfBenchmarkConfig, new BlazegraphBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

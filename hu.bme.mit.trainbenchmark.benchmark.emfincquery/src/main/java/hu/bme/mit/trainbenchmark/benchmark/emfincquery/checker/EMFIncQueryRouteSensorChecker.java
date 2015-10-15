@@ -21,13 +21,14 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 
 public class EMFIncQueryRouteSensorChecker extends EMFIncQueryChecker<RouteSensorMatch> {
 
-	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<RouteSensorMatch> eiqDriver) {
-		super(eiqbc, eiqDriver);
+	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+			final EMFIncQueryBaseDriver<RouteSensorMatch, EMFIncQueryBenchmarkConfig> driver) {
+		super(benchmarkConfig, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<RouteSensorMatch> getMatcher() throws IncQueryException {
-		return RouteSensorMatcher.on(eiqDriver.getEngine());
+		return RouteSensorMatcher.on(driver.getEngine());
 	}
 
 }

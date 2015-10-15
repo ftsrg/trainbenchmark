@@ -11,7 +11,7 @@
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.hawk</artifactId>
 
 	<properties>
-		<hawk.version>1.0.0-201510091826</hawk.version>
+		<hawk.version>1.0.0-201510131437</hawk.version>
 	</properties>
 
 	<build>

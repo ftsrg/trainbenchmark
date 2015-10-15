@@ -21,14 +21,14 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDri
 
 public class EMFIncQuerySwitchSensorChecker extends EMFIncQueryChecker<SwitchSensorMatch> {
 
-	public EMFIncQuerySwitchSensorChecker(final EMFIncQueryBenchmarkConfig eiqbc,
-			final EMFIncQueryBaseDriver<SwitchSensorMatch> eiqDriver) {
-		super(eiqbc, eiqDriver);
+	public EMFIncQuerySwitchSensorChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+			final EMFIncQueryBaseDriver<SwitchSensorMatch, EMFIncQueryBenchmarkConfig> driver) {
+		super(benchmarkConfig, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<SwitchSensorMatch> getMatcher() throws IncQueryException {
-		return SwitchSensorMatcher.on(eiqDriver.getEngine());
+		return SwitchSensorMatcher.on(driver.getEngine());
 	}
 
 }

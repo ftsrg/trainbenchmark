@@ -40,7 +40,7 @@
 
 	<dependencies>
 
-		<!-- TrainBenchmark -->
+		<!-- Train Benchmark -->
 
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>

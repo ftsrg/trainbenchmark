@@ -14,34 +14,25 @@ package hu.bme.mit.trainbenchmark.sql.process;
 
 import java.io.IOException;
 
+import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+
 public class MySQLProcess {
 
+	private static final String SCRIPT_DIRECTORY = "../hu.bme.mit.trainbenchmark.sql/scripts/";
+
+	public static void clean() throws IOException, InterruptedException {
+		final String commandStart = SCRIPT_DIRECTORY + "clean-mysql.sh";
+		Util.executeCommand(commandStart, "Failed to clean MySQL database directory");
+	}
+
 	public static void startServer() throws IOException, InterruptedException {
-		// make sure MySQL is not running
-		stopServer();
-
-		final Runtime rt = Runtime.getRuntime();
-		final String[] commandStart = { "sudo", "service", "mysql", "start" };
-		final Process prStart = rt.exec(commandStart);
-		prStart.waitFor();
-		if (prStart.exitValue() != 0) {
-			throw new IOException("Failed to start MySQL process");
-		}
-
-		// increase the heap size to avoid "table full" errors
-		final String[] commandSetHeapSize = { "/bin/bash", "-c", "echo \"SET GLOBAL max_heap_table_size=1073741824;\" | mysql -u root" };
-		final Process processSetHeapSize = rt.exec(commandSetHeapSize);
-		processSetHeapSize.waitFor();
-		if (prStart.exitValue() != 0) {
-			throw new IOException("Failed to set max_heap_table_size");
-		}
+		final String commandStart = SCRIPT_DIRECTORY + "start-mysql.sh";
+		Util.executeCommand(commandStart, "Failed to start MySQL process");
 	}
 
 	public static void stopServer() throws IOException, InterruptedException {
-		final Runtime rt = Runtime.getRuntime();
-		final String[] command = { "sudo", "service", "mysql", "stop" };
-		final Process pr = rt.exec(command);
-		pr.waitFor();
+		final String commandStart = SCRIPT_DIRECTORY + "stop-mysql.sh";
+		Util.executeCommand(commandStart, "Failed to stop MySQL process");
 	}
 
 }

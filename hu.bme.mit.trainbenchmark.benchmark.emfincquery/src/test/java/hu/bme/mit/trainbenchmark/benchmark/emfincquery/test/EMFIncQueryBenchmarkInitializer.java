@@ -35,9 +35,9 @@ public class EMFIncQueryBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
-		final EMFIncQueryBenchmarkConfig eiqbc = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query,
+		final EMFIncQueryBenchmarkConfig benchmarkConfig = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query,
 				iterationCount, transformationStrategy, transformationConstant, localSearch);
-		return new BenchmarkRunner(eiqbc, new EMFIncQueryBenchmarkCase());
+		return new BenchmarkRunner(benchmarkConfig, new EMFIncQueryBenchmarkCase());
 	}
 
 }

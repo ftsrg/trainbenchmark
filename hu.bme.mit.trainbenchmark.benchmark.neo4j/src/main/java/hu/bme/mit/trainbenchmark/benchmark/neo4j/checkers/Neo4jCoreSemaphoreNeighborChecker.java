@@ -18,13 +18,10 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -35,6 +32,10 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
+
 public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSemaphoreNeighborMatch> {
 
 	public Neo4jCoreSemaphoreNeighborChecker(final Neo4jDriver driver) {
@@ -43,7 +44,7 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 
 	@Override
 	public Collection<Neo4jSemaphoreNeighborMatch> check() {
-		final Collection<Neo4jSemaphoreNeighborMatch> matches = new HashSet<>();
+		final Collection<Neo4jSemaphoreNeighborMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
@@ -54,7 +55,7 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 					continue;
 				}
 
-				// (route1:Route)<-[:exit]->(semaphore:Semaphore)
+				// (route1:Route)-[:exit]->(semaphore:Semaphore)
 				final Iterable<Relationship> exits = route1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeExit);
 				for (final Relationship exit : exits) {
 					final Node semaphore = exit.getEndNode();

@@ -18,8 +18,8 @@ public class EMFIncQueryBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final EMFIncQueryBenchmarkConfig benchmarkConfig = new EMFIncQueryBenchmarkConfig(args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new EMFIncQueryBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new EMFIncQueryBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

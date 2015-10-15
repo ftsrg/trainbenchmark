@@ -50,8 +50,8 @@ public class FourStoreDriver extends RDFDriver<URI> {
 	protected boolean showCommandOutput = false;
 	protected final Map<String, String> environment = ImmutableMap.of("FOURSTORE_CLUSTER_NAME", CLUSTERNAME);
 
-	public FourStoreDriver(final RDFBenchmarkConfig rdfbc) throws IOException {
-		super(rdfbc);
+	public FourStoreDriver(final RDFBenchmarkConfig benchmarkConfig) throws IOException {
+		super(benchmarkConfig);
 		final String dbPath = "/var/lib/4store/" + CLUSTERNAME;
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));

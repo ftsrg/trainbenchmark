@@ -33,8 +33,8 @@ public class JenaChecker extends RDFChecker<JenaMatch> {
 	protected JenaDriver jenaDriver;
 	protected Query jenaQuery;
 
-	public JenaChecker(final JenaDriver jenaDriver, final RDFBenchmarkConfig rdfbc) throws IOException {
-		super(rdfbc);
+	public JenaChecker(final JenaDriver jenaDriver, final RDFBenchmarkConfig benchmarkConfig) throws IOException {
+		super(benchmarkConfig);
 		this.jenaDriver = jenaDriver;
 		this.jenaQuery = QueryFactory.read(queryPath);
 	}

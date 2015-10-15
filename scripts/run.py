@@ -48,6 +48,11 @@ def build_ci():
 def generate(config, formats):
     for format in formats:
         for scenario in config["scenarios"]:
+
+            # dict only has one item
+            for (scenario_name, _) in scenario.items():
+                pass
+
             args = [""]
             if format in config["generator_optional_arguments"]:
                 for optional_argument in config["generator_optional_arguments"][format]:
@@ -61,9 +66,9 @@ def generate(config, formats):
                     cmd = flatten(["java", 
                          config["java_opts"],
                          "-jar", target,
-                         "-scenario", scenario,
+                         "-scenario", scenario_name,
                          "-size", str(size),
-                       arg])
+                         arg])
                     try:
                         subprocess.check_call(cmd)
                     except subprocess.CalledProcessError:
@@ -75,6 +80,8 @@ def generate(config, formats):
 def measure(config):
     for scenario in config["scenarios"]:
         transformation_arguments = []
+
+        # dict only has one item
         for (scenario_name, scenario_arguments) in scenario.items():
             if scenario_arguments is not None:
                 for arg, value in scenario_arguments.items():

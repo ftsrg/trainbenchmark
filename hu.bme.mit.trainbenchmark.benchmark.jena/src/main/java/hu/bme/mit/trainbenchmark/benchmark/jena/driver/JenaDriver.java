@@ -43,15 +43,15 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
-public class JenaDriver extends RDFDriver<Resource> {
+public class JenaDriver extends RDFDriver<Resource, RDFBenchmarkConfig> {
 
 	protected Model model;
 
 	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Comparator<Statement> statementComparator = new StatementComparator();
 
-	public JenaDriver(final RDFBenchmarkConfig rdfbc) {
-		super(rdfbc);
+	public JenaDriver(final RDFBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class JenaDriver extends RDFDriver<Resource> {
 		defaultModel.read(modelPath);
 
 		// run inferencing if required
-		if (rdfbc.isInferencing()) {
+		if (benchmarkConfig.isInferencing()) {
 			final Reasoner reasoner = ReasonerRegistry.getRDFSSimpleReasoner();
 			model = ModelFactory.createInfModel(reasoner, defaultModel);
 		} else {
@@ -70,8 +70,8 @@ public class JenaDriver extends RDFDriver<Resource> {
 	}
 
 	@Override
-	public List<QuerySolution> runQuery(final Query query, final String queryDefinition) throws IOException {
-		final List<QuerySolution> results = new ArrayList<>();
+	public Collection<QuerySolution> runQuery(final Query query, final String queryDefinition) throws IOException {
+		final Collection<QuerySolution> results = new ArrayList<>();
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(queryDefinition, model)) {
 			final ResultSet resultSet = queryExecution.execSelect();
 
@@ -94,9 +94,9 @@ public class JenaDriver extends RDFDriver<Resource> {
 	// read
 
 	@Override
-	public List<Resource> collectVertices(final String type) throws IOException {
+	public Collection<Resource> collectVertices(final String type) throws IOException {
 		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type, model.getResource(BASE_PREFIX + type));
-		final List<Resource> vertices = vertexStatements.toList();
+		final Collection<Resource> vertices = vertexStatements.toList();
 		return vertices;
 	}
 

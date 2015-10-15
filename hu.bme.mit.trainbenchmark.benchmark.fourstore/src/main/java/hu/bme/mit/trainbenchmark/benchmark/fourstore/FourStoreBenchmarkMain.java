@@ -22,8 +22,8 @@ public class FourStoreBenchmarkMain {
 
 	public static void main(final String[] args) throws IOException, ParseException {
 		final FourStoreBenchmarkConfig bc = new FourStoreBenchmarkConfig(args, "FourStoreBenchmark");
-		final BenchmarkLogic benchmarkLogic = new BenchmarkLogic(bc, new FourStoreBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkLogic benchmarkRunner = new BenchmarkLogic(bc, new FourStoreBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 
 }

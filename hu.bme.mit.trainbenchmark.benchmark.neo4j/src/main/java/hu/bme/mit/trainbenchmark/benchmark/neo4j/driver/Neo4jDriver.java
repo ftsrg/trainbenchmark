@@ -15,15 +15,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,8 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
@@ -45,16 +36,19 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
-import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Neo4jDriver extends Driver<Node> {
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.constants.Query;
+
+public class Neo4jDriver extends Driver<Node, Neo4jBenchmarkConfig> {
 
 	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(DEFINED_BY);
 	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
@@ -64,17 +58,27 @@ public class Neo4jDriver extends Driver<Node> {
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
-	protected String dbPath;
-	protected Comparator<Node> nodeComparator = new NodeComparator();
+	protected final Comparator<Node> nodeComparator = new NodeComparator();
+	protected final String dbPath;
 
-	public Neo4jDriver(final String dbPath) throws IOException {
-		// delete old directory
+	public Neo4jDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws IOException {
+		super(benchmarkConfig);
+		this.dbPath = benchmarkConfig.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
+	}
+
+	@Override
+	public void initialize() throws Exception {
+		super.initialize();
+		
+		// delete old database directory
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
 		}
-
-		// start the database
-		this.dbPath = dbPath;
+	}
+	
+	@Override
+	public void destroy() {
+		graphDb.shutdown();
 	}
 
 	@Override
@@ -95,60 +99,36 @@ public class Neo4jDriver extends Driver<Node> {
 		try (Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 			xmlGraphMLReader.nodeLabels(true);
-			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath + getPostfix())), MapNodeCache.usingHashMap());
+			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath + getPostfix())),
+					MapNodeCache.usingHashMap());
 			tx.success();
 		}
 	}
 
 	@Override
-	public List<Neo4jMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
-		final List<Neo4jMatch> results = new ArrayList<>();
+	public Collection<Neo4jMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
+		final Collection<Neo4jMatch> results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final Result executionResult = graphDb.execute(queryDefinition);
 			while (executionResult.hasNext()) {
 				final Map<String, Object> row = executionResult.next();
-				results.add(createMatch(query, row));
+				results.add(Neo4jMatch.createMatch(query, row));
 			}
 		}
 
 		return results;
 	}
 
-	protected Neo4jMatch createMatch(final Query query, final Map<String, Object> row) {
-		switch (query) {
-		case CONNECTEDSEGMENTS:
-			return new Neo4jConnectedSegmentsMatch(row);
-		case POSLENGTH:
-			return new Neo4jPosLengthMatch(row);
-		case ROUTESENSOR:
-			return new Neo4jRouteSensorMatch(row);
-		case SEMAPHORENEIGHBOR:
-			return new Neo4jSemaphoreNeighborMatch(row);
-		case SWITCHSENSOR:
-			return new Neo4jSwitchSensorMatch(row);
-		case SWITCHSET:
-			return new Neo4jSwitchSetMatch(row);
-		default:
-			throw new UnsupportedOperationException("Query not supported: " + query);
-		}
-	}
-
-	@Override
-	public void destroy() {
-		graphDb.shutdown();
-	}
-
 	// read
 
 	@Override
-	public List<Node> collectVertices(final String type) {
-		final ResourceIterable<Node> nodes = GlobalGraphOperations.at(graphDb).getAllNodesWithLabel(DynamicLabel.label(type));
+	public Collection<Node> collectVertices(final String type) {
+		final ResourceIterator<Node> iterator = graphDb.findNodes(DynamicLabel.label(type));
 
-		final ResourceIterator<Node> iterator = nodes.iterator();
 		@SuppressWarnings("unchecked")
-		final List<Node> list = IteratorUtils.toList(iterator);
-		return list;
+		final Collection<Node> vertices = IteratorUtils.toList(iterator);
+		return vertices;
 	}
 
 	// utility

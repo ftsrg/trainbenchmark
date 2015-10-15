@@ -11,17 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.memsql.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
-
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MemSQLDriver extends SQLDriver {
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+
+public class MemSQLDriver extends SQLDriver<BenchmarkConfig> {
 
 	protected final String url = "jdbc:mysql://localhost:3307/trainbenchmark";
 	protected final String user = "root";
 	protected final String password = "";
+	
+	public MemSQLDriver(final BenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
+	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {

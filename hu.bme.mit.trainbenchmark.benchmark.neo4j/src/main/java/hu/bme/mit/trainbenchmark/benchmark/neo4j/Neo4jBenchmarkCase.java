@@ -33,8 +33,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 
 	@Override
 	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
-		final String dbPath = benchmarkConfig.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
-		return new Neo4jDriver(dbPath);
+		return new Neo4jDriver(benchmarkConfig);
 	}
 
 	@Override

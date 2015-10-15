@@ -30,8 +30,8 @@ public class SesameChecker extends RDFChecker<SesameMatch> {
 	protected final SesameDriver driver;
 	protected final String queryDefinition;
 
-	public SesameChecker(final SesameDriver driver, final RDFBenchmarkConfig rdfbc) throws IOException {
-		super(rdfbc);
+	public SesameChecker(final SesameDriver driver, final RDFBenchmarkConfig benchmarkConfig) throws IOException {
+		super(benchmarkConfig);
 		this.driver = driver;
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
