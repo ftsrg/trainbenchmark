@@ -23,8 +23,12 @@ public class HawkPreparedTransformation extends HawkTransformation<Object> {
 
 	@Override
 	public void rhs(final Collection<Object> objects) throws Exception {
-		// copy the prepared invalid file to perform the transformation 		
-		FileUtils.copyFile(new File(invalidModelPath), new File(modelPath));
+		// copy the prepared invalid file to perform the transformation
+		// and touch it
+		final File fSource = new File(invalidModelPath);
+		final File fTarget = new File(modelPath);
+		FileUtils.copyFile(fSource, fTarget);
+		FileUtils.touch(fTarget);
 		driver.waitForSync();
 	}
 
