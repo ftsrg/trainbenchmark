@@ -32,23 +32,39 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public class Drools5Driver extends EMFDriver {
+public class Drools5Driver extends EMFDriver<BenchmarkConfig> {
 
 	protected StatefulKnowledgeSession ksession;
-	protected BenchmarkConfig benchmarkConfig;
 
 	public Drools5Driver(final BenchmarkConfig benchmarkConfig) {
-		super();
-		this.benchmarkConfig = benchmarkConfig;
+		super(benchmarkConfig);
+	}
+
+	@Override
+	public void initialize() throws Exception {
+		super.initialize();
+
+		final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		ksession = kbase.newStatefulKnowledgeSession();
+
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		final String queryFile = benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".drl";
+		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
+
+		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
+		if (errors.size() > 0) {
+			for (final KnowledgeBuilderError error : errors) {
+				throw new IOException("Error encountered while reading knowledge base: " + error);
+			}
+			throw new IllegalArgumentException("Could not parse knowledge.");
+		}
+		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
-
-		// change Drools knowledge base based on EMF notifications
-		final KnowledgeBase kbase = readKnowledgeBase();
-		ksession = kbase.newStatefulKnowledgeSession();
 
 		EObject eObject = null;
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
@@ -97,24 +113,6 @@ public class Drools5Driver extends EMFDriver {
 			}
 		};
 		resource.eAdapters().add(adapter);
-	}
-
-	protected KnowledgeBase readKnowledgeBase() throws Exception {
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = benchmarkConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/"
-				+ benchmarkConfig.getQuery() + ".drl";
-		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
-
-		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
-		if (errors.size() > 0) {
-			for (final KnowledgeBuilderError error : errors) {
-				throw new IOException("Error encountered while reading knowledge base: " + error);
-			}
-			throw new IllegalArgumentException("Could not parse knowledge.");
-		}
-		final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-		return kbase;
 	}
 
 	public StatefulKnowledgeSession getKsession() {

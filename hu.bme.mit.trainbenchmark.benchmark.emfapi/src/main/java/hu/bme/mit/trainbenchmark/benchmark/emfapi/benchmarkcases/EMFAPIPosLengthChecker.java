@@ -12,19 +12,20 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
-import hu.bme.mit.trainbenchmark.railway.Segment;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+
 public class EMFAPIPosLengthChecker extends EMFAPIChecker<EMFPosLengthMatch> {
 
-	public EMFAPIPosLengthChecker(final EMFDriver emfDriver) {
+	public EMFAPIPosLengthChecker(final EMFDriver<?> emfDriver) {
 		super(emfDriver);
 	}
 
@@ -35,10 +36,11 @@ public class EMFAPIPosLengthChecker extends EMFAPIChecker<EMFPosLengthMatch> {
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// (Segment)
-			if (eObject instanceof Segment) {
+			// (segment:Segment)
+			if (RailwayPackage.eINSTANCE.getSegment().isInstance(eObject)) {
 				final Segment segment = (Segment) eObject;
-				// Segment.length <= 0
+				
+				// segment.length <= 0
 				if (segment.getLength() <= 0) {
 					matches.add(new EMFPosLengthMatch(segment));
 				}

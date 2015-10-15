@@ -36,9 +36,9 @@ public class HawkBenchmarkInitializer extends TestBenchmarkInitializer {
 	
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
-		final BenchmarkConfig hbc = new HawkBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
+		final BenchmarkConfig benchmarkConfig = new HawkBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
 				transformationConstant, useHawkResource);
-		return new BenchmarkRunner(hbc, new HawkBenchmarkCase<>());
+		return new BenchmarkRunner(benchmarkConfig, new HawkBenchmarkCase<>());
 	}
 
 }

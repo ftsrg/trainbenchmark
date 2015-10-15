@@ -4,6 +4,8 @@
 
 **Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
 
+**Warning.** The Train Benchmark is designed to run in a server environment. Some implementations may shut down or delete existing databases, so only run it on your developer workstation if you understand the consequences.
+
 For theoretical and implementation details, check out the following documents:
 * [Train Benchmark technical report](https://www.sharelatex.com/github/repos/FTSRG/trainbenchmark-docs/builds/latest/output.pdf) ([GitHub repository](https://github.com/FTSRG/trainbenchmark-docs))
 * [Related publications](http://incquery.net/publications/trainbenchmark)
@@ -32,7 +34,6 @@ The benchmark projects are responsible for running the benchmarks.
   * Neo4j
   * OrientDB
 * RDF
-  * Allegro
   * Blazegraph
   * Jena
   * Sesame
@@ -52,7 +53,7 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
 
 Make sure that you have the following environments.
 
-* [Oracle JDK 7+](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
+* [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
 * [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
 * Python 3
 
@@ -70,14 +71,12 @@ scripts/init-config.sh
 
 Certain tools need to be installed manually. For details, please follow their README file:
 
-* [Allegro](hu.bme.mit.trainbenchmark.benchmark.allegro)
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql)
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso)
 
 Certain tools have dependencies that should be installed, either by buildin from source or by deploying them to your local Maven repository.
 
 ```bash
-scripts/dep-allegro.sh && \
 scripts/dep-neo4j.sh && \
 scripts/dep-virtuoso.sh
 ```

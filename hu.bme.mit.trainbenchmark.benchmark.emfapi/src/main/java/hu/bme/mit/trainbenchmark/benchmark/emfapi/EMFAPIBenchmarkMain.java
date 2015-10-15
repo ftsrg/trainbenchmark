@@ -18,7 +18,7 @@ public class EMFAPIBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("EMF_API", args);
-		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new EMFAPIBenchmarkCase());
-		benchmarkLogic.runBenchmark();
+		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new EMFAPIBenchmarkCase());
+		benchmarkRunner.runBenchmark();
 	}
 }

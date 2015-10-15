@@ -33,6 +33,8 @@
 
 	<dependencies>
 
+		<!-- Train Benchmark -->
+
 		<dependency>
 			<groupId>hu.bme.mit.trainbenchmark</groupId>
 			<artifactId>hu.bme.mit.trainbenchmark.benchmark.sesame</artifactId>

@@ -12,15 +12,16 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.railway.Switch;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
 public class EMFAPISwitchSensorChecker extends EMFAPIChecker<EMFSwitchSensorMatch> {
 
@@ -35,14 +36,16 @@ public class EMFAPISwitchSensorChecker extends EMFAPIChecker<EMFSwitchSensorMatc
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// (Switch)
-			if (eObject instanceof Switch) {
-				final Switch sw = (Switch) eObject;
+			// (sw:Switch)
+			if (!RailwayPackage.eINSTANCE.getSwitch().isInstance(eObject)) {
+				continue;
+			}
 
-				// (Switch)-[sensor]->() NAC
-				if (sw.getSensor() == null) {
-					matches.add(new EMFSwitchSensorMatch(sw));
-				}
+			final Switch sw = (Switch) eObject;
+
+			// (sw)-[:sensor]->() NAC
+			if (sw.getSensor() == null) {
+				matches.add(new EMFSwitchSensorMatch(sw));
 			}
 		}
 

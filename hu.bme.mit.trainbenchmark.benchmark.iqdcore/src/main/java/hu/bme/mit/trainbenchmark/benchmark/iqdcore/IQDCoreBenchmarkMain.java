@@ -19,8 +19,8 @@ import org.apache.commons.cli.ParseException;
 public class IQDCoreBenchmarkMain {
 
 	public static void main(String[] args) throws IOException, ParseException {
-		IQDCoreBenchmarkLogic benchmarkLogic = new IQDCoreBenchmarkLogic(args);
-		benchmarkLogic.runBenchmark();
+		IQDCoreBenchmarkLogic benchmarkRunner = new IQDCoreBenchmarkLogic(args);
+		benchmarkRunner.runBenchmark();
 		System.exit(0);
 		return;
 	}

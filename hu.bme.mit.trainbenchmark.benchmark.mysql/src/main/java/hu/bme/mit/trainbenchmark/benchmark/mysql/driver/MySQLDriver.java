@@ -19,10 +19,15 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-public class MySQLDriver extends SQLDriver {
+public class MySQLDriver extends SQLDriver<BenchmarkConfig> {
+
+	public MySQLDriver(final BenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
+	}
 
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true";
 
@@ -34,6 +39,7 @@ public class MySQLDriver extends SQLDriver {
 		if (!modelFile.exists()) {
 			throw new IOException("Model does not exist: " + modelPath);
 		}
+
 		final String[] command = { "/bin/bash", "-c", "mysql -u " + USER + " < " + modelPath };
 
 		final Process pr = rt.exec(command);
@@ -46,6 +52,12 @@ public class MySQLDriver extends SQLDriver {
 
 	@Override
 	public void initialize() throws Exception {
+		try {
+			MySQLProcess.stopServer();
+		} catch (final Exception e) {
+			// do nothing
+		}
+		MySQLProcess.clean();
 		MySQLProcess.startServer();
 	}
 

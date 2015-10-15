@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
@@ -26,29 +25,30 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends Checker<TMatch> {
 
 	protected Collection<TMatch> matches;
-	protected final EMFIncQueryBaseDriver<TMatch> eiqDriver;
-	protected final EMFIncQueryBenchmarkConfig eiqbc;
+	protected final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> driver;
+	protected final EMFIncQueryBenchmarkConfig benchmarkConfig;
 
-	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver<TMatch> eiqDriver) {
-		this.eiqbc = eiqbc;
-		this.eiqDriver = eiqDriver;
+	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+			final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> driver) {
+		this.benchmarkConfig = benchmarkConfig;
+		this.driver = driver;
 	}
 
-	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig eiqbc, final EMFIncQueryBaseDriver eiqDriver,
+	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig benchmarkConfig, final EMFIncQueryBaseDriver driver,
 			final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new EMFIncQueryConnectedSegmentsChecker(eiqbc, eiqDriver);
+			return new EMFIncQueryConnectedSegmentsChecker(benchmarkConfig, driver);
 		case POSLENGTH:
-			return new EMFIncQueryPosLengthChecker(eiqbc, eiqDriver);
+			return new EMFIncQueryPosLengthChecker(benchmarkConfig, driver);
 		case ROUTESENSOR:
-			return new EMFIncQueryRouteSensorChecker(eiqbc, eiqDriver);
+			return new EMFIncQueryRouteSensorChecker(benchmarkConfig, driver);
 		case SEMAPHORENEIGHBOR:
-			return new EMFIncQuerySemaphoreNeighborChecker(eiqbc, eiqDriver);
+			return new EMFIncQuerySemaphoreNeighborChecker(benchmarkConfig, driver);
 		case SWITCHSENSOR:
-			return new EMFIncQuerySwitchSensorChecker(eiqbc, eiqDriver);
+			return new EMFIncQuerySwitchSensorChecker(benchmarkConfig, driver);
 		case SWITCHSET:
-			return new EMFIncQuerySwitchSetChecker(eiqbc, eiqDriver);
+			return new EMFIncQuerySwitchSetChecker(benchmarkConfig, driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}
@@ -56,11 +56,8 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 
 	@Override
 	public Collection<TMatch> check() throws IncQueryException {
-		if (eiqbc.isLocalSearch()) {
-			matches = new ArrayList<>();
-			for (final TMatch match : getMatcher().getAllMatches()) {
-				matches.add(match);
-			}
+		if (benchmarkConfig.isLocalSearch()) {
+			matches = getMatcher().getAllMatches();
 		}
 		return matches;
 	}

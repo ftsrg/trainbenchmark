@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools6.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -30,22 +27,45 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 
-public class Drools6Driver extends EMFDriver {
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-	protected BenchmarkConfig benchmarkConfig;
+public class Drools6Driver extends EMFDriver<BenchmarkConfig> {
+
 	protected KieSession kieSession;
 
 	public Drools6Driver(final BenchmarkConfig benchmarkConfig) {
-		super();
-		this.benchmarkConfig = benchmarkConfig;
+		super(benchmarkConfig);
+	}
+
+	@Override
+	public void initialize() throws Exception {
+		super.initialize();
+
+		final KieServices kieServices = KieServices.Factory.get();
+
+		final KieFileSystem kfs = kieServices.newKieFileSystem();
+		final String queryFile = benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".drl";
+		final File file = new File(queryFile);
+		if (!file.exists()) {
+			throw new IOException("Query file not found: " + queryFile);
+		}
+		kfs.write("src/main/resources/KBase1/oneQuery.drl", kieServices.getResources().newFileSystemResource(queryFile));
+
+		final KieBuilder kieBuilder = kieServices.newKieBuilder(kfs);
+		kieBuilder.buildAll();
+		if (kieBuilder.getResults().hasMessages(Level.ERROR)) {
+			throw new RuntimeException("Build Errors:\n" + kieBuilder.getResults().toString());
+		}
+
+		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
+		kieSession = kContainer.newKieSession();
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
-
-		// change Drools knowledge base based on EMF notifications
-		readKnowledgeBase();
 
 		EObject eObject = null;
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
@@ -94,28 +114,6 @@ public class Drools6Driver extends EMFDriver {
 			}
 		};
 		resource.eAdapters().add(adapter);
-	}
-
-	protected void readKnowledgeBase() throws IOException {
-		final KieServices kieServices = KieServices.Factory.get();
-
-		final KieFileSystem kfs = kieServices.newKieFileSystem();
-		final String queryFile = benchmarkConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/"
-				+ benchmarkConfig.getQuery() + ".drl";
-		final File file = new File(queryFile);
-		if (!file.exists()) {
-			throw new IOException("Query file not found: " + queryFile);
-		}
-		kfs.write("src/main/resources/KBase1/oneQuery.drl", kieServices.getResources().newFileSystemResource(queryFile));
-
-		final KieBuilder kieBuilder = kieServices.newKieBuilder(kfs);
-		kieBuilder.buildAll();
-		if (kieBuilder.getResults().hasMessages(Level.ERROR)) {
-			throw new RuntimeException("Build Errors:\n" + kieBuilder.getResults().toString());
-		}
-
-		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
-		kieSession = kContainer.newKieSession();
 	}
 
 	public KieSession getKsession() {

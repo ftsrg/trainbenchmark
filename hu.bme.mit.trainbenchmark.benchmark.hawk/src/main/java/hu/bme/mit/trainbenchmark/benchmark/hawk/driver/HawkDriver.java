@@ -21,6 +21,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.thrift.TException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -43,13 +44,14 @@ import uk.ac.york.mondo.integration.api.Credentials;
 import uk.ac.york.mondo.integration.api.Hawk.Client;
 import uk.ac.york.mondo.integration.api.HawkInstance;
 import uk.ac.york.mondo.integration.api.HawkInstanceNotFound;
+import uk.ac.york.mondo.integration.api.HawkInstanceNotRunning;
 import uk.ac.york.mondo.integration.api.Repository;
 import uk.ac.york.mondo.integration.api.utils.APIUtils;
 import uk.ac.york.mondo.integration.api.utils.APIUtils.ThriftProtocol;
 import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceFactoryImpl;
 import uk.ac.york.mondo.integration.hawk.emf.impl.HawkResourceImpl;
 
-public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch> {
+public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch, HawkBenchmarkConfig> {
 
 	private static final String ECORE_METAMODEL = "/hu.bme.mit.trainbenchmark.emf.model/model/railway.ecore";
 	private static final String HAWK_REPOSITORY = "/models/hawkrepository/";
@@ -58,20 +60,19 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 	private static final String HAWK_ADDRESS = "localhost:8080/thrift/hawk/tuple";
 	private static final String HAWK_URL = "http://" + HAWK_ADDRESS;
 
-	protected HawkBenchmarkConfig hbc;
 	protected String hawkRepositoryPath;
 	private Client client;
 	private HawkResourceImpl hawkResource;
 
-	public HawkDriver(final HawkBenchmarkConfig hbc) {
-		this.hbc = hbc;
+	public HawkDriver(final HawkBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
 	}
 
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
 
-		final File workspaceRelativePath = new File(hbc.getWorkspacePath());
+		final File workspaceRelativePath = new File(benchmarkConfig.getWorkspacePath());
 		final String workspacePath = workspaceRelativePath.getAbsolutePath();
 
 		hawkRepositoryPath = workspacePath + HAWK_REPOSITORY;
@@ -89,6 +90,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		final File modelFile = new File(modelPath);
 
 		final File hawkRepositoryFile = new File(hawkRepositoryPath);
+		FileUtils.deleteQuietly(hawkRepositoryFile);
 		FileUtils.copyFileToDirectory(modelFile, hawkRepositoryFile);
 	}
 
@@ -123,7 +125,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 
 		String hawkURI = "hawk+http://" + HAWK_ADDRESS + "?instance=" + HAWK_INSTANCE
 				+ "&subscribe=true&durability=temporary&clientID=hu.trainbenchmark" + System.nanoTime();
-		if (hbc.isUseHawkScope()) {
+		if (benchmarkConfig.isUseHawkScope()) {
 			hawkURI += "&loadingMode=lazy_children";
 		}
 		
@@ -133,14 +135,24 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		client.registerMetamodels(HAWK_INSTANCE, Arrays.asList(thriftFile));
 
 		final Credentials credentials = new Credentials("dummy", "dummy");
-		final Repository repository = new Repository(hawkRepositoryPath, "org.hawk.localfolder.LocalFolder");
 
-		client.addRepository(HAWK_INSTANCE, repository, credentials);
+		// We only create the repository if we don't have it already
+		final Repository newRepository = new Repository(hawkRepositoryPath, "org.hawk.localfolder.LocalFolder");
+		boolean bAlreadyExists = false;
+		for (Repository r : client.listRepositories(HAWK_INSTANCE)) {
+			if (r.equals(newRepository)) {
+				bAlreadyExists = true;
+				break;
+			}
+		}
+		if (!bAlreadyExists) {
+			client.addRepository(HAWK_INSTANCE, newRepository, credentials);
+		}
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
-		final String modelPath = hbc.getModelPathWithoutExtension() + getPostfix();
+		final String modelPath = benchmarkConfig.getModelPathWithoutExtension() + getPostfix();
 
 		hawkResource = (HawkResourceImpl) resource;
 		
@@ -148,10 +160,9 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		// copy the model to the hawk repository to allow Hawk to load the model
 		copyModelToHawk(hawkRepositoryPath, modelPath);
 
-		client.syncInstance(HAWK_INSTANCE);
 		waitForSync();
 
-		if (hbc.isUseHawkScope()) {
+		if (benchmarkConfig.isUseHawkScope()) {
 			final HawkScope hawkScope = new HawkScope(hawkResource.getResourceSet(), client);
 			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(hawkScope));
 		} else {
@@ -177,7 +188,7 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 
 		final ResourceSet resourceSet = resource.getResourceSet();
 		for (final Resource r : resourceSet.getResources()) {
-			for (EObject eObject : r.getContents()) {
+			for (final EObject eObject : r.getContents()) {
 				if (eObject instanceof RailwayContainer) {
 					container = (RailwayContainer) eObject;
 					break;
@@ -186,24 +197,26 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		}
 	}
 
-	public void waitForSync() throws InterruptedException, ExecutionException {
-		CompletableFuture<Boolean> syncEnd = new CompletableFuture<Boolean>();
-		Runnable runnable = new Runnable() {
+	public void waitForSync() throws InterruptedException, ExecutionException, HawkInstanceNotFound, HawkInstanceNotRunning, TException {
+		final CompletableFuture<Boolean> syncEnd = new CompletableFuture<Boolean>();
+		final Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
 				syncEnd.complete(true);
 			}
 		};
 		hawkResource.addSyncEndListener(runnable);
+		client.syncInstance(HAWK_INSTANCE);
+
 		syncEnd.get();
 		hawkResource.removeSyncEndListener(runnable);
 	}
 
+	@Override
 	public void persist() throws IOException {
 		try {
-			client.syncInstance(HAWK_INSTANCE);
 			waitForSync();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new IOException(e);
 		}
 	}
@@ -214,4 +227,8 @@ public class HawkDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBase
 		resource.unload();
 	}
 
+	public String getHawkRepositoryPath() {
+		return hawkRepositoryPath;
+	}
+	
 }

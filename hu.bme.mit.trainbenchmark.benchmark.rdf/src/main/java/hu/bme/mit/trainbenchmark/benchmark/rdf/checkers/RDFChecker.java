@@ -20,10 +20,10 @@ public abstract class RDFChecker<TMatch> extends Checker<TMatch> {
 	protected final Query query;
 	protected final String queryPath;
 
-	public RDFChecker(final RDFBenchmarkConfig rdfbc) {
-		query = rdfbc.getQuery();
+	public RDFChecker(final RDFBenchmarkConfig benchmarkConfig) {
+		query = benchmarkConfig.getQuery();
 
-		queryPath = rdfbc.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + rdfbc.getQuery()
+		queryPath = benchmarkConfig.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + benchmarkConfig.getQuery()
 				+ ".sparql";
 	}
 

@@ -13,12 +13,25 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class Driver<TMatch> {
+/**
+ * Superclass for the drivers used in the benchmark.
+ *  
+ * @author szarnyasg
+ *
+ * @param <TElement> the type of the individual model elements
+ * @param <TBenchmarkConfig> the type of the benchmark configuration used by the benchmark
+ */
+public abstract class Driver<TElement, TBenchmarkConfig> {
 
+	protected final TBenchmarkConfig benchmarkConfig;
+	
+	public Driver(final TBenchmarkConfig benchmarkConfig) {
+		this.benchmarkConfig = benchmarkConfig;
+	}
+	
 	// these methods should be redefined if required
 
 	public void beginTransaction() throws Exception {
@@ -37,11 +50,11 @@ public abstract class Driver<TMatch> {
 
 	public abstract void read(String modelPathWithoutExtension) throws Exception;
 
-	public abstract List<TMatch> collectVertices(final String type) throws Exception;
+	public abstract Collection<TElement> collectVertices(final String type) throws Exception;
 
 	// comparator
 
-	public abstract Comparator<TMatch> getElementComparator();
+	public abstract Comparator<TElement> getElementComparator();
 
 	// extension
 

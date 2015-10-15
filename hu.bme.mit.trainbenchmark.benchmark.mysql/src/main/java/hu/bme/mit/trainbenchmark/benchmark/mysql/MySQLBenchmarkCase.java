@@ -23,15 +23,12 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 
-public class MySQLBenchmarkCase extends SQLBenchmarkCase<MySQLDriver> {
+public class MySQLBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, MySQLDriver> {
 
-	public MySQLBenchmarkCase() {
-		super();
-	}
 
 	@Override
 	public MySQLDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new MySQLDriver();
+		return new MySQLDriver(benchmarkConfig);
 	}
 
 	@Override

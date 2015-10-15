@@ -20,11 +20,11 @@ import hu.bme.mit.trainbenchmark.benchmark.memsql.driver.MemSQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 
-public class MemSQLBenchmarkCase extends SQLBenchmarkCase<MemSQLDriver> {
+public class MemSQLBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, MemSQLDriver> {
 
 	@Override
 	public MemSQLDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new MemSQLDriver();
+		return new MemSQLDriver(benchmarkConfig);
 	}
 
 	@Override

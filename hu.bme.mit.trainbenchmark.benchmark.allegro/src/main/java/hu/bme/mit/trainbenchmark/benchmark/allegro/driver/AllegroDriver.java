@@ -23,7 +23,7 @@ import com.franz.agraph.repository.AGServer;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
-public class AllegroDriver extends SesameDriver {
+public class AllegroDriver extends SesameDriver<RDFBenchmarkConfig> {
 
 	protected AGCatalog catalog;
 
@@ -33,8 +33,8 @@ public class AllegroDriver extends SesameDriver {
 	protected String catalogID = "system";
 	protected String repositoryID = "train";
 
-	public AllegroDriver(final RDFBenchmarkConfig rdfbc) {
-		super(rdfbc);
+	public AllegroDriver(final RDFBenchmarkConfig benchmarkConfig) {
+		super(benchmarkConfig);
 	}
 
 	@Override

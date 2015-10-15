@@ -21,9 +21,9 @@ import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSwitch;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
@@ -47,29 +47,31 @@ public class Neo4jCoreSwitchSetChecker extends Neo4jCoreChecker<Neo4jSwitchSetMa
 
 	@Override
 	public Collection<Neo4jSwitchSetMatch> check() {
-		final Collection<Neo4jSwitchSetMatch> matches = new HashSet<>();
+		final Collection<Neo4jSwitchSetMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			final ResourceIterator<Node> semaphores = graphDb.findNodes(labelSemaphore);
-			while (semaphores.hasNext()) {
-				final Node semaphore = semaphores.next();
+			// (route:Route)
+			final ResourceIterator<Node> routes = graphDb.findNodes(labelRoute);
+			while (routes.hasNext()) {
+				final Node route = routes.next();
 
-				// semaphore.signal = "GO"
-				final Object signal = semaphore.getProperty(SIGNAL);
-				if (!Signal.GO.toString().equals(signal)) {
-					continue;
-				}
-
-				// (semaphore:Semaphore)<-[:entry]-(route:Route)
-				final Iterable<Relationship> entries = semaphore.getRelationships(Direction.INCOMING,
+				// (route:Route)-[:entry]->(semaphore:Semaphore)
+				final Iterable<Relationship> entries = route.getRelationships(Direction.OUTGOING,
 						relationshipTypeEntry);
+				
 				for (final Relationship entry : entries) {
-					final Node route = entry.getStartNode();
-					if (!route.hasLabel(labelRoute)) {
+					final Node semaphore = entry.getEndNode();
+					if (!semaphore.hasLabel(labelSemaphore)) {
 						continue;
 					}
 
+					// semaphore.signal = "GO"
+					final Object signal = semaphore.getProperty(SIGNAL);
+					if (!Signal.GO.toString().equals(signal)) {
+						continue;
+					}
+				
 					// (route:Route)-[:follows]->(swP:SwitchPosition)
 					final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING,
 							relationshipTypeFollows);

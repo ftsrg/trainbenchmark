@@ -33,14 +33,14 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
+public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement, TBenchmarkConfig>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TBenchmarkConfig benchmarkConfig;
 	protected final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkCase;
 
 	protected Transformation<?, ?> transformation;
-	protected TransformationLogic<TMatch, TElement, ?> transformationLogic;
+	protected TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig> transformationLogic;
 	protected TDriver driver;
 	protected Checker<TMatch> checker;
 	protected Collection<TMatch> matches;
@@ -78,8 +78,8 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 	public final void initializeTransformation() throws IOException {
 		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver);
-		transformationLogic = (TransformationLogic<TMatch, TElement, ?>) TransformationLogic.newInstance(benchmarkConfig.getScenario(),
-				getComparator());
+		transformationLogic = (TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig>) TransformationLogic
+				.newInstance(benchmarkConfig.getScenario(), getComparator());
 		if (transformationLogic != null) {
 			transformationLogic.initialize(benchmarkConfig, driver, random);
 		}

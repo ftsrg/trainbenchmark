@@ -12,18 +12,19 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+
+import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNeighborMatch> {
 
@@ -38,52 +39,55 @@ public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNe
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			if (eObject instanceof Route) {
-				final Route route1 = (Route) eObject;
-				checkRoute(route1);
+			// (route1:Route)
+			if (!RailwayPackage.eINSTANCE.getRoute().isInstance(eObject)) {
+				continue;
 			}
-		}
 
-		return matches;
-	}
+			final Route route1 = (Route) eObject;
+			
+			// (route1:Route)-[:exit]->(semaphore:Semaphore)
+			final Semaphore semaphore = route1.getExit();
+			if (semaphore == null) {
+				continue;
+			}
+			
+			// (route1:Route)-[:definedBy]->(sensor1:Sensor)
+			outer: for (final Sensor sensor1 : route1.getDefinedBy()) {
+				// (sensor1:Sensor)-[:element]->(te1:TrackElement)
+				for (final TrackElement te1 : sensor1.getElements()) {
+					// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
+					for (final TrackElement te2 : te1.getConnectsTo()) {
+						// (sensor2:Sensor)-[:sensor]->(te2:TrackElement)
+						final Sensor sensor2 = te2.getSensor();
+						if (sensor2 == null) {
+							continue;
+						}
+						
+						// (sensor2:Sensor)-[eContainer()]->(route2:Route),
+						final EObject route2object = sensor2.eContainer();
+						if (!RailwayPackage.eINSTANCE.getRoute().isInstance(route2object)) {
+							continue;
+						}
 
-	private void checkRoute(final Route route1) {
-		final Semaphore semaphore = route1.getExit();
-		if (semaphore == null) {
-			return;
-		}
-		for (final Sensor sensor1 : route1.getDefinedBy()) {
-			for (final TrackElement te1 : sensor1.getElements()) {
-				for (final TrackElement te2 : te1.getConnectsTo()) {
-					final Sensor sensor2 = te2.getSensor();
+						final Route route2 = (Route) route2object;
 
-					if (sensor2 == null) {
-						continue;
-					}
+						// route1 != route2
+						if (route1.equals(route2)) {
+							continue;
+						}
 
-					// reverse navigation on the (sensor2)<-[definedBy]-(route2) edge
-					final EObject container = sensor2.eContainer();
-					if (!(container instanceof Route)) {
-						continue;
-					}
-
-					final Route route2 = (Route) container;
-
-					// route1 != route2
-					if (route1.equals(route2)) {
-						continue;
-					}
-
-					// (route2)-[entry]->(semaphore) NAC
-					if (!semaphore.equals(route2.getEntry())) {
-						matches.add(new EMFSemaphoreNeighborMatch(semaphore, route1, route2, sensor1, sensor2, te1, te2));
-						return;
+						// (route2:Route)-[:entry]->(semaphore:Semaphore) NAC
+						if (!semaphore.equals(route2.getEntry())) {
+							matches.add(new EMFSemaphoreNeighborMatch(semaphore, route1, route2, sensor1, sensor2, te1, te2));
+							break outer;
+						}
 					}
 				}
 			}
 		}
 
-		return;
+		return matches;
 	}
 
 }
