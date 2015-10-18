@@ -60,6 +60,7 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
   df <- melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
   
   ys = -10:10
+  ybreaks = 10^ys
   yvalues = parse(text=paste("10^", ys, sep=""))
 
   variable.title <- gsub("\\.", " ", variable)
@@ -71,7 +72,7 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
     geom_line(aes(x = as.factor(Size), y = value, col = Tool, group = Tool), size = 0.15) +
     scale_shape_manual(values = seq(0,24)) +
     scale_x_discrete(breaks = 4^(0:24)) +
-    scale_y_log10(breaks = ybreaks, labels = ylabels) +
+    scale_y_log10(breaks = ybreaks, labels = yvalues) +
     facet_wrap(~ CaseName, ncol = 2) +
     theme_bw() +
     theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom") +
