@@ -61,9 +61,12 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
   
   ys = -10:10
   yvalues = parse(text=paste("10^", ys, sep=""))
+
+  variable.title <- gsub("\\.", " ", variable)
+  variable.filename <- gsub("\\.", "-", variable)
   
   base <- ggplot(df) +
-    labs(title = paste(scenario, " scenario, ", variable, sep=""), x = "Model size", y = "Execution time [s]") +
+    labs(title = paste(scenario, " scenario, ", variable.title, sep=""), x = "Model size", y = "Execution time [s]") +
     geom_point(aes(x = as.factor(Size), y = value, col = Tool, shape = Tool), size = 1.5) +
     geom_line(aes(x = as.factor(Size), y = value, col = Tool, group = Tool), size = 0.15) +
     scale_shape_manual(values = seq(0,24)) +
@@ -75,8 +78,7 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
     guides(shape = guide_legend(ncol = 4))
   print(base)
   
-  variableFilename <- gsub("\\.", "-", variable)
-  ggsave(file=paste("../diagrams/", scenario, "-", variableFilename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
+  ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
 }
 
 # aggregated plots
