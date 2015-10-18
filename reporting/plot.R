@@ -60,9 +60,7 @@ trainBenchmarkPlot <- function(df, scenario, variable) {
   df <- melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
   
   ys = -10:10
-  ybreaks = 10^ys
-  yvalues = paste("10^", ys, sep="")
-  ylabels = bquote(.(yvalues))
+  yvalues = parse(text=paste("10^", ys, sep=""))
   
   base <- ggplot(df) +
     labs(title = paste(scenario, " scenario, ", variable, sep=""), x = "Model size", y = "Execution time [s]") +
@@ -105,4 +103,3 @@ for (scenario in transformation.scenarios) {
   trainBenchmarkPlot(plottimes, scenario, "recheck")
   trainBenchmarkPlot(plottimes, scenario, "transformation.and.recheck")
 }
-
