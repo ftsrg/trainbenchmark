@@ -7,8 +7,7 @@ install:
 script:
   - scripts/init-config.sh
   - scripts/init-python.sh
-  - scripts/init-mondo-sam.sh
-  - scripts/dep-allegro.sh
+  - scripts/dep-mondo-sam.sh
   - scripts/dep-neo4j.sh
   - scripts/dep-virtuoso.sh
   - scripts/dep-iqdcore.sh
