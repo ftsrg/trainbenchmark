@@ -89,22 +89,11 @@ trainBenchmarkPlot <- function(df, scenario, variable, xlabels) {
   ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
 }
 
-# aggregated plots
-
-#trainBenchmarkPlot(plottimes, "Batch", "read.and.check")
-
-
-#trainBenchmarkPlot(plottimes, "Repair", "read.and.check")
-#trainBenchmarkPlot(plottimes, "Repair", "transformation.and.recheck")
-
-
 modelsize.batch <- c("8k", "37k", "158k", "662k", "2.6M", "10M", "40.7M")
 modelsize.inject <- c("9k", "35k", "152k", "660k", "2.7M", "10.3M", "41.2M")
 modelsize.repair <- c("9k", "35k", "151k", "658k", "2.7M", "10.3M", "41.1M")
 
 xlabels <- data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair);
-
-# detailed plots
 
 batch.scenarios = c("Batch")
 transformation.scenarios = c("Inject", "Repair")
