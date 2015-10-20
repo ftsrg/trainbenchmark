@@ -14,7 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.jena;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.BenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.AnalyzedBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.layers.VersatileBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.analyzer.JenaModelAnalyzer;
+import hu.bme.mit.trainbenchmark.benchmark.jena.analyzer.JenaQueryAnalyzer;
 import hu.bme.mit.trainbenchmark.benchmark.jena.checkers.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
@@ -28,11 +30,13 @@ import java.util.Comparator;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public class JenaBenchmarkCase extends BenchmarkCase<JenaMatch, Resource, JenaDriver> implements
-		AnalyzedBenchmarkCase {
+		AnalyzedBenchmarkCase, VersatileBenchmarkCase {
 
 	protected JenaDriver jenaDriver;
 	protected RDFBenchmarkConfig rbc;
 	protected JenaModelAnalyzer jenaModelAnalyzer;
+	protected JenaQueryAnalyzer jenaQueryAnalyzer;
+	protected JenaChecker jenaChecker;
 
 	protected RDFBenchmarkConfig getRDFBenchmarkConfig() {
 		return (RDFBenchmarkConfig) benchmarkConfig;
@@ -42,7 +46,7 @@ public class JenaBenchmarkCase extends BenchmarkCase<JenaMatch, Resource, JenaDr
 	protected void init() throws IOException {
 		rbc = (RDFBenchmarkConfig) benchmarkConfig;
 		driver = jenaDriver = new JenaDriver();
-		checker = new JenaChecker(jenaDriver, benchmarkConfig);
+		checker = jenaChecker = new JenaChecker(jenaDriver, benchmarkConfig);
 
 		transformation = JenaTransformation.newInstance(jenaDriver, benchmarkConfig.getQuery(),
 				benchmarkConfig.getScenario());
@@ -57,6 +61,22 @@ public class JenaBenchmarkCase extends BenchmarkCase<JenaMatch, Resource, JenaDr
 	public void initAnalyzer() {
 		modelAnalyzer = jenaModelAnalyzer = new JenaModelAnalyzer(jenaDriver);
 		jenaModelAnalyzer.setBenchmarkConfig(rbc);
+		queryAnalyzer = jenaQueryAnalyzer = new JenaQueryAnalyzer(jenaDriver);
+		jenaQueryAnalyzer.setQueryString(jenaChecker.getQueryDefinition());
+	}
+
+	@Override
+	public void modify() throws IOException {
+		if (benchmarkConfig.isVersatile()) {
+			final String query = queryInitializer
+					.resolveQuery(rbc.getWorkspacePath()
+							+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/",
+							".sparql");
+			jenaChecker.setQueryDefinition(query);
+			jenaChecker.setQuery(query);
+			jenaQueryAnalyzer.setQueryString(query);
+		}
+
 	}
 
 }

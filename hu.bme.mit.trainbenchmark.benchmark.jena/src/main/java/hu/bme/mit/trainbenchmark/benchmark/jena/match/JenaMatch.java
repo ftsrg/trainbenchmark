@@ -11,6 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 
+import hu.bme.mit.trainbenchmark.benchmark.jena.match.schedule.JenaNavigationsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.match.schedule.JenaStationsPathMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
 import com.hp.hpl.jena.query.QuerySolution;
@@ -40,6 +42,10 @@ public abstract class JenaMatch {
 			return new JenaSwitchSensorMatch(qs);
 		case SWITCHSET:
 			return new JenaSwitchSetMatch(qs);
+		case STATIONSPATH:
+			return new JenaStationsPathMatch(qs);
+		case SCHEDULENAVIGATIONS:
+			return new JenaNavigationsMatch(qs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}

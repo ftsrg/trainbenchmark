@@ -16,10 +16,13 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -33,21 +36,26 @@ public class JenaChecker extends Checker<JenaMatch> {
 	protected JenaDriver jenaDriver;
 	protected Query query;
 	protected hu.bme.mit.trainbenchmark.constants.Query tbQuery;
+	protected String queryDefinition;
 
 	public JenaChecker(final JenaDriver jenaDriver, final BenchmarkConfig bc) throws IOException {
 		super();
 		this.jenaDriver = jenaDriver;
-		final String queryPath = bc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + bc.getQuery()
-				+ ".sparql";
+		final String queryPath = bc.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/"
+				+ bc.getQuery() + ".sparql";
 		tbQuery = bc.getQuery();
-		
-		query = QueryFactory.read(queryPath);
+		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
+		if (!bc.isVersatile()) {
+			query = QueryFactory.read(queryPath);
+		}
 	}
 
 	@Override
 	public Collection<JenaMatch> check() throws IOException {
 		final List<JenaMatch> matches = new ArrayList<>();
-		try (QueryExecution queryExecution = QueryExecutionFactory.create(query, jenaDriver.getModel())) {
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(query,
+				jenaDriver.getModel())) {
 			final ResultSet resultSet = queryExecution.execSelect();
 
 			while (resultSet.hasNext()) {
@@ -60,4 +68,15 @@ public class JenaChecker extends Checker<JenaMatch> {
 		return matches;
 	}
 
+	public void setQueryDefinition(String queryDefinition) {
+		this.queryDefinition = queryDefinition;
+	}
+
+	public String getQueryDefinition() {
+		return queryDefinition;
+	}
+
+	public void setQuery(String queryDefinition) {
+		query = QueryFactory.create(queryDefinition);
+	}
 }
