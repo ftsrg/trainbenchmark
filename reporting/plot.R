@@ -104,23 +104,19 @@ modelsize.repair <- c("9k", "35k", "151k", "658k", "2.7M", "10.3M", "41.1M")
 
 xlabels <- data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair);
 
-trainBenchmarkPlot(plottimes, "Batch", "read.and.check", xlabels)
-
 # detailed plots
 
 batch.scenarios = c("Batch")
 transformation.scenarios = c("Inject", "Repair")
 
 for (scenario in c(batch.scenarios, transformation.scenarios)) {
-#  trainBenchmarkPlot(plottimes, scenario, "read")
-#  trainBenchmarkPlot(plottimes, scenario, "check")
-
-    trainBenchmarkPlot(plottimes, scenario, "read.and.check", xlabels)
-
+  trainBenchmarkPlot(plottimes, scenario, "read", xlabels)
+  trainBenchmarkPlot(plottimes, scenario, "check", xlabels)
+  trainBenchmarkPlot(plottimes, scenario, "read.and.check", xlabels)
 }
 
-#for (scenario in transformation.scenarios) {
-#  trainBenchmarkPlot(plottimes, scenario, "transformation")
-#  trainBenchmarkPlot(plottimes, scenario, "recheck")
-#  trainBenchmarkPlot(plottimes, scenario, "transformation.and.recheck")
-#}
+for (scenario in transformation.scenarios) {
+  trainBenchmarkPlot(plottimes, scenario, "transformation", xlabels)
+  trainBenchmarkPlot(plottimes, scenario, "recheck", xlabels)
+  trainBenchmarkPlot(plottimes, scenario, "transformation.and.recheck", xlabels)
+}
