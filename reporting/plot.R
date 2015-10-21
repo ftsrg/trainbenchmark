@@ -72,6 +72,8 @@ trainBenchmarkPlot = function(df, scenario, variable, modelsizes) {
   variable.title = gsub("\\.", " ", variable)
   variable.filename = gsub("\\.", "-", variable)
   
+  df$CaseName <- factor(df$CaseName, levels = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor"))
+  
   base = ggplot(df) +
     labs(title = paste(scenario, " scenario, ", variable.title, sep=""), x = "Model size", y = "Execution time [s]") +
     geom_point(aes(x = as.factor(Size), y = value, col = Tool, shape = Tool), size = 1.5) +
