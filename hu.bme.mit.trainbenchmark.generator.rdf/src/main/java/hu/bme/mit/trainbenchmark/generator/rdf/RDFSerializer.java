@@ -47,13 +47,15 @@ public class RDFSerializer extends ModelSerializer {
 	public void initModel() throws IOException {
 		// source file
 		final String postfix = rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "-inferred";
+		final String extension = rdfGeneratorConfig.isNTriples() ? ".nt" : ".ttl";
+
 		final String srcFilePath = rdfGeneratorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix + ".ttl";
 
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = rdfGeneratorConfig.getModelPathWithoutExtension() + postfix + ".ttl";
+		final String destFilePath = rdfGeneratorConfig.getModelPathWithoutExtension() + postfix + extension;
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -75,18 +77,27 @@ public class RDFSerializer extends ModelSerializer {
 		final String triple = String.format(":%s%d a :%s", ID_PREFIX, id, type);
 		final StringBuilder vertex = new StringBuilder(triple);
 
+		final String linePrefix;
+		if (rdfGeneratorConfig.isNTriples()) {
+			linePrefix = String.format(" .\n:%s%d ", ID_PREFIX, id);
+		} else {
+			linePrefix = " ;\n\t";
+		}
+
 		// if the metamodel is not included, we manually insert the inferenced triples
 		if (!rdfGeneratorConfig.isMetamodel()) {
 			if (ModelConstants.SUPERTYPES.containsKey(type)) {
 				final String superType = ModelConstants.SUPERTYPES.get(type);
-				final String superTypeTriple = String.format("  ;\n\ta :%s", superType);
+
+				final String superTypeTriple = String.format("%sa :%s", linePrefix, superType);
 				vertex.append(superTypeTriple);
 			}
 		}
 
 		// (id)-[]->() attributes
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
-			final String attributeTriple = String.format(" ;\n\t:%s %s", attribute.getKey(), stringValue(attribute.getValue()));
+			final String attributeTriple = String.format("%s:%s %s", linePrefix, attribute.getKey(),
+					stringValue(attribute.getValue()));
 			vertex.append(attributeTriple);
 		}
 
@@ -96,7 +107,8 @@ public class RDFSerializer extends ModelSerializer {
 				continue;
 			}
 
-			final String edgeTriple = String.format(" ;\n\t:%s :%s%s", outgoingEdge.getKey(), ID_PREFIX, outgoingEdge.getValue());
+			final String edgeTriple = String.format("%s:%s :%s%s", linePrefix, outgoingEdge.getKey(), ID_PREFIX,
+					outgoingEdge.getValue());
 			vertex.append(edgeTriple);
 		}
 
@@ -121,7 +133,8 @@ public class RDFSerializer extends ModelSerializer {
 	}
 
 	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value)
+			throws IOException {
 		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
 		write(triple + ".");
 

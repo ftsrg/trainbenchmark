@@ -19,7 +19,10 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 public class RDFGeneratorConfig extends GeneratorConfig {
 
 	protected static final String METAMODEL = "metamodel";
+	protected static final String NTRIPLES = "ntriples";
+	
 	protected boolean metamodel;
+	protected boolean nTriples; 
 
 	public RDFGeneratorConfig(final String[] args) throws ParseException {
 		super(args);
@@ -30,6 +33,7 @@ public class RDFGeneratorConfig extends GeneratorConfig {
 		super.initOptions();
 
 		options.addOption(METAMODEL, false, "generate metamodel and container object and relations for RDF TBox");
+		options.addOption(NTRIPLES, false, "use N-Triples format");
 	}
 
 	@Override
@@ -37,10 +41,15 @@ public class RDFGeneratorConfig extends GeneratorConfig {
 		super.processArguments(args);
 
 		metamodel = cmd.hasOption(METAMODEL);
+		nTriples = cmd.hasOption(NTRIPLES);
 	}
 
 	public boolean isMetamodel() {
 		return metamodel;
+	}
+
+	public boolean isNTriples() {
+		return nTriples;
 	}
 
 }

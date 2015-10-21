@@ -65,8 +65,8 @@ Provided that you start with a fresh Ubuntu server installation, you may use the
 scripts/init-jdk.sh && \
 scripts/init-maven.sh && \
 scripts/init-python.sh && \
-scripts/init-mondo-sam.sh && \
-scripts/init-config.sh
+scripts/init-config.sh && \
+scripts/dep-mondo-sam.sh
 ```
 
 Certain tools need to be installed manually. For details, please follow their README file:
