@@ -26,7 +26,7 @@ public class JenaBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	protected boolean inferencing;
 
-	public JenaBenchmarkInitializer(boolean inferencing) {
+	public JenaBenchmarkInitializer(final boolean inferencing) {
 		this.inferencing = inferencing;
 	}
 	
@@ -37,7 +37,7 @@ public class JenaBenchmarkInitializer extends TestBenchmarkInitializer {
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount,
-				transformationStrategy, transformationConstant, true);
+				transformationStrategy, transformationConstant, inferencing);
 		return new BenchmarkRunner(rbc, new JenaBenchmarkCase());
 	}
 
