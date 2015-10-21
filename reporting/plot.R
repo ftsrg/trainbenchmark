@@ -61,8 +61,8 @@ trainBenchmarkPlot = function(df, scenario, variable, modelsizes) {
   
   # x axis labels
   modelsizes.scenario = as.vector(modelsizes[[scenario]])
-  xbreaks = 4^(0:24)
-  xlabels = paste(4^(0:24), "\n", modelsizes.scenario, sep="")
+  xbreaks = 4^(0:16)
+  xlabels = paste(xbreaks, "\n", modelsizes.scenario, sep="")
   
   # y axis labels
   ys = -10:10
@@ -88,9 +88,9 @@ trainBenchmarkPlot = function(df, scenario, variable, modelsizes) {
   ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
 }
 
-modelsize.batch = c("8k", "37k", "158k", "662k", "2.6M", "10M", "40.7M")
-modelsize.inject = c("9k", "35k", "152k", "660k", "2.7M", "10.3M", "41.2M")
-modelsize.repair = c("9k", "35k", "151k", "658k", "2.7M", "10.3M", "41.1M")
+modelsize.batch = c("8k", "37k", "158k", "662k", "2.6M", "10M", "40.7M", "163.3M")
+modelsize.inject = c("9k", "35k", "152k", "660k", "2.7M", "10.3M", "41.2M", "164.6M")
+modelsize.repair = c("9k", "35k", "151k", "658k", "2.7M", "10.3M", "41.1M", "164.1M")
 
 modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair);
 
