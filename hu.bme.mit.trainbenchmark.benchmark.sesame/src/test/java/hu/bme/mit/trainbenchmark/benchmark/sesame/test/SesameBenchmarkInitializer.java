@@ -26,7 +26,7 @@ public class SesameBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	protected boolean inferencing;
 
-	public SesameBenchmarkInitializer(boolean inferencing) {
+	public SesameBenchmarkInitializer(final boolean inferencing) {
 		this.inferencing = inferencing;
 	}
 
@@ -37,7 +37,7 @@ public class SesameBenchmarkInitializer extends TestBenchmarkInitializer {
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
 		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Sesame", scenario, size, runIndex, query, iterationCount,
-				transformationStrategy, transformationConstant, true);
+				transformationStrategy, transformationConstant, inferencing);
 		return new BenchmarkRunner(rbc, new SesameBenchmarkCase());
 	}
 
