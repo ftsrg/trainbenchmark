@@ -3,22 +3,22 @@
 
 :_1 a :Sensor .
 
-:_2 a :Segment  ;
+:_2 a :Segment ;
 	a :TrackElement .
 
-:_3 a :Segment  ;
+:_3 a :Segment ;
 	a :TrackElement .
 
-:_4 a :Segment  ;
+:_4 a :Segment ;
 	a :TrackElement .
 
-:_5 a :Segment  ;
+:_5 a :Segment ;
 	a :TrackElement .
 
-:_6 a :Segment  ;
+:_6 a :Segment ;
 	a :TrackElement .
 
-:_7 a :Segment  ;
+:_7 a :Segment ;
 	a :TrackElement .
 
 :_2 :connectsTo :_3 .
