@@ -50,7 +50,7 @@ public class RDFSerializer extends ModelSerializer {
 		final String extension = rdfGeneratorConfig.isNTriples() ? ".nt" : ".ttl";
 
 		final String srcFilePath = rdfGeneratorConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix + ".ttl";
+				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix + extension;
 
 		final File srcFile = new File(srcFilePath);
 
