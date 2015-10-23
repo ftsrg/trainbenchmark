@@ -27,10 +27,10 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 
 public class SesameChecker extends RDFChecker<SesameMatch> {
 
-	protected final SesameDriver driver;
+	protected final SesameDriver<RDFBenchmarkConfig> driver;
 	protected final String queryDefinition;
 
-	public SesameChecker(final SesameDriver driver, final RDFBenchmarkConfig benchmarkConfig) throws IOException {
+	public SesameChecker(final SesameDriver<RDFBenchmarkConfig> driver, final RDFBenchmarkConfig benchmarkConfig) throws IOException {
 		super(benchmarkConfig);
 		this.driver = driver;
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));

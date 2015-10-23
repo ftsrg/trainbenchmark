@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.List;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
