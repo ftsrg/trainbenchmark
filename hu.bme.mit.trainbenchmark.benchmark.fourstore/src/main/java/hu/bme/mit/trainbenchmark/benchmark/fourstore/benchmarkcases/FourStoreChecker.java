@@ -23,9 +23,9 @@ public class FourStoreChecker extends Checker<SesameMatch> {
 	public FourStoreChecker(final FourStoreDriver driver, final FourStoreBenchmarkConfig fsbc) throws IOException {
 		super();
 		this.driver = driver;
-		this.query = fsbc.getQuery();
+		this.query = fsbc.getQueries();
 
-		final String queryPath = fsbc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + fsbc.getQuery()
+		final String queryPath = fsbc.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/queries/" + fsbc.getQueries()
 				+ ".sparql";
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}

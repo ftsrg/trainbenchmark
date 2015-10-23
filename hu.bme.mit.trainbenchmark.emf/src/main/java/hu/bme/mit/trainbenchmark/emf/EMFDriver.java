@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
@@ -36,6 +35,7 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 
 	protected RailwayContainer container;
 	protected Resource resource;
+	protected final ResourceSetImpl resourceSet = new ResourceSetImpl();
 	private final Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
 
 	public EMFDriver(final TBenchmarkConfig benchmarkConfig) {
@@ -48,7 +48,6 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 		final String modelPath = modelPathWithoutExtension + getPostfix();
 
 		final URI resourceURI = FileBroker.getEMFUri(modelPath);
-		final ResourceSet resourceSet = new ResourceSetImpl();
 		resource = resourceSet.getResource(resourceURI, true);
 
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
@@ -72,6 +71,7 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
 		final Collection<RailwayElement> vertices = new ArrayList<>();
 
+		RailwayPackage.eINSTANCE.eClass();
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 
 		final TreeIterator<EObject> contents = container.eAllContents();

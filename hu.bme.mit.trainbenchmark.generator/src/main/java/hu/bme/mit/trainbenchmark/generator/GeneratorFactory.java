@@ -40,7 +40,7 @@ public class GeneratorFactory {
 			case SWITCHSET:
 				return new MinimalSwitchSetGenerator(serializer, generatorConfig);
 			default:
-				throw new UnsupportedOperationException("Query " + generatorConfig.getQuery() + " not supported");
+				throw new UnsupportedOperationException("Query " + query + " not supported");
 			}
 		} else {
 			return new ScalableModelGenerator(serializer, generatorConfig);

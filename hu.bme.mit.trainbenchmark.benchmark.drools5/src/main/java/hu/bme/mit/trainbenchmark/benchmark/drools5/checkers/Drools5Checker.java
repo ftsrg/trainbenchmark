@@ -11,17 +11,24 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools5.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
-import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.drools.builder.KnowledgeBuilder;
+import org.drools.builder.KnowledgeBuilderError;
+import org.drools.builder.KnowledgeBuilderErrors;
+import org.drools.builder.KnowledgeBuilderFactory;
+import org.drools.builder.ResourceType;
+import org.drools.io.ResourceFactory;
 import org.drools.runtime.rule.LiveQuery;
+
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 public class Drools5Checker extends Checker<EMFMatch> {
 
@@ -31,10 +38,25 @@ public class Drools5Checker extends Checker<EMFMatch> {
 	protected LiveQuery liveQuery;
 	protected Query query;
 
-	public Drools5Checker(final Drools5Driver driver, final Query query) {
+	public Drools5Checker(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver, final Query query) throws IOException {
 		super();
 		this.driver = driver;
 		this.query = query;
+	
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		final String queryFile = benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/" + query + ".drl";
+		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
+
+		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
+		if (errors.size() > 0) {
+			for (final KnowledgeBuilderError error : errors) {
+				throw new IOException("Error encountered while reading knowledge base: " + error);
+			}
+			throw new IllegalArgumentException("Could not parse knowledge.");
+		}
+		driver.getKbase().addKnowledgePackages(kbuilder.getKnowledgePackages());
+
 	}
 
 	@Override

@@ -65,15 +65,23 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		engine.getBenchmarkResult().addSerializer(serializer);
 		final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
 		token.setBenchmarkRunner(this);
-		
+
 		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
 			driver = benchmarkCase.createDriver(benchmarkConfig);
-			
+
 			// initialize checkers
 			checkers = new ArrayList<>();
-			final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver);;
-			checkers.add(checker);	
-			
+
+			// if (benchmarkConfig.getScenario().equals(Scenario.BATCH)) {
+			// for (final Query query : Query.values()) {
+			// final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, query);
+			// checkers.add(checker);
+			// }
+			// } else {
+			final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, benchmarkConfig.getQuery());
+			checkers.add(checker);
+			// }
+
 			scenario.setRunIndex(i);
 			engine.runBenchmark(scenario, token);
 		}
@@ -84,7 +92,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	// initialization methods
 
 	public final void initializeTransformation() throws IOException {
-		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver);
+		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver, benchmarkConfig.getQuery());
 		transformationLogic = (TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig>) TransformationLogic
 				.newInstance(benchmarkConfig.getScenario(), getComparator());
 		if (transformationLogic != null) {
@@ -110,11 +118,11 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		final TimeMetric timer = new TimeMetric("Time");
 		final ScalarMetric results = new ScalarMetric("Matches");
 		timer.startMeasure();
-		
+
 		for (final TChecker checker : checkers) {
 			matches.add(checker.check());
 		}
-		
+
 		timer.stopMeasure();
 		// only use the first match for now
 		results.setValue(matches.get(0).size());

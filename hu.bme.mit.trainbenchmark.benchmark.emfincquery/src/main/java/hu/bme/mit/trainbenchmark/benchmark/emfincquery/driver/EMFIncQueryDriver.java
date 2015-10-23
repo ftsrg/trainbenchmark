@@ -12,24 +12,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver;
 
 import java.util.Collection;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
-import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
-import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.base.api.NavigationHelper;
 import org.eclipse.incquery.runtime.emf.EMFScope;
-import org.eclipse.incquery.runtime.extensibility.QueryBackendRegistry;
-import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackend;
-import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
-import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
-import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 import com.google.common.collect.Sets;
@@ -38,10 +31,18 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> {
+public class EMFIncQueryDriver<TMatch extends BasePatternMatch>
+		extends EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> {
 
 	public EMFIncQueryDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) {
 		super(benchmarkConfig);
+		
+		try {
+			final EMFScope emfScope = new EMFScope(resourceSet);
+			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
+		} catch (final IncQueryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -49,47 +50,10 @@ public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQu
 		super.initialize();
 		IncQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
 	}
-	
+
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
-
-		if (benchmarkConfig.isLocalSearch()) {
-			// When running local search, make sure the factory is registered
-
-			final Iterable<Entry<Class<? extends IQueryBackend>, IQueryBackendFactory>> factories = QueryBackendRegistry.getInstance()
-					.getAllKnownFactories();
-			boolean registered = false;
-			for (final Entry<Class<? extends IQueryBackend>, IQueryBackendFactory> entry : factories) {
-				if (entry.getKey().equals(LocalSearchBackend.class)) {
-					registered = true;
-				}
-			}
-			if (!registered) {
-				QueryBackendRegistry.getInstance().registerQueryBackendFactory(LocalSearchBackend.class, new LocalSearchBackendFactory());
-			}
-
-		}
-
-		final EMFScope emfScope = new EMFScope(resource);
-		engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));
-
-		final IncQueryMatcher<TMatch> matcher = checker.getMatcher();
-		final Collection<TMatch> matches = matcher.getAllMatches();
-		checker.setMatches(matches);
-		if (!benchmarkConfig.isLocalSearch()) {
-			engine.addMatchUpdateListener(matcher, new IMatchUpdateListener<TMatch>() {
-				@Override
-				public void notifyAppearance(final TMatch match) {
-					matches.add(match);
-				}
-
-				@Override
-				public void notifyDisappearance(final TMatch match) {
-					matches.remove(match);
-				}
-			}, false);
-		}
 	}
 
 	@Override

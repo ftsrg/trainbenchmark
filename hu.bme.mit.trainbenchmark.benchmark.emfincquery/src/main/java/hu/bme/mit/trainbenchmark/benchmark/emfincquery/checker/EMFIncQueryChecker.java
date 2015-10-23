@@ -12,15 +12,23 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
 import java.util.Collection;
+import java.util.Map.Entry;
 
+import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.incquery.runtime.extensibility.QueryBackendRegistry;
+import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackend;
+import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
+import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
+import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends Checker<TMatch> {
 
@@ -32,10 +40,47 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 			final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> driver) {
 		this.benchmarkConfig = benchmarkConfig;
 		this.driver = driver;
+
+		RailwayPackage.eINSTANCE.eClass();
+
+		try {
+			matches = getMatcher().getAllMatches();
+
+			if (benchmarkConfig.isLocalSearch()) { // when running local search, make sure the factory is registered
+
+				final Iterable<Entry<Class<? extends IQueryBackend>, IQueryBackendFactory>> factories = QueryBackendRegistry
+						.getInstance().getAllKnownFactories();
+				boolean registered = false;
+				for (final Entry<Class<? extends IQueryBackend>, IQueryBackendFactory> entry : factories) {
+					if (entry.getKey().equals(LocalSearchBackend.class)) {
+						registered = true;
+					}
+				}
+				if (!registered) {
+					QueryBackendRegistry.getInstance().registerQueryBackendFactory(LocalSearchBackend.class,
+							new LocalSearchBackendFactory());
+				}
+
+			} else { // incremental
+				driver.getEngine().addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<TMatch>() {
+					@Override
+					public void notifyAppearance(final TMatch match) {
+						matches.add(match);
+					}
+
+					@Override
+					public void notifyDisappearance(final TMatch match) {
+						matches.remove(match);
+					}
+				}, false);
+			}
+		} catch (final IncQueryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig benchmarkConfig, final EMFIncQueryBaseDriver driver,
-			final Query query) {
+	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+			final EMFIncQueryBaseDriver driver, final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new EMFIncQueryConnectedSegmentsChecker(benchmarkConfig, driver);
