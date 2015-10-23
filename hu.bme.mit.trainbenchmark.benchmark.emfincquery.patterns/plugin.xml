@@ -14,7 +14,4 @@
   <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor" point="org.eclipse.incquery.runtime.queryspecification">
     <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighbor"/>
   </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" point="org.eclipse.incquery.runtime.queryspecification">
-    <group group="org.eclipse.incquery.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength" id="hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLength"/>
-  </extension>
 </plugin>
