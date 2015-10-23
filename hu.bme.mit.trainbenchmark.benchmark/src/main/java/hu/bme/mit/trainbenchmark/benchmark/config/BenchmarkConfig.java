@@ -67,6 +67,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		queryOption.setRequired(true);
 		options.addOption(queryOption);
 
+		// runs
 		options.addOption(RUNS, true, "number of runs");
 		final Option runOption = options.getOption(RUNS);
 		runOption.setRequired(true);

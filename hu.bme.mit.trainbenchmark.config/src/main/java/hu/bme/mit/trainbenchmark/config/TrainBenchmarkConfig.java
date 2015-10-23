@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.config;
 
 import static hu.bme.mit.trainbenchmark.constants.Scenario.MINIMAL;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public abstract class TrainBenchmarkConfig {
 	// arguments
 	protected int size;
 	protected Scenario scenario;
-	protected List<Query> queries;
+	protected List<Query> queries = new ArrayList<>();
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
@@ -80,8 +81,7 @@ public abstract class TrainBenchmarkConfig {
 		// queries
 		final Option queryOption = new Option(QUERIES, true, "specifies the query, e.g. RouteSensor");
 		queryOption.setArgs(Option.UNLIMITED_VALUES);
-		options.addOption(queryOption);
-		
+		options.addOption(queryOption);		
 	}
 
 	protected void processArguments(final String[] args) throws ParseException {
@@ -90,16 +90,11 @@ public abstract class TrainBenchmarkConfig {
 		scenario = Scenario.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
 
 		if (cmd.hasOption(QUERIES)) {
-			System.out.println(cmd.getOptionValue(QUERIES));
-			final String[] queriesArgument = cmd.getOptionValues(QUERIES);
-			System.out.println("-");
-			for (final String string : queriesArgument) {
-				System.out.println(string);
+			final String[] queriesArguments = cmd.getOptionValues(QUERIES);
+
+			for (final String queriesArgument : queriesArguments) {
+				queries.add(Query.valueOf(queriesArgument.toUpperCase()));
 			}
-			System.out.println("--");
-			
-//			queries = Query.valueOf(.toUpperCase());
-			System.out.println(queries);
 		}
 
 		if (cmd.hasOption(SIZE)) {
