@@ -11,18 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools6.driver;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.kie.api.KieServices;
-import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.KieFileSystem;
-import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
@@ -32,35 +27,22 @@ import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 public class Drools6Driver extends EMFDriver<BenchmarkConfig> {
 
+	protected final KieServices kieServices = KieServices.Factory.get();
+	protected final KieFileSystem kfs = kieServices.newKieFileSystem();
+	protected KieContainer kContainer;
 	protected KieSession kieSession;
-
+	
 	public Drools6Driver(final BenchmarkConfig benchmarkConfig) {
 		super(benchmarkConfig);
 	}
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();
-
-		final KieServices kieServices = KieServices.Factory.get();
-
-		final KieFileSystem kfs = kieServices.newKieFileSystem();
-		final String queryFile = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".drl";
-		final File file = new File(queryFile);
-		if (!file.exists()) {
-			throw new IOException("Query file not found: " + queryFile);
-		}
-		kfs.write("src/main/resources/KBase1/oneQuery.drl", kieServices.getResources().newFileSystemResource(queryFile));
-
-		final KieBuilder kieBuilder = kieServices.newKieBuilder(kfs);
-		kieBuilder.buildAll();
-		if (kieBuilder.getResults().hasMessages(Level.ERROR)) {
-			throw new RuntimeException("Build Errors:\n" + kieBuilder.getResults().toString());
-		}
-
-		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
+		super.initialize();	
+	
+		kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
 		kieSession = kContainer.newKieSession();
+		
 	}
 
 	@Override
@@ -118,6 +100,14 @@ public class Drools6Driver extends EMFDriver<BenchmarkConfig> {
 
 	public KieSession getKsession() {
 		return kieSession;
+	}
+	
+	public KieFileSystem getKfs() {
+		return kfs;
+	}
+	
+	public KieServices getKieServices() {
+		return kieServices;
 	}
 
 }

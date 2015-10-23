@@ -36,7 +36,7 @@ public class HawkBenchmarkCase<TMatch extends BasePatternMatch>
 	@Override
 	public EMFIncQueryChecker<TMatch> createChecker(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<TMatch> driver) throws Exception {
 		final EMFIncQueryChecker<TMatch> checker = (EMFIncQueryChecker<TMatch>) EMFIncQueryChecker.newInstance(benchmarkConfig, driver,
-				benchmarkConfig.getQuery());
+				benchmarkConfig.getQueries());
 		driver.registerChecker(checker);
 		return checker;
 	}
@@ -44,7 +44,7 @@ public class HawkBenchmarkCase<TMatch extends BasePatternMatch>
 	@Override
 	public Transformation<?, ?> createTransformation(final HawkBenchmarkConfig benchmarkConfig, final HawkDriver<TMatch> driver)
 			throws IOException {
-		return HawkTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario(), benchmarkConfig);
+		return HawkTransformation.newInstance(driver, benchmarkConfig.getQueries(), benchmarkConfig.getScenario(), benchmarkConfig);
 	}
 
 	@Override

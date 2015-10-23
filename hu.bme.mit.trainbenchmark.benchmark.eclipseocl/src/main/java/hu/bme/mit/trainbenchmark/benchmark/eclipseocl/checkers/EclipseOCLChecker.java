@@ -19,11 +19,11 @@ import org.apache.commons.io.FileUtils;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCL.Helper;
-import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.ecore.OCLExpression;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
@@ -33,7 +33,7 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 
 	protected Collection<TMatch> matches;
 	protected OCL ocl;
-	protected Query queryEvaluator;
+	protected org.eclipse.ocl.ecore.OCL.Query queryEvaluator;
 	protected RailwayContainer container;
 	protected EMFDriver driver;
 
@@ -42,7 +42,7 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 		this.driver = driver;
 
 		final String oclQuery = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".ocl"));
+				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + benchmarkConfig.getQueries() + ".ocl"));
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
@@ -51,8 +51,8 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 		queryEvaluator = ocl.createQuery(query);
 	}
 
-	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
-		switch (benchmarkConfig.getQuery()) {
+	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws Exception {
+		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new EclipseOCLConnectedSegmentsChecker(driver, benchmarkConfig);
 		case POSLENGTH:
@@ -66,7 +66,7 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 		case SWITCHSET:
 			return new EclipseOCLSwitchSetChecker(driver, benchmarkConfig);
 		default:
-			throw new UnsupportedOperationException("Query " + benchmarkConfig.getQuery() + " not supported");
+			throw new UnsupportedOperationException("Query " + benchmarkConfig.getQueries() + " not supported");
 		}
 	}
 

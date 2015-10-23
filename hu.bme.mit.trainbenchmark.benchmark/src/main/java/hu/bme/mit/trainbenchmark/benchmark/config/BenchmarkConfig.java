@@ -15,6 +15,8 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 
+import com.google.common.collect.ImmutableList;
+
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
@@ -49,7 +51,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		super(scenario, size);
 		this.toolName = toolName;
 		this.runs = runs;
-		this.query = query;
+		this.queries = ImmutableList.of(query);
 		this.iterationCount = iterationCount;
 		this.transformationStrategy = transformationStrategy;
 		this.transformationConstant = transformationConstant;
@@ -59,9 +61,9 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		// the "size" and "query" options are required for the BenchmarkConfig but not required for the GeneratorConfig
+		// the "size" and "queries" options are required for the BenchmarkConfig but not required for the GeneratorConfig
 		options.getOption(SIZE).setRequired(true);
-		final Option queryOption = options.getOption(QUERY);
+		final Option queryOption = options.getOption(QUERIES);
 		queryOption.setRequired(true);
 		options.addOption(queryOption);
 
