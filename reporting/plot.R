@@ -90,9 +90,9 @@ trainBenchmarkPlot = function(df, scenario, variable, modelsizes) {
   ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
 }
 
-modelsize.batch = c("8k", "37k", "158k", "662k", "2.6M", "10M", "40.7M", "163.3M")
-modelsize.inject = c("9k", "35k", "152k", "660k", "2.7M", "10.3M", "41.2M", "164.6M")
-modelsize.repair = c("9k", "35k", "151k", "658k", "2.7M", "10.3M", "41.1M", "164.1M")
+modelsize.batch = c("4.7k", "21k", "89k", "374k", "1.5M", "5.7M", "23M")
+modelsize.inject = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M")
+modelsize.repair = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M")
 
 modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair);
 
