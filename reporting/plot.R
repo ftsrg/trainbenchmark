@@ -54,7 +54,7 @@ plottimes = melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "
 
 # plot
 
-trainBenchmarkPlot = function(df, scenario, variable, modelsizes) {
+trainBenchmarkPlot = function(df, scenario, modelsizes, levels, variable) {
   df = df[df$Scenario == scenario & df$variable == variable, ]
   #print(head(df))
   df = melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
@@ -72,7 +72,7 @@ trainBenchmarkPlot = function(df, scenario, variable, modelsizes) {
   variable.title = gsub("\\.", " ", variable)
   variable.filename = gsub("\\.", "-", variable)
   
-  df$CaseName <- factor(df$CaseName, levels = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor"))
+  df$CaseName <- factor(df$CaseName, levels = levels)
   
   base = ggplot(df) +
     labs(title = paste(scenario, " scenario, ", variable.title, sep=""), x = "Model size", y = "Execution time [s]") +
@@ -95,18 +95,23 @@ modelsize.inject = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M")
 modelsize.repair = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M")
 
 modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair);
+levels = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
 
 batch.scenarios = c("Batch")
 transformation.scenarios = c("Inject", "Repair")
 
+trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "read")
+trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "check")
+trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "read.and.check")
+
 for (scenario in c(batch.scenarios, transformation.scenarios)) {
-  trainBenchmarkPlot(plottimes, scenario, "read", modelsizes)
-  trainBenchmarkPlot(plottimes, scenario, "check", modelsizes)
-  trainBenchmarkPlot(plottimes, scenario, "read.and.check", modelsizes)
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "check")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read.and.check")
 }
 
 for (scenario in transformation.scenarios) {
-  trainBenchmarkPlot(plottimes, scenario, "transformation", modelsizes)
-  trainBenchmarkPlot(plottimes, scenario, "recheck", modelsizes)
-  trainBenchmarkPlot(plottimes, scenario, "transformation.and.recheck", modelsizes)
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "recheck")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation.and.recheck")
 }
