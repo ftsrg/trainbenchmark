@@ -33,6 +33,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement, TBenchmarkConfig>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
@@ -72,15 +73,10 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 			// initialize checkers
 			checkers = new ArrayList<>();
 
-			// if (benchmarkConfig.getScenario().equals(Scenario.BATCH)) {
-			// for (final Query query : Query.values()) {
-			// final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, query);
-			// checkers.add(checker);
-			// }
-			// } else {
-			final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, benchmarkConfig.getQuery());
-			checkers.add(checker);
-			// }
+			for (final Query query : benchmarkConfig.getQueries()) {
+				final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, query);
+				checkers.add(checker);
+			}
 
 			scenario.setRunIndex(i);
 			engine.runBenchmark(scenario, token);
