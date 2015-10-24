@@ -54,14 +54,13 @@ plottimes = melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "
 
 # plot
 
-trainBenchmarkPlot = function(df, scenario, modelsizes, levels, variable) {
+trainBenchmarkPlot = function(df, scenario, modelsizes, levels, variable, xbreaks = 4^(0:16), width = 210, height = 297) {
   df = df[df$Scenario == scenario & df$variable == variable, ]
   #print(head(df))
   df = melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
   
   # x axis labels
   modelsizes.scenario = as.vector(modelsizes[[scenario]])
-  xbreaks = 4^(0:16)
   xlabels = paste(xbreaks, "\n", modelsizes.scenario, sep="")
   
   # y axis labels
@@ -87,22 +86,27 @@ trainBenchmarkPlot = function(df, scenario, modelsizes, levels, variable) {
     guides(shape = guide_legend(ncol = 4))
   print(base)
   
-  ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = 210, height = 297, units = "mm")
+  ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = width, height = height, units = "mm")
 }
 
-modelsize.batch = c("4.7k", "21k", "89k", "374k", "1.5M", "5.7M", "23M")
-modelsize.inject = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M")
-modelsize.repair = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M")
+modelsize.all = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M")
+modelsize.batch = c("4.7k", "21k", "89k", "374k", "1.5M", "5.7M", "23M", "4.7k", "21k", "89k", "374k", "1.5M", "5.7M", "23M")
+modelsize.inject = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M", "5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M")
+modelsize.repair = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M", "5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M")
 
-modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair);
+
+modelsizes = data.frame("All" = modelsize.all, "Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair)
 levels = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
 
 batch.scenarios = c("Batch")
 transformation.scenarios = c("Inject", "Repair")
 
-trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "read")
-trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "check")
-trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "read.and.check")
+width.all = 210
+height.all = 150
+xbreaks.all = 2^(0:32)
+trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "read", xbreaks = xbreaks.all, width = width.all, height = height.all)
+trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "check", xbreaks = xbreaks.all, width = width.all, height = height.all)
+trainBenchmarkPlot(plottimes, "All", modelsizes, c("All"), "read.and.check", xbreaks = xbreaks.all, width = width.all, height = height.all)
 
 for (scenario in c(batch.scenarios, transformation.scenarios)) {
   trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read")

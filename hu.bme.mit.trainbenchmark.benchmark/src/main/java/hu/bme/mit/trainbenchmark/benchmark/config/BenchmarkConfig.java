@@ -119,4 +119,9 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 	public String getToolName() {
 		return toolName;
 	}
+
+	public String getCaseName() {
+		final String queries = getQueries().toString().replaceAll("[\\[\\]]", "").replaceAll(", ","-");
+		return queries;
+	}
 }
