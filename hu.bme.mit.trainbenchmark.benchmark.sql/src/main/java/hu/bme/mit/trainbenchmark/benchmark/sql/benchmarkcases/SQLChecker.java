@@ -41,6 +41,7 @@ public class SQLChecker extends Checker<SQLMatch> {
 
 	@Override
 	public Collection<SQLMatch> check() throws SQLException {
+		System.out.println(query);
 		return driver.runQuery(query, queryDefinition);
 	}
 
