@@ -46,7 +46,7 @@ public class Drools6Checker extends Checker<EMFMatch> {
 		if (!file.exists()) {
 			throw new IOException("Query file not found: " + queryFile);
 		}
-		driver.getKfs().write("src/main/resources/KBase1/oneQuery.drl", driver.getKieServices().getResources().newFileSystemResource(queryFile));
+		driver.getKfs().write("src/main/resources/" + query + ".drl", driver.getKieServices().getResources().newFileSystemResource(queryFile));
 
 		final KieBuilder kieBuilder = driver.getKieServices().newKieBuilder(driver.getKfs());
 		kieBuilder.buildAll();
