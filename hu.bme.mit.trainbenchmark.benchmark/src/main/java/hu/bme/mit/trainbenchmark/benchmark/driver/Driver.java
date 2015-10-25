@@ -14,8 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
 import java.util.Collection;
 import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
-
 /**
  * Superclass for the drivers used in the benchmark.
  *  
@@ -59,7 +57,5 @@ public abstract class Driver<TElement, TBenchmarkConfig> {
 	// extension
 
 	public abstract String getPostfix();
-
-	public abstract Collection<?> runQuery(final Query query, final String queryDefinition) throws Exception;
 
 }

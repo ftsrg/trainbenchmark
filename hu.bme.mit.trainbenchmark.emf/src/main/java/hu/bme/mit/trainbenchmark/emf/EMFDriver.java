@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -26,7 +25,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
@@ -95,11 +93,6 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 
 	public Resource getResource() {
 		return resource;
-	}
-
-	@Override
-	public List<?> runQuery(final Query query, final String queryDefinition) throws IOException {
-		throw new UnsupportedOperationException("The EMFDriver cannot evaluate queries.");
 	}
 
 	public void persist() throws IOException {
