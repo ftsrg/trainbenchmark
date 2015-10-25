@@ -69,7 +69,6 @@ public class JenaDriver extends RDFDriver<Resource, RDFBenchmarkConfig> {
 		}
 	}
 
-	@Override
 	public Collection<QuerySolution> runQuery(final Query query, final String queryDefinition) throws IOException {
 		final Collection<QuerySolution> results = new ArrayList<>();
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(queryDefinition, model)) {

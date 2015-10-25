@@ -88,7 +88,6 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 		connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
 
-	@Override
 	public Collection<SesameMatch> runQuery(final Query query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final Collection<SesameMatch> results = new ArrayList<>();
