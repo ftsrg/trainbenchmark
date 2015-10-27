@@ -16,20 +16,22 @@ import java.util.Comparator;
 
 /**
  * Superclass for the drivers used in the benchmark.
- *  
+ * 
  * @author szarnyasg
  *
- * @param <TElement> the type of the individual model elements
- * @param <TBenchmarkConfig> the type of the benchmark configuration used by the benchmark
+ * @param <TElement>
+ *            the type of the individual model elements
+ * @param <TBenchmarkConfig>
+ *            the type of the benchmark configuration used by the benchmark
  */
 public abstract class Driver<TElement, TBenchmarkConfig> {
 
 	protected final TBenchmarkConfig benchmarkConfig;
-	
+
 	public Driver(final TBenchmarkConfig benchmarkConfig) {
 		this.benchmarkConfig = benchmarkConfig;
 	}
-	
+
 	// these methods should be redefined if required
 
 	public void beginTransaction() throws Exception {

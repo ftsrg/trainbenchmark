@@ -16,7 +16,7 @@ times$Tool = gsub('_', ' ', times$Tool)
 # long table to wide table
 times = dcast(times,
                Tool + Size + MetricName + Scenario + CaseName + Iteration + RunIndex ~ PhaseName,
-               value.var = "MetricValue")
+               value.var = "MetricValue", fun.aggregate = sum)
 
 derived.times = times
 derived.times$read.and.check = derived.times$Read + derived.times$Check
@@ -89,33 +89,28 @@ trainBenchmarkPlot = function(df, scenario, modelsizes, levels, variable, xbreak
   ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = width, height = height, units = "mm")
 }
 
-modelsize.all = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M")
-modelsize.batch = c("4.7k", "21k", "89k", "374k", "1.5M", "5.7M", "23M", "4.7k", "21k", "89k", "374k", "1.5M", "5.7M")
+modelsize.batch = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M")
 modelsize.inject = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M", "5k", "20k", "86k", "373k", "1.5M", "5.8M")
 modelsize.repair = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M", "5k", "20k", "86k", "373k", "1.5M", "5.8M")
 
 
-modelsizes = data.frame("All" = modelsize.all, "Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair)
+modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair)
 levels = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
 
-batch.scenarios = c("Batch")
 transformation.scenarios = c("Inject", "Repair")
 
 width.all = 210
 height.all = 150
 xbreaks.all = 2^(0:32)
-trainBenchmarkPlot(plottimes, "All", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read", xbreaks = xbreaks.all, width = width.all, height = height.all)
-trainBenchmarkPlot(plottimes, "All", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "check", xbreaks = xbreaks.all, width = width.all, height = height.all)
-trainBenchmarkPlot(plottimes, "All", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read.and.check", xbreaks = xbreaks.all, width = width.all, height = height.all)
+trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read", xbreaks = xbreaks.all, width = width.all, height = height.all)
+trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "check", xbreaks = xbreaks.all, width = width.all, height = height.all)
+trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read.and.check", xbreaks = xbreaks.all, width = width.all, height = height.all)
 
-for (scenario in c(batch.scenarios, transformation.scenarios)) {
-  #trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read")
-  #trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "check")
-  #trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read.and.check")
-}
-
-for (scenario in transformation.scenarios) {
-  #trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation")
-  #trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "recheck")
-  #trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation.and.recheck")
+for (scenario in c(transformation.scenarios)) {
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "check")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read.and.check")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "recheck")
+  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation.and.recheck")
 }

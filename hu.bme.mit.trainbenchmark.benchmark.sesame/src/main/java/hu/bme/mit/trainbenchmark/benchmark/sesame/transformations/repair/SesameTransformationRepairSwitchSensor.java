@@ -13,10 +13,9 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSensorMatch;
 
 import java.util.Collection;
 
@@ -25,6 +24,9 @@ import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
+
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSensorMatch;
 
 public class SesameTransformationRepairSwitchSensor extends SesameTransformationRepair<SesameSwitchSensorMatch> {
 
@@ -39,6 +41,7 @@ public class SesameTransformationRepairSwitchSensor extends SesameTransformation
 
 		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
 		final URI sensorType = vf.createURI(BASE_PREFIX + SENSOR);
+		final URI trackElementType = vf.createURI(BASE_PREFIX + TRACKELEMENT);
 
 		for (final SesameSwitchSensorMatch match : matches) {
 			final Resource sw = match.getSw();
@@ -47,6 +50,12 @@ public class SesameTransformationRepairSwitchSensor extends SesameTransformation
 
 			// set vertex type
 			con.add(sensor, RDF.TYPE, sensorType);
+
+			// insert the supertype as well
+			if (!driver.isInferencing()) {
+				con.add(sensor, RDF.TYPE, trackElementType);
+			}
+
 			// insert edge
 			con.add(sw, sensorEdgeType, sensor);
 		}
