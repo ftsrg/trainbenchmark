@@ -36,7 +36,7 @@ public class OrientDbBenchmarkCase
 	@Override
 	public OrientDbChecker<OrientDbMatch> createChecker(final BenchmarkConfig benchmarkConfig, final OrientDbDriver driver)
 			throws Exception {
-		return OrientDbChecker.newInstance(driver, benchmarkConfig.getQuery());
+		return OrientDbChecker.newInstance(driver, benchmarkConfig.getQueries());
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class OrientDbBenchmarkCase
 
 	@Override
 	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final OrientDbDriver driver) throws IOException {
-		return OrientDbTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+		return OrientDbTransformation.newInstance(driver, benchmarkConfig.getQueries(), benchmarkConfig.getScenario());
 	}
 
 }

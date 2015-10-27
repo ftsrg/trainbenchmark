@@ -7,7 +7,7 @@
 :_2 a :Route ;
 	:entry :_1 .
 
-:_3 a :Switch  ;
+:_3 a :Switch ;
 	a :TrackElement ;
 	:currentPosition :POSITION_RIGHT .
 

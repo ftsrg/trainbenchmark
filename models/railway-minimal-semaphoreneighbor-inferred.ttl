@@ -12,10 +12,10 @@
 
 :_5 a :Sensor .
 
-:_6 a :Segment  ;
+:_6 a :Segment ;
 	a :TrackElement .
 
-:_7 a :Segment  ;
+:_7 a :Segment ;
 	a :TrackElement .
 
 :_2 :definedBy :_4 .

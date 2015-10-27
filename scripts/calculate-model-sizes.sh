@@ -2,6 +2,12 @@
 
 cd "$( cd "$( dirname "$0" )" && pwd )/../models"
 
-wc -l railway-batch-*-metamodel.ttl
-wc -l railway-inject-*-metamodel.ttl
-wc -l railway-repair-*-metamodel.ttl
+for variant in inferred metamodel; do
+	echo $variant
+	for scenario in batch inject repair; do
+		echo $scenario
+		ag --count "^[^@].*[;.]$" *-$scenario-*$variant.ttl | sed "s/\(.*\):\(.*\)/\2\t\1/" | sort --numeric-sort
+		echo
+	done
+	echo
+done
