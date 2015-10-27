@@ -48,6 +48,7 @@ tools:
 - blazegraph
 - drools5
 - drools6
+- eclipseocl
 - emfapi
 - emfincquery
 #- hawk
