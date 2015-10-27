@@ -11,17 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
+
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 
@@ -29,13 +29,13 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 	protected final Query query;
 	protected final String queryDefinition;
 
-	protected Neo4jCypherChecker(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
+	protected Neo4jCypherChecker(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
 		super();
 		this.driver = driver;
 
-		query = benchmarkConfig.getQuery();
+		this.query = query;
 		queryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".cypher"));
+				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + query + ".cypher"));
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 		return driver.runQuery(query, queryDefinition);
 	}
 
-	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
-		return new Neo4jCypherChecker(driver, benchmarkConfig);
+	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+		return new Neo4jCypherChecker(driver, benchmarkConfig, query);
 	}
 
 }

@@ -14,7 +14,9 @@ package hu.bme.mit.trainbenchmark.config;
 
 import static hu.bme.mit.trainbenchmark.constants.Scenario.MINIMAL;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -31,7 +33,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 public abstract class TrainBenchmarkConfig {
 
 	protected static final String HELP = "help";
-	protected static final String QUERY = "query";
+	protected static final String QUERIES = "queries";
 	protected static final String SCENARIO = "scenario";
 	protected static final String SIZE = "size";
 
@@ -42,7 +44,7 @@ public abstract class TrainBenchmarkConfig {
 	// arguments
 	protected int size;
 	protected Scenario scenario;
-	protected Query query;
+	protected List<Query> queries = new ArrayList<>();
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
@@ -68,12 +70,18 @@ public abstract class TrainBenchmarkConfig {
 	protected void initOptions() {
 		options.addOption(HELP, false, "displays this text");
 
+		// scenario
 		final Option scenarioOption = new Option(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
 		scenarioOption.setRequired(true);
 		options.addOption(scenarioOption);
 
+		// size
 		options.addOption(SIZE, true, "specifies model size, e.g. 4");
-		options.addOption(QUERY, true, "specifies the query, e.g. RouteSensor");
+		
+		// queries
+		final Option queryOption = new Option(QUERIES, true, "specifies the query, e.g. RouteSensor");
+		queryOption.setArgs(Option.UNLIMITED_VALUES);
+		options.addOption(queryOption);		
 	}
 
 	protected void processArguments(final String[] args) throws ParseException {
@@ -81,8 +89,12 @@ public abstract class TrainBenchmarkConfig {
 
 		scenario = Scenario.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
 
-		if (cmd.hasOption(QUERY)) {
-			query = Query.valueOf(cmd.getOptionValue(QUERY).toUpperCase());
+		if (cmd.hasOption(QUERIES)) {
+			final String[] queriesArguments = cmd.getOptionValues(QUERIES);
+
+			for (final String queriesArgument : queriesArguments) {
+				queries.add(Query.valueOf(queriesArgument.toUpperCase()));
+			}
 		}
 
 		if (cmd.hasOption(SIZE)) {
@@ -129,15 +141,19 @@ public abstract class TrainBenchmarkConfig {
 		final StringBuilder filenameBuilder = new StringBuilder();
 		filenameBuilder.append("railway-" + variant + "-");
 		if (scenario == MINIMAL) {
-			filenameBuilder.append(query.toString().toLowerCase());
+			filenameBuilder.append(getQuery().toString().toLowerCase());
 		} else {
 			filenameBuilder.append(size);
 		}
 		return filenameBuilder.toString();
 	}
 
+	public List<Query> getQueries() {
+		return queries;
+	}
+	
 	public Query getQuery() {
-		return query;
+		return queries.get(0);
 	}
 
 }

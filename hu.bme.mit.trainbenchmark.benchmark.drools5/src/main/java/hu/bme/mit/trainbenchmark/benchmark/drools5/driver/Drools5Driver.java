@@ -11,16 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools5.driver;
 
-import java.io.IOException;
-
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.KnowledgeBuilder;
-import org.drools.builder.KnowledgeBuilderError;
-import org.drools.builder.KnowledgeBuilderErrors;
-import org.drools.builder.KnowledgeBuilderFactory;
-import org.drools.builder.ResourceType;
-import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.FactHandle;
 import org.eclipse.emf.common.notify.Notification;
@@ -34,32 +26,11 @@ import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 public class Drools5Driver extends EMFDriver<BenchmarkConfig> {
 
-	protected StatefulKnowledgeSession ksession;
+	protected KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+	protected StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
 
 	public Drools5Driver(final BenchmarkConfig benchmarkConfig) {
 		super(benchmarkConfig);
-	}
-
-	@Override
-	public void initialize() throws Exception {
-		super.initialize();
-
-		final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-		ksession = kbase.newStatefulKnowledgeSession();
-
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".drl";
-		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
-
-		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
-		if (errors.size() > 0) {
-			for (final KnowledgeBuilderError error : errors) {
-				throw new IOException("Error encountered while reading knowledge base: " + error);
-			}
-			throw new IllegalArgumentException("Could not parse knowledge.");
-		}
-		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 	}
 
 	@Override
@@ -115,6 +86,10 @@ public class Drools5Driver extends EMFDriver<BenchmarkConfig> {
 		resource.eAdapters().add(adapter);
 	}
 
+	public KnowledgeBase getKbase() {
+		return kbase;
+	}
+	
 	public StatefulKnowledgeSession getKsession() {
 		return ksession;
 	}

@@ -1,7 +1,7 @@
 @prefix : <http://www.semanticweb.org/ontologies/2015/trainbenchmark#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:_1 a :Segment  ;
+:_1 a :Segment ;
 	a :TrackElement ;
 	:length "-1"^^xsd:int .
 

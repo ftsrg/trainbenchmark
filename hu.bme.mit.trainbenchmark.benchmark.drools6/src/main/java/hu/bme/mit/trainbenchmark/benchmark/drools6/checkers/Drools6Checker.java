@@ -11,17 +11,21 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools6.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6ResultListener;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
-
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.kie.api.builder.KieBuilder;
+import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.rule.LiveQuery;
+
+import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6ResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
+import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 public class Drools6Checker extends Checker<EMFMatch> {
 
@@ -31,10 +35,24 @@ public class Drools6Checker extends Checker<EMFMatch> {
 	protected LiveQuery liveQuery;
 	protected Query query;
 
-	public Drools6Checker(final Drools6Driver driver, final Query query) {
+	public Drools6Checker(final BenchmarkConfig benchmarkConfig, final Drools6Driver driver, final Query query) throws IOException {
 		super();
 		this.driver = driver;
 		this.query = query;
+		
+		final String queryFile = benchmarkConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/" + query + ".drl";
+		final File file = new File(queryFile);
+		if (!file.exists()) {
+			throw new IOException("Query file not found: " + queryFile);
+		}
+		driver.getKfs().write("src/main/resources/" + query + ".drl", driver.getKieServices().getResources().newFileSystemResource(queryFile));
+
+		final KieBuilder kieBuilder = driver.getKieServices().newKieBuilder(driver.getKfs());
+		kieBuilder.buildAll();
+		if (kieBuilder.getResults().hasMessages(Level.ERROR)) {
+			throw new RuntimeException("Build Errors:\n" + kieBuilder.getResults().toString());
+		}
 	}
 
 	@Override

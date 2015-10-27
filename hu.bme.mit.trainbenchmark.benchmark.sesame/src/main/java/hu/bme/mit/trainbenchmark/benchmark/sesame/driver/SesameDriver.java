@@ -55,9 +55,12 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 	protected ValueFactory vf;
 
 	protected final Comparator<URI> elementComparator = new URIComparator();
+	protected final boolean inferencing;
 
 	public SesameDriver(final TBenchmarkConfig benchmarkConfig) {
 		super(benchmarkConfig);
+
+		inferencing = benchmarkConfig.isInferencing();
 	}
 
 	@Override
@@ -71,7 +74,8 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException, OpenRDFException {
+	public void read(final String modelPathWithoutExtension)
+			throws RepositoryException, RDFParseException, IOException, OpenRDFException {
 		if (benchmarkConfig.isInferencing()) {
 			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {
@@ -80,7 +84,8 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 		load(modelPathWithoutExtension);
 	}
 
-	protected void load(final String modelPathWithoutExtension) throws RepositoryException, RDFParseException, IOException {
+	protected void load(final String modelPathWithoutExtension)
+			throws RepositoryException, RDFParseException, IOException {
 		final File modelFile = new File(modelPathWithoutExtension + getPostfix());
 
 		repository.initialize();
@@ -88,7 +93,6 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 		connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
 
-	@Override
 	public Collection<SesameMatch> runQuery(final Query query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final Collection<SesameMatch> results = new ArrayList<>();
@@ -150,8 +154,8 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
-	protected void deleteEdges(final Collection<URI> vertices, final String edgeType, final boolean outgoing, final boolean all)
-			throws RepositoryException {
+	protected void deleteEdges(final Collection<URI> vertices, final String edgeType, final boolean outgoing,
+			final boolean all) throws RepositoryException {
 		final List<Statement> itemsToRemove = new ArrayList<>();
 
 		final URI edge = vf.createURI(BASE_PREFIX + edgeType);
@@ -183,7 +187,8 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 	// utility
 
 	@Override
-	protected boolean ask(final String askQuery) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+	protected boolean ask(final String askQuery)
+			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final BooleanQuery q = connection.prepareBooleanQuery(QueryLanguage.SPARQL, askQuery);
 		final boolean result = q.evaluate();
 		return result;
@@ -195,6 +200,10 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 
 	public ValueFactory getValueFactory() {
 		return vf;
+	}
+
+	public boolean isInferencing() {
+		return inferencing;
 	}
 
 }

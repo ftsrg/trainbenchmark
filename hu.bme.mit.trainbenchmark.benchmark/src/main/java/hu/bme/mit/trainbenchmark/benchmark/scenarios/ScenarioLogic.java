@@ -30,7 +30,7 @@ public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?, ?, ?, 
 	}
 
 	public void initializeDescriptor() {
-		caseName = benchmarkConfig.getQuery().toString();
+		caseName = benchmarkConfig.getCaseName();
 		size = benchmarkConfig.getSize();
 		tool = benchmarkConfig.getToolName();
 	}

@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.minimal.MinimalConnectedSegmentsGenerator;
@@ -26,7 +27,8 @@ public class GeneratorFactory {
 
 	public static ModelGenerator createGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
 		if (generatorConfig.getScenario() == Scenario.MINIMAL) {
-			switch (generatorConfig.getQuery()) {
+			final Query query = generatorConfig.getQuery();
+			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new MinimalConnectedSegmentsGenerator(serializer, generatorConfig);
 			case POSLENGTH:
@@ -40,7 +42,7 @@ public class GeneratorFactory {
 			case SWITCHSET:
 				return new MinimalSwitchSetGenerator(serializer, generatorConfig);
 			default:
-				throw new UnsupportedOperationException("Query " + generatorConfig.getQuery() + " not supported");
+				throw new UnsupportedOperationException("Query " + query + " not supported");
 			}
 		} else {
 			return new ScalableModelGenerator(serializer, generatorConfig);
