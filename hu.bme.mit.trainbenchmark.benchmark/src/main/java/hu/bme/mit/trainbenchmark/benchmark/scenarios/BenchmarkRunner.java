@@ -13,8 +13,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 import eu.mondo.sam.core.BenchmarkEngine;
@@ -31,6 +33,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
+import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement, TBenchmarkConfig>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
@@ -42,8 +45,8 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	protected Transformation<?, ?> transformation;
 	protected TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig> transformationLogic;
 	protected TDriver driver;
-	protected Checker<TMatch> checker;
-	protected Collection<TMatch> matches;
+	protected List<TChecker> checkers;
+	protected List<Collection<TMatch>> matches;
 
 	public BenchmarkRunner(final TBenchmarkConfig benchmarkConfig,
 			final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkCase) {
@@ -66,7 +69,15 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
 			driver = benchmarkCase.createDriver(benchmarkConfig);
-			checker = benchmarkCase.createChecker(benchmarkConfig, driver);
+
+			// initialize checkers
+			checkers = new ArrayList<>();
+
+			for (final Query query : benchmarkConfig.getQueries()) {
+				final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, query);
+				checkers.add(checker);
+			}
+
 			scenario.setRunIndex(i);
 			engine.runBenchmark(scenario, token);
 		}
@@ -77,7 +88,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	// initialization methods
 
 	public final void initializeTransformation() throws IOException {
-		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver);
+		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver, benchmarkConfig.getQuery());
 		transformationLogic = (TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig>) TransformationLogic
 				.newInstance(benchmarkConfig.getScenario(), getComparator());
 		if (transformationLogic != null) {
@@ -97,17 +108,25 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	}
 
 	public final void check(final PhaseResult phaseResult) throws Exception {
+		// initialize a list for the matches
+		matches = new ArrayList<>(checkers.size());
+
 		final TimeMetric timer = new TimeMetric("Time");
 		final ScalarMetric results = new ScalarMetric("Matches");
 		timer.startMeasure();
-		matches = checker.check();
+
+		for (final TChecker checker : checkers) {
+			matches.add(checker.check());
+		}
+
 		timer.stopMeasure();
-		results.setValue(matches.size());
+		// only use the first match for now
+		results.setValue(matches.get(0).size());
 		phaseResult.addMetrics(timer, results);
 	}
 
 	public final void destroy() throws Exception {
-		if (checker != null) {
+		for (final TChecker checker : checkers) {
 			checker.destroy();
 		}
 		if (driver != null) {
@@ -116,7 +135,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	}
 
 	public final void transform(final PhaseResult phaseResult) throws Exception {
-		transformationLogic.performTransformation(phaseResult, matches);
+		transformationLogic.performTransformation(phaseResult, matches.get(0));
 	}
 
 	// getters

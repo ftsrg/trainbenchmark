@@ -27,6 +27,8 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 
 public abstract class SQLDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<Long, TBenchmarkConfig> {
 
+	protected static final String COLLECT_VERTICES = "SELECT * FROM `%s`;";
+	
 	protected String queryDefinition;
 	protected Connection connection;
 	protected PreparedStatement preparedQuery;
@@ -40,15 +42,10 @@ public abstract class SQLDriver<TBenchmarkConfig extends BenchmarkConfig> extend
 		return ".sql";
 	}
 
-	@Override
-	public Collection<SQLMatch> runQuery(final Query query, final String queryDefinition) throws SQLException {
+	public Collection<SQLMatch> runStatement(final Query query, final PreparedStatement statement) throws SQLException {
 		final Collection<SQLMatch> results = new ArrayList<>();
 
-		if (preparedQuery == null) {
-			preparedQuery = connection.prepareStatement(queryDefinition);
-		}
-
-		try (ResultSet rs = preparedQuery.executeQuery()) {
+		try (ResultSet rs = statement.executeQuery()) {
 			while (rs.next()) {
 				final SQLMatch match = SQLMatch.createMatch(query, rs);
 				results.add(match);
@@ -68,7 +65,7 @@ public abstract class SQLDriver<TBenchmarkConfig extends BenchmarkConfig> extend
 	public Collection<Long> collectVertices(final String type) throws SQLException {
 		final Collection<Long> results = new ArrayList<>();
 
-		final String query = String.format("SELECT * FROM `%s`;", type);
+		final String query = String.format(COLLECT_VERTICES, type);
 		try (ResultSet rs = connection.createStatement().executeQuery(query)) {
 			while (rs.next()) {
 				results.add(rs.getLong("id"));

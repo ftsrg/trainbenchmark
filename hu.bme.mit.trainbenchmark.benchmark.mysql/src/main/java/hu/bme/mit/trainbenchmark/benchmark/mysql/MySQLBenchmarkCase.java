@@ -22,6 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 public class MySQLBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, MySQLDriver> {
 
@@ -32,13 +33,13 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, MySQLD
 	}
 
 	@Override
-	public SQLChecker createChecker(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws Exception {
-		return new SQLChecker(driver, benchmarkConfig);
+	public SQLChecker createChecker(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver, final Query query) throws Exception {
+		return new SQLChecker(driver, benchmarkConfig, query);
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver) throws IOException {
-		return SQLTransformation.newInstance(driver, benchmarkConfig);
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver, final Query query) throws IOException {
+		return SQLTransformation.newInstance(driver, benchmarkConfig, query);
 	}
 
 	@Override

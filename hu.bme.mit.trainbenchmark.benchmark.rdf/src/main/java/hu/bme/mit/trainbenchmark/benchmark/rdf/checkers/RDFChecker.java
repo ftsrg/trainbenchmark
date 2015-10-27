@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.rdf.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
 public abstract class RDFChecker<TMatch> extends Checker<TMatch> {
@@ -20,11 +20,9 @@ public abstract class RDFChecker<TMatch> extends Checker<TMatch> {
 	protected final Query query;
 	protected final String queryPath;
 
-	public RDFChecker(final RDFBenchmarkConfig benchmarkConfig) {
-		query = benchmarkConfig.getQuery();
-
-		queryPath = benchmarkConfig.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + benchmarkConfig.getQuery()
-				+ ".sparql";
+	public RDFChecker(final BenchmarkConfig benchmarkConfig, final Query query) {
+		this.query = query; 
+		this.queryPath = benchmarkConfig.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + query + ".sparql";
 	}
 
 }

@@ -99,7 +99,7 @@ def measure(config):
                 util.set_working_directory(path)
                 target = util.get_tool_jar(tool)
 
-                for query in config["queries"]:
+                for queries in config["queries"]:
                     for size in config["sizes"]:
                         
                         # remove all files in the temporary results directory
@@ -111,7 +111,7 @@ def measure(config):
                               "runs: " + str(config["runs"]) +
                               ", tool: " + tool +
                               ", scenario: " + scenario_name +
-                              ", query: " + query +
+                              ", queries: " + queries +
                               ", size: " + str(size) +
                               (", argument: " + arg if arg != "" else ""))
                         cmd = flatten(["java",
@@ -119,7 +119,7 @@ def measure(config):
                                "-jar", target,
                                "-runs", str(config["runs"]),
                                "-scenario", scenario_name,
-                               "-query", query,
+                               "-queries", queries.split(" "),
                                "-size", str(size),
                                transformation_arguments,
                                arg])
@@ -127,10 +127,10 @@ def measure(config):
                         try:
                             subprocess.check_call(cmd, timeout=config["timeout"])
                         except subprocess.TimeoutExpired:
-                            print("Timeout, skipping larger sizes for this tool/scenario/query.")
+                            print("Timeout, skipping larger sizes for this tool/scenario/queries.")
                             break
                         except subprocess.CalledProcessError:
-                            print("An error occured, skipping larger sizes for this tool/scenario/query.")
+                            print("An error occured, skipping larger sizes for this tool/scenario/queries.")
                             break
 
                         # if the runs were successful, move all files to the results

@@ -9,7 +9,7 @@
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.drools6</artifactId>
 
 	<properties>
-		<drools.version>6.3.0.CR1</drools.version>
+		<drools.version>6.3.0.Final</drools.version>
 	</properties>
 
 	<build>

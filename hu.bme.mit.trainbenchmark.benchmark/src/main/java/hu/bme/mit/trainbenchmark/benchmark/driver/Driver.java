@@ -14,24 +14,24 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
 import java.util.Collection;
 import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
-
 /**
  * Superclass for the drivers used in the benchmark.
- *  
+ * 
  * @author szarnyasg
  *
- * @param <TElement> the type of the individual model elements
- * @param <TBenchmarkConfig> the type of the benchmark configuration used by the benchmark
+ * @param <TElement>
+ *            the type of the individual model elements
+ * @param <TBenchmarkConfig>
+ *            the type of the benchmark configuration used by the benchmark
  */
 public abstract class Driver<TElement, TBenchmarkConfig> {
 
 	protected final TBenchmarkConfig benchmarkConfig;
-	
+
 	public Driver(final TBenchmarkConfig benchmarkConfig) {
 		this.benchmarkConfig = benchmarkConfig;
 	}
-	
+
 	// these methods should be redefined if required
 
 	public void beginTransaction() throws Exception {
@@ -59,7 +59,5 @@ public abstract class Driver<TElement, TBenchmarkConfig> {
 	// extension
 
 	public abstract String getPostfix();
-
-	public abstract Collection<?> runQuery(final Query query, final String queryDefinition) throws Exception;
 
 }

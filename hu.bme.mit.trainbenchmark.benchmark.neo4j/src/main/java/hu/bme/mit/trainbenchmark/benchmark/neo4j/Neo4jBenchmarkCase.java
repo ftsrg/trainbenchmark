@@ -27,6 +27,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 public class Neo4jBenchmarkCase<Neo4jChecker>
 		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, Checker<Neo4jMatch>> {
@@ -35,26 +36,26 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
 		return new Neo4jDriver(benchmarkConfig);
 	}
-
+	
 	@Override
-	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver)
+	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final Query query)
 			throws Exception {
 		if (benchmarkConfig.isCoreApi()) {
-			return Neo4jCoreChecker.newInstance(driver, benchmarkConfig.getQuery());
+			return Neo4jCoreChecker.newInstance(driver, query);
 		} else {
-			return Neo4jCypherChecker.newInstance(driver, benchmarkConfig);
+			return Neo4jCypherChecker.newInstance(driver, benchmarkConfig, query);
 		}
-	}
-
-	@Override
-	public Transformation<?, ?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig,
-			final Neo4jDriver driver) throws IOException {
-		return Neo4jTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 	@Override
 	public Comparator<?> createMatchComparator() {
 		return new Neo4jMatchComparator();
+	}
+
+	@Override
+	public Transformation<?, ?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final Query query)
+			throws IOException {
+		return Neo4jTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 
 }
