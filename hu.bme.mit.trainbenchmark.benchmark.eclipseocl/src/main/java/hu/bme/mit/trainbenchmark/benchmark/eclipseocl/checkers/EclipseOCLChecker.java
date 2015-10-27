@@ -42,7 +42,7 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 		this.driver = driver;
 
 		final String oclQuery = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + benchmarkConfig.getQueries() + ".ocl"));
+				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".ocl"));
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
