@@ -18,26 +18,26 @@ times = dcast(times,
                Tool + Size + MetricName + Scenario + CaseName + Iteration + RunIndex ~ PhaseName,
                value.var = "MetricValue", fun.aggregate = sum)
 
+# calculate aggregated values
 derived.times = times
 derived.times$read.and.check = derived.times$Read + derived.times$Check
 derived.times$transformation.and.recheck = derived.times$Transformation + derived.times$Recheck
 
+# summarize along the iterations
 derived.times = ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName", "RunIndex"), 
     summarize,
-    read.and.check = sum(read.and.check, na.rm = TRUE), 
-    transformation.and.recheck = sum(transformation.and.recheck),
     read = sum(Read, na.rm = TRUE),
     check = sum(Check, na.rm = TRUE),
+    read.and.check = sum(read.and.check, na.rm = TRUE), 
     transformation = sum(Transformation),
-    recheck = sum(Recheck)
+    recheck = sum(Recheck),
+    transformation.and.recheck = sum(transformation.and.recheck)
 )
 
-# adjust the function
+# take the median values from each measurement
 f = median
-#f = min
-
 derived.times = ddply(
     .data = derived.times, 
     .variables = c("Tool", "Size", "MetricName", "Scenario", "CaseName"), 
@@ -50,31 +50,33 @@ derived.times = ddply(
     recheck = f(recheck)
 )
 
-plottimes = melt(data = derived.times, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("read.and.check", "transformation.and.recheck", "read", "check", "transformation", "recheck"))
+# melt data to 
+plottimes = melt(
+  data = derived.times,
+  id.vars = c("Tool", "Size", "Scenario", "CaseName"), 
+  measure.vars = c("read", "check", "read.and.check", "transformation.and.recheck",  "transformation", "recheck")
+)
+
 
 # plot
 
-trainBenchmarkPlot = function(df, scenario, modelsizes, levels, variable, xbreaks = 4^(0:16), width = 210, height = 297) {
-  df = df[df$Scenario == scenario & df$variable == variable, ]
-  #print(head(df))
-  df = melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
-  
+benchmark.plot = function(df, scenario, modelsizes, levels, variable, xbreaks, width, height) {
   # x axis labels
-  modelsizes.scenario = as.vector(modelsizes[[scenario]])
+  modelsizes.scenario = modelsizes[modelsizes$Scenario == "Batch", "Size"]
   xlabels = paste(xbreaks, "\n", modelsizes.scenario, sep="")
   
   # y axis labels
   ys = -10:10
   ybreaks = 10^ys
   ylabels = parse(text=paste("10^", ys, sep=""))
-
+  
   variable.title = gsub("\\.", " ", variable)
   variable.filename = gsub("\\.", "-", variable)
   
   df$CaseName <- factor(df$CaseName, levels = levels)
   
   base = ggplot(df) +
-    labs(title = paste(scenario, " scenario, ", variable.title, sep=""), x = "Model size", y = "Execution time [s]") +
+    labs(title = paste(scenario, " scenario, ", variable.title, sep=""), x = "Model size", y = "Execution time (s)") +
     geom_point(aes(x = as.factor(Size), y = value, col = Tool, shape = Tool), size = 1.5) +
     geom_line(aes(x = as.factor(Size), y = value, col = Tool, group = Tool), size = 0.15) +
     scale_shape_manual(values = seq(0,24)) +
@@ -89,28 +91,51 @@ trainBenchmarkPlot = function(df, scenario, modelsizes, levels, variable, xbreak
   ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = width, height = height, units = "mm")
 }
 
-modelsize.batch = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M")
-modelsize.inject = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M", "5k", "20k", "86k", "373k", "1.5M", "5.8M")
-modelsize.repair = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M", "5k", "20k", "86k", "373k", "1.5M", "5.8M")
+benchmark.plot.by.case = function(df, scenario, modelsizes, levels, variable, xbreaks = 4^(0:16), width = 210, height = 297) {
+  df = df[df$Scenario == scenario & df$variable == variable, ]
+  df = melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
+  
+  benchmark.plot(df, scenario, modelsizes, levels, variable, xbreaks, width, height)
+}
+
+benchmark.plot.by.phase = function() {
+  df = df[df$Scenario == scenario & df$variable == variable, ]
+  df = melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
+  
+  benchmark.plot(df, scenario, modelsizes, levels, variable, xbreaks, width, height)
+}
+
+modelsize.batch = data.frame(Scenario = "Batch", Size = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M"))
+modelsize.inject = data.frame(Scenario = "Inject", Size = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M"))
+modelsize.repair = data.frame(Scenario = "Repair", Size = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M"))
+#modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair)
+
+modelsizes = do.call(rbind, list(modelsize.batch, modelsize.inject, modelsize.repair))
 
 
-modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair)
 levels = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
 
 transformation.scenarios = c("Inject", "Repair")
 
-width.all = 210
-height.all = 150
-xbreaks.all = 2^(0:32)
-trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read", xbreaks = xbreaks.all, width = width.all, height = height.all)
-trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "check", xbreaks = xbreaks.all, width = width.all, height = height.all)
-trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read.and.check", xbreaks = xbreaks.all, width = width.all, height = height.all)
+halfpage.width = 210
+halfpage.height = 150
+halfpage.xbreaks = 2^(0:32)
 
-for (scenario in c(transformation.scenarios)) {
-  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read")
-  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "check")
-  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read.and.check")
-  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation")
-  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "recheck")
-  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation.and.recheck")
-}
+levels = c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet")
+benchmark.plot.by.case(
+  plottimes, "Batch", modelsizes, levels, "read", 
+  xbreaks = halfpage.xbreaks, width = halfpage.width, height = halfpage.height
+)
+#trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read", xbreaks = xbreaks.all, width = width.all, height = height.all)
+
+#trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "check", xbreaks = xbreaks.all, width = width.all, height = height.all)
+#trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read.and.check", xbreaks = xbreaks.all, width = width.all, height = height.all)
+
+#for (scenario in c(transformation.scenarios)) {
+#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read")
+#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "check")
+#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read.and.check")
+#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation")
+#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "recheck")
+#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation.and.recheck")
+#}
