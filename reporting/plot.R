@@ -91,7 +91,7 @@ benchmark.plot = function(df, scenario, modelsizes, title, xbreaks, width = 210,
     scale_shape_manual(values = seq(0,24)) +
     #scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(~ CaseName, ncol = 2) +
+    facet_wrap(~ variable, ncol = 2) +
     theme_bw() +
     theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom") +
     guides(shape = guide_legend(ncol = 4))
@@ -106,8 +106,6 @@ levels.phases = c("read",           "transformation",
                   "check",          "recheck",
                   "read.and.check", "transformation.and.recheck")
 
-
-
 benchmark.plot.by.phase = function(df, scenario, modelsizes, levels, case, title, xbreaks = 2^(0:12)) {
   df = df[df$Scenario == scenario & df$CaseName == case, ]
   df$variable = factor(df$variable, levels = levels)
@@ -118,12 +116,8 @@ benchmark.plot.by.phase(plottimes, "Inject", modelsizes, levels.phases, "RouteSe
 
 benchmark.plot.by.case = function(df, scenario, modelsizes, levels, phase, title, xbreaks = 2^(0:12)) {
   df = df[df$Scenario == scenario & df$variable == phase, ]
-  print(head(df))
   df$CaseName = factor(df$CaseName, levels = levels)
   benchmark.plot(df, scenario, modelsizes, title, xbreaks)
 }
 benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read", "read.phase")
 
-
-
-#df$variable = factor(df$variable, levels = levels.phases)
