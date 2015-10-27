@@ -13,11 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 
 import java.util.Collection;
 
-public abstract class Transformation<TObject, TDriver> {
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+
+public abstract class Transformation<TObject, TDriver extends Driver> {
 
 	protected TDriver driver;
 	
-	public Transformation(TDriver driver) {
+	public Transformation(final TDriver driver) {
 		this.driver = driver;
 	}
 

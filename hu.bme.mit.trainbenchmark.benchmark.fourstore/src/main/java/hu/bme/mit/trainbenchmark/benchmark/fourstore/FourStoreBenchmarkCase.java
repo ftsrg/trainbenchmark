@@ -44,7 +44,7 @@ public class FourStoreBenchmarkCase extends AbstractBenchmarkCaseRunner<SesameMa
 
 	@Override
 	protected Transformation<?> getTransformation() throws IOException {
-		return FourStoreTransformation.newInstance(fourStoreDriver, bc.getQuery(), bc.getScenario());
+		return FourStoreTransformation.newInstance(fourStoreDriver, bc.getQueries(), bc.getScenario());
 	}
 
 }

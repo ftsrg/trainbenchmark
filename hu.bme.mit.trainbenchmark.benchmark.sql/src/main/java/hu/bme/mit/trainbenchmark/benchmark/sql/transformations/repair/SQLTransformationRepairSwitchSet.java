@@ -18,11 +18,12 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.constants.Query;
 
 public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQLSwitchSetMatch> {
 
-	public SQLTransformationRepairSwitchSet(final SQLDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException {
-		super(driver, benchmarkConfig);
+	public SQLTransformationRepairSwitchSet(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+		super(driver, benchmarkConfig, query);
 	}
 
 	@Override
