@@ -4,6 +4,16 @@ library("plyr")
 
 results = read.csv("../results/results.csv")
 
+# constants
+modelsize.batch = data.frame(Scenario = "Batch", Size = 2^(0:12), Triples = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M"))
+modelsize.inject = data.frame(Scenario = "Inject", Size = 4^(0:6), Triples = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M"))
+modelsize.repair = data.frame(Scenario = "Repair", Size = 4^(0:6), Triples = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M"))
+modelsizes = do.call(rbind, list(modelsize.batch, modelsize.inject, modelsize.repair))
+
+halfpage.width = 210
+halfpage.height = 150
+halfpage.xbreaks = 2^(0:32)
+
 # filtering for time values (not interested in the number of matches for visualization)
 times = subset(results, MetricName == "Time")
 
@@ -60,27 +70,26 @@ plottimes = melt(
 
 # plot
 
-benchmark.plot = function(df, scenario, modelsizes, levels, variable, xbreaks, width, height) {
+benchmark.plot = function(df, scenario, modelsizes, title, xbreaks, width = 210, height = 297) {
   # x axis labels
-  modelsizes.scenario = modelsizes[modelsizes$Scenario == "Batch", "Size"]
+  modelsizes.scenario = modelsizes[modelsizes$Scenario == "Batch", "Triples"]
   xlabels = paste(xbreaks, "\n", modelsizes.scenario, sep="")
+  print(xlabels)
   
   # y axis labels
   ys = -10:10
   ybreaks = 10^ys
   ylabels = parse(text=paste("10^", ys, sep=""))
   
-  variable.title = gsub("\\.", " ", variable)
-  variable.filename = gsub("\\.", "-", variable)
-  
-  df$CaseName <- factor(df$CaseName, levels = levels)
+  plot.title = gsub("\\.", " ", title)
+  plot.filename = gsub("\\.", "-", title)
   
   base = ggplot(df) +
-    labs(title = paste(scenario, " scenario, ", variable.title, sep=""), x = "Model size", y = "Execution time (s)") +
+    labs(title = paste(scenario, " scenario, ", plot.title, sep=""), x = "model size\n#triples", y = "execution time [s]") +
     geom_point(aes(x = as.factor(Size), y = value, col = Tool, shape = Tool), size = 1.5) +
     geom_line(aes(x = as.factor(Size), y = value, col = Tool, group = Tool), size = 0.15) +
     scale_shape_manual(values = seq(0,24)) +
-    scale_x_discrete(breaks = xbreaks, labels = xlabels) +
+    #scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
     facet_wrap(~ CaseName, ncol = 2) +
     theme_bw() +
@@ -88,54 +97,33 @@ benchmark.plot = function(df, scenario, modelsizes, levels, variable, xbreaks, w
     guides(shape = guide_legend(ncol = 4))
   print(base)
   
-  ggsave(file=paste("../diagrams/", scenario, "-", variable.filename, ".pdf", sep=""), width = width, height = height, units = "mm")
+  ggsave(file=paste("../diagrams/", scenario, "-", plot.filename, ".pdf", sep=""), width = width, height = height, units = "mm")
 }
 
-benchmark.plot.by.case = function(df, scenario, modelsizes, levels, variable, xbreaks = 4^(0:16), width = 210, height = 297) {
-  df = df[df$Scenario == scenario & df$variable == variable, ]
-  df = melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
-  
-  benchmark.plot(df, scenario, modelsizes, levels, variable, xbreaks, width, height)
+#levels.all.cases = c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet")
+levels.cases = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
+levels.phases = c("read",           "transformation",
+                  "check",          "recheck",
+                  "read.and.check", "transformation.and.recheck")
+
+
+
+benchmark.plot.by.phase = function(df, scenario, modelsizes, levels, case, title, xbreaks = 2^(0:12)) {
+  df = df[df$Scenario == scenario & df$CaseName == case, ]
+  df$variable = factor(df$variable, levels = levels)
+  benchmark.plot(df, scenario, modelsizes, title, xbreaks)
 }
+benchmark.plot.by.phase(plottimes, "Inject", modelsizes, levels.phases, "RouteSensor", "RouteSensor.query")
 
-benchmark.plot.by.phase = function() {
-  df = df[df$Scenario == scenario & df$variable == variable, ]
-  df = melt(data = df, id.vars = c("Tool", "Size", "Scenario", "CaseName"), measure.vars = c("value"))
-  
-  benchmark.plot(df, scenario, modelsizes, levels, variable, xbreaks, width, height)
+
+benchmark.plot.by.case = function(df, scenario, modelsizes, levels, phase, title, xbreaks = 2^(0:12)) {
+  df = df[df$Scenario == scenario & df$variable == phase, ]
+  print(head(df))
+  df$CaseName = factor(df$CaseName, levels = levels)
+  benchmark.plot(df, scenario, modelsizes, title, xbreaks)
 }
-
-modelsize.batch = data.frame(Scenario = "Batch", Size = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M"))
-modelsize.inject = data.frame(Scenario = "Inject", Size = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M"))
-modelsize.repair = data.frame(Scenario = "Repair", Size = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M"))
-#modelsizes = data.frame("Batch" = modelsize.batch, "Inject" = modelsize.inject, "Repair" = modelsize.repair)
-
-modelsizes = do.call(rbind, list(modelsize.batch, modelsize.inject, modelsize.repair))
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read", "read.phase")
 
 
-levels = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
 
-transformation.scenarios = c("Inject", "Repair")
-
-halfpage.width = 210
-halfpage.height = 150
-halfpage.xbreaks = 2^(0:32)
-
-levels = c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet")
-benchmark.plot.by.case(
-  plottimes, "Batch", modelsizes, levels, "read", 
-  xbreaks = halfpage.xbreaks, width = halfpage.width, height = halfpage.height
-)
-#trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read", xbreaks = xbreaks.all, width = width.all, height = height.all)
-
-#trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "check", xbreaks = xbreaks.all, width = width.all, height = height.all)
-#trainBenchmarkPlot(plottimes, "Batch", modelsizes, c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet"), "read.and.check", xbreaks = xbreaks.all, width = width.all, height = height.all)
-
-#for (scenario in c(transformation.scenarios)) {
-#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read")
-#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "check")
-#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "read.and.check")
-#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation")
-#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "recheck")
-#  trainBenchmarkPlot(plottimes, scenario, modelsizes, levels, "transformation.and.recheck")
-#}
+#df$variable = factor(df$variable, levels = levels.phases)
