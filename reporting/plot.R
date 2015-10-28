@@ -2,10 +2,11 @@ library("reshape2")
 library("ggplot2")
 library("plyr")
 
-results = read.csv("../results/results.csv")
+results = read.csv("../results/results-individual.csv")
 
 # constants
-modelsize.batch = data.frame(Scenario = "Batch", Size = 2^(0:12), Triples = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M"))
+#modelsize.batch = data.frame(Scenario = "Batch", Size = 2^(0:12), Triples = c("4.7k", "7.9k", "21k", "41k", "89k", "192k", "374k", "717k", "1.5M", "2.8M", "5.7M", "11.5M", "23M"))
+modelsize.batch = data.frame(Scenario = "Batch", Size = 4^(0:6), Triples = c("4.7k", "21k", "89k", "374k", "1.5M", "5.7M", "23M"))
 modelsize.inject = data.frame(Scenario = "Inject", Size = 4^(0:6), Triples = c("5k", "20k", "86k", "373k", "1.5M", "5.8M", "23.3M"))
 modelsize.repair = data.frame(Scenario = "Repair", Size = 4^(0:6), Triples = c("4.9k", "20k", "85k", "372k", "1.5M", "5.8M", "23.2M"))
 modelsizes = do.call(rbind, list(modelsize.batch, modelsize.inject, modelsize.repair))
@@ -68,8 +69,8 @@ plottimes = melt(
   variable.name = "PhaseName"
 )
 
-
-# plot
+# remove the . characters from the phasename
+plottimes$PhaseName = gsub('\\.', ' ', plottimes$PhaseName)
 
 benchmark.plot = function(df, scenario, modelsizes, title, facet, width = 210, height = 297) {
   # x axis labels
@@ -83,49 +84,46 @@ benchmark.plot = function(df, scenario, modelsizes, title, facet, width = 210, h
   ybreaks = 10^ys
   ylabels = parse(text=paste("10^", ys, sep=""))
   
-  plot.title = gsub("\\.", " ", title)
-  plot.filename = gsub("\\.", "-", title)
+  plot.filename = gsub(" ", "-", title)
   
   facet = as.formula(paste("~", facet))
   
-  base = ggplot(df) +
-    labs(title = paste(scenario, " scenario, ", plot.title, sep=""), x = "model size\n#triples", y = "execution time [s]") +
+  ggplot(df) +
+    labs(title = paste(scenario, " scenario, ", title, sep=""), x = "model size\n#triples", y = "execution time [s]") +
     geom_point(aes(x = as.factor(Size), y = value, col = Tool, shape = Tool), size = 1.5) +
     geom_line(aes(x = as.factor(Size), y = value, col = Tool, group = Tool), size = 0.15) +
     scale_shape_manual(values = seq(0,24)) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(facet, ncol = 2) +
+    facet_wrap(facet, ncol = 2, scale = "free") +
     theme_bw() +
     theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom") +
     guides(shape = guide_legend(ncol = 4))
-  print(base)
   
   ggsave(file=paste("../diagrams/", scenario, "-", plot.filename, ".pdf", sep=""), width = width, height = height, units = "mm")
 }
 
-#levels.all.cases = c("ConnectedSegments-PosLength-RouteSensor-SemaphoreNeighbor-SwitchSensor-SwitchSet")
+query.mix = c("RouteSensor-ConnectedSegments-PosLength-SemaphoreNeighbor-SwitchSensor-SwitchSet")
 levels.cases = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
 levels.phases = c("read",           "transformation",
                   "check",          "recheck",
-                  "read.and.check", "transformation.and.recheck")
+                  "read and check", "transformation and recheck")
 
 benchmark.plot.by.phase = function(df, scenario, modelsizes, levels, case, title) {
   df = df[df$Scenario == scenario & df$CaseName == case, ]
   df$PhaseName = factor(df$PhaseName, levels = levels)
-  benchmark.plot(df, scenario, modelsizes, paste(case, "query"), "PhaseName")
+  benchmark.plot(df, scenario, modelsizes, title, "PhaseName")
 }
-benchmark.plot.by.phase(plottimes, "Inject", modelsizes, levels.phases, "RouteSensor")
-
 
 benchmark.plot.by.case = function(df, scenario, modelsizes, levels, phase, title) {
   df = df[df$Scenario == scenario & df$PhaseName == phase, ]
   df$CaseName = factor(df$CaseName, levels = levels)
-  benchmark.plot(df, scenario, modelsizes, paste(phase, "phase"), "CaseName")
+  benchmark.plot(df, scenario, modelsizes, title, "CaseName")
 }
 
-benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read")
-benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "check")
-benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read.and.check")
-benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "transformation.and.recheck")
+benchmark.plot.by.phase(plottimes, "Inject", modelsizes, levels.phases, query.mix, "Query Mix")
 
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read", "read phase")
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "check", "check phase")
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "transformation", "transformation phase")
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "recheck", "recheck phase")
