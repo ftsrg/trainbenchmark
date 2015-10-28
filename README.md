@@ -62,10 +62,10 @@ Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam) and initialize the confi
 Provided that you start with a fresh Ubuntu server installation, you may use the provided install scripts:
 
 ```bash
+scripts/init-config.sh && \
 scripts/init-jdk.sh && \
 scripts/init-maven.sh && \
 scripts/init-python.sh && \
-scripts/init-config.sh && \
 scripts/dep-mondo-sam.sh
 ```
 
