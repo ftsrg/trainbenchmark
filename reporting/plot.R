@@ -64,18 +64,20 @@ derived.times = ddply(
 plottimes = melt(
   data = derived.times,
   id.vars = c("Tool", "Size", "Scenario", "CaseName"), 
-  measure.vars = c("read", "check", "read.and.check", "transformation.and.recheck",  "transformation", "recheck")
+  measure.vars = c("read", "check", "read.and.check", "transformation.and.recheck",  "transformation", "recheck"),
+  variable.name = "PhaseName"
 )
 
 
 # plot
 
-benchmark.plot = function(df, scenario, modelsizes, title, xbreaks, width = 210, height = 297) {
+benchmark.plot = function(df, scenario, modelsizes, title, facet, width = 210, height = 297) {
   # x axis labels
-  modelsizes.scenario = modelsizes[modelsizes$Scenario == "Batch", "Triples"]
-  xlabels = paste(xbreaks, "\n", modelsizes.scenario, sep="")
-  print(xlabels)
+  modelsizes.scenario = modelsizes[modelsizes$Scenario == scenario, "Triples"]
   
+  xbreaks = modelsizes[modelsizes$Scenario == scenario, "Size"]
+  xlabels = paste(xbreaks, "\n", modelsizes.scenario, sep="")
+
   # y axis labels
   ys = -10:10
   ybreaks = 10^ys
@@ -84,14 +86,16 @@ benchmark.plot = function(df, scenario, modelsizes, title, xbreaks, width = 210,
   plot.title = gsub("\\.", " ", title)
   plot.filename = gsub("\\.", "-", title)
   
+  facet = as.formula(paste("~", facet))
+  
   base = ggplot(df) +
     labs(title = paste(scenario, " scenario, ", plot.title, sep=""), x = "model size\n#triples", y = "execution time [s]") +
     geom_point(aes(x = as.factor(Size), y = value, col = Tool, shape = Tool), size = 1.5) +
     geom_line(aes(x = as.factor(Size), y = value, col = Tool, group = Tool), size = 0.15) +
     scale_shape_manual(values = seq(0,24)) +
-    #scale_x_discrete(breaks = xbreaks, labels = xlabels) +
+    scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(~ variable, ncol = 2) +
+    facet_wrap(facet, ncol = 2) +
     theme_bw() +
     theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom") +
     guides(shape = guide_legend(ncol = 4))
@@ -106,18 +110,22 @@ levels.phases = c("read",           "transformation",
                   "check",          "recheck",
                   "read.and.check", "transformation.and.recheck")
 
-benchmark.plot.by.phase = function(df, scenario, modelsizes, levels, case, title, xbreaks = 2^(0:12)) {
+benchmark.plot.by.phase = function(df, scenario, modelsizes, levels, case, title) {
   df = df[df$Scenario == scenario & df$CaseName == case, ]
-  df$variable = factor(df$variable, levels = levels)
-  benchmark.plot(df, scenario, modelsizes, title, xbreaks)
+  df$PhaseName = factor(df$PhaseName, levels = levels)
+  benchmark.plot(df, scenario, modelsizes, paste(case, "query"), "PhaseName")
 }
-benchmark.plot.by.phase(plottimes, "Inject", modelsizes, levels.phases, "RouteSensor", "RouteSensor.query")
+benchmark.plot.by.phase(plottimes, "Inject", modelsizes, levels.phases, "RouteSensor")
 
 
-benchmark.plot.by.case = function(df, scenario, modelsizes, levels, phase, title, xbreaks = 2^(0:12)) {
-  df = df[df$Scenario == scenario & df$variable == phase, ]
+benchmark.plot.by.case = function(df, scenario, modelsizes, levels, phase, title) {
+  df = df[df$Scenario == scenario & df$PhaseName == phase, ]
   df$CaseName = factor(df$CaseName, levels = levels)
-  benchmark.plot(df, scenario, modelsizes, title, xbreaks)
+  benchmark.plot(df, scenario, modelsizes, paste(phase, "phase"), "CaseName")
 }
-benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read", "read.phase")
+
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read")
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "check")
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "read.and.check")
+benchmark.plot.by.case(plottimes, "Inject", modelsizes, levels.cases, "transformation.and.recheck")
 
