@@ -104,7 +104,7 @@ public class SQLSerializer extends ModelSerializer {
 		processLoad.waitFor();
 
 		final String[] commandDump = { "/bin/bash", "-c",
-				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date > " + sqlDumpPath };
+				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --skip-comments > " + sqlDumpPath };
 		final Process processDump = rt.exec(commandDump);
 		processDump.waitFor();
 	}
