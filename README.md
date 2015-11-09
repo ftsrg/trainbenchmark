@@ -49,48 +49,50 @@ The framework provides a set of scripts for building the projects, generating th
 
 The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linux systems.
 
-### Environment
+### Setup
 
-Make sure that you have the following environments.
-
-* [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
-* [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
-* Python 3
-
-Install [MONDO-SAM](https://github.com/FTSRG/mondo-sam) and initialize the configuration file.
+#### Automatic
 
 Provided that you start with a fresh Ubuntu server installation, you may use the provided install scripts:
 
 ```bash
-scripts/init-config.sh && \
 scripts/init-jdk.sh && \
 scripts/init-maven.sh && \
 scripts/init-python.sh && \
+scripts/dep-mysql.sh && \
+scripts/dep-neo4j.sh && \
+scripts/dep-virtuoso.sh && \
 scripts/dep-mondo-sam.sh
 ```
 
-Certain tools need to be installed manually. For details, please follow their README file:
+#### Manual
 
+Alternatively, install the following software:
+
+* [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
+* [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
+* Python 3
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql)
+* Neo4j
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso)
-
-Certain tools have dependencies that should be installed, either by buildin from source or by deploying them to your local Maven repository.
-
-```bash
-scripts/dep-neo4j.sh && \
-scripts/dep-virtuoso.sh
-```
+* [MONDO-SAM 0.1](https://github.com/FTSRG/mondo-sam/tree/v0.1.0)
 
 ### Usage
 
-The `scripts/init-config.sh` script initializes the `config/config.yml` file. This file defines the configuration for the benchmark. The documentation is provided as comments in the file.
+Initialize the configuration file by running:
+
+```
+scripts/init-config.sh
+```
+
+This creates `config/config.yml` which defines the configuration for the benchmark. The documentation is provided as comments in the file.
 
 The `scripts` directory contains the `run.py` script which is used for the following purposes:
-* `run.py -b` -- build the projects
-* `run.py -b -s` -- build the projects without testing
-* `run.py -g` -- generates the instance models
-* `run.py -m` -- runs the benchmark
-* `run.py -h` -- displays the help
+* `scripts/run.py -b` -- build the projects
+* `scripts/run.py -b -s` -- build the projects without testing
+* `scripts/run.py -g` -- generates the instance models
+* `scripts/run.py -m` -- runs the benchmark
+* `scripts/run.py -h` -- displays the help
 
 ### Importing to Eclipse
 
@@ -104,24 +106,25 @@ To avoid confusion between the different implementations, we decided to use the 
 
 ## Reporting tools
 
+### Install R packages
+
+Follow the instructions [here](https://github.com/FTSRG/mondo-sam/blob/master/README.md#reporting-in-r).
+
 ### Convert the results
 
 It is possible to convert the measurement results from JSON to CSV with the following script:
 
 ```bash
 scripts/convert-results.sh
-scripts/report.sh
 ```
 
 ### Interactive reporting
 
-In order to use the interactive interface in MONDO-SAM, run the following:
+In order to use the interactive interface in MONDO-SAM, install additional R packages as described [here](https://github.com/FTSRG/mondo-sam/tree/v0.1.0#interactive-reporting), then run the following:
 
 ```bash
-scripts/interactive.sh
+scripts/interactive.py
 ```
- 
-For further information, read the [instructions](https://github.com/FTSRG/mondo-sam/blob/master/README.md).
 
 ### Generating diagrams
 
