@@ -102,7 +102,7 @@ To import and develop the Train Benchmark, you need the m2e Eclipse plugin, incl
 
 ### Naming conventions
 
-To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Java implementation are named `JavaBenchmarkCase`, `JavaPosLength`, `JavaPosLengthMatch`, `JavaPosLengthTransformation`, while the classes in the EMF-IncQuery implementation are named `EMFIncQueryBenchmarkCase`, `EMFIncQueryPosLength`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
+To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Neo4j implementation are named `Neo4jBenchmarkCase`, `Neo4jPosLengthChecker`, `JavaPosLengthMatch`, `JavaPosLengthTransformation`, while the classes in the EMF-IncQuery implementation are named `EMFIncQueryBenchmarkCase`, `EMFIncQueryPosLengthChecker`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
 
 ## Reporting tools
 
