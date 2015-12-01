@@ -171,6 +171,9 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--generate",
                         help="generate models",
                         action="store_true")
+    parser.add_argument("-f", "--formats",
+                        help="generate the formats specified in the configuration file",
+                        action="store_true")
     parser.add_argument("-m", "--measure",
                         help="run the benchmark",
                         action="store_true")
@@ -189,9 +192,12 @@ if __name__ == "__main__":
     with open("config/formats.yml", 'r') as stream:
         tool_formats = yaml.load(stream)
 
-    formats = set()
-    for tool in config["tools"]:
-        formats.add(tool_formats[tool])
+    if args.formats:
+        formats = config["formats"]
+    else:
+        formats = set()
+        for tool in config["tools"]:
+            formats.add(tool_formats[tool])
 
     # if there are no args, execute a full sequence
     # with the test and the visualization/reporting
