@@ -14,10 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.ConnectedSegmentsQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.PosLengthQuerySpecification;
 
 public class EMFIncQueryPosLengthChecker extends EMFIncQueryChecker<PosLengthMatch> {
 
@@ -28,7 +31,11 @@ public class EMFIncQueryPosLengthChecker extends EMFIncQueryChecker<PosLengthMat
 
 	@Override
 	public IncQueryMatcher<PosLengthMatch> getMatcher() throws IncQueryException {
-		return PosLengthMatcher.on(driver.getEngine());
+        if (benchmarkConfig.isLocalSearch()) {
+            return (PosLengthMatcher) getLSMatcher(PosLengthQuerySpecification.instance());
+        } else {
+            return engine.getMatcher(PosLengthQuerySpecification.instance());
+        }
 	}
 
 }

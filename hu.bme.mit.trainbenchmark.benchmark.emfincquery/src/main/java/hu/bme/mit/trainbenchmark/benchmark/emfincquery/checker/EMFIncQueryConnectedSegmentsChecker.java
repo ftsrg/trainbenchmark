@@ -18,6 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.ConnectedSegmentsQuerySpecification;
 
 public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryChecker<ConnectedSegmentsMatch> {
 
@@ -26,9 +27,13 @@ public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryChecker<Conn
 		super(benchmarkConfig, driver);
 	}
 
-	@Override
-	public IncQueryMatcher<ConnectedSegmentsMatch> getMatcher() throws IncQueryException {
-		return ConnectedSegmentsMatcher.on(driver.getEngine());
-	}
+    @Override
+    public IncQueryMatcher<ConnectedSegmentsMatch> getMatcher() throws IncQueryException {
+        if (benchmarkConfig.isLocalSearch()) {
+            return (ConnectedSegmentsMatcher) getLSMatcher(ConnectedSegmentsQuerySpecification.instance());
+        } else {
+            return engine.getMatcher(ConnectedSegmentsQuerySpecification.instance());
+        }
+    }
 
 }
