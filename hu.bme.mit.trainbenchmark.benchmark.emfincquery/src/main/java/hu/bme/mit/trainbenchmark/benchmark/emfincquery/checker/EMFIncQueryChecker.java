@@ -12,17 +12,27 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
 import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
+import org.eclipse.incquery.runtime.api.IPatternMatch;
+import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
+import org.eclipse.incquery.runtime.api.impl.BaseGeneratedEMFQuerySpecification;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
+import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.extensibility.QueryBackendRegistry;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackend;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
+import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchHintKeys;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.incquery.runtime.matchers.backend.QueryEvaluationHint;
+
+import com.google.common.collect.Maps;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
@@ -35,6 +45,7 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 	protected Collection<TMatch> matches;
 	protected final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> driver;
 	protected final EMFIncQueryBenchmarkConfig benchmarkConfig;
+    protected AdvancedIncQueryEngine engine;
 
 	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
 			final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> driver) {
@@ -44,8 +55,8 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 		RailwayPackage.eINSTANCE.eClass();
 
 		try {
-			matches = getMatcher().getAllMatches();
 
+		    engine = AdvancedIncQueryEngine.from(driver.getEngine());
 			if (benchmarkConfig.isLocalSearch()) { // when running local search, make sure the factory is registered
 
 				final Iterable<Entry<Class<? extends IQueryBackend>, IQueryBackendFactory>> factories = QueryBackendRegistry
@@ -62,6 +73,7 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 				}
 
 			} else { // incremental
+			    matches = getMatcher().getAllMatches();
 				driver.getEngine().addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<TMatch>() {
 					@Override
 					public void notifyAppearance(final TMatch match) {
@@ -74,6 +86,8 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 					}
 				}, false);
 			}
+			
+
 		} catch (final IncQueryException e) {
 			throw new RuntimeException(e);
 		}
@@ -112,5 +126,10 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 	}
 
 	public abstract IncQueryMatcher<TMatch> getMatcher() throws IncQueryException;
+
+    protected IncQueryMatcher<? extends IPatternMatch> getLSMatcher(BaseGeneratedEMFQuerySpecification<?> specificationInstance) throws IncQueryException {
+        HashMap<String, Object> mapForHint = Maps.<String, Object>newHashMap();
+        return engine.getMatcher(specificationInstance, new QueryEvaluationHint(LocalSearchBackend.class, mapForHint));
+    }
 
 }
