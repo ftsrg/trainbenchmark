@@ -6,7 +6,8 @@ for variant in inferred metamodel; do
 	echo $variant
 	for scenario in batch inject repair; do
 		echo $scenario
-		ag --count "^[^@].*[;.]$" *-$scenario-*$variant.ttl | sed "s/\(.*\):\(.*\)/\2\t\1/" | sort --numeric-sort
+		#ag --count "^[^@#].*[;.]$" *-$scenario-*$variant.ttl | sed "s/\(.*\):\(.*\)/\2\t\1/" | sort --numeric-sort
+		grep --count "^[^@#].*[;.]$" *-$scenario-*$variant.ttl | sed "s/\(.*\):\(.*\)/\2\t\1/" | sort --numeric-sort
 		echo
 	done
 	echo

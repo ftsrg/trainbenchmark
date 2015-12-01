@@ -59,6 +59,14 @@ tools:
 - sesame
 #- virtuoso
 
+# If you run the script with the -f switch, the script will only generate the formats listed here.
+# Without the -f switch, this list is ignored by the script.
+formats:
+- emf
+- graph
+- rdf
+- sql
+
 # Optional arguments for the generator.
 generator_optional_arguments:
   rdf:
