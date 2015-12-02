@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.incquery.runtime.api.IMatchProcessor;
 import org.eclipse.incquery.runtime.api.IQuerySpecification;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
@@ -87,7 +88,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
    * 
    */
   @Deprecated
-  public RouteSensorMatcher(final org.eclipse.emf.common.notify.Notifier emfRoot) throws IncQueryException {
+  public RouteSensorMatcher(final Notifier emfRoot) throws IncQueryException {
     this(IncQueryEngine.on(emfRoot));
   }
   
