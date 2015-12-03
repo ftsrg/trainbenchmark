@@ -7,7 +7,6 @@ install:
 script:
   - scripts/init-config.sh
   - scripts/install-python.sh
-  - scripts/install-jdk.sh
   - scripts/install-maven.sh
   - scripts/dep-mondo-sam.sh
   - scripts/dep-graph.sh
