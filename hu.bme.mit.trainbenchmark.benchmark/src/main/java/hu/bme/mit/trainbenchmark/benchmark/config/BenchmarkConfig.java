@@ -51,7 +51,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		super(scenario, size);
 		this.toolName = toolName;
 		this.runs = runs;
-		this.queries = ImmutableList.of(query);
+		this.queryMix = ImmutableList.of(query);
 		this.iterationCount = iterationCount;
 		this.transformationStrategy = transformationStrategy;
 		this.transformationConstant = transformationConstant;
@@ -63,7 +63,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 		// the "size" and "queries" options are required for the BenchmarkConfig but not required for the GeneratorConfig
 		options.getOption(SIZE).setRequired(true);
-		final Option queryOption = options.getOption(QUERIES);
+		final Option queryOption = options.getOption(QUERY_MIX);
 		queryOption.setRequired(true);
 		options.addOption(queryOption);
 

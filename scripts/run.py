@@ -1,191 +1,21 @@
 #!/usr/bin/env python3
 """
-Created on Sep 28, 2014
-
-@author: Zsolt Kovari
-
-This script assumes that the required dependencies are available from either 
+This script runs the benchmark and performs some additional operations:
+* building the code
+* generating the models
+* running the benchmark
+The script assumes that the required dependencies are available from either 
 the local Maven repository or the Maven Central Repository.
 """
-import subprocess
 import argparse
 
 import yaml
+
+import build
+import generate
+import measure
+import send_mail
 import util
-
-import os
-import glob
-
-import smtplib
-from email.mime.text import MIMEText
-
-
-def flatten(lst):
-    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
-
-
-def build(config, formats, skip_tests):
-    profiles = {"core"}
-    profiles = profiles.union(formats)
-    profiles = profiles.union(config["tools"])
-
-    profiles_arg = ",".join(profiles)
-
-    cmd = ["mvn", "clean", "install", "-P", profiles_arg, "--fail-at-end"]
-    if skip_tests:
-        cmd.append("-DskipTests")
-    subprocess.check_call(cmd)
-
-
-def format(format):
-    path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
-    util.set_working_directory(path)
-    target = util.get_generator_jar(format)
-    for size in config["sizes"]:
-        cmd = flatten(["java", 
-             config["java_opts"],
-             "-jar", target,
-             "-scenario", scenario_name,
-             "-size", str(size),
-             arg])
-        try:
-            subprocess.check_call(cmd)
-        except subprocess.CalledProcessError:
-            print("An error occured during model generation, skipping larger sizes for this scenario/format.")
-            break
-    util.set_working_directory("..")
-    
-
-def formats(config, formats):
-    for format in formats:
-        for scenario in config["scenarios"]:
-
-            # dict only has one item
-            for (scenario_name, _) in scenario.items():
-                pass
-
-            args = [""]
-            if format in config["generator_optional_arguments"]:
-                for optional_argument in config["generator_optional_arguments"][format]:
-                    args.append("-" + optional_argument)
-
-            for arg in args:
-                
-
-
-def generate_models(config, formats):
-    for format in formats:
-        for scenario in config["scenarios"]:
-
-            # dict only has one item
-            for (scenario_name, _) in scenario.items():
-                pass
-
-            args = [""]
-            if format in config["generator_optional_arguments"]:
-                for optional_argument in config["generator_optional_arguments"][format]:
-                    args.append("-" + optional_argument)
-
-            for arg in args:
-                path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
-                util.set_working_directory(path)
-                target = util.get_generator_jar(format)
-                for size in config["sizes"]:
-                    cmd = flatten(["java", 
-                         config["java_opts"],
-                         "-jar", target,
-                         "-scenario", scenario_name,
-                         "-size", str(size),
-                         arg])
-                    try:
-                        subprocess.check_call(cmd)
-                    except subprocess.CalledProcessError:
-                        print("An error occured during model generation, skipping larger sizes for this scenario/format.")
-                        break
-                util.set_working_directory("..")
-
-
-def measure(config):
-    for scenario in config["scenarios"]:
-        transformation_arguments = []
-
-        # dict only has one item
-        for (scenario_name, scenario_arguments) in scenario.items():
-            if scenario_arguments is not None:
-                for arg, value in scenario_arguments.items():
-                    transformation_arguments.append("-" + arg)
-                    transformation_arguments.append(str(value))
-
-        for tool in config["tools"]:
-            args = [""]
-            if tool in config["benchmark_optional_arguments"]:
-                for optional_argument in config["benchmark_optional_arguments"][tool]:
-                    args.append("-" + optional_argument)
-
-            for arg in args:
-                path = "./hu.bme.mit.trainbenchmark.benchmark.{TOOL}/".format(TOOL=tool)
-                util.set_working_directory(path)
-                target = util.get_tool_jar(tool)
-
-                for queries in config["queries"]:
-                    for size in config["sizes"]:
-                        
-                        # remove all files in the temporary results directory
-                        prev_files = glob.glob('../results/json/*')
-                        for f in prev_files:
-                            os.remove(f)
-
-                        print("Running benchmark... " +
-                              "runs: " + str(config["runs"]) +
-                              ", tool: " + tool +
-                              ", scenario: " + scenario_name +
-                              ", queries: " + queries +
-                              ", size: " + str(size) +
-                              (", argument: " + arg if arg != "" else ""))
-                        cmd = flatten(["java",
-                               config["java_opts"],
-                               "-jar", target,
-                               "-runs", str(config["runs"]),
-                               "-scenario", scenario_name,
-                               "-queries", queries.split(" "),
-                               "-size", str(size),
-                               transformation_arguments,
-                               arg])
-                        
-                        try:
-                            subprocess.check_call(cmd, timeout=config["timeout"])
-                        except subprocess.TimeoutExpired:
-                            print("Timeout, skipping larger sizes for this tool/scenario/queries.")
-                            break
-                        except subprocess.CalledProcessError:
-                            print("An error occured, skipping larger sizes for this tool/scenario/queries.")
-                            break
-
-                        # if the runs were successful, move all files to the results
-                        result_files = glob.glob('../results/json/*')
-                        for f in result_files:
-                            name = os.path.basename(f)
-                            os.rename(f, '../results/completed/' + name)
-
-                util.set_working_directory("..")
-
-
-def send_mail(config):
-    if "email" in config:
-        address = config["email"]["address"]
-        password = config["email"]["password"]
-        host = config["email"]["host"]
-
-        msg = MIMEText("<helpful information about the run>")
-        msg["Subject"] = "Train Benchmark measurement ready"
-        msg["From"] = address
-        msg["To"] = address
-        
-        session = smtplib.SMTP(host)	 
-        session.ehlo()
-        session.starttls()
-        session.login(address, password)
-        session.sendmail(from_addr=address, to_addrs=[address], msg=msg.as_string())
 
 
 if __name__ == "__main__":
@@ -213,34 +43,41 @@ if __name__ == "__main__":
     # set working directory to this file's path
     util.set_working_directory()
 
+    # load the configuration file and determine the derived value
     with open("config/config.yml", 'r') as stream:
         config = yaml.load(stream)
-    config["sizes"] = util.get_power_of_two(config["min_size"], config["max_size"])
-
     with open("config/formats.yml", 'r') as stream:
         tool_formats = yaml.load(stream)
+  
+    tools = config["tools"]
+    email = config["email"]
+    java_opts = config["java_opts"]
+    query_mixes = config["query_mixes"]
+    scenarios = config["scenarios"]
+    runs = config["runs"]
+    timeout = config["timeout"]
+    benchmark_optional_arguments = config["benchmark_optional_arguments"]
+    generator_optional_arguments = config["generator_optional_arguments"]
+    sizes = util.get_power_of_two(config["min_size"], config["max_size"])
 
-    if args.formats:
+    if args.formats_only:
         formats = config["formats"]
     else:
         formats = set()
-        for tool in config["tools"]:
+        for tool in tools:
             formats.add(tool_formats[tool])
 
-    # if there are no args, execute a full sequence
-    # with the test and the visualization/reporting
+    # Run the framework. If there are no args, execute a full sequence
+    # with the test and the visualization/reporting.
     no_args = all(val is False for val in vars(args).values())
     if no_args:
         args.build = True
         args.generate = True
         args.measure = True
-    
-    if args.ci:
-        build_ci()
     if args.build:
-        build(config, formats, args.skip_tests)
+        build.build(java_opts, formats, tools, args.skip_tests)
     if args.generate:
-        generate_models(config, formats)
+        generate.generate_models(java_opts, formats, scenarios, sizes, generator_optional_arguments)
     if args.measure:
-        measure(config)
-        send_mail(config)
+        measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, benchmark_optional_arguments)
+        send_mail.send_mail(email)
