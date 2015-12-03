@@ -15,20 +15,21 @@ runs: 5
 # Timeout for the benchmark processes.
 timeout: 600
 
-# Uncomment this if you would like to receive an email if the benchmark is finished.
-#email:
+# Set these values if you would like to receive an email if the benchmark is finished.
+email:
 #  address: trainbenchmark@gmail.com
 #  password: 
 #  host: smtp.gmail.com:587
 
 # Specify the queries to run.
-queries:
+query_mixes:
 - ConnectedSegments
 - PosLength
 - RouteSensor
 - SemaphoreNeighbor
 - SwitchSensor
 - SwitchSet
+# - RouteSensor SwitchSensor PosLength
 
 # Specify the scenarios for the benchmark and the generator.
 # You may also specify the benchmark arguments for each scenario.

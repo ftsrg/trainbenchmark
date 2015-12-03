@@ -7,6 +7,7 @@ A helper module, which collects the most frequently used functions
 by the other modules.
 
 Functions:
+    flatten: flattens a list of lists
     set_working_directory: changes the working directory
     get_power_of_two: creates a list of power of 2 numbers
 """
