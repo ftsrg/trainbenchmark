@@ -51,47 +51,44 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
 
 ### Setup
 
-#### Automatic
+* Initialization
+    * `init-config.sh`: initializes the configuration file (`config/config.yml`)
+* Installation
+    * `install-python.sh`: installs [Python 3](https://www.python.org/downloads/) and the required packages
+    * `install-jdk.sh`: installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
+    * `install-maven.sh`: installs [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
+* Dependencies
+    * `dep-mondo-sam.sh`: resolves the [MONDO-SAM 0.1](https://github.com/FTSRG/mondo-sam/tree/v0.1.0) dependency used by the benchmark framework
+    * `dep-graph.sh` resolves the [Neo4j Shell Tools](https://github.com/jexp/neo4j-shell-tools) dependency required by the `graph` components
 
-Provided that you start with a fresh Ubuntu server installation, you may use the provided install scripts:
+Provided that you start with a fresh Ubuntu server installation, you can run the provided install scripts like this:
 
 ```bash
-scripts/init-jdk.sh && \
-scripts/init-maven.sh && \
-scripts/init-python.sh && \
-scripts/dep-mysql.sh && \
-scripts/dep-neo4j.sh && \
-scripts/dep-virtuoso.sh && \
-scripts/dep-mondo-sam.sh
+scripts/init-config.sh && \
+scripts/install-python.sh && \
+scripts/install-jdk.sh && \
+scripts/install-maven.sh && \
+scripts/dep-mondo-sam.sh && \
+scripts/dep-graph.sh
 ```
 
-#### Manual
+#### Optional dependencies
 
-Alternatively, install the following software:
+Some tools require dependencies, e.g. installing a database manager or adding artifacts to your local Maven repository
 
-* [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
-* [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
-* Python 3
-* [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql)
-* Neo4j
-* [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso)
-* [MONDO-SAM 0.1](https://github.com/FTSRG/mondo-sam/tree/v0.1.0)
+* [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install mysql-server` and set the root password to empty.
+* [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso): run the `scripts/dep-virtuoso.sh` script to resolve the dependencies. Issue the `sudo apt-get install virtuoso-opensource` command to install Virtuoso and set the password to `dba`.
 
 ### Usage
 
-Initialize the configuration file by running:
-
-```
-scripts/init-config.sh
-```
-
-This creates `config/config.yml` which defines the configuration for the benchmark. The documentation is provided as comments in the file.
+The benchmark configuration is defined in the `config/config.yml` file (this is be created by the `scripts/init-config.sh` script). The script is based on the default configuration stored in [`scripts/default-config.yml`](scripts/default-config.yml) which also provided the documentation as comments in the file.
 
 The `scripts` directory contains the `run.py` script which is used for the following purposes:
 * `scripts/run.py -b` -- build the projects
 * `scripts/run.py -b -s` -- build the projects without testing
-* `scripts/run.py -g` -- generates the instance models
-* `scripts/run.py -m` -- runs the benchmark
+* `scripts/run.py -g` -- generates the instance models for the defined tools
+* `scripts/run.py -f` -- only generates the instance models for the specified formats (useful if you only need the models)
+* `scripts/run.py -m` -- runs the benchmark measurements
 * `scripts/run.py -h` -- displays the help
 
 ### Importing to Eclipse

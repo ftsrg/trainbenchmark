@@ -37,15 +37,43 @@ def build(config, formats, skip_tests):
     subprocess.check_call(cmd)
 
 
-def build_ci():
-    cmd_ci = ["mvn", "clean", "install", "-P", "ci", "--fail-at-end"]
-    subprocess.check_call(cmd_ci)
-    # skip the tests for tools with third-party dependencies
-    cmd_notest = ["mvn", "clean", "install", "-P", "notest", "-DskipTests", "--fail-at-end"]
-    subprocess.check_call(cmd_notest)
+def format(format):
+    path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
+    util.set_working_directory(path)
+    target = util.get_generator_jar(format)
+    for size in config["sizes"]:
+        cmd = flatten(["java", 
+             config["java_opts"],
+             "-jar", target,
+             "-scenario", scenario_name,
+             "-size", str(size),
+             arg])
+        try:
+            subprocess.check_call(cmd)
+        except subprocess.CalledProcessError:
+            print("An error occured during model generation, skipping larger sizes for this scenario/format.")
+            break
+    util.set_working_directory("..")
+    
+
+def formats(config, formats):
+    for format in formats:
+        for scenario in config["scenarios"]:
+
+            # dict only has one item
+            for (scenario_name, _) in scenario.items():
+                pass
+
+            args = [""]
+            if format in config["generator_optional_arguments"]:
+                for optional_argument in config["generator_optional_arguments"][format]:
+                    args.append("-" + optional_argument)
+
+            for arg in args:
+                
 
 
-def generate(config, formats):
+def generate_models(config, formats):
     for format in formats:
         for scenario in config["scenarios"]:
 
@@ -171,7 +199,7 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--generate",
                         help="generate models",
                         action="store_true")
-    parser.add_argument("-f", "--formats",
+    parser.add_argument("-f", "--formats-only",
                         help="generate the formats specified in the configuration file",
                         action="store_true")
     parser.add_argument("-m", "--measure",
@@ -212,7 +240,7 @@ if __name__ == "__main__":
     if args.build:
         build(config, formats, args.skip_tests)
     if args.generate:
-        generate(config, formats)
+        generate_models(config, formats)
     if args.measure:
         measure(config)
         send_mail(config)
