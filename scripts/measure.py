@@ -1,3 +1,4 @@
+import send_mail
 import subprocess
 import util
 
@@ -5,7 +6,7 @@ import os
 import glob
 
 
-def measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, benchmark_optional_arguments):
+def measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, benchmark_optional_arguments, email):
     for scenario in scenarios:
         transformation_arguments = []
 
@@ -31,6 +32,7 @@ def measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes
                     measure_tool(java_opts, timeout, target, scenario_name, runs, sizes, query_mix, transformation_arguments, arg)
 
             util.set_working_directory("..")
+    send_mail.send_mail(email)
 
 
 def measure_tool(java_opts, timeout, target, scenario_name, runs, sizes, query_mix, transformation_arguments, arg):
@@ -49,7 +51,7 @@ def measure_tool(java_opts, timeout, target, scenario_name, runs, sizes, query_m
                "-size", str(size),
                transformation_arguments,
                arg])
-        print(cmd)
+        print(" ".join(cmd))
         
         try:
             subprocess.check_call(cmd, timeout=timeout)

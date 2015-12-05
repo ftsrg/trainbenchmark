@@ -2,6 +2,9 @@ import smtplib
 from email.mime.text import MIMEText
 
 def send_mail(email):
+    if (email == None):
+        return
+
     address = email["address"]
     password = email["password"]
     host = email["host"]
