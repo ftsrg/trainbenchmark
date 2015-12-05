@@ -16,7 +16,7 @@ runs: 5
 timeout: 600
 
 # Set these values if you would like to receive an email if the benchmark is finished.
-email:
+#email:
 #  address: trainbenchmark@gmail.com
 #  password: 
 #  host: smtp.gmail.com:587

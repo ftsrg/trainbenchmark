@@ -14,7 +14,6 @@ import yaml
 import build
 import generate
 import measure
-import send_mail
 import util
 
 
@@ -50,7 +49,6 @@ if __name__ == "__main__":
         tool_formats = yaml.load(stream)
   
     tools = config["tools"]
-    email = config["email"]
     java_opts = config["java_opts"]
     query_mixes = config["query_mixes"]
     scenarios = config["scenarios"]
@@ -59,6 +57,10 @@ if __name__ == "__main__":
     benchmark_optional_arguments = config["benchmark_optional_arguments"]
     generator_optional_arguments = config["generator_optional_arguments"]
     sizes = util.get_power_of_two(config["min_size"], config["max_size"])
+    if ("email" in config):
+        email = config["email"]
+    else:
+        email = None
 
     if args.formats_only:
         formats = config["formats"]
@@ -79,5 +81,4 @@ if __name__ == "__main__":
     if args.generate:
         generate.generate_models(java_opts, formats, scenarios, sizes, generator_optional_arguments)
     if args.measure:
-        measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, benchmark_optional_arguments)
-        send_mail.send_mail(email)
+        measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, benchmark_optional_arguments, email)
