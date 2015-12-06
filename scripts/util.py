@@ -104,6 +104,33 @@ def get_common_model_path():
     return common_models_path
 
 
+def get_command_line_options(option_set):
+    options = []
+    for key, value in option_set.items():
+        arg = "-" + key
+        if isinstance(value, bool):
+            if value:
+                options.append(arg)
+            else:
+                pass
+        else:
+            options.append(arg)
+            options.append(value)
+    return options
+
+# based on http://stackoverflow.com/questions/2330245/python-change-text-color-in-shell
+def highlight(string, status, bold):
+    attr = []
+    if status:
+        # green
+        attr.append('32')
+    else:
+        # red
+        attr.append('31')
+    if bold:
+        attr.append('1')
+    return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
+
 # the used models extensions
 extensions = {
           'rdf': "ttl",

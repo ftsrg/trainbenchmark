@@ -18,16 +18,13 @@ import java.util.Map.Entry;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
 import org.eclipse.incquery.runtime.api.IMatchUpdateListener;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
-import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.api.impl.BaseGeneratedEMFQuerySpecification;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
-import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.extensibility.QueryBackendRegistry;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackend;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
-import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchHintKeys;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
 import org.eclipse.incquery.runtime.matchers.backend.QueryEvaluationHint;
@@ -35,6 +32,7 @@ import org.eclipse.incquery.runtime.matchers.backend.QueryEvaluationHint;
 import com.google.common.collect.Maps;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -57,7 +55,11 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 		try {
 
 		    engine = AdvancedIncQueryEngine.from(driver.getEngine());
-			if (benchmarkConfig.isLocalSearch()) { // when running local search, make sure the factory is registered
+			
+		    final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
+			switch (backend) {
+			case LOCALSEARCH:
+				// when running local search, make sure the factory is registered
 
 				final Iterable<Entry<Class<? extends IQueryBackend>, IQueryBackendFactory>> factories = QueryBackendRegistry
 						.getInstance().getAllKnownFactories();
@@ -71,8 +73,8 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 					QueryBackendRegistry.getInstance().registerQueryBackendFactory(LocalSearchBackend.class,
 							new LocalSearchBackendFactory());
 				}
-
-			} else { // incremental
+				break;
+			case  INCREMENTAL:
 			    matches = getMatcher().getAllMatches();
 				driver.getEngine().addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<TMatch>() {
 					@Override
@@ -85,9 +87,10 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 						matches.remove(match);
 					}
 				}, false);
+				break;
+			default:
+				throw new UnsupportedOperationException("Backend: " + backend + " not supported");
 			}
-			
-
 		} catch (final IncQueryException e) {
 			throw new RuntimeException(e);
 		}
@@ -115,8 +118,15 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 
 	@Override
 	public Collection<TMatch> check() throws IncQueryException {
-		if (benchmarkConfig.isLocalSearch()) {
+		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
+		switch (backend) {
+		case INCREMENTAL:
+			break;
+		case LOCALSEARCH:
 			matches = getMatcher().getAllMatches();
+			break;
+		default:
+			throw new UnsupportedOperationException("Backend: " + backend + " not supported");			
 		}
 		return matches;
 	}
@@ -127,8 +137,8 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 
 	public abstract IncQueryMatcher<TMatch> getMatcher() throws IncQueryException;
 
-    protected IncQueryMatcher<? extends IPatternMatch> getLSMatcher(BaseGeneratedEMFQuerySpecification<?> specificationInstance) throws IncQueryException {
-        HashMap<String, Object> mapForHint = Maps.<String, Object>newHashMap();
+    protected IncQueryMatcher<? extends IPatternMatch> getLSMatcher(final BaseGeneratedEMFQuerySpecification<?> specificationInstance) throws IncQueryException {
+        final HashMap<String, Object> mapForHint = Maps.<String, Object>newHashMap();
         return engine.getMatcher(specificationInstance, new QueryEvaluationHint(LocalSearchBackend.class, mapForHint));
     }
 

@@ -16,6 +16,7 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.ConnectedSegmentsQuerySpecification;
@@ -27,13 +28,17 @@ public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryChecker<Conn
 		super(benchmarkConfig, driver);
 	}
 
-    @Override
-    public IncQueryMatcher<ConnectedSegmentsMatch> getMatcher() throws IncQueryException {
-        if (benchmarkConfig.isLocalSearch()) {
-            return (ConnectedSegmentsMatcher) getLSMatcher(ConnectedSegmentsQuerySpecification.instance());
-        } else {
-            return engine.getMatcher(ConnectedSegmentsQuerySpecification.instance());
-        }
-    }
+	@Override
+	public IncQueryMatcher<ConnectedSegmentsMatch> getMatcher() throws IncQueryException {
+		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
+		switch (backend) {
+		case INCREMENTAL:
+			return engine.getMatcher(ConnectedSegmentsQuerySpecification.instance());
+		case LOCALSEARCH:
+			return (ConnectedSegmentsMatcher) getLSMatcher(ConnectedSegmentsQuerySpecification.instance());
+		default:
+			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
+		}
+	}
 
 }

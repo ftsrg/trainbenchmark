@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.EMFIncQueryBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
@@ -23,20 +24,20 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class EMFIncQueryBenchmarkInitializer extends TestBenchmarkInitializer {
 
-	protected boolean localSearch;
+	protected EMFIncQueryBackend backend;
 
-	public EMFIncQueryBenchmarkInitializer(boolean localSearch) {
-		this.localSearch = localSearch;
+	public EMFIncQueryBenchmarkInitializer(final EMFIncQueryBackend backend) {
+		this.backend = backend;
 	}
 	
 	public static List<Object[]> getTestParameters() {
-		return Arrays.asList(new Object[][] { { true }, { false } });
+		return Arrays.asList(new Object[][] { { EMFIncQueryBackend.INCREMENTAL }, { EMFIncQueryBackend.LOCALSEARCH} });
 	}
 
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
 		final EMFIncQueryBenchmarkConfig benchmarkConfig = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query,
-				iterationCount, transformationStrategy, transformationConstant, localSearch);
+				iterationCount, transformationStrategy, transformationConstant, backend);
 		return new BenchmarkRunner(benchmarkConfig, new EMFIncQueryBenchmarkCase());
 	}
 

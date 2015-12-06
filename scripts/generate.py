@@ -2,37 +2,39 @@ import subprocess
 import util
 
 
-def generate_models(java_opts, formats, scenarios, sizes, generator_optional_arguments):
+def generate_models(java_opts, formats, scenarios, sizes):
     for format in formats:
-        for scenario in scenarios:
+        for format_name, format_option_sets in format.items():
+            pass
 
-            # dict only has one item
-            for (scenario_name, _) in scenario.items():
+        for scenario in scenarios:
+            # extract the scenario name
+            for scenario_name, _ in scenario.items():
                 pass
 
-            args = [""]
-            if format in generator_optional_arguments:
-                for optional_argument in generator_optional_arguments[format]:
-                    args.append("-" + optional_argument)
-
-            for arg in args:
-                generate_model(java_opts, format, sizes, scenario_name, arg)
+                if format_option_sets is not None:
+                    for format_option_set in format_option_sets:
+                        generate_model(java_opts, format_name, format_option_set, sizes, scenario_name)
 
 
-def generate_model(java_opts, format, sizes, scenario_name, arg):
-    path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format)
+def generate_model(java_opts, format_name, format_option_set, sizes, scenario_name, ):
+    path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format_name)
     util.set_working_directory(path)
-    target = util.get_generator_jar(format)
+    target = util.get_generator_jar(format_name)
+
+    options = util.get_command_line_options(format_option_set)
+
     for size in sizes:
         cmd = util.flatten(["java", 
              java_opts,
              "-jar", target,
              "-scenario", scenario_name,
              "-size", str(size),
-             arg])
+             options])
+        print(util.highlight(" ".join(cmd), True, True))
         try:
             subprocess.check_call(cmd)
         except subprocess.CalledProcessError:
-            print("An error occured during model generation, skipping larger sizes for this scenario/format.")
+            print(util.highlight("An error occured during model generation, skipping larger sizes for this scenario/format.", False, True))
             break
     util.set_working_directory("..")

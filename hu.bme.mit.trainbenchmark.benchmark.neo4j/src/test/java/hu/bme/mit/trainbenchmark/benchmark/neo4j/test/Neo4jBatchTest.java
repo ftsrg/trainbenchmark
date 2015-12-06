@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class Neo4jBatchTest extends BatchTest {
@@ -25,8 +26,8 @@ public class Neo4jBatchTest extends BatchTest {
 	    return Neo4jBenchmarkInitializer.getTestParameters();
 	}
 	
-	public Neo4jBatchTest(final boolean coreApi) {
-		bi = new Neo4jBenchmarkInitializer(coreApi);
+	public Neo4jBatchTest(final Neo4jEngine engine) {
+		bi = new Neo4jBenchmarkInitializer(engine);
 	}
 
 }

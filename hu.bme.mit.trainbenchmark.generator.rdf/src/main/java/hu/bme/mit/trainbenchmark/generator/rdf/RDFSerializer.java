@@ -40,22 +40,24 @@ public class RDFSerializer extends ModelSerializer {
 
 	@Override
 	public String syntax() {
-		return "RDF" + (rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "-inferred");
+		return "RDF" + rdfGeneratorConfig.getModelFlavor();
 	}
 
 	@Override
 	public void initModel() throws IOException {
 		// source file
-		final String postfix = rdfGeneratorConfig.isMetamodel() ? "-metamodel" : "-inferred";
-		final String extension = rdfGeneratorConfig.isNTriples() ? ".nt" : ".ttl";
-
+		final String modelFlavor = rdfGeneratorConfig.getModelFlavor();
+		final String extension = rdfGeneratorConfig.getExtension();
+	
+		final String postfix = modelFlavor + "." + extension;
+		
 		final String srcFilePath = rdfGeneratorConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix + extension;
+				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix;
 
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = rdfGeneratorConfig.getModelPathWithoutExtension() + postfix + extension;
+		final String destFilePath = rdfGeneratorConfig.getModelPathWithoutExtension() + postfix;
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -78,14 +80,20 @@ public class RDFSerializer extends ModelSerializer {
 		final StringBuilder vertex = new StringBuilder(triple);
 
 		final String linePrefix;
-		if (rdfGeneratorConfig.isNTriples()) {
+		
+		switch (rdfGeneratorConfig.getFormat()) {
+		case NTRIPLES:
 			linePrefix = String.format(" .\n:%s%d ", ID_PREFIX, id);
-		} else {
+			break;
+		case TURTLE:
 			linePrefix = " ;\n\t";
+			break;
+		default:
+			throw new UnsupportedOperationException("RDF format " + rdfGeneratorConfig.getFormat() + " not supported");
 		}
 
 		// if the metamodel is not included, we manually insert the inferenced triples
-		if (!rdfGeneratorConfig.isMetamodel()) {
+		if (rdfGeneratorConfig.isInferred()) {
 			if (ModelConstants.SUPERTYPES.containsKey(type)) {
 				final String superType = ModelConstants.SUPERTYPES.get(type);
 

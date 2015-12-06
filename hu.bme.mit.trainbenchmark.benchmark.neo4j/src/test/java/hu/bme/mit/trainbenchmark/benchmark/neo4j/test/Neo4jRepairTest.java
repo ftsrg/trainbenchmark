@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 
 public class Neo4jRepairTest extends RepairTest {
@@ -25,7 +26,7 @@ public class Neo4jRepairTest extends RepairTest {
 	    return Neo4jBenchmarkInitializer.getTestParameters();
 	}
 	
-	public Neo4jRepairTest(final boolean coreApi) {
-		bi = new Neo4jBenchmarkInitializer(coreApi);
+	public Neo4jRepairTest(final Neo4jEngine engine) {
+		bi = new Neo4jBenchmarkInitializer(engine);
 	}
 }

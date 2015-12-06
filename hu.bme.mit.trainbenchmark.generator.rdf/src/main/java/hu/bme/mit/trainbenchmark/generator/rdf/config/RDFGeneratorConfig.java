@@ -15,14 +15,15 @@ package hu.bme.mit.trainbenchmark.generator.rdf.config;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.rdf.RDFFormat;
 
 public class RDFGeneratorConfig extends GeneratorConfig {
 
-	protected static final String METAMODEL = "metamodel";
-	protected static final String NTRIPLES = "ntriples";
+	protected static final String INFERRED = "inferred";
+	protected static final String FORMAT = "format";
 	
-	protected boolean metamodel;
-	protected boolean nTriples; 
+	protected boolean inferred;
+	protected RDFFormat format; 
 
 	public RDFGeneratorConfig(final String[] args) throws ParseException {
 		super(args);
@@ -32,24 +33,32 @@ public class RDFGeneratorConfig extends GeneratorConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(METAMODEL, false, "generate metamodel and container object and relations for RDF TBox");
-		options.addOption(NTRIPLES, false, "use N-Triples format");
+		options.addOption(INFERRED, false, "insert the inferred tuples instead of inserting the metamodel");
+		options.addOption(FORMAT, true, "specify the format: turtle (default), ntriples");
 	}
 
 	@Override
 	protected void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		metamodel = cmd.hasOption(METAMODEL);
-		nTriples = cmd.hasOption(NTRIPLES);
+		inferred = cmd.hasOption(INFERRED);
+		format = RDFFormat.valueOf(cmd.getOptionValue(FORMAT).toUpperCase());
 	}
 
-	public boolean isMetamodel() {
-		return metamodel;
+	public boolean isInferred() {
+		return inferred;
 	}
 
-	public boolean isNTriples() {
-		return nTriples;
+	public RDFFormat getFormat() {
+		return format;
+	}
+	
+	public String getModelFlavor() {
+		return isInferred() ? "-inferred" : "-metamodel";
 	}
 
+	public String getExtension() {
+		return format.getExtension();
+	}
+	
 }
