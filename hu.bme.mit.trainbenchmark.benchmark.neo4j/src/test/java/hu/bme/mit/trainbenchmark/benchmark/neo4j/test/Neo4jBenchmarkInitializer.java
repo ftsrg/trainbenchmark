@@ -17,6 +17,7 @@ import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.Query;
@@ -24,20 +25,20 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class Neo4jBenchmarkInitializer extends TestBenchmarkInitializer {
 	
-	protected boolean coreApi;
+	protected Neo4jEngine engine;
 
-	public Neo4jBenchmarkInitializer(boolean coreApi) {
-		this.coreApi = coreApi;
+	public Neo4jBenchmarkInitializer(final Neo4jEngine engine) {
+		this.engine = engine;
 	}
 
 	public static Collection<Object[]> getTestParameters() {
-		return Arrays.asList(new Object[][] { { true }, { false } });
+		return Arrays.asList(new Object[][] { { Neo4jEngine.COREAPI }, { Neo4jEngine.CYPHER } });
 	}
 	
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
 		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, runIndex, query, iterationCount, transformationStrategy,
-				transformationConstant, coreApi);
+				transformationConstant, engine);
 		return new BenchmarkRunner(rbc, new Neo4jBenchmarkCase());
 	}
 

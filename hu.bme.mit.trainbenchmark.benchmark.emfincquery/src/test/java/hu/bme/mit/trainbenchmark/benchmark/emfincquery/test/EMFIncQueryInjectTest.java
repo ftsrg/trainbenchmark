@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
 public class EMFIncQueryInjectTest extends InjectTest {
@@ -24,8 +25,8 @@ public class EMFIncQueryInjectTest extends InjectTest {
 	    return EMFIncQueryBenchmarkInitializer.getTestParameters();
 	}
 
-	public EMFIncQueryInjectTest(boolean localSearch) {
-		bi = new EMFIncQueryBenchmarkInitializer(localSearch);
+	public EMFIncQueryInjectTest(final EMFIncQueryBackend backend) {
+		bi = new EMFIncQueryBenchmarkInitializer(backend);
 	}
 
 }

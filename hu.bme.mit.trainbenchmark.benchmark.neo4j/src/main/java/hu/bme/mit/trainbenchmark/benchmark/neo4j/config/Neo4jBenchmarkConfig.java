@@ -22,40 +22,40 @@ import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	protected static final String NEO4J = "Neo4j";
-	protected static final String COREAPI = "coreapi";
+	protected static final String ENGINE = "engine";
 
-	protected boolean coreApi;
+	protected Neo4jEngine engine;
 
 	public Neo4jBenchmarkConfig(final String[] args) throws ParseException {
 		super(NEO4J, args);
 	}
 
 	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query, final int iterationCount,
-			final TransformationStrategy transformationStrategy, final long transformationConstant, final boolean coreApi) {
+			final TransformationStrategy transformationStrategy, final long transformationConstant, final Neo4jEngine engine) {
 		super(NEO4J, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
-		this.coreApi = coreApi;
+		this.engine = engine;
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(COREAPI, false, "use the faster, low-level core API for querying");
+		options.addOption(ENGINE, true, "query engine: coreapi (Core Java API), cypher (Cypher query language)");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		coreApi = cmd.hasOption(COREAPI);
+		engine = Neo4jEngine.valueOf(cmd.getOptionValue(ENGINE).toUpperCase());
 	}
 
-	public boolean isCoreApi() {
-		return coreApi;
+	public Neo4jEngine getEngine() {
+		return engine;
 	}
-
+	
 	@Override
 	public String getToolName() {
-		return super.getToolName() + (isCoreApi() ? "_(Core_API)" : "_(Cypher)");
+		return super.getToolName() + "_(" + engine.toString() + ")";
 	}
 }

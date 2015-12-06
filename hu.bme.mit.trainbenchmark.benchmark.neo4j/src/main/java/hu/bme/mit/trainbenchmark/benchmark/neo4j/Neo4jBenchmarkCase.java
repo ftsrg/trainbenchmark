@@ -23,6 +23,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.Neo4jCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
@@ -39,11 +40,15 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	
 	@Override
 	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final Query query)
-			throws Exception {
-		if (benchmarkConfig.isCoreApi()) {
+			throws Exception {		
+		final Neo4jEngine engine = benchmarkConfig.getEngine();
+		switch (engine) {	
+		case COREAPI:
 			return Neo4jCoreChecker.newInstance(driver, query);
-		} else {
+		case CYPHER:
 			return Neo4jCypherChecker.newInstance(driver, benchmarkConfig, query);
+		default:
+			throw new UnsupportedOperationException("Engine not supported: " + engine);
 		}
 	}
 

@@ -14,12 +14,11 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.ConnectedSegmentsQuerySpecification;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SemaphoreNeighborQuerySpecification;
 
 public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
@@ -31,11 +30,15 @@ public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<Sema
 
 	@Override
 	public IncQueryMatcher<SemaphoreNeighborMatch> getMatcher() throws IncQueryException {
-        if (benchmarkConfig.isLocalSearch()) {
-            return (SemaphoreNeighborMatcher) getLSMatcher(SemaphoreNeighborQuerySpecification.instance());
-        } else {
-            return engine.getMatcher(SemaphoreNeighborQuerySpecification.instance());
-        }
+		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
+		switch (backend) {
+		case INCREMENTAL:
+			return engine.getMatcher(SemaphoreNeighborQuerySpecification.instance());
+		case LOCALSEARCH:
+			return (SemaphoreNeighborMatcher) getLSMatcher(SemaphoreNeighborQuerySpecification.instance());
+		default:
+			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
+		}
 	}
 
 }

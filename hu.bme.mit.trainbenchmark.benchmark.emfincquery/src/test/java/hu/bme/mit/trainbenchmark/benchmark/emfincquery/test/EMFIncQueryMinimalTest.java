@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
 public class EMFIncQueryMinimalTest extends MinimalTest {
@@ -24,8 +25,8 @@ public class EMFIncQueryMinimalTest extends MinimalTest {
 	    return EMFIncQueryBenchmarkInitializer.getTestParameters();
 	}
 
-	public EMFIncQueryMinimalTest(final boolean localSearch) {
-		bi = new EMFIncQueryBenchmarkInitializer(localSearch);
+	public EMFIncQueryMinimalTest(final EMFIncQueryBackend backend) {
+		bi = new EMFIncQueryBenchmarkInitializer(backend);
 	}
 
 }

@@ -14,12 +14,11 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.ConnectedSegmentsMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensorMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.ConnectedSegmentsQuerySpecification;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SwitchSensorQuerySpecification;
 
 public class EMFIncQuerySwitchSensorChecker extends EMFIncQueryChecker<SwitchSensorMatch> {
@@ -31,11 +30,15 @@ public class EMFIncQuerySwitchSensorChecker extends EMFIncQueryChecker<SwitchSen
 
 	@Override
 	public IncQueryMatcher<SwitchSensorMatch> getMatcher() throws IncQueryException {
-        if (benchmarkConfig.isLocalSearch()) {
-            return (SwitchSensorMatcher) getLSMatcher(SwitchSensorQuerySpecification.instance());
-        } else {
+		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
+		switch (backend) {
+		case INCREMENTAL:
             return engine.getMatcher(SwitchSensorQuerySpecification.instance());
-        }
+		case LOCALSEARCH:
+            return (SwitchSensorMatcher) getLSMatcher(SwitchSensorQuerySpecification.instance());
+		default:
+			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
+		}
 	}
 
 }

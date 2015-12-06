@@ -21,9 +21,9 @@ import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 
 	protected static final String EMFINCQUERY = "EMF-IncQuery";
-	protected static final String LOCALSEARCH = "localsearch";
+	protected static final String BACKEND = "backend";
 
-	protected boolean localSearch;
+	protected EMFIncQueryBackend backend;
 
 	public EMFIncQueryBenchmarkConfig(final String[] args) throws ParseException {
 		super(EMFINCQUERY, args);
@@ -35,44 +35,42 @@ public class EMFIncQueryBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	public EMFIncQueryBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query,
-			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant,
-			final boolean localSearch) {
-		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
-		this.localSearch = localSearch;
+			final int iterationCount, final TransformationStrategy transformationStrategy,
+			final long transformationConstant, final EMFIncQueryBackend backend) {
+		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, transformationStrategy,
+				transformationConstant);
+		this.backend = backend;
 	}
 
 	// for Hawk
-	protected EMFIncQueryBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex,
-			final Query query, final int iterationCount, final TransformationStrategy transformationStrategy,
-			final long transformationConstant, final boolean localSearch) {
-		super(className, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
+	protected EMFIncQueryBenchmarkConfig(final String className, final Scenario scenario, final int size,
+			final int runIndex, final Query query, final int iterationCount,
+			final TransformationStrategy transformationStrategy, final long transformationConstant,
+			final boolean localSearch) {
+		super(className, scenario, size, runIndex, query, iterationCount, transformationStrategy,
+				transformationConstant);
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
-
-		options.addOption(LOCALSEARCH, false, "uses the local search strategy for pattern matching");
+		options.addOption(BACKEND, true, "set the IncQuery backend: incremental or local search");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
 
-		localSearch = cmd.hasOption(LOCALSEARCH);
+		backend = EMFIncQueryBackend.valueOf(cmd.getOptionValue(BACKEND).toUpperCase());
 	}
 
-	public boolean isLocalSearch() {
-		return localSearch;
+	public EMFIncQueryBackend getBackend() {
+		return backend;
 	}
 
 	@Override
 	public String getToolName() {
-		if (isLocalSearch()) {
-			return super.getToolName() + "_(Local_Search)";
-		} else {
-			return super.getToolName() + "_(Incremental)";
-		}
+		return super.getToolName() + "_(" + backend.toString() + ")";
 	}
 
 }

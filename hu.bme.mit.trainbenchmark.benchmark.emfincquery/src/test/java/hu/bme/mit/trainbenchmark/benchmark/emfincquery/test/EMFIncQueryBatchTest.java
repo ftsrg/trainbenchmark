@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class EMFIncQueryBatchTest extends BatchTest {
@@ -25,8 +26,8 @@ public class EMFIncQueryBatchTest extends BatchTest {
 	    return EMFIncQueryBenchmarkInitializer.getTestParameters();
 	}
 	
-	public EMFIncQueryBatchTest(final boolean localSearch) {
-		bi = new EMFIncQueryBenchmarkInitializer(localSearch);
+	public EMFIncQueryBatchTest(final EMFIncQueryBackend backend) {
+		bi = new EMFIncQueryBenchmarkInitializer(backend);
 	}
 
 }

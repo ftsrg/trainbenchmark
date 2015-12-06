@@ -49,25 +49,31 @@ if __name__ == "__main__":
         tool_formats = yaml.load(stream)
   
     tools = config["tools"]
+    formats = config["formats"]
+    tool_names = [];
+    for tool in tools:
+        for tool_name, _ in tool.items():
+            pass
+        tool_names.append(tool_name)
     java_opts = config["java_opts"]
     query_mixes = config["query_mixes"]
     scenarios = config["scenarios"]
     runs = config["runs"]
     timeout = config["timeout"]
-    benchmark_optional_arguments = config["benchmark_optional_arguments"]
-    generator_optional_arguments = config["generator_optional_arguments"]
     sizes = util.get_power_of_two(config["min_size"], config["max_size"])
     if ("email" in config):
         email = config["email"]
     else:
         email = None
 
+    format_names = set()
     if args.formats_only:
-        formats = config["formats"]
+        for format in config["formats"]:
+            for format_name, _ in format.items():
+                format_names.add(format_name)
     else:
-        formats = set()
-        for tool in tools:
-            formats.add(tool_formats[tool])
+        for tool_name in tool_names:
+            format_names.add(tool_formats[tool_name])
 
     # Run the framework. If there are no args, execute a full sequence
     # with the test and the visualization/reporting.
@@ -77,8 +83,8 @@ if __name__ == "__main__":
         args.generate = True
         args.measure = True
     if args.build:
-        build.build(java_opts, formats, tools, args.skip_tests)
+        build.build(java_opts, format_names, tool_names, args.skip_tests)
     if args.generate:
-        generate.generate_models(java_opts, formats, scenarios, sizes, generator_optional_arguments)
+        generate.generate_models(java_opts, formats, scenarios, sizes)
     if args.measure:
-        measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, benchmark_optional_arguments, email)
+        measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, email)

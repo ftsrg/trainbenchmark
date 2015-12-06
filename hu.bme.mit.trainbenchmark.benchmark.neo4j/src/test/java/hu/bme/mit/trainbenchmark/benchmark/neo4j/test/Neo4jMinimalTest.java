@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
 
 public class Neo4jMinimalTest extends MinimalTest {
@@ -25,8 +26,8 @@ public class Neo4jMinimalTest extends MinimalTest {
 	    return Neo4jBenchmarkInitializer.getTestParameters();
 	}
 	
-	public Neo4jMinimalTest(final boolean coreApi) {
-		bi = new Neo4jBenchmarkInitializer(coreApi);
+	public Neo4jMinimalTest(final Neo4jEngine engine) {
+		bi = new Neo4jBenchmarkInitializer(engine);
 	}
 
 }

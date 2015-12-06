@@ -29,7 +29,7 @@ query_mixes:
 - SemaphoreNeighbor
 - SwitchSensor
 - SwitchSet
-# - RouteSensor SwitchSensor PosLength
+# - RouteSensor ConnectedSegments PosLength SemaphoreNeighbor SwitchSensor SwitchSet
 
 # Specify the scenarios for the benchmark and the generator.
 # You may also specify the benchmark arguments for each scenario.
@@ -46,41 +46,38 @@ scenarios:
 
 # Specify the name of the tools to run.
 tools:
-- blazegraph
-- drools5
-- drools6
-- eclipseocl
-- emfapi
-- emfincquery
-#- hawk
-#- iqdcore
-- jena
-- mysql
-- neo4j
-- sesame
-#- virtuoso
+- blazegraph:
+- drools5:
+- drools6:
+- eclipseocl:
+- emfapi:
+- emfincquery:
+  - backend: incremental
+  - backend: localsearch
+#- hawk:
+#- iqdcore:
+- jena:
+  - inferencing: false
+  - inferencing: true
+- mysql:
+- neo4j:
+  - engine: coreapi
+  - engine: cypher
+- sesame:
+  - inferencing: false
+  - inferencing: true
+#- virtuoso:
 
 # If you run the script with the -f switch, the script will only generate the formats listed here.
 # Without the -f switch, this list is ignored by the script.
 formats:
-- emf
-- graph
-- rdf
-- sql
-
-# Optional arguments for the generator.
-generator_optional_arguments:
-  rdf:
-  - metamodel
-
-# Optional arguments for the benchmark.
-# For example, the neo4j tool is invoked with and without the coreapi argument as well.
-benchmark_optional_arguments:
-  neo4j:
-  - coreapi
-  jena:
-  - inferencing
-  sesame:
-  - inferencing
-  emfincquery:
-  - localsearch
+- emf:
+- graph:
+- rdf:
+  - inferred: on
+    format: turtle
+  - inferred: off
+    format: turtle
+  - inferred: on
+    format: ntriples
+- sql:
