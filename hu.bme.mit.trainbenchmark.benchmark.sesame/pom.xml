@@ -9,7 +9,7 @@
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.sesame</artifactId>
 
 	<properties>
-		<sesame.version>2.7.9</sesame.version>
+		<sesame.version>2.7.16</sesame.version>
 	</properties>
 
 	<build>
