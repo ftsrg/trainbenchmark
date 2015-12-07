@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class EclipseOCLBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Eclipse OCL", args);
+		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Eclipse_OCL", args);
 		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new EclipseOCLBenchmarkCase<>());
 		benchmarkRunner.runBenchmark();
 	}
