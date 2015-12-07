@@ -106,6 +106,9 @@ def get_common_model_path():
 
 def get_command_line_options(option_set):
     options = []
+    if (option_set is None):
+        return options
+
     for key, value in option_set.items():
         arg = "-" + key
         if isinstance(value, bool):

@@ -15,6 +15,8 @@ def generate_models(java_opts, formats, scenarios, sizes):
                 if format_option_sets is not None:
                     for format_option_set in format_option_sets:
                         generate_model(java_opts, format_name, format_option_set, sizes, scenario_name)
+                else:
+                    generate_model(java_opts, format_name, None, sizes, scenario_name)
 
 
 def generate_model(java_opts, format_name, format_option_set, sizes, scenario_name, ):
