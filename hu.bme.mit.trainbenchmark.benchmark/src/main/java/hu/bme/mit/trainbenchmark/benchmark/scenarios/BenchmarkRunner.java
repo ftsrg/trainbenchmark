@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,10 +23,12 @@ import java.util.Random;
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
+import eu.mondo.sam.core.publishers.CsvPublisher;
+import eu.mondo.sam.core.publishers.DefaultFilenameFactory;
+import eu.mondo.sam.core.publishers.FilenameFactory;
+import eu.mondo.sam.core.publishers.Publisher;
 import eu.mondo.sam.core.results.BenchmarkResult;
-import eu.mondo.sam.core.results.JsonSerializer;
 import eu.mondo.sam.core.results.PhaseResult;
-import eu.mondo.sam.core.results.ResultSerializer;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
@@ -62,8 +65,10 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		scenario.initializeDescriptor();
 
 		final BenchmarkEngine engine = new BenchmarkEngine();
-		final ResultSerializer serializer = new JsonSerializer();
-		engine.getBenchmarkResult().addSerializer(serializer);
+		final BenchmarkResult result = new BenchmarkResult(new File("."));
+		final FilenameFactory factory = new DefaultFilenameFactory(scenario.getCaseDescriptor());
+		final Publisher publisher = new CsvPublisher(factory);	
+		result.addPublisher(publisher);
 		final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
 		token.setBenchmarkRunner(this);
 
@@ -79,10 +84,10 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 			}
 
 			scenario.setRunIndex(i);
-			engine.runBenchmark(scenario, token);
+			engine.runBenchmark(result, scenario, token);
 		}
 
-		return engine.getBenchmarkResult();
+		return result;
 	}
 
 	// initialization methods

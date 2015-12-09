@@ -28,7 +28,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.google.common.collect.ImmutableList;
 
 import eu.mondo.sam.core.results.BenchmarkResult;
-import eu.mondo.sam.core.results.JsonSerializer;
 import eu.mondo.sam.core.results.MetricResult;
 import eu.mondo.sam.core.results.PhaseResult;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
@@ -62,7 +61,7 @@ public abstract class TrainBenchmarkTest {
 
 	private void runQuery(final BenchmarkRunner benchmarkRunner, final List<Integer> expectedResultSizes)
 			throws Exception {
-		JsonSerializer.setResultPath("../results/test/");
+//		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult benchmarkResult = benchmarkRunner.runBenchmark();
 
 		final List<Integer> resultSizes = new ArrayList<>();
