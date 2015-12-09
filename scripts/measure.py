@@ -4,9 +4,10 @@ import util
 
 import os
 import glob
+from typing import List
 
 
-def measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, email):
+def measure_tools(java_opts: List[str], timeout: int, runs: int, scenarios: List, sizes: List[int], tools: List, query_mixes: List, email):
     for scenario in scenarios:
         transformation_arguments = []
 
@@ -34,7 +35,7 @@ def measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes
     send_mail.send_mail(email)
 
 
-def measure_tool(java_opts, timeout, target, scenario_name, runs, sizes, query_mix, transformation_arguments, tool_option_set):
+def measure_tool(java_opts: List[str], timeout: int, target: str, scenario_name: str, runs: int, sizes: List[int], query_mix: List[str], transformation_arguments: List, tool_option_set: List):
     for size in sizes:
         # remove all files in the temporary results directory
         prev_files = glob.glob('../results/json/*')

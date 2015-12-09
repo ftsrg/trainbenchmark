@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.5
 """
 This script runs the benchmark and performs some additional operations:
 * building the code
@@ -88,3 +88,4 @@ if __name__ == "__main__":
         generate.generate_models(java_opts, formats, scenarios, sizes)
     if args.measure:
         measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, email)
+

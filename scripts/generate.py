@@ -1,8 +1,9 @@
 import subprocess
 import util
+from typing import List
 
 
-def generate_models(java_opts, formats, scenarios, sizes):
+def generate_models(java_opts: List[str], formats: List, scenarios: List, sizes: List[str]):
     for format in formats:
         for format_name, format_option_sets in format.items():
             pass
@@ -19,7 +20,7 @@ def generate_models(java_opts, formats, scenarios, sizes):
                     generate_model(java_opts, format_name, None, sizes, scenario_name)
 
 
-def generate_model(java_opts, format_name, format_option_set, sizes, scenario_name, ):
+def generate_model(java_opts: List[str], format_name: str, format_option_set: List, sizes: List[int], scenario_name: str):
     path = "./hu.bme.mit.trainbenchmark.generator.{FORMAT}/".format(FORMAT=format_name)
     util.set_working_directory(path)
     target = util.get_generator_jar(format_name)

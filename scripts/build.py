@@ -1,7 +1,9 @@
 import subprocess
 import util
 
-def build(java_opts, format_names, tool_names, skip_tests):
+from typing import List
+
+def build(java_opts: List[str], format_names: List[str], tool_names: List[str], skip_tests: bool):
     profiles = {"core"}
     profiles = profiles.union(format_names)
     profiles = profiles.union(tool_names)
