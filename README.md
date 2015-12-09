@@ -4,7 +4,7 @@
 
 **Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
 
-**Warning.** The Train Benchmark is designed to run in a server environment. Some implementations may shut down or delete existing databases, so only run it on your developer workstation if you understand the consequences.
+**Warning.** The Train Benchmark is designed to run in an isolated server environment, e.g. virtual machines in the cloud. Some implementations may shut down or delete existing databases, so only run it on your developer workstation if you understand the consequences.
 
 For theoretical and implementation details, check out the following documents:
 * [Train Benchmark technical report](https://www.sharelatex.com/github/repos/FTSRG/trainbenchmark-docs/builds/latest/output.pdf) ([GitHub repository](https://github.com/FTSRG/trainbenchmark-docs))
@@ -12,34 +12,15 @@ For theoretical and implementation details, check out the following documents:
 
 ## Projects
 
-### Generator projects
+* The **generator projects** are responsible for generating instance models. For **each format**, there is a separate generator project.
+* The **benchmark projects** are responsible for running the benchmarks. For each tool, there is a separate benchmark project.
 
-The generator projects are responsible for generating instance models. Currently, the following formats are supported:
+Currently, the following formats and tools are supported. Experimental tools are shown in _italics_.
 
-* EMF
-* Property graph
-* RDF
-* SQL
-
-### Benchmark projects
-
-The benchmark projects are responsible for running the benchmarks.
-
-* EMF
-  * Drools 5 & 6
-  * EMF API
-  * EMF-IncQuery
-  * Eclipse OCL
-* Property graph
-  * Neo4j
-  * OrientDB
-* RDF
-  * Blazegraph
-  * Jena
-  * Sesame
-  * Virtuoso
-* SQL
-  * MySQL
+* **EMF:** Drools 5 & 6, Eclipse OCL, EMF API, EMF-IncQuery
+* **Property graph:** Neo4j, _OrientDB_
+* **RDF:** _4store_, AllegroGraph, Blazegraph, Jena, Sesame, Virtuoso
+* **SQL:** _MemSQL_, MySQL
 
 ## Getting started
 
@@ -76,9 +57,9 @@ scripts/dep-graph.sh
 
 Some tools require dependencies, e.g. installing a database manager or adding artifacts to your local Maven repository
 
+* [AllegroGraph](hu.bme.mit.trainbenchmark.benchmark.allegro): download the [Allegro server](http://franz.com/agraph/downloads/server). Unzip the file and run `./configure-agraph`. Adjust the port to `10035` (default value), set the username and password to `super`. Start the server with `./agraph`.
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install mysql-server` and set the root password to empty.
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso): run the `scripts/dep-virtuoso.sh` script to resolve the dependencies. Issue the `sudo apt-get install virtuoso-opensource` command to install Virtuoso and set the password to `dba`.
-* [Allegro](hu.bme.mit.trainbenchmark.benchmark.allegro): download the [Allegro server](http://franz.com/agraph/downloads/server). Unzip the file and run `./configure-agraph`. Adjust the port to `10035` (default value), set the username and password to `super`. Start the server with `./agraph`.
 
 ### Usage
 
@@ -100,33 +81,17 @@ To import and develop the Train Benchmark, you need the m2e Eclipse plugin, incl
 
 ### Naming conventions
 
-To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Neo4j implementation are named `Neo4jBenchmarkCase`, `Neo4jPosLengthChecker`, `JavaPosLengthMatch`, `JavaPosLengthTransformation`, while the classes in the EMF-IncQuery implementation are named `EMFIncQueryBenchmarkCase`, `EMFIncQueryPosLengthChecker`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
+**Note.** To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Neo4j implementation are named `Neo4jBenchmarkCase`, `Neo4jPosLengthChecker`, `JavaPosLengthMatch`, `JavaPosLengthTransformation`, while the classes in the EMF-IncQuery implementation are named `EMFIncQueryBenchmarkCase`, `EMFIncQueryPosLengthChecker`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
 
 ## Reporting tools
 
-### Install R packages
-
-Follow the instructions [here](https://github.com/FTSRG/mondo-sam/blob/master/README.md#reporting-in-r).
-
-### Convert the results
-
-It is possible to convert the measurement results from JSON to CSV with the following script:
+Convert the measurement results from JSON to CSV with the following script:
 
 ```bash
 scripts/convert-results.sh
 ```
 
-### Interactive reporting
-
-In order to use the interactive interface in MONDO-SAM, install additional R packages as described [here](https://github.com/FTSRG/mondo-sam/tree/v0.1.0#interactive-reporting), then run the following:
-
-```bash
-scripts/interactive.py
-```
-
-### Generating diagrams
-
-Adjust the `config/reporting.json` file and run the `scripts/report.sh` script. The possible configuration values are listed in the [MONDO-SAM wiki](https://github.com/FTSRG/mondo-sam/wiki/Reporting).
+Use the reporting tools provided in the [mondo-sam-reporting](https://github.com/FTSRG/mondo-sam-reporting) repository.
 
 ## Instance models
 

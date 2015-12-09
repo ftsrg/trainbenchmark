@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>eu.mondo.sam</groupId>
 			<artifactId>eu.mondo.sam.core</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.2.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
