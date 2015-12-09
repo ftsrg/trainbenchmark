@@ -7,6 +7,5 @@ if [ ! -d mondo-sam ]; then
   git clone https://github.com/FTSRG/mondo-sam.git
 fi
 cd mondo-sam
-git checkout v0.1.0
 mvn clean install -DskipTests
 cd ..
