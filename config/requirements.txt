@@ -1,2 +1,2 @@
-jsonschema==2.4.0
 pyyaml
+typing
