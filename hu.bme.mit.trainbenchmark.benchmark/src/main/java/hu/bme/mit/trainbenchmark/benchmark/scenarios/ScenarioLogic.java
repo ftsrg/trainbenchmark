@@ -37,12 +37,13 @@ public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?, ?, ?, 
 
 	@Override
 	public CaseDescriptor getCaseDescriptor() {
-		final CaseDescriptor descriptor = new CaseDescriptor();
-		descriptor.setCaseName(caseName);
-		descriptor.setTool(tool);
-		descriptor.setScenario(benchmarkConfig.getScenarioName());
-		descriptor.setSize(size);
-		descriptor.setRunIndex(runIndex);
+		final CaseDescriptor descriptor = new CaseDescriptor.Builder()
+				.case_(caseName) //
+				.tool(tool) //
+				.scenario(benchmarkConfig.getScenarioName()) //
+				.artifact(Integer.toString(size)) //
+				.run(runIndex) //
+				.build();
 		return descriptor;
 	}
 
