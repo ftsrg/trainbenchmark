@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 """
 This script runs the benchmark and performs some additional operations:
 * building the code
