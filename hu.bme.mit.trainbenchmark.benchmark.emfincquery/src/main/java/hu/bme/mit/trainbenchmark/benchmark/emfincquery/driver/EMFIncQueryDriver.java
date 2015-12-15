@@ -36,7 +36,7 @@ public class EMFIncQueryDriver<TMatch extends BasePatternMatch>
 
 	public EMFIncQueryDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) {
 		super(benchmarkConfig);
-		
+
 		try {
 			final EMFScope emfScope = new EMFScope(resourceSet);
 			engine = AdvancedIncQueryEngine.from(IncQueryEngine.on(emfScope));

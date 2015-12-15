@@ -43,7 +43,7 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 	protected Collection<TMatch> matches;
 	protected final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> driver;
 	protected final EMFIncQueryBenchmarkConfig benchmarkConfig;
-    protected AdvancedIncQueryEngine engine;
+	protected AdvancedIncQueryEngine engine;
 
 	protected EMFIncQueryChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
 			final EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> driver) {
@@ -54,9 +54,9 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 
 		try {
 
-		    engine = AdvancedIncQueryEngine.from(driver.getEngine());
-			
-		    final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
+			engine = AdvancedIncQueryEngine.from(driver.getEngine());
+
+			final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
 			switch (backend) {
 			case LOCALSEARCH:
 				// when running local search, make sure the factory is registered
@@ -74,8 +74,8 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 							new LocalSearchBackendFactory());
 				}
 				break;
-			case  INCREMENTAL:
-			    matches = getMatcher().getAllMatches();
+			case INCREMENTAL:
+				matches = getMatcher().getAllMatches();
 				driver.getEngine().addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<TMatch>() {
 					@Override
 					public void notifyAppearance(final TMatch match) {
@@ -126,7 +126,7 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 			matches = getMatcher().getAllMatches();
 			break;
 		default:
-			throw new UnsupportedOperationException("Backend: " + backend + " not supported");			
+			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
 		}
 		return matches;
 	}
@@ -137,9 +137,10 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 
 	public abstract IncQueryMatcher<TMatch> getMatcher() throws IncQueryException;
 
-    protected IncQueryMatcher<? extends IPatternMatch> getLSMatcher(final BaseGeneratedEMFQuerySpecification<?> specificationInstance) throws IncQueryException {
-        final HashMap<String, Object> mapForHint = Maps.<String, Object>newHashMap();
-        return engine.getMatcher(specificationInstance, new QueryEvaluationHint(LocalSearchBackend.class, mapForHint));
-    }
+	protected IncQueryMatcher<? extends IPatternMatch> getLSMatcher(
+			final BaseGeneratedEMFQuerySpecification<?> specificationInstance) throws IncQueryException {
+		final HashMap<String, Object> mapForHint = Maps.<String, Object> newHashMap();
+		return engine.getMatcher(specificationInstance, new QueryEvaluationHint(LocalSearchBackend.class, mapForHint));
+	}
 
 }
