@@ -36,8 +36,8 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
     * `init-config.sh`: initializes the configuration file (`config/config.yml`)
 * Installation
     * `install-python.sh`: installs [Python 3](https://www.python.org/downloads/) and the required packages
-    * `install-jdk.sh`: installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux#oracle-jdk)
-    * `install-maven.sh`: installs [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux#maven-3)
+    * `install-jdk.sh`: installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
+    * `install-maven.sh`: installs [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux-packages#maven-3)
 * Dependencies
     * `dep-mondo-sam.sh`: resolves the [MONDO-SAM 0.1](https://github.com/FTSRG/mondo-sam/tree/v0.1.0) dependency used by the benchmark framework
     * `dep-graph.sh` resolves the [Neo4j Shell Tools](https://github.com/jexp/neo4j-shell-tools) dependency required by the `graph` components
