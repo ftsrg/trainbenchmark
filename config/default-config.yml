@@ -36,13 +36,13 @@ query_mixes:
 scenarios:
 - Batch:
 - Inject:
+    iterationCount: 20
     transformationStrategy: fixed
-    transformationConstant: 10
-    iterationCount: 10
+    transformationConstant: 10# matches
 - Repair:
+    iterationCount: 8
     transformationStrategy: proportional
-    transformationConstant: 10
-    iterationCount: 10
+    transformationConstant: 5# percent
 
 # Specify the name of the tools to run.
 tools:
