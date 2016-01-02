@@ -68,6 +68,7 @@ if __name__ == "__main__":
 
     format_names = set()
     if args.formats_only:
+        args.generate = True
         for format in config["formats"]:
             for format_name, _ in format.items():
                 format_names.add(format_name)
