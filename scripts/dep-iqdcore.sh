@@ -7,6 +7,6 @@ sudo apt-get update
 sudo apt-get install sbt
 
 cd "$( cd "$( dirname "$0" )" && pwd )/../.."
-git clone https://github.com/FTSRG/incqueryd-core.git
+git clone https://github.com/FTSRG/incqueryd-core.git --depth=1
 cd incqueryd-core
 ./publishM2.sh
