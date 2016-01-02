@@ -11,7 +11,7 @@
 	<artifactId>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</artifactId>
 
 	<properties>
-		<emfincquery.version>1.1.0-SNAPSHOT</emfincquery.version>
+		<emfincquery.version>1.2.0-SNAPSHOT</emfincquery.version>
 	</properties>
 
 	<build>
