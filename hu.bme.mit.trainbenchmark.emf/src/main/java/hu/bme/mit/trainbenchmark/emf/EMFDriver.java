@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
@@ -33,13 +34,13 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 
 	protected RailwayContainer container;
 	protected Resource resource;
-	protected final ResourceSetImpl resourceSet = new ResourceSetImpl();
+	protected final ResourceSet resourceSet = new ResourceSetImpl();
 	private final Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
 
 	public EMFDriver(final TBenchmarkConfig benchmarkConfig) {
 		super(benchmarkConfig);
 	}
-	
+
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		RailwayPackage.eINSTANCE.eClass();
