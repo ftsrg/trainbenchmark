@@ -12,17 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.emf;
 
-import hu.bme.mit.trainbenchmark.emf.xmi.XMIResourceFactoryImplWithUUID;
-
-import java.util.Map;
-
 import org.eclipse.emf.ecore.resource.Resource;
 
+import hu.bme.mit.trainbenchmark.emf.xmi.XMIResourceFactoryImplWithUUID;
+
 public class EMFUtil {
+
 	public static void registerUUIDXMIResourceFactory() {
-		// register the XMI resource factory for the .xmi extension
-		final Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-		final Map<String, Object> m = reg.getExtensionToFactoryMap();
-		m.put("xmi", new XMIResourceFactoryImplWithUUID());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImplWithUUID());
 	}
+
 }
