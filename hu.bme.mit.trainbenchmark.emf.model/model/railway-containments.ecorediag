@@ -293,7 +293,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_YJG1YVPbEeCLuajbZvk0sQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_YJG1YlPbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="railway.ecore#//SwitchPosition/switch"/>
+    <element xmi:type="ecore:EReference" href="railway.ecore#//SwitchPosition/target"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_YJG1Y1PbEeCLuajbZvk0sQ" points="[89, -24, -167, 24]$[160, -24, -96, 24]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZcjaQlPbEeCLuajbZvk0sQ" id="(0.5136612021857924,0.9803921568627451)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZckBUFPbEeCLuajbZvk0sQ" id="(0.5,0.0)"/>
