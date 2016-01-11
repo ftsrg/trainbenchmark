@@ -218,18 +218,6 @@
     <element xmi:type="ecore:EReference" href="railway.ecore#//RailwayContainer/invalids"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_J3EmY8j_EeSrKPS3EHb8JQ" points="[2, 0, -282, -50]$[212, 37, -72, -13]"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_J3GbkMj_EeSrKPS3EHb8JQ" type="3002" source="_J25AMMj_EeSrKPS3EHb8JQ" target="_YI1IkFPbEeCLuajbZvk0sQ">
-    <children xmi:type="notation:Node" xmi:id="_J3HCoMj_EeSrKPS3EHb8JQ" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_J3HCocj_EeSrKPS3EHb8JQ" x="-10" y="51"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_J3HCosj_EeSrKPS3EHb8JQ" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_J3HCo8j_EeSrKPS3EHb8JQ" x="3" y="17"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_J3Gbkcj_EeSrKPS3EHb8JQ" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_J3Gbksj_EeSrKPS3EHb8JQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="railway.ecore#//RailwayContainer/semaphores"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_J3Gbk8j_EeSrKPS3EHb8JQ" points="[1, 2, -78, -173]$[68, 152, -11, -23]"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_J3HpsMj_EeSrKPS3EHb8JQ" type="3002" source="_J25AMMj_EeSrKPS3EHb8JQ" target="_YIz6cFPbEeCLuajbZvk0sQ">
     <children xmi:type="notation:Node" xmi:id="_J3HptMj_EeSrKPS3EHb8JQ" type="4011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_J3Hptcj_EeSrKPS3EHb8JQ" x="-16" y="-25"/>
