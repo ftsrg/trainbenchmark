@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseDefinedByMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseGathersMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseDefinedByQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseGathersQuerySpecification;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.RouteSensorQuerySpecification;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.impl.BaseGeneratedPatternGroup;
@@ -17,7 +17,7 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
  * 
  * <p> From package hu.bme.mit.trainbenchmark.benchmark.emfincquery, the group contains the definition of the following patterns: <ul>
  * <li>RouteSensor</li>
- * <li>inverseDefinedBy</li>
+ * <li>inverseGathers</li>
  * </ul>
  * 
  * @see IPatternGroup
@@ -43,7 +43,7 @@ public final class RouteSensor extends BaseGeneratedPatternGroup {
   
   private RouteSensor() throws IncQueryException {
     querySpecifications.add(RouteSensorQuerySpecification.instance());
-    querySpecifications.add(InverseDefinedByQuerySpecification.instance());
+    querySpecifications.add(InverseGathersQuerySpecification.instance());
   }
   
   public RouteSensorQuerySpecification getRouteSensor() throws IncQueryException {
@@ -54,11 +54,11 @@ public final class RouteSensor extends BaseGeneratedPatternGroup {
     return RouteSensorMatcher.on(engine);
   }
   
-  public InverseDefinedByQuerySpecification getInverseDefinedBy() throws IncQueryException {
-    return InverseDefinedByQuerySpecification.instance();
+  public InverseGathersQuerySpecification getInverseGathers() throws IncQueryException {
+    return InverseGathersQuerySpecification.instance();
   }
   
-  public InverseDefinedByMatcher getInverseDefinedBy(final IncQueryEngine engine) throws IncQueryException {
-    return InverseDefinedByMatcher.on(engine);
+  public InverseGathersMatcher getInverseGathers(final IncQueryEngine engine) throws IncQueryException {
+    return InverseGathersMatcher.on(engine);
   }
 }

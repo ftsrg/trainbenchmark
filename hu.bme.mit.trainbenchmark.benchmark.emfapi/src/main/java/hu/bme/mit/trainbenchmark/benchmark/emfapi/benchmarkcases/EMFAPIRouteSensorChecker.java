@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -44,22 +45,23 @@ public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch>
 				final Route route = (Route) eObject;
 				// (route)-[:follows]->(swP:SwitchPosition)
 				for (final SwitchPosition swP : route.getFollows()) {
-					// (swP:switchPosition)-[:switch]->(sw:Switch)
-					final Switch sw = swP.getSwitch();
+					// (swP:switchPosition)-[:target]->(sw:Switch)
+					final Switch sw = swP.getTarget();
 					if (sw == null) {
 						continue;
 					}
 					
-					// (switch:Switch)-[:sensor]->(sensor:Sensor)
-					final Sensor sensor = sw.getSensor();
-					if (sensor == null) {
-						continue;
-					}
+					// (switch:Switch)-[:monitoredBy]->(sensor:Sensor)
+					final List<Sensor> sensors = sw.getMonitoredBy();
 
-					// (route)-[:definedBy]->(sensor) NAC
-					if (!route.getDefinedBy().contains(sensor)) {
-						final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor, swP, sw);
-						matches.add(match);
+					// TODO check n-m edge
+					for (Sensor sensor2 : sensors) {
+						// (route)-[:gathers]->(sensor) NAC
+						if (!route.getGathers().contains(sensor)) {
+							final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor, swP, sw);
+							matches.add(match);
+						}
+						
 					}
 				}
 			}

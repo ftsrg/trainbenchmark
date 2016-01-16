@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeDefinedBy;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeGathers;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import java.util.Collection;
@@ -28,7 +28,7 @@ public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformationInj
 	@Override
 	public void rhs(final Collection<Node> routes) {
 		for (final Node route : routes) {
-			final Iterable<Relationship> definedBys = route.getRelationships(relationshipTypeDefinedBy);
+			final Iterable<Relationship> definedBys = route.getRelationships(relationshipTypeGathers);
 			for (final Relationship definedBy : definedBys) {
 				definedBy.delete();
 				break;

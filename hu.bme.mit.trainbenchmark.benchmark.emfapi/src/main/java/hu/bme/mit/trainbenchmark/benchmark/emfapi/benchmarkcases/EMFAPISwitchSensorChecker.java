@@ -43,8 +43,8 @@ public class EMFAPISwitchSensorChecker extends EMFAPIChecker<EMFSwitchSensorMatc
 
 			final Switch sw = (Switch) eObject;
 
-			// (sw)-[:sensor]->() NAC
-			if (sw.getSensor() == null) {
+			// (sw)-[:monitoredBy]->() NAC
+			if (sw.getMonitoredBy() == null) {
 				matches.add(new EMFSwitchSensorMatch(sw));
 			}
 		}

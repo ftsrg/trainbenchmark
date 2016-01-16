@@ -25,7 +25,7 @@ public class EMFTransformationRepairRouteSensor extends EMFTransformationRepair<
 	@Override
 	public void rhs(final Collection<EMFRouteSensorMatch> matches) {
 		for (final EMFRouteSensorMatch rsm : matches) {
-			rsm.getRoute().getDefinedBy().add(rsm.getSensor());
+			rsm.getRoute().getGathers().add(rsm.getSensor());
 		}
 	}
 

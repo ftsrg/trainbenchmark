@@ -69,7 +69,7 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 							continue;
 						}
 						final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING,
-								Neo4jConstants.relationshipTypeSensor);
+								Neo4jConstants.relationshipTypeMonitoredBy);
 						for (final Relationship relationshipSensor : relationshipSensors) {
 							final Node sensor = relationshipSensor.getEndNode();
 
@@ -82,7 +82,7 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 								continue;
 							}
 							final Iterable<Relationship> definedBys = sensor.getRelationships(Direction.INCOMING,
-									Neo4jConstants.relationshipTypeDefinedBy);
+									Neo4jConstants.relationshipTypeGathers);
 
 							final List<Node> routes2 = new ArrayList<>();
 							for (final Relationship definedBy : definedBys) {

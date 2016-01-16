@@ -14,11 +14,11 @@
 <edge id="e2" source="n4" target="n5" label="connectsTo"><data key="label">connectsTo</data></edge>
 <edge id="e3" source="n5" target="n6" label="connectsTo"><data key="label">connectsTo</data></edge>
 <edge id="e4" source="n6" target="n7" label="connectsTo"><data key="label">connectsTo</data></edge>
-<edge id="e5" source="n2" target="n1" label="sensor"><data key="label">sensor</data></edge>
-<edge id="e6" source="n3" target="n1" label="sensor"><data key="label">sensor</data></edge>
-<edge id="e7" source="n4" target="n1" label="sensor"><data key="label">sensor</data></edge>
-<edge id="e8" source="n5" target="n1" label="sensor"><data key="label">sensor</data></edge>
-<edge id="e9" source="n6" target="n1" label="sensor"><data key="label">sensor</data></edge>
-<edge id="e10" source="n7" target="n1" label="sensor"><data key="label">sensor</data></edge>
+<edge id="e5" source="n2" target="n1" label="monitoredBy"><data key="label">monitoredBy</data></edge>
+<edge id="e6" source="n3" target="n1" label="monitoredBy"><data key="label">monitoredBy</data></edge>
+<edge id="e7" source="n4" target="n1" label="monitoredBy"><data key="label">monitoredBy</data></edge>
+<edge id="e8" source="n5" target="n1" label="monitoredBy"><data key="label">monitoredBy</data></edge>
+<edge id="e9" source="n6" target="n1" label="monitoredBy"><data key="label">monitoredBy</data></edge>
+<edge id="e10" source="n7" target="n1" label="monitoredBy"><data key="label">monitoredBy</data></edge>
 </graph>
 </graphml>

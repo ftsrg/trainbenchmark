@@ -44,8 +44,8 @@ public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSe
 			}
 			final Sensor sensor = (Sensor) eObject;
 
-			// (sensor)-[:element]->(segment1:Segment)
-			for (final TrackElement element1 : sensor.getElements()) {
+			// (sensor)-[:monitors]->(segment1:Segment)
+			for (final TrackElement element1 : sensor.getMonitors()) {
 				if (!RailwayPackage.eINSTANCE.getSegment().isInstance(element1)) {
 					continue;
 				}
@@ -86,8 +86,8 @@ public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSe
 									}
 									final Segment segment6 = (Segment) element6;
 
-									// (segment6:Segment)-[:sensor]->(sensor)
-									if (segment6.getSensor() != sensor) {
+									// (segment6:Segment)-[:monitoredBy]->(sensor)
+									if (segment6.getMonitoredBy() != sensor) {
 										continue;
 									}
 

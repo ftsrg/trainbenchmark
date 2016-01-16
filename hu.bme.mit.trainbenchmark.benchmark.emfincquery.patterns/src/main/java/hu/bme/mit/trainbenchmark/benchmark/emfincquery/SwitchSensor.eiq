@@ -10,5 +10,5 @@ pattern SwitchSensor(sw)
 
 pattern hasSensor(sw)
 {
-	TrackElement.sensor(sw, _);
+	TrackElement.monitoredBy(sw, _);
 }
