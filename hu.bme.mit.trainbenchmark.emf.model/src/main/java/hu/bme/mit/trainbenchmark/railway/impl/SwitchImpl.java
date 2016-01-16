@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
@@ -17,6 +6,7 @@ import hu.bme.mit.trainbenchmark.railway.Position;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 import java.util.Collection;
 
@@ -42,6 +32,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getCurrentPosition <em>Current Position</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getPositions <em>Positions</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getFrom <em>From</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,6 +70,36 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	 * @ordered
 	 */
 	protected EList<SwitchPosition> positions;
+
+	/**
+	 * The cached value of the '{@link #getLeft() <em>Left</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLeft()
+	 * @generated
+	 * @ordered
+	 */
+	protected TrackElement left;
+
+	/**
+	 * The cached value of the '{@link #getRight() <em>Right</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRight()
+	 * @generated
+	 * @ordered
+	 */
+	protected TrackElement right;
+
+	/**
+	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFrom()
+	 * @generated
+	 * @ordered
+	 */
+	protected TrackElement from;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,9 +148,123 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 	 */
 	public EList<SwitchPosition> getPositions() {
 		if (positions == null) {
-			positions = new EObjectWithInverseResolvingEList<SwitchPosition>(SwitchPosition.class, this, RailwayPackage.SWITCH__POSITIONS, RailwayPackage.SWITCH_POSITION__SWITCH);
+			positions = new EObjectWithInverseResolvingEList<SwitchPosition>(SwitchPosition.class, this, RailwayPackage.SWITCH__POSITIONS, RailwayPackage.SWITCH_POSITION__TARGET);
 		}
 		return positions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TrackElement getLeft() {
+		if (left != null && left.eIsProxy()) {
+			InternalEObject oldLeft = (InternalEObject)left;
+			left = (TrackElement)eResolveProxy(oldLeft);
+			if (left != oldLeft) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RailwayPackage.SWITCH__LEFT, oldLeft, left));
+			}
+		}
+		return left;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TrackElement basicGetLeft() {
+		return left;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLeft(TrackElement newLeft) {
+		TrackElement oldLeft = left;
+		left = newLeft;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH__LEFT, oldLeft, left));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TrackElement getRight() {
+		if (right != null && right.eIsProxy()) {
+			InternalEObject oldRight = (InternalEObject)right;
+			right = (TrackElement)eResolveProxy(oldRight);
+			if (right != oldRight) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RailwayPackage.SWITCH__RIGHT, oldRight, right));
+			}
+		}
+		return right;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TrackElement basicGetRight() {
+		return right;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRight(TrackElement newRight) {
+		TrackElement oldRight = right;
+		right = newRight;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH__RIGHT, oldRight, right));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TrackElement getFrom() {
+		if (from != null && from.eIsProxy()) {
+			InternalEObject oldFrom = (InternalEObject)from;
+			from = (TrackElement)eResolveProxy(oldFrom);
+			if (from != oldFrom) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RailwayPackage.SWITCH__FROM, oldFrom, from));
+			}
+		}
+		return from;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TrackElement basicGetFrom() {
+		return from;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFrom(TrackElement newFrom) {
+		TrackElement oldFrom = from;
+		from = newFrom;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH__FROM, oldFrom, from));
 	}
 
 	/**
@@ -171,6 +308,15 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 				return getCurrentPosition();
 			case RailwayPackage.SWITCH__POSITIONS:
 				return getPositions();
+			case RailwayPackage.SWITCH__LEFT:
+				if (resolve) return getLeft();
+				return basicGetLeft();
+			case RailwayPackage.SWITCH__RIGHT:
+				if (resolve) return getRight();
+				return basicGetRight();
+			case RailwayPackage.SWITCH__FROM:
+				if (resolve) return getFrom();
+				return basicGetFrom();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,6 +337,15 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 				getPositions().clear();
 				getPositions().addAll((Collection<? extends SwitchPosition>)newValue);
 				return;
+			case RailwayPackage.SWITCH__LEFT:
+				setLeft((TrackElement)newValue);
+				return;
+			case RailwayPackage.SWITCH__RIGHT:
+				setRight((TrackElement)newValue);
+				return;
+			case RailwayPackage.SWITCH__FROM:
+				setFrom((TrackElement)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -209,6 +364,15 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 			case RailwayPackage.SWITCH__POSITIONS:
 				getPositions().clear();
 				return;
+			case RailwayPackage.SWITCH__LEFT:
+				setLeft((TrackElement)null);
+				return;
+			case RailwayPackage.SWITCH__RIGHT:
+				setRight((TrackElement)null);
+				return;
+			case RailwayPackage.SWITCH__FROM:
+				setFrom((TrackElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -225,6 +389,12 @@ public class SwitchImpl extends TrackElementImpl implements Switch {
 				return currentPosition != CURRENT_POSITION_EDEFAULT;
 			case RailwayPackage.SWITCH__POSITIONS:
 				return positions != null && !positions.isEmpty();
+			case RailwayPackage.SWITCH__LEFT:
+				return left != null;
+			case RailwayPackage.SWITCH__RIGHT:
+				return right != null;
+			case RailwayPackage.SWITCH__FROM:
+				return from != null;
 		}
 		return super.eIsSet(featureID);
 	}

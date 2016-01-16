@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway;
@@ -57,17 +46,7 @@ public enum Position implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	RIGHT(2, "RIGHT", "RIGHT"),
-
-	/**
-	 * The '<em><b>STRAIGHT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #STRAIGHT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	STRAIGHT(3, "STRAIGHT", "STRAIGHT");
+	RIGHT(2, "RIGHT", "RIGHT");
 
 	/**
 	 * The '<em><b>FAILURE</b></em>' literal value.
@@ -115,21 +94,6 @@ public enum Position implements Enumerator {
 	public static final int RIGHT_VALUE = 2;
 
 	/**
-	 * The '<em><b>STRAIGHT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>STRAIGHT</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #STRAIGHT
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int STRAIGHT_VALUE = 3;
-
-	/**
 	 * An array of all the '<em><b>Position</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -140,7 +104,6 @@ public enum Position implements Enumerator {
 			FAILURE,
 			LEFT,
 			RIGHT,
-			STRAIGHT,
 		};
 
 	/**
@@ -194,7 +157,6 @@ public enum Position implements Enumerator {
 			case FAILURE_VALUE: return FAILURE;
 			case LEFT_VALUE: return LEFT;
 			case RIGHT_VALUE: return RIGHT;
-			case STRAIGHT_VALUE: return STRAIGHT;
 		}
 		return null;
 	}

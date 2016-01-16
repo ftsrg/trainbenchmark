@@ -131,7 +131,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_YI6oJFPbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="railway.ecore#//Signal"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YI6oJVPbEeCLuajbZvk0sQ" x="-48" y="108" width="147"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YI6oJVPbEeCLuajbZvk0sQ" y="108" width="147"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_YI9EYFPbEeCLuajbZvk0sQ" type="1005">
     <children xmi:type="notation:Node" xmi:id="_YI9EY1PbEeCLuajbZvk0sQ" type="4010"/>
@@ -154,7 +154,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_YI9EYVPbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="railway.ecore#//Position"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YI9EYlPbEeCLuajbZvk0sQ" x="-48" y="216" width="147"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YI9EYlPbEeCLuajbZvk0sQ" y="204" width="147"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_QVlyAMUaEeSxg88MuIzR8w" type="1001">
     <children xmi:type="notation:Node" xmi:id="_QVpcYMUaEeSxg88MuIzR8w" type="4001"/>

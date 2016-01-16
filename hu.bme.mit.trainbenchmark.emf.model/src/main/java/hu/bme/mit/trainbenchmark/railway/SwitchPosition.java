@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway;
@@ -22,7 +11,7 @@ package hu.bme.mit.trainbenchmark.railway;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getSwitch <em>Switch</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getTarget <em>Target</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getPosition <em>Position</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getRoute <em>Route</em>}</li>
  * </ul>
@@ -34,32 +23,32 @@ package hu.bme.mit.trainbenchmark.railway;
  */
 public interface SwitchPosition extends RailwayElement {
 	/**
-	 * Returns the value of the '<em><b>Switch</b></em>' reference.
+	 * Returns the value of the '<em><b>Target</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link hu.bme.mit.trainbenchmark.railway.Switch#getPositions <em>Positions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Switch</em>' reference isn't clear,
+	 * If the meaning of the '<em>Target</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Switch</em>' reference.
-	 * @see #setSwitch(Switch)
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitchPosition_Switch()
+	 * @return the value of the '<em>Target</em>' reference.
+	 * @see #setTarget(Switch)
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitchPosition_Target()
 	 * @see hu.bme.mit.trainbenchmark.railway.Switch#getPositions
 	 * @model opposite="positions" required="true"
 	 * @generated
 	 */
-	Switch getSwitch();
+	Switch getTarget();
 
 	/**
-	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getSwitch <em>Switch</em>}' reference.
+	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Switch</em>' reference.
-	 * @see #getSwitch()
+	 * @param value the new value of the '<em>Target</em>' reference.
+	 * @see #getTarget()
 	 * @generated
 	 */
-	void setSwitch(Switch value);
+	void setTarget(Switch value);
 
 	/**
 	 * Returns the value of the '<em><b>Position</b></em>' attribute.

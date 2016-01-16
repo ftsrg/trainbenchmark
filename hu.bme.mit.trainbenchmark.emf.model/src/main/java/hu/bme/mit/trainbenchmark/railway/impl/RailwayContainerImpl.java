@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
@@ -16,8 +5,8 @@ package hu.bme.mit.trainbenchmark.railway.impl;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
 
 import java.util.Collection;
 
@@ -41,8 +30,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getInvalids <em>Invalids</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getSemaphores <em>Semaphores</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getRoutes <em>Routes</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getRegions <em>Regions</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,16 +49,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	protected EList<RailwayElement> invalids;
 
 	/**
-	 * The cached value of the '{@link #getSemaphores() <em>Semaphores</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSemaphores()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Semaphore> semaphores;
-
-	/**
 	 * The cached value of the '{@link #getRoutes() <em>Routes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +57,16 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected EList<Route> routes;
+
+	/**
+	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Region> regions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,18 +104,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Semaphore> getSemaphores() {
-		if (semaphores == null) {
-			semaphores = new EObjectContainmentEList<Semaphore>(Semaphore.class, this, RailwayPackage.RAILWAY_CONTAINER__SEMAPHORES);
-		}
-		return semaphores;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Route> getRoutes() {
 		if (routes == null) {
 			routes = new EObjectContainmentEList<Route>(Route.class, this, RailwayPackage.RAILWAY_CONTAINER__ROUTES);
@@ -139,15 +116,27 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Region> getRegions() {
+		if (regions == null) {
+			regions = new EObjectContainmentEList<Region>(Region.class, this, RailwayPackage.RAILWAY_CONTAINER__REGIONS);
+		}
+		return regions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
 				return ((InternalEList<?>)getInvalids()).basicRemove(otherEnd, msgs);
-			case RailwayPackage.RAILWAY_CONTAINER__SEMAPHORES:
-				return ((InternalEList<?>)getSemaphores()).basicRemove(otherEnd, msgs);
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				return ((InternalEList<?>)getRoutes()).basicRemove(otherEnd, msgs);
+			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
+				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -162,10 +151,10 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 		switch (featureID) {
 			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
 				return getInvalids();
-			case RailwayPackage.RAILWAY_CONTAINER__SEMAPHORES:
-				return getSemaphores();
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				return getRoutes();
+			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
+				return getRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -183,13 +172,13 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 				getInvalids().clear();
 				getInvalids().addAll((Collection<? extends RailwayElement>)newValue);
 				return;
-			case RailwayPackage.RAILWAY_CONTAINER__SEMAPHORES:
-				getSemaphores().clear();
-				getSemaphores().addAll((Collection<? extends Semaphore>)newValue);
-				return;
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				getRoutes().clear();
 				getRoutes().addAll((Collection<? extends Route>)newValue);
+				return;
+			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
+				getRegions().clear();
+				getRegions().addAll((Collection<? extends Region>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -206,11 +195,11 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
 				getInvalids().clear();
 				return;
-			case RailwayPackage.RAILWAY_CONTAINER__SEMAPHORES:
-				getSemaphores().clear();
-				return;
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				getRoutes().clear();
+				return;
+			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
+				getRegions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -226,10 +215,10 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 		switch (featureID) {
 			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
 				return invalids != null && !invalids.isEmpty();
-			case RailwayPackage.RAILWAY_CONTAINER__SEMAPHORES:
-				return semaphores != null && !semaphores.isEmpty();
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				return routes != null && !routes.isEmpty();
+			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
+				return regions != null && !regions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

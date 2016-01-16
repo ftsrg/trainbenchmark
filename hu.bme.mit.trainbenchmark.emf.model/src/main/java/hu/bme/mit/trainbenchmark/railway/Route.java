@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway;
@@ -26,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getEntry <em>Entry</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getFollows <em>Follows</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getExit <em>Exit</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getDefinedBy <em>Defined By</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getGathers <em>Gathers</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,19 +95,19 @@ public interface Route extends RailwayElement {
 	void setExit(Semaphore value);
 
 	/**
-	 * Returns the value of the '<em><b>Defined By</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Gathers</b></em>' reference list.
 	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.Sensor}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Defined By</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Gathers</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Defined By</em>' containment reference list.
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getRoute_DefinedBy()
-	 * @model containment="true" lower="2"
+	 * @return the value of the '<em>Gathers</em>' reference list.
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getRoute_Gathers()
+	 * @model lower="2"
 	 * @generated
 	 */
-	EList<Sensor> getDefinedBy();
+	EList<Sensor> getGathers();
 
 } // Route
