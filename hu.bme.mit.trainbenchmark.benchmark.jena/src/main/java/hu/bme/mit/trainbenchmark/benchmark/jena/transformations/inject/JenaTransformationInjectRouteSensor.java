@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class JenaTransformationInjectRouteSensor extends JenaTransformationInjec
 
 	@Override
 	public void rhs(final Collection<Resource> routes) throws IOException {
-		driver.deleteOneOutgoingEdge(routes, ROUTE, DEFINED_BY);
+		driver.deleteOneOutgoingEdge(routes, ROUTE, GATHERS);
 	}
 
 }

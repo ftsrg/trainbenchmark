@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
@@ -50,7 +50,7 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 
 public class Neo4jDriver extends Driver<Node, Neo4jBenchmarkConfig> {
 
-	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(DEFINED_BY);
+	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(GATHERS);
 	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
 	protected final RelationshipType sensorEdge = DynamicRelationshipType.withName(SENSOR_EDGE);
 

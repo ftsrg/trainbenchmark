@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class JenaTransformationRepairRouteSensor extends JenaTransformationRepai
 	public void rhs(final Collection<JenaRouteSensorMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 
-		final Property definedBy = model.getProperty(BASE_PREFIX + DEFINED_BY);
+		final Property definedBy = model.getProperty(BASE_PREFIX + GATHERS);
 		for (final JenaRouteSensorMatch match : matches) {
 			final Resource route = match.getRoute();
 			final Resource sensor = match.getSensor();

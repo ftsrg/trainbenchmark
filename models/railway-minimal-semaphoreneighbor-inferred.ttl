@@ -18,9 +18,9 @@
 :_7 a :Segment ;
 	a :TrackElement .
 
-:_2 :definedBy :_4 .
+:_2 :gathers :_4 .
 
-:_3 :definedBy :_5 .
+:_3 :gathers :_5 .
 
 :_6 :sensor :_4 .
 

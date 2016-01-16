@@ -1,7 +1,7 @@
 package hu.bme.mit.trainbenchmark.generator.minimal;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
@@ -42,7 +42,7 @@ public class MinimalConnectedSegmentsGenerator extends MinimalModelGenerator {
 		serializer.createEdge(SENSOR_EDGE, segment6, sensor);
 
 		// this is required by the EMF serializer to fix the containment hierarchy
-		serializer.createEdge(DEFINED_BY, null, sensor);
+		serializer.createEdge(GATHERS, null, sensor);
 	}
 
 }

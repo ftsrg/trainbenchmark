@@ -14,8 +14,8 @@ WHERE
 	?sensor rdf:type base:Sensor .
 
 	OPTIONAL {
-		?route ?xDefinedBy ?sensor .
-		FILTER (sameTerm(base:definedBy, ?xDefinedBy))
+		?route ?xGathers ?sensor .
+		FILTER (sameTerm(base:gathers, ?xGathers))
 	} .
-	FILTER (!bound(?xDefinedBy))
+	FILTER (!bound(?xGathers))
 }

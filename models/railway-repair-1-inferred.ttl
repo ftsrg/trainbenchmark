@@ -47,7 +47,7 @@
 
 :_11 a :Sensor .
 
-:_3 :definedBy :_11 .
+:_3 :gathers :_11 .
 
 :_12 a :Segment ;
 	a :TrackElement ;
@@ -81,7 +81,7 @@
 
 :_17 a :Sensor .
 
-:_3 :definedBy :_17 .
+:_3 :gathers :_17 .
 
 :_18 a :Segment ;
 	a :TrackElement ;
@@ -115,7 +115,7 @@
 
 :_23 a :Sensor .
 
-:_3 :definedBy :_23 .
+:_3 :gathers :_23 .
 
 :_24 a :Segment ;
 	a :TrackElement ;
@@ -149,7 +149,7 @@
 
 :_29 a :Sensor .
 
-:_3 :definedBy :_29 .
+:_3 :gathers :_29 .
 
 :_30 a :Segment ;
 	a :TrackElement ;
@@ -183,7 +183,7 @@
 
 :_35 a :Sensor .
 
-:_3 :definedBy :_35 .
+:_3 :gathers :_35 .
 
 :_36 a :Segment ;
 	a :TrackElement ;
@@ -217,7 +217,7 @@
 
 :_41 a :Sensor .
 
-:_3 :definedBy :_41 .
+:_3 :gathers :_41 .
 
 :_42 a :Segment ;
 	a :TrackElement ;
@@ -264,7 +264,7 @@
 
 :_49 a :Sensor .
 
-:_3 :definedBy :_49 .
+:_3 :gathers :_49 .
 
 :_50 a :Segment ;
 	a :TrackElement ;
@@ -298,7 +298,7 @@
 
 :_55 a :Sensor .
 
-:_3 :definedBy :_55 .
+:_3 :gathers :_55 .
 
 :_56 a :Segment ;
 	a :TrackElement ;
@@ -332,7 +332,7 @@
 
 :_61 a :Sensor .
 
-:_3 :definedBy :_61 .
+:_3 :gathers :_61 .
 
 :_62 a :Segment ;
 	a :TrackElement ;
@@ -366,7 +366,7 @@
 
 :_67 a :Sensor .
 
-:_3 :definedBy :_67 .
+:_3 :gathers :_67 .
 
 :_68 a :Segment ;
 	a :TrackElement ;
@@ -400,7 +400,7 @@
 
 :_73 a :Sensor .
 
-:_3 :definedBy :_73 .
+:_3 :gathers :_73 .
 
 :_74 a :Segment ;
 	a :TrackElement ;
@@ -434,7 +434,7 @@
 
 :_79 a :Sensor .
 
-:_3 :definedBy :_79 .
+:_3 :gathers :_79 .
 
 :_80 a :Segment ;
 	a :TrackElement ;
@@ -468,7 +468,7 @@
 
 :_85 a :Sensor .
 
-:_3 :definedBy :_85 .
+:_3 :gathers :_85 .
 
 :_86 a :Segment ;
 	a :TrackElement ;
@@ -502,7 +502,7 @@
 
 :_91 a :Sensor .
 
-:_3 :definedBy :_91 .
+:_3 :gathers :_91 .
 
 :_92 a :Segment ;
 	a :TrackElement ;
@@ -536,10 +536,10 @@
 
 :_48 :sensor :_91 .
 
-:_48 :currentPosition :POSITION_LEFT.
+:_48 :currentPosition :POSITION_RIGHT.
 
 :_97 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_RIGHT ;
 	:switch :_48 .
 
 :_3 :follows :_97 .
@@ -549,7 +549,7 @@
 
 :_99 a :Sensor .
 
-:_3 :definedBy :_99 .
+:_3 :gathers :_99 .
 
 :_100 a :Segment ;
 	a :TrackElement ;
@@ -583,7 +583,7 @@
 
 :_105 a :Sensor .
 
-:_3 :definedBy :_105 .
+:_3 :gathers :_105 .
 
 :_106 a :Segment ;
 	a :TrackElement ;
@@ -630,7 +630,7 @@
 
 :_113 a :Sensor .
 
-:_3 :definedBy :_113 .
+:_3 :gathers :_113 .
 
 :_114 a :Segment ;
 	a :TrackElement ;
@@ -664,7 +664,7 @@
 
 :_119 a :Sensor .
 
-:_3 :definedBy :_119 .
+:_3 :gathers :_119 .
 
 :_120 a :Segment ;
 	a :TrackElement ;
@@ -698,7 +698,7 @@
 
 :_125 a :Sensor .
 
-:_3 :definedBy :_125 .
+:_3 :gathers :_125 .
 
 :_126 a :Segment ;
 	a :TrackElement ;
@@ -732,7 +732,7 @@
 
 :_131 a :Sensor .
 
-:_3 :definedBy :_131 .
+:_3 :gathers :_131 .
 
 :_132 a :Segment ;
 	a :TrackElement ;
@@ -766,10 +766,10 @@
 
 :_112 :sensor :_131 .
 
-:_112 :currentPosition :POSITION_RIGHT.
+:_112 :currentPosition :POSITION_FAILURE.
 
 :_137 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_112 .
 
 :_3 :follows :_137 .
@@ -779,7 +779,7 @@
 
 :_139 a :Sensor .
 
-:_3 :definedBy :_139 .
+:_3 :gathers :_139 .
 
 :_140 a :Segment ;
 	a :TrackElement ;
@@ -813,7 +813,7 @@
 
 :_145 a :Sensor .
 
-:_3 :definedBy :_145 .
+:_3 :gathers :_145 .
 
 :_146 a :Segment ;
 	a :TrackElement ;
@@ -847,7 +847,7 @@
 
 :_151 a :Sensor .
 
-:_3 :definedBy :_151 .
+:_3 :gathers :_151 .
 
 :_152 a :Segment ;
 	a :TrackElement ;
@@ -913,7 +913,7 @@
 
 :_163 a :Sensor .
 
-:_3 :definedBy :_163 .
+:_3 :gathers :_163 .
 
 :_164 a :Segment ;
 	a :TrackElement ;
@@ -947,7 +947,7 @@
 
 :_169 a :Sensor .
 
-:_3 :definedBy :_169 .
+:_3 :gathers :_169 .
 
 :_170 a :Segment ;
 	a :TrackElement ;
@@ -981,10 +981,10 @@
 
 :_138 :sensor :_169 .
 
-:_138 :currentPosition :POSITION_RIGHT.
+:_138 :currentPosition :POSITION_FAILURE.
 
 :_175 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_138 .
 
 :_3 :follows :_175 .
@@ -1026,7 +1026,7 @@
 
 :_183 a :Sensor .
 
-:_3 :definedBy :_183 .
+:_3 :gathers :_183 .
 
 :_184 a :Segment ;
 	a :TrackElement ;
@@ -1060,7 +1060,7 @@
 
 :_189 a :Sensor .
 
-:_3 :definedBy :_189 .
+:_3 :gathers :_189 .
 
 :_190 a :Segment ;
 	a :TrackElement ;
@@ -1094,7 +1094,7 @@
 
 :_195 a :Sensor .
 
-:_3 :definedBy :_195 .
+:_3 :gathers :_195 .
 
 :_196 a :Segment ;
 	a :TrackElement ;
@@ -1128,10 +1128,10 @@
 
 :_176 :sensor :_195 .
 
-:_176 :currentPosition :POSITION_STRAIGHT.
+:_176 :currentPosition :POSITION_LEFT.
 
 :_201 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_176 .
 
 :_3 :follows :_201 .
@@ -1173,7 +1173,7 @@
 
 :_209 a :Sensor .
 
-:_3 :definedBy :_209 .
+:_3 :gathers :_209 .
 
 :_210 a :Segment ;
 	a :TrackElement ;
@@ -1207,7 +1207,7 @@
 
 :_215 a :Sensor .
 
-:_3 :definedBy :_215 .
+:_3 :gathers :_215 .
 
 :_216 a :Segment ;
 	a :TrackElement ;
@@ -1241,7 +1241,7 @@
 
 :_221 a :Sensor .
 
-:_3 :definedBy :_221 .
+:_3 :gathers :_221 .
 
 :_222 a :Segment ;
 	a :TrackElement ;
@@ -1275,7 +1275,7 @@
 
 :_227 a :Sensor .
 
-:_3 :definedBy :_227 .
+:_3 :gathers :_227 .
 
 :_228 a :Segment ;
 	a :TrackElement ;
@@ -1309,7 +1309,7 @@
 
 :_233 a :Sensor .
 
-:_3 :definedBy :_233 .
+:_3 :gathers :_233 .
 
 :_234 a :Segment ;
 	a :TrackElement ;
@@ -1343,7 +1343,7 @@
 
 :_239 a :Sensor .
 
-:_3 :definedBy :_239 .
+:_3 :gathers :_239 .
 
 :_240 a :Segment ;
 	a :TrackElement ;
@@ -1377,7 +1377,7 @@
 
 :_245 a :Sensor .
 
-:_3 :definedBy :_245 .
+:_3 :gathers :_245 .
 
 :_246 a :Segment ;
 	a :TrackElement ;
@@ -1411,7 +1411,7 @@
 
 :_251 a :Sensor .
 
-:_3 :definedBy :_251 .
+:_3 :gathers :_251 .
 
 :_252 a :Segment ;
 	a :TrackElement ;
@@ -1445,10 +1445,10 @@
 
 :_202 :sensor :_251 .
 
-:_202 :currentPosition :POSITION_LEFT.
+:_202 :currentPosition :POSITION_FAILURE.
 
 :_257 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_202 .
 
 :_3 :follows :_257 .
@@ -1458,7 +1458,7 @@
 
 :_259 a :Sensor .
 
-:_3 :definedBy :_259 .
+:_3 :gathers :_259 .
 
 :_260 a :Segment ;
 	a :TrackElement ;
@@ -1492,7 +1492,7 @@
 
 :_265 a :Sensor .
 
-:_3 :definedBy :_265 .
+:_3 :gathers :_265 .
 
 :_266 a :Segment ;
 	a :TrackElement ;
@@ -1526,7 +1526,7 @@
 
 :_271 a :Sensor .
 
-:_3 :definedBy :_271 .
+:_3 :gathers :_271 .
 
 :_272 a :Segment ;
 	a :TrackElement ;
@@ -1560,7 +1560,7 @@
 
 :_277 a :Sensor .
 
-:_3 :definedBy :_277 .
+:_3 :gathers :_277 .
 
 :_278 a :Segment ;
 	a :TrackElement ;
@@ -1594,7 +1594,7 @@
 
 :_283 a :Sensor .
 
-:_3 :definedBy :_283 .
+:_3 :gathers :_283 .
 
 :_284 a :Segment ;
 	a :TrackElement ;
@@ -1628,10 +1628,10 @@
 
 :_258 :sensor :_283 .
 
-:_258 :currentPosition :POSITION_STRAIGHT.
+:_258 :currentPosition :POSITION_LEFT.
 
 :_289 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_258 .
 
 :_3 :follows :_289 .
@@ -1641,7 +1641,7 @@
 
 :_291 a :Sensor .
 
-:_3 :definedBy :_291 .
+:_3 :gathers :_291 .
 
 :_292 a :Segment ;
 	a :TrackElement ;
@@ -1707,7 +1707,7 @@
 
 :_303 a :Sensor .
 
-:_3 :definedBy :_303 .
+:_3 :gathers :_303 .
 
 :_304 a :Segment ;
 	a :TrackElement ;
@@ -1754,7 +1754,7 @@
 
 :_311 a :Sensor .
 
-:_3 :definedBy :_311 .
+:_3 :gathers :_311 .
 
 :_312 a :Segment ;
 	a :TrackElement ;
@@ -1788,10 +1788,10 @@
 
 :_310 :sensor :_311 .
 
-:_310 :currentPosition :POSITION_LEFT.
+:_310 :currentPosition :POSITION_FAILURE.
 
 :_317 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_310 .
 
 :_3 :follows :_317 .
@@ -1801,7 +1801,7 @@
 
 :_319 a :Sensor .
 
-:_3 :definedBy :_319 .
+:_3 :gathers :_319 .
 
 :_320 a :Segment ;
 	a :TrackElement ;
@@ -1835,7 +1835,7 @@
 
 :_325 a :Sensor .
 
-:_3 :definedBy :_325 .
+:_3 :gathers :_325 .
 
 :_326 a :Segment ;
 	a :TrackElement ;
@@ -1869,7 +1869,7 @@
 
 :_331 a :Sensor .
 
-:_3 :definedBy :_331 .
+:_3 :gathers :_331 .
 
 :_332 a :Segment ;
 	a :TrackElement ;
@@ -1903,7 +1903,7 @@
 
 :_337 a :Sensor .
 
-:_3 :definedBy :_337 .
+:_3 :gathers :_337 .
 
 :_338 a :Segment ;
 	a :TrackElement ;
@@ -1937,7 +1937,7 @@
 
 :_343 a :Sensor .
 
-:_3 :definedBy :_343 .
+:_3 :gathers :_343 .
 
 :_344 a :Segment ;
 	a :TrackElement ;
@@ -1971,7 +1971,7 @@
 
 :_349 a :Sensor .
 
-:_3 :definedBy :_349 .
+:_3 :gathers :_349 .
 
 :_350 a :Segment ;
 	a :TrackElement ;
@@ -2006,7 +2006,7 @@
 :_318 :currentPosition :POSITION_FAILURE.
 
 :_355 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_318 .
 
 :_3 :follows :_355 .
@@ -2048,7 +2048,7 @@
 
 :_363 a :Sensor .
 
-:_3 :definedBy :_363 .
+:_3 :gathers :_363 .
 
 :_364 a :Segment ;
 	a :TrackElement ;
@@ -2082,7 +2082,7 @@
 
 :_369 a :Sensor .
 
-:_3 :definedBy :_369 .
+:_3 :gathers :_369 .
 
 :_370 a :Segment ;
 	a :TrackElement ;
@@ -2116,10 +2116,10 @@
 
 :_356 :sensor :_369 .
 
-:_356 :currentPosition :POSITION_FAILURE.
+:_356 :currentPosition :POSITION_RIGHT.
 
 :_375 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_356 .
 
 :_3 :follows :_375 .
@@ -2161,10 +2161,10 @@
 
 :_376 :sensor :_377 .
 
-:_376 :currentPosition :POSITION_STRAIGHT.
+:_376 :currentPosition :POSITION_FAILURE.
 
 :_383 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_376 .
 
 :_3 :follows :_383 .
@@ -2174,7 +2174,7 @@
 
 :_385 a :Sensor .
 
-:_3 :definedBy :_385 .
+:_3 :gathers :_385 .
 
 :_386 a :Segment ;
 	a :TrackElement ;
@@ -2208,7 +2208,7 @@
 
 :_391 a :Sensor .
 
-:_3 :definedBy :_391 .
+:_3 :gathers :_391 .
 
 :_392 a :Segment ;
 	a :TrackElement ;
@@ -2242,7 +2242,7 @@
 
 :_397 a :Sensor .
 
-:_3 :definedBy :_397 .
+:_3 :gathers :_397 .
 
 :_398 a :Segment ;
 	a :TrackElement ;
@@ -2276,7 +2276,7 @@
 
 :_403 a :Sensor .
 
-:_3 :definedBy :_403 .
+:_3 :gathers :_403 .
 
 :_404 a :Segment ;
 	a :TrackElement ;
@@ -2348,10 +2348,10 @@
 
 :_384 :sensor :_409 .
 
-:_384 :currentPosition :POSITION_STRAIGHT.
+:_384 :currentPosition :POSITION_FAILURE.
 
 :_416 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_384 .
 
 :_3 :follows :_416 .
@@ -2361,7 +2361,7 @@
 
 :_418 a :Sensor .
 
-:_3 :definedBy :_418 .
+:_3 :gathers :_418 .
 
 :_419 a :Segment ;
 	a :TrackElement ;
@@ -2395,7 +2395,7 @@
 
 :_424 a :Sensor .
 
-:_3 :definedBy :_424 .
+:_3 :gathers :_424 .
 
 :_425 a :Segment ;
 	a :TrackElement ;
@@ -2429,7 +2429,7 @@
 
 :_430 a :Sensor .
 
-:_3 :definedBy :_430 .
+:_3 :gathers :_430 .
 
 :_431 a :Segment ;
 	a :TrackElement ;
@@ -2463,7 +2463,7 @@
 
 :_436 a :Sensor .
 
-:_3 :definedBy :_436 .
+:_3 :gathers :_436 .
 
 :_437 a :Segment ;
 	a :TrackElement ;
@@ -2529,7 +2529,7 @@
 
 :_448 a :Sensor .
 
-:_3 :definedBy :_448 .
+:_3 :gathers :_448 .
 
 :_449 a :Segment ;
 	a :TrackElement ;
@@ -2563,7 +2563,7 @@
 
 :_454 a :Sensor .
 
-:_3 :definedBy :_454 .
+:_3 :gathers :_454 .
 
 :_455 a :Segment ;
 	a :TrackElement ;
@@ -2597,7 +2597,7 @@
 
 :_460 a :Sensor .
 
-:_3 :definedBy :_460 .
+:_3 :gathers :_460 .
 
 :_461 a :Segment ;
 	a :TrackElement ;
@@ -2663,10 +2663,10 @@
 
 :_417 :sensor :_466 .
 
-:_417 :currentPosition :POSITION_FAILURE.
+:_417 :currentPosition :POSITION_RIGHT.
 
 :_472 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_417 .
 
 :_3 :follows :_472 .
@@ -3443,7 +3443,7 @@
 
 :_476 a :Sensor .
 
-:_474 :definedBy :_476 .
+:_474 :gathers :_476 .
 
 :_477 a :Segment ;
 	a :TrackElement ;
@@ -3477,7 +3477,7 @@
 
 :_482 a :Sensor .
 
-:_474 :definedBy :_482 .
+:_474 :gathers :_482 .
 
 :_483 a :Segment ;
 	a :TrackElement ;
@@ -3511,7 +3511,7 @@
 
 :_488 a :Sensor .
 
-:_474 :definedBy :_488 .
+:_474 :gathers :_488 .
 
 :_489 a :Segment ;
 	a :TrackElement ;
@@ -3545,7 +3545,7 @@
 
 :_494 a :Sensor .
 
-:_474 :definedBy :_494 .
+:_474 :gathers :_494 .
 
 :_495 a :Segment ;
 	a :TrackElement ;
@@ -3579,10 +3579,10 @@
 
 :_475 :sensor :_494 .
 
-:_475 :currentPosition :POSITION_RIGHT.
+:_475 :currentPosition :POSITION_LEFT.
 
 :_500 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_475 .
 
 :_474 :follows :_500 .
@@ -3592,7 +3592,7 @@
 
 :_502 a :Sensor .
 
-:_474 :definedBy :_502 .
+:_474 :gathers :_502 .
 
 :_503 a :Segment ;
 	a :TrackElement ;
@@ -3658,7 +3658,7 @@
 
 :_514 a :Sensor .
 
-:_474 :definedBy :_514 .
+:_474 :gathers :_514 .
 
 :_515 a :Segment ;
 	a :TrackElement ;
@@ -3692,7 +3692,7 @@
 
 :_520 a :Sensor .
 
-:_474 :definedBy :_520 .
+:_474 :gathers :_520 .
 
 :_521 a :Segment ;
 	a :TrackElement ;
@@ -3726,7 +3726,7 @@
 
 :_526 a :Sensor .
 
-:_474 :definedBy :_526 .
+:_474 :gathers :_526 .
 
 :_527 a :Segment ;
 	a :TrackElement ;
@@ -3760,10 +3760,10 @@
 
 :_501 :sensor :_526 .
 
-:_501 :currentPosition :POSITION_RIGHT.
+:_501 :currentPosition :POSITION_FAILURE.
 
 :_532 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_501 .
 
 :_474 :follows :_532 .
@@ -3874,7 +3874,7 @@
 
 :_536 a :Sensor .
 
-:_534 :definedBy :_536 .
+:_534 :gathers :_536 .
 
 :_537 a :Segment ;
 	a :TrackElement ;
@@ -3908,7 +3908,7 @@
 
 :_542 a :Sensor .
 
-:_534 :definedBy :_542 .
+:_534 :gathers :_542 .
 
 :_543 a :Segment ;
 	a :TrackElement ;
@@ -3942,7 +3942,7 @@
 
 :_548 a :Sensor .
 
-:_534 :definedBy :_548 .
+:_534 :gathers :_548 .
 
 :_549 a :Segment ;
 	a :TrackElement ;
@@ -3976,7 +3976,7 @@
 
 :_554 a :Sensor .
 
-:_534 :definedBy :_554 .
+:_534 :gathers :_554 .
 
 :_555 a :Segment ;
 	a :TrackElement ;
@@ -4010,7 +4010,7 @@
 
 :_560 a :Sensor .
 
-:_534 :definedBy :_560 .
+:_534 :gathers :_560 .
 
 :_561 a :Segment ;
 	a :TrackElement ;
@@ -4044,7 +4044,7 @@
 
 :_566 a :Sensor .
 
-:_534 :definedBy :_566 .
+:_534 :gathers :_566 .
 
 :_567 a :Segment ;
 	a :TrackElement ;
@@ -4078,7 +4078,7 @@
 
 :_572 a :Sensor .
 
-:_534 :definedBy :_572 .
+:_534 :gathers :_572 .
 
 :_573 a :Segment ;
 	a :TrackElement ;
@@ -4112,10 +4112,10 @@
 
 :_535 :sensor :_572 .
 
-:_535 :currentPosition :POSITION_LEFT.
+:_535 :currentPosition :POSITION_FAILURE.
 
 :_578 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_535 .
 
 :_534 :follows :_578 .
@@ -4125,7 +4125,7 @@
 
 :_580 a :Sensor .
 
-:_534 :definedBy :_580 .
+:_534 :gathers :_580 .
 
 :_581 a :Segment ;
 	a :TrackElement ;
@@ -4191,7 +4191,7 @@
 
 :_592 a :Sensor .
 
-:_534 :definedBy :_592 .
+:_534 :gathers :_592 .
 
 :_593 a :Segment ;
 	a :TrackElement ;
@@ -4225,7 +4225,7 @@
 
 :_598 a :Sensor .
 
-:_534 :definedBy :_598 .
+:_534 :gathers :_598 .
 
 :_599 a :Segment ;
 	a :TrackElement ;
@@ -4259,7 +4259,7 @@
 
 :_604 a :Sensor .
 
-:_534 :definedBy :_604 .
+:_534 :gathers :_604 .
 
 :_605 a :Segment ;
 	a :TrackElement ;
@@ -4325,7 +4325,7 @@
 
 :_616 a :Sensor .
 
-:_534 :definedBy :_616 .
+:_534 :gathers :_616 .
 
 :_617 a :Segment ;
 	a :TrackElement ;
@@ -4359,10 +4359,10 @@
 
 :_579 :sensor :_616 .
 
-:_579 :currentPosition :POSITION_STRAIGHT.
+:_579 :currentPosition :POSITION_FAILURE.
 
 :_622 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_579 .
 
 :_534 :follows :_622 .
@@ -4404,7 +4404,7 @@
 
 :_630 a :Sensor .
 
-:_534 :definedBy :_630 .
+:_534 :gathers :_630 .
 
 :_631 a :Segment ;
 	a :TrackElement ;
@@ -4438,7 +4438,7 @@
 
 :_636 a :Sensor .
 
-:_534 :definedBy :_636 .
+:_534 :gathers :_636 .
 
 :_637 a :Segment ;
 	a :TrackElement ;
@@ -4472,7 +4472,7 @@
 
 :_642 a :Sensor .
 
-:_534 :definedBy :_642 .
+:_534 :gathers :_642 .
 
 :_643 a :Segment ;
 	a :TrackElement ;
@@ -4506,7 +4506,7 @@
 
 :_648 a :Sensor .
 
-:_534 :definedBy :_648 .
+:_534 :gathers :_648 .
 
 :_649 a :Segment ;
 	a :TrackElement ;
@@ -4553,7 +4553,7 @@
 
 :_656 a :Sensor .
 
-:_534 :definedBy :_656 .
+:_534 :gathers :_656 .
 
 :_657 a :Segment ;
 	a :TrackElement ;
@@ -4593,7 +4593,7 @@
 
 :_663 a :Sensor .
 
-:_534 :definedBy :_663 .
+:_534 :gathers :_663 .
 
 :_664 a :Segment ;
 	a :TrackElement ;
@@ -4657,10 +4657,10 @@
 
 :_674 :sensor :_669 .
 
-:_655 :currentPosition :POSITION_FAILURE.
+:_655 :currentPosition :POSITION_RIGHT.
 
 :_675 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_655 .
 
 :_534 :follows :_675 .
@@ -4670,7 +4670,7 @@
 
 :_677 a :Sensor .
 
-:_534 :definedBy :_677 .
+:_534 :gathers :_677 .
 
 :_678 a :Segment ;
 	a :TrackElement ;
@@ -4717,7 +4717,7 @@
 
 :_685 a :Sensor .
 
-:_534 :definedBy :_685 .
+:_534 :gathers :_685 .
 
 :_686 a :Segment ;
 	a :TrackElement ;
@@ -4764,7 +4764,7 @@
 
 :_693 a :Sensor .
 
-:_534 :definedBy :_693 .
+:_534 :gathers :_693 .
 
 :_694 a :Segment ;
 	a :TrackElement ;
@@ -4798,7 +4798,7 @@
 
 :_699 a :Sensor .
 
-:_534 :definedBy :_699 .
+:_534 :gathers :_699 .
 
 :_700 a :Segment ;
 	a :TrackElement ;
@@ -4832,7 +4832,7 @@
 
 :_705 a :Sensor .
 
-:_534 :definedBy :_705 .
+:_534 :gathers :_705 .
 
 :_706 a :Segment ;
 	a :TrackElement ;
@@ -4866,7 +4866,7 @@
 
 :_711 a :Sensor .
 
-:_534 :definedBy :_711 .
+:_534 :gathers :_711 .
 
 :_712 a :Segment ;
 	a :TrackElement ;
@@ -4906,7 +4906,7 @@
 
 :_718 a :Sensor .
 
-:_534 :definedBy :_718 .
+:_534 :gathers :_718 .
 
 :_719 a :Segment ;
 	a :TrackElement ;
@@ -4940,7 +4940,7 @@
 
 :_724 a :Sensor .
 
-:_534 :definedBy :_724 .
+:_534 :gathers :_724 .
 
 :_725 a :Segment ;
 	a :TrackElement ;
@@ -4974,7 +4974,7 @@
 
 :_730 a :Sensor .
 
-:_534 :definedBy :_730 .
+:_534 :gathers :_730 .
 
 :_731 a :Segment ;
 	a :TrackElement ;
@@ -5008,7 +5008,7 @@
 
 :_736 a :Sensor .
 
-:_534 :definedBy :_736 .
+:_534 :gathers :_736 .
 
 :_737 a :Segment ;
 	a :TrackElement ;
@@ -5042,10 +5042,10 @@
 
 :_692 :sensor :_736 .
 
-:_692 :currentPosition :POSITION_LEFT.
+:_692 :currentPosition :POSITION_FAILURE.
 
 :_742 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_692 .
 
 :_534 :follows :_742 .
@@ -5055,7 +5055,7 @@
 
 :_744 a :Sensor .
 
-:_534 :definedBy :_744 .
+:_534 :gathers :_744 .
 
 :_745 a :Segment ;
 	a :TrackElement ;
@@ -5089,7 +5089,7 @@
 
 :_750 a :Sensor .
 
-:_534 :definedBy :_750 .
+:_534 :gathers :_750 .
 
 :_751 a :Segment ;
 	a :TrackElement ;
@@ -5123,7 +5123,7 @@
 
 :_756 a :Sensor .
 
-:_534 :definedBy :_756 .
+:_534 :gathers :_756 .
 
 :_757 a :Segment ;
 	a :TrackElement ;
@@ -5157,7 +5157,7 @@
 
 :_762 a :Sensor .
 
-:_534 :definedBy :_762 .
+:_534 :gathers :_762 .
 
 :_763 a :Segment ;
 	a :TrackElement ;
@@ -5191,7 +5191,7 @@
 
 :_768 a :Sensor .
 
-:_534 :definedBy :_768 .
+:_534 :gathers :_768 .
 
 :_769 a :Segment ;
 	a :TrackElement ;
@@ -5257,10 +5257,10 @@
 
 :_743 :sensor :_774 .
 
-:_743 :currentPosition :POSITION_FAILURE.
+:_743 :currentPosition :POSITION_RIGHT.
 
 :_780 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_743 .
 
 :_534 :follows :_780 .
@@ -5270,7 +5270,7 @@
 
 :_782 a :Sensor .
 
-:_534 :definedBy :_782 .
+:_534 :gathers :_782 .
 
 :_783 a :Segment ;
 	a :TrackElement ;
@@ -5304,7 +5304,7 @@
 
 :_788 a :Sensor .
 
-:_534 :definedBy :_788 .
+:_534 :gathers :_788 .
 
 :_789 a :Segment ;
 	a :TrackElement ;
@@ -5338,7 +5338,7 @@
 
 :_794 a :Sensor .
 
-:_534 :definedBy :_794 .
+:_534 :gathers :_794 .
 
 :_795 a :Segment ;
 	a :TrackElement ;
@@ -5372,7 +5372,7 @@
 
 :_800 a :Sensor .
 
-:_534 :definedBy :_800 .
+:_534 :gathers :_800 .
 
 :_801 a :Segment ;
 	a :TrackElement ;
@@ -5438,7 +5438,7 @@
 
 :_812 a :Sensor .
 
-:_534 :definedBy :_812 .
+:_534 :gathers :_812 .
 
 :_813 a :Segment ;
 	a :TrackElement ;
@@ -5472,7 +5472,7 @@
 
 :_818 a :Sensor .
 
-:_534 :definedBy :_818 .
+:_534 :gathers :_818 .
 
 :_819 a :Segment ;
 	a :TrackElement ;
@@ -5506,10 +5506,10 @@
 
 :_781 :sensor :_818 .
 
-:_781 :currentPosition :POSITION_STRAIGHT.
+:_781 :currentPosition :POSITION_LEFT.
 
 :_824 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_781 .
 
 :_534 :follows :_824 .
@@ -5519,7 +5519,7 @@
 
 :_826 a :Sensor .
 
-:_534 :definedBy :_826 .
+:_534 :gathers :_826 .
 
 :_827 a :Segment ;
 	a :TrackElement ;
@@ -5553,7 +5553,7 @@
 
 :_832 a :Sensor .
 
-:_534 :definedBy :_832 .
+:_534 :gathers :_832 .
 
 :_833 a :Segment ;
 	a :TrackElement ;
@@ -5587,10 +5587,10 @@
 
 :_825 :sensor :_832 .
 
-:_825 :currentPosition :POSITION_STRAIGHT.
+:_825 :currentPosition :POSITION_FAILURE.
 
 :_838 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_825 .
 
 :_534 :follows :_838 .
@@ -5600,7 +5600,7 @@
 
 :_840 a :Sensor .
 
-:_534 :definedBy :_840 .
+:_534 :gathers :_840 .
 
 :_841 a :Segment ;
 	a :TrackElement ;
@@ -5634,7 +5634,7 @@
 
 :_846 a :Sensor .
 
-:_534 :definedBy :_846 .
+:_534 :gathers :_846 .
 
 :_847 a :Segment ;
 	a :TrackElement ;
@@ -5668,7 +5668,7 @@
 
 :_852 a :Sensor .
 
-:_534 :definedBy :_852 .
+:_534 :gathers :_852 .
 
 :_853 a :Segment ;
 	a :TrackElement ;
@@ -5702,10 +5702,10 @@
 
 :_839 :sensor :_852 .
 
-:_839 :currentPosition :POSITION_STRAIGHT.
+:_839 :currentPosition :POSITION_FAILURE.
 
 :_858 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_839 .
 
 :_534 :follows :_858 .
@@ -5715,7 +5715,7 @@
 
 :_860 a :Sensor .
 
-:_534 :definedBy :_860 .
+:_534 :gathers :_860 .
 
 :_861 a :Segment ;
 	a :TrackElement ;
@@ -5749,7 +5749,7 @@
 
 :_866 a :Sensor .
 
-:_534 :definedBy :_866 .
+:_534 :gathers :_866 .
 
 :_867 a :Segment ;
 	a :TrackElement ;
@@ -5783,7 +5783,7 @@
 
 :_872 a :Sensor .
 
-:_534 :definedBy :_872 .
+:_534 :gathers :_872 .
 
 :_873 a :Segment ;
 	a :TrackElement ;
@@ -5817,7 +5817,7 @@
 
 :_878 a :Sensor .
 
-:_534 :definedBy :_878 .
+:_534 :gathers :_878 .
 
 :_879 a :Segment ;
 	a :TrackElement ;
@@ -5851,7 +5851,7 @@
 
 :_884 a :Sensor .
 
-:_534 :definedBy :_884 .
+:_534 :gathers :_884 .
 
 :_885 a :Segment ;
 	a :TrackElement ;
@@ -5917,10 +5917,10 @@
 
 :_859 :sensor :_890 .
 
-:_859 :currentPosition :POSITION_LEFT.
+:_859 :currentPosition :POSITION_FAILURE.
 
 :_896 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_859 .
 
 :_534 :follows :_896 .
@@ -6525,7 +6525,7 @@
 
 :_900 a :Sensor .
 
-:_898 :definedBy :_900 .
+:_898 :gathers :_900 .
 
 :_901 a :Segment ;
 	a :TrackElement ;
@@ -6559,7 +6559,7 @@
 
 :_906 a :Sensor .
 
-:_898 :definedBy :_906 .
+:_898 :gathers :_906 .
 
 :_907 a :Segment ;
 	a :TrackElement ;
@@ -6593,7 +6593,7 @@
 
 :_912 a :Sensor .
 
-:_898 :definedBy :_912 .
+:_898 :gathers :_912 .
 
 :_913 a :Segment ;
 	a :TrackElement ;
@@ -6627,10 +6627,10 @@
 
 :_899 :sensor :_912 .
 
-:_899 :currentPosition :POSITION_STRAIGHT.
+:_899 :currentPosition :POSITION_FAILURE.
 
 :_918 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_899 .
 
 :_898 :follows :_918 .
@@ -6640,7 +6640,7 @@
 
 :_920 a :Sensor .
 
-:_898 :definedBy :_920 .
+:_898 :gathers :_920 .
 
 :_921 a :Segment ;
 	a :TrackElement ;
@@ -6674,7 +6674,7 @@
 
 :_926 a :Sensor .
 
-:_898 :definedBy :_926 .
+:_898 :gathers :_926 .
 
 :_927 a :Segment ;
 	a :TrackElement ;
@@ -6708,7 +6708,7 @@
 
 :_932 a :Sensor .
 
-:_898 :definedBy :_932 .
+:_898 :gathers :_932 .
 
 :_933 a :Segment ;
 	a :TrackElement ;
@@ -6806,7 +6806,7 @@
 
 :_950 a :Sensor .
 
-:_898 :definedBy :_950 .
+:_898 :gathers :_950 .
 
 :_951 a :Segment ;
 	a :TrackElement ;
@@ -6838,10 +6838,10 @@
 
 :_955 :sensor :_950 .
 
-:_919 :currentPosition :POSITION_STRAIGHT.
+:_919 :currentPosition :POSITION_FAILURE.
 
 :_956 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_919 .
 
 :_898 :follows :_956 .
@@ -6851,7 +6851,7 @@
 
 :_958 a :Sensor .
 
-:_898 :definedBy :_958 .
+:_898 :gathers :_958 .
 
 :_959 a :Segment ;
 	a :TrackElement ;
@@ -6885,7 +6885,7 @@
 
 :_964 a :Sensor .
 
-:_898 :definedBy :_964 .
+:_898 :gathers :_964 .
 
 :_965 a :Segment ;
 	a :TrackElement ;
@@ -6919,7 +6919,7 @@
 
 :_970 a :Sensor .
 
-:_898 :definedBy :_970 .
+:_898 :gathers :_970 .
 
 :_971 a :Segment ;
 	a :TrackElement ;
@@ -6953,7 +6953,7 @@
 
 :_976 a :Sensor .
 
-:_898 :definedBy :_976 .
+:_898 :gathers :_976 .
 
 :_977 a :Segment ;
 	a :TrackElement ;
@@ -6987,7 +6987,7 @@
 
 :_982 a :Sensor .
 
-:_898 :definedBy :_982 .
+:_898 :gathers :_982 .
 
 :_983 a :Segment ;
 	a :TrackElement ;
@@ -7021,10 +7021,10 @@
 
 :_957 :sensor :_982 .
 
-:_957 :currentPosition :POSITION_LEFT.
+:_957 :currentPosition :POSITION_FAILURE.
 
 :_988 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_957 .
 
 :_898 :follows :_988 .
@@ -7034,7 +7034,7 @@
 
 :_990 a :Sensor .
 
-:_898 :definedBy :_990 .
+:_898 :gathers :_990 .
 
 :_991 a :Segment ;
 	a :TrackElement ;
@@ -7068,7 +7068,7 @@
 
 :_996 a :Sensor .
 
-:_898 :definedBy :_996 .
+:_898 :gathers :_996 .
 
 :_997 a :Segment ;
 	a :TrackElement ;
@@ -7102,7 +7102,7 @@
 
 :_1002 a :Sensor .
 
-:_898 :definedBy :_1002 .
+:_898 :gathers :_1002 .
 
 :_1003 a :Segment ;
 	a :TrackElement ;
@@ -7136,7 +7136,7 @@
 
 :_1008 a :Sensor .
 
-:_898 :definedBy :_1008 .
+:_898 :gathers :_1008 .
 
 :_1009 a :Segment ;
 	a :TrackElement ;
@@ -7170,7 +7170,7 @@
 
 :_1014 a :Sensor .
 
-:_898 :definedBy :_1014 .
+:_898 :gathers :_1014 .
 
 :_1015 a :Segment ;
 	a :TrackElement ;
@@ -7204,7 +7204,7 @@
 
 :_1020 a :Sensor .
 
-:_898 :definedBy :_1020 .
+:_898 :gathers :_1020 .
 
 :_1021 a :Segment ;
 	a :TrackElement ;
@@ -7238,7 +7238,7 @@
 
 :_1026 a :Sensor .
 
-:_898 :definedBy :_1026 .
+:_898 :gathers :_1026 .
 
 :_1027 a :Segment ;
 	a :TrackElement ;
@@ -7272,7 +7272,7 @@
 
 :_1032 a :Sensor .
 
-:_898 :definedBy :_1032 .
+:_898 :gathers :_1032 .
 
 :_1033 a :Segment ;
 	a :TrackElement ;
@@ -7306,10 +7306,10 @@
 
 :_989 :sensor :_1032 .
 
-:_989 :currentPosition :POSITION_LEFT.
+:_989 :currentPosition :POSITION_FAILURE.
 
 :_1038 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_989 .
 
 :_898 :follows :_1038 .
@@ -7319,7 +7319,7 @@
 
 :_1040 a :Sensor .
 
-:_898 :definedBy :_1040 .
+:_898 :gathers :_1040 .
 
 :_1041 a :Segment ;
 	a :TrackElement ;
@@ -7353,7 +7353,7 @@
 
 :_1046 a :Sensor .
 
-:_898 :definedBy :_1046 .
+:_898 :gathers :_1046 .
 
 :_1047 a :Segment ;
 	a :TrackElement ;
@@ -7387,7 +7387,7 @@
 
 :_1052 a :Sensor .
 
-:_898 :definedBy :_1052 .
+:_898 :gathers :_1052 .
 
 :_1053 a :Segment ;
 	a :TrackElement ;
@@ -7421,7 +7421,7 @@
 
 :_1058 a :Sensor .
 
-:_898 :definedBy :_1058 .
+:_898 :gathers :_1058 .
 
 :_1059 a :Segment ;
 	a :TrackElement ;
@@ -7487,7 +7487,7 @@
 
 :_1070 a :Sensor .
 
-:_898 :definedBy :_1070 .
+:_898 :gathers :_1070 .
 
 :_1071 a :Segment ;
 	a :TrackElement ;
@@ -7521,7 +7521,7 @@
 
 :_1076 a :Sensor .
 
-:_898 :definedBy :_1076 .
+:_898 :gathers :_1076 .
 
 :_1077 a :Segment ;
 	a :TrackElement ;
@@ -7555,7 +7555,7 @@
 
 :_1082 a :Sensor .
 
-:_898 :definedBy :_1082 .
+:_898 :gathers :_1082 .
 
 :_1083 a :Segment ;
 	a :TrackElement ;
@@ -7621,10 +7621,10 @@
 
 :_1039 :sensor :_1088 .
 
-:_1039 :currentPosition :POSITION_RIGHT.
+:_1039 :currentPosition :POSITION_FAILURE.
 
 :_1094 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_1039 .
 
 :_898 :follows :_1094 .
@@ -7958,7 +7958,7 @@
 
 :_1097 a :Sensor .
 
-:_1095 :definedBy :_1097 .
+:_1095 :gathers :_1097 .
 
 :_1098 a :Segment ;
 	a :TrackElement ;
@@ -7992,7 +7992,7 @@
 
 :_1103 a :Sensor .
 
-:_1095 :definedBy :_1103 .
+:_1095 :gathers :_1103 .
 
 :_1104 a :Segment ;
 	a :TrackElement ;
@@ -8026,7 +8026,7 @@
 
 :_1109 a :Sensor .
 
-:_1095 :definedBy :_1109 .
+:_1095 :gathers :_1109 .
 
 :_1110 a :Segment ;
 	a :TrackElement ;
@@ -8060,7 +8060,7 @@
 
 :_1115 a :Sensor .
 
-:_1095 :definedBy :_1115 .
+:_1095 :gathers :_1115 .
 
 :_1116 a :Segment ;
 	a :TrackElement ;
@@ -8094,7 +8094,7 @@
 
 :_1121 a :Sensor .
 
-:_1095 :definedBy :_1121 .
+:_1095 :gathers :_1121 .
 
 :_1122 a :Segment ;
 	a :TrackElement ;
@@ -8134,7 +8134,7 @@
 
 :_1128 a :Sensor .
 
-:_1095 :definedBy :_1128 .
+:_1095 :gathers :_1128 .
 
 :_1129 a :Segment ;
 	a :TrackElement ;
@@ -8200,7 +8200,7 @@
 
 :_1140 a :Sensor .
 
-:_1095 :definedBy :_1140 .
+:_1095 :gathers :_1140 .
 
 :_1141 a :Segment ;
 	a :TrackElement ;
@@ -8279,7 +8279,7 @@
 
 :_1154 a :Sensor .
 
-:_1095 :definedBy :_1154 .
+:_1095 :gathers :_1154 .
 
 :_1155 a :Segment ;
 	a :TrackElement ;
@@ -8313,7 +8313,7 @@
 
 :_1160 a :Sensor .
 
-:_1095 :definedBy :_1160 .
+:_1095 :gathers :_1160 .
 
 :_1161 a :Segment ;
 	a :TrackElement ;
@@ -8347,7 +8347,7 @@
 
 :_1166 a :Sensor .
 
-:_1095 :definedBy :_1166 .
+:_1095 :gathers :_1166 .
 
 :_1167 a :Segment ;
 	a :TrackElement ;
@@ -8381,7 +8381,7 @@
 
 :_1172 a :Sensor .
 
-:_1095 :definedBy :_1172 .
+:_1095 :gathers :_1172 .
 
 :_1173 a :Segment ;
 	a :TrackElement ;
@@ -8447,7 +8447,7 @@
 
 :_1184 a :Sensor .
 
-:_1095 :definedBy :_1184 .
+:_1095 :gathers :_1184 .
 
 :_1185 a :Segment ;
 	a :TrackElement ;
@@ -8545,7 +8545,7 @@
 
 :_1202 a :Sensor .
 
-:_1095 :definedBy :_1202 .
+:_1095 :gathers :_1202 .
 
 :_1203 a :Segment ;
 	a :TrackElement ;
@@ -8579,10 +8579,10 @@
 
 :_1153 :sensor :_1202 .
 
-:_1153 :currentPosition :POSITION_FAILURE.
+:_1153 :currentPosition :POSITION_RIGHT.
 
 :_1208 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_1153 .
 
 :_1095 :follows :_1208 .
@@ -8592,7 +8592,7 @@
 
 :_1210 a :Sensor .
 
-:_1095 :definedBy :_1210 .
+:_1095 :gathers :_1210 .
 
 :_1211 a :Segment ;
 	a :TrackElement ;
@@ -8626,7 +8626,7 @@
 
 :_1216 a :Sensor .
 
-:_1095 :definedBy :_1216 .
+:_1095 :gathers :_1216 .
 
 :_1217 a :Segment ;
 	a :TrackElement ;
@@ -8660,10 +8660,10 @@
 
 :_1209 :sensor :_1216 .
 
-:_1209 :currentPosition :POSITION_FAILURE.
+:_1209 :currentPosition :POSITION_RIGHT.
 
 :_1222 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_1209 .
 
 :_1095 :follows :_1222 .
@@ -8705,7 +8705,7 @@
 
 :_1230 a :Sensor .
 
-:_1095 :definedBy :_1230 .
+:_1095 :gathers :_1230 .
 
 :_1231 a :Segment ;
 	a :TrackElement ;
@@ -8739,7 +8739,7 @@
 
 :_1236 a :Sensor .
 
-:_1095 :definedBy :_1236 .
+:_1095 :gathers :_1236 .
 
 :_1237 a :Segment ;
 	a :TrackElement ;
@@ -8805,7 +8805,7 @@
 
 :_1248 a :Sensor .
 
-:_1095 :definedBy :_1248 .
+:_1095 :gathers :_1248 .
 
 :_1249 a :Segment ;
 	a :TrackElement ;
@@ -8839,7 +8839,7 @@
 
 :_1254 a :Sensor .
 
-:_1095 :definedBy :_1254 .
+:_1095 :gathers :_1254 .
 
 :_1255 a :Segment ;
 	a :TrackElement ;
@@ -8873,7 +8873,7 @@
 
 :_1260 a :Sensor .
 
-:_1095 :definedBy :_1260 .
+:_1095 :gathers :_1260 .
 
 :_1261 a :Segment ;
 	a :TrackElement ;
@@ -8907,7 +8907,7 @@
 
 :_1266 a :Sensor .
 
-:_1095 :definedBy :_1266 .
+:_1095 :gathers :_1266 .
 
 :_1267 a :Segment ;
 	a :TrackElement ;
@@ -8954,7 +8954,7 @@
 
 :_1274 a :Sensor .
 
-:_1095 :definedBy :_1274 .
+:_1095 :gathers :_1274 .
 
 :_1275 a :Segment ;
 	a :TrackElement ;
@@ -8988,7 +8988,7 @@
 
 :_1280 a :Sensor .
 
-:_1095 :definedBy :_1280 .
+:_1095 :gathers :_1280 .
 
 :_1281 a :Segment ;
 	a :TrackElement ;
@@ -9022,10 +9022,10 @@
 
 :_1273 :sensor :_1280 .
 
-:_1273 :currentPosition :POSITION_FAILURE.
+:_1273 :currentPosition :POSITION_RIGHT.
 
 :_1286 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_1273 .
 
 :_1095 :follows :_1286 .
@@ -9035,7 +9035,7 @@
 
 :_1288 a :Sensor .
 
-:_1095 :definedBy :_1288 .
+:_1095 :gathers :_1288 .
 
 :_1289 a :Segment ;
 	a :TrackElement ;
@@ -9069,7 +9069,7 @@
 
 :_1294 a :Sensor .
 
-:_1095 :definedBy :_1294 .
+:_1095 :gathers :_1294 .
 
 :_1295 a :Segment ;
 	a :TrackElement ;
@@ -9103,7 +9103,7 @@
 
 :_1300 a :Sensor .
 
-:_1095 :definedBy :_1300 .
+:_1095 :gathers :_1300 .
 
 :_1301 a :Segment ;
 	a :TrackElement ;
@@ -9150,7 +9150,7 @@
 
 :_1308 a :Sensor .
 
-:_1095 :definedBy :_1308 .
+:_1095 :gathers :_1308 .
 
 :_1309 a :Segment ;
 	a :TrackElement ;
@@ -9184,10 +9184,10 @@
 
 :_1307 :sensor :_1308 .
 
-:_1307 :currentPosition :POSITION_STRAIGHT.
+:_1307 :currentPosition :POSITION_LEFT.
 
 :_1314 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_LEFT ;
 	:switch :_1307 .
 
 :_1095 :follows :_1314 .
@@ -9197,7 +9197,7 @@
 
 :_1316 a :Sensor .
 
-:_1095 :definedBy :_1316 .
+:_1095 :gathers :_1316 .
 
 :_1317 a :Segment ;
 	a :TrackElement ;
@@ -9231,10 +9231,10 @@
 
 :_1315 :sensor :_1316 .
 
-:_1315 :currentPosition :POSITION_LEFT.
+:_1315 :currentPosition :POSITION_RIGHT.
 
 :_1322 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_RIGHT ;
 	:switch :_1315 .
 
 :_1095 :follows :_1322 .
@@ -9244,7 +9244,7 @@
 
 :_1324 a :Sensor .
 
-:_1095 :definedBy :_1324 .
+:_1095 :gathers :_1324 .
 
 :_1325 a :Segment ;
 	a :TrackElement ;
@@ -9278,10 +9278,10 @@
 
 :_1323 :sensor :_1324 .
 
-:_1323 :currentPosition :POSITION_STRAIGHT.
+:_1323 :currentPosition :POSITION_RIGHT.
 
 :_1330 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_1323 .
 
 :_1095 :follows :_1330 .
