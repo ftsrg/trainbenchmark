@@ -6,7 +6,7 @@ WHERE
 {
 	?route base:follows ?swP .
 	?swP base:target ?sw .
-	?sw base:sensor ?sensor .
+	?sw base:monitoredBy ?sensor .
 
 	?route rdf:type base:Route .
 	?swP rdf:type base:SwitchPosition .

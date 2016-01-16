@@ -370,9 +370,9 @@
 
 :_3 :gathers :_5 .
 
-:_6 :sensor :_4 .
+:_6 :monitoredBy :_4 .
 
-:_7 :sensor :_5 .
+:_7 :monitoredBy :_5 .
 
 :_6 :connectsTo :_7 .
 

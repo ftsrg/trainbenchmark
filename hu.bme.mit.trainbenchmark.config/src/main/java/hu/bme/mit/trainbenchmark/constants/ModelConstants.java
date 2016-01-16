@@ -40,8 +40,8 @@ public class ModelConstants {
 	public static final String ENTRY = "entry";
 	public static final String GATHERS = "gathers";
 	public static final String FOLLOWS = "follows";
-	public static final String CONNECTSTO = "connectsTo";
-	public static final String SENSOR_EDGE = "sensor";
+	public static final String CONNECTS_TO = "connectsTo";
+	public static final String MONITORED_BY = "monitoredBy";
 	public static final String TARGET = "target";
 
 	// inheritance

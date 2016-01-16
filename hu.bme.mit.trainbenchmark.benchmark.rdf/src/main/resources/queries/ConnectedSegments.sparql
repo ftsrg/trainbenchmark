@@ -4,13 +4,13 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?sensor ?segment1 ?segment2 ?segment3 ?segment4 ?segment5 ?segment6 
 WHERE
 {
-	?segment1 base:sensor ?sensor .
+	?segment1 base:monitoredBy ?sensor .
 	?segment1 base:connectsTo ?segment2 .
 	?segment2 base:connectsTo ?segment3 .
 	?segment3 base:connectsTo ?segment4 .
 	?segment4 base:connectsTo ?segment5 .
 	?segment5 base:connectsTo ?segment6 .
-	?segment6 base:sensor ?sensor .
+	?segment6 base:monitoredBy ?sensor .
 
 	?sensor rdf:type base:Sensor .
 	?segment1 rdf:type base:Segment .

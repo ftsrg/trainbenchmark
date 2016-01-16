@@ -4,7 +4,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
@@ -36,7 +36,7 @@ public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 		final Map<String, ? extends Object> emptyMap = Collections.emptyMap();
 		final Object swP = serializer.createVertex(SWITCHPOSITION, emptyMap, swPOutgoingEdges, swPIncomingEdges);
 
-		serializer.createEdge(SENSOR_EDGE, sw, sensor);
+		serializer.createEdge(MONITORED_BY, sw, sensor);
 		// this is required by the EMF serializer to fix the containment hierarchy
 		serializer.createEdge(GATHERS, null, sensor);
 	}

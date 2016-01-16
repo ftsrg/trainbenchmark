@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.generator.scalable;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
@@ -12,7 +12,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
@@ -155,7 +155,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 				// add "sensor" edge from switch to sensor
 				final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
 				final Object targetSensor = switchSensorError ? null : lastSensor;
-				serializer.createEdge(SENSOR_EDGE, sw, targetSensor);
+				serializer.createEdge(MONITORED_BY, sw, targetSensor);
 
 				final int numberOfPositions = Position.values().length;
 				final int positionOrdinal = random.nextInt(numberOfPositions);
@@ -182,20 +182,20 @@ public class ScalableModelGenerator extends ModelGenerator {
 			Object prevte = null;
 			for (final Object trackelement : currentTrack) {
 				if (prevte != null) {
-					serializer.createEdge(CONNECTSTO, prevte, trackelement);
+					serializer.createEdge(CONNECTS_TO, prevte, trackelement);
 				}
 				prevte = trackelement;
 			}
 
 			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {
-				serializer.createEdge(CONNECTSTO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
+				serializer.createEdge(CONNECTS_TO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
 			}
 
 			// Loop the last track element of the last route to the first track
 			// element of the first route.
 			if (i == maxRoutes - 1) {
 				if (currentTrack != null && currentTrack.size() > 0 && firstTracks.size() > 0) {
-					serializer.createEdge(CONNECTSTO, currentTrack.get(currentTrack.size() - 1), firstTracks.get(0));
+					serializer.createEdge(CONNECTS_TO, currentTrack.get(currentTrack.size() - 1), firstTracks.get(0));
 				}
 			}
 
@@ -218,7 +218,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 		segmentAttributes.put(LENGTH, segmentLength);
 		final Object seg = serializer.createVertex(SEGMENT, segmentAttributes);
 
-		serializer.createEdge(SENSOR_EDGE, seg, sen);
+		serializer.createEdge(MONITORED_BY, seg, sen);
 		currTracks.add(seg);
 	}
 

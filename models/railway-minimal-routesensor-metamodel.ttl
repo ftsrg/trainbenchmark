@@ -362,5 +362,5 @@
 
 :_1 :follows :_4 .
 
-:_3 :sensor :_2 .
+:_3 :monitoredBy :_2 .
 

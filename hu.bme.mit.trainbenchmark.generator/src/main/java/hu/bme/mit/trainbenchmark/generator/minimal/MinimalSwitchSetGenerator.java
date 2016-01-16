@@ -6,7 +6,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
@@ -53,7 +53,7 @@ public class MinimalSwitchSetGenerator extends MinimalModelGenerator {
 		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
 		final Object swP = serializer.createVertex(SWITCHPOSITION, swPProperties, swPOutgoingEdges, swPIncomingEdges);
 
-		serializer.createEdge(SENSOR_EDGE, sw, null);
+		serializer.createEdge(MONITORED_BY, sw, null);
 	}
 
 }
