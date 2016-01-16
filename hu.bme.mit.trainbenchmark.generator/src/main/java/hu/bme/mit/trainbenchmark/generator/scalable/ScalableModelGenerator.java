@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -170,7 +170,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 				switchPosititonAttributes.put(POSITION, invalidPosition);
 
 				final Map<String, Object> switchPositionOutgoingEdges = new HashMap<>();
-				switchPositionOutgoingEdges.put(SWITCH_EDGE, sw);
+				switchPositionOutgoingEdges.put(TARGET, sw);
 
 				final Map<String, Object> switchPositionIncomingEdges = new HashMap<>();
 				switchPositionIncomingEdges.put(FOLLOWS, route);

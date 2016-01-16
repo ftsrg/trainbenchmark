@@ -362,7 +362,7 @@
 
 :_4 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_3 .
+	:target :_3 .
 
 :_2 :follows :_4 .
 

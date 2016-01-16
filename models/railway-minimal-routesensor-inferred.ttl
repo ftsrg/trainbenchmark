@@ -9,7 +9,7 @@
 	a :TrackElement .
 
 :_4 a :SwitchPosition ;
-	:switch :_3 .
+	:target :_3 .
 
 :_1 :follows :_4 .
 

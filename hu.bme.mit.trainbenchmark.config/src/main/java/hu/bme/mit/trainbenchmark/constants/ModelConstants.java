@@ -42,7 +42,7 @@ public class ModelConstants {
 	public static final String FOLLOWS = "follows";
 	public static final String CONNECTSTO = "connectsTo";
 	public static final String SENSOR_EDGE = "sensor";
-	public static final String SWITCH_EDGE = "switch";
+	public static final String TARGET = "target";
 
 	// inheritance
 	public static final Map<String, String> SUPERTYPES = ImmutableMap.of(SEGMENT, TRACKELEMENT, SWITCH, TRACKELEMENT);

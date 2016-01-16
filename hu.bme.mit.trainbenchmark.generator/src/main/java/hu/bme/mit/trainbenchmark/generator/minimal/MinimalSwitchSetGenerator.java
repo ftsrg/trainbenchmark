@@ -10,7 +10,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 import static hu.bme.mit.trainbenchmark.constants.Position.LEFT;
 import static hu.bme.mit.trainbenchmark.constants.Position.RIGHT;
 import static hu.bme.mit.trainbenchmark.constants.Signal.GO;
@@ -49,7 +49,7 @@ public class MinimalSwitchSetGenerator extends MinimalModelGenerator {
 
 		// swP
 		final Map<String, ? extends Object> swPProperties = ImmutableMap.of(POSITION, LEFT);
-		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(SWITCH_EDGE, sw);
+		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
 		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
 		final Object swP = serializer.createVertex(SWITCHPOSITION, swPProperties, swPOutgoingEdges, swPIncomingEdges);
 

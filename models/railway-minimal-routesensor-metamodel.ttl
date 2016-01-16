@@ -38,9 +38,9 @@
 
 
 
-###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##gathers
+###  http://www.semanticweb.org/ontologies/2015/trainbenchmark##definedBy
 
-:gathers rdf:type owl:ObjectProperty ;
+:definedBy rdf:type owl:ObjectProperty ;
            
            rdfs:domain :Route ;
            
@@ -209,7 +209,7 @@
                          owl:cardinality "1"^^xsd:nonNegativeInteger
                        ] ,
                        [ rdf:type owl:Restriction ;
-                         owl:onProperty :gathers ;
+                         owl:onProperty :definedBy ;
                          owl:minCardinality "2"^^xsd:nonNegativeInteger
                        ] .
 
@@ -358,7 +358,7 @@
 :_3 a :Switch .
 
 :_4 a :SwitchPosition ;
-	:switch :_3 .
+	:target :_3 .
 
 :_1 :follows :_4 .
 
