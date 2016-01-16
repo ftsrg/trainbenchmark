@@ -370,27 +370,27 @@
 :_6 a :Segment ;
 	:length "358"^^xsd:int .
 
-:_6 :sensor :_5 .
+:_6 :monitoredBy :_5 .
 
 :_7 a :Segment ;
 	:length "461"^^xsd:int .
 
-:_7 :sensor :_5 .
+:_7 :monitoredBy :_5 .
 
 :_8 a :Segment ;
 	:length "879"^^xsd:int .
 
-:_8 :sensor :_5 .
+:_8 :monitoredBy :_5 .
 
 :_9 a :Segment ;
 	:length "829"^^xsd:int .
 
-:_9 :sensor :_5 .
+:_9 :monitoredBy :_5 .
 
 :_10 a :Segment ;
 	:length "732"^^xsd:int .
 
-:_10 :sensor :_5 .
+:_10 :monitoredBy :_5 .
 
 :_11 a :Sensor .
 
@@ -399,27 +399,27 @@
 :_12 a :Segment ;
 	:length "803"^^xsd:int .
 
-:_12 :sensor :_11 .
+:_12 :monitoredBy :_11 .
 
 :_13 a :Segment ;
 	:length "137"^^xsd:int .
 
-:_13 :sensor :_11 .
+:_13 :monitoredBy :_11 .
 
 :_14 a :Segment ;
 	:length "494"^^xsd:int .
 
-:_14 :sensor :_11 .
+:_14 :monitoredBy :_11 .
 
 :_15 a :Segment ;
 	:length "979"^^xsd:int .
 
-:_15 :sensor :_11 .
+:_15 :monitoredBy :_11 .
 
 :_16 a :Segment ;
 	:length "815"^^xsd:int .
 
-:_16 :sensor :_11 .
+:_16 :monitoredBy :_11 .
 
 :_17 a :Sensor .
 
@@ -428,27 +428,27 @@
 :_18 a :Segment ;
 	:length "831"^^xsd:int .
 
-:_18 :sensor :_17 .
+:_18 :monitoredBy :_17 .
 
 :_19 a :Segment ;
 	:length "127"^^xsd:int .
 
-:_19 :sensor :_17 .
+:_19 :monitoredBy :_17 .
 
 :_20 a :Segment ;
 	:length "974"^^xsd:int .
 
-:_20 :sensor :_17 .
+:_20 :monitoredBy :_17 .
 
 :_21 a :Segment ;
 	:length "324"^^xsd:int .
 
-:_21 :sensor :_17 .
+:_21 :monitoredBy :_17 .
 
 :_22 a :Segment ;
 	:length "996"^^xsd:int .
 
-:_22 :sensor :_17 .
+:_22 :monitoredBy :_17 .
 
 :_23 a :Sensor .
 
@@ -457,27 +457,27 @@
 :_24 a :Segment ;
 	:length "582"^^xsd:int .
 
-:_24 :sensor :_23 .
+:_24 :monitoredBy :_23 .
 
 :_25 a :Segment ;
 	:length "683"^^xsd:int .
 
-:_25 :sensor :_23 .
+:_25 :monitoredBy :_23 .
 
 :_26 a :Segment ;
 	:length "212"^^xsd:int .
 
-:_26 :sensor :_23 .
+:_26 :monitoredBy :_23 .
 
 :_27 a :Segment ;
 	:length "994"^^xsd:int .
 
-:_27 :sensor :_23 .
+:_27 :monitoredBy :_23 .
 
 :_28 a :Segment ;
 	:length "472"^^xsd:int .
 
-:_28 :sensor :_23 .
+:_28 :monitoredBy :_23 .
 
 :_29 a :Sensor .
 
@@ -486,27 +486,27 @@
 :_30 a :Segment ;
 	:length "745"^^xsd:int .
 
-:_30 :sensor :_29 .
+:_30 :monitoredBy :_29 .
 
 :_31 a :Segment ;
 	:length "711"^^xsd:int .
 
-:_31 :sensor :_29 .
+:_31 :monitoredBy :_29 .
 
 :_32 a :Segment ;
 	:length "733"^^xsd:int .
 
-:_32 :sensor :_29 .
+:_32 :monitoredBy :_29 .
 
 :_33 a :Segment ;
 	:length "449"^^xsd:int .
 
-:_33 :sensor :_29 .
+:_33 :monitoredBy :_29 .
 
 :_34 a :Segment ;
 	:length "549"^^xsd:int .
 
-:_34 :sensor :_29 .
+:_34 :monitoredBy :_29 .
 
 :_35 a :Sensor .
 
@@ -515,27 +515,27 @@
 :_36 a :Segment ;
 	:length "234"^^xsd:int .
 
-:_36 :sensor :_35 .
+:_36 :monitoredBy :_35 .
 
 :_37 a :Segment ;
 	:length "132"^^xsd:int .
 
-:_37 :sensor :_35 .
+:_37 :monitoredBy :_35 .
 
 :_38 a :Segment ;
 	:length "421"^^xsd:int .
 
-:_38 :sensor :_35 .
+:_38 :monitoredBy :_35 .
 
 :_39 a :Segment ;
 	:length "429"^^xsd:int .
 
-:_39 :sensor :_35 .
+:_39 :monitoredBy :_35 .
 
 :_40 a :Segment ;
 	:length "892"^^xsd:int .
 
-:_40 :sensor :_35 .
+:_40 :monitoredBy :_35 .
 
 :_41 a :Sensor .
 
@@ -544,29 +544,29 @@
 :_42 a :Segment ;
 	:length "209"^^xsd:int .
 
-:_42 :sensor :_41 .
+:_42 :monitoredBy :_41 .
 
 :_43 a :Segment ;
 	:length "721"^^xsd:int .
 
-:_43 :sensor :_41 .
+:_43 :monitoredBy :_41 .
 
 :_44 a :Segment ;
 	:length "436"^^xsd:int .
 
-:_44 :sensor :_41 .
+:_44 :monitoredBy :_41 .
 
 :_45 a :Segment ;
 	:length "818"^^xsd:int .
 
-:_45 :sensor :_41 .
+:_45 :monitoredBy :_41 .
 
 :_46 a :Segment ;
 	:length "153"^^xsd:int .
 
-:_46 :sensor :_41 .
+:_46 :monitoredBy :_41 .
 
-:_4 :sensor :_41 .
+:_4 :monitoredBy :_41 .
 
 :_4 :currentPosition :POSITION_RIGHT.
 
@@ -585,27 +585,27 @@
 :_50 a :Segment ;
 	:length "193"^^xsd:int .
 
-:_50 :sensor :_49 .
+:_50 :monitoredBy :_49 .
 
 :_51 a :Segment ;
 	:length "141"^^xsd:int .
 
-:_51 :sensor :_49 .
+:_51 :monitoredBy :_49 .
 
 :_52 a :Segment ;
 	:length "288"^^xsd:int .
 
-:_52 :sensor :_49 .
+:_52 :monitoredBy :_49 .
 
 :_53 a :Segment ;
 	:length "852"^^xsd:int .
 
-:_53 :sensor :_49 .
+:_53 :monitoredBy :_49 .
 
 :_54 a :Segment ;
 	:length "933"^^xsd:int .
 
-:_54 :sensor :_49 .
+:_54 :monitoredBy :_49 .
 
 :_55 a :Sensor .
 
@@ -614,27 +614,27 @@
 :_56 a :Segment ;
 	:length "590"^^xsd:int .
 
-:_56 :sensor :_55 .
+:_56 :monitoredBy :_55 .
 
 :_57 a :Segment ;
 	:length "896"^^xsd:int .
 
-:_57 :sensor :_55 .
+:_57 :monitoredBy :_55 .
 
 :_58 a :Segment ;
 	:length "325"^^xsd:int .
 
-:_58 :sensor :_55 .
+:_58 :monitoredBy :_55 .
 
 :_59 a :Segment ;
 	:length "800"^^xsd:int .
 
-:_59 :sensor :_55 .
+:_59 :monitoredBy :_55 .
 
 :_60 a :Segment ;
 	:length "813"^^xsd:int .
 
-:_60 :sensor :_55 .
+:_60 :monitoredBy :_55 .
 
 :_61 a :Sensor .
 
@@ -643,27 +643,27 @@
 :_62 a :Segment ;
 	:length "386"^^xsd:int .
 
-:_62 :sensor :_61 .
+:_62 :monitoredBy :_61 .
 
 :_63 a :Segment ;
 	:length "220"^^xsd:int .
 
-:_63 :sensor :_61 .
+:_63 :monitoredBy :_61 .
 
 :_64 a :Segment ;
 	:length "929"^^xsd:int .
 
-:_64 :sensor :_61 .
+:_64 :monitoredBy :_61 .
 
 :_65 a :Segment ;
 	:length "152"^^xsd:int .
 
-:_65 :sensor :_61 .
+:_65 :monitoredBy :_61 .
 
 :_66 a :Segment ;
 	:length "886"^^xsd:int .
 
-:_66 :sensor :_61 .
+:_66 :monitoredBy :_61 .
 
 :_67 a :Sensor .
 
@@ -672,27 +672,27 @@
 :_68 a :Segment ;
 	:length "245"^^xsd:int .
 
-:_68 :sensor :_67 .
+:_68 :monitoredBy :_67 .
 
 :_69 a :Segment ;
 	:length "239"^^xsd:int .
 
-:_69 :sensor :_67 .
+:_69 :monitoredBy :_67 .
 
 :_70 a :Segment ;
 	:length "544"^^xsd:int .
 
-:_70 :sensor :_67 .
+:_70 :monitoredBy :_67 .
 
 :_71 a :Segment ;
 	:length "398"^^xsd:int .
 
-:_71 :sensor :_67 .
+:_71 :monitoredBy :_67 .
 
 :_72 a :Segment ;
 	:length "191"^^xsd:int .
 
-:_72 :sensor :_67 .
+:_72 :monitoredBy :_67 .
 
 :_73 a :Sensor .
 
@@ -701,27 +701,27 @@
 :_74 a :Segment ;
 	:length "301"^^xsd:int .
 
-:_74 :sensor :_73 .
+:_74 :monitoredBy :_73 .
 
 :_75 a :Segment ;
 	:length "437"^^xsd:int .
 
-:_75 :sensor :_73 .
+:_75 :monitoredBy :_73 .
 
 :_76 a :Segment ;
 	:length "511"^^xsd:int .
 
-:_76 :sensor :_73 .
+:_76 :monitoredBy :_73 .
 
 :_77 a :Segment ;
 	:length "625"^^xsd:int .
 
-:_77 :sensor :_73 .
+:_77 :monitoredBy :_73 .
 
 :_78 a :Segment ;
 	:length "111"^^xsd:int .
 
-:_78 :sensor :_73 .
+:_78 :monitoredBy :_73 .
 
 :_79 a :Sensor .
 
@@ -730,27 +730,27 @@
 :_80 a :Segment ;
 	:length "711"^^xsd:int .
 
-:_80 :sensor :_79 .
+:_80 :monitoredBy :_79 .
 
 :_81 a :Segment ;
 	:length "740"^^xsd:int .
 
-:_81 :sensor :_79 .
+:_81 :monitoredBy :_79 .
 
 :_82 a :Segment ;
 	:length "242"^^xsd:int .
 
-:_82 :sensor :_79 .
+:_82 :monitoredBy :_79 .
 
 :_83 a :Segment ;
 	:length "840"^^xsd:int .
 
-:_83 :sensor :_79 .
+:_83 :monitoredBy :_79 .
 
 :_84 a :Segment ;
 	:length "284"^^xsd:int .
 
-:_84 :sensor :_79 .
+:_84 :monitoredBy :_79 .
 
 :_85 a :Sensor .
 
@@ -759,27 +759,27 @@
 :_86 a :Segment ;
 	:length "977"^^xsd:int .
 
-:_86 :sensor :_85 .
+:_86 :monitoredBy :_85 .
 
 :_87 a :Segment ;
 	:length "824"^^xsd:int .
 
-:_87 :sensor :_85 .
+:_87 :monitoredBy :_85 .
 
 :_88 a :Segment ;
 	:length "395"^^xsd:int .
 
-:_88 :sensor :_85 .
+:_88 :monitoredBy :_85 .
 
 :_89 a :Segment ;
 	:length "608"^^xsd:int .
 
-:_89 :sensor :_85 .
+:_89 :monitoredBy :_85 .
 
 :_90 a :Segment ;
 	:length "829"^^xsd:int .
 
-:_90 :sensor :_85 .
+:_90 :monitoredBy :_85 .
 
 :_91 a :Sensor .
 
@@ -788,29 +788,29 @@
 :_92 a :Segment ;
 	:length "620"^^xsd:int .
 
-:_92 :sensor :_91 .
+:_92 :monitoredBy :_91 .
 
 :_93 a :Segment ;
 	:length "181"^^xsd:int .
 
-:_93 :sensor :_91 .
+:_93 :monitoredBy :_91 .
 
 :_94 a :Segment ;
 	:length "54"^^xsd:int .
 
-:_94 :sensor :_91 .
+:_94 :monitoredBy :_91 .
 
 :_95 a :Segment ;
 	:length "745"^^xsd:int .
 
-:_95 :sensor :_91 .
+:_95 :monitoredBy :_91 .
 
 :_96 a :Segment ;
 	:length "322"^^xsd:int .
 
-:_96 :sensor :_91 .
+:_96 :monitoredBy :_91 .
 
-:_48 :sensor :_91 .
+:_48 :monitoredBy :_91 .
 
 :_48 :currentPosition :POSITION_RIGHT.
 
@@ -829,27 +829,27 @@
 :_100 a :Segment ;
 	:length "257"^^xsd:int .
 
-:_100 :sensor :_99 .
+:_100 :monitoredBy :_99 .
 
 :_101 a :Segment ;
 	:length "488"^^xsd:int .
 
-:_101 :sensor :_99 .
+:_101 :monitoredBy :_99 .
 
 :_102 a :Segment ;
 	:length "366"^^xsd:int .
 
-:_102 :sensor :_99 .
+:_102 :monitoredBy :_99 .
 
 :_103 a :Segment ;
 	:length "638"^^xsd:int .
 
-:_103 :sensor :_99 .
+:_103 :monitoredBy :_99 .
 
 :_104 a :Segment ;
 	:length "102"^^xsd:int .
 
-:_104 :sensor :_99 .
+:_104 :monitoredBy :_99 .
 
 :_105 a :Sensor .
 
@@ -858,29 +858,29 @@
 :_106 a :Segment ;
 	:length "785"^^xsd:int .
 
-:_106 :sensor :_105 .
+:_106 :monitoredBy :_105 .
 
 :_107 a :Segment ;
 	:length "566"^^xsd:int .
 
-:_107 :sensor :_105 .
+:_107 :monitoredBy :_105 .
 
 :_108 a :Segment ;
 	:length "386"^^xsd:int .
 
-:_108 :sensor :_105 .
+:_108 :monitoredBy :_105 .
 
 :_109 a :Segment ;
 	:length "462"^^xsd:int .
 
-:_109 :sensor :_105 .
+:_109 :monitoredBy :_105 .
 
 :_110 a :Segment ;
 	:length "657"^^xsd:int .
 
-:_110 :sensor :_105 .
+:_110 :monitoredBy :_105 .
 
-:_98 :sensor :_105 .
+:_98 :monitoredBy :_105 .
 
 :_98 :currentPosition :POSITION_FAILURE.
 
@@ -899,27 +899,27 @@
 :_114 a :Segment ;
 	:length "986"^^xsd:int .
 
-:_114 :sensor :_113 .
+:_114 :monitoredBy :_113 .
 
 :_115 a :Segment ;
 	:length "798"^^xsd:int .
 
-:_115 :sensor :_113 .
+:_115 :monitoredBy :_113 .
 
 :_116 a :Segment ;
 	:length "480"^^xsd:int .
 
-:_116 :sensor :_113 .
+:_116 :monitoredBy :_113 .
 
 :_117 a :Segment ;
 	:length "214"^^xsd:int .
 
-:_117 :sensor :_113 .
+:_117 :monitoredBy :_113 .
 
 :_118 a :Segment ;
 	:length "617"^^xsd:int .
 
-:_118 :sensor :_113 .
+:_118 :monitoredBy :_113 .
 
 :_119 a :Sensor .
 
@@ -928,27 +928,27 @@
 :_120 a :Segment ;
 	:length "981"^^xsd:int .
 
-:_120 :sensor :_119 .
+:_120 :monitoredBy :_119 .
 
 :_121 a :Segment ;
 	:length "186"^^xsd:int .
 
-:_121 :sensor :_119 .
+:_121 :monitoredBy :_119 .
 
 :_122 a :Segment ;
 	:length "324"^^xsd:int .
 
-:_122 :sensor :_119 .
+:_122 :monitoredBy :_119 .
 
 :_123 a :Segment ;
 	:length "881"^^xsd:int .
 
-:_123 :sensor :_119 .
+:_123 :monitoredBy :_119 .
 
 :_124 a :Segment ;
 	:length "740"^^xsd:int .
 
-:_124 :sensor :_119 .
+:_124 :monitoredBy :_119 .
 
 :_125 a :Sensor .
 
@@ -957,27 +957,27 @@
 :_126 a :Segment ;
 	:length "685"^^xsd:int .
 
-:_126 :sensor :_125 .
+:_126 :monitoredBy :_125 .
 
 :_127 a :Segment ;
 	:length "630"^^xsd:int .
 
-:_127 :sensor :_125 .
+:_127 :monitoredBy :_125 .
 
 :_128 a :Segment ;
 	:length "809"^^xsd:int .
 
-:_128 :sensor :_125 .
+:_128 :monitoredBy :_125 .
 
 :_129 a :Segment ;
 	:length "77"^^xsd:int .
 
-:_129 :sensor :_125 .
+:_129 :monitoredBy :_125 .
 
 :_130 a :Segment ;
 	:length "719"^^xsd:int .
 
-:_130 :sensor :_125 .
+:_130 :monitoredBy :_125 .
 
 :_131 a :Sensor .
 
@@ -986,29 +986,29 @@
 :_132 a :Segment ;
 	:length "894"^^xsd:int .
 
-:_132 :sensor :_131 .
+:_132 :monitoredBy :_131 .
 
 :_133 a :Segment ;
 	:length "951"^^xsd:int .
 
-:_133 :sensor :_131 .
+:_133 :monitoredBy :_131 .
 
 :_134 a :Segment ;
 	:length "718"^^xsd:int .
 
-:_134 :sensor :_131 .
+:_134 :monitoredBy :_131 .
 
 :_135 a :Segment ;
 	:length "942"^^xsd:int .
 
-:_135 :sensor :_131 .
+:_135 :monitoredBy :_131 .
 
 :_136 a :Segment ;
 	:length "547"^^xsd:int .
 
-:_136 :sensor :_131 .
+:_136 :monitoredBy :_131 .
 
-:_112 :sensor :_131 .
+:_112 :monitoredBy :_131 .
 
 :_112 :currentPosition :POSITION_FAILURE.
 
@@ -1027,27 +1027,27 @@
 :_140 a :Segment ;
 	:length "191"^^xsd:int .
 
-:_140 :sensor :_139 .
+:_140 :monitoredBy :_139 .
 
 :_141 a :Segment ;
 	:length "610"^^xsd:int .
 
-:_141 :sensor :_139 .
+:_141 :monitoredBy :_139 .
 
 :_142 a :Segment ;
 	:length "374"^^xsd:int .
 
-:_142 :sensor :_139 .
+:_142 :monitoredBy :_139 .
 
 :_143 a :Segment ;
 	:length "792"^^xsd:int .
 
-:_143 :sensor :_139 .
+:_143 :monitoredBy :_139 .
 
 :_144 a :Segment ;
 	:length "100"^^xsd:int .
 
-:_144 :sensor :_139 .
+:_144 :monitoredBy :_139 .
 
 :_145 a :Sensor .
 
@@ -1056,27 +1056,27 @@
 :_146 a :Segment ;
 	:length "889"^^xsd:int .
 
-:_146 :sensor :_145 .
+:_146 :monitoredBy :_145 .
 
 :_147 a :Segment ;
 	:length "465"^^xsd:int .
 
-:_147 :sensor :_145 .
+:_147 :monitoredBy :_145 .
 
 :_148 a :Segment ;
 	:length "470"^^xsd:int .
 
-:_148 :sensor :_145 .
+:_148 :monitoredBy :_145 .
 
 :_149 a :Segment ;
 	:length "343"^^xsd:int .
 
-:_149 :sensor :_145 .
+:_149 :monitoredBy :_145 .
 
 :_150 a :Segment ;
 	:length "771"^^xsd:int .
 
-:_150 :sensor :_145 .
+:_150 :monitoredBy :_145 .
 
 :_151 a :Sensor .
 
@@ -1085,27 +1085,27 @@
 :_152 a :Segment ;
 	:length "964"^^xsd:int .
 
-:_152 :sensor :_151 .
+:_152 :monitoredBy :_151 .
 
 :_153 a :Segment ;
 	:length "518"^^xsd:int .
 
-:_153 :sensor :_151 .
+:_153 :monitoredBy :_151 .
 
 :_154 a :Segment ;
 	:length "90"^^xsd:int .
 
-:_154 :sensor :_151 .
+:_154 :monitoredBy :_151 .
 
 :_155 a :Segment ;
 	:length "52"^^xsd:int .
 
-:_155 :sensor :_151 .
+:_155 :monitoredBy :_151 .
 
 :_156 a :Segment ;
 	:length "685"^^xsd:int .
 
-:_156 :sensor :_151 .
+:_156 :monitoredBy :_151 .
 
 :_157 a :Sensor .
 
@@ -1114,27 +1114,27 @@
 :_158 a :Segment ;
 	:length "111"^^xsd:int .
 
-:_158 :sensor :_157 .
+:_158 :monitoredBy :_157 .
 
 :_159 a :Segment ;
 	:length "852"^^xsd:int .
 
-:_159 :sensor :_157 .
+:_159 :monitoredBy :_157 .
 
 :_160 a :Segment ;
 	:length "36"^^xsd:int .
 
-:_160 :sensor :_157 .
+:_160 :monitoredBy :_157 .
 
 :_161 a :Segment ;
 	:length "458"^^xsd:int .
 
-:_161 :sensor :_157 .
+:_161 :monitoredBy :_157 .
 
 :_162 a :Segment ;
 	:length "918"^^xsd:int .
 
-:_162 :sensor :_157 .
+:_162 :monitoredBy :_157 .
 
 :_163 a :Sensor .
 
@@ -1143,27 +1143,27 @@
 :_164 a :Segment ;
 	:length "820"^^xsd:int .
 
-:_164 :sensor :_163 .
+:_164 :monitoredBy :_163 .
 
 :_165 a :Segment ;
 	:length "428"^^xsd:int .
 
-:_165 :sensor :_163 .
+:_165 :monitoredBy :_163 .
 
 :_166 a :Segment ;
 	:length "714"^^xsd:int .
 
-:_166 :sensor :_163 .
+:_166 :monitoredBy :_163 .
 
 :_167 a :Segment ;
 	:length "735"^^xsd:int .
 
-:_167 :sensor :_163 .
+:_167 :monitoredBy :_163 .
 
 :_168 a :Segment ;
 	:length "372"^^xsd:int .
 
-:_168 :sensor :_163 .
+:_168 :monitoredBy :_163 .
 
 :_169 a :Sensor .
 
@@ -1172,29 +1172,29 @@
 :_170 a :Segment ;
 	:length "373"^^xsd:int .
 
-:_170 :sensor :_169 .
+:_170 :monitoredBy :_169 .
 
 :_171 a :Segment ;
 	:length "507"^^xsd:int .
 
-:_171 :sensor :_169 .
+:_171 :monitoredBy :_169 .
 
 :_172 a :Segment ;
 	:length "348"^^xsd:int .
 
-:_172 :sensor :_169 .
+:_172 :monitoredBy :_169 .
 
 :_173 a :Segment ;
 	:length "411"^^xsd:int .
 
-:_173 :sensor :_169 .
+:_173 :monitoredBy :_169 .
 
 :_174 a :Segment ;
 	:length "541"^^xsd:int .
 
-:_174 :sensor :_169 .
+:_174 :monitoredBy :_169 .
 
-:_138 :sensor :_169 .
+:_138 :monitoredBy :_169 .
 
 :_138 :currentPosition :POSITION_FAILURE.
 
@@ -1213,27 +1213,27 @@
 :_178 a :Segment ;
 	:length "160"^^xsd:int .
 
-:_178 :sensor :_177 .
+:_178 :monitoredBy :_177 .
 
 :_179 a :Segment ;
 	:length "744"^^xsd:int .
 
-:_179 :sensor :_177 .
+:_179 :monitoredBy :_177 .
 
 :_180 a :Segment ;
 	:length "461"^^xsd:int .
 
-:_180 :sensor :_177 .
+:_180 :monitoredBy :_177 .
 
 :_181 a :Segment ;
 	:length "224"^^xsd:int .
 
-:_181 :sensor :_177 .
+:_181 :monitoredBy :_177 .
 
 :_182 a :Segment ;
 	:length "857"^^xsd:int .
 
-:_182 :sensor :_177 .
+:_182 :monitoredBy :_177 .
 
 :_183 a :Sensor .
 
@@ -1242,27 +1242,27 @@
 :_184 a :Segment ;
 	:length "976"^^xsd:int .
 
-:_184 :sensor :_183 .
+:_184 :monitoredBy :_183 .
 
 :_185 a :Segment ;
 	:length "644"^^xsd:int .
 
-:_185 :sensor :_183 .
+:_185 :monitoredBy :_183 .
 
 :_186 a :Segment ;
 	:length "519"^^xsd:int .
 
-:_186 :sensor :_183 .
+:_186 :monitoredBy :_183 .
 
 :_187 a :Segment ;
 	:length "643"^^xsd:int .
 
-:_187 :sensor :_183 .
+:_187 :monitoredBy :_183 .
 
 :_188 a :Segment ;
 	:length "207"^^xsd:int .
 
-:_188 :sensor :_183 .
+:_188 :monitoredBy :_183 .
 
 :_189 a :Sensor .
 
@@ -1271,27 +1271,27 @@
 :_190 a :Segment ;
 	:length "620"^^xsd:int .
 
-:_190 :sensor :_189 .
+:_190 :monitoredBy :_189 .
 
 :_191 a :Segment ;
 	:length "905"^^xsd:int .
 
-:_191 :sensor :_189 .
+:_191 :monitoredBy :_189 .
 
 :_192 a :Segment ;
 	:length "453"^^xsd:int .
 
-:_192 :sensor :_189 .
+:_192 :monitoredBy :_189 .
 
 :_193 a :Segment ;
 	:length "322"^^xsd:int .
 
-:_193 :sensor :_189 .
+:_193 :monitoredBy :_189 .
 
 :_194 a :Segment ;
 	:length "524"^^xsd:int .
 
-:_194 :sensor :_189 .
+:_194 :monitoredBy :_189 .
 
 :_195 a :Sensor .
 
@@ -1300,29 +1300,29 @@
 :_196 a :Segment ;
 	:length "36"^^xsd:int .
 
-:_196 :sensor :_195 .
+:_196 :monitoredBy :_195 .
 
 :_197 a :Segment ;
 	:length "263"^^xsd:int .
 
-:_197 :sensor :_195 .
+:_197 :monitoredBy :_195 .
 
 :_198 a :Segment ;
 	:length "970"^^xsd:int .
 
-:_198 :sensor :_195 .
+:_198 :monitoredBy :_195 .
 
 :_199 a :Segment ;
 	:length "39"^^xsd:int .
 
-:_199 :sensor :_195 .
+:_199 :monitoredBy :_195 .
 
 :_200 a :Segment ;
 	:length "83"^^xsd:int .
 
-:_200 :sensor :_195 .
+:_200 :monitoredBy :_195 .
 
-:_176 :sensor :_195 .
+:_176 :monitoredBy :_195 .
 
 :_176 :currentPosition :POSITION_LEFT.
 
@@ -1341,27 +1341,27 @@
 :_204 a :Segment ;
 	:length "371"^^xsd:int .
 
-:_204 :sensor :_203 .
+:_204 :monitoredBy :_203 .
 
 :_205 a :Segment ;
 	:length "227"^^xsd:int .
 
-:_205 :sensor :_203 .
+:_205 :monitoredBy :_203 .
 
 :_206 a :Segment ;
 	:length "208"^^xsd:int .
 
-:_206 :sensor :_203 .
+:_206 :monitoredBy :_203 .
 
 :_207 a :Segment ;
 	:length "611"^^xsd:int .
 
-:_207 :sensor :_203 .
+:_207 :monitoredBy :_203 .
 
 :_208 a :Segment ;
 	:length "605"^^xsd:int .
 
-:_208 :sensor :_203 .
+:_208 :monitoredBy :_203 .
 
 :_209 a :Sensor .
 
@@ -1370,27 +1370,27 @@
 :_210 a :Segment ;
 	:length "781"^^xsd:int .
 
-:_210 :sensor :_209 .
+:_210 :monitoredBy :_209 .
 
 :_211 a :Segment ;
 	:length "83"^^xsd:int .
 
-:_211 :sensor :_209 .
+:_211 :monitoredBy :_209 .
 
 :_212 a :Segment ;
 	:length "973"^^xsd:int .
 
-:_212 :sensor :_209 .
+:_212 :monitoredBy :_209 .
 
 :_213 a :Segment ;
 	:length "918"^^xsd:int .
 
-:_213 :sensor :_209 .
+:_213 :monitoredBy :_209 .
 
 :_214 a :Segment ;
 	:length "185"^^xsd:int .
 
-:_214 :sensor :_209 .
+:_214 :monitoredBy :_209 .
 
 :_215 a :Sensor .
 
@@ -1399,27 +1399,27 @@
 :_216 a :Segment ;
 	:length "314"^^xsd:int .
 
-:_216 :sensor :_215 .
+:_216 :monitoredBy :_215 .
 
 :_217 a :Segment ;
 	:length "300"^^xsd:int .
 
-:_217 :sensor :_215 .
+:_217 :monitoredBy :_215 .
 
 :_218 a :Segment ;
 	:length "51"^^xsd:int .
 
-:_218 :sensor :_215 .
+:_218 :monitoredBy :_215 .
 
 :_219 a :Segment ;
 	:length "270"^^xsd:int .
 
-:_219 :sensor :_215 .
+:_219 :monitoredBy :_215 .
 
 :_220 a :Segment ;
 	:length "195"^^xsd:int .
 
-:_220 :sensor :_215 .
+:_220 :monitoredBy :_215 .
 
 :_221 a :Sensor .
 
@@ -1428,27 +1428,27 @@
 :_222 a :Segment ;
 	:length "373"^^xsd:int .
 
-:_222 :sensor :_221 .
+:_222 :monitoredBy :_221 .
 
 :_223 a :Segment ;
 	:length "423"^^xsd:int .
 
-:_223 :sensor :_221 .
+:_223 :monitoredBy :_221 .
 
 :_224 a :Segment ;
 	:length "450"^^xsd:int .
 
-:_224 :sensor :_221 .
+:_224 :monitoredBy :_221 .
 
 :_225 a :Segment ;
 	:length "372"^^xsd:int .
 
-:_225 :sensor :_221 .
+:_225 :monitoredBy :_221 .
 
 :_226 a :Segment ;
 	:length "993"^^xsd:int .
 
-:_226 :sensor :_221 .
+:_226 :monitoredBy :_221 .
 
 :_227 a :Sensor .
 
@@ -1457,27 +1457,27 @@
 :_228 a :Segment ;
 	:length "325"^^xsd:int .
 
-:_228 :sensor :_227 .
+:_228 :monitoredBy :_227 .
 
 :_229 a :Segment ;
 	:length "536"^^xsd:int .
 
-:_229 :sensor :_227 .
+:_229 :monitoredBy :_227 .
 
 :_230 a :Segment ;
 	:length "108"^^xsd:int .
 
-:_230 :sensor :_227 .
+:_230 :monitoredBy :_227 .
 
 :_231 a :Segment ;
 	:length "176"^^xsd:int .
 
-:_231 :sensor :_227 .
+:_231 :monitoredBy :_227 .
 
 :_232 a :Segment ;
 	:length "759"^^xsd:int .
 
-:_232 :sensor :_227 .
+:_232 :monitoredBy :_227 .
 
 :_233 a :Sensor .
 
@@ -1486,27 +1486,27 @@
 :_234 a :Segment ;
 	:length "917"^^xsd:int .
 
-:_234 :sensor :_233 .
+:_234 :monitoredBy :_233 .
 
 :_235 a :Segment ;
 	:length "569"^^xsd:int .
 
-:_235 :sensor :_233 .
+:_235 :monitoredBy :_233 .
 
 :_236 a :Segment ;
 	:length "971"^^xsd:int .
 
-:_236 :sensor :_233 .
+:_236 :monitoredBy :_233 .
 
 :_237 a :Segment ;
 	:length "593"^^xsd:int .
 
-:_237 :sensor :_233 .
+:_237 :monitoredBy :_233 .
 
 :_238 a :Segment ;
 	:length "358"^^xsd:int .
 
-:_238 :sensor :_233 .
+:_238 :monitoredBy :_233 .
 
 :_239 a :Sensor .
 
@@ -1515,27 +1515,27 @@
 :_240 a :Segment ;
 	:length "969"^^xsd:int .
 
-:_240 :sensor :_239 .
+:_240 :monitoredBy :_239 .
 
 :_241 a :Segment ;
 	:length "421"^^xsd:int .
 
-:_241 :sensor :_239 .
+:_241 :monitoredBy :_239 .
 
 :_242 a :Segment ;
 	:length "514"^^xsd:int .
 
-:_242 :sensor :_239 .
+:_242 :monitoredBy :_239 .
 
 :_243 a :Segment ;
 	:length "530"^^xsd:int .
 
-:_243 :sensor :_239 .
+:_243 :monitoredBy :_239 .
 
 :_244 a :Segment ;
 	:length "686"^^xsd:int .
 
-:_244 :sensor :_239 .
+:_244 :monitoredBy :_239 .
 
 :_245 a :Sensor .
 
@@ -1544,27 +1544,27 @@
 :_246 a :Segment ;
 	:length "909"^^xsd:int .
 
-:_246 :sensor :_245 .
+:_246 :monitoredBy :_245 .
 
 :_247 a :Segment ;
 	:length "750"^^xsd:int .
 
-:_247 :sensor :_245 .
+:_247 :monitoredBy :_245 .
 
 :_248 a :Segment ;
 	:length "200"^^xsd:int .
 
-:_248 :sensor :_245 .
+:_248 :monitoredBy :_245 .
 
 :_249 a :Segment ;
 	:length "79"^^xsd:int .
 
-:_249 :sensor :_245 .
+:_249 :monitoredBy :_245 .
 
 :_250 a :Segment ;
 	:length "135"^^xsd:int .
 
-:_250 :sensor :_245 .
+:_250 :monitoredBy :_245 .
 
 :_251 a :Sensor .
 
@@ -1573,29 +1573,29 @@
 :_252 a :Segment ;
 	:length "943"^^xsd:int .
 
-:_252 :sensor :_251 .
+:_252 :monitoredBy :_251 .
 
 :_253 a :Segment ;
 	:length "168"^^xsd:int .
 
-:_253 :sensor :_251 .
+:_253 :monitoredBy :_251 .
 
 :_254 a :Segment ;
 	:length "432"^^xsd:int .
 
-:_254 :sensor :_251 .
+:_254 :monitoredBy :_251 .
 
 :_255 a :Segment ;
 	:length "589"^^xsd:int .
 
-:_255 :sensor :_251 .
+:_255 :monitoredBy :_251 .
 
 :_256 a :Segment ;
 	:length "533"^^xsd:int .
 
-:_256 :sensor :_251 .
+:_256 :monitoredBy :_251 .
 
-:_202 :sensor :_251 .
+:_202 :monitoredBy :_251 .
 
 :_202 :currentPosition :POSITION_FAILURE.
 
@@ -1614,27 +1614,27 @@
 :_260 a :Segment ;
 	:length "78"^^xsd:int .
 
-:_260 :sensor :_259 .
+:_260 :monitoredBy :_259 .
 
 :_261 a :Segment ;
 	:length "56"^^xsd:int .
 
-:_261 :sensor :_259 .
+:_261 :monitoredBy :_259 .
 
 :_262 a :Segment ;
 	:length "161"^^xsd:int .
 
-:_262 :sensor :_259 .
+:_262 :monitoredBy :_259 .
 
 :_263 a :Segment ;
 	:length "145"^^xsd:int .
 
-:_263 :sensor :_259 .
+:_263 :monitoredBy :_259 .
 
 :_264 a :Segment ;
 	:length "904"^^xsd:int .
 
-:_264 :sensor :_259 .
+:_264 :monitoredBy :_259 .
 
 :_265 a :Sensor .
 
@@ -1643,27 +1643,27 @@
 :_266 a :Segment ;
 	:length "916"^^xsd:int .
 
-:_266 :sensor :_265 .
+:_266 :monitoredBy :_265 .
 
 :_267 a :Segment ;
 	:length "182"^^xsd:int .
 
-:_267 :sensor :_265 .
+:_267 :monitoredBy :_265 .
 
 :_268 a :Segment ;
 	:length "972"^^xsd:int .
 
-:_268 :sensor :_265 .
+:_268 :monitoredBy :_265 .
 
 :_269 a :Segment ;
 	:length "349"^^xsd:int .
 
-:_269 :sensor :_265 .
+:_269 :monitoredBy :_265 .
 
 :_270 a :Segment ;
 	:length "695"^^xsd:int .
 
-:_270 :sensor :_265 .
+:_270 :monitoredBy :_265 .
 
 :_271 a :Sensor .
 
@@ -1672,27 +1672,27 @@
 :_272 a :Segment ;
 	:length "163"^^xsd:int .
 
-:_272 :sensor :_271 .
+:_272 :monitoredBy :_271 .
 
 :_273 a :Segment ;
 	:length "81"^^xsd:int .
 
-:_273 :sensor :_271 .
+:_273 :monitoredBy :_271 .
 
 :_274 a :Segment ;
 	:length "510"^^xsd:int .
 
-:_274 :sensor :_271 .
+:_274 :monitoredBy :_271 .
 
 :_275 a :Segment ;
 	:length "941"^^xsd:int .
 
-:_275 :sensor :_271 .
+:_275 :monitoredBy :_271 .
 
 :_276 a :Segment ;
 	:length "777"^^xsd:int .
 
-:_276 :sensor :_271 .
+:_276 :monitoredBy :_271 .
 
 :_277 a :Sensor .
 
@@ -1701,27 +1701,27 @@
 :_278 a :Segment ;
 	:length "596"^^xsd:int .
 
-:_278 :sensor :_277 .
+:_278 :monitoredBy :_277 .
 
 :_279 a :Segment ;
 	:length "331"^^xsd:int .
 
-:_279 :sensor :_277 .
+:_279 :monitoredBy :_277 .
 
 :_280 a :Segment ;
 	:length "500"^^xsd:int .
 
-:_280 :sensor :_277 .
+:_280 :monitoredBy :_277 .
 
 :_281 a :Segment ;
 	:length "683"^^xsd:int .
 
-:_281 :sensor :_277 .
+:_281 :monitoredBy :_277 .
 
 :_282 a :Segment ;
 	:length "633"^^xsd:int .
 
-:_282 :sensor :_277 .
+:_282 :monitoredBy :_277 .
 
 :_283 a :Sensor .
 
@@ -1730,29 +1730,29 @@
 :_284 a :Segment ;
 	:length "525"^^xsd:int .
 
-:_284 :sensor :_283 .
+:_284 :monitoredBy :_283 .
 
 :_285 a :Segment ;
 	:length "691"^^xsd:int .
 
-:_285 :sensor :_283 .
+:_285 :monitoredBy :_283 .
 
 :_286 a :Segment ;
 	:length "359"^^xsd:int .
 
-:_286 :sensor :_283 .
+:_286 :monitoredBy :_283 .
 
 :_287 a :Segment ;
 	:length "523"^^xsd:int .
 
-:_287 :sensor :_283 .
+:_287 :monitoredBy :_283 .
 
 :_288 a :Segment ;
 	:length "341"^^xsd:int .
 
-:_288 :sensor :_283 .
+:_288 :monitoredBy :_283 .
 
-:_258 :sensor :_283 .
+:_258 :monitoredBy :_283 .
 
 :_258 :currentPosition :POSITION_LEFT.
 
@@ -1771,27 +1771,27 @@
 :_292 a :Segment ;
 	:length "809"^^xsd:int .
 
-:_292 :sensor :_291 .
+:_292 :monitoredBy :_291 .
 
 :_293 a :Segment ;
 	:length "373"^^xsd:int .
 
-:_293 :sensor :_291 .
+:_293 :monitoredBy :_291 .
 
 :_294 a :Segment ;
 	:length "954"^^xsd:int .
 
-:_294 :sensor :_291 .
+:_294 :monitoredBy :_291 .
 
 :_295 a :Segment ;
 	:length "554"^^xsd:int .
 
-:_295 :sensor :_291 .
+:_295 :monitoredBy :_291 .
 
 :_296 a :Segment ;
 	:length "191"^^xsd:int .
 
-:_296 :sensor :_291 .
+:_296 :monitoredBy :_291 .
 
 :_297 a :Sensor .
 
@@ -1800,27 +1800,27 @@
 :_298 a :Segment ;
 	:length "690"^^xsd:int .
 
-:_298 :sensor :_297 .
+:_298 :monitoredBy :_297 .
 
 :_299 a :Segment ;
 	:length "855"^^xsd:int .
 
-:_299 :sensor :_297 .
+:_299 :monitoredBy :_297 .
 
 :_300 a :Segment ;
 	:length "838"^^xsd:int .
 
-:_300 :sensor :_297 .
+:_300 :monitoredBy :_297 .
 
 :_301 a :Segment ;
 	:length "31"^^xsd:int .
 
-:_301 :sensor :_297 .
+:_301 :monitoredBy :_297 .
 
 :_302 a :Segment ;
 	:length "100"^^xsd:int .
 
-:_302 :sensor :_297 .
+:_302 :monitoredBy :_297 .
 
 :_303 a :Sensor .
 
@@ -1829,29 +1829,29 @@
 :_304 a :Segment ;
 	:length "569"^^xsd:int .
 
-:_304 :sensor :_303 .
+:_304 :monitoredBy :_303 .
 
 :_305 a :Segment ;
 	:length "881"^^xsd:int .
 
-:_305 :sensor :_303 .
+:_305 :monitoredBy :_303 .
 
 :_306 a :Segment ;
 	:length "193"^^xsd:int .
 
-:_306 :sensor :_303 .
+:_306 :monitoredBy :_303 .
 
 :_307 a :Segment ;
 	:length "620"^^xsd:int .
 
-:_307 :sensor :_303 .
+:_307 :monitoredBy :_303 .
 
 :_308 a :Segment ;
 	:length "236"^^xsd:int .
 
-:_308 :sensor :_303 .
+:_308 :monitoredBy :_303 .
 
-:_290 :sensor :_303 .
+:_290 :monitoredBy :_303 .
 
 :_290 :currentPosition :POSITION_LEFT.
 
@@ -1870,29 +1870,29 @@
 :_312 a :Segment ;
 	:length "861"^^xsd:int .
 
-:_312 :sensor :_311 .
+:_312 :monitoredBy :_311 .
 
 :_313 a :Segment ;
 	:length "674"^^xsd:int .
 
-:_313 :sensor :_311 .
+:_313 :monitoredBy :_311 .
 
 :_314 a :Segment ;
 	:length "723"^^xsd:int .
 
-:_314 :sensor :_311 .
+:_314 :monitoredBy :_311 .
 
 :_315 a :Segment ;
 	:length "495"^^xsd:int .
 
-:_315 :sensor :_311 .
+:_315 :monitoredBy :_311 .
 
 :_316 a :Segment ;
 	:length "123"^^xsd:int .
 
-:_316 :sensor :_311 .
+:_316 :monitoredBy :_311 .
 
-:_310 :sensor :_311 .
+:_310 :monitoredBy :_311 .
 
 :_310 :currentPosition :POSITION_FAILURE.
 
@@ -1911,27 +1911,27 @@
 :_320 a :Segment ;
 	:length "882"^^xsd:int .
 
-:_320 :sensor :_319 .
+:_320 :monitoredBy :_319 .
 
 :_321 a :Segment ;
 	:length "118"^^xsd:int .
 
-:_321 :sensor :_319 .
+:_321 :monitoredBy :_319 .
 
 :_322 a :Segment ;
 	:length "707"^^xsd:int .
 
-:_322 :sensor :_319 .
+:_322 :monitoredBy :_319 .
 
 :_323 a :Segment ;
 	:length "342"^^xsd:int .
 
-:_323 :sensor :_319 .
+:_323 :monitoredBy :_319 .
 
 :_324 a :Segment ;
 	:length "501"^^xsd:int .
 
-:_324 :sensor :_319 .
+:_324 :monitoredBy :_319 .
 
 :_325 a :Sensor .
 
@@ -1940,27 +1940,27 @@
 :_326 a :Segment ;
 	:length "917"^^xsd:int .
 
-:_326 :sensor :_325 .
+:_326 :monitoredBy :_325 .
 
 :_327 a :Segment ;
 	:length "827"^^xsd:int .
 
-:_327 :sensor :_325 .
+:_327 :monitoredBy :_325 .
 
 :_328 a :Segment ;
 	:length "594"^^xsd:int .
 
-:_328 :sensor :_325 .
+:_328 :monitoredBy :_325 .
 
 :_329 a :Segment ;
 	:length "498"^^xsd:int .
 
-:_329 :sensor :_325 .
+:_329 :monitoredBy :_325 .
 
 :_330 a :Segment ;
 	:length "752"^^xsd:int .
 
-:_330 :sensor :_325 .
+:_330 :monitoredBy :_325 .
 
 :_331 a :Sensor .
 
@@ -1969,27 +1969,27 @@
 :_332 a :Segment ;
 	:length "169"^^xsd:int .
 
-:_332 :sensor :_331 .
+:_332 :monitoredBy :_331 .
 
 :_333 a :Segment ;
 	:length "63"^^xsd:int .
 
-:_333 :sensor :_331 .
+:_333 :monitoredBy :_331 .
 
 :_334 a :Segment ;
 	:length "587"^^xsd:int .
 
-:_334 :sensor :_331 .
+:_334 :monitoredBy :_331 .
 
 :_335 a :Segment ;
 	:length "827"^^xsd:int .
 
-:_335 :sensor :_331 .
+:_335 :monitoredBy :_331 .
 
 :_336 a :Segment ;
 	:length "941"^^xsd:int .
 
-:_336 :sensor :_331 .
+:_336 :monitoredBy :_331 .
 
 :_337 a :Sensor .
 
@@ -1998,27 +1998,27 @@
 :_338 a :Segment ;
 	:length "939"^^xsd:int .
 
-:_338 :sensor :_337 .
+:_338 :monitoredBy :_337 .
 
 :_339 a :Segment ;
 	:length "703"^^xsd:int .
 
-:_339 :sensor :_337 .
+:_339 :monitoredBy :_337 .
 
 :_340 a :Segment ;
 	:length "625"^^xsd:int .
 
-:_340 :sensor :_337 .
+:_340 :monitoredBy :_337 .
 
 :_341 a :Segment ;
 	:length "148"^^xsd:int .
 
-:_341 :sensor :_337 .
+:_341 :monitoredBy :_337 .
 
 :_342 a :Segment ;
 	:length "691"^^xsd:int .
 
-:_342 :sensor :_337 .
+:_342 :monitoredBy :_337 .
 
 :_343 a :Sensor .
 
@@ -2027,27 +2027,27 @@
 :_344 a :Segment ;
 	:length "659"^^xsd:int .
 
-:_344 :sensor :_343 .
+:_344 :monitoredBy :_343 .
 
 :_345 a :Segment ;
 	:length "898"^^xsd:int .
 
-:_345 :sensor :_343 .
+:_345 :monitoredBy :_343 .
 
 :_346 a :Segment ;
 	:length "364"^^xsd:int .
 
-:_346 :sensor :_343 .
+:_346 :monitoredBy :_343 .
 
 :_347 a :Segment ;
 	:length "307"^^xsd:int .
 
-:_347 :sensor :_343 .
+:_347 :monitoredBy :_343 .
 
 :_348 a :Segment ;
 	:length "283"^^xsd:int .
 
-:_348 :sensor :_343 .
+:_348 :monitoredBy :_343 .
 
 :_349 a :Sensor .
 
@@ -2056,29 +2056,29 @@
 :_350 a :Segment ;
 	:length "694"^^xsd:int .
 
-:_350 :sensor :_349 .
+:_350 :monitoredBy :_349 .
 
 :_351 a :Segment ;
 	:length "895"^^xsd:int .
 
-:_351 :sensor :_349 .
+:_351 :monitoredBy :_349 .
 
 :_352 a :Segment ;
 	:length "140"^^xsd:int .
 
-:_352 :sensor :_349 .
+:_352 :monitoredBy :_349 .
 
 :_353 a :Segment ;
 	:length "160"^^xsd:int .
 
-:_353 :sensor :_349 .
+:_353 :monitoredBy :_349 .
 
 :_354 a :Segment ;
 	:length "12"^^xsd:int .
 
-:_354 :sensor :_349 .
+:_354 :monitoredBy :_349 .
 
-:_318 :sensor :_349 .
+:_318 :monitoredBy :_349 .
 
 :_318 :currentPosition :POSITION_FAILURE.
 
@@ -2097,27 +2097,27 @@
 :_358 a :Segment ;
 	:length "116"^^xsd:int .
 
-:_358 :sensor :_357 .
+:_358 :monitoredBy :_357 .
 
 :_359 a :Segment ;
 	:length "252"^^xsd:int .
 
-:_359 :sensor :_357 .
+:_359 :monitoredBy :_357 .
 
 :_360 a :Segment ;
 	:length "795"^^xsd:int .
 
-:_360 :sensor :_357 .
+:_360 :monitoredBy :_357 .
 
 :_361 a :Segment ;
 	:length "392"^^xsd:int .
 
-:_361 :sensor :_357 .
+:_361 :monitoredBy :_357 .
 
 :_362 a :Segment ;
 	:length "628"^^xsd:int .
 
-:_362 :sensor :_357 .
+:_362 :monitoredBy :_357 .
 
 :_363 a :Sensor .
 
@@ -2126,27 +2126,27 @@
 :_364 a :Segment ;
 	:length "110"^^xsd:int .
 
-:_364 :sensor :_363 .
+:_364 :monitoredBy :_363 .
 
 :_365 a :Segment ;
 	:length "30"^^xsd:int .
 
-:_365 :sensor :_363 .
+:_365 :monitoredBy :_363 .
 
 :_366 a :Segment ;
 	:length "182"^^xsd:int .
 
-:_366 :sensor :_363 .
+:_366 :monitoredBy :_363 .
 
 :_367 a :Segment ;
 	:length "217"^^xsd:int .
 
-:_367 :sensor :_363 .
+:_367 :monitoredBy :_363 .
 
 :_368 a :Segment ;
 	:length "758"^^xsd:int .
 
-:_368 :sensor :_363 .
+:_368 :monitoredBy :_363 .
 
 :_369 a :Sensor .
 
@@ -2155,29 +2155,29 @@
 :_370 a :Segment ;
 	:length "132"^^xsd:int .
 
-:_370 :sensor :_369 .
+:_370 :monitoredBy :_369 .
 
 :_371 a :Segment ;
 	:length "455"^^xsd:int .
 
-:_371 :sensor :_369 .
+:_371 :monitoredBy :_369 .
 
 :_372 a :Segment ;
 	:length "678"^^xsd:int .
 
-:_372 :sensor :_369 .
+:_372 :monitoredBy :_369 .
 
 :_373 a :Segment ;
 	:length "489"^^xsd:int .
 
-:_373 :sensor :_369 .
+:_373 :monitoredBy :_369 .
 
 :_374 a :Segment ;
 	:length "540"^^xsd:int .
 
-:_374 :sensor :_369 .
+:_374 :monitoredBy :_369 .
 
-:_356 :sensor :_369 .
+:_356 :monitoredBy :_369 .
 
 :_356 :currentPosition :POSITION_RIGHT.
 
@@ -2196,29 +2196,29 @@
 :_378 a :Segment ;
 	:length "316"^^xsd:int .
 
-:_378 :sensor :_377 .
+:_378 :monitoredBy :_377 .
 
 :_379 a :Segment ;
 	:length "26"^^xsd:int .
 
-:_379 :sensor :_377 .
+:_379 :monitoredBy :_377 .
 
 :_380 a :Segment ;
 	:length "772"^^xsd:int .
 
-:_380 :sensor :_377 .
+:_380 :monitoredBy :_377 .
 
 :_381 a :Segment ;
 	:length "473"^^xsd:int .
 
-:_381 :sensor :_377 .
+:_381 :monitoredBy :_377 .
 
 :_382 a :Segment ;
 	:length "726"^^xsd:int .
 
-:_382 :sensor :_377 .
+:_382 :monitoredBy :_377 .
 
-:_376 :sensor :_377 .
+:_376 :monitoredBy :_377 .
 
 :_376 :currentPosition :POSITION_FAILURE.
 
@@ -2237,27 +2237,27 @@
 :_386 a :Segment ;
 	:length "413"^^xsd:int .
 
-:_386 :sensor :_385 .
+:_386 :monitoredBy :_385 .
 
 :_387 a :Segment ;
 	:length "709"^^xsd:int .
 
-:_387 :sensor :_385 .
+:_387 :monitoredBy :_385 .
 
 :_388 a :Segment ;
 	:length "664"^^xsd:int .
 
-:_388 :sensor :_385 .
+:_388 :monitoredBy :_385 .
 
 :_389 a :Segment ;
 	:length "395"^^xsd:int .
 
-:_389 :sensor :_385 .
+:_389 :monitoredBy :_385 .
 
 :_390 a :Segment ;
 	:length "70"^^xsd:int .
 
-:_390 :sensor :_385 .
+:_390 :monitoredBy :_385 .
 
 :_391 a :Sensor .
 
@@ -2266,27 +2266,27 @@
 :_392 a :Segment ;
 	:length "544"^^xsd:int .
 
-:_392 :sensor :_391 .
+:_392 :monitoredBy :_391 .
 
 :_393 a :Segment ;
 	:length "287"^^xsd:int .
 
-:_393 :sensor :_391 .
+:_393 :monitoredBy :_391 .
 
 :_394 a :Segment ;
 	:length "632"^^xsd:int .
 
-:_394 :sensor :_391 .
+:_394 :monitoredBy :_391 .
 
 :_395 a :Segment ;
 	:length "252"^^xsd:int .
 
-:_395 :sensor :_391 .
+:_395 :monitoredBy :_391 .
 
 :_396 a :Segment ;
 	:length "611"^^xsd:int .
 
-:_396 :sensor :_391 .
+:_396 :monitoredBy :_391 .
 
 :_397 a :Sensor .
 
@@ -2295,27 +2295,27 @@
 :_398 a :Segment ;
 	:length "107"^^xsd:int .
 
-:_398 :sensor :_397 .
+:_398 :monitoredBy :_397 .
 
 :_399 a :Segment ;
 	:length "360"^^xsd:int .
 
-:_399 :sensor :_397 .
+:_399 :monitoredBy :_397 .
 
 :_400 a :Segment ;
 	:length "499"^^xsd:int .
 
-:_400 :sensor :_397 .
+:_400 :monitoredBy :_397 .
 
 :_401 a :Segment ;
 	:length "987"^^xsd:int .
 
-:_401 :sensor :_397 .
+:_401 :monitoredBy :_397 .
 
 :_402 a :Segment ;
 	:length "132"^^xsd:int .
 
-:_402 :sensor :_397 .
+:_402 :monitoredBy :_397 .
 
 :_403 a :Sensor .
 
@@ -2324,27 +2324,27 @@
 :_404 a :Segment ;
 	:length "181"^^xsd:int .
 
-:_404 :sensor :_403 .
+:_404 :monitoredBy :_403 .
 
 :_405 a :Segment ;
 	:length "724"^^xsd:int .
 
-:_405 :sensor :_403 .
+:_405 :monitoredBy :_403 .
 
 :_406 a :Segment ;
 	:length "455"^^xsd:int .
 
-:_406 :sensor :_403 .
+:_406 :monitoredBy :_403 .
 
 :_407 a :Segment ;
 	:length "296"^^xsd:int .
 
-:_407 :sensor :_403 .
+:_407 :monitoredBy :_403 .
 
 :_408 a :Segment ;
 	:length "686"^^xsd:int .
 
-:_408 :sensor :_403 .
+:_408 :monitoredBy :_403 .
 
 :_409 a :Sensor .
 
@@ -2353,29 +2353,29 @@
 :_410 a :Segment ;
 	:length "659"^^xsd:int .
 
-:_410 :sensor :_409 .
+:_410 :monitoredBy :_409 .
 
 :_411 a :Segment ;
 	:length "630"^^xsd:int .
 
-:_411 :sensor :_409 .
+:_411 :monitoredBy :_409 .
 
 :_412 a :Segment ;
 	:length "6"^^xsd:int .
 
-:_412 :sensor :_409 .
+:_412 :monitoredBy :_409 .
 
 :_413 a :Segment ;
 	:length "220"^^xsd:int .
 
-:_413 :sensor :_409 .
+:_413 :monitoredBy :_409 .
 
 :_414 a :Segment ;
 	:length "793"^^xsd:int .
 
-:_414 :sensor :_409 .
+:_414 :monitoredBy :_409 .
 
-:_384 :sensor :_409 .
+:_384 :monitoredBy :_409 .
 
 :_384 :currentPosition :POSITION_LEFT.
 
@@ -2394,29 +2394,29 @@
 :_418 a :Segment ;
 	:length "717"^^xsd:int .
 
-:_418 :sensor :_417 .
+:_418 :monitoredBy :_417 .
 
 :_419 a :Segment ;
 	:length "779"^^xsd:int .
 
-:_419 :sensor :_417 .
+:_419 :monitoredBy :_417 .
 
 :_420 a :Segment ;
 	:length "520"^^xsd:int .
 
-:_420 :sensor :_417 .
+:_420 :monitoredBy :_417 .
 
 :_421 a :Segment ;
 	:length "585"^^xsd:int .
 
-:_421 :sensor :_417 .
+:_421 :monitoredBy :_417 .
 
 :_422 a :Segment ;
 	:length "11"^^xsd:int .
 
-:_422 :sensor :_417 .
+:_422 :monitoredBy :_417 .
 
-:_416 :sensor :_417 .
+:_416 :monitoredBy :_417 .
 
 :_416 :currentPosition :POSITION_LEFT.
 
@@ -3120,27 +3120,27 @@
 :_428 a :Segment ;
 	:length "262"^^xsd:int .
 
-:_428 :sensor :_427 .
+:_428 :monitoredBy :_427 .
 
 :_429 a :Segment ;
 	:length "610"^^xsd:int .
 
-:_429 :sensor :_427 .
+:_429 :monitoredBy :_427 .
 
 :_430 a :Segment ;
 	:length "301"^^xsd:int .
 
-:_430 :sensor :_427 .
+:_430 :monitoredBy :_427 .
 
 :_431 a :Segment ;
 	:length "836"^^xsd:int .
 
-:_431 :sensor :_427 .
+:_431 :monitoredBy :_427 .
 
 :_432 a :Segment ;
 	:length "254"^^xsd:int .
 
-:_432 :sensor :_427 .
+:_432 :monitoredBy :_427 .
 
 :_433 a :Sensor .
 
@@ -3149,27 +3149,27 @@
 :_434 a :Segment ;
 	:length "146"^^xsd:int .
 
-:_434 :sensor :_433 .
+:_434 :monitoredBy :_433 .
 
 :_435 a :Segment ;
 	:length "43"^^xsd:int .
 
-:_435 :sensor :_433 .
+:_435 :monitoredBy :_433 .
 
 :_436 a :Segment ;
 	:length "938"^^xsd:int .
 
-:_436 :sensor :_433 .
+:_436 :monitoredBy :_433 .
 
 :_437 a :Segment ;
 	:length "693"^^xsd:int .
 
-:_437 :sensor :_433 .
+:_437 :monitoredBy :_433 .
 
 :_438 a :Segment ;
 	:length "813"^^xsd:int .
 
-:_438 :sensor :_433 .
+:_438 :monitoredBy :_433 .
 
 :_439 a :Sensor .
 
@@ -3178,29 +3178,29 @@
 :_440 a :Segment ;
 	:length "718"^^xsd:int .
 
-:_440 :sensor :_439 .
+:_440 :monitoredBy :_439 .
 
 :_441 a :Segment ;
 	:length "907"^^xsd:int .
 
-:_441 :sensor :_439 .
+:_441 :monitoredBy :_439 .
 
 :_442 a :Segment ;
 	:length "225"^^xsd:int .
 
-:_442 :sensor :_439 .
+:_442 :monitoredBy :_439 .
 
 :_443 a :Segment ;
 	:length "409"^^xsd:int .
 
-:_443 :sensor :_439 .
+:_443 :monitoredBy :_439 .
 
 :_444 a :Segment ;
 	:length "78"^^xsd:int .
 
-:_444 :sensor :_439 .
+:_444 :monitoredBy :_439 .
 
-:_426 :sensor :_439 .
+:_426 :monitoredBy :_439 .
 
 :_426 :currentPosition :POSITION_FAILURE.
 
@@ -3219,27 +3219,27 @@
 :_448 a :Segment ;
 	:length "818"^^xsd:int .
 
-:_448 :sensor :_447 .
+:_448 :monitoredBy :_447 .
 
 :_449 a :Segment ;
 	:length "378"^^xsd:int .
 
-:_449 :sensor :_447 .
+:_449 :monitoredBy :_447 .
 
 :_450 a :Segment ;
 	:length "68"^^xsd:int .
 
-:_450 :sensor :_447 .
+:_450 :monitoredBy :_447 .
 
 :_451 a :Segment ;
 	:length "124"^^xsd:int .
 
-:_451 :sensor :_447 .
+:_451 :monitoredBy :_447 .
 
 :_452 a :Segment ;
 	:length "629"^^xsd:int .
 
-:_452 :sensor :_447 .
+:_452 :monitoredBy :_447 .
 
 :_453 a :Sensor .
 
@@ -3248,29 +3248,29 @@
 :_454 a :Segment ;
 	:length "173"^^xsd:int .
 
-:_454 :sensor :_453 .
+:_454 :monitoredBy :_453 .
 
 :_455 a :Segment ;
 	:length "587"^^xsd:int .
 
-:_455 :sensor :_453 .
+:_455 :monitoredBy :_453 .
 
 :_456 a :Segment ;
 	:length "113"^^xsd:int .
 
-:_456 :sensor :_453 .
+:_456 :monitoredBy :_453 .
 
 :_457 a :Segment ;
 	:length "3"^^xsd:int .
 
-:_457 :sensor :_453 .
+:_457 :monitoredBy :_453 .
 
 :_458 a :Segment ;
 	:length "326"^^xsd:int .
 
-:_458 :sensor :_453 .
+:_458 :monitoredBy :_453 .
 
-:_446 :sensor :_453 .
+:_446 :monitoredBy :_453 .
 
 :_446 :currentPosition :POSITION_FAILURE.
 
@@ -3289,27 +3289,27 @@
 :_462 a :Segment ;
 	:length "597"^^xsd:int .
 
-:_462 :sensor :_461 .
+:_462 :monitoredBy :_461 .
 
 :_463 a :Segment ;
 	:length "992"^^xsd:int .
 
-:_463 :sensor :_461 .
+:_463 :monitoredBy :_461 .
 
 :_464 a :Segment ;
 	:length "149"^^xsd:int .
 
-:_464 :sensor :_461 .
+:_464 :monitoredBy :_461 .
 
 :_465 a :Segment ;
 	:length "359"^^xsd:int .
 
-:_465 :sensor :_461 .
+:_465 :monitoredBy :_461 .
 
 :_466 a :Segment ;
 	:length "356"^^xsd:int .
 
-:_466 :sensor :_461 .
+:_466 :monitoredBy :_461 .
 
 :_467 a :Sensor .
 
@@ -3318,29 +3318,29 @@
 :_468 a :Segment ;
 	:length "38"^^xsd:int .
 
-:_468 :sensor :_467 .
+:_468 :monitoredBy :_467 .
 
 :_469 a :Segment ;
 	:length "598"^^xsd:int .
 
-:_469 :sensor :_467 .
+:_469 :monitoredBy :_467 .
 
 :_470 a :Segment ;
 	:length "172"^^xsd:int .
 
-:_470 :sensor :_467 .
+:_470 :monitoredBy :_467 .
 
 :_471 a :Segment ;
 	:length "263"^^xsd:int .
 
-:_471 :sensor :_467 .
+:_471 :monitoredBy :_467 .
 
 :_472 a :Segment ;
 	:length "411"^^xsd:int .
 
-:_472 :sensor :_467 .
+:_472 :monitoredBy :_467 .
 
-:_460 :sensor :_467 .
+:_460 :monitoredBy :_467 .
 
 :_460 :currentPosition :POSITION_RIGHT.
 
@@ -3359,27 +3359,27 @@
 :_476 a :Segment ;
 	:length "298"^^xsd:int .
 
-:_476 :sensor :_475 .
+:_476 :monitoredBy :_475 .
 
 :_477 a :Segment ;
 	:length "486"^^xsd:int .
 
-:_477 :sensor :_475 .
+:_477 :monitoredBy :_475 .
 
 :_478 a :Segment ;
 	:length "942"^^xsd:int .
 
-:_478 :sensor :_475 .
+:_478 :monitoredBy :_475 .
 
 :_479 a :Segment ;
 	:length "553"^^xsd:int .
 
-:_479 :sensor :_475 .
+:_479 :monitoredBy :_475 .
 
 :_480 a :Segment ;
 	:length "393"^^xsd:int .
 
-:_480 :sensor :_475 .
+:_480 :monitoredBy :_475 .
 
 :_481 a :Sensor .
 
@@ -3388,27 +3388,27 @@
 :_482 a :Segment ;
 	:length "542"^^xsd:int .
 
-:_482 :sensor :_481 .
+:_482 :monitoredBy :_481 .
 
 :_483 a :Segment ;
 	:length "770"^^xsd:int .
 
-:_483 :sensor :_481 .
+:_483 :monitoredBy :_481 .
 
 :_484 a :Segment ;
 	:length "147"^^xsd:int .
 
-:_484 :sensor :_481 .
+:_484 :monitoredBy :_481 .
 
 :_485 a :Segment ;
 	:length "170"^^xsd:int .
 
-:_485 :sensor :_481 .
+:_485 :monitoredBy :_481 .
 
 :_486 a :Segment ;
 	:length "167"^^xsd:int .
 
-:_486 :sensor :_481 .
+:_486 :monitoredBy :_481 .
 
 :_487 a :Sensor .
 
@@ -3417,27 +3417,27 @@
 :_488 a :Segment ;
 	:length "74"^^xsd:int .
 
-:_488 :sensor :_487 .
+:_488 :monitoredBy :_487 .
 
 :_489 a :Segment ;
 	:length "952"^^xsd:int .
 
-:_489 :sensor :_487 .
+:_489 :monitoredBy :_487 .
 
 :_490 a :Segment ;
 	:length "524"^^xsd:int .
 
-:_490 :sensor :_487 .
+:_490 :monitoredBy :_487 .
 
 :_491 a :Segment ;
 	:length "5"^^xsd:int .
 
-:_491 :sensor :_487 .
+:_491 :monitoredBy :_487 .
 
 :_492 a :Segment ;
 	:length "133"^^xsd:int .
 
-:_492 :sensor :_487 .
+:_492 :monitoredBy :_487 .
 
 :_493 a :Sensor .
 
@@ -3446,27 +3446,27 @@
 :_494 a :Segment ;
 	:length "980"^^xsd:int .
 
-:_494 :sensor :_493 .
+:_494 :monitoredBy :_493 .
 
 :_495 a :Segment ;
 	:length "743"^^xsd:int .
 
-:_495 :sensor :_493 .
+:_495 :monitoredBy :_493 .
 
 :_496 a :Segment ;
 	:length "316"^^xsd:int .
 
-:_496 :sensor :_493 .
+:_496 :monitoredBy :_493 .
 
 :_497 a :Segment ;
 	:length "668"^^xsd:int .
 
-:_497 :sensor :_493 .
+:_497 :monitoredBy :_493 .
 
 :_498 a :Segment ;
 	:length "152"^^xsd:int .
 
-:_498 :sensor :_493 .
+:_498 :monitoredBy :_493 .
 
 :_499 a :Sensor .
 
@@ -3475,29 +3475,29 @@
 :_500 a :Segment ;
 	:length "94"^^xsd:int .
 
-:_500 :sensor :_499 .
+:_500 :monitoredBy :_499 .
 
 :_501 a :Segment ;
 	:length "768"^^xsd:int .
 
-:_501 :sensor :_499 .
+:_501 :monitoredBy :_499 .
 
 :_502 a :Segment ;
 	:length "969"^^xsd:int .
 
-:_502 :sensor :_499 .
+:_502 :monitoredBy :_499 .
 
 :_503 a :Segment ;
 	:length "316"^^xsd:int .
 
-:_503 :sensor :_499 .
+:_503 :monitoredBy :_499 .
 
 :_504 a :Segment ;
 	:length "9"^^xsd:int .
 
-:_504 :sensor :_499 .
+:_504 :monitoredBy :_499 .
 
-:_474 :sensor :_499 .
+:_474 :monitoredBy :_499 .
 
 :_474 :currentPosition :POSITION_RIGHT.
 
@@ -3516,29 +3516,29 @@
 :_508 a :Segment ;
 	:length "506"^^xsd:int .
 
-:_508 :sensor :_507 .
+:_508 :monitoredBy :_507 .
 
 :_509 a :Segment ;
 	:length "387"^^xsd:int .
 
-:_509 :sensor :_507 .
+:_509 :monitoredBy :_507 .
 
 :_510 a :Segment ;
 	:length "932"^^xsd:int .
 
-:_510 :sensor :_507 .
+:_510 :monitoredBy :_507 .
 
 :_511 a :Segment ;
 	:length "606"^^xsd:int .
 
-:_511 :sensor :_507 .
+:_511 :monitoredBy :_507 .
 
 :_512 a :Segment ;
 	:length "672"^^xsd:int .
 
-:_512 :sensor :_507 .
+:_512 :monitoredBy :_507 .
 
-:_506 :sensor :_507 .
+:_506 :monitoredBy :_507 .
 
 :_506 :currentPosition :POSITION_RIGHT.
 
@@ -3704,27 +3704,27 @@
 :_518 a :Segment ;
 	:length "237"^^xsd:int .
 
-:_518 :sensor :_517 .
+:_518 :monitoredBy :_517 .
 
 :_519 a :Segment ;
 	:length "95"^^xsd:int .
 
-:_519 :sensor :_517 .
+:_519 :monitoredBy :_517 .
 
 :_520 a :Segment ;
 	:length "669"^^xsd:int .
 
-:_520 :sensor :_517 .
+:_520 :monitoredBy :_517 .
 
 :_521 a :Segment ;
 	:length "628"^^xsd:int .
 
-:_521 :sensor :_517 .
+:_521 :monitoredBy :_517 .
 
 :_522 a :Segment ;
 	:length "50"^^xsd:int .
 
-:_522 :sensor :_517 .
+:_522 :monitoredBy :_517 .
 
 :_523 a :Sensor .
 
@@ -3733,27 +3733,27 @@
 :_524 a :Segment ;
 	:length "965"^^xsd:int .
 
-:_524 :sensor :_523 .
+:_524 :monitoredBy :_523 .
 
 :_525 a :Segment ;
 	:length "28"^^xsd:int .
 
-:_525 :sensor :_523 .
+:_525 :monitoredBy :_523 .
 
 :_526 a :Segment ;
 	:length "196"^^xsd:int .
 
-:_526 :sensor :_523 .
+:_526 :monitoredBy :_523 .
 
 :_527 a :Segment ;
 	:length "953"^^xsd:int .
 
-:_527 :sensor :_523 .
+:_527 :monitoredBy :_523 .
 
 :_528 a :Segment ;
 	:length "473"^^xsd:int .
 
-:_528 :sensor :_523 .
+:_528 :monitoredBy :_523 .
 
 :_529 a :Sensor .
 
@@ -3762,27 +3762,27 @@
 :_530 a :Segment ;
 	:length "214"^^xsd:int .
 
-:_530 :sensor :_529 .
+:_530 :monitoredBy :_529 .
 
 :_531 a :Segment ;
 	:length "574"^^xsd:int .
 
-:_531 :sensor :_529 .
+:_531 :monitoredBy :_529 .
 
 :_532 a :Segment ;
 	:length "868"^^xsd:int .
 
-:_532 :sensor :_529 .
+:_532 :monitoredBy :_529 .
 
 :_533 a :Segment ;
 	:length "938"^^xsd:int .
 
-:_533 :sensor :_529 .
+:_533 :monitoredBy :_529 .
 
 :_534 a :Segment ;
 	:length "675"^^xsd:int .
 
-:_534 :sensor :_529 .
+:_534 :monitoredBy :_529 .
 
 :_535 a :Sensor .
 
@@ -3791,27 +3791,27 @@
 :_536 a :Segment ;
 	:length "220"^^xsd:int .
 
-:_536 :sensor :_535 .
+:_536 :monitoredBy :_535 .
 
 :_537 a :Segment ;
 	:length "319"^^xsd:int .
 
-:_537 :sensor :_535 .
+:_537 :monitoredBy :_535 .
 
 :_538 a :Segment ;
 	:length "706"^^xsd:int .
 
-:_538 :sensor :_535 .
+:_538 :monitoredBy :_535 .
 
 :_539 a :Segment ;
 	:length "35"^^xsd:int .
 
-:_539 :sensor :_535 .
+:_539 :monitoredBy :_535 .
 
 :_540 a :Segment ;
 	:length "383"^^xsd:int .
 
-:_540 :sensor :_535 .
+:_540 :monitoredBy :_535 .
 
 :_541 a :Sensor .
 
@@ -3820,27 +3820,27 @@
 :_542 a :Segment ;
 	:length "578"^^xsd:int .
 
-:_542 :sensor :_541 .
+:_542 :monitoredBy :_541 .
 
 :_543 a :Segment ;
 	:length "832"^^xsd:int .
 
-:_543 :sensor :_541 .
+:_543 :monitoredBy :_541 .
 
 :_544 a :Segment ;
 	:length "741"^^xsd:int .
 
-:_544 :sensor :_541 .
+:_544 :monitoredBy :_541 .
 
 :_545 a :Segment ;
 	:length "343"^^xsd:int .
 
-:_545 :sensor :_541 .
+:_545 :monitoredBy :_541 .
 
 :_546 a :Segment ;
 	:length "261"^^xsd:int .
 
-:_546 :sensor :_541 .
+:_546 :monitoredBy :_541 .
 
 :_547 a :Sensor .
 
@@ -3849,27 +3849,27 @@
 :_548 a :Segment ;
 	:length "300"^^xsd:int .
 
-:_548 :sensor :_547 .
+:_548 :monitoredBy :_547 .
 
 :_549 a :Segment ;
 	:length "403"^^xsd:int .
 
-:_549 :sensor :_547 .
+:_549 :monitoredBy :_547 .
 
 :_550 a :Segment ;
 	:length "728"^^xsd:int .
 
-:_550 :sensor :_547 .
+:_550 :monitoredBy :_547 .
 
 :_551 a :Segment ;
 	:length "798"^^xsd:int .
 
-:_551 :sensor :_547 .
+:_551 :monitoredBy :_547 .
 
 :_552 a :Segment ;
 	:length "214"^^xsd:int .
 
-:_552 :sensor :_547 .
+:_552 :monitoredBy :_547 .
 
 :_553 a :Sensor .
 
@@ -3878,27 +3878,27 @@
 :_554 a :Segment ;
 	:length "441"^^xsd:int .
 
-:_554 :sensor :_553 .
+:_554 :monitoredBy :_553 .
 
 :_555 a :Segment ;
 	:length "823"^^xsd:int .
 
-:_555 :sensor :_553 .
+:_555 :monitoredBy :_553 .
 
 :_556 a :Segment ;
 	:length "588"^^xsd:int .
 
-:_556 :sensor :_553 .
+:_556 :monitoredBy :_553 .
 
 :_557 a :Segment ;
 	:length "286"^^xsd:int .
 
-:_557 :sensor :_553 .
+:_557 :monitoredBy :_553 .
 
 :_558 a :Segment ;
 	:length "904"^^xsd:int .
 
-:_558 :sensor :_553 .
+:_558 :monitoredBy :_553 .
 
 :_559 a :Sensor .
 
@@ -3907,27 +3907,27 @@
 :_560 a :Segment ;
 	:length "182"^^xsd:int .
 
-:_560 :sensor :_559 .
+:_560 :monitoredBy :_559 .
 
 :_561 a :Segment ;
 	:length "241"^^xsd:int .
 
-:_561 :sensor :_559 .
+:_561 :monitoredBy :_559 .
 
 :_562 a :Segment ;
 	:length "734"^^xsd:int .
 
-:_562 :sensor :_559 .
+:_562 :monitoredBy :_559 .
 
 :_563 a :Segment ;
 	:length "70"^^xsd:int .
 
-:_563 :sensor :_559 .
+:_563 :monitoredBy :_559 .
 
 :_564 a :Segment ;
 	:length "104"^^xsd:int .
 
-:_564 :sensor :_559 .
+:_564 :monitoredBy :_559 .
 
 :_565 a :Sensor .
 
@@ -3936,29 +3936,29 @@
 :_566 a :Segment ;
 	:length "880"^^xsd:int .
 
-:_566 :sensor :_565 .
+:_566 :monitoredBy :_565 .
 
 :_567 a :Segment ;
 	:length "375"^^xsd:int .
 
-:_567 :sensor :_565 .
+:_567 :monitoredBy :_565 .
 
 :_568 a :Segment ;
 	:length "727"^^xsd:int .
 
-:_568 :sensor :_565 .
+:_568 :monitoredBy :_565 .
 
 :_569 a :Segment ;
 	:length "77"^^xsd:int .
 
-:_569 :sensor :_565 .
+:_569 :monitoredBy :_565 .
 
 :_570 a :Segment ;
 	:length "84"^^xsd:int .
 
-:_570 :sensor :_565 .
+:_570 :monitoredBy :_565 .
 
-:_516 :sensor :_565 .
+:_516 :monitoredBy :_565 .
 
 :_516 :currentPosition :POSITION_FAILURE.
 
@@ -3977,27 +3977,27 @@
 :_574 a :Segment ;
 	:length "106"^^xsd:int .
 
-:_574 :sensor :_573 .
+:_574 :monitoredBy :_573 .
 
 :_575 a :Segment ;
 	:length "482"^^xsd:int .
 
-:_575 :sensor :_573 .
+:_575 :monitoredBy :_573 .
 
 :_576 a :Segment ;
 	:length "560"^^xsd:int .
 
-:_576 :sensor :_573 .
+:_576 :monitoredBy :_573 .
 
 :_577 a :Segment ;
 	:length "694"^^xsd:int .
 
-:_577 :sensor :_573 .
+:_577 :monitoredBy :_573 .
 
 :_578 a :Segment ;
 	:length "780"^^xsd:int .
 
-:_578 :sensor :_573 .
+:_578 :monitoredBy :_573 .
 
 :_579 a :Sensor .
 
@@ -4006,27 +4006,27 @@
 :_580 a :Segment ;
 	:length "911"^^xsd:int .
 
-:_580 :sensor :_579 .
+:_580 :monitoredBy :_579 .
 
 :_581 a :Segment ;
 	:length "837"^^xsd:int .
 
-:_581 :sensor :_579 .
+:_581 :monitoredBy :_579 .
 
 :_582 a :Segment ;
 	:length "245"^^xsd:int .
 
-:_582 :sensor :_579 .
+:_582 :monitoredBy :_579 .
 
 :_583 a :Segment ;
 	:length "171"^^xsd:int .
 
-:_583 :sensor :_579 .
+:_583 :monitoredBy :_579 .
 
 :_584 a :Segment ;
 	:length "83"^^xsd:int .
 
-:_584 :sensor :_579 .
+:_584 :monitoredBy :_579 .
 
 :_585 a :Sensor .
 
@@ -4035,27 +4035,27 @@
 :_586 a :Segment ;
 	:length "702"^^xsd:int .
 
-:_586 :sensor :_585 .
+:_586 :monitoredBy :_585 .
 
 :_587 a :Segment ;
 	:length "68"^^xsd:int .
 
-:_587 :sensor :_585 .
+:_587 :monitoredBy :_585 .
 
 :_588 a :Segment ;
 	:length "634"^^xsd:int .
 
-:_588 :sensor :_585 .
+:_588 :monitoredBy :_585 .
 
 :_589 a :Segment ;
 	:length "852"^^xsd:int .
 
-:_589 :sensor :_585 .
+:_589 :monitoredBy :_585 .
 
 :_590 a :Segment ;
 	:length "364"^^xsd:int .
 
-:_590 :sensor :_585 .
+:_590 :monitoredBy :_585 .
 
 :_591 a :Sensor .
 
@@ -4064,27 +4064,27 @@
 :_592 a :Segment ;
 	:length "615"^^xsd:int .
 
-:_592 :sensor :_591 .
+:_592 :monitoredBy :_591 .
 
 :_593 a :Segment ;
 	:length "721"^^xsd:int .
 
-:_593 :sensor :_591 .
+:_593 :monitoredBy :_591 .
 
 :_594 a :Segment ;
 	:length "394"^^xsd:int .
 
-:_594 :sensor :_591 .
+:_594 :monitoredBy :_591 .
 
 :_595 a :Segment ;
 	:length "904"^^xsd:int .
 
-:_595 :sensor :_591 .
+:_595 :monitoredBy :_591 .
 
 :_596 a :Segment ;
 	:length "939"^^xsd:int .
 
-:_596 :sensor :_591 .
+:_596 :monitoredBy :_591 .
 
 :_597 a :Sensor .
 
@@ -4093,27 +4093,27 @@
 :_598 a :Segment ;
 	:length "77"^^xsd:int .
 
-:_598 :sensor :_597 .
+:_598 :monitoredBy :_597 .
 
 :_599 a :Segment ;
 	:length "710"^^xsd:int .
 
-:_599 :sensor :_597 .
+:_599 :monitoredBy :_597 .
 
 :_600 a :Segment ;
 	:length "845"^^xsd:int .
 
-:_600 :sensor :_597 .
+:_600 :monitoredBy :_597 .
 
 :_601 a :Segment ;
 	:length "835"^^xsd:int .
 
-:_601 :sensor :_597 .
+:_601 :monitoredBy :_597 .
 
 :_602 a :Segment ;
 	:length "27"^^xsd:int .
 
-:_602 :sensor :_597 .
+:_602 :monitoredBy :_597 .
 
 :_603 a :Sensor .
 
@@ -4122,27 +4122,27 @@
 :_604 a :Segment ;
 	:length "723"^^xsd:int .
 
-:_604 :sensor :_603 .
+:_604 :monitoredBy :_603 .
 
 :_605 a :Segment ;
 	:length "595"^^xsd:int .
 
-:_605 :sensor :_603 .
+:_605 :monitoredBy :_603 .
 
 :_606 a :Segment ;
 	:length "714"^^xsd:int .
 
-:_606 :sensor :_603 .
+:_606 :monitoredBy :_603 .
 
 :_607 a :Segment ;
 	:length "210"^^xsd:int .
 
-:_607 :sensor :_603 .
+:_607 :monitoredBy :_603 .
 
 :_608 a :Segment ;
 	:length "630"^^xsd:int .
 
-:_608 :sensor :_603 .
+:_608 :monitoredBy :_603 .
 
 :_609 a :Sensor .
 
@@ -4151,27 +4151,27 @@
 :_610 a :Segment ;
 	:length "807"^^xsd:int .
 
-:_610 :sensor :_609 .
+:_610 :monitoredBy :_609 .
 
 :_611 a :Segment ;
 	:length "911"^^xsd:int .
 
-:_611 :sensor :_609 .
+:_611 :monitoredBy :_609 .
 
 :_612 a :Segment ;
 	:length "394"^^xsd:int .
 
-:_612 :sensor :_609 .
+:_612 :monitoredBy :_609 .
 
 :_613 a :Segment ;
 	:length "268"^^xsd:int .
 
-:_613 :sensor :_609 .
+:_613 :monitoredBy :_609 .
 
 :_614 a :Segment ;
 	:length "468"^^xsd:int .
 
-:_614 :sensor :_609 .
+:_614 :monitoredBy :_609 .
 
 :_615 a :Sensor .
 
@@ -4180,27 +4180,27 @@
 :_616 a :Segment ;
 	:length "82"^^xsd:int .
 
-:_616 :sensor :_615 .
+:_616 :monitoredBy :_615 .
 
 :_617 a :Segment ;
 	:length "963"^^xsd:int .
 
-:_617 :sensor :_615 .
+:_617 :monitoredBy :_615 .
 
 :_618 a :Segment ;
 	:length "647"^^xsd:int .
 
-:_618 :sensor :_615 .
+:_618 :monitoredBy :_615 .
 
 :_619 a :Segment ;
 	:length "666"^^xsd:int .
 
-:_619 :sensor :_615 .
+:_619 :monitoredBy :_615 .
 
 :_620 a :Segment ;
 	:length "464"^^xsd:int .
 
-:_620 :sensor :_615 .
+:_620 :monitoredBy :_615 .
 
 :_621 a :Sensor .
 
@@ -4209,29 +4209,29 @@
 :_622 a :Segment ;
 	:length "825"^^xsd:int .
 
-:_622 :sensor :_621 .
+:_622 :monitoredBy :_621 .
 
 :_623 a :Segment ;
 	:length "741"^^xsd:int .
 
-:_623 :sensor :_621 .
+:_623 :monitoredBy :_621 .
 
 :_624 a :Segment ;
 	:length "610"^^xsd:int .
 
-:_624 :sensor :_621 .
+:_624 :monitoredBy :_621 .
 
 :_625 a :Segment ;
 	:length "32"^^xsd:int .
 
-:_625 :sensor :_621 .
+:_625 :monitoredBy :_621 .
 
 :_626 a :Segment ;
 	:length "44"^^xsd:int .
 
-:_626 :sensor :_621 .
+:_626 :monitoredBy :_621 .
 
-:_572 :sensor :_621 .
+:_572 :monitoredBy :_621 .
 
 :_572 :currentPosition :POSITION_LEFT.
 
@@ -4250,27 +4250,27 @@
 :_630 a :Segment ;
 	:length "300"^^xsd:int .
 
-:_630 :sensor :_629 .
+:_630 :monitoredBy :_629 .
 
 :_631 a :Segment ;
 	:length "212"^^xsd:int .
 
-:_631 :sensor :_629 .
+:_631 :monitoredBy :_629 .
 
 :_632 a :Segment ;
 	:length "78"^^xsd:int .
 
-:_632 :sensor :_629 .
+:_632 :monitoredBy :_629 .
 
 :_633 a :Segment ;
 	:length "58"^^xsd:int .
 
-:_633 :sensor :_629 .
+:_633 :monitoredBy :_629 .
 
 :_634 a :Segment ;
 	:length "959"^^xsd:int .
 
-:_634 :sensor :_629 .
+:_634 :monitoredBy :_629 .
 
 :_635 a :Sensor .
 
@@ -4279,27 +4279,27 @@
 :_636 a :Segment ;
 	:length "244"^^xsd:int .
 
-:_636 :sensor :_635 .
+:_636 :monitoredBy :_635 .
 
 :_637 a :Segment ;
 	:length "891"^^xsd:int .
 
-:_637 :sensor :_635 .
+:_637 :monitoredBy :_635 .
 
 :_638 a :Segment ;
 	:length "820"^^xsd:int .
 
-:_638 :sensor :_635 .
+:_638 :monitoredBy :_635 .
 
 :_639 a :Segment ;
 	:length "913"^^xsd:int .
 
-:_639 :sensor :_635 .
+:_639 :monitoredBy :_635 .
 
 :_640 a :Segment ;
 	:length "871"^^xsd:int .
 
-:_640 :sensor :_635 .
+:_640 :monitoredBy :_635 .
 
 :_641 a :Sensor .
 
@@ -4308,27 +4308,27 @@
 :_642 a :Segment ;
 	:length "319"^^xsd:int .
 
-:_642 :sensor :_641 .
+:_642 :monitoredBy :_641 .
 
 :_643 a :Segment ;
 	:length "364"^^xsd:int .
 
-:_643 :sensor :_641 .
+:_643 :monitoredBy :_641 .
 
 :_644 a :Segment ;
 	:length "923"^^xsd:int .
 
-:_644 :sensor :_641 .
+:_644 :monitoredBy :_641 .
 
 :_645 a :Segment ;
 	:length "142"^^xsd:int .
 
-:_645 :sensor :_641 .
+:_645 :monitoredBy :_641 .
 
 :_646 a :Segment ;
 	:length "275"^^xsd:int .
 
-:_646 :sensor :_641 .
+:_646 :monitoredBy :_641 .
 
 :_647 a :Sensor .
 
@@ -4337,27 +4337,27 @@
 :_648 a :Segment ;
 	:length "557"^^xsd:int .
 
-:_648 :sensor :_647 .
+:_648 :monitoredBy :_647 .
 
 :_649 a :Segment ;
 	:length "165"^^xsd:int .
 
-:_649 :sensor :_647 .
+:_649 :monitoredBy :_647 .
 
 :_650 a :Segment ;
 	:length "238"^^xsd:int .
 
-:_650 :sensor :_647 .
+:_650 :monitoredBy :_647 .
 
 :_651 a :Segment ;
 	:length "691"^^xsd:int .
 
-:_651 :sensor :_647 .
+:_651 :monitoredBy :_647 .
 
 :_652 a :Segment ;
 	:length "804"^^xsd:int .
 
-:_652 :sensor :_647 .
+:_652 :monitoredBy :_647 .
 
 :_653 a :Sensor .
 
@@ -4366,27 +4366,27 @@
 :_654 a :Segment ;
 	:length "144"^^xsd:int .
 
-:_654 :sensor :_653 .
+:_654 :monitoredBy :_653 .
 
 :_655 a :Segment ;
 	:length "770"^^xsd:int .
 
-:_655 :sensor :_653 .
+:_655 :monitoredBy :_653 .
 
 :_656 a :Segment ;
 	:length "113"^^xsd:int .
 
-:_656 :sensor :_653 .
+:_656 :monitoredBy :_653 .
 
 :_657 a :Segment ;
 	:length "575"^^xsd:int .
 
-:_657 :sensor :_653 .
+:_657 :monitoredBy :_653 .
 
 :_658 a :Segment ;
 	:length "131"^^xsd:int .
 
-:_658 :sensor :_653 .
+:_658 :monitoredBy :_653 .
 
 :_659 a :Sensor .
 
@@ -4395,27 +4395,27 @@
 :_660 a :Segment ;
 	:length "911"^^xsd:int .
 
-:_660 :sensor :_659 .
+:_660 :monitoredBy :_659 .
 
 :_661 a :Segment ;
 	:length "452"^^xsd:int .
 
-:_661 :sensor :_659 .
+:_661 :monitoredBy :_659 .
 
 :_662 a :Segment ;
 	:length "900"^^xsd:int .
 
-:_662 :sensor :_659 .
+:_662 :monitoredBy :_659 .
 
 :_663 a :Segment ;
 	:length "552"^^xsd:int .
 
-:_663 :sensor :_659 .
+:_663 :monitoredBy :_659 .
 
 :_664 a :Segment ;
 	:length "411"^^xsd:int .
 
-:_664 :sensor :_659 .
+:_664 :monitoredBy :_659 .
 
 :_665 a :Sensor .
 
@@ -4424,29 +4424,29 @@
 :_666 a :Segment ;
 	:length "192"^^xsd:int .
 
-:_666 :sensor :_665 .
+:_666 :monitoredBy :_665 .
 
 :_667 a :Segment ;
 	:length "759"^^xsd:int .
 
-:_667 :sensor :_665 .
+:_667 :monitoredBy :_665 .
 
 :_668 a :Segment ;
 	:length "180"^^xsd:int .
 
-:_668 :sensor :_665 .
+:_668 :monitoredBy :_665 .
 
 :_669 a :Segment ;
 	:length "504"^^xsd:int .
 
-:_669 :sensor :_665 .
+:_669 :monitoredBy :_665 .
 
 :_670 a :Segment ;
 	:length "471"^^xsd:int .
 
-:_670 :sensor :_665 .
+:_670 :monitoredBy :_665 .
 
-:_628 :sensor :_665 .
+:_628 :monitoredBy :_665 .
 
 :_628 :currentPosition :POSITION_FAILURE.
 
@@ -4465,27 +4465,27 @@
 :_674 a :Segment ;
 	:length "357"^^xsd:int .
 
-:_674 :sensor :_673 .
+:_674 :monitoredBy :_673 .
 
 :_675 a :Segment ;
 	:length "604"^^xsd:int .
 
-:_675 :sensor :_673 .
+:_675 :monitoredBy :_673 .
 
 :_676 a :Segment ;
 	:length "492"^^xsd:int .
 
-:_676 :sensor :_673 .
+:_676 :monitoredBy :_673 .
 
 :_677 a :Segment ;
 	:length "37"^^xsd:int .
 
-:_677 :sensor :_673 .
+:_677 :monitoredBy :_673 .
 
 :_678 a :Segment ;
 	:length "427"^^xsd:int .
 
-:_678 :sensor :_673 .
+:_678 :monitoredBy :_673 .
 
 :_679 a :Sensor .
 
@@ -4494,27 +4494,27 @@
 :_680 a :Segment ;
 	:length "883"^^xsd:int .
 
-:_680 :sensor :_679 .
+:_680 :monitoredBy :_679 .
 
 :_681 a :Segment ;
 	:length "255"^^xsd:int .
 
-:_681 :sensor :_679 .
+:_681 :monitoredBy :_679 .
 
 :_682 a :Segment ;
 	:length "265"^^xsd:int .
 
-:_682 :sensor :_679 .
+:_682 :monitoredBy :_679 .
 
 :_683 a :Segment ;
 	:length "926"^^xsd:int .
 
-:_683 :sensor :_679 .
+:_683 :monitoredBy :_679 .
 
 :_684 a :Segment ;
 	:length "672"^^xsd:int .
 
-:_684 :sensor :_679 .
+:_684 :monitoredBy :_679 .
 
 :_685 a :Sensor .
 
@@ -4523,27 +4523,27 @@
 :_686 a :Segment ;
 	:length "551"^^xsd:int .
 
-:_686 :sensor :_685 .
+:_686 :monitoredBy :_685 .
 
 :_687 a :Segment ;
 	:length "942"^^xsd:int .
 
-:_687 :sensor :_685 .
+:_687 :monitoredBy :_685 .
 
 :_688 a :Segment ;
 	:length "403"^^xsd:int .
 
-:_688 :sensor :_685 .
+:_688 :monitoredBy :_685 .
 
 :_689 a :Segment ;
 	:length "615"^^xsd:int .
 
-:_689 :sensor :_685 .
+:_689 :monitoredBy :_685 .
 
 :_690 a :Segment ;
 	:length "887"^^xsd:int .
 
-:_690 :sensor :_685 .
+:_690 :monitoredBy :_685 .
 
 :_691 a :Sensor .
 
@@ -4552,29 +4552,29 @@
 :_692 a :Segment ;
 	:length "55"^^xsd:int .
 
-:_692 :sensor :_691 .
+:_692 :monitoredBy :_691 .
 
 :_693 a :Segment ;
 	:length "317"^^xsd:int .
 
-:_693 :sensor :_691 .
+:_693 :monitoredBy :_691 .
 
 :_694 a :Segment ;
 	:length "813"^^xsd:int .
 
-:_694 :sensor :_691 .
+:_694 :monitoredBy :_691 .
 
 :_695 a :Segment ;
 	:length "914"^^xsd:int .
 
-:_695 :sensor :_691 .
+:_695 :monitoredBy :_691 .
 
 :_696 a :Segment ;
 	:length "258"^^xsd:int .
 
-:_696 :sensor :_691 .
+:_696 :monitoredBy :_691 .
 
-:_672 :sensor :_691 .
+:_672 :monitoredBy :_691 .
 
 :_672 :currentPosition :POSITION_LEFT.
 
@@ -4593,27 +4593,27 @@
 :_700 a :Segment ;
 	:length "11"^^xsd:int .
 
-:_700 :sensor :_699 .
+:_700 :monitoredBy :_699 .
 
 :_701 a :Segment ;
 	:length "153"^^xsd:int .
 
-:_701 :sensor :_699 .
+:_701 :monitoredBy :_699 .
 
 :_702 a :Segment ;
 	:length "444"^^xsd:int .
 
-:_702 :sensor :_699 .
+:_702 :monitoredBy :_699 .
 
 :_703 a :Segment ;
 	:length "576"^^xsd:int .
 
-:_703 :sensor :_699 .
+:_703 :monitoredBy :_699 .
 
 :_704 a :Segment ;
 	:length "11"^^xsd:int .
 
-:_704 :sensor :_699 .
+:_704 :monitoredBy :_699 .
 
 :_705 a :Sensor .
 
@@ -4622,27 +4622,27 @@
 :_706 a :Segment ;
 	:length "15"^^xsd:int .
 
-:_706 :sensor :_705 .
+:_706 :monitoredBy :_705 .
 
 :_707 a :Segment ;
 	:length "309"^^xsd:int .
 
-:_707 :sensor :_705 .
+:_707 :monitoredBy :_705 .
 
 :_708 a :Segment ;
 	:length "596"^^xsd:int .
 
-:_708 :sensor :_705 .
+:_708 :monitoredBy :_705 .
 
 :_709 a :Segment ;
 	:length "584"^^xsd:int .
 
-:_709 :sensor :_705 .
+:_709 :monitoredBy :_705 .
 
 :_710 a :Segment ;
 	:length "749"^^xsd:int .
 
-:_710 :sensor :_705 .
+:_710 :monitoredBy :_705 .
 
 :_711 a :Sensor .
 
@@ -4651,27 +4651,27 @@
 :_712 a :Segment ;
 	:length "820"^^xsd:int .
 
-:_712 :sensor :_711 .
+:_712 :monitoredBy :_711 .
 
 :_713 a :Segment ;
 	:length "66"^^xsd:int .
 
-:_713 :sensor :_711 .
+:_713 :monitoredBy :_711 .
 
 :_714 a :Segment ;
 	:length "898"^^xsd:int .
 
-:_714 :sensor :_711 .
+:_714 :monitoredBy :_711 .
 
 :_715 a :Segment ;
 	:length "660"^^xsd:int .
 
-:_715 :sensor :_711 .
+:_715 :monitoredBy :_711 .
 
 :_716 a :Segment ;
 	:length "555"^^xsd:int .
 
-:_716 :sensor :_711 .
+:_716 :monitoredBy :_711 .
 
 :_717 a :Sensor .
 
@@ -4680,27 +4680,27 @@
 :_718 a :Segment ;
 	:length "448"^^xsd:int .
 
-:_718 :sensor :_717 .
+:_718 :monitoredBy :_717 .
 
 :_719 a :Segment ;
 	:length "367"^^xsd:int .
 
-:_719 :sensor :_717 .
+:_719 :monitoredBy :_717 .
 
 :_720 a :Segment ;
 	:length "576"^^xsd:int .
 
-:_720 :sensor :_717 .
+:_720 :monitoredBy :_717 .
 
 :_721 a :Segment ;
 	:length "734"^^xsd:int .
 
-:_721 :sensor :_717 .
+:_721 :monitoredBy :_717 .
 
 :_722 a :Segment ;
 	:length "720"^^xsd:int .
 
-:_722 :sensor :_717 .
+:_722 :monitoredBy :_717 .
 
 :_723 a :Sensor .
 
@@ -4709,27 +4709,27 @@
 :_724 a :Segment ;
 	:length "79"^^xsd:int .
 
-:_724 :sensor :_723 .
+:_724 :monitoredBy :_723 .
 
 :_725 a :Segment ;
 	:length "538"^^xsd:int .
 
-:_725 :sensor :_723 .
+:_725 :monitoredBy :_723 .
 
 :_726 a :Segment ;
 	:length "127"^^xsd:int .
 
-:_726 :sensor :_723 .
+:_726 :monitoredBy :_723 .
 
 :_727 a :Segment ;
 	:length "970"^^xsd:int .
 
-:_727 :sensor :_723 .
+:_727 :monitoredBy :_723 .
 
 :_728 a :Segment ;
 	:length "389"^^xsd:int .
 
-:_728 :sensor :_723 .
+:_728 :monitoredBy :_723 .
 
 :_729 a :Sensor .
 
@@ -4738,27 +4738,27 @@
 :_730 a :Segment ;
 	:length "170"^^xsd:int .
 
-:_730 :sensor :_729 .
+:_730 :monitoredBy :_729 .
 
 :_731 a :Segment ;
 	:length "809"^^xsd:int .
 
-:_731 :sensor :_729 .
+:_731 :monitoredBy :_729 .
 
 :_732 a :Segment ;
 	:length "434"^^xsd:int .
 
-:_732 :sensor :_729 .
+:_732 :monitoredBy :_729 .
 
 :_733 a :Segment ;
 	:length "574"^^xsd:int .
 
-:_733 :sensor :_729 .
+:_733 :monitoredBy :_729 .
 
 :_734 a :Segment ;
 	:length "81"^^xsd:int .
 
-:_734 :sensor :_729 .
+:_734 :monitoredBy :_729 .
 
 :_735 a :Sensor .
 
@@ -4767,27 +4767,27 @@
 :_736 a :Segment ;
 	:length "45"^^xsd:int .
 
-:_736 :sensor :_735 .
+:_736 :monitoredBy :_735 .
 
 :_737 a :Segment ;
 	:length "843"^^xsd:int .
 
-:_737 :sensor :_735 .
+:_737 :monitoredBy :_735 .
 
 :_738 a :Segment ;
 	:length "943"^^xsd:int .
 
-:_738 :sensor :_735 .
+:_738 :monitoredBy :_735 .
 
 :_739 a :Segment ;
 	:length "593"^^xsd:int .
 
-:_739 :sensor :_735 .
+:_739 :monitoredBy :_735 .
 
 :_740 a :Segment ;
 	:length "371"^^xsd:int .
 
-:_740 :sensor :_735 .
+:_740 :monitoredBy :_735 .
 
 :_741 a :Sensor .
 
@@ -4796,27 +4796,27 @@
 :_742 a :Segment ;
 	:length "983"^^xsd:int .
 
-:_742 :sensor :_741 .
+:_742 :monitoredBy :_741 .
 
 :_743 a :Segment ;
 	:length "998"^^xsd:int .
 
-:_743 :sensor :_741 .
+:_743 :monitoredBy :_741 .
 
 :_744 a :Segment ;
 	:length "297"^^xsd:int .
 
-:_744 :sensor :_741 .
+:_744 :monitoredBy :_741 .
 
 :_745 a :Segment ;
 	:length "941"^^xsd:int .
 
-:_745 :sensor :_741 .
+:_745 :monitoredBy :_741 .
 
 :_746 a :Segment ;
 	:length "320"^^xsd:int .
 
-:_746 :sensor :_741 .
+:_746 :monitoredBy :_741 .
 
 :_747 a :Sensor .
 
@@ -4825,29 +4825,29 @@
 :_748 a :Segment ;
 	:length "212"^^xsd:int .
 
-:_748 :sensor :_747 .
+:_748 :monitoredBy :_747 .
 
 :_749 a :Segment ;
 	:length "546"^^xsd:int .
 
-:_749 :sensor :_747 .
+:_749 :monitoredBy :_747 .
 
 :_750 a :Segment ;
 	:length "570"^^xsd:int .
 
-:_750 :sensor :_747 .
+:_750 :monitoredBy :_747 .
 
 :_751 a :Segment ;
 	:length "399"^^xsd:int .
 
-:_751 :sensor :_747 .
+:_751 :monitoredBy :_747 .
 
 :_752 a :Segment ;
 	:length "248"^^xsd:int .
 
-:_752 :sensor :_747 .
+:_752 :monitoredBy :_747 .
 
-:_698 :sensor :_747 .
+:_698 :monitoredBy :_747 .
 
 :_698 :currentPosition :POSITION_RIGHT.
 
@@ -4866,27 +4866,27 @@
 :_756 a :Segment ;
 	:length "358"^^xsd:int .
 
-:_756 :sensor :_755 .
+:_756 :monitoredBy :_755 .
 
 :_757 a :Segment ;
 	:length "459"^^xsd:int .
 
-:_757 :sensor :_755 .
+:_757 :monitoredBy :_755 .
 
 :_758 a :Segment ;
 	:length "522"^^xsd:int .
 
-:_758 :sensor :_755 .
+:_758 :monitoredBy :_755 .
 
 :_759 a :Segment ;
 	:length "529"^^xsd:int .
 
-:_759 :sensor :_755 .
+:_759 :monitoredBy :_755 .
 
 :_760 a :Segment ;
 	:length "643"^^xsd:int .
 
-:_760 :sensor :_755 .
+:_760 :monitoredBy :_755 .
 
 :_761 a :Sensor .
 
@@ -4895,29 +4895,29 @@
 :_762 a :Segment ;
 	:length "458"^^xsd:int .
 
-:_762 :sensor :_761 .
+:_762 :monitoredBy :_761 .
 
 :_763 a :Segment ;
 	:length "261"^^xsd:int .
 
-:_763 :sensor :_761 .
+:_763 :monitoredBy :_761 .
 
 :_764 a :Segment ;
 	:length "319"^^xsd:int .
 
-:_764 :sensor :_761 .
+:_764 :monitoredBy :_761 .
 
 :_765 a :Segment ;
 	:length "543"^^xsd:int .
 
-:_765 :sensor :_761 .
+:_765 :monitoredBy :_761 .
 
 :_766 a :Segment ;
 	:length "919"^^xsd:int .
 
-:_766 :sensor :_761 .
+:_766 :monitoredBy :_761 .
 
-:_754 :sensor :_761 .
+:_754 :monitoredBy :_761 .
 
 :_754 :currentPosition :POSITION_FAILURE.
 
@@ -4936,27 +4936,27 @@
 :_770 a :Segment ;
 	:length "156"^^xsd:int .
 
-:_770 :sensor :_769 .
+:_770 :monitoredBy :_769 .
 
 :_771 a :Segment ;
 	:length "479"^^xsd:int .
 
-:_771 :sensor :_769 .
+:_771 :monitoredBy :_769 .
 
 :_772 a :Segment ;
 	:length "514"^^xsd:int .
 
-:_772 :sensor :_769 .
+:_772 :monitoredBy :_769 .
 
 :_773 a :Segment ;
 	:length "938"^^xsd:int .
 
-:_773 :sensor :_769 .
+:_773 :monitoredBy :_769 .
 
 :_774 a :Segment ;
 	:length "507"^^xsd:int .
 
-:_774 :sensor :_769 .
+:_774 :monitoredBy :_769 .
 
 :_775 a :Sensor .
 
@@ -4965,27 +4965,27 @@
 :_776 a :Segment ;
 	:length "232"^^xsd:int .
 
-:_776 :sensor :_775 .
+:_776 :monitoredBy :_775 .
 
 :_777 a :Segment ;
 	:length "992"^^xsd:int .
 
-:_777 :sensor :_775 .
+:_777 :monitoredBy :_775 .
 
 :_778 a :Segment ;
 	:length "211"^^xsd:int .
 
-:_778 :sensor :_775 .
+:_778 :monitoredBy :_775 .
 
 :_779 a :Segment ;
 	:length "940"^^xsd:int .
 
-:_779 :sensor :_775 .
+:_779 :monitoredBy :_775 .
 
 :_780 a :Segment ;
 	:length "685"^^xsd:int .
 
-:_780 :sensor :_775 .
+:_780 :monitoredBy :_775 .
 
 :_781 a :Sensor .
 
@@ -4994,27 +4994,27 @@
 :_782 a :Segment ;
 	:length "141"^^xsd:int .
 
-:_782 :sensor :_781 .
+:_782 :monitoredBy :_781 .
 
 :_783 a :Segment ;
 	:length "53"^^xsd:int .
 
-:_783 :sensor :_781 .
+:_783 :monitoredBy :_781 .
 
 :_784 a :Segment ;
 	:length "915"^^xsd:int .
 
-:_784 :sensor :_781 .
+:_784 :monitoredBy :_781 .
 
 :_785 a :Segment ;
 	:length "302"^^xsd:int .
 
-:_785 :sensor :_781 .
+:_785 :monitoredBy :_781 .
 
 :_786 a :Segment ;
 	:length "386"^^xsd:int .
 
-:_786 :sensor :_781 .
+:_786 :monitoredBy :_781 .
 
 :_787 a :Sensor .
 
@@ -5023,27 +5023,27 @@
 :_788 a :Segment ;
 	:length "827"^^xsd:int .
 
-:_788 :sensor :_787 .
+:_788 :monitoredBy :_787 .
 
 :_789 a :Segment ;
 	:length "88"^^xsd:int .
 
-:_789 :sensor :_787 .
+:_789 :monitoredBy :_787 .
 
 :_790 a :Segment ;
 	:length "550"^^xsd:int .
 
-:_790 :sensor :_787 .
+:_790 :monitoredBy :_787 .
 
 :_791 a :Segment ;
 	:length "925"^^xsd:int .
 
-:_791 :sensor :_787 .
+:_791 :monitoredBy :_787 .
 
 :_792 a :Segment ;
 	:length "84"^^xsd:int .
 
-:_792 :sensor :_787 .
+:_792 :monitoredBy :_787 .
 
 :_793 a :Sensor .
 
@@ -5052,27 +5052,27 @@
 :_794 a :Segment ;
 	:length "464"^^xsd:int .
 
-:_794 :sensor :_793 .
+:_794 :monitoredBy :_793 .
 
 :_795 a :Segment ;
 	:length "236"^^xsd:int .
 
-:_795 :sensor :_793 .
+:_795 :monitoredBy :_793 .
 
 :_796 a :Segment ;
 	:length "236"^^xsd:int .
 
-:_796 :sensor :_793 .
+:_796 :monitoredBy :_793 .
 
 :_797 a :Segment ;
 	:length "572"^^xsd:int .
 
-:_797 :sensor :_793 .
+:_797 :monitoredBy :_793 .
 
 :_798 a :Segment ;
 	:length "647"^^xsd:int .
 
-:_798 :sensor :_793 .
+:_798 :monitoredBy :_793 .
 
 :_799 a :Sensor .
 
@@ -5081,27 +5081,27 @@
 :_800 a :Segment ;
 	:length "220"^^xsd:int .
 
-:_800 :sensor :_799 .
+:_800 :monitoredBy :_799 .
 
 :_801 a :Segment ;
 	:length "395"^^xsd:int .
 
-:_801 :sensor :_799 .
+:_801 :monitoredBy :_799 .
 
 :_802 a :Segment ;
 	:length "710"^^xsd:int .
 
-:_802 :sensor :_799 .
+:_802 :monitoredBy :_799 .
 
 :_803 a :Segment ;
 	:length "407"^^xsd:int .
 
-:_803 :sensor :_799 .
+:_803 :monitoredBy :_799 .
 
 :_804 a :Segment ;
 	:length "183"^^xsd:int .
 
-:_804 :sensor :_799 .
+:_804 :monitoredBy :_799 .
 
 :_805 a :Sensor .
 
@@ -5110,27 +5110,27 @@
 :_806 a :Segment ;
 	:length "8"^^xsd:int .
 
-:_806 :sensor :_805 .
+:_806 :monitoredBy :_805 .
 
 :_807 a :Segment ;
 	:length "439"^^xsd:int .
 
-:_807 :sensor :_805 .
+:_807 :monitoredBy :_805 .
 
 :_808 a :Segment ;
 	:length "739"^^xsd:int .
 
-:_808 :sensor :_805 .
+:_808 :monitoredBy :_805 .
 
 :_809 a :Segment ;
 	:length "507"^^xsd:int .
 
-:_809 :sensor :_805 .
+:_809 :monitoredBy :_805 .
 
 :_810 a :Segment ;
 	:length "620"^^xsd:int .
 
-:_810 :sensor :_805 .
+:_810 :monitoredBy :_805 .
 
 :_811 a :Sensor .
 
@@ -5139,27 +5139,27 @@
 :_812 a :Segment ;
 	:length "918"^^xsd:int .
 
-:_812 :sensor :_811 .
+:_812 :monitoredBy :_811 .
 
 :_813 a :Segment ;
 	:length "116"^^xsd:int .
 
-:_813 :sensor :_811 .
+:_813 :monitoredBy :_811 .
 
 :_814 a :Segment ;
 	:length "513"^^xsd:int .
 
-:_814 :sensor :_811 .
+:_814 :monitoredBy :_811 .
 
 :_815 a :Segment ;
 	:length "105"^^xsd:int .
 
-:_815 :sensor :_811 .
+:_815 :monitoredBy :_811 .
 
 :_816 a :Segment ;
 	:length "481"^^xsd:int .
 
-:_816 :sensor :_811 .
+:_816 :monitoredBy :_811 .
 
 :_817 a :Sensor .
 
@@ -5168,29 +5168,29 @@
 :_818 a :Segment ;
 	:length "843"^^xsd:int .
 
-:_818 :sensor :_817 .
+:_818 :monitoredBy :_817 .
 
 :_819 a :Segment ;
 	:length "403"^^xsd:int .
 
-:_819 :sensor :_817 .
+:_819 :monitoredBy :_817 .
 
 :_820 a :Segment ;
 	:length "568"^^xsd:int .
 
-:_820 :sensor :_817 .
+:_820 :monitoredBy :_817 .
 
 :_821 a :Segment ;
 	:length "977"^^xsd:int .
 
-:_821 :sensor :_817 .
+:_821 :monitoredBy :_817 .
 
 :_822 a :Segment ;
 	:length "772"^^xsd:int .
 
-:_822 :sensor :_817 .
+:_822 :monitoredBy :_817 .
 
-:_768 :sensor :_817 .
+:_768 :monitoredBy :_817 .
 
 :_768 :currentPosition :POSITION_LEFT.
 
@@ -5209,27 +5209,27 @@
 :_826 a :Segment ;
 	:length "867"^^xsd:int .
 
-:_826 :sensor :_825 .
+:_826 :monitoredBy :_825 .
 
 :_827 a :Segment ;
 	:length "732"^^xsd:int .
 
-:_827 :sensor :_825 .
+:_827 :monitoredBy :_825 .
 
 :_828 a :Segment ;
 	:length "415"^^xsd:int .
 
-:_828 :sensor :_825 .
+:_828 :monitoredBy :_825 .
 
 :_829 a :Segment ;
 	:length "517"^^xsd:int .
 
-:_829 :sensor :_825 .
+:_829 :monitoredBy :_825 .
 
 :_830 a :Segment ;
 	:length "200"^^xsd:int .
 
-:_830 :sensor :_825 .
+:_830 :monitoredBy :_825 .
 
 :_831 a :Sensor .
 
@@ -5238,27 +5238,27 @@
 :_832 a :Segment ;
 	:length "991"^^xsd:int .
 
-:_832 :sensor :_831 .
+:_832 :monitoredBy :_831 .
 
 :_833 a :Segment ;
 	:length "715"^^xsd:int .
 
-:_833 :sensor :_831 .
+:_833 :monitoredBy :_831 .
 
 :_834 a :Segment ;
 	:length "341"^^xsd:int .
 
-:_834 :sensor :_831 .
+:_834 :monitoredBy :_831 .
 
 :_835 a :Segment ;
 	:length "185"^^xsd:int .
 
-:_835 :sensor :_831 .
+:_835 :monitoredBy :_831 .
 
 :_836 a :Segment ;
 	:length "155"^^xsd:int .
 
-:_836 :sensor :_831 .
+:_836 :monitoredBy :_831 .
 
 :_837 a :Sensor .
 
@@ -5267,27 +5267,27 @@
 :_838 a :Segment ;
 	:length "22"^^xsd:int .
 
-:_838 :sensor :_837 .
+:_838 :monitoredBy :_837 .
 
 :_839 a :Segment ;
 	:length "964"^^xsd:int .
 
-:_839 :sensor :_837 .
+:_839 :monitoredBy :_837 .
 
 :_840 a :Segment ;
 	:length "528"^^xsd:int .
 
-:_840 :sensor :_837 .
+:_840 :monitoredBy :_837 .
 
 :_841 a :Segment ;
 	:length "918"^^xsd:int .
 
-:_841 :sensor :_837 .
+:_841 :monitoredBy :_837 .
 
 :_842 a :Segment ;
 	:length "153"^^xsd:int .
 
-:_842 :sensor :_837 .
+:_842 :monitoredBy :_837 .
 
 :_843 a :Sensor .
 
@@ -5296,27 +5296,27 @@
 :_844 a :Segment ;
 	:length "997"^^xsd:int .
 
-:_844 :sensor :_843 .
+:_844 :monitoredBy :_843 .
 
 :_845 a :Segment ;
 	:length "940"^^xsd:int .
 
-:_845 :sensor :_843 .
+:_845 :monitoredBy :_843 .
 
 :_846 a :Segment ;
 	:length "255"^^xsd:int .
 
-:_846 :sensor :_843 .
+:_846 :monitoredBy :_843 .
 
 :_847 a :Segment ;
 	:length "283"^^xsd:int .
 
-:_847 :sensor :_843 .
+:_847 :monitoredBy :_843 .
 
 :_848 a :Segment ;
 	:length "387"^^xsd:int .
 
-:_848 :sensor :_843 .
+:_848 :monitoredBy :_843 .
 
 :_849 a :Sensor .
 
@@ -5325,29 +5325,29 @@
 :_850 a :Segment ;
 	:length "848"^^xsd:int .
 
-:_850 :sensor :_849 .
+:_850 :monitoredBy :_849 .
 
 :_851 a :Segment ;
 	:length "630"^^xsd:int .
 
-:_851 :sensor :_849 .
+:_851 :monitoredBy :_849 .
 
 :_852 a :Segment ;
 	:length "428"^^xsd:int .
 
-:_852 :sensor :_849 .
+:_852 :monitoredBy :_849 .
 
 :_853 a :Segment ;
 	:length "663"^^xsd:int .
 
-:_853 :sensor :_849 .
+:_853 :monitoredBy :_849 .
 
 :_854 a :Segment ;
 	:length "986"^^xsd:int .
 
-:_854 :sensor :_849 .
+:_854 :monitoredBy :_849 .
 
-:_824 :sensor :_849 .
+:_824 :monitoredBy :_849 .
 
 :_824 :currentPosition :POSITION_LEFT.
 
@@ -5366,27 +5366,27 @@
 :_858 a :Segment ;
 	:length "979"^^xsd:int .
 
-:_858 :sensor :_857 .
+:_858 :monitoredBy :_857 .
 
 :_859 a :Segment ;
 	:length "391"^^xsd:int .
 
-:_859 :sensor :_857 .
+:_859 :monitoredBy :_857 .
 
 :_860 a :Segment ;
 	:length "858"^^xsd:int .
 
-:_860 :sensor :_857 .
+:_860 :monitoredBy :_857 .
 
 :_861 a :Segment ;
 	:length "43"^^xsd:int .
 
-:_861 :sensor :_857 .
+:_861 :monitoredBy :_857 .
 
 :_862 a :Segment ;
 	:length "658"^^xsd:int .
 
-:_862 :sensor :_857 .
+:_862 :monitoredBy :_857 .
 
 :_863 a :Sensor .
 
@@ -5395,29 +5395,29 @@
 :_864 a :Segment ;
 	:length "118"^^xsd:int .
 
-:_864 :sensor :_863 .
+:_864 :monitoredBy :_863 .
 
 :_865 a :Segment ;
 	:length "243"^^xsd:int .
 
-:_865 :sensor :_863 .
+:_865 :monitoredBy :_863 .
 
 :_866 a :Segment ;
 	:length "665"^^xsd:int .
 
-:_866 :sensor :_863 .
+:_866 :monitoredBy :_863 .
 
 :_867 a :Segment ;
 	:length "557"^^xsd:int .
 
-:_867 :sensor :_863 .
+:_867 :monitoredBy :_863 .
 
 :_868 a :Segment ;
 	:length "199"^^xsd:int .
 
-:_868 :sensor :_863 .
+:_868 :monitoredBy :_863 .
 
-:_856 :sensor :_863 .
+:_856 :monitoredBy :_863 .
 
 :_856 :currentPosition :POSITION_RIGHT.
 
@@ -5436,27 +5436,27 @@
 :_872 a :Segment ;
 	:length "641"^^xsd:int .
 
-:_872 :sensor :_871 .
+:_872 :monitoredBy :_871 .
 
 :_873 a :Segment ;
 	:length "497"^^xsd:int .
 
-:_873 :sensor :_871 .
+:_873 :monitoredBy :_871 .
 
 :_874 a :Segment ;
 	:length "84"^^xsd:int .
 
-:_874 :sensor :_871 .
+:_874 :monitoredBy :_871 .
 
 :_875 a :Segment ;
 	:length "13"^^xsd:int .
 
-:_875 :sensor :_871 .
+:_875 :monitoredBy :_871 .
 
 :_876 a :Segment ;
 	:length "547"^^xsd:int .
 
-:_876 :sensor :_871 .
+:_876 :monitoredBy :_871 .
 
 :_877 a :Sensor .
 
@@ -5465,27 +5465,27 @@
 :_878 a :Segment ;
 	:length "557"^^xsd:int .
 
-:_878 :sensor :_877 .
+:_878 :monitoredBy :_877 .
 
 :_879 a :Segment ;
 	:length "540"^^xsd:int .
 
-:_879 :sensor :_877 .
+:_879 :monitoredBy :_877 .
 
 :_880 a :Segment ;
 	:length "775"^^xsd:int .
 
-:_880 :sensor :_877 .
+:_880 :monitoredBy :_877 .
 
 :_881 a :Segment ;
 	:length "430"^^xsd:int .
 
-:_881 :sensor :_877 .
+:_881 :monitoredBy :_877 .
 
 :_882 a :Segment ;
 	:length "995"^^xsd:int .
 
-:_882 :sensor :_877 .
+:_882 :monitoredBy :_877 .
 
 :_883 a :Sensor .
 
@@ -5494,27 +5494,27 @@
 :_884 a :Segment ;
 	:length "487"^^xsd:int .
 
-:_884 :sensor :_883 .
+:_884 :monitoredBy :_883 .
 
 :_885 a :Segment ;
 	:length "960"^^xsd:int .
 
-:_885 :sensor :_883 .
+:_885 :monitoredBy :_883 .
 
 :_886 a :Segment ;
 	:length "10"^^xsd:int .
 
-:_886 :sensor :_883 .
+:_886 :monitoredBy :_883 .
 
 :_887 a :Segment ;
 	:length "167"^^xsd:int .
 
-:_887 :sensor :_883 .
+:_887 :monitoredBy :_883 .
 
 :_888 a :Segment ;
 	:length "209"^^xsd:int .
 
-:_888 :sensor :_883 .
+:_888 :monitoredBy :_883 .
 
 :_889 a :Sensor .
 
@@ -5523,27 +5523,27 @@
 :_890 a :Segment ;
 	:length "8"^^xsd:int .
 
-:_890 :sensor :_889 .
+:_890 :monitoredBy :_889 .
 
 :_891 a :Segment ;
 	:length "132"^^xsd:int .
 
-:_891 :sensor :_889 .
+:_891 :monitoredBy :_889 .
 
 :_892 a :Segment ;
 	:length "180"^^xsd:int .
 
-:_892 :sensor :_889 .
+:_892 :monitoredBy :_889 .
 
 :_893 a :Segment ;
 	:length "756"^^xsd:int .
 
-:_893 :sensor :_889 .
+:_893 :monitoredBy :_889 .
 
 :_894 a :Segment ;
 	:length "53"^^xsd:int .
 
-:_894 :sensor :_889 .
+:_894 :monitoredBy :_889 .
 
 :_895 a :Sensor .
 
@@ -5552,27 +5552,27 @@
 :_896 a :Segment ;
 	:length "632"^^xsd:int .
 
-:_896 :sensor :_895 .
+:_896 :monitoredBy :_895 .
 
 :_897 a :Segment ;
 	:length "948"^^xsd:int .
 
-:_897 :sensor :_895 .
+:_897 :monitoredBy :_895 .
 
 :_898 a :Segment ;
 	:length "346"^^xsd:int .
 
-:_898 :sensor :_895 .
+:_898 :monitoredBy :_895 .
 
 :_899 a :Segment ;
 	:length "796"^^xsd:int .
 
-:_899 :sensor :_895 .
+:_899 :monitoredBy :_895 .
 
 :_900 a :Segment ;
 	:length "642"^^xsd:int .
 
-:_900 :sensor :_895 .
+:_900 :monitoredBy :_895 .
 
 :_901 a :Sensor .
 
@@ -5581,27 +5581,27 @@
 :_902 a :Segment ;
 	:length "909"^^xsd:int .
 
-:_902 :sensor :_901 .
+:_902 :monitoredBy :_901 .
 
 :_903 a :Segment ;
 	:length "946"^^xsd:int .
 
-:_903 :sensor :_901 .
+:_903 :monitoredBy :_901 .
 
 :_904 a :Segment ;
 	:length "565"^^xsd:int .
 
-:_904 :sensor :_901 .
+:_904 :monitoredBy :_901 .
 
 :_905 a :Segment ;
 	:length "92"^^xsd:int .
 
-:_905 :sensor :_901 .
+:_905 :monitoredBy :_901 .
 
 :_906 a :Segment ;
 	:length "11"^^xsd:int .
 
-:_906 :sensor :_901 .
+:_906 :monitoredBy :_901 .
 
 :_907 a :Sensor .
 
@@ -5610,29 +5610,29 @@
 :_908 a :Segment ;
 	:length "793"^^xsd:int .
 
-:_908 :sensor :_907 .
+:_908 :monitoredBy :_907 .
 
 :_909 a :Segment ;
 	:length "551"^^xsd:int .
 
-:_909 :sensor :_907 .
+:_909 :monitoredBy :_907 .
 
 :_910 a :Segment ;
 	:length "852"^^xsd:int .
 
-:_910 :sensor :_907 .
+:_910 :monitoredBy :_907 .
 
 :_911 a :Segment ;
 	:length "418"^^xsd:int .
 
-:_911 :sensor :_907 .
+:_911 :monitoredBy :_907 .
 
 :_912 a :Segment ;
 	:length "631"^^xsd:int .
 
-:_912 :sensor :_907 .
+:_912 :monitoredBy :_907 .
 
-:_870 :sensor :_907 .
+:_870 :monitoredBy :_907 .
 
 :_870 :currentPosition :POSITION_RIGHT.
 
@@ -6308,27 +6308,27 @@
 :_918 a :Segment ;
 	:length "46"^^xsd:int .
 
-:_918 :sensor :_917 .
+:_918 :monitoredBy :_917 .
 
 :_919 a :Segment ;
 	:length "731"^^xsd:int .
 
-:_919 :sensor :_917 .
+:_919 :monitoredBy :_917 .
 
 :_920 a :Segment ;
 	:length "916"^^xsd:int .
 
-:_920 :sensor :_917 .
+:_920 :monitoredBy :_917 .
 
 :_921 a :Segment ;
 	:length "887"^^xsd:int .
 
-:_921 :sensor :_917 .
+:_921 :monitoredBy :_917 .
 
 :_922 a :Segment ;
 	:length "424"^^xsd:int .
 
-:_922 :sensor :_917 .
+:_922 :monitoredBy :_917 .
 
 :_923 a :Sensor .
 
@@ -6337,27 +6337,27 @@
 :_924 a :Segment ;
 	:length "283"^^xsd:int .
 
-:_924 :sensor :_923 .
+:_924 :monitoredBy :_923 .
 
 :_925 a :Segment ;
 	:length "781"^^xsd:int .
 
-:_925 :sensor :_923 .
+:_925 :monitoredBy :_923 .
 
 :_926 a :Segment ;
 	:length "850"^^xsd:int .
 
-:_926 :sensor :_923 .
+:_926 :monitoredBy :_923 .
 
 :_927 a :Segment ;
 	:length "849"^^xsd:int .
 
-:_927 :sensor :_923 .
+:_927 :monitoredBy :_923 .
 
 :_928 a :Segment ;
 	:length "70"^^xsd:int .
 
-:_928 :sensor :_923 .
+:_928 :monitoredBy :_923 .
 
 :_929 a :Sensor .
 
@@ -6366,27 +6366,27 @@
 :_930 a :Segment ;
 	:length "124"^^xsd:int .
 
-:_930 :sensor :_929 .
+:_930 :monitoredBy :_929 .
 
 :_931 a :Segment ;
 	:length "361"^^xsd:int .
 
-:_931 :sensor :_929 .
+:_931 :monitoredBy :_929 .
 
 :_932 a :Segment ;
 	:length "796"^^xsd:int .
 
-:_932 :sensor :_929 .
+:_932 :monitoredBy :_929 .
 
 :_933 a :Segment ;
 	:length "92"^^xsd:int .
 
-:_933 :sensor :_929 .
+:_933 :monitoredBy :_929 .
 
 :_934 a :Segment ;
 	:length "343"^^xsd:int .
 
-:_934 :sensor :_929 .
+:_934 :monitoredBy :_929 .
 
 :_935 a :Sensor .
 
@@ -6395,27 +6395,27 @@
 :_936 a :Segment ;
 	:length "954"^^xsd:int .
 
-:_936 :sensor :_935 .
+:_936 :monitoredBy :_935 .
 
 :_937 a :Segment ;
 	:length "196"^^xsd:int .
 
-:_937 :sensor :_935 .
+:_937 :monitoredBy :_935 .
 
 :_938 a :Segment ;
 	:length "704"^^xsd:int .
 
-:_938 :sensor :_935 .
+:_938 :monitoredBy :_935 .
 
 :_939 a :Segment ;
 	:length "496"^^xsd:int .
 
-:_939 :sensor :_935 .
+:_939 :monitoredBy :_935 .
 
 :_940 a :Segment ;
 	:length "115"^^xsd:int .
 
-:_940 :sensor :_935 .
+:_940 :monitoredBy :_935 .
 
 :_941 a :Sensor .
 
@@ -6424,27 +6424,27 @@
 :_942 a :Segment ;
 	:length "490"^^xsd:int .
 
-:_942 :sensor :_941 .
+:_942 :monitoredBy :_941 .
 
 :_943 a :Segment ;
 	:length "45"^^xsd:int .
 
-:_943 :sensor :_941 .
+:_943 :monitoredBy :_941 .
 
 :_944 a :Segment ;
 	:length "503"^^xsd:int .
 
-:_944 :sensor :_941 .
+:_944 :monitoredBy :_941 .
 
 :_945 a :Segment ;
 	:length "529"^^xsd:int .
 
-:_945 :sensor :_941 .
+:_945 :monitoredBy :_941 .
 
 :_946 a :Segment ;
 	:length "719"^^xsd:int .
 
-:_946 :sensor :_941 .
+:_946 :monitoredBy :_941 .
 
 :_947 a :Sensor .
 
@@ -6453,29 +6453,29 @@
 :_948 a :Segment ;
 	:length "988"^^xsd:int .
 
-:_948 :sensor :_947 .
+:_948 :monitoredBy :_947 .
 
 :_949 a :Segment ;
 	:length "251"^^xsd:int .
 
-:_949 :sensor :_947 .
+:_949 :monitoredBy :_947 .
 
 :_950 a :Segment ;
 	:length "224"^^xsd:int .
 
-:_950 :sensor :_947 .
+:_950 :monitoredBy :_947 .
 
 :_951 a :Segment ;
 	:length "301"^^xsd:int .
 
-:_951 :sensor :_947 .
+:_951 :monitoredBy :_947 .
 
 :_952 a :Segment ;
 	:length "743"^^xsd:int .
 
-:_952 :sensor :_947 .
+:_952 :monitoredBy :_947 .
 
-:_916 :sensor :_947 .
+:_916 :monitoredBy :_947 .
 
 :_916 :currentPosition :POSITION_RIGHT.
 
@@ -6494,27 +6494,27 @@
 :_956 a :Segment ;
 	:length "804"^^xsd:int .
 
-:_956 :sensor :_955 .
+:_956 :monitoredBy :_955 .
 
 :_957 a :Segment ;
 	:length "925"^^xsd:int .
 
-:_957 :sensor :_955 .
+:_957 :monitoredBy :_955 .
 
 :_958 a :Segment ;
 	:length "764"^^xsd:int .
 
-:_958 :sensor :_955 .
+:_958 :monitoredBy :_955 .
 
 :_959 a :Segment ;
 	:length "574"^^xsd:int .
 
-:_959 :sensor :_955 .
+:_959 :monitoredBy :_955 .
 
 :_960 a :Segment ;
 	:length "41"^^xsd:int .
 
-:_960 :sensor :_955 .
+:_960 :monitoredBy :_955 .
 
 :_961 a :Sensor .
 
@@ -6523,27 +6523,27 @@
 :_962 a :Segment ;
 	:length "821"^^xsd:int .
 
-:_962 :sensor :_961 .
+:_962 :monitoredBy :_961 .
 
 :_963 a :Segment ;
 	:length "44"^^xsd:int .
 
-:_963 :sensor :_961 .
+:_963 :monitoredBy :_961 .
 
 :_964 a :Segment ;
 	:length "327"^^xsd:int .
 
-:_964 :sensor :_961 .
+:_964 :monitoredBy :_961 .
 
 :_965 a :Segment ;
 	:length "12"^^xsd:int .
 
-:_965 :sensor :_961 .
+:_965 :monitoredBy :_961 .
 
 :_966 a :Segment ;
 	:length "459"^^xsd:int .
 
-:_966 :sensor :_961 .
+:_966 :monitoredBy :_961 .
 
 :_967 a :Sensor .
 
@@ -6552,27 +6552,27 @@
 :_968 a :Segment ;
 	:length "488"^^xsd:int .
 
-:_968 :sensor :_967 .
+:_968 :monitoredBy :_967 .
 
 :_969 a :Segment ;
 	:length "894"^^xsd:int .
 
-:_969 :sensor :_967 .
+:_969 :monitoredBy :_967 .
 
 :_970 a :Segment ;
 	:length "691"^^xsd:int .
 
-:_970 :sensor :_967 .
+:_970 :monitoredBy :_967 .
 
 :_971 a :Segment ;
 	:length "546"^^xsd:int .
 
-:_971 :sensor :_967 .
+:_971 :monitoredBy :_967 .
 
 :_972 a :Segment ;
 	:length "610"^^xsd:int .
 
-:_972 :sensor :_967 .
+:_972 :monitoredBy :_967 .
 
 :_973 a :Sensor .
 
@@ -6581,27 +6581,27 @@
 :_974 a :Segment ;
 	:length "234"^^xsd:int .
 
-:_974 :sensor :_973 .
+:_974 :monitoredBy :_973 .
 
 :_975 a :Segment ;
 	:length "951"^^xsd:int .
 
-:_975 :sensor :_973 .
+:_975 :monitoredBy :_973 .
 
 :_976 a :Segment ;
 	:length "553"^^xsd:int .
 
-:_976 :sensor :_973 .
+:_976 :monitoredBy :_973 .
 
 :_977 a :Segment ;
 	:length "303"^^xsd:int .
 
-:_977 :sensor :_973 .
+:_977 :monitoredBy :_973 .
 
 :_978 a :Segment ;
 	:length "208"^^xsd:int .
 
-:_978 :sensor :_973 .
+:_978 :monitoredBy :_973 .
 
 :_979 a :Sensor .
 
@@ -6610,27 +6610,27 @@
 :_980 a :Segment ;
 	:length "672"^^xsd:int .
 
-:_980 :sensor :_979 .
+:_980 :monitoredBy :_979 .
 
 :_981 a :Segment ;
 	:length "340"^^xsd:int .
 
-:_981 :sensor :_979 .
+:_981 :monitoredBy :_979 .
 
 :_982 a :Segment ;
 	:length "366"^^xsd:int .
 
-:_982 :sensor :_979 .
+:_982 :monitoredBy :_979 .
 
 :_983 a :Segment ;
 	:length "128"^^xsd:int .
 
-:_983 :sensor :_979 .
+:_983 :monitoredBy :_979 .
 
 :_984 a :Segment ;
 	:length "833"^^xsd:int .
 
-:_984 :sensor :_979 .
+:_984 :monitoredBy :_979 .
 
 :_985 a :Sensor .
 
@@ -6639,27 +6639,27 @@
 :_986 a :Segment ;
 	:length "871"^^xsd:int .
 
-:_986 :sensor :_985 .
+:_986 :monitoredBy :_985 .
 
 :_987 a :Segment ;
 	:length "878"^^xsd:int .
 
-:_987 :sensor :_985 .
+:_987 :monitoredBy :_985 .
 
 :_988 a :Segment ;
 	:length "535"^^xsd:int .
 
-:_988 :sensor :_985 .
+:_988 :monitoredBy :_985 .
 
 :_989 a :Segment ;
 	:length "381"^^xsd:int .
 
-:_989 :sensor :_985 .
+:_989 :monitoredBy :_985 .
 
 :_990 a :Segment ;
 	:length "890"^^xsd:int .
 
-:_990 :sensor :_985 .
+:_990 :monitoredBy :_985 .
 
 :_991 a :Sensor .
 
@@ -6668,27 +6668,27 @@
 :_992 a :Segment ;
 	:length "963"^^xsd:int .
 
-:_992 :sensor :_991 .
+:_992 :monitoredBy :_991 .
 
 :_993 a :Segment ;
 	:length "313"^^xsd:int .
 
-:_993 :sensor :_991 .
+:_993 :monitoredBy :_991 .
 
 :_994 a :Segment ;
 	:length "917"^^xsd:int .
 
-:_994 :sensor :_991 .
+:_994 :monitoredBy :_991 .
 
 :_995 a :Segment ;
 	:length "941"^^xsd:int .
 
-:_995 :sensor :_991 .
+:_995 :monitoredBy :_991 .
 
 :_996 a :Segment ;
 	:length "60"^^xsd:int .
 
-:_996 :sensor :_991 .
+:_996 :monitoredBy :_991 .
 
 :_997 a :Sensor .
 
@@ -6697,29 +6697,29 @@
 :_998 a :Segment ;
 	:length "667"^^xsd:int .
 
-:_998 :sensor :_997 .
+:_998 :monitoredBy :_997 .
 
 :_999 a :Segment ;
 	:length "589"^^xsd:int .
 
-:_999 :sensor :_997 .
+:_999 :monitoredBy :_997 .
 
 :_1000 a :Segment ;
 	:length "829"^^xsd:int .
 
-:_1000 :sensor :_997 .
+:_1000 :monitoredBy :_997 .
 
 :_1001 a :Segment ;
 	:length "99"^^xsd:int .
 
-:_1001 :sensor :_997 .
+:_1001 :monitoredBy :_997 .
 
 :_1002 a :Segment ;
 	:length "175"^^xsd:int .
 
-:_1002 :sensor :_997 .
+:_1002 :monitoredBy :_997 .
 
-:_954 :sensor :_997 .
+:_954 :monitoredBy :_997 .
 
 :_954 :currentPosition :POSITION_RIGHT.
 
@@ -6886,27 +6886,27 @@
 :_1007 a :Segment ;
 	:length "2"^^xsd:int .
 
-:_1007 :sensor :_1006 .
+:_1007 :monitoredBy :_1006 .
 
 :_1008 a :Segment ;
 	:length "186"^^xsd:int .
 
-:_1008 :sensor :_1006 .
+:_1008 :monitoredBy :_1006 .
 
 :_1009 a :Segment ;
 	:length "560"^^xsd:int .
 
-:_1009 :sensor :_1006 .
+:_1009 :monitoredBy :_1006 .
 
 :_1010 a :Segment ;
 	:length "801"^^xsd:int .
 
-:_1010 :sensor :_1006 .
+:_1010 :monitoredBy :_1006 .
 
 :_1011 a :Segment ;
 	:length "257"^^xsd:int .
 
-:_1011 :sensor :_1006 .
+:_1011 :monitoredBy :_1006 .
 
 :_1012 a :Sensor .
 
@@ -6915,27 +6915,27 @@
 :_1013 a :Segment ;
 	:length "131"^^xsd:int .
 
-:_1013 :sensor :_1012 .
+:_1013 :monitoredBy :_1012 .
 
 :_1014 a :Segment ;
 	:length "320"^^xsd:int .
 
-:_1014 :sensor :_1012 .
+:_1014 :monitoredBy :_1012 .
 
 :_1015 a :Segment ;
 	:length "188"^^xsd:int .
 
-:_1015 :sensor :_1012 .
+:_1015 :monitoredBy :_1012 .
 
 :_1016 a :Segment ;
 	:length "832"^^xsd:int .
 
-:_1016 :sensor :_1012 .
+:_1016 :monitoredBy :_1012 .
 
 :_1017 a :Segment ;
 	:length "250"^^xsd:int .
 
-:_1017 :sensor :_1012 .
+:_1017 :monitoredBy :_1012 .
 
 :_1018 a :Sensor .
 
@@ -6944,27 +6944,27 @@
 :_1019 a :Segment ;
 	:length "63"^^xsd:int .
 
-:_1019 :sensor :_1018 .
+:_1019 :monitoredBy :_1018 .
 
 :_1020 a :Segment ;
 	:length "653"^^xsd:int .
 
-:_1020 :sensor :_1018 .
+:_1020 :monitoredBy :_1018 .
 
 :_1021 a :Segment ;
 	:length "323"^^xsd:int .
 
-:_1021 :sensor :_1018 .
+:_1021 :monitoredBy :_1018 .
 
 :_1022 a :Segment ;
 	:length "172"^^xsd:int .
 
-:_1022 :sensor :_1018 .
+:_1022 :monitoredBy :_1018 .
 
 :_1023 a :Segment ;
 	:length "756"^^xsd:int .
 
-:_1023 :sensor :_1018 .
+:_1023 :monitoredBy :_1018 .
 
 :_1024 a :Sensor .
 
@@ -6973,27 +6973,27 @@
 :_1025 a :Segment ;
 	:length "360"^^xsd:int .
 
-:_1025 :sensor :_1024 .
+:_1025 :monitoredBy :_1024 .
 
 :_1026 a :Segment ;
 	:length "430"^^xsd:int .
 
-:_1026 :sensor :_1024 .
+:_1026 :monitoredBy :_1024 .
 
 :_1027 a :Segment ;
 	:length "915"^^xsd:int .
 
-:_1027 :sensor :_1024 .
+:_1027 :monitoredBy :_1024 .
 
 :_1028 a :Segment ;
 	:length "51"^^xsd:int .
 
-:_1028 :sensor :_1024 .
+:_1028 :monitoredBy :_1024 .
 
 :_1029 a :Segment ;
 	:length "676"^^xsd:int .
 
-:_1029 :sensor :_1024 .
+:_1029 :monitoredBy :_1024 .
 
 :_1030 a :Sensor .
 
@@ -7002,27 +7002,27 @@
 :_1031 a :Segment ;
 	:length "649"^^xsd:int .
 
-:_1031 :sensor :_1030 .
+:_1031 :monitoredBy :_1030 .
 
 :_1032 a :Segment ;
 	:length "135"^^xsd:int .
 
-:_1032 :sensor :_1030 .
+:_1032 :monitoredBy :_1030 .
 
 :_1033 a :Segment ;
 	:length "267"^^xsd:int .
 
-:_1033 :sensor :_1030 .
+:_1033 :monitoredBy :_1030 .
 
 :_1034 a :Segment ;
 	:length "771"^^xsd:int .
 
-:_1034 :sensor :_1030 .
+:_1034 :monitoredBy :_1030 .
 
 :_1035 a :Segment ;
 	:length "261"^^xsd:int .
 
-:_1035 :sensor :_1030 .
+:_1035 :monitoredBy :_1030 .
 
 :_1036 a :Sensor .
 
@@ -7031,29 +7031,29 @@
 :_1037 a :Segment ;
 	:length "14"^^xsd:int .
 
-:_1037 :sensor :_1036 .
+:_1037 :monitoredBy :_1036 .
 
 :_1038 a :Segment ;
 	:length "406"^^xsd:int .
 
-:_1038 :sensor :_1036 .
+:_1038 :monitoredBy :_1036 .
 
 :_1039 a :Segment ;
 	:length "918"^^xsd:int .
 
-:_1039 :sensor :_1036 .
+:_1039 :monitoredBy :_1036 .
 
 :_1040 a :Segment ;
 	:length "185"^^xsd:int .
 
-:_1040 :sensor :_1036 .
+:_1040 :monitoredBy :_1036 .
 
 :_1041 a :Segment ;
 	:length "525"^^xsd:int .
 
-:_1041 :sensor :_1036 .
+:_1041 :monitoredBy :_1036 .
 
-:_1005 :sensor :_1036 .
+:_1005 :monitoredBy :_1036 .
 
 :_1005 :currentPosition :POSITION_LEFT.
 
@@ -7072,27 +7072,27 @@
 :_1045 a :Segment ;
 	:length "898"^^xsd:int .
 
-:_1045 :sensor :_1044 .
+:_1045 :monitoredBy :_1044 .
 
 :_1046 a :Segment ;
 	:length "526"^^xsd:int .
 
-:_1046 :sensor :_1044 .
+:_1046 :monitoredBy :_1044 .
 
 :_1047 a :Segment ;
 	:length "489"^^xsd:int .
 
-:_1047 :sensor :_1044 .
+:_1047 :monitoredBy :_1044 .
 
 :_1048 a :Segment ;
 	:length "653"^^xsd:int .
 
-:_1048 :sensor :_1044 .
+:_1048 :monitoredBy :_1044 .
 
 :_1049 a :Segment ;
 	:length "412"^^xsd:int .
 
-:_1049 :sensor :_1044 .
+:_1049 :monitoredBy :_1044 .
 
 :_1050 a :Sensor .
 
@@ -7101,27 +7101,27 @@
 :_1051 a :Segment ;
 	:length "606"^^xsd:int .
 
-:_1051 :sensor :_1050 .
+:_1051 :monitoredBy :_1050 .
 
 :_1052 a :Segment ;
 	:length "980"^^xsd:int .
 
-:_1052 :sensor :_1050 .
+:_1052 :monitoredBy :_1050 .
 
 :_1053 a :Segment ;
 	:length "913"^^xsd:int .
 
-:_1053 :sensor :_1050 .
+:_1053 :monitoredBy :_1050 .
 
 :_1054 a :Segment ;
 	:length "282"^^xsd:int .
 
-:_1054 :sensor :_1050 .
+:_1054 :monitoredBy :_1050 .
 
 :_1055 a :Segment ;
 	:length "548"^^xsd:int .
 
-:_1055 :sensor :_1050 .
+:_1055 :monitoredBy :_1050 .
 
 :_1056 a :Sensor .
 
@@ -7130,29 +7130,29 @@
 :_1057 a :Segment ;
 	:length "890"^^xsd:int .
 
-:_1057 :sensor :_1056 .
+:_1057 :monitoredBy :_1056 .
 
 :_1058 a :Segment ;
 	:length "599"^^xsd:int .
 
-:_1058 :sensor :_1056 .
+:_1058 :monitoredBy :_1056 .
 
 :_1059 a :Segment ;
 	:length "470"^^xsd:int .
 
-:_1059 :sensor :_1056 .
+:_1059 :monitoredBy :_1056 .
 
 :_1060 a :Segment ;
 	:length "188"^^xsd:int .
 
-:_1060 :sensor :_1056 .
+:_1060 :monitoredBy :_1056 .
 
 :_1061 a :Segment ;
 	:length "66"^^xsd:int .
 
-:_1061 :sensor :_1056 .
+:_1061 :monitoredBy :_1056 .
 
-:_1043 :sensor :_1056 .
+:_1043 :monitoredBy :_1056 .
 
 :_1043 :currentPosition :POSITION_FAILURE.
 
@@ -7171,27 +7171,27 @@
 :_1065 a :Segment ;
 	:length "423"^^xsd:int .
 
-:_1065 :sensor :_1064 .
+:_1065 :monitoredBy :_1064 .
 
 :_1066 a :Segment ;
 	:length "463"^^xsd:int .
 
-:_1066 :sensor :_1064 .
+:_1066 :monitoredBy :_1064 .
 
 :_1067 a :Segment ;
 	:length "734"^^xsd:int .
 
-:_1067 :sensor :_1064 .
+:_1067 :monitoredBy :_1064 .
 
 :_1068 a :Segment ;
 	:length "921"^^xsd:int .
 
-:_1068 :sensor :_1064 .
+:_1068 :monitoredBy :_1064 .
 
 :_1069 a :Segment ;
 	:length "527"^^xsd:int .
 
-:_1069 :sensor :_1064 .
+:_1069 :monitoredBy :_1064 .
 
 :_1070 a :Sensor .
 
@@ -7200,27 +7200,27 @@
 :_1071 a :Segment ;
 	:length "939"^^xsd:int .
 
-:_1071 :sensor :_1070 .
+:_1071 :monitoredBy :_1070 .
 
 :_1072 a :Segment ;
 	:length "950"^^xsd:int .
 
-:_1072 :sensor :_1070 .
+:_1072 :monitoredBy :_1070 .
 
 :_1073 a :Segment ;
 	:length "436"^^xsd:int .
 
-:_1073 :sensor :_1070 .
+:_1073 :monitoredBy :_1070 .
 
 :_1074 a :Segment ;
 	:length "11"^^xsd:int .
 
-:_1074 :sensor :_1070 .
+:_1074 :monitoredBy :_1070 .
 
 :_1075 a :Segment ;
 	:length "935"^^xsd:int .
 
-:_1075 :sensor :_1070 .
+:_1075 :monitoredBy :_1070 .
 
 :_1076 a :Sensor .
 
@@ -7229,27 +7229,27 @@
 :_1077 a :Segment ;
 	:length "760"^^xsd:int .
 
-:_1077 :sensor :_1076 .
+:_1077 :monitoredBy :_1076 .
 
 :_1078 a :Segment ;
 	:length "488"^^xsd:int .
 
-:_1078 :sensor :_1076 .
+:_1078 :monitoredBy :_1076 .
 
 :_1079 a :Segment ;
 	:length "912"^^xsd:int .
 
-:_1079 :sensor :_1076 .
+:_1079 :monitoredBy :_1076 .
 
 :_1080 a :Segment ;
 	:length "945"^^xsd:int .
 
-:_1080 :sensor :_1076 .
+:_1080 :monitoredBy :_1076 .
 
 :_1081 a :Segment ;
 	:length "601"^^xsd:int .
 
-:_1081 :sensor :_1076 .
+:_1081 :monitoredBy :_1076 .
 
 :_1082 a :Sensor .
 
@@ -7258,27 +7258,27 @@
 :_1083 a :Segment ;
 	:length "90"^^xsd:int .
 
-:_1083 :sensor :_1082 .
+:_1083 :monitoredBy :_1082 .
 
 :_1084 a :Segment ;
 	:length "974"^^xsd:int .
 
-:_1084 :sensor :_1082 .
+:_1084 :monitoredBy :_1082 .
 
 :_1085 a :Segment ;
 	:length "205"^^xsd:int .
 
-:_1085 :sensor :_1082 .
+:_1085 :monitoredBy :_1082 .
 
 :_1086 a :Segment ;
 	:length "692"^^xsd:int .
 
-:_1086 :sensor :_1082 .
+:_1086 :monitoredBy :_1082 .
 
 :_1087 a :Segment ;
 	:length "350"^^xsd:int .
 
-:_1087 :sensor :_1082 .
+:_1087 :monitoredBy :_1082 .
 
 :_1088 a :Sensor .
 
@@ -7287,27 +7287,27 @@
 :_1089 a :Segment ;
 	:length "7"^^xsd:int .
 
-:_1089 :sensor :_1088 .
+:_1089 :monitoredBy :_1088 .
 
 :_1090 a :Segment ;
 	:length "536"^^xsd:int .
 
-:_1090 :sensor :_1088 .
+:_1090 :monitoredBy :_1088 .
 
 :_1091 a :Segment ;
 	:length "502"^^xsd:int .
 
-:_1091 :sensor :_1088 .
+:_1091 :monitoredBy :_1088 .
 
 :_1092 a :Segment ;
 	:length "791"^^xsd:int .
 
-:_1092 :sensor :_1088 .
+:_1092 :monitoredBy :_1088 .
 
 :_1093 a :Segment ;
 	:length "688"^^xsd:int .
 
-:_1093 :sensor :_1088 .
+:_1093 :monitoredBy :_1088 .
 
 :_1094 a :Sensor .
 
@@ -7316,27 +7316,27 @@
 :_1095 a :Segment ;
 	:length "878"^^xsd:int .
 
-:_1095 :sensor :_1094 .
+:_1095 :monitoredBy :_1094 .
 
 :_1096 a :Segment ;
 	:length "190"^^xsd:int .
 
-:_1096 :sensor :_1094 .
+:_1096 :monitoredBy :_1094 .
 
 :_1097 a :Segment ;
 	:length "214"^^xsd:int .
 
-:_1097 :sensor :_1094 .
+:_1097 :monitoredBy :_1094 .
 
 :_1098 a :Segment ;
 	:length "867"^^xsd:int .
 
-:_1098 :sensor :_1094 .
+:_1098 :monitoredBy :_1094 .
 
 :_1099 a :Segment ;
 	:length "213"^^xsd:int .
 
-:_1099 :sensor :_1094 .
+:_1099 :monitoredBy :_1094 .
 
 :_1100 a :Sensor .
 
@@ -7345,27 +7345,27 @@
 :_1101 a :Segment ;
 	:length "127"^^xsd:int .
 
-:_1101 :sensor :_1100 .
+:_1101 :monitoredBy :_1100 .
 
 :_1102 a :Segment ;
 	:length "547"^^xsd:int .
 
-:_1102 :sensor :_1100 .
+:_1102 :monitoredBy :_1100 .
 
 :_1103 a :Segment ;
 	:length "857"^^xsd:int .
 
-:_1103 :sensor :_1100 .
+:_1103 :monitoredBy :_1100 .
 
 :_1104 a :Segment ;
 	:length "393"^^xsd:int .
 
-:_1104 :sensor :_1100 .
+:_1104 :monitoredBy :_1100 .
 
 :_1105 a :Segment ;
 	:length "862"^^xsd:int .
 
-:_1105 :sensor :_1100 .
+:_1105 :monitoredBy :_1100 .
 
 :_1106 a :Sensor .
 
@@ -7374,29 +7374,29 @@
 :_1107 a :Segment ;
 	:length "54"^^xsd:int .
 
-:_1107 :sensor :_1106 .
+:_1107 :monitoredBy :_1106 .
 
 :_1108 a :Segment ;
 	:length "364"^^xsd:int .
 
-:_1108 :sensor :_1106 .
+:_1108 :monitoredBy :_1106 .
 
 :_1109 a :Segment ;
 	:length "773"^^xsd:int .
 
-:_1109 :sensor :_1106 .
+:_1109 :monitoredBy :_1106 .
 
 :_1110 a :Segment ;
 	:length "271"^^xsd:int .
 
-:_1110 :sensor :_1106 .
+:_1110 :monitoredBy :_1106 .
 
 :_1111 a :Segment ;
 	:length "847"^^xsd:int .
 
-:_1111 :sensor :_1106 .
+:_1111 :monitoredBy :_1106 .
 
-:_1063 :sensor :_1106 .
+:_1063 :monitoredBy :_1106 .
 
 :_1063 :currentPosition :POSITION_RIGHT.
 
@@ -7415,27 +7415,27 @@
 :_1115 a :Segment ;
 	:length "267"^^xsd:int .
 
-:_1115 :sensor :_1114 .
+:_1115 :monitoredBy :_1114 .
 
 :_1116 a :Segment ;
 	:length "618"^^xsd:int .
 
-:_1116 :sensor :_1114 .
+:_1116 :monitoredBy :_1114 .
 
 :_1117 a :Segment ;
 	:length "961"^^xsd:int .
 
-:_1117 :sensor :_1114 .
+:_1117 :monitoredBy :_1114 .
 
 :_1118 a :Segment ;
 	:length "731"^^xsd:int .
 
-:_1118 :sensor :_1114 .
+:_1118 :monitoredBy :_1114 .
 
 :_1119 a :Segment ;
 	:length "601"^^xsd:int .
 
-:_1119 :sensor :_1114 .
+:_1119 :monitoredBy :_1114 .
 
 :_1120 a :Sensor .
 
@@ -7444,27 +7444,27 @@
 :_1121 a :Segment ;
 	:length "183"^^xsd:int .
 
-:_1121 :sensor :_1120 .
+:_1121 :monitoredBy :_1120 .
 
 :_1122 a :Segment ;
 	:length "433"^^xsd:int .
 
-:_1122 :sensor :_1120 .
+:_1122 :monitoredBy :_1120 .
 
 :_1123 a :Segment ;
 	:length "35"^^xsd:int .
 
-:_1123 :sensor :_1120 .
+:_1123 :monitoredBy :_1120 .
 
 :_1124 a :Segment ;
 	:length "996"^^xsd:int .
 
-:_1124 :sensor :_1120 .
+:_1124 :monitoredBy :_1120 .
 
 :_1125 a :Segment ;
 	:length "428"^^xsd:int .
 
-:_1125 :sensor :_1120 .
+:_1125 :monitoredBy :_1120 .
 
 :_1126 a :Sensor .
 
@@ -7473,29 +7473,29 @@
 :_1127 a :Segment ;
 	:length "422"^^xsd:int .
 
-:_1127 :sensor :_1126 .
+:_1127 :monitoredBy :_1126 .
 
 :_1128 a :Segment ;
 	:length "691"^^xsd:int .
 
-:_1128 :sensor :_1126 .
+:_1128 :monitoredBy :_1126 .
 
 :_1129 a :Segment ;
 	:length "527"^^xsd:int .
 
-:_1129 :sensor :_1126 .
+:_1129 :monitoredBy :_1126 .
 
 :_1130 a :Segment ;
 	:length "927"^^xsd:int .
 
-:_1130 :sensor :_1126 .
+:_1130 :monitoredBy :_1126 .
 
 :_1131 a :Segment ;
 	:length "152"^^xsd:int .
 
-:_1131 :sensor :_1126 .
+:_1131 :monitoredBy :_1126 .
 
-:_1113 :sensor :_1126 .
+:_1113 :monitoredBy :_1126 .
 
 :_1113 :currentPosition :POSITION_LEFT.
 
@@ -7514,27 +7514,27 @@
 :_1135 a :Segment ;
 	:length "481"^^xsd:int .
 
-:_1135 :sensor :_1134 .
+:_1135 :monitoredBy :_1134 .
 
 :_1136 a :Segment ;
 	:length "155"^^xsd:int .
 
-:_1136 :sensor :_1134 .
+:_1136 :monitoredBy :_1134 .
 
 :_1137 a :Segment ;
 	:length "572"^^xsd:int .
 
-:_1137 :sensor :_1134 .
+:_1137 :monitoredBy :_1134 .
 
 :_1138 a :Segment ;
 	:length "165"^^xsd:int .
 
-:_1138 :sensor :_1134 .
+:_1138 :monitoredBy :_1134 .
 
 :_1139 a :Segment ;
 	:length "954"^^xsd:int .
 
-:_1139 :sensor :_1134 .
+:_1139 :monitoredBy :_1134 .
 
 :_1140 a :Sensor .
 
@@ -7543,27 +7543,27 @@
 :_1141 a :Segment ;
 	:length "929"^^xsd:int .
 
-:_1141 :sensor :_1140 .
+:_1141 :monitoredBy :_1140 .
 
 :_1142 a :Segment ;
 	:length "849"^^xsd:int .
 
-:_1142 :sensor :_1140 .
+:_1142 :monitoredBy :_1140 .
 
 :_1143 a :Segment ;
 	:length "568"^^xsd:int .
 
-:_1143 :sensor :_1140 .
+:_1143 :monitoredBy :_1140 .
 
 :_1144 a :Segment ;
 	:length "867"^^xsd:int .
 
-:_1144 :sensor :_1140 .
+:_1144 :monitoredBy :_1140 .
 
 :_1145 a :Segment ;
 	:length "620"^^xsd:int .
 
-:_1145 :sensor :_1140 .
+:_1145 :monitoredBy :_1140 .
 
 :_1146 a :Sensor .
 
@@ -7572,27 +7572,27 @@
 :_1147 a :Segment ;
 	:length "857"^^xsd:int .
 
-:_1147 :sensor :_1146 .
+:_1147 :monitoredBy :_1146 .
 
 :_1148 a :Segment ;
 	:length "527"^^xsd:int .
 
-:_1148 :sensor :_1146 .
+:_1148 :monitoredBy :_1146 .
 
 :_1149 a :Segment ;
 	:length "492"^^xsd:int .
 
-:_1149 :sensor :_1146 .
+:_1149 :monitoredBy :_1146 .
 
 :_1150 a :Segment ;
 	:length "69"^^xsd:int .
 
-:_1150 :sensor :_1146 .
+:_1150 :monitoredBy :_1146 .
 
 :_1151 a :Segment ;
 	:length "85"^^xsd:int .
 
-:_1151 :sensor :_1146 .
+:_1151 :monitoredBy :_1146 .
 
 :_1152 a :Sensor .
 
@@ -7601,27 +7601,27 @@
 :_1153 a :Segment ;
 	:length "234"^^xsd:int .
 
-:_1153 :sensor :_1152 .
+:_1153 :monitoredBy :_1152 .
 
 :_1154 a :Segment ;
 	:length "627"^^xsd:int .
 
-:_1154 :sensor :_1152 .
+:_1154 :monitoredBy :_1152 .
 
 :_1155 a :Segment ;
 	:length "94"^^xsd:int .
 
-:_1155 :sensor :_1152 .
+:_1155 :monitoredBy :_1152 .
 
 :_1156 a :Segment ;
 	:length "180"^^xsd:int .
 
-:_1156 :sensor :_1152 .
+:_1156 :monitoredBy :_1152 .
 
 :_1157 a :Segment ;
 	:length "848"^^xsd:int .
 
-:_1157 :sensor :_1152 .
+:_1157 :monitoredBy :_1152 .
 
 :_1158 a :Sensor .
 
@@ -7630,27 +7630,27 @@
 :_1159 a :Segment ;
 	:length "200"^^xsd:int .
 
-:_1159 :sensor :_1158 .
+:_1159 :monitoredBy :_1158 .
 
 :_1160 a :Segment ;
 	:length "494"^^xsd:int .
 
-:_1160 :sensor :_1158 .
+:_1160 :monitoredBy :_1158 .
 
 :_1161 a :Segment ;
 	:length "836"^^xsd:int .
 
-:_1161 :sensor :_1158 .
+:_1161 :monitoredBy :_1158 .
 
 :_1162 a :Segment ;
 	:length "652"^^xsd:int .
 
-:_1162 :sensor :_1158 .
+:_1162 :monitoredBy :_1158 .
 
 :_1163 a :Segment ;
 	:length "873"^^xsd:int .
 
-:_1163 :sensor :_1158 .
+:_1163 :monitoredBy :_1158 .
 
 :_1164 a :Sensor .
 
@@ -7659,27 +7659,27 @@
 :_1165 a :Segment ;
 	:length "533"^^xsd:int .
 
-:_1165 :sensor :_1164 .
+:_1165 :monitoredBy :_1164 .
 
 :_1166 a :Segment ;
 	:length "688"^^xsd:int .
 
-:_1166 :sensor :_1164 .
+:_1166 :monitoredBy :_1164 .
 
 :_1167 a :Segment ;
 	:length "953"^^xsd:int .
 
-:_1167 :sensor :_1164 .
+:_1167 :monitoredBy :_1164 .
 
 :_1168 a :Segment ;
 	:length "322"^^xsd:int .
 
-:_1168 :sensor :_1164 .
+:_1168 :monitoredBy :_1164 .
 
 :_1169 a :Segment ;
 	:length "372"^^xsd:int .
 
-:_1169 :sensor :_1164 .
+:_1169 :monitoredBy :_1164 .
 
 :_1170 a :Sensor .
 
@@ -7688,29 +7688,29 @@
 :_1171 a :Segment ;
 	:length "907"^^xsd:int .
 
-:_1171 :sensor :_1170 .
+:_1171 :monitoredBy :_1170 .
 
 :_1172 a :Segment ;
 	:length "627"^^xsd:int .
 
-:_1172 :sensor :_1170 .
+:_1172 :monitoredBy :_1170 .
 
 :_1173 a :Segment ;
 	:length "125"^^xsd:int .
 
-:_1173 :sensor :_1170 .
+:_1173 :monitoredBy :_1170 .
 
 :_1174 a :Segment ;
 	:length "728"^^xsd:int .
 
-:_1174 :sensor :_1170 .
+:_1174 :monitoredBy :_1170 .
 
 :_1175 a :Segment ;
 	:length "634"^^xsd:int .
 
-:_1175 :sensor :_1170 .
+:_1175 :monitoredBy :_1170 .
 
-:_1133 :sensor :_1170 .
+:_1133 :monitoredBy :_1170 .
 
 :_1133 :currentPosition :POSITION_LEFT.
 
@@ -7729,27 +7729,27 @@
 :_1179 a :Segment ;
 	:length "780"^^xsd:int .
 
-:_1179 :sensor :_1178 .
+:_1179 :monitoredBy :_1178 .
 
 :_1180 a :Segment ;
 	:length "911"^^xsd:int .
 
-:_1180 :sensor :_1178 .
+:_1180 :monitoredBy :_1178 .
 
 :_1181 a :Segment ;
 	:length "774"^^xsd:int .
 
-:_1181 :sensor :_1178 .
+:_1181 :monitoredBy :_1178 .
 
 :_1182 a :Segment ;
 	:length "68"^^xsd:int .
 
-:_1182 :sensor :_1178 .
+:_1182 :monitoredBy :_1178 .
 
 :_1183 a :Segment ;
 	:length "2"^^xsd:int .
 
-:_1183 :sensor :_1178 .
+:_1183 :monitoredBy :_1178 .
 
 :_1184 a :Sensor .
 
@@ -7758,27 +7758,27 @@
 :_1185 a :Segment ;
 	:length "560"^^xsd:int .
 
-:_1185 :sensor :_1184 .
+:_1185 :monitoredBy :_1184 .
 
 :_1186 a :Segment ;
 	:length "684"^^xsd:int .
 
-:_1186 :sensor :_1184 .
+:_1186 :monitoredBy :_1184 .
 
 :_1187 a :Segment ;
 	:length "669"^^xsd:int .
 
-:_1187 :sensor :_1184 .
+:_1187 :monitoredBy :_1184 .
 
 :_1188 a :Segment ;
 	:length "461"^^xsd:int .
 
-:_1188 :sensor :_1184 .
+:_1188 :monitoredBy :_1184 .
 
 :_1189 a :Segment ;
 	:length "547"^^xsd:int .
 
-:_1189 :sensor :_1184 .
+:_1189 :monitoredBy :_1184 .
 
 :_1190 a :Sensor .
 
@@ -7787,27 +7787,27 @@
 :_1191 a :Segment ;
 	:length "274"^^xsd:int .
 
-:_1191 :sensor :_1190 .
+:_1191 :monitoredBy :_1190 .
 
 :_1192 a :Segment ;
 	:length "743"^^xsd:int .
 
-:_1192 :sensor :_1190 .
+:_1192 :monitoredBy :_1190 .
 
 :_1193 a :Segment ;
 	:length "932"^^xsd:int .
 
-:_1193 :sensor :_1190 .
+:_1193 :monitoredBy :_1190 .
 
 :_1194 a :Segment ;
 	:length "336"^^xsd:int .
 
-:_1194 :sensor :_1190 .
+:_1194 :monitoredBy :_1190 .
 
 :_1195 a :Segment ;
 	:length "78"^^xsd:int .
 
-:_1195 :sensor :_1190 .
+:_1195 :monitoredBy :_1190 .
 
 :_1196 a :Sensor .
 
@@ -7816,27 +7816,27 @@
 :_1197 a :Segment ;
 	:length "691"^^xsd:int .
 
-:_1197 :sensor :_1196 .
+:_1197 :monitoredBy :_1196 .
 
 :_1198 a :Segment ;
 	:length "453"^^xsd:int .
 
-:_1198 :sensor :_1196 .
+:_1198 :monitoredBy :_1196 .
 
 :_1199 a :Segment ;
 	:length "171"^^xsd:int .
 
-:_1199 :sensor :_1196 .
+:_1199 :monitoredBy :_1196 .
 
 :_1200 a :Segment ;
 	:length "880"^^xsd:int .
 
-:_1200 :sensor :_1196 .
+:_1200 :monitoredBy :_1196 .
 
 :_1201 a :Segment ;
 	:length "512"^^xsd:int .
 
-:_1201 :sensor :_1196 .
+:_1201 :monitoredBy :_1196 .
 
 :_1202 a :Sensor .
 
@@ -7845,27 +7845,27 @@
 :_1203 a :Segment ;
 	:length "225"^^xsd:int .
 
-:_1203 :sensor :_1202 .
+:_1203 :monitoredBy :_1202 .
 
 :_1204 a :Segment ;
 	:length "366"^^xsd:int .
 
-:_1204 :sensor :_1202 .
+:_1204 :monitoredBy :_1202 .
 
 :_1205 a :Segment ;
 	:length "631"^^xsd:int .
 
-:_1205 :sensor :_1202 .
+:_1205 :monitoredBy :_1202 .
 
 :_1206 a :Segment ;
 	:length "467"^^xsd:int .
 
-:_1206 :sensor :_1202 .
+:_1206 :monitoredBy :_1202 .
 
 :_1207 a :Segment ;
 	:length "381"^^xsd:int .
 
-:_1207 :sensor :_1202 .
+:_1207 :monitoredBy :_1202 .
 
 :_1208 a :Sensor .
 
@@ -7874,27 +7874,27 @@
 :_1209 a :Segment ;
 	:length "108"^^xsd:int .
 
-:_1209 :sensor :_1208 .
+:_1209 :monitoredBy :_1208 .
 
 :_1210 a :Segment ;
 	:length "424"^^xsd:int .
 
-:_1210 :sensor :_1208 .
+:_1210 :monitoredBy :_1208 .
 
 :_1211 a :Segment ;
 	:length "836"^^xsd:int .
 
-:_1211 :sensor :_1208 .
+:_1211 :monitoredBy :_1208 .
 
 :_1212 a :Segment ;
 	:length "314"^^xsd:int .
 
-:_1212 :sensor :_1208 .
+:_1212 :monitoredBy :_1208 .
 
 :_1213 a :Segment ;
 	:length "287"^^xsd:int .
 
-:_1213 :sensor :_1208 .
+:_1213 :monitoredBy :_1208 .
 
 :_1214 a :Sensor .
 
@@ -7903,27 +7903,27 @@
 :_1215 a :Segment ;
 	:length "416"^^xsd:int .
 
-:_1215 :sensor :_1214 .
+:_1215 :monitoredBy :_1214 .
 
 :_1216 a :Segment ;
 	:length "27"^^xsd:int .
 
-:_1216 :sensor :_1214 .
+:_1216 :monitoredBy :_1214 .
 
 :_1217 a :Segment ;
 	:length "57"^^xsd:int .
 
-:_1217 :sensor :_1214 .
+:_1217 :monitoredBy :_1214 .
 
 :_1218 a :Segment ;
 	:length "702"^^xsd:int .
 
-:_1218 :sensor :_1214 .
+:_1218 :monitoredBy :_1214 .
 
 :_1219 a :Segment ;
 	:length "770"^^xsd:int .
 
-:_1219 :sensor :_1214 .
+:_1219 :monitoredBy :_1214 .
 
 :_1220 a :Sensor .
 
@@ -7932,27 +7932,27 @@
 :_1221 a :Segment ;
 	:length "93"^^xsd:int .
 
-:_1221 :sensor :_1220 .
+:_1221 :monitoredBy :_1220 .
 
 :_1222 a :Segment ;
 	:length "878"^^xsd:int .
 
-:_1222 :sensor :_1220 .
+:_1222 :monitoredBy :_1220 .
 
 :_1223 a :Segment ;
 	:length "557"^^xsd:int .
 
-:_1223 :sensor :_1220 .
+:_1223 :monitoredBy :_1220 .
 
 :_1224 a :Segment ;
 	:length "902"^^xsd:int .
 
-:_1224 :sensor :_1220 .
+:_1224 :monitoredBy :_1220 .
 
 :_1225 a :Segment ;
 	:length "95"^^xsd:int .
 
-:_1225 :sensor :_1220 .
+:_1225 :monitoredBy :_1220 .
 
 :_1226 a :Sensor .
 
@@ -7961,29 +7961,29 @@
 :_1227 a :Segment ;
 	:length "49"^^xsd:int .
 
-:_1227 :sensor :_1226 .
+:_1227 :monitoredBy :_1226 .
 
 :_1228 a :Segment ;
 	:length "815"^^xsd:int .
 
-:_1228 :sensor :_1226 .
+:_1228 :monitoredBy :_1226 .
 
 :_1229 a :Segment ;
 	:length "152"^^xsd:int .
 
-:_1229 :sensor :_1226 .
+:_1229 :monitoredBy :_1226 .
 
 :_1230 a :Segment ;
 	:length "718"^^xsd:int .
 
-:_1230 :sensor :_1226 .
+:_1230 :monitoredBy :_1226 .
 
 :_1231 a :Segment ;
 	:length "445"^^xsd:int .
 
-:_1231 :sensor :_1226 .
+:_1231 :monitoredBy :_1226 .
 
-:_1177 :sensor :_1226 .
+:_1177 :monitoredBy :_1226 .
 
 :_1177 :currentPosition :POSITION_RIGHT.
 
@@ -8002,27 +8002,27 @@
 :_1235 a :Segment ;
 	:length "4"^^xsd:int .
 
-:_1235 :sensor :_1234 .
+:_1235 :monitoredBy :_1234 .
 
 :_1236 a :Segment ;
 	:length "690"^^xsd:int .
 
-:_1236 :sensor :_1234 .
+:_1236 :monitoredBy :_1234 .
 
 :_1237 a :Segment ;
 	:length "832"^^xsd:int .
 
-:_1237 :sensor :_1234 .
+:_1237 :monitoredBy :_1234 .
 
 :_1238 a :Segment ;
 	:length "769"^^xsd:int .
 
-:_1238 :sensor :_1234 .
+:_1238 :monitoredBy :_1234 .
 
 :_1239 a :Segment ;
 	:length "25"^^xsd:int .
 
-:_1239 :sensor :_1234 .
+:_1239 :monitoredBy :_1234 .
 
 :_1240 a :Sensor .
 
@@ -8031,29 +8031,29 @@
 :_1241 a :Segment ;
 	:length "145"^^xsd:int .
 
-:_1241 :sensor :_1240 .
+:_1241 :monitoredBy :_1240 .
 
 :_1242 a :Segment ;
 	:length "201"^^xsd:int .
 
-:_1242 :sensor :_1240 .
+:_1242 :monitoredBy :_1240 .
 
 :_1243 a :Segment ;
 	:length "354"^^xsd:int .
 
-:_1243 :sensor :_1240 .
+:_1243 :monitoredBy :_1240 .
 
 :_1244 a :Segment ;
 	:length "750"^^xsd:int .
 
-:_1244 :sensor :_1240 .
+:_1244 :monitoredBy :_1240 .
 
 :_1245 a :Segment ;
 	:length "248"^^xsd:int .
 
-:_1245 :sensor :_1240 .
+:_1245 :monitoredBy :_1240 .
 
-:_1233 :sensor :_1240 .
+:_1233 :monitoredBy :_1240 .
 
 :_1233 :currentPosition :POSITION_RIGHT.
 

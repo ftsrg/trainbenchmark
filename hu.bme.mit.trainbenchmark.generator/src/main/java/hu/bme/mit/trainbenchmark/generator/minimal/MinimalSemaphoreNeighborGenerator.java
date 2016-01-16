@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.generator.minimal;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
@@ -8,7 +8,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,9 +44,9 @@ public class MinimalSemaphoreNeighborGenerator extends MinimalModelGenerator {
 		serializer.createEdge(ENTRY, route2, null);
 		serializer.createEdge(GATHERS, route1, sensor1);
 		serializer.createEdge(GATHERS, route2, sensor2);
-		serializer.createEdge(SENSOR_EDGE, te1, sensor1);
-		serializer.createEdge(SENSOR_EDGE, te2, sensor2);
-		serializer.createEdge(CONNECTSTO, te1, te2);
+		serializer.createEdge(MONITORED_BY, te1, sensor1);
+		serializer.createEdge(MONITORED_BY, te2, sensor2);
+		serializer.createEdge(CONNECTS_TO, te1, te2);
 	}
 
 }

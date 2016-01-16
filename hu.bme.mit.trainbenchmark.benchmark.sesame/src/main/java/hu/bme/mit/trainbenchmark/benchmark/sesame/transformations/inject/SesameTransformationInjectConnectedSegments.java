@@ -11,9 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 
@@ -40,8 +40,8 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
-		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTSTO);
-		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + SENSOR_EDGE);
+		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTS_TO);
+		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + MONITORED_BY);
 
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
 

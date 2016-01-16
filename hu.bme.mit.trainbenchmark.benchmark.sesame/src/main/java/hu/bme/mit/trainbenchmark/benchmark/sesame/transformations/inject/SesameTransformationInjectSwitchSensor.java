@@ -27,7 +27,7 @@ public class SesameTransformationInjectSwitchSensor extends SesameTransformation
 
 	@Override
 	public void rhs(final Collection<URI> switches) throws RepositoryException {
-		driver.deleteSingleOutgoingEdge(switches, ModelConstants.SWITCH, ModelConstants.SENSOR_EDGE);
+		driver.deleteSingleOutgoingEdge(switches, ModelConstants.SWITCH, ModelConstants.MONITORED_BY);
 	}
 
 }

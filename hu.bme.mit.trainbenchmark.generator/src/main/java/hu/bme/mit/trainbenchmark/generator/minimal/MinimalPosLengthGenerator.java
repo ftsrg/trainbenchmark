@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.generator.minimal;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class MinimalPosLengthGenerator extends MinimalModelGenerator {
 		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
 
 		// this is required by the EMF serializer to fix the containment hierarchy
-		serializer.createEdge(SENSOR_EDGE, segment, null);
+		serializer.createEdge(MONITORED_BY, segment, null);
 	}
 
 }

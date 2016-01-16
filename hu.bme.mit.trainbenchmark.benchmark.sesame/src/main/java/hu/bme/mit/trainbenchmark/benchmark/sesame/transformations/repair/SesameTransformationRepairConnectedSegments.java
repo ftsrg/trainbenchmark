@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class SesameTransformationRepairConnectedSegments extends SesameTransform
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
-		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTSTO);
+		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTS_TO);
 		for (final SesameConnectedSegmentsMatch match : matches) {
 			// delete segment2 by removing all (segment2, _, _) and (_, _, segment2) triples
 			final RepositoryResult<Statement> outgoingEdges = con.getStatements(match.getSegment2(), null, null, true);

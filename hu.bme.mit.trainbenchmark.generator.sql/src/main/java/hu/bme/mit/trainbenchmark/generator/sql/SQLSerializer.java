@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.generator.sql;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
@@ -36,7 +36,7 @@ import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
 public class SQLSerializer extends ModelSerializer {
 
-	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(SENSOR_EDGE, TRACKELEMENT);
+	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(MONITORED_BY, TRACKELEMENT);
 	protected final SQLGeneratorConfig sqlGeneratorConfig;
 
 	protected String sqlRawPath;
@@ -141,8 +141,8 @@ public class SQLSerializer extends ModelSerializer {
 		}
 
 		String insertQuery;
-		if (SENSOR_EDGE.equals(label)) {
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, SENSOR_EDGE, to, ID, from);
+		if (MONITORED_BY.equals(label)) {
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, MONITORED_BY, to, ID, from);
 		} else {
 			insertQuery = String.format("INSERT INTO \"%s\" VALUES (%s, %s);", label, from, to);
 		}

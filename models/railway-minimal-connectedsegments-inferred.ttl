@@ -31,15 +31,15 @@
 
 :_6 :connectsTo :_7 .
 
-:_2 :sensor :_1 .
+:_2 :monitoredBy :_1 .
 
-:_3 :sensor :_1 .
+:_3 :monitoredBy :_1 .
 
-:_4 :sensor :_1 .
+:_4 :monitoredBy :_1 .
 
-:_5 :sensor :_1 .
+:_5 :monitoredBy :_1 .
 
-:_6 :sensor :_1 .
+:_6 :monitoredBy :_1 .
 
-:_7 :sensor :_1 .
+:_7 :monitoredBy :_1 .
 
