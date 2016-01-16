@@ -23,7 +23,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 
 import org.neo4j.graphdb.DynamicLabel;
@@ -46,6 +46,6 @@ public class Neo4jConstants {
 	public static final DynamicRelationshipType relationshipTypeExit = DynamicRelationshipType.withName(EXIT);
 	public static final DynamicRelationshipType relationshipTypeFollows = DynamicRelationshipType.withName(FOLLOWS);
 	public static final DynamicRelationshipType relationshipTypeSensor = DynamicRelationshipType.withName(SENSOR_EDGE);
-	public static final DynamicRelationshipType relationshipTypeSwitch = DynamicRelationshipType.withName(SWITCH_EDGE);
+	public static final DynamicRelationshipType relationshipTypeSwitch = DynamicRelationshipType.withName(TARGET);
 
 }

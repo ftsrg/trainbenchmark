@@ -7,7 +7,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 		final Object sensor = serializer.createVertex(SENSOR);
 		final Object sw = serializer.createVertex(SWITCH);
 
-		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(SWITCH_EDGE, sw);
+		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
 		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
 		final Map<String, ? extends Object> emptyMap = Collections.emptyMap();
 		final Object swP = serializer.createVertex(SWITCHPOSITION, emptyMap, swPOutgoingEdges, swPIncomingEdges);

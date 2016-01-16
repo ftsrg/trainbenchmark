@@ -258,7 +258,7 @@
 
 :_47 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_4 .
+	:target :_4 .
 
 :_3 :follows :_47 .
 
@@ -543,7 +543,7 @@
 
 :_97 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_48 .
+	:target :_48 .
 
 :_3 :follows :_97 .
 
@@ -624,7 +624,7 @@
 
 :_111 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_98 .
+	:target :_98 .
 
 :_3 :follows :_111 .
 
@@ -773,7 +773,7 @@
 
 :_137 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_112 .
+	:target :_112 .
 
 :_3 :follows :_137 .
 
@@ -990,7 +990,7 @@
 
 :_175 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_138 .
+	:target :_138 .
 
 :_3 :follows :_175 .
 
@@ -1139,7 +1139,7 @@
 
 :_201 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_176 .
+	:target :_176 .
 
 :_3 :follows :_201 .
 
@@ -1458,7 +1458,7 @@
 
 :_257 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_202 .
+	:target :_202 .
 
 :_3 :follows :_257 .
 
@@ -1641,7 +1641,7 @@
 
 :_289 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_258 .
+	:target :_258 .
 
 :_3 :follows :_289 .
 
@@ -1756,7 +1756,7 @@
 
 :_309 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_290 .
+	:target :_290 .
 
 :_3 :follows :_309 .
 
@@ -1803,7 +1803,7 @@
 
 :_317 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_310 .
+	:target :_310 .
 
 :_3 :follows :_317 .
 
@@ -2020,7 +2020,7 @@
 
 :_355 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_318 .
+	:target :_318 .
 
 :_3 :follows :_355 .
 
@@ -2135,7 +2135,7 @@
 
 :_375 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_356 .
+	:target :_356 .
 
 :_3 :follows :_375 .
 
@@ -2182,7 +2182,7 @@
 
 :_383 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_376 .
+	:target :_376 .
 
 :_3 :follows :_383 .
 
@@ -2365,7 +2365,7 @@
 
 :_415 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_384 .
+	:target :_384 .
 
 :_3 :follows :_415 .
 
@@ -2412,7 +2412,7 @@
 
 :_423 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_416 .
+	:target :_416 .
 
 :_3 :follows :_423 .
 
@@ -3212,7 +3212,7 @@
 
 :_445 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_426 .
+	:target :_426 .
 
 :_425 :follows :_445 .
 
@@ -3293,7 +3293,7 @@
 
 :_459 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_446 .
+	:target :_446 .
 
 :_425 :follows :_459 .
 
@@ -3374,7 +3374,7 @@
 
 :_473 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_460 .
+	:target :_460 .
 
 :_425 :follows :_473 .
 
@@ -3557,7 +3557,7 @@
 
 :_505 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_474 .
+	:target :_474 .
 
 :_425 :follows :_505 .
 
@@ -3604,7 +3604,7 @@
 
 :_513 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_506 .
+	:target :_506 .
 
 :_425 :follows :_513 .
 
@@ -4070,7 +4070,7 @@
 
 :_571 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_516 .
+	:target :_516 .
 
 :_515 :follows :_571 .
 
@@ -4389,7 +4389,7 @@
 
 :_627 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_572 .
+	:target :_572 .
 
 :_515 :follows :_627 .
 
@@ -4640,7 +4640,7 @@
 
 :_671 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_628 .
+	:target :_628 .
 
 :_515 :follows :_671 .
 
@@ -4789,7 +4789,7 @@
 
 :_697 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_672 .
+	:target :_672 .
 
 :_515 :follows :_697 .
 
@@ -5108,7 +5108,7 @@
 
 :_753 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_698 .
+	:target :_698 .
 
 :_515 :follows :_753 .
 
@@ -5189,7 +5189,7 @@
 
 :_767 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_754 .
+	:target :_754 .
 
 :_515 :follows :_767 .
 
@@ -5508,7 +5508,7 @@
 
 :_823 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_768 .
+	:target :_768 .
 
 :_515 :follows :_823 .
 
@@ -5691,7 +5691,7 @@
 
 :_855 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_824 .
+	:target :_824 .
 
 :_515 :follows :_855 .
 
@@ -5772,7 +5772,7 @@
 
 :_869 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_856 .
+	:target :_856 .
 
 :_515 :follows :_869 .
 
@@ -6023,7 +6023,7 @@
 
 :_913 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_870 .
+	:target :_870 .
 
 :_515 :follows :_913 .
 
@@ -6897,7 +6897,7 @@
 
 :_953 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_916 .
+	:target :_916 .
 
 :_915 :follows :_953 .
 
@@ -7182,7 +7182,7 @@
 
 :_1003 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_954 .
+	:target :_954 .
 
 :_915 :follows :_1003 .
 
@@ -7547,7 +7547,7 @@
 
 :_1042 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_1005 .
+	:target :_1005 .
 
 :_1004 :follows :_1042 .
 
@@ -7662,7 +7662,7 @@
 
 :_1062 a :SwitchPosition ;
 	:position :POSITION_FAILURE ;
-	:switch :_1043 .
+	:target :_1043 .
 
 :_1004 :follows :_1062 .
 
@@ -7947,7 +7947,7 @@
 
 :_1112 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_1063 .
+	:target :_1063 .
 
 :_1004 :follows :_1112 .
 
@@ -8062,7 +8062,7 @@
 
 :_1132 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_1113 .
+	:target :_1113 .
 
 :_1004 :follows :_1132 .
 
@@ -8313,7 +8313,7 @@
 
 :_1176 a :SwitchPosition ;
 	:position :POSITION_LEFT ;
-	:switch :_1133 .
+	:target :_1133 .
 
 :_1004 :follows :_1176 .
 
@@ -8632,7 +8632,7 @@
 
 :_1232 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_1177 .
+	:target :_1177 .
 
 :_1004 :follows :_1232 .
 
@@ -8713,7 +8713,7 @@
 
 :_1246 a :SwitchPosition ;
 	:position :POSITION_RIGHT ;
-	:switch :_1233 .
+	:target :_1233 .
 
 :_1004 :follows :_1246 .
 

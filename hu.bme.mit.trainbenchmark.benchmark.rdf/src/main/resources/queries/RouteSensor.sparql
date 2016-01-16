@@ -5,7 +5,7 @@ SELECT DISTINCT ?route ?sensor ?swP ?sw
 WHERE
 {
 	?route base:follows ?swP .
-	?swP base:switch ?sw .
+	?swP base:target ?sw .
 	?sw base:sensor ?sensor .
 
 	?route rdf:type base:Route .

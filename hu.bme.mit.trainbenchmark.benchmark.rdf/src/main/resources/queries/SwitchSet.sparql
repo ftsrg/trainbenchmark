@@ -8,7 +8,7 @@ WHERE
 {
     ?route base:entry ?semaphore .
     ?route base:follows ?swP .
-    ?swP base:switch ?sw .
+    ?swP base:target ?sw .
     ?semaphore base:signal base:SIGNAL_GO .
     ?sw base:currentPosition ?currentPosition .
     ?swP base:position ?position .
