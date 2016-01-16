@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.constants;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
@@ -41,7 +41,7 @@ public class Neo4jConstants {
 	public static final Label labelTrackElement = DynamicLabel.label(TRACKELEMENT);
 
 	public static final DynamicRelationshipType relationshipTypeConnectsTo = DynamicRelationshipType.withName(CONNECTSTO);
-	public static final DynamicRelationshipType relationshipTypeDefinedBy = DynamicRelationshipType.withName(DEFINED_BY);
+	public static final DynamicRelationshipType relationshipTypeDefinedBy = DynamicRelationshipType.withName(GATHERS);
 	public static final DynamicRelationshipType relationshipTypeEntry = DynamicRelationshipType.withName(ENTRY);
 	public static final DynamicRelationshipType relationshipTypeExit = DynamicRelationshipType.withName(EXIT);
 	public static final DynamicRelationshipType relationshipTypeFollows = DynamicRelationshipType.withName(FOLLOWS);

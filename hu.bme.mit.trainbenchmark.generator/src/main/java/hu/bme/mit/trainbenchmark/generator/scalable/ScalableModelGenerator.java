@@ -2,10 +2,10 @@ package hu.bme.mit.trainbenchmark.generator.scalable;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
@@ -139,7 +139,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 					// add "sensors" edge from route to sensor
 					final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
 					final Object sourceRoute = routeSensorError ? null : route;
-					serializer.createEdge(DEFINED_BY, sourceRoute, sensor);
+					serializer.createEdge(GATHERS, sourceRoute, sensor);
 
 					for (int m = 0; m < maxSegments; m++) {
 						createSegment(currentTrack, sensor);
@@ -157,16 +157,17 @@ public class ScalableModelGenerator extends ModelGenerator {
 				final Object targetSensor = switchSensorError ? null : lastSensor;
 				serializer.createEdge(SENSOR_EDGE, sw, targetSensor);
 
-				final int stateNumber = random.nextInt(4);
-				final Position stateEnum = Position.values()[stateNumber];
-				serializer.setAttribute(SWITCH, sw, CURRENTPOSITION, stateEnum);
+				final int numberOfPositions = Position.values().length;
+				final int positionOrdinal = random.nextInt(numberOfPositions);
+				final Position position = Position.values()[positionOrdinal];
+				serializer.setAttribute(SWITCH, sw, CURRENTPOSITION, position);
 
 				// the errorInjectedState may contain a bad value
 				final boolean switchSetError = nextRandom() < switchSetErrorPercent;
-				final int errorInjectedStateNumber = switchSetError ? 3 - stateNumber : stateNumber;
-				final Position errorInjectedStateEnum = Position.values()[errorInjectedStateNumber];
+				final int invalidPositionOrdinal = switchSetError ? (numberOfPositions - 1) - positionOrdinal : positionOrdinal;
+				final Position invalidPosition = Position.values()[invalidPositionOrdinal];
 				final Map<String, Object> switchPosititonAttributes = new HashMap<>();
-				switchPosititonAttributes.put(POSITION, errorInjectedStateEnum);
+				switchPosititonAttributes.put(POSITION, invalidPosition);
 
 				final Map<String, Object> switchPositionOutgoingEdges = new HashMap<>();
 				switchPositionOutgoingEdges.put(SWITCH_EDGE, sw);

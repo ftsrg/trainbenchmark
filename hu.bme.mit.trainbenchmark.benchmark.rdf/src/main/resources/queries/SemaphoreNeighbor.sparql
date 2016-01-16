@@ -5,11 +5,11 @@ SELECT DISTINCT ?semaphore ?route1 ?route2 ?sensor1 ?sensor2 ?te1 ?te2
 WHERE
 {
 	?route1 base:exit ?semaphore .
-	?route1 base:definedBy ?sensor1 .
+	?route1 base:gathers ?sensor1 .
 	?te1 base:sensor ?sensor1 .
 	?te1 base:connectsTo ?te2 .
 	?te2 base:sensor ?sensor2 .
-	?route2 base:definedBy ?sensor2 .
+	?route2 base:gathers ?sensor2 .
 
 	?semaphore rdf:type base:Semaphore .
 	?route1 rdf:type base:Route .

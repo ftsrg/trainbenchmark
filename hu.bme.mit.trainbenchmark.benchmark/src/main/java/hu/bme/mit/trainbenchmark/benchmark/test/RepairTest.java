@@ -51,7 +51,7 @@ public abstract class RepairTest extends TrainBenchmarkTest {
 
 	@Test
 	public void switchSetRepair() throws Exception {
-		testTransformation(SWITCHSET, REPAIR, 2, 0);
+		testTransformation(SWITCHSET, REPAIR, 1, 0);
 	}
 
 }

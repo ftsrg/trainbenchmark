@@ -365,7 +365,7 @@
 
 :_5 a :Sensor .
 
-:_3 :definedBy :_5 .
+:_3 :gathers :_5 .
 
 :_6 a :Segment ;
 	:length "358"^^xsd:int .
@@ -394,7 +394,7 @@
 
 :_11 a :Sensor .
 
-:_3 :definedBy :_11 .
+:_3 :gathers :_11 .
 
 :_12 a :Segment ;
 	:length "803"^^xsd:int .
@@ -423,7 +423,7 @@
 
 :_17 a :Sensor .
 
-:_3 :definedBy :_17 .
+:_3 :gathers :_17 .
 
 :_18 a :Segment ;
 	:length "831"^^xsd:int .
@@ -452,7 +452,7 @@
 
 :_23 a :Sensor .
 
-:_3 :definedBy :_23 .
+:_3 :gathers :_23 .
 
 :_24 a :Segment ;
 	:length "582"^^xsd:int .
@@ -481,7 +481,7 @@
 
 :_29 a :Sensor .
 
-:_3 :definedBy :_29 .
+:_3 :gathers :_29 .
 
 :_30 a :Segment ;
 	:length "745"^^xsd:int .
@@ -510,7 +510,7 @@
 
 :_35 a :Sensor .
 
-:_3 :definedBy :_35 .
+:_3 :gathers :_35 .
 
 :_36 a :Segment ;
 	:length "234"^^xsd:int .
@@ -539,7 +539,7 @@
 
 :_41 a :Sensor .
 
-:_3 :definedBy :_41 .
+:_3 :gathers :_41 .
 
 :_42 a :Segment ;
 	:length "209"^^xsd:int .
@@ -580,7 +580,7 @@
 
 :_49 a :Sensor .
 
-:_3 :definedBy :_49 .
+:_3 :gathers :_49 .
 
 :_50 a :Segment ;
 	:length "193"^^xsd:int .
@@ -609,7 +609,7 @@
 
 :_55 a :Sensor .
 
-:_3 :definedBy :_55 .
+:_3 :gathers :_55 .
 
 :_56 a :Segment ;
 	:length "590"^^xsd:int .
@@ -638,7 +638,7 @@
 
 :_61 a :Sensor .
 
-:_3 :definedBy :_61 .
+:_3 :gathers :_61 .
 
 :_62 a :Segment ;
 	:length "386"^^xsd:int .
@@ -667,7 +667,7 @@
 
 :_67 a :Sensor .
 
-:_3 :definedBy :_67 .
+:_3 :gathers :_67 .
 
 :_68 a :Segment ;
 	:length "245"^^xsd:int .
@@ -696,7 +696,7 @@
 
 :_73 a :Sensor .
 
-:_3 :definedBy :_73 .
+:_3 :gathers :_73 .
 
 :_74 a :Segment ;
 	:length "301"^^xsd:int .
@@ -725,7 +725,7 @@
 
 :_79 a :Sensor .
 
-:_3 :definedBy :_79 .
+:_3 :gathers :_79 .
 
 :_80 a :Segment ;
 	:length "711"^^xsd:int .
@@ -754,7 +754,7 @@
 
 :_85 a :Sensor .
 
-:_3 :definedBy :_85 .
+:_3 :gathers :_85 .
 
 :_86 a :Segment ;
 	:length "977"^^xsd:int .
@@ -783,7 +783,7 @@
 
 :_91 a :Sensor .
 
-:_3 :definedBy :_91 .
+:_3 :gathers :_91 .
 
 :_92 a :Segment ;
 	:length "620"^^xsd:int .
@@ -812,10 +812,10 @@
 
 :_48 :sensor :_91 .
 
-:_48 :currentPosition :POSITION_LEFT.
+:_48 :currentPosition :POSITION_RIGHT.
 
 :_97 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_RIGHT ;
 	:switch :_48 .
 
 :_3 :follows :_97 .
@@ -824,7 +824,7 @@
 
 :_99 a :Sensor .
 
-:_3 :definedBy :_99 .
+:_3 :gathers :_99 .
 
 :_100 a :Segment ;
 	:length "257"^^xsd:int .
@@ -853,7 +853,7 @@
 
 :_105 a :Sensor .
 
-:_3 :definedBy :_105 .
+:_3 :gathers :_105 .
 
 :_106 a :Segment ;
 	:length "785"^^xsd:int .
@@ -894,7 +894,7 @@
 
 :_113 a :Sensor .
 
-:_3 :definedBy :_113 .
+:_3 :gathers :_113 .
 
 :_114 a :Segment ;
 	:length "986"^^xsd:int .
@@ -923,7 +923,7 @@
 
 :_119 a :Sensor .
 
-:_3 :definedBy :_119 .
+:_3 :gathers :_119 .
 
 :_120 a :Segment ;
 	:length "981"^^xsd:int .
@@ -952,7 +952,7 @@
 
 :_125 a :Sensor .
 
-:_3 :definedBy :_125 .
+:_3 :gathers :_125 .
 
 :_126 a :Segment ;
 	:length "685"^^xsd:int .
@@ -981,7 +981,7 @@
 
 :_131 a :Sensor .
 
-:_3 :definedBy :_131 .
+:_3 :gathers :_131 .
 
 :_132 a :Segment ;
 	:length "894"^^xsd:int .
@@ -1010,10 +1010,10 @@
 
 :_112 :sensor :_131 .
 
-:_112 :currentPosition :POSITION_RIGHT.
+:_112 :currentPosition :POSITION_FAILURE.
 
 :_137 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_112 .
 
 :_3 :follows :_137 .
@@ -1022,7 +1022,7 @@
 
 :_139 a :Sensor .
 
-:_3 :definedBy :_139 .
+:_3 :gathers :_139 .
 
 :_140 a :Segment ;
 	:length "191"^^xsd:int .
@@ -1051,7 +1051,7 @@
 
 :_145 a :Sensor .
 
-:_3 :definedBy :_145 .
+:_3 :gathers :_145 .
 
 :_146 a :Segment ;
 	:length "889"^^xsd:int .
@@ -1080,7 +1080,7 @@
 
 :_151 a :Sensor .
 
-:_3 :definedBy :_151 .
+:_3 :gathers :_151 .
 
 :_152 a :Segment ;
 	:length "964"^^xsd:int .
@@ -1109,7 +1109,7 @@
 
 :_157 a :Sensor .
 
-:_3 :definedBy :_157 .
+:_3 :gathers :_157 .
 
 :_158 a :Segment ;
 	:length "111"^^xsd:int .
@@ -1138,7 +1138,7 @@
 
 :_163 a :Sensor .
 
-:_3 :definedBy :_163 .
+:_3 :gathers :_163 .
 
 :_164 a :Segment ;
 	:length "820"^^xsd:int .
@@ -1167,7 +1167,7 @@
 
 :_169 a :Sensor .
 
-:_3 :definedBy :_169 .
+:_3 :gathers :_169 .
 
 :_170 a :Segment ;
 	:length "373"^^xsd:int .
@@ -1196,10 +1196,10 @@
 
 :_138 :sensor :_169 .
 
-:_138 :currentPosition :POSITION_RIGHT.
+:_138 :currentPosition :POSITION_FAILURE.
 
 :_175 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_138 .
 
 :_3 :follows :_175 .
@@ -1208,7 +1208,7 @@
 
 :_177 a :Sensor .
 
-:_3 :definedBy :_177 .
+:_3 :gathers :_177 .
 
 :_178 a :Segment ;
 	:length "160"^^xsd:int .
@@ -1237,7 +1237,7 @@
 
 :_183 a :Sensor .
 
-:_3 :definedBy :_183 .
+:_3 :gathers :_183 .
 
 :_184 a :Segment ;
 	:length "976"^^xsd:int .
@@ -1266,7 +1266,7 @@
 
 :_189 a :Sensor .
 
-:_3 :definedBy :_189 .
+:_3 :gathers :_189 .
 
 :_190 a :Segment ;
 	:length "620"^^xsd:int .
@@ -1295,7 +1295,7 @@
 
 :_195 a :Sensor .
 
-:_3 :definedBy :_195 .
+:_3 :gathers :_195 .
 
 :_196 a :Segment ;
 	:length "36"^^xsd:int .
@@ -1324,10 +1324,10 @@
 
 :_176 :sensor :_195 .
 
-:_176 :currentPosition :POSITION_STRAIGHT.
+:_176 :currentPosition :POSITION_LEFT.
 
 :_201 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_176 .
 
 :_3 :follows :_201 .
@@ -1336,7 +1336,7 @@
 
 :_203 a :Sensor .
 
-:_3 :definedBy :_203 .
+:_3 :gathers :_203 .
 
 :_204 a :Segment ;
 	:length "371"^^xsd:int .
@@ -1365,7 +1365,7 @@
 
 :_209 a :Sensor .
 
-:_3 :definedBy :_209 .
+:_3 :gathers :_209 .
 
 :_210 a :Segment ;
 	:length "781"^^xsd:int .
@@ -1394,7 +1394,7 @@
 
 :_215 a :Sensor .
 
-:_3 :definedBy :_215 .
+:_3 :gathers :_215 .
 
 :_216 a :Segment ;
 	:length "314"^^xsd:int .
@@ -1423,7 +1423,7 @@
 
 :_221 a :Sensor .
 
-:_3 :definedBy :_221 .
+:_3 :gathers :_221 .
 
 :_222 a :Segment ;
 	:length "373"^^xsd:int .
@@ -1452,7 +1452,7 @@
 
 :_227 a :Sensor .
 
-:_3 :definedBy :_227 .
+:_3 :gathers :_227 .
 
 :_228 a :Segment ;
 	:length "325"^^xsd:int .
@@ -1481,7 +1481,7 @@
 
 :_233 a :Sensor .
 
-:_3 :definedBy :_233 .
+:_3 :gathers :_233 .
 
 :_234 a :Segment ;
 	:length "917"^^xsd:int .
@@ -1510,7 +1510,7 @@
 
 :_239 a :Sensor .
 
-:_3 :definedBy :_239 .
+:_3 :gathers :_239 .
 
 :_240 a :Segment ;
 	:length "969"^^xsd:int .
@@ -1539,7 +1539,7 @@
 
 :_245 a :Sensor .
 
-:_3 :definedBy :_245 .
+:_3 :gathers :_245 .
 
 :_246 a :Segment ;
 	:length "909"^^xsd:int .
@@ -1568,7 +1568,7 @@
 
 :_251 a :Sensor .
 
-:_3 :definedBy :_251 .
+:_3 :gathers :_251 .
 
 :_252 a :Segment ;
 	:length "943"^^xsd:int .
@@ -1597,10 +1597,10 @@
 
 :_202 :sensor :_251 .
 
-:_202 :currentPosition :POSITION_LEFT.
+:_202 :currentPosition :POSITION_FAILURE.
 
 :_257 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_202 .
 
 :_3 :follows :_257 .
@@ -1609,7 +1609,7 @@
 
 :_259 a :Sensor .
 
-:_3 :definedBy :_259 .
+:_3 :gathers :_259 .
 
 :_260 a :Segment ;
 	:length "78"^^xsd:int .
@@ -1638,7 +1638,7 @@
 
 :_265 a :Sensor .
 
-:_3 :definedBy :_265 .
+:_3 :gathers :_265 .
 
 :_266 a :Segment ;
 	:length "916"^^xsd:int .
@@ -1667,7 +1667,7 @@
 
 :_271 a :Sensor .
 
-:_3 :definedBy :_271 .
+:_3 :gathers :_271 .
 
 :_272 a :Segment ;
 	:length "163"^^xsd:int .
@@ -1696,7 +1696,7 @@
 
 :_277 a :Sensor .
 
-:_3 :definedBy :_277 .
+:_3 :gathers :_277 .
 
 :_278 a :Segment ;
 	:length "596"^^xsd:int .
@@ -1725,7 +1725,7 @@
 
 :_283 a :Sensor .
 
-:_3 :definedBy :_283 .
+:_3 :gathers :_283 .
 
 :_284 a :Segment ;
 	:length "525"^^xsd:int .
@@ -1754,10 +1754,10 @@
 
 :_258 :sensor :_283 .
 
-:_258 :currentPosition :POSITION_STRAIGHT.
+:_258 :currentPosition :POSITION_LEFT.
 
 :_289 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_258 .
 
 :_3 :follows :_289 .
@@ -1766,7 +1766,7 @@
 
 :_291 a :Sensor .
 
-:_3 :definedBy :_291 .
+:_3 :gathers :_291 .
 
 :_292 a :Segment ;
 	:length "809"^^xsd:int .
@@ -1795,7 +1795,7 @@
 
 :_297 a :Sensor .
 
-:_3 :definedBy :_297 .
+:_3 :gathers :_297 .
 
 :_298 a :Segment ;
 	:length "690"^^xsd:int .
@@ -1824,7 +1824,7 @@
 
 :_303 a :Sensor .
 
-:_3 :definedBy :_303 .
+:_3 :gathers :_303 .
 
 :_304 a :Segment ;
 	:length "569"^^xsd:int .
@@ -1865,7 +1865,7 @@
 
 :_311 a :Sensor .
 
-:_3 :definedBy :_311 .
+:_3 :gathers :_311 .
 
 :_312 a :Segment ;
 	:length "861"^^xsd:int .
@@ -1894,10 +1894,10 @@
 
 :_310 :sensor :_311 .
 
-:_310 :currentPosition :POSITION_LEFT.
+:_310 :currentPosition :POSITION_FAILURE.
 
 :_317 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_310 .
 
 :_3 :follows :_317 .
@@ -1906,7 +1906,7 @@
 
 :_319 a :Sensor .
 
-:_3 :definedBy :_319 .
+:_3 :gathers :_319 .
 
 :_320 a :Segment ;
 	:length "882"^^xsd:int .
@@ -1935,7 +1935,7 @@
 
 :_325 a :Sensor .
 
-:_3 :definedBy :_325 .
+:_3 :gathers :_325 .
 
 :_326 a :Segment ;
 	:length "917"^^xsd:int .
@@ -1964,7 +1964,7 @@
 
 :_331 a :Sensor .
 
-:_3 :definedBy :_331 .
+:_3 :gathers :_331 .
 
 :_332 a :Segment ;
 	:length "169"^^xsd:int .
@@ -1993,7 +1993,7 @@
 
 :_337 a :Sensor .
 
-:_3 :definedBy :_337 .
+:_3 :gathers :_337 .
 
 :_338 a :Segment ;
 	:length "939"^^xsd:int .
@@ -2022,7 +2022,7 @@
 
 :_343 a :Sensor .
 
-:_3 :definedBy :_343 .
+:_3 :gathers :_343 .
 
 :_344 a :Segment ;
 	:length "659"^^xsd:int .
@@ -2051,7 +2051,7 @@
 
 :_349 a :Sensor .
 
-:_3 :definedBy :_349 .
+:_3 :gathers :_349 .
 
 :_350 a :Segment ;
 	:length "694"^^xsd:int .
@@ -2092,7 +2092,7 @@
 
 :_357 a :Sensor .
 
-:_3 :definedBy :_357 .
+:_3 :gathers :_357 .
 
 :_358 a :Segment ;
 	:length "116"^^xsd:int .
@@ -2121,7 +2121,7 @@
 
 :_363 a :Sensor .
 
-:_3 :definedBy :_363 .
+:_3 :gathers :_363 .
 
 :_364 a :Segment ;
 	:length "110"^^xsd:int .
@@ -2150,7 +2150,7 @@
 
 :_369 a :Sensor .
 
-:_3 :definedBy :_369 .
+:_3 :gathers :_369 .
 
 :_370 a :Segment ;
 	:length "132"^^xsd:int .
@@ -2179,10 +2179,10 @@
 
 :_356 :sensor :_369 .
 
-:_356 :currentPosition :POSITION_FAILURE.
+:_356 :currentPosition :POSITION_RIGHT.
 
 :_375 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_356 .
 
 :_3 :follows :_375 .
@@ -2191,7 +2191,7 @@
 
 :_377 a :Sensor .
 
-:_3 :definedBy :_377 .
+:_3 :gathers :_377 .
 
 :_378 a :Segment ;
 	:length "316"^^xsd:int .
@@ -2220,10 +2220,10 @@
 
 :_376 :sensor :_377 .
 
-:_376 :currentPosition :POSITION_STRAIGHT.
+:_376 :currentPosition :POSITION_FAILURE.
 
 :_383 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_376 .
 
 :_3 :follows :_383 .
@@ -2232,7 +2232,7 @@
 
 :_385 a :Sensor .
 
-:_3 :definedBy :_385 .
+:_3 :gathers :_385 .
 
 :_386 a :Segment ;
 	:length "413"^^xsd:int .
@@ -2261,7 +2261,7 @@
 
 :_391 a :Sensor .
 
-:_3 :definedBy :_391 .
+:_3 :gathers :_391 .
 
 :_392 a :Segment ;
 	:length "544"^^xsd:int .
@@ -2290,7 +2290,7 @@
 
 :_397 a :Sensor .
 
-:_3 :definedBy :_397 .
+:_3 :gathers :_397 .
 
 :_398 a :Segment ;
 	:length "107"^^xsd:int .
@@ -2319,7 +2319,7 @@
 
 :_403 a :Sensor .
 
-:_3 :definedBy :_403 .
+:_3 :gathers :_403 .
 
 :_404 a :Segment ;
 	:length "181"^^xsd:int .
@@ -2348,7 +2348,7 @@
 
 :_409 a :Sensor .
 
-:_3 :definedBy :_409 .
+:_3 :gathers :_409 .
 
 :_410 a :Segment ;
 	:length "659"^^xsd:int .
@@ -2377,10 +2377,10 @@
 
 :_384 :sensor :_409 .
 
-:_384 :currentPosition :POSITION_STRAIGHT.
+:_384 :currentPosition :POSITION_LEFT.
 
 :_415 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_384 .
 
 :_3 :follows :_415 .
@@ -2389,7 +2389,7 @@
 
 :_417 a :Sensor .
 
-:_3 :definedBy :_417 .
+:_3 :gathers :_417 .
 
 :_418 a :Segment ;
 	:length "717"^^xsd:int .
@@ -3115,7 +3115,7 @@
 
 :_427 a :Sensor .
 
-:_425 :definedBy :_427 .
+:_425 :gathers :_427 .
 
 :_428 a :Segment ;
 	:length "262"^^xsd:int .
@@ -3144,7 +3144,7 @@
 
 :_433 a :Sensor .
 
-:_425 :definedBy :_433 .
+:_425 :gathers :_433 .
 
 :_434 a :Segment ;
 	:length "146"^^xsd:int .
@@ -3173,7 +3173,7 @@
 
 :_439 a :Sensor .
 
-:_425 :definedBy :_439 .
+:_425 :gathers :_439 .
 
 :_440 a :Segment ;
 	:length "718"^^xsd:int .
@@ -3202,10 +3202,10 @@
 
 :_426 :sensor :_439 .
 
-:_426 :currentPosition :POSITION_RIGHT.
+:_426 :currentPosition :POSITION_FAILURE.
 
 :_445 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_426 .
 
 :_425 :follows :_445 .
@@ -3214,7 +3214,7 @@
 
 :_447 a :Sensor .
 
-:_425 :definedBy :_447 .
+:_425 :gathers :_447 .
 
 :_448 a :Segment ;
 	:length "818"^^xsd:int .
@@ -3243,7 +3243,7 @@
 
 :_453 a :Sensor .
 
-:_425 :definedBy :_453 .
+:_425 :gathers :_453 .
 
 :_454 a :Segment ;
 	:length "173"^^xsd:int .
@@ -3272,10 +3272,10 @@
 
 :_446 :sensor :_453 .
 
-:_446 :currentPosition :POSITION_STRAIGHT.
+:_446 :currentPosition :POSITION_FAILURE.
 
 :_459 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_446 .
 
 :_425 :follows :_459 .
@@ -3284,7 +3284,7 @@
 
 :_461 a :Sensor .
 
-:_425 :definedBy :_461 .
+:_425 :gathers :_461 .
 
 :_462 a :Segment ;
 	:length "597"^^xsd:int .
@@ -3313,7 +3313,7 @@
 
 :_467 a :Sensor .
 
-:_425 :definedBy :_467 .
+:_425 :gathers :_467 .
 
 :_468 a :Segment ;
 	:length "38"^^xsd:int .
@@ -3342,10 +3342,10 @@
 
 :_460 :sensor :_467 .
 
-:_460 :currentPosition :POSITION_FAILURE.
+:_460 :currentPosition :POSITION_RIGHT.
 
 :_473 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_460 .
 
 :_425 :follows :_473 .
@@ -3354,7 +3354,7 @@
 
 :_475 a :Sensor .
 
-:_425 :definedBy :_475 .
+:_425 :gathers :_475 .
 
 :_476 a :Segment ;
 	:length "298"^^xsd:int .
@@ -3383,7 +3383,7 @@
 
 :_481 a :Sensor .
 
-:_425 :definedBy :_481 .
+:_425 :gathers :_481 .
 
 :_482 a :Segment ;
 	:length "542"^^xsd:int .
@@ -3412,7 +3412,7 @@
 
 :_487 a :Sensor .
 
-:_425 :definedBy :_487 .
+:_425 :gathers :_487 .
 
 :_488 a :Segment ;
 	:length "74"^^xsd:int .
@@ -3441,7 +3441,7 @@
 
 :_493 a :Sensor .
 
-:_425 :definedBy :_493 .
+:_425 :gathers :_493 .
 
 :_494 a :Segment ;
 	:length "980"^^xsd:int .
@@ -3470,7 +3470,7 @@
 
 :_499 a :Sensor .
 
-:_425 :definedBy :_499 .
+:_425 :gathers :_499 .
 
 :_500 a :Segment ;
 	:length "94"^^xsd:int .
@@ -3499,10 +3499,10 @@
 
 :_474 :sensor :_499 .
 
-:_474 :currentPosition :POSITION_FAILURE.
+:_474 :currentPosition :POSITION_RIGHT.
 
 :_505 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_474 .
 
 :_425 :follows :_505 .
@@ -3511,7 +3511,7 @@
 
 :_507 a :Sensor .
 
-:_425 :definedBy :_507 .
+:_425 :gathers :_507 .
 
 :_508 a :Segment ;
 	:length "506"^^xsd:int .
@@ -3540,10 +3540,10 @@
 
 :_506 :sensor :_507 .
 
-:_506 :currentPosition :POSITION_LEFT.
+:_506 :currentPosition :POSITION_RIGHT.
 
 :_513 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_RIGHT ;
 	:switch :_506 .
 
 :_425 :follows :_513 .
@@ -3699,7 +3699,7 @@
 
 :_517 a :Sensor .
 
-:_515 :definedBy :_517 .
+:_515 :gathers :_517 .
 
 :_518 a :Segment ;
 	:length "237"^^xsd:int .
@@ -3728,7 +3728,7 @@
 
 :_523 a :Sensor .
 
-:_515 :definedBy :_523 .
+:_515 :gathers :_523 .
 
 :_524 a :Segment ;
 	:length "965"^^xsd:int .
@@ -3757,7 +3757,7 @@
 
 :_529 a :Sensor .
 
-:_515 :definedBy :_529 .
+:_515 :gathers :_529 .
 
 :_530 a :Segment ;
 	:length "214"^^xsd:int .
@@ -3786,7 +3786,7 @@
 
 :_535 a :Sensor .
 
-:_515 :definedBy :_535 .
+:_515 :gathers :_535 .
 
 :_536 a :Segment ;
 	:length "220"^^xsd:int .
@@ -3815,7 +3815,7 @@
 
 :_541 a :Sensor .
 
-:_515 :definedBy :_541 .
+:_515 :gathers :_541 .
 
 :_542 a :Segment ;
 	:length "578"^^xsd:int .
@@ -3844,7 +3844,7 @@
 
 :_547 a :Sensor .
 
-:_515 :definedBy :_547 .
+:_515 :gathers :_547 .
 
 :_548 a :Segment ;
 	:length "300"^^xsd:int .
@@ -3873,7 +3873,7 @@
 
 :_553 a :Sensor .
 
-:_515 :definedBy :_553 .
+:_515 :gathers :_553 .
 
 :_554 a :Segment ;
 	:length "441"^^xsd:int .
@@ -3902,7 +3902,7 @@
 
 :_559 a :Sensor .
 
-:_515 :definedBy :_559 .
+:_515 :gathers :_559 .
 
 :_560 a :Segment ;
 	:length "182"^^xsd:int .
@@ -3931,7 +3931,7 @@
 
 :_565 a :Sensor .
 
-:_515 :definedBy :_565 .
+:_515 :gathers :_565 .
 
 :_566 a :Segment ;
 	:length "880"^^xsd:int .
@@ -3972,7 +3972,7 @@
 
 :_573 a :Sensor .
 
-:_515 :definedBy :_573 .
+:_515 :gathers :_573 .
 
 :_574 a :Segment ;
 	:length "106"^^xsd:int .
@@ -4001,7 +4001,7 @@
 
 :_579 a :Sensor .
 
-:_515 :definedBy :_579 .
+:_515 :gathers :_579 .
 
 :_580 a :Segment ;
 	:length "911"^^xsd:int .
@@ -4030,7 +4030,7 @@
 
 :_585 a :Sensor .
 
-:_515 :definedBy :_585 .
+:_515 :gathers :_585 .
 
 :_586 a :Segment ;
 	:length "702"^^xsd:int .
@@ -4059,7 +4059,7 @@
 
 :_591 a :Sensor .
 
-:_515 :definedBy :_591 .
+:_515 :gathers :_591 .
 
 :_592 a :Segment ;
 	:length "615"^^xsd:int .
@@ -4088,7 +4088,7 @@
 
 :_597 a :Sensor .
 
-:_515 :definedBy :_597 .
+:_515 :gathers :_597 .
 
 :_598 a :Segment ;
 	:length "77"^^xsd:int .
@@ -4117,7 +4117,7 @@
 
 :_603 a :Sensor .
 
-:_515 :definedBy :_603 .
+:_515 :gathers :_603 .
 
 :_604 a :Segment ;
 	:length "723"^^xsd:int .
@@ -4146,7 +4146,7 @@
 
 :_609 a :Sensor .
 
-:_515 :definedBy :_609 .
+:_515 :gathers :_609 .
 
 :_610 a :Segment ;
 	:length "807"^^xsd:int .
@@ -4175,7 +4175,7 @@
 
 :_615 a :Sensor .
 
-:_515 :definedBy :_615 .
+:_515 :gathers :_615 .
 
 :_616 a :Segment ;
 	:length "82"^^xsd:int .
@@ -4204,7 +4204,7 @@
 
 :_621 a :Sensor .
 
-:_515 :definedBy :_621 .
+:_515 :gathers :_621 .
 
 :_622 a :Segment ;
 	:length "825"^^xsd:int .
@@ -4233,10 +4233,10 @@
 
 :_572 :sensor :_621 .
 
-:_572 :currentPosition :POSITION_STRAIGHT.
+:_572 :currentPosition :POSITION_LEFT.
 
 :_627 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_572 .
 
 :_515 :follows :_627 .
@@ -4245,7 +4245,7 @@
 
 :_629 a :Sensor .
 
-:_515 :definedBy :_629 .
+:_515 :gathers :_629 .
 
 :_630 a :Segment ;
 	:length "300"^^xsd:int .
@@ -4274,7 +4274,7 @@
 
 :_635 a :Sensor .
 
-:_515 :definedBy :_635 .
+:_515 :gathers :_635 .
 
 :_636 a :Segment ;
 	:length "244"^^xsd:int .
@@ -4303,7 +4303,7 @@
 
 :_641 a :Sensor .
 
-:_515 :definedBy :_641 .
+:_515 :gathers :_641 .
 
 :_642 a :Segment ;
 	:length "319"^^xsd:int .
@@ -4332,7 +4332,7 @@
 
 :_647 a :Sensor .
 
-:_515 :definedBy :_647 .
+:_515 :gathers :_647 .
 
 :_648 a :Segment ;
 	:length "557"^^xsd:int .
@@ -4361,7 +4361,7 @@
 
 :_653 a :Sensor .
 
-:_515 :definedBy :_653 .
+:_515 :gathers :_653 .
 
 :_654 a :Segment ;
 	:length "144"^^xsd:int .
@@ -4390,7 +4390,7 @@
 
 :_659 a :Sensor .
 
-:_515 :definedBy :_659 .
+:_515 :gathers :_659 .
 
 :_660 a :Segment ;
 	:length "911"^^xsd:int .
@@ -4419,7 +4419,7 @@
 
 :_665 a :Sensor .
 
-:_515 :definedBy :_665 .
+:_515 :gathers :_665 .
 
 :_666 a :Segment ;
 	:length "192"^^xsd:int .
@@ -4448,10 +4448,10 @@
 
 :_628 :sensor :_665 .
 
-:_628 :currentPosition :POSITION_LEFT.
+:_628 :currentPosition :POSITION_FAILURE.
 
 :_671 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_FAILURE ;
 	:switch :_628 .
 
 :_515 :follows :_671 .
@@ -4460,7 +4460,7 @@
 
 :_673 a :Sensor .
 
-:_515 :definedBy :_673 .
+:_515 :gathers :_673 .
 
 :_674 a :Segment ;
 	:length "357"^^xsd:int .
@@ -4489,7 +4489,7 @@
 
 :_679 a :Sensor .
 
-:_515 :definedBy :_679 .
+:_515 :gathers :_679 .
 
 :_680 a :Segment ;
 	:length "883"^^xsd:int .
@@ -4518,7 +4518,7 @@
 
 :_685 a :Sensor .
 
-:_515 :definedBy :_685 .
+:_515 :gathers :_685 .
 
 :_686 a :Segment ;
 	:length "551"^^xsd:int .
@@ -4547,7 +4547,7 @@
 
 :_691 a :Sensor .
 
-:_515 :definedBy :_691 .
+:_515 :gathers :_691 .
 
 :_692 a :Segment ;
 	:length "55"^^xsd:int .
@@ -4576,10 +4576,10 @@
 
 :_672 :sensor :_691 .
 
-:_672 :currentPosition :POSITION_STRAIGHT.
+:_672 :currentPosition :POSITION_LEFT.
 
 :_697 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_672 .
 
 :_515 :follows :_697 .
@@ -4588,7 +4588,7 @@
 
 :_699 a :Sensor .
 
-:_515 :definedBy :_699 .
+:_515 :gathers :_699 .
 
 :_700 a :Segment ;
 	:length "11"^^xsd:int .
@@ -4617,7 +4617,7 @@
 
 :_705 a :Sensor .
 
-:_515 :definedBy :_705 .
+:_515 :gathers :_705 .
 
 :_706 a :Segment ;
 	:length "15"^^xsd:int .
@@ -4646,7 +4646,7 @@
 
 :_711 a :Sensor .
 
-:_515 :definedBy :_711 .
+:_515 :gathers :_711 .
 
 :_712 a :Segment ;
 	:length "820"^^xsd:int .
@@ -4675,7 +4675,7 @@
 
 :_717 a :Sensor .
 
-:_515 :definedBy :_717 .
+:_515 :gathers :_717 .
 
 :_718 a :Segment ;
 	:length "448"^^xsd:int .
@@ -4704,7 +4704,7 @@
 
 :_723 a :Sensor .
 
-:_515 :definedBy :_723 .
+:_515 :gathers :_723 .
 
 :_724 a :Segment ;
 	:length "79"^^xsd:int .
@@ -4733,7 +4733,7 @@
 
 :_729 a :Sensor .
 
-:_515 :definedBy :_729 .
+:_515 :gathers :_729 .
 
 :_730 a :Segment ;
 	:length "170"^^xsd:int .
@@ -4762,7 +4762,7 @@
 
 :_735 a :Sensor .
 
-:_515 :definedBy :_735 .
+:_515 :gathers :_735 .
 
 :_736 a :Segment ;
 	:length "45"^^xsd:int .
@@ -4791,7 +4791,7 @@
 
 :_741 a :Sensor .
 
-:_515 :definedBy :_741 .
+:_515 :gathers :_741 .
 
 :_742 a :Segment ;
 	:length "983"^^xsd:int .
@@ -4820,7 +4820,7 @@
 
 :_747 a :Sensor .
 
-:_515 :definedBy :_747 .
+:_515 :gathers :_747 .
 
 :_748 a :Segment ;
 	:length "212"^^xsd:int .
@@ -4849,10 +4849,10 @@
 
 :_698 :sensor :_747 .
 
-:_698 :currentPosition :POSITION_FAILURE.
+:_698 :currentPosition :POSITION_RIGHT.
 
 :_753 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_698 .
 
 :_515 :follows :_753 .
@@ -4861,7 +4861,7 @@
 
 :_755 a :Sensor .
 
-:_515 :definedBy :_755 .
+:_515 :gathers :_755 .
 
 :_756 a :Segment ;
 	:length "358"^^xsd:int .
@@ -4890,7 +4890,7 @@
 
 :_761 a :Sensor .
 
-:_515 :definedBy :_761 .
+:_515 :gathers :_761 .
 
 :_762 a :Segment ;
 	:length "458"^^xsd:int .
@@ -4931,7 +4931,7 @@
 
 :_769 a :Sensor .
 
-:_515 :definedBy :_769 .
+:_515 :gathers :_769 .
 
 :_770 a :Segment ;
 	:length "156"^^xsd:int .
@@ -4960,7 +4960,7 @@
 
 :_775 a :Sensor .
 
-:_515 :definedBy :_775 .
+:_515 :gathers :_775 .
 
 :_776 a :Segment ;
 	:length "232"^^xsd:int .
@@ -4989,7 +4989,7 @@
 
 :_781 a :Sensor .
 
-:_515 :definedBy :_781 .
+:_515 :gathers :_781 .
 
 :_782 a :Segment ;
 	:length "141"^^xsd:int .
@@ -5018,7 +5018,7 @@
 
 :_787 a :Sensor .
 
-:_515 :definedBy :_787 .
+:_515 :gathers :_787 .
 
 :_788 a :Segment ;
 	:length "827"^^xsd:int .
@@ -5047,7 +5047,7 @@
 
 :_793 a :Sensor .
 
-:_515 :definedBy :_793 .
+:_515 :gathers :_793 .
 
 :_794 a :Segment ;
 	:length "464"^^xsd:int .
@@ -5076,7 +5076,7 @@
 
 :_799 a :Sensor .
 
-:_515 :definedBy :_799 .
+:_515 :gathers :_799 .
 
 :_800 a :Segment ;
 	:length "220"^^xsd:int .
@@ -5105,7 +5105,7 @@
 
 :_805 a :Sensor .
 
-:_515 :definedBy :_805 .
+:_515 :gathers :_805 .
 
 :_806 a :Segment ;
 	:length "8"^^xsd:int .
@@ -5134,7 +5134,7 @@
 
 :_811 a :Sensor .
 
-:_515 :definedBy :_811 .
+:_515 :gathers :_811 .
 
 :_812 a :Segment ;
 	:length "918"^^xsd:int .
@@ -5163,7 +5163,7 @@
 
 :_817 a :Sensor .
 
-:_515 :definedBy :_817 .
+:_515 :gathers :_817 .
 
 :_818 a :Segment ;
 	:length "843"^^xsd:int .
@@ -5192,10 +5192,10 @@
 
 :_768 :sensor :_817 .
 
-:_768 :currentPosition :POSITION_RIGHT.
+:_768 :currentPosition :POSITION_LEFT.
 
 :_823 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_768 .
 
 :_515 :follows :_823 .
@@ -5204,7 +5204,7 @@
 
 :_825 a :Sensor .
 
-:_515 :definedBy :_825 .
+:_515 :gathers :_825 .
 
 :_826 a :Segment ;
 	:length "867"^^xsd:int .
@@ -5233,7 +5233,7 @@
 
 :_831 a :Sensor .
 
-:_515 :definedBy :_831 .
+:_515 :gathers :_831 .
 
 :_832 a :Segment ;
 	:length "991"^^xsd:int .
@@ -5262,7 +5262,7 @@
 
 :_837 a :Sensor .
 
-:_515 :definedBy :_837 .
+:_515 :gathers :_837 .
 
 :_838 a :Segment ;
 	:length "22"^^xsd:int .
@@ -5291,7 +5291,7 @@
 
 :_843 a :Sensor .
 
-:_515 :definedBy :_843 .
+:_515 :gathers :_843 .
 
 :_844 a :Segment ;
 	:length "997"^^xsd:int .
@@ -5320,7 +5320,7 @@
 
 :_849 a :Sensor .
 
-:_515 :definedBy :_849 .
+:_515 :gathers :_849 .
 
 :_850 a :Segment ;
 	:length "848"^^xsd:int .
@@ -5349,10 +5349,10 @@
 
 :_824 :sensor :_849 .
 
-:_824 :currentPosition :POSITION_FAILURE.
+:_824 :currentPosition :POSITION_LEFT.
 
 :_855 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_LEFT ;
 	:switch :_824 .
 
 :_515 :follows :_855 .
@@ -5361,7 +5361,7 @@
 
 :_857 a :Sensor .
 
-:_515 :definedBy :_857 .
+:_515 :gathers :_857 .
 
 :_858 a :Segment ;
 	:length "979"^^xsd:int .
@@ -5390,7 +5390,7 @@
 
 :_863 a :Sensor .
 
-:_515 :definedBy :_863 .
+:_515 :gathers :_863 .
 
 :_864 a :Segment ;
 	:length "118"^^xsd:int .
@@ -5431,7 +5431,7 @@
 
 :_871 a :Sensor .
 
-:_515 :definedBy :_871 .
+:_515 :gathers :_871 .
 
 :_872 a :Segment ;
 	:length "641"^^xsd:int .
@@ -5460,7 +5460,7 @@
 
 :_877 a :Sensor .
 
-:_515 :definedBy :_877 .
+:_515 :gathers :_877 .
 
 :_878 a :Segment ;
 	:length "557"^^xsd:int .
@@ -5489,7 +5489,7 @@
 
 :_883 a :Sensor .
 
-:_515 :definedBy :_883 .
+:_515 :gathers :_883 .
 
 :_884 a :Segment ;
 	:length "487"^^xsd:int .
@@ -5518,7 +5518,7 @@
 
 :_889 a :Sensor .
 
-:_515 :definedBy :_889 .
+:_515 :gathers :_889 .
 
 :_890 a :Segment ;
 	:length "8"^^xsd:int .
@@ -5547,7 +5547,7 @@
 
 :_895 a :Sensor .
 
-:_515 :definedBy :_895 .
+:_515 :gathers :_895 .
 
 :_896 a :Segment ;
 	:length "632"^^xsd:int .
@@ -5576,7 +5576,7 @@
 
 :_901 a :Sensor .
 
-:_515 :definedBy :_901 .
+:_515 :gathers :_901 .
 
 :_902 a :Segment ;
 	:length "909"^^xsd:int .
@@ -5605,7 +5605,7 @@
 
 :_907 a :Sensor .
 
-:_515 :definedBy :_907 .
+:_515 :gathers :_907 .
 
 :_908 a :Segment ;
 	:length "793"^^xsd:int .
@@ -5634,10 +5634,10 @@
 
 :_870 :sensor :_907 .
 
-:_870 :currentPosition :POSITION_STRAIGHT.
+:_870 :currentPosition :POSITION_RIGHT.
 
 :_913 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_870 .
 
 :_515 :follows :_913 .
@@ -6303,7 +6303,7 @@
 
 :_917 a :Sensor .
 
-:_915 :definedBy :_917 .
+:_915 :gathers :_917 .
 
 :_918 a :Segment ;
 	:length "46"^^xsd:int .
@@ -6332,7 +6332,7 @@
 
 :_923 a :Sensor .
 
-:_915 :definedBy :_923 .
+:_915 :gathers :_923 .
 
 :_924 a :Segment ;
 	:length "283"^^xsd:int .
@@ -6361,7 +6361,7 @@
 
 :_929 a :Sensor .
 
-:_915 :definedBy :_929 .
+:_915 :gathers :_929 .
 
 :_930 a :Segment ;
 	:length "124"^^xsd:int .
@@ -6390,7 +6390,7 @@
 
 :_935 a :Sensor .
 
-:_915 :definedBy :_935 .
+:_915 :gathers :_935 .
 
 :_936 a :Segment ;
 	:length "954"^^xsd:int .
@@ -6419,7 +6419,7 @@
 
 :_941 a :Sensor .
 
-:_915 :definedBy :_941 .
+:_915 :gathers :_941 .
 
 :_942 a :Segment ;
 	:length "490"^^xsd:int .
@@ -6448,7 +6448,7 @@
 
 :_947 a :Sensor .
 
-:_915 :definedBy :_947 .
+:_915 :gathers :_947 .
 
 :_948 a :Segment ;
 	:length "988"^^xsd:int .
@@ -6477,10 +6477,10 @@
 
 :_916 :sensor :_947 .
 
-:_916 :currentPosition :POSITION_STRAIGHT.
+:_916 :currentPosition :POSITION_RIGHT.
 
 :_953 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_916 .
 
 :_915 :follows :_953 .
@@ -6489,7 +6489,7 @@
 
 :_955 a :Sensor .
 
-:_915 :definedBy :_955 .
+:_915 :gathers :_955 .
 
 :_956 a :Segment ;
 	:length "804"^^xsd:int .
@@ -6518,7 +6518,7 @@
 
 :_961 a :Sensor .
 
-:_915 :definedBy :_961 .
+:_915 :gathers :_961 .
 
 :_962 a :Segment ;
 	:length "821"^^xsd:int .
@@ -6547,7 +6547,7 @@
 
 :_967 a :Sensor .
 
-:_915 :definedBy :_967 .
+:_915 :gathers :_967 .
 
 :_968 a :Segment ;
 	:length "488"^^xsd:int .
@@ -6576,7 +6576,7 @@
 
 :_973 a :Sensor .
 
-:_915 :definedBy :_973 .
+:_915 :gathers :_973 .
 
 :_974 a :Segment ;
 	:length "234"^^xsd:int .
@@ -6605,7 +6605,7 @@
 
 :_979 a :Sensor .
 
-:_915 :definedBy :_979 .
+:_915 :gathers :_979 .
 
 :_980 a :Segment ;
 	:length "672"^^xsd:int .
@@ -6634,7 +6634,7 @@
 
 :_985 a :Sensor .
 
-:_915 :definedBy :_985 .
+:_915 :gathers :_985 .
 
 :_986 a :Segment ;
 	:length "871"^^xsd:int .
@@ -6663,7 +6663,7 @@
 
 :_991 a :Sensor .
 
-:_915 :definedBy :_991 .
+:_915 :gathers :_991 .
 
 :_992 a :Segment ;
 	:length "963"^^xsd:int .
@@ -6692,7 +6692,7 @@
 
 :_997 a :Sensor .
 
-:_915 :definedBy :_997 .
+:_915 :gathers :_997 .
 
 :_998 a :Segment ;
 	:length "667"^^xsd:int .
@@ -6721,10 +6721,10 @@
 
 :_954 :sensor :_997 .
 
-:_954 :currentPosition :POSITION_FAILURE.
+:_954 :currentPosition :POSITION_RIGHT.
 
 :_1003 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_954 .
 
 :_915 :follows :_1003 .
@@ -6881,7 +6881,7 @@
 
 :_1006 a :Sensor .
 
-:_1004 :definedBy :_1006 .
+:_1004 :gathers :_1006 .
 
 :_1007 a :Segment ;
 	:length "2"^^xsd:int .
@@ -6910,7 +6910,7 @@
 
 :_1012 a :Sensor .
 
-:_1004 :definedBy :_1012 .
+:_1004 :gathers :_1012 .
 
 :_1013 a :Segment ;
 	:length "131"^^xsd:int .
@@ -6939,7 +6939,7 @@
 
 :_1018 a :Sensor .
 
-:_1004 :definedBy :_1018 .
+:_1004 :gathers :_1018 .
 
 :_1019 a :Segment ;
 	:length "63"^^xsd:int .
@@ -6968,7 +6968,7 @@
 
 :_1024 a :Sensor .
 
-:_1004 :definedBy :_1024 .
+:_1004 :gathers :_1024 .
 
 :_1025 a :Segment ;
 	:length "360"^^xsd:int .
@@ -6997,7 +6997,7 @@
 
 :_1030 a :Sensor .
 
-:_1004 :definedBy :_1030 .
+:_1004 :gathers :_1030 .
 
 :_1031 a :Segment ;
 	:length "649"^^xsd:int .
@@ -7026,7 +7026,7 @@
 
 :_1036 a :Sensor .
 
-:_1004 :definedBy :_1036 .
+:_1004 :gathers :_1036 .
 
 :_1037 a :Segment ;
 	:length "14"^^xsd:int .
@@ -7055,10 +7055,10 @@
 
 :_1005 :sensor :_1036 .
 
-:_1005 :currentPosition :POSITION_RIGHT.
+:_1005 :currentPosition :POSITION_LEFT.
 
 :_1042 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_1005 .
 
 :_1004 :follows :_1042 .
@@ -7067,7 +7067,7 @@
 
 :_1044 a :Sensor .
 
-:_1004 :definedBy :_1044 .
+:_1004 :gathers :_1044 .
 
 :_1045 a :Segment ;
 	:length "898"^^xsd:int .
@@ -7096,7 +7096,7 @@
 
 :_1050 a :Sensor .
 
-:_1004 :definedBy :_1050 .
+:_1004 :gathers :_1050 .
 
 :_1051 a :Segment ;
 	:length "606"^^xsd:int .
@@ -7125,7 +7125,7 @@
 
 :_1056 a :Sensor .
 
-:_1004 :definedBy :_1056 .
+:_1004 :gathers :_1056 .
 
 :_1057 a :Segment ;
 	:length "890"^^xsd:int .
@@ -7154,10 +7154,10 @@
 
 :_1043 :sensor :_1056 .
 
-:_1043 :currentPosition :POSITION_STRAIGHT.
+:_1043 :currentPosition :POSITION_FAILURE.
 
 :_1062 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_FAILURE ;
 	:switch :_1043 .
 
 :_1004 :follows :_1062 .
@@ -7166,7 +7166,7 @@
 
 :_1064 a :Sensor .
 
-:_1004 :definedBy :_1064 .
+:_1004 :gathers :_1064 .
 
 :_1065 a :Segment ;
 	:length "423"^^xsd:int .
@@ -7195,7 +7195,7 @@
 
 :_1070 a :Sensor .
 
-:_1004 :definedBy :_1070 .
+:_1004 :gathers :_1070 .
 
 :_1071 a :Segment ;
 	:length "939"^^xsd:int .
@@ -7224,7 +7224,7 @@
 
 :_1076 a :Sensor .
 
-:_1004 :definedBy :_1076 .
+:_1004 :gathers :_1076 .
 
 :_1077 a :Segment ;
 	:length "760"^^xsd:int .
@@ -7253,7 +7253,7 @@
 
 :_1082 a :Sensor .
 
-:_1004 :definedBy :_1082 .
+:_1004 :gathers :_1082 .
 
 :_1083 a :Segment ;
 	:length "90"^^xsd:int .
@@ -7282,7 +7282,7 @@
 
 :_1088 a :Sensor .
 
-:_1004 :definedBy :_1088 .
+:_1004 :gathers :_1088 .
 
 :_1089 a :Segment ;
 	:length "7"^^xsd:int .
@@ -7311,7 +7311,7 @@
 
 :_1094 a :Sensor .
 
-:_1004 :definedBy :_1094 .
+:_1004 :gathers :_1094 .
 
 :_1095 a :Segment ;
 	:length "878"^^xsd:int .
@@ -7340,7 +7340,7 @@
 
 :_1100 a :Sensor .
 
-:_1004 :definedBy :_1100 .
+:_1004 :gathers :_1100 .
 
 :_1101 a :Segment ;
 	:length "127"^^xsd:int .
@@ -7369,7 +7369,7 @@
 
 :_1106 a :Sensor .
 
-:_1004 :definedBy :_1106 .
+:_1004 :gathers :_1106 .
 
 :_1107 a :Segment ;
 	:length "54"^^xsd:int .
@@ -7398,10 +7398,10 @@
 
 :_1063 :sensor :_1106 .
 
-:_1063 :currentPosition :POSITION_STRAIGHT.
+:_1063 :currentPosition :POSITION_RIGHT.
 
 :_1112 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_1063 .
 
 :_1004 :follows :_1112 .
@@ -7410,7 +7410,7 @@
 
 :_1114 a :Sensor .
 
-:_1004 :definedBy :_1114 .
+:_1004 :gathers :_1114 .
 
 :_1115 a :Segment ;
 	:length "267"^^xsd:int .
@@ -7439,7 +7439,7 @@
 
 :_1120 a :Sensor .
 
-:_1004 :definedBy :_1120 .
+:_1004 :gathers :_1120 .
 
 :_1121 a :Segment ;
 	:length "183"^^xsd:int .
@@ -7468,7 +7468,7 @@
 
 :_1126 a :Sensor .
 
-:_1004 :definedBy :_1126 .
+:_1004 :gathers :_1126 .
 
 :_1127 a :Segment ;
 	:length "422"^^xsd:int .
@@ -7497,10 +7497,10 @@
 
 :_1113 :sensor :_1126 .
 
-:_1113 :currentPosition :POSITION_FAILURE.
+:_1113 :currentPosition :POSITION_LEFT.
 
 :_1132 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_LEFT ;
 	:switch :_1113 .
 
 :_1004 :follows :_1132 .
@@ -7509,7 +7509,7 @@
 
 :_1134 a :Sensor .
 
-:_1004 :definedBy :_1134 .
+:_1004 :gathers :_1134 .
 
 :_1135 a :Segment ;
 	:length "481"^^xsd:int .
@@ -7538,7 +7538,7 @@
 
 :_1140 a :Sensor .
 
-:_1004 :definedBy :_1140 .
+:_1004 :gathers :_1140 .
 
 :_1141 a :Segment ;
 	:length "929"^^xsd:int .
@@ -7567,7 +7567,7 @@
 
 :_1146 a :Sensor .
 
-:_1004 :definedBy :_1146 .
+:_1004 :gathers :_1146 .
 
 :_1147 a :Segment ;
 	:length "857"^^xsd:int .
@@ -7596,7 +7596,7 @@
 
 :_1152 a :Sensor .
 
-:_1004 :definedBy :_1152 .
+:_1004 :gathers :_1152 .
 
 :_1153 a :Segment ;
 	:length "234"^^xsd:int .
@@ -7625,7 +7625,7 @@
 
 :_1158 a :Sensor .
 
-:_1004 :definedBy :_1158 .
+:_1004 :gathers :_1158 .
 
 :_1159 a :Segment ;
 	:length "200"^^xsd:int .
@@ -7654,7 +7654,7 @@
 
 :_1164 a :Sensor .
 
-:_1004 :definedBy :_1164 .
+:_1004 :gathers :_1164 .
 
 :_1165 a :Segment ;
 	:length "533"^^xsd:int .
@@ -7683,7 +7683,7 @@
 
 :_1170 a :Sensor .
 
-:_1004 :definedBy :_1170 .
+:_1004 :gathers :_1170 .
 
 :_1171 a :Segment ;
 	:length "907"^^xsd:int .
@@ -7712,10 +7712,10 @@
 
 :_1133 :sensor :_1170 .
 
-:_1133 :currentPosition :POSITION_RIGHT.
+:_1133 :currentPosition :POSITION_LEFT.
 
 :_1176 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_LEFT ;
 	:switch :_1133 .
 
 :_1004 :follows :_1176 .
@@ -7724,7 +7724,7 @@
 
 :_1178 a :Sensor .
 
-:_1004 :definedBy :_1178 .
+:_1004 :gathers :_1178 .
 
 :_1179 a :Segment ;
 	:length "780"^^xsd:int .
@@ -7753,7 +7753,7 @@
 
 :_1184 a :Sensor .
 
-:_1004 :definedBy :_1184 .
+:_1004 :gathers :_1184 .
 
 :_1185 a :Segment ;
 	:length "560"^^xsd:int .
@@ -7782,7 +7782,7 @@
 
 :_1190 a :Sensor .
 
-:_1004 :definedBy :_1190 .
+:_1004 :gathers :_1190 .
 
 :_1191 a :Segment ;
 	:length "274"^^xsd:int .
@@ -7811,7 +7811,7 @@
 
 :_1196 a :Sensor .
 
-:_1004 :definedBy :_1196 .
+:_1004 :gathers :_1196 .
 
 :_1197 a :Segment ;
 	:length "691"^^xsd:int .
@@ -7840,7 +7840,7 @@
 
 :_1202 a :Sensor .
 
-:_1004 :definedBy :_1202 .
+:_1004 :gathers :_1202 .
 
 :_1203 a :Segment ;
 	:length "225"^^xsd:int .
@@ -7869,7 +7869,7 @@
 
 :_1208 a :Sensor .
 
-:_1004 :definedBy :_1208 .
+:_1004 :gathers :_1208 .
 
 :_1209 a :Segment ;
 	:length "108"^^xsd:int .
@@ -7898,7 +7898,7 @@
 
 :_1214 a :Sensor .
 
-:_1004 :definedBy :_1214 .
+:_1004 :gathers :_1214 .
 
 :_1215 a :Segment ;
 	:length "416"^^xsd:int .
@@ -7927,7 +7927,7 @@
 
 :_1220 a :Sensor .
 
-:_1004 :definedBy :_1220 .
+:_1004 :gathers :_1220 .
 
 :_1221 a :Segment ;
 	:length "93"^^xsd:int .
@@ -7956,7 +7956,7 @@
 
 :_1226 a :Sensor .
 
-:_1004 :definedBy :_1226 .
+:_1004 :gathers :_1226 .
 
 :_1227 a :Segment ;
 	:length "49"^^xsd:int .
@@ -7985,10 +7985,10 @@
 
 :_1177 :sensor :_1226 .
 
-:_1177 :currentPosition :POSITION_FAILURE.
+:_1177 :currentPosition :POSITION_RIGHT.
 
 :_1232 a :SwitchPosition ;
-	:position :POSITION_FAILURE ;
+	:position :POSITION_RIGHT ;
 	:switch :_1177 .
 
 :_1004 :follows :_1232 .
@@ -7997,7 +7997,7 @@
 
 :_1234 a :Sensor .
 
-:_1004 :definedBy :_1234 .
+:_1004 :gathers :_1234 .
 
 :_1235 a :Segment ;
 	:length "4"^^xsd:int .
@@ -8026,7 +8026,7 @@
 
 :_1240 a :Sensor .
 
-:_1004 :definedBy :_1240 .
+:_1004 :gathers :_1240 .
 
 :_1241 a :Segment ;
 	:length "145"^^xsd:int .
@@ -8055,10 +8055,10 @@
 
 :_1233 :sensor :_1240 .
 
-:_1233 :currentPosition :POSITION_STRAIGHT.
+:_1233 :currentPosition :POSITION_RIGHT.
 
 :_1246 a :SwitchPosition ;
-	:position :POSITION_STRAIGHT ;
+	:position :POSITION_RIGHT ;
 	:switch :_1233 .
 
 :_1004 :follows :_1246 .
