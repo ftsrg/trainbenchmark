@@ -11,5 +11,5 @@ Export-Package: hu.bme.mit.trainbenchmark.railway,
  hu.bme.mit.trainbenchmark.railway.impl,
  hu.bme.mit.trainbenchmark.railway.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;bundle-version="2.9.2";visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport;bundle-version="2.9.2"
 Bundle-ActivationPolicy: lazy

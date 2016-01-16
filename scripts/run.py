@@ -28,11 +28,17 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--generate",
                         help="generate models",
                         action="store_true")
+    parser.add_argument("-t", "--test",
+                        help="perform the tests",
+                        action="store_true")
     parser.add_argument("-f", "--formats-only",
                         help="generate the formats specified in the configuration file",
                         action="store_true")
     parser.add_argument("-m", "--measure",
                         help="run the benchmark",
+                        action="store_true")
+    parser.add_argument("-o", "--offline",
+                        help="run offline build",
                         action="store_true")
     parser.add_argument("-s", "--skip-tests",
                         help="skip JUnit tests",
@@ -83,8 +89,8 @@ if __name__ == "__main__":
         args.build = True
         args.generate = True
         args.measure = True
-    if args.build:
-        build.build(java_opts, format_names, tool_names, args.skip_tests)
+    if args.build or args.test:
+        build.build(java_opts, format_names, tool_names, args.skip_tests, args.test, args.offline)
     if args.generate:
         generate.generate_models(java_opts, formats, scenarios, sizes)
     if args.measure:

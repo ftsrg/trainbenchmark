@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
@@ -31,8 +20,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -45,7 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getEntry <em>Entry</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getFollows <em>Follows</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getExit <em>Exit</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getDefinedBy <em>Defined By</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getGathers <em>Gathers</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,14 +72,14 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 	protected Semaphore exit;
 
 	/**
-	 * The cached value of the '{@link #getDefinedBy() <em>Defined By</em>}' containment reference list.
+	 * The cached value of the '{@link #getGathers() <em>Gathers</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefinedBy()
+	 * @see #getGathers()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Sensor> definedBy;
+	protected EList<Sensor> gathers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -204,11 +193,11 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Sensor> getDefinedBy() {
-		if (definedBy == null) {
-			definedBy = new EObjectContainmentEList<Sensor>(Sensor.class, this, RailwayPackage.ROUTE__DEFINED_BY);
+	public EList<Sensor> getGathers() {
+		if (gathers == null) {
+			gathers = new EObjectResolvingEList<Sensor>(Sensor.class, this, RailwayPackage.ROUTE__GATHERS);
 		}
-		return definedBy;
+		return gathers;
 	}
 
 	/**
@@ -236,8 +225,6 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 		switch (featureID) {
 			case RailwayPackage.ROUTE__FOLLOWS:
 				return ((InternalEList<?>)getFollows()).basicRemove(otherEnd, msgs);
-			case RailwayPackage.ROUTE__DEFINED_BY:
-				return ((InternalEList<?>)getDefinedBy()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -258,8 +245,8 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 			case RailwayPackage.ROUTE__EXIT:
 				if (resolve) return getExit();
 				return basicGetExit();
-			case RailwayPackage.ROUTE__DEFINED_BY:
-				return getDefinedBy();
+			case RailwayPackage.ROUTE__GATHERS:
+				return getGathers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -283,9 +270,9 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 			case RailwayPackage.ROUTE__EXIT:
 				setExit((Semaphore)newValue);
 				return;
-			case RailwayPackage.ROUTE__DEFINED_BY:
-				getDefinedBy().clear();
-				getDefinedBy().addAll((Collection<? extends Sensor>)newValue);
+			case RailwayPackage.ROUTE__GATHERS:
+				getGathers().clear();
+				getGathers().addAll((Collection<? extends Sensor>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,8 +295,8 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 			case RailwayPackage.ROUTE__EXIT:
 				setExit((Semaphore)null);
 				return;
-			case RailwayPackage.ROUTE__DEFINED_BY:
-				getDefinedBy().clear();
+			case RailwayPackage.ROUTE__GATHERS:
+				getGathers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -329,8 +316,8 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 				return follows != null && !follows.isEmpty();
 			case RailwayPackage.ROUTE__EXIT:
 				return exit != null;
-			case RailwayPackage.ROUTE__DEFINED_BY:
-				return definedBy != null && !definedBy.isEmpty();
+			case RailwayPackage.ROUTE__GATHERS:
+				return gathers != null && !gathers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -1,3 +1,0 @@
-SwitchSensor = new Table()
-g.V('labels',':Switch:TrackElement').filter{!it.outE('sensor').hasNext()}.as('sw').table(SwitchSensor)
-SwitchSensor
