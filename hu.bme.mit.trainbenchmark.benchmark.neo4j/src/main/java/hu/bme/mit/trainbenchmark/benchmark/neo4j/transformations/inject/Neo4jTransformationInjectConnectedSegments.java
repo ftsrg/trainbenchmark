@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeConnectsTo;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSensor;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeMonitoredBy;
 
 import java.util.Collection;
 
@@ -33,7 +33,7 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 	@Override
 	public void rhs(final Collection<Node> segments) {
 		for (final Node segment1 : segments) {
-			final Iterable<Relationship> sensors = segment1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeSensor);
+			final Iterable<Relationship> sensors = segment1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeMonitoredBy);
 			if (!sensors.iterator().hasNext()) {
 				continue;
 			}
@@ -53,7 +53,7 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 			final Node segment2 = driver.getGraphDb().createNode(labelSegment);
 			segment1.createRelationshipTo(segment2, relationshipTypeConnectsTo);
 			segment2.createRelationshipTo(segment3, relationshipTypeConnectsTo);
-			segment2.createRelationshipTo(sensor, relationshipTypeSensor);
+			segment2.createRelationshipTo(sensor, relationshipTypeMonitoredBy);
 		}
 	}
 

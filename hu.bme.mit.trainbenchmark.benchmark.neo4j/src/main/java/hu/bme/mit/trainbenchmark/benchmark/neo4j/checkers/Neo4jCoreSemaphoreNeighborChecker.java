@@ -65,13 +65,13 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 
 					// (route1:Route)-[:definedBy]->(sensor1:Sensor)
 					final Iterable<Relationship> definedBys1 = route1.getRelationships(Direction.OUTGOING,
-							Neo4jConstants.relationshipTypeDefinedBy);
+							Neo4jConstants.relationshipTypeGathers);
 					for (final Relationship definedBy1 : definedBys1) {
 						final Node sensor1 = definedBy1.getEndNode();
 
 						// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
 						final Iterable<Relationship> relationshipSensors1 = sensor1.getRelationships(Direction.INCOMING,
-								Neo4jConstants.relationshipTypeSensor);
+								Neo4jConstants.relationshipTypeMonitoredBy);
 						for (final Relationship relationshipSensor : relationshipSensors1) {
 							final Node te1 = relationshipSensor.getStartNode();
 							if (!te1.hasLabel(Neo4jConstants.labelTrackElement)) {
@@ -89,7 +89,7 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 
 								// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
 								final Iterable<Relationship> relationshipSensors2 = te2.getRelationships(Direction.OUTGOING,
-										Neo4jConstants.relationshipTypeSensor);
+										Neo4jConstants.relationshipTypeMonitoredBy);
 								for (final Relationship relationshipSensor2 : relationshipSensors2) {
 									final Node sensor2 = relationshipSensor2.getEndNode();
 									if (!sensor2.hasLabel(Neo4jConstants.labelSensor)) {
@@ -98,7 +98,7 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 
 									// (sensor2:Sensor)<-[:definedBy]-(route2:Route),
 									final Iterable<Relationship> definedBys2 = sensor2.getRelationships(Direction.INCOMING,
-											Neo4jConstants.relationshipTypeDefinedBy);
+											Neo4jConstants.relationshipTypeGathers);
 									for (final Relationship definedBy2 : definedBys2) {
 										final Node route2 = definedBy2.getStartNode();
 										if (!route2.hasLabel(Neo4jConstants.labelRoute)) {

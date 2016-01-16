@@ -10,10 +10,10 @@
 <node id="n6" labels=":Segment:TrackElement"><data key="labels">:Segment:TrackElement</data></node>
 <node id="n7" labels=":Segment:TrackElement"><data key="labels">:Segment:TrackElement</data></node>
 <edge id="e0" source="n2" target="n1" label="exit"><data key="label">exit</data></edge>
-<edge id="e1" source="n2" target="n4" label="definedBy"><data key="label">definedBy</data></edge>
-<edge id="e2" source="n3" target="n5" label="definedBy"><data key="label">definedBy</data></edge>
-<edge id="e3" source="n6" target="n4" label="sensor"><data key="label">sensor</data></edge>
-<edge id="e4" source="n7" target="n5" label="sensor"><data key="label">sensor</data></edge>
+<edge id="e1" source="n2" target="n4" label="gathers"><data key="label">gathers</data></edge>
+<edge id="e2" source="n3" target="n5" label="gathers"><data key="label">gathers</data></edge>
+<edge id="e3" source="n6" target="n4" label="monitoredBy"><data key="label">monitoredBy</data></edge>
+<edge id="e4" source="n7" target="n5" label="monitoredBy"><data key="label">monitoredBy</data></edge>
 <edge id="e5" source="n6" target="n7" label="connectsTo"><data key="label">connectsTo</data></edge>
 </graph>
 </graphml>

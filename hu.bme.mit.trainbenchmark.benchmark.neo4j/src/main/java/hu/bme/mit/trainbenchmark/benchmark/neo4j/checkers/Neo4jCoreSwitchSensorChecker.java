@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSensor;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSwitch;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSensor;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeMonitoredBy;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class Neo4jCoreSwitchSensorChecker extends Neo4jCoreChecker<Neo4jSwitchSe
 				final Node sw = switches.next();
 				
 				// (sw)-[:sensor]->(Sensor) NAC
-				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeSensor);
+				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeMonitoredBy);
 
 				boolean hasSensor = false;
 				for (final Relationship relationshipSensor : relationshipSensors) {

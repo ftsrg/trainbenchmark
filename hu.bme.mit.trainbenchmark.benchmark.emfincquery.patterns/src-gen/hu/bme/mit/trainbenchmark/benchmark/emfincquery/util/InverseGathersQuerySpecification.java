@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.util;
 
 import com.google.common.collect.Sets;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseDefinedByMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseDefinedByMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseGathersMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.InverseGathersMatcher;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -23,15 +23,15 @@ import org.eclipse.incquery.runtime.matchers.psystem.queries.QueryInitialization
 import org.eclipse.incquery.runtime.matchers.tuple.FlatTuple;
 
 /**
- * A pattern-specific query specification that can instantiate InverseDefinedByMatcher in a type-safe way.
+ * A pattern-specific query specification that can instantiate InverseGathersMatcher in a type-safe way.
  * 
- * @see InverseDefinedByMatcher
- * @see InverseDefinedByMatch
+ * @see InverseGathersMatcher
+ * @see InverseGathersMatch
  * 
  */
 @SuppressWarnings("all")
-public final class InverseDefinedByQuerySpecification extends BaseGeneratedEMFQuerySpecification<InverseDefinedByMatcher> {
-  private InverseDefinedByQuerySpecification() {
+public final class InverseGathersQuerySpecification extends BaseGeneratedEMFQuerySpecification<InverseGathersMatcher> {
+  private InverseGathersQuerySpecification() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -40,7 +40,7 @@ public final class InverseDefinedByQuerySpecification extends BaseGeneratedEMFQu
    * @throws IncQueryException if the pattern definition could not be loaded
    * 
    */
-  public static InverseDefinedByQuerySpecification instance() throws IncQueryException {
+  public static InverseGathersQuerySpecification instance() throws IncQueryException {
     try{
     	return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -49,34 +49,34 @@ public final class InverseDefinedByQuerySpecification extends BaseGeneratedEMFQu
   }
   
   @Override
-  protected InverseDefinedByMatcher instantiate(final IncQueryEngine engine) throws IncQueryException {
-    return InverseDefinedByMatcher.on(engine);
+  protected InverseGathersMatcher instantiate(final IncQueryEngine engine) throws IncQueryException {
+    return InverseGathersMatcher.on(engine);
   }
   
   @Override
-  public InverseDefinedByMatch newEmptyMatch() {
-    return InverseDefinedByMatch.newEmptyMatch();
+  public InverseGathersMatch newEmptyMatch() {
+    return InverseGathersMatch.newEmptyMatch();
   }
   
   @Override
-  public InverseDefinedByMatch newMatch(final Object... parameters) {
-    return InverseDefinedByMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Route) parameters[1]);
+  public InverseGathersMatch newMatch(final Object... parameters) {
+    return InverseGathersMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Route) parameters[1]);
   }
   
   private static class LazyHolder {
-    private final static InverseDefinedByQuerySpecification INSTANCE = make();
+    private final static InverseGathersQuerySpecification INSTANCE = make();
     
-    public static InverseDefinedByQuerySpecification make() {
-      return new InverseDefinedByQuerySpecification();					
+    public static InverseGathersQuerySpecification make() {
+      return new InverseGathersQuerySpecification();					
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static InverseDefinedByQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private final static InverseGathersQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseDefinedBy";
+      return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseGathers";
     }
     
     @Override
@@ -97,14 +97,14 @@ public final class InverseDefinedByQuerySpecification extends BaseGeneratedEMFQu
       		PBody body = new PBody(this);
       		PVariable var_sensor = body.getOrCreateVariableByName("sensor");
       		PVariable var_route = body.getOrCreateVariableByName("route");
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      			new ExportedParameter(body, var_sensor, "sensor"),
-      			
-      			new ExportedParameter(body, var_route, "route")
+      		   new ExportedParameter(body, var_sensor, "sensor"),
+      		   new ExportedParameter(body, var_route, "route")
       		));
+      		// 	Route.gathers(route, sensor)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "definedBy")));
+      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "gathers")));
       		new Equality(body, var__virtual_0_, var_sensor);
       		bodies.add(body);
       	}

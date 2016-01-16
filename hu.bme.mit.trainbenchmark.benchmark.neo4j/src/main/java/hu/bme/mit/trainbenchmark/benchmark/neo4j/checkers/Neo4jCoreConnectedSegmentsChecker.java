@@ -57,7 +57,7 @@ public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jCon
 				
 				// (sensor:Sensor)<-[:sensor]-(segment1:Segment)
 				final Iterator<Relationship> sensorEdges1 = sensor.getRelationships(Direction.INCOMING,
-						Neo4jConstants.relationshipTypeSensor).iterator();			
+						Neo4jConstants.relationshipTypeMonitoredBy).iterator();			
 				while (sensorEdges1.hasNext()) {
 					final Node segment1 = sensorEdges1.next().getStartNode();
 					if (!segment1.hasLabel(Neo4jConstants.labelSegment)) {
@@ -126,7 +126,7 @@ public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jCon
 
 					// (segment6:Segment)-[:sensor]->(sensor:Sensor)
 					final Iterator<Relationship> sensorEdges2 = segment6.getRelationships(Direction.OUTGOING,
-							Neo4jConstants.relationshipTypeSensor).iterator();
+							Neo4jConstants.relationshipTypeMonitoredBy).iterator();
 					
 					if (!sensorEdges2.hasNext()) {
 						continue;

@@ -55,8 +55,8 @@ public class EMFAPISwitchSetChecker extends EMFAPIChecker<EMFSwitchSetMatch> {
 			if (semaphore.getSignal() == Signal.GO) {
 				// (route:Route)-[:follows]->(swP:SwitchPosition)
 				for (final SwitchPosition switchPosition : route.getFollows()) {
-					// (swP:SwitchPosition)-[:switch]->(sw:Switch)
-					final Switch sw = switchPosition.getSwitch();
+					// (swP:SwitchPosition)-[:target]->(sw:Switch)
+					final Switch sw = switchPosition.getTarget();
 					// sw.currentPosition != swP.position
 					if (sw.getCurrentPosition() != switchPosition.getPosition()) {
 						matches.add(new EMFSwitchSetMatch(semaphore, route, switchPosition, sw));

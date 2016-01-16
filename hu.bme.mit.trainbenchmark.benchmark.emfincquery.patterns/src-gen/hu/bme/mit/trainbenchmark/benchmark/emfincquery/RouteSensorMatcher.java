@@ -33,10 +33,10 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * pattern RouteSensor(route, sensor, swP, sw)
  * {
  * 	Route.follows(route, swP);
- * 	SwitchPosition.^switch(swP, sw);
- * 	TrackElement.sensor(sw, sensor);
+ * 	SwitchPosition.target(swP, sw);
+ * 	TrackElement.monitoredBy(sw, sensor);
  * 	
- * 	neg find inverseDefinedBy(sensor, route);	
+ * 	neg find inverseGathers(sensor, route);	
  * }
  * </pre></code>
  * 
@@ -378,7 +378,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   @Override
   protected RouteSensorMatch tupleToMatch(final Tuple t) {
     try {
-    	return RouteSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE), (hu.bme.mit.trainbenchmark.railway.Sensor) t.get(POSITION_SENSOR), (hu.bme.mit.trainbenchmark.railway.SwitchPosition) t.get(POSITION_SWP), (hu.bme.mit.trainbenchmark.railway.Switch) t.get(POSITION_SW));
+    	return RouteSensorMatch.newMatch((Route) t.get(POSITION_ROUTE), (Sensor) t.get(POSITION_SENSOR), (SwitchPosition) t.get(POSITION_SWP), (Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -388,7 +388,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   @Override
   protected RouteSensorMatch arrayToMatch(final Object[] match) {
     try {
-    	return RouteSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWP], (hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
+    	return RouteSensorMatch.newMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -398,7 +398,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   @Override
   protected RouteSensorMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return RouteSensorMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWP], (hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
+    	return RouteSensorMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

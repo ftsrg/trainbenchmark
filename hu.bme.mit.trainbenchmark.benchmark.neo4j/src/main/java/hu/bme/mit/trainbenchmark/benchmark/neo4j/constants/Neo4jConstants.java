@@ -12,15 +12,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.constants;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
@@ -41,11 +41,11 @@ public class Neo4jConstants {
 	public static final Label labelTrackElement = DynamicLabel.label(TRACKELEMENT);
 
 	public static final DynamicRelationshipType relationshipTypeConnectsTo = DynamicRelationshipType.withName(CONNECTS_TO);
-	public static final DynamicRelationshipType relationshipTypeDefinedBy = DynamicRelationshipType.withName(GATHERS);
 	public static final DynamicRelationshipType relationshipTypeEntry = DynamicRelationshipType.withName(ENTRY);
 	public static final DynamicRelationshipType relationshipTypeExit = DynamicRelationshipType.withName(EXIT);
 	public static final DynamicRelationshipType relationshipTypeFollows = DynamicRelationshipType.withName(FOLLOWS);
-	public static final DynamicRelationshipType relationshipTypeSensor = DynamicRelationshipType.withName(MONITORED_BY);
+	public static final DynamicRelationshipType relationshipTypeGathers = DynamicRelationshipType.withName(GATHERS);
+	public static final DynamicRelationshipType relationshipTypeMonitoredBy = DynamicRelationshipType.withName(MONITORED_BY);
 	public static final DynamicRelationshipType relationshipTypeSwitch = DynamicRelationshipType.withName(TARGET);
 
 }

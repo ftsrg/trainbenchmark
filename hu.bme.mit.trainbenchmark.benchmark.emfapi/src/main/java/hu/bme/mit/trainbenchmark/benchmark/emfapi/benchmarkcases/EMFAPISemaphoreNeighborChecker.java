@@ -52,14 +52,16 @@ public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNe
 				continue;
 			}
 			
-			// (route1:Route)-[:definedBy]->(sensor1:Sensor)
-			outer: for (final Sensor sensor1 : route1.getDefinedBy()) {
-				// (sensor1:Sensor)-[:element]->(te1:TrackElement)
-				for (final TrackElement te1 : sensor1.getElements()) {
+			// (route1:Route)-[:gathers]->(sensor1:Sensor)
+			outer: for (final Sensor sensor1 : route1.getGathers()) {
+				// (sensor1:Sensor)-[:monitors]->(te1:TrackElement)
+				for (final TrackElement te1 : sensor1.getMonitors()) {
 					// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
 					for (final TrackElement te2 : te1.getConnectsTo()) {
-						// (sensor2:Sensor)-[:sensor]->(te2:TrackElement)
-						final Sensor sensor2 = te2.getSensor();
+						// TODO check n-m edge
+						
+						// (sensor2:Sensor)-[:monitoredBy]->(te2:TrackElement)
+						final Sensor sensor2 = te2.getMonitoredBy();
 						if (sensor2 == null) {
 							continue;
 						}

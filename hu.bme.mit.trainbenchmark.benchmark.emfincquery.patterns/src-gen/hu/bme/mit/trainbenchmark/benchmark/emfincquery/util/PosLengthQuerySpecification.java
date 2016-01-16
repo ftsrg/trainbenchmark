@@ -100,32 +100,34 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
       		PBody body = new PBody(this);
       		PVariable var_segment = body.getOrCreateVariableByName("segment");
       		PVariable var_length = body.getOrCreateVariableByName("length");
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      			new ExportedParameter(body, var_segment, "segment")
+      		   new ExportedParameter(body, var_segment, "segment")
       		));
+      		// 	Segment.length(segment, length)
       		new TypeConstraint(body, new FlatTuple(var_segment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       		new TypeConstraint(body, new FlatTuple(var_segment, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment", "length")));
       		new Equality(body, var__virtual_0_, var_length);
+      		// 	check(length <= 0)
       		new ExpressionEvaluation(body, new IExpressionEvaluator() {
-      			
-      			@Override
-      			public String getShortDescription() {
-      				return "Expression evaluation from pattern PosLength";
-      			}
+      		                            
+      		                            @Override
+      		                            public String getShortDescription() {
+      		                                return "Expression evaluation from pattern PosLength";
+      		                            }
       		
-      			@Override
-      			public Iterable<String> getInputParameterNames() {
-      				return Arrays.asList("length");
-      			}
+      		                            @Override
+      		                            public Iterable<String> getInputParameterNames() {
+      		                                return Arrays.asList("length");
+      		                            }
       		
-      			@Override
-      			public Object evaluateExpression(IValueProvider provider) throws Exception {
-      					java.lang.Integer length = (java.lang.Integer) provider.getValue("length");
-      					return evaluateExpression_1_1(length);
-      				}
+      		                            @Override
+      		                            public Object evaluateExpression(IValueProvider provider) throws Exception {
+      		                                    java.lang.Integer length = (java.lang.Integer) provider.getValue("length");
+      		                                    return evaluateExpression_1_1(length);
+      		                                }
       		
-      		},  null); 
+      		                        },  null); 
       		bodies.add(body);
       	}
       	// to silence compiler error

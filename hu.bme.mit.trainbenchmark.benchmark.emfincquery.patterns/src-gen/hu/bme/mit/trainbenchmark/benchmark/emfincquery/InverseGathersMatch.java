@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseDefinedByQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseGathersQuerySpecification;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import java.util.Arrays;
@@ -10,27 +10,27 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
 /**
- * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseDefinedBy pattern,
- * to be used in conjunction with {@link InverseDefinedByMatcher}.
+ * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseGathers pattern,
+ * to be used in conjunction with {@link InverseGathersMatcher}.
  * 
  * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
  * Each instance is a (possibly partial) substitution of pattern parameters,
  * usable to represent a match of the pattern in the result of a query,
  * or to specify the bound (fixed) input parameters when issuing a query.
  * 
- * @see InverseDefinedByMatcher
- * @see InverseDefinedByProcessor
+ * @see InverseGathersMatcher
+ * @see InverseGathersProcessor
  * 
  */
 @SuppressWarnings("all")
-public abstract class InverseDefinedByMatch extends BasePatternMatch {
+public abstract class InverseGathersMatch extends BasePatternMatch {
   private Sensor fSensor;
   
   private Route fRoute;
   
   private static List<String> parameterNames = makeImmutableList("sensor", "route");
   
-  private InverseDefinedByMatch(final Sensor pSensor, final Route pRoute) {
+  private InverseGathersMatch(final Sensor pSensor, final Route pRoute) {
     this.fSensor = pSensor;
     this.fRoute = pRoute;
   }
@@ -54,11 +54,11 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("sensor".equals(parameterName) ) {
-    	this.fSensor = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
+    	this.fSensor = (Sensor) newValue;
     	return true;
     }
     if ("route".equals(parameterName) ) {
-    	this.fRoute = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
+    	this.fRoute = (Route) newValue;
     	return true;
     }
     return false;
@@ -76,12 +76,12 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
   
   @Override
   public String patternName() {
-    return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseDefinedBy";
+    return "hu.bme.mit.trainbenchmark.benchmark.emfincquery.inverseGathers";
   }
   
   @Override
   public List<String> parameterNames() {
-    return InverseDefinedByMatch.parameterNames;
+    return InverseGathersMatch.parameterNames;
   }
   
   @Override
@@ -90,7 +90,7 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
   }
   
   @Override
-  public InverseDefinedByMatch toImmutable() {
+  public InverseGathersMatch toImmutable() {
     return isMutable() ? newMatch(fSensor, fRoute) : this;
   }
   
@@ -117,7 +117,7 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
   public boolean equals(final Object obj) {
     if (this == obj)
     	return true;
-    if (!(obj instanceof InverseDefinedByMatch)) { // this should be infrequent
+    if (!(obj instanceof InverseGathersMatch)) { // this should be infrequent
     	if (obj == null) {
     		return false;
     	}
@@ -129,7 +129,7 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
     		return false;
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
-    InverseDefinedByMatch other = (InverseDefinedByMatch) obj;
+    InverseGathersMatch other = (InverseGathersMatch) obj;
     if (fSensor == null) {if (other.fSensor != null) return false;}
     else if (!fSensor.equals(other.fSensor)) return false;
     if (fRoute == null) {if (other.fRoute != null) return false;}
@@ -138,9 +138,9 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
   }
   
   @Override
-  public InverseDefinedByQuerySpecification specification() {
+  public InverseGathersQuerySpecification specification() {
     try {
-    	return InverseDefinedByQuerySpecification.instance();
+    	return InverseGathersQuerySpecification.instance();
     } catch (IncQueryException ex) {
      	// This cannot happen, as the match object can only be instantiated if the query specification exists
      	throw new IllegalStateException (ex);
@@ -154,7 +154,7 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
    * @return the empty match.
    * 
    */
-  public static InverseDefinedByMatch newEmptyMatch() {
+  public static InverseGathersMatch newEmptyMatch() {
     return new Mutable(null, null);
   }
   
@@ -167,7 +167,7 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static InverseDefinedByMatch newMutableMatch(final Sensor pSensor, final Route pRoute) {
+  public static InverseGathersMatch newMutableMatch(final Sensor pSensor, final Route pRoute) {
     return new Mutable(pSensor, pRoute);
   }
   
@@ -180,11 +180,11 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
    * @return the (partial) match object.
    * 
    */
-  public static InverseDefinedByMatch newMatch(final Sensor pSensor, final Route pRoute) {
+  public static InverseGathersMatch newMatch(final Sensor pSensor, final Route pRoute) {
     return new Immutable(pSensor, pRoute);
   }
   
-  private static final class Mutable extends InverseDefinedByMatch {
+  private static final class Mutable extends InverseGathersMatch {
     Mutable(final Sensor pSensor, final Route pRoute) {
       super(pSensor, pRoute);
     }
@@ -195,7 +195,7 @@ public abstract class InverseDefinedByMatch extends BasePatternMatch {
     }
   }
   
-  private static final class Immutable extends InverseDefinedByMatch {
+  private static final class Immutable extends InverseGathersMatch {
     Immutable(final Sensor pSensor, final Route pRoute) {
       super(pSensor, pRoute);
     }
