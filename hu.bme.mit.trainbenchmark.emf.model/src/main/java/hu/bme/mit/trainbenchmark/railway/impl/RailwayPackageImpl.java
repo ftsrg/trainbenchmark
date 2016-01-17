@@ -443,7 +443,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRailwayContainer_Invalids() {
+	public EReference getRailwayContainer_Routes() {
 		return (EReference)railwayContainerEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -452,17 +452,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRailwayContainer_Routes() {
-		return (EReference)railwayContainerEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getRailwayContainer_Regions() {
-		return (EReference)railwayContainerEClass.getEStructuralFeatures().get(2);
+		return (EReference)railwayContainerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -575,7 +566,6 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		createEReference(sensorEClass, SENSOR__MONITORS);
 
 		railwayContainerEClass = createEClass(RAILWAY_CONTAINER);
-		createEReference(railwayContainerEClass, RAILWAY_CONTAINER__INVALIDS);
 		createEReference(railwayContainerEClass, RAILWAY_CONTAINER__ROUTES);
 		createEReference(railwayContainerEClass, RAILWAY_CONTAINER__REGIONS);
 
@@ -623,6 +613,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		semaphoreEClass.getESuperTypes().add(this.getRailwayElement());
 		switchPositionEClass.getESuperTypes().add(this.getRailwayElement());
 		sensorEClass.getESuperTypes().add(this.getRailwayElement());
+		regionEClass.getESuperTypes().add(this.getRailwayElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(segmentEClass, Segment.class, "Segment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -662,7 +653,6 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEReference(getSensor_Monitors(), this.getTrackElement(), this.getTrackElement_MonitoredBy(), "monitors", null, 0, -1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(railwayContainerEClass, RailwayContainer.class, "RailwayContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRailwayContainer_Invalids(), this.getRailwayElement(), null, "invalids", null, 0, -1, RailwayContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRailwayContainer_Routes(), this.getRoute(), null, "routes", null, 0, -1, RailwayContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRailwayContainer_Regions(), this.getRegion(), null, "regions", null, 0, -1, RailwayContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

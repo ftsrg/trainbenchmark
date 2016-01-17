@@ -2,6 +2,8 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
 <graph id="G" edgedefault="directed">
 <key id="labels" for="node" attr.name="labels" attr.type="string"/>
-<node id="n1" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data></node>
+<node id="n1" labels=":Region"><data key="labels">:Region</data></node>
+<node id="n2" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data></node>
+<edge id="e0" source="n1" target="n2" label="elements"><data key="label">elements</data></edge>
 </graph>
 </graphml>

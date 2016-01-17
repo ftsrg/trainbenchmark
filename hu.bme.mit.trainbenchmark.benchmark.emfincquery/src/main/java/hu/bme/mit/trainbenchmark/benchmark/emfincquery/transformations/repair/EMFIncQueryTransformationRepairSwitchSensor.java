@@ -33,8 +33,7 @@ public class EMFIncQueryTransformationRepairSwitchSensor extends EMFIncQueryTran
 	public void rhs(final Collection<SwitchSensorMatch> matches) throws IOException {
 		for (final SwitchSensorMatch match : matches) {
 			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
-			match.getSw().setSensor(sensor);
-			driver.getContainer().getInvalids().add(sensor);
+			match.getSw().getMonitoredBy().add(sensor);
 
 			// TODO add unique id
 		}

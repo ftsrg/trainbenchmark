@@ -63,14 +63,12 @@
     <eLiterals name="RIGHT" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RailwayContainer">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="invalids" upperBound="-1"
-        eType="#//RailwayElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
         eType="#//Route" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" upperBound="-1"
         eType="#//Region" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Region">
+  <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="#//RailwayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//TrackElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sensors" upperBound="-1"

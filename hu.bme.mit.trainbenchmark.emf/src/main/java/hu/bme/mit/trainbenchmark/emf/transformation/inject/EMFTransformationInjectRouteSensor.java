@@ -35,7 +35,6 @@ public class EMFTransformationInjectRouteSensor extends EMFTransformationInject<
 			if (gatherss.size() > 0) {
 				Sensor sensor = gatherss.get(0);
 				gatherss.remove(0);
-				driver.getContainer().getInvalids().add(sensor);
 			}
 		}
 	}

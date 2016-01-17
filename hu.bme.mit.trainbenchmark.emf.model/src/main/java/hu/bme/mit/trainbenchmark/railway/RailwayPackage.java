@@ -571,22 +571,13 @@ public interface RailwayPackage extends EPackage {
 	int RAILWAY_CONTAINER = 8;
 
 	/**
-	 * The feature id for the '<em><b>Invalids</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RAILWAY_CONTAINER__INVALIDS = 0;
-
-	/**
 	 * The feature id for the '<em><b>Routes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAILWAY_CONTAINER__ROUTES = 1;
+	int RAILWAY_CONTAINER__ROUTES = 0;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -595,7 +586,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RAILWAY_CONTAINER__REGIONS = 2;
+	int RAILWAY_CONTAINER__REGIONS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Container</em>' class.
@@ -604,7 +595,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RAILWAY_CONTAINER_FEATURE_COUNT = 3;
+	int RAILWAY_CONTAINER_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Container</em>' class.
@@ -626,13 +617,22 @@ public interface RailwayPackage extends EPackage {
 	int REGION = 9;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__ID = RAILWAY_ELEMENT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__ELEMENTS = 0;
+	int REGION__ELEMENTS = RAILWAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sensors</b></em>' containment reference list.
@@ -641,7 +641,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__SENSORS = 1;
+	int REGION__SENSORS = RAILWAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -650,7 +650,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = 2;
+	int REGION_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Region</em>' class.
@@ -659,7 +659,7 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_OPERATION_COUNT = 0;
+	int REGION_OPERATION_COUNT = RAILWAY_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.trainbenchmark.railway.Signal <em>Signal</em>}' enum.
@@ -991,17 +991,6 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRailwayContainer();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.trainbenchmark.railway.RailwayContainer#getInvalids <em>Invalids</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Invalids</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayContainer#getInvalids()
-	 * @see #getRailwayContainer()
-	 * @generated
-	 */
-	EReference getRailwayContainer_Invalids();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.trainbenchmark.railway.RailwayContainer#getRoutes <em>Routes</em>}'.
@@ -1349,14 +1338,6 @@ public interface RailwayPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RAILWAY_CONTAINER = eINSTANCE.getRailwayContainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Invalids</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RAILWAY_CONTAINER__INVALIDS = eINSTANCE.getRailwayContainer_Invalids();
 
 		/**
 		 * The meta object literal for the '<em><b>Routes</b></em>' containment reference list feature.

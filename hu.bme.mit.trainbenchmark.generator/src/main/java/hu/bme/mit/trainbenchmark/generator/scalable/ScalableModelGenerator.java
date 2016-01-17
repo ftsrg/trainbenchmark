@@ -2,17 +2,20 @@ package hu.bme.mit.trainbenchmark.generator.scalable;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSORS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
@@ -27,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -93,6 +97,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 		List<Object> prevTracks = null;
 
 		for (long i = 0; i < maxRoutes; i++) {
+			boolean firstSegment = true;
+
 			serializer.beginTransaction();
 
 			if (prevSemaphore == null) {
@@ -122,12 +128,15 @@ public class ScalableModelGenerator extends ModelGenerator {
 			routeOutgoingEdges.put(EXIT, exit);
 
 			final Object route = serializer.createVertex(ROUTE, Collections.<String, Object> emptyMap(), routeOutgoingEdges);
+			final Object region = serializer.createVertex(ModelConstants.REGION);
 
 			final int swps = random.nextInt(maxSwitchPositions);
 			final List<Object> currentTrack = new ArrayList<>();
 
 			for (int j = 0; j < swps; j++) {
 				final Object sw = serializer.createVertex(SWITCH);
+
+				serializer.createEdge(ELEMENTS, region, sw);
 				currentTrack.add(sw);
 
 				final int sensors = random.nextInt(maxSensors - 1) + 1;
@@ -135,27 +144,35 @@ public class ScalableModelGenerator extends ModelGenerator {
 				Object lastSensor = null;
 				for (int k = 0; k < sensors; k++) {
 					final Object sensor = serializer.createVertex(SENSOR);
+					serializer.createEdge(SENSORS, region, sensor);
 
-					// add "sensors" edge from route to sensor
-					final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
-					final Object sourceRoute = routeSensorError ? null : route;
-					serializer.createEdge(GATHERS, sourceRoute, sensor);
+					// add "gathers" edge from route to sensor
+					final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;					
+					if (!routeSensorError) {
+						serializer.createEdge(GATHERS, route, sensor);
+					}
 
 					for (int m = 0; m < maxSegments; m++) {
-						createSegment(currentTrack, sensor);
+						Object segment = createSegment(currentTrack, sensor, region);
+
+						if (firstSegment) {
+							serializer.createEdge(SEMAPHORES, segment, semaphore2);
+							firstSegment = false;
+						}
 					}
 
 					// creates another extra segment
 					if (nextRandom() < connectedSegmentsErrorPercent) {
-						createSegment(currentTrack, sensor);
+						createSegment(currentTrack, sensor, region);
 					}
 
 					lastSensor = sensor;
 				}
 				// add "sensor" edge from switch to sensor
 				final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
-				final Object targetSensor = switchSensorError ? null : lastSensor;
-				serializer.createEdge(MONITORED_BY, sw, targetSensor);
+				if (!switchSensorError) {
+					serializer.createEdge(MONITORED_BY, sw, lastSensor);
+				}
 
 				final int numberOfPositions = Position.values().length;
 				final int positionOrdinal = random.nextInt(numberOfPositions);
@@ -210,16 +227,18 @@ public class ScalableModelGenerator extends ModelGenerator {
 		}
 	}
 
-	private void createSegment(final List<Object> currTracks, final Object sen) throws IOException {
+	private Object createSegment(final List<Object> currTracks, final Object sensor, final Object region) throws IOException {
 		final boolean posLengthError = nextRandom() < posLengthErrorPercent;
 		final int segmentLength = ((posLengthError ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH)) + 1;
 
 		final Map<String, Object> segmentAttributes = new HashMap<>();
 		segmentAttributes.put(LENGTH, segmentLength);
-		final Object seg = serializer.createVertex(SEGMENT, segmentAttributes);
+		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
 
-		serializer.createEdge(MONITORED_BY, seg, sen);
-		currTracks.add(seg);
+		serializer.createEdge(ELEMENTS, region, segment);
+		serializer.createEdge(MONITORED_BY, segment, sensor);
+		currTracks.add(segment);
+		return segment;
 	}
 
 }
