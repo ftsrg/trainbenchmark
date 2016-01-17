@@ -61,7 +61,7 @@ public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNe
 						// TODO check n-m edge
 						
 						// (sensor2:Sensor)-[:monitoredBy]->(te2:TrackElement)
-						final Sensor sensor2 = te2.getMonitoredBy();
+						final Sensor sensor2 = te2.getMonitoredBy().get(0);
 						if (sensor2 == null) {
 							continue;
 						}

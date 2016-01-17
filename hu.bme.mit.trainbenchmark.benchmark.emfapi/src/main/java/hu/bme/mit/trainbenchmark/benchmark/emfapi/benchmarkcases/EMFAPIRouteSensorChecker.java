@@ -57,8 +57,8 @@ public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch>
 					// TODO check n-m edge
 					for (Sensor sensor2 : sensors) {
 						// (route)-[:gathers]->(sensor) NAC
-						if (!route.getGathers().contains(sensor)) {
-							final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor, swP, sw);
+						if (!route.getGathers().contains(sensor2)) {
+							final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor2, swP, sw);
 							matches.add(match);
 						}
 						

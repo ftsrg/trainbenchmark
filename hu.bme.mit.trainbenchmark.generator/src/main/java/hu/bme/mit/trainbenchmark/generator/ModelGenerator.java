@@ -23,7 +23,7 @@ public abstract class ModelGenerator {
 		messageBuilder.append("generator: " + serializer.syntax() + ", ");
 		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
 		if (generatorConfig.getScenario() == MINIMAL) {
-			messageBuilder.append("query: " + generatorConfig.getQueries());
+			messageBuilder.append("query: " + generatorConfig.getQueries().get(0));
 		} else {
 			messageBuilder.append("size: " + generatorConfig.getSize());
 		}

@@ -132,6 +132,7 @@ public class RailwaySwitch<T> extends Switch<T> {
 			case RailwayPackage.REGION: {
 				Region region = (Region)theEObject;
 				T result = caseRegion(region);
+				if (result == null) result = caseRailwayElement(region);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

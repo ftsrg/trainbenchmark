@@ -37,8 +37,8 @@ import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
 
 public class EMFSerializer extends ModelSerializer {
 
@@ -89,8 +89,8 @@ public class EMFSerializer extends ModelSerializer {
 		}
 
 		switch (type) {
-		case ModelConstants.SEMAPHORE:
-			container.getSemaphores().add((Semaphore) railwayElement);
+		case ModelConstants.REGION:
+			container.getRegions().add((Region) railwayElement);
 			break;
 		case ModelConstants.ROUTE:
 			container.getRoutes().add((Route) railwayElement);
@@ -112,19 +112,22 @@ public class EMFSerializer extends ModelSerializer {
 
 	@Override
 	public void createEdge(final String label, final Object from, final Object to) throws IOException {
-		if (from == null) {
-			if (!container.getInvalids().contains(to)) {
-				container.getInvalids().add((RailwayElement) to);
-			}
-			return;
-		}
-
-		if (to == null) {
-			if (!container.getInvalids().contains(from)) {
-				container.getInvalids().add((RailwayElement) from);
-			}
-			return;
-		}
+//		if (from == null) {
+//			System.out.println("!!!" + label);
+//			// if (!container.getInvalids().contains(to)) {
+//			// container.getInvalids().add((RailwayElement) to);
+//			// }
+//			return;
+//		}
+//
+//		if (to == null) {
+//			System.out.println("xxx" + label);
+//		
+//			// if (!container.getInvalids().contains(from)) {
+//			// container.getInvalids().add((RailwayElement) from);
+//			// }
+//			return;
+//		}
 
 		final EObject objectFrom = (EObject) from;
 		final EStructuralFeature edgeType = objectFrom.eClass().getEStructuralFeature(label);

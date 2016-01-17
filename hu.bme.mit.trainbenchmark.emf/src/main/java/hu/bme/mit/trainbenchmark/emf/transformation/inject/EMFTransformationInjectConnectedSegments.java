@@ -32,7 +32,6 @@ public class EMFTransformationInjectConnectedSegments extends EMFTransformationI
 				continue;
 			}
 			final Segment segment2 = RailwayFactory.eINSTANCE.createSegment();
-			driver.getContainer().getInvalids().add(segment2);
 
 			final TrackElement segment3 = segment1.getConnectsTo().get(0);
 			segment1.getConnectsTo().remove(segment3);

@@ -1,10 +1,12 @@
 package hu.bme.mit.trainbenchmark.generator.minimal;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REGION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSORS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
@@ -27,18 +29,21 @@ public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 
 	@Override
 	protected void buildPatternModel() throws FileNotFoundException, IOException {
+		final Object region = serializer.createVertex(REGION);
+
 		final Object route = serializer.createVertex(ROUTE);
 		final Object sensor = serializer.createVertex(SENSOR);
 		final Object sw = serializer.createVertex(SWITCH);
 
+		serializer.createEdge(SENSORS, region, sensor);
+		serializer.createEdge(ELEMENTS, region, sw);
+		
 		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
 		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
 		final Map<String, ? extends Object> emptyMap = Collections.emptyMap();
 		final Object swP = serializer.createVertex(SWITCHPOSITION, emptyMap, swPOutgoingEdges, swPIncomingEdges);
 
 		serializer.createEdge(MONITORED_BY, sw, sensor);
-		// this is required by the EMF serializer to fix the containment hierarchy
-		serializer.createEdge(GATHERS, null, sensor);
 	}
 
 }

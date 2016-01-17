@@ -21,6 +21,7 @@ public class ModelConstants {
 	public static final String ID = "id";
 	
 	// node types
+	public static final String REGION = "Region";
 	public static final String ROUTE = "Route";
 	public static final String SEGMENT = "Segment";
 	public static final String SENSOR = "Sensor";
@@ -36,12 +37,15 @@ public class ModelConstants {
 	public static final String POSITION = "position";
 
 	// references
+	public static final String CONNECTS_TO = "connectsTo";
+	public static final String ELEMENTS = "elements";
 	public static final String EXIT = "exit";
 	public static final String ENTRY = "entry";
-	public static final String GATHERS = "gathers";
 	public static final String FOLLOWS = "follows";
-	public static final String CONNECTS_TO = "connectsTo";
+	public static final String GATHERS = "gathers";
 	public static final String MONITORED_BY = "monitoredBy";
+	public static final String SEMAPHORES = "semaphores";
+	public static final String SENSORS = "sensors";
 	public static final String TARGET = "target";
 
 	// inheritance

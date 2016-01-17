@@ -3,22 +3,15 @@
 package hu.bme.mit.trainbenchmark.railway.impl;
 
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Route;
-
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -29,7 +22,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getInvalids <em>Invalids</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getRoutes <em>Routes</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RailwayContainerImpl#getRegions <em>Regions</em>}</li>
  * </ul>
@@ -38,16 +30,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class RailwayContainerImpl extends MinimalEObjectImpl.Container implements RailwayContainer {
-	/**
-	 * The cached value of the '{@link #getInvalids() <em>Invalids</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInvalids()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RailwayElement> invalids;
-
 	/**
 	 * The cached value of the '{@link #getRoutes() <em>Routes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -92,18 +74,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<RailwayElement> getInvalids() {
-		if (invalids == null) {
-			invalids = new EObjectContainmentEList<RailwayElement>(RailwayElement.class, this, RailwayPackage.RAILWAY_CONTAINER__INVALIDS);
-		}
-		return invalids;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Route> getRoutes() {
 		if (routes == null) {
 			routes = new EObjectContainmentEList<Route>(Route.class, this, RailwayPackage.RAILWAY_CONTAINER__ROUTES);
@@ -131,8 +101,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
-				return ((InternalEList<?>)getInvalids()).basicRemove(otherEnd, msgs);
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				return ((InternalEList<?>)getRoutes()).basicRemove(otherEnd, msgs);
 			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
@@ -149,8 +117,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
-				return getInvalids();
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				return getRoutes();
 			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
@@ -168,10 +134,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
-				getInvalids().clear();
-				getInvalids().addAll((Collection<? extends RailwayElement>)newValue);
-				return;
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				getRoutes().clear();
 				getRoutes().addAll((Collection<? extends Route>)newValue);
@@ -192,9 +154,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
-				getInvalids().clear();
-				return;
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				getRoutes().clear();
 				return;
@@ -213,8 +172,6 @@ public class RailwayContainerImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.RAILWAY_CONTAINER__INVALIDS:
-				return invalids != null && !invalids.isEmpty();
 			case RailwayPackage.RAILWAY_CONTAINER__ROUTES:
 				return routes != null && !routes.isEmpty();
 			case RailwayPackage.RAILWAY_CONTAINER__REGIONS:
