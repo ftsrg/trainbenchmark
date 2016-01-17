@@ -148,6 +148,28 @@
     <element xmi:type="ecore:EClass" href="railway.ecore#//Region"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OWX6sr0MEeWJb8T49F7LJw" x="-96" y="120"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_gVnoUL0pEeWJb8T49F7LJw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_gVo2cL0pEeWJb8T49F7LJw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_gVpdgL0pEeWJb8T49F7LJw" type="5008">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_gVpdgb0pEeWJb8T49F7LJw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_gVpdgr0pEeWJb8T49F7LJw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_gVpdg70pEeWJb8T49F7LJw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_gVnoUb0pEeWJb8T49F7LJw" fontColor="4210752" fontName="Noto Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="railway.ecore#//Position"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gVnoUr0pEeWJb8T49F7LJw" x="-96" y="180"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_gVqEkL0pEeWJb8T49F7LJw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_gVqEk70pEeWJb8T49F7LJw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_gVqroL0pEeWJb8T49F7LJw" type="5008">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_gVqrob0pEeWJb8T49F7LJw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_gVqror0pEeWJb8T49F7LJw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_gVqro70pEeWJb8T49F7LJw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_gVqEkb0pEeWJb8T49F7LJw" fontColor="4210752" fontName="Noto Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="railway.ecore#//Signal"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gVqEkr0pEeWJb8T49F7LJw" x="24" y="180"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_YIrXkVPbEeCLuajbZvk0sQ"/>
   <element xmi:type="ecore:EPackage" href="railway.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_YJAHs1PbEeCLuajbZvk0sQ" type="3003" source="_YIvB8FPbEeCLuajbZvk0sQ" target="_YIw3IlPbEeCLuajbZvk0sQ">
