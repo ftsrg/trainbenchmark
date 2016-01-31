@@ -12,6 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf.config;
 
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -35,6 +36,9 @@ public class RDFGeneratorConfig extends GeneratorConfig {
 
 		options.addOption(INFERRED, false, "insert the inferred tuples instead of inserting the metamodel");
 		options.addOption(FORMAT, true, "specify the format: turtle (default), ntriples");
+		Option formatOption = options.getOption(FORMAT);
+		formatOption.setRequired(true);
+		options.addOption(formatOption);
 	}
 
 	@Override
