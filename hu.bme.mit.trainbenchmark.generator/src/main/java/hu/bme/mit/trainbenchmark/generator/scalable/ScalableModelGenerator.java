@@ -109,19 +109,19 @@ public class ScalableModelGenerator extends ModelGenerator {
 				firstSemaphore = prevSemaphore;
 			}
 
-			Object semaphore2;
+			Object semaphore;
 			if (i != maxRoutes - 1) {
 				final Map<String, Object> semaphoreAttributes = new HashMap<>();
 				semaphoreAttributes.put(SIGNAL, Signal.GO);
-				semaphore2 = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
+				semaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
 			} else {
-				semaphore2 = firstSemaphore;
+				semaphore = firstSemaphore;
 			}
 
 			// the semaphoreNeighborErrorPercent
 			final boolean semaphoreNeighborError1 = nextRandom() < semaphoreNeighborErrorPercent;
 			final Object entry = semaphoreNeighborError1 ? null : prevSemaphore;
-			final Object exit = semaphore2;
+			final Object exit = semaphore;
 
 			final Map<String, Object> routeOutgoingEdges = new HashMap<>();
 			routeOutgoingEdges.put(ENTRY, entry);
@@ -130,7 +130,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			final Object route = serializer.createVertex(ROUTE, Collections.<String, Object> emptyMap(), routeOutgoingEdges);
 			final Object region = serializer.createVertex(ModelConstants.REGION);
 
-			final int swps = random.nextInt(maxSwitchPositions);
+			final int swps = random.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
 
 			for (int j = 0; j < swps; j++) {
@@ -141,37 +141,36 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 				final int sensors = random.nextInt(maxSensors - 1) + 1;
 
-				Object lastSensor = null;
 				for (int k = 0; k < sensors; k++) {
 					final Object sensor = serializer.createVertex(SENSOR);
 					serializer.createEdge(SENSORS, region, sensor);
 
-					// add "gathers" edge from route to sensor
-					final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;					
-					if (!routeSensorError) {
-						serializer.createEdge(GATHERS, route, sensor);
-					}
+					// add "monitored by" edge from switch to sensor
+					final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
+					if (!switchSensorError) {
+						serializer.createEdge(MONITORED_BY, sw, sensor);
 
+						// add "gathers" edge from route to sensor
+						final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;					
+						if (!routeSensorError) {
+							serializer.createEdge(GATHERS, route, sensor);
+						}
+					}
+					
+					// generate segments
 					for (int m = 0; m < maxSegments; m++) {
 						Object segment = createSegment(currentTrack, sensor, region);
 
 						if (firstSegment) {
-							serializer.createEdge(SEMAPHORES, segment, semaphore2);
+							serializer.createEdge(SEMAPHORES, segment, semaphore);
 							firstSegment = false;
 						}
 					}
-
-					// creates another extra segment
+					
+					// create another extra segment
 					if (nextRandom() < connectedSegmentsErrorPercent) {
 						createSegment(currentTrack, sensor, region);
 					}
-
-					lastSensor = sensor;
-				}
-				// add "sensor" edge from switch to sensor
-				final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
-				if (!switchSensorError) {
-					serializer.createEdge(MONITORED_BY, sw, lastSensor);
 				}
 
 				final int numberOfPositions = Position.values().length;
@@ -221,7 +220,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			}
 
 			prevTracks = currentTrack;
-			prevSemaphore = semaphore2;
+			prevSemaphore = semaphore;
 
 			serializer.endTransaction();
 		}
