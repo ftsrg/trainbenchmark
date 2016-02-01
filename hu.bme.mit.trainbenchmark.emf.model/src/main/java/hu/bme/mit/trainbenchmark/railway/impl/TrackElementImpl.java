@@ -25,11 +25,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.TrackElementImpl#getMonitoredBy <em>Monitored By</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.TrackElementImpl#getConnectsTo <em>Connects To</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -36,7 +36,9 @@ public enum Position implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STRAIGHT(1, "STRAIGHT", "STRAIGHT"), /**
+	STRAIGHT(1, "STRAIGHT", "STRAIGHT"),
+
+	/**
 	 * The '<em><b>DIVERGING</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,6 +118,8 @@ public enum Position implements Enumerator {
 	 * Returns the '<em><b>Position</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Position get(String literal) {
@@ -132,6 +136,8 @@ public enum Position implements Enumerator {
 	 * Returns the '<em><b>Position</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Position getByName(String name) {
@@ -148,6 +154,8 @@ public enum Position implements Enumerator {
 	 * Returns the '<em><b>Position</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Position get(int value) {

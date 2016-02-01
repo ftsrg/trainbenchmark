@@ -29,12 +29,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SegmentImpl#getLength <em>Length</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SegmentImpl#getSemaphores <em>Semaphores</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SegmentImpl#getNeighbors <em>Neighbors</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
