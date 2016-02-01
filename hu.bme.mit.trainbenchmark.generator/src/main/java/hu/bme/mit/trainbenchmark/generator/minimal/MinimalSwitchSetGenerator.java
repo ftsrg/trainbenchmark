@@ -14,8 +14,8 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
-import static hu.bme.mit.trainbenchmark.constants.Position.LEFT;
-import static hu.bme.mit.trainbenchmark.constants.Position.RIGHT;
+import static hu.bme.mit.trainbenchmark.constants.Position.STRAIGHT;
+import static hu.bme.mit.trainbenchmark.constants.Position.DIVERGING;
 import static hu.bme.mit.trainbenchmark.constants.Signal.GO;
 
 import java.io.FileNotFoundException;
@@ -53,13 +53,13 @@ public class MinimalSwitchSetGenerator extends MinimalModelGenerator {
 		final Object route = serializer.createVertex(ROUTE, emptyMap, routeOutgoingEdges);
 
 		// sw
-		final Map<String, ? extends Object> swProperties = ImmutableMap.of(CURRENTPOSITION, RIGHT);
+		final Map<String, ? extends Object> swProperties = ImmutableMap.of(CURRENTPOSITION, DIVERGING);
 		final Object sw = serializer.createVertex(SWITCH, swProperties);
 
 		serializer.createEdge(ELEMENTS, region, sw);
 		
 		// swP
-		final Map<String, ? extends Object> swPProperties = ImmutableMap.of(POSITION, LEFT);
+		final Map<String, ? extends Object> swPProperties = ImmutableMap.of(POSITION, STRAIGHT);
 		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
 		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
 		final Object swP = serializer.createVertex(SWITCHPOSITION, swPProperties, swPOutgoingEdges, swPIncomingEdges);

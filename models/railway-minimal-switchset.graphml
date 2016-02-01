@@ -9,8 +9,8 @@
 <node id="n2" labels=":Segment:TrackElement"><data key="labels">:Segment:TrackElement</data></node>
 <node id="n3" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
 <node id="n4" labels=":Route"><data key="labels">:Route</data></node>
-<node id="n5" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="currentPosition">RIGHT</data></node>
-<node id="n6" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="position">LEFT</data></node>
+<node id="n5" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n6" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="position">STRAIGHT</data></node>
 <edge id="e0" source="n1" target="n2" label="elements"><data key="label">elements</data></edge>
 <edge id="e1" source="n2" target="n3" label="semaphores"><data key="label">semaphores</data></edge>
 <edge id="e2" source="n4" target="n3" label="entry"><data key="label">entry</data></edge>

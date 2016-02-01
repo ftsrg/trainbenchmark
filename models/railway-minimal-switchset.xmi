@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <hu.bme.mit.trainbenchmark:RailwayContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hu.bme.mit.trainbenchmark="http://www.semanticweb.org/ontologies/2015/trainbenchmark">
   <routes id="4" entry="//@regions.0/@elements.0/@semaphores.0">
-    <follows id="6" target="//@regions.0/@elements.1" position="LEFT"/>
+    <follows id="6" target="//@regions.0/@elements.1" position="STRAIGHT"/>
   </routes>
   <regions id="1">
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="2">
       <semaphores id="3" signal="GO"/>
     </elements>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="5" currentPosition="RIGHT" positions="//@routes.0/@follows.0"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="5" currentPosition="DIVERGING" positions="//@routes.0/@follows.0"/>
   </regions>
 </hu.bme.mit.trainbenchmark:RailwayContainer>

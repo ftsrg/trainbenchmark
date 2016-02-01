@@ -13,5 +13,5 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum Position {
-	FAILURE, LEFT, RIGHT
+	FAILURE, STRAIGHT, DIVERGING
 }

@@ -18,12 +18,12 @@
 
 :_5 a :Switch ;
 	a :TrackElement ;
-	:currentPosition :POSITION_RIGHT .
+	:currentPosition :POSITION_DIVERGING .
 
 :_1 :elements :_5 .
 
 :_6 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_STRAIGHT ;
 	:target :_5 .
 
 :_4 :follows :_6 .
