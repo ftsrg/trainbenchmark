@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getCurrentPosition <em>Current Position</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getPositions <em>Positions</em>}</li>
@@ -36,7 +37,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getRight <em>Right</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchImpl#getFrom <em>From</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

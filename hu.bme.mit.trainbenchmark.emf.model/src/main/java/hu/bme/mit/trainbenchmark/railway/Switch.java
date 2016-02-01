@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getCurrentPosition <em>Current Position</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getPositions <em>Positions</em>}</li>
@@ -18,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getRight <em>Right</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getFrom <em>From</em>}</li>
  * </ul>
- * </p>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitch()
  * @model

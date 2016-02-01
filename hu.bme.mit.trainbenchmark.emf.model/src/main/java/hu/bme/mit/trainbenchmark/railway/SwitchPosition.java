@@ -10,12 +10,12 @@ package hu.bme.mit.trainbenchmark.railway;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getTarget <em>Target</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getPosition <em>Position</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.SwitchPosition#getRoute <em>Route</em>}</li>
  * </ul>
- * </p>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitchPosition()
  * @model

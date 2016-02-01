@@ -11,10 +11,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Sensor#getMonitors <em>Monitors</em>}</li>
  * </ul>
- * </p>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSensor()
  * @model

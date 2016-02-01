@@ -11,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.TrackElement#getMonitoredBy <em>Monitored By</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.TrackElement#getConnectsTo <em>Connects To</em>}</li>
  * </ul>
- * </p>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getTrackElement()
  * @model abstract="true"

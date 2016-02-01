@@ -24,10 +24,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SensorImpl#getMonitors <em>Monitors</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
