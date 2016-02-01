@@ -670,10 +670,10 @@
 
 :_47 :monitoredBy :_42 .
 
-:_5 :currentPosition :POSITION_RIGHT.
+:_5 :currentPosition :POSITION_DIVERGING.
 
 :_48 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_5 .
 
 :_3 :follows :_48 .
@@ -1107,10 +1107,10 @@
 
 :_100 :monitoredBy :_95 .
 
-:_52 :currentPosition :POSITION_LEFT.
+:_52 :currentPosition :POSITION_STRAIGHT.
 
 :_101 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_STRAIGHT ;
 	:target :_52 .
 
 :_50 :follows :_101 .
@@ -1832,10 +1832,10 @@
 
 :_179 :monitoredBy :_174 .
 
-:_161 :currentPosition :POSITION_LEFT.
+:_161 :currentPosition :POSITION_STRAIGHT.
 
 :_180 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_STRAIGHT ;
 	:target :_161 .
 
 :_159 :follows :_180 .
@@ -2243,10 +2243,10 @@
 
 :_234 :monitoredBy :_229 .
 
-:_228 :currentPosition :POSITION_LEFT.
+:_228 :currentPosition :POSITION_STRAIGHT.
 
 :_235 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_STRAIGHT ;
 	:target :_228 .
 
 :_182 :follows :_235 .
@@ -2427,10 +2427,10 @@
 
 :_260 :monitoredBy :_255 .
 
-:_236 :currentPosition :POSITION_RIGHT.
+:_236 :currentPosition :POSITION_DIVERGING.
 
 :_261 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_236 .
 
 :_182 :follows :_261 .
@@ -2568,10 +2568,10 @@
 
 :_280 :monitoredBy :_275 .
 
-:_262 :currentPosition :POSITION_RIGHT.
+:_262 :currentPosition :POSITION_DIVERGING.
 
 :_281 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_262 .
 
 :_182 :follows :_281 .
@@ -2795,10 +2795,10 @@
 
 :_312 :monitoredBy :_307 .
 
-:_282 :currentPosition :POSITION_RIGHT.
+:_282 :currentPosition :POSITION_DIVERGING.
 
 :_313 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_282 .
 
 :_182 :follows :_313 .
@@ -3108,10 +3108,10 @@
 
 :_356 :monitoredBy :_351 .
 
-:_314 :currentPosition :POSITION_RIGHT.
+:_314 :currentPosition :POSITION_DIVERGING.
 
 :_357 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_314 .
 
 :_182 :follows :_357 .
@@ -3292,10 +3292,10 @@
 
 :_382 :monitoredBy :_377 .
 
-:_358 :currentPosition :POSITION_RIGHT.
+:_358 :currentPosition :POSITION_DIVERGING.
 
 :_383 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_358 .
 
 :_182 :follows :_383 .
@@ -3808,10 +3808,10 @@
 
 :_410 :monitoredBy :_405 .
 
-:_386 :currentPosition :POSITION_RIGHT.
+:_386 :currentPosition :POSITION_DIVERGING.
 
 :_411 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_386 .
 
 :_384 :follows :_411 .
@@ -4630,10 +4630,10 @@
 
 :_526 :monitoredBy :_521 .
 
-:_478 :currentPosition :POSITION_RIGHT.
+:_478 :currentPosition :POSITION_DIVERGING.
 
 :_527 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_478 .
 
 :_384 :follows :_527 .
@@ -4728,10 +4728,10 @@
 
 :_540 :monitoredBy :_535 .
 
-:_528 :currentPosition :POSITION_RIGHT.
+:_528 :currentPosition :POSITION_DIVERGING.
 
 :_541 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_528 .
 
 :_384 :follows :_541 .
@@ -4826,10 +4826,10 @@
 
 :_554 :monitoredBy :_549 .
 
-:_542 :currentPosition :POSITION_RIGHT.
+:_542 :currentPosition :POSITION_DIVERGING.
 
 :_555 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_542 .
 
 :_384 :follows :_555 .
@@ -5409,10 +5409,10 @@
 
 :_636 :monitoredBy :_631 .
 
-:_606 :currentPosition :POSITION_RIGHT.
+:_606 :currentPosition :POSITION_DIVERGING.
 
 :_637 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_606 .
 
 :_384 :follows :_637 .
@@ -5722,10 +5722,10 @@
 
 :_680 :monitoredBy :_675 .
 
-:_638 :currentPosition :POSITION_RIGHT.
+:_638 :currentPosition :POSITION_DIVERGING.
 
 :_681 a :SwitchPosition ;
-	:position :POSITION_RIGHT ;
+	:position :POSITION_DIVERGING ;
 	:target :_638 .
 
 :_384 :follows :_681 .
@@ -5906,10 +5906,10 @@
 
 :_706 :monitoredBy :_701 .
 
-:_682 :currentPosition :POSITION_LEFT.
+:_682 :currentPosition :POSITION_STRAIGHT.
 
 :_707 a :SwitchPosition ;
-	:position :POSITION_LEFT ;
+	:position :POSITION_STRAIGHT ;
 	:target :_682 .
 
 :_384 :follows :_707 .

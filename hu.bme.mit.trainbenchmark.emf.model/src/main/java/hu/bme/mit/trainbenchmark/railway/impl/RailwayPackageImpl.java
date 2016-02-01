@@ -668,8 +668,8 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 
 		initEEnum(positionEEnum, Position.class, "Position");
 		addEEnumLiteral(positionEEnum, Position.FAILURE);
-		addEEnumLiteral(positionEEnum, Position.LEFT);
-		addEEnumLiteral(positionEEnum, Position.RIGHT);
+		addEEnumLiteral(positionEEnum, Position.STRAIGHT);
+		addEEnumLiteral(positionEEnum, Position.DIVERGING);
 
 		// Create resource
 		createResource(eNS_URI);

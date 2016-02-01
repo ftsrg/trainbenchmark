@@ -29,24 +29,22 @@ public enum Position implements Enumerator {
 	FAILURE(0, "FAILURE", "FAILURE"),
 
 	/**
-	 * The '<em><b>LEFT</b></em>' literal object.
+	 * The '<em><b>STRAIGHT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #LEFT_VALUE
+	 * @see #STRAIGHT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	LEFT(1, "LEFT", "LEFT"),
-
-	/**
-	 * The '<em><b>RIGHT</b></em>' literal object.
+	STRAIGHT(1, "STRAIGHT", "STRAIGHT"), /**
+	 * The '<em><b>DIVERGING</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #RIGHT_VALUE
+	 * @see #DIVERGING_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	RIGHT(2, "RIGHT", "RIGHT");
+	DIVERGING(2, "DIVERGING", "DIVERGING");
 
 	/**
 	 * The '<em><b>FAILURE</b></em>' literal value.
@@ -64,34 +62,34 @@ public enum Position implements Enumerator {
 	public static final int FAILURE_VALUE = 0;
 
 	/**
-	 * The '<em><b>LEFT</b></em>' literal value.
+	 * The '<em><b>STRAIGHT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>LEFT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>STRAIGHT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #LEFT
+	 * @see #STRAIGHT
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LEFT_VALUE = 1;
+	public static final int STRAIGHT_VALUE = 1;
 
 	/**
-	 * The '<em><b>RIGHT</b></em>' literal value.
+	 * The '<em><b>DIVERGING</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>RIGHT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>DIVERGING</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #RIGHT
+	 * @see #DIVERGING
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RIGHT_VALUE = 2;
+	public static final int DIVERGING_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Position</b></em>' enumerators.
@@ -102,8 +100,8 @@ public enum Position implements Enumerator {
 	private static final Position[] VALUES_ARRAY =
 		new Position[] {
 			FAILURE,
-			LEFT,
-			RIGHT,
+			STRAIGHT,
+			DIVERGING,
 		};
 
 	/**
@@ -155,8 +153,8 @@ public enum Position implements Enumerator {
 	public static Position get(int value) {
 		switch (value) {
 			case FAILURE_VALUE: return FAILURE;
-			case LEFT_VALUE: return LEFT;
-			case RIGHT_VALUE: return RIGHT;
+			case STRAIGHT_VALUE: return STRAIGHT;
+			case DIVERGING_VALUE: return DIVERGING;
 		}
 		return null;
 	}

@@ -59,8 +59,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Position">
     <eLiterals name="FAILURE"/>
-    <eLiterals name="LEFT" value="1"/>
-    <eLiterals name="RIGHT" value="2"/>
+    <eLiterals name="STRAIGHT" value="1"/>
+    <eLiterals name="DIVERGING" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RailwayContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
