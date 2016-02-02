@@ -153,6 +153,11 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 			throws RepositoryException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
+	
+	public void deleteOutgoingEdges(final Collection<URI> vertices, final String vertexType, final String edgeType)
+			throws RepositoryException {
+		deleteEdges(vertices, edgeType, true, true);
+	}
 
 	protected void deleteEdges(final Collection<URI> vertices, final String edgeType, final boolean outgoing,
 			final boolean all) throws RepositoryException {
