@@ -29,7 +29,7 @@ public class JenaTransformationInjectRouteSensor extends JenaTransformationInjec
 
 	@Override
 	public void rhs(final Collection<Resource> routes) throws IOException {
-		driver.deleteOneOutgoingEdge(routes, ROUTE, GATHERS);
+		driver.deleteAllOutgoingEdges(routes, ROUTE, GATHERS);
 	}
 
 }
