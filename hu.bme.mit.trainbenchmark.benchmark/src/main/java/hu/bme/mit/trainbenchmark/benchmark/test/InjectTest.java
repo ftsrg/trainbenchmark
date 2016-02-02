@@ -36,7 +36,7 @@ public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
 	public void routeSensorInject() throws Exception {
-		testTransformation(ROUTESENSOR, INJECT, 6, 8);
+		testTransformation(ROUTESENSOR, INJECT, 6, 49);
 	}
 
 	@Test

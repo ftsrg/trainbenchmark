@@ -31,11 +31,8 @@ public class EMFTransformationInjectRouteSensor extends EMFTransformationInject<
 		for (final Route route : routes) {
 			final EList<Sensor> gatherss = route.getGathers();
 
-			// delete the first edge
-			if (gatherss.size() > 0) {
-				Sensor sensor = gatherss.get(0);
-				gatherss.remove(0);
-			}
+			// delete edges
+			gatherss.clear();
 		}
 	}
 
