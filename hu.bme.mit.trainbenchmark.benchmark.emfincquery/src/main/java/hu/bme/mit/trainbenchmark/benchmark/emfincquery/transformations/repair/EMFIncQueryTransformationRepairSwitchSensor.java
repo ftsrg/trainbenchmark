@@ -34,7 +34,6 @@ public class EMFIncQueryTransformationRepairSwitchSensor extends EMFIncQueryTran
 		for (final SwitchSensorMatch match : matches) {
 			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
 			match.getSw().getMonitoredBy().add(sensor);
-
 			// TODO add unique id
 		}
 	}
