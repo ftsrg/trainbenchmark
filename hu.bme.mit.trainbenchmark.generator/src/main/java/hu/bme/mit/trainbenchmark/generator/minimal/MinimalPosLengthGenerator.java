@@ -1,6 +1,8 @@
 package hu.bme.mit.trainbenchmark.generator.minimal;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REGION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 
 import java.io.FileNotFoundException;
@@ -20,8 +22,11 @@ public class MinimalPosLengthGenerator extends MinimalModelGenerator {
 
 	@Override
 	protected void buildPatternModel() throws FileNotFoundException, IOException {
+		final Object region = serializer.createVertex(REGION);
+
 		final Map<String, ? extends Object> segmentAttributes = ImmutableMap.of(LENGTH, -1);
 		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
+		serializer.createEdge(ELEMENTS, region, segment);
 	}
 
 }
