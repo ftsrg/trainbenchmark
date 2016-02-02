@@ -112,23 +112,6 @@ public class EMFSerializer extends ModelSerializer {
 
 	@Override
 	public void createEdge(final String label, final Object from, final Object to) throws IOException {
-//		if (from == null) {
-//			System.out.println("!!!" + label);
-//			// if (!container.getInvalids().contains(to)) {
-//			// container.getInvalids().add((RailwayElement) to);
-//			// }
-//			return;
-//		}
-//
-//		if (to == null) {
-//			System.out.println("xxx" + label);
-//		
-//			// if (!container.getInvalids().contains(from)) {
-//			// container.getInvalids().add((RailwayElement) from);
-//			// }
-//			return;
-//		}
-
 		final EObject objectFrom = (EObject) from;
 		final EStructuralFeature edgeType = objectFrom.eClass().getEStructuralFeature(label);
 
