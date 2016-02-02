@@ -24,7 +24,6 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.extensibility.QueryBackendRegistry;
 import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackend;
-import org.eclipse.incquery.runtime.localsearch.matcher.integration.LocalSearchBackendFactory;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackend;
 import org.eclipse.incquery.runtime.matchers.backend.IQueryBackendFactory;
 import org.eclipse.incquery.runtime.matchers.backend.QueryEvaluationHint;
@@ -69,10 +68,10 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 						registered = true;
 					}
 				}
-				if (!registered) {
-					QueryBackendRegistry.getInstance().registerQueryBackendFactory(LocalSearchBackend.class,
-							new LocalSearchBackendFactory());
-				}
+//				if (!registered) {
+//					QueryBackendRegistry.getInstance().registerQueryBackendFactory(LocalSearchBackend.class,
+//							new LocalSearchBackendFactory());
+//				}
 				break;
 			case INCREMENTAL:
 				matches = getMatcher().getAllMatches();

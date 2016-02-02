@@ -21,3 +21,4 @@ catalog-v*.xml
 .Rproj.user
 *.tar.gz
 *.zip
+*.gml
