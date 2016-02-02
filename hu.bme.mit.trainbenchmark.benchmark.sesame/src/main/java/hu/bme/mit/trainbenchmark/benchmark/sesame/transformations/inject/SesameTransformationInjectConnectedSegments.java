@@ -12,8 +12,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 
@@ -41,7 +41,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 		final ValueFactory vf = driver.getValueFactory();
 
 		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTS_TO);
-		final URI sensorEdgeType = vf.createURI(BASE_PREFIX + MONITORED_BY);
+		final URI monitoredByEdgeType = vf.createURI(BASE_PREFIX + MONITORED_BY);
 
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
 
@@ -54,14 +54,16 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 			final Statement connectsToEdge0 = connectsToEdges0.next();
 			final Value segment3 = connectsToEdge0.getObject();
 
-			// get (sensor) node
-			final RepositoryResult<Statement> sensorEdges = connection.getStatements(segment1, sensorEdgeType, null, true);
-			if (!sensorEdges.hasNext()) {
-				continue;
-			}
-			final Statement sensorEdge = sensorEdges.next();
-			final Value sensor = sensorEdge.getObject();
+			// get (sensor) nodes
+			final RepositoryResult<Statement> monitoredByEdges = connection.getStatements(segment1, monitoredByEdgeType, null, true);
+			while (!monitoredByEdges.hasNext()) {
+				final Statement monitoredByEdge = monitoredByEdges.next();
+				final Value sensor = monitoredByEdge.getObject();
 
+				// (segment1)-[:monitoredBy]->(sensor)
+				connection.add(segment1, monitoredByEdgeType, sensor);
+			}
+			
 			// delete (segment1)-[:connectsTo]->(segment3) edge
 			connection.remove(connectsToEdge0);
 
@@ -73,8 +75,6 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 			connection.add(segment1, connectsTo, segment2);
 			// (segment2)-[:connectsTo]->(segment3)
 			connection.add(segment2, connectsTo, segment3);
-			// (segment1)-[:sensor]->(sensor)
-			connection.add(segment1, sensorEdgeType, sensor);
 		}
 	}
 

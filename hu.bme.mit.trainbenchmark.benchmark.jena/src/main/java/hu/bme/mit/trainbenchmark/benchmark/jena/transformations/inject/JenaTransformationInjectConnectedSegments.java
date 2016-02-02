@@ -15,6 +15,8 @@ import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -39,7 +41,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 	public void rhs(final Collection<Resource> segments) throws Exception {
 		final Model model = driver.getModel();
 		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTS_TO);
-		final Property sensorEdgeProperty = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);
+		final Property monitoredByProperty = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);
 		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
 
 		for (final Resource segment1 : segments) {
@@ -52,30 +54,31 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 			final Statement connectsToEdge0 = connectsToEdges0.next();
 			final RDFNode segment3 = connectsToEdge0.getObject();
 
-			// get (sensor) node
-			final Selector sensorEdgesSelector = new SimpleSelector(segment1, sensorEdgeProperty, (RDFNode) null);
-			final StmtIterator sensorEdges = model.listStatements(sensorEdgesSelector);
-			if (!sensorEdges.hasNext()) {
-				continue;
-			}
-			final Statement sensorEdge = sensorEdges.next();
-			final RDFNode sensor = sensorEdge.getObject();
-
 			// delete (segment1)-[:connectsTo]->(segment3) edge
 			model.remove(connectsToEdge0);
 
 			// create (segment2) node
 			final Long newVertexId = driver.getNewVertexId();
 			final Resource segment2 = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
-
 			model.add(model.createStatement(segment2, RDF.type, segmentType));
 
+			// get (sensor) nodes
+			final Selector monitoredByEdgesSelector = new SimpleSelector(segment1, monitoredByProperty, (RDFNode) null);
+			final StmtIterator monitoredByEdges = model.listStatements(monitoredByEdgesSelector);
+			final List<RDFNode> sensors = new LinkedList<>();
+			while (monitoredByEdges.hasNext()) {
+				final Statement monitoredByEdge = monitoredByEdges.next();
+				final RDFNode sensor = monitoredByEdge.getObject();
+				sensors.add(sensor);
+			}
+			// (segment2)-[:monitoredBy]->(sensor)
+			for (final RDFNode sensor : sensors) {
+				model.add(segment2, monitoredByProperty, sensor);								
+			}		
 			// (segment1)-[:connectsTo]->(segment2)
 			model.add(segment1, connectsToProperty, segment2);
 			// (segment2)-[:connectsTo]->(segment3)
 			model.add(segment2, connectsToProperty, segment3);
-			// (segment1)-[:sensor]->(sensor)
-			model.add(segment1, sensorEdgeProperty, sensor);
 		}
 	}
 
