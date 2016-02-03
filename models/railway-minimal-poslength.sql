@@ -13,6 +13,20 @@
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `trainbenchmark` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `trainbenchmark`;
+DROP TABLE IF EXISTS `Region`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Region` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `Region` WRITE;
+/*!40000 ALTER TABLE `Region` DISABLE KEYS */;
+INSERT INTO `Region` VALUES (1);
+/*!40000 ALTER TABLE `Region` ENABLE KEYS */;
+UNLOCK TABLES;
 DROP TABLE IF EXISTS `Route`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -34,12 +48,14 @@ DROP TABLE IF EXISTS `Segment`;
 CREATE TABLE `Segment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `length` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `segment_length_idx` (`length`)
+) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `Segment` WRITE;
 /*!40000 ALTER TABLE `Segment` DISABLE KEYS */;
+INSERT INTO `Segment` VALUES (2,-1);
 /*!40000 ALTER TABLE `Segment` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `Semaphore`;
@@ -47,6 +63,7 @@ DROP TABLE IF EXISTS `Semaphore`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Semaphore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `segment` int(11) NOT NULL,
   `signal` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
@@ -61,6 +78,8 @@ DROP TABLE IF EXISTS `Sensor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Sensor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `route` int(11) NOT NULL,
+  `region` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -88,8 +107,8 @@ DROP TABLE IF EXISTS `SwitchPosition`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SwitchPosition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `follows` int(11) DEFAULT NULL,
-  `switch` int(11) NOT NULL,
+  `route` int(11) DEFAULT NULL,
+  `target` int(11) NOT NULL,
   `position` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
@@ -104,22 +123,25 @@ DROP TABLE IF EXISTS `TrackElement`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `TrackElement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sensor` int(11) DEFAULT NULL,
+  `region` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `TrackElement` WRITE;
 /*!40000 ALTER TABLE `TrackElement` DISABLE KEYS */;
+INSERT INTO `TrackElement` VALUES (2,0);
 /*!40000 ALTER TABLE `TrackElement` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `connectsTo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `connectsTo` (
-  `TrackElement1` int(11) NOT NULL,
-  `TrackElement2` int(11) NOT NULL,
-  PRIMARY KEY (`TrackElement1`,`TrackElement2`)
+  `TrackElement1_id` int(11) NOT NULL,
+  `TrackElement2_id` int(11) NOT NULL,
+  PRIMARY KEY (`TrackElement1_id`,`TrackElement2_id`),
+  KEY `connectsTo_idx1` (`TrackElement1_id`),
+  KEY `connectsTo_idx2` (`TrackElement2_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -127,19 +149,20 @@ LOCK TABLES `connectsTo` WRITE;
 /*!40000 ALTER TABLE `connectsTo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `connectsTo` ENABLE KEYS */;
 UNLOCK TABLES;
-DROP TABLE IF EXISTS `definedBy`;
+DROP TABLE IF EXISTS `monitoredBy`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `definedBy` (
-  `Route_id` int(11) NOT NULL,
+CREATE TABLE `monitoredBy` (
+  `TrackElement_id` int(11) NOT NULL,
   `Sensor_id` int(11) NOT NULL,
-  PRIMARY KEY (`Route_id`,`Sensor_id`)
+  PRIMARY KEY (`TrackElement_id`,`Sensor_id`),
+  KEY `monitoredBy_idx` (`Sensor_id`,`TrackElement_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `definedBy` WRITE;
-/*!40000 ALTER TABLE `definedBy` DISABLE KEYS */;
-/*!40000 ALTER TABLE `definedBy` ENABLE KEYS */;
+LOCK TABLES `monitoredBy` WRITE;
+/*!40000 ALTER TABLE `monitoredBy` DISABLE KEYS */;
+/*!40000 ALTER TABLE `monitoredBy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
