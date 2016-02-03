@@ -131,3 +131,15 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
   "TrackElement2" int NOT NULL,
   PRIMARY KEY  ("TrackElement1", "TrackElement2")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure: "monitoredBy"
+--
+
+CREATE TABLE IF NOT EXISTS "monitoredBy" (
+  "Sensor" int NOT NULL,
+  "TrackElement" int NOT NULL,
+  PRIMARY KEY  ("Sensor", "TrackElement")
+) DEFAULT CHARSET=utf8 ENGINE=MEMORY;

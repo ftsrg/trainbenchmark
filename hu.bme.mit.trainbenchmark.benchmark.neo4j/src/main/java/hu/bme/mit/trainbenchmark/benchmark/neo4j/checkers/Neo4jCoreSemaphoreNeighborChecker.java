@@ -115,8 +115,6 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 												Neo4jConstants.relationshipTypeEntry);
 										final Iterator<Relationship> entriesIterator2 = entries2.iterator();
 										if (!entriesIterator2.hasNext() || !entriesIterator2.next().getEndNode().equals(semaphore)) {
-											System.out.println(route2);
-											
 											final Map<String, Object> match = new HashMap<>();
 											match.put(VAR_SEMAPHORE, semaphore);
 											match.put(VAR_ROUTE1, route1);
