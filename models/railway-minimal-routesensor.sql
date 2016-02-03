@@ -1,8 +1,3 @@
--- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
---
--- Host: localhost    Database: trainbenchmark
--- ------------------------------------------------------
--- Server version	5.5.44-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -15,18 +10,23 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Current Database: `trainbenchmark`
---
-
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `trainbenchmark` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `trainbenchmark`;
+DROP TABLE IF EXISTS `Region`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Region` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `Route`
---
-
+LOCK TABLES `Region` WRITE;
+/*!40000 ALTER TABLE `Region` DISABLE KEYS */;
+INSERT INTO `Region` VALUES (1);
+/*!40000 ALTER TABLE `Region` ENABLE KEYS */;
+UNLOCK TABLES;
 DROP TABLE IF EXISTS `Route`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -35,93 +35,59 @@ CREATE TABLE `Route` (
   `entry` int(11) DEFAULT NULL,
   `exit` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Route`
---
 
 LOCK TABLES `Route` WRITE;
 /*!40000 ALTER TABLE `Route` DISABLE KEYS */;
-INSERT INTO `Route` VALUES (1,NULL,NULL);
+INSERT INTO `Route` VALUES (2,NULL,NULL);
 /*!40000 ALTER TABLE `Route` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `Segment`
---
-
 DROP TABLE IF EXISTS `Segment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Segment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `length` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `segment_length_idx` (`length`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Segment`
---
 
 LOCK TABLES `Segment` WRITE;
 /*!40000 ALTER TABLE `Segment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Segment` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `Semaphore`
---
-
 DROP TABLE IF EXISTS `Semaphore`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Semaphore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `segment` int(11) NOT NULL,
   `signal` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `Semaphore`
---
-
 LOCK TABLES `Semaphore` WRITE;
 /*!40000 ALTER TABLE `Semaphore` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Semaphore` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `Sensor`
---
-
 DROP TABLE IF EXISTS `Sensor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Sensor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `route` int(11) NOT NULL,
+  `region` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Sensor`
---
 
 LOCK TABLES `Sensor` WRITE;
 /*!40000 ALTER TABLE `Sensor` DISABLE KEYS */;
-INSERT INTO `Sensor` VALUES (2);
+INSERT INTO `Sensor` VALUES (3,0,0);
 /*!40000 ALTER TABLE `Sensor` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `Switch`
---
-
 DROP TABLE IF EXISTS `Switch`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -129,116 +95,72 @@ CREATE TABLE `Switch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `currentPosition` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Switch`
---
 
 LOCK TABLES `Switch` WRITE;
 /*!40000 ALTER TABLE `Switch` DISABLE KEYS */;
-INSERT INTO `Switch` VALUES (3,NULL);
+INSERT INTO `Switch` VALUES (4,NULL);
 /*!40000 ALTER TABLE `Switch` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `SwitchPosition`
---
-
 DROP TABLE IF EXISTS `SwitchPosition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SwitchPosition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `follows` int(11) DEFAULT NULL,
-  `switch` int(11) NOT NULL,
+  `route` int(11) DEFAULT NULL,
+  `target` int(11) NOT NULL,
   `position` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `SwitchPosition`
---
 
 LOCK TABLES `SwitchPosition` WRITE;
 /*!40000 ALTER TABLE `SwitchPosition` DISABLE KEYS */;
-INSERT INTO `SwitchPosition` VALUES (4,1,3,0);
 /*!40000 ALTER TABLE `SwitchPosition` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `TrackElement`
---
-
 DROP TABLE IF EXISTS `TrackElement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `TrackElement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sensor` int(11) DEFAULT NULL,
+  `region` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MEMORY AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `TrackElement`
---
 
 LOCK TABLES `TrackElement` WRITE;
 /*!40000 ALTER TABLE `TrackElement` DISABLE KEYS */;
-INSERT INTO `TrackElement` VALUES (3,2);
+INSERT INTO `TrackElement` VALUES (4,0);
 /*!40000 ALTER TABLE `TrackElement` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `connectsTo`
---
-
 DROP TABLE IF EXISTS `connectsTo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `connectsTo` (
-  `TrackElement1` int(11) NOT NULL,
-  `TrackElement2` int(11) NOT NULL,
-  PRIMARY KEY (`TrackElement1`,`TrackElement2`),
-  KEY `connectsTo_idx1` (`TrackElement1`),
-  KEY `connectsTo_idx2` (`TrackElement1`)
+  `TrackElement1_id` int(11) NOT NULL,
+  `TrackElement2_id` int(11) NOT NULL,
+  PRIMARY KEY (`TrackElement1_id`,`TrackElement2_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `connectsTo`
---
 
 LOCK TABLES `connectsTo` WRITE;
 /*!40000 ALTER TABLE `connectsTo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `connectsTo` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `definedBy`
---
-
-DROP TABLE IF EXISTS `definedBy`;
+DROP TABLE IF EXISTS `monitoredBy`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `definedBy` (
-  `Route_id` int(11) NOT NULL,
+CREATE TABLE `monitoredBy` (
+  `TrackElement_id` int(11) NOT NULL,
   `Sensor_id` int(11) NOT NULL,
-  PRIMARY KEY (`Route_id`,`Sensor_id`),
-  KEY `definedBy_idx` (`Route_id`,`Sensor_id`)
+  PRIMARY KEY (`TrackElement_id`,`Sensor_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `definedBy`
---
-
-LOCK TABLES `definedBy` WRITE;
-/*!40000 ALTER TABLE `definedBy` DISABLE KEYS */;
-/*!40000 ALTER TABLE `definedBy` ENABLE KEYS */;
+LOCK TABLES `monitoredBy` WRITE;
+/*!40000 ALTER TABLE `monitoredBy` DISABLE KEYS */;
+/*!40000 ALTER TABLE `monitoredBy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -250,4 +172,3 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed
