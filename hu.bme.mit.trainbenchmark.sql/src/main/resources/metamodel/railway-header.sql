@@ -14,7 +14,7 @@ START TRANSACTION;
 -- --------------------------------------------------------
 
 --
--- Table structure: "Route"
+-- Table structure: "Region"
 --
 
 CREATE TABLE IF NOT EXISTS "Route" (
@@ -27,10 +27,21 @@ CREATE TABLE IF NOT EXISTS "Route" (
 -- --------------------------------------------------------
 
 --
--- Table structure: "definedBy"
+-- Table structure: "Route"
 --
 
-CREATE TABLE IF NOT EXISTS "definedBy" (
+CREATE TABLE IF NOT EXISTS "Region" (
+  "id" int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY  ("id")
+) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure: "gathers"
+--
+
+CREATE TABLE IF NOT EXISTS "gathers" (
   "Route_id" int NOT NULL,
   "Sensor_id" int NOT NULL,
   PRIMARY KEY  ("Route_id", "Sensor_id")
@@ -49,7 +60,6 @@ CREATE TABLE IF NOT EXISTS "Segment" (
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
-
 --
 -- Table structure: "Sensor"
 --
@@ -106,7 +116,7 @@ CREATE TABLE IF NOT EXISTS "SwitchPosition" (
 
 CREATE TABLE IF NOT EXISTS "TrackElement" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "sensor" int,
+  "elements" int,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -121,4 +131,3 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
   "TrackElement2" int NOT NULL,
   PRIMARY KEY  ("TrackElement1", "TrackElement2")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
-

@@ -9,10 +9,10 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public abstract class ModelGenerator {
 
-	protected final ModelSerializer serializer;
+	protected final ModelSerializer<?> serializer;
 	protected GeneratorConfig generatorConfig;
 
-	public ModelGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
+	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		this.serializer = serializer;
 		this.generatorConfig = generatorConfig;
 	}

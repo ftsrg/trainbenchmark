@@ -15,12 +15,10 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Signal;
@@ -36,16 +34,9 @@ public class EMFAPISwitchSetChecker extends EMFAPIChecker<EMFSwitchSetMatch> {
 	@Override
 	public Collection<EMFSwitchSetMatch> check() {
 		matches = new ArrayList<>();
-		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
-		while (contents.hasNext()) {
-			final EObject eObject = contents.next();
 
-			// (route:Route)
-			if (!RailwayPackage.eINSTANCE.getRoute().isInstance(eObject)) {
-				continue;
-			}
-
-			final Route route = (Route) eObject;
+		final EList<Route> routes = emfDriver.getContainer().getRoutes();
+		for (Route route : routes) {
 			// (route:Route)-[:entry]->(semaphore:Semaphore)
 			final Semaphore semaphore = route.getEntry();
 			if (semaphore == null) {

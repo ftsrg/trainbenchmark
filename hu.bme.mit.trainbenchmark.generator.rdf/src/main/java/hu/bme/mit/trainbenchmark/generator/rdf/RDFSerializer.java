@@ -28,36 +28,34 @@ import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RDFGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
-public class RDFSerializer extends ModelSerializer {
+public class RDFSerializer extends ModelSerializer<RDFGeneratorConfig> {
 
-	protected final RDFGeneratorConfig rdfGeneratorConfig;
 	protected BufferedWriter file;
 
-	public RDFSerializer(final RDFGeneratorConfig rdfGeneratorConfig) {
-		super();
-		this.rdfGeneratorConfig = rdfGeneratorConfig;
+	public RDFSerializer(final RDFGeneratorConfig generatorConfig) {
+		super(generatorConfig);
 	}
 
 	@Override
 	public String syntax() {
-		return "RDF" + rdfGeneratorConfig.getModelFlavor();
+		return "RDF" + generatorConfig.getModelFlavor();
 	}
 
 	@Override
 	public void initModel() throws IOException {
 		// source file
-		final String modelFlavor = rdfGeneratorConfig.getModelFlavor();
-		final String extension = rdfGeneratorConfig.getExtension();
+		final String modelFlavor = generatorConfig.getModelFlavor();
+		final String extension = generatorConfig.getExtension();
 	
 		final String postfix = modelFlavor + "." + extension;
 		
-		final String srcFilePath = rdfGeneratorConfig.getWorkspacePath()
+		final String srcFilePath = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix;
 
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = rdfGeneratorConfig.getModelPathWithoutExtension() + postfix;
+		final String destFilePath = generatorConfig.getModelPathWithoutExtension() + postfix;
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -81,7 +79,7 @@ public class RDFSerializer extends ModelSerializer {
 
 		final String linePrefix;
 		
-		switch (rdfGeneratorConfig.getFormat()) {
+		switch (generatorConfig.getFormat()) {
 		case NTRIPLES:
 			linePrefix = String.format(" .\n:%s%d ", ID_PREFIX, id);
 			break;
@@ -89,11 +87,11 @@ public class RDFSerializer extends ModelSerializer {
 			linePrefix = " ;\n\t";
 			break;
 		default:
-			throw new UnsupportedOperationException("RDF format " + rdfGeneratorConfig.getFormat() + " not supported");
+			throw new UnsupportedOperationException("RDF format " + generatorConfig.getFormat() + " not supported");
 		}
 
 		// if the metamodel is not included, we manually insert the inferenced triples
-		if (rdfGeneratorConfig.isInferred()) {
+		if (generatorConfig.isInferred()) {
 			if (ModelConstants.SUPERTYPES.containsKey(type)) {
 				final String superType = ModelConstants.SUPERTYPES.get(type);
 

@@ -28,16 +28,11 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 
-import com.google.common.collect.ImmutableMap;
-
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-public class SQLSerializer extends ModelSerializer {
-
-	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(MONITORED_BY, TRACKELEMENT);
-	protected final SQLGeneratorConfig sqlGeneratorConfig;
+public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 
 	protected String sqlRawPath;
 	protected String sqlDumpPath;
@@ -45,8 +40,7 @@ public class SQLSerializer extends ModelSerializer {
 	protected BufferedWriter writer;
 
 	public SQLSerializer(final SQLGeneratorConfig sqlGeneratorConfig) {
-		super();
-		this.sqlGeneratorConfig = sqlGeneratorConfig;
+		super(sqlGeneratorConfig);
 	}
 
 	@Override
@@ -61,16 +55,16 @@ public class SQLSerializer extends ModelSerializer {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFileDirectory = sqlGeneratorConfig.getWorkspacePath()
+		final String headerFileDirectory = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
 		final String headerFilePath = headerFileDirectory
-				+ (sqlGeneratorConfig.isMemSQL() ? "railway-header-memsql.sql" : "railway-header.sql");
+				+ (generatorConfig.isMemSQL() ? "railway-header-memsql.sql" : "railway-header.sql");
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		sqlRawPath = sqlGeneratorConfig.getModelPathWithoutExtension() + "-raw.sql";
-		sqlDumpPath = sqlGeneratorConfig.getModelPathWithoutExtension() + ".sql";
-		sqlPostgreDumpPath = sqlGeneratorConfig.getModelPathWithoutExtension() + "-posgres.sql";
+		sqlRawPath = generatorConfig.getModelPathWithoutExtension() + "-raw.sql";
+		sqlDumpPath = generatorConfig.getModelPathWithoutExtension() + ".sql";
+		sqlPostgreDumpPath = generatorConfig.getModelPathWithoutExtension() + "-posgres.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -81,7 +75,7 @@ public class SQLSerializer extends ModelSerializer {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = sqlGeneratorConfig.getWorkspacePath()
+		final String footerFilePath = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 

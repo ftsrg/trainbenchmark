@@ -40,13 +40,10 @@ import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Route;
 
-public class EMFSerializer extends ModelSerializer {
-
-	protected final GeneratorConfig generatorConfig;
+public class EMFSerializer extends ModelSerializer<GeneratorConfig> {
 
 	public EMFSerializer(final GeneratorConfig generatorConfig) {
-		super();
-		this.generatorConfig = generatorConfig;
+		super(generatorConfig);
 	}
 
 	@Override
