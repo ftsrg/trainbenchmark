@@ -12,9 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORES;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSORS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 
@@ -36,7 +45,7 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 
 	protected String sqlRawPath;
 	protected String sqlDumpPath;
-	protected String sqlPostgreDumpPath;
+	protected String sqlPostgresDumpPath;
 	protected BufferedWriter writer;
 
 	public SQLSerializer(final SQLGeneratorConfig sqlGeneratorConfig) {
@@ -64,7 +73,7 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 		// destination file
 		sqlRawPath = generatorConfig.getModelPathWithoutExtension() + "-raw.sql";
 		sqlDumpPath = generatorConfig.getModelPathWithoutExtension() + ".sql";
-		sqlPostgreDumpPath = generatorConfig.getModelPathWithoutExtension() + "-posgres.sql";
+		sqlPostgresDumpPath = generatorConfig.getModelPathWithoutExtension() + "-postgres.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -133,13 +142,34 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 		if (from == null || to == null) {
 			return;
 		}
-
+		
 		String insertQuery;
-		if (MONITORED_BY.equals(label)) {
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, MONITORED_BY, to, ID, from);
-		} else {
+		switch (label) {
+		// n:m edges
+		case MONITORED_BY:
+		case CONNECTS_TO:
 			insertQuery = String.format("INSERT INTO \"%s\" VALUES (%s, %s);", label, from, to);
+			break;
+		// n:1 edges
+		case FOLLOWS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", to, ID, from);			
+			break;
+		case GATHERS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", to, ID, from);			
+			break;
+		case SENSORS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", to, ID, from);
+			break;
+		case ELEMENTS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region", to, ID, from);
+			break;
+		case SEMAPHORES:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", to, ID, from);
+			break;
+		default:
+			throw new UnsupportedOperationException("Label '" + label + "' not supported.");
 		}
+
 		write(insertQuery);
 	}
 
