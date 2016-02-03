@@ -38,18 +38,6 @@ CREATE TABLE IF NOT EXISTS "Region" (
 -- --------------------------------------------------------
 
 --
--- Table structure: "gathers"
---
-
-CREATE TABLE IF NOT EXISTS "gathers" (
-  "Route_id" int NOT NULL,
-  "Sensor_id" int NOT NULL,
-  PRIMARY KEY  ("Route_id", "Sensor_id")
-) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
-
--- --------------------------------------------------------
-
---
 -- Table structure: "Segment"
 --
 
@@ -66,6 +54,8 @@ CREATE TABLE IF NOT EXISTS "Segment" (
 
 CREATE TABLE IF NOT EXISTS "Sensor" (
   "id" int NOT NULL AUTO_INCREMENT,
+  "route" int NOT NULL, -- inverse of the "gathers" edge
+  "region" int NOT NULL, -- inverse of the "sensors" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -77,6 +67,7 @@ CREATE TABLE IF NOT EXISTS "Sensor" (
 
 CREATE TABLE IF NOT EXISTS "Semaphore" (
   "id" int NOT NULL AUTO_INCREMENT,
+  "segment" int NOT NULL, -- inverse of the "semaphores" edge
   "signal" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -102,8 +93,8 @@ CREATE TABLE IF NOT EXISTS "Switch" (
 
 CREATE TABLE IF NOT EXISTS "SwitchPosition" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "follows" int, -- inverse of the route edge
-  "switch" int NOT NULL,
+  "route" int, -- inverse of the "follows" edge
+  "target" int NOT NULL,
   "position" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -116,7 +107,7 @@ CREATE TABLE IF NOT EXISTS "SwitchPosition" (
 
 CREATE TABLE IF NOT EXISTS "TrackElement" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "elements" int,
+  "region" int NOT NULL, -- inverse of the "elements" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
@@ -127,19 +118,19 @@ CREATE TABLE IF NOT EXISTS "TrackElement" (
 --
 
 CREATE TABLE IF NOT EXISTS "connectsTo" (
-  "TrackElement1" int NOT NULL,
-  "TrackElement2" int NOT NULL,
-  PRIMARY KEY  ("TrackElement1", "TrackElement2")
+  "TrackElement1_id" int NOT NULL,
+  "TrackElement2_id" int NOT NULL,
+  PRIMARY KEY  ("TrackElement1_id", "TrackElement2_id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
 -- --------------------------------------------------------
 
 --
--- Table structure: "monitoredBy"
+-- Table structure: "TrackElement_monitoredBy"
 --
 
 CREATE TABLE IF NOT EXISTS "monitoredBy" (
-  "Sensor" int NOT NULL,
-  "TrackElement" int NOT NULL,
-  PRIMARY KEY  ("Sensor", "TrackElement")
+  "TrackElement_id" int NOT NULL,
+  "Sensor_id" int NOT NULL,
+  PRIMARY KEY  ("TrackElement_id", "Sensor_id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
