@@ -16,12 +16,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -36,32 +34,27 @@ public class EMFAPIRouteSensorChecker extends EMFAPIChecker<EMFRouteSensorMatch>
 	@Override
 	public Collection<EMFRouteSensorMatch> check() {
 		matches = new ArrayList<>();
-		final TreeIterator<EObject> contents = emfDriver.getContainer().eAllContents();
-		while (contents.hasNext()) {
-			final EObject eObject = contents.next();
 
-			// (route:Route)
-			if (RailwayPackage.eINSTANCE.getRoute().isInstance(eObject)) {
-				final Route route = (Route) eObject;
-				// (route)-[:follows]->(swP:SwitchPosition)
-				for (final SwitchPosition swP : route.getFollows()) {
-					// (swP:switchPosition)-[:target]->(sw:Switch)
-					final Switch sw = swP.getTarget();
-					if (sw == null) {
-						continue;
-					}
-					
-					// (switch:Switch)-[:monitoredBy]->(sensor:Sensor)
-					final List<Sensor> sensors = sw.getMonitoredBy();
+		final EList<Route> routes = emfDriver.getContainer().getRoutes();
+		// (route:Route)
+		for (Route route : routes) {
+			// (route)-[:follows]->(swP:SwitchPosition)
+			for (final SwitchPosition swP : route.getFollows()) {
+				// (swP:switchPosition)-[:target]->(sw:Switch)
+				final Switch sw = swP.getTarget();
+				if (sw == null) {
+					continue;
+				}
 
-					// TODO check n-m edge
-					for (Sensor sensor2 : sensors) {
-						// (route)-[:gathers]->(sensor) NAC
-						if (!route.getGathers().contains(sensor2)) {
-							final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor2, swP, sw);
-							matches.add(match);
-						}
-						
+				// (switch:Switch)-[:monitoredBy]->(sensor:Sensor)
+				final List<Sensor> sensors = sw.getMonitoredBy();
+
+				// TODO check n-m edge
+				for (Sensor sensor2 : sensors) {
+					// (route)-[:gathers]->(sensor) NAC
+					if (!route.getGathers().contains(sensor2)) {
+						final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor2, swP, sw);
+						matches.add(match);
 					}
 				}
 			}

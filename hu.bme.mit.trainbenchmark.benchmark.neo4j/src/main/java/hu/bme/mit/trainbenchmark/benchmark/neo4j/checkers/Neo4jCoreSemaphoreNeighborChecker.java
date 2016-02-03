@@ -64,15 +64,15 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 					}
 
 					// (route1:Route)-[:definedBy]->(sensor1:Sensor)
-					final Iterable<Relationship> definedBys1 = route1.getRelationships(Direction.OUTGOING,
+					final Iterable<Relationship> gatherss1 = route1.getRelationships(Direction.OUTGOING,
 							Neo4jConstants.relationshipTypeGathers);
-					for (final Relationship definedBy1 : definedBys1) {
-						final Node sensor1 = definedBy1.getEndNode();
+					for (final Relationship gathers1 : gatherss1) {
+						final Node sensor1 = gathers1.getEndNode();
 
 						// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
-						final Iterable<Relationship> relationshipSensors1 = sensor1.getRelationships(Direction.INCOMING,
+						final Iterable<Relationship> relationshipMonitoredBy1 = sensor1.getRelationships(Direction.INCOMING,
 								Neo4jConstants.relationshipTypeMonitoredBy);
-						for (final Relationship relationshipSensor : relationshipSensors1) {
+						for (final Relationship relationshipSensor : relationshipMonitoredBy1) {
 							final Node te1 = relationshipSensor.getStartNode();
 							if (!te1.hasLabel(Neo4jConstants.labelTrackElement)) {
 								continue;
@@ -88,19 +88,19 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 								}
 
 								// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
-								final Iterable<Relationship> relationshipSensors2 = te2.getRelationships(Direction.OUTGOING,
+								final Iterable<Relationship> relationshipMonitoredBy2 = te2.getRelationships(Direction.OUTGOING,
 										Neo4jConstants.relationshipTypeMonitoredBy);
-								for (final Relationship relationshipSensor2 : relationshipSensors2) {
+								for (final Relationship relationshipSensor2 : relationshipMonitoredBy2) {
 									final Node sensor2 = relationshipSensor2.getEndNode();
 									if (!sensor2.hasLabel(Neo4jConstants.labelSensor)) {
 										continue;
 									}
 
-									// (sensor2:Sensor)<-[:definedBy]-(route2:Route),
-									final Iterable<Relationship> definedBys2 = sensor2.getRelationships(Direction.INCOMING,
+									// (sensor2:Sensor)<-[:gathers]-(route2:Route),
+									final Iterable<Relationship> gatherss2 = sensor2.getRelationships(Direction.INCOMING,
 											Neo4jConstants.relationshipTypeGathers);
-									for (final Relationship definedBy2 : definedBys2) {
-										final Node route2 = definedBy2.getStartNode();
+									for (final Relationship gathers2 : gatherss2) {
+										final Node route2 = gathers2.getStartNode();
 										if (!route2.hasLabel(Neo4jConstants.labelRoute)) {
 											continue;
 										}
@@ -115,6 +115,8 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 												Neo4jConstants.relationshipTypeEntry);
 										final Iterator<Relationship> entriesIterator2 = entries2.iterator();
 										if (!entriesIterator2.hasNext() || !entriesIterator2.next().getEndNode().equals(semaphore)) {
+											System.out.println(route2);
+											
 											final Map<String, Object> match = new HashMap<>();
 											match.put(VAR_SEMAPHORE, semaphore);
 											match.put(VAR_ROUTE1, route1);

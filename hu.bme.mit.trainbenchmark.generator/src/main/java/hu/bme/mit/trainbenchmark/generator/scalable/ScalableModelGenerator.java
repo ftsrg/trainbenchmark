@@ -10,6 +10,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REGION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
@@ -30,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -39,6 +39,8 @@ import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class ScalableModelGenerator extends ModelGenerator {
+
+	private static final Map<String, Object> EMPTY_MAP = Collections.<String, Object> emptyMap();
 
 	public static final int MAX_SEGMENT_LENGTH = 1000;
 
@@ -56,7 +58,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
-	public ScalableModelGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
+	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		super(serializer, generatorConfig);
 
 		maxRoutes = 5 * generatorConfig.getSize();
@@ -127,23 +129,27 @@ public class ScalableModelGenerator extends ModelGenerator {
 			routeOutgoingEdges.put(ENTRY, entry);
 			routeOutgoingEdges.put(EXIT, exit);
 
-			final Object route = serializer.createVertex(ROUTE, Collections.<String, Object> emptyMap(), routeOutgoingEdges);
-			final Object region = serializer.createVertex(ModelConstants.REGION);
+			final Object route = serializer.createVertex(ROUTE, EMPTY_MAP, routeOutgoingEdges);
+
+			final Object region = serializer.createVertex(REGION);
 
 			final int swps = random.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
 
 			for (int j = 0; j < swps; j++) {
-				final Object sw = serializer.createVertex(SWITCH);
 
-				serializer.createEdge(ELEMENTS, region, sw);
+				final Map<String, Object> switchIncomingEdges = new HashMap<>();
+				switchIncomingEdges.put(ELEMENTS, region);
+				final Object sw = serializer.createVertex(SWITCH, EMPTY_MAP, EMPTY_MAP, switchIncomingEdges);
 				currentTrack.add(sw);
 
 				final int sensors = random.nextInt(maxSensors - 1) + 1;
 
 				for (int k = 0; k < sensors; k++) {
-					final Object sensor = serializer.createVertex(SENSOR);
-					serializer.createEdge(SENSORS, region, sensor);
+					final Map<String, Object> sensorIncomingEdges = new HashMap<>();
+					sensorIncomingEdges.put(SENSORS, region);
+
+					final Object sensor = serializer.createVertex(SENSOR, EMPTY_MAP, EMPTY_MAP, sensorIncomingEdges);
 
 					// add "monitored by" edge from switch to sensor
 					final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;

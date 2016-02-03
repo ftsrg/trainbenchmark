@@ -122,8 +122,10 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
   PRIMARY KEY  ("TrackElement1", "TrackElement2")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
-INSERT INTO "TrackElement" ("id") VALUES (1);
-INSERT INTO "Segment" ("id", "length") VALUES (1, -1);
+INSERT INTO "Region" ("id") VALUES (1);
+INSERT INTO "TrackElement" ("id") VALUES (2);
+INSERT INTO "Segment" ("id", "length") VALUES (2, -1);
+INSERT INTO "elements" VALUES (1, 2);
 
 COMMIT;
 CREATE INDEX segment_length_idx ON "Segment" ("length");
