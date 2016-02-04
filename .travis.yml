@@ -12,6 +12,3 @@ script:
   - scripts/run.py --build --skip-tests
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
-branches:
-  except:
-    mm
