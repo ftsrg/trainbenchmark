@@ -27,7 +27,7 @@ public class AllegroBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
 	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
-		return new AllegroDriver(benchmarkConfig);
+		return new AllegroDriver(benchmarkConfig.isInferencing());
 	}
 
 	@Override

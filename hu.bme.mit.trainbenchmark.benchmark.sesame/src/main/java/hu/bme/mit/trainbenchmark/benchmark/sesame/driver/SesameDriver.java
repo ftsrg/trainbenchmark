@@ -42,25 +42,21 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
-public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends RDFDriver<URI, TBenchmarkConfig> {
+public class SesameDriver extends RDFDriver<URI> {
 
 	protected RepositoryConnection connection;
 	protected Repository repository;
 	protected ValueFactory vf;
 
 	protected final Comparator<URI> elementComparator = new URIComparator();
-	protected final boolean inferencing;
 
-	public SesameDriver(final TBenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
-
-		inferencing = benchmarkConfig.isInferencing();
+	public SesameDriver(boolean inferencing) {
+		super(inferencing);
 	}
 
 	@Override
@@ -76,7 +72,7 @@ public class SesameDriver<TBenchmarkConfig extends RDFBenchmarkConfig> extends R
 	@Override
 	public void read(final String modelPathWithoutExtension)
 			throws RepositoryException, RDFParseException, IOException, OpenRDFException {
-		if (benchmarkConfig.isInferencing()) {
+		if (inferencing) {
 			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {
 			repository = new SailRepository(new MemoryStore());

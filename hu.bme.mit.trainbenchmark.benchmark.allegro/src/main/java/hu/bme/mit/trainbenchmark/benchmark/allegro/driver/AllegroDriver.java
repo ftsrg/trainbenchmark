@@ -20,10 +20,9 @@ import org.openrdf.repository.RepositoryException;
 import com.franz.agraph.repository.AGCatalog;
 import com.franz.agraph.repository.AGServer;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
-public class AllegroDriver extends SesameDriver<RDFBenchmarkConfig> {
+public class AllegroDriver extends SesameDriver {
 
 	protected AGCatalog catalog;
 
@@ -33,8 +32,8 @@ public class AllegroDriver extends SesameDriver<RDFBenchmarkConfig> {
 	protected String catalogID = "system";
 	protected String repositoryID = "train";
 
-	public AllegroDriver(final RDFBenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
+	public AllegroDriver(final boolean inferencing) {
+		super(inferencing);
 	}
 
 	@Override

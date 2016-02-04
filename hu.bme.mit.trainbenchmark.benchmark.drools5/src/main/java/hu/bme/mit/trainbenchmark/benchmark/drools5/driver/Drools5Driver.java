@@ -21,17 +21,12 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public class Drools5Driver extends EMFDriver<BenchmarkConfig> {
+public class Drools5Driver extends EMFDriver {
 
 	protected KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
 	protected StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
-
-	public Drools5Driver(final BenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
-	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {

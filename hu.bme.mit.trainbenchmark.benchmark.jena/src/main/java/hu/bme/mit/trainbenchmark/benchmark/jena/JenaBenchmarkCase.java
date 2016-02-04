@@ -32,7 +32,7 @@ public class JenaBenchmarkCase
 
 	@Override
 	public JenaDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
-		return new JenaDriver(benchmarkConfig);
+		return new JenaDriver(benchmarkConfig.isInferencing());
 	}
 
 	@Override

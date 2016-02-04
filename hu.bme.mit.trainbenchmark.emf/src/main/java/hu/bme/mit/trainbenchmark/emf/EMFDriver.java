@@ -24,21 +24,20 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<RailwayElement, TBenchmarkConfig> {
+public class EMFDriver extends Driver<RailwayElement> {
 
 	protected RailwayContainer container;
 	protected Resource resource;
 	protected final ResourceSet resourceSet = new ResourceSetImpl();
 	private final Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
 
-	public EMFDriver(final TBenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
+	public EMFDriver() {
+		super();
 		EMFUtil.registerExtension();
 	}
 

@@ -27,15 +27,13 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
 
 import com.google.common.collect.Sets;
 
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class EMFIncQueryDriver<TMatch extends BasePatternMatch>
-		extends EMFIncQueryBaseDriver<TMatch, EMFIncQueryBenchmarkConfig> {
+public class EMFIncQueryDriver<TMatch extends BasePatternMatch> extends EMFIncQueryBaseDriver<TMatch> {
 
-	public EMFIncQueryDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
+	public EMFIncQueryDriver() {
+		super();
 
 		try {
 			final EMFScope emfScope = new EMFScope(resourceSet);

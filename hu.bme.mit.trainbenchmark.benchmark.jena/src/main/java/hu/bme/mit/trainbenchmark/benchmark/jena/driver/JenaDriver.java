@@ -38,20 +38,19 @@ import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.RDF;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
-public class JenaDriver extends RDFDriver<Resource, RDFBenchmarkConfig> {
+public class JenaDriver extends RDFDriver<Resource> {
 
 	protected Model model;
 
 	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Comparator<Statement> statementComparator = new StatementComparator();
 
-	public JenaDriver(final RDFBenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
+	public JenaDriver(boolean inferencing) {
+		super(inferencing);
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class JenaDriver extends RDFDriver<Resource, RDFBenchmarkConfig> {
 		defaultModel.read(modelPath);
 
 		// run inferencing if required
-		if (benchmarkConfig.isInferencing()) {
+		if (inferencing) {
 			final Reasoner reasoner = ReasonerRegistry.getRDFSSimpleReasoner();
 			model = ModelFactory.createInfModel(reasoner, defaultModel);
 		} else {

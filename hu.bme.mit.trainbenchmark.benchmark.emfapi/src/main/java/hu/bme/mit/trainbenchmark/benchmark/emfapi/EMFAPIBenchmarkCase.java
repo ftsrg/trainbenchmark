@@ -25,11 +25,11 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
-		extends EMFBenchmarkCase<EMFDriver<TBenchmarkConfig>, TBenchmarkConfig, Checker<EMFMatch>> {
+		extends EMFBenchmarkCase<EMFDriver, TBenchmarkConfig, Checker<EMFMatch>> {
 
 	@Override
 	public EMFDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new EMFDriver(benchmarkConfig);
+		return new EMFDriver();
 	}
 
 	@Override

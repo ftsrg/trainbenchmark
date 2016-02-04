@@ -22,20 +22,15 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public class Drools6Driver extends EMFDriver<BenchmarkConfig> {
+public class Drools6Driver extends EMFDriver {
 
 	protected final KieServices kieServices = KieServices.Factory.get();
 	protected final KieFileSystem kfs = kieServices.newKieFileSystem();
 	protected KieContainer kContainer;
 	protected KieSession kieSession;
 	
-	public Drools6Driver(final BenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
-	}
-
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();	

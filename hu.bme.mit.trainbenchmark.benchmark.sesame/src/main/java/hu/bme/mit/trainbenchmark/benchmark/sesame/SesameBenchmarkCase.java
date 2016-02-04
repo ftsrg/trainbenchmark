@@ -27,11 +27,11 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver<RDFBenchmarkConfig>, RDFBenchmarkConfig, SesameChecker> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RDFBenchmarkConfig, SesameChecker> {
 
 	@Override
 	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
-		return new SesameDriver(benchmarkConfig);
+		return new SesameDriver(benchmarkConfig.isInferencing());
 	}
 
 	@Override

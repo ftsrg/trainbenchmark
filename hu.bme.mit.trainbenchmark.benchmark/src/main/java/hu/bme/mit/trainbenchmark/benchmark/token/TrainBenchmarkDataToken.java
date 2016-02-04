@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
-public class TrainBenchmarkDataToken<TMatch, TElement, TDriver extends Driver<TElement, TBenchmarkConfig>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>>
+public class TrainBenchmarkDataToken<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>>
 		implements DataToken {
 
 	protected BenchmarkRunner<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkRunner;

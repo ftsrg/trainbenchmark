@@ -26,15 +26,14 @@ import org.openrdf.rio.RDFParseException;
 import com.bigdata.rdf.sail.BigdataSail;
 import com.bigdata.rdf.sail.BigdataSailRepository;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
-public class BlazegraphDriver extends SesameDriver<RDFBenchmarkConfig> {
+public class BlazegraphDriver extends SesameDriver {
 
 	protected final BigdataSail sail;
 
-	public BlazegraphDriver(final RDFBenchmarkConfig benchmarkConfig) throws IOException, RepositoryException {
-		super(benchmarkConfig);
+	public BlazegraphDriver(final boolean inferencing) throws IOException, RepositoryException {
+		super(inferencing);
 
 		// load journal properties from resources
 		final Properties props = loadProperties("/blazegraph.properties");

@@ -17,20 +17,18 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SemaphoreNeighborMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SemaphoreNeighborQuerySpecification;
 
 public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
 
-	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryBaseDriver<SemaphoreNeighborMatch, EMFIncQueryBenchmarkConfig> driver) {
-		super(benchmarkConfig, driver);
+	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryBackend backend,
+			final EMFIncQueryBaseDriver<SemaphoreNeighborMatch> driver) {
+		super(backend, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<SemaphoreNeighborMatch> getMatcher() throws IncQueryException {
-		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
 		switch (backend) {
 		case INCREMENTAL:
 			return engine.getMatcher(SemaphoreNeighborQuerySpecification.instance());

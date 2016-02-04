@@ -39,7 +39,7 @@ import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement, TBenchmarkConfig>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
+public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TBenchmarkConfig benchmarkConfig;

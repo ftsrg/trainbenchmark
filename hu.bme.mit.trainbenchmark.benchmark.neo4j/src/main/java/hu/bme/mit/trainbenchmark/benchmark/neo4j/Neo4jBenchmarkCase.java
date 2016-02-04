@@ -35,7 +35,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 
 	@Override
 	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
-		return new Neo4jDriver(benchmarkConfig);
+		return new Neo4jDriver(benchmarkConfig.getWorkspacePath());
 	}
 	
 	@Override

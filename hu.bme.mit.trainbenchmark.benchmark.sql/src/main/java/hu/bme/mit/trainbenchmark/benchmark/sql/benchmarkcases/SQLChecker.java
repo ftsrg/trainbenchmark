@@ -27,12 +27,12 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 
 public class SQLChecker extends Checker<SQLMatch> {
 
-	protected final SQLDriver<? extends BenchmarkConfig> driver;
+	protected final SQLDriver driver;
 	protected final Query query;
 	protected final String queryDefinition; 
 	protected PreparedStatement statement;
 	
-	public SQLChecker(final SQLDriver<? extends BenchmarkConfig> driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException, SQLException {
+	public SQLChecker(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException, SQLException {
 		super();
 		this.driver = driver;
 		this.query = query;
