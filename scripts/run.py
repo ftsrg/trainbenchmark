@@ -4,7 +4,7 @@ This script runs the benchmark and performs some additional operations:
 * building the code
 * generating the models
 * running the benchmark
-The script assumes that the required dependencies are available from either 
+The script assumes that the required dependencies are available from either
 the local Maven repository or the Maven Central Repository.
 """
 import argparse
@@ -53,7 +53,7 @@ if __name__ == "__main__":
         config = yaml.load(stream)
     with open("config/formats.yml", 'r') as stream:
         tool_formats = yaml.load(stream)
-  
+
     tools = config["tools"]
     formats = config["formats"]
     tool_names = [];
@@ -95,4 +95,3 @@ if __name__ == "__main__":
         generate.generate_models(java_opts, formats, scenarios, sizes)
     if args.measure:
         measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, email)
-

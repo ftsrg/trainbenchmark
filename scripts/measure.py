@@ -26,10 +26,12 @@ def measure_tools(java_opts: List[str], timeout: int, runs: int, scenarios: List
             util.set_working_directory(path)
             target = util.get_tool_jar(tool_name)
 
-            if tool_option_sets is not None:
+            if tool_option_sets is None:
+                tool_option_sets = [None]
+
+            for query_mix in query_mixes:
                 for tool_option_set in tool_option_sets:
-                    for query_mix in query_mixes:
-                        measure_tool(java_opts, timeout, target, scenario_name, runs, sizes, query_mix, transformation_arguments, tool_option_set)
+                    measure_tool(java_opts, timeout, target, scenario_name, runs, sizes, query_mix, transformation_arguments, tool_option_set)
 
             util.set_working_directory("..")
     send_mail.send_mail(email)
@@ -54,7 +56,7 @@ def measure_tool(java_opts: List[str], timeout: int, target: str, scenario_name:
                transformation_arguments,
                options])
         print(util.highlight(" ".join(cmd), True, True))
-        
+
         try:
             subprocess.check_call(cmd, timeout=timeout)
         except subprocess.TimeoutExpired:
