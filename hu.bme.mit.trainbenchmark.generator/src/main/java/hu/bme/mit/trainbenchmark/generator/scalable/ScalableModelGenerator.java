@@ -233,8 +233,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 		final Map<String, Object> segmentAttributes = ImmutableMap.of(LENGTH, segmentLength);
 		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
 
-		// (region)-[:elements]->(sw)
-		serializer.createEdge(ELEMENTS, region, sensor);
+		// (region)-[:elements]->(segment)
+		serializer.createEdge(ELEMENTS, region, segment);
 
 		// (segment)-[:monitoredBy]->(sensor) monitoredBy n:m edge
 		serializer.createEdge(MONITORED_BY, segment, sensor);
