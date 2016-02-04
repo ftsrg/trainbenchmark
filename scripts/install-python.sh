@@ -8,5 +8,3 @@ wget https://bootstrap.pypa.io/get-pip.py
 sudo python3 get-pip.py
 sudo pip3 install --upgrade pip
 sudo pip3 install -r ../config/requirements.txt
-pip3 --version
-pip3 freeze

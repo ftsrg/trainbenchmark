@@ -8,9 +8,9 @@ install:
 script:
 #  - scripts/init-config.sh
   - scripts/install-python.sh
-  - pip3 freeze
 #  - scripts/dep-mondo-sam.sh
 #  - scripts/dep-graph.sh
+  - python3 --version
   - scripts/run.py --build --skip-tests
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
