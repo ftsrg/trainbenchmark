@@ -6,6 +6,7 @@ install:
   -
 script:
   - scripts/init-config.sh
+  - scripts/update-python.sh
   - scripts/install-python.sh
   - scripts/dep-mondo-sam.sh
   - scripts/dep-graph.sh
