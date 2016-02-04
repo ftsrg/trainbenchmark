@@ -78,7 +78,7 @@ DROP TABLE IF EXISTS `Sensor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Sensor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `route` int(11) NOT NULL,
+  `route` int(11) DEFAULT NULL,
   `region` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -86,7 +86,7 @@ CREATE TABLE `Sensor` (
 
 LOCK TABLES `Sensor` WRITE;
 /*!40000 ALTER TABLE `Sensor` DISABLE KEYS */;
-INSERT INTO `Sensor` VALUES (2,0,0);
+INSERT INTO `Sensor` VALUES (2,NULL,1);
 /*!40000 ALTER TABLE `Sensor` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `Switch`;
@@ -94,7 +94,7 @@ DROP TABLE IF EXISTS `Switch`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Switch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `currentPosition` int(11) DEFAULT NULL,
+  `currentPosition` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS `SwitchPosition`;
 CREATE TABLE `SwitchPosition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `route` int(11) DEFAULT NULL,
-  `target` int(11) NOT NULL,
+  `target` int(11) DEFAULT NULL,
   `position` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
@@ -131,7 +131,7 @@ CREATE TABLE `TrackElement` (
 
 LOCK TABLES `TrackElement` WRITE;
 /*!40000 ALTER TABLE `TrackElement` DISABLE KEYS */;
-INSERT INTO `TrackElement` VALUES (3,0),(4,0),(5,0),(6,0),(7,0),(8,0);
+INSERT INTO `TrackElement` VALUES (3,1),(4,1),(5,1),(6,1),(7,1),(8,1);
 /*!40000 ALTER TABLE `TrackElement` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `connectsTo`;

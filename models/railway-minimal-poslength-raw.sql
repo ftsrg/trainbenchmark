@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS "Segment" (
 
 CREATE TABLE IF NOT EXISTS "Sensor" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "route" int NOT NULL, -- inverse of the "gathers" edge
+  "route" int, -- inverse of the "gathers" edge
   "region" int NOT NULL, -- inverse of the "sensors" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS "Semaphore" (
 
 CREATE TABLE IF NOT EXISTS "Switch" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "currentPosition" int,
+  "currentPosition" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS "Switch" (
 CREATE TABLE IF NOT EXISTS "SwitchPosition" (
   "id" int NOT NULL AUTO_INCREMENT,
   "route" int, -- inverse of the "follows" edge
-  "target" int NOT NULL,
+  "target" int,
   "position" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS "monitoredBy" (
 INSERT INTO "Region" ("id") VALUES (1);
 INSERT INTO "TrackElement" ("id") VALUES (2);
 INSERT INTO "Segment" ("id", "length") VALUES (2, -1);
-UPDATE "TrackElement" SET "region" = 2 WHERE "id" = 1;
+UPDATE "TrackElement" SET "region" = 1 WHERE "id" = 2;
 
 COMMIT;
 CREATE INDEX segment_length_idx ON "Segment" ("length");

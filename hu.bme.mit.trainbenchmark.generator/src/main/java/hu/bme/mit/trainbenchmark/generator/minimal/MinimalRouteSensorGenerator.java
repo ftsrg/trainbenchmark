@@ -39,10 +39,10 @@ public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 		serializer.createEdge(ELEMENTS, region, sw);
 		
 		final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
-		final Map<String, Object> swPIncomingEdges = ImmutableMap.of(FOLLOWS, route);
 		final Map<String, ? extends Object> emptyMap = Collections.emptyMap();
-		final Object swP = serializer.createVertex(SWITCHPOSITION, emptyMap, swPOutgoingEdges, swPIncomingEdges);
-
+		final Object swP = serializer.createVertex(SWITCHPOSITION, emptyMap, swPOutgoingEdges);
+		serializer.createEdge(FOLLOWS, route, swP);
+		
 		serializer.createEdge(MONITORED_BY, sw, sensor);
 	}
 
