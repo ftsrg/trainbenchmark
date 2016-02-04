@@ -10,6 +10,8 @@ script:
   - scripts/install-python.sh
 #  - scripts/dep-mondo-sam.sh
 #  - scripts/dep-graph.sh
+  - python3 -c "import sys; print sys.executable"
+  - sudo python3 -c "import sys; print sys.executable"
   - python3 --version
   - sudo python3 scripts/run.py --build --skip-tests
 notifications:
