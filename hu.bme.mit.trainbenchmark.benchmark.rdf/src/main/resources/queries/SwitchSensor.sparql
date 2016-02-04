@@ -6,9 +6,8 @@ WHERE
 {
 	?sw rdf:type base:Switch .
 
-	OPTIONAL { 
-		?sensor rdf:type base:Sensor .
+	FILTER NOT EXISTS {
 		?sw base:monitoredBy ?sensor .
-	} .
-	FILTER (!bound(?sensor))
+		?sensor rdf:type base:Sensor .
+	}
 }
