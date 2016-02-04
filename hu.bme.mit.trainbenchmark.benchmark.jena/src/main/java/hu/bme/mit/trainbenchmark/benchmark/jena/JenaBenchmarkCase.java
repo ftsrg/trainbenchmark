@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class JenaBenchmarkCase
 		extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RDFBenchmarkConfig, JenaChecker> {
@@ -36,14 +36,14 @@ public class JenaBenchmarkCase
 	}
 
 	@Override
-	public JenaChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver, final Query query)
+	public JenaChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver, final RailwayQuery query)
 			throws Exception {
 		return new JenaChecker(driver, benchmarkConfig, query);
 	}
 
 	@Override
 	public Transformation<?, JenaDriver> createTransformation(final RDFBenchmarkConfig benchmarkConfig,
-			final JenaDriver driver, final Query query) throws IOException {
+			final JenaDriver driver, final RailwayQuery query) throws IOException {
 		return JenaTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 

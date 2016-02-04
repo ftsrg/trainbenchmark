@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.driver.VirtuosoDriver;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 
@@ -27,7 +27,7 @@ public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 	}
 
 	@Override
-	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final Query query) throws Exception {
+	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws Exception {
 		return new SesameChecker(driver, benchmarkConfig, query);
 	}
 

@@ -27,7 +27,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransfo
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SQLTransformation<TObject> extends Transformation<TObject, SQLDriver> {
 
@@ -35,7 +35,7 @@ public abstract class SQLTransformation<TObject> extends Transformation<TObject,
 	protected BenchmarkConfig benchmarkConfig;
 	protected final String updateQuery;
 		
-	protected SQLTransformation(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+	protected SQLTransformation(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver);
 		this.benchmarkConfig = benchmarkConfig;
 
@@ -47,7 +47,7 @@ public abstract class SQLTransformation<TObject> extends Transformation<TObject,
 		return benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "transformations/";
 	}
 
-	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		switch (benchmarkConfig.getScenario()) {
 		case REPAIR:
 			switch (query) {

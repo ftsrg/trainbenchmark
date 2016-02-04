@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class Neo4jCoreChecker<TMatch extends Neo4jMatch> extends Checker<TMatch> {
 
@@ -25,7 +25,7 @@ public abstract class Neo4jCoreChecker<TMatch extends Neo4jMatch> extends Checke
 		this.driver = driver;
 	}
 
-	public static Neo4jCoreChecker newInstance(final Neo4jDriver driver, final Query query) {
+	public static Neo4jCoreChecker newInstance(final Neo4jDriver driver, final RailwayQuery query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new Neo4jCoreConnectedSegmentsChecker(driver);

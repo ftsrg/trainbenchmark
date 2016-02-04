@@ -25,8 +25,8 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTrans
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public abstract class JenaTransformation<TObject> extends Transformation<TObject, JenaDriver> {
 
@@ -34,7 +34,7 @@ public abstract class JenaTransformation<TObject> extends Transformation<TObject
 		super(driver);
 	}
 
-	public static Transformation<?, JenaDriver> newInstance(final JenaDriver driver, final Query query, final Scenario scenario) {
+	public static Transformation<?, JenaDriver> newInstance(final JenaDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

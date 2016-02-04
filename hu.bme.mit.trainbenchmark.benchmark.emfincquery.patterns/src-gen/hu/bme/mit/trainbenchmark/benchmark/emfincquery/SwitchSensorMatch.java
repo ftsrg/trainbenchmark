@@ -45,7 +45,7 @@ public abstract class SwitchSensorMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("sw".equals(parameterName) ) {
-    	this.fSw = (Switch) newValue;
+    	this.fSw = (hu.bme.mit.trainbenchmark.railway.Switch) newValue;
     	return true;
     }
     return false;

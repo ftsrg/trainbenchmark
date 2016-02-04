@@ -34,7 +34,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends Checker<TMatch> {
@@ -95,7 +95,7 @@ public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extend
 	}
 
 	public static EMFIncQueryChecker<?> newInstance(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryBaseDriver driver, final Query query) {
+			final EMFIncQueryBaseDriver driver, final RailwayQuery query) {
 		EMFIncQueryBackend backend = benchmarkConfig.getBackend();
 		switch (query) {
 		case CONNECTEDSEGMENTS:

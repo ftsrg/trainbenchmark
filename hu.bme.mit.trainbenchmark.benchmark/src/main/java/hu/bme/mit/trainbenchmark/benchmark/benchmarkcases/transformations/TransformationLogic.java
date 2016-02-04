@@ -25,7 +25,7 @@ import eu.mondo.sam.core.results.PhaseResult;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 // TMatch: matches
 // TElement: elements in the match set
@@ -33,7 +33,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 // TBenchmarkConfig: benchmark configuration
 public abstract class TransformationLogic<TMatch, TElement, TTransformationObject, TBenchmarkConfig extends BenchmarkConfig> {
 
-	public static TransformationLogic<?, ?, ?, ?> newInstance(final Scenario scenario, final Comparator<?> comparator) {
+	public static TransformationLogic<?, ?, ?, ?> newInstance(final ScenarioEnum scenario, final Comparator<?> comparator) {
 		switch (scenario) {
 		case REPAIR:
 			return new RepairTransformationLogic<>(comparator);

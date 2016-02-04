@@ -16,13 +16,13 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public class MySQLBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
+	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("MySQL", scenario, size, runIndex, query, iterationCount, transformationStrategy,
 				transformationConstant);
 		return new BenchmarkRunner(benchmarkConfig, new MySQLBenchmarkCase());

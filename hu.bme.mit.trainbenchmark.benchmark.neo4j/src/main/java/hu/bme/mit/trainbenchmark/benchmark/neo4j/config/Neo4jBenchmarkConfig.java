@@ -15,8 +15,8 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
@@ -30,7 +30,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 		super(NEO4J, args);
 	}
 
-	public Neo4jBenchmarkConfig(final Scenario scenario, final int size, final int runIndex, final Query query, final int iterationCount,
+	public Neo4jBenchmarkConfig(final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query, final int iterationCount,
 			final TransformationStrategy transformationStrategy, final long transformationConstant, final Neo4jEngine engine) {
 		super(NEO4J, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 		this.engine = engine;

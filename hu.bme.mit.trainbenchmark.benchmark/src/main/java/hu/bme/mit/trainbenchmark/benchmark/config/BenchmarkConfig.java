@@ -18,8 +18,8 @@ import org.apache.commons.cli.ParseException;
 import com.google.common.collect.ImmutableList;
 
 import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class BenchmarkConfig extends TrainBenchmarkConfig {
@@ -46,7 +46,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		this.toolName = toolName;
 	}
 
-	public BenchmarkConfig(final String toolName, final Scenario scenario, final int size, final int runs, final Query query,
+	public BenchmarkConfig(final String toolName, final ScenarioEnum scenario, final int size, final int runs, final RailwayQuery query,
 			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant) {
 		super(scenario, size);
 		this.toolName = toolName;

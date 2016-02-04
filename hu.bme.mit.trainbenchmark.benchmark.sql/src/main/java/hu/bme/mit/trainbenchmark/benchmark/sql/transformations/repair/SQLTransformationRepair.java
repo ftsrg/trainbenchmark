@@ -17,11 +17,11 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SQLTransformationRepair<TMatch extends SQLMatch> extends SQLTransformation<TMatch> {
 
-	protected SQLTransformationRepair(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+	protected SQLTransformationRepair(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 

@@ -17,7 +17,7 @@ import eu.mondo.sam.core.scenarios.BenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public abstract class ScenarioLogic<T extends AbstractBenchmarkCase<?, ?, ?, ?, ?>> extends BenchmarkScenario {
+public abstract class TrainBenchmarkScenario<T extends AbstractBenchmarkCase<?, ?, ?, ?, ?>> extends BenchmarkScenario {
 
 	protected BenchmarkConfig benchmarkConfig;
 

@@ -18,11 +18,11 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationRepair<SQLSemaphoreNeighborMatch> {
 
-	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 

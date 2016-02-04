@@ -11,28 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.constants;
 
-public enum Scenario {
-	BATCH("Batch"), //
-	INJECT("Inject"), //
-	REPAIR("Repair"), //
-	MINIMAL("Minimal");
+public enum RailwayQuery {
+	CONNECTEDSEGMENTS("ConnectedSegments"), //
+	POSLENGTH("PosLength"), //
+	ROUTESENSOR("RouteSensor"), //
+	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
+	SWITCHSENSOR("SwitchSensor"), //
+	SWITCHSET("SwitchSet");
 
 	private String name;
 
-	Scenario(final String name) {
+	RailwayQuery(final String name) {
 		this.name = name;
 	}
 
 	@Override
 	public String toString() {
 		return name;
-	}
-
-	public boolean hasTranformation() {
-		if (this == BATCH || this == MINIMAL) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 }

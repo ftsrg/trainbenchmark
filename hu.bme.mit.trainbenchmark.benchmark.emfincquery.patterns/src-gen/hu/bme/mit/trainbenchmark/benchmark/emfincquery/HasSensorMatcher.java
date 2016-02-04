@@ -192,7 +192,7 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
   @Override
   protected HasSensorMatch tupleToMatch(final Tuple t) {
     try {
-    	return HasSensorMatch.newMatch((TrackElement) t.get(POSITION_SW));
+    	return HasSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.TrackElement) t.get(POSITION_SW));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -202,7 +202,7 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
   @Override
   protected HasSensorMatch arrayToMatch(final Object[] match) {
     try {
-    	return HasSensorMatch.newMatch((TrackElement) match[POSITION_SW]);
+    	return HasSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.TrackElement) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -212,7 +212,7 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
   @Override
   protected HasSensorMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return HasSensorMatch.newMutableMatch((TrackElement) match[POSITION_SW]);
+    	return HasSensorMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.TrackElement) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

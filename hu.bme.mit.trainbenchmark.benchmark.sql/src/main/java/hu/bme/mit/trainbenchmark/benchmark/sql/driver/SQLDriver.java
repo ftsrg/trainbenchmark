@@ -22,7 +22,7 @@ import java.util.Comparator;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SQLDriver extends Driver<Long> {
 
@@ -41,7 +41,7 @@ public abstract class SQLDriver extends Driver<Long> {
 		return ".sql";
 	}
 
-	public Collection<SQLMatch> runStatement(final Query query, final PreparedStatement statement) throws SQLException {
+	public Collection<SQLMatch> runStatement(final RailwayQuery query, final PreparedStatement statement) throws SQLException {
 		final Collection<SQLMatch> results = new ArrayList<>();
 
 		try (ResultSet rs = statement.executeQuery()) {

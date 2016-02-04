@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RDFBenchmarkConfig, SesameChecker> {
 
@@ -35,7 +35,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final Query query) throws Exception {
+	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws Exception {
 		return new SesameChecker(driver, benchmarkConfig, query);
 	}
 
@@ -45,7 +45,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final Query query) throws IOException {
+	public Transformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
 		return SesameTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 }

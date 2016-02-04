@@ -16,13 +16,13 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoBenchmarkCase;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public class VirtuosoBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
-	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
+	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
 		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", scenario, size, runIndex, query, iterationCount,
 				transformationStrategy, transformationConstant, false);
 		return new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());

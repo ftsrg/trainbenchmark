@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.config;
 
-import static hu.bme.mit.trainbenchmark.constants.Scenario.MINIMAL;
+import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.MINIMAL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,8 +27,8 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.lang.WordUtils;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public abstract class TrainBenchmarkConfig {
 
@@ -43,8 +43,8 @@ public abstract class TrainBenchmarkConfig {
 
 	// arguments
 	protected int size;
-	protected Scenario scenario;
-	protected List<Query> queryMix = new ArrayList<>();
+	protected ScenarioEnum scenario;
+	protected List<RailwayQuery> queryMix = new ArrayList<>();
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
@@ -62,7 +62,7 @@ public abstract class TrainBenchmarkConfig {
 		}
 	}
 
-	public TrainBenchmarkConfig(final Scenario scenario, final int size) {
+	public TrainBenchmarkConfig(final ScenarioEnum scenario, final int size) {
 		this.scenario = scenario;
 		this.size = size;
 	}
@@ -87,13 +87,13 @@ public abstract class TrainBenchmarkConfig {
 	protected void processArguments(final String[] args) throws ParseException {
 		cmd = parser.parse(options, args);
 
-		scenario = Scenario.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
+		scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
 
 		if (cmd.hasOption(QUERY_MIX)) {
 			final String[] queriesArguments = cmd.getOptionValues(QUERY_MIX);
 
 			for (final String queriesArgument : queriesArguments) {
-				queryMix.add(Query.valueOf(queriesArgument.toUpperCase()));
+				queryMix.add(RailwayQuery.valueOf(queriesArgument.toUpperCase()));
 			}
 		}
 
@@ -110,7 +110,7 @@ public abstract class TrainBenchmarkConfig {
 		System.out.println();
 	}
 
-	public Scenario getScenario() {
+	public ScenarioEnum getScenario() {
 		return scenario;
 	}
 
@@ -148,11 +148,11 @@ public abstract class TrainBenchmarkConfig {
 		return filenameBuilder.toString();
 	}
 
-	public List<Query> getQueries() {
+	public List<RailwayQuery> getQueries() {
 		return queryMix;
 	}
 	
-	public Query getQuery() {
+	public RailwayQuery getQuery() {
 		return queryMix.get(0);
 	}
 

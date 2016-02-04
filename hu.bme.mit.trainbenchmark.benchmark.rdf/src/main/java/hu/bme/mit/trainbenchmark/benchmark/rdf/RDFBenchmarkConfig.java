@@ -15,8 +15,8 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class RDFBenchmarkConfig extends BenchmarkConfig {
@@ -28,7 +28,7 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 		super(toolName, args);
 	}
 
-	public RDFBenchmarkConfig(final String className, final Scenario scenario, final int size, final int runIndex, final Query query,
+	public RDFBenchmarkConfig(final String className, final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query,
 			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant,
 			final boolean inferencing) {
 		super(className, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
