@@ -13,9 +13,7 @@ WHERE
 	?sw rdf:type base:Switch .
 	?sensor rdf:type base:Sensor .
 
-	OPTIONAL {
-		?route ?xGathers ?sensor .
-		FILTER (sameTerm(base:gathers, ?xGathers))
-	} .
-	FILTER (!bound(?xGathers))
+	FILTER NOT EXISTS {
+		?route base:gathers ?sensor .
+	}
 }

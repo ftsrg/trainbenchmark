@@ -21,9 +21,7 @@ WHERE
 
 	FILTER (?route1 != ?route2) .
 
-	OPTIONAL {
-		?route2 ?entry ?semaphore .
-		FILTER (sameTerm(base:entry, ?entry))
-	} .
-	FILTER (!bound(?entry))
+	FILTER NOT EXISTS {
+		?route2 base:entry ?semaphore
+	}
 }

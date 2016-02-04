@@ -18,5 +18,5 @@ WHERE
     ?swP rdf:type base:SwitchPosition .
     ?sw rdf:type base:Switch .
 
-    FILTER (!sameTerm(?currentPosition, ?position))
+    FILTER (?currentPosition != ?position)
 }
