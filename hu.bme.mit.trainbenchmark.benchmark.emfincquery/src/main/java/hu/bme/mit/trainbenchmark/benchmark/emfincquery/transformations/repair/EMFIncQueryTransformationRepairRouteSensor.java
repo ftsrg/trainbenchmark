@@ -17,13 +17,12 @@ import java.util.Collection;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 
 public class EMFIncQueryTransformationRepairRouteSensor extends EMFIncQueryTransformation<RouteSensorMatch> {
 
-	public EMFIncQueryTransformationRepairRouteSensor(final EMFIncQueryBaseDriver<? extends BasePatternMatch, EMFIncQueryBenchmarkConfig> driver) {
+	public EMFIncQueryTransformationRepairRouteSensor(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver) {
 		super(driver);
 	}
 

@@ -24,11 +24,11 @@ import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EclipseOCLBenchmarkCase<T extends RailwayElement>
-		extends EMFBenchmarkCase<EMFDriver<BenchmarkConfig>, BenchmarkConfig, EclipseOCLChecker<EMFMatch>> {
+		extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig, EclipseOCLChecker<EMFMatch>> {
 
 	@Override
 	public EMFDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new EMFDriver(benchmarkConfig);
+		return new EMFDriver();
 	}
 
 	@Override

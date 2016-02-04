@@ -17,25 +17,22 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSensorMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SwitchSensorQuerySpecification;
 
 public class EMFIncQuerySwitchSensorChecker extends EMFIncQueryChecker<SwitchSensorMatch> {
 
-	public EMFIncQuerySwitchSensorChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryBaseDriver<SwitchSensorMatch, EMFIncQueryBenchmarkConfig> driver) {
-		super(benchmarkConfig, driver);
+	public EMFIncQuerySwitchSensorChecker(final EMFIncQueryBackend backend, final EMFIncQueryBaseDriver<SwitchSensorMatch> driver) {
+		super(backend, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<SwitchSensorMatch> getMatcher() throws IncQueryException {
-		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
 		switch (backend) {
 		case INCREMENTAL:
-            return engine.getMatcher(SwitchSensorQuerySpecification.instance());
+			return engine.getMatcher(SwitchSensorQuerySpecification.instance());
 		case LOCALSEARCH:
-            return (SwitchSensorMatcher) getLSMatcher(SwitchSensorQuerySpecification.instance());
+			return (SwitchSensorMatcher) getLSMatcher(SwitchSensorQuerySpecification.instance());
 		default:
 			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
 		}

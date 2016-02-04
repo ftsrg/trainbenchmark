@@ -17,20 +17,19 @@ import java.io.IOException;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFParseException;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.virtuoso.VirtuosoProcess;
 import virtuoso.sesame2.driver.VirtuosoRepository;
 
-public class VirtuosoDriver extends SesameDriver<RDFBenchmarkConfig> {
+public class VirtuosoDriver extends SesameDriver {
 
 	private final String VIRTUOSO_INSTANCE = "localhost";
 	private final String VIRTUOSO_PORT = "1111";
 	private final String VIRTUOSO_USERNAME = "dba";
 	private final String VIRTUOSO_PASSWORD = "dba";
 
-	public VirtuosoDriver(final RDFBenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
+	public VirtuosoDriver(final boolean inferencing) {
+		super(inferencing);
 	}
 
 	@Override

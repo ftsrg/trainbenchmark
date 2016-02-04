@@ -32,7 +32,7 @@ import com.google.common.collect.Ordering;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public class InjectTransformationLogic<TMatch, TElement,TBenchmarkConfig extends BenchmarkConfig> extends TransformationLogic<TMatch, TElement, TElement, TBenchmarkConfig> {
+public class InjectTransformationLogic<TMatch, TElement, TBenchmarkConfig extends BenchmarkConfig> extends TransformationLogic<TMatch, TElement, TElement, TBenchmarkConfig> {
 
 	protected InjectTransformationLogic(final Comparator<TElement> comparator) {
 		super(comparator);

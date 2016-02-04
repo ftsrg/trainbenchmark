@@ -26,7 +26,7 @@ public class Drools5BenchmarkCase extends EMFBenchmarkCase<Drools5Driver, Benchm
 
 	@Override
 	public Drools5Driver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new Drools5Driver(benchmarkConfig);
+		return new Drools5Driver();
 	}
 
 	@Override

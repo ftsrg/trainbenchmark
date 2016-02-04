@@ -22,8 +22,8 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 public class VirtuosoBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
-	public SesameDriver<RDFBenchmarkConfig> createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
-		return new VirtuosoDriver(benchmarkConfig);
+	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+		return new VirtuosoDriver(benchmarkConfig.isInferencing());
 	}
 
 	@Override

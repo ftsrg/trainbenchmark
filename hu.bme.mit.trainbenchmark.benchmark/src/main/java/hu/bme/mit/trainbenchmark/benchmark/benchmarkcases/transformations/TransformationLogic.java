@@ -51,7 +51,7 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 
 	protected TBenchmarkConfig benchmarkConfig;
 	protected BenchmarkResult benchmarkResult;
-	protected Driver<TElement, TBenchmarkConfig> driver;
+	protected Driver<TElement> driver;
 	protected Random random;
 
 	protected Collection<TTransformationObject> candidatesToModify;
@@ -62,9 +62,9 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	protected long start;
 	protected long startEdit;
 	protected long end;
-	protected Transformation<TTransformationObject, Driver<TElement, TBenchmarkConfig>> transformation;
+	protected Transformation<TTransformationObject, Driver<TElement>> transformation;
 
-	public void initialize(final TBenchmarkConfig benchmarkConfig, final Driver<TElement, TBenchmarkConfig> driver, final Random random) {
+	public void initialize(final TBenchmarkConfig benchmarkConfig, final Driver<TElement> driver, final Random random) {
 		this.benchmarkConfig = benchmarkConfig;
 		this.driver = driver;
 		this.random = random;
@@ -111,7 +111,7 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	}
 
 	public void setTransformation(final Transformation<?, ?> transformation) {
-		this.transformation = (Transformation<TTransformationObject, Driver<TElement, TBenchmarkConfig>>) transformation;
+		this.transformation = (Transformation<TTransformationObject, Driver<TElement>>) transformation;
 	}
 
 }

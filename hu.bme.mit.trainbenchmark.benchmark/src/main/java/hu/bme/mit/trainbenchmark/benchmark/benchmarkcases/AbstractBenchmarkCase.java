@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class AbstractBenchmarkCase<TMatch, TElement, TDriver extends Driver<TElement, TBenchmarkConfig>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
+public abstract class AbstractBenchmarkCase<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
 
 	public abstract TDriver createDriver(TBenchmarkConfig benchmarkConfig) throws Exception;
 

@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPISemaphoreNeighborChecker extends EMFAPIChecker<EMFSemaphoreNeighborMatch> {
 
-	public EMFAPISemaphoreNeighborChecker(final EMFDriver<?> emfDriver) {
+	public EMFAPISemaphoreNeighborChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 

@@ -17,20 +17,17 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.RouteSensorQuerySpecification;
 
 public class EMFIncQueryRouteSensorChecker extends EMFIncQueryChecker<RouteSensorMatch> {
 
-	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryBaseDriver<RouteSensorMatch, EMFIncQueryBenchmarkConfig> driver) {
-		super(benchmarkConfig, driver);
+	public EMFIncQueryRouteSensorChecker(final EMFIncQueryBackend backend, final EMFIncQueryBaseDriver<RouteSensorMatch> driver) {
+		super(backend, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<RouteSensorMatch> getMatcher() throws IncQueryException {
-		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
 		switch (backend) {
 		case INCREMENTAL:
             return engine.getMatcher(RouteSensorQuerySpecification.instance());

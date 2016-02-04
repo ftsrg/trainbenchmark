@@ -17,13 +17,12 @@ import java.util.Collection;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
 
 public class EMFIncQueryTransformationRepairPosLength extends EMFIncQueryTransformation<PosLengthMatch> {
 
-	public EMFIncQueryTransformationRepairPosLength(final EMFIncQueryBaseDriver<? extends BasePatternMatch, EMFIncQueryBenchmarkConfig> driver) {
+	public EMFIncQueryTransformationRepairPosLength(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver) {
 		super(driver);
 	}
 

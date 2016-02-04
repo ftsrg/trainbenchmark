@@ -26,7 +26,7 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
 	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
-		return new BlazegraphDriver(benchmarkConfig);
+		return new BlazegraphDriver(benchmarkConfig.isInferencing());
 	}
 
 	@Override

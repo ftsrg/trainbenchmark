@@ -21,13 +21,13 @@ import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 public abstract class EMFAPIChecker<TMatch extends EMFMatch> extends Checker<TMatch> {
 
 	protected Collection<TMatch> matches;
-	protected final EMFDriver<?> emfDriver;
+	protected final EMFDriver emfDriver;
 	
-	public EMFAPIChecker(final EMFDriver<?> emfDriver) {
+	public EMFAPIChecker(final EMFDriver emfDriver) {
 		this.emfDriver = emfDriver;
 	}
 
-	public static EMFAPIChecker<?> newInstance(final EMFDriver<?> driver, final Query query) {
+	public static EMFAPIChecker<?> newInstance(final EMFDriver driver, final Query query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new EMFAPIConnectedSegmentsChecker(driver);

@@ -17,20 +17,17 @@ import org.eclipse.incquery.runtime.exception.IncQueryException;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.SwitchSetMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SwitchSetQuerySpecification;
 
 public class EMFIncQuerySwitchSetChecker extends EMFIncQueryChecker<SwitchSetMatch> {
 
-	public EMFIncQuerySwitchSetChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryBaseDriver<SwitchSetMatch, EMFIncQueryBenchmarkConfig> driver) {
-		super(benchmarkConfig, driver);
+	public EMFIncQuerySwitchSetChecker(final EMFIncQueryBackend backend, final EMFIncQueryBaseDriver<SwitchSetMatch> driver) {
+		super(backend, driver);
 	}
 
 	@Override
 	public IncQueryMatcher<SwitchSetMatch> getMatcher() throws IncQueryException {
-		final EMFIncQueryBackend backend = benchmarkConfig.getBackend();
 		switch (backend) {
 		case INCREMENTAL:
             return engine.getMatcher(SwitchSetQuerySpecification.instance());

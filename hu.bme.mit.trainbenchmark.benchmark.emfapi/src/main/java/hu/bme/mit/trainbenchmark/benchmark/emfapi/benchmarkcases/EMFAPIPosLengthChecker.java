@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPIPosLengthChecker extends EMFAPIChecker<EMFPosLengthMatch> {
 
-	public EMFAPIPosLengthChecker(final EMFDriver<?> emfDriver) {
+	public EMFAPIPosLengthChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 

@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,11 +44,10 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public class Neo4jDriver extends Driver<Node, Neo4jBenchmarkConfig> {
+public class Neo4jDriver extends Driver<Node> {
 
 	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(GATHERS);
 	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
@@ -61,9 +60,9 @@ public class Neo4jDriver extends Driver<Node, Neo4jBenchmarkConfig> {
 	protected final Comparator<Node> nodeComparator = new NodeComparator();
 	protected final String dbPath;
 
-	public Neo4jDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws IOException {
-		super(benchmarkConfig);
-		this.dbPath = benchmarkConfig.getWorkspacePath() + "/models/neo4j-dbs/railway-database";
+	public Neo4jDriver(final String workspacePath) throws IOException {
+		super();
+		this.dbPath = workspacePath + "/models/neo4j-dbs/railway-database";
 	}
 
 	@Override

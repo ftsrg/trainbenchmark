@@ -16,7 +16,6 @@ import static hu.bme.mit.trainbenchmark.constants.Scenario.INJECT;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
@@ -29,13 +28,13 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public abstract class EMFIncQueryTransformation<TMatch extends BasePatternMatch>
-	extends Transformation<TMatch, EMFIncQueryBaseDriver<? extends BasePatternMatch, EMFIncQueryBenchmarkConfig>> {
+	extends Transformation<TMatch, EMFIncQueryBaseDriver<? extends BasePatternMatch>> {
 
-	public EMFIncQueryTransformation(final EMFIncQueryBaseDriver<? extends BasePatternMatch, EMFIncQueryBenchmarkConfig> driver) {
+	public EMFIncQueryTransformation(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver) {
 		super(driver);
 	}
 
-	public static Transformation<?, ?> newInstance(final EMFIncQueryBaseDriver<? extends BasePatternMatch, EMFIncQueryBenchmarkConfig> driver,
+	public static Transformation<?, ?> newInstance(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver,
 			final Query query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:

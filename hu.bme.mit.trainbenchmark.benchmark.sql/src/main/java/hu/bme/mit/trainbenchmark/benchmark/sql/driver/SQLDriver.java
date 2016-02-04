@@ -19,13 +19,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.constants.Query;
 
-public abstract class SQLDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<Long, TBenchmarkConfig> {
+public abstract class SQLDriver extends Driver<Long> {
 
 	protected static final String COLLECT_VERTICES = "SELECT * FROM `%s`;";
 	
@@ -33,8 +32,8 @@ public abstract class SQLDriver<TBenchmarkConfig extends BenchmarkConfig> extend
 	protected Connection connection;
 	protected PreparedStatement preparedQuery;
 
-	public SQLDriver(final TBenchmarkConfig benchmarkConfig) {
-		super(benchmarkConfig);
+	public SQLDriver() {
+		super();
 	}
 	
 	@Override

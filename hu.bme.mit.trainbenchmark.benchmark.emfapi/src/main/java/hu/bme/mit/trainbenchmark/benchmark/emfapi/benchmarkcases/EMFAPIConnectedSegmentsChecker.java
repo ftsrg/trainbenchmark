@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSegmentsMatch> {
 
-	public EMFAPIConnectedSegmentsChecker(final EMFDriver<?> emfDriver) {
+	public EMFAPIConnectedSegmentsChecker(final EMFDriver emfDriver) {
 		super(emfDriver);
 	}
 

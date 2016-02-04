@@ -31,7 +31,7 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 
 	@Override
 	public EMFIncQueryDriver<TMatch> createDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) throws Exception {
-		return new EMFIncQueryDriver(benchmarkConfig);
+		return new EMFIncQueryDriver();
 	}
 
 	@Override
