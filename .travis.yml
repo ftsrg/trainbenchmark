@@ -12,6 +12,7 @@ script:
 #  - scripts/dep-graph.sh
   - python3 -c "import sys; print(sys.executable)"
   - sudo python3 -c "import sys; print(sys.executable)"
+  - sudo -H python3 -c "import sys; print(sys.executable)"
   - python3 --version
   - sudo python3 scripts/run.py --build --skip-tests
 notifications:
