@@ -39,6 +39,7 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 
 	public EMFDriver(final TBenchmarkConfig benchmarkConfig) {
 		super(benchmarkConfig);
+		EMFUtil.registerExtension();
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 		RailwayPackage.eINSTANCE.eClass();
 		final String modelPath = modelPathWithoutExtension + getPostfix();
 
-		final URI resourceURI = FileBroker.getEMFUri(modelPath);
+		final URI resourceURI = URI.createFileURI(modelPath);
 		resource = resourceSet.getResource(resourceURI, true);
 
 		if (resource.getContents().size() > 0 && resource.getContents().get(0) instanceof RailwayContainer) {
@@ -56,7 +57,7 @@ public class EMFDriver<TBenchmarkConfig extends BenchmarkConfig> extends Driver<
 
 	@Override
 	public String getPostfix() {
-		return ".xmi";
+		return "." + EMFConstants.RAILWAY_EXTENSION;
 	}
 
 	@Override
