@@ -27,7 +27,7 @@ public class SQLTransformationRepairConnectedSegments extends SQLTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<SQLConnectedSegmentsMatch> matches) throws SQLException {
+	public void performRHS(final Collection<SQLConnectedSegmentsMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}

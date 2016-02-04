@@ -37,7 +37,7 @@ public class JenaTransformationRepairConnectedSegments extends JenaTransformatio
 	}
 
 	@Override
-	public void rhs(final Collection<JenaConnectedSegmentsMatch> matches) throws IOException {
+	public void performRHS(final Collection<JenaConnectedSegmentsMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.LENGTH);
 

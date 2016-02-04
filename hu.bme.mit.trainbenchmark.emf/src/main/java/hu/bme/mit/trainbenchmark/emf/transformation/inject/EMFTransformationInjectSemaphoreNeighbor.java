@@ -24,7 +24,7 @@ public class EMFTransformationInjectSemaphoreNeighbor extends EMFTransformationI
 	}
 
 	@Override
-	public void rhs(final Collection<Route> routes) throws IOException {
+	public void performRHS(final Collection<Route> routes) throws IOException {
 		for (final Route route : routes) {
 			route.setEntry(null);
 		}

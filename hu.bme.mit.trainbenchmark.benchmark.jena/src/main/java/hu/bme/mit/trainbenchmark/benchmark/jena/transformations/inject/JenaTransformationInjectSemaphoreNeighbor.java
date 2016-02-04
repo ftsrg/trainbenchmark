@@ -28,7 +28,7 @@ public class JenaTransformationInjectSemaphoreNeighbor extends JenaTransformatio
 	}
 
 	@Override
-	public void rhs(final Collection<Resource> routes) throws IOException {
+	public void performRHS(final Collection<Resource> routes) throws IOException {
 		driver.deleteSingleOutgoingEdge(routes, ROUTE, ENTRY);
 	}
 

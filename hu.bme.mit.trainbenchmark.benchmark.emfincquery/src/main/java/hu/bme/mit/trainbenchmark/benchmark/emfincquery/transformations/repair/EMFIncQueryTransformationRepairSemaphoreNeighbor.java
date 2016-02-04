@@ -27,7 +27,7 @@ public class EMFIncQueryTransformationRepairSemaphoreNeighbor extends EMFIncQuer
 	}
 
 	@Override
-	public void rhs(final Collection<SemaphoreNeighborMatch> matches) throws IOException {
+	public void performRHS(final Collection<SemaphoreNeighborMatch> matches) throws IOException {
 		for (final SemaphoreNeighborMatch match : matches) {
 			match.getRoute2().setEntry(match.getSemaphore());
 		}

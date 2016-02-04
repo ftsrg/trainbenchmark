@@ -28,7 +28,7 @@ public class JenaTransformationInjectSwitchSensor extends JenaTransformationInje
 	}
 
 	@Override
-	public void rhs(final Collection<Resource> switches) throws IOException {
+	public void performRHS(final Collection<Resource> switches) throws IOException {
 		driver.deleteSingleOutgoingEdge(switches, SWITCH, MONITORED_BY);
 	}
 

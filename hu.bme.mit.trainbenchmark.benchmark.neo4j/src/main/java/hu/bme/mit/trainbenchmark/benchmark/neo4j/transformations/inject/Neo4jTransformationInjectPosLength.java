@@ -25,7 +25,7 @@ public class Neo4jTransformationInjectPosLength extends Neo4jTransformationInjec
 	}
 
 	@Override
-	public void rhs(final Collection<Node> segments) {
+	public void performRHS(final Collection<Node> segments) {
 		for (final Node segment : segments) {
 			segment.setProperty(LENGTH, 0);
 		}

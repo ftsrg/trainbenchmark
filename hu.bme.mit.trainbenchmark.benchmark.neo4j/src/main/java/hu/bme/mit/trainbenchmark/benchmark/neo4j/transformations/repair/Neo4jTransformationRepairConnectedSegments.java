@@ -27,7 +27,7 @@ public class Neo4jTransformationRepairConnectedSegments extends Neo4jTransformat
 	}
 
 	@Override
-	public void rhs(final Collection<Neo4jConnectedSegmentsMatch> matches) {
+	public void performRHS(final Collection<Neo4jConnectedSegmentsMatch> matches) {
 		for (final Neo4jConnectedSegmentsMatch csm : matches) {
 			// delete segment2 with all its relationships
 			final Node segment2 = csm.getSegment2();

@@ -31,7 +31,7 @@ public class JenaTransformationRepairSwitchSet extends JenaTransformationRepair<
 	}
 
 	@Override
-	public void rhs(final Collection<JenaSwitchSetMatch> matches) throws IOException {
+	public void performRHS(final Collection<JenaSwitchSetMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 		final Property currentPositionProperty = model.getProperty(BASE_PREFIX + CURRENTPOSITION);
 

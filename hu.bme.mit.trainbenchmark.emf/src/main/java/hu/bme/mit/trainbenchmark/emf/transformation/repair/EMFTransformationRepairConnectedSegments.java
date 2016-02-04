@@ -25,7 +25,7 @@ public class EMFTransformationRepairConnectedSegments extends EMFTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<EMFConnectedSegmentsMatch> matches) {
+	public void performRHS(final Collection<EMFConnectedSegmentsMatch> matches) {
 		for (final EMFConnectedSegmentsMatch csm : matches) {
 			EcoreUtil.delete(csm.getSegment2());
 			csm.getSegment1().getConnectsTo().add(csm.getSegment3());

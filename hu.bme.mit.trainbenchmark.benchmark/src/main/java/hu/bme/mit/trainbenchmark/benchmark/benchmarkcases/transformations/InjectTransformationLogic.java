@@ -48,7 +48,7 @@ public class InjectTransformationLogic<TMatch, TElement, TBenchmarkConfig extend
 			.build();
 
 	@Override
-	protected void lhs(final Collection<TMatch> currentMatches) throws Exception {
+	protected void performLHS(final Collection<TMatch> currentMatches) throws Exception {
 		final String vertexType = VERTEX_TYPES.get(benchmarkConfig.getQuery());
 		candidatesToModify = driver.collectVertices(vertexType);
 	}

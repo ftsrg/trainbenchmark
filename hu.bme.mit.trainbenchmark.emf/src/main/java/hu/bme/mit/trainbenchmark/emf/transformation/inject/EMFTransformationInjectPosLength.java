@@ -24,7 +24,7 @@ public class EMFTransformationInjectPosLength extends EMFTransformationInject<Se
 	}
 
 	@Override
-	public void rhs(final Collection<Segment> segments) throws IOException {
+	public void performRHS(final Collection<Segment> segments) throws IOException {
 		for (final Segment segment : segments) {
 			segment.setLength(0);
 		}

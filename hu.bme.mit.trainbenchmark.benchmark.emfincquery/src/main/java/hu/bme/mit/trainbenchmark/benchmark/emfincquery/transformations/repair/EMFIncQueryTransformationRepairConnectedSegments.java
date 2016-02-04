@@ -29,7 +29,7 @@ public class EMFIncQueryTransformationRepairConnectedSegments extends EMFIncQuer
 	}
 
 	@Override
-	public void rhs(final Collection<ConnectedSegmentsMatch> matches) throws IOException {
+	public void performRHS(final Collection<ConnectedSegmentsMatch> matches) throws IOException {
 		for (final ConnectedSegmentsMatch match : matches) {
 			final Segment segment1 = match.getSegment1();
 			final Segment segment2 = match.getSegment2();

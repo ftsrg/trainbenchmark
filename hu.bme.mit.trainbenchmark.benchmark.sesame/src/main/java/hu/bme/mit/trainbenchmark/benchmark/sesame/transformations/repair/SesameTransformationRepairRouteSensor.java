@@ -31,7 +31,7 @@ public class SesameTransformationRepairRouteSensor extends SesameTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<SesameRouteSensorMatch> matches) throws RepositoryException {
+	public void performRHS(final Collection<SesameRouteSensorMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

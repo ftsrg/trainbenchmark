@@ -33,7 +33,7 @@ public class SesameTransformationRepairConnectedSegments extends SesameTransform
 	}
 
 	@Override
-	public void rhs(final Collection<SesameConnectedSegmentsMatch> matches) throws RepositoryException {
+	public void performRHS(final Collection<SesameConnectedSegmentsMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

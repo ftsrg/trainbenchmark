@@ -27,7 +27,7 @@ public class EMFIncQueryTransformationRepairSwitchSet extends EMFIncQueryTransfo
 	}
 
 	@Override
-	public void rhs(final Collection<SwitchSetMatch> matches) throws IOException {
+	public void performRHS(final Collection<SwitchSetMatch> matches) throws IOException {
 		for (final SwitchSetMatch match : matches) {
 			match.getSw().setCurrentPosition(match.getSwP().getPosition());
 		}

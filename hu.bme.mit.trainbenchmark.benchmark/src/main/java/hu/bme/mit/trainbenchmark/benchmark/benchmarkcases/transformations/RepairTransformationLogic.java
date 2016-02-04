@@ -27,7 +27,7 @@ public class RepairTransformationLogic<TMatch, TElement, TBenchmarkConfig extend
 	}
 
 	@Override
-	protected void lhs(final Collection<TMatch> currentMatches) throws IOException {
+	protected void performLHS(final Collection<TMatch> currentMatches) throws IOException {
 		candidatesToModify = currentMatches;
 	}
 
