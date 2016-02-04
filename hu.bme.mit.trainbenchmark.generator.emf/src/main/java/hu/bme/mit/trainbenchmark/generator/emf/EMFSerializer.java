@@ -30,7 +30,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.emf.FileBroker;
+import hu.bme.mit.trainbenchmark.emf.EMFConstants;
+import hu.bme.mit.trainbenchmark.emf.EMFUtil;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
@@ -57,8 +58,9 @@ public class EMFSerializer extends ModelSerializer<GeneratorConfig> {
 
 	@Override
 	public void initModel() {
-		final String fileName = generatorConfig.getModelPathWithoutExtension() + ".xmi";
-		final URI resourceURI = FileBroker.getEMFUri(fileName);
+		EMFUtil.registerExtension();
+		final String modelPath = generatorConfig.getModelPathWithoutExtension() + "." + EMFConstants.RAILWAY_EXTENSION;
+		final URI resourceURI = URI.createFileURI(modelPath);	
 
 		final ResourceSet resourceSet = new ResourceSetImpl();
 
