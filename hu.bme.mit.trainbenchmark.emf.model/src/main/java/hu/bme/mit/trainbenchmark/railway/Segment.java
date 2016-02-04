@@ -1,18 +1,8 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,10 +11,12 @@ package hu.bme.mit.trainbenchmark.railway;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Segment#getLength <em>Length</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.Segment#getSemaphores <em>Semaphores</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.Segment#getNeighbors <em>Neighbors</em>}</li>
  * </ul>
- * </p>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSegment()
  * @model
@@ -56,5 +48,37 @@ public interface Segment extends TrackElement {
 	 * @generated
 	 */
 	void setLength(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Semaphores</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.Semaphore}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Semaphores</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Semaphores</em>' containment reference list.
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSegment_Semaphores()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Semaphore> getSemaphores();
+
+	/**
+	 * Returns the value of the '<em><b>Neighbors</b></em>' reference list.
+	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.TrackElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Neighbors</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Neighbors</em>' reference list.
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSegment_Neighbors()
+	 * @model lower="2" upper="2"
+	 * @generated
+	 */
+	EList<TrackElement> getNeighbors();
 
 } // Segment

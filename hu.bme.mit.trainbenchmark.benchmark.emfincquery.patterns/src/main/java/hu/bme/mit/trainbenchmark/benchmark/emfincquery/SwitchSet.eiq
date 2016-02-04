@@ -6,7 +6,7 @@ pattern switchSet(semaphore, route, swP, sw)
 {
 	Route.entry(route, semaphore);
 	Route.follows(route, swP);
-	SwitchPosition.^switch(swP, sw);
+	SwitchPosition.target(swP, sw);
 	
 	Semaphore.signal(semaphore, ::GO);
 	SwitchPosition.position(swP, swpPosition);

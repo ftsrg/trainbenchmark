@@ -5,11 +5,11 @@ import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 pattern semaphoreNeighbor(semaphore, route1, route2, sensor1, sensor2, te1, te2)
 {
 	Route.exit(route1, semaphore);
-	Route.definedBy(route1, sensor1);
-	TrackElement.sensor(te1, sensor1);
+	Route.gathers(route1, sensor1);
+	TrackElement.monitoredBy(te1, sensor1);
 	TrackElement.connectsTo(te1, te2);
-	TrackElement.sensor(te2, sensor2);
-	Route.definedBy(route2, sensor2);
+	TrackElement.monitoredBy(te2, sensor2);
+	Route.gathers(route2, sensor2);
 	
 	neg find entrySemaphore(route2, semaphore);
 

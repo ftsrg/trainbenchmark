@@ -54,11 +54,11 @@ public abstract class EntrySemaphoreMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("route".equals(parameterName) ) {
-    	this.fRoute = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
+    	this.fRoute = (Route) newValue;
     	return true;
     }
     if ("semaphore".equals(parameterName) ) {
-    	this.fSemaphore = (hu.bme.mit.trainbenchmark.railway.Semaphore) newValue;
+    	this.fSemaphore = (Semaphore) newValue;
     	return true;
     }
     return false;

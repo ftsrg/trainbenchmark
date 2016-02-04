@@ -22,7 +22,7 @@ public abstract class EMFAPIChecker<TMatch extends EMFMatch> extends Checker<TMa
 
 	protected Collection<TMatch> matches;
 	protected final EMFDriver<?> emfDriver;
-
+	
 	public EMFAPIChecker(final EMFDriver<?> emfDriver) {
 		this.emfDriver = emfDriver;
 	}
@@ -45,5 +45,5 @@ public abstract class EMFAPIChecker<TMatch extends EMFMatch> extends Checker<TMa
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}
 	}
-
+	
 }

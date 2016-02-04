@@ -8,7 +8,7 @@ WHERE
 
 	OPTIONAL { 
 		?sensor rdf:type base:Sensor .
-		?sw base:sensor ?sensor .
+		?sw base:monitoredBy ?sensor .
 	} .
 	FILTER (!bound(?sensor))
 }

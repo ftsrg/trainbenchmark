@@ -1,8 +1,8 @@
 Route.allInstances()->collect(
 	route | route.follows->collect(
-		swP | swP.switch->collect(
-			sw | sw.sensor->select(
-				sensor | route.definedBy->excludes(sensor)
+		swP | swP.target->collect(
+			sw | sw.monitoredBy->select(
+				sensor | route.gathers->excludes(sensor)
 			)->collect(
 				sensor | Tuple{route = route, sensor = sensor, swP = swP, sw = sw}
 			)

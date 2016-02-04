@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
@@ -16,15 +5,19 @@ package hu.bme.mit.trainbenchmark.railway.impl;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
+
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,15 +25,25 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.TrackElementImpl#getSensor <em>Sensor</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.TrackElementImpl#getMonitoredBy <em>Monitored By</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.TrackElementImpl#getConnectsTo <em>Connects To</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public abstract class TrackElementImpl extends RailwayElementImpl implements TrackElement {
+	/**
+	 * The cached value of the '{@link #getMonitoredBy() <em>Monitored By</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMonitoredBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Sensor> monitoredBy;
+
 	/**
 	 * The cached value of the '{@link #getConnectsTo() <em>Connects To</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -75,40 +78,11 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Sensor getSensor() {
-		if (eContainerFeatureID() != RailwayPackage.TRACK_ELEMENT__SENSOR) return null;
-		return (Sensor)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSensor(Sensor newSensor, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newSensor, RailwayPackage.TRACK_ELEMENT__SENSOR, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSensor(Sensor newSensor) {
-		if (newSensor != eInternalContainer() || (eContainerFeatureID() != RailwayPackage.TRACK_ELEMENT__SENSOR && newSensor != null)) {
-			if (EcoreUtil.isAncestor(this, newSensor))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newSensor != null)
-				msgs = ((InternalEObject)newSensor).eInverseAdd(this, RailwayPackage.SENSOR__ELEMENTS, Sensor.class, msgs);
-			msgs = basicSetSensor(newSensor, msgs);
-			if (msgs != null) msgs.dispatch();
+	public EList<Sensor> getMonitoredBy() {
+		if (monitoredBy == null) {
+			monitoredBy = new EObjectWithInverseResolvingEList.ManyInverse<Sensor>(Sensor.class, this, RailwayPackage.TRACK_ELEMENT__MONITORED_BY, RailwayPackage.SENSOR__MONITORS);
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.TRACK_ELEMENT__SENSOR, newSensor, newSensor));
+		return monitoredBy;
 	}
 
 	/**
@@ -128,13 +102,12 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RailwayPackage.TRACK_ELEMENT__SENSOR:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetSensor((Sensor)otherEnd, msgs);
+			case RailwayPackage.TRACK_ELEMENT__MONITORED_BY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMonitoredBy()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -147,8 +120,8 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RailwayPackage.TRACK_ELEMENT__SENSOR:
-				return basicSetSensor(null, msgs);
+			case RailwayPackage.TRACK_ELEMENT__MONITORED_BY:
+				return ((InternalEList<?>)getMonitoredBy()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -159,24 +132,10 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case RailwayPackage.TRACK_ELEMENT__SENSOR:
-				return eInternalContainer().eInverseRemove(this, RailwayPackage.SENSOR__ELEMENTS, Sensor.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RailwayPackage.TRACK_ELEMENT__SENSOR:
-				return getSensor();
+			case RailwayPackage.TRACK_ELEMENT__MONITORED_BY:
+				return getMonitoredBy();
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
 				return getConnectsTo();
 		}
@@ -192,8 +151,9 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RailwayPackage.TRACK_ELEMENT__SENSOR:
-				setSensor((Sensor)newValue);
+			case RailwayPackage.TRACK_ELEMENT__MONITORED_BY:
+				getMonitoredBy().clear();
+				getMonitoredBy().addAll((Collection<? extends Sensor>)newValue);
 				return;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
 				getConnectsTo().clear();
@@ -211,8 +171,8 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.TRACK_ELEMENT__SENSOR:
-				setSensor((Sensor)null);
+			case RailwayPackage.TRACK_ELEMENT__MONITORED_BY:
+				getMonitoredBy().clear();
 				return;
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
 				getConnectsTo().clear();
@@ -229,8 +189,8 @@ public abstract class TrackElementImpl extends RailwayElementImpl implements Tra
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.TRACK_ELEMENT__SENSOR:
-				return getSensor() != null;
+			case RailwayPackage.TRACK_ELEMENT__MONITORED_BY:
+				return monitoredBy != null && !monitoredBy.isEmpty();
 			case RailwayPackage.TRACK_ELEMENT__CONNECTS_TO:
 				return connectsTo != null && !connectsTo.isEmpty();
 		}

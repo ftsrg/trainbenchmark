@@ -26,22 +26,22 @@ public abstract class InjectTest extends TrainBenchmarkTest {
 	
 	@Test
 	public void connectedSegmentsInject() throws Exception {
-		testTransformation(CONNECTEDSEGMENTS, INJECT, 4, 6);
+		testTransformation(CONNECTEDSEGMENTS, INJECT, 5, 7);
 	}
 
 	@Test
 	public void posLengthInject() throws Exception {
-		testTransformation(POSLENGTH, INJECT, 21, 23);
+		testTransformation(POSLENGTH, INJECT, 13, 15);
 	}
 
 	@Test
 	public void routeSensorInject() throws Exception {
-		testTransformation(ROUTESENSOR, INJECT, 2, 2);
+		testTransformation(ROUTESENSOR, INJECT, 6, 49);
 	}
 
 	@Test
 	public void semaphoreNeighborInject() throws Exception {
-		testTransformation(SEMAPHORENEIGHBOR, INJECT, 1, 2);
+		testTransformation(SEMAPHORENEIGHBOR, INJECT, 9, 17);
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
 	public void switchSetInject() throws Exception {
-		testTransformation(SWITCHSET, INJECT, 1, 3);
+		testTransformation(SWITCHSET, INJECT, 0, 0);
 	}
 
 }

@@ -3,7 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfincquery.util;
 import com.google.common.collect.Sets;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseDefinedByQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.InverseGathersQuerySpecification;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -101,28 +101,29 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
       		PVariable var_sensor = body.getOrCreateVariableByName("sensor");
       		PVariable var_swP = body.getOrCreateVariableByName("swP");
       		PVariable var_sw = body.getOrCreateVariableByName("sw");
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-      		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      			new ExportedParameter(body, var_route, "route"),
-      			
-      			new ExportedParameter(body, var_sensor, "sensor"),
-      			
-      			new ExportedParameter(body, var_swP, "swP"),
-      			
-      			new ExportedParameter(body, var_sw, "sw")
+      		   new ExportedParameter(body, var_route, "route"),
+      		   new ExportedParameter(body, var_sensor, "sensor"),
+      		   new ExportedParameter(body, var_swP, "swP"),
+      		   new ExportedParameter(body, var_sw, "sw")
       		));
+      		// 	Route.follows(route, swP)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows")));
       		new Equality(body, var__virtual_0_, var_swP);
+      		// 	SwitchPosition.target(swP, sw)
       		new TypeConstraint(body, new FlatTuple(var_swP), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
-      		new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "switch")));
+      		PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+      		new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "target")));
       		new Equality(body, var__virtual_1_, var_sw);
+      		// 	TrackElement.monitoredBy(sw, sensor)
       		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
-      		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor")));
+      		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+      		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
       		new Equality(body, var__virtual_2_, var_sensor);
-      		new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseDefinedByQuerySpecification.instance().getInternalQueryRepresentation());
+      		// 		neg find inverseGathers(sensor, route)
+      		new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseGathersQuerySpecification.instance().getInternalQueryRepresentation());
       		bodies.add(body);
       	}
       	// to silence compiler error

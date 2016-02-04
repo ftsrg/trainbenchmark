@@ -11,13 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeDefinedBy;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeGathers;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformationInject {
 
@@ -28,10 +29,9 @@ public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformationInj
 	@Override
 	public void rhs(final Collection<Node> routes) {
 		for (final Node route : routes) {
-			final Iterable<Relationship> definedBys = route.getRelationships(relationshipTypeDefinedBy);
+			final Iterable<Relationship> definedBys = route.getRelationships(relationshipTypeGathers);
 			for (final Relationship definedBy : definedBys) {
 				definedBy.delete();
-				break;
 			}
 		}
 	}

@@ -9,10 +9,10 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public abstract class ModelGenerator {
 
-	protected final ModelSerializer serializer;
+	protected final ModelSerializer<?> serializer;
 	protected GeneratorConfig generatorConfig;
 
-	public ModelGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
+	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		this.serializer = serializer;
 		this.generatorConfig = generatorConfig;
 	}
@@ -23,7 +23,7 @@ public abstract class ModelGenerator {
 		messageBuilder.append("generator: " + serializer.syntax() + ", ");
 		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
 		if (generatorConfig.getScenario() == MINIMAL) {
-			messageBuilder.append("query: " + generatorConfig.getQueries());
+			messageBuilder.append("query: " + generatorConfig.getQueries().get(0));
 		} else {
 			messageBuilder.append("size: " + generatorConfig.getSize());
 		}

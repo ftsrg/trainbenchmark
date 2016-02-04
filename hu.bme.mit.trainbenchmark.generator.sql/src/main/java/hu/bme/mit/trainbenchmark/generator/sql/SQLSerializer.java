@@ -12,9 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORES;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSORS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 
@@ -28,25 +37,19 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 
-import com.google.common.collect.ImmutableMap;
-
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SQLGeneratorConfig;
 import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 
-public class SQLSerializer extends ModelSerializer {
-
-	protected static final Map<String, String> EDGE_TABLE = ImmutableMap.of(SENSOR_EDGE, TRACKELEMENT);
-	protected final SQLGeneratorConfig sqlGeneratorConfig;
+public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 
 	protected String sqlRawPath;
 	protected String sqlDumpPath;
-	protected String sqlPostgreDumpPath;
+	protected String sqlPostgresDumpPath;
 	protected BufferedWriter writer;
 
 	public SQLSerializer(final SQLGeneratorConfig sqlGeneratorConfig) {
-		super();
-		this.sqlGeneratorConfig = sqlGeneratorConfig;
+		super(sqlGeneratorConfig);
 	}
 
 	@Override
@@ -61,16 +64,16 @@ public class SQLSerializer extends ModelSerializer {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFileDirectory = sqlGeneratorConfig.getWorkspacePath()
+		final String headerFileDirectory = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
 		final String headerFilePath = headerFileDirectory
-				+ (sqlGeneratorConfig.isMemSQL() ? "railway-header-memsql.sql" : "railway-header.sql");
+				+ (generatorConfig.isMemSQL() ? "railway-header-memsql.sql" : "railway-header.sql");
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		sqlRawPath = sqlGeneratorConfig.getModelPathWithoutExtension() + "-raw.sql";
-		sqlDumpPath = sqlGeneratorConfig.getModelPathWithoutExtension() + ".sql";
-		sqlPostgreDumpPath = sqlGeneratorConfig.getModelPathWithoutExtension() + "-posgres.sql";
+		sqlRawPath = generatorConfig.getModelPathWithoutExtension() + "-raw.sql";
+		sqlDumpPath = generatorConfig.getModelPathWithoutExtension() + ".sql";
+		sqlPostgresDumpPath = generatorConfig.getModelPathWithoutExtension() + "-postgres.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -81,7 +84,7 @@ public class SQLSerializer extends ModelSerializer {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = sqlGeneratorConfig.getWorkspacePath()
+		final String footerFilePath = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
@@ -139,13 +142,34 @@ public class SQLSerializer extends ModelSerializer {
 		if (from == null || to == null) {
 			return;
 		}
-
+		
 		String insertQuery;
-		if (SENSOR_EDGE.equals(label)) {
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, SENSOR_EDGE, to, ID, from);
-		} else {
+		switch (label) {
+		// n:m edges
+		case MONITORED_BY:
+		case CONNECTS_TO:
 			insertQuery = String.format("INSERT INTO \"%s\" VALUES (%s, %s);", label, from, to);
+			break;
+		// n:1 edges
+		case FOLLOWS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);			
+			break;
+		case GATHERS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);			
+			break;
+		case SENSORS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID, to);
+			break;
+		case ELEMENTS:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region", from, ID, to);
+			break;
+		case SEMAPHORES:
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", from, ID, to);
+			break;
+		default:
+			throw new UnsupportedOperationException("Label '" + label + "' not supported.");
 		}
+
 		write(insertQuery);
 	}
 

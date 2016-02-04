@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
@@ -35,25 +24,25 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchPositionImpl#getSwitch <em>Switch</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchPositionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchPositionImpl#getPosition <em>Position</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SwitchPositionImpl#getRoute <em>Route</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosition {
 	/**
-	 * The cached value of the '{@link #getSwitch() <em>Switch</em>}' reference.
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSwitch()
+	 * @see #getTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected Switch switch_;
+	protected Switch target;
 
 	/**
 	 * The default value of the '{@link #getPosition() <em>Position</em>}' attribute.
@@ -99,16 +88,16 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Switch getSwitch() {
-		if (switch_ != null && switch_.eIsProxy()) {
-			InternalEObject oldSwitch = (InternalEObject)switch_;
-			switch_ = (Switch)eResolveProxy(oldSwitch);
-			if (switch_ != oldSwitch) {
+	public Switch getTarget() {
+		if (target != null && target.eIsProxy()) {
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (Switch)eResolveProxy(oldTarget);
+			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RailwayPackage.SWITCH_POSITION__SWITCH, oldSwitch, switch_));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RailwayPackage.SWITCH_POSITION__TARGET, oldTarget, target));
 			}
 		}
-		return switch_;
+		return target;
 	}
 
 	/**
@@ -116,8 +105,8 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Switch basicGetSwitch() {
-		return switch_;
+	public Switch basicGetTarget() {
+		return target;
 	}
 
 	/**
@@ -125,11 +114,11 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSwitch(Switch newSwitch, NotificationChain msgs) {
-		Switch oldSwitch = switch_;
-		switch_ = newSwitch;
+	public NotificationChain basicSetTarget(Switch newTarget, NotificationChain msgs) {
+		Switch oldTarget = target;
+		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH_POSITION__SWITCH, oldSwitch, newSwitch);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH_POSITION__TARGET, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -140,18 +129,18 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSwitch(Switch newSwitch) {
-		if (newSwitch != switch_) {
+	public void setTarget(Switch newTarget) {
+		if (newTarget != target) {
 			NotificationChain msgs = null;
-			if (switch_ != null)
-				msgs = ((InternalEObject)switch_).eInverseRemove(this, RailwayPackage.SWITCH__POSITIONS, Switch.class, msgs);
-			if (newSwitch != null)
-				msgs = ((InternalEObject)newSwitch).eInverseAdd(this, RailwayPackage.SWITCH__POSITIONS, Switch.class, msgs);
-			msgs = basicSetSwitch(newSwitch, msgs);
+			if (target != null)
+				msgs = ((InternalEObject)target).eInverseRemove(this, RailwayPackage.SWITCH__POSITIONS, Switch.class, msgs);
+			if (newTarget != null)
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, RailwayPackage.SWITCH__POSITIONS, Switch.class, msgs);
+			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH_POSITION__SWITCH, newSwitch, newSwitch));
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.SWITCH_POSITION__TARGET, newTarget, newTarget));
 	}
 
 	/**
@@ -224,10 +213,10 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH_POSITION__SWITCH:
-				if (switch_ != null)
-					msgs = ((InternalEObject)switch_).eInverseRemove(this, RailwayPackage.SWITCH__POSITIONS, Switch.class, msgs);
-				return basicSetSwitch((Switch)otherEnd, msgs);
+			case RailwayPackage.SWITCH_POSITION__TARGET:
+				if (target != null)
+					msgs = ((InternalEObject)target).eInverseRemove(this, RailwayPackage.SWITCH__POSITIONS, Switch.class, msgs);
+				return basicSetTarget((Switch)otherEnd, msgs);
 			case RailwayPackage.SWITCH_POSITION__ROUTE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -244,8 +233,8 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH_POSITION__SWITCH:
-				return basicSetSwitch(null, msgs);
+			case RailwayPackage.SWITCH_POSITION__TARGET:
+				return basicSetTarget(null, msgs);
 			case RailwayPackage.SWITCH_POSITION__ROUTE:
 				return basicSetRoute(null, msgs);
 		}
@@ -274,9 +263,9 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH_POSITION__SWITCH:
-				if (resolve) return getSwitch();
-				return basicGetSwitch();
+			case RailwayPackage.SWITCH_POSITION__TARGET:
+				if (resolve) return getTarget();
+				return basicGetTarget();
 			case RailwayPackage.SWITCH_POSITION__POSITION:
 				return getPosition();
 			case RailwayPackage.SWITCH_POSITION__ROUTE:
@@ -293,8 +282,8 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH_POSITION__SWITCH:
-				setSwitch((Switch)newValue);
+			case RailwayPackage.SWITCH_POSITION__TARGET:
+				setTarget((Switch)newValue);
 				return;
 			case RailwayPackage.SWITCH_POSITION__POSITION:
 				setPosition((Position)newValue);
@@ -314,8 +303,8 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH_POSITION__SWITCH:
-				setSwitch((Switch)null);
+			case RailwayPackage.SWITCH_POSITION__TARGET:
+				setTarget((Switch)null);
 				return;
 			case RailwayPackage.SWITCH_POSITION__POSITION:
 				setPosition(POSITION_EDEFAULT);
@@ -335,8 +324,8 @@ public class SwitchPositionImpl extends RailwayElementImpl implements SwitchPosi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RailwayPackage.SWITCH_POSITION__SWITCH:
-				return switch_ != null;
+			case RailwayPackage.SWITCH_POSITION__TARGET:
+				return target != null;
 			case RailwayPackage.SWITCH_POSITION__POSITION:
 				return position != POSITION_EDEFAULT;
 			case RailwayPackage.SWITCH_POSITION__ROUTE:

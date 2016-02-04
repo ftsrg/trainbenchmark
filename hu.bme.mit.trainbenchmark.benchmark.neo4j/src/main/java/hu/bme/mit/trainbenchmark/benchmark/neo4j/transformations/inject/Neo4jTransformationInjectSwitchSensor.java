@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSensor;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeMonitoredBy;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import java.util.Collection;
@@ -28,7 +28,7 @@ public class Neo4jTransformationInjectSwitchSensor extends Neo4jTransformationIn
 	@Override
 	public void rhs(final Collection<Node> switches) {
 		for (final Node sw : switches) {
-			final Iterable<Relationship> sensors = sw.getRelationships(relationshipTypeSensor);
+			final Iterable<Relationship> sensors = sw.getRelationships(relationshipTypeMonitoredBy);
 			for (final Relationship sensor : sensors) {
 				sensor.delete();
 			}

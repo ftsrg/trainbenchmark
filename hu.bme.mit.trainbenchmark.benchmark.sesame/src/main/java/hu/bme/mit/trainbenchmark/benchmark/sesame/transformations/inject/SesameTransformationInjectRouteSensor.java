@@ -27,7 +27,7 @@ public class SesameTransformationInjectRouteSensor extends SesameTransformationI
 
 	@Override
 	public void rhs(final Collection<URI> routes) throws RepositoryException {
-		driver.deleteOneOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.DEFINED_BY);
+		driver.deleteOutgoingEdges(routes, ModelConstants.ROUTE, ModelConstants.GATHERS);
 	}
 
 }

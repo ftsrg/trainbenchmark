@@ -14,9 +14,13 @@ package hu.bme.mit.trainbenchmark.emf.transformation.inject;
 import java.io.IOException;
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.EList;
+
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
+import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFTransformationInjectConnectedSegments extends EMFTransformationInject<Segment> {
@@ -32,12 +36,23 @@ public class EMFTransformationInjectConnectedSegments extends EMFTransformationI
 				continue;
 			}
 			final Segment segment2 = RailwayFactory.eINSTANCE.createSegment();
-			driver.getContainer().getInvalids().add(segment2);
 
 			final TrackElement segment3 = segment1.getConnectsTo().get(0);
+
+			// delete (segment1)-[:connectsTo]->(segment3)
 			segment1.getConnectsTo().remove(segment3);
+			// (segment1)-[:connectsTo]->(segment2)
 			segment1.getConnectsTo().add(segment2);
+			// (segment2)-[:connectsTo]->(segment3)
 			segment2.getConnectsTo().add(segment3);
+			
+			// (segment2)-[:monitoredBy]->(sensor)
+			final EList<Sensor> sensors = segment1.getMonitoredBy();
+			segment2.getMonitoredBy().addAll(sensors);
+			
+			// add the segment2 to a Region to ensure proper containment hierarchy
+			final Region region = (Region) segment1.eContainer();
+			region.getElements().add(segment2);
 		}
 	}
 }

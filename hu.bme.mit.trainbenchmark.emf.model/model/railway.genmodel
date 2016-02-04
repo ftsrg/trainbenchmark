@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.trainbenchmark.emf.model/src/main/java"
-    editorDirectory="/hu.bme.mit.trainbenchmark.emf.model.editor/src" modelPluginID="hu.bme.mit.trainbenchmark.emf.model"
-    modelName="Railway" modelPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    editorPluginID="hu.bme.mit.trainbenchmark.emf.model.editor" operationReflection="true"
-    importOrganizing="true">
+    modelPluginID="hu.bme.mit.trainbenchmark.emf.model" modelName="Railway" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
   <foreignModel>railway.ecore</foreignModel>
   <genPackages prefix="Railway" basePackage="hu.bme.mit.trainbenchmark" disposableProviderFactory="true"
       ecorePackage="railway.ecore#/" publicationLocation="">
@@ -16,45 +14,52 @@
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="railway.ecore#//Position">
       <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/FAILURE"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/LEFT"/>
-      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/RIGHT"/>
       <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/STRAIGHT"/>
+      <genEnumLiterals ecoreEnumLiteral="railway.ecore#//Position/DIVERGING"/>
     </genEnums>
     <genClasses ecoreClass="railway.ecore#//Segment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Segment/length"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Segment/semaphores"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Segment/neighbors"/>
     </genClasses>
-    <genClasses ecoreClass="railway.ecore#//TrackElement">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference railway.ecore#//TrackElement/sensor"/>
+    <genClasses image="false" ecoreClass="railway.ecore#//TrackElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//TrackElement/monitoredBy"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//TrackElement/connectsTo"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Switch">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Switch/currentPosition"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Switch/positions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Switch/left"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Switch/right"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Switch/from"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Route">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference railway.ecore#//Route/entry"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/entry"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Route/follows"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/exit"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Route/definedBy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/gathers"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Semaphore">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Semaphore/signal"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//SwitchPosition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//SwitchPosition/switch"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//SwitchPosition/target"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//SwitchPosition/position"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference railway.ecore#//SwitchPosition/route"/>
     </genClasses>
-    <genClasses ecoreClass="railway.ecore#//RailwayElement">
+    <genClasses image="false" ecoreClass="railway.ecore#//RailwayElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//RailwayElement/id"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Sensor">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Sensor/elements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Sensor/monitors"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//RailwayContainer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/invalids"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/semaphores"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/routes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//RailwayContainer/regions"/>
+    </genClasses>
+    <genClasses ecoreClass="railway.ecore#//Region">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Region/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Region/sensors"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

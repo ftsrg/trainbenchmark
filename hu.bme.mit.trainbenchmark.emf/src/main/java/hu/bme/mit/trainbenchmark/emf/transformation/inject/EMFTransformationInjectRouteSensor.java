@@ -29,14 +29,10 @@ public class EMFTransformationInjectRouteSensor extends EMFTransformationInject<
 	@Override
 	public void rhs(final Collection<Route> routes) throws IOException {
 		for (final Route route : routes) {
-			final EList<Sensor> definedBys = route.getDefinedBy();
+			final EList<Sensor> gatherss = route.getGathers();
 
-			// delete the first edge
-			if (definedBys.size() > 0) {
-				Sensor sensor = definedBys.get(0);
-				definedBys.remove(0);
-				driver.getContainer().getInvalids().add(sensor);
-			}
+			// delete edges
+			gatherss.clear();
 		}
 	}
 

@@ -38,9 +38,8 @@ import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
 
-public class GraphSerializer extends ModelSerializer {
+public class GraphSerializer extends ModelSerializer<GeneratorConfig> {
 
-	protected final GeneratorConfig generatorConfig;
 	protected String databasePath;
 
 	protected GraphGeneratorConfig graphGeneratorConfig;
@@ -48,8 +47,7 @@ public class GraphSerializer extends ModelSerializer {
 	protected Transaction tx;
 
 	public GraphSerializer(final GeneratorConfig generatorConfig) {
-		super();
-		this.generatorConfig = generatorConfig;
+		super(generatorConfig);
 	}
 
 	@Override

@@ -27,7 +27,6 @@ public class EMFTransformationInjectSemaphoreNeighbor extends EMFTransformationI
 	public void rhs(final Collection<Route> routes) throws IOException {
 		for (final Route route : routes) {
 			route.setEntry(null);
-			driver.getContainer().getInvalids().add(route);
 		}
 	}
 }

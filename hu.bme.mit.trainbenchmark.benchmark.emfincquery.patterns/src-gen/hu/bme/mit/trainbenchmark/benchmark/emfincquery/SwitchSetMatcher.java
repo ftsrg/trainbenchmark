@@ -34,7 +34,7 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * {
  * 	Route.entry(route, semaphore);
  * 	Route.follows(route, swP);
- * 	SwitchPosition.^switch(swP, sw);
+ * 	SwitchPosition.target(swP, sw);
  * 	
  * 	Semaphore.signal(semaphore, ::GO);
  * 	SwitchPosition.position(swP, swpPosition);
@@ -382,7 +382,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   @Override
   protected SwitchSetMatch tupleToMatch(final Tuple t) {
     try {
-    	return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) t.get(POSITION_SEMAPHORE), (hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE), (hu.bme.mit.trainbenchmark.railway.SwitchPosition) t.get(POSITION_SWP), (hu.bme.mit.trainbenchmark.railway.Switch) t.get(POSITION_SW));
+    	return SwitchSetMatch.newMatch((Semaphore) t.get(POSITION_SEMAPHORE), (Route) t.get(POSITION_ROUTE), (SwitchPosition) t.get(POSITION_SWP), (Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -392,7 +392,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   @Override
   protected SwitchSetMatch arrayToMatch(final Object[] match) {
     try {
-    	return SwitchSetMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWP], (hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
+    	return SwitchSetMatch.newMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -402,7 +402,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   @Override
   protected SwitchSetMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SwitchSetMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.SwitchPosition) match[POSITION_SWP], (hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
+    	return SwitchSetMatch.newMutableMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

@@ -30,7 +30,7 @@ public class EMFIncQueryTransformationRepairRouteSensor extends EMFIncQueryTrans
 	@Override
 	public void rhs(final Collection<RouteSensorMatch> matches) throws IOException {
 		for (final RouteSensorMatch match : matches) {
-			match.getRoute().getDefinedBy().add(match.getSensor());
+			match.getRoute().getGathers().add(match.getSensor());
 		}
 	}
 

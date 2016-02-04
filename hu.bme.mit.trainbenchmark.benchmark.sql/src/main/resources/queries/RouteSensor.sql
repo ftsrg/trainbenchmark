@@ -4,11 +4,8 @@ SELECT DISTINCT
 	SwitchPosition.id AS swP,
 	Switch.id as sw
 FROM Sensor
-INNER JOIN TrackElement   ON TrackElement.sensor = Sensor.id
-INNER JOIN Switch         ON TrackElement.id = Switch.id
-INNER JOIN SwitchPosition ON SwitchPosition.switch = Switch.id
-INNER JOIN Route          ON Route.id = SwitchPosition.follows
-LEFT OUTER JOIN definedBy ON 1 = 1
-                             AND definedBy.Route_id = Route.id
-                             AND definedBy.Sensor_id = Sensor.id
-WHERE definedBy.Sensor_id IS NULL;
+INNER JOIN monitoredBy    ON monitoredBy.Sensor_id = Sensor.id
+INNER JOIN Switch         ON Switch.id = monitoredBy.TrackElement_id
+INNER JOIN SwitchPosition ON SwitchPosition.target = Switch.id
+INNER JOIN Route          ON Route.id = SwitchPosition.route -- the "SwitchPosition.route" attribute is the inverse of the "Route.follows" edge
+WHERE Sensor.route IS NULL; -- the "Sensor.route" attribute is the inverse of the "Route.gathers" edge
