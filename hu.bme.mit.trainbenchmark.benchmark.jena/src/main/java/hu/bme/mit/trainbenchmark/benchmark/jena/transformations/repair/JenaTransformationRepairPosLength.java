@@ -36,7 +36,7 @@ public class JenaTransformationRepairPosLength extends JenaTransformationRepair<
 	}
 
 	@Override
-	public void rhs(final Collection<JenaPosLengthMatch> matches) throws IOException {
+	public void performRHS(final Collection<JenaPosLengthMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 		final Property lengthProperty = model.getProperty(BASE_PREFIX + LENGTH);
 

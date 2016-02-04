@@ -27,7 +27,7 @@ public class Neo4jTransformationInjectSwitchSet extends Neo4jTransformationInjec
 	}
 
 	@Override
-	public void rhs(final Collection<Node> switches) {
+	public void performRHS(final Collection<Node> switches) {
 		for (final Node sw : switches) {
 			final String currentPositionString = (String) sw.getProperty(ModelConstants.CURRENTPOSITION);
 			final Position currentPosition = Position.valueOf(currentPositionString);

@@ -23,7 +23,7 @@ public class EMFTransformationRepairSemaphoreNeighbor extends EMFTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<EMFSemaphoreNeighborMatch> matches) {
+	public void performRHS(final Collection<EMFSemaphoreNeighborMatch> matches) {
 		for (final EMFSemaphoreNeighborMatch snm : matches) {
 			snm.getRoute2().setEntry(snm.getSemaphore());
 		}

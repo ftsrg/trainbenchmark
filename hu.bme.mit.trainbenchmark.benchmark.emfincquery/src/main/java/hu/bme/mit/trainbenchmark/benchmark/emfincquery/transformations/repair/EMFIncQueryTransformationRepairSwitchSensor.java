@@ -29,7 +29,7 @@ public class EMFIncQueryTransformationRepairSwitchSensor extends EMFIncQueryTran
 	}
 
 	@Override
-	public void rhs(final Collection<SwitchSensorMatch> matches) throws IOException {
+	public void performRHS(final Collection<SwitchSensorMatch> matches) throws IOException {
 		for (final SwitchSensorMatch match : matches) {
 			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
 			match.getSw().getMonitoredBy().add(sensor);

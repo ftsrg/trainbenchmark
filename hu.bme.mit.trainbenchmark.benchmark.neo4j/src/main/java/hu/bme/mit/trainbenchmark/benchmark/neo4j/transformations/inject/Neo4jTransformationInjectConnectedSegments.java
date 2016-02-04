@@ -30,7 +30,7 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 	}
 
 	@Override
-	public void rhs(final Collection<Node> segments) {
+	public void performRHS(final Collection<Node> segments) {
 		for (final Node segment1 : segments) {
 			final Iterable<Relationship> monitoredByEdges = segment1.getRelationships(Direction.OUTGOING, relationshipTypeMonitoredBy);
 

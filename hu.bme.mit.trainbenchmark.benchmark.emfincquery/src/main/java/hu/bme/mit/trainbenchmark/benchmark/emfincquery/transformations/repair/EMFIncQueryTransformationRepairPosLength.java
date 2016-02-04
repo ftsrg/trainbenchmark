@@ -27,7 +27,7 @@ public class EMFIncQueryTransformationRepairPosLength extends EMFIncQueryTransfo
 	}
 
 	@Override
-	public void rhs(final Collection<PosLengthMatch> matches) throws IOException {
+	public void performRHS(final Collection<PosLengthMatch> matches) throws IOException {
 		for (final PosLengthMatch match : matches) {
 			final int newLength = -match.getSegment().getLength() + 1;
 			match.getSegment().setLength(newLength);

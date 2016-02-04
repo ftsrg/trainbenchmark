@@ -34,7 +34,7 @@ public class SesameTransformationInjectSwitchSet extends SesameTransformationInj
 	}
 
 	@Override
-	public void rhs(final Collection<URI> switches) throws RepositoryException {
+	public void performRHS(final Collection<URI> switches) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

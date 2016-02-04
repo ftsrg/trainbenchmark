@@ -31,7 +31,7 @@ public class JenaTransformationRepairSemaphoreNeighbor extends JenaTransformatio
 	}
 
 	@Override
-	public void rhs(final Collection<JenaSemaphoreNeighborMatch> matches) throws IOException {
+	public void performRHS(final Collection<JenaSemaphoreNeighborMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 
 		final Property entry = model.getProperty(BASE_PREFIX + ENTRY);

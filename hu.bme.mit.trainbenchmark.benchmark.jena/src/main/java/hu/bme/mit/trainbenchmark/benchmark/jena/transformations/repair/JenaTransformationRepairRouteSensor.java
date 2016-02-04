@@ -31,7 +31,7 @@ public class JenaTransformationRepairRouteSensor extends JenaTransformationRepai
 	}
 
 	@Override
-	public void rhs(final Collection<JenaRouteSensorMatch> matches) throws IOException {
+	public void performRHS(final Collection<JenaRouteSensorMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 
 		final Property definedBy = model.getProperty(BASE_PREFIX + GATHERS);

@@ -27,7 +27,7 @@ public class SQLTransformationRepairPosLength extends SQLTransformationRepair<SQ
 	}
 
 	@Override
-	public void rhs(final Collection<SQLPosLengthMatch> matches) throws SQLException {
+	public void performRHS(final Collection<SQLPosLengthMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}

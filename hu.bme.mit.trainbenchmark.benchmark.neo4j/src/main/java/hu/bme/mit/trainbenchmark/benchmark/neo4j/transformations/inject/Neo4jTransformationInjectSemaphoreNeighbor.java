@@ -26,7 +26,7 @@ public class Neo4jTransformationInjectSemaphoreNeighbor extends Neo4jTransformat
 	}
 
 	@Override
-	public void rhs(final Collection<Node> routes) {
+	public void performRHS(final Collection<Node> routes) {
 		for (final Node route : routes) {
 			final Iterable<Relationship> entries = route.getRelationships(relationshipTypeEntry);
 			for (final Relationship entry : entries) {

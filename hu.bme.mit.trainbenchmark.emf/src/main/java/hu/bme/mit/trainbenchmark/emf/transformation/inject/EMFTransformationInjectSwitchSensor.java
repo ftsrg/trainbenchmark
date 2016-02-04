@@ -24,7 +24,7 @@ public class EMFTransformationInjectSwitchSensor extends EMFTransformationInject
 	}
 
 	@Override
-	public void rhs(final Collection<Switch> switches) throws IOException {
+	public void performRHS(final Collection<Switch> switches) throws IOException {
 		for (final Switch sw : switches) {
 			sw.getMonitoredBy().clear();
 		}

@@ -31,7 +31,7 @@ public class SesameTransformationRepairSemaphoreNeighbor extends SesameTransform
 	}
 
 	@Override
-	public void rhs(final Collection<SesameSemaphoreNeighborMatch> matches) throws RepositoryException {
+	public void performRHS(final Collection<SesameSemaphoreNeighborMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

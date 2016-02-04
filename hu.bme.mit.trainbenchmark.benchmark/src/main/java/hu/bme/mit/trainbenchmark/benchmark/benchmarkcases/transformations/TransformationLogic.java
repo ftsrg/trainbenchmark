@@ -70,7 +70,7 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		this.random = random;
 	}
 
-	protected abstract void lhs(final Collection<TMatch> currentMatches) throws Exception;
+	protected abstract void performLHS(final Collection<TMatch> currentMatches) throws Exception;
 
 	public void performTransformation(final PhaseResult phaseResult, final Collection<TMatch> currentMatches) throws Exception {
 		final TimeMetric transformationMetric = new TimeMetric("Time");
@@ -80,14 +80,14 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		modified.setValue(numberOfObjectsToModify);
 
 		driver.beginTransaction();
-		lhs(currentMatches);
+		performLHS(currentMatches);
 
 		// we do not measure this in the benchmark results
 		final List<TTransformationObject> candidatesList = copyAndSort();
 		objectsToModify = pickRandom(numberOfObjectsToModify, candidatesList);
 
 		transformationMetric.startMeasure();
-		transformation.rhs(objectsToModify);
+		transformation.performRHS(objectsToModify);
 		driver.finishTransaction();
 		transformationMetric.stopMeasure();
 

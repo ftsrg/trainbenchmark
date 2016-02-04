@@ -27,7 +27,7 @@ public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationR
 	}
 
 	@Override
-	public void rhs(final Collection<SQLSemaphoreNeighborMatch> matches) throws SQLException {
+	public void performRHS(final Collection<SQLSemaphoreNeighborMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}

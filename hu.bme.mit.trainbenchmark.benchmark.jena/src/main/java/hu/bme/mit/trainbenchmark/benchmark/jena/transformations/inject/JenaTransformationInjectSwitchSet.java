@@ -36,7 +36,7 @@ public class JenaTransformationInjectSwitchSet extends JenaTransformationInject 
 	}
 
 	@Override
-	public void rhs(final Collection<Resource> switches) {
+	public void performRHS(final Collection<Resource> switches) {
 		final Model model = driver.getModel();
 		final Property currentPositionProperty = model.getProperty(BASE_PREFIX + CURRENTPOSITION);
 

@@ -27,7 +27,7 @@ public class EMFTransformationInjectRouteSensor extends EMFTransformationInject<
 	}
 
 	@Override
-	public void rhs(final Collection<Route> routes) throws IOException {
+	public void performRHS(final Collection<Route> routes) throws IOException {
 		for (final Route route : routes) {
 			final EList<Sensor> gatherss = route.getGathers();
 
