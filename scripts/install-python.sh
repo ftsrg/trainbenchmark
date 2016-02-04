@@ -7,3 +7,8 @@ sudo apt-get install -y python3 python3-setuptools python3-dev
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3 get-pip.py
 sudo pip3 install -r ../config/requirements.txt
+pip3 --version
+pip3 freeze
+sudo pip3 install --upgrade pip
+pip3 --version
+pip3 freeze
