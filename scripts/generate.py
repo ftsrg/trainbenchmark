@@ -8,22 +8,19 @@ def generate_models(java_opts: List[str], formats: List, scenarios: List, sizes:
         for format_name, format_option_sets in format.items():
             pass
 
+        if format_option_sets is None:
+            format_option_sets = [None]
+
         for scenario in scenarios:
             # extract the scenario name
             for scenario_name, _ in scenario.items():
                 pass
 
-                if format_option_sets is not None:
-                    for format_option_set in format_option_sets:
-                        generate_model(java_opts, format_name, format_option_set, sizes, scenario_name)
-                else:
-                    generate_model(java_opts, format_name, None, sizes, scenario_name)
-
-        if format_option_sets is not None:
             for format_option_set in format_option_sets:
-                generate_minimals(java_opts, format_name, format_option_set)
-        else:
-            generate_minimals(java_opts, format_name, None)
+                generate_model(java_opts, format_name, format_option_set, sizes, scenario_name)
+
+        for format_option_set in format_option_sets:
+            generate_minimals(java_opts, format_name, format_option_set)
 
 
 def generate_model(java_opts: List[str], format_name: str, format_option_set: List, sizes: List[int], scenario_name: str):
@@ -33,7 +30,7 @@ def generate_model(java_opts: List[str], format_name: str, format_option_set: Li
     options = util.get_command_line_options(format_option_set)
 
     for size in sizes:
-        cmd = util.flatten(["java", 
+        cmd = util.flatten(["java",
              java_opts,
              "-jar", target,
              "-scenario", scenario_name,
@@ -57,7 +54,7 @@ def generate_minimals(java_opts: List[str], format_name: str, format_option_set:
 
     queries = ["ConnectedSegments", "PosLength", "RouteSensor", "SemaphoreNeighbor", "SwitchSensor", "SwitchSet"]
     for query in queries:
-        cmd = util.flatten(["java", 
+        cmd = util.flatten(["java",
              java_opts,
              "-jar", target,
              "-scenario", "Minimal",
