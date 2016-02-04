@@ -7,16 +7,18 @@ SELECT DISTINCT ?semaphore ?route ?swP ?sw ?currentPosition ?position
 WHERE
 {
     ?route base:entry ?semaphore .
+    ?route rdf:type base:Route .
+    ?semaphore rdf:type base:Semaphore .
+
     ?route base:follows ?swP .
+    ?swP rdf:type base:SwitchPosition .
+
     ?swP base:target ?sw .
+    ?sw rdf:type base:Switch .
+
     ?semaphore base:signal base:SIGNAL_GO .
     ?sw base:currentPosition ?currentPosition .
     ?swP base:position ?position .
-
-    ?semaphore rdf:type base:Semaphore .
-    ?route rdf:type base:Route .
-    ?swP rdf:type base:SwitchPosition .
-    ?sw rdf:type base:Switch .
 
     FILTER (?currentPosition != ?position)
 }

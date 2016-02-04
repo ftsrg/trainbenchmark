@@ -6,17 +6,21 @@ WHERE
 {
 	?segment1 base:monitoredBy ?sensor .
 	?segment1 base:connectsTo ?segment2 .
-	?segment2 base:connectsTo ?segment3 .
-	?segment3 base:connectsTo ?segment4 .
-	?segment4 base:connectsTo ?segment5 .
-	?segment5 base:connectsTo ?segment6 .
-	?segment6 base:monitoredBy ?sensor .
-
-	?sensor rdf:type base:Sensor .
 	?segment1 rdf:type base:Segment .
+
+	?segment2 base:connectsTo ?segment3 .
 	?segment2 rdf:type base:Segment .
+
+	?segment3 base:connectsTo ?segment4 .
 	?segment3 rdf:type base:Segment .
+
+	?segment4 base:connectsTo ?segment5 .
 	?segment4 rdf:type base:Segment .
+
+	?segment5 base:connectsTo ?segment6 .
 	?segment5 rdf:type base:Segment .
+	
+	?segment6 base:monitoredBy ?sensor .
 	?segment6 rdf:type base:Segment .
+	?sensor rdf:type base:Sensor .
 }
