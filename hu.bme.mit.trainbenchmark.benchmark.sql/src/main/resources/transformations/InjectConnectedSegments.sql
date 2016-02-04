@@ -34,3 +34,7 @@ VALUES (@segment1, @segment2);
 -- insert (segment1)-[:connectsTo]->(segment3) edge
 INSERT INTO connectsTo
 VALUES (@segment2, @segment3);
+
+-- insert (segment2)-[:monitoredBy]->(sensor) edge
+INSERT INTO monitoredBy
+VALUES (@segment2, @sensor);

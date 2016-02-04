@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS "Segment" (
 
 CREATE TABLE IF NOT EXISTS "Sensor" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "route" int NOT NULL, -- inverse of the "gathers" edge
+  "route" int, -- inverse of the "gathers" edge
   "region" int NOT NULL, -- inverse of the "sensors" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS "Semaphore" (
 
 CREATE TABLE IF NOT EXISTS "Switch" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "currentPosition" int,
+  "currentPosition" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS "Switch" (
 CREATE TABLE IF NOT EXISTS "SwitchPosition" (
   "id" int NOT NULL AUTO_INCREMENT,
   "route" int, -- inverse of the "follows" edge
-  "target" int NOT NULL,
+  "target" int,
   "position" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -144,13 +144,13 @@ INSERT INTO "TrackElement" ("id") VALUES (7);
 INSERT INTO "Segment" ("id") VALUES (7);
 INSERT INTO "TrackElement" ("id") VALUES (8);
 INSERT INTO "Segment" ("id") VALUES (8);
-UPDATE "Sensor" SET "region" = 5 WHERE "id" = 1;
-UPDATE "Sensor" SET "region" = 6 WHERE "id" = 1;
-UPDATE "TrackElement" SET "region" = 7 WHERE "id" = 1;
-UPDATE "TrackElement" SET "region" = 8 WHERE "id" = 1;
-UPDATE "Semaphore" SET "segment" = 2 WHERE "id" = 7;
-UPDATE "Sensor" SET "route" = 5 WHERE "id" = 3;
-UPDATE "Sensor" SET "route" = 6 WHERE "id" = 4;
+UPDATE "Sensor" SET "region" = 1 WHERE "id" = 5;
+UPDATE "Sensor" SET "region" = 1 WHERE "id" = 6;
+UPDATE "TrackElement" SET "region" = 1 WHERE "id" = 7;
+UPDATE "TrackElement" SET "region" = 1 WHERE "id" = 8;
+UPDATE "Semaphore" SET "segment" = 7 WHERE "id" = 2;
+UPDATE "Sensor" SET "route" = 3 WHERE "id" = 5;
+UPDATE "Sensor" SET "route" = 4 WHERE "id" = 6;
 INSERT INTO "monitoredBy" VALUES (7, 5);
 INSERT INTO "monitoredBy" VALUES (8, 6);
 INSERT INTO "connectsTo" VALUES (7, 8);

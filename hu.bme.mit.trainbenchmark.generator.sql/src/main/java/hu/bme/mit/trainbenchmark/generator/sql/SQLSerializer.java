@@ -152,19 +152,19 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 			break;
 		// n:1 edges
 		case FOLLOWS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", to, ID, from);			
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);			
 			break;
 		case GATHERS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", to, ID, from);			
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);			
 			break;
 		case SENSORS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", to, ID, from);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID, to);
 			break;
 		case ELEMENTS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region", to, ID, from);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region", from, ID, to);
 			break;
 		case SEMAPHORES:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", to, ID, from);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", from, ID, to);
 			break;
 		default:
 			throw new UnsupportedOperationException("Label '" + label + "' not supported.");

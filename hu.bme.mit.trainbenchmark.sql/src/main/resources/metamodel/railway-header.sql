@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS "Segment" (
 
 CREATE TABLE IF NOT EXISTS "Sensor" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "route" int NOT NULL, -- inverse of the "gathers" edge
+  "route" int, -- inverse of the "gathers" edge
   "region" int NOT NULL, -- inverse of the "sensors" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS "Semaphore" (
 
 CREATE TABLE IF NOT EXISTS "Switch" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "currentPosition" int,
+  "currentPosition" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS "Switch" (
 CREATE TABLE IF NOT EXISTS "SwitchPosition" (
   "id" int NOT NULL AUTO_INCREMENT,
   "route" int, -- inverse of the "follows" edge
-  "target" int NOT NULL,
+  "target" int,
   "position" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
