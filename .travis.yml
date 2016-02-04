@@ -11,6 +11,6 @@ script:
 #  - scripts/dep-mondo-sam.sh
 #  - scripts/dep-graph.sh
   - python3 --version
-  - scripts/run.py --build --skip-tests
+  - sudo python3 scripts/run.py --build --skip-tests
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
