@@ -38,11 +38,11 @@ scenarios:
 - Inject:
     iterationCount: 20
     transformationStrategy: fixed
-    transformationConstant: 10# matches
+    transformationConstant: 10
 - Repair:
     iterationCount: 8
     transformationStrategy: proportional
-    transformationConstant: 5# percent
+    transformationConstant: 5
 
 # Specify the name of the tools to run.
 tools:
