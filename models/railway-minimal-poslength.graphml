@@ -3,6 +3,8 @@
 <graph id="G" edgedefault="directed">
 <key id="labels" for="node" attr.name="labels" attr.type="string"/>
 <key id="length" for="node" attr.name="length" attr.type="int"/>
-<node id="n1" labels=":Segment:TrackElement"><data key="labels">:Segment:TrackElement</data><data key="length">-1</data></node>
+<node id="n1" labels=":Region"><data key="labels">:Region</data></node>
+<node id="n2" labels=":Segment:TrackElement"><data key="labels">:Segment:TrackElement</data><data key="length">-1</data></node>
+<edge id="e0" source="n1" target="n2" label="elements"><data key="label">elements</data></edge>
 </graph>
 </graphml>

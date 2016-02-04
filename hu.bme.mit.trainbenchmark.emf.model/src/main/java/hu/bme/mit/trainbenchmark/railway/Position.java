@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway;
@@ -40,26 +29,6 @@ public enum Position implements Enumerator {
 	FAILURE(0, "FAILURE", "FAILURE"),
 
 	/**
-	 * The '<em><b>LEFT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LEFT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	LEFT(1, "LEFT", "LEFT"),
-
-	/**
-	 * The '<em><b>RIGHT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RIGHT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	RIGHT(2, "RIGHT", "RIGHT"),
-
-	/**
 	 * The '<em><b>STRAIGHT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,7 +36,17 @@ public enum Position implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STRAIGHT(3, "STRAIGHT", "STRAIGHT");
+	STRAIGHT(1, "STRAIGHT", "STRAIGHT"),
+
+	/**
+	 * The '<em><b>DIVERGING</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DIVERGING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DIVERGING(2, "DIVERGING", "DIVERGING");
 
 	/**
 	 * The '<em><b>FAILURE</b></em>' literal value.
@@ -85,36 +64,6 @@ public enum Position implements Enumerator {
 	public static final int FAILURE_VALUE = 0;
 
 	/**
-	 * The '<em><b>LEFT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>LEFT</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #LEFT
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int LEFT_VALUE = 1;
-
-	/**
-	 * The '<em><b>RIGHT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>RIGHT</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #RIGHT
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int RIGHT_VALUE = 2;
-
-	/**
 	 * The '<em><b>STRAIGHT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -127,7 +76,22 @@ public enum Position implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int STRAIGHT_VALUE = 3;
+	public static final int STRAIGHT_VALUE = 1;
+
+	/**
+	 * The '<em><b>DIVERGING</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>DIVERGING</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #DIVERGING
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DIVERGING_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Position</b></em>' enumerators.
@@ -138,9 +102,8 @@ public enum Position implements Enumerator {
 	private static final Position[] VALUES_ARRAY =
 		new Position[] {
 			FAILURE,
-			LEFT,
-			RIGHT,
 			STRAIGHT,
+			DIVERGING,
 		};
 
 	/**
@@ -155,6 +118,8 @@ public enum Position implements Enumerator {
 	 * Returns the '<em><b>Position</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Position get(String literal) {
@@ -171,6 +136,8 @@ public enum Position implements Enumerator {
 	 * Returns the '<em><b>Position</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Position getByName(String name) {
@@ -187,14 +154,15 @@ public enum Position implements Enumerator {
 	 * Returns the '<em><b>Position</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Position get(int value) {
 		switch (value) {
 			case FAILURE_VALUE: return FAILURE;
-			case LEFT_VALUE: return LEFT;
-			case RIGHT_VALUE: return RIGHT;
 			case STRAIGHT_VALUE: return STRAIGHT;
+			case DIVERGING_VALUE: return DIVERGING;
 		}
 		return null;
 	}

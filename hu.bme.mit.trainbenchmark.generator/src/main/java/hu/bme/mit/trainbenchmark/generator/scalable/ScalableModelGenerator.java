@@ -1,22 +1,26 @@
 package hu.bme.mit.trainbenchmark.generator.scalable;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTSTO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REGION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSORS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.google.common.collect.ImmutableMap;
+
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -35,6 +41,8 @@ import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class ScalableModelGenerator extends ModelGenerator {
+
+	private static final Map<String, Object> EMPTY_MAP = Collections.<String, Object> emptyMap();
 
 	public static final int MAX_SEGMENT_LENGTH = 1000;
 
@@ -52,7 +60,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
-	public ScalableModelGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
+	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		super(serializer, generatorConfig);
 
 		maxRoutes = 5 * generatorConfig.getSize();
@@ -93,108 +101,117 @@ public class ScalableModelGenerator extends ModelGenerator {
 		List<Object> prevTracks = null;
 
 		for (long i = 0; i < maxRoutes; i++) {
+			boolean firstSegment = true;
+
 			serializer.beginTransaction();
 
 			if (prevSemaphore == null) {
-				final Map<String, Object> semaphoreAttributes = new HashMap<>();
-				semaphoreAttributes.put(SIGNAL, Signal.GO);
+				final Map<String, Object> semaphoreAttributes = ImmutableMap.of(SIGNAL, Signal.GO);
 
 				prevSemaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
 				firstSemaphore = prevSemaphore;
 			}
 
-			Object semaphore2;
+			Object semaphore;
 			if (i != maxRoutes - 1) {
-				final Map<String, Object> semaphoreAttributes = new HashMap<>();
-				semaphoreAttributes.put(SIGNAL, Signal.GO);
-				semaphore2 = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
+				final Map<String, Object> semaphoreAttributes = ImmutableMap.of(SIGNAL, Signal.GO);
+				semaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
 			} else {
-				semaphore2 = firstSemaphore;
+				semaphore = firstSemaphore;
 			}
 
 			// the semaphoreNeighborErrorPercent
 			final boolean semaphoreNeighborError1 = nextRandom() < semaphoreNeighborErrorPercent;
 			final Object entry = semaphoreNeighborError1 ? null : prevSemaphore;
-			final Object exit = semaphore2;
+			final Object exit = semaphore;
 
+			// the entry might be null, therefore we avoid using an ImmutableMap here
 			final Map<String, Object> routeOutgoingEdges = new HashMap<>();
 			routeOutgoingEdges.put(ENTRY, entry);
 			routeOutgoingEdges.put(EXIT, exit);
 
-			final Object route = serializer.createVertex(ROUTE, Collections.<String, Object> emptyMap(), routeOutgoingEdges);
+			final Object route = serializer.createVertex(ROUTE, EMPTY_MAP, routeOutgoingEdges);
+			final Object region = serializer.createVertex(REGION);
 
-			final int swps = random.nextInt(maxSwitchPositions);
+			final int swPs = random.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
 
-			for (int j = 0; j < swps; j++) {
+			for (int j = 0; j < swPs; j++) {
 				final Object sw = serializer.createVertex(SWITCH);
 				currentTrack.add(sw);
 
+				// (region)-[:elements]->(sw)
+				serializer.createEdge(ELEMENTS, region, sw);
+				
 				final int sensors = random.nextInt(maxSensors - 1) + 1;
 
-				Object lastSensor = null;
 				for (int k = 0; k < sensors; k++) {
 					final Object sensor = serializer.createVertex(SENSOR);
+					serializer.createEdge(SENSORS, region, sensor);
+					
+					// add "monitored by" edge from switch to sensor
+					final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
+					if (!switchSensorError) {
+						serializer.createEdge(MONITORED_BY, sw, sensor);
 
-					// add "sensors" edge from route to sensor
-					final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
-					final Object sourceRoute = routeSensorError ? null : route;
-					serializer.createEdge(DEFINED_BY, sourceRoute, sensor);
+						// add "gathers" edge from route to sensor
+						final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
+						if (!routeSensorError) {
+							serializer.createEdge(GATHERS, route, sensor);
+						}
+					}
 
+					// generate segments
 					for (int m = 0; m < maxSegments; m++) {
-						createSegment(currentTrack, sensor);
+						Object segment = createSegment(currentTrack, sensor, region);
+
+						if (firstSegment) {
+							serializer.createEdge(SEMAPHORES, segment, semaphore);
+							firstSegment = false;
+						}
 					}
 
-					// creates another extra segment
+					// create another extra segment
 					if (nextRandom() < connectedSegmentsErrorPercent) {
-						createSegment(currentTrack, sensor);
+						createSegment(currentTrack, sensor, region);
 					}
-
-					lastSensor = sensor;
 				}
-				// add "sensor" edge from switch to sensor
-				final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
-				final Object targetSensor = switchSensorError ? null : lastSensor;
-				serializer.createEdge(SENSOR_EDGE, sw, targetSensor);
 
-				final int stateNumber = random.nextInt(4);
-				final Position stateEnum = Position.values()[stateNumber];
-				serializer.setAttribute(SWITCH, sw, CURRENTPOSITION, stateEnum);
+				final int numberOfPositions = Position.values().length;
+				final int positionOrdinal = random.nextInt(numberOfPositions);
+				final Position position = Position.values()[positionOrdinal];
+				serializer.setAttribute(SWITCH, sw, CURRENTPOSITION, position);
 
 				// the errorInjectedState may contain a bad value
 				final boolean switchSetError = nextRandom() < switchSetErrorPercent;
-				final int errorInjectedStateNumber = switchSetError ? 3 - stateNumber : stateNumber;
-				final Position errorInjectedStateEnum = Position.values()[errorInjectedStateNumber];
-				final Map<String, Object> switchPosititonAttributes = new HashMap<>();
-				switchPosititonAttributes.put(POSITION, errorInjectedStateEnum);
+				final int invalidPositionOrdinal = switchSetError ? (numberOfPositions - 1) - positionOrdinal : positionOrdinal;
+				final Position invalidPosition = Position.values()[invalidPositionOrdinal];
 
-				final Map<String, Object> switchPositionOutgoingEdges = new HashMap<>();
-				switchPositionOutgoingEdges.put(SWITCH_EDGE, sw);
-
-				final Map<String, Object> switchPositionIncomingEdges = new HashMap<>();
-				switchPositionIncomingEdges.put(FOLLOWS, route);
-
-				serializer.createVertex(SWITCHPOSITION, switchPosititonAttributes, switchPositionOutgoingEdges,
-						switchPositionIncomingEdges);
+				final Map<String, Object> swPAttributes = ImmutableMap.of(POSITION, invalidPosition);
+				final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
+				Object swP = serializer.createVertex(SWITCHPOSITION, swPAttributes, swPOutgoingEdges);
+				
+				// (route)-[:follows]->(swP)
+				serializer.createEdge(FOLLOWS, route, swP);
 			}
 
+			// create connectsTo (n:m) edges
 			Object prevte = null;
-			for (final Object trackelement : currentTrack) {
+			for (final Object trackElement : currentTrack) {
 				if (prevte != null) {
-					serializer.createEdge(CONNECTSTO, prevte, trackelement);
+					serializer.createEdge(CONNECTS_TO, prevte, trackElement);
 				}
-				prevte = trackelement;
+				prevte = trackElement;
 			}
 
 			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {
-				serializer.createEdge(CONNECTSTO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
+				serializer.createEdge(CONNECTS_TO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
 			}
 
-			// Loop the last track element of the last route to the first track
-			// element of the first route.
+			// loop the last track element of the last route to the first track element of the first route
 			if (i == maxRoutes - 1) {
 				if (currentTrack != null && currentTrack.size() > 0 && firstTracks.size() > 0) {
-					serializer.createEdge(CONNECTSTO, currentTrack.get(currentTrack.size() - 1), firstTracks.get(0));
+					serializer.createEdge(CONNECTS_TO, currentTrack.get(currentTrack.size() - 1), firstTracks.get(0));
 				}
 			}
 
@@ -203,22 +220,26 @@ public class ScalableModelGenerator extends ModelGenerator {
 			}
 
 			prevTracks = currentTrack;
-			prevSemaphore = semaphore2;
+			prevSemaphore = semaphore;
 
 			serializer.endTransaction();
 		}
 	}
 
-	private void createSegment(final List<Object> currTracks, final Object sen) throws IOException {
+	private Object createSegment(final List<Object> currTracks, final Object sensor, final Object region) throws IOException {
 		final boolean posLengthError = nextRandom() < posLengthErrorPercent;
 		final int segmentLength = ((posLengthError ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH)) + 1;
 
-		final Map<String, Object> segmentAttributes = new HashMap<>();
-		segmentAttributes.put(LENGTH, segmentLength);
-		final Object seg = serializer.createVertex(SEGMENT, segmentAttributes);
+		final Map<String, Object> segmentAttributes = ImmutableMap.of(LENGTH, segmentLength);
+		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
 
-		serializer.createEdge(SENSOR_EDGE, seg, sen);
-		currTracks.add(seg);
+		// (region)-[:elements]->(segment)
+		serializer.createEdge(ELEMENTS, region, segment);
+
+		// (segment)-[:monitoredBy]->(sensor) monitoredBy n:m edge
+		serializer.createEdge(MONITORED_BY, segment, sensor);
+		currTracks.add(segment);
+		return segment;
 	}
 
 }

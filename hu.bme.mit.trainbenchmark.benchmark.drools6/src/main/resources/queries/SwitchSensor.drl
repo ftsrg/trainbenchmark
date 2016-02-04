@@ -1,5 +1,5 @@
 package hu.bme.mit.trainbenchmark.railway
 
 query "SwitchSensor" 
-    sw : Switch( sensor == null )
+    sw : Switch( monitoredBy.isEmpty() )
 end

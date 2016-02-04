@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class JenaTransformationInjectSwitchSensor extends JenaTransformationInje
 
 	@Override
 	public void rhs(final Collection<Resource> switches) throws IOException {
-		driver.deleteSingleOutgoingEdge(switches, SWITCH, SENSOR_EDGE);
+		driver.deleteSingleOutgoingEdge(switches, SWITCH, MONITORED_BY);
 	}
 
 }

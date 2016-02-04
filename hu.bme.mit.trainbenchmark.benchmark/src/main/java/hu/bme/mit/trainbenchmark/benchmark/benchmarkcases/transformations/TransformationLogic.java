@@ -27,12 +27,11 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-// TODO Javadoc
+// TMatch: matches
+// TElement: elements in the match set
+// TTransformationObject: transformation object
+// TBenchmarkConfig: benchmark configuration
 public abstract class TransformationLogic<TMatch, TElement, TTransformationObject, TBenchmarkConfig extends BenchmarkConfig> {
-
-	// TMatch: matches
-	// TElement: elements in the match set
-	// TTransformationObject: transformation object
 
 	public static TransformationLogic<?, ?, ?, ?> newInstance(final Scenario scenario, final Comparator<?> comparator) {
 		switch (scenario) {

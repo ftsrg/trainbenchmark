@@ -4,10 +4,17 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-public abstract class ModelSerializer {
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
+public abstract class ModelSerializer<TGeneratorConfig extends GeneratorConfig> {
+	
+	protected final TGeneratorConfig generatorConfig;
 	protected int id = 1;
 
+	public ModelSerializer(TGeneratorConfig generatorConfig) {
+		this.generatorConfig = generatorConfig;
+	}
+	
 	public abstract String syntax();
 
 	public abstract void initModel() throws IOException;

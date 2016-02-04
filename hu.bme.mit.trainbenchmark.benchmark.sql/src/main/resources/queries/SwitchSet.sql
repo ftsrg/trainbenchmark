@@ -5,9 +5,22 @@ SELECT
 	Switch.id AS sw,
 	SwitchPosition.position AS position,
 	Switch.currentPosition AS currentPosition
-FROM SwitchPosition, Route, Semaphore, Switch 
-WHERE Route.entry = Semaphore.id 
-  AND Route.id = SwitchPosition.follows
-  AND SwitchPosition.switch = Switch.id 
-  AND Switch.currentPosition != SwitchPosition.position 
+
+-- (route)
+FROM Route
+
+-- (route)-[:follows]->(swP)
+INNER JOIN SwitchPosition
+ON Route.id = SwitchPosition.route -- the "SwitchPosition.route" attribute is the inverse of the "Route.follows" edge
+
+-- (swP)-[:switch]->(sw)
+INNER JOIN Switch
+ON SwitchPosition.target = Switch.id
+
+-- (route)-[:entry]->(semaphore)
+INNER JOIN Semaphore
+ON Route.entry = Semaphore.id
+
+WHERE 1 = 1
+  AND Switch.currentPosition != SwitchPosition.position
   AND Semaphore.signal = 2;

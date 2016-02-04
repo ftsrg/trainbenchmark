@@ -30,13 +30,13 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * <code><pre>
  * pattern ConnectedSegments(sensor, segment1, segment2, segment3, segment4, segment5, segment6)
  * {
- * 	Segment.sensor(segment1, sensor);
+ * 	Segment.monitoredBy(segment1, sensor);
  * 	Segment.connectsTo(segment1, segment2);
  * 	Segment.connectsTo(segment2, segment3);
  * 	Segment.connectsTo(segment3, segment4);
  * 	Segment.connectsTo(segment4, segment5);
  * 	Segment.connectsTo(segment5, segment6);
- * 	Segment.sensor(segment6, sensor);
+ * 	Segment.monitoredBy(segment6, sensor);
  * }
  * </pre></code>
  * 
@@ -555,7 +555,7 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
   @Override
   protected ConnectedSegmentsMatch tupleToMatch(final Tuple t) {
     try {
-    	return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) t.get(POSITION_SENSOR), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT1), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT2), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT3), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT4), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT5), (hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT6));
+    	return ConnectedSegmentsMatch.newMatch((Sensor) t.get(POSITION_SENSOR), (Segment) t.get(POSITION_SEGMENT1), (Segment) t.get(POSITION_SEGMENT2), (Segment) t.get(POSITION_SEGMENT3), (Segment) t.get(POSITION_SEGMENT4), (Segment) t.get(POSITION_SEGMENT5), (Segment) t.get(POSITION_SEGMENT6));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -565,7 +565,7 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
   @Override
   protected ConnectedSegmentsMatch arrayToMatch(final Object[] match) {
     try {
-    	return ConnectedSegmentsMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT1], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT2], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT3], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT4], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT5], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT6]);
+    	return ConnectedSegmentsMatch.newMatch((Sensor) match[POSITION_SENSOR], (Segment) match[POSITION_SEGMENT1], (Segment) match[POSITION_SEGMENT2], (Segment) match[POSITION_SEGMENT3], (Segment) match[POSITION_SEGMENT4], (Segment) match[POSITION_SEGMENT5], (Segment) match[POSITION_SEGMENT6]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -575,7 +575,7 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
   @Override
   protected ConnectedSegmentsMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return ConnectedSegmentsMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT1], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT2], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT3], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT4], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT5], (hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT6]);
+    	return ConnectedSegmentsMatch.newMutableMatch((Sensor) match[POSITION_SENSOR], (Segment) match[POSITION_SEGMENT1], (Segment) match[POSITION_SEGMENT2], (Segment) match[POSITION_SEGMENT3], (Segment) match[POSITION_SEGMENT4], (Segment) match[POSITION_SEGMENT5], (Segment) match[POSITION_SEGMENT6]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

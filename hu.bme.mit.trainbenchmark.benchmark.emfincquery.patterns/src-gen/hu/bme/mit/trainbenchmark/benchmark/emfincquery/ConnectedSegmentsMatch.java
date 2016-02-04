@@ -94,31 +94,31 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("sensor".equals(parameterName) ) {
-    	this.fSensor = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
+    	this.fSensor = (Sensor) newValue;
     	return true;
     }
     if ("segment1".equals(parameterName) ) {
-    	this.fSegment1 = (hu.bme.mit.trainbenchmark.railway.Segment) newValue;
+    	this.fSegment1 = (Segment) newValue;
     	return true;
     }
     if ("segment2".equals(parameterName) ) {
-    	this.fSegment2 = (hu.bme.mit.trainbenchmark.railway.Segment) newValue;
+    	this.fSegment2 = (Segment) newValue;
     	return true;
     }
     if ("segment3".equals(parameterName) ) {
-    	this.fSegment3 = (hu.bme.mit.trainbenchmark.railway.Segment) newValue;
+    	this.fSegment3 = (Segment) newValue;
     	return true;
     }
     if ("segment4".equals(parameterName) ) {
-    	this.fSegment4 = (hu.bme.mit.trainbenchmark.railway.Segment) newValue;
+    	this.fSegment4 = (Segment) newValue;
     	return true;
     }
     if ("segment5".equals(parameterName) ) {
-    	this.fSegment5 = (hu.bme.mit.trainbenchmark.railway.Segment) newValue;
+    	this.fSegment5 = (Segment) newValue;
     	return true;
     }
     if ("segment6".equals(parameterName) ) {
-    	this.fSegment6 = (hu.bme.mit.trainbenchmark.railway.Segment) newValue;
+    	this.fSegment6 = (Segment) newValue;
     	return true;
     }
     return false;

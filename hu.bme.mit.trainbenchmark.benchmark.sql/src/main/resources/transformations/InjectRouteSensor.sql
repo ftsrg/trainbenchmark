@@ -1,4 +1,4 @@
--- (route)-[:entry]->(semaphore) edge
-DELETE FROM definedBy 
-WHERE Route_id = ? 
-LIMIT 1;
+-- the "Sensor.route" attribute is the inverse of the "Route.gathers" edge
+UPDATE Sensor
+SET route = NULL
+WHERE route = ?;

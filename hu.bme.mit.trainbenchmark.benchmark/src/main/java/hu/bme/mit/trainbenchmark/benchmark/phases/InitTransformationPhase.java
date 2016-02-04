@@ -31,8 +31,7 @@ public class InitTransformationPhase extends AtomicPhase {
 		try {
 			trainToken.getBenchmarkRunner().initializeTransformation();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 

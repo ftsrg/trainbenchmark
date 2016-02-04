@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
 
@@ -35,7 +35,7 @@ public class JenaTransformationRepairSwitchSensor extends JenaTransformationRepa
 	@Override
 	public void rhs(final Collection<JenaSwitchSensorMatch> matches) throws Exception {
 		final Model model = driver.getModel();
-		final Property sensorEdge = model.getProperty(BASE_PREFIX + SENSOR_EDGE);
+		final Property sensorEdge = model.getProperty(BASE_PREFIX + MONITORED_BY);
 		final Resource sensorType = model.getResource(BASE_PREFIX + SENSOR);
 
 		for (final JenaSwitchSensorMatch match : matches) {

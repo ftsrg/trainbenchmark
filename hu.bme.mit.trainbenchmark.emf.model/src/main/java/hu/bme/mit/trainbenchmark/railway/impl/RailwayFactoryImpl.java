@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
 /**
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
@@ -75,6 +64,7 @@ public class RailwayFactoryImpl extends EFactoryImpl implements RailwayFactory {
 			case RailwayPackage.SWITCH_POSITION: return createSwitchPosition();
 			case RailwayPackage.SENSOR: return createSensor();
 			case RailwayPackage.RAILWAY_CONTAINER: return createRailwayContainer();
+			case RailwayPackage.REGION: return createRegion();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -182,6 +172,16 @@ public class RailwayFactoryImpl extends EFactoryImpl implements RailwayFactory {
 	public RailwayContainer createRailwayContainer() {
 		RailwayContainerImpl railwayContainer = new RailwayContainerImpl();
 		return railwayContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Region createRegion() {
+		RegionImpl region = new RegionImpl();
+		return region;
 	}
 
 	/**

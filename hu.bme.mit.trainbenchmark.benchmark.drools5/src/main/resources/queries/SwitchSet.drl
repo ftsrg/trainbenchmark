@@ -4,5 +4,5 @@ query "SwitchSet"
     route : Route( $follows : follows )
     semaphore : Semaphore( this == route.entry )
     swP : SwitchPosition( this memberOf $follows )
-    sw: Switch( this == swP.switch, currentPosition.value != swP.position.value )
+    sw: Switch( this == swP.target, currentPosition.value != swP.position.value )
 end

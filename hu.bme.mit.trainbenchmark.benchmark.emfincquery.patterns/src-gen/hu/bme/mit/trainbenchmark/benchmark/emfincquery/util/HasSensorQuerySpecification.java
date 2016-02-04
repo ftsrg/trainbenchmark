@@ -97,12 +97,13 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
       		PBody body = new PBody(this);
       		PVariable var_sw = body.getOrCreateVariableByName("sw");
       		PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      			new ExportedParameter(body, var_sw, "sw")
+      		   new ExportedParameter(body, var_sw, "sw")
       		));
+      		// 	TrackElement.monitoredBy(sw, _)
       		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
-      		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "sensor")));
+      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+      		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
       		new Equality(body, var__virtual_0_, var___0_);
       		bodies.add(body);
       	}

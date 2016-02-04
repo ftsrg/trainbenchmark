@@ -97,9 +97,11 @@ public final class SwitchSensorQuerySpecification extends BaseGeneratedEMFQueryS
       		PBody body = new PBody(this);
       		PVariable var_sw = body.getOrCreateVariableByName("sw");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      			new ExportedParameter(body, var_sw, "sw")
+      		   new ExportedParameter(body, var_sw, "sw")
       		));
+      		// 	Switch(sw)
       		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch")));
+      		// 	neg find hasSensor(sw)
       		new NegativePatternCall(body, new FlatTuple(var_sw), HasSensorQuerySpecification.instance().getInternalQueryRepresentation());
       		bodies.add(body);
       	}

@@ -5,13 +5,13 @@ import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 pattern RouteSensor(route, sensor, swP, sw)
 {
 	Route.follows(route, swP);
-	SwitchPosition.^switch(swP, sw);
-	TrackElement.sensor(sw, sensor);
+	SwitchPosition.target(swP, sw);
+	TrackElement.monitoredBy(sw, sensor);
 	
-	neg find inverseDefinedBy(sensor, route);	
+	neg find inverseGathers(sensor, route);	
 }
 
-pattern inverseDefinedBy(sensor, route)
+pattern inverseGathers(sensor, route)
 {
-	Route.definedBy(route, sensor);
+	Route.gathers(route, sensor);
 }
