@@ -24,14 +24,14 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SesameChecker extends RDFChecker<SesameMatch> {
 
 	protected final SesameDriver driver;
 	protected final String queryDefinition;
 
-	public SesameChecker(final SesameDriver driver, final RDFBenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+	public SesameChecker(final SesameDriver driver, final RDFBenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(benchmarkConfig, query);
 		this.driver = driver;
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));

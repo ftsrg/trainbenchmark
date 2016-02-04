@@ -45,7 +45,7 @@ import org.neo4j.shell.tools.imp.util.MapNodeCache;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jDriver extends Driver<Node> {
 
@@ -104,7 +104,7 @@ public class Neo4jDriver extends Driver<Node> {
 		}
 	}
 
-	public Collection<Neo4jMatch> runQuery(final Query query, final String queryDefinition) throws IOException {
+	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
 		final Collection<Neo4jMatch> results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {

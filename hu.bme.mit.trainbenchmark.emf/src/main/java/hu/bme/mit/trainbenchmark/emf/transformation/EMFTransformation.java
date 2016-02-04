@@ -12,8 +12,8 @@
 package hu.bme.mit.trainbenchmark.emf.transformation;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.emf.transformation.inject.EMFTransformationInjectPosLength;
@@ -34,7 +34,7 @@ public abstract class EMFTransformation<TObject, TDriver extends EMFDriver> exte
 		super(driver);
 	}
 
-	public static EMFTransformation<?, ?> newInstance(final EMFDriver driver, final Query query, final Scenario scenario) {
+	public static EMFTransformation<?, ?> newInstance(final EMFDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

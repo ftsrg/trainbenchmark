@@ -23,7 +23,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchma
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
@@ -36,13 +36,13 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 
 	@Override
 	public EMFIncQueryChecker<TMatch> createChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryDriver<TMatch> driver, final Query query) throws Exception {
+			final EMFIncQueryDriver<TMatch> driver, final RailwayQuery query) throws Exception {
 		return (EMFIncQueryChecker<TMatch>) EMFIncQueryChecker.newInstance(benchmarkConfig, driver, query);
 	}
 
 	@Override
 	public Transformation<?, ?> createTransformation(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryDriver<TMatch> driver, final Query query) throws IOException {
+			final EMFIncQueryDriver<TMatch> driver, final RailwayQuery query) throws IOException {
 		return EMFIncQueryTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 

@@ -12,13 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static hu.bme.mit.trainbenchmark.constants.Query.CONNECTEDSEGMENTS;
-import static hu.bme.mit.trainbenchmark.constants.Query.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
-import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
-import static hu.bme.mit.trainbenchmark.constants.Scenario.REPAIR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
+import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.REPAIR;
 
 import org.junit.Test;
 

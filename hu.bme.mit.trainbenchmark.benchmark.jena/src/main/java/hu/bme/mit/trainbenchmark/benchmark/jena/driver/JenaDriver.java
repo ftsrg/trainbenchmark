@@ -39,7 +39,7 @@ import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.RDF;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 public class JenaDriver extends RDFDriver<Resource> {
@@ -68,7 +68,7 @@ public class JenaDriver extends RDFDriver<Resource> {
 		}
 	}
 
-	public Collection<QuerySolution> runQuery(final Query query, final String queryDefinition) throws IOException {
+	public Collection<QuerySolution> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
 		final Collection<QuerySolution> results = new ArrayList<>();
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(queryDefinition, model)) {
 			final ResultSet resultSet = queryExecution.execSelect();

@@ -23,12 +23,14 @@ import java.util.Random;
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
-import eu.mondo.sam.core.publishers.CsvPublisher;
 import eu.mondo.sam.core.publishers.DefaultFilenameFactory;
+import eu.mondo.sam.core.publishers.FilePublisher;
 import eu.mondo.sam.core.publishers.FilenameFactory;
 import eu.mondo.sam.core.publishers.Publisher;
 import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.PhaseResult;
+import eu.mondo.sam.core.results.formatters.JsonResultFormatter;
+import eu.mondo.sam.core.results.formatters.ResultFormatter;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
@@ -36,7 +38,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
@@ -59,34 +61,40 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 	public BenchmarkResult runBenchmark() throws Exception {
 		@SuppressWarnings("rawtypes")
-		final ScenarioLogic scenario = ScenarioFactory.getScenario(benchmarkConfig.getScenario());
+		final TrainBenchmarkScenario scenario = ScenarioFactory.getScenario(benchmarkConfig.getScenario());
 
 		scenario.setBenchmarkConfig(benchmarkConfig);
 		scenario.initializeDescriptor();
 
-		final BenchmarkEngine engine = new BenchmarkEngine();
-		final BenchmarkResult result = new BenchmarkResult(new File("."));
-		final FilenameFactory factory = new DefaultFilenameFactory(scenario.getCaseDescriptor());
-		final Publisher publisher = new CsvPublisher(factory);	
-		result.addPublisher(publisher);
-		final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
-		token.setBenchmarkRunner(this);
-
+		BenchmarkResult result = null;
 		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
+			final BenchmarkEngine engine = new BenchmarkEngine();
+			result = new BenchmarkResult(new File("."));
+			final ResultFormatter formatter = new JsonResultFormatter();
+			scenario.setRunIndex(i);
+			final FilenameFactory factory = new DefaultFilenameFactory(scenario.getCaseDescriptor());
+			final Publisher publisher = new FilePublisher.Builder(). //
+					filenameFactory(factory). //
+					formatter(formatter). //
+					build();
+						
+			result.addPublisher(publisher);
+			final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
+			token.setBenchmarkRunner(this);
+			
 			driver = benchmarkCase.createDriver(benchmarkConfig);
 
 			// initialize checkers
 			checkers = new ArrayList<>();
 
-			for (final Query query : benchmarkConfig.getQueries()) {
+			for (final RailwayQuery query : benchmarkConfig.getQueries()) {
 				final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, query);
 				checkers.add(checker);
 			}
 
-			scenario.setRunIndex(i);
 			engine.runBenchmark(result, scenario, token);
 		}
-
+		
 		return result;
 	}
 

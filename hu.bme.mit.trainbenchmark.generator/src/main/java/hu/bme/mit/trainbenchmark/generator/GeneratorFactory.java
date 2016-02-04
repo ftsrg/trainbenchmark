@@ -12,8 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.minimal.MinimalConnectedSegmentsGenerator;
 import hu.bme.mit.trainbenchmark.generator.minimal.MinimalPosLengthGenerator;
@@ -26,8 +26,8 @@ import hu.bme.mit.trainbenchmark.generator.scalable.ScalableModelGenerator;
 public class GeneratorFactory {
 
 	public static ModelGenerator createGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
-		if (generatorConfig.getScenario() == Scenario.MINIMAL) {
-			final Query query = generatorConfig.getQuery();
+		if (generatorConfig.getScenario() == ScenarioEnum.MINIMAL) {
+			final RailwayQuery query = generatorConfig.getQuery();
 			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new MinimalConnectedSegmentsGenerator(serializer, generatorConfig);

@@ -31,8 +31,8 @@ import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.MetricResult;
 import eu.mondo.sam.core.results.PhaseResult;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 @RunWith(Parameterized.class)
 public abstract class TrainBenchmarkTest {
@@ -47,13 +47,13 @@ public abstract class TrainBenchmarkTest {
 
 	protected TestBenchmarkInitializer bi;
 
-	protected void testQuery(final Query query, final Scenario scenario, final int expectedResultSize)
+	protected void testQuery(final RailwayQuery query, final ScenarioEnum scenario, final int expectedResultSize)
 			throws Exception {
 		final BenchmarkRunner bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, ImmutableList.of(expectedResultSize));
 	}
 
-	protected void testTransformation(final Query query, final Scenario scenario, final int expectedResultSize1,
+	protected void testTransformation(final RailwayQuery query, final ScenarioEnum scenario, final int expectedResultSize1,
 			final int expectedResultSize2) throws Exception {
 		final BenchmarkRunner bl = bi.initializeBenchmark(query, scenario);
 		runQuery(bl, ImmutableList.of(expectedResultSize1, expectedResultSize2));

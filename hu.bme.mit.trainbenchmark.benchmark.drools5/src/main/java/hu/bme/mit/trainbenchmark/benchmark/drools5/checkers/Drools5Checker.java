@@ -27,7 +27,7 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 public class Drools5Checker extends Checker<EMFMatch> {
@@ -36,9 +36,9 @@ public class Drools5Checker extends Checker<EMFMatch> {
 	protected Collection<EMFMatch> matches = new HashSet<>();
 	protected Drools5ResultListener listener;
 	protected LiveQuery liveQuery;
-	protected Query query;
+	protected RailwayQuery query;
 
-	public Drools5Checker(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver, final Query query) throws IOException {
+	public Drools5Checker(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver, final RailwayQuery query) throws IOException {
 		super();
 		this.driver = driver;
 		this.query = query;

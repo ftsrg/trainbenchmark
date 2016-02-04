@@ -44,7 +44,7 @@ import org.openrdf.sail.memory.MemoryStore;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
 
 public class SesameDriver extends RDFDriver<URI> {
@@ -89,7 +89,7 @@ public class SesameDriver extends RDFDriver<URI> {
 		connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
 
-	public Collection<SesameMatch> runQuery(final Query query, final String queryDefinition)
+	public Collection<SesameMatch> runQuery(final RailwayQuery query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final Collection<SesameMatch> results = new ArrayList<>();
 

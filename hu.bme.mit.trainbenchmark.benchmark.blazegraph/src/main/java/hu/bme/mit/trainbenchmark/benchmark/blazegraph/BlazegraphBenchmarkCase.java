@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
@@ -30,7 +30,7 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final Query query) throws IOException {
+	public Transformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
 		return SesameTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 

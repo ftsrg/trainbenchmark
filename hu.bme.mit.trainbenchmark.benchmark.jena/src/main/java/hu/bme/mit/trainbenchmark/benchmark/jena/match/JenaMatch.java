@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.match;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.rdf.model.Resource;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class JenaMatch {
 
@@ -26,7 +26,7 @@ public abstract class JenaMatch {
 
 	public abstract Resource[] toArray();
 
-	public static JenaMatch createMatch(final Query query, final QuerySolution qs) {
+	public static JenaMatch createMatch(final RailwayQuery query, final QuerySolution qs) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new JenaConnectedSegmentsMatch(qs);

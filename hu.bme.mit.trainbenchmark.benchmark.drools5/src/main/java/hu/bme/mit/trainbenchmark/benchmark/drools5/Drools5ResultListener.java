@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5RouteSensorMat
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSetMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 import java.util.HashSet;
@@ -29,10 +29,10 @@ import org.drools.runtime.rule.ViewChangedEventListener;
 
 public class Drools5ResultListener implements ViewChangedEventListener {
 
-	protected Query query;
+	protected RailwayQuery query;
 	protected final Set<EMFMatch> matches = new HashSet<>();
 
-	public Drools5ResultListener(final Query query) {
+	public Drools5ResultListener(final RailwayQuery query) {
 		this.query = query;
 	}
 
@@ -55,7 +55,7 @@ public class Drools5ResultListener implements ViewChangedEventListener {
 		return matches;
 	}
 
-	private EMFMatch createMatch(final Query query, final Row row) {
+	private EMFMatch createMatch(final RailwayQuery query, final Row row) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new Drools5ConnectedSegmentsMatch(row);

@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations;
 
-import static hu.bme.mit.trainbenchmark.constants.Scenario.INJECT;
+import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.INJECT;
 
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
@@ -23,8 +23,8 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EM
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public abstract class EMFIncQueryTransformation<TMatch extends BasePatternMatch>
@@ -35,7 +35,7 @@ public abstract class EMFIncQueryTransformation<TMatch extends BasePatternMatch>
 	}
 
 	public static Transformation<?, ?> newInstance(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver,
-			final Query query, final Scenario scenario) {
+			final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

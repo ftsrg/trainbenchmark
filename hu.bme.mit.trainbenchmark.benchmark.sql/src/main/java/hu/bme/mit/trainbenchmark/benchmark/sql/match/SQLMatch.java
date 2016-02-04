@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ import java.sql.SQLException;
  */
 public abstract class SQLMatch extends LongMatch {
 
-	public static SQLMatch createMatch(final Query query, final ResultSet rs) throws SQLException {
+	public static SQLMatch createMatch(final RailwayQuery query, final ResultSet rs) throws SQLException {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new SQLConnectedSegmentsMatch(rs);

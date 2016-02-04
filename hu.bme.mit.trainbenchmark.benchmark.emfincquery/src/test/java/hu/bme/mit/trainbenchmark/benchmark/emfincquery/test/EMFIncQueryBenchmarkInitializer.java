@@ -19,8 +19,8 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public class EMFIncQueryBenchmarkInitializer extends TestBenchmarkInitializer {
 
@@ -35,7 +35,7 @@ public class EMFIncQueryBenchmarkInitializer extends TestBenchmarkInitializer {
 	}
 
 	@Override
-	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
+	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
 		final EMFIncQueryBenchmarkConfig benchmarkConfig = new EMFIncQueryBenchmarkConfig(scenario, size, 1, query,
 				iterationCount, transformationStrategy, transformationConstant, backend);
 		return new BenchmarkRunner(benchmarkConfig, new EMFIncQueryBenchmarkCase());

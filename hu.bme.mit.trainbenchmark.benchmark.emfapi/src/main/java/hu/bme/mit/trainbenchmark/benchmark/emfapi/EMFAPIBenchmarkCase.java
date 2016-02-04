@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EMFAPIChecker;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
@@ -33,13 +33,13 @@ public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
 	}
 
 	@Override
-	public Checker<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final Query query)
+	public Checker<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
 			throws Exception {
 		return (Checker<EMFMatch>) EMFAPIChecker.newInstance(driver, query);
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final Query query)
+	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
 			throws IOException {
 		return EMFTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}

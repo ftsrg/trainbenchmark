@@ -14,12 +14,12 @@ package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.Query.CONNECTEDSEGMENTS;
-import static hu.bme.mit.trainbenchmark.constants.Query.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.Query.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.Query.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSENSOR;
-import static hu.bme.mit.trainbenchmark.constants.Query.SWITCHSET;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -30,7 +30,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Ordering;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class InjectTransformationLogic<TMatch, TElement, TBenchmarkConfig extends BenchmarkConfig> extends TransformationLogic<TMatch, TElement, TElement, TBenchmarkConfig> {
 
@@ -38,7 +38,7 @@ public class InjectTransformationLogic<TMatch, TElement, TBenchmarkConfig extend
 		super(comparator);
 	}
 
-	protected static Map<Query, String> VERTEX_TYPES = ImmutableMap.<Query, String> builder() //
+	protected static Map<RailwayQuery, String> VERTEX_TYPES = ImmutableMap.<RailwayQuery, String> builder() //
 			.put(CONNECTEDSEGMENTS, SEGMENT) //
 			.put(POSLENGTH, SEGMENT) //
 			.put(ROUTESENSOR, ROUTE) //

@@ -16,7 +16,7 @@ import java.util.Map;
 
 import org.neo4j.graphdb.Node;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class Neo4jMatch {
 
@@ -33,7 +33,7 @@ public abstract class Neo4jMatch {
 		return "Neo4jMatch [match=" + Arrays.toString(toArray()) + "]";
 	}
 	
-	public static Neo4jMatch createMatch(final Query query, final Map<String, Object> row) {
+	public static Neo4jMatch createMatch(final RailwayQuery query, final Map<String, Object> row) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new Neo4jConnectedSegmentsMatch(row);

@@ -23,16 +23,16 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SQLChecker extends Checker<SQLMatch> {
 
 	protected final SQLDriver driver;
-	protected final Query query;
+	protected final RailwayQuery query;
 	protected final String queryDefinition; 
 	protected PreparedStatement statement;
 	
-	public SQLChecker(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException, SQLException {
+	public SQLChecker(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
 		super();
 		this.driver = driver;
 		this.query = query;

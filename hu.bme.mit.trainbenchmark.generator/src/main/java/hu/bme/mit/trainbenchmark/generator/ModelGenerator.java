@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.generator;
 
-import static hu.bme.mit.trainbenchmark.constants.Scenario.MINIMAL;
+import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.MINIMAL;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

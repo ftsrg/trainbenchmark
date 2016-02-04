@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
@@ -26,7 +26,7 @@ public abstract class SesameMatch {
 
 	public abstract URI[] toArray();
 
-	public static SesameMatch createMatch(final Query query, final BindingSet bs) {
+	public static SesameMatch createMatch(final RailwayQuery query, final BindingSet bs) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new SesameConnectedSegmentsMatch(bs);

@@ -23,7 +23,7 @@ import org.eclipse.ocl.ecore.OCLExpression;
 
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
@@ -51,7 +51,7 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker
 		queryEvaluator = ocl.createQuery(query);
 	}
 
-	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws Exception {
+	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws Exception {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new EclipseOCLConnectedSegmentsChecker(driver, benchmarkConfig);

@@ -18,11 +18,11 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SQLTransformationRepairRouteSensor extends SQLTransformationRepair<SQLRouteSensorMatch> {
 
-	public SQLTransformationRepairRouteSensor (final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final Query query) throws IOException {
+	public SQLTransformationRepairRouteSensor (final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 

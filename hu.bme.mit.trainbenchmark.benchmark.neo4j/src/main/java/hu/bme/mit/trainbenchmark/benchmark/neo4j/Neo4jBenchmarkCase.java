@@ -28,7 +28,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jBenchmarkCase<Neo4jChecker>
 		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, Checker<Neo4jMatch>> {
@@ -39,7 +39,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 	
 	@Override
-	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final Query query)
+	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
 			throws Exception {		
 		final Neo4jEngine engine = benchmarkConfig.getEngine();
 		switch (engine) {	
@@ -58,7 +58,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final Query query)
+	public Transformation<?, ?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
 			throws IOException {
 		return Neo4jTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
