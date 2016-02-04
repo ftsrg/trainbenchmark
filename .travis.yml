@@ -8,6 +8,7 @@ install:
 script:
 #  - scripts/init-config.sh
   - scripts/install-python.sh
+  - pip3 freeze
 #  - scripts/dep-mondo-sam.sh
 #  - scripts/dep-graph.sh
   - scripts/run.py --build --skip-tests
