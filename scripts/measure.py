@@ -61,6 +61,7 @@ def measure_tool(java_opts: List[str], timeout: int, target: str, scenario_name:
             subprocess.check_call(cmd, timeout=timeout)
         except subprocess.TimeoutExpired:
             print(util.highlight("Timeout, skipping larger sizes for this tool, scenario and query mix.", True, True))
+            break
         except subprocess.CalledProcessError:
             print(util.highlight("An error occured, skipping larger sizes for this tool, scenario and query mix.", True, True))
             break
