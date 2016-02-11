@@ -33,7 +33,8 @@ import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 public abstract class TrainBenchmarkConfig {
 
 	protected static final String HELP = "help";
-	protected static final String QUERY_MIX = "querymix";
+	protected static final String MAX_MEMORY = "maxMemory";
+	protected static final String QUERY_MIX = "queryMix";
 	protected static final String SCENARIO = "scenario";
 	protected static final String SIZE = "size";
 
@@ -42,9 +43,10 @@ public abstract class TrainBenchmarkConfig {
 	protected CommandLine cmd;
 
 	// arguments
-	protected int size;
-	protected ScenarioEnum scenario;
 	protected List<RailwayQuery> queryMix = new ArrayList<>();
+	protected ScenarioEnum scenario;
+	protected int size;
+	protected int maxMemory;
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
@@ -70,6 +72,15 @@ public abstract class TrainBenchmarkConfig {
 	protected void initOptions() {
 		options.addOption(HELP, false, "displays this text");
 
+		// max memory
+		options.addOption(MAX_MEMORY, true, "denotes the maximum memory of the JVM in MBs, e.g. 10240 "
+				+ "(this only servers logging purposes, you still need to set Xmx accordingly)");
+
+		// query mix
+		final Option queryMixOption = new Option(QUERY_MIX, true, "specifies the query, e.g. RouteSensor");
+		queryMixOption.setArgs(Option.UNLIMITED_VALUES);
+		options.addOption(queryMixOption);
+
 		// scenario
 		final Option scenarioOption = new Option(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
 		scenarioOption.setRequired(true);
@@ -77,15 +88,14 @@ public abstract class TrainBenchmarkConfig {
 
 		// size
 		options.addOption(SIZE, true, "specifies model size, e.g. 4");
-		
-		// queries
-		final Option queryOption = new Option(QUERY_MIX, true, "specifies the query, e.g. RouteSensor");
-		queryOption.setArgs(Option.UNLIMITED_VALUES);
-		options.addOption(queryOption);		
 	}
 
 	protected void processArguments(final String[] args) throws ParseException {
 		cmd = parser.parse(options, args);
+
+		if (cmd.hasOption(MAX_MEMORY)) {
+			maxMemory = Integer.parseInt(cmd.getOptionValue(MAX_MEMORY));
+		}
 
 		scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
 
@@ -151,9 +161,13 @@ public abstract class TrainBenchmarkConfig {
 	public List<RailwayQuery> getQueries() {
 		return queryMix;
 	}
-	
+
 	public RailwayQuery getQuery() {
 		return queryMix.get(0);
+	}
+
+	public int getMaxMemory() {
+		return maxMemory;
 	}
 
 }
