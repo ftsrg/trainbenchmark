@@ -54,11 +54,11 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("sensor".equals(parameterName) ) {
-    	this.fSensor = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
+    	this.fSensor = (Sensor) newValue;
     	return true;
     }
     if ("route".equals(parameterName) ) {
-    	this.fRoute = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
+    	this.fRoute = (Route) newValue;
     	return true;
     }
     return false;

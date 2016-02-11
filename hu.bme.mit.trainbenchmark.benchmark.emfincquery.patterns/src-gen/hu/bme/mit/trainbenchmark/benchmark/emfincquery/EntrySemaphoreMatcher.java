@@ -264,7 +264,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   @Override
   protected EntrySemaphoreMatch tupleToMatch(final Tuple t) {
     try {
-    	return EntrySemaphoreMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE), (hu.bme.mit.trainbenchmark.railway.Semaphore) t.get(POSITION_SEMAPHORE));
+    	return EntrySemaphoreMatch.newMatch((Route) t.get(POSITION_ROUTE), (Semaphore) t.get(POSITION_SEMAPHORE));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -274,7 +274,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   @Override
   protected EntrySemaphoreMatch arrayToMatch(final Object[] match) {
     try {
-    	return EntrySemaphoreMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE]);
+    	return EntrySemaphoreMatch.newMatch((Route) match[POSITION_ROUTE], (Semaphore) match[POSITION_SEMAPHORE]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -284,7 +284,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   @Override
   protected EntrySemaphoreMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return EntrySemaphoreMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE], (hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE]);
+    	return EntrySemaphoreMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Semaphore) match[POSITION_SEMAPHORE]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
