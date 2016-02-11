@@ -23,14 +23,11 @@ import java.util.Random;
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.metrics.ScalarMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
+import eu.mondo.sam.core.publishers.CsvPublisher;
 import eu.mondo.sam.core.publishers.DefaultFilenameFactory;
-import eu.mondo.sam.core.publishers.FilePublisher;
 import eu.mondo.sam.core.publishers.FilenameFactory;
-import eu.mondo.sam.core.publishers.Publisher;
 import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.PhaseResult;
-import eu.mondo.sam.core.results.formatters.JsonResultFormatter;
-import eu.mondo.sam.core.results.formatters.ResultFormatter;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
@@ -69,19 +66,16 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		BenchmarkResult result = null;
 		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
 			final BenchmarkEngine engine = new BenchmarkEngine();
-			result = new BenchmarkResult(new File("."));
-			final ResultFormatter formatter = new JsonResultFormatter();
+
 			scenario.setRunIndex(i);
 			final FilenameFactory factory = new DefaultFilenameFactory(scenario.getCaseDescriptor());
-			final Publisher publisher = new FilePublisher.Builder(). //
-					filenameFactory(factory). //
-					formatter(formatter). //
-					build();
-						
+			result = new BenchmarkResult(new File("."));
+			CsvPublisher publisher = new CsvPublisher(factory);
 			result.addPublisher(publisher);
+
 			final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
 			token.setBenchmarkRunner(this);
-			
+
 			driver = benchmarkCase.createDriver(benchmarkConfig);
 
 			// initialize checkers
@@ -94,7 +88,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 			engine.runBenchmark(result, scenario, token);
 		}
-		
+
 		return result;
 	}
 
@@ -118,6 +112,10 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		driver.read(benchmarkConfig.getModelPathWithoutExtension());
 		timer.stopMeasure();
 		phaseResult.addMetrics(timer);
+
+		final ScalarMetric maxMemory = new ScalarMetric("MaxMemory");
+		maxMemory.setValue(benchmarkConfig.getMaxMemory());
+		phaseResult.addMetrics(maxMemory);
 	}
 
 	public final void check(final PhaseResult phaseResult) throws Exception {

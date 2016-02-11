@@ -124,4 +124,5 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 		final String queries = getQueries().toString().replaceAll("[\\[\\]]", "").replaceAll(", ","-");
 		return queries;
 	}
+	
 }
