@@ -264,7 +264,7 @@ public class InverseGathersMatcher extends BaseMatcher<InverseGathersMatch> {
   @Override
   protected InverseGathersMatch tupleToMatch(final Tuple t) {
     try {
-    	return InverseGathersMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) t.get(POSITION_SENSOR), (hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE));
+    	return InverseGathersMatch.newMatch((Sensor) t.get(POSITION_SENSOR), (Route) t.get(POSITION_ROUTE));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -274,7 +274,7 @@ public class InverseGathersMatcher extends BaseMatcher<InverseGathersMatch> {
   @Override
   protected InverseGathersMatch arrayToMatch(final Object[] match) {
     try {
-    	return InverseGathersMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE]);
+    	return InverseGathersMatch.newMatch((Sensor) match[POSITION_SENSOR], (Route) match[POSITION_ROUTE]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -284,7 +284,7 @@ public class InverseGathersMatcher extends BaseMatcher<InverseGathersMatch> {
   @Override
   protected InverseGathersMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return InverseGathersMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE]);
+    	return InverseGathersMatch.newMutableMatch((Sensor) match[POSITION_SENSOR], (Route) match[POSITION_ROUTE]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

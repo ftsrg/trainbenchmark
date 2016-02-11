@@ -45,7 +45,7 @@ public abstract class HasSensorMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("sw".equals(parameterName) ) {
-    	this.fSw = (hu.bme.mit.trainbenchmark.railway.TrackElement) newValue;
+    	this.fSw = (TrackElement) newValue;
     	return true;
     }
     return false;

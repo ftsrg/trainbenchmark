@@ -96,31 +96,31 @@ public abstract class SemaphoreNeighborMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("semaphore".equals(parameterName) ) {
-    	this.fSemaphore = (hu.bme.mit.trainbenchmark.railway.Semaphore) newValue;
+    	this.fSemaphore = (Semaphore) newValue;
     	return true;
     }
     if ("route1".equals(parameterName) ) {
-    	this.fRoute1 = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
+    	this.fRoute1 = (Route) newValue;
     	return true;
     }
     if ("route2".equals(parameterName) ) {
-    	this.fRoute2 = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
+    	this.fRoute2 = (Route) newValue;
     	return true;
     }
     if ("sensor1".equals(parameterName) ) {
-    	this.fSensor1 = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
+    	this.fSensor1 = (Sensor) newValue;
     	return true;
     }
     if ("sensor2".equals(parameterName) ) {
-    	this.fSensor2 = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
+    	this.fSensor2 = (Sensor) newValue;
     	return true;
     }
     if ("te1".equals(parameterName) ) {
-    	this.fTe1 = (hu.bme.mit.trainbenchmark.railway.TrackElement) newValue;
+    	this.fTe1 = (TrackElement) newValue;
     	return true;
     }
     if ("te2".equals(parameterName) ) {
-    	this.fTe2 = (hu.bme.mit.trainbenchmark.railway.TrackElement) newValue;
+    	this.fTe2 = (TrackElement) newValue;
     	return true;
     }
     return false;

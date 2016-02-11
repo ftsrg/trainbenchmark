@@ -560,7 +560,7 @@ public class SemaphoreNeighborMatcher extends BaseMatcher<SemaphoreNeighborMatch
   @Override
   protected SemaphoreNeighborMatch tupleToMatch(final Tuple t) {
     try {
-    	return SemaphoreNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) t.get(POSITION_SEMAPHORE), (hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE1), (hu.bme.mit.trainbenchmark.railway.Route) t.get(POSITION_ROUTE2), (hu.bme.mit.trainbenchmark.railway.Sensor) t.get(POSITION_SENSOR1), (hu.bme.mit.trainbenchmark.railway.Sensor) t.get(POSITION_SENSOR2), (hu.bme.mit.trainbenchmark.railway.TrackElement) t.get(POSITION_TE1), (hu.bme.mit.trainbenchmark.railway.TrackElement) t.get(POSITION_TE2));
+    	return SemaphoreNeighborMatch.newMatch((Semaphore) t.get(POSITION_SEMAPHORE), (Route) t.get(POSITION_ROUTE1), (Route) t.get(POSITION_ROUTE2), (Sensor) t.get(POSITION_SENSOR1), (Sensor) t.get(POSITION_SENSOR2), (TrackElement) t.get(POSITION_TE1), (TrackElement) t.get(POSITION_TE2));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -570,7 +570,7 @@ public class SemaphoreNeighborMatcher extends BaseMatcher<SemaphoreNeighborMatch
   @Override
   protected SemaphoreNeighborMatch arrayToMatch(final Object[] match) {
     try {
-    	return SemaphoreNeighborMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE1], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE2], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR1], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR2], (hu.bme.mit.trainbenchmark.railway.TrackElement) match[POSITION_TE1], (hu.bme.mit.trainbenchmark.railway.TrackElement) match[POSITION_TE2]);
+    	return SemaphoreNeighborMatch.newMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE1], (Route) match[POSITION_ROUTE2], (Sensor) match[POSITION_SENSOR1], (Sensor) match[POSITION_SENSOR2], (TrackElement) match[POSITION_TE1], (TrackElement) match[POSITION_TE2]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -580,7 +580,7 @@ public class SemaphoreNeighborMatcher extends BaseMatcher<SemaphoreNeighborMatch
   @Override
   protected SemaphoreNeighborMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SemaphoreNeighborMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Semaphore) match[POSITION_SEMAPHORE], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE1], (hu.bme.mit.trainbenchmark.railway.Route) match[POSITION_ROUTE2], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR1], (hu.bme.mit.trainbenchmark.railway.Sensor) match[POSITION_SENSOR2], (hu.bme.mit.trainbenchmark.railway.TrackElement) match[POSITION_TE1], (hu.bme.mit.trainbenchmark.railway.TrackElement) match[POSITION_TE2]);
+    	return SemaphoreNeighborMatch.newMutableMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE1], (Route) match[POSITION_ROUTE2], (Sensor) match[POSITION_SENSOR1], (Sensor) match[POSITION_SENSOR2], (TrackElement) match[POSITION_TE1], (TrackElement) match[POSITION_TE2]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
