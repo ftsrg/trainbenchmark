@@ -17,6 +17,7 @@ import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
@@ -35,7 +36,7 @@ public class MySQLDriver extends SQLDriver {
 		this.maxMemory = maxMemory;
 	}
 
-	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true";
+	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true&useSSL=false";
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
@@ -54,8 +55,10 @@ public class MySQLDriver extends SQLDriver {
 		}
 		connection = DriverManager.getConnection(url, USER, PASSWORD);
 		
-		int maxMemoryBytes = maxMemory * 1000 * 1000;
-		connection.prepareStatement("SET GLOBAL innodb_buffer_pool_size=" + maxMemoryBytes + ";");
+		final int maxMemoryBytes = maxMemory * 1000 * 1000;
+		final String maxMemoryQuery = "SET GLOBAL innodb_buffer_pool_size=" + maxMemoryBytes + ";";
+		final PreparedStatement maxMemoryStatement = connection.prepareStatement(maxMemoryQuery);		
+		maxMemoryStatement.execute();
 	}
 
 	@Override
