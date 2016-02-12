@@ -36,11 +36,11 @@ def generate_model(java_opts: List[str], format_name: str, format_option_set: Li
              "-scenario", scenario_name,
              "-size", str(size),
              options])
-        print(util.highlight(" ".join(cmd), True, True))
+        print(util.highlight(" ".join(cmd), "debug", True))
         try:
             subprocess.check_call(cmd)
         except subprocess.CalledProcessError:
-            print(util.highlight("An error occured during model generation, skipping larger sizes for this scenario/format.", False, True))
+            print(util.highlight("An error occured during model generation, skipping larger sizes for this scenario/format.", "error", True))
             break
 
     util.set_working_directory("..")
@@ -60,11 +60,11 @@ def generate_minimals(java_opts: List[str], format_name: str, format_option_set:
              "-scenario", "Minimal",
              "-queryMix", query,
              options])
-        print(util.highlight(" ".join(cmd), True, True))
+        print(util.highlight(" ".join(cmd), "debug", True))
         try:
             subprocess.check_call(cmd)
         except subprocess.CalledProcessError:
-            print(util.highlight("An error occured during model generation, skipping larger sizes for this scenario/format.", False, True))
+            print(util.highlight("An error occured during model generation, skipping larger sizes for this scenario/format.", "error", True))
             break
 
     util.set_working_directory("..")

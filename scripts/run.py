@@ -54,6 +54,7 @@ if __name__ == "__main__":
     with open("config/formats.yml", 'r') as stream:
         tool_formats = yaml.load(stream)
 
+    # extract the options from the config object
     tools = config["tools"]
     formats = config["formats"]
     tool_names = [];
@@ -61,12 +62,17 @@ if __name__ == "__main__":
         for tool_name, _ in tool.items():
             pass
         tool_names.append(tool_name)
-    java_opts = config["java_opts"]
+    build_java_opts = config["generator_java_opts"]
+    generator_java_opts = config["generator_java_opts"]
+    measurement_java_opts = config["measurement_java_opts"]
     query_mixes = config["query_mixes"]
     scenarios = config["scenarios"]
     runs = config["runs"]
     timeout = config["timeout"]
     sizes = util.get_power_of_two(config["min_size"], config["max_size"])
+    max_levels = config["memory_measurement"]["max_levels"]
+    max_memory = config["memory_measurement"]["max_memory"]
+
     if ("email" in config):
         email = config["email"]
     else:
@@ -90,8 +96,8 @@ if __name__ == "__main__":
         args.generate = True
         args.measure = True
     if args.build or args.test:
-        build.build(java_opts, format_names, tool_names, args.skip_tests, args.test, args.offline)
+        build.build(build_java_opts, format_names, tool_names, args.skip_tests, args.test, args.offline)
     if args.generate:
-        generate.generate_models(java_opts, formats, scenarios, sizes)
+        generate.generate_models(generator_java_opts, formats, scenarios, sizes)
     if args.measure:
-        measure.measure_tools(java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, email)
+        measure.measure_tools(measurement_java_opts, timeout, runs, scenarios, sizes, tools, query_mixes, email, max_levels, max_memory)

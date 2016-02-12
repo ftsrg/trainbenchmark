@@ -122,24 +122,27 @@ def get_command_line_options(option_set):
     return options
 
 # based on http://stackoverflow.com/questions/2330245/python-change-text-color-in-shell
-def highlight(string, status, bold):
-    attr = []
-    if status:
-        # green
-        attr.append('32')
-    else:
-        # red
-        attr.append('31')
+def highlight(string, color, bold):
+    # colors based on https://www.siafoo.net/snippet/88
+    types = {
+        "error": '31', # red
+        "success": '32', # green
+        "debug": '33', # yellow
+        "info": '34', # blue
+        "failure": '35', # magenta
+    }
+
+    attr = [types.get(color)]
     if bold:
         attr.append('1')
     return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
 
 # the used models extensions
 extensions = {
-          'rdf': "ttl",
-          'graph': "graphml",
-          'emf': "xmi",
-          'sql': "sql"
+          "rdf": "ttl",
+          "graph": "graphml",
+          "emf": "xmi",
+          "sql": "sql"
           }
 
 common_models_path = "../models"
