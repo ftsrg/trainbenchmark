@@ -21,18 +21,15 @@ public class MySQLProcess {
 	private static final String SCRIPT_DIRECTORY = "../hu.bme.mit.trainbenchmark.sql/scripts/";
 
 	public static void clean() throws IOException, InterruptedException {
-		final String commandStart = SCRIPT_DIRECTORY + "clean-mysql.sh";
-		Util.executeCommand(commandStart, "Failed to clean MySQL database directory");
+		Util.executeCommand(SCRIPT_DIRECTORY + "clean-mysql.sh", "Failed to clean MySQL database directory");
 	}
 
 	public static void startServer() throws IOException, InterruptedException {
-		final String commandStart = SCRIPT_DIRECTORY + "start-mysql.sh";
-		Util.executeCommand(commandStart, "Failed to start MySQL process");
+		Util.executeCommand(SCRIPT_DIRECTORY + "start-mysql.sh", "Failed to clean MySQL database directory");
 	}
 
 	public static void stopServer() throws IOException, InterruptedException {
-		final String commandStart = SCRIPT_DIRECTORY + "stop-mysql.sh";
-		Util.executeCommand(commandStart, "Failed to stop MySQL process");
+		Util.executeCommand(SCRIPT_DIRECTORY + "stop-mysql.sh", "Failed to stop MySQL process");
 	}
 
 }
