@@ -5,8 +5,14 @@ min_size: 1
 max_size: 1
 
 # Specify the options for the Java virtual machine. The options are copied to the "java" command invoking the JVM.
-java_opts:
-- -Xms2000M
+# Options for the build.
+build_java_opts: []
+
+# Options for the generator.
+generator_java_opts: ["-Xms6G", "-Xmx6G"]
+
+# Options for the measurement.
+measurement_java_opts: []
 
 # Number of runs for the same tool/scenario/query/size.
 runs: 5
@@ -80,3 +86,8 @@ formats:
   - inferred: on
     format: ntriples
 - sql:
+
+# constants for the memory measurement
+memory_measurement:
+    max_levels: 8
+    max_memory: 12800

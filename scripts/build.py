@@ -27,5 +27,5 @@ def build(java_opts: List[str], format_names: List[str], tool_names: List[str], 
     try:
         subprocess.check_call(cmd)
     except subprocess.CalledProcessError:
-        print(util.highlight("Build failed.", False, True))
+        print(util.highlight("Build failed.", "error", True))
         exit(1)
