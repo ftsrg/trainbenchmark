@@ -25,7 +25,7 @@ public class MySQLProcess {
 	}
 
 	public static void startServer() throws IOException, InterruptedException {
-		Util.executeCommand(SCRIPT_DIRECTORY + "start-mysql.sh", "Failed to clean MySQL database directory");
+		Util.executeCommand(SCRIPT_DIRECTORY + "start-mysql.sh", "Failed to start MySQL process");
 	}
 
 	public static void stopServer() throws IOException, InterruptedException {
