@@ -15,12 +15,12 @@ For theoretical and implementation details, check out the following documents:
 * The **generator projects** are responsible for generating instance models. For **each format**, there is a separate generator project.
 * The **benchmark projects** are responsible for running the benchmarks. For each tool, there is a separate benchmark project.
 
-Currently, the following formats and tools are supported. Experimental tools are shown in _italics_.
+Currently, the following formats and tools are supported.
 
 * **EMF:** Drools 5 & 6, Eclipse OCL, EMF API, EMF-IncQuery
-* **Property graph:** Neo4j, _OrientDB_
-* **RDF:** _4store_, AllegroGraph, Blazegraph, Jena, Sesame, Virtuoso
-* **SQL:** _MemSQL_, MySQL
+* **Property graph:** Neo4j
+* **RDF:** Blazegraph, Jena, Sesame
+* **SQL:** MySQL
 
 ## Getting started
 
@@ -33,14 +33,14 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
 ### Setup
 
 * Initialization
-    * `init-config.sh`: initializes the configuration file (`config/config.yml`)
+    * [`init-config.sh`](scripts/init-config.sh): initializes the configuration file, `config/config.yml`
 * Installation
-    * `install-python.sh`: installs [Python 3](https://www.python.org/downloads/) and the required packages
-    * `install-jdk.sh`: installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
-    * `install-maven.sh`: installs [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux-packages#maven-3)
+    * [`install-python.sh`](scripts/install-python.sh): installs [Python 3](https://www.python.org/downloads/) and the required packages
+    * [`install-jdk.sh`](scripts/install-jdk.sh): installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
+    * [`install-maven.sh`](scripts/install-maven.sh): installs [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux-packages#maven-3)
 * Dependencies
-    * `dep-mondo-sam.sh`: resolves the [MONDO-SAM 0.1](https://github.com/FTSRG/mondo-sam/tree/v0.1.0) dependency used by the benchmark framework
-    * `dep-graph.sh` resolves the [Neo4j Shell Tools](https://github.com/jexp/neo4j-shell-tools) dependency required by the `graph` components
+    * [`dep-mondo-sam.sh`](scripts/dep-mondo-sam.sh): resolves the [MONDO-SAM 0.1](https://github.com/FTSRG/mondo-sam/tree/v0.1.0) dependency used by the benchmark framework
+    * [`dep-graph.sh`](scripts/dep-graph.sh): resolves the [Neo4j Shell Tools](https://github.com/jexp/neo4j-shell-tools) dependency required by the `graph` components
 
 Provided that you start with a fresh Ubuntu server installation, you can run the provided install scripts like this:
 
@@ -58,14 +58,14 @@ scripts/dep-graph.sh
 Some tools require dependencies, e.g. installing a database manager or adding artifacts to your local Maven repository
 
 * [AllegroGraph](hu.bme.mit.trainbenchmark.benchmark.allegro): download the [Allegro server](http://franz.com/agraph/downloads/server). Unzip the file and run `./configure-agraph`. Adjust the port to `10035` (default value), set the username and password to `super`. Start the server with `./agraph`.
-* [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install mysql-server` and set the root password to empty.
+* [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install -y mysql-server` and set the root password to empty.
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso): run the `scripts/dep-virtuoso.sh` script to resolve the dependencies. Issue the `sudo apt-get install virtuoso-opensource` command to install Virtuoso and set the password to `dba`.
 
 ### Usage
 
-The benchmark configuration is defined in the `config/config.yml` file (this is be created by the `scripts/init-config.sh` script). The script is based on the default configuration stored in [`scripts/default-config.yml`](scripts/default-config.yml) which also provided the documentation as comments in the file.
+The benchmark configuration is defined in the `config/config.yml` file (this is be created by the [`scripts/init-config.sh`](scripts/init-config.sh) script). The script is based on the default configuration stored in [`config/default-config.yml`](config/default-config.yml) which also provided the documentation as comments in the file.
 
-The `scripts` directory contains the `run.py` script which is used for the following purposes:
+The `scripts` directory contains the [`run.py`](scripts/run.py) script which is used for the following purposes:
 * `scripts/run.py -b` -- build the projects
 * `scripts/run.py -b -s` -- build the projects without testing
 * `scripts/run.py -g` -- generates the instance models for the defined tools
