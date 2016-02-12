@@ -58,7 +58,7 @@ def generate_minimals(java_opts: List[str], format_name: str, format_option_set:
              java_opts,
              "-jar", target,
              "-scenario", "Minimal",
-             "-querymix", query,
+             "-queryMix", query,
              options])
         print(util.highlight(" ".join(cmd), True, True))
         try:
