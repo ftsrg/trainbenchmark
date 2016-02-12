@@ -6,8 +6,7 @@ max_size: 1
 
 # Specify the options for the Java virtual machine. The options are copied to the "java" command invoking the JVM.
 java_opts:
-- -Xms2G
-- -Xmx2G
+- -Xms2000M
 
 # Number of runs for the same tool/scenario/query/size.
 runs: 5
