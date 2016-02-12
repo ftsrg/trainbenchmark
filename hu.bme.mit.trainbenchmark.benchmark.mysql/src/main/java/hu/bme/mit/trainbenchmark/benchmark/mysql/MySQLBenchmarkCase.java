@@ -29,7 +29,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, MySQLD
 
 	@Override
 	public MySQLDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new MySQLDriver(benchmarkConfig);
+		return new MySQLDriver(benchmarkConfig.getMaxMemory());
 	}
 
 	@Override

@@ -14,10 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.util;
 
 import java.io.IOException;
 
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteException;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class Util {
@@ -36,14 +32,12 @@ public class Util {
 		}
 	}
 
-	public static int executeCommand(final String commandStart, final String exceptionMessage) throws ExecuteException, IOException {
-		final CommandLine commandLine = new CommandLine(commandStart);
-		final DefaultExecutor executor = new DefaultExecutor();
-		try {
-			final int exitValue = executor.execute(commandLine);
-			return exitValue;
-		} catch (final ExecuteException e) {
-			throw new ExecuteException(exceptionMessage, e.getExitValue());
+	public static void executeCommand(final String commandStart, final String exceptionMessage) throws InterruptedException, IOException {
+		final Runtime rt = Runtime.getRuntime();
+		final Process pr = rt.exec(commandStart);
+		pr.waitFor();
+		if (pr.exitValue() != 0) {
+			throw new IOException("Error code: " + pr.exitValue() + ", " + exceptionMessage);
 		}
 	}
 
