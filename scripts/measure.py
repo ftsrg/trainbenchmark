@@ -49,7 +49,7 @@ def measure_tool(java_opts: List[str], timeout: int, target: str, scenario_name:
         while (level < max_level and max_memory <= initial_memory):
             level += 1
             memory_quantum //= 2
-            print("Level " + str(level) + ". Testing with maximum memory of " + str(max_memory) + " MB".)
+            print("Level " + str(level) + ". Testing with maximum memory of " + str(max_memory) + " MB.")
 
             cmd = util.flatten(["java",
                    java_opts,
