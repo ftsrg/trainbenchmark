@@ -46,7 +46,7 @@ public abstract class TrainBenchmarkConfig {
 	protected List<RailwayQuery> queryMix = new ArrayList<>();
 	protected ScenarioEnum scenario;
 	protected int size;
-	protected int maxMemory;
+	protected int maxMemory = 1000;
 
 	public TrainBenchmarkConfig(final String args[]) throws ParseException {
 		initOptions();
