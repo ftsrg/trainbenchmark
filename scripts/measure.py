@@ -72,13 +72,17 @@ def measure_tool(java_opts: List[str], timeout: int, target: str, scenario_name:
             print(util.highlight("Execution failed, testing with more memory.", "failure", False))
             max_memory += memory_quantum
 
+    if (max_memory > initial_memory):
+        print(util.highlight("The first execution timed out or errored. Skipping larger sizes for this tool, scenario and query mix.", "info", True))
+        return
+
 def test(cmd, timeout):
     try:
         subprocess.check_call(cmd, timeout=timeout)
     except subprocess.TimeoutExpired:
-        print(util.highlight("Timeout, skipping larger sizes for this tool, scenario and query mix.", "error", True))
+        print(util.highlight("Timeout after " + str(timeout) + " seconds.", "error", True))
         return False
     except subprocess.CalledProcessError:
-        print(util.highlight("An error occured, skipping larger sizes for this tool, scenario and query mix.", "error", True))
+        print(util.highlight("Process return with an error.", "error", True))
         return False
     return True
