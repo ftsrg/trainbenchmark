@@ -142,12 +142,21 @@ public class RDFSerializer extends ModelSerializer<RDFGeneratorConfig> {
 	public void setAttribute(final String type, final Object node, final String key, final Object value)
 			throws IOException {
 		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
-		write(triple + ".");
+		write(triple + " .");
 
 	}
 
 	protected void write(final String s) throws IOException {
-		file.write(s + "\n\n");
+		switch (generatorConfig.getFormat()) {
+		case NTRIPLES:
+			file.write(s + "\n");
+			break;
+		case TURTLE:
+			file.write(s + "\n\n");
+			break;
+		default:
+			throw new UnsupportedOperationException("RDF format " + generatorConfig.getFormat() + " not supported");
+		}		
 	}
 
 	protected String stringValue(final Object value) {
