@@ -34,7 +34,7 @@ query_mixes:
 - SemaphoreNeighbor
 - SwitchSensor
 - SwitchSet
-# - RouteSensor ConnectedSegments PosLength SemaphoreNeighbor SwitchSensor SwitchSet
+#- RouteSensor ConnectedSegments PosLength SemaphoreNeighbor SwitchSensor SwitchSet
 
 # Specify the scenarios for the benchmark and the generator.
 # You may also specify the benchmark arguments for each scenario.
