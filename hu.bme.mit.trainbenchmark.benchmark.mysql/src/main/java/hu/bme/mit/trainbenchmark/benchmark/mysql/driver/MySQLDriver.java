@@ -17,7 +17,6 @@ import static hu.bme.mit.trainbenchmark.sql.constants.SQLConstants.USER;
 import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
@@ -26,10 +25,11 @@ import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 public class MySQLDriver extends SQLDriver {
 
 	final int maxMemory;
-	
+
 	/**
 	 * 
-	 * @param maxMemory maximum memory in megabytes
+	 * @param maxMemory
+	 *            maximum memory in megabytes
 	 */
 	public MySQLDriver(int maxMemory) {
 		super();
@@ -54,11 +54,10 @@ public class MySQLDriver extends SQLDriver {
 			throw new IOException("MySQL process returned non-zero exit value: " + pr.exitValue());
 		}
 		connection = DriverManager.getConnection(url, USER, PASSWORD);
-		
-		final int maxMemoryBytes = maxMemory * 1000 * 1000;
-		final String maxMemoryQuery = "SET GLOBAL innodb_buffer_pool_size=" + maxMemoryBytes + ";";
-		final PreparedStatement maxMemoryStatement = connection.prepareStatement(maxMemoryQuery);		
-		maxMemoryStatement.execute();
+		// final int maxMemoryBytes = maxMemory * 1000 * 1000;
+		// final String maxMemoryQuery = "SET GLOBAL innodb_buffer_pool_size=" + maxMemoryBytes + ";";
+		// final PreparedStatement maxMemoryStatement = connection.prepareStatement(maxMemoryQuery);
+		// maxMemoryStatement.execute();
 	}
 
 	@Override
