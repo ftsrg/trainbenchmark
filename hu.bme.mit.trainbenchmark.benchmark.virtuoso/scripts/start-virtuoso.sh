@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo service virtuoso-opensource-6.1 restart
+sudo service virtuoso-opensource-6.1 start
