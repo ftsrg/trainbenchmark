@@ -34,7 +34,9 @@ def measure_tools(java_opts: List[str], timeout: int, runs: int, scenarios: List
                     for size in sizes:
                         print(util.highlight("Tool: " + tool_name + ", scenario: " + scenario_name + ", size: " + str(size) + ", query mix: " + query_mix + ", runs: " + str(runs), "info", True))
                         print(util.highlight("==============================================================================", "info", True))
-                        measure_tool(java_opts, timeout, target, scenario_name, runs, size, query_mix, transformation_arguments, tool_option_set, max_levels, max_memory)
+                        successful = measure_tool(java_opts, timeout, target, scenario_name, runs, size, query_mix, transformation_arguments, tool_option_set, max_levels, max_memory)
+                        if not successful:
+                            break
 
             util.set_working_directory("..")
     send_mail.send_mail(email)
@@ -74,7 +76,8 @@ def measure_tool(java_opts: List[str], timeout: int, target: str, scenario_name:
 
     if (max_memory > initial_memory):
         print(util.highlight("The first execution timed out or errored. Skipping larger sizes for this tool, scenario and query mix.", "info", True))
-        return
+        return False
+    return True
 
 def test(cmd, timeout):
     try:
