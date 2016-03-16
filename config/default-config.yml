@@ -83,8 +83,8 @@ formats:
     format: turtle
   - inferred: off
     format: turtle
-  - inferred: on
-    format: ntriples
+#  - inferred: on
+#    format: ntriples
 - sql:
 
 # constants for the memory measurement
