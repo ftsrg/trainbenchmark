@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3 -u
 """
 This script runs the benchmark and performs some additional operations:
 * building the code
