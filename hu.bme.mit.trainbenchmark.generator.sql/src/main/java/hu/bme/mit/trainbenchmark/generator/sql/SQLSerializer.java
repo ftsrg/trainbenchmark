@@ -44,8 +44,7 @@ import hu.bme.mit.trainbenchmark.sql.process.MySQLProcess;
 public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 
 	protected String sqlRawPath;
-	protected String sqlDumpPath;
-	protected String sqlPostgresDumpPath;
+	// protected Strings sqlPostgresDumpPath;
 	protected BufferedWriter writer;
 
 	public SQLSerializer(final SQLGeneratorConfig sqlGeneratorConfig) {
@@ -72,8 +71,7 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 
 		// destination file
 		sqlRawPath = generatorConfig.getModelPathWithoutExtension() + "-raw.sql";
-		sqlDumpPath = generatorConfig.getModelPathWithoutExtension() + ".sql";
-		sqlPostgresDumpPath = generatorConfig.getModelPathWithoutExtension() + "-postgres.sql";
+		// sqlPostgresDumpPath = generatorConfig.getModelPathWithoutExtension() + "-postgres.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -105,11 +103,19 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 		final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };
 		final Process processLoad = rt.exec(commandLoad);
 		processLoad.waitFor();
+		
+		final String mysqlDumpPath = generatorConfig.getModelPathWithoutExtension() + "-mysql.sql";
+		final String sqliteDumpPath = generatorConfig.getModelPathWithoutExtension() + "-sqlite.sql";
 
 		final String[] commandDump = { "/bin/bash", "-c",
-				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --skip-comments > " + sqlDumpPath };
+				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --skip-comments > " + mysqlDumpPath };
 		final Process processDump = rt.exec(commandDump);
 		processDump.waitFor();
+
+		final String[] sqliteDump = { "/bin/bash", "-c",
+				generatorConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.sql/scripts/mysql2sqlite.sh " + mysqlDumpPath+ " > " + sqliteDumpPath };
+		final Process processSqlite = rt.exec(sqliteDump);
+		processSqlite.waitFor();	
 	}
 
 	@Override
@@ -142,7 +148,7 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 		if (from == null || to == null) {
 			return;
 		}
-		
+
 		String insertQuery;
 		switch (label) {
 		// n:m edges
@@ -152,10 +158,10 @@ public class SQLSerializer extends ModelSerializer<SQLGeneratorConfig> {
 			break;
 		// n:1 edges
 		case FOLLOWS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);			
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);
 			break;
 		case GATHERS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);			
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);
 			break;
 		case SENSORS:
 			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID, to);

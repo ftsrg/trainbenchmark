@@ -38,6 +38,7 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.sqlite</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.emf.model</module>

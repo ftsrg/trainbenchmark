@@ -35,11 +35,6 @@ public abstract class SQLDriver extends Driver<Long> {
 	public SQLDriver() {
 		super();
 	}
-	
-	@Override
-	public String getPostfix() {
-		return ".sql";
-	}
 
 	public Collection<SQLMatch> runStatement(final RailwayQuery query, final PreparedStatement statement) throws SQLException {
 		final Collection<SQLMatch> results = new ArrayList<>();
