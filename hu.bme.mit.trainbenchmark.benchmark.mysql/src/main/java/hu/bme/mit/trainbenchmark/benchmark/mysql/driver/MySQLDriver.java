@@ -79,5 +79,11 @@ public class MySQLDriver extends SQLDriver {
 
 		MySQLProcess.stopServer();
 	}
+	
+
+	@Override
+	public String getPostfix() {
+		return "-mysql.sql";
+	}
 
 }
