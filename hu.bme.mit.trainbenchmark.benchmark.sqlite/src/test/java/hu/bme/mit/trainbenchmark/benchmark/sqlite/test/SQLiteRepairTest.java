@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
+package hu.bme.mit.trainbenchmark.benchmark.sqlite.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
 

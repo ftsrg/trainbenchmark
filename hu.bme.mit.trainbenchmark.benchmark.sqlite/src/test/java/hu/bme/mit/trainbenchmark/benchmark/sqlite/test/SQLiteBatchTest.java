@@ -10,13 +10,13 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
+package hu.bme.mit.trainbenchmark.benchmark.sqlite.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class SQLiteInjectTest extends InjectTest {
+public class SQLiteBatchTest extends BatchTest {
 
-	public SQLiteInjectTest() {
+	public SQLiteBatchTest() {
 		bi = new SQLiteBenchmarkInitializer();
 	}
 
