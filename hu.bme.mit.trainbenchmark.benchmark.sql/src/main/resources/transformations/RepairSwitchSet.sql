@@ -1,3 +1,3 @@
-UPDATE Switch 
-SET Switch.currentPosition = ?
+UPDATE Switch
+SET currentPosition = ?
 WHERE Switch.id = ?;
