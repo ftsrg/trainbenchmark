@@ -1,3 +1,3 @@
 UPDATE Switch
-SET currentPosition = MOD(currentPosition + 1, 4)
+SET currentPosition = (currentPosition + 1) % 4
 WHERE id = ?;
