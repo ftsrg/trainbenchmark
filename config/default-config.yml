@@ -4,7 +4,7 @@
 min_size: 1
 max_size: 1
 
-# Specify the options for the Java virtual machine. The options are copied to the "java" command invoking the JVM.
+# Specify the options for the Java Virtual Machine. The options are copied to the "java" command invoking the JVM.
 # Options for the build.
 build_java_opts: []
 
@@ -71,6 +71,7 @@ tools:
 - sesame:
   - inferencing: false
   - inferencing: true
+#- sqlite
 #- virtuoso:
 
 # If you run the script with the -f switch, the script will only generate the formats listed here.
