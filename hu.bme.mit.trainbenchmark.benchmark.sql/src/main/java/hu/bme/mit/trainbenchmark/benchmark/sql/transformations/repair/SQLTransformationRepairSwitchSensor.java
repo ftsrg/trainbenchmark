@@ -32,9 +32,10 @@ public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}
 
+		System.out.println(matches.size());
 		for (final SQLSwitchSensorMatch match : matches) {
 			preparedUpdateStatement.setLong(1, match.getSw());
-			preparedUpdateStatement.executeUpdate();
+			int result = preparedUpdateStatement.executeUpdate();
 		}
 	}
 

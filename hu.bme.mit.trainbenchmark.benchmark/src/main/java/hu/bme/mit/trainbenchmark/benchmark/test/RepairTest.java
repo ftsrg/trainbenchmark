@@ -26,32 +26,32 @@ public abstract class RepairTest extends TrainBenchmarkTest {
 	
 	@Test
 	public void connectedSegmentsRepair() throws Exception {
-		testTransformation(CONNECTEDSEGMENTS, REPAIR, 3, 1);
+		testTransformation(CONNECTEDSEGMENTS, REPAIR, 9, 7);
 	}
 
 	@Test
 	public void posLengthRepair() throws Exception {
-		testTransformation(POSLENGTH, REPAIR, 39, 37);
+		testTransformation(POSLENGTH, REPAIR, 197, 195);
 	}
 
 	@Test
 	public void routeSensorRepair() throws Exception {
-		testTransformation(ROUTESENSOR, REPAIR, 8, 6);
+		testTransformation(ROUTESENSOR, REPAIR, 26, 24);
 	}
 
 	@Test
 	public void semaphoreNeighborRepair() throws Exception {
-		testTransformation(SEMAPHORENEIGHBOR, REPAIR, 11, 0);
+		testTransformation(SEMAPHORENEIGHBOR, REPAIR, 3, 0);
 	}
 
 	@Test
 	public void switchSensorRepair() throws Exception {
-		testTransformation(SWITCHSENSOR, REPAIR, 0, 0);
+		testTransformation(SWITCHSENSOR, REPAIR, 1, 0);
 	}
 
 	@Test
 	public void switchSetRepair() throws Exception {
-		testTransformation(SWITCHSET, REPAIR, 0, 0);
+		testTransformation(SWITCHSET, REPAIR, 2, 0);
 	}
 
 }

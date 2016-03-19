@@ -80,9 +80,9 @@ public class ScalableModelGenerator extends ModelGenerator {
 			connectedSegmentsErrorPercent = 5;
 			posLengthErrorPercent = 10;
 			routeSensorErrorPercent = 10;
-			semaphoreNeighborErrorPercent = 8;
-			switchSensorErrorPercent = 4;
-			switchSetErrorPercent = 10;
+			semaphoreNeighborErrorPercent = 25;
+			switchSensorErrorPercent = 18;
+			switchSetErrorPercent = 15;
 			break;
 		default:
 			throw new UnsupportedOperationException("Scenario not supported.");
