@@ -9,14 +9,14 @@ INSERT OR REPLACE INTO Variables VALUES ("region",
 INSERT OR REPLACE INTO Variables VALUES ("segment3",
     (SELECT TrackElement2_id
     FROM connectsTo
-    WHERE TrackElement1_id = @segment1)
+    WHERE TrackElement1_id = (SELECT Value FROM Variables WHERE Name = "segment1"))
   );
 
   -- get (sensor) node
 INSERT OR REPLACE INTO Variables VALUES ("sensor",
     (SELECT Sensor_id
     FROM monitoredBy
-    WHERE TrackElement_id = @segment1)
+    WHERE TrackElement_id = (SELECT Value FROM Variables WHERE Name = "segment1"))
   );
 
 -- delete (segment1)-[:connectsTo]->(segment3) edge
@@ -27,7 +27,7 @@ WHERE
 
 -- insert new node (segment2) as a TrackElement and retrieve its id
 INSERT INTO TrackElement (region) VALUES (
-    (SELECT Value FROM Variables WHERE Name = "region");
+    (SELECT Value FROM Variables WHERE Name = "region")
   );
 
 INSERT OR REPLACE INTO Variables VALUES ("segment2",
@@ -37,7 +37,7 @@ INSERT OR REPLACE INTO Variables VALUES ("segment2",
 -- insert (segment2) node as a Segment
 INSERT INTO Segment (id)
 VALUES (
-  SELECT Value FROM Variables WHERE Name = "segment2"
+  (SELECT Value FROM Variables WHERE Name = "segment2")
 );
 
 -- insert (segment1)-[:connectsTo]->(segment2) edge
