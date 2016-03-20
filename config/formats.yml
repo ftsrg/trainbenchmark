@@ -13,4 +13,5 @@ neo4j: graph
 orientdb: graph
 postgresql: sql
 sesame: rdf
+sqlite: sql
 virtuoso: rdf

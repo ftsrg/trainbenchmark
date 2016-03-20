@@ -11,6 +11,6 @@ INSERT INTO Sensor (region) VALUES (
 
 INSERT INTO monitoredBy (TrackElement_id, Sensor_id)
 VALUES (
-  (SELECT MAX(id) FROM Sensor),
-  (SELECT Value FROM Variables WHERE Name = "sensor")
+  (SELECT Value FROM Variables WHERE Name = "switch"),
+  (SELECT MAX(id) FROM Sensor)
 );
