@@ -71,7 +71,7 @@ tools:
 - sesame:
   - inferencing: false
   - inferencing: true
-#- sqlite
+- sqlite:
 #- virtuoso:
 
 # If you run the script with the -f switch, the script will only generate the formats listed here.
