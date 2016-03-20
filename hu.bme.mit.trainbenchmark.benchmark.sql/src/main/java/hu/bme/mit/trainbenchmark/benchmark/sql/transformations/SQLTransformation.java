@@ -33,7 +33,7 @@ public abstract class SQLTransformation<TObject> extends Transformation<TObject,
 
 	protected PreparedStatement preparedUpdateStatement;
 	protected BenchmarkConfig benchmarkConfig;
-	protected final String updateQuery;
+	protected String updateQuery;
 		
 	protected SQLTransformation(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver);

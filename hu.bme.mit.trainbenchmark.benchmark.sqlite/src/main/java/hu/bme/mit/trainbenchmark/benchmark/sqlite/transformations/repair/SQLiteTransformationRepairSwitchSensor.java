@@ -16,28 +16,29 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepair;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLiteTransformationRepairSwitchSensor extends SQLTransformationRepair<SQLSwitchSensorMatch> {
+public class SQLiteTransformationRepairSwitchSensor extends SQLiteTransformationRepair<SQLSwitchSensorMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('switch', ?);";
 	
-	public SQLiteTransformationRepairSwitchSensor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public SQLiteTransformationRepairSwitchSensor(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 
 	@Override
-	public void performRHS(final Collection<SQLSwitchSensorMatch> matches) throws SQLException {
+	public void performRHS(final Collection<SQLSwitchSensorMatch> matches) throws SQLException {		
 		if (preparedUpdateStatement == null) {
-			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
+			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
 		}
 
 		for (final SQLSwitchSensorMatch match : matches) {
 			preparedUpdateStatement.setLong(1, match.getSw());
 			preparedUpdateStatement.executeUpdate();
+			
+			driver.getConnection().createStatement().executeUpdate(updateQuery);
 		}
 	}
 
