@@ -29,9 +29,9 @@ SET @segment2 := (SELECT LAST_INSERT_ID());
 
 -- insert (segment2) node as a Segment
 INSERT INTO Segment (id)
-VALUES (@segent2);
+VALUES (@segment2);
 
--- insert (segment1)-[:connectsTo]->(segment3) edge
+-- insert (segment1)-[:connectsTo]->(segment2) edge
 INSERT INTO connectsTo
 VALUES (@segment1, @segment2);
 

@@ -22,7 +22,8 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SQLTransformationRepairConnectedSegments extends SQLTransformationRepair<SQLConnectedSegmentsMatch> {
 
-	public SQLTransformationRepairConnectedSegments(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public SQLTransformationRepairConnectedSegments(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
+			throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 
@@ -31,12 +32,13 @@ public class SQLTransformationRepairConnectedSegments extends SQLTransformationR
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}
-
+		
 		for (final SQLConnectedSegmentsMatch match : matches) {
 			preparedUpdateStatement.setLong(1, match.getSegment1());
 			preparedUpdateStatement.setLong(2, match.getSegment2());
 			preparedUpdateStatement.setLong(3, match.getSegment3());
-			preparedUpdateStatement.executeUpdate();
+			preparedUpdateStatement.executeUpdate();			
 		}
 	}
+	
 }

@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sqlite.driver;
 import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -49,6 +50,11 @@ public class SQLiteDriver extends SQLDriver {
 
 		final String sql = FileUtils.readFileToString(new File(modelPath));
 		statement.executeUpdate(sql);
+
+		// create temporary table (used by the transformations)
+		final PreparedStatement createStatement = connection
+				.prepareStatement("CREATE TEMP TABLE IF NOT EXISTS Variables (Name TEXT PRIMARY KEY, Value INTEGER);");
+		createStatement.execute();
 	}
 
 	@Override

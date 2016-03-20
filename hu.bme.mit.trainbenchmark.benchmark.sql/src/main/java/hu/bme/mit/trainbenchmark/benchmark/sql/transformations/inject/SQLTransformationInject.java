@@ -22,7 +22,8 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SQLTransformationInject extends SQLTransformation<Long> {
 
-	public SQLTransformationInject(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public SQLTransformationInject(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
+			throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 
@@ -37,5 +38,5 @@ public class SQLTransformationInject extends SQLTransformation<Long> {
 			preparedUpdateStatement.executeUpdate();
 		}
 	}
-	
+
 }

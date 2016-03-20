@@ -22,7 +22,8 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationRepair<SQLSemaphoreNeighborMatch> {
 
-	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public SQLTransformationRepairSemaphoreNeighbor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
+			throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 
@@ -38,4 +39,5 @@ public class SQLTransformationRepairSemaphoreNeighbor extends SQLTransformationR
 			preparedUpdateStatement.executeUpdate();
 		}
 	}
+
 }
