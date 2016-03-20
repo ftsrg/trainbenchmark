@@ -59,6 +59,7 @@ Some tools require dependencies, e.g. installing a database manager or adding ar
 
 * [AllegroGraph](hu.bme.mit.trainbenchmark.benchmark.allegro): download the [Allegro server](http://franz.com/agraph/downloads/server). Unzip the file and run `./configure-agraph`. Adjust the port to `10035` (default value), set the username and password to `super`. Start the server with `./agraph`.
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install -y mysql-server` and set the root password to empty.
+* [SQLite](hu.bme.mit.trainbenchmark.benchmark.sqlite): install with `sudo apt-get install -y sqlite3`.
 * [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso): run the `scripts/dep-virtuoso.sh` script to resolve the dependencies. Issue the `sudo apt-get install virtuoso-opensource` command to install Virtuoso and set the password to `dba`.
 
 ### Usage
