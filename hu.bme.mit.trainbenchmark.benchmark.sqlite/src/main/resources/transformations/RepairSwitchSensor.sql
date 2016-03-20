@@ -1,7 +1,7 @@
 INSERT OR REPLACE INTO Variables VALUES ("region",
     (SELECT region
     FROM TrackElement
-    WHERE id = (SELECT Value FROM Variables WHERE Name = "switch")
+    WHERE id = (SELECT Value FROM Variables WHERE Name = "switch"))
   );
 
 -- insert a (sensor) vertex and retrieve its id

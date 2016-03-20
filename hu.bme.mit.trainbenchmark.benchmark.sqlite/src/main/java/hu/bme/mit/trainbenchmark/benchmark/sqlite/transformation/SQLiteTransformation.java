@@ -1,23 +1,38 @@
 package hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation;
 
+import java.io.File;
 import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.inject.SQLiteTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLiteTransformation {
+public abstract class SQLiteTransformation<TObject> extends SQLTransformation<TObject> {
 
-	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	protected SQLiteTransformation(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+		super(driver, benchmarkConfig, query);
+
+		final String updatePath = getTransformationDirectory() + benchmarkConfig.getScenarioName() + query + ".sql";
+		updateQuery = FileUtils.readFileToString(new File(updatePath));
+	}
+	
+	protected String getTransformationDirectory() {
+		return benchmarkConfig.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.sqlite/" + "src/main/resources/transformations/";
+	}
+	
+	public static Transformation<?, ?> newInstance(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		switch (benchmarkConfig.getScenario()) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new SQLiteTransformationInjectConnectedSegments(driver, benchmarkConfig, query);				
+				return new SQLiteTransformationRepairConnectedSegments(driver, benchmarkConfig, query);				
 			case SWITCHSENSOR:
 				return new SQLiteTransformationRepairSwitchSensor(driver, benchmarkConfig, query);
 			default:
