@@ -22,7 +22,8 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair<SQLSwitchSensorMatch> {
 
-	public SQLTransformationRepairSwitchSensor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public SQLTransformationRepairSwitchSensor(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
+			throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 

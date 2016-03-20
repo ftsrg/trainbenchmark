@@ -20,7 +20,7 @@ public class SQLiteBenchmarkMain {
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("MySQL", args);
 		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new SQLiteBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+		benchmarkRunner.runBenchmark();		
 	}
 
 }
