@@ -193,7 +193,7 @@ public class SwitchSensorMatcher extends BaseMatcher<SwitchSensorMatch> {
   @Override
   protected SwitchSensorMatch tupleToMatch(final Tuple t) {
     try {
-    	return SwitchSensorMatch.newMatch((Switch) t.get(POSITION_SW));
+    	return SwitchSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -203,7 +203,7 @@ public class SwitchSensorMatcher extends BaseMatcher<SwitchSensorMatch> {
   @Override
   protected SwitchSensorMatch arrayToMatch(final Object[] match) {
     try {
-    	return SwitchSensorMatch.newMatch((Switch) match[POSITION_SW]);
+    	return SwitchSensorMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -213,7 +213,7 @@ public class SwitchSensorMatcher extends BaseMatcher<SwitchSensorMatch> {
   @Override
   protected SwitchSensorMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SwitchSensorMatch.newMutableMatch((Switch) match[POSITION_SW]);
+    	return SwitchSensorMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
