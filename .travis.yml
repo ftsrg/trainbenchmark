@@ -10,6 +10,6 @@ script:
   - scripts/install-python.sh
   - scripts/dep-mondo-sam.sh
   - scripts/dep-graph.sh
-  - /usr/bin/python3 scripts/run.py --build --skip-tests
+  - scripts/run.py --build --skip-tests
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
