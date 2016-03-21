@@ -193,7 +193,7 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
   @Override
   protected PosLengthMatch tupleToMatch(final Tuple t) {
     try {
-    	return PosLengthMatch.newMatch((Segment) t.get(POSITION_SEGMENT));
+    	return PosLengthMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Segment) t.get(POSITION_SEGMENT));
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in tuple not properly typed!",e);
     	return null;
@@ -203,7 +203,7 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
   @Override
   protected PosLengthMatch arrayToMatch(final Object[] match) {
     try {
-    	return PosLengthMatch.newMatch((Segment) match[POSITION_SEGMENT]);
+    	return PosLengthMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;
@@ -213,7 +213,7 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
   @Override
   protected PosLengthMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return PosLengthMatch.newMutableMatch((Segment) match[POSITION_SEGMENT]);
+    	return PosLengthMatch.newMutableMatch((hu.bme.mit.trainbenchmark.railway.Segment) match[POSITION_SEGMENT]);
     } catch(ClassCastException e) {
     	LOGGER.error("Element(s) in array not properly typed!",e);
     	return null;

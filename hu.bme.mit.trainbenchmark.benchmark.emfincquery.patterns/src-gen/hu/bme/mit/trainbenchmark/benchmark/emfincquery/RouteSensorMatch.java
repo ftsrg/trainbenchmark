@@ -72,19 +72,19 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("route".equals(parameterName) ) {
-    	this.fRoute = (Route) newValue;
+    	this.fRoute = (hu.bme.mit.trainbenchmark.railway.Route) newValue;
     	return true;
     }
     if ("sensor".equals(parameterName) ) {
-    	this.fSensor = (Sensor) newValue;
+    	this.fSensor = (hu.bme.mit.trainbenchmark.railway.Sensor) newValue;
     	return true;
     }
     if ("swP".equals(parameterName) ) {
-    	this.fSwP = (SwitchPosition) newValue;
+    	this.fSwP = (hu.bme.mit.trainbenchmark.railway.SwitchPosition) newValue;
     	return true;
     }
     if ("sw".equals(parameterName) ) {
-    	this.fSw = (Switch) newValue;
+    	this.fSw = (hu.bme.mit.trainbenchmark.railway.Switch) newValue;
     	return true;
     }
     return false;

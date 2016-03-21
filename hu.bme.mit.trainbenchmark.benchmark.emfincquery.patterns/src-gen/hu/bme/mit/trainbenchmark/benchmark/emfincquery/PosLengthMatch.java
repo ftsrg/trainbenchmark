@@ -45,7 +45,7 @@ public abstract class PosLengthMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("segment".equals(parameterName) ) {
-    	this.fSegment = (Segment) newValue;
+    	this.fSegment = (hu.bme.mit.trainbenchmark.railway.Segment) newValue;
     	return true;
     }
     return false;
