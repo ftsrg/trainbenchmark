@@ -30,12 +30,16 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * <code><pre>
  * pattern ConnectedSegments(sensor, segment1, segment2, segment3, segment4, segment5, segment6)
  * {
- * 	Segment.monitoredBy(segment1, sensor);
  * 	Segment.connectsTo(segment1, segment2);
  * 	Segment.connectsTo(segment2, segment3);
  * 	Segment.connectsTo(segment3, segment4);
  * 	Segment.connectsTo(segment4, segment5);
  * 	Segment.connectsTo(segment5, segment6);
+ * 	Segment.monitoredBy(segment1, sensor);
+ * 	Segment.monitoredBy(segment2, sensor);
+ * 	Segment.monitoredBy(segment3, sensor);
+ * 	Segment.monitoredBy(segment4, sensor);
+ * 	Segment.monitoredBy(segment5, sensor);
  * 	Segment.monitoredBy(segment6, sensor);
  * }
  * </pre></code>

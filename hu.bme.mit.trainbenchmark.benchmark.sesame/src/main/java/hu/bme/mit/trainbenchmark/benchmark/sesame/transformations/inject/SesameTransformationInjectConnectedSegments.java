@@ -48,33 +48,32 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 		for (final URI segment1 : segments) {
 			// get (segment3) node
 			final RepositoryResult<Statement> connectsToEdges0 = connection.getStatements(segment1, connectsTo, null, true);
-			if (!connectsToEdges0.hasNext()) {
-				continue;
+			while (connectsToEdges0.hasNext()) {
+				final Statement connectsToEdge0 = connectsToEdges0.next();
+				final Value segment3 = connectsToEdge0.getObject();
+
+				// delete (segment1)-[:connectsTo]->(segment3) edge
+				connection.remove(connectsToEdge0);
+
+				// insert (segment2) node
+				final Long newVertexId = driver.getNewVertexId();
+				final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
+				connection.add(segment2, RDF.TYPE, segmentType);
+
+				// insert the edges of the (segment2) node				
+				// (segment1)-[:connectsTo]->(segment2)
+				connection.add(segment1, connectsTo, segment2);
+				// (segment2)-[:connectsTo]->(segment3)
+				connection.add(segment2, connectsTo, segment3);
+				
+				// get (sensor) nodes and insert (segment1)-[:monitoredBy]->(sensor) edges
+				final RepositoryResult<Statement> monitoredByEdges = connection.getStatements(segment1, monitoredByEdgeType, null, true);
+				while (monitoredByEdges.hasNext()) {
+					final Statement monitoredByEdge = monitoredByEdges.next();
+					final Value sensor = monitoredByEdge.getObject();
+					connection.add(segment2, monitoredByEdgeType, sensor);
+				}
 			}
-			final Statement connectsToEdge0 = connectsToEdges0.next();
-			final Value segment3 = connectsToEdge0.getObject();
-
-			// get (sensor) nodes
-			final RepositoryResult<Statement> monitoredByEdges = connection.getStatements(segment1, monitoredByEdgeType, null, true);
-			while (!monitoredByEdges.hasNext()) {
-				final Statement monitoredByEdge = monitoredByEdges.next();
-				final Value sensor = monitoredByEdge.getObject();
-
-				// (segment1)-[:monitoredBy]->(sensor)
-				connection.add(segment1, monitoredByEdgeType, sensor);
-			}
-			
-			// delete (segment1)-[:connectsTo]->(segment3) edge
-			connection.remove(connectsToEdge0);
-
-			// create (segment2) node
-			final Long newVertexId = driver.getNewVertexId();
-			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
-			connection.add(segment2, RDF.TYPE, segmentType);
-			// (segment1)-[:connectsTo]->(segment2)
-			connection.add(segment1, connectsTo, segment2);
-			// (segment2)-[:connectsTo]->(segment3)
-			connection.add(segment2, connectsTo, segment3);
 		}
 	}
 
