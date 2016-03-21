@@ -51,12 +51,22 @@ public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSe
 						}
 						final Segment segment2 = (Segment) element2;
 
+						// (segment2:Segment)-[:monitoredBy]->(sensor)
+						if (!segment2.getMonitoredBy().contains(sensor)) {
+							continue;
+						}
+
 						// (segment2)-[:connectsTo]->(segment3:Segment)
 						for (final TrackElement element3 : segment2.getConnectsTo()) {
 							if (!RailwayPackage.eINSTANCE.getSegment().isInstance(element3)) {
 								continue;
 							}
 							final Segment segment3 = (Segment) element3;
+
+							// (segment3:Segment)-[:monitoredBy]->(sensor)
+							if (!segment3.getMonitoredBy().contains(sensor)) {
+								continue;
+							}
 
 							// (segment3)-[:connectsTo]->(segment4:Segment)
 							for (final TrackElement element4 : segment3.getConnectsTo()) {
@@ -65,12 +75,22 @@ public class EMFAPIConnectedSegmentsChecker extends EMFAPIChecker<EMFConnectedSe
 								}
 								final Segment segment4 = (Segment) element4;
 
+								// (segment4:Segment)-[:monitoredBy]->(sensor)
+								if (!segment4.getMonitoredBy().contains(sensor)) {
+									continue;
+								}
+
 								// (segment4)-[:connectsTo]->(segment5:Segment)
 								for (final TrackElement element5 : segment4.getConnectsTo()) {
 									if (!RailwayPackage.eINSTANCE.getSegment().isInstance(element5)) {
 										continue;
 									}
 									final Segment segment5 = (Segment) element5;
+
+									// (segment5:Segment)-[:monitoredBy]->(sensor)
+									if (!segment5.getMonitoredBy().contains(sensor)) {
+										continue;
+									}
 
 									// (segment5)-[:connectsTo]->(segment6:Segment)
 									for (final TrackElement element6 : segment5.getConnectsTo()) {

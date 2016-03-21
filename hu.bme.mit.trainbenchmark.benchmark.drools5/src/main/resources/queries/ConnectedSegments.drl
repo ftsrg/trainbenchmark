@@ -7,5 +7,12 @@ query "ConnectedSegments"
     segment4 : Segment( this memberOf segment3.connectsTo )
     segment5 : Segment( this memberOf segment4.connectsTo )
     segment6 : Segment( this memberOf segment5.connectsTo )
-    sensor : Sensor( this memberOf segment6.monitoredBy, this memberOf segment1.monitoredBy )
+    sensor : Sensor( 
+    	this memberOf segment1.monitoredBy, 
+    	this memberOf segment2.monitoredBy, 
+    	this memberOf segment3.monitoredBy, 
+    	this memberOf segment4.monitoredBy, 
+    	this memberOf segment5.monitoredBy, 
+    	this memberOf segment6.monitoredBy 
+	)
 end
