@@ -50,6 +50,7 @@ scenarios:
     transformationConstant: 5
 
 # Specify the name of the tools to run.
+# Disk-based tools are typically slower, hence they are listed at the end of each category.
 tools:
 # EMF
 - drools5:
@@ -64,16 +65,16 @@ tools:
   - engine: coreapi
   - engine: cypher
 # RDF
-- blazegraph:
 - jena:
   - inferencing: false
   - inferencing: true
 - sesame:
   - inferencing: false
   - inferencing: true
+- blazegraph:
 # SQL
-- mysql:
 - sqlite:
+- mysql:
 
 # If you run the script with the -f switch, the script will only generate the formats listed here.
 # Without the -f switch, this list is ignored by the script.
