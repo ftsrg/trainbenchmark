@@ -60,8 +60,9 @@ tools:
   - backend: incremental
   - backend: localsearch
 # graph
-- mysql:
-- sqlite:
+- neo4j:
+  - engine: coreapi
+  - engine: cypher
 # RDF
 - blazegraph:
 - jena:
@@ -71,9 +72,8 @@ tools:
   - inferencing: false
   - inferencing: true
 # SQL
-- neo4j:
-  - engine: coreapi
-  - engine: cypher
+- mysql:
+- sqlite:
 
 # If you run the script with the -f switch, the script will only generate the formats listed here.
 # Without the -f switch, this list is ignored by the script.
