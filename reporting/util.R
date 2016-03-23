@@ -29,13 +29,12 @@ modelsizes = do.call(rbind, list(modelsize.batch, modelsize.inject, modelsize.re
 ####################################################################################################
 
 load = function(results.file, cases) {
-  results = read.csv(results.file, header=FALSE)
+  results = read.csv(results.file, header = FALSE)
   colnames(results) = c("Scenario", "Tool", "Run", "Case", "Artifact", "Phase", "Iteration", "Metric", "Value")
   
   # make the phases a factor with a fixed set of values to help dcasting
-  levels(results$Phase) = c("Read", "Check", "Transformation", "Recheck")#, "Read.and.Check", "Transformation.and.Recheck")
-  #levels(results$Phase) = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck")
-  #results$Phase = factor(results$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
+  # (e.g. Batch measurements do not have Transformation and Recheck attributes which would cause df$Transformation to throw an error)
+  results$Phase = factor(results$Phase, levels = c("Read", "Check", "Transformation", "Recheck"))
     
   # order queries according to their complexity
   results$Case = factor(results$Case, levels = cases)
@@ -106,7 +105,7 @@ process.times = function(results, drop) {
   # remove the . characters from the phasename
   #times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
   times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
-  #times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read and Check", "Transformation and Recheck"))
+  times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read and Check", "Transformation and Recheck"))
   
   return(times.plot)
 }
