@@ -34,7 +34,8 @@ heatmap(df = times.individual,
                    "RDF", "RDF", "RDF", "RDF", "RDF", 
                    "SQL", "SQL"),
         title = "Formats",
-        height = 75)
+        height = 85,
+        ncol = 4)
 
 heatmap(df = times.individual, 
         attribute = "Tool",
@@ -47,12 +48,13 @@ heatmap(df = times.individual,
                "disk-resident", "in-memory", "in-memory", "in-memory", "in-memory", 
                "in-memory", "in-memory"),
         title = "Storage",
-        height = 75)
+        height = 85,
+        ncol = 2)
 
 heatmap(df = times.individual, 
         attribute = "Case",
         title = "Case",
-        height = 50,
+        height = 60,
         ncol = 6)
 
 ####################################################################################################
