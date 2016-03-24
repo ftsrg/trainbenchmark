@@ -32,7 +32,9 @@ heatmap(df = times.individual,
         map.to = c("EMF", "EMF", "EMF", "EMF", "EMF", "EMF", 
                    "graph", "graph",
                    "RDF", "RDF", "RDF", "RDF", "RDF", 
-                   "SQL", "SQL"))
+                   "SQL", "SQL"),
+        title = "Formats",
+        height = 75)
 
 heatmap(df = times.individual, 
         attribute = "Tool",
@@ -43,7 +45,15 @@ heatmap(df = times.individual,
         map.to = c("in-memory", "in-memory", "in-memory", "in-memory", "in-memory", "in-memory",
                "disk-resident", "disk-resident",
                "disk-resident", "in-memory", "in-memory", "in-memory", "in-memory", 
-               "in-memory", "in-memory"))
+               "in-memory", "in-memory"),
+        title = "Storage",
+        height = 75)
+
+heatmap(df = times.individual, 
+        attribute = "Case",
+        title = "Case",
+        height = 50,
+        ncol = 6)
 
 ####################################################################################################
 # Mix
