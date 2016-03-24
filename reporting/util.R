@@ -252,15 +252,19 @@ heatmap = function(df, attribute, map.from = NULL, map.to = NULL, title, width =
   frequencies = merge(frequencies, relative.frequencies)
   frequencies$Normalized = frequencies$Freq / frequencies$Total
   
-  print(frequencies)
-  
   p = ggplot(frequencies) +
     geom_tile(aes(x = Artifact, y = Time, fill = Normalized)) +
     labs(title = title, x = "Model size", y = "Execution time") +
     scale_fill_gradient(low = "white", high = "darkred") +
     facet_wrap(as.formula(paste("~", attribute)), ncol = ncol) +
     theme_bw() +
-    theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "right")
+    theme(
+      legend.key = element_blank(), 
+      legend.title = element_blank(), 
+      legend.position = "right", 
+      axis.text.x = element_text(angle = 90, hjust = 1),
+      strip.text.x = element_text(size = 7)
+    )
   print(p)
   
   ggsave(file = paste("../diagrams/heatmap-", title, ".pdf", sep = ""), width = width, height = height, units = "mm")
