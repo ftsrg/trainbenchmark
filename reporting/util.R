@@ -226,3 +226,35 @@ benchmark.plot = function(df, scenario, artifacts, title, facet, scale, metric, 
   ggsave(file = paste("../diagrams/", scenario, "-", plot.filename, ".pdf", sep = ""), width = width, height = height, units = "mm")
 }
 
+####################################################################################################
+
+heatmap = function(df, attribute, map.from, map.to) {
+  mydf = df
+  
+  mydf$Artifact = discretize(
+    mydf$Artifact,
+    "fixed",
+    categories = c(-Inf,16,256,Inf),
+    labels = c("small", "medium", "large"))
+  
+  mydf$Time = discretize(
+    mydf$Time,
+    "fixed",
+    categories = c(-Inf,0.1,1,10,Inf),
+    labels = c("instantaneous", "fast", "acceptable", "slow"))
+  
+  mydf[[attribute]] = mapvalues(mydf[[attribute]], from = map.from, to = map.to)
+  
+  frequencies = as.data.frame(table(mydf[, c("Artifact", "Time", attribute)]))
+  p = ggplot(frequencies) +
+    geom_tile(aes(x = Artifact, y = Time, fill = Freq)) +
+    scale_fill_gradient(low = "white", high = "darkred") +
+    facet_wrap(~ Tool, ncol = 2) +
+    theme_bw() +
+    theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom")
+    #+
+    #guides(shape = guide_legend(ncol = legend_cols))
+  print(p)
+}
+
+####################################################################################################
