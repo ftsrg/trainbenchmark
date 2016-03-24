@@ -21,44 +21,29 @@ benchmark.plot(
   scale = "free_y"
 )
 
-df = times.individual
-df$Artifact = discretize(df$Artifact, "fixed", categories = c(-Inf,16,256,Inf), labels = c("small", "medium", "large"))
-df$Time = discretize(df$Time, "fixed", categories = c(-Inf,.1,1,10,Inf), labels = c("instantaneous", "fast", "acceptable", "slow"))
+# heatmaps
 
-formats = df
-formats$Tool = mapvalues(formats$Tool,
-                    from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery (Incremental)", "EMF-IncQuery (Local Search)",
-                             "Neo4j (Core API)", "Neo4j (Cypher)",
-                             "Blazegraph", "Jena (Inferencing)", "Jena (No Inferencing)", "Sesame (Inferencing)", "Sesame (No Inferencing)",
-                             "MySQL", "SQLite"),
-                    to = c("EMF", "EMF", "EMF", "EMF", "EMF", "EMF", 
-                           "graph", "graph",
-                           "RDF", "RDF", "RDF", "RDF", "RDF", 
-                           "SQL", "SQL"))
-frequencies = as.data.frame(table(formats[, c("Artifact", "Time", "Tool")]))
-p = ggplot(frequencies) +
-  geom_tile(aes(x = Artifact, y = Time, fill = Freq)) +
-  scale_fill_gradient(low = "white", high = "darkred") +
-  facet_wrap(~ Tool, ncol = 2)
-p
+heatmap(df = times.individual, 
+        attribute = "Tool",
+        map.from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery (Incremental)", "EMF-IncQuery (Local Search)",
+                     "Neo4j (Core API)", "Neo4j (Cypher)",
+                     "Blazegraph", "Jena (Inferencing)", "Jena (No Inferencing)", "Sesame (Inferencing)", "Sesame (No Inferencing)",
+                     "MySQL", "SQLite"), 
+        map.to = c("EMF", "EMF", "EMF", "EMF", "EMF", "EMF", 
+                   "graph", "graph",
+                   "RDF", "RDF", "RDF", "RDF", "RDF", 
+                   "SQL", "SQL"))
 
-storage = df
-storage$Tool = mapvalues(storage$Tool,
-                    from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery (Incremental)", "EMF-IncQuery (Local Search)",
-                             "Neo4j (Core API)", "Neo4j (Cypher)",
-                             "Blazegraph", "Jena (Inferencing)", "Jena (No Inferencing)", "Sesame (Inferencing)", "Sesame (No Inferencing)",
-                             "MySQL", "SQLite"),
-                    to = c("in-memory", "in-memory", "in-memory", "in-memory", "in-memory", "in-memory",
-                           "disk-resident", "disk-resident",
-                           "disk-resident", "in-memory", "in-memory", "in-memory", "in-memory", 
-                           "in-memory", "in-memory"))
-frequencies = as.data.frame(table(storage[, c("Artifact", "Time", "Tool")]))
-p = ggplot(frequencies) +
-  geom_tile(aes(x = Artifact, y = Time, fill = Freq)) +
-  scale_fill_gradient(low = "white", high = "darkred") +
-  facet_wrap(~ Tool, ncol = 2)
-p
-
+heatmap(df = times.individual, 
+        attribute = "Tool",
+        map.from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery (Incremental)", "EMF-IncQuery (Local Search)",
+                     "Neo4j (Core API)", "Neo4j (Cypher)",
+                     "Blazegraph", "Jena (Inferencing)", "Jena (No Inferencing)", "Sesame (Inferencing)", "Sesame (No Inferencing)",
+                     "MySQL", "SQLite"),
+        map.to = c("in-memory", "in-memory", "in-memory", "in-memory", "in-memory", "in-memory",
+               "disk-resident", "disk-resident",
+               "disk-resident", "in-memory", "in-memory", "in-memory", "in-memory", 
+               "in-memory", "in-memory"))
 
 ####################################################################################################
 # Mix
