@@ -246,8 +246,12 @@ heatmap = function(df, attribute, map.from, map.to) {
   mydf[[attribute]] = mapvalues(mydf[[attribute]], from = map.from, to = map.to)
   
   frequencies = as.data.frame(table(mydf[, c("Artifact", "Time", attribute)]))
+  relative.frequencies = ddply(frequencies, c("Tool"), summarize, Total = sum(Freq))
+  frequencies = merge(frequencies, relative.frequencies)
+  frequencies$Normalized = frequencies$Freq / frequencies$Total
+  
   p = ggplot(frequencies) +
-    geom_tile(aes(x = Artifact, y = Time, fill = Freq)) +
+    geom_tile(aes(x = Artifact, y = Time, fill = Normalized)) +
     scale_fill_gradient(low = "white", high = "darkred") +
     facet_wrap(~ Tool, ncol = 2) +
     theme_bw() +
