@@ -172,7 +172,7 @@ yaxis = function() {
 
 ####################################################################################################
 
-benchmark.plot = function(df, scenario, artifacts, title, facet, scale, metric, toolnames = NULL, facet_cols = 2, legend_cols = 4, width = 210, height = 297) { #toolnames
+benchmark.plot = function(df, scenario, artifacts, title, facet, scale, metric, toolnames = NULL, facet_cols = 2, legend_cols = 4, width = 210, height = 297) {
   # for multicolumn layouts, we omit every second label on the x axis
   if (facet_cols > 1) {
     evens = c(seq(4, nrow(artifacts), by=2))
@@ -228,7 +228,7 @@ benchmark.plot = function(df, scenario, artifacts, title, facet, scale, metric, 
 
 ####################################################################################################
 
-heatmap = function(df, attribute, map.from, map.to) {
+heatmap = function(df, attribute, map.from = NULL, map.to = NULL, title, width = 210, height = 100, ncol = 3) {
   mydf = df
   
   mydf$Artifact = discretize(
@@ -243,22 +243,27 @@ heatmap = function(df, attribute, map.from, map.to) {
     categories = c(-Inf,0.1,1,10,Inf),
     labels = c("instantaneous", "fast", "acceptable", "slow"))
   
-  mydf[[attribute]] = mapvalues(mydf[[attribute]], from = map.from, to = map.to)
+  if (!is.null(map.from)) {
+    mydf[[attribute]] = mapvalues(mydf[[attribute]], from = map.from, to = map.to)
+  }
   
   frequencies = as.data.frame(table(mydf[, c("Artifact", "Time", attribute)]))
-  relative.frequencies = ddply(frequencies, c("Tool"), summarize, Total = sum(Freq))
+  relative.frequencies = ddply(frequencies, c(attribute), summarize, Total = sum(Freq))
   frequencies = merge(frequencies, relative.frequencies)
   frequencies$Normalized = frequencies$Freq / frequencies$Total
   
+  print(frequencies)
+  
   p = ggplot(frequencies) +
     geom_tile(aes(x = Artifact, y = Time, fill = Normalized)) +
+    labs(title = title, x = "Model size", y = "Execution time") +
     scale_fill_gradient(low = "white", high = "darkred") +
-    facet_wrap(~ Tool, ncol = 2) +
+    facet_wrap(as.formula(paste("~", attribute)), ncol = ncol) +
     theme_bw() +
-    theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom")
-    #+
-    #guides(shape = guide_legend(ncol = legend_cols))
+    theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "right")
   print(p)
+  
+  ggsave(file = paste("../diagrams/heatmap-", title, ".pdf", sep = ""), width = width, height = height, units = "mm")
 }
 
 ####################################################################################################
