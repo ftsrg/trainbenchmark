@@ -29,6 +29,8 @@ modelsizes = do.call(rbind, list(modelsize.batch, modelsize.inject, modelsize.re
 ####################################################################################################
 
 load = function(results.file, cases) {
+  #results.file = "../results/results-mix.csv"
+  
   results = read.csv(results.file, header = FALSE)
   colnames(results) = c("Scenario", "Tool", "Run", "Case", "Artifact", "Phase", "Iteration", "Metric", "Value")
   
@@ -113,6 +115,7 @@ process.times = function(results, drop) {
 ####################################################################################################
 
 process.memories = function(results) {
+  results = results.mix
   # filter on the MaxMemory metric, throw away unused columns
   memories = subset(results, Metric == "MaxMemory")
   memories = subset(memories, select = -c(Phase, Iteration, Metric))
@@ -129,14 +132,14 @@ process.memories = function(results) {
   )
   
   # drop results from less than 5 runs
-  memories.runs = ddply(
-    .data = minimum.memories,
-    .variables = c("Scenario", "Tool", "Case", "Artifact", "Memory"),
-    .fun = colwise(length),
-    .progress = "text"
-  )
-  memories.finished = subset(memories.runs, Run == 5)
-  memories.finished = subset(memories.finished, select = -c(Run))
+  #memories.runs = ddply(
+  #  .data = minimum.memories,
+  #  .variables = c("Scenario", "Tool", "Case", "Artifact", "Memory"),
+  #  .fun = colwise(length),
+  #  .progress = "text"
+  #)
+  #memories.finished = subset(memories.runs, Run == 1)
+  memories.finished = subset(minimum.memories, select = -c(Run))
   
   # extract the tool names for the plots labels
   toolnames = ddply(
@@ -172,7 +175,7 @@ yaxis = function() {
 
 ####################################################################################################
 
-benchmark.plot = function(df, scenario, artifacts, title, facet, scale, metric, toolnames = NULL, facet_cols = 2, legend_cols = 4, width = 210, height = 297) {
+benchmark.plot = function(df, scenario, artifacts, title, facet = NULL, scale, metric, toolnames = NULL, facet_cols = 2, legend_cols = 4, width = 210, height = 297) {
   # for multicolumn layouts, we omit every second label on the x axis
   if (facet_cols > 1) {
     evens = c(seq(4, nrow(artifacts), by=2))
@@ -194,7 +197,6 @@ benchmark.plot = function(df, scenario, artifacts, title, facet, scale, metric, 
   ylabels = yaxis$ylabels
 
   plot.filename = gsub(" ", "-", title)
-  facet = as.formula(paste("~", facet))
 
   if (metric == "Time") {
     ycaption = "Execution time [s]"
@@ -216,8 +218,14 @@ benchmark.plot = function(df, scenario, artifacts, title, facet, scale, metric, 
   p = p +
     scale_shape_manual(values = seq(0,24)) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
-    scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(facet, ncol = facet_cols, scale = scale) +
+    scale_y_log10(breaks = ybreaks, labels = ylabels)
+  
+  if (!is.null(facet)) {
+    facet = as.formula(paste("~", facet))
+    p = p + facet_wrap(facet, ncol = facet_cols, scale = scale)
+  }
+    
+  p = p +
     theme_bw() +
     theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom") +
     guides(shape = guide_legend(ncol = legend_cols))
