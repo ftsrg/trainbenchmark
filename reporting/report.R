@@ -63,8 +63,22 @@ heatmap(df = times.individual,
 
 levels.mix = c("RouteSensor-ConnectedSegments-PosLength-SemaphoreNeighbor-SwitchSensor-SwitchSet");
 results.mix = load("../results/results-mix.csv", levels.mix)
-times.mix = process.times(results.mix, T)
-memories.plot = process.memories(results.individual)
+memories.plot = process.memories(results.mix)
+#times.mix = process.times(results.mix, T)
+
+# Memory
+
+benchmark.plot(
+  df = memories.plot$memories, 
+  scenario = "Batch", 
+  artifacts = modelsizes, 
+  metric = "Memory", 
+  title = "Memories", 
+  #facet = "Case", 
+  scale = "fixed", 
+  toolnames = memories.plot$toolnames,
+  height = 150
+)
 
 # Time
 
@@ -88,17 +102,4 @@ benchmark.plot(
   title = "Time", 
   facet = "Phase", 
   scale = "free_y"
-)
-
-# Memory
-
-benchmark.plot(
-  df = memories.plot$memories, 
-  scenario = "Batch", 
-  artifacts = modelsizes, 
-  metric = "Memory", 
-  title = "Memories", 
-  facet = "Case", 
-  scale = "fixed", 
-  toolnames = memories.plot$toolnames
 )
