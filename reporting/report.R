@@ -34,9 +34,12 @@ heatmap(df = times.individual,
                    "graph", "graph",
                    "RDF", "RDF", "RDF", "RDF", "RDF", 
                    "SQL", "SQL"),
-        title = "Formats",
+        title = "Comparison of performance by formats",
+        filename = "formats",
         height = 85,
         ncol = 4)
+
+
 
 heatmap(df = times.individual, 
         attributes = c("Tool"),
@@ -48,25 +51,34 @@ heatmap(df = times.individual,
                "disk-resident", "disk-resident",
                "disk-resident", "in-memory", "in-memory", "in-memory", "in-memory", 
                "in-memory", "in-memory"),
-        title = "Storage",
+        title = "Comparison of performance by storage",
+        filename = "storage",
         height = 85,
+        width = 90,
         ncol = 2)
 
-heatmap(df = times.individual, 
+
+
+times.individual.read.and.check.only = subset(
+  times.individual, 
+  Phase == "Read and Check")
+heatmap(df = times.individual.read.and.check.only, 
         attributes = c("Case"),
-        title = "Case",
-        height = 60,
+        title = "Complexity of queries (read and check phase)",
+        filename = "queries",
+        height = 75,
         ncol = 6)
 
 times.individual.aggregated.only = subset(
   times.individual, 
   Phase == "Read and Check" | Phase == "Transformation and Recheck")
-
 heatmap(df = times.individual.aggregated.only,
         attributes = c("Phase", "Scenario"),
-        title = "Scenario",
-        width = 120,
-        height = 60)
+        title = "Complexity of scenarios",
+        filename = "scenarios",
+        width = 135,
+        height = 110)
+
 
 ####################################################################################################
 # Mix

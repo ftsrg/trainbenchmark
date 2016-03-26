@@ -232,7 +232,7 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
 
 ####################################################################################################
 
-heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, width = 210, height = 100, ncol = 3) {
+heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filename, width = 210, height = 100, ncol = 3) {
   df$Artifact = discretize(
     df$Artifact,
     "fixed",
@@ -242,7 +242,7 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, width 
   df$Time = discretize(
     df$Time,
     "fixed",
-    categories = c(-Inf,0.1,1,10,Inf),
+    categories = c(-Inf,0.2,1,5,Inf),
     labels = c("instantaneous", "fast", "acceptable", "slow"))
   
   if (!is.null(map.from)) {
@@ -271,13 +271,15 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, width 
     theme(
       legend.key = element_blank(), 
       legend.title = element_blank(), 
-      legend.position = "right", 
+#      legend.position = "right", 
+      legend.position = "bottom",
       axis.text.x = element_text(angle = 90, hjust = 1),
-      strip.text.x = element_text(size = 7)
+      strip.text.x = element_text(size = 7),
+      strip.text.y = element_text(size = 7)
     )
   print(p)
   
-  ggsave(file = paste("../diagrams/heatmap-", title, ".pdf", sep = ""), width = width, height = height, units = "mm")
+  ggsave(file = paste("../diagrams/heatmap-", filename, ".pdf", sep = ""), width = width, height = height, units = "mm")
 }
 
 ####################################################################################################
