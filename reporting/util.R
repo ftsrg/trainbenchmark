@@ -206,7 +206,6 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
     labs(title = paste(scenario, " scenario, ", title, sep = ""), x = "Model size\n#Triples", y = ycaption) +
     geom_point(aes_string(y = metric, col = "Tool", shape = "Tool"), size = 2.0) +
     geom_line(aes_string(y = metric, col = "Tool", group = "Tool"), size = 0.5)
-    #geom_line(aes_string(y = metric, col = "Tool", shape = "Tool"), size = 0.5)
   
   if (!is.null(toolnames)) {
     p = p + geom_label_repel(data = toolnames, aes_string(y = metric, label = "Tool",  col = "Tool"), size = 1.6, show.legend = F, label.padding = unit(0.12, "lines"))
@@ -233,35 +232,41 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
 
 ####################################################################################################
 
-heatmap = function(df, attribute, map.from = NULL, map.to = NULL, title, width = 210, height = 100, ncol = 3) {
-  mydf = df
-  
-  mydf$Artifact = discretize(
-    mydf$Artifact,
+heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, width = 210, height = 100, ncol = 3) {
+  df$Artifact = discretize(
+    df$Artifact,
     "fixed",
     categories = c(-Inf,16,256,Inf),
     labels = c("small", "medium", "large"))
   
-  mydf$Time = discretize(
-    mydf$Time,
+  df$Time = discretize(
+    df$Time,
     "fixed",
     categories = c(-Inf,0.1,1,10,Inf),
     labels = c("instantaneous", "fast", "acceptable", "slow"))
   
   if (!is.null(map.from)) {
-    mydf[[attribute]] = mapvalues(mydf[[attribute]], from = map.from, to = map.to)
+    attribute = attributes[1];
+    df[[attribute]] = mapvalues(df[[attribute]], from = map.from, to = map.to)
   }
   
-  frequencies = as.data.frame(table(mydf[, c("Artifact", "Time", attribute)]))
-  relative.frequencies = ddply(frequencies, c(attribute), summarize, Total = sum(Freq))
+  frequencies = as.data.frame(table(df[, c("Artifact", "Time", attributes)]))
+  relative.frequencies = ddply(frequencies, attributes, summarize, Total = sum(Freq))
   frequencies = merge(frequencies, relative.frequencies)
   frequencies$Normalized = frequencies$Freq / frequencies$Total
   
-  p = ggplot(frequencies) +
+  p = ggplot(na.omit(frequencies)) +
     geom_tile(aes(x = Artifact, y = Time, fill = Normalized)) +
     labs(title = title, x = "Model size", y = "Execution time") +
-    scale_fill_gradient(low = "white", high = "darkred") +
-    facet_wrap(as.formula(paste("~", attribute)), ncol = ncol) +
+    scale_fill_gradient(low = "white", high = "darkred")
+  
+  if (length(attributes) == 1) {
+    p = p + facet_wrap(as.formula(paste("~" ,attributes[1])), ncol = ncol)
+  } else {
+    p = p + facet_grid(as.formula(paste(attributes[1], "~" ,attributes[2])))
+  }
+  
+  p = p +
     theme_bw() +
     theme(
       legend.key = element_blank(), 

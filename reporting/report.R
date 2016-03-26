@@ -25,7 +25,7 @@ benchmark.plot(
 # heatmaps
 
 heatmap(df = times.individual, 
-        attribute = "Tool",
+        attributes = c("Tool"),
         map.from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery (Incremental)", "EMF-IncQuery (Local Search)",
                      "Neo4j (Core API)", "Neo4j (Cypher)",
                      "Blazegraph (No Inferencing)", "Jena (Inferencing)", "Jena (No Inferencing)", "Sesame (Inferencing)", "Sesame (No Inferencing)",
@@ -39,7 +39,7 @@ heatmap(df = times.individual,
         ncol = 4)
 
 heatmap(df = times.individual, 
-        attribute = "Tool",
+        attributes = c("Tool"),
         map.from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery (Incremental)", "EMF-IncQuery (Local Search)",
                      "Neo4j (Core API)", "Neo4j (Cypher)",
                      "Blazegraph (No Inferencing)", "Jena (Inferencing)", "Jena (No Inferencing)", "Sesame (Inferencing)", "Sesame (No Inferencing)",
@@ -53,17 +53,20 @@ heatmap(df = times.individual,
         ncol = 2)
 
 heatmap(df = times.individual, 
-        attribute = "Scenario",
-        title = "Scenario",
-        height = 60,
-        ncol = 6)
-
-heatmap(df = times.individual, 
-        attribute = "Case",
+        attributes = c("Case"),
         title = "Case",
         height = 60,
         ncol = 6)
 
+times.individual.aggregated.only = subset(
+  times.individual, 
+  Phase == "Read and Check" | Phase == "Transformation and Recheck")
+
+heatmap(df = times.individual.aggregated.only,
+        attributes = c("Phase", "Scenario"),
+        title = "Scenario",
+        width = 120,
+        height = 60)
 
 ####################################################################################################
 # Mix
