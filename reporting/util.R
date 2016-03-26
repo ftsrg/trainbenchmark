@@ -115,7 +115,6 @@ process.times = function(results, drop) {
 ####################################################################################################
 
 process.memories = function(results) {
-  results = results.mix
   # filter on the MaxMemory metric, throw away unused columns
   memories = subset(results, Metric == "MaxMemory")
   memories = subset(memories, select = -c(Phase, Iteration, Metric))
@@ -175,7 +174,7 @@ yaxis = function() {
 
 ####################################################################################################
 
-benchmark.plot = function(df, scenario, artifacts, title, facet = NULL, scale, metric, toolnames = NULL, facet_cols = 2, legend_cols = 4, width = 210, height = 297) {
+benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL, scale, metric, toolnames = NULL, facet_cols = 2, legend_cols = 4, width = 210, height = 297) {
   # for multicolumn layouts, we omit every second label on the x axis
   if (facet_cols > 1) {
     evens = c(seq(4, nrow(artifacts), by=2))
@@ -184,7 +183,7 @@ benchmark.plot = function(df, scenario, artifacts, title, facet = NULL, scale, m
   
   # only keep the records for the current scenario
   df = df[df$Scenario == scenario, ]
-
+  
   # x axis labels
   artifacts.scenario = artifacts[artifacts$Scenario == scenario, "Triples"]
   
@@ -195,8 +194,6 @@ benchmark.plot = function(df, scenario, artifacts, title, facet = NULL, scale, m
   yaxis = yaxis()
   ybreaks = yaxis$ybreaks
   ylabels = yaxis$ylabels
-
-  plot.filename = gsub(" ", "-", title)
 
   if (metric == "Time") {
     ycaption = "Execution time [s]"
@@ -231,7 +228,7 @@ benchmark.plot = function(df, scenario, artifacts, title, facet = NULL, scale, m
     guides(shape = guide_legend(ncol = legend_cols))
   print(p)
   
-  ggsave(file = paste("../diagrams/", scenario, "-", plot.filename, ".pdf", sep = ""), width = width, height = height, units = "mm")
+  ggsave(file = paste("../diagrams/", filename, ".pdf", sep = ""), width = width, height = height, units = "mm")
 }
 
 ####################################################################################################
