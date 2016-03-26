@@ -1,11 +1,11 @@
 source("util.R")
 
 ####################################################################################################
-# Individual
+# Individual / Runtime
 ####################################################################################################
 
 levels.individual = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
-results.individual = load("../results/results-individual.csv", levels.individual)
+results.individual = load("../results/results-individual-runtime.csv", levels.individual)
 times.individual = process.times(results.individual, F)
 
 # Time
@@ -14,6 +14,7 @@ phase = "Read"
 benchmark.plot(
   df = times.individual[times.individual$Phase == phase, ], 
   scenario = "Batch",
+  filename = ,
   artifacts = modelsizes,
   metric = "Time",
   title = "Time",
@@ -52,54 +53,66 @@ heatmap(df = times.individual,
         ncol = 2)
 
 heatmap(df = times.individual, 
+        attribute = "Scenario",
+        title = "Scenario",
+        height = 60,
+        ncol = 6)
+
+heatmap(df = times.individual, 
         attribute = "Case",
         title = "Case",
         height = 60,
         ncol = 6)
+
 
 ####################################################################################################
 # Mix
 ####################################################################################################
 
 levels.mix = c("RouteSensor-ConnectedSegments-PosLength-SemaphoreNeighbor-SwitchSensor-SwitchSet");
-results.mix = load("../results/results-mix.csv", levels.mix)
-memories.plot = process.memories(results.mix)
-#times.mix = process.times(results.mix, T)
 
-# Memory
+####################################################################################################
+# Mix / Memory
+####################################################################################################
+
+results.mix.memory = load("../results/results-mix-memory.csv", levels.mix)
+memories.plot = process.memories(results.mix.memory)
 
 benchmark.plot(
-  df = memories.plot$memories, 
-  scenario = "Batch", 
-  artifacts = modelsizes, 
-  metric = "Memory", 
-  title = "Memories", 
-  #facet = "Case", 
+  df = memories.plot$memories,
+  scenario = "Batch",
+  artifacts = modelsizes,
+  metric = "Memory",
+  title = "Batch scenario, query mix, memory consumption",
+  filename = "batch-mix-memory",
   scale = "fixed", 
   toolnames = memories.plot$toolnames,
   height = 150
 )
 
-# Time
+####################################################################################################
+# Mix / Runtime
+####################################################################################################
 
-scenario = "Inject"
+results.mix.runtime = load("../results/results-mix-runtime.csv", levels.mix)
+times.mix = process.times(results.mix.runtime, T)
+
+metric = "Time"
+facet = "Phase"
+scale = "free_y"
+
 benchmark.plot(
-  df = times.mix, 
-  scenario = scenario, 
-  artifacts = modelsizes, 
-  metric = "Time", 
-  title = "Time", 
-  facet = "Phase", 
-  scale = "free_y"
+  df = times.mix, scenario = "Batch", artifacts = modelsizes, metric = metric, 
+  title = "Batch scenario, query mix, execution time", filename = "batch-mix-runtime", facet = facet, scale = scale
 )
 
-scenario = "Repair"
 benchmark.plot(
-  df = times.mix, 
-  scenario = scenario, 
-  artifacts = modelsizes, 
-  metric = "Time", 
-  title = "Time", 
-  facet = "Phase", 
-  scale = "free_y"
+  df = times.mix, scenario = "Inject", artifacts = modelsizes, metric = metric, 
+  title = "Inject scenario, query mix, execution time", filename = "inject-mix-runtime", facet = facet, scale = scale
 )
+
+benchmark.plot(
+  df = times.mix, scenario = "Repair", artifacts = modelsizes, metric = "Time", 
+  title = "Repair scenario, query mix, execution time", filename = "repair-mix-runtime", facet = facet, scale = scale
+)
+
