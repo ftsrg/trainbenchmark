@@ -203,7 +203,7 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
   
   p = ggplot(df) +
     aes(x = as.factor(Artifact)) +
-    labs(title = paste(scenario, " scenario, ", title, sep = ""), x = "Model size\n#Triples", y = ycaption) +
+    labs(title = paste(title, sep = ""), x = "Model size\n#Triples", y = ycaption) +
     geom_point(aes_string(y = metric, col = "Tool", shape = "Tool"), size = 2.0) +
     geom_line(aes_string(y = metric, col = "Tool", group = "Tool"), size = 0.5)
   
@@ -232,7 +232,7 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
 
 ####################################################################################################
 
-heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filename, width = 210, height = 100, ncol = 3) {
+heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filename, width = 210, height = 100, ncol = 3, legend.position = "bottom") {
   df$Artifact = discretize(
     df$Artifact,
     "fixed",
@@ -271,8 +271,7 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filena
     theme(
       legend.key = element_blank(), 
       legend.title = element_blank(), 
-#      legend.position = "right", 
-      legend.position = "bottom",
+      legend.position = legend.position,
       axis.text.x = element_text(angle = 90, hjust = 1),
       strip.text.x = element_text(size = 7),
       strip.text.y = element_text(size = 7)
