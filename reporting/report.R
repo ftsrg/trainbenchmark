@@ -36,8 +36,10 @@ heatmap(df = times.individual,
                    "SQL", "SQL"),
         title = "Comparison of performance by formats",
         filename = "formats",
-        height = 85,
-        ncol = 4)
+        height = 65,
+        width = 160,
+        ncol = 4,
+        legend.position = "right")
 
 
 
@@ -55,7 +57,8 @@ heatmap(df = times.individual,
         filename = "storage",
         height = 85,
         width = 90,
-        ncol = 2)
+        ncol = 2,
+        legend.position = "bottom")
 
 
 
@@ -66,8 +69,11 @@ heatmap(df = times.individual.read.and.check.only,
         attributes = c("Case"),
         title = "Complexity of queries (read and check phase)",
         filename = "queries",
-        height = 75,
-        ncol = 6)
+        height = 90,
+        ncol = 6,
+        legend.position = "bottom")
+
+
 
 times.individual.aggregated.only = subset(
   times.individual, 
@@ -76,8 +82,9 @@ heatmap(df = times.individual.aggregated.only,
         attributes = c("Phase", "Scenario"),
         title = "Complexity of scenarios",
         filename = "scenarios",
-        width = 135,
-        height = 110)
+        width = 100,
+        height = 100,
+        legend.position = "bottom")
 
 
 ####################################################################################################
