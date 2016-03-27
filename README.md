@@ -64,7 +64,7 @@ Some tools require dependencies, e.g. installing a database manager or adding ar
 
 ### Usage
 
-The benchmark configuration is defined in the `config/config.yml` file (this is be created by the [`scripts/init-config.sh`](scripts/init-config.sh) script). The script is based on the default configuration stored in [`config/default-config.yml`](config/default-config.yml) which also provided the documentation as comments in the file.
+The benchmark configuration is defined in the `config/config.yml` file (this is created by the [`scripts/init-config.sh`](scripts/init-config.sh) script). The script is based on the default configuration stored in [`config/default-config.yml`](config/default-config.yml) which also provided the documentation as comments in the file.
 
 The `scripts` directory contains the [`run.py`](scripts/run.py) script which is used for the following purposes:
 * `scripts/run.py -b` -- build the projects
