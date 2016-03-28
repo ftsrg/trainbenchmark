@@ -24,6 +24,7 @@ benchmark.plot(
 
 # heatmaps
 
+# formats
 heatmap(df = times.individual, 
         attributes = c("Tool"),
         map.from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery",
@@ -36,14 +37,14 @@ heatmap(df = times.individual,
                    "SQL", "SQL"),
         title = "Comparison of performance by formats",
         filename = "formats",
-        height = 65,
-        width = 160,
-        ncol = 4,
+        height = 115,
+        width = 108,
+        ncol = 2,
         legend.position = "right")
 
-
-
-heatmap(df = times.individual, 
+# storage
+times.individual.read.and.check.only = subset(times.individual, Phase == "Read and Check")
+heatmap(df = times.individual.read.and.check.only, 
         attributes = c("Tool"),
         #map.from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery (Incremental)", "EMF-IncQuery (Local Search)",
         map.from = c("Drools5", "Drools6", "Eclipse OCL", "EMF API", "EMF-IncQuery",
@@ -54,38 +55,36 @@ heatmap(df = times.individual,
                "disk-resident", "disk-resident",
                "disk-resident", "in-memory", "in-memory", "in-memory", "in-memory", 
                "disk-resident", "in-memory"),
-        title = "Comparison of performance\n by storage",
+        title = "Comparison of performance by storage\n(read and check)",
         filename = "storage",
-        height = 85,
-        width = 90,
+        height = 74,
+        width = 106,
         ncol = 2,
-        legend.position = "bottom")
+        legend.position = "right")
 
-
-
-times.individual.read.and.check.only = subset(
-  times.individual, 
-  Phase == "Read and Check")
+# query
+times.individual.read.and.check.only = subset(times.individual, Phase == "Read and Check")
 heatmap(df = times.individual.read.and.check.only, 
         attributes = c("Case"),
-        title = "Complexity of queries (read and check phase)",
+        title = "Complexity of queries\n(read and check)",
         filename = "queries",
-        height = 90,
-        ncol = 6,
-        legend.position = "bottom")
+        height = 155,
+        width = 110,
+        ncol = 2,
+        legend.position = "right")
 
 
 
-times.individual.aggregated.only = subset(
-  times.individual, 
-  Phase == "Read and Check" | Phase == "Transformation and Recheck")
-heatmap(df = times.individual.aggregated.only,
-        attributes = c("Phase", "Scenario"),
-        title = "Complexity of scenarios",
-        filename = "scenarios",
-        width = 100,
-        height = 100,
-        legend.position = "bottom")
+# times.individual.aggregated.only = subset(
+#   times.individual, 
+#   Phase == "Read and Check" | Phase == "Transformation and Recheck")
+# heatmap(df = times.individual.aggregated.only,
+#         attributes = c("Phase", "Scenario"),
+#         title = "Complexity of scenarios",
+#         filename = "scenarios",
+#         width = 100,
+#         height = 100,
+#         legend.position = "bottom")
 
 
 ####################################################################################################
