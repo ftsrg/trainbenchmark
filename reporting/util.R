@@ -251,12 +251,12 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filena
   }
   
   frequencies = as.data.frame(table(df[, c("Artifact", "Time", attributes)]))
-  relative.frequencies = ddply(frequencies, attributes, summarize, Total = sum(Freq))
-  frequencies = merge(frequencies, relative.frequencies)
-  frequencies$Normalized = frequencies$Freq / frequencies$Total
+  total.frequencies = ddply(frequencies, attributes, summarize, Total = sum(Freq))
+  frequencies = merge(frequencies, total.frequencies)
+  frequencies$Freq = frequencies$Freq / frequencies$Total
   
   p = ggplot(na.omit(frequencies)) +
-    geom_tile(aes(x = Artifact, y = Time, fill = Normalized)) +
+    geom_tile(aes(x = Artifact, y = Time, fill = Freq)) +
     labs(title = title, x = "Model size", y = "Execution time") +
     scale_fill_gradient(low = "white", high = "darkred")
   
