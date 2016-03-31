@@ -10,18 +10,23 @@ times.individual = process.times(results.individual, F)
 
 # Time
 
-phase = "Read"
-benchmark.plot(
-  df = times.individual[times.individual$Phase == phase, ], 
-  scenario = "Batch",
-  filename = ,
-  artifacts = modelsizes,
-  metric = "Time",
-  title = "Time",
-  facet = "Case",
-  scale = "free_y"
-)
 
+for (scenario in c("Batch", "Inject", "Repair")) {
+  for (phase in c("Read", "Check", "Read and Check", "Transformation", "Recheck", "Transformation and Recheck")) {
+    phase.no.spaces = gsub(" ", "-", phase)
+    benchmark.plot(
+      df = times.individual[times.individual$Phase == phase, ], 
+      scenario = scenario,
+      filename = paste("runtime", scenario, phase.no.spaces, sep="-"),
+      artifacts = modelsizes,
+      metric = "Time",
+      title = paste(scenario, "scenario", phase, "phase", sep=" "),
+      facet = "Case",
+      scale = "free_y"
+    )
+  }
+}
+  
 # heatmaps
 
 # formats
