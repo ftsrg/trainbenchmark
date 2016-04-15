@@ -21,41 +21,29 @@ import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class TinkerGraphBenchmarkConfig extends BenchmarkConfig {
 
-	protected static final String NEO4J = "TinkerGraph";
-	protected static final String ENGINE = "engine";
-
-	protected TinkerGraphEngine engine;
+	protected static final String TINKERGRAPH = "TinkerGraph";
 
 	public TinkerGraphBenchmarkConfig(final String[] args) throws ParseException {
-		super(NEO4J, args);
+		super(TINKERGRAPH, args);
 	}
 
 	public TinkerGraphBenchmarkConfig(final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query, final int iterationCount,
 			final TransformationStrategy transformationStrategy, final long transformationConstant, final TinkerGraphEngine engine) {
-		super(NEO4J, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
-		this.engine = engine;
+		super(TINKERGRAPH, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
-
-		options.addOption(ENGINE, true, "query engine: coreapi (Core Java API), cypher (Cypher query language)");
 	}
 
 	@Override
 	public void processArguments(final String[] args) throws ParseException {
 		super.processArguments(args);
-
-		engine = TinkerGraphEngine.valueOf(cmd.getOptionValue(ENGINE).toUpperCase());
-	}
-
-	public TinkerGraphEngine getEngine() {
-		return engine;
 	}
 	
 	@Override
 	public String getToolName() {
-		return super.getToolName() + "_(" + engine.toString() + ")";
+		return super.getToolName();
 	}
 }

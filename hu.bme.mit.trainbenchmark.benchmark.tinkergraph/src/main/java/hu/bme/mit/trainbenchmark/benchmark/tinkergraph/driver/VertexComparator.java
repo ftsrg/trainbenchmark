@@ -9,27 +9,19 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.inject;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import java.util.Comparator;
 
-import java.util.Collection;
+import com.tinkerpop.gremlin.structure.Vertex;
 
-import org.neo4j.graphdb.Node;
-
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-
-public class TinkerGraphTransformationInjectPosLength extends TinkerGraphTransformationInject {
-
-	public TinkerGraphTransformationInjectPosLength(final TinkerGraphDriver driver) {
-		super(driver);
-	}
+public class VertexComparator implements Comparator<Vertex> {
 
 	@Override
-	public void performRHS(final Collection<Node> segments) {
-		for (final Node segment : segments) {
-			segment.setProperty(LENGTH, 0);
-		}
+	public int compare(final Vertex v1, final Vertex v2) {
+		final long id1 = (Long) v1.id();
+		final long id2 = (Long) v2.id();
+		return Long.compare(id1, id2);
 	}
 
 }

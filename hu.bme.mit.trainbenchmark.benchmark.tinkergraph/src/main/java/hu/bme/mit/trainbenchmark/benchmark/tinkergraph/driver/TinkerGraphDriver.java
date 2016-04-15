@@ -30,24 +30,15 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.io.FileUtils;
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.DynamicRelationshipType;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.ResourceIterator;
-import org.neo4j.graphdb.Result;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
-import org.neo4j.shell.tools.imp.util.MapNodeCache;
+
+import com.tinkerpop.gremlin.structure.Transaction;
+import com.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphDriver extends Driver<Node> {
+public class TinkerGraphDriver extends Driver<Vertex> {
 
 	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(GATHERS);
 	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
@@ -57,7 +48,7 @@ public class TinkerGraphDriver extends Driver<Node> {
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
-	protected final Comparator<Node> nodeComparator = new NodeComparator();
+	protected final Comparator<Vertex> nodeComparator = new VertexComparator();
 	protected final String dbPath;
 
 	public TinkerGraphDriver(final String workspacePath) throws IOException {

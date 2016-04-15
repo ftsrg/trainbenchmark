@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.NodeComparator;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.VertexComparator;
 
 import org.neo4j.graphdb.Node;
 
 public class TinkerGraphMatchComparator extends MatchComparator<TinkerGraphMatch, Node> {
 
-	protected NodeComparator nc = new NodeComparator();
+	protected VertexComparator nc = new VertexComparator();
 
 	@Override
 	public int compare(final TinkerGraphMatch o1, final TinkerGraphMatch o2) {
