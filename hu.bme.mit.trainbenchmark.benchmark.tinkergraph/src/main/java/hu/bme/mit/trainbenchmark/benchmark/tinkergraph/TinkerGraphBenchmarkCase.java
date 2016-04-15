@@ -15,15 +15,12 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph;
 import java.io.IOException;
 import java.util.Comparator;
 
-import org.neo4j.graphdb.Node;
+import com.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphCoreChecker;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphEngine;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatchComparator;
@@ -31,7 +28,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGra
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphBenchmarkCase<TinkerGraphChecker>
-		extends AbstractBenchmarkCase<TinkerGraphMatch, Node, TinkerGraphDriver, TinkerGraphBenchmarkConfig, Checker<TinkerGraphMatch>> {
+		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, Checker<TinkerGraphMatch>> {
 
 	@Override
 	public TinkerGraphDriver createDriver(final TinkerGraphBenchmarkConfig benchmarkConfig) throws Exception {
@@ -41,15 +38,7 @@ public class TinkerGraphBenchmarkCase<TinkerGraphChecker>
 	@Override
 	public Checker<TinkerGraphMatch> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver, final RailwayQuery query)
 			throws Exception {		
-		final TinkerGraphEngine engine = benchmarkConfig.getEngine();
-		switch (engine) {	
-		case COREAPI:
-			return TinkerGraphCoreChecker.newInstance(driver, query);
-		case CYPHER:
-			return TinkerGraphCypherChecker.newInstance(driver, benchmarkConfig, query);
-		default:
-			throw new UnsupportedOperationException("Engine not supported: " + engine);
-		}
+		return TinkerGraphChecker.newInstance(driver, query);
 	}
 
 	@Override
