@@ -20,7 +20,8 @@ public class GraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
 		final GeneratorConfig generatorConfig = new GeneratorConfig(args);
-		final GraphSerializer graphSerializer = new GraphSerializer(generatorConfig);
+//		final GraphSerializer graphSerializer = new GraphSerializer(generatorConfig);
+		final TinkerGraphSerializer graphSerializer = new TinkerGraphSerializer(generatorConfig);
 		final ModelGenerator generator = GeneratorFactory.createGenerator(graphSerializer, generatorConfig);
 		generator.generateModel();
 	}
