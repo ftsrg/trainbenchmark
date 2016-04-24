@@ -17,7 +17,6 @@ import java.util.Collection;
 import org.junit.runners.Parameterized.Parameters;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.RepairTest;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphEngine;
 
 public class TinkerGraphRepairTest extends RepairTest {
 
@@ -26,7 +25,8 @@ public class TinkerGraphRepairTest extends RepairTest {
 	    return TinkerGraphBenchmarkInitializer.getTestParameters();
 	}
 	
-	public TinkerGraphRepairTest(final TinkerGraphEngine engine) {
-		bi = new TinkerGraphBenchmarkInitializer(engine);
+	public TinkerGraphRepairTest() {
+		bi = new TinkerGraphBenchmarkInitializer();
 	}
+	
 }

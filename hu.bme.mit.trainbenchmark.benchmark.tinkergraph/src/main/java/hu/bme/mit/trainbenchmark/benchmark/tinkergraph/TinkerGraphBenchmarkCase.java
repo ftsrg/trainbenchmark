@@ -15,11 +15,12 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph;
 import java.io.IOException;
 import java.util.Comparator;
 
-import com.tinkerpop.gremlin.structure.Vertex;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
@@ -27,17 +28,17 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatchC
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphBenchmarkCase<TinkerGraphChecker>
+public class TinkerGraphBenchmarkCase
 		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, Checker<TinkerGraphMatch>> {
 
 	@Override
 	public TinkerGraphDriver createDriver(final TinkerGraphBenchmarkConfig benchmarkConfig) throws Exception {
-		return new TinkerGraphDriver(benchmarkConfig.getWorkspacePath());
+		return new TinkerGraphDriver();
 	}
-	
+
 	@Override
-	public Checker<TinkerGraphMatch> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver, final RailwayQuery query)
-			throws Exception {		
+	public Checker<TinkerGraphMatch> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
+			final RailwayQuery query) throws Exception {
 		return TinkerGraphChecker.newInstance(driver, query);
 	}
 
@@ -47,8 +48,8 @@ public class TinkerGraphBenchmarkCase<TinkerGraphChecker>
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver, final RailwayQuery query)
-			throws IOException {
+	public Transformation<?, ?> createTransformation(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
+			final RailwayQuery query) throws IOException {
 		return TinkerGraphTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 

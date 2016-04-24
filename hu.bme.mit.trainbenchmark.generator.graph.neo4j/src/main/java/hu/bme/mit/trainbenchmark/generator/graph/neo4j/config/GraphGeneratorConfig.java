@@ -10,23 +10,16 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
+package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 
-import java.util.Collection;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-import org.junit.runners.Parameterized.Parameters;
+import org.apache.commons.cli.ParseException;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+public class GraphGeneratorConfig extends GeneratorConfig {
 
-public class TinkerGraphBatchTest extends BatchTest {
-
-	@Parameters
-	public static Collection<Object[]> data() {
-	    return TinkerGraphBenchmarkInitializer.getTestParameters();
-	}
-	
-	public TinkerGraphBatchTest() {
-		bi = new TinkerGraphBenchmarkInitializer();
+	public GraphGeneratorConfig(final String[] args) throws ParseException {
+		super(args);
 	}
 
 }

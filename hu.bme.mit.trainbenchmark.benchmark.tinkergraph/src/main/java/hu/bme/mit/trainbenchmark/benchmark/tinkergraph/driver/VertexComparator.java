@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver;
 
 import java.util.Comparator;
 
-import com.tinkerpop.gremlin.structure.Vertex;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 public class VertexComparator implements Comparator<Vertex> {
 

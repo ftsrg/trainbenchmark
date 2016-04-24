@@ -28,7 +28,7 @@ public class TinkerGraphBenchmarkConfig extends BenchmarkConfig {
 	}
 
 	public TinkerGraphBenchmarkConfig(final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query, final int iterationCount,
-			final TransformationStrategy transformationStrategy, final long transformationConstant, final TinkerGraphEngine engine) {
+			final TransformationStrategy transformationStrategy, final long transformationConstant) {
 		super(TINKERGRAPH, scenario, size, runIndex, query, iterationCount, transformationStrategy, transformationConstant);
 	}
 

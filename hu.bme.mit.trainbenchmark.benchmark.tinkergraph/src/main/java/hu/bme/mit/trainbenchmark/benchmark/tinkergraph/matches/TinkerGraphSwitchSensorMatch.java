@@ -9,24 +9,30 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
-import java.util.Collection;
+import java.util.Map;
 
-import org.junit.runners.Parameterized.Parameters;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
 
-public class TinkerGraphBatchTest extends BatchTest {
+public class TinkerGraphSwitchSensorMatch extends TinkerGraphMatch implements SwitchSensorMatch {
 
-	@Parameters
-	public static Collection<Object[]> data() {
-	    return TinkerGraphBenchmarkInitializer.getTestParameters();
+	public TinkerGraphSwitchSensorMatch(final Map<String, Object> match) {
+		super(match);
 	}
-	
-	public TinkerGraphBatchTest() {
-		bi = new TinkerGraphBenchmarkInitializer();
+
+	@Override
+	public Vertex getSw() {
+		return (Vertex) match.get(VAR_SW);
+	}
+
+	@Override
+	public Vertex[] toArray() {
+		return new Vertex[] { getSw() };
 	}
 
 }

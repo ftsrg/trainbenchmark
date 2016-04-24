@@ -46,8 +46,9 @@
 				<module>hu.bme.mit.trainbenchmark.generator</module>
 				<module>hu.bme.mit.trainbenchmark.generator.emf</module>
 				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
+				<module>hu.bme.mit.trainbenchmark.generator.graph.neo4j</module>
+				<module>hu.bme.mit.trainbenchmark.generator.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.generator.sql</module>
-				<module>hu.bme.mit.trainbenchmark.graph</module>
 				<module>hu.bme.mit.trainbenchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.sql</module>
 			</modules>
@@ -81,7 +82,6 @@
 			<id>graph</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
-				<module>hu.bme.mit.trainbenchmark.graph</module>
 			</modules>
 		</profile>
 
@@ -113,7 +113,6 @@
 		</profile>
 
 		<!-- tools -->
-		<!-- there should be a specific build profile for each tool -->
 
 		<profile>
 			<id>blazegraph</id>
@@ -198,7 +197,6 @@
 			<id>neo4j</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
-				<module>hu.bme.mit.trainbenchmark.graph</module>
 			</modules>
 		</profile>
 
@@ -285,7 +283,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
