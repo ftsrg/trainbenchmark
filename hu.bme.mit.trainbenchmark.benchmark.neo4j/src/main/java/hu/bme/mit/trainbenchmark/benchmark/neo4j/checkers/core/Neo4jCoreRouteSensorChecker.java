@@ -78,14 +78,15 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 								continue;
 							}
 
-							// (sensor:Sensor)<-[:gathers]-(Route) NAC							
+							// (sensor:Sensor)<-[:gathers]-(route:Route) NAC							
 							if (!Neo4jUtil.isConnected(route, sensor, Neo4jConstants.relationshipTypeGathers)) {
 								final Map<String, Object> match = new HashMap<>();
 								match.put(VAR_ROUTE, route);
 								match.put(VAR_SENSOR, sensor);
 								match.put(VAR_SWP, swP);
 								match.put(VAR_SW, sw);
-								matches.add(new Neo4jRouteSensorMatch(match));
+								final Neo4jRouteSensorMatch rsm = new Neo4jRouteSensorMatch(match);
+								matches.add(rsm);
 							}
 						}
 					}

@@ -17,7 +17,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
@@ -26,6 +25,7 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
@@ -52,10 +52,8 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 				}
 
 				final Iterable<Vertex> sws = () -> swP.vertices(Direction.OUT, ModelConstants.TARGET);
-
 				for (final Vertex sw : sws) {
 					// (switch:Switch)-[:sensor]->()
-
 					if (!sw.label().equals(SWITCH)) {
 						continue;
 					}
@@ -67,24 +65,15 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 						}
 
 						// (sensor:Sensor)<-[:gathers]-(Route) NAC
-						final Iterable<Vertex> route2candidates = () -> sensor.vertices(Direction.IN, ModelConstants.GATHERS);
-						final List<Vertex> route2s = new ArrayList<>();
-
-						for (final Vertex route2 : route2candidates) {
-							if (route2.label().equals(ModelConstants.ROUTE)) {
-								continue;
-							}
-
-							route2s.add(route2);
-						}
-
-						if (!route2s.contains(route)) {
+						if (!TinkerGraphUtil.isConnected(route, sensor, ModelConstants.GATHERS)) {
 							final Map<String, Object> match = new HashMap<>();
 							match.put(QueryConstants.VAR_ROUTE, route);
 							match.put(QueryConstants.VAR_SENSOR, sensor);
 							match.put(QueryConstants.VAR_SWP, swP);
 							match.put(QueryConstants.VAR_SW, sw);
-							matches.add(new TinkerGraphRouteSensorMatch(match));
+							final TinkerGraphRouteSensorMatch rsm = new TinkerGraphRouteSensorMatch(match);
+							matches.add(rsm);
+							System.out.println(rsm);
 						}
 					}
 				}
