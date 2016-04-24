@@ -13,12 +13,18 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
+import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 public class TinkerGraphSemaphoreNeighborChecker extends TinkerGraphChecker<TinkerGraphSemaphoreNeighborMatch> {
 
@@ -30,97 +36,73 @@ public class TinkerGraphSemaphoreNeighborChecker extends TinkerGraphChecker<Tink
 	public Collection<TinkerGraphSemaphoreNeighborMatch> check() {
 		final Collection<TinkerGraphSemaphoreNeighborMatch> matches = new ArrayList<>();
 
-		final TinkerGraph graph = driver.getGraph();		
-//		final List<? extends Vertex> routes = TinkerHelper.queryVertexIndex(graph, TYPE, ROUTE);
+		final Collection<Vertex> route1s = driver.collectVertices(ModelConstants.ROUTE);
 
-//		final GraphDatabaseService graphDb = driver.getGraphDb();
-//		try (Transaction tx = graphDb.beginTx()) {
-//			final ResourceIterator<Node> routes1 = graphDb.findNodes(Neo4jConstants.labelRoute);
-//			while (routes1.hasNext()) {
-//				final Node route1 = routes1.next();
-//				if (matches.contains(route1)) {
-//					continue;
-//				}
-//
-//				// (route1:Route)-[:exit]->(semaphore:Semaphore)
-//				final Iterable<Relationship> exits = route1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeExit);
-//				for (final Relationship exit : exits) {
-//					final Node semaphore = exit.getEndNode();
-//					if (!semaphore.hasLabel(Neo4jConstants.labelSemaphore)) {
-//						continue;
-//					}
-//
-//					// (route1:Route)-[:definedBy]->(sensor1:Sensor)
-//					final Iterable<Relationship> gatherss1 = route1.getRelationships(Direction.OUTGOING,
-//							Neo4jConstants.relationshipTypeGathers);
-//					for (final Relationship gathers1 : gatherss1) {
-//						final Node sensor1 = gathers1.getEndNode();
-//
-//						// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
-//						final Iterable<Relationship> relationshipMonitoredBy1 = sensor1.getRelationships(Direction.INCOMING,
-//								Neo4jConstants.relationshipTypeMonitoredBy);
-//						for (final Relationship relationshipSensor : relationshipMonitoredBy1) {
-//							final Node te1 = relationshipSensor.getStartNode();
-//							if (!te1.hasLabel(Neo4jConstants.labelTrackElement)) {
-//								continue;
-//							}
-//
-//							// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
-//							final Iterable<Relationship> connectsTos = te1.getRelationships(Direction.OUTGOING,
-//									Neo4jConstants.relationshipTypeConnectsTo);
-//							for (final Relationship connectsTo : connectsTos) {
-//								final Node te2 = connectsTo.getEndNode();
-//								if (!te2.hasLabel(Neo4jConstants.labelTrackElement)) {
-//									continue;
-//								}
-//
-//								// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
-//								final Iterable<Relationship> relationshipMonitoredBy2 = te2.getRelationships(Direction.OUTGOING,
-//										Neo4jConstants.relationshipTypeMonitoredBy);
-//								for (final Relationship relationshipSensor2 : relationshipMonitoredBy2) {
-//									final Node sensor2 = relationshipSensor2.getEndNode();
-//									if (!sensor2.hasLabel(Neo4jConstants.labelSensor)) {
-//										continue;
-//									}
-//
-//									// (sensor2:Sensor)<-[:gathers]-(route2:Route),
-//									final Iterable<Relationship> gatherss2 = sensor2.getRelationships(Direction.INCOMING,
-//											Neo4jConstants.relationshipTypeGathers);
-//									for (final Relationship gathers2 : gatherss2) {
-//										final Node route2 = gathers2.getStartNode();
-//										if (!route2.hasLabel(Neo4jConstants.labelRoute)) {
-//											continue;
-//										}
-//
-//										// route1 != route2 --> if (route1 == route2), break
-//										if (route1.getId() == route2.getId()) {
-//											break;
-//										}
-//
-//										// (route2)-[:entry]-(semaphore) NAC
-//										final Iterable<Relationship> entries2 = route2.getRelationships(Direction.OUTGOING,
-//												Neo4jConstants.relationshipTypeEntry);
-//										final Iterator<Relationship> entriesIterator2 = entries2.iterator();
-//										if (!entriesIterator2.hasNext() || !entriesIterator2.next().getEndNode().equals(semaphore)) {
-//											final Map<String, Object> match = new HashMap<>();
-//											match.put(VAR_SEMAPHORE, semaphore);
-//											match.put(VAR_ROUTE1, route1);
-//											match.put(VAR_ROUTE2, route2);
-//											match.put(VAR_SENSOR1, sensor1);
-//											match.put(VAR_SENSOR2, sensor2);
-//											match.put(VAR_TE1, te1);
-//											match.put(VAR_TE2, te2);
-//											matches.add(new Neo4jSemaphoreNeighborMatch(match));
-//											break;
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
+		for (final Vertex route1 : route1s) {
+			// (route1:Route)-[:exit]->(semaphore:Semaphore)
+
+			final Iterable<Vertex> semaphores = () -> route1.vertices(Direction.OUT, ModelConstants.EXIT);
+			for (final Vertex semaphore : semaphores) {
+				if (!semaphore.label().equals(ModelConstants.SEMAPHORE)) {
+					continue;
+				}
+				
+				// (route1:Route)-[:definedBy]->(sensor1:Sensor)
+				final Iterable<Vertex> sensor1s = () -> route1.vertices(Direction.OUT, ModelConstants.GATHERS);
+				for (final Vertex sensor1 : sensor1s) {
+					// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
+					final Iterable<Vertex> te1s = () -> sensor1.vertices(Direction.IN, ModelConstants.MONITORED_BY);
+					for (final Vertex te1 : te1s) {
+						if (!(te1.label().equals(ModelConstants.SEGMENT) || !te1.label().equals(ModelConstants.SWITCH))) {
+							continue;
+						}
+					
+						// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
+						final Iterable<Vertex> te2s = () -> te1.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
+						for (final Vertex te2 : te2s) {							
+							if (!(te2.label().equals(ModelConstants.SEGMENT) || !te2.label().equals(ModelConstants.SWITCH))) {
+								continue;
+							}
+
+							// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
+							final Iterable<Vertex> sensor2s = () -> te2.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
+							for (final Vertex sensor2 : sensor2s) {
+								if (!sensor2.label().equals(ModelConstants.SENSOR)) {
+									continue;
+								}
+
+								// (sensor2:Sensor)<-[:gathers]-(route2:Route),
+								final Iterable<Vertex> route2s = () -> sensor2.vertices(Direction.IN, ModelConstants.GATHERS);
+								for (final Vertex route2 : route2s) {
+									if (!route2.label().equals(ModelConstants.ROUTE)) {
+										continue;
+									}
+
+									// route1 != route2 --> if (route1 == route2), break
+									if (route1.id() == route2.id()) {
+										break;
+									}
+
+									// (route2)-[:entry]->(semaphore) NAC
+									if (!TinkerGraphUtil.isConnected(route2, semaphore, ModelConstants.ENTRY)) {
+										final Map<String, Object> match = new HashMap<>();
+										match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
+										match.put(QueryConstants.VAR_ROUTE1, route1);
+										match.put(QueryConstants.VAR_ROUTE2, route2);
+										match.put(QueryConstants.VAR_SENSOR1, sensor1);
+										match.put(QueryConstants.VAR_SENSOR2, sensor2);
+										match.put(QueryConstants.VAR_TE1, te1);
+										match.put(QueryConstants.VAR_TE2, te2);
+										matches.add(new TinkerGraphSemaphoreNeighborMatch(match));
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
 		return matches;
 	}
