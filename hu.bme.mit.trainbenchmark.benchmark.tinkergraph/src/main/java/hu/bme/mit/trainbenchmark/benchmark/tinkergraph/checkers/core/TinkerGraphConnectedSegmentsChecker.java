@@ -23,6 +23,7 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
@@ -49,7 +50,7 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 				// (segment2:Segment)-[:sensor]->(sensor:Sensor)
 				final Iterable<Vertex> segment2s = () -> segment1.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
 				for (final Vertex segment2 : segment2s) {
-					if (!segment2.label().equals(ModelConstants.SEGMENT) || !isConnected(segment2, sensor, ModelConstants.MONITORED_BY)) {
+					if (!segment2.label().equals(ModelConstants.SEGMENT) || !TinkerGraphUtil.isConnected(segment2, sensor, ModelConstants.MONITORED_BY)) {
 						continue;
 					}
 
@@ -58,7 +59,7 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 					final Iterable<Vertex> segment3s = () -> segment2.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
 					for (final Vertex segment3 : segment3s) {
 						if (!segment3.label().equals(ModelConstants.SEGMENT)
-								|| !isConnected(segment3, sensor, ModelConstants.MONITORED_BY)) {
+								|| !TinkerGraphUtil.isConnected(segment3, sensor, ModelConstants.MONITORED_BY)) {
 							continue;
 						}
 
@@ -67,7 +68,7 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 						final Iterable<Vertex> segment4s = () -> segment3.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
 						for (final Vertex segment4 : segment4s) {
 							if (!segment4.label().equals(ModelConstants.SEGMENT)
-									|| !isConnected(segment4, sensor, ModelConstants.MONITORED_BY)) {
+									|| !TinkerGraphUtil.isConnected(segment4, sensor, ModelConstants.MONITORED_BY)) {
 								continue;
 							}
 
@@ -76,7 +77,7 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 							final Iterable<Vertex> segment5s = () -> segment4.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
 							for (final Vertex segment5 : segment5s) {
 								if (!segment5.label().equals(ModelConstants.SEGMENT)
-										|| !isConnected(segment5, sensor, ModelConstants.MONITORED_BY)) {
+										|| !TinkerGraphUtil.isConnected(segment5, sensor, ModelConstants.MONITORED_BY)) {
 									continue;
 								}
 
@@ -85,7 +86,7 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 								final Iterable<Vertex> segment6s = () -> segment5.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
 								for (final Vertex segment6 : segment6s) {
 									if (!segment6.label().equals(ModelConstants.SEGMENT)
-											|| !isConnected(segment6, sensor, ModelConstants.MONITORED_BY)) {
+											|| !TinkerGraphUtil.isConnected(segment6, sensor, ModelConstants.MONITORED_BY)) {
 										continue;
 									}
 
@@ -109,16 +110,6 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 
 		return matches;
 
-	}
-
-	private boolean isConnected(final Vertex source, final Vertex target, final String type) {
-		final Iterable<Vertex> vertices = () -> source.vertices(Direction.OUT, type);
-		for (final Vertex vertex : vertices) {
-			if (vertex.equals(target)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }

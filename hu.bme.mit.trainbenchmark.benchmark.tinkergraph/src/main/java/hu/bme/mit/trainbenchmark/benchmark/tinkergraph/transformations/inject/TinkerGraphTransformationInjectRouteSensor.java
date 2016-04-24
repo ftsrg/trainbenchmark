@@ -29,9 +29,9 @@ public class TinkerGraphTransformationInjectRouteSensor extends TinkerGraphTrans
 	@Override
 	public void performRHS(final Collection<Vertex> routes) {
 		for (final Vertex route : routes) {
-			final Iterable<Edge> definedBys = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
-			for (final Edge definedBy : definedBys) {
-				definedBy.remove();
+			final Iterable<Edge> gatherss = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
+			for (final Edge gathers : gatherss) {
+				gathers.remove();
 			}
 		}
 	}

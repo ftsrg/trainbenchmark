@@ -51,9 +51,6 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 			final ResourceIterator<Node> routes1 = graphDb.findNodes(Neo4jConstants.labelRoute);
 			while (routes1.hasNext()) {
 				final Node route1 = routes1.next();
-				if (matches.contains(route1)) {
-					continue;
-				}
 
 				// (route1:Route)-[:exit]->(semaphore:Semaphore)
 				final Iterable<Relationship> exits = route1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeExit);
@@ -63,9 +60,8 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 						continue;
 					}
 
-					// (route1:Route)-[:definedBy]->(sensor1:Sensor)
-					final Iterable<Relationship> gatherss1 = route1.getRelationships(Direction.OUTGOING,
-							Neo4jConstants.relationshipTypeGathers);
+					// (route1:Route)-[:gathers]->(sensor1:Sensor)
+					final Iterable<Relationship> gatherss1 = route1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeGathers);
 					for (final Relationship gathers1 : gatherss1) {
 						final Node sensor1 = gathers1.getEndNode();
 
