@@ -1,0 +1,6 @@
+{"id":0,"label":"Region","outE":{"elements":[{"id":2,"inV":1},{"id":10,"inV":8}]}}
+{"id":1,"label":"Segment","inE":{"elements":[{"id":2,"outV":0}]},"outE":{"semaphores":[{"id":5,"inV":3}]}}
+{"id":3,"label":"Semaphore","inE":{"entry":[{"id":7,"outV":6}],"semaphores":[{"id":5,"outV":1}]},"properties":{"signal":[{"id":4,"value":"GO"}]}}
+{"id":6,"label":"Route","outE":{"entry":[{"id":7,"inV":3}],"follows":[{"id":14,"inV":11}]}}
+{"id":8,"label":"Switch","inE":{"elements":[{"id":10,"outV":0}],"target":[{"id":13,"outV":11}]},"properties":{"currentPosition":[{"id":9,"value":"DIVERGING"}]}}
+{"id":11,"label":"SwitchPosition","inE":{"follows":[{"id":14,"outV":6}]},"outE":{"target":[{"id":13,"inV":8}]},"properties":{"position":[{"id":12,"value":"STRAIGHT"}]}}

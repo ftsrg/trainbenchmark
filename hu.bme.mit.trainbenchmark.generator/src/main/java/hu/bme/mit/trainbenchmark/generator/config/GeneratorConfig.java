@@ -18,8 +18,17 @@ import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
 
 public class GeneratorConfig extends TrainBenchmarkConfig {
 
+	protected static final String GRAPH_FORMAT = "graphFormat";
+
+	protected GraphFormat graphFormat;
+
 	public GeneratorConfig(final String[] args) throws ParseException {
 		super(args);
 	}
 
+	@Override
+	protected void initOptions() {
+		super.initOptions();
+	}
+	
 }

@@ -1,0 +1,5 @@
+{"id":0,"label":"Region","outE":{"sensors":[{"id":4,"inV":2}],"elements":[{"id":5,"inV":3}]}}
+{"id":1,"label":"Route","outE":{"follows":[{"id":8,"inV":6}]}}
+{"id":2,"label":"Sensor","inE":{"sensors":[{"id":4,"outV":0}],"monitoredBy":[{"id":9,"outV":3}]}}
+{"id":3,"label":"Switch","inE":{"elements":[{"id":5,"outV":0}],"target":[{"id":7,"outV":6}]},"outE":{"monitoredBy":[{"id":9,"inV":2}]}}
+{"id":6,"label":"SwitchPosition","inE":{"follows":[{"id":8,"outV":1}]},"outE":{"target":[{"id":7,"inV":3}]}}

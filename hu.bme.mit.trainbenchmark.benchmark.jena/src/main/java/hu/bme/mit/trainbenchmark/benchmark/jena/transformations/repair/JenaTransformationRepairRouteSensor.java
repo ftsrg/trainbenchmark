@@ -34,12 +34,12 @@ public class JenaTransformationRepairRouteSensor extends JenaTransformationRepai
 	public void performRHS(final Collection<JenaRouteSensorMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 
-		final Property definedBy = model.getProperty(BASE_PREFIX + GATHERS);
+		final Property gathers = model.getProperty(BASE_PREFIX + GATHERS);
 		for (final JenaRouteSensorMatch match : matches) {
 			final Resource route = match.getRoute();
 			final Resource sensor = match.getSensor();
 
-			model.add(model.createStatement(route, definedBy, sensor));
+			model.add(model.createStatement(route, gathers, sensor));
 		}
 	}
 

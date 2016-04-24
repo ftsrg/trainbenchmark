@@ -39,27 +39,18 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.sesame</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sqlite</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.tinkergraph</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.emf.model</module>
 				<module>hu.bme.mit.trainbenchmark.generator</module>
 				<module>hu.bme.mit.trainbenchmark.generator.emf</module>
-				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
+				<module>hu.bme.mit.trainbenchmark.generator.graph.neo4j</module>
+				<module>hu.bme.mit.trainbenchmark.generator.graph.tinkerpop</module>
+				<module>hu.bme.mit.trainbenchmark.generator.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.generator.sql</module>
-				<module>hu.bme.mit.trainbenchmark.graph</module>
 				<module>hu.bme.mit.trainbenchmark.rdf</module>
 				<module>hu.bme.mit.trainbenchmark.sql</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>notest</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<modules>
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.orientdb</module> -->
-				<!-- <module>hu.bme.mit.trainbenchmark.benchmark.virtuoso</module> -->
 			</modules>
 		</profile>
 
@@ -77,10 +68,16 @@
 		<!-- formats -->
 
 		<profile>
-			<id>graph</id>
+			<id>graph.neo4j</id>
 			<modules>
-				<module>hu.bme.mit.trainbenchmark.generator.graph</module>
-				<module>hu.bme.mit.trainbenchmark.graph</module>
+				<module>hu.bme.mit.trainbenchmark.generator.graph.neo4j</module>
+			</modules>
+		</profile>
+
+    <profile>
+			<id>graph.tinkerpop</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.generator.graph.tinkerpop</module>
 			</modules>
 		</profile>
 
@@ -112,7 +109,6 @@
 		</profile>
 
 		<!-- tools -->
-		<!-- there should be a specific build profile for each tool -->
 
 		<profile>
 			<id>blazegraph</id>
@@ -197,7 +193,6 @@
 			<id>neo4j</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
-				<module>hu.bme.mit.trainbenchmark.graph</module>
 			</modules>
 		</profile>
 
@@ -226,6 +221,13 @@
 			<id>sqlite</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sqlite</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>tinkergraph</id>
+			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.tinkergraph</module>
 			</modules>
 		</profile>
 
