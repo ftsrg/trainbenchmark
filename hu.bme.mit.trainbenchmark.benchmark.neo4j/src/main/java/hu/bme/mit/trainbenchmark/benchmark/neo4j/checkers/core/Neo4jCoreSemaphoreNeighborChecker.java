@@ -27,8 +27,6 @@ import java.util.Map;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
@@ -47,60 +45,30 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 		final Collection<Neo4jSemaphoreNeighborMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
-		try (Transaction tx = graphDb.beginTx()) {
-			final ResourceIterator<Node> routes1 = graphDb.findNodes(Neo4jConstants.labelRoute);
-			while (routes1.hasNext()) {
-				final Node route1 = routes1.next();
-
+		try (final Transaction tx = graphDb.beginTx()) {
+			final Iterable<Node> route1s = () -> graphDb.findNodes(Neo4jConstants.labelRoute);
+			for (final Node route1 : route1s) {
 				// (route1:Route)-[:exit]->(semaphore:Semaphore)
-				final Iterable<Relationship> exits = route1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeExit);
-				for (final Relationship exit : exits) {
-					final Node semaphore = exit.getEndNode();
-					if (!semaphore.hasLabel(Neo4jConstants.labelSemaphore)) {
-						continue;
-					}
+				final Iterable<Node> semaphores = Neo4jUtil.getAdjacentNodes(route1, Neo4jConstants.relationshipTypeExit,
+						Direction.OUTGOING, Neo4jConstants.labelSemaphore);
+				for (final Node semaphore : semaphores) {
 
 					// (route1:Route)-[:gathers]->(sensor1:Sensor)
-					final Iterable<Relationship> gatherss1 = route1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeGathers);
-					for (final Relationship gathers1 : gatherss1) {
-						final Node sensor1 = gathers1.getEndNode();
-
+					final Iterable<Node> sensor1s = Neo4jUtil.getAdjacentNodes(route1, Neo4jConstants.relationshipTypeGathers,
+							Direction.OUTGOING, Neo4jConstants.labelSensor);
+					for (final Node sensor1 : sensor1s) {
 						// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
-						final Iterable<Relationship> relationshipMonitoredBy1 = sensor1.getRelationships(Direction.INCOMING,
-								Neo4jConstants.relationshipTypeMonitoredBy);
-						for (final Relationship relationshipSensor : relationshipMonitoredBy1) {
-							final Node te1 = relationshipSensor.getStartNode();
-							if (!te1.hasLabel(Neo4jConstants.labelTrackElement)) {
-								continue;
-							}
-
+						final Iterable<Node> te1s = Neo4jUtil.getAdjacentNodes(sensor1, Neo4jConstants.relationshipTypeMonitoredBy, Direction.INCOMING, Neo4jConstants.labelTrackElement);					
+						for (final Node te1 : te1s) {
 							// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
-							final Iterable<Relationship> connectsTos = te1.getRelationships(Direction.OUTGOING,
-									Neo4jConstants.relationshipTypeConnectsTo);
-							for (final Relationship connectsTo : connectsTos) {
-								final Node te2 = connectsTo.getEndNode();
-								if (!te2.hasLabel(Neo4jConstants.labelTrackElement)) {
-									continue;
-								}
-
+							final Iterable<Node> te2s = Neo4jUtil.getAdjacentNodes(te1, Neo4jConstants.relationshipTypeConnectsTo, Direction.OUTGOING, Neo4jConstants.labelTrackElement);
+							for (final Node te2 : te2s) {							
 								// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
-								final Iterable<Relationship> relationshipMonitoredBy2 = te2.getRelationships(Direction.OUTGOING,
-										Neo4jConstants.relationshipTypeMonitoredBy);
-								for (final Relationship relationshipSensor2 : relationshipMonitoredBy2) {
-									final Node sensor2 = relationshipSensor2.getEndNode();
-									if (!sensor2.hasLabel(Neo4jConstants.labelSensor)) {
-										continue;
-									}
-
-									// (sensor2:Sensor)<-[:gathers]-(route2:Route),
-									final Iterable<Relationship> gatherss2 = sensor2.getRelationships(Direction.INCOMING,
-											Neo4jConstants.relationshipTypeGathers);
-									for (final Relationship gathers2 : gatherss2) {
-										final Node route2 = gathers2.getStartNode();
-										if (!route2.hasLabel(Neo4jConstants.labelRoute)) {
-											continue;
-										}
-
+								final Iterable<Node> sensor2s = Neo4jUtil.getAdjacentNodes(te2, Neo4jConstants.relationshipTypeMonitoredBy, Direction.OUTGOING, Neo4jConstants.labelSensor);								
+								for (final Node sensor2 : sensor2s) {
+									// (sensor2:Sensor)<-[:gathers]-(route2:Route),								
+									final Iterable<Node> route2s = Neo4jUtil.getAdjacentNodes(sensor2, Neo4jConstants.relationshipTypeGathers, Direction.INCOMING, Neo4jConstants.labelRoute);
+									for (final Node route2 : route2s) {
 										// route1 != route2 --> if (route1 == route2), continue
 										if (route1.equals(route2)) {
 											continue;

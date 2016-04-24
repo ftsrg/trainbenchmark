@@ -77,6 +77,7 @@ public class TinkerGraphSwitchSetChecker extends TinkerGraphChecker<TinkerGraphS
 							match.put(QueryConstants.VAR_CURRENTPOSITION, currentPosition);
 							match.put(QueryConstants.VAR_POSITION, position);
 							matches.add(new TinkerGraphSwitchSetMatch(match));
+							break;
 						}
 					}
 				}

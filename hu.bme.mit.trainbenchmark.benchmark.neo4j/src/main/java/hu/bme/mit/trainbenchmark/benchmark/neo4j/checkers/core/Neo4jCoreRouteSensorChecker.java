@@ -25,8 +25,6 @@ import java.util.Map;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
@@ -45,39 +43,18 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 		final Collection<Neo4jRouteSensorMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
-		try (Transaction tx = graphDb.beginTx()) {
-			// (route:Route)-[:follows]->()
-			final ResourceIterator<Node> routes = graphDb.findNodes(Neo4jConstants.labelRoute);
-			while (routes.hasNext()) {
-				final Node route = routes.next();
-				final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeFollows);
-
-				for (final Relationship follows : followss) {
-					final Node swP = follows.getEndNode();
-
-					// (swP:switchPosition)-[:target]->()
-					if (!swP.hasLabel(Neo4jConstants.labelSwitchPosition)) {
-						continue;
-					}
-					final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING,
-							Neo4jConstants.relationshipTypeTarget);
-					for (final Relationship relationshipSwitch : relationshipSwitches) {
-						final Node sw = relationshipSwitch.getEndNode();
-
-						// (switch:Switch)-[:sensor]->()
-						if (!sw.hasLabel(Neo4jConstants.labelSwitch)) {
-							continue;
-						}
-						final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING,
-								Neo4jConstants.relationshipTypeMonitoredBy);
-						for (final Relationship relationshipSensor : relationshipSensors) {
-							final Node sensor = relationshipSensor.getEndNode();
-
-							// (sensor:Sensor)
-							if (!sensor.hasLabel(Neo4jConstants.labelSensor)) {
-								continue;
-							}
-
+		try (final Transaction tx = graphDb.beginTx()) {
+			final Iterable<Node> routes = () -> graphDb.findNodes(Neo4jConstants.labelRoute);
+			for (final Node route : routes) {
+				// (route:Route)-[:follows]->(swp:switchPosition)
+				final Iterable<Node> swPs = Neo4jUtil.getAdjacentNodes(route, Neo4jConstants.relationshipTypeFollows, Direction.OUTGOING, Neo4jConstants.labelSwitchPosition);
+				for (final Node swP : swPs) {								
+					// (swP:switchPosition)-[:target]->(sw:Switch)
+					final Iterable<Node> sws = Neo4jUtil.getAdjacentNodes(swP, Neo4jConstants.relationshipTypeTarget, Direction.OUTGOING, Neo4jConstants.labelSwitch);
+					for (final Node sw : sws) {						
+						// (sw:Switch)-[:sensor]->(sensor:Sensor)
+						final Iterable<Node> sensors = Neo4jUtil.getAdjacentNodes(sw, Neo4jConstants.relationshipTypeMonitoredBy, Direction.OUTGOING, Neo4jConstants.labelSensor);
+						for (final Node sensor : sensors) {
 							// (sensor:Sensor)<-[:gathers]-(route:Route) NAC
 							if (!Neo4jUtil.isConnected(route, sensor, Neo4jConstants.relationshipTypeGathers)) {
 								final Map<String, Object> match = new HashMap<>();
@@ -85,8 +62,7 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 								match.put(VAR_SENSOR, sensor);
 								match.put(VAR_SWP, swP);
 								match.put(VAR_SW, sw);
-								final Neo4jRouteSensorMatch rsm = new Neo4jRouteSensorMatch(match);
-								matches.add(rsm);
+								matches.add(new Neo4jRouteSensorMatch(match));
 							}
 						}
 					}

@@ -18,7 +18,6 @@ import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSwitchPosition;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeEntry;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeFollows;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeTarget;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 
 import java.util.ArrayList;
@@ -29,12 +28,12 @@ import java.util.Map;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.Signal;
@@ -52,60 +51,41 @@ public class Neo4jCoreSwitchSetChecker extends Neo4jCoreChecker<Neo4jSwitchSetMa
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (route:Route)
-			final ResourceIterator<Node> routes = graphDb.findNodes(labelRoute);
-			while (routes.hasNext()) {
-				final Node route = routes.next();
-
+			final Iterable<Node> routes = () -> graphDb.findNodes(labelRoute);
+			for (final Node route : routes) {
 				// (route:Route)-[:entry]->(semaphore:Semaphore)
-				final Iterable<Relationship> entries = route.getRelationships(Direction.OUTGOING,
-						relationshipTypeEntry);
-				
-				for (final Relationship entry : entries) {
-					final Node semaphore = entry.getEndNode();
-					if (!semaphore.hasLabel(labelSemaphore)) {
-						continue;
-					}
+				final Iterable<Node> semaphores = Neo4jUtil.getAdjacentNodes(route, relationshipTypeEntry, Direction.OUTGOING,
+						labelSemaphore);
+				for (final Node semaphore : semaphores) {
 
 					// semaphore.signal = "GO"
 					final Object signal = semaphore.getProperty(SIGNAL);
 					if (!Signal.GO.toString().equals(signal)) {
 						continue;
 					}
-				
+
 					// (route:Route)-[:follows]->(swP:SwitchPosition)
-					final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING,
-							relationshipTypeFollows);
-					for (final Relationship follows : followss) {
-						final Node swP = follows.getEndNode();
-						if (!swP.hasLabel(labelSwitchPosition)) {
-							continue;
-						}
-
+					final Iterable<Node> swPs = Neo4jUtil.getAdjacentNodes(route, relationshipTypeFollows, Direction.OUTGOING,
+							labelSwitchPosition);
+					for (final Node swP : swPs) {
 						// (swP:SwitchPosition)-[:target]->(sw:Switch)
-						final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING,
-								relationshipTypeTarget);
+						final Iterable<Node> sws = Neo4jUtil.getAdjacentNodes(swP, Neo4jConstants.relationshipTypeTarget,
+								Direction.OUTGOING, labelSwitch);
 
-						if (!relationshipSwitches.iterator().hasNext()) {
-							continue;
-						}
+						for (final Node sw : sws) {
+							final Object currentPosition = sw.getProperty(ModelConstants.CURRENTPOSITION);
+							final Object position = swP.getProperty(ModelConstants.POSITION);
 
-						final Node sw = relationshipSwitches.iterator().next().getEndNode();
-						if (!sw.hasLabel(labelSwitch)) {
-							continue;
-						}
-
-						final Object currentPosition = sw.getProperty(ModelConstants.CURRENTPOSITION);
-						final Object position = swP.getProperty(ModelConstants.POSITION);
-
-						if (!currentPosition.equals(position)) {
-							final Map<String, Object> match = new HashMap<>();
-							match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
-							match.put(QueryConstants.VAR_ROUTE, route);
-							match.put(QueryConstants.VAR_SWP, swP);
-							match.put(QueryConstants.VAR_SW, sw);
-							match.put(QueryConstants.VAR_CURRENTPOSITION, currentPosition);
-							match.put(QueryConstants.VAR_POSITION, position);
-							matches.add(new Neo4jSwitchSetMatch(match));
+							if (!currentPosition.equals(position)) {
+								final Map<String, Object> match = new HashMap<>();
+								match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
+								match.put(QueryConstants.VAR_ROUTE, route);
+								match.put(QueryConstants.VAR_SWP, swP);
+								match.put(QueryConstants.VAR_SW, sw);
+								match.put(QueryConstants.VAR_CURRENTPOSITION, currentPosition);
+								match.put(QueryConstants.VAR_POSITION, position);
+								matches.add(new Neo4jSwitchSetMatch(match));
+							}
 						}
 					}
 				}

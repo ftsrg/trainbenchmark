@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
@@ -43,9 +42,8 @@ public class Neo4jCorePosLengthChecker extends Neo4jCoreChecker<Neo4jPosLengthMa
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (segment:Segment)
-			final ResourceIterator<Node> segments = graphDb.findNodes(labelSegment);
-			while (segments.hasNext()) {
-				final Node segment = segments.next();
+			final Iterable<Node> segments = () -> graphDb.findNodes(labelSegment);
+			for (final Node segment : segments) {
 				final Integer length = (Integer) segment.getProperty(LENGTH);
 				
 				// segment.length <= 0
