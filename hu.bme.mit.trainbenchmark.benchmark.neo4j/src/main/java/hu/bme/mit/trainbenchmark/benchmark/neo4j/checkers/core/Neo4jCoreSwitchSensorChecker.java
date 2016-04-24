@@ -26,7 +26,6 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
@@ -44,11 +43,9 @@ public class Neo4jCoreSwitchSensorChecker extends Neo4jCoreChecker<Neo4jSwitchSe
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			final ResourceIterator<Node> switches = graphDb.findNodes(labelSwitch);
-			while (switches.hasNext()) {
-				// (sw:Switch)
-				final Node sw = switches.next();
-				
+			final Iterable<Node> sws = () -> graphDb.findNodes(labelSwitch);
+			// (sw:Switch)
+			for (final Node sw : sws) {
 				// (sw)-[:sensor]->(Sensor) NAC
 				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeMonitoredBy);
 

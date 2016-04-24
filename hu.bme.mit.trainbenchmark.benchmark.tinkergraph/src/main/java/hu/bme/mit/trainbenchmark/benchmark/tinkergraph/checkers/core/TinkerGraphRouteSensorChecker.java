@@ -38,18 +38,17 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 		final Collection<TinkerGraphRouteSensorMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> routes = driver.collectVertices(ModelConstants.ROUTE);
-
 		for (final Vertex route : routes) {
-			// (route:Route)-[:follows]->()
+			// (route:Route)-[:follows]->(swP:switchPosition)
 			final Iterable<Vertex> swPs = TinkerGraphUtil.getAdjacentNodes(route, ModelConstants.FOLLOWS, Direction.OUT, ModelConstants.SWITCHPOSITION);
 			for (final Vertex swP : swPs) {
-				// (swP:switchPosition)-[:target]->()
+				// (swP:switchPosition)-[:target]->(sw:Switch)
 				final Iterable<Vertex> sws = TinkerGraphUtil.getAdjacentNodes(swP, ModelConstants.TARGET, Direction.OUT, ModelConstants.SWITCH);
 				for (final Vertex sw : sws) {
-					// (switch:Switch)-[:sensor]->()
+					// (sw:Switch)-[:sensor]->(sensor:Sensor)
 					final Iterable<Vertex> sensors = TinkerGraphUtil.getAdjacentNodes(sw, ModelConstants.MONITORED_BY, Direction.OUT, ModelConstants.SENSOR);
 					for (final Vertex sensor : sensors) {
-						// (sensor:Sensor)<-[:gathers]-(Route) NAC
+						// (sensor:Sensor)<-[:gathers]-(route:Route) NAC
 						if (!TinkerGraphUtil.isConnected(route, sensor, ModelConstants.GATHERS)) {
 							final Map<String, Object> match = new HashMap<>();
 							match.put(QueryConstants.VAR_ROUTE, route);
