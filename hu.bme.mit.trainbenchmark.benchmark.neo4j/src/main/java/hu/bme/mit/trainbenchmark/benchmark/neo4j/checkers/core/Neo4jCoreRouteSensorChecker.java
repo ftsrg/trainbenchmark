@@ -55,7 +55,7 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 				for (final Relationship follows : followss) {
 					final Node swP = follows.getEndNode();
 
-					// (swP:switchPosition)-[:switch]->()
+					// (swP:switchPosition)-[:target]->()
 					if (!swP.hasLabel(Neo4jConstants.labelSwitchPosition)) {
 						continue;
 					}
@@ -78,7 +78,7 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 								continue;
 							}
 
-							// (sensor:Sensor)<-[:gathers]-(route:Route) NAC							
+							// (sensor:Sensor)<-[:gathers]-(route:Route) NAC
 							if (!Neo4jUtil.isConnected(route, sensor, Neo4jConstants.relationshipTypeGathers)) {
 								final Map<String, Object> match = new HashMap<>();
 								match.put(VAR_ROUTE, route);

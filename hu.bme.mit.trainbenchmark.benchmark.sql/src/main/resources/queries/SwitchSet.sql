@@ -13,7 +13,7 @@ FROM Route
 INNER JOIN SwitchPosition
 ON Route.id = SwitchPosition.route -- the "SwitchPosition.route" attribute is the inverse of the "Route.follows" edge
 
--- (swP)-[:switch]->(sw)
+-- (swP)-[:target]->(sw)
 INNER JOIN Switch
 ON SwitchPosition.target = Switch.id
 

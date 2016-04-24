@@ -40,47 +40,31 @@ public class TinkerGraphSemaphoreNeighborChecker extends TinkerGraphChecker<Tink
 
 		for (final Vertex route1 : route1s) {
 			// (route1:Route)-[:exit]->(semaphore:Semaphore)
-
-			final Iterable<Vertex> semaphores = () -> route1.vertices(Direction.OUT, ModelConstants.EXIT);
+			final Iterable<Vertex> semaphores = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.EXIT, Direction.OUT,
+					ModelConstants.SEMAPHORE);
 			for (final Vertex semaphore : semaphores) {
-				if (!semaphore.label().equals(ModelConstants.SEMAPHORE)) {
-					continue;
-				}
-				
-				// (route1:Route)-[:definedBy]->(sensor1:Sensor)
-				final Iterable<Vertex> sensor1s = () -> route1.vertices(Direction.OUT, ModelConstants.GATHERS);
+				// (route1:Route)-[:gathers]->(sensor1:Sensor)
+				final Iterable<Vertex> sensor1s = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.GATHERS, Direction.OUT,
+						ModelConstants.SENSOR);
+
 				for (final Vertex sensor1 : sensor1s) {
 					// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
-					final Iterable<Vertex> te1s = () -> sensor1.vertices(Direction.IN, ModelConstants.MONITORED_BY);
+					final Iterable<Vertex> te1s = TinkerGraphUtil.getAdjacentNodes(sensor1, ModelConstants.MONITORED_BY, Direction.IN,
+							new String[] { ModelConstants.SEGMENT, ModelConstants.SWITCH });
 					for (final Vertex te1 : te1s) {
-						if (!(te1.label().equals(ModelConstants.SEGMENT) || !te1.label().equals(ModelConstants.SWITCH))) {
-							continue;
-						}
-					
 						// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
-						final Iterable<Vertex> te2s = () -> te1.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
-						for (final Vertex te2 : te2s) {							
-							if (!(te2.label().equals(ModelConstants.SEGMENT) || !te2.label().equals(ModelConstants.SWITCH))) {
-								continue;
-							}
-
+						final Iterable<Vertex> te2s = TinkerGraphUtil.getAdjacentNodes(te1, ModelConstants.CONNECTS_TO, Direction.OUT,
+								new String[] { ModelConstants.SEGMENT, ModelConstants.SWITCH });
+						for (final Vertex te2 : te2s) {
 							// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
-							final Iterable<Vertex> sensor2s = () -> te2.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
+							final Iterable<Vertex> sensor2s = TinkerGraphUtil.getAdjacentNodes(te2, ModelConstants.MONITORED_BY, Direction.OUT, ModelConstants.SENSOR);
 							for (final Vertex sensor2 : sensor2s) {
-								if (!sensor2.label().equals(ModelConstants.SENSOR)) {
-									continue;
-								}
-
 								// (sensor2:Sensor)<-[:gathers]-(route2:Route),
-								final Iterable<Vertex> route2s = () -> sensor2.vertices(Direction.IN, ModelConstants.GATHERS);
+								final Iterable<Vertex> route2s = TinkerGraphUtil.getAdjacentNodes(sensor2, ModelConstants.GATHERS, Direction.IN, ModelConstants.ROUTE);
 								for (final Vertex route2 : route2s) {
-									if (!route2.label().equals(ModelConstants.ROUTE)) {
+									// route1 != route2 --> if (route1 == route2), continue
+									if (route1.equals(route2)) {
 										continue;
-									}
-
-									// route1 != route2 --> if (route1 == route2), break
-									if (route1.id() == route2.id()) {
-										break;
 									}
 
 									// (route2)-[:entry]->(semaphore) NAC
