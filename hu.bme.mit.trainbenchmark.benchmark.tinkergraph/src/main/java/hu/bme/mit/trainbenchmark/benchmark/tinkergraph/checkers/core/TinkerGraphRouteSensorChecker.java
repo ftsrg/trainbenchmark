@@ -12,16 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
-import static hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver.TYPE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerHelper;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
@@ -38,7 +32,7 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 		final Collection<TinkerGraphRouteSensorMatch> matches = new ArrayList<>();
 
 		final TinkerGraph graph = driver.getGraph();		
-		final List<? extends Vertex> routes = TinkerHelper.queryVertexIndex(graph, TYPE, ROUTE);
+//		final List<? extends Vertex> routes = TinkerHelper.queryVertexIndex(graph, TYPE, ROUTE);
 
 		
 //		final GraphDatabaseService graphDb = driver.getGraphDb();

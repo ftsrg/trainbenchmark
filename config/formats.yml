@@ -9,9 +9,10 @@ hawk: emf
 iqdcore: rdf
 jena: rdf
 mysql: sql
-neo4j: graph
-orientdb: graph
+neo4j: graph.neo4j
+orientdb: graph.tinkerpop
 postgresql: sql
 sesame: rdf
 sqlite: sql
+tinkergraph: graph.tinkerpop
 virtuoso: rdf

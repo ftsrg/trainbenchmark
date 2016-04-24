@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph;
+package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop;
 
 import java.io.IOException;
 import java.util.Map;
@@ -24,18 +24,15 @@ import org.apache.tinkerpop.gremlin.structure.io.IoCore;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GraphFormat;
-import hu.bme.mit.trainbenchmark.generator.graph.config.GraphGeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerPopGraphGeneratorConfig;
 
-public class TinkerGraphSerializer extends ModelSerializer<GeneratorConfig> {
+public class TinkerPopGraphSerializer extends ModelSerializer<TinkerPopGraphGeneratorConfig> {
 
-	public static final String TYPE = "type";
-
-	protected GraphGeneratorConfig graphGeneratorConfig;
+	protected TinkerPopGraphGeneratorConfig graphGeneratorConfig;
 	protected TinkerGraph graph = TinkerGraph.open();
 
-	public TinkerGraphSerializer(final GeneratorConfig generatorConfig) {
+	public TinkerPopGraphSerializer(final TinkerPopGraphGeneratorConfig generatorConfig) {
 		super(generatorConfig);
 	}
 
@@ -51,15 +48,9 @@ public class TinkerGraphSerializer extends ModelSerializer<GeneratorConfig> {
 	@Override
 	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
-		final Vertex vertex = graph.addVertex(TYPE, type);
-
-		// TODO fix multiple hierarchies
-		// // this only works for inheritance hierarchies with
-		// if (ModelConstants.SUPERTYPES.containsKey(type)) {
-		// final String ancestor = ModelConstants.SUPERTYPES.get(type);
-		// vertex.addLabel(DynamicLabel.label(ancestor));
-		// }
-
+		// NOTE: multiple inheritance is not supported
+		final Vertex vertex = graph.addVertex(type);
+		
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String key = attribute.getKey();
 			Object value = attribute.getValue();

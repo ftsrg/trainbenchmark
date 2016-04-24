@@ -11,17 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
-import static hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver.TYPE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerHelper;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
@@ -37,8 +29,7 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 	public Collection<TinkerGraphConnectedSegmentsMatch> check() throws IOException {
 		final Collection<TinkerGraphConnectedSegmentsMatch> matches = new ArrayList<>();
 
-		final TinkerGraph graph = driver.getGraph();		
-		final List<? extends Vertex> sensors = TinkerHelper.queryVertexIndex(graph, TYPE, SENSOR);
+//		final List<? extends Vertex> sensors = TinkerHelper.queryVertexIndex(graph, TYPE, SENSOR);
 		
 //		final GraphDatabaseService graphDb = driver.getGraphDb();
 //		try (Transaction tx = graphDb.beginTx()) {

@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
-import static hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver.TYPE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
@@ -25,13 +24,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerHelper;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
@@ -49,20 +45,18 @@ public class TinkerGraphSwitchSetChecker extends TinkerGraphChecker<TinkerGraphS
 	@Override
 	public Collection<TinkerGraphSwitchSetMatch> check() {
 		final Collection<TinkerGraphSwitchSetMatch> matches = new ArrayList<>();
-
-		final TinkerGraph graph = driver.getGraph();		
-		final List<? extends Vertex> routes = TinkerHelper.queryVertexIndex(graph, TYPE, ROUTE);
 		
+		final Collection<Vertex> routes = driver.collectVertices(ROUTE);
 		// (route:Route)
 		for (final Vertex route : routes) {			
 			// (route:Route)-[:entry]->(semaphore:Semaphore)
 			final Iterable<Vertex> entryNodes = () -> route.vertices(Direction.OUT, ENTRY);
 			
 			for (final Vertex semaphore : entryNodes) {
-				if (!semaphore.property(TYPE).value().equals(SEMAPHORE)) {
+				if (!semaphore.label().equals(SEMAPHORE)) {
 					continue;
-				}
-
+				}				
+				
 				// semaphore.signal = "GO"
 				final Object signal = semaphore.property(SIGNAL).value();
 				if (!Signal.GO.toString().equals(signal)) {
@@ -72,7 +66,7 @@ public class TinkerGraphSwitchSetChecker extends TinkerGraphChecker<TinkerGraphS
 				// (route:Route)-[:follows]->(swP:SwitchPosition)
 				final Iterable<Vertex> swPs = () -> route.vertices(Direction.OUT, FOLLOWS);
 				for (final Vertex swP : swPs) {
-					if (!swP.property(TYPE).value().equals(SWITCHPOSITION)) {
+					if (!swP.label().equals(SWITCHPOSITION)) {
 						continue;
 					}
 
@@ -84,7 +78,7 @@ public class TinkerGraphSwitchSetChecker extends TinkerGraphChecker<TinkerGraphS
 					}
 
 					final Vertex sw = sws.next();
-					if (!sw.property(TYPE).value().equals(SWITCH)) {
+					if (!sw.label().equals(SWITCH)) {
 						continue;
 					}
 

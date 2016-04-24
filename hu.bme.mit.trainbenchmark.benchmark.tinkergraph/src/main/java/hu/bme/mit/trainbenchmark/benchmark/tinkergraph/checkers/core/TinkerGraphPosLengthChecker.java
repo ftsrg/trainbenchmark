@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
-import static hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver.TYPE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
@@ -21,12 +20,9 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerHelper;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
@@ -42,9 +38,8 @@ public class TinkerGraphPosLengthChecker extends TinkerGraphChecker<TinkerGraphP
 	public Collection<TinkerGraphPosLengthMatch> check() {
 		final Collection<TinkerGraphPosLengthMatch> matches = new ArrayList<>();
 
-		final TinkerGraph graph = driver.getGraph();		
-		final List<? extends Vertex> segments = TinkerHelper.queryVertexIndex(graph, TYPE, SEGMENT);
-
+		final Collection<Vertex> segments = driver.collectVertices(SEGMENT);
+		
 		// (segment:Segment)
 		for (final Vertex segment : segments) {
 			final Integer length = (Integer) segment.property(LENGTH).value();
