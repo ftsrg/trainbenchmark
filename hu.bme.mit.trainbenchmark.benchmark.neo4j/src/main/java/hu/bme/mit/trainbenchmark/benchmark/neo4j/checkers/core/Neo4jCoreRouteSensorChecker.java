@@ -93,7 +93,6 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 								routes2.add(route2);
 							}
 							
-							// TODO is there a :definedBy relationship from route to sensor
 							if (!routes2.contains(route)) {
 								final Map<String, Object> match = new HashMap<>();
 								match.put(VAR_ROUTE, route);

@@ -15,11 +15,12 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGraphRouteSensorMatch> {
 
@@ -31,13 +32,14 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 	public Collection<TinkerGraphRouteSensorMatch> check() {
 		final Collection<TinkerGraphRouteSensorMatch> matches = new ArrayList<>();
 
-		final TinkerGraph graph = driver.getGraph();		
-//		final List<? extends Vertex> routes = TinkerHelper.queryVertexIndex(graph, TYPE, ROUTE);
 
+		final Collection<Vertex> routes = driver.collectVertices(ModelConstants.ROUTE);
+
+		for (final Vertex route : routes) {
+			// (route:Route)-[:follows]->()
+		}
 		
-//		final GraphDatabaseService graphDb = driver.getGraphDb();
-//		try (Transaction tx = graphDb.beginTx()) {
-//			// (route:Route)-[:follows]->()
+
 //			final ResourceIterator<Node> routes = graphDb.findNodes(Neo4jConstants.labelRoute);
 //			while (routes.hasNext()) {
 //				final Node route = routes.next();
