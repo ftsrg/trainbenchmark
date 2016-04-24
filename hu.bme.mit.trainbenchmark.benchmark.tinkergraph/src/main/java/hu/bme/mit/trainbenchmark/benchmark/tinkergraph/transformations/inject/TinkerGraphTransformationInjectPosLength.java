@@ -9,19 +9,27 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 
-import java.util.Comparator;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+
+import java.util.Collection;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-public class VertexComparator implements Comparator<Vertex> {
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+
+public class TinkerGraphTransformationInjectPosLength extends TinkerGraphTransformationInject {
+
+	public TinkerGraphTransformationInjectPosLength(final TinkerGraphDriver driver) {
+		super(driver);
+	}
 
 	@Override
-	public int compare(final Vertex v1, final Vertex v2) {
-		final long id1 = (Integer) v1.id();
-		final long id2 = (Integer) v2.id();
-		return Long.compare(id1, id2);
+	public void performRHS(final Collection<Vertex> segments) {
+		for (final Vertex segment : segments) {
+			segment.property(LENGTH, 0);
+		}
 	}
 
 }
