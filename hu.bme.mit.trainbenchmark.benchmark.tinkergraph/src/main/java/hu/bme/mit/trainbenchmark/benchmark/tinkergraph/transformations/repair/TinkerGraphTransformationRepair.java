@@ -9,19 +9,16 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair;
 
-import java.util.Comparator;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-import org.apache.tinkerpop.gremlin.structure.Vertex;
+public abstract class TinkerGraphTransformationRepair<TMatch extends TinkerGraphMatch> extends TinkerGraphTransformation<TMatch> {
 
-public class VertexComparator implements Comparator<Vertex> {
-
-	@Override
-	public int compare(final Vertex v1, final Vertex v2) {
-		final long id1 = (Integer) v1.id();
-		final long id2 = (Integer) v2.id();
-		return Long.compare(id1, id2);
+	protected TinkerGraphTransformationRepair(final TinkerGraphDriver driver) {
+		super(driver);
 	}
 
 }
