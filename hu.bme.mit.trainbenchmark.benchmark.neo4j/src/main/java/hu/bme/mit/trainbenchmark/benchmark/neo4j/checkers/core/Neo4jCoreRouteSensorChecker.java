@@ -73,27 +73,23 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 						for (final Relationship relationshipSensor : relationshipSensors) {
 							final Node sensor = relationshipSensor.getEndNode();
 
-							if (matches.contains(sensor)) {
-								continue;
-							}
-
-							// (sensor:Sensor)<-[:definedBy]-(Route) NAC
+							// (sensor:Sensor)<-[:gathers]-(Route) NAC
 							if (!sensor.hasLabel(Neo4jConstants.labelSensor)) {
 								continue;
 							}
-							final Iterable<Relationship> definedBys = sensor.getRelationships(Direction.INCOMING,
+							final Iterable<Relationship> gatherss = sensor.getRelationships(Direction.INCOMING,
 									Neo4jConstants.relationshipTypeGathers);
 
-							final List<Node> routes2 = new ArrayList<>();
-							for (final Relationship definedBy : definedBys) {
-								final Node route2 = definedBy.getStartNode();
+							final List<Node> route2s = new ArrayList<>();
+							for (final Relationship gathers : gatherss) {
+								final Node route2 = gathers.getStartNode();
 								if (!route2.hasLabel(Neo4jConstants.labelRoute)) {
 									continue;
 								}
-								routes2.add(route2);
+								route2s.add(route2);
 							}
 							
-							if (!routes2.contains(route)) {
+							if (!route2s.contains(route)) {
 								final Map<String, Object> match = new HashMap<>();
 								match.put(VAR_ROUTE, route);
 								match.put(VAR_SENSOR, sensor);
