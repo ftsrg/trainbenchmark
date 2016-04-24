@@ -14,7 +14,7 @@ START TRANSACTION;
 -- --------------------------------------------------------
 
 --
--- Table structure: "Region"
+-- Table structure: "Route"
 --
 
 CREATE TABLE IF NOT EXISTS "Route" (
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS "Route" (
 -- --------------------------------------------------------
 
 --
--- Table structure: "Route"
+-- Table structure: "Region"
 --
 
 CREATE TABLE IF NOT EXISTS "Region" (

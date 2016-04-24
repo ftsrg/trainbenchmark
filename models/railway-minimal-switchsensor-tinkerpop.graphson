@@ -1,0 +1,2 @@
+{"id":0,"label":"Region","outE":{"elements":[{"id":2,"inV":1}]}}
+{"id":1,"label":"Switch","inE":{"elements":[{"id":2,"outV":0}]}}

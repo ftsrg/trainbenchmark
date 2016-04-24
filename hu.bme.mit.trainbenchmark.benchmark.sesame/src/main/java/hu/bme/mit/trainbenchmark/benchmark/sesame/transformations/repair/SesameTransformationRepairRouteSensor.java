@@ -35,13 +35,13 @@ public class SesameTransformationRepairRouteSensor extends SesameTransformationR
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
-		final URI definedBy = vf.createURI(BASE_PREFIX + GATHERS);
+		final URI gathers = vf.createURI(BASE_PREFIX + GATHERS);
 
 		for (final SesameRouteSensorMatch match : matches) {
 			final Resource route = match.getRoute();
 			final Resource sensor = match.getSensor();
 
-			con.add(route, definedBy, sensor);
+			con.add(route, gathers, sensor);
 		}
 	}
 

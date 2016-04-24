@@ -32,10 +32,9 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 	@Override
 	public void performRHS(final Collection<Node> segments) {
 		for (final Node segment1 : segments) {
-			final Iterable<Relationship> monitoredByEdges = segment1.getRelationships(Direction.OUTGOING, relationshipTypeMonitoredBy);
-
 			final Node segment2 = driver.getGraphDb().createNode(labelSegment);
 
+			final Iterable<Relationship> monitoredByEdges = segment1.getRelationships(Direction.OUTGOING, relationshipTypeMonitoredBy);
 			// (segment2)-[:monitoredBy]->(sensor)
 			for (final Relationship monitoredByEdge : monitoredByEdges) {
 				final Node sensor = monitoredByEdge.getEndNode();
