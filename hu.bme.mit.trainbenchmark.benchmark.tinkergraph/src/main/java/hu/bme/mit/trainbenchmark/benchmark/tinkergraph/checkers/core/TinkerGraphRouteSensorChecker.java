@@ -1,44 +1,46 @@
-///*******************************************************************************
-// * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
-// * All rights reserved. This program and the accompanying materials
-// * are made available under the terms of the Eclipse Public License v1.0
-// * which accompanies this distribution, and is available at
-// * http://www.eclipse.org/legal/epl-v10.html
-// *
-// * Contributors:
-// *   Benedek Izso - initial API and implementation
-// *   Gabor Szarnyas - initial API and implementation
-// *******************************************************************************/
-//
-//package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
-//
-//import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-//import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-//import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-//import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-//
-//import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//
-//import com.tinkerpop.gremlin.structure.Direction;
-//import com.tinkerpop.gremlin.structure.Transaction;
-//
-//import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
-//import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-//
-//public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<Neo4jRouteSensorMatch> {
-//
-//	public TinkerGraphRouteSensorChecker(final TinkerGraphDriver driver) {
-//		super(driver);
-//	}
-//
-//	@Override
-//	public Collection<Neo4jRouteSensorMatch> check() {
-//		final Collection<Neo4jRouteSensorMatch> matches = new ArrayList<>();
-//
+/*******************************************************************************
+ * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Benedek Izso - initial API and implementation
+ *   Gabor Szarnyas - initial API and implementation
+ *******************************************************************************/
+
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
+
+import static hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver.TYPE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
+import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerHelper;
+
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
+
+public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGraphRouteSensorMatch> {
+
+	public TinkerGraphRouteSensorChecker(final TinkerGraphDriver driver) {
+		super(driver);
+	}
+
+	@Override
+	public Collection<TinkerGraphRouteSensorMatch> check() {
+		final Collection<TinkerGraphRouteSensorMatch> matches = new ArrayList<>();
+
+		final TinkerGraph graph = driver.getGraph();		
+		final List<? extends Vertex> routes = TinkerHelper.queryVertexIndex(graph, TYPE, ROUTE);
+
+		
 //		final GraphDatabaseService graphDb = driver.getGraphDb();
 //		try (Transaction tx = graphDb.beginTx()) {
 //			// (route:Route)-[:follows]->()
@@ -102,7 +104,7 @@
 //				}
 //			}
 //		}
-//
-//		return matches;
-//	}
-//}
+
+		return matches;
+	}
+}

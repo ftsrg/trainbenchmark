@@ -46,6 +46,6 @@ public class Neo4jConstants {
 	public static final DynamicRelationshipType relationshipTypeFollows = DynamicRelationshipType.withName(FOLLOWS);
 	public static final DynamicRelationshipType relationshipTypeGathers = DynamicRelationshipType.withName(GATHERS);
 	public static final DynamicRelationshipType relationshipTypeMonitoredBy = DynamicRelationshipType.withName(MONITORED_BY);
-	public static final DynamicRelationshipType relationshipTypeSwitch = DynamicRelationshipType.withName(TARGET);
+	public static final DynamicRelationshipType relationshipTypeTarget = DynamicRelationshipType.withName(TARGET);
 
 }

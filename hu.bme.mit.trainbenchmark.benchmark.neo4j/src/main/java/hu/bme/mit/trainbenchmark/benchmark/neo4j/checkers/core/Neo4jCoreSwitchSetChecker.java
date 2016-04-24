@@ -18,7 +18,7 @@ import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSwitchPosition;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeEntry;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeFollows;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeSwitch;
+import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeTarget;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 
 import java.util.ArrayList;
@@ -81,9 +81,9 @@ public class Neo4jCoreSwitchSetChecker extends Neo4jCoreChecker<Neo4jSwitchSetMa
 							continue;
 						}
 
-						// (swP:SwitchPosition)-[:switch]->(sw:Switch)
+						// (swP:SwitchPosition)-[:target]->(sw:Switch)
 						final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING,
-								relationshipTypeSwitch);
+								relationshipTypeTarget);
 
 						if (!relationshipSwitches.iterator().hasNext()) {
 							continue;
