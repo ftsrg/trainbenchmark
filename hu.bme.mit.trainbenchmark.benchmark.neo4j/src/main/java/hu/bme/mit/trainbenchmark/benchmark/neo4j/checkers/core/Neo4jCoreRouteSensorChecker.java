@@ -60,7 +60,7 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 						continue;
 					}
 					final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING,
-							Neo4jConstants.relationshipTypeSwitch);
+							Neo4jConstants.relationshipTypeTarget);
 					for (final Relationship relationshipSwitch : relationshipSwitches) {
 						final Node sw = relationshipSwitch.getEndNode();
 

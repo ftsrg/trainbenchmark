@@ -13,13 +13,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
 import static hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver.TYPE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -44,21 +43,20 @@ public class TinkerGraphSwitchSensorChecker extends TinkerGraphChecker<TinkerGra
 		final Collection<TinkerGraphSwitchSensorMatch> matches = new ArrayList<>();
 
 		final TinkerGraph graph = driver.getGraph();
-
-		final List<? extends Vertex> switches = TinkerHelper.queryVertexIndex(graph, TYPE, SEGMENT);
+		final List<? extends Vertex> switches = TinkerHelper.queryVertexIndex(graph, TYPE, SWITCH);
 
 		// (sw:Switch)
 		for (final Vertex sw : switches) {
-			final Iterator<Vertex> vertices = sw.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
+			final Iterable<Vertex> monitoredByVertices = () -> sw.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
 
 			boolean hasSensor = false;
-			while (vertices.hasNext()) {
-				final Vertex sensor = vertices.next();
-				if (ModelConstants.SENSOR.equals(sensor.label())) {
+			for (final Vertex monitoredByVertex : monitoredByVertices) {
+				if (ModelConstants.SENSOR.equals(monitoredByVertex.property(TYPE).value())) {
 					hasSensor = true;
 					break;
 				}
 			}
+
 			if (!hasSensor) {
 				final Map<String, Object> match = new HashMap<>();
 				match.put(VAR_SW, sw);

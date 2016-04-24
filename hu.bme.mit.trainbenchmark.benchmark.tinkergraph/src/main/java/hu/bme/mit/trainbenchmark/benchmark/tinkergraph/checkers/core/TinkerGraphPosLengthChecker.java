@@ -42,9 +42,9 @@ public class TinkerGraphPosLengthChecker extends TinkerGraphChecker<TinkerGraphP
 	public Collection<TinkerGraphPosLengthMatch> check() {
 		final Collection<TinkerGraphPosLengthMatch> matches = new ArrayList<>();
 
-		final TinkerGraph graph = driver.getGraph();
-		
+		final TinkerGraph graph = driver.getGraph();		
 		final List<? extends Vertex> segments = TinkerHelper.queryVertexIndex(graph, TYPE, SEGMENT);
+
 		// (segment:Segment)
 		for (final Vertex segment : segments) {
 			final Integer length = (Integer) segment.property(LENGTH).value();
