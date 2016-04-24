@@ -46,7 +46,6 @@ public class TinkerGraphSemaphoreNeighborChecker extends TinkerGraphChecker<Tink
 				// (route1:Route)-[:gathers]->(sensor1:Sensor)
 				final Iterable<Vertex> sensor1s = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.GATHERS, Direction.OUT,
 						ModelConstants.SENSOR);
-
 				for (final Vertex sensor1 : sensor1s) {
 					// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
 					final Iterable<Vertex> te1s = TinkerGraphUtil.getAdjacentNodes(sensor1, ModelConstants.MONITORED_BY, Direction.IN,

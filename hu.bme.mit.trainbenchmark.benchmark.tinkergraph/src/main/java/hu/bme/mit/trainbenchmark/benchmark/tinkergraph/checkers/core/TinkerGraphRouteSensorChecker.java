@@ -41,7 +41,6 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 
 		for (final Vertex route : routes) {
 			// (route:Route)-[:follows]->()
-
 			final Iterable<Vertex> swPs = TinkerGraphUtil.getAdjacentNodes(route, ModelConstants.FOLLOWS, Direction.OUT, ModelConstants.SWITCHPOSITION);
 			for (final Vertex swP : swPs) {
 				// (swP:switchPosition)-[:target]->()
@@ -50,7 +49,6 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 					// (switch:Switch)-[:sensor]->()
 					final Iterable<Vertex> sensors = TinkerGraphUtil.getAdjacentNodes(sw, ModelConstants.MONITORED_BY, Direction.OUT, ModelConstants.SENSOR);
 					for (final Vertex sensor : sensors) {
-						
 						// (sensor:Sensor)<-[:gathers]-(Route) NAC
 						if (!TinkerGraphUtil.isConnected(route, sensor, ModelConstants.GATHERS)) {
 							final Map<String, Object> match = new HashMap<>();
@@ -63,7 +61,6 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 					}
 				}
 			}
-
 		}
 
 		return matches;

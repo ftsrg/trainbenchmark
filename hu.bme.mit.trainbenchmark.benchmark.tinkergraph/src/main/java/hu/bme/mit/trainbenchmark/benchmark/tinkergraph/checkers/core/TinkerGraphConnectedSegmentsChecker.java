@@ -40,53 +40,50 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 		final Collection<Vertex> sensors = driver.collectVertices(ModelConstants.SENSOR);
 		for (final Vertex sensor : sensors) {
 			// (sensor:Sensor)<-[:sensor]-(segment1:Segment)
-			final Iterable<Vertex> segments1 = () -> sensor.vertices(Direction.IN, ModelConstants.MONITORED_BY);
-
-			for (final Vertex segment1 : segments1) {
-				if (!segment1.label().equals(ModelConstants.SEGMENT)) {
-					continue;
-				}
-
+			final Iterable<Vertex> segment1s = TinkerGraphUtil.getAdjacentNodes(sensor, ModelConstants.MONITORED_BY, Direction.IN,
+					ModelConstants.SEGMENT);
+			for (final Vertex segment1 : segment1s) {
 				// (segment2:Segment)-[:sensor]->(sensor:Sensor)
-				final Iterable<Vertex> segment2s = () -> segment1.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
+				final Iterable<Vertex> segment2s = TinkerGraphUtil.getAdjacentNodes(segment1, ModelConstants.CONNECTS_TO, Direction.OUT,
+						ModelConstants.SEGMENT);
 				for (final Vertex segment2 : segment2s) {
-					if (!segment2.label().equals(ModelConstants.SEGMENT) || !TinkerGraphUtil.isConnected(segment2, sensor, ModelConstants.MONITORED_BY)) {
+					if (!TinkerGraphUtil.isConnected(segment2, sensor, ModelConstants.MONITORED_BY)) {
 						continue;
 					}
 
 					// (segment2:Segment)-[:connectsTo]->(segment3:Segment)
 					// (segment3:Segment)-[:sensor]->(sensor:Sensor)
-					final Iterable<Vertex> segment3s = () -> segment2.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
+					final Iterable<Vertex> segment3s = TinkerGraphUtil.getAdjacentNodes(segment2, ModelConstants.CONNECTS_TO, Direction.OUT,
+							ModelConstants.SEGMENT);
 					for (final Vertex segment3 : segment3s) {
-						if (!segment3.label().equals(ModelConstants.SEGMENT)
-								|| !TinkerGraphUtil.isConnected(segment3, sensor, ModelConstants.MONITORED_BY)) {
+						if (!TinkerGraphUtil.isConnected(segment3, sensor, ModelConstants.MONITORED_BY)) {
 							continue;
 						}
 
 						// (segment3:Segment)-[:connectsTo]->(segment4:Segment)
 						// (segment4:Segment)-[:sensor]->(sensor:Sensor)
-						final Iterable<Vertex> segment4s = () -> segment3.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
+						final Iterable<Vertex> segment4s = TinkerGraphUtil.getAdjacentNodes(segment3, ModelConstants.CONNECTS_TO,
+								Direction.OUT, ModelConstants.SEGMENT);
 						for (final Vertex segment4 : segment4s) {
-							if (!segment4.label().equals(ModelConstants.SEGMENT)
-									|| !TinkerGraphUtil.isConnected(segment4, sensor, ModelConstants.MONITORED_BY)) {
+							if (!TinkerGraphUtil.isConnected(segment4, sensor, ModelConstants.MONITORED_BY)) {
 								continue;
 							}
 
 							// (segment4:Segment)-[:connectsTo]->(segment5:Segment)
 							// (segment5:Segment)-[:sensor]->(sensor:Sensor)
-							final Iterable<Vertex> segment5s = () -> segment4.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
+							final Iterable<Vertex> segment5s = TinkerGraphUtil.getAdjacentNodes(segment4, ModelConstants.CONNECTS_TO,
+									Direction.OUT, ModelConstants.SEGMENT);
 							for (final Vertex segment5 : segment5s) {
-								if (!segment5.label().equals(ModelConstants.SEGMENT)
-										|| !TinkerGraphUtil.isConnected(segment5, sensor, ModelConstants.MONITORED_BY)) {
+								if (!TinkerGraphUtil.isConnected(segment5, sensor, ModelConstants.MONITORED_BY)) {
 									continue;
 								}
 
 								// (segment5:Segment)-[:connectsTo]->(segment6:Segment)
 								// (segment6:Segment)-[:sensor]->(sensor:Sensor)
-								final Iterable<Vertex> segment6s = () -> segment5.vertices(Direction.OUT, ModelConstants.CONNECTS_TO);
+								final Iterable<Vertex> segment6s = TinkerGraphUtil.getAdjacentNodes(segment5, ModelConstants.CONNECTS_TO,
+										Direction.OUT, ModelConstants.SEGMENT);
 								for (final Vertex segment6 : segment6s) {
-									if (!segment6.label().equals(ModelConstants.SEGMENT)
-											|| !TinkerGraphUtil.isConnected(segment6, sensor, ModelConstants.MONITORED_BY)) {
+									if (!TinkerGraphUtil.isConnected(segment6, sensor, ModelConstants.MONITORED_BY)) {
 										continue;
 									}
 
