@@ -101,9 +101,9 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 											continue;
 										}
 
-										// route1 != route2 --> if (route1 == route2), break
-										if (route1.getId() == route2.getId()) {
-											break;
+										// route1 != route2 --> if (route1 == route2), continue
+										if (route1.equals(route2)) {
+											continue;
 										}
 
 										// (route2)-[:entry]->(semaphore) NAC

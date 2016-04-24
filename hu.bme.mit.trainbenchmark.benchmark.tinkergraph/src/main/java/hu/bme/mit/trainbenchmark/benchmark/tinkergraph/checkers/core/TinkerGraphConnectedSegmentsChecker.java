@@ -98,8 +98,7 @@ public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphChecker<Tink
 									match.put(QueryConstants.VAR_SEGMENT4, segment4);
 									match.put(QueryConstants.VAR_SEGMENT5, segment5);
 									match.put(QueryConstants.VAR_SEGMENT6, segment6);
-									final TinkerGraphConnectedSegmentsMatch csm = new TinkerGraphConnectedSegmentsMatch(match);
-									matches.add(csm);
+									matches.add(new TinkerGraphConnectedSegmentsMatch(match));
 								}
 							}
 						}
