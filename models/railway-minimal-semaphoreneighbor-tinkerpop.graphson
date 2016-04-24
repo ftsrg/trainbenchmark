@@ -1,8 +1,8 @@
-{"id":0,"label":"vertex","outE":{"sensors":[{"id":17,"inV":9},{"id":18,"inV":11}],"elements":[{"id":19,"inV":13},{"id":20,"inV":15}]},"properties":{"type":[{"id":1,"value":"Region"}]}}
-{"id":2,"label":"vertex","inE":{"exit":[{"id":6,"outV":4}],"semaphores":[{"id":21,"outV":13}]},"properties":{"type":[{"id":3,"value":"Semaphore"}]}}
-{"id":4,"label":"vertex","outE":{"exit":[{"id":6,"inV":2}],"gathers":[{"id":22,"inV":9}]},"properties":{"type":[{"id":5,"value":"Route"}]}}
-{"id":7,"label":"vertex","outE":{"gathers":[{"id":23,"inV":11}]},"properties":{"type":[{"id":8,"value":"Route"}]}}
-{"id":9,"label":"vertex","inE":{"sensors":[{"id":17,"outV":0}],"gathers":[{"id":22,"outV":4}],"monitoredBy":[{"id":24,"outV":13}]},"properties":{"type":[{"id":10,"value":"Sensor"}]}}
-{"id":11,"label":"vertex","inE":{"sensors":[{"id":18,"outV":0}],"gathers":[{"id":23,"outV":7}],"monitoredBy":[{"id":25,"outV":15}]},"properties":{"type":[{"id":12,"value":"Sensor"}]}}
-{"id":13,"label":"vertex","inE":{"elements":[{"id":19,"outV":0}]},"outE":{"connectsTo":[{"id":26,"inV":15}],"semaphores":[{"id":21,"inV":2}],"monitoredBy":[{"id":24,"inV":9}]},"properties":{"type":[{"id":14,"value":"Segment"}]}}
-{"id":15,"label":"vertex","inE":{"connectsTo":[{"id":26,"outV":13}],"elements":[{"id":20,"outV":0}]},"outE":{"monitoredBy":[{"id":25,"inV":11}]},"properties":{"type":[{"id":16,"value":"Segment"}]}}
+{"id":0,"label":"Region","outE":{"sensors":[{"id":9,"inV":5},{"id":10,"inV":6}],"elements":[{"id":11,"inV":7},{"id":12,"inV":8}]}}
+{"id":1,"label":"Semaphore","inE":{"exit":[{"id":3,"outV":2}],"semaphores":[{"id":13,"outV":7}]}}
+{"id":2,"label":"Route","outE":{"exit":[{"id":3,"inV":1}],"gathers":[{"id":14,"inV":5}]}}
+{"id":4,"label":"Route","outE":{"gathers":[{"id":15,"inV":6}]}}
+{"id":5,"label":"Sensor","inE":{"sensors":[{"id":9,"outV":0}],"gathers":[{"id":14,"outV":2}],"monitoredBy":[{"id":16,"outV":7}]}}
+{"id":6,"label":"Sensor","inE":{"sensors":[{"id":10,"outV":0}],"gathers":[{"id":15,"outV":4}],"monitoredBy":[{"id":17,"outV":8}]}}
+{"id":7,"label":"Segment","inE":{"elements":[{"id":11,"outV":0}]},"outE":{"connectsTo":[{"id":18,"inV":8}],"semaphores":[{"id":13,"inV":1}],"monitoredBy":[{"id":16,"inV":5}]}}
+{"id":8,"label":"Segment","inE":{"connectsTo":[{"id":18,"outV":7}],"elements":[{"id":12,"outV":0}]},"outE":{"monitoredBy":[{"id":17,"inV":6}]}}

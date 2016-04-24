@@ -10,18 +10,17 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph;
+package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop;
 
 import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerPopGraphGeneratorConfig;
 
-public class GraphGeneratorMain {
+public class TinkerPopGraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final GeneratorConfig generatorConfig = new GeneratorConfig(args);
-//		final GraphSerializer graphSerializer = new GraphSerializer(generatorConfig);
-		final TinkerGraphSerializer graphSerializer = new TinkerGraphSerializer(generatorConfig);
+		final TinkerPopGraphGeneratorConfig generatorConfig = new TinkerPopGraphGeneratorConfig(args);
+		final TinkerPopGraphSerializer graphSerializer = new TinkerPopGraphSerializer(generatorConfig);
 		final ModelGenerator generator = GeneratorFactory.createGenerator(graphSerializer, generatorConfig);
 		generator.generateModel();
 	}

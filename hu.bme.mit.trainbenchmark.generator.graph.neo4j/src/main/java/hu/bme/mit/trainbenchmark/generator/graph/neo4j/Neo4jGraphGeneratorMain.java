@@ -10,16 +10,19 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph.config;
+package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
 
+import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
+import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-import org.apache.commons.cli.ParseException;
+public class Neo4jGraphGeneratorMain {
 
-public class GraphGeneratorConfig extends GeneratorConfig {
-
-	public GraphGeneratorConfig(final String[] args) throws ParseException {
-		super(args);
+	public static void main(final String[] args) throws Exception {
+		final GeneratorConfig generatorConfig = new GeneratorConfig(args);
+		final Neo4jGraphSerializer graphSerializer = new Neo4jGraphSerializer(generatorConfig);
+		final ModelGenerator generator = GeneratorFactory.createGenerator(graphSerializer, generatorConfig);
+		generator.generateModel();
 	}
 
 }

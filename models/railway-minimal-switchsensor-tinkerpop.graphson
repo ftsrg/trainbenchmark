@@ -1,2 +1,2 @@
-{"id":0,"label":"vertex","outE":{"elements":[{"id":4,"inV":2}]},"properties":{"type":[{"id":1,"value":"Region"}]}}
-{"id":2,"label":"vertex","inE":{"elements":[{"id":4,"outV":0}]},"properties":{"type":[{"id":3,"value":"Switch"}]}}
+{"id":0,"label":"Region","outE":{"elements":[{"id":2,"inV":1}]}}
+{"id":1,"label":"Switch","inE":{"elements":[{"id":2,"outV":0}]}}

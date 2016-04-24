@@ -12,25 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
-import static hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver.TYPE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerHelper;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSensorMatch;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class TinkerGraphSwitchSensorChecker extends TinkerGraphChecker<TinkerGraphSwitchSensorMatch> {
 
@@ -42,16 +39,15 @@ public class TinkerGraphSwitchSensorChecker extends TinkerGraphChecker<TinkerGra
 	public Collection<TinkerGraphSwitchSensorMatch> check() {
 		final Collection<TinkerGraphSwitchSensorMatch> matches = new ArrayList<>();
 
-		final TinkerGraph graph = driver.getGraph();
-		final List<? extends Vertex> switches = TinkerHelper.queryVertexIndex(graph, TYPE, SWITCH);
-
+		final Collection<Vertex> switches = driver.collectVertices(SWITCH);
+		
 		// (sw:Switch)
 		for (final Vertex sw : switches) {
-			final Iterable<Vertex> monitoredByVertices = () -> sw.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
+			final Iterable<Vertex> monitoredByVertices = () -> sw.vertices(Direction.OUT, MONITORED_BY);
 
 			boolean hasSensor = false;
 			for (final Vertex monitoredByVertex : monitoredByVertices) {
-				if (ModelConstants.SENSOR.equals(monitoredByVertex.property(TYPE).value())) {
+				if (monitoredByVertex.label().equals(SENSOR)) {
 					hasSensor = true;
 					break;
 				}

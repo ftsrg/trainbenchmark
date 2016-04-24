@@ -12,22 +12,21 @@
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.io.IoCore;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerHelper;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
 public class TinkerGraphDriver extends Driver<Vertex> {
 
-	public static final String TYPE = "type";
+	public static final String LABEL = "label";
 	protected TinkerGraph graph = TinkerGraph.open();
 	protected final Comparator<Vertex> vertexComparator = new VertexComparator();
 
@@ -35,11 +34,10 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 		super();
 	}
 
-
 	@Override
 	public void read(final String filePath) throws XMLStreamException, IOException {
 		final String graphFilePath = filePath + getPostfix();
-		graph.createIndex(TYPE, Vertex.class);
+		graph.createIndex(LABEL, Vertex.class);
 		graph.io(IoCore.graphson()).readGraph(graphFilePath);
 	}
 
@@ -47,14 +45,22 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 
 	@Override
 	public Collection<Vertex> collectVertices(final String type) {
-		final List<? extends Vertex> vertices = TinkerHelper.queryVertexIndex(graph, TYPE, type);
-		return (List<Vertex>) vertices;
+		final Collection<Vertex> vertices = new ArrayList<>();
+
+		final Iterable<Vertex> allVertices = () -> graph.vertices();
+		for (Vertex vertex : allVertices) {
+			if (vertex.label().equals(type)) {
+				vertices.add(vertex);
+			}
+		}
+
+		return vertices;
 	}
 
 	public TinkerGraph getGraph() {
 		return graph;
 	}
-	
+
 	@Override
 	public Comparator<Vertex> getElementComparator() {
 		return vertexComparator;
