@@ -12,15 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGraphRouteSensorMatch> {
 
@@ -32,74 +39,58 @@ public class TinkerGraphRouteSensorChecker extends TinkerGraphChecker<TinkerGrap
 	public Collection<TinkerGraphRouteSensorMatch> check() {
 		final Collection<TinkerGraphRouteSensorMatch> matches = new ArrayList<>();
 
-
 		final Collection<Vertex> routes = driver.collectVertices(ModelConstants.ROUTE);
 
 		for (final Vertex route : routes) {
 			// (route:Route)-[:follows]->()
-		}
-		
 
-//			final ResourceIterator<Node> routes = graphDb.findNodes(Neo4jConstants.labelRoute);
-//			while (routes.hasNext()) {
-//				final Node route = routes.next();
-//				final Iterable<Relationship> followss = route.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeFollows);
-//
-//				for (final Relationship follows : followss) {
-//					final Node swP = follows.getEndNode();
-//
-//					// (swP:switchPosition)-[:switch]->()
-//					if (!swP.hasLabel(Neo4jConstants.labelSwitchPosition)) {
-//						continue;
-//					}
-//					final Iterable<Relationship> relationshipSwitches = swP.getRelationships(Direction.OUTGOING,
-//							Neo4jConstants.relationshipTypeSwitch);
-//					for (final Relationship relationshipSwitch : relationshipSwitches) {
-//						final Node sw = relationshipSwitch.getEndNode();
-//
-//						// (switch:Switch)-[:sensor]->()
-//						if (!sw.hasLabel(Neo4jConstants.labelSwitch)) {
-//							continue;
-//						}
-//						final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING,
-//								Neo4jConstants.relationshipTypeMonitoredBy);
-//						for (final Relationship relationshipSensor : relationshipSensors) {
-//							final Node sensor = relationshipSensor.getEndNode();
-//
-//							if (matches.contains(sensor)) {
-//								continue;
-//							}
-//
-//							// (sensor:Sensor)<-[:definedBy]-(Route) NAC
-//							if (!sensor.hasLabel(Neo4jConstants.labelSensor)) {
-//								continue;
-//							}
-//							final Iterable<Relationship> definedBys = sensor.getRelationships(Direction.INCOMING,
-//									Neo4jConstants.relationshipTypeGathers);
-//
-//							final List<Node> routes2 = new ArrayList<>();
-//							for (final Relationship definedBy : definedBys) {
-//								final Node route2 = definedBy.getStartNode();
-//								if (!route2.hasLabel(Neo4jConstants.labelRoute)) {
-//									continue;
-//								}
-//								routes2.add(route2);
-//							}
-//							
-//							// TODO is there a :definedBy relationship from route to sensor
-//							if (!routes2.contains(route)) {
-//								final Map<String, Object> match = new HashMap<>();
-//								match.put(VAR_ROUTE, route);
-//								match.put(VAR_SENSOR, sensor);
-//								match.put(VAR_SWP, swP);
-//								match.put(VAR_SW, sw);
-//								matches.add(new Neo4jRouteSensorMatch(match));
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
+			final Iterable<Vertex> swPs = () -> route.vertices(Direction.OUT, ModelConstants.FOLLOWS);
+			for (final Vertex swP : swPs) {
+				// (swP:switchPosition)-[:switch]->()
+				if (!swP.label().equals(ModelConstants.SWITCHPOSITION)) {
+					continue;
+				}
+
+				final Iterable<Vertex> sws = () -> swP.vertices(Direction.OUT, ModelConstants.TARGET);
+
+				for (final Vertex sw : sws) {
+					// (switch:Switch)-[:sensor]->()
+
+					if (!sw.label().equals(SWITCH)) {
+						continue;
+					}
+
+					final Iterable<Vertex> sensors = () -> sw.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
+					for (final Vertex sensor : sensors) {
+						if (!sensor.label().equals(ModelConstants.SENSOR)) {
+							continue;
+						}
+
+						// (sensor:Sensor)<-[:gathers]-(Route) NAC
+						final Iterable<Vertex> route2candidates = () -> sensor.vertices(Direction.IN, ModelConstants.GATHERS);
+						final List<Vertex> route2s = new ArrayList<>();
+
+						for (final Vertex route2 : route2candidates) {
+							if (route2.label().equals(ModelConstants.ROUTE)) {
+								continue;
+							}
+
+							route2s.add(route2);
+						}
+
+						if (!route2s.contains(route)) {
+							final Map<String, Object> match = new HashMap<>();
+							match.put(QueryConstants.VAR_ROUTE, route);
+							match.put(QueryConstants.VAR_SENSOR, sensor);
+							match.put(QueryConstants.VAR_SWP, swP);
+							match.put(QueryConstants.VAR_SW, sw);
+							matches.add(new TinkerGraphRouteSensorMatch(match));
+						}
+					}
+				}
+			}
+
+		}
 
 		return matches;
 	}
