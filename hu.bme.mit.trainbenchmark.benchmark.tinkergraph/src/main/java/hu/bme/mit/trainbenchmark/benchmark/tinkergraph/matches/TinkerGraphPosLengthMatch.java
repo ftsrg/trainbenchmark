@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
 import java.util.Map;
 
-import org.neo4j.graphdb.Node;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
@@ -27,8 +27,8 @@ public class TinkerGraphPosLengthMatch extends TinkerGraphMatch implements PosLe
 	}
 
 	@Override
-	public Node getSegment() {
-		return (Node) match.get(VAR_SEGMENT);
+	public Vertex getSegment() {
+		return (Vertex) match.get(VAR_SEGMENT);
 	}
 
 	public Integer getLength() {
@@ -36,8 +36,8 @@ public class TinkerGraphPosLengthMatch extends TinkerGraphMatch implements PosLe
 	}
 
 	@Override
-	public Node[] toArray() {
-		return new Node[] { getSegment() };
+	public Vertex[] toArray() {
+		return new Vertex[] { getSegment() };
 	}
 
 }

@@ -17,7 +17,6 @@ import java.util.Collection;
 import org.junit.runners.Parameterized.Parameters;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.MinimalTest;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphEngine;
 
 public class TinkerGraphMinimalTest extends MinimalTest {
 
@@ -26,8 +25,8 @@ public class TinkerGraphMinimalTest extends MinimalTest {
 	    return TinkerGraphBenchmarkInitializer.getTestParameters();
 	}
 	
-	public TinkerGraphMinimalTest(final TinkerGraphEngine engine) {
-		bi = new TinkerGraphBenchmarkInitializer(engine);
+	public TinkerGraphMinimalTest() {
+		bi = new TinkerGraphBenchmarkInitializer();
 	}
 
 }

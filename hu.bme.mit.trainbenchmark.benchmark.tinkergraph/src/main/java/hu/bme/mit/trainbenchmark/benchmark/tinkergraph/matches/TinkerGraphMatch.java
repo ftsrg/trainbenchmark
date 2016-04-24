@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.neo4j.graphdb.Node;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -26,7 +26,7 @@ public abstract class TinkerGraphMatch {
 		this.match = match;
 	}
 
-	public abstract Node[] toArray();
+	public abstract Vertex[] toArray();
 
 	@Override
 	public String toString() {
@@ -36,17 +36,17 @@ public abstract class TinkerGraphMatch {
 	public static TinkerGraphMatch createMatch(final RailwayQuery query, final Map<String, Object> row) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new TinkerGraphConnectedSegmentsMatch(row);
+//			return new TinkerGraphConnectedSegmentsMatch(row);
 		case POSLENGTH:
 			return new TinkerGraphPosLengthMatch(row);
 		case ROUTESENSOR:
-			return new TinkerGraphRouteSensorMatch(row);
+//			return new TinkerGraphRouteSensorMatch(row);
 		case SEMAPHORENEIGHBOR:
-			return new TinkerGraphSemaphoreNeighborMatch(row);
+//			return new TinkerGraphSemaphoreNeighborMatch(row);
 		case SWITCHSENSOR:
-			return new TinkerGraphSwitchSensorMatch(row);
+//			return new TinkerGraphSwitchSensorMatch(row);
 		case SWITCHSET:
-			return new TinkerGraphSwitchSetMatch(row);
+//			return new TinkerGraphSwitchSetMatch(row);
 		default:
 			throw new UnsupportedOperationException("Query not supported: " + query);
 		}

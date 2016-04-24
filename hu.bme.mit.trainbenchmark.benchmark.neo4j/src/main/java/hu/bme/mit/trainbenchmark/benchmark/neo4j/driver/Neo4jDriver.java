@@ -11,11 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,11 +26,8 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
@@ -48,12 +40,6 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jDriver extends Driver<Node> {
-
-	protected final RelationshipType definedByEdge = DynamicRelationshipType.withName(GATHERS);
-	protected final RelationshipType entryEdge = DynamicRelationshipType.withName(ENTRY);
-	protected final RelationshipType sensorEdge = DynamicRelationshipType.withName(MONITORED_BY);
-
-	protected final Label sensorLabel = DynamicLabel.label(SENSOR);
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;

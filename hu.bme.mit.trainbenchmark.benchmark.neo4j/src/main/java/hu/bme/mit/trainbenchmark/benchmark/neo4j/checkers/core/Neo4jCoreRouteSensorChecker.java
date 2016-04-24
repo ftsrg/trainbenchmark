@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;

@@ -11,19 +11,19 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
 import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.VertexComparator;
 
-import org.neo4j.graphdb.Node;
-
-public class TinkerGraphMatchComparator extends MatchComparator<TinkerGraphMatch, Node> {
+public class TinkerGraphMatchComparator extends MatchComparator<TinkerGraphMatch, Vertex> {
 
 	protected VertexComparator nc = new VertexComparator();
 
 	@Override
 	public int compare(final TinkerGraphMatch o1, final TinkerGraphMatch o2) {
-		final Node[] m1 = o1.toArray();
-		final Node[] m2 = o2.toArray();
+		final Vertex[] m1 = o1.toArray();
+		final Vertex[] m2 = o2.toArray();
 		return compareArrays(m1, m2, nc);
 	}
 

@@ -17,7 +17,6 @@ import java.util.Collection;
 import org.junit.runners.Parameterized.Parameters;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphEngine;
 
 public class TinkerGraphInjectTest extends InjectTest {
 
@@ -26,8 +25,8 @@ public class TinkerGraphInjectTest extends InjectTest {
 	    return TinkerGraphBenchmarkInitializer.getTestParameters();
 	}
 	
-	public TinkerGraphInjectTest(final TinkerGraphEngine engine) {
-		bi = new TinkerGraphBenchmarkInitializer(engine);
+	public TinkerGraphInjectTest() {
+		bi = new TinkerGraphBenchmarkInitializer();
 	}
 
 }

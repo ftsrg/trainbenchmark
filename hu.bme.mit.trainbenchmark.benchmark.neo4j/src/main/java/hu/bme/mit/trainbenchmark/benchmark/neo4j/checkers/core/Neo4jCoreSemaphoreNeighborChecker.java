@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
