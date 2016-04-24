@@ -20,7 +20,6 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
@@ -33,6 +32,7 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
 public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSensorMatch> {
 
@@ -73,23 +73,13 @@ public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSens
 						for (final Relationship relationshipSensor : relationshipSensors) {
 							final Node sensor = relationshipSensor.getEndNode();
 
-							// (sensor:Sensor)<-[:gathers]-(Route) NAC
+							// (sensor:Sensor)
 							if (!sensor.hasLabel(Neo4jConstants.labelSensor)) {
 								continue;
 							}
-							final Iterable<Relationship> gatherss = sensor.getRelationships(Direction.INCOMING,
-									Neo4jConstants.relationshipTypeGathers);
 
-							final List<Node> route2s = new ArrayList<>();
-							for (final Relationship gathers : gatherss) {
-								final Node route2 = gathers.getStartNode();
-								if (!route2.hasLabel(Neo4jConstants.labelRoute)) {
-									continue;
-								}
-								route2s.add(route2);
-							}
-							
-							if (!route2s.contains(route)) {
+							// (sensor:Sensor)<-[:gathers]-(Route) NAC							
+							if (!Neo4jUtil.isConnected(route, sensor, Neo4jConstants.relationshipTypeGathers)) {
 								final Map<String, Object> match = new HashMap<>();
 								match.put(VAR_ROUTE, route);
 								match.put(VAR_SENSOR, sensor);

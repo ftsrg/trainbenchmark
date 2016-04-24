@@ -22,7 +22,6 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
@@ -35,6 +34,7 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
 public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSemaphoreNeighborMatch> {
 
@@ -110,11 +110,8 @@ public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSem
 											break;
 										}
 
-										// (route2)-[:entry]-(semaphore) NAC
-										final Iterable<Relationship> entries2 = route2.getRelationships(Direction.OUTGOING,
-												Neo4jConstants.relationshipTypeEntry);
-										final Iterator<Relationship> entriesIterator2 = entries2.iterator();
-										if (!entriesIterator2.hasNext() || !entriesIterator2.next().getEndNode().equals(semaphore)) {
+										// (route2)-[:entry]->(semaphore) NAC
+										if (!Neo4jUtil.isConnected(route2, semaphore, Neo4jConstants.relationshipTypeEntry)) {
 											final Map<String, Object> match = new HashMap<>();
 											match.put(VAR_SEMAPHORE, semaphore);
 											match.put(VAR_ROUTE1, route1);
