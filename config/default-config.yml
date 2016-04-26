@@ -53,29 +53,29 @@ scenarios:
 # Disk-based tools are typically slower, hence they are listed at the end of each category.
 tools:
 # EMF
-#- drools5:
-#- drools6:
-#- eclipseocl:
-#- emfapi:
-#- emfincquery:
-#  - backend: incremental
-#  - backend: localsearch
+- drools5:
+- drools6:
+- eclipseocl:
+- emfapi:
+- emfincquery:
+  - backend: incremental
+  - backend: localsearch
 # graph
 - neo4j:
   - engine: coreapi
   - engine: cypher
 - tinkergraph:
 # RDF
-#- jena:
-#  - inferencing: false
-#  - inferencing: true
-#- sesame:
-#  - inferencing: false
-#  - inferencing: true
-#- blazegraph:
+- jena:
+  - inferencing: false
+  - inferencing: true
+- sesame:
+  - inferencing: false
+  - inferencing: true
+- blazegraph:
 # SQL
-#- sqlite:
-#- mysql:
+- sqlite:
+- mysql:
 
 # If you run the script with the -f switch, the script will only generate the formats listed here.
 # Without the -f switch, this list is ignored by the script.
