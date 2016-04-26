@@ -35,7 +35,7 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 
 		this.query = query;
 		queryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + query + ".cypher"));
+				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + query + ".cyp"));
 	}
 
 	@Override
