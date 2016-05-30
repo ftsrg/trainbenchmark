@@ -6,6 +6,8 @@ import java.util.List;
 
 import hu.bme.mit.incquerydcore.WildcardInput;
 import hu.bme.mit.incquerydcore.trainbenchmark.TrainbenchmarkReader;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
@@ -13,6 +15,7 @@ import hu.bme.mit.trainbenchmark.constants.Query;
 import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
 
 public class IQDCoreReader extends Driver<Long> {
+
 	TrainbenchmarkReader reader;
 	ResourceComparator comparator;
 	private final WildcardInput input;

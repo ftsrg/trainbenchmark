@@ -11,12 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.config;
 
-import org.apache.commons.cli.ParseException;
-
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
+import org.apache.commons.cli.ParseException;
 
 public class IQDCoreBenchmarkConfig extends RDFBenchmarkConfig {
 
@@ -29,14 +28,14 @@ public class IQDCoreBenchmarkConfig extends RDFBenchmarkConfig {
 	protected int messageSize;
 
 	public IQDCoreBenchmarkConfig(final String[] args) throws ParseException {
-		super(args, IQDCORE);
+		super(IQDCORE, args);
 	}
 
-	public IQDCoreBenchmarkConfig(final Scenario scenario, final int size,
-			final int runIndex, final Query query, final int iterationCount,
-			final TransformationStrategy transformationStrategy,
-			final long transformationConstant, final String cpulist, final Checker checker,
-                                  int messageSize) {
+	public IQDCoreBenchmarkConfig(final ScenarioEnum scenario, final int size,
+								  final int runIndex, final RailwayQuery query, final int iterationCount,
+								  final TransformationStrategy transformationStrategy,
+								  final long transformationConstant, final String cpulist, final Checker checker,
+								  int messageSize) {
 		super(IQDCORE, scenario, size, runIndex, query, iterationCount,
 				transformationStrategy, transformationConstant, false);
 		this.cpulist = cpulist;
