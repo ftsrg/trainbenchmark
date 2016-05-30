@@ -11,11 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import hu.bme.mit.incqueryds.ConfigReader;
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.incqueryds.trainbenchmark.*;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
@@ -34,14 +37,11 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 	public IQDCoreChecker(final WildcardInput iqdDriver, final IQDCoreBenchmarkConfig iqdbc) throws IOException {
 		super(iqdbc, iqdbc.getQuery());
 		this.iqdInput = iqdDriver;
-		ClassLoader classLoader = IQDCoreChecker.class.getClassLoader();
-		try {
-			String classname = String.format("hu.bme.mit.incqueryds.trainbenchmark.%s%s",  iqdbc.getChecker(), iqdbc.getQuery());
-			this.checker = (TrainbenchmarkQuery) classLoader.loadClass(classname).newInstance();
-			iqdInput.subscribe(checker.inputLookup());
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResource(String.format("%s.yaml", iqdbc.getQuery())).openStream();
+        this.checker = ConfigReader.parse(iqdbc.getQuery().toString(), inputStream);
+        iqdInput.subscribe(checker.inputLookup());
+
 	}
 
 	@Override

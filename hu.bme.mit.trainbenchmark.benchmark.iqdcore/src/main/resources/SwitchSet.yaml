@@ -1,16 +1,16 @@
 input:
   edges:
-     signal: [SigChecker]
-     entry: [Entry_SempahoreJoin.secondary]
-     follows: [Follows_EntryJoin.secondary]
-     target: {Switch_SwitchPosition.primary}
-     position: [Switch_SwitchPosition.secondary]
-     currentPosition: SwitchPosition_CurrentPosition.secondary
+    signal: [SigChecker]
+    entry: [Entry_SemaphoreJoin.secondary]
+    follows: [Follows_EntryJoin.secondary]
+    target: [Switch_SwitchPositionJoin.primary]
+    position: [Switch_SwitchPositionJoin.secondary]
+    currentPosition: [SwitchPosition_CurrentPositionJoin.secondary]
 
 nodes:
   - SigChecker:
       type: Checker
-      condition: (cs) => cs(1) == "SIGNAL_GO"
+      condition: '(cs) => cs(1) == "SIGNAL_GO"'
       next: LeftTrimmer
   - LeftTrimmer:
       type: Trimmer
@@ -22,7 +22,7 @@ nodes:
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(1)
-      next: Follows_EntryJoin
+      next: Follows_EntryJoin.primary
   - Follows_EntryJoin:
       type: HashJoiner
       primaryLength: 2
@@ -41,11 +41,11 @@ nodes:
   - SwitchPosition_CurrentPositionJoin:
       type: HashJoiner
       primaryLength: 2
-      primarySelector: Vector(0)
+      primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: Inequality
-  - Inequality:
+      next: Ineq
+  - Ineq:
       type: Inequality
       nodeIndex: 2
       inequals: Vector(3)
