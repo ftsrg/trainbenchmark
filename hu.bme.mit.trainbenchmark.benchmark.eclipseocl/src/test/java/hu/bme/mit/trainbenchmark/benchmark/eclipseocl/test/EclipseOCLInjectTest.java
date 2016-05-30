@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class EclipseInjectTest extends InjectTest {
+public class EclipseOCLInjectTest extends InjectTest {
 
-	public EclipseInjectTest() {
+	public EclipseOCLInjectTest() {
 		bi = new EclipseOCLBenchmarkInitializer();
 	}
 
