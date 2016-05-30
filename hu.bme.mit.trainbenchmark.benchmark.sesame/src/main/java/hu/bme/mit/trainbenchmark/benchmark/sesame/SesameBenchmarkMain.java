@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class SesameBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig(args, "Sesame");
+		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Sesame", args);
 		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new SesameBenchmarkCase());
 		benchmarkRunner.runBenchmark();
 	}

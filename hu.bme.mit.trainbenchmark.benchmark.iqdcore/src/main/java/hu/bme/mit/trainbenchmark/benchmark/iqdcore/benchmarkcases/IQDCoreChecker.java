@@ -22,6 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.Iterator;
 import scala.collection.immutable.Vector;
 
@@ -30,8 +31,8 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 	protected WildcardInput iqdInput;
 	protected TrainbenchmarkQuery checker;
 
-	public IQDCoreChecker(final WildcardInput iqdDriver, final IQDCoreBenchmarkConfig iqdbc) throws IOException {
-		super(iqdbc);
+	public IQDCoreChecker(final WildcardInput iqdDriver, final IQDCoreBenchmarkConfig iqdbc, final RailwayQuery query) throws IOException {
+		super(iqdbc, query);
 		this.iqdInput = iqdDriver;
 		ClassLoader classLoader = IQDCoreChecker.class.getClassLoader();
 		try {
