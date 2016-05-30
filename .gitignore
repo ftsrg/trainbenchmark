@@ -22,3 +22,6 @@ catalog-v*.xml
 *.tar.gz
 *.zip
 *.gml
+
+# IntelliJ IDEA
+*.iml
