@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.incquerydcore.trainbenchmark.*;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.incqueryds.trainbenchmark.*;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
