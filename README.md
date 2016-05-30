@@ -78,7 +78,9 @@ The `scripts` directory contains the [`run.py`](scripts/run.py) script which is 
 
 The projects are developed and tested with **Eclipse Mars**.
 
-To import and develop the Train Benchmark, you need the m2e Eclipse plugin, included in Eclipse for Java developers. If you use another distribution (e.g. Eclipse Modeling), you can install it from the Mars update site or the m2e update site (<http://download.eclipse.org/technology/m2e/releases>).
+To develop the Train Benchmark, you need the m2e Eclipse plugin, included in Eclipse for Java developers. If you use another distribution (e.g. Eclipse Modeling), you can install it from the Mars update site or the m2e update site (<http://download.eclipse.org/technology/m2e/releases>).
+
+To import the projects, choose **Import...** | **Existing Maven Projects** and import the desired Train Benchmark projects.
 
 ### Naming conventions
 
