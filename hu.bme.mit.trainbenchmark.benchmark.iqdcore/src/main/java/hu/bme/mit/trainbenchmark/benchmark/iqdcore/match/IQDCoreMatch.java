@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.constants.Query;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.immutable.Vector;
 
 public abstract class IQDCoreMatch {
@@ -24,7 +24,7 @@ public abstract class IQDCoreMatch {
 
 	public abstract Long[] toArray();
 
-	public static IQDCoreMatch createMatch(final Query query, final Vector<Object> qs) {
+	public static IQDCoreMatch createMatch(final RailwayQuery query, final Vector<Object> qs) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new IQDCoreConnectedSegmentsMatch(qs);
