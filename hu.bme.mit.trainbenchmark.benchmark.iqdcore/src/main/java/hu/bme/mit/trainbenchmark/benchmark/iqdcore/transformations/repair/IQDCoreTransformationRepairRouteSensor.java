@@ -11,28 +11,28 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DEFINED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
+import hu.bme.mit.incqueryds.WildcardInput.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreRouteSensorMatch;
 
 public class IQDCoreTransformationRepairRouteSensor extends IQDCoreTransformationRepair<IQDCoreRouteSensorMatch> {
 
-	public IQDCoreTransformationRepairRouteSensor(final WildcardInput jenaDriver) {
-		super(jenaDriver);
+	public IQDCoreTransformationRepairRouteSensor(final IQDCoreDriver driver) {
+		super(driver);
 	}
 
 	@Override
-	public void rhs(final Collection<IQDCoreRouteSensorMatch> matches) throws IOException {
+	public void performRHS(final Collection<IQDCoreRouteSensorMatch> matches) throws IOException {
 		final Transaction transaction = input.newTransaction();
 		for (final IQDCoreRouteSensorMatch match : matches) {
 			final Long route = match.getRoute();
 			final Long sensor = match.getSensor();
-			transaction.add(route, DEFINED_BY, sensor);
+			transaction.add(route, GATHERS, sensor);
 		}
 		input.processTransaction(transaction);
 	}

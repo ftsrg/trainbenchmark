@@ -11,29 +11,29 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR_EDGE;
 
 import java.util.Collection;
 
-import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
+import hu.bme.mit.incqueryds.WildcardInput.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSensorMatch;
 
 public class IQDCoreTransformationRepairSwitchSensor extends IQDCoreTransformationRepair<IQDCoreSwitchSensorMatch> {
 
-	public IQDCoreTransformationRepairSwitchSensor(final WildcardInput jenaDriver) {
-		super(jenaDriver);
+	public IQDCoreTransformationRepairSwitchSensor(final IQDCoreDriver driver) {
+		super(driver);
 	}
 
 	@Override
-	public void rhs(final Collection<IQDCoreSwitchSensorMatch> matches) throws Exception {
+	public void performRHS(final Collection<IQDCoreSwitchSensorMatch> matches) throws Exception {
 		final Transaction transaction = input.newTransaction();
 		for (final IQDCoreSwitchSensorMatch match : matches) {
 			final long sw = match.getSw();
 			final long sensorID = input.newKey();
 			transaction.add(sensorID, "type", SENSOR);
-			transaction.add(sw, SENSOR_EDGE, sensorID);
+			transaction.add(sw, MONITORED_BY, sensorID);
 		}
 		input.processTransaction(transaction);
 	}

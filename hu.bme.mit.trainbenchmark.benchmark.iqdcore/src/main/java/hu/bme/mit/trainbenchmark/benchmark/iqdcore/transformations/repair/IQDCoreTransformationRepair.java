@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;
 
 public abstract class IQDCoreTransformationRepair<TMatch extends IQDCoreMatch> extends IQDCoreTransformation<TMatch> {
 
-	protected IQDCoreTransformationRepair(final WildcardInput jenaDriver) {
-		super(jenaDriver);
+	protected IQDCoreTransformationRepair(final IQDCoreDriver driver) {
+		super(driver);
 	}
 
 }
