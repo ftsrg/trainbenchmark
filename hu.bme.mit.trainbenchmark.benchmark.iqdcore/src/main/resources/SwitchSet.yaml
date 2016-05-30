@@ -18,14 +18,14 @@ nodes:
       next: Entry_SemaphoreJoin.primary #itt valami baj van :D
   - Entry_SemaphoreJoin:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(1)
       next: Follows_EntryJoin
   - Follows_EntryJoin:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
@@ -33,14 +33,14 @@ nodes:
 
   - Switch_SwitchPositionJoin:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: SwitchPosition_CurrentPositionJoin.primary
   - SwitchPosition_CurrentPositionJoin:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
@@ -53,7 +53,7 @@ nodes:
 
   - FinalJoin:
       type: HashJoiner
-      primaryLenght: 3
+      primaryLength: 3
       primarySelector: Vector(2)
       secondaryLength: 4
       secondarySelector: Vector(0)
