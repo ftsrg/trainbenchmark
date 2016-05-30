@@ -1,0 +1,60 @@
+input:
+  edges:
+     signal: [SigChecker]
+     entry: [Entry_SempahoreJoin.secondary]
+     follows: [Follows_EntryJoin.secondary]
+     target: {Switch_SwitchPosition.primary}
+     position: [Switch_SwitchPosition.secondary]
+     currentPosition: SwitchPosition_CurrentPosition.secondary
+
+nodes:
+  - SigChecker:
+      type: Checker
+      condition: (cs) => cs(1) == "SIGNAL_GO"
+      next: LeftTrimmer
+  - LeftTrimmer:
+      type: Trimmer
+      selectionVector: Vector(0)
+      next: Entry_SemaphoreJoin.primary #itt valami baj van :D
+  - Entry_SemaphoreJoin:
+      type: HashJoiner
+      primaryLenght: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(1)
+      next: Follows_EntryJoin
+  - Follows_EntryJoin:
+      type: HashJoiner
+      primaryLenght: 2
+      primarySelector: Vector(1)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: FinalJoin.primary
+
+  - Switch_SwitchPositionJoin:
+      type: HashJoiner
+      primaryLenght: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: SwitchPosition_CurrentPositionJoin.primary
+  - SwitchPosition_CurrentPositionJoin:
+      type: HashJoiner
+      primaryLenght: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: Inequality
+  - Inequality:
+      type: Inequality
+      nodeIndex: 2
+      inequals: Vector(3)
+      next: FinalJoin.secondary
+
+  - FinalJoin:
+      type: HashJoiner
+      primaryLenght: 3
+      primarySelector: Vector(2)
+      secondaryLength: 4
+      secondarySelector: Vector(0)
+      next: production
