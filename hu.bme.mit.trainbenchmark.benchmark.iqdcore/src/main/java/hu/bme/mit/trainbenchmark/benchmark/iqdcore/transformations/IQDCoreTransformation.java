@@ -20,11 +20,10 @@ import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public abstract class IQDCoreTransformation<TObject> extends Transformation<TObject, IQDCoreDriver> {
 
-	protected WildcardInput input;
-
 	protected IQDCoreTransformation(final IQDCoreDriver driver) {
 		super(driver);
 		this.driver = driver;
+
 	}
 
 	public static Transformation<?, IQDCoreDriver> newInstance(final IQDCoreDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {

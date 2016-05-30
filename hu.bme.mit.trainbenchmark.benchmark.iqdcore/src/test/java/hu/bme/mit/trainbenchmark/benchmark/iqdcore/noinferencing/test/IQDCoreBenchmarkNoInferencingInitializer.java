@@ -17,16 +17,15 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public class IQDCoreBenchmarkNoInferencingInitializer extends TestBenchmarkInitializer {
-
 	@Override
-	protected BenchmarkRunner initializeBenchmark(final Query query, final Scenario scenario) {
+	protected BenchmarkRunner initializeBenchmark(RailwayQuery query, ScenarioEnum scenario) {
 		final IQDCoreBenchmarkConfig iqdbc = new IQDCoreBenchmarkConfig(scenario, size, 1, query, iterationCount, transformationStrategy,
 				transformationConstant, null, Checker.LOCAL, 16);
 		return new BenchmarkRunner(iqdbc, new IQDCoreBenchmarkCase(iqdbc));
 	}
-
 }

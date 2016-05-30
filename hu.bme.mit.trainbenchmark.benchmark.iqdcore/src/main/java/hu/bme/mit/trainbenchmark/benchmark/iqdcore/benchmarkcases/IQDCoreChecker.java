@@ -31,12 +31,12 @@ public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 	protected WildcardInput iqdInput;
 	protected TrainbenchmarkQuery checker;
 
-	public IQDCoreChecker(final WildcardInput iqdDriver, final IQDCoreBenchmarkConfig iqdbc, final RailwayQuery query) throws IOException {
-		super(iqdbc, query);
+	public IQDCoreChecker(final WildcardInput iqdDriver, final IQDCoreBenchmarkConfig iqdbc) throws IOException {
+		super(iqdbc, iqdbc.getQuery());
 		this.iqdInput = iqdDriver;
 		ClassLoader classLoader = IQDCoreChecker.class.getClassLoader();
 		try {
-			String classname = String.format("hu.bme.mit.incquerydcore.trainbenchmark.%s%s",  iqdbc.getChecker(), iqdbc.getQuery());
+			String classname = String.format("hu.bme.mit.incqueryds.trainbenchmark.%s%s",  iqdbc.getChecker(), iqdbc.getQuery());
 			this.checker = (TrainbenchmarkQuery) classLoader.loadClass(classname).newInstance();
 			iqdInput.subscribe(checker.inputLookup());
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {

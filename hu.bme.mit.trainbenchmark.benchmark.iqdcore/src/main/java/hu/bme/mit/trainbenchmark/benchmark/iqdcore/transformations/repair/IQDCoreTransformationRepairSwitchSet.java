@@ -28,14 +28,14 @@ public class IQDCoreTransformationRepairSwitchSet extends IQDCoreTransformationR
 
 	@Override
 	public void performRHS(final Collection<IQDCoreSwitchSetMatch> matches) throws IOException {
-		final Transaction transaction = input.newTransaction();
+		final Transaction transaction = driver.newTransaction();
 		for (final IQDCoreSwitchSetMatch match : matches) {
 			final Long sw = match.getSw();
 
 			transaction.remove(sw, CURRENTPOSITION, match.getCurrentPosition());
 			transaction.add(sw, CURRENTPOSITION, match.getPosition());
 		}
-		input.processTransaction(transaction);
+		transaction.close();
 	}
 
 }

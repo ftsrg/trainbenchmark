@@ -30,7 +30,6 @@ public class IQDCoreDriver extends Driver<Long> {
 		reader.read(modelPathWithoutExtension + RDFHelper.getPostfix(false));
 		query.getQuery().getResults();
 	}
-
 	@Override
 	public List<Long> collectVertices(final String type) throws Exception {
 		return (List<Long>) input.multiValueAttributes().apply(type).keysIterator().toList();
@@ -49,5 +48,13 @@ public class IQDCoreDriver extends Driver<Long> {
 	@Override
 	public void destroy() {
 		query.shutdown();
+	}
+
+	public WildcardInput.Transaction newTransaction() {
+		return input.newTransaction();
+	}
+
+	public long newKey() {
+		return input.newKey();
 	}
 }
