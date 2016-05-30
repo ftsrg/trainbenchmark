@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 public class VirtuosoBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig(args, "Virtuoso");
+		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
 		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
 		benchmarkRunner.runBenchmark();
 	}
