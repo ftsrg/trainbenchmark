@@ -16,18 +16,18 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
+import hu.bme.mit.incqueryds.WildcardInput.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSemaphoreNeighborMatch;
 
 public class IQDCoreTransformationRepairSemaphoreNeighbor extends IQDCoreTransformationRepair<IQDCoreSemaphoreNeighborMatch> {
 
-	public IQDCoreTransformationRepairSemaphoreNeighbor(final WildcardInput jenaDriver) {
-		super(jenaDriver);
+	public IQDCoreTransformationRepairSemaphoreNeighbor(final IQDCoreDriver driver) {
+		super(driver);
 	}
 
 	@Override
-	public void rhs(final Collection<IQDCoreSemaphoreNeighborMatch> matches) throws IOException {
+	public void performRHS(final Collection<IQDCoreSemaphoreNeighborMatch> matches) throws IOException {
 		final Transaction transaction = input.newTransaction();
 		for (final IQDCoreSemaphoreNeighborMatch match : matches) {
 			final Long route2 = match.getRoute2();

@@ -11,39 +11,39 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations;
 
-import hu.bme.mit.incquerydcore.WildcardInput;
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.*;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
-public abstract class IQDCoreTransformation<TObject> extends Transformation<TObject, WildcardInput> {
+public abstract class IQDCoreTransformation<TObject> extends Transformation<TObject, IQDCoreDriver> {
 
 	protected WildcardInput input;
 
-	protected IQDCoreTransformation(final WildcardInput input) {
-		super(input);
-		this.input = input;
+	protected IQDCoreTransformation(final IQDCoreDriver driver) {
+		super(driver);
+		this.driver = driver;
 	}
 
-	public static Transformation<?, WildcardInput> newInstance(final WildcardInput input, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static Transformation<?, IQDCoreDriver> newInstance(final IQDCoreDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case BATCH:
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new IQDCoreTransformationRepairConnectedSegments(input);
+				return new IQDCoreTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
-				return new IQDCoreTransformationRepairPosLength(input);
+				return new IQDCoreTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
-				return new IQDCoreTransformationRepairRouteSensor(input);
+				return new IQDCoreTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
-				return new IQDCoreTransformationRepairSemaphoreNeighbor(input);
+				return new IQDCoreTransformationRepairSemaphoreNeighbor(driver);
 			case SWITCHSENSOR:
-				return new IQDCoreTransformationRepairSwitchSensor(input);
+				return new IQDCoreTransformationRepairSwitchSensor(driver);
 			case SWITCHSET:
-				return new IQDCoreTransformationRepairSwitchSet(input);
+				return new IQDCoreTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}

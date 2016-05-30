@@ -16,18 +16,19 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incquerydcore.WildcardInput;
-import hu.bme.mit.incquerydcore.WildcardInput.Transaction;
+import hu.bme.mit.incqueryds.WildcardInput.Transaction;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCorePosLengthMatch;
 
 public class IQDCoreTransformationRepairPosLength extends IQDCoreTransformationRepair<IQDCorePosLengthMatch> {
 
-	public IQDCoreTransformationRepairPosLength(final WildcardInput jenaDriver) {
-		super(jenaDriver);
+	public IQDCoreTransformationRepairPosLength(final IQDCoreDriver driver) {
+		super(driver);
 	}
 
 	@Override
-	public void rhs(final Collection<IQDCorePosLengthMatch> matches) throws IOException {
+	public void performRHS(final Collection<IQDCorePosLengthMatch> matches) throws IOException {
 		final Transaction transaction = input.newTransaction();
 		for (final IQDCorePosLengthMatch match : matches) {
 			final Long segment = match.getSegment();
