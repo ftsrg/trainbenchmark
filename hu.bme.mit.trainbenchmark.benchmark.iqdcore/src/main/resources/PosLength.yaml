@@ -5,7 +5,7 @@ input:
 nodes:
   - Check:
       type: Checker
-      condition: (cs) => { cs match { case Vector(_, length: Int) => length <= 0 } }
+      condition: "(cs) => { cs match { case Vector(_, length: Int) => length <= 0 } }"
       next: production
 
 
