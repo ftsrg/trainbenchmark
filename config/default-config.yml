@@ -73,6 +73,7 @@ tools:
   - inferencing: false
   - inferencing: true
 - blazegraph:
+#- iqdcore:
 # SQL
 - sqlite:
 - mysql:
