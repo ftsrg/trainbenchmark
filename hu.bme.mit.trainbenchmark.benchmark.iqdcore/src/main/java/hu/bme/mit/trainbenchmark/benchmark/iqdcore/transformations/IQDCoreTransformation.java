@@ -12,16 +12,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations;
 
 import hu.bme.mit.incquerydcore.WildcardInput;
+import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreReader;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.constants.Query;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.*;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public abstract class IQDCoreTransformation<TObject> extends Transformation<TObject, WildcardInput> {
 
@@ -32,7 +27,7 @@ public abstract class IQDCoreTransformation<TObject> extends Transformation<TObj
 		this.input = input;
 	}
 
-	public static Transformation<?, WildcardInput> newInstance(final WildcardInput input, final Query query, final Scenario scenario) {
+	public static Transformation<?, WildcardInput> newInstance(final WildcardInput input, final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case BATCH:
 		case REPAIR:

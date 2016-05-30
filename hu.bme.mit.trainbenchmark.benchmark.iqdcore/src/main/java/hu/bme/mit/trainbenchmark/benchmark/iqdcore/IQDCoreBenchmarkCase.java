@@ -22,17 +22,19 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 
-public class IQDCoreBenchmarkCase extends
-		AbstractBenchmarkCase<IQDCoreMatch, Long,  IQDCoreReader, IQDCoreBenchmarkConfig, IQDCoreChecker> {
-	private final IQDCoreBenchmarkConfig iqdbc;
+public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Long,  IQDCoreReader, IQDCoreBenchmarkConfig, IQDCoreChecker> {
+
+	protected final IQDCoreBenchmarkConfig iqdbc;
 	protected WildcardInput iqdInput;
 	protected RDFBenchmarkConfig rdfbc;
 	protected IQDCoreChecker checker;
+
 	public IQDCoreBenchmarkCase(IQDCoreBenchmarkConfig config) {
 		iqdbc = config;
 		setCPUAffinity();
@@ -63,12 +65,12 @@ public class IQDCoreBenchmarkCase extends
 	}
 
 	@Override
-	public IQDCoreChecker createChecker(IQDCoreBenchmarkConfig benchmarkConfig, IQDCoreReader driver) throws Exception {
+	public IQDCoreChecker createChecker(IQDCoreBenchmarkConfig benchmarkConfig, IQDCoreReader driver, RailwayQuery query) throws Exception {
 		return checker;
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(IQDCoreBenchmarkConfig benchmarkConfig, IQDCoreReader driver) throws IOException {
+	public Transformation<?, ?> createTransformation(IQDCoreBenchmarkConfig benchmarkConfig, IQDCoreReader driver, RailwayQuery query) throws IOException {
 		return IQDCoreTransformation.newInstance(iqdInput, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
