@@ -25,3 +25,8 @@ catalog-v*.xml
 
 # IntelliJ IDEA
 *.iml
+
+# Eclipse
+.project
+.classpath
+
