@@ -71,7 +71,7 @@ public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Lo
 
 	@Override
 	public Transformation<?, ?> createTransformation(IQDCoreBenchmarkConfig benchmarkConfig, IQDCoreDriver driver, RailwayQuery query) throws IOException {
-		return IQDCoreTransformation.newInstance(iqdInput, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
+		return IQDCoreTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 
 	@Override

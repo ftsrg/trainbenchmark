@@ -29,7 +29,7 @@ public class IQDCoreTransformationRepairPosLength extends IQDCoreTransformationR
 
 	@Override
 	public void performRHS(final Collection<IQDCorePosLengthMatch> matches) throws IOException {
-		final Transaction transaction = input.newTransaction();
+		final Transaction transaction = driver.newTransaction();
 		for (final IQDCorePosLengthMatch match : matches) {
 			final Long segment = match.getSegment();
 			final int length = match.getLength();
@@ -37,7 +37,7 @@ public class IQDCoreTransformationRepairPosLength extends IQDCoreTransformationR
 			transaction.remove(segment, LENGTH, length);
 			transaction.add(segment, LENGTH, newLength);
 		}
-		input.processTransaction(transaction);
+		transaction.close();
 	}
 
 }

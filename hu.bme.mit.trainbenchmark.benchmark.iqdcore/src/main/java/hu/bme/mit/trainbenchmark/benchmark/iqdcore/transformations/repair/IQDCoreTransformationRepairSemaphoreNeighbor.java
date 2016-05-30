@@ -28,13 +28,13 @@ public class IQDCoreTransformationRepairSemaphoreNeighbor extends IQDCoreTransfo
 
 	@Override
 	public void performRHS(final Collection<IQDCoreSemaphoreNeighborMatch> matches) throws IOException {
-		final Transaction transaction = input.newTransaction();
+		final Transaction transaction = driver.newTransaction();
 		for (final IQDCoreSemaphoreNeighborMatch match : matches) {
 			final Long route2 = match.getRoute2();
 			final Long semaphore = match.getSemaphore();
 			transaction.add(route2, ENTRY, semaphore);
 		}
-		input.processTransaction(transaction);
+		transaction.close();
 	}
 
 }
