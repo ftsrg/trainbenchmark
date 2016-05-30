@@ -8,42 +8,42 @@ input:
 nodes:
   - EntryDefined:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: Antijoin.secondary
   - ExitDefined:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: SecondToLastJoin.primary
   - SensorConnects:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: RightMostJoin.primary
   - RightMostJoin:
       type: HashJoiner
-      primaryLenght: 3
+      primaryLength: 3
       primarySelector: Vector(2)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: SecondToLastJoin.secondary
   - SecondToLastJoin:
       type: HashJoiner
-      primaryLenght: 3
+      primaryLength: 3
       primarySelector: Vector(1)
       secondaryLength: 4
       secondarySelector: Vector(0)
       next: FinalJoin.primary
   - FinalJoin:
       type: HashJoiner
-      primaryLenght: 6
+      primaryLength: 6
       primarySelector: Vector(5)
       secondaryLength: 2
       secondarySelector: Vector(1)

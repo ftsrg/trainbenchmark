@@ -8,49 +8,49 @@ input:
 nodes:
   - SegmentJoin1:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 1
       secondarySelector: Vector(0)
       next: Join1_2.primary
   - Join1_2:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: Join12_34.primary
   - Join3_4:
       type: HashJoiner
-      primaryLenght: 2
+      primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: Join12_34.secondary
   - Join12_34:
       type: HashJoiner
-      primaryLenght: 3
+      primaryLength: 3
       primarySelector: Vector(2)
       secondaryLength: 3
       secondarySelector: Vector(0)
       next: Join1234_5.primary
   - Join1234_5:
       type: HashJoiner
-      primaryLenght: 5
+      primaryLength: 5
       primarySelector: Vector(4)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: SensorJoin1.primary
   - SensorJoin1:
       type: HashJoiner
-      primaryLenght: 6
+      primaryLength: 6
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: SensorJoin2.primary
   - SensorJoin2:
       type: HashJoiner
-      primaryLenght: 7
+      primaryLength: 7
       primarySelector: Vector(5, 6)
       secondaryLength: 2
       secondarySelector: Vector(0, 1)
