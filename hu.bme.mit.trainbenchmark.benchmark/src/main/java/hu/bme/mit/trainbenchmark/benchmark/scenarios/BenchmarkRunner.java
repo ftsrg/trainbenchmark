@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -22,7 +21,6 @@ import java.util.Random;
 
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.metrics.ScalarMetric;
-import eu.mondo.sam.core.metrics.TimeMetric;
 import eu.mondo.sam.core.publishers.CsvPublisher;
 import eu.mondo.sam.core.publishers.DefaultFilenameFactory;
 import eu.mondo.sam.core.publishers.FilenameFactory;
@@ -40,7 +38,7 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
 
-	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	protected final Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TBenchmarkConfig benchmarkConfig;
 	protected final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkCase;
 
@@ -70,7 +68,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 			scenario.setRunIndex(i);
 			final FilenameFactory factory = new DefaultFilenameFactory(scenario.getCaseDescriptor());
 			result = new BenchmarkResult(new File("."));
-			CsvPublisher publisher = new CsvPublisher(factory);
+			final CsvPublisher publisher = new CsvPublisher(factory);
 			result.addPublisher(publisher);
 
 			final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
@@ -92,26 +90,14 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		return result;
 	}
 
-	// initialization methods
-
-	public final void initializeTransformation() throws IOException {
-		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver, benchmarkConfig.getQuery());
-		transformationLogic = (TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig>) TransformationLogic
-				.newInstance(benchmarkConfig.getScenario(), getComparator());
-		if (transformationLogic != null) {
-			transformationLogic.initialize(benchmarkConfig, driver, random);
-		}
-		transformationLogic.setTransformation(transformation);
-	}
-
 	// phases
 
 	public final void read(final PhaseResult phaseResult) throws Exception {
-		final TimeMetric timer = new TimeMetric("Time");
-		timer.startMeasure();
+//		final TimeMetric timer = new TimeMetric("Time");
+//		timer.startMeasure();
 		driver.read(benchmarkConfig.getModelPathWithoutExtension());
-		timer.stopMeasure();
-		phaseResult.addMetrics(timer);
+//		timer.stopMeasure();
+//		phaseResult.addMetrics(timer);
 
 		final ScalarMetric maxMemory = new ScalarMetric("MaxMemory");
 		maxMemory.setValue(benchmarkConfig.getMaxMemory());
@@ -122,30 +108,37 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		// initialize a list for the matches
 		matches = new ArrayList<>(checkers.size());
 
-		final TimeMetric timer = new TimeMetric("Time");
+//		final TimeMetric timer = new TimeMetric("Time");
+//		timer.startMeasure();
 		final ScalarMetric results = new ScalarMetric("Matches");
-		timer.startMeasure();
 
 		for (final TChecker checker : checkers) {
 			matches.add(checker.check());
 		}
 
-		timer.stopMeasure();
 		// only use the first match for now
 		results.setValue(matches.get(0).size());
-		phaseResult.addMetrics(timer, results);
+//		timer.stopMeasure();
+//		phaseResult.addMetrics(timer, results);
+		phaseResult.addMetrics(results);
 	}
 
 	public final void destroy() throws Exception {
 		for (final TChecker checker : checkers) {
 			checker.destroy();
 		}
-		if (driver != null) {
-			driver.destroy();
-		}
+		driver.destroy();
 	}
 
 	public final void transform(final PhaseResult phaseResult) throws Exception {
+		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver, benchmarkConfig.getQuery());
+		transformationLogic = (TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig>) TransformationLogic
+				.newInstance(benchmarkConfig.getScenario(), getComparator());
+		if (transformationLogic != null) {
+			transformationLogic.initialize(benchmarkConfig, driver, random);
+		}
+		transformationLogic.setTransformation(transformation);
+
 		transformationLogic.performTransformation(phaseResult, matches.get(0));
 	}
 
