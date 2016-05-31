@@ -9,18 +9,28 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
+import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import scala.collection.immutable.Vector;
+public class IQDCorePosLengthMatch extends IQDCoreMatch implements PosLengthMatch {
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+	public IQDCorePosLengthMatch(final Vector<Object> qs) {
+		super(qs);
+	}
 
-public class VirtuosoBenchmarkMain {
+	@Override
+	public Long getSegment() {
+		return (Long) qs.apply(0);
+	}
 
-	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+	public Integer getLength() {
+		return (Integer) qs.apply(1);
+	}
+
+	@Override
+	public Long[] toArray() {
+		return new Long[] { getSegment() };
 	}
 
 }

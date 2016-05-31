@@ -10,17 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+import hu.bme.mit.trainbenchmark.benchmark.test.InjectTest;
 
-public class VirtuosoBenchmarkMain {
+public class EclipseOCLInjectTest extends InjectTest {
 
-	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+	public EclipseOCLInjectTest() {
+		bi = new EclipseOCLBenchmarkInitializer();
 	}
 
 }

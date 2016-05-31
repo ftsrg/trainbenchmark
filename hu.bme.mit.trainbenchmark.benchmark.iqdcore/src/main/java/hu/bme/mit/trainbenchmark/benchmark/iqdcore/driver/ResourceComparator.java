@@ -9,18 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver;
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
+import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+public class ResourceComparator implements Comparator<Long> {
 
-public class VirtuosoBenchmarkMain {
-
-	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+	@Override
+	public int compare(final Long r1, final Long r2) {
+		return Long.compare(r1, r2);
 	}
 
 }

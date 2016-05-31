@@ -24,7 +24,7 @@ public class RDFBenchmarkConfig extends BenchmarkConfig {
 	protected static final String INFERENCING = "inferencing";
 	protected boolean inferencing;
 
-	public RDFBenchmarkConfig(final String[] args, final String toolName) throws ParseException {
+	public RDFBenchmarkConfig(final String toolName, final String[] args) throws ParseException {
 		super(toolName, args);
 	}
 
