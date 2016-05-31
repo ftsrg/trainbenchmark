@@ -61,7 +61,6 @@ public abstract class TrainBenchmarkTest {
 
 	private void runQuery(final BenchmarkRunner benchmarkRunner, final List<Integer> expectedResultSizes)
 			throws Exception {
-//		JsonSerializer.setResultPath("../results/test/");
 		final BenchmarkResult benchmarkResult = benchmarkRunner.runBenchmark();
 
 		final List<Integer> resultSizes = new ArrayList<>();
