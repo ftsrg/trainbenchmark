@@ -10,17 +10,24 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
+import java.io.IOException;
+
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+import org.apache.commons.cli.ParseException;
 
-public class VirtuosoBenchmarkMain {
+public class IQDCoreBenchmarkMain {
 
-	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+	public static void main(String[] args) throws Exception {
+		Thread.sleep(10000); //wait for remote system to unquarantine us
+		final IQDCoreBenchmarkConfig benchmarkConfig = new IQDCoreBenchmarkConfig(args);
+		final BenchmarkRunner benchmarkLogic = new BenchmarkRunner(benchmarkConfig, new IQDCoreBenchmarkCase(benchmarkConfig));
+		benchmarkLogic.runBenchmark();
+		System.exit(0);
+		return;
 	}
 
 }

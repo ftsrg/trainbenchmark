@@ -9,18 +9,25 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSensorMatch;
+import scala.collection.immutable.Vector;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+public class IQDCoreSwitchSensorMatch extends IQDCoreMatch implements SwitchSensorMatch {
 
-public class VirtuosoBenchmarkMain {
+	public IQDCoreSwitchSensorMatch(final Vector<Object> qs) {
+		super(qs);
+	}
 
-	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+	@Override
+	public Long getSw() {
+		return (Long) qs.apply(0);
+	}
+
+	@Override
+	public Long[] toArray() {
+		return new Long[] { getSw() };
 	}
 
 }

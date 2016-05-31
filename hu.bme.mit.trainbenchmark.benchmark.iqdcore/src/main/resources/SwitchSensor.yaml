@@ -1,0 +1,16 @@
+input:
+  edges:
+    monitoredBy: [Trim]
+  types:
+    Switch: [Antijoin.primary]
+
+nodes:
+  - Trim:
+      type: Trimmer
+      selectionVector: Vector(0)
+      next: Antijoin.secondary
+  - Antijoin:
+      type: HashAntijoiner
+      primarySelector: Vector(0)
+      secondarySelector: Vector(0)
+      next: production

@@ -9,18 +9,17 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+public abstract class IQDCoreTransformationRepair<TMatch extends IQDCoreMatch> extends IQDCoreTransformation<TMatch> {
 
-public class VirtuosoBenchmarkMain {
-
-	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+	protected IQDCoreTransformationRepair(final IQDCoreDriver driver) {
+		super(driver);
 	}
 
 }

@@ -10,17 +10,14 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.virtuoso;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
+import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class VirtuosoBenchmarkMain {
+public class IQDCoreBatchNoInferencingTest extends BatchTest {
 
-	public static void main(final String[] args) throws Exception {
-		final RDFBenchmarkConfig benchmarkConfig = new RDFBenchmarkConfig("Virtuoso", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new VirtuosoBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+	public IQDCoreBatchNoInferencingTest() {
+		bi = new IQDCoreBenchmarkNoInferencingInitializer();
 	}
 
 }
