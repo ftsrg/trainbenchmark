@@ -17,12 +17,12 @@ import org.apache.commons.cli.ParseException;
 
 import com.google.common.collect.ImmutableList;
 
-import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
-public class BenchmarkConfig extends TrainBenchmarkConfig {
+public class BenchmarkConfig extends AbstractConfig {
 
 	protected static final String RUNS = "runs";
 	protected static final String ITERATION_COUNT = "iterationCount";
@@ -34,7 +34,7 @@ public class BenchmarkConfig extends TrainBenchmarkConfig {
 
 	protected final String toolName;
 
-	// constants for trhe transformation
+	// constants for the transformation
 	protected TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
 	protected long transformationConstant = 10;
 	protected int iterationCount = 10;
