@@ -43,7 +43,7 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, MySQLD
 	}
 
 	@Override
-	public Comparator<?> createMatchComparator() {
+	public Comparator<?> getMatchComparator() {
 		return new LongMatchComparator();
 	}
 
