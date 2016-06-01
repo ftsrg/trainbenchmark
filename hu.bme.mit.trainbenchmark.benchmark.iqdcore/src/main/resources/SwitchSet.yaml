@@ -15,10 +15,10 @@ nodes:
   - LeftTrimmer:
       type: Trimmer
       selectionVector: Vector(0)
-      next: Entry_SemaphoreJoin.primary #itt valami baj van :D
+      next: Entry_SemaphoreJoin.primary
   - Entry_SemaphoreJoin:
       type: HashJoiner
-      primaryLength: 2
+      primaryLength: 1
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(1)
