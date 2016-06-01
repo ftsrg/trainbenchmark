@@ -28,7 +28,7 @@ public class IQDCoreTransformationRepairConnectedSegments extends IQDCoreTransfo
 	}
 
 	@Override
-	public void performRHS(final Collection<IQDCoreConnectedSegmentsMatch> matches) throws IOException {
+	public void activate(final Collection<IQDCoreConnectedSegmentsMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
 		for (final IQDCoreConnectedSegmentsMatch match : matches) {
 			transaction.remove(match.getSegment1(), CONNECTS_TO, match.getSegment2());

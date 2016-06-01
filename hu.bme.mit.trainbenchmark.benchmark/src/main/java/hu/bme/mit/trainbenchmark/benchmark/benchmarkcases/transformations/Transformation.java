@@ -15,7 +15,7 @@ import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
-public abstract class Transformation<TObject, TDriver extends Driver> {
+public abstract class Transformation<TObject, TDriver extends Driver<?>> {
 
 	protected TDriver driver;
 	
@@ -27,6 +27,6 @@ public abstract class Transformation<TObject, TDriver extends Driver> {
 	// Using "throws Exception" is generally considered bad practice in production systems.
 	// However, it allows us to throw all exceptions similar to unchecked exceptions,
 	// hence we found it acceptible in benchmark code.
-	public abstract void performRHS(Collection<TObject> objects) throws Exception;
+	public abstract void activate(Collection<TObject> objects) throws Exception;
 
 }

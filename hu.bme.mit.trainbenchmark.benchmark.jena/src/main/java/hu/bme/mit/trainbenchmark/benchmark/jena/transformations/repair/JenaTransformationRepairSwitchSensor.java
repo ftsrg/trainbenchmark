@@ -33,7 +33,7 @@ public class JenaTransformationRepairSwitchSensor extends JenaTransformationRepa
 	}
 
 	@Override
-	public void performRHS(final Collection<JenaSwitchSensorMatch> matches) throws Exception {
+	public void activate(final Collection<JenaSwitchSensorMatch> matches) throws Exception {
 		final Model model = driver.getModel();
 		final Property sensorEdge = model.getProperty(BASE_PREFIX + MONITORED_BY);
 		final Resource sensorType = model.getResource(BASE_PREFIX + SENSOR);

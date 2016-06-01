@@ -27,7 +27,7 @@ public class EMFIncQueryTransformationRepairRouteSensor extends EMFIncQueryTrans
 	}
 
 	@Override
-	public void performRHS(final Collection<RouteSensorMatch> matches) throws IOException {
+	public void activate(final Collection<RouteSensorMatch> matches) throws IOException {
 		for (final RouteSensorMatch match : matches) {
 			match.getRoute().getGathers().add(match.getSensor());
 		}

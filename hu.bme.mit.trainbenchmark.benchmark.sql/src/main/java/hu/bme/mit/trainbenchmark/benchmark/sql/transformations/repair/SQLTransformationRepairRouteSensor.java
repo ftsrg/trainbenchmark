@@ -28,7 +28,7 @@ public class SQLTransformationRepairRouteSensor extends SQLTransformationRepair<
 	}
 
 	@Override
-	public void performRHS(final Collection<SQLRouteSensorMatch> matches) throws SQLException {
+	public void activate(final Collection<SQLRouteSensorMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}

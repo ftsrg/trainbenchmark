@@ -27,7 +27,7 @@ public class IQDCoreTransformationRepairRouteSensor extends IQDCoreTransformatio
 	}
 
 	@Override
-	public void performRHS(final Collection<IQDCoreRouteSensorMatch> matches) throws IOException {
+	public void activate(final Collection<IQDCoreRouteSensorMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
 		for (final IQDCoreRouteSensorMatch match : matches) {
 			final Long route = match.getRoute();

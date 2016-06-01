@@ -17,7 +17,7 @@ public abstract class SQLiteTransformationInject extends SQLiteTransformation<Lo
 	}
 
 	@Override
-	public void performRHS(final Collection<Long> elements) throws SQLException {
+	public void activate(final Collection<Long> elements) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}

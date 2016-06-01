@@ -27,7 +27,7 @@ public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformationInj
 	}
 
 	@Override
-	public void performRHS(final Collection<Node> routes) {
+	public void activate(final Collection<Node> routes) {
 		for (final Node route : routes) {
 			final Iterable<Relationship> gatherss = route.getRelationships(relationshipTypeGathers);
 			for (final Relationship gathers : gatherss) {

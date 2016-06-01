@@ -27,7 +27,7 @@ public class TinkerGraphTransformationInjectSemaphoreNeighbor extends TinkerGrap
 	}
 
 	@Override
-	public void performRHS(final Collection<Vertex> routes) {
+	public void activate(final Collection<Vertex> routes) {
 		for (final Vertex route : routes) {
 			final Iterable<Edge> entries = () -> route.edges(Direction.OUT, ModelConstants.ENTRY);
 			for (final Edge entry : entries) {

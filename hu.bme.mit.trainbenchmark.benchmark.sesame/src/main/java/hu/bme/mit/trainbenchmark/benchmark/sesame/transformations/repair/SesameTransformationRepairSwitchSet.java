@@ -34,7 +34,7 @@ public class SesameTransformationRepairSwitchSet extends SesameTransformationRep
 	}
 
 	@Override
-	public void performRHS(final Collection<SesameSwitchSetMatch> matches) throws RepositoryException {
+	public void activate(final Collection<SesameSwitchSetMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

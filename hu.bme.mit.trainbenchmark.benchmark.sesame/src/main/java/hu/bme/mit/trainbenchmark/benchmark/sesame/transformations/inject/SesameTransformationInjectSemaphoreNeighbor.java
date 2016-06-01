@@ -26,7 +26,7 @@ public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransform
 	}
 
 	@Override
-	public void performRHS(final Collection<URI> routes) throws RepositoryException {
+	public void activate(final Collection<URI> routes) throws RepositoryException {
 		driver.deleteSingleOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.ENTRY);
 	}
 

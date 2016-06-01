@@ -30,7 +30,7 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 	}
 
 	@Override
-	public void performRHS(final Collection<Node> segments) {
+	public void activate(final Collection<Node> segments) {
 		for (final Node segment1 : segments) {
 			final Node segment2 = driver.getGraphDb().createNode(labelSegment);
 

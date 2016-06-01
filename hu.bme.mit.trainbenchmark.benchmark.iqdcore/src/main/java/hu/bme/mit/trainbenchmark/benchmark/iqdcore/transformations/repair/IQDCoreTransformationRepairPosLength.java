@@ -28,7 +28,7 @@ public class IQDCoreTransformationRepairPosLength extends IQDCoreTransformationR
 	}
 
 	@Override
-	public void performRHS(final Collection<IQDCorePosLengthMatch> matches) throws IOException {
+	public void activate(final Collection<IQDCorePosLengthMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
 		for (final IQDCorePosLengthMatch match : matches) {
 			final Long segment = match.getSegment();

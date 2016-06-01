@@ -29,7 +29,7 @@ public class SQLiteTransformationRepairConnectedSegments extends SQLiteTransform
 	}
 
 	@Override
-	public void performRHS(final Collection<SQLConnectedSegmentsMatch> matches) throws SQLException {
+	public void activate(final Collection<SQLConnectedSegmentsMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
 		}

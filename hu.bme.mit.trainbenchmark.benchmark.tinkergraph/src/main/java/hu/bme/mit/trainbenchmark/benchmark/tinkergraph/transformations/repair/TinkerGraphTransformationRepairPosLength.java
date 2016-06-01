@@ -27,7 +27,7 @@ public class TinkerGraphTransformationRepairPosLength extends TinkerGraphTransfo
 	}
 
 	@Override
-	public void performRHS(final Collection<TinkerGraphPosLengthMatch> matches) {
+	public void activate(final Collection<TinkerGraphPosLengthMatch> matches) {
 		for (final TinkerGraphPosLengthMatch plm : matches) {
 			final Vertex segment = plm.getSegment();
 			final Integer length = plm.getLength();

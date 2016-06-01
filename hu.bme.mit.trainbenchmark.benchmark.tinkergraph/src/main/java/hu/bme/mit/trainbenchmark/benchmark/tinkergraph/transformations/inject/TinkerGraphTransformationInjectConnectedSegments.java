@@ -30,7 +30,7 @@ public class TinkerGraphTransformationInjectConnectedSegments extends TinkerGrap
 	}
 
 	@Override
-	public void performRHS(final Collection<Vertex> segments) {
+	public void activate(final Collection<Vertex> segments) {
 		for (final Vertex segment1 : segments) {
 			final Vertex segment2 = driver.getGraph().addVertex(ModelConstants.SEGMENT);
 

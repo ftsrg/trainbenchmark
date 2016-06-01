@@ -26,7 +26,7 @@ public class Neo4jTransformationRepairRouteSensor extends Neo4jTransformationRep
 	}
 
 	@Override
-	public void performRHS(final Collection<Neo4jRouteSensorMatch> matches) {
+	public void activate(final Collection<Neo4jRouteSensorMatch> matches) {
 		for (final Neo4jRouteSensorMatch rsm : matches) {
 			final Node route = rsm.getRoute();
 			final Node sensor = rsm.getSensor();

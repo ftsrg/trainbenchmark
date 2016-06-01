@@ -26,7 +26,7 @@ public class Neo4jTransformationRepairSemaphoreNeighbor extends Neo4jTransformat
 	}
 
 	@Override
-	public void performRHS(final Collection<Neo4jSemaphoreNeighborMatch> matches) {
+	public void activate(final Collection<Neo4jSemaphoreNeighborMatch> matches) {
 		for (final Neo4jSemaphoreNeighborMatch snm : matches) {
 			final Node semaphore = snm.getSemaphore();
 			final Node route2 = snm.getRoute2();

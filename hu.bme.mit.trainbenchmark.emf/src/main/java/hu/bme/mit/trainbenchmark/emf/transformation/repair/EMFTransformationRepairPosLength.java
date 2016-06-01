@@ -23,7 +23,7 @@ public class EMFTransformationRepairPosLength extends EMFTransformationRepair<EM
 	}
 
 	@Override
-	public void performRHS(final Collection<EMFPosLengthMatch> matches) {
+	public void activate(final Collection<EMFPosLengthMatch> matches) {
 		for (final EMFPosLengthMatch plm : matches) {
 			final int newLength = -plm.getSegment().getLength() + 1;
 			plm.getSegment().setLength(newLength);

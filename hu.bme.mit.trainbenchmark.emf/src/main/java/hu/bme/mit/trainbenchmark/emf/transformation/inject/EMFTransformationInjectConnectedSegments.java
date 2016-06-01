@@ -30,7 +30,7 @@ public class EMFTransformationInjectConnectedSegments extends EMFTransformationI
 	}
 
 	@Override
-	public void performRHS(final Collection<Segment> segments) throws IOException {
+	public void activate(final Collection<Segment> segments) throws IOException {
 		for (final Segment segment1 : segments) {
 			if (segment1.getConnectsTo().isEmpty()) {
 				continue;

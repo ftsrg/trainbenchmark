@@ -33,7 +33,7 @@ public class SesameTransformationInjectPosLength extends SesameTransformationInj
 	}
 
 	@Override
-	public void performRHS(final Collection<URI> segments) throws RepositoryException {
+	public void activate(final Collection<URI> segments) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
