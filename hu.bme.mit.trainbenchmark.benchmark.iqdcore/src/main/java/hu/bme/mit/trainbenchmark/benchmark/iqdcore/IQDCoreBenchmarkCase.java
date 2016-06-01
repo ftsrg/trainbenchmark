@@ -75,7 +75,7 @@ public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Lo
 	}
 
 	@Override
-	public Comparator<?> createMatchComparator() {
+	public Comparator<?> getMatchComparator() {
 		return new IQDCoreMatchComparator();
 	}
 }

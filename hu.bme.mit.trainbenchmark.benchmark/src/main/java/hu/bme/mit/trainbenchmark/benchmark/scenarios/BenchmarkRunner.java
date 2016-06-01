@@ -150,7 +150,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		case INJECT:
 			return driver.getElementComparator();
 		case REPAIR:
-			return benchmarkCase.createMatchComparator();
+			return benchmarkCase.getMatchComparator();
 		default:
 			throw new UnsupportedOperationException();
 		}

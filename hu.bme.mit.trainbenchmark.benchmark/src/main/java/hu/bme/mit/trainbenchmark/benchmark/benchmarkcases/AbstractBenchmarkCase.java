@@ -29,6 +29,6 @@ public abstract class AbstractBenchmarkCase<TMatch, TElement, TDriver extends Dr
 
 	public abstract Transformation<?, ?> createTransformation(TBenchmarkConfig benchmarkConfig, TDriver driver, RailwayQuery query) throws IOException;
 
-	public abstract Comparator<?> createMatchComparator();
+	public abstract Comparator<?> getMatchComparator();
 
 }

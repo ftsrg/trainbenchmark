@@ -25,7 +25,7 @@ public abstract class EMFBenchmarkCase<TDriver extends EMFDriver, TBenchmarkConf
 		extends AbstractBenchmarkCase<EMFMatch, RailwayElement, TDriver, TBenchmarkConfig, TChecker> {
 
 	@Override
-	public Comparator<?> createMatchComparator() {
+	public Comparator<?> getMatchComparator() {
 		return new EMFMatchComparator();
 	}
 
