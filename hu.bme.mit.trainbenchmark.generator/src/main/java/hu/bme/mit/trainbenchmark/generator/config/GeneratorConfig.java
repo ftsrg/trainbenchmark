@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.generator.config;
 
 import org.apache.commons.cli.ParseException;
 
-import hu.bme.mit.trainbenchmark.config.TrainBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 
-public class GeneratorConfig extends TrainBenchmarkConfig {
+public class GeneratorConfig extends AbstractConfig {
 
 	protected static final String GRAPH_FORMAT = "graphFormat";
 

@@ -30,7 +30,7 @@ import org.apache.commons.lang.WordUtils;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
-public abstract class TrainBenchmarkConfig {
+public abstract class AbstractConfig {
 
 	protected static final String HELP = "help";
 	protected static final String MAX_MEMORY = "maxMemory";
@@ -48,7 +48,7 @@ public abstract class TrainBenchmarkConfig {
 	protected int size;
 	protected int maxMemory = 1000;
 
-	public TrainBenchmarkConfig(final String args[]) throws ParseException {
+	public AbstractConfig(final String args[]) throws ParseException {
 		initOptions();
 
 		if (Arrays.asList(args).contains("-help")) {
@@ -64,7 +64,7 @@ public abstract class TrainBenchmarkConfig {
 		}
 	}
 
-	public TrainBenchmarkConfig(final ScenarioEnum scenario, final int size) {
+	public AbstractConfig(final ScenarioEnum scenario, final int size) {
 		this.scenario = scenario;
 		this.size = size;
 	}
