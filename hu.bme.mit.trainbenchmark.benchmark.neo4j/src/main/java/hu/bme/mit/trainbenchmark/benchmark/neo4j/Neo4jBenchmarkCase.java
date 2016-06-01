@@ -53,7 +53,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 
 	@Override
-	public Comparator<?> createMatchComparator() {
+	public Comparator<?> getMatchComparator() {
 		return new Neo4jMatchComparator();
 	}
 

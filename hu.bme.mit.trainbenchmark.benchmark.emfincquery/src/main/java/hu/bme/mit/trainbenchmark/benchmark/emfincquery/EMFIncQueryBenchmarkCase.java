@@ -47,7 +47,7 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 	}
 
 	@Override
-	public Comparator<?> createMatchComparator() {
+	public Comparator<?> getMatchComparator() {
 		return new EMFIncQueryMatchComparator();
 	}
 

@@ -48,7 +48,7 @@ public class JenaBenchmarkCase
 	}
 
 	@Override
-	public Comparator<?> createMatchComparator() {
+	public Comparator<?> getMatchComparator() {
 		return new JenaMatchComparator();
 	}
 
