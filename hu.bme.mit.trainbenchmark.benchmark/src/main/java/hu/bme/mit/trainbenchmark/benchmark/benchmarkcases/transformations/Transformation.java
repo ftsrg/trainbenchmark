@@ -24,7 +24,9 @@ public abstract class Transformation<TObject, TDriver extends Driver> {
 	}
 
 	// As the transformations are implemented on a wide range of technologies, they may throw any exception.
-	// Using "throws Exception" is generally considered bad practice in production systems, however, it is acceptible in the benchmark code.
+	// Using "throws Exception" is generally considered bad practice in production systems.
+	// However, it allows us to throw all exceptions similar to unchecked exceptions,
+	// hence we found it acceptible in benchmark code.
 	public abstract void performRHS(Collection<TObject> objects) throws Exception;
 
 }
