@@ -43,7 +43,7 @@ public class SQLiteBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, SQLit
 	}
 
 	@Override
-	public Comparator<?> createMatchComparator() {
+	public Comparator<?> getMatchComparator() {
 		return new LongMatchComparator();
 	}
 
