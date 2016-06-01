@@ -25,7 +25,7 @@ public class EMFTransformationInjectSwitchSet extends EMFTransformationInject<Sw
 	}
 
 	@Override
-	public void performRHS(final Collection<Switch> switches) throws IOException {
+	public void activate(final Collection<Switch> switches) throws IOException {
 		for (final Switch sw : switches) {
 			final Position currentPosition = sw.getCurrentPosition();
 			final Position newCurrentPosition = Position.get((currentPosition.ordinal() + 1) % Position.VALUES.size());

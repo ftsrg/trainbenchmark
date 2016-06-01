@@ -35,7 +35,7 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 	}
 
 	@Override
-	public void performRHS(final Collection<SesamePosLengthMatch> matches) throws RepositoryException {
+	public void activate(final Collection<SesamePosLengthMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

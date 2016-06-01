@@ -28,7 +28,7 @@ public class TinkerGraphTransformationInjectSwitchSet extends TinkerGraphTransfo
 	}
 
 	@Override
-	public void performRHS(final Collection<Vertex> switches) {
+	public void activate(final Collection<Vertex> switches) {
 		for (final Vertex sw : switches) {
 			final String currentPositionString = (String) sw.property(ModelConstants.CURRENTPOSITION).value();
 			final Position currentPosition = Position.valueOf(currentPositionString);

@@ -87,7 +87,7 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		objectsToModify = pickRandom(numberOfObjectsToModify, candidatesList);
 
 		transformationMetric.startMeasure();
-		transformation.performRHS(objectsToModify);
+		transformation.activate(objectsToModify);
 		driver.finishTransaction();
 		transformationMetric.stopMeasure();
 

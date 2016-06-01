@@ -36,7 +36,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 	}
 
 	@Override
-	public void performRHS(final Collection<URI> segments) throws Exception {
+	public void activate(final Collection<URI> segments) throws Exception {
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

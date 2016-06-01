@@ -28,7 +28,7 @@ public class SQLTransformationRepairSwitchSet extends SQLTransformationRepair<SQ
 	}
 
 	@Override
-	public void performRHS(final Collection<SQLSwitchSetMatch> matches) throws SQLException {
+	public void activate(final Collection<SQLSwitchSetMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}

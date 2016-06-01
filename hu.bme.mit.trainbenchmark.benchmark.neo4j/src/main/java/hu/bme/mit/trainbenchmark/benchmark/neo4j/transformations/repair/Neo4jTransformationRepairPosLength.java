@@ -27,7 +27,7 @@ public class Neo4jTransformationRepairPosLength extends Neo4jTransformationRepai
 	}
 
 	@Override
-	public void performRHS(final Collection<Neo4jPosLengthMatch> matches) {
+	public void activate(final Collection<Neo4jPosLengthMatch> matches) {
 		for (final Neo4jPosLengthMatch plm : matches) {
 			final Node segment = plm.getSegment();
 			final Integer length = plm.getLength();

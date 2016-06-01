@@ -35,7 +35,7 @@ public class JenaTransformationInjectPosLength extends JenaTransformationInject 
 	}
 
 	@Override
-	public void performRHS(final Collection<Resource> segments) throws IOException {
+	public void activate(final Collection<Resource> segments) throws IOException {
 		final Model model = driver.getModel();
 		final Property lengthProperty = model.getProperty(BASE_PREFIX + LENGTH);
 

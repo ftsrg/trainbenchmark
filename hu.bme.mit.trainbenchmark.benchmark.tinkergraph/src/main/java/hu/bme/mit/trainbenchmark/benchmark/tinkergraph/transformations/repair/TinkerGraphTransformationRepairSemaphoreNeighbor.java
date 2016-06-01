@@ -27,7 +27,7 @@ public class TinkerGraphTransformationRepairSemaphoreNeighbor extends TinkerGrap
 	}
 
 	@Override
-	public void performRHS(final Collection<TinkerGraphSemaphoreNeighborMatch> matches) {
+	public void activate(final Collection<TinkerGraphSemaphoreNeighborMatch> matches) {
 		for (final TinkerGraphSemaphoreNeighborMatch snm : matches) {
 			final Vertex semaphore = snm.getSemaphore();
 			final Vertex route2 = snm.getRoute2();

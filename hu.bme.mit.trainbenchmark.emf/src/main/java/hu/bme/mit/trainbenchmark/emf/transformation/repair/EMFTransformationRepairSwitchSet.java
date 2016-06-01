@@ -23,7 +23,7 @@ public class EMFTransformationRepairSwitchSet extends EMFTransformationRepair<EM
 	}
 
 	@Override
-	public void performRHS(final Collection<EMFSwitchSetMatch> matches) {
+	public void activate(final Collection<EMFSwitchSetMatch> matches) {
 		for (final EMFSwitchSetMatch sstm : matches) {
 			sstm.getSw().setCurrentPosition(sstm.getSwP().getPosition());
 		}

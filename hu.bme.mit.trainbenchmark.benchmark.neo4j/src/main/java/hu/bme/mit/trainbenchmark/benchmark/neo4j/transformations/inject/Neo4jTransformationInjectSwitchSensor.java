@@ -26,7 +26,7 @@ public class Neo4jTransformationInjectSwitchSensor extends Neo4jTransformationIn
 	}
 
 	@Override
-	public void performRHS(final Collection<Node> switches) {
+	public void activate(final Collection<Node> switches) {
 		for (final Node sw : switches) {
 			final Iterable<Relationship> sensors = sw.getRelationships(relationshipTypeMonitoredBy);
 			for (final Relationship sensor : sensors) {

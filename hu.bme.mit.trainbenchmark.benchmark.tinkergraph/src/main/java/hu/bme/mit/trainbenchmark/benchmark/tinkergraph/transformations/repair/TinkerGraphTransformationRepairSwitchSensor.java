@@ -28,7 +28,7 @@ public class TinkerGraphTransformationRepairSwitchSensor extends TinkerGraphTran
 	}
 
 	@Override
-	public void performRHS(final Collection<TinkerGraphSwitchSensorMatch> matches) {
+	public void activate(final Collection<TinkerGraphSwitchSensorMatch> matches) {
 		for (final TinkerGraphSwitchSensorMatch ssnm : matches) {
 			final Vertex sw = ssnm.getSw();
 			final Vertex sensor = driver.getGraph().addVertex(SENSOR);

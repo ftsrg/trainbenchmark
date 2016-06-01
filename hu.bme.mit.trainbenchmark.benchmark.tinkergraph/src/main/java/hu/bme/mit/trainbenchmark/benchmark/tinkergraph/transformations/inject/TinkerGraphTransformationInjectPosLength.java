@@ -26,7 +26,7 @@ public class TinkerGraphTransformationInjectPosLength extends TinkerGraphTransfo
 	}
 
 	@Override
-	public void performRHS(final Collection<Vertex> segments) {
+	public void activate(final Collection<Vertex> segments) {
 		for (final Vertex segment : segments) {
 			segment.property(LENGTH, 0);
 		}

@@ -38,7 +38,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 	}
 
 	@Override
-	public void performRHS(final Collection<Resource> segments) throws Exception {
+	public void activate(final Collection<Resource> segments) throws Exception {
 		final Model model = driver.getModel();
 		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTS_TO);
 		final Property monitoredByProperty = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);

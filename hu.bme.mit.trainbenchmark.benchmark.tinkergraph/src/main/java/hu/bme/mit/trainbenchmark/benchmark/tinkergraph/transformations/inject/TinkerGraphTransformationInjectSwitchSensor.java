@@ -26,7 +26,7 @@ public class TinkerGraphTransformationInjectSwitchSensor extends TinkerGraphTran
 	}
 
 	@Override
-	public void performRHS(final Collection<Vertex> switches) {
+	public void activate(final Collection<Vertex> switches) {
 		for (final Vertex sw : switches) {
 			Iterable<Vertex> sensors = () -> sw.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
 			for (final Vertex sensor : sensors) {

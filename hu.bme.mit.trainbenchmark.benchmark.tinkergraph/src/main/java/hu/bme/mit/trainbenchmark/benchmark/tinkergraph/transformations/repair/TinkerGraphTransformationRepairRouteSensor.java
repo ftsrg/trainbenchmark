@@ -26,7 +26,7 @@ public class TinkerGraphTransformationRepairRouteSensor extends TinkerGraphTrans
 	}
 
 	@Override
-	public void performRHS(final Collection<TinkerGraphRouteSensorMatch> matches) {
+	public void activate(final Collection<TinkerGraphRouteSensorMatch> matches) {
 		for (final TinkerGraphRouteSensorMatch rsm : matches) {
 			final Vertex route = rsm.getRoute();
 			final Vertex sensor = rsm.getSensor();

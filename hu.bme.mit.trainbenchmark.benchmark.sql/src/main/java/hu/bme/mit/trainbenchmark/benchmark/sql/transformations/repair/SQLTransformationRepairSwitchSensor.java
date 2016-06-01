@@ -28,7 +28,7 @@ public class SQLTransformationRepairSwitchSensor extends SQLTransformationRepair
 	}
 
 	@Override
-	public void performRHS(final Collection<SQLSwitchSensorMatch> matches) throws SQLException {
+	public void activate(final Collection<SQLSwitchSensorMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(updateQuery);
 		}

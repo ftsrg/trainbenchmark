@@ -22,7 +22,7 @@ public class HawkPreparedTransformation extends HawkTransformation<Object> {
 	}
 
 	@Override
-	public void performRHS(final Collection<Object> objects) throws Exception {
+	public void activate(final Collection<Object> objects) throws Exception {
 		// copy the prepared invalid file to perform the transformation
 		// and touch it
 		final File fSource = new File(invalidModelPath);

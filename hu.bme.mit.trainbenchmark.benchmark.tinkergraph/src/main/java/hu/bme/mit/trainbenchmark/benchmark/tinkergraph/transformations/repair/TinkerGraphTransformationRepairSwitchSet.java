@@ -27,7 +27,7 @@ public class TinkerGraphTransformationRepairSwitchSet extends TinkerGraphTransfo
 	}
 
 	@Override
-	public void performRHS(final Collection<TinkerGraphSwitchSetMatch> matches) {
+	public void activate(final Collection<TinkerGraphSwitchSetMatch> matches) {
 		for (final TinkerGraphSwitchSetMatch sstm : matches) {
 			final Vertex sw = sstm.getSw();
 			final String position = sstm.getPosition();

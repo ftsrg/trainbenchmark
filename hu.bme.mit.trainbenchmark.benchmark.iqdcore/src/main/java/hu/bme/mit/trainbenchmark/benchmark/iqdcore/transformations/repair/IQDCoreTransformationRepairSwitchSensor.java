@@ -27,7 +27,7 @@ public class IQDCoreTransformationRepairSwitchSensor extends IQDCoreTransformati
 	}
 
 	@Override
-	public void performRHS(final Collection<IQDCoreSwitchSensorMatch> matches) throws Exception {
+	public void activate(final Collection<IQDCoreSwitchSensorMatch> matches) throws Exception {
 		final Transaction transaction = driver.newTransaction();
 		for (final IQDCoreSwitchSensorMatch match : matches) {
 			final long sw = match.getSw();

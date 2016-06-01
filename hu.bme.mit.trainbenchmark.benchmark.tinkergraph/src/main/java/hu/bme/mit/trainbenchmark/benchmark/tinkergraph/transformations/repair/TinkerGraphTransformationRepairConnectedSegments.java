@@ -26,7 +26,7 @@ public class TinkerGraphTransformationRepairConnectedSegments extends TinkerGrap
 	}
 
 	@Override
-	public void performRHS(final Collection<TinkerGraphConnectedSegmentsMatch> matches) {
+	public void activate(final Collection<TinkerGraphConnectedSegmentsMatch> matches) {
 		for (final TinkerGraphConnectedSegmentsMatch csm : matches) {
 			// delete segment2 with all its relationships
 			final Vertex segment2 = csm.getSegment2();			
