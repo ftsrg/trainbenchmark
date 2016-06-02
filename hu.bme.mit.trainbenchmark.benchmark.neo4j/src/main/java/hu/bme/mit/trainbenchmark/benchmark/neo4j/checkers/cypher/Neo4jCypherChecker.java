@@ -23,15 +23,13 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Neo4jCypherChecker extends ModelQuery<Neo4jMatch> {
+public class Neo4jCypherChecker extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 
-	protected final Neo4jDriver driver;
 	protected final RailwayQuery query;
 	protected final String queryDefinition;
 
 	protected Neo4jCypherChecker(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
-		super();
-		this.driver = driver;
+		super(driver);
 
 		this.query = query;
 		queryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
@@ -43,7 +41,7 @@ public class Neo4jCypherChecker extends ModelQuery<Neo4jMatch> {
 		return driver.runQuery(query, queryDefinition);
 	}
 
-	public static ModelQuery<Neo4jMatch> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public static ModelQuery<Neo4jMatch, Neo4jDriver> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		return new Neo4jCypherChecker(driver, benchmarkConfig, query);
 	}
 

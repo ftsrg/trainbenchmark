@@ -26,15 +26,15 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPIConnectedSegmentsChecker extends EMFAPIModelQuery<EMFConnectedSegmentsMatch> {
 
-	public EMFAPIConnectedSegmentsChecker(final EMFDriver emfDriver) {
-		super(emfDriver);
+	public EMFAPIConnectedSegmentsChecker(final EMFDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public Collection<EMFConnectedSegmentsMatch> check() {
 		matches = new ArrayList<>();
 
-		final EList<Region> regions = emfDriver.getContainer().getRegions();
+		final EList<Region> regions = driver.getContainer().getRegions();
 		for (Region region : regions) {
 			for (Sensor sensor : region.getSensors()) {
 				// (sensor)-[:monitors]->(segment1:Segment)

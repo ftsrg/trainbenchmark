@@ -29,7 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGra
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphBenchmarkCase
-		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, ModelQuery<TinkerGraphMatch>> {
+		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, ModelQuery<TinkerGraphMatch, TinkerGraphDriver>> {
 
 	@Override
 	public TinkerGraphDriver createDriver(final TinkerGraphBenchmarkConfig benchmarkConfig) throws Exception {
@@ -37,7 +37,7 @@ public class TinkerGraphBenchmarkCase
 	}
 
 	@Override
-	public ModelQuery<TinkerGraphMatch> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
+	public ModelQuery<TinkerGraphMatch, TinkerGraphDriver> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
 			final RailwayQuery query) throws Exception {
 		return TinkerGraphChecker.newInstance(driver, query);
 	}

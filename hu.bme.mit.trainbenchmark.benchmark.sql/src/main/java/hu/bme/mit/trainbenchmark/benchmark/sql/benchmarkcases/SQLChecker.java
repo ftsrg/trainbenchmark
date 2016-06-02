@@ -25,16 +25,14 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLChecker extends ModelQuery<SQLMatch> {
+public class SQLChecker<TSQLDriver extends SQLDriver> extends ModelQuery<SQLMatch, TSQLDriver> {
 
-	protected final SQLDriver driver;
 	protected final RailwayQuery query;
 	protected final String queryDefinition; 
 	protected PreparedStatement statement;
 	
-	public SQLChecker(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
-		super();
-		this.driver = driver;
+	public SQLChecker(final TSQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
+		super(driver);
 		this.query = query;
 
 		final String queryPath = benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "queries/" + query + ".sql";

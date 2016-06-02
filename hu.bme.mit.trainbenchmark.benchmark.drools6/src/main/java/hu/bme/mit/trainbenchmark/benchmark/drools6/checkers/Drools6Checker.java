@@ -27,17 +27,15 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools6Checker extends ModelQuery<EMFMatch> {
+public class Drools6Checker extends ModelQuery<EMFMatch, Drools6Driver> {
 
-	protected final Drools6Driver driver;
 	protected Collection<EMFMatch> matches = new HashSet<>();
 	protected Drools6ResultListener listener;
 	protected LiveQuery liveQuery;
 	protected RailwayQuery query;
 
 	public Drools6Checker(final BenchmarkConfig benchmarkConfig, final Drools6Driver driver, final RailwayQuery query) throws IOException {
-		super();
-		this.driver = driver;
+		super(driver);
 		this.query = query;
 		
 		final String queryFile = benchmarkConfig.getWorkspacePath()

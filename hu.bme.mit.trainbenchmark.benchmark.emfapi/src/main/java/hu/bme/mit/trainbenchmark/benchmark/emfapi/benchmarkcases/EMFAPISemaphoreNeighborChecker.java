@@ -26,15 +26,15 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPISemaphoreNeighborChecker extends EMFAPIModelQuery<EMFSemaphoreNeighborMatch> {
 
-	public EMFAPISemaphoreNeighborChecker(final EMFDriver emfDriver) {
-		super(emfDriver);
+	public EMFAPISemaphoreNeighborChecker(final EMFDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public Collection<EMFSemaphoreNeighborMatch> check() {
 		matches = new ArrayList<>();
 
-		final EList<Route> routes = emfDriver.getContainer().getRoutes();
+		final EList<Route> routes = driver.getContainer().getRoutes();
 		for (Route route1 : routes) {
 			// (route1:Route)-[:exit]->(semaphore:Semaphore)
 			final Semaphore semaphore = route1.getExit();

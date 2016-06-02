@@ -29,17 +29,15 @@ import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends ModelQuery<TMatch> {
+public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends ModelQuery<TMatch, EMFDriver> {
 
 	protected Collection<TMatch> matches;
 	protected OCL ocl;
 	protected org.eclipse.ocl.ecore.OCL.Query queryEvaluator;
 	protected RailwayContainer container;
-	protected EMFDriver driver;
 
 	public EclipseOCLChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, ParserException {
-		super();
-		this.driver = driver;
+		super(driver);
 
 		final String oclQuery = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".ocl"));

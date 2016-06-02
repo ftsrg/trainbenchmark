@@ -27,15 +27,15 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 public class EMFAPIRouteSensorChecker extends EMFAPIModelQuery<EMFRouteSensorMatch> {
 
-	public EMFAPIRouteSensorChecker(final EMFDriver emfDriver) {
-		super(emfDriver);
+	public EMFAPIRouteSensorChecker(final EMFDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public Collection<EMFRouteSensorMatch> check() {
 		matches = new ArrayList<>();
 
-		final EList<Route> routes = emfDriver.getContainer().getRoutes();
+		final EList<Route> routes = driver.getContainer().getRoutes();
 		// (route:Route)
 		for (Route route : routes) {
 			// (route)-[:follows]->(swP:SwitchPosition)

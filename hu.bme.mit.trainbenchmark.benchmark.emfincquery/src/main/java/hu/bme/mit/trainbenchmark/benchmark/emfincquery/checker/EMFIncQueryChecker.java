@@ -37,18 +37,16 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends ModelQuery<TMatch> {
+public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends ModelQuery<TMatch, EMFIncQueryBaseDriver<TMatch>> {
 
 	protected Collection<TMatch> matches;
-	protected final EMFIncQueryBaseDriver<TMatch> driver;
 	
 	protected final EMFIncQueryBackend backend;
 	protected AdvancedIncQueryEngine engine;
 	
 	public EMFIncQueryChecker(final EMFIncQueryBackend backend, final EMFIncQueryBaseDriver<TMatch> driver) {
-		super();
+		super(driver);
 		this.backend = backend;
-		this.driver = driver;
 
 		RailwayPackage.eINSTANCE.eClass();
 

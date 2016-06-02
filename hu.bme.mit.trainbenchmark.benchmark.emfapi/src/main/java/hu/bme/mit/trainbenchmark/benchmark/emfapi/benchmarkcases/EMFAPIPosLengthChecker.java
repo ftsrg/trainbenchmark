@@ -26,15 +26,15 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPIPosLengthChecker extends EMFAPIModelQuery<EMFPosLengthMatch> {
 
-	public EMFAPIPosLengthChecker(final EMFDriver emfDriver) {
-		super(emfDriver);
+	public EMFAPIPosLengthChecker(final EMFDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public Collection<EMFPosLengthMatch> check() {
 		matches = new ArrayList<>();
 
-		final EList<Region> regions = emfDriver.getContainer().getRegions();
+		final EList<Region> regions = driver.getContainer().getRegions();
 		for (Region region : regions) {
 			for (TrackElement element : region.getElements()) {
 

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
@@ -28,14 +29,12 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class JenaChecker extends RDFChecker<JenaMatch> {
+public class JenaChecker extends RDFChecker<JenaMatch, JenaDriver> {
 
-	protected JenaDriver jenaDriver;
-	protected org.apache.jena.query.Query jenaQuery;
+	protected Query jenaQuery;
 
-	public JenaChecker(final JenaDriver jenaDriver, final RDFBenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
-		super(benchmarkConfig, query);
-		this.jenaDriver = jenaDriver;
+	public JenaChecker(final JenaDriver driver, final RDFBenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+		super(driver, benchmarkConfig, query);
 		this.jenaQuery = QueryFactory.read(queryPath);
 	}
 
@@ -43,7 +42,7 @@ public class JenaChecker extends RDFChecker<JenaMatch> {
 	public Collection<JenaMatch> check() throws IOException {
 		final List<JenaMatch> matches = new ArrayList<>();
 
-		try (QueryExecution queryExecution = QueryExecutionFactory.create(jenaQuery, jenaDriver.getModel())) {
+		try (QueryExecution queryExecution = QueryExecutionFactory.create(jenaQuery, driver.getModel())) {
 			final ResultSet resultSet = queryExecution.execSelect();
 
 			while (resultSet.hasNext()) {

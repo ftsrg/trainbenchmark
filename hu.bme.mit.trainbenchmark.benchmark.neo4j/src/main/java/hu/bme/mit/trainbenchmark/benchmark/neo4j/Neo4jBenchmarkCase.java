@@ -31,7 +31,7 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jBenchmarkCase<Neo4jChecker>
-		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, ModelQuery<Neo4jMatch>> {
+		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, ModelQuery<Neo4jMatch, Neo4jDriver>> {
 
 	@Override
 	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
@@ -39,12 +39,12 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 	
 	@Override
-	public ModelQuery<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
+	public ModelQuery<Neo4jMatch, Neo4jDriver> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
 			throws Exception {		
 		final Neo4jEngine engine = benchmarkConfig.getEngine();
 		switch (engine) {	
 		case COREAPI:
-			return Neo4jCoreChecker.newInstance(driver, query);
+			return (ModelQuery<Neo4jMatch, Neo4jDriver>) Neo4jCoreChecker.newInstance(driver, query);
 		case CYPHER:
 			return Neo4jCypherChecker.newInstance(driver, benchmarkConfig, query);
 		default:

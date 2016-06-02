@@ -26,15 +26,15 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EMFAPISwitchSensorChecker extends EMFAPIModelQuery<EMFSwitchSensorMatch> {
 
-	public EMFAPISwitchSensorChecker(final EMFDriver emfDriver) {
-		super(emfDriver);
+	public EMFAPISwitchSensorChecker(final EMFDriver driver) {
+		super(driver);
 	}
 
 	@Override
 	public Collection<EMFSwitchSensorMatch> check() {
 		matches = new ArrayList<>();
 
-		final EList<Region> regions = emfDriver.getContainer().getRegions();
+		final EList<Region> regions = driver.getContainer().getRegions();
 		for (Region region : regions) {
 			for (TrackElement element : region.getElements()) {
 				if (!RailwayPackage.eINSTANCE.getSwitch().isInstance(element)) {

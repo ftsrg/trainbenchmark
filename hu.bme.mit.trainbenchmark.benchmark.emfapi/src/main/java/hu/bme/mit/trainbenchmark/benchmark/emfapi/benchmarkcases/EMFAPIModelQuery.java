@@ -18,13 +18,12 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public abstract class EMFAPIModelQuery<TMatch extends EMFMatch> extends ModelQuery<TMatch> {
+public abstract class EMFAPIModelQuery<TMatch extends EMFMatch> extends ModelQuery<TMatch, EMFDriver> {
 
 	protected Collection<TMatch> matches;
-	protected final EMFDriver emfDriver;
 	
-	public EMFAPIModelQuery(final EMFDriver emfDriver) {
-		this.emfDriver = emfDriver;
+	public EMFAPIModelQuery(final EMFDriver driver) {
+		super(driver);
 	}
 
 	public static EMFAPIModelQuery<?> newInstance(final EMFDriver driver, final RailwayQuery query) {
