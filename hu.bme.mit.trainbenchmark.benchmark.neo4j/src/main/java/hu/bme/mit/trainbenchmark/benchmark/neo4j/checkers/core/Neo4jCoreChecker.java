@@ -16,16 +16,13 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class Neo4jCoreChecker<TMatch extends Neo4jMatch> extends ModelQuery<TMatch> {
-
-	protected final Neo4jDriver driver;
+public abstract class Neo4jCoreChecker<TMatch extends Neo4jMatch> extends ModelQuery<TMatch, Neo4jDriver> {
 
 	public Neo4jCoreChecker(final Neo4jDriver driver) {
-		super();
-		this.driver = driver;
+		super(driver);
 	}
 
-	public static Neo4jCoreChecker newInstance(final Neo4jDriver driver, final RailwayQuery query) {
+	public static Neo4jCoreChecker<?> newInstance(final Neo4jDriver driver, final RailwayQuery query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new Neo4jCoreConnectedSegmentsChecker(driver);

@@ -21,13 +21,19 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class AbstractBenchmarkCase<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<TMatch>> {
+public abstract class AbstractBenchmarkCase<TMatch, //
+TElement, //
+TDriver extends Driver<TElement>, //
+TBenchmarkConfig extends BenchmarkConfig, //
+TChecker extends ModelQuery<TMatch, TDriver> //
+> {
 
 	public abstract TDriver createDriver(TBenchmarkConfig benchmarkConfig) throws Exception;
 
 	public abstract TChecker createChecker(TBenchmarkConfig benchmarkConfig, TDriver driver, RailwayQuery query) throws Exception;
 
-	public abstract ModelTransformation<?, ?> createTransformation(TBenchmarkConfig benchmarkConfig, TDriver driver, RailwayQuery query) throws IOException;
+	public abstract ModelTransformation<?, ?> createTransformation(TBenchmarkConfig benchmarkConfig, TDriver driver, RailwayQuery query)
+			throws IOException;
 
 	public abstract Comparator<?> getMatchComparator();
 

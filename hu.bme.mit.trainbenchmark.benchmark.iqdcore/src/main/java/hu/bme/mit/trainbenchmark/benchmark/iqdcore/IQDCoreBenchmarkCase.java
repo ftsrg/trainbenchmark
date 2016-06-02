@@ -28,7 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 
-public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Long, IQDCoreDriver, IQDCoreBenchmarkConfig, IQDCoreChecker> {
+public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Long, IQDCoreDriver, IQDCoreBenchmarkConfig, IQDCoreChecker {
 
 	protected final IQDCoreBenchmarkConfig iqdbc;
 	protected WildcardInput iqdInput;

@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
-		extends EMFBenchmarkCase<EMFDriver, TBenchmarkConfig, ModelQuery<EMFMatch>> {
+		extends EMFBenchmarkCase<EMFDriver, TBenchmarkConfig, ModelQuery<EMFMatch, EMFDriver>> {
 
 	@Override
 	public EMFDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
@@ -33,9 +33,9 @@ public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
 	}
 
 	@Override
-	public ModelQuery<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
+	public ModelQuery<EMFMatch, EMFDriver> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
 			throws Exception {
-		return (ModelQuery<EMFMatch>) EMFAPIModelQuery.newInstance(driver, query);
+		return (ModelQuery<EMFMatch, EMFDriver>) EMFAPIModelQuery.newInstance(driver, query);
 	}
 
 	@Override

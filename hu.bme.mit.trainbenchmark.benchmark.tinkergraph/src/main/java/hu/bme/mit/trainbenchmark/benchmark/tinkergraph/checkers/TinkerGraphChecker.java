@@ -22,13 +22,10 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class TinkerGraphChecker<TMatch extends TinkerGraphMatch> extends ModelQuery<TMatch> {
-
-	protected final TinkerGraphDriver driver;
+public abstract class TinkerGraphChecker<TMatch extends TinkerGraphMatch> extends ModelQuery<TMatch, TinkerGraphDriver> {
 
 	public TinkerGraphChecker(final TinkerGraphDriver driver) {
-		super();
-		this.driver = driver;
+		super(driver);
 	}
 
 	public static TinkerGraphChecker newInstance(final TinkerGraphDriver driver, final RailwayQuery query) {

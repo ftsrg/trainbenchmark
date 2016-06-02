@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public abstract class EMFBenchmarkCase<TDriver extends EMFDriver, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<EMFMatch>>
+public abstract class EMFBenchmarkCase<TDriver extends EMFDriver, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<EMFMatch, TDriver>>
 		extends AbstractBenchmarkCase<EMFMatch, RailwayElement, TDriver, TBenchmarkConfig, TChecker> {
 
 	@Override

@@ -19,6 +19,7 @@ import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
@@ -27,7 +28,12 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
-		AbstractBenchmarkCase<TMatch, RailwayElement, EMFIncQueryDriver<TMatch>, EMFIncQueryBenchmarkConfig, EMFIncQueryChecker<TMatch>> {
+		AbstractBenchmarkCase< //
+			TMatch, // 
+			RailwayElement, //
+			EMFIncQueryBaseDriver<TMatch>, //
+			EMFIncQueryBenchmarkConfig, //
+			EMFIncQueryChecker<TMatch>> {
 
 	@Override
 	public EMFIncQueryDriver<TMatch> createDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) throws Exception {
@@ -36,13 +42,13 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 
 	@Override
 	public EMFIncQueryChecker<TMatch> createChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryDriver<TMatch> driver, final RailwayQuery query) throws Exception {
+			final EMFIncQueryBaseDriver<TMatch> driver, final RailwayQuery query) throws Exception {
 		return (EMFIncQueryChecker<TMatch>) EMFIncQueryChecker.newInstance(benchmarkConfig, driver, query);
 	}
 
 	@Override
 	public ModelTransformation<?, ?> createTransformation(final EMFIncQueryBenchmarkConfig benchmarkConfig,
-			final EMFIncQueryDriver<TMatch> driver, final RailwayQuery query) throws IOException {
+			final EMFIncQueryBaseDriver<TMatch> driver, final RailwayQuery query) throws IOException {
 		return EMFIncQueryTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 

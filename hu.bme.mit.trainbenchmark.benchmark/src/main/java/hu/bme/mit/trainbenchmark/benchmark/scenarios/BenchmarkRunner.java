@@ -36,7 +36,7 @@ import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<TMatch>> {
+public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<TMatch, TDriver>> {
 
 	protected final Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TBenchmarkConfig benchmarkConfig;
@@ -93,11 +93,11 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	// phases
 
 	public final void read(final PhaseResult phaseResult) throws Exception {
-//		final TimeMetric timer = new TimeMetric("Time");
-//		timer.startMeasure();
+		// final TimeMetric timer = new TimeMetric("Time");
+		// timer.startMeasure();
 		driver.read(benchmarkConfig.getModelPathWithoutExtension());
-//		timer.stopMeasure();
-//		phaseResult.addMetrics(timer);
+		// timer.stopMeasure();
+		// phaseResult.addMetrics(timer);
 
 		final ScalarMetric maxMemory = new ScalarMetric("MaxMemory");
 		maxMemory.setValue(benchmarkConfig.getMaxMemory());
@@ -108,8 +108,8 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		// initialize a list for the matches
 		matches = new ArrayList<>(checkers.size());
 
-//		final TimeMetric timer = new TimeMetric("Time");
-//		timer.startMeasure();
+		// final TimeMetric timer = new TimeMetric("Time");
+		// timer.startMeasure();
 		final ScalarMetric results = new ScalarMetric("Matches");
 
 		for (final TChecker checker : checkers) {
@@ -118,8 +118,8 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 		// only use the first match for now
 		results.setValue(matches.get(0).size());
-//		timer.stopMeasure();
-//		phaseResult.addMetrics(timer, results);
+		// timer.stopMeasure();
+		// phaseResult.addMetrics(timer, results);
 		phaseResult.addMetrics(results);
 	}
 

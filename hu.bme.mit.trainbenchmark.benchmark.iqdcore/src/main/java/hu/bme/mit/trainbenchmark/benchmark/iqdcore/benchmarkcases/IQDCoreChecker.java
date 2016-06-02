@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,27 +19,25 @@ import java.util.List;
 
 import hu.bme.mit.incqueryds.ConfigReader;
 import hu.bme.mit.incqueryds.WildcardInput;
-import hu.bme.mit.incqueryds.trainbenchmark.*;
+import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.Iterator;
 import scala.collection.immutable.Vector;
 
 public class IQDCoreChecker extends RDFChecker<IQDCoreMatch> {
 
-	protected WildcardInput iqdInput;
+	protected WildcardInput driver;
 	protected TrainbenchmarkQuery checker;
 
 	public IQDCoreChecker(final WildcardInput iqdDriver, final IQDCoreBenchmarkConfig iqdbc) throws IOException {
 		super(iqdbc, iqdbc.getQuery());
-		this.iqdInput = iqdDriver;
+		this.driver = iqdDriver;
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResource(String.format("%s.yaml", iqdbc.getQuery())).openStream();
         this.checker = ConfigReader.parse(iqdbc.getQuery().toString(), inputStream);
-        iqdInput.subscribe(checker.inputLookup());
+        driver.subscribe(checker.inputLookup());
 
 	}
 
