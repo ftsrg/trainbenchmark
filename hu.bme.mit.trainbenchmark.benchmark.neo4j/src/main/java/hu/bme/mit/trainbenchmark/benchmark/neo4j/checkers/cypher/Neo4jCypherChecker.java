@@ -17,13 +17,13 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
+public class Neo4jCypherChecker extends ModelQuery<Neo4jMatch> {
 
 	protected final Neo4jDriver driver;
 	protected final RailwayQuery query;
@@ -43,7 +43,7 @@ public class Neo4jCypherChecker extends Checker<Neo4jMatch> {
 		return driver.runQuery(query, queryDefinition);
 	}
 
-	public static Checker<Neo4jMatch> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public static ModelQuery<Neo4jMatch> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		return new Neo4jCypherChecker(driver, benchmarkConfig, query);
 	}
 

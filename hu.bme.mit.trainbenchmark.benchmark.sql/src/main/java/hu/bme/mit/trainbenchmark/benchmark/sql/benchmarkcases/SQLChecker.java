@@ -19,13 +19,13 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLChecker extends Checker<SQLMatch> {
+public class SQLChecker extends ModelQuery<SQLMatch> {
 
 	protected final SQLDriver driver;
 	protected final RailwayQuery query;

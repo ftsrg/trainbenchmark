@@ -18,8 +18,8 @@ import java.util.Comparator;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
@@ -29,7 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGra
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphBenchmarkCase
-		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, Checker<TinkerGraphMatch>> {
+		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, ModelQuery<TinkerGraphMatch>> {
 
 	@Override
 	public TinkerGraphDriver createDriver(final TinkerGraphBenchmarkConfig benchmarkConfig) throws Exception {
@@ -37,7 +37,7 @@ public class TinkerGraphBenchmarkCase
 	}
 
 	@Override
-	public Checker<TinkerGraphMatch> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
+	public ModelQuery<TinkerGraphMatch> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
 			final RailwayQuery query) throws Exception {
 		return TinkerGraphChecker.newInstance(driver, query);
 	}
@@ -48,7 +48,7 @@ public class TinkerGraphBenchmarkCase
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
+	public ModelTransformation<?, ?> createTransformation(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
 			final RailwayQuery query) throws IOException {
 		return TinkerGraphTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}

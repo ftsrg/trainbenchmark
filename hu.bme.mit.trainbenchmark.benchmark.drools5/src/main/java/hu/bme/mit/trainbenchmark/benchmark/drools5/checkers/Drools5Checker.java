@@ -23,14 +23,14 @@ import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.rule.LiveQuery;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools5Checker extends Checker<EMFMatch> {
+public class Drools5Checker extends ModelQuery<EMFMatch> {
 
 	protected final Drools5Driver driver;
 	protected Collection<EMFMatch> matches = new HashSet<>();
@@ -70,7 +70,7 @@ public class Drools5Checker extends Checker<EMFMatch> {
 	}
 
 	@Override
-	public void destroy() {
+	public void close() {
 		if (liveQuery != null) {
 			liveQuery.close();
 		}

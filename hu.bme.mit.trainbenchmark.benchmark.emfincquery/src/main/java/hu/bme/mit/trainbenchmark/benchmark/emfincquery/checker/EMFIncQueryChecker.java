@@ -30,14 +30,14 @@ import org.eclipse.incquery.runtime.matchers.backend.QueryEvaluationHint;
 
 import com.google.common.collect.Maps;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends Checker<TMatch> {
+public abstract class EMFIncQueryChecker<TMatch extends BasePatternMatch> extends ModelQuery<TMatch> {
 
 	protected Collection<TMatch> matches;
 	protected final EMFIncQueryBaseDriver<TMatch> driver;

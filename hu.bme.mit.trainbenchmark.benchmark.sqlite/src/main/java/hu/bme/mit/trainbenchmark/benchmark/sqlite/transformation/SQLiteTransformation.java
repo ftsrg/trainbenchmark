@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.inject.SQLiteTransformationInjectConnectedSegments;
@@ -27,7 +27,7 @@ public abstract class SQLiteTransformation<TObject> extends SQLTransformation<TO
 		return benchmarkConfig.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.sqlite/" + "src/main/resources/transformations/";
 	}
 	
-	public static Transformation<?, ?> newInstance(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public static ModelTransformation<?, ?> newInstance(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		switch (benchmarkConfig.getScenario()) {
 		case REPAIR:
 			switch (query) {

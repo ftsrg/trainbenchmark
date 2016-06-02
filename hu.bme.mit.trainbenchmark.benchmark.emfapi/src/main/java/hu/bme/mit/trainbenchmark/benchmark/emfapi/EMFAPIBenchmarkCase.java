@@ -14,18 +14,18 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
 import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EMFAPIChecker;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EMFAPIModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
 public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
-		extends EMFBenchmarkCase<EMFDriver, TBenchmarkConfig, Checker<EMFMatch>> {
+		extends EMFBenchmarkCase<EMFDriver, TBenchmarkConfig, ModelQuery<EMFMatch>> {
 
 	@Override
 	public EMFDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
@@ -33,13 +33,13 @@ public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
 	}
 
 	@Override
-	public Checker<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
+	public ModelQuery<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
 			throws Exception {
-		return (Checker<EMFMatch>) EMFAPIChecker.newInstance(driver, query);
+		return (ModelQuery<EMFMatch>) EMFAPIModelQuery.newInstance(driver, query);
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
+	public ModelTransformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
 			throws IOException {
 		return EMFTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}

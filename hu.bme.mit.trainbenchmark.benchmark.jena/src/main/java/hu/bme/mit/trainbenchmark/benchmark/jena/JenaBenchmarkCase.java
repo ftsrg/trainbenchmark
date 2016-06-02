@@ -18,12 +18,12 @@ import java.util.Comparator;
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -42,7 +42,7 @@ public class JenaBenchmarkCase
 	}
 
 	@Override
-	public Transformation<?, JenaDriver> createTransformation(final RDFBenchmarkConfig benchmarkConfig,
+	public ModelTransformation<?, JenaDriver> createTransformation(final RDFBenchmarkConfig benchmarkConfig,
 			final JenaDriver driver, final RailwayQuery query) throws IOException {
 		return JenaTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}

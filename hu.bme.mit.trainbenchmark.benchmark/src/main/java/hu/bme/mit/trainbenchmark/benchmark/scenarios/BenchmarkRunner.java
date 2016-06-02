@@ -27,22 +27,22 @@ import eu.mondo.sam.core.publishers.FilenameFactory;
 import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.PhaseResult;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>> {
+public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<TMatch>> {
 
 	protected final Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TBenchmarkConfig benchmarkConfig;
 	protected final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkCase;
 
-	protected Transformation<?, ?> transformation;
+	protected ModelTransformation<?, ?> transformation;
 	protected TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig> transformationLogic;
 	protected TDriver driver;
 	protected List<TChecker> checkers;
@@ -125,7 +125,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 	public final void destroy() throws Exception {
 		for (final TChecker checker : checkers) {
-			checker.destroy();
+			checker.close();
 		}
 		driver.destroy();
 	}

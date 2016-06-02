@@ -24,6 +24,7 @@ import eu.mondo.sam.core.results.BenchmarkResult;
 import eu.mondo.sam.core.results.PhaseResult;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
@@ -62,7 +63,7 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	protected long start;
 	protected long startEdit;
 	protected long end;
-	protected Transformation<TTransformationObject, Driver<TElement>> transformation;
+	protected ModelTransformation<TTransformationObject, Driver<TElement>> transformation;
 
 	public void initialize(final TBenchmarkConfig benchmarkConfig, final Driver<TElement> driver, final Random random) {
 		this.benchmarkConfig = benchmarkConfig;
@@ -110,8 +111,8 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		return objects;
 	}
 
-	public void setTransformation(final Transformation<?, ?> transformation) {
-		this.transformation = (Transformation<TTransformationObject, Driver<TElement>>) transformation;
+	public void setTransformation(final ModelTransformation<?, ?> transformation) {
+		this.transformation = (ModelTransformation<TTransformationObject, Driver<TElement>>) transformation;
 	}
 
 }

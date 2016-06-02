@@ -17,8 +17,8 @@ import java.sql.PreparedStatement;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SQLTransformationInject;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairConnectedSegments;
@@ -29,7 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransfo
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SQLTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SQLTransformation<TObject> extends Transformation<TObject, SQLDriver> {
+public abstract class SQLTransformation<TObject> extends ModelTransformation<TObject, SQLDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
 	protected BenchmarkConfig benchmarkConfig;
@@ -47,7 +47,7 @@ public abstract class SQLTransformation<TObject> extends Transformation<TObject,
 		return benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "transformations/";
 	}
 
-	public static Transformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public static ModelTransformation<?, ?> newInstance(final SQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		switch (benchmarkConfig.getScenario()) {
 		case REPAIR:
 			switch (query) {

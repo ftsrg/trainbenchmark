@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class Neo4jCoreChecker<TMatch extends Neo4jMatch> extends Checker<TMatch> {
+public abstract class Neo4jCoreChecker<TMatch extends Neo4jMatch> extends ModelQuery<TMatch> {
 
 	protected final Neo4jDriver driver;
 

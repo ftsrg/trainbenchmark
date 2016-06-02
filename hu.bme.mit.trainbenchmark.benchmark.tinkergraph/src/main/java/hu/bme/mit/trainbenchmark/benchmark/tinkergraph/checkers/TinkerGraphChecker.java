@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphConnectedSegmentsChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphPosLengthChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphRouteSensorChecker;
@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class TinkerGraphChecker<TMatch extends TinkerGraphMatch> extends Checker<TMatch> {
+public abstract class TinkerGraphChecker<TMatch extends TinkerGraphMatch> extends ModelQuery<TMatch> {
 
 	protected final TinkerGraphDriver driver;
 

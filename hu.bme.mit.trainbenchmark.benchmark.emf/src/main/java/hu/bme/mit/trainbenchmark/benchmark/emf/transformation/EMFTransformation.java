@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.transformation;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EMFTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EMFTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EMFTransformationInjectRouteSensor;
@@ -24,11 +23,12 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransfor
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public abstract class EMFTransformation<TObject, TDriver extends EMFDriver> extends Transformation<TObject, TDriver> {
+public abstract class EMFTransformation<TObject, TDriver extends EMFDriver> extends ModelTransformation<TObject, TDriver> {
 
 	public EMFTransformation(TDriver driver) {
 		super(driver);

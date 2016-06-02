@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf.checkers;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class RDFChecker<TMatch> extends Checker<TMatch> {
+public abstract class RDFChecker<TMatch> extends ModelQuery<TMatch> {
 
 	protected final RailwayQuery query;
 	protected final String queryPath;
