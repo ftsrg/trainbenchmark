@@ -15,9 +15,9 @@ package hu.bme.mit.trainbenchmark.benchmark.sqlite;
 import java.io.IOException;
 import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
@@ -38,7 +38,7 @@ public class SQLiteBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, SQLit
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final SQLiteDriver driver, final RailwayQuery query) throws IOException {
+	public ModelTransformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final SQLiteDriver driver, final RailwayQuery query) throws IOException {
 		return SQLiteTransformation.newInstance(driver, benchmarkConfig, query);
 	}
 

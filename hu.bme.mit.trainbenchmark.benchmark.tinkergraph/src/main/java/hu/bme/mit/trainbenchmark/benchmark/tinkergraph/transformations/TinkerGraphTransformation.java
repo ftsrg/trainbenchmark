@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectPosLength;
@@ -28,13 +28,13 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.Ti
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
-public abstract class TinkerGraphTransformation<TObject> extends Transformation<TObject, TinkerGraphDriver> {
+public abstract class TinkerGraphTransformation<TObject> extends ModelTransformation<TObject, TinkerGraphDriver> {
 
 	protected TinkerGraphTransformation(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
-	public static Transformation<?, ?> newInstance(final TinkerGraphDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static ModelTransformation<?, ?> newInstance(final TinkerGraphDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

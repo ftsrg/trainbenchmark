@@ -13,12 +13,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.token;
 
 import eu.mondo.sam.core.DataToken;
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
-public class TrainBenchmarkDataToken<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends Checker<TMatch>>
+public class TrainBenchmarkDataToken<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<TMatch>>
 		implements DataToken {
 
 	protected BenchmarkRunner<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkRunner;

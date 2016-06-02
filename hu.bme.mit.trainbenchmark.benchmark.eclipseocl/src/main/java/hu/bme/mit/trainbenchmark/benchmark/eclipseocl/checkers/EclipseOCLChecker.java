@@ -21,15 +21,15 @@ import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCL.Helper;
 import org.eclipse.ocl.ecore.OCLExpression;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends Checker<TMatch> {
+public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends ModelQuery<TMatch> {
 
 	protected Collection<TMatch> matches;
 	protected OCL ocl;

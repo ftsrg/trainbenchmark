@@ -18,7 +18,7 @@ import java.util.Comparator;
 import org.openrdf.model.URI;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
@@ -45,7 +45,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
+	public ModelTransformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
 		return SesameTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 }

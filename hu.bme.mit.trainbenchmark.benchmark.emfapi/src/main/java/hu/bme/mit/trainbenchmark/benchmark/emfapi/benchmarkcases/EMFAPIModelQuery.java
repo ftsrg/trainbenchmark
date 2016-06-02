@@ -13,21 +13,21 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public abstract class EMFAPIChecker<TMatch extends EMFMatch> extends Checker<TMatch> {
+public abstract class EMFAPIModelQuery<TMatch extends EMFMatch> extends ModelQuery<TMatch> {
 
 	protected Collection<TMatch> matches;
 	protected final EMFDriver emfDriver;
 	
-	public EMFAPIChecker(final EMFDriver emfDriver) {
+	public EMFAPIModelQuery(final EMFDriver emfDriver) {
 		this.emfDriver = emfDriver;
 	}
 
-	public static EMFAPIChecker<?> newInstance(final EMFDriver driver, final RailwayQuery query) {
+	public static EMFAPIModelQuery<?> newInstance(final EMFDriver driver, final RailwayQuery query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new EMFAPIConnectedSegmentsChecker(driver);

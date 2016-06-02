@@ -18,8 +18,6 @@ import java.util.Comparator;
 import org.neo4j.graphdb.Node;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
-import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core.Neo4jCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.cypher.Neo4jCypherChecker;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -28,10 +26,12 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jBenchmarkCase<Neo4jChecker>
-		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, Checker<Neo4jMatch>> {
+		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, ModelQuery<Neo4jMatch>> {
 
 	@Override
 	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
@@ -39,7 +39,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 	
 	@Override
-	public Checker<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
+	public ModelQuery<Neo4jMatch> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
 			throws Exception {		
 		final Neo4jEngine engine = benchmarkConfig.getEngine();
 		switch (engine) {	
@@ -58,7 +58,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
+	public ModelTransformation<?, ?> createTransformation(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
 			throws IOException {
 		return Neo4jTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}

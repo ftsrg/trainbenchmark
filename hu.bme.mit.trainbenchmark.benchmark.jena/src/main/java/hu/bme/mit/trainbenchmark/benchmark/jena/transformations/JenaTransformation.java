@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectPosLength;
@@ -25,16 +24,17 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTrans
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
-public abstract class JenaTransformation<TObject> extends Transformation<TObject, JenaDriver> {
+public abstract class JenaTransformation<TObject> extends ModelTransformation<TObject, JenaDriver> {
 
 	protected JenaTransformation(final JenaDriver driver) {
 		super(driver);
 	}
 
-	public static Transformation<?, JenaDriver> newInstance(final JenaDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static ModelTransformation<?, JenaDriver> newInstance(final JenaDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

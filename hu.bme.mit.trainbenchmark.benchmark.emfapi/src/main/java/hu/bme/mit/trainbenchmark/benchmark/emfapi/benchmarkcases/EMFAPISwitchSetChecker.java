@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.railway.Signal;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class EMFAPISwitchSetChecker extends EMFAPIChecker<EMFSwitchSetMatch> {
+public class EMFAPISwitchSetChecker extends EMFAPIModelQuery<EMFSwitchSetMatch> {
 
 	public EMFAPISwitchSetChecker(final EMFDriver emfDriver) {
 		super(emfDriver);

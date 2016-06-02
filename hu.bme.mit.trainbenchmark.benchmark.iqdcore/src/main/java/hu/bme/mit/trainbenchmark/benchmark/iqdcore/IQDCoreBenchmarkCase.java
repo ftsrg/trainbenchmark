@@ -14,13 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -70,7 +70,7 @@ public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Lo
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(IQDCoreBenchmarkConfig benchmarkConfig, IQDCoreDriver driver, RailwayQuery query) throws IOException {
+	public ModelTransformation<?, ?> createTransformation(IQDCoreBenchmarkConfig benchmarkConfig, IQDCoreDriver driver, RailwayQuery query) throws IOException {
 		return IQDCoreTransformation.newInstance(driver, benchmarkConfig.getQuery(), benchmarkConfig.getScenario());
 	}
 

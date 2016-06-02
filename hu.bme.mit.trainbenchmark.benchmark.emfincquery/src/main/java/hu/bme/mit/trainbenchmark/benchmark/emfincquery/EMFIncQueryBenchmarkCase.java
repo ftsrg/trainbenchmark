@@ -17,12 +17,12 @@ import java.util.Comparator;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches.EMFIncQueryMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQueryTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
@@ -41,7 +41,7 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+	public ModelTransformation<?, ?> createTransformation(final EMFIncQueryBenchmarkConfig benchmarkConfig,
 			final EMFIncQueryDriver<TMatch> driver, final RailwayQuery query) throws IOException {
 		return EMFIncQueryTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}

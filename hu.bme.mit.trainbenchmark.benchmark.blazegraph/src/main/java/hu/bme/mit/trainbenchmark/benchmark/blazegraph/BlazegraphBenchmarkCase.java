@@ -14,8 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
 import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
@@ -30,7 +30,7 @@ public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
+	public ModelTransformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
 		return SesameTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 

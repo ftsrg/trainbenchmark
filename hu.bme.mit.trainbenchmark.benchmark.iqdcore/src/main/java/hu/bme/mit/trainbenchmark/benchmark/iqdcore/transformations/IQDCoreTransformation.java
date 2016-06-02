@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations;
 
 import hu.bme.mit.incqueryds.WildcardInput;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.*;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
-public abstract class IQDCoreTransformation<TObject> extends Transformation<TObject, IQDCoreDriver> {
+public abstract class IQDCoreTransformation<TObject> extends ModelTransformation<TObject, IQDCoreDriver> {
 
 	protected IQDCoreTransformation(final IQDCoreDriver driver) {
 		super(driver);
@@ -26,7 +26,7 @@ public abstract class IQDCoreTransformation<TObject> extends Transformation<TObj
 
 	}
 
-	public static Transformation<?, IQDCoreDriver> newInstance(final IQDCoreDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static ModelTransformation<?, IQDCoreDriver> newInstance(final IQDCoreDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
 		switch (scenario) {
 		case BATCH:
 		case REPAIR:

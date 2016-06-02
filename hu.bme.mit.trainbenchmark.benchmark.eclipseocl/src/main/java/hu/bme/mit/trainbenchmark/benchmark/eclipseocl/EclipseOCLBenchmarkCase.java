@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
 import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLChecker;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -37,7 +37,7 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement>
 	}
 
 	@Override
-	public Transformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query) throws IOException {
+	public ModelTransformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query) throws IOException {
 		return EMFTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 
