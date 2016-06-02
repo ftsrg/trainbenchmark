@@ -16,6 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.INJECT;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
@@ -25,7 +26,6 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EM
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
-import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public abstract class EMFIncQueryTransformation<TMatch extends BasePatternMatch>
 	extends Transformation<TMatch, EMFIncQueryBaseDriver<? extends BasePatternMatch>> {

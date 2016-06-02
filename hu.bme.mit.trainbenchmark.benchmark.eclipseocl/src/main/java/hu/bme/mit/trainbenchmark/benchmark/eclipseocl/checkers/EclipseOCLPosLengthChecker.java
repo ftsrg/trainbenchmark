@@ -18,8 +18,8 @@ import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFPosLengthMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EclipseOCLPosLengthChecker extends EclipseOCLChecker<EMFPosLengthMatch> {

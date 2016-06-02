@@ -12,7 +12,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFPosLengthMatch;
+
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import org.drools.runtime.rule.Row;

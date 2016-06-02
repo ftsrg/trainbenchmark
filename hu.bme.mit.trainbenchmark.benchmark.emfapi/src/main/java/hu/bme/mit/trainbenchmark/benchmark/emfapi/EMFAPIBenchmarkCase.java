@@ -17,12 +17,12 @@ import java.io.IOException;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transformation;
 import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EMFBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EMFAPIChecker;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
-import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
 		extends EMFBenchmarkCase<EMFDriver, TBenchmarkConfig, Checker<EMFMatch>> {

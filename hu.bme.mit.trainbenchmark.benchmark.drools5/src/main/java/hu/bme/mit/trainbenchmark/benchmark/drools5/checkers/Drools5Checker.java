@@ -27,8 +27,8 @@ import hu.bme.mit.trainbenchmark.benchmark.checker.Checker;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 public class Drools5Checker extends Checker<EMFMatch> {
 

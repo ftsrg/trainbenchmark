@@ -18,8 +18,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;

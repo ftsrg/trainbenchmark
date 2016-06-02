@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6RouteSensorMat
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFMatch;
 
 import java.util.HashSet;
 import java.util.Set;
