@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.ConnectedSegmentsQuerySpecification;
 
-public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryChecker<ConnectedSegmentsMatch> {
+public class EMFIncQueryConnectedSegmentsChecker extends EMFIncQueryModelQuery<ConnectedSegmentsMatch> {
 
 	public EMFIncQueryConnectedSegmentsChecker(final EMFIncQueryBackend backend,
 			final EMFIncQueryBaseDriver<ConnectedSegmentsMatch> driver) {

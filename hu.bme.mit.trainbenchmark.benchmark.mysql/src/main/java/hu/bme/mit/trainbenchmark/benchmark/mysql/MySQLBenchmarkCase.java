@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySQLDriver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
+import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -33,8 +33,8 @@ public class MySQLBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, MySQLD
 	}
 
 	@Override
-	public SQLChecker createChecker(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver, final RailwayQuery query) throws Exception {
-		return new SQLChecker(driver, benchmarkConfig, query);
+	public SQLModelQuery createModelQuery(final BenchmarkConfig benchmarkConfig, final MySQLDriver driver, final RailwayQuery query) throws Exception {
+		return new SQLModelQuery(driver, benchmarkConfig, query);
 	}
 
 	@Override

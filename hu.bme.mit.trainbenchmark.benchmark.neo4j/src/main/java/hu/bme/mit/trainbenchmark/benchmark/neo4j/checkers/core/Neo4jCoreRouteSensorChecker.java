@@ -32,7 +32,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
-public class Neo4jCoreRouteSensorChecker extends Neo4jCoreChecker<Neo4jRouteSensorMatch> {
+public class Neo4jCoreRouteSensorChecker extends Neo4jCoreModelQuery<Neo4jRouteSensorMatch> {
 
 	public Neo4jCoreRouteSensorChecker(final Neo4jDriver driver) {
 		super(driver);

@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLChecker<EMFSemaphoreNeighborMatch> {
+public class EclipseOCLSemaphoreNeighborChecker extends EclipseOCLModelQuery<EMFSemaphoreNeighborMatch> {
 
 	public EclipseOCLSemaphoreNeighborChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
 		super(driver, benchmarkConfig);

@@ -80,7 +80,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 			checkers = new ArrayList<>();
 
 			for (final RailwayQuery query : benchmarkConfig.getQueries()) {
-				final TChecker checker = benchmarkCase.createChecker(benchmarkConfig, driver, query);
+				final TChecker checker = benchmarkCase.createModelQuery(benchmarkConfig, driver, query);
 				checkers.add(checker);
 			}
 

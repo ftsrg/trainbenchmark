@@ -25,11 +25,11 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSensorMatch;
 
-public class TinkerGraphSwitchSensorChecker extends TinkerGraphChecker<TinkerGraphSwitchSensorMatch> {
+public class TinkerGraphSwitchSensorChecker extends TinkerGraphModelQuery<TinkerGraphSwitchSensorMatch> {
 
 	public TinkerGraphSwitchSensorChecker(final TinkerGraphDriver driver) {
 		super(driver);

@@ -36,7 +36,7 @@ public class JenaBenchmarkCase
 	}
 
 	@Override
-	public JenaChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver, final RailwayQuery query)
+	public JenaChecker createModelQuery(final RDFBenchmarkConfig benchmarkConfig, final JenaDriver driver, final RailwayQuery query)
 			throws Exception {
 		return new JenaChecker(driver, benchmarkConfig, query);
 	}

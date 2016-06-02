@@ -19,7 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLChecker;
+import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -33,8 +33,8 @@ public class SQLiteBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, SQLit
 	}
 
 	@Override
-	public SQLChecker createChecker(final BenchmarkConfig benchmarkConfig, final SQLiteDriver driver, final RailwayQuery query) throws Exception {
-		return new SQLChecker(driver, benchmarkConfig, query);
+	public SQLModelQuery createModelQuery(final BenchmarkConfig benchmarkConfig, final SQLiteDriver driver, final RailwayQuery query) throws Exception {
+		return new SQLModelQuery(driver, benchmarkConfig, query);
 	}
 
 	@Override

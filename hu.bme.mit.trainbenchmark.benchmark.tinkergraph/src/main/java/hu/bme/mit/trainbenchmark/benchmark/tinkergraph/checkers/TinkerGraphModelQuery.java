@@ -22,13 +22,13 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class TinkerGraphChecker<TMatch extends TinkerGraphMatch> extends ModelQuery<TMatch, TinkerGraphDriver> {
+public abstract class TinkerGraphModelQuery<TMatch extends TinkerGraphMatch> extends ModelQuery<TMatch, TinkerGraphDriver> {
 
-	public TinkerGraphChecker(final TinkerGraphDriver driver) {
+	public TinkerGraphModelQuery(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
-	public static TinkerGraphChecker newInstance(final TinkerGraphDriver driver, final RailwayQuery query) {
+	public static TinkerGraphModelQuery newInstance(final TinkerGraphDriver driver, final RailwayQuery query) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new TinkerGraphConnectedSegmentsChecker(driver);

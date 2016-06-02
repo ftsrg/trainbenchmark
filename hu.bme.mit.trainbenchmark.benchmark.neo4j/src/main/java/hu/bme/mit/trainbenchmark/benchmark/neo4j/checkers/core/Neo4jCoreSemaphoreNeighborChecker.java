@@ -34,7 +34,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
-public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreChecker<Neo4jSemaphoreNeighborMatch> {
+public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreModelQuery<Neo4jSemaphoreNeighborMatch> {
 
 	public Neo4jCoreSemaphoreNeighborChecker(final Neo4jDriver driver) {
 		super(driver);

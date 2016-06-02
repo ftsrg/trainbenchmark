@@ -26,10 +26,10 @@ import org.apache.jena.query.ResultSet;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class JenaChecker extends RDFChecker<JenaMatch, JenaDriver> {
+public class JenaChecker extends RDFModelQuery<JenaMatch, JenaDriver> {
 
 	protected Query jenaQuery;
 

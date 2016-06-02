@@ -29,7 +29,7 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
-public class Neo4jCorePosLengthChecker extends Neo4jCoreChecker<Neo4jPosLengthMatch> {
+public class Neo4jCorePosLengthChecker extends Neo4jCoreModelQuery<Neo4jPosLengthMatch> {
 
 	public Neo4jCorePosLengthChecker(final Neo4jDriver driver) {
 		super(driver);

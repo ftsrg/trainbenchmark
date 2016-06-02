@@ -20,7 +20,7 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
@@ -37,9 +37,9 @@ public class TinkerGraphBenchmarkCase
 	}
 
 	@Override
-	public ModelQuery<TinkerGraphMatch, TinkerGraphDriver> createChecker(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
+	public ModelQuery<TinkerGraphMatch, TinkerGraphDriver> createModelQuery(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
 			final RailwayQuery query) throws Exception {
-		return TinkerGraphChecker.newInstance(driver, query);
+		return TinkerGraphModelQuery.newInstance(driver, query);
 	}
 
 	@Override

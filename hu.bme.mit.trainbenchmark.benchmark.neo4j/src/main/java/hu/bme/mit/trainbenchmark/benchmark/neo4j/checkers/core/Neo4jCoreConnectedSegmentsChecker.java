@@ -35,7 +35,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
-public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreChecker<Neo4jConnectedSegmentsMatch> {
+public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreModelQuery<Neo4jConnectedSegmentsMatch> {
 
 	public Neo4jCoreConnectedSegmentsChecker(final Neo4jDriver driver) {
 		super(driver);

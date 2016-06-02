@@ -33,7 +33,7 @@ public class EMFAPIBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
 	}
 
 	@Override
-	public ModelQuery<EMFMatch, EMFDriver> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
+	public ModelQuery<EMFMatch, EMFDriver> createModelQuery(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query)
 			throws Exception {
 		return (ModelQuery<EMFMatch, EMFDriver>) EMFAPIModelQuery.newInstance(driver, query);
 	}

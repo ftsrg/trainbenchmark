@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class EclipseOCLSwitchSetChecker extends EclipseOCLChecker<EMFSwitchSetMatch> {
+public class EclipseOCLSwitchSetChecker extends EclipseOCLModelQuery<EMFSwitchSetMatch> {
 
 	public EclipseOCLSwitchSetChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
 		super(driver, benchmarkConfig);

@@ -24,11 +24,11 @@ import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthMatch;
 
-public class TinkerGraphPosLengthChecker extends TinkerGraphChecker<TinkerGraphPosLengthMatch> {
+public class TinkerGraphPosLengthChecker extends TinkerGraphModelQuery<TinkerGraphPosLengthMatch> {
 
 	public TinkerGraphPosLengthChecker(final TinkerGraphDriver driver) {
 		super(driver);
