@@ -21,12 +21,12 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.repository.RepositoryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFChecker;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SesameChecker extends RDFChecker<SesameMatch, SesameDriver> {
+public class SesameChecker extends RDFModelQuery<SesameMatch, SesameDriver> {
 	
 	protected final String queryDefinition;
 

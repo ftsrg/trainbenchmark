@@ -29,14 +29,14 @@ import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends ModelQuery<TMatch, EMFDriver> {
+public abstract class EclipseOCLModelQuery<TMatch extends EMFMatch> extends ModelQuery<TMatch, EMFDriver> {
 
 	protected Collection<TMatch> matches;
 	protected OCL ocl;
 	protected org.eclipse.ocl.ecore.OCL.Query queryEvaluator;
 	protected RailwayContainer container;
 
-	public EclipseOCLChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, ParserException {
+	public EclipseOCLModelQuery(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, ParserException {
 		super(driver);
 
 		final String oclQuery = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
@@ -49,7 +49,7 @@ public abstract class EclipseOCLChecker<TMatch extends EMFMatch> extends ModelQu
 		queryEvaluator = ocl.createQuery(query);
 	}
 
-	public static EclipseOCLChecker<?> newInstance(final EMFDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws Exception {
+	public static EclipseOCLModelQuery<?> newInstance(final EMFDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws Exception {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new EclipseOCLConnectedSegmentsChecker(driver, benchmarkConfig);

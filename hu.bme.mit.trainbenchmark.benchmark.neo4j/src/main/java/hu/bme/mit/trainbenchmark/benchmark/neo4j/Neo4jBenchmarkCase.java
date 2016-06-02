@@ -18,8 +18,8 @@ import java.util.Comparator;
 import org.neo4j.graphdb.Node;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core.Neo4jCoreChecker;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.cypher.Neo4jCypherChecker;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core.Neo4jCoreModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.cypher.Neo4jCypherModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
@@ -39,14 +39,14 @@ public class Neo4jBenchmarkCase<Neo4jChecker>
 	}
 	
 	@Override
-	public ModelQuery<Neo4jMatch, Neo4jDriver> createChecker(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
+	public ModelQuery<Neo4jMatch, Neo4jDriver> createModelQuery(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
 			throws Exception {		
 		final Neo4jEngine engine = benchmarkConfig.getEngine();
 		switch (engine) {	
 		case COREAPI:
-			return (ModelQuery<Neo4jMatch, Neo4jDriver>) Neo4jCoreChecker.newInstance(driver, query);
+			return (ModelQuery<Neo4jMatch, Neo4jDriver>) Neo4jCoreModelQuery.newInstance(driver, query);
 		case CYPHER:
-			return Neo4jCypherChecker.newInstance(driver, benchmarkConfig, query);
+			return Neo4jCypherModelQuery.newInstance(driver, benchmarkConfig, query);
 		default:
 			throw new UnsupportedOperationException("Engine not supported: " + engine);
 		}

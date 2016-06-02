@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.PosLengthQuerySpecification;
 
-public class EMFIncQueryPosLengthChecker extends EMFIncQueryChecker<PosLengthMatch> {
+public class EMFIncQueryPosLengthChecker extends EMFIncQueryModelQuery<PosLengthMatch> {
 
 	public EMFIncQueryPosLengthChecker(final EMFIncQueryBackend backend,
 			final EMFIncQueryBaseDriver<PosLengthMatch> driver) {

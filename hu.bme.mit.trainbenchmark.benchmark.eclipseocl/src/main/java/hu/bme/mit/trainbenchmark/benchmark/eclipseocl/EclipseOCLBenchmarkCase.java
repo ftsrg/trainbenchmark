@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLChecker;
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers.EclipseOCLModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EMFBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EclipseOCLBenchmarkCase<T extends RailwayElement>
-		extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig, EclipseOCLChecker<EMFMatch>> {
+		extends EMFBenchmarkCase<EMFDriver, BenchmarkConfig, EclipseOCLModelQuery<EMFMatch>> {
 
 	@Override
 	public EMFDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
@@ -32,8 +32,8 @@ public class EclipseOCLBenchmarkCase<T extends RailwayElement>
 	}
 
 	@Override
-	public EclipseOCLChecker<EMFMatch> createChecker(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query) throws Exception {
-		return (EclipseOCLChecker<EMFMatch>) EclipseOCLChecker.newInstance(driver, benchmarkConfig, query);
+	public EclipseOCLModelQuery<EMFMatch> createModelQuery(final BenchmarkConfig benchmarkConfig, final EMFDriver driver, final RailwayQuery query) throws Exception {
+		return (EclipseOCLModelQuery<EMFMatch>) EclipseOCLModelQuery.newInstance(driver, benchmarkConfig, query);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SwitchSetQuerySpecification;
 
-public class EMFIncQuerySwitchSetChecker extends EMFIncQueryChecker<SwitchSetMatch> {
+public class EMFIncQuerySwitchSetChecker extends EMFIncQueryModelQuery<SwitchSetMatch> {
 
 	public EMFIncQuerySwitchSetChecker(final EMFIncQueryBackend backend, final EMFIncQueryBaseDriver<SwitchSetMatch> driver) {
 		super(backend, driver);

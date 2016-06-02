@@ -27,7 +27,7 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphChecker;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
@@ -35,7 +35,7 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
-public class TinkerGraphSwitchSetChecker extends TinkerGraphChecker<TinkerGraphSwitchSetMatch> {
+public class TinkerGraphSwitchSetChecker extends TinkerGraphModelQuery<TinkerGraphSwitchSetMatch> {
 
 	public TinkerGraphSwitchSetChecker(final TinkerGraphDriver driver) {
 		super(driver);

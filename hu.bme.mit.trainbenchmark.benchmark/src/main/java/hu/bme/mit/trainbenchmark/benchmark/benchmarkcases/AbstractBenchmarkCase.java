@@ -30,7 +30,7 @@ TChecker extends ModelQuery<TMatch, TDriver> //
 
 	public abstract TDriver createDriver(TBenchmarkConfig benchmarkConfig) throws Exception;
 
-	public abstract TChecker createChecker(TBenchmarkConfig benchmarkConfig, TDriver driver, RailwayQuery query) throws Exception;
+	public abstract TChecker createModelQuery(TBenchmarkConfig benchmarkConfig, TDriver driver, RailwayQuery query) throws Exception;
 
 	public abstract ModelTransformation<?, ?> createTransformation(TBenchmarkConfig benchmarkConfig, TDriver driver, RailwayQuery query)
 			throws IOException;

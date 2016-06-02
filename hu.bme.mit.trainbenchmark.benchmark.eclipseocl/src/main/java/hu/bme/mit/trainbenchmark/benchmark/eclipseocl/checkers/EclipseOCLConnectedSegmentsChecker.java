@@ -23,7 +23,7 @@ import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
-public class EclipseOCLConnectedSegmentsChecker extends EclipseOCLChecker<EMFConnectedSegmentsMatch> {
+public class EclipseOCLConnectedSegmentsChecker extends EclipseOCLModelQuery<EMFConnectedSegmentsMatch> {
 
 	public EclipseOCLConnectedSegmentsChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
 		super(driver, benchmarkConfig);

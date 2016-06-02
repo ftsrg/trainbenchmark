@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
-public class EclipseOCLSwitchSensorChecker extends EclipseOCLChecker<EMFSwitchSensorMatch> {
+public class EclipseOCLSwitchSensorChecker extends EclipseOCLModelQuery<EMFSwitchSensorMatch> {
 
 	public EclipseOCLSwitchSensorChecker(final EMFDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
 		super(driver, benchmarkConfig);

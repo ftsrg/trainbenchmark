@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SemaphoreNeighborQuerySpecification;
 
-public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryChecker<SemaphoreNeighborMatch> {
+public class EMFIncQuerySemaphoreNeighborChecker extends EMFIncQueryModelQuery<SemaphoreNeighborMatch> {
 
 	public EMFIncQuerySemaphoreNeighborChecker(final EMFIncQueryBackend backend,
 			final EMFIncQueryBaseDriver<SemaphoreNeighborMatch> driver) {

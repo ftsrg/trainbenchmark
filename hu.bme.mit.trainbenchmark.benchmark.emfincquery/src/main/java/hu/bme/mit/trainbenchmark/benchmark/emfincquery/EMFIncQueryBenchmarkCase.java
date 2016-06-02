@@ -17,7 +17,7 @@ import java.util.Comparator;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryChecker;
+import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
@@ -33,7 +33,7 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 			RailwayElement, //
 			EMFIncQueryBaseDriver<TMatch>, //
 			EMFIncQueryBenchmarkConfig, //
-			EMFIncQueryChecker<TMatch>> {
+			EMFIncQueryModelQuery<TMatch>> {
 
 	@Override
 	public EMFIncQueryDriver<TMatch> createDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) throws Exception {
@@ -41,9 +41,9 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 	}
 
 	@Override
-	public EMFIncQueryChecker<TMatch> createChecker(final EMFIncQueryBenchmarkConfig benchmarkConfig,
+	public EMFIncQueryModelQuery<TMatch> createModelQuery(final EMFIncQueryBenchmarkConfig benchmarkConfig,
 			final EMFIncQueryBaseDriver<TMatch> driver, final RailwayQuery query) throws Exception {
-		return (EMFIncQueryChecker<TMatch>) EMFIncQueryChecker.newInstance(benchmarkConfig, driver, query);
+		return (EMFIncQueryModelQuery<TMatch>) EMFIncQueryModelQuery.newInstance(benchmarkConfig, driver, query);
 	}
 
 	@Override

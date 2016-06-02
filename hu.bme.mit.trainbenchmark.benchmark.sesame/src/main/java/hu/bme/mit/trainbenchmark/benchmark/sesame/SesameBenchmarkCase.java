@@ -35,7 +35,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public SesameChecker createChecker(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws Exception {
+	public SesameChecker createModelQuery(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws Exception {
 		return new SesameChecker(driver, benchmarkConfig, query);
 	}
 
