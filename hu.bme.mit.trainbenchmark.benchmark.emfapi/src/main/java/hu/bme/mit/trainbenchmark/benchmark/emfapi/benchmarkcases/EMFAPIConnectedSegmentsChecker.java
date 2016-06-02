@@ -16,8 +16,8 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;

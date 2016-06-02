@@ -29,6 +29,7 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools5</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.drools6</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.eclipseocl</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
@@ -74,7 +75,7 @@
 			</modules>
 		</profile>
 
-    <profile>
+		<profile>
 			<id>graph.tinkerpop</id>
 			<modules>
 				<module>hu.bme.mit.trainbenchmark.generator.graph.tinkerpop</module>
@@ -84,6 +85,7 @@
 		<profile>
 			<id>emf</id>
 			<modules>
+				<module>hu.bme.mit.trainbenchmark.benchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.emf.model</module>
 				<module>hu.bme.mit.trainbenchmark.generator.emf</module>

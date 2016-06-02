@@ -18,9 +18,9 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.Transf
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.checkers.Drools5Checker;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EMFBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.emf.benchmarkcases.EMFBenchmarkCase;
-import hu.bme.mit.trainbenchmark.emf.transformation.EMFTransformation;
 
 public class Drools5BenchmarkCase extends EMFBenchmarkCase<Drools5Driver, BenchmarkConfig, Drools5Checker> {
 

@@ -18,7 +18,8 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
-import hu.bme.mit.trainbenchmark.emf.matches.EMFSemaphoreNeighborMatch;
+
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
