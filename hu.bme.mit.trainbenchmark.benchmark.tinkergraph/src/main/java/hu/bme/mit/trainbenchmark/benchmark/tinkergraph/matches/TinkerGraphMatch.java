@@ -43,8 +43,8 @@ public abstract class TinkerGraphMatch {
 			return new TinkerGraphRouteSensorMatch(row);
 		case SEMAPHORENEIGHBOR:
 			return new TinkerGraphSemaphoreNeighborMatch(row);
-		case SWITCHSENSOR:
-			return new TinkerGraphSwitchSensorMatch(row);
+		case SWITCHMONITORED:
+			return new TinkerGraphSwitchMonitoredMatch(row);
 		case SWITCHSET:
 			return new TinkerGraphSwitchSetMatch(row);
 		default:

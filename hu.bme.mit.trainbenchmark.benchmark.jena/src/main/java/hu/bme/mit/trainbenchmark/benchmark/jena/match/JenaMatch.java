@@ -36,8 +36,8 @@ public abstract class JenaMatch {
 			return new JenaRouteSensorMatch(qs);
 		case SEMAPHORENEIGHBOR:
 			return new JenaSemaphoreNeighborMatch(qs);
-		case SWITCHSENSOR:
-			return new JenaSwitchSensorMatch(qs);
+		case SWITCHMONITORED:
+			return new JenaSwitchMonitoredMatch(qs);
 		case SWITCHSET:
 			return new JenaSwitchSetMatch(qs);
 		default:

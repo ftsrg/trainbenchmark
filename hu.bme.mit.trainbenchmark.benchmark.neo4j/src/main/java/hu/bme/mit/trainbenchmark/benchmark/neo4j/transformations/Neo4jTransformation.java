@@ -16,13 +16,13 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTra
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -46,8 +46,8 @@ public abstract class Neo4jTransformation<TObject> extends ModelTransformation<T
 				return new Neo4jTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
 				return new Neo4jTransformationRepairSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new Neo4jTransformationRepairSwitchSensor(driver);
+			case SWITCHMONITORED:
+				return new Neo4jTransformationRepairSwitchMonitored(driver);
 			case SWITCHSET:
 				return new Neo4jTransformationRepairSwitchSet(driver);
 			default:
@@ -63,8 +63,8 @@ public abstract class Neo4jTransformation<TObject> extends ModelTransformation<T
 				return new Neo4jTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
 				return new Neo4jTransformationInjectSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new Neo4jTransformationInjectSwitchSensor(driver);
+			case SWITCHMONITORED:
+				return new Neo4jTransformationInjectSwitchMonitored(driver);
 			case SWITCHSET:
 				return new Neo4jTransformationInjectSwitchSet(driver);
 			default:

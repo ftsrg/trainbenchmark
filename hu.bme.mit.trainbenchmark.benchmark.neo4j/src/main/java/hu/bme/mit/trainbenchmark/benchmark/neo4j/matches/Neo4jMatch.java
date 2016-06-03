@@ -43,8 +43,8 @@ public abstract class Neo4jMatch {
 			return new Neo4jRouteSensorMatch(row);
 		case SEMAPHORENEIGHBOR:
 			return new Neo4jSemaphoreNeighborMatch(row);
-		case SWITCHSENSOR:
-			return new Neo4jSwitchSensorMatch(row);
+		case SWITCHMONITORED:
+			return new Neo4jSwitchMonitoredMatch(row);
 		case SWITCHSET:
 			return new Neo4jSwitchSetMatch(row);
 		default:

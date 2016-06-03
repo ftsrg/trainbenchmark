@@ -35,8 +35,8 @@ public abstract class EmfApiQuery<TMatch extends EmfMatch, TDriver extends EmfDr
 //			return new EMFAPIRouteSensorQuery<>(driver);
 //		case SEMAPHORENEIGHBOR:
 //			return new EMFAPISemaphoreNeighborQuery<>(driver);
-//		case SWITCHSENSOR:
-//			return new EMFAPISwitchSensorQuery<>(driver);
+//		case SWITCHMONITORED:
+//			return new EMFAPISwitchMonitoredQuery<>(driver);
 //		case SWITCHSET:
 //			return new EMFAPISwitchSetQuery<>(driver);
 //		default:

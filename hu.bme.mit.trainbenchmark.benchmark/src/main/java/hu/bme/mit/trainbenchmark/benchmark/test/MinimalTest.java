@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHMONITORED;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.MINIMAL;
 
@@ -46,7 +46,7 @@ public abstract class MinimalTest extends TrainBenchmarkTest {
 
 	@Test
 	public void switchSensor() throws Exception {
-		testQuery(SWITCHSENSOR, MINIMAL, 1);
+		testQuery(SWITCHMONITORED, MINIMAL, 1);
 	}
 
 	@Test

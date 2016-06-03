@@ -104,8 +104,8 @@ public abstract class EMFIncQueryModelQuery<TMatch extends BasePatternMatch> ext
 			return new EMFIncQueryRouteSensorChecker(backend, driver);
 		case SEMAPHORENEIGHBOR:
 			return new EMFIncQuerySemaphoreNeighborChecker(backend, driver);
-		case SWITCHSENSOR:
-			return new EMFIncQuerySwitchSensorChecker(backend, driver);
+		case SWITCHMONITORED:
+			return new EMFIncQuerySwitchMonitoredChecker(backend, driver);
 		case SWITCHSET:
 			return new EMFIncQuerySwitchSetChecker(backend, driver);
 		default:

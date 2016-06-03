@@ -32,8 +32,8 @@ public abstract class Neo4jCoreModelQuery<TMatch extends Neo4jMatch> extends Mod
 			return new Neo4jCoreRouteSensorChecker(driver);
 		case SEMAPHORENEIGHBOR:
 			return new Neo4jCoreSemaphoreNeighborChecker(driver);
-		case SWITCHSENSOR:
-			return new Neo4jCoreSwitchSensorChecker(driver);
+		case SWITCHMONITORED:
+			return new Neo4jCoreSwitchMonitoredChecker(driver);
 		case SWITCHSET:
 			return new Neo4jCoreSwitchSetChecker(driver);
 		default:

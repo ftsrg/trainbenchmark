@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHMONITORED;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.REPAIR;
 
@@ -46,7 +46,7 @@ public abstract class RepairTest extends TrainBenchmarkTest {
 
 	@Test
 	public void switchSensorRepair() throws Exception {
-		testTransformation(SWITCHSENSOR, REPAIR, 1, 0);
+		testTransformation(SWITCHMONITORED, REPAIR, 1, 0);
 	}
 
 	@Test

@@ -36,8 +36,8 @@ public abstract class SqlMatch extends LongMatch {
 			return new SqlRouteSensorMatch(rs);
 		case SEMAPHORENEIGHBOR:
 			return new SqlSemaphoreNeighborMatch(rs);
-		case SWITCHSENSOR:
-			return new SqlSwitchSensorMatch(rs);
+		case SWITCHMONITORED:
+			return new SqlSwitchMonitoredMatch(rs);
 		case SWITCHSET:
 			return new SqlSwitchSetMatch(rs);
 		default:

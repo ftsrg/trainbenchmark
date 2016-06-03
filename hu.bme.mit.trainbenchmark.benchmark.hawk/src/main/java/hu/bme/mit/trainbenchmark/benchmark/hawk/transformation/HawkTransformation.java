@@ -40,8 +40,8 @@ public abstract class HawkTransformation<TObject> extends Transformation<TObject
 		// return new HawkTransformationRepairRouteSensor(driver);
 		// case SEMAPHORENEIGHBOR:
 		// return new HawkTransformationRepairSemaphoreNeighbor(driver);
-		// case SWITCHSENSOR:
-		// return new HawkTransformationRepairSwitchSensor(driver);
+		// case SWITCHMONITORED:
+		// return new HawkTransformationRepairSwitchMonitored(driver);
 		// case SWITCHSET:
 		// return new HawkTransformationRepairSwitchSet(driver);
 		// default:
@@ -57,8 +57,8 @@ public abstract class HawkTransformation<TObject> extends Transformation<TObject
 		// return new HawkTransformationInjectRouteSensor(driver);
 		// case SEMAPHORENEIGHBOR:
 		// return new HawkTransformationInjectSemaphoreNeighbor(driver);
-		// case SWITCHSENSOR:
-		// return new HawkTransformationInjectSwitchSensor(driver);
+		// case SWITCHMONITORED:
+		// return new HawkTransformationInjectSwitchMonitored(driver);
 		// case SWITCHSET:
 		// return new HawkTransformationInjectSwitchSet(driver);
 		// default:

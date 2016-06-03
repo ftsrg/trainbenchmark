@@ -34,8 +34,8 @@ public abstract class IQDCoreMatch {
 			return new IQDCoreRouteSensorMatch(qs);
 		case SEMAPHORENEIGHBOR:
 			return new IQDCoreSemaphoreNeighborMatch(qs);
-		case SWITCHSENSOR:
-			return new IQDCoreSwitchSensorMatch(qs);
+		case SWITCHMONITORED:
+			return new IQDCoreSwitchMonitoredMatch(qs);
 		case SWITCHSET:
 			return new IQDCoreSwitchSetMatch(qs);
 		default:

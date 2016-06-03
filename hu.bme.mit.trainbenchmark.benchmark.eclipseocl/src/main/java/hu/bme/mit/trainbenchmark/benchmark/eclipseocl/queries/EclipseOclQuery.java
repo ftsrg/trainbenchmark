@@ -61,8 +61,8 @@ public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuer
 			return new EclipseOclQueryRouteSensor(driver, benchmarkConfig);
 		case SEMAPHORENEIGHBOR:
 			return new EclipseOclQuerySemaphoreNeighbor(driver, benchmarkConfig);
-		case SWITCHSENSOR:
-			return new EclipseOclQuerySwitchSensor(driver, benchmarkConfig);
+		case SWITCHMONITORED:
+			return new EclipseOclQuerySwitchMonitored(driver, benchmarkConfig);
 		case SWITCHSET:
 			return new EclipseOclQuerySwitchSet(driver, benchmarkConfig);
 		default:

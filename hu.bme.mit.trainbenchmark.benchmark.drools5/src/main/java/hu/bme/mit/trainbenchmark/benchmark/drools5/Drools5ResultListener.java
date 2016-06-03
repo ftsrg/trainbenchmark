@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5ConnectedSegme
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -65,8 +65,8 @@ public class Drools5ResultListener implements ViewChangedEventListener {
 			return new Drools5RouteSensorMatch(row);
 		case SEMAPHORENEIGHBOR:
 			return new Drools5SemaphoreNeighborMatch(row);
-		case SWITCHSENSOR:
-			return new Drools5SwitchSensorMatch(row);
+		case SWITCHMONITORED:
+			return new Drools5SwitchMonitoredMatch(row);
 		case SWITCHSET:
 			return new Drools5SwitchSetMatch(row);
 		default:

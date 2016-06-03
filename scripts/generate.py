@@ -52,7 +52,7 @@ def generate_minimals(java_opts: List[str], format_name: str, format_option_set:
     target = util.get_generator_jar(format_name)
     options = util.get_command_line_options(format_option_set)
 
-    queries = ["ConnectedSegments", "PosLength", "RouteSensor", "SemaphoreNeighbor", "SwitchSensor", "SwitchSet"]
+    queries = ["ConnectedSegments", "PosLength", "RouteSensor", "SemaphoreNeighbor", "SwitchMonitored", "SwitchSet"]
     for query in queries:
         cmd = util.flatten(["java",
              java_opts,
