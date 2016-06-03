@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.token;
 
-import eu.mondo.sam.core.DataToken;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;

@@ -12,11 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sqlite;
 
-import java.util.Comparator;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SqlBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 
@@ -25,11 +21,6 @@ public class SQLiteBenchmarkCase extends SqlBenchmarkCase<BenchmarkConfig, SQLit
 	@Override
 	public SQLiteDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
 		return new SQLiteDriver(benchmarkConfig.getMaxMemory());
-	}
-
-	@Override
-	public Comparator<LongMatch> getMatchComparator() {
-		return new LongMatchComparator();
 	}
 
 }

@@ -19,13 +19,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import eu.mondo.sam.core.BenchmarkEngine;
-import eu.mondo.sam.core.metrics.ScalarMetric;
-import eu.mondo.sam.core.publishers.CsvPublisher;
-import eu.mondo.sam.core.publishers.DefaultFilenameFactory;
-import eu.mondo.sam.core.publishers.FilenameFactory;
-import eu.mondo.sam.core.results.BenchmarkResult;
-import eu.mondo.sam.core.results.PhaseResult;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;

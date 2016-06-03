@@ -17,10 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -53,26 +51,24 @@ public abstract class SqlDriver extends Driver<Long> {
 		return connection;
 	}
 
-	// read
+//	@Override
+//	public Collection<Long> collectVertices(final String type) throws SQLException {
+//		final Collection<Long> results = new ArrayList<>();
+//
+//		final String query = String.format(COLLECT_VERTICES, type);
+//		try (ResultSet rs = connection.createStatement().executeQuery(query)) {
+//			while (rs.next()) {
+//				results.add(rs.getLong("id"));
+//			}
+//		}
+//
+//		return results;
+//	}
 
-	@Override
-	public Collection<Long> collectVertices(final String type) throws SQLException {
-		final Collection<Long> results = new ArrayList<>();
-
-		final String query = String.format(COLLECT_VERTICES, type);
-		try (ResultSet rs = connection.createStatement().executeQuery(query)) {
-			while (rs.next()) {
-				results.add(rs.getLong("id"));
-			}
-		}
-
-		return results;
-	}
-
-	@Override
-	public Comparator<Long> getElementComparator() {
-		return new LongComparator();
-	}
+//	@Override
+//	public Comparator<Long> getElementComparator() {
+//		return new LongComparator();
+//	}
 
 	public String getResourceDirectory() {
 		return "/hu.bme.mit.trainbenchmark.benchmark.sql/src/main/resources/";

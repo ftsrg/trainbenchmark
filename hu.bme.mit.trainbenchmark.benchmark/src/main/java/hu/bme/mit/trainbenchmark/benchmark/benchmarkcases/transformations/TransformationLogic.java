@@ -18,10 +18,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import eu.mondo.sam.core.metrics.ScalarMetric;
-import eu.mondo.sam.core.metrics.TimeMetric;
-import eu.mondo.sam.core.results.BenchmarkResult;
-import eu.mondo.sam.core.results.PhaseResult;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;

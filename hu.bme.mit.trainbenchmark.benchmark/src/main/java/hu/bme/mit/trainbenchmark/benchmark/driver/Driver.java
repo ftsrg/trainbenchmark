@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.driver;
 
-import java.util.Collection;
-import java.util.Comparator;
-
 /**
  * Superclass for the drivers used in the benchmark.
  * 
@@ -40,16 +37,16 @@ public abstract class Driver<TElement> {
 
 	// read methods
 
-	public abstract void read(String modelPathWithoutExtension) throws Exception;
+	public abstract void read(String modelPath) throws Exception;
 
-	public abstract Collection<TElement> collectVertices(final String type) throws Exception;
-
-	// comparator
-
-	public abstract Comparator<TElement> getElementComparator();
-
-	// extension
-
-	public abstract String getPostfix();
+//	public abstract Collection<TElement> collectVertices(final String type) throws Exception;
+//
+//	// comparator
+//
+//	public abstract Comparator<TElement> getElementComparator();
+//
+//	// extension
+//
+//	public abstract String getPostfix();
 
 }

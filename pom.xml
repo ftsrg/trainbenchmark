@@ -39,7 +39,7 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sqlite</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.tinkergraph</module>
-        <module>hu.bme.mit.trainbenchmark.benchmark.viatra</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.viatra</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.viatra.patterns</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
@@ -260,7 +260,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>

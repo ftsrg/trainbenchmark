@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.generator;
 
-import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.MINIMAL;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -21,12 +19,12 @@ public abstract class ModelGenerator {
 		final StringBuilder messageBuilder = new StringBuilder();
 		messageBuilder.append("Generating instance model, ");
 		messageBuilder.append("generator: " + serializer.syntax() + ", ");
-		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
-		if (generatorConfig.getScenario() == MINIMAL) {
-			messageBuilder.append("query: " + generatorConfig.getQueries().get(0));
-		} else {
-			messageBuilder.append("size: " + generatorConfig.getSize());
-		}
+//		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
+		// if (generatorConfig.getScenario() == MINIMAL) {
+		// messageBuilder.append("query: " + generatorConfig.getQueries().get(0));
+		// } else {
+		messageBuilder.append("size: " + generatorConfig.getSize());
+		// }
 		messageBuilder.append("... ");
 		System.out.print(messageBuilder.toString());
 		serializer.initModel();
