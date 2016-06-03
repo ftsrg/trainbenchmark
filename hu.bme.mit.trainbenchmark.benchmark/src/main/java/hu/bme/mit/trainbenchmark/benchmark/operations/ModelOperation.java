@@ -33,33 +33,22 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 		this.transformation = null;
 	}
 
-	public ModelOperation(
-			final ModelQuery<TPatternMatch, TDriver> query,
-//			Optional<ModelTransformation<TPatternMatch, TDriver>> transformation) {
-			ModelTransformation<TPatternMatch, TDriver> transformation) {
+	public ModelOperation(final ModelQuery<TPatternMatch, TDriver> query,
+			Optional<ModelTransformation<TPatternMatch, TDriver>> transformation) {
 		super();
 		this.query = query;
-//		this.transformation = transformation;
-		this.transformation = null;
+		this.transformation = transformation;
 	}
 
-//	public static <TPatternMatch, TDriver extends Driver<?>> ModelOperation<TPatternMatch, TDriver> of(
-//			final ModelQuery<TPatternMatch, TDriver> query) {
-//		return new ModelOperation<>(query, Optional.empty());
-//	}
+	public static <TPatternMatch, TDriver extends Driver<?>> ModelOperation<TPatternMatch, TDriver> of(
+			final ModelQuery<TPatternMatch, TDriver> query) {
+		return new ModelOperation<>(query, Optional.empty());
+	}
 
-	// public static <TPatternMatch, TDriver extends Driver<?>> ModelOperation<TPatternMatch, TDriver> of(final ModelQuery<TPatternMatch,
-	// TDriver> query,
-	// final ModelTransformation<TPatternMatch, TDriver> transformation) {
-	// return new ModelOperation<>(query, Optional.of(transformation));
-	// }
-
-	
-
-
-
-
-
+	public static <TPatternMatch, TDriver extends Driver<?>> ModelOperation<TPatternMatch, TDriver> of(
+			final ModelQuery<TPatternMatch, TDriver> query, final ModelTransformation<TPatternMatch, TDriver> transformation) {
+		return new ModelOperation<>(query, Optional.of(transformation));
+	}
 
 	public ModelQuery<TPatternMatch, TDriver> getQuery() {
 		return query;

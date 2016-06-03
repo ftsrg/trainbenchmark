@@ -17,7 +17,8 @@ public enum RailwayQuery {
 	ROUTESENSOR("RouteSensor"), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SWITCHSENSOR("SwitchSensor"), //
-	SWITCHSET("SwitchSet");
+	SWITCHSET("SwitchSet"), //
+	;
 
 	private String name;
 

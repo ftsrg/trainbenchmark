@@ -24,9 +24,9 @@ import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EMFAPISemaphoreNeighborQuery extends EMFAPIModelQuery<EMFSemaphoreNeighborMatch> {
+public class EMFAPISemaphoreNeighborQuery<TDriver extends EMFDriver> extends EMFAPIModelQuery<EMFSemaphoreNeighborMatch, TDriver> {
 
-	public EMFAPISemaphoreNeighborQuery(final EMFDriver driver) {
+	public EMFAPISemaphoreNeighborQuery(final TDriver driver) {
 		super(driver);
 	}
 

@@ -12,10 +12,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.rdf.checkers;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class RDFModelQuery<TMatch, TDriver> extends ModelQuery<TMatch, TDriver> {
+public abstract class RDFModelQuery<TMatch, TDriver extends Driver<?>> extends ModelQuery<TMatch, TDriver> {
 
 	protected final RailwayQuery query;
 	protected final String queryPath;

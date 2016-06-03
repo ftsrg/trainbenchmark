@@ -25,9 +25,9 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class EMFAPIRouteSensorQuery extends EMFAPIModelQuery<EMFRouteSensorMatch> {
+public class EMFAPIRouteSensorQuery<TDriver extends EMFDriver> extends EMFAPIModelQuery<EMFRouteSensorMatch, TDriver> {
 
-	public EMFAPIRouteSensorQuery(final EMFDriver driver) {
+	public EMFAPIRouteSensorQuery(final TDriver driver) {
 		super(driver);
 	}
 

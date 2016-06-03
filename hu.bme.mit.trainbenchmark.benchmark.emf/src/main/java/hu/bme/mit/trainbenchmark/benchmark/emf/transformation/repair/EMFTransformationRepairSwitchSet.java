@@ -16,9 +16,9 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public class EMFTransformationRepairSwitchSet extends EMFTransformationRepair<EMFSwitchSetMatch> {
+public class EMFTransformationRepairSwitchSet<TDriver extends EMFDriver> extends EMFTransformationRepair<EMFSwitchSetMatch, TDriver> {
 
-	public EMFTransformationRepairSwitchSet(EMFDriver driver) {
+	public EMFTransformationRepairSwitchSet(TDriver driver) {
 		super(driver);
 	}
 
