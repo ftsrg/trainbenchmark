@@ -15,14 +15,14 @@ import java.util.Comparator;
 
 import org.apache.jena.rdf.model.Resource;
 
-import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
+import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
 public class ResourceComparator implements Comparator<Resource> {
 
 	@Override
 	public int compare(final Resource r1, final Resource r2) {
-		final long id1 = RDFHelper.extractId(r1.getURI());
-		final long id2 = RDFHelper.extractId(r2.getURI());
+		final long id1 = RdfHelper.extractId(r1.getURI());
+		final long id2 = RdfHelper.extractId(r2.getURI());
 
 		return Long.compare(id1, id2);
 	}

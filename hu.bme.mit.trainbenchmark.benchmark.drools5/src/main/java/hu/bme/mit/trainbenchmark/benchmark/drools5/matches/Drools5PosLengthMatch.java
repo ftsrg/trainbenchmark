@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 import org.drools.runtime.rule.Row;
 
-public class Drools5PosLengthMatch extends EMFPosLengthMatch {
+public class Drools5PosLengthMatch extends EmfPosLengthMatch {
 
 	public Drools5PosLengthMatch(final Row match) {
 		super((Segment) match.get(VAR_SEGMENT));

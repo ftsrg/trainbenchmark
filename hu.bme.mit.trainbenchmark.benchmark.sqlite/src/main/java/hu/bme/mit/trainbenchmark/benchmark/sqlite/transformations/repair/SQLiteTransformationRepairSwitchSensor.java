@@ -16,11 +16,11 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLiteTransformationRepairSwitchSensor extends SQLiteTransformationRepair<SQLSwitchSensorMatch> {
+public class SQLiteTransformationRepairSwitchSensor extends SQLiteTransformationRepair<SqlSwitchSensorMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('switch', ?);";
 	
@@ -29,12 +29,12 @@ public class SQLiteTransformationRepairSwitchSensor extends SQLiteTransformation
 	}
 
 	@Override
-	public void activate(final Collection<SQLSwitchSensorMatch> matches) throws SQLException {		
+	public void activate(final Collection<SqlSwitchSensorMatch> matches) throws SQLException {		
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
 		}
 
-		for (final SQLSwitchSensorMatch match : matches) {
+		for (final SqlSwitchSensorMatch match : matches) {
 			preparedUpdateStatement.setLong(1, match.getSw());
 			preparedUpdateStatement.executeUpdate();
 			

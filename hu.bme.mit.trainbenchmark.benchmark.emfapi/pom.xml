@@ -21,7 +21,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.benchmark.emfapi.EMFAPIBenchmarkMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

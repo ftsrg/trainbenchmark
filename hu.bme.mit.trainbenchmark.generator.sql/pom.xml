@@ -21,7 +21,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.generator.sql.SQLGeneratorMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.generator.sql.SqlGeneratorMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

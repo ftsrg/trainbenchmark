@@ -16,11 +16,11 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SQLConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLiteTransformationRepairConnectedSegments extends SQLiteTransformationRepair<SQLConnectedSegmentsMatch> {
+public class SQLiteTransformationRepairConnectedSegments extends SQLiteTransformationRepair<SqlConnectedSegmentsMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('segment1', ?), ('segment2', ?), ('segment3', ?);";
 	
@@ -29,12 +29,12 @@ public class SQLiteTransformationRepairConnectedSegments extends SQLiteTransform
 	}
 
 	@Override
-	public void activate(final Collection<SQLConnectedSegmentsMatch> matches) throws SQLException {
+	public void activate(final Collection<SqlConnectedSegmentsMatch> matches) throws SQLException {
 		if (preparedUpdateStatement == null) {
 			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
 		}
 
-		for (final SQLConnectedSegmentsMatch match : matches) {
+		for (final SqlConnectedSegmentsMatch match : matches) {
 			preparedUpdateStatement.setLong(1, match.getSegment1());
 			preparedUpdateStatement.setLong(2, match.getSegment2());
 			preparedUpdateStatement.setLong(3, match.getSegment3());

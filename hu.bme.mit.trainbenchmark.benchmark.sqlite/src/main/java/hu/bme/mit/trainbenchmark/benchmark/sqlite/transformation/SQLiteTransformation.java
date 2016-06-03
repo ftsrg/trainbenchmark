@@ -7,14 +7,14 @@ import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SQLTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.inject.SQLiteTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SQLiteTransformation<TObject> extends SQLTransformation<TObject> {
+public abstract class SQLiteTransformation<TObject> extends SqlTransformation<TObject> {
 
 	protected SQLiteTransformation(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
@@ -46,7 +46,7 @@ public abstract class SQLiteTransformation<TObject> extends SQLTransformation<TO
 				break;
 			}
 		}
-		return SQLTransformation.newInstance(driver, benchmarkConfig, query);
+		return SqlTransformation.newInstance(driver, benchmarkConfig, query);
 	}
 	
 }

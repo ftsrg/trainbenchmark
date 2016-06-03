@@ -19,7 +19,7 @@ import org.openrdf.model.URI;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
@@ -27,15 +27,15 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RDFBenchmarkConfig, SesameChecker> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RdfBenchmarkConfig, SesameChecker> {
 
 	@Override
-	public SesameDriver createDriver(final RDFBenchmarkConfig benchmarkConfig) throws Exception {
+	public SesameDriver createDriver(final RdfBenchmarkConfig benchmarkConfig) throws Exception {
 		return new SesameDriver(benchmarkConfig.isInferencing());
 	}
 
 	@Override
-	public SesameChecker createModelQuery(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws Exception {
+	public SesameChecker createModelQuery(final RdfBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws Exception {
 		return new SesameChecker(driver, benchmarkConfig, query);
 	}
 
@@ -45,7 +45,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public ModelTransformation<?, ?> createTransformation(final RDFBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
+	public ModelTransformation<?, ?> createTransformation(final RdfBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
 		return SesameTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 }

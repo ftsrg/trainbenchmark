@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,18 +42,18 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
+import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 
-public class SesameDriver extends RDFDriver<URI> {
+public class SesameDriver extends RdfDriver<URI> {
 
 	protected RepositoryConnection connection;
 	protected Repository repository;
 	protected ValueFactory vf;
 
-	protected final Comparator<URI> elementComparator = new URIComparator();
+	protected final Comparator<URI> elementComparator = new UriComparator();
 
 	public SesameDriver(boolean inferencing) {
 		super(inferencing);
@@ -86,7 +86,7 @@ public class SesameDriver extends RDFDriver<URI> {
 
 		repository.initialize();
 		connection = repository.getConnection();
-		connection.add(modelFile, RDFConstants.BASE_PREFIX, RDFFormat.TURTLE);
+		connection.add(modelFile, RdfConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
 
 	public Collection<SesameMatch> runQuery(final RailwayQuery query, final String queryDefinition)

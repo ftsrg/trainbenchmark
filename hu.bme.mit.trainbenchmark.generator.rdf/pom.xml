@@ -25,7 +25,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.generator.rdf.RDFGeneratorMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.generator.rdf.RdfGeneratorMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

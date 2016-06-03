@@ -22,9 +22,9 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
-public class Drools6Driver extends EMFDriver {
+public class Drools6Driver extends EmfDriver {
 
 	protected final KieServices kieServices = KieServices.Factory.get();
 	protected final KieFileSystem kfs = kieServices.newKieFileSystem();

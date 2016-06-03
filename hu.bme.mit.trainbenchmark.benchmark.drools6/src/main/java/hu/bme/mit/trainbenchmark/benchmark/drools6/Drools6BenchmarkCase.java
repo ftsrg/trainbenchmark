@@ -17,12 +17,12 @@ import java.io.IOException;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.checkers.Drools6ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EMFBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools6BenchmarkCase extends EMFBenchmarkCase<Drools6Driver, BenchmarkConfig, Drools6ModelQuery> {
+public class Drools6BenchmarkCase extends EmfBenchmarkCase<Drools6Driver, BenchmarkConfig, Drools6ModelQuery> {
 
 	@Override
 	public Drools6Driver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
@@ -36,7 +36,7 @@ public class Drools6BenchmarkCase extends EMFBenchmarkCase<Drools6Driver, Benchm
 
 	@Override
 	public ModelTransformation<?, ?> createTransformation(final BenchmarkConfig benchmarkConfig, final Drools6Driver driver, final RailwayQuery query) throws IOException {
-		return EMFTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
+		return EmfTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 
 }

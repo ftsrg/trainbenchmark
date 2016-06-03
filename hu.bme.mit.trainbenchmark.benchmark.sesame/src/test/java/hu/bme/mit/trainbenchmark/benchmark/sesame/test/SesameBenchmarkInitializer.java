@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 import java.util.Arrays;
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
@@ -36,7 +36,7 @@ public class SesameBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Sesame", scenario, size, runIndex, query, iterationCount,
+		final RdfBenchmarkConfig rbc = new RdfBenchmarkConfig("Sesame", scenario, size, runIndex, query, iterationCount,
 				transformationStrategy, transformationConstant, inferencing);
 		return new BenchmarkRunner(rbc, new SesameBenchmarkCase());
 	}

@@ -26,13 +26,13 @@ import org.drools.runtime.rule.LiveQuery;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools5ModelQuery extends ModelQuery<EMFMatch, Drools5Driver> {
+public class Drools5ModelQuery extends ModelQuery<EmfMatch, Drools5Driver> {
 
-	protected Collection<EMFMatch> matches = new HashSet<>();
+	protected Collection<EmfMatch> matches = new HashSet<>();
 	protected Drools5ResultListener listener;
 	protected LiveQuery liveQuery;
 	protected RailwayQuery query;
@@ -58,7 +58,7 @@ public class Drools5ModelQuery extends ModelQuery<EMFMatch, Drools5Driver> {
 	}
 
 	@Override
-	public Collection<EMFMatch> check() throws IOException {
+	public Collection<EmfMatch> check() throws IOException {
 		if (liveQuery == null) {
 			listener = new Drools5ResultListener(query);
 			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);

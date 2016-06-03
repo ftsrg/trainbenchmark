@@ -20,9 +20,9 @@ import java.sql.Statement;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SQLDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
-public class SQLiteDriver extends SQLDriver {
+public class SQLiteDriver extends SqlDriver {
 
 	final int maxMemory;
 
