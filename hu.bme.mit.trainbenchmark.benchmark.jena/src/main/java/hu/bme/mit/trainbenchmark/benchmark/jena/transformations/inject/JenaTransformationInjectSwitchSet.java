@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 import java.util.Collection;
 
@@ -27,7 +27,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
+import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
 public class JenaTransformationInjectSwitchSet extends JenaTransformationInject {
 
@@ -55,10 +55,10 @@ public class JenaTransformationInjectSwitchSet extends JenaTransformationInject 
 			// get next enum value
 			final Resource currentPositionResource = oldStatement.getObject().asResource();
 			final String currentPositionRDFString = currentPositionResource.getLocalName();
-			final String currentPositionString = RDFHelper.removePrefix(Position.class, currentPositionRDFString);
+			final String currentPositionString = RdfHelper.removePrefix(Position.class, currentPositionRDFString);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
-			final String newCurrentPositionString = RDFHelper.addEnumPrefix(newCurrentPosition);
+			final String newCurrentPositionString = RdfHelper.addEnumPrefix(newCurrentPosition);
 			final Resource newCurrentPositionResource = model.createResource(BASE_PREFIX + newCurrentPositionString);
 
 			// set new value

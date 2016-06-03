@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -36,7 +36,7 @@ public class JenaBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount,
+		final RdfBenchmarkConfig rbc = new RdfBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount,
 				transformationStrategy, transformationConstant, inferencing);
 		return new BenchmarkRunner(rbc, new JenaBenchmarkCase());
 	}

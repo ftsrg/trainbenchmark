@@ -20,17 +20,17 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.repository.RepositoryException;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.checkers.RDFModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SesameChecker extends RDFModelQuery<SesameMatch, SesameDriver> {
+public class SesameChecker extends RdfModelQuery<SesameMatch, SesameDriver> {
 	
 	protected final String queryDefinition;
 
-	public SesameChecker(final SesameDriver driver, final RDFBenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public SesameChecker(final SesameDriver driver, final RdfBenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}

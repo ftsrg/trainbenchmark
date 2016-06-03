@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 import java.util.Collection;
 
@@ -25,7 +25,7 @@ import org.openrdf.repository.RepositoryResult;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.rdf.RDFHelper;
+import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
 public class SesameTransformationInjectSwitchSet extends SesameTransformationInject {
 
@@ -54,10 +54,10 @@ public class SesameTransformationInjectSwitchSet extends SesameTransformationInj
 			// get next enum value
 			final URI currentPositionURI = (URI) oldStatement.getObject();
 			final String currentPositionRDFString = currentPositionURI.getLocalName();
-			final String currentPositionString = RDFHelper.removePrefix(Position.class, currentPositionRDFString);
+			final String currentPositionString = RdfHelper.removePrefix(Position.class, currentPositionRDFString);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
-			final String newCurrentPositionString = RDFHelper.addEnumPrefix(newCurrentPosition);
+			final String newCurrentPositionString = RdfHelper.addEnumPrefix(newCurrentPosition);
 			final URI newCurrentPositionUri = vf.createURI(BASE_PREFIX + newCurrentPositionString);
 
 			// set new value

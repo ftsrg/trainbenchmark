@@ -14,8 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
 import java.util.Collection;
 

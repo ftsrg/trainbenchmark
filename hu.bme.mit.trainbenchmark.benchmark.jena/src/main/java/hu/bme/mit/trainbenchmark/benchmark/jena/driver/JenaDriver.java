@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,11 +38,11 @@ import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.RDF;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.rdf.RDFConstants;
+import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 
-public class JenaDriver extends RDFDriver<Resource> {
+public class JenaDriver extends RdfDriver<Resource> {
 
 	protected Model model;
 
@@ -119,7 +119,7 @@ public class JenaDriver extends RDFDriver<Resource> {
 	}
 
 	protected void deleteEdges(final Collection<Resource> vertices, final String edgeType, final boolean outgoing, final boolean all) {
-		final Property property = model.getProperty(RDFConstants.BASE_PREFIX + edgeType);
+		final Property property = model.getProperty(RdfConstants.BASE_PREFIX + edgeType);
 
 		for (final Resource vertex : vertices) {
 			final Selector selector = outgoing ? new SimpleSelector(vertex, property, (RDFNode) null) //

@@ -21,9 +21,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
-import hu.bme.mit.trainbenchmark.emf.EMFDriver;
+import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
-public class Drools5Driver extends EMFDriver {
+public class Drools5Driver extends EmfDriver {
 
 	protected KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
 	protected StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();

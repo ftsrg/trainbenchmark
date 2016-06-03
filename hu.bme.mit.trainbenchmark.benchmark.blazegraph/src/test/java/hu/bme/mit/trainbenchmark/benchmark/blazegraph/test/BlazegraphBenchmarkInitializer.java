@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.BlazegraphBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RDFBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -23,7 +23,7 @@ public class BlazegraphBenchmarkInitializer extends TestBenchmarkInitializer {
 
 	@Override
 	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-		final RDFBenchmarkConfig rbc = new RDFBenchmarkConfig("Blazegraph", scenario, size, runIndex, query, iterationCount,
+		final RdfBenchmarkConfig rbc = new RdfBenchmarkConfig("Blazegraph", scenario, size, runIndex, query, iterationCount,
 				transformationStrategy, transformationConstant, false);
 		return new BenchmarkRunner(rbc, new BlazegraphBenchmarkCase());
 	}

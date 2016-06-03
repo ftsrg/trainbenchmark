@@ -11,8 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.BASE_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RDFConstants.ID_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
 import java.util.Collection;
 import java.util.LinkedList;

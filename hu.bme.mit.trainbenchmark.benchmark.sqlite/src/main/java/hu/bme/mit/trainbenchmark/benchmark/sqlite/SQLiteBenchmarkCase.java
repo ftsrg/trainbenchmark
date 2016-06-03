@@ -18,13 +18,13 @@ import java.util.Comparator;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SQLModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SqlBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SqlModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLiteBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, SQLiteDriver> {
+public class SQLiteBenchmarkCase extends SqlBenchmarkCase<BenchmarkConfig, SQLiteDriver> {
 
 
 	@Override
@@ -33,8 +33,8 @@ public class SQLiteBenchmarkCase extends SQLBenchmarkCase<BenchmarkConfig, SQLit
 	}
 
 	@Override
-	public SQLModelQuery createModelQuery(final BenchmarkConfig benchmarkConfig, final SQLiteDriver driver, final RailwayQuery query) throws Exception {
-		return new SQLModelQuery(driver, benchmarkConfig, query);
+	public SqlModelQuery createModelQuery(final BenchmarkConfig benchmarkConfig, final SQLiteDriver driver, final RailwayQuery query) throws Exception {
+		return new SqlModelQuery(driver, benchmarkConfig, query);
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.INJECT;
 
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.repair.EMFIncQueryTransformationRepairPosLength;
@@ -55,7 +55,7 @@ public abstract class EMFIncQueryTransformation<TMatch extends BasePatternMatch>
 				break;
 			}
 		case INJECT:
-			return EMFTransformation.newInstance(driver, query, INJECT);
+			return EmfTransformation.newInstance(driver, query, INJECT);
 		default:
 			break;
 		}
