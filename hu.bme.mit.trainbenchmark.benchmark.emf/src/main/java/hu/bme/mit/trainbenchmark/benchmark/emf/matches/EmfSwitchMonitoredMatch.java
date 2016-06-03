@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
-public class EmfSwitchMonitoredMatch extends EmfMatch implements SwitchSensorMatch {
+public class EmfSwitchMonitoredMatch extends EmfMatch implements SwitchMonitoredMatch {
 
 	public EmfSwitchMonitoredMatch(final Switch sw) {
 		super();

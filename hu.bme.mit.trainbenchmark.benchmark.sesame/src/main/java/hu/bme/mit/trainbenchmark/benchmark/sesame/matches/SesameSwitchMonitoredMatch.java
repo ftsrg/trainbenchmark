@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
 
-public class SesameSwitchMonitoredMatch extends SesameMatch implements SwitchSensorMatch {
+public class SesameSwitchMonitoredMatch extends SesameMatch implements SwitchMonitoredMatch {
 
 	public SesameSwitchMonitoredMatch(final BindingSet bs) {
 		super(bs);

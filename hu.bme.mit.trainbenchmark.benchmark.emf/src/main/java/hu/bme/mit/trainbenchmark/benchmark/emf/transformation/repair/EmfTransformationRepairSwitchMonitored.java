@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
-public class EmfTransformationRepairSwitchMonitored<TDriver extends EmfDriver> extends EmfTransformationRepair<EmfSwitchSensorMatch, TDriver> {
+public class EmfTransformationRepairSwitchMonitored<TDriver extends EmfDriver> extends EmfTransformationRepair<EmfSwitchMonitoredMatch, TDriver> {
 
 	public EmfTransformationRepairSwitchMonitored(TDriver driver) {
 		super(driver);

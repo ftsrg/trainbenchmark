@@ -46,11 +46,11 @@ public final class SwitchMonitored extends BaseGeneratedPatternGroup {
     querySpecifications.add(HasSensorQuerySpecification.instance());
   }
   
-  public SwitchMonitoredQuerySpecification getSwitchSensor() throws IncQueryException {
+  public SwitchMonitoredQuerySpecification getSwitchMonitored() throws IncQueryException {
     return SwitchMonitoredQuerySpecification.instance();
   }
   
-  public SwitchMonitoredMatcher getSwitchSensor(final IncQueryEngine engine) throws IncQueryException {
+  public SwitchMonitoredMatcher getSwitchMonitored(final IncQueryEngine engine) throws IncQueryException {
     return SwitchMonitoredMatcher.on(engine);
   }
   

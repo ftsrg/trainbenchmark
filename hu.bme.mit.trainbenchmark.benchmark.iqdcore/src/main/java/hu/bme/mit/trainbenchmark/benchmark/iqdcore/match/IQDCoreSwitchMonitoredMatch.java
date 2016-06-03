@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 import scala.collection.immutable.Vector;
 
-public class IQDCoreSwitchMonitoredMatch extends IQDCoreMatch implements SwitchSensorMatch {
+public class IQDCoreSwitchMonitoredMatch extends IQDCoreMatch implements SwitchMonitoredMatch {
 
 	public IQDCoreSwitchMonitoredMatch(final Vector<Object> qs) {
 		super(qs);

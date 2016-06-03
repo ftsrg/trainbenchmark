@@ -31,7 +31,7 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
 
-public class Neo4jCoreSwitchMonitoredChecker extends Neo4jCoreModelQuery<Neo4jSwitchSensorMatch> {
+public class Neo4jCoreSwitchMonitoredChecker extends Neo4jCoreModelQuery<Neo4jSwitchMonitoredMatch> {
 
 	public Neo4jCoreSwitchMonitoredChecker(final Neo4jDriver driver) {
 		super(driver);

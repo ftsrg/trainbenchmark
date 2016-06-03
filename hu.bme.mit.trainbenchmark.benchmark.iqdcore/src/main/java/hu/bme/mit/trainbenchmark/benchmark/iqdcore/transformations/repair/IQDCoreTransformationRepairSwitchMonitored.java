@@ -20,7 +20,7 @@ import hu.bme.mit.incqueryds.WildcardInput.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchMonitoredMatch;
 
-public class IQDCoreTransformationRepairSwitchMonitored extends IQDCoreTransformationRepair<IQDCoreSwitchSensorMatch> {
+public class IQDCoreTransformationRepairSwitchMonitored extends IQDCoreTransformationRepair<IQDCoreSwitchMonitoredMatch> {
 
 	public IQDCoreTransformationRepairSwitchMonitored(final IQDCoreDriver driver) {
 		super(driver);

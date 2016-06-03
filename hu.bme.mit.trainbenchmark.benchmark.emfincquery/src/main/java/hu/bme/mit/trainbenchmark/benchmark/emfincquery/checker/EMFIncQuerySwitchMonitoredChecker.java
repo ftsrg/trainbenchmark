@@ -20,9 +20,9 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBackend
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.util.SwitchMonitoredQuerySpecification;
 
-public class EMFIncQuerySwitchMonitoredChecker extends EMFIncQueryModelQuery<SwitchSensorMatch> {
+public class EMFIncQuerySwitchMonitoredChecker extends EMFIncQueryModelQuery<SwitchMonitoredMatch> {
 
-	public EMFIncQuerySwitchMonitoredChecker(final EMFIncQueryBackend backend, final EMFIncQueryBaseDriver<SwitchSensorMatch> driver) {
+	public EMFIncQuerySwitchMonitoredChecker(final EMFIncQueryBackend backend, final EMFIncQueryBaseDriver<SwitchMonitoredMatch> driver) {
 		super(backend, driver);
 	}
 
@@ -32,7 +32,7 @@ public class EMFIncQuerySwitchMonitoredChecker extends EMFIncQueryModelQuery<Swi
 		case INCREMENTAL:
 			return engine.getMatcher(SwitchMonitoredQuerySpecification.instance());
 		case LOCALSEARCH:
-			return (SwitchMonitoredMatcher) getLSMatcher(SwitchSensorQuerySpecification.instance());
+			return (SwitchMonitoredMatcher) getLSMatcher(SwitchMonitoredQuerySpecification.instance());
 		default:
 			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
 		}

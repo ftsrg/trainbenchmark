@@ -14,12 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
-public class EmfApiBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig>
-		extends EmfBenchmarkCase<EmfDriver, TBenchmarkConfig, ModelQuery<EmfMatch, EmfDriver>> {
+public class EmfApiBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig> extends EmfBenchmarkCase<EmfDriver, TBenchmarkConfig> {
 
 	@Override
 	public EmfDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {

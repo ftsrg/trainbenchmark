@@ -21,32 +21,16 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 
-public class Neo4jBenchmarkCase<Neo4jChecker>
-		extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig, ModelQuery<Neo4jMatch, Neo4jDriver>> {
+public class Neo4jBenchmarkCase<Neo4jChecker> extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig> {
 
 	@Override
 	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
 		return new Neo4jDriver(benchmarkConfig.getWorkspacePath());
 	}
 	
-//	@Override
-//	public ModelQuery<Neo4jMatch, Neo4jDriver> createModelQuery(final Neo4jBenchmarkConfig benchmarkConfig, final Neo4jDriver driver, final RailwayQuery query)
-//			throws Exception {		
-//		final Neo4jEngine engine = benchmarkConfig.getEngine();
-//		switch (engine) {	
-//		case COREAPI:
-//			return (ModelQuery<Neo4jMatch, Neo4jDriver>) Neo4jCoreModelQuery.newInstance(driver, query);
-//		case CYPHER:
-//			return Neo4jCypherModelQuery.newInstance(driver, benchmarkConfig, query);
-//		default:
-//			throw new UnsupportedOperationException("Engine not supported: " + engine);
-//		}
-//	}
-
 	@Override
-	public Comparator<?> getMatchComparator() {
+	public Comparator<Neo4jMatch> getMatchComparator() {
 		return new Neo4jMatchComparator();
 	}
 

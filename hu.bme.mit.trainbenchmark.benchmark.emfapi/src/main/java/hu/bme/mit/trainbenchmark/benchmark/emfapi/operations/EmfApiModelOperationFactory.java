@@ -106,7 +106,7 @@ public class EmfApiModelOperationFactory {
 
 		// SwitchMonitored
 		case SWITCHMONITORED: {
-			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchSensor<>(driver);
+			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchMonitored<>(driver);
 			final ModelOperation<EmfSwitchMonitoredMatch, TDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -114,8 +114,8 @@ public class EmfApiModelOperationFactory {
 			// TODO
 		}
 		case SWITCHMONITORED_REPAIR: {
-			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchSensor<>(driver);
-			final EmfTransformation<EmfSwitchMonitoredMatch, TDriver> transformation = new EmfTransformationRepairSwitchSensor<>(driver);
+			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchMonitored<>(driver);
+			final EmfTransformation<EmfSwitchMonitoredMatch, TDriver> transformation = new EmfTransformationRepairSwitchMonitored<>(driver);
 			final ModelOperation<EmfSwitchMonitoredMatch, TDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}

@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emfincquery.transformations.EMFIncQue
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
-public class EMFIncQueryTransformationRepairSwitchMonitored extends EMFIncQueryTransformation<SwitchSensorMatch> {
+public class EMFIncQueryTransformationRepairSwitchMonitored extends EMFIncQueryTransformation<SwitchMonitoredMatch> {
 
 	public EMFIncQueryTransformationRepairSwitchMonitored(final EMFIncQueryBaseDriver<? extends BasePatternMatch> driver) {
 		super(driver);

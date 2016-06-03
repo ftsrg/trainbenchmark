@@ -16,17 +16,17 @@ import java.util.Comparator;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 
-public abstract class AbstractBenchmarkCase<TMatch, //
+public abstract class AbstractBenchmarkCase<//
+TMatch, //
 TElement, //
 TDriver extends Driver<TElement>, //
-TBenchmarkConfig extends BenchmarkConfig, //
-TChecker extends ModelQuery<TMatch, TDriver> //
+TBenchmarkConfig extends BenchmarkConfig //
+ //
 > {
 
 	public abstract TDriver createDriver(TBenchmarkConfig benchmarkConfig) throws Exception;
 
-	public abstract Comparator<?> getMatchComparator();
+	public abstract Comparator<TMatch> getMatchComparator();
 
 }

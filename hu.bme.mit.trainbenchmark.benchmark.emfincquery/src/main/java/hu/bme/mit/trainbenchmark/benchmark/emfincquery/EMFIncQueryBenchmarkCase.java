@@ -16,7 +16,6 @@ import java.util.Comparator;
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emfincquery.checker.EMFIncQueryModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.config.EMFIncQueryBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emfincquery.driver.EMFIncQueryDriver;
@@ -28,8 +27,7 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 			TMatch, // 
 			RailwayElement, //
 			EMFIncQueryBaseDriver<TMatch>, //
-			EMFIncQueryBenchmarkConfig, //
-			EMFIncQueryModelQuery<TMatch>> {
+			EMFIncQueryBenchmarkConfig> {
 
 	@Override
 	public EMFIncQueryDriver<TMatch> createDriver(final EMFIncQueryBenchmarkConfig benchmarkConfig) throws Exception {
@@ -37,7 +35,7 @@ public class EMFIncQueryBenchmarkCase<TMatch extends BasePatternMatch> extends
 	}
 
 	@Override
-	public Comparator<?> getMatchComparator() {
+	public Comparator<TMatch> getMatchComparator() {
 		return new EMFIncQueryMatchComparator();
 	}
 

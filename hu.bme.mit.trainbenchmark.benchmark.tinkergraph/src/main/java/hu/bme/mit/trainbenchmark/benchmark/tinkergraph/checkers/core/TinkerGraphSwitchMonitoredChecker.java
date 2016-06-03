@@ -29,7 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModel
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredMatch;
 
-public class TinkerGraphSwitchMonitoredChecker extends TinkerGraphModelQuery<TinkerGraphSwitchSensorMatch> {
+public class TinkerGraphSwitchMonitoredChecker extends TinkerGraphModelQuery<TinkerGraphSwitchMonitoredMatch> {
 
 	public TinkerGraphSwitchMonitoredChecker(final TinkerGraphDriver driver) {
 		super(driver);

@@ -26,7 +26,7 @@ import org.apache.jena.vocabulary.RDF;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchMonitoredMatch;
 
-public class JenaTransformationRepairSwitchMonitored extends JenaTransformationRepair<JenaSwitchSensorMatch> {
+public class JenaTransformationRepairSwitchMonitored extends JenaTransformationRepair<JenaSwitchMonitoredMatch> {
 
 	public JenaTransformationRepairSwitchMonitored(final JenaDriver driver) {
 		super(driver);

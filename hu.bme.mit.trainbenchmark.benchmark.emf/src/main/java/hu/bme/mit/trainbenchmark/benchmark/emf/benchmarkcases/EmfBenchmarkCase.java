@@ -17,15 +17,14 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public abstract class EmfBenchmarkCase<TDriver extends EmfDriver, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<EmfMatch, TDriver>>
-		extends AbstractBenchmarkCase<EmfMatch, RailwayElement, TDriver, TBenchmarkConfig, TChecker> {
+public abstract class EmfBenchmarkCase<TDriver extends EmfDriver, TBenchmarkConfig extends BenchmarkConfig>
+		extends AbstractBenchmarkCase<EmfMatch, RailwayElement, TDriver, TBenchmarkConfig> {
 
 	@Override
-	public Comparator<?> getMatchComparator() {
+	public Comparator<EmfMatch> getMatchComparator() {
 		return new EmfMatchComparator();
 	}
 

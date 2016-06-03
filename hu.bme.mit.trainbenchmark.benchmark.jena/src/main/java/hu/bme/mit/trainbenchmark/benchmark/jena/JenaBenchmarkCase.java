@@ -17,14 +17,12 @@ import java.util.Comparator;
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaChecker;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 
-public class JenaBenchmarkCase
-		extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RdfBenchmarkConfig, JenaChecker> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RdfBenchmarkConfig> {
 
 	@Override
 	public JenaDriver createDriver(final RdfBenchmarkConfig benchmarkConfig) throws Exception {
@@ -32,7 +30,7 @@ public class JenaBenchmarkCase
 	}
 
 	@Override
-	public Comparator<?> getMatchComparator() {
+	public Comparator<JenaMatch> getMatchComparator() {
 		return new JenaMatchComparator();
 	}
 

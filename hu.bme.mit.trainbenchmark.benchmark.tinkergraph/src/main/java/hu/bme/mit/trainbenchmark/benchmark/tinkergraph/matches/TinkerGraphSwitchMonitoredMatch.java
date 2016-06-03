@@ -19,7 +19,7 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
-public class TinkerGraphSwitchMonitoredMatch extends TinkerGraphMatch implements SwitchSensorMatch {
+public class TinkerGraphSwitchMonitoredMatch extends TinkerGraphMatch implements SwitchMonitoredMatch {
 
 	public TinkerGraphSwitchMonitoredMatch(final Map<String, Object> match) {
 		super(match);

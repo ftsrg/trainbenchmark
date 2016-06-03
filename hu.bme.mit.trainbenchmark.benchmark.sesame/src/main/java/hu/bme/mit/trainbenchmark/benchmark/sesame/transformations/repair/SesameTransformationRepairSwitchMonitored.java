@@ -28,7 +28,7 @@ import org.openrdf.repository.RepositoryConnection;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchMonitoredMatch;
 
-public class SesameTransformationRepairSwitchMonitored extends SesameTransformationRepair<SesameSwitchSensorMatch> {
+public class SesameTransformationRepairSwitchMonitored extends SesameTransformationRepair<SesameSwitchMonitoredMatch> {
 
 	public SesameTransformationRepairSwitchMonitored(final SesameDriver driver) {
 		super(driver);
