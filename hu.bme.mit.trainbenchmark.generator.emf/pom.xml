@@ -25,7 +25,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.generator.emf.EMFGeneratorMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.generator.emf.EmfGeneratorMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
