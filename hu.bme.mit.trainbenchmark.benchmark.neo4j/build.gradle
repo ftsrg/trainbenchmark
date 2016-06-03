@@ -1,0 +1,7 @@
+
+description = ''
+dependencies {
+  compile project(':hu.bme.mit.trainbenchmark.benchmark')
+    compile group: 'org.neo4j.shell', name: 'import-tools', version:'2.3.3'
+    compile group: 'commons-collections', name: 'commons-collections', version:'3.2.1'
+}
