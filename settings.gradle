@@ -4,6 +4,7 @@ include ':hu.bme.mit.trainbenchmark.benchmark.blazegraph'
 include ':hu.bme.mit.trainbenchmark.benchmark.drools5'
 include ':hu.bme.mit.trainbenchmark.benchmark.drools6'
 include ':hu.bme.mit.trainbenchmark.benchmark.eclipseocl'
+include ':hu.bme.mit.trainbenchmark.benchmark.emf'
 include ':hu.bme.mit.trainbenchmark.benchmark.emfapi'
 include ':hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns'
 include ':hu.bme.mit.trainbenchmark.benchmark.emfincquery'
@@ -32,6 +33,7 @@ project(':hu.bme.mit.trainbenchmark.benchmark.blazegraph').projectDir = "$rootDi
 project(':hu.bme.mit.trainbenchmark.benchmark.drools5').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.drools5" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.drools6').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.drools6" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.eclipseocl').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.eclipseocl" as File
+project(':hu.bme.mit.trainbenchmark.benchmark.emf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emf" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.emfapi').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emfapi" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.emfincquery').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emfincquery" as File

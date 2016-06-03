@@ -1,10 +1,8 @@
 
 description = ''
 dependencies {
-  compile project(':hu.bme.mit.trainbenchmark.benchmark')
-  compile project(':hu.bme.mit.trainbenchmark.emf')
-  compile project(':hu.bme.mit.trainbenchmark.emf.model')
-    compile group: 'org.drools', name: 'drools-core', version:'5.6.0.Final'
-    compile group: 'org.drools', name: 'drools-compiler', version:'5.6.0.Final'
-    compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.7.10'
+  compile project(':hu.bme.mit.trainbenchmark.benchmark.emf')
+  compile group: 'org.drools', name: 'drools-core', version:'5.6.0.Final'
+  compile group: 'org.drools', name: 'drools-compiler', version:'5.6.0.Final'
+  compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.7.10'
 }

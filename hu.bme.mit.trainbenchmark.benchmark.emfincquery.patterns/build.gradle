@@ -4,7 +4,7 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version:'1.2.17'
     compile group: 'org.eclipse.incquery', name: 'incquery-runtime', version:'1.2.0-SNAPSHOT'
     compile group: 'org.eclipse.incquery', name: 'org.eclipse.incquery.runtime.localsearch', version:'1.2.0-SNAPSHOT'
-  compile project(':hu.bme.mit.trainbenchmark.emf.model')
+    compile project(':hu.bme.mit.trainbenchmark.benchmark.emf')
 }
 sourceSets {
     main {
