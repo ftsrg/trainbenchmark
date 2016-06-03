@@ -108,7 +108,7 @@ public abstract class SwitchMonitoredMatch extends BasePatternMatch {
     		return false;
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
-    SwitchMonitoredMatch other = (SwitchSensorMatch) obj;
+    SwitchMonitoredMatch other = (SwitchMonitoredMatch) obj;
     if (fSw == null) {if (other.fSw != null) return false;}
     else if (!fSw.equals(other.fSw)) return false;
     return true;

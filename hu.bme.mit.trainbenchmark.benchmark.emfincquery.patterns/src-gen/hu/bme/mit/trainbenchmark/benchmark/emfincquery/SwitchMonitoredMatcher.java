@@ -40,7 +40,7 @@ import org.eclipse.incquery.runtime.util.IncQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public class SwitchMonitoredMatcher extends BaseMatcher<SwitchSensorMatch> {
+public class SwitchMonitoredMatcher extends BaseMatcher<SwitchMonitoredMatch> {
   /**
    * Initializes the pattern matcher within an existing EMF-IncQuery engine.
    * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.

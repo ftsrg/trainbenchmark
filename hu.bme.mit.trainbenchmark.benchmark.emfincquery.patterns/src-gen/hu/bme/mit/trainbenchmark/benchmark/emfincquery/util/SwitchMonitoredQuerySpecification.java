@@ -30,7 +30,7 @@ import org.eclipse.incquery.runtime.matchers.tuple.FlatTuple;
  * 
  */
 @SuppressWarnings("all")
-public final class SwitchMonitoredQuerySpecification extends BaseGeneratedEMFQuerySpecification<SwitchSensorMatcher> {
+public final class SwitchMonitoredQuerySpecification extends BaseGeneratedEMFQuerySpecification<SwitchMonitoredMatcher> {
   private SwitchMonitoredQuerySpecification() {
     super(GeneratedPQuery.INSTANCE);
   }

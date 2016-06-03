@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EmfApiQuerySwitchMonitored<TDriver extends EmfDriver> extends EmfApiQuery<EmfSwitchSensorMatch, TDriver> {
+public class EmfApiQuerySwitchMonitored<TDriver extends EmfDriver> extends EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> {
 
 	public EmfApiQuerySwitchMonitored(final TDriver driver) {
 		super(driver);

@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.railway.Switch;
 
 import org.drools.runtime.rule.Row;
 
-public class Drools5SwitchMonitoredMatch extends EmfSwitchSensorMatch {
+public class Drools5SwitchMonitoredMatch extends EmfSwitchMonitoredMatch {
 
 	public Drools5SwitchMonitoredMatch(final Row match) {
 		super((Switch) match.get(VAR_SW));

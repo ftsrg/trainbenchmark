@@ -37,4 +37,5 @@ public class RepairTransformationLogic<TMatch, TElement, TBenchmarkConfig extend
 		final List<TMatch> sortedMatches = ordering.sortedCopy(candidatesToModify);
 		return sortedMatches;
 	}
+	
 }

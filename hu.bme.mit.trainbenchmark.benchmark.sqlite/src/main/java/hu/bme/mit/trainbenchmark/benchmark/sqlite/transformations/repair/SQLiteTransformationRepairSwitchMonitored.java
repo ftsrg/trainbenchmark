@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SQLiteTransformationRepairSwitchMonitored extends SQLiteTransformationRepair<SqlSwitchSensorMatch> {
+public class SQLiteTransformationRepairSwitchMonitored extends SQLiteTransformationRepair<SqlSwitchMonitoredMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('switch', ?);";
 	

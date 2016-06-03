@@ -40,7 +40,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 	protected final Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TBenchmarkConfig benchmarkConfig;
-	protected final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkCase;
+	protected final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig> benchmarkCase;
 
 	protected ModelTransformation<?, ?> transformation;
 	protected TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig> transformationLogic;
@@ -49,7 +49,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	protected List<Collection<TMatch>> matches;
 
 	public BenchmarkRunner(final TBenchmarkConfig benchmarkConfig,
-			final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> benchmarkCase) {
+			final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig> benchmarkCase) {
 		this.benchmarkConfig = benchmarkConfig;
 		this.benchmarkCase = benchmarkCase;
 	}

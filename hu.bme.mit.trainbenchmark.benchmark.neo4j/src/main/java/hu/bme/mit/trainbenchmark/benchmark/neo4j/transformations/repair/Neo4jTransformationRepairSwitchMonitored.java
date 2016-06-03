@@ -21,7 +21,7 @@ import org.neo4j.graphdb.Node;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
 
-public class Neo4jTransformationRepairSwitchMonitored extends Neo4jTransformationRepair<Neo4jSwitchSensorMatch> {
+public class Neo4jTransformationRepairSwitchMonitored extends Neo4jTransformationRepair<Neo4jSwitchMonitoredMatch> {
 
 	public Neo4jTransformationRepairSwitchMonitored(final Neo4jDriver driver) {
 		super(driver);

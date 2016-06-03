@@ -17,14 +17,13 @@ import java.util.Comparator;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatchComparator;
 
 public class TinkerGraphBenchmarkCase
-		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, ModelQuery<TinkerGraphMatch, TinkerGraphDriver>> {
+		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig> {
 
 	@Override
 	public TinkerGraphDriver createDriver(final TinkerGraphBenchmarkConfig benchmarkConfig) throws Exception {
@@ -32,7 +31,7 @@ public class TinkerGraphBenchmarkCase
 	}
 
 	@Override
-	public Comparator<?> getMatchComparator() {
+	public Comparator<TinkerGraphMatch> getMatchComparator() {
 		return new TinkerGraphMatchComparator();
 	}
 

@@ -11,7 +11,7 @@ import org.eclipse.incquery.runtime.api.IMatchProcessor;
  * 
  */
 @SuppressWarnings("all")
-public abstract class SwitchMonitoredProcessor implements IMatchProcessor<SwitchSensorMatch> {
+public abstract class SwitchMonitoredProcessor implements IMatchProcessor<SwitchMonitoredMatch> {
   /**
    * Defines the action that is to be executed on each match.
    * @param pSw the value of pattern parameter sw in the currently processed match

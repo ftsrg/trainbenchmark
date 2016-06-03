@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
+import org.kie.api.runtime.rule.Row;
+
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
-import org.kie.api.runtime.rule.Row;
-
-public class Drools6SwitchMonitoredMatch extends EmfSwitchSensorMatch {
+public class Drools6SwitchMonitoredMatch extends EmfSwitchMonitoredMatch {
 
 	public Drools6SwitchMonitoredMatch(final Row match) {
 		super((Switch) match.get(VAR_SW));

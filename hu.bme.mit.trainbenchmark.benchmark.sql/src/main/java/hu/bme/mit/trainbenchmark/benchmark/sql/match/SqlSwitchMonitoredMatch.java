@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SqlSwitchMonitoredMatch extends SqlMatch implements SwitchSensorMatch {
+public class SqlSwitchMonitoredMatch extends SqlMatch implements SwitchMonitoredMatch {
 
 	public SqlSwitchMonitoredMatch(final ResultSet rs) throws SQLException {
 		match = new Long[] { rs.getLong(VAR_SW) };

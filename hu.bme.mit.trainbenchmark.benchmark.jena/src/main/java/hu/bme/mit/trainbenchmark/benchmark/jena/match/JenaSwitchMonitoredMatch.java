@@ -18,7 +18,7 @@ import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
-public class JenaSwitchMonitoredMatch extends JenaMatch implements SwitchSensorMatch {
+public class JenaSwitchMonitoredMatch extends JenaMatch implements SwitchMonitoredMatch {
 
 	public JenaSwitchMonitoredMatch(final QuerySolution qs) {
 		super(qs);

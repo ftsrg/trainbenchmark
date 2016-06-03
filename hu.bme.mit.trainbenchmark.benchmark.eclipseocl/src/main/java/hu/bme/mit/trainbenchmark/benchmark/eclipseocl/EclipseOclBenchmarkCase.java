@@ -12,14 +12,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries.EclipseOclQuery;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOclBenchmarkCase<T extends RailwayElement>
-		extends EmfBenchmarkCase<EmfDriver, BenchmarkConfig, EclipseOclQuery<EmfMatch>> {
+public class EclipseOclBenchmarkCase<T extends RailwayElement> extends EmfBenchmarkCase<EmfDriver, BenchmarkConfig> {
 
 	@Override
 	public EmfDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {

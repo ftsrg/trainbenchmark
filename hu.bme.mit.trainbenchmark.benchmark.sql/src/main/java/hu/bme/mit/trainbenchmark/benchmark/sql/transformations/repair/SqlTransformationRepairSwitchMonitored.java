@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SqlTransformationRepairSwitchMonitored extends SqlTransformationRepair<SqlSwitchSensorMatch> {
+public class SqlTransformationRepairSwitchMonitored extends SqlTransformationRepair<SqlSwitchMonitoredMatch> {
 
 	public SqlTransformationRepairSwitchMonitored(final SqlDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
 			throws IOException {

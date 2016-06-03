@@ -11,15 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfincquery.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
-import hu.bme.mit.trainbenchmark.emf.RailwayElementComparator;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-
 import java.util.Comparator;
 
 import org.eclipse.incquery.runtime.api.impl.BasePatternMatch;
 
-public class EMFIncQueryMatchComparator extends MatchComparator<BasePatternMatch, RailwayElement> {
+import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
+import hu.bme.mit.trainbenchmark.emf.RailwayElementComparator;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+
+public class EMFIncQueryMatchComparator<TMatch extends BasePatternMatch> extends MatchComparator<TMatch, RailwayElement> {
 
 	protected final Comparator<RailwayElement> rec = new RailwayElementComparator();
 

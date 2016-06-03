@@ -18,7 +18,7 @@ import java.util.Map;
 
 import org.neo4j.graphdb.Node;
 
-public class Neo4jSwitchMonitoredMatch extends Neo4jMatch implements SwitchSensorMatch {
+public class Neo4jSwitchMonitoredMatch extends Neo4jMatch implements SwitchMonitoredMatch {
 
 	public Neo4jSwitchMonitoredMatch(final Map<String, Object> match) {
 		super(match);
