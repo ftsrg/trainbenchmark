@@ -13,7 +13,9 @@ package hu.bme.mit.trainbenchmark.benchmark.operations;
 
 import java.util.Collection;
 
-public abstract class ModelQuery<PatternMatch, TDriver> implements AutoCloseable {
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+
+public abstract class ModelQuery<PatternMatch, TDriver extends Driver<?>> implements AutoCloseable {
 	
 	protected final TDriver driver; 
 	
@@ -25,6 +27,10 @@ public abstract class ModelQuery<PatternMatch, TDriver> implements AutoCloseable
 
 	@Override
 	public void close() {
+	}
+	
+	public TDriver getDriver() {
+		return driver;
 	}
 
 }
