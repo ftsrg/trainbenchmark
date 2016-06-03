@@ -12,8 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.config;
 
-import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.MINIMAL;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,21 +19,17 @@ import java.util.List;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
-import org.apache.commons.lang.WordUtils;
 
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public abstract class AbstractConfig {
 
 	protected static final String HELP = "help";
 	protected static final String MAX_MEMORY = "maxMemory";
-	protected static final String QUERY_MIX = "queryMix";
-	protected static final String SCENARIO = "scenario";
+	protected static final String OPERATIONS = "operations";
 	protected static final String SIZE = "size";
 
 	protected final Options options = new Options();
@@ -43,9 +37,7 @@ public abstract class AbstractConfig {
 	protected CommandLine cmd;
 
 	// arguments
-	protected List<RailwayQuery> queryMix = new ArrayList<>();
-	protected ScenarioEnum scenario;
-	protected int size;
+	protected List<RailwayQuery> operations = new ArrayList<>();
 	protected int maxMemory = 1000;
 
 	public AbstractConfig(final String args[]) throws ParseException {
@@ -64,9 +56,7 @@ public abstract class AbstractConfig {
 		}
 	}
 
-	public AbstractConfig(final ScenarioEnum scenario, final int size) {
-		this.scenario = scenario;
-		this.size = size;
+	public AbstractConfig() {
 	}
 
 	protected void initOptions() {
@@ -76,18 +66,7 @@ public abstract class AbstractConfig {
 		options.addOption(MAX_MEMORY, true, "denotes the maximum memory of the JVM in MBs, e.g. 10240 "
 				+ "(this only servers logging purposes, you still need to set Xmx accordingly)");
 
-		// query mix
-		final Option queryMixOption = new Option(QUERY_MIX, true, "specifies the query, e.g. RouteSensor");
-		queryMixOption.setArgs(Option.UNLIMITED_VALUES);
-		options.addOption(queryMixOption);
 
-		// scenario
-		final Option scenarioOption = new Option(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
-		scenarioOption.setRequired(true);
-		options.addOption(scenarioOption);
-
-		// size
-		options.addOption(SIZE, true, "specifies model size, e.g. 4");
 	}
 
 	protected void processArguments(final String[] args) throws ParseException {
@@ -97,19 +76,14 @@ public abstract class AbstractConfig {
 			maxMemory = Integer.parseInt(cmd.getOptionValue(MAX_MEMORY));
 		}
 
-		scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
-
-		if (cmd.hasOption(QUERY_MIX)) {
-			final String[] queriesArguments = cmd.getOptionValues(QUERY_MIX);
+		if (cmd.hasOption(OPERATIONS)) {
+			final String[] queriesArguments = cmd.getOptionValues(OPERATIONS);
 
 			for (final String queriesArgument : queriesArguments) {
-				queryMix.add(RailwayQuery.valueOf(queriesArgument.toUpperCase()));
+				operations.add(RailwayQuery.valueOf(queriesArgument.toUpperCase()));
 			}
 		}
 
-		if (cmd.hasOption(SIZE)) {
-			size = Integer.parseInt(cmd.getOptionValue(SIZE));
-		}
 	}
 
 	public void printHelp() {
@@ -120,18 +94,6 @@ public abstract class AbstractConfig {
 		System.out.println();
 	}
 
-	public ScenarioEnum getScenario() {
-		return scenario;
-	}
-
-	public String getScenarioName() {
-		return WordUtils.capitalizeFully(scenario.toString());
-	}
-
-	public int getSize() {
-		return size;
-	}
-
 	public String getWorkspacePath() {
 		return "../";
 	}
@@ -140,30 +102,8 @@ public abstract class AbstractConfig {
 		return getWorkspacePath() + "models/";
 	}
 
-	public String getModelPathWithoutExtension() {
-		final String filename = getModelFileNameWithoutExtension();
-		return getModelsPath() + filename;
-	}
-
-	public String getModelFileNameWithoutExtension() {
-		final String variant = scenario.toString().toLowerCase();
-
-		final StringBuilder filenameBuilder = new StringBuilder();
-		filenameBuilder.append("railway-" + variant + "-");
-		if (scenario == MINIMAL) {
-			filenameBuilder.append(getQuery().toString().toLowerCase());
-		} else {
-			filenameBuilder.append(size);
-		}
-		return filenameBuilder.toString();
-	}
-
-	public List<RailwayQuery> getQueries() {
-		return queryMix;
-	}
-
-	public RailwayQuery getQuery() {
-		return queryMix.get(0);
+	public List<RailwayQuery> getOperations() {
+		return operations;
 	}
 
 	public int getMaxMemory() {

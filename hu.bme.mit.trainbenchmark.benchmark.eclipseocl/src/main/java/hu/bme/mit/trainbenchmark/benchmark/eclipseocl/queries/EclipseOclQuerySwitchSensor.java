@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,9 +22,9 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSensorMatch;
 import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
-public class EclipseOclSwitchSensorChecker extends EclipseOclModelQuery<EmfSwitchSensorMatch> {
+public class EclipseOclQuerySwitchSensor extends EclipseOclQuery<EmfSwitchSensorMatch> {
 
-	public EclipseOclSwitchSensorChecker(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
+	public EclipseOclQuerySwitchSensor(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
 		super(driver, benchmarkConfig);
 	}
 

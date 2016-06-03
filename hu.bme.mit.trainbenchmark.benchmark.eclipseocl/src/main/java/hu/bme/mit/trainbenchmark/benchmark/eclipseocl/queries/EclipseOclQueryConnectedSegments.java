@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,33 +18,33 @@ import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.emf.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EclipseOclSemaphoreNeighborChecker extends EclipseOclModelQuery<EmfSemaphoreNeighborMatch> {
+public class EclipseOclQueryConnectedSegments extends EclipseOclQuery<EmfConnectedSegmentsMatch> {
 
-	public EclipseOclSemaphoreNeighborChecker(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
+	public EclipseOclQueryConnectedSegments(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
 		super(driver, benchmarkConfig);
 	}
 
 	@Override
-	public Collection<EmfSemaphoreNeighborMatch> check() {
+	public Collection<EmfConnectedSegmentsMatch> check() {
 		matches = new ArrayList<>();
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
 		for (final Tuple<?, ?> tuple : bag) {
-			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphore");
-			final Route route1 = (Route) tuple.getValue("route1");
-			final Route route2 = (Route) tuple.getValue("route2");
-			final Sensor sensor1 = (Sensor) tuple.getValue("sensor1");
-			final Sensor sensor2 = (Sensor) tuple.getValue("sensor2");
-			final TrackElement te1 = (TrackElement) tuple.getValue("te1");
-			final TrackElement te2 = (TrackElement) tuple.getValue("te2");
-			matches.add(new EmfSemaphoreNeighborMatch(semaphore, route1, route2, sensor1, sensor2, te1, te2));
+			final Sensor sensor = (Sensor) tuple.getValue("sensor");
+			final Segment segment1 = (Segment) tuple.getValue("segment1");
+			final Segment segment2 = (Segment) tuple.getValue("segment2");
+			final Segment segment3 = (Segment) tuple.getValue("segment3");
+			final Segment segment4 = (Segment) tuple.getValue("segment4");
+			final Segment segment5 = (Segment) tuple.getValue("segment5");
+			final Segment segment6 = (Segment) tuple.getValue("segment6");
+			final EmfConnectedSegmentsMatch match = new EmfConnectedSegmentsMatch(sensor, segment1, segment2, segment3, segment4, segment5,
+					segment6);
+			matches.add(match);
 		}
 
 		return matches;

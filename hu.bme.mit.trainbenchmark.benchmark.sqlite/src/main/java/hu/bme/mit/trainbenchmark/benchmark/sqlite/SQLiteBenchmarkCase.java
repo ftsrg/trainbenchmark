@@ -21,7 +21,6 @@ import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 
 public class SQLiteBenchmarkCase extends SqlBenchmarkCase<BenchmarkConfig, SQLiteDriver> {
 
-
 	@Override
 	public SQLiteDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
 		return new SQLiteDriver(benchmarkConfig.getMaxMemory());
