@@ -17,12 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EMFTransfor
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EMFTransformationInjectSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EMFTransformationInjectSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EMFTransformationInjectSwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairSwitchSensor;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EMFTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
@@ -38,18 +33,18 @@ public abstract class EMFTransformation<TObject, TDriver extends EMFDriver> exte
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
-			case CONNECTEDSEGMENTS:
-				return new EMFTransformationRepairConnectedSegments(driver);
+//			case CONNECTEDSEGMENTS:
+//				return new EMFTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
 				return new EMFTransformationRepairPosLength(driver);
-			case ROUTESENSOR:
-				return new EMFTransformationRepairRouteSensor(driver);
-			case SEMAPHORENEIGHBOR:
-				return new EMFTransformationRepairSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new EMFTransformationRepairSwitchSensor(driver);
-			case SWITCHSET:
-				return new EMFTransformationRepairSwitchSet(driver);
+//			case ROUTESENSOR:
+//				return new EMFTransformationRepairRouteSensor(driver);
+//			case SEMAPHORENEIGHBOR:
+//				return new EMFTransformationRepairSemaphoreNeighbor(driver);
+//			case SWITCHSENSOR:
+//				return new EMFTransformationRepairSwitchSensor(driver);
+//			case SWITCHSET:
+//				return new EMFTransformationRepairSwitchSet(driver);
 			default:
 				break;
 			}

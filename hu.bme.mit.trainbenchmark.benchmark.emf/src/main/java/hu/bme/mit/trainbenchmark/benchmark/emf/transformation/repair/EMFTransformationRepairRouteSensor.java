@@ -16,9 +16,9 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public class EMFTransformationRepairRouteSensor extends EMFTransformationRepair<EMFRouteSensorMatch> {
+public class EMFTransformationRepairRouteSensor<TDriver extends EMFDriver> extends EMFTransformationRepair<EMFRouteSensorMatch, TDriver> {
 
-	public EMFTransformationRepairRouteSensor(EMFDriver driver) {
+	public EMFTransformationRepairRouteSensor(TDriver driver) {
 		super(driver);
 	}
 

@@ -28,18 +28,18 @@ public abstract class EMFAPIModelQuery<TMatch extends EMFMatch, TDriver extends 
 
 	public static <TDriver extends EMFDriver> EMFAPIModelQuery<?, TDriver> newInstance(final TDriver driver, final RailwayQuery query) {
 		switch (query) {
-//		case CONNECTEDSEGMENTS:
-//			return new EMFAPIConnectedSegmentsQuery(driver);
+		case CONNECTEDSEGMENTS:
+			return new EMFAPIConnectedSegmentsQuery<>(driver);
 		case POSLENGTH:
-			return new EMFAPIPosLengthQuery<TDriver>(driver);
-//		case ROUTESENSOR:
-//			return new EMFAPIRouteSensorQuery(driver);
-//		case SEMAPHORENEIGHBOR:
-//			return new EMFAPISemaphoreNeighborQuery(driver);
-//		case SWITCHSENSOR:
-//			return new EMFAPISwitchSensorQuery(driver);
-//		case SWITCHSET:
-//			return new EMFAPISwitchSetQuery(driver);
+			return new EMFAPIPosLengthQuery<>(driver);
+		case ROUTESENSOR:
+			return new EMFAPIRouteSensorQuery<>(driver);
+		case SEMAPHORENEIGHBOR:
+			return new EMFAPISemaphoreNeighborQuery<>(driver);
+		case SWITCHSENSOR:
+			return new EMFAPISwitchSensorQuery<>(driver);
+		case SWITCHSET:
+			return new EMFAPISwitchSetQuery<>(driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}

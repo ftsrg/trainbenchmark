@@ -15,9 +15,9 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EMFTransformation;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public abstract class EMFTransformationRepair<T extends EMFMatch> extends EMFTransformation<T, EMFDriver> {
+public abstract class EMFTransformationRepair<TMatch extends EMFMatch, TDriver extends EMFDriver> extends EMFTransformation<TMatch, TDriver> {
 
-	public EMFTransformationRepair(EMFDriver driver) {
+	public EMFTransformationRepair(TDriver driver) {
 		super(driver);
 	}
 
