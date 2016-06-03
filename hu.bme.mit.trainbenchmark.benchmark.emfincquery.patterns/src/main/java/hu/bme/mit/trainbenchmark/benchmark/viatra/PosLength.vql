@@ -1,0 +1,9 @@
+package hu.bme.mit.trainbenchmark.benchmark.viatra
+
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
+
+pattern PosLength(segment)
+{
+	Segment.length(segment, length);
+//	check(length <= 0);
+}
