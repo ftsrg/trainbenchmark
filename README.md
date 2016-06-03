@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
 
-**Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. This repository contains the original Train Benchmark which also supports RDF, SQL and property graph databases.
+**Note.** The Train Benchmark has a fork for the [2015 Transformation Tool Contest](https://github.com/FTSRG/trainbenchmark-ttc), primarily targeting EMF tools. _That fork is no longer maintained._ You should use this repository, containing the full, cross-technology Train Benchmark (also supporting RDF, SQL and property graph databases).
 
 **Warning.** The Train Benchmark is designed to run in an isolated server environment, e.g. virtual machines in the cloud. Some implementations may shut down or delete existing databases, so only run it on your developer workstation if you understand the consequences.
 
@@ -18,9 +18,9 @@ For theoretical and implementation details, check out the following documents:
 Currently, the following formats and tools are supported.
 
 * **EMF:** Drools 5 & 6, Eclipse OCL, EMF API, VIATRA
-* **Property graph:** Neo4j
+* **Property graph:** Neo4j, Tinkergraph
 * **RDF:** Blazegraph, Jena, Sesame
-* **SQL:** MySQL
+* **SQL:** MySQL, SQLite
 
 ## Getting started
 
@@ -39,7 +39,6 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
     * [`install-jdk.sh`](scripts/install-jdk.sh): installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
     * [`install-maven.sh`](scripts/install-maven.sh): installs [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux-packages#maven-3)
 * Dependencies
-    * [`dep-mondo-sam.sh`](scripts/dep-mondo-sam.sh): resolves the [MONDO-SAM 0.1](https://github.com/FTSRG/mondo-sam/tree/v0.1.0) dependency used by the benchmark framework
     * [`dep-graph.sh`](scripts/dep-graph.sh): resolves the [Neo4j Shell Tools](https://github.com/jexp/neo4j-shell-tools) dependency required by the `graph` components
 
 Provided that you start with a fresh Ubuntu server installation, you can run the provided install scripts like this:
@@ -49,7 +48,6 @@ scripts/init-config.sh && \
 scripts/install-python.sh && \
 scripts/install-jdk.sh && \
 scripts/install-maven.sh && \
-scripts/dep-mondo-sam.sh && \
 scripts/dep-graph.sh
 ```
 
@@ -57,10 +55,10 @@ scripts/dep-graph.sh
 
 Some tools require dependencies, e.g. installing a database manager or adding artifacts to your local Maven repository
 
-* [AllegroGraph](hu.bme.mit.trainbenchmark.benchmark.allegro): download the [Allegro server](http://franz.com/agraph/downloads/server). Unzip the file and run `./configure-agraph`. Adjust the port to `10035` (default value), set the username and password to `super`. Start the server with `./agraph`.
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install -y mysql-server` and set the root password to empty.
 * [SQLite](hu.bme.mit.trainbenchmark.benchmark.sqlite): install with `sudo apt-get install -y sqlite3`.
-* [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso): run the `scripts/dep-virtuoso.sh` script to resolve the dependencies. Issue the `sudo apt-get install virtuoso-opensource` command to install Virtuoso and set the password to `dba`.
+* (Deprecated.) [AllegroGraph](hu.bme.mit.trainbenchmark.benchmark.allegro): download the [Allegro server](http://franz.com/agraph/downloads/server). Unzip the file and run `./configure-agraph`. Adjust the port to `10035` (default value), set the username and password to `super`. Start the server with `./agraph`.
+* (Deprecated.) [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso): run the `scripts/dep-virtuoso.sh` script to resolve the dependencies. Issue the `sudo apt-get install virtuoso-opensource` command to install Virtuoso and set the password to `dba`.
 
 ### Usage
 
@@ -88,13 +86,7 @@ To import the projects, choose **Import...** | **Existing Maven Projects** and i
 
 ## Reporting tools
 
-Convert the measurement results from JSON to CSV with the following script:
 
-```bash
-scripts/convert-results.sh
-```
-
-Use the reporting tools provided in the [mondo-sam-reporting](https://github.com/FTSRG/mondo-sam-reporting) repository.
 
 ## Instance models
 

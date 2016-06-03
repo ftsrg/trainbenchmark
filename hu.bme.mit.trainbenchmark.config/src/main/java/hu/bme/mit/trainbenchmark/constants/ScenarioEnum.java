@@ -28,11 +28,4 @@ public enum ScenarioEnum {
 		return name;
 	}
 
-	public boolean hasTranformation() {
-		if (this == BATCH || this == MINIMAL) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 }

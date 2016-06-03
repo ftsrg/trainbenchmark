@@ -43,11 +43,11 @@ public class GeneratorConfig extends AbstractConfig {
 		// size
 		options.addOption(SIZE, true, "specifies model size, e.g. 4");
 	}
-	
+
 	@Override
 	protected void processArguments(String[] args) throws ParseException {
 		super.processArguments(args);
-		
+
 		scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
 
 		if (cmd.hasOption(SIZE)) {
@@ -55,10 +55,9 @@ public class GeneratorConfig extends AbstractConfig {
 		}
 	}
 
-	
-//	public String getScenarioName() {
-//		return WordUtils.capitalizeFully(scenario.toString());
-//	}
+	// public String getScenarioName() {
+	// return WordUtils.capitalizeFully(scenario.toString());
+	// }
 
 	public ScenarioEnum getScenario() {
 		return scenario;
@@ -68,5 +67,18 @@ public class GeneratorConfig extends AbstractConfig {
 		return size;
 	}
 
+	public String getModelFileNameWithoutExtension() {
+		final String variant = scenario.toString().toLowerCase();
+
+		final StringBuilder filenameBuilder = new StringBuilder();
+		filenameBuilder.append("railway-" + variant + "-");
+		filenameBuilder.append(size);
+		return filenameBuilder.toString();
+	}
+	
+	public String getModelPathWithoutExtension() {
+		final String filename = getModelFileNameWithoutExtension();
+		return getModelsPath() + filename;
+	}
 
 }

@@ -1,0 +1,10 @@
+package hu.bme.mit.trainbenchmark.benchmark.viatra
+
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
+
+pattern ConnectedSegmentsInject(sensor, segment1, segment3)
+{
+	Segment.connectsTo(segment1, segment3);
+	Segment.monitoredBy(segment1, sensor);
+	Segment.monitoredBy(segment3, sensor);
+}
