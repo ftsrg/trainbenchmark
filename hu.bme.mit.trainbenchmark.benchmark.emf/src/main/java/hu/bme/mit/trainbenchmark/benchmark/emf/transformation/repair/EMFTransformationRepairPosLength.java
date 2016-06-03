@@ -16,9 +16,9 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFPosLengthMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public class EMFTransformationRepairPosLength extends EMFTransformationRepair<EMFPosLengthMatch> {
+public class EMFTransformationRepairPosLength<XDriver extends EMFDriver> extends EMFTransformationRepair<EMFPosLengthMatch> {
 
-	public EMFTransformationRepairPosLength(EMFDriver driver) {
+	public EMFTransformationRepairPosLength(XDriver driver) {
 		super(driver);
 	}
 

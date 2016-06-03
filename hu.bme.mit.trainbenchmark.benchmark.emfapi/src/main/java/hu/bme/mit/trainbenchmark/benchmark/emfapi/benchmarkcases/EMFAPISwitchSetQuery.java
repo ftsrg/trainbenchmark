@@ -14,47 +14,43 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EMFSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Signal;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class EMFAPIRouteSensorChecker extends EMFAPIModelQuery<EMFRouteSensorMatch> {
+public class EMFAPISwitchSetQuery extends EMFAPIModelQuery<EMFSwitchSetMatch> {
 
-	public EMFAPIRouteSensorChecker(final EMFDriver driver) {
+	public EMFAPISwitchSetQuery(final EMFDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<EMFRouteSensorMatch> check() {
+	public Collection<EMFSwitchSetMatch> check() {
 		matches = new ArrayList<>();
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
-		// (route:Route)
 		for (Route route : routes) {
-			// (route)-[:follows]->(swP:SwitchPosition)
-			for (final SwitchPosition swP : route.getFollows()) {
-				// (swP:switchPosition)-[:target]->(sw:Switch)
-				final Switch sw = swP.getTarget();
-				if (sw == null) {
-					continue;
-				}
-
-				// (switch:Switch)-[:monitoredBy]->(sensor:Sensor)
-				final List<Sensor> sensors = sw.getMonitoredBy();
-
-				// TODO check n-m edge
-				for (Sensor sensor2 : sensors) {
-					// (route)-[:gathers]->(sensor) NAC
-					if (!route.getGathers().contains(sensor2)) {
-						final EMFRouteSensorMatch match = new EMFRouteSensorMatch(route, sensor2, swP, sw);
-						matches.add(match);
+			// (route:Route)-[:entry]->(semaphore:Semaphore)
+			final Semaphore semaphore = route.getEntry();
+			if (semaphore == null) {
+				continue;
+			}
+			// semaphore.signal == GO
+			if (semaphore.getSignal() == Signal.GO) {
+				// (route:Route)-[:follows]->(swP:SwitchPosition)
+				for (final SwitchPosition switchPosition : route.getFollows()) {
+					// (swP:SwitchPosition)-[:target]->(sw:Switch)
+					final Switch sw = switchPosition.getTarget();
+					// sw.currentPosition != swP.position
+					if (sw.getCurrentPosition() != switchPosition.getPosition()) {
+						matches.add(new EMFSwitchSetMatch(semaphore, route, switchPosition, sw));
 					}
 				}
 			}
@@ -62,5 +58,4 @@ public class EMFAPIRouteSensorChecker extends EMFAPIModelQuery<EMFRouteSensorMat
 
 		return matches;
 	}
-
 }

@@ -18,28 +18,28 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.emf.EMFDriver;
 
-public abstract class EMFAPIModelQuery<TMatch extends EMFMatch> extends ModelQuery<TMatch, EMFDriver> {
+public abstract class EMFAPIModelQuery<TMatch extends EMFMatch, TDriver extends EMFDriver> extends ModelQuery<TMatch, TDriver> {
 
 	protected Collection<TMatch> matches;
 	
-	public EMFAPIModelQuery(final EMFDriver driver) {
+	public EMFAPIModelQuery(final TDriver driver) {
 		super(driver);
 	}
 
-	public static EMFAPIModelQuery<?> newInstance(final EMFDriver driver, final RailwayQuery query) {
+	public static <TDriver extends EMFDriver> EMFAPIModelQuery<?, TDriver> newInstance(final TDriver driver, final RailwayQuery query) {
 		switch (query) {
-		case CONNECTEDSEGMENTS:
-			return new EMFAPIConnectedSegmentsChecker(driver);
+//		case CONNECTEDSEGMENTS:
+//			return new EMFAPIConnectedSegmentsQuery(driver);
 		case POSLENGTH:
-			return new EMFAPIPosLengthChecker(driver);
-		case ROUTESENSOR:
-			return new EMFAPIRouteSensorChecker(driver);
-		case SEMAPHORENEIGHBOR:
-			return new EMFAPISemaphoreNeighborChecker(driver);
-		case SWITCHSENSOR:
-			return new EMFAPISwitchSensorChecker(driver);
-		case SWITCHSET:
-			return new EMFAPISwitchSetChecker(driver);
+			return new EMFAPIPosLengthQuery<TDriver>(driver);
+//		case ROUTESENSOR:
+//			return new EMFAPIRouteSensorQuery(driver);
+//		case SEMAPHORENEIGHBOR:
+//			return new EMFAPISemaphoreNeighborQuery(driver);
+//		case SWITCHSENSOR:
+//			return new EMFAPISwitchSensorQuery(driver);
+//		case SWITCHSET:
+//			return new EMFAPISwitchSetQuery(driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}
