@@ -17,7 +17,7 @@ For theoretical and implementation details, check out the following documents:
 
 Currently, the following formats and tools are supported.
 
-* **EMF:** Drools 5 & 6, Eclipse OCL, EMF API, EMF-IncQuery
+* **EMF:** Drools 5 & 6, Eclipse OCL, EMF API, VIATRA
 * **Property graph:** Neo4j
 * **RDF:** Blazegraph, Jena, Sesame
 * **SQL:** MySQL
@@ -84,7 +84,7 @@ To import the projects, choose **Import...** | **Existing Maven Projects** and i
 
 ### Naming conventions
 
-**Note.** To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Neo4j implementation are named `Neo4jBenchmarkCase`, `Neo4jPosLengthChecker`, `EmfApiPosLengthMatch`, `EmfApiPosLengthTransformation`, while the classes in the EMF-IncQuery implementation are named `ViatraBenchmarkCase`, `ViatraPosLengthChecker`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
+**Note.** To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Neo4j implementation are named `Neo4jBenchmarkCase`, `Neo4jPosLengthChecker`, `EmfApiPosLengthMatch`, `EmfApiPosLengthTransformation`, while the classes in the VIATRA implementation are named `ViatraBenchmarkCase`, `ViatraPosLengthChecker`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
 
 ## Reporting tools
 

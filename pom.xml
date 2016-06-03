@@ -31,8 +31,6 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.eclipseocl</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.emfapi</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.jena</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.mysql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.neo4j</module>
@@ -41,6 +39,8 @@
 				<module>hu.bme.mit.trainbenchmark.benchmark.sql</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.sqlite</module>
 				<module>hu.bme.mit.trainbenchmark.benchmark.tinkergraph</module>
+        <module>hu.bme.mit.trainbenchmark.benchmark.viatra</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.viatra.patterns</module>
 				<module>hu.bme.mit.trainbenchmark.config</module>
 				<module>hu.bme.mit.trainbenchmark.emf</module>
 				<module>hu.bme.mit.trainbenchmark.emf.model</module>
@@ -149,10 +149,10 @@
 		</profile>
 
 		<profile>
-			<id>emfincquery</id>
+			<id>viatra</id>
 			<modules>
-				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery</module>
-				<module>hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.viatra</module>
+				<module>hu.bme.mit.trainbenchmark.benchmark.viatra.patterns</module>
 			</modules>
 		</profile>
 
