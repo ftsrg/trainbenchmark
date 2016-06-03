@@ -12,20 +12,16 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
-import java.io.IOException;
 import java.util.Comparator;
 
 import org.openrdf.model.URI;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.checkers.SesameChecker;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RdfBenchmarkConfig, SesameChecker> {
 
@@ -35,17 +31,8 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public SesameChecker createModelQuery(final RdfBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws Exception {
-		return new SesameChecker(driver, benchmarkConfig, query);
-	}
-
-	@Override
 	public Comparator<?> getMatchComparator() {
 		return new SesameMatchComparator();
 	}
 
-	@Override
-	public ModelTransformation<?, ?> createTransformation(final RdfBenchmarkConfig benchmarkConfig, final SesameDriver driver, final RailwayQuery query) throws IOException {
-		return SesameTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
-	}
 }

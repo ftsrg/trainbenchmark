@@ -80,8 +80,8 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 			checkers = new ArrayList<>();
 
 			for (final RailwayQuery query : benchmarkConfig.getQueries()) {
-				final TChecker checker = benchmarkCase.createModelQuery(benchmarkConfig, driver, query);
-				checkers.add(checker);
+//				final TChecker checker = benchmarkCase.createModelQuery(benchmarkConfig, driver, query);
+//				checkers.add(checker);
 			}
 
 			engine.runBenchmark(result, scenario, token);
@@ -131,7 +131,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	}
 
 	public final void transform(final PhaseResult phaseResult) throws Exception {
-		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver, benchmarkConfig.getQuery());
+//		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver, benchmarkConfig.getQuery());
 		transformationLogic = (TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig>) TransformationLogic
 				.newInstance(benchmarkConfig.getScenario(), getComparator());
 		if (transformationLogic != null) {

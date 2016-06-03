@@ -12,21 +12,16 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph;
 
-import java.io.IOException;
 import java.util.Comparator;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphBenchmarkCase
 		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig, ModelQuery<TinkerGraphMatch, TinkerGraphDriver>> {
@@ -37,20 +32,8 @@ public class TinkerGraphBenchmarkCase
 	}
 
 	@Override
-	public ModelQuery<TinkerGraphMatch, TinkerGraphDriver> createModelQuery(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
-			final RailwayQuery query) throws Exception {
-		return TinkerGraphModelQuery.newInstance(driver, query);
-	}
-
-	@Override
 	public Comparator<?> getMatchComparator() {
 		return new TinkerGraphMatchComparator();
-	}
-
-	@Override
-	public ModelTransformation<?, ?> createTransformation(final TinkerGraphBenchmarkConfig benchmarkConfig, final TinkerGraphDriver driver,
-			final RailwayQuery query) throws IOException {
-		return TinkerGraphTransformation.newInstance(driver, query, benchmarkConfig.getScenario());
 	}
 
 }

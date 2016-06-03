@@ -19,7 +19,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>hu.bme.mit.trainbenchmark.benchmark.mysql.MySQLBenchmarkMain</mainClass>
+							<mainClass>hu.bme.mit.trainbenchmark.benchmark.mysql.MySqlBenchmarkMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
