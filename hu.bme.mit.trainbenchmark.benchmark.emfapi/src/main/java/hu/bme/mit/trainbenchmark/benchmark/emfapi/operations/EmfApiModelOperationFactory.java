@@ -14,9 +14,9 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransfor
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairSwitchSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuery;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQueryConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQueryPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuery;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQueryRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySwitchSensor;
@@ -39,6 +39,13 @@ public class EmfApiModelOperationFactory {
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
 			// TODO
+
+//			final EmfApiQuery<, TDriver> query = new EmfApiQueryConnectedSegments<>(driver);
+//			final EmfTransformation<, TDriver> transformation = new EmfTransformationInjectConnectedSegments<>(
+//					driver);
+//			final ModelOperation<, TDriver> operation = ModelOperation.of(query, transformation);
+//			return operation;
+
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final EmfApiQuery<EmfConnectedSegmentsMatch, TDriver> query = new EmfApiQueryConnectedSegments<>(driver);

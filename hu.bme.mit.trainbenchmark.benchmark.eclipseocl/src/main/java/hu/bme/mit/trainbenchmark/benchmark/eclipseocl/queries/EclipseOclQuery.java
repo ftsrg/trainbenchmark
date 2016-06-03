@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +19,7 @@ import org.apache.commons.io.FileUtils;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCL.Helper;
+import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.ecore.OCLExpression;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
@@ -29,18 +30,18 @@ import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public abstract class EclipseOclModelQuery<TMatch extends EmfMatch> extends ModelQuery<TMatch, EmfDriver> {
+public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuery<TMatch, EmfDriver> {
 
 	protected Collection<TMatch> matches;
 	protected OCL ocl;
-	protected org.eclipse.ocl.ecore.OCL.Query queryEvaluator;
+	protected Query queryEvaluator;
 	protected RailwayContainer container;
 
-	public EclipseOclModelQuery(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, ParserException {
+	public EclipseOclQuery(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, ParserException {
 		super(driver);
 
 		final String oclQuery = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/" + benchmarkConfig.getQuery() + ".ocl"));
+				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/.ocl"));
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
@@ -49,22 +50,23 @@ public abstract class EclipseOclModelQuery<TMatch extends EmfMatch> extends Mode
 		queryEvaluator = ocl.createQuery(query);
 	}
 
-	public static EclipseOclModelQuery<?> newInstance(final EmfDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws Exception {
+	public static EclipseOclQuery<?> newInstance(final EmfDriver driver, final BenchmarkConfig benchmarkConfig,
+			final RailwayQuery query) throws Exception {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new EclipseOclConnectedSegmentsChecker(driver, benchmarkConfig);
+			return new EclipseOclQueryConnectedSegments(driver, benchmarkConfig);
 		case POSLENGTH:
-			return new EclipseOclPosLengthChecker(driver, benchmarkConfig);
+			return new EclipseOclQueryPosLength(driver, benchmarkConfig);
 		case ROUTESENSOR:
-			return new EclipseOclRouteSensorChecker(driver, benchmarkConfig);
+			return new EclipseOclQueryRouteSensor(driver, benchmarkConfig);
 		case SEMAPHORENEIGHBOR:
-			return new EclipseOclSemaphoreNeighborChecker(driver, benchmarkConfig);
+			return new EclipseOclQuerySemaphoreNeighbor(driver, benchmarkConfig);
 		case SWITCHSENSOR:
-			return new EclipseOclSwitchSensorChecker(driver, benchmarkConfig);
+			return new EclipseOclQuerySwitchSensor(driver, benchmarkConfig);
 		case SWITCHSET:
-			return new EclipseOclSwitchSetChecker(driver, benchmarkConfig);
+			return new EclipseOclQuerySwitchSet(driver, benchmarkConfig);
 		default:
-			throw new UnsupportedOperationException("Query " + benchmarkConfig.getQueries() + " not supported");
+			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}
 	}
 

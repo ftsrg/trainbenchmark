@@ -48,10 +48,10 @@ public class BenchmarkConfig extends AbstractConfig {
 
 	public BenchmarkConfig(final String toolName, final ScenarioEnum scenario, final int size, final int runs, final RailwayQuery query,
 			final int iterationCount, final TransformationStrategy transformationStrategy, final long transformationConstant) {
-		super(scenario, size);
+		super();
 		this.toolName = toolName;
 		this.runs = runs;
-		this.queryMix = ImmutableList.of(query);
+		this.operations = ImmutableList.of(query);
 		this.iterationCount = iterationCount;
 		this.transformationStrategy = transformationStrategy;
 		this.transformationConstant = transformationConstant;
@@ -63,7 +63,7 @@ public class BenchmarkConfig extends AbstractConfig {
 
 		// the "size" and "queries" options are required for the BenchmarkConfig but not required for the GeneratorConfig
 		options.getOption(SIZE).setRequired(true);
-		final Option queryOption = options.getOption(QUERY_MIX);
+		final Option queryOption = options.getOption(OPERATIONS);
 		queryOption.setRequired(true);
 		options.addOption(queryOption);
 
@@ -73,6 +73,11 @@ public class BenchmarkConfig extends AbstractConfig {
 		runOption.setRequired(true);
 		options.addOption(runOption);
 
+		// model operations
+		final Option operations = new Option(OPERATIONS, true, "specifies the model operations, e.g. RouteSensor, PosLengthInject, SwitchSetRepair");
+		operations.setArgs(Option.UNLIMITED_VALUES);
+		options.addOption(operations);
+		
 		// constants for the transformation
 		options.addOption(ITERATION_COUNT, true, "number of transformation-recheck iterations");
 		options.addOption(TRANSFORMATION_STRATEGY, true,
@@ -120,9 +125,9 @@ public class BenchmarkConfig extends AbstractConfig {
 		return toolName;
 	}
 
-	public String getCaseName() {
-		final String queries = getQueries().toString().replaceAll("[\\[\\]]", "").replaceAll(", ","-");
-		return queries;
-	}
+//	public String getCaseName() {
+//		final String queries = getQueries().toString().replaceAll("[\\[\\]]", "").replaceAll(", ","-");
+//		return queries;
+//	}
 	
 }
