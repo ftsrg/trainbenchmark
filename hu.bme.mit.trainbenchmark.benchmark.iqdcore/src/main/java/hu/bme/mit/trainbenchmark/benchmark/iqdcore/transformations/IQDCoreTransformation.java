@@ -39,8 +39,8 @@ public abstract class IQDCoreTransformation<TObject> extends ModelTransformation
 				return new IQDCoreTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
 				return new IQDCoreTransformationRepairSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new IQDCoreTransformationRepairSwitchSensor(driver);
+			case SWITCHMONITORED:
+				return new IQDCoreTransformationRepairSwitchMonitored(driver);
 			case SWITCHSET:
 				return new IQDCoreTransformationRepairSwitchSet(driver);
 			default:

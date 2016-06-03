@@ -17,13 +17,13 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameT
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
@@ -46,8 +46,8 @@ public abstract class SesameTransformation<TObject> extends ModelTransformation<
 				return new SesameTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
 				return new SesameTransformationRepairSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new SesameTransformationRepairSwitchSensor(driver);
+			case SWITCHMONITORED:
+				return new SesameTransformationRepairSwitchMonitored(driver);
 			case SWITCHSET:
 				return new SesameTransformationRepairSwitchSet(driver);
 			default:
@@ -63,8 +63,8 @@ public abstract class SesameTransformation<TObject> extends ModelTransformation<
 				return new SesameTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
 				return new SesameTransformationInjectSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new SesameTransformationInjectSwitchSensor(driver);
+			case SWITCHMONITORED:
+				return new SesameTransformationInjectSwitchMonitored(driver);
 			case SWITCHSET:
 				return new SesameTransformationInjectSwitchSet(driver);
 			default:

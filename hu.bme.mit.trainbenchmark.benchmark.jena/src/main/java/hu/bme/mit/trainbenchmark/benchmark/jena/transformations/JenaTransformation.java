@@ -16,13 +16,13 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTrans
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -46,8 +46,8 @@ public abstract class JenaTransformation<TObject> extends ModelTransformation<TO
 				return new JenaTransformationRepairRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
 				return new JenaTransformationRepairSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new JenaTransformationRepairSwitchSensor(driver);
+			case SWITCHMONITORED:
+				return new JenaTransformationRepairSwitchMonitored(driver);
 			case SWITCHSET:
 				return new JenaTransformationRepairSwitchSet(driver);
 			default:
@@ -63,8 +63,8 @@ public abstract class JenaTransformation<TObject> extends ModelTransformation<TO
 				return new JenaTransformationInjectRouteSensor(driver);
 			case SEMAPHORENEIGHBOR:
 				return new JenaTransformationInjectSemaphoreNeighbor(driver);
-			case SWITCHSENSOR:
-				return new JenaTransformationInjectSwitchSensor(driver);
+			case SWITCHMONITORED:
+				return new JenaTransformationInjectSwitchMonitored(driver);
 			case SWITCHSET:
 				return new JenaTransformationInjectSwitchSet(driver);
 			default:

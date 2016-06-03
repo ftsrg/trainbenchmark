@@ -18,7 +18,7 @@ import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHMONITORED;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
 
 import java.util.Collection;
@@ -43,7 +43,7 @@ public class InjectTransformationLogic<TMatch, TElement, TBenchmarkConfig extend
 			.put(POSLENGTH, SEGMENT) //
 			.put(ROUTESENSOR, ROUTE) //
 			.put(SEMAPHORENEIGHBOR, ROUTE) //
-			.put(SWITCHSENSOR, SWITCH) //
+			.put(SWITCHMONITORED, SWITCH) //
 			.put(SWITCHSET, SWITCH) //
 			.build();
 

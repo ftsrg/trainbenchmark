@@ -5,21 +5,21 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuery;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQueryConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQueryPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQueryRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
@@ -104,19 +104,19 @@ public class EmfApiModelOperationFactory {
 			return operation;
 		}
 
-		// SwitchSensor
-		case SWITCHSENSOR: {
-			final EmfApiQuery<EmfSwitchSensorMatch, TDriver> query = new EmfApiQuerySwitchSensor<>(driver);
-			final ModelOperation<EmfSwitchSensorMatch, TDriver> operation = ModelOperation.of(query);
+		// SwitchMonitored
+		case SWITCHMONITORED: {
+			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchSensor<>(driver);
+			final ModelOperation<EmfSwitchMonitoredMatch, TDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
-		case SWITCHSENSOR_INJECT: {
+		case SWITCHMONITORED_INJECT: {
 			// TODO
 		}
-		case SWITCHSENSOR_REPAIR: {
-			final EmfApiQuery<EmfSwitchSensorMatch, TDriver> query = new EmfApiQuerySwitchSensor<>(driver);
-			final EmfTransformation<EmfSwitchSensorMatch, TDriver> transformation = new EmfTransformationRepairSwitchSensor<>(driver);
-			final ModelOperation<EmfSwitchSensorMatch, TDriver> operation = ModelOperation.of(query, transformation);
+		case SWITCHMONITORED_REPAIR: {
+			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchSensor<>(driver);
+			final EmfTransformation<EmfSwitchMonitoredMatch, TDriver> transformation = new EmfTransformationRepairSwitchSensor<>(driver);
+			final ModelOperation<EmfSwitchMonitoredMatch, TDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 

@@ -1,0 +1,14 @@
+package hu.bme.mit.trainbenchmark.benchmark.emfincquery
+
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
+
+pattern SwitchMonitored(sw)
+{
+	Switch(sw);
+	neg find hasSensor(sw);	
+}
+
+pattern hasSensor(sw)
+{
+	TrackElement.monitoredBy(sw, _);
+}

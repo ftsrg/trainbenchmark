@@ -13,9 +13,9 @@ public enum RailwayOperation {
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SEMAPHORENEIGHBOR_INJECT("SemaphoreNeighborInject"), //
 	SEMAPHORENEIGHBOR_REPAIR("SemaphoreNeighborRepair"), //
-	SWITCHSENSOR("SwitchSensor"), //
-	SWITCHSENSOR_INJECT("SwitchSensorInject"), //
-	SWITCHSENSOR_REPAIR("SwitchSensorRepair"), //
+	SWITCHMONITORED("SwitchMonitored"), //
+	SWITCHMONITORED_INJECT("SwitchMonitoredInject"), //
+	SWITCHMONITORED_REPAIR("SwitchMonitoredRepair"), //
 	SWITCHSET("SwitchSet"), //
 	SWITCHSET_INJECT("SwitchSetInject"), //
 	SWITCHSET_REPAIR("SwitchSetRepair"), //

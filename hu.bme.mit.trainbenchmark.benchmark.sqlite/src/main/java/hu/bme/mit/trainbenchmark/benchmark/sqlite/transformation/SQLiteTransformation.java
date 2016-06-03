@@ -11,7 +11,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.inject.SQLiteTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SQLiteTransformation<TObject> extends SqlTransformation<TObject> {
@@ -33,8 +33,8 @@ public abstract class SQLiteTransformation<TObject> extends SqlTransformation<TO
 			switch (query) {
 			case CONNECTEDSEGMENTS:
 				return new SQLiteTransformationRepairConnectedSegments(driver, benchmarkConfig, query);				
-			case SWITCHSENSOR:
-				return new SQLiteTransformationRepairSwitchSensor(driver, benchmarkConfig, query);
+			case SWITCHMONITORED:
+				return new SQLiteTransformationRepairSwitchMonitored(driver, benchmarkConfig, query);
 			default:
 				break;
 			}

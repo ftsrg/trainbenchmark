@@ -36,8 +36,8 @@ public abstract class SesameMatch {
 			return new SesameRouteSensorMatch(bs);
 		case SEMAPHORENEIGHBOR:
 			return new SesameSemaphoreNeighborMatch(bs);
-		case SWITCHSENSOR:
-			return new SesameSwitchSensorMatch(bs);
+		case SWITCHMONITORED:
+			return new SesameSwitchMonitoredMatch(bs);
 		case SWITCHSET:
 			return new SesameSwitchSetMatch(bs);
 		default:

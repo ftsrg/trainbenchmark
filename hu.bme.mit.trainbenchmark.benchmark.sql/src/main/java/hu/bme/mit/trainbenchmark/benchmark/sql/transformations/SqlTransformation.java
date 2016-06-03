@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransfo
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairSwitchSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SqlTransformation<TObject> extends ModelTransformation<TObject, SqlDriver> {
@@ -59,8 +59,8 @@ public abstract class SqlTransformation<TObject> extends ModelTransformation<TOb
 				return new SqlTransformationRepairRouteSensor(driver, benchmarkConfig, query);
 			case SEMAPHORENEIGHBOR:
 				return new SqlTransformationRepairSemaphoreNeighbor(driver, benchmarkConfig, query);
-			case SWITCHSENSOR:
-				return new SqlTransformationRepairSwitchSensor(driver, benchmarkConfig, query);
+			case SWITCHMONITORED:
+				return new SqlTransformationRepairSwitchMonitored(driver, benchmarkConfig, query);
 			case SWITCHSET:
 				return new SqlTransformationRepairSwitchSet(driver, benchmarkConfig, query);
 			default:

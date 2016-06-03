@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHMONITORED;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.BATCH;
 
@@ -46,7 +46,7 @@ public abstract class BatchTest extends TrainBenchmarkTest {
 
 	@Test
 	public void switchSensor() throws Exception {
-		testQuery(SWITCHSENSOR, BATCH, 0);
+		testQuery(SWITCHMONITORED, BATCH, 0);
 	}
 
 	@Test

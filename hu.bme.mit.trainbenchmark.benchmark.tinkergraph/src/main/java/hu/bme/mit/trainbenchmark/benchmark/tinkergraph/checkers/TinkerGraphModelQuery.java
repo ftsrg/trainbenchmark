@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraph
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphPosLengthChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphRouteSensorChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphSemaphoreNeighborChecker;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphSwitchSensorChecker;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphSwitchMonitoredChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core.TinkerGraphSwitchSetChecker;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
@@ -38,8 +38,8 @@ public abstract class TinkerGraphModelQuery<TMatch extends TinkerGraphMatch> ext
 			return new TinkerGraphRouteSensorChecker(driver);
 		case SEMAPHORENEIGHBOR:
 			return new TinkerGraphSemaphoreNeighborChecker(driver);
-		case SWITCHSENSOR:
-			return new TinkerGraphSwitchSensorChecker(driver);
+		case SWITCHMONITORED:
+			return new TinkerGraphSwitchMonitoredChecker(driver);
 		case SWITCHSET:
 			return new TinkerGraphSwitchSetChecker(driver);
 		default:

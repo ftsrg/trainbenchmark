@@ -16,7 +16,7 @@ public enum RailwayQuery {
 	POSLENGTH("PosLength"), //
 	ROUTESENSOR("RouteSensor"), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
-	SWITCHSENSOR("SwitchSensor"), //
+	SWITCHMONITORED("SwitchMonitored"), //
 	SWITCHSET("SwitchSet"), //
 	;
 

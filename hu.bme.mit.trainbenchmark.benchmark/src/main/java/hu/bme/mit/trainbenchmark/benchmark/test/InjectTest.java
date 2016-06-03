@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSENSOR;
+import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHMONITORED;
 import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
 import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.INJECT;
 
@@ -46,7 +46,7 @@ public abstract class InjectTest extends TrainBenchmarkTest {
 
 	@Test
 	public void switchSensorInject() throws Exception {
-		testTransformation(SWITCHSENSOR, INJECT, 0, 2);
+		testTransformation(SWITCHMONITORED, INJECT, 0, 2);
 	}
 
 	@Test
