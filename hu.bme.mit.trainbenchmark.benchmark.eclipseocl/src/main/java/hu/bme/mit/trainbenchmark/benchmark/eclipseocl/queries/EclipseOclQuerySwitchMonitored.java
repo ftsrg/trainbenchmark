@@ -18,8 +18,8 @@ import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 public class EclipseOclQuerySwitchMonitored extends EclipseOclQuery<EmfSwitchMonitoredMatch> {

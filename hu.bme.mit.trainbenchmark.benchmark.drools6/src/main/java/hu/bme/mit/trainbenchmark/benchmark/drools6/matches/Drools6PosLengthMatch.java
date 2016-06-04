@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
+import org.kie.api.runtime.rule.Row;
+
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
-
-import org.kie.api.runtime.rule.Row;
 
 public class Drools6PosLengthMatch extends EmfPosLengthMatch {
 

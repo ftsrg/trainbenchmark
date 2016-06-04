@@ -11,8 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.transformation;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
 public abstract class EmfTransformation<TObject, TDriver extends EmfDriver> extends ModelTransformation<TObject, TDriver> {
 

@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
 public class Drools5Driver extends EmfDriver {
 

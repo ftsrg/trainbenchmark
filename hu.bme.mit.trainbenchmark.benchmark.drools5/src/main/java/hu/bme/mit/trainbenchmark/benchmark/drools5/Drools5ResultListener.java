@@ -12,6 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.drools.runtime.rule.Row;
+import org.drools.runtime.rule.ViewChangedEventListener;
+
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5RouteSensorMatch;
@@ -20,12 +26,6 @@ import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchMonitore
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import org.drools.runtime.rule.Row;
-import org.drools.runtime.rule.ViewChangedEventListener;
 
 public class Drools5ResultListener implements ViewChangedEventListener {
 

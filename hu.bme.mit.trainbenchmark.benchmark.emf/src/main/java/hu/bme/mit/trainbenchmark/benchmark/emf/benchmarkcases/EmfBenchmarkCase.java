@@ -16,8 +16,8 @@ import java.util.Comparator;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public abstract class EmfBenchmarkCase<TDriver extends EmfDriver, TBenchmarkConfig extends BenchmarkConfig>

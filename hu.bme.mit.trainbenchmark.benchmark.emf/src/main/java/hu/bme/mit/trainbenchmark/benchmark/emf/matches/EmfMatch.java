@@ -11,9 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-
 import java.util.Arrays;
+
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public abstract class EmfMatch {
 

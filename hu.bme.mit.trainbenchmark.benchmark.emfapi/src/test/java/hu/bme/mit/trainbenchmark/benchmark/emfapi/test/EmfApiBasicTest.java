@@ -6,11 +6,11 @@ import java.util.Random;
 import org.junit.Test;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.operations.EmfApiModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
 public class EmfApiBasicTest {
 

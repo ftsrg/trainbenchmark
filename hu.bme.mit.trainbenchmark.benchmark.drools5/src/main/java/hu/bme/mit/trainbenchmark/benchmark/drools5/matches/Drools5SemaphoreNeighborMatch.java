@@ -19,13 +19,13 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
 
+import org.drools.runtime.rule.Row;
+
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
-import org.drools.runtime.rule.Row;
 
 public class Drools5SemaphoreNeighborMatch extends EmfSemaphoreNeighborMatch {
 

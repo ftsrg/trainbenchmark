@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.operations;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
@@ -24,7 +25,6 @@ import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySwit
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
 public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends ModelOperationFactory<TDriver> {
 

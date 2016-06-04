@@ -13,8 +13,8 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair;
 
 import java.util.Collection;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 

@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
+import org.kie.api.runtime.rule.Row;
+
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
-
-import org.kie.api.runtime.rule.Row;
 
 public class Drools6ConnectedSegmentsMatch extends EmfConnectedSegmentsMatch {
 

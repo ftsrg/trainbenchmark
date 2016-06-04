@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EclipseOclBenchmarkCase<T extends RailwayElement> extends EmfBenchmarkCase<EmfDriver, BenchmarkConfig> {
