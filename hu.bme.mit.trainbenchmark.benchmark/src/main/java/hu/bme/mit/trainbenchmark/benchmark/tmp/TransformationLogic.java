@@ -9,14 +9,17 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations;
+package hu.bme.mit.trainbenchmark.benchmark.tmp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+
+import com.google.common.collect.Ordering;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
@@ -28,12 +31,13 @@ import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 // TElement: elements in the match set
 // TTransformationObject: transformation object
 // TBenchmarkConfig: benchmark configuration
-public abstract class TransformationLogic<TMatch, TElement, TTransformationObject, TBenchmarkConfig extends BenchmarkConfig> {
+public class TransformationLogic<TMatch, TElement, TBenchmarkConfig extends BenchmarkConfig>
+		extends TransformationLogic<TMatch, TElement, TMatch, TBenchmarkConfig> {
 
 	public static TransformationLogic<?, ?, ?, ?> newInstance(final ScenarioEnum scenario, final Comparator<?> comparator) {
 		switch (scenario) {
 		case REPAIR:
-			return new RepairTransformationLogic<>(comparator);
+			return new TransformationLogic<>(comparator);
 		case INJECT:
 			return new InjectTransformationLogic<>(comparator);
 		default:
@@ -42,9 +46,9 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 	}
 
 	protected TransformationLogic(final Comparator<TTransformationObject> comparator) {
-		super();
-		this.comparator = comparator;
-	}
+			super();
+			this.comparator = comparator;
+		}
 
 	protected TBenchmarkConfig benchmarkConfig;
 	protected BenchmarkResult benchmarkResult;
@@ -66,8 +70,6 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 		this.driver = driver;
 		this.random = random;
 	}
-
-	protected abstract void performLHS(final Collection<TMatch> currentMatches) throws Exception;
 
 	public void performTransformation(final PhaseResult phaseResult, final Collection<TMatch> currentMatches) throws Exception {
 		final TimeMetric transformationMetric = new TimeMetric("Time");
@@ -109,6 +111,22 @@ public abstract class TransformationLogic<TMatch, TElement, TTransformationObjec
 
 	public void setTransformation(final ModelTransformation<?, ?> transformation) {
 		this.transformation = (ModelTransformation<TTransformationObject, Driver<TElement>>) transformation;
+	}
+
+	protected TransformationLogic(final Comparator<TMatch> comparator) {
+		super(comparator);
+	}
+
+	@Override
+	protected void performLHS(final Collection<TMatch> currentMatches) throws IOException {
+		candidatesToModify = currentMatches;
+	}
+
+	@Override
+	protected List<TMatch> copyAndSort() {
+		final Ordering<TMatch> ordering = Ordering.from(comparator);
+		final List<TMatch> sortedMatches = ordering.sortedCopy(candidatesToModify);
+		return sortedMatches;
 	}
 
 }
