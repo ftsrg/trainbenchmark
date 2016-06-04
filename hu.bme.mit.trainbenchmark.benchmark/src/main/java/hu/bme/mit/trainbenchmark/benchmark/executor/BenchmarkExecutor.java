@@ -21,15 +21,14 @@ public class BenchmarkExecutor<TDriver extends Driver<?>, TPatternMatch> {
 		this.factory = factory;
 		this.comparator = comparator;
 	}
-	
-	public void executeGeneric() throws Exception {
-		driver.read("../models/railway-repair-1.xmi");
 
-		final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(RailwayOperation.POSLENGTH_REPAIR,
-				driver);
+	public void executeGeneric(final String modelPath, final RailwayOperation railwayOperation) throws Exception {
+		driver.read(modelPath);
 
+		final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation, driver);
 		final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation.of(operation, comparator,
 				random);
+
 		qst.evaluateQuery();
 		qst.shuffle(10);
 		qst.transform();
