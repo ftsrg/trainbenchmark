@@ -26,9 +26,9 @@ public class EmfApiBasicTest {
 		final ModelQuery<? extends EmfMatch, EmfDriver> query = posLengthRepairOperation.getQuery();
 		final ModelTransformation<? extends EmfMatch, EmfDriver> transformation = posLengthRepairOperation.getTransformation();
 		
-//		final Collection<? extends EmfMatch> matches = query.check();
-//		transformation.activate(matches);
-//		System.out.println(matches);
+		final Collection<? extends EmfMatch> matches = query.check();
+		transformation.activate(matches);
+		System.out.println(matches);
 
 	}
 	
