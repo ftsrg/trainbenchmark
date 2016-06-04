@@ -30,12 +30,12 @@ ViatraBenchmarkConfig> {
 
 	@Override
 	public ViatraDriver<TMatch> createDriver(final ViatraBenchmarkConfig benchmarkConfig) throws Exception {
-		return new ViatraDriver();
+		return new ViatraDriver<>();
 	}
 
 	@Override
 	public Comparator<TMatch> getMatchComparator() {
-		return new ViatraMatchComparator();
+		return ViatraMatchComparator.create();
 	}
 
 }

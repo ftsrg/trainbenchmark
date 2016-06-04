@@ -24,7 +24,7 @@ public abstract class SqlBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig,
 
 	@Override
 	public Comparator<LongMatch> getMatchComparator() {
-		return new LongMatchComparator();
+		return LongMatchComparator.create();
 	}
 
 }

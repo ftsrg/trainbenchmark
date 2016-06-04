@@ -31,7 +31,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 
 	@Override
 	public Comparator<SesameMatch> getMatchComparator() {
-		return new SesameMatchComparator();
+		return SesameMatchComparator.create();
 	}
 
 }

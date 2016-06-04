@@ -32,7 +32,7 @@ public class TinkerGraphBenchmarkCase
 
 	@Override
 	public Comparator<TinkerGraphMatch> getMatchComparator() {
-		return new TinkerGraphMatchComparator();
+		return TinkerGraphMatchComparator.create();
 	}
 
 }
