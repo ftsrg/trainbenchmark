@@ -15,7 +15,13 @@ import java.util.Comparator;
 
 public abstract class MatchComparator<TMatch, TElement> implements Comparator<TMatch> {
 
-	public int compareArrays(final Object[] m1, final Object[] m2, final Comparator<TElement> elementComparator) {
+	final Comparator<TElement> elementComparator;
+
+	public MatchComparator(final Comparator<TElement> elementComparator) {
+		this.elementComparator = elementComparator;
+	}
+
+	public int compareArrays(final Object[] m1, final Object[] m2) {
 		for (int i = 0; i < m1.length; i++) {
 			final TElement t1 = (TElement) m1[i];
 			final TElement t2 = (TElement) m2[i];

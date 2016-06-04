@@ -18,13 +18,19 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.VertexComparator;
 
 public class TinkerGraphMatchComparator extends MatchComparator<TinkerGraphMatch, Vertex> {
 
-	protected VertexComparator nc = new VertexComparator();
-
+	protected TinkerGraphMatchComparator() {
+		super(new VertexComparator());
+	}
+	
+	public static TinkerGraphMatchComparator create() {
+		return new TinkerGraphMatchComparator();
+	}
+	
 	@Override
 	public int compare(final TinkerGraphMatch o1, final TinkerGraphMatch o2) {
 		final Vertex[] m1 = o1.toArray();
 		final Vertex[] m2 = o2.toArray();
-		return compareArrays(m1, m2, nc);
+		return compareArrays(m1, m2);
 	}
 
 }

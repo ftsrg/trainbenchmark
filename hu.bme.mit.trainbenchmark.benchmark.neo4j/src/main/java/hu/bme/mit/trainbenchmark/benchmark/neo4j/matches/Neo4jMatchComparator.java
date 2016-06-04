@@ -11,20 +11,26 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
+import org.neo4j.graphdb.Node;
+
 import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.NodeComparator;
 
-import org.neo4j.graphdb.Node;
-
 public class Neo4jMatchComparator extends MatchComparator<Neo4jMatch, Node> {
 
-	protected NodeComparator nc = new NodeComparator();
+	protected Neo4jMatchComparator() {
+		super(new NodeComparator());
+	}
+	
+	public static Neo4jMatchComparator create() {
+		return new Neo4jMatchComparator();
+	}
 
 	@Override
 	public int compare(final Neo4jMatch o1, final Neo4jMatch o2) {
 		final Node[] m1 = o1.toArray();
 		final Node[] m2 = o2.toArray();
-		return compareArrays(m1, m2, nc);
+		return compareArrays(m1, m2);
 	}
 
 }

@@ -11,20 +11,26 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
+import org.openrdf.model.URI;
+
 import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.UriComparator;
 
-import org.openrdf.model.URI;
-
 public class SesameMatchComparator extends MatchComparator<SesameMatch, URI> {
 
-	protected UriComparator uc = new UriComparator();
+	protected SesameMatchComparator() {
+		super(new UriComparator());
+	}
+	
+	public static SesameMatchComparator create() {
+		return new SesameMatchComparator();
+	}
 
 	@Override
 	public int compare(final SesameMatch o1, final SesameMatch o2) {
 		final URI[] m1 = o1.toArray();
 		final URI[] m2 = o2.toArray();
-		return compareArrays(m1, m2, uc);
+		return compareArrays(m1, m2);
 	}
 
 }

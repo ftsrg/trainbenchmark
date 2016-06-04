@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.viatra.matches;
 
-import java.util.Comparator;
-
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
@@ -20,14 +18,20 @@ import hu.bme.mit.trainbenchmark.emf.RailwayElementComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class ViatraMatchComparator<TMatch extends BasePatternMatch> extends MatchComparator<TMatch, RailwayElement> {
-
-	protected final Comparator<RailwayElement> rec = new RailwayElementComparator();
-
+ 
+	protected ViatraMatchComparator() {
+		super(new RailwayElementComparator());
+	}
+	
+	public static <TMatch extends BasePatternMatch> ViatraMatchComparator<TMatch> create() {
+		return new ViatraMatchComparator<>();
+	}
+	
 	@Override
 	public int compare(final BasePatternMatch o1, final BasePatternMatch o2) {
 		final Object[] m1 = o1.toArray();
 		final Object[] m2 = o2.toArray();
-		return compareArrays(m1, m2, rec);
+		return compareArrays(m1, m2);
 	}
 
 }

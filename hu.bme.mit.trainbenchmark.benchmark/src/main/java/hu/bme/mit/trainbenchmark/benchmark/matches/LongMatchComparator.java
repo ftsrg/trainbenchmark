@@ -13,13 +13,19 @@ package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 public class LongMatchComparator extends MatchComparator<LongMatch, Long> {
 
-	protected LongComparator lc = new LongComparator();
+	protected LongMatchComparator() {
+		super(new LongComparator());
+	}
+	
+	public static LongMatchComparator create() {
+		return new LongMatchComparator();
+	}
 
 	@Override
 	public int compare(final LongMatch o1, final LongMatch o2) {
 		final Long[] m1 = o1.getMatch();
 		final Long[] m2 = o2.getMatch();
-		return compareArrays(m1, m2, lc);
+		return compareArrays(m1, m2);
 	}
 
 }

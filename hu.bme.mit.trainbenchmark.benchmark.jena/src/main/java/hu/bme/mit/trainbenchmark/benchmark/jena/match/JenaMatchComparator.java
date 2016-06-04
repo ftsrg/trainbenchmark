@@ -18,13 +18,19 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
 
 public class JenaMatchComparator extends MatchComparator<JenaMatch, Resource> {
 
-	protected ResourceComparator rc = new ResourceComparator();
+	protected JenaMatchComparator() {
+		super(new ResourceComparator());
+	}
+	
+	public static JenaMatchComparator create() {
+		return new JenaMatchComparator();
+	}
 
 	@Override
 	public int compare(final JenaMatch o1, final JenaMatch o2) {
 		final Resource[] m1 = o1.toArray();
 		final Resource[] m2 = o2.toArray();
-		return compareArrays(m1, m2, rc);
+		return compareArrays(m1, m2);
 	}
 
 }
