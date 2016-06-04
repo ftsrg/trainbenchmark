@@ -7,6 +7,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.operations.EmfApiModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class EmfApiBasicTest {
 
@@ -17,7 +18,7 @@ public class EmfApiBasicTest {
 		final EmfMatchComparator comparator = EmfMatchComparator.create();
 		
 		BenchmarkExecutor<EmfDriver, EmfMatch> executor = new BenchmarkExecutor<>(driver, factory, comparator);
-		executor.executeGeneric();
+		executor.executeGeneric("../models/railway-repair-1.xmi", RailwayOperation.POSLENGTH_REPAIR);
 	}
 	
 }
