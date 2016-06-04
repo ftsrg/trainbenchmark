@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
+package hu.bme.mit.trainbenchmark.benchmark.executor;
 
 import java.util.ArrayList;
 import java.util.Collection;
