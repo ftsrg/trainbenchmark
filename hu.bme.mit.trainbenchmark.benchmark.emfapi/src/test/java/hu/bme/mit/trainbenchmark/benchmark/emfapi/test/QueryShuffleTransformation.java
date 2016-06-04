@@ -15,45 +15,47 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>> {
 
 	protected final ModelOperation<TPatternMatch, TDriver> operation;
+	protected final Comparator<? super TPatternMatch> comparator;
 	protected final Random random;
 	protected Collection<TPatternMatch> matches;
 	protected List<TPatternMatch> sortedMatches;
-	protected Comparator<TPatternMatch> comparator;
-	
-	public QueryShuffleTransformation(final ModelOperation<TPatternMatch, TDriver> operation, final Random random) {
+	protected List<TPatternMatch> candidates;
+
+	public QueryShuffleTransformation(final ModelOperation<TPatternMatch, TDriver> operation, final Comparator<? super TPatternMatch> comparator, final Random random) {
 		this.operation = operation;
+		this.comparator = comparator;
 		this.random = random;
 	}
-	
+
+	public static <TPatternMatch, TDriver extends Driver<?>> QueryShuffleTransformation<TPatternMatch, TDriver> of(
+			final ModelOperation<TPatternMatch, TDriver> operation, final Comparator<? super TPatternMatch> comparator, final Random random) {
+		return new QueryShuffleTransformation<>(operation, comparator, random);
+	}
+
 	public Collection<? extends TPatternMatch> evaluateQuery() throws Exception {
-		matches = operation.evaluateQuery();
+		matches = operation.getQuery().evaluate();
 		return matches;
 	}
-	
-	public List<TPatternMatch> createSortedList() {
-		final Ordering<TPatternMatch> ordering = Ordering.from(comparator);
+
+	public List<TPatternMatch> shuffle(int nMatchesToModify) {
+		final Ordering<? super TPatternMatch> ordering = Ordering.from(comparator);
 		sortedMatches = ordering.sortedCopy(matches);
-		return sortedMatches;
-	}
-	
-	public List<TPatternMatch> pickPatternMatches(long nMatchesToModify) {
+
 		final int size = sortedMatches.size();
 		if (size < nMatchesToModify) {
 			nMatchesToModify = size;
 		}
 		Collections.shuffle(sortedMatches, random);
-		final List<TPatternMatch> objects = new ArrayList<>();
+		candidates = new ArrayList<>(nMatchesToModify);
 		for (int i = 0; i < nMatchesToModify; i++) {
-			final TPatternMatch object = sortedMatches.get(i);
-			objects.add(object);
+			final TPatternMatch candidate = sortedMatches.get(i);
+			candidates.add(candidate);
 		}
-		return objects;
-	}
-	
-	public Collection<? extends TPatternMatch> transform() throws Exception {
-		matches = operation.evaluateQuery();
-		return matches;
+		return candidates;
 	}
 
-	
+	public void transform() throws Exception {
+		operation.getTransformation().activate(sortedMatches);
+	}
+
 }
