@@ -15,15 +15,17 @@ import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
-public abstract class ModelQuery<PatternMatch, TDriver extends Driver<?>> implements AutoCloseable {
+public abstract class ModelQuery<TPatternMatch, TDriver extends Driver<?>> implements AutoCloseable {
 	
 	protected final TDriver driver; 
+	protected Collection<TPatternMatch> matches;
 	
+
 	public ModelQuery(final TDriver driver) {
 		this.driver = driver;
 	}
 	
-	public abstract Collection<? extends PatternMatch> check() throws Exception;
+	public abstract Collection<TPatternMatch> check() throws Exception;
 
 	@Override
 	public void close() {
