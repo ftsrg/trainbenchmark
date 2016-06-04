@@ -24,7 +24,7 @@ public class EmfApiBasicTest {
 		final Random random = new Random(0);
 
 		final ModelOperation<? extends EmfMatch, EmfDriver> posLengthRepairOperation = factory.createOperation(RailwayOperation.POSLENGTH_REPAIR, driver);
-		final Comparator<EmfMatch> emfMatchComparator = new EmfMatchComparator();
+		final Comparator<EmfMatch> emfMatchComparator = EmfMatchComparator.create();
         
         final QueryShuffleTransformation<? extends EmfMatch, EmfDriver> qst = QueryShuffleTransformation.of(posLengthRepairOperation, emfMatchComparator, random);
         qst.evaluateQuery();

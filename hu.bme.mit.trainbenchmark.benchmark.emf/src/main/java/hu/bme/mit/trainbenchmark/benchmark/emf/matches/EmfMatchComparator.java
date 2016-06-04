@@ -17,13 +17,19 @@ import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EmfMatchComparator extends MatchComparator<EmfMatch, RailwayElement> {
 
-	protected RailwayElementComparator rec = new RailwayElementComparator();
-
+	protected EmfMatchComparator() {
+		super(new RailwayElementComparator());
+	}
+	
+	public static EmfMatchComparator create() {
+		return new EmfMatchComparator();
+	}
+	
 	@Override
 	public int compare(final EmfMatch o1, final EmfMatch o2) {
 		final RailwayElement[] m1 = o1.match;
 		final RailwayElement[] m2 = o2.match;
-		return compareArrays(m1, m2, rec);
+		return compareArrays(m1, m2);
 	}
 
 }
