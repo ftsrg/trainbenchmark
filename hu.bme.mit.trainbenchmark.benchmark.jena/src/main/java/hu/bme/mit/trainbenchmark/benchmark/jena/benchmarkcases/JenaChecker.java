@@ -24,7 +24,7 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;

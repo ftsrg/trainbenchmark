@@ -22,7 +22,7 @@ import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSemaphoreNeighborMatch;
 
 public class JenaTransformationRepairSemaphoreNeighbor extends JenaTransformationRepair<JenaSemaphoreNeighborMatch> {
 

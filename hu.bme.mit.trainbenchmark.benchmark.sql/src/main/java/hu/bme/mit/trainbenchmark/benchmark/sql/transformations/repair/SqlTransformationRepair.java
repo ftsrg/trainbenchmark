@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 

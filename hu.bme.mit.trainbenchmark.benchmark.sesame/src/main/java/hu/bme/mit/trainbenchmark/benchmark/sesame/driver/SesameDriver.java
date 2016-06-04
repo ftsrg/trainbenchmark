@@ -43,6 +43,7 @@ import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.UriComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.rdf.RdfConstants;

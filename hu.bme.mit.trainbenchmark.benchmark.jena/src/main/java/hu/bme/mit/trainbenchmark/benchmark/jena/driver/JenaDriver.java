@@ -38,6 +38,7 @@ import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.RDF;
 
+import hu.bme.mit.trainbenchmark.benchmark.jena.comparators.ResourceComparator;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.rdf.RdfConstants;

@@ -17,7 +17,7 @@ import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SqlTransformationRepairSwitchMonitored extends SqlTransformationRepair<SqlSwitchMonitoredMatch> {

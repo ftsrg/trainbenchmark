@@ -1,2 +1,2 @@
-src-gen/hu/bme/mit/trainbenchmark/benchmark/emfincquery/.gitignore
-src-gen/hu/bme/mit/trainbenchmark/benchmark/emfincquery/util/.gitignore
+src-gen/hu/bme/mit/trainbenchmark/benchmark/viatra/.gitignore
+src-gen/hu/bme/mit/trainbenchmark/benchmark/viatra/util/.gitignore

@@ -22,7 +22,7 @@ import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchSetMatch;
 
 public class JenaTransformationRepairSwitchSet extends JenaTransformationRepair<JenaSwitchSetMatch> {
 

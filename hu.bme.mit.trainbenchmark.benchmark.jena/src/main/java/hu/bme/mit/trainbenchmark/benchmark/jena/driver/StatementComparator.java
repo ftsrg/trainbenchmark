@@ -16,6 +16,8 @@ import java.util.Comparator;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 
+import hu.bme.mit.trainbenchmark.benchmark.jena.comparators.ResourceComparator;
+
 public class StatementComparator implements Comparator<Statement> {
 
 	protected final ResourceComparator resourceComparator = new ResourceComparator();

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SqlDriver extends Driver<Long> {

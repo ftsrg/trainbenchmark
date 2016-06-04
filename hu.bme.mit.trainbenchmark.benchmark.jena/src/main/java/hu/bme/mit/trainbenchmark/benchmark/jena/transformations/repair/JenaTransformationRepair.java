@@ -12,7 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
 public abstract class JenaTransformationRepair<TMatch extends JenaMatch> extends JenaTransformation<TMatch> {
