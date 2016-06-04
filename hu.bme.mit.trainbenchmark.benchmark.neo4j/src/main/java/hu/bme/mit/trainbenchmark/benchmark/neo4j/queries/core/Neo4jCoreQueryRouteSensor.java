@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
@@ -32,14 +32,14 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
-public class Neo4jCoreRouteSensorChecker extends Neo4jCoreModelQuery<Neo4jRouteSensorMatch> {
+public class Neo4jCoreQueryRouteSensor extends Neo4jCoreQuery<Neo4jRouteSensorMatch> {
 
-	public Neo4jCoreRouteSensorChecker(final Neo4jDriver driver) {
+	public Neo4jCoreQueryRouteSensor(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<Neo4jRouteSensorMatch> check() {
+	public Collection<Neo4jRouteSensorMatch> evaluate() {
 		final Collection<Neo4jRouteSensorMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();

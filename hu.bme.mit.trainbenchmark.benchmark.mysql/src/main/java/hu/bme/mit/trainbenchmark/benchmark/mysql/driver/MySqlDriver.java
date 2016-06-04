@@ -31,7 +31,7 @@ public class MySqlDriver extends SqlDriver {
 	 * @param maxMemory
 	 *            maximum memory in megabytes
 	 */
-	public MySqlDriver(int maxMemory) {
+	public MySqlDriver(final int maxMemory) {
 		super();
 		this.maxMemory = maxMemory;
 	}

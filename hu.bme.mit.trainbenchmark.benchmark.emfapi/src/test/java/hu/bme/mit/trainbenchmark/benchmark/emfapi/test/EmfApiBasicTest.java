@@ -26,7 +26,7 @@ public class EmfApiBasicTest {
         final ModelQuery<? extends EmfMatch, EmfDriver> query = posLengthRepairOperation.getQuery();
         final ModelTransformation<? extends EmfMatch, EmfDriver> transformation = posLengthRepairOperation.getTransformation();
         
-        final Collection<? extends EmfMatch> matches = query.check();
+        final Collection<? extends EmfMatch> matches = query.evaluate();
 	}
 	
 	
@@ -35,7 +35,7 @@ public class EmfApiBasicTest {
 		final ModelQuery<TPatternMatch, TDriver> query = operation.getQuery();
 		final ModelTransformation<TPatternMatch, TDriver> transformation = operation.getTransformation();
 		
-		final Collection<? extends TPatternMatch> matches = query.check();
+		final Collection<TPatternMatch> matches = query.evaluate();
 		transformation.activate(matches);
 	}
 	

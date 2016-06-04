@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
@@ -29,14 +29,14 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 
-public class Neo4jCorePosLengthChecker extends Neo4jCoreModelQuery<Neo4jPosLengthMatch> {
+public class Neo4jCoreQueryPosLength extends Neo4jCoreQuery<Neo4jPosLengthMatch> {
 
-	public Neo4jCorePosLengthChecker(final Neo4jDriver driver) {
+	public Neo4jCoreQueryPosLength(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<Neo4jPosLengthMatch> check() {
+	public Collection<Neo4jPosLengthMatch> evaluate() {
 		final Collection<Neo4jPosLengthMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();

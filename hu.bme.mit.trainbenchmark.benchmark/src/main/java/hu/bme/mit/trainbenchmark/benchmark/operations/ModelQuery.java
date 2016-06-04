@@ -25,7 +25,7 @@ public abstract class ModelQuery<TPatternMatch, TDriver extends Driver<?>> imple
 		this.driver = driver;
 	}
 	
-	public abstract Collection<TPatternMatch> check() throws Exception;
+	public abstract Collection<TPatternMatch> evaluate() throws Exception;
 
 	@Override
 	public void close() {

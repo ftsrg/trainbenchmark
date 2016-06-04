@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
@@ -25,18 +25,17 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredMatch;
 
-public class TinkerGraphSwitchMonitoredChecker extends TinkerGraphModelQuery<TinkerGraphSwitchMonitoredMatch> {
+public class TinkerGraphQuerySwitchMonitored extends TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch> {
 
-	public TinkerGraphSwitchMonitoredChecker(final TinkerGraphDriver driver) {
+	public TinkerGraphQuerySwitchMonitored(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphSwitchMonitoredMatch> check() {
+	public Collection<TinkerGraphSwitchMonitoredMatch> evaluate() {
 		final Collection<TinkerGraphSwitchMonitoredMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> switches = driver.collectVertices(SWITCH);

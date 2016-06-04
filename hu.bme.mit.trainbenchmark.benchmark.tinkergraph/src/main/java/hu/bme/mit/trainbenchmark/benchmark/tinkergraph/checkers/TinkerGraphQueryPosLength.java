@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
@@ -24,18 +24,17 @@ import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthMatch;
 
-public class TinkerGraphPosLengthChecker extends TinkerGraphModelQuery<TinkerGraphPosLengthMatch> {
+public class TinkerGraphQueryPosLength extends TinkerGraphQuery<TinkerGraphPosLengthMatch> {
 
-	public TinkerGraphPosLengthChecker(final TinkerGraphDriver driver) {
+	public TinkerGraphQueryPosLength(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphPosLengthMatch> check() {
+	public Collection<TinkerGraphPosLengthMatch> evaluate() {
 		final Collection<TinkerGraphPosLengthMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> segments = driver.collectVertices(SEGMENT);

@@ -60,7 +60,7 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 	}
 	
 	public Collection<TPatternMatch> evaluateQuery() throws Exception {
-		return query.check();
+		return query.evaluate();
 	}
 	
 	public void performTransformation(final Collection<? extends TPatternMatch> matches) throws Exception {

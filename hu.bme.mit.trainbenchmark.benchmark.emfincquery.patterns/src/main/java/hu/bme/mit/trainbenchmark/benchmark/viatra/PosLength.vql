@@ -5,5 +5,5 @@ import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 pattern PosLength(segment)
 {
 	Segment.length(segment, length);
-	check(length <= 0);
+//	check(length <= 0);
 }

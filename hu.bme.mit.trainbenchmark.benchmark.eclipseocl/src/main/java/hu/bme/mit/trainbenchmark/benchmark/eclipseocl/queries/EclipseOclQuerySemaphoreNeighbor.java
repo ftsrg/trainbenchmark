@@ -32,7 +32,7 @@ public class EclipseOclQuerySemaphoreNeighbor extends EclipseOclQuery<EmfSemapho
 	}
 
 	@Override
-	public Collection<EmfSemaphoreNeighborMatch> check() {
+	public Collection<EmfSemaphoreNeighborMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());

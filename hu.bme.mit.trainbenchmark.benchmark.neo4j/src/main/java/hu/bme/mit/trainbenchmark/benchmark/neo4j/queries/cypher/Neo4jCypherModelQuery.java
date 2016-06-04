@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.cypher;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.cypher;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class Neo4jCypherModelQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 	}
 
 	@Override
-	public Collection<Neo4jMatch> check() throws IOException {
+	public Collection<Neo4jMatch> evaluate() throws IOException {
 		return driver.runQuery(query, queryDefinition);
 	}
 

@@ -122,11 +122,6 @@ public class Neo4jDriver extends Driver<Node> {
 	}
 
 	@Override
-	public Comparator<Node> getElementComparator() {
-		return nodeComparator;
-	}
-
-	@Override
 	public String getPostfix() {
 		return ".graphml";
 	}

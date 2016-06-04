@@ -29,7 +29,7 @@ public class EclipseOclQuerySwitchMonitored extends EclipseOclQuery<EmfSwitchMon
 	}
 
 	@Override
-	public Collection<EmfSwitchMonitoredMatch> check() {
+	public Collection<EmfSwitchMonitoredMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());

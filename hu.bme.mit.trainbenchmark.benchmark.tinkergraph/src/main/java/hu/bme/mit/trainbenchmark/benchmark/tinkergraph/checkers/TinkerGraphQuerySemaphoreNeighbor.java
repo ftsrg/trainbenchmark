@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,21 +19,20 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
-public class TinkerGraphSemaphoreNeighborChecker extends TinkerGraphModelQuery<TinkerGraphSemaphoreNeighborMatch> {
+public class TinkerGraphQuerySemaphoreNeighbor extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch> {
 
-	public TinkerGraphSemaphoreNeighborChecker(final TinkerGraphDriver driver) {
+	public TinkerGraphQuerySemaphoreNeighbor(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphSemaphoreNeighborMatch> check() {
+	public Collection<TinkerGraphSemaphoreNeighborMatch> evaluate() {
 		final Collection<TinkerGraphSemaphoreNeighborMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> route1s = driver.collectVertices(ModelConstants.ROUTE);

@@ -27,6 +27,6 @@ public abstract class ModelTransformation<PatternMatch, TDriver extends Driver<?
 	// Using "throws Exception" is generally considered bad practice in production systems.
 	// However, it allows us to throw all exceptions similar to unchecked exceptions,
 	// hence we found it acceptible in benchmark code.
-	public abstract void activate(Collection<? extends PatternMatch> matches) throws Exception;
+	public abstract void activate(Collection<PatternMatch> matches) throws Exception;
 
 }

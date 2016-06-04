@@ -30,7 +30,7 @@ public class EclipseOclQueryConnectedSegments extends EclipseOclQuery<EmfConnect
 	}
 
 	@Override
-	public Collection<EmfConnectedSegmentsMatch> check() {
+	public Collection<EmfConnectedSegmentsMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());

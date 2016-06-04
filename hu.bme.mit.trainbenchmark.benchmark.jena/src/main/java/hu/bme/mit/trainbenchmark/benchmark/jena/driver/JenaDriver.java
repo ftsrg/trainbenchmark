@@ -49,7 +49,7 @@ public class JenaDriver extends RdfDriver<Resource> {
 	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Comparator<Statement> statementComparator = new StatementComparator();
 
-	public JenaDriver(boolean inferencing) {
+	public JenaDriver(final boolean inferencing) {
 		super(inferencing);
 	}
 
@@ -150,11 +150,6 @@ public class JenaDriver extends RdfDriver<Resource> {
 			final boolean result = queryExecution.execAsk();
 			return result;
 		}
-	}
-
-	@Override
-	public Comparator<Resource> getElementComparator() {
-		return elementComparator;
 	}
 
 	public Model getModel() {

@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,21 +20,20 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
-public class TinkerGraphRouteSensorChecker extends TinkerGraphModelQuery<TinkerGraphRouteSensorMatch> {
+public class TinkerGraphQueryRouteSensor extends TinkerGraphQuery<TinkerGraphRouteSensorMatch> {
 
-	public TinkerGraphRouteSensorChecker(final TinkerGraphDriver driver) {
+	public TinkerGraphQueryRouteSensor(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphRouteSensorMatch> check() {
+	public Collection<TinkerGraphRouteSensorMatch> evaluate() {
 		final Collection<TinkerGraphRouteSensorMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> routes = driver.collectVertices(ModelConstants.ROUTE);

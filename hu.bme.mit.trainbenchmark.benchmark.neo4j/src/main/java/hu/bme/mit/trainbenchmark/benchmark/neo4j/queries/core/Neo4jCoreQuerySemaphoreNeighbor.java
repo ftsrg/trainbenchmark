@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
@@ -34,14 +34,14 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
-public class Neo4jCoreSemaphoreNeighborChecker extends Neo4jCoreModelQuery<Neo4jSemaphoreNeighborMatch> {
+public class Neo4jCoreQuerySemaphoreNeighbor extends Neo4jCoreQuery<Neo4jSemaphoreNeighborMatch> {
 
-	public Neo4jCoreSemaphoreNeighborChecker(final Neo4jDriver driver) {
+	public Neo4jCoreQuerySemaphoreNeighbor(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<Neo4jSemaphoreNeighborMatch> check() {
+	public Collection<Neo4jSemaphoreNeighborMatch> evaluate() {
 		final Collection<Neo4jSemaphoreNeighborMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
