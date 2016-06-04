@@ -11,9 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
 public abstract class EmfApiQuery<TPatternMatch extends EmfMatch, TDriver extends EmfDriver> extends ModelQuery<TPatternMatch, TDriver> {
 

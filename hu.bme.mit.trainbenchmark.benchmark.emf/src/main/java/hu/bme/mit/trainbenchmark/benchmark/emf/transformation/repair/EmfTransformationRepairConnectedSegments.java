@@ -15,8 +15,8 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
 public class EmfTransformationRepairConnectedSegments<TDriver extends EmfDriver> extends EmfTransformationRepair<EmfConnectedSegmentsMatch, TDriver> {
 

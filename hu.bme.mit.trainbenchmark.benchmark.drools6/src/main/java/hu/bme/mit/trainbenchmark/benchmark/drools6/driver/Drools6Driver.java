@@ -22,7 +22,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
 
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
 public class Drools6Driver extends EmfDriver {
 

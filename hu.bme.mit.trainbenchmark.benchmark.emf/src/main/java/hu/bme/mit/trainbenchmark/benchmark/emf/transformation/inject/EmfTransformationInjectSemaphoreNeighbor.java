@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject;
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.Route;
 
 public class EmfTransformationInjectSemaphoreNeighbor extends EmfTransformationInject<Route> {

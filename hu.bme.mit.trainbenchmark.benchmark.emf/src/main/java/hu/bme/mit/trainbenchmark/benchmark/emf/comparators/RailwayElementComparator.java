@@ -11,9 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.comparators;
 
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-
 import java.util.Comparator;
+
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class RailwayElementComparator implements Comparator<RailwayElement> {
 

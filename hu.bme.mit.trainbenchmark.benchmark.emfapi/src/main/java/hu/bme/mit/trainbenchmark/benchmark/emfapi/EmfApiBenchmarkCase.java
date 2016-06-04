@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
-import hu.bme.mit.trainbenchmark.emf.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
 public class EmfApiBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig> extends EmfBenchmarkCase<EmfDriver, TBenchmarkConfig> {
 

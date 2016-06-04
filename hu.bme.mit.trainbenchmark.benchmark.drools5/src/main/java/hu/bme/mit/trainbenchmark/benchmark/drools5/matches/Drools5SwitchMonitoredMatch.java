@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.drools5.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
+import org.drools.runtime.rule.Row;
+
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.railway.Switch;
-
-import org.drools.runtime.rule.Row;
 
 public class Drools5SwitchMonitoredMatch extends EmfSwitchMonitoredMatch {
 
