@@ -3,7 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair;
 import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;

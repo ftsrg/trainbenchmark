@@ -17,10 +17,10 @@ import java.util.Comparator;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.comparators.TinkerGraphMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatchComparator;
 
 public class TinkerGraphBenchmarkCase
 		extends AbstractBenchmarkCase<TinkerGraphMatch, Vertex, TinkerGraphDriver, TinkerGraphBenchmarkConfig> {

@@ -17,9 +17,9 @@ import java.util.Comparator;
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.jena.comparators.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
 
 public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RdfBenchmarkConfig> {

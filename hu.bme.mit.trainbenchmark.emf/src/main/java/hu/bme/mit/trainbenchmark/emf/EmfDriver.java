@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.RailwayElementComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;

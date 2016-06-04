@@ -12,12 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeMonitoredBy;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 public class Neo4jTransformationInjectSwitchMonitored extends Neo4jTransformationInject {
 

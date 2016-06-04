@@ -36,6 +36,7 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators.NodeComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 

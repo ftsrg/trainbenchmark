@@ -27,7 +27,7 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.match.JenaConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class JenaTransformationRepairConnectedSegments extends JenaTransformationRepair<JenaConnectedSegmentsMatch> {

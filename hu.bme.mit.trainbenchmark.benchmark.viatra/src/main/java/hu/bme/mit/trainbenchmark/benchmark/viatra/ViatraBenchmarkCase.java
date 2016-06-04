@@ -16,10 +16,10 @@ import java.util.Comparator;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.comparators.ViatraMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.matches.ViatraMatchComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class ViatraBenchmarkCase<TMatch extends BasePatternMatch> extends AbstractBenchmarkCase< //

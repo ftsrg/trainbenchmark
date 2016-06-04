@@ -22,7 +22,7 @@ import org.apache.commons.io.FileUtils;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.match.SqlMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SqlModelQuery<TSQLDriver extends SqlDriver> extends ModelQuery<SqlMatch, TSQLDriver> {

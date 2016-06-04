@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
+
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 
 public class Neo4jTransformationInjectPosLength extends Neo4jTransformationInject {
 
