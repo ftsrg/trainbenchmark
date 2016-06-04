@@ -31,7 +31,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 
 	@Override
 	public Comparator<JenaMatch> getMatchComparator() {
-		return new JenaMatchComparator();
+		return JenaMatchComparator.create();
 	}
 
 }

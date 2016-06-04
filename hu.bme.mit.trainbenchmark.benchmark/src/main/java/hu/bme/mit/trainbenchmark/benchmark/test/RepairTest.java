@@ -12,46 +12,36 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHMONITORED;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
-import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.REPAIR;
-
-import org.junit.Test;
-
 public abstract class RepairTest extends TrainBenchmarkTest {
 	
-	@Test
-	public void connectedSegmentsRepair() throws Exception {
-		testTransformation(CONNECTEDSEGMENTS, REPAIR, 9, 7);
-	}
-
-	@Test
-	public void posLengthRepair() throws Exception {
-		testTransformation(POSLENGTH, REPAIR, 197, 195);
-	}
-
-	@Test
-	public void routeSensorRepair() throws Exception {
-		testTransformation(ROUTESENSOR, REPAIR, 26, 24);
-	}
-
-	@Test
-	public void semaphoreNeighborRepair() throws Exception {
-		testTransformation(SEMAPHORENEIGHBOR, REPAIR, 3, 0);
-	}
-
-	@Test
-	public void switchSensorRepair() throws Exception {
-		testTransformation(SWITCHMONITORED, REPAIR, 1, 0);
-	}
-
-	@Test
-	public void switchSetRepair() throws Exception {
-		testTransformation(SWITCHSET, REPAIR, 2, 0);
-	}
+//	@Test
+//	public void connectedSegmentsRepair() throws Exception {
+//		testTransformation(CONNECTEDSEGMENTS, REPAIR, 9, 7);
+//	}
+//
+//	@Test
+//	public void posLengthRepair() throws Exception {
+//		testTransformation(POSLENGTH, REPAIR, 197, 195);
+//	}
+//
+//	@Test
+//	public void routeSensorRepair() throws Exception {
+//		testTransformation(ROUTESENSOR, REPAIR, 26, 24);
+//	}
+//
+//	@Test
+//	public void semaphoreNeighborRepair() throws Exception {
+//		testTransformation(SEMAPHORENEIGHBOR, REPAIR, 3, 0);
+//	}
+//
+//	@Test
+//	public void switchSensorRepair() throws Exception {
+//		testTransformation(SWITCHMONITORED, REPAIR, 1, 0);
+//	}
+//
+//	@Test
+//	public void switchSetRepair() throws Exception {
+//		testTransformation(SWITCHSET, REPAIR, 2, 0);
+//	}
 
 }

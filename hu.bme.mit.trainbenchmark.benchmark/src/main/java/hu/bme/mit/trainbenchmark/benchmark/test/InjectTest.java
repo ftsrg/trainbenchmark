@@ -12,46 +12,36 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.CONNECTEDSEGMENTS;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.POSLENGTH;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.ROUTESENSOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SEMAPHORENEIGHBOR;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHMONITORED;
-import static hu.bme.mit.trainbenchmark.constants.RailwayQuery.SWITCHSET;
-import static hu.bme.mit.trainbenchmark.constants.ScenarioEnum.INJECT;
-
-import org.junit.Test;
-
 public abstract class InjectTest extends TrainBenchmarkTest {
 	
-	@Test
-	public void connectedSegmentsInject() throws Exception {
-		testTransformation(CONNECTEDSEGMENTS, INJECT, 5, 7);
-	}
-
-	@Test
-	public void posLengthInject() throws Exception {
-		testTransformation(POSLENGTH, INJECT, 13, 15);
-	}
-
-	@Test
-	public void routeSensorInject() throws Exception {
-		testTransformation(ROUTESENSOR, INJECT, 6, 49);
-	}
-
-	@Test
-	public void semaphoreNeighborInject() throws Exception {
-		testTransformation(SEMAPHORENEIGHBOR, INJECT, 9, 17);
-	}
-
-	@Test
-	public void switchSensorInject() throws Exception {
-		testTransformation(SWITCHMONITORED, INJECT, 0, 2);
-	}
-
-	@Test
-	public void switchSetInject() throws Exception {
-		testTransformation(SWITCHSET, INJECT, 0, 0);
-	}
+//	@Test
+//	public void connectedSegmentsInject() throws Exception {
+//		testTransformation(CONNECTEDSEGMENTS, INJECT, 5, 7);
+//	}
+//
+//	@Test
+//	public void posLengthInject() throws Exception {
+//		testTransformation(POSLENGTH, INJECT, 13, 15);
+//	}
+//
+//	@Test
+//	public void routeSensorInject() throws Exception {
+//		testTransformation(ROUTESENSOR, INJECT, 6, 49);
+//	}
+//
+//	@Test
+//	public void semaphoreNeighborInject() throws Exception {
+//		testTransformation(SEMAPHORENEIGHBOR, INJECT, 9, 17);
+//	}
+//
+//	@Test
+//	public void switchSensorInject() throws Exception {
+//		testTransformation(SWITCHMONITORED, INJECT, 0, 2);
+//	}
+//
+//	@Test
+//	public void switchSetInject() throws Exception {
+//		testTransformation(SWITCHSET, INJECT, 0, 0);
+//	}
 
 }

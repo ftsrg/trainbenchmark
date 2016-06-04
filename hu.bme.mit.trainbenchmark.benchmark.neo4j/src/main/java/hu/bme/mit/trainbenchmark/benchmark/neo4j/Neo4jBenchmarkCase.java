@@ -31,7 +31,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker> extends AbstractBenchmarkCase<Neo4
 	
 	@Override
 	public Comparator<Neo4jMatch> getMatchComparator() {
-		return new Neo4jMatchComparator();
+		return Neo4jMatchComparator.create();
 	}
 
 }

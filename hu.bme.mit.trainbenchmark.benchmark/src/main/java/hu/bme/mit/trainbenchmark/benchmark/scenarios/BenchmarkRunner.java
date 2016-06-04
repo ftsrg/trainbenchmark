@@ -12,9 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -80,69 +78,44 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 
 	// phases
 
-	public final void read(final PhaseResult phaseResult) throws Exception {
-		// final TimeMetric timer = new TimeMetric("Time");
-		// timer.startMeasure();
-		driver.read(benchmarkConfig.getModelPathWithoutExtension());
-		// timer.stopMeasure();
-		// phaseResult.addMetrics(timer);
+//	public final void read(final PhaseResult phaseResult) throws Exception {
+//		// final TimeMetric timer = new TimeMetric("Time");
+//		// timer.startMeasure();
+//		driver.read(benchmarkConfig.getModelPathWithoutExtension());
+//		// timer.stopMeasure();
+//		// phaseResult.addMetrics(timer);
+//
+//		final ScalarMetric maxMemory = new ScalarMetric("MaxMemory");
+//		maxMemory.setValue(benchmarkConfig.getMaxMemory());
+//		phaseResult.addMetrics(maxMemory);
+//	}
 
-		final ScalarMetric maxMemory = new ScalarMetric("MaxMemory");
-		maxMemory.setValue(benchmarkConfig.getMaxMemory());
-		phaseResult.addMetrics(maxMemory);
-	}
-
-	public final void check(final PhaseResult phaseResult) throws Exception {
-		// initialize a list for the matches
-		matches = new ArrayList<>(checkers.size());
-
-		// final TimeMetric timer = new TimeMetric("Time");
-		// timer.startMeasure();
-		final ScalarMetric results = new ScalarMetric("Matches");
-
-		for (final TChecker checker : checkers) {
-			matches.add(checker.evaluate());
-		}
-
-		// only use the first match for now
-		results.setValue(matches.get(0).size());
-		// timer.stopMeasure();
-		// phaseResult.addMetrics(timer, results);
-		phaseResult.addMetrics(results);
-	}
+//	public final void check(final PhaseResult phaseResult) throws Exception {
+//		// initialize a list for the matches
+//		matches = new ArrayList<>(checkers.size());
+//
+//		// final TimeMetric timer = new TimeMetric("Time");
+//		// timer.startMeasure();
+////		final ScalarMetric results = new ScalarMetric("Matches");
+//
+//		for (final TChecker checker : checkers) {
+//			matches.add(checker.evaluate());
+//		}
+//
+//		// only use the first match for now
+////		results.setValue(matches.get(0).size());
+//		// timer.stopMeasure();
+//		// phaseResult.addMetrics(timer, results);
+////		phaseResult.addMetrics(results);
+//	}
 
 	public final void destroy() throws Exception {
-		for (final TChecker checker : checkers) {
-			checker.close();
-		}
+//		for (final TChecker queries : checkers) {
+//			queries.close();
+//		}
 		driver.destroy();
 	}
 
-	public final void transform(final PhaseResult phaseResult) throws Exception {
-//		transformation = benchmarkCase.createTransformation(benchmarkConfig, driver, benchmarkConfig.getQuery());
-		transformationLogic = (TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig>) TransformationLogic
-				.newInstance(benchmarkConfig.getScenario(), getComparator());
-		if (transformationLogic != null) {
-			transformationLogic.initialize(benchmarkConfig, driver, random);
-		}
-		transformationLogic.setTransformation(transformation);
-
-		transformationLogic.performTransformation(phaseResult, matches.get(0));
-	}
-
-	// getters
-
-	protected final Comparator<?> getComparator() {
-		switch (benchmarkConfig.getScenario()) {
-		case BATCH:
-		case INJECT:
-			return driver.getElementComparator();
-		case REPAIR:
-			return benchmarkCase.getMatchComparator();
-		default:
-			throw new UnsupportedOperationException();
-		}
-	}
 
 	public TDriver getDriver() {
 		return driver;
@@ -152,8 +125,5 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		return benchmarkConfig;
 	}
 
-	public AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig, TChecker> getBenchmarkCase() {
-		return benchmarkCase;
-	}
 
 }

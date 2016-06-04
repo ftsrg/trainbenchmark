@@ -25,7 +25,7 @@ public abstract class EmfBenchmarkCase<TDriver extends EmfDriver, TBenchmarkConf
 
 	@Override
 	public Comparator<EmfMatch> getMatchComparator() {
-		return new EmfMatchComparator();
+		return EmfMatchComparator.create();
 	}
 
 }
