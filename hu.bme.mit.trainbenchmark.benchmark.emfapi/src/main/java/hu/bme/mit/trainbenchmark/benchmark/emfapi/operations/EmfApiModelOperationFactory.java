@@ -22,12 +22,14 @@ import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySema
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases.EmfApiQuerySwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.emf.EmfDriver;
 
-public class EmfApiModelOperationFactory {
+public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends ModelOperationFactory<TDriver> {
 
-	public static <TDriver extends EmfDriver> ModelOperation<? extends EmfMatch, TDriver> createOperation(
+	@Override
+	public ModelOperation<? extends EmfMatch, TDriver> createOperation(
 			final RailwayOperation operationEnum, final TDriver driver) {
 
 		switch (operationEnum) {

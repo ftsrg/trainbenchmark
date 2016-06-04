@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.operations;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
@@ -34,7 +35,7 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 	}
 
 	public ModelOperation(final ModelQuery<TPatternMatch, TDriver> query,
-			Optional<ModelTransformation<TPatternMatch, TDriver>> transformation) {
+			final Optional<ModelTransformation<TPatternMatch, TDriver>> transformation) {
 		super();
 		this.query = query;
 		this.transformation = transformation;
@@ -57,5 +58,13 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 	public ModelTransformation<TPatternMatch, TDriver> getTransformation() {
 		return transformation.get();
 	}
-
+	
+	public Collection<? extends TPatternMatch> evaluateQuery() throws Exception {
+		return query.check();
+	}
+	
+	public void performTransformation(final Collection<? extends TPatternMatch> matches) throws Exception {
+		transformation.get().activate(matches);
+	}
+	
 }

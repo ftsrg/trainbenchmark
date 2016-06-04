@@ -19,11 +19,11 @@ public abstract class ModelQuery<PatternMatch, TDriver extends Driver<?>> implem
 	
 	protected final TDriver driver; 
 	
-	public ModelQuery(TDriver driver) {
+	public ModelQuery(final TDriver driver) {
 		this.driver = driver;
 	}
 	
-	public abstract Collection<PatternMatch> check() throws Exception;
+	public abstract Collection<? extends PatternMatch> check() throws Exception;
 
 	@Override
 	public void close() {

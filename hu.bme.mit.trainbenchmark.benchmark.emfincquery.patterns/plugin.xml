@@ -2,19 +2,31 @@
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor"/>
   </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject"/>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments" id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments"/>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject"/>
+  </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor"/>
   </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject"/>
+  </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSet" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSet" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSet"/>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredInject" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredInject"/>
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored"/>
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInject" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInject"/>
-  </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject"/>
   </extension>
 </plugin>

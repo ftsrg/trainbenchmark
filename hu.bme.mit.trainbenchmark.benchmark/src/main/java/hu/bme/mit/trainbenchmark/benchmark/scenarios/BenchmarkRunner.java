@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Random;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.transformations.TransformationLogic;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.tmp.TransformationLogic;
 import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
