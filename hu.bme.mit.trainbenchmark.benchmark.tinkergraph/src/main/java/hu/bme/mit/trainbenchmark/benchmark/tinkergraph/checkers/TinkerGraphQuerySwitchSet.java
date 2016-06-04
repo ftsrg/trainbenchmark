@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
@@ -27,7 +27,6 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
@@ -35,14 +34,14 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
-public class TinkerGraphSwitchSetChecker extends TinkerGraphModelQuery<TinkerGraphSwitchSetMatch> {
+public class TinkerGraphQuerySwitchSet extends TinkerGraphQuery<TinkerGraphSwitchSetMatch> {
 
-	public TinkerGraphSwitchSetChecker(final TinkerGraphDriver driver) {
+	public TinkerGraphQuerySwitchSet(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphSwitchSetMatch> check() {
+	public Collection<TinkerGraphSwitchSetMatch> evaluate() {
 		final Collection<TinkerGraphSwitchSetMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> routes = driver.collectVertices(ROUTE);

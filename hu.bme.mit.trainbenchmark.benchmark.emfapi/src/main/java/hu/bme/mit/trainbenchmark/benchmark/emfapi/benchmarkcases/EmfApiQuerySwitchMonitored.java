@@ -31,12 +31,12 @@ public class EmfApiQuerySwitchMonitored<TDriver extends EmfDriver> extends EmfAp
 	}
 
 	@Override
-	public Collection<EmfSwitchMonitoredMatch> check() {
+	public Collection<EmfSwitchMonitoredMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final EList<Region> regions = driver.getContainer().getRegions();
-		for (Region region : regions) {
-			for (TrackElement element : region.getElements()) {
+		for (final Region region : regions) {
+			for (final TrackElement element : region.getElements()) {
 				if (!RailwayPackage.eINSTANCE.getSwitch().isInstance(element)) {
 					continue;
 				}

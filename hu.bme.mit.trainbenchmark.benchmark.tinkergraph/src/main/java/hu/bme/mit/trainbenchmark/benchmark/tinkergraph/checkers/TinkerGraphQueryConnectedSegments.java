@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,21 +20,20 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers.TinkerGraphModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
-public class TinkerGraphConnectedSegmentsChecker extends TinkerGraphModelQuery<TinkerGraphConnectedSegmentsMatch> {
+public class TinkerGraphQueryConnectedSegments extends TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch> {
 
-	public TinkerGraphConnectedSegmentsChecker(final TinkerGraphDriver driver) {
+	public TinkerGraphQueryConnectedSegments(final TinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphConnectedSegmentsMatch> check() throws IOException {
+	public Collection<TinkerGraphConnectedSegmentsMatch> evaluate() throws IOException {
 		final Collection<TinkerGraphConnectedSegmentsMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> sensors = driver.collectVertices(ModelConstants.SENSOR);

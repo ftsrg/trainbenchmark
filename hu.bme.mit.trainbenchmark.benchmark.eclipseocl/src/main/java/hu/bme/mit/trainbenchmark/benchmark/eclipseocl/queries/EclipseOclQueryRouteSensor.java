@@ -32,7 +32,7 @@ public class EclipseOclQueryRouteSensor extends EclipseOclQuery<EmfRouteSensorMa
 	}
 
 	@Override
-	public Collection<EmfRouteSensorMatch> check() {
+	public Collection<EmfRouteSensorMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());

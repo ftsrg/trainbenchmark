@@ -36,7 +36,7 @@ public class SesameChecker extends RdfModelQuery<SesameMatch, SesameDriver> {
 	}
 
 	@Override
-	public Collection<SesameMatch> check() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+	public Collection<SesameMatch> evaluate() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		return driver.runQuery(query, queryDefinition);
 	}
 

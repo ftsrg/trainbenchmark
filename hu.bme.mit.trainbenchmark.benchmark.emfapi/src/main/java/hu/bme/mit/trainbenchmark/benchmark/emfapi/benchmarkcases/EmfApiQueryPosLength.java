@@ -31,12 +31,12 @@ public class EmfApiQueryPosLength<TDriver extends EmfDriver> extends EmfApiQuery
 	}
 
 	@Override
-	public Collection<EmfPosLengthMatch> check() {
+	public Collection<EmfPosLengthMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final EList<Region> regions = driver.getContainer().getRegions();
-		for (Region region : regions) {
-			for (TrackElement element : region.getElements()) {
+		for (final Region region : regions) {
+			for (final TrackElement element : region.getElements()) {
 
 				// (segment:Segment)
 				if (RailwayPackage.eINSTANCE.getSegment().isInstance(element)) {

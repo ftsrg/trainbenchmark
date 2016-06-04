@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelRoute;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSemaphore;
@@ -38,14 +38,14 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
-public class Neo4jCoreSwitchSetChecker extends Neo4jCoreModelQuery<Neo4jSwitchSetMatch> {
+public class Neo4jCoreQuerySwitchSet extends Neo4jCoreQuery<Neo4jSwitchSetMatch> {
 
-	public Neo4jCoreSwitchSetChecker(final Neo4jDriver driver) {
+	public Neo4jCoreQuerySwitchSet(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<Neo4jSwitchSetMatch> check() {
+	public Collection<Neo4jSwitchSetMatch> evaluate() {
 		final Collection<Neo4jSwitchSetMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();

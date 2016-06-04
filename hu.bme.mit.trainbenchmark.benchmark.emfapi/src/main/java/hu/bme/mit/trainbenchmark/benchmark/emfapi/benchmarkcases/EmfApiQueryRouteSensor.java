@@ -32,12 +32,12 @@ public class EmfApiQueryRouteSensor<TDriver extends EmfDriver> extends EmfApiQue
 	}
 
 	@Override
-	public Collection<EmfRouteSensorMatch> check() {
+	public Collection<EmfRouteSensorMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
 		// (route:Route)
-		for (Route route : routes) {
+		for (final Route route : routes) {
 			// (route)-[:follows]->(swP:SwitchPosition)
 			for (final SwitchPosition swP : route.getFollows()) {
 				// (swP:switchPosition)-[:target]->(sw:Switch)
@@ -50,7 +50,7 @@ public class EmfApiQueryRouteSensor<TDriver extends EmfDriver> extends EmfApiQue
 				final List<Sensor> sensors = sw.getMonitoredBy();
 
 				// TODO check n-m edge
-				for (Sensor sensor2 : sensors) {
+				for (final Sensor sensor2 : sensors) {
 					// (route)-[:gathers]->(sensor) NAC
 					if (!route.getGathers().contains(sensor2)) {
 						final EmfRouteSensorMatch match = new EmfRouteSensorMatch(route, sensor2, swP, sw);

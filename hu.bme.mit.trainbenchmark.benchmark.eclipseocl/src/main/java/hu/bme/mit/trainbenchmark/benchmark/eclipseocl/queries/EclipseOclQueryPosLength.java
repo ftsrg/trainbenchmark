@@ -29,7 +29,7 @@ public class EclipseOclQueryPosLength extends EclipseOclQuery<EmfPosLengthMatch>
 	}
 
 	@Override
-	public Collection<EmfPosLengthMatch> check() {
+	public Collection<EmfPosLengthMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());

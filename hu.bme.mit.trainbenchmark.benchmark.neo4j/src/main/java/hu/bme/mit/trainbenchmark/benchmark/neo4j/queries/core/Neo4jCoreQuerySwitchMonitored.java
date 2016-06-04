@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSensor;
 import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSwitch;
@@ -31,14 +31,14 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
 
-public class Neo4jCoreSwitchMonitoredChecker extends Neo4jCoreModelQuery<Neo4jSwitchMonitoredMatch> {
+public class Neo4jCoreQuerySwitchMonitored extends Neo4jCoreQuery<Neo4jSwitchMonitoredMatch> {
 
-	public Neo4jCoreSwitchMonitoredChecker(final Neo4jDriver driver) {
+	public Neo4jCoreQuerySwitchMonitored(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<Neo4jSwitchMonitoredMatch> check() {
+	public Collection<Neo4jSwitchMonitoredMatch> evaluate() {
 		final Collection<Neo4jSwitchMonitoredMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();

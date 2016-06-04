@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.checkers.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT2;
@@ -35,14 +35,14 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 
-public class Neo4jCoreConnectedSegmentsChecker extends Neo4jCoreModelQuery<Neo4jConnectedSegmentsMatch> {
+public class Neo4jCoreQueryConnectedSegments extends Neo4jCoreQuery<Neo4jConnectedSegmentsMatch> {
 
-	public Neo4jCoreConnectedSegmentsChecker(final Neo4jDriver driver) {
+	public Neo4jCoreQueryConnectedSegments(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public Collection<Neo4jConnectedSegmentsMatch> check() throws IOException {
+	public Collection<Neo4jConnectedSegmentsMatch> evaluate() throws IOException {
 		final Collection<Neo4jConnectedSegmentsMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();

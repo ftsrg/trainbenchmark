@@ -32,11 +32,11 @@ public class EmfApiQuerySwitchSet<TDriver extends EmfDriver> extends EmfApiQuery
 	}
 
 	@Override
-	public Collection<EmfSwitchSetMatch> check() {
+	public Collection<EmfSwitchSetMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
-		for (Route route : routes) {
+		for (final Route route : routes) {
 			// (route:Route)-[:entry]->(semaphore:Semaphore)
 			final Semaphore semaphore = route.getEntry();
 			if (semaphore == null) {

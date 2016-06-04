@@ -55,7 +55,7 @@ public class SesameDriver extends RdfDriver<URI> {
 
 	protected final Comparator<URI> elementComparator = new UriComparator();
 
-	public SesameDriver(boolean inferencing) {
+	public SesameDriver(final boolean inferencing) {
 		super(inferencing);
 	}
 
@@ -106,11 +106,6 @@ public class SesameDriver extends RdfDriver<URI> {
 		}
 
 		return results;
-	}
-
-	@Override
-	public Comparator<URI> getElementComparator() {
-		return elementComparator;
 	}
 
 	@Override

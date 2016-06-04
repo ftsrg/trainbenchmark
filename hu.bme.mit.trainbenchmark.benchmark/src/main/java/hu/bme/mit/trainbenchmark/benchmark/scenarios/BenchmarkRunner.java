@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.scenarios;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -24,9 +23,6 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.tmp.TransformationLogic;
-import hu.bme.mit.trainbenchmark.benchmark.token.TrainBenchmarkDataToken;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TElement>, TBenchmarkConfig extends BenchmarkConfig, TChecker extends ModelQuery<TMatch, TDriver>> {
@@ -36,7 +32,6 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 	protected final AbstractBenchmarkCase<TMatch, TElement, TDriver, TBenchmarkConfig> benchmarkCase;
 
 	protected ModelTransformation<?, ?> transformation;
-	protected TransformationLogic<TMatch, TElement, ?, TBenchmarkConfig> transformationLogic;
 	protected TDriver driver;
 	protected List<TChecker> checkers;
 	protected List<Collection<TMatch>> matches;
@@ -47,40 +42,40 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		this.benchmarkCase = benchmarkCase;
 	}
 
-	public BenchmarkResult runBenchmark() throws Exception {
-		@SuppressWarnings("rawtypes")
-		final TrainBenchmarkScenario scenario = ScenarioFactory.getScenario(benchmarkConfig.getScenario());
-
-		scenario.setBenchmarkConfig(benchmarkConfig);
-		scenario.initializeDescriptor();
-
-		BenchmarkResult result = null;
-		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
-			final BenchmarkEngine engine = new BenchmarkEngine();
-
-			scenario.setRunIndex(i);
-			final FilenameFactory factory = new DefaultFilenameFactory(scenario.getCaseDescriptor());
-			result = new BenchmarkResult(new File("."));
-			final CsvPublisher publisher = new CsvPublisher(factory);
-			result.addPublisher(publisher);
-
-			final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
-			token.setBenchmarkRunner(this);
-
-			driver = benchmarkCase.createDriver(benchmarkConfig);
-
-			// initialize checkers
-			checkers = new ArrayList<>();
-
-			for (final RailwayQuery query : benchmarkConfig.getQueries()) {
-//				final TChecker checker = benchmarkCase.createModelQuery(benchmarkConfig, driver, query);
-//				checkers.add(checker);
-			}
-
-			engine.runBenchmark(result, scenario, token);
-		}
-
-		return result;
+	public void runBenchmark() throws Exception {
+//		@SuppressWarnings("rawtypes")
+//		final TrainBenchmarkScenario scenario = ScenarioFactory.getScenario(benchmarkConfig.getScenario());
+//
+//		scenario.setBenchmarkConfig(benchmarkConfig);
+//		scenario.initializeDescriptor();
+//
+//		BenchmarkResult result = null;
+//		for (int i = 1; i <= benchmarkConfig.getRuns(); i++) {
+//			final BenchmarkEngine engine = new BenchmarkEngine();
+//
+//			scenario.setRunIndex(i);
+//			final FilenameFactory factory = new DefaultFilenameFactory(scenario.getCaseDescriptor());
+//			result = new BenchmarkResult(new File("."));
+//			final CsvPublisher publisher = new CsvPublisher(factory);
+//			result.addPublisher(publisher);
+//
+//			final TrainBenchmarkDataToken token = new TrainBenchmarkDataToken();
+//			token.setBenchmarkRunner(this);
+//
+//			driver = benchmarkCase.createDriver(benchmarkConfig);
+//
+//			// initialize checkers
+//			checkers = new ArrayList<>();
+//
+//			for (final RailwayQuery query : benchmarkConfig.getQueries()) {
+////				final TChecker checker = benchmarkCase.createModelQuery(benchmarkConfig, driver, query);
+////				checkers.add(checker);
+//			}
+//
+//			engine.runBenchmark(result, scenario, token);
+//		}
+//
+//		return result;
 	}
 
 	// phases
@@ -106,7 +101,7 @@ public final class BenchmarkRunner<TMatch, TElement, TDriver extends Driver<TEle
 		final ScalarMetric results = new ScalarMetric("Matches");
 
 		for (final TChecker checker : checkers) {
-			matches.add(checker.check());
+			matches.add(checker.evaluate());
 		}
 
 		// only use the first match for now

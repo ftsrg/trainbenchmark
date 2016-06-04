@@ -31,12 +31,12 @@ public class EmfApiQueryConnectedSegments<TDriver extends EmfDriver> extends Emf
 	}
 
 	@Override
-	public Collection<EmfConnectedSegmentsMatch> check() {
+	public Collection<EmfConnectedSegmentsMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final EList<Region> regions = driver.getContainer().getRegions();
-		for (Region region : regions) {
-			for (Sensor sensor : region.getSensors()) {
+		for (final Region region : regions) {
+			for (final Sensor sensor : region.getSensors()) {
 				// (sensor)-[:monitors]->(segment1:Segment)
 				for (final TrackElement element1 : sensor.getMonitors()) {
 					if (!RailwayPackage.eINSTANCE.getSegment().isInstance(element1)) {

@@ -40,7 +40,7 @@ public class SqlModelQuery<TSQLDriver extends SqlDriver> extends ModelQuery<SqlM
 	}
 
 	@Override
-	public Collection<SqlMatch> check() throws SQLException {
+	public Collection<SqlMatch> evaluate() throws SQLException {
 		if (statement == null) {
 			statement = driver.getConnection().prepareStatement(queryDefinition);
 		}

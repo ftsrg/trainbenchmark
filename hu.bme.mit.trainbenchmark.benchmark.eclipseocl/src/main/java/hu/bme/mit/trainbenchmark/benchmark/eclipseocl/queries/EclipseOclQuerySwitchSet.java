@@ -32,7 +32,7 @@ public class EclipseOclQuerySwitchSet extends EclipseOclQuery<EmfSwitchSetMatch>
 	}
 
 	@Override
-	public Collection<EmfSwitchSetMatch> check() {
+	public Collection<EmfSwitchSetMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());

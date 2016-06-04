@@ -105,7 +105,7 @@ public abstract class ViatraQuery<TMatch extends BasePatternMatch> extends Model
 	}
 
 	@Override
-	public Collection<TMatch> check() throws ViatraQueryException {
+	public Collection<TMatch> evaluate() throws ViatraQueryException {
 		switch (backend) {
 		case INCREMENTAL:
 			break;

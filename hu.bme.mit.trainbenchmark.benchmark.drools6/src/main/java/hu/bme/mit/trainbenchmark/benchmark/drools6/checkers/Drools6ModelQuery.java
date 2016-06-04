@@ -54,7 +54,7 @@ public class Drools6ModelQuery extends ModelQuery<EmfMatch, Drools6Driver> {
 	}
 
 	@Override
-	public Collection<EmfMatch> check() throws IOException {
+	public Collection<EmfMatch> evaluate() throws IOException {
 		if (liveQuery == null) {
 			listener = new Drools6ResultListener(query);
 			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);

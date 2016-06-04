@@ -31,11 +31,11 @@ public class EmfApiQuerySemaphoreNeighbor<TDriver extends EmfDriver> extends Emf
 	}
 
 	@Override
-	public Collection<EmfSemaphoreNeighborMatch> check() {
+	public Collection<EmfSemaphoreNeighborMatch> evaluate() {
 		matches = new ArrayList<>();
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
-		for (Route route1 : routes) {
+		for (final Route route1 : routes) {
 			// (route1:Route)-[:exit]->(semaphore:Semaphore)
 			final Semaphore semaphore = route1.getExit();
 			if (semaphore == null) {
@@ -49,9 +49,9 @@ public class EmfApiQuerySemaphoreNeighbor<TDriver extends EmfDriver> extends Emf
 					// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
 					for (final TrackElement te2 : te1.getConnectsTo()) {
 						// (te2:TrackElement)<-[:monitoredBy]-(sensor2:Sensor)
-						for (Sensor sensor2 : te2.getMonitoredBy()) {
+						for (final Sensor sensor2 : te2.getMonitoredBy()) {
 							// (route2:Route)-[:gathers]->(sensor2:Sensor)
-							for (Route route2 : routes) {
+							for (final Route route2 : routes) {
 								if (!route2.getGathers().contains(sensor2)) {
 									continue;
 								}

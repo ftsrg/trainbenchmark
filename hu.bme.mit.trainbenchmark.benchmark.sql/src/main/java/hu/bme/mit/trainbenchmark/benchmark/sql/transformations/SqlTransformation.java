@@ -32,7 +32,7 @@ public abstract class SqlTransformation<TObject> extends ModelTransformation<TOb
 		super(driver);
 		this.benchmarkConfig = benchmarkConfig;
 
-		final String updatePath = getTransformationDirectory() + benchmarkConfig.getScenarioName() + query + ".sql";
+		final String updatePath = "";//getTransformationDirectory() + benchmarkConfig.getScenarioName() + query + ".sql";
 		updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 	

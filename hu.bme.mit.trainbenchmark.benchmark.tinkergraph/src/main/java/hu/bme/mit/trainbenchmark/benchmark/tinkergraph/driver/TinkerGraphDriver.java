@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -28,7 +27,6 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 
 	public static final String LABEL = "label";
 	protected TinkerGraph graph = TinkerGraph.open();
-	protected final Comparator<Vertex> vertexComparator = new VertexComparator();
 
 	public TinkerGraphDriver() throws IOException {
 		super();
@@ -48,7 +46,7 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 		final Collection<Vertex> vertices = new ArrayList<>();
 
 		final Iterable<Vertex> allVertices = () -> graph.vertices();
-		for (Vertex vertex : allVertices) {
+		for (final Vertex vertex : allVertices) {
 			if (vertex.label().equals(type)) {
 				vertices.add(vertex);
 			}
@@ -59,11 +57,6 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 
 	public TinkerGraph getGraph() {
 		return graph;
-	}
-
-	@Override
-	public Comparator<Vertex> getElementComparator() {
-		return vertexComparator;
 	}
 
 	@Override
