@@ -23,18 +23,20 @@ public class EmfApiBasicTest {
 		driver.read("../models/railway-repair-1.xmi");
 		
 		final ModelOperation<? extends EmfMatch, EmfDriver> posLengthRepairOperation = factory.createOperation(RailwayOperation.POSLENGTH_REPAIR, driver);
-		final ModelQuery<? extends EmfMatch, EmfDriver> query = posLengthRepairOperation.getQuery();
-		final ModelTransformation<? extends EmfMatch, EmfDriver> transformation = posLengthRepairOperation.getTransformation();
-		
-		final Collection<? extends EmfMatch> matches = query.check();
-		transformation.activate(matches);
-		System.out.println(matches);
-
+        final ModelQuery<? extends EmfMatch, EmfDriver> query = posLengthRepairOperation.getQuery();
+        final ModelTransformation<? extends EmfMatch, EmfDriver> transformation = posLengthRepairOperation.getTransformation();
+        
+        final Collection<? extends EmfMatch> matches = query.check();
 	}
 	
+	
+		
 	public <TPatternMatch, TDriver extends Driver<?>> void execute(final ModelOperation<TPatternMatch, TDriver> operation) throws Exception {
-		final Collection<? extends TPatternMatch> matches = operation.evaluateQuery();
-		operation.performTransformation(matches);
+		final ModelQuery<TPatternMatch, TDriver> query = operation.getQuery();
+		final ModelTransformation<TPatternMatch, TDriver> transformation = operation.getTransformation();
+		
+		final Collection<? extends TPatternMatch> matches = query.check();
+		transformation.activate(matches);
 	}
 	
 }
