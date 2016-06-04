@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.driver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -25,7 +24,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.RailwayElementComparator;
 import hu.bme.mit.trainbenchmark.emf.EmfConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfUtil;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
@@ -37,7 +35,6 @@ public class EmfDriver extends Driver<RailwayElement> {
 	protected RailwayContainer container;
 	protected Resource resource;
 	protected final ResourceSet resourceSet = new ResourceSetImpl();
-	private final Comparator<RailwayElement> elementComparator = new RailwayElementComparator();
 
 	public EmfDriver() {
 		super();
