@@ -1,0 +1,13 @@
+
+description = ''
+dependencies {
+  compile project(':hu.bme.mit.trainbenchmark.benchmark.emf')
+  compile group: 'org.drools', name: 'drools-core', version:'6.3.0.Final'
+  compile group: 'org.drools', name: 'drools-compiler', version:'6.3.0.Final'
+  compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.7.10'
+}
+repositories {
+  maven {
+    url "https://repository.jboss.org"
+  }
+}

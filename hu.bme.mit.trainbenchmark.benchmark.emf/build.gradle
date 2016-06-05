@@ -1,0 +1,6 @@
+
+description = ''
+dependencies {
+  compile project(':hu.bme.mit.trainbenchmark.benchmark')
+  compile project(':hu.bme.mit.trainbenchmark.emf')
+}
