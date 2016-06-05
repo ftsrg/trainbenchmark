@@ -13,6 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class TinkerGraphBenchmarkMain {
 
