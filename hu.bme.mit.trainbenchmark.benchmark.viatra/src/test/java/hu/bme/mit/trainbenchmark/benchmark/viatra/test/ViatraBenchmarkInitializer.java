@@ -14,13 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.test;
 import java.util.Arrays;
 import java.util.List;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.ViatraBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public class ViatraBenchmarkInitializer extends TestBenchmarkInitializer {
 
@@ -34,11 +29,11 @@ public class ViatraBenchmarkInitializer extends TestBenchmarkInitializer {
 		return Arrays.asList(new Object[][] { { ViatraBackend.INCREMENTAL }, { ViatraBackend.LOCALSEARCH} });
 	}
 
-	@Override
-	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-		final ViatraBenchmarkConfig benchmarkConfig = new ViatraBenchmarkConfig(scenario, size, 1, query,
-				iterationCount, transformationStrategy, transformationConstant, backend);
-		return new BenchmarkRunner(benchmarkConfig, new ViatraBenchmarkCase());
-	}
+//	@Override
+//	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
+//		final ViatraBenchmarkConfig benchmarkConfig = new ViatraBenchmarkConfig(scenario, size, 1, query,
+//				iterationCount, transformationStrategy, transformationConstant, backend);
+//		return new BenchmarkRunner(benchmarkConfig, new ViatraBenchmarkCase());
+//	}
 
 }

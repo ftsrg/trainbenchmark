@@ -22,7 +22,6 @@ TMatch, //
 TElement, //
 TDriver extends Driver<TElement>, //
 TBenchmarkConfig extends BenchmarkConfig //
- //
 > {
 
 	public abstract TDriver createDriver(TBenchmarkConfig benchmarkConfig) throws Exception;

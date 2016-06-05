@@ -11,15 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
 
 public class ViatraBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final ViatraBenchmarkConfig benchmarkConfig = new ViatraBenchmarkConfig(args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new ViatraBenchmarkCase());
-		benchmarkRunner.runBenchmark();
 	}
 
 }

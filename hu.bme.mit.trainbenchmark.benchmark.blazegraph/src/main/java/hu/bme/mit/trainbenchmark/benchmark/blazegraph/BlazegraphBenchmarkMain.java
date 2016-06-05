@@ -13,14 +13,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class BlazegraphBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final RdfBenchmarkConfig rdfBenchmarkConfig = new RdfBenchmarkConfig("Blazegraph", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(rdfBenchmarkConfig, new BlazegraphBenchmarkCase());
-		benchmarkRunner.runBenchmark();
+
 	}
 
 }

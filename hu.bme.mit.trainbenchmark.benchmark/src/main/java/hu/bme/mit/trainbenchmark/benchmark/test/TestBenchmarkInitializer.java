@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
-public abstract class TestBenchmarkInitializer {
+public abstract class TestBenchmarkInitializer<TPatternMatch, TDriver extends Driver<?>> {
 
 	protected final int size = 1;
 	protected final TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
@@ -25,6 +23,5 @@ public abstract class TestBenchmarkInitializer {
 	protected final int runIndex = 1;
 	protected final int iterationCount = 1;
 
-	protected abstract BenchmarkRunner initializeBenchmark(RailwayQuery query, ScenarioEnum scenario);
 
 }

@@ -13,14 +13,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.sqlite;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class SQLiteBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("SQLite", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new SQLiteBenchmarkCase());
-		benchmarkRunner.runBenchmark();
 	}
 
 }

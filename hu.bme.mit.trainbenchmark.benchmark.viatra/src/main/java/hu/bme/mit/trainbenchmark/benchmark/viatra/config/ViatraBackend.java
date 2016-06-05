@@ -13,6 +13,5 @@ public enum ViatraBackend {
 	public String toString() {
 		return name;
 	}
-
 	
 }

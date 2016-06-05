@@ -12,12 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
+import java.util.Collection;
+
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 
 import com.google.common.collect.ImmutableList;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
@@ -40,6 +43,7 @@ public class BenchmarkConfig extends AbstractConfig {
 	protected int iterationCount = 10;
 
 	protected String className;
+	private Collection<RailwayOperation> railwayOperations;
 
 	public BenchmarkConfig(final String toolName, final String args[]) throws ParseException {
 		super(args);
@@ -129,6 +133,11 @@ public class BenchmarkConfig extends AbstractConfig {
 		return "../models/railway-repair-1.xmi";
 	}
 
+	public Collection<RailwayOperation> getRailwayOperations() {
+		return railwayOperations;
+		
+	}
+	
 //	public String getCaseName() {
 //		final String queries = getQueries().toString().replaceAll("[\\[\\]]", "").replaceAll(", ","-");
 //		return queries;

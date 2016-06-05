@@ -13,14 +13,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class Neo4jBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final Neo4jBenchmarkConfig benchmarkConfig = new Neo4jBenchmarkConfig(args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new Neo4jBenchmarkCase());
-		benchmarkRunner.runBenchmark();
 	}
 
 }

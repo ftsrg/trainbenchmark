@@ -5,32 +5,37 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Random;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>> {
+public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchmarkConfig extends BenchmarkConfig> {
 
-	protected final Random random = new Random(0);
+	protected final Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TDriver driver;
 	protected final ModelOperationFactory<TPatternMatch, TDriver> factory;
 	protected final Comparator<TPatternMatch> comparator;
+	protected final TBenchmarkConfig benchmarkConfig;
+	
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
 	public BenchmarkExecutor(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
-			final Comparator<TPatternMatch> comparator) {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfig benchmarkConfig) {
 		this.driver = driver;
 		this.factory = factory;
 		this.comparator = comparator;
+		this.benchmarkConfig = benchmarkConfig;
 	}
 
 	public void read() throws Exception {
-		driver.read("../models/railway-repair-1.xmi");
+		driver.read(benchmarkConfig.getModelsPath());
 	}
 
-	public void initializeOperations(final Collection<RailwayOperation> railwayOperations) throws Exception {
-		for (final RailwayOperation railwayOperation : railwayOperations) {
+	public void initializeOperations() throws Exception {
+		for (final RailwayOperation railwayOperation : benchmarkConfig.getRailwayOperations()) {
 			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation, driver);
 			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation.of(operation, comparator, random);
 			qsts.add(qst);
