@@ -19,12 +19,9 @@ artifacts.archives packageSources
     mavenLocal()
 
     maven { url "http://repo.maven.apache.org/maven2" }
-    maven { url "http://www.systap.com/maven/releases/" }
+    maven { url "http://www.systap.com/maven/releases" }
     maven { url "https://repo.eclipse.org/content/groups/acceleo" }
-    maven { url "https://repo.eclipse.org/content/repositories/emf-incquery-snapshots/" }
+    maven { url "https://repo.eclipse.org/content/groups/viatra2" }
   }
-
-
-
 
 }
