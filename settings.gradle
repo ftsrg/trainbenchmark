@@ -6,8 +6,6 @@ include ':hu.bme.mit.trainbenchmark.benchmark.drools6'
 include ':hu.bme.mit.trainbenchmark.benchmark.eclipseocl'
 include ':hu.bme.mit.trainbenchmark.benchmark.emf'
 include ':hu.bme.mit.trainbenchmark.benchmark.emfapi'
-include ':hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns'
-include ':hu.bme.mit.trainbenchmark.benchmark.emfincquery'
 include ':hu.bme.mit.trainbenchmark.benchmark.jena'
 include ':hu.bme.mit.trainbenchmark.benchmark.mysql'
 include ':hu.bme.mit.trainbenchmark.benchmark.neo4j'
@@ -16,6 +14,8 @@ include ':hu.bme.mit.trainbenchmark.benchmark.sesame'
 include ':hu.bme.mit.trainbenchmark.benchmark.sql'
 include ':hu.bme.mit.trainbenchmark.benchmark.sqlite'
 include ':hu.bme.mit.trainbenchmark.benchmark.tinkergraph'
+include ':hu.bme.mit.trainbenchmark.benchmark.viatra'
+include ':hu.bme.mit.trainbenchmark.benchmark.viatra.patterns'
 include ':hu.bme.mit.trainbenchmark.config'
 include ':hu.bme.mit.trainbenchmark.emf'
 include ':hu.bme.mit.trainbenchmark.emf.model'
@@ -35,8 +35,6 @@ project(':hu.bme.mit.trainbenchmark.benchmark.drools6').projectDir = "$rootDir/h
 project(':hu.bme.mit.trainbenchmark.benchmark.eclipseocl').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.eclipseocl" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.emf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emf" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.emfapi').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emfapi" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emfincquery.patterns" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.emfincquery').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emfincquery" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.jena').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.jena" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.mysql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.mysql" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.neo4j').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.neo4j" as File
@@ -45,6 +43,8 @@ project(':hu.bme.mit.trainbenchmark.benchmark.sesame').projectDir = "$rootDir/hu
 project(':hu.bme.mit.trainbenchmark.benchmark.sql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.sql" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.sqlite').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.sqlite" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.tinkergraph').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.tinkergraph" as File
+project(':hu.bme.mit.trainbenchmark.benchmark.viatra').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.viatra" as File
+project(':hu.bme.mit.trainbenchmark.benchmark.viatra.patterns').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.viatra.patterns" as File
 project(':hu.bme.mit.trainbenchmark.config').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.config" as File
 project(':hu.bme.mit.trainbenchmark.emf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.emf" as File
 project(':hu.bme.mit.trainbenchmark.emf.model').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.emf.model" as File

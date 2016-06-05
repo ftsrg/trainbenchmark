@@ -8,7 +8,6 @@ install:
 script:
   - scripts/init-config.sh
   - scripts/install-python.sh
-  - scripts/dep-mondo-sam.sh
   - scripts/dep-graph.sh
   - gradle build -x test
 notifications:
