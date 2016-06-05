@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
  */
 public abstract class Phase {
 
-	protected final BenchmarkExecutor<?, ?> executor;
+	protected final BenchmarkExecutor<?, ?, ?> executor;
 	
-	public Phase(final BenchmarkExecutor<?, ?> executor) {
+	public Phase(final BenchmarkExecutor<?, ?, ?> executor) {
 		this.executor = executor;
 	}
 	

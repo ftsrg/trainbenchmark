@@ -12,20 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5BenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public class Drools5BenchmarkInitializer extends TestBenchmarkInitializer {
 
-	@Override
-	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Drools5", scenario, size, runIndex, query, iterationCount, transformationStrategy,
-				transformationConstant);
-		return new BenchmarkRunner(benchmarkConfig, new Drools5BenchmarkCase());
-	}
+//	@Override
+//	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
+//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Drools5", scenario, size, runIndex, query, iterationCount, transformationStrategy,
+//				transformationConstant);
+//		return new BenchmarkRunner(benchmarkConfig, new Drools5BenchmarkCase());
+//	}
 
 }

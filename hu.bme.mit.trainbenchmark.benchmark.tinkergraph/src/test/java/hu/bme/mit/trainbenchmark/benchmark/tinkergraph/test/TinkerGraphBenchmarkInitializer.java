@@ -15,12 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
 import java.util.Arrays;
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.TinkerGraphBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
 
 public class TinkerGraphBenchmarkInitializer extends TestBenchmarkInitializer {
 	
@@ -31,11 +26,11 @@ public class TinkerGraphBenchmarkInitializer extends TestBenchmarkInitializer {
 		return Arrays.asList(new Object[][] { { } });
 	}
 	
-	@Override
-	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-		final TinkerGraphBenchmarkConfig rbc = new TinkerGraphBenchmarkConfig(scenario, size, runIndex, query, iterationCount, transformationStrategy,
-				transformationConstant);
-		return new BenchmarkRunner(rbc, new TinkerGraphBenchmarkCase());
-	}
+//	@Override
+//	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
+//		final TinkerGraphBenchmarkConfig rbc = new TinkerGraphBenchmarkConfig(scenario, size, runIndex, query, iterationCount, transformationStrategy,
+//				transformationConstant);
+//		return new BenchmarkRunner(rbc, new TinkerGraphBenchmarkCase());
+//	}
 
 }

@@ -21,43 +21,29 @@ import hu.bme.mit.trainbenchmark.constants.TransformationStrategy;
 
 public class ViatraBenchmarkConfig extends BenchmarkConfig {
 
-	protected static final String EMFINCQUERY = "EMF-IncQuery";
+	protected static final String VIATRA = "VIATRA";
 	protected static final String BACKEND = "backend";
 
 	protected ViatraBackend backend;
 
 	public ViatraBenchmarkConfig(final String[] args) throws ParseException {
-		super(EMFINCQUERY, args);
-	}
-
-	// for Hawk
-	protected ViatraBenchmarkConfig(final String[] args, final String toolName) throws ParseException {
-		super(toolName, args);
+		super(VIATRA, args);
 	}
 
 	public ViatraBenchmarkConfig(final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query,
 			final int iterationCount, final TransformationStrategy transformationStrategy,
 			final long transformationConstant, final ViatraBackend backend) {
-		super(EMFINCQUERY, scenario, size, runIndex, query, iterationCount, transformationStrategy,
+		super(VIATRA, scenario, size, runIndex, query, iterationCount, transformationStrategy,
 				transformationConstant);
 		this.backend = backend;
-	}
-
-	// for Hawk
-	protected ViatraBenchmarkConfig(final String className, final ScenarioEnum scenario, final int size,
-			final int runIndex, final RailwayQuery query, final int iterationCount,
-			final TransformationStrategy transformationStrategy, final long transformationConstant,
-			final boolean localSearch) {
-		super(className, scenario, size, runIndex, query, iterationCount, transformationStrategy,
-				transformationConstant);
 	}
 
 	@Override
 	protected void initOptions() {
 		super.initOptions();
 		
-		options.addOption(BACKEND, true, "set the IncQuery backend: incremental or local search");
-		Option backendOption = options.getOption(BACKEND);
+		options.addOption(BACKEND, true, "set the backend for VIATRA Query. Options: incremental, localsearch.");
+		final Option backendOption = options.getOption(BACKEND);
 		backendOption.setRequired(true);
 		options.addOption(backendOption);
 	}

@@ -13,14 +13,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 
 public class Drools5BenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
 		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Drools5", args);
-		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new Drools5BenchmarkCase());
-		benchmarkRunner.runBenchmark();
+		
 	}
 
 }
