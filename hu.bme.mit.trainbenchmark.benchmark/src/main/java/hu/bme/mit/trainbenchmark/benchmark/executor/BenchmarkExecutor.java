@@ -10,7 +10,7 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class BenchmarkExecutor<TDriver extends Driver<?>, TPatternMatch> {
+public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>> {
 
 	protected final Random random = new Random(0);
 	protected final TDriver driver;
