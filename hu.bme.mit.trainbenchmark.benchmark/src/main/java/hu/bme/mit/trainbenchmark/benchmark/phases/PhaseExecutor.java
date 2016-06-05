@@ -4,7 +4,7 @@ import com.google.common.base.Stopwatch;
 
 public class PhaseExecutor {
 
-	public void execute(final Phase phase) {
+	public void execute(final Phase phase) throws Exception {
 		phase.initialize();
 		
 		final Stopwatch stopwatch = Stopwatch.createStarted();
@@ -13,6 +13,5 @@ public class PhaseExecutor {
 		
 		phase.cleanup();
 	}
-	
 	
 }

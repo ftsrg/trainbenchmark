@@ -125,6 +125,10 @@ public class BenchmarkConfig extends AbstractConfig {
 		return toolName;
 	}
 
+	public String getModelPath() {
+		return "../models/railway-repair-1.xmi";
+	}
+
 //	public String getCaseName() {
 //		final String queries = getQueries().toString().replaceAll("[\\[\\]]", "").replaceAll(", ","-");
 //		return queries;
