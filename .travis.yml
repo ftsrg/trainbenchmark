@@ -1,6 +1,6 @@
 sudo: required
 dist: trusty
-language: java
+language: groovy
 jdk:
   - oraclejdk8
 install:
