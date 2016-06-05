@@ -55,7 +55,7 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 	}
 
 	public void transform() throws Exception {
-		operation.getTransformation().activate(sortedMatches);
+		operation.getTransformation().activate(candidates);
 	}
 
 }
