@@ -1,0 +1,10 @@
+
+description = ''
+dependencies {
+  compile project(':hu.bme.mit.trainbenchmark.benchmark')
+  compile project(':hu.bme.mit.trainbenchmark.emf')
+  compile project(':hu.bme.mit.trainbenchmark.generator')
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version:'2.10.0-v20140514-1158'
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore.xmi', version:'2.10.0-v20140514-1158'
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version:'2.10.0-v20140514-1158'
+}

@@ -1,0 +1,7 @@
+
+description = ''
+dependencies {
+  compile project(':hu.bme.mit.trainbenchmark.benchmark')
+  compile project(':hu.bme.mit.trainbenchmark.benchmark.sql')
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.38'
+}
