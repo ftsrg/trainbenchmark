@@ -1,4 +1,20 @@
+apply plugin: 'groovy'
+
 dependencies {
+  compile localGroovy()
   compile project(':hu.bme.mit.trainbenchmark.benchmark')
-  compile project(':hu.bme.mit.trainbenchmark.emf')
+  compile group: 'org.apache.ivy', name: 'ivy', version: '2.4.0'
+}
+
+sourceSets {
+  main {
+    groovy {
+      srcDir '.'
+    }
+  }
+}
+
+task runScript(dependsOn: 'classes', type: JavaExec) {
+  main = 'benchmark'
+  classpath = sourceSets.main.runtimeClasspath
 }
