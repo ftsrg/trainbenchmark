@@ -1,7 +1,5 @@
-
-description = ''
 dependencies {
   compile project(':hu.bme.mit.trainbenchmark.benchmark')
   compile project(':hu.bme.mit.trainbenchmark.benchmark.rdf')
-    compile group: 'org.apache.jena', name: 'jena-querybuilder', version:'3.0.0'
+  compile group: 'org.apache.jena', name: 'jena-querybuilder', version:'3.0.0'
 }

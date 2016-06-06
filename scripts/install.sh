@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gradle install
+gradle install installDist

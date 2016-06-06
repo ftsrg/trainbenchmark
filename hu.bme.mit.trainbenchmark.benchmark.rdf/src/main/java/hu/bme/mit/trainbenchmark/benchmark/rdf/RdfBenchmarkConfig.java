@@ -25,7 +25,7 @@ public class RdfBenchmarkConfig extends BenchmarkConfig {
 	protected boolean inferencing;
 
 	public RdfBenchmarkConfig(final String toolName, final String[] args) throws ParseException {
-		super(toolName, args);
+		super();
 	}
 
 	public RdfBenchmarkConfig(final String className, final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query,
@@ -39,7 +39,7 @@ public class RdfBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(INFERENCING, false, "Use type inferencing");
+//		options.addOption(INFERENCING, false, "Use type inferencing");
 	}
 
 	@Override

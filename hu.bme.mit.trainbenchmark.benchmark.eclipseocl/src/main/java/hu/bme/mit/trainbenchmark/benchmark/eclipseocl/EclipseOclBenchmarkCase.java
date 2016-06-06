@@ -20,7 +20,7 @@ public class EclipseOclBenchmarkCase<T extends RailwayElement> extends EmfBenchm
 
 	@Override
 	public EmfDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new EmfDriver();
+		return EmfDriver.create();
 	}
 
 }

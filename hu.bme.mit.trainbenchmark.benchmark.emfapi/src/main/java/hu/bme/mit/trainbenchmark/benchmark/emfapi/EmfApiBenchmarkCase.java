@@ -20,7 +20,7 @@ public class EmfApiBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig> exten
 
 	@Override
 	public EmfDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new EmfDriver();
+		return EmfDriver.create();
 	}
 
 }

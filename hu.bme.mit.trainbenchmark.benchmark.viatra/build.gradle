@@ -1,11 +1,9 @@
-
-description = ''
 dependencies {
   compile project(':hu.bme.mit.trainbenchmark.benchmark.viatra.patterns')
   compile project(':hu.bme.mit.trainbenchmark.benchmark')
   compile project(':hu.bme.mit.trainbenchmark.emf')
   compile project(':hu.bme.mit.trainbenchmark.emf.model')
-    compile(group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.xbase.lib', version:'2.6.2') {
+  compile(group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.xbase.lib', version:'2.6.2') {
 exclude(module: 'guava')
-    }
+  }
 }

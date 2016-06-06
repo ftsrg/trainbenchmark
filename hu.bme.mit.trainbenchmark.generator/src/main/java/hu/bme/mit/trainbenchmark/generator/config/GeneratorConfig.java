@@ -12,7 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.generator.config;
 
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
@@ -26,9 +28,11 @@ public class GeneratorConfig extends AbstractConfig {
 	protected GraphFormat graphFormat;
 	protected ScenarioEnum scenario;
 	protected int size;
+	protected Options options;
+	protected CommandLine cmd;
 
 	public GeneratorConfig(final String[] args) throws ParseException {
-		super(args);
+		super();
 	}
 
 	@Override
@@ -44,15 +48,13 @@ public class GeneratorConfig extends AbstractConfig {
 		options.addOption(SIZE, true, "specifies model size, e.g. 4");
 	}
 
-	@Override
 	protected void processArguments(String[] args) throws ParseException {
-		super.processArguments(args);
-
-		scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
-
-		if (cmd.hasOption(SIZE)) {
-			size = Integer.parseInt(cmd.getOptionValue(SIZE));
-		}
+//		
+//		scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
+//
+//		if (cmd.hasOption(SIZE)) {
+//			size = Integer.parseInt(cmd.getOptionValue(SIZE));
+//		}
 	}
 
 	// public String getScenarioName() {

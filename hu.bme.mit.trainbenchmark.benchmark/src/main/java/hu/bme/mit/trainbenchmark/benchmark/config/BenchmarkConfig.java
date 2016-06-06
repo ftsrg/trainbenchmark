@@ -14,6 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import java.util.Collection;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.ParseException;
+
 import com.google.common.collect.ImmutableList;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
@@ -34,6 +37,7 @@ public class BenchmarkConfig extends AbstractConfig {
 
 	protected String toolName;
 	protected String modelPath;
+	protected CommandLine cmd;
 	
 	// constants for the transformation
 	protected TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
@@ -56,8 +60,8 @@ public class BenchmarkConfig extends AbstractConfig {
 		this.transformationConstant = transformationConstant;
 	}
 
-//	@Override
-//	protected void initOptions() {
+	@Override
+	protected void initOptions() {
 //		super.initOptions();
 //
 //		// the "size" and "queries" options are required for the BenchmarkConfig but not required for the GeneratorConfig
@@ -83,10 +87,9 @@ public class BenchmarkConfig extends AbstractConfig {
 //				"options: fixed -- modify a fixed number of elements, proportional -- modify a percentage of the elements based on the size of the results set");
 //		options.addOption(TRANSFORMATION_CONSTANT, true,
 //				"transformation constant for the transformation method (number of elements for fixed strategy, percentage for proportional strategy)");
-//	}
-//
-//	@Override
-//	public void processArguments(final String[] args) throws ParseException {
+	}
+
+	public void processArguments(final String[] args) throws ParseException {
 //		super.processArguments(args);
 //
 //		runs = new Integer(cmd.getOptionValue(RUNS));
@@ -102,7 +105,7 @@ public class BenchmarkConfig extends AbstractConfig {
 //		if (cmd.hasOption(TRANSFORMATION_CONSTANT)) {
 //			transformationConstant = new Long(cmd.getOptionValue(TRANSFORMATION_CONSTANT));
 //		}
-//	}
+	}
 
 	public TransformationStrategy getTransformationStrategy() {
 		return transformationStrategy;

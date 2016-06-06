@@ -9,6 +9,6 @@ script:
   - scripts/init-config.sh
   - scripts/install-python.sh
   - scripts/dep-graph.sh
-  - gradle build -x test
+  - scripts/install.sh
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y

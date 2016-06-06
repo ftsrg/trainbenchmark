@@ -1,7 +1,5 @@
-
-description = ''
 dependencies {
   compile project(':hu.bme.mit.trainbenchmark.benchmark.rdf')
-    compile group: 'org.openrdf.sesame', name: 'sesame-runtime', version:'2.7.16'
-    compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.7.10'
+  compile group: 'org.openrdf.sesame', name: 'sesame-runtime', version:'2.7.16'
+  compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.7.10'
 }
