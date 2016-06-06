@@ -27,6 +27,7 @@ include ':hu.bme.mit.trainbenchmark.generator.rdf'
 include ':hu.bme.mit.trainbenchmark.generator.sql'
 include ':hu.bme.mit.trainbenchmark.rdf'
 include ':hu.bme.mit.trainbenchmark.sql'
+include ':runner'
 
 project(':hu.bme.mit.trainbenchmark.benchmark').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark" as File
 project(':hu.bme.mit.trainbenchmark.benchmark.blazegraph').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.blazegraph" as File
@@ -56,3 +57,4 @@ project(':hu.bme.mit.trainbenchmark.generator.rdf').projectDir = "$rootDir/hu.bm
 project(':hu.bme.mit.trainbenchmark.generator.sql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.generator.sql" as File
 project(':hu.bme.mit.trainbenchmark.rdf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.rdf" as File
 project(':hu.bme.mit.trainbenchmark.sql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.sql" as File
+project(':runner').projectDir = "$rootDir/runner" as File

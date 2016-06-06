@@ -1,12 +1,13 @@
 dependencies {
-    compile group: 'log4j', name: 'log4j', version:'1.2.17'
-    compile group: 'org.eclipse.viatra', name: 'viatra-query-runtime', version:'1.2.1'
-    compile project(':hu.bme.mit.trainbenchmark.benchmark.emf')
+  compile group: 'log4j', name: 'log4j', version:'1.2.17'
+  compile group: 'org.eclipse.viatra', name: 'viatra-query-runtime', version:'1.2.1'
+  compile project(':hu.bme.mit.trainbenchmark.benchmark.emf')
 }
+
 sourceSets {
-    main {
-        java {
-            srcDir 'src-gen'
-        }
+  main {
+    java {
+      srcDir '.'
     }
+  }
 }
