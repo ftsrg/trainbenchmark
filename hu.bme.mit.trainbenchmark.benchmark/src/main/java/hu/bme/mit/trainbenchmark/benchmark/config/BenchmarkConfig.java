@@ -14,9 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import java.util.Collection;
 
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.ParseException;
-
 import com.google.common.collect.ImmutableList;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
@@ -35,19 +32,17 @@ public class BenchmarkConfig extends AbstractConfig {
 	// this must be specified by the user
 	protected int runs;
 
-	protected final String toolName;
-
+	protected String toolName;
+	protected String modelPath;
+	
 	// constants for the transformation
 	protected TransformationStrategy transformationStrategy = TransformationStrategy.FIXED;
 	protected long transformationConstant = 10;
 	protected int iterationCount = 10;
 
-	protected String className;
 	private Collection<RailwayOperation> railwayOperations;
 
-	public BenchmarkConfig(final String toolName, final String args[]) throws ParseException {
-		super(args);
-		this.toolName = toolName;
+	public BenchmarkConfig() {
 	}
 
 	public BenchmarkConfig(final String toolName, final ScenarioEnum scenario, final int size, final int runs, final RailwayQuery query,
@@ -61,53 +56,53 @@ public class BenchmarkConfig extends AbstractConfig {
 		this.transformationConstant = transformationConstant;
 	}
 
-	@Override
-	protected void initOptions() {
-		super.initOptions();
-
-		// the "size" and "queries" options are required for the BenchmarkConfig but not required for the GeneratorConfig
-		options.getOption(SIZE).setRequired(true);
-		final Option queryOption = options.getOption(OPERATIONS);
-		queryOption.setRequired(true);
-		options.addOption(queryOption);
-
-		// runs
-		options.addOption(RUNS, true, "number of runs");
-		final Option runOption = options.getOption(RUNS);
-		runOption.setRequired(true);
-		options.addOption(runOption);
-
-		// model operations
-		final Option operations = new Option(OPERATIONS, true, "specifies the model operations, e.g. RouteSensor, PosLengthInject, SwitchSetRepair");
-		operations.setArgs(Option.UNLIMITED_VALUES);
-		options.addOption(operations);
-		
-		// constants for the transformation
-		options.addOption(ITERATION_COUNT, true, "number of transformation-recheck iterations");
-		options.addOption(TRANSFORMATION_STRATEGY, true,
-				"options: fixed -- modify a fixed number of elements, proportional -- modify a percentage of the elements based on the size of the results set");
-		options.addOption(TRANSFORMATION_CONSTANT, true,
-				"transformation constant for the transformation method (number of elements for fixed strategy, percentage for proportional strategy)");
-	}
-
-	@Override
-	public void processArguments(final String[] args) throws ParseException {
-		super.processArguments(args);
-
-		runs = new Integer(cmd.getOptionValue(RUNS));
-
-		if (cmd.hasOption(ITERATION_COUNT)) {
-			iterationCount = new Integer(cmd.getOptionValue(ITERATION_COUNT));
-		}
-
-		if (cmd.hasOption(TRANSFORMATION_STRATEGY)) {
-			transformationStrategy = TransformationStrategy.valueOf(cmd.getOptionValue(TRANSFORMATION_STRATEGY).toUpperCase());
-		}
-
-		if (cmd.hasOption(TRANSFORMATION_CONSTANT)) {
-			transformationConstant = new Long(cmd.getOptionValue(TRANSFORMATION_CONSTANT));
-		}
-	}
+//	@Override
+//	protected void initOptions() {
+//		super.initOptions();
+//
+//		// the "size" and "queries" options are required for the BenchmarkConfig but not required for the GeneratorConfig
+//		options.getOption(SIZE).setRequired(true);
+//		final Option queryOption = options.getOption(OPERATIONS);
+//		queryOption.setRequired(true);
+//		options.addOption(queryOption);
+//
+//		// runs
+//		options.addOption(RUNS, true, "number of runs");
+//		final Option runOption = options.getOption(RUNS);
+//		runOption.setRequired(true);
+//		options.addOption(runOption);
+//
+//		// model operations
+//		final Option operations = new Option(OPERATIONS, true, "specifies the model operations, e.g. RouteSensor, PosLengthInject, SwitchSetRepair");
+//		operations.setArgs(Option.UNLIMITED_VALUES);
+//		options.addOption(operations);
+//		
+//		// constants for the transformation
+//		options.addOption(ITERATION_COUNT, true, "number of transformation-recheck iterations");
+//		options.addOption(TRANSFORMATION_STRATEGY, true,
+//				"options: fixed -- modify a fixed number of elements, proportional -- modify a percentage of the elements based on the size of the results set");
+//		options.addOption(TRANSFORMATION_CONSTANT, true,
+//				"transformation constant for the transformation method (number of elements for fixed strategy, percentage for proportional strategy)");
+//	}
+//
+//	@Override
+//	public void processArguments(final String[] args) throws ParseException {
+//		super.processArguments(args);
+//
+//		runs = new Integer(cmd.getOptionValue(RUNS));
+//
+//		if (cmd.hasOption(ITERATION_COUNT)) {
+//			iterationCount = new Integer(cmd.getOptionValue(ITERATION_COUNT));
+//		}
+//
+//		if (cmd.hasOption(TRANSFORMATION_STRATEGY)) {
+//			transformationStrategy = TransformationStrategy.valueOf(cmd.getOptionValue(TRANSFORMATION_STRATEGY).toUpperCase());
+//		}
+//
+//		if (cmd.hasOption(TRANSFORMATION_CONSTANT)) {
+//			transformationConstant = new Long(cmd.getOptionValue(TRANSFORMATION_CONSTANT));
+//		}
+//	}
 
 	public TransformationStrategy getTransformationStrategy() {
 		return transformationStrategy;
@@ -130,17 +125,26 @@ public class BenchmarkConfig extends AbstractConfig {
 	}
 
 	public String getModelPath() {
-		return "../models/railway-repair-1.xmi";
+	//	return "../models/railway-repair-1.xmi";
+		return modelPath;
+	}
+
+	public void setModelPath(final String modelPath) {
+		this.modelPath = modelPath;
 	}
 
 	public Collection<RailwayOperation> getRailwayOperations() {
 		return railwayOperations;
-		
+	}
+	
+	public void setRailwayOperations(Collection<RailwayOperation> railwayOperations) {
+		this.railwayOperations = railwayOperations;
 	}
 	
 //	public String getCaseName() {
 //		final String queries = getQueries().toString().replaceAll("[\\[\\]]", "").replaceAll(", ","-");
 //		return queries;
 //	}
+
 	
 }

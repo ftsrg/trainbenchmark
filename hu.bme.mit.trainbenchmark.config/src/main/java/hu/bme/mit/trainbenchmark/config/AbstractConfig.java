@@ -13,15 +13,7 @@
 package hu.bme.mit.trainbenchmark.config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
 
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -32,67 +24,47 @@ public abstract class AbstractConfig {
 	protected static final String OPERATIONS = "operations";
 	protected static final String SIZE = "size";
 
-	protected final Options options = new Options();
-	protected final CommandLineParser parser = new PosixParser();
-	protected CommandLine cmd;
-
 	// arguments
 	protected List<RailwayQuery> operations = new ArrayList<>();
 	protected int maxMemory = 1000;
-
-	public AbstractConfig(final String args[]) throws ParseException {
-		initOptions();
-
-		if (Arrays.asList(args).contains("-help")) {
-			printHelp();
-			System.exit(0);
-		}
-
-		try {
-			processArguments(args);
-		} catch (final ParseException e) {
-			printHelp();
-			throw e;
-		}
-	}
 
 	public AbstractConfig() {
 	}
 
 	protected void initOptions() {
-		options.addOption(HELP, false, "displays this text");
-
-		// max memory
-		options.addOption(MAX_MEMORY, true, "denotes the maximum memory of the JVM in MBs, e.g. 10240 "
-				+ "(this only servers logging purposes, you still need to set Xmx accordingly)");
-
-
-	}
-
-	protected void processArguments(final String[] args) throws ParseException {
-		cmd = parser.parse(options, args);
-
-		if (cmd.hasOption(MAX_MEMORY)) {
-			maxMemory = Integer.parseInt(cmd.getOptionValue(MAX_MEMORY));
-		}
-
-		if (cmd.hasOption(OPERATIONS)) {
-			final String[] queriesArguments = cmd.getOptionValues(OPERATIONS);
-
-			for (final String queriesArgument : queriesArguments) {
-				operations.add(RailwayQuery.valueOf(queriesArgument.toUpperCase()));
-			}
-		}
+//		options.addOption(HELP, false, "displays this text");
+//
+//		// max memory
+//		options.addOption(MAX_MEMORY, true, "denotes the maximum memory of the JVM in MBs, e.g. 10240 "
+//				+ "(this only servers logging purposes, you still need to set Xmx accordingly)");
+//
 
 	}
 
-	public void printHelp() {
-		final HelpFormatter formatter = new HelpFormatter();
-		formatter.setWidth(120);
-
-		formatter.printHelp("java -jar trainbenchmark-project-jarfile.jar [options]", "options:", options, "", false);
-		System.out.println();
-	}
+//	protected void processArguments(final String[] args) throws ParseException {
+//		cmd = parser.parse(options, args);
+//
+//		if (cmd.hasOption(MAX_MEMORY)) {
+//			maxMemory = Integer.parseInt(cmd.getOptionValue(MAX_MEMORY));
+//		}
+//
+//		if (cmd.hasOption(OPERATIONS)) {
+//			final String[] queriesArguments = cmd.getOptionValues(OPERATIONS);
+//
+//			for (final String queriesArgument : queriesArguments) {
+//				operations.add(RailwayQuery.valueOf(queriesArgument.toUpperCase()));
+//			}
+//		}
+//
+//	}
+//
+//	public void printHelp() {
+//		final HelpFormatter formatter = new HelpFormatter();
+//		formatter.setWidth(120);
+//
+//		formatter.printHelp("java -jar trainbenchmark-project-jarfile.jar [options]", "options:", options, "", false);
+//		System.out.println();
+//	}
 
 	public String getWorkspacePath() {
 		return "../";

@@ -16,7 +16,7 @@ public class SerializationMain {
 	    Kryo kryo = new Kryo();
 	    // ...
 	    Output output = new Output(new FileOutputStream("/tmp/file.bin"));
-	    BenchmarkConfig bc = new BenchmarkConfig("MyTool", args);
+	    BenchmarkConfig bc = new BenchmarkConfig();
 	    	    
 	    kryo.writeObject(output, bc);
 	    output.close();

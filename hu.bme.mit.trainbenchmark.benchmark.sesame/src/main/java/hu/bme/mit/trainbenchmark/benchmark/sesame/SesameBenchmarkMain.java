@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
-
 public class SesameBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RdfBenchmarkConfig benchmarkConfig = new RdfBenchmarkConfig("Sesame", args);
+//		final RdfBenchmarkConfig benchmarkConfig = new RdfBenchmarkConfig("Sesame", args);
 	}
 
 }
