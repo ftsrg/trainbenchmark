@@ -9,4 +9,5 @@ dependencies {
     compile group: 'org.hamcrest', name: 'hamcrest-junit', version:'1.0.0.0'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.4.4'
     compile group: 'com.google.guava', name: 'guava', version:'18.0'
+	compile group: 'com.esotericsoftware', name: 'kryo', version: '3.0.3'
 }

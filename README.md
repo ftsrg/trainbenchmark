@@ -48,6 +48,7 @@ scripts/init-config.sh && \
 scripts/install-python.sh && \
 scripts/install-jdk.sh && \
 scripts/install-maven.sh && \
+scripts/install-gradle.sh && \
 scripts/dep-graph.sh
 ```
 
@@ -82,7 +83,7 @@ To import the projects, choose **Import...** | **Gradle Project**, specify the r
 
 ### Naming conventions
 
-**Note.** To avoid confusion between the different implementations, we decided to use the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the Neo4j implementation are named `Neo4jBenchmarkCase`, `Neo4jPosLengthChecker`, `EmfApiPosLengthMatch`, `EmfApiPosLengthTransformation`, while the classes in the VIATRA implementation are named `ViatraBenchmarkCase`, `ViatraPosLengthChecker`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
+**Note.** To avoid confusion between the different implementations, we decided to naming similar to the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the EMF API implementation are named `EmfApiQueryPosLength`, `EmfApiQueryRouteSensor`, etc., while the classes in the VIATRA implementation are named `ViatraQueryPosLength`, `ViatraQueryRouteSensor`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
 
 ## Reporting tools
 
