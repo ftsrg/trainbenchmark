@@ -27,7 +27,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected Neo4jEngine engine;
 
 	public Neo4jBenchmarkConfig(final String[] args) throws ParseException {
-		super(NEO4J, args);
+		super();
 	}
 
 	public Neo4jBenchmarkConfig(final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query, final int iterationCount,
@@ -40,7 +40,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 
-		options.addOption(ENGINE, true, "query engine: coreapi (Core Java API), cypher (Cypher query language)");
+//		options.addOption(ENGINE, true, "query engine: coreapi (Core Java API), cypher (Cypher query language)");
 	}
 
 	@Override

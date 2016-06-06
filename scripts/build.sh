@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gradle installDist -x test
+gradle build -x test

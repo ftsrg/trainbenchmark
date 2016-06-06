@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.viatra.config;
 
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
@@ -27,7 +26,7 @@ public class ViatraBenchmarkConfig extends BenchmarkConfig {
 	protected ViatraBackend backend;
 
 	public ViatraBenchmarkConfig(final String[] args) throws ParseException {
-		super(VIATRA, args);
+		super();
 	}
 
 	public ViatraBenchmarkConfig(final ScenarioEnum scenario, final int size, final int runIndex, final RailwayQuery query,
@@ -42,10 +41,10 @@ public class ViatraBenchmarkConfig extends BenchmarkConfig {
 	protected void initOptions() {
 		super.initOptions();
 		
-		options.addOption(BACKEND, true, "set the backend for VIATRA Query. Options: incremental, localsearch.");
-		final Option backendOption = options.getOption(BACKEND);
-		backendOption.setRequired(true);
-		options.addOption(backendOption);
+//		options.addOption(BACKEND, true, "set the backend for VIATRA Query. Options: incremental, localsearch.");
+//		final Option backendOption = options.getOption(BACKEND);
+//		backendOption.setRequired(true);
+//		options.addOption(backendOption);
 	}
 
 	@Override
