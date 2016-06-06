@@ -52,6 +52,8 @@ scripts/install-gradle.sh && \
 scripts/dep-graph.sh
 ```
 
+Use [sdkman](http://sdkman.io/) to install the latest Groovy distribution (`sdk install groovy`).
+
 #### Optional dependencies
 
 Some tools require dependencies, e.g. installing a database manager or adding artifacts to your local Maven repository

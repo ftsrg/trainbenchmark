@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 public class SQLiteBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("SQLite", args);
+//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("SQLite", args);
 	}
 
 }

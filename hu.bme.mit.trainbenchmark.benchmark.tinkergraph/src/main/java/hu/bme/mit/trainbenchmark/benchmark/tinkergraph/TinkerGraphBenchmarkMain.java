@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-
 public class TinkerGraphBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("TinkerGraph", args);
+//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("TinkerGraph", args);
 	}
 
 }

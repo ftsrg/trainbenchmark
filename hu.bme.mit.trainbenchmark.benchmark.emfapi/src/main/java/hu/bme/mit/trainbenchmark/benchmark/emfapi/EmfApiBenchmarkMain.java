@@ -12,10 +12,21 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.operations.EmfApiModelOperationFactory;
+import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
 public class EmfApiBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("EMF_API", args);
+		EmfDriver driver = EmfDriver.create();
+		EmfApiModelOperationFactory<EmfDriver> factory = EmfApiModelOperationFactory.create();
+		EmfMatchComparator comparator = EmfMatchComparator.create();
+		BenchmarkConfig benchmarkConfig = new BenchmarkConfig();
+		
+		final BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfig> scenario = new BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfig>(driver, factory, comparator, benchmarkConfig);
+		scenario.runBenchmark();
 	}
 }

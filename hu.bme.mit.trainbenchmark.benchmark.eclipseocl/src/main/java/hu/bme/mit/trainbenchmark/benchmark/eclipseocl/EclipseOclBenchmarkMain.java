@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-
 public class EclipseOclBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Eclipse_OCL", args);
+//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Eclipse_OCL", args);
 //		final BenchmarkRunner benchmarkRunner = new BenchmarkRunner(benchmarkConfig, new EclipseOclBenchmarkCase<>());
 //		benchmarkRunner.runBenchmark();
 	}

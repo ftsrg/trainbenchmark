@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
-
 public class Neo4jBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Neo4jBenchmarkConfig benchmarkConfig = new Neo4jBenchmarkConfig(args);
+//		final Neo4jBenchmarkConfig benchmarkConfig = new Neo4jBenchmarkConfig(args);
 	}
 
 }

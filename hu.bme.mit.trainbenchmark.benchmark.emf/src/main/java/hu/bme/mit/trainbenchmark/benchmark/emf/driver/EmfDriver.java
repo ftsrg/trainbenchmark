@@ -36,9 +36,13 @@ public class EmfDriver extends Driver<RailwayElement> {
 	protected Resource resource;
 	protected final ResourceSet resourceSet = new ResourceSetImpl();
 
-	public EmfDriver() {
+	protected EmfDriver() {
 		super();
 		EmfUtil.registerExtension();
+	}
+	
+	public static EmfDriver create() {
+		return new EmfDriver();
 	}
 
 	@Override

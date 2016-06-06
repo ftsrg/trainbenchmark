@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-
 public class MySqlBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("MySQL", args);
+//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("MySQL", args);
 	}
 
 }

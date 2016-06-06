@@ -28,6 +28,14 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends ModelOperationFactory<EmfMatch, TDriver> {
 
+	protected EmfApiModelOperationFactory() {
+		
+	}
+	
+	public static <TDriver extends EmfDriver> EmfApiModelOperationFactory<TDriver> create() {		
+		return new EmfApiModelOperationFactory<>();
+	}
+	
 	@Override
 	public ModelOperation<? extends EmfMatch, TDriver> createOperation(
 			final RailwayOperation operationEnum, final TDriver driver) {

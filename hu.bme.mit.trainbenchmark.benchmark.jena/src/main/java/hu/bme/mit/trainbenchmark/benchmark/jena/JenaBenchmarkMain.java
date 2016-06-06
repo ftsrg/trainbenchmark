@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
-
 public class JenaBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RdfBenchmarkConfig benchmarkConfig = new RdfBenchmarkConfig("Jena", args);
+//		final RdfBenchmarkConfig benchmarkConfig = new RdfBenchmarkConfig("Jena", args);
 	}
 
 }
