@@ -1,6 +1,0 @@
-dependencies {
-  compile project(':hu.bme.mit.trainbenchmark.benchmark.viatra.patterns')
-  compile project(':hu.bme.mit.trainbenchmark.benchmark')
-  compile project(':hu.bme.mit.trainbenchmark.emf')
-  compile project(':hu.bme.mit.trainbenchmark.emf.model')
-}

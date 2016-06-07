@@ -1,0 +1,4 @@
+dependencies {
+  compile project(':trainbenchmark-tool-sesame')
+  compile group: 'com.bigdata', name: 'bigdata', version:'1.5.2'
+}

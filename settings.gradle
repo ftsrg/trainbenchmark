@@ -1,60 +1,30 @@
-rootProject.name = 'hu.bme.mit.trainbenchmark'
-include ':hu.bme.mit.trainbenchmark.benchmark'
-include ':hu.bme.mit.trainbenchmark.benchmark.blazegraph'
-include ':hu.bme.mit.trainbenchmark.benchmark.drools5'
-include ':hu.bme.mit.trainbenchmark.benchmark.drools6'
-include ':hu.bme.mit.trainbenchmark.benchmark.eclipseocl'
-include ':hu.bme.mit.trainbenchmark.benchmark.emf'
-include ':hu.bme.mit.trainbenchmark.benchmark.emfapi'
-include ':hu.bme.mit.trainbenchmark.benchmark.jena'
-include ':hu.bme.mit.trainbenchmark.benchmark.mysql'
-include ':hu.bme.mit.trainbenchmark.benchmark.neo4j'
-include ':hu.bme.mit.trainbenchmark.benchmark.rdf'
-include ':hu.bme.mit.trainbenchmark.benchmark.sesame'
-include ':hu.bme.mit.trainbenchmark.benchmark.sql'
-include ':hu.bme.mit.trainbenchmark.benchmark.sqlite'
-include ':hu.bme.mit.trainbenchmark.benchmark.tinkergraph'
-include ':hu.bme.mit.trainbenchmark.benchmark.viatra'
-include ':hu.bme.mit.trainbenchmark.benchmark.viatra.patterns'
-include ':hu.bme.mit.trainbenchmark.config'
-include ':hu.bme.mit.trainbenchmark.emf'
-include ':hu.bme.mit.trainbenchmark.emf.model'
-include ':hu.bme.mit.trainbenchmark.generator'
-include ':hu.bme.mit.trainbenchmark.generator.emf'
-include ':hu.bme.mit.trainbenchmark.generator.graph.neo4j'
-include ':hu.bme.mit.trainbenchmark.generator.graph'
-include ':hu.bme.mit.trainbenchmark.generator.rdf'
-include ':hu.bme.mit.trainbenchmark.generator.sql'
-include ':hu.bme.mit.trainbenchmark.rdf'
-include ':hu.bme.mit.trainbenchmark.sql'
-include ':runner'
-
-project(':hu.bme.mit.trainbenchmark.benchmark').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.blazegraph').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.blazegraph" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.drools5').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.drools5" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.drools6').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.drools6" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.eclipseocl').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.eclipseocl" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.emf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emf" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.emfapi').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.emfapi" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.jena').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.jena" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.mysql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.mysql" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.neo4j').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.neo4j" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.rdf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.rdf" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.sesame').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.sesame" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.sql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.sql" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.sqlite').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.sqlite" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.tinkergraph').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.tinkergraph" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.viatra').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.viatra" as File
-project(':hu.bme.mit.trainbenchmark.benchmark.viatra.patterns').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.benchmark.viatra.patterns" as File
-project(':hu.bme.mit.trainbenchmark.config').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.config" as File
-project(':hu.bme.mit.trainbenchmark.emf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.emf" as File
-project(':hu.bme.mit.trainbenchmark.emf.model').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.emf.model" as File
-project(':hu.bme.mit.trainbenchmark.generator').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.generator" as File
-project(':hu.bme.mit.trainbenchmark.generator.emf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.generator.emf" as File
-project(':hu.bme.mit.trainbenchmark.generator.graph.neo4j').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.generator.graph.neo4j" as File
-project(':hu.bme.mit.trainbenchmark.generator.graph').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.generator.graph.tinkerpop" as File
-project(':hu.bme.mit.trainbenchmark.generator.rdf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.generator.rdf" as File
-project(':hu.bme.mit.trainbenchmark.generator.sql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.generator.sql" as File
-project(':hu.bme.mit.trainbenchmark.rdf').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.rdf" as File
-project(':hu.bme.mit.trainbenchmark.sql').projectDir = "$rootDir/hu.bme.mit.trainbenchmark.sql" as File
-project(':runner').projectDir = "$rootDir/runner" as File
+rootProject.name = 'trainbenchmark'
+include ':trainbenchmark-config'
+include ':trainbenchmark-format-emf'
+include ':trainbenchmark-format-emf-model'
+include ':trainbenchmark-format-rdf'
+include ':trainbenchmark-format-sql'
+include ':trainbenchmark-generator'
+include ':trainbenchmark-generator-emf'
+include ':trainbenchmark-generator-graph'
+include ':trainbenchmark-generator-graph.neo4j'
+include ':trainbenchmark-generator-rdf'
+include ':trainbenchmark-generator-sql'
+include ':trainbenchmark-tool'
+include ':trainbenchmark-tool-blazegraph'
+include ':trainbenchmark-tool-drools5'
+include ':trainbenchmark-tool-drools6'
+include ':trainbenchmark-tool-eclipseocl'
+include ':trainbenchmark-tool-emf'
+include ':trainbenchmark-tool-emfapi'
+include ':trainbenchmark-tool-jena'
+include ':trainbenchmark-tool-mysql'
+include ':trainbenchmark-tool-neo4j'
+include ':trainbenchmark-tool-rdf'
+include ':trainbenchmark-tool-sesame'
+include ':trainbenchmark-tool-sql'
+include ':trainbenchmark-tool-sqlite'
+include ':trainbenchmark-tool-tinkergraph'
+include ':trainbenchmark-tool-viatra'
+include ':trainbenchmark-tool-viatra-patterns'
+include ':trainbenchmark-runner'

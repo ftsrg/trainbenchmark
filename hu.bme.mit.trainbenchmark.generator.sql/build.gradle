@@ -1,4 +1,0 @@
-dependencies {
-  compile project(':hu.bme.mit.trainbenchmark.generator')
-  compile project(':hu.bme.mit.trainbenchmark.sql')
-}
