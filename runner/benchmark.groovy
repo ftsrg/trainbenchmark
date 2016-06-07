@@ -1,4 +1,3 @@
-
 import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig
 
@@ -8,19 +7,16 @@ import com.esotericsoftware.kryo.io.Output
 
 def config = new BenchmarkConfig()
 config.modelPath = "../models/railway-repair-1.xmi"
-config.railwayOperations = [POSLENGTH_REPAIR, ROUTESENSOR_INJECT, SWITCHMONITORED]
+config.railwayOperations = [
+	POSLENGTH_REPAIR,
+	ROUTESENSOR_INJECT,
+	SWITCHMONITORED
+]
 
 println(config.modelPath)
 println(config.railwayOperations)
 
-def kryo = new Kryo()
-def output = new Output(new FileOutputStream("/tmp/file.bin"))
-kryo.writeObject(output, config)
-output.close()
-
-def input = new Input(new FileInputStream("/tmp/file.bin"))
-def someObject = kryo.readObject(input, BenchmarkConfig.class)
-println(someObject)
-input.close()
+config.saveToFile("/tmp/file.bin")
+BenchmarkConfig.fromFile("/tmp/file.bin")
 
 println("ls".execute().text)
