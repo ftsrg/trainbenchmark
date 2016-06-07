@@ -1,7 +1,0 @@
-apply plugin: 'application'
-
-mainClassName = 'hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkMain'
-
-dependencies {
-  compile project(':hu.bme.mit.trainbenchmark.benchmark.emf')
-}

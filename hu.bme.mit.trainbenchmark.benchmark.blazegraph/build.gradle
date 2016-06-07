@@ -1,4 +1,0 @@
-dependencies {
-  compile project(':hu.bme.mit.trainbenchmark.benchmark.sesame')
-  compile group: 'com.bigdata', name: 'bigdata', version:'1.5.2'
-}

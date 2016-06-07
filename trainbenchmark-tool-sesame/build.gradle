@@ -1,0 +1,5 @@
+dependencies {
+  compile project(':trainbenchmark-tool-rdf')
+  compile group: 'org.openrdf.sesame', name: 'sesame-runtime', version:'2.7.16'
+  compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.7.10'
+}

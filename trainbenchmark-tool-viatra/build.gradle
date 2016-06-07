@@ -1,0 +1,6 @@
+dependencies {
+  compile project(':trainbenchmark-tool-viatra-patterns')
+  compile project(':trainbenchmark-tool')
+  compile project(':trainbenchmark-format-emf')
+  compile project(':trainbenchmark-format-emf-model')
+}
