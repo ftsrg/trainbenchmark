@@ -6,8 +6,6 @@ jdk:
 install:
   -
 script:
-  - scripts/init-config.sh
-  - scripts/install-python.sh
   - scripts/dep-graph.sh
   - scripts/install.sh
 notifications:

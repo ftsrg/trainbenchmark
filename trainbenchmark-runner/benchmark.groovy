@@ -15,5 +15,8 @@ final BenchmarkConfigWrapper bcw = new BenchmarkConfigWrapper(bc)
 bcw.saveToFile("/tmp/file.bin")
 BenchmarkConfigWrapper.fromFile("/tmp/file.bin")
 
+def toolname = "emfapi"
+def projectname = "trainbenchmark-tool-${toolname}"
+def script = "bash -c ${projectname}/build/install/${projectname}/${projectname}"
 
-println("ls".execute().text)
+println script.execute().text
