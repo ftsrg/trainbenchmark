@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
-public class EmfApiBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig> extends EmfBenchmarkCase<EmfDriver, TBenchmarkConfig> {
+public class EmfApiBenchmarkCase<TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> extends EmfBenchmarkCase<EmfDriver, TBenchmarkConfigWrapper> {
 
 	@Override
-	public EmfDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+	public EmfDriver createDriver(final TBenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
 		return EmfDriver.create();
 	}
 

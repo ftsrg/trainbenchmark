@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.jena;
 public class JenaBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-//		final RdfBenchmarkConfig benchmarkConfig = new RdfBenchmarkConfig("Jena", args);
+//		final RdfBenchmarkConfigWrapper benchmarkConfig = new RdfBenchmarkConfigWrapper("Jena", args);
 	}
 
 }

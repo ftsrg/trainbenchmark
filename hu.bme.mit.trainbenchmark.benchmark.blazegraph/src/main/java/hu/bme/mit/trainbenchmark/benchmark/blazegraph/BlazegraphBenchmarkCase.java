@@ -13,14 +13,14 @@
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
 public class BlazegraphBenchmarkCase extends SesameBenchmarkCase {
 
 	@Override
-	public SesameDriver createDriver(final RdfBenchmarkConfig benchmarkConfig) throws Exception {
+	public SesameDriver createDriver(final RdfBenchmarkConfigWrapper benchmarkConfig) throws Exception {
 		return new BlazegraphDriver(benchmarkConfig.isInferencing());
 	}
 

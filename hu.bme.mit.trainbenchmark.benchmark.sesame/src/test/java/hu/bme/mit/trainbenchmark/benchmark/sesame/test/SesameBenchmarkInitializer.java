@@ -31,7 +31,7 @@ public class SesameBenchmarkInitializer extends TestBenchmarkInitializer {
 
 //	@Override
 //	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-//		final RdfBenchmarkConfig rbc = new RdfBenchmarkConfig("Sesame", scenario, size, runIndex, query, iterationCount,
+//		final RdfBenchmarkConfigWrapper rbc = new RdfBenchmarkConfigWrapper("Sesame", scenario, size, runIndex, query, iterationCount,
 //				transformationStrategy, transformationConstant, inferencing);
 //		return new BenchmarkRunner(rbc, new SesameBenchmarkCase());
 //	}

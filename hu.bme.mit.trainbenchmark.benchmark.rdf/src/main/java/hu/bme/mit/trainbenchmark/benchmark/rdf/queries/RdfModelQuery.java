@@ -11,9 +11,9 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf.queries;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class RdfModelQuery<TMatch, TDriver extends Driver<?>> extends ModelQuery<TMatch, TDriver> {
@@ -21,10 +21,11 @@ public abstract class RdfModelQuery<TMatch, TDriver extends Driver<?>> extends M
 	protected final RailwayQuery query;
 	protected final String queryPath;
 
-	public RdfModelQuery(final TDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) {
+	public RdfModelQuery(final TDriver driver, final RdfBenchmarkConfigWrapper benchmarkConfigWrapper, final RailwayQuery query) {
 		super(driver);
-		this.query = query; 
-		this.queryPath = benchmarkConfig.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + query + ".sparql";
+		this.query = query;
+		this.queryPath = benchmarkConfigWrapper.getBenchmarkConfig().getWorkspacePath()
+				+ "hu.bme.mit.trainbenchmark.benchmark.rdf/src/main/resources/queries/" + query + ".sparql";
 	}
 
 }

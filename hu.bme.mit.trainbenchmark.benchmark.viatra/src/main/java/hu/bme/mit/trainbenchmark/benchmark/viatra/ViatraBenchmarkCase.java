@@ -17,7 +17,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.comparators.ViatraMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
@@ -26,10 +26,10 @@ public class ViatraBenchmarkCase<TMatch extends BasePatternMatch> extends Abstra
 TMatch, //
 RailwayElement, //
 ViatraBaseDriver<TMatch>, //
-ViatraBenchmarkConfig> {
+ViatraBenchmarkConfigWrapper> {
 
 	@Override
-	public ViatraDriver<TMatch> createDriver(final ViatraBenchmarkConfig benchmarkConfig) throws Exception {
+	public ViatraDriver<TMatch> createDriver(final ViatraBenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
 		return new ViatraDriver<>();
 	}
 

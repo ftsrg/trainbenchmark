@@ -65,8 +65,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		// header file (DDL operations)
 		final String headerFileDirectory = generatorConfig.getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
-		final String headerFilePath = headerFileDirectory
-				+ (generatorConfig.isMemSQL() ? "railway-header-memsql.sql" : "railway-header.sql");
+		final String headerFilePath = headerFileDirectory + "railway-header.sql";
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
@@ -103,7 +102,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };
 		final Process processLoad = rt.exec(commandLoad);
 		processLoad.waitFor();
-		
+
 		final String mysqlDumpPath = generatorConfig.getModelPathWithoutExtension() + "-mysql.sql";
 		final String sqliteDumpPath = generatorConfig.getModelPathWithoutExtension() + "-sqlite.sql";
 
@@ -112,10 +111,10 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		final Process processDump = rt.exec(commandDump);
 		processDump.waitFor();
 
-		final String[] sqliteDump = { "/bin/bash", "-c",
-				generatorConfig.getWorkspacePath() + "/hu.bme.mit.trainbenchmark.sql/scripts/mysql2sqlite.sh " + mysqlDumpPath+ " > " + sqliteDumpPath };
+		final String[] sqliteDump = { "/bin/bash", "-c", generatorConfig.getWorkspacePath()
+				+ "/hu.bme.mit.trainbenchmark.sql/scripts/mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath };
 		final Process processSqlite = rt.exec(sqliteDump);
-		processSqlite.waitFor();	
+		processSqlite.waitFor();
 	}
 
 	@Override

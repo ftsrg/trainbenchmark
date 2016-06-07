@@ -31,7 +31,7 @@ public class ViatraBenchmarkInitializer extends TestBenchmarkInitializer {
 
 //	@Override
 //	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-//		final ViatraBenchmarkConfig benchmarkConfig = new ViatraBenchmarkConfig(scenario, size, 1, query,
+//		final ViatraBenchmarkConfigWrapper benchmarkConfig = new ViatraBenchmarkConfigWrapper(scenario, size, 1, query,
 //				iterationCount, transformationStrategy, transformationConstant, backend);
 //		return new BenchmarkRunner(benchmarkConfig, new ViatraBenchmarkCase());
 //	}

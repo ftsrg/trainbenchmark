@@ -12,15 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SqlBenchmarkCase;
 
-public class MySqlBenchmarkCase extends SqlBenchmarkCase<BenchmarkConfig, MySqlDriver> {
+public class MySqlBenchmarkCase extends SqlBenchmarkCase<BenchmarkConfigWrapper, MySqlDriver> {
 
 	@Override
-	public MySqlDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new MySqlDriver(benchmarkConfig.getMaxMemory());
+	public MySqlDriver createDriver(final BenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
+		return new MySqlDriver();
 	}
 
 }

@@ -18,7 +18,7 @@ public class BlazegraphBenchmarkInitializer extends TestBenchmarkInitializer {
 
 //	@Override
 //	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-//		final RdfBenchmarkConfig rbc = new RdfBenchmarkConfig("Blazegraph", scenario, size, runIndex, query, iterationCount,
+//		final RdfBenchmarkConfigWrapper rbc = new RdfBenchmarkConfigWrapper("Blazegraph", scenario, size, runIndex, query, iterationCount,
 //				transformationStrategy, transformationConstant, false);
 //		return new BenchmarkRunner(rbc, new BlazegraphBenchmarkCase());
 //	}

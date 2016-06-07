@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
 
-public class Drools5BenchmarkCase extends EmfBenchmarkCase<Drools5Driver, BenchmarkConfig> {
+public class Drools5BenchmarkCase extends EmfBenchmarkCase<Drools5Driver, BenchmarkConfigWrapper> {
 
 	@Override
-	public Drools5Driver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
+	public Drools5Driver createDriver(final BenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
 		return new Drools5Driver();
 	}
 

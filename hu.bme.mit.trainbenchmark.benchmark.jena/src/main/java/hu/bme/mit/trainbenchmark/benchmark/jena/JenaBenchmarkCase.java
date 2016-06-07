@@ -20,13 +20,13 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.comparators.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 
-public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RdfBenchmarkConfig> {
+public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RdfBenchmarkConfigWrapper> {
 
 	@Override
-	public JenaDriver createDriver(final RdfBenchmarkConfig benchmarkConfig) throws Exception {
-		return new JenaDriver(benchmarkConfig.isInferencing());
+	public JenaDriver createDriver(final RdfBenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
+		return new JenaDriver(benchmarkConfigWrapper.isInferencing());
 	}
 
 	@Override

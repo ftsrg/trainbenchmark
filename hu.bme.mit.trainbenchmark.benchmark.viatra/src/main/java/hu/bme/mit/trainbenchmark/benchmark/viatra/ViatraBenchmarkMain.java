@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra;
 public class ViatraBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-//		final ViatraBenchmarkConfig benchmarkConfig = new ViatraBenchmarkConfig(args);
+//		final ViatraBenchmarkConfigWrapper benchmarkConfig = new ViatraBenchmarkConfigWrapper(args);
 	}
 
 }

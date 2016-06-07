@@ -9,18 +9,28 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
+package hu.bme.mit.trainbenchmark.benchmark.rdf;
+
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOclBenchmarkCase<T extends RailwayElement> extends EmfBenchmarkCase<EmfDriver, BenchmarkConfigWrapper> {
+public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	@Override
-	public EmfDriver createDriver(final BenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
-		return EmfDriver.create();
+	protected final boolean inferencing;
+
+	public RdfBenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig, final boolean inferencing) {
+		super(benchmarkConfig);
+		this.inferencing = inferencing;
 	}
-
+	
+	public boolean isInferencing() {
+		return inferencing;
+	}
+	
+	@Override
+	public String getToolNamePostfix() {
+		return isInferencing() ? "(Inferencing)" : "(No_Inferencing)";
+	}
+	
 }

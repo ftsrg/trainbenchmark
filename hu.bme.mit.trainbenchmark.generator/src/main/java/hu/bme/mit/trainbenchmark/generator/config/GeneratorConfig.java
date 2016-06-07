@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.generator.config;
 
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
@@ -35,27 +34,27 @@ public class GeneratorConfig extends AbstractConfig {
 		super();
 	}
 
-	@Override
-	protected void initOptions() {
-		super.initOptions();
+	// @Override
+	// protected void initOptions() {
+	// super.initOptions();
+	//
+	// // scenario
+	// final Option scenarioOption = new Option(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
+	// scenarioOption.setRequired(true);
+	// options.addOption(scenarioOption);
+	//
+	// // size
+	// options.addOption(SIZE, true, "specifies model size, e.g. 4");
+	// }
 
-		// scenario
-		final Option scenarioOption = new Option(SCENARIO, true, "specifies the scenario, e.g. Batch/Inject/Repair");
-		scenarioOption.setRequired(true);
-		options.addOption(scenarioOption);
-
-		// size
-		options.addOption(SIZE, true, "specifies model size, e.g. 4");
-	}
-
-	protected void processArguments(String[] args) throws ParseException {
-//		
-//		scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
-//
-//		if (cmd.hasOption(SIZE)) {
-//			size = Integer.parseInt(cmd.getOptionValue(SIZE));
-//		}
-	}
+	// protected void processArguments(String[] args) throws ParseException {
+	//
+	// scenario = ScenarioEnum.valueOf(cmd.getOptionValue(SCENARIO).toUpperCase());
+	//
+	// if (cmd.hasOption(SIZE)) {
+	// size = Integer.parseInt(cmd.getOptionValue(SIZE));
+	// }
+	// }
 
 	// public String getScenarioName() {
 	// return WordUtils.capitalizeFully(scenario.toString());
@@ -77,7 +76,7 @@ public class GeneratorConfig extends AbstractConfig {
 		filenameBuilder.append(size);
 		return filenameBuilder.toString();
 	}
-	
+
 	public String getModelPathWithoutExtension() {
 		final String filename = getModelFileNameWithoutExtension();
 		return getModelsPath() + filename;

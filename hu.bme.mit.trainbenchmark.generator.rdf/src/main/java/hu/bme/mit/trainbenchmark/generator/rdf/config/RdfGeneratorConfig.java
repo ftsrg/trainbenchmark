@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf.config;
 
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
@@ -30,24 +29,24 @@ public class RdfGeneratorConfig extends GeneratorConfig {
 		super(args);
 	}
 
-	@Override
-	protected void initOptions() {
-		super.initOptions();
-
-		options.addOption(INFERRED, false, "insert the inferred tuples instead of inserting the metamodel");
-		options.addOption(FORMAT, true, "specify the format: turtle (default), ntriples");
-		Option formatOption = options.getOption(FORMAT);
-		formatOption.setRequired(true);
-		options.addOption(formatOption);
-	}
-
-	@Override
-	protected void processArguments(final String[] args) throws ParseException {
-		super.processArguments(args);
-
-		inferred = cmd.hasOption(INFERRED);
-		format = RdfFormat.valueOf(cmd.getOptionValue(FORMAT).toUpperCase());
-	}
+//	@Override
+//	protected void initOptions() {
+//		super.initOptions();
+//
+//		options.addOption(INFERRED, false, "insert the inferred tuples instead of inserting the metamodel");
+//		options.addOption(FORMAT, true, "specify the format: turtle (default), ntriples");
+//		Option formatOption = options.getOption(FORMAT);
+//		formatOption.setRequired(true);
+//		options.addOption(formatOption);
+//	}
+//
+//	@Override
+//	protected void processArguments(final String[] args) throws ParseException {
+//		super.processArguments(args);
+//
+//		inferred = cmd.hasOption(INFERRED);
+//		format = RdfFormat.valueOf(cmd.getOptionValue(FORMAT).toUpperCase());
+//	}
 
 	public boolean isInferred() {
 		return inferred;

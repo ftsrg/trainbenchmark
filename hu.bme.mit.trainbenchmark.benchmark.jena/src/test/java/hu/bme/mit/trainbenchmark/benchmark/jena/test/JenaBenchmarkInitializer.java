@@ -31,7 +31,7 @@ public class JenaBenchmarkInitializer extends TestBenchmarkInitializer {
 
 //	@Override
 //	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-//		final RdfBenchmarkConfig rbc = new RdfBenchmarkConfig("Jena", scenario, size, 1, query, iterationCount,
+//		final RdfBenchmarkConfigWrapper rbc = new RdfBenchmarkConfigWrapper("Jena", scenario, size, 1, query, iterationCount,
 //				transformationStrategy, transformationConstant, inferencing);
 //		return new BenchmarkRunner(rbc, new JenaBenchmarkCase());
 //	}
