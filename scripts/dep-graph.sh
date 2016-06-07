@@ -8,5 +8,5 @@ if [ ! -d neo4j-shell-tools ]; then
 fi
 cd neo4j-shell-tools
 git checkout 2.3
-mvn clean install -DskipTests
+mvn clean install -DskipTests -q
 cd ..
