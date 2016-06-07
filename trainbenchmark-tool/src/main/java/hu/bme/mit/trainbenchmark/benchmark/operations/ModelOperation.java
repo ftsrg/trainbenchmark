@@ -30,7 +30,7 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 	public ModelOperation(final ModelQuery<TPatternMatch, TDriver> query) {
 		super();
 		this.query = query;
-		this.transformation = null;
+		this.transformation = Optional.empty();
 	}
 
 	public ModelOperation(final ModelQuery<TPatternMatch, TDriver> query,
@@ -54,8 +54,8 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 		return query;
 	}
 
-	public ModelTransformation<TPatternMatch, TDriver> getTransformation() {
-		return transformation.get();
+	public Optional<ModelTransformation<TPatternMatch, TDriver>> getTransformation() {
+		return transformation;
 	}	
 	
 }

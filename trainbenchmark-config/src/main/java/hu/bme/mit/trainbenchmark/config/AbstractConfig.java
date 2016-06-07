@@ -18,8 +18,4 @@ public abstract class AbstractConfig {
 		return "../";
 	}
 
-	public String getModelsPath() {
-		return getWorkspacePath() + "models/";
-	}
-
 }
