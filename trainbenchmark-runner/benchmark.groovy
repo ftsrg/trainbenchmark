@@ -1,19 +1,18 @@
 import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig
 
-final BenchmarkConfig config = new BenchmarkConfig()
-config.modelPath = "../models/railway-repair-1.xmi"
-config.railwayOperations = [
+def modelPath = "../models/railway-repair-1.xmi"
+def railwayOperations = [
 	POSLENGTH_REPAIR,
 	ROUTESENSOR_INJECT,
 	SWITCHMONITORED
 ]
+final BenchmarkConfig bc = new BenchmarkConfig(1, 5, "EMF API", modelPath, railwayOperations)
+final BenchmarkConfigWrapper bcw = new BenchmarkConfigWrapper(bc)
 
-println(config.modelPath)
-println(config.railwayOperations)
-
-config.saveToFile("/tmp/file.bin")
-BenchmarkConfig.fromFile("/tmp/file.bin")
+bcw.saveToFile("/tmp/file.bin")
+BenchmarkConfigWrapper.fromFile("/tmp/file.bin")
 
 
 println("ls".execute().text)
