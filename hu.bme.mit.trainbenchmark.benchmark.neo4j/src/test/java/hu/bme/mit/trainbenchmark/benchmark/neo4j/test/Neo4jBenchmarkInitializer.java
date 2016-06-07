@@ -32,7 +32,7 @@ public class Neo4jBenchmarkInitializer extends TestBenchmarkInitializer {
 	
 //	@Override
 //	protected BenchmarkRunner initializeBenchmark(final RailwayQuery query, final ScenarioEnum scenario) {
-//		final Neo4jBenchmarkConfig rbc = new Neo4jBenchmarkConfig(scenario, size, runIndex, query, iterationCount, transformationStrategy,
+//		final Neo4jBenchmarkConfigWrapper rbc = new Neo4jBenchmarkConfigWrapper(scenario, size, runIndex, query, iterationCount, transformationStrategy,
 //				transformationConstant, engine);
 //		return new BenchmarkRunner(rbc, new Neo4jBenchmarkCase());
 //	}

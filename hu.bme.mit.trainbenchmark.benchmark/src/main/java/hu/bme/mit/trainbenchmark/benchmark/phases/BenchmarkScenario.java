@@ -2,18 +2,19 @@ package hu.bme.mit.trainbenchmark.benchmark.phases;
 
 import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 
-public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchmarkConfig extends BenchmarkConfig> {
+public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
 
 	protected final PhaseExecutor phaseExecutor = new PhaseExecutor();
-	protected final BenchmarkExecutor<TPatternMatch, TDriver, TBenchmarkConfig> executor;
+	protected final BenchmarkExecutor<TPatternMatch, TDriver, TBenchmarkConfigWrapper> executor;
 
-	public BenchmarkScenario(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory, final Comparator<TPatternMatch> comparator, final TBenchmarkConfig benchmarkConfig) throws Exception {
-		executor = new BenchmarkExecutor<>(driver, factory, comparator, benchmarkConfig);
+	public BenchmarkScenario(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
+		executor = new BenchmarkExecutor<>(driver, factory, comparator, benchmarkConfigWrapper);
 
 	}
 

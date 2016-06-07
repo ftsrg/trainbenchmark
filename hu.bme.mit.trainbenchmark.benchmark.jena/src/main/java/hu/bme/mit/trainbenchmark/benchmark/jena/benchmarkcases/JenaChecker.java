@@ -25,7 +25,7 @@ import org.apache.jena.query.ResultSet;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -33,8 +33,9 @@ public class JenaChecker extends RdfModelQuery<JenaMatch, JenaDriver> {
 
 	protected Query jenaQuery;
 
-	public JenaChecker(final JenaDriver driver, final RdfBenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
-		super(driver, benchmarkConfig, query);
+	public JenaChecker(final JenaDriver driver, final RdfBenchmarkConfigWrapper benchmarkConfigWrapper, final RailwayQuery query)
+			throws IOException {
+		super(driver, benchmarkConfigWrapper, query);
 		this.jenaQuery = QueryFactory.read(queryPath);
 	}
 

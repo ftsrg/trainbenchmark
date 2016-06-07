@@ -14,23 +14,21 @@ package hu.bme.mit.trainbenchmark.benchmark.util;
 
 import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-
 public class Util {
 
-	public static long calcNumberOfObjectsToModify(final BenchmarkConfig benchmarkConfig, final int resultSize) {
-		final long transformationConstant = benchmarkConfig.getTransformationConstant();
-
-		switch (benchmarkConfig.getTransformationStrategy()) {
-		case FIXED:
-			return transformationConstant;
-		case PROPORTIONAL:
-			return resultSize / transformationConstant;
-		default:
-			throw new UnsupportedOperationException(
-					"Transformation strategy " + benchmarkConfig.getTransformationStrategy() + " not supported.");
-		}
-	}
+//	public static long calcNumberOfObjectsToModify(final BenchmarkConfig benchmarkConfig, final int resultSize) {
+//		final long transformationConstant = benchmarkConfig.getTransformationConstant();
+//
+//		switch (benchmarkConfig.getTransformationStrategy()) {
+//		case FIXED:
+//			return transformationConstant;
+//		case PROPORTIONAL:
+//			return resultSize / transformationConstant;
+//		default:
+//			throw new UnsupportedOperationException(
+//					"Transformation strategy " + benchmarkConfig.getTransformationStrategy() + " not supported.");
+//		}
+//	}
 
 	public static void executeCommand(final String commandStart, final String exceptionMessage) throws InterruptedException, IOException {
 		final Runtime rt = Runtime.getRuntime();

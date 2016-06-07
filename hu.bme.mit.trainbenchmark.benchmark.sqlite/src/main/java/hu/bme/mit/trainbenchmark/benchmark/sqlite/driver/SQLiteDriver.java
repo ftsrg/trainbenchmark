@@ -24,18 +24,6 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
 public class SQLiteDriver extends SqlDriver {
 
-	final int maxMemory;
-
-	/**
-	 * 
-	 * @param maxMemory
-	 *            maximum memory in megabytes
-	 */
-	public SQLiteDriver(int maxMemory) {
-		super();
-		this.maxMemory = maxMemory;
-	}
-
 	@Override
 	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
 		final String modelPath = modelPathWithoutExtension + getPostfix();

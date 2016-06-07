@@ -11,22 +11,31 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
+import java.util.Collection;
+
+import com.google.common.collect.ImmutableList;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.operations.EmfApiModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class EmfApiBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		EmfDriver driver = EmfDriver.create();
-		EmfApiModelOperationFactory<EmfDriver> factory = EmfApiModelOperationFactory.create();
-		EmfMatchComparator comparator = EmfMatchComparator.create();
-		BenchmarkConfig benchmarkConfig = new BenchmarkConfig();
+		final EmfDriver driver = EmfDriver.create();
+		final EmfApiModelOperationFactory<EmfDriver> factory = EmfApiModelOperationFactory.create();
+		final EmfMatchComparator comparator = EmfMatchComparator.create();
 		
-		final BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfig> scenario = new BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfig>(driver, factory, comparator, benchmarkConfig);
+		final Collection<RailwayOperation> operations = ImmutableList.of(RailwayOperation.CONNECTEDSEGMENTS);
+		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig(5, 10, "EMF API", "../models/railway-repair-1.xmi", operations);
+		final BenchmarkConfigWrapper benchmarkConfigWrapper = new BenchmarkConfigWrapper(benchmarkConfig);
+		
+		final BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, benchmarkConfigWrapper);
 		scenario.runBenchmark();
 	}
 }

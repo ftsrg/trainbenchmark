@@ -23,7 +23,7 @@ import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
@@ -83,7 +83,7 @@ public abstract class ViatraQuery<TMatch extends BasePatternMatch> extends Model
 		}
 	}
 
-	public static ViatraQuery<?> newInstance(final ViatraBenchmarkConfig benchmarkConfig,
+	public static ViatraQuery<?> newInstance(final ViatraBenchmarkConfigWrapper benchmarkConfig,
 			final ViatraBaseDriver driver, final RailwayQuery query) {
 		ViatraBackend backend = benchmarkConfig.getBackend();
 		switch (query) {

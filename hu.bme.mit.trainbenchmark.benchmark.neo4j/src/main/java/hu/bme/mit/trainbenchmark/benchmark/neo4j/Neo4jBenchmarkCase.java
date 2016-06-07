@@ -18,15 +18,15 @@ import org.neo4j.graphdb.Node;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators.Neo4jMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 
-public class Neo4jBenchmarkCase<Neo4jChecker> extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfig> {
+public class Neo4jBenchmarkCase<Neo4jChecker> extends AbstractBenchmarkCase<Neo4jMatch, Node, Neo4jDriver, Neo4jBenchmarkConfigWrapper> {
 
 	@Override
-	public Neo4jDriver createDriver(final Neo4jBenchmarkConfig benchmarkConfig) throws Exception {
-		return new Neo4jDriver(benchmarkConfig.getWorkspacePath());
+	public Neo4jDriver createDriver(final Neo4jBenchmarkConfigWrapper benchmarkConfig) throws Exception {
+		return new Neo4jDriver(benchmarkConfig.getBenchmarkConfig().getWorkspacePath());
 	}
 	
 	@Override

@@ -9,18 +9,28 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
+
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOclBenchmarkCase<T extends RailwayElement> extends EmfBenchmarkCase<EmfDriver, BenchmarkConfigWrapper> {
+public class Neo4jBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	@Override
-	public EmfDriver createDriver(final BenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
-		return EmfDriver.create();
+	protected Neo4jEngine engine;
+
+	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig, final Neo4jEngine engine) {
+		super(benchmarkConfig);
+		this.engine = engine;
 	}
-
+	
+	public Neo4jEngine getEngine() {
+		return engine;
+	}
+	
+	@Override
+	public String getToolNamePostfix() {
+		return "(" + engine.toString() + ")";
+	}
+	
 }

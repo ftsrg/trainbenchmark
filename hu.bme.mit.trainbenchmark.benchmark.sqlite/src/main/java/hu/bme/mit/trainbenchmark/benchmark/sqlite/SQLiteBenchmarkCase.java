@@ -12,15 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sqlite;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SqlBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 
-public class SQLiteBenchmarkCase extends SqlBenchmarkCase<BenchmarkConfig, SQLiteDriver> {
+public class SQLiteBenchmarkCase extends SqlBenchmarkCase<BenchmarkConfigWrapper, SQLiteDriver> {
 
 	@Override
-	public SQLiteDriver createDriver(final BenchmarkConfig benchmarkConfig) throws Exception {
-		return new SQLiteDriver(benchmarkConfig.getMaxMemory());
+	public SQLiteDriver createDriver(final BenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
+		return new SQLiteDriver();
 	}
 
 }

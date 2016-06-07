@@ -14,13 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases;
 import java.util.Comparator;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.comparators.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
-public abstract class SqlBenchmarkCase<TBenchmarkConfig extends BenchmarkConfig, TSqlDriver extends SqlDriver>
-		extends AbstractBenchmarkCase<LongMatch, Long, TSqlDriver, TBenchmarkConfig> {
+public abstract class SqlBenchmarkCase<TBenchmarkConfigWrapper extends BenchmarkConfigWrapper, TSqlDriver extends SqlDriver>
+		extends AbstractBenchmarkCase<LongMatch, Long, TSqlDriver, TBenchmarkConfigWrapper> {
 
 	@Override
 	public Comparator<LongMatch> getMatchComparator() {

@@ -28,16 +28,16 @@ public class TinkerPopGraphGeneratorConfig extends GeneratorConfig {
 		options.addOption(graphFormatOption);
 	}
 
-	@Override
-	protected void processArguments(final String[] args) throws ParseException {
-		super.processArguments(args);
-
-		if (cmd.hasOption(GRAPH_FORMAT)) {
-			graphFormat = GraphFormat.valueOf(cmd.getOptionValue(GRAPH_FORMAT).toUpperCase());
-		} else {
-			graphFormat = GraphFormat.GRAPHSON;
-		}
-	}
+//	@Override
+//	protected void processArguments(final String[] args) throws ParseException {
+//		super.processArguments(args);
+//
+//		if (cmd.hasOption(GRAPH_FORMAT)) {
+//			graphFormat = GraphFormat.valueOf(cmd.getOptionValue(GRAPH_FORMAT).toUpperCase());
+//		} else {
+//			graphFormat = GraphFormat.GRAPHSON;
+//		}
+//	}
 
 	public GraphFormat getGraphFormat() {
 		return graphFormat;

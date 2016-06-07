@@ -12,12 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
-
 public class BlazegraphBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RdfBenchmarkConfig rdfBenchmarkConfig = new RdfBenchmarkConfig("Blazegraph", args);
+		
 
 	}
 

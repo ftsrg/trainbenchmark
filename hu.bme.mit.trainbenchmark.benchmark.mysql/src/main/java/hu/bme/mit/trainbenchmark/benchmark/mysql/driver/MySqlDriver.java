@@ -24,18 +24,6 @@ import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
 
 public class MySqlDriver extends SqlDriver {
 
-	final int maxMemory;
-
-	/**
-	 * 
-	 * @param maxMemory
-	 *            maximum memory in megabytes
-	 */
-	public MySqlDriver(final int maxMemory) {
-		super();
-		this.maxMemory = maxMemory;
-	}
-
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true&useSSL=false";
 
 	@Override

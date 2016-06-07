@@ -9,18 +9,27 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
+package hu.bme.mit.trainbenchmark.benchmark.viatra.config;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases.EmfBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EclipseOclBenchmarkCase<T extends RailwayElement> extends EmfBenchmarkCase<EmfDriver, BenchmarkConfigWrapper> {
+public class ViatraBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+
+	protected final ViatraBackend backend;
+
+	public ViatraBenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig, final ViatraBackend backend) {
+		super(benchmarkConfig);
+		this.backend = backend;
+	}	
+	
+	public ViatraBackend getBackend() {
+		return backend;
+	}
 
 	@Override
-	public EmfDriver createDriver(final BenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
-		return EmfDriver.create();
+	public String getToolNamePostfix() {
+		return "(" + backend.toString() + ")";
 	}
 
 }

@@ -17,15 +17,15 @@ import java.util.Comparator;
 import org.openrdf.model.URI;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 
-public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RdfBenchmarkConfig> {
+public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RdfBenchmarkConfigWrapper> {
 
 	@Override
-	public SesameDriver createDriver(final RdfBenchmarkConfig benchmarkConfig) throws Exception {
+	public SesameDriver createDriver(final RdfBenchmarkConfigWrapper benchmarkConfig) throws Exception {
 		return new SesameDriver(benchmarkConfig.isInferencing());
 	}
 
