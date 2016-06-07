@@ -12,7 +12,8 @@ def railwayOperations = [
 final BenchmarkConfig bc = new BenchmarkConfig(1, 5, "EMF API", modelPath, railwayOperations)
 final BenchmarkConfigWrapper bcw = new BenchmarkConfigWrapper(bc)
 
-def configPath = "/tmp/file.bin"
+def configFile = File.createTempFile("trainbenchmark-", ".conf")
+def configPath = configFile.absolutePath;
 bcw.saveToFile(configPath)
 BenchmarkConfigWrapper.fromFile(configPath)
 
@@ -30,3 +31,5 @@ proc.consumeProcessOutput(sout, serr)
 proc.waitForOrKill(1000)
 println "out> $sout"
 println "err> $serr"
+
+configFile.deleteOnExit()
