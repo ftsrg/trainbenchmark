@@ -11,18 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
-import java.util.Collection;
-
-import com.google.common.collect.ImmutableList;
-
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.operations.EmfApiModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
-import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class EmfApiBenchmarkMain {
 
@@ -31,9 +25,7 @@ public class EmfApiBenchmarkMain {
 		final EmfApiModelOperationFactory<EmfDriver> factory = EmfApiModelOperationFactory.create();
 		final EmfMatchComparator comparator = EmfMatchComparator.create();
 		
-		final Collection<RailwayOperation> operations = ImmutableList.of(RailwayOperation.CONNECTEDSEGMENTS);
-		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig(5, 10, "EMF API", "../models/railway-repair-1.xmi", operations);
-		final BenchmarkConfigWrapper benchmarkConfigWrapper = new BenchmarkConfigWrapper(benchmarkConfig);
+		final BenchmarkConfigWrapper benchmarkConfigWrapper = BenchmarkConfigWrapper.fromFile(args[0]);
 		
 		final BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, benchmarkConfigWrapper);
 		scenario.runBenchmark();

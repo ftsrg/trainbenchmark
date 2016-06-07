@@ -31,7 +31,7 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	}
 
 	public void read() throws Exception {
-		driver.read(benchmarkConfigWrapper.getBenchmarkConfig().getModelsPath());
+		driver.read(benchmarkConfigWrapper.getBenchmarkConfig().getModelPath());
 	}
 
 	public void initializeOperations() throws Exception {
@@ -51,13 +51,17 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 
 	public void shuffle() {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
-			qst.shuffle(10);
+			if (qst.isTransformation()) {
+				qst.shuffle(10);				
+			}
 		}
 	}
 
 	public void transform() throws Exception {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
-			qst.transform();
+			if (qst.isTransformation()) {
+				qst.transform();
+			}
 		}
 	}
 
