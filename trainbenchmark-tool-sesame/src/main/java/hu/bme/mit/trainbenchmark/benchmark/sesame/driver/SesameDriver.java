@@ -56,10 +56,14 @@ public class SesameDriver extends RdfDriver<URI> {
 
 	protected final Comparator<URI> elementComparator = new UriComparator();
 
-	public SesameDriver(final boolean inferencing) {
+	protected SesameDriver(final boolean inferencing) {
 		super(inferencing);
 	}
 
+	public static SesameDriver create(final boolean inferencing) {
+		return new SesameDriver(inferencing);
+	}
+	
 	@Override
 	public void beginTransaction() {
 		vf = repository.getValueFactory();

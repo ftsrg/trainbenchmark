@@ -1,3 +1,6 @@
+apply plugin: 'application'
+mainClassName = 'hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkMain'
+
 dependencies {
   compile project(':trainbenchmark-tool-rdf')
   compile group: 'org.openrdf.sesame', name: 'sesame-runtime', version:'2.7.16'

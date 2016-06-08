@@ -1,1 +1,1 @@
-cloc . --exclude-dir=hu.bme.mit.trainbenchmark.benchmark.viatra.patterns
+cloc . --exclude-dir=trainbenchmark-tool-viatra-patterns

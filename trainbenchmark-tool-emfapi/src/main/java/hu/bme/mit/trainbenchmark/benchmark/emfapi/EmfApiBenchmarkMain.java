@@ -21,11 +21,11 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 public class EmfApiBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
+		final BenchmarkConfigWrapper benchmarkConfigWrapper = BenchmarkConfigWrapper.fromFile(args[0]);
+
 		final EmfDriver driver = EmfDriver.create();
 		final EmfApiModelOperationFactory<EmfDriver> factory = EmfApiModelOperationFactory.create();
 		final EmfMatchComparator comparator = EmfMatchComparator.create();
-		
-		final BenchmarkConfigWrapper benchmarkConfigWrapper = BenchmarkConfigWrapper.fromFile(args[0]);
 		
 		final BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, benchmarkConfigWrapper);
 		scenario.runBenchmark();

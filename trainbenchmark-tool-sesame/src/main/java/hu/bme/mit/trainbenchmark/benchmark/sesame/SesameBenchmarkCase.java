@@ -25,8 +25,8 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI, SesameDriver, RdfBenchmarkConfigWrapper> {
 
 	@Override
-	public SesameDriver createDriver(final RdfBenchmarkConfigWrapper benchmarkConfig) throws Exception {
-		return new SesameDriver(benchmarkConfig.isInferencing());
+	public SesameDriver createDriver(final RdfBenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception {
+		return SesameDriver.create(benchmarkConfigWrapper.isInferencing());
 	}
 
 	@Override

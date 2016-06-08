@@ -27,11 +27,10 @@ public final class BenchmarkConfig extends AbstractConfig {
 	
 	protected BenchmarkConfig() {}
 	
-	public BenchmarkConfig(final int runs, final int queryTransformatioCount, final String toolName, final String modelPath, final Collection<RailwayOperation> railwayOperations) {
+	public BenchmarkConfig(final int runs, final int queryTransformatioCount, final String modelPath, final Collection<RailwayOperation> railwayOperations) {
 		super();
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformatioCount;
-		this.toolName = toolName;
 		this.modelPath = modelPath;
 		this.railwayOperations = railwayOperations;
 	}

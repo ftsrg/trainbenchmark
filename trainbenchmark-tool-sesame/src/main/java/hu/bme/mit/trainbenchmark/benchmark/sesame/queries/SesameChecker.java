@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.queries;
 
 import java.io.File;
 import java.io.IOException;

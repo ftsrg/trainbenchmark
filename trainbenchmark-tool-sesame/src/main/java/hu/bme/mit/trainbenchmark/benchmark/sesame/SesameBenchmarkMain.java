@@ -12,10 +12,25 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.SesameMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.operations.SesameModelOperationFactory;
+
 public class SesameBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-//		final RdfBenchmarkConfigWrapper benchmarkConfig = new RdfBenchmarkConfigWrapper("Sesame", args);
+		final RdfBenchmarkConfigWrapper benchmarkConfigWrapper = RdfBenchmarkConfigWrapper.fromFile(args[0]);
+		
+		final SesameDriver driver = SesameDriver.create(benchmarkConfigWrapper.isInferencing());
+		final SesameModelOperationFactory factory = SesameModelOperationFactory.create();
+		final SesameMatchComparator comparator = SesameMatchComparator.create();
+		
+		final BenchmarkScenario<SesameMatch, SesameDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, benchmarkConfigWrapper);
+		scenario.runBenchmark();
 	}
 
 }
