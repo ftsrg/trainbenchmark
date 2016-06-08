@@ -12,6 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.rdf;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
@@ -31,6 +37,14 @@ public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	@Override
 	public String getToolNamePostfix() {
 		return isInferencing() ? "(Inferencing)" : "(No_Inferencing)";
+	}
+	
+	public static RdfBenchmarkConfigWrapper fromFile(final String path) throws FileNotFoundException {
+		final Kryo kryo = new Kryo();
+		try (final Input input = new Input(new FileInputStream(path))) {
+			final RdfBenchmarkConfigWrapper benchmarkConfig = kryo.readObject(input, RdfBenchmarkConfigWrapper.class);
+			return benchmarkConfig;
+		}
 	}
 	
 }
