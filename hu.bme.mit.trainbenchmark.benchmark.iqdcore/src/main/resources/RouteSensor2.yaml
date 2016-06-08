@@ -1,27 +1,31 @@
 input:
   edges:
-    target: [FollowsJoin.primary]
+    target: [SensorJoin.primary]
     follows: [FollowsJoin.secondary]
     monitoredBy: [SensorJoin.secondary]
     gathers: [AntiJoin.secondary]
 
 nodes:
-  - FollowsJoin:
-      type: HashJoiner
-      primaryLength: 2
-      primarySelector: Vector(0)
-      secondaryLength: 2
-      secondarySelector: Vector(1)
-      next: SensorJoin.primary
   - SensorJoin:
       type: HashJoiner
-      primaryLength: 3
+      primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
+      next: FollowsJoin.primary
+  - FollowsJoin:
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(1)
       next: AntiJoin.primary
   - AntiJoin:
       type: HashAntijoiner
-      primarySelector: Vector(2, 3)
+      primarySelector: Vector(3, 2)
       secondarySelector: Vector(0, 1)
+      next: Trim
+  - Trim:
+      type: Trimmer
+      selectionVector: Vector(1, 0, 3, 2)
       next: production
