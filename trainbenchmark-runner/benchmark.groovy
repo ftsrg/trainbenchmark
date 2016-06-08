@@ -9,7 +9,10 @@ def railwayOperations = [
 	ROUTESENSOR_INJECT,
 	SWITCHMONITORED,
 ]
-final BenchmarkConfig bc = new BenchmarkConfig(1, 5, "EMF API", modelPath, railwayOperations)
+def bc = new BenchmarkConfig(1, 5, "EMF API", modelPath, railwayOperations)
 
-final BenchmarkConfigWrapper bcw = new BenchmarkConfigWrapper(bc)
-BenchmarkRunner.runBenchmark(bcw)
+def emfCW = new BenchmarkConfigWrapper(bc)
+BenchmarkRunner.runBenchmark(emfCW)
+
+def emfCW2 = new BenchmarkConfigWrapper(bc)
+BenchmarkRunner.runBenchmark(emfCW2)
