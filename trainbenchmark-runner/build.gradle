@@ -1,19 +1,19 @@
-//apply plugin: 'groovy'
+apply plugin: 'groovy'
 
 dependencies {
-//  compile localGroovy()
+compile localGroovy()
   compile project(':trainbenchmark-tool')
 }
 
-//sourceSets {
-//  main {
-//    groovy {
-//      srcDirs = ['.', 'src/main/groovy/']
-//    }
-//  }
-//}
-//
-//task runScript(dependsOn: 'classes', type: JavaExec) {
-//  main = 'benchmark'
-//  classpath = sourceSets.main.runtimeClasspath
-//}
+sourceSets {
+  main {
+    groovy {
+      srcDirs = ['.']
+    }
+  }
+}
+
+task runScript(dependsOn: 'classes', type: JavaExec) {
+  main = 'benchmark'
+  classpath = sourceSets.main.runtimeClasspath
+}
