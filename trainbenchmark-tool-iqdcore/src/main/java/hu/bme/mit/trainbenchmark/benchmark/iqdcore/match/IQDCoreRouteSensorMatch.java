@@ -22,12 +22,12 @@ public class IQDCoreRouteSensorMatch extends IQDCoreMatch implements RouteSensor
 
 	@Override
 	public Long getSwP() {
-		return (Long) qs.apply(0);
+		return (Long) qs.apply(1);
 	}
 
     @Override
     public Long getSw() {
-        return (Long) qs.apply(1);
+        return (Long) qs.apply(0);
     }
 
 	@Override
