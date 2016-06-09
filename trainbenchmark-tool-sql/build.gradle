@@ -1,0 +1,4 @@
+dependencies {
+  compile project(':trainbenchmark-tool')
+  compile project(':trainbenchmark-format-sql')
+}
