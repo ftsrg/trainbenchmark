@@ -25,7 +25,7 @@ public abstract class RdfModelQuery<TMatch, TDriver extends Driver<?>> extends M
 	public RdfModelQuery(final TDriver driver, final Optional<String> queryDirectory, final RailwayQuery query) {
 		super(driver);
 		this.query = query;
-		this.queryPath =  queryDirectory + "src/main/resources/queries/" + query + ".sparql";
+		this.queryPath = queryDirectory.get() + "trainbenchmark-tool-rdf/src/main/resources/queries/" + query + ".sparql";
 	}
 
 }

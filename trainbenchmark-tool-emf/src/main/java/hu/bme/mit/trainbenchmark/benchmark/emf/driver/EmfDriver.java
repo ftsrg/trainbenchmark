@@ -47,8 +47,6 @@ public class EmfDriver extends Driver<RailwayElement> {
 
 	@Override
 	public void read(final String modelPath) throws Exception {
-		System.out.println("Loading model: " + modelPath);
-		
 		RailwayPackage.eINSTANCE.eClass();
 
 		final URI resourceURI = URI.createFileURI(modelPath);

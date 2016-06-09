@@ -21,7 +21,6 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.openrdf.repository.RepositoryException;
-import org.openrdf.rio.RDFParseException;
 
 import com.bigdata.rdf.sail.BigdataSail;
 import com.bigdata.rdf.sail.BigdataSailRepository;
@@ -49,11 +48,6 @@ public class BlazegraphDriver extends SesameDriver {
 	@Override
 	public void beginTransaction() {
 		vf = sail.getValueFactory();
-	}
-
-	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException, RepositoryException, RDFParseException {
-		load(modelPathWithoutExtension);
 	}
 
 	@Override
