@@ -3,15 +3,16 @@ apply plugin: 'groovy'
 dependencies {
 compile localGroovy()
   compile project(':trainbenchmark-tool')
+  compile project(':trainbenchmark-tool-rdf')
 }
 
-//sourceSets {
-//  main {
-//    groovy {
+sourceSets {
+  main {
+    groovy {
 //      srcDirs = ['.']
-//    }
-//  }
-//}
+    }
+  }
+}
 
 task runScript(dependsOn: 'classes', type: JavaExec) {
   main = 'benchmark'

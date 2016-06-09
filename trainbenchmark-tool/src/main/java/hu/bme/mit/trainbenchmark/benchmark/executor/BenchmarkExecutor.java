@@ -32,14 +32,16 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	}
 
 	public void read() throws Exception {
-		driver.read(bcw.getBenchmarkConfig().getModelPath());
+		final String modelPath = bcw.getBenchmarkConfig().getModelPath() + driver.getPostfix();
+		System.out.println("Loading " + modelPath);
+		driver.read(modelPath);
 	}
 
 	public void initializeOperations() throws Exception {
 		for (final RailwayOperation railwayOperation : bcw.getBenchmarkConfig().getRailwayOperations()) {
 
-			final Optional<String> queryDirectory = Optional.of(bcw.getBenchmarkConfig().getWorkspacePath()
-					+ "hu.bme.mit.trainbenchmark.benchmark.rdf/");
+			// TODO rename
+			final Optional<String> queryDirectory = Optional.of(bcw.getBenchmarkConfig().getWorkspacePath());
 
 			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
 					queryDirectory, driver);

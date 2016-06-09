@@ -7,7 +7,11 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.queries.SesameQuery;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -40,17 +44,22 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 			// PosLength
 		case POSLENGTH: {
-			// final EmfApiQuery<EmfPosLengthMatch, TDriver> query = new EmfApiQueryPosLength<>(driver);
-			// final ModelOperation<EmfPosLengthMatch, TDriver> operation = ModelOperation.of(query);
-			// return operation;
 			final SesameQuery<SesamePosLengthMatch> query = SesameQuery.create(driver, queryDirectory,
 					RailwayQuery.POSLENGTH);
+			final ModelOperation<SesamePosLengthMatch, SesameDriver> operation = ModelOperation.of(query);
+			return operation;
 
 		}
 		case POSLENGTH_INJECT: {
 			// TODO
 		}
 		case POSLENGTH_REPAIR: {
+			final SesameQuery<SesameRouteSensorMatch> query = SesameQuery.create(driver, queryDirectory,
+					RailwayQuery.POSLENGTH);
+			final SesameTransformation<SesameRouteSensorMatch> transformation = new SesameTransformationRepairRouteSensor(
+					driver);
+			final ModelOperation<SesameRouteSensorMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 
 		}
 
@@ -78,6 +87,10 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 			// SwitchMonitored
 		case SWITCHMONITORED: {
+			final SesameQuery<SesameSwitchMonitoredMatch> query = SesameQuery.create(driver, queryDirectory,
+					RailwayQuery.SWITCHMONITORED);
+			final ModelOperation<SesameSwitchMonitoredMatch, SesameDriver> operation = ModelOperation.of(query);
+			return operation;
 
 		}
 		case SWITCHMONITORED_INJECT: {

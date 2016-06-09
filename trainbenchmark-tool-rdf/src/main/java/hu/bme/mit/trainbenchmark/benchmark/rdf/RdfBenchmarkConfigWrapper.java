@@ -23,22 +23,25 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	protected final boolean inferencing;
+	protected boolean inferencing;
+
+	protected RdfBenchmarkConfigWrapper() {
+	}
 
 	public RdfBenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig, final boolean inferencing) {
 		super(benchmarkConfig);
 		this.inferencing = inferencing;
 	}
-	
+
 	public boolean isInferencing() {
 		return inferencing;
 	}
-	
+
 	@Override
 	public String getToolNamePostfix() {
 		return isInferencing() ? "(Inferencing)" : "(No_Inferencing)";
 	}
-	
+
 	public static RdfBenchmarkConfigWrapper fromFile(final String path) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
@@ -46,5 +49,5 @@ public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 			return benchmarkConfig;
 		}
 	}
-	
+
 }

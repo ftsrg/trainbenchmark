@@ -75,25 +75,21 @@ public class SesameDriver extends RdfDriver<URI> {
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension)
+	public void read(final String modelPath)
 			throws RepositoryException, RDFParseException, IOException, OpenRDFException {
 		if (inferencing) {
 			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {
 			repository = new SailRepository(new MemoryStore());
 		}
-		load(modelPathWithoutExtension);
-	}
 
-	protected void load(final String modelPathWithoutExtension)
-			throws RepositoryException, RDFParseException, IOException {
-		final File modelFile = new File(modelPathWithoutExtension + getPostfix());
+		final File modelFile = new File(modelPath);
 
 		repository.initialize();
 		connection = repository.getConnection();
 		connection.add(modelFile, RdfConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
-
+	
 	public Collection<? extends SesameMatch> runQuery(final RailwayQuery query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final Collection<SesameMatch> results = new ArrayList<>();
