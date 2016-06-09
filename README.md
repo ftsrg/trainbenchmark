@@ -79,7 +79,7 @@ The `scripts` directory contains the [`run.py`](scripts/run.py) script which is 
 
 The projects are developed and tested with **Eclipse Mars**.
 
-To develop the Train Benchmark, you need Gradle Eclipse plugin from the **Eclipse Marketplace**. If you use another distribution (e.g. Eclipse Modeling), you can install it from the Mars update site or the m2e update site (<http://download.eclipse.org/technology/m2e/releases>).
+To develop the Train Benchmark, you a Gradle Eclipse plugin from the **Eclipse Marketplace**, e.g. the **Buildship: Eclipse Plug-ins for Gradle**. Also install the Groovy tooling from <https://github.com/groovy/groovy-eclipse/wiki>.
 
 To import the projects, choose **Import...** | **Gradle Project**, specify the root directory as the repository directory and import them with the default **Gradle distribution** (**Gradle wrapper (recommended)**).
 

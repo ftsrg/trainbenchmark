@@ -5,13 +5,13 @@ compile localGroovy()
   compile project(':trainbenchmark-tool')
 }
 
-sourceSets {
-  main {
-    groovy {
-      srcDirs = ['.']
-    }
-  }
-}
+//sourceSets {
+//  main {
+//    groovy {
+//      srcDirs = ['.']
+//    }
+//  }
+//}
 
 task runScript(dependsOn: 'classes', type: JavaExec) {
   main = 'benchmark'

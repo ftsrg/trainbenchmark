@@ -35,7 +35,7 @@ public class JenaChecker extends RdfModelQuery<JenaMatch, JenaDriver> {
 
 	public JenaChecker(final JenaDriver driver, final RdfBenchmarkConfigWrapper benchmarkConfigWrapper, final RailwayQuery query)
 			throws IOException {
-		super(driver, benchmarkConfigWrapper, query);
+		super(driver, null, query);
 		this.jenaQuery = QueryFactory.read(queryPath);
 	}
 

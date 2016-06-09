@@ -1,5 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.operations;
 
+import java.util.Optional;
+
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
@@ -37,8 +39,8 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 	}
 	
 	@Override
-	public ModelOperation<? extends EmfMatch, TDriver> createOperation(
-			final RailwayOperation operationEnum, final TDriver driver) {
+	public ModelOperation<? extends EmfMatch, TDriver> createOperation(final RailwayOperation operationEnum,
+			final Optional<String> queryDirectory, final TDriver driver) throws Exception {
 
 		switch (operationEnum) {
 		// ConnectedSegments

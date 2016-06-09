@@ -1,5 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.operations;
 
+import java.util.Optional;
+
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
@@ -7,20 +9,21 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.queries.SesameQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SesameModelOperationFactory extends ModelOperationFactory<SesameMatch, SesameDriver> {
 
 	protected SesameModelOperationFactory() {
-		
+
 	}
-	
-	public static SesameModelOperationFactory create() {		
+
+	public static SesameModelOperationFactory create() {
 		return new SesameModelOperationFactory();
 	}
-	
+
 	@Override
-	public ModelOperation<? extends SesameMatch, SesameDriver> createOperation(
-			final RailwayOperation operationEnum, final SesameDriver driver) {
+	public ModelOperation<? extends SesameMatch, SesameDriver> createOperation(final RailwayOperation operationEnum,
+			final Optional<String> queryDirectory, final SesameDriver driver) throws Exception {
 
 		switch (operationEnum) {
 		// ConnectedSegments
@@ -30,20 +33,19 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 		case CONNECTEDSEGMENTS_INJECT: {
 			// TODO
 
-
-
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 
 		}
 
-		// PosLength
+			// PosLength
 		case POSLENGTH: {
-//			final EmfApiQuery<EmfPosLengthMatch, TDriver> query = new EmfApiQueryPosLength<>(driver);
-//			final ModelOperation<EmfPosLengthMatch, TDriver> operation = ModelOperation.of(query);
-//			return operation;
-			SesameQuery<SesamePosLengthMatch> query = new SesameQuery<>(driver, query);
-		
+			// final EmfApiQuery<EmfPosLengthMatch, TDriver> query = new EmfApiQueryPosLength<>(driver);
+			// final ModelOperation<EmfPosLengthMatch, TDriver> operation = ModelOperation.of(query);
+			// return operation;
+			final SesameQuery<SesamePosLengthMatch> query = SesameQuery.create(driver, queryDirectory,
+					RailwayQuery.POSLENGTH);
+
 		}
 		case POSLENGTH_INJECT: {
 			// TODO
@@ -52,7 +54,7 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 		}
 
-		// RouteSensor
+			// RouteSensor
 		case ROUTESENSOR: {
 
 		}
@@ -63,7 +65,7 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 		}
 
-		// SemaphoreNeighbor
+			// SemaphoreNeighbor
 		case SEMAPHORENEIGHBOR: {
 
 		}
@@ -74,7 +76,7 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 		}
 
-		// SwitchMonitored
+			// SwitchMonitored
 		case SWITCHMONITORED: {
 
 		}
@@ -85,7 +87,7 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 		}
 
-		// SwitchSet
+			// SwitchSet
 		case SWITCHSET: {
 
 		}
