@@ -4,7 +4,7 @@ source("util.R")
 # Individual / Runtime
 ####################################################################################################
 
-levels.individual = c("PosLength", "SwitchSensor", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
+levels.individual = c("PosLength", "SwitchMonitored", "RouteSensor", "SwitchSet", "ConnectedSegments", "SemaphoreNeighbor")
 results.individual = load("../results/results-individual-runtime.csv", levels.individual)
 times.individual = process.times(results.individual, F)
 
@@ -96,7 +96,7 @@ heatmap(df = times.individual.read.and.check.only,
 # Mix
 ####################################################################################################
 
-levels.mix = c("RouteSensor-ConnectedSegments-PosLength-SemaphoreNeighbor-SwitchSensor-SwitchSet");
+levels.mix = c("RouteSensor-ConnectedSegments-PosLength-SemaphoreNeighbor-SwitchMonitored-SwitchSet");
 
 ####################################################################################################
 # Mix / Memory

@@ -1,0 +1,17 @@
+package hu.bme.mit.trainbenchmark.benchmark.viatra
+
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
+
+pattern RouteSensor(route, sensor, swP, sw)
+{
+	Route.follows(route, swP);
+	SwitchPosition.target(swP, sw);
+	TrackElement.monitoredBy(sw, sensor);
+	
+	neg find inverseGathers(sensor, route);	
+}
+
+pattern inverseGathers(sensor, route)
+{
+	Route.gathers(route, sensor);
+}

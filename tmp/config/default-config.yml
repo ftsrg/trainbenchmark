@@ -1,0 +1,99 @@
+# Specify the minimum and maximum sizes for the scalable models.
+# The models are generated in sizes of powers of two,
+# e.g. if min_size = 1 and max_size = 8, the generated model sizes are 1, 2, 4 and 8.
+min_size: 1
+max_size: 1
+
+# Specify the options for the Java Virtual Machine. The options are copied to the "java" command invoking the JVM.
+# Options for the build.
+build_java_opts: []
+
+# Options for the generator.
+generator_java_opts: ["-Xms6G", "-Xmx6G"]
+
+# Options for the measurement.
+measurement_java_opts: []
+
+# Number of runs for the same tool/scenario/query/size.
+runs: 5
+
+# Timeout for the benchmark processes.
+timeout: 600
+
+# Set these values if you would like to receive an email if the benchmark is finished.
+#email:
+#  address: trainbenchmark@gmail.com
+#  password:
+#  host: smtp.gmail.com:587
+
+# Specify the queries to run.
+query_mixes:
+- ConnectedSegments
+- PosLength
+- RouteSensor
+- SemaphoreNeighbor
+- SwitchMonitored
+- SwitchSet
+#- RouteSensor ConnectedSegments PosLength SemaphoreNeighbor SwitchMonitored SwitchSet
+
+# Specify the scenarios for the benchmark and the generator.
+# You may also specify the benchmark arguments for each scenario.
+scenarios:
+- Batch:
+- Inject:
+    iterationCount: 20
+    transformationStrategy: fixed
+    transformationConstant: 10
+- Repair:
+    iterationCount: 8
+    transformationStrategy: proportional
+    transformationConstant: 5
+
+# Specify the name of the tools to run.
+# Disk-based tools are typically slower, hence they are listed at the end of each category.
+tools:
+# EMF
+- drools5:
+- drools6:
+- eclipseocl:
+- emfapi:
+- emfincquery:
+  - backend: incremental
+  - backend: localsearch
+# graph
+- neo4j:
+  - engine: coreapi
+  - engine: cypher
+- tinkergraph:
+# RDF
+- jena:
+  - inferencing: false
+  - inferencing: true
+- sesame:
+  - inferencing: false
+  - inferencing: true
+- blazegraph:
+#- iqdcore:
+# SQL
+- sqlite:
+- mysql:
+
+# If you run the script with the -f switch, the script will only generate the formats listed here.
+# Without the -f switch, this list is ignored by the script.
+formats:
+- emf:
+- graph.neo4j:
+- graph.tinkerpop:
+- rdf:
+  - inferred: on
+    format: turtle
+  - inferred: off
+    format: turtle
+#  - inferred: on
+#    format: ntriples
+- sql:
+
+# constants for the memory measurement
+memory_measurement:
+    max_levels: 8
+    max_memory: 12800
