@@ -2,11 +2,11 @@ import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.runner.BenchmarkRunner
+import hu.bme.mit.trainbenchmark.benchmark.runner.BenchmarkRunner
 
 def modelPath = "../models/railway-repair-1"
 def railwayOperations = [
-//	POSLENGTH_REPAIR,
+	POSLENGTH_REPAIR,
 	SWITCHMONITORED,
 ]
 def bc = new BenchmarkConfig(1, 5, modelPath, railwayOperations)

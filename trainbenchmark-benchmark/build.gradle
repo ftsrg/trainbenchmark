@@ -9,7 +9,7 @@ compile localGroovy()
 sourceSets {
   main {
     groovy {
-//      srcDirs = ['.']
+      srcDirs = ['.']
     }
   }
 }
