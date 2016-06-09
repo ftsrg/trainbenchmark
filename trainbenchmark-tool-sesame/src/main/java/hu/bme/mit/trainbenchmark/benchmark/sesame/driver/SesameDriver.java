@@ -94,7 +94,7 @@ public class SesameDriver extends RdfDriver<URI> {
 		connection.add(modelFile, RdfConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
 
-	public Collection<SesameMatch> runQuery(final RailwayQuery query, final String queryDefinition)
+	public Collection<? extends SesameMatch> runQuery(final RailwayQuery query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final Collection<SesameMatch> results = new ArrayList<>();
 
