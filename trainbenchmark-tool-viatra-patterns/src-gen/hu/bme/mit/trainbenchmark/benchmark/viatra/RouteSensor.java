@@ -1,0 +1,64 @@
+package hu.bme.mit.trainbenchmark.benchmark.viatra;
+
+import hu.bme.mit.trainbenchmark.benchmark.viatra.InverseGathersMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.InverseGathersQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+/**
+ * A pattern group formed of all patterns defined in RouteSensor.vql.
+ * 
+ * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
+ * a VIATRA Query engine for matching all patterns originally defined in file RouteSensor.vql,
+ * in order to achieve better performance than one-by-one on-demand matcher initialization.
+ * 
+ * <p> From package hu.bme.mit.trainbenchmark.benchmark.viatra, the group contains the definition of the following patterns: <ul>
+ * <li>RouteSensor</li>
+ * <li>inverseGathers</li>
+ * </ul>
+ * 
+ * @see IPatternGroup
+ * 
+ */
+@SuppressWarnings("all")
+public final class RouteSensor extends BaseGeneratedPatternGroup {
+  /**
+   * Access the pattern group.
+   * 
+   * @return the singleton instance of the group
+   * @throws ViatraQueryException if there was an error loading the generated code of pattern specifications
+   * 
+   */
+  public static RouteSensor instance() throws ViatraQueryException {
+    if (INSTANCE == null) {
+    	INSTANCE = new RouteSensor();
+    }
+    return INSTANCE;
+  }
+  
+  private static RouteSensor INSTANCE;
+  
+  private RouteSensor() throws ViatraQueryException {
+    querySpecifications.add(RouteSensorQuerySpecification.instance());
+    querySpecifications.add(InverseGathersQuerySpecification.instance());
+  }
+  
+  public RouteSensorQuerySpecification getRouteSensor() throws ViatraQueryException {
+    return RouteSensorQuerySpecification.instance();
+  }
+  
+  public RouteSensorMatcher getRouteSensor(final ViatraQueryEngine engine) throws ViatraQueryException {
+    return RouteSensorMatcher.on(engine);
+  }
+  
+  public InverseGathersQuerySpecification getInverseGathers() throws ViatraQueryException {
+    return InverseGathersQuerySpecification.instance();
+  }
+  
+  public InverseGathersMatcher getInverseGathers(final ViatraQueryEngine engine) throws ViatraQueryException {
+    return InverseGathersMatcher.on(engine);
+  }
+}
