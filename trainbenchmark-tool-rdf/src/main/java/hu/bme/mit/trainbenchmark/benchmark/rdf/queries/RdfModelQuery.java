@@ -11,10 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf.queries;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import src.main.java.hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 
 public abstract class RdfModelQuery<TMatch, TDriver extends Driver<?>> extends ModelQuery<TMatch, TDriver> {
 

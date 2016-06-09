@@ -20,24 +20,23 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.repository.RepositoryException;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SesameChecker extends RdfModelQuery<SesameMatch, SesameDriver> {
+public class SesameQuery<TPatternMatch extends SesameMatch> extends RdfModelQuery<TPatternMatch, SesameDriver> {
 	
 	protected final String queryDefinition;
 
-	public SesameChecker(final SesameDriver driver, final RdfBenchmarkConfigWrapper benchmarkConfig, final RailwayQuery query) throws IOException {
-		super(driver, benchmarkConfig, query);
+	public SesameQuery(final SesameDriver driver, final RailwayQuery query) throws IOException {
+		super(driver, query);
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 
 	@Override
-	public Collection<SesameMatch> evaluate() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-		return driver.runQuery(query, queryDefinition);
+	public Collection<TPatternMatch> evaluate() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+		return (Collection<TPatternMatch>) driver.runQuery(query, queryDefinition);
 	}
 
 }
