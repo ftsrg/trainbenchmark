@@ -4,6 +4,8 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.queries.SesameQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class SesameModelOperationFactory extends ModelOperationFactory<SesameMatch, SesameDriver> {
@@ -37,6 +39,11 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 		// PosLength
 		case POSLENGTH: {
+//			final EmfApiQuery<EmfPosLengthMatch, TDriver> query = new EmfApiQueryPosLength<>(driver);
+//			final ModelOperation<EmfPosLengthMatch, TDriver> operation = ModelOperation.of(query);
+//			return operation;
+			SesameQuery<SesamePosLengthMatch> query = new SesameQuery<>(driver, query);
+		
 		}
 		case POSLENGTH_INJECT: {
 			// TODO
