@@ -24,12 +24,10 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -39,6 +37,8 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.utils.ZipIterator;
+import hu.bme.mit.trainbenchmark.generator.utils.ZipUtils;
 
 public class ScalableModelGenerator extends ModelGenerator {
 
@@ -62,7 +62,6 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		super(serializer, generatorConfig);
-
 		maxRoutes = 5 * generatorConfig.getSize();
 		switch (generatorConfig.getScenario()) {
 		case BATCH:
@@ -99,7 +98,6 @@ public class ScalableModelGenerator extends ModelGenerator {
 		Object firstSemaphore = null;
 		List<Object> firstTracks = null;
 		List<Object> prevTracks = null;
-
 		for (long i = 0; i < maxRoutes; i++) {
 			boolean firstSegment = true;
 
@@ -135,10 +133,11 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 			final int swPs = random.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
-
+			final Set<Object> switches = new HashSet<>();
 			for (int j = 0; j < swPs; j++) {
 				final Object sw = serializer.createVertex(SWITCH);
 				currentTrack.add(sw);
+				switches.add(sw);
 
 				// (region)-[:elements]->(sw)
 				serializer.createEdge(ELEMENTS, region, sw);
@@ -203,6 +202,17 @@ public class ScalableModelGenerator extends ModelGenerator {
 				}
 				prevte = trackElement;
 			}
+
+			Stream<Object> objectStream = random.ints(0, currentTrack.size()).distinct()
+					.filter(id -> !switches.contains(currentTrack.get(id)))
+					.limit(switches.size()).mapToObj(currentTrack::get);
+			ZipUtils.zip(switches, objectStream, (sw, tr) -> {
+				try {
+					serializer.createEdge(CONNECTS_TO, sw, tr);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
 
 			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {
 				serializer.createEdge(CONNECTS_TO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
