@@ -37,17 +37,18 @@ public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuer
 	protected Query queryEvaluator;
 	protected RailwayContainer container;
 
-	public EclipseOclQuery(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws IOException, ParserException {
-		super(driver);
+	public EclipseOclQuery(final EmfDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
+			throws IOException, ParserException {
+		super(query, driver);
 
-		final String oclQuery = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.eclipseocl/src/main/resources/queries/.ocl"));
+		final String oclQueryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
+				+ "/trainbenchmark-tool-eclipseocl/src/main/resources/queries/" + query + ".ocl"));
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
 		helper.setContext(RailwayPackage.eINSTANCE.getRailwayContainer());
-		final OCLExpression query = helper.createQuery(oclQuery);
-		queryEvaluator = ocl.createQuery(query);
+		final OCLExpression expression = helper.createQuery(oclQueryDefinition);
+		queryEvaluator = ocl.createQuery(expression);
 	}
 
 	public static EclipseOclQuery<?> newInstance(final EmfDriver driver, final BenchmarkConfig benchmarkConfig,

@@ -32,12 +32,13 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitch
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
 public class TinkerGraphQuerySwitchSet extends TinkerGraphQuery<TinkerGraphSwitchSetMatch> {
 
 	public TinkerGraphQuerySwitchSet(final TinkerGraphDriver driver) {
-		super(driver);
+		super(RailwayQuery.SWITCHSET, driver);
 	}
 
 	@Override

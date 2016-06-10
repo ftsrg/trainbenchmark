@@ -20,6 +20,7 @@ import org.eclipse.ocl.util.Tuple;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
@@ -28,7 +29,7 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 public class EclipseOclQuerySemaphoreNeighbor extends EclipseOclQuery<EmfSemaphoreNeighborMatch> {
 
 	public EclipseOclQuerySemaphoreNeighbor(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
-		super(driver, benchmarkConfig);
+		super(driver, benchmarkConfig, RailwayQuery.SEMAPHORENEIGHBOR);
 	}
 
 	@Override

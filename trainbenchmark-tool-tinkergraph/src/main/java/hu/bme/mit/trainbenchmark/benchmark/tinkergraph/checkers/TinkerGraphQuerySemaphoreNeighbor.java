@@ -24,11 +24,12 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaph
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphQuerySemaphoreNeighbor extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch> {
 
 	public TinkerGraphQuerySemaphoreNeighbor(final TinkerGraphDriver driver) {
-		super(driver);
+		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
 	}
 
 	@Override

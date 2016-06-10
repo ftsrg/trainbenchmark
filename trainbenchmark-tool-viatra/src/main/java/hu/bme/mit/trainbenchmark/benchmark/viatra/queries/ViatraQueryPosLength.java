@@ -19,12 +19,13 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.PosLengthQuerySpecification;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQueryPosLength extends ViatraQuery<PosLengthMatch> {
 
 	public ViatraQueryPosLength(final ViatraBackend backend,
 			final ViatraBaseDriver<PosLengthMatch> driver) {
-		super(backend, driver);
+		super(RailwayQuery.POSLENGTH, backend, driver);
 	}
 
 	@Override

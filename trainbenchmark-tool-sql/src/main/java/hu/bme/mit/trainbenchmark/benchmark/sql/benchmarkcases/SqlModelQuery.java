@@ -27,13 +27,11 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SqlModelQuery<TSQLDriver extends SqlDriver> extends ModelQuery<SqlMatch, TSQLDriver> {
 
-	protected final RailwayQuery query;
 	protected final String queryDefinition; 
 	protected PreparedStatement statement;
 	
 	public SqlModelQuery(final TSQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
-		super(driver);
-		this.query = query;
+		super(query, driver);
 
 		final String queryPath = benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "queries/" + query + ".sql";
 		queryDefinition = FileUtils.readFileToString(new File(queryPath));

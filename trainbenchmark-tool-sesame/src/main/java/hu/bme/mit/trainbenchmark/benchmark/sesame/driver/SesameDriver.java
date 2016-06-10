@@ -24,6 +24,7 @@ import org.openrdf.OpenRDFException;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
+import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.BooleanQuery;
@@ -66,7 +67,6 @@ public class SesameDriver extends RdfDriver<URI> {
 	
 	@Override
 	public void beginTransaction() {
-		vf = repository.getValueFactory();
 	}
 
 	@Override
@@ -82,10 +82,11 @@ public class SesameDriver extends RdfDriver<URI> {
 		} else {
 			repository = new SailRepository(new MemoryStore());
 		}
-
+		
 		final File modelFile = new File(modelPath);
 
 		repository.initialize();
+		vf = repository.getValueFactory();
 		connection = repository.getConnection();
 		connection.add(modelFile, RdfConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}

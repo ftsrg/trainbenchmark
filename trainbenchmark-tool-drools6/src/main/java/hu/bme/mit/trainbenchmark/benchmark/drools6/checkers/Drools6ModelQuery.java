@@ -32,14 +32,12 @@ public class Drools6ModelQuery extends ModelQuery<EmfMatch, Drools6Driver> {
 	protected Collection<EmfMatch> matches = new HashSet<>();
 	protected Drools6ResultListener listener;
 	protected LiveQuery liveQuery;
-	protected RailwayQuery query;
 
 	public Drools6ModelQuery(final BenchmarkConfig benchmarkConfig, final Drools6Driver driver, final RailwayQuery query) throws IOException {
-		super(driver);
-		this.query = query;
+		super(query, driver);
 		
 		final String queryFile = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.drools6/src/main/resources/queries/" + query + ".drl";
+				+ "/trainbenchmark-tool-drools6/src/main/resources/queries/" + query + ".drl";
 		final File file = new File(queryFile);
 		if (!file.exists()) {
 			throw new IOException("Query file not found: " + queryFile);

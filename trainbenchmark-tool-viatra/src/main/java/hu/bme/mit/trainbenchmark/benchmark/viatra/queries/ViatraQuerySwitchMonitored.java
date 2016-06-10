@@ -19,11 +19,12 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredQuerySpecification;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQuerySwitchMonitored extends ViatraQuery<SwitchMonitoredMatch> {
 
 	public ViatraQuerySwitchMonitored(final ViatraBackend backend, final ViatraBaseDriver<SwitchMonitoredMatch> driver) {
-		super(backend, driver);
+		super(RailwayQuery.SWITCHMONITORED, backend, driver);
 	}
 
 	@Override

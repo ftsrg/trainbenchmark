@@ -19,12 +19,10 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class RdfModelQuery<TMatch, TDriver extends Driver<?>> extends ModelQuery<TMatch, TDriver> {
 
-	protected final RailwayQuery query;
 	protected final String queryPath;
 
 	public RdfModelQuery(final TDriver driver, final Optional<String> queryDirectory, final RailwayQuery query) {
-		super(driver);
-		this.query = query;
+		super(query, driver);
 		this.queryPath = queryDirectory.get() + "trainbenchmark-tool-rdf/src/main/resources/queries/" + query + ".sparql";
 	}
 

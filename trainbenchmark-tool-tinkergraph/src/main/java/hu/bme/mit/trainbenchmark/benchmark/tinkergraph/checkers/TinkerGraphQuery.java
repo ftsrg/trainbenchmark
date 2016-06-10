@@ -18,11 +18,11 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class TinkerGraphQuery<TMatch extends TinkerGraphMatch> extends ModelQuery<TMatch, TinkerGraphDriver> {
 
-	public TinkerGraphQuery(final TinkerGraphDriver driver) {
-		super(driver);
+	public TinkerGraphQuery(final RailwayQuery query, final TinkerGraphDriver driver) {
+		super(query, driver);
 	}
 
-	public static TinkerGraphQuery newInstance(final TinkerGraphDriver driver, final RailwayQuery query) {
+	public static TinkerGraphQuery newInstance(final RailwayQuery query, final TinkerGraphDriver driver) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new TinkerGraphQueryConnectedSegments(driver);

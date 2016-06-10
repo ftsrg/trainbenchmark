@@ -33,11 +33,12 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jCoreQuerySemaphoreNeighbor extends Neo4jCoreQuery<Neo4jSemaphoreNeighborMatch> {
 
 	public Neo4jCoreQuerySemaphoreNeighbor(final Neo4jDriver driver) {
-		super(driver);
+		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
 	}
 
 	@Override

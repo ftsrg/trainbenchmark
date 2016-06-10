@@ -19,11 +19,12 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorQuerySpecification;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQueryRouteSensor extends ViatraQuery<RouteSensorMatch> {
 
 	public ViatraQueryRouteSensor(final ViatraBackend backend, final ViatraBaseDriver<RouteSensorMatch> driver) {
-		super(backend, driver);
+		super(RailwayQuery.ROUTESENSOR, backend, driver);
 	}
 
 	@Override

@@ -36,12 +36,13 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
 public class Neo4jCoreQuerySwitchSet extends Neo4jCoreQuery<Neo4jSwitchSetMatch> {
 
 	public Neo4jCoreQuerySwitchSet(final Neo4jDriver driver) {
-		super(driver);
+		super(RailwayQuery.SWITCHSET, driver);
 	}
 
 	@Override

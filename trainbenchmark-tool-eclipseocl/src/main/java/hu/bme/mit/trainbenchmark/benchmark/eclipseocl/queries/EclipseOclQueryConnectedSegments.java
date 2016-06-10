@@ -20,13 +20,14 @@ import org.eclipse.ocl.util.Tuple;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EclipseOclQueryConnectedSegments extends EclipseOclQuery<EmfConnectedSegmentsMatch> {
 
 	public EclipseOclQueryConnectedSegments(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
-		super(driver, benchmarkConfig);
+		super(driver, benchmarkConfig, RailwayQuery.CONNECTEDSEGMENTS);
 	}
 
 	@Override

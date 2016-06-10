@@ -14,11 +14,14 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
@@ -27,12 +30,12 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 public class EmfApiQuerySemaphoreNeighbor<TDriver extends EmfDriver> extends EmfApiQuery<EmfSemaphoreNeighborMatch, TDriver> {
 
 	public EmfApiQuerySemaphoreNeighbor(final TDriver driver) {
-		super(driver);
+		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
 	}
 
 	@Override
 	public Collection<EmfSemaphoreNeighborMatch> evaluate() {
-		matches = new ArrayList<>();
+		final List<EmfSemaphoreNeighborMatch> matches = new ArrayList<>();
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
 		for (final Route route1 : routes) {

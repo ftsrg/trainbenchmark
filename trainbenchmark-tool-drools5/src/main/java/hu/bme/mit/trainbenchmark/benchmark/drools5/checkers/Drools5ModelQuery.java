@@ -35,15 +35,13 @@ public class Drools5ModelQuery extends ModelQuery<EmfMatch, Drools5Driver> {
 	protected Collection<EmfMatch> matches = new HashSet<>();
 	protected Drools5ResultListener listener;
 	protected LiveQuery liveQuery;
-	protected RailwayQuery query;
 
 	public Drools5ModelQuery(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver, final RailwayQuery query) throws IOException {
-		super(driver);
-		this.query = query;
+		super(query, driver);
 	
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 		final String queryFile = benchmarkConfig.getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.benchmark.drools5/src/main/resources/queries/" + query + ".drl";
+				+ "/trainbenchmark-tool-drools5/src/main/resources/queries/" + query + ".drl";
 		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
 
 		final KnowledgeBuilderErrors errors = kbuilder.getErrors();

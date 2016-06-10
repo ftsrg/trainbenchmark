@@ -19,12 +19,13 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.ConnectedSegmentsQuerySpecification;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQueryConnectedSegments extends ViatraQuery<ConnectedSegmentsMatch> {
 
 	public ViatraQueryConnectedSegments(final ViatraBackend backend,
 			final ViatraBaseDriver<ConnectedSegmentsMatch> driver) {
-		super(backend, driver);
+		super(RailwayQuery.CONNECTEDSEGMENTS, backend, driver);
 	}
 
 	@Override

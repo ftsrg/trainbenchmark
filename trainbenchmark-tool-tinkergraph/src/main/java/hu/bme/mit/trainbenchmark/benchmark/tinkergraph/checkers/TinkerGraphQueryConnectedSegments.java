@@ -25,11 +25,12 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnec
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphQueryConnectedSegments extends TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch> {
 
 	public TinkerGraphQueryConnectedSegments(final TinkerGraphDriver driver) {
-		super(driver);
+		super(RailwayQuery.CONNECTEDSEGMENTS, driver);
 	}
 
 	@Override

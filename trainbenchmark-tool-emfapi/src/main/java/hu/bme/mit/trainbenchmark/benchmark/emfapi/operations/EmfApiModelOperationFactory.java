@@ -40,7 +40,7 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 
 	@Override
 	public ModelOperation<? extends EmfMatch, TDriver> createOperation(final RailwayOperation operationEnum,
-			final Optional<String> queryDirectory, final TDriver driver) throws Exception {
+			final Optional<String> workspacePath, final TDriver driver) throws Exception {
 
 		switch (operationEnum) {
 		// ConnectedSegments

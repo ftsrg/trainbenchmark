@@ -5,3 +5,12 @@ dependencies {
   compile project(':trainbenchmark-generator')
   compile group: 'org.apache.tinkerpop', name: 'tinkergraph-gremlin', version:'3.2.0-incubating'
 }
+
+startScripts {
+  doLast {
+	def winScriptFile  = file getWindowsScript()
+	def winFileText = winScriptFile.text
+	winFileText = winFileText.replaceAll('set CLASSPATH=.*', 'rem original CLASSPATH declaration replaced by:\nset CLASSPATH=%APP_HOME%\\\\lib\\\\\\*')
+	winScriptFile.text = winFileText
+  }
+}
