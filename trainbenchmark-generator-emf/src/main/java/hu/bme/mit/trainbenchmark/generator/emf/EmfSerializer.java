@@ -33,7 +33,7 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfUtil;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
@@ -41,10 +41,10 @@ import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Route;
 
-public class EmfSerializer extends ModelSerializer<GeneratorConfig> {
+public class EmfSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 
-	public EmfSerializer(final GeneratorConfig generatorConfig) {
-		super(generatorConfig);
+	public EmfSerializer(final GeneratorConfigWrapper generatorConfigWrapper) {
+		super(generatorConfigWrapper);
 	}
 
 	@Override
@@ -59,8 +59,9 @@ public class EmfSerializer extends ModelSerializer<GeneratorConfig> {
 	@Override
 	public void initModel() {
 		EmfUtil.registerExtension();
-		final String modelPath = generatorConfig.getModelPathWithoutExtension() + "." + EmfConstants.RAILWAY_EXTENSION;
-		final URI resourceURI = URI.createFileURI(modelPath);	
+		final String modelPath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension() + "."
+				+ EmfConstants.RAILWAY_EXTENSION;
+		final URI resourceURI = URI.createFileURI(modelPath);
 
 		final ResourceSet resourceSet = new ResourceSetImpl();
 
@@ -123,7 +124,8 @@ public class EmfSerializer extends ModelSerializer<GeneratorConfig> {
 	}
 
 	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value)
+			throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 		setAttribute(clazz, (RailwayElement) node, key, value);
 	}

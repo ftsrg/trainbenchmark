@@ -12,12 +12,12 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class MinimalPosLengthGenerator extends MinimalModelGenerator {
 
-	public MinimalPosLengthGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
-		super(serializer, generatorConfig);
+	public MinimalPosLengthGenerator(final ModelSerializer serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+		super(serializer, generatorConfigWrapper);
 	}
 
 	@Override

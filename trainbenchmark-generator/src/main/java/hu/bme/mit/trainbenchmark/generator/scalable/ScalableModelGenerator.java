@@ -24,9 +24,14 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import com.google.common.collect.ImmutableMap;
@@ -36,8 +41,7 @@ import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-import hu.bme.mit.trainbenchmark.generator.utils.ZipIterator;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.generator.utils.ZipUtils;
 
 public class ScalableModelGenerator extends ModelGenerator {
@@ -60,10 +64,10 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
-	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
-		super(serializer, generatorConfig);
-		maxRoutes = 5 * generatorConfig.getSize();
-		switch (generatorConfig.getScenario()) {
+	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+		super(serializer, generatorConfigWrapper);
+		maxRoutes = 5 * generatorConfigWrapper.getGeneratorConfig().getSize();
+		switch (generatorConfigWrapper.getGeneratorConfig().getScenario()) {
 		case BATCH:
 			// set all error percents to 0
 			break;

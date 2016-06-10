@@ -34,19 +34,17 @@ import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.GraphGeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
-public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfig> {
+public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 
 	protected String databasePath;
 
-	protected GraphGeneratorConfig graphGeneratorConfig;
 	protected GraphDatabaseService graphDb;
 	protected Transaction tx;
 
-	public Neo4jGraphSerializer(final GeneratorConfig generatorConfig) {
-		super(generatorConfig);
+	public Neo4jGraphSerializer(final GeneratorConfigWrapper generatorConfigWrapper) {
+		super(generatorConfigWrapper);
 	}
 
 	@Override
@@ -57,7 +55,8 @@ public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfig> {
 	@Override
 	public void initModel() throws IOException {
 		final String databaseDirectoriesPath = "/neo4j-gen/";
-		databasePath = databaseDirectoriesPath + "/" + generatorConfig.getModelFileNameWithoutExtension() + ".neo4j";
+		databasePath = databaseDirectoriesPath + "/"
+				+ generatorConfigWrapper.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j";
 
 		// on the first run delete the previous database directories
 		if (new File(databasePath).exists()) {
@@ -156,12 +155,14 @@ public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfig> {
 			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 			tx.success();
 
-			final String fileName = generatorConfig.getModelPathWithoutExtension() + ".graphml";
+			final String fileName = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
+					+ ".graphml";
 
 			String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB
-			graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
-					"<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\" attr.type=\"string\"/>");
+			// graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
+			// "<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\"
+			// attr.type=\"string\"/>");
 
 			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
 		} finally {

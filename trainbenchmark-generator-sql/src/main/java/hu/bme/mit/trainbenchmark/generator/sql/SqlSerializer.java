@@ -38,17 +38,16 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
 
-public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
+public class SqlSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 
 	protected String sqlRawPath;
-	// protected Strings sqlPostgresDumpPath;
 	protected BufferedWriter writer;
 
-	public SqlSerializer(final SqlGeneratorConfig sqlGeneratorConfig) {
-		super(sqlGeneratorConfig);
+	public SqlSerializer(final GeneratorConfigWrapper generatorConfigWrapper) {
+		super(generatorConfigWrapper);
 	}
 
 	@Override
@@ -63,14 +62,13 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFileDirectory = generatorConfig.getWorkspacePath()
+		final String headerFileDirectory = generatorConfigWrapper.getGeneratorConfig().getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
 		final String headerFilePath = headerFileDirectory + "railway-header.sql";
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		sqlRawPath = generatorConfig.getModelPathWithoutExtension() + "-raw.sql";
-		// sqlPostgresDumpPath = generatorConfig.getModelPathWithoutExtension() + "-postgres.sql";
+		sqlRawPath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension() + "-raw.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -81,7 +79,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = generatorConfig.getWorkspacePath()
+		final String footerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
@@ -103,15 +101,17 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		final Process processLoad = rt.exec(commandLoad);
 		processLoad.waitFor();
 
-		final String mysqlDumpPath = generatorConfig.getModelPathWithoutExtension() + "-mysql.sql";
-		final String sqliteDumpPath = generatorConfig.getModelPathWithoutExtension() + "-sqlite.sql";
+		final String mysqlDumpPath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
+				+ "-mysql.sql";
+		final String sqliteDumpPath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
+				+ "-sqlite.sql";
 
-		final String[] commandDump = { "/bin/bash", "-c",
-				"mysqldump -u " + USER + " --databases trainbenchmark --skip-dump-date --skip-comments > " + mysqlDumpPath };
+		final String[] commandDump = { "/bin/bash", "-c", "mysqldump -u " + USER
+				+ " --databases trainbenchmark --skip-dump-date --skip-comments > " + mysqlDumpPath };
 		final Process processDump = rt.exec(commandDump);
 		processDump.waitFor();
 
-		final String[] sqliteDump = { "/bin/bash", "-c", generatorConfig.getWorkspacePath()
+		final String[] sqliteDump = { "/bin/bash", "-c", generatorConfigWrapper.getGeneratorConfig().getWorkspacePath()
 				+ "/hu.bme.mit.trainbenchmark.sql/scripts/mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath };
 		final Process processSqlite = rt.exec(sqliteDump);
 		processSqlite.waitFor();
@@ -135,7 +135,8 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 			write(String.format("INSERT INTO \"%s\" (\"%s\") VALUES (%s);", ancestorType, ID, id));
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
-			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());
+			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(),
+					values.toString());
 			write(insertQuery.toString());
 		}
 
@@ -157,19 +158,24 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 			break;
 		// n:1 edges
 		case FOLLOWS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route",
+					from, ID, to);
 			break;
 		case GATHERS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID,
+					to);
 			break;
 		case SENSORS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID,
+					to);
 			break;
 		case ELEMENTS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region", from, ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region",
+					from, ID, to);
 			break;
 		case SEMAPHORES:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", from, ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", from,
+					ID, to);
 			break;
 		default:
 			throw new UnsupportedOperationException("Label '" + label + "' not supported.");
@@ -179,9 +185,11 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 	}
 
 	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value)
+			throws IOException {
 		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key, stringValue, ID, node);
+		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key,
+				stringValue, ID, node);
 		write(updateQuery);
 	}
 

@@ -14,12 +14,9 @@ package hu.bme.mit.trainbenchmark.generator.emf.config;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-import org.apache.commons.cli.ParseException;
-
 public class EmfGeneratorConfig extends GeneratorConfig {
 
-	public EmfGeneratorConfig(final String[] args) throws ParseException {
-		super(args);
+	protected EmfGeneratorConfig() {
 	}
 
 }
