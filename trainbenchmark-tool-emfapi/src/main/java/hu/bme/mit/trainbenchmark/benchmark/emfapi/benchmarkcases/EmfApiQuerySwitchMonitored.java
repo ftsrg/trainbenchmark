@@ -14,11 +14,14 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -27,12 +30,12 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 public class EmfApiQuerySwitchMonitored<TDriver extends EmfDriver> extends EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> {
 
 	public EmfApiQuerySwitchMonitored(final TDriver driver) {
-		super(driver);
+		super(RailwayQuery.SWITCHMONITORED, driver);
 	}
 
 	@Override
 	public Collection<EmfSwitchMonitoredMatch> evaluate() {
-		matches = new ArrayList<>();
+		final List<EmfSwitchMonitoredMatch> matches = new ArrayList<>();
 
 		final EList<Region> regions = driver.getContainer().getRegions();
 		for (final Region region : regions) {

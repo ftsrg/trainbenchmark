@@ -14,11 +14,12 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class EmfApiQuery<TPatternMatch extends EmfMatch, TDriver extends EmfDriver> extends ModelQuery<TPatternMatch, TDriver> {
 
-	public EmfApiQuery(final TDriver driver) {
-		super(driver);
+	public EmfApiQuery(final RailwayQuery query, final TDriver driver) {
+		super(query, driver);
 	}
 	
 }

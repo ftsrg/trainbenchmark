@@ -28,11 +28,12 @@ import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jCoreQueryPosLength extends Neo4jCoreQuery<Neo4jPosLengthMatch> {
 
 	public Neo4jCoreQueryPosLength(final Neo4jDriver driver) {
-		super(driver);
+		super(RailwayQuery.POSLENGTH, driver);
 	}
 
 	@Override

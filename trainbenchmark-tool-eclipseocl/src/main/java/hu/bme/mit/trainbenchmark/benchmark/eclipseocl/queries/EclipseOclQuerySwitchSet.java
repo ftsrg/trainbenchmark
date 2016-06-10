@@ -20,6 +20,7 @@ import org.eclipse.ocl.util.Tuple;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -28,7 +29,7 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 public class EclipseOclQuerySwitchSet extends EclipseOclQuery<EmfSwitchSetMatch> {
 
 	public EclipseOclQuerySwitchSet(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
-		super(driver, benchmarkConfig);
+		super(driver, benchmarkConfig, RailwayQuery.SWITCHSET);
 	}
 
 	@Override

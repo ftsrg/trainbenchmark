@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 
 dependencies {
-compile localGroovy()
+  compile localGroovy()
   compile project(':trainbenchmark-generator')
   compile project(':trainbenchmark-generator-graph-tinkerpop')
   compile project(':trainbenchmark-generator-rdf')

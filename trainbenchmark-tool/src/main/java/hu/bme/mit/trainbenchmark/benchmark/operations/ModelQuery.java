@@ -14,25 +14,30 @@ package hu.bme.mit.trainbenchmark.benchmark.operations;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class ModelQuery<TPatternMatch, TDriver extends Driver<?>> implements AutoCloseable {
-	
-	protected final TDriver driver; 
-	protected Collection<TPatternMatch> matches;
-	
 
-	public ModelQuery(final TDriver driver) {
+	protected final RailwayQuery query;
+	protected final TDriver driver;
+
+	public ModelQuery(final RailwayQuery query, final TDriver driver) {
+		this.query = query;
 		this.driver = driver;
 	}
-	
+
 	public abstract Collection<TPatternMatch> evaluate() throws Exception;
 
 	@Override
 	public void close() {
 	}
-	
+
 	public TDriver getDriver() {
 		return driver;
+	}
+	
+	public RailwayQuery getQuery() {
+		return query;
 	}
 
 }

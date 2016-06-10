@@ -20,6 +20,7 @@ import org.eclipse.ocl.util.Tuple;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -28,7 +29,7 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 public class EclipseOclQueryRouteSensor extends EclipseOclQuery<EmfRouteSensorMatch> {
 
 	public EclipseOclQueryRouteSensor(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
-		super(driver, benchmarkConfig);
+		super(driver, benchmarkConfig, RailwayQuery.ROUTESENSOR);
 	}
 
 	@Override

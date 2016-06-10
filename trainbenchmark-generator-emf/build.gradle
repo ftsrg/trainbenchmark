@@ -9,3 +9,12 @@ dependencies {
   compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore.xmi', version:'2.10.0-v20140514-1158'
   compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version:'2.10.0-v20140514-1158'
 }
+
+startScripts {
+  doLast {
+	def winScriptFile  = file getWindowsScript()
+	def winFileText = winScriptFile.text
+	winFileText = winFileText.replaceAll('set CLASSPATH=.*', 'rem original CLASSPATH declaration replaced by:\nset CLASSPATH=%APP_HOME%\\\\lib\\\\\\*')
+	winScriptFile.text = winFileText
+  }
+}

@@ -19,12 +19,13 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SemaphoreNeighborQuerySpecification;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQuerySemaphoreNeighbor extends ViatraQuery<SemaphoreNeighborMatch> {
 
 	public ViatraQuerySemaphoreNeighbor(final ViatraBackend backend,
 			final ViatraBaseDriver<SemaphoreNeighborMatch> driver) {
-		super(backend, driver);
+		super(RailwayQuery.SEMAPHORENEIGHBOR, backend, driver);
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public class Neo4jCypherModelQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 	protected final String queryDefinition;
 
 	protected Neo4jCypherModelQuery(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
-		super(driver);
+		super(query, driver);
 
 		this.query = query;
 		queryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()

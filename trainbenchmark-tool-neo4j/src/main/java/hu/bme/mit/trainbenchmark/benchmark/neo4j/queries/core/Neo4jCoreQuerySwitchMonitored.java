@@ -30,11 +30,12 @@ import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Neo4jCoreQuerySwitchMonitored extends Neo4jCoreQuery<Neo4jSwitchMonitoredMatch> {
 
 	public Neo4jCoreQuerySwitchMonitored(final Neo4jDriver driver) {
-		super(driver);
+		super(RailwayQuery.SWITCHMONITORED, driver);
 	}
 
 	@Override

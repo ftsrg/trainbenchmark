@@ -20,12 +20,13 @@ import org.eclipse.ocl.util.Tuple;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 public class EclipseOclQuerySwitchMonitored extends EclipseOclQuery<EmfSwitchMonitoredMatch> {
 
 	public EclipseOclQuerySwitchMonitored(final EmfDriver driver, final BenchmarkConfig benchmarkConfig) throws Exception {
-		super(driver, benchmarkConfig);
+		super(driver, benchmarkConfig, RailwayQuery.SWITCHMONITORED);
 	}
 
 	@Override

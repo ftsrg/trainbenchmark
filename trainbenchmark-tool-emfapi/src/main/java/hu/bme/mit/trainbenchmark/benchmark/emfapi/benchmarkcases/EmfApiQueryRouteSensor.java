@@ -19,7 +19,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -28,12 +30,12 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 public class EmfApiQueryRouteSensor<TDriver extends EmfDriver> extends EmfApiQuery<EmfRouteSensorMatch, TDriver> {
 
 	public EmfApiQueryRouteSensor(final TDriver driver) {
-		super(driver);
+		super(RailwayQuery.ROUTESENSOR, driver);
 	}
 
 	@Override
 	public Collection<EmfRouteSensorMatch> evaluate() {
-		matches = new ArrayList<>();
+		final List<EmfRouteSensorMatch> matches = new ArrayList<>();
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
 		// (route:Route)

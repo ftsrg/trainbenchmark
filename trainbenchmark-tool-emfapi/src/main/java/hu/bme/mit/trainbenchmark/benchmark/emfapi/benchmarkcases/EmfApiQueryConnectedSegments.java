@@ -13,11 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;
@@ -27,12 +29,12 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 public class EmfApiQueryConnectedSegments<TDriver extends EmfDriver> extends EmfApiQuery<EmfConnectedSegmentsMatch, TDriver> {
 
 	public EmfApiQueryConnectedSegments(final TDriver driver) {
-		super(driver);
+		super(RailwayQuery.CONNECTEDSEGMENTS, driver);
 	}
 
 	@Override
 	public Collection<EmfConnectedSegmentsMatch> evaluate() {
-		matches = new ArrayList<>();
+		final List<EmfConnectedSegmentsMatch> matches = new ArrayList<>();
 
 		final EList<Region> regions = driver.getContainer().getRegions();
 		for (final Region region : regions) {

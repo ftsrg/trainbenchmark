@@ -20,15 +20,17 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	protected final ModelOperationFactory<TPatternMatch, TDriver> factory;
 	protected final Comparator<TPatternMatch> comparator;
 	protected final TBenchmarkConfigWrapper bcw;
+	protected final BenchmarkResults benchmarkResults;
 
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
 	public BenchmarkExecutor(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper benchmarkConfigWrapper) {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper benchmarkConfigWrapper, final BenchmarkResults benchmarkResults) {
 		this.driver = driver;
 		this.factory = factory;
 		this.comparator = comparator;
 		this.bcw = benchmarkConfigWrapper;
+		this.benchmarkResults = benchmarkResults;
 	}
 
 	public void read() throws Exception {
@@ -40,11 +42,10 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	public void initializeOperations() throws Exception {
 		for (final RailwayOperation railwayOperation : bcw.getBenchmarkConfig().getRailwayOperations()) {
 
-			// TODO rename
-			final Optional<String> queryDirectory = Optional.of(bcw.getBenchmarkConfig().getWorkspacePath());
+			final Optional<String> workspacePath = Optional.of(bcw.getBenchmarkConfig().getWorkspacePath());
 
 			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
-					queryDirectory, driver);
+					workspacePath, driver);
 			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation
 					.of(operation, comparator, random);
 			qsts.add(qst);
@@ -54,7 +55,7 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	public void query() throws Exception {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
 			final Collection<?> matches = qst.evaluateQuery();
-			System.out.println(matches.size());
+			benchmarkResults.registerMatches(qst.getQuery().getQuery(), matches.size());
 		}
 	}
 

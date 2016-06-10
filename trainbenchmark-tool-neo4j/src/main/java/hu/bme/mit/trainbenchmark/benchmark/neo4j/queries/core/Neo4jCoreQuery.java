@@ -18,11 +18,11 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class Neo4jCoreQuery<TMatch extends Neo4jMatch> extends ModelQuery<TMatch, Neo4jDriver> {
 
-	public Neo4jCoreQuery(final Neo4jDriver driver) {
-		super(driver);
+	public Neo4jCoreQuery(final RailwayQuery query, final Neo4jDriver driver) {
+		super(query, driver);
 	}
 
-	public static Neo4jCoreQuery<?> newInstance(final Neo4jDriver driver, final RailwayQuery query) {
+	public static Neo4jCoreQuery<?> newInstance(final RailwayQuery query, final Neo4jDriver driver) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new Neo4jCoreQueryConnectedSegments(driver);

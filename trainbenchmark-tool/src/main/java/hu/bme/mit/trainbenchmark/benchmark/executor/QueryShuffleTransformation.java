@@ -11,6 +11,7 @@ import com.google.common.collect.Ordering;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 
 public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>> {
 
@@ -60,6 +61,10 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 	
 	public boolean isTransformation() {
 		return operation.getTransformation().isPresent();
+	}
+	
+	public ModelQuery<TPatternMatch, TDriver> getQuery() {
+		return operation.getQuery();
 	}
 
 }

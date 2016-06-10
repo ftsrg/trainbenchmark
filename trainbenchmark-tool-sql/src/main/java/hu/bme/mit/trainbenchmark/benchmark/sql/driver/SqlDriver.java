@@ -66,7 +66,7 @@ public abstract class SqlDriver extends Driver<Long> {
 	}
 
 	public String getResourceDirectory() {
-		return "/hu.bme.mit.trainbenchmark.benchmark.sql/src/main/resources/";
+		return "/trainbenchmark-tool-sql/src/main/resources/";
 	}
 
 }

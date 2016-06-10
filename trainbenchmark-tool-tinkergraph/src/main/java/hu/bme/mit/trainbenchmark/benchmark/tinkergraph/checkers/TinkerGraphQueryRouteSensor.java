@@ -25,11 +25,12 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteS
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphQueryRouteSensor extends TinkerGraphQuery<TinkerGraphRouteSensorMatch> {
 
 	public TinkerGraphQueryRouteSensor(final TinkerGraphDriver driver) {
-		super(driver);
+		super(RailwayQuery.ROUTESENSOR, driver);
 	}
 
 	@Override

@@ -35,8 +35,8 @@ public abstract class ViatraQuery<TMatch extends BasePatternMatch> extends Model
 	protected final ViatraBackend backend;
 	protected AdvancedViatraQueryEngine engine;
 	
-	public ViatraQuery(final ViatraBackend backend, final ViatraBaseDriver<TMatch> driver) {
-		super(driver);
+	public ViatraQuery(final RailwayQuery query, final ViatraBackend backend, final ViatraBaseDriver<TMatch> driver) {
+		super(query, driver);
 		this.backend = backend;
 
 		RailwayPackage.eINSTANCE.eClass();
