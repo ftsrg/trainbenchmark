@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTra
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair.Neo4jTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public abstract class Neo4jTransformation<TObject> extends ModelTransformation<TObject, Neo4jDriver> {
 
@@ -34,7 +34,7 @@ public abstract class Neo4jTransformation<TObject> extends ModelTransformation<T
 		super(driver);
 	}
 
-	public static ModelTransformation<?, ?> newInstance(final Neo4jDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static ModelTransformation<?, ?> newInstance(final Neo4jDriver driver, final RailwayQuery query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {

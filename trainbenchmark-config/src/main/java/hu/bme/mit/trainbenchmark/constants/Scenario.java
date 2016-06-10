@@ -9,17 +9,23 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.constants;
 
-package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
+public enum Scenario {
+	BATCH("Batch"), //
+	INJECT("Inject"), //
+	REPAIR("Repair"), //
+	MINIMAL("Minimal");
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+	private String name;
 
-import org.apache.commons.cli.ParseException;
+	Scenario(final String name) {
+		this.name = name;
+	}
 
-public class GraphGeneratorConfig extends GeneratorConfig {
-
-	public GraphGeneratorConfig(final String[] args) throws ParseException {
-		super(args);
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

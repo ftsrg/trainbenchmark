@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameT
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public abstract class SesameTransformation<TObject> extends ModelTransformation<TObject, SesameDriver> {
 
@@ -34,7 +34,7 @@ public abstract class SesameTransformation<TObject> extends ModelTransformation<
 		super(driver);
 	}
 
-	public static ModelTransformation<?, ?> newInstance(final SesameDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static ModelTransformation<?, ?> newInstance(final SesameDriver driver, final RailwayQuery query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
