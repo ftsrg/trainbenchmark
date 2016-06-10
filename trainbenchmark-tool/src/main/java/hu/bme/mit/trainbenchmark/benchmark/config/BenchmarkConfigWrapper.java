@@ -45,5 +45,13 @@ public class BenchmarkConfigWrapper {
 			return benchmarkConfig;
 		}
 	}
+
+	public static <T> T fromFile(final String path, final Class<T> class_) throws FileNotFoundException {
+		final Kryo kryo = new Kryo();
+		try (final Input input = new Input(new FileInputStream(path))) {
+			final T benchmarkConfig = kryo.readObject(input, class_);
+			return benchmarkConfig;
+		}
+	}
 	
 }
