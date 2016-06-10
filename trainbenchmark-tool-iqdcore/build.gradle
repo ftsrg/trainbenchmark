@@ -1,0 +1,7 @@
+apply plugin: 'application'
+mainClassName = 'hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDCoreBenchmarkMain'
+
+dependencies {
+  compile project(':trainbenchmark-tool-rdf')
+  compile group: 'hu.bme.mit', name: 'incquery-ds_2.11', version:'1.0'
+}
