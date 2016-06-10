@@ -12,22 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.generator.config;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.Options;
-
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class GeneratorConfig extends AbstractConfig {
 
-	protected static final String GRAPH_FORMAT = "graphFormat";
-	protected static final String SCENARIO = "scenario";
-
-	protected GraphFormat graphFormat;
 	protected Scenario scenario;
 	protected int size;
-	protected Options options;
-	protected CommandLine cmd;
 
 	public Scenario getScenario() {
 		return scenario;

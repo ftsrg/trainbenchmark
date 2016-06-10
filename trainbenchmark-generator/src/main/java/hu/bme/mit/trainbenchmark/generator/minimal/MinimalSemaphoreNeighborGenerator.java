@@ -21,12 +21,12 @@ import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class MinimalSemaphoreNeighborGenerator extends MinimalModelGenerator {
 
-	public MinimalSemaphoreNeighborGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
-		super(serializer, generatorConfig);
+	public MinimalSemaphoreNeighborGenerator(final ModelSerializer serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+		super(serializer, generatorConfigWrapper);
 	}
 
 	@Override

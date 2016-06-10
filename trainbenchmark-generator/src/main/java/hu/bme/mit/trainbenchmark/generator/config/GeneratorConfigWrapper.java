@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.config;
+package hu.bme.mit.trainbenchmark.generator.config;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,24 +8,20 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
-public class BenchmarkConfigWrapper {
+public class GeneratorConfigWrapper {
 
-	protected BenchmarkConfig benchmarkConfig;
+	protected GeneratorConfig generatorConfig;
 	
-	protected BenchmarkConfigWrapper() {}
-	
-	public BenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig) {
-		this.benchmarkConfig = benchmarkConfig;
+	protected GeneratorConfigWrapper() {}
+
+	public GeneratorConfigWrapper(final GeneratorConfig generatorConfig) {
+		this.generatorConfig = generatorConfig;
 	}
 	
-	public BenchmarkConfig getBenchmarkConfig() {
-		return benchmarkConfig;
+	public GeneratorConfig getGeneratorConfig() {
+		return generatorConfig;
 	}
-
-	public String getToolNamePostfix() {
-		return "";
-	}
-
+	
 	/**
 	 * Serialize the configuration to a file. This does not need to be redefined in the subclasses (e.g. {Neo4jBenchmarkConfigWrapper}).
 	 * @param path
@@ -38,11 +34,11 @@ public class BenchmarkConfigWrapper {
 		}
 	}
 
-	public static BenchmarkConfigWrapper fromFile(final String path) throws FileNotFoundException {
+	public static GeneratorConfigWrapper fromFile(final String path) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
-			final BenchmarkConfigWrapper benchmarkConfig = kryo.readObject(input, BenchmarkConfigWrapper.class);
-			return benchmarkConfig;
+			final GeneratorConfigWrapper generatorConfigWrapper = kryo.readObject(input, GeneratorConfigWrapper.class);
+			return generatorConfigWrapper;
 		}
 	}
 	

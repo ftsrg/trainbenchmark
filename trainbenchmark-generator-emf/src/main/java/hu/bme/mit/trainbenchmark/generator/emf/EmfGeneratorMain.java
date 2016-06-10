@@ -14,14 +14,14 @@ package hu.bme.mit.trainbenchmark.generator.emf;
 
 import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class EmfGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final GeneratorConfig generatorConfig = new GeneratorConfig(args);
-		final EmfSerializer emfSerializer = new EmfSerializer(generatorConfig);
-		final ModelGenerator generator = GeneratorFactory.createGenerator(emfSerializer, generatorConfig);
+		final GeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0]);
+		final EmfSerializer rdfSerializer = new EmfSerializer(generatorConfigWrapper);
+		final ModelGenerator generator = GeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
 		generator.generateModel();
 	}
 

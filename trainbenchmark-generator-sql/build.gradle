@@ -1,3 +1,6 @@
+apply plugin: 'application'
+mainClassName = 'hu.bme.mit.trainbenchmark.generator.sql'
+
 dependencies {
   compile project(':trainbenchmark-generator')
   compile project(':trainbenchmark-format-sql')

@@ -14,14 +14,14 @@ package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
 
 import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class Neo4jGraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final GeneratorConfig generatorConfig = new GeneratorConfig(args);
-		final Neo4jGraphSerializer graphSerializer = new Neo4jGraphSerializer(generatorConfig);
-		final ModelGenerator generator = GeneratorFactory.createGenerator(graphSerializer, generatorConfig);
+		final GeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0]);
+		final Neo4jGraphSerializer rdfSerializer = new Neo4jGraphSerializer(generatorConfigWrapper);
+		final ModelGenerator generator = GeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
 		generator.generateModel();
 	}
 

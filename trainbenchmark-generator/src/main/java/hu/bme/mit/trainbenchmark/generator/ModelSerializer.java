@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
-public abstract class ModelSerializer<TGeneratorConfig extends GeneratorConfig> {
+public abstract class ModelSerializer<TGeneratorConfigWrapper extends GeneratorConfigWrapper> {
 	
-	protected final TGeneratorConfig generatorConfig;
+	protected final TGeneratorConfigWrapper generatorConfigWrapper;
 	protected int id = 1;
 
-	public ModelSerializer(TGeneratorConfig generatorConfig) {
-		this.generatorConfig = generatorConfig;
+	public ModelSerializer(TGeneratorConfigWrapper generatorConfigWrapper) {
+		this.generatorConfigWrapper = generatorConfigWrapper;
 	}
 	
 	public abstract String syntax();

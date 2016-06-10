@@ -3,27 +3,27 @@ package hu.bme.mit.trainbenchmark.generator;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public abstract class ModelGenerator {
 
 	protected final ModelSerializer<?> serializer;
-	protected GeneratorConfig generatorConfig;
+	protected GeneratorConfigWrapper generatorConfigWrapper;
 
-	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
+	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfig) {
 		this.serializer = serializer;
-		this.generatorConfig = generatorConfig;
+		this.generatorConfigWrapper = generatorConfigWrapper;
 	}
 
 	public void generateModel() throws Exception {
 		final StringBuilder messageBuilder = new StringBuilder();
 		messageBuilder.append("Generating instance model, ");
 		messageBuilder.append("generator: " + serializer.syntax() + ", ");
-//		messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
+		// messageBuilder.append("scenario: " + generatorConfig.getScenarioName() + ", ");
 		// if (generatorConfig.getScenario() == MINIMAL) {
 		// messageBuilder.append("query: " + generatorConfig.getQueries().get(0));
 		// } else {
-		messageBuilder.append("size: " + generatorConfig.getSize());
+		// messageBuilder.append("size: " + generatorConfigWrapper.getGeneratorConfig().getSize());
 		// }
 		messageBuilder.append("... ");
 		System.out.print(messageBuilder.toString());

@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.generator.scalable.ScalableModelGenerator;
 
 public class GeneratorFactory {
 
-	public static ModelGenerator createGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
+	public static ModelGenerator createGenerator(final ModelSerializer serializer, final GeneratorConfigWrapper generatorConfig) {
 		// if (generatorConfig.getScenario() == ScenarioEnum.MINIMAL) {
 		// final RailwayQuery query = generatorConfig.getQuery();
 		// switch (query) {

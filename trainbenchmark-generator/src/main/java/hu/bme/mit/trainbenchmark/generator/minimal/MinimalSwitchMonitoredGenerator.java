@@ -8,12 +8,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class MinimalSwitchMonitoredGenerator extends MinimalModelGenerator {
 
-	public MinimalSwitchMonitoredGenerator(final ModelSerializer serializer, final GeneratorConfig generatorConfig) {
-		super(serializer, generatorConfig);
+	public MinimalSwitchMonitoredGenerator(final ModelSerializer serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+		super(serializer, generatorConfigWrapper);
 	}
 
 	@Override
