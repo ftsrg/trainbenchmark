@@ -1,8 +1,17 @@
 apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.generator.graph.neo4j'
+mainClassName = 'hu.bme.mit.trainbenchmark.generator.graph.neo4j.Neo4jGraphGeneratorMain'
 
 dependencies {
   compile project(':trainbenchmark-generator')
   compile group: 'org.neo4j.shell', name: 'import-tools', version:'2.3.3'
   compile group: 'commons-io', name: 'commons-io', version:'2.4'
+}
+
+startScripts {
+    doLast {
+        def winScriptFile  = file getWindowsScript()
+        def winFileText = winScriptFile.text
+        winFileText = winFileText.replaceAll('set CLASSPATH=.*', 'rem original CLASSPATH declaration replaced by:\nset CLASSPATH=%APP_HOME%\\\\lib\\\\\\*')
+        winScriptFile.text = winFileText
+    }
 }

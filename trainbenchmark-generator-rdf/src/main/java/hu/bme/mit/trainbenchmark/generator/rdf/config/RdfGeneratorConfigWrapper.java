@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
@@ -29,7 +30,8 @@ public class RdfGeneratorConfigWrapper extends GeneratorConfigWrapper {
 	protected RdfGeneratorConfigWrapper() {
 	}
 	
-	public RdfGeneratorConfigWrapper(final boolean inferred, final RdfFormat format) {
+	public RdfGeneratorConfigWrapper(final GeneratorConfig generatorConfig, final boolean inferred, final RdfFormat format) {
+		super(generatorConfig);
 		this.inferred = inferred;
 		this.format = format;
 	}

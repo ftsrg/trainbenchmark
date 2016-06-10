@@ -10,13 +10,16 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.emf.config;
+package hu.bme.mit.trainbenchmark.generator;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.scalable.ScalableModelGenerator;
 
-public class EmfGeneratorConfig extends GeneratorConfig {
+public class ScalableGeneratorFactory {
 
-	protected EmfGeneratorConfig() {
+	public static <TGeneratorConfigWrapper extends GeneratorConfigWrapper> ModelGenerator createGenerator(
+			final ModelSerializer<TGeneratorConfigWrapper> serializer, final TGeneratorConfigWrapper generatorConfig) {
+		return new ScalableModelGenerator(serializer, generatorConfig);
 	}
 
 }

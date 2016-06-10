@@ -1,5 +1,5 @@
 apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.generator.graph.tinkerpop'
+mainClassName = 'hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.TinkerPopGraphGeneratorMain'
 
 dependencies {
   compile project(':trainbenchmark-generator')
