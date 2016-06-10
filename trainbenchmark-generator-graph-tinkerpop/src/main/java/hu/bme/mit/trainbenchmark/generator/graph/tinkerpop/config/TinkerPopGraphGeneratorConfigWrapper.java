@@ -18,14 +18,19 @@ import java.io.FileNotFoundException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.config.GraphFormat;
 
 public class TinkerPopGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
 
 	protected GraphFormat graphFormat;
 	
 	protected TinkerPopGraphGeneratorConfigWrapper() {
+	}
+	
+	public TinkerPopGraphGeneratorConfigWrapper(final GeneratorConfig generatorConfig, final GraphFormat graphFormat) {
+		super(generatorConfig);
+		this.graphFormat = graphFormat;
 	}
 	
 	public GraphFormat getGraphFormat() {

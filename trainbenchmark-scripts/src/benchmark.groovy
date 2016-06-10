@@ -12,7 +12,7 @@ def railwayOperations = [
 def bc = new BenchmarkConfig(1, 5, modelPath, railwayOperations)
 
 def emfBCW = new BenchmarkConfigWrapper(bc)
-BenchmarkRunner.runBenchmark(emfBCW, "emfapi")
+BenchmarkRunner.run(emfBCW, "emfapi")
 
 def rdfBCW = new RdfBenchmarkConfigWrapper(bc, false)
-BenchmarkRunner.runBenchmark(rdfBCW, "sesame")
+BenchmarkRunner.run(rdfBCW, "sesame")

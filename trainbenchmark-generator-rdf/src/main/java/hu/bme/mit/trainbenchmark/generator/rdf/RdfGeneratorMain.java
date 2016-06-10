@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
-import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
+import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper;
 
@@ -21,7 +21,7 @@ public class RdfGeneratorMain {
 	public static void main(final String[] args) throws Exception {
 		final RdfGeneratorConfigWrapper rdfGeneratorConfigWrapper = RdfGeneratorConfigWrapper.fromFile(args[0]);
 		final RdfSerializer rdfSerializer = new RdfSerializer(rdfGeneratorConfigWrapper);
-		final ModelGenerator generator = GeneratorFactory.createGenerator(rdfSerializer, rdfGeneratorConfigWrapper);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, rdfGeneratorConfigWrapper);
 		generator.generateModel();
 	}
 	

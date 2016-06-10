@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.generator.config;
+package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config;
 
 public enum GraphFormat {
 	GRAPHML("GraphML"), //

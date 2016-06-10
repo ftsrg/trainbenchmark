@@ -15,11 +15,19 @@ package hu.bme.mit.trainbenchmark.generator.config;
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class GeneratorConfig extends AbstractConfig {
+public final class GeneratorConfig extends AbstractConfig {
 
 	protected Scenario scenario;
 	protected int size;
 
+	protected GeneratorConfig() {
+	}
+	
+	public GeneratorConfig(final Scenario scenario, final int size) {
+		this.scenario = scenario;
+		this.size = size;
+	}
+	
 	public Scenario getScenario() {
 		return scenario;
 	}

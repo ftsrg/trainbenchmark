@@ -50,7 +50,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfigWrapper> {
 		final String postfix = modelFlavor + "." + extension;
 		
 		final String srcFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspacePath()
-				+ "/hu.bme.mit.trainbenchmark.rdf/src/main/resources/metamodel/railway" + postfix;
+				+ "/trainbenchmark-format-rdf/src/main/resources/metamodel/railway" + postfix;
 
 		final File srcFile = new File(srcFilePath);
 

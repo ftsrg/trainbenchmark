@@ -1,5 +1,5 @@
 apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.generator.emf'
+mainClassName = 'hu.bme.mit.trainbenchmark.generator.emf.EmfGeneratorMain'
 
 dependencies {
   compile project(':trainbenchmark-tool')

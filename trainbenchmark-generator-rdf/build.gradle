@@ -1,5 +1,5 @@
 apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.generator.rdf'
+mainClassName = 'hu.bme.mit.trainbenchmark.generator.rdf.RdfGeneratorMain'
 
 dependencies {
   compile project(':trainbenchmark-generator')

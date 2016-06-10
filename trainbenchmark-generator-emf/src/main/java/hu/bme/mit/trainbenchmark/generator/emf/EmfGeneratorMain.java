@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
-import hu.bme.mit.trainbenchmark.generator.GeneratorFactory;
+import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
@@ -21,7 +21,7 @@ public class EmfGeneratorMain {
 	public static void main(final String[] args) throws Exception {
 		final GeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0]);
 		final EmfSerializer rdfSerializer = new EmfSerializer(generatorConfigWrapper);
-		final ModelGenerator generator = GeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
 		generator.generateModel();
 	}
 

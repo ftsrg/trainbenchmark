@@ -24,7 +24,7 @@ import org.apache.tinkerpop.gremlin.structure.io.IoCore;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GraphFormat;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.GraphFormat;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerPopGraphGeneratorConfigWrapper;
 
 public class TinkerPopGraphSerializer extends ModelSerializer<TinkerPopGraphGeneratorConfigWrapper> {
