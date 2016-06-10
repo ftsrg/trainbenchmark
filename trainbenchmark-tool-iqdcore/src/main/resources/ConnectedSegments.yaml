@@ -51,6 +51,34 @@ nodes:
   - SensorJoin2:
       type: HashJoiner
       primaryLength: 7
+      primarySelector: Vector(1, 6)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: SensorJoin3.primary
+  - SensorJoin3:
+      type: HashJoiner
+      primaryLength: 7
+      primarySelector: Vector(2, 6)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: SensorJoin4.primary
+  - SensorJoin4:
+      type: HashJoiner
+      primaryLength: 7
+      primarySelector: Vector(3, 6)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: SensorJoin5.primary
+  - SensorJoin5:
+      type: HashJoiner
+      primaryLength: 7
+      primarySelector: Vector(4, 6)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: SensorJoin6.primary
+  - SensorJoin6:
+      type: HashJoiner
+      primaryLength: 7
       primarySelector: Vector(5, 6)
       secondaryLength: 2
       secondarySelector: Vector(0, 1)
