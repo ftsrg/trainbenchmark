@@ -1,3 +1,4 @@
+package src
 import hu.bme.mit.trainbenchmark.constants.Scenario
 
 def minSize = 1

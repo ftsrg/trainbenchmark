@@ -1,3 +1,4 @@
+package src
 import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper
