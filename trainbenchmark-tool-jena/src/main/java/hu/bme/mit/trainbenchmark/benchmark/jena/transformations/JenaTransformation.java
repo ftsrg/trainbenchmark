@@ -26,7 +26,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTrans
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public abstract class JenaTransformation<TObject> extends ModelTransformation<TObject, JenaDriver> {
 
@@ -34,7 +34,7 @@ public abstract class JenaTransformation<TObject> extends ModelTransformation<TO
 		super(driver);
 	}
 
-	public static ModelTransformation<?, JenaDriver> newInstance(final JenaDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static ModelTransformation<?, JenaDriver> newInstance(final JenaDriver driver, final RailwayQuery query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
