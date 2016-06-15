@@ -17,8 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
-
-import java.util.Comparator;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
 
 public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Long, IQDCoreDriver, IQDConfigWrapper> {
 
@@ -29,7 +28,7 @@ public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Lo
 	}
 
 	@Override
-	public Comparator<IQDCoreMatch> getMatchComparator() {
-		return null;
+	public IQDCoreMatchComparator getMatchComparator() {
+		return IQDCoreMatchComparator.create();
 	}
 }

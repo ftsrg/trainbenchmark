@@ -4,7 +4,7 @@ import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
 
 public class ReadPhase extends Phase {
 
-	public ReadPhase(final BenchmarkExecutor executor) {
+	public ReadPhase(final BenchmarkExecutor<?, ?, ?> executor) {
 		super(executor);
 	}
 

@@ -11,14 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
+import hu.bme.mit.trainbenchmark.benchmark.comparators.LongComparator;
 import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
-
-import java.util.Comparator;
 
 public class IQDCoreMatchComparator extends MatchComparator<IQDCoreMatch, Long> {
 
-	public IQDCoreMatchComparator(Comparator<Long> longComparator) {
-		super(longComparator);
+	protected IQDCoreMatchComparator() {
+		super(new LongComparator());
+	}
+
+	public static IQDCoreMatchComparator create() {
+		return new IQDCoreMatchComparator();
 	}
 
 	@Override
