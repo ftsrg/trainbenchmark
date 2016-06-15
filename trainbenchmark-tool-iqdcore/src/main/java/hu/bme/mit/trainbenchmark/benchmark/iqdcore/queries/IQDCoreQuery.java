@@ -18,31 +18,45 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import scala.collection.Iterator;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+
+import scala.collection.immutable.Vector;
 
 public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQuery<TPatternMatch, IQDCoreDriver> {
 
 	private final TrainbenchmarkQuery queryEngine;
 
-	public IQDCoreQuery(final IQDCoreDriver driver, final Optional<String> queryDirectory, final RailwayQuery query, WildcardInput input)
+	public IQDCoreQuery(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, WildcardInput input)
 			throws IOException {
-		super(driver, queryDirectory, query);
-		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(queryPath));
+		super(driver, Optional.of(queryDirectory), query);
+		final String yamlPath = queryDirectory + query + ".yaml";
+		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath));
 		input.subscribe(queryEngine.inputLookup());
 	}
 	
-	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch> create(final IQDCoreDriver driver, final Optional<String> queryDirectory, final RailwayQuery query, final WildcardInput input)
+	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch> create(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final WildcardInput input)
 			throws IOException {
 		return new IQDCoreQuery<TPatternMatch>(driver, queryDirectory, query, input);
 	}
 
 	@Override
 	public Collection<TPatternMatch> evaluate() {
-		return (Collection<TPatternMatch>) queryEngine.getResults();
+		final List<IQDCoreMatch> matches = new ArrayList<>();
+
+		final Iterator<Vector<Object>> resultIterator = queryEngine.getResults().iterator();
+		while (resultIterator.hasNext()) {
+			final Vector<Object> qs = resultIterator.next();
+			final IQDCoreMatch match = IQDCoreMatch.createMatch(query, qs);
+			matches.add(match);
+		}
+		return (Collection<TPatternMatch>) matches;
 	}
 
 }

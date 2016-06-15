@@ -30,7 +30,7 @@ public class IQDCoreDriver extends Driver<Long> {
 
 	@Override
 	public String getPostfix() {
-		return ".ttl";
+		return "-inferred.ttl";
 	}
 
 	@Override
