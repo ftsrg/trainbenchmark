@@ -29,6 +29,10 @@ public class BenchmarkResult {
 		transformationTimes.put(query, time);
 	}
 	
+	public ListMultimap<RailwayQuery, Integer> getAllMatches() {
+		return allMatches;
+	}
+	
 	public Long getReadTime() {
 		return readTime;
 	}
