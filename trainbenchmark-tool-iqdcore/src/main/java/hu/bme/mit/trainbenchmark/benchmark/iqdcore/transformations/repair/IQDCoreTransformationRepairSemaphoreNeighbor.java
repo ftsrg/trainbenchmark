@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSemaphoreNeighborMatch;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incqueryds.WildcardInput.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSemaphoreNeighborMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 
 public class IQDCoreTransformationRepairSemaphoreNeighbor extends IQDCoreTransformationRepair<IQDCoreSemaphoreNeighborMatch> {
 
@@ -28,7 +28,7 @@ public class IQDCoreTransformationRepairSemaphoreNeighbor extends IQDCoreTransfo
 
 	@Override
 	public void activate(final Collection<IQDCoreSemaphoreNeighborMatch> matches) throws IOException {
-		final Transaction transaction = driver.newTransaction();
+		final WildcardInput.BatchTransaction transaction = driver.newTransaction();
 		for (final IQDCoreSemaphoreNeighborMatch match : matches) {
 			final Long route2 = match.getRoute2();
 			final Long semaphore = match.getSemaphore();

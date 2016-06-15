@@ -17,6 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations.IQDModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
@@ -27,8 +28,7 @@ public class IQDCoreBenchmarkMain {
 		final WildcardInput input = new WildcardInput(16);
 		final IQDCoreDriver driver = new IQDCoreDriver(config, input);
 		final IQDModelOperationFactory factory = new IQDModelOperationFactory(input);
-		
-		final BenchmarkScenario<IQDCoreMatch, IQDCoreDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, config);
+		final BenchmarkScenario<IQDCoreMatch, IQDCoreDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, IQDCoreMatchComparator.create(), config);
 		scenario.runBenchmark();
 		System.exit(0);
 		return;
