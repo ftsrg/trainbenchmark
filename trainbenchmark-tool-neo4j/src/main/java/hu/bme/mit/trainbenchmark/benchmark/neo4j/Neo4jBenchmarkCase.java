@@ -25,7 +25,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker> extends AbstractBenchmarkCase<Neo4
 
 	@Override
 	public Neo4jDriver createDriver(final Neo4jBenchmarkConfigWrapper benchmarkConfig) throws Exception {
-		return new Neo4jDriver(benchmarkConfig.getBenchmarkConfig().getModelDir()());
+		return new Neo4jDriver(benchmarkConfig.getBenchmarkConfig().getModelDir());
 	}
 	
 	@Override
