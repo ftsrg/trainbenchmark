@@ -12,14 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
-import java.util.Comparator;
-
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.comparators.JenaMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 
 public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource, JenaDriver, RdfBenchmarkConfigWrapper> {
@@ -30,7 +29,7 @@ public class JenaBenchmarkCase extends AbstractBenchmarkCase<JenaMatch, Resource
 	}
 
 	@Override
-	public Comparator<JenaMatch> getMatchComparator() {
+	public JenaMatchComparator getMatchComparator() {
 		return JenaMatchComparator.create();
 	}
 

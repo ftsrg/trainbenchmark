@@ -1,5 +1,13 @@
-apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.generator.sql.SqlGeneratorMain'
+plugins {
+	id "com.github.johnrengelman.shadow" version "1.2.3"
+}
+
+shadowJar {
+	classifier = 'fat'
+	manifest {
+		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.sql.SqlGeneratorMain'
+	}
+}
 
 dependencies {
   compile project(':trainbenchmark-generator')
