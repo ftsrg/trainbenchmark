@@ -1,7 +1,7 @@
 input:
   edges:
     connectsTo: [SegmentJoin1.primary, Join1_2.secondary, Join3_4.primary, Join3_4.secondary, Join1234_5.secondary]
-    monitoredBy: [SensorJoin1.secondary, SensorJoin2.secondary]
+    monitoredBy: [SensorJoin1.secondary, SensorJoin2.secondary, SensorJoin3.secondary, SensorJoin4.secondary, SensorJoin5.secondary, SensorJoin6.secondary]
   types:
     Segment: [SegmentJoin1.secondary]
 

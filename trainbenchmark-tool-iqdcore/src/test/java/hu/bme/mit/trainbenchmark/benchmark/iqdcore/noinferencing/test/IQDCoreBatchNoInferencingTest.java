@@ -12,12 +12,21 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
-public class IQDCoreBatchNoInferencingTest extends BatchTest {
+public class IQDCoreBatchNoInferencingTest extends BaseTest {
 
-	public IQDCoreBatchNoInferencingTest() {
-		bi = new IQDCoreBenchmarkNoInferencingInitializer();
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		final int messageSize = 16;
+		final IQDConfigWrapper config = new IQDConfigWrapper(bc, messageSize);
+		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
+		final BenchmarkResult result = scenario.runBenchmark();
+		return result;
 	}
-
 }

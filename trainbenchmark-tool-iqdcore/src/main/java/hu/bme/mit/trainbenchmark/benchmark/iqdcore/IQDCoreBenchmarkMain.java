@@ -28,7 +28,7 @@ public class IQDCoreBenchmarkMain {
 		final WildcardInput input = new WildcardInput(16);
 		final IQDCoreDriver driver = new IQDCoreDriver(config, input);
 		final IQDModelOperationFactory factory = new IQDModelOperationFactory(input);
-		final BenchmarkScenario<IQDCoreMatch, IQDCoreDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, IQDCoreMatchComparator.create(), config);
+		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		scenario.runBenchmark();
 		System.exit(0);
 		return;
