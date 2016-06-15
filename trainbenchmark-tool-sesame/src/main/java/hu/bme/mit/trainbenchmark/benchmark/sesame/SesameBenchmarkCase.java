@@ -15,7 +15,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame;
 import org.openrdf.model.URI;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;

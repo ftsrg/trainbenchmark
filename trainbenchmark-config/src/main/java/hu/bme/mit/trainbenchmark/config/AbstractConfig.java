@@ -14,13 +14,13 @@ package hu.bme.mit.trainbenchmark.config;
 
 public abstract class AbstractConfig {
 
-	protected int xms;
-	protected int xmx;
+	protected String xms;
+	protected String xmx;
 
 	protected AbstractConfig() {
 	}
 	
-	public AbstractConfig(int xms, int xmx) {
+	public AbstractConfig(String xms, String xmx) {
 		this.xms = xms;
 		this.xmx = xmx;
 	}
@@ -29,11 +29,11 @@ public abstract class AbstractConfig {
 		return "../";
 	}
 
-	public int getXms() {
+	public String getXms() {
 		return xms;
 	}
 	
-	public int getXmx() {
+	public String getXmx() {
 		return xmx;
 	}
 
