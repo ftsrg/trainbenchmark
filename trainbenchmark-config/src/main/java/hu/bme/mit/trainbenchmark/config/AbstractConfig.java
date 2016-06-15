@@ -20,13 +20,17 @@ public abstract class AbstractConfig {
 	protected AbstractConfig() {
 	}
 	
-	public AbstractConfig(String xms, String xmx) {
+	public AbstractConfig(final String xms, final String xmx) {
 		this.xms = xms;
 		this.xmx = xmx;
 	}
 
-	public String getWorkspacePath() {
+	public String getWorkspaceDir() {
 		return "../";
+	}
+	
+	public String getModelDir() {
+		return getWorkspaceDir() + "models/";
 	}
 
 	public String getXms() {

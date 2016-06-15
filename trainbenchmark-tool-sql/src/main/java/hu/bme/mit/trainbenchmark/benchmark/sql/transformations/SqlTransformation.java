@@ -37,7 +37,7 @@ public abstract class SqlTransformation<TObject> extends ModelTransformation<TOb
 	}
 	
 	protected String getTransformationDirectory() {
-		return benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "transformations/";
+		return benchmarkConfig.getWorkspaceDir() + driver.getResourceDirectory() + "transformations/";
 	}
 
 //	public static ModelTransformation<?, ?> newInstance(final SqlDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {

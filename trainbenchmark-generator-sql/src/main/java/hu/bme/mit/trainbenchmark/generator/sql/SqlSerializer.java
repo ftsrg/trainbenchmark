@@ -62,7 +62,7 @@ public class SqlSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFileDirectory = generatorConfigWrapper.getGeneratorConfig().getWorkspacePath()
+		final String headerFileDirectory = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
 		final String headerFilePath = headerFileDirectory + "railway-header.sql";
 		final File headerFile = new File(headerFilePath);
@@ -79,7 +79,7 @@ public class SqlSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspacePath()
+		final String footerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
 				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
@@ -111,7 +111,7 @@ public class SqlSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 		final Process processDump = rt.exec(commandDump);
 		processDump.waitFor();
 
-		final String[] sqliteDump = { "/bin/bash", "-c", generatorConfigWrapper.getGeneratorConfig().getWorkspacePath()
+		final String[] sqliteDump = { "/bin/bash", "-c", generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
 				+ "/hu.bme.mit.trainbenchmark.sql/scripts/mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath };
 		final Process processSqlite = rt.exec(sqliteDump);
 		processSqlite.waitFor();

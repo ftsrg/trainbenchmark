@@ -48,7 +48,7 @@ public final class GeneratorConfig extends AbstractConfig {
 	}
 
 	public String getModelPathWithoutExtension() {
-		return "../models/" + getModelFileNameWithoutExtension();
+		return getModelDir() + getModelFileNameWithoutExtension();
 	}
 
 }

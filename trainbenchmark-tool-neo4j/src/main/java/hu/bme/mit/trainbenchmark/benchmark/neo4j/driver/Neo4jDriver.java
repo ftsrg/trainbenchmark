@@ -47,21 +47,21 @@ public class Neo4jDriver extends Driver<Node> {
 	protected final Comparator<Node> nodeComparator = new NodeComparator();
 	protected final String dbPath;
 
-	public Neo4jDriver(final String workspacePath) throws IOException {
+	public Neo4jDriver(final String modelDir) throws IOException {
 		super();
-		this.dbPath = workspacePath + "/models/neo4j-dbs/railway-database";
+		this.dbPath = modelDir + "/neo4j-dbs/railway-database";
 	}
 
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-		
+
 		// delete old database directory
 		if (new File(dbPath).exists()) {
 			FileUtils.deleteDirectory(new File(dbPath));
 		}
 	}
-	
+
 	@Override
 	public void destroy() {
 		graphDb.shutdown();

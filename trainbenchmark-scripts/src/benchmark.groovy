@@ -6,7 +6,7 @@ import hu.bme.mit.trainbenchmark.benchmark.runner.BenchmarkRunner
 
 def xms = "2G"
 def xmx = "4G"
-def modelPath = "../models/railway-repair-1"
+def modelPath = "railway-repair-1"
 def railwayOperations = [
 	POSLENGTH_REPAIR,
 	SWITCHMONITORED,
