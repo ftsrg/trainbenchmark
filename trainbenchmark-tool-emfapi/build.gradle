@@ -1,15 +1,14 @@
-apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkMain'
+plugins {
+	id "com.github.johnrengelman.shadow" version "1.2.3"
+}
+
+shadowJar {
+	classifier = 'fat'
+	manifest {
+		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkMain'
+	}
+}
 
 dependencies {
   compile project(':trainbenchmark-tool-emf')
-}
-
-startScripts {
-  doLast {
-	def winScriptFile  = file getWindowsScript()
-	def winFileText = winScriptFile.text
-	winFileText = winFileText.replaceAll('set CLASSPATH=.*', 'rem original CLASSPATH declaration replaced by:\nset CLASSPATH=%APP_HOME%\\\\lib\\\\\\*')
-	winScriptFile.text = winFileText
-  }
 }

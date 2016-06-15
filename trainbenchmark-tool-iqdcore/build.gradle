@@ -1,5 +1,13 @@
-apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDCoreBenchmarkMain'
+plugins {
+	id "com.github.johnrengelman.shadow" version "1.2.3"
+}
+
+shadowJar {
+	classifier = 'fat'
+	manifest {
+		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDCoreBenchmarkMain'
+	}
+}
 
 dependencies {
   compile project(':trainbenchmark-tool-rdf')

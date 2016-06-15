@@ -12,8 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph;
 
-import java.util.Comparator;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
@@ -31,7 +29,7 @@ public class TinkerGraphBenchmarkCase
 	}
 
 	@Override
-	public Comparator<TinkerGraphMatch> getMatchComparator() {
+	public TinkerGraphMatchComparator getMatchComparator() {
 		return TinkerGraphMatchComparator.create();
 	}
 
