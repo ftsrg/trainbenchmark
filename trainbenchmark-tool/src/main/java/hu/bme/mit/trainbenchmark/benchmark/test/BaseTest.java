@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test;
 
 import java.util.Collection;
 
-import org.junit.Assert;
+import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,12 +44,12 @@ public abstract class BaseTest {
 	public void checkResult() throws Exception {
 		final BenchmarkResult result = runTest();
 
-		Assert.assertEquals(8, (int) result.getAllMatches().get(RailwayQuery.CONNECTEDSEGMENTS).get(0));
-		Assert.assertEquals(78, (int) result.getAllMatches().get(RailwayQuery.POSLENGTH).get(0));
-		Assert.assertEquals(12, (int) result.getAllMatches().get(RailwayQuery.ROUTESENSOR).get(0));
-		Assert.assertEquals(9, (int) result.getAllMatches().get(RailwayQuery.SEMAPHORENEIGHBOR).get(0));
-		Assert.assertEquals(1, (int) result.getAllMatches().get(RailwayQuery.SWITCHMONITORED).get(0));
-		Assert.assertEquals(2, (int) result.getAllMatches().get(RailwayQuery.SWITCHSET).get(0));
+		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
+		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(78));
+		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(12));
+		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(9));
+		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(1));
+		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(2));
 	}
 
 	protected abstract BenchmarkResult runTest() throws Exception;
