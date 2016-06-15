@@ -19,26 +19,30 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public final class BenchmarkConfig extends AbstractConfig {
 
+	protected long timeout; // in seconds
 	protected int runs;
 	protected int queryTransformationCount;
 	protected String toolName;
 	protected String modelPath;
 	protected Collection<RailwayOperation> railwayOperations;
-	
-	protected BenchmarkConfig() {}
-	
-	public BenchmarkConfig(final int runs, final int queryTransformatioCount, final String modelPath, final Collection<RailwayOperation> railwayOperations) {
-		super();
+
+	public BenchmarkConfig(final int xms, final int xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelPath, final Collection<RailwayOperation> railwayOperations) {
+		super(xms, xmx);
+		this.timeout = timeout;
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformatioCount;
 		this.modelPath = modelPath;
 		this.railwayOperations = railwayOperations;
 	}
 
+	public long getTimeout() {
+		return timeout;
+	}
+	
 	public int getRuns() {
 		return runs;
 	}
-
+	
 	public int getQueryTransformationCount() {
 		return queryTransformationCount;
 	}

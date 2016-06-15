@@ -14,8 +14,27 @@ package hu.bme.mit.trainbenchmark.config;
 
 public abstract class AbstractConfig {
 
+	protected int xms;
+	protected int xmx;
+
+	protected AbstractConfig() {
+	}
+	
+	public AbstractConfig(int xms, int xmx) {
+		this.xms = xms;
+		this.xmx = xmx;
+	}
+
 	public String getWorkspacePath() {
 		return "../";
+	}
+
+	public int getXms() {
+		return xms;
+	}
+	
+	public int getXmx() {
+		return xmx;
 	}
 
 }

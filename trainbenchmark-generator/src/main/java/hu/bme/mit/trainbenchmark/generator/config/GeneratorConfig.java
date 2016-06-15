@@ -21,9 +21,11 @@ public final class GeneratorConfig extends AbstractConfig {
 	protected int size;
 
 	protected GeneratorConfig() {
+		super();
 	}
 	
-	public GeneratorConfig(final Scenario scenario, final int size) {
+	public GeneratorConfig(final int xms, final int xmx, final Scenario scenario, final int size) {
+		super(xms, xmx);
 		this.scenario = scenario;
 		this.size = size;
 	}

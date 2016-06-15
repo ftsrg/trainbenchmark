@@ -4,7 +4,7 @@ import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
 
 public class TransformationPhase extends Phase {
 	
-	public TransformationPhase(final BenchmarkExecutor executor) {
+	public TransformationPhase(final BenchmarkExecutor<?, ?, ?> executor) {
 		super(executor);
 	}
 

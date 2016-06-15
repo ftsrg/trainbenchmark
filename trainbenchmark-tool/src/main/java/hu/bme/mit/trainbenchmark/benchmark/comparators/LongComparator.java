@@ -9,26 +9,15 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sql.comparators;
+package hu.bme.mit.trainbenchmark.benchmark.comparators;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
+import java.util.Comparator;
 
-public class LongMatchComparator extends MatchComparator<LongMatch, Long> {
-
-	protected LongMatchComparator() {
-		super(new LongComparator());
-	}
-	
-	public static LongMatchComparator create() {
-		return new LongMatchComparator();
-	}
+public class LongComparator implements Comparator<Long> {
 
 	@Override
-	public int compare(final LongMatch o1, final LongMatch o2) {
-		final Long[] m1 = o1.getMatch();
-		final Long[] m2 = o2.getMatch();
-		return compareArrays(m1, m2);
+	public int compare(final Long l1, final Long l2) {
+		return Long.compare(l1, l2);
 	}
 
 }

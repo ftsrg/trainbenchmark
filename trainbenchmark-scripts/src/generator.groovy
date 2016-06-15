@@ -7,6 +7,9 @@ import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.runner.GeneratorRunner
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 
+
+def xms = "2G"
+def xmx = "4G"
 def minSize = 1
 def maxSize = 2
 
@@ -16,8 +19,8 @@ def scenarios = [
 	Scenario.REPAIR,
 ]
 
-def generate(Scenario scenario, int size) {
-	def gc = new GeneratorConfig(scenario, size)
+def generate(int xms, int xmx, Scenario scenario, int size) {
+	def gc = new GeneratorConfig(xms, xmx, scenario, size)
 
 	// EMF
 	def egcw = new GeneratorConfigWrapper(gc)
@@ -49,6 +52,6 @@ def generate(Scenario scenario, int size) {
 for (scenario in scenarios) {
 	for (size = minSize; size <= maxSize; size*=2) {
 		println("Scenario: ${scenario}, size: ${size}")
-		generate(scenario, size)
+		generate(xms, xmx, scenario, size)
 	}
 }
