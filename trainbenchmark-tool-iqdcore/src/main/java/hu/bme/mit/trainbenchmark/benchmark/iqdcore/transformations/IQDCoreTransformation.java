@@ -16,7 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.*;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.ScenarioEnum;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
+
+
 
 public abstract class IQDCoreTransformation<TObject> extends ModelTransformation<TObject, IQDCoreDriver> {
 
@@ -26,9 +28,8 @@ public abstract class IQDCoreTransformation<TObject> extends ModelTransformation
 
 	}
 
-	public static ModelTransformation<?, IQDCoreDriver> newInstance(final IQDCoreDriver driver, final RailwayQuery query, final ScenarioEnum scenario) {
+	public static ModelTransformation<?, IQDCoreDriver> newInstance(final IQDCoreDriver driver, final RailwayQuery query, final Scenario scenario) {
 		switch (scenario) {
-		case BATCH:
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:

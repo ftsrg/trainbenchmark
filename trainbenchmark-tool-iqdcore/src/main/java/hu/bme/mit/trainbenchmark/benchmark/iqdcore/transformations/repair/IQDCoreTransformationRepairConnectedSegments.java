@@ -11,15 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incqueryds.WildcardInput.Transaction;
-import hu.bme.mit.incqueryds.WildcardInput;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 
 public class IQDCoreTransformationRepairConnectedSegments extends IQDCoreTransformationRepair<IQDCoreConnectedSegmentsMatch> {
 
@@ -29,7 +28,7 @@ public class IQDCoreTransformationRepairConnectedSegments extends IQDCoreTransfo
 
 	@Override
 	public void activate(final Collection<IQDCoreConnectedSegmentsMatch> matches) throws IOException {
-		final Transaction transaction = driver.newTransaction();
+		final WildcardInput.BatchTransaction transaction = driver.newTransaction();
 		for (final IQDCoreConnectedSegmentsMatch match : matches) {
 			transaction.remove(match.getSegment1(), CONNECTS_TO, match.getSegment2());
 			transaction.remove(match.getSegment2(), CONNECTS_TO, match.getSegment3());

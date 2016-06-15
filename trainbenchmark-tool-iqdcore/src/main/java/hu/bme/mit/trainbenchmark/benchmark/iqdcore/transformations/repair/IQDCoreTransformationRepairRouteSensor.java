@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreRouteSensorMatch;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incqueryds.WildcardInput.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreRouteSensorMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 
 public class IQDCoreTransformationRepairRouteSensor extends IQDCoreTransformationRepair<IQDCoreRouteSensorMatch> {
 
@@ -28,7 +28,7 @@ public class IQDCoreTransformationRepairRouteSensor extends IQDCoreTransformatio
 
 	@Override
 	public void activate(final Collection<IQDCoreRouteSensorMatch> matches) throws IOException {
-		final Transaction transaction = driver.newTransaction();
+		final WildcardInput.BatchTransaction transaction = driver.newTransaction();
 		for (final IQDCoreRouteSensorMatch match : matches) {
 			final Long route = match.getRoute();
 			final Long sensor = match.getSensor();
