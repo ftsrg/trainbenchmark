@@ -7,6 +7,6 @@ install:
   -
 script:
   - scripts/dep-graph.sh
-  - scripts/install.sh
+  - scripts/shadowJar.sh
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
