@@ -19,7 +19,6 @@ include ':trainbenchmark-tool-drools6'
 include ':trainbenchmark-tool-eclipseocl'
 include ':trainbenchmark-tool-emf'
 include ':trainbenchmark-tool-emfapi'
-include ':trainbenchmark-tool-iqdcore'
 include ':trainbenchmark-tool-jena'
 include ':trainbenchmark-tool-mysql'
 include ':trainbenchmark-tool-neo4j'
@@ -30,3 +29,7 @@ include ':trainbenchmark-tool-sqlite'
 include ':trainbenchmark-tool-tinkergraph'
 include ':trainbenchmark-tool-viatra'
 include ':trainbenchmark-tool-viatra-patterns'
+
+if (hasProperty('iqdcore')) {
+	include ':trainbenchmark-tool-iqdcore'
+}
