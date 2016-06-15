@@ -12,11 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
-import java.util.Comparator;
-
 import org.openrdf.model.URI;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.SesameMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
@@ -30,7 +29,7 @@ public class SesameBenchmarkCase extends AbstractBenchmarkCase<SesameMatch, URI,
 	}
 
 	@Override
-	public Comparator<SesameMatch> getMatchComparator() {
+	public SesameMatchComparator getMatchComparator() {
 		return SesameMatchComparator.create();
 	}
 
