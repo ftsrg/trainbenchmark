@@ -11,40 +11,38 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.queries;
 
+import hu.bme.mit.incqueryds.ConfigReader;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import org.apache.commons.io.FileUtils;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.repository.RepositoryException;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 
 public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQuery<TPatternMatch, IQDCoreDriver> {
 
-	protected final String queryDefinition;
+	private final TrainbenchmarkQuery queryEngine;
 
-	public IQDCoreQuery(final IQDCoreDriver driver, final Optional<String> queryDirectory, final RailwayQuery query)
+	public IQDCoreQuery(final IQDCoreDriver driver, final Optional<String> queryDirectory, final RailwayQuery query, WildcardInput input)
 			throws IOException {
 		super(driver, queryDirectory, query);
-		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
+		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(queryPath));
+		input.subscribe(queryEngine.inputLookup());
 	}
 	
-	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch> create(final IQDCoreDriver driver, final Optional<String> queryDirectory, final RailwayQuery query)
+	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch> create(final IQDCoreDriver driver, final Optional<String> queryDirectory, final RailwayQuery query, final WildcardInput input)
 			throws IOException {
-		return new IQDCoreQuery<TPatternMatch>(driver, queryDirectory, query);
+		return new IQDCoreQuery<TPatternMatch>(driver, queryDirectory, query, input);
 	}
 
 	@Override
 	public Collection<TPatternMatch> evaluate() {
-		return (Collection<TPatternMatch>) driver.runQuery(query, queryDefinition);
+		return (Collection<TPatternMatch>) queryEngine.getResults();
 	}
 
 }

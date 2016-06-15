@@ -11,18 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.ResourceComparator;
-import hu.bme.mit.trainbenchmark.benchmark.matches.MatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
+
+import java.util.Comparator;
 
 public class IQDCoreMatchComparator extends MatchComparator<IQDCoreMatch, Long> {
 
-	protected ResourceComparator rc = new ResourceComparator();
+	public IQDCoreMatchComparator(Comparator<Long> longComparator) {
+		super(longComparator);
+	}
 
 	@Override
 	public int compare(final IQDCoreMatch o1, final IQDCoreMatch o2) {
 		final Long[] m1 = o1.toArray();
 		final Long[] m2 = o2.toArray();
-		return compareArrays(m1, m2, rc);
+		return compareArrays(m1, m2);
 	}
-
 }

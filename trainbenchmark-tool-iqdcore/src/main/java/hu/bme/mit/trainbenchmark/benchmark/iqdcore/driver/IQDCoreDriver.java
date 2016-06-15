@@ -11,20 +11,17 @@ import java.util.List;
 public class IQDCoreDriver extends Driver<Long> {
 
 	TrainbenchmarkReader reader;
-	ResourceComparator comparator;
 	private final WildcardInput input;
 
 	public IQDCoreDriver(final IQDConfigWrapper configWrapper, final WildcardInput input) {
 		super();
 		this.input = input;
 		reader = new TrainbenchmarkReader(input);
-		comparator = new ResourceComparator();
 	}
 
 	@Override
 	public void read(final String modelPath) throws Exception {
 		reader.read(modelPath);
-
 	}
 	@Override
 	public List<Long> collectVertices(final String type) throws Exception {
@@ -38,11 +35,11 @@ public class IQDCoreDriver extends Driver<Long> {
 
 	@Override
 	public void destroy() {
-		query.shutdown();
+
 	}
 
-	public WildcardInput.Transaction newTransaction() {
-		return input.newTransaction();
+	public WildcardInput.BatchTransaction newTransaction() {
+		return input.newBatchTransaction();
 	}
 
 	public long newKey() {
