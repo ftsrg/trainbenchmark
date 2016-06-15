@@ -1,22 +1,23 @@
 plugins {
-	id "com.github.johnrengelman.shadow" version "1.2.3"
+  id "com.github.johnrengelman.shadow" version "1.2.3"
 }
 
 shadowJar {
-	classifier = 'fat'
-	manifest {
-		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.rdf.RdfGeneratorMain'
-	}
+  classifier = 'fat'
+  manifest {
+    attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.rdf.RdfGeneratorMain'
+  }
 }
 
 dependencies {
+  def sesameVersion = '2.7.10'
   compile project(':trainbenchmark-generator')
   compile project(':trainbenchmark-format-rdf')
-  compile group: 'org.openrdf.sesame', name: 'sesame-model', version:'2.7.10'
-  compile group: 'org.openrdf.sesame', name: 'sesame-repository-sail', version:'2.7.10'
-  compile group: 'org.openrdf.sesame', name: 'sesame-sail-memory', version:'2.7.10'
-  compile group: 'org.openrdf.sesame', name: 'sesame-repository-contextaware', version:'2.7.10'
-  compile group: 'org.openrdf.sesame', name: 'sesame-rio-rdfxml', version:'2.7.10'
-  compile group: 'org.openrdf.sesame', name: 'sesame-rio-turtle', version:'2.7.10'
-  compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.6.1'
+  compile group: 'org.openrdf.sesame', name: 'sesame-model', version: sesameVersion
+  compile group: 'org.openrdf.sesame', name: 'sesame-repository-sail', version: sesameVersion
+  compile group: 'org.openrdf.sesame', name: 'sesame-sail-memory', version: sesameVersion
+  compile group: 'org.openrdf.sesame', name: 'sesame-repository-contextaware', version: sesameVersion
+  compile group: 'org.openrdf.sesame', name: 'sesame-rio-rdfxml', version: sesameVersion
+  compile group: 'org.openrdf.sesame', name: 'sesame-rio-turtle', version: sesameVersion
+  compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.6.1'
 }

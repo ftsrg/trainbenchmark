@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ListMultimap;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
@@ -44,12 +45,13 @@ public abstract class BaseTest {
 	public void checkResult() throws Exception {
 		final BenchmarkResult result = runTest();
 
-		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
-		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(78));
-		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(12));
-		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(9));
-		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(1));
-		collector.checkThat((int) result.getAllMatches().get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(2));
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getAllMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
+		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(78));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(12));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(9));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(1));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(2));
 	}
 
 	protected abstract BenchmarkResult runTest() throws Exception;
