@@ -42,7 +42,6 @@ public class MySesameTest {
 				driver, factory, comparator, rbcw);
 		final BenchmarkResult benchmark = scenario.runBenchmark();
 		System.out.println(benchmark);
-
 	}
 
 }
