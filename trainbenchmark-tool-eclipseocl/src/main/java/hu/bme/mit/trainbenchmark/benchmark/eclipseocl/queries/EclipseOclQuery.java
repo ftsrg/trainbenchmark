@@ -41,7 +41,7 @@ public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuer
 			throws IOException, ParserException {
 		super(query, driver);
 
-		final String oclQueryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
+		final String oclQueryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspaceDir()
 				+ "/trainbenchmark-tool-eclipseocl/src/main/resources/queries/" + query + ".ocl"));
 
 		ocl = OCL.newInstance();

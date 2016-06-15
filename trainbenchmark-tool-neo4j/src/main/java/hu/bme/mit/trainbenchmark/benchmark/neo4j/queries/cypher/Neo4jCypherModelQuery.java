@@ -32,7 +32,7 @@ public class Neo4jCypherModelQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 		super(query, driver);
 
 		this.query = query;
-		queryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspacePath()
+		queryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspaceDir()
 				+ "/hu.bme.mit.trainbenchmark.benchmark.neo4j/src/main/resources/queries/" + query + ".cyp"));
 	}
 

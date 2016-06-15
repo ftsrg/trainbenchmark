@@ -42,7 +42,7 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	public void initializeOperations() throws Exception {
 		for (final RailwayOperation railwayOperation : bcw.getBenchmarkConfig().getRailwayOperations()) {
 
-			final Optional<String> workspacePath = Optional.of(bcw.getBenchmarkConfig().getWorkspacePath());
+			final Optional<String> workspacePath = Optional.of(bcw.getBenchmarkConfig().getWorkspaceDir());
 
 			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
 					workspacePath, driver);

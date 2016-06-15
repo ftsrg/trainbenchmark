@@ -40,7 +40,7 @@ public class Drools5ModelQuery extends ModelQuery<EmfMatch, Drools5Driver> {
 		super(query, driver);
 	
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = benchmarkConfig.getWorkspacePath()
+		final String queryFile = benchmarkConfig.getWorkspaceDir()
 				+ "/trainbenchmark-tool-drools5/src/main/resources/queries/" + query + ".drl";
 		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
 

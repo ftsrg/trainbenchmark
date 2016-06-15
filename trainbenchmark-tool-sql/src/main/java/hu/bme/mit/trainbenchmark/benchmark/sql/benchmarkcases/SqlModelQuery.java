@@ -33,7 +33,7 @@ public class SqlModelQuery<TSQLDriver extends SqlDriver> extends ModelQuery<SqlM
 	public SqlModelQuery(final TSQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
 		super(query, driver);
 
-		final String queryPath = benchmarkConfig.getWorkspacePath() + driver.getResourceDirectory() + "queries/" + query + ".sql";
+		final String queryPath = benchmarkConfig.getWorkspaceDir() + driver.getResourceDirectory() + "queries/" + query + ".sql";
 		queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 

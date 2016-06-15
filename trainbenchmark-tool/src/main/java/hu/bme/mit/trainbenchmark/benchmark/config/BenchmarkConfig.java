@@ -23,15 +23,15 @@ public final class BenchmarkConfig extends AbstractConfig {
 	protected int runs;
 	protected int queryTransformationCount;
 	protected String toolName;
-	protected String modelPath;
+	protected String modelFilename;
 	protected Collection<RailwayOperation> railwayOperations;
 
-	public BenchmarkConfig(final String xms, final String xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelPath, final Collection<RailwayOperation> railwayOperations) {
+	public BenchmarkConfig(final String xms, final String xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelFilename, final Collection<RailwayOperation> railwayOperations) {
 		super(xms, xmx);
 		this.timeout = timeout;
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformatioCount;
-		this.modelPath = modelPath;
+		this.modelFilename = modelFilename;
 		this.railwayOperations = railwayOperations;
 	}
 
@@ -52,7 +52,7 @@ public final class BenchmarkConfig extends AbstractConfig {
 	}
 
 	public String getModelPath() {
-		return modelPath;
+		return getModelDir() + modelFilename;
 	}
 
 	public Collection<RailwayOperation> getRailwayOperations() {

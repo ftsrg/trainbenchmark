@@ -21,7 +21,7 @@ public abstract class SQLiteTransformation<TObject> extends SqlTransformation<TO
 	
 	@Override
 	protected String getTransformationDirectory() {
-		return benchmarkConfig.getWorkspacePath() + "hu.bme.mit.trainbenchmark.benchmark.sqlite/" + "src/main/resources/transformations/";
+		return benchmarkConfig.getWorkspaceDir() + "hu.bme.mit.trainbenchmark.benchmark.sqlite/" + "src/main/resources/transformations/";
 	}
 	
 //	public static ModelTransformation<?, ?> newInstance(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {

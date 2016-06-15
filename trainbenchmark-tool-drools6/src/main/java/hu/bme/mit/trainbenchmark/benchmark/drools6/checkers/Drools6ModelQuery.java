@@ -36,7 +36,7 @@ public class Drools6ModelQuery extends ModelQuery<EmfMatch, Drools6Driver> {
 	public Drools6ModelQuery(final BenchmarkConfig benchmarkConfig, final Drools6Driver driver, final RailwayQuery query) throws IOException {
 		super(query, driver);
 		
-		final String queryFile = benchmarkConfig.getWorkspacePath()
+		final String queryFile = benchmarkConfig.getWorkspaceDir()
 				+ "/trainbenchmark-tool-drools6/src/main/resources/queries/" + query + ".drl";
 		final File file = new File(queryFile);
 		if (!file.exists()) {
