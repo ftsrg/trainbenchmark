@@ -26,7 +26,7 @@ public final class BenchmarkConfig extends AbstractConfig {
 	protected String modelPath;
 	protected Collection<RailwayOperation> railwayOperations;
 
-	public BenchmarkConfig(final int xms, final int xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelPath, final Collection<RailwayOperation> railwayOperations) {
+	public BenchmarkConfig(final String xms, final String xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelPath, final Collection<RailwayOperation> railwayOperations) {
 		super(xms, xmx);
 		this.timeout = timeout;
 		this.runs = runs;

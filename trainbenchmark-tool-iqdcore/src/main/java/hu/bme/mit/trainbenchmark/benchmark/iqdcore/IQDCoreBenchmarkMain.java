@@ -20,8 +20,6 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations.IQDModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
-import static com.sun.xml.internal.xsom.impl.UName.comparator;
-
 public class IQDCoreBenchmarkMain {
 
 	public static void main(String[] args) throws Exception {
@@ -29,6 +27,7 @@ public class IQDCoreBenchmarkMain {
 		final WildcardInput input = new WildcardInput(16);
 		final IQDCoreDriver driver = new IQDCoreDriver(config, input);
 		final IQDModelOperationFactory factory = new IQDModelOperationFactory(input);
+		
 		final BenchmarkScenario<IQDCoreMatch, IQDCoreDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, config);
 		scenario.runBenchmark();
 		System.exit(0);

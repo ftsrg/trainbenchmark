@@ -23,13 +23,13 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.operations.SesameModelOperatio
 public class SesameBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RdfBenchmarkConfigWrapper benchmarkConfigWrapper = BenchmarkConfigWrapper.fromFile(args[0], RdfBenchmarkConfigWrapper.class);
+		final RdfBenchmarkConfigWrapper rbcw = BenchmarkConfigWrapper.fromFile(args[0], RdfBenchmarkConfigWrapper.class);
 		
-		final SesameDriver driver = SesameDriver.create(benchmarkConfigWrapper.isInferencing());
+		final SesameDriver driver = SesameDriver.create(rbcw.isInferencing());
 		final SesameModelOperationFactory factory = SesameModelOperationFactory.create();
 		final SesameMatchComparator comparator = SesameMatchComparator.create();
 		
-		final BenchmarkScenario<SesameMatch, SesameDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, benchmarkConfigWrapper);
+		final BenchmarkScenario<SesameMatch, SesameDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, rbcw);
 		scenario.runBenchmark();
 	}
 

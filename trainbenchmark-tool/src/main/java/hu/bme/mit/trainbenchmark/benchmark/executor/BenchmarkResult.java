@@ -5,7 +5,7 @@ import com.google.common.collect.ListMultimap;
 
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class BenchmarkResults {
+public class BenchmarkResult {
 
 	protected final ListMultimap<RailwayQuery, Integer> allMatches = LinkedListMultimap.create();
 	
@@ -51,6 +51,5 @@ public class BenchmarkResults {
 		s += "Transformation times: " + transformationTimes + "\n";
 		return s;
 	}
-
 	
 }

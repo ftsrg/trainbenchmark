@@ -20,12 +20,12 @@ public class BenchmarkExecutor<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	protected final ModelOperationFactory<TPatternMatch, TDriver> factory;
 	protected final Comparator<TPatternMatch> comparator;
 	protected final TBenchmarkConfigWrapper bcw;
-	protected final BenchmarkResults benchmarkResults;
+	protected final BenchmarkResult benchmarkResults;
 
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
 	public BenchmarkExecutor(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper benchmarkConfigWrapper, final BenchmarkResults benchmarkResults) {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper benchmarkConfigWrapper, final BenchmarkResult benchmarkResults) {
 		this.driver = driver;
 		this.factory = factory;
 		this.comparator = comparator;
