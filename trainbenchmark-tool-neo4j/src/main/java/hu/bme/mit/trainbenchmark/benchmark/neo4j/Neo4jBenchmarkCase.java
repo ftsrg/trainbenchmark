@@ -12,11 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
-import java.util.Comparator;
-
 import org.neo4j.graphdb.Node;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators.Neo4jMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
@@ -30,7 +29,7 @@ public class Neo4jBenchmarkCase<Neo4jChecker> extends AbstractBenchmarkCase<Neo4
 	}
 	
 	@Override
-	public Comparator<Neo4jMatch> getMatchComparator() {
+	public MatchComparator<Neo4jMatch, Node> getMatchComparator() {
 		return Neo4jMatchComparator.create();
 	}
 

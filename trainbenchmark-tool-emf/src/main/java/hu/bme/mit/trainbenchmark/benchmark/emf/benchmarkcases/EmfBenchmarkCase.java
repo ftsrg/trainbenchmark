@@ -11,20 +11,19 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.benchmarkcases;
 
-import java.util.Comparator;
-
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public abstract class EmfBenchmarkCase<TDriver extends EmfDriver, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper>
 		extends AbstractBenchmarkCase<EmfMatch, RailwayElement, TDriver, TBenchmarkConfigWrapper> {
 
 	@Override
-	public Comparator<EmfMatch> getMatchComparator() {
+	public EmfMatchComparator getMatchComparator() {
 		return EmfMatchComparator.create();
 	}
 

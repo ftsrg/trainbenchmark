@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.lang.SystemUtils;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
@@ -17,9 +16,7 @@ public class GeneratorRunner {
 		gcw.saveToFile(configPath);
 
 		final String projectName = String.format("trainbenchmark-generator-%s", generatorName);
-		final String postFix = SystemUtils.IS_OS_WINDOWS ? ".bat" : "";
-		final String scriptCommand = String.format("../%s/build/install/%s/bin/%s%s %s", projectName, projectName,
-				projectName, postFix, configPath);
+		final String scriptCommand = String.format("../%s/build/libs/%s/bin/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName, projectName, configPath);
 
 		System.out.println(scriptCommand);
 		final CommandLine cmdLine = CommandLine.parse(scriptCommand);

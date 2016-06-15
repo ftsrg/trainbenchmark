@@ -12,10 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.benchmarkcases;
 
-import java.util.Comparator;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 
 public abstract class AbstractBenchmarkCase<//
 TMatch, //
@@ -26,6 +25,6 @@ TBenchmarkConfigWrapper extends BenchmarkConfigWrapper //
 
 	public abstract TDriver createDriver(TBenchmarkConfigWrapper benchmarkConfigWrapper) throws Exception;
 
-	public abstract Comparator<TMatch> getMatchComparator();
+	public abstract MatchComparator<TMatch, TElement> getMatchComparator();
 
 }

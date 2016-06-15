@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import java.util.Comparator;
-
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
@@ -34,7 +32,7 @@ ViatraBenchmarkConfigWrapper> {
 	}
 
 	@Override
-	public Comparator<TMatch> getMatchComparator() {
+	public ViatraMatchComparator<TMatch> getMatchComparator() {
 		return ViatraMatchComparator.create();
 	}
 

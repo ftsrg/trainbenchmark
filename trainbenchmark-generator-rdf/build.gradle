@@ -1,5 +1,13 @@
-apply plugin: 'application'
-mainClassName = 'hu.bme.mit.trainbenchmark.generator.rdf.RdfGeneratorMain'
+plugins {
+	id "com.github.johnrengelman.shadow" version "1.2.3"
+}
+
+shadowJar {
+	classifier = 'fat'
+	manifest {
+		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.rdf.RdfGeneratorMain'
+	}
+}
 
 dependencies {
   compile project(':trainbenchmark-generator')
@@ -11,13 +19,4 @@ dependencies {
   compile group: 'org.openrdf.sesame', name: 'sesame-rio-rdfxml', version:'2.7.10'
   compile group: 'org.openrdf.sesame', name: 'sesame-rio-turtle', version:'2.7.10'
   compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.6.1'
-}
-
-startScripts {
-  doLast {
-	def winScriptFile  = file getWindowsScript()
-	def winFileText = winScriptFile.text
-	winFileText = winFileText.replaceAll('set CLASSPATH=.*', 'rem original CLASSPATH declaration replaced by:\nset CLASSPATH=%APP_HOME%\\\\lib\\\\\\*')
-	winScriptFile.text = winFileText
-  }
 }
