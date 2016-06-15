@@ -15,7 +15,6 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.benchmarkcases.IQDCoreChecker;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
@@ -28,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 
-public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Long, IQDCoreDriver, IQDCoreBenchmarkConfig, IQDCoreChecker {
+public class IQDCoreBenchmarkCase extends AbstractBenchmarkCase<IQDCoreMatch, Long, IQDCoreDriver, IQDCoreBenchmarkConfig, IQDCoreChecker> {
 
 	protected final IQDCoreBenchmarkConfig iqdbc;
 	protected WildcardInput iqdInput;

@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDCoreBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.Checker;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.scenarios.BenchmarkRunner;
 import hu.bme.mit.trainbenchmark.benchmark.test.TestBenchmarkInitializer;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
