@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations;
 
+import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
 
@@ -14,27 +15,31 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 import java.util.Optional;
 
-/**
- * Created by wafle on 6/10/2016.
- */
 public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch, IQDCoreDriver> {
+    private WildcardInput input;
+
+    public IQDModelOperationFactory(WildcardInput input) {
+
+        this.input = input;
+    }
+
     @Override
     public ModelOperation<? extends IQDCoreMatch, IQDCoreDriver> createOperation(RailwayOperation operationEnum, Optional<String> workspacePath, IQDCoreDriver driver) throws Exception {
         switch (operationEnum) {
             // ConnectedSegments
             case CONNECTEDSEGMENTS: {
                 final IQDCoreQuery<IQDCoreConnectedSegmentsMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.CONNECTEDSEGMENTS);
+                        RailwayQuery.CONNECTEDSEGMENTS, input);
                 final ModelOperation<IQDCoreConnectedSegmentsMatch, IQDCoreDriver> operation = ModelOperation.of(query);
                 return operation;
             }
             case CONNECTEDSEGMENTS_INJECT: {
-                // TODO
+                // TONOTDO
 
             }
             case CONNECTEDSEGMENTS_REPAIR: {
                 final IQDCoreQuery<IQDCoreConnectedSegmentsMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.CONNECTEDSEGMENTS);
+                        RailwayQuery.CONNECTEDSEGMENTS, input);
                 final IQDCoreTransformation<IQDCoreConnectedSegmentsMatch> transformation = new IQDCoreTransformationRepairConnectedSegments(
                         driver);
                 final ModelOperation<IQDCoreConnectedSegmentsMatch, IQDCoreDriver> operation = ModelOperation.of(query,
@@ -45,16 +50,16 @@ public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch
             // PosLength
             case POSLENGTH: {
                 final IQDCoreQuery<IQDCorePosLengthMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.POSLENGTH);
+                        RailwayQuery.POSLENGTH, input);
                 final ModelOperation<IQDCorePosLengthMatch, IQDCoreDriver> operation = ModelOperation.of(query);
                 return operation;
             }
             case POSLENGTH_INJECT: {
-                // TODO
+                // TONOTDO
             }
             case POSLENGTH_REPAIR: {
                 final IQDCoreQuery<IQDCorePosLengthMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.POSLENGTH);
+                        RailwayQuery.POSLENGTH, input);
                 final IQDCoreTransformation<IQDCorePosLengthMatch> transformation = new IQDCoreTransformationRepairPosLength(
                         driver);
                 final ModelOperation<IQDCorePosLengthMatch, IQDCoreDriver> operation = ModelOperation.of(query,
@@ -66,16 +71,16 @@ public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch
             // RouteSensor
             case ROUTESENSOR: {
                 final IQDCoreQuery<IQDCoreRouteSensorMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.ROUTESENSOR);
+                        RailwayQuery.ROUTESENSOR, input);
                 final ModelOperation<IQDCoreRouteSensorMatch, IQDCoreDriver> operation = ModelOperation.of(query);
                 return operation;
             }
             case ROUTESENSOR_INJECT: {
-                // TODO
+                // TONOTDO
             }
             case ROUTESENSOR_REPAIR: {
                 final IQDCoreQuery<IQDCoreRouteSensorMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.ROUTESENSOR);
+                        RailwayQuery.ROUTESENSOR, input);
                 final IQDCoreTransformation<IQDCoreRouteSensorMatch> transformation = new IQDCoreTransformationRepairRouteSensor(
                         driver);
                 final ModelOperation<IQDCoreRouteSensorMatch, IQDCoreDriver> operation = ModelOperation.of(query,
@@ -86,16 +91,16 @@ public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch
             // SemaphoreNeighbor
             case SEMAPHORENEIGHBOR: {
                 final IQDCoreQuery<IQDCoreSemaphoreNeighborMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.SEMAPHORENEIGHBOR);
+                        RailwayQuery.SEMAPHORENEIGHBOR, input);
                 final ModelOperation<IQDCoreSemaphoreNeighborMatch, IQDCoreDriver> operation = ModelOperation.of(query);
                 return operation;
             }
             case SEMAPHORENEIGHBOR_INJECT: {
-                // TODO
+                // TONOTDO
             }
             case SEMAPHORENEIGHBOR_REPAIR: {
                 final IQDCoreQuery<IQDCoreSemaphoreNeighborMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.SEMAPHORENEIGHBOR);
+                        RailwayQuery.SEMAPHORENEIGHBOR, input);
                 final IQDCoreTransformation<IQDCoreSemaphoreNeighborMatch> transformation = new IQDCoreTransformationRepairSemaphoreNeighbor(
                         driver);
                 final ModelOperation<IQDCoreSemaphoreNeighborMatch, IQDCoreDriver> operation = ModelOperation.of(query,
@@ -106,16 +111,16 @@ public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch
             // SwitchMonitored
             case SWITCHMONITORED: {
                 final IQDCoreQuery<IQDCoreSwitchMonitoredMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.SWITCHMONITORED);
+                        RailwayQuery.SWITCHMONITORED, input);
                 final ModelOperation<IQDCoreSwitchMonitoredMatch, IQDCoreDriver> operation = ModelOperation.of(query);
                 return operation;
             }
             case SWITCHMONITORED_INJECT: {
-                // TODO
+                // TONOTDO
             }
             case SWITCHMONITORED_REPAIR: {
                 final IQDCoreQuery<IQDCoreSwitchMonitoredMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.SWITCHMONITORED);
+                        RailwayQuery.SWITCHMONITORED, input);
                 final IQDCoreTransformation<IQDCoreSwitchMonitoredMatch> transformation = new IQDCoreTransformationRepairSwitchMonitored(
                         driver);
                 final ModelOperation<IQDCoreSwitchMonitoredMatch, IQDCoreDriver> operation = ModelOperation.of(query,
@@ -126,16 +131,16 @@ public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch
             // SwitchSet
             case SWITCHSET: {
                 final IQDCoreQuery<IQDCoreSwitchSetMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.SWITCHSET);
+                        RailwayQuery.SWITCHSET, input);
                 final ModelOperation<IQDCoreSwitchSetMatch, IQDCoreDriver> operation = ModelOperation.of(query);
                 return operation;
             }
             case SWITCHSET_INJECT: {
-                // TODO
+                // TONOTDO
             }
             case SWITCHSET_REPAIR: {
                 final IQDCoreQuery<IQDCoreSwitchSetMatch> query = IQDCoreQuery.create(driver, workspacePath,
-                        RailwayQuery.SWITCHSET);
+                        RailwayQuery.SWITCHSET, input);
                 final IQDCoreTransformation<IQDCoreSwitchSetMatch> transformation = new IQDCoreTransformationRepairSwitchSet(
                         driver);
                 final ModelOperation<IQDCoreSwitchSetMatch, IQDCoreDriver> operation = ModelOperation.of(query,
