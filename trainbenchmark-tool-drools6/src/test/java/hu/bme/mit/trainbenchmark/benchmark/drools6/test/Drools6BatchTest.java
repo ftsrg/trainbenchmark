@@ -16,8 +16,4 @@ import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class Drools6BatchTest extends BatchTest {
 
-	public Drools6BatchTest() {
-		bi = new Drools6BenchmarkInitializer();
-	}
-
 }

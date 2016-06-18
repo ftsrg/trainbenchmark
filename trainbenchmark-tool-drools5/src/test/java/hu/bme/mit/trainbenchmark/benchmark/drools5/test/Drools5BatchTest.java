@@ -12,12 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
-
-public class Drools5BatchTest extends BatchTest {
-
-	public Drools5BatchTest() {
-		bi = new Drools5BenchmarkInitializer();
-	}
+public class Drools5BatchTest {
 
 }

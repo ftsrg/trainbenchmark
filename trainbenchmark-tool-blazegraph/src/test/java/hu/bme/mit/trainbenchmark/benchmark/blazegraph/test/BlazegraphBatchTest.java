@@ -12,11 +12,5 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
-
-public class BlazegraphBatchTest extends BatchTest {
-
-	public BlazegraphBatchTest() {
-		bi = new BlazegraphBenchmarkInitializer();
-	}
+public class BlazegraphBatchTest {
 }

@@ -16,8 +16,4 @@ import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class MySqlBatchTest extends BatchTest {
 
-	public MySqlBatchTest() {
-		bi = new MySqlBenchmarkInitializer();
-	}
-
 }
