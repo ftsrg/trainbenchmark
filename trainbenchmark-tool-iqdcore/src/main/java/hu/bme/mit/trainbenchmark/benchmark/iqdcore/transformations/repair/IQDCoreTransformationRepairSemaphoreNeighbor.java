@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import hu.bme.mit.incqueryds.WildcardInput;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSemaphoreNeighborMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSemaphoreNeighborMatch;
 
 public class IQDCoreTransformationRepairSemaphoreNeighbor extends IQDCoreTransformationRepair<IQDCoreSemaphoreNeighborMatch> {
 

@@ -1,10 +1,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchSetQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchSetQuerySpecification;
 
 /**
  * A pattern group formed of all patterns defined in SwitchSet.vql.

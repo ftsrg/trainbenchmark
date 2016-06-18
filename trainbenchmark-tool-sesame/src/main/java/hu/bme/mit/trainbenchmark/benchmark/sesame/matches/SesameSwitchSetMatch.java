@@ -17,11 +17,12 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 
 public class SesameSwitchSetMatch extends SesameMatch implements SwitchSetMatch {
 

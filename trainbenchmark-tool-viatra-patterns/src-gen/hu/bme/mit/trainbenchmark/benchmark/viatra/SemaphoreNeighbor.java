@@ -1,12 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.viatra.EntrySemaphoreMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.EntrySemaphoreQuerySpecification;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SemaphoreNeighborQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.EntrySemaphoreQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SemaphoreNeighborQuerySpecification;
 
 /**
  * A pattern group formed of all patterns defined in SemaphoreNeighbor.vql.

@@ -38,13 +38,14 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 
-	protected String databasePath;
-
 	protected GraphDatabaseService graphDb;
 	protected Transaction tx;
+	protected final File databaseDirectory;
 
 	public Neo4jGraphSerializer(final GeneratorConfigWrapper generatorConfigWrapper) {
 		super(generatorConfigWrapper);
+		databaseDirectory = new File("/neo4j-gen/"
+				+ generatorConfigWrapper.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j");
 	}
 
 	@Override
@@ -54,16 +55,8 @@ public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfigWrapper
 
 	@Override
 	public void initModel() throws IOException {
-		final String databaseDirectoriesPath = "/neo4j-gen/";
-		databasePath = databaseDirectoriesPath + "/"
-				+ generatorConfigWrapper.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j";
-
-		// on the first run delete the previous database directories
-		if (new File(databasePath).exists()) {
-			FileUtils.deleteDirectory(new File(databasePath));
-		}
-
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databasePath);
+		cleanupDatabaseDirectory();
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
 
 		// bump the initial id from 0 to 1
 		try (Transaction tx = graphDb.beginTx()) {
@@ -158,7 +151,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfigWrapper
 			final String fileName = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
 					+ ".graphml";
 
-			String graphmlContent = writer.toString();
+			final String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB
 			// graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
 			// "<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\"
@@ -169,9 +162,13 @@ public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfigWrapper
 			graphDb.shutdown();
 
 			// cleanup: delete the database directory
-			if (new File(databasePath).exists()) {
-				FileUtils.deleteDirectory(new File(databasePath));
-			}
+			cleanupDatabaseDirectory();
+		}
+	}
+
+	private void cleanupDatabaseDirectory() throws IOException {
+		if (databaseDirectory.exists()) {
+			FileUtils.deleteDirectory(databaseDirectory);
 		}
 	}
 

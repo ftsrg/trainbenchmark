@@ -1,10 +1,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInjectMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.PosLengthInjectQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.PosLengthInjectQuerySpecification;
 
 /**
  * A pattern group formed of all patterns defined in PosLengthInject.vql.

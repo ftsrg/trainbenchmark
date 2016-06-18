@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Route;

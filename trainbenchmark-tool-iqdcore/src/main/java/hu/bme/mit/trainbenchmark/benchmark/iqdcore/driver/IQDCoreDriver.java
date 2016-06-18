@@ -1,12 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver;
 
+import java.util.List;
+
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
-
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
-
-import java.util.List;
 
 public class IQDCoreDriver extends Driver<Long> {
 

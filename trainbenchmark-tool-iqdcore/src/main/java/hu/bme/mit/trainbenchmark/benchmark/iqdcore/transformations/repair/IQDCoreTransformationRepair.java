@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;

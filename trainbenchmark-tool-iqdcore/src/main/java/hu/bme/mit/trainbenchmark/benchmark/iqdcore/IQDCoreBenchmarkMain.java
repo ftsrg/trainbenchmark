@@ -12,26 +12,16 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
-import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations.IQDModelOperationFactory;
-import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
 public class IQDCoreBenchmarkMain {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 		final IQDConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], IQDConfigWrapper.class);
-		final WildcardInput input = new WildcardInput(16);
-		final IQDCoreDriver driver = new IQDCoreDriver(config, input);
-		final IQDModelOperationFactory factory = new IQDModelOperationFactory(input);
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		scenario.runBenchmark();
 		System.exit(0);
-		return;
 	}
 
 }

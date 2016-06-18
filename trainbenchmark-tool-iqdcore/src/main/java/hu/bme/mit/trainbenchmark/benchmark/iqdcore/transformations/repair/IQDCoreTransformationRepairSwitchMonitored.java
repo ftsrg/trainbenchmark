@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import hu.bme.mit.incqueryds.WildcardInput;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchMonitoredMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 
 import java.util.Collection;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchMonitoredMatch;
 
 public class IQDCoreTransformationRepairSwitchMonitored extends IQDCoreTransformationRepair<IQDCoreSwitchMonitoredMatch> {
 

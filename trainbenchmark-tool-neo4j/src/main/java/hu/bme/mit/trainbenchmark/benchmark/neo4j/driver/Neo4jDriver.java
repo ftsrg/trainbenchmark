@@ -45,11 +45,11 @@ public class Neo4jDriver extends Driver<Node> {
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
 	protected final Comparator<Node> nodeComparator = new NodeComparator();
-	protected final String dbPath;
+	protected final File databaseDirectory;
 
 	public Neo4jDriver(final String modelDir) throws IOException {
 		super();
-		this.dbPath = modelDir + "/neo4j-dbs/railway-database";
+		this.databaseDirectory = new File(modelDir + "/neo4j-dbs/railway-database");
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class Neo4jDriver extends Driver<Node> {
 		super.initialize();
 
 		// delete old database directory
-		if (new File(dbPath).exists()) {
-			FileUtils.deleteDirectory(new File(dbPath));
+		if (databaseDirectory.exists()) {
+			FileUtils.deleteDirectory(databaseDirectory);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class Neo4jDriver extends Driver<Node> {
 
 	@Override
 	public void read(final String filePath) throws FileNotFoundException, XMLStreamException {
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);

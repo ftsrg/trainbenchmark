@@ -18,10 +18,11 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT4;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT5;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT6;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 
 public class SesameConnectedSegmentsMatch extends SesameMatch implements ConnectedSegmentsMatch {
 
