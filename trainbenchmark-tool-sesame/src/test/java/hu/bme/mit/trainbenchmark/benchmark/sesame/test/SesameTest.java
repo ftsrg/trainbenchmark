@@ -1,21 +1,21 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class MySesameTest extends BaseTest {
+public abstract class SesameTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		final boolean inferencing = true;
-
-		final RdfBenchmarkConfigWrapper rbcw = new RdfBenchmarkConfigWrapper(bc, inferencing);
+		final RdfBenchmarkConfigWrapper rbcw = createRdfBenchmarkConfigWrapper(bc);
 		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(rbcw);
 		final BenchmarkResult result = scenario.runBenchmark();
-
 		return result;
 	}
+
+	protected abstract RdfBenchmarkConfigWrapper createRdfBenchmarkConfigWrapper(final BenchmarkConfig bc);
 
 }
