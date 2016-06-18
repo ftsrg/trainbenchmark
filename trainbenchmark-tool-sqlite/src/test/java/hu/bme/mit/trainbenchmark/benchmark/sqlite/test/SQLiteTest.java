@@ -10,11 +10,18 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
+package hu.bme.mit.trainbenchmark.benchmark.sqlite.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class TinkerGraphBatchTest extends BatchTest {
+public class SQLiteTest extends BaseTest {
+
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

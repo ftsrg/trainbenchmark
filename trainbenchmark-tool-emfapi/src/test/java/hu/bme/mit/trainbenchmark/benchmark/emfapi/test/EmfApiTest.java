@@ -10,10 +10,17 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class MySqlBatchTest extends BatchTest {
+public class EmfApiTest extends BaseTest {
+
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

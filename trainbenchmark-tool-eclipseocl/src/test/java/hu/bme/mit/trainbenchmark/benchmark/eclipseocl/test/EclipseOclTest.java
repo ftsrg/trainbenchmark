@@ -10,10 +10,17 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class Drools6BatchTest extends BatchTest {
+public class EclipseOclTest extends BaseTest {
+
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
