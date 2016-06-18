@@ -13,10 +13,13 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IExpressionEvaluator;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IValueProvider;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
@@ -125,6 +128,26 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
       		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       		new TypeConstraint(body, new FlatTuple(var_segment, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment", "length")));
       		new Equality(body, var__virtual_0_, var_length);
+      		// 	check(length <= 0)
+      		new ExpressionEvaluation(body, new IExpressionEvaluator() {
+      		                            
+      		                            @Override
+      		                            public String getShortDescription() {
+      		                                return "Expression evaluation from pattern PosLength";
+      		                            }
+      		
+      		                            @Override
+      		                            public Iterable<String> getInputParameterNames() {
+      		                                return Arrays.asList("length");
+      		                            }
+      		
+      		                            @Override
+      		                            public Object evaluateExpression(IValueProvider provider) throws Exception {
+      		                                    java.lang.Integer length = (java.lang.Integer) provider.getValue("length");
+      		                                    return evaluateExpression_1_1(length);
+      		                                }
+      		
+      		                        },  null); 
       		bodies.add(body);
       	}
       	// to silence compiler error
@@ -134,5 +157,9 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
       }
       return bodies;
     }
+  }
+  
+  private static boolean evaluateExpression_1_1(final Integer length) {
+    return ((length).intValue() <= 0);
   }
 }

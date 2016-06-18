@@ -29,7 +29,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * pattern PosLength(segment)
  * {
  * 	Segment.length(segment, length);
- * //	check(length {@literal <}= 0);
+ * 	check(length {@literal <}= 0);
  * }
  * </pre></code>
  * 
