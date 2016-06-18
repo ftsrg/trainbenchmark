@@ -1,12 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.viatra.InverseGathersMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.InverseGathersQuerySpecification;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.InverseGathersQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorQuerySpecification;
 
 /**
  * A pattern group formed of all patterns defined in RouteSensor.vql.

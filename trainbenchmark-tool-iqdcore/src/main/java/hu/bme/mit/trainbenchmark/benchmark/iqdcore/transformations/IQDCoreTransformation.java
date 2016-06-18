@@ -11,9 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations;
 
-import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.*;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Scenario;

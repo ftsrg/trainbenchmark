@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
-import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
 public class SesamePosLengthMatch extends SesameMatch implements PosLengthMatch {
 

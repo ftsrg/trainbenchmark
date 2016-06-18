@@ -22,7 +22,7 @@ public abstract class TinkerGraphQuery<TMatch extends TinkerGraphMatch> extends 
 		super(query, driver);
 	}
 
-	public static TinkerGraphQuery newInstance(final RailwayQuery query, final TinkerGraphDriver driver) {
+	public static TinkerGraphQuery<?> newInstance(final RailwayQuery query, final TinkerGraphDriver driver) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new TinkerGraphQueryConnectedSegments(driver);

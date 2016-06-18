@@ -1,8 +1,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
+import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
+
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.railway.Switch;
-import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 
 /**
  * A match processor tailored for the hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInject pattern.

@@ -1,7 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
+import java.util.Comparator;
+
 import hu.bme.mit.incqueryds.WildcardInput;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
@@ -9,8 +10,6 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations.IQDModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
-
-import java.util.Comparator;
 
 /**
  * Created by wafle on 6/15/16.

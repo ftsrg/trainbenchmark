@@ -15,7 +15,6 @@ import hu.bme.mit.trainbenchmark.benchmark.benchmarkcases.AbstractBenchmarkCase;
 import hu.bme.mit.trainbenchmark.benchmark.comparators.LongMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
 public abstract class SqlBenchmarkCase<TBenchmarkConfigWrapper extends BenchmarkConfigWrapper, TSqlDriver extends SqlDriver>

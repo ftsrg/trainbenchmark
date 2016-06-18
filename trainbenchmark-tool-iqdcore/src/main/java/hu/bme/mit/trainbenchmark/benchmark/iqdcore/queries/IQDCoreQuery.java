@@ -11,6 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.queries;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 import hu.bme.mit.incqueryds.ConfigReader;
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
@@ -19,14 +26,6 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.Iterator;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-
 import scala.collection.immutable.Vector;
 
 public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQuery<TPatternMatch, IQDCoreDriver> {

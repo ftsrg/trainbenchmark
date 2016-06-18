@@ -15,10 +15,11 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
 
 public class SesameRouteSensorMatch extends SesameMatch implements RouteSensorMatch {
 

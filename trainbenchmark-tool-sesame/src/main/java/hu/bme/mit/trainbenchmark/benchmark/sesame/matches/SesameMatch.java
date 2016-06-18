@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
+
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SesameMatch {
 

@@ -16,7 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public abstract class EmfBenchmarkCase<TDriver extends EmfDriver, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper>

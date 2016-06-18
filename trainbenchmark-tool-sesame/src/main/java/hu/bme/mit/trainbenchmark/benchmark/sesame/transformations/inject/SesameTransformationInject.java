@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
+import org.openrdf.model.URI;
+
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-
-import org.openrdf.model.URI;
 
 public abstract class SesameTransformationInject extends SesameTransformation<URI> {
 

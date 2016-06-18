@@ -13,8 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
 
 import java.util.Collection;
 
@@ -26,6 +24,9 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
+
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
 
 public class SesameTransformationRepairSwitchSet extends SesameTransformationRepair<SesameSwitchSetMatch> {
 

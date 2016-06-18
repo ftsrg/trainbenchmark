@@ -1,12 +1,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.PosLengthInjectQuerySpecification;
-import hu.bme.mit.trainbenchmark.railway.Segment;
 import java.util.Arrays;
 import java.util.List;
+
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.PosLengthInjectProcessor;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.PosLengthInjectQuerySpecification;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
 /**
  * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject pattern,

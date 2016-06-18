@@ -12,10 +12,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
 public class SesameSwitchMonitoredMatch extends SesameMatch implements SwitchMonitoredMatch {
 

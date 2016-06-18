@@ -1,19 +1,28 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations;
 
+import java.util.Optional;
+
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
-
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.*;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCorePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.queries.IQDCoreQuery;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.*;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.*;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IQDCoreTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-
-import java.util.Optional;
 
 public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch, IQDCoreDriver> {
     private WildcardInput input;
