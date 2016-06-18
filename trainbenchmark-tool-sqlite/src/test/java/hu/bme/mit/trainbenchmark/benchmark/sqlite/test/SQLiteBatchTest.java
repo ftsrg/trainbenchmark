@@ -16,8 +16,5 @@ import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class SQLiteBatchTest extends BatchTest {
 
-	public SQLiteBatchTest() {
-		bi = new SQLiteBenchmarkInitializer();
-	}
 
 }

@@ -16,8 +16,4 @@ import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class EmfApiBatchTest extends BatchTest {
 
-	public EmfApiBatchTest() {
-		bi = new EmfApiBenchmarkInitializer();
-	}
-
 }

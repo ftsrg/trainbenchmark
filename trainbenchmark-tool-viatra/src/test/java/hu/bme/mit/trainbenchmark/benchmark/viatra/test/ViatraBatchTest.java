@@ -12,22 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.viatra.test;
 
-import java.util.Collection;
-
-import org.junit.runners.Parameterized.Parameters;
-
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 
 public class ViatraBatchTest extends BatchTest {
 	
-	@Parameters
-	public static Collection<Object[]> data() {
-	    return ViatraBenchmarkInitializer.getTestParameters();
-	}
-	
-	public ViatraBatchTest(final ViatraBackend backend) {
-		bi = new ViatraBenchmarkInitializer(backend);
-	}
 
 }

@@ -12,22 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.test;
 
-import java.util.Collection;
-
-import org.junit.runners.Parameterized.Parameters;
-
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class JenaBatchTest extends BatchTest {
-
-	@Parameters
-	public static Collection<Object[]> data() {
-	    return JenaBenchmarkInitializer.getTestParameters();
-	}
-	
-	public JenaBatchTest(final boolean inferencing) {
-		bi = new JenaBenchmarkInitializer(inferencing);
-	}
-
 
 }

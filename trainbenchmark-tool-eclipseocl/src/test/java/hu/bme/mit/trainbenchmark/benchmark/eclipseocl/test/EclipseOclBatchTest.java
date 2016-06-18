@@ -16,8 +16,4 @@ import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class EclipseOclBatchTest extends BatchTest {
 
-	public EclipseOclBatchTest() {
-		bi = new EclipseOclBenchmarkInitializer();
-	}
-
 }

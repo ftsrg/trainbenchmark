@@ -12,21 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
 
-import java.util.Collection;
-
-import org.junit.runners.Parameterized.Parameters;
-
 import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
 
 public class TinkerGraphBatchTest extends BatchTest {
 
-	@Parameters
-	public static Collection<Object[]> data() {
-	    return TinkerGraphBenchmarkInitializer.getTestParameters();
-	}
-	
-	public TinkerGraphBatchTest() {
-		bi = new TinkerGraphBenchmarkInitializer();
-	}
 
 }
