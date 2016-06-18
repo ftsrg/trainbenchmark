@@ -10,10 +10,16 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class EmfApiBatchTest extends BatchTest {
+public class Drools6Test extends BaseTest {
+
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		return null;
+	}
 
 }

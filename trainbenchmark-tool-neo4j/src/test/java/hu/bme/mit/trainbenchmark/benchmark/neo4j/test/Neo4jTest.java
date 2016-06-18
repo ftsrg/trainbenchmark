@@ -10,10 +10,17 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.test;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BatchTest;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class JenaBatchTest extends BatchTest {
+public class Neo4jTest extends BaseTest {
+
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

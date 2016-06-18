@@ -10,26 +10,18 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.test;
+package hu.bme.mit.trainbenchmark.benchmark.viatra.test;
 
-import java.util.Arrays;
-import java.util.Collection;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-import org.junit.Rule;
-import org.junit.rules.ErrorCollector;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+public class ViatraTest extends BaseTest {
 
-@RunWith(Parameterized.class)
-public abstract class TrainBenchmarkTest {
-
-	@Parameters
-	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { {} });
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	@Rule
-	public ErrorCollector collector = new ErrorCollector();	
 	
+
 }
