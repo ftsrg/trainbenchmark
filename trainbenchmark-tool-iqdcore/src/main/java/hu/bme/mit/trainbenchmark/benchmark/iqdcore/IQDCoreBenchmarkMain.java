@@ -20,7 +20,7 @@ public class IQDCoreBenchmarkMain {
 	public static void main(final String[] args) throws Exception {
 		final IQDConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], IQDConfigWrapper.class);
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
-		scenario.runBenchmark();
+		scenario.performBenchmark();
 		System.exit(0);
 	}
 

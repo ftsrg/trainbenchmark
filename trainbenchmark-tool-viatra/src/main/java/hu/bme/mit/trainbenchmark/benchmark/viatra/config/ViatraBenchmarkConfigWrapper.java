@@ -16,8 +16,11 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class ViatraBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	protected final ViatraBackend backend;
+	protected ViatraBackend backend;
 
+	protected ViatraBenchmarkConfigWrapper() {
+	}
+	
 	public ViatraBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final ViatraBackend backend) {
 		super(benchmarkConfig);
 		this.backend = backend;
