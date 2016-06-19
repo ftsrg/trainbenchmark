@@ -1,9 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
+import com.google.common.collect.Sets;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.EntrySemaphoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.EntrySemaphoreMatcher;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
@@ -19,11 +21,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeCo
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
-
-import com.google.common.collect.Sets;
-
-import hu.bme.mit.trainbenchmark.benchmark.viatra.EntrySemaphoreMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.EntrySemaphoreMatcher;
 
 /**
  * A pattern-specific query specification that can instantiate EntrySemaphoreMatcher in a type-safe way.

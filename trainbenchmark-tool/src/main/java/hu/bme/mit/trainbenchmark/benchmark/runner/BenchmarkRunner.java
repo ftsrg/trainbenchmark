@@ -10,12 +10,12 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class BenchmarkRunner {
 
-	public static int run(final BenchmarkConfigWrapper bcw, final String toolName) throws IOException, InterruptedException {
+	public static int run(final BenchmarkConfigWrapper bcw) throws IOException, InterruptedException {
 		final File configFile = File.createTempFile("trainbenchmark-benchmark-", ".conf");
 		final String configPath = configFile.getAbsolutePath();
 		bcw.saveToFile(configPath);
 
-		final String projectName = String.format("trainbenchmark-tool-%s", toolName);
+		final String projectName = String.format("trainbenchmark-tool-%s", bcw.getToolName());
 		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName,
 				projectName, configPath);
 

@@ -1,11 +1,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
+import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredInjectQuerySpecification;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -13,10 +14,6 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredInjectProcessor;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredInjectQuerySpecification;
-import hu.bme.mit.trainbenchmark.railway.Switch;
 
 /**
  * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredInject pattern,

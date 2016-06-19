@@ -1,10 +1,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
+import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredInjectMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredInjectQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
-
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredInjectQuerySpecification;
 
 /**
  * A pattern group formed of all patterns defined in SwitchMonitoredInject.vql.

@@ -1,11 +1,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
+import hu.bme.mit.trainbenchmark.benchmark.viatra.HasSensorMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.HasSensorQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
-
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.HasSensorQuerySpecification;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchMonitoredQuerySpecification;
 
 /**
  * A pattern group formed of all patterns defined in SwitchMonitored.vql.

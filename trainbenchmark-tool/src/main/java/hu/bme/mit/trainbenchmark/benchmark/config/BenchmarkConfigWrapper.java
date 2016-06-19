@@ -8,7 +8,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
-public class BenchmarkConfigWrapper {
+public abstract class BenchmarkConfigWrapper {
 
 	protected BenchmarkConfigCore benchmarkConfig;
 	
@@ -22,18 +22,18 @@ public class BenchmarkConfigWrapper {
 		return benchmarkConfig;
 	}
 
-	public String getToolName() {
-		return "Tool";
-	}
+	/**
+	 * @return The name of the tools for storing the benchmark results.
+	 * Example: "Sesame (No Inferencing)"
+	 */
+	public abstract String getToolName();
 
-	public String getWorkload() {
-		return "Workload";
-	}
-
-	public String getToolNamePostfix() {
-		return "";
-	}
-
+	/**
+	 * @return The name of the project to be executed.
+	 * Example: "sesame"
+	 */
+	public abstract String getProjectName();
+	
 	/**
 	 * Serialize the configuration to a file. This does not need to be redefined in the subclasses (e.g. {Neo4jBenchmarkConfigWrapper}).
 	 * @param path

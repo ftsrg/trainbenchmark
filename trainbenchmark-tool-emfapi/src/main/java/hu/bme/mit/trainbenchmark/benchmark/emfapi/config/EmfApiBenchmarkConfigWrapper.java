@@ -10,32 +10,25 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-public class Neo4jBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class EmfApiBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	protected Neo4jEngine engine;
-
-	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final Neo4jEngine engine) {
+	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
 		super(benchmarkConfig);
-		this.engine = engine;
-	}
-	
-	public Neo4jEngine getEngine() {
-		return engine;
 	}
 	
 	@Override
 	public String getToolName() {
-		return "Neo4j (" + engine.toString() + ")";
+		return "EMF API";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "neo4j";
+		return "emfapi";
 	}
 	
 }
