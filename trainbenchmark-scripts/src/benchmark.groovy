@@ -4,17 +4,22 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.runner.BenchmarkRunner
 
-def xms = "2G"
-def xmx = "4G"
-def modelPath = "railway-repair-1"
-def railwayOperations = [
-	POSLENGTH_REPAIR,
-	SWITCHMONITORED,
-]
-def bc = new BenchmarkConfigCore(xms, xmx, 1, 5, modelPath, railwayOperations)
+class BenchmarkScript extends Script {
 
-def emfBCW = new BenchmarkConfigWrapper(bc)
-BenchmarkRunner.run(emfBCW, "emfapi")
+	def run() {
+		def xms = "2G"
+		def xmx = "4G"
+		def modelPath = "railway-repair-1"
+		def railwayOperations = [
+			POSLENGTH_REPAIR,
+			SWITCHMONITORED,
+		]
+		def bc = new BenchmarkConfigCore(xms, xmx, 1, 5, modelPath, railwayOperations)
 
-def rdfBCW = new RdfBenchmarkConfigWrapper(bc, false)
-BenchmarkRunner.run(rdfBCW, "sesame")
+		def emfBCW = new BenchmarkConfigWrapper(bc)
+		BenchmarkRunner.run(emfBCW, "emfapi")
+
+		def rdfBCW = new RdfBenchmarkConfigWrapper(bc, false)
+		BenchmarkRunner.run(rdfBCW, "sesame")
+	}
+}
