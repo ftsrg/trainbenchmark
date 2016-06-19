@@ -1,3 +1,10 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.eclipseocl.EclipseOclBenchmarkMain' }
+}
+
 dependencies {
   compile project(':trainbenchmark-tool-emf')
   compile group: 'org.eclipse.ocl', name: 'org.eclipse.ocl', version:'3.3.0.v20140120-1508'

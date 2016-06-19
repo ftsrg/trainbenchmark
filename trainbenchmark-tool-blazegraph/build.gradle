@@ -1,3 +1,11 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.blazegraph.BlazegraphBenchmarkMain' }
+}
+
+
 dependencies {
   compile project(':trainbenchmark-tool-sesame')
   compile group: 'com.bigdata', name: 'bigdata', version:'1.5.2'

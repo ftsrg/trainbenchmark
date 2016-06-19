@@ -11,6 +11,8 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 public class BenchmarkRunner {
 
 	public static int run(final BenchmarkConfigWrapper bcw) throws IOException, InterruptedException {
+		System.out.println("Running benchmark: " + bcw.getToolName());
+		
 		final File configFile = File.createTempFile("trainbenchmark-benchmark-", ".conf");
 		final String configPath = configFile.getAbsolutePath();
 		bcw.saveToFile(configPath);
