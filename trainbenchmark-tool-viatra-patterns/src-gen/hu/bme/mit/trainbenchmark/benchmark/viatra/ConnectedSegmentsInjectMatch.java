@@ -1,16 +1,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.eclipse.viatra.query.runtime.api.IPatternMatch;
-import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
-import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
-
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.ConnectedSegmentsInjectProcessor;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.ConnectedSegmentsInjectQuerySpecification;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
+import java.util.Arrays;
+import java.util.List;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
  * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject pattern,

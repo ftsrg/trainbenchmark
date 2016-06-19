@@ -25,28 +25,32 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 	protected String toolName;
 	protected String modelFilename;
 	protected Collection<RailwayOperation> railwayOperations;
+	protected String workload;
 
-	public BenchmarkConfigCore(final String xms, final String xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelFilename, final Collection<RailwayOperation> railwayOperations) {
+	public BenchmarkConfigCore(final String xms, final String xmx, final long timeout, final int runs,
+			final int queryTransformatioCount, final String modelFilename,
+			final Collection<RailwayOperation> railwayOperations, final String workload) {
 		super(xms, xmx);
 		this.timeout = timeout;
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformatioCount;
 		this.modelFilename = modelFilename;
 		this.railwayOperations = railwayOperations;
+		this.workload = workload;
 	}
 
 	public long getTimeout() {
 		return timeout;
 	}
-	
+
 	public int getRuns() {
 		return runs;
 	}
-	
+
 	public int getQueryTransformationCount() {
 		return queryTransformationCount;
 	}
-	
+
 	public String getToolName() {
 		return toolName;
 	}
@@ -57,6 +61,14 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 
 	public Collection<RailwayOperation> getRailwayOperations() {
 		return railwayOperations;
+	}
+
+	/**
+	 * @return An identifier for the workload.
+	 * Example: "Query mix, Repair transformation"
+	 */
+	public String getWorkload() {
+		return workload;
 	}
 
 }

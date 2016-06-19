@@ -10,32 +10,25 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 
-public class Neo4jBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class SesameBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
 
-	protected Neo4jEngine engine;
-
-	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final Neo4jEngine engine) {
-		super(benchmarkConfig);
-		this.engine = engine;
-	}
-	
-	public Neo4jEngine getEngine() {
-		return engine;
+	public SesameBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
+		super(benchmarkConfig, inferencing);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "Neo4j (" + engine.toString() + ")";
+		return "Sesame" + getToolNamePostfix();
 	}
 
 	@Override
 	public String getProjectName() {
-		return "neo4j";
+		return "sesame";
 	}
 	
 }

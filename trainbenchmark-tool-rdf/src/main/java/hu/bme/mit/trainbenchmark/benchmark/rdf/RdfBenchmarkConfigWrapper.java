@@ -21,7 +21,7 @@ import com.esotericsoftware.kryo.io.Input;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public abstract class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
 	protected boolean inferencing;
 
@@ -37,8 +37,7 @@ public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 		return inferencing;
 	}
 
-	@Override
-	public String getToolNamePostfix() {
+	protected String getToolNamePostfix() {
 		return isInferencing() ? "(Inferencing)" : "(No_Inferencing)";
 	}
 

@@ -1,10 +1,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
-import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
-
 import hu.bme.mit.trainbenchmark.benchmark.viatra.InverseGathersMatch;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
+import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 
 /**
  * A match processor tailored for the hu.bme.mit.trainbenchmark.benchmark.viatra.inverseGathers pattern.

@@ -1,18 +1,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.eclipse.viatra.query.runtime.api.IPatternMatch;
-import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
-import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
-
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorProcessor;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorQuerySpecification;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+import java.util.Arrays;
+import java.util.List;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
  * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor pattern,

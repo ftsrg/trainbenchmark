@@ -28,8 +28,13 @@ public class ViatraBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	}
 
 	@Override
-	public String getToolNamePostfix() {
-		return "(" + backend.toString() + ")";
+	public String getToolName() {
+		return "VIATRA " + "(" + backend.toString() + ")";
+	}
+
+	@Override
+	public String getProjectName() {
+		return "viatra";
 	}
 
 }

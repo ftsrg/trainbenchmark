@@ -37,7 +37,8 @@ public abstract class BaseTest {
 				RailwayOperation.SWITCHMONITORED, //
 				RailwayOperation.SWITCHSET //
 				);
-		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformatioCount, modelFilename, operations);
+		final String workload = "BatchTest";
+		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformatioCount, modelFilename, operations, workload);
 	}
 
 	@Test

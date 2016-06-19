@@ -1,8 +1,8 @@
 import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.runner.BenchmarkRunner
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfigWrapper
 
 class BenchmarkScript extends Script {
 
@@ -14,12 +14,12 @@ class BenchmarkScript extends Script {
 			POSLENGTH_REPAIR,
 			SWITCHMONITORED,
 		]
-		def bc = new BenchmarkConfigCore(xms, xmx, 1, 5, modelPath, railwayOperations)
+		def bc = new BenchmarkConfigCore(xms, xmx, 1, 5, modelPath, railwayOperations, "Batch")
 
-		def emfBCW = new BenchmarkConfigWrapper(bc)
-		BenchmarkRunner.run(emfBCW, "emfapi")
+		def emfApiBcw = new EmfApiBenchmarkConfigWrapper(bc)
+		BenchmarkRunner.run(emfApiBcw)
 
-		def rdfBCW = new RdfBenchmarkConfigWrapper(bc, false)
-		BenchmarkRunner.run(rdfBCW, "sesame")
+		def sesameBcw = new SesameBenchmarkConfigWrapper(bc)
+		BenchmarkRunner.run(sesameBcw)
 	}
 }
