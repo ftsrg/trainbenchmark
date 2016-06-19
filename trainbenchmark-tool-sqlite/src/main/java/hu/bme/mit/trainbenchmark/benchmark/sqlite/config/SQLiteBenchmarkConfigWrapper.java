@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
+package hu.bme.mit.trainbenchmark.benchmark.sqlite.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-public class EmfApiBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class SQLiteBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	protected EmfApiBenchmarkConfigWrapper() {
+	protected SQLiteBenchmarkConfigWrapper() {
 	}
 	
-	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
+	public SQLiteBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
 		super(benchmarkConfig);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "EMF API";
+		return "SQLite";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "emfapi";
+		return "sqlite";
 	}
 	
 }

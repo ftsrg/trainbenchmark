@@ -1,30 +1,35 @@
 apply plugin: 'groovy'
 
 dependencies {
-  compile localGroovy()
-  compile project(':trainbenchmark-generator')
-  compile project(':trainbenchmark-generator-graph-tinkerpop')
-  compile project(':trainbenchmark-generator-rdf')
-  compile project(':trainbenchmark-tool')
-  compile project(':trainbenchmark-tool-emfapi')
-//  compile project(':trainbenchmark-tool-iqdcore')
-  compile project(':trainbenchmark-tool-sesame')
+	compile localGroovy()
+	compile project(':trainbenchmark-generator')
+	compile project(':trainbenchmark-generator-graph-tinkerpop')
+	compile project(':trainbenchmark-generator-rdf')
+	compile project(':trainbenchmark-tool')
+	compile project(':trainbenchmark-tool-drools5')
+	compile project(':trainbenchmark-tool-drools6')
+	compile project(':trainbenchmark-tool-eclipseocl')
+	compile project(':trainbenchmark-tool-emfapi')
+	//  compile project(':trainbenchmark-tool-iqdcore')
+	compile project(':trainbenchmark-tool-jena')
+	compile project(':trainbenchmark-tool-neo4j')
+	compile project(':trainbenchmark-tool-sesame')
+	compile project(':trainbenchmark-tool-tinkergraph')
+	compile project(':trainbenchmark-tool-viatra')
 }
 
 sourceSets {
-  main {
-    groovy {
-      srcDirs = ['src']
-    }
-  }
+	main {
+		groovy { srcDirs = ['src'] }
+	}
 }
 
 task runBenchmark(dependsOn: 'classes', type: JavaExec) {
-  main = 'benchmark'
-  classpath = sourceSets.main.runtimeClasspath
+	main = 'BenchmarkScript'
+	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runGenerator(dependsOn: 'classes', type: JavaExec) {
-  main = 'generator'
-  classpath = sourceSets.main.runtimeClasspath
+	main = 'GeneratorScript'
+	classpath = sourceSets.main.runtimeClasspath
 }

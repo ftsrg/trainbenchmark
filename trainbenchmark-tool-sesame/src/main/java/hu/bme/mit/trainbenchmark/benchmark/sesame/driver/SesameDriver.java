@@ -82,8 +82,9 @@ public class SesameDriver extends RdfDriver<URI> {
 			repository = new SailRepository(new MemoryStore());
 		}
 		
+		System.out.println("Reading file " + modelPath);
 		final File modelFile = new File(modelPath);
-
+		
 		repository.initialize();
 		vf = repository.getValueFactory();
 		connection = repository.getConnection();

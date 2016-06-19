@@ -1,3 +1,10 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkMain' }
+}
+
 dependencies {
   compile project(':trainbenchmark-tool')
   compile project(':trainbenchmark-tool-rdf')
