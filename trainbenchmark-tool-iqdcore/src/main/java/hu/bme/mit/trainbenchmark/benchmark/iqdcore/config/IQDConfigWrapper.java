@@ -4,7 +4,8 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class IQDConfigWrapper extends BenchmarkConfigWrapper {
-    protected int messageSize;
+
+	protected int messageSize;
 
     protected IQDConfigWrapper() {
     }
@@ -17,4 +18,16 @@ public class IQDConfigWrapper extends BenchmarkConfigWrapper {
     public int getMessageSize() {
         return messageSize;
     }
+
+	@Override
+	public String getToolName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getProjectName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

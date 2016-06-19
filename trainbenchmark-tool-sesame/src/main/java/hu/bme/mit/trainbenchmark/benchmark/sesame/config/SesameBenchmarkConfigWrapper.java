@@ -17,6 +17,9 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 
 public class SesameBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
 
+	protected SesameBenchmarkConfigWrapper() {
+	}
+	
 	public SesameBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
 		super(benchmarkConfig, inferencing);
 	}
