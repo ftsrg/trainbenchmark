@@ -1,5 +1,12 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.mysql.MySqlBenchmarkMain' }
+}
+
 dependencies {
-  compile project(':trainbenchmark-tool')
-  compile project(':trainbenchmark-tool-sql')
-  compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.38'
+	compile project(':trainbenchmark-tool')
+	compile project(':trainbenchmark-tool-sql')
+	compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.38'
 }

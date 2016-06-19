@@ -1,4 +1,11 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.tinkergraph.TinkerGraphBenchmarkMain' }
+}
+
 dependencies {
-  compile project(':trainbenchmark-tool')
-  compile group: 'org.apache.tinkerpop', name: 'tinkergraph-gremlin', version:'3.2.0-incubating'
+	compile project(':trainbenchmark-tool')
+	compile group: 'org.apache.tinkerpop', name: 'tinkergraph-gremlin', version:'3.2.0-incubating'
 }

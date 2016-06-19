@@ -1,14 +1,8 @@
-plugins {
-	id "com.github.johnrengelman.shadow" version "1.2.3"
-}
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
 
 shadowJar {
 	classifier = 'fat'
-	manifest {
-		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkMain'
-	}
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkMain' }
 }
 
-dependencies {
-  compile project(':trainbenchmark-tool-emf')
-}
+dependencies { compile project(':trainbenchmark-tool-emf') }

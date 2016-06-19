@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gradle shadowJar
+gradle build shadowJar -x test

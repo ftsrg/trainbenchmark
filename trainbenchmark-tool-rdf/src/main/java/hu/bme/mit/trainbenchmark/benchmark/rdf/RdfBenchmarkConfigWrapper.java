@@ -38,7 +38,7 @@ public abstract class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	}
 
 	protected String getToolNamePostfix() {
-		return isInferencing() ? "(Inferencing)" : "(No_Inferencing)";
+		return isInferencing() ? " (Inferencing)" : " (No Inferencing)";
 	}
 
 	public static RdfBenchmarkConfigWrapper fromFile(final String path) throws FileNotFoundException {

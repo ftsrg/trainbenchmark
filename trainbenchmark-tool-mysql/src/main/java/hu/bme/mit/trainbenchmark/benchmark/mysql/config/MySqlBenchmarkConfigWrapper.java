@@ -15,12 +15,12 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.config;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-public class MySQLBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class MySqlBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	protected MySQLBenchmarkConfigWrapper() {
+	protected MySqlBenchmarkConfigWrapper() {
 	}
 	
-	public MySQLBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
+	public MySqlBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
 		super(benchmarkConfig);
 	}
 	

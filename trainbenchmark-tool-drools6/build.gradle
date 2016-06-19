@@ -1,3 +1,10 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkMain' }
+}
+
 dependencies {
   compile project(':trainbenchmark-tool-emf')
   compile group: 'org.drools', name: 'drools-core', version:'6.3.0.Final'
