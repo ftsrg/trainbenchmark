@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkScenario;
@@ -12,10 +12,10 @@ public abstract class SesameTest extends BaseTest {
 	protected BenchmarkResult runTest() throws Exception {
 		final RdfBenchmarkConfigWrapper rbcw = createRdfBenchmarkConfigWrapper(bc);
 		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(rbcw);
-		final BenchmarkResult result = scenario.runBenchmark();
+		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}
 
-	protected abstract RdfBenchmarkConfigWrapper createRdfBenchmarkConfigWrapper(final BenchmarkConfig bc);
+	protected abstract RdfBenchmarkConfigWrapper createRdfBenchmarkConfigWrapper(final BenchmarkConfigCore bc);
 
 }

@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class Neo4jBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
 	protected Neo4jEngine engine;
 
-	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig, final Neo4jEngine engine) {
+	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final Neo4jEngine engine) {
 		super(benchmarkConfig);
 		this.engine = engine;
 	}

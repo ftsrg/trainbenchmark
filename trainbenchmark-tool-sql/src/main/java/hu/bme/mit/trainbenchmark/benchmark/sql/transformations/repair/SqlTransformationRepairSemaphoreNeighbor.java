@@ -15,14 +15,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class SqlTransformationRepairSemaphoreNeighbor extends SqlTransformationRepair<SqlSemaphoreNeighborMatch> {
 
-	public SqlTransformationRepairSemaphoreNeighbor(final SqlDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
+	public SqlTransformationRepairSemaphoreNeighbor(final SqlDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query)
 			throws IOException {
 		super(driver, benchmarkConfig, query);
 	}

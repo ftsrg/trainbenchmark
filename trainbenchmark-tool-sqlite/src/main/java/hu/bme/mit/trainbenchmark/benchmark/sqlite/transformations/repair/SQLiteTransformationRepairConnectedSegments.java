@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -24,7 +24,7 @@ public class SQLiteTransformationRepairConnectedSegments extends SQLiteTransform
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('segment1', ?), ('segment2', ?), ('segment3', ?);";
 	
-	public SQLiteTransformationRepairConnectedSegments(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public SQLiteTransformationRepairConnectedSegments(final SQLiteDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
 	}
 

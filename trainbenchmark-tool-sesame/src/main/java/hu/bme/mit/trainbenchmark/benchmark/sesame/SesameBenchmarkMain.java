@@ -20,7 +20,7 @@ public class SesameBenchmarkMain {
 	public static void main(final String[] args) throws Exception {
 		final RdfBenchmarkConfigWrapper rbcw = BenchmarkConfigWrapper.fromFile(args[0], RdfBenchmarkConfigWrapper.class);
 		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(rbcw);
-		scenario.runBenchmark();
+		scenario.performBenchmark();
 	}
 
 }

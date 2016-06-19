@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.phases;
 
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkBundle;
 
 /**
  * A phase consists of three subphases.
@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
  */
 public abstract class Phase {
 
-	protected final BenchmarkExecutor<?, ?, ?> executor;
+	protected final BenchmarkBundle<?, ?, ?> executor;
 	
-	public Phase(final BenchmarkExecutor<?, ?, ?> executor) {
+	public Phase(final BenchmarkBundle<?, ?, ?> executor) {
 		this.executor = executor;
 	}
 	

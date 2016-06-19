@@ -5,14 +5,14 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class SQLiteTransformation<TObject> extends SqlTransformation<TObject> {
 
-	protected SQLiteTransformation(final SQLiteDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	protected SQLiteTransformation(final SQLiteDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver, benchmarkConfig, query);
 
 		final String updatePath = "";// getTransformationDirectory() + benchmarkConfig.getScenarioName() + query + ".sql";

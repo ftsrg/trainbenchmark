@@ -28,6 +28,6 @@ public class EmfApiBenchmarkMain {
 		final EmfMatchComparator comparator = EmfMatchComparator.create();
 		
 		final BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, benchmarkConfigWrapper);
-		scenario.runBenchmark();
+		scenario.performBenchmark();
 	}
 }

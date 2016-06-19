@@ -58,8 +58,8 @@ public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfigWrapper
 		cleanupDatabaseDirectory();
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
 
-		// bump the initial id from 0 to 1
 		try (Transaction tx = graphDb.beginTx()) {
+			// bump the initial id from 0 to 1
 			graphDb.createNode().delete();
 			tx.success();
 		}
