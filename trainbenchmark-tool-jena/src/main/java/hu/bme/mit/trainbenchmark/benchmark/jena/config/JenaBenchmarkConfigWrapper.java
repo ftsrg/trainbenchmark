@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
+package hu.bme.mit.trainbenchmark.benchmark.jena.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 
-public class EmfApiBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class JenaBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
 
-	protected EmfApiBenchmarkConfigWrapper() {
+	protected JenaBenchmarkConfigWrapper() {
 	}
 	
-	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		super(benchmarkConfig);
+	public JenaBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
+		super(benchmarkConfig, inferencing);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "EMF API";
+		return "Jena" + getToolNamePostfix();
 	}
 
 	@Override
 	public String getProjectName() {
-		return "emfapi";
+		return "jena";
 	}
 	
 }

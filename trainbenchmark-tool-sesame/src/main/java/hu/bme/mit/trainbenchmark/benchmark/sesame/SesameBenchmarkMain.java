@@ -13,13 +13,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfigWrapper;
 
 public class SesameBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RdfBenchmarkConfigWrapper rbcw = BenchmarkConfigWrapper.fromFile(args[0], RdfBenchmarkConfigWrapper.class);
-		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(rbcw);
+		final SesameBenchmarkConfigWrapper sbcw = BenchmarkConfigWrapper.fromFile(args[0], SesameBenchmarkConfigWrapper.class);
+		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(sbcw);
 		scenario.performBenchmark();
 	}
 

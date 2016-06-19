@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-public class EmfApiBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class Drools6BenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	protected EmfApiBenchmarkConfigWrapper() {
+	protected Drools6BenchmarkConfigWrapper() {
 	}
 	
-	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
+	public Drools6BenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
 		super(benchmarkConfig);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "EMF API";
+		return "Drools 6";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "emfapi";
+		return "drools6";
 	}
 	
 }

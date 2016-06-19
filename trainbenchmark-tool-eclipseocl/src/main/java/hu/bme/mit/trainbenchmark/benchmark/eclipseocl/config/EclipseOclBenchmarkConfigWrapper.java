@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-public class EmfApiBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class EclipseOclBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	protected EmfApiBenchmarkConfigWrapper() {
+	protected EclipseOclBenchmarkConfigWrapper() {
 	}
 	
-	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
+	public EclipseOclBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
 		super(benchmarkConfig);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "EMF API";
+		return "Eclipse OCL";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "emfapi";
+		return "eclipseocl";
 	}
 	
 }

@@ -15,7 +15,7 @@ public class BenchmarkRunner {
 		final String configPath = configFile.getAbsolutePath();
 		bcw.saveToFile(configPath);
 
-		final String projectName = String.format("trainbenchmark-tool-%s", bcw.getToolName());
+		final String projectName = String.format("trainbenchmark-tool-%s", bcw.getProjectName());
 		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName,
 				projectName, configPath);
 

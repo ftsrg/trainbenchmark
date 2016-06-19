@@ -27,6 +27,9 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 	protected Collection<RailwayOperation> railwayOperations;
 	protected String workload;
 
+	protected BenchmarkConfigCore() {
+	}
+
 	public BenchmarkConfigCore(final String xms, final String xmx, final long timeout, final int runs,
 			final int queryTransformatioCount, final String modelFilename,
 			final Collection<RailwayOperation> railwayOperations, final String workload) {
@@ -64,8 +67,7 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 	}
 
 	/**
-	 * @return An identifier for the workload.
-	 * Example: "Query mix, Repair transformation"
+	 * @return An identifier for the workload. Example: "Query mix, Repair transformation"
 	 */
 	public String getWorkload() {
 		return workload;
