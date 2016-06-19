@@ -17,7 +17,7 @@ import java.sql.PreparedStatement;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -25,10 +25,10 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 public abstract class SqlTransformation<TObject> extends ModelTransformation<TObject, SqlDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
-	protected BenchmarkConfig benchmarkConfig;
+	protected BenchmarkConfigCore benchmarkConfig;
 	protected String updateQuery;
 		
-	protected SqlTransformation(final SqlDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	protected SqlTransformation(final SqlDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(driver);
 		this.benchmarkConfig = benchmarkConfig;
 

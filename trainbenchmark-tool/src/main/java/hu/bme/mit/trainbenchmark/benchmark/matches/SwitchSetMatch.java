@@ -20,5 +20,5 @@ public interface SwitchSetMatch {
 	public Object getSwP();
 
 	public Object getSw();
-
+	
 }

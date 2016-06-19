@@ -10,16 +10,24 @@ import com.esotericsoftware.kryo.io.Output;
 
 public class BenchmarkConfigWrapper {
 
-	protected BenchmarkConfig benchmarkConfig;
+	protected BenchmarkConfigCore benchmarkConfig;
 	
 	protected BenchmarkConfigWrapper() {}
 	
-	public BenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig) {
+	public BenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
 		this.benchmarkConfig = benchmarkConfig;
 	}
 	
-	public BenchmarkConfig getBenchmarkConfig() {
+	public BenchmarkConfigCore getBenchmarkConfig() {
 		return benchmarkConfig;
+	}
+
+	public String getToolName() {
+		return "Tool";
+	}
+
+	public String getWorkload() {
+		return "Workload";
 	}
 
 	public String getToolNamePostfix() {

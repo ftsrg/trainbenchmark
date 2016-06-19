@@ -20,7 +20,7 @@ import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.rule.LiveQuery;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
@@ -33,7 +33,7 @@ public class Drools6ModelQuery extends ModelQuery<EmfMatch, Drools6Driver> {
 	protected Drools6ResultListener listener;
 	protected LiveQuery liveQuery;
 
-	public Drools6ModelQuery(final BenchmarkConfig benchmarkConfig, final Drools6Driver driver, final RailwayQuery query) throws IOException {
+	public Drools6ModelQuery(final BenchmarkConfigCore benchmarkConfig, final Drools6Driver driver, final RailwayQuery query) throws IOException {
 		super(query, driver);
 		
 		final String queryFile = benchmarkConfig.getWorkspaceDir()

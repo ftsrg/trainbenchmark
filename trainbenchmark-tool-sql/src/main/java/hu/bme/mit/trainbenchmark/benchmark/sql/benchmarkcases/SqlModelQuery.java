@@ -19,7 +19,7 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
@@ -30,7 +30,7 @@ public class SqlModelQuery<TSQLDriver extends SqlDriver> extends ModelQuery<SqlM
 	protected final String queryDefinition; 
 	protected PreparedStatement statement;
 	
-	public SqlModelQuery(final TSQLDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
+	public SqlModelQuery(final TSQLDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
 		super(query, driver);
 
 		final String queryPath = benchmarkConfig.getWorkspaceDir() + driver.getResourceDirectory() + "queries/" + query + ".sql";

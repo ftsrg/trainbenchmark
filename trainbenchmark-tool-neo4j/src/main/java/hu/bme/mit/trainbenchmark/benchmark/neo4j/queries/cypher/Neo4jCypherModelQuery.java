@@ -17,7 +17,7 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
@@ -28,7 +28,7 @@ public class Neo4jCypherModelQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 	protected final RailwayQuery query;
 	protected final String queryDefinition;
 
-	protected Neo4jCypherModelQuery(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	protected Neo4jCypherModelQuery(final Neo4jDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
 		super(query, driver);
 
 		this.query = query;
@@ -41,7 +41,7 @@ public class Neo4jCypherModelQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 		return driver.runQuery(query, queryDefinition);
 	}
 
-	public static ModelQuery<Neo4jMatch, Neo4jDriver> newInstance(final Neo4jDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
+	public static ModelQuery<Neo4jMatch, Neo4jDriver> newInstance(final Neo4jDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
 		return new Neo4jCypherModelQuery(driver, benchmarkConfig, query);
 	}
 

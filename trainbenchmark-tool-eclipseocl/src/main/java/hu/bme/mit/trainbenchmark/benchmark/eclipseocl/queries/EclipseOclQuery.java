@@ -22,7 +22,7 @@ import org.eclipse.ocl.ecore.OCL.Helper;
 import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.ecore.OCLExpression;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
@@ -37,7 +37,7 @@ public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuer
 	protected Query queryEvaluator;
 	protected RailwayContainer container;
 
-	public EclipseOclQuery(final EmfDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query)
+	public EclipseOclQuery(final EmfDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query)
 			throws IOException, ParserException {
 		super(query, driver);
 
@@ -51,7 +51,7 @@ public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuer
 		queryEvaluator = ocl.createQuery(expression);
 	}
 
-	public static EclipseOclQuery<?> newInstance(final EmfDriver driver, final BenchmarkConfig benchmarkConfig,
+	public static EclipseOclQuery<?> newInstance(final EmfDriver driver, final BenchmarkConfigCore benchmarkConfig,
 			final RailwayQuery query) throws Exception {
 		switch (query) {
 		case CONNECTEDSEGMENTS:

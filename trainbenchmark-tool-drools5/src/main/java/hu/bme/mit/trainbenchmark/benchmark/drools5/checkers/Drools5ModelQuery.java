@@ -23,7 +23,7 @@ import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.rule.LiveQuery;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
@@ -36,7 +36,7 @@ public class Drools5ModelQuery extends ModelQuery<EmfMatch, Drools5Driver> {
 	protected Drools5ResultListener listener;
 	protected LiveQuery liveQuery;
 
-	public Drools5ModelQuery(final BenchmarkConfig benchmarkConfig, final Drools5Driver driver, final RailwayQuery query) throws IOException {
+	public Drools5ModelQuery(final BenchmarkConfigCore benchmarkConfig, final Drools5Driver driver, final RailwayQuery query) throws IOException {
 		super(query, driver);
 	
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();

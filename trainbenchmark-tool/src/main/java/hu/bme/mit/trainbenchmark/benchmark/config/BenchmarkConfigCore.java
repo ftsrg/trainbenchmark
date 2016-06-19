@@ -17,7 +17,7 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public final class BenchmarkConfig extends AbstractConfig {
+public final class BenchmarkConfigCore extends AbstractConfig {
 
 	protected long timeout; // in seconds
 	protected int runs;
@@ -26,7 +26,7 @@ public final class BenchmarkConfig extends AbstractConfig {
 	protected String modelFilename;
 	protected Collection<RailwayOperation> railwayOperations;
 
-	public BenchmarkConfig(final String xms, final String xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelFilename, final Collection<RailwayOperation> railwayOperations) {
+	public BenchmarkConfigCore(final String xms, final String xmx, final long timeout, final int runs, final int queryTransformatioCount, final String modelFilename, final Collection<RailwayOperation> railwayOperations) {
 		super(xms, xmx);
 		this.timeout = timeout;
 		this.runs = runs;

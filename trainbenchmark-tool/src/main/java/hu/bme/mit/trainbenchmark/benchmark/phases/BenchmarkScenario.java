@@ -4,40 +4,63 @@ import java.util.Comparator;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkExecutor;
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkBundle;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 
 public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
 
 	protected final PhaseExecutor phaseExecutor = new PhaseExecutor();
-	protected final BenchmarkExecutor<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkExecutor;
-	protected final BenchmarkResult benchmarkResults = new BenchmarkResult();
+
+	protected final TDriver driver;
+	protected final ModelOperationFactory<TPatternMatch, TDriver> factory;
+	protected final Comparator<TPatternMatch> comparator;
 	protected final TBenchmarkConfigWrapper bcw;
+	protected final BenchmarkResult benchmarkResult;
 
 	public BenchmarkScenario(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
 			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw) throws Exception {
+		this.driver = driver;
+		this.factory = factory;
+		this.comparator = comparator;
 		this.bcw = bcw;
-		this.benchmarkExecutor = new BenchmarkExecutor<>(driver, factory, comparator, bcw, benchmarkResults);
+		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcw.getWorkload());
 	}
 
-	public BenchmarkResult runBenchmark() throws Exception {
-		final InitializeOperationsPhase initializeOperationsPhase = new InitializeOperationsPhase(benchmarkExecutor);
-		final ReadPhase readPhase = new ReadPhase(benchmarkExecutor);
-		final QueryPhase queryPhase = new QueryPhase(benchmarkExecutor);
-		final TransformationPhase transformationPhase = new TransformationPhase(benchmarkExecutor);
+	public BenchmarkResult performBenchmark() throws Exception {
+		for (int i = 0; i < bcw.getBenchmarkConfig().getRuns(); i++) {
+			performRun();
+		}
+		return benchmarkResult;
+	}
+
+	protected void performRun() throws Exception {
+		benchmarkResult.nextRun();
+
+		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkBundle = new BenchmarkBundle<>(
+				driver, factory, comparator, bcw, benchmarkResult);
+
+		final InitializeOperationsPhase initializeOperationsPhase = new InitializeOperationsPhase(benchmarkBundle);
+		final ReadPhase readPhase = new ReadPhase(benchmarkBundle);
+		final QueryPhase queryPhase = new QueryPhase(benchmarkBundle);
+		final TransformationPhase transformationPhase = new TransformationPhase(benchmarkBundle);
 
 		phaseExecutor.execute(initializeOperationsPhase);
-		phaseExecutor.execute(readPhase);
-		phaseExecutor.execute(queryPhase);
+
+		final long readTime = phaseExecutor.execute(readPhase);
+		benchmarkResult.registerReadTime(readTime);
+
+		final long queryTime = phaseExecutor.execute(queryPhase);
+		benchmarkResult.registerQueryTime(queryTime);
 
 		// transformation-recheck loops
 		for (int i = 0; i < bcw.getBenchmarkConfig().getQueryTransformationCount(); i++) {
-			phaseExecutor.execute(transformationPhase);
-			phaseExecutor.execute(queryPhase);
+			final long transformationTime = phaseExecutor.execute(transformationPhase);
+			benchmarkResult.registerTransformationTime(transformationTime);
+
+			final long recheckTime = phaseExecutor.execute(queryPhase);
+			benchmarkResult.registerQueryTime(recheckTime);
 		}
-		
-		return benchmarkResults;
 	}
 
 }

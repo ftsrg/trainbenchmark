@@ -18,7 +18,7 @@ import java.io.FileNotFoundException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
@@ -28,7 +28,7 @@ public class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected RdfBenchmarkConfigWrapper() {
 	}
 
-	public RdfBenchmarkConfigWrapper(final BenchmarkConfig benchmarkConfig, final boolean inferencing) {
+	public RdfBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
 		super(benchmarkConfig);
 		this.inferencing = inferencing;
 	}
