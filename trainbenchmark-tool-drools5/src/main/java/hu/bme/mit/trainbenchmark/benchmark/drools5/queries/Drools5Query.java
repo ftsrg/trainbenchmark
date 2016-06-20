@@ -9,11 +9,10 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools5.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.drools5.queries;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 
 import org.drools.builder.KnowledgeBuilder;
@@ -32,7 +31,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class Drools5Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Drools5Driver> {
 
-	protected Collection<EmfMatch> matches = new HashSet<>();
+	protected Collection<TMatch> matches;
 	protected Drools5ResultListener listener;
 	protected LiveQuery liveQuery;
 
@@ -41,7 +40,7 @@ public class Drools5Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dr
 		super(query, driver);
 
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = workspaceDir + "/trainbenchmark-tool-drools5/src/main/resources/queries/" + query
+		final String queryFile = workspaceDir.get() + "/trainbenchmark-tool-drools5/src/main/resources/queries/" + query
 				+ ".drl";
 		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
 
@@ -66,8 +65,8 @@ public class Drools5Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dr
 			listener = new Drools5ResultListener(query);
 			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);
 		}
-		matches = listener.getMatches();
-		return (Collection<TMatch>) matches;
+		matches = (Collection<TMatch>) listener.getMatches();
+		return matches;
 	}
 
 	@Override

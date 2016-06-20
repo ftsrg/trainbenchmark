@@ -9,40 +9,41 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools6.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.queries;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Optional;
 
 import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.rule.LiveQuery;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools6ModelQuery extends ModelQuery<EmfMatch, Drools6Driver> {
+public class Drools6Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Drools6Driver> {
 
-	protected Collection<EmfMatch> matches = new HashSet<>();
+	protected Collection<TMatch> matches;
 	protected Drools6ResultListener listener;
 	protected LiveQuery liveQuery;
 
-	public Drools6ModelQuery(final BenchmarkConfigCore benchmarkConfig, final Drools6Driver driver, final RailwayQuery query) throws IOException {
+	protected Drools6Query(final Drools6Driver driver, final Optional<String> workspaceDir,
+			final RailwayQuery query) throws IOException {
 		super(query, driver);
-		
-		final String queryFile = benchmarkConfig.getWorkspaceDir()
+
+		final String queryFile = workspaceDir.get()
 				+ "/trainbenchmark-tool-drools6/src/main/resources/queries/" + query + ".drl";
 		final File file = new File(queryFile);
 		if (!file.exists()) {
 			throw new IOException("Query file not found: " + queryFile);
 		}
-		driver.getKfs().write("src/main/resources/" + query + ".drl", driver.getKieServices().getResources().newFileSystemResource(queryFile));
+		driver.getKfs().write("src/main/resources/" + query + ".drl",
+				driver.getKieServices().getResources().newFileSystemResource(queryFile));
 
 		final KieBuilder kieBuilder = driver.getKieServices().newKieBuilder(driver.getKfs());
 		kieBuilder.buildAll();
@@ -51,8 +52,13 @@ public class Drools6ModelQuery extends ModelQuery<EmfMatch, Drools6Driver> {
 		}
 	}
 
+	public static <TMatch extends EmfMatch> Drools6Query<TMatch> create(final Drools6Driver driver,
+			final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+		return new Drools6Query<TMatch>(driver, workspaceDir, query);
+	}
+
 	@Override
-	public Collection<EmfMatch> evaluate() throws IOException {
+	public Collection<TMatch> evaluate() throws IOException {
 		if (liveQuery == null) {
 			listener = new Drools6ResultListener(query);
 			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);
@@ -60,7 +66,7 @@ public class Drools6ModelQuery extends ModelQuery<EmfMatch, Drools6Driver> {
 			// activate lazy PHREAK evaluation
 			driver.getKsession().fireAllRules();
 		}
-		matches = listener.getMatches();
+		matches = (Collection<TMatch>) listener.getMatches();
 		return matches;
 	}
 

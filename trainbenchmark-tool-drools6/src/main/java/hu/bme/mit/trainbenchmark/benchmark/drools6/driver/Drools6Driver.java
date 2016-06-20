@@ -31,6 +31,13 @@ public class Drools6Driver extends EmfDriver {
 	protected KieContainer kContainer;
 	protected KieSession kieSession;
 	
+	protected Drools6Driver() {
+	}
+	
+	public static Drools6Driver create() {
+		return new Drools6Driver();
+	}	
+
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();	
