@@ -12,15 +12,25 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.mysql.MySqlBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
 public class MySqlTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		final MySqlBenchmarkConfigWrapper msbcw = createMySqlBenchmarkConfigWrapper(bc);
+		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(msbcw);
+		final BenchmarkResult result = scenario.performBenchmark();
+		return result;
 	}
+
+	protected MySqlBenchmarkConfigWrapper createMySqlBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
+		return new MySqlBenchmarkConfigWrapper(bc);
+	}
+
 
 }

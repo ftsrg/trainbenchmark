@@ -24,12 +24,18 @@ import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
 
 public class MySqlDriver extends SqlDriver {
 
+	protected MySqlDriver() {
+	}
+	
+	public static MySqlDriver create() {
+		return new MySqlDriver();
+	}
+	
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true&useSSL=false";
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
+	public void read(final String modelPath) throws IOException, InterruptedException, SQLException {
 		final Runtime rt = Runtime.getRuntime();
-		final String modelPath = modelPathWithoutExtension + getPostfix();
 		final File modelFile = new File(modelPath);
 		if (!modelFile.exists()) {
 			throw new IOException("Model does not exist: " + modelPath);
