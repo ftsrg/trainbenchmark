@@ -12,15 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class JenaTest extends BaseTest {
+public abstract class JenaTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		final JenaBenchmarkConfigWrapper rbcw = createJenaBenchmarkConfigWrapper(bc);
+		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(rbcw);
+		final BenchmarkResult result = scenario.performBenchmark();
+		return result;
 	}
+	
+	protected abstract JenaBenchmarkConfigWrapper createJenaBenchmarkConfigWrapper(final BenchmarkConfigCore bc);
 
 }

@@ -6,7 +6,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfigWr
 public class SesameInferencingTest extends SesameTest {
 
 	@Override
-	protected SesameBenchmarkConfigWrapper createRdfBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
+	protected SesameBenchmarkConfigWrapper createSesameBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
 		return new SesameBenchmarkConfigWrapper(bc, true);
 	}
 

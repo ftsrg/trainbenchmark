@@ -12,6 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 
-public class Drools5BatchTest {
+import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
+
+public class Drools5Test extends BaseTest {
+
+	@Override
+	protected BenchmarkResult runTest() throws Exception {
+		return null;
+	}
 
 }

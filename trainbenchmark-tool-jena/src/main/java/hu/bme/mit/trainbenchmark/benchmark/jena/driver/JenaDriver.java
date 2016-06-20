@@ -38,7 +38,6 @@ import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.RDF;
 
-import hu.bme.mit.trainbenchmark.benchmark.jena.comparators.ResourceComparator;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
@@ -47,16 +46,18 @@ public class JenaDriver extends RdfDriver<Resource> {
 
 	protected Model model;
 
-	protected Comparator<Resource> elementComparator = new ResourceComparator();
 	protected Comparator<Statement> statementComparator = new StatementComparator();
 
 	public JenaDriver(final boolean inferencing) {
 		super(inferencing);
 	}
 
+	public static JenaDriver create(final boolean inferencing) {
+		return new JenaDriver(inferencing);
+	}
+
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException {
-		final String modelPath = modelPathWithoutExtension + getPostfix();
+	public void read(final String modelPath) throws IOException {
 		final Model defaultModel = ModelFactory.createDefaultModel();
 		defaultModel.read(modelPath);
 
@@ -69,7 +70,8 @@ public class JenaDriver extends RdfDriver<Resource> {
 		}
 	}
 
-	public Collection<QuerySolution> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
+	public Collection<QuerySolution> runQuery(final RailwayQuery query, final String queryDefinition)
+			throws IOException {
 		final Collection<QuerySolution> results = new ArrayList<>();
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(queryDefinition, model)) {
 			final ResultSet resultSet = queryExecution.execSelect();
@@ -94,32 +96,34 @@ public class JenaDriver extends RdfDriver<Resource> {
 
 	@Override
 	public Collection<Resource> collectVertices(final String type) throws IOException {
-		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type, model.getResource(BASE_PREFIX + type));
+		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type,
+				model.getResource(BASE_PREFIX + type));
 		final Collection<Resource> vertices = vertexStatements.toList();
 		return vertices;
 	}
 
-	public void deleteIncomingEdge(final Collection<Resource> vertices, final String sourceVertexType, final String edgeType)
-			throws IOException {
+	public void deleteIncomingEdge(final Collection<Resource> vertices, final String sourceVertexType,
+			final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, false, true);
 	}
 
-	public void deleteAllOutgoingEdges(final Collection<Resource> vertices, final String vertexType, final String edgeType)
-			throws IOException {
+	public void deleteAllOutgoingEdges(final Collection<Resource> vertices, final String vertexType,
+			final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, true, true);
 	}
 
-	public void deleteOneOutgoingEdge(final Collection<Resource> vertices, final String vertexType, final String edgeType)
-			throws IOException {
+	public void deleteOneOutgoingEdge(final Collection<Resource> vertices, final String vertexType,
+			final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, true, false);
 	}
 
-	public void deleteSingleOutgoingEdge(final Collection<Resource> vertices, final String vertexType, final String edgeType)
-			throws IOException {
+	public void deleteSingleOutgoingEdge(final Collection<Resource> vertices, final String vertexType,
+			final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, true, true);
 	}
 
-	protected void deleteEdges(final Collection<Resource> vertices, final String edgeType, final boolean outgoing, final boolean all) {
+	protected void deleteEdges(final Collection<Resource> vertices, final String edgeType, final boolean outgoing,
+			final boolean all) {
 		final Property property = model.getProperty(RdfConstants.BASE_PREFIX + edgeType);
 
 		for (final Resource vertex : vertices) {
