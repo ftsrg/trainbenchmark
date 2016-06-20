@@ -10,7 +10,7 @@ public class InitializeOperationsPhase extends Phase {
 
 	@Override
 	public void run() throws Exception {
-		executor.initializeOperations();		
+		executor.initializeOperations();
 	}
 
 }

@@ -47,13 +47,15 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 
 		phaseExecutor.execute(initializeOperationsPhase);
 
+		// read
 		final long readTime = phaseExecutor.execute(readPhase);
 		benchmarkResult.registerReadTime(readTime);
 
+		// check
 		final long queryTime = phaseExecutor.execute(queryPhase);
 		benchmarkResult.registerQueryTime(queryTime);
 
-		// transformation-recheck loops
+		// transformation-recheck iterations
 		for (int i = 0; i < bcw.getBenchmarkConfig().getQueryTransformationCount(); i++) {
 			final long transformationTime = phaseExecutor.execute(transformationPhase);
 			benchmarkResult.registerTransformationTime(transformationTime);

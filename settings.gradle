@@ -30,6 +30,6 @@ include ':trainbenchmark-tool-tinkergraph'
 include ':trainbenchmark-tool-viatra'
 include ':trainbenchmark-tool-viatra-patterns'
 
-//if (hasProperty('iqdcore')) {
+if (hasProperty('iqdcore')) {
 	include ':trainbenchmark-tool-iqdcore'
-//}
+}
