@@ -13,7 +13,6 @@ import hu.bme.mit.trainbenchmark.benchmark.runner.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper
 
 import org.codehaus.groovy.runtime.InvokerHelper
@@ -45,7 +44,7 @@ class BenchmarkScript extends Script {
 		BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.CYPHER))
 		BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bc))
 		BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bc))
-		BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bc, ViatraBackend.INCREMENTAL))
+		BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bc))
 	}
 	
 	public static void main(String[] args) {
