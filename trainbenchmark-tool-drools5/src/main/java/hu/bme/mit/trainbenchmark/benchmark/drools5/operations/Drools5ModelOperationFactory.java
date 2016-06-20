@@ -2,7 +2,6 @@ package hu.bme.mit.trainbenchmark.benchmark.drools5.operations;
 
 import java.util.Optional;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools5.checkers.Drools5Query;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5PosLengthMatch;
@@ -10,6 +9,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5RouteSensorMat
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.matches.Drools5SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.queries.Drools5Query;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairConnectedSegments;
