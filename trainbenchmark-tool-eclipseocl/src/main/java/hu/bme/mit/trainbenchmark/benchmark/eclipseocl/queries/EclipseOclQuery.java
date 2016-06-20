@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.ocl.ParserException;
@@ -22,7 +23,6 @@ import org.eclipse.ocl.ecore.OCL.Helper;
 import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.ecore.OCLExpression;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
@@ -37,38 +37,18 @@ public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuer
 	protected Query queryEvaluator;
 	protected RailwayContainer container;
 
-	public EclipseOclQuery(final EmfDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query)
+	public EclipseOclQuery(final EmfDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
 			throws IOException, ParserException {
 		super(query, driver);
 
-		final String oclQueryDefinition = FileUtils.readFileToString(new File(benchmarkConfig.getWorkspaceDir()
-				+ "/trainbenchmark-tool-eclipseocl/src/main/resources/queries/" + query + ".ocl"));
+		final String oclQueryDefinition = FileUtils.readFileToString(new File(
+				workspaceDir.get() + "/trainbenchmark-tool-eclipseocl/src/main/resources/queries/" + query + ".ocl"));
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();
 		helper.setContext(RailwayPackage.eINSTANCE.getRailwayContainer());
 		final OCLExpression expression = helper.createQuery(oclQueryDefinition);
 		queryEvaluator = ocl.createQuery(expression);
-	}
-
-	public static EclipseOclQuery<?> newInstance(final EmfDriver driver, final BenchmarkConfigCore benchmarkConfig,
-			final RailwayQuery query) throws Exception {
-		switch (query) {
-		case CONNECTEDSEGMENTS:
-			return new EclipseOclQueryConnectedSegments(driver, benchmarkConfig);
-		case POSLENGTH:
-			return new EclipseOclQueryPosLength(driver, benchmarkConfig);
-		case ROUTESENSOR:
-			return new EclipseOclQueryRouteSensor(driver, benchmarkConfig);
-		case SEMAPHORENEIGHBOR:
-			return new EclipseOclQuerySemaphoreNeighbor(driver, benchmarkConfig);
-		case SWITCHMONITORED:
-			return new EclipseOclQuerySwitchMonitored(driver, benchmarkConfig);
-		case SWITCHSET:
-			return new EclipseOclQuerySwitchSet(driver, benchmarkConfig);
-		default:
-			throw new UnsupportedOperationException("Query " + query + " not supported");
-		}
 	}
 
 }

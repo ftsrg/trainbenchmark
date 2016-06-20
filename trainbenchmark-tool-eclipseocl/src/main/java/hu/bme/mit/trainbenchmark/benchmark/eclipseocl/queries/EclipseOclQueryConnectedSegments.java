@@ -13,11 +13,11 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -26,8 +26,8 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EclipseOclQueryConnectedSegments extends EclipseOclQuery<EmfConnectedSegmentsMatch> {
 
-	public EclipseOclQueryConnectedSegments(final EmfDriver driver, final BenchmarkConfigCore benchmarkConfig) throws Exception {
-		super(driver, benchmarkConfig, RailwayQuery.CONNECTEDSEGMENTS);
+	public EclipseOclQueryConnectedSegments(final EmfDriver driver, final Optional<String> workspaceDir) throws Exception {
+		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
 	}
 
 	@Override
