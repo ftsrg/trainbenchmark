@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
@@ -28,9 +28,9 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryPosLength extends TinkerGraphQuery<TinkerGraphPosLengthMatch> {
+public class TinkerGraphQueryPosLength<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphPosLengthMatch, TTinkerGraphDriver> {
 
-	public TinkerGraphQueryPosLength(final TinkerGraphDriver driver) {
+	public TinkerGraphQueryPosLength(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.POSLENGTH, driver);
 	}
 

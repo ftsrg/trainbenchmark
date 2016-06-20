@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,9 +26,9 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQuerySemaphoreNeighbor extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch> {
+public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, TTinkerGraphDriver> {
 
-	public TinkerGraphQuerySemaphoreNeighbor(final TinkerGraphDriver driver) {
+	public TinkerGraphQuerySemaphoreNeighbor(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
 	}
 

@@ -21,9 +21,9 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Position;
 
-public class TinkerGraphTransformationInjectSwitchSet extends TinkerGraphTransformationInject {
+public class TinkerGraphTransformationInjectSwitchSet<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
 
-	public TinkerGraphTransformationInjectSwitchSet(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationInjectSwitchSet(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

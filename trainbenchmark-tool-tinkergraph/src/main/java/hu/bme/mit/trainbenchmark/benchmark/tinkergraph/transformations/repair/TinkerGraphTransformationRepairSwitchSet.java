@@ -20,9 +20,9 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
 
-public class TinkerGraphTransformationRepairSwitchSet extends TinkerGraphTransformationRepair<TinkerGraphSwitchSetMatch> {
+public class TinkerGraphTransformationRepairSwitchSet<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationRepair<TTinkerGraphDriver, TinkerGraphSwitchSetMatch> {
 
-	public TinkerGraphTransformationRepairSwitchSet(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationRepairSwitchSet(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

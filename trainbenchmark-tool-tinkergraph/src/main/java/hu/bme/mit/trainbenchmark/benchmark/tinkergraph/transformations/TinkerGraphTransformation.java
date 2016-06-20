@@ -28,18 +28,20 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.Ti
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class TinkerGraphTransformation<TObject> extends ModelTransformation<TObject, TinkerGraphDriver> {
+public abstract class TinkerGraphTransformation<TObject, TTinkerGraphDriver extends TinkerGraphDriver>
+		extends ModelTransformation<TObject, TTinkerGraphDriver> {
 
-	protected TinkerGraphTransformation(final TinkerGraphDriver driver) {
+	protected TinkerGraphTransformation(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 
-	public static ModelTransformation<?, ?> newInstance(final TinkerGraphDriver driver, final RailwayQuery query, final Scenario scenario) {
+	public static <TTinkerGraphDriver extends TinkerGraphDriver> ModelTransformation<TTinkerGraphDriver, ?> newInstance(
+			final TTinkerGraphDriver driver, final RailwayQuery query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new TinkerGraphTransformationRepairConnectedSegments(driver);				
+				return new TinkerGraphTransformationRepairConnectedSegments(driver);
 			case POSLENGTH:
 				return new TinkerGraphTransformationRepairPosLength(driver);
 			case ROUTESENSOR:
@@ -56,7 +58,7 @@ public abstract class TinkerGraphTransformation<TObject> extends ModelTransforma
 		case INJECT:
 			switch (query) {
 			case CONNECTEDSEGMENTS:
-				return new TinkerGraphTransformationInjectConnectedSegments(driver);				
+				return new TinkerGraphTransformationInjectConnectedSegments(driver);
 			case POSLENGTH:
 				return new TinkerGraphTransformationInjectPosLength(driver);
 			case ROUTESENSOR:
@@ -73,6 +75,6 @@ public abstract class TinkerGraphTransformation<TObject> extends ModelTransforma
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);
+		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);		
 	}
 }

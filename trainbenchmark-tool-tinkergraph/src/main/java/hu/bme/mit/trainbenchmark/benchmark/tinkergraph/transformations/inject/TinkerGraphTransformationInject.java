@@ -16,9 +16,10 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-public abstract class TinkerGraphTransformationInject extends TinkerGraphTransformation<Vertex> {
+public abstract class TinkerGraphTransformationInject<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphTransformation<Vertex, TTinkerGraphDriver> {
 
-	protected TinkerGraphTransformationInject(final TinkerGraphDriver driver) {
+	protected TinkerGraphTransformationInject(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

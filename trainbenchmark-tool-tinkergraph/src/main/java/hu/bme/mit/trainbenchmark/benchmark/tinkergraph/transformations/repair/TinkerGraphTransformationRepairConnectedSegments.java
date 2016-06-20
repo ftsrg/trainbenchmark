@@ -19,9 +19,10 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationRepairConnectedSegments extends TinkerGraphTransformationRepair<TinkerGraphConnectedSegmentsMatch> {
+public class TinkerGraphTransformationRepairConnectedSegments<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphTransformationRepair<TTinkerGraphDriver, TinkerGraphConnectedSegmentsMatch> {
 
-	public TinkerGraphTransformationRepairConnectedSegments(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationRepairConnectedSegments(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 
@@ -29,9 +30,9 @@ public class TinkerGraphTransformationRepairConnectedSegments extends TinkerGrap
 	public void activate(final Collection<TinkerGraphConnectedSegmentsMatch> matches) {
 		for (final TinkerGraphConnectedSegmentsMatch csm : matches) {
 			// delete segment2 with all its relationships
-			final Vertex segment2 = csm.getSegment2();			
+			final Vertex segment2 = csm.getSegment2();
 			segment2.remove();
-			
+
 			// (segment1)-[:connectsTo]->(segment3)
 			csm.getSegment1().addEdge(ModelConstants.CONNECTS_TO, csm.getSegment3());
 		}
