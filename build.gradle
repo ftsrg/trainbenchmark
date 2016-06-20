@@ -23,7 +23,7 @@ subprojects {
 		maven { url "https://repo.eclipse.org/content/groups/viatra2" }
 		maven { url "http://www.systap.com/maven/releases" }
 		maven { url "http://docs.inf.mit.bme.hu/neo4j-shell-tools-m2" }
-		maven { url "http://m2.neo4j.org/content/repositories/snapshots/" }
+		maven { url "http://m2.neo4j.org/content/repositories/snapshots" }
 		maven { url "https://raw.github.com/neo4j-contrib/m2/master/releases" }
 	}
 }
