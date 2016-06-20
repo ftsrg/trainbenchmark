@@ -56,6 +56,6 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 
 	public Optional<ModelTransformation<TPatternMatch, TDriver>> getTransformation() {
 		return transformation;
-	}	
+	}
 	
 }

@@ -14,16 +14,17 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlPosLengthMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SqlTransformationRepairPosLength extends SqlTransformationRepair<SqlPosLengthMatch> {
+public class SqlTransformationRepairPosLength<TSqlDriver extends SqlDriver> extends SqlTransformationRepair<SqlPosLengthMatch, TSqlDriver> {
 
-	public SqlTransformationRepairPosLength(final SqlDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
-		super(driver, benchmarkConfig, query);
+	public SqlTransformationRepairPosLength(final TSqlDriver driver, final Optional<String> workspaceDir) 
+			throws IOException {
+		super(driver, workspaceDir, RailwayQuery.POSLENGTH);
 	}
 
 	@Override
@@ -37,5 +38,5 @@ public class SqlTransformationRepairPosLength extends SqlTransformationRepair<Sq
 			preparedUpdateStatement.executeUpdate();
 		}
 	}
-	
+
 }

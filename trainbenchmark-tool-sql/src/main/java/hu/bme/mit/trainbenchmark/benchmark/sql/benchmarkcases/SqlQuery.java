@@ -16,33 +16,33 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SqlModelQuery<TSQLDriver extends SqlDriver> extends ModelQuery<SqlMatch, TSQLDriver> {
+public class SqlQuery<TSqlMatch extends SqlMatch, TSqlDriver extends SqlDriver> extends ModelQuery<TSqlMatch, TSqlDriver> {
 
 	protected final String queryDefinition; 
 	protected PreparedStatement statement;
 	
-	public SqlModelQuery(final TSQLDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException, SQLException {
+	public SqlQuery(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException, SQLException {
 		super(query, driver);
 
-		final String queryPath = benchmarkConfig.getWorkspaceDir() + driver.getResourceDirectory() + "queries/" + query + ".sql";
+		final String queryPath = workspaceDir.get() + driver.getResourceDirectory() + "queries/" + query + ".sql";
 		queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 
 	@Override
-	public Collection<SqlMatch> evaluate() throws SQLException {
+	public Collection<TSqlMatch> evaluate() throws SQLException {
 		if (statement == null) {
 			statement = driver.getConnection().prepareStatement(queryDefinition);
 		}
-		return driver.runStatement(query, statement);
+		return (Collection<TSqlMatch>) driver.runStatement(query, statement);
 	}
 
 }

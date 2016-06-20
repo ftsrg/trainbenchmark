@@ -24,9 +24,15 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
 public class SQLiteDriver extends SqlDriver {
 
+	protected SQLiteDriver() {
+	}
+	
+	public static SQLiteDriver create() {
+		return new SQLiteDriver();
+	}
+	
 	@Override
-	public void read(final String modelPathWithoutExtension) throws IOException, InterruptedException, SQLException {
-		final String modelPath = modelPathWithoutExtension + getPostfix();
+	public void read(final String modelPath) throws IOException, InterruptedException, SQLException {
 		final File modelFile = new File(modelPath);
 		if (!modelFile.exists()) {
 			throw new IOException("Model does not exist: " + modelPath);
