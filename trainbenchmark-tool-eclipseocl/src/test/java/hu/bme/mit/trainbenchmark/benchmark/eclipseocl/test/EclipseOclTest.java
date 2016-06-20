@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
@@ -19,8 +22,14 @@ public class EclipseOclTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		final EclipseOclBenchmarkConfigWrapper eobcw = createEclipseOclBenchmarkConfigWrapper(bc);
+		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(eobcw);
+		final BenchmarkResult result = scenario.performBenchmark();
+		return result;
+	}
+	
+	protected EclipseOclBenchmarkConfigWrapper createEclipseOclBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
+		return new EclipseOclBenchmarkConfigWrapper(bc);
 	}
 
 }
