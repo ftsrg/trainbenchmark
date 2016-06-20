@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -25,23 +26,27 @@ import org.apache.jena.query.ResultSet;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class JenaChecker extends RdfModelQuery<JenaMatch, JenaDriver> {
+public class JenaQuery<TPatternMatch extends JenaMatch> extends RdfModelQuery<TPatternMatch, JenaDriver> {
 
 	protected Query jenaQuery;
 
-	public JenaChecker(final JenaDriver driver, final RdfBenchmarkConfigWrapper benchmarkConfigWrapper, final RailwayQuery query)
+	public JenaQuery(final JenaDriver driver, final Optional<String> queryDirectory, final RailwayQuery query)
 			throws IOException {
-		super(driver, null, query);
+		super(driver, queryDirectory, query);
 		this.jenaQuery = QueryFactory.read(queryPath);
+	}
+	
+	public static <TPatternMatch extends JenaMatch> JenaQuery<TPatternMatch> create(final JenaDriver driver, final Optional<String> queryDirectory, final RailwayQuery query)
+			throws IOException {
+		return new JenaQuery<TPatternMatch>(driver, queryDirectory, query);
 	}
 
 	@Override
-	public Collection<JenaMatch> evaluate() throws IOException {
-		final List<JenaMatch> matches = new ArrayList<>();
+	public Collection<TPatternMatch> evaluate() throws IOException {
+		final List<TPatternMatch> matches = new ArrayList<>();
 
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(jenaQuery, driver.getModel())) {
 			final ResultSet resultSet = queryExecution.execSelect();
@@ -49,7 +54,7 @@ public class JenaChecker extends RdfModelQuery<JenaMatch, JenaDriver> {
 			while (resultSet.hasNext()) {
 				final QuerySolution qs = resultSet.next();
 				final JenaMatch match = JenaMatch.createMatch(query, qs);
-				matches.add(match);
+				matches.add((TPatternMatch) match);
 			}
 		}
 
