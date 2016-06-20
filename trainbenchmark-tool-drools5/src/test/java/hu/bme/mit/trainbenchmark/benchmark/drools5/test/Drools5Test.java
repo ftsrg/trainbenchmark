@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5BenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.config.Drools5BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
@@ -19,7 +22,14 @@ public class Drools5Test extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		return null;
+		final Drools5BenchmarkConfigWrapper dbcw = createDrools5BenchmarkConfigWrapper(bc);
+		final Drools5BenchmarkScenario scenario = new Drools5BenchmarkScenario(dbcw);
+		final BenchmarkResult result = scenario.performBenchmark();
+		return result;
+	}
+	
+	protected Drools5BenchmarkConfigWrapper createDrools5BenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
+		return new Drools5BenchmarkConfigWrapper(bc);
 	}
 
 }

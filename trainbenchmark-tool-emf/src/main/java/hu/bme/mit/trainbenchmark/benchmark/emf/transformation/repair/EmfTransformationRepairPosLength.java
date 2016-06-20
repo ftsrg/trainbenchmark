@@ -16,14 +16,15 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
 
-public class EmfTransformationRepairPosLength<TDriver extends EmfDriver> extends EmfTransformationRepair<EmfPosLengthMatch, TDriver> {
+public class EmfTransformationRepairPosLength<TDriver extends EmfDriver, TPosLengthMatch extends EmfPosLengthMatch>
+		extends EmfTransformationRepair<TPosLengthMatch, TDriver> {
 
-	public EmfTransformationRepairPosLength(TDriver driver) {
+	public EmfTransformationRepairPosLength(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<EmfPosLengthMatch> matches) {
+	public void activate(final Collection<TPosLengthMatch> matches) {
 		for (final EmfPosLengthMatch plm : matches) {
 			final int newLength = -plm.getSegment().getLength() + 1;
 			plm.getSegment().setLength(newLength);

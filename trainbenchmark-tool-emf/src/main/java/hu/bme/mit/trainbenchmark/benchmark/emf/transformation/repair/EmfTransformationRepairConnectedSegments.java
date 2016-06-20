@@ -18,14 +18,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 
-public class EmfTransformationRepairConnectedSegments<TDriver extends EmfDriver> extends EmfTransformationRepair<EmfConnectedSegmentsMatch, TDriver> {
+public class EmfTransformationRepairConnectedSegments<TDriver extends EmfDriver, TConnectedSegmentsMatch extends EmfConnectedSegmentsMatch>
+		extends EmfTransformationRepair<TConnectedSegmentsMatch, TDriver> {
 
-	public EmfTransformationRepairConnectedSegments(TDriver driver) {
+	public EmfTransformationRepairConnectedSegments(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<EmfConnectedSegmentsMatch> matches) {
+	public void activate(final Collection<TConnectedSegmentsMatch> matches) {
 		for (final EmfConnectedSegmentsMatch csm : matches) {
 			EcoreUtil.delete(csm.getSegment2());
 			csm.getSegment1().getConnectsTo().add(csm.getSegment3());

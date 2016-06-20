@@ -28,6 +28,13 @@ public class Drools5Driver extends EmfDriver {
 	protected KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
 	protected StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
 
+	protected Drools5Driver() {
+	}
+	
+	public static Drools5Driver create() {
+		return new Drools5Driver();
+	}
+	
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);

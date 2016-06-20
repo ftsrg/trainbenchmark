@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.drools5.checkers;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 
 import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderError;
@@ -23,25 +24,25 @@ import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.rule.LiveQuery;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.Drools5ResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools5.driver.Drools5Driver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools5ModelQuery extends ModelQuery<EmfMatch, Drools5Driver> {
+public class Drools5Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Drools5Driver> {
 
 	protected Collection<EmfMatch> matches = new HashSet<>();
 	protected Drools5ResultListener listener;
 	protected LiveQuery liveQuery;
 
-	public Drools5ModelQuery(final BenchmarkConfigCore benchmarkConfig, final Drools5Driver driver, final RailwayQuery query) throws IOException {
+	protected Drools5Query(final Drools5Driver driver, final Optional<String> workspaceDir, final RailwayQuery query)
+			throws IOException {
 		super(query, driver);
-	
+
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		final String queryFile = benchmarkConfig.getWorkspaceDir()
-				+ "/trainbenchmark-tool-drools5/src/main/resources/queries/" + query + ".drl";
+		final String queryFile = workspaceDir + "/trainbenchmark-tool-drools5/src/main/resources/queries/" + query
+				+ ".drl";
 		kbuilder.add(ResourceFactory.newFileResource(queryFile), ResourceType.DRL);
 
 		final KnowledgeBuilderErrors errors = kbuilder.getErrors();
@@ -55,14 +56,18 @@ public class Drools5ModelQuery extends ModelQuery<EmfMatch, Drools5Driver> {
 
 	}
 
+	public static <TMatch extends EmfMatch> Drools5Query<TMatch> create(final Drools5Driver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+		return new Drools5Query<TMatch>(driver, workspaceDir, query);
+	}
+
 	@Override
-	public Collection<EmfMatch> evaluate() throws IOException {
+	public Collection<TMatch> evaluate() throws IOException {
 		if (liveQuery == null) {
 			listener = new Drools5ResultListener(query);
 			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);
 		}
 		matches = listener.getMatches();
-		return matches;
+		return (Collection<TMatch>) matches;
 	}
 
 	@Override
