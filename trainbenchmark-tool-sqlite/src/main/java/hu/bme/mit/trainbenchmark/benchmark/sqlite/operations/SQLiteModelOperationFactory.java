@@ -39,8 +39,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		switch (operationEnum) {
 		// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
-			final SqlQuery<SqlConnectedSegmentsMatch, SQLiteDriver> query = new SqlQuery<>(driver,
-					workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+			final SqlQuery<SqlConnectedSegmentsMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir,
+					RailwayQuery.CONNECTEDSEGMENTS);
 			final ModelOperation<SqlConnectedSegmentsMatch, SQLiteDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -56,8 +56,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
-			final SqlQuery<SqlConnectedSegmentsMatch, SQLiteDriver> query = new SqlQuery<>(driver,
-					workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+			final SqlQuery<SqlConnectedSegmentsMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir,
+					RailwayQuery.CONNECTEDSEGMENTS);
 			final SQLiteTransformationRepairConnectedSegments transformation = new SQLiteTransformationRepairConnectedSegments(
 					driver, workspaceDir);
 			final ModelOperation<SqlConnectedSegmentsMatch, SQLiteDriver> operation = ModelOperation.of(query,
@@ -79,8 +79,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		case POSLENGTH_REPAIR: {
 			final SqlQuery<SqlPosLengthMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir,
 					RailwayQuery.POSLENGTH);
-			final SqlTransformationRepairPosLength<SQLiteDriver> transformation = new SqlTransformationRepairPosLength<>(driver,
-					workspaceDir);
+			final SqlTransformationRepairPosLength<SQLiteDriver> transformation = new SqlTransformationRepairPosLength<>(
+					driver, workspaceDir);
 			final ModelOperation<SqlPosLengthMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -99,7 +99,7 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		case ROUTESENSOR_REPAIR: {
 			final SqlQuery<SqlRouteSensorMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir,
 					RailwayQuery.ROUTESENSOR);
-			final SqlTransformationRepairRouteSensor transformation = new SqlTransformationRepairRouteSensor(driver,
+			final SqlTransformationRepairRouteSensor<SQLiteDriver> transformation = new SqlTransformationRepairRouteSensor<>(driver,
 					workspaceDir);
 			final ModelOperation<SqlRouteSensorMatch, SQLiteDriver> operation = ModelOperation.of(query,
 					transformation);
@@ -108,8 +108,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 
 			// SemaphoreNeighbor
 		case SEMAPHORENEIGHBOR: {
-			final SqlQuery<SqlSemaphoreNeighborMatch, SQLiteDriver> query = new SqlQuery<>(driver,
-					workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
+			final SqlQuery<SqlSemaphoreNeighborMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir,
+					RailwayQuery.SEMAPHORENEIGHBOR);
 			final ModelOperation<SqlSemaphoreNeighborMatch, SQLiteDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -118,9 +118,9 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 			break;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
-			final SqlQuery<SqlSemaphoreNeighborMatch, SQLiteDriver> query = new SqlQuery<>(driver,
-					workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
-			final SqlTransformationRepairSemaphoreNeighbor transformation = new SqlTransformationRepairSemaphoreNeighbor(
+			final SqlQuery<SqlSemaphoreNeighborMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir,
+					RailwayQuery.SEMAPHORENEIGHBOR);
+			final SqlTransformationRepairSemaphoreNeighbor<SQLiteDriver> transformation = new SqlTransformationRepairSemaphoreNeighbor<>(
 					driver, workspaceDir);
 			final ModelOperation<SqlSemaphoreNeighborMatch, SQLiteDriver> operation = ModelOperation.of(query,
 					transformation);
@@ -162,7 +162,7 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		case SWITCHSET_REPAIR: {
 			final SqlQuery<SqlSwitchSetMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir,
 					RailwayQuery.SWITCHSET);
-			final SqlTransformationRepairSwitchSet transformation = new SqlTransformationRepairSwitchSet(driver,
+			final SqlTransformationRepairSwitchSet<SQLiteDriver> transformation = new SqlTransformationRepairSwitchSet<>(driver,
 					workspaceDir);
 			final ModelOperation<SqlSwitchSetMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
