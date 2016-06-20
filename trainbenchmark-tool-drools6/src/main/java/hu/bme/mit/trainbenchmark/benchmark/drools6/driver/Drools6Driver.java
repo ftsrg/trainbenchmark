@@ -30,30 +30,30 @@ public class Drools6Driver extends EmfDriver {
 	protected final KieFileSystem kfs = kieServices.newKieFileSystem();
 	protected KieContainer kContainer;
 	protected KieSession kieSession;
-	
+
 	protected Drools6Driver() {
 	}
-	
+
 	public static Drools6Driver create() {
 		return new Drools6Driver();
-	}	
+	}
 
 	@Override
 	public void initialize() throws Exception {
-		super.initialize();	
-	
+		super.initialize();
+
 		kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
 		kieSession = kContainer.newKieSession();
-		
+
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
 
-		EObject eObject = null;
+		initialize();
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
-			eObject = tIterator.next();
+			final EObject eObject = tIterator.next();
 			kieSession.insert(eObject);
 		}
 
@@ -103,11 +103,11 @@ public class Drools6Driver extends EmfDriver {
 	public KieSession getKsession() {
 		return kieSession;
 	}
-	
+
 	public KieFileSystem getKfs() {
 		return kfs;
 	}
-	
+
 	public KieServices getKieServices() {
 		return kieServices;
 	}

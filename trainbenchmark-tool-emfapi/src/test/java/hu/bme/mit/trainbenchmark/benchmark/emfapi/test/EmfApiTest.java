@@ -12,6 +12,9 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
@@ -19,8 +22,14 @@ public class EmfApiTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		final EmfApiBenchmarkConfigWrapper dbcw = createDrools5BenchmarkConfigWrapper(bc);
+		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(dbcw);
+		final BenchmarkResult result = scenario.performBenchmark();
+		return result;
+	}
+	
+	protected EmfApiBenchmarkConfigWrapper createDrools5BenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
+		return new EmfApiBenchmarkConfigWrapper(bc);
 	}
 
 }
