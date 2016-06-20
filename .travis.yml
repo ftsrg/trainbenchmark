@@ -6,6 +6,6 @@ jdk:
 install:
   -
 script:
-  - scripts/shadowJar.sh
+  - scripts/build.sh
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
