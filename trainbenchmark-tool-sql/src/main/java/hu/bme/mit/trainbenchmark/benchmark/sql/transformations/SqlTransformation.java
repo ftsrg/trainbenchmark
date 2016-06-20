@@ -14,56 +14,24 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SqlTransformation<TObject> extends ModelTransformation<TObject, SqlDriver> {
+public abstract class SqlTransformation<TObject, TSqlDriver extends SqlDriver> extends ModelTransformation<TObject, TSqlDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
-	protected BenchmarkConfigCore benchmarkConfig;
-	protected String updateQuery;
+	protected final String updateQuery;
 		
-	protected SqlTransformation(final SqlDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
+	protected SqlTransformation(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query, final String scenario) throws IOException {
 		super(driver);
-		this.benchmarkConfig = benchmarkConfig;
-
-		final String updatePath = "";//getTransformationDirectory() + benchmarkConfig.getScenarioName() + query + ".sql";
-		updateQuery = FileUtils.readFileToString(new File(updatePath));
+		
+		final String updatePath = workspaceDir.get() + driver.getResourceDirectory() + "transformations/" + scenario + query + ".sql";
+		this.updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 	
-	protected String getTransformationDirectory() {
-		return benchmarkConfig.getWorkspaceDir() + driver.getResourceDirectory() + "transformations/";
-	}
-
-//	public static ModelTransformation<?, ?> newInstance(final SqlDriver driver, final BenchmarkConfig benchmarkConfig, final RailwayQuery query) throws IOException {
-//		switch (benchmarkConfig.getScenario()) {
-//		case REPAIR:
-//			switch (query) {
-//			case CONNECTEDSEGMENTS:
-//				return new SqlTransformationRepairConnectedSegments(driver, benchmarkConfig, query);				
-//			case POSLENGTH:
-//				return new SqlTransformationRepairPosLength(driver, benchmarkConfig, query);
-//			case ROUTESENSOR:
-//				return new SqlTransformationRepairRouteSensor(driver, benchmarkConfig, query);
-//			case SEMAPHORENEIGHBOR:
-//				return new SqlTransformationRepairSemaphoreNeighbor(driver, benchmarkConfig, query);
-//			case SWITCHMONITORED:
-//				return new SqlTransformationRepairSwitchMonitored(driver, benchmarkConfig, query);
-//			case SWITCHSET:
-//				return new SqlTransformationRepairSwitchSet(driver, benchmarkConfig, query);
-//			default:
-//				break;
-//			}
-//		case INJECT:
-//			return new SqlTransformationInject(driver, benchmarkConfig, query);				
-//		default:
-//			break;
-//		}
-//		throw new UnsupportedOperationException("Query: " + query + ", scenario: " + benchmarkConfig.getScenario());
-//	}
 }

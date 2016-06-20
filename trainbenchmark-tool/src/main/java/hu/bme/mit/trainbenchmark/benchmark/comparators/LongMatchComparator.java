@@ -14,14 +14,14 @@ package hu.bme.mit.trainbenchmark.benchmark.comparators;
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
 import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 
-public class LongMatchComparator extends MatchComparator<LongMatch, Long> {
+public class LongMatchComparator<TMatch extends LongMatch> extends MatchComparator<TMatch, Long> {
 
 	protected LongMatchComparator() {
 		super(new LongComparator());
 	}
 	
-	public static LongMatchComparator create() {
-		return new LongMatchComparator();
+	public static <TMatch extends LongMatch> LongMatchComparator<TMatch> create() {
+		return new LongMatchComparator<>();
 	}
 
 	@Override

@@ -14,17 +14,17 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SqlTransformationRepairSemaphoreNeighbor extends SqlTransformationRepair<SqlSemaphoreNeighborMatch> {
+public class SqlTransformationRepairSemaphoreNeighbor<TSqlDriver extends SqlDriver> extends SqlTransformationRepair<SqlSemaphoreNeighborMatch, TSqlDriver> {
 
-	public SqlTransformationRepairSemaphoreNeighbor(final SqlDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query)
+	public SqlTransformationRepairSemaphoreNeighbor(final TSqlDriver driver, final Optional<String> workspaceDir)
 			throws IOException {
-		super(driver, benchmarkConfig, query);
+		super(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
 	}
 
 	@Override

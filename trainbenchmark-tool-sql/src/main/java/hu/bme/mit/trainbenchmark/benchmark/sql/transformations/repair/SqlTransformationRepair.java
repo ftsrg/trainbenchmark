@@ -12,17 +12,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 
 import java.io.IOException;
+import java.util.Optional;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SqlTransformationRepair<TMatch extends SqlMatch> extends SqlTransformation<TMatch> {
+public abstract class SqlTransformationRepair<TMatch extends SqlMatch, TSqlDriver extends SqlDriver> extends SqlTransformation<TMatch, TSqlDriver> {
 
-	protected SqlTransformationRepair(final SqlDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query) throws IOException {
-		super(driver, benchmarkConfig, query);
+	protected SqlTransformationRepair(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+		super(driver, workspaceDir, query, "Repair");
 	}
 
 }

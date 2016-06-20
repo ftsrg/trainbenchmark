@@ -14,17 +14,17 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SqlTransformationInject extends SqlTransformation<Long> {
+public class SqlTransformationInject<TSqlDriver extends SqlDriver> extends SqlTransformation<Long, TSqlDriver> {
 
-	public SqlTransformationInject(final SqlDriver driver, final BenchmarkConfigCore benchmarkConfig, final RailwayQuery query)
+	public SqlTransformationInject(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
 			throws IOException {
-		super(driver, benchmarkConfig, query);
+		super(driver, workspaceDir, query, "Inject");
 	}
 
 	@Override
