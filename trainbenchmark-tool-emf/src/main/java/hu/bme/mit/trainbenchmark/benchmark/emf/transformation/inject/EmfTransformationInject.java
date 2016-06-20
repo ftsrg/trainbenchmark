@@ -15,7 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public abstract class EmfTransformationInject<T extends RailwayElement> extends EmfTransformation<T, EmfDriver> {
+public abstract class EmfTransformationInject<TMatch extends RailwayElement> extends EmfTransformation<TMatch, EmfDriver> {
 
 	public EmfTransformationInject(final EmfDriver driver) {
 		super(driver);

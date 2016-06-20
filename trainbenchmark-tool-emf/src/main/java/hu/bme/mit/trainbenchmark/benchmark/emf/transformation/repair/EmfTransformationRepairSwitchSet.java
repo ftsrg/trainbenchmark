@@ -16,14 +16,15 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetMatch;
 
-public class EmfTransformationRepairSwitchSet<TDriver extends EmfDriver> extends EmfTransformationRepair<EmfSwitchSetMatch, TDriver> {
+public class EmfTransformationRepairSwitchSet<TDriver extends EmfDriver, TSwitchSetMatch extends EmfSwitchSetMatch>
+		extends EmfTransformationRepair<TSwitchSetMatch, TDriver> {
 
-	public EmfTransformationRepairSwitchSet(TDriver driver) {
+	public EmfTransformationRepairSwitchSet(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<EmfSwitchSetMatch> matches) {
+	public void activate(final Collection<TSwitchSetMatch> matches) {
 		for (final EmfSwitchSetMatch sstm : matches) {
 			sstm.getSw().setCurrentPosition(sstm.getSwP().getPosition());
 		}
