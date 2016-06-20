@@ -15,29 +15,19 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SemaphoreNeighborQuerySpecification;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQuerySemaphoreNeighbor extends ViatraQuery<SemaphoreNeighborMatch> {
 
-	public ViatraQuerySemaphoreNeighbor(final ViatraBackend backend,
-			final ViatraBaseDriver<SemaphoreNeighborMatch> driver) {
-		super(RailwayQuery.SEMAPHORENEIGHBOR, backend, driver);
+	public ViatraQuerySemaphoreNeighbor(final ViatraDriver driver) {
+		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
 	}
 
 	@Override
 	public ViatraQueryMatcher<SemaphoreNeighborMatch> getMatcher() throws ViatraQueryException {
-		switch (backend) {
-		case INCREMENTAL:
-			return engine.getMatcher(SemaphoreNeighborQuerySpecification.instance());
-		case LOCALSEARCH:
-			return (SemaphoreNeighborMatcher) getLSMatcher(SemaphoreNeighborQuerySpecification.instance());
-		default:
-			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
-		}
+		return engine.getMatcher(SemaphoreNeighborQuerySpecification.instance());
 	}
 
 }

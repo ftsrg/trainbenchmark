@@ -15,29 +15,19 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.ConnectedSegmentsQuerySpecification;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQueryConnectedSegments extends ViatraQuery<ConnectedSegmentsMatch> {
 
-	public ViatraQueryConnectedSegments(final ViatraBackend backend,
-			final ViatraBaseDriver<ConnectedSegmentsMatch> driver) {
-		super(RailwayQuery.CONNECTEDSEGMENTS, backend, driver);
+	public ViatraQueryConnectedSegments(final ViatraDriver driver) {
+		super(RailwayQuery.CONNECTEDSEGMENTS, driver);
 	}
 
 	@Override
 	public ViatraQueryMatcher<ConnectedSegmentsMatch> getMatcher() throws ViatraQueryException {
-		switch (backend) {
-		case INCREMENTAL:
-			return engine.getMatcher(ConnectedSegmentsQuerySpecification.instance());
-		case LOCALSEARCH:
-			return (ConnectedSegmentsMatcher) getLSMatcher(ConnectedSegmentsQuerySpecification.instance());
-		default:
-			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
-		}
+		return engine.getMatcher(ConnectedSegmentsQuerySpecification.instance());
 	}
 
 }

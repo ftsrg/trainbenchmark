@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
-import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.base.api.NavigationHelper;
 import org.eclipse.viatra.query.runtime.emf.EMFScope;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
@@ -27,12 +26,19 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 import com.google.common.collect.Sets;
 
+import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class ViatraDriver<TMatch extends BasePatternMatch> extends ViatraBaseDriver<TMatch> {
+public class ViatraDriver extends EmfDriver {
 
-	public ViatraDriver() {
+	protected AdvancedViatraQueryEngine engine;
+
+	public AdvancedViatraQueryEngine getEngine() {
+		return engine;
+	}
+	
+	protected ViatraDriver() {
 		super();
 
 		try {
@@ -43,6 +49,10 @@ public class ViatraDriver<TMatch extends BasePatternMatch> extends ViatraBaseDri
 		}
 	}
 
+	public static ViatraDriver create() {
+		return new ViatraDriver();
+	}
+	
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
@@ -50,8 +60,8 @@ public class ViatraDriver<TMatch extends BasePatternMatch> extends ViatraBaseDri
 	}
 
 	@Override
-	public void read(final String modelPathWithoutExtension) throws Exception {
-		super.read(modelPathWithoutExtension);
+	public void read(final String modelPath) throws Exception {
+		super.read(modelPath);
 	}
 
 	@Override

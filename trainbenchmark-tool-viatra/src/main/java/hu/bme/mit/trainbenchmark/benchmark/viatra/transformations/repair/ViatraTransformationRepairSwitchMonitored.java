@@ -14,17 +14,15 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
-
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class ViatraTransformationRepairSwitchMonitored extends ViatraTransformation<SwitchMonitoredMatch> {
 
-	public ViatraTransformationRepairSwitchMonitored(final ViatraBaseDriver<? extends BasePatternMatch> driver) {
+	public ViatraTransformationRepairSwitchMonitored(final ViatraDriver driver) {
 		super(driver);
 	}
 

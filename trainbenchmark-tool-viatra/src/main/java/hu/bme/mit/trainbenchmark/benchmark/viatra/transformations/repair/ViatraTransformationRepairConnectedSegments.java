@@ -15,16 +15,15 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class ViatraTransformationRepairConnectedSegments extends ViatraTransformation<ConnectedSegmentsMatch> {
 
-	public ViatraTransformationRepairConnectedSegments(final ViatraBaseDriver<? extends BasePatternMatch> driver) {
+	public ViatraTransformationRepairConnectedSegments(final ViatraDriver driver) {
 		super(driver);
 	}
 

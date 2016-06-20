@@ -15,28 +15,19 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorQuerySpecification;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQueryRouteSensor extends ViatraQuery<RouteSensorMatch> {
 
-	public ViatraQueryRouteSensor(final ViatraBackend backend, final ViatraBaseDriver<RouteSensorMatch> driver) {
-		super(RailwayQuery.ROUTESENSOR, backend, driver);
+	public ViatraQueryRouteSensor(final ViatraDriver driver) {
+		super(RailwayQuery.ROUTESENSOR, driver);
 	}
 
 	@Override
 	public ViatraQueryMatcher<RouteSensorMatch> getMatcher() throws ViatraQueryException {
-		switch (backend) {
-		case INCREMENTAL:
-            return engine.getMatcher(RouteSensorQuerySpecification.instance());
-		case LOCALSEARCH:
-            return (RouteSensorMatcher) getLSMatcher(RouteSensorQuerySpecification.instance());
-		default:
-			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
-		}
+		return engine.getMatcher(RouteSensorQuerySpecification.instance());
 	}
 
 }

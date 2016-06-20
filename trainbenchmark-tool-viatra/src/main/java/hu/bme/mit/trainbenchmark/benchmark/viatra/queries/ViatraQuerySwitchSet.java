@@ -15,28 +15,19 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.SwitchSetQuerySpecification;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQuerySwitchSet extends ViatraQuery<SwitchSetMatch> {
 
-	public ViatraQuerySwitchSet(final ViatraBackend backend, final ViatraBaseDriver<SwitchSetMatch> driver) {
-		super(RailwayQuery.SWITCHSET, backend, driver);
+	public ViatraQuerySwitchSet(final ViatraDriver driver) {
+		super(RailwayQuery.SWITCHSET, driver);
 	}
 
 	@Override
 	public ViatraQueryMatcher<SwitchSetMatch> getMatcher() throws ViatraQueryException {
-		switch (backend) {
-		case INCREMENTAL:
-            return engine.getMatcher(SwitchSetQuerySpecification.instance());
-		case LOCALSEARCH:
-            return (SwitchSetMatcher) getLSMatcher(SwitchSetQuerySpecification.instance());
-		default:
-			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
-		}
+		return engine.getMatcher(SwitchSetQuerySpecification.instance());
 	}
 
 }

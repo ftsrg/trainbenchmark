@@ -14,15 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
-
 import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
 
 public class ViatraTransformationRepairPosLength extends ViatraTransformation<PosLengthMatch> {
 
-	public ViatraTransformationRepairPosLength(final ViatraBaseDriver<? extends BasePatternMatch> driver) {
+	public ViatraTransformationRepairPosLength(final ViatraDriver driver) {
 		super(driver);
 	}
 
