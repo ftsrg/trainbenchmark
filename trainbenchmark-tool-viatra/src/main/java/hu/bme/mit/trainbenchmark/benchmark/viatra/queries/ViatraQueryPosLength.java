@@ -15,29 +15,19 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.PosLengthQuerySpecification;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class ViatraQueryPosLength extends ViatraQuery<PosLengthMatch> {
 
-	public ViatraQueryPosLength(final ViatraBackend backend,
-			final ViatraBaseDriver<PosLengthMatch> driver) {
-		super(RailwayQuery.POSLENGTH, backend, driver);
+	public ViatraQueryPosLength(final ViatraDriver driver) {
+		super(RailwayQuery.POSLENGTH, driver);
 	}
 
 	@Override
 	public ViatraQueryMatcher<PosLengthMatch> getMatcher() throws ViatraQueryException {
-		switch (backend) {
-		case INCREMENTAL:
-			return engine.getMatcher(PosLengthQuerySpecification.instance());
-		case LOCALSEARCH:
-			return (PosLengthMatcher) getLSMatcher(PosLengthQuerySpecification.instance());
-		default:
-			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
-		}
+		return engine.getMatcher(PosLengthQuerySpecification.instance());
 	}
 
 }

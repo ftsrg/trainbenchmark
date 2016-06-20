@@ -14,12 +14,12 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.transformations;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraBaseDriver;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 
 public abstract class ViatraTransformation<TMatch extends BasePatternMatch>
-	extends ModelTransformation<TMatch, ViatraBaseDriver<? extends BasePatternMatch>> {
+		extends ModelTransformation<TMatch, ViatraDriver> {
 
-	public ViatraTransformation(final ViatraBaseDriver<? extends BasePatternMatch> driver) {
+	public ViatraTransformation(final ViatraDriver driver) {
 		super(driver);
 	}
 
