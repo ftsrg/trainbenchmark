@@ -48,10 +48,6 @@ public class MySqlDriver extends SqlDriver {
 			throw new IOException("MySQL process returned non-zero exit value: " + pr.exitValue());
 		}
 		connection = DriverManager.getConnection(url, USER, PASSWORD);
-		// final int maxMemoryBytes = maxMemory * 1000 * 1000;
-		// final String maxMemoryQuery = "SET GLOBAL innodb_buffer_pool_size=" + maxMemoryBytes + ";";
-		// final PreparedStatement maxMemoryStatement = connection.prepareStatement(maxMemoryQuery);
-		// maxMemoryStatement.execute();
 	}
 
 	@Override

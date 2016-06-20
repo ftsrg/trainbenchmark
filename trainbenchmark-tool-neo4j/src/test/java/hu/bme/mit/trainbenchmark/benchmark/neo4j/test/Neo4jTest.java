@@ -12,15 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class Neo4jTest extends BaseTest {
+public abstract class Neo4jTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		final Neo4jBenchmarkConfigWrapper nbcw = createNeo4jBenchmarkConfigWrapper(bc);
+		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(nbcw);
+		final BenchmarkResult result = scenario.performBenchmark();
+		return result;
 	}
+
+	protected abstract Neo4jBenchmarkConfigWrapper createNeo4jBenchmarkConfigWrapper(final BenchmarkConfigCore bc);
 
 }

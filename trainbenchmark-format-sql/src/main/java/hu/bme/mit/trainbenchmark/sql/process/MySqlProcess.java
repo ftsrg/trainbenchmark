@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.util.Util;
 
 public class MySqlProcess {
 
-	private static final String SCRIPT_DIRECTORY = "../hu.bme.mit.trainbenchmark.sql/scripts/";
+	private static final String SCRIPT_DIRECTORY = "../trainbenchmark-format-sql/scripts/";
 
 	public static void clean() throws IOException, InterruptedException {
 		Util.executeCommand(SCRIPT_DIRECTORY + "clean-mysql.sh", "Failed to clean MySQL database directory");

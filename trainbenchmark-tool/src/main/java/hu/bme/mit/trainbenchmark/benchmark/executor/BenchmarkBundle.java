@@ -25,7 +25,8 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
 	public BenchmarkBundle(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw, final BenchmarkResult benchmarkResults) {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw,
+			final BenchmarkResult benchmarkResults) {
 		this.driver = driver;
 		this.factory = factory;
 		this.comparator = comparator;
@@ -33,6 +34,10 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 		this.benchmarkResults = benchmarkResults;
 	}
 
+	public void initialize() throws Exception {
+		driver.initialize();
+	}
+	
 	public void read() throws Exception {
 		final String modelPath = bcw.getBenchmarkConfig().getModelPath() + driver.getPostfix();
 		driver.read(modelPath);
@@ -72,6 +77,10 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 				qst.transform();
 			}
 		}
+	}
+
+	public void cleanup() throws Exception {
+		driver.destroy();
 	}
 
 }
