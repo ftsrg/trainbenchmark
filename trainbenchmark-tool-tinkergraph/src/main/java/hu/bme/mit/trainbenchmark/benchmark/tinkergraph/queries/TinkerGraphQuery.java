@@ -9,33 +9,33 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class TinkerGraphQuery<TMatch extends TinkerGraphMatch> extends ModelQuery<TMatch, TinkerGraphDriver> {
+public abstract class TinkerGraphQuery<TMatch extends TinkerGraphMatch, TTinkerGraphDriver extends TinkerGraphDriver> extends ModelQuery<TMatch, TTinkerGraphDriver> {
 
-	public TinkerGraphQuery(final RailwayQuery query, final TinkerGraphDriver driver) {
+	public TinkerGraphQuery(final RailwayQuery query, final TTinkerGraphDriver driver) {
 		super(query, driver);
 	}
 
-	public static TinkerGraphQuery<?> newInstance(final RailwayQuery query, final TinkerGraphDriver driver) {
+	public static <TTinkerGraphDriver extends TinkerGraphDriver> TinkerGraphQuery<?, TTinkerGraphDriver> newInstance(final RailwayQuery query, final TTinkerGraphDriver driver) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new TinkerGraphQueryConnectedSegments(driver);
+			return new TinkerGraphQueryConnectedSegments<>(driver);
 		case POSLENGTH:
-			return new TinkerGraphQueryPosLength(driver);
+			return new TinkerGraphQueryPosLength<>(driver);
 		case ROUTESENSOR:
-			return new TinkerGraphQueryRouteSensor(driver);
+			return new TinkerGraphQueryRouteSensor<>(driver);
 		case SEMAPHORENEIGHBOR:
-			return new TinkerGraphQuerySemaphoreNeighbor(driver);
+			return new TinkerGraphQuerySemaphoreNeighbor<>(driver);
 		case SWITCHMONITORED:
-			return new TinkerGraphQuerySwitchMonitored(driver);
+			return new TinkerGraphQuerySwitchMonitored<>(driver);
 		case SWITCHSET:
-			return new TinkerGraphQuerySwitchSet(driver);
+			return new TinkerGraphQuerySwitchSet<>(driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}

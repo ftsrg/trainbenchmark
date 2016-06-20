@@ -19,9 +19,10 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationRepairRouteSensor extends TinkerGraphTransformationRepair<TinkerGraphRouteSensorMatch> {
+public class TinkerGraphTransformationRepairRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphTransformationRepair<TTinkerGraphDriver, TinkerGraphRouteSensorMatch> {
 
-	public TinkerGraphTransformationRepairRouteSensor(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationRepairRouteSensor(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

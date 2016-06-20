@@ -23,9 +23,9 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationInjectConnectedSegments extends TinkerGraphTransformationInject {
+public class TinkerGraphTransformationInjectConnectedSegments<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
 
-	public TinkerGraphTransformationInjectConnectedSegments(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationInjectConnectedSegments(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

@@ -20,9 +20,9 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationInjectRouteSensor extends TinkerGraphTransformationInject {
+public class TinkerGraphTransformationInjectRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
 
-	public TinkerGraphTransformationInjectRouteSensor(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationInjectRouteSensor(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

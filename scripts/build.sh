@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gradle build -x test
+gradle build -x test --continue

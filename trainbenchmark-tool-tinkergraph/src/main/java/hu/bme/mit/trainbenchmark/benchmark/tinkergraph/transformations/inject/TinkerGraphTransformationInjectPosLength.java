@@ -19,9 +19,9 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 
-public class TinkerGraphTransformationInjectPosLength extends TinkerGraphTransformationInject {
+public class TinkerGraphTransformationInjectPosLength<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
 
-	public TinkerGraphTransformationInjectPosLength(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationInjectPosLength(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

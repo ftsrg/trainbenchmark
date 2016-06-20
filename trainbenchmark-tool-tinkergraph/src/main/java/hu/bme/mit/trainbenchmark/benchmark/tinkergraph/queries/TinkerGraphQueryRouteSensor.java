@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,9 +27,9 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryRouteSensor extends TinkerGraphQuery<TinkerGraphRouteSensorMatch> {
+public class TinkerGraphQueryRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphRouteSensorMatch, TTinkerGraphDriver> {
 
-	public TinkerGraphQueryRouteSensor(final TinkerGraphDriver driver) {
+	public TinkerGraphQueryRouteSensor(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.ROUTESENSOR, driver);
 	}
 

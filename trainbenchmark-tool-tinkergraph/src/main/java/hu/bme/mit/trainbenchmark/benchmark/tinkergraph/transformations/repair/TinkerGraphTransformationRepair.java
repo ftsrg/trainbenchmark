@@ -15,9 +15,10 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-public abstract class TinkerGraphTransformationRepair<TMatch extends TinkerGraphMatch> extends TinkerGraphTransformation<TMatch> {
+public abstract class TinkerGraphTransformationRepair<TTinkerGraphDriver extends TinkerGraphDriver, TMatch extends TinkerGraphMatch>
+		extends TinkerGraphTransformation<TMatch, TTinkerGraphDriver> {
 
-	protected TinkerGraphTransformationRepair(final TinkerGraphDriver driver) {
+	protected TinkerGraphTransformationRepair(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 

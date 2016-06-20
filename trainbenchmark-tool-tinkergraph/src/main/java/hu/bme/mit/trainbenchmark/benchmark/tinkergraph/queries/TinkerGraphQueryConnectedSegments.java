@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryConnectedSegments extends TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch> {
+public class TinkerGraphQueryConnectedSegments<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch, TTinkerGraphDriver> {
 
-	public TinkerGraphQueryConnectedSegments(final TinkerGraphDriver driver) {
+	public TinkerGraphQueryConnectedSegments(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.CONNECTEDSEGMENTS, driver);
 	}
 

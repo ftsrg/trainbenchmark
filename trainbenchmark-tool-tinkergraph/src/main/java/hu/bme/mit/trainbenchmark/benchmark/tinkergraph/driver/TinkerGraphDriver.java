@@ -26,17 +26,21 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 public class TinkerGraphDriver extends Driver<Vertex> {
 
 	public static final String LABEL = "label";
-	protected TinkerGraph graph = TinkerGraph.open();
+	protected TinkerGraph graph;
 
-	public TinkerGraphDriver() throws IOException {
+	protected TinkerGraphDriver() throws IOException {
 		super();
+	}
+	
+	public static TinkerGraphDriver create() throws IOException {
+		return new TinkerGraphDriver();
 	}
 
 	@Override
-	public void read(final String filePath) throws XMLStreamException, IOException {
-		final String graphFilePath = filePath + getPostfix();
+	public void read(final String modelPath) throws XMLStreamException, IOException {
+		graph = TinkerGraph.open();
 		graph.createIndex(LABEL, Vertex.class);
-		graph.io(IoCore.graphson()).readGraph(graphFilePath);
+		graph.io(IoCore.graphson()).readGraph(modelPath);
 	}
 
 	// read

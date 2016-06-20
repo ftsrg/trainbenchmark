@@ -12,16 +12,24 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.TinkerGraphBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigWrapper;
 
 public class TinkerGraphTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		final TinkerGraphBenchmarkConfigWrapper dbcw = createTinkerGraphBenchmarkConfigWrapper(bc);
+		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(dbcw);
+		final BenchmarkResult result = scenario.performBenchmark();
+		return result;
 	}
-
+	
+	protected TinkerGraphBenchmarkConfigWrapper createTinkerGraphBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
+		return new TinkerGraphBenchmarkConfigWrapper(bc);
+	}
 
 }

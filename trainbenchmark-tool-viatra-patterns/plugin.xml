@@ -8,11 +8,11 @@
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments" id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments"/>
   </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength" id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength"/>
-  </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject"/>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength" id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength"/>
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor"/>

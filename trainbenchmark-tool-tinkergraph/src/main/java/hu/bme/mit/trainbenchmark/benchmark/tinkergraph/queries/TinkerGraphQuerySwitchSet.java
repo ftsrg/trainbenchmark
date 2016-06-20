@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.checkers;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
@@ -35,9 +35,9 @@ import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
-public class TinkerGraphQuerySwitchSet extends TinkerGraphQuery<TinkerGraphSwitchSetMatch> {
+public class TinkerGraphQuerySwitchSet<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSwitchSetMatch, TTinkerGraphDriver> {
 
-	public TinkerGraphQuerySwitchSet(final TinkerGraphDriver driver) {
+	public TinkerGraphQuerySwitchSet(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.SWITCHSET, driver);
 	}
 

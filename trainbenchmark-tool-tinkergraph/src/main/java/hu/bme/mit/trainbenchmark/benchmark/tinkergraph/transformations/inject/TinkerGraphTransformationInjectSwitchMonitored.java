@@ -19,16 +19,16 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationInjectSwitchMonitored extends TinkerGraphTransformationInject {
+public class TinkerGraphTransformationInjectSwitchMonitored<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
 
-	public TinkerGraphTransformationInjectSwitchMonitored(final TinkerGraphDriver driver) {
+	public TinkerGraphTransformationInjectSwitchMonitored(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
 	public void activate(final Collection<Vertex> switches) {
 		for (final Vertex sw : switches) {
-			Iterable<Vertex> sensors = () -> sw.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
+			final Iterable<Vertex> sensors = () -> sw.vertices(Direction.OUT, ModelConstants.MONITORED_BY);
 			for (final Vertex sensor : sensors) {
 				sensor.remove();
 			}
