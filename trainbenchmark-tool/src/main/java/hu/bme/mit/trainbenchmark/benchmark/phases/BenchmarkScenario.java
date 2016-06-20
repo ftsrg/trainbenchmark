@@ -44,6 +44,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 		final ReadPhase readPhase = new ReadPhase(benchmarkBundle);
 		final QueryPhase queryPhase = new QueryPhase(benchmarkBundle);
 		final TransformationPhase transformationPhase = new TransformationPhase(benchmarkBundle);
+		final CleanupPhase cleanupPhase = new CleanupPhase(benchmarkBundle);
 
 		phaseExecutor.execute(initializeOperationsPhase);
 
@@ -63,6 +64,8 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 			final long recheckTime = phaseExecutor.execute(queryPhase);
 			benchmarkResult.registerQueryTime(recheckTime);
 		}
+		
+		phaseExecutor.execute(cleanupPhase);
 	}
 
 }

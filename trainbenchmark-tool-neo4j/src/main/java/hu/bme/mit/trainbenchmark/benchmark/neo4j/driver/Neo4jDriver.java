@@ -47,9 +47,13 @@ public class Neo4jDriver extends Driver<Node> {
 	protected final Comparator<Node> nodeComparator = new NodeComparator();
 	protected final File databaseDirectory;
 
-	public Neo4jDriver(final String modelDir) throws IOException {
+	protected Neo4jDriver(final String modelDir) throws IOException {
 		super();
 		this.databaseDirectory = new File(modelDir + "/neo4j-dbs/railway-database");
+	}
+
+	public static Neo4jDriver create(final String modelDir) throws IOException {
+		return new Neo4jDriver(modelDir);
 	}
 
 	@Override
@@ -79,13 +83,13 @@ public class Neo4jDriver extends Driver<Node> {
 	}
 
 	@Override
-	public void read(final String filePath) throws FileNotFoundException, XMLStreamException {
+	public void read(final String modelPath) throws FileNotFoundException, XMLStreamException {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
 
 		try (Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 			xmlGraphMLReader.nodeLabels(true);
-			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(filePath + getPostfix())),
+			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(modelPath)),
 					MapNodeCache.usingHashMap());
 			tx.success();
 		}

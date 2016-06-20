@@ -22,23 +22,4 @@ public abstract class Neo4jCoreQuery<TMatch extends Neo4jMatch> extends ModelQue
 		super(query, driver);
 	}
 
-	public static Neo4jCoreQuery<?> newInstance(final RailwayQuery query, final Neo4jDriver driver) {
-		switch (query) {
-		case CONNECTEDSEGMENTS:
-			return new Neo4jCoreQueryConnectedSegments(driver);
-		case POSLENGTH:
-			return new Neo4jCoreQueryPosLength(driver);
-		case ROUTESENSOR:
-			return new Neo4jCoreQueryRouteSensor(driver);
-		case SEMAPHORENEIGHBOR:
-			return new Neo4jCoreQuerySemaphoreNeighbor(driver);
-		case SWITCHMONITORED:
-			return new Neo4jCoreQuerySwitchMonitored(driver);
-		case SWITCHSET:
-			return new Neo4jCoreQuerySwitchSet(driver);
-		default:
-			throw new UnsupportedOperationException("Query " + query + " not supported");
-		}
-	}
-
 }

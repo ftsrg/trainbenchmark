@@ -2,20 +2,19 @@ package hu.bme.mit.trainbenchmark.benchmark.phases;
 
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkBundle;
 
-public class ReadPhase extends Phase {
-
-	public ReadPhase(final BenchmarkBundle<?, ?, ?> executor) {
+public class CleanupPhase extends Phase {
+	
+	public CleanupPhase(final BenchmarkBundle<?, ?, ?> executor) {
 		super(executor);
 	}
 
 	@Override
 	public void initialize() throws Exception {
-		executor.initialize();
+		executor.cleanup();
 	}
 	
 	@Override
 	public void run() throws Exception {
-		executor.read();
 	}
-
+	
 }

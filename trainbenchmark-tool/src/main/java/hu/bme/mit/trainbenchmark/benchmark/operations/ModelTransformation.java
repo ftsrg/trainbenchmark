@@ -23,6 +23,12 @@ public abstract class ModelTransformation<PatternMatch, TDriver extends Driver<?
 		this.driver = driver;
 	}
 
+	public void activateTransformation(final Collection<PatternMatch> matches) throws Exception {
+		driver.beginTransaction();
+		activate(matches);
+		driver.finishTransaction();
+	}
+	
 	// As the transformations are implemented on a wide range of technologies, they may throw any exception.
 	// Using "throws Exception" is generally considered bad practice in production systems.
 	// However, it allows us to throw all exceptions similar to unchecked exceptions,
