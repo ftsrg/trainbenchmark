@@ -3,8 +3,10 @@ dist: trusty
 language: groovy
 jdk:
   - oraclejdk8
+before_install:
+  - sudo apt-get purge -y mysql-server
 install:
-  -
+  - scripts/install-mysql-silent.sh
 script:
   - sudo service mysql restart
   - scripts/build.sh
