@@ -1,7 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
 public enum Neo4jEngine {
-	COREAPI("Core_API"), CYPHER("Cypher");
+	COREAPI("Core API"), CYPHER("Cypher");
 
 	private String name;
 

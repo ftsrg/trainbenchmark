@@ -7,11 +7,11 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.operations.Neo4jModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
-public class Neo4jBenchmarkScenario
-		extends BenchmarkScenario<Neo4jMatch, Neo4jDriver, Neo4jBenchmarkConfigWrapper> {
+public class Neo4jBenchmarkScenario extends BenchmarkScenario<Neo4jMatch, Neo4jDriver, Neo4jBenchmarkConfigWrapper> {
 
 	public Neo4jBenchmarkScenario(final Neo4jBenchmarkConfigWrapper dbcw) throws Exception {
-		super(Neo4jDriver.create(dbcw.getBenchmarkConfig().getModelDir()), Neo4jModelOperationFactory.create(), Neo4jMatchComparator.create(), dbcw);
+		super(Neo4jDriver.create(dbcw.getBenchmarkConfig().getModelDir()),
+				Neo4jModelOperationFactory.create(dbcw.getEngine()), Neo4jMatchComparator.create(), dbcw);
 	}
 
 }
