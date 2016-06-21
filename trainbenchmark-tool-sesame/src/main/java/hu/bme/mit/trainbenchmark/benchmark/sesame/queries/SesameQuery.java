@@ -30,15 +30,15 @@ public class SesameQuery<TPatternMatch extends SesameMatch> extends RdfModelQuer
 
 	protected final String queryDefinition;
 
-	public SesameQuery(final SesameDriver driver, final Optional<String> queryDirectory, final RailwayQuery query)
+	public SesameQuery(final SesameDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
 			throws IOException {
-		super(driver, queryDirectory, query);
+		super(driver, workspaceDir, query);
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 	
-	public static <TPatternMatch extends SesameMatch> SesameQuery<TPatternMatch> create(final SesameDriver driver, final Optional<String> queryDirectory, final RailwayQuery query)
+	public static <TPatternMatch extends SesameMatch> SesameQuery<TPatternMatch> create(final SesameDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
 			throws IOException {
-		return new SesameQuery<TPatternMatch>(driver, queryDirectory, query);
+		return new SesameQuery<TPatternMatch>(driver, workspaceDir, query);
 	}
 
 	@Override
