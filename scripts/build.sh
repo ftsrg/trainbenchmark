@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gradle build --continue --info
+gradle build --continue
