@@ -12,6 +12,8 @@ public class BenchmarkRunner {
 
 	public static int run(final BenchmarkConfigWrapper bcw) throws IOException, InterruptedException {
 		System.out.println("Running benchmark: " + bcw.getToolName());
+		System.out.println("Model: " + bcw.getBenchmarkConfig().getModelPath());
+		System.out.println("Desc: " + bcw.getDescription());
 		
 		final File configFile = File.createTempFile("trainbenchmark-benchmark-", ".conf");
 		final String configPath = configFile.getAbsolutePath();
@@ -27,6 +29,8 @@ public class BenchmarkRunner {
 		final DefaultExecutor executor = new DefaultExecutor();
 		final int exitValue = executor.execute(cmdLine);
 
+		System.out.println();
+		
 		return exitValue;
 	}
 

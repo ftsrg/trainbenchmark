@@ -14,10 +14,7 @@ def scenarios = [
 	//	Scenario.INJECT,
 	Scenario.REPAIR,
 ]
-def railwayOperations = [
-	POSLENGTH_REPAIR,
-	SWITCHMONITORED,
-]
+def railwayOperations = []
 
 for (scenario in scenarios) {
 	for (size = minSize; size <= maxSize; size*=2) {
@@ -25,23 +22,37 @@ for (scenario in scenarios) {
 		def modelPath = "railway-${scenarioString}-${size}"
 		def timeout = 120
 		def runs = 1
-		def queryTransformationCount = 1
-		def bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, railwayOperations, "Batch")
+		def queryTransformationCount = 2
+		def messageSize = 10
 
-		//		BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bc, false))
-		//		BenchmarkRunner.run(new EclipseOclBenchmarkConfigWrapper(bc))
-		//		BenchmarkRunner.run(new Drools5BenchmarkConfigWrapper(bc))
-		//		BenchmarkRunner.run(new Drools6BenchmarkConfigWrapper(bc))
-		//		BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bc))
-		//		BenchmarkRunner.run(new SesameBenchmarkConfigWrapper(bc, false))
-		BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bc, 10, ""))
-		//		BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bc, false))
-		//		BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bc))
-		//		BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.COREAPI))
-		//		BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.CYPHER))
-		//		BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bc))
-		//		BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bc))
-		//		BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bc))
+		def operations1 = [ROUTESENSOR_REPAIR]
+		def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "PerPol")
+		BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, ""))
+		BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, "1"))
+		BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, "2"))
+
+		def operations2 = [CONNECTEDSEGMENTS_REPAIR]
+		def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "PerPol")
+		BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, ""))
+		BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, "1"))
 
 	}
 }
+
+
+
+
+//		BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bc, false))
+//		BenchmarkRunner.run(new EclipseOclBenchmarkConfigWrapper(bc))
+//		BenchmarkRunner.run(new Drools5BenchmarkConfigWrapper(bc))
+//		BenchmarkRunner.run(new Drools6BenchmarkConfigWrapper(bc))
+//		BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bc))
+//		BenchmarkRunner.run(new SesameBenchmarkConfigWrapper(bc, false))
+
+//		BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bc, false))
+//		BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bc))
+//		BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.COREAPI))
+//		BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.CYPHER))
+//		BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bc))
+//		BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bc))
+//		BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bc))

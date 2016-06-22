@@ -35,4 +35,9 @@ public class IQDBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 		return queryVariant;
 	}
 	
+	@Override
+	public String getDescription() {
+		return "Query variant '" + queryVariant + "'";
+	}
+	
 }
