@@ -1,7 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.executor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.Iterables;
 
@@ -11,23 +15,25 @@ public class BenchmarkResult {
 
 	protected final String tool;
 	protected final String workload;
+	protected final String workspaceDir;
 
 	protected RunResult currentResult;
 	protected List<RunResult> runResults = new LinkedList<>();
 
-	public BenchmarkResult(final String tool, final String workload) {
+	public BenchmarkResult(final String tool, final String workload, final String workspaceDir) {
 		this.tool = tool;
 		this.workload = workload;
+		this.workspaceDir = workspaceDir;
 	}
 
 	public void nextRun() {
 		currentResult = new RunResult();
 		runResults.add(currentResult);
 	}
-	
+
 	public RunResult getLastRunResult() {
 		return Iterables.getLast(runResults);
-		
+
 	}
 
 	public void registerMatches(final RailwayQuery query, final int numberOfMatches) {
@@ -71,7 +77,7 @@ public class BenchmarkResult {
 			final RunResult runResult = runResults.get(run - 1);
 
 			final String runBase = recordBase + run + SEP;
-			
+
 			// Read
 			final String timeRecord = runBase + "Read" + SEP + SEP + runResult.getReadTime() + NL;
 			csvTimes += timeRecord;
@@ -81,22 +87,23 @@ public class BenchmarkResult {
 			csvTimes += queryRecord;
 
 			// Transformation-Recheck
-			final List<Long> transformationTimes = runResult.getTransformationTimes();			
+			final List<Long> transformationTimes = runResult.getTransformationTimes();
 			final List<Long> queryTimes = runResult.getQueryTimes();
 			for (int iteration = 1; iteration <= transformationTimes.size(); iteration++) {
 				final Long transformationTime = transformationTimes.get(iteration - 1);
 				final Long recheckTime = queryTimes.get(iteration);
-				
+
 				final String recheckRecord = runBase + "Transformation" + SEP + iteration + SEP + recheckTime + NL;
-				csvTimes += recheckRecord;				
-				final String transformationRecord = runBase + "Recheck" + SEP + iteration + SEP + transformationTime + NL;
-				csvTimes += transformationRecord;				
+				csvTimes += recheckRecord;
+				final String transformationRecord = runBase + "Recheck" + SEP + iteration + SEP + transformationTime
+						+ NL;
+				csvTimes += transformationRecord;
 			}
 		}
 
 		return csvTimes;
 	}
-	
+
 	public String csvMatches() {
 		final String recordBase = tool + SEP + workload + SEP;
 		String csvMatches = "Tool" + SEP + "Workload" + SEP + "Run" + SEP + "Query" + SEP + "Iteration" + SEP + "Value"
@@ -126,5 +133,16 @@ public class BenchmarkResult {
 
 		return csvMatches;
 	}
-	
+
+	public void serialize() {
+		System.out.println("Saving results to: " + workspaceDir);
+		
+		String resultsPath = workspaceDir + String.format("results/results-%s-%s.csv", tool, workload);
+		try {
+			FileUtils.write(new File(resultsPath), csvTimes() + csvMatches());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
