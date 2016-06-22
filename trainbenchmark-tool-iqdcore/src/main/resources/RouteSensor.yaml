@@ -24,4 +24,8 @@ nodes:
       type: HashAntijoiner
       primarySelector: Vector(2, 3)
       secondarySelector: Vector(0, 1)
+      next: Trim
+  - Trim:
+      type: Trimmer
+      projectionVector: Vector(1, 0, 2, 3)
       next: production
