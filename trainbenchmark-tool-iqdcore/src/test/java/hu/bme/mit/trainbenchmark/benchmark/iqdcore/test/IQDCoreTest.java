@@ -12,8 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
@@ -24,7 +22,7 @@ public class IQDCoreTest extends BaseTest {
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
 		final int messageSize = 16;
-		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, Optional.empty());
+		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, "");
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
