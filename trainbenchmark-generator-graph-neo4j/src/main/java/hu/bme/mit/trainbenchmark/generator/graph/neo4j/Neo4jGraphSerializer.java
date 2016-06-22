@@ -44,7 +44,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<GeneratorConfigWrapper
 
 	public Neo4jGraphSerializer(final GeneratorConfigWrapper generatorConfigWrapper) {
 		super(generatorConfigWrapper);
-		databaseDirectory = new File("/neo4j-gen/"
+		databaseDirectory = new File(generatorConfigWrapper.getGeneratorConfig().getModelDir() + "neo4j-gen/"
 				+ generatorConfigWrapper.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j");
 	}
 

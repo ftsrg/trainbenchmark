@@ -10,19 +10,21 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test;
+
+import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
-public class IQDCoreBatchNoInferencingTest extends BaseTest {
+public class IQDCoreTest extends BaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
 		final int messageSize = 16;
-		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize);
+		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, Optional.empty());
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
