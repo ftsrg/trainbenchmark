@@ -1,0 +1,85 @@
+input:
+  edges:
+    connectsTo: [SegmentJoin1.primary, Join1_2.secondary, Join3_4.primary, Join3_4.secondary, Join1234_5.secondary]
+    monitoredBy: [SensorJoin1.secondary, SensorJoin2.secondary, SensorJoin3.secondary, SensorJoin4.secondary, SensorJoin5.secondary, SensorJoin6.secondary]
+  types:
+    Segment: [SegmentJoin1.secondary]
+
+nodes:
+  - SegmentJoin1:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 1
+      secondarySelector: Vector(0)
+      next: Join1_2.primary
+  - Join1_2: # 1 - 2 - 3
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(1)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: SensorJoin1.primary
+  - SensorJoin1: # 1 - 2 - 3 - sensor
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: SensorJoin2.primary
+  - SensorJoin2:
+      type: HashJoiner
+      primaryLength: 4
+      primarySelector: Vector(1, 3)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: Join12_34.primary
+  - Join3_4: # 3 - 4 - 5
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(1)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: SensorJoin3.primary
+  - SensorJoin3: # 3 - 4 - 5 - sensor
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: SensorJoin4.primary
+  - SensorJoin4: # 3 - 4 - 5 - sensor
+      type: HashJoiner
+      primaryLength: 4
+      primarySelector: Vector(1, 3)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: Join12_34.secondary
+  - Join12_34: #1 - 2 - 3 - sensor - 4 - 5
+      type: HashJoiner
+      primaryLength: 4
+      primarySelector: Vector(2, 3)
+      secondaryLength: 4
+      secondarySelector: Vector(0, 3)
+      next: Join1234_5.primary
+  - Join1234_5: #1 - 2 - 3 - sensor - 4 - 5 - 6
+      type: HashJoiner
+      primaryLength: 6
+      primarySelector: Vector(5)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: SensorJoin5.primary
+  - SensorJoin5: #1 - 2 - 3 - sensor - 4 - 5 - 6
+      type: HashJoiner
+      primaryLength: 7
+      primarySelector: Vector(5, 3)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: SensorJoin6.primary
+  - SensorJoin6:
+      type: HashJoiner
+      primaryLength: 7
+      primarySelector: Vector(6, 3)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: production
