@@ -31,7 +31,6 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	public BenchmarkResult performBenchmark() throws Exception {
 		for (int i = 0; i < bcw.getBenchmarkConfig().getRuns(); i++) {
 			performRun();
-			System.out.println("PENIS");
 		}
 		
 		benchmarkResult.serialize();
