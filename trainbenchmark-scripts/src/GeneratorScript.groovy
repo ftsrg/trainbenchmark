@@ -12,42 +12,43 @@ import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 def generate(String xms, String xmx, Scenario scenario, int size) {
 	def gc = new GeneratorConfig(xms, xmx, scenario, size)
 
-	// EMF
-	def egcw = new GeneratorConfigWrapper(gc)
-	GeneratorRunner.run(egcw, "emf")
-
-	// graph / Neo4j
-	def gngcw = new GeneratorConfigWrapper(gc)
-	GeneratorRunner.run(gngcw, "graph-neo4j")
-
-	// graph / TinkerPop
-	def gtgcw = new TinkerPopGraphGeneratorConfigWrapper(gc, GraphFormat.GRAPHML)
-	GeneratorRunner.run(gtgcw, "graph-tinkerpop")
+//	// EMF
+//	def egcw = new GeneratorConfigWrapper(gc)
+//	GeneratorRunner.run(egcw, "emf")
+//
+//	// graph / Neo4j
+//	def gngcw = new GeneratorConfigWrapper(gc)
+//	GeneratorRunner.run(gngcw, "graph-neo4j")
+//
+//	// graph / TinkerPop
+//	def gtgcw = new TinkerPopGraphGeneratorConfigWrapper(gc, GraphFormat.GRAPHML)
+//	GeneratorRunner.run(gtgcw, "graph-tinkerpop")
 
 	// RDF
 	def rdfFormats = [RdfFormat.TURTLE]
-	def inferencingOptions = [true, false]
+//	def includeInferredOptions = [true, false]
+	def includeInferredOptions = [true]
 	for (rdfFormat in rdfFormats) {
-		for (inferencingOption in inferencingOptions) {
-			def rgcw = new RdfGeneratorConfigWrapper(gc, inferencingOption, rdfFormat)
+		for (includeInferredOption in includeInferredOptions) {
+			def rgcw = new RdfGeneratorConfigWrapper(gc, includeInferredOption, rdfFormat)
 			GeneratorRunner.run(rgcw, "rdf")
 		}
 	}
 
-	// SQL
-	def sgcw = new GeneratorConfigWrapper(gc)
-	//	GeneratorRunner.run(sgcw, "sql")
+//	// SQL
+//	def sgcw = new GeneratorConfigWrapper(gc)
+//	//	GeneratorRunner.run(sgcw, "sql")
 }
 
 
-def xms = "2G"
-def xmx = "4G"
+def xms = "12G"
+def xmx = "12G"
 def minSize = 1
-def maxSize = 2
+def maxSize = 2048
 
 def scenarios = [
-	Scenario.BATCH,
-	Scenario.INJECT,
+//	Scenario.BATCH,
+//	Scenario.INJECT,
 	Scenario.REPAIR,
 ]
 
