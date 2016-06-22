@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.phases;
 
 import java.util.Comparator;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkBundle;
@@ -24,15 +25,17 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 		this.factory = factory;
 		this.comparator = comparator;
 		this.bcw = bcw;
-		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcw.getBenchmarkConfig().getWorkload(),
-				bcw.getBenchmarkConfig().getWorkspaceDir());
+
+		final BenchmarkConfigCore bc = bcw.getBenchmarkConfig();
+		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bc.getWorkload(), bc.getWorkspaceDir(),
+				bc.getModelFilename(), bcw.getDescription());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {
 		for (int i = 0; i < bcw.getBenchmarkConfig().getRuns(); i++) {
 			performRun();
 		}
-		
+
 		benchmarkResult.serialize();
 		return benchmarkResult;
 	}

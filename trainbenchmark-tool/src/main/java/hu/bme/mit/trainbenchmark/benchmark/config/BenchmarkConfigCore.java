@@ -72,5 +72,9 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 	public String getWorkload() {
 		return workload;
 	}
+	
+	public String getModelFilename() {
+		return modelFilename;
+	}
 
 }
