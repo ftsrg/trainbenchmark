@@ -37,12 +37,10 @@ for (scenario in scenarios) {
 		def operations2 = [CONNECTEDSEGMENTS_REPAIR]
 		def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "PerPol")
 		for (variant in ["", "2", "3", "4"]) {
-			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant))
+			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, variant))
 		}
 	}
 }
-
-
 
 
 //		BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bc, false))
