@@ -30,13 +30,13 @@ for (scenario in scenarios) {
 
 		def operations1 = [ROUTESENSOR_REPAIR]
 		def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "PerPol")
-		for (variant in ["", "1"]) {
+		for (variant in ["", "2"]) {
 			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant))
 		}
 		
 		def operations2 = [CONNECTEDSEGMENTS_REPAIR]
 		def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "PerPol")
-		for (variant in ["", "1", "2", "3", "4"]) {
+		for (variant in ["", "2", "3", "4"]) {
 			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant))
 		}
 	}

@@ -24,13 +24,17 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 		this.factory = factory;
 		this.comparator = comparator;
 		this.bcw = bcw;
-		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcw.getBenchmarkConfig().getWorkload());
+		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcw.getBenchmarkConfig().getWorkload(),
+				bcw.getBenchmarkConfig().getWorkspaceDir());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {
 		for (int i = 0; i < bcw.getBenchmarkConfig().getRuns(); i++) {
 			performRun();
+			System.out.println("PENIS");
 		}
+		
+		benchmarkResult.serialize();
 		return benchmarkResult;
 	}
 
@@ -64,7 +68,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 			final long recheckTime = phaseExecutor.execute(queryPhase);
 			benchmarkResult.registerQueryTime(recheckTime);
 		}
-		
+
 		phaseExecutor.execute(cleanupPhase);
 	}
 

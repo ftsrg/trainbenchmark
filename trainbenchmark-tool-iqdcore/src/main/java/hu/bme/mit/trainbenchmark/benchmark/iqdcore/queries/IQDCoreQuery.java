@@ -32,10 +32,10 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 
 	private final TrainbenchmarkQuery queryEngine;
 
-	public IQDCoreQuery(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, WildcardInput input)
+	public IQDCoreQuery(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final WildcardInput input)
 			throws IOException {
 		super(driver, Optional.of(queryDirectory), query);
-		final String yamlPath = queryDirectory + query + ".yaml";
+		final String yamlPath = queryDirectory + query + driver.getVariant() + ".yaml";
 		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath), false);
 		input.subscribe(queryEngine.inputLookup());
 	}

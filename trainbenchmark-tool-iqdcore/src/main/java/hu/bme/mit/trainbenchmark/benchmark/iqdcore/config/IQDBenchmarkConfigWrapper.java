@@ -31,7 +31,7 @@ public class IQDBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 		return "iqdcore";
 	}
 	
-	public String queryVariant() {
+	public String getQueryVariant() {
 		return queryVariant;
 	}
 	

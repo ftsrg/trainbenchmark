@@ -5,17 +5,18 @@ import java.util.List;
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 
 public class IQDCoreDriver extends Driver<Long> {
 
-	TrainbenchmarkReader reader;
-	private final WildcardInput input;
+	protected final WildcardInput input;
+	protected final TrainbenchmarkReader reader;
+	protected final String variant;
 
-	public IQDCoreDriver(final IQDBenchmarkConfigWrapper configWrapper, final WildcardInput input) {
+	public IQDCoreDriver(final String variant, final WildcardInput input) {
 		super();
 		this.input = input;
-		reader = new TrainbenchmarkReader(input);
+		this.reader = new TrainbenchmarkReader(input);
+		this.variant = variant;
 	}
 
 	@Override
@@ -44,4 +45,9 @@ public class IQDCoreDriver extends Driver<Long> {
 	public long newKey() {
 		return input.newKey();
 	}
+	
+	public String getVariant() {
+		return variant;
+	}
+	
 }
