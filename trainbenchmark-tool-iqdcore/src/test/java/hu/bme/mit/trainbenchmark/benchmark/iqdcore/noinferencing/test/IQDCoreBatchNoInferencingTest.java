@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.noinferencing.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
 
 public class IQDCoreBatchNoInferencingTest extends BaseTest {
@@ -22,7 +22,7 @@ public class IQDCoreBatchNoInferencingTest extends BaseTest {
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
 		final int messageSize = 16;
-		final IQDConfigWrapper config = new IQDConfigWrapper(bc, messageSize);
+		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize);
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

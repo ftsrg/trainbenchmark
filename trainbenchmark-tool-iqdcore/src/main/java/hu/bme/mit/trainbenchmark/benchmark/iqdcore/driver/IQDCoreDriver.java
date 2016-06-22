@@ -5,14 +5,14 @@ import java.util.List;
 import hu.bme.mit.incqueryds.WildcardInput;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 
 public class IQDCoreDriver extends Driver<Long> {
 
 	TrainbenchmarkReader reader;
 	private final WildcardInput input;
 
-	public IQDCoreDriver(final IQDConfigWrapper configWrapper, final WildcardInput input) {
+	public IQDCoreDriver(final IQDBenchmarkConfigWrapper configWrapper, final WildcardInput input) {
 		super();
 		this.input = input;
 		reader = new TrainbenchmarkReader(input);
