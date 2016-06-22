@@ -33,6 +33,10 @@ public abstract class BenchmarkConfigWrapper {
 	 */
 	public abstract String getProjectName();
 
+	public String getDescription() {
+		return "";
+	}
+	
 	/**
 	 * Serialize the configuration to a file. This does not need to be redefined in the subclasses (e.g.
 	 * {Neo4jBenchmarkConfigWrapper}).
@@ -54,5 +58,5 @@ public abstract class BenchmarkConfigWrapper {
 			return benchmarkConfig;
 		}
 	}
-
+	
 }
