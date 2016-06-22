@@ -36,7 +36,7 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 			throws IOException {
 		super(driver, Optional.of(queryDirectory), query);
 		final String yamlPath = queryDirectory + query + ".yaml";
-		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath));
+		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath), false);
 		input.subscribe(queryEngine.inputLookup());
 	}
 	

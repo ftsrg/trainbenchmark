@@ -1,19 +1,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.config;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class IQDBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
 	protected int messageSize;
-	protected Optional<String> queryVariant;
+	protected String queryVariant;
 
     protected IQDBenchmarkConfigWrapper() {
     }
 
-    public IQDBenchmarkConfigWrapper(final BenchmarkConfigCore config, final int messageSize, final Optional<String> queryVariant) {
+    public IQDBenchmarkConfigWrapper(final BenchmarkConfigCore config, final int messageSize, final String queryVariant) {
         super(config);
         this.messageSize = messageSize;
 		this.queryVariant = queryVariant;
@@ -34,7 +32,7 @@ public class IQDBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	}
 	
 	public String queryVariant() {
-		return queryVariant.orElse("");
+		return queryVariant;
 	}
 	
 }
