@@ -13,12 +13,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 
 public class IQDCoreBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final IQDConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], IQDConfigWrapper.class);
+		final IQDBenchmarkConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], IQDBenchmarkConfigWrapper.class);
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		scenario.performBenchmark();
 		System.exit(0);

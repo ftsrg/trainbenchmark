@@ -11,7 +11,7 @@ dependencies {
 	compile project(':trainbenchmark-tool-drools6')
 	compile project(':trainbenchmark-tool-eclipseocl')
 	compile project(':trainbenchmark-tool-emfapi')
-	//  compile project(':trainbenchmark-tool-iqdcore')
+	compile project(':trainbenchmark-tool-iqdcore')
 	compile project(':trainbenchmark-tool-jena')
 	compile project(':trainbenchmark-tool-mysql')
 	compile project(':trainbenchmark-tool-neo4j')

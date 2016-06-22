@@ -5,6 +5,7 @@ import hu.bme.mit.trainbenchmark.benchmark.drools5.config.Drools5BenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.drools6.config.Drools6BenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper
@@ -38,6 +39,7 @@ class BenchmarkScript extends Script {
 		BenchmarkRunner.run(new Drools6BenchmarkConfigWrapper(bc))
 		BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bc))
 		BenchmarkRunner.run(new SesameBenchmarkConfigWrapper(bc, false))
+		BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bc, 10))
 		BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bc, false))
 		BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bc))
 		BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.COREAPI))

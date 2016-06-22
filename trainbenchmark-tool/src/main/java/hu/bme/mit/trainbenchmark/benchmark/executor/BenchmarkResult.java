@@ -3,6 +3,8 @@ package hu.bme.mit.trainbenchmark.benchmark.executor;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class BenchmarkResult {
@@ -21,6 +23,11 @@ public class BenchmarkResult {
 	public void nextRun() {
 		currentResult = new RunResult();
 		runResults.add(currentResult);
+	}
+	
+	public RunResult getLastRunResult() {
+		return Iterables.getLast(runResults);
+		
 	}
 
 	public void registerMatches(final RailwayQuery query, final int numberOfMatches) {
@@ -119,5 +126,5 @@ public class BenchmarkResult {
 
 		return csvMatches;
 	}
-
+	
 }
