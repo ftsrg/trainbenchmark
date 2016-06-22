@@ -27,5 +27,5 @@ nodes:
       next: Trim
   - Trim:
       type: Trimmer
-      projectionVector: Vector(1, 0, 2, 3)
+      selectionVector: Vector(1, 0, 2, 3)
       next: production
