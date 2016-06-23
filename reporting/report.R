@@ -10,6 +10,7 @@ times <- rbindlist(l)
 
 # preprocessing
 times$Model = gsub("\\D+", "", times$Model)
+times$Model = as.numeric(times$Model)
 times$Time = times$Time / 10^9
 
 times.wide = dcast(times,
@@ -42,10 +43,7 @@ times.plot = melt(
 
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
 
-workloads = c("ConnectedSegments")#, "RouteSensor")
-#for (phase in phases) {
-    #print(phase)
-    #phaseTimes = times.plot[times.plot$Phase == phase, ]
+workloads = c("RouteSensor", "ConnectedSegments")
 
 for (workload in workloads) {
   print(workload)
@@ -59,7 +57,6 @@ for (workload in workloads) {
     geom_line(aes(y = Time, col = Description, group = Description), size = 0.5) +
     facet_wrap(~ Phase, ncol = 2, scale = "free_y")
   print(p)
+  
+  ggsave(plot = p, filename = paste("../diagrams/", workload, ".pdf", sep=""))
 }
-
-#}
-
