@@ -19,6 +19,7 @@ public class BenchmarkResult {
 	protected final String SEP = ",";
 	protected final String NL = "\n";
 	protected final String NA = "";
+	protected final String LAST_LINE = "";
 	protected final Joiner separatorJoiner = Joiner.on(SEP);
 	protected final Joiner newlineJoiner = Joiner.on(NL);
 	
@@ -114,9 +115,10 @@ public class BenchmarkResult {
 				rows.add(transformationRecord);
 			}
 		}
-		
-		final String csvTimes = newlineJoiner.join(rows);
-		return csvTimes;
+
+		rows.add(LAST_LINE);
+		final String csv = newlineJoiner.join(rows);
+		return csv;
 	}
 
 	public String csvMatches() {
@@ -141,8 +143,9 @@ public class BenchmarkResult {
 			}
 		}
 
-		final String csvMatches = newlineJoiner.join(rows);
-		return csvMatches;
+		rows.add(LAST_LINE);
+		final String csv = newlineJoiner.join(rows);
+		return csv;
 	}
 
 	public void serialize() throws IOException {

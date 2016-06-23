@@ -27,12 +27,12 @@ sourceSets {
 	}
 }
 
-task runBenchmark(dependsOn: 'classes', type: JavaExec) {
+task benchmark(dependsOn: 'classes', type: JavaExec) {
 	main = 'BenchmarkScript'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
-task runGenerator(dependsOn: 'classes', type: JavaExec) {
+task generate(dependsOn: 'classes', type: JavaExec) {
 	main = 'GeneratorScript'
 	classpath = sourceSets.main.runtimeClasspath
 }
