@@ -1,7 +1,4 @@
 import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
-
-import org.junit.After;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.runner.BenchmarkRunner
@@ -10,7 +7,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario
 def xms = "12G"
 def xmx = "12G"
 def minSize = 1
-def maxSize = 1
+def maxSize = 32
 
 def scenarios = [
 	//	Scenario.BATCH,
@@ -23,19 +20,19 @@ for (scenario in scenarios) {
 		def scenarioString = scenario.toString().toLowerCase()
 		def modelPath = "railway-${scenarioString}-${size}"
 		def timeout = 120
-		def runs = 2
-		def queryTransformationCount = 2
+		def runs = 3
+		def queryTransformationCount = 1
 		def messageSize = 10
 
 		def operations1 = [ROUTESENSOR_REPAIR]
 		def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
-		for (variant in ["", "2"]) {
+		for (variant in ["A", "B"]) {
 			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant))
 		}
 		
 		def operations2 = [CONNECTEDSEGMENTS_REPAIR]
 		def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "ConnectedSegments")
-		for (variant in ["", "2", "3", "4"]) {
+		for (variant in ["A", "B", "C", "D"]) {
 			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, variant))
 		}
 	}

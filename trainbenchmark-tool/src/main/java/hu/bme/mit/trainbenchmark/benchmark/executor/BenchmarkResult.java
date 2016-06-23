@@ -22,7 +22,7 @@ public class BenchmarkResult {
 	protected final String LAST_LINE = "";
 	protected final Joiner separatorJoiner = Joiner.on(SEP);
 	protected final Joiner newlineJoiner = Joiner.on(NL);
-	
+
 	protected RunResult currentResult;
 	protected List<RunResult> runResults = new LinkedList<>();
 
@@ -32,8 +32,8 @@ public class BenchmarkResult {
 	protected final String model;
 	protected final String description;
 
-	public BenchmarkResult(final String tool, final String workload, final String workspaceDir,
-			final String model, final String description) {
+	public BenchmarkResult(final String tool, final String workload, final String workspaceDir, final String model,
+			final String description) {
 		this.tool = tool;
 		this.workload = workload;
 		this.workspaceDir = workspaceDir;
@@ -80,22 +80,24 @@ public class BenchmarkResult {
 		return s;
 	}
 
-
 	public String csvTimes() {
-		final List<String> headerAttributes =  ImmutableList.of("Tool", "Workload", "Description", "Model", "Run", "Phase", "Iteration", "Value");
+		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
+				"Phase", "Iteration", "Time");
 		final String header = separatorJoiner.join(headerAttributes);
-		
+
 		final List<String> rows = Lists.newArrayList(header);
 		for (Integer run = 1; run <= runResults.size(); run++) {
 			final RunResult runResult = runResults.get(run - 1);
 
 			// Read
-			final List<String> timeRecordAttributes = ImmutableList.of(tool, workload, description, model, run.toString(), "Read", NA, runResult.getReadTime().toString());
+			final List<String> timeRecordAttributes = ImmutableList.of(tool, workload, description, model,
+					run.toString(), "Read", NA, runResult.getReadTime().toString());
 			final String timeRecord = separatorJoiner.join(timeRecordAttributes);
 			rows.add(timeRecord);
-			
+
 			// Check
-			final List<String> queryRecordAttributes = ImmutableList.of(tool, workload, description, model, run.toString(), "Check", NA, runResult.getQueryTimes().get(0).toString());
+			final List<String> queryRecordAttributes = ImmutableList.of(tool, workload, description, model,
+					run.toString(), "Check", NA, runResult.getQueryTimes().get(0).toString());
 			final String queryRecord = separatorJoiner.join(queryRecordAttributes);
 			rows.add(queryRecord);
 
@@ -106,11 +108,13 @@ public class BenchmarkResult {
 				final Long transformationTime = transformationTimes.get(iteration - 1);
 				final Long recheckTime = queryTimes.get(iteration);
 
-				final List<String> recheckRecordAttributes = ImmutableList.of(tool, workload, description, model, run.toString(), "Transformation", iteration.toString(), recheckTime.toString());
+				final List<String> recheckRecordAttributes = ImmutableList.of(tool, workload, description, model,
+						run.toString(), "Transformation", iteration.toString(), recheckTime.toString());
 				final String recheckRecord = separatorJoiner.join(recheckRecordAttributes);
 				rows.add(recheckRecord);
-				
-				final List<String> transformationRecordAttributes = ImmutableList.of(tool, workload, description, model, run.toString(), "Recheck", iteration.toString(), transformationTime.toString());
+
+				final List<String> transformationRecordAttributes = ImmutableList.of(tool, workload, description, model,
+						run.toString(), "Recheck", iteration.toString(), transformationTime.toString());
 				final String transformationRecord = separatorJoiner.join(transformationRecordAttributes);
 				rows.add(transformationRecord);
 			}
@@ -122,8 +126,8 @@ public class BenchmarkResult {
 	}
 
 	public String csvMatches() {
-		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run", "Query",
-				"Iteration", "Value");
+		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
+				"Query", "Iteration", "Matches");
 		final String header = separatorJoiner.join(headerAttributes);
 
 		final List<String> rows = Lists.newArrayList(header);
@@ -149,10 +153,16 @@ public class BenchmarkResult {
 	}
 
 	public void serialize() throws IOException {
-		String resultsPath = String.format("%sresults/%s-%s-%s-[%s].csv", workspaceDir, tool, workload, model, description);
-		System.out.println("Saving results to: " + resultsPath);
+		final String timesCsvPath = String.format("%sresults/times-%s-%s-%s-[%s].csv", workspaceDir, tool, workload,
+				model, description);
+		System.out.println("Saving execution times to: " + timesCsvPath);
+		FileUtils.write(new File(timesCsvPath), csvTimes());
 
-		FileUtils.write(new File(resultsPath), csvTimes());
+		final String matchesCsvPath = String.format("%sresults/matches-%s-%s-%s-[%s].csv", workspaceDir, tool, workload,
+				model, description);
+		System.out.println("Saving results to: " + matchesCsvPath);
+		FileUtils.write(new File(matchesCsvPath), csvMatches());
+
 	}
 
 }

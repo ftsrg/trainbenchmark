@@ -204,8 +204,8 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
   p = ggplot(df) +
     aes(x = as.factor(Artifact)) +
     labs(title = paste(title, sep = ""), x = "Model size\n#Triples", y = ycaption) +
-    geom_point(aes_string(y = metric, col = "Tool", shape = "Tool"), size = 2.0) +
-    geom_line(aes_string(y = metric, col = "Tool", group = "Tool"), size = 0.5)
+    geom_point(aes_string(y = metric, col = Tool, shape = Tool), size = 2.0) +
+    geom_line(aes_string(y = metric, col = Tool, group = Tool), size = 0.5)
   
   if (!is.null(toolnames)) {
     p = p + geom_label_repel(data = toolnames, aes_string(y = metric, label = "Tool",  col = "Tool"), size = 1.6, show.legend = F, label.padding = unit(0.12, "lines"))
