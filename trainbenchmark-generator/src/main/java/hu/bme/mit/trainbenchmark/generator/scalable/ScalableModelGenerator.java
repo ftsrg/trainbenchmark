@@ -198,25 +198,24 @@ public class ScalableModelGenerator extends ModelGenerator {
 				serializer.createEdge(FOLLOWS, route, swP);
 			}
 
+			Set<Integer> usedTracks = new HashSet<>();
 			// create connectsTo (n:m) edges
-			Object prevte = null;
-			for (final Object trackElement : currentTrack) {
-				if (prevte != null) {
-					serializer.createEdge(CONNECTS_TO, prevte, trackElement);
-				}
-				prevte = trackElement;
-			}
+			for (int j = 1; j < currentTrack.size(); ++j) {
+				final Object current = currentTrack.get(0);
+				if (usedTracks.contains(current))
+					continue;
 
-			Stream<Object> objectStream = random.ints(0, currentTrack.size()).distinct()
-					.filter(id -> !switches.contains(currentTrack.get(id)))
-					.limit(switches.size()).mapToObj(currentTrack::get);
-			ZipUtils.zip(switches, objectStream, (sw, tr) -> {
-				try {
-					serializer.createEdge(CONNECTS_TO, sw, tr);
-				} catch (IOException e) {
-					e.printStackTrace();
+				serializer.createEdge(CONNECTS_TO, currentTrack.get(j - 1), current);
+
+				if (switches.contains(current)) {
+					int segmentID;
+					do {
+						segmentID = j + random.nextInt(currentTrack.size() - j);
+					} while (usedTracks.contains(segmentID));
+					serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
+					usedTracks.add(segmentID);
 				}
-			});
+			}
 
 			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {
 				serializer.createEdge(CONNECTS_TO, prevTracks.get(prevTracks.size() - 1), currentTrack.get(0));
