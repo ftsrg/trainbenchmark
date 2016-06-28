@@ -33,26 +33,15 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
 ### Setup
 
 * Initialization
-    * [`init-config.sh`](scripts/init-config.sh): initializes the configuration file, `config/config.yml`
-* Installation
-    * [`install-python.sh`](scripts/install-python.sh): installs [Python 3](https://www.python.org/downloads/) and the required packages
     * [`install-jdk.sh`](scripts/install-jdk.sh): installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
-    * [`install-maven.sh`](scripts/install-maven.sh): installs [Maven 3](https://github.com/FTSRG/technology-cheat-sheets/wiki/Linux-packages#maven-3)
-* Dependencies
-    * [`dep-graph.sh`](scripts/dep-graph.sh): resolves the [Neo4j Shell Tools](https://github.com/jexp/neo4j-shell-tools) dependency required by the `graph` components
+    * [`install-gradle.sh`](scripts/install-maven.sh): installs Gradle.
 
 Provided that you start with a fresh Ubuntu server installation, you can run the provided install scripts like this:
 
 ```bash
-scripts/init-config.sh && \
-scripts/install-python.sh && \
 scripts/install-jdk.sh && \
-scripts/install-maven.sh && \
-scripts/install-gradle.sh && \
-scripts/dep-graph.sh
+scripts/install-gradle.sh
 ```
-
-Use [sdkman](http://sdkman.io/) to install the latest Groovy distribution (`sdk install groovy`).
 
 #### Optional dependencies
 
@@ -79,7 +68,7 @@ The `scripts` directory contains the [`run.py`](scripts/run.py) script which is 
 
 The projects are developed and tested with **Eclipse Mars**.
 
-To develop the Train Benchmark, you a Gradle Eclipse plugin from the **Eclipse Marketplace**, e.g. the **Buildship: Eclipse Plug-ins for Gradle**. Also install the Groovy tooling from <https://github.com/groovy/groovy-eclipse/wiki>.
+To develop the Train Benchmark, you a Gradle Eclipse plugin from the **Eclipse Marketplace**, e.g. the **Buildship: Eclipse Plug-ins for Gradle**. Also install the Eclipse Groovy tooling from <https://github.com/groovy/groovy-eclipse/wiki>.
 
 To import the projects, choose **Import...** | **Gradle Project**, specify the root directory as the repository directory and import them with the default **Gradle distribution** (**Gradle wrapper (recommended)**).
 
