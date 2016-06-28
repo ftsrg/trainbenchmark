@@ -1,3 +1,3 @@
 #!/bin/bash
 
-tar zcf results.tar.gz results
+tar czf results.tar.gz results
