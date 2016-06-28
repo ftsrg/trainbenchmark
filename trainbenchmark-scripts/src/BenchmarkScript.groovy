@@ -7,7 +7,10 @@ import hu.bme.mit.trainbenchmark.constants.Scenario
 def xms = "12G"
 def xmx = "12G"
 def minSize = 1
-def maxSize = 32
+def maxSize = 1024
+def timeout = 300
+def runs = 3
+def queryTransformationCount = 1
 
 def scenarios = [
 	//	Scenario.BATCH,
@@ -19,9 +22,6 @@ for (scenario in scenarios) {
 	for (size = minSize; size <= maxSize; size*=2) {
 		def scenarioString = scenario.toString().toLowerCase()
 		def modelPath = "railway-${scenarioString}-${size}"
-		def timeout = 120
-		def runs = 3
-		def queryTransformationCount = 1
 		def messageSize = 10
 
 		def operations1 = [ROUTESENSOR_REPAIR]
