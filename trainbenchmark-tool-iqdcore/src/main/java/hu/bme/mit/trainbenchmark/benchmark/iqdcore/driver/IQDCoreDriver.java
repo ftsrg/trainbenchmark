@@ -3,6 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver;
 import java.util.List;
 
 import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
@@ -11,6 +12,7 @@ public class IQDCoreDriver extends Driver<Long> {
 	protected final WildcardInput input;
 	protected final TrainbenchmarkReader reader;
 	protected final String variant;
+	private TrainbenchmarkQuery query;
 
 	public IQDCoreDriver(final String variant, final WildcardInput input) {
 		super();
@@ -33,13 +35,16 @@ public class IQDCoreDriver extends Driver<Long> {
 		return "-inferred.ttl";
 	}
 
+	public void setQuery(TrainbenchmarkQuery query) {
+		this.query = query;
+	}
 	@Override
 	public void destroy() {
-
+		query.shutdown();
 	}
 
 	public WildcardInput.BatchTransaction newTransaction() {
-		return input.newBatchTransaction();
+		return input.newContinousTransaction();
 	}
 
 	public long newKey() {
