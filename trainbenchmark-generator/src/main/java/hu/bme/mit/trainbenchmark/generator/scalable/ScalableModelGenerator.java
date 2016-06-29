@@ -199,7 +199,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			Set<Integer> usedTracks = new HashSet<>();
 			// create connectsTo (n:m) edges
 			for (int j = 1; j < currentTrack.size(); ++j) {
-				final Object current = currentTrack.get(0);
+				final Object current = currentTrack.get(j);
 				if (usedTracks.contains(current))
 					continue;
 
