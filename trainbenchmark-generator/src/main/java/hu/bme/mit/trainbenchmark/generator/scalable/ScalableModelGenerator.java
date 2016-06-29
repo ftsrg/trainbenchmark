@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -42,7 +41,6 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.utils.ZipUtils;
 
 public class ScalableModelGenerator extends ModelGenerator {
 
@@ -208,12 +206,11 @@ public class ScalableModelGenerator extends ModelGenerator {
 				serializer.createEdge(CONNECTS_TO, currentTrack.get(j - 1), current);
 
 				if (switches.contains(current)) {
-					int segmentID;
-					do {
-						segmentID = j + random.nextInt(currentTrack.size() - j);
-					} while (usedTracks.contains(segmentID));
-					serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
-					usedTracks.add(segmentID);
+					int segmentID = j + random.nextInt(currentTrack.size() - j);
+					if (!usedTracks.contains(segmentID)) {
+						serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
+						usedTracks.add(segmentID);
+					}
 				}
 			}
 
