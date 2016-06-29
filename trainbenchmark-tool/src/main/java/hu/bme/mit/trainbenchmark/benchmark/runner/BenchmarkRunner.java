@@ -42,7 +42,7 @@ public class BenchmarkRunner {
 			return exitValue;
 		} catch (ExecuteException e) {
 			System.out.println("Process timed out.");
-			return 1;
+			return 143;
 		}
 	}
 
