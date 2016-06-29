@@ -38,6 +38,7 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 		final String yamlPath = queryDirectory + query + driver.getVariant() + ".yaml";
 		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath), false);
 		input.subscribe(queryEngine.inputLookup());
+		driver.setQuery(queryEngine);
 	}
 	
 	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch> create(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final WildcardInput input)

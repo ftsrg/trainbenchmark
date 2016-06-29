@@ -7,9 +7,9 @@ import hu.bme.mit.trainbenchmark.constants.Scenario
 def xms = "12G"
 def xmx = "12G"
 def minSize = 1
-def maxSize = 4096
-def timeout = 300
-def runs = 5
+def maxSize = 1024
+def timeout = 900
+def runs = 1
 def queryTransformationCount = 1
 
 def scenarios = [
@@ -20,7 +20,7 @@ def scenarios = [
 
 for (scenario in scenarios) {
 	def scenarioString = scenario.toString().toLowerCase()
-	def messageSize = 10
+	def messageSize = 2048
 
 	//	def operations1 = [ROUTESENSOR_REPAIR]
 	//	for (variant in ["A", "B"]) {
