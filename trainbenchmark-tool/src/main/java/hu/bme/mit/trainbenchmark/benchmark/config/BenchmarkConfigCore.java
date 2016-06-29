@@ -31,12 +31,12 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 	}
 
 	public BenchmarkConfigCore(final String xms, final String xmx, final long timeout, final int runs,
-			final int queryTransformatioCount, final String modelFilename,
+			final int queryTransformationCount, final String modelFilename,
 			final Collection<RailwayOperation> railwayOperations, final String workload) {
 		super(xms, xmx);
 		this.timeout = timeout;
 		this.runs = runs;
-		this.queryTransformationCount = queryTransformatioCount;
+		this.queryTransformationCount = queryTransformationCount;
 		this.modelFilename = modelFilename;
 		this.railwayOperations = railwayOperations;
 		this.workload = workload;
