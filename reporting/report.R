@@ -55,6 +55,7 @@ for (workload in workloads) {
     labs(workload, x = "Model size\n#Triples", y = "Execution times [s]") +
     geom_point(aes(y = Time, col = Description, shape = Description), size = 2.0) +
     geom_line(aes(y = Time, col = Description, group = Description), size = 0.5) +
+    scale_y_log10() + #breaks = ybreaks, labels = ylabels) +
     facet_wrap(~ Phase, ncol = 2, scale = "free_y")
   print(p)
   
