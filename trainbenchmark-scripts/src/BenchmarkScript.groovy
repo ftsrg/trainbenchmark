@@ -19,21 +19,28 @@ def scenarios = [
 ]
 
 for (scenario in scenarios) {
-	for (size = minSize; size <= maxSize; size*=2) {
-		def scenarioString = scenario.toString().toLowerCase()
-		def modelPath = "railway-${scenarioString}-${size}"
-		def messageSize = 10
+	def scenarioString = scenario.toString().toLowerCase()
+	def messageSize = 10
 
-		def operations1 = [ROUTESENSOR_REPAIR]
-		def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
-		for (variant in ["A", "B"]) {
-			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant))
+	def operations1 = [ROUTESENSOR_REPAIR]
+	for (variant in ["A", "B"]) {
+		for (size = minSize; size <= maxSize; size*=2) {
+			def modelPath = "railway-${scenarioString}-${size}"
+			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
+			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant)) == 143) {
+				break
+			}
 		}
-		
-		def operations2 = [CONNECTEDSEGMENTS_REPAIR]
-		def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "ConnectedSegments")
-		for (variant in ["A", "B", "C", "D"]) {
-			BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, variant))
+	}
+
+	def operations2 = [CONNECTEDSEGMENTS_REPAIR]
+	for (variant in ["A", "B", "C", "D"]) {
+		for (size = minSize; size <= maxSize; size*=2) {
+			def modelPath = "railway-${scenarioString}-${size}"
+			def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "ConnectedSegments")
+			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, variant)) == 143) {
+				break
+			}
 		}
 	}
 }
