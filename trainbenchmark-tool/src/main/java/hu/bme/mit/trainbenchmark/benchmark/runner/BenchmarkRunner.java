@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.Executor;
 
@@ -34,11 +35,15 @@ public class BenchmarkRunner {
 		final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeoutInMilliseconds);
 		final Executor executor = new DefaultExecutor();
 		executor.setWatchdog(watchdog);
-		final int exitValue = executor.execute(cmdLine);
 
-		System.out.println();
-
-		return exitValue;
+		try {
+			final int exitValue = executor.execute(cmdLine);
+			System.out.println();
+			return exitValue;
+		} catch (ExecuteException e) {
+			System.out.println("Process timed out.");
+			return 1;
+		}
 	}
 
 }
