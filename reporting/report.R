@@ -52,7 +52,7 @@ for (workload in workloads) {
   df = workloadTimes
   p = ggplot(df) +
     aes(x = as.factor(Model)) +
-    labs(workload, x = "Model size\n#Triples", y = "Execution times [s]") +
+    labs(title = workload, x = "Model size\n#Triples", y = "Execution times [s]") +
     geom_point(aes(y = Time, col = Description, shape = Description), size = 2.0) +
     geom_line(aes(y = Time, col = Description, group = Description), size = 0.5) +
     scale_y_log10() + #breaks = ybreaks, labels = ylabels) +
