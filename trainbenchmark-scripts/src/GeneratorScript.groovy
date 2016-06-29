@@ -7,7 +7,16 @@ import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.runner.GeneratorRunner
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 
+def xms = "4G"
+def xmx = "8G"
+def minSize = 1
+def maxSize = 1024
 
+def scenarios = [
+//	Scenario.BATCH,
+//	Scenario.INJECT,
+	Scenario.REPAIR,
+]
 
 def generate(String xms, String xmx, Scenario scenario, int size) {
 	def gc = new GeneratorConfig(xms, xmx, scenario, size)
@@ -40,22 +49,9 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 //	//	GeneratorRunner.run(sgcw, "sql")
 }
 
-
-def xms = "12G"
-def xmx = "12G"
-def minSize = 1
-def maxSize = 2048
-
-def scenarios = [
-//	Scenario.BATCH,
-//	Scenario.INJECT,
-	Scenario.REPAIR,
-]
-
 for (scenario in scenarios) {
 	for (size = minSize; size <= maxSize; size*=2) {
 		println("Scenario: ${scenario}, size: ${size}")
 		generate(xms, xmx, scenario, size)
 	}
 }
-
