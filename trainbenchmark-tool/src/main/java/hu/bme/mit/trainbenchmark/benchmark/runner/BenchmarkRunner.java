@@ -29,7 +29,9 @@ public class BenchmarkRunner {
 				bcw.getBenchmarkConfig().getXms(), bcw.getBenchmarkConfig().getXmx(), jarPath, configPath);
 		final CommandLine cmdLine = CommandLine.parse(javaCommand);
 
-		final ExecuteWatchdog watchdog = new ExecuteWatchdog(bcw.getBenchmarkConfig().getTimeout());
+		final long timeoutInSeconds = bcw.getBenchmarkConfig().getTimeout();
+		final long timeoutInMilliseconds = timeoutInSeconds * 1000;
+		final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeoutInMilliseconds);
 		final Executor executor = new DefaultExecutor();
 		executor.setWatchdog(watchdog);
 		final int exitValue = executor.execute(cmdLine);

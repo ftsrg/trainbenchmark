@@ -27,7 +27,7 @@ public abstract class BaseTest {
 	public static void init() {
 		final String xms = "1G";
 		final String xmx = "1G";
-		final long timeout = 100;
+		final long timeout = 120;
 		final int runs = 2;
 		final int queryTransformationCount = 2;
 		final String modelFilename = "railway-repair-1";
