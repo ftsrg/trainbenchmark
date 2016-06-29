@@ -7,9 +7,9 @@ import hu.bme.mit.trainbenchmark.constants.Scenario
 def xms = "12G"
 def xmx = "12G"
 def minSize = 1
-def maxSize = 1024
+def maxSize = 2048
 def timeout = 300
-def runs = 3
+def runs = 5
 def queryTransformationCount = 1
 
 def scenarios = [
