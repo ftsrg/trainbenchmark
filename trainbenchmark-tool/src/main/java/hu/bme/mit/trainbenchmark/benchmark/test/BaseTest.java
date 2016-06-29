@@ -29,7 +29,7 @@ public abstract class BaseTest {
 		final String xmx = "1G";
 		final long timeout = 100;
 		final int runs = 2;
-		final int queryTransformatioCount = 2;
+		final int queryTransformationCount = 2;
 		final String modelFilename = "railway-repair-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS, //
@@ -41,7 +41,7 @@ public abstract class BaseTest {
 				RailwayOperation.SWITCHSET //
 				);
 		final String workload = "BatchTest";
-		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformatioCount, modelFilename, operations, workload);
+		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
 	}
 
 	@Test
@@ -53,11 +53,11 @@ public abstract class BaseTest {
 		
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
-		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(78));
-		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(12));
-		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(9));
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(1));
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(2));
+		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(95));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(3));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(5));
 	}
 
 	protected abstract BenchmarkResult runTest() throws Exception;
