@@ -1,8 +1,5 @@
 import hu.bme.mit.trainbenchmark.constants.Scenario
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.GraphFormat
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerPopGraphGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.runner.GeneratorRunner
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat
@@ -50,7 +47,7 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 }
 
 for (scenario in scenarios) {
-	for (size = minSize; size <= maxSize; size*=2) {
+	for (size = minSize; size <= maxSize; size *= 2) {
 		println("Scenario: ${scenario}, size: ${size}")
 		generate(xms, xmx, scenario, size)
 	}
