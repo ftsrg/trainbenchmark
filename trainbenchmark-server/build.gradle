@@ -1,6 +1,6 @@
 apply plugin: 'jetty'
 
-task page() {
+task page() << {
     copy {
         from '../trainbenchmark-reporting'
         into 'src/main/webapp/diagrams'
