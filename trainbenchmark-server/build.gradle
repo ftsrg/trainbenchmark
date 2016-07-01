@@ -1,0 +1,18 @@
+apply plugin: 'jetty'
+
+task page() {
+    copy {
+        from '../trainbenchmark-reporting'
+        into 'src/main/webapp/diagrams'
+        include '*.pdf'
+    }
+
+    copy {
+        from '../diagrams'
+        into 'src/main/webapp/diagrams'
+        include '*.pdf'
+    }
+
+    jettyRun.contextPath = ''
+    jettyRun.execute()
+}
