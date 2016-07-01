@@ -1,0 +1,6 @@
+task plot() {
+  exec {
+    executable 'Rscript'
+    args 'report.R'
+  }
+}
