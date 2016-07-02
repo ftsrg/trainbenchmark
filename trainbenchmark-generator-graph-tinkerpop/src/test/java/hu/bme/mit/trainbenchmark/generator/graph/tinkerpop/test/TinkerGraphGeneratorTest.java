@@ -7,9 +7,9 @@ import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.TinkerGraphSerializer;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.tests.BaseGeneratorTest;
+import hu.bme.mit.trainbenchmark.generator.tests.GeneratorBaseTest;
 
-public class TinkerGraphGeneratorTest extends BaseGeneratorTest {
+public class TinkerGraphGeneratorTest extends GeneratorBaseTest {
 
 	@Test
 	public void generate() throws Exception {

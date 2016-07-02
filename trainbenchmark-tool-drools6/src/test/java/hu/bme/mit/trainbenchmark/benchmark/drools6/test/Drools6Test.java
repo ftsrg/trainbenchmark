@@ -16,9 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.config.Drools6BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
 
-public class Drools6Test extends BaseTest {
+public class Drools6Test extends BenchmarkBaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {

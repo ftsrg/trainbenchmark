@@ -5,9 +5,9 @@ import org.junit.Test;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.tests.BaseGeneratorTest;
+import hu.bme.mit.trainbenchmark.generator.tests.GeneratorBaseTest;
 
-public class SqlGeneratorTest extends BaseGeneratorTest {
+public class SqlGeneratorTest extends GeneratorBaseTest {
 
 	@Test
 	public void generate() throws Exception {

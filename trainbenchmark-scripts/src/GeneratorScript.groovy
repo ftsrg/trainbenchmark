@@ -1,7 +1,7 @@
 import hu.bme.mit.trainbenchmark.constants.Scenario
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig
 import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfigWrapper
-import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGeneratorConfigWrapper
+import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper
@@ -25,15 +25,15 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 
 	// EMF
 	def egcw = new EmfGeneratorConfigWrapper(gc)
-	GeneratorRunner.run(egcw, "emf")
+	GeneratorRunner.run(egcw)
 
 	// graph / Neo4j
-	def gngcw = new Neo4jGeneratorConfigWrapper(gc)
-	GeneratorRunner.run(gngcw, "graph-neo4j")
+	def ngcw = new Neo4jGraphGeneratorConfigWrapper(gc)
+	GeneratorRunner.run(ngcw)
 
 	// graph / TinkerPop
-	def gtgcw = new TinkerGraphGeneratorConfigWrapper(gc, TinkerGraphFormat.GRAPHML)
-	GeneratorRunner.run(gtgcw, "graph-tinkerpop")
+	def tgcw = new TinkerGraphGeneratorConfigWrapper(gc, TinkerGraphFormat.GRAPHSON)
+	GeneratorRunner.run(tgcw)
 
 	// RDF
 	def rdfFormats = [RdfFormat.TURTLE]
@@ -41,13 +41,13 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 	for (rdfFormat in rdfFormats) {
 		for (includeInferredOption in includeInferredOptions) {
 			def rgcw = new RdfGeneratorConfigWrapper(gc, includeInferredOption, rdfFormat)
-			GeneratorRunner.run(rgcw, "rdf")
+			GeneratorRunner.run(rgcw)
 		}
 	}
 
 	// SQL
 	def sgcw = new SqlGeneratorConfigWrapper(gc)
-	GeneratorRunner.run(sgcw, "sql")
+	GeneratorRunner.run(sgcw)
 }
 
 for (scenario in scenarios) {

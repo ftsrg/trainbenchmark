@@ -14,11 +14,11 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.BaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ViatraBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper;
 
-public class ViatraTest extends BaseTest {
+public class ViatraTest extends BenchmarkBaseTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {

@@ -34,15 +34,15 @@ import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigWrapper;
 
-public class Neo4jSerializer extends ModelSerializer<Neo4jGeneratorConfigWrapper> {
+public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorConfigWrapper> {
 
 	protected GraphDatabaseService graphDb;
 	protected Transaction tx;
 	protected final File databaseDirectory;
 
-	public Neo4jSerializer(final Neo4jGeneratorConfigWrapper generatorConfigWrapper) {
+	public Neo4jGraphSerializer(final Neo4jGraphGeneratorConfigWrapper generatorConfigWrapper) {
 		super(generatorConfigWrapper);
 		databaseDirectory = new File(generatorConfigWrapper.getGeneratorConfig().getModelDir() + "neo4j-gen/"
 				+ generatorConfigWrapper.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j");

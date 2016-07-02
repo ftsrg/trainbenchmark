@@ -6,10 +6,10 @@ import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.rdf.RdfSerializer;
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.tests.BaseGeneratorTest;
+import hu.bme.mit.trainbenchmark.generator.tests.GeneratorBaseTest;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
-public class RdfGeneratorTest extends BaseGeneratorTest {
+public class RdfGeneratorTest extends GeneratorBaseTest {
 	
 	@Test
 	public void generateWithInferred() throws Exception {

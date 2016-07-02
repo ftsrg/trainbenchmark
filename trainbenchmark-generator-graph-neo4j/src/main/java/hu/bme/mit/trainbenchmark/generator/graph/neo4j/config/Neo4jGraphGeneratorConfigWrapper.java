@@ -15,12 +15,12 @@ package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
-public class Neo4jGeneratorConfigWrapper extends GeneratorConfigWrapper {
+public class Neo4jGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
 
-	protected Neo4jGeneratorConfigWrapper() {
+	protected Neo4jGraphGeneratorConfigWrapper() {
 	}
 	
-	public Neo4jGeneratorConfigWrapper(final GeneratorConfig generatorConfig) {
+	public Neo4jGraphGeneratorConfigWrapper(final GeneratorConfig generatorConfig) {
 		super(generatorConfig);
 	}
 

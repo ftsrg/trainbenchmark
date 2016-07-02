@@ -6,9 +6,9 @@ import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.emf.EmfSerializer;
 import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.tests.BaseGeneratorTest;
+import hu.bme.mit.trainbenchmark.generator.tests.GeneratorBaseTest;
 
-public class EmfGeneratorTest extends BaseGeneratorTest {
+public class EmfGeneratorTest extends GeneratorBaseTest {
 	
 	@Test
 	public void generate() throws Exception {
