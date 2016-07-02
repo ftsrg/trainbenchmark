@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations;
 
 import java.util.Optional;
 
-import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
@@ -25,9 +25,10 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class IQDModelOperationFactory extends ModelOperationFactory<IQDCoreMatch, IQDCoreDriver> {
-    private WildcardInput input;
 
-    public IQDModelOperationFactory(WildcardInput input) {
+    private final TransactionFactory input;
+
+    public IQDModelOperationFactory(TransactionFactory input) {
         this.input = input;
     }
 

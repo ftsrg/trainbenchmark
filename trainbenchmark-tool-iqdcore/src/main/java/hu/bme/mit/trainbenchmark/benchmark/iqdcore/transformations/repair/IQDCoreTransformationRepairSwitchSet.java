@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import hu.bme.mit.incqueryds.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSetMatch;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incqueryds.WildcardInput;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSetMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 
 public class IQDCoreTransformationRepairSwitchSet extends IQDCoreTransformationRepair<IQDCoreSwitchSetMatch> {
 
@@ -28,14 +28,13 @@ public class IQDCoreTransformationRepairSwitchSet extends IQDCoreTransformationR
 
 	@Override
 	public void activate(final Collection<IQDCoreSwitchSetMatch> matches) throws IOException {
-		final WildcardInput.BatchTransaction transaction = driver.newTransaction();
+		final Transaction transaction = driver.newTransaction();
 		for (final IQDCoreSwitchSetMatch match : matches) {
 			final Long sw = match.getSw();
 
 			transaction.remove(sw, CURRENTPOSITION, match.getCurrentPosition());
 			transaction.add(sw, CURRENTPOSITION, match.getPosition());
 		}
-		transaction.close();
 	}
 
 }
