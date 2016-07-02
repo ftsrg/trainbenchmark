@@ -21,28 +21,25 @@ import com.esotericsoftware.kryo.io.Input;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
-public class TinkerPopGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
+public class TinkerGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
 
-	protected GraphFormat graphFormat;
+	protected TinkerGraphFormat graphFormat;
 	
-	protected TinkerPopGraphGeneratorConfigWrapper() {
+	protected TinkerGraphGeneratorConfigWrapper() {
 	}
 	
-	public TinkerPopGraphGeneratorConfigWrapper(final GeneratorConfig generatorConfig, final GraphFormat graphFormat) {
+	public TinkerGraphGeneratorConfigWrapper(final GeneratorConfig generatorConfig, final TinkerGraphFormat graphFormat) {
 		super(generatorConfig);
 		this.graphFormat = graphFormat;
 	}
 	
-	public GraphFormat getGraphFormat() {
+	public TinkerGraphFormat getGraphFormat() {
 		return graphFormat;
 	}
-	
-	public static TinkerPopGraphGeneratorConfigWrapper fromFile(final String path) throws FileNotFoundException {
-		final Kryo kryo = new Kryo();
-		try (final Input input = new Input(new FileInputStream(path))) {
-			final TinkerPopGraphGeneratorConfigWrapper benchmarkConfig = kryo.readObject(input, TinkerPopGraphGeneratorConfigWrapper.class);
-			return benchmarkConfig;
-		}
+
+	@Override
+	public String getProjectName() {
+		return "graph-tinkerpop";
 	}
 
 }

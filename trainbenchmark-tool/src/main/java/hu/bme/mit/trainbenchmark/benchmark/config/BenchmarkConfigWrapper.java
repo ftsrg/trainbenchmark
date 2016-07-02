@@ -51,11 +51,11 @@ public abstract class BenchmarkConfigWrapper {
 		}
 	}
 
-	public static <T> T fromFile(final String path, final Class<T> class_) throws FileNotFoundException {
+	public static <T extends BenchmarkConfigWrapper> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
-			final T benchmarkConfig = kryo.readObject(input, class_);
-			return benchmarkConfig;
+			final T benchmarkConfigWrapper = kryo.readObject(input, clazz);
+			return benchmarkConfigWrapper;
 		}
 	}
 	

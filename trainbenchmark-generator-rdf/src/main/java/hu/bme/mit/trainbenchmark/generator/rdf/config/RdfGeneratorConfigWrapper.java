@@ -12,12 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf.config;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Input;
-
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
@@ -51,13 +45,10 @@ public class RdfGeneratorConfigWrapper extends GeneratorConfigWrapper {
 	public String getExtension() {
 		return format.getExtension();
 	}
-	
-	public static RdfGeneratorConfigWrapper fromFile(final String path) throws FileNotFoundException {
-		final Kryo kryo = new Kryo();
-		try (final Input input = new Input(new FileInputStream(path))) {
-			final RdfGeneratorConfigWrapper generatorConfigWrapper = kryo.readObject(input, RdfGeneratorConfigWrapper.class);
-			return generatorConfigWrapper;
-		}
+
+	@Override
+	public String getProjectName() {
+		return "rdf";
 	}
 	
 }

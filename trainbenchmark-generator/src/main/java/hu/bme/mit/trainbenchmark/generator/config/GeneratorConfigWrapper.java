@@ -8,7 +8,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
-public class GeneratorConfigWrapper {
+public abstract class GeneratorConfigWrapper {
 
 	protected GeneratorConfig generatorConfig;
 	
@@ -18,6 +18,11 @@ public class GeneratorConfigWrapper {
 		this.generatorConfig = generatorConfig;
 	}
 	
+	/**
+	 * @return The name of the project to be executed. Example: "emf"
+	 */
+	public abstract String getProjectName();
+		
 	public GeneratorConfig getGeneratorConfig() {
 		return generatorConfig;
 	}
@@ -34,10 +39,10 @@ public class GeneratorConfigWrapper {
 		}
 	}
 
-	public static GeneratorConfigWrapper fromFile(final String path) throws FileNotFoundException {
+	public static <T extends GeneratorConfigWrapper> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
-			final GeneratorConfigWrapper generatorConfigWrapper = kryo.readObject(input, GeneratorConfigWrapper.class);
+			final T generatorConfigWrapper = kryo.readObject(input, clazz);
 			return generatorConfigWrapper;
 		}
 	}

@@ -1,13 +1,13 @@
 package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config;
 
-public enum GraphFormat {
+public enum TinkerGraphFormat {
 	GRAPHML("GraphML"), //
 	GRAPHSON("GraphSON"), //
 	GRYO("Gryo");
 
 	private String name;
 
-	GraphFormat(final String name) {
+	TinkerGraphFormat(final String name) {
 		this.name = name;
 	}
 

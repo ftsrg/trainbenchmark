@@ -44,6 +44,7 @@ public class JenaQuery<TPatternMatch extends JenaMatch> extends RdfModelQuery<TP
 		return new JenaQuery<TPatternMatch>(driver, workspaceDir, query);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TPatternMatch> evaluate() throws IOException {
 		final List<TPatternMatch> matches = new ArrayList<>();

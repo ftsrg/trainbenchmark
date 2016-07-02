@@ -27,11 +27,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -64,6 +62,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
 		super(serializer, generatorConfigWrapper);
+
 		maxRoutes = 5 * generatorConfigWrapper.getGeneratorConfig().getSize();
 		switch (generatorConfigWrapper.getGeneratorConfig().getScenario()) {
 		case BATCH:
@@ -100,6 +99,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 		Object firstSemaphore = null;
 		List<Object> firstTracks = null;
 		List<Object> prevTracks = null;
+
 		for (long i = 0; i < maxRoutes; i++) {
 			boolean firstSegment = true;
 
@@ -135,11 +135,10 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 			final int swPs = random.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
-			final Set<Object> switches = new HashSet<>();
+
 			for (int j = 0; j < swPs; j++) {
 				final Object sw = serializer.createVertex(SWITCH);
 				currentTrack.add(sw);
-				switches.add(sw);
 
 				// (region)-[:elements]->(sw)
 				serializer.createEdge(ELEMENTS, region, sw);
@@ -196,22 +195,13 @@ public class ScalableModelGenerator extends ModelGenerator {
 				serializer.createEdge(FOLLOWS, route, swP);
 			}
 
-			Set<Integer> usedTracks = new HashSet<>();
 			// create connectsTo (n:m) edges
-			for (int j = 1; j < currentTrack.size(); ++j) {
-				final Object current = currentTrack.get(j);
-				if (usedTracks.contains(current))
-					continue;
-
-				serializer.createEdge(CONNECTS_TO, currentTrack.get(j - 1), current);
-
-				if (switches.contains(current)) {
-					int segmentID = j + random.nextInt(currentTrack.size() - j);
-					if (!usedTracks.contains(segmentID)) {
-						serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
-						usedTracks.add(segmentID);
-					}
+			Object prevte = null;
+			for (final Object trackElement : currentTrack) {
+				if (prevte != null) {
+					serializer.createEdge(CONNECTS_TO, prevte, trackElement);
 				}
+				prevte = trackElement;
 			}
 
 			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {

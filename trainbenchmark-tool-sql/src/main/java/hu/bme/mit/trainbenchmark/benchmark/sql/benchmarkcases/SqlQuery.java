@@ -37,6 +37,7 @@ public class SqlQuery<TSqlMatch extends SqlMatch, TSqlDriver extends SqlDriver> 
 		queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TSqlMatch> evaluate() throws SQLException {
 		if (statement == null) {

@@ -47,6 +47,7 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 		return new IQDCoreQuery<TPatternMatch>(driver, queryDirectory, query, input);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TPatternMatch> evaluate() {
 		driver.flushLastTransaction();

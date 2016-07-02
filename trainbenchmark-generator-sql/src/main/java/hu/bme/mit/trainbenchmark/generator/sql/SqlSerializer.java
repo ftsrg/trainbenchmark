@@ -38,15 +38,16 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
 
-public class SqlSerializer extends ModelSerializer<GeneratorConfigWrapper> {
+public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 
 	protected String sqlRawPath;
 	protected BufferedWriter writer;
+	protected String SQL_METAMODEL_DIR = "/trainbenchmark-format-sql/src/main/resources/metamodel/";
 
-	public SqlSerializer(final GeneratorConfigWrapper generatorConfigWrapper) {
+	public SqlSerializer(final SqlGeneratorConfigWrapper generatorConfigWrapper) {
 		super(generatorConfigWrapper);
 	}
 
@@ -62,9 +63,8 @@ public class SqlSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFileDirectory = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
-				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/";
-		final String headerFilePath = headerFileDirectory + "railway-header.sql";
+		final String headerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
+				+ "railway-header.sql";
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
@@ -79,8 +79,8 @@ public class SqlSerializer extends ModelSerializer<GeneratorConfigWrapper> {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
-				+ "/hu.bme.mit.trainbenchmark.sql/src/main/resources/metamodel/railway-footer.sql";
+		final String footerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
+				+ "railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
 		final List<String> lines = FileUtils.readLines(footerFile);
