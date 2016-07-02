@@ -10,6 +10,7 @@ public class InitializeOperationsPhase extends Phase {
 
 	@Override
 	public void run() throws Exception {
+		executor.initializeDriver();
 		executor.initializeOperations();
 	}
 
