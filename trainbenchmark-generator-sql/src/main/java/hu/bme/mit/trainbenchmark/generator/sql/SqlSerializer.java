@@ -45,7 +45,9 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 
 	protected String sqlRawPath;
 	protected BufferedWriter writer;
-	protected String SQL_METAMODEL_DIR = "/trainbenchmark-format-sql/src/main/resources/metamodel/";
+	protected String SQL_FORMAT_DIR = "trainbenchmark-format-sql/";
+	protected String SQL_METAMODEL_DIR = SQL_FORMAT_DIR + "src/main/resources/metamodel/";
+	protected String SQL_SCRIPT_DIR = SQL_FORMAT_DIR + "scripts/";
 
 	public SqlSerializer(final SqlGeneratorConfigWrapper generatorConfigWrapper) {
 		super(generatorConfigWrapper);
@@ -112,7 +114,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 		processDump.waitFor();
 
 		final String[] sqliteDump = { "/bin/bash", "-c", generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
-				+ "/hu.bme.mit.trainbenchmark.sql/scripts/mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath };
+				+ SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath };
 		final Process processSqlite = rt.exec(sqliteDump);
 		processSqlite.waitFor();
 	}
