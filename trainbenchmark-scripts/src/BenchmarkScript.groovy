@@ -7,7 +7,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario
 def xms = "12G"
 def xmx = "12G"
 def minSize = 1
-def maxSize = 1024
+def maxSize = 2
 def timeout = 900
 def runs = 1
 def queryTransformationCount = 1
@@ -22,16 +22,16 @@ for (scenario in scenarios) {
 	def scenarioString = scenario.toString().toLowerCase()
 	def messageSize = 2048
 
-	//	def operations1 = [ROUTESENSOR_REPAIR]
-	//	for (variant in ["A", "B"]) {
-	//		for (size = minSize; size <= maxSize; size *= 2) {
-	//			def modelPath = "railway-${scenarioString}-${size}"
-	//			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
-	//			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant)) == 143) {
-	//				break
-	//			}
-	//		}
-	//	}
+	def operations1 = [ROUTESENSOR_REPAIR]
+	for (variant in ["A", "B"]) {
+		for (size = minSize; size <= maxSize; size *= 2) {
+			def modelPath = "railway-${scenarioString}-${size}"
+			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
+			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant)) == 143) {
+				break
+			}
+		}
+	}
 
 	def operations2 = [CONNECTEDSEGMENTS_REPAIR]
 	for (variant in ["A", "B", "C", "D"]) {

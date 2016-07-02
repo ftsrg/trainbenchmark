@@ -7,7 +7,7 @@ import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 def xms = "4G"
 def xmx = "8G"
 def minSize = 1
-def maxSize = 1024
+def maxSize = 2
 
 def scenarios = [
 //	Scenario.BATCH,
