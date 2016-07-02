@@ -10,7 +10,7 @@ public class ReadPhase extends Phase {
 
 	@Override
 	public void initialize() throws Exception {
-		executor.initialize();
+		executor.initializeDriver();
 	}
 	
 	@Override

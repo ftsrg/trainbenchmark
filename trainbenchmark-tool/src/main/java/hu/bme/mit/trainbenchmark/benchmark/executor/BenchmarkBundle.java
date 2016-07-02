@@ -34,7 +34,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 		this.benchmarkResults = benchmarkResults;
 	}
 
-	public void initialize() throws Exception {
+	public void initializeDriver() throws Exception {
 		driver.initialize();
 	}
 	
