@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# trusty for 14.04, utopic for 14.10, vivid for 15.04
+# based on
+# trusty for 14.04, xenial for 16.04
 DISTRIBUTION=trusty
-MIRROR=http://cran.rapporter.net
 
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-sudo echo "deb $MIRROR/bin/linux/ubuntu $DISTRIBUTION/" >> /etc/apt/sources.list
+sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+gpg -a --export E084DAB9 | sudo apt-key add -
+
 sudo apt-get update
 sudo apt-get install -y r-base r-base-dev
