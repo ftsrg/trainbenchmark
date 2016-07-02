@@ -24,15 +24,15 @@ import org.apache.tinkerpop.gremlin.structure.io.IoCore;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.GraphFormat;
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerPopGraphGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfigWrapper;
 
-public class TinkerPopGraphSerializer extends ModelSerializer<TinkerPopGraphGeneratorConfigWrapper> {
+public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorConfigWrapper> {
 
-	protected TinkerPopGraphGeneratorConfigWrapper graphGeneratorConfig;
+	protected TinkerGraphGeneratorConfigWrapper graphGeneratorConfig;
 	protected TinkerGraph graph = TinkerGraph.open();
 
-	public TinkerPopGraphSerializer(final TinkerPopGraphGeneratorConfigWrapper generatorConfig) {
+	public TinkerGraphSerializer(final TinkerGraphGeneratorConfigWrapper generatorConfig) {
 		super(generatorConfig);
 	}
 
@@ -110,7 +110,7 @@ public class TinkerPopGraphSerializer extends ModelSerializer<TinkerPopGraphGene
 	@Override
 	public void persistModel() throws IOException, XMLStreamException, ClassNotFoundException, IllegalAccessException,
 			InstantiationException {
-		final GraphFormat format = generatorConfigWrapper.getGraphFormat();
+		final TinkerGraphFormat format = generatorConfigWrapper.getGraphFormat();
 		Builder<?> builder = null;
 		switch (format) {
 		case GRAPHML:

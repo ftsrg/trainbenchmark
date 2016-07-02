@@ -57,6 +57,7 @@ public class Drools6Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dr
 		return new Drools6Query<TMatch>(driver, workspaceDir, query);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TMatch> evaluate() throws IOException {
 		if (liveQuery == null) {

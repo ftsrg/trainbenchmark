@@ -12,14 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql;
 
-import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfigWrapper;
 
 public class SqlGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final GeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0]);
+		final SqlGeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0], SqlGeneratorConfigWrapper.class);
 		final SqlSerializer sqlSerializer = new SqlSerializer(generatorConfigWrapper);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(sqlSerializer, generatorConfigWrapper);
 		generator.generateModel();

@@ -10,18 +10,19 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop;
+package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
 
-import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerPopGraphGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGeneratorConfigWrapper;
 
-public class TinkerPopGraphGeneratorMain {
+public class Neo4jGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final TinkerPopGraphGeneratorConfigWrapper rdfGeneratorConfigWrapper = TinkerPopGraphGeneratorConfigWrapper.fromFile(args[0]);
-		final TinkerPopGraphSerializer rdfSerializer = new TinkerPopGraphSerializer(rdfGeneratorConfigWrapper);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, rdfGeneratorConfigWrapper);
+		final Neo4jGeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0], Neo4jGeneratorConfigWrapper.class);
+		final Neo4jSerializer rdfSerializer = new Neo4jSerializer(generatorConfigWrapper);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
 		generator.generateModel();
 	}
 

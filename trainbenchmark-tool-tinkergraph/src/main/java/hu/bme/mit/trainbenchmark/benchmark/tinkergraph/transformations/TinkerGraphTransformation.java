@@ -35,6 +35,7 @@ public abstract class TinkerGraphTransformation<TObject, TTinkerGraphDriver exte
 		super(driver);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <TTinkerGraphDriver extends TinkerGraphDriver> ModelTransformation<TTinkerGraphDriver, ?> newInstance(
 			final TTinkerGraphDriver driver, final RailwayQuery query, final Scenario scenario) {
 		switch (scenario) {

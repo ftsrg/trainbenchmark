@@ -10,19 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
+package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 
-import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
-import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
-public class Neo4jGraphGeneratorMain {
+public class Neo4jGeneratorConfigWrapper extends GeneratorConfigWrapper {
 
-	public static void main(final String[] args) throws Exception {
-		final GeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0]);
-		final Neo4jGraphSerializer rdfSerializer = new Neo4jGraphSerializer(generatorConfigWrapper);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
-		generator.generateModel();
+	protected Neo4jGeneratorConfigWrapper() {
+	}
+	
+	public Neo4jGeneratorConfigWrapper(final GeneratorConfig generatorConfig) {
+		super(generatorConfig);
 	}
 
+	@Override
+	public String getProjectName() {
+		return "graph-neo4j";
+	}
+	
 }

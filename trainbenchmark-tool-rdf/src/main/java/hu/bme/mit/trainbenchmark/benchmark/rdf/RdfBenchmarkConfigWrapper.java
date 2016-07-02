@@ -41,12 +41,4 @@ public abstract class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 		return isInferencing() ? " (Inferencing)" : " (No Inferencing)";
 	}
 
-	public static RdfBenchmarkConfigWrapper fromFile(final String path) throws FileNotFoundException {
-		final Kryo kryo = new Kryo();
-		try (final Input input = new Input(new FileInputStream(path))) {
-			final RdfBenchmarkConfigWrapper benchmarkConfig = kryo.readObject(input, RdfBenchmarkConfigWrapper.class);
-			return benchmarkConfig;
-		}
-	}
-
 }

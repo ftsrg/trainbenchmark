@@ -32,5 +32,4 @@ public class SQLiteTest extends BaseTest {
 		return new SQLiteBenchmarkConfigWrapper(bc);
 	}
 
-
 }

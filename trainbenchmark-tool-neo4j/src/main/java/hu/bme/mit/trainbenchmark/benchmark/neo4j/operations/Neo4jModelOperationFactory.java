@@ -165,6 +165,7 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private <TNeo4jMatch extends Neo4jMatch> ModelQuery<TNeo4jMatch, Neo4jDriver> createQuery(final Neo4jDriver driver,
 			final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
 		switch (neo4jEngine) {

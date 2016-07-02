@@ -31,6 +31,7 @@ import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 public class RdfSerializer extends ModelSerializer<RdfGeneratorConfigWrapper> {
 
 	protected BufferedWriter file;
+	protected String RDF_METAMODEL_DIR = "/trainbenchmark-format-rdf/src/main/resources/metamodel/";
 
 	public RdfSerializer(final RdfGeneratorConfigWrapper generatorConfigWrapper) {
 		super(generatorConfigWrapper);
@@ -46,16 +47,17 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfigWrapper> {
 		// source file
 		final String modelFlavor = generatorConfigWrapper.getModelFlavor();
 		final String extension = generatorConfigWrapper.getExtension();
-	
+
 		final String postfix = modelFlavor + "." + extension;
-		
-		final String srcFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
-				+ "/trainbenchmark-format-rdf/src/main/resources/metamodel/railway" + postfix;
+
+		final String srcFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir() + RDF_METAMODEL_DIR
+				+ "railway" + postfix;
 
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension() + postfix;
+		final String destFilePath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
+				+ postfix;
 		final File destFile = new File(destFilePath);
 
 		// this overwrites the destination file if it exists
@@ -78,7 +80,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfigWrapper> {
 		final StringBuilder vertex = new StringBuilder(triple);
 
 		final String linePrefix;
-		
+
 		switch (generatorConfigWrapper.getFormat()) {
 		case NTRIPLES:
 			linePrefix = String.format(" .\n:%s%d ", ID_PREFIX, id);
@@ -87,7 +89,8 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfigWrapper> {
 			linePrefix = " ;\n\t";
 			break;
 		default:
-			throw new UnsupportedOperationException("RDF format " + generatorConfigWrapper.getFormat() + " not supported");
+			throw new UnsupportedOperationException(
+					"RDF format " + generatorConfigWrapper.getFormat() + " not supported");
 		}
 
 		// if the metamodel is not included, we manually insert the inferenced triples
@@ -155,8 +158,9 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfigWrapper> {
 			file.write(s + "\n\n");
 			break;
 		default:
-			throw new UnsupportedOperationException("RDF format " + generatorConfigWrapper.getFormat() + " not supported");
-		}		
+			throw new UnsupportedOperationException(
+					"RDF format " + generatorConfigWrapper.getFormat() + " not supported");
+		}
 	}
 
 	protected String stringValue(final Object value) {

@@ -41,6 +41,7 @@ public class SesameQuery<TPatternMatch extends SesameMatch> extends RdfModelQuer
 		return new SesameQuery<TPatternMatch>(driver, workspaceDir, query);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TPatternMatch> evaluate()
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
