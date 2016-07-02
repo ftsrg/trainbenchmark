@@ -51,7 +51,6 @@ public class Drools6Driver extends EmfDriver {
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
 
-		initialize();
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
 			final EObject eObject = tIterator.next();
 			kieSession.insert(eObject);
