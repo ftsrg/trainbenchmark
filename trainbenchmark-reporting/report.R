@@ -47,9 +47,13 @@ workloads = c("RouteSensor", "ConnectedSegments")
 
 for (workload in workloads) {
   print(workload)
-  workloadTimes = times.plot[times.plot$Workload == workload, ]
+  df = times.plot[times.plot$Workload == workload, ]
 
-  df = workloadTimes
+  # do not visualize empty data sets
+  if (nrow(df) == 0) {
+    next
+  }
+
   p = ggplot(df) +
     aes(x = as.factor(Model)) +
     labs(title = workload, x = "Model size\n#Triples", y = "Execution times [s]") +
