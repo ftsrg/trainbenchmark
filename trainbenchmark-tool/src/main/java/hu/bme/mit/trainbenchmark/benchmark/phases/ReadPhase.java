@@ -7,11 +7,6 @@ public class ReadPhase extends Phase {
 	public ReadPhase(final BenchmarkBundle<?, ?, ?> executor) {
 		super(executor);
 	}
-
-	@Override
-	public void initialize() throws Exception {
-		executor.initializeDriver();
-	}
 	
 	@Override
 	public void run() throws Exception {

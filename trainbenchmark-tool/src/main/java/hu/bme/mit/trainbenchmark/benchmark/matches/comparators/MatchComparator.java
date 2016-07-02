@@ -21,6 +21,7 @@ public abstract class MatchComparator<TMatch, TElement> implements Comparator<TM
 		this.elementComparator = elementComparator;
 	}
 
+	@SuppressWarnings("unchecked")
 	public int compareArrays(final Object[] m1, final Object[] m2) {
 		for (int i = 0; i < m1.length; i++) {
 			final TElement t1 = (TElement) m1[i];

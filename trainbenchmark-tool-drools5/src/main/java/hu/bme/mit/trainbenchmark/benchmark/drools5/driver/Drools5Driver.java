@@ -25,8 +25,8 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
 public class Drools5Driver extends EmfDriver {
 
-	protected KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-	protected StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+	protected KnowledgeBase kbase;
+	protected StatefulKnowledgeSession ksession;
 
 	protected Drools5Driver() {
 	}
@@ -34,6 +34,12 @@ public class Drools5Driver extends EmfDriver {
 	public static Drools5Driver create() {
 		return new Drools5Driver();
 	}
+	
+	@Override
+	public void initialize() throws Exception {
+		super.initialize();
+		kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		ksession = kbase.newStatefulKnowledgeSession();	}
 	
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {

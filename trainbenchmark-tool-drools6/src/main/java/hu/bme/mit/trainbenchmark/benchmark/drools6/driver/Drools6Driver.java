@@ -26,10 +26,9 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
 public class Drools6Driver extends EmfDriver {
 
-	protected final KieServices kieServices = KieServices.Factory.get();
-	protected final KieFileSystem kfs = kieServices.newKieFileSystem();
-	protected KieContainer kContainer;
-	protected KieSession kieSession;
+	protected KieServices kieServices;
+	protected KieFileSystem kfs;
+	protected KieSession kSession; 
 
 	protected Drools6Driver() {
 	}
@@ -41,19 +40,22 @@ public class Drools6Driver extends EmfDriver {
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-
-		kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
-		kieSession = kContainer.newKieSession();
-
+		
+		kieServices = KieServices.Factory.get();
+		kfs = kieServices.newKieFileSystem();
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
 
+		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
+		kSession = kContainer.newKieSession();
+
+		
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
 			final EObject eObject = tIterator.next();
-			kieSession.insert(eObject);
+			kSession.insert(eObject);
 		}
 
 		final EContentAdapter adapter = new EContentAdapter() {
@@ -61,7 +63,7 @@ public class Drools6Driver extends EmfDriver {
 			public void notifyChanged(final Notification notification) {
 				super.notifyChanged(notification);
 				final EObject notifier = (EObject) notification.getNotifier();
-				final FactHandle notifierFH = kieSession.getFactHandle(notifier);
+				final FactHandle notifierFH = kSession.getFactHandle(notifier);
 				final int event = notification.getEventType();
 
 				switch (event) {
@@ -76,7 +78,7 @@ public class Drools6Driver extends EmfDriver {
 				case Notification.RESOLVE:
 				case Notification.UNSET:
 				case Notification.SET:
-					kieSession.update(notifierFH, notifier);
+					kSession.update(notifierFH, notifier);
 					break;
 				}
 			}
@@ -85,22 +87,22 @@ public class Drools6Driver extends EmfDriver {
 			protected void addAdapter(final Notifier notifier) {
 				super.addAdapter(notifier);
 
-				kieSession.insert(notifier);
+				kSession.insert(notifier);
 			}
 
 			@Override
 			protected void removeAdapter(final Notifier notifier) {
 				super.removeAdapter(notifier);
 
-				final FactHandle changedFactHandle = kieSession.getFactHandle(notifier);
-				kieSession.delete(changedFactHandle);
+				final FactHandle changedFactHandle = kSession.getFactHandle(notifier);
+				kSession.delete(changedFactHandle);
 			}
 		};
 		resource.eAdapters().add(adapter);
 	}
 
 	public KieSession getKsession() {
-		return kieSession;
+		return kSession;
 	}
 
 	public KieFileSystem getKfs() {
