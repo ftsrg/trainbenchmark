@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import hu.bme.mit.incqueryds.ConfigReader;
-import hu.bme.mit.incqueryds.WildcardInput;
+import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
@@ -32,7 +32,7 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 
 	private final TrainbenchmarkQuery queryEngine;
 
-	public IQDCoreQuery(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final WildcardInput input)
+	public IQDCoreQuery(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
 		super(driver, Optional.of(queryDirectory), query);
 		final String yamlPath = queryDirectory + query + driver.getVariant() + ".yaml";
@@ -41,13 +41,16 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 		driver.setQuery(queryEngine);
 	}
 	
-	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch> create(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final WildcardInput input)
+	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch>
+		create(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
 		return new IQDCoreQuery<TPatternMatch>(driver, queryDirectory, query, input);
 	}
 
 	@Override
 	public Collection<TPatternMatch> evaluate() {
+		driver.flushLastTransaction();
+
 		final List<IQDCoreMatch> matches = new ArrayList<>();
 
 		final Iterator<Vector<Object>> resultIterator = queryEngine.getResults().iterator();
