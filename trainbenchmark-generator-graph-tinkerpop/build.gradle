@@ -5,7 +5,7 @@ plugins {
 shadowJar {
 	classifier = 'fat'
 	manifest {
-		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.TinkerPopGraphGeneratorMain'
+		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.TinkerGraphGeneratorMain'
 	}
 }
 

@@ -5,7 +5,7 @@ import org.junit.BeforeClass;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class BaseGeneratorTest {
+public class GeneratorBaseTest {
 
 	protected static GeneratorConfig gc;
 
