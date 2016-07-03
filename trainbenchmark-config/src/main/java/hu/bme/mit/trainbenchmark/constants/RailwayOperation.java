@@ -1,6 +1,7 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum RailwayOperation {
+	ACTIVEROUTE("ActiveRoute"), //
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
 	CONNECTEDSEGMENTS_INJECT("ConnectedSegmentsInject"), //
 	CONNECTEDSEGMENTS_REPAIR("ConnectedSegmentsRepair"), //
