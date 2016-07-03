@@ -12,11 +12,14 @@ times <- rbindlist(l)
 times$Model = gsub("\\D+", "", times$Model)
 times$Model = as.numeric(times$Model)
 times$Time = times$Time / 10^9
+# make the phases a factor with a fixed set of values to help dcasting
+# (e.g. Batch measurements do not have Transformation and Recheck attributes, hence accessing the "Transformation" attribute would throw an error)
+times$Phase = factor(times$Phase, levels = c("Read", "Check", "Transformation", "Recheck"))
 
 times.wide = dcast(times,
                    Tool + Workload + Description + Model + Run ~ Phase,
                    value.var = "Time",
-                   drop = T,
+                   drop = F,
                    fun.aggregate = mean
 )
 # calculate aggregated values
