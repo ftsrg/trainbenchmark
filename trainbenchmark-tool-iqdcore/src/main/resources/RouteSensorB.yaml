@@ -21,7 +21,7 @@ nodes:
       secondarySelector: Vector(1)
       next: AntiJoin.primary
   - AntiJoin:
-      type: HashAntijoiner
+      type: HashLeftAntijoiner
       primarySelector: Vector(3, 2)
       secondarySelector: Vector(0, 1)
       next: Trim

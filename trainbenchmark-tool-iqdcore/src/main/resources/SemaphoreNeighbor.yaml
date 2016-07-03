@@ -55,7 +55,7 @@ nodes:
       inequals: Vector(6)
       next: AntiJ.primary
   - AntiJ:
-      type: HashAntijoiner
+      type: HashLeftAntijoiner
       primarySelector: Vector(2, 5)
       secondarySelector: Vector(1, 2)
       next: production

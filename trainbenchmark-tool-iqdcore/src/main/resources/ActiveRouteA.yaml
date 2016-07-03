@@ -40,7 +40,7 @@ nodes:
       secondarySelector: Vector(0)
       next: AntiJoin.secondary
   - AntiJoin:
-      type: HashAntijoiner
+      type: HashLeftAntijoiner
       primarySelector: Vector(0)
       secondarySelector: Vector(0)
       next: production
