@@ -10,26 +10,22 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.viatra.test;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.ViatraBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.test.ActiveRouteTest;
 
-public class ViatraTest extends BenchmarkBaseTest {
+public class IQDCoreActiveRouteTest extends ActiveRouteTest {
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
-		final ViatraBenchmarkConfigWrapper bcw = createViatraBenchmarkConfigWrapper(bc);
-		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bcw);
+		final int messageSize = 16;
+		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, "");
+		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
-	}
-
-	protected ViatraBenchmarkConfigWrapper createViatraBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
-		return new ViatraBenchmarkConfigWrapper(bc);
 	}
 
 }

@@ -9,26 +9,10 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public enum RailwayQuery {
-	ACTIVEROUTE("ActiveRoute"), //
-	CONNECTEDSEGMENTS("ConnectedSegments"), //
-	POSLENGTH("PosLength"), //
-	ROUTESENSOR("RouteSensor"), //
-	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
-	SWITCHMONITORED("SwitchMonitored"), //
-	SWITCHSET("SwitchSet"), //
-	;
+public interface ActiveRouteMatch {
 
-	private String name;
+	public Object getRoute();
 
-	RailwayQuery(final String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return name;
-	}
 }

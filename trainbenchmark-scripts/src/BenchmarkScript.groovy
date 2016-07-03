@@ -10,7 +10,7 @@ def minSize = 1
 def maxSize = 2
 def timeout = 900
 def runs = 1
-def queryTransformationCount = 1
+def queryTransformationCount = 0
 
 def scenarios = [
 	//	Scenario.BATCH,
@@ -22,27 +22,38 @@ for (scenario in scenarios) {
 	def scenarioString = scenario.toString().toLowerCase()
 	def messageSize = 2048
 
-	def operations1 = [ROUTESENSOR_REPAIR]
+	def operations1 = [ACTIVEROUTE]
 	for (variant in ["A", "B"]) {
 		for (size = minSize; size <= maxSize; size *= 2) {
 			def modelPath = "railway-${scenarioString}-${size}"
-			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
+			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "ActiveRoute")
 			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant)) == 143) {
 				break
 			}
 		}
 	}
-
-	def operations2 = [CONNECTEDSEGMENTS_REPAIR]
-	for (variant in ["A", "B", "C", "D"]) {
-		for (size = minSize; size <= maxSize; size *= 2) {
-			def modelPath = "railway-${scenarioString}-${size}"
-			def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "ConnectedSegments")
-			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, variant)) == 143) {
-				break
-			}
-		}
-	}
+	
+	//	def operations1 = [ROUTESENSOR_REPAIR]
+	//	for (variant in ["A", "B"]) {
+	//		for (size = minSize; size <= maxSize; size *= 2) {
+	//			def modelPath = "railway-${scenarioString}-${size}"
+	//			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
+	//			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant)) == 143) {
+	//				break
+	//			}
+	//		}
+	//	}
+	//
+	//	def operations2 = [CONNECTEDSEGMENTS_REPAIR]
+	//	for (variant in ["A", "B", "C", "D"]) {
+	//		for (size = minSize; size <= maxSize; size *= 2) {
+	//			def modelPath = "railway-${scenarioString}-${size}"
+	//			def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "ConnectedSegments")
+	//			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcConnectedSegments, messageSize, variant)) == 143) {
+	//				break
+	//			}
+	//		}
+	//	}
 }
 
 //		BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bc, false))

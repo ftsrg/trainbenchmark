@@ -5,6 +5,7 @@ input:
     exit: [ExitDefined.secondary]
     monitoredBy: [SensorConnects.primary, RightMostJoin.secondary]
     connectsTo: [SensorConnects.secondary]
+
 nodes:
   - EntryDefined:
       type: HashJoiner
@@ -58,9 +59,3 @@ nodes:
       primarySelector: Vector(2, 5)
       secondarySelector: Vector(1, 2)
       next: production
-
-
-
-
-
-
