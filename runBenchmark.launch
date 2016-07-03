@@ -6,7 +6,7 @@
 <booleanAttribute key="show_console_view" value="true"/>
 <booleanAttribute key="show_execution_view" value="true"/>
 <listAttribute key="tasks">
-<listEntry value="runBenchmark"/>
+<listEntry value="benchmark"/>
 </listAttribute>
 <stringAttribute key="working_dir" value="${workspace_loc:/trainbenchmark-scripts}"/>
 </launchConfiguration>
