@@ -11,6 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
+import com.google.common.base.Joiner;
+
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.immutable.Vector;
 
@@ -26,6 +28,8 @@ public abstract class IQDCoreMatch {
 
 	public static IQDCoreMatch createMatch(final RailwayQuery query, final Vector<Object> qs) {
 		switch (query) {
+		case ACTIVEROUTE:
+			return new IQDCoreActiveRouteMatch(qs);
 		case CONNECTEDSEGMENTS:
 			return new IQDCoreConnectedSegmentsMatch(qs);
 		case POSLENGTH:
@@ -41,6 +45,12 @@ public abstract class IQDCoreMatch {
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		Joiner joiner = Joiner.on(", ");
+		return "<" + joiner.join(toArray()) + ">";
 	}
 
 }

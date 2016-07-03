@@ -9,26 +9,30 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-public enum RailwayQuery {
-	ACTIVEROUTE("ActiveRoute"), //
-	CONNECTEDSEGMENTS("ConnectedSegments"), //
-	POSLENGTH("PosLength"), //
-	ROUTESENSOR("RouteSensor"), //
-	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
-	SWITCHMONITORED("SwitchMonitored"), //
-	SWITCHSET("SwitchSet"), //
-	;
+import hu.bme.mit.trainbenchmark.benchmark.matches.ActiveRouteMatch;
+import scala.collection.immutable.Vector;
 
-	private String name;
+public class IQDCoreActiveRouteMatch extends IQDCoreMatch implements ActiveRouteMatch {
 
-	RailwayQuery(final String name) {
-		this.name = name;
+	public IQDCoreActiveRouteMatch(final Vector<Object> qs) {
+		super(qs);
 	}
 
 	@Override
-	public String toString() {
-		return name;
+	public Long getRoute() {
+		return (Long) qs.apply(0);
 	}
+
+	@Override
+	public Long[] toArray() {
+		return new Long[] { getRoute() };
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
 }

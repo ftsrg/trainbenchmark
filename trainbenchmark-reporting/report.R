@@ -43,18 +43,18 @@ times.plot = melt(
 
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
 
-workloads = c("RouteSensor", "ConnectedSegments")
+workloads = c("RouteSensor", "ConnectedSegments", "ActiveRoute")
 
 for (workload in workloads) {
   print(workload)
   df = times.plot[times.plot$Workload == workload, ]
-
+  
   # do not visualize empty data sets
   if (nrow(df) == 0) {
     next
   }
 
-  p = ggplot(df) +
+  p = ggplot(na.omit(df)) +
     aes(x = as.factor(Model)) +
     labs(title = workload, x = "Model size\n#Triples", y = "Execution times [s]") +
     geom_point(aes(y = Time, col = Description, shape = Description), size = 2.0) +
