@@ -30,14 +30,14 @@ nodes:
       next: Trim
   - Trim:
       type: Trimmer
-      selectionVector: Vector(0, 2)
+      selectionVector: Vector(1)
       next: Join3.secondary
   - Join3:
       type: HashJoiner
       primaryLength: 2
       primarySelector: Vector(1)
-      secondaryLength: 2
-      secondarySelector: Vector(1)
+      secondaryLength: 1
+      secondarySelector: Vector(0)
       next: AntiJoin.secondary
   - AntiJoin:
       type: HashAntijoiner
