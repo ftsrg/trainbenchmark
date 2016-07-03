@@ -50,7 +50,7 @@ public abstract class IQDCoreMatch {
 	@Override
 	public String toString() {
 		Joiner joiner = Joiner.on(", ");
-		return "[" + joiner.join(toArray()) + "]";
+		return "<" + joiner.join(toArray()) + ">";
 	}
 
 }
