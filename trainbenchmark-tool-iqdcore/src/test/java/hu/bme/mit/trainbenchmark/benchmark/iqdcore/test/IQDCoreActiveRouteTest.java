@@ -12,17 +12,34 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test;
 
+import java.util.Arrays;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
+
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.ActiveRouteTest;
 
+@RunWith(Parameterized.class)
 public class IQDCoreActiveRouteTest extends ActiveRouteTest {
+
+	@Parameters
+	public static Iterable<? extends Object> data() {
+		return Arrays.asList("A", "B", "C");
+	}
+
+	@Parameter
+	public String variant;
 
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
 		final int messageSize = 16;
-		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, "");
+		System.out.println();
+		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, variant);
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

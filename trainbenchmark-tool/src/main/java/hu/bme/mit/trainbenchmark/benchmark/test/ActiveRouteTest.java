@@ -33,9 +33,10 @@ public abstract class ActiveRouteTest {
 		final String modelFilename = "railway-repair-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ACTIVEROUTE //
-				);
+		);
 		final String workload = "ActiveRouteTest";
-		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
+				workload);
 	}
 
 	@Test
