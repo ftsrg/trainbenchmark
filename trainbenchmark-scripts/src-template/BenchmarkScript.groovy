@@ -23,7 +23,7 @@ for (scenario in scenarios) {
 	def messageSize = 2048
 
 	def operations1 = [ACTIVEROUTE]
-	for (variant in ["A", "B", "C"]) {
+	for (variant in ["A", "B", "C", "D"]) {
 		for (size = minSize; size <= maxSize; size *= 2) {
 			def modelPath = "railway-${scenarioString}-${size}"
 			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "ActiveRoute")
