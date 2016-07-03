@@ -1,7 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.SesameBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;

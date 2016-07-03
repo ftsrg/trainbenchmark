@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sqlite.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.SQLiteBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;

@@ -5,9 +5,9 @@ import java.util.Comparator;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkBundle;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkBundle;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 
 public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
 

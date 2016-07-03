@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.executor;
+package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 
 import java.io.File;
 import java.io.IOException;

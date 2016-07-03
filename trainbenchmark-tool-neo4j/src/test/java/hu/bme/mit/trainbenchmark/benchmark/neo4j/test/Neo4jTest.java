@@ -13,9 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
 
 public abstract class Neo4jTest extends BenchmarkBaseTest {

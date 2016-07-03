@@ -13,9 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySqlBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
 
 public class MySqlTest extends BenchmarkBaseTest {

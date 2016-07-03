@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.runner;
+package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +33,11 @@ public class BenchmarkRunner {
 		final long timeoutInSeconds = bcw.getBenchmarkConfig().getTimeout();
 		final long timeoutInMilliseconds = timeoutInSeconds * 1000;
 		final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeoutInMilliseconds);
-		final Executor executor = new DefaultExecutor();
-		executor.setWatchdog(watchdog);
+		final Executor bundle = new DefaultExecutor();
+		bundle.setWatchdog(watchdog);
 
 		try {
-			final int exitValue = executor.execute(cmdLine);
+			final int exitValue = bundle.execute(cmdLine);
 			System.out.println();
 			return exitValue;
 		} catch (ExecuteException e) {

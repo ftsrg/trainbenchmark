@@ -13,9 +13,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
 
 public abstract class JenaTest extends BenchmarkBaseTest {

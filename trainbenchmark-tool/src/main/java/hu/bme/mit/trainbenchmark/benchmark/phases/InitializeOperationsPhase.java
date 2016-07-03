@@ -1,17 +1,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.phases;
 
-import hu.bme.mit.trainbenchmark.benchmark.executor.BenchmarkBundle;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkBundle;
 
 public class InitializeOperationsPhase extends Phase {
 
-	public InitializeOperationsPhase(final BenchmarkBundle<?, ?, ?> executor) {
-		super(executor);
+	public InitializeOperationsPhase(final BenchmarkBundle<?, ?, ?> bundle) {
+		super(bundle);
 	}
 
 	@Override
 	public void run() throws Exception {
-		executor.initializeDriver();
-		executor.initializeOperations();
+		bundle.initializeDriver();
+		bundle.initializeOperations();
 	}
 
 }
