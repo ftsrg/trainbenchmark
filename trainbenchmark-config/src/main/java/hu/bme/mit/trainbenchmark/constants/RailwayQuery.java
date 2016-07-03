@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum RailwayQuery {
+	ACTIVEROUTE("ActiveRoute"), //
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
 	POSLENGTH("PosLength"), //
 	ROUTESENSOR("RouteSensor"), //

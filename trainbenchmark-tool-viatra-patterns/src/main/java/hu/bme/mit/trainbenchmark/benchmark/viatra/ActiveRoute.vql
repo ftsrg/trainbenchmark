@@ -1,0 +1,18 @@
+package hu.bme.mit.trainbenchmark.benchmark.viatra
+
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
+
+pattern ActiveRoute(route) {
+	Route(route);
+	neg find misalignedSwitch(route, _, _);
+}
+
+pattern misalignedSwitch(route, swP, sw) {
+	Route.follows(route, swP);
+	SwitchPosition.target(swP, sw);
+
+	SwitchPosition.position(swP, position);
+	Switch.currentPosition(sw, currentPosition);
+
+	position != currentPosition;
+}
