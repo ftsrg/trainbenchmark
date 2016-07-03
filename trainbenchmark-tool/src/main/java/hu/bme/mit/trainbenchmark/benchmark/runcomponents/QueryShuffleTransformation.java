@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.executor;
+package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 
 import java.util.ArrayList;
 import java.util.Collection;

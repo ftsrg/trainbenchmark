@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.executor;
+package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -37,7 +37,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 	public void initializeDriver() throws Exception {
 		driver.initialize();
 	}
-	
+
 	public void read() throws Exception {
 		final String modelPath = bcw.getBenchmarkConfig().getModelPath() + driver.getPostfix();
 		driver.read(modelPath);
@@ -59,8 +59,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 	public void query() throws Exception {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
 			final Collection<?> matches = qst.evaluateQuery();
-			
-			System.out.println(matches);
+
 			benchmarkResults.registerMatches(qst.getQuery().getQuery(), matches.size());
 		}
 	}
