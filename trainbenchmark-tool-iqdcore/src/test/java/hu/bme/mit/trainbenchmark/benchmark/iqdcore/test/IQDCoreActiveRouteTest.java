@@ -29,7 +29,7 @@ public class IQDCoreActiveRouteTest extends ActiveRouteTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B", "C");
+		return Arrays.asList("A", "B", "C", "D");
 	}
 
 	@Parameter
