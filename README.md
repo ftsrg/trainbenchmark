@@ -35,12 +35,14 @@ The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linu
 * Initialization
     * [`install-jdk.sh`](scripts/install-jdk.sh): installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
     * [`install-gradle.sh`](scripts/install-maven.sh): installs Gradle.
+    * [`gradle initScript`](trainbenchmark-scripts/build.gradle): intializes the Groovy scripts for the [generate](trainbenchmark-scripts/src-template/GeneratorScript.groovy) and thet [benchmark](trainbenchmark-scripts/src-template/BenchmarkScript.groovy) goals.
 
 Provided that you start with a fresh Ubuntu server installation, you can run the provided install scripts like this:
 
 ```bash
 scripts/install-jdk.sh && \
-scripts/install-gradle.sh
+scripts/install-gradle.sh ** \
+gradle initScripts
 ```
 
 #### Optional dependencies

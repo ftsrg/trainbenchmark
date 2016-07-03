@@ -31,6 +31,14 @@ sourceSets {
 	}
 }
 
+task initScripts() << {
+	copy {
+		from 'src-template'
+		into 'src'
+		include '*.groovy'
+	}
+}
+
 task benchmark(dependsOn: 'classes', type: JavaExec) {
 	main = 'BenchmarkScript'
 	classpath = sourceSets.main.runtimeClasspath
