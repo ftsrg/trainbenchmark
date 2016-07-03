@@ -22,18 +22,22 @@ nodes:
       primarySelector: Vector(0)
       secondaryLength: 3
       secondarySelector: Vector(1)
+      next: Ineq
+  - Ineq:
+      type: Inequality
+      nodeIndex: 1
+      inequals: Vector(3)
+      next: Trim
+  - Trim:
+      type: Trimmer
+      selectionVector: Vector(1)
       next: Join3.secondary
   - Join3:
       type: HashJoiner
       primaryLength: 2
       primarySelector: Vector(1)
-      secondaryLength: 4
-      secondarySelector: Vector(2)
-      next: Ineq
-  - Ineq:
-      type: Inequality
-      nodeIndex: 3
-      inequals: Vector(4)
+      secondaryLength: 1
+      secondarySelector: Vector(0)
       next: AntiJoin.secondary
   - AntiJoin:
       type: HashAntijoiner
