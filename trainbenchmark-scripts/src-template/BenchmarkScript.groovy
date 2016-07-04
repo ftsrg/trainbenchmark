@@ -24,7 +24,7 @@ def scenarios = [
 //	def messageSize = 2048
 //
 //	def operations1 = [ACTIVEROUTE]
-//	for (variant in ["A", "B", "C", "D"]) {
+//	for (variant in 'A'..'E') {
 //		for (size = minSize; size <= maxSize; size *= 2) {
 //			def modelPath = "railway-${scenarioString}-${size}"
 //			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "ActiveRoute")
@@ -35,7 +35,7 @@ def scenarios = [
 //	}
 	
 	//	def operations1 = [ROUTESENSOR_REPAIR]
-	//	for (variant in ["A", "B"]) {
+	//	for (variant in 'A'..'B') {
 	//		for (size = minSize; size <= maxSize; size *= 2) {
 	//			def modelPath = "railway-${scenarioString}-${size}"
 	//			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations1, "RouteSensor")
@@ -46,7 +46,7 @@ def scenarios = [
 	//	}
 	//
 	//	def operations2 = [CONNECTEDSEGMENTS_REPAIR]
-	//	for (variant in ["A", "B", "C", "D"]) {
+	//	for (variant in 'A'..'D') {
 	//		for (size = minSize; size <= maxSize; size *= 2) {
 	//			def modelPath = "railway-${scenarioString}-${size}"
 	//			def bcConnectedSegments = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "ConnectedSegments")
