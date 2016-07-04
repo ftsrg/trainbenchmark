@@ -1,7 +1,7 @@
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
+import java.io.InputStreamReader;
+import java.net.*;
 import java.util.Enumeration;
 
 import in.ashwanthkumar.slack.webhook.Slack;
@@ -23,20 +23,14 @@ public class BenchmarkReporter {
 		return "http://" + getIpAddress() + ":8080/diagrams";
 	}
 
-	static String getIpAddress() throws SocketException {
-		System.setProperty("java.net.preferIPv4Stack", "true");
-		Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
-		for (; n.hasMoreElements();) {
-			NetworkInterface e = n.nextElement();
-			if ("eth0".equals(e.getName())) {
-				Enumeration<InetAddress> a = e.getInetAddresses();
-				for (; a.hasMoreElements();) {
-					InetAddress addr = a.nextElement();
-					return addr.getHostAddress();
-				}
-			}
+	static String getIpAddress(){
+		String url = "http://bot.whatismyipaddress.com";
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()))){
+			return reader.readLine().trim();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "";
 		}
-		throw new RuntimeException("Could not retrieve IP address");
 	}
-
 }
+	
