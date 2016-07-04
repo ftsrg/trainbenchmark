@@ -1,0 +1,27 @@
+input:
+  edges:
+    follows: [Join1.primary]
+    target: [Join2.secondary]
+    monitoredBy: [Join1.secondary]
+    gathers: [AntiJoin.secondary]
+
+nodes:
+  - Join1:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector()
+      secondaryLength: 2
+      secondarySelector: Vector()
+      next: AntiJoin.primary
+  - AntiJoin:
+      type: HashLeftAntijoiner
+      primarySelector: Vector(0, 3)
+      secondarySelector: Vector(0, 1)
+      next: Join2.primary
+  - Join2:
+      type: HashJoiner
+      primaryLength: 4
+      primarySelector: Vector(1, 2)
+      secondaryLength: 2
+      secondarySelector: Vector(0, 1)
+      next: production
