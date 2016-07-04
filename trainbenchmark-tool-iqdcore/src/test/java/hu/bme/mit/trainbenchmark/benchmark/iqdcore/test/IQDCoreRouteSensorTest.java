@@ -22,14 +22,14 @@ import org.junit.runners.Parameterized.Parameters;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.ActiveRouteTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.RouteSensorTest;
 
 @RunWith(Parameterized.class)
-public class IQDCoreActiveRouteTest extends ActiveRouteTest {
+public class IQDCoreRouteSensorTest extends RouteSensorTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B", "C", "D", "E");
+		return Arrays.asList("A", "B", "C");
 	}
 
 	@Parameter
