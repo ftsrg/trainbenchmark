@@ -1,0 +1,46 @@
+input:
+  types:
+    Route: [AntiJoin.secondary]
+  edges:
+    follows: [Join3.primary]
+    target: [Join1.primary]
+  nodes:
+    currentPosition: [Join2.primary]
+    position: [Join1.secondary]
+
+nodes:
+  - Join1:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: Join2.secondary
+  - Join2:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 3
+      secondarySelector: Vector(1)
+      next: Join3.secondary
+  - Join3:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(1)
+      secondaryLength: 4
+      secondarySelector: Vector(2)
+      next: Ineq
+  - Ineq:
+      type: Inequality
+      nodeIndex: 3
+      inequals: Vector(4)
+      next: AntiJoin.primary
+  - AntiJoin:
+      type: HashRightAntijoiner
+      primarySelector: Vector(0)
+      secondarySelector: Vector(0)
+      next: Trim
+  - Trim:
+      type: Trimmer
+      selectionVector: Vector(0)
+      next: production
