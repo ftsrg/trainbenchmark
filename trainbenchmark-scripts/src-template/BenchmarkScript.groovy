@@ -60,7 +60,7 @@ for (scenario in scenarios) {
 	for (variant in 'A'..'B') {
 		for (size = minSize; size <= maxSize; size *= 2) {
 			def modelPath = "railway-${scenarioString}-${size}"
-			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations4, "ActiveRoute")
+			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations4, "SemaphoreNeighbor")
 			if (BenchmarkRunner.run(new IQDBenchmarkConfigWrapper(bcRouteSensor, messageSize, variant)) == 143) {
 				break
 			}
