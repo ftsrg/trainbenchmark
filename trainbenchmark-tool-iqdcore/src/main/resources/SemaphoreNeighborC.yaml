@@ -51,4 +51,8 @@ nodes:
       type: HashLeftAntijoiner
       primarySelector: Vector(6, 2)
       secondarySelector: Vector(0, 1)
+      next: [Trimmer]
+  - Trimmer:
+      type: Trimmer
+      selectionVector: Vector(2, 0, 6, 1, 5, 3, 4)
       next: [production]
