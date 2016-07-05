@@ -29,10 +29,10 @@ public abstract class SemaphoreNeighborTest {
 		final String xmx = "1G";
 		final long timeout = 120;
 		final int runs = 2;
-		final int queryTransformationCount = 0;
+		final int queryTransformationCount = 1;
 		final String modelFilename = "railway-repair-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
-				RailwayOperation.SEMAPHORENEIGHBOR //
+				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
 		);
 		final String workload = "SemaphoreNeighborTest";
 		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
@@ -48,6 +48,7 @@ public abstract class SemaphoreNeighborTest {
 
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(3));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(0));
 	}
 
 	protected abstract BenchmarkResult runTest() throws Exception;
