@@ -1,0 +1,54 @@
+input:
+  edges:
+    connectsTo: [Join1.secondary]
+    monitoredBy: [Join1.primary, Join2.secondary]
+    exit: [Join3.secondary]
+    gathers: [Join5.secondary, Join3.primary]
+    entry: [Join6.secondary]
+
+nodes:
+  - Join1:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [Join2.primary]
+  - Join2:
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(2)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [Join4.secondary]
+  - Join3:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [Join4.primary]
+  - Join4:
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(1)
+      secondaryLength: 4
+      secondarySelector: Vector(1)
+      next: [Join5.primary]
+  - Join5:
+      type: HashJoiner
+      primaryLength: 6
+      primarySelector: Vector(5)
+      secondaryLength: 2
+      secondarySelector: Vector(1)
+      next: [Inequality]
+  - Inequality:
+      type: Inequality
+      nodeIndex: 0
+      inequals: Vector(6)
+      next: [AntiJoin.primary]
+  - AntiJoin:
+      type: HashLeftAntijoiner
+      primarySelector: Vector(2, 5)
+      secondarySelector: Vector(1, 2)
+      next: [production]
