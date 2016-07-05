@@ -56,7 +56,7 @@ for (scenario in scenarios) {
 	//		}
 	//	}
 	//
-	//	def operations4 = [SEMAPHORENEIGHBOR]
+	//	def operations4 = [SEMAPHORENEIGHBOR_REPAIR]
 	//	for (variant in 'A'..'E') {
 	//		for (size = minSize; size <= maxSize; size *= 2) {
 	//			def modelPath = "railway-${scenarioString}-${size}"
