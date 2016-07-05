@@ -3,8 +3,8 @@ input:
     connectsTo: [Join1.secondary]
     monitoredBy: [Join1.primary, Join2.secondary]
     exit: [Join3.secondary]
-    gathers: [Join6.secondary, Join5.secondary, Join3.primary]
-    entry: [Join6.primary]
+    gathers: [Join3.primary, Join5.secondary]
+    entry: [AntiJoin.secondary]
 
 nodes:
   - Join1:
@@ -47,15 +47,8 @@ nodes:
       nodeIndex: 0
       inequals: Vector(6)
       next: [AntiJoin.primary]
-  - Join6:
-      type: HashJoiner
-      primaryLength: 2
-      primarySelector: Vector(0)
-      secondaryLength: 2
-      secondarySelector: Vector(0)
-      next: [AntiJoin.secondary]
   - AntiJoin:
       type: HashLeftAntijoiner
-      primarySelector: Vector(2, 5)
-      secondarySelector: Vector(1, 2)
+      primarySelector: Vector(6, 2)
+      secondarySelector: Vector(0, 1)
       next: [production]
