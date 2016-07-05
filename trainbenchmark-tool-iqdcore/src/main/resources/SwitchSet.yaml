@@ -15,14 +15,14 @@ nodes:
   - LeftTrimmer:
       type: Trimmer
       selectionVector: Vector(0)
-      next: [Entry]_SemaphoreJoin.primary
+      next: [Entry_SemaphoreJoin.primary]
   - Entry_SemaphoreJoin:
       type: HashJoiner
       primaryLength: 1
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(1)
-      next: [Follows]_EntryJoin.primary
+      next: [Follows_EntryJoin.primary]
   - Follows_EntryJoin:
       type: HashJoiner
       primaryLength: 2
@@ -37,7 +37,7 @@ nodes:
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: [SwitchPosition]_CurrentPositionJoin.primary
+      next: [SwitchPosition_CurrentPositionJoin.primary]
   - SwitchPosition_CurrentPositionJoin:
       type: HashJoiner
       primaryLength: 2
