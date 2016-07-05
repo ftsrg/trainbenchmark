@@ -12,20 +12,20 @@ nodes:
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(1)
-      next: SensorJoin.primary
+      next: [SensorJoin.primary]
   - SensorJoin:
       type: HashJoiner
       primaryLength: 3
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: AntiJoin.primary
+      next: [AntiJoin.primary]
   - AntiJoin:
       type: HashLeftAntijoiner
       primarySelector: Vector(2, 3)
       secondarySelector: Vector(0, 1)
-      next: Trim
+      next: [Trim]
   - Trim:
       type: Trimmer
       selectionVector: Vector(1, 0, 2, 3)
-      next: production
+      next: [production]

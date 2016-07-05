@@ -11,25 +11,25 @@ nodes:
   - SigChecker:
       type: Checker
       condition: '(cs) => cs(1) == "SIGNAL_GO"'
-      next: LeftTrimmer
+      next: [LeftTrimmer]
   - LeftTrimmer:
       type: Trimmer
       selectionVector: Vector(0)
-      next: Entry_SemaphoreJoin.primary
+      next: [Entry]_SemaphoreJoin.primary
   - Entry_SemaphoreJoin:
       type: HashJoiner
       primaryLength: 1
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(1)
-      next: Follows_EntryJoin.primary
+      next: [Follows]_EntryJoin.primary
   - Follows_EntryJoin:
       type: HashJoiner
       primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: FinalJoin.primary
+      next: [FinalJoin.primary]
 
   - Switch_SwitchPositionJoin:
       type: HashJoiner
@@ -37,19 +37,19 @@ nodes:
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: SwitchPosition_CurrentPositionJoin.primary
+      next: [SwitchPosition]_CurrentPositionJoin.primary
   - SwitchPosition_CurrentPositionJoin:
       type: HashJoiner
       primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: Ineq
+      next: [Ineq]
   - Ineq:
       type: Inequality
       nodeIndex: 2
       inequals: Vector(3)
-      next: FinalJoin.secondary
+      next: [FinalJoin.secondary]
 
   - FinalJoin:
       type: HashJoiner
@@ -57,4 +57,4 @@ nodes:
       primarySelector: Vector(2)
       secondaryLength: 4
       secondarySelector: Vector(0)
-      next: production
+      next: [production]
