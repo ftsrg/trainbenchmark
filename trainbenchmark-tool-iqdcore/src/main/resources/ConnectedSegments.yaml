@@ -12,28 +12,28 @@ nodes:
       primarySelector: Vector(0)
       secondaryLength: 1
       secondarySelector: Vector(0)
-      next: [Join1]_2.primary
+      next: [Join1_2.primary]
   - Join1_2:
       type: HashJoiner
       primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: [Join12]_34.primary
+      next: [Join12_34.primary]
   - Join3_4:
       type: HashJoiner
       primaryLength: 2
       primarySelector: Vector(1)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: [Join12]_34.secondary
+      next: [Join12_34.secondary]
   - Join12_34:
       type: HashJoiner
       primaryLength: 3
       primarySelector: Vector(2)
       secondaryLength: 3
       secondarySelector: Vector(0)
-      next: [Join1234]_5.primary
+      next: [Join1234_5.primary]
   - Join1234_5:
       type: HashJoiner
       primaryLength: 5
