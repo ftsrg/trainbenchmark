@@ -18,26 +18,26 @@ public class IQDCoreSemaphoreNeighborMatch extends IQDCoreMatch implements Semap
 
 	public IQDCoreSemaphoreNeighborMatch(final Vector<Object> qs) { super(qs); }
 
-	@Override
+    @Override
+	public Long getSemaphore() { return (Long) qs.apply(2);	}
+
+    @Override
 	public Long getRoute1() { return (Long) qs.apply(0); }
+
+    @Override
+	public Long getRoute2() { return (Long) qs.apply(6); }
 
     @Override
     public Long getSensor1() { return (Long) qs.apply(1); }
 
     @Override
-	public Long getSemaphore() { return (Long) qs.apply(2);	}
+    public Long getSensor2() { return (Long) qs.apply(5); }
 
     @Override
     public Long getTe1() { return (Long) qs.apply(3); }
 
     @Override
     public Long getTe2() { return (Long) qs.apply(4); }
-
-    @Override
-    public Long getSensor2() { return (Long) qs.apply(5); }
-
-    @Override
-	public Long getRoute2() { return (Long) qs.apply(6); }
 
 	@Override
 	public Long[] toArray() {

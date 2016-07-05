@@ -1,0 +1,61 @@
+input:
+  edges:
+    entry: [EntryDefined.primary]
+    gathers: [EntryDefined.secondary, FinalJoin.secondary, ExitDefined.primary]
+    exit: [ExitDefined.secondary]
+    monitoredBy: [SensorConnects.primary, RightMostJoin.secondary]
+    connectsTo: [SensorConnects.secondary]
+
+nodes:
+  - EntryDefined:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [AntiJoin.secondary]
+  - ExitDefined:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [SecondToLastJoin.primary]
+  - SensorConnects:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [RightMostJoin.primary]
+  - RightMostJoin:
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(2)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [SecondToLastJoin.secondary]
+  - SecondToLastJoin:
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(1)
+      secondaryLength: 4
+      secondarySelector: Vector(1)
+      next: [FinalJoin.primary]
+  - FinalJoin:
+      type: HashJoiner
+      primaryLength: 6
+      primarySelector: Vector(5)
+      secondaryLength: 2
+      secondarySelector: Vector(1)
+      next: [Ineq]
+  - Ineq:
+      type: Inequality
+      nodeIndex: 0
+      inequals: Vector(6)
+      next: [AntiJoin.primary]
+  - AntiJoin:
+      type: HashLeftAntijoiner
+      primarySelector: Vector(2, 5)
+      secondarySelector: Vector(1, 2)
+      next: [production]

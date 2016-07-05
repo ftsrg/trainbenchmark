@@ -13,7 +13,7 @@ nodes:
       primarySelector: Vector(0)
       secondaryLength: 2
       secondarySelector: Vector(0)
-      next: [AntiJ.secondary]
+      next: [AntiJoin.secondary]
   - ExitDefined:
       type: HashJoiner
       primaryLength: 2
@@ -53,8 +53,8 @@ nodes:
       type: Inequality
       nodeIndex: 0
       inequals: Vector(6)
-      next: [AntiJ.primary]
-  - AntiJ:
+      next: [AntiJoin.primary]
+  - AntiJoin:
       type: HashLeftAntijoiner
       primarySelector: Vector(2, 5)
       secondarySelector: Vector(1, 2)
