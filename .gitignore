@@ -50,3 +50,4 @@ gradle/
 gradlew
 gradlew.bat
 
+*.log
