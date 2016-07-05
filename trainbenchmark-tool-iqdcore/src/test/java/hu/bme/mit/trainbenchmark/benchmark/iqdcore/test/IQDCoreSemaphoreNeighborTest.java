@@ -29,7 +29,7 @@ public class IQDCoreSemaphoreNeighborTest extends SemaphoreNeighborTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B");
+		return Arrays.asList("D", "A", "B", "C");
 	}
 
 	@Parameter

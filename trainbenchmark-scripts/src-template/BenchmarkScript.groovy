@@ -57,7 +57,7 @@ for (scenario in scenarios) {
 	//	}
 
 	def operations4 = [SEMAPHORENEIGHBOR]
-	for (variant in 'A'..'B') {
+	for (variant in 'A'..'C') {
 		for (size = minSize; size <= maxSize; size *= 2) {
 			def modelPath = "railway-${scenarioString}-${size}"
 			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations4, "SemaphoreNeighbor")
