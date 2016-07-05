@@ -50,4 +50,4 @@ gradle/
 gradlew
 gradlew.bat
 
-*.log
+hs_err_*.log
