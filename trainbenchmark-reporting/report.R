@@ -46,7 +46,7 @@ times.plot = melt(
 
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
 
-workloads = c("RouteSensor", "ConnectedSegments", "ActiveRoute")
+workloads = c("RouteSensor", "ConnectedSegments", "ActiveRoute", "SemaphoreNeighbor")
 
 for (workload in workloads) {
   print(workload)
