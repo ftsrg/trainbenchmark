@@ -1,61 +1,47 @@
 input:
   edges:
-    entry: [EntryDefined.primary]
-    gathers: [EntryDefined.secondary, FinalJoin.secondary, ExitDefined.primary]
-    exit: [ExitDefined.secondary]
-    monitoredBy: [SensorConnects.primary, RightMostJoin.secondary]
-    connectsTo: [SensorConnects.secondary]
+    connectsTo: [Join2.primary]
+    monitoredBy: [Join1.primary]
+    exit: [Join4.secondary]
+    gathers: [Join1.secondary]
+    entry: [AntiJoin.secondary]
 
 nodes:
-  - EntryDefined:
+  - Join1:
       type: HashJoiner
       primaryLength: 2
-      primarySelector: Vector(0)
-      secondaryLength: 2
-      secondarySelector: Vector(0)
-      next: [AntiJoin.secondary]
-  - ExitDefined:
-      type: HashJoiner
-      primaryLength: 2
-      primarySelector: Vector(0)
-      secondaryLength: 2
-      secondarySelector: Vector(0)
-      next: [SecondToLastJoin.primary]
-  - SensorConnects:
-      type: HashJoiner
-      primaryLength: 2
-      primarySelector: Vector(0)
-      secondaryLength: 2
-      secondarySelector: Vector(0)
-      next: [RightMostJoin.primary]
-  - RightMostJoin:
-      type: HashJoiner
-      primaryLength: 3
-      primarySelector: Vector(2)
-      secondaryLength: 2
-      secondarySelector: Vector(0)
-      next: [SecondToLastJoin.secondary]
-  - SecondToLastJoin:
-      type: HashJoiner
-      primaryLength: 3
       primarySelector: Vector(1)
-      secondaryLength: 4
+      secondaryLength: 2
       secondarySelector: Vector(1)
-      next: [FinalJoin.primary]
-  - FinalJoin:
+      next: [Join2.secondary, Join3.secondary]
+  - Join2:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 3
+      secondarySelector: Vector(0)
+      next: [Join3.primary]
+  - Join3:
+      type: HashJoiner
+      primaryLength: 4
+      primarySelector: Vector(1)
+      secondaryLength: 3
+      secondarySelector: Vector(0)
+      next: [Inequality]
+  - Inequality:
+      type: Inequality
+      nodeIndex: 3
+      inequals: Vector(5)
+      next: [Join4.primary]
+  - Join4:
       type: HashJoiner
       primaryLength: 6
-      primarySelector: Vector(5)
+      primarySelector: Vector(3)
       secondaryLength: 2
-      secondarySelector: Vector(1)
-      next: [Ineq]
-  - Ineq:
-      type: Inequality
-      nodeIndex: 0
-      inequals: Vector(6)
+      secondarySelector: Vector(0)
       next: [AntiJoin.primary]
   - AntiJoin:
       type: HashLeftAntijoiner
-      primarySelector: Vector(2, 5)
-      secondarySelector: Vector(1, 2)
+      primarySelector: Vector(5, 6)
+      secondarySelector: Vector(0, 1)
       next: [production]
