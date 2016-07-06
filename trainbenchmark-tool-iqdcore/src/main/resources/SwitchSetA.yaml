@@ -1,0 +1,58 @@
+input:
+  edges:
+    signal: [SigChecker]
+    entry: [Join1.secondary]
+    follows: [Join2.secondary]
+    target: [Join3.primary]
+    position: [Join3.secondary]
+    currentPosition: [Join4.secondary]
+
+nodes:
+  - SigChecker:
+      type: Checker
+      condition: '(cs) => cs(1) == "SIGNAL_GO"'
+      next: [LeftTrimmer]
+  - LeftTrimmer:
+      type: Trimmer
+      selectionVector: Vector(0)
+      next: [Join1.primary]
+  - Join1:
+      type: HashJoiner
+      primaryLength: 1
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(1)
+      next: [Join2.primary]
+  - Join2:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(1)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [Join5.primary]
+  - Join3:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(0)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [Join4.primary]
+  - Join4:
+      type: HashJoiner
+      primaryLength: 2
+      primarySelector: Vector(1)
+      secondaryLength: 2
+      secondarySelector: Vector(0)
+      next: [Inequality]
+  - Inequality:
+      type: Inequality
+      nodeIndex: 2
+      inequals: Vector(3)
+      next: [Join5.secondary]
+  - Join5:
+      type: HashJoiner
+      primaryLength: 3
+      primarySelector: Vector(2)
+      secondaryLength: 4
+      secondarySelector: Vector(0)
+      next: [production]
