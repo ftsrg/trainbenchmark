@@ -154,21 +154,16 @@ process.memories = function(results) {
 
 yaxis = function() {
   # y axis labels
-  longticks = c(F, F, F, F, F, F, F, F, T)
+  longticks = c(F, F, F, T, F, F, F, F, T)
   shortticks = 2:10
   range = -6:4
   
   ooms = 10^range
   
   ybreaks = as.vector(shortticks %o% ooms)
-
-  emptylabels = rep(c(""), each=8)
-  longticklabels = paste("1e", range, sep="")
+  ylabels = as.character(ybreaks * longticks)
+  ylabels = gsub("^0$", "", labels)
   
-  ylabels = c()
-  for (longticklabel in longticklabels) {
-    ylabels = c(ylabels, emptylabels, longticklabel)
-  }
   list(ybreaks = ybreaks, ylabels = ylabels)
 }
 
