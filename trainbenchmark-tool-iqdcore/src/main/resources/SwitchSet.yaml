@@ -30,7 +30,6 @@ nodes:
       secondaryLength: 2
       secondarySelector: Vector(0)
       next: [FinalJoin.primary]
-
   - Switch_SwitchPositionJoin:
       type: HashJoiner
       primaryLength: 2
@@ -50,7 +49,6 @@ nodes:
       nodeIndex: 2
       inequals: Vector(3)
       next: [FinalJoin.secondary]
-
   - FinalJoin:
       type: HashJoiner
       primaryLength: 3
