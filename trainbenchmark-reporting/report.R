@@ -4,6 +4,8 @@ library(plyr)
 library(ggplot2)
 library(ggrepel)
 
+source('util.R')
+
 tsvs <- list.files("../results/", pattern = "times-.*\\.csv", full.names = T, recursive = T)
 l <- lapply(tsvs, read.csv)
 times <- rbindlist(l)
@@ -46,7 +48,8 @@ times.plot = melt(
 
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
 
-workloads = c("RouteSensor", "ConnectedSegments", "ActiveRoute", "SemaphoreNeighbor")
+#workloads = c("RouteSensor", "ConnectedSegments", "ActiveRoute", "SemaphoreNeighbor")
+workloads = c("RouteSensor")
 
 for (workload in workloads) {
   print(workload)
@@ -57,14 +60,27 @@ for (workload in workloads) {
     next
   }
 
+  # x axis labels
+  xbreaks = unique(df$Model)
+  xlabels = paste(xbreaks, "\n", sep = "")
+
+  # y axis labels
+  yaxis = yaxis()
+  ybreaks = yaxis$ybreaks
+  ylabels = yaxis$ylabels
+
   p = ggplot(na.omit(df)) +
     aes(x = as.factor(Model)) +
     labs(title = workload, x = "Model size\n#Triples", y = "Execution times [s]") +
     geom_point(aes(y = Time, col = Description, shape = Description), size = 2.0) +
     geom_line(aes(y = Time, col = Description, group = Description), size = 0.5) +
-    scale_y_log10() + #breaks = ybreaks, labels = ylabels) +
-    facet_wrap(~ Phase, ncol = 2, scale = "free_y")
+    scale_x_discrete(breaks = xbreaks, labels = xlabels) +
+    scale_y_log10(breaks = ybreaks, labels = ylabels) +
+    facet_wrap(~ Phase, ncol = 2, scale = "free_y") +
+    theme_bw() +
+    theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom")
   print(p)
   
   ggsave(plot = p, filename = paste("../diagrams/", workload, ".pdf", sep=""))
 }
+
