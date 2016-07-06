@@ -68,7 +68,7 @@ for (scenario in scenarios) {
 	//	}
 	//
 	//	def operations5 = [SWITCHSET_REPAIR]
-	//	for (variant in 'A'..'E') {
+	//	for (variant in 'A'..'B') {
 	//		for (size = minSize; size <= maxSize; size *= 2) {
 	//			def modelPath = "railway-${scenarioString}-${size}"
 	//			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations5, "SwitchSet")
