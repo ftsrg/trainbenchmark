@@ -6,6 +6,8 @@ library(ggrepel)
 
 source('util.R')
 
+options(scipen=999)
+
 tsvs <- list.files("../results/", pattern = "times-.*\\.csv", full.names = T, recursive = T)
 l <- lapply(tsvs, read.csv)
 times <- rbindlist(l)
