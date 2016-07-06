@@ -206,27 +206,27 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
     labs(title = paste(title, sep = ""), x = "Model size\n#Triples", y = ycaption) +
     geom_point(aes_string(y = metric, col = Tool, shape = Tool), size = 2.0) +
     geom_line(aes_string(y = metric, col = Tool, group = Tool), size = 0.5)
-  
+
   if (!is.null(toolnames)) {
     p = p + geom_label_repel(data = toolnames, aes_string(y = metric, label = "Tool",  col = "Tool"), size = 1.6, show.legend = F, label.padding = unit(0.12, "lines"))
   }
-  
+
   p = p +
     scale_shape_manual(values = seq(0,24)) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels)
-  
+
   if (!is.null(facet)) {
     facet = as.formula(paste("~", facet))
     p = p + facet_wrap(facet, ncol = facet_cols, scale = scale)
   }
-    
+
   p = p +
     theme_bw() +
     theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom") +
     guides(shape = guide_legend(ncol = legend_cols))
   print(p)
-  
+
   ggsave(file = paste("../diagrams/", filename, ".pdf", sep = ""), width = width, height = height, units = "mm")
 }
 
