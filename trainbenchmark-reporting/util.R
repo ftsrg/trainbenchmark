@@ -153,6 +153,8 @@ process.memories = function(results) {
 ####################################################################################################
 
 yaxis = function() {
+  options(scipen=999)
+  
   # y axis labels
   longticks = c(F, F, F, T, F, F, F, F, T)
   shortticks = 2:10
