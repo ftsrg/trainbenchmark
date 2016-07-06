@@ -162,7 +162,7 @@ yaxis = function() {
   
   ybreaks = as.vector(shortticks %o% ooms)
   ylabels = as.character(ybreaks * longticks)
-  ylabels = gsub("^0$", "", labels)
+  ylabels = gsub("^0$", "", ylabels)
   
   list(ybreaks = ybreaks, ylabels = ylabels)
 }
