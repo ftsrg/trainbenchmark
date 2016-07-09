@@ -4,7 +4,20 @@ library(plyr)
 library(ggplot2)
 library(ggrepel)
 
-source('util.R')
+myyaxis = function() {
+  # y axis labels
+  longticks = c(F, F, F, T, F, F, F, F, T)
+  shortticks = 2:10
+  range = -6:4
+  
+  ooms = 10^range
+  
+  ybreaks = as.vector(shortticks %o% ooms)
+  ylabels = as.character(ybreaks * longticks)
+  ylabels = gsub("^0$", "", ylabels)
+  
+  list(ybreaks = ybreaks, ylabels = ylabels)
+}
 
 options(scipen=999)
 
@@ -48,10 +61,10 @@ times.plot = melt(
   value.name = "Time"
 )
 
-times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
+#times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
 
 #workloads = c("RouteSensor", "ConnectedSegments", "ActiveRoute", "SemaphoreNeighbor")
-workloads = c("RouteSensor")
+workloads = c("RouteSensor", "SemaphoreNeighbor")
 
 for (workload in workloads) {
   print(workload)
@@ -67,7 +80,7 @@ for (workload in workloads) {
   xlabels = paste(xbreaks, "\n", sep = "")
 
   # y axis labels
-  yaxis = yaxis()
+  yaxis = myyaxis()
   ybreaks = yaxis$ybreaks
   ylabels = yaxis$ylabels
 
@@ -78,11 +91,10 @@ for (workload in workloads) {
     geom_line(aes(y = Time, col = Description, group = Description), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(~ Phase, ncol = 2, scale = "free_y") +
+    facet_wrap(~ Phase, ncol = 3, scale = "free_y") +
     theme_bw() +
     theme(legend.key = element_blank(), legend.title = element_blank(), legend.position = "bottom")
   print(p)
   
   ggsave(plot = p, filename = paste("../diagrams/", workload, ".pdf", sep=""))
 }
-
