@@ -35,7 +35,7 @@ for (scenario in scenarios) {
 	//	}
 	//
 	//	def operations2 = [ROUTESENSOR_REPAIR]
-	//	for (variant in 'A'..'B') {
+	//	for (variant in 'A'..'C') {
 	//		for (size = minSize; size <= maxSize; size *= 2) {
 	//			def modelPath = "railway-${scenarioString}-${size}"
 	//			def bcRouteSensor = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelPath, operations2, "RouteSensor")
