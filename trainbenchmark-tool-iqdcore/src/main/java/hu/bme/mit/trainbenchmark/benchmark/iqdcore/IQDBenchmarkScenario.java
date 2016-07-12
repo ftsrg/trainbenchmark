@@ -11,10 +11,8 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations.IQDModelOperationF
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
-/**
- * Created by wafle on 6/15/16.
- */
 public class IQDBenchmarkScenario extends BenchmarkScenario<IQDCoreMatch, IQDCoreDriver, IQDBenchmarkConfigWrapper> {
+
 	public IQDBenchmarkScenario(IQDCoreDriver driver, ModelOperationFactory<IQDCoreMatch, IQDCoreDriver> factory,
 			Comparator<IQDCoreMatch> comparator, IQDBenchmarkConfigWrapper bcw) throws Exception {
 		super(driver, factory, comparator, bcw);
