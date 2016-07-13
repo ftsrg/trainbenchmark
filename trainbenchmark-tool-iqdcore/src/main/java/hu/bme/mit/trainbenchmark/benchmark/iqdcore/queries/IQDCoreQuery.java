@@ -35,7 +35,7 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 	public IQDCoreQuery(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
 		super(driver, Optional.of(queryDirectory), query);
-		final String yamlPath = queryDirectory + query + driver.getVariant() + ".yaml";
+		final String yamlPath = queryDirectory + query + driver.getQueryVariant() + ".yaml";
 		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath), false);
 		input.subscribe(queryEngine.inputLookup());
 		driver.setQuery(queryEngine);
@@ -51,6 +51,7 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 	@Override
 	public Collection<TPatternMatch> evaluate() {
 		driver.flushLastTransaction();
+		driver.maybeMeasureMemory();
 
 		final List<IQDCoreMatch> matches = new ArrayList<>();
 
@@ -61,6 +62,7 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 			matches.add(match);
 		}
 		return (Collection<TPatternMatch>) matches;
+
 	}
 
 }
