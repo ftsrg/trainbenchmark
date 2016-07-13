@@ -12,10 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigWrapper;
+
 public class TinkerGraphBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("TinkerGraph", args);
+		final TinkerGraphBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], TinkerGraphBenchmarkConfigWrapper.class);
+		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(bcw);
+		scenario.performBenchmark();
 	}
 
 }

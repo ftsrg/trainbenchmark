@@ -12,10 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sqlite;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigWrapper;
+
 public class SQLiteBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("SQLite", args);
+		final SQLiteBenchmarkConfigWrapper sbcw = BenchmarkConfigWrapper.fromFile(args[0], SQLiteBenchmarkConfigWrapper.class);
+		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(sbcw);
+		scenario.performBenchmark();
 	}
 
 }

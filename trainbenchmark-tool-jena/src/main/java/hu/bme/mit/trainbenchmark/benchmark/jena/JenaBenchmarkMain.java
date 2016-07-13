@@ -12,10 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigWrapper;
+
 public class JenaBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-//		final RdfBenchmarkConfigWrapper benchmarkConfig = new RdfBenchmarkConfigWrapper("Jena", args);
+		final JenaBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], JenaBenchmarkConfigWrapper.class);
+		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(bcw);
+		scenario.performBenchmark();
 	}
 
 }

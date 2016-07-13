@@ -12,11 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools5;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.drools5.config.Drools5BenchmarkConfigWrapper;
+
 public class Drools5BenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-//		final BenchmarkConfig benchmarkConfig = new BenchmarkConfig("Drools5", args);
-		
+		final Drools5BenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], Drools5BenchmarkConfigWrapper.class);
+		final Drools5BenchmarkScenario scenario = new Drools5BenchmarkScenario(bcw);
+		scenario.performBenchmark();	
 	}
 
 }
