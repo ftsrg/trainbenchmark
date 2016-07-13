@@ -7,15 +7,24 @@ public class IQDBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
 	protected int messageSize;
 	protected String queryVariant;
+    protected String memoryMeasurementPath;
 
     protected IQDBenchmarkConfigWrapper() {
     }
 
-    public IQDBenchmarkConfigWrapper(final BenchmarkConfigCore config, final int messageSize, final String queryVariant) {
+    public IQDBenchmarkConfigWrapper(
+    		final BenchmarkConfigCore config,
+			final int messageSize,
+			final String queryVariant,
+			final String memoryMeasurementPath) {
         super(config);
         this.messageSize = messageSize;
 		this.queryVariant = queryVariant;
+		this.memoryMeasurementPath = memoryMeasurementPath;
     }
+	public String getFileName() {
+		return benchmarkConfig.getModelFilename();
+	}
 
     public int getMessageSize() {
         return messageSize;
@@ -34,7 +43,11 @@ public class IQDBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	public String getQueryVariant() {
 		return queryVariant;
 	}
-	
+
+	public String getMemoryMeasurementPath() {
+		return memoryMeasurementPath;
+	}
+
 	@Override
 	public String getDescription() {
 		return queryVariant;

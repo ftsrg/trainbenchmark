@@ -20,7 +20,7 @@ public class IQDBenchmarkScenario extends BenchmarkScenario<IQDCoreMatch, IQDCor
 
 	public static IQDBenchmarkScenario create(IQDBenchmarkConfigWrapper config) throws Exception {
 		final TransactionFactory input = new TransactionFactory(16);
-		final IQDCoreDriver driver = new IQDCoreDriver(config.getQueryVariant(), input);
+		final IQDCoreDriver driver = new IQDCoreDriver(config, input);
 		final IQDModelOperationFactory factory = new IQDModelOperationFactory(input);
 		return new IQDBenchmarkScenario(driver, factory, IQDCoreMatchComparator.create(), config);
 

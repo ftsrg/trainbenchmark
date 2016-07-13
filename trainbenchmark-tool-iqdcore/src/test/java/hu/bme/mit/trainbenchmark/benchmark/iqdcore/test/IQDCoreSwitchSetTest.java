@@ -39,7 +39,7 @@ public class IQDCoreSwitchSetTest extends SwitchSetTest {
 	protected BenchmarkResult runTest() throws Exception {
 		final int messageSize = 16;
 		System.out.println();
-		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, variant);
+		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, variant, null);
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

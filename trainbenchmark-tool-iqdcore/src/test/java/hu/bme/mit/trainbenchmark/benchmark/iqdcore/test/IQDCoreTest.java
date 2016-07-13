@@ -22,7 +22,7 @@ public class IQDCoreTest extends BenchmarkBaseTest {
 	@Override
 	protected BenchmarkResult runTest() throws Exception {
 		final int messageSize = 16;
-		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, "");
+		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, "", null);
 		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

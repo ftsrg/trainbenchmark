@@ -8,4 +8,5 @@ shadowJar {
 dependencies {
 	compile project(':trainbenchmark-tool-rdf')
 	compile group: 'hu.bme.mit', name: 'incquery-ds_2.11', version:'1.0'
+	compile 'com.github.jbellis:jamm:0.3.1'
 }

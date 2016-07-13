@@ -1,5 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
@@ -7,20 +10,23 @@ import hu.bme.mit.incqueryds.Transaction;
 import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
+import org.apache.commons.io.FileUtils;
+import org.github.jamm.MemoryMeter;
 
 public class IQDCoreDriver extends Driver<Long> {
 
 	protected final TransactionFactory transactionFactory;
 	protected final TrainbenchmarkReader reader;
-	protected final String variant;
 	private TrainbenchmarkQuery query;
 	private Transaction lastTransaction;
-
-	public IQDCoreDriver(final String variant, final TransactionFactory input) {
+    private IQDBenchmarkConfigWrapper config;
+	public IQDCoreDriver(final IQDBenchmarkConfigWrapper config,
+						 final TransactionFactory input) {
 		super();
 		this.transactionFactory = input;
 		this.reader = new TrainbenchmarkReader();
-		this.variant = variant;
+		this.config = config;
 	}
 
 	@Override
@@ -55,14 +61,35 @@ public class IQDCoreDriver extends Driver<Long> {
 		return transactionFactory.newKey();
 	}
 	
-	public String getVariant() {
-		return variant;
+	public String getQueryVariant() {
+		return config.getQueryVariant();
 	}
 
 	public void flushLastTransaction() {
 		if (this.lastTransaction != null) {
 			this.lastTransaction.close();
 			this.lastTransaction = null;
+		}
+	}
+
+	public void maybeMeasureMemory() {
+		String memPath = config.getMemoryMeasurementPath();
+		if (memPath != null) {
+			MemoryMeter meter = new MemoryMeter();
+			long memoryB = meter.measureDeep(query);
+			double memoryMB = memoryB / Math.pow(10, 6);
+			String line = String.join(",",
+					Arrays.asList(
+				config.getToolName(),
+				config.getQueryVariant(),
+				config.getFileName(),
+				String.format("%.02f", memoryMB)
+					));
+			try {
+				FileUtils.write(new File(memPath), line, true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
