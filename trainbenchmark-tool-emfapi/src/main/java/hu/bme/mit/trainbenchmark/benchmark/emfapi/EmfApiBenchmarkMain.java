@@ -12,23 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.operations.EmfApiModelOperationFactory;
-import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
 public class EmfApiBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final EmfApiBenchmarkConfigWrapper benchmarkConfigWrapper = BenchmarkConfigWrapper.fromFile(args[0], EmfApiBenchmarkConfigWrapper.class);
-
-		final EmfDriver driver = EmfDriver.create();
-		final EmfApiModelOperationFactory<EmfDriver> factory = EmfApiModelOperationFactory.create();
-		final EmfMatchComparator comparator = EmfMatchComparator.create();
-		
-		final BenchmarkScenario<EmfMatch, EmfDriver, BenchmarkConfigWrapper> scenario = new BenchmarkScenario<>(driver, factory, comparator, benchmarkConfigWrapper);
+		final EmfApiBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], EmfApiBenchmarkConfigWrapper.class);
+		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bcw);
 		scenario.performBenchmark();
 	}
 }
