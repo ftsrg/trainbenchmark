@@ -5,14 +5,15 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
+import org.apache.commons.io.FileUtils;
+import org.github.jamm.MemoryMeter;
+
 import hu.bme.mit.incqueryds.Transaction;
 import hu.bme.mit.incqueryds.TransactionFactory;
+import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
-import org.apache.commons.io.FileUtils;
-import org.github.jamm.MemoryMeter;
 
 public class IQDCoreDriver extends Driver<Long> {
 
@@ -75,16 +76,16 @@ public class IQDCoreDriver extends Driver<Long> {
 	public void maybeMeasureMemory() {
 		String memPath = config.getMemoryMeasurementPath();
 		if (memPath != null) {
-			MemoryMeter meter = new MemoryMeter();
+			final MemoryMeter meter = new MemoryMeter();
 			long memoryB = meter.measureDeep(query);
 			double memoryMB = memoryB / Math.pow(10, 6);
 			String line = String.join(",",
-					Arrays.asList(
+				Arrays.asList(
 				config.getToolName(),
 				config.getQueryVariant(),
 				config.getFileName(),
 				String.format("%.02f", memoryMB)
-					));
+				)) + "\n";
 			try {
 				FileUtils.write(new File(memPath), line, true);
 			} catch (IOException e) {
