@@ -53,3 +53,6 @@ gradlew.bat
 hs_err_*.log
 replay_*.log
 
+~*.*
+*.~*
+
