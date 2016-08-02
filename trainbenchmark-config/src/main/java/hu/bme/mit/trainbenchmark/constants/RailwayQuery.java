@@ -15,6 +15,7 @@ public enum RailwayQuery {
 	ACTIVEROUTE("ActiveRoute"), //
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
 	POSLENGTH("PosLength"), //
+	POSLENGTH_INJECT("PosLengthInject"), //
 	ROUTESENSOR("RouteSensor"), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SWITCHMONITORED("SwitchMonitored"), //

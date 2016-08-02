@@ -8,6 +8,7 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ActiveRouteMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborMatch;
@@ -18,10 +19,12 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuery;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryActiveRoute;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryPosLengthInject;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairRouteSensor;
@@ -79,7 +82,10 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
+			final ViatraQuery<PosLengthInjectMatch> query = new ViatraQueryPosLengthInject(driver);
+			final ViatraTransformationInjectPosLength transformation = new ViatraTransformationInjectPosLength(driver);
+			final ModelOperation<PosLengthInjectMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final ViatraQuery<PosLengthMatch> query = new ViatraQueryPosLength(driver);
