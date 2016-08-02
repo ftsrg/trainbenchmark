@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
-public class EclipseOclTest extends BenchmarkBaseTest {
+public class EclipseOclTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest() throws Exception {
+	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
 		final EclipseOclBenchmarkConfigWrapper eobcw = createEclipseOclBenchmarkConfigWrapper(bc);
 		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(eobcw);
 		final BenchmarkResult result = scenario.performBenchmark();

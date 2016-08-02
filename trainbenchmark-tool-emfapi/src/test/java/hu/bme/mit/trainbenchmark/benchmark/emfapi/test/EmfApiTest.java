@@ -16,12 +16,12 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
-public class EmfApiTest extends BenchmarkBaseTest {
+public class EmfApiTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest() throws Exception {
+	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
 		final EmfApiBenchmarkConfigWrapper dbcw = createDrools5BenchmarkConfigWrapper(bc);
 		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(dbcw);
 		final BenchmarkResult result = scenario.performBenchmark();

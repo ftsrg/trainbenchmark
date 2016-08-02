@@ -22,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.ActiveRouteTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.ActiveRouteTest;
 
 @RunWith(Parameterized.class)
 public class IQDCoreActiveRouteTest extends ActiveRouteTest {

@@ -22,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.RouteSensorTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.RouteSensorTest;
 
 @RunWith(Parameterized.class)
 public class IQDCoreRouteSensorTest extends RouteSensorTest {

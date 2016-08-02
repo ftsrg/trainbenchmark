@@ -22,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.SemaphoreNeighborTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.SemaphoreNeighborTest;
 
 @RunWith(Parameterized.class)
 public class IQDCoreSemaphoreNeighborTest extends SemaphoreNeighborTest {
