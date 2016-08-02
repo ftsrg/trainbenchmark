@@ -22,7 +22,6 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryRouteSensor
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairRouteSensor;
@@ -84,7 +83,7 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 		}
 		case POSLENGTH_REPAIR: {
 			final ViatraQuery<PosLengthMatch> query = new ViatraQueryPosLength(driver);
-			final ViatraTransformation transformation = new ViatraTransformationRepairPosLength(driver);
+			final ViatraTransformationRepairPosLength transformation = new ViatraTransformationRepairPosLength(driver);
 			final ModelOperation<PosLengthMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 
