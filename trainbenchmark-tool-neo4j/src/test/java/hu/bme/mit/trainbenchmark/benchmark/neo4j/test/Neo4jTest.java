@@ -19,14 +19,15 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
 @RunWith(Parameterized.class)
-public class Neo4jTest extends BenchmarkBaseTest {
+public class Neo4jTest extends TrainBenchmarkTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
@@ -37,7 +38,7 @@ public class Neo4jTest extends BenchmarkBaseTest {
 	public Neo4jEngine engine;
 	
 	@Override
-	protected BenchmarkResult runTest() throws Exception {
+	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
 		final Neo4jBenchmarkConfigWrapper nbcw = new Neo4jBenchmarkConfigWrapper(bc, engine);
 		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(nbcw);
 		final BenchmarkResult result = scenario.performBenchmark();

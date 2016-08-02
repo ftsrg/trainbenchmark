@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.test;
+package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
 import java.util.Collection;
 
@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SemaphoreNeighborTest {
+public abstract class ActiveRouteTest {
 
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
@@ -29,12 +29,12 @@ public abstract class SemaphoreNeighborTest {
 		final String xmx = "1G";
 		final long timeout = 120;
 		final int runs = 2;
-		final int queryTransformationCount = 1;
+		final int queryTransformationCount = 0;
 		final String modelFilename = "railway-repair-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
-				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
+				RailwayOperation.ACTIVEROUTE //
 		);
-		final String workload = "SemaphoreNeighborTest";
+		final String workload = "ActiveRouteTest";
 		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload);
 	}
@@ -47,8 +47,7 @@ public abstract class SemaphoreNeighborTest {
 		System.out.println(result.csvTimes());
 
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
-		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(3));
-		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.ACTIVEROUTE).get(0), Matchers.equalTo(3));
 	}
 
 	protected abstract BenchmarkResult runTest() throws Exception;

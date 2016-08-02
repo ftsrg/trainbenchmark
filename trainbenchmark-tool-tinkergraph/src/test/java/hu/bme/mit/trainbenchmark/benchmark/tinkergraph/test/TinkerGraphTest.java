@@ -14,14 +14,14 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.TinkerGraphBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigWrapper;
 
-public class TinkerGraphTest extends BenchmarkBaseTest {
+public class TinkerGraphTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest() throws Exception {
+	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
 		final TinkerGraphBenchmarkConfigWrapper dbcw = createTinkerGraphBenchmarkConfigWrapper(bc);
 		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(dbcw);
 		final BenchmarkResult result = scenario.performBenchmark();

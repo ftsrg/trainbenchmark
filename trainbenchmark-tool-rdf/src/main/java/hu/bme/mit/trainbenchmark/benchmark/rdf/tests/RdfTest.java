@@ -7,10 +7,10 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import hu.bme.mit.trainbenchmark.benchmark.test.BenchmarkBaseTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
 @RunWith(Parameterized.class)
-public abstract class RdfTest extends BenchmarkBaseTest {
+public abstract class RdfTest extends TrainBenchmarkTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {

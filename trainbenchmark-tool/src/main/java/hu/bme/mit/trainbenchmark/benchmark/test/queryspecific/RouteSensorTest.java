@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.benchmark.test;
+package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
 import java.util.Collection;
 
@@ -16,7 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SwitchSetTest {
+public abstract class RouteSensorTest {
 
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
@@ -29,12 +29,12 @@ public abstract class SwitchSetTest {
 		final String xmx = "1G";
 		final long timeout = 120;
 		final int runs = 2;
-		final int queryTransformationCount = 0;
+		final int queryTransformationCount = 1;
 		final String modelFilename = "railway-repair-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
-				RailwayOperation.SWITCHSET_REPAIR //
+				RailwayOperation.ROUTESENSOR_REPAIR //
 		);
-		final String workload = "SwitchSetTest";
+		final String workload = "RouteSensorTest";
 		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload);
 	}
@@ -47,7 +47,8 @@ public abstract class SwitchSetTest {
 		System.out.println(result.csvTimes());
 
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(5));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(8));
 	}
 
 	protected abstract BenchmarkResult runTest() throws Exception;
