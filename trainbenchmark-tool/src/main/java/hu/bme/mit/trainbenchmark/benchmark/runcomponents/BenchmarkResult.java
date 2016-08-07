@@ -48,7 +48,6 @@ public class BenchmarkResult {
 
 	public RunResult getLastRunResult() {
 		return Iterables.getLast(runResults);
-
 	}
 
 	public void registerMatches(final RailwayQuery query, final int numberOfMatches) {

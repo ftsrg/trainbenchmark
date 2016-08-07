@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 public class EmfUtil {
 	
 	public static void registerExtension() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(EmfConstants.RAILWAY_EXTENSION, new XMIResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(EmfConstants.MODEL_EXTENSION, new XMIResourceFactoryImpl());
 	}
 	
 }

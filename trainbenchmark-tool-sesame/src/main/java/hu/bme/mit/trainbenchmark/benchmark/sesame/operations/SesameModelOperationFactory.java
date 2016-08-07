@@ -12,8 +12,15 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.queries.SesameQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairRouteSensor;
@@ -46,7 +53,10 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			// TODO
+			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
+			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectConnectedSegments(driver);
+			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
@@ -65,10 +75,10 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			final SesameQuery<SesamePosLengthMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.POSLENGTH);
-//			final SesameTransformation<SesamePosLengthMatch> transformation = new SesameTransformationRepairPosLength(driver);
-//			final ModelOperation<SesamePosLengthMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
+			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.POSLENGTH_INJECT);
+			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectPosLength(driver);
+			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final SesameQuery<SesamePosLengthMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.POSLENGTH);
@@ -84,7 +94,10 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
+			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR_INJECT);
+			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectRouteSensor(driver);
+			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final SesameQuery<SesameRouteSensorMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR);
@@ -101,7 +114,10 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
+			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.SEMAPHORENEIGHBOR_INJECT);
+			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectSemaphoreNeighbor(driver);
+			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final SesameQuery<SesameSemaphoreNeighborMatch> query = SesameQuery.create(driver, workspacePath,
@@ -119,7 +135,10 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
+			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.SWITCHMONITORED_INJECT);
+			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectSwitchMonitored(driver);
+			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final SesameQuery<SesameSwitchMonitoredMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.SWITCHMONITORED);
@@ -135,7 +154,10 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
+			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.SWITCHSET_INJECT);
+			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectSwitchSet(driver);
+			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final SesameQuery<SesameSwitchSetMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.SWITCHSET);

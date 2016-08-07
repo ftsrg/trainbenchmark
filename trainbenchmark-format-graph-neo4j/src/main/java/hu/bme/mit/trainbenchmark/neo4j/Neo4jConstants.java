@@ -1,15 +1,4 @@
-/*******************************************************************************
- * Copyright (c) 2010-2015, Benedek Izso, Gabor Szarnyas, Istvan Rath and Daniel Varro
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Benedek Izso - initial API and implementation
- *   Gabor Szarnyas - initial API and implementation
- *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.constants;
+package hu.bme.mit.trainbenchmark.neo4j;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
@@ -31,6 +20,8 @@ import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.Label;
 
 public class Neo4jConstants {
+
+	public static final String MODEL_EXTENSION = "graphml";
 
 	public static final Label labelRoute = DynamicLabel.label(ROUTE);
 	public static final Label labelSegment = DynamicLabel.label(SEGMENT);

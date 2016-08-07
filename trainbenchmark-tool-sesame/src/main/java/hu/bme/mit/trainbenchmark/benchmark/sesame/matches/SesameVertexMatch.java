@@ -9,16 +9,26 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import org.openrdf.model.URI;
+import org.openrdf.query.BindingSet;
 
-public abstract class SesameTransformationInject extends SesameTransformation<SesameVertexMatch> {
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
-	protected SesameTransformationInject(final SesameDriver driver) {
-		super(driver);
+public class SesameVertexMatch extends SesameMatch {
+
+	public SesameVertexMatch(final BindingSet bs) {
+		super(bs);
+	}
+	
+	public URI getVertex() {
+		return (URI) bs.getValue(QueryConstants.VAR_VERTEX);
+	}
+
+	@Override
+	public URI[] toArray() {
+		return new URI[] { getVertex() };
 	}
 
 }

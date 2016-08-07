@@ -23,28 +23,25 @@ import org.openrdf.repository.RepositoryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class SesameQuery<TPatternMatch extends SesameMatch> extends RdfModelQuery<TPatternMatch, SesameDriver> {
+public class SesameQuery<TPatternMatch> extends RdfModelQuery<TPatternMatch, SesameDriver> {
 
 	protected final String queryDefinition;
 
-	public SesameQuery(final SesameDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
-			throws IOException {
+	public SesameQuery(final SesameDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
 		super(driver, workspaceDir, query);
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
-	
-	public static <TPatternMatch extends SesameMatch> SesameQuery<TPatternMatch> create(final SesameDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
-			throws IOException {
+
+	public static <TPatternMatch> SesameQuery<TPatternMatch> create(final SesameDriver driver,
+			final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
 		return new SesameQuery<TPatternMatch>(driver, workspaceDir, query);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<TPatternMatch> evaluate()
-			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+	public Collection<TPatternMatch> evaluate() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		return (Collection<TPatternMatch>) driver.runQuery(query, queryDefinition);
 	}
 

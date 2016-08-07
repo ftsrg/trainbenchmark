@@ -38,7 +38,7 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 		return matches;
 	}
 
-	public List<TPatternMatch> shuffle(int nMatchesToModify) {
+	public List<TPatternMatch> shuffle(int nMatchesToModify) {	
 		final Ordering<? super TPatternMatch> ordering = Ordering.from(comparator);
 		sortedMatches = ordering.sortedCopy(matches);
 

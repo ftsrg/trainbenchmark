@@ -11,14 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeMonitoredBy;
-
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public class Neo4jTransformationInjectSwitchMonitored extends Neo4jTransformationInject {
 
@@ -29,7 +28,7 @@ public class Neo4jTransformationInjectSwitchMonitored extends Neo4jTransformatio
 	@Override
 	public void activate(final Collection<Node> switches) {
 		for (final Node sw : switches) {
-			final Iterable<Relationship> sensors = sw.getRelationships(relationshipTypeMonitoredBy);
+			final Iterable<Relationship> sensors = sw.getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
 			for (final Relationship sensor : sensors) {
 				sensor.delete();
 			}

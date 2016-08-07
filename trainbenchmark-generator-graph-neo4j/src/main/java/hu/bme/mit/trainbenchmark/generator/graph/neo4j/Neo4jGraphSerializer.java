@@ -35,6 +35,7 @@ import org.neo4j.shell.tools.imp.util.ProgressReporter;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorConfigWrapper> {
 
@@ -148,8 +149,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 			tx.success();
 
-			final String fileName = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
-					+ ".graphml";
+			final String fileName = gcw.getGeneratorConfig().getModelPathWithoutExtension() + "." + Neo4jConstants.MODEL_EXTENSION;
 
 			final String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB

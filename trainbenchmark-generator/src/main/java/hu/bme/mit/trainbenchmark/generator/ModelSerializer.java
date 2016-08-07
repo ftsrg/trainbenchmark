@@ -8,11 +8,11 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public abstract class ModelSerializer<TGeneratorConfigWrapper extends GeneratorConfigWrapper> {
 	
-	protected final TGeneratorConfigWrapper generatorConfigWrapper;
+	protected final TGeneratorConfigWrapper gcw;
 	protected int id = 1;
 
 	public ModelSerializer(TGeneratorConfigWrapper generatorConfigWrapper) {
-		this.generatorConfigWrapper = generatorConfigWrapper;
+		this.gcw = generatorConfigWrapper;
 	}
 	
 	public abstract String syntax();

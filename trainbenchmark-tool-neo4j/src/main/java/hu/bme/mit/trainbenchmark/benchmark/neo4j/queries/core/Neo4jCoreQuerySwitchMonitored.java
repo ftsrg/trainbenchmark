@@ -12,9 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSensor;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSwitch;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeMonitoredBy;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public class Neo4jCoreQuerySwitchMonitored extends Neo4jCoreQuery<Neo4jSwitchMonitoredMatch> {
 
@@ -44,16 +42,16 @@ public class Neo4jCoreQuerySwitchMonitored extends Neo4jCoreQuery<Neo4jSwitchMon
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			final Iterable<Node> sws = () -> graphDb.findNodes(labelSwitch);
+			final Iterable<Node> sws = () -> graphDb.findNodes(Neo4jConstants.labelSwitch);
 			// (sw:Switch)
 			for (final Node sw : sws) {
 				// (sw)-[:sensor]->(Sensor) NAC
-				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, relationshipTypeMonitoredBy);
+				final Iterable<Relationship> relationshipSensors = sw.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeMonitoredBy);
 
 				boolean hasSensor = false;
 				for (final Relationship relationshipSensor : relationshipSensors) {
 					final Node sensor = relationshipSensor.getEndNode();
-					if (sensor.hasLabel(labelSensor)) {
+					if (sensor.hasLabel(Neo4jConstants.labelSensor)) {
 						hasSensor = true;
 						break;
 					}
