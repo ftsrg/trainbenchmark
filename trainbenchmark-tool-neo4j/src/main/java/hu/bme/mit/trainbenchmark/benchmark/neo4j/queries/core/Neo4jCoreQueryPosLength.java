@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSegment;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
@@ -29,6 +28,7 @@ import org.neo4j.graphdb.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public class Neo4jCoreQueryPosLength extends Neo4jCoreQuery<Neo4jPosLengthMatch> {
 
@@ -43,7 +43,7 @@ public class Neo4jCoreQueryPosLength extends Neo4jCoreQuery<Neo4jPosLengthMatch>
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (segment:Segment)
-			final Iterable<Node> segments = () -> graphDb.findNodes(labelSegment);
+			final Iterable<Node> segments = () -> graphDb.findNodes(Neo4jConstants.labelSegment);
 			for (final Node segment : segments) {
 				final Integer length = (Integer) segment.getProperty(LENGTH);
 				

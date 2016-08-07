@@ -65,12 +65,12 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
+		final String headerFilePath = gcw.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
 				+ "railway-header.sql";
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		sqlRawPath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension() + "-raw.sql";
+		sqlRawPath = gcw.getGeneratorConfig().getModelPathWithoutExtension() + "-raw.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -81,7 +81,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
+		final String footerFilePath = gcw.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
 				+ "railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
@@ -103,9 +103,9 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 		final Process processLoad = rt.exec(commandLoad);
 		processLoad.waitFor();
 
-		final String mysqlDumpPath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
+		final String mysqlDumpPath = gcw.getGeneratorConfig().getModelPathWithoutExtension()
 				+ "-mysql.sql";
-		final String sqliteDumpPath = generatorConfigWrapper.getGeneratorConfig().getModelPathWithoutExtension()
+		final String sqliteDumpPath = gcw.getGeneratorConfig().getModelPathWithoutExtension()
 				+ "-sqlite.sql";
 
 		final String[] commandDump = { "/bin/bash", "-c", "mysqldump -u " + USER
@@ -113,7 +113,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 		final Process processDump = rt.exec(commandDump);
 		processDump.waitFor();
 
-		final String[] sqliteDump = { "/bin/bash", "-c", generatorConfigWrapper.getGeneratorConfig().getWorkspaceDir()
+		final String[] sqliteDump = { "/bin/bash", "-c", gcw.getGeneratorConfig().getWorkspaceDir()
 				+ SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath };
 		final Process processSqlite = rt.exec(sqliteDump);
 		processSqlite.waitFor();

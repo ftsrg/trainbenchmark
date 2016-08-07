@@ -59,7 +59,6 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 	public void query() throws Exception {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
 			final Collection<?> matches = qst.evaluateQuery();
-
 			benchmarkResults.registerMatches(qst.getQuery().getQuery(), matches.size());
 		}
 	}

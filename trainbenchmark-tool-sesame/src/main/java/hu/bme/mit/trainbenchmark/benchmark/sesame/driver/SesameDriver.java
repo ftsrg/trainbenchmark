@@ -117,7 +117,7 @@ public class SesameDriver extends RdfDriver<URI> {
 	}
 
 	// read
-//
+
 //	@Override
 //	public Collection<URI> collectVertices(final String type) throws RepositoryException {
 //		final URI typeURI = vf.createURI(BASE_PREFIX + type);

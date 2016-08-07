@@ -11,10 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.labelSegment;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeConnectsTo;
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeMonitoredBy;
-
 import java.util.Collection;
 
 import org.neo4j.graphdb.Direction;
@@ -22,6 +18,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformationInject {
 
@@ -32,17 +29,17 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 	@Override
 	public void activate(final Collection<Node> segments) {
 		for (final Node segment1 : segments) {
-			final Node segment2 = driver.getGraphDb().createNode(labelSegment);
+			final Node segment2 = driver.getGraphDb().createNode(Neo4jConstants.labelSegment);
 
-			final Iterable<Relationship> monitoredByEdges = segment1.getRelationships(Direction.OUTGOING, relationshipTypeMonitoredBy);
+			final Iterable<Relationship> monitoredByEdges = segment1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeMonitoredBy);
 			// (segment2)-[:monitoredBy]->(sensor)
 			for (final Relationship monitoredByEdge : monitoredByEdges) {
 				final Node sensor = monitoredByEdge.getEndNode();
-				segment2.createRelationshipTo(sensor, relationshipTypeMonitoredBy);
+				segment2.createRelationshipTo(sensor, Neo4jConstants.relationshipTypeMonitoredBy);
 			}
 
 			// delete (segment1)-[:connectsTo]->(segment3)
-			final Iterable<Relationship> connectsToEdges = segment1.getRelationships(Direction.OUTGOING, relationshipTypeConnectsTo);
+			final Iterable<Relationship> connectsToEdges = segment1.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeConnectsTo);
 			if (!connectsToEdges.iterator().hasNext()) {
 				continue;
 			}
@@ -50,9 +47,9 @@ public class Neo4jTransformationInjectConnectedSegments extends Neo4jTransformat
 			final Node segment3 = connectsTo.getEndNode();
 			connectsTo.delete();
 			// (segment1)-[:connectsTo]->(segment2)
-			segment1.createRelationshipTo(segment2, relationshipTypeConnectsTo);
+			segment1.createRelationshipTo(segment2, Neo4jConstants.relationshipTypeConnectsTo);
 			// (segment2)-[:connectsTo]->(segment3)
-			segment2.createRelationshipTo(segment3, relationshipTypeConnectsTo);
+			segment2.createRelationshipTo(segment3, Neo4jConstants.relationshipTypeConnectsTo);
 		}
 	}
 

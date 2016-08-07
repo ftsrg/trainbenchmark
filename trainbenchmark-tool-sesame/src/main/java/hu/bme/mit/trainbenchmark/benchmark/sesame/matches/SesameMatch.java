@@ -40,6 +40,13 @@ public abstract class SesameMatch {
 			return new SesameSwitchMonitoredMatch(bs);
 		case SWITCHSET:
 			return new SesameSwitchSetMatch(bs);
+		case CONNECTEDSEGMENTS_INJECT:
+		case POSLENGTH_INJECT:
+		case ROUTESENSOR_INJECT:
+		case SEMAPHORENEIGHBOR_INJECT:
+		case SWITCHMONITORED_INJECT:
+		case SWITCHSET_INJECT:
+			return new SesameVertexMatch(bs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}

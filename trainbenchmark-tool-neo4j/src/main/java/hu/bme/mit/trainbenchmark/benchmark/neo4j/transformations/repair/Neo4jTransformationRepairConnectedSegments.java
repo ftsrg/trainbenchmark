@@ -11,15 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.benchmark.neo4j.constants.Neo4jConstants.relationshipTypeConnectsTo;
-
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
-
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public class Neo4jTransformationRepairConnectedSegments extends Neo4jTransformationRepair<Neo4jConnectedSegmentsMatch> {
 
@@ -37,7 +36,7 @@ public class Neo4jTransformationRepairConnectedSegments extends Neo4jTransformat
 			}
 			segment2.delete();
 			// (segment1)-[:connectsTo]->(segment3)
-			csm.getSegment1().createRelationshipTo(csm.getSegment3(), relationshipTypeConnectsTo);
+			csm.getSegment1().createRelationshipTo(csm.getSegment3(), Neo4jConstants.relationshipTypeConnectsTo);
 		}
 	}
 

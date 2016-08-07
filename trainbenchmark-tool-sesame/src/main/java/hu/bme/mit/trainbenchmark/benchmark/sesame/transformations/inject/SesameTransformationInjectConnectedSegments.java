@@ -28,6 +28,7 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
 
 public class SesameTransformationInjectConnectedSegments extends SesameTransformationInject {
 
@@ -36,7 +37,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 	}
 
 	@Override
-	public void activate(final Collection<URI> segments) throws Exception {
+	public void activate(final Collection<SesameVertexMatch> segments) throws Exception {
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
@@ -45,7 +46,9 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
 
-		for (final URI segment1 : segments) {
+		for (final SesameVertexMatch segment1Match : segments) {
+			final URI segment1 = segment1Match.getVertex();
+			
 			// get (segment3) node
 			final RepositoryResult<Statement> connectsToEdges0 = connection.getStatements(segment1, connectsTo, null, true);
 			while (connectsToEdges0.hasNext()) {

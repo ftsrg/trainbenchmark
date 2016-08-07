@@ -24,6 +24,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class SesameTransformationInjectPosLength extends SesameTransformationInject {
@@ -33,14 +34,16 @@ public class SesameTransformationInjectPosLength extends SesameTransformationInj
 	}
 
 	@Override
-	public void activate(final Collection<URI> segments) throws RepositoryException {
+	public void activate(final Collection<SesameVertexMatch> segments) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
 		final URI typeURI = vf.createURI(BASE_PREFIX + ModelConstants.LENGTH);
 		final Literal zeroLiteral = vf.createLiteral(0);
 
-		for (final URI segment : segments) {
+		for (final SesameVertexMatch segmentMatch : segments) {
+			final URI segment = segmentMatch.getVertex();
+
 			final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, typeURI, null, true);
 			while (statementsToRemove.hasNext()) {
 				con.remove(statementsToRemove.next());

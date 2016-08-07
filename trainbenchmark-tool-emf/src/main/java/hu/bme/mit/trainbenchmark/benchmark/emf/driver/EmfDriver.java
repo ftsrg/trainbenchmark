@@ -60,7 +60,7 @@ public class EmfDriver extends Driver<RailwayElement> {
 
 	@Override
 	public String getPostfix() {
-		return "." + EmfConstants.RAILWAY_EXTENSION;
+		return "." + EmfConstants.MODEL_EXTENSION;
 	}
 
 //

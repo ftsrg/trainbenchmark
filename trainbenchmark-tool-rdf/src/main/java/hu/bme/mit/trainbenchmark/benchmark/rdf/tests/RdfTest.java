@@ -12,9 +12,9 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 @RunWith(Parameterized.class)
 public abstract class RdfTest extends TrainBenchmarkTest {
 
-	@Parameters
+	@Parameters(name="inferencing={0}")
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList(false, true);
+		return Arrays.asList(false);//, true);
 	}
 
 	@Parameter
