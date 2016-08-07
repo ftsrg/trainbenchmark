@@ -1,16 +1,12 @@
-plugins {
-	id "com.github.johnrengelman.shadow" version "1.2.3"
-}
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
 
 shadowJar {
 	classifier = 'fat'
-	manifest {
-		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.graph.neo4j.Neo4jGraphGeneratorMain'
-	}
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.graph.neo4j.Neo4jGraphGeneratorMain' }
 }
 
 dependencies {
-  compile project(':trainbenchmark-generator')
-  compile group: 'org.neo4j.shell', name: 'import-tools', version:'2.3.3'
-  compile group: 'commons-io', name: 'commons-io', version:'2.4'
+	compile project(':trainbenchmark-generator')
+	compile group: 'org.neo4j.shell', name: 'import-tools', version:'2.3.3'
+	compile group: 'commons-io', name: 'commons-io', version:'2.4'
 }

@@ -24,7 +24,6 @@ import org.openrdf.OpenRDFException;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
-import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.BooleanQuery;
 import org.openrdf.query.MalformedQueryException;
@@ -118,28 +117,23 @@ public class SesameDriver extends RdfDriver<URI> {
 	}
 
 	// read
-
-	@Override
-	public Collection<URI> collectVertices(final String type) throws RepositoryException {
-		final URI typeURI = vf.createURI(BASE_PREFIX + type);
-		final Collection<URI> vertices = new ArrayList<>();
-
-		final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
-		while (statements.hasNext()) {
-			final Statement s = statements.next();
-			final URI uri = (URI) s.getSubject();
-			vertices.add(uri);
-		}
-
-		return vertices;
-	}
+//
+//	@Override
+//	public Collection<URI> collectVertices(final String type) throws RepositoryException {
+//		final URI typeURI = vf.createURI(BASE_PREFIX + type);
+//		final Collection<URI> vertices = new ArrayList<>();
+//
+//		final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
+//		while (statements.hasNext()) {
+//			final Statement s = statements.next();
+//			final URI uri = (URI) s.getSubject();
+//			vertices.add(uri);
+//		}
+//
+//		return vertices;
+//	}
 
 	// delete
-
-	public void deleteOneOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
-			throws RepositoryException {
-		deleteEdges(vertices, edgeType, true, false);
-	}
 
 	public void deleteSingleOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
 			throws RepositoryException {

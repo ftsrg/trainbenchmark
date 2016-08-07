@@ -38,7 +38,7 @@ public class TinkerGraphQueryPosLength<TTinkerGraphDriver extends TinkerGraphDri
 	public Collection<TinkerGraphPosLengthMatch> evaluate() {
 		final Collection<TinkerGraphPosLengthMatch> matches = new ArrayList<>();
 
-		final Collection<Vertex> segments = driver.collectVertices(SEGMENT);
+		final Collection<Vertex> segments = driver.getVertices(SEGMENT);
 		
 		// (segment:Segment)
 		for (final Vertex segment : segments) {

@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.driver;
 
-import java.util.Collection;
-
 /**
  * Superclass for the drivers used in the benchmark.
  * 
@@ -23,28 +21,43 @@ import java.util.Collection;
  */
 public abstract class Driver<TElement> {
 
-	// these methods should be redefined if required
-
+	/**
+	 * Should be overridden for tools with support for transactions.
+	 */
 	public void beginTransaction() throws Exception {
 	}
 
+	/**
+	 * Should be overridden for tools with support for transactions.
+	 */
 	public void finishTransaction() throws Exception {
 	}
 
+	/**
+	 * Should be overridden if the tool requires initialization.
+	 */
 	public void initialize() throws Exception {
 	}
 
+	/**
+	 * Should be overridden if the tool requires freeing managed resources.
+	 */
 	public void destroy() throws Exception {
 	}
 
-	// read methods
-
+	/**
+	 * Reads the model form a textual format. For disk-resident databases, it persists the loaded data; for in-memory
+	 * databases, it load the model to the memory.
+	 * 
+	 * @param modelPath
+	 *            path of the model (with the appropriate postfix)
+	 */
 	public abstract void read(String modelPath) throws Exception;
 
-	public abstract Collection<TElement> collectVertices(final String type) throws Exception;
-
-	// extension
-
+	/**
+	 * @return The postfix of the model files. This contains both the postfix for the file and the extension, e.g.
+	 *         "-sqlite.sql";
+	 */
 	public abstract String getPostfix();
 
 }
