@@ -3,7 +3,6 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.github.jamm.MemoryMeter;
@@ -34,10 +33,6 @@ public class IQDCoreDriver extends Driver<Long> {
 	public void read(final String modelPath) throws Exception {
 		this.lastTransaction = newTransaction();
 		reader.read(modelPath, lastTransaction);
-	}
-	@Override
-	public List<Long> collectVertices(final String type) throws Exception {
-		return null;
 	}
 
 	@Override

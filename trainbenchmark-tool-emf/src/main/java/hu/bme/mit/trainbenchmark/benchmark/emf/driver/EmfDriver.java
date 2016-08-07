@@ -12,13 +12,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.driver;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -68,27 +63,26 @@ public class EmfDriver extends Driver<RailwayElement> {
 		return "." + EmfConstants.RAILWAY_EXTENSION;
 	}
 
-	// read
-
-	@Override
-	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
-		final Collection<RailwayElement> vertices = new ArrayList<>();
-
-		RailwayPackage.eINSTANCE.eClass();
-		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-
-		final TreeIterator<EObject> contents = container.eAllContents();
-		while (contents.hasNext()) {
-			final EObject eObject = contents.next();
-
-			// if t's type is a descendant of clazz
-			if (clazz.isSuperTypeOf(eObject.eClass())) {
-				vertices.add((RailwayElement) eObject);
-			}
-		}
-
-		return vertices;
-	}
+//
+//	@Override
+//	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
+//		final Collection<RailwayElement> vertices = new ArrayList<>();
+//
+//		RailwayPackage.eINSTANCE.eClass();
+//		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
+//
+//		final TreeIterator<EObject> contents = container.eAllContents();
+//		while (contents.hasNext()) {
+//			final EObject eObject = contents.next();
+//
+//			// if t's type is a descendant of clazz
+//			if (clazz.isSuperTypeOf(eObject.eClass())) {
+//				vertices.add((RailwayElement) eObject);
+//			}
+//		}
+//
+//		return vertices;
+//	}
 
 	// utility
 

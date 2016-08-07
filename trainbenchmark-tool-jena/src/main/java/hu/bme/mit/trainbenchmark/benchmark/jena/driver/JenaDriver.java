@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +26,6 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Selector;
 import org.apache.jena.rdf.model.SimpleSelector;
@@ -36,7 +33,6 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
-import org.apache.jena.vocabulary.RDF;
 
 import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -92,29 +88,17 @@ public class JenaDriver extends RdfDriver<Resource> {
 		}
 	}
 
-	// read
-
-	@Override
-	public Collection<Resource> collectVertices(final String type) throws IOException {
-		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type,
-				model.getResource(BASE_PREFIX + type));
-		final Collection<Resource> vertices = vertexStatements.toList();
-		return vertices;
-	}
-
-	public void deleteIncomingEdge(final Collection<Resource> vertices, final String sourceVertexType,
-			final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, false, true);
-	}
+//	@Override
+//	public Collection<Resource> collectVertices(final String type) throws IOException {
+//		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type,
+//				model.getResource(BASE_PREFIX + type));
+//		final Collection<Resource> vertices = vertexStatements.toList();
+//		return vertices;
+//	}
 
 	public void deleteAllOutgoingEdges(final Collection<Resource> vertices, final String vertexType,
 			final String edgeType) throws IOException {
 		deleteEdges(vertices, edgeType, true, true);
-	}
-
-	public void deleteOneOutgoingEdge(final Collection<Resource> vertices, final String vertexType,
-			final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, true, false);
 	}
 
 	public void deleteSingleOutgoingEdge(final Collection<Resource> vertices, final String vertexType,

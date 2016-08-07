@@ -37,7 +37,7 @@ public class TinkerGraphQueryConnectedSegments<TTinkerGraphDriver extends Tinker
 	public Collection<TinkerGraphConnectedSegmentsMatch> evaluate() throws IOException {
 		final Collection<TinkerGraphConnectedSegmentsMatch> matches = new ArrayList<>();
 
-		final Collection<Vertex> sensors = driver.collectVertices(ModelConstants.SENSOR);
+		final Collection<Vertex> sensors = driver.getVertices(ModelConstants.SENSOR);
 		for (final Vertex sensor : sensors) {
 			// (sensor:Sensor)<-[:sensor]-(segment1:Segment)
 			final Iterable<Vertex> segment1s = TinkerGraphUtil.getAdjacentNodes(sensor, ModelConstants.MONITORED_BY, Direction.IN,

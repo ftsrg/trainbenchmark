@@ -43,10 +43,7 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 		graph.io(IoCore.graphson()).readGraph(modelPath);
 	}
 
-	// read
-
-	@Override
-	public Collection<Vertex> collectVertices(final String type) {
+	public Collection<Vertex> getVertices(final String type) {
 		final Collection<Vertex> vertices = new ArrayList<>();
 
 		final Iterable<Vertex> allVertices = () -> graph.vertices();

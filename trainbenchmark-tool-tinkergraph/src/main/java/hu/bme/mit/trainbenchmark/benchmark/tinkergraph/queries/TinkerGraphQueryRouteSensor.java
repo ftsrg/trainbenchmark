@@ -37,7 +37,7 @@ public class TinkerGraphQueryRouteSensor<TTinkerGraphDriver extends TinkerGraphD
 	public Collection<TinkerGraphRouteSensorMatch> evaluate() {
 		final Collection<TinkerGraphRouteSensorMatch> matches = new ArrayList<>();
 
-		final Collection<Vertex> routes = driver.collectVertices(ModelConstants.ROUTE);
+		final Collection<Vertex> routes = driver.getVertices(ModelConstants.ROUTE);
 		for (final Vertex route : routes) {
 			// (route:Route)-[:follows]->(swP:switchPosition)
 			final Iterable<Vertex> swPs = TinkerGraphUtil.getAdjacentNodes(route, ModelConstants.FOLLOWS, Direction.OUT, ModelConstants.SWITCHPOSITION);

@@ -12,14 +12,22 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum RailwayQuery {
+	// simulation queries
 	ACTIVEROUTE("ActiveRoute"), //
+	// well-formedness constraint queries (LHS for the Repair scenario)
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
 	POSLENGTH("PosLength"), //
-	POSLENGTH_INJECT("PosLengthInject"), //
 	ROUTESENSOR("RouteSensor"), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SWITCHMONITORED("SwitchMonitored"), //
 	SWITCHSET("SwitchSet"), //
+	// LHS queries for the Inject scenario
+	CONNECTEDSEGMENTS_INJECT("ConnectedSegmentsInject"), //
+	POSLENGTH_INJECT("PosLengthInject"), //
+	ROUTESENSOR_INJECT("RouteSensorInject"), //
+	SEMAPHORENEIGHBOR_INJECT("SemaphoreNeighborInject"), //
+	SWITCHMONITORED_INJECT("SwitchMonitoredInject"), //
+	SWITCHSET_INJECT("SwitchSetInject"), //
 	;
 
 	private String name;

@@ -36,7 +36,7 @@ public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends Tinker
 	public Collection<TinkerGraphSemaphoreNeighborMatch> evaluate() {
 		final Collection<TinkerGraphSemaphoreNeighborMatch> matches = new ArrayList<>();
 
-		final Collection<Vertex> route1s = driver.collectVertices(ModelConstants.ROUTE);
+		final Collection<Vertex> route1s = driver.getVertices(ModelConstants.ROUTE);
 
 		for (final Vertex route1 : route1s) {
 			// (route1:Route)-[:exit]->(semaphore:Semaphore)

@@ -45,7 +45,7 @@ public class TinkerGraphQuerySwitchSet<TTinkerGraphDriver extends TinkerGraphDri
 	public Collection<TinkerGraphSwitchSetMatch> evaluate() {
 		final Collection<TinkerGraphSwitchSetMatch> matches = new ArrayList<>();
 
-		final Collection<Vertex> routes = driver.collectVertices(ROUTE);
+		final Collection<Vertex> routes = driver.getVertices(ROUTE);
 		// (route:Route)
 		for (final Vertex route : routes) {
 			// (route:Route)-[:entry]->(semaphore:Semaphore)

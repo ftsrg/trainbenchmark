@@ -39,7 +39,7 @@ public class TinkerGraphQuerySwitchMonitored<TTinkerGraphDriver extends TinkerGr
 	public Collection<TinkerGraphSwitchMonitoredMatch> evaluate() {
 		final Collection<TinkerGraphSwitchMonitoredMatch> matches = new ArrayList<>();
 
-		final Collection<Vertex> switches = driver.collectVertices(SWITCH);
+		final Collection<Vertex> switches = driver.getVertices(SWITCH);
 		
 		// (sw:Switch)
 		for (final Vertex sw : switches) {

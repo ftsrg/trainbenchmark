@@ -23,12 +23,9 @@ import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
 
-import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.io.FileUtils;
-import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -95,6 +92,11 @@ public class Neo4jDriver extends Driver<Node> {
 		}
 	}
 
+	@Override
+	public String getPostfix() {
+		return ".graphml";
+	}
+	
 	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
 		final Collection<Neo4jMatch> results = new ArrayList<>();
 
@@ -109,26 +111,19 @@ public class Neo4jDriver extends Driver<Node> {
 		return results;
 	}
 
-	// read
-
-	@Override
-	public Collection<Node> collectVertices(final String type) {
-		final ResourceIterator<Node> iterator = graphDb.findNodes(DynamicLabel.label(type));
-
-		@SuppressWarnings("unchecked")
-		final Collection<Node> vertices = IteratorUtils.toList(iterator);
-		return vertices;
-	}
+//	@Override
+//	public Collection<Node> collectVertices(final String type) {
+//		final ResourceIterator<Node> iterator = graphDb.findNodes(DynamicLabel.label(type));
+//
+//		@SuppressWarnings("unchecked")
+//		final Collection<Node> vertices = IteratorUtils.toList(iterator);
+//		return vertices;
+//	}
 
 	// utility
 
 	public GraphDatabaseService getGraphDb() {
 		return graphDb;
-	}
-
-	@Override
-	public String getPostfix() {
-		return ".graphml";
 	}
 
 }
