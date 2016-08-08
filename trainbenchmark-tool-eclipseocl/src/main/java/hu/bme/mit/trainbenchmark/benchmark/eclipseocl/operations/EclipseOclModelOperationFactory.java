@@ -39,8 +39,8 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 	}
 
 	@Override
-	public ModelOperation<? extends EmfMatch, EmfDriver> createOperation(final RailwayOperation operationEnum,
-			final Optional<String> workspaceDir, final EmfDriver driver) throws Exception {
+	public ModelOperation<? extends EmfMatch, EmfDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+			final EmfDriver driver) throws Exception {
 
 		switch (operationEnum) {
 		// ConnectedSegments
@@ -61,12 +61,9 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
-			final EclipseOclQuery<EmfConnectedSegmentsMatch> query = new EclipseOclQueryConnectedSegments(driver,
-					workspaceDir);
-			final EmfTransformation<EmfConnectedSegmentsMatch, EmfDriver> transformation = new EmfTransformationRepairConnectedSegments<>(
-					driver);
-			final ModelOperation<EmfConnectedSegmentsMatch, EmfDriver> operation = ModelOperation.of(query,
-					transformation);
+			final EclipseOclQuery<EmfConnectedSegmentsMatch> query = new EclipseOclQueryConnectedSegments(driver, workspaceDir);
+			final EmfTransformation<EmfConnectedSegmentsMatch, EmfDriver> transformation = new EmfTransformationRepairConnectedSegments<>(driver);
+			final ModelOperation<EmfConnectedSegmentsMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
@@ -82,8 +79,7 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 		}
 		case POSLENGTH_REPAIR: {
 			final EclipseOclQuery<EmfPosLengthMatch> query = new EclipseOclQueryPosLength(driver, workspaceDir);
-			final EmfTransformation<EmfPosLengthMatch, EmfDriver> transformation = new EmfTransformationRepairPosLength<>(
-					driver);
+			final EmfTransformation<EmfPosLengthMatch, EmfDriver> transformation = new EmfTransformationRepairPosLength<>(driver);
 			final ModelOperation<EmfPosLengthMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -100,16 +96,14 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 		}
 		case ROUTESENSOR_REPAIR: {
 			final EclipseOclQuery<EmfRouteSensorMatch> query = new EclipseOclQueryRouteSensor(driver, workspaceDir);
-			final EmfTransformation<EmfRouteSensorMatch, EmfDriver> transformation = new EmfTransformationRepairRouteSensor<>(
-					driver);
+			final EmfTransformation<EmfRouteSensorMatch, EmfDriver> transformation = new EmfTransformationRepairRouteSensor<>(driver);
 			final ModelOperation<EmfRouteSensorMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
 			// SemaphoreNeighbor
 		case SEMAPHORENEIGHBOR: {
-			final EclipseOclQuery<EmfSemaphoreNeighborMatch> query = new EclipseOclQuerySemaphoreNeighbor(driver,
-					workspaceDir);
+			final EclipseOclQuery<EmfSemaphoreNeighborMatch> query = new EclipseOclQuerySemaphoreNeighbor(driver, workspaceDir);
 			final ModelOperation<EmfSemaphoreNeighborMatch, EmfDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -118,19 +112,15 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			break;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
-			final EclipseOclQuery<EmfSemaphoreNeighborMatch> query = new EclipseOclQuerySemaphoreNeighbor(driver,
-					workspaceDir);
-			final EmfTransformation<EmfSemaphoreNeighborMatch, EmfDriver> transformation = new EmfTransformationRepairSemaphoreNeighbor<>(
-					driver);
-			final ModelOperation<EmfSemaphoreNeighborMatch, EmfDriver> operation = ModelOperation.of(query,
-					transformation);
+			final EclipseOclQuery<EmfSemaphoreNeighborMatch> query = new EclipseOclQuerySemaphoreNeighbor(driver, workspaceDir);
+			final EmfTransformation<EmfSemaphoreNeighborMatch, EmfDriver> transformation = new EmfTransformationRepairSemaphoreNeighbor<>(driver);
+			final ModelOperation<EmfSemaphoreNeighborMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
 			// SwitchMonitored
 		case SWITCHMONITORED: {
-			final EclipseOclQuery<EmfSwitchMonitoredMatch> query = new EclipseOclQuerySwitchMonitored(driver,
-					workspaceDir);
+			final EclipseOclQuery<EmfSwitchMonitoredMatch> query = new EclipseOclQuerySwitchMonitored(driver, workspaceDir);
 			final ModelOperation<EmfSwitchMonitoredMatch, EmfDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -139,12 +129,9 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			break;
 		}
 		case SWITCHMONITORED_REPAIR: {
-			final EclipseOclQuery<EmfSwitchMonitoredMatch> query = new EclipseOclQuerySwitchMonitored(driver,
-					workspaceDir);
-			final EmfTransformation<EmfSwitchMonitoredMatch, EmfDriver> transformation = new EmfTransformationRepairSwitchMonitored<>(
-					driver);
-			final ModelOperation<EmfSwitchMonitoredMatch, EmfDriver> operation = ModelOperation.of(query,
-					transformation);
+			final EclipseOclQuery<EmfSwitchMonitoredMatch> query = new EclipseOclQuerySwitchMonitored(driver, workspaceDir);
+			final EmfTransformation<EmfSwitchMonitoredMatch, EmfDriver> transformation = new EmfTransformationRepairSwitchMonitored<>(driver);
+			final ModelOperation<EmfSwitchMonitoredMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
@@ -160,8 +147,7 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 		}
 		case SWITCHSET_REPAIR: {
 			final EclipseOclQuery<EmfSwitchSetMatch> query = new EclipseOclQuerySwitchSet(driver, workspaceDir);
-			final EmfTransformation<EmfSwitchSetMatch, EmfDriver> transformation = new EmfTransformationRepairSwitchSet<>(
-					driver);
+			final EmfTransformation<EmfSwitchSetMatch, EmfDriver> transformation = new EmfTransformationRepairSwitchSet<>(driver);
 			final ModelOperation<EmfSwitchSetMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}

@@ -46,13 +46,15 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
 			final SqlQuery<SqlConnectedSegmentsMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
-			final SqlTransformation<SqlConnectedSegmentsMatch, MySqlDriver> transformation = new SqlTransformationRepairConnectedSegments<>(driver, workspaceDir);
+			final SqlTransformation<SqlConnectedSegmentsMatch, MySqlDriver> transformation = new SqlTransformationRepairConnectedSegments<>(driver,
+					workspaceDir);
 			final ModelOperation<SqlConnectedSegmentsMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final SqlQuery<SqlConnectedSegmentsMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
-			final SqlTransformation<SqlConnectedSegmentsMatch, MySqlDriver> transformation = new SqlTransformationRepairConnectedSegments<>(driver, workspaceDir);
+			final SqlTransformation<SqlConnectedSegmentsMatch, MySqlDriver> transformation = new SqlTransformationRepairConnectedSegments<>(driver,
+					workspaceDir);
 			final ModelOperation<SqlConnectedSegmentsMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -137,9 +139,8 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			final ModelOperation<SqlSwitchSetMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
-		default:
-			throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 		}
+		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}
 
 }

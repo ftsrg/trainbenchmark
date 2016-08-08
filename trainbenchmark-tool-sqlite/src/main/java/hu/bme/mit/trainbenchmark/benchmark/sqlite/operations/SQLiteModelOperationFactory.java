@@ -12,12 +12,12 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
@@ -47,11 +47,10 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		case CONNECTEDSEGMENTS_INJECT: {
 			// TODO
 
-
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final SqlQuery<SqlConnectedSegmentsMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
-			final SQLiteTransformation<SqlConnectedSegmentsMatch> transformation = new SQLiteTransformationRepairConnectedSegments(driver, workspaceDir);
+			final SqlTransformation<SqlConnectedSegmentsMatch, SQLiteDriver> transformation = new SQLiteTransformationRepairConnectedSegments(driver, workspaceDir);
 			final ModelOperation<SqlConnectedSegmentsMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -67,7 +66,7 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case POSLENGTH_REPAIR: {
 			final SqlQuery<SqlPosLengthMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH);
-			final SqlTransformationRepairPosLength<SQLiteDriver> transformation = new SqlTransformationRepairPosLength<>(driver, workspaceDir);
+			final SqlTransformation<SqlPosLengthMatch, SQLiteDriver> transformation = new SqlTransformationRepairPosLength<>(driver, workspaceDir);
 			final ModelOperation<SqlPosLengthMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -83,7 +82,7 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case ROUTESENSOR_REPAIR: {
 			final SqlQuery<SqlRouteSensorMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
-			final SqlTransformationRepairRouteSensor<SQLiteDriver> transformation = new SqlTransformationRepairRouteSensor<>(driver, workspaceDir);
+			final SqlTransformation<SqlRouteSensorMatch, SQLiteDriver> transformation = new SqlTransformationRepairRouteSensor<>(driver, workspaceDir);
 			final ModelOperation<SqlRouteSensorMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -99,7 +98,7 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final SqlQuery<SqlSemaphoreNeighborMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
-			final SqlTransformationRepairSemaphoreNeighbor<SQLiteDriver> transformation = new SqlTransformationRepairSemaphoreNeighbor<>(driver, workspaceDir);
+			final SqlTransformation<SqlSemaphoreNeighborMatch, SQLiteDriver> transformation = new SqlTransformationRepairSemaphoreNeighbor<>(driver, workspaceDir);
 			final ModelOperation<SqlSemaphoreNeighborMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -115,7 +114,7 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final SqlQuery<SqlSwitchMonitoredMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
-			final SQLiteTransformationRepairSwitchMonitored transformation = new SQLiteTransformationRepairSwitchMonitored(driver, workspaceDir);
+			final SqlTransformation<SqlSwitchMonitoredMatch, SQLiteDriver> transformation = new SQLiteTransformationRepairSwitchMonitored(driver, workspaceDir);
 			final ModelOperation<SqlSwitchMonitoredMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -131,13 +130,12 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case SWITCHSET_REPAIR: {
 			final SqlQuery<SqlSwitchSetMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
-			final SqlTransformationRepairSwitchSet<SQLiteDriver> transformation = new SqlTransformationRepairSwitchSet<>(driver, workspaceDir);
+			final SqlTransformation<SqlSwitchSetMatch, SQLiteDriver> transformation = new SqlTransformationRepairSwitchSet<>(driver, workspaceDir);
 			final ModelOperation<SqlSwitchSetMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
-		default:
-			throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 		}
+		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}
 
 }
