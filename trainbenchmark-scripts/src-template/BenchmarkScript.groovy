@@ -1,6 +1,6 @@
 import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.constants.Scenario
 import BenchmarkReporter
