@@ -29,7 +29,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
 
-public class JenaTransformationInjectPosLength extends JenaTransformationInject {
+public class JenaTransformationInjectPosLength extends JenaTransformationInject<JenaVertexMatch> {
 
 	public JenaTransformationInjectPosLength(final JenaDriver driver) {
 		super(driver);

@@ -5,9 +5,11 @@ import java.util.Optional;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchMonitoredMatch;
@@ -52,9 +54,9 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
-			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectConnectedSegments(driver);
-			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			final SesameQuery<SesameConnectedSegmentsInjectMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
+			final SesameTransformation<SesameConnectedSegmentsInjectMatch> transformation = new SesameTransformationInjectConnectedSegments(driver);
+			final ModelOperation<SesameConnectedSegmentsInjectMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 
 		}
@@ -91,9 +93,9 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			final SesameQuery<SesameVertexMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR_INJECT);
-			final SesameTransformation<SesameVertexMatch> transformation = new SesameTransformationInjectRouteSensor(driver);
-			final ModelOperation<SesameVertexMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
+			final SesameQuery<SesameRouteSensorInjectMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR_INJECT);
+			final SesameTransformation<SesameRouteSensorInjectMatch> transformation = new SesameTransformationInjectRouteSensor(driver);
+			final ModelOperation<SesameRouteSensorInjectMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {

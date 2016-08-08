@@ -41,8 +41,10 @@ public abstract class SesameMatch {
 		case SWITCHSET:
 			return new SesameSwitchSetMatch(bs);
 		case CONNECTEDSEGMENTS_INJECT:
-		case POSLENGTH_INJECT:
+			return new SesameConnectedSegmentsInjectMatch(bs);
 		case ROUTESENSOR_INJECT:
+			return new SesameRouteSensorInjectMatch(bs);
+		case POSLENGTH_INJECT:
 		case SEMAPHORENEIGHBOR_INJECT:
 		case SWITCHMONITORED_INJECT:
 		case SWITCHSET_INJECT:

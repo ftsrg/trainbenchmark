@@ -11,27 +11,40 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class SesameTransformationInjectRouteSensor extends SesameTransformationInject {
+public class SesameTransformationInjectRouteSensor extends SesameTransformationInject<SesameRouteSensorInjectMatch> {
 
 	public SesameTransformationInjectRouteSensor(final SesameDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<SesameVertexMatch> routeMatches) throws RepositoryException {
-		final List<URI> routes = routeMatches.stream().map(it -> it.getVertex()).collect(Collectors.toList());
-		driver.deleteOutgoingEdges(routes, ModelConstants.ROUTE, ModelConstants.GATHERS);
+	public void activate(final Collection<SesameRouteSensorInjectMatch> routeSensorInjectMatches) throws RepositoryException {
+		final RepositoryConnection connection = driver.getConnection();
+		final ValueFactory vf = connection.getValueFactory();
+		
+		final List<Statement> statementsToRemove = new ArrayList<>(routeSensorInjectMatches.size());
+		final URI gathers = vf.createURI(BASE_PREFIX + ModelConstants.GATHERS);				
+		for (final SesameRouteSensorInjectMatch m : routeSensorInjectMatches) {
+			final Statement statement = vf.createStatement(m.getRoute(), gathers, m.getSensor());
+			statementsToRemove.add(statement);
+		}
+		connection.remove(statementsToRemove);
 	}
 
 }

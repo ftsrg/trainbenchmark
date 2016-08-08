@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransformationInject {
+public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransformationInject<SesameVertexMatch> {
 
 	public SesameTransformationInjectSemaphoreNeighbor(final SesameDriver driver) {
 		super(driver);

@@ -19,64 +19,42 @@ import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
 import java.util.Collection;
 
-import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
-import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryResult;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsInjectMatch;
 
-public class SesameTransformationInjectConnectedSegments extends SesameTransformationInject {
+public class SesameTransformationInjectConnectedSegments extends SesameTransformationInject<SesameConnectedSegmentsInjectMatch> {
 
 	public SesameTransformationInjectConnectedSegments(final SesameDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<SesameVertexMatch> segments) throws Exception {
+	public void activate(final Collection<SesameConnectedSegmentsInjectMatch> connectedSegmentsInjectMatches) throws Exception {
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
 		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTS_TO);
-		final URI monitoredByEdgeType = vf.createURI(BASE_PREFIX + MONITORED_BY);
-
+		final URI monitoredBy = vf.createURI(BASE_PREFIX + MONITORED_BY);
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
 
-		for (final SesameVertexMatch segment1Match : segments) {
-			final URI segment1 = segment1Match.getVertex();
-			
-			// get (segment3) node
-			final RepositoryResult<Statement> connectsToEdges0 = connection.getStatements(segment1, connectsTo, null, true);
-			while (connectsToEdges0.hasNext()) {
-				final Statement connectsToEdge0 = connectsToEdges0.next();
-				final Value segment3 = connectsToEdge0.getObject();
+		for (final SesameConnectedSegmentsInjectMatch csim : connectedSegmentsInjectMatches) {
+			// create (segment2) node
+			final Long newVertexId = driver.getNewVertexId();
+			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
+			connection.add(segment2, RDF.TYPE, segmentType);
 
-				// delete (segment1)-[:connectsTo]->(segment3) edge
-				connection.remove(connectsToEdge0);
-
-				// insert (segment2) node
-				final Long newVertexId = driver.getNewVertexId();
-				final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
-				connection.add(segment2, RDF.TYPE, segmentType);
-
-				// insert the edges of the (segment2) node				
-				// (segment1)-[:connectsTo]->(segment2)
-				connection.add(segment1, connectsTo, segment2);
-				// (segment2)-[:connectsTo]->(segment3)
-				connection.add(segment2, connectsTo, segment3);
-				
-				// get (sensor) nodes and insert (segment1)-[:monitoredBy]->(sensor) edges
-				final RepositoryResult<Statement> monitoredByEdges = connection.getStatements(segment1, monitoredByEdgeType, null, true);
-				while (monitoredByEdges.hasNext()) {
-					final Statement monitoredByEdge = monitoredByEdges.next();
-					final Value sensor = monitoredByEdge.getObject();
-					connection.add(segment2, monitoredByEdgeType, sensor);
-				}
-			}
+			// (segment1)-[:connectsTo]->(segment2)
+			connection.add(csim.getSegment1(), connectsTo, segment2);
+			// (segment2)-[:connectsTo]->(segment3)
+			connection.add(segment2, connectsTo, csim.getSegment3());
+			// (segment2)-[:monitoredBy]->(sensor)
+			connection.add(segment2, monitoredBy, csim.getSensor());
+			connection.remove(csim.getSegment1(), connectsTo, csim.getSegment3());
 		}
 	}
 

@@ -12,10 +12,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public abstract class JenaTransformationInject extends JenaTransformation<JenaVertexMatch> {
+public abstract class JenaTransformationInject<TJenaMatch extends JenaMatch> extends JenaTransformation<TJenaMatch> {
 
 	protected JenaTransformationInject(final JenaDriver driver) {
 		super(driver);

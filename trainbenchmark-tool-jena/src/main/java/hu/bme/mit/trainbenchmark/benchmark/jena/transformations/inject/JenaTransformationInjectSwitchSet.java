@@ -30,7 +30,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
-public class JenaTransformationInjectSwitchSet extends JenaTransformationInject {
+public class JenaTransformationInjectSwitchSet extends JenaTransformationInject<JenaVertexMatch> {
 
 	public JenaTransformationInjectSwitchSet(final JenaDriver jenaDriver) {
 		super(jenaDriver);

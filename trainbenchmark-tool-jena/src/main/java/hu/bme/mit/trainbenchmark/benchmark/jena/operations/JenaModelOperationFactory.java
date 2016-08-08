@@ -4,9 +4,11 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaQuery;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchMonitoredMatch;
@@ -52,9 +54,9 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
-			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectConnectedSegments(driver);
-			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			final JenaQuery<JenaConnectedSegmentsInjectMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
+			final JenaTransformation<JenaConnectedSegmentsInjectMatch> transformation = new JenaTransformationInjectConnectedSegments(driver);
+			final ModelOperation<JenaConnectedSegmentsInjectMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
@@ -92,9 +94,9 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR_INJECT);
-			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectRouteSensor(driver);
-			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			final JenaQuery<JenaRouteSensorInjectMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR_INJECT);
+			final JenaTransformation<JenaRouteSensorInjectMatch> transformation = new JenaTransformationInjectRouteSensor(driver);
+			final ModelOperation<JenaRouteSensorInjectMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {

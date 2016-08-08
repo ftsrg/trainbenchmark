@@ -12,10 +12,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 
-public abstract class SesameTransformationInject extends SesameTransformation<SesameVertexMatch> {
+public abstract class SesameTransformationInject<TSesameMatch extends SesameMatch> extends SesameTransformation<TSesameMatch> {
 
 	protected SesameTransformationInject(final SesameDriver driver) {
 		super(driver);

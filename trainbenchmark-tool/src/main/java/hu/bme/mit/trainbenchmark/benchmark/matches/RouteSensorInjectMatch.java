@@ -9,16 +9,12 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
+public interface RouteSensorInjectMatch {
 
-public abstract class JenaTransformationRepair<TJenaMatch extends JenaMatch> extends JenaTransformation<TJenaMatch> {
+	public Object getRoute();
 
-	protected JenaTransformationRepair(final JenaDriver jenaDriver) {
-		super(jenaDriver);
-	}
+	public Object getSensor();
 
 }

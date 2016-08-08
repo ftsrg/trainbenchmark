@@ -11,29 +11,33 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class JenaTransformationInjectRouteSensor extends JenaTransformationInject {
+public class JenaTransformationInjectRouteSensor extends JenaTransformationInject<JenaRouteSensorInjectMatch> {
 
 	public JenaTransformationInjectRouteSensor(final JenaDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<JenaVertexMatch> routeMatches) throws IOException {
-		final List<Resource> routes = routeMatches.stream().map(it -> it.getVertex()).collect(Collectors.toList());
-		driver.deleteAllOutgoingEdges(routes, ROUTE, GATHERS);
+	public void activate(final Collection<JenaRouteSensorInjectMatch> routeSensorInjectMatchsMatches) throws IOException {
+		final Model model = driver.getModel();
+		final Property gathers = model.getProperty(BASE_PREFIX + ModelConstants.GATHERS);
+		
+		for (final JenaRouteSensorInjectMatch rsim : routeSensorInjectMatchsMatches) {
+			model.remove(rsim.getRoute(), gathers, rsim.getSensor()); 
+		}
+	
 	}
 
 }
