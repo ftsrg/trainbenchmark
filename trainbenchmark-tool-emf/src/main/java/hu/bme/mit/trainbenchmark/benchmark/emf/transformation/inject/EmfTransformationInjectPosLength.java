@@ -15,18 +15,20 @@ import java.io.IOException;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 
-public class EmfTransformationInjectPosLength extends EmfTransformationInject<Segment> {
+public class EmfTransformationInjectPosLength<TDriver extends EmfDriver, TPosLengthInjectMatch extends EmfPosLengthInjectMatch>
+		extends EmfTransformation<TPosLengthInjectMatch, TDriver> {
 
-	public EmfTransformationInjectPosLength(final EmfDriver driver) {
+	public EmfTransformationInjectPosLength(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Segment> segments) throws IOException {
-		for (final Segment segment : segments) {
-			segment.setLength(0);
+	public void activate(final Collection<TPosLengthInjectMatch> matches) throws IOException {
+		for (final TPosLengthInjectMatch match : matches) {
+			match.getSegment().setLength(0);
 		}
 	}
 

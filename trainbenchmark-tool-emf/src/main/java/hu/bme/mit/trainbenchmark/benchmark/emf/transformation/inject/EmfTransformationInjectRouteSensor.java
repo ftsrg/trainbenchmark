@@ -14,25 +14,21 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.emf.common.util.EList;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 
-public class EmfTransformationInjectRouteSensor extends EmfTransformationInject<Route> {
+public class EmfTransformationInjectRouteSensor<TDriver extends EmfDriver, TRouteSensorInjectMatch extends EmfRouteSensorInjectMatch>
+		extends EmfTransformation<TRouteSensorInjectMatch, TDriver> {
 
-	public EmfTransformationInjectRouteSensor(final EmfDriver driver) {
+	public EmfTransformationInjectRouteSensor(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Route> routes) throws IOException {
-		for (final Route route : routes) {
-			final EList<Sensor> gatherss = route.getGathers();
-
-			// delete edges
-			gatherss.clear();
+	public void activate(final Collection<TRouteSensorInjectMatch> matches) throws IOException {
+		for (final TRouteSensorInjectMatch match : matches) {
+			match.getRoute().getGathers().remove(match.getSensor());
 		}
 	}
 

@@ -14,44 +14,37 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.emf.common.util.EList;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EmfTransformationInjectConnectedSegments extends EmfTransformationInject<Segment> {
+public class EmfTransformationInjectConnectedSegments<TDriver extends EmfDriver, TConnectedSegmentsInjectMatch extends EmfConnectedSegmentsInjectMatch>
+		extends EmfTransformation<TConnectedSegmentsInjectMatch, TDriver> {
 
-	public EmfTransformationInjectConnectedSegments(final EmfDriver driver) {
+	public EmfTransformationInjectConnectedSegments(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Segment> segments) throws IOException {
-		for (final Segment segment1 : segments) {
-			if (segment1.getConnectsTo().isEmpty()) {
-				continue;
-			}
+	public void activate(final Collection<TConnectedSegmentsInjectMatch> matches) throws IOException {
+		for (final EmfConnectedSegmentsInjectMatch match : matches) {
 			final Segment segment2 = RailwayFactory.eINSTANCE.createSegment();
 
-			final TrackElement segment3 = segment1.getConnectsTo().get(0);
-
 			// delete (segment1)-[:connectsTo]->(segment3)
-			segment1.getConnectsTo().remove(segment3);
+			match.getSegment1().getConnectsTo().remove(match.getSegment3());
 			// (segment1)-[:connectsTo]->(segment2)
-			segment1.getConnectsTo().add(segment2);
+			match.getSegment1().getConnectsTo().add(segment2);
 			// (segment2)-[:connectsTo]->(segment3)
-			segment2.getConnectsTo().add(segment3);
-			
+			segment2.getConnectsTo().add(match.getSegment3());
+
 			// (segment2)-[:monitoredBy]->(sensor)
-			final EList<Sensor> sensors = segment1.getMonitoredBy();
-			segment2.getMonitoredBy().addAll(sensors);
-			
+			segment2.getMonitoredBy().add(match.getSensor());
+
 			// add the segment2 to a Region to ensure proper containment hierarchy
-			final Region region = (Region) segment1.eContainer();
+			final Region region = (Region) match.getSegment1().eContainer();
 			region.getElements().add(segment2);
 		}
 	}

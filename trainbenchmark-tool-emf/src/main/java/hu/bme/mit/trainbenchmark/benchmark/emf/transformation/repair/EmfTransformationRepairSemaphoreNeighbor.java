@@ -15,9 +15,10 @@ import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 
 public class EmfTransformationRepairSemaphoreNeighbor<TDriver extends EmfDriver, TSemaphoreNeighborMatch extends EmfSemaphoreNeighborMatch>
-		extends EmfTransformationRepair<TSemaphoreNeighborMatch, TDriver> {
+		extends EmfTransformation<TSemaphoreNeighborMatch, TDriver> {
 
 	public EmfTransformationRepairSemaphoreNeighbor(final TDriver driver) {
 		super(driver);

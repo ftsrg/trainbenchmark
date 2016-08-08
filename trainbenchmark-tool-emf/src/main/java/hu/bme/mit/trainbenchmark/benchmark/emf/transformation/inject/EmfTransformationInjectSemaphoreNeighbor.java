@@ -15,18 +15,20 @@ import java.io.IOException;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 
-public class EmfTransformationInjectSemaphoreNeighbor extends EmfTransformationInject<Route> {
+public class EmfTransformationInjectSemaphoreNeighbor<TDriver extends EmfDriver, TSemaphoreNeighborInjectMatch extends EmfSemaphoreNeighborInjectMatch>
+		extends EmfTransformation<TSemaphoreNeighborInjectMatch, TDriver> {
 
-	public EmfTransformationInjectSemaphoreNeighbor(final EmfDriver driver) {
+	public EmfTransformationInjectSemaphoreNeighbor(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Route> routes) throws IOException {
-		for (final Route route : routes) {
-			route.setEntry(null);
+	public void activate(final Collection<TSemaphoreNeighborInjectMatch> matches) throws IOException {
+		for (final TSemaphoreNeighborInjectMatch match : matches) {
+			match.getRoute().setEntry(null);
 		}
 	}
 }

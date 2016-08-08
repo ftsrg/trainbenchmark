@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.transformation;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 
-public abstract class EmfTransformation<TObject, TDriver extends EmfDriver> extends ModelTransformation<TObject, TDriver> {
+public abstract class EmfTransformation<TMatch extends EmfMatch, TDriver extends EmfDriver> extends ModelTransformation<TMatch, TDriver> {
 
-	public EmfTransformation(TDriver driver) {
+	public EmfTransformation(final TDriver driver) {
 		super(driver);
 	}
 
