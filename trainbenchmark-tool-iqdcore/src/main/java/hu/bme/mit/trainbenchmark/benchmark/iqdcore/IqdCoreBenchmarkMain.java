@@ -9,25 +9,19 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
-import scala.collection.immutable.Vector;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore;
 
-public class IQDCoreSwitchMonitoredMatch extends IQDCoreMatch implements SwitchMonitoredMatch {
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
 
-	public IQDCoreSwitchMonitoredMatch(final Vector<Object> qs) {
-		super(qs);
-	}
+public class IqdCoreBenchmarkMain {
 
-	@Override
-	public Long getSw() {
-		return (Long) qs.apply(0);
-	}
-
-	@Override
-	public Long[] toArray() {
-		return new Long[] { getSw() };
+	public static void main(final String[] args) throws Exception {
+		final IqdCoreBenchmarkConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], IqdCoreBenchmarkConfigWrapper.class);
+		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(config);
+		scenario.performBenchmark();
+		System.exit(0);
 	}
 
 }

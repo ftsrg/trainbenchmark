@@ -11,28 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.ActiveRouteMatch;
-import scala.collection.immutable.Vector;
+import hu.bme.mit.trainbenchmark.benchmark.comparators.LongComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 
-public class IQDCoreActiveRouteMatch extends IQDCoreMatch implements ActiveRouteMatch {
+public class IqdCoreMatchComparator extends MatchComparator<IqdCoreMatch, Long> {
 
-	public IQDCoreActiveRouteMatch(final Vector<Object> qs) {
-		super(qs);
+	protected IqdCoreMatchComparator() {
+		super(new LongComparator());
+	}
+
+	public static IqdCoreMatchComparator create() {
+		return new IqdCoreMatchComparator();
 	}
 
 	@Override
-	public Long getRoute() {
-		return (Long) qs.apply(0);
+	public int compare(final IqdCoreMatch o1, final IqdCoreMatch o2) {
+		final Long[] m1 = o1.toArray();
+		final Long[] m2 = o2.toArray();
+		return compareArrays(m1, m2);
 	}
-
-	@Override
-	public Long[] toArray() {
-		return new Long[] { getRoute() };
-	}
-	
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 }

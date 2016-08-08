@@ -11,45 +11,41 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 import scala.collection.immutable.Vector;
-public class IQDCoreSwitchSetMatch extends IQDCoreMatch implements SwitchSetMatch {
 
-	public IQDCoreSwitchSetMatch(final Vector<Object> qs) {
+public class IqdCoreConnectedSegmentsMatch extends IqdCoreMatch implements ConnectedSegmentsMatch {
+
+	public IqdCoreConnectedSegmentsMatch(final Vector<Object> qs) {
 		super(qs);
 	}
 
 	@Override
-	public Long getSemaphore() {
-		return (Long) qs.apply(0);
-	}
+	public Long getSegment1() { return (Long) qs.apply(0); }
 
 	@Override
-	public Long getRoute() {
-		return (Long) qs.apply(1);
-	}
+	public Long getSegment2() { return (Long) qs.apply(1); }
 
 	@Override
-	public Long getSwP() {
-		return (Long) qs.apply(2);
-	}
+	public Long getSegment3() {	return (Long) qs.apply(2); }
 
 	@Override
-	public Long getSw() {
-		return (Long) qs.apply(3);
-	}
+	public Long getSegment4() {	return (Long) qs.apply(3); }
 
-	public String getPosition() {
-		return (String) qs.apply(4);
-	}
+	@Override
+	public Long getSegment5() { return (Long) qs.apply(4); }
 
-	public String getCurrentPosition() {
-		return (String) qs.apply(5);
-	}
+	@Override
+	public Long getSegment6() { return (Long) qs.apply(5); }
+
+    @Override
+    public Long getSensor() {
+        return (Long) qs.apply(6);
+    }
 
 	@Override
 	public Long[] toArray() {
-		return new Long[] { getSemaphore(), getRoute(), getSwP(), getSw() };
+		return new Long[] { getSensor(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(), getSegment6() };
 	}
 
 }

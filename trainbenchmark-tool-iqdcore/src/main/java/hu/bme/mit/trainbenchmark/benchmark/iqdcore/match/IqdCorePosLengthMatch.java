@@ -11,23 +11,26 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.comparators.LongComparator;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import scala.collection.immutable.Vector;
+public class IqdCorePosLengthMatch extends IqdCoreMatch implements PosLengthMatch {
 
-public class IQDCoreMatchComparator extends MatchComparator<IQDCoreMatch, Long> {
-
-	protected IQDCoreMatchComparator() {
-		super(new LongComparator());
-	}
-
-	public static IQDCoreMatchComparator create() {
-		return new IQDCoreMatchComparator();
+	public IqdCorePosLengthMatch(final Vector<Object> qs) {
+		super(qs);
 	}
 
 	@Override
-	public int compare(final IQDCoreMatch o1, final IQDCoreMatch o2) {
-		final Long[] m1 = o1.toArray();
-		final Long[] m2 = o2.toArray();
-		return compareArrays(m1, m2);
+	public Long getSegment() {
+		return (Long) qs.apply(0);
 	}
+
+	public Integer getLength() {
+		return (Integer) qs.apply(1);
+	}
+
+	@Override
+	public Long[] toArray() {
+		return new Long[] { getSegment() };
+	}
+
 }

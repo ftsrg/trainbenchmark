@@ -11,29 +11,28 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import hu.bme.mit.incqueryds.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchSetMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import hu.bme.mit.incqueryds.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreRouteSensorMatch;
 
-public class IQDCoreTransformationRepairSwitchSet extends IQDCoreTransformationRepair<IQDCoreSwitchSetMatch> {
+public class IqdCoreTransformationRepairRouteSensor extends IqdCoreTransformationRepair<IqdCoreRouteSensorMatch> {
 
-	public IQDCoreTransformationRepairSwitchSet(final IQDCoreDriver driver) {
+	public IqdCoreTransformationRepairRouteSensor(final IqdCoreDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<IQDCoreSwitchSetMatch> matches) throws IOException {
+	public void activate(final Collection<IqdCoreRouteSensorMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
-		for (final IQDCoreSwitchSetMatch match : matches) {
-			final Long sw = match.getSw();
-
-			transaction.remove(sw, CURRENTPOSITION, match.getCurrentPosition());
-			transaction.add(sw, CURRENTPOSITION, match.getPosition());
+		for (final IqdCoreRouteSensorMatch match : matches) {
+			final Long route = match.getRoute();
+			final Long sensor = match.getSensor();
+			transaction.add(route, GATHERS, sensor);
 		}
 	}
 

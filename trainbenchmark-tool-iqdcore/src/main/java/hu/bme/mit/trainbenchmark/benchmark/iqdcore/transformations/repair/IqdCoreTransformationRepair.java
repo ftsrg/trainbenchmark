@@ -11,13 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IQDCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IqdCoreTransformation;
 
-public abstract class IQDCoreTransformationRepair<TMatch extends IQDCoreMatch> extends IQDCoreTransformation<TMatch> {
+public abstract class IqdCoreTransformationRepair<TMatch extends IqdCoreMatch> extends IqdCoreTransformation<TMatch> {
 
-	protected IQDCoreTransformationRepair(final IQDCoreDriver driver) {
+	protected IqdCoreTransformationRepair(final IqdCoreDriver driver) {
 		super(driver);
 	}
 

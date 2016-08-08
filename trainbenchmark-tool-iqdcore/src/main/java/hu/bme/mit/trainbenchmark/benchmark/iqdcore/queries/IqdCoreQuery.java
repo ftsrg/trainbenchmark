@@ -21,18 +21,18 @@ import java.util.Optional;
 import hu.bme.mit.incqueryds.ConfigReader;
 import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.Iterator;
 import scala.collection.immutable.Vector;
 
-public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQuery<TPatternMatch, IQDCoreDriver> {
+public class IqdCoreQuery<TPatternMatch extends IqdCoreMatch> extends RdfModelQuery<TPatternMatch, IqdCoreDriver> {
 
 	private final TrainbenchmarkQuery queryEngine;
 
-	public IQDCoreQuery(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
+	public IqdCoreQuery(final IqdCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
 		super(driver, Optional.of(queryDirectory), query);
 		final String yamlPath = queryDirectory + query + driver.getQueryVariant() + ".yaml";
@@ -41,10 +41,10 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 		driver.setQuery(queryEngine);
 	}
 	
-	public static <TPatternMatch extends IQDCoreMatch> IQDCoreQuery<TPatternMatch>
-		create(final IQDCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
+	public static <TPatternMatch extends IqdCoreMatch> IqdCoreQuery<TPatternMatch>
+		create(final IqdCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
-		return new IQDCoreQuery<TPatternMatch>(driver, queryDirectory, query, input);
+		return new IqdCoreQuery<TPatternMatch>(driver, queryDirectory, query, input);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -53,12 +53,12 @@ public class IQDCoreQuery<TPatternMatch extends IQDCoreMatch> extends RdfModelQu
 		driver.flushLastTransaction();
 		driver.maybeMeasureMemory();
 
-		final List<IQDCoreMatch> matches = new ArrayList<>();
+		final List<IqdCoreMatch> matches = new ArrayList<>();
 
 		final Iterator<Vector<Object>> resultIterator = queryEngine.getResults().iterator();
 		while (resultIterator.hasNext()) {
 			final Vector<Object> qs = resultIterator.next();
-			final IQDCoreMatch match = IQDCoreMatch.createMatch(query, qs);
+			final IqdCoreMatch match = IqdCoreMatch.createMatch(query, qs);
 			matches.add(match);
 		}
 		return (Collection<TPatternMatch>) matches;

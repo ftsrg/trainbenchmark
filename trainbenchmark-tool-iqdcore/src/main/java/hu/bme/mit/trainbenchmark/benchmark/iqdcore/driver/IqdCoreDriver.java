@@ -12,16 +12,16 @@ import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
 
-public class IQDCoreDriver extends Driver<Long> {
+public class IqdCoreDriver extends Driver<Long> {
 
 	protected final TransactionFactory transactionFactory;
 	protected final TrainbenchmarkReader reader;
 	private TrainbenchmarkQuery query;
 	private Transaction lastTransaction;
-    private IQDCoreBenchmarkConfigWrapper config;
-	public IQDCoreDriver(final IQDCoreBenchmarkConfigWrapper config,
+    private IqdCoreBenchmarkConfigWrapper config;
+	public IqdCoreDriver(final IqdCoreBenchmarkConfigWrapper config,
 						 final TransactionFactory input) {
 		super();
 		this.transactionFactory = input;
