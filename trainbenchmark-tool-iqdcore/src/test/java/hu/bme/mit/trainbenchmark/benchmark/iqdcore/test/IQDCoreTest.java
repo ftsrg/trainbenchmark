@@ -13,8 +13,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDCoreBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
@@ -23,8 +23,8 @@ public class IQDCoreTest extends TrainBenchmarkTest {
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
 		final int messageSize = 16;
-		final IQDBenchmarkConfigWrapper config = new IQDBenchmarkConfigWrapper(bc, messageSize, "", null);
-		final IQDBenchmarkScenario scenario = IQDBenchmarkScenario.create(config);
+		final IQDCoreBenchmarkConfigWrapper config = new IQDCoreBenchmarkConfigWrapper(bc, messageSize, "", null);
+		final IQDCoreBenchmarkScenario scenario = IQDCoreBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}
