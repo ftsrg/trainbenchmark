@@ -45,7 +45,6 @@ public class ViatraTransformationInjectConnectedSegments extends ViatraTransform
 			// remove (segment1)-[:connectsTo]->(segment3)
 			csim.getSegment1().getConnectsTo().remove(csim.getSegment3());
 		}
-		System.out.println();
 	}
 
 }

@@ -41,8 +41,6 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
 
 		for (final JenaConnectedSegmentsInjectMatch csim : matches) {
-			System.out.println(csim.toString());
-			
 			// create (segment2) node
 			final Long newVertexId = driver.getNewVertexId();
 			final Resource segment2 = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
@@ -58,7 +56,6 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 			// remove (segment1)-[:connectsTo]->(segment3)
 			model.remove(csim.getSegment1(), connectsTo, csim.getSegment3());
 		}
-		System.out.println(" ");
 	}
 
 }
