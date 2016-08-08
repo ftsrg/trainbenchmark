@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectRouteSensor;
@@ -28,7 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameT
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class SesameTransformation<TObject> extends ModelTransformation<TObject, SesameDriver> {
+public abstract class SesameTransformation<TSesameMatch extends SesameMatch> extends ModelTransformation<TSesameMatch, SesameDriver> {
 
 	protected SesameTransformation(final SesameDriver driver) {
 		super(driver);

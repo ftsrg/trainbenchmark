@@ -109,7 +109,7 @@ public abstract class TrainBenchmarkTest {
 		// Assert
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
-		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(18));
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(17));
 	}
 	
 	@Test
@@ -151,7 +151,7 @@ public abstract class TrainBenchmarkTest {
 		// Assert
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(11));
-		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(205));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(21));
 	}
 
 	@Test

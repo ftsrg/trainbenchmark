@@ -27,7 +27,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class SesameTransformationInjectPosLength extends SesameTransformationInject {
+public class SesameTransformationInjectPosLength extends SesameTransformationInject<SesameVertexMatch> {
 
 	public SesameTransformationInjectPosLength(final SesameDriver driver) {
 		super(driver);
@@ -45,9 +45,7 @@ public class SesameTransformationInjectPosLength extends SesameTransformationInj
 			final URI segment = segmentMatch.getVertex();
 
 			final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, typeURI, null, true);
-			while (statementsToRemove.hasNext()) {
-				con.remove(statementsToRemove.next());
-			}
+			con.remove(statementsToRemove);
 
 			con.add(segment, typeURI, zeroLiteral);
 		}

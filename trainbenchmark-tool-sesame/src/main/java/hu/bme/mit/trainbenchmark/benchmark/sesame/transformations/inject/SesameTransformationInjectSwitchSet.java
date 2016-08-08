@@ -30,7 +30,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
-public class SesameTransformationInjectSwitchSet extends SesameTransformationInject {
+public class SesameTransformationInjectSwitchSet extends SesameTransformationInject<SesameVertexMatch> {
 
 	public SesameTransformationInjectSwitchSet(final SesameDriver driver) {
 		super(driver);

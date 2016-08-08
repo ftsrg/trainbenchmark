@@ -116,23 +116,6 @@ public class SesameDriver extends RdfDriver<URI> {
 		}
 	}
 
-	// read
-
-//	@Override
-//	public Collection<URI> collectVertices(final String type) throws RepositoryException {
-//		final URI typeURI = vf.createURI(BASE_PREFIX + type);
-//		final Collection<URI> vertices = new ArrayList<>();
-//
-//		final RepositoryResult<Statement> statements = connection.getStatements(null, RDF.TYPE, typeURI, true);
-//		while (statements.hasNext()) {
-//			final Statement s = statements.next();
-//			final URI uri = (URI) s.getSubject();
-//			vertices.add(uri);
-//		}
-//
-//		return vertices;
-//	}
-
 	// delete
 
 	public void deleteSingleOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
@@ -152,7 +135,7 @@ public class SesameDriver extends RdfDriver<URI> {
 		final URI edge = vf.createURI(BASE_PREFIX + edgeType);
 
 		for (final URI vertex : vertices) {
-			RepositoryResult<Statement> statementsToRemove;
+			final RepositoryResult<Statement> statementsToRemove;
 			if (outgoing) {
 				statementsToRemove = connection.getStatements(vertex, edge, null, true);
 			} else {

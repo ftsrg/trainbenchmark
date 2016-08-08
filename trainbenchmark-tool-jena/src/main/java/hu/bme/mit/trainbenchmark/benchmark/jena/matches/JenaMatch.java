@@ -41,8 +41,10 @@ public abstract class JenaMatch {
 		case SWITCHSET:
 			return new JenaSwitchSetMatch(qs);
 		case CONNECTEDSEGMENTS_INJECT:
-		case POSLENGTH_INJECT:
+			return new JenaConnectedSegmentsInjectMatch(qs);
 		case ROUTESENSOR_INJECT:
+			return new JenaRouteSensorInjectMatch(qs);
+		case POSLENGTH_INJECT:
 		case SEMAPHORENEIGHBOR_INJECT:
 		case SWITCHMONITORED_INJECT:
 		case SWITCHSET_INJECT:
