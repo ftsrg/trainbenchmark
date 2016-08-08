@@ -11,26 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 import scala.collection.immutable.Vector;
-public class IQDCorePosLengthMatch extends IQDCoreMatch implements PosLengthMatch {
 
-	public IQDCorePosLengthMatch(final Vector<Object> qs) {
+public class IqdCoreSwitchMonitoredMatch extends IqdCoreMatch implements SwitchMonitoredMatch {
+
+	public IqdCoreSwitchMonitoredMatch(final Vector<Object> qs) {
 		super(qs);
 	}
 
 	@Override
-	public Long getSegment() {
+	public Long getSw() {
 		return (Long) qs.apply(0);
-	}
-
-	public Integer getLength() {
-		return (Integer) qs.apply(1);
 	}
 
 	@Override
 	public Long[] toArray() {
-		return new Long[] { getSegment() };
+		return new Long[] { getSw() };
 	}
 
 }

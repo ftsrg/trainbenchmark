@@ -14,9 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 import scala.collection.immutable.Vector;
 
-public class IQDCoreSemaphoreNeighborMatch extends IQDCoreMatch implements SemaphoreNeighborMatch {
+public class IqdCoreSemaphoreNeighborMatch extends IqdCoreMatch implements SemaphoreNeighborMatch {
 
-	public IQDCoreSemaphoreNeighborMatch(final Vector<Object> qs) { super(qs); }
+	public IqdCoreSemaphoreNeighborMatch(final Vector<Object> qs) { super(qs); }
 
     @Override
 	public Long getSemaphore() { return (Long) qs.apply(0);	}

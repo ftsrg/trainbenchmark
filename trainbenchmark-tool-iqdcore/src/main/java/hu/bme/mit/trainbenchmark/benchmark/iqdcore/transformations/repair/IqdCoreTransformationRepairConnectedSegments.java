@@ -17,19 +17,19 @@ import java.io.IOException;
 import java.util.Collection;
 
 import hu.bme.mit.incqueryds.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreConnectedSegmentsMatch;
 
-public class IQDCoreTransformationRepairConnectedSegments extends IQDCoreTransformationRepair<IQDCoreConnectedSegmentsMatch> {
+public class IqdCoreTransformationRepairConnectedSegments extends IqdCoreTransformationRepair<IqdCoreConnectedSegmentsMatch> {
 
-	public IQDCoreTransformationRepairConnectedSegments(final IQDCoreDriver driver) {
+	public IqdCoreTransformationRepairConnectedSegments(final IqdCoreDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<IQDCoreConnectedSegmentsMatch> matches) throws IOException {
+	public void activate(final Collection<IqdCoreConnectedSegmentsMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
-		for (final IQDCoreConnectedSegmentsMatch match : matches) {
+		for (final IqdCoreConnectedSegmentsMatch match : matches) {
 			transaction.remove(match.getSegment1(), CONNECTS_TO, match.getSegment2());
 			transaction.remove(match.getSegment2(), CONNECTS_TO, match.getSegment3());
 			transaction.add(match.getSegment1(), CONNECTS_TO, match.getSegment3());

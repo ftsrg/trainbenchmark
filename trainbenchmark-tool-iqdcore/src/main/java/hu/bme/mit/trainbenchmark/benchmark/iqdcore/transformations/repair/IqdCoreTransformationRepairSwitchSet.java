@@ -12,28 +12,29 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
 import hu.bme.mit.incqueryds.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCoreSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSwitchSetMatch;
 
+import java.io.IOException;
 import java.util.Collection;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 
-public class IQDCoreTransformationRepairSwitchMonitored extends IQDCoreTransformationRepair<IQDCoreSwitchMonitoredMatch> {
+public class IqdCoreTransformationRepairSwitchSet extends IqdCoreTransformationRepair<IqdCoreSwitchSetMatch> {
 
-	public IQDCoreTransformationRepairSwitchMonitored(final IQDCoreDriver driver) {
+	public IqdCoreTransformationRepairSwitchSet(final IqdCoreDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<IQDCoreSwitchMonitoredMatch> matches) throws Exception {
+	public void activate(final Collection<IqdCoreSwitchSetMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
-		for (final IQDCoreSwitchMonitoredMatch match : matches) {
-			final long sw = match.getSw();
-			final long sensorID = driver.newKey();
-			transaction.add(sensorID, "type", SENSOR);
-			transaction.add(sw, MONITORED_BY, sensorID);
+		for (final IqdCoreSwitchSetMatch match : matches) {
+			final Long sw = match.getSw();
+
+			transaction.remove(sw, CURRENTPOSITION, match.getCurrentPosition());
+			transaction.add(sw, CURRENTPOSITION, match.getPosition());
 		}
 	}
+
 }

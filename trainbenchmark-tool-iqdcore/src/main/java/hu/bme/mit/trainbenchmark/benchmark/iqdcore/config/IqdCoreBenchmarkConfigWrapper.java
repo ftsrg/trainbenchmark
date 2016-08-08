@@ -3,16 +3,16 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.config;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-public class IQDCoreBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class IqdCoreBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
 	protected int messageSize;
 	protected String queryVariant;
 	protected String memoryMeasurementPath;
 
-	protected IQDCoreBenchmarkConfigWrapper() {
+	protected IqdCoreBenchmarkConfigWrapper() {
 	}
 
-	public IQDCoreBenchmarkConfigWrapper(final BenchmarkConfigCore config, final int messageSize, final String queryVariant,
+	public IqdCoreBenchmarkConfigWrapper(final BenchmarkConfigCore config, final int messageSize, final String queryVariant,
 			final String memoryMeasurementPath) {
 		super(config);
 		this.messageSize = messageSize;

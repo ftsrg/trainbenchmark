@@ -16,32 +16,32 @@ import com.google.common.base.Joiner;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.immutable.Vector;
 
-public abstract class IQDCoreMatch {
+public abstract class IqdCoreMatch {
 
 	protected Vector<Object> qs;
 
-	public IQDCoreMatch(final Vector<Object> qs2) {
+	public IqdCoreMatch(final Vector<Object> qs2) {
 		this.qs = qs2;
 	}
 
 	public abstract Long[] toArray();
 
-	public static IQDCoreMatch createMatch(final RailwayQuery query, final Vector<Object> qs) {
+	public static IqdCoreMatch createMatch(final RailwayQuery query, final Vector<Object> qs) {
 		switch (query) {
 		case ACTIVEROUTE:
-			return new IQDCoreActiveRouteMatch(qs);
+			return new IqdCoreActiveRouteMatch(qs);
 		case CONNECTEDSEGMENTS:
-			return new IQDCoreConnectedSegmentsMatch(qs);
+			return new IqdCoreConnectedSegmentsMatch(qs);
 		case POSLENGTH:
-			return new IQDCorePosLengthMatch(qs);
+			return new IqdCorePosLengthMatch(qs);
 		case ROUTESENSOR:
-			return new IQDCoreRouteSensorMatch(qs);
+			return new IqdCoreRouteSensorMatch(qs);
 		case SEMAPHORENEIGHBOR:
-			return new IQDCoreSemaphoreNeighborMatch(qs);
+			return new IqdCoreSemaphoreNeighborMatch(qs);
 		case SWITCHMONITORED:
-			return new IQDCoreSwitchMonitoredMatch(qs);
+			return new IqdCoreSwitchMonitoredMatch(qs);
 		case SWITCHSET:
-			return new IQDCoreSwitchSetMatch(qs);
+			return new IqdCoreSwitchSetMatch(qs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}

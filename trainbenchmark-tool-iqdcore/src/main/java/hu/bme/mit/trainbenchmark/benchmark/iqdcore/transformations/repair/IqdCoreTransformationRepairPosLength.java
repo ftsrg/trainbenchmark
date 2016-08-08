@@ -12,24 +12,24 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
 import hu.bme.mit.incqueryds.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IQDCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IQDCorePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCorePosLengthMatch;
 
 import java.io.IOException;
 import java.util.Collection;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 
-public class IQDCoreTransformationRepairPosLength extends IQDCoreTransformationRepair<IQDCorePosLengthMatch> {
+public class IqdCoreTransformationRepairPosLength extends IqdCoreTransformationRepair<IqdCorePosLengthMatch> {
 
-	public IQDCoreTransformationRepairPosLength(final IQDCoreDriver driver) {
+	public IqdCoreTransformationRepairPosLength(final IqdCoreDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<IQDCorePosLengthMatch> matches) throws IOException {
+	public void activate(final Collection<IqdCorePosLengthMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
-		for (final IQDCorePosLengthMatch match : matches) {
+		for (final IqdCorePosLengthMatch match : matches) {
 			final Long segment = match.getSegment();
 			final int length = match.getLength();
 			final int newLength = -length + 1;

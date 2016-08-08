@@ -19,17 +19,17 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IQDCoreBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IQDCoreBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IqdCoreBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.RouteSensorTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.ActiveRouteTest;
 
 @RunWith(Parameterized.class)
-public class IQDCoreRouteSensorTest extends RouteSensorTest {
+public class IqdCoreActiveRouteTest extends ActiveRouteTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B", "C");
+		return Arrays.asList("A", "B", "C", "D", "E");
 	}
 
 	@Parameter
@@ -39,8 +39,8 @@ public class IQDCoreRouteSensorTest extends RouteSensorTest {
 	protected BenchmarkResult runTest() throws Exception {
 		final int messageSize = 16;
 		System.out.println();
-		final IQDCoreBenchmarkConfigWrapper config = new IQDCoreBenchmarkConfigWrapper(bc, messageSize, variant, null);
-		final IQDCoreBenchmarkScenario scenario = IQDCoreBenchmarkScenario.create(config);
+		final IqdCoreBenchmarkConfigWrapper config = new IqdCoreBenchmarkConfigWrapper(bc, messageSize, variant, null);
+		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}
