@@ -41,14 +41,13 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 	}
 
 	@Override
-	public ModelOperation<? extends SesameMatch, SesameDriver> createOperation(final RailwayOperation operationEnum,
-			final Optional<String> workspacePath, final SesameDriver driver) throws Exception {
+	public ModelOperation<? extends SesameMatch, SesameDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspacePath,
+			final SesameDriver driver) throws Exception {
 
 		switch (operationEnum) {
 		// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
-			final SesameQuery<SesameConnectedSegmentsMatch> query = SesameQuery.create(driver, workspacePath,
-					RailwayQuery.CONNECTEDSEGMENTS);
+			final SesameQuery<SesameConnectedSegmentsMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS);
 			final ModelOperation<SesameConnectedSegmentsMatch, SesameDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -60,10 +59,8 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
-			final SesameQuery<SesameConnectedSegmentsMatch> query = SesameQuery.create(driver, workspacePath,
-					RailwayQuery.CONNECTEDSEGMENTS);
-			final SesameTransformation<SesameConnectedSegmentsMatch> transformation = new SesameTransformationRepairConnectedSegments(
-					driver);
+			final SesameQuery<SesameConnectedSegmentsMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS);
+			final SesameTransformation<SesameConnectedSegmentsMatch> transformation = new SesameTransformationRepairConnectedSegments(driver);
 			final ModelOperation<SesameConnectedSegmentsMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -108,8 +105,7 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 
 			// SemaphoreNeighbor
 		case SEMAPHORENEIGHBOR: {
-			final SesameQuery<SesameSemaphoreNeighborMatch> query = SesameQuery.create(driver, workspacePath,
-					RailwayQuery.SEMAPHORENEIGHBOR);
+			final SesameQuery<SesameSemaphoreNeighborMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.SEMAPHORENEIGHBOR);
 			final ModelOperation<SesameSemaphoreNeighborMatch, SesameDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -120,10 +116,8 @@ public class SesameModelOperationFactory extends ModelOperationFactory<SesameMat
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
-			final SesameQuery<SesameSemaphoreNeighborMatch> query = SesameQuery.create(driver, workspacePath,
-					RailwayQuery.SEMAPHORENEIGHBOR);
-			final SesameTransformation<SesameSemaphoreNeighborMatch> transformation = new SesameTransformationRepairSemaphoreNeighbor(
-					driver);
+			final SesameQuery<SesameSemaphoreNeighborMatch> query = SesameQuery.create(driver, workspacePath, RailwayQuery.SEMAPHORENEIGHBOR);
+			final SesameTransformation<SesameSemaphoreNeighborMatch> transformation = new SesameTransformationRepairSemaphoreNeighbor(driver);
 			final ModelOperation<SesameSemaphoreNeighborMatch, SesameDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}

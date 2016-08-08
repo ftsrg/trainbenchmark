@@ -22,13 +22,15 @@ public abstract class TrainBenchmarkTest {
 
 	protected abstract BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception;
 
+	protected final String xms = "1G";
+	protected final String xmx = "1G";
+	protected final long timeout = 120;
+	protected final int runs = 1;
+
 	@Test
 	public void batchTest() throws Exception {
 		// Arrange
-		final String xms = "1G";
-		final String xmx = "1G";
-		final long timeout = 120;
-		final int runs = 1;
+		final String workload = "BatchTest";
 		final int queryTransformationCount = 0;
 		final String modelFilename = "railway-batch-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
@@ -39,9 +41,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHMONITORED, //
 				RailwayOperation.SWITCHSET //
 		);
-		final String workload = "BatchTest";
-		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
-				workload);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
 
 		// Act
 		final BenchmarkResult result = runTest(bc);
@@ -59,10 +59,7 @@ public abstract class TrainBenchmarkTest {
 	@Test
 	public void repairTest() throws Exception {
 		// Arrange
-		final String xms = "1G";
-		final String xmx = "1G";
-		final long timeout = 120;
-		final int runs = 1;
+		final String workload = "RepairTest";
 		final int queryTransformationCount = 1;
 		final String modelFilename = "railway-repair-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
@@ -73,9 +70,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHMONITORED_REPAIR, //
 				RailwayOperation.SWITCHSET_REPAIR //
 		);
-		final String workload = "RepairTest";
-		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
-				workload);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
 
 		// Act
 		final BenchmarkResult result = runTest(bc);
@@ -96,33 +91,17 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(0));
 	}
 
-	// TODO the inject transformations should be checked separately as they interfere with each other
 	@Test
-	public void injectTest() throws Exception {
+	public void connectedSegmentsInjectTest() throws Exception {
 		// Arrange
-		final String xms = "1G";
-		final String xmx = "1G";
-		final long timeout = 120;
-		final int runs = 1;
 		final int queryTransformationCount = 1;
 		final String modelFilename = "railway-inject-1";
+		final String workload = "RouteSensorInjectTest";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS, //
-				RailwayOperation.CONNECTEDSEGMENTS_INJECT, //
-				RailwayOperation.POSLENGTH, //
-				RailwayOperation.POSLENGTH_INJECT, //
-				RailwayOperation.ROUTESENSOR, //
-				RailwayOperation.ROUTESENSOR_INJECT, //
-				RailwayOperation.SEMAPHORENEIGHBOR, //
-				RailwayOperation.SEMAPHORENEIGHBOR_INJECT, //
-				RailwayOperation.SWITCHMONITORED, //
-				RailwayOperation.SWITCHMONITORED_INJECT, //
-				RailwayOperation.SWITCHSET, //
-				RailwayOperation.SWITCHSET_INJECT //
+				RailwayOperation.CONNECTEDSEGMENTS_INJECT //
 		);
-		final String workload = "InjectTest";
-		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
-				workload);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
 
 		// Act
 		final BenchmarkResult result = runTest(bc);
@@ -131,16 +110,111 @@ public abstract class TrainBenchmarkTest {
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
 		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(18));
+	}
+	
+	@Test
+	public void posLengthInjectTest() throws Exception {
+		// Arrange
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-inject-1";
+		final String workload = "PosLengthInjectTest";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.POSLENGTH, //
+				RailwayOperation.POSLENGTH_INJECT //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(18));
 		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(1), Matchers.equalTo(28));
+	}
+
+	@Test
+	public void routeSensorInjectTest() throws Exception {
+		// Arrange
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-inject-1";
+		final String workload = "RouteSensorInjectTest";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.ROUTESENSOR, //
+				RailwayOperation.ROUTESENSOR_INJECT //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(11));
-		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(176));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(205));
+	}
+
+	@Test
+	public void semaphoreNeighborInjectTest() throws Exception {
+		// Arrange
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-inject-1";
+		final String workload = "SemaphoreNeighborInjectTest";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.SEMAPHORENEIGHBOR, //
+				RailwayOperation.SEMAPHORENEIGHBOR_INJECT //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(6));
-		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(21));
+	}
+
+	@Test
+	public void switchMonitoredInjectTest() throws Exception {
+		// Arrange
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-inject-1";
+		final String workload = "SwitchMonitoredInjectTest";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.SWITCHMONITORED, //
+				RailwayOperation.SWITCHMONITORED_INJECT //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(1), Matchers.equalTo(10));
+	}
+
+	@Test
+	public void switchSetInjectTest() throws Exception {
+		// Arrange
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-inject-1";
+		final String workload = "SwitchSetInjectTest";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.SWITCHSET, //
+				RailwayOperation.SWITCHSET_INJECT //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(3));
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(12));
 	}
 
 }
