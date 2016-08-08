@@ -25,9 +25,10 @@ import org.openrdf.repository.RepositoryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class SesameTransformationInjectRouteSensor extends SesameTransformationInject<SesameRouteSensorInjectMatch> {
+public class SesameTransformationInjectRouteSensor extends SesameTransformation<SesameRouteSensorInjectMatch> {
 
 	public SesameTransformationInjectRouteSensor(final SesameDriver driver) {
 		super(driver);

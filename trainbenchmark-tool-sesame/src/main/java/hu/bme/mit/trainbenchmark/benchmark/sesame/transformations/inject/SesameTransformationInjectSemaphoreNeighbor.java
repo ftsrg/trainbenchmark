@@ -20,9 +20,10 @@ import org.openrdf.repository.RepositoryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransformationInject<SesameVertexMatch> {
+public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransformation<SesameVertexMatch> {
 
 	public SesameTransformationInjectSemaphoreNeighbor(final SesameDriver driver) {
 		super(driver);

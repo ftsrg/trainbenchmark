@@ -23,8 +23,9 @@ import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public class JenaTransformationRepairRouteSensor extends JenaTransformationRepair<JenaRouteSensorMatch> {
+public class JenaTransformationRepairRouteSensor extends JenaTransformation<JenaRouteSensorMatch> {
 
 	public JenaTransformationRepairRouteSensor(final JenaDriver driver) {
 		super(driver);

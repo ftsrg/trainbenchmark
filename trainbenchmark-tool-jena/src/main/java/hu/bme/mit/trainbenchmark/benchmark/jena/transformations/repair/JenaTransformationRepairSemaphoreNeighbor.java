@@ -23,8 +23,9 @@ import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public class JenaTransformationRepairSemaphoreNeighbor extends JenaTransformationRepair<JenaSemaphoreNeighborMatch> {
+public class JenaTransformationRepairSemaphoreNeighbor extends JenaTransformation<JenaSemaphoreNeighborMatch> {
 
 	public JenaTransformationRepairSemaphoreNeighbor(final JenaDriver driver) {
 		super(driver);

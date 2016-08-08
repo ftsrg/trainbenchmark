@@ -21,9 +21,10 @@ import org.apache.jena.rdf.model.Property;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class JenaTransformationInjectRouteSensor extends JenaTransformationInject<JenaRouteSensorInjectMatch> {
+public class JenaTransformationInjectRouteSensor extends JenaTransformation<JenaRouteSensorInjectMatch> {
 
 	public JenaTransformationInjectRouteSensor(final JenaDriver driver) {
 		super(driver);

@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject;
 
 import java.io.IOException;
 import java.util.Collection;

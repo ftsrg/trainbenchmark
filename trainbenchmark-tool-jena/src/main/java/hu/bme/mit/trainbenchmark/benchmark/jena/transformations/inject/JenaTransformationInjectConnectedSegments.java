@@ -23,9 +23,10 @@ import org.apache.jena.vocabulary.RDF;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class JenaTransformationInjectConnectedSegments extends JenaTransformationInject<JenaConnectedSegmentsInjectMatch> {
+public class JenaTransformationInjectConnectedSegments extends JenaTransformation<JenaConnectedSegmentsInjectMatch> {
 
 	public JenaTransformationInjectConnectedSegments(final JenaDriver driver) {
 		super(driver);
@@ -34,23 +35,30 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 	@Override
 	public void activate(final Collection<JenaConnectedSegmentsInjectMatch> matches) throws Exception {
 		final Model model = driver.getModel();
-		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTS_TO);
-		final Property monitoredByProperty = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);
+		
+		final Property connectsTo = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTS_TO);
+		final Property monitoredBy = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);
 		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
 
 		for (final JenaConnectedSegmentsInjectMatch csim : matches) {
+			System.out.println(csim.toString());
+			
 			// create (segment2) node
 			final Long newVertexId = driver.getNewVertexId();
 			final Resource segment2 = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
 			model.add(model.createStatement(segment2, RDF.type, segmentType));
 
 			// (segment1)-[:connectsTo]->(segment2)
-			model.add(csim.getSegment1(), connectsToProperty, segment2);
+			model.add(csim.getSegment1(), connectsTo, segment2);
 			// (segment2)-[:connectsTo]->(segment3)
-			model.add(segment2, connectsToProperty, csim.getSegment3());
+			model.add(segment2, connectsTo, csim.getSegment3());
 			// (segment2)-[:monitoredBy]->(sensor)
-			model.add(segment2, monitoredByProperty, csim.getSensor());
+			model.add(segment2, monitoredBy, csim.getSensor());
+			
+			// remove (segment1)-[:connectsTo]->(segment3)
+			model.remove(csim.getSegment1(), connectsTo, csim.getSegment3());
 		}
+		System.out.println(" ");
 	}
 
 }
