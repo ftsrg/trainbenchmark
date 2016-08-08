@@ -24,26 +24,26 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class SesameTransformationInjectPosLength extends SesameTransformation<SesameVertexMatch> {
+public class SesameTransformationInjectPosLength extends SesameTransformation<SesamePosLengthInjectMatch> {
 
 	public SesameTransformationInjectPosLength(final SesameDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<SesameVertexMatch> segments) throws RepositoryException {
+	public void activate(final Collection<SesamePosLengthInjectMatch> matches) throws RepositoryException {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
 		final URI typeURI = vf.createURI(BASE_PREFIX + ModelConstants.LENGTH);
 		final Literal zeroLiteral = vf.createLiteral(0);
 
-		for (final SesameVertexMatch segmentMatch : segments) {
-			final URI segment = segmentMatch.getVertex();
+		for (final SesamePosLengthInjectMatch match : matches) {
+			final URI segment = match.getSegment();
 
 			final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, typeURI, null, true);
 			con.remove(statementsToRemove);

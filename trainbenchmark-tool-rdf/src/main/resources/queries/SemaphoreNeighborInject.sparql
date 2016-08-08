@@ -1,4 +1,7 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?v WHERE { ?v rdf:type base:Route }
+SELECT DISTINCT ?route
+WHERE {
+	?route rdf:type base:Route .
+}

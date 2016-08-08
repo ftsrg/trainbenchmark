@@ -11,24 +11,38 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_VERTEX;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_POSITION;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
 import org.openrdf.model.URI;
+import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-public class SesameVertexMatch extends SesameMatch {
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetInjectMatch;
 
-	public SesameVertexMatch(final BindingSet bs) {
+public class SesameSwitchSetInjectMatch extends SesameMatch implements SwitchSetInjectMatch {
+
+	public SesameSwitchSetInjectMatch(final BindingSet bs) {
 		super(bs);
 	}
-	
-	public URI getVertex() {
-		return (URI) bs.getValue(VAR_VERTEX);
+
+	@Override
+	public URI getSw() {
+		return (URI) bs.getValue(VAR_SW);
+	}
+
+	public Value getPosition() {
+		return bs.getValue(VAR_POSITION);
+	}
+
+	public Value getCurrentPosition() {
+		return bs.getValue(VAR_CURRENTPOSITION);
 	}
 
 	@Override
 	public URI[] toArray() {
-		return new URI[] { getVertex() };
+		return new URI[] { getSw() };
 	}
 
 }

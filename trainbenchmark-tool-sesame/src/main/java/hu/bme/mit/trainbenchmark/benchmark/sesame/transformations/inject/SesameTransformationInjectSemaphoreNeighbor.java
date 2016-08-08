@@ -19,19 +19,19 @@ import org.openrdf.model.URI;
 import org.openrdf.repository.RepositoryException;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransformation<SesameVertexMatch> {
+public class SesameTransformationInjectSemaphoreNeighbor extends SesameTransformation<SesameSemaphoreNeighborInjectMatch> {
 
 	public SesameTransformationInjectSemaphoreNeighbor(final SesameDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<SesameVertexMatch> routeMatches) throws RepositoryException {
-		final List<URI> routes = routeMatches.stream().map(it -> it.getVertex()).collect(Collectors.toList());
+	public void activate(final Collection<SesameSemaphoreNeighborInjectMatch> matches) throws RepositoryException {
+		final List<URI> routes = matches.stream().map(it -> it.getRoute()).collect(Collectors.toList());
 		driver.deleteSingleOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.ENTRY);
 	}
 

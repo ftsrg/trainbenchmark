@@ -35,13 +35,13 @@ public class SesameTransformationInjectRouteSensor extends SesameTransformation<
 	}
 
 	@Override
-	public void activate(final Collection<SesameRouteSensorInjectMatch> routeSensorInjectMatches) throws RepositoryException {
+	public void activate(final Collection<SesameRouteSensorInjectMatch> matches) throws RepositoryException {
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = connection.getValueFactory();
 		
-		final List<Statement> statementsToRemove = new ArrayList<>(routeSensorInjectMatches.size());
+		final List<Statement> statementsToRemove = new ArrayList<>(matches.size());
 		final URI gathers = vf.createURI(BASE_PREFIX + ModelConstants.GATHERS);				
-		for (final SesameRouteSensorInjectMatch m : routeSensorInjectMatches) {
+		for (final SesameRouteSensorInjectMatch m : matches) {
 			final Statement statement = vf.createStatement(m.getRoute(), gathers, m.getSensor());
 			statementsToRemove.add(statement);
 		}

@@ -50,7 +50,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final SqlQuery<SqlConnectedSegmentsMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
-			final SqlTransformation<SqlConnectedSegmentsMatch, SQLiteDriver> transformation = new SQLiteTransformationRepairConnectedSegments(driver, workspaceDir);
+			final SqlTransformation<SqlConnectedSegmentsMatch, SQLiteDriver> transformation = new SQLiteTransformationRepairConnectedSegments(driver,
+					workspaceDir);
 			final ModelOperation<SqlConnectedSegmentsMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -98,7 +99,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final SqlQuery<SqlSemaphoreNeighborMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
-			final SqlTransformation<SqlSemaphoreNeighborMatch, SQLiteDriver> transformation = new SqlTransformationRepairSemaphoreNeighbor<>(driver, workspaceDir);
+			final SqlTransformation<SqlSemaphoreNeighborMatch, SQLiteDriver> transformation = new SqlTransformationRepairSemaphoreNeighbor<>(driver,
+					workspaceDir);
 			final ModelOperation<SqlSemaphoreNeighborMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}

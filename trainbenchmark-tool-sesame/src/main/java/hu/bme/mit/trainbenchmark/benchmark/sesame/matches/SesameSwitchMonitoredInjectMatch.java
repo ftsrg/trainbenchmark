@@ -9,21 +9,29 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sql.matches;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import org.openrdf.model.URI;
+import org.openrdf.query.BindingSet;
 
-public class SqlVertexMatch extends SqlMatch {
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
-	public SqlVertexMatch(final ResultSet rs) throws SQLException {
-		match = new Long[] { rs.getLong(QueryConstants.VAR_VERTEX) };
+public class SesameSwitchMonitoredInjectMatch extends SesameMatch implements SwitchMonitoredMatch {
+
+	public SesameSwitchMonitoredInjectMatch(final BindingSet bs) {
+		super(bs);
 	}
 
-	public Long getVertex() {
-		return match[0];
+	@Override
+	public URI getSw() {
+		return (URI) bs.getValue(VAR_SW);
+	}
+
+	@Override
+	public URI[] toArray() {
+		return new URI[] { getSw() };
 	}
 
 }

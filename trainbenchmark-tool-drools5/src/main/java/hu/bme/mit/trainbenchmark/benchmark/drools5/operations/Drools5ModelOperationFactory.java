@@ -34,14 +34,13 @@ public class Drools5ModelOperationFactory extends ModelOperationFactory<EmfMatch
 	}
 
 	@Override
-	public ModelOperation<? extends EmfMatch, Drools5Driver> createOperation(final RailwayOperation operationEnum,
-			final Optional<String> workspaceDir, final Drools5Driver driver) throws Exception {
+	public ModelOperation<? extends EmfMatch, Drools5Driver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+			final Drools5Driver driver) throws Exception {
 
 		switch (operationEnum) {
 		// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
-			final Drools5Query<Drools5ConnectedSegmentsMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.CONNECTEDSEGMENTS);
+			final Drools5Query<Drools5ConnectedSegmentsMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
 			final ModelOperation<Drools5ConnectedSegmentsMatch, Drools5Driver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -50,19 +49,16 @@ public class Drools5ModelOperationFactory extends ModelOperationFactory<EmfMatch
 
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
-			final Drools5Query<Drools5ConnectedSegmentsMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.CONNECTEDSEGMENTS);
+			final Drools5Query<Drools5ConnectedSegmentsMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
 			final EmfTransformationRepairConnectedSegments<Drools5Driver, Drools5ConnectedSegmentsMatch> transformation = new EmfTransformationRepairConnectedSegments<>(
 					driver);
-			final ModelOperation<Drools5ConnectedSegmentsMatch, Drools5Driver> operation = ModelOperation.of(query,
-					transformation);
+			final ModelOperation<Drools5ConnectedSegmentsMatch, Drools5Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
 			// PosLength
 		case POSLENGTH: {
-			final Drools5Query<Drools5PosLengthMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.POSLENGTH);
+			final Drools5Query<Drools5PosLengthMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.POSLENGTH);
 			final ModelOperation<Drools5PosLengthMatch, Drools5Driver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -70,20 +66,16 @@ public class Drools5ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			// TODO
 		}
 		case POSLENGTH_REPAIR: {
-			final Drools5Query<Drools5PosLengthMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.POSLENGTH);
-			final EmfTransformation<Drools5PosLengthMatch, Drools5Driver> transformation = new EmfTransformationRepairPosLength<>(
-					driver);
-			final ModelOperation<Drools5PosLengthMatch, Drools5Driver> operation = ModelOperation.of(query,
-					transformation);
+			final Drools5Query<Drools5PosLengthMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.POSLENGTH);
+			final EmfTransformation<Drools5PosLengthMatch, Drools5Driver> transformation = new EmfTransformationRepairPosLength<>(driver);
+			final ModelOperation<Drools5PosLengthMatch, Drools5Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
 
 		}
 
 			// RouteSensor
 		case ROUTESENSOR: {
-			final Drools5Query<Drools5RouteSensorMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.ROUTESENSOR);
+			final Drools5Query<Drools5RouteSensorMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
 			final ModelOperation<Drools5RouteSensorMatch, Drools5Driver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -91,19 +83,15 @@ public class Drools5ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			// TODO
 		}
 		case ROUTESENSOR_REPAIR: {
-			final Drools5Query<Drools5RouteSensorMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.ROUTESENSOR);
-			final EmfTransformationRepairRouteSensor<Drools5Driver, Drools5RouteSensorMatch> transformation = new EmfTransformationRepairRouteSensor<>(
-					driver);
-			final ModelOperation<Drools5RouteSensorMatch, Drools5Driver> operation = ModelOperation.of(query,
-					transformation);
+			final Drools5Query<Drools5RouteSensorMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
+			final EmfTransformationRepairRouteSensor<Drools5Driver, Drools5RouteSensorMatch> transformation = new EmfTransformationRepairRouteSensor<>(driver);
+			final ModelOperation<Drools5RouteSensorMatch, Drools5Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
 			// SemaphoreNeighbor
 		case SEMAPHORENEIGHBOR: {
-			final Drools5Query<Drools5SemaphoreNeighborMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.SEMAPHORENEIGHBOR);
+			final Drools5Query<Drools5SemaphoreNeighborMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
 			final ModelOperation<Drools5SemaphoreNeighborMatch, Drools5Driver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -111,19 +99,16 @@ public class Drools5ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			// TODO
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
-			final Drools5Query<Drools5SemaphoreNeighborMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.SEMAPHORENEIGHBOR);
+			final Drools5Query<Drools5SemaphoreNeighborMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
 			final EmfTransformationRepairSemaphoreNeighbor<Drools5Driver, Drools5SemaphoreNeighborMatch> transformation = new EmfTransformationRepairSemaphoreNeighbor<>(
 					driver);
-			final ModelOperation<Drools5SemaphoreNeighborMatch, Drools5Driver> operation = ModelOperation.of(query,
-					transformation);
+			final ModelOperation<Drools5SemaphoreNeighborMatch, Drools5Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
 			// SwitchMonitored
 		case SWITCHMONITORED: {
-			final Drools5Query<Drools5SwitchMonitoredMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.SWITCHMONITORED);
+			final Drools5Query<Drools5SwitchMonitoredMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
 			final ModelOperation<Drools5SwitchMonitoredMatch, Drools5Driver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -131,19 +116,16 @@ public class Drools5ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			// TODO
 		}
 		case SWITCHMONITORED_REPAIR: {
-			final Drools5Query<Drools5SwitchMonitoredMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.SWITCHMONITORED);
+			final Drools5Query<Drools5SwitchMonitoredMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
 			final EmfTransformationRepairSwitchMonitored<Drools5Driver, Drools5SwitchMonitoredMatch> transformation = new EmfTransformationRepairSwitchMonitored<>(
 					driver);
-			final ModelOperation<Drools5SwitchMonitoredMatch, Drools5Driver> operation = ModelOperation.of(query,
-					transformation);
+			final ModelOperation<Drools5SwitchMonitoredMatch, Drools5Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
 			// SwitchSet
 		case SWITCHSET: {
-			final Drools5Query<Drools5SwitchSetMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.SWITCHSET);
+			final Drools5Query<Drools5SwitchSetMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.SWITCHSET);
 			final ModelOperation<Drools5SwitchSetMatch, Drools5Driver> operation = ModelOperation.of(query);
 			return operation;
 		}
@@ -151,12 +133,9 @@ public class Drools5ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			// TODO
 		}
 		case SWITCHSET_REPAIR: {
-			final Drools5Query<Drools5SwitchSetMatch> query = Drools5Query.create(driver, workspaceDir,
-					RailwayQuery.SWITCHSET);
-			final EmfTransformation<Drools5SwitchSetMatch, Drools5Driver> transformation = new EmfTransformationRepairSwitchSet<>(
-					driver);
-			final ModelOperation<Drools5SwitchSetMatch, Drools5Driver> operation = ModelOperation.of(query,
-					transformation);
+			final Drools5Query<Drools5SwitchSetMatch> query = Drools5Query.create(driver, workspaceDir, RailwayQuery.SWITCHSET);
+			final EmfTransformation<Drools5SwitchSetMatch, Drools5Driver> transformation = new EmfTransformationRepairSwitchSet<>(driver);
+			final ModelOperation<Drools5SwitchSetMatch, Drools5Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 

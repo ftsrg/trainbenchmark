@@ -26,24 +26,24 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
-public class JenaTransformationInjectSwitchSet extends JenaTransformation<JenaVertexMatch> {
+public class JenaTransformationInjectSwitchSet extends JenaTransformation<JenaSwitchSetInjectMatch> {
 
 	public JenaTransformationInjectSwitchSet(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 
 	@Override
-	public void activate(final Collection<JenaVertexMatch> switches) {
+	public void activate(final Collection<JenaSwitchSetInjectMatch> matches) {
 		final Model model = driver.getModel();
 		final Property currentPositionProperty = model.getProperty(BASE_PREFIX + CURRENTPOSITION);
 
-		for (final JenaVertexMatch swMatch : switches) {
-			final Resource sw = swMatch.getVertex();
+		for (final JenaSwitchSetInjectMatch match : matches) {
+			final Resource sw = match.getSw();
 			
 			final Selector selector = new SimpleSelector(sw, currentPositionProperty, (RDFNode) null);
 			final StmtIterator statementsToRemove = model.listStatements(selector);

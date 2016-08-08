@@ -35,6 +35,5 @@ public class QueryConstants {
 	public static final String VAR_SWP = "swP";
 	public static final String VAR_TE1 = "te1";
 	public static final String VAR_TE2 = "te2";
-	public static final String VAR_VERTEX = "v";
 
 }
