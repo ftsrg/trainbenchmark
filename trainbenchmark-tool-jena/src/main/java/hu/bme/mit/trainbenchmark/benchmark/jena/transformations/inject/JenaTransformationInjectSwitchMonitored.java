@@ -16,10 +16,13 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
 
 public class JenaTransformationInjectSwitchMonitored extends JenaTransformationInject {
 
@@ -28,7 +31,8 @@ public class JenaTransformationInjectSwitchMonitored extends JenaTransformationI
 	}
 
 	@Override
-	public void activate(final Collection<Resource> switches) throws IOException {
+	public void activate(final Collection<JenaVertexMatch> switchMatches) throws IOException {
+		final List<Resource> switches = switchMatches.stream().map(it -> it.getVertex()).collect(Collectors.toList());
 		driver.deleteSingleOutgoingEdge(switches, SWITCH, MONITORED_BY);
 	}
 

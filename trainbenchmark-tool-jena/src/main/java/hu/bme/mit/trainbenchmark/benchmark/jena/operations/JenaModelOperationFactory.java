@@ -11,7 +11,14 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair.JenaTransformationRepairRouteSensor;
@@ -45,8 +52,10 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			// TODO
-
+			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
+			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectConnectedSegments(driver);
+			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final JenaQuery<JenaConnectedSegmentsMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.CONNECTEDSEGMENTS);
@@ -62,7 +71,11 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
+			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.POSLENGTH_INJECT);
+			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectPosLength(driver);
+			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
+
 		}
 		case POSLENGTH_REPAIR: {
 			final JenaQuery<JenaPosLengthMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.POSLENGTH);
@@ -79,7 +92,10 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
+			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR_INJECT);
+			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectRouteSensor(driver);
+			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final JenaQuery<JenaRouteSensorMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.ROUTESENSOR);
@@ -95,7 +111,10 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
+			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.SEMAPHORENEIGHBOR_INJECT);
+			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectSemaphoreNeighbor(driver);
+			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final JenaQuery<JenaSemaphoreNeighborMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.SEMAPHORENEIGHBOR);
@@ -111,7 +130,10 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
+			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.SWITCHMONITORED_INJECT);
+			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectSwitchMonitored(driver);
+			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final JenaQuery<JenaSwitchMonitoredMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.SWITCHMONITORED);
@@ -127,7 +149,10 @@ public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, 
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
+			final JenaQuery<JenaVertexMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.SWITCHSET_INJECT);
+			final JenaTransformation<JenaVertexMatch> transformation = new JenaTransformationInjectSwitchSet(driver);
+			final ModelOperation<JenaVertexMatch, JenaDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final JenaQuery<JenaSwitchSetMatch> query = JenaQuery.create(driver, workspacePath, RailwayQuery.SWITCHSET);

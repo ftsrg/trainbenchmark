@@ -40,6 +40,13 @@ public abstract class JenaMatch {
 			return new JenaSwitchMonitoredMatch(qs);
 		case SWITCHSET:
 			return new JenaSwitchSetMatch(qs);
+		case CONNECTEDSEGMENTS_INJECT:
+		case POSLENGTH_INJECT:
+		case ROUTESENSOR_INJECT:
+		case SEMAPHORENEIGHBOR_INJECT:
+		case SWITCHMONITORED_INJECT:
+		case SWITCHSET_INJECT:
+			return new JenaVertexMatch(qs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}

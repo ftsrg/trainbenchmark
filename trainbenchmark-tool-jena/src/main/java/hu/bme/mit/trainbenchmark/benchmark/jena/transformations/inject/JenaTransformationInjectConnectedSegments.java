@@ -29,6 +29,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class JenaTransformationInjectConnectedSegments extends JenaTransformationInject {
@@ -38,13 +39,15 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 	}
 
 	@Override
-	public void activate(final Collection<Resource> segments) throws Exception {
+	public void activate(final Collection<JenaVertexMatch> segments) throws Exception {
 		final Model model = driver.getModel();
 		final Property connectsToProperty = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTS_TO);
 		final Property monitoredByProperty = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);
 		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
 
-		for (final Resource segment1 : segments) {
+		for (final JenaVertexMatch segment1Match : segments) {
+			final Resource segment1 = segment1Match.getVertex();
+
 			// get (segment3) node
 			final Selector connectsToEdges0selector = new SimpleSelector(segment1, connectsToProperty, (RDFNode) null);
 			final StmtIterator connectsToEdges0 = model.listStatements(connectsToEdges0selector);
@@ -73,8 +76,8 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 			}
 			// (segment2)-[:monitoredBy]->(sensor)
 			for (final RDFNode sensor : sensors) {
-				model.add(segment2, monitoredByProperty, sensor);								
-			}		
+				model.add(segment2, monitoredByProperty, sensor);
+			}
 			// (segment1)-[:connectsTo]->(segment2)
 			model.add(segment1, connectsToProperty, segment2);
 			// (segment2)-[:connectsTo]->(segment3)

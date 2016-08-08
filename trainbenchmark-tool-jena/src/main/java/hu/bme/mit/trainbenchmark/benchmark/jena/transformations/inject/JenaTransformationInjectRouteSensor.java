@@ -16,10 +16,13 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
 
 public class JenaTransformationInjectRouteSensor extends JenaTransformationInject {
 
@@ -28,7 +31,8 @@ public class JenaTransformationInjectRouteSensor extends JenaTransformationInjec
 	}
 
 	@Override
-	public void activate(final Collection<Resource> routes) throws IOException {
+	public void activate(final Collection<JenaVertexMatch> routeMatches) throws IOException {
+		final List<Resource> routes = routeMatches.stream().map(it -> it.getVertex()).collect(Collectors.toList());
 		driver.deleteAllOutgoingEdges(routes, ROUTE, GATHERS);
 	}
 

@@ -11,10 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_VERTEX;
+
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
-
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 public class SesameVertexMatch extends SesameMatch {
 
@@ -23,7 +23,7 @@ public class SesameVertexMatch extends SesameMatch {
 	}
 	
 	public URI getVertex() {
-		return (URI) bs.getValue(QueryConstants.VAR_VERTEX);
+		return (URI) bs.getValue(VAR_VERTEX);
 	}
 
 	@Override

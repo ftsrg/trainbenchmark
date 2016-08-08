@@ -48,8 +48,11 @@ public class JenaTransformationRepairPosLength extends JenaTransformationRepair<
 			final Selector selector = new SimpleSelector(segment, lengthProperty, (RDFNode) null);
 			final StmtIterator statementsToRemove = model.listStatements(selector);
 
-			final Statement oldStatement = statementsToRemove.next();
-			model.remove(oldStatement);
+			if (statementsToRemove.hasNext()) {
+				final Statement oldStatement = statementsToRemove.next();
+				model.remove(oldStatement);
+			}
+			
 			final Statement newStatement = model.createLiteralStatement(segment, lengthProperty, newLength);
 			model.add(newStatement);
 		}
