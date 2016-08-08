@@ -15,18 +15,20 @@ import java.io.IOException;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 
-public class EmfTransformationInjectSwitchMonitored extends EmfTransformationInject<Switch> {
+public class EmfTransformationInjectSwitchMonitored<TDriver extends EmfDriver, TSwitchMonitoredInjectMatch extends EmfSwitchMonitoredInjectMatch>
+		extends EmfTransformation<TSwitchMonitoredInjectMatch, TDriver> {
 
-	public EmfTransformationInjectSwitchMonitored(final EmfDriver driver) {
+	public EmfTransformationInjectSwitchMonitored(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Switch> switches) throws IOException {
-		for (final Switch sw : switches) {
-			sw.getMonitoredBy().clear();
+	public void activate(final Collection<TSwitchMonitoredInjectMatch> matches) throws IOException {
+		for (final TSwitchMonitoredInjectMatch match : matches) {
+			match.getSw().getMonitoredBy().clear();
 		}
 	}
 

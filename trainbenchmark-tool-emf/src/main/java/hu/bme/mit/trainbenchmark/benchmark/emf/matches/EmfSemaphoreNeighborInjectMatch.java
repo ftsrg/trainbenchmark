@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EmfSemaphoreNeighborInjectMatch extends EmfMatch implements SemaphoreNeighborMatch {
+public class EmfSemaphoreNeighborInjectMatch extends EmfMatch implements SemaphoreNeighborInjectMatch {
 
 	public EmfSemaphoreNeighborInjectMatch(final Semaphore semaphore, final Route route1, final Route route2, final Sensor sensor1,
 			final Sensor sensor2, final TrackElement te1, final TrackElement te2) {
@@ -27,38 +27,8 @@ public class EmfSemaphoreNeighborInjectMatch extends EmfMatch implements Semapho
 	}
 
 	@Override
-	public Semaphore getSemaphore() {
-		return (Semaphore) match[0];
-	}
-
-	@Override
-	public Route getRoute1() {
-		return (Route) match[1];
-	}
-
-	@Override
-	public Route getRoute2() {
-		return (Route) match[2];
-	}
-
-	@Override
-	public Sensor getSensor1() {
-		return (Sensor) match[3];
-	}
-
-	@Override
-	public Sensor getSensor2() {
-		return (Sensor) match[4];
-	}
-
-	@Override
-	public TrackElement getTe1() {
-		return (TrackElement) match[5];
-	}
-
-	@Override
-	public TrackElement getTe2() {
-		return (TrackElement) match[6];
+	public Route getRoute() {
+		return (Route) match[0];
 	}
 
 }

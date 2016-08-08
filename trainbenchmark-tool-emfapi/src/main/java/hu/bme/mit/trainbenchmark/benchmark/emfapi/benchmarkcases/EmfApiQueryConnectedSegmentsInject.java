@@ -9,26 +9,28 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsInjectMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class EmfTransformationRepairSwitchSet<TDriver extends EmfDriver, TSwitchSetMatch extends EmfSwitchSetMatch>
-		extends EmfTransformation<TSwitchSetMatch, TDriver> {
+public class EmfApiQueryConnectedSegmentsInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfConnectedSegmentsInjectMatch, TDriver> {
 
-	public EmfTransformationRepairSwitchSet(final TDriver driver) {
-		super(driver);
+	public EmfApiQueryConnectedSegmentsInject(final TDriver driver) {
+		super(RailwayQuery.CONNECTEDSEGMENTS, driver);
 	}
 
 	@Override
-	public void activate(final Collection<TSwitchSetMatch> matches) {
-		for (final EmfSwitchSetMatch sstm : matches) {
-			sstm.getSw().setCurrentPosition(sstm.getSwP().getPosition());
-		}
+	public Collection<EmfConnectedSegmentsInjectMatch> evaluate() {
+		final List<EmfConnectedSegmentsInjectMatch> matches = new ArrayList<>();
+
+		
+		return matches;
 	}
 
 }

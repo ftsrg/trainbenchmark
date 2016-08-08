@@ -15,21 +15,23 @@ import java.io.IOException;
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.railway.Position;
-import hu.bme.mit.trainbenchmark.railway.Switch;
 
-public class EmfTransformationInjectSwitchSet extends EmfTransformationInject<Switch> {
+public class EmfTransformationInjectSwitchSet<TDriver extends EmfDriver, TSwitchSetInjectMatch extends EmfSwitchSetInjectMatch>
+		extends EmfTransformation<TSwitchSetInjectMatch, TDriver> {
 
-	public EmfTransformationInjectSwitchSet(final EmfDriver driver) {
+	public EmfTransformationInjectSwitchSet(final TDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Switch> switches) throws IOException {
-		for (final Switch sw : switches) {
-			final Position currentPosition = sw.getCurrentPosition();
+	public void activate(final Collection<TSwitchSetInjectMatch> matches) throws IOException {
+		for (final TSwitchSetInjectMatch match : matches) {
+			final Position currentPosition = match.getSw().getCurrentPosition();
 			final Position newCurrentPosition = Position.get((currentPosition.ordinal() + 1) % Position.VALUES.size());
-			sw.setCurrentPosition(newCurrentPosition);
+			match.getSw().setCurrentPosition(newCurrentPosition);
 		}
 	}
 }
