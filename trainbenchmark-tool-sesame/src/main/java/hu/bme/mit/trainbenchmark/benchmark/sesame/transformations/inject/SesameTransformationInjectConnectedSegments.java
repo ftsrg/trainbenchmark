@@ -35,7 +35,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 	}
 
 	@Override
-	public void activate(final Collection<SesameConnectedSegmentsInjectMatch> connectedSegmentsInjectMatches) throws Exception {
+	public void activate(final Collection<SesameConnectedSegmentsInjectMatch> matches) throws Exception {
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
@@ -43,7 +43,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 		final URI monitoredBy = vf.createURI(BASE_PREFIX + MONITORED_BY);
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
 
-		for (final SesameConnectedSegmentsInjectMatch csim : connectedSegmentsInjectMatches) {			
+		for (final SesameConnectedSegmentsInjectMatch csim : matches) {			
 			// create (segment2) node
 			final Long newVertexId = driver.getNewVertexId();
 			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);

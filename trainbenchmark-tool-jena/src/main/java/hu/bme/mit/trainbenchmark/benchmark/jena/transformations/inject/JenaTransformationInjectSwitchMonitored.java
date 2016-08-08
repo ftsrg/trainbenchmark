@@ -22,18 +22,18 @@ import java.util.stream.Collectors;
 import org.apache.jena.rdf.model.Resource;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public class JenaTransformationInjectSwitchMonitored extends JenaTransformation<JenaVertexMatch> {
+public class JenaTransformationInjectSwitchMonitored extends JenaTransformation<JenaSwitchMonitoredInjectMatch> {
 
 	public JenaTransformationInjectSwitchMonitored(final JenaDriver jenaDriver) {
 		super(jenaDriver);
 	}
 
 	@Override
-	public void activate(final Collection<JenaVertexMatch> switchMatches) throws IOException {
-		final List<Resource> switches = switchMatches.stream().map(it -> it.getVertex()).collect(Collectors.toList());
+	public void activate(final Collection<JenaSwitchMonitoredInjectMatch> matches) throws IOException {
+		final List<Resource> switches = matches.stream().map(it -> it.getSw()).collect(Collectors.toList());
 		driver.deleteSingleOutgoingEdge(switches, SWITCH, MONITORED_BY);
 	}
 

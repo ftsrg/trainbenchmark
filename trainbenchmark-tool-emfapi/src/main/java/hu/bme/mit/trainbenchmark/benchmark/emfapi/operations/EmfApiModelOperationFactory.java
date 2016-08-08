@@ -50,14 +50,10 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			// TODO
-			break;
-
-			// final EmfApiQuery<, TDriver> query = new EmfApiQueryConnectedSegments<>(driver);
-			// final EmfTransformation<, TDriver> transformation = new EmfTransformationInjectConnectedSegments<>(
-			// driver);
-			// final ModelOperation<, TDriver> operation = ModelOperation.of(query, transformation);
-			// return operation;
+			final EmfApiQuery<EmfConnectedSegmentsMatch, TDriver> query = new EmfApiQueryConnectedSegments<>(driver);
+			final EmfTransformation<EmfConnectedSegmentsMatch, TDriver> transformation = new EmfTransformationRepairConnectedSegments<>(driver);
+			final ModelOperation<EmfConnectedSegmentsMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
@@ -74,8 +70,10 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfPosLengthMatch, TDriver> query = new EmfApiQueryPosLength<>(driver);
+			final EmfTransformation<EmfPosLengthMatch, TDriver> transformation = new EmfTransformationRepairPosLength<>(driver);
+			final ModelOperation<EmfPosLengthMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final EmfApiQuery<EmfPosLengthMatch, TDriver> query = new EmfApiQueryPosLength<>(driver);
@@ -91,8 +89,10 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfRouteSensorMatch, TDriver> query = new EmfApiQueryRouteSensor<>(driver);
+			final EmfTransformation<EmfRouteSensorMatch, TDriver> transformation = new EmfTransformationRepairRouteSensor<>(driver);
+			final ModelOperation<EmfRouteSensorMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final EmfApiQuery<EmfRouteSensorMatch, TDriver> query = new EmfApiQueryRouteSensor<>(driver);
@@ -108,8 +108,10 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfSemaphoreNeighborMatch, TDriver> query = new EmfApiQuerySemaphoreNeighbor<>(driver);
+			final EmfTransformation<EmfSemaphoreNeighborMatch, TDriver> transformation = new EmfTransformationRepairSemaphoreNeighbor<>(driver);
+			final ModelOperation<EmfSemaphoreNeighborMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final EmfApiQuery<EmfSemaphoreNeighborMatch, TDriver> query = new EmfApiQuerySemaphoreNeighbor<>(driver);
@@ -125,8 +127,10 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchMonitored<>(driver);
+			final EmfTransformation<EmfSwitchMonitoredMatch, TDriver> transformation = new EmfTransformationRepairSwitchMonitored<>(driver);
+			final ModelOperation<EmfSwitchMonitoredMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final EmfApiQuery<EmfSwitchMonitoredMatch, TDriver> query = new EmfApiQuerySwitchMonitored<>(driver);
@@ -142,8 +146,10 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfSwitchSetMatch, TDriver> query = new EmfApiQuerySwitchSet<>(driver);
+			final EmfTransformation<EmfSwitchSetMatch, TDriver> transformation = new EmfTransformationRepairSwitchSet<>(driver);
+			final ModelOperation<EmfSwitchSetMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final EmfApiQuery<EmfSwitchSetMatch, TDriver> query = new EmfApiQuerySwitchSet<>(driver);

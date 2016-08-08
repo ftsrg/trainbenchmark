@@ -27,22 +27,22 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public class JenaTransformationInjectPosLength extends JenaTransformation<JenaVertexMatch> {
+public class JenaTransformationInjectPosLength extends JenaTransformation<JenaPosLengthInjectMatch> {
 
 	public JenaTransformationInjectPosLength(final JenaDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<JenaVertexMatch> segments) throws IOException {
+	public void activate(final Collection<JenaPosLengthInjectMatch> matches) throws IOException {
 		final Model model = driver.getModel();
 		final Property lengthProperty = model.getProperty(BASE_PREFIX + LENGTH);
 
-		for (final JenaVertexMatch segmentMatch : segments) {
-			final Resource segment = segmentMatch.getVertex();
+		for (final JenaPosLengthInjectMatch match : matches) {
+			final Resource segment = match.getSegment();
 			final Selector selector = new SimpleSelector(segment, lengthProperty, (RDFNode) null);
 			final StmtIterator oldStatements = model.listStatements(selector);
 			if (!oldStatements.hasNext()) {

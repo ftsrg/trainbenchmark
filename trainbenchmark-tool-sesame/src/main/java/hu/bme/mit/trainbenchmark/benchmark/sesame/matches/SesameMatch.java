@@ -35,7 +35,7 @@ public abstract class SesameMatch {
 		case POSLENGTH:
 			return new SesamePosLengthMatch(bs);
 		case POSLENGTH_INJECT:
-			return new SesameVertexMatch(bs);
+			return new SesamePosLengthInjectMatch(bs);
 		case ROUTESENSOR:
 			return new SesameRouteSensorMatch(bs);
 		case ROUTESENSOR_INJECT:
@@ -43,15 +43,15 @@ public abstract class SesameMatch {
 		case SEMAPHORENEIGHBOR:
 			return new SesameSemaphoreNeighborMatch(bs);
 		case SEMAPHORENEIGHBOR_INJECT:
-			return new SesameVertexMatch(bs);
+			return new SesameSemaphoreNeighborInjectMatch(bs);
 		case SWITCHMONITORED:
 			return new SesameSwitchMonitoredMatch(bs);
 		case SWITCHMONITORED_INJECT:
-			return new SesameVertexMatch(bs);
+			return new SesameSwitchMonitoredInjectMatch(bs);
 		case SWITCHSET:
 			return new SesameSwitchSetMatch(bs);
 		case SWITCHSET_INJECT:
-			return new SesameVertexMatch(bs);
+			return new SesameSwitchSetInjectMatch(bs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}

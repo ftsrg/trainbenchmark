@@ -36,7 +36,7 @@ public abstract class JenaMatch {
 		case POSLENGTH:
 			return new JenaPosLengthMatch(qs);
 		case POSLENGTH_INJECT:
-			return new JenaVertexMatch(qs);
+			return new JenaPosLengthInjectMatch(qs);
 		case ROUTESENSOR:
 			return new JenaRouteSensorMatch(qs);
 		case ROUTESENSOR_INJECT:
@@ -44,15 +44,15 @@ public abstract class JenaMatch {
 		case SEMAPHORENEIGHBOR:
 			return new JenaSemaphoreNeighborMatch(qs);
 		case SEMAPHORENEIGHBOR_INJECT:
-			return new JenaVertexMatch(qs);
+			return new JenaSemaphoreNeighborInjectMatch(qs);
 		case SWITCHMONITORED:
 			return new JenaSwitchMonitoredMatch(qs);
 		case SWITCHMONITORED_INJECT:
-			return new JenaVertexMatch(qs);
+			return new JenaSwitchMonitoredInjectMatch(qs);
 		case SWITCHSET:
 			return new JenaSwitchSetMatch(qs);
 		case SWITCHSET_INJECT:
-			return new JenaVertexMatch(qs);
+			return new JenaSwitchSetInjectMatch(qs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}

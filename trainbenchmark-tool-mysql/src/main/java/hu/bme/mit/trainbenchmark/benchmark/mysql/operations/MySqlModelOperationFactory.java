@@ -6,14 +6,26 @@ import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SqlQuery;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairRouteSensor;
@@ -45,10 +57,10 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			final SqlQuery<SqlConnectedSegmentsMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
-			final SqlTransformation<SqlConnectedSegmentsMatch, MySqlDriver> transformation = new SqlTransformationRepairConnectedSegments<>(driver,
+			final SqlQuery<SqlConnectedSegmentsInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+			final SqlTransformation<SqlConnectedSegmentsInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectConnectedSegments<>(driver,
 					workspaceDir);
-			final ModelOperation<SqlConnectedSegmentsMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
+			final ModelOperation<SqlConnectedSegmentsInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
@@ -66,7 +78,10 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
+			final SqlQuery<SqlPosLengthInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH_INJECT);
+			final SqlTransformation<SqlPosLengthInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectPosLength<>(driver, workspaceDir);
+			final ModelOperation<SqlPosLengthInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final SqlQuery<SqlPosLengthMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH);
@@ -82,7 +97,10 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
+			final SqlQuery<SqlRouteSensorInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR_INJECT);
+			final SqlTransformation<SqlRouteSensorInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectRouteSensor<>(driver, workspaceDir);
+			final ModelOperation<SqlRouteSensorInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final SqlQuery<SqlRouteSensorMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
@@ -98,7 +116,10 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
+			final SqlQuery<SqlSemaphoreNeighborInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR_INJECT);
+			final SqlTransformation<SqlSemaphoreNeighborInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSemaphoreNeighbor<>(driver, workspaceDir);
+			final ModelOperation<SqlSemaphoreNeighborInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final SqlQuery<SqlSemaphoreNeighborMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
@@ -115,7 +136,10 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
+			final SqlQuery<SqlSwitchMonitoredInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED_INJECT);
+			final SqlTransformation<SqlSwitchMonitoredInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSwitchMonitored<>(driver, workspaceDir);
+			final ModelOperation<SqlSwitchMonitoredInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final SqlQuery<SqlSwitchMonitoredMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
@@ -131,7 +155,10 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
+			final SqlQuery<SqlSwitchSetInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET_INJECT);
+			final SqlTransformation<SqlSwitchSetInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSwitchSet<>(driver, workspaceDir);
+			final ModelOperation<SqlSwitchSetInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final SqlQuery<SqlSwitchSetMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
