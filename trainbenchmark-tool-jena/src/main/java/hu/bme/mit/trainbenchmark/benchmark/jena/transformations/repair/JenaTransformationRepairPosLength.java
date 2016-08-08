@@ -28,8 +28,9 @@ import org.apache.jena.rdf.model.StmtIterator;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public class JenaTransformationRepairPosLength extends JenaTransformationRepair<JenaPosLengthMatch> {
+public class JenaTransformationRepairPosLength extends JenaTransformation<JenaPosLengthMatch> {
 
 	public JenaTransformationRepairPosLength(final JenaDriver driver) {
 		super(driver);

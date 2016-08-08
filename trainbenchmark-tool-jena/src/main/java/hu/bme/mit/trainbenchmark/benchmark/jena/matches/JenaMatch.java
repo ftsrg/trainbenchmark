@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.matches;
 
+import org.apache.jena.ext.com.google.common.base.Joiner;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.rdf.model.Resource;
 
@@ -54,4 +55,10 @@ public abstract class JenaMatch {
 		}
 	}
 
+	@Override
+	public String toString() {
+		final Joiner joiner = Joiner.on(", ");
+		return joiner.join(toArray());
+	}
+	
 }

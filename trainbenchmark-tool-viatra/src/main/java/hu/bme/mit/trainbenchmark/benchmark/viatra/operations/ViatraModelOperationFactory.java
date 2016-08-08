@@ -7,24 +7,40 @@ import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ActiveRouteMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuery;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryActiveRoute;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryConnectedSegmentsInject;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryPosLengthInject;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryRouteSensorInject;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySemaphoreNeighborInject;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchMonitoredInject;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuerySwitchSetInject;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject.ViatraTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject.ViatraTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject.ViatraTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject.ViatraTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject.ViatraTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject.ViatraTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair.ViatraTransformationRepairRouteSensor;
@@ -44,9 +60,8 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 	}
 
 	@Override
-	public ModelOperation<? extends BasePatternMatch, ViatraDriver> createOperation(
-			final RailwayOperation operationEnum, final Optional<String> workspaceDir, final ViatraDriver driver)
-					throws Exception {
+	public ModelOperation<? extends BasePatternMatch, ViatraDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+			final ViatraDriver driver) throws Exception {
 
 		switch (operationEnum) {
 		// ActiveRoute
@@ -55,23 +70,23 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 			final ModelOperation<ActiveRouteMatch, ViatraDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
-		
-		// ConnectedSegments
+
+			// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
 			final ViatraQuery<ConnectedSegmentsMatch> query = new ViatraQueryConnectedSegments(driver);
 			final ModelOperation<ConnectedSegmentsMatch, ViatraDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			// TODO
-
+			final ViatraQuery<ConnectedSegmentsInjectMatch> query = new ViatraQueryConnectedSegmentsInject(driver);
+			final ViatraTransformation<ConnectedSegmentsInjectMatch> transformation = new ViatraTransformationInjectConnectedSegments(driver);
+			final ModelOperation<ConnectedSegmentsInjectMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final ViatraQuery<ConnectedSegmentsMatch> query = new ViatraQueryConnectedSegments(driver);
-			final ViatraTransformationRepairConnectedSegments transformation = new ViatraTransformationRepairConnectedSegments(
-					driver);
-			final ModelOperation<ConnectedSegmentsMatch, ViatraDriver> operation = ModelOperation.of(query,
-					transformation);
+			final ViatraTransformation<ConnectedSegmentsMatch> transformation = new ViatraTransformationRepairConnectedSegments(driver);
+			final ModelOperation<ConnectedSegmentsMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
@@ -83,7 +98,7 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 		}
 		case POSLENGTH_INJECT: {
 			final ViatraQuery<PosLengthInjectMatch> query = new ViatraQueryPosLengthInject(driver);
-			final ViatraTransformationInjectPosLength transformation = new ViatraTransformationInjectPosLength(driver);
+			final ViatraTransformation<PosLengthInjectMatch> transformation = new ViatraTransformationInjectPosLength(driver);
 			final ModelOperation<PosLengthInjectMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -102,12 +117,14 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
+			final ViatraQuery<RouteSensorInjectMatch> query = new ViatraQueryRouteSensorInject(driver);
+			final ViatraTransformation<RouteSensorInjectMatch> transformation = new ViatraTransformationInjectRouteSensor(driver);
+			final ModelOperation<RouteSensorInjectMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final ViatraQuery<RouteSensorMatch> query = new ViatraQueryRouteSensor(driver);
-			final ViatraTransformationRepairRouteSensor transformation = new ViatraTransformationRepairRouteSensor(
-					driver);
+			final ViatraTransformation<RouteSensorMatch> transformation = new ViatraTransformationRepairRouteSensor(driver);
 			final ModelOperation<RouteSensorMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -119,14 +136,15 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
+			final ViatraQuery<SemaphoreNeighborInjectMatch> query = new ViatraQuerySemaphoreNeighborInject(driver);
+			final ViatraTransformation<SemaphoreNeighborInjectMatch> transformation = new ViatraTransformationInjectSemaphoreNeighbor(driver);
+			final ModelOperation<SemaphoreNeighborInjectMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final ViatraQuery<SemaphoreNeighborMatch> query = new ViatraQuerySemaphoreNeighbor(driver);
-			final ViatraTransformationRepairSemaphoreNeighbor transformation = new ViatraTransformationRepairSemaphoreNeighbor(
-					driver);
-			final ModelOperation<SemaphoreNeighborMatch, ViatraDriver> operation = ModelOperation.of(query,
-					transformation);
+			final ViatraTransformation<SemaphoreNeighborMatch> transformation = new ViatraTransformationRepairSemaphoreNeighbor(driver);
+			final ModelOperation<SemaphoreNeighborMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
@@ -137,14 +155,15 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
+			final ViatraQuery<SwitchMonitoredInjectMatch> query = new ViatraQuerySwitchMonitoredInject(driver);
+			final ViatraTransformation<SwitchMonitoredInjectMatch> transformation = new ViatraTransformationInjectSwitchMonitored(driver);
+			final ModelOperation<SwitchMonitoredInjectMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final ViatraQuery<SwitchMonitoredMatch> query = new ViatraQuerySwitchMonitored(driver);
-			final ViatraTransformationRepairSwitchMonitored transformation = new ViatraTransformationRepairSwitchMonitored(
-					driver);
-			final ModelOperation<SwitchMonitoredMatch, ViatraDriver> operation = ModelOperation.of(query,
-					transformation);
+			final ViatraTransformation<SwitchMonitoredMatch> transformation = new ViatraTransformationRepairSwitchMonitored(driver);
+			final ModelOperation<SwitchMonitoredMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 
@@ -155,11 +174,14 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
+			final ViatraQuery<SwitchSetInjectMatch> query = new ViatraQuerySwitchSetInject(driver);
+			final ViatraTransformation<SwitchSetInjectMatch> transformation = new ViatraTransformationInjectSwitchSet(driver);
+			final ModelOperation<SwitchSetInjectMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final ViatraQuery<SwitchSetMatch> query = new ViatraQuerySwitchSet(driver);
-			final ViatraTransformationRepairSwitchSet transformation = new ViatraTransformationRepairSwitchSet(driver);
+			final ViatraTransformation<SwitchSetMatch> transformation = new ViatraTransformationRepairSwitchSet(driver);
 			final ModelOperation<SwitchSetMatch, ViatraDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}

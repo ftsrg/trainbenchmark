@@ -27,10 +27,11 @@ import org.apache.jena.rdf.model.StmtIterator;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
-public class JenaTransformationInjectSwitchSet extends JenaTransformationInject<JenaVertexMatch> {
+public class JenaTransformationInjectSwitchSet extends JenaTransformation<JenaVertexMatch> {
 
 	public JenaTransformationInjectSwitchSet(final JenaDriver jenaDriver) {
 		super(jenaDriver);

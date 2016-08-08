@@ -11,8 +11,8 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
@@ -25,8 +25,9 @@ import org.apache.jena.vocabulary.RDF;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 
-public class JenaTransformationRepairSwitchMonitored extends JenaTransformationRepair<JenaSwitchMonitoredMatch> {
+public class JenaTransformationRepairSwitchMonitored extends JenaTransformation<JenaSwitchMonitoredMatch> {
 
 	public JenaTransformationRepairSwitchMonitored(final JenaDriver driver) {
 		super(driver);

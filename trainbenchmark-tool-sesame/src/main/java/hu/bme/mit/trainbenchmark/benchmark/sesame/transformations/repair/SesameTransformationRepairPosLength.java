@@ -28,8 +28,9 @@ import org.openrdf.repository.RepositoryResult;
 
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesamePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 
-public class SesameTransformationRepairPosLength extends SesameTransformationRepair<SesamePosLengthMatch> {
+public class SesameTransformationRepairPosLength extends SesameTransformation<SesamePosLengthMatch> {
 
 	public SesameTransformationRepairPosLength(final SesameDriver driver) {
 		super(driver);

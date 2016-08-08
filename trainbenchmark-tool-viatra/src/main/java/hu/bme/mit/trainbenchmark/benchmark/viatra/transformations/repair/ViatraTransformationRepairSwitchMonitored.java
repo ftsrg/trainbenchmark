@@ -18,9 +18,12 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
+import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class ViatraTransformationRepairSwitchMonitored extends ViatraTransformation<SwitchMonitoredMatch> {
+
+	private static final String Region = null;
 
 	public ViatraTransformationRepairSwitchMonitored(final ViatraDriver driver) {
 		super(driver);
@@ -31,7 +34,8 @@ public class ViatraTransformationRepairSwitchMonitored extends ViatraTransformat
 		for (final SwitchMonitoredMatch match : matches) {
 			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
 			match.getSw().getMonitoredBy().add(sensor);
-			// TODO add unique id
+			final Region region = (Region) match.getSw().eContainer();
+			region.getSensors().add(sensor);
 		}
 	}
 
