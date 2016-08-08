@@ -18,13 +18,15 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SqlTransformationRepairPosLength<TSqlDriver extends SqlDriver> extends SqlTransformationRepair<SqlPosLengthMatch, TSqlDriver> {
+public class SqlTransformationRepairPosLength<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlPosLengthMatch, TSqlDriver> {
 
 	public SqlTransformationRepairPosLength(final TSqlDriver driver, final Optional<String> workspaceDir) 
 			throws IOException {
-		super(driver, workspaceDir, RailwayQuery.POSLENGTH);
+		super(driver, workspaceDir, RailwayQuery.POSLENGTH, Scenario.REPAIR);
 	}
 
 	@Override

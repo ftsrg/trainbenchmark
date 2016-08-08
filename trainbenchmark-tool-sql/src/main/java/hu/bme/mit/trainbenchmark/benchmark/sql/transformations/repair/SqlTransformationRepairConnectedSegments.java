@@ -18,13 +18,15 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SqlTransformationRepairConnectedSegments<TSqlDriver extends SqlDriver> extends SqlTransformationRepair<SqlConnectedSegmentsMatch, TSqlDriver> {
+public class SqlTransformationRepairConnectedSegments<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlConnectedSegmentsMatch, TSqlDriver> {
 
 	public SqlTransformationRepairConnectedSegments(final TSqlDriver driver, final Optional<String> workspaceDir)
 			throws IOException {
-		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, Scenario.REPAIR);
 	}
 
 	@Override

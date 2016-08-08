@@ -30,16 +30,28 @@ public abstract class SqlMatch extends LongMatch {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new SqlConnectedSegmentsMatch(rs);
+		case CONNECTEDSEGMENTS_INJECT:
+			return new SqlConnectedSegmentsInjectMatch(rs);
 		case POSLENGTH:
 			return new SqlPosLengthMatch(rs);
+		case POSLENGTH_INJECT:
+			return new SqlVertexMatch(rs);
 		case ROUTESENSOR:
 			return new SqlRouteSensorMatch(rs);
+		case ROUTESENSOR_INJECT:
+			return new SqlRouteSensorInjectMatch(rs);
 		case SEMAPHORENEIGHBOR:
 			return new SqlSemaphoreNeighborMatch(rs);
+		case SEMAPHORENEIGHBOR_INJECT:
+			return new SqlVertexMatch(rs);
 		case SWITCHMONITORED:
 			return new SqlSwitchMonitoredMatch(rs);
+		case SWITCHMONITORED_INJECT:
+			return new SqlVertexMatch(rs);
 		case SWITCHSET:
 			return new SqlSwitchSetMatch(rs);
+		case SWITCHSET_INJECT:
+			return new SqlVertexMatch(rs);
 		default:
 			throw new UnsupportedOperationException("Query not supported: " + query);
 		}

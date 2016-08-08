@@ -18,13 +18,15 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SqlTransformationRepairSemaphoreNeighbor<TSqlDriver extends SqlDriver> extends SqlTransformationRepair<SqlSemaphoreNeighborMatch, TSqlDriver> {
+public class SqlTransformationRepairSemaphoreNeighbor<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlSemaphoreNeighborMatch, TSqlDriver> {
 
 	public SqlTransformationRepairSemaphoreNeighbor(final TSqlDriver driver, final Optional<String> workspaceDir)
 			throws IOException {
-		super(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
+		super(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR, Scenario.REPAIR);
 	}
 
 	@Override

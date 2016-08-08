@@ -18,13 +18,15 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SqlTransformationRepairSwitchMonitored<TSqlDriver extends SqlDriver> extends SqlTransformationRepair<SqlSwitchMonitoredMatch, TSqlDriver> {
+public class SqlTransformationRepairSwitchMonitored<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlSwitchMonitoredMatch, TSqlDriver> {
 
 	public SqlTransformationRepairSwitchMonitored(final TSqlDriver driver, final Optional<String> workspaceDir)
 			throws IOException {
-		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
+		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, Scenario.REPAIR);
 	}
 
 	@Override

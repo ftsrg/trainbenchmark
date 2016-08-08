@@ -30,23 +30,26 @@ public abstract class SesameMatch {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new SesameConnectedSegmentsMatch(bs);
-		case POSLENGTH:
-			return new SesamePosLengthMatch(bs);
-		case ROUTESENSOR:
-			return new SesameRouteSensorMatch(bs);
-		case SEMAPHORENEIGHBOR:
-			return new SesameSemaphoreNeighborMatch(bs);
-		case SWITCHMONITORED:
-			return new SesameSwitchMonitoredMatch(bs);
-		case SWITCHSET:
-			return new SesameSwitchSetMatch(bs);
 		case CONNECTEDSEGMENTS_INJECT:
 			return new SesameConnectedSegmentsInjectMatch(bs);
+		case POSLENGTH:
+			return new SesamePosLengthMatch(bs);
+		case POSLENGTH_INJECT:
+			return new SesameVertexMatch(bs);
+		case ROUTESENSOR:
+			return new SesameRouteSensorMatch(bs);
 		case ROUTESENSOR_INJECT:
 			return new SesameRouteSensorInjectMatch(bs);
-		case POSLENGTH_INJECT:
+		case SEMAPHORENEIGHBOR:
+			return new SesameSemaphoreNeighborMatch(bs);
 		case SEMAPHORENEIGHBOR_INJECT:
+			return new SesameVertexMatch(bs);
+		case SWITCHMONITORED:
+			return new SesameSwitchMonitoredMatch(bs);
 		case SWITCHMONITORED_INJECT:
+			return new SesameVertexMatch(bs);
+		case SWITCHSET:
+			return new SesameSwitchSetMatch(bs);
 		case SWITCHSET_INJECT:
 			return new SesameVertexMatch(bs);
 		default:

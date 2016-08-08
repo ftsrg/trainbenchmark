@@ -16,29 +16,32 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Optional;
 
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SQLiteTransformationInjectConnectedSegments extends SQLiteTransformationInject {
+public class SQLiteTransformationInjectConnectedSegments extends SQLiteTransformation<SqlConnectedSegmentsInjectMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('segment1', ?);";
 	
 	public SQLiteTransformationInjectConnectedSegments(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, Scenario.INJECT);
 	}
 
 	@Override
-	public void activate(final Collection<Long> elements) throws SQLException {
-		if (preparedUpdateStatement == null) {
-			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
-		}
-
-		for (final Long element : elements) {
-			preparedUpdateStatement.setLong(1, element);
-			preparedUpdateStatement.executeUpdate();
-
-			driver.getConnection().createStatement().executeUpdate(updateQuery);
-		}
+	public void activate(final Collection<SqlConnectedSegmentsInjectMatch> elements) throws SQLException {
+//		if (preparedUpdateStatement == null) {
+//			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
+//		}
+//
+//		for (final Long element : elements) {
+//			preparedUpdateStatement.setLong(1, element);
+//			preparedUpdateStatement.executeUpdate();
+//
+//			driver.getConnection().createStatement().executeUpdate(updateQuery);
+//		}
 	}
 	
 }
