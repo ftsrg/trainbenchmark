@@ -51,4 +51,5 @@ public abstract class SesameMatch {
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}
 	}
+
 }

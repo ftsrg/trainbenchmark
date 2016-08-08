@@ -48,13 +48,15 @@ public class SesameTransformationRepairPosLength extends SesameTransformationRep
 
 			final RepositoryResult<Statement> statementsToRemove = con.getStatements(segment, lengthProperty, length, true);
 			while (statementsToRemove.hasNext()) {
-				con.remove(statementsToRemove.next());
+				final Statement oldStatement = statementsToRemove.next();
+				con.remove(oldStatement);
 			}
 
 			final Integer lengthInteger = new Integer(length.stringValue());
 			final Integer newLengthInteger = -lengthInteger + 1;
 			final Literal newLength = vf.createLiteral(newLengthInteger);
-			con.add(segment, lengthProperty, newLength);
+			final Statement newStatement = vf.createStatement(segment, lengthProperty, newLength);
+			con.add(newStatement);
 		}
 	}
 }

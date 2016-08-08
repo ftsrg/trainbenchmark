@@ -26,6 +26,7 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaVertexMatch;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
@@ -36,11 +37,13 @@ public class JenaTransformationInjectSwitchSet extends JenaTransformationInject 
 	}
 
 	@Override
-	public void activate(final Collection<Resource> switches) {
+	public void activate(final Collection<JenaVertexMatch> switches) {
 		final Model model = driver.getModel();
 		final Property currentPositionProperty = model.getProperty(BASE_PREFIX + CURRENTPOSITION);
 
-		for (final Resource sw : switches) {
+		for (final JenaVertexMatch swMatch : switches) {
+			final Resource sw = swMatch.getVertex();
+			
 			final Selector selector = new SimpleSelector(sw, currentPositionProperty, (RDFNode) null);
 			final StmtIterator statementsToRemove = model.listStatements(selector);
 			if (!statementsToRemove.hasNext()) {
