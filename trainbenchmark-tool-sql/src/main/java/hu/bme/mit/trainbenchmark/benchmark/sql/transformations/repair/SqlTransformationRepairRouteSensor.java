@@ -18,13 +18,15 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SqlTransformationRepairRouteSensor<TSqlDriver extends SqlDriver> extends SqlTransformationRepair<SqlRouteSensorMatch, TSqlDriver> {
+public class SqlTransformationRepairRouteSensor<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlRouteSensorMatch, TSqlDriver> {
 
 	public SqlTransformationRepairRouteSensor(final TSqlDriver driver, final Optional<String> workspaceDir)
 			throws IOException {
-		super(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
+		super(driver, workspaceDir, RailwayQuery.ROUTESENSOR, Scenario.REPAIR);
 	}
 
 	@Override

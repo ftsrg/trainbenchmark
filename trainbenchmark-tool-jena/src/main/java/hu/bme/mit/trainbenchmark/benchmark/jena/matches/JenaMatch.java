@@ -31,23 +31,26 @@ public abstract class JenaMatch {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new JenaConnectedSegmentsMatch(qs);
-		case POSLENGTH:
-			return new JenaPosLengthMatch(qs);
-		case ROUTESENSOR:
-			return new JenaRouteSensorMatch(qs);
-		case SEMAPHORENEIGHBOR:
-			return new JenaSemaphoreNeighborMatch(qs);
-		case SWITCHMONITORED:
-			return new JenaSwitchMonitoredMatch(qs);
-		case SWITCHSET:
-			return new JenaSwitchSetMatch(qs);
 		case CONNECTEDSEGMENTS_INJECT:
 			return new JenaConnectedSegmentsInjectMatch(qs);
+		case POSLENGTH:
+			return new JenaPosLengthMatch(qs);
+		case POSLENGTH_INJECT:
+			return new JenaVertexMatch(qs);
+		case ROUTESENSOR:
+			return new JenaRouteSensorMatch(qs);
 		case ROUTESENSOR_INJECT:
 			return new JenaRouteSensorInjectMatch(qs);
-		case POSLENGTH_INJECT:
+		case SEMAPHORENEIGHBOR:
+			return new JenaSemaphoreNeighborMatch(qs);
 		case SEMAPHORENEIGHBOR_INJECT:
+			return new JenaVertexMatch(qs);
+		case SWITCHMONITORED:
+			return new JenaSwitchMonitoredMatch(qs);
 		case SWITCHMONITORED_INJECT:
+			return new JenaVertexMatch(qs);
+		case SWITCHSET:
+			return new JenaSwitchSetMatch(qs);
 		case SWITCHSET_INJECT:
 			return new JenaVertexMatch(qs);
 		default:

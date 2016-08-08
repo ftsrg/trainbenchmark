@@ -18,14 +18,16 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class SQLiteTransformationRepairSwitchMonitored extends SQLiteTransformationRepair<SqlSwitchMonitoredMatch> {
+public class SQLiteTransformationRepairSwitchMonitored extends SQLiteTransformation<SqlSwitchMonitoredMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('switch', ?);";
 	
 	public SQLiteTransformationRepairSwitchMonitored(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
+		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, Scenario.REPAIR);
 	}
 
 	@Override

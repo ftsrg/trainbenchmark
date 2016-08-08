@@ -20,14 +20,16 @@ import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class SqlTransformation<TObject, TSqlDriver extends SqlDriver> extends ModelTransformation<TObject, TSqlDriver> {
+public abstract class SqlTransformation<TSqlMatch extends SqlMatch, TSqlDriver extends SqlDriver> extends ModelTransformation<TSqlMatch, TSqlDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
 	protected final String updateQuery;
 		
-	protected SqlTransformation(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query, final String scenario) throws IOException {
+	protected SqlTransformation(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query, final Scenario scenario) throws IOException {
 		super(driver);
 		
 		final String updatePath = workspaceDir.get() + driver.getResourceDirectory() + "transformations/" + scenario + query + ".sql";
