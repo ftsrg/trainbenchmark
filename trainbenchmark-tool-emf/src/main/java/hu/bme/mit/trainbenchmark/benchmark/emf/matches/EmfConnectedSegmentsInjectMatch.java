@@ -35,7 +35,7 @@ public class EmfConnectedSegmentsInjectMatch extends EmfMatch implements Connect
 
 	@Override
 	public Segment getSegment3() {
-		return (Segment) match[3];
+		return (Segment) match[2];
 	}
 
 }

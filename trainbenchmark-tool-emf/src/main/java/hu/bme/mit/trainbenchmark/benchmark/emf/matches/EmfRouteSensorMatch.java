@@ -25,19 +25,23 @@ public class EmfRouteSensorMatch extends EmfMatch implements RouteSensorMatch {
 		super();
 		match = new RailwayElement[] { route, sensor, switchPosition, sw };
 	}
-
+	
+	@Override
 	public Route getRoute() {
 		return (Route) match[0];
 	}
 
+	@Override
 	public Sensor getSensor() {
 		return (Sensor) match[1];
 	}
 
+	@Override
 	public SwitchPosition getSwP() {
 		return (SwitchPosition) match[2];
 	}
 
+	@Override
 	public Switch getSw() {
 		return (Switch) match[3];
 	}
