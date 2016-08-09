@@ -16,14 +16,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EmfApiQueryRouteSensorInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfRouteSensorInjectMatch, TDriver> {
 
@@ -35,18 +32,11 @@ public class EmfApiQueryRouteSensorInject<TDriver extends EmfDriver> extends Emf
 	public Collection<EmfRouteSensorInjectMatch> evaluate() {
 		final List<EmfRouteSensorInjectMatch> matches = new ArrayList<>();
 
-		final TreeIterator<EObject> contents = driver.getContainer().eAllContents();
-		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier("Segment");
-
-//		while (contents.hasNext()) {
-//			final EObject eObject = contents.next();
-//
-//			// if eObject's type is a descendant of clazz
-//			if (clazz.isSuperTypeOf(eObject.eClass())) {
-//				final Segment segment = (Segment) eObject;
-//				matches.add(new EmfPosLengthInjectMatch(segment));
-//			}
-//		}
+		for (final Route route : driver.getContainer().getRoutes()) {
+			for (final Sensor sensor : route.getGathers()) {
+				matches.add(new EmfRouteSensorInjectMatch(route, sensor));				
+			}
+		}
 
 		return matches;
 	}
