@@ -10,8 +10,27 @@ import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SemaphoreNeigh
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools6.queries.Drools6Query;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuery;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQueryConnectedSegmentsInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQueryPosLengthInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQueryRouteSensorInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuerySemaphoreNeighborInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuerySwitchMonitoredInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuerySwitchSetInject;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairRouteSensor;
@@ -45,8 +64,10 @@ public class Drools6ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			// TODO
-
+			final EmfApiQuery<EmfConnectedSegmentsInjectMatch, Drools6Driver> query = new EmfApiQueryConnectedSegmentsInject<>(driver);
+			final EmfTransformation<EmfConnectedSegmentsInjectMatch, Drools6Driver> transformation = new EmfTransformationInjectConnectedSegments<>(driver);
+			final ModelOperation<EmfConnectedSegmentsInjectMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final Drools6Query<Drools6ConnectedSegmentsMatch> query = Drools6Query.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
@@ -63,14 +84,16 @@ public class Drools6ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
+			final EmfApiQuery<EmfPosLengthInjectMatch, Drools6Driver> query = new EmfApiQueryPosLengthInject<>(driver);
+			final EmfTransformation<EmfPosLengthInjectMatch, Drools6Driver> transformation = new EmfTransformationInjectPosLength<>(driver);
+			final ModelOperation<EmfPosLengthInjectMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final Drools6Query<Drools6PosLengthMatch> query = Drools6Query.create(driver, workspaceDir, RailwayQuery.POSLENGTH);
 			final EmfTransformation<Drools6PosLengthMatch, Drools6Driver> transformation = new EmfTransformationRepairPosLength<>(driver);
 			final ModelOperation<Drools6PosLengthMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
-
 		}
 
 			// RouteSensor
@@ -80,7 +103,10 @@ public class Drools6ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
+			final EmfApiQuery<EmfRouteSensorInjectMatch, Drools6Driver> query = new EmfApiQueryRouteSensorInject<>(driver);
+			final EmfTransformation<EmfRouteSensorInjectMatch, Drools6Driver> transformation = new EmfTransformationInjectRouteSensor<>(driver);
+			final ModelOperation<EmfRouteSensorInjectMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final Drools6Query<Drools6RouteSensorMatch> query = Drools6Query.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
@@ -96,7 +122,10 @@ public class Drools6ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
+			final EmfApiQuery<EmfSemaphoreNeighborInjectMatch, Drools6Driver> query = new EmfApiQuerySemaphoreNeighborInject<>(driver);
+			final EmfTransformation<EmfSemaphoreNeighborInjectMatch, Drools6Driver> transformation = new EmfTransformationInjectSemaphoreNeighbor<>(driver);
+			final ModelOperation<EmfSemaphoreNeighborInjectMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final Drools6Query<Drools6SemaphoreNeighborMatch> query = Drools6Query.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
@@ -113,7 +142,10 @@ public class Drools6ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
+			final EmfApiQuery<EmfSwitchMonitoredInjectMatch, Drools6Driver> query = new EmfApiQuerySwitchMonitoredInject<>(driver);
+			final EmfTransformation<EmfSwitchMonitoredInjectMatch, Drools6Driver> transformation = new EmfTransformationInjectSwitchMonitored<>(driver);
+			final ModelOperation<EmfSwitchMonitoredInjectMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final Drools6Query<Drools6SwitchMonitoredMatch> query = Drools6Query.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
@@ -130,7 +162,10 @@ public class Drools6ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
+			final EmfApiQuery<EmfSwitchSetInjectMatch, Drools6Driver> query = new EmfApiQuerySwitchSetInject<>(driver);
+			final EmfTransformation<EmfSwitchSetInjectMatch, Drools6Driver> transformation = new EmfTransformationInjectSwitchSet<>(driver);
+			final ModelOperation<EmfSwitchSetInjectMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final Drools6Query<Drools6SwitchSetMatch> query = Drools6Query.create(driver, workspaceDir, RailwayQuery.SWITCHSET);
@@ -138,10 +173,8 @@ public class Drools6ModelOperationFactory extends ModelOperationFactory<EmfMatch
 			final ModelOperation<Drools6SwitchSetMatch, Drools6Driver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
-
-		default:
-			throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 		}
+		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}
 
 }
