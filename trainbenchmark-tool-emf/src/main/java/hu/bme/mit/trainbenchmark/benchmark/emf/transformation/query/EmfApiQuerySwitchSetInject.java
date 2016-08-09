@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,35 +20,34 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EmfApiQueryPosLengthInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfPosLengthInjectMatch, TDriver> {
+public class EmfApiQuerySwitchSetInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfSwitchSetInjectMatch, TDriver> {
 
-	public EmfApiQueryPosLengthInject(final TDriver driver) {
-		super(RailwayQuery.POSLENGTH_INJECT, driver);
+	public EmfApiQuerySwitchSetInject(final TDriver driver) {
+		super(RailwayQuery.SWITCHSET_INJECT, driver);
 	}
 
 	@Override
-	public Collection<EmfPosLengthInjectMatch> evaluate() {
-		final List<EmfPosLengthInjectMatch> matches = new ArrayList<>();
+	public Collection<EmfSwitchSetInjectMatch> evaluate() {
+		final List<EmfSwitchSetInjectMatch> matches = new ArrayList<>();
 
 		final EList<Region> regions = driver.getContainer().getRegions();
-		final EClass clazz = RailwayPackage.eINSTANCE.getSegment();
+		final EClass clazz = RailwayPackage.eINSTANCE.getSwitch();
 		
 		for (final Region region : regions) {
 			for (final TrackElement te : region.getElements()) {
 				if (te.eClass().isSuperTypeOf(clazz)) {
-					matches.add(new EmfPosLengthInjectMatch((Segment) te));
+					matches.add(new EmfSwitchSetInjectMatch((Switch) te));
 				}
 			}
 		}
 		
 		return matches;
 	}
-
 }

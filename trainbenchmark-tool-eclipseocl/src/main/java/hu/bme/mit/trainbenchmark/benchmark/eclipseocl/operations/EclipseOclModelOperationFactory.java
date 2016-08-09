@@ -10,14 +10,33 @@ import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries.EclipseOclQuerySem
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries.EclipseOclQuerySwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries.EclipseOclQuerySwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.inject.EmfTransformationInjectSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuery;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQueryConnectedSegmentsInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQueryPosLengthInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQueryRouteSensorInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuerySemaphoreNeighborInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuerySwitchMonitoredInject;
+import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuerySwitchSetInject;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair.EmfTransformationRepairRouteSensor;
@@ -50,15 +69,10 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			// TODO
-			break;
-
-			// final EmfApiQuery<, EmfDriver> query = new EmfApiQueryConnectedSegments<>(driver);
-			// final EmfTransformation<, EmfDriver> transformation = new EmfTransformationInjectConnectedSegments<>(
-			// driver);
-			// final ModelOperation<, EmfDriver> operation = ModelOperation.of(query, transformation);
-			// return operation;
-
+			final EmfApiQuery<EmfConnectedSegmentsInjectMatch, EmfDriver> query = new EmfApiQueryConnectedSegmentsInject<>(driver);
+			final EmfTransformation<EmfConnectedSegmentsInjectMatch, EmfDriver> transformation = new EmfTransformationInjectConnectedSegments<>(driver);
+			final ModelOperation<EmfConnectedSegmentsInjectMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final EclipseOclQuery<EmfConnectedSegmentsMatch> query = new EclipseOclQueryConnectedSegments(driver, workspaceDir);
@@ -74,8 +88,10 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfPosLengthInjectMatch, EmfDriver> query = new EmfApiQueryPosLengthInject<>(driver);
+			final EmfTransformation<EmfPosLengthInjectMatch, EmfDriver> transformation = new EmfTransformationInjectPosLength<>(driver);
+			final ModelOperation<EmfPosLengthInjectMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final EclipseOclQuery<EmfPosLengthMatch> query = new EclipseOclQueryPosLength(driver, workspaceDir);
@@ -91,8 +107,10 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfRouteSensorInjectMatch, EmfDriver> query = new EmfApiQueryRouteSensorInject<>(driver);
+			final EmfTransformation<EmfRouteSensorInjectMatch, EmfDriver> transformation = new EmfTransformationInjectRouteSensor<>(driver);
+			final ModelOperation<EmfRouteSensorInjectMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final EclipseOclQuery<EmfRouteSensorMatch> query = new EclipseOclQueryRouteSensor(driver, workspaceDir);
@@ -108,8 +126,10 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfSemaphoreNeighborInjectMatch, EmfDriver> query = new EmfApiQuerySemaphoreNeighborInject<>(driver);
+			final EmfTransformation<EmfSemaphoreNeighborInjectMatch, EmfDriver> transformation = new EmfTransformationInjectSemaphoreNeighbor<>(driver);
+			final ModelOperation<EmfSemaphoreNeighborInjectMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final EclipseOclQuery<EmfSemaphoreNeighborMatch> query = new EclipseOclQuerySemaphoreNeighbor(driver, workspaceDir);
@@ -125,8 +145,10 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfSwitchMonitoredInjectMatch, EmfDriver> query = new EmfApiQuerySwitchMonitoredInject<>(driver);
+			final EmfTransformation<EmfSwitchMonitoredInjectMatch, EmfDriver> transformation = new EmfTransformationInjectSwitchMonitored<>(driver);
+			final ModelOperation<EmfSwitchMonitoredInjectMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final EclipseOclQuery<EmfSwitchMonitoredMatch> query = new EclipseOclQuerySwitchMonitored(driver, workspaceDir);
@@ -142,8 +164,10 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
-			break;
+			final EmfApiQuery<EmfSwitchSetInjectMatch, EmfDriver> query = new EmfApiQuerySwitchSetInject<>(driver);
+			final EmfTransformation<EmfSwitchSetInjectMatch, EmfDriver> transformation = new EmfTransformationInjectSwitchSet<>(driver);
+			final ModelOperation<EmfSwitchSetInjectMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final EclipseOclQuery<EmfSwitchSetMatch> query = new EclipseOclQuerySwitchSet(driver, workspaceDir);
