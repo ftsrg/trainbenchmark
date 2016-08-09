@@ -57,7 +57,7 @@ public class MySqlDriver extends SqlDriver {
 		} catch (final Exception e) {
 			// do nothing
 		}
-		MySqlProcess.clean();
+		MySqlProcess.cleanServer();
 		MySqlProcess.startServer();
 	}
 

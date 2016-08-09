@@ -11,27 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthInjectMatch;
 
-public class SqlPosLengthInjectMatch extends SqlMatch implements PosLengthMatch {
+public class SqlPosLengthInjectMatch extends SqlMatch implements PosLengthInjectMatch {
 
 	public SqlPosLengthInjectMatch(final ResultSet rs) throws SQLException {
-		match = new Long[] { rs.getLong(VAR_SEGMENT), rs.getLong(VAR_LENGTH) };
+		match = new Long[] { rs.getLong(VAR_SEGMENT) };
 	}
 
 	@Override
 	public Long getSegment() {
 		return match[0];
-	}
-
-	public Long getLength() {
-		return match[1];
 	}
 
 }

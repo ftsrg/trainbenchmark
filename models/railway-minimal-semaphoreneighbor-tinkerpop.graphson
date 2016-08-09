@@ -1,8 +1,0 @@
-{"id":0,"label":"Region","outE":{"sensors":[{"id":9,"inV":5},{"id":10,"inV":6}],"elements":[{"id":11,"inV":7},{"id":12,"inV":8}]}}
-{"id":1,"label":"Semaphore","inE":{"exit":[{"id":3,"outV":2}],"semaphores":[{"id":13,"outV":7}]}}
-{"id":2,"label":"Route","outE":{"exit":[{"id":3,"inV":1}],"gathers":[{"id":14,"inV":5}]}}
-{"id":4,"label":"Route","outE":{"gathers":[{"id":15,"inV":6}]}}
-{"id":5,"label":"Sensor","inE":{"sensors":[{"id":9,"outV":0}],"gathers":[{"id":14,"outV":2}],"monitoredBy":[{"id":16,"outV":7}]}}
-{"id":6,"label":"Sensor","inE":{"sensors":[{"id":10,"outV":0}],"gathers":[{"id":15,"outV":4}],"monitoredBy":[{"id":17,"outV":8}]}}
-{"id":7,"label":"Segment","inE":{"elements":[{"id":11,"outV":0}]},"outE":{"connectsTo":[{"id":18,"inV":8}],"semaphores":[{"id":13,"inV":1}],"monitoredBy":[{"id":16,"inV":5}]}}
-{"id":8,"label":"Segment","inE":{"connectsTo":[{"id":18,"outV":7}],"elements":[{"id":12,"outV":0}]},"outE":{"monitoredBy":[{"id":17,"inV":6}]}}

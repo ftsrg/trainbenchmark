@@ -143,13 +143,13 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 				// (region)-[:elements]->(sw)
 				serializer.createEdge(ELEMENTS, region, sw);
-				
+
 				final int sensors = random.nextInt(maxSensors - 1) + 1;
 
 				for (int k = 0; k < sensors; k++) {
 					final Object sensor = serializer.createVertex(SENSOR);
 					serializer.createEdge(SENSORS, region, sensor);
-					
+
 					// add "monitored by" edge from switch to sensor
 					final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
 					if (!switchSensorError) {
@@ -191,7 +191,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 				final Map<String, Object> swPAttributes = ImmutableMap.of(POSITION, invalidPosition);
 				final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
 				final Object swP = serializer.createVertex(SWITCHPOSITION, swPAttributes, swPOutgoingEdges);
-				
+
 				// (route)-[:follows]->(swP)
 				serializer.createEdge(FOLLOWS, route, swP);
 			}
@@ -208,7 +208,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 				if (switches.contains(current)) {
 					final int segmentID = j + random.nextInt(currentTrack.size() - j);
 					if (!usedTracks.contains(segmentID)) {
-						serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
+						// TODO check why this causes double edges
+						// serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
 						usedTracks.add(segmentID);
 					}
 				}

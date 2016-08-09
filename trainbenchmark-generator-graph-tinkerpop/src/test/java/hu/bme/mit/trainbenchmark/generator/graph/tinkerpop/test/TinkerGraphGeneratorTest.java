@@ -6,9 +6,9 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.TinkerGraphSerializer;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.tests.GeneratorBaseTest;
+import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
 
-public class TinkerGraphGeneratorTest extends GeneratorBaseTest {
+public class TinkerGraphGeneratorTest extends GeneratorTest {
 
 	public void generate(final GeneratorConfig gc) throws Exception {
 		final TinkerGraphGeneratorConfigWrapper gcw = new TinkerGraphGeneratorConfigWrapper(gc, TinkerGraphFormat.GRAPHML);

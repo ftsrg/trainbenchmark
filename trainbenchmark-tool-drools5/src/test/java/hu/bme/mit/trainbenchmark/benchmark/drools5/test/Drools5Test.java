@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class Drools5Test extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigCore bc) throws Exception {
 		final Drools5BenchmarkConfigWrapper bcw = new Drools5BenchmarkConfigWrapper(bc);
 		final Drools5BenchmarkScenario scenario = new Drools5BenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();

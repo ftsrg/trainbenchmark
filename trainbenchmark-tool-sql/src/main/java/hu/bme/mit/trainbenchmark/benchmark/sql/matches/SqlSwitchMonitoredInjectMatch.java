@@ -12,12 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SqlSwitchMonitoredInjectMatch extends SqlMatch implements SwitchMonitoredMatch {
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredInjectMatch;
+
+public class SqlSwitchMonitoredInjectMatch extends SqlMatch implements SwitchMonitoredInjectMatch {
 
 	public SqlSwitchMonitoredInjectMatch(final ResultSet rs) throws SQLException {
 		match = new Long[] { rs.getLong(VAR_SW) };

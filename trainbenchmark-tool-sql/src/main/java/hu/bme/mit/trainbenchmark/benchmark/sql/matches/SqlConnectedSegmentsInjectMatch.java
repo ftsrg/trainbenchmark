@@ -35,7 +35,7 @@ public class SqlConnectedSegmentsInjectMatch extends SqlMatch implements Connect
 
 	@Override
 	public Long getSegment3() {
-		return match[3];
+		return match[2];
 	}
 
 }

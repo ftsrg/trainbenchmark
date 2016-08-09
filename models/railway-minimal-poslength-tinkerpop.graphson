@@ -1,2 +1,0 @@
-{"id":0,"label":"Region","outE":{"elements":[{"id":3,"inV":1}]}}
-{"id":1,"label":"Segment","inE":{"elements":[{"id":3,"outV":0}]},"properties":{"length":[{"id":2,"value":-1}]}}

@@ -57,7 +57,7 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			final SqlQuery<SqlConnectedSegmentsInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+			final SqlQuery<SqlConnectedSegmentsInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
 			final SqlTransformation<SqlConnectedSegmentsInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectConnectedSegments<>(driver,
 					workspaceDir);
 			final ModelOperation<SqlConnectedSegmentsInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
@@ -116,7 +116,7 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			final SqlQuery<SqlSemaphoreNeighborInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR_INJECT);
+			final SqlQuery<SqlSemaphoreNeighborInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR_INJECT);
 			final SqlTransformation<SqlSemaphoreNeighborInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSemaphoreNeighbor<>(driver, workspaceDir);
 			final ModelOperation<SqlSemaphoreNeighborInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;

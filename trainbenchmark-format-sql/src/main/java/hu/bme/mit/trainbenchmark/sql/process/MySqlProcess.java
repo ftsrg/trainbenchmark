@@ -13,23 +13,65 @@
 package hu.bme.mit.trainbenchmark.sql.process;
 
 import java.io.IOException;
+import java.io.InputStream;
 
-import hu.bme.mit.trainbenchmark.benchmark.util.Util;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
+import org.apache.commons.exec.Executor;
 
 public class MySqlProcess {
 
+	// It is generally considered good practice to use Apache Commmons Exec.
+	// However, it does not work with MySQL start/stop properly, with frequent hangs. Therefore, we recommend using the
+	// simple process builder instead.
+
 	private static final String SCRIPT_DIRECTORY = "../trainbenchmark-format-sql/scripts/";
 
-	public static void clean() throws IOException, InterruptedException {
-		Util.executeCommand(SCRIPT_DIRECTORY + "clean-mysql.sh", "Failed to clean MySQL database directory");
+	private static String getInputAsString(final InputStream is)
+	{
+	   try(java.util.Scanner s = new java.util.Scanner(is)) 
+	   { 
+	       return s.useDelimiter("\\A").hasNext() ? s.next() : ""; 
+	   }
+	}
+	
+	public static void stopServer() throws ExecuteException, IOException, InterruptedException {
+		run(new String[] { SCRIPT_DIRECTORY + "stop-mysql.sh" });
 	}
 
-	public static void startServer() throws IOException, InterruptedException {
-		Util.executeCommand(SCRIPT_DIRECTORY + "start-mysql.sh", "Failed to start MySQL process");
+	public static void cleanServer() throws ExecuteException, IOException, InterruptedException {
+		runScript(SCRIPT_DIRECTORY + "clean-mysql.sh");
 	}
 
-	public static void stopServer() throws IOException, InterruptedException {
-		Util.executeCommand(SCRIPT_DIRECTORY + "stop-mysql.sh", "Failed to stop MySQL process");
+	public static void startServer() throws ExecuteException, IOException, InterruptedException {
+		run(new String[] { SCRIPT_DIRECTORY + "start-mysql.sh" });
+	}
+
+	public static void run(final String command[]) throws IOException, InterruptedException {
+		final ProcessBuilder pb = new ProcessBuilder(command);
+		final Process p = pb.start();
+		p.waitFor();
+		
+		final String stdOut = getInputAsString(p.getInputStream());
+		final String stdErr = getInputAsString(p.getErrorStream());
+		System.out.println(stdOut);
+		System.out.println(stdErr);
+	}
+
+	public static void runShell(final String shellCommand) throws ExecuteException, IOException {
+		final Executor executor = new DefaultExecutor();
+		final CommandLine commandLine = new CommandLine("/bin/bash");
+		commandLine.addArgument("-c");
+		commandLine.addArgument(shellCommand, false);
+		executor.execute(commandLine);
+	}
+
+	public static void runScript(final String scriptFile) throws ExecuteException, IOException {
+		final Executor executor = new DefaultExecutor();
+		final CommandLine commandLine = new CommandLine("/bin/bash");
+		commandLine.addArgument(scriptFile, false);
+		executor.execute(commandLine);
 	}
 
 }

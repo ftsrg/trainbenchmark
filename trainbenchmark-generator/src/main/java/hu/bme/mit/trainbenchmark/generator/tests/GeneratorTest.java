@@ -5,7 +5,7 @@ import org.junit.Test;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public abstract class GeneratorBaseTest {
+public abstract class GeneratorTest {
 
 	public abstract void generate(final GeneratorConfig gc) throws Exception;
 
