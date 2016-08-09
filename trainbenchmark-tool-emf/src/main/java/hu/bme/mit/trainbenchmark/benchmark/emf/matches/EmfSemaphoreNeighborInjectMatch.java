@@ -14,16 +14,12 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EmfSemaphoreNeighborInjectMatch extends EmfMatch implements SemaphoreNeighborInjectMatch {
 
-	public EmfSemaphoreNeighborInjectMatch(final Semaphore semaphore, final Route route1, final Route route2, final Sensor sensor1,
-			final Sensor sensor2, final TrackElement te1, final TrackElement te2) {
+	public EmfSemaphoreNeighborInjectMatch(final Route route) {
 		super();
-		match = new RailwayElement[] { semaphore, route1, route2, sensor1, sensor2, te1, te2 };
+		match = new RailwayElement[] { route };
 	}
 
 	@Override

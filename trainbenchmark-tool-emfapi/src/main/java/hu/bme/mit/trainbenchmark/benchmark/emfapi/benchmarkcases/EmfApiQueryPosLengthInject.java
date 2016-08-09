@@ -38,7 +38,7 @@ public class EmfApiQueryPosLengthInject<TDriver extends EmfDriver> extends EmfAp
 		final List<EmfPosLengthInjectMatch> matches = new ArrayList<>();
 
 		final EList<Region> regions = driver.getContainer().getRegions();
-		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier("Segment");
+		final EClass clazz = RailwayPackage.eINSTANCE.getSegment();
 		
 		for (final Region region : regions) {
 			for (final TrackElement te : region.getElements()) {

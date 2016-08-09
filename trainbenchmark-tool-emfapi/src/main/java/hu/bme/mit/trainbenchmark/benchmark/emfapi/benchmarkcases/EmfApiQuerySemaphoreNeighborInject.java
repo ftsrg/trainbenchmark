@@ -19,6 +19,7 @@ import java.util.List;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.railway.Route;
 
 public class EmfApiQuerySemaphoreNeighborInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfSemaphoreNeighborInjectMatch, TDriver> {
 
@@ -30,6 +31,9 @@ public class EmfApiQuerySemaphoreNeighborInject<TDriver extends EmfDriver> exten
 	public Collection<EmfSemaphoreNeighborInjectMatch> evaluate() {
 		final List<EmfSemaphoreNeighborInjectMatch> matches = new ArrayList<>();
 
+		for (final Route route : driver.getContainer().getRoutes()) {
+			matches.add(new EmfSemaphoreNeighborInjectMatch(route));
+		}
 		
 		return matches;
 	}
