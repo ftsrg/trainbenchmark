@@ -51,20 +51,6 @@ public abstract class SqlDriver extends Driver<Long> {
 		return connection;
 	}
 
-//	@Override
-//	public Collection<Long> collectVertices(final String type) throws SQLException {
-//		final Collection<Long> results = new ArrayList<>();
-//
-//		final String query = String.format(COLLECT_VERTICES, type);
-//		try (ResultSet rs = connection.createStatement().executeQuery(query)) {
-//			while (rs.next()) {
-//				results.add(rs.getLong("id"));
-//			}
-//		}
-//
-//		return results;
-//	}
-
 	public String getResourceDirectory() {
 		return "/trainbenchmark-tool-sql/src/main/resources/";
 	}

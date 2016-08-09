@@ -116,7 +116,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="68" monitoredBy="//@regions.1/@sensors.2" connectsTo="//@regions.1/@elements.14" length="246"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="69" monitoredBy="//@regions.1/@sensors.2" connectsTo="//@regions.1/@elements.15" length="246"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="70" monitoredBy="//@regions.1/@sensors.2" connectsTo="//@regions.1/@elements.16" length="437"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="72" monitoredBy="//@regions.1/@sensors.3 //@regions.1/@sensors.4 //@regions.1/@sensors.5 //@regions.1/@sensors.7" connectsTo="//@regions.1/@elements.302 //@regions.1/@elements.17" currentPosition="STRAIGHT" positions="//@routes.1/@follows.1"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="72" monitoredBy="//@regions.1/@sensors.3 //@regions.1/@sensors.4 //@regions.1/@sensors.5 //@regions.1/@sensors.7" connectsTo="//@regions.1/@elements.17" currentPosition="STRAIGHT" positions="//@routes.1/@follows.1"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="74" monitoredBy="//@regions.1/@sensors.3" connectsTo="//@regions.1/@elements.18" length="488"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="75" monitoredBy="//@regions.1/@sensors.3" connectsTo="//@regions.1/@elements.19" length="-557"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="76" monitoredBy="//@regions.1/@sensors.3" connectsTo="//@regions.1/@elements.20" length="997"/>
@@ -147,7 +147,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="106" monitoredBy="//@regions.1/@sensors.8" connectsTo="//@regions.1/@elements.45" length="566"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="107" monitoredBy="//@regions.1/@sensors.8" connectsTo="//@regions.1/@elements.46" length="386"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="108" monitoredBy="//@regions.1/@sensors.8" connectsTo="//@regions.1/@elements.47" length="462"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="110" monitoredBy="//@regions.1/@sensors.9 //@regions.1/@sensors.11 //@regions.1/@sensors.12" connectsTo="//@regions.1/@elements.252 //@regions.1/@elements.48" currentPosition="STRAIGHT" positions="//@routes.1/@follows.2"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="110" monitoredBy="//@regions.1/@sensors.9 //@regions.1/@sensors.11 //@regions.1/@sensors.12" connectsTo="//@regions.1/@elements.48" currentPosition="STRAIGHT" positions="//@routes.1/@follows.2"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="112" monitoredBy="//@regions.1/@sensors.9" connectsTo="//@regions.1/@elements.49" length="342"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="113" monitoredBy="//@regions.1/@sensors.9" connectsTo="//@regions.1/@elements.50" length="986"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="114" monitoredBy="//@regions.1/@sensors.9" connectsTo="//@regions.1/@elements.51" length="798"/>
@@ -168,7 +168,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="132" monitoredBy="//@regions.1/@sensors.12" connectsTo="//@regions.1/@elements.66" length="-716"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="133" monitoredBy="//@regions.1/@sensors.12" connectsTo="//@regions.1/@elements.67" length="942"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="134" monitoredBy="//@regions.1/@sensors.12" connectsTo="//@regions.1/@elements.68" length="547"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="136" monitoredBy="//@regions.1/@sensors.14" connectsTo="//@regions.1/@elements.263 //@regions.1/@elements.69" currentPosition="STRAIGHT" positions="//@routes.1/@follows.3"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="136" monitoredBy="//@regions.1/@sensors.14" connectsTo="//@regions.1/@elements.69" currentPosition="STRAIGHT" positions="//@routes.1/@follows.3"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="138" monitoredBy="//@regions.1/@sensors.13" connectsTo="//@regions.1/@elements.70" length="616"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="139" monitoredBy="//@regions.1/@sensors.13" connectsTo="//@regions.1/@elements.71" length="870"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="140" monitoredBy="//@regions.1/@sensors.13" connectsTo="//@regions.1/@elements.72" length="-342"/>
@@ -179,7 +179,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="146" monitoredBy="//@regions.1/@sensors.14" connectsTo="//@regions.1/@elements.77" length="470"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="147" monitoredBy="//@regions.1/@sensors.14" connectsTo="//@regions.1/@elements.78" length="343"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="148" monitoredBy="//@regions.1/@sensors.14" connectsTo="//@regions.1/@elements.79" length="-769"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="150" monitoredBy="//@regions.1/@sensors.15 //@regions.1/@sensors.16 //@regions.1/@sensors.17 //@regions.1/@sensors.18 //@regions.1/@sensors.20" connectsTo="//@regions.1/@elements.99 //@regions.1/@elements.80" positions="//@routes.1/@follows.4"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="150" monitoredBy="//@regions.1/@sensors.15 //@regions.1/@sensors.16 //@regions.1/@sensors.17 //@regions.1/@sensors.18 //@regions.1/@sensors.20" connectsTo="//@regions.1/@elements.80" positions="//@routes.1/@follows.4"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="152" monitoredBy="//@regions.1/@sensors.15" connectsTo="//@regions.1/@elements.81" length="90"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="153" monitoredBy="//@regions.1/@sensors.15" connectsTo="//@regions.1/@elements.82" length="52"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="154" monitoredBy="//@regions.1/@sensors.15" connectsTo="//@regions.1/@elements.83" length="685"/>
@@ -210,7 +210,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="184" monitoredBy="//@regions.1/@sensors.20" connectsTo="//@regions.1/@elements.108" length="207"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="185" monitoredBy="//@regions.1/@sensors.20" connectsTo="//@regions.1/@elements.109" length="157"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="186" monitoredBy="//@regions.1/@sensors.20" connectsTo="//@regions.1/@elements.110" length="620"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="188" monitoredBy="//@regions.1/@sensors.21 //@regions.1/@sensors.22 //@regions.1/@sensors.23 //@regions.1/@sensors.24 //@regions.1/@sensors.25 //@regions.1/@sensors.26 //@regions.1/@sensors.27 //@regions.1/@sensors.28 //@regions.1/@sensors.29" connectsTo="//@regions.1/@elements.253 //@regions.1/@elements.111" positions="//@routes.1/@follows.5"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="188" monitoredBy="//@regions.1/@sensors.21 //@regions.1/@sensors.22 //@regions.1/@sensors.23 //@regions.1/@sensors.24 //@regions.1/@sensors.25 //@regions.1/@sensors.26 //@regions.1/@sensors.27 //@regions.1/@sensors.28 //@regions.1/@sensors.29" connectsTo="//@regions.1/@elements.111" positions="//@routes.1/@follows.5"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="190" monitoredBy="//@regions.1/@sensors.21" connectsTo="//@regions.1/@elements.112" length="524"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="191" monitoredBy="//@regions.1/@sensors.21" connectsTo="//@regions.1/@elements.113" length="82"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="192" monitoredBy="//@regions.1/@sensors.21" connectsTo="//@regions.1/@elements.114" length="36"/>
@@ -256,7 +256,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="240" monitoredBy="//@regions.1/@sensors.29" connectsTo="//@regions.1/@elements.154" length="200"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="241" monitoredBy="//@regions.1/@sensors.29" connectsTo="//@regions.1/@elements.155" length="79"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="242" monitoredBy="//@regions.1/@sensors.29" connectsTo="//@regions.1/@elements.156" length="135"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="244" monitoredBy="//@regions.1/@sensors.30 //@regions.1/@sensors.31 //@regions.1/@sensors.32 //@regions.1/@sensors.33" connectsTo="//@regions.1/@elements.288 //@regions.1/@elements.157" positions="//@routes.1/@follows.6"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="244" monitoredBy="//@regions.1/@sensors.30 //@regions.1/@sensors.31 //@regions.1/@sensors.32 //@regions.1/@sensors.33" connectsTo="//@regions.1/@elements.157" positions="//@routes.1/@follows.6"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="246" monitoredBy="//@regions.1/@sensors.30" connectsTo="//@regions.1/@elements.158" length="432"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="247" monitoredBy="//@regions.1/@sensors.30" connectsTo="//@regions.1/@elements.159" length="589"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="248" monitoredBy="//@regions.1/@sensors.30" connectsTo="//@regions.1/@elements.160" length="533"/>
@@ -277,7 +277,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="266" monitoredBy="//@regions.1/@sensors.33" connectsTo="//@regions.1/@elements.175" length="78"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="267" monitoredBy="//@regions.1/@sensors.33" connectsTo="//@regions.1/@elements.176" length="229"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="268" monitoredBy="//@regions.1/@sensors.33" connectsTo="//@regions.1/@elements.177" length="137"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="270" monitoredBy="//@regions.1/@sensors.34 //@regions.1/@sensors.35 //@regions.1/@sensors.36 //@regions.1/@sensors.37 //@regions.1/@sensors.38 //@regions.1/@sensors.39 //@regions.1/@sensors.40" connectsTo="//@regions.1/@elements.220 //@regions.1/@elements.178" positions="//@routes.1/@follows.7"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="270" monitoredBy="//@regions.1/@sensors.34 //@regions.1/@sensors.35 //@regions.1/@sensors.36 //@regions.1/@sensors.37 //@regions.1/@sensors.38 //@regions.1/@sensors.39 //@regions.1/@sensors.40" connectsTo="//@regions.1/@elements.178" positions="//@routes.1/@follows.7"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="272" monitoredBy="//@regions.1/@sensors.34" connectsTo="//@regions.1/@elements.179" length="50"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="273" monitoredBy="//@regions.1/@sensors.34" connectsTo="//@regions.1/@elements.180" length="578"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="274" monitoredBy="//@regions.1/@sensors.34" connectsTo="//@regions.1/@elements.181" length="596"/>
@@ -318,7 +318,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="316" monitoredBy="//@regions.1/@sensors.41" connectsTo="//@regions.1/@elements.216" length="998"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="317" monitoredBy="//@regions.1/@sensors.41" connectsTo="//@regions.1/@elements.217" length="638"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="318" monitoredBy="//@regions.1/@sensors.41" connectsTo="//@regions.1/@elements.218" length="669"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="320" monitoredBy="//@regions.1/@sensors.42 //@regions.1/@sensors.44 //@regions.1/@sensors.45" connectsTo="//@regions.1/@elements.245 //@regions.1/@elements.219" currentPosition="STRAIGHT" positions="//@routes.1/@follows.8"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="320" monitoredBy="//@regions.1/@sensors.42 //@regions.1/@sensors.44 //@regions.1/@sensors.45" connectsTo="//@regions.1/@elements.219" currentPosition="STRAIGHT" positions="//@routes.1/@follows.8"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="322" monitoredBy="//@regions.1/@sensors.42" connectsTo="//@regions.1/@elements.220" length="211"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="323" monitoredBy="//@regions.1/@sensors.42" connectsTo="//@regions.1/@elements.221" length="773"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="324" monitoredBy="//@regions.1/@sensors.42" connectsTo="//@regions.1/@elements.222" length="220"/>
@@ -340,13 +340,13 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="343" monitoredBy="//@regions.1/@sensors.45" connectsTo="//@regions.1/@elements.238" length="-933"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="344" monitoredBy="//@regions.1/@sensors.45" connectsTo="//@regions.1/@elements.239" length="-233"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="345" monitoredBy="//@regions.1/@sensors.45" connectsTo="//@regions.1/@elements.240" length="326"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="347" monitoredBy="//@regions.1/@sensors.46" connectsTo="//@regions.1/@elements.275 //@regions.1/@elements.241" currentPosition="STRAIGHT" positions="//@routes.1/@follows.9"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="347" monitoredBy="//@regions.1/@sensors.46" connectsTo="//@regions.1/@elements.241" currentPosition="STRAIGHT" positions="//@routes.1/@follows.9"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="349" monitoredBy="//@regions.1/@sensors.46" connectsTo="//@regions.1/@elements.242" length="164"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="350" monitoredBy="//@regions.1/@sensors.46" connectsTo="//@regions.1/@elements.243" length="764"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="351" monitoredBy="//@regions.1/@sensors.46" connectsTo="//@regions.1/@elements.244" length="-228"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="352" monitoredBy="//@regions.1/@sensors.46" connectsTo="//@regions.1/@elements.245" length="83"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="353" monitoredBy="//@regions.1/@sensors.46" connectsTo="//@regions.1/@elements.246" length="102"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="355" monitoredBy="//@regions.1/@sensors.47 //@regions.1/@sensors.49" connectsTo="//@regions.1/@elements.264 //@regions.1/@elements.247" currentPosition="DIVERGING" positions="//@routes.1/@follows.10"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="355" monitoredBy="//@regions.1/@sensors.47 //@regions.1/@sensors.49" connectsTo="//@regions.1/@elements.247" currentPosition="DIVERGING" positions="//@routes.1/@follows.10"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="357" monitoredBy="//@regions.1/@sensors.47" connectsTo="//@regions.1/@elements.248" length="196"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="358" monitoredBy="//@regions.1/@sensors.47" connectsTo="//@regions.1/@elements.249" length="675"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="359" monitoredBy="//@regions.1/@sensors.47" connectsTo="//@regions.1/@elements.250" length="299"/>
@@ -362,7 +362,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="371" monitoredBy="//@regions.1/@sensors.49" connectsTo="//@regions.1/@elements.260" length="149"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="372" monitoredBy="//@regions.1/@sensors.49" connectsTo="//@regions.1/@elements.261" length="413"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="373" monitoredBy="//@regions.1/@sensors.49" connectsTo="//@regions.1/@elements.262" length="709"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="375" monitoredBy="//@regions.1/@sensors.50 //@regions.1/@sensors.52" connectsTo="//@regions.1/@elements.294 //@regions.1/@elements.263" positions="//@routes.1/@follows.11"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="375" monitoredBy="//@regions.1/@sensors.50 //@regions.1/@sensors.52" connectsTo="//@regions.1/@elements.263" positions="//@routes.1/@follows.11"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="377" monitoredBy="//@regions.1/@sensors.50" connectsTo="//@regions.1/@elements.264" length="718"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="378" monitoredBy="//@regions.1/@sensors.50" connectsTo="//@regions.1/@elements.265" length="544"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="379" monitoredBy="//@regions.1/@sensors.50" connectsTo="//@regions.1/@elements.266" length="287"/>
@@ -388,7 +388,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="403" monitoredBy="//@regions.1/@sensors.54" connectsTo="//@regions.1/@elements.286" length="777"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="404" monitoredBy="//@regions.1/@sensors.54" connectsTo="//@regions.1/@elements.287" length="906"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="405" monitoredBy="//@regions.1/@sensors.54" connectsTo="//@regions.1/@elements.288" length="244"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="407" monitoredBy="//@regions.1/@sensors.57 //@regions.1/@sensors.58 //@regions.1/@sensors.60" connectsTo="//@regions.1/@elements.354 //@regions.1/@elements.289" currentPosition="STRAIGHT" positions="//@routes.1/@follows.12"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="407" monitoredBy="//@regions.1/@sensors.57 //@regions.1/@sensors.58 //@regions.1/@sensors.60" connectsTo="//@regions.1/@elements.289" currentPosition="STRAIGHT" positions="//@routes.1/@follows.12"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="409" monitoredBy="//@regions.1/@sensors.55" connectsTo="//@regions.1/@elements.290" length="287"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="410" monitoredBy="//@regions.1/@sensors.55" connectsTo="//@regions.1/@elements.291" length="947"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="411" monitoredBy="//@regions.1/@sensors.55" connectsTo="//@regions.1/@elements.292" length="106"/>
@@ -419,7 +419,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="441" monitoredBy="//@regions.1/@sensors.60" connectsTo="//@regions.1/@elements.317" length="-825"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="442" monitoredBy="//@regions.1/@sensors.60" connectsTo="//@regions.1/@elements.318" length="856"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="443" monitoredBy="//@regions.1/@sensors.60" connectsTo="//@regions.1/@elements.319" length="835"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="445" monitoredBy="//@regions.1/@sensors.61 //@regions.1/@sensors.63 //@regions.1/@sensors.64" connectsTo="//@regions.1/@elements.330 //@regions.1/@elements.320" positions="//@routes.1/@follows.13"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="445" monitoredBy="//@regions.1/@sensors.61 //@regions.1/@sensors.63 //@regions.1/@sensors.64" connectsTo="//@regions.1/@elements.320" positions="//@routes.1/@follows.13"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="447" monitoredBy="//@regions.1/@sensors.61" connectsTo="//@regions.1/@elements.321" length="126"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="448" monitoredBy="//@regions.1/@sensors.61" connectsTo="//@regions.1/@elements.322" length="620"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="449" monitoredBy="//@regions.1/@sensors.61" connectsTo="//@regions.1/@elements.323" length="323"/>
@@ -440,7 +440,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="467" monitoredBy="//@regions.1/@sensors.64" connectsTo="//@regions.1/@elements.338" length="724"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="468" monitoredBy="//@regions.1/@sensors.64" connectsTo="//@regions.1/@elements.339" length="480"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="469" monitoredBy="//@regions.1/@sensors.64" connectsTo="//@regions.1/@elements.340" length="333"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="471" monitoredBy="//@regions.1/@sensors.65 //@regions.1/@sensors.67" connectsTo="//@regions.1/@elements.353 //@regions.1/@elements.341" currentPosition="STRAIGHT" positions="//@routes.1/@follows.14"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="471" monitoredBy="//@regions.1/@sensors.65 //@regions.1/@sensors.67" connectsTo="//@regions.1/@elements.341" currentPosition="STRAIGHT" positions="//@routes.1/@follows.14"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="473" monitoredBy="//@regions.1/@sensors.65" connectsTo="//@regions.1/@elements.342" length="490"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="474" monitoredBy="//@regions.1/@sensors.65" connectsTo="//@regions.1/@elements.343" length="-778"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="475" monitoredBy="//@regions.1/@sensors.65" connectsTo="//@regions.1/@elements.344" length="931"/>
@@ -574,7 +574,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="546" monitoredBy="//@regions.2/@sensors.8" connectsTo="//@regions.2/@elements.44" length="53"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="547" monitoredBy="//@regions.2/@sensors.8" connectsTo="//@regions.2/@elements.45" length="-571"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="548" monitoredBy="//@regions.2/@sensors.8" connectsTo="//@regions.2/@elements.46" length="447"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="550" monitoredBy="//@regions.2/@sensors.9 //@regions.2/@sensors.10 //@regions.2/@sensors.11 //@regions.2/@sensors.12 //@regions.2/@sensors.13 //@regions.2/@sensors.14 //@regions.2/@sensors.15 //@regions.2/@sensors.16" connectsTo="//@regions.2/@elements.134 //@regions.2/@elements.47" currentPosition="STRAIGHT" positions="//@routes.2/@follows.1"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="550" monitoredBy="//@regions.2/@sensors.9 //@regions.2/@sensors.10 //@regions.2/@sensors.11 //@regions.2/@sensors.12 //@regions.2/@sensors.13 //@regions.2/@sensors.14 //@regions.2/@sensors.15 //@regions.2/@sensors.16" connectsTo="//@regions.2/@elements.47" currentPosition="STRAIGHT" positions="//@routes.2/@follows.1"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="552" monitoredBy="//@regions.2/@sensors.9" connectsTo="//@regions.2/@elements.48" length="395"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="553" monitoredBy="//@regions.2/@sensors.9" connectsTo="//@regions.2/@elements.49" length="950"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="554" monitoredBy="//@regions.2/@sensors.9" connectsTo="//@regions.2/@elements.50" length="569"/>
@@ -616,7 +616,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="597" monitoredBy="//@regions.2/@sensors.16" connectsTo="//@regions.2/@elements.86" length="918"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="598" monitoredBy="//@regions.2/@sensors.16" connectsTo="//@regions.2/@elements.87" length="648"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="599" monitoredBy="//@regions.2/@sensors.16" connectsTo="//@regions.2/@elements.88" length="300"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="601" monitoredBy="//@regions.2/@sensors.17 //@regions.2/@sensors.19 //@regions.2/@sensors.20 //@regions.2/@sensors.21 //@regions.2/@sensors.22" connectsTo="//@regions.2/@elements.203 //@regions.2/@elements.89" positions="//@routes.2/@follows.2"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="601" monitoredBy="//@regions.2/@sensors.17 //@regions.2/@sensors.19 //@regions.2/@sensors.20 //@regions.2/@sensors.21 //@regions.2/@sensors.22" connectsTo="//@regions.2/@elements.89" positions="//@routes.2/@follows.2"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="603" monitoredBy="//@regions.2/@sensors.17" connectsTo="//@regions.2/@elements.90" length="-957"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="604" monitoredBy="//@regions.2/@sensors.17" connectsTo="//@regions.2/@elements.91" length="633"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="605" monitoredBy="//@regions.2/@sensors.17" connectsTo="//@regions.2/@elements.92" length="244"/>
@@ -647,7 +647,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="635" monitoredBy="//@regions.2/@sensors.22" connectsTo="//@regions.2/@elements.117" length="180"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="636" monitoredBy="//@regions.2/@sensors.22" connectsTo="//@regions.2/@elements.118" length="504"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="637" monitoredBy="//@regions.2/@sensors.22" connectsTo="//@regions.2/@elements.119" length="471"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="639" monitoredBy="//@regions.2/@sensors.23 //@regions.2/@sensors.24 //@regions.2/@sensors.26 //@regions.2/@sensors.29 //@regions.2/@sensors.30" connectsTo="//@regions.2/@elements.143 //@regions.2/@elements.120" currentPosition="DIVERGING" positions="//@routes.2/@follows.3"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="639" monitoredBy="//@regions.2/@sensors.23 //@regions.2/@sensors.24 //@regions.2/@sensors.26 //@regions.2/@sensors.29 //@regions.2/@sensors.30" connectsTo="//@regions.2/@elements.120" currentPosition="DIVERGING" positions="//@routes.2/@follows.3"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="641" monitoredBy="//@regions.2/@sensors.23" connectsTo="//@regions.2/@elements.121" length="357"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="642" monitoredBy="//@regions.2/@sensors.23" connectsTo="//@regions.2/@elements.122" length="604"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="643" monitoredBy="//@regions.2/@sensors.23" connectsTo="//@regions.2/@elements.123" length="492"/>
@@ -689,7 +689,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="686" monitoredBy="//@regions.2/@sensors.30" connectsTo="//@regions.2/@elements.159" length="734"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="687" monitoredBy="//@regions.2/@sensors.30" connectsTo="//@regions.2/@elements.160" length="720"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="688" monitoredBy="//@regions.2/@sensors.30" connectsTo="//@regions.2/@elements.161" length="382"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="690" monitoredBy="//@regions.2/@sensors.31 //@regions.2/@sensors.32 //@regions.2/@sensors.35 //@regions.2/@sensors.36 //@regions.2/@sensors.37" connectsTo="//@regions.2/@elements.313 //@regions.2/@elements.162" positions="//@routes.2/@follows.4"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="690" monitoredBy="//@regions.2/@sensors.31 //@regions.2/@sensors.32 //@regions.2/@sensors.35 //@regions.2/@sensors.36 //@regions.2/@sensors.37" connectsTo="//@regions.2/@elements.162" positions="//@routes.2/@follows.4"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="692" monitoredBy="//@regions.2/@sensors.31" connectsTo="//@regions.2/@elements.163" length="970"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="693" monitoredBy="//@regions.2/@sensors.31" connectsTo="//@regions.2/@elements.164" length="389"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="694" monitoredBy="//@regions.2/@sensors.31" connectsTo="//@regions.2/@elements.165" length="237"/>
@@ -725,7 +725,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="730" monitoredBy="//@regions.2/@sensors.37" connectsTo="//@regions.2/@elements.195" length="383"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="731" monitoredBy="//@regions.2/@sensors.37" connectsTo="//@regions.2/@elements.196" length="27"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="732" monitoredBy="//@regions.2/@sensors.37" connectsTo="//@regions.2/@elements.197" length="795"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="734" monitoredBy="//@regions.2/@sensors.40 //@regions.2/@sensors.41 //@regions.2/@sensors.42" connectsTo="//@regions.2/@elements.278 //@regions.2/@elements.198" positions="//@routes.2/@follows.5"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="734" monitoredBy="//@regions.2/@sensors.40 //@regions.2/@sensors.41 //@regions.2/@sensors.42" connectsTo="//@regions.2/@elements.198" positions="//@routes.2/@follows.5"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="736" monitoredBy="//@regions.2/@sensors.38" connectsTo="//@regions.2/@elements.199" length="770"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="737" monitoredBy="//@regions.2/@sensors.38" connectsTo="//@regions.2/@elements.200" length="934"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="738" monitoredBy="//@regions.2/@sensors.38" connectsTo="//@regions.2/@elements.201" length="-746"/>
@@ -751,7 +751,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="762" monitoredBy="//@regions.2/@sensors.42" connectsTo="//@regions.2/@elements.221" length="220"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="763" monitoredBy="//@regions.2/@sensors.42" connectsTo="//@regions.2/@elements.222" length="395"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="764" monitoredBy="//@regions.2/@sensors.42" connectsTo="//@regions.2/@elements.223" length="710"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="766" monitoredBy="//@regions.2/@sensors.43 //@regions.2/@sensors.44 //@regions.2/@sensors.45 //@regions.2/@sensors.46" connectsTo="//@regions.2/@elements.345 //@regions.2/@elements.224" currentPosition="STRAIGHT" positions="//@routes.2/@follows.6"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="766" monitoredBy="//@regions.2/@sensors.43 //@regions.2/@sensors.44 //@regions.2/@sensors.45 //@regions.2/@sensors.46" connectsTo="//@regions.2/@elements.224" currentPosition="STRAIGHT" positions="//@routes.2/@follows.6"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="768" monitoredBy="//@regions.2/@sensors.43" connectsTo="//@regions.2/@elements.225" length="8"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="769" monitoredBy="//@regions.2/@sensors.43" connectsTo="//@regions.2/@elements.226" length="439"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="770" monitoredBy="//@regions.2/@sensors.43" connectsTo="//@regions.2/@elements.227" length="739"/>
@@ -772,7 +772,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="788" monitoredBy="//@regions.2/@sensors.46" connectsTo="//@regions.2/@elements.242" length="733"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="789" monitoredBy="//@regions.2/@sensors.46" connectsTo="//@regions.2/@elements.243" length="563"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="790" monitoredBy="//@regions.2/@sensors.46" connectsTo="//@regions.2/@elements.244" length="355"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="792" monitoredBy="//@regions.2/@sensors.47 //@regions.2/@sensors.48 //@regions.2/@sensors.49 //@regions.2/@sensors.50 //@regions.2/@sensors.51 //@regions.2/@sensors.52 //@regions.2/@sensors.53 //@regions.2/@sensors.54 //@regions.2/@sensors.55" connectsTo="//@regions.2/@elements.275 //@regions.2/@elements.245" positions="//@routes.2/@follows.7"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="792" monitoredBy="//@regions.2/@sensors.47 //@regions.2/@sensors.48 //@regions.2/@sensors.49 //@regions.2/@sensors.50 //@regions.2/@sensors.51 //@regions.2/@sensors.52 //@regions.2/@sensors.53 //@regions.2/@sensors.54 //@regions.2/@sensors.55" connectsTo="//@regions.2/@elements.245" positions="//@routes.2/@follows.7"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="794" monitoredBy="//@regions.2/@sensors.47" connectsTo="//@regions.2/@elements.246" length="894"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="795" monitoredBy="//@regions.2/@sensors.47" connectsTo="//@regions.2/@elements.247" length="262"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="796" monitoredBy="//@regions.2/@sensors.47" connectsTo="//@regions.2/@elements.248" length="546"/>
@@ -818,13 +818,13 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="844" monitoredBy="//@regions.2/@sensors.55" connectsTo="//@regions.2/@elements.288" length="200"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="845" monitoredBy="//@regions.2/@sensors.55" connectsTo="//@regions.2/@elements.289" length="-504"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="846" monitoredBy="//@regions.2/@sensors.55" connectsTo="//@regions.2/@elements.290" length="846"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="848" monitoredBy="//@regions.2/@sensors.56" connectsTo="//@regions.2/@elements.298 //@regions.2/@elements.291" currentPosition="DIVERGING" positions="//@routes.2/@follows.8"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="848" monitoredBy="//@regions.2/@sensors.56" connectsTo="//@regions.2/@elements.291" currentPosition="DIVERGING" positions="//@routes.2/@follows.8"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="850" monitoredBy="//@regions.2/@sensors.56" connectsTo="//@regions.2/@elements.292" length="811"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="851" monitoredBy="//@regions.2/@sensors.56" connectsTo="//@regions.2/@elements.293" length="354"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="852" monitoredBy="//@regions.2/@sensors.56" connectsTo="//@regions.2/@elements.294" length="-785"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="853" monitoredBy="//@regions.2/@sensors.56" connectsTo="//@regions.2/@elements.295" length="222"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="854" monitoredBy="//@regions.2/@sensors.56" connectsTo="//@regions.2/@elements.296" length="629"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="856" monitoredBy="//@regions.2/@sensors.57 //@regions.2/@sensors.58 //@regions.2/@sensors.59 //@regions.2/@sensors.61 //@regions.2/@sensors.62 //@regions.2/@sensors.63 //@regions.2/@sensors.64" connectsTo="//@regions.2/@elements.347 //@regions.2/@elements.297" currentPosition="STRAIGHT" positions="//@routes.2/@follows.9"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="856" monitoredBy="//@regions.2/@sensors.57 //@regions.2/@sensors.58 //@regions.2/@sensors.59 //@regions.2/@sensors.61 //@regions.2/@sensors.62 //@regions.2/@sensors.63 //@regions.2/@sensors.64" connectsTo="//@regions.2/@elements.297" currentPosition="STRAIGHT" positions="//@routes.2/@follows.9"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="858" monitoredBy="//@regions.2/@sensors.57" connectsTo="//@regions.2/@elements.298" length="445"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="859" monitoredBy="//@regions.2/@sensors.57" connectsTo="//@regions.2/@elements.299" length="-732"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="860" monitoredBy="//@regions.2/@sensors.57" connectsTo="//@regions.2/@elements.300" length="626"/>
@@ -865,7 +865,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="902" monitoredBy="//@regions.2/@sensors.64" connectsTo="//@regions.2/@elements.335" length="761"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="903" monitoredBy="//@regions.2/@sensors.64" connectsTo="//@regions.2/@elements.336" length="52"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="904" monitoredBy="//@regions.2/@sensors.64" connectsTo="//@regions.2/@elements.337" length="-936"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="906" monitoredBy="//@regions.2/@sensors.65 //@regions.2/@sensors.66 //@regions.2/@sensors.67" connectsTo="//@regions.2/@elements.340 //@regions.2/@elements.338" currentPosition="DIVERGING" positions="//@routes.2/@follows.10"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="906" monitoredBy="//@regions.2/@sensors.65 //@regions.2/@sensors.66 //@regions.2/@sensors.67" connectsTo="//@regions.2/@elements.338" currentPosition="DIVERGING" positions="//@routes.2/@follows.10"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="908" monitoredBy="//@regions.2/@sensors.65" connectsTo="//@regions.2/@elements.339" length="782"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="909" monitoredBy="//@regions.2/@sensors.65" connectsTo="//@regions.2/@elements.340" length="-966"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="910" monitoredBy="//@regions.2/@sensors.65" connectsTo="//@regions.2/@elements.341" length="687"/>
@@ -999,7 +999,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="981" monitoredBy="//@regions.3/@sensors.8" connectsTo="//@regions.3/@elements.44" length="261"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="982" monitoredBy="//@regions.3/@sensors.8" connectsTo="//@regions.3/@elements.45" length="132"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="983" monitoredBy="//@regions.3/@sensors.8" connectsTo="//@regions.3/@elements.46" length="14"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="985" monitoredBy="//@regions.3/@sensors.9 //@regions.3/@sensors.10 //@regions.3/@sensors.11 //@regions.3/@sensors.12 //@regions.3/@sensors.13 //@regions.3/@sensors.14" connectsTo="//@regions.3/@elements.322 //@regions.3/@elements.47" positions="//@routes.3/@follows.1"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="985" monitoredBy="//@regions.3/@sensors.9 //@regions.3/@sensors.10 //@regions.3/@sensors.11 //@regions.3/@sensors.12 //@regions.3/@sensors.13 //@regions.3/@sensors.14" connectsTo="//@regions.3/@elements.47" positions="//@routes.3/@follows.1"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="987" monitoredBy="//@regions.3/@sensors.9" connectsTo="//@regions.3/@elements.48" length="-523"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="988" monitoredBy="//@regions.3/@sensors.9" connectsTo="//@regions.3/@elements.49" length="674"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="989" monitoredBy="//@regions.3/@sensors.9" connectsTo="//@regions.3/@elements.50" length="478"/>
@@ -1030,13 +1030,13 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1019" monitoredBy="//@regions.3/@sensors.14" connectsTo="//@regions.3/@elements.75" length="77"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1020" monitoredBy="//@regions.3/@sensors.14" connectsTo="//@regions.3/@elements.76" length="74"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1021" monitoredBy="//@regions.3/@sensors.14" connectsTo="//@regions.3/@elements.77" length="147"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1023" monitoredBy="//@regions.3/@sensors.15" connectsTo="//@regions.3/@elements.246 //@regions.3/@elements.78" positions="//@routes.3/@follows.2"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1023" monitoredBy="//@regions.3/@sensors.15" connectsTo="//@regions.3/@elements.78" positions="//@routes.3/@follows.2"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1025" monitoredBy="//@regions.3/@sensors.15" connectsTo="//@regions.3/@elements.79" length="-585"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1026" monitoredBy="//@regions.3/@sensors.15" connectsTo="//@regions.3/@elements.80" length="222"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1027" monitoredBy="//@regions.3/@sensors.15" connectsTo="//@regions.3/@elements.81" length="263"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1028" monitoredBy="//@regions.3/@sensors.15" connectsTo="//@regions.3/@elements.82" length="389"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1029" monitoredBy="//@regions.3/@sensors.15" connectsTo="//@regions.3/@elements.83" length="-692"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1031" monitoredBy="//@regions.3/@sensors.17 //@regions.3/@sensors.18 //@regions.3/@sensors.19 //@regions.3/@sensors.20 //@regions.3/@sensors.22" connectsTo="//@regions.3/@elements.184 //@regions.3/@elements.84" currentPosition="STRAIGHT" positions="//@routes.3/@follows.3"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1031" monitoredBy="//@regions.3/@sensors.17 //@regions.3/@sensors.18 //@regions.3/@sensors.19 //@regions.3/@sensors.20 //@regions.3/@sensors.22" connectsTo="//@regions.3/@elements.84" currentPosition="STRAIGHT" positions="//@routes.3/@follows.3"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1033" monitoredBy="//@regions.3/@sensors.16" connectsTo="//@regions.3/@elements.85" length="7"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1034" monitoredBy="//@regions.3/@sensors.16" connectsTo="//@regions.3/@elements.86" length="536"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1035" monitoredBy="//@regions.3/@sensors.16" connectsTo="//@regions.3/@elements.87" length="502"/>
@@ -1072,7 +1072,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1071" monitoredBy="//@regions.3/@sensors.22" connectsTo="//@regions.3/@elements.117" length="178"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1072" monitoredBy="//@regions.3/@sensors.22" connectsTo="//@regions.3/@elements.118" length="181"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1073" monitoredBy="//@regions.3/@sensors.22" connectsTo="//@regions.3/@elements.119" length="924"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1075" monitoredBy="//@regions.3/@sensors.24 //@regions.3/@sensors.26 //@regions.3/@sensors.27 //@regions.3/@sensors.29" connectsTo="//@regions.3/@elements.284 //@regions.3/@elements.120" currentPosition="STRAIGHT" positions="//@routes.3/@follows.4"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1075" monitoredBy="//@regions.3/@sensors.24 //@regions.3/@sensors.26 //@regions.3/@sensors.27 //@regions.3/@sensors.29" connectsTo="//@regions.3/@elements.120" currentPosition="STRAIGHT" positions="//@routes.3/@follows.4"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1077" monitoredBy="//@regions.3/@sensors.23" connectsTo="//@regions.3/@elements.121" length="-479"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1078" monitoredBy="//@regions.3/@sensors.23" connectsTo="//@regions.3/@elements.122" length="155"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1079" monitoredBy="//@regions.3/@sensors.23" connectsTo="//@regions.3/@elements.123" length="572"/>
@@ -1109,7 +1109,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1116" monitoredBy="//@regions.3/@sensors.29" connectsTo="//@regions.3/@elements.154" length="281"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1117" monitoredBy="//@regions.3/@sensors.29" connectsTo="//@regions.3/@elements.155" length="843"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1118" monitoredBy="//@regions.3/@sensors.29" connectsTo="//@regions.3/@elements.156" length="304"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1120" monitoredBy="//@regions.3/@sensors.30 //@regions.3/@sensors.31 //@regions.3/@sensors.32" connectsTo="//@regions.3/@elements.260 //@regions.3/@elements.157" positions="//@routes.3/@follows.5"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1120" monitoredBy="//@regions.3/@sensors.30 //@regions.3/@sensors.31 //@regions.3/@sensors.32" connectsTo="//@regions.3/@elements.157" positions="//@routes.3/@follows.5"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1122" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.158" length="68"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1123" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.159" length="2"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1124" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.160" length="686"/>
@@ -1131,7 +1131,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1143" monitoredBy="//@regions.3/@sensors.33" connectsTo="//@regions.3/@elements.176" length="-364"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1144" monitoredBy="//@regions.3/@sensors.33" connectsTo="//@regions.3/@elements.177" length="631"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1145" monitoredBy="//@regions.3/@sensors.33" connectsTo="//@regions.3/@elements.178" length="467"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1147" monitoredBy="//@regions.3/@sensors.34 //@regions.3/@sensors.36" connectsTo="//@regions.3/@elements.298 //@regions.3/@elements.179" currentPosition="DIVERGING" positions="//@routes.3/@follows.6"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1147" monitoredBy="//@regions.3/@sensors.34 //@regions.3/@sensors.36" connectsTo="//@regions.3/@elements.179" currentPosition="DIVERGING" positions="//@routes.3/@follows.6"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1149" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.180" length="424"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1150" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.181" length="836"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1151" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.182" length="314"/>
@@ -1147,7 +1147,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1163" monitoredBy="//@regions.3/@sensors.36" connectsTo="//@regions.3/@elements.192" length="-653"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1164" monitoredBy="//@regions.3/@sensors.36" connectsTo="//@regions.3/@elements.193" length="490"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1165" monitoredBy="//@regions.3/@sensors.36" connectsTo="//@regions.3/@elements.194" length="819"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1167" monitoredBy="//@regions.3/@sensors.37 //@regions.3/@sensors.41" connectsTo="//@regions.3/@elements.254 //@regions.3/@elements.195" currentPosition="DIVERGING" positions="//@routes.3/@follows.7"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1167" monitoredBy="//@regions.3/@sensors.37 //@regions.3/@sensors.41" connectsTo="//@regions.3/@elements.195" currentPosition="DIVERGING" positions="//@routes.3/@follows.7"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1169" monitoredBy="//@regions.3/@sensors.37" connectsTo="//@regions.3/@elements.196" length="908"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1170" monitoredBy="//@regions.3/@sensors.37" connectsTo="//@regions.3/@elements.197" length="98"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1171" monitoredBy="//@regions.3/@sensors.37" connectsTo="//@regions.3/@elements.198" length="318"/>
@@ -1175,7 +1175,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1197" monitoredBy="//@regions.3/@sensors.41" connectsTo="//@regions.3/@elements.220" length="801"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1198" monitoredBy="//@regions.3/@sensors.41" connectsTo="//@regions.3/@elements.221" length="889"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1199" monitoredBy="//@regions.3/@sensors.41" connectsTo="//@regions.3/@elements.222" length="252"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1201" monitoredBy="//@regions.3/@sensors.42 //@regions.3/@sensors.43 //@regions.3/@sensors.45 //@regions.3/@sensors.47" connectsTo="//@regions.3/@elements.269 //@regions.3/@elements.223" positions="//@routes.3/@follows.8"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1201" monitoredBy="//@regions.3/@sensors.42 //@regions.3/@sensors.43 //@regions.3/@sensors.45 //@regions.3/@sensors.47" connectsTo="//@regions.3/@elements.223" positions="//@routes.3/@follows.8"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1203" monitoredBy="//@regions.3/@sensors.42" connectsTo="//@regions.3/@elements.224" length="729"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1204" monitoredBy="//@regions.3/@sensors.42" connectsTo="//@regions.3/@elements.225" length="147"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1205" monitoredBy="//@regions.3/@sensors.42" connectsTo="//@regions.3/@elements.226" length="132"/>
@@ -1206,7 +1206,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1235" monitoredBy="//@regions.3/@sensors.47" connectsTo="//@regions.3/@elements.251" length="988"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1236" monitoredBy="//@regions.3/@sensors.47" connectsTo="//@regions.3/@elements.252" length="-390"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1237" monitoredBy="//@regions.3/@sensors.47" connectsTo="//@regions.3/@elements.253" length="560"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1239" monitoredBy="//@regions.3/@sensors.48 //@regions.3/@sensors.51 //@regions.3/@sensors.52 //@regions.3/@sensors.53 //@regions.3/@sensors.54 //@regions.3/@sensors.56" connectsTo="//@regions.3/@elements.266 //@regions.3/@elements.254" currentPosition="STRAIGHT" positions="//@routes.3/@follows.9"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1239" monitoredBy="//@regions.3/@sensors.48 //@regions.3/@sensors.51 //@regions.3/@sensors.52 //@regions.3/@sensors.53 //@regions.3/@sensors.54 //@regions.3/@sensors.56" connectsTo="//@regions.3/@elements.254" currentPosition="STRAIGHT" positions="//@routes.3/@follows.9"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1241" monitoredBy="//@regions.3/@sensors.48" connectsTo="//@regions.3/@elements.255" length="653"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1242" monitoredBy="//@regions.3/@sensors.48" connectsTo="//@regions.3/@elements.256" length="619"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1243" monitoredBy="//@regions.3/@sensors.48" connectsTo="//@regions.3/@elements.257" length="812"/>
@@ -1394,7 +1394,7 @@
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1382" monitoredBy="//@regions.4/@sensors.5" connectsTo="//@regions.4/@elements.29" length="63"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1383" monitoredBy="//@regions.4/@sensors.5" connectsTo="//@regions.4/@elements.30" length="801"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1384" monitoredBy="//@regions.4/@sensors.5" connectsTo="//@regions.4/@elements.31" length="721"/>
-    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1386" monitoredBy="//@regions.4/@sensors.6 //@regions.4/@sensors.8 //@regions.4/@sensors.10" connectsTo="//@regions.4/@elements.37 //@regions.4/@elements.32" currentPosition="DIVERGING" positions="//@routes.4/@follows.1"/>
+    <elements xsi:type="hu.bme.mit.trainbenchmark:Switch" id="1386" monitoredBy="//@regions.4/@sensors.6 //@regions.4/@sensors.8 //@regions.4/@sensors.10" connectsTo="//@regions.4/@elements.32" currentPosition="DIVERGING" positions="//@routes.4/@follows.1"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1388" monitoredBy="//@regions.4/@sensors.6" connectsTo="//@regions.4/@elements.33" length="132"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1389" monitoredBy="//@regions.4/@sensors.6" connectsTo="//@regions.4/@elements.34" length="850"/>
     <elements xsi:type="hu.bme.mit.trainbenchmark:Segment" id="1390" monitoredBy="//@regions.4/@sensors.6" connectsTo="//@regions.4/@elements.35" length="633"/>

@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
 public class SqlSemaphoreNeighborInjectMatch extends SqlMatch implements SemaphoreNeighborInjectMatch {
 
 	public SqlSemaphoreNeighborInjectMatch(final ResultSet rs) throws SQLException {
-		match = new Long[] { rs.getLong(VAR_ROUTE), };
+		match = new Long[] { rs.getLong(VAR_ROUTE) };
 	}
 
 	@Override

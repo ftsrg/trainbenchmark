@@ -25,7 +25,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSORS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
-import static hu.bme.mit.trainbenchmark.sql.constants.SqlConstants.USER;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,6 +38,7 @@ import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.sql.constants.SqlConstants;
 import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
 
 public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
@@ -65,8 +65,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFilePath = gcw.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
-				+ "railway-header.sql";
+		final String headerFilePath = gcw.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR + "railway-header.sql";
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
@@ -81,8 +80,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = gcw.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR
-				+ "railway-footer.sql";
+		final String footerFilePath = gcw.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR + "railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
 		final List<String> lines = FileUtils.readLines(footerFile);
@@ -96,32 +94,30 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 	}
 
 	public void compact() throws IOException, InterruptedException {
+		System.out.println("Stopping server");
+		MySqlProcess.stopServer();
+
+		System.out.println("Cleaning data");
+		MySqlProcess.cleanServer();
+
+		System.out.println("Starting server");
 		MySqlProcess.startServer();
 
-		final Runtime rt = Runtime.getRuntime();
-		final String[] commandLoad = { "/bin/bash", "-c", "mysql -u " + USER + " < " + sqlRawPath };
-		final Process processLoad = rt.exec(commandLoad);
-		processLoad.waitFor();
+		System.out.println("Loading the raw model");
+		MySqlProcess.runShell(String.format("mysql -u %s < %s", SqlConstants.USER, sqlRawPath));
 
-		final String mysqlDumpPath = gcw.getGeneratorConfig().getModelPathWithoutExtension()
-				+ "-mysql.sql";
-		final String sqliteDumpPath = gcw.getGeneratorConfig().getModelPathWithoutExtension()
-				+ "-sqlite.sql";
+		final String mysqlDumpPath = gcw.getGeneratorConfig().getModelPathWithoutExtension() + "-mysql.sql";
+		final String commandDump = "mysqldump -u " + SqlConstants.USER + " --databases trainbenchmark --skip-dump-date --skip-comments > " + mysqlDumpPath;
+		MySqlProcess.runShell(commandDump);
 
-		final String[] commandDump = { "/bin/bash", "-c", "mysqldump -u " + USER
-				+ " --databases trainbenchmark --skip-dump-date --skip-comments > " + mysqlDumpPath };
-		final Process processDump = rt.exec(commandDump);
-		processDump.waitFor();
-
-		final String[] sqliteDump = { "/bin/bash", "-c", gcw.getGeneratorConfig().getWorkspaceDir()
-				+ SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath };
-		final Process processSqlite = rt.exec(sqliteDump);
-		processSqlite.waitFor();
+		final String sqliteDumpPath = gcw.getGeneratorConfig().getModelPathWithoutExtension() + "-sqlite.sql";
+		final String sqliteDump = gcw.getGeneratorConfig().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath;
+		MySqlProcess.runShell(sqliteDump);
 	}
 
 	@Override
-	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
-			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
+	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes, final Map<String, Object> outgoingEdges,
+			final Map<String, Object> incomingEdges) throws IOException {
 		final StringBuilder columns = new StringBuilder();
 		final StringBuilder values = new StringBuilder();
 
@@ -137,8 +133,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 			write(String.format("INSERT INTO \"%s\" (\"%s\") VALUES (%s);", ancestorType, ID, id));
 			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
 		} else {
-			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(),
-					values.toString());
+			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());
 			write(insertQuery.toString());
 		}
 
@@ -160,24 +155,19 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 			break;
 		// n:1 edges
 		case FOLLOWS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route",
-					from, ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);
 			break;
 		case GATHERS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID,
-					to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);
 			break;
 		case SENSORS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID,
-					to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID, to);
 			break;
 		case ELEMENTS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region",
-					from, ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region", from, ID, to);
 			break;
 		case SEMAPHORES:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", from,
-					ID, to);
+			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", from, ID, to);
 			break;
 		default:
 			throw new UnsupportedOperationException("Label '" + label + "' not supported.");
@@ -187,16 +177,13 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 	}
 
 	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value)
-			throws IOException {
+	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key,
-				stringValue, ID, node);
+		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key, stringValue, ID, node);
 		write(updateQuery);
 	}
 
-	protected void structuralFeaturesToSQL(final Map<String, ? extends Object> attributes, final StringBuilder columns,
-			final StringBuilder values) {
+	protected void structuralFeaturesToSQL(final Map<String, ? extends Object> attributes, final StringBuilder columns, final StringBuilder values) {
 		for (final Entry<String, ? extends Object> entry : attributes.entrySet()) {
 			final String key = entry.getKey();
 			final Object value = entry.getValue();

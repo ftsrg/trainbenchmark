@@ -3,7 +3,12 @@ package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.exec.*;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
+import org.apache.commons.exec.ExecuteWatchdog;
+import org.apache.commons.exec.Executor;
+import org.apache.commons.exec.PumpStreamHandler;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
@@ -19,24 +24,23 @@ public class BenchmarkRunner {
 		bcw.saveToFile(configPath);
 
 		final String projectName = String.format("trainbenchmark-tool-%s", bcw.getProjectName());
-		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName, projectName,
-				configPath);
+		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName, projectName, configPath);
 
-		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s",
-				bcw.getBenchmarkConfig().getXms(), bcw.getBenchmarkConfig().getXmx(), jarPath, configPath);
+		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s", bcw.getBenchmarkConfig().getXms(), bcw.getBenchmarkConfig().getXmx(),
+				jarPath, configPath);
 		final CommandLine cmdLine = CommandLine.parse(javaCommand);
 
 		final long timeoutInSeconds = bcw.getBenchmarkConfig().getTimeout();
 		final long timeoutInMilliseconds = timeoutInSeconds * 1000;
 		final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeoutInMilliseconds);
-		final Executor bundle = new DefaultExecutor();
-		bundle.setWatchdog(watchdog);
-		bundle.setStreamHandler(new PumpStreamHandler());
+		final Executor executor = new DefaultExecutor();
+		executor.setWatchdog(watchdog);
+		executor.setStreamHandler(new PumpStreamHandler());
 		try {
-			final int exitValue = bundle.execute(cmdLine);
+			final int exitValue = executor.execute(cmdLine);
 			System.out.println();
 			return exitValue;
-		} catch (ExecuteException e) {
+		} catch (final ExecuteException e) {
 			e.printStackTrace();
 			return 143;
 		}
