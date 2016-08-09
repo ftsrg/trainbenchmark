@@ -16,21 +16,38 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Region;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EmfApiQueryPosLengthInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfPosLengthInjectMatch, TDriver> {
 
 	public EmfApiQueryPosLengthInject(final TDriver driver) {
-		super(RailwayQuery.POSLENGTH, driver);
+		super(RailwayQuery.POSLENGTH_INJECT, driver);
 	}
 
 	@Override
 	public Collection<EmfPosLengthInjectMatch> evaluate() {
 		final List<EmfPosLengthInjectMatch> matches = new ArrayList<>();
 
-
+		final EList<Region> regions = driver.getContainer().getRegions();
+		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier("Segment");
+		
+		for (final Region region : regions) {
+			for (final TrackElement te : region.getElements()) {
+				if (te.eClass().isSuperTypeOf(clazz)) {
+					matches.add(new EmfPosLengthInjectMatch((Segment) te));
+				}
+			}
+		}
+		
 		return matches;
 	}
 

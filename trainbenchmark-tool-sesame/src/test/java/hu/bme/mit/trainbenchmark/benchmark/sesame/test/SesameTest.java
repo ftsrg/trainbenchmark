@@ -14,8 +14,8 @@ public class SesameTest extends RdfTest {
 	
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final SesameBenchmarkConfigWrapper sbcw = new SesameBenchmarkConfigWrapper(bc, inferencing);
-		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(sbcw);
+		final SesameBenchmarkConfigWrapper bcw = new SesameBenchmarkConfigWrapper(bc, inferencing);
+		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

@@ -22,15 +22,10 @@ public class MySqlTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final MySqlBenchmarkConfigWrapper msbcw = createMySqlBenchmarkConfigWrapper(bc);
-		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(msbcw);
+		final MySqlBenchmarkConfigWrapper bcw = new MySqlBenchmarkConfigWrapper(bc);
+		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}
-
-	protected MySqlBenchmarkConfigWrapper createMySqlBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
-		return new MySqlBenchmarkConfigWrapper(bc);
-	}
-
 
 }

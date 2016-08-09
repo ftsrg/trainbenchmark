@@ -71,14 +71,13 @@ public class EmfDriver extends Driver<RailwayElement> {
 	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
 		final Collection<RailwayElement> vertices = new ArrayList<>();
 
-		RailwayPackage.eINSTANCE.eClass();
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
 
 		final TreeIterator<EObject> contents = container.eAllContents();
 		while (contents.hasNext()) {
 			final EObject eObject = contents.next();
 
-			// if t's type is a descendant of clazz
+			// if eObject's type is a descendant of clazz
 			if (clazz.isSuperTypeOf(eObject.eClass())) {
 				vertices.add((RailwayElement) eObject);
 			}

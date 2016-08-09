@@ -22,14 +22,10 @@ public class TinkerGraphTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final TinkerGraphBenchmarkConfigWrapper dbcw = createTinkerGraphBenchmarkConfigWrapper(bc);
-		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(dbcw);
+		final TinkerGraphBenchmarkConfigWrapper bcw = new TinkerGraphBenchmarkConfigWrapper(bc);
+		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
-	}
-	
-	protected TinkerGraphBenchmarkConfigWrapper createTinkerGraphBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
-		return new TinkerGraphBenchmarkConfigWrapper(bc);
 	}
 
 }

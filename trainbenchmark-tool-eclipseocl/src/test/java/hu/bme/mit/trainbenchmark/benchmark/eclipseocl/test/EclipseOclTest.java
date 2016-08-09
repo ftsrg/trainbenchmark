@@ -22,14 +22,10 @@ public class EclipseOclTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final EclipseOclBenchmarkConfigWrapper eobcw = createEclipseOclBenchmarkConfigWrapper(bc);
-		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(eobcw);
+		final EclipseOclBenchmarkConfigWrapper bcw = new EclipseOclBenchmarkConfigWrapper(bc);
+		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
-	}
-	
-	protected EclipseOclBenchmarkConfigWrapper createEclipseOclBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
-		return new EclipseOclBenchmarkConfigWrapper(bc);
 	}
 
 }

@@ -26,8 +26,8 @@ public class JenaTest extends RdfTest {
 	
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final JenaBenchmarkConfigWrapper rbcw = new JenaBenchmarkConfigWrapper(bc, inferencing);
-		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(rbcw);
+		final JenaBenchmarkConfigWrapper bcw = new JenaBenchmarkConfigWrapper(bc, inferencing);
+		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

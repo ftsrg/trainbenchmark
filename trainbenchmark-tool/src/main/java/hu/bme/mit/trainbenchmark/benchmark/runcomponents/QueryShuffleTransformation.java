@@ -41,7 +41,7 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 	public List<TPatternMatch> shuffle(int nMatchesToModify) {	
 		final Ordering<? super TPatternMatch> ordering = Ordering.from(comparator);
 		sortedMatches = ordering.sortedCopy(matches);
-
+		
 		final int size = sortedMatches.size();
 		if (size < nMatchesToModify) {
 			nMatchesToModify = size;
@@ -52,6 +52,7 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 			final TPatternMatch candidate = sortedMatches.get(i);
 			candidates.add(candidate);
 		}
+		
 		return candidates;
 	}
 
