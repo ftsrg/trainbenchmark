@@ -22,14 +22,10 @@ public class EmfApiTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final EmfApiBenchmarkConfigWrapper dbcw = createDrools5BenchmarkConfigWrapper(bc);
-		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(dbcw);
+		final EmfApiBenchmarkConfigWrapper bcw = new EmfApiBenchmarkConfigWrapper(bc);
+		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
-	}
-	
-	protected EmfApiBenchmarkConfigWrapper createDrools5BenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
-		return new EmfApiBenchmarkConfigWrapper(bc);
 	}
 
 }

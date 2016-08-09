@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 public class EmfApiQueryConnectedSegmentsInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfConnectedSegmentsInjectMatch, TDriver> {
 
 	public EmfApiQueryConnectedSegmentsInject(final TDriver driver) {
-		super(RailwayQuery.CONNECTEDSEGMENTS, driver);
+		super(RailwayQuery.CONNECTEDSEGMENTS_INJECT, driver);
 	}
 
 	@Override

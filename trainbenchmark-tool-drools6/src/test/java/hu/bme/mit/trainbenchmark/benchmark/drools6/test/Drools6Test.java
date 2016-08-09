@@ -22,14 +22,10 @@ public class Drools6Test extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final Drools6BenchmarkConfigWrapper dbcw = createDrools6BenchmarkConfigWrapper(bc);
-		final Drools6BenchmarkScenario scenario = new Drools6BenchmarkScenario(dbcw);
+		final Drools6BenchmarkConfigWrapper bcw = new Drools6BenchmarkConfigWrapper(bc);
+		final Drools6BenchmarkScenario scenario = new Drools6BenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
-	}
-	
-	protected Drools6BenchmarkConfigWrapper createDrools6BenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
-		return new Drools6BenchmarkConfigWrapper(bc);
 	}
 
 }

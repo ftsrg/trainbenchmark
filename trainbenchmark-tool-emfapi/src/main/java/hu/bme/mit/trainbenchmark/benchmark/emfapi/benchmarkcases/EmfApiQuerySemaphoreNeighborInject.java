@@ -23,7 +23,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 public class EmfApiQuerySemaphoreNeighborInject<TDriver extends EmfDriver> extends EmfApiQuery<EmfSemaphoreNeighborInjectMatch, TDriver> {
 
 	public EmfApiQuerySemaphoreNeighborInject(final TDriver driver) {
-		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
+		super(RailwayQuery.SEMAPHORENEIGHBOR_INJECT, driver);
 	}
 
 	@Override

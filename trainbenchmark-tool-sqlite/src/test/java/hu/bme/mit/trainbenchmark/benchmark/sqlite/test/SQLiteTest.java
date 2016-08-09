@@ -22,14 +22,10 @@ public class SQLiteTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final SQLiteBenchmarkConfigWrapper sbcw = createSQLiteBenchmarkConfigWrapper(bc);
-		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(sbcw);
+		final SQLiteBenchmarkConfigWrapper bcw = new SQLiteBenchmarkConfigWrapper(bc);
+		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
-	}
-
-	protected SQLiteBenchmarkConfigWrapper createSQLiteBenchmarkConfigWrapper(final BenchmarkConfigCore bc) {
-		return new SQLiteBenchmarkConfigWrapper(bc);
 	}
 
 }
