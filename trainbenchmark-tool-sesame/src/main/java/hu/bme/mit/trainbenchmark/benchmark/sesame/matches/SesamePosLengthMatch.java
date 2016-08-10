@@ -35,9 +35,4 @@ public class SesamePosLengthMatch extends SesameMatch implements PosLengthMatch 
 		return bs.getValue(VAR_LENGTH);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getSegment() };
-	}
-
 }

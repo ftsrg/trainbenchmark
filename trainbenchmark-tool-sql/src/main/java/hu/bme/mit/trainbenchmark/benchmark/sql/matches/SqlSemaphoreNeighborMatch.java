@@ -22,7 +22,9 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SqlSemaphoreNeighborMatch extends SqlMatch {
+import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
+
+public class SqlSemaphoreNeighborMatch extends SqlMatch implements SemaphoreNeighborMatch {
 
 	public SqlSemaphoreNeighborMatch(final ResultSet rs) throws SQLException {
 		match = new Long[] { rs.getLong(VAR_SEMAPHORE), rs.getLong(VAR_ROUTE1), rs.getLong(VAR_ROUTE2), rs.getLong(VAR_SENSOR1),

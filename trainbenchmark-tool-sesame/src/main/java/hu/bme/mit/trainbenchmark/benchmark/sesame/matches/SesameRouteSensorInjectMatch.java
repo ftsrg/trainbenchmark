@@ -35,9 +35,4 @@ public class SesameRouteSensorInjectMatch extends SesameMatch implements RouteSe
 		return (URI) bs.getValue(VAR_SENSOR);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getRoute(), getSensor() };
-	}
-
 }

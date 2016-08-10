@@ -58,9 +58,4 @@ public class SesameSwitchSetMatch extends SesameMatch implements SwitchSetMatch 
 		return bs.getValue(VAR_CURRENTPOSITION);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getSemaphore(), getRoute(), getSwP(), getSw() };
-	}
-
 }

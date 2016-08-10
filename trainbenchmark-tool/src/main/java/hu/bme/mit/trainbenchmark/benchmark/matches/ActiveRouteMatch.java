@@ -11,8 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public interface ActiveRouteMatch {
+public interface ActiveRouteMatch extends Match {
 
 	public Object getRoute();
 
+	public default Object[] toArray() {
+		return new Object[] { getRoute() };
+	}
+	
 }

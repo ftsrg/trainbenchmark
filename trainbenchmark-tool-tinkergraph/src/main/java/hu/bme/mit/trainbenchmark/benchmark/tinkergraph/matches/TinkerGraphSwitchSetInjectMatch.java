@@ -9,35 +9,30 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_POSITION;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
-import org.openrdf.model.URI;
-import org.openrdf.model.Value;
-import org.openrdf.query.BindingSet;
+import java.util.Map;
+
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetInjectMatch;
 
-public class SesameSwitchSetInjectMatch extends SesameMatch implements SwitchSetInjectMatch {
+public class TinkerGraphSwitchSetInjectMatch extends TinkerGraphMatch implements SwitchSetInjectMatch {
 
-	public SesameSwitchSetInjectMatch(final BindingSet bs) {
-		super(bs);
+	public TinkerGraphSwitchSetInjectMatch(final Map<String, Object> match) {
+		super(match);
 	}
 
 	@Override
-	public URI getSw() {
-		return (URI) bs.getValue(VAR_SW);
+	public Vertex getSw() {
+		return (Vertex) match.get(VAR_SW);
 	}
 
-	public Value getPosition() {
-		return bs.getValue(VAR_POSITION);
-	}
-
-	public Value getCurrentPosition() {
-		return bs.getValue(VAR_CURRENTPOSITION);
+	@Override
+	public Vertex[] toArray() {
+		return new Vertex[] { getSw() };
 	}
 
 }

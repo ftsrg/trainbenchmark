@@ -13,19 +13,17 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.matches;
 
 import org.apache.jena.ext.com.google.common.base.Joiner;
 import org.apache.jena.query.QuerySolution;
-import org.apache.jena.rdf.model.Resource;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class JenaMatch {
+public abstract class JenaMatch implements Match {
 
 	protected QuerySolution qs;
 
 	public JenaMatch(final QuerySolution qs) {
 		this.qs = qs;
 	}
-
-	public abstract Resource[] toArray();
 
 	public static JenaMatch createMatch(final RailwayQuery query, final QuerySolution qs) {
 		switch (query) {

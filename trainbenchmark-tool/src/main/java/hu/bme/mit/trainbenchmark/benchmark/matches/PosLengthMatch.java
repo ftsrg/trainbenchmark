@@ -11,8 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public interface PosLengthMatch {
+public interface PosLengthMatch extends Match {
 
 	public Object getSegment();
+
+	public default Object[] toArray() {
+		return new Object[] { getSegment() };
+	}
 
 }

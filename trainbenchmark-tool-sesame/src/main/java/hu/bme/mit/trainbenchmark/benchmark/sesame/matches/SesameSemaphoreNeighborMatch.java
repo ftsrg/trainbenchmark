@@ -65,9 +65,4 @@ public class SesameSemaphoreNeighborMatch extends SesameMatch implements Semapho
 		return (URI) bs.getValue(VAR_TE2);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getSemaphore(), getRoute1(), getRoute2(), getSensor1(), getSensor2(), getTe1(), getTe2() };
-	}
-
 }
