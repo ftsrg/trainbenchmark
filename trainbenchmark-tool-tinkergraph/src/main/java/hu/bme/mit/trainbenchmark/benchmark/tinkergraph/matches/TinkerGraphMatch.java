@@ -14,19 +14,16 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
+import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class TinkerGraphMatch {
+public abstract class TinkerGraphMatch implements Match {
 
 	protected Map<String, Object> match;
 
 	public TinkerGraphMatch(final Map<String, Object> match) {
 		this.match = match;
 	}
-
-	public abstract Vertex[] toArray();
 
 	@Override
 	public String toString() {

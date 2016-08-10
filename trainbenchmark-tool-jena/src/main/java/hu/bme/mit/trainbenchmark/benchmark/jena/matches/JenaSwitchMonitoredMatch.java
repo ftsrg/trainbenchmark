@@ -29,9 +29,4 @@ public class JenaSwitchMonitoredMatch extends JenaMatch implements SwitchMonitor
 		return qs.getResource(VAR_SW);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSw() };
-	}
-
 }

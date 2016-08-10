@@ -40,7 +40,7 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 	public void read(final String modelPath) throws XMLStreamException, IOException {
 		graph = TinkerGraph.open();
 		graph.createIndex(LABEL, Vertex.class);
-		graph.io(IoCore.graphson()).readGraph(modelPath);
+		graph.io(IoCore.graphml()).readGraph(modelPath);
 	}
 
 	public Collection<Vertex> getVertices(final String type) {
@@ -62,7 +62,7 @@ public class TinkerGraphDriver extends Driver<Vertex> {
 
 	@Override
 	public String getPostfix() {
-		return "-tinkerpop.graphson";
+		return "-tinkerpop.graphml";
 	}
 
 }

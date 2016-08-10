@@ -65,9 +65,4 @@ public class SesameConnectedSegmentsMatch extends SesameMatch implements Connect
 		return (URI) bs.getValue(VAR_SEGMENT6);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getSensor(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(), getSegment6() };
-	}
-
 }

@@ -16,9 +16,9 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 import org.openrdf.model.URI;
 import org.openrdf.query.BindingSet;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredInjectMatch;
 
-public class SesameSwitchMonitoredInjectMatch extends SesameMatch implements SwitchMonitoredMatch {
+public class SesameSwitchMonitoredInjectMatch extends SesameMatch implements SwitchMonitoredInjectMatch {
 
 	public SesameSwitchMonitoredInjectMatch(final BindingSet bs) {
 		super(bs);
@@ -27,11 +27,6 @@ public class SesameSwitchMonitoredInjectMatch extends SesameMatch implements Swi
 	@Override
 	public URI getSw() {
 		return (URI) bs.getValue(VAR_SW);
-	}
-
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getSw() };
 	}
 
 }

@@ -47,9 +47,4 @@ public class SesameRouteSensorMatch extends SesameMatch implements RouteSensorMa
 		return (URI) bs.getValue(VAR_SW);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getRoute(), getSensor(), getSwP(), getSw() };
-	}
-
 }

@@ -11,12 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public interface ConnectedSegmentsInjectMatch {
+public interface ConnectedSegmentsInjectMatch extends Match {
 
 	public Object getSensor();
 
 	public Object getSegment1();
 
 	public Object getSegment3();
+
+	public default Object[] toArray() {
+		return new Object[] { getSensor(), getSegment1(), getSegment3() };
+	}
 
 }

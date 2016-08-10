@@ -26,8 +26,8 @@ public class IqdCoreMatchComparator extends MatchComparator<IqdCoreMatch, Long> 
 
 	@Override
 	public int compare(final IqdCoreMatch o1, final IqdCoreMatch o2) {
-		final Long[] m1 = o1.toArray();
-		final Long[] m2 = o2.toArray();
+		final Long[] m1 = (Long[]) o1.toArray();
+		final Long[] m2 = (Long[]) o2.toArray();
 		return compareArrays(m1, m2);
 	}
 }

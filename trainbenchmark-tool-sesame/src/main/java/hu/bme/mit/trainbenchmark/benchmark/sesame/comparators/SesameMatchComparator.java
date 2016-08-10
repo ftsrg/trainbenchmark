@@ -28,8 +28,8 @@ public class SesameMatchComparator extends MatchComparator<SesameMatch, URI> {
 
 	@Override
 	public int compare(final SesameMatch o1, final SesameMatch o2) {
-		final URI[] m1 = o1.toArray();
-		final URI[] m2 = o2.toArray();
+		final URI[] m1 = (URI[]) o1.toArray();
+		final URI[] m2 = (URI[]) o2.toArray();
 		return compareArrays(m1, m2);
 	}
 

@@ -19,7 +19,7 @@ import java.util.Arrays;
  * @author szarnyasg
  * 
  */
-public abstract class LongMatch {
+public abstract class LongMatch implements Match {
 
 	protected Long[] match;
 

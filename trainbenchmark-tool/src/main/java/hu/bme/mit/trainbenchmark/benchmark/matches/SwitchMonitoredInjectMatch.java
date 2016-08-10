@@ -11,8 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public interface SwitchMonitoredInjectMatch {
+public interface SwitchMonitoredInjectMatch extends Match {
 
 	public Object getSw();
+
+	public default Object[] toArray() {
+		return new Object[] { getSw() };
+	}
 
 }

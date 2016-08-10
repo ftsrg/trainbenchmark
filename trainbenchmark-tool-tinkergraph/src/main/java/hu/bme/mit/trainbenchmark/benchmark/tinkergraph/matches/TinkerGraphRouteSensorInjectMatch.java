@@ -9,28 +9,34 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.comparators;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
+
+import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
-public class TinkerGraphMatchComparator extends MatchComparator<TinkerGraphMatch, Vertex> {
+public class TinkerGraphRouteSensorInjectMatch extends TinkerGraphMatch implements RouteSensorInjectMatch {
 
-	protected TinkerGraphMatchComparator() {
-		super(new VertexComparator());
+	public TinkerGraphRouteSensorInjectMatch(final Map<String, Object> match) {
+		super(match);
 	}
-	
-	public static TinkerGraphMatchComparator create() {
-		return new TinkerGraphMatchComparator();
-	}
-	
+
 	@Override
-	public int compare(final TinkerGraphMatch o1, final TinkerGraphMatch o2) {
-		final Vertex[] m1 = (Vertex[]) o1.toArray();
-		final Vertex[] m2 = (Vertex[]) o2.toArray();
-		return compareArrays(m1, m2);
+	public Vertex getRoute() {
+		return (Vertex) match.get(QueryConstants.VAR_ROUTE);
+	}
+
+	@Override
+	public Vertex getSensor() {
+		return (Vertex) match.get(QueryConstants.VAR_SENSOR);
+	}
+
+	@Override
+	public Vertex[] toArray() {
+		return new Vertex[] { getRoute(), getSensor() };
 	}
 
 }

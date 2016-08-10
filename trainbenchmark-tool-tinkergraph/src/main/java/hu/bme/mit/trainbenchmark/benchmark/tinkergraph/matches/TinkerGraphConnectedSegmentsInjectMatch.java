@@ -9,36 +9,37 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT3;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
 
-import org.openrdf.model.URI;
-import org.openrdf.query.BindingSet;
+import java.util.Map;
+
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsInjectMatch;
 
-public class SesameConnectedSegmentsInjectMatch extends SesameMatch implements ConnectedSegmentsInjectMatch {
+public class TinkerGraphConnectedSegmentsInjectMatch extends TinkerGraphMatch implements ConnectedSegmentsInjectMatch {
 
-	public SesameConnectedSegmentsInjectMatch(final BindingSet bs) {
-		super(bs);
+	public TinkerGraphConnectedSegmentsInjectMatch(final Map<String, Object> match) {
+		super(match);
 	}
 
 	@Override
-	public URI getSensor() {
-		return (URI) bs.getValue(VAR_SENSOR);
+	public Vertex getSensor() {
+		return (Vertex) match.get(VAR_SENSOR);
 	}
 
 	@Override
-	public URI getSegment1() {
-		return (URI) bs.getValue(VAR_SEGMENT1);
+	public Vertex getSegment1() {
+		return (Vertex) match.get(VAR_SEGMENT1);
 	}
 
 	@Override
-	public URI getSegment3() {
-		return (URI) bs.getValue(VAR_SEGMENT3);
+	public Vertex getSegment3() {
+		return (Vertex) match.get(VAR_SEGMENT3);
 	}
 
 }

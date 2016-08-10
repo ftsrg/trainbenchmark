@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public interface SwitchSetMatch {
+public interface SwitchSetMatch extends Match {
 
 	public Object getSemaphore();
 
@@ -21,4 +21,8 @@ public interface SwitchSetMatch {
 
 	public Object getSw();
 	
+	default Object[] toArray() {
+		return new Object[] { getSemaphore(), getRoute(), getSwP(), getSw() };
+	}
+
 }

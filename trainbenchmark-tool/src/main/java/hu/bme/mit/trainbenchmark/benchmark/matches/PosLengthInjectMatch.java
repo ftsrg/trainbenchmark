@@ -11,8 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.matches;
 
-public interface PosLengthInjectMatch {
+public interface PosLengthInjectMatch extends Match {
 
 	public Object getSegment();
+
+	public default Object[] toArray() {
+		return new Object[] { getSegment() };
+	}
 
 }
