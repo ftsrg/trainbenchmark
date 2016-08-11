@@ -13,26 +13,24 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 
 import java.util.Collection;
 
-import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.apache.tinkerpop.gremlin.structure.Edge;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-public class TinkerGraphTransformationInjectSemaphoreNeighbor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
+public class TinkerGraphTransformationInjectSemaphoreNeighbor<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphTransformation<TinkerGraphSemaphoreNeighborInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationInjectSemaphoreNeighbor(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Vertex> routes) {
-		for (final Vertex route : routes) {
-			final Iterable<Edge> entries = () -> route.edges(Direction.OUT, ModelConstants.ENTRY);
-			for (final Edge entry : entries) {
-				entry.remove();
-			}
+	public void activate(final Collection<TinkerGraphSemaphoreNeighborInjectMatch> matches) {
+		for (final TinkerGraphSemaphoreNeighborInjectMatch match : matches) {
+//			final Iterable<Edge> entries = () -> route.edges(Direction.OUT, ModelConstants.ENTRY);
+//			for (final Edge entry : entries) {
+//				entry.remove();
+//			}
 		}
 	}
 

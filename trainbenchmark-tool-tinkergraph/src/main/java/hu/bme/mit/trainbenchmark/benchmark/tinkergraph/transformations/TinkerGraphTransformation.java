@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectRouteSensor;
@@ -28,16 +29,16 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.Ti
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class TinkerGraphTransformation<TObject, TTinkerGraphDriver extends TinkerGraphDriver>
-		extends ModelTransformation<TObject, TTinkerGraphDriver> {
+public abstract class TinkerGraphTransformation<TMatch extends TinkerGraphMatch, TTinkerGraphDriver extends TinkerGraphDriver>
+		extends ModelTransformation<TMatch, TTinkerGraphDriver> {
 
 	protected TinkerGraphTransformation(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <TTinkerGraphDriver extends TinkerGraphDriver> ModelTransformation<TTinkerGraphDriver, ?> newInstance(
-			final TTinkerGraphDriver driver, final RailwayQuery query, final Scenario scenario) {
+	public static <TTinkerGraphDriver extends TinkerGraphDriver> ModelTransformation<TTinkerGraphDriver, ?> newInstance(final TTinkerGraphDriver driver,
+			final RailwayQuery query, final Scenario scenario) {
 		switch (scenario) {
 		case REPAIR:
 			switch (query) {
@@ -76,6 +77,6 @@ public abstract class TinkerGraphTransformation<TObject, TTinkerGraphDriver exte
 		default:
 			break;
 		}
-		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);		
+		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);
 	}
 }

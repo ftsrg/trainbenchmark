@@ -19,8 +19,10 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-public class TinkerGraphTransformationRepairPosLength<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationRepair<TTinkerGraphDriver, TinkerGraphPosLengthMatch> {
+public class TinkerGraphTransformationRepairPosLength<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphTransformation<TinkerGraphPosLengthMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationRepairPosLength(final TTinkerGraphDriver driver) {
 		super(driver);

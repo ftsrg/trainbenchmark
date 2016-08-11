@@ -26,16 +26,28 @@ public abstract class TinkerGraphQuery<TMatch extends TinkerGraphMatch, TTinkerG
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new TinkerGraphQueryConnectedSegments<>(driver);
+		case CONNECTEDSEGMENTS_INJECT:
+			return new TinkerGraphQueryConnectedSegmentsInject<>(driver);
 		case POSLENGTH:
 			return new TinkerGraphQueryPosLength<>(driver);
+		case POSLENGTH_INJECT:
+			return new TinkerGraphQueryPosLengthInject<>(driver);
 		case ROUTESENSOR:
 			return new TinkerGraphQueryRouteSensor<>(driver);
+		case ROUTESENSOR_INJECT:
+			return new TinkerGraphQueryRouteSensorInject<>(driver);
 		case SEMAPHORENEIGHBOR:
 			return new TinkerGraphQuerySemaphoreNeighbor<>(driver);
+		case SEMAPHORENEIGHBOR_INJECT:
+			return new TinkerGraphQuerySemaphoreNeighborInject<>(driver);
 		case SWITCHMONITORED:
 			return new TinkerGraphQuerySwitchMonitored<>(driver);
+		case SWITCHMONITORED_INJECT:
+			return new TinkerGraphQuerySwitchMonitoredInject<>(driver);
 		case SWITCHSET:
 			return new TinkerGraphQuerySwitchSet<>(driver);
+		case SWITCHSET_INJECT:
+			return new TinkerGraphQuerySwitchSetInject<>(driver);
 		default:
 			throw new UnsupportedOperationException("Query " + query + " not supported");
 		}

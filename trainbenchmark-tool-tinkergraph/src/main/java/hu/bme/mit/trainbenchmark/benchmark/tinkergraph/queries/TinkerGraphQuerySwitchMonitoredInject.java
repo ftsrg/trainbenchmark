@@ -12,53 +12,23 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQuerySwitchMonitoredInject<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, TTinkerGraphDriver> {
+public class TinkerGraphQuerySwitchMonitoredInject<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphQuery<TinkerGraphSwitchMonitoredInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySwitchMonitoredInject(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.SWITCHMONITORED, driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphSwitchMonitoredMatch> evaluate() {
-		final Collection<TinkerGraphSwitchMonitoredMatch> matches = new ArrayList<>();
-
-		final Collection<Vertex> switches = driver.getVertices(SWITCH);
-		
-		// (sw:Switch)
-		for (final Vertex sw : switches) {
-			final Iterable<Vertex> monitoredByVertices = () -> sw.vertices(Direction.OUT, MONITORED_BY);
-
-			boolean hasSensor = false;
-			for (final Vertex monitoredByVertex : monitoredByVertices) {
-				if (monitoredByVertex.label().equals(SENSOR)) {
-					hasSensor = true;
-					break;
-				}
-			}
-
-			if (!hasSensor) {
-				final Map<String, Object> match = new HashMap<>();
-				match.put(VAR_SW, sw);
-				matches.add(new TinkerGraphSwitchMonitoredMatch(match));
-			}
-		}
+	public Collection<TinkerGraphSwitchMonitoredInjectMatch> evaluate() {
+		final Collection<TinkerGraphSwitchMonitoredInjectMatch> matches = new ArrayList<>();
 
 		return matches;
 	}

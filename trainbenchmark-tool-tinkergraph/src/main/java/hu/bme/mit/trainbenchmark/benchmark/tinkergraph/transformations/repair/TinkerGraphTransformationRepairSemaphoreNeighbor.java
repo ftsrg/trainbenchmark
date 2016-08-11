@@ -19,9 +19,10 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
 public class TinkerGraphTransformationRepairSemaphoreNeighbor<TTinkerGraphDriver extends TinkerGraphDriver>
-		extends TinkerGraphTransformationRepair<TTinkerGraphDriver, TinkerGraphSemaphoreNeighborMatch> {
+		extends TinkerGraphTransformation<TinkerGraphSemaphoreNeighborMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationRepairSemaphoreNeighbor(final TTinkerGraphDriver driver) {
 		super(driver);
