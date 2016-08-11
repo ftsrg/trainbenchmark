@@ -21,31 +21,38 @@ public class IqdCoreConnectedSegmentsMatch extends IqdCoreMatch implements Conne
 	}
 
 	@Override
-	public Long getSegment1() { return (Long) qs.apply(0); }
+	public Long getSegment1() {
+		return (Long) qs.apply(0);
+	}
 
 	@Override
-	public Long getSegment2() { return (Long) qs.apply(1); }
+	public Long getSegment2() {
+		return (Long) qs.apply(1);
+	}
 
 	@Override
-	public Long getSegment3() {	return (Long) qs.apply(2); }
+	public Long getSegment3() {
+		return (Long) qs.apply(2);
+	}
 
 	@Override
-	public Long getSegment4() {	return (Long) qs.apply(3); }
+	public Long getSegment4() {
+		return (Long) qs.apply(3);
+	}
 
 	@Override
-	public Long getSegment5() { return (Long) qs.apply(4); }
+	public Long getSegment5() {
+		return (Long) qs.apply(4);
+	}
 
 	@Override
-	public Long getSegment6() { return (Long) qs.apply(5); }
-
-    @Override
-    public Long getSensor() {
-        return (Long) qs.apply(6);
-    }
+	public Long getSegment6() {
+		return (Long) qs.apply(5);
+	}
 
 	@Override
-	public Long[] toArray() {
-		return new Long[] { getSensor(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(), getSegment6() };
+	public Long getSensor() {
+		return (Long) qs.apply(6);
 	}
 
 }

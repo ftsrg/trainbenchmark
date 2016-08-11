@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 import scala.collection.immutable.Vector;
+
 public class IqdCoreSwitchSetMatch extends IqdCoreMatch implements SwitchSetMatch {
 
 	public IqdCoreSwitchSetMatch(final Vector<Object> qs) {
@@ -45,11 +46,6 @@ public class IqdCoreSwitchSetMatch extends IqdCoreMatch implements SwitchSetMatc
 
 	public String getCurrentPosition() {
 		return (String) qs.apply(5);
-	}
-
-	@Override
-	public Long[] toArray() {
-		return new Long[] { getSemaphore(), getRoute(), getSwP(), getSw() };
 	}
 
 }
