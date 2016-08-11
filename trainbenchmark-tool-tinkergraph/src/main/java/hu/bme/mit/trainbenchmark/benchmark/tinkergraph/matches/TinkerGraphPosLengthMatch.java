@@ -35,9 +35,4 @@ public class TinkerGraphPosLengthMatch extends TinkerGraphMatch implements PosLe
 		return (Integer) match.get(VAR_LENGTH);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getSegment() };
-	}
-
 }

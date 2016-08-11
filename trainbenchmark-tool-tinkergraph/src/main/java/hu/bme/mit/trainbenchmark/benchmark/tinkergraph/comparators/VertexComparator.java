@@ -19,9 +19,9 @@ public class VertexComparator implements Comparator<Vertex> {
 
 	@Override
 	public int compare(final Vertex v1, final Vertex v2) {
-		final long id1 = (Integer) v1.id();
-		final long id2 = (Integer) v2.id();
-		return Long.compare(id1, id2);
+		final int id1 = (Integer) v1.id(); // TODO is this a String, a long or an int?
+		final int id2 = (Integer) v2.id();
+		return Integer.compare(id1, id2);
 	}
 
 }

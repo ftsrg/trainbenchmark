@@ -30,9 +30,4 @@ public class TinkerGraphSwitchMonitoredInjectMatch extends TinkerGraphMatch impl
 		return (Vertex) match.get(VAR_SW);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getSw() };
-	}
-
 }

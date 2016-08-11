@@ -71,8 +71,10 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
-			break;
+			final TinkerGraphQuery<TinkerGraphPosLengthMatch, TDriver> query = new TinkerGraphQueryPosLength<>(driver);
+			final TinkerGraphTransformation<TinkerGraphPosLengthMatch, TDriver> transformation = new TinkerGraphTransformationRepairPosLength<>(driver);
+			final ModelOperation<TinkerGraphPosLengthMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final TinkerGraphQuery<TinkerGraphPosLengthMatch, TDriver> query = new TinkerGraphQueryPosLength<>(driver);
@@ -88,8 +90,10 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
-			break;
+			final TinkerGraphQuery<TinkerGraphRouteSensorMatch, TDriver> query = new TinkerGraphQueryRouteSensor<>(driver);
+			final TinkerGraphTransformation<TinkerGraphRouteSensorMatch, TDriver> transformation = new TinkerGraphTransformationRepairRouteSensor<>(driver);
+			final ModelOperation<TinkerGraphRouteSensorMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final TinkerGraphQuery<TinkerGraphRouteSensorMatch, TDriver> query = new TinkerGraphQueryRouteSensor<>(driver);
@@ -105,8 +109,11 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
-			break;
+			final TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, TDriver> query = new TinkerGraphQuerySemaphoreNeighbor<>(driver);
+			final TinkerGraphTransformation<TinkerGraphSemaphoreNeighborMatch, TDriver> transformation = new TinkerGraphTransformationRepairSemaphoreNeighbor<>(
+					driver);
+			final ModelOperation<TinkerGraphSemaphoreNeighborMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, TDriver> query = new TinkerGraphQuerySemaphoreNeighbor<>(driver);
@@ -123,8 +130,11 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
-			break;
+			final TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, TDriver> query = new TinkerGraphQuerySwitchMonitored<>(driver);
+			final TinkerGraphTransformation<TinkerGraphSwitchMonitoredMatch, TDriver> transformation = new TinkerGraphTransformationRepairSwitchMonitored<>(
+					driver);
+			final ModelOperation<TinkerGraphSwitchMonitoredMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, TDriver> query = new TinkerGraphQuerySwitchMonitored<>(driver);
@@ -141,8 +151,10 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
-			break;
+			final TinkerGraphQuery<TinkerGraphSwitchSetMatch, TDriver> query = new TinkerGraphQuerySwitchSet<>(driver);
+			final TinkerGraphTransformation<TinkerGraphSwitchSetMatch, TDriver> transformation = new TinkerGraphTransformationRepairSwitchSet<>(driver);
+			final ModelOperation<TinkerGraphSwitchSetMatch, TDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final TinkerGraphQuery<TinkerGraphSwitchSetMatch, TDriver> query = new TinkerGraphQuerySwitchSet<>(driver);

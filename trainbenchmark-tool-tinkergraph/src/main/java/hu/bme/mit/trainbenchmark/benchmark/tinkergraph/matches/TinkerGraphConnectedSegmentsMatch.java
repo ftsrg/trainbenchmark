@@ -66,9 +66,4 @@ public class TinkerGraphConnectedSegmentsMatch extends TinkerGraphMatch implemen
 		return (Vertex) match.get(VAR_SEGMENT6);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getSensor(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(), getSegment6() };
-	}
-
 }

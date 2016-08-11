@@ -57,9 +57,4 @@ public class TinkerGraphSwitchSetMatch extends TinkerGraphMatch implements Switc
 		return (String) match.get(QueryConstants.VAR_POSITION);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getSemaphore(), getRoute(), getSwP(), getSw() };
-	}
-
 }

@@ -66,9 +66,4 @@ public class TinkerGraphSemaphoreNeighborMatch extends TinkerGraphMatch implemen
 		return (Vertex) match.get(VAR_TE2);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getSemaphore(), getRoute1(), getRoute2(), getSensor1(), getSensor2(), getTe1(), getTe2() };
-	}
-
 }

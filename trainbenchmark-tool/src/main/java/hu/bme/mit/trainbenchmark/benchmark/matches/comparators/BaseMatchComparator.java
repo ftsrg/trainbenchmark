@@ -9,21 +9,23 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.jena.comparators;
+package hu.bme.mit.trainbenchmark.benchmark.matches.comparators;
 
-import org.apache.jena.rdf.model.Resource;
+import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 
-public class JenaMatchComparator extends BaseMatchComparator<JenaMatch, Resource> {
+public abstract class BaseMatchComparator<TMatch extends Match, TElement> extends MatchComparator<TMatch, TElement> {
 
-	protected JenaMatchComparator() {
-		super(new ResourceComparator());
+	public BaseMatchComparator(final Comparator<TElement> elementComparator) {
+		super(elementComparator);
 	}
 
-	public static JenaMatchComparator create() {
-		return new JenaMatchComparator();
+	@Override
+	public int compare(final Match m1, final Match m2) {
+		final Object[] o1 = m1.toArray();
+		final Object[] o2 = m2.toArray();
+		return compareArrays(o1, o2);
 	}
-
+	
 }
