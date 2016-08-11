@@ -13,26 +13,24 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 
 import java.util.Collection;
 
-import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.apache.tinkerpop.gremlin.structure.Edge;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-public class TinkerGraphTransformationInjectRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
+public class TinkerGraphTransformationInjectRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphTransformation<TinkerGraphRouteSensorInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationInjectRouteSensor(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Vertex> routes) {
-		for (final Vertex route : routes) {
-			final Iterable<Edge> gatherss = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
-			for (final Edge gathers : gatherss) {
-				gathers.remove();
-			}
+	public void activate(final Collection<TinkerGraphRouteSensorInjectMatch> matches) {
+		for (final TinkerGraphRouteSensorInjectMatch match : matches) {
+//			final Iterable<Edge> gatherss = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
+//			for (final Edge gathers : gatherss) {
+//				gathers.remove();
+//			}
 		}
 	}
 

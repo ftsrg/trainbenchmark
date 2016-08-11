@@ -13,79 +13,21 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQuerySemaphoreNeighborInject<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, TTinkerGraphDriver> {
+public class TinkerGraphQuerySemaphoreNeighborInject<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySemaphoreNeighborInject(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphSemaphoreNeighborMatch> evaluate() {
-		final Collection<TinkerGraphSemaphoreNeighborMatch> matches = new ArrayList<>();
-
-		final Collection<Vertex> route1s = driver.getVertices(ModelConstants.ROUTE);
-
-		for (final Vertex route1 : route1s) {
-			// (route1:Route)-[:exit]->(semaphore:Semaphore)
-			final Iterable<Vertex> semaphores = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.EXIT, Direction.OUT,
-					ModelConstants.SEMAPHORE);
-			for (final Vertex semaphore : semaphores) {
-				// (route1:Route)-[:gathers]->(sensor1:Sensor)
-				final Iterable<Vertex> sensor1s = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.GATHERS, Direction.OUT,
-						ModelConstants.SENSOR);
-				for (final Vertex sensor1 : sensor1s) {
-					// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
-					final Iterable<Vertex> te1s = TinkerGraphUtil.getAdjacentNodes(sensor1, ModelConstants.MONITORED_BY, Direction.IN,
-							new String[] { ModelConstants.SEGMENT, ModelConstants.SWITCH });
-					for (final Vertex te1 : te1s) {
-						// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
-						final Iterable<Vertex> te2s = TinkerGraphUtil.getAdjacentNodes(te1, ModelConstants.CONNECTS_TO, Direction.OUT,
-								new String[] { ModelConstants.SEGMENT, ModelConstants.SWITCH });
-						for (final Vertex te2 : te2s) {
-							// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
-							final Iterable<Vertex> sensor2s = TinkerGraphUtil.getAdjacentNodes(te2, ModelConstants.MONITORED_BY, Direction.OUT, ModelConstants.SENSOR);
-							for (final Vertex sensor2 : sensor2s) {
-								// (sensor2:Sensor)<-[:gathers]-(route2:Route),
-								final Iterable<Vertex> route2s = TinkerGraphUtil.getAdjacentNodes(sensor2, ModelConstants.GATHERS, Direction.IN, ModelConstants.ROUTE);
-								for (final Vertex route2 : route2s) {
-									// route1 != route2 --> if (route1 == route2), continue
-									if (route1.equals(route2)) {
-										continue;
-									}
-
-									// (route2)-[:entry]->(semaphore) NAC
-									if (!TinkerGraphUtil.isConnected(route2, semaphore, ModelConstants.ENTRY)) {
-										final Map<String, Object> match = new HashMap<>();
-										match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
-										match.put(QueryConstants.VAR_ROUTE1, route1);
-										match.put(QueryConstants.VAR_ROUTE2, route2);
-										match.put(QueryConstants.VAR_SENSOR1, sensor1);
-										match.put(QueryConstants.VAR_SENSOR2, sensor2);
-										match.put(QueryConstants.VAR_TE1, te1);
-										match.put(QueryConstants.VAR_TE2, te2);
-										matches.add(new TinkerGraphSemaphoreNeighborMatch(match));
-										break;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+	public Collection<TinkerGraphSemaphoreNeighborInjectMatch> evaluate() {
+		final Collection<TinkerGraphSemaphoreNeighborInjectMatch> matches = new ArrayList<>();
 
 		return matches;
 	}

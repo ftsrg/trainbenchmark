@@ -12,46 +12,23 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryPosLengthInject<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphPosLengthMatch, TTinkerGraphDriver> {
+public class TinkerGraphQueryPosLengthInject<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphQuery<TinkerGraphPosLengthInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryPosLengthInject(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.POSLENGTH, driver);
 	}
 
 	@Override
-	public Collection<TinkerGraphPosLengthMatch> evaluate() {
-		final Collection<TinkerGraphPosLengthMatch> matches = new ArrayList<>();
-
-		final Collection<Vertex> segments = driver.getVertices(SEGMENT);
-		
-		// (segment:Segment)
-		for (final Vertex segment : segments) {
-			final Integer length = (Integer) segment.property(LENGTH).value();
-			
-			// segment.length <= 0
-			if (length <= 0) {
-				final Map<String, Object> match = new HashMap<>();
-				match.put(VAR_SEGMENT, segment);
-				match.put(VAR_LENGTH, length);
-				matches.add(new TinkerGraphPosLengthMatch(match));
-			}			
-		}
+	public Collection<TinkerGraphPosLengthInjectMatch> evaluate() {
+		final Collection<TinkerGraphPosLengthInjectMatch> matches = new ArrayList<>();
 
 		return matches;
 	}

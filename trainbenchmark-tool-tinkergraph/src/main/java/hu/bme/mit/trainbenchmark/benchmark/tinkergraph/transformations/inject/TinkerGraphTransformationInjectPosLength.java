@@ -11,24 +11,24 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-
 import java.util.Collection;
 
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-public class TinkerGraphTransformationInjectPosLength<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphTransformationInject<TTinkerGraphDriver> {
+public class TinkerGraphTransformationInjectPosLength<TTinkerGraphDriver extends TinkerGraphDriver>
+		extends TinkerGraphTransformation<TinkerGraphPosLengthInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationInjectPosLength(final TTinkerGraphDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Vertex> segments) {
-		for (final Vertex segment : segments) {
-			segment.property(LENGTH, 0);
+	public void activate(final Collection<TinkerGraphPosLengthInjectMatch> matches) {
+		// TODO search for all activate methods w/o a matches argument 
+		for (final TinkerGraphPosLengthInjectMatch match : matches) {
+//			segment.property(LENGTH, 0);
 		}
 	}
 
