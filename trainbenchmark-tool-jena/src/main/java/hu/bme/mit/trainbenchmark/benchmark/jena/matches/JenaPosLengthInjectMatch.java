@@ -29,9 +29,4 @@ public class JenaPosLengthInjectMatch extends JenaMatch implements PosLengthInje
 		return qs.getResource(VAR_SEGMENT);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSegment() };
-	}
-
 }

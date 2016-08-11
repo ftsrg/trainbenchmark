@@ -41,9 +41,4 @@ public class JenaConnectedSegmentsInjectMatch extends JenaMatch implements Conne
 		return qs.getResource(VAR_SEGMENT3);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSensor(), getSegment1(), getSegment3() };
-	}
-
 }

@@ -29,9 +29,4 @@ public class JenaSwitchMonitoredInjectMatch extends JenaMatch implements SwitchM
 		return qs.getResource(VAR_SW);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSw() };
-	}
-
 }

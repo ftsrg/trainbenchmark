@@ -29,9 +29,4 @@ public class SesameSwitchMonitoredMatch extends SesameMatch implements SwitchMon
 		return (URI) bs.getValue(VAR_SW);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getSw() };
-	}
-
 }

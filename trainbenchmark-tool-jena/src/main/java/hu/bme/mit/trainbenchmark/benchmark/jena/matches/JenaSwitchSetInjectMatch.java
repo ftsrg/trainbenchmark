@@ -39,9 +39,4 @@ public class JenaSwitchSetInjectMatch extends JenaMatch implements SwitchSetInje
 		return qs.getResource(VAR_CURRENTPOSITION);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSw() };
-	}
-
 }

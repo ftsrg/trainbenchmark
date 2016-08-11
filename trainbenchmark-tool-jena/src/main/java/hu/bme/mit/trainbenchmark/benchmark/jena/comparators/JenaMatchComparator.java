@@ -28,8 +28,8 @@ public class JenaMatchComparator extends MatchComparator<JenaMatch, Resource> {
 
 	@Override
 	public int compare(final JenaMatch o1, final JenaMatch o2) {
-		final Resource[] m1 = (Resource[]) o1.toArray();
-		final Resource[] m2 = (Resource[]) o2.toArray();
+		final Object[] m1 = o1.toArray();
+		final Object[] m2 = o2.toArray();
 		return compareArrays(m1, m2);
 	}
 
