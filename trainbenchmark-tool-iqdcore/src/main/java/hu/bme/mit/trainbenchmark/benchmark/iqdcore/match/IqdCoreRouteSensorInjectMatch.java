@@ -11,12 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorInjectMatch;
 import scala.collection.immutable.Vector;
 
-public class IqdCoreRouteSensorMatch extends IqdCoreMatch implements RouteSensorMatch {
+public class IqdCoreRouteSensorInjectMatch extends IqdCoreMatch implements RouteSensorInjectMatch {
 
-	public IqdCoreRouteSensorMatch(final Vector<Object> qs) {
+	public IqdCoreRouteSensorInjectMatch(final Vector<Object> qs) {
 		super(qs);
 	}
 
@@ -27,17 +27,7 @@ public class IqdCoreRouteSensorMatch extends IqdCoreMatch implements RouteSensor
 
 	@Override
 	public Long getSensor() {
-		return (Long) qs.apply(3);
-	}
-
-	@Override
-	public Long getSwP() {
 		return (Long) qs.apply(1);
-	}
-
-	@Override
-	public Long getSw() {
-		return (Long) qs.apply(2);
 	}
 
 }

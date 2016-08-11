@@ -11,32 +11,27 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsInjectMatch;
 import scala.collection.immutable.Vector;
 
-public class IqdCoreRouteSensorMatch extends IqdCoreMatch implements RouteSensorMatch {
+public class IqdCoreConnectedSegmentsInjectMatch extends IqdCoreMatch implements ConnectedSegmentsInjectMatch {
 
-	public IqdCoreRouteSensorMatch(final Vector<Object> qs) {
+	public IqdCoreConnectedSegmentsInjectMatch(final Vector<Object> qs) {
 		super(qs);
 	}
 
 	@Override
-	public Long getRoute() {
+	public Long getSensor() {
 		return (Long) qs.apply(0);
 	}
 
 	@Override
-	public Long getSensor() {
-		return (Long) qs.apply(3);
-	}
-
-	@Override
-	public Long getSwP() {
+	public Long getSegment1() {
 		return (Long) qs.apply(1);
 	}
 
 	@Override
-	public Long getSw() {
+	public Long getSegment3() {
 		return (Long) qs.apply(2);
 	}
 

@@ -24,7 +24,7 @@ public class IqdCoreActiveRouteMatch extends IqdCoreMatch implements ActiveRoute
 	public Long getRoute() {
 		return (Long) qs.apply(0);
 	}
-	
+
 	@Override
 	public String toString() {
 		return super.toString();

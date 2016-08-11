@@ -25,9 +25,4 @@ public class IqdCoreSwitchMonitoredMatch extends IqdCoreMatch implements SwitchM
 		return (Long) qs.apply(0);
 	}
 
-	@Override
-	public Long[] toArray() {
-		return new Long[] { getSw() };
-	}
-
 }

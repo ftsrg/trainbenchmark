@@ -21,8 +21,8 @@ public abstract class IqdCoreMatch implements Match {
 
 	protected Vector<Object> qs;
 
-	public IqdCoreMatch(final Vector<Object> qs2) {
-		this.qs = qs2;
+	public IqdCoreMatch(final Vector<Object> qs) {
+		this.qs = qs;
 	}
 
 	public static IqdCoreMatch createMatch(final RailwayQuery query, final Vector<Object> qs) {
@@ -31,21 +31,33 @@ public abstract class IqdCoreMatch implements Match {
 			return new IqdCoreActiveRouteMatch(qs);
 		case CONNECTEDSEGMENTS:
 			return new IqdCoreConnectedSegmentsMatch(qs);
+		case CONNECTEDSEGMENTS_INJECT:
+			return new IqdCoreConnectedSegmentsInjectMatch(qs);
 		case POSLENGTH:
 			return new IqdCorePosLengthMatch(qs);
+		case POSLENGTH_INJECT:
+			return new IqdCorePosLengthInjectMatch(qs);
 		case ROUTESENSOR:
 			return new IqdCoreRouteSensorMatch(qs);
+		case ROUTESENSOR_INJECT:
+			return new IqdCoreRouteSensorInjectMatch(qs);
 		case SEMAPHORENEIGHBOR:
 			return new IqdCoreSemaphoreNeighborMatch(qs);
+		case SEMAPHORENEIGHBOR_INJECT:
+			return new IqdCoreSemaphoreNeighborInjectMatch(qs);
 		case SWITCHMONITORED:
 			return new IqdCoreSwitchMonitoredMatch(qs);
+		case SWITCHMONITORED_INJECT:
+			return new IqdCoreSwitchMonitoredInjectMatch(qs);
 		case SWITCHSET:
 			return new IqdCoreSwitchSetMatch(qs);
+		case SWITCHSET_INJECT:
+			return new IqdCoreSwitchSetInjectMatch(qs);
 		default:
 			throw new UnsupportedOperationException("Pattern not supported: " + query);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		Joiner joiner = Joiner.on(", ");

@@ -13,6 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 import scala.collection.immutable.Vector;
+
 public class IqdCorePosLengthMatch extends IqdCoreMatch implements PosLengthMatch {
 
 	public IqdCorePosLengthMatch(final Vector<Object> qs) {
@@ -26,11 +27,6 @@ public class IqdCorePosLengthMatch extends IqdCoreMatch implements PosLengthMatc
 
 	public Integer getLength() {
 		return (Integer) qs.apply(1);
-	}
-
-	@Override
-	public Long[] toArray() {
-		return new Long[] { getSegment() };
 	}
 
 }
