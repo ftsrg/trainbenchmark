@@ -64,10 +64,5 @@ public class JenaSemaphoreNeighborMatch extends JenaMatch implements SemaphoreNe
 	public Resource getTe2() {
 		return qs.getResource(VAR_TE2);
 	}
-
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSemaphore(), getRoute1(), getRoute2(), getSensor1(), getSensor2(), getTe1(), getTe2() };
-	}
-
+	
 }

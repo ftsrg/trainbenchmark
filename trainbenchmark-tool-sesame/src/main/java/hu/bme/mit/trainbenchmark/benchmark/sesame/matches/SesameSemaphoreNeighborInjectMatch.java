@@ -29,9 +29,4 @@ public class SesameSemaphoreNeighborInjectMatch extends SesameMatch implements S
 		return (URI) bs.getValue(VAR_ROUTE);
 	}
 
-	@Override
-	public URI[] toArray() {
-		return new URI[] { getRoute() };
-	}
-
 }

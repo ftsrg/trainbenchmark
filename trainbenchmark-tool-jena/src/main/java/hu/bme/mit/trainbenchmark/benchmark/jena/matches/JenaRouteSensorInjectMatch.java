@@ -35,9 +35,4 @@ public class JenaRouteSensorInjectMatch extends JenaMatch implements RouteSensor
 		return qs.getResource(VAR_SENSOR);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getRoute(), getSensor() };
-	}
-
 }

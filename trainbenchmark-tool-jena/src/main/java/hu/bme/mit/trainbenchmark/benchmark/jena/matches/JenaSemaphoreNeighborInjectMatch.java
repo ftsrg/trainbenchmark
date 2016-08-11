@@ -29,9 +29,4 @@ public class JenaSemaphoreNeighborInjectMatch extends JenaMatch implements Semap
 		return qs.getResource(VAR_ROUTE);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getRoute() };
-	}
-
 }

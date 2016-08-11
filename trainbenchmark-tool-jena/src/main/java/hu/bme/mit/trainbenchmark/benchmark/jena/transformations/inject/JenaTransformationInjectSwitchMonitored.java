@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -34,7 +33,7 @@ public class JenaTransformationInjectSwitchMonitored extends JenaTransformation<
 	@Override
 	public void activate(final Collection<JenaSwitchMonitoredInjectMatch> matches) throws IOException {
 		final List<Resource> switches = matches.stream().map(it -> it.getSw()).collect(Collectors.toList());
-		driver.deleteSingleOutgoingEdge(switches, SWITCH, MONITORED_BY);
+		driver.deleteOutgoingEdges(switches, MONITORED_BY);
 	}
 
 }

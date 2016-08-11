@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.driver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -66,8 +65,7 @@ public class JenaDriver extends RdfDriver<Resource> {
 		}
 	}
 
-	public Collection<QuerySolution> runQuery(final RailwayQuery query, final String queryDefinition)
-			throws IOException {
+	public Collection<QuerySolution> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
 		final Collection<QuerySolution> results = new ArrayList<>();
 		try (QueryExecution queryExecution = QueryExecutionFactory.create(queryDefinition, model)) {
 			final ResultSet resultSet = queryExecution.execSelect();
@@ -88,31 +86,11 @@ public class JenaDriver extends RdfDriver<Resource> {
 		}
 	}
 
-//	@Override
-//	public Collection<Resource> collectVertices(final String type) throws IOException {
-//		final ResIterator vertexStatements = model.listSubjectsWithProperty(RDF.type,
-//				model.getResource(BASE_PREFIX + type));
-//		final Collection<Resource> vertices = vertexStatements.toList();
-//		return vertices;
-//	}
-
-	public void deleteAllOutgoingEdges(final Collection<Resource> vertices, final String vertexType,
-			final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, true, true);
-	}
-
-	public void deleteSingleOutgoingEdge(final Collection<Resource> vertices, final String vertexType,
-			final String edgeType) throws IOException {
-		deleteEdges(vertices, edgeType, true, true);
-	}
-
-	protected void deleteEdges(final Collection<Resource> vertices, final String edgeType, final boolean outgoing,
-			final boolean all) {
+	public void deleteOutgoingEdges(final Collection<Resource> vertices, final String edgeType) throws IOException {
 		final Property property = model.getProperty(RdfConstants.BASE_PREFIX + edgeType);
 
 		for (final Resource vertex : vertices) {
-			final Selector selector = outgoing ? new SimpleSelector(vertex, property, (RDFNode) null) //
-					: new SimpleSelector(null, property, vertex);
+			final Selector selector = new SimpleSelector(vertex, property, (RDFNode) null);
 
 			final StmtIterator edges = model.listStatements(selector);
 
@@ -122,13 +100,8 @@ public class JenaDriver extends RdfDriver<Resource> {
 				statementsToRemove.add(edge);
 			}
 
-			Collections.sort(statementsToRemove, statementComparator);
 			for (final Statement statement : statementsToRemove) {
 				model.remove(statement);
-
-				if (!all) {
-					return;
-				}
 			}
 		}
 	}

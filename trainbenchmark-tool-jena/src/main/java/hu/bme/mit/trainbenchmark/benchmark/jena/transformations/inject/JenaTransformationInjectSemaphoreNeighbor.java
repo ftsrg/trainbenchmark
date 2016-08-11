@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -34,7 +33,7 @@ public class JenaTransformationInjectSemaphoreNeighbor extends JenaTransformatio
 	@Override
 	public void activate(final Collection<JenaSemaphoreNeighborInjectMatch> matches) throws IOException {
 		final List<Resource> routes = matches.stream().map(it -> it.getRoute()).collect(Collectors.toList());
-		driver.deleteSingleOutgoingEdge(routes, ROUTE, ENTRY);
+		driver.deleteOutgoingEdges(routes, ENTRY);
 	}
 
 }

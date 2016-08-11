@@ -57,9 +57,4 @@ public class JenaSwitchSetMatch extends JenaMatch implements SwitchSetMatch {
 		return qs.getResource(VAR_CURRENTPOSITION);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSemaphore(), getRoute(), getSwP(), getSw() };
-	}
-
 }

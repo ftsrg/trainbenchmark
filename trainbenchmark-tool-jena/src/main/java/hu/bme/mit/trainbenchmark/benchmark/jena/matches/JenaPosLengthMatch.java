@@ -35,9 +35,4 @@ public class JenaPosLengthMatch extends JenaMatch implements PosLengthMatch {
 		return qs.getLiteral(VAR_LENGTH);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSegment() };
-	}
-
 }

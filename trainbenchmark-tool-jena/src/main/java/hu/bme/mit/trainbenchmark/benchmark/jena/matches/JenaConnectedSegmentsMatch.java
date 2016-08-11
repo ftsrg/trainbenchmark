@@ -65,9 +65,4 @@ public class JenaConnectedSegmentsMatch extends JenaMatch implements ConnectedSe
 		return qs.getResource(VAR_SEGMENT6);
 	}
 
-	@Override
-	public Resource[] toArray() {
-		return new Resource[] { getSensor(), getSegment1(), getSegment2(), getSegment3(), getSegment4(), getSegment5(), getSegment6() };
-	}
-
 }
