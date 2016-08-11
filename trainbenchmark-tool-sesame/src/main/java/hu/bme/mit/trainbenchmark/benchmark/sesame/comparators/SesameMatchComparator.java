@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.comparators;
 
 import org.openrdf.model.URI;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
 
-public class SesameMatchComparator extends MatchComparator<SesameMatch, URI> {
+public class SesameMatchComparator extends BaseMatchComparator<SesameMatch, URI> {
 
 	protected SesameMatchComparator() {
 		super(new UriComparator());

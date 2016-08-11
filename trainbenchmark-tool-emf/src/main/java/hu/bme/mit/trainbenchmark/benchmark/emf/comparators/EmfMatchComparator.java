@@ -12,10 +12,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.comparators;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class EmfMatchComparator extends MatchComparator<EmfMatch, RailwayElement> {
+public class EmfMatchComparator extends BaseMatchComparator<EmfMatch, RailwayElement> {
 
 	protected EmfMatchComparator() {
 		super(new RailwayElementComparator());
@@ -23,13 +23,6 @@ public class EmfMatchComparator extends MatchComparator<EmfMatch, RailwayElement
 	
 	public static EmfMatchComparator create() {
 		return new EmfMatchComparator();
-	}
-	
-	@Override
-	public int compare(final EmfMatch o1, final EmfMatch o2) {
-		final RailwayElement[] m1 = o1.getMatch();
-		final RailwayElement[] m2 = o2.getMatch();
-		return compareArrays(m1, m2);
 	}
 
 }

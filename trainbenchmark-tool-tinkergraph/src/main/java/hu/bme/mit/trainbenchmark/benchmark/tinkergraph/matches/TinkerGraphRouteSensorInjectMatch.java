@@ -34,9 +34,4 @@ public class TinkerGraphRouteSensorInjectMatch extends TinkerGraphMatch implemen
 		return (Vertex) match.get(QueryConstants.VAR_SENSOR);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getRoute(), getSensor() };
-	}
-
 }

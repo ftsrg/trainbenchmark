@@ -30,9 +30,4 @@ public class TinkerGraphPosLengthInjectMatch extends TinkerGraphMatch implements
 		return (Vertex) match.get(VAR_SEGMENT);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getSegment() };
-	}
-
 }

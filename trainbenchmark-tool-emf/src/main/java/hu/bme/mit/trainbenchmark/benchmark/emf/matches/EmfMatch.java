@@ -13,9 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import java.util.Arrays;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public abstract class EmfMatch {
+public abstract class EmfMatch implements Match {
 
 	protected RailwayElement[] match;
 
@@ -23,6 +24,7 @@ public abstract class EmfMatch {
 		return match;
 	}
 
+	// TODO why does this have a hashCode() and equals?
 	@Override
 	public int hashCode() {
 		final int prime = 31;

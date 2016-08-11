@@ -12,9 +12,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.comparators.LongComparator;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparator;
 
-public class IqdCoreMatchComparator extends MatchComparator<IqdCoreMatch, Long> {
+public class IqdCoreMatchComparator extends BaseMatchComparator<IqdCoreMatch, Long> {
 
 	protected IqdCoreMatchComparator() {
 		super(new LongComparator());
@@ -23,11 +23,5 @@ public class IqdCoreMatchComparator extends MatchComparator<IqdCoreMatch, Long> 
 	public static IqdCoreMatchComparator create() {
 		return new IqdCoreMatchComparator();
 	}
-
-	@Override
-	public int compare(final IqdCoreMatch o1, final IqdCoreMatch o2) {
-		final Long[] m1 = (Long[]) o1.toArray();
-		final Long[] m2 = (Long[]) o2.toArray();
-		return compareArrays(m1, m2);
-	}
+	
 }

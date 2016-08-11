@@ -12,9 +12,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.comparators;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
-import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparator;
 
-public class LongMatchComparator<TMatch extends LongMatch> extends MatchComparator<TMatch, Long> {
+public class LongMatchComparator<TMatch extends LongMatch> extends BaseMatchComparator<TMatch, Long> {
 
 	protected LongMatchComparator() {
 		super(new LongComparator());
@@ -22,13 +22,6 @@ public class LongMatchComparator<TMatch extends LongMatch> extends MatchComparat
 	
 	public static <TMatch extends LongMatch> LongMatchComparator<TMatch> create() {
 		return new LongMatchComparator<>();
-	}
-
-	@Override
-	public int compare(final LongMatch o1, final LongMatch o2) {
-		final Long[] m1 = o1.getMatch();
-		final Long[] m2 = o2.getMatch();
-		return compareArrays(m1, m2);
 	}
 
 }

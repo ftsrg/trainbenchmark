@@ -30,9 +30,4 @@ public class TinkerGraphSemaphoreNeighborInjectMatch extends TinkerGraphMatch im
 		return (Vertex) match.get(VAR_ROUTE);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getRoute() };
-	}
-
 }

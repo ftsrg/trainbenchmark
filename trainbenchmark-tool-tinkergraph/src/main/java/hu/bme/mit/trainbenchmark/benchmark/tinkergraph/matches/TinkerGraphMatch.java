@@ -34,16 +34,28 @@ public abstract class TinkerGraphMatch implements Match {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new TinkerGraphConnectedSegmentsMatch(row);
+		case CONNECTEDSEGMENTS_INJECT:
+			return new TinkerGraphConnectedSegmentsInjectMatch(row);
 		case POSLENGTH:
 			return new TinkerGraphPosLengthMatch(row);
+		case POSLENGTH_INJECT:
+			return new TinkerGraphPosLengthInjectMatch(row);
 		case ROUTESENSOR:
 			return new TinkerGraphRouteSensorMatch(row);
+		case ROUTESENSOR_INJECT:
+			return new TinkerGraphRouteSensorInjectMatch(row);
 		case SEMAPHORENEIGHBOR:
 			return new TinkerGraphSemaphoreNeighborMatch(row);
+		case SEMAPHORENEIGHBOR_INJECT:
+			return new TinkerGraphSemaphoreNeighborInjectMatch(row);
 		case SWITCHMONITORED:
 			return new TinkerGraphSwitchMonitoredMatch(row);
+		case SWITCHMONITORED_INJECT:
+			return new TinkerGraphSwitchMonitoredInjectMatch(row);
 		case SWITCHSET:
 			return new TinkerGraphSwitchSetMatch(row);
+		case SWITCHSET_INJECT:
+			return new TinkerGraphSwitchSetInjectMatch(row);
 		default:
 			throw new UnsupportedOperationException("Query not supported: " + query);
 		}

@@ -44,9 +44,4 @@ public class TinkerGraphRouteSensorMatch extends TinkerGraphMatch implements Rou
 		return (Vertex) match.get(QueryConstants.VAR_SW);
 	}
 
-	@Override
-	public Vertex[] toArray() {
-		return new Vertex[] { getRoute(), getSensor(), getSwP(), getSw() };
-	}
-
 }

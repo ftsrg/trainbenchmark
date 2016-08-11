@@ -16,9 +16,10 @@ import java.util.Map;
 
 import org.neo4j.graphdb.Node;
 
+import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class Neo4jMatch {
+public abstract class Neo4jMatch implements Match {
 
 	protected Map<String, Object> match;
 
