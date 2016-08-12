@@ -53,6 +53,7 @@ public class SesameTransformationInjectConnectedSegments extends SesameTransform
 			connection.add(csim.getSegment1(), connectsTo, segment2);
 			// (segment2)-[:connectsTo]->(segment3)
 			connection.add(segment2, connectsTo, csim.getSegment3());
+
 			// (segment2)-[:monitoredBy]->(sensor)
 			connection.add(segment2, monitoredBy, csim.getSensor());
 			

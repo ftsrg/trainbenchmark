@@ -13,23 +13,26 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.Position;
-
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 
-public class Neo4jTransformationInjectSwitchSet extends Neo4jTransformationInject {
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.Position;
+
+public class Neo4jTransformationInjectSwitchSet extends Neo4jTransformation<Neo4jSwitchSetInjectMatch> {
 
 	public Neo4jTransformationInjectSwitchSet(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Node> switches) {
-		for (final Node sw : switches) {
+	public void activate(final Collection<Neo4jSwitchSetInjectMatch> matches) {
+		for (final Neo4jSwitchSetInjectMatch match : matches) {
+			final Node sw = match.getSw();
 			final String currentPositionString = (String) sw.getProperty(ModelConstants.CURRENTPOSITION);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];

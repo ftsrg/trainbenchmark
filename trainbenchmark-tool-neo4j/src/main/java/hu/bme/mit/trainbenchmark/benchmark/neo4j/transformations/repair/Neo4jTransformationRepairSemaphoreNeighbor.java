@@ -17,9 +17,10 @@ import org.neo4j.graphdb.Node;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jTransformationRepairSemaphoreNeighbor extends Neo4jTransformationRepair<Neo4jSemaphoreNeighborMatch> {
+public class Neo4jTransformationRepairSemaphoreNeighbor extends Neo4jTransformation<Neo4jSemaphoreNeighborMatch> {
 
 	public Neo4jTransformationRepairSemaphoreNeighbor(final Neo4jDriver driver) {
 		super(driver);
