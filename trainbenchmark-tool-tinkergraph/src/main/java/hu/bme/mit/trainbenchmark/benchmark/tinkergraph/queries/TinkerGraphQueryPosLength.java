@@ -14,13 +14,9 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
@@ -39,18 +35,15 @@ public class TinkerGraphQueryPosLength<TTinkerGraphDriver extends TinkerGraphDri
 		final Collection<TinkerGraphPosLengthMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> segments = driver.getVertices(SEGMENT);
-		
+
 		// (segment:Segment)
 		for (final Vertex segment : segments) {
 			final Integer length = (Integer) segment.property(LENGTH).value();
-			
+
 			// segment.length <= 0
 			if (length <= 0) {
-				final Map<String, Object> match = new HashMap<>();
-				match.put(VAR_SEGMENT, segment);
-				match.put(VAR_LENGTH, length);
-				matches.add(new TinkerGraphPosLengthMatch(match));
-			}			
+				matches.add(new TinkerGraphPosLengthMatch(segment, length));
+			}
 		}
 
 		return matches;

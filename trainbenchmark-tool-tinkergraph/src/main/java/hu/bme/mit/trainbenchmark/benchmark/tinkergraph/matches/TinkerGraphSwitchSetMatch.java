@@ -11,50 +11,56 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SWP;
-
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 public class TinkerGraphSwitchSetMatch extends TinkerGraphMatch implements SwitchSetMatch {
 
-	public TinkerGraphSwitchSetMatch(final Map<String, Object> match) {
-		super(match);
+	protected final Vertex semaphore;
+	protected final Vertex route;
+	protected final Vertex swP;
+	protected final Vertex sw;
+	protected final String position;
+	protected final String currentPosition;
+
+	public TinkerGraphSwitchSetMatch(final Vertex semaphore, final Vertex route, final Vertex swP, final Vertex sw, final String position,
+			final String currentPosition) {
+		super();
+		this.semaphore = semaphore;
+		this.route = route;
+		this.swP = swP;
+		this.sw = sw;
+		this.position = position;
+		this.currentPosition = currentPosition;
 	}
 
 	@Override
 	public Vertex getSemaphore() {
-		return (Vertex) match.get(VAR_SEMAPHORE);
+		return semaphore;
 	}
 
 	@Override
 	public Vertex getRoute() {
-		return (Vertex) match.get(VAR_ROUTE);
+		return route;
 	}
 
 	@Override
 	public Vertex getSwP() {
-		return (Vertex) match.get(VAR_SWP);
+		return swP;
 	}
 
 	@Override
 	public Vertex getSw() {
-		return (Vertex) match.get(VAR_SW);
-	}
-
-	public String getCurrentPosition() {
-		return (String) match.get(QueryConstants.VAR_CURRENTPOSITION);
+		return sw;
 	}
 
 	public String getPosition() {
-		return (String) match.get(QueryConstants.VAR_POSITION);
+		return position;
+	}
+
+	public String getCurrentPosition() {
+		return currentPosition;
 	}
 
 }

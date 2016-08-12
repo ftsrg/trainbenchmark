@@ -11,59 +11,65 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
-
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 
 public class TinkerGraphSemaphoreNeighborMatch extends TinkerGraphMatch implements SemaphoreNeighborMatch {
 
-	public TinkerGraphSemaphoreNeighborMatch(final Map<String, Object> match) {
-		super(match);
+	protected final Vertex semaphore;
+	protected final Vertex route1;
+	protected final Vertex route2;
+	protected final Vertex sensor1;
+	protected final Vertex sensor2;
+	protected final Vertex te1;
+	protected final Vertex te2;
+
+	public TinkerGraphSemaphoreNeighborMatch(final Vertex semaphore, final Vertex route1, final Vertex route2, final Vertex sensor1, final Vertex sensor2,
+			final Vertex te1, final Vertex te2) {
+		super();
+		this.semaphore = semaphore;
+		this.route1 = route1;
+		this.route2 = route2;
+		this.sensor1 = sensor1;
+		this.sensor2 = sensor2;
+		this.te1 = te1;
+		this.te2 = te2;
 	}
 
 	@Override
 	public Vertex getSemaphore() {
-		return (Vertex) match.get(VAR_SEMAPHORE);
+		return semaphore;
 	}
 
 	@Override
 	public Vertex getRoute1() {
-		return (Vertex) match.get(VAR_ROUTE1);
+		return route1;
 	}
 
 	@Override
 	public Vertex getRoute2() {
-		return (Vertex) match.get(VAR_ROUTE2);
+		return route2;
 	}
 
 	@Override
 	public Vertex getSensor1() {
-		return (Vertex) match.get(VAR_SENSOR1);
+		return sensor1;
 	}
 
 	@Override
 	public Vertex getSensor2() {
-		return (Vertex) match.get(VAR_SENSOR2);
+		return sensor2;
 	}
 
 	@Override
 	public Vertex getTe1() {
-		return (Vertex) match.get(VAR_TE1);
+		return te1;
 	}
 
 	@Override
 	public Vertex getTe2() {
-		return (Vertex) match.get(VAR_TE2);
+		return te2;
 	}
 
 }

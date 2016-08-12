@@ -13,8 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
@@ -23,7 +21,6 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, TTinkerGraphDriver> {
@@ -68,15 +65,7 @@ public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends Tinker
 
 									// (route2)-[:entry]->(semaphore) NAC
 									if (!TinkerGraphUtil.isConnected(route2, semaphore, ModelConstants.ENTRY)) {
-										final Map<String, Object> match = new HashMap<>();
-										match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
-										match.put(QueryConstants.VAR_ROUTE1, route1);
-										match.put(QueryConstants.VAR_ROUTE2, route2);
-										match.put(QueryConstants.VAR_SENSOR1, sensor1);
-										match.put(QueryConstants.VAR_SENSOR2, sensor2);
-										match.put(QueryConstants.VAR_TE1, te1);
-										match.put(QueryConstants.VAR_TE2, te2);
-										matches.add(new TinkerGraphSemaphoreNeighborMatch(match));
+										matches.add(new TinkerGraphSemaphoreNeighborMatch(semaphore, route1, route2, sensor1, sensor2, te1, te2));
 										break;
 									}
 								}

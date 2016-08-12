@@ -11,27 +11,29 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorInjectMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 
 public class TinkerGraphRouteSensorInjectMatch extends TinkerGraphMatch implements RouteSensorInjectMatch {
 
-	public TinkerGraphRouteSensorInjectMatch(final Map<String, Object> match) {
-		super(match);
+	protected final Vertex route;
+	protected final Vertex sensor;
+
+	public TinkerGraphRouteSensorInjectMatch(final Vertex route, final Vertex sensor) {
+		super();
+		this.route = route;
+		this.sensor = sensor;
 	}
 
 	@Override
 	public Vertex getRoute() {
-		return (Vertex) match.get(QueryConstants.VAR_ROUTE);
+		return route;
 	}
 
 	@Override
 	public Vertex getSensor() {
-		return (Vertex) match.get(QueryConstants.VAR_SENSOR);
+		return sensor;
 	}
 
 }

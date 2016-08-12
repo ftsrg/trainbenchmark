@@ -9,24 +9,25 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
-import org.apache.tinkerpop.gremlin.structure.Vertex;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthInjectMatch;
+import java.util.Map;
 
-public class TinkerGraphPosLengthInjectMatch extends TinkerGraphMatch implements PosLengthInjectMatch {
+import org.neo4j.graphdb.Node;
 
-	protected final Vertex segment;
-	
-	public TinkerGraphPosLengthInjectMatch(final Vertex segment) {
-		super();
-		this.segment = segment;
+import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
+
+public class Neo4jSemaphoreNeighborInjectMatch extends Neo4jMatch implements SemaphoreNeighborInjectMatch {
+
+	public Neo4jSemaphoreNeighborInjectMatch(final Map<String, Object> match) {
+		super(match);
 	}
 
 	@Override
-	public Vertex getSegment() {
-		return segment;
+	public Node getRoute() {
+		return (Node) match.get(VAR_ROUTE);
 	}
 
 }
