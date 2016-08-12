@@ -15,8 +15,11 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetInjectMatch;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphQuerySwitchSetInject<TTinkerGraphDriver extends TinkerGraphDriver>
@@ -30,6 +33,10 @@ public class TinkerGraphQuerySwitchSetInject<TTinkerGraphDriver extends TinkerGr
 	public Collection<TinkerGraphSwitchSetInjectMatch> evaluate() {
 		final Collection<TinkerGraphSwitchSetInjectMatch> matches = new ArrayList<>();
 
+		Collection<Vertex> switches = driver.getVertices(ModelConstants.SWITCH);
+		for (Vertex sw : switches) {
+			matches.add(new TinkerGraphSwitchSetInjectMatch(sw));
+		}
 		
 		return matches;
 	}

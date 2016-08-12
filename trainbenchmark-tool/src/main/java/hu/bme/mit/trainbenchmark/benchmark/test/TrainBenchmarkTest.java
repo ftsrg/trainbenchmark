@@ -27,6 +27,8 @@ public abstract class TrainBenchmarkTest {
 	protected final long timeout = 120;
 	protected final int runs = 1;
 
+	// batch
+	
 	@Test
 	public void batchTest() throws Exception {
 		// Arrange
@@ -56,64 +58,8 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(0));
 	}
 
-	@Test
-	public void injectBatchTest() throws Exception {
-		// Arrange
-		final String workload = "InjectModelTest";
-		final int queryTransformationCount = 0;
-		final String modelFilename = "railway-inject-1";
-		final Collection<RailwayOperation> operations = ImmutableList.of(//
-				RailwayOperation.CONNECTEDSEGMENTS, //
-				RailwayOperation.POSLENGTH, //
-				RailwayOperation.ROUTESENSOR, //
-				RailwayOperation.SEMAPHORENEIGHBOR, //
-				RailwayOperation.SWITCHMONITORED, //
-				RailwayOperation.SWITCHSET //
-		);
-		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
-
-		// Act
-		final BenchmarkResult result = runTest(bc);
-
-		// Assert
-		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
-		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(3));
-		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(11));
-		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(9));
-		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(12));
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(0));
-	}
-
-	@Test
-	public void repairBatchTest() throws Exception {
-		// Arrange
-		final String workload = "RepairModelTest";
-		final int queryTransformationCount = 0;
-		final String modelFilename = "railway-repair-1";
-		final Collection<RailwayOperation> operations = ImmutableList.of(//
-				RailwayOperation.CONNECTEDSEGMENTS, //
-				RailwayOperation.POSLENGTH, //
-				RailwayOperation.ROUTESENSOR, //
-				RailwayOperation.SEMAPHORENEIGHBOR, //
-				RailwayOperation.SWITCHMONITORED, //
-				RailwayOperation.SWITCHSET //
-		);
-		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
-
-		// Act
-		final BenchmarkResult result = runTest(bc);
-
-		// Assert
-		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
-		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
-		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(95));
-		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
-		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(3));
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
-		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(5));
-	}
-
+	// repair
+	
 	@Test
 	public void repairTest() throws Exception {
 		// Arrange
@@ -148,6 +94,130 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(5));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(0));
 	}
+	
+	@Test
+	public void connectedSegmentsRepairTest() throws Exception {
+		// Arrange
+		final String workload = "ConnectedSegmentsRepairTest";
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-repair-1";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.CONNECTEDSEGMENTS_REPAIR //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(0));
+	}
+
+	@Test
+	public void posLengthRepairTest() throws Exception {
+		// Arrange
+		final String workload = "PosLengthRepairTest";
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-repair-1";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.POSLENGTH_REPAIR //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(95));
+		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(1), Matchers.equalTo(85));
+	}
+
+	@Test
+	public void routeSensorRepairTest() throws Exception {
+		// Arrange
+		final String workload = "RepairTest";
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-repair-1";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.ROUTESENSOR_REPAIR //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(8));
+	}
+	
+
+	@Test
+	public void semaphoreNeighborRepairTest() throws Exception {
+		// Arrange
+		final String workload = "SemaphoreNeighborRepairTest";
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-repair-1";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(3));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(0));
+	}
+	
+
+	@Test
+	public void switchMonitoredRepairTest() throws Exception {
+		// Arrange
+		final String workload = "SwitchMonitoredRepairTest";
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-repair-1";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.SWITCHMONITORED_REPAIR //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(1), Matchers.equalTo(0));
+	}
+	
+
+	@Test
+	public void switchSetRepairTest() throws Exception {
+		// Arrange
+		final String workload = "SwitchSetRepairTest";
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-repair-1";
+		final Collection<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.SWITCHSET_REPAIR //
+		);
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+
+		// Act
+		final BenchmarkResult result = runTest(bc);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(5));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(0));
+	}
+	// inject
 
 	@Test
 	public void connectedSegmentsInjectTest() throws Exception {

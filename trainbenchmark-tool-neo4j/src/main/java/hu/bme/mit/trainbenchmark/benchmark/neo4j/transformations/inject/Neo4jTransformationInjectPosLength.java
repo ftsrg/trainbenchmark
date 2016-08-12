@@ -11,13 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
 public class Neo4jTransformationInjectPosLength extends Neo4jTransformation<Neo4jPosLengthInjectMatch> {
 
@@ -28,7 +27,7 @@ public class Neo4jTransformationInjectPosLength extends Neo4jTransformation<Neo4
 	@Override
 	public void activate(final Collection<Neo4jPosLengthInjectMatch> matches) {
 		for (final Neo4jPosLengthInjectMatch match : matches) {
-			match.getSegment().setProperty(LENGTH, 0);
+			match.getSegment().setProperty(ModelConstants.LENGTH, 0);
 		}
 	}
 

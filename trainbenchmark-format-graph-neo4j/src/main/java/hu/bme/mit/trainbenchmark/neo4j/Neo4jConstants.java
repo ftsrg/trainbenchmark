@@ -1,3 +1,4 @@
+
 package hu.bme.mit.trainbenchmark.neo4j;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
