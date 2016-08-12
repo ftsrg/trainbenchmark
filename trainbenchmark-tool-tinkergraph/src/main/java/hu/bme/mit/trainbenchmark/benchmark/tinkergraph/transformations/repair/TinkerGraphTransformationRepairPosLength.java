@@ -33,7 +33,11 @@ public class TinkerGraphTransformationRepairPosLength<TTinkerGraphDriver extends
 		for (final TinkerGraphPosLengthMatch plm : matches) {
 			final Vertex segment = plm.getSegment();
 			final Integer length = plm.getLength();
-			segment.property(LENGTH, -length + 1);
+			try {
+				segment.property(LENGTH, -length + 1);
+			} catch (final IllegalStateException e) {
+				// do nothing (vertex has been removed)
+			}
 		}
 	}
 

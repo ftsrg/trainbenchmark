@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
@@ -33,10 +31,11 @@ public class Neo4jTransformationInjectSwitchSet extends Neo4jTransformation<Neo4
 	public void activate(final Collection<Neo4jSwitchSetInjectMatch> matches) {
 		for (final Neo4jSwitchSetInjectMatch match : matches) {
 			final Node sw = match.getSw();
+			// System.out.println(sw.getProperty(ModelConstants.CURRENTPOSITION));
 			final String currentPositionString = (String) sw.getProperty(ModelConstants.CURRENTPOSITION);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
-			sw.setProperty(CURRENTPOSITION, newCurrentPosition.toString());
+			sw.setProperty(ModelConstants.CURRENTPOSITION, newCurrentPosition.toString());
 		}
 	}
 

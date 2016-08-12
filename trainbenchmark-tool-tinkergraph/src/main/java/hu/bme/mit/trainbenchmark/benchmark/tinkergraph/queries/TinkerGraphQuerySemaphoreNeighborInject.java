@@ -25,7 +25,7 @@ public class TinkerGraphQuerySemaphoreNeighborInject<TTinkerGraphDriver extends 
 		extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySemaphoreNeighborInject(final TTinkerGraphDriver driver) {
-		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);
+		super(RailwayQuery.SEMAPHORENEIGHBOR_INJECT, driver);
 	}
 
 	@Override

@@ -27,5 +27,5 @@ public abstract class BaseMatchComparator<TMatch extends Match, TElement> extend
 		final Object[] o2 = m2.toArray();
 		return compareArrays(o1, o2);
 	}
-	
+
 }

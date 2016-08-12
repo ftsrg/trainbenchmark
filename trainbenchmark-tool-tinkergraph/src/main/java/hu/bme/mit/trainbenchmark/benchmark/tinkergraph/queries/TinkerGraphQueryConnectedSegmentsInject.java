@@ -31,7 +31,7 @@ public class TinkerGraphQueryConnectedSegmentsInject<TTinkerGraphDriver extends 
 		extends TinkerGraphQuery<TinkerGraphConnectedSegmentsInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryConnectedSegmentsInject(final TTinkerGraphDriver driver) {
-		super(RailwayQuery.CONNECTEDSEGMENTS, driver);
+		super(RailwayQuery.CONNECTEDSEGMENTS_INJECT, driver);
 	}
 
 	@Override
