@@ -13,22 +13,23 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
 import java.util.Collection;
 
-import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jTransformationInjectSemaphoreNeighbor extends Neo4jTransformationInject {
+public class Neo4jTransformationInjectSemaphoreNeighbor extends Neo4jTransformation<Neo4jSemaphoreNeighborInjectMatch> {
 
 	public Neo4jTransformationInjectSemaphoreNeighbor(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Node> routes) {
-		for (final Node route : routes) {
-			final Iterable<Relationship> entries = route.getRelationships(Neo4jConstants.relationshipTypeEntry);
+	public void activate(final Collection<Neo4jSemaphoreNeighborInjectMatch> matches) {
+		for (final Neo4jSemaphoreNeighborInjectMatch match : matches) {
+			final Iterable<Relationship> entries = match.getRoute().getRelationships(Neo4jConstants.relationshipTypeEntry);
 			for (final Relationship entry : entries) {
 				entry.delete();
 			}

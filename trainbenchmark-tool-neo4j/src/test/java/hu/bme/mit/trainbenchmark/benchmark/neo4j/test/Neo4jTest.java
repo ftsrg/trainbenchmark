@@ -29,7 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 @RunWith(Parameterized.class)
 public class Neo4jTest extends TrainBenchmarkTest {
 
-	@Parameters
+	@Parameters(name="engine={0}")
 	public static Iterable<? extends Object> data() {
 		return Arrays.asList(Neo4jEngine.CYPHER, Neo4jEngine.COREAPI);
 	}
@@ -38,7 +38,7 @@ public class Neo4jTest extends TrainBenchmarkTest {
 	public Neo4jEngine engine;
 	
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigCore bc) throws Exception {
 		final Neo4jBenchmarkConfigWrapper nbcw = new Neo4jBenchmarkConfigWrapper(bc, engine);
 		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(nbcw);
 		final BenchmarkResult result = scenario.performBenchmark();

@@ -11,16 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class Neo4jTransformationRepairPosLength extends Neo4jTransformationRepair<Neo4jPosLengthMatch> {
+public class Neo4jTransformationRepairPosLength extends Neo4jTransformation<Neo4jPosLengthMatch> {
 
 	public Neo4jTransformationRepairPosLength(final Neo4jDriver driver) {
 		super(driver);
@@ -31,7 +31,7 @@ public class Neo4jTransformationRepairPosLength extends Neo4jTransformationRepai
 		for (final Neo4jPosLengthMatch plm : matches) {
 			final Node segment = plm.getSegment();
 			final Integer length = plm.getLength();
-			segment.setProperty(LENGTH, -length + 1);
+			segment.setProperty(ModelConstants.LENGTH, -length + 1);
 		}
 	}
 

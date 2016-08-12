@@ -15,20 +15,20 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 
 import java.util.Collection;
 
-import org.neo4j.graphdb.Node;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 
-public class Neo4jTransformationInjectPosLength extends Neo4jTransformationInject {
+public class Neo4jTransformationInjectPosLength extends Neo4jTransformation<Neo4jPosLengthInjectMatch> {
 
 	public Neo4jTransformationInjectPosLength(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Node> segments) {
-		for (final Node segment : segments) {
-			segment.setProperty(LENGTH, 0);
+	public void activate(final Collection<Neo4jPosLengthInjectMatch> matches) {
+		for (final Neo4jPosLengthInjectMatch match : matches) {
+			match.getSegment().setProperty(LENGTH, 0);
 		}
 	}
 

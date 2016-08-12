@@ -13,22 +13,23 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
 import java.util.Collection;
 
-import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jTransformationInjectSwitchMonitored extends Neo4jTransformationInject {
+public class Neo4jTransformationInjectSwitchMonitored extends Neo4jTransformation<Neo4jSwitchMonitoredInjectMatch> {
 
 	public Neo4jTransformationInjectSwitchMonitored(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Node> switches) {
-		for (final Node sw : switches) {
-			final Iterable<Relationship> sensors = sw.getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
+	public void activate(final Collection<Neo4jSwitchMonitoredInjectMatch> matches) {
+		for (final Neo4jSwitchMonitoredInjectMatch match : matches) {
+			final Iterable<Relationship> sensors = match.getSw().getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
 			for (final Relationship sensor : sensors) {
 				sensor.delete();
 			}

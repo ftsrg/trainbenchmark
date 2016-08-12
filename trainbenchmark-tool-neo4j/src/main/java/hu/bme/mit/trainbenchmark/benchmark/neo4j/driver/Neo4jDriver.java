@@ -111,15 +111,6 @@ public class Neo4jDriver extends Driver<Node> {
 		return results;
 	}
 
-//	@Override
-//	public Collection<Node> collectVertices(final String type) {
-//		final ResourceIterator<Node> iterator = graphDb.findNodes(DynamicLabel.label(type));
-//
-//		@SuppressWarnings("unchecked")
-//		final Collection<Node> vertices = IteratorUtils.toList(iterator);
-//		return vertices;
-//	}
-
 	// utility
 
 	public GraphDatabaseService getGraphDb() {

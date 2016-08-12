@@ -13,24 +13,27 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
 
 import java.util.Collection;
 
-import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformationInject {
+public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformation<Neo4jRouteSensorInjectMatch> {
 
 	public Neo4jTransformationInjectRouteSensor(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Node> routes) {
-		for (final Node route : routes) {
-			final Iterable<Relationship> gatherss = route.getRelationships(Neo4jConstants.relationshipTypeGathers);
+	public void activate(final Collection<Neo4jRouteSensorInjectMatch> matches) {
+		for (final Neo4jRouteSensorInjectMatch match : matches) {
+			final Iterable<Relationship> gatherss = match.getRoute().getRelationships(Neo4jConstants.relationshipTypeGathers);
 			for (final Relationship gathers : gatherss) {
-				gathers.delete();
+				if (gathers.getEndNode().equals(match.getSensor())) {
+					gathers.delete();
+				}
 			}
 		}
 	}

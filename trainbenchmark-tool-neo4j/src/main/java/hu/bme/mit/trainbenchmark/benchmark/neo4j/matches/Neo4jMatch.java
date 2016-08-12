@@ -30,32 +30,32 @@ public abstract class Neo4jMatch implements Match {
 		return "Neo4jMatch [match=" + Arrays.toString(toArray()) + "]";
 	}
 	
-	public static Neo4jMatch createMatch(final RailwayQuery query, final Map<String, Object> row) {
+	public static Neo4jMatch createMatch(final RailwayQuery query, final Map<String, Object> match) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new Neo4jConnectedSegmentsMatch(row);
+			return new Neo4jConnectedSegmentsMatch(match);
 		case CONNECTEDSEGMENTS_INJECT:
-			return new Neo4jConnectedSegmentsInjectMatch(row);
+			return new Neo4jConnectedSegmentsInjectMatch(match);
 		case POSLENGTH:
-			return new Neo4jPosLengthMatch(row);
+			return new Neo4jPosLengthMatch(match);
 		case POSLENGTH_INJECT:
-			return new Neo4jPosLengthInjectMatch(row);
+			return new Neo4jPosLengthInjectMatch(match);
 		case ROUTESENSOR:
-			return new Neo4jRouteSensorMatch(row);
+			return new Neo4jRouteSensorMatch(match);
 		case ROUTESENSOR_INJECT:
-			return new Neo4jRouteSensorInjectMatch(row);
+			return new Neo4jRouteSensorInjectMatch(match);
 		case SEMAPHORENEIGHBOR:
-			return new Neo4jSemaphoreNeighborMatch(row);
+			return new Neo4jSemaphoreNeighborMatch(match);
 		case SEMAPHORENEIGHBOR_INJECT:
-			return new Neo4jSemaphoreNeighborInjectMatch(row);
+			return new Neo4jSemaphoreNeighborInjectMatch(match);
 		case SWITCHMONITORED:
-			return new Neo4jSwitchMonitoredMatch(row);
+			return new Neo4jSwitchMonitoredMatch(match);
 		case SWITCHMONITORED_INJECT:
-			return new Neo4jSwitchMonitoredInjectMatch(row);
+			return new Neo4jSwitchMonitoredInjectMatch(match);
 		case SWITCHSET:
-			return new Neo4jSwitchSetMatch(row);
+			return new Neo4jSwitchSetMatch(match);
 		case SWITCHSET_INJECT:
-			return new Neo4jSwitchSetInjectMatch(row);
+			return new Neo4jSwitchSetInjectMatch(match);
 		default:
 			throw new UnsupportedOperationException("Query not supported: " + query);
 		}

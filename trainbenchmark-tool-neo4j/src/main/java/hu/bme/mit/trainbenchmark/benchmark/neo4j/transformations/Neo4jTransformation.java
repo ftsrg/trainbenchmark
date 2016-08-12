@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject.Neo4jTransformationInjectRouteSensor;
@@ -28,7 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public abstract class Neo4jTransformation<TObject> extends ModelTransformation<TObject, Neo4jDriver> {
+public abstract class Neo4jTransformation<TMatch extends Neo4jMatch> extends ModelTransformation<TMatch, Neo4jDriver> {
 
 	protected Neo4jTransformation(final Neo4jDriver driver) {
 		super(driver);

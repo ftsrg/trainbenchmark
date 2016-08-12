@@ -19,8 +19,9 @@ import org.neo4j.graphdb.Node;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
 
-public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformationRepair<Neo4jSwitchSetMatch> {
+public class Neo4jTransformationRepairSwitchSet extends Neo4jTransformation<Neo4jSwitchSetMatch> {
 
 	public Neo4jTransformationRepairSwitchSet(final Neo4jDriver driver) {
 		super(driver);

@@ -1,0 +1,2 @@
+MATCH (sw:Switch)
+RETURN DISTINCT sw
