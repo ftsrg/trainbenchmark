@@ -26,7 +26,7 @@ public class TinkerGraphQuerySwitchMonitoredInject<TTinkerGraphDriver extends Ti
 		extends TinkerGraphQuery<TinkerGraphSwitchMonitoredInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySwitchMonitoredInject(final TTinkerGraphDriver driver) {
-		super(RailwayQuery.SWITCHMONITORED, driver);
+		super(RailwayQuery.SWITCHMONITORED_INJECT, driver);
 	}
 
 	@Override

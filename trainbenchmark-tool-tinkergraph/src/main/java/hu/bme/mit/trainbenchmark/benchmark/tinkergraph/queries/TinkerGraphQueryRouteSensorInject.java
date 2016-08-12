@@ -28,22 +28,22 @@ public class TinkerGraphQueryRouteSensorInject<TTinkerGraphDriver extends Tinker
 		extends TinkerGraphQuery<TinkerGraphRouteSensorInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryRouteSensorInject(final TTinkerGraphDriver driver) {
-		super(RailwayQuery.ROUTESENSOR, driver);
+		super(RailwayQuery.ROUTESENSOR_INJECT, driver);
 	}
 
 	@Override
 	public Collection<TinkerGraphRouteSensorInjectMatch> evaluate() {
 		final Collection<TinkerGraphRouteSensorInjectMatch> matches = new ArrayList<>();
 
-		Collection<Vertex> routes = driver.getVertices(ModelConstants.ROUTE);
-		for (Vertex route : routes) {
-			Iterable<Edge> edges = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
-			for (Edge gathers : edges) {
-				Vertex sensor = gathers.inVertex();
+		final Collection<Vertex> routes = driver.getVertices(ModelConstants.ROUTE);
+		for (final Vertex route : routes) {
+			final Iterable<Edge> edges = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
+			for (final Edge gathers : edges) {
+				final Vertex sensor = gathers.inVertex();
 				matches.add(new TinkerGraphRouteSensorInjectMatch(route, sensor));
-			}			
+			}
 		}
-		
+
 		return matches;
 	}
 }

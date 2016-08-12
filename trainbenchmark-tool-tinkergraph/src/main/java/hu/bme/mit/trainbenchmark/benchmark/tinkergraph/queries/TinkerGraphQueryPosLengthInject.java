@@ -26,7 +26,7 @@ public class TinkerGraphQueryPosLengthInject<TTinkerGraphDriver extends TinkerGr
 		extends TinkerGraphQuery<TinkerGraphPosLengthInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryPosLengthInject(final TTinkerGraphDriver driver) {
-		super(RailwayQuery.POSLENGTH, driver);
+		super(RailwayQuery.POSLENGTH_INJECT, driver);
 	}
 
 	@Override

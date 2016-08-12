@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
 import java.util.Collection;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.NotFoundException;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
@@ -30,8 +31,12 @@ public class Neo4jTransformationRepairPosLength extends Neo4jTransformation<Neo4
 	public void activate(final Collection<Neo4jPosLengthMatch> matches) {
 		for (final Neo4jPosLengthMatch plm : matches) {
 			final Node segment = plm.getSegment();
-			final Integer length = plm.getLength();
-			segment.setProperty(ModelConstants.LENGTH, -length + 1);
+			try {
+				final Integer length = plm.getLength();
+				segment.setProperty(ModelConstants.LENGTH, -length + 1);
+			} catch (final NotFoundException e) {
+				// do nothing (node has been removed)
+			}
 		}
 	}
 

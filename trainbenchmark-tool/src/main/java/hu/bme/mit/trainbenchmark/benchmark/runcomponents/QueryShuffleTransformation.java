@@ -22,7 +22,8 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 	protected List<TPatternMatch> sortedMatches;
 	protected List<TPatternMatch> candidates;
 
-	public QueryShuffleTransformation(final ModelOperation<TPatternMatch, TDriver> operation, final Comparator<? super TPatternMatch> comparator, final Random random) {
+	public QueryShuffleTransformation(final ModelOperation<TPatternMatch, TDriver> operation, final Comparator<? super TPatternMatch> comparator,
+			final Random random) {
 		this.operation = operation;
 		this.comparator = comparator;
 		this.random = random;
@@ -38,32 +39,33 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 		return matches;
 	}
 
-	public List<TPatternMatch> shuffle(int nMatchesToModify) {	
+	public List<TPatternMatch> shuffle(int nMatchesToModify) {
 		final Ordering<? super TPatternMatch> ordering = Ordering.from(comparator);
 		sortedMatches = ordering.sortedCopy(matches);
-		
+
 		final int size = sortedMatches.size();
 		if (size < nMatchesToModify) {
 			nMatchesToModify = size;
 		}
+		System.out.println(sortedMatches);
 		Collections.shuffle(sortedMatches, random);
 		candidates = new ArrayList<>(nMatchesToModify);
 		for (int i = 0; i < nMatchesToModify; i++) {
 			final TPatternMatch candidate = sortedMatches.get(i);
 			candidates.add(candidate);
 		}
-		
+
 		return candidates;
 	}
 
 	public void transform() throws Exception {
 		operation.getTransformation().get().activateTransformation(candidates);
 	}
-	
+
 	public boolean isTransformation() {
 		return operation.getTransformation().isPresent();
 	}
-	
+
 	public ModelQuery<TPatternMatch, TDriver> getQuery() {
 		return operation.getQuery();
 	}

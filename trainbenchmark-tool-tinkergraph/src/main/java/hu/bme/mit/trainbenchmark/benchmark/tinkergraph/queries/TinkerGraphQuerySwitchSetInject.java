@@ -26,18 +26,18 @@ public class TinkerGraphQuerySwitchSetInject<TTinkerGraphDriver extends TinkerGr
 		extends TinkerGraphQuery<TinkerGraphSwitchSetInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySwitchSetInject(final TTinkerGraphDriver driver) {
-		super(RailwayQuery.SWITCHSET, driver);
+		super(RailwayQuery.SWITCHSET_INJECT, driver);
 	}
 
 	@Override
 	public Collection<TinkerGraphSwitchSetInjectMatch> evaluate() {
 		final Collection<TinkerGraphSwitchSetInjectMatch> matches = new ArrayList<>();
 
-		Collection<Vertex> switches = driver.getVertices(ModelConstants.SWITCH);
-		for (Vertex sw : switches) {
+		final Collection<Vertex> switches = driver.getVertices(ModelConstants.SWITCH);
+		for (final Vertex sw : switches) {
 			matches.add(new TinkerGraphSwitchSetInjectMatch(sw));
 		}
-		
+
 		return matches;
 	}
 }

@@ -28,7 +28,7 @@ public abstract class TrainBenchmarkTest {
 	protected final int runs = 1;
 
 	// batch
-	
+
 	@Test
 	public void batchTest() throws Exception {
 		// Arrange
@@ -59,7 +59,7 @@ public abstract class TrainBenchmarkTest {
 	}
 
 	// repair
-	
+
 	@Test
 	public void repairTest() throws Exception {
 		// Arrange
@@ -94,7 +94,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(5));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(0));
 	}
-	
+
 	@Test
 	public void connectedSegmentsRepairTest() throws Exception {
 		// Arrange
@@ -154,7 +154,6 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(8));
 	}
-	
 
 	@Test
 	public void semaphoreNeighborRepairTest() throws Exception {
@@ -175,7 +174,6 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(3));
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(0));
 	}
-	
 
 	@Test
 	public void switchMonitoredRepairTest() throws Exception {
@@ -196,7 +194,6 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(1), Matchers.equalTo(0));
 	}
-	
 
 	@Test
 	public void switchSetRepairTest() throws Exception {
