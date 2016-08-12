@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -21,29 +20,37 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 public class EmfRouteSensorMatch extends EmfMatch implements RouteSensorMatch {
 
-	public EmfRouteSensorMatch(final Route route, final Sensor sensor, final SwitchPosition switchPosition, final Switch sw) {
+	protected final Route route;
+	protected final Sensor sensor;
+	protected final SwitchPosition swP;
+	protected final Switch sw;
+
+	public EmfRouteSensorMatch(final Route route, final Sensor sensor, final SwitchPosition swP, final Switch sw) {
 		super();
-		match = new RailwayElement[] { route, sensor, switchPosition, sw };
+		this.route = route;
+		this.sensor = sensor;
+		this.swP = swP;
+		this.sw = sw;
 	}
-	
+
 	@Override
 	public Route getRoute() {
-		return (Route) match[0];
+		return route;
 	}
 
 	@Override
 	public Sensor getSensor() {
-		return (Sensor) match[1];
+		return sensor;
 	}
 
 	@Override
 	public SwitchPosition getSwP() {
-		return (SwitchPosition) match[2];
+		return swP;
 	}
 
 	@Override
 	public Switch getSw() {
-		return (Switch) match[3];
+		return sw;
 	}
 
 }

@@ -13,25 +13,28 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorInjectMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EmfRouteSensorInjectMatch extends EmfMatch implements RouteSensorInjectMatch {
 
+	protected final Route route;
+	protected final Sensor sensor;
+
 	public EmfRouteSensorInjectMatch(final Route route, final Sensor sensor) {
 		super();
-		match = new RailwayElement[] { route, sensor };
+		this.route = route;
+		this.sensor = sensor;
 	}
 
 	@Override
 	public Route getRoute() {
-		return (Route) match[0];
+		return route;
 	}
-
+	
 	@Override
 	public Sensor getSensor() {
-		return (Sensor) match[1];
-	}
+		return sensor;
+	};
 
 }

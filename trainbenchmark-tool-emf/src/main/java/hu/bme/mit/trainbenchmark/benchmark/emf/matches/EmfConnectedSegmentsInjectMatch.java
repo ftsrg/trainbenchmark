@@ -12,30 +12,35 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsInjectMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EmfConnectedSegmentsInjectMatch extends EmfMatch implements ConnectedSegmentsInjectMatch {
 
+	protected final Sensor sensor;
+	protected final Segment segment1;
+	protected final Segment segment3;
+	
 	public EmfConnectedSegmentsInjectMatch(final Sensor sensor, final Segment segment1, final Segment segment3) {
 		super();
-		match = new RailwayElement[] { sensor, segment1, segment3 };
+		this.sensor = sensor;
+		this.segment1 = segment1;
+		this.segment3 = segment3;
 	}
 
 	@Override
 	public Sensor getSensor() {
-		return (Sensor) match[0];
+		return sensor;
 	}
 
 	@Override
 	public Segment getSegment1() {
-		return (Segment) match[1];
+		return segment1;
 	}
 
 	@Override
 	public Segment getSegment3() {
-		return (Segment) match[2];
+		return segment3;
 	}
 
 }

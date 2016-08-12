@@ -12,19 +12,19 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 
 public class EmfSemaphoreNeighborInjectMatch extends EmfMatch implements SemaphoreNeighborInjectMatch {
 
+	protected final Route route;
+
 	public EmfSemaphoreNeighborInjectMatch(final Route route) {
 		super();
-		match = new RailwayElement[] { route };
+		this.route = route;
 	}
 
-	@Override
 	public Route getRoute() {
-		return (Route) match[0];
+		return route;
 	}
 
 }

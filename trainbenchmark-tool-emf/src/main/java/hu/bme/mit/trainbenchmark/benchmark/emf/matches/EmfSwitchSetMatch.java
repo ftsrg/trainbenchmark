@@ -12,7 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Switch;
@@ -20,29 +19,37 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 public class EmfSwitchSetMatch extends EmfMatch implements SwitchSetMatch {
 
-	public EmfSwitchSetMatch(final Semaphore semaphore, final Route route, final SwitchPosition switchPosition, final Switch sw) {
+	protected final Semaphore semaphore;
+	protected final Route route;
+	protected final SwitchPosition swP;
+	protected final Switch sw;
+	
+	public EmfSwitchSetMatch(final Semaphore semaphore, final Route route, final SwitchPosition swP, final Switch sw) {
 		super();
-		match = new RailwayElement[] { semaphore, route, switchPosition, sw };
+		this.semaphore = semaphore;
+		this.route = route;
+		this.swP = swP;
+		this.sw = sw;
 	}
 
 	@Override
 	public Semaphore getSemaphore() {
-		return (Semaphore) match[0];
+		return semaphore;
 	}
 
 	@Override
 	public Route getRoute() {
-		return (Route) match[1];
+		return route;
 	}
 
 	@Override
 	public SwitchPosition getSwP() {
-		return (SwitchPosition) match[2];
+		return swP;
 	}
 
 	@Override
 	public Switch getSw() {
-		return (Switch) match[3];
+		return sw;
 	}
 
 }
