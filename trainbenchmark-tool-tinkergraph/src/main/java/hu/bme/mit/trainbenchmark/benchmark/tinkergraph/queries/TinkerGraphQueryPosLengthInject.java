@@ -35,7 +35,7 @@ public class TinkerGraphQueryPosLengthInject<TTinkerGraphDriver extends TinkerGr
 
 		Collection<Vertex> segments = driver.getVertices(ModelConstants.SEGMENT);
 		for (Vertex segment : segments) {
-//			matches.add(new TinkerGraphPosLengthInjectMatch());
+			matches.add(new TinkerGraphPosLengthInjectMatch(segment));
 		}
 		
 		return matches;

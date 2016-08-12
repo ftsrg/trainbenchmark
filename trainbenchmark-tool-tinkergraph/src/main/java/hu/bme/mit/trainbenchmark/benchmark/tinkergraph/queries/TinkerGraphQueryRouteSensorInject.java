@@ -15,8 +15,13 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.apache.tinkerpop.gremlin.structure.Edge;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphQueryRouteSensorInject<TTinkerGraphDriver extends TinkerGraphDriver>
@@ -30,6 +35,15 @@ public class TinkerGraphQueryRouteSensorInject<TTinkerGraphDriver extends Tinker
 	public Collection<TinkerGraphRouteSensorInjectMatch> evaluate() {
 		final Collection<TinkerGraphRouteSensorInjectMatch> matches = new ArrayList<>();
 
+		Collection<Vertex> routes = driver.getVertices(ModelConstants.ROUTE);
+		for (Vertex route : routes) {
+			Iterable<Edge> edges = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
+			for (Edge gathers : edges) {
+				Vertex sensor = gathers.inVertex();
+				matches.add(new TinkerGraphRouteSensorInjectMatch(route, sensor));
+			}			
+		}
+		
 		return matches;
 	}
 }

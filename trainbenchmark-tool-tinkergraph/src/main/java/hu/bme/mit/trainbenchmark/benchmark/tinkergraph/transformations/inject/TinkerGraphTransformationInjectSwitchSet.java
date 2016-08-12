@@ -13,9 +13,13 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 
 import java.util.Collection;
 
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.Position;
 
 public class TinkerGraphTransformationInjectSwitchSet<TTinkerGraphDriver extends TinkerGraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphSwitchSetInjectMatch, TTinkerGraphDriver> {
@@ -27,10 +31,11 @@ public class TinkerGraphTransformationInjectSwitchSet<TTinkerGraphDriver extends
 	@Override
 	public void activate(final Collection<TinkerGraphSwitchSetInjectMatch> matches) {
 		for (final TinkerGraphSwitchSetInjectMatch match : matches) {
-//			final String currentPositionString = (String) sw.property(ModelConstants.CURRENTPOSITION).value();
-//			final Position currentPosition = Position.valueOf(currentPositionString);
-//			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
-//			sw.property(CURRENTPOSITION, newCurrentPosition.toString());
+			Vertex sw = match.getSw();
+			final String currentPositionString = (String) sw.property(ModelConstants.CURRENTPOSITION).value();
+			final Position currentPosition = Position.valueOf(currentPositionString);
+			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
+			sw.property(ModelConstants.CURRENTPOSITION, newCurrentPosition.toString());
 		}
 	}
 
