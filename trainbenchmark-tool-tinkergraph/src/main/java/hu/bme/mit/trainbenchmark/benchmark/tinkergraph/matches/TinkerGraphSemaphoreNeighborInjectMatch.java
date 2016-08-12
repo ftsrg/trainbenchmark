@@ -11,23 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
-
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
 
 public class TinkerGraphSemaphoreNeighborInjectMatch extends TinkerGraphMatch implements SemaphoreNeighborInjectMatch {
 
-	public TinkerGraphSemaphoreNeighborInjectMatch(final Map<String, Object> match) {
-		super(match);
+	protected final Vertex route;
+	
+	public TinkerGraphSemaphoreNeighborInjectMatch(final Vertex route) {
+		super();
+		this.route = route;
 	}
 
 	@Override
 	public Vertex getRoute() {
-		return (Vertex) match.get(VAR_ROUTE);
+		return route;
 	}
 
 }

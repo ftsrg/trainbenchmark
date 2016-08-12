@@ -18,11 +18,12 @@ import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR2;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_TE2;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 
 import java.util.Map;
 
 import org.neo4j.graphdb.Node;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborMatch;
 
 public class Neo4jSemaphoreNeighborMatch extends Neo4jMatch implements SemaphoreNeighborMatch {
 
@@ -63,11 +64,6 @@ public class Neo4jSemaphoreNeighborMatch extends Neo4jMatch implements Semaphore
 	@Override
 	public Node getTe2() {
 		return (Node) match.get(VAR_TE2);
-	}
-
-	@Override
-	public Node[] toArray() {
-		return new Node[] { getSemaphore(), getRoute1(), getRoute2(), getSensor1(), getSensor2(), getTe1(), getTe2() };
 	}
 
 }

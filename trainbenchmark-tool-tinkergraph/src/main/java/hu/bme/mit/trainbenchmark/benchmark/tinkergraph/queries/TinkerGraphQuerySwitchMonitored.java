@@ -15,12 +15,9 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
@@ -54,9 +51,7 @@ public class TinkerGraphQuerySwitchMonitored<TTinkerGraphDriver extends TinkerGr
 			}
 
 			if (!hasSensor) {
-				final Map<String, Object> match = new HashMap<>();
-				match.put(VAR_SW, sw);
-				matches.add(new TinkerGraphSwitchMonitoredMatch(match));
+				matches.add(new TinkerGraphSwitchMonitoredMatch(sw));
 			}
 		}
 

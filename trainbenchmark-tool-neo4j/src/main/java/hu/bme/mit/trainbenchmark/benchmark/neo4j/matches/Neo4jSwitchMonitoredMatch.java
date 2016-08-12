@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
 import java.util.Map;
 
 import org.neo4j.graphdb.Node;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
 public class Neo4jSwitchMonitoredMatch extends Neo4jMatch implements SwitchMonitoredMatch {
 
@@ -27,11 +28,6 @@ public class Neo4jSwitchMonitoredMatch extends Neo4jMatch implements SwitchMonit
 	@Override
 	public Node getSw() {
 		return (Node) match.get(VAR_SW);
-	}
-
-	@Override
-	public Node[] toArray() {
-		return new Node[] { getSw() };
 	}
 
 }

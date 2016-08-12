@@ -14,8 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.neo4j.graphdb.Node;
-
 import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -26,9 +24,6 @@ public abstract class Neo4jMatch implements Match {
 	public Neo4jMatch(final Map<String, Object> match) {
 		this.match = match;
 	}
-
-	@Override
-	public abstract Node[] toArray();
 
 	@Override
 	public String toString() {

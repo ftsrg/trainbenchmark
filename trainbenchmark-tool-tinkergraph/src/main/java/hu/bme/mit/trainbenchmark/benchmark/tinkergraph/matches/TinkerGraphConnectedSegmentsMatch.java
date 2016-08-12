@@ -11,59 +11,65 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT1;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT2;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT3;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT4;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT5;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT6;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SENSOR;
-
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsMatch;
 
 public class TinkerGraphConnectedSegmentsMatch extends TinkerGraphMatch implements ConnectedSegmentsMatch {
 
-	public TinkerGraphConnectedSegmentsMatch(final Map<String, Object> match) {
-		super(match);
+	protected final Vertex sensor;
+	protected final Vertex segment1;
+	protected final Vertex segment2;
+	protected final Vertex segment3;
+	protected final Vertex segment4;
+	protected final Vertex segment5;
+	protected final Vertex segment6;
+	
+	public TinkerGraphConnectedSegmentsMatch(final Vertex sensor, final Vertex segment1, final Vertex segment2,
+			final Vertex segment3, final Vertex segment4, final Vertex segment5, final Vertex segment6) {
+		super();
+		this.sensor = sensor;
+		this.segment1 = segment1;
+		this.segment2 = segment2;
+		this.segment3 = segment3;
+		this.segment4 = segment4;
+		this.segment5 = segment5;
+		this.segment6 = segment6;
 	}
 
 	@Override
 	public Vertex getSensor() {
-		return (Vertex) match.get(VAR_SENSOR);
+		return sensor;
 	}
 
 	@Override
 	public Vertex getSegment1() {
-		return (Vertex) match.get(VAR_SEGMENT1);
+		return segment1;
 	}
 
 	@Override
 	public Vertex getSegment2() {
-		return (Vertex) match.get(VAR_SEGMENT2);
+		return segment2;
 	}
 
 	@Override
 	public Vertex getSegment3() {
-		return (Vertex) match.get(VAR_SEGMENT3);
+		return segment3;
 	}
 
 	@Override
 	public Vertex getSegment4() {
-		return (Vertex) match.get(VAR_SEGMENT4);
+		return segment4;
 	}
 
 	@Override
 	public Vertex getSegment5() {
-		return (Vertex) match.get(VAR_SEGMENT5);
+		return segment5;
 	}
 
 	@Override
 	public Vertex getSegment6() {
-		return (Vertex) match.get(VAR_SEGMENT6);
+		return segment6;
 	}
 
 }

@@ -14,8 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
@@ -24,7 +22,6 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class TinkerGraphQueryRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphRouteSensorMatch, TTinkerGraphDriver> {
@@ -50,12 +47,7 @@ public class TinkerGraphQueryRouteSensor<TTinkerGraphDriver extends TinkerGraphD
 					for (final Vertex sensor : sensors) {
 						// (sensor:Sensor)<-[:gathers]-(route:Route) NAC
 						if (!TinkerGraphUtil.isConnected(route, sensor, ModelConstants.GATHERS)) {
-							final Map<String, Object> match = new HashMap<>();
-							match.put(QueryConstants.VAR_ROUTE, route);
-							match.put(QueryConstants.VAR_SENSOR, sensor);
-							match.put(QueryConstants.VAR_SWP, swP);
-							match.put(QueryConstants.VAR_SW, sw);
-							matches.add(new TinkerGraphRouteSensorMatch(match));
+							matches.add(new TinkerGraphRouteSensorMatch(route, sensor, swP, sw));
 						}
 					}
 				}

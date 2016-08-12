@@ -11,28 +11,28 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
-
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
 
 public class TinkerGraphPosLengthMatch extends TinkerGraphMatch implements PosLengthMatch {
 
-	public TinkerGraphPosLengthMatch(final Map<String, Object> match) {
-		super(match);
+	protected final Vertex segment;
+	protected final int length;
+	
+	public TinkerGraphPosLengthMatch(final Vertex segment, final int length) {
+		super();
+		this.segment = segment;
+		this.length = length;
 	}
 
 	@Override
 	public Vertex getSegment() {
-		return (Vertex) match.get(VAR_SEGMENT);
+		return segment;
 	}
-
-	public Integer getLength() {
-		return (Integer) match.get(VAR_LENGTH);
+	
+	public int getLength() {
+		return length;
 	}
 
 }

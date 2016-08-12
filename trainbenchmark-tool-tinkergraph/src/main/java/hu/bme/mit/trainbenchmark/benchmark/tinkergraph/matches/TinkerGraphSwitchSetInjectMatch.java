@@ -11,23 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetInjectMatch;
 
 public class TinkerGraphSwitchSetInjectMatch extends TinkerGraphMatch implements SwitchSetInjectMatch {
 
-	public TinkerGraphSwitchSetInjectMatch(final Map<String, Object> match) {
-		super(match);
+	protected final Vertex sw;
+	
+	public TinkerGraphSwitchSetInjectMatch(final Vertex sw) {
+		super();
+		this.sw = sw;
 	}
 
 	@Override
 	public Vertex getSw() {
-		return (Vertex) match.get(VAR_SW);
+		return sw;
 	}
 
 }

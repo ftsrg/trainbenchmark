@@ -21,8 +21,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
@@ -31,7 +29,6 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
@@ -58,25 +55,17 @@ public class TinkerGraphQuerySwitchSet<TTinkerGraphDriver extends TinkerGraphDri
 					continue;
 				}
 				// (route:Route)-[:follows]->(swP:SwitchPosition)
-				final Iterable<Vertex> swPs = TinkerGraphUtil.getAdjacentNodes(route, ModelConstants.FOLLOWS, Direction.OUT,
-						SWITCHPOSITION);
+				final Iterable<Vertex> swPs = TinkerGraphUtil.getAdjacentNodes(route, ModelConstants.FOLLOWS, Direction.OUT, SWITCHPOSITION);
 				for (final Vertex swP : swPs) {
 					// (swP:SwitchPosition)-[:target]->(sw:Switch)
 					final Iterable<Vertex> sws = TinkerGraphUtil.getAdjacentNodes(swP, ModelConstants.TARGET, Direction.OUT, SWITCH);
 
 					for (final Vertex sw : sws) {
-						final Object currentPosition = sw.property(ModelConstants.CURRENTPOSITION).value();
-						final Object position = swP.property(ModelConstants.POSITION).value();
+						final String currentPosition = (String) sw.property(ModelConstants.CURRENTPOSITION).value();
+						final String position = (String) swP.property(ModelConstants.POSITION).value();
 
 						if (!currentPosition.equals(position)) {
-							final Map<String, Object> match = new HashMap<>();
-							match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
-							match.put(QueryConstants.VAR_ROUTE, route);
-							match.put(QueryConstants.VAR_SWP, swP);
-							match.put(QueryConstants.VAR_SW, sw);
-							match.put(QueryConstants.VAR_CURRENTPOSITION, currentPosition);
-							match.put(QueryConstants.VAR_POSITION, position);
-							matches.add(new TinkerGraphSwitchSetMatch(match));
+							matches.add(new TinkerGraphSwitchSetMatch(semaphore, route, swP, sw, position, currentPosition));
 							break;
 						}
 					}
