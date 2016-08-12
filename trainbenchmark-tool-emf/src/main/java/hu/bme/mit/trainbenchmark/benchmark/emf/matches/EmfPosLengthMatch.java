@@ -12,18 +12,20 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EmfPosLengthMatch extends EmfMatch implements PosLengthMatch {
 
+	protected final Segment segment;
+
 	public EmfPosLengthMatch(final Segment segment) {
 		super();
-		match = new RailwayElement[] { segment };
+		this.segment = segment;
 	}
 
 	public Segment getSegment() {
-		return (Segment) match[0];
+		return segment;
 	}
+
 
 }

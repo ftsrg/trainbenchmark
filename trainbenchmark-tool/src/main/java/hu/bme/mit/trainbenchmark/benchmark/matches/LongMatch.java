@@ -27,9 +27,9 @@ public abstract class LongMatch implements Match {
 		super();
 	}
 
-	public Long[] getMatch() {
-		return match;
-	}
+//	public Long[] getMatch() {
+//		return match;
+//	}
 
 	@Override
 	public int hashCode() {

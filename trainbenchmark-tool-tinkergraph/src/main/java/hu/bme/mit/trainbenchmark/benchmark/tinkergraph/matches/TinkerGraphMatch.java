@@ -19,12 +19,6 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class TinkerGraphMatch implements Match {
 
-	protected Map<String, Object> match;
-
-	public TinkerGraphMatch(final Map<String, Object> match) {
-		this.match = match;
-	}
-
 	@Override
 	public String toString() {
 		return "TinkerGraphMatch [match=" + Arrays.toString(toArray()) + "]";

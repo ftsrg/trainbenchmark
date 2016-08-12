@@ -12,19 +12,20 @@
 package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetInjectMatch;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 
 public class EmfSwitchSetInjectMatch extends EmfMatch implements SwitchSetInjectMatch {
 
+	protected final Switch sw;
+
 	public EmfSwitchSetInjectMatch(final Switch sw) {
 		super();
-		match = new RailwayElement[] { sw };
+		this.sw = sw;
 	}
 
 	@Override
 	public Switch getSw() {
-		return (Switch) match[0];
+		return sw;
 	}
 
 }
