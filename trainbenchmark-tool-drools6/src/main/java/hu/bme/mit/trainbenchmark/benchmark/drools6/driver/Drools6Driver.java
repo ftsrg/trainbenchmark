@@ -28,7 +28,7 @@ public class Drools6Driver extends EmfDriver {
 
 	protected KieServices kieServices;
 	protected KieFileSystem kfs;
-	protected KieSession kSession; 
+	protected KieSession kSession;
 
 	protected Drools6Driver() {
 	}
@@ -40,7 +40,7 @@ public class Drools6Driver extends EmfDriver {
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-		
+
 		kieServices = KieServices.Factory.get();
 		kfs = kieServices.newKieFileSystem();
 	}
@@ -51,7 +51,7 @@ public class Drools6Driver extends EmfDriver {
 
 		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
 		kSession = kContainer.newKieSession();
-		
+
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
 			final EObject eObject = tIterator.next();
 			kSession.insert(eObject);
