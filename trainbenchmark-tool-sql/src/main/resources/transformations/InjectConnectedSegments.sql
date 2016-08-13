@@ -1,22 +1,12 @@
+SET @sensor := ?;
 SET @segment1 := ?;
+SET @segment3 := ?;
 
 -- get (region) node
 SET @region :=
     (SELECT region
     FROM TrackElement
     WHERE id = @segment1);
-
--- get (segment3) node
-SET @segment3 :=
-	(SELECT TrackElement2_id
-	FROM connectsTo
-	WHERE TrackElement1_id = @segment1);
-
--- get (sensor) node
-SET @sensor :=
-	(SELECT Sensor_id
-	FROM monitoredBy
-	WHERE TrackElement_id = @segment1);
 
 -- delete (segment1)-[:connectsTo]->(segment3) edge
 DELETE FROM connectsTo

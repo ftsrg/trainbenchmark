@@ -16,6 +16,7 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EmfTransformationRepairPosLength<TDriver extends EmfDriver, TPosLengthMatch extends EmfPosLengthMatch>
 		extends EmfTransformation<TPosLengthMatch, TDriver> {
@@ -27,8 +28,9 @@ public class EmfTransformationRepairPosLength<TDriver extends EmfDriver, TPosLen
 	@Override
 	public void activate(final Collection<TPosLengthMatch> matches) {
 		for (final EmfPosLengthMatch plm : matches) {
-			final int newLength = -plm.getSegment().getLength() + 1;
-			plm.getSegment().setLength(newLength);
+			final Segment segment = plm.getSegment();
+			final int newLength = -segment.getLength() + 1;
+			segment.setLength(newLength);
 		}
 	}
 
