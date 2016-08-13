@@ -51,7 +51,6 @@ public class Drools6Driver extends EmfDriver {
 
 		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
 		kSession = kContainer.newKieSession();
-
 		
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
 			final EObject eObject = tIterator.next();

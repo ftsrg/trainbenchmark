@@ -138,7 +138,7 @@ public abstract class TrainBenchmarkTest {
 	@Test
 	public void routeSensorRepairTest() throws Exception {
 		// Arrange
-		final String workload = "RepairTest";
+		final String workload = "RouteSensorRepairTest";
 		final int queryTransformationCount = 1;
 		final String modelFilename = "railway-repair-1";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
@@ -221,7 +221,7 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final int queryTransformationCount = 1;
 		final String modelFilename = "railway-inject-1";
-		final String workload = "RouteSensorInjectTest";
+		final String workload = "ConnectedSegmentsInjectTest";
 		final Collection<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS, //
 				RailwayOperation.CONNECTEDSEGMENTS_INJECT //

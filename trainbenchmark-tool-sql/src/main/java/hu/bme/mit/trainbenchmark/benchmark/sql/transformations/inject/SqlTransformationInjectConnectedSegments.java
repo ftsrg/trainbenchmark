@@ -35,9 +35,9 @@ public class SqlTransformationInjectConnectedSegments<TSqlDriver extends SqlDriv
 		}
 
 		for (final SqlConnectedSegmentsInjectMatch match : matches) {
-			preparedUpdateStatement.setLong(1, match.getSegment1());
-			preparedUpdateStatement.setLong(2, match.getSegment3());
-			preparedUpdateStatement.setLong(3, match.getSensor());
+			preparedUpdateStatement.setLong(1, match.getSensor());
+			preparedUpdateStatement.setLong(2, match.getSegment1());
+			preparedUpdateStatement.setLong(3, match.getSegment3());
 			preparedUpdateStatement.executeUpdate();
 		}
 	}
