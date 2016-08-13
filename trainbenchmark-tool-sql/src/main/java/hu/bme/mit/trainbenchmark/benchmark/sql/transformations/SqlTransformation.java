@@ -27,7 +27,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 public abstract class SqlTransformation<TSqlMatch extends SqlMatch, TSqlDriver extends SqlDriver> extends ModelTransformation<TSqlMatch, TSqlDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
-	protected final String updateQuery;
+	protected String updateQuery;
 		
 	protected SqlTransformation(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query, final Scenario scenario) throws IOException {
 		super(driver);

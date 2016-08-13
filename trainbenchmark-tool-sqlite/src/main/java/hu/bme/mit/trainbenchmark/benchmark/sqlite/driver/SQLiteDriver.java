@@ -47,7 +47,7 @@ public class SQLiteDriver extends SqlDriver {
 
 		// create temporary table (used by the transformations)
 		final PreparedStatement createStatement = connection
-				.prepareStatement("CREATE TEMP TABLE IF NOT EXISTS Variables (Name TEXT PRIMARY KEY, Value INTEGER);");
+				.prepareStatement("CREATE TEMP TABLE IF NOT EXISTS Variables (Name TEXT PRIMARY KEY, Value LONG);");
 		createStatement.execute();
 	}
 

@@ -1,3 +1,2 @@
-SELECT DISTINCT
-	id AS segment
+SELECT DISTINCT	id AS segment
 FROM Segment;

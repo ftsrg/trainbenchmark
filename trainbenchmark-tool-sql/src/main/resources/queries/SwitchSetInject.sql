@@ -1,3 +1,2 @@
-SELECT
-	Switch.id AS sw
+SELECT DISTINCT id AS sw
 FROM Switch;

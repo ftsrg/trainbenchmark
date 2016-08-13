@@ -24,24 +24,26 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SQLiteTransformationInjectConnectedSegments extends SQLiteTransformation<SqlConnectedSegmentsInjectMatch> {
 
-	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('segment1', ?);";
+	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('sensor', ?), ('segment1', ?), ('segment3', ?);";
 	
 	public SQLiteTransformationInjectConnectedSegments(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, Scenario.INJECT);
 	}
 
 	@Override
-	public void activate(final Collection<SqlConnectedSegmentsInjectMatch> elements) throws SQLException {
-//		if (preparedUpdateStatement == null) {
-//			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
-//		}
-//
-//		for (final Long element : elements) {
-//			preparedUpdateStatement.setLong(1, element);
-//			preparedUpdateStatement.executeUpdate();
-//
-//			driver.getConnection().createStatement().executeUpdate(updateQuery);
-//		}
+	public void activate(final Collection<SqlConnectedSegmentsInjectMatch> matches) throws SQLException {
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
+		}
+
+		for (final SqlConnectedSegmentsInjectMatch match : matches) {
+			preparedUpdateStatement.setLong(1, match.getSensor());
+			preparedUpdateStatement.setLong(2, match.getSegment1());
+			preparedUpdateStatement.setLong(3, match.getSegment3());
+			preparedUpdateStatement.executeUpdate();
+
+			driver.getConnection().createStatement().executeUpdate(updateQuery);
+		}
 	}
 	
 }

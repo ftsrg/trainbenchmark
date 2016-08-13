@@ -24,24 +24,25 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SQLiteTransformationInjectRouteSensor extends SQLiteTransformation<SqlRouteSensorInjectMatch> {
 
-	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('segment1', ?);";
-	
+	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('route', ?), ('sensor', ?);";
+
 	public SQLiteTransformationInjectRouteSensor(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.ROUTESENSOR, Scenario.INJECT);
 	}
 
 	@Override
-	public void activate(final Collection<SqlRouteSensorInjectMatch> elements) throws SQLException {
-//		if (preparedUpdateStatement == null) {
-//			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
-//		}
-//
-//		for (final Long element : elements) {
-//			preparedUpdateStatement.setLong(1, element);
-//			preparedUpdateStatement.executeUpdate();
-//
-//			driver.getConnection().createStatement().executeUpdate(updateQuery);
-//		}
+	public void activate(final Collection<SqlRouteSensorInjectMatch> matches) throws SQLException {
+		if (preparedUpdateStatement == null) {
+			preparedUpdateStatement = driver.getConnection().prepareStatement(setBindings);
+		}
+
+		for (final SqlRouteSensorInjectMatch match : matches) {
+			preparedUpdateStatement.setLong(1, match.getRoute());
+			preparedUpdateStatement.setLong(2, match.getSensor());
+			preparedUpdateStatement.executeUpdate();
+
+			driver.getConnection().createStatement().executeUpdate(updateQuery);
+		}
 	}
-	
+
 }
