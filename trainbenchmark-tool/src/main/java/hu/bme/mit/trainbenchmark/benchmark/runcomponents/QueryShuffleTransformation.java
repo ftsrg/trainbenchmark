@@ -47,7 +47,6 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 		if (size < nMatchesToModify) {
 			nMatchesToModify = size;
 		}
-		System.out.println(sortedMatches);
 		Collections.shuffle(sortedMatches, random);
 		candidates = new ArrayList<>(nMatchesToModify);
 		for (int i = 0; i < nMatchesToModify; i++) {

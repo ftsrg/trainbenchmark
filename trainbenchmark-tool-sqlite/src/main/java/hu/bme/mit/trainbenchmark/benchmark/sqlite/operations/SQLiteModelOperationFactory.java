@@ -20,7 +20,6 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectSwitchSet;
@@ -30,6 +29,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransfo
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair.SqlTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.inject.SQLiteTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.inject.SQLiteTransformationInjectRouteSensor;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair.SQLiteTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
@@ -98,7 +98,7 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case ROUTESENSOR_INJECT: {
 			final SqlQuery<SqlRouteSensorInjectMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR_INJECT);
-			final SqlTransformation<SqlRouteSensorInjectMatch, SQLiteDriver> transformation = new SqlTransformationInjectRouteSensor<>(driver, workspaceDir);
+			final SqlTransformation<SqlRouteSensorInjectMatch, SQLiteDriver> transformation = new SQLiteTransformationInjectRouteSensor(driver, workspaceDir);
 			final ModelOperation<SqlRouteSensorInjectMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
