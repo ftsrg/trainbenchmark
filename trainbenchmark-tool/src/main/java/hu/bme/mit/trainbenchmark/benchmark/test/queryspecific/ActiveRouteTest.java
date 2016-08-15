@@ -3,10 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 import java.util.Collection;
 
 import org.hamcrest.Matchers;
-import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ErrorCollector;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
@@ -16,15 +13,10 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class ActiveRouteTest {
+public abstract class ActiveRouteTest extends QueryTest {
 
-	@Rule
-	public ErrorCollector collector = new ErrorCollector();
-
-	protected static BenchmarkConfigCore bc;
-
-	@BeforeClass
-	public static void init() {
+	@Test
+	public void testActiveRoute() throws Exception {
 		final String xms = "1G";
 		final String xmx = "1G";
 		final long timeout = 120;
@@ -35,13 +27,10 @@ public abstract class ActiveRouteTest {
 				RailwayOperation.ACTIVEROUTE //
 		);
 		final String workload = "ActiveRouteTest";
-		bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
+		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload);
-	}
-
-	@Test
-	public void checkResult() throws Exception {
-		final BenchmarkResult result = runTest();
+		
+		final BenchmarkResult result = runTest(bc);
 		System.out.println(result);
 		System.out.println(result.csvMatches());
 		System.out.println(result.csvTimes());
@@ -49,7 +38,5 @@ public abstract class ActiveRouteTest {
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.ACTIVEROUTE).get(0), Matchers.equalTo(3));
 	}
-
-	protected abstract BenchmarkResult runTest() throws Exception;
 
 }
