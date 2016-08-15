@@ -31,7 +31,7 @@ public class Neo4jActiveRouteTest extends ActiveRouteTest {
 
 	@Parameters(name="engine={0}")
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList(Neo4jEngine.CYPHER);//, Neo4jEngine.COREAPI);
+		return Arrays.asList(Neo4jEngine.CYPHER, Neo4jEngine.COREAPI);
 	}
 
 	@Parameter
