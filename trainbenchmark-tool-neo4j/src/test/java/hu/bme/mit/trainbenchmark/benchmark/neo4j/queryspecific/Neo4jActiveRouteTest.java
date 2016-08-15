@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test.queryspecific;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queryspecific;
 
 import java.util.Arrays;
 
@@ -20,28 +20,27 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IqdCoreBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.SemaphoreNeighborTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.ActiveRouteTest;
 
 @RunWith(Parameterized.class)
-public class IqdCoreSemaphoreNeighborTest extends SemaphoreNeighborTest {
+public class Neo4jActiveRouteTest extends ActiveRouteTest {
 
-	@Parameters
+	@Parameters(name="engine={0}")
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B", "C", "D", "E", "F");
+		return Arrays.asList(Neo4jEngine.CYPHER);//, Neo4jEngine.COREAPI);
 	}
 
 	@Parameter
-	public String variant;
-
+	public Neo4jEngine engine;
+	
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigCore bc) throws Exception {
-		final int messageSize = 16;
-		System.out.println();
-		final IqdCoreBenchmarkConfigWrapper config = new IqdCoreBenchmarkConfigWrapper(bc, messageSize, variant, null);
-		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(config);
+		final Neo4jBenchmarkConfigWrapper nbcw = new Neo4jBenchmarkConfigWrapper(bc, engine);
+		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(nbcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}
