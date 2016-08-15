@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jActiveRouteMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
@@ -67,6 +68,13 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 			final Neo4jDriver driver) throws Exception {
 
 		switch (operationEnum) {
+		// ActiveRoute
+		case ACTIVEROUTE: {
+			final ModelQuery<Neo4jActiveRouteMatch, Neo4jDriver> query = createQuery(driver, workspaceDir, RailwayQuery.ACTIVEROUTE);
+			final ModelOperation<Neo4jActiveRouteMatch, Neo4jDriver> operation = ModelOperation.of(query);
+			return operation;
+		}
+
 		// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
 			final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = createQuery(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
