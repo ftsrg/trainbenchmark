@@ -9,7 +9,7 @@ install:
   - scripts/install-mysql-silent.sh
 script:
   - sudo service mysql restart
-  - gradle initScripts
+  - ./gradlew initScripts
   - scripts/build.sh
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
