@@ -9,32 +9,27 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
-
-import java.io.IOException;
 import java.util.Collection;
 
 import hu.bme.mit.incqueryds.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IqdCoreTransformation;
 
-public class IqdCoreTransformationRepairRouteSensor extends IqdCoreTransformation<IqdCoreRouteSensorMatch> {
+public class IqdCoreTransformationInjectSwitchMonitored extends IqdCoreTransformation<IqdCoreSwitchMonitoredInjectMatch> {
 
-	public IqdCoreTransformationRepairRouteSensor(final IqdCoreDriver driver) {
+	public IqdCoreTransformationInjectSwitchMonitored(final IqdCoreDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<IqdCoreRouteSensorMatch> matches) throws IOException {
+	public void activate(final Collection<IqdCoreSwitchMonitoredInjectMatch> matches) throws Exception {
 		final Transaction transaction = driver.newTransaction();
-		for (final IqdCoreRouteSensorMatch match : matches) {
-			final Long route = match.getRoute();
-			final Long sensor = match.getSensor();
-			transaction.add(route, GATHERS, sensor);
+		for (final IqdCoreSwitchMonitoredInjectMatch match : matches) {
+			final Long sw = match.getSw();
+			// TODO remove all outgoing MonitoredBy edges of the switch
 		}
 	}
-
 }

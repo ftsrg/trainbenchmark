@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test.queryspecific;
 
 import java.util.Arrays;
 
@@ -22,14 +22,14 @@ import org.junit.runners.Parameterized.Parameters;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IqdCoreBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.SemaphoreNeighborTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.SwitchSetTest;
 
 @RunWith(Parameterized.class)
-public class IqdCoreSemaphoreNeighborTest extends SemaphoreNeighborTest {
+public class IqdCoreSwitchSetTest extends SwitchSetTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B", "C", "D", "E", "F");
+		return Arrays.asList("A", "B");
 	}
 
 	@Parameter

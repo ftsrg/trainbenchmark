@@ -9,31 +9,32 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 
 import java.io.IOException;
 import java.util.Collection;
 
 import hu.bme.mit.incqueryds.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCorePosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IqdCoreTransformation;
 
-public class IqdCoreTransformationRepairRouteSensor extends IqdCoreTransformation<IqdCoreRouteSensorMatch> {
+public class IqdCoreTransformationInjectPosLength extends IqdCoreTransformation<IqdCorePosLengthInjectMatch> {
 
-	public IqdCoreTransformationRepairRouteSensor(final IqdCoreDriver driver) {
+	public IqdCoreTransformationInjectPosLength(final IqdCoreDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<IqdCoreRouteSensorMatch> matches) throws IOException {
+	public void activate(final Collection<IqdCorePosLengthInjectMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
-		for (final IqdCoreRouteSensorMatch match : matches) {
-			final Long route = match.getRoute();
-			final Long sensor = match.getSensor();
-			transaction.add(route, GATHERS, sensor);
+		for (final IqdCorePosLengthInjectMatch match : matches) {
+			final Long segment = match.getSegment();
+			final Integer length = match.getLength();
+			transaction.remove(segment, LENGTH, length);
+			transaction.add(segment, LENGTH, 0);
 		}
 	}
 
