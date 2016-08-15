@@ -9,16 +9,29 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject;
 
+import java.io.IOException;
+import java.util.Collection;
+
+import hu.bme.mit.incqueryds.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IqdCoreTransformation;
 
-public abstract class IqdCoreTransformationRepair<TMatch extends IqdCoreMatch> extends IqdCoreTransformation<TMatch> {
+public class IqdCoreTransformationInjectSwitchSet extends IqdCoreTransformation<IqdCoreSwitchSetInjectMatch> {
 
-	protected IqdCoreTransformationRepair(final IqdCoreDriver driver) {
+	public IqdCoreTransformationInjectSwitchSet(final IqdCoreDriver driver) {
 		super(driver);
+	}
+
+	@Override
+	public void activate(final Collection<IqdCoreSwitchSetInjectMatch> matches) throws IOException {
+		final Transaction transaction = driver.newTransaction();
+		for (final IqdCoreSwitchSetInjectMatch match : matches) {
+			final Long sw = match.getSw();
+			// TODO set the position of the switch to the next enum value
+		}
 	}
 
 }

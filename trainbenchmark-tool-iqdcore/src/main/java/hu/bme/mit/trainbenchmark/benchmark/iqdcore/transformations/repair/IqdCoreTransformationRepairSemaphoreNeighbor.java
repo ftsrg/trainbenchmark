@@ -11,16 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair;
 
-import hu.bme.mit.incqueryds.Transaction;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSemaphoreNeighborMatch;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import hu.bme.mit.incqueryds.Transaction;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IqdCoreTransformation;
 
-public class IqdCoreTransformationRepairSemaphoreNeighbor extends IqdCoreTransformationRepair<IqdCoreSemaphoreNeighborMatch> {
+public class IqdCoreTransformationRepairSemaphoreNeighbor extends IqdCoreTransformation<IqdCoreSemaphoreNeighborMatch> {
 
 	public IqdCoreTransformationRepairSemaphoreNeighbor(final IqdCoreDriver driver) {
 		super(driver);

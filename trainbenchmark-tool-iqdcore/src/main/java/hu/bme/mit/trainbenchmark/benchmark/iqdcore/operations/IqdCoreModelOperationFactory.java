@@ -5,15 +5,27 @@ import java.util.Optional;
 import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreActiveRouteMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCorePosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCorePosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.queries.IqdCoreQuery;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IqdCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject.IqdCoreTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject.IqdCoreTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject.IqdCoreTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject.IqdCoreTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject.IqdCoreTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject.IqdCoreTransformationInjectSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IqdCoreTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IqdCoreTransformationRepairPosLength;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.repair.IqdCoreTransformationRepairRouteSensor;
@@ -53,7 +65,10 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			// TODO
+			final IqdCoreQuery<IqdCoreConnectedSegmentsInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.CONNECTEDSEGMENTS_INJECT, input);
+			final IqdCoreTransformation<IqdCoreConnectedSegmentsInjectMatch> transformation = new IqdCoreTransformationInjectConnectedSegments(driver);
+			final ModelOperation<IqdCoreConnectedSegmentsInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
 			final IqdCoreQuery<IqdCoreConnectedSegmentsMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.CONNECTEDSEGMENTS, input);
@@ -69,7 +84,10 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			// TODO
+			final IqdCoreQuery<IqdCorePosLengthInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.POSLENGTH_INJECT, input);
+			final IqdCoreTransformation<IqdCorePosLengthInjectMatch> transformation = new IqdCoreTransformationInjectPosLength(driver);
+			final ModelOperation<IqdCorePosLengthInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case POSLENGTH_REPAIR: {
 			final IqdCoreQuery<IqdCorePosLengthMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.POSLENGTH, input);
@@ -85,7 +103,10 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			// TODO
+			final IqdCoreQuery<IqdCoreRouteSensorInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.ROUTESENSOR_INJECT, input);
+			final IqdCoreTransformation<IqdCoreRouteSensorInjectMatch> transformation = new IqdCoreTransformationInjectRouteSensor(driver);
+			final ModelOperation<IqdCoreRouteSensorInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
 			final IqdCoreQuery<IqdCoreRouteSensorMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.ROUTESENSOR, input);
@@ -101,7 +122,10 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			// TODO
+			final IqdCoreQuery<IqdCoreSemaphoreNeighborInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SEMAPHORENEIGHBOR_INJECT, input);
+			final IqdCoreTransformation<IqdCoreSemaphoreNeighborInjectMatch> transformation = new IqdCoreTransformationInjectSemaphoreNeighbor(driver);
+			final ModelOperation<IqdCoreSemaphoreNeighborInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
 			final IqdCoreQuery<IqdCoreSemaphoreNeighborMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SEMAPHORENEIGHBOR, input);
@@ -117,7 +141,10 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			// TODO
+			final IqdCoreQuery<IqdCoreSwitchMonitoredInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHMONITORED_INJECT, input);
+			final IqdCoreTransformation<IqdCoreSwitchMonitoredInjectMatch> transformation = new IqdCoreTransformationInjectSwitchMonitored(driver);
+			final ModelOperation<IqdCoreSwitchMonitoredInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
 			final IqdCoreQuery<IqdCoreSwitchMonitoredMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHMONITORED, input);
@@ -133,7 +160,10 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			// TODO
+			final IqdCoreQuery<IqdCoreSwitchSetInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHSET_INJECT, input);
+			final IqdCoreTransformation<IqdCoreSwitchSetInjectMatch> transformation = new IqdCoreTransformationInjectSwitchSet(driver);
+			final ModelOperation<IqdCoreSwitchSetInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
+			return operation;
 		}
 		case SWITCHSET_REPAIR: {
 			final IqdCoreQuery<IqdCoreSwitchSetMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHSET, input);

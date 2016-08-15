@@ -19,8 +19,9 @@ import java.util.Collection;
 import hu.bme.mit.incqueryds.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.IqdCoreTransformation;
 
-public class IqdCoreTransformationRepairConnectedSegments extends IqdCoreTransformationRepair<IqdCoreConnectedSegmentsMatch> {
+public class IqdCoreTransformationRepairConnectedSegments extends IqdCoreTransformation<IqdCoreConnectedSegmentsMatch> {
 
 	public IqdCoreTransformationRepairConnectedSegments(final IqdCoreDriver driver) {
 		super(driver);
