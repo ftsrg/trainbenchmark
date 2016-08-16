@@ -13,17 +13,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6BenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.config.Drools6BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.DroolsBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.config.DroolsBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
-public class Drools6Test extends TrainBenchmarkTest {
+public class DroolsTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final Drools6BenchmarkConfigWrapper bcw = new Drools6BenchmarkConfigWrapper(bc);
-		final Drools6BenchmarkScenario scenario = new Drools6BenchmarkScenario(bcw);
+		final DroolsBenchmarkConfigWrapper bcw = new DroolsBenchmarkConfigWrapper(bc);
+		final DroolsBenchmarkScenario scenario = new DroolsBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

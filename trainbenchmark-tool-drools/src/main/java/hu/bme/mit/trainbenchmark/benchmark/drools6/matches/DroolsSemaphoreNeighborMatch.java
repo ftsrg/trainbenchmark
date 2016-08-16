@@ -27,9 +27,9 @@ import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class Drools6SemaphoreNeighborMatch extends EmfSemaphoreNeighborMatch {
+public class DroolsSemaphoreNeighborMatch extends EmfSemaphoreNeighborMatch {
 
-	public Drools6SemaphoreNeighborMatch(final Row match) {
+	public DroolsSemaphoreNeighborMatch(final Row match) {
 		super((Semaphore) match.get(VAR_SEMAPHORE), (Route) match.get(VAR_ROUTE1), (Route) match.get(VAR_ROUTE2), (Sensor) match
 				.get(VAR_SENSOR1), (Sensor) match.get(VAR_SENSOR2), (TrackElement) match.get(VAR_TE1), (TrackElement) match.get(VAR_TE2));
 	}

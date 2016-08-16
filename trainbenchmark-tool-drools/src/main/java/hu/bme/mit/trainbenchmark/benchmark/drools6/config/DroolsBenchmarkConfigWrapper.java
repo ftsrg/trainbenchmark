@@ -9,19 +9,29 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+package hu.bme.mit.trainbenchmark.benchmark.drools6.config;
 
-import org.kie.api.runtime.rule.Row;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.railway.Switch;
+public class DroolsBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-public class Drools6SwitchMonitoredMatch extends EmfSwitchMonitoredMatch {
-
-	public Drools6SwitchMonitoredMatch(final Row match) {
-		super((Switch) match.get(VAR_SW));
+	protected DroolsBenchmarkConfigWrapper() {
+	}
+	
+	public DroolsBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
+		super(benchmarkConfig);
+	}
+	
+	@Override
+	public String getToolName() {
+		return "Drools";
 	}
 
+	@Override
+	public String getProjectName() {
+		return "drools";
+	}
+	
 }
