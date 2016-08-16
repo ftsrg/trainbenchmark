@@ -34,7 +34,6 @@ ON mb2.Sensor_id = Sensor2.id
 INNER JOIN Route AS Route2
 ON Sensor2.route = Route2.id
 
-WHERE 1 = 1
-  AND Route1.id != Route2.id
+WHERE Route1.id != Route2.id
   AND Route1.exit IS NOT NULL -- semaphore
   AND (Route2.entry IS NULL OR Route2.entry != Route1.exit);
