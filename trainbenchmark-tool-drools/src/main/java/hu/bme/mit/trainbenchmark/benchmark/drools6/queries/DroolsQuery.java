@@ -20,24 +20,24 @@ import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.rule.LiveQuery;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools6.Drools6ResultListener;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.Drools6Driver;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.DroolsResultListener;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.DroolsDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools6Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Drools6Driver> {
+public class DroolsQuery<TMatch extends EmfMatch> extends ModelQuery<TMatch, DroolsDriver> {
 
 	protected Collection<TMatch> matches;
-	protected Drools6ResultListener listener;
+	protected DroolsResultListener listener;
 	protected LiveQuery liveQuery;
 
-	protected Drools6Query(final Drools6Driver driver, final Optional<String> workspaceDir,
+	protected DroolsQuery(final DroolsDriver driver, final Optional<String> workspaceDir,
 			final RailwayQuery query) throws IOException {
 		super(query, driver);
 
 		final String queryFile = workspaceDir.get()
-				+ "/trainbenchmark-tool-drools6/src/main/resources/queries/" + query + ".drl";
+				+ "/trainbenchmark-tool-drools/src/main/resources/queries/" + query + ".drl";
 		final File file = new File(queryFile);
 		if (!file.exists()) {
 			throw new IOException("Query file not found: " + queryFile);
@@ -52,16 +52,16 @@ public class Drools6Query<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dr
 		}
 	}
 
-	public static <TMatch extends EmfMatch> Drools6Query<TMatch> create(final Drools6Driver driver,
+	public static <TMatch extends EmfMatch> DroolsQuery<TMatch> create(final DroolsDriver driver,
 			final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
-		return new Drools6Query<TMatch>(driver, workspaceDir, query);
+		return new DroolsQuery<TMatch>(driver, workspaceDir, query);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TMatch> evaluate() throws IOException {
 		if (liveQuery == null) {
-			listener = new Drools6ResultListener(query);
+			listener = new DroolsResultListener(query);
 			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);
 		} else {
 			// activate lazy PHREAK evaluation

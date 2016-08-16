@@ -9,19 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+package hu.bme.mit.trainbenchmark.benchmark.drools6;
 
-import org.kie.api.runtime.rule.Row;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.config.DroolsBenchmarkConfigWrapper;
 
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
-import hu.bme.mit.trainbenchmark.railway.Segment;
+public class DroolsBenchmarkMain {
 
-public class Drools6PosLengthMatch extends EmfPosLengthMatch {
-
-	public Drools6PosLengthMatch(final Row match) {
-		super((Segment) match.get(VAR_SEGMENT));
+	public static void main(final String[] args) throws Exception {
+		final DroolsBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], DroolsBenchmarkConfigWrapper.class);
+		final DroolsBenchmarkScenario scenario = new DroolsBenchmarkScenario(bcw);
+		scenario.performBenchmark();	
 	}
 
 }

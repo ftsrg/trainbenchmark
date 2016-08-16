@@ -11,20 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
 
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+
 import org.kie.api.runtime.rule.Row;
 
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
 import hu.bme.mit.trainbenchmark.railway.Segment;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
 
-public class Drools6ConnectedSegmentsMatch extends EmfConnectedSegmentsMatch {
+public class DroolsPosLengthMatch extends EmfPosLengthMatch {
 
-	public Drools6ConnectedSegmentsMatch(final Row match) {
-		super((Sensor) match.get(QueryConstants.VAR_SENSOR), (Segment) match.get(QueryConstants.VAR_SEGMENT1), (Segment) match
-				.get(QueryConstants.VAR_SEGMENT2), (Segment) match.get(QueryConstants.VAR_SEGMENT3), (Segment) match
-				.get(QueryConstants.VAR_SEGMENT4), (Segment) match.get(QueryConstants.VAR_SEGMENT5), (Segment) match
-				.get(QueryConstants.VAR_SEGMENT6));
+	public DroolsPosLengthMatch(final Row match) {
+		super((Segment) match.get(VAR_SEGMENT));
 	}
 
 }

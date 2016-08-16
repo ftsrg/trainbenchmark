@@ -18,21 +18,21 @@ import java.util.Set;
 import org.kie.api.runtime.rule.Row;
 import org.kie.api.runtime.rule.ViewChangedEventListener;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6ConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6PosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.Drools6SwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Drools6ResultListener implements ViewChangedEventListener {
+public class DroolsResultListener implements ViewChangedEventListener {
 
 	protected RailwayQuery query;
 	protected final Set<EmfMatch> matches = new HashSet<>();
 
-	public Drools6ResultListener(final RailwayQuery query) {
+	public DroolsResultListener(final RailwayQuery query) {
 		this.query = query;
 	}
 
@@ -58,17 +58,17 @@ public class Drools6ResultListener implements ViewChangedEventListener {
 	private EmfMatch createMatch(final RailwayQuery query, final Row row) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
-			return new Drools6ConnectedSegmentsMatch(row);
+			return new DroolsConnectedSegmentsMatch(row);
 		case POSLENGTH:
-			return new Drools6PosLengthMatch(row);
+			return new DroolsPosLengthMatch(row);
 		case ROUTESENSOR:
-			return new Drools6RouteSensorMatch(row);
+			return new DroolsRouteSensorMatch(row);
 		case SEMAPHORENEIGHBOR:
-			return new Drools6SemaphoreNeighborMatch(row);
+			return new DroolsSemaphoreNeighborMatch(row);
 		case SWITCHMONITORED:
-			return new Drools6SwitchMonitoredMatch(row);
+			return new DroolsSwitchMonitoredMatch(row);
 		case SWITCHSET:
-			return new Drools6SwitchSetMatch(row);
+			return new DroolsSwitchSetMatch(row);
 		default:
 			throw new UnsupportedOperationException("Query not supported: " + query);
 		}

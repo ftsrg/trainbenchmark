@@ -24,17 +24,17 @@ import org.kie.api.runtime.rule.FactHandle;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
-public class Drools6Driver extends EmfDriver {
+public class DroolsDriver extends EmfDriver {
 
 	protected KieServices kieServices;
 	protected KieFileSystem kfs;
 	protected KieSession kSession;
 
-	protected Drools6Driver() {
+	protected DroolsDriver() {
 	}
 
-	public static Drools6Driver create() {
-		return new Drools6Driver();
+	public static DroolsDriver create() {
+		return new DroolsDriver();
 	}
 
 	@Override
