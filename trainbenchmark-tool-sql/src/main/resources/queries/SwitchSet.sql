@@ -21,6 +21,5 @@ ON SwitchPosition.target = Switch.id
 INNER JOIN Semaphore
 ON Route.entry = Semaphore.id
 
-WHERE 1 = 1
-  AND Switch.currentPosition != SwitchPosition.position
+WHERE Switch.currentPosition != SwitchPosition.position
   AND Semaphore.signal = 2;
