@@ -2,9 +2,7 @@ plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
 
 shadowJar {
     classifier = 'fat'
-    mergeServiceFiles {
-    //    include 'META-INF/services/org.neo4j.kernel.extension.Kernel‌​ExtensionFactory'
-    }
+    mergeServiceFiles()
     manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.graph.neo4j.Neo4jGraphGeneratorMain' }
 }
 
