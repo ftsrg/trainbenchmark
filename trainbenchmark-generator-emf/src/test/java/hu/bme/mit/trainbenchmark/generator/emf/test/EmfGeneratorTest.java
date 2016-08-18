@@ -10,8 +10,8 @@ import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
 public class EmfGeneratorTest extends GeneratorTest {
 	
 	@Override
-	public void generate(final GeneratorConfigCore gc) throws Exception {
-		final EmfGeneratorConfigWrapper gcw = new EmfGeneratorConfigWrapper(gc);
+	public void generate(final GeneratorConfigCore gcc) throws Exception {
+		final EmfGeneratorConfigWrapper gcw = new EmfGeneratorConfigWrapper(gcc);
 		final EmfSerializer serializer = new EmfSerializer(gcw);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gcw);
 		generator.generateModel();

@@ -7,7 +7,7 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
 
 public abstract class GeneratorTest {
 
-	public abstract void generate(final GeneratorConfigCore gc) throws Exception;
+	public abstract void generate(final GeneratorConfigCore gcc) throws Exception;
 
 	@Test
 	public void generateBatch() throws Exception {
@@ -16,8 +16,8 @@ public abstract class GeneratorTest {
 		final Scenario scenario = Scenario.BATCH;
 		final int size = 1;
 
-		final GeneratorConfigCore gc = new GeneratorConfigCore(xms, xmx, scenario, size);
-		generate(gc);
+		final GeneratorConfigCore gcc = new GeneratorConfigCore(xms, xmx, scenario, size);
+		generate(gcc);
 	}
 
 	@Test
@@ -27,8 +27,8 @@ public abstract class GeneratorTest {
 		final Scenario scenario = Scenario.INJECT;
 		final int size = 1;
 
-		final GeneratorConfigCore gc = new GeneratorConfigCore(xms, xmx, scenario, size);
-		generate(gc);
+		final GeneratorConfigCore gcc = new GeneratorConfigCore(xms, xmx, scenario, size);
+		generate(gcc);
 	}
 
 	@Test
@@ -38,8 +38,8 @@ public abstract class GeneratorTest {
 		final Scenario scenario = Scenario.REPAIR;
 		final int size = 1;
 
-		final GeneratorConfigCore gc = new GeneratorConfigCore(xms, xmx, scenario, size);
-		generate(gc);
+		final GeneratorConfigCore gcc = new GeneratorConfigCore(xms, xmx, scenario, size);
+		generate(gcc);
 	}
 
 }

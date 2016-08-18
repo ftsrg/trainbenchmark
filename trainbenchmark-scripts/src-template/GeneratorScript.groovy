@@ -21,18 +21,18 @@ def scenarios = [
 ]
 
 def generate(String xms, String xmx, Scenario scenario, int size) {
-	def gc = new GeneratorConfig(xms, xmx, scenario, size)
+	def gcc = new GeneratorConfig(xms, xmx, scenario, size)
 
 	// EMF
-	def egcw = new EmfGeneratorConfigWrapper(gc)
+	def egcw = new EmfGeneratorConfigWrapper(gcc)
 	GeneratorRunner.run(egcw)
 
 	// graph / Neo4j
-	def ngcw = new Neo4jGraphGeneratorConfigWrapper(gc)
+	def ngcw = new Neo4jGraphGeneratorConfigWrapper(gcc)
 	GeneratorRunner.run(ngcw)
 
 	// graph / TinkerPop
-	def tgcw = new TinkerGraphGeneratorConfigWrapper(gc, TinkerGraphFormat.GRAPHSON)
+	def tgcw = new TinkerGraphGeneratorConfigWrapper(gcc, TinkerGraphFormat.GRAPHSON)
 	GeneratorRunner.run(tgcw)
 
 	// RDF
@@ -40,13 +40,13 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 	def includeInferredOptions = [true, false]
 	for (rdfFormat in rdfFormats) {
 		for (includeInferredOption in includeInferredOptions) {
-			def rgcw = new RdfGeneratorConfigWrapper(gc, includeInferredOption, rdfFormat)
+			def rgcw = new RdfGeneratorConfigWrapper(gcc, includeInferredOption, rdfFormat)
 			GeneratorRunner.run(rgcw)
 		}
 	}
 
 	// SQL
-	def sgcw = new SqlGeneratorConfigWrapper(gc)
+	def sgcw = new SqlGeneratorConfigWrapper(gcc)
 	GeneratorRunner.run(sgcw)
 }
 
