@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class EmfGeneratorConfigWrapper extends GeneratorConfigWrapper {
@@ -20,7 +20,7 @@ public class EmfGeneratorConfigWrapper extends GeneratorConfigWrapper {
 	protected EmfGeneratorConfigWrapper() {
 	}
 	
-	public EmfGeneratorConfigWrapper(final GeneratorConfig generatorConfig) {
+	public EmfGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig) {
 		super(generatorConfig);
 	}
 

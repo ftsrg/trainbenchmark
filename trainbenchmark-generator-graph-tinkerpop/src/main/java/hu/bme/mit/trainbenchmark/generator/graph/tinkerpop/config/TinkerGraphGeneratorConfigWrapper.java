@@ -12,13 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Input;
-
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class TinkerGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
@@ -28,7 +22,7 @@ public class TinkerGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
 	protected TinkerGraphGeneratorConfigWrapper() {
 	}
 	
-	public TinkerGraphGeneratorConfigWrapper(final GeneratorConfig generatorConfig, final TinkerGraphFormat graphFormat) {
+	public TinkerGraphGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig, final TinkerGraphFormat graphFormat) {
 		super(generatorConfig);
 		this.graphFormat = graphFormat;
 	}

@@ -21,8 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWr
 public class ViatraTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(final BenchmarkConfigCore bc) throws Exception {
-		final ViatraBenchmarkConfigWrapper bcw = new ViatraBenchmarkConfigWrapper(bc);
+	protected BenchmarkResult runTest(final BenchmarkConfigCore bcc) throws Exception {
+		final ViatraBenchmarkConfigWrapper bcw = new ViatraBenchmarkConfigWrapper(bcc);
 		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

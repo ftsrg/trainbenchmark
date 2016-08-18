@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.generator.graph.neo4j.test;
 
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.Neo4jGraphSerializer;
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
 public class Neo4jGraphGeneratorTest extends GeneratorTest {
 
 	@Override
-	public void generate(final GeneratorConfig gc) throws Exception {
+	public void generate(final GeneratorConfigCore gc) throws Exception {
 		final Neo4jGraphGeneratorConfigWrapper gcw = new Neo4jGraphGeneratorConfigWrapper(gc);
 		final Neo4jGraphSerializer serializer = new Neo4jGraphSerializer(gcw);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gcw);

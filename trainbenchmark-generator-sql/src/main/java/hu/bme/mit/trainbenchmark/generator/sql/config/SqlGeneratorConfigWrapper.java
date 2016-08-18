@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class SqlGeneratorConfigWrapper extends GeneratorConfigWrapper {
@@ -20,7 +20,7 @@ public class SqlGeneratorConfigWrapper extends GeneratorConfigWrapper {
 	protected SqlGeneratorConfigWrapper() {
 	}
 	
-	public SqlGeneratorConfigWrapper(final GeneratorConfig generatorConfig) {
+	public SqlGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig) {
 		super(generatorConfig);
 	}
 

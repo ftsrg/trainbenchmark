@@ -26,9 +26,9 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 		this.comparator = comparator;
 		this.bcw = bcw;
 
-		final BenchmarkConfigCore bc = bcw.getBenchmarkConfig();
-		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bc.getWorkload(), bc.getWorkspaceDir(),
-				bc.getModelFilename(), bcw.getDescription());
+		final BenchmarkConfigCore bcc = bcw.getBenchmarkConfig();
+		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcc.getWorkload(), bcc.getWorkspaceDir(),
+				bcc.getModelFilename(), bcw.getDescription());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {

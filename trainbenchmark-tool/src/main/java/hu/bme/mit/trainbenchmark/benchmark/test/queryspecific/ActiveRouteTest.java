@@ -27,10 +27,10 @@ public abstract class ActiveRouteTest extends QueryTest {
 				RailwayOperation.ACTIVEROUTE //
 		);
 		final String workload = "ActiveRouteTest";
-		final BenchmarkConfigCore bc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
+		final BenchmarkConfigCore bcc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload);
 		
-		final BenchmarkResult result = runTest(bc);
+		final BenchmarkResult result = runTest(bcc);
 		System.out.println(result);
 		System.out.println(result.csvMatches());
 		System.out.println(result.csvTimes());
