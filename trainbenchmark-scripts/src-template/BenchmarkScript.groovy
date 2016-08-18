@@ -10,13 +10,13 @@ def xmx = "12G"
 def minSize = 1
 def maxSize = 2
 def timeout = 900
-def runs = 1
-def queryTransformationCount = 0
+def runs = 3
+def queryTransformationCount = 5
 
-def scenarios = [
-	Scenario.BATCH,
-	Scenario.INJECT,
-	Scenario.REPAIR,
+def operations = [
+	RailwayOperation.POSLENGTH_REPAIR,
+	RailwayOperation.ROUTESENSOR,
+	RailwayOperation.SWITCHMONITORED_REPAIR
 ]
 
 for (scenario in scenarios) {
@@ -25,8 +25,7 @@ for (scenario in scenarios) {
 
 //	BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bc, false))
 //	BenchmarkRunner.run(new EclipseOclBenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new Drools5BenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new Drools6BenchmarkConfigWrapper(bc))
+//	BenchmarkRunner.run(new DroolsBenchmarkConfigWrapper(bc))
 //	BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bc))
 //	BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bc, false))
 //	BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bc))
