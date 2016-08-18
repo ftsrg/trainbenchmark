@@ -32,7 +32,7 @@ for (scenario in scenarios) {
 //	BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bc))
 //	BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.COREAPI))
 //	BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.CYPHER))
-//	BenchmarkRunner.run(new SesameBenchmarkConfigWrapper(bc, false))
+//	BenchmarkRunner.run(new Rdf4jBenchmarkConfigWrapper(bc, false))
 //	BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bc))
 //	BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bc))
 //	BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bc))

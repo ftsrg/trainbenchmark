@@ -7,6 +7,6 @@ shadowJar {
 
 
 dependencies {
-  compile project(':trainbenchmark-tool-sesame')
-  compile group: 'com.bigdata', name: 'bigdata', version:'1.5.2'
+  compile project(':trainbenchmark-tool-rdf4j')
+  compile group: 'com.blazegraph', name: 'bigdata-core', version: '2.1.2'
 }

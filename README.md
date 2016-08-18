@@ -19,7 +19,7 @@ Currently, the following formats and tools are supported.
 
 * **EMF:** Drools 5 & 6, Eclipse OCL, EMF API, VIATRA
 * **Property graph:** Neo4j, Tinkergraph
-* **RDF:** Blazegraph, Jena, Sesame
+* **RDF:** Blazegraph, Jena, RDF4J
 * **SQL:** MySQL, SQLite
 
 ## Getting started

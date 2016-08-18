@@ -24,7 +24,7 @@ public abstract class BenchmarkConfigWrapper {
 	}
 
 	/**
-	 * @return The name of the tools for storing the benchmark results. Example: "Sesame (No Inferencing)"
+	 * @return The name of the tools for storing the benchmark results. Example: "RDF4J (No Inferencing)"
 	 */
 	public abstract String getToolName();
 
