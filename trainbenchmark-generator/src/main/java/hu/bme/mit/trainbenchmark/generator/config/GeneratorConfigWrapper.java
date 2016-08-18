@@ -10,11 +10,11 @@ import com.esotericsoftware.kryo.io.Output;
 
 public abstract class GeneratorConfigWrapper {
 
-	protected GeneratorConfig generatorConfig;
+	protected GeneratorConfigCore generatorConfig;
 	
 	protected GeneratorConfigWrapper() {}
 
-	public GeneratorConfigWrapper(final GeneratorConfig generatorConfig) {
+	public GeneratorConfigWrapper(final GeneratorConfigCore generatorConfig) {
 		this.generatorConfig = generatorConfig;
 	}
 	
@@ -23,7 +23,7 @@ public abstract class GeneratorConfigWrapper {
 	 */
 	public abstract String getProjectName();
 		
-	public GeneratorConfig getGeneratorConfig() {
+	public GeneratorConfigCore getGeneratorConfig() {
 		return generatorConfig;
 	}
 	

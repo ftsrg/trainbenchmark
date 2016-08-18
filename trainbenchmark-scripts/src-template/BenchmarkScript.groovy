@@ -1,9 +1,7 @@
-import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
-import hu.bme.mit.trainbenchmark.constants.Scenario
 import BenchmarkReporter
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
+
+import static hu.bme.mit.trainbenchmark.constants.RailwayOperation.*
 
 def xms = "12G"
 def xmx = "12G"
@@ -19,22 +17,20 @@ def operations = [
 	RailwayOperation.SWITCHMONITORED_REPAIR
 ]
 
-for (scenario in scenarios) {
-	def scenarioString = scenario.toString().toLowerCase()
-	def messageSize = 2048
+def bcc = new BenchmarkConfigCore()
 
-//	BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bc, false))
-//	BenchmarkRunner.run(new EclipseOclBenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new DroolsBenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bc, false))
-//	BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.COREAPI))
-//	BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bc, Neo4jEngine.CYPHER))
-//	BenchmarkRunner.run(new Rdf4jBenchmarkConfigWrapper(bc, false))
-//	BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bc))
-//	BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bc))
+//	BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bcc, false))
+//	BenchmarkRunner.run(new EclipseOclBenchmarkConfigWrapper(bcc))
+//	BenchmarkRunner.run(new DroolsBenchmarkConfigWrapper(bcc))
+//	BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bcc))
+//	BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bcc, false))
+//	BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bcc))
+//	BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bcc, Neo4jEngine.COREAPI))
+//	BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bcc, Neo4jEngine.CYPHER))
+//	BenchmarkRunner.run(new Rdf4jBenchmarkConfigWrapper(bcc, false))
+//	BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bcc))
+//	BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bcc))
+//	BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bcc))
 
 }
 

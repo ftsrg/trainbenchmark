@@ -12,7 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
@@ -24,7 +24,7 @@ public class RdfGeneratorConfigWrapper extends GeneratorConfigWrapper {
 	protected RdfGeneratorConfigWrapper() {
 	}
 	
-	public RdfGeneratorConfigWrapper(final GeneratorConfig generatorConfig, final boolean inferred, final RdfFormat format) {
+	public RdfGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig, final boolean inferred, final RdfFormat format) {
 		super(generatorConfig);
 		this.inferred = inferred;
 		this.format = format;

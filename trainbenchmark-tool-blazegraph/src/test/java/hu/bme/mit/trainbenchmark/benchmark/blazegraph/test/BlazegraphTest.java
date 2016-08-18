@@ -25,8 +25,8 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 public class BlazegraphTest extends RdfTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception {
-		final BlazegraphBenchmarkConfigWrapper bcw = new BlazegraphBenchmarkConfigWrapper(bc, inferencing);
+	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
+		final BlazegraphBenchmarkConfigWrapper bcw = new BlazegraphBenchmarkConfigWrapper(bcc, inferencing);
 		final BlazegraphBenchmarkScenario scenario = new BlazegraphBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

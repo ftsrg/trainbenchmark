@@ -37,10 +37,10 @@ public class IqdCoreSwitchSetTest extends SwitchSetTest {
 	public String variant;
 
 	@Override
-	protected BenchmarkResult runTest(final BenchmarkConfigCore bc) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigCore bcc) throws Exception {
 		final int messageSize = 16;
 		System.out.println();
-		final IqdCoreBenchmarkConfigWrapper config = new IqdCoreBenchmarkConfigWrapper(bc, messageSize, variant, null);
+		final IqdCoreBenchmarkConfigWrapper config = new IqdCoreBenchmarkConfigWrapper(bcc, messageSize, variant, null);
 		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

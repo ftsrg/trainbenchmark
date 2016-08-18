@@ -11,6 +11,6 @@ public abstract class QueryTest {
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
 
-	protected abstract BenchmarkResult runTest(BenchmarkConfigCore bc) throws Exception;
+	protected abstract BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception;
 	
 }
