@@ -69,7 +69,7 @@ times.plot = melt(
   value.name = "Time"
 )
 
-workloads = c("ConnectedSegments", "RouteSensor", "SwitchSet", "SemaphoreNeighbor")
+workloads = c("Repair")
 #workloads = c("SemaphoreNeighbor", "RouteSensor")
 
 times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
@@ -77,7 +77,7 @@ times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Check", "Read an
 phases = gsub('\\.', ' ', phases)
 
 # we only keep every second artifact for the x axis
-artifacts = c("8k", "15k", "33k", "67k", "136k", "272k", "0.5M", "1.1M", "2.2M", "4.5M", "9.3M", "18.5M") #, "37M")
+artifacts = c("8k", "15k", "33k", "67k") #, "136k", "272k", "0.5M", "1.1M", "2.2M", "4.5M", "9.3M", "18.5M") #, "37M")
 
 for (workload in workloads) {
   print(workload)
@@ -102,42 +102,42 @@ for (workload in workloads) {
   
   ncol=3
   
-  if (workload == "RouteSensor") {
-    maxs <- data.frame(
-      Model = rep(1,ncol*2), 
-      Phase = phases,
-      Time = c(rep(100000,ncol), rep(80,ncol))
-    )
-    mins <- data.frame(
-      Model = rep(1,6), 
-      Phase = phases,
-      Time = c(rep(5,ncol), rep(0.002,ncol))
-    )
-  }
-  if (workload == "SemaphoreNeighbor") {
-    maxs <- data.frame(
-      Model = rep(1,ncol*2), 
-      Phase = phases,
-      Time = c(rep(100000,ncol), rep(5,ncol))
-    )
-    mins <- data.frame(
-      Model = rep(1,6), 
-      Phase = phases,
-      Time = c(rep(10,ncol), rep(0.002,ncol))
-    )
-  }
+#   if (workload == "RouteSensor") {
+#     maxs <- data.frame(
+#       Model = rep(1,ncol*2), 
+#       Phase = phases,
+#       Time = c(rep(100000,ncol), rep(80,ncol))
+#     )
+#     mins <- data.frame(
+#       Model = rep(1,6), 
+#       Phase = phases,
+#       Time = c(rep(5,ncol), rep(0.002,ncol))
+#     )
+#   }
+#   if (workload == "SemaphoreNeighbor") {
+#     maxs <- data.frame(
+#       Model = rep(1,ncol*2), 
+#       Phase = phases,
+#       Time = c(rep(100000,ncol), rep(5,ncol))
+#     )
+#     mins <- data.frame(
+#       Model = rep(1,6), 
+#       Phase = phases,
+#       Time = c(rep(10,ncol), rep(0.002,ncol))
+#     )
+#   }
   
-  p = ggplot(na.omit(df)) +
+  p = ggplot(df) + #na.omit(df)) +
     aes(x = as.factor(Model), y = Time) +
     labs(title = workload, x = "Model size\n#Elements", y = "Execution times [ms]") +
-    geom_point(aes(col = Description, shape = Description), size = 2.0) +
-    geom_point(data = mins, color = "transparent") +
-    geom_point(data = maxs, color = "transparent") +
-    geom_line(aes(col = Description, group = Description), size = 0.5) +
+    #     geom_point(data = mins, color = "transparent") +
+    #     geom_point(data = maxs, color = "transparent") +
+    geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
+    geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
     facet_wrap(~ Phase, ncol = ncol, scale = "free_y") +
-    guides(color = guide_legend(nrow = 1)) +
+    guides(color = guide_legend(ncol = 4)) +
     theme_bw() +
     theme(
       text = element_text(size = 10),
