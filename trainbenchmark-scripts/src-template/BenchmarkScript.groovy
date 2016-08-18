@@ -32,6 +32,4 @@ def bcc = new BenchmarkConfigCore()
 //	BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bcc))
 //	BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bcc))
 
-}
-
 BenchmarkReporter.reportReady()
