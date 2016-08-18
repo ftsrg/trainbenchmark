@@ -1,3 +1,5 @@
 #!/bin/bash
 
-./gradlew build --continue -x test
+cd "$( cd "$( dirname "$0" )" && pwd )/../"
+
+./gradlew build -x test --continue
