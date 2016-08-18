@@ -20,14 +20,16 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.repository.Repository;
 import org.openrdf.repository.RepositoryException;
 
 import com.bigdata.rdf.sail.BigdataSail;
 import com.bigdata.rdf.sail.BigdataSailRepository;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
 
-public class BlazegraphDriver extends SesameDriver {
+public class BlazegraphDriver extends Rdf4jDriver {
 
 	protected final BigdataSail sail;
 
@@ -41,13 +43,13 @@ public class BlazegraphDriver extends SesameDriver {
 		FileUtils.deleteQuietly(new File(journalFile));
 
 		sail = new BigdataSail(props);
-		repository = new BigdataSailRepository(sail);
+		repository = (Repository) new BigdataSailRepository(sail);
 		repository.initialize();
 	}
 
 	@Override
 	public void beginTransaction() {
-		vf = sail.getValueFactory();
+		vf = (ValueFactory) sail.getValueFactory();
 	}
 
 	@Override
