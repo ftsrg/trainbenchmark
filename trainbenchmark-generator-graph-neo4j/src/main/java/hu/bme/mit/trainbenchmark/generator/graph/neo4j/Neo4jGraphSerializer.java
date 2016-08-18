@@ -21,12 +21,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.DynamicRelationshipType;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
@@ -69,12 +64,12 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	@Override
 	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
-		final Node node = graphDb.createNode(DynamicLabel.label(type));
+		final Node node = graphDb.createNode(Label.label(type));
 
 		// this only works for inheritance hierarchies
 		if (ModelConstants.SUPERTYPES.containsKey(type)) {
 			final String ancestor = ModelConstants.SUPERTYPES.get(type);
-			node.addLabel(DynamicLabel.label(ancestor));
+			node.addLabel(Label.label(ancestor));
 		}
 
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
@@ -134,8 +129,8 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		n.setProperty(key, attributeValue);
 	}
 
-	public DynamicRelationshipType relationship(final String label) {
-		return DynamicRelationshipType.withName(label);
+	public RelationshipType relationship(final String label) {
+		return RelationshipType.withName(label);
 	}
 
 	@Override

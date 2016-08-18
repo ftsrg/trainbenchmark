@@ -1,19 +1,14 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.util;
 
+import org.neo4j.graphdb.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.DynamicRelationshipType;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.RelationshipType;
-
 public class Neo4jUtil {
 	
-	public static boolean isConnected(final Node source, final Node target, final DynamicRelationshipType relationshipType) {
+	public static boolean isConnected(final Node source, final Node target, final RelationshipType relationshipType) {
 		final Iterator<Relationship> edges = source.getRelationships(Direction.OUTGOING, relationshipType).iterator();
 
 		while (edges.hasNext()) {
