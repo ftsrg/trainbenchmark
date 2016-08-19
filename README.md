@@ -51,20 +51,14 @@ Some tools require dependencies, e.g. installing a database manager or adding ar
 
 * [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install -y mysql-server` and set the root password to empty.
 * [SQLite](hu.bme.mit.trainbenchmark.benchmark.sqlite): install with `sudo apt-get install -y sqlite3`.
-* (Deprecated.) [AllegroGraph](hu.bme.mit.trainbenchmark.benchmark.allegro): download the [Allegro server](http://franz.com/agraph/downloads/server). Unzip the file and run `./configure-agraph`. Adjust the port to `10035` (default value), set the username and password to `super`. Start the server with `./agraph`.
-* (Deprecated.) [Virtuoso](hu.bme.mit.trainbenchmark.benchmark.virtuoso): run the `scripts/dep-virtuoso.sh` script to resolve the dependencies. Issue the `sudo apt-get install virtuoso-opensource` command to install Virtuoso and set the password to `dba`.
 
 ### Usage
 
-The benchmark configuration is defined in the `config/config.yml` file (this is created by the [`scripts/init-config.sh`](scripts/init-config.sh) script). The script is based on the default configuration stored in [`config/default-config.yml`](config/default-config.yml) which also provided the documentation as comments in the file.
+The benchmark configuration is defined in the `trainbenchmark-scripts/src/BenchmarkScript.groovy` file.
 
-The `scripts` directory contains the [`run.py`](scripts/run.py) script which is used for the following purposes:
-* `scripts/run.py -b` -- build the projects
-* `scripts/run.py -b -s` -- build the projects without testing
-* `scripts/run.py -g` -- generates the instance models for the defined tools
-* `scripts/run.py -f` -- only generates the instance models for the specified formats (useful if you only need the models)
-* `scripts/run.py -m` -- runs the benchmark measurements
-* `scripts/run.py -h` -- displays the help
+* Use `gradle shadowJar generate benchmark` to run the benchmark and generate the plots.
+* Add the `plot` goal to generate the plots.
+* Add the `page` goal to run a Jetty server showing the plots.
 
 ### Importing to Eclipse
 
@@ -77,10 +71,6 @@ To import the projects, choose **Import...** | **Gradle Project**, specify the r
 ### Naming conventions
 
 **Note.** To avoid confusion between the different implementations, we decided to naming similar to the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the EMF API implementation are named `EmfApiQueryPosLength`, `EmfApiQueryRouteSensor`, etc., while the classes in the VIATRA implementation are named `ViatraQueryPosLength`, `ViatraQueryRouteSensor`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
-
-## Reporting tools
-
-
 
 ## Instance models
 

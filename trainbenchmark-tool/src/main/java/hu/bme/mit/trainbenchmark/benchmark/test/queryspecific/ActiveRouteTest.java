@@ -1,17 +1,15 @@
 package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
-import java.util.Collection;
-
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+
+import java.util.List;
 
 public abstract class ActiveRouteTest extends QueryTest {
 
@@ -23,7 +21,7 @@ public abstract class ActiveRouteTest extends QueryTest {
 		final int runs = 2;
 		final int queryTransformationCount = 0;
 		final String modelFilename = "railway-repair-1";
-		final Collection<RailwayOperation> operations = ImmutableList.of(//
+		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ACTIVEROUTE //
 		);
 		final String workload = "ActiveRouteTest";

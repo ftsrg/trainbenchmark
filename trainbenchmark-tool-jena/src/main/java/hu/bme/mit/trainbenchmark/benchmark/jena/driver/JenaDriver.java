@@ -33,7 +33,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.driver.RdfDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 

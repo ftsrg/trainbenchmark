@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfigWrapper;
 
 public class Rdf4jBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
 

@@ -9,16 +9,14 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.rdf;
-
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.RDF_TYPE;
-
-import java.io.IOException;
+package hu.bme.mit.trainbenchmark.benchmark.rdf.driver;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
+
+import java.io.IOException;
+
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.*;
 
 public abstract class RdfDriver<TElement> extends Driver<TElement> {
 
