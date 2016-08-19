@@ -175,6 +175,9 @@ public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMa
 			final ModelOperation<EmfSwitchSetMatch, EmfDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
+
+		default:
+			break;
 		}
 		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}

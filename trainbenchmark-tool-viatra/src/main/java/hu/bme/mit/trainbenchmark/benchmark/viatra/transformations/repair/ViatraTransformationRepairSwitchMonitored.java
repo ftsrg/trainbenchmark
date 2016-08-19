@@ -23,8 +23,6 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class ViatraTransformationRepairSwitchMonitored extends ViatraTransformation<SwitchMonitoredMatch> {
 
-	private static final String Region = null;
-
 	public ViatraTransformationRepairSwitchMonitored(final ViatraDriver driver) {
 		super(driver);
 	}

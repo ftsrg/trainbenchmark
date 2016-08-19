@@ -175,6 +175,8 @@ public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends Mode
 			final ModelOperation<EmfSwitchSetMatch, TDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
+		default:
+			break;
 		}
 		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}

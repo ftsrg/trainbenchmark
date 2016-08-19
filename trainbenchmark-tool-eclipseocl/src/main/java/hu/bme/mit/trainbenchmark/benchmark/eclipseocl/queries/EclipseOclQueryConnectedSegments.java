@@ -34,6 +34,7 @@ public class EclipseOclQueryConnectedSegments extends EclipseOclQuery<EmfConnect
 	public Collection<EmfConnectedSegmentsMatch> evaluate() {
 		matches = new ArrayList<>();
 
+		@SuppressWarnings("unchecked")
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
 		for (final Tuple<?, ?> tuple : bag) {
 			final Sensor sensor = (Sensor) tuple.getValue("sensor");

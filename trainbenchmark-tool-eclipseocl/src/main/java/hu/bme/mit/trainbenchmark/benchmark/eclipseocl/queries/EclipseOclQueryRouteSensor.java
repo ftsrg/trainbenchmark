@@ -36,6 +36,7 @@ public class EclipseOclQueryRouteSensor extends EclipseOclQuery<EmfRouteSensorMa
 	public Collection<EmfRouteSensorMatch> evaluate() {
 		matches = new ArrayList<>();
 
+		@SuppressWarnings("unchecked")
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
 		for (final Tuple<?, ?> tuple : bag) {
 			final Route route = (Route) tuple.getValue("route");

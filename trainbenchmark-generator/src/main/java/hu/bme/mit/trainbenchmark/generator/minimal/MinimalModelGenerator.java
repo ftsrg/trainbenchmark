@@ -9,7 +9,7 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public abstract class MinimalModelGenerator extends ModelGenerator {
 
-	public MinimalModelGenerator(final ModelSerializer serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+	public MinimalModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
 		super(serializer, generatorConfigWrapper);
 	}
 

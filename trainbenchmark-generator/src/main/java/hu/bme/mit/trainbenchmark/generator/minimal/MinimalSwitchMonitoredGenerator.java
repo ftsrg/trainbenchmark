@@ -12,7 +12,7 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
 
 public class MinimalSwitchMonitoredGenerator extends MinimalModelGenerator {
 
-	public MinimalSwitchMonitoredGenerator(final ModelSerializer serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+	public MinimalSwitchMonitoredGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
 		super(serializer, generatorConfigWrapper);
 	}
 

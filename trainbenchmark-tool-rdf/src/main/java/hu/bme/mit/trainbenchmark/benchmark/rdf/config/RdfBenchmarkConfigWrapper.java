@@ -12,12 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.rdf.config;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Input;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 

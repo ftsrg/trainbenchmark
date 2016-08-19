@@ -69,7 +69,8 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
 			final TinkerGraphQuery<TinkerGraphConnectedSegmentsInjectMatch, TDriver> query = new TinkerGraphQueryConnectedSegmentsInject<>(driver);
-			final TinkerGraphTransformation<TinkerGraphConnectedSegmentsInjectMatch, TDriver> transformation = new TinkerGraphTransformationInjectConnectedSegments<>(driver);
+			final TinkerGraphTransformation<TinkerGraphConnectedSegmentsInjectMatch, TDriver> transformation = new TinkerGraphTransformationInjectConnectedSegments<>(
+					driver);
 			final ModelOperation<TinkerGraphConnectedSegmentsInjectMatch, TDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -108,7 +109,8 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 		}
 		case ROUTESENSOR_INJECT: {
 			final TinkerGraphQuery<TinkerGraphRouteSensorInjectMatch, TDriver> query = new TinkerGraphQueryRouteSensorInject<>(driver);
-			final TinkerGraphTransformation<TinkerGraphRouteSensorInjectMatch, TDriver> transformation = new TinkerGraphTransformationInjectRouteSensor<>(driver);
+			final TinkerGraphTransformation<TinkerGraphRouteSensorInjectMatch, TDriver> transformation = new TinkerGraphTransformationInjectRouteSensor<>(
+					driver);
 			final ModelOperation<TinkerGraphRouteSensorInjectMatch, TDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -179,6 +181,8 @@ public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver>
 			final ModelOperation<TinkerGraphSwitchSetMatch, TDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
+		default:
+			break;
 		}
 		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}

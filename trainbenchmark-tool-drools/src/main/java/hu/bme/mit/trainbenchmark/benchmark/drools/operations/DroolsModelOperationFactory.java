@@ -173,6 +173,8 @@ public class DroolsModelOperationFactory extends ModelOperationFactory<EmfMatch,
 			final ModelOperation<DroolsSwitchSetMatch, DroolsDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
+		default:
+			break;
 		}
 		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}

@@ -29,6 +29,7 @@ public class EclipseOclQuerySwitchMonitored extends EclipseOclQuery<EmfSwitchMon
 		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<EmfSwitchMonitoredMatch> evaluate() {
 		matches = new ArrayList<>();
