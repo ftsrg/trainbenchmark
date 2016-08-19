@@ -11,19 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.inject;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSemaphoreNeighborInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import org.eclipse.rdf4j.model.IRI;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Rdf4jTransformationInjectSemaphoreNeighbor extends Rdf4jTransformation<Rdf4jSemaphoreNeighborInjectMatch> {
+import org.eclipse.rdf4j.model.IRI;
 
-	public Rdf4jTransformationInjectSemaphoreNeighbor(final Rdf4jDriver driver) {
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSemaphoreNeighborInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+
+public class Rdf4jTransformationInjectSemaphoreNeighbor<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jSemaphoreNeighborInjectMatch, TRdf4jDriver> {
+
+	public Rdf4jTransformationInjectSemaphoreNeighbor(final TRdf4jDriver driver) {
 		super(driver);
 	}
 

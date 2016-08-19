@@ -16,12 +16,8 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparat
 
 public class IqdCoreMatchComparator extends BaseMatchComparator<IqdCoreMatch, Long> {
 
-	protected IqdCoreMatchComparator() {
+	public IqdCoreMatchComparator() {
 		super(new LongComparator());
 	}
 
-	public static IqdCoreMatchComparator create() {
-		return new IqdCoreMatchComparator();
-	}
-	
 }

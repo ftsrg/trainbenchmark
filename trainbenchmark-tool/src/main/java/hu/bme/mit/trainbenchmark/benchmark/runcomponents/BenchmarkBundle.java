@@ -8,12 +8,13 @@ import java.util.Random;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
+public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
 
 	protected final Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TDriver driver;
@@ -24,10 +25,10 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
-	public BenchmarkBundle(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
+	public BenchmarkBundle(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> factory,
 			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw,
-			final BenchmarkResult benchmarkResults) {
-		this.driver = driver;
+			final BenchmarkResult benchmarkResults) throws Exception {
+		this.driver = driverFactory.createInstance();
 		this.factory = factory;
 		this.comparator = comparator;
 		this.bcw = bcw;
@@ -35,6 +36,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver<?>, TBenchmar
 	}
 
 	public void initializeDriver() throws Exception {
+		
 		driver.initialize();
 	}
 

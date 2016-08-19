@@ -18,12 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparat
 
 public class JenaMatchComparator extends BaseMatchComparator<JenaMatch, Resource> {
 
-	protected JenaMatchComparator() {
+	public JenaMatchComparator() {
 		super(new ResourceComparator());
-	}
-
-	public static JenaMatchComparator create() {
-		return new JenaMatchComparator();
 	}
 
 }

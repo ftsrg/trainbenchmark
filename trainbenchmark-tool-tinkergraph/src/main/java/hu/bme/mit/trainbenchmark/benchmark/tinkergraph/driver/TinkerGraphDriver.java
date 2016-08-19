@@ -23,7 +23,7 @@ import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
-public class TinkerGraphDriver extends Driver<Vertex> {
+public class TinkerGraphDriver extends Driver {
 
 	public static final String LABEL = "label";
 	protected TinkerGraph graph;

@@ -37,14 +37,6 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, MySqlDriver> {
 
-	protected MySqlModelOperationFactory() {
-
-	}
-
-	public static MySqlModelOperationFactory create() {
-		return new MySqlModelOperationFactory();
-	}
-
 	@Override
 	public ModelOperation<? extends SqlMatch, MySqlDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
 			final MySqlDriver driver) throws Exception {

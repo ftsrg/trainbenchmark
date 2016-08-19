@@ -27,12 +27,8 @@ public class ViatraDriver extends EmfDriver {
 		return engine;
 	}
 	
-	protected ViatraDriver() {
+	public ViatraDriver() {
 		super();
-	}
-
-	public static ViatraDriver create() {
-		return new ViatraDriver();
 	}
 	
 	@Override

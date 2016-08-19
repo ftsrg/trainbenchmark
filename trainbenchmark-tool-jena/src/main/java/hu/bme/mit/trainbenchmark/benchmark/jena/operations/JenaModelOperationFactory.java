@@ -37,14 +37,6 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class JenaModelOperationFactory extends ModelOperationFactory<JenaMatch, JenaDriver> {
 
-	protected JenaModelOperationFactory() {
-
-	}
-
-	public static JenaModelOperationFactory create() {
-		return new JenaModelOperationFactory();
-	}
-
 	@Override
 	public ModelOperation<? extends JenaMatch, JenaDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspacePath,
 			final JenaDriver driver) throws Exception {

@@ -11,21 +11,27 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jPosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
-import org.eclipse.rdf4j.model.*;
-import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.RepositoryResult;
-
-import java.util.Collection;
-
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
-public class Rdf4jTransformationRepairPosLength extends Rdf4jTransformation<Rdf4jPosLengthMatch> {
+import java.util.Collection;
 
-	public Rdf4jTransformationRepairPosLength(final Rdf4jDriver driver) {
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Literal;
+import org.eclipse.rdf4j.model.Resource;
+import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.model.Value;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.repository.RepositoryResult;
+
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+
+public class Rdf4jTransformationRepairPosLength<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jPosLengthMatch, TRdf4jDriver> {
+
+	public Rdf4jTransformationRepairPosLength(final TRdf4jDriver driver) {
 		super(driver);
 	}
 

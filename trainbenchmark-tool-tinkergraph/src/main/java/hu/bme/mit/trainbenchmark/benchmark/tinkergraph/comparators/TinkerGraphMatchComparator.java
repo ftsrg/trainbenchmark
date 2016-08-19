@@ -18,12 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 
 public class TinkerGraphMatchComparator extends BaseMatchComparator<TinkerGraphMatch, Vertex> {
 
-	protected TinkerGraphMatchComparator() {
+	public TinkerGraphMatchComparator() {
 		super(new VertexComparator());
 	}
 	
-	public static TinkerGraphMatchComparator create() {
-		return new TinkerGraphMatchComparator();
-	}
-
 }

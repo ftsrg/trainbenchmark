@@ -17,14 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.RailwayElementCompara
 import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.MatchComparator;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
-public class ViatraMatchComparator<TMatch extends BasePatternMatch> extends MatchComparator<TMatch, RailwayElement> {
+public class ViatraMatchComparator extends MatchComparator<BasePatternMatch, RailwayElement> {
  
-	protected ViatraMatchComparator() {
+	public ViatraMatchComparator() {
 		super(new RailwayElementComparator());
-	}
-	
-	public static <TMatch extends BasePatternMatch> ViatraMatchComparator<TMatch> create() {
-		return new ViatraMatchComparator<>();
 	}
 	
 	@Override

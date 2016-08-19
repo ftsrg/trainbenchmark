@@ -39,8 +39,8 @@ public class Neo4jActiveRouteTest extends ActiveRouteTest {
 	
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigCore bcc) throws Exception {
-		final Neo4jBenchmarkConfigWrapper nbcw = new Neo4jBenchmarkConfigWrapper(bcc, engine);
-		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(nbcw);
+		final Neo4jBenchmarkConfigWrapper bcw = new Neo4jBenchmarkConfigWrapper(bcc, engine);
+		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

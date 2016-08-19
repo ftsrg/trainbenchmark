@@ -11,22 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+
+import java.util.Collection;
+
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 
-import java.util.Collection;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+public class Rdf4jTransformationRepairSemaphoreNeighbor<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jSemaphoreNeighborMatch, TRdf4jDriver> {
 
-public class Rdf4jTransformationRepairSemaphoreNeighbor extends Rdf4jTransformation<Rdf4jSemaphoreNeighborMatch> {
-
-	public Rdf4jTransformationRepairSemaphoreNeighbor(final Rdf4jDriver driver) {
+	public Rdf4jTransformationRepairSemaphoreNeighbor(final TRdf4jDriver driver) {
 		super(driver);
 	}
 

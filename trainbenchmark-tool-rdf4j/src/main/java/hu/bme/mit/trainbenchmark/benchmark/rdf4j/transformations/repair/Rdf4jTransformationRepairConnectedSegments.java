@@ -11,23 +11,24 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+
+import java.util.Collection;
+
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryResult;
 
-import java.util.Collection;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+public class Rdf4jTransformationRepairConnectedSegments<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jConnectedSegmentsMatch, TRdf4jDriver> {
 
-public class Rdf4jTransformationRepairConnectedSegments extends Rdf4jTransformation<Rdf4jConnectedSegmentsMatch> {
-
-	public Rdf4jTransformationRepairConnectedSegments(final Rdf4jDriver driver) {
+	public Rdf4jTransformationRepairConnectedSegments(final TRdf4jDriver driver) {
 		super(driver);
 	}
 

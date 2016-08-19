@@ -23,8 +23,8 @@ public class IqdCoreTest extends TrainBenchmarkTest {
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
 		final int messageSize = 16;
-		final IqdCoreBenchmarkConfigWrapper config = new IqdCoreBenchmarkConfigWrapper(bcc, messageSize, "", null);
-		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(config);
+		final IqdCoreBenchmarkConfigWrapper bcw = new IqdCoreBenchmarkConfigWrapper(bcc, messageSize, "", null);
+		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bcw);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

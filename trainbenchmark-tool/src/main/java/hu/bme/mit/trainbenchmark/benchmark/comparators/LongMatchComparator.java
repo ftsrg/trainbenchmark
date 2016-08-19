@@ -16,12 +16,8 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.comparators.BaseMatchComparat
 
 public class LongMatchComparator<TMatch extends LongMatch> extends BaseMatchComparator<TMatch, Long> {
 
-	protected LongMatchComparator() {
+	public LongMatchComparator() {
 		super(new LongComparator());
-	}
-	
-	public static <TMatch extends LongMatch> LongMatchComparator<TMatch> create() {
-		return new LongMatchComparator<>();
 	}
 
 }

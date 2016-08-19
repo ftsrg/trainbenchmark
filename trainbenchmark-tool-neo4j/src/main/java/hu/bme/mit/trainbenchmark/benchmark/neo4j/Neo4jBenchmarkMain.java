@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrap
 public class Neo4jBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Neo4jBenchmarkConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], Neo4jBenchmarkConfigWrapper.class);
-		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(config);
+		final Neo4jBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], Neo4jBenchmarkConfigWrapper.class);
+		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bcw);
 		scenario.performBenchmark();
 	}
 

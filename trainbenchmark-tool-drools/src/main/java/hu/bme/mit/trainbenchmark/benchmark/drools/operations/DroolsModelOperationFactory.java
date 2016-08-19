@@ -44,14 +44,6 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class DroolsModelOperationFactory extends ModelOperationFactory<EmfMatch, DroolsDriver> {
 
-	protected DroolsModelOperationFactory() {
-
-	}
-
-	public static DroolsModelOperationFactory create() {
-		return new DroolsModelOperationFactory();
-	}
-
 	@Override
 	public ModelOperation<? extends EmfMatch, DroolsDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
 			final DroolsDriver driver) throws Exception {

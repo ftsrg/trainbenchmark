@@ -37,20 +37,16 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators.NodeComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class Neo4jDriver extends Driver<Node> {
+public class Neo4jDriver extends Driver {
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
 	protected final Comparator<Node> nodeComparator = new NodeComparator();
 	protected final File databaseDirectory;
 
-	protected Neo4jDriver(final String modelDir) throws IOException {
+	public Neo4jDriver(final String modelDir) throws IOException {
 		super();
 		this.databaseDirectory = new File(modelDir + "/neo4j-dbs/railway-database");
-	}
-
-	public static Neo4jDriver create(final String modelDir) throws IOException {
-		return new Neo4jDriver(modelDir);
 	}
 
 	@Override

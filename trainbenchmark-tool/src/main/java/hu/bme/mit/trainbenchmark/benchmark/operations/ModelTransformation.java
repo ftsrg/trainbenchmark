@@ -15,7 +15,7 @@ import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 
-public abstract class ModelTransformation<PatternMatch, TDriver extends Driver<?>> {
+public abstract class ModelTransformation<PatternMatch, TDriver extends Driver> {
 
 	protected TDriver driver;
 	

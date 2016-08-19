@@ -18,19 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jMatch;
 
 public class Rdf4jMatchComparator extends BaseMatchComparator<Rdf4jMatch, IRI> {
 
-	protected Rdf4jMatchComparator() {
+	public Rdf4jMatchComparator() {
 		super(new IriComparator());
-	}
-	
-	public static Rdf4jMatchComparator create() {
-		return new Rdf4jMatchComparator();
-	}
-
-	@Override
-	public int compare(final Rdf4jMatch o1, final Rdf4jMatch o2) {
-		final Object[] m1 = o1.toArray();
-		final Object[] m2 = o2.toArray();
-		return compareArrays(m1, m2);
 	}
 
 }

@@ -11,15 +11,25 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.driver.RdfDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.comparators.IriComparator;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jMatch;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.query.*;
+import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.BooleanQuery;
+import org.eclipse.rdf4j.query.MalformedQueryException;
+import org.eclipse.rdf4j.query.QueryEvaluationException;
+import org.eclipse.rdf4j.query.QueryLanguage;
+import org.eclipse.rdf4j.query.TupleQuery;
+import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryException;
@@ -29,16 +39,13 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.driver.RdfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.comparators.IriComparator;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-
-public class Rdf4jDriver extends RdfDriver<IRI> {
+public class Rdf4jDriver extends RdfDriver {
 
     protected RepositoryConnection connection;
     protected Repository repository;
