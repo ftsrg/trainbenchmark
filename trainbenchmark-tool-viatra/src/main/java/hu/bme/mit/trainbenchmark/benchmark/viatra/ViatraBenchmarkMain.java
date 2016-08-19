@@ -17,8 +17,8 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWr
 public class ViatraBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final ViatraBenchmarkConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], ViatraBenchmarkConfigWrapper.class);
-		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(config);
+		final ViatraBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], ViatraBenchmarkConfigWrapper.class);
+		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bcw);
 		scenario.performBenchmark();
 	}
 

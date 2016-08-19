@@ -10,17 +10,17 @@ import com.esotericsoftware.kryo.io.Output;
 
 public abstract class BenchmarkConfigWrapper {
 
-	protected BenchmarkConfigCore benchmarkConfig;
+	protected BenchmarkConfigCore bcc;
 
 	protected BenchmarkConfigWrapper() {
 	}
 
-	public BenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		this.benchmarkConfig = benchmarkConfig;
+	public BenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		this.bcc = bcc;
 	}
 
-	public BenchmarkConfigCore getBenchmarkConfig() {
-		return benchmarkConfig;
+	public BenchmarkConfigCore getBenchmarkConfigCore() {
+		return bcc;
 	}
 
 	/**
@@ -54,8 +54,8 @@ public abstract class BenchmarkConfigWrapper {
 	public static <T extends BenchmarkConfigWrapper> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
-			final T benchmarkConfigWrapper = kryo.readObject(input, clazz);
-			return benchmarkConfigWrapper;
+			final T bcw = kryo.readObject(input, clazz);
+			return bcw;
 		}
 	}
 	

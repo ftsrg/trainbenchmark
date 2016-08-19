@@ -20,8 +20,8 @@ public class EmfApiBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected EmfApiBenchmarkConfigWrapper() {
 	}
 	
-	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		super(benchmarkConfig);
+	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		super(bcc);
 	}
 	
 	@Override

@@ -20,8 +20,8 @@ public class JenaBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
 	protected JenaBenchmarkConfigWrapper() {
 	}
 	
-	public JenaBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
-		super(benchmarkConfig, inferencing);
+	public JenaBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final boolean inferencing) {
+		super(bcc, inferencing);
 	}
 	
 	@Override

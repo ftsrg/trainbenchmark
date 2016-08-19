@@ -20,8 +20,8 @@ public class EclipseOclBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected EclipseOclBenchmarkConfigWrapper() {
 	}
 	
-	public EclipseOclBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		super(benchmarkConfig);
+	public EclipseOclBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		super(bcc);
 	}
 	
 	@Override

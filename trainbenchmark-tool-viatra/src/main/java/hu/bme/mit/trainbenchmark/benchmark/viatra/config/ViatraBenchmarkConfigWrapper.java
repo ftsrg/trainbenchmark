@@ -19,8 +19,8 @@ public class ViatraBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected ViatraBenchmarkConfigWrapper() {
 	}
 	
-	public ViatraBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		super(benchmarkConfig);
+	public ViatraBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		super(bcc);
 	}	
 	
 	@Override

@@ -20,8 +20,8 @@ public class Rdf4jBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
 	protected Rdf4jBenchmarkConfigWrapper() {
 	}
 	
-	public Rdf4jBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
-		super(benchmarkConfig, inferencing);
+	public Rdf4jBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final boolean inferencing) {
+		super(bcc, inferencing);
 	}
 	
 	@Override

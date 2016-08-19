@@ -20,8 +20,8 @@ public class MySqlBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected MySqlBenchmarkConfigWrapper() {
 	}
 	
-	public MySqlBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		super(benchmarkConfig);
+	public MySqlBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		super(bcc);
 	}
 	
 	@Override

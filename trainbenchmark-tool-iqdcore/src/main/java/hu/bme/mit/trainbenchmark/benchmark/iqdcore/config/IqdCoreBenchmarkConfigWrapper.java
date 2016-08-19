@@ -12,16 +12,16 @@ public class IqdCoreBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected IqdCoreBenchmarkConfigWrapper() {
 	}
 
-	public IqdCoreBenchmarkConfigWrapper(final BenchmarkConfigCore config, final int messageSize, final String queryVariant,
+	public IqdCoreBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final int messageSize, final String queryVariant,
 			final String memoryMeasurementPath) {
-		super(config);
+		super(bcc);
 		this.messageSize = messageSize;
 		this.queryVariant = queryVariant;
 		this.memoryMeasurementPath = memoryMeasurementPath;
 	}
 
 	public String getFileName() {
-		return benchmarkConfig.getModelFilename();
+		return bcc.getModelFilename();
 	}
 
 	public int getMessageSize() {

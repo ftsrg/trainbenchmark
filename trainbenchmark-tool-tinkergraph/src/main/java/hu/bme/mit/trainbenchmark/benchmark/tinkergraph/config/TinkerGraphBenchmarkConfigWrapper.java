@@ -20,8 +20,8 @@ public class TinkerGraphBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected TinkerGraphBenchmarkConfigWrapper() {
 	}
 	
-	public TinkerGraphBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		super(benchmarkConfig);
+	public TinkerGraphBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		super(bcc);
 	}
 	
 	@Override
