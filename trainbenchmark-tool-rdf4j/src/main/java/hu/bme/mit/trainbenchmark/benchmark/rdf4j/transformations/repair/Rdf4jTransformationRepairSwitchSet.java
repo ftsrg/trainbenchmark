@@ -11,23 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-
-import java.util.Collection;
-
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.model.Value;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.RepositoryException;
-import org.eclipse.rdf4j.repository.RepositoryResult;
-
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.repository.RepositoryResult;
+
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 public class Rdf4jTransformationRepairSwitchSet extends Rdf4jTransformation<Rdf4jSwitchSetMatch> {
 
@@ -36,7 +30,7 @@ public class Rdf4jTransformationRepairSwitchSet extends Rdf4jTransformation<Rdf4
 	}
 
 	@Override
-	public void activate(final Collection<Rdf4jSwitchSetMatch> matches) throws RepositoryException {
+	public void activate(final Collection<Rdf4jSwitchSetMatch> matches) {
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 

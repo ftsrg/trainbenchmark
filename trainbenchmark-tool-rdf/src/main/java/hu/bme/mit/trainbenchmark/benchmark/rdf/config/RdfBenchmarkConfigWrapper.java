@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.rdf;
+package hu.bme.mit.trainbenchmark.benchmark.rdf.config;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

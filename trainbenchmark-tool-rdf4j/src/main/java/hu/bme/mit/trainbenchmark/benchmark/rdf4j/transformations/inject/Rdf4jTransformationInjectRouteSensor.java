@@ -11,22 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.repository.RepositoryConnection;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.RepositoryException;
-
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jRouteSensorInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 public class Rdf4jTransformationInjectRouteSensor extends Rdf4jTransformation<Rdf4jRouteSensorInjectMatch> {
 
@@ -35,7 +33,7 @@ public class Rdf4jTransformationInjectRouteSensor extends Rdf4jTransformation<Rd
 	}
 
 	@Override
-	public void activate(final Collection<Rdf4jRouteSensorInjectMatch> matches) throws RepositoryException {
+	public void activate(final Collection<Rdf4jRouteSensorInjectMatch> matches) {
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = connection.getValueFactory();
 		

@@ -11,17 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.inject;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.repository.RepositoryException;
-
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import org.eclipse.rdf4j.model.IRI;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Rdf4jTransformationInjectSemaphoreNeighbor extends Rdf4jTransformation<Rdf4jSemaphoreNeighborInjectMatch> {
 
@@ -30,9 +28,9 @@ public class Rdf4jTransformationInjectSemaphoreNeighbor extends Rdf4jTransformat
 	}
 
 	@Override
-	public void activate(final Collection<Rdf4jSemaphoreNeighborInjectMatch> matches) throws RepositoryException {
+	public void activate(final Collection<Rdf4jSemaphoreNeighborInjectMatch> matches) {
 		final List<IRI> routes = matches.stream().map(it -> it.getRoute()).collect(Collectors.toList());
-		driver.deleteSingleOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.ENTRY);
+		driver.deleteSingleOutgoingEdge(routes, ModelConstants.ENTRY);
 	}
 
 }

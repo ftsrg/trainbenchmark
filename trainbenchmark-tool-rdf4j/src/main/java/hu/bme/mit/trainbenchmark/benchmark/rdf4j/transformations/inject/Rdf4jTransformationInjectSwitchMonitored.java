@@ -11,17 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.inject;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.repository.RepositoryException;
-
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import org.eclipse.rdf4j.model.IRI;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Rdf4jTransformationInjectSwitchMonitored extends Rdf4jTransformation<Rdf4jSwitchMonitoredInjectMatch> {
 
@@ -30,9 +28,9 @@ public class Rdf4jTransformationInjectSwitchMonitored extends Rdf4jTransformatio
 	}
 
 	@Override
-	public void activate(final Collection<Rdf4jSwitchMonitoredInjectMatch> matches) throws RepositoryException {
+	public void activate(final Collection<Rdf4jSwitchMonitoredInjectMatch> matches) {
 		final List<IRI> switches = matches.stream().map(it -> it.getSw()).collect(Collectors.toList());
-		driver.deleteOutgoingEdges(switches, ModelConstants.SWITCH, ModelConstants.MONITORED_BY);
+		driver.deleteOutgoingEdges(switches, ModelConstants.MONITORED_BY);
 	}
 
 }

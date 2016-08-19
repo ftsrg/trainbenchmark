@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools;
+package hu.bme.mit.trainbenchmark.benchmark.drools.queries;
 
 import java.util.HashSet;
 import java.util.Set;

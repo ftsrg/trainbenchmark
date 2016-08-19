@@ -20,7 +20,6 @@ import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.Message.Level;
 import org.kie.api.runtime.rule.LiveQuery;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools.DroolsResultListener;
 import hu.bme.mit.trainbenchmark.benchmark.drools.driver.DroolsDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
