@@ -40,6 +40,12 @@ task initScripts() << {
 	}
 }
 
+task cleanResults() << {
+	delete fileTree('../results') {
+		include '*.csv'
+	}
+}
+
 task benchmark(dependsOn: 'classes', type: JavaExec) {
 	main = 'BenchmarkScript'
 	classpath = sourceSets.main.runtimeClasspath
