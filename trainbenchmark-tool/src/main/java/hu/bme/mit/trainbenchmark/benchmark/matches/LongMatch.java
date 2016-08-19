@@ -15,9 +15,6 @@ import java.util.Arrays;
 
 /**
  * A match class for storing only the ids of the elements in the match.
- * 
- * @author szarnyasg
- * 
  */
 public abstract class LongMatch implements Match {
 
@@ -26,10 +23,6 @@ public abstract class LongMatch implements Match {
 	public LongMatch() {
 		super();
 	}
-
-//	public Long[] getMatch() {
-//		return match;
-//	}
 
 	@Override
 	public int hashCode() {

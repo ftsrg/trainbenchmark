@@ -49,16 +49,4 @@ public class ViatraDriver extends EmfDriver {
 		super.read(modelPath);
 	}
 
-//	@Override
-//	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
-//		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-//		final NavigationHelper navigationHelper = EMFScope.extractUnderlyingEMFIndex(engine);
-//
-//		// register the class (won't register it twice)
-//		navigationHelper.registerEClasses(Sets.newHashSet(clazz));
-//
-//		final Set<? extends EObject> instances = navigationHelper.getAllInstances(clazz);
-//		return (Collection<RailwayElement>) instances;
-//	}
-
 }
