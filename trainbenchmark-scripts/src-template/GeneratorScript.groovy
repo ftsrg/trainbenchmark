@@ -1,5 +1,5 @@
 import hu.bme.mit.trainbenchmark.constants.Scenario
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore
 import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigWrapper
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat
@@ -12,7 +12,7 @@ import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 def xms = "4G"
 def xmx = "8G"
 def minSize = 1
-def maxSize = 2
+def maxSize = 8
 
 def scenarios = [
 //	Scenario.BATCH,
@@ -21,7 +21,7 @@ def scenarios = [
 ]
 
 def generate(String xms, String xmx, Scenario scenario, int size) {
-	def gcc = new GeneratorConfig(xms, xmx, scenario, size)
+	def gcc = new GeneratorConfigCore(xms, xmx, scenario, size)
 
 	// EMF
 	def egcw = new EmfGeneratorConfigWrapper(gcc)
@@ -32,7 +32,7 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 	GeneratorRunner.run(ngcw)
 
 	// graph / TinkerPop
-	def tgcw = new TinkerGraphGeneratorConfigWrapper(gcc, TinkerGraphFormat.GRAPHSON)
+	def tgcw = new TinkerGraphGeneratorConfigWrapper(gcc, TinkerGraphFormat.GRAPHML)
 	GeneratorRunner.run(tgcw)
 
 	// RDF
