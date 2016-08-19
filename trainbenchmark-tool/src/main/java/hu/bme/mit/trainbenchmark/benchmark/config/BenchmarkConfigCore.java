@@ -13,26 +13,52 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import java.util.Collection;
+import java.util.List;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public final class BenchmarkConfigCore extends AbstractConfig {
 
-	protected long timeout; // in seconds
+	/**
+	 * The timeout for each measurement run in seconds.
+	 */
+	protected long timeout;
+
+	/**
+	 * The number of measurement runs.
+	 */
 	protected int runs;
+
+	/**
+	 * The number of Transformation-Recheck loops.
+	 */
 	protected int queryTransformationCount;
-	protected String toolName;
+
+	/**
+	 * The name of the model file (without extension).
+	 */
 	protected String modelFilename;
-	protected Collection<RailwayOperation> railwayOperations;
+
+	/**
+	 * The sequence of operations to perform.
+	 */
+	protected List<RailwayOperation> railwayOperations;
+
+	/**
+	 * A short description of the workload.
+	 */
 	protected String workload;
 
+	/**
+	 * Non-arg constructor for Kryo
+	 */
 	protected BenchmarkConfigCore() {
 	}
 
 	public BenchmarkConfigCore(final String xms, final String xmx, final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
-			final Collection<RailwayOperation> railwayOperations, final String workload) {
+			final List<RailwayOperation> railwayOperations, final String workload) {
 		super(xms, xmx);
 		this.timeout = timeout;
 		this.runs = runs;
@@ -52,10 +78,6 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 
 	public int getQueryTransformationCount() {
 		return queryTransformationCount;
-	}
-
-	public String getToolName() {
-		return toolName;
 	}
 
 	public String getModelPath() {
