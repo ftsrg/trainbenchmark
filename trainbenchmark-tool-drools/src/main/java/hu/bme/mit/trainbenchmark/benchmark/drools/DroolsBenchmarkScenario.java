@@ -1,8 +1,8 @@
-package hu.bme.mit.trainbenchmark.benchmark.drools6;
+package hu.bme.mit.trainbenchmark.benchmark.drools;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools6.config.DroolsBenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.driver.DroolsDriver;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.operations.DroolsModelOperationFactory;
+import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.drools.driver.DroolsDriver;
+import hu.bme.mit.trainbenchmark.benchmark.drools.operations.DroolsModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;

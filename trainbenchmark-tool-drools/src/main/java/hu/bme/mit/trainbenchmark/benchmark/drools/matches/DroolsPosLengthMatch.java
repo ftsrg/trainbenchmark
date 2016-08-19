@@ -9,19 +9,19 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
+package hu.bme.mit.trainbenchmark.benchmark.drools.matches;
 
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
 import org.kie.api.runtime.rule.Row;
 
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfPosLengthMatch;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
-public class DroolsSwitchMonitoredMatch extends EmfSwitchMonitoredMatch {
+public class DroolsPosLengthMatch extends EmfPosLengthMatch {
 
-	public DroolsSwitchMonitoredMatch(final Row match) {
-		super((Switch) match.get(VAR_SW));
+	public DroolsPosLengthMatch(final Row match) {
+		super((Segment) match.get(VAR_SEGMENT));
 	}
 
 }

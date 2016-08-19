@@ -9,18 +9,19 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.drools.matches;
 
-package hu.bme.mit.trainbenchmark.benchmark.drools6;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.config.DroolsBenchmarkConfigWrapper;
+import org.kie.api.runtime.rule.Row;
 
-public class DroolsBenchmarkMain {
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.railway.Switch;
 
-	public static void main(final String[] args) throws Exception {
-		final DroolsBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], DroolsBenchmarkConfigWrapper.class);
-		final DroolsBenchmarkScenario scenario = new DroolsBenchmarkScenario(bcw);
-		scenario.performBenchmark();	
+public class DroolsSwitchMonitoredMatch extends EmfSwitchMonitoredMatch {
+
+	public DroolsSwitchMonitoredMatch(final Row match) {
+		super((Switch) match.get(VAR_SW));
 	}
 
 }

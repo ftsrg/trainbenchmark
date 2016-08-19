@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
+package hu.bme.mit.trainbenchmark.benchmark.drools.matches;
 
 import org.kie.api.runtime.rule.Row;
 
