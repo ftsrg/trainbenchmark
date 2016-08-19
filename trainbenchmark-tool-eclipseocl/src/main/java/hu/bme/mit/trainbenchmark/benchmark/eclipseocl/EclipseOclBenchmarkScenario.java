@@ -1,17 +1,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.operations.EclipseOclModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.emf.comparators.EmfMatchComparator;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.operations.EmfApiModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
-public class EmfApiBenchmarkScenario
-		extends BenchmarkScenario<EmfMatch, EmfDriver, EmfApiBenchmarkConfigWrapper> {
+public class EclipseOclBenchmarkScenario
+		extends BenchmarkScenario<EmfMatch, EmfDriver, EclipseOclBenchmarkConfigWrapper> {
 
-	public EmfApiBenchmarkScenario(final EmfApiBenchmarkConfigWrapper dbcw) throws Exception {
-		super(EmfDriver.create(), EmfApiModelOperationFactory.create(), EmfMatchComparator.create(), dbcw);
+	public EclipseOclBenchmarkScenario(final EclipseOclBenchmarkConfigWrapper bcw) throws Exception {
+		super(EmfDriver.create(), EclipseOclModelOperationFactory.create(), EmfMatchComparator.create(), bcw);
 	}
 
 }

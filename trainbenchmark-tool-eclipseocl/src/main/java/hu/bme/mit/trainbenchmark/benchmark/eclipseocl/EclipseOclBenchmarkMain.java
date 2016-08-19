@@ -12,13 +12,13 @@
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper;
 
-public class EmfApiBenchmarkMain {
+public class EclipseOclBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final EmfApiBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], EmfApiBenchmarkConfigWrapper.class);
-		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bcw);
+		final EclipseOclBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], EclipseOclBenchmarkConfigWrapper.class);
+		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(bcw);
 		scenario.performBenchmark();
 	}
 }
