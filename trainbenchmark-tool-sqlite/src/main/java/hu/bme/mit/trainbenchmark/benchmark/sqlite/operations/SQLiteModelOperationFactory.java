@@ -138,7 +138,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 		}
 		case SWITCHMONITORED_INJECT: {
 			final SqlQuery<SqlSwitchMonitoredInjectMatch, SQLiteDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED_INJECT);
-			final SqlTransformation<SqlSwitchMonitoredInjectMatch, SQLiteDriver> transformation = new SqlTransformationInjectSwitchMonitored<>(driver, workspaceDir);
+			final SqlTransformation<SqlSwitchMonitoredInjectMatch, SQLiteDriver> transformation = new SqlTransformationInjectSwitchMonitored<>(driver,
+					workspaceDir);
 			final ModelOperation<SqlSwitchMonitoredInjectMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -167,6 +168,8 @@ public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch,
 			final ModelOperation<SqlSwitchSetMatch, SQLiteDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
+		default:
+			break;
 		}
 		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}

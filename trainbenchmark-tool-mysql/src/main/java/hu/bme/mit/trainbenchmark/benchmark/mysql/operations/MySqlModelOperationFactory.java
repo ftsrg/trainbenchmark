@@ -117,7 +117,8 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
 			final SqlQuery<SqlSemaphoreNeighborInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR_INJECT);
-			final SqlTransformation<SqlSemaphoreNeighborInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSemaphoreNeighbor<>(driver, workspaceDir);
+			final SqlTransformation<SqlSemaphoreNeighborInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSemaphoreNeighbor<>(driver,
+					workspaceDir);
 			final ModelOperation<SqlSemaphoreNeighborInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -137,7 +138,8 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 		}
 		case SWITCHMONITORED_INJECT: {
 			final SqlQuery<SqlSwitchMonitoredInjectMatch, MySqlDriver> query = new SqlQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED_INJECT);
-			final SqlTransformation<SqlSwitchMonitoredInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSwitchMonitored<>(driver, workspaceDir);
+			final SqlTransformation<SqlSwitchMonitoredInjectMatch, MySqlDriver> transformation = new SqlTransformationInjectSwitchMonitored<>(driver,
+					workspaceDir);
 			final ModelOperation<SqlSwitchMonitoredInjectMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
@@ -166,6 +168,8 @@ public class MySqlModelOperationFactory extends ModelOperationFactory<SqlMatch, 
 			final ModelOperation<SqlSwitchSetMatch, MySqlDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
+		default:
+			break;
 		}
 		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}

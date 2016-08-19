@@ -36,6 +36,7 @@ public class EclipseOclQuerySwitchSet extends EclipseOclQuery<EmfSwitchSetMatch>
 	public Collection<EmfSwitchSetMatch> evaluate() {
 		matches = new ArrayList<>();
 
+		@SuppressWarnings("unchecked")
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
 		for (final Tuple<?, ?> tuple : bag) {
 			final Semaphore semaphore = (Semaphore) tuple.getValue("semaphore");

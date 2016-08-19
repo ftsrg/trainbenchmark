@@ -33,6 +33,7 @@ public class EclipseOclQueryPosLength extends EclipseOclQuery<EmfPosLengthMatch>
 	public Collection<EmfPosLengthMatch> evaluate() {
 		matches = new ArrayList<>();
 
+		@SuppressWarnings("unchecked")
 		final Bag<Tuple<?, ?>> bag = (Bag<Tuple<?, ?>>) queryEvaluator.evaluate(driver.getContainer());
 		for (final Tuple<?, ?> tuple : bag) {
 			final Segment segment = (Segment) tuple.getValue("segment");
