@@ -32,18 +32,14 @@ sourceSets {
 	}
 }
 
-task initScripts() << {
-	copy {
-		from 'src-template'
-		into 'src'
-		include '*.groovy'
-	}
+task initScripts(type: Copy) << {
+	from 'src-template'
+	into 'src'
+	include '*.groovy'
 }
 
-task cleanResults() << {
-	delete fileTree('../results') {
-		include '*.csv'
-	}
+task cleanResults(type: Delete) {
+	delete fileTree(dir: '../results', include: '*.csv')
 }
 
 task benchmark(dependsOn: 'classes', type: JavaExec) {
