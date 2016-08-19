@@ -13,7 +13,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.blazegraph.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.RdfBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfigWrapper;
 
 public class BlazegraphBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
 
