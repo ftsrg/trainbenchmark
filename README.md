@@ -57,8 +57,9 @@ Some tools require dependencies, e.g. installing a database manager or adding ar
 The benchmark configuration is defined in the `trainbenchmark-scripts/src/BenchmarkScript.groovy` file.
 
 * Use `gradle shadowJar generate benchmark` to run the benchmark and generate the plots.
-* Add the `plot` goal to generate the plots.
-* Add the `page` goal to run a Jetty server showing the plots.
+* `plot`: generate the plots.
+* `page`: run a Jetty server showing the plots.
+* `cleanresults`: remove the previous benchmark results
 
 ### Importing to Eclipse
 
