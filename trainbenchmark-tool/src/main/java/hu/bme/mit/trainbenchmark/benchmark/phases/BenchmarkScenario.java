@@ -27,12 +27,12 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 		this.comparator = comparator;
 		this.bcw = bcw;
 
-		final BenchmarkConfigCore bcc = bcw.getBenchmarkConfig();
+		final BenchmarkConfigCore bcc = bcw.getBenchmarkConfigCore();
 		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcc.getWorkload(), bcc.getWorkspaceDir(), bcc.getModelFilename(), bcw.getDescription());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {
-		for (int i = 0; i < bcw.getBenchmarkConfig().getRuns(); i++) {
+		for (int i = 0; i < bcw.getBenchmarkConfigCore().getRuns(); i++) {
 			performRun();
 		}
 
@@ -63,7 +63,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 		benchmarkResult.registerQueryTime(queryTime);
 
 		// transformation-recheck iterations
-		for (int i = 0; i < bcw.getBenchmarkConfig().getQueryTransformationCount(); i++) {
+		for (int i = 0; i < bcw.getBenchmarkConfigCore().getQueryTransformationCount(); i++) {
 			final long transformationTime = phaseExecutor.execute(transformationPhase);
 			benchmarkResult.registerTransformationTime(transformationTime);
 

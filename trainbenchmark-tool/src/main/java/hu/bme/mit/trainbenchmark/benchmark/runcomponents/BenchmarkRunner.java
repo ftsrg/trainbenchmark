@@ -16,7 +16,7 @@ public class BenchmarkRunner {
 
 	public static int run(final BenchmarkConfigWrapper bcw) throws IOException, InterruptedException {
 		System.out.println("Running benchmark: " + bcw.getToolName());
-		System.out.println("Model: " + bcw.getBenchmarkConfig().getModelPath());
+		System.out.println("Model: " + bcw.getBenchmarkConfigCore().getModelPath());
 		System.out.println("Description: " + bcw.getDescription());
 
 		final File configFile = File.createTempFile("trainbenchmark-benchmark-", ".conf");
@@ -26,11 +26,11 @@ public class BenchmarkRunner {
 		final String projectName = String.format("trainbenchmark-tool-%s", bcw.getProjectName());
 		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName, projectName, configPath);
 
-		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s", bcw.getBenchmarkConfig().getXms(), bcw.getBenchmarkConfig().getXmx(),
+		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s", bcw.getBenchmarkConfigCore().getXms(), bcw.getBenchmarkConfigCore().getXmx(),
 				jarPath, configPath);
 		final CommandLine cmdLine = CommandLine.parse(javaCommand);
 
-		final long timeoutInSeconds = bcw.getBenchmarkConfig().getTimeout();
+		final long timeoutInSeconds = bcw.getBenchmarkConfigCore().getTimeout();
 		final long timeoutInMilliseconds = timeoutInSeconds * 1000;
 		final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeoutInMilliseconds);
 		final Executor executor = new DefaultExecutor();

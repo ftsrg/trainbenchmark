@@ -22,8 +22,8 @@ public abstract class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected RdfBenchmarkConfigWrapper() {
 	}
 
-	public RdfBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
-		super(benchmarkConfig);
+	public RdfBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final boolean inferencing) {
+		super(bcc);
 		this.inferencing = inferencing;
 	}
 

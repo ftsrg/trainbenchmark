@@ -20,8 +20,8 @@ public class BlazegraphBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper 
 	protected BlazegraphBenchmarkConfigWrapper() {
 	}
 	
-	public BlazegraphBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
-		super(benchmarkConfig, inferencing);
+	public BlazegraphBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final boolean inferencing) {
+		super(bcc, inferencing);
 	}
 	
 	@Override

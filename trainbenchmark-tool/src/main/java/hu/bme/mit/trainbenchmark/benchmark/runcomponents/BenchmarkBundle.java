@@ -41,14 +41,14 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	}
 
 	public void read() throws Exception {
-		final String modelPath = bcw.getBenchmarkConfig().getModelPath() + driver.getPostfix();
+		final String modelPath = bcw.getBenchmarkConfigCore().getModelPath() + driver.getPostfix();
 		driver.read(modelPath);
 	}
 
 	public void initializeOperations() throws Exception {
-		for (final RailwayOperation railwayOperation : bcw.getBenchmarkConfig().getRailwayOperations()) {
+		for (final RailwayOperation railwayOperation : bcw.getBenchmarkConfigCore().getRailwayOperations()) {
 
-			final Optional<String> workspacePath = Optional.of(bcw.getBenchmarkConfig().getWorkspaceDir());
+			final Optional<String> workspacePath = Optional.of(bcw.getBenchmarkConfigCore().getWorkspaceDir());
 
 			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
 					workspacePath, driver);

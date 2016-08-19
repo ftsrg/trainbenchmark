@@ -22,8 +22,8 @@ public class Neo4jBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected Neo4jBenchmarkConfigWrapper() {
 	}
 	
-	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final Neo4jEngine engine) {
-		super(benchmarkConfig);
+	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final Neo4jEngine engine) {
+		super(bcc);
 		this.engine = engine;
 	}
 	

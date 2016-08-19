@@ -17,14 +17,14 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig
 public class IqdCoreDriver extends Driver {
 
 	protected final TrainbenchmarkReader reader = new TrainbenchmarkReader();
-	protected final IqdCoreBenchmarkConfigWrapper config;
+	protected final IqdCoreBenchmarkConfigWrapper bcw;
 	protected final TransactionFactory transactionFactory;
 	protected TrainbenchmarkQuery query;
 	protected Transaction lastTransaction;
 
-	public IqdCoreDriver(final IqdCoreBenchmarkConfigWrapper config, final TransactionFactory transactionFactory) {
+	public IqdCoreDriver(final IqdCoreBenchmarkConfigWrapper bcw, final TransactionFactory transactionFactory) {
 		super();
-		this.config = config;
+		this.bcw = bcw;
 		this.transactionFactory = transactionFactory;
 	}
 
@@ -58,7 +58,7 @@ public class IqdCoreDriver extends Driver {
 	}
 
 	public String getQueryVariant() {
-		return config.getQueryVariant();
+		return bcw.getQueryVariant();
 	}
 
 	public void flushLastTransaction() {
@@ -69,13 +69,13 @@ public class IqdCoreDriver extends Driver {
 	}
 
 	public void maybeMeasureMemory() {
-		final String memPath = config.getMemoryMeasurementPath();
+		final String memPath = bcw.getMemoryMeasurementPath();
 		if (memPath != null) {
 			final MemoryMeter meter = new MemoryMeter();
 			final long memoryB = meter.measureDeep(query);
 			final double memoryMB = memoryB / Math.pow(10, 6);
 			final String line = String.join(",",
-					Arrays.asList(config.getToolName(), config.getQueryVariant(), config.getFileName(), String.format("%.02f", memoryMB))) + "\n";
+					Arrays.asList(bcw.getToolName(), bcw.getQueryVariant(), bcw.getFileName(), String.format("%.02f", memoryMB))) + "\n";
 			try {
 				FileUtils.write(new File(memPath), line, true);
 			} catch (final IOException e) {

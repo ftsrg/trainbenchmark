@@ -6,17 +6,17 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig
 
 public class IqdCoreDriverFactory extends DriverFactory<IqdCoreDriver> {
 
-	protected IqdCoreBenchmarkConfigWrapper config;
+	protected IqdCoreBenchmarkConfigWrapper bcw;
 	protected TransactionFactory transactionFactory;
 
-	public IqdCoreDriverFactory(final IqdCoreBenchmarkConfigWrapper config, final TransactionFactory transactionFactory) {
-		this.config = config;
+	public IqdCoreDriverFactory(final IqdCoreBenchmarkConfigWrapper bcw, final TransactionFactory transactionFactory) {
+		this.bcw = bcw;
 		this.transactionFactory = transactionFactory;
 	}
 	
 	@Override
 	public IqdCoreDriver createInstance() throws Exception {
-		return new IqdCoreDriver(config, transactionFactory);
+		return new IqdCoreDriver(bcw, transactionFactory);
 	}
 
 }

@@ -20,8 +20,8 @@ public class SQLiteBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	protected SQLiteBenchmarkConfigWrapper() {
 	}
 	
-	public SQLiteBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig) {
-		super(benchmarkConfig);
+	public SQLiteBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		super(bcc);
 	}
 	
 	@Override
