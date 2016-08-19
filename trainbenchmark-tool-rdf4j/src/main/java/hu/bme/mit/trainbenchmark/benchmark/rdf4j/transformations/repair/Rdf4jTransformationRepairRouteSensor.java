@@ -11,22 +11,23 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.repair;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+
+import java.util.Collection;
+
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 
-import java.util.Collection;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+public class Rdf4jTransformationRepairRouteSensor<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jRouteSensorMatch, TRdf4jDriver> {
 
-public class Rdf4jTransformationRepairRouteSensor extends Rdf4jTransformation<Rdf4jRouteSensorMatch> {
-
-	public Rdf4jTransformationRepairRouteSensor(final Rdf4jDriver driver) {
+	public Rdf4jTransformationRepairRouteSensor(final TRdf4jDriver driver) {
 		super(driver);
 	}
 

@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigWr
 public class SQLiteBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final SQLiteBenchmarkConfigWrapper sbcw = BenchmarkConfigWrapper.fromFile(args[0], SQLiteBenchmarkConfigWrapper.class);
-		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(sbcw);
+		final SQLiteBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], SQLiteBenchmarkConfigWrapper.class);
+		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(bcw);
 		scenario.performBenchmark();
 	}
 

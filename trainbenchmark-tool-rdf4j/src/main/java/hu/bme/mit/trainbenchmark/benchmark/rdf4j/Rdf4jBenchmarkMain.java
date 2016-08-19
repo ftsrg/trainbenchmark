@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfigWrap
 public class Rdf4jBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Rdf4jBenchmarkConfigWrapper sbcw = BenchmarkConfigWrapper.fromFile(args[0], Rdf4jBenchmarkConfigWrapper.class);
-		final Rdf4jBenchmarkScenario scenario = new Rdf4jBenchmarkScenario(sbcw);
+		final Rdf4jBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], Rdf4jBenchmarkConfigWrapper.class);
+		final Rdf4jBenchmarkScenario scenario = new Rdf4jBenchmarkScenario(bcw);
 		scenario.performBenchmark();
 	}
 

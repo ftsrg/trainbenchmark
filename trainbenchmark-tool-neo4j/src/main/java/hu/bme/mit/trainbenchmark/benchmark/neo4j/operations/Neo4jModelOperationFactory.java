@@ -55,12 +55,8 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 
 	protected final Neo4jEngine neo4jEngine;
 
-	protected Neo4jModelOperationFactory(final Neo4jEngine neo4jEngine) {
+	public Neo4jModelOperationFactory(final Neo4jEngine neo4jEngine) {
 		this.neo4jEngine = neo4jEngine;
-	}
-
-	public static Neo4jModelOperationFactory create(final Neo4jEngine neo4jEngine) {
-		return new Neo4jModelOperationFactory(neo4jEngine);
 	}
 
 	@Override

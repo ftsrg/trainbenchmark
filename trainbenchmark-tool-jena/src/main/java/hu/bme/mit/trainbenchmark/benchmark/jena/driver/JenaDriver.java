@@ -37,7 +37,7 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.driver.RdfDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 
-public class JenaDriver extends RdfDriver<Resource> {
+public class JenaDriver extends RdfDriver {
 
 	protected Model model;
 

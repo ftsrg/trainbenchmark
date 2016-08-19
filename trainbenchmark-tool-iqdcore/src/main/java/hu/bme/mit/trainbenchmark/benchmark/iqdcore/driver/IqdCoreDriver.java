@@ -14,24 +14,23 @@ import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
 
-public class IqdCoreDriver extends Driver<Long> {
+public class IqdCoreDriver extends Driver {
 
+	protected final TrainbenchmarkReader reader = new TrainbenchmarkReader();
+	protected final IqdCoreBenchmarkConfigWrapper config;
 	protected final TransactionFactory transactionFactory;
-	protected final TrainbenchmarkReader reader;
-	private TrainbenchmarkQuery query;
-	private Transaction lastTransaction;
-    private IqdCoreBenchmarkConfigWrapper config;
-	public IqdCoreDriver(final IqdCoreBenchmarkConfigWrapper config,
-						 final TransactionFactory input) {
+	protected TrainbenchmarkQuery query;
+	protected Transaction lastTransaction;
+
+	public IqdCoreDriver(final IqdCoreBenchmarkConfigWrapper config, final TransactionFactory transactionFactory) {
 		super();
-		this.transactionFactory = input;
-		this.reader = new TrainbenchmarkReader();
 		this.config = config;
+		this.transactionFactory = transactionFactory;
 	}
 
 	@Override
 	public void read(final String modelPath) throws Exception {
-		this.lastTransaction = newTransaction();
+		lastTransaction = newTransaction();
 		reader.read(modelPath, lastTransaction);
 	}
 
@@ -40,9 +39,10 @@ public class IqdCoreDriver extends Driver<Long> {
 		return "-inferred.ttl";
 	}
 
-	public void setQuery(TrainbenchmarkQuery query) {
+	public void setQuery(final TrainbenchmarkQuery query) {
 		this.query = query;
 	}
+
 	@Override
 	public void destroy() {
 		query.shutdown();
@@ -56,7 +56,7 @@ public class IqdCoreDriver extends Driver<Long> {
 	public long newKey() {
 		return transactionFactory.newKey();
 	}
-	
+
 	public String getQueryVariant() {
 		return config.getQueryVariant();
 	}
@@ -69,21 +69,16 @@ public class IqdCoreDriver extends Driver<Long> {
 	}
 
 	public void maybeMeasureMemory() {
-		String memPath = config.getMemoryMeasurementPath();
+		final String memPath = config.getMemoryMeasurementPath();
 		if (memPath != null) {
 			final MemoryMeter meter = new MemoryMeter();
-			long memoryB = meter.measureDeep(query);
-			double memoryMB = memoryB / Math.pow(10, 6);
-			String line = String.join(",",
-				Arrays.asList(
-				config.getToolName(),
-				config.getQueryVariant(),
-				config.getFileName(),
-				String.format("%.02f", memoryMB)
-				)) + "\n";
+			final long memoryB = meter.measureDeep(query);
+			final double memoryMB = memoryB / Math.pow(10, 6);
+			final String line = String.join(",",
+					Arrays.asList(config.getToolName(), config.getQueryVariant(), config.getFileName(), String.format("%.02f", memoryMB))) + "\n";
 			try {
 				FileUtils.write(new File(memPath), line, true);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 			}
 		}

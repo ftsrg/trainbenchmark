@@ -19,10 +19,10 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
  * </ul>
  * 
  * @param <TPatternMatch>
- *            defines the data transfer object of the query and transformation operations. ModelFragment objects are the output of the query
- *            and (optionally) the input
+ *            defines the data transfer object of the query and transformation operations. ModelFragment objects are the
+ *            output of the query and (optionally) the input
  */
-public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
+public class ModelOperation<TPatternMatch, TDriver extends Driver> {
 
 	protected final ModelQuery<TPatternMatch, TDriver> query;
 	protected final Optional<ModelTransformation<TPatternMatch, TDriver>> transformation;
@@ -33,20 +33,18 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 		this.transformation = Optional.empty();
 	}
 
-	public ModelOperation(final ModelQuery<TPatternMatch, TDriver> query,
-			final Optional<ModelTransformation<TPatternMatch, TDriver>> transformation) {
+	public ModelOperation(final ModelQuery<TPatternMatch, TDriver> query, final Optional<ModelTransformation<TPatternMatch, TDriver>> transformation) {
 		super();
 		this.query = query;
 		this.transformation = transformation;
 	}
 
-	public static <TPatternMatch, TDriver extends Driver<?>> ModelOperation<TPatternMatch, TDriver> of(
-			final ModelQuery<TPatternMatch, TDriver> query) {
+	public static <TPatternMatch, TDriver extends Driver> ModelOperation<TPatternMatch, TDriver> of(final ModelQuery<TPatternMatch, TDriver> query) {
 		return new ModelOperation<>(query, Optional.empty());
 	}
 
-	public static <TPatternMatch, TDriver extends Driver<?>> ModelOperation<TPatternMatch, TDriver> of(
-			final ModelQuery<TPatternMatch, TDriver> query, final ModelTransformation<TPatternMatch, TDriver> transformation) {
+	public static <TPatternMatch, TDriver extends Driver> ModelOperation<TPatternMatch, TDriver> of(final ModelQuery<TPatternMatch, TDriver> query,
+			final ModelTransformation<TPatternMatch, TDriver> transformation) {
 		return new ModelOperation<>(query, Optional.of(transformation));
 	}
 
@@ -57,5 +55,5 @@ public class ModelOperation<TPatternMatch, TDriver extends Driver<?>> {
 	public Optional<ModelTransformation<TPatternMatch, TDriver>> getTransformation() {
 		return transformation;
 	}
-	
+
 }

@@ -22,7 +22,7 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SqlDriver extends Driver<Long> {
+public abstract class SqlDriver extends Driver {
 
 	protected static final String COLLECT_VERTICES = "SELECT * FROM `%s`;";
 	

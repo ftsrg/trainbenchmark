@@ -51,14 +51,6 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatternMatch, ViatraDriver> {
 
-	protected ViatraModelOperationFactory() {
-
-	}
-
-	public static ViatraModelOperationFactory create() {
-		return new ViatraModelOperationFactory();
-	}
-
 	@Override
 	public ModelOperation<? extends BasePatternMatch, ViatraDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
 			final ViatraDriver driver) throws Exception {

@@ -30,19 +30,15 @@ import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
-public class EmfDriver extends Driver<RailwayElement> {
+public class EmfDriver extends Driver {
 
 	protected RailwayContainer container;
 	protected Resource resource;
 	protected ResourceSet resourceSet;
 
-	protected EmfDriver() {
+	public EmfDriver() {
 		super();
 		EmfUtil.registerExtension();
-	}
-
-	public static EmfDriver create() {
-		return new EmfDriver();
 	}
 
 	@Override

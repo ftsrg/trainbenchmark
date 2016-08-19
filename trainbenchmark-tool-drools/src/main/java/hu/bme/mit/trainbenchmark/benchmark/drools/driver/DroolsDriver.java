@@ -30,13 +30,6 @@ public class DroolsDriver extends EmfDriver {
 	protected KieFileSystem kfs;
 	protected KieSession kSession;
 
-	protected DroolsDriver() {
-	}
-
-	public static DroolsDriver create() {
-		return new DroolsDriver();
-	}
-
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();

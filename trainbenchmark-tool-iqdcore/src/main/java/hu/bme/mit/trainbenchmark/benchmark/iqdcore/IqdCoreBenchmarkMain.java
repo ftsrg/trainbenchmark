@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig
 public class IqdCoreBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final IqdCoreBenchmarkConfigWrapper config = BenchmarkConfigWrapper.fromFile(args[0], IqdCoreBenchmarkConfigWrapper.class);
-		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(config);
+		final IqdCoreBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], IqdCoreBenchmarkConfigWrapper.class);
+		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bcw);
 		scenario.performBenchmark();
 		System.exit(0);
 	}

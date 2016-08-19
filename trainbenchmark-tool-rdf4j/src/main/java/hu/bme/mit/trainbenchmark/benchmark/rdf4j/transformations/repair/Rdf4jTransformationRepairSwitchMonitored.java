@@ -29,9 +29,9 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
 
-public class Rdf4jTransformationRepairSwitchMonitored extends Rdf4jTransformation<Rdf4jSwitchMonitoredMatch> {
+public class Rdf4jTransformationRepairSwitchMonitored<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jSwitchMonitoredMatch, TRdf4jDriver> {
 
-	public Rdf4jTransformationRepairSwitchMonitored(final Rdf4jDriver driver) {
+	public Rdf4jTransformationRepairSwitchMonitored(final TRdf4jDriver driver) {
 		super(driver);
 	}
 

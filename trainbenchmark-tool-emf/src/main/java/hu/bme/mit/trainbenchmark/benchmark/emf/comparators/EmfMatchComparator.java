@@ -17,12 +17,8 @@ import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 
 public class EmfMatchComparator extends BaseMatchComparator<EmfMatch, RailwayElement> {
 
-	protected EmfMatchComparator() {
+	public EmfMatchComparator() {
 		super(new RailwayElementComparator());
 	}
 	
-	public static EmfMatchComparator create() {
-		return new EmfMatchComparator();
-	}
-
 }

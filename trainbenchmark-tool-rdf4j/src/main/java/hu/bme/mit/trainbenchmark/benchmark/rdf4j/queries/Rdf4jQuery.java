@@ -11,29 +11,30 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.queries;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Optional;
 
-public class Rdf4jQuery<TPatternMatch> extends RdfModelQuery<TPatternMatch, Rdf4jDriver> {
+import org.apache.commons.io.FileUtils;
+
+import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+
+public class Rdf4jQuery<TPatternMatch, TRdf4jDriver extends Rdf4jDriver> extends RdfModelQuery<TPatternMatch, TRdf4jDriver> {
 
 	protected final String queryDefinition;
 
-	public Rdf4jQuery(final Rdf4jDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+	public Rdf4jQuery(final TRdf4jDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
 		super(driver, workspaceDir, query);
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath), Charset.forName("UTF-8"));
 	}
 
-	public static <TPatternMatch> Rdf4jQuery<TPatternMatch> create(final Rdf4jDriver driver,
+	public static <TPatternMatch, TRdf4jDriver extends Rdf4jDriver> Rdf4jQuery<TPatternMatch, TRdf4jDriver> create(final TRdf4jDriver driver,
 			final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
-		return new Rdf4jQuery<TPatternMatch>(driver, workspaceDir, query);
+		return new Rdf4jQuery<TPatternMatch, TRdf4jDriver>(driver, workspaceDir, query);
 	}
 
 	@SuppressWarnings("unchecked")

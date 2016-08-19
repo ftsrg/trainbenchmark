@@ -5,30 +5,30 @@ import java.util.Comparator;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.driver.DriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkBundle;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 
-public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
+public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
 
 	protected final PhaseExecutor phaseExecutor = new PhaseExecutor();
 
-	protected final TDriver driver;
-	protected final ModelOperationFactory<TPatternMatch, TDriver> factory;
+	protected final DriverFactory<TDriver> driverFactory;
+	protected final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory;
 	protected final Comparator<TPatternMatch> comparator;
 	protected final TBenchmarkConfigWrapper bcw;
 	protected final BenchmarkResult benchmarkResult;
 
-	public BenchmarkScenario(final TDriver driver, final ModelOperationFactory<TPatternMatch, TDriver> factory,
+	public BenchmarkScenario(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory,
 			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw) throws Exception {
-		this.driver = driver;
-		this.factory = factory;
+		this.driverFactory = driverFactory;
+		this.modelOperationFactory = modelOperationFactory;
 		this.comparator = comparator;
 		this.bcw = bcw;
 
 		final BenchmarkConfigCore bcc = bcw.getBenchmarkConfig();
-		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcc.getWorkload(), bcc.getWorkspaceDir(),
-				bcc.getModelFilename(), bcw.getDescription());
+		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcc.getWorkload(), bcc.getWorkspaceDir(), bcc.getModelFilename(), bcw.getDescription());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {
@@ -43,8 +43,8 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver<?>, TBenchm
 	protected void performRun() throws Exception {
 		benchmarkResult.nextRun();
 
-		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkBundle = new BenchmarkBundle<>(
-				driver, factory, comparator, bcw, benchmarkResult);
+		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkBundle = new BenchmarkBundle<>(driverFactory, modelOperationFactory,
+				comparator, bcw, benchmarkResult);
 
 		final InitializeOperationsPhase initializeOperationsPhase = new InitializeOperationsPhase(benchmarkBundle);
 		final ReadPhase readPhase = new ReadPhase(benchmarkBundle);

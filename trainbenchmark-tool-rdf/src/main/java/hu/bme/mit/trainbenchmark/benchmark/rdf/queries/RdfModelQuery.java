@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class RdfModelQuery<TMatch, TDriver extends Driver<?>> extends ModelQuery<TMatch, TDriver> {
+public abstract class RdfModelQuery<TMatch, TDriver extends Driver> extends ModelQuery<TMatch, TDriver> {
 
 	protected final String queryPath;
 

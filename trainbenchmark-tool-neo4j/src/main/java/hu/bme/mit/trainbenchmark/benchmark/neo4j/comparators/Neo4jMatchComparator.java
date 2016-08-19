@@ -18,12 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 
 public class Neo4jMatchComparator extends BaseMatchComparator<Neo4jMatch, Node> {
 
-	protected Neo4jMatchComparator() {
+	public Neo4jMatchComparator() {
 		super(new NodeComparator());
-	}
-	
-	public static Neo4jMatchComparator create() {
-		return new Neo4jMatchComparator();
 	}
 
 }

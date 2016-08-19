@@ -16,7 +16,7 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class ModelQuery<TPatternMatch, TDriver extends Driver<?>> implements AutoCloseable {
+public abstract class ModelQuery<TPatternMatch, TDriver extends Driver> implements AutoCloseable {
 
 	protected final RailwayQuery query;
 	protected final TDriver driver;

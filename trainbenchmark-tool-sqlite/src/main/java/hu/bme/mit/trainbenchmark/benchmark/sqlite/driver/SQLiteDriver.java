@@ -23,13 +23,6 @@ import org.apache.commons.io.FileUtils;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
 public class SQLiteDriver extends SqlDriver {
-
-	protected SQLiteDriver() {
-	}
-	
-	public static SQLiteDriver create() {
-		return new SQLiteDriver();
-	}
 	
 	@Override
 	public void read(final String modelPath) throws IOException, InterruptedException, SQLException {

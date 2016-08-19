@@ -13,7 +13,7 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 
-public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>> {
+public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver> {
 
 	protected final ModelOperation<TPatternMatch, TDriver> operation;
 	protected final Comparator<? super TPatternMatch> comparator;
@@ -29,7 +29,7 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver<?>
 		this.random = random;
 	}
 
-	public static <TPatternMatch, TDriver extends Driver<?>> QueryShuffleTransformation<TPatternMatch, TDriver> of(
+	public static <TPatternMatch, TDriver extends Driver> QueryShuffleTransformation<TPatternMatch, TDriver> of(
 			final ModelOperation<TPatternMatch, TDriver> operation, final Comparator<? super TPatternMatch> comparator, final Random random) {
 		return new QueryShuffleTransformation<>(operation, comparator, random);
 	}

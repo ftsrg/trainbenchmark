@@ -39,7 +39,6 @@ public class IqdCoreActiveRouteTest extends ActiveRouteTest {
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
 		final int messageSize = 16;
-		System.out.println();
 		final IqdCoreBenchmarkConfigWrapper config = new IqdCoreBenchmarkConfigWrapper(bcc, messageSize, variant, null);
 		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(config);
 		final BenchmarkResult result = scenario.performBenchmark();

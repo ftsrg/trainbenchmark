@@ -11,19 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.inject;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSwitchMonitoredInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import org.eclipse.rdf4j.model.IRI;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Rdf4jTransformationInjectSwitchMonitored extends Rdf4jTransformation<Rdf4jSwitchMonitoredInjectMatch> {
+import org.eclipse.rdf4j.model.IRI;
 
-	public Rdf4jTransformationInjectSwitchMonitored(final Rdf4jDriver driver) {
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSwitchMonitoredInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+
+public class Rdf4jTransformationInjectSwitchMonitored<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jSwitchMonitoredInjectMatch, TRdf4jDriver> {
+
+	public Rdf4jTransformationInjectSwitchMonitored(final TRdf4jDriver driver) {
 		super(driver);
 	}
 

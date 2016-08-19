@@ -19,7 +19,7 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
  * @param <TElement>
  *            the type of the individual model elements
  */
-public abstract class Driver<TElement> {
+public abstract class Driver {
 
 	/**
 	 * Should be overridden for tools with support for transactions.
