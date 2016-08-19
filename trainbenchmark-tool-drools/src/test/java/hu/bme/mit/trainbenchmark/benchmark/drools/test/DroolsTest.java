@@ -10,11 +10,11 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools6.test;
+package hu.bme.mit.trainbenchmark.benchmark.drools.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.DroolsBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.config.DroolsBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.drools.DroolsBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 

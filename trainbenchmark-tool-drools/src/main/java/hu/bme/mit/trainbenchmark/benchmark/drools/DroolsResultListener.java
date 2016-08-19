@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools6;
+package hu.bme.mit.trainbenchmark.benchmark.drools;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,12 +18,12 @@ import java.util.Set;
 import org.kie.api.runtime.rule.Row;
 import org.kie.api.runtime.rule.ViewChangedEventListener;
 
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsPosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsSemaphoreNeighborMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsSwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.benchmark.drools6.matches.DroolsSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 

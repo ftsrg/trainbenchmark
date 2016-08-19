@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.drools6.matches;
+package hu.bme.mit.trainbenchmark.benchmark.drools.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE1;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE2;
