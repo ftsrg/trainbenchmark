@@ -1,15 +1,9 @@
-sudo: required
-dist: trusty
-language: groovy
+language: java
 jdk:
   - oraclejdk8
-before_install:
-  - sudo apt-get purge -y mysql-server
-install:
-  - scripts/install-mysql-silent.sh
 script:
   - sudo service mysql restart
   - ./gradlew initScripts
-  - scripts/build.sh
+  - ./gradlew build --exclude-task test
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
