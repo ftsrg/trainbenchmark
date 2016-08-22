@@ -10,6 +10,7 @@ install:
 script:
   - sudo service mysql restart
   - ./gradlew initScripts
-  - scripts/build.sh
+#  - scripts/build.sh
+  - ./gradlew build --continue
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
