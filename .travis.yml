@@ -1,6 +1,7 @@
 language: r
 jdk:
   - oraclejdk8
+install: false
 script:
   - sudo service mysql restart
   - ./gradlew initScripts
