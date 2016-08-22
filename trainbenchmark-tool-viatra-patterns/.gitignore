@@ -1,4 +1,5 @@
 !.project
+!.classpath
 !src-gen/hu/bme/mit/trainbenchmark/benchmark/viatra/*.java
 src-gen/hu/bme/mit/trainbenchmark/benchmark/viatra/.gitignore
 !src-gen/hu/bme/mit/trainbenchmark/benchmark/viatra/util/*.java
