@@ -32,4 +32,10 @@
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored"/>
   </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborInject" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborInject"/>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.ActiveRoute" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.ActiveRoute" id="hu.bme.mit.trainbenchmark.benchmark.viatra.ActiveRoute"/>
+  </extension>
 </plugin>
