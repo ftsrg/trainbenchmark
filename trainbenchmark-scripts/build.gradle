@@ -32,7 +32,7 @@ sourceSets {
 	}
 }
 
-task initScripts(type: Copy) << {
+task initScripts(type: Copy) {
 	from 'src-template'
 	into 'src'
 	include '*.groovy'
