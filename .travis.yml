@@ -1,9 +1,8 @@
-language: r
+language: java
 jdk:
   - oraclejdk8
 install: false
 script:
-  - sudo service mysql restart
   - ./gradlew initScripts
   - ./gradlew build --exclude-task test
 notifications:
