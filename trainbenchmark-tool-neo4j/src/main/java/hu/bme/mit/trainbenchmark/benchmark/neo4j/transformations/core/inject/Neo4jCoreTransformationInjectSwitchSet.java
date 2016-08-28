@@ -31,7 +31,6 @@ public class Neo4jCoreTransformationInjectSwitchSet extends Neo4jCoreTransformat
 	public void activate(final Collection<Neo4jSwitchSetInjectMatch> matches) {
 		for (final Neo4jSwitchSetInjectMatch match : matches) {
 			final Node sw = match.getSw();
-			// System.out.println(sw.getProperty(ModelConstants.CURRENTPOSITION));
 			final String currentPositionString = (String) sw.getProperty(ModelConstants.CURRENTPOSITION);
 			final Position currentPosition = Position.valueOf(currentPositionString);
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];

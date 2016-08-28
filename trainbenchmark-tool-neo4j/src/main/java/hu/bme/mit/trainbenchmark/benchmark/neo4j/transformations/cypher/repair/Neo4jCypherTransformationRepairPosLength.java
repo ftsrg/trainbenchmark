@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-import org.neo4j.graphdb.Node;
-
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
@@ -34,9 +32,9 @@ public class Neo4jCypherTransformationRepairPosLength extends Neo4jCypherTransfo
 	@Override
 	public void activate(final Collection<Neo4jPosLengthMatch> matches) throws IOException {
 		for (final Neo4jPosLengthMatch match : matches) {
-			final Node segment = match.getSegment();
-
-			final Map<String, Object> parameters = ImmutableMap.of(QueryConstants.VAR_SEGMENT, segment.getId());
+			final Map<String, Object> parameters = ImmutableMap.of( //
+					QueryConstants.VAR_SEGMENT, match.getSegment().getId() //
+			);
 			driver.runTransformation(transformationDefinition, parameters);
 		}
 	}
