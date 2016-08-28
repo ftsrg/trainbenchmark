@@ -1,12 +1,22 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public abstract class Neo4jCypherTransformation<TNeo4jMatch extends Neo4jMatch> extends Neo4jTransformation<TNeo4jMatch> {
 
-	public Neo4jCypherTransformation(final Neo4jDriver driver) {
+	protected final String transformationDefinition; 
+	
+	public Neo4jCypherTransformation(final Neo4jDriver driver, final String workspaceDir, final RailwayOperation operation) throws IOException {
 		super(driver);
+		this.transformationDefinition = FileUtils.readFileToString(new File(workspaceDir + Neo4jConstants.CYPHER_DIR + "transformations/" + operation + ".cyp"));
 	}
 
 }
