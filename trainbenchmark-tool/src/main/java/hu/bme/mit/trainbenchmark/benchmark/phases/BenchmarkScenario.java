@@ -52,26 +52,28 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 		final TransformationPhase transformationPhase = new TransformationPhase(benchmarkBundle);
 		final CleanupPhase cleanupPhase = new CleanupPhase(benchmarkBundle);
 
-		phaseExecutor.execute(initializeOperationsPhase);
+		try {
+			phaseExecutor.execute(initializeOperationsPhase);
 
-		// read
-		final long readTime = phaseExecutor.execute(readPhase);
-		benchmarkResult.registerReadTime(readTime);
+			// read
+			final long readTime = phaseExecutor.execute(readPhase);
+			benchmarkResult.registerReadTime(readTime);
 
-		// check
-		final long queryTime = phaseExecutor.execute(queryPhase);
-		benchmarkResult.registerQueryTime(queryTime);
+			// check
+			final long queryTime = phaseExecutor.execute(queryPhase);
+			benchmarkResult.registerQueryTime(queryTime);
 
-		// transformation-recheck iterations
-		for (int i = 0; i < bcw.getBenchmarkConfigCore().getQueryTransformationCount(); i++) {
-			final long transformationTime = phaseExecutor.execute(transformationPhase);
-			benchmarkResult.registerTransformationTime(transformationTime);
+			// transformation-recheck iterations
+			for (int i = 0; i < bcw.getBenchmarkConfigCore().getQueryTransformationCount(); i++) {
+				final long transformationTime = phaseExecutor.execute(transformationPhase);
+				benchmarkResult.registerTransformationTime(transformationTime);
 
-			final long recheckTime = phaseExecutor.execute(queryPhase);
-			benchmarkResult.registerQueryTime(recheckTime);
+				final long recheckTime = phaseExecutor.execute(queryPhase);
+				benchmarkResult.registerQueryTime(recheckTime);
+			}
+		} finally {
+			phaseExecutor.execute(cleanupPhase);
 		}
-
-		phaseExecutor.execute(cleanupPhase);
 	}
 
 }

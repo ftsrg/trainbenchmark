@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -18,22 +18,23 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class Neo4jCypherTransformationInjectPosLength extends Neo4jCypherTransformation<Neo4jPosLengthInjectMatch> {
+public class Neo4jCypherTransformationRepairSemaphoreNeighbor extends Neo4jCypherTransformation<Neo4jSemaphoreNeighborMatch> {
 
-	public Neo4jCypherTransformationInjectPosLength(final Neo4jDriver driver, final String workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayOperation.POSLENGTH_INJECT);
+	public Neo4jCypherTransformationRepairSemaphoreNeighbor(final Neo4jDriver driver, final String workspaceDir) throws IOException {
+		super(driver, workspaceDir, RailwayOperation.SEMAPHORENEIGHBOR_REPAIR);
 	}
 
 	@Override
-	public void activate(final Collection<Neo4jPosLengthInjectMatch> matches) throws IOException {
-		for (final Neo4jPosLengthInjectMatch match : matches) {
-			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SEGMENT, match.getSegment().getId() //
+	public void activate(final Collection<Neo4jSemaphoreNeighborMatch> matches) throws IOException {
+		for (final Neo4jSemaphoreNeighborMatch match : matches) {
+			final Map<String, Object> parameters = ImmutableMap.of(//
+					QueryConstants.VAR_ROUTE2, match.getRoute2().getId(), //
+					QueryConstants.VAR_SEMAPHORE, match.getSemaphore().getId() //
 			);
 			driver.runTransformation(transformationDefinition, parameters);
 		}

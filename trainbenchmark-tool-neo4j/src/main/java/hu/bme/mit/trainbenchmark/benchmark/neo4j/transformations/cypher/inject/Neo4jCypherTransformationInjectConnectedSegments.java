@@ -18,22 +18,24 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class Neo4jCypherTransformationInjectPosLength extends Neo4jCypherTransformation<Neo4jPosLengthInjectMatch> {
+public class Neo4jCypherTransformationInjectConnectedSegments extends Neo4jCypherTransformation<Neo4jConnectedSegmentsInjectMatch> {
 
-	public Neo4jCypherTransformationInjectPosLength(final Neo4jDriver driver, final String workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayOperation.POSLENGTH_INJECT);
+	public Neo4jCypherTransformationInjectConnectedSegments(final Neo4jDriver driver, final String workspaceDir) throws IOException {
+		super(driver, workspaceDir, RailwayOperation.CONNECTEDSEGMENTS_INJECT);
 	}
 
 	@Override
-	public void activate(final Collection<Neo4jPosLengthInjectMatch> matches) throws IOException {
-		for (final Neo4jPosLengthInjectMatch match : matches) {
+	public void activate(final Collection<Neo4jConnectedSegmentsInjectMatch> matches) throws IOException {
+		for (final Neo4jConnectedSegmentsInjectMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SEGMENT, match.getSegment().getId() //
+					QueryConstants.VAR_SENSOR, match.getSensor().getId(), //
+					QueryConstants.VAR_SEGMENT1, match.getSegment1().getId(), //
+					QueryConstants.VAR_SEGMENT3, match.getSegment3().getId() //
 			);
 			driver.runTransformation(transformationDefinition, parameters);
 		}

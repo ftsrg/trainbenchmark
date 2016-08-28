@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -18,22 +18,22 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class Neo4jCypherTransformationInjectPosLength extends Neo4jCypherTransformation<Neo4jPosLengthInjectMatch> {
+public class Neo4jCypherTransformationRepairConnectedSegments extends Neo4jCypherTransformation<Neo4jConnectedSegmentsMatch> {
 
-	public Neo4jCypherTransformationInjectPosLength(final Neo4jDriver driver, final String workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayOperation.POSLENGTH_INJECT);
+	public Neo4jCypherTransformationRepairConnectedSegments(final Neo4jDriver driver, final String workspaceDir) throws IOException {
+		super(driver, workspaceDir, RailwayOperation.CONNECTEDSEGMENTS_REPAIR);
 	}
 
 	@Override
-	public void activate(final Collection<Neo4jPosLengthInjectMatch> matches) throws IOException {
-		for (final Neo4jPosLengthInjectMatch match : matches) {
+	public void activate(final Collection<Neo4jConnectedSegmentsMatch> matches) throws IOException {
+		for (final Neo4jConnectedSegmentsMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SEGMENT, match.getSegment().getId() //
+					QueryConstants.VAR_SEGMENT2, match.getSegment2().getId() //
 			);
 			driver.runTransformation(transformationDefinition, parameters);
 		}

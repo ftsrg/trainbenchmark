@@ -42,8 +42,18 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair.Neo
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair.Neo4jCoreTransformationRepairSemaphoreNeighbor;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair.Neo4jCoreTransformationRepairSwitchMonitored;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair.Neo4jCoreTransformationRepairSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject.Neo4jCypherTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject.Neo4jCypherTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject.Neo4jCypherTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject.Neo4jCypherTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject.Neo4jCypherTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject.Neo4jCypherTransformationInjectSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair.Neo4jCypherTransformationRepairConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair.Neo4jCypherTransformationRepairPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair.Neo4jCypherTransformationRepairRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair.Neo4jCypherTransformationRepairSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair.Neo4jCypherTransformationRepairSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair.Neo4jCypherTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
@@ -200,19 +210,22 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 
 				// ConnectedSegments
 			case CONNECTEDSEGMENTS: {
-				final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = new Neo4jCoreQueryConnectedSegments(driver);
+				final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
 				final ModelOperation<Neo4jConnectedSegmentsMatch, Neo4jDriver> operation = ModelOperation.of(query);
 				return operation;
 			}
 			case CONNECTEDSEGMENTS_INJECT: {
-				final ModelQuery<Neo4jConnectedSegmentsInjectMatch, Neo4jDriver> query = new Neo4jCoreQueryConnectedSegmentsInject(driver);
-				final Neo4jCoreTransformation<Neo4jConnectedSegmentsInjectMatch> transformation = new Neo4jCoreTransformationInjectConnectedSegments(driver);
+				final ModelQuery<Neo4jConnectedSegmentsInjectMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir,
+						RailwayQuery.CONNECTEDSEGMENTS_INJECT);
+				final Neo4jCypherTransformation<Neo4jConnectedSegmentsInjectMatch> transformation = new Neo4jCypherTransformationInjectConnectedSegments(driver,
+						workspaceDir);
 				final ModelOperation<Neo4jConnectedSegmentsInjectMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 			case CONNECTEDSEGMENTS_REPAIR: {
-				final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = new Neo4jCoreQueryConnectedSegments(driver);
-				final Neo4jCoreTransformation<Neo4jConnectedSegmentsMatch> transformation = new Neo4jCoreTransformationRepairConnectedSegments(driver);
+				final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+				final Neo4jCypherTransformation<Neo4jConnectedSegmentsMatch> transformation = new Neo4jCypherTransformationRepairConnectedSegments(driver,
+						workspaceDir);
 				final ModelOperation<Neo4jConnectedSegmentsMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
@@ -238,76 +251,84 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 
 				// RouteSensor
 			case ROUTESENSOR: {
-				final ModelQuery<Neo4jRouteSensorMatch, Neo4jDriver> query = new Neo4jCoreQueryRouteSensor(driver);
+				final ModelQuery<Neo4jRouteSensorMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
 				final ModelOperation<Neo4jRouteSensorMatch, Neo4jDriver> operation = ModelOperation.of(query);
 				return operation;
 			}
 			case ROUTESENSOR_INJECT: {
-				final ModelQuery<Neo4jRouteSensorInjectMatch, Neo4jDriver> query = new Neo4jCoreQueryRouteSensorInject(driver);
-				final Neo4jCoreTransformation<Neo4jRouteSensorInjectMatch> transformation = new Neo4jCoreTransformationInjectRouteSensor(driver);
+				final ModelQuery<Neo4jRouteSensorInjectMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir,
+						RailwayQuery.ROUTESENSOR_INJECT);
+				final Neo4jCypherTransformation<Neo4jRouteSensorInjectMatch> transformation = new Neo4jCypherTransformationInjectRouteSensor(driver,
+						workspaceDir);
 				final ModelOperation<Neo4jRouteSensorInjectMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 			case ROUTESENSOR_REPAIR: {
-				final ModelQuery<Neo4jRouteSensorMatch, Neo4jDriver> query = new Neo4jCoreQueryRouteSensor(driver);
-				final Neo4jCoreTransformation<Neo4jRouteSensorMatch> transformation = new Neo4jCoreTransformationRepairRouteSensor(driver);
+				final ModelQuery<Neo4jRouteSensorMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
+				final Neo4jCypherTransformation<Neo4jRouteSensorMatch> transformation = new Neo4jCypherTransformationRepairRouteSensor(driver, workspaceDir);
 				final ModelOperation<Neo4jRouteSensorMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 
 				// SemaphoreNeighbor
 			case SEMAPHORENEIGHBOR: {
-				final ModelQuery<Neo4jSemaphoreNeighborMatch, Neo4jDriver> query = new Neo4jCoreQuerySemaphoreNeighbor(driver);
+				final ModelQuery<Neo4jSemaphoreNeighborMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
 				final ModelOperation<Neo4jSemaphoreNeighborMatch, Neo4jDriver> operation = ModelOperation.of(query);
 				return operation;
 			}
 			case SEMAPHORENEIGHBOR_INJECT: {
-				final ModelQuery<Neo4jSemaphoreNeighborInjectMatch, Neo4jDriver> query = new Neo4jCoreQuerySemaphoreNeighborInject(driver);
-				final Neo4jCoreTransformation<Neo4jSemaphoreNeighborInjectMatch> transformation = new Neo4jCoreTransformationInjectSemaphoreNeighbor(driver);
+				final ModelQuery<Neo4jSemaphoreNeighborInjectMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir,
+						RailwayQuery.SEMAPHORENEIGHBOR_INJECT);
+				final Neo4jCypherTransformation<Neo4jSemaphoreNeighborInjectMatch> transformation = new Neo4jCypherTransformationInjectSemaphoreNeighbor(driver,
+						workspaceDir);
 				final ModelOperation<Neo4jSemaphoreNeighborInjectMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 			case SEMAPHORENEIGHBOR_REPAIR: {
-				final ModelQuery<Neo4jSemaphoreNeighborMatch, Neo4jDriver> query = new Neo4jCoreQuerySemaphoreNeighbor(driver);
-				final Neo4jCoreTransformation<Neo4jSemaphoreNeighborMatch> transformation = new Neo4jCoreTransformationRepairSemaphoreNeighbor(driver);
+				final ModelQuery<Neo4jSemaphoreNeighborMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
+				final Neo4jCypherTransformation<Neo4jSemaphoreNeighborMatch> transformation = new Neo4jCypherTransformationRepairSemaphoreNeighbor(driver,
+						workspaceDir);
 				final ModelOperation<Neo4jSemaphoreNeighborMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 
 				// SwitchMonitored
 			case SWITCHMONITORED: {
-				final ModelQuery<Neo4jSwitchMonitoredMatch, Neo4jDriver> query = new Neo4jCoreQuerySwitchMonitored(driver);
+				final ModelQuery<Neo4jSwitchMonitoredMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
 				final ModelOperation<Neo4jSwitchMonitoredMatch, Neo4jDriver> operation = ModelOperation.of(query);
 				return operation;
 			}
 			case SWITCHMONITORED_INJECT: {
-				final ModelQuery<Neo4jSwitchMonitoredInjectMatch, Neo4jDriver> query = new Neo4jCoreQuerySwitchMonitoredInject(driver);
-				final Neo4jCoreTransformation<Neo4jSwitchMonitoredInjectMatch> transformation = new Neo4jCoreTransformationInjectSwitchMonitored(driver);
+				final ModelQuery<Neo4jSwitchMonitoredInjectMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir,
+						RailwayQuery.SWITCHMONITORED_INJECT);
+				final Neo4jCypherTransformation<Neo4jSwitchMonitoredInjectMatch> transformation = new Neo4jCypherTransformationInjectSwitchMonitored(driver,
+						workspaceDir);
 				final ModelOperation<Neo4jSwitchMonitoredInjectMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 			case SWITCHMONITORED_REPAIR: {
-				final ModelQuery<Neo4jSwitchMonitoredMatch, Neo4jDriver> query = new Neo4jCoreQuerySwitchMonitored(driver);
-				final Neo4jCoreTransformation<Neo4jSwitchMonitoredMatch> transformation = new Neo4jCoreTransformationRepairSwitchMonitored(driver);
+				final ModelQuery<Neo4jSwitchMonitoredMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
+				final Neo4jCypherTransformation<Neo4jSwitchMonitoredMatch> transformation = new Neo4jCypherTransformationRepairSwitchMonitored(driver,
+						workspaceDir);
 				final ModelOperation<Neo4jSwitchMonitoredMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 
 				// SwitchSet
 			case SWITCHSET: {
-				final ModelQuery<Neo4jSwitchSetMatch, Neo4jDriver> query = new Neo4jCoreQuerySwitchSet(driver);
+				final ModelQuery<Neo4jSwitchSetMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
 				final ModelOperation<Neo4jSwitchSetMatch, Neo4jDriver> operation = ModelOperation.of(query);
 				return operation;
 			}
 			case SWITCHSET_INJECT: {
-				final ModelQuery<Neo4jSwitchSetInjectMatch, Neo4jDriver> query = new Neo4jCoreQuerySwitchSetInject(driver);
-				final Neo4jCoreTransformation<Neo4jSwitchSetInjectMatch> transformation = new Neo4jCoreTransformationInjectSwitchSet(driver);
+				final ModelQuery<Neo4jSwitchSetInjectMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET_INJECT);
+				final Neo4jCypherTransformation<Neo4jSwitchSetInjectMatch> transformation = new Neo4jCypherTransformationInjectSwitchSet(driver, workspaceDir);
 				final ModelOperation<Neo4jSwitchSetInjectMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}
 			case SWITCHSET_REPAIR: {
-				final ModelQuery<Neo4jSwitchSetMatch, Neo4jDriver> query = new Neo4jCoreQuerySwitchSet(driver);
-				final Neo4jCoreTransformation<Neo4jSwitchSetMatch> transformation = new Neo4jCoreTransformationRepairSwitchSet(driver);
+				final ModelQuery<Neo4jSwitchSetMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
+				final Neo4jCypherTransformation<Neo4jSwitchSetMatch> transformation = new Neo4jCypherTransformationRepairSwitchSet(driver, workspaceDir);
 				final ModelOperation<Neo4jSwitchSetMatch, Neo4jDriver> operation = ModelOperation.of(query, transformation);
 				return operation;
 			}

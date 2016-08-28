@@ -1,0 +1,8 @@
+MATCH (sensor), (segment1)-[c:connectsTo]->(segment3)
+WHERE id(sensor) = { sensor }
+  AND id(segment1) = { segment1 }
+  AND id(segment3) = { segment3 }
+CREATE (segment2:Segment)-[:monitoredBy]->(sensor)
+CREATE (segment1)-[:connectsTo]->(segment2)
+CREATE (segment2)-[:connectsTo]->(segment3)
+DELETE c
