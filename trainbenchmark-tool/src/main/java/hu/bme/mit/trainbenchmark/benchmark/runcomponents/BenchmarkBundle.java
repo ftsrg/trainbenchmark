@@ -48,10 +48,10 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	public void initializeOperations() throws Exception {
 		for (final RailwayOperation railwayOperation : bcw.getBenchmarkConfigCore().getRailwayOperations()) {
 
-			final Optional<String> workspacePath = Optional.of(bcw.getBenchmarkConfigCore().getWorkspaceDir());
+			final Optional<String> workspaceDir = Optional.of(bcw.getBenchmarkConfigCore().getWorkspaceDir());
 
 			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
-					workspacePath, driver);
+					workspaceDir, driver);
 			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation
 					.of(operation, comparator, random);
 			qsts.add(qst);

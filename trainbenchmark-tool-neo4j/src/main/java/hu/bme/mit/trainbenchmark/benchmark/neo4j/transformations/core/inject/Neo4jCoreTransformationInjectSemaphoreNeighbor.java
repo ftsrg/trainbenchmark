@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.inject;
 
 import java.util.Collection;
 
@@ -17,12 +17,12 @@ import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jTransformationInjectSemaphoreNeighbor extends Neo4jTransformation<Neo4jSemaphoreNeighborInjectMatch> {
+public class Neo4jCoreTransformationInjectSemaphoreNeighbor extends Neo4jCoreTransformation<Neo4jSemaphoreNeighborInjectMatch> {
 
-	public Neo4jTransformationInjectSemaphoreNeighbor(final Neo4jDriver driver) {
+	public Neo4jCoreTransformationInjectSemaphoreNeighbor(final Neo4jDriver driver) {
 		super(driver);
 	}
 

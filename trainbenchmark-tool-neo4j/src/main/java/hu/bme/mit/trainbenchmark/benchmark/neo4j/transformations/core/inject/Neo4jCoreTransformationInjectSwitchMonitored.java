@@ -9,31 +9,29 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.inject;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jTransformationInjectRouteSensor extends Neo4jTransformation<Neo4jRouteSensorInjectMatch> {
+public class Neo4jCoreTransformationInjectSwitchMonitored extends Neo4jCoreTransformation<Neo4jSwitchMonitoredInjectMatch> {
 
-	public Neo4jTransformationInjectRouteSensor(final Neo4jDriver driver) {
+	public Neo4jCoreTransformationInjectSwitchMonitored(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Neo4jRouteSensorInjectMatch> matches) {
-		for (final Neo4jRouteSensorInjectMatch match : matches) {
-			final Iterable<Relationship> gatherss = match.getRoute().getRelationships(Neo4jConstants.relationshipTypeGathers);
-			for (final Relationship gathers : gatherss) {
-				if (gathers.getEndNode().equals(match.getSensor())) {
-					gathers.delete();
-				}
+	public void activate(final Collection<Neo4jSwitchMonitoredInjectMatch> matches) {
+		for (final Neo4jSwitchMonitoredInjectMatch match : matches) {
+			final Iterable<Relationship> sensors = match.getSw().getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
+			for (final Relationship sensor : sensors) {
+				sensor.delete();
 			}
 		}
 	}
