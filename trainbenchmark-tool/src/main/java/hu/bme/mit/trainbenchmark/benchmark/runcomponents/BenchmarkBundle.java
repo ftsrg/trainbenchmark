@@ -3,7 +3,6 @@ package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.Optional;
 import java.util.Random;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
@@ -26,8 +25,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
 	public BenchmarkBundle(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> factory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw,
-			final BenchmarkResult benchmarkResults) throws Exception {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw, final BenchmarkResult benchmarkResults) throws Exception {
 		this.driver = driverFactory.createInstance();
 		this.factory = factory;
 		this.comparator = comparator;
@@ -36,7 +34,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	}
 
 	public void initializeDriver() throws Exception {
-		
+
 		driver.initialize();
 	}
 
@@ -48,12 +46,10 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	public void initializeOperations() throws Exception {
 		for (final RailwayOperation railwayOperation : bcw.getBenchmarkConfigCore().getRailwayOperations()) {
 
-			final Optional<String> workspaceDir = Optional.of(bcw.getBenchmarkConfigCore().getWorkspaceDir());
+			final String workspaceDir = bcw.getBenchmarkConfigCore().getWorkspaceDir();
 
-			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
-					workspaceDir, driver);
-			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation
-					.of(operation, comparator, random);
+			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation, workspaceDir, driver);
+			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation.of(operation, comparator, random);
 			qsts.add(qst);
 		}
 	}

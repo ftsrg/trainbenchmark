@@ -56,7 +56,7 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 	}
 
 	@Override
-	public ModelOperation<? extends Neo4jMatch, Neo4jDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+	public ModelOperation<? extends Neo4jMatch, Neo4jDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final Neo4jDriver driver) throws Exception {
 
 		switch (neo4jEngine) {

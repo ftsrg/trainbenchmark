@@ -26,7 +26,7 @@ public class SQLiteTransformationInjectRouteSensor extends SQLiteTransformation<
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('route', ?), ('sensor', ?);";
 
-	public SQLiteTransformationInjectRouteSensor(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
+	public SQLiteTransformationInjectRouteSensor(final SQLiteDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.ROUTESENSOR, Scenario.INJECT);
 	}
 

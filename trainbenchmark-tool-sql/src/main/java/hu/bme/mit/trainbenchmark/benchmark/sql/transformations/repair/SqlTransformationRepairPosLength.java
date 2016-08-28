@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SqlTransformationRepairPosLength<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlPosLengthMatch, TSqlDriver> {
 
-	public SqlTransformationRepairPosLength(final TSqlDriver driver, final Optional<String> workspaceDir) 
+	public SqlTransformationRepairPosLength(final TSqlDriver driver, final String workspaceDir) 
 			throws IOException {
 		super(driver, workspaceDir, RailwayQuery.POSLENGTH, Scenario.REPAIR);
 	}

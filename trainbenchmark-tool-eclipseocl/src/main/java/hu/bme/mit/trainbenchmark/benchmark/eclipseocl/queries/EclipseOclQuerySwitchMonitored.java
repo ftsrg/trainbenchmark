@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.railway.Switch;
 
 public class EclipseOclQuerySwitchMonitored extends EclipseOclQuery<EmfSwitchMonitoredMatch> {
 
-	public EclipseOclQuerySwitchMonitored(final EmfDriver driver, final Optional<String> workspaceDir) throws Exception {
+	public EclipseOclQuerySwitchMonitored(final EmfDriver driver, final String workspaceDir) throws Exception {
 		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
 	}
 

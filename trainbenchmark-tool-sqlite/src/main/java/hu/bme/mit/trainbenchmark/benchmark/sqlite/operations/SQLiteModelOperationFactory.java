@@ -38,7 +38,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 public class SQLiteModelOperationFactory extends ModelOperationFactory<SqlMatch, SQLiteDriver> {
 
 	@Override
-	public ModelOperation<? extends SqlMatch, SQLiteDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+	public ModelOperation<? extends SqlMatch, SQLiteDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final SQLiteDriver driver) throws Exception {
 
 		switch (operationEnum) {

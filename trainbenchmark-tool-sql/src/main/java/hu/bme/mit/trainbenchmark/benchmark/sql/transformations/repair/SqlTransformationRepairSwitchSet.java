@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SqlTransformationRepairSwitchSet<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlSwitchSetMatch, TSqlDriver> {
 
-	public SqlTransformationRepairSwitchSet(final TSqlDriver driver, final Optional<String> workspaceDir)
+	public SqlTransformationRepairSwitchSet(final TSqlDriver driver, final String workspaceDir)
 			throws IOException {
 		super(driver, workspaceDir, RailwayQuery.SWITCHSET, Scenario.REPAIR);
 	}

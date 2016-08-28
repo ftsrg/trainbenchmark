@@ -26,7 +26,7 @@ public class SQLiteTransformationInjectConnectedSegments extends SQLiteTransform
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('sensor', ?), ('segment1', ?), ('segment3', ?);";
 	
-	public SQLiteTransformationInjectConnectedSegments(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
+	public SQLiteTransformationInjectConnectedSegments(final SQLiteDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, Scenario.INJECT);
 	}
 

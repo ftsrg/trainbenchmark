@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.drools.queries;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.Message.Level;
@@ -31,18 +30,15 @@ public class DroolsQuery<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dro
 	protected DroolsResultListener listener;
 	protected LiveQuery liveQuery;
 
-	protected DroolsQuery(final DroolsDriver driver, final Optional<String> workspaceDir,
-			final RailwayQuery query) throws IOException {
+	protected DroolsQuery(final DroolsDriver driver, final String workspaceDir, final RailwayQuery query) throws IOException {
 		super(query, driver);
 
-		final String queryFile = workspaceDir.get()
-				+ "/trainbenchmark-tool-drools/src/main/resources/queries/" + query + ".drl";
+		final String queryFile = workspaceDir + "/trainbenchmark-tool-drools/src/main/resources/queries/" + query + ".drl";
 		final File file = new File(queryFile);
 		if (!file.exists()) {
 			throw new IOException("Query file not found: " + queryFile);
 		}
-		driver.getKfs().write("src/main/resources/" + query + ".drl",
-				driver.getKieServices().getResources().newFileSystemResource(queryFile));
+		driver.getKfs().write("src/main/resources/" + query + ".drl", driver.getKieServices().getResources().newFileSystemResource(queryFile));
 
 		final KieBuilder kieBuilder = driver.getKieServices().newKieBuilder(driver.getKfs());
 		kieBuilder.buildAll();
@@ -51,8 +47,8 @@ public class DroolsQuery<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dro
 		}
 	}
 
-	public static <TMatch extends EmfMatch> DroolsQuery<TMatch> create(final DroolsDriver driver,
-			final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+	public static <TMatch extends EmfMatch> DroolsQuery<TMatch> create(final DroolsDriver driver, final String workspaceDir, final RailwayQuery query)
+			throws IOException {
 		return new DroolsQuery<TMatch>(driver, workspaceDir, query);
 	}
 

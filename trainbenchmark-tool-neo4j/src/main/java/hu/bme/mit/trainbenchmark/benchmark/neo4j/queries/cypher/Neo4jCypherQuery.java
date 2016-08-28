@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.cypher;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 
@@ -29,11 +28,11 @@ public class Neo4jCypherQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 	protected final RailwayQuery query;
 	protected final String queryDefinition;
 
-	public Neo4jCypherQuery(final Neo4jDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+	public Neo4jCypherQuery(final Neo4jDriver driver, final String workspaceDir, final RailwayQuery query) throws IOException {
 		super(query, driver);
 
 		this.query = query;
-		this.queryDefinition = FileUtils.readFileToString(new File(workspaceDir.get() + Neo4jConstants.CYPHER_DIR + "queries/" + query + ".cyp"));
+		this.queryDefinition = FileUtils.readFileToString(new File(workspaceDir + Neo4jConstants.CYPHER_DIR + "queries/" + query + ".cyp"));
 	}
 
 	@Override

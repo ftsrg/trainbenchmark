@@ -52,7 +52,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatternMatch, ViatraDriver> {
 
 	@Override
-	public ModelOperation<? extends BasePatternMatch, ViatraDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+	public ModelOperation<? extends BasePatternMatch, ViatraDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final ViatraDriver driver) throws Exception {
 
 		switch (operationEnum) {

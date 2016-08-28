@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 
@@ -30,10 +29,10 @@ public class SqlQuery<TSqlMatch extends SqlMatch, TSqlDriver extends SqlDriver> 
 	protected final String queryDefinition; 
 	protected PreparedStatement statement;
 	
-	public SqlQuery(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException, SQLException {
+	public SqlQuery(final TSqlDriver driver, final String workspaceDir, final RailwayQuery query) throws IOException, SQLException {
 		super(query, driver);
 
-		final String queryPath = workspaceDir.get() + driver.getResourceDirectory() + "queries/" + query + ".sql";
+		final String queryPath = workspaceDir + driver.getResourceDirectory() + "queries/" + query + ".sql";
 		queryDefinition = FileUtils.readFileToString(new File(queryPath));
 	}
 

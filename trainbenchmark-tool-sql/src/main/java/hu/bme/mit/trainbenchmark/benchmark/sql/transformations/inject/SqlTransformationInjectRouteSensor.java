@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SqlTransformationInjectRouteSensor<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlRouteSensorInjectMatch, TSqlDriver> {
 
-	public SqlTransformationInjectRouteSensor(final TSqlDriver driver, final Optional<String> workspaceDir) throws IOException {
+	public SqlTransformationInjectRouteSensor(final TSqlDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.ROUTESENSOR, Scenario.INJECT);
 	}
 

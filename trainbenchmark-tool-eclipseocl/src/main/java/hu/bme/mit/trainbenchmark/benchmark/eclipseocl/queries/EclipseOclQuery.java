@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.ocl.ParserException;
@@ -37,12 +36,11 @@ public abstract class EclipseOclQuery<TMatch extends EmfMatch> extends ModelQuer
 	protected Query queryEvaluator;
 	protected RailwayContainer container;
 
-	public EclipseOclQuery(final EmfDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
-			throws IOException, ParserException {
+	public EclipseOclQuery(final EmfDriver driver, final String workspaceDir, final RailwayQuery query) throws IOException, ParserException {
 		super(query, driver);
 
-		final String oclQueryDefinition = FileUtils.readFileToString(new File(
-				workspaceDir.get() + "/trainbenchmark-tool-eclipseocl/src/main/resources/queries/" + query + ".ocl"));
+		final String oclQueryDefinition = FileUtils
+				.readFileToString(new File(workspaceDir + "/trainbenchmark-tool-eclipseocl/src/main/resources/queries/" + query + ".ocl"));
 
 		ocl = OCL.newInstance();
 		final Helper helper = ocl.createOCLHelper();

@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 
@@ -29,10 +28,10 @@ public abstract class SqlTransformation<TSqlMatch extends SqlMatch, TSqlDriver e
 	protected PreparedStatement preparedUpdateStatement;
 	protected String updateQuery;
 		
-	protected SqlTransformation(final TSqlDriver driver, final Optional<String> workspaceDir, final RailwayQuery query, final Scenario scenario) throws IOException {
+	protected SqlTransformation(final TSqlDriver driver, final String workspaceDir, final RailwayQuery query, final Scenario scenario) throws IOException {
 		super(driver);
 		
-		final String updatePath = workspaceDir.get() + driver.getResourceDirectory() + "transformations/" + scenario + query + ".sql";
+		final String updatePath = workspaceDir + driver.getResourceDirectory() + "transformations/" + scenario + query + ".sql";
 		this.updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
 	

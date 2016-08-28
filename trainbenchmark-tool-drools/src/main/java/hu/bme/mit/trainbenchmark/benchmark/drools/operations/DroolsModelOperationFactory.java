@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.drools.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.drools.driver.DroolsDriver;
 import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.drools.matches.DroolsPosLengthMatch;
@@ -45,7 +43,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 public class DroolsModelOperationFactory extends ModelOperationFactory<EmfMatch, DroolsDriver> {
 
 	@Override
-	public ModelOperation<? extends EmfMatch, DroolsDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+	public ModelOperation<? extends EmfMatch, DroolsDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final DroolsDriver driver) throws Exception {
 
 		switch (operationEnum) {

@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SqlTransformationRepairConnectedSegments<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlConnectedSegmentsMatch, TSqlDriver> {
 
-	public SqlTransformationRepairConnectedSegments(final TSqlDriver driver, final Optional<String> workspaceDir)
+	public SqlTransformationRepairConnectedSegments(final TSqlDriver driver, final String workspaceDir)
 			throws IOException {
 		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, Scenario.REPAIR);
 	}

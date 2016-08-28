@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreActiveRouteMatch;
@@ -40,38 +38,35 @@ import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreMatch, IqdCoreDriver> {
 
 	protected final TransactionFactory transactionFactory;
-	protected final String RELATIVE_QUERY_DIR = "trainbenchmark-tool-iqdcore/src/main/resources/";
 
 	public IqdCoreModelOperationFactory(final TransactionFactory transactionFactory) {
 		this.transactionFactory = transactionFactory;
 	}
 
 	@Override
-	public ModelOperation<? extends IqdCoreMatch, IqdCoreDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspacePath,
+	public ModelOperation<? extends IqdCoreMatch, IqdCoreDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final IqdCoreDriver driver) throws Exception {
-		final String queryDirectory = workspacePath.get() + RELATIVE_QUERY_DIR;
-
 		switch (operationEnum) {
 		// ActiveRoute
 		case ACTIVEROUTE: {
-			final IqdCoreQuery<IqdCoreActiveRouteMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.ACTIVEROUTE, transactionFactory);
+			final IqdCoreQuery<IqdCoreActiveRouteMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.ACTIVEROUTE, transactionFactory);
 			final ModelOperation<IqdCoreActiveRouteMatch, IqdCoreDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 			// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
-			final IqdCoreQuery<IqdCoreConnectedSegmentsMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
+			final IqdCoreQuery<IqdCoreConnectedSegmentsMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
 			final ModelOperation<IqdCoreConnectedSegmentsMatch, IqdCoreDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			final IqdCoreQuery<IqdCoreConnectedSegmentsInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.CONNECTEDSEGMENTS_INJECT, transactionFactory);
+			final IqdCoreQuery<IqdCoreConnectedSegmentsInjectMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS_INJECT, transactionFactory);
 			final IqdCoreTransformation<IqdCoreConnectedSegmentsInjectMatch> transformation = new IqdCoreTransformationInjectConnectedSegments(driver);
 			final ModelOperation<IqdCoreConnectedSegmentsInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
-			final IqdCoreQuery<IqdCoreConnectedSegmentsMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
+			final IqdCoreQuery<IqdCoreConnectedSegmentsMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
 			final IqdCoreTransformation<IqdCoreConnectedSegmentsMatch> transformation = new IqdCoreTransformationRepairConnectedSegments(driver);
 			final ModelOperation<IqdCoreConnectedSegmentsMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -79,18 +74,18 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 
 			// PosLength
 		case POSLENGTH: {
-			final IqdCoreQuery<IqdCorePosLengthMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.POSLENGTH, transactionFactory);
+			final IqdCoreQuery<IqdCorePosLengthMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.POSLENGTH, transactionFactory);
 			final ModelOperation<IqdCorePosLengthMatch, IqdCoreDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			final IqdCoreQuery<IqdCorePosLengthInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.POSLENGTH_INJECT, transactionFactory);
+			final IqdCoreQuery<IqdCorePosLengthInjectMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.POSLENGTH_INJECT, transactionFactory);
 			final IqdCoreTransformation<IqdCorePosLengthInjectMatch> transformation = new IqdCoreTransformationInjectPosLength(driver);
 			final ModelOperation<IqdCorePosLengthInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case POSLENGTH_REPAIR: {
-			final IqdCoreQuery<IqdCorePosLengthMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.POSLENGTH, transactionFactory);
+			final IqdCoreQuery<IqdCorePosLengthMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.POSLENGTH, transactionFactory);
 			final IqdCoreTransformation<IqdCorePosLengthMatch> transformation = new IqdCoreTransformationRepairPosLength(driver);
 			final ModelOperation<IqdCorePosLengthMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -98,18 +93,18 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 
 			// RouteSensor
 		case ROUTESENSOR: {
-			final IqdCoreQuery<IqdCoreRouteSensorMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.ROUTESENSOR, transactionFactory);
+			final IqdCoreQuery<IqdCoreRouteSensorMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR, transactionFactory);
 			final ModelOperation<IqdCoreRouteSensorMatch, IqdCoreDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			final IqdCoreQuery<IqdCoreRouteSensorInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.ROUTESENSOR_INJECT, transactionFactory);
+			final IqdCoreQuery<IqdCoreRouteSensorInjectMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR_INJECT, transactionFactory);
 			final IqdCoreTransformation<IqdCoreRouteSensorInjectMatch> transformation = new IqdCoreTransformationInjectRouteSensor(driver);
 			final ModelOperation<IqdCoreRouteSensorInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
-			final IqdCoreQuery<IqdCoreRouteSensorMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.ROUTESENSOR, transactionFactory);
+			final IqdCoreQuery<IqdCoreRouteSensorMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR, transactionFactory);
 			final IqdCoreTransformation<IqdCoreRouteSensorMatch> transformation = new IqdCoreTransformationRepairRouteSensor(driver);
 			final ModelOperation<IqdCoreRouteSensorMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -117,18 +112,18 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 
 			// SemaphoreNeighbor
 		case SEMAPHORENEIGHBOR: {
-			final IqdCoreQuery<IqdCoreSemaphoreNeighborMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
+			final IqdCoreQuery<IqdCoreSemaphoreNeighborMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
 			final ModelOperation<IqdCoreSemaphoreNeighborMatch, IqdCoreDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			final IqdCoreQuery<IqdCoreSemaphoreNeighborInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SEMAPHORENEIGHBOR_INJECT, transactionFactory);
+			final IqdCoreQuery<IqdCoreSemaphoreNeighborInjectMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR_INJECT, transactionFactory);
 			final IqdCoreTransformation<IqdCoreSemaphoreNeighborInjectMatch> transformation = new IqdCoreTransformationInjectSemaphoreNeighbor(driver);
 			final ModelOperation<IqdCoreSemaphoreNeighborInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
-			final IqdCoreQuery<IqdCoreSemaphoreNeighborMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
+			final IqdCoreQuery<IqdCoreSemaphoreNeighborMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
 			final IqdCoreTransformation<IqdCoreSemaphoreNeighborMatch> transformation = new IqdCoreTransformationRepairSemaphoreNeighbor(driver);
 			final ModelOperation<IqdCoreSemaphoreNeighborMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -136,18 +131,18 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 
 			// SwitchMonitored
 		case SWITCHMONITORED: {
-			final IqdCoreQuery<IqdCoreSwitchMonitoredMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHMONITORED, transactionFactory);
+			final IqdCoreQuery<IqdCoreSwitchMonitoredMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, transactionFactory);
 			final ModelOperation<IqdCoreSwitchMonitoredMatch, IqdCoreDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			final IqdCoreQuery<IqdCoreSwitchMonitoredInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHMONITORED_INJECT, transactionFactory);
+			final IqdCoreQuery<IqdCoreSwitchMonitoredInjectMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED_INJECT, transactionFactory);
 			final IqdCoreTransformation<IqdCoreSwitchMonitoredInjectMatch> transformation = new IqdCoreTransformationInjectSwitchMonitored(driver);
 			final ModelOperation<IqdCoreSwitchMonitoredInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
-			final IqdCoreQuery<IqdCoreSwitchMonitoredMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHMONITORED, transactionFactory);
+			final IqdCoreQuery<IqdCoreSwitchMonitoredMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, transactionFactory);
 			final IqdCoreTransformation<IqdCoreSwitchMonitoredMatch> transformation = new IqdCoreTransformationRepairSwitchMonitored(driver);
 			final ModelOperation<IqdCoreSwitchMonitoredMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -155,18 +150,18 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 
 			// SwitchSet
 		case SWITCHSET: {
-			final IqdCoreQuery<IqdCoreSwitchSetMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHSET, transactionFactory);
+			final IqdCoreQuery<IqdCoreSwitchSetMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SWITCHSET, transactionFactory);
 			final ModelOperation<IqdCoreSwitchSetMatch, IqdCoreDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			final IqdCoreQuery<IqdCoreSwitchSetInjectMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHSET_INJECT, transactionFactory);
+			final IqdCoreQuery<IqdCoreSwitchSetInjectMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SWITCHSET_INJECT, transactionFactory);
 			final IqdCoreTransformation<IqdCoreSwitchSetInjectMatch> transformation = new IqdCoreTransformationInjectSwitchSet(driver);
 			final ModelOperation<IqdCoreSwitchSetInjectMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case SWITCHSET_REPAIR: {
-			final IqdCoreQuery<IqdCoreSwitchSetMatch> query = IqdCoreQuery.create(driver, queryDirectory, RailwayQuery.SWITCHSET, transactionFactory);
+			final IqdCoreQuery<IqdCoreSwitchSetMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.SWITCHSET, transactionFactory);
 			final IqdCoreTransformation<IqdCoreSwitchSetMatch> transformation = new IqdCoreTransformationRepairSwitchSet(driver);
 			final ModelOperation<IqdCoreSwitchSetMatch, IqdCoreDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
