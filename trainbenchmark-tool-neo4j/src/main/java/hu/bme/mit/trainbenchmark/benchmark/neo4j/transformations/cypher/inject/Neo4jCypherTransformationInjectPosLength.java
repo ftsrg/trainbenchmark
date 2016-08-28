@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -20,20 +20,20 @@ import org.neo4j.graphdb.Node;
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class Neo4jCypherTransformationRepairPosLength extends Neo4jCypherTransformation<Neo4jPosLengthMatch> {
+public class Neo4jCypherTransformationInjectPosLength extends Neo4jCypherTransformation<Neo4jPosLengthInjectMatch> {
 
-	public Neo4jCypherTransformationRepairPosLength(final Neo4jDriver driver, final String workspaceDir) throws IOException {
+	public Neo4jCypherTransformationInjectPosLength(final Neo4jDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayOperation.POSLENGTH_REPAIR);
 	}
 
 	@Override
-	public void activate(final Collection<Neo4jPosLengthMatch> matches) throws IOException {
-		for (final Neo4jPosLengthMatch match : matches) {
+	public void activate(final Collection<Neo4jPosLengthInjectMatch> matches) throws IOException {
+		for (final Neo4jPosLengthInjectMatch match : matches) {
 			final Node segment = match.getSegment();
 
 			final Map<String, Object> parameters = ImmutableMap.of(QueryConstants.VAR_SEGMENT, segment.getId());

@@ -18,7 +18,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -83,8 +82,7 @@ public class Neo4jDriver extends Driver {
 		try (Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 			xmlGraphMLReader.nodeLabels(true);
-			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(modelPath)),
-					MapNodeCache.usingHashMap());
+			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(modelPath)), MapNodeCache.usingHashMap());
 			tx.success();
 		}
 	}
@@ -93,23 +91,21 @@ public class Neo4jDriver extends Driver {
 	public String getPostfix() {
 		return ".graphml";
 	}
-	
-	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition, final Map<String, Object> parameters) throws IOException {
+
+	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
 		final Collection<Neo4jMatch> results = new ArrayList<>();
 
-		try (Transaction tx = graphDb.beginTx()) {
-			final Result executionResult = graphDb.execute(queryDefinition, parameters);
-			while (executionResult.hasNext()) {
-				final Map<String, Object> row = executionResult.next();
-				results.add(Neo4jMatch.createMatch(query, row));
-			}
+		final Result executionResult = graphDb.execute(queryDefinition);
+		while (executionResult.hasNext()) {
+			final Map<String, Object> row = executionResult.next();
+			results.add(Neo4jMatch.createMatch(query, row));
 		}
 
 		return results;
 	}
-	
-	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
-		return runQuery(query, queryDefinition, Collections.emptyMap());
+
+	public void runTransformation(final String transformationDefinition, final Map<String, Object> parameters) throws IOException {
+		graphDb.execute(transformationDefinition, parameters);
 	}
 
 	// utility

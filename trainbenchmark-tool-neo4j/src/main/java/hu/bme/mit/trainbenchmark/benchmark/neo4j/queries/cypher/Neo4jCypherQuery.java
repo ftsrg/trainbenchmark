@@ -23,7 +23,7 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jCypherQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
+public class Neo4jCypherQuery<TNeo4jMatch extends Neo4jMatch> extends ModelQuery<TNeo4jMatch, Neo4jDriver> {
 
 	protected final RailwayQuery query;
 	protected final String queryDefinition;
@@ -35,9 +35,10 @@ public class Neo4jCypherQuery extends ModelQuery<Neo4jMatch, Neo4jDriver> {
 		this.queryDefinition = FileUtils.readFileToString(new File(workspaceDir + Neo4jConstants.CYPHER_DIR + "queries/" + query + ".cyp"));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Neo4jMatch> evaluate() throws IOException {
-		return driver.runQuery(query, queryDefinition);
+	public Collection<TNeo4jMatch> evaluate() throws IOException {
+		return (Collection<TNeo4jMatch>) driver.runQuery(query, queryDefinition);
 	}
 
 }

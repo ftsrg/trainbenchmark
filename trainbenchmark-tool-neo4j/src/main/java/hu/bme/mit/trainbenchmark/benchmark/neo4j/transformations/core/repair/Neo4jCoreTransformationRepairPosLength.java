@@ -32,7 +32,7 @@ public class Neo4jCoreTransformationRepairPosLength extends Neo4jCoreTransformat
 		for (final Neo4jPosLengthMatch plm : matches) {
 			final Node segment = plm.getSegment();
 			try {
-				final Integer length = plm.getLength();
+				final Integer length = (Integer) segment.getProperty(ModelConstants.LENGTH);
 				segment.setProperty(ModelConstants.LENGTH, -length + 1);
 			} catch (final NotFoundException e) {
 				// do nothing (node has been removed)
