@@ -18,6 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -93,11 +94,11 @@ public class Neo4jDriver extends Driver {
 		return ".graphml";
 	}
 	
-	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
+	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition, final Map<String, Object> parameters) throws IOException {
 		final Collection<Neo4jMatch> results = new ArrayList<>();
 
 		try (Transaction tx = graphDb.beginTx()) {
-			final Result executionResult = graphDb.execute(queryDefinition);
+			final Result executionResult = graphDb.execute(queryDefinition, parameters);
 			while (executionResult.hasNext()) {
 				final Map<String, Object> row = executionResult.next();
 				results.add(Neo4jMatch.createMatch(query, row));
@@ -105,6 +106,10 @@ public class Neo4jDriver extends Driver {
 		}
 
 		return results;
+	}
+	
+	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {
+		return runQuery(query, queryDefinition, Collections.emptyMap());
 	}
 
 	// utility

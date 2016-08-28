@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.repair;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
 
 import java.util.Collection;
 
@@ -18,12 +18,12 @@ import org.neo4j.graphdb.NotFoundException;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class Neo4jTransformationRepairPosLength extends Neo4jTransformation<Neo4jPosLengthMatch> {
+public class Neo4jCoreTransformationRepairPosLength extends Neo4jCoreTransformation<Neo4jPosLengthMatch> {
 
-	public Neo4jTransformationRepairPosLength(final Neo4jDriver driver) {
+	public Neo4jCoreTransformationRepairPosLength(final Neo4jDriver driver) {
 		super(driver);
 	}
 

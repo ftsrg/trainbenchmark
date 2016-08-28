@@ -1,10 +1,23 @@
 
 package hu.bme.mit.trainbenchmark.neo4j;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
+
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.RelationshipType;
-
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.*;
 
 public class Neo4jConstants {
 
@@ -26,4 +39,6 @@ public class Neo4jConstants {
 	public static final RelationshipType relationshipTypeMonitoredBy = RelationshipType.withName(MONITORED_BY);
 	public static final RelationshipType relationshipTypeTarget = RelationshipType.withName(TARGET);
 
+	public static final String CYPHER_DIR = "/trainbenchmark-tool-neo4j/src/main/resources/";
+	
 }

@@ -9,29 +9,31 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.inject;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.inject;
 
 import java.util.Collection;
 
 import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jTransformationInjectSwitchMonitored extends Neo4jTransformation<Neo4jSwitchMonitoredInjectMatch> {
+public class Neo4jCoreTransformationInjectRouteSensor extends Neo4jCoreTransformation<Neo4jRouteSensorInjectMatch> {
 
-	public Neo4jTransformationInjectSwitchMonitored(final Neo4jDriver driver) {
+	public Neo4jCoreTransformationInjectRouteSensor(final Neo4jDriver driver) {
 		super(driver);
 	}
 
 	@Override
-	public void activate(final Collection<Neo4jSwitchMonitoredInjectMatch> matches) {
-		for (final Neo4jSwitchMonitoredInjectMatch match : matches) {
-			final Iterable<Relationship> sensors = match.getSw().getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
-			for (final Relationship sensor : sensors) {
-				sensor.delete();
+	public void activate(final Collection<Neo4jRouteSensorInjectMatch> matches) {
+		for (final Neo4jRouteSensorInjectMatch match : matches) {
+			final Iterable<Relationship> gatherss = match.getRoute().getRelationships(Neo4jConstants.relationshipTypeGathers);
+			for (final Relationship gathers : gatherss) {
+				if (gathers.getEndNode().equals(match.getSensor())) {
+					gathers.delete();
+				}
 			}
 		}
 	}
