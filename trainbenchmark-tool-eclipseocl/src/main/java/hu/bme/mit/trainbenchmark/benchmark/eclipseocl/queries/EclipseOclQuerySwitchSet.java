@@ -28,7 +28,7 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 public class EclipseOclQuerySwitchSet extends EclipseOclQuery<EmfSwitchSetMatch> {
 
-	public EclipseOclQuerySwitchSet(final EmfDriver driver, final Optional<String> workspaceDir) throws Exception {
+	public EclipseOclQuerySwitchSet(final EmfDriver driver, final String workspaceDir) throws Exception {
 		super(driver, workspaceDir, RailwayQuery.SWITCHSET);
 	}
 

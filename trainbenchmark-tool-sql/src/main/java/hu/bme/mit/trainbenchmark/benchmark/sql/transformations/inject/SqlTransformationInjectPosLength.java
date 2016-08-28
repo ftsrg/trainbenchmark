@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SqlTransformationInjectPosLength<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlPosLengthInjectMatch, TSqlDriver> {
 
-	public SqlTransformationInjectPosLength(final TSqlDriver driver, final Optional<String> workspaceDir) throws IOException {
+	public SqlTransformationInjectPosLength(final TSqlDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.POSLENGTH, Scenario.INJECT);
 	}
 

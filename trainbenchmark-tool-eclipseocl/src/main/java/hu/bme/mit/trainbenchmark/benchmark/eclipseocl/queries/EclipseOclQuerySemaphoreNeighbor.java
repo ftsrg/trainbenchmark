@@ -28,7 +28,7 @@ import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 public class EclipseOclQuerySemaphoreNeighbor extends EclipseOclQuery<EmfSemaphoreNeighborMatch> {
 
-	public EclipseOclQuerySemaphoreNeighbor(final EmfDriver driver, final Optional<String> workspaceDir) throws Exception {
+	public EclipseOclQuerySemaphoreNeighbor(final EmfDriver driver, final String workspaceDir) throws Exception {
 		super(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
 	}
 

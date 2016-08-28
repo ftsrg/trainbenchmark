@@ -26,7 +26,7 @@ public class SQLiteTransformationRepairSwitchMonitored extends SQLiteTransformat
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('switch', ?);";
 	
-	public SQLiteTransformationRepairSwitchMonitored(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
+	public SQLiteTransformationRepairSwitchMonitored(final SQLiteDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, Scenario.REPAIR);
 	}
 

@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import hu.bme.mit.incqueryds.ConfigReader;
 import hu.bme.mit.incqueryds.TransactionFactory;
@@ -31,11 +30,12 @@ import scala.collection.immutable.Vector;
 public class IqdCoreQuery<TPatternMatch extends IqdCoreMatch> extends RdfModelQuery<TPatternMatch, IqdCoreDriver> {
 
 	private final TrainbenchmarkQuery queryEngine;
-
-	public IqdCoreQuery(final IqdCoreDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
+	private final String RELATIVE_QUERY_DIR = "/trainbenchmark-tool-iqdcore/src/main/resources/";
+	
+	public IqdCoreQuery(final IqdCoreDriver driver, final String workspaceDir, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
-		super(driver, Optional.of(queryDirectory), query);
-		final String yamlPath = queryDirectory + query + driver.getQueryVariant() + ".yaml";
+		super(driver, workspaceDir, query);
+		final String yamlPath = workspaceDir + RELATIVE_QUERY_DIR + query + driver.getQueryVariant() + ".yaml";
 		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath), false);
 		input.subscribe(queryEngine.inputLookup());
 		driver.setQuery(queryEngine);

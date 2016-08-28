@@ -28,7 +28,7 @@ import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 public class EclipseOclQueryRouteSensor extends EclipseOclQuery<EmfRouteSensorMatch> {
 
-	public EclipseOclQueryRouteSensor(final EmfDriver driver, final Optional<String> workspaceDir) throws Exception {
+	public EclipseOclQueryRouteSensor(final EmfDriver driver, final String workspaceDir) throws Exception {
 		super(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
 	}
 

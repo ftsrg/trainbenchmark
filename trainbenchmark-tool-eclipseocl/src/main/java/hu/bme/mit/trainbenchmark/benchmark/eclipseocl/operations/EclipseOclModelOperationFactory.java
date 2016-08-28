@@ -50,7 +50,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 public class EclipseOclModelOperationFactory extends ModelOperationFactory<EmfMatch, EmfDriver> {
 
 	@Override
-	public ModelOperation<? extends EmfMatch, EmfDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspaceDir,
+	public ModelOperation<? extends EmfMatch, EmfDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final EmfDriver driver) throws Exception {
 
 		switch (operationEnum) {

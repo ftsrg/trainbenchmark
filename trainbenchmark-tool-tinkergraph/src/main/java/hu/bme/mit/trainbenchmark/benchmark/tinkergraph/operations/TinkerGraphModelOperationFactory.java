@@ -49,7 +49,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver> extends ModelOperationFactory<TinkerGraphMatch, TDriver> {
 
 	@Override
-	public ModelOperation<? extends TinkerGraphMatch, TDriver> createOperation(final RailwayOperation operationEnum, final Optional<String> workspacePath,
+	public ModelOperation<? extends TinkerGraphMatch, TDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final TDriver driver) throws Exception {
 
 		switch (operationEnum) {

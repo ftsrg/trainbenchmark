@@ -33,13 +33,13 @@ public class JenaQuery<TPatternMatch extends JenaMatch> extends RdfModelQuery<TP
 
 	protected Query jenaQuery;
 
-	public JenaQuery(final JenaDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
+	public JenaQuery(final JenaDriver driver, final String workspaceDir, final RailwayQuery query)
 			throws IOException {
 		super(driver, workspaceDir, query);
 		this.jenaQuery = QueryFactory.read(queryPath);
 	}
 	
-	public static <TPatternMatch extends JenaMatch> JenaQuery<TPatternMatch> create(final JenaDriver driver, final Optional<String> workspaceDir, final RailwayQuery query)
+	public static <TPatternMatch extends JenaMatch> JenaQuery<TPatternMatch> create(final JenaDriver driver, final String workspaceDir, final RailwayQuery query)
 			throws IOException {
 		return new JenaQuery<TPatternMatch>(driver, workspaceDir, query);
 	}

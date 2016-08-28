@@ -26,7 +26,7 @@ public class SQLiteTransformationRepairConnectedSegments extends SQLiteTransform
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('segment1', ?), ('segment2', ?), ('segment3', ?);";
 	
-	public SQLiteTransformationRepairConnectedSegments(final SQLiteDriver driver, final Optional<String> workspaceDir) throws IOException {
+	public SQLiteTransformationRepairConnectedSegments(final SQLiteDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, Scenario.REPAIR);
 	}
 

@@ -27,13 +27,13 @@ public class Rdf4jQuery<TPatternMatch, TRdf4jDriver extends Rdf4jDriver> extends
 
 	protected final String queryDefinition;
 
-	public Rdf4jQuery(final TRdf4jDriver driver, final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+	public Rdf4jQuery(final TRdf4jDriver driver, final String workspaceDir, final RailwayQuery query) throws IOException {
 		super(driver, workspaceDir, query);
 		this.queryDefinition = FileUtils.readFileToString(new File(queryPath), Charset.forName("UTF-8"));
 	}
 
 	public static <TPatternMatch, TRdf4jDriver extends Rdf4jDriver> Rdf4jQuery<TPatternMatch, TRdf4jDriver> create(final TRdf4jDriver driver,
-			final Optional<String> workspaceDir, final RailwayQuery query) throws IOException {
+			final String workspaceDir, final RailwayQuery query) throws IOException {
 		return new Rdf4jQuery<TPatternMatch, TRdf4jDriver>(driver, workspaceDir, query);
 	}
 

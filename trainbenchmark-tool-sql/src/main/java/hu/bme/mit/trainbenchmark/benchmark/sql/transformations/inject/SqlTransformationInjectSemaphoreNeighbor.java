@@ -24,7 +24,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public class SqlTransformationInjectSemaphoreNeighbor<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlSemaphoreNeighborInjectMatch, TSqlDriver> {
 
-	public SqlTransformationInjectSemaphoreNeighbor(final TSqlDriver driver, final Optional<String> workspaceDir) throws IOException {
+	public SqlTransformationInjectSemaphoreNeighbor(final TSqlDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR, Scenario.INJECT);
 	}
 
