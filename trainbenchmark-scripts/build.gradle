@@ -22,8 +22,6 @@ dependencies {
 	compile project(':trainbenchmark-tool-sqlite')
 	compile project(':trainbenchmark-tool-tinkergraph')
 	compile project(':trainbenchmark-tool-viatra')
-
-	compile 'in.ashwanthkumar:slack-java-webhook:0.0.6'
 }
 
 sourceSets {

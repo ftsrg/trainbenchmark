@@ -2,12 +2,11 @@ plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
 
 shadowJar {
 	classifier = 'fat'
-    mergeServiceFiles()
+	mergeServiceFiles()
 	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.blazegraph.BlazegraphBenchmarkMain' }
 }
 
-
 dependencies {
-  compile project(':trainbenchmark-tool-rdf4j')
-  compile group: 'com.blazegraph', name: 'bigdata-core', version: '2.1.2'
+	compile project(':trainbenchmark-tool-rdf4j')
+	compile group: 'com.blazegraph', name: 'bigdata-core', version: '2.1.2'
 }

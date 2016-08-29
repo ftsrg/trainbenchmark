@@ -1,3 +1,4 @@
+package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
