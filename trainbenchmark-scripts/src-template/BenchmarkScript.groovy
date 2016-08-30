@@ -1,4 +1,4 @@
-import BenchmarkReporter
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkReporter
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigWrapper
