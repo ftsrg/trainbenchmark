@@ -26,3 +26,10 @@ subprojects {
 		maven { url "https://raw.github.com/neo4j-contrib/m2/master/releases" }
 	}
 }
+
+ext {
+	commonsExecVersion = "1.3"
+	kryoVersion = "4.0.0"
+	junitVersion = "4.12"
+}
+
