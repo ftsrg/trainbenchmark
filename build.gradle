@@ -1,6 +1,4 @@
 allprojects  {
-	apply plugin: 'maven'
-
 	group = 'hu.bme.mit.trainbenchmark'
 	version = '1.0.0-SNAPSHOT'
 }
