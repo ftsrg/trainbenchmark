@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/ActiveRoute.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -85,12 +88,16 @@ public final class ActiveRouteQuerySpecification extends BaseGeneratedEMFQuerySp
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static ActiveRouteQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pRoute);
     
     @Override
     public String getFullyQualifiedName() {
@@ -104,9 +111,7 @@ public final class ActiveRouteQuerySpecification extends BaseGeneratedEMFQuerySp
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -119,7 +124,7 @@ public final class ActiveRouteQuerySpecification extends BaseGeneratedEMFQuerySp
       		PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
       		PVariable var___1_ = body.getOrCreateVariableByName("_<1>");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_route, "route")
+      		   new ExportedParameter(body, var_route, parameter_pRoute)
       		));
       		// 	Route(route)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));

@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/PosLength.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -88,12 +91,16 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static PosLengthQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pSegment = new PParameter("segment", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pSegment);
     
     @Override
     public String getFullyQualifiedName() {
@@ -107,9 +114,7 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("segment", "hu.bme.mit.trainbenchmark.railway.Segment", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -121,7 +126,7 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
       		PVariable var_segment = body.getOrCreateVariableByName("segment");
       		PVariable var_length = body.getOrCreateVariableByName("length");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_segment, "segment")
+      		   new ExportedParameter(body, var_segment, parameter_pSegment)
       		));
       		// 	Segment.length(segment, length)
       		new TypeConstraint(body, new FlatTuple(var_segment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));

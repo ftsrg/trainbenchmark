@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/SwitchSet.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -87,12 +90,22 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static SwitchSetQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore");
+    
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final PParameter parameter_pSwP = new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition");
+    
+    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pSemaphore, parameter_pRoute, parameter_pSwP, parameter_pSw);
     
     @Override
     public String getFullyQualifiedName() {
@@ -106,12 +119,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore", null),
-      			 new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", null),
-      			 new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition", null),
-      			 new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -127,10 +135,10 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       		PVariable var_swpPosition = body.getOrCreateVariableByName("swpPosition");
       		PVariable var_swCurrentPosition = body.getOrCreateVariableByName("swCurrentPosition");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_semaphore, "semaphore"),
-      		   new ExportedParameter(body, var_route, "route"),
-      		   new ExportedParameter(body, var_swP, "swP"),
-      		   new ExportedParameter(body, var_sw, "sw")
+      		   new ExportedParameter(body, var_semaphore, parameter_pSemaphore),
+      		   new ExportedParameter(body, var_route, parameter_pRoute),
+      		   new ExportedParameter(body, var_swP, parameter_pSwP),
+      		   new ExportedParameter(body, var_sw, parameter_pSw)
       		));
       		// 	Route.entry(route, semaphore)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
@@ -149,7 +157,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       		new Equality(body, var__virtual_2_, var_sw);
       		// 		Semaphore.signal(semaphore, ::GO)
       		PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-      		new ConstantValue(body, var__virtual_3_, getEnumLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Signal", "GO").getInstance());
+      		new ConstantValue(body, var__virtual_3_, hu.bme.mit.trainbenchmark.railway.Signal.get("GO"));
       		new TypeConstraint(body, new FlatTuple(var_semaphore), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore")));
       		PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
       		new TypeConstraint(body, new FlatTuple(var_semaphore, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore", "signal")));

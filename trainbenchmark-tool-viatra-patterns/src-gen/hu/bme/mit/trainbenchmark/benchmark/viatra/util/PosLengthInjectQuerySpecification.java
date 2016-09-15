@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/PosLengthInject.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -83,12 +86,16 @@ public final class PosLengthInjectQuerySpecification extends BaseGeneratedEMFQue
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static PosLengthInjectQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pSegment = new PParameter("segment", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pSegment);
     
     @Override
     public String getFullyQualifiedName() {
@@ -102,9 +109,7 @@ public final class PosLengthInjectQuerySpecification extends BaseGeneratedEMFQue
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("segment", "hu.bme.mit.trainbenchmark.railway.Segment", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -115,7 +120,7 @@ public final class PosLengthInjectQuerySpecification extends BaseGeneratedEMFQue
       		PBody body = new PBody(this);
       		PVariable var_segment = body.getOrCreateVariableByName("segment");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_segment, "segment")
+      		   new ExportedParameter(body, var_segment, parameter_pSegment)
       		));
       		// 	Segment(segment)
       		new TypeConstraint(body, new FlatTuple(var_segment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));

@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/SemaphoreNeighborInject.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -85,12 +88,18 @@ public final class SemaphoreNeighborInjectQuerySpecification extends BaseGenerat
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static SemaphoreNeighborInjectQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pRoute, parameter_pSemaphore);
     
     @Override
     public String getFullyQualifiedName() {
@@ -104,10 +113,7 @@ public final class SemaphoreNeighborInjectQuerySpecification extends BaseGenerat
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", null),
-      			 new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -119,8 +125,8 @@ public final class SemaphoreNeighborInjectQuerySpecification extends BaseGenerat
       		PVariable var_route = body.getOrCreateVariableByName("route");
       		PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_route, "route"),
-      		   new ExportedParameter(body, var_semaphore, "semaphore")
+      		   new ExportedParameter(body, var_route, parameter_pRoute),
+      		   new ExportedParameter(body, var_semaphore, parameter_pSemaphore)
       		));
       		// 	Route.entry(route, semaphore)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));

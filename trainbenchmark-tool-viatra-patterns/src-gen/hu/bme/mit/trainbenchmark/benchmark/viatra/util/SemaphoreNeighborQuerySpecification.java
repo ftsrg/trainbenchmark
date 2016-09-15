@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/SemaphoreNeighbor.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -88,12 +91,28 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static SemaphoreNeighborQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore");
+    
+    private final PParameter parameter_pRoute1 = new PParameter("route1", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final PParameter parameter_pRoute2 = new PParameter("route2", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final PParameter parameter_pSensor1 = new PParameter("sensor1", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    
+    private final PParameter parameter_pSensor2 = new PParameter("sensor2", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    
+    private final PParameter parameter_pTe1 = new PParameter("te1", "hu.bme.mit.trainbenchmark.railway.TrackElement");
+    
+    private final PParameter parameter_pTe2 = new PParameter("te2", "hu.bme.mit.trainbenchmark.railway.TrackElement");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pSemaphore, parameter_pRoute1, parameter_pRoute2, parameter_pSensor1, parameter_pSensor2, parameter_pTe1, parameter_pTe2);
     
     @Override
     public String getFullyQualifiedName() {
@@ -107,15 +126,7 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore", null),
-      			 new PParameter("route1", "hu.bme.mit.trainbenchmark.railway.Route", null),
-      			 new PParameter("route2", "hu.bme.mit.trainbenchmark.railway.Route", null),
-      			 new PParameter("sensor1", "hu.bme.mit.trainbenchmark.railway.Sensor", null),
-      			 new PParameter("sensor2", "hu.bme.mit.trainbenchmark.railway.Sensor", null),
-      			 new PParameter("te1", "hu.bme.mit.trainbenchmark.railway.TrackElement", null),
-      			 new PParameter("te2", "hu.bme.mit.trainbenchmark.railway.TrackElement", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -132,13 +143,13 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
       		PVariable var_te1 = body.getOrCreateVariableByName("te1");
       		PVariable var_te2 = body.getOrCreateVariableByName("te2");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_semaphore, "semaphore"),
-      		   new ExportedParameter(body, var_route1, "route1"),
-      		   new ExportedParameter(body, var_route2, "route2"),
-      		   new ExportedParameter(body, var_sensor1, "sensor1"),
-      		   new ExportedParameter(body, var_sensor2, "sensor2"),
-      		   new ExportedParameter(body, var_te1, "te1"),
-      		   new ExportedParameter(body, var_te2, "te2")
+      		   new ExportedParameter(body, var_semaphore, parameter_pSemaphore),
+      		   new ExportedParameter(body, var_route1, parameter_pRoute1),
+      		   new ExportedParameter(body, var_route2, parameter_pRoute2),
+      		   new ExportedParameter(body, var_sensor1, parameter_pSensor1),
+      		   new ExportedParameter(body, var_sensor2, parameter_pSensor2),
+      		   new ExportedParameter(body, var_te1, parameter_pTe1),
+      		   new ExportedParameter(body, var_te2, parameter_pTe2)
       		));
       		// 	Route.exit(route1, semaphore)
       		new TypeConstraint(body, new FlatTuple(var_route1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));

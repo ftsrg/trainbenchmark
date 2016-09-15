@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/RouteSensorInject.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -85,12 +88,18 @@ public final class RouteSensorInjectQuerySpecification extends BaseGeneratedEMFQ
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static RouteSensorInjectQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pRoute, parameter_pSensor);
     
     @Override
     public String getFullyQualifiedName() {
@@ -104,10 +113,7 @@ public final class RouteSensorInjectQuerySpecification extends BaseGeneratedEMFQ
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", null),
-      			 new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -119,8 +125,8 @@ public final class RouteSensorInjectQuerySpecification extends BaseGeneratedEMFQ
       		PVariable var_route = body.getOrCreateVariableByName("route");
       		PVariable var_sensor = body.getOrCreateVariableByName("sensor");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_route, "route"),
-      		   new ExportedParameter(body, var_sensor, "sensor")
+      		   new ExportedParameter(body, var_route, parameter_pRoute),
+      		   new ExportedParameter(body, var_sensor, parameter_pSensor)
       		));
       		// 	Route.gathers(route, sensor)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
