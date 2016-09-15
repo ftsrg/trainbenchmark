@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/ConnectedSegmentsInject.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -85,12 +88,20 @@ public final class ConnectedSegmentsInjectQuerySpecification extends BaseGenerat
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static ConnectedSegmentsInjectQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    
+    private final PParameter parameter_pSegment1 = new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final PParameter parameter_pSegment3 = new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pSensor, parameter_pSegment1, parameter_pSegment3);
     
     @Override
     public String getFullyQualifiedName() {
@@ -104,11 +115,7 @@ public final class ConnectedSegmentsInjectQuerySpecification extends BaseGenerat
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor", null),
-      			 new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment", null),
-      			 new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -121,9 +128,9 @@ public final class ConnectedSegmentsInjectQuerySpecification extends BaseGenerat
       		PVariable var_segment1 = body.getOrCreateVariableByName("segment1");
       		PVariable var_segment3 = body.getOrCreateVariableByName("segment3");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_sensor, "sensor"),
-      		   new ExportedParameter(body, var_segment1, "segment1"),
-      		   new ExportedParameter(body, var_segment3, "segment3")
+      		   new ExportedParameter(body, var_sensor, parameter_pSensor),
+      		   new ExportedParameter(body, var_segment1, parameter_pSegment1),
+      		   new ExportedParameter(body, var_segment3, parameter_pSegment3)
       		));
       		// 	Segment.connectsTo(segment1, segment3)
       		new TypeConstraint(body, new FlatTuple(var_segment1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));

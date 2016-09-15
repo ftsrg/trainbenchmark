@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/PosLength.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthMatch;

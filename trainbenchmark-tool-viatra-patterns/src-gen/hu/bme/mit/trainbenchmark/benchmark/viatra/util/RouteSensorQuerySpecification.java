@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/RouteSensor.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -87,12 +90,22 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static RouteSensorQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    
+    private final PParameter parameter_pSwP = new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition");
+    
+    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pRoute, parameter_pSensor, parameter_pSwP, parameter_pSw);
     
     @Override
     public String getFullyQualifiedName() {
@@ -106,12 +119,7 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", null),
-      			 new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor", null),
-      			 new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition", null),
-      			 new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -125,10 +133,10 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
       		PVariable var_swP = body.getOrCreateVariableByName("swP");
       		PVariable var_sw = body.getOrCreateVariableByName("sw");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_route, "route"),
-      		   new ExportedParameter(body, var_sensor, "sensor"),
-      		   new ExportedParameter(body, var_swP, "swP"),
-      		   new ExportedParameter(body, var_sw, "sw")
+      		   new ExportedParameter(body, var_route, parameter_pRoute),
+      		   new ExportedParameter(body, var_sensor, parameter_pSensor),
+      		   new ExportedParameter(body, var_swP, parameter_pSwP),
+      		   new ExportedParameter(body, var_sw, parameter_pSw)
       		));
       		// 	Route.follows(route, swP)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));

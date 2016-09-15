@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/ConnectedSegments.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -85,12 +88,28 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static ConnectedSegmentsQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    
+    private final PParameter parameter_pSegment1 = new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final PParameter parameter_pSegment2 = new PParameter("segment2", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final PParameter parameter_pSegment3 = new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final PParameter parameter_pSegment4 = new PParameter("segment4", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final PParameter parameter_pSegment5 = new PParameter("segment5", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final PParameter parameter_pSegment6 = new PParameter("segment6", "hu.bme.mit.trainbenchmark.railway.Segment");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pSensor, parameter_pSegment1, parameter_pSegment2, parameter_pSegment3, parameter_pSegment4, parameter_pSegment5, parameter_pSegment6);
     
     @Override
     public String getFullyQualifiedName() {
@@ -104,15 +123,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor", null),
-      			 new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment", null),
-      			 new PParameter("segment2", "hu.bme.mit.trainbenchmark.railway.Segment", null),
-      			 new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment", null),
-      			 new PParameter("segment4", "hu.bme.mit.trainbenchmark.railway.Segment", null),
-      			 new PParameter("segment5", "hu.bme.mit.trainbenchmark.railway.Segment", null),
-      			 new PParameter("segment6", "hu.bme.mit.trainbenchmark.railway.Segment", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -129,13 +140,13 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       		PVariable var_segment5 = body.getOrCreateVariableByName("segment5");
       		PVariable var_segment6 = body.getOrCreateVariableByName("segment6");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_sensor, "sensor"),
-      		   new ExportedParameter(body, var_segment1, "segment1"),
-      		   new ExportedParameter(body, var_segment2, "segment2"),
-      		   new ExportedParameter(body, var_segment3, "segment3"),
-      		   new ExportedParameter(body, var_segment4, "segment4"),
-      		   new ExportedParameter(body, var_segment5, "segment5"),
-      		   new ExportedParameter(body, var_segment6, "segment6")
+      		   new ExportedParameter(body, var_sensor, parameter_pSensor),
+      		   new ExportedParameter(body, var_segment1, parameter_pSegment1),
+      		   new ExportedParameter(body, var_segment2, parameter_pSegment2),
+      		   new ExportedParameter(body, var_segment3, parameter_pSegment3),
+      		   new ExportedParameter(body, var_segment4, parameter_pSegment4),
+      		   new ExportedParameter(body, var_segment5, parameter_pSegment5),
+      		   new ExportedParameter(body, var_segment6, parameter_pSegment6)
       		));
       		// 	Segment.connectsTo(segment1, segment2)
       		new TypeConstraint(body, new FlatTuple(var_segment1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));

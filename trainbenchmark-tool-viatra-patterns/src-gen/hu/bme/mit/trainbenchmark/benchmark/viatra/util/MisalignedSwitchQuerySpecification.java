@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/ActiveRoute.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -86,12 +89,20 @@ public final class MisalignedSwitchQuerySpecification extends BaseGeneratedEMFQu
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static MisalignedSwitchQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    
+    private final PParameter parameter_pSwP = new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition");
+    
+    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pRoute, parameter_pSwP, parameter_pSw);
     
     @Override
     public String getFullyQualifiedName() {
@@ -105,11 +116,7 @@ public final class MisalignedSwitchQuerySpecification extends BaseGeneratedEMFQu
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", null),
-      			 new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition", null),
-      			 new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -124,9 +131,9 @@ public final class MisalignedSwitchQuerySpecification extends BaseGeneratedEMFQu
       		PVariable var_position = body.getOrCreateVariableByName("position");
       		PVariable var_currentPosition = body.getOrCreateVariableByName("currentPosition");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_route, "route"),
-      		   new ExportedParameter(body, var_swP, "swP"),
-      		   new ExportedParameter(body, var_sw, "sw")
+      		   new ExportedParameter(body, var_route, parameter_pRoute),
+      		   new ExportedParameter(body, var_swP, parameter_pSwP),
+      		   new ExportedParameter(body, var_sw, parameter_pSw)
       		));
       		// 	Route.follows(route, swP)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));

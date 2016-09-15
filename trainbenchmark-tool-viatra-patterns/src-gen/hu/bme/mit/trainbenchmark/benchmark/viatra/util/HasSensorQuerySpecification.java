@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/SwitchMonitored.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
@@ -85,12 +88,16 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternalSneaky();
-      return null;					
+      return null;
     }
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static HasSensorQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.TrackElement");
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_pSw);
     
     @Override
     public String getFullyQualifiedName() {
@@ -104,9 +111,7 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public List<PParameter> getParameters() {
-      return Arrays.asList(
-      			 new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.TrackElement", null)
-      			);
+      return parameters;
     }
     
     @Override
@@ -118,7 +123,7 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
       		PVariable var_sw = body.getOrCreateVariableByName("sw");
       		PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
       		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_sw, "sw")
+      		   new ExportedParameter(body, var_sw, parameter_pSw)
       		));
       		// 	TrackElement.monitoredBy(sw, _)
       		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));

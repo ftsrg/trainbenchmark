@@ -1,3 +1,6 @@
+/**
+ * Generated from platform:/resource/trainbenchmark-tool-viatra-patterns/src/hu/bme/mit/trainbenchmark/benchmark/viatra/RouteSensorInject.vql
+ */
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
 import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInjectMatcher;
