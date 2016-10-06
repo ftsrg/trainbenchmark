@@ -44,7 +44,7 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class EmfApiModelOperationFactory<TDriver extends EmfDriver> extends ModelOperationFactory<EmfMatch, TDriver> {
+public class EpsilonModelOperationFactory<TDriver extends EmfDriver> extends ModelOperationFactory<EmfMatch, TDriver> {
 
 	@Override
 	public ModelOperation<? extends EmfMatch, TDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
