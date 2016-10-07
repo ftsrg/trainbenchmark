@@ -53,12 +53,8 @@ public class Rdf4jDriver extends RdfDriver {
 
     protected final Comparator<IRI> elementComparator = new IriComparator();
 
-    protected Rdf4jDriver(final boolean inferencing) {
+    public Rdf4jDriver(final boolean inferencing) {
         super(inferencing);
-    }
-
-    public static Rdf4jDriver create(final boolean inferencing) {
-        return new Rdf4jDriver(inferencing);
     }
 
     @Override
