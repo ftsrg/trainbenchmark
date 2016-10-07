@@ -3,7 +3,7 @@ jdk:
   - oraclejdk8
 install: false
 script:
-  - ./gradlew initScripts
+#  - ./gradlew initScripts
   - ./gradlew build --exclude-task test
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
