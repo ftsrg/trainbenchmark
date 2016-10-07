@@ -7,5 +7,5 @@ shadowJar {
 
 dependencies { 
 	compile project(':trainbenchmark-tool-emf') 
-//	compile group: 'org.eclipse.epsilon', name: 'org.eclipse.epsilon.common', version:'1.4.0-SNAPSHOT'  
+	compile group: 'org.eclipse.epsilon', name: 'org.eclipse.epsilon.common', version:'1.4.0-SNAPSHOT'
 }

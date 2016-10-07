@@ -15,6 +15,7 @@ subprojects {
 
 	artifacts.archives packageSources
 	repositories {
+		mavenLocal()
 		mavenCentral()
 		maven { url "https://repo.eclipse.org/content/groups/acceleo" }
 		maven { url "https://repo.eclipse.org/content/groups/viatra2" }
