@@ -20,16 +20,16 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.repository.Repository;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryException;
 
 import com.bigdata.rdf.sail.BigdataSail;
 import com.bigdata.rdf.sail.BigdataSailRepository;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 
-public class BlazegraphDriver extends Rdf4jDriver {
+public class BlazegraphDriver extends SesameDriver {
 
 	protected final BigdataSail sail;
 
