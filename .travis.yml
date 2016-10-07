@@ -7,3 +7,4 @@ script:
   - ./gradlew build --exclude-task test
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
+ 
