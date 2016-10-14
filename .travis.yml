@@ -1,10 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
-install: false
+install: true
 script:
-#  - ./gradlew initScripts
   - ./gradlew build --exclude-task test
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
- 
