@@ -5,14 +5,11 @@ shadowJar {
 	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.drools.DroolsBenchmarkMain' }
 }
 
+ext { droolsVersion = '6.4.0.Final' }
+
 dependencies {
   compile project(':trainbenchmark-tool-emf')
-  compile group: 'org.drools', name: 'drools-core', version:'6.3.0.Final'
-  compile group: 'org.drools', name: 'drools-compiler', version:'6.3.0.Final'
-  compile group: 'org.slf4j', name: 'slf4j-nop', version:'1.7.10'
-}
-repositories {
-  maven {
-    url "https://repository.jboss.org"
-  }
+  compile group: 'org.drools', name: 'drools-core', version: droolsVersion
+  compile group: 'org.drools', name: 'drools-compiler', version: droolsVersion
+  compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.10'
 }

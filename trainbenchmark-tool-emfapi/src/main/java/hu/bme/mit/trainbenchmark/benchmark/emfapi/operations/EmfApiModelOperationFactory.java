@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;

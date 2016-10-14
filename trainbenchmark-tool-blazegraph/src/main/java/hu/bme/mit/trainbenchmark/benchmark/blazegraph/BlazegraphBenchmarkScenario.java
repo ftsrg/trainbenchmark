@@ -4,14 +4,14 @@ import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmark
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.driver.BlazegraphDriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.comparators.Rdf4jMatchComparator;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.operations.Rdf4jModelOperationFactory;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.SesameMatchComparator;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.operations.SesameModelOperationFactory;
 
-public class BlazegraphBenchmarkScenario extends BenchmarkScenario<Rdf4jMatch, BlazegraphDriver, BlazegraphBenchmarkConfigWrapper> {
+public class BlazegraphBenchmarkScenario extends BenchmarkScenario<SesameMatch, BlazegraphDriver, BlazegraphBenchmarkConfigWrapper> {
 
 	public BlazegraphBenchmarkScenario(final BlazegraphBenchmarkConfigWrapper bcw) throws Exception {
-		super(new BlazegraphDriverFactory(bcw.isInferencing()), new Rdf4jModelOperationFactory<BlazegraphDriver>(), new Rdf4jMatchComparator(), bcw);
+		super(new BlazegraphDriverFactory(bcw.isInferencing()), new SesameModelOperationFactory<BlazegraphDriver>(), new SesameMatchComparator(), bcw);
 	}
 
 }
