@@ -17,7 +17,7 @@ For theoretical and implementation details, check out the following documents:
 
 Currently, the following formats and tools are supported.
 
-* **EMF:** Drools 5 & 6, Eclipse OCL, EMF API, VIATRA
+* **EMF:** Drools, Eclipse OCL, EMF API, VIATRA
 * **Property graph:** Neo4j, Tinkergraph
 * **RDF:** Blazegraph, Jena, RDF4J
 * **SQL:** MySQL, SQLite
