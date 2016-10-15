@@ -5,7 +5,11 @@ shadowJar {
 	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.epsilon.EpsilonBenchmarkMain' }
 }
 
-dependencies { 
-	compile project(':trainbenchmark-tool-emf') 
-	compile group: 'org.eclipse.epsilon', name: 'org.eclipse.epsilon.common', version:'1.4.0-SNAPSHOT'
+dependencies {
+	compile project(':trainbenchmark-tool-emf')
+	compile group: 'org.eclipse.epsilon', name: 'epsilon-core', version:'1.4.0-SNAPSHOT'
+}
+
+repositories {
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
