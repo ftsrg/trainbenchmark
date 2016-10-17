@@ -3,6 +3,7 @@ import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmark
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigWrapper
@@ -36,13 +37,13 @@ for (size = minSize; size <= maxSize; size *= 2) {
     def modelFilename = "railway-repair-${size}"
 
     def bcc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload)
-	
+
     BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bcc, false))
     BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bcc, true))
     BenchmarkRunner.run(new EclipseOclBenchmarkConfigWrapper(bcc))
     BenchmarkRunner.run(new DroolsBenchmarkConfigWrapper(bcc))
     BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bcc))
-	BenchmarkRunner.run(new IqdCoreBenchmarkConfigWrapper(bcc, 16, "", null))
+    BenchmarkRunner.run(new IqdCoreBenchmarkConfigWrapper(bcc, 16, "", null))
     BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bcc, false))
     BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bcc, true))
     BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bcc))

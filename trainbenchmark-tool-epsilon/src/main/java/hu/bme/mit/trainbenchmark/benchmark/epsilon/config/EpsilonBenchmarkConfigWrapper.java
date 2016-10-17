@@ -9,16 +9,29 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.c;
 
+package hu.bme.mit.trainbenchmark.benchmark.epsilon.config;
+
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EpsilonBenchmarkConfigWrapper;
 
-public class EpsilonBenchmarkMain {
+public class EpsilonBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
-	public static void main(final String[] args) throws Exception {
-		final EpsilonBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], EpsilonBenchmarkConfigWrapper.class);
-		final EpsilonBenchmarkScenario scenario = new EpsilonBenchmarkScenario(bcw);
-		scenario.performBenchmark();
+	protected EpsilonBenchmarkConfigWrapper() {
 	}
+	
+	public EpsilonBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+		super(bcc);
+	}
+	
+	@Override
+	public String getToolName() {
+		return "Epsilon";
+	}
+
+	@Override
+	public String getProjectName() {
+		return "epsilon";
+	}
+	
 }

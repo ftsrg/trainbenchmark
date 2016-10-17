@@ -10,15 +10,15 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
+package hu.bme.mit.trainbenchmark.benchmark.epsilon.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.c.EpsilonBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EpsilonBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.epsilon.EpsilonBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfigWrapper;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
-public class EmfApiTest extends TrainBenchmarkTest {
+public class EpsilonTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {

@@ -9,7 +9,3 @@ dependencies {
 	compile project(':trainbenchmark-tool-emf')
 	compile group: 'org.eclipse.epsilon', name: 'epsilon-core', version:'1.4.0-SNAPSHOT'
 }
-
-repositories {
-	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-}
