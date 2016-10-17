@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;

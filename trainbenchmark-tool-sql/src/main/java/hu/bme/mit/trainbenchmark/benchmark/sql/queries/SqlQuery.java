@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.sql.queries;
 
 import java.io.File;
 import java.io.IOException;

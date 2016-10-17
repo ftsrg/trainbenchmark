@@ -5,7 +5,6 @@ import java.util.Optional;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
-import hu.bme.mit.trainbenchmark.benchmark.sql.benchmarkcases.SqlQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
@@ -19,6 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredInjectM
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sql.queries.SqlQuery;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject.SqlTransformationInjectPosLength;
