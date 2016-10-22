@@ -14,20 +14,18 @@ package hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.inject;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class SQLiteTransformationInjectConnectedSegments extends SQLiteTransformation<SqlConnectedSegmentsInjectMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('sensor', ?), ('segment1', ?), ('segment3', ?);";
 	
 	public SQLiteTransformationInjectConnectedSegments(final SQLiteDriver driver, final String workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, Scenario.INJECT);
+		super(driver, workspaceDir, RailwayOperation.CONNECTEDSEGMENTS_INJECT);
 	}
 
 	@Override
