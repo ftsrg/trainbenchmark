@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra
 
-import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 
-pattern SwitchMonitoredInject(sw)
+pattern switchMonitoredInject(sw)
 {
 	Switch(sw);
 }
