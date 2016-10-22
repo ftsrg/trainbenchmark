@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra
 
 import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 
-pattern ActiveRoute(route) {
+pattern activeRoute(route) {
 	Route(route);
 	neg find misalignedSwitch(route, _, _);
 }
