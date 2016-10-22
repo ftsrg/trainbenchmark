@@ -14,19 +14,17 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.repair;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class SqlTransformationRepairSwitchSet<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlSwitchSetMatch, TSqlDriver> {
 
 	public SqlTransformationRepairSwitchSet(final TSqlDriver driver, final String workspaceDir)
 			throws IOException {
-		super(driver, workspaceDir, RailwayQuery.SWITCHSET, Scenario.REPAIR);
+		super(driver, workspaceDir, RailwayOperation.SWITCHSET_REPAIR);
 	}
 
 	@Override

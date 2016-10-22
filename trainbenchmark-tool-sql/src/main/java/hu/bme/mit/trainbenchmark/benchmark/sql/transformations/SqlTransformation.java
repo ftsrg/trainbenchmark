@@ -20,19 +20,18 @@ import org.apache.commons.io.FileUtils;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public abstract class SqlTransformation<TSqlMatch extends SqlMatch, TSqlDriver extends SqlDriver> extends ModelTransformation<TSqlMatch, TSqlDriver> {
 
 	protected PreparedStatement preparedUpdateStatement;
 	protected String updateQuery;
-		
-	protected SqlTransformation(final TSqlDriver driver, final String workspaceDir, final RailwayQuery query, final Scenario scenario) throws IOException {
+
+	protected SqlTransformation(final TSqlDriver driver, final String workspaceDir, final RailwayOperation operation) throws IOException {
 		super(driver);
-		
-		final String updatePath = workspaceDir + driver.getResourceDirectory() + "transformations/" + scenario + query + ".sql";
+
+		final String updatePath = workspaceDir + driver.getResourceDirectory() + "transformations/" + operation + "Rhs.sql";
 		this.updateQuery = FileUtils.readFileToString(new File(updatePath));
 	}
-	
+
 }
