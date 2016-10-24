@@ -83,3 +83,4 @@ The Train Benchmark provides two sorts of instance models:
 The **minimal models** contain only a few (8-10) model elements to provide simple models for development and testing.
 
 The **scalable models** are generated for each scenario in sizes denoted by the powers of two, e.g. `railway-repair-1`, `railway-repair-2`, `railway-repair-4`, etc.
+
