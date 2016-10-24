@@ -15,7 +15,6 @@ subprojects {
 
 	artifacts.archives packageSources
 	repositories {
-		mavenLocal()
 		jcenter()
 		maven { url "http://docs.inf.mit.bme.hu/trainbenchmark-deps" }
 		maven { url "https://raw.github.com/neo4j-contrib/m2/master/releases" }
