@@ -17,11 +17,11 @@ subprojects {
 	repositories {
 		mavenLocal()
 		jcenter()
-		maven { url "https://repo.eclipse.org/content/groups/acceleo" }
-		maven { url "https://repo.eclipse.org/content/groups/viatra2" }
-		maven { url "http://www.systap.com/maven/releases" }
 		maven { url "http://docs.inf.mit.bme.hu/trainbenchmark-deps" }
 		maven { url "https://raw.github.com/neo4j-contrib/m2/master/releases" }
+		maven { url "http://www.systap.com/maven/releases" }
+		maven { url "https://repo.eclipse.org/content/groups/acceleo" }
+		maven { url "https://repo.eclipse.org/content/groups/viatra2" }
 	}
 }
 
@@ -30,4 +30,3 @@ ext {
 	kryoVersion = "4.0.0"
 	junitVersion = "4.12"
 }
-
