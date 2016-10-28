@@ -14,18 +14,16 @@ package hu.bme.mit.trainbenchmark.benchmark.sql.transformations.inject;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class SqlTransformationInjectPosLength<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlPosLengthInjectMatch, TSqlDriver> {
 
 	public SqlTransformationInjectPosLength(final TSqlDriver driver, final String workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayQuery.POSLENGTH, Scenario.INJECT);
+		super(driver, workspaceDir, RailwayOperation.POSLENGTH_INJECT);
 	}
 
 	@Override

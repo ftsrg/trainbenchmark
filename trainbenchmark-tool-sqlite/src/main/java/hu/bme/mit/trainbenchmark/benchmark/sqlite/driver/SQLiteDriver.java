@@ -23,7 +23,7 @@ import org.apache.commons.io.FileUtils;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
 public class SQLiteDriver extends SqlDriver {
-	
+
 	@Override
 	public void read(final String modelPath) throws IOException, InterruptedException, SQLException {
 		final File modelFile = new File(modelPath);
@@ -47,6 +47,10 @@ public class SQLiteDriver extends SqlDriver {
 	@Override
 	public String getPostfix() {
 		return "-sqlite.sql";
+	}
+
+	public String getSQLiteResourceDirectory() {
+		return "/trainbenchmark-tool-sqlite/src/main/resources/";
 	}
 
 }

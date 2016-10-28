@@ -5,7 +5,7 @@ shadowJar {
 	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.drools.DroolsBenchmarkMain' }
 }
 
-ext { droolsVersion = '6.4.0.Final' }
+ext { droolsVersion = '6.5.0.Final' }
 
 dependencies {
   compile project(':trainbenchmark-tool-emf')
