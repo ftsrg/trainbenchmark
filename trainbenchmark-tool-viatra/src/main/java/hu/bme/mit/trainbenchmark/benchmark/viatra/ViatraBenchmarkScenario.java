@@ -13,7 +13,7 @@ public class ViatraBenchmarkScenario
 		extends BenchmarkScenario<BasePatternMatch, ViatraDriver, ViatraBenchmarkConfigWrapper> {
 
 	public ViatraBenchmarkScenario(final ViatraBenchmarkConfigWrapper bcw) throws Exception {
-		super(new ViatraDriverFactory(), new ViatraModelOperationFactory(), new ViatraMatchComparator(), bcw);
+		super(new ViatraDriverFactory(bcw.getBackend()), new ViatraModelOperationFactory(), new ViatraMatchComparator(), bcw);
 	}
 
 }

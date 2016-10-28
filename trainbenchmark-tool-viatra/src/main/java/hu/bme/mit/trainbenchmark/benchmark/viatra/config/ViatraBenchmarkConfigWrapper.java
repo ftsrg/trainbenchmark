@@ -16,16 +16,23 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
 
 public class ViatraBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 
+	protected ViatraBackend backend;
+	
 	protected ViatraBenchmarkConfigWrapper() {
 	}
 	
-	public ViatraBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+	public ViatraBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final ViatraBackend backend) {
 		super(bcc);
+		this.backend = backend;
 	}	
+	
+	public ViatraBackend getBackend() {
+		return backend;
+	}
 	
 	@Override
 	public String getToolName() {
-		return "VIATRA";
+		return "VIATRA (" + getBackend().toString() + ")";
 	}
 
 	@Override

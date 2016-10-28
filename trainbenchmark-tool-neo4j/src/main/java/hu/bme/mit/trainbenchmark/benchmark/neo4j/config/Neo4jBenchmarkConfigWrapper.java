@@ -33,7 +33,7 @@ public class Neo4jBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	
 	@Override
 	public String getToolName() {
-		return "Neo4j (" + engine.toString() + ")";
+		return "Neo4j (" + getEngine().toString() + ")";
 	}
 
 	@Override

@@ -36,7 +36,6 @@ public abstract class ViatraQuery<TMatch extends BasePatternMatch> extends Model
 
 		try {
 			engine = AdvancedViatraQueryEngine.from(driver.getEngine());
-
 			matches = getMatcher().getAllMatches();
 			driver.getEngine().addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<TMatch>() {
 				@Override
@@ -52,6 +51,7 @@ public abstract class ViatraQuery<TMatch extends BasePatternMatch> extends Model
 		} catch (final ViatraQueryException e) {
 			throw new RuntimeException(e);
 		}
+
 	}
 
 	@Override

@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.Neo4jQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class Neo4jCoreQuery<TMatch extends Neo4jMatch> extends ModelQuery<TMatch, Neo4jDriver> {
+public abstract class Neo4jCoreQuery<TNeo4jMatch extends Neo4jMatch> extends Neo4jQuery<TNeo4jMatch> {
 
 	public Neo4jCoreQuery(final RailwayQuery query, final Neo4jDriver driver) {
 		super(query, driver);
