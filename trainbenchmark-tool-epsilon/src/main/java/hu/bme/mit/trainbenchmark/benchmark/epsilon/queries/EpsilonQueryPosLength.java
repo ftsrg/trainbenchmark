@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.epsilon.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,9 +27,9 @@ import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
-public class EmfApiQueryPosLength<TDriver extends EmfDriver> extends EmfApiQuery<EmfPosLengthMatch, TDriver> {
+public class EpsilonQueryPosLength<TDriver extends EmfDriver> extends EmfApiQuery<EmfPosLengthMatch, TDriver> {
 
-	public EmfApiQueryPosLength(final TDriver driver) {
+	public EpsilonQueryPosLength(final TDriver driver) {
 		super(RailwayQuery.POSLENGTH, driver);
 	}
 

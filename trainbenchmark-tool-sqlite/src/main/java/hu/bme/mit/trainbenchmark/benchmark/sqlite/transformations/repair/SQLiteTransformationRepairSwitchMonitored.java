@@ -14,20 +14,18 @@ package hu.bme.mit.trainbenchmark.benchmark.sqlite.transformations.repair;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public class SQLiteTransformationRepairSwitchMonitored extends SQLiteTransformation<SqlSwitchMonitoredMatch> {
 
 	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('switch', ?);";
 	
 	public SQLiteTransformationRepairSwitchMonitored(final SQLiteDriver driver, final String workspaceDir) throws IOException {
-		super(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, Scenario.REPAIR);
+		super(driver, workspaceDir, RailwayOperation.SWITCHMONITORED_REPAIR);
 	}
 
 	@Override

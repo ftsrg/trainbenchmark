@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,44 +19,41 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
-import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.query.EmfApiQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Signal;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
-public class EmfApiQueryRouteSensor<TDriver extends EmfDriver> extends EmfApiQuery<EmfRouteSensorMatch, TDriver> {
+public class EmfApiQuerySwitchSet<TDriver extends EmfDriver> extends EmfApiQuery<EmfSwitchSetMatch, TDriver> {
 
-	public EmfApiQueryRouteSensor(final TDriver driver) {
-		super(RailwayQuery.ROUTESENSOR, driver);
+	public EmfApiQuerySwitchSet(final TDriver driver) {
+		super(RailwayQuery.SWITCHSET, driver);
 	}
 
 	@Override
-	public Collection<EmfRouteSensorMatch> evaluate() {
-		final List<EmfRouteSensorMatch> matches = new ArrayList<>();
+	public Collection<EmfSwitchSetMatch> evaluate() {
+		final List<EmfSwitchSetMatch> matches = new ArrayList<>();
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
-		// (route:Route)
 		for (final Route route : routes) {
-			// (route)-[:follows]->(swP:SwitchPosition)
-			for (final SwitchPosition swP : route.getFollows()) {
-				// (swP:switchPosition)-[:target]->(sw:Switch)
-				final Switch sw = swP.getTarget();
-				if (sw == null) {
-					continue;
-				}
-
-				// (switch:Switch)-[:monitoredBy]->(sensor:Sensor)
-				final List<Sensor> sensors = sw.getMonitoredBy();
-
-				// TODO check n-m edge
-				for (final Sensor sensor2 : sensors) {
-					// (route)-[:gathers]->(sensor) NAC
-					if (!route.getGathers().contains(sensor2)) {
-						final EmfRouteSensorMatch match = new EmfRouteSensorMatch(route, sensor2, swP, sw);
-						matches.add(match);
+			// (route:Route)-[:entry]->(semaphore:Semaphore)
+			final Semaphore semaphore = route.getEntry();
+			if (semaphore == null) {
+				continue;
+			}
+			// semaphore.signal == GO
+			if (semaphore.getSignal() == Signal.GO) {
+				// (route:Route)-[:follows]->(swP:SwitchPosition)
+				for (final SwitchPosition switchPosition : route.getFollows()) {
+					// (swP:SwitchPosition)-[:target]->(sw:Switch)
+					final Switch sw = switchPosition.getTarget();
+					// sw.currentPosition != swP.position
+					if (sw.getCurrentPosition() != switchPosition.getPosition()) {
+						matches.add(new EmfSwitchSetMatch(semaphore, route, switchPosition, sw));
 					}
 				}
 			}
@@ -64,5 +61,4 @@ public class EmfApiQueryRouteSensor<TDriver extends EmfDriver> extends EmfApiQue
 
 		return matches;
 	}
-
 }

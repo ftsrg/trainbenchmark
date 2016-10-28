@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases;
+package hu.bme.mit.trainbenchmark.benchmark.jena.queries;
 
 import java.io.IOException;
 import java.util.ArrayList;

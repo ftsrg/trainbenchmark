@@ -2,7 +2,6 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.operations;
 
 import java.util.Optional;
 
-import hu.bme.mit.trainbenchmark.benchmark.jena.benchmarkcases.JenaQuery;
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsMatch;
@@ -17,6 +16,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchMonitoredInjec
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.queries.JenaQuery;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject.JenaTransformationInjectPosLength;

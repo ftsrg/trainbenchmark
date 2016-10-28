@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra
 
-import "http://www.semanticweb.org/ontologies/2015/trainbenchmark" 
+import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 
-pattern ConnectedSegments(sensor, segment1, segment2, segment3, segment4, segment5, segment6)
+pattern connectedSegments(sensor, segment1, segment2, segment3, segment4, segment5, segment6)
 {
 	Segment.connectsTo(segment1, segment2);
 	Segment.connectsTo(segment2, segment3);
