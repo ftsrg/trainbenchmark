@@ -19,11 +19,11 @@ import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.Neo4jQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jCypherQuery<TNeo4jMatch extends Neo4jMatch> extends ModelQuery<TNeo4jMatch, Neo4jDriver> {
+public class Neo4jCypherQuery<TNeo4jMatch extends Neo4jMatch> extends Neo4jQuery<TNeo4jMatch> {
 
 	protected final RailwayQuery query;
 	protected final String queryDefinition;

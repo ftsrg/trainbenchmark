@@ -14,6 +14,7 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigWrapper
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 
 def xms = "12G"
@@ -51,7 +52,8 @@ for (size = minSize; size <= maxSize; size *= 2) {
     BenchmarkRunner.run(new Rdf4jBenchmarkConfigWrapper(bcc, false))
     BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bcc))
     BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bcc))
-    BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bcc))
+    BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bcc, ViatraBackend.INCREMENTAL))
+    BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bcc, ViatraBackend.LOCAL_SEARCH))
 }
 
 BenchmarkReporter.reportReady()
