@@ -33,7 +33,7 @@ public class BlazegraphDriver extends SesameDriver {
 
 	public BlazegraphDriver(final boolean inferencing) throws IOException, RepositoryException {
 		super(inferencing);
-		
+
 		// remove Blazegraph banner text
 		System.getProperties().setProperty("com.bigdata.Banner.quiet", "true");
 		// load journal properties from resources

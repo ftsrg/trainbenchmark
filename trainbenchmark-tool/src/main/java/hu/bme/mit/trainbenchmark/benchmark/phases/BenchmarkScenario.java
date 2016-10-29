@@ -10,18 +10,18 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkBundle;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 
-public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmarkConfig extends BenchmarkConfig> {
+public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmarkConfigWrapper extends BenchmarkConfig> {
 
 	protected final PhaseExecutor phaseExecutor = new PhaseExecutor();
 
 	protected final DriverFactory<TDriver> driverFactory;
 	protected final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory;
 	protected final Comparator<TPatternMatch> comparator;
-	protected final TBenchmarkConfig bc;
+	protected final TBenchmarkConfigWrapper bc;
 	protected final BenchmarkResult benchmarkResult;
 
 	public BenchmarkScenario(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfig bc) throws Exception {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bc) throws Exception {
 		this.driverFactory = driverFactory;
 		this.modelOperationFactory = modelOperationFactory;
 		this.comparator = comparator;
@@ -43,7 +43,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 	protected void performRun() throws Exception {
 		benchmarkResult.nextRun();
 
-		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfig> benchmarkBundle = new BenchmarkBundle<>(driverFactory, modelOperationFactory,
+		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkBundle = new BenchmarkBundle<>(driverFactory, modelOperationFactory,
 				comparator, bc, benchmarkResult);
 
 		final InitializeOperationsPhase initializeOperationsPhase = new InitializeOperationsPhase(benchmarkBundle);

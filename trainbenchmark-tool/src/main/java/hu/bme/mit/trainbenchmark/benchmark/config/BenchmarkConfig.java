@@ -2,9 +2,11 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
+import com.esotericsoftware.kryo.io.Output;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 

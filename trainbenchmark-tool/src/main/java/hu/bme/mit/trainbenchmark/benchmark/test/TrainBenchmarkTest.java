@@ -1,17 +1,19 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ListMultimap;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
-import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import java.util.List;
+
 import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ListMultimap;
+
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public abstract class TrainBenchmarkTest {
 
