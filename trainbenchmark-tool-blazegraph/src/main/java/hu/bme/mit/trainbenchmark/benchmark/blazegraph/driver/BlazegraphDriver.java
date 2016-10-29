@@ -20,8 +20,6 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.openrdf.model.ValueFactory;
-import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryException;
 
 import com.bigdata.rdf.sail.BigdataSail;
@@ -35,7 +33,9 @@ public class BlazegraphDriver extends SesameDriver {
 
 	public BlazegraphDriver(final boolean inferencing) throws IOException, RepositoryException {
 		super(inferencing);
-
+		
+		// remove Blazegraph banner text
+		System.getProperties().setProperty("com.bigdata.Banner.quiet", "true");
 		// load journal properties from resources
 		final Properties props = loadProperties("/blazegraph.properties");
 		// instantiate a sail
@@ -43,13 +43,13 @@ public class BlazegraphDriver extends SesameDriver {
 		FileUtils.deleteQuietly(new File(journalFile));
 
 		sail = new BigdataSail(props);
-		repository = (Repository) new BigdataSailRepository(sail);
+		repository = new BigdataSailRepository(sail);
 		repository.initialize();
 	}
 
 	@Override
 	public void beginTransaction() {
-		vf = (ValueFactory) sail.getValueFactory();
+		vf = sail.getValueFactory();
 	}
 
 	@Override
