@@ -16,8 +16,8 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class MinimalConnectedSegmentsGenerator extends MinimalModelGenerator {
 
-	public MinimalConnectedSegmentsGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
-		super(serializer, generatorConfigWrapper);
+	public MinimalConnectedSegmentsGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
+		super(serializer, generatorConfig);
 	}
 
 	@Override

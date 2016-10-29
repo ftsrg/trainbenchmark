@@ -20,8 +20,8 @@ public class MySqlBenchmarkConfig extends BenchmarkConfig {
 	protected MySqlBenchmarkConfig() {
 	}
 	
-	public MySqlBenchmarkConfig(final BenchmarkConfigBase bcc) {
-		super(bcc);
+	public MySqlBenchmarkConfig(final BenchmarkConfigBase bcb) {
+		super(bcb);
 	}
 	
 	@Override

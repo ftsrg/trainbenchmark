@@ -13,8 +13,8 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 public class Rdf4jTest extends RdfTest {
 	
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
-		final Rdf4jBenchmarkConfig bc = new Rdf4jBenchmarkConfig(bcc, inferencing);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+		final Rdf4jBenchmarkConfig bc = new Rdf4jBenchmarkConfig(bcb, inferencing);
 		final Rdf4jBenchmarkScenario scenario = new Rdf4jBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

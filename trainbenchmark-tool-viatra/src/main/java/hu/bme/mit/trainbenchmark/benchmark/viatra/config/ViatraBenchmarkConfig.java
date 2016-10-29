@@ -21,8 +21,8 @@ public class ViatraBenchmarkConfig extends BenchmarkConfig {
 	protected ViatraBenchmarkConfig() {
 	}
 	
-	public ViatraBenchmarkConfig(final BenchmarkConfigBase bcc, final ViatraBackend backend) {
-		super(bcc);
+	public ViatraBenchmarkConfig(final BenchmarkConfigBase bcb, final ViatraBackend backend) {
+		super(bcb);
 		this.backend = backend;
 	}	
 	

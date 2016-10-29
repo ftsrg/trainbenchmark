@@ -38,10 +38,10 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	protected Transaction tx;
 	protected final File databaseDirectory;
 
-	public Neo4jGraphSerializer(final Neo4jGraphGeneratorConfig generatorConfigWrapper) {
-		super(generatorConfigWrapper);
-		databaseDirectory = new File(generatorConfigWrapper.getGeneratorConfig().getModelDir() + "neo4j-gen/"
-				+ generatorConfigWrapper.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j");
+	public Neo4jGraphSerializer(final Neo4jGraphGeneratorConfig generatorConfig) {
+		super(generatorConfig);
+		databaseDirectory = new File(generatorConfig.getGeneratorConfig().getModelDir() + "neo4j-gen/"
+				+ generatorConfig.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j");
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 			tx.success();
 
-			final String fileName = gcw.getGeneratorConfig().getModelPathWithoutExtension() + "." + Neo4jConstants.MODEL_EXTENSION;
+			final String fileName = gc.getGeneratorConfig().getModelPathWithoutExtension() + "." + Neo4jConstants.MODEL_EXTENSION;
 
 			final String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB

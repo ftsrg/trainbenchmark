@@ -22,8 +22,8 @@ public abstract class RdfBenchmarkConfig extends BenchmarkConfig {
 	protected RdfBenchmarkConfig() {
 	}
 
-	public RdfBenchmarkConfig(final BenchmarkConfigBase bcc, final boolean inferencing) {
-		super(bcc);
+	public RdfBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
+		super(bcb);
 		this.inferencing = inferencing;
 	}
 

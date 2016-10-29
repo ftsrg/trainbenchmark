@@ -20,9 +20,9 @@ import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfig;
 public class EmfGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final EmfGeneratorConfig generatorConfigWrapper = GeneratorConfig.fromFile(args[0], EmfGeneratorConfig.class);
-		final EmfSerializer rdfSerializer = new EmfSerializer(generatorConfigWrapper);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
+		final EmfGeneratorConfig gc = GeneratorConfig.fromFile(args[0], EmfGeneratorConfig.class);
+		final EmfSerializer rdfSerializer = new EmfSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, gc);
 		generator.generateModel();
 	}
 

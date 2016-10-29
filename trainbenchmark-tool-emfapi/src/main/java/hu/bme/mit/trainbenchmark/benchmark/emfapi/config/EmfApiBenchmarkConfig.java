@@ -20,8 +20,8 @@ public class EmfApiBenchmarkConfig extends BenchmarkConfig {
 	protected EmfApiBenchmarkConfig() {
 	}
 	
-	public EmfApiBenchmarkConfig(final BenchmarkConfigBase bcc) {
-		super(bcc);
+	public EmfApiBenchmarkConfig(final BenchmarkConfigBase bcb) {
+		super(bcb);
 	}
 	
 	@Override

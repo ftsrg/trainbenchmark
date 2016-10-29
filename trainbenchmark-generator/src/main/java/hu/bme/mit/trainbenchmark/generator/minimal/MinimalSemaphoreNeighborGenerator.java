@@ -25,8 +25,8 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class MinimalSemaphoreNeighborGenerator extends MinimalModelGenerator {
 
-	public MinimalSemaphoreNeighborGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
-		super(serializer, generatorConfigWrapper);
+	public MinimalSemaphoreNeighborGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
+		super(serializer, generatorConfig);
 	}
 
 	@Override

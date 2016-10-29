@@ -20,8 +20,8 @@ public class SQLiteBenchmarkConfig extends BenchmarkConfig {
 	protected SQLiteBenchmarkConfig() {
 	}
 	
-	public SQLiteBenchmarkConfig(final BenchmarkConfigBase bcc) {
-		super(bcc);
+	public SQLiteBenchmarkConfig(final BenchmarkConfigBase bcb) {
+		super(bcb);
 	}
 	
 	@Override

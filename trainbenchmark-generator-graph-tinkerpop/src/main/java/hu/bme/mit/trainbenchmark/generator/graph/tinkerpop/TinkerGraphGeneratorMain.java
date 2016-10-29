@@ -19,9 +19,9 @@ import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGen
 public class TinkerGraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final TinkerGraphGeneratorConfig rdfGeneratorConfigWrapper = TinkerGraphGeneratorConfig.fromFile(args[0], TinkerGraphGeneratorConfig.class);
-		final TinkerGraphSerializer rdfSerializer = new TinkerGraphSerializer(rdfGeneratorConfigWrapper);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, rdfGeneratorConfigWrapper);
+		final TinkerGraphGeneratorConfig gc = TinkerGraphGeneratorConfig.fromFile(args[0], TinkerGraphGeneratorConfig.class);
+		final TinkerGraphSerializer rdfSerializer = new TinkerGraphSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, gc);
 		generator.generateModel();
 	}
 

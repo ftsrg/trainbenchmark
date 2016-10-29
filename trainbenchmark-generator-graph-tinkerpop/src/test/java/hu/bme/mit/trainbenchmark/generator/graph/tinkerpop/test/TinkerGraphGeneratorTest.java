@@ -10,10 +10,10 @@ import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
 
 public class TinkerGraphGeneratorTest extends GeneratorTest {
 
-	public void generate(final GeneratorConfigBase gcc) throws Exception {
-		final TinkerGraphGeneratorConfig gcw = new TinkerGraphGeneratorConfig(gcc, TinkerGraphFormat.GRAPHML);
-		final TinkerGraphSerializer serializer = new TinkerGraphSerializer(gcw);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gcw);
+	public void generate(final GeneratorConfigBase gcb) throws Exception {
+		final TinkerGraphGeneratorConfig gc = new TinkerGraphGeneratorConfig(gcb, TinkerGraphFormat.GRAPHML);
+		final TinkerGraphSerializer serializer = new TinkerGraphSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();
 	}
 	

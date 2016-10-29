@@ -22,10 +22,10 @@ import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
 public class Neo4jGraphGeneratorTest extends GeneratorTest {
 
 	@Override
-	public void generate(final GeneratorConfigBase gcc) throws Exception {
-		final Neo4jGraphGeneratorConfig gcw = new Neo4jGraphGeneratorConfig(gcc);
-		final Neo4jGraphSerializer serializer = new Neo4jGraphSerializer(gcw);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gcw);
+	public void generate(final GeneratorConfigBase gcb) throws Exception {
+		final Neo4jGraphGeneratorConfig gc = new Neo4jGraphGeneratorConfig(gcb);
+		final Neo4jGraphSerializer serializer = new Neo4jGraphSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();
 	}
 

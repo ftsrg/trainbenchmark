@@ -17,8 +17,8 @@ import hu.bme.mit.trainbenchmark.generator.scalable.ScalableModelGenerator;
 
 public class ScalableGeneratorFactory {
 
-	public static <TGeneratorConfigWrapper extends GeneratorConfig> ModelGenerator createGenerator(
-			final ModelSerializer<TGeneratorConfigWrapper> serializer, final TGeneratorConfigWrapper generatorConfig) {
+	public static <TGeneratorConfig extends GeneratorConfig> ModelGenerator createGenerator(
+			final ModelSerializer<TGeneratorConfig> serializer, final TGeneratorConfig generatorConfig) {
 		return new ScalableModelGenerator(serializer, generatorConfig);
 	}
 

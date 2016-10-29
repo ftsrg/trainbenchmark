@@ -21,8 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class EpsilonTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
-		final EpsilonBenchmarkConfig bc = new EpsilonBenchmarkConfig(bcc);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+		final EpsilonBenchmarkConfig bc = new EpsilonBenchmarkConfig(bcb);
 		final EpsilonBenchmarkScenario scenario = new EpsilonBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

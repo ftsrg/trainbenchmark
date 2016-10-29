@@ -6,13 +6,13 @@ import java.util.Map;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public abstract class ModelSerializer<TGeneratorConfigWrapper extends GeneratorConfig> {
+public abstract class ModelSerializer<TGeneratorConfig extends GeneratorConfig> {
 	
-	protected final TGeneratorConfigWrapper gcw;
+	protected final TGeneratorConfig gc;
 	protected int id = 1;
 
-	public ModelSerializer(TGeneratorConfigWrapper generatorConfigWrapper) {
-		this.gcw = generatorConfigWrapper;
+	public ModelSerializer(TGeneratorConfig gc) {
+		this.gc = gc;
 	}
 	
 	public abstract String syntax();

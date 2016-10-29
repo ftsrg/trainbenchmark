@@ -8,11 +8,11 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 public abstract class ModelGenerator {
 
 	protected final ModelSerializer<?> serializer;
-	protected GeneratorConfig generatorConfigWrapper;
+	protected GeneratorConfig gc;
 
-	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
+	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig gc) {
 		this.serializer = serializer;
-		this.generatorConfigWrapper = generatorConfigWrapper;
+		this.gc = gc;
 	}
 
 	public void generateModel() throws Exception {
@@ -25,7 +25,7 @@ public abstract class ModelGenerator {
 		// messageBuilder.append("query: " +
 		// generatorConfig.getQueries().get(0));
 		// } else {
-		messageBuilder.append("size: " + generatorConfigWrapper.getGeneratorConfig().getSize());
+		messageBuilder.append("size: " + gc.getGeneratorConfig().getSize());
 		// }
 		messageBuilder.append("... ");
 		System.out.print(messageBuilder.toString());

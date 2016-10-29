@@ -19,9 +19,9 @@ import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfig;
 public class RdfGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RdfGeneratorConfig rdfGeneratorConfigWrapper = RdfGeneratorConfig.fromFile(args[0], RdfGeneratorConfig.class);
-		final RdfSerializer rdfSerializer = new RdfSerializer(rdfGeneratorConfigWrapper);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, rdfGeneratorConfigWrapper);
+		final RdfGeneratorConfig gc = RdfGeneratorConfig.fromFile(args[0], RdfGeneratorConfig.class);
+		final RdfSerializer rdfSerializer = new RdfSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, gc);
 		generator.generateModel();
 	}
 	

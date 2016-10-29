@@ -21,8 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class EclipseOclTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(final BenchmarkConfigBase bcc) throws Exception {
-		final EclipseOclBenchmarkConfig bc = new EclipseOclBenchmarkConfig(bcc);
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
+		final EclipseOclBenchmarkConfig bc = new EclipseOclBenchmarkConfig(bcb);
 		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
