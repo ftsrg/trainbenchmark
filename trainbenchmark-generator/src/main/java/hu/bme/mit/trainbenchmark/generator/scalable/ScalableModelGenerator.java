@@ -62,10 +62,10 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
-	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
-		super(serializer, generatorConfigWrapper);
-		maxRoutes = 5 * generatorConfigWrapper.getGeneratorConfig().getSize();
-		switch (generatorConfigWrapper.getGeneratorConfig().getScenario()) {
+	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
+		super(serializer, generatorConfig);
+		maxRoutes = 5 * generatorConfig.getGeneratorConfig().getSize();
+		switch (generatorConfig.getGeneratorConfig().getScenario()) {
 		case BATCH:
 			// set all error percents to 0
 			break;

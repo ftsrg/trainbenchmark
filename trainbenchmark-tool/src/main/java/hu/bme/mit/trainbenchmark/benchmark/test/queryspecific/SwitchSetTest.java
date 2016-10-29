@@ -25,8 +25,8 @@ public abstract class SwitchSetTest extends QueryTest {
 				RailwayOperation.SWITCHSET_REPAIR //
 		);
 		final String workload = "SwitchSetTest";
-		final BenchmarkConfigBase bcc = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
-		final BenchmarkResult result = runTest(bcc);
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+		final BenchmarkResult result = runTest(bcb);
 		System.out.println(result);
 		System.out.println(result.csvMatches());
 		System.out.println(result.csvTimes());

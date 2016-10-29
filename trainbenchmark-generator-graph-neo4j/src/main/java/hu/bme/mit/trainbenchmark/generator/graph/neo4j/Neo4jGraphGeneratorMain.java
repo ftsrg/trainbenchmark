@@ -20,9 +20,9 @@ import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGenerato
 public class Neo4jGraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Neo4jGraphGeneratorConfig generatorConfigWrapper = GeneratorConfig.fromFile(args[0], Neo4jGraphGeneratorConfig.class);
-		final Neo4jGraphSerializer rdfSerializer = new Neo4jGraphSerializer(generatorConfigWrapper);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
+		final Neo4jGraphGeneratorConfig gc = GeneratorConfig.fromFile(args[0], Neo4jGraphGeneratorConfig.class);
+		final Neo4jGraphSerializer rdfSerializer = new Neo4jGraphSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, gc);
 		generator.generateModel();
 	}
 

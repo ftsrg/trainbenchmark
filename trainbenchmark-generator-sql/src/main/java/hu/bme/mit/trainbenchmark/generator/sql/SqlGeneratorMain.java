@@ -20,9 +20,9 @@ import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfig;
 public class SqlGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final SqlGeneratorConfig generatorConfigWrapper = GeneratorConfig.fromFile(args[0], SqlGeneratorConfig.class);
-		final SqlSerializer sqlSerializer = new SqlSerializer(generatorConfigWrapper);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(sqlSerializer, generatorConfigWrapper);
+		final SqlGeneratorConfig gc = GeneratorConfig.fromFile(args[0], SqlGeneratorConfig.class);
+		final SqlSerializer sqlSerializer = new SqlSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(sqlSerializer, gc);
 		generator.generateModel();
 	}
 

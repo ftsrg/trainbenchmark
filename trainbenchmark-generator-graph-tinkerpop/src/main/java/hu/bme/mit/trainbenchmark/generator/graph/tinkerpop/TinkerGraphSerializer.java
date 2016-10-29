@@ -110,7 +110,7 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 	@Override
 	public void persistModel() throws IOException, XMLStreamException, ClassNotFoundException, IllegalAccessException,
 			InstantiationException {
-		final TinkerGraphFormat format = gcw.getGraphFormat();
+		final TinkerGraphFormat format = gc.getGraphFormat();
 		Builder<?> builder = null;
 		switch (format) {
 		case GRAPHML:
@@ -127,7 +127,7 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 		}
 
 		final String extension = "-tinkerpop." + format.toString().toLowerCase();
-		final String fileName = gcw.getGeneratorConfig().getModelPathWithoutExtension() + extension;
+		final String fileName = gc.getGeneratorConfig().getModelPathWithoutExtension() + extension;
 		graph.io(builder).writeGraph(fileName);
 		graph.close();
 	}

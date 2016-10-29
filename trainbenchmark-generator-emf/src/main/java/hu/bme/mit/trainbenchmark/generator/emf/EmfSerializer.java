@@ -43,8 +43,8 @@ import hu.bme.mit.trainbenchmark.railway.Route;
 
 public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 
-	public EmfSerializer(final EmfGeneratorConfig generatorConfigWrapper) {
-		super(generatorConfigWrapper);
+	public EmfSerializer(final EmfGeneratorConfig generatorConfig) {
+		super(generatorConfig);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 	@Override
 	public void initModel() {
 		EmfUtil.registerExtension();
-		final String modelPath = gcw.getGeneratorConfig().getModelPathWithoutExtension() + "."
+		final String modelPath = gc.getGeneratorConfig().getModelPathWithoutExtension() + "."
 				+ EmfConstants.MODEL_EXTENSION;
 		final URI resourceURI = URI.createFileURI(modelPath);
 

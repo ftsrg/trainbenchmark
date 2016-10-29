@@ -13,19 +13,19 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
-public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkConfigWrapper extends BenchmarkConfig> {
+public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkConfig extends BenchmarkConfig> {
 
 	protected final Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	protected final TDriver driver;
 	protected final ModelOperationFactory<TPatternMatch, TDriver> factory;
 	protected final Comparator<TPatternMatch> comparator;
-	protected final TBenchmarkConfigWrapper bc;
+	protected final TBenchmarkConfig bc;
 	protected final BenchmarkResult benchmarkResults;
 
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
 	public BenchmarkBundle(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> factory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bc, final BenchmarkResult benchmarkResults) throws Exception {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfig bc, final BenchmarkResult benchmarkResults) throws Exception {
 		this.driver = driverFactory.createInstance();
 		this.factory = factory;
 		this.comparator = comparator;

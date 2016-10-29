@@ -20,8 +20,8 @@ public class EclipseOclBenchmarkConfig extends BenchmarkConfig {
 	protected EclipseOclBenchmarkConfig() {
 	}
 	
-	public EclipseOclBenchmarkConfig(final BenchmarkConfigBase bcc) {
-		super(bcc);
+	public EclipseOclBenchmarkConfig(final BenchmarkConfigBase bcb) {
+		super(bcb);
 	}
 	
 	@Override

@@ -22,8 +22,8 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	protected Neo4jBenchmarkConfig() {
 	}
 	
-	public Neo4jBenchmarkConfig(final BenchmarkConfigBase bcc, final Neo4jEngine engine) {
-		super(bcc);
+	public Neo4jBenchmarkConfig(final BenchmarkConfigBase bcb, final Neo4jEngine engine) {
+		super(bcb);
 		this.engine = engine;
 	}
 	

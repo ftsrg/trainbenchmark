@@ -20,8 +20,8 @@ public class DroolsBenchmarkConfig extends BenchmarkConfig {
 	protected DroolsBenchmarkConfig() {
 	}
 	
-	public DroolsBenchmarkConfig(final BenchmarkConfigBase bcc) {
-		super(bcc);
+	public DroolsBenchmarkConfig(final BenchmarkConfigBase bcb) {
+		super(bcb);
 	}
 	
 	@Override

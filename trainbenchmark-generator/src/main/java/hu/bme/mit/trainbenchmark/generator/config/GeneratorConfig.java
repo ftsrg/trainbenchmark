@@ -2,51 +2,36 @@ package hu.bme.mit.trainbenchmark.generator.config;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
-import com.esotericsoftware.kryo.io.Output;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 
 public abstract class GeneratorConfig extends AbstractConfig<GeneratorConfigBase> {
 
-	protected GeneratorConfigBase generatorConfig;
-	
-	protected GeneratorConfig() {}
-
-	public GeneratorConfig(final GeneratorConfigBase generatorConfig) {
-		this.generatorConfig = generatorConfig;
+	protected GeneratorConfig() {
 	}
-	
+
+	public GeneratorConfig(final GeneratorConfigBase configBase) {
+		this.configBase = configBase;
+	}
+
 	/**
 	 * @return The name of the project to be executed. Example: "emf"
 	 */
 	public abstract String getProjectName();
-		
+
 	public GeneratorConfigBase getGeneratorConfig() {
-		return generatorConfig;
-	}
-	
-	/**
-	 * Serialize the configuration to a file. This does not need to be redefined in the subclasses (e.g. {Neo4jBenchmarkConfigWrapper}).
-	 * @param path
-	 * @throws FileNotFoundException
-	 */
-	public final void saveToFile(final String path) throws FileNotFoundException {
-		final Kryo kryo = new Kryo();
-		try (final Output output = new Output(new FileOutputStream(path))) {
-			kryo.writeObject(output, this);
-		}
+		return configBase;
 	}
 
 	public static <T extends GeneratorConfig> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
-			final T generatorConfigWrapper = kryo.readObject(input, clazz);
-			return generatorConfigWrapper;
+			final T gc = kryo.readObject(input, clazz);
+			return gc;
 		}
 	}
-	
+
 }

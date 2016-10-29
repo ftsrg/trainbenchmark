@@ -21,8 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class EmfApiTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
-		final EmfApiBenchmarkConfig bc = new EmfApiBenchmarkConfig(bcc);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+		final EmfApiBenchmarkConfig bc = new EmfApiBenchmarkConfig(bcb);
 		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

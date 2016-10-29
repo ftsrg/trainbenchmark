@@ -21,8 +21,8 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchma
 public class TinkerGraphTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
-		final TinkerGraphBenchmarkConfig bc = new TinkerGraphBenchmarkConfig(bcc);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+		final TinkerGraphBenchmarkConfig bc = new TinkerGraphBenchmarkConfig(bcb);
 		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

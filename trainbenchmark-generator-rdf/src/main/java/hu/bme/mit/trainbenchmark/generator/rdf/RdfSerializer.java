@@ -33,30 +33,30 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 	protected BufferedWriter file;
 	protected String RDF_METAMODEL_DIR = "/trainbenchmark-format-rdf/src/main/resources/metamodel/";
 
-	public RdfSerializer(final RdfGeneratorConfig generatorConfigWrapper) {
-		super(generatorConfigWrapper);
+	public RdfSerializer(final RdfGeneratorConfig generatorConfig) {
+		super(generatorConfig);
 	}
 
 	@Override
 	public String syntax() {
-		return "RDF" + gcw.getModelFlavor();
+		return "RDF" + gc.getModelFlavor();
 	}
 
 	@Override
 	public void initModel() throws IOException {
 		// source file
-		final String modelFlavor = gcw.getModelFlavor();
-		final String extension = gcw.getExtension();
+		final String modelFlavor = gc.getModelFlavor();
+		final String extension = gc.getExtension();
 
 		final String postfix = modelFlavor + "." + extension;
 
-		final String srcFilePath = gcw.getGeneratorConfig().getWorkspaceDir() + RDF_METAMODEL_DIR
+		final String srcFilePath = gc.getGeneratorConfig().getWorkspaceDir() + RDF_METAMODEL_DIR
 				+ "railway" + postfix;
 
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = gcw.getGeneratorConfig().getModelPathWithoutExtension()
+		final String destFilePath = gc.getGeneratorConfig().getModelPathWithoutExtension()
 				+ postfix;
 		final File destFile = new File(destFilePath);
 
@@ -81,7 +81,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
 		final String linePrefix;
 
-		switch (gcw.getFormat()) {
+		switch (gc.getFormat()) {
 		case NTRIPLES:
 			linePrefix = String.format(" .\n:%s%d ", ID_PREFIX, id);
 			break;
@@ -90,11 +90,11 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 			break;
 		default:
 			throw new UnsupportedOperationException(
-					"RDF format " + gcw.getFormat() + " not supported");
+					"RDF format " + gc.getFormat() + " not supported");
 		}
 
 		// if the metamodel is not included, we manually insert the inferenced triples
-		if (gcw.isInferred()) {
+		if (gc.isInferred()) {
 			if (ModelConstants.SUPERTYPES.containsKey(type)) {
 				final String superType = ModelConstants.SUPERTYPES.get(type);
 
@@ -150,7 +150,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 	}
 
 	protected void write(final String s) throws IOException {
-		switch (gcw.getFormat()) {
+		switch (gc.getFormat()) {
 		case NTRIPLES:
 			file.write(s + "\n");
 			break;
@@ -159,7 +159,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 			break;
 		default:
 			throw new UnsupportedOperationException(
-					"RDF format " + gcw.getFormat() + " not supported");
+					"RDF format " + gc.getFormat() + " not supported");
 		}
 	}
 

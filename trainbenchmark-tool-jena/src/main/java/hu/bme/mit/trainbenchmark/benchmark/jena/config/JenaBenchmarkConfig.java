@@ -20,8 +20,8 @@ public class JenaBenchmarkConfig extends RdfBenchmarkConfig {
 	protected JenaBenchmarkConfig() {
 	}
 	
-	public JenaBenchmarkConfig(final BenchmarkConfigBase bcc, final boolean inferencing) {
-		super(bcc, inferencing);
+	public JenaBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
+		super(bcb, inferencing);
 	}
 	
 	@Override

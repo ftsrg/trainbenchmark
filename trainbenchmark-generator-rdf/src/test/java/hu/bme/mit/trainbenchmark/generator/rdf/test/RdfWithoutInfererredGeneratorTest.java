@@ -11,10 +11,10 @@ import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 public class RdfWithoutInfererredGeneratorTest extends GeneratorTest {
 	
 	@Override
-	public void generate(final GeneratorConfigBase gcc) throws Exception {
-		final RdfGeneratorConfig gcw = new RdfGeneratorConfig(gcc, false, RdfFormat.TURTLE);
-		final RdfSerializer serializer = new RdfSerializer(gcw);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gcw);
+	public void generate(final GeneratorConfigBase gcb) throws Exception {
+		final RdfGeneratorConfig gc = new RdfGeneratorConfig(gcb, false, RdfFormat.TURTLE);
+		final RdfSerializer serializer = new RdfSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();
 	}
 

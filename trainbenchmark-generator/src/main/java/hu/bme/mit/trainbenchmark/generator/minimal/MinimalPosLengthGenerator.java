@@ -16,8 +16,8 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class MinimalPosLengthGenerator extends MinimalModelGenerator {
 
-	public MinimalPosLengthGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
-		super(serializer, generatorConfigWrapper);
+	public MinimalPosLengthGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
+		super(serializer, generatorConfig);
 	}
 
 	@Override

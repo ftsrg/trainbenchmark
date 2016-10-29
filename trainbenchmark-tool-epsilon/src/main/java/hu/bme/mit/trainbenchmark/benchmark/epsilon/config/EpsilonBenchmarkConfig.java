@@ -20,8 +20,8 @@ public class EpsilonBenchmarkConfig extends BenchmarkConfig {
 	protected EpsilonBenchmarkConfig() {
 	}
 	
-	public EpsilonBenchmarkConfig(final BenchmarkConfigBase bcc) {
-		super(bcc);
+	public EpsilonBenchmarkConfig(final BenchmarkConfigBase bcb) {
+		super(bcb);
 	}
 	
 	@Override
