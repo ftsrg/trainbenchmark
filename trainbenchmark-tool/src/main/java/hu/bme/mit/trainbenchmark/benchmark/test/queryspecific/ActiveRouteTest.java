@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -25,7 +25,7 @@ public abstract class ActiveRouteTest extends QueryTest {
 				RailwayOperation.ACTIVEROUTE //
 		);
 		final String workload = "ActiveRouteTest";
-		final BenchmarkConfigCore bcc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
+		final BenchmarkConfigBase bcc = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload);
 		
 		final BenchmarkResult result = runTest(bcc);

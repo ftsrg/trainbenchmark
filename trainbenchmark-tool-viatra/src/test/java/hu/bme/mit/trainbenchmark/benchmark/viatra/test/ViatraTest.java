@@ -19,12 +19,12 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ViatraBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
 
 @RunWith(Parameterized.class)
 public class ViatraTest extends TrainBenchmarkTest {
@@ -38,9 +38,9 @@ public class ViatraTest extends TrainBenchmarkTest {
 	public ViatraBackend backend;
 	
 	@Override
-	protected BenchmarkResult runTest(final BenchmarkConfigCore bcc) throws Exception {
-		final ViatraBenchmarkConfigWrapper bcw = new ViatraBenchmarkConfigWrapper(bcc, backend);
-		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bcw);
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcc) throws Exception {
+		final ViatraBenchmarkConfig bc = new ViatraBenchmarkConfig(bcc, backend);
+		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

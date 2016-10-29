@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
 
 public class ViatraBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final ViatraBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], ViatraBenchmarkConfigWrapper.class);
-		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bcw);
+		final ViatraBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], ViatraBenchmarkConfig.class);
+		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 

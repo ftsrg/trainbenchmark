@@ -10,30 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config;
+package hu.bme.mit.trainbenchmark.benchmark.sqlite.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public class TinkerGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
+public class SQLiteBenchmarkConfig extends BenchmarkConfig {
 
-	protected TinkerGraphFormat graphFormat;
-	
-	protected TinkerGraphGeneratorConfigWrapper() {
+	protected SQLiteBenchmarkConfig() {
 	}
 	
-	public TinkerGraphGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig, final TinkerGraphFormat graphFormat) {
-		super(generatorConfig);
-		this.graphFormat = graphFormat;
+	public SQLiteBenchmarkConfig(final BenchmarkConfigBase bcc) {
+		super(bcc);
 	}
 	
-	public TinkerGraphFormat getGraphFormat() {
-		return graphFormat;
+	@Override
+	public String getToolName() {
+		return "SQLite";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "graph-tinkerpop";
+		return "sqlite";
 	}
-
+	
 }

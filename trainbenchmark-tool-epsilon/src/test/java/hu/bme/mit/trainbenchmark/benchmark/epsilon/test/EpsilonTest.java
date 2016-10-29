@@ -12,18 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.epsilon.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.epsilon.EpsilonBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
 public class EpsilonTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
-		final EpsilonBenchmarkConfigWrapper bcw = new EpsilonBenchmarkConfigWrapper(bcc);
-		final EpsilonBenchmarkScenario scenario = new EpsilonBenchmarkScenario(bcw);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
+		final EpsilonBenchmarkConfig bc = new EpsilonBenchmarkConfig(bcc);
+		final EpsilonBenchmarkScenario scenario = new EpsilonBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

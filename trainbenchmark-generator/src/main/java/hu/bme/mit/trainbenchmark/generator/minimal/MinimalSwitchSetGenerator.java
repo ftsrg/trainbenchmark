@@ -26,11 +26,11 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class MinimalSwitchSetGenerator extends MinimalModelGenerator {
 
-	public MinimalSwitchSetGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+	public MinimalSwitchSetGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
 		super(serializer, generatorConfigWrapper);
 	}
 

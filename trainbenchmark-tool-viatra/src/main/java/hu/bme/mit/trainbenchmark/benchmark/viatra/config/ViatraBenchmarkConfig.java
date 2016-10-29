@@ -9,29 +9,35 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
+package hu.bme.mit.trainbenchmark.benchmark.viatra.config;
 
-package hu.bme.mit.trainbenchmark.benchmark.jena.config;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfigWrapper;
+public class ViatraBenchmarkConfig extends BenchmarkConfig {
 
-public class JenaBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
-
-	protected JenaBenchmarkConfigWrapper() {
+	protected ViatraBackend backend;
+	
+	protected ViatraBenchmarkConfig() {
 	}
 	
-	public JenaBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final boolean inferencing) {
-		super(bcc, inferencing);
+	public ViatraBenchmarkConfig(final BenchmarkConfigBase bcc, final ViatraBackend backend) {
+		super(bcc);
+		this.backend = backend;
+	}	
+	
+	public ViatraBackend getBackend() {
+		return backend;
 	}
 	
 	@Override
 	public String getToolName() {
-		return "Jena" + getToolNamePostfix();
+		return "VIATRA (" + getBackend().toString() + ")";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "jena";
+		return "viatra";
 	}
-	
+
 }

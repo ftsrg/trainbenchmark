@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 
 public class Neo4jBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Neo4jBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], Neo4jBenchmarkConfigWrapper.class);
-		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bcw);
+		final Neo4jBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], Neo4jBenchmarkConfig.class);
+		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 

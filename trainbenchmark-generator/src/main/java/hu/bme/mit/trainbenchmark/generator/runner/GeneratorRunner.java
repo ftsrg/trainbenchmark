@@ -6,11 +6,11 @@ import java.io.IOException;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class GeneratorRunner {
 
-	public static int run(final GeneratorConfigWrapper gcw)
+	public static int run(final GeneratorConfig gcw)
 			throws IOException, InterruptedException {
 		final File configFile = File.createTempFile("trainbenchmark-generator-", ".conf");
 		final String configPath = configFile.getAbsolutePath();

@@ -10,29 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.rdf.config;
+package hu.bme.mit.trainbenchmark.benchmark.mysql.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public abstract class RdfBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class MySqlBenchmarkConfig extends BenchmarkConfig {
 
-	protected boolean inferencing;
-
-	protected RdfBenchmarkConfigWrapper() {
+	protected MySqlBenchmarkConfig() {
 	}
-
-	public RdfBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final boolean inferencing) {
+	
+	public MySqlBenchmarkConfig(final BenchmarkConfigBase bcc) {
 		super(bcc);
-		this.inferencing = inferencing;
+	}
+	
+	@Override
+	public String getToolName() {
+		return "MySQL";
 	}
 
-	public boolean isInferencing() {
-		return inferencing;
+	@Override
+	public String getProjectName() {
+		return "mysql";
 	}
-
-	protected String getToolNamePostfix() {
-		return isInferencing() ? " (Inferencing)" : " (No Inferencing)";
-	}
-
+	
 }

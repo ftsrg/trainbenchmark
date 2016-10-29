@@ -8,13 +8,15 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
-public abstract class GeneratorConfigWrapper {
+import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 
-	protected GeneratorConfigCore generatorConfig;
+public abstract class GeneratorConfig extends AbstractConfig<GeneratorConfigBase> {
+
+	protected GeneratorConfigBase generatorConfig;
 	
-	protected GeneratorConfigWrapper() {}
+	protected GeneratorConfig() {}
 
-	public GeneratorConfigWrapper(final GeneratorConfigCore generatorConfig) {
+	public GeneratorConfig(final GeneratorConfigBase generatorConfig) {
 		this.generatorConfig = generatorConfig;
 	}
 	
@@ -23,7 +25,7 @@ public abstract class GeneratorConfigWrapper {
 	 */
 	public abstract String getProjectName();
 		
-	public GeneratorConfigCore getGeneratorConfig() {
+	public GeneratorConfigBase getGeneratorConfig() {
 		return generatorConfig;
 	}
 	
@@ -39,7 +41,7 @@ public abstract class GeneratorConfigWrapper {
 		}
 	}
 
-	public static <T extends GeneratorConfigWrapper> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
+	public static <T extends GeneratorConfig> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
 			final T generatorConfigWrapper = kryo.readObject(input, clazz);

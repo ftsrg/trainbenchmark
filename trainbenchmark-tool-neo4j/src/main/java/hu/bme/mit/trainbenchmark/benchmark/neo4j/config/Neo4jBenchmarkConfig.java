@@ -10,23 +10,35 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public class Neo4jGraphGeneratorConfigWrapper extends GeneratorConfigWrapper {
+public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
-	protected Neo4jGraphGeneratorConfigWrapper() {
+	protected Neo4jEngine engine;
+
+	protected Neo4jBenchmarkConfig() {
 	}
 	
-	public Neo4jGraphGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig) {
-		super(generatorConfig);
+	public Neo4jBenchmarkConfig(final BenchmarkConfigBase bcc, final Neo4jEngine engine) {
+		super(bcc);
+		this.engine = engine;
+	}
+	
+	public Neo4jEngine getEngine() {
+		return engine;
+	}
+	
+	@Override
+	public String getToolName() {
+		return "Neo4j (" + getEngine().toString() + ")";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "graph-neo4j";
+		return "neo4j";
 	}
 	
 }

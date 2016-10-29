@@ -12,19 +12,19 @@ import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkReader;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig;
 
 public class IqdCoreDriver extends Driver {
 
 	protected final TrainbenchmarkReader reader = new TrainbenchmarkReader();
-	protected final IqdCoreBenchmarkConfigWrapper bcw;
+	protected final IqdCoreBenchmarkConfig bc;
 	protected final TransactionFactory transactionFactory;
 	protected TrainbenchmarkQuery query;
 	protected Transaction lastTransaction;
 
-	public IqdCoreDriver(final IqdCoreBenchmarkConfigWrapper bcw, final TransactionFactory transactionFactory) {
+	public IqdCoreDriver(final IqdCoreBenchmarkConfig bc, final TransactionFactory transactionFactory) {
 		super();
-		this.bcw = bcw;
+		this.bc = bc;
 		this.transactionFactory = transactionFactory;
 	}
 
@@ -58,7 +58,7 @@ public class IqdCoreDriver extends Driver {
 	}
 
 	public String getQueryVariant() {
-		return bcw.getQueryVariant();
+		return bc.getQueryVariant();
 	}
 
 	public void flushLastTransaction() {
@@ -69,13 +69,13 @@ public class IqdCoreDriver extends Driver {
 	}
 
 	public void maybeMeasureMemory() {
-		final String memPath = bcw.getMemoryMeasurementPath();
+		final String memPath = bc.getMemoryMeasurementPath();
 		if (memPath != null) {
 			final MemoryMeter meter = new MemoryMeter();
 			final long memoryB = meter.measureDeep(query);
 			final double memoryMB = memoryB / Math.pow(10, 6);
 			final String line = String.join(",",
-					Arrays.asList(bcw.getToolName(), bcw.getQueryVariant(), bcw.getFileName(), String.format("%.02f", memoryMB))) + "\n";
+					Arrays.asList(bc.getToolName(), bc.getQueryVariant(), bc.getFileName(), String.format("%.02f", memoryMB))) + "\n";
 			try {
 				FileUtils.write(new File(memPath), line, true);
 			} catch (final IOException e) {

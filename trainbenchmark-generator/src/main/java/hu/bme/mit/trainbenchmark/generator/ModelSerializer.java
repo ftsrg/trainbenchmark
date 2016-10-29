@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public abstract class ModelSerializer<TGeneratorConfigWrapper extends GeneratorConfigWrapper> {
+public abstract class ModelSerializer<TGeneratorConfigWrapper extends GeneratorConfig> {
 	
 	protected final TGeneratorConfigWrapper gcw;
 	protected int id = 1;

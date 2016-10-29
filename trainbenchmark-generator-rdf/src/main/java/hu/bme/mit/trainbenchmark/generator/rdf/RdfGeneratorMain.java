@@ -14,12 +14,12 @@ package hu.bme.mit.trainbenchmark.generator.rdf;
 
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
-import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfig;
 
 public class RdfGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final RdfGeneratorConfigWrapper rdfGeneratorConfigWrapper = RdfGeneratorConfigWrapper.fromFile(args[0], RdfGeneratorConfigWrapper.class);
+		final RdfGeneratorConfig rdfGeneratorConfigWrapper = RdfGeneratorConfig.fromFile(args[0], RdfGeneratorConfig.class);
 		final RdfSerializer rdfSerializer = new RdfSerializer(rdfGeneratorConfigWrapper);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, rdfGeneratorConfigWrapper);
 		generator.generateModel();

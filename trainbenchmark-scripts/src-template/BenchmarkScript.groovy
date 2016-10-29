@@ -1,20 +1,20 @@
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkReporter
-import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore
-import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
-import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigWrapper
-import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigWrapper
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 
@@ -39,22 +39,22 @@ for (size = minSize; size <= maxSize; size *= 2) {
 
     def bcc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload)
 
-    BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bcc, false))
-    BenchmarkRunner.run(new BlazegraphBenchmarkConfigWrapper(bcc, true))
-    BenchmarkRunner.run(new EclipseOclBenchmarkConfigWrapper(bcc))
-    BenchmarkRunner.run(new DroolsBenchmarkConfigWrapper(bcc))
-    BenchmarkRunner.run(new EmfApiBenchmarkConfigWrapper(bcc))
-    BenchmarkRunner.run(new IqdCoreBenchmarkConfigWrapper(bcc, 16, "", null))
-    BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bcc, false))
-    BenchmarkRunner.run(new JenaBenchmarkConfigWrapper(bcc, true))
-    BenchmarkRunner.run(new MySqlBenchmarkConfigWrapper(bcc))
-    BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bcc, Neo4jEngine.COREAPI))
-    BenchmarkRunner.run(new Neo4jBenchmarkConfigWrapper(bcc, Neo4jEngine.CYPHER))
-    BenchmarkRunner.run(new Rdf4jBenchmarkConfigWrapper(bcc, false))
-    BenchmarkRunner.run(new SQLiteBenchmarkConfigWrapper(bcc))
-    BenchmarkRunner.run(new TinkerGraphBenchmarkConfigWrapper(bcc))
-    BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bcc, ViatraBackend.INCREMENTAL))
-    BenchmarkRunner.run(new ViatraBenchmarkConfigWrapper(bcc, ViatraBackend.LOCAL_SEARCH))
+    BenchmarkRunner.run(new BlazegraphBenchmarkConfig(bcc, false))
+    BenchmarkRunner.run(new BlazegraphBenchmarkConfig(bcc, true))
+    BenchmarkRunner.run(new EclipseOclBenchmarkConfig(bcc))
+    BenchmarkRunner.run(new DroolsBenchmarkConfig(bcc))
+    BenchmarkRunner.run(new EmfApiBenchmarkConfig(bcc))
+    BenchmarkRunner.run(new IqdCoreBenchmarkConfig(bcc, 16, "", null))
+    BenchmarkRunner.run(new JenaBenchmarkConfig(bcc, false))
+    BenchmarkRunner.run(new JenaBenchmarkConfig(bcc, true))
+    BenchmarkRunner.run(new MySqlBenchmarkConfig(bcc))
+    BenchmarkRunner.run(new Neo4jBenchmarkConfig(bcc, Neo4jEngine.COREAPI))
+    BenchmarkRunner.run(new Neo4jBenchmarkConfig(bcc, Neo4jEngine.CYPHER))
+    BenchmarkRunner.run(new Rdf4jBenchmarkConfig(bcc, false))
+    BenchmarkRunner.run(new SQLiteBenchmarkConfig(bcc))
+    BenchmarkRunner.run(new TinkerGraphBenchmarkConfig(bcc))
+    BenchmarkRunner.run(new ViatraBenchmarkConfig(bcc, ViatraBackend.INCREMENTAL))
+    BenchmarkRunner.run(new ViatraBenchmarkConfig(bcc, ViatraBackend.LOCAL_SEARCH))
 }
 
 BenchmarkReporter.reportReady()

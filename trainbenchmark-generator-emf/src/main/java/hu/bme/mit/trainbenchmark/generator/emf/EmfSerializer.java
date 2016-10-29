@@ -33,7 +33,7 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfUtil;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfig;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
@@ -41,9 +41,9 @@ import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Route;
 
-public class EmfSerializer extends ModelSerializer<EmfGeneratorConfigWrapper> {
+public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 
-	public EmfSerializer(final EmfGeneratorConfigWrapper generatorConfigWrapper) {
+	public EmfSerializer(final EmfGeneratorConfig generatorConfigWrapper) {
 		super(generatorConfigWrapper);
 	}
 

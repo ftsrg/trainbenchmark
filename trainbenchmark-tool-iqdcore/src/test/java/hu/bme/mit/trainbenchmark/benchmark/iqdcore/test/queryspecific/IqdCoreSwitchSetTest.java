@@ -19,9 +19,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IqdCoreBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.SwitchSetTest;
 
@@ -37,10 +37,10 @@ public class IqdCoreSwitchSetTest extends SwitchSetTest {
 	public String variant;
 
 	@Override
-	protected BenchmarkResult runTest(final BenchmarkConfigCore bcc) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcc) throws Exception {
 		final int messageSize = 16;
-		final IqdCoreBenchmarkConfigWrapper bcw = new IqdCoreBenchmarkConfigWrapper(bcc, messageSize, variant, null);
-		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bcw);
+		final IqdCoreBenchmarkConfig bc = new IqdCoreBenchmarkConfig(bcc, messageSize, variant, null);
+		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

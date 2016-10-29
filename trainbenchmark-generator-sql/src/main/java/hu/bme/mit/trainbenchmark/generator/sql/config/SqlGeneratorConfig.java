@@ -10,17 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.blazegraph;
+package hu.bme.mit.trainbenchmark.generator.sql.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class BlazegraphBenchmarkMain {
+public class SqlGeneratorConfig extends GeneratorConfig {
 
-	public static void main(final String[] args) throws Exception {
-		final BlazegraphBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], BlazegraphBenchmarkConfig.class);
-		final BlazegraphBenchmarkScenario scenario = new BlazegraphBenchmarkScenario(bc);
-		scenario.performBenchmark();
+	protected SqlGeneratorConfig() {
+	}
+	
+	public SqlGeneratorConfig(final GeneratorConfigBase generatorConfig) {
+		super(generatorConfig);
 	}
 
+	@Override
+	public String getProjectName() {
+		return "sql";
+	}
+	
 }

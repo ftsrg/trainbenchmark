@@ -12,18 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.TinkerGraphBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
 
 public class TinkerGraphTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
-		final TinkerGraphBenchmarkConfigWrapper bcw = new TinkerGraphBenchmarkConfigWrapper(bcc);
-		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(bcw);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
+		final TinkerGraphBenchmarkConfig bc = new TinkerGraphBenchmarkConfig(bcc);
+		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

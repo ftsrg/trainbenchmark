@@ -12,18 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.emfapi.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.EmfApiBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
 public class EmfApiTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
-		final EmfApiBenchmarkConfigWrapper bcw = new EmfApiBenchmarkConfigWrapper(bcc);
-		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bcw);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
+		final EmfApiBenchmarkConfig bc = new EmfApiBenchmarkConfig(bcc);
+		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

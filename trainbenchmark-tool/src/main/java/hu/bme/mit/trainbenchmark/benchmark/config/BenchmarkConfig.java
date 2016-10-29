@@ -8,19 +8,19 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
-public abstract class BenchmarkConfigWrapper {
+import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 
-	protected BenchmarkConfigCore bcc;
+public abstract class BenchmarkConfig extends AbstractConfig<BenchmarkConfigBase> {
 
-	protected BenchmarkConfigWrapper() {
+	protected BenchmarkConfig() {
 	}
 
-	public BenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
-		this.bcc = bcc;
+	public BenchmarkConfig(final BenchmarkConfigBase configBase) {
+		this.configBase = configBase;
 	}
 
-	public BenchmarkConfigCore getBenchmarkConfigCore() {
-		return bcc;
+	public BenchmarkConfigBase getConfigBase() {
+		return configBase;
 	}
 
 	/**
@@ -51,11 +51,11 @@ public abstract class BenchmarkConfigWrapper {
 		}
 	}
 
-	public static <T extends BenchmarkConfigWrapper> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
+	public static <T extends BenchmarkConfig> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
-			final T bcw = kryo.readObject(input, clazz);
-			return bcw;
+			final T bc = kryo.readObject(input, clazz);
+			return bc;
 		}
 	}
 	

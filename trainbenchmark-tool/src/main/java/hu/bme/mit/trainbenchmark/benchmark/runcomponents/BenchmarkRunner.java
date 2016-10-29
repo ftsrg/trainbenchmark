@@ -10,27 +10,27 @@ import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.Executor;
 import org.apache.commons.exec.PumpStreamHandler;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public class BenchmarkRunner {
 
-	public static int run(final BenchmarkConfigWrapper bcw) throws IOException, InterruptedException {
-		System.out.println("Running benchmark: " + bcw.getToolName());
-		System.out.println("Model: " + bcw.getBenchmarkConfigCore().getModelPath());
-		System.out.println("Description: " + bcw.getDescription());
+	public static int run(final BenchmarkConfig bc) throws IOException, InterruptedException {
+		System.out.println("Running benchmark: " + bc.getToolName());
+		System.out.println("Model: " + bc.getConfigBase().getModelPath());
+		System.out.println("Description: " + bc.getDescription());
 
 		final File configFile = File.createTempFile("trainbenchmark-benchmark-", ".conf");
 		final String configPath = configFile.getAbsolutePath();
-		bcw.saveToFile(configPath);
+		bc.saveToFile(configPath);
 
-		final String projectName = String.format("trainbenchmark-tool-%s", bcw.getProjectName());
+		final String projectName = String.format("trainbenchmark-tool-%s", bc.getProjectName());
 		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName, projectName, configPath);
 
-		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s", bcw.getBenchmarkConfigCore().getXms(), bcw.getBenchmarkConfigCore().getXmx(),
+		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s", bc.getConfigBase().getXms(), bc.getConfigBase().getXmx(),
 				jarPath, configPath);
 		final CommandLine cmdLine = CommandLine.parse(javaCommand);
 
-		final long timeoutInSeconds = bcw.getBenchmarkConfigCore().getTimeout();
+		final long timeoutInSeconds = bc.getConfigBase().getTimeout();
 		final long timeoutInMilliseconds = timeoutInSeconds * 1000;
 		final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeoutInMilliseconds);
 		final Executor executor = new DefaultExecutor();

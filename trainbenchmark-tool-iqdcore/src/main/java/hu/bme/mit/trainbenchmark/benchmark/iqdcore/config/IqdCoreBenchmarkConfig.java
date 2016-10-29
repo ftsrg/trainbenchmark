@@ -1,18 +1,18 @@
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
-public class IqdCoreBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class IqdCoreBenchmarkConfig extends BenchmarkConfig {
 
 	protected int messageSize;
 	protected String queryVariant;
 	protected String memoryMeasurementPath;
 
-	protected IqdCoreBenchmarkConfigWrapper() {
+	protected IqdCoreBenchmarkConfig() {
 	}
 
-	public IqdCoreBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final int messageSize, final String queryVariant,
+	public IqdCoreBenchmarkConfig(final BenchmarkConfigBase bcc, final int messageSize, final String queryVariant,
 			final String memoryMeasurementPath) {
 		super(bcc);
 		this.messageSize = messageSize;
@@ -21,7 +21,7 @@ public class IqdCoreBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
 	}
 
 	public String getFileName() {
-		return bcc.getModelFilename();
+		return getConfigBase().getModelFilename();
 	}
 
 	public int getMessageSize() {

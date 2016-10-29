@@ -10,28 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.rdf4j.config;
+package hu.bme.mit.trainbenchmark.generator.emf.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class Rdf4jBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
+public class EmfGeneratorConfig extends GeneratorConfig {
 
-	protected Rdf4jBenchmarkConfigWrapper() {
+	protected EmfGeneratorConfig() {
 	}
 	
-	public Rdf4jBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final boolean inferencing) {
-		super(bcc, inferencing);
-	}
-	
-	@Override
-	public String getToolName() {
-		return "RDF4J" + getToolNamePostfix();
+	public EmfGeneratorConfig(final GeneratorConfigBase generatorConfig) {
+		super(generatorConfig);
 	}
 
 	@Override
 	public String getProjectName() {
-		return "rdf4j";
+		return "emf";
 	}
 	
 }

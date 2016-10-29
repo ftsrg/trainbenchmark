@@ -9,35 +9,29 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.viatra.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
 
-public class ViatraBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-	protected ViatraBackend backend;
-	
-	protected ViatraBenchmarkConfigWrapper() {
+public class EmfApiBenchmarkConfig extends BenchmarkConfig {
+
+	protected EmfApiBenchmarkConfig() {
 	}
 	
-	public ViatraBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final ViatraBackend backend) {
+	public EmfApiBenchmarkConfig(final BenchmarkConfigBase bcc) {
 		super(bcc);
-		this.backend = backend;
-	}	
-	
-	public ViatraBackend getBackend() {
-		return backend;
 	}
 	
 	@Override
 	public String getToolName() {
-		return "VIATRA (" + getBackend().toString() + ")";
+		return "EMF API";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "viatra";
+		return "emfapi";
 	}
-
+	
 }

@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.epsilon;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.epsilon.config.EpsilonBenchmarkConfig;
 
 public class EpsilonBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final EpsilonBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], EpsilonBenchmarkConfigWrapper.class);
-		final EpsilonBenchmarkScenario scenario = new EpsilonBenchmarkScenario(bcw);
+		final EpsilonBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], EpsilonBenchmarkConfig.class);
+		final EpsilonBenchmarkScenario scenario = new EpsilonBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 }

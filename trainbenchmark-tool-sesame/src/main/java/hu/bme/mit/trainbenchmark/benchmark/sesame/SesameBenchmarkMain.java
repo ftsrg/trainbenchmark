@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sesame;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.config.SesameBenchmarkConfig;
 
 public class SesameBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final SesameBenchmarkConfigWrapper sbcw = BenchmarkConfigWrapper.fromFile(args[0], SesameBenchmarkConfigWrapper.class);
-		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(sbcw);
+		final SesameBenchmarkConfig sbc = BenchmarkConfig.fromFile(args[0], SesameBenchmarkConfig.class);
+		final SesameBenchmarkScenario scenario = new SesameBenchmarkScenario(sbc);
 		scenario.performBenchmark();
 	}
 
