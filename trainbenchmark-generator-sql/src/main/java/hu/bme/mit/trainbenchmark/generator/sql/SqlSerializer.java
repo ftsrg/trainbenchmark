@@ -37,11 +37,11 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfig;
 import hu.bme.mit.trainbenchmark.sql.constants.SqlConstants;
 import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
 
-public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
+public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 
 	protected String sqlRawPath;
 	protected BufferedWriter writer;
@@ -49,7 +49,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfigWrapper> {
 	protected String SQL_METAMODEL_DIR = SQL_FORMAT_DIR + "src/main/resources/metamodel/";
 	protected String SQL_SCRIPT_DIR = SQL_FORMAT_DIR + "scripts/";
 
-	public SqlSerializer(final SqlGeneratorConfigWrapper generatorConfigWrapper) {
+	public SqlSerializer(final SqlGeneratorConfig generatorConfigWrapper) {
 		super(generatorConfigWrapper);
 	}
 

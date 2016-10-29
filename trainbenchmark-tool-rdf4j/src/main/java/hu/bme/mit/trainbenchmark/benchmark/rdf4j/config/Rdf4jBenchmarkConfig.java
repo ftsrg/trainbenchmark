@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config;
+package hu.bme.mit.trainbenchmark.benchmark.rdf4j.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
-public class EclipseOclBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class Rdf4jBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected EclipseOclBenchmarkConfigWrapper() {
+	protected Rdf4jBenchmarkConfig() {
 	}
 	
-	public EclipseOclBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
-		super(bcc);
+	public Rdf4jBenchmarkConfig(final BenchmarkConfigBase bcc, final boolean inferencing) {
+		super(bcc, inferencing);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "Eclipse OCL";
+		return "RDF4J" + getToolNamePostfix();
 	}
 
 	@Override
 	public String getProjectName() {
-		return "eclipseocl";
+		return "rdf4j";
 	}
 	
 }

@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.jena;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig;
 
 public class JenaBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final JenaBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], JenaBenchmarkConfigWrapper.class);
-		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(bcw);
+		final JenaBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], JenaBenchmarkConfig.class);
+		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 

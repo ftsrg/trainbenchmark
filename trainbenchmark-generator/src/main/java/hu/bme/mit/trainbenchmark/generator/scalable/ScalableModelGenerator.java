@@ -40,7 +40,7 @@ import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class ScalableModelGenerator extends ModelGenerator {
 
@@ -62,7 +62,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
-	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
 		super(serializer, generatorConfigWrapper);
 		maxRoutes = 5 * generatorConfigWrapper.getGeneratorConfig().getSize();
 		switch (generatorConfigWrapper.getGeneratorConfig().getScenario()) {

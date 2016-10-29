@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emfapi;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfig;
 
 public class EmfApiBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final EmfApiBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], EmfApiBenchmarkConfigWrapper.class);
-		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bcw);
+		final EmfApiBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], EmfApiBenchmarkConfig.class);
+		final EmfApiBenchmarkScenario scenario = new EmfApiBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 }

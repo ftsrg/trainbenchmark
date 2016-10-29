@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.epsilon.config;
+package hu.bme.mit.trainbenchmark.benchmark.blazegraph.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
-public class EpsilonBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected EpsilonBenchmarkConfigWrapper() {
+	protected BlazegraphBenchmarkConfig() {
 	}
 	
-	public EpsilonBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
-		super(bcc);
+	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase bcc, final boolean inferencing) {
+		super(bcc, inferencing);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "Epsilon";
+		return "Blazegraph" + getToolNamePostfix();
 	}
 
 	@Override
 	public String getProjectName() {
-		return "epsilon";
+		return "blazegraph";
 	}
 	
 }

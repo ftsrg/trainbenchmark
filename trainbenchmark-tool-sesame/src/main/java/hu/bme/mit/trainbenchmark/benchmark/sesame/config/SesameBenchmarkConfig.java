@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.drools.config;
+package hu.bme.mit.trainbenchmark.benchmark.sesame.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
-public class DroolsBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class SesameBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected DroolsBenchmarkConfigWrapper() {
+	protected SesameBenchmarkConfig() {
 	}
 	
-	public DroolsBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
-		super(bcc);
+	public SesameBenchmarkConfig(final BenchmarkConfigBase benchmarkConfig, final boolean inferencing) {
+		super(benchmarkConfig, inferencing);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "Drools";
+		return "Sesame" + getToolNamePostfix();
 	}
 
 	@Override
 	public String getProjectName() {
-		return "drools";
+		return "sesame";
 	}
 	
 }

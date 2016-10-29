@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config;
+package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public class TinkerGraphBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class EclipseOclBenchmarkConfig extends BenchmarkConfig {
 
-	protected TinkerGraphBenchmarkConfigWrapper() {
+	protected EclipseOclBenchmarkConfig() {
 	}
 	
-	public TinkerGraphBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+	public EclipseOclBenchmarkConfig(final BenchmarkConfigBase bcc) {
 		super(bcc);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "TinkerGraph";
+		return "Eclipse OCL";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "tinkergraph";
+		return "eclipseocl";
 	}
 	
 }

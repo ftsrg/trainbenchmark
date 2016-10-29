@@ -10,28 +10,30 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
+package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class EmfApiBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class TinkerGraphGeneratorConfig extends GeneratorConfig {
 
-	protected EmfApiBenchmarkConfigWrapper() {
+	protected TinkerGraphFormat graphFormat;
+	
+	protected TinkerGraphGeneratorConfig() {
 	}
 	
-	public EmfApiBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
-		super(bcc);
+	public TinkerGraphGeneratorConfig(final GeneratorConfigBase generatorConfig, final TinkerGraphFormat graphFormat) {
+		super(generatorConfig);
+		this.graphFormat = graphFormat;
 	}
 	
-	@Override
-	public String getToolName() {
-		return "EMF API";
+	public TinkerGraphFormat getGraphFormat() {
+		return graphFormat;
 	}
 
 	@Override
 	public String getProjectName() {
-		return "emfapi";
+		return "graph-tinkerpop";
 	}
-	
+
 }

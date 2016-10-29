@@ -19,11 +19,11 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class MinimalRouteSensorGenerator extends MinimalModelGenerator {
 
-	public MinimalRouteSensorGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+	public MinimalRouteSensorGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
 		super(serializer, generatorConfigWrapper);
 	}
 

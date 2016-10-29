@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfig;
 
 public class Rdf4jBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Rdf4jBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], Rdf4jBenchmarkConfigWrapper.class);
-		final Rdf4jBenchmarkScenario scenario = new Rdf4jBenchmarkScenario(bcw);
+		final Rdf4jBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], Rdf4jBenchmarkConfig.class);
+		final Rdf4jBenchmarkScenario scenario = new Rdf4jBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 

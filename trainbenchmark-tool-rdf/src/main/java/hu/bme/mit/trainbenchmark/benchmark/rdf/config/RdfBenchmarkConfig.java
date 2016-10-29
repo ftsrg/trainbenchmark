@@ -10,23 +10,29 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.sql.config;
+package hu.bme.mit.trainbenchmark.benchmark.rdf.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public class SqlGeneratorConfigWrapper extends GeneratorConfigWrapper {
+public abstract class RdfBenchmarkConfig extends BenchmarkConfig {
 
-	protected SqlGeneratorConfigWrapper() {
-	}
-	
-	public SqlGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig) {
-		super(generatorConfig);
+	protected boolean inferencing;
+
+	protected RdfBenchmarkConfig() {
 	}
 
-	@Override
-	public String getProjectName() {
-		return "sql";
+	public RdfBenchmarkConfig(final BenchmarkConfigBase bcc, final boolean inferencing) {
+		super(bcc);
+		this.inferencing = inferencing;
 	}
-	
+
+	public boolean isInferencing() {
+		return inferencing;
+	}
+
+	protected String getToolNamePostfix() {
+		return isInferencing() ? " (Inferencing)" : " (No Inferencing)";
+	}
+
 }

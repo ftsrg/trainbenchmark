@@ -12,18 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sqlite.test;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.SQLiteBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
 public class SQLiteTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
-		final SQLiteBenchmarkConfigWrapper bcw = new SQLiteBenchmarkConfigWrapper(bcc);
-		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(bcw);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
+		final SQLiteBenchmarkConfig bc = new SQLiteBenchmarkConfig(bcc);
+		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

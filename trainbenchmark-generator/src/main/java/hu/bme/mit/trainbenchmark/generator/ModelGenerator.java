@@ -3,14 +3,14 @@ package hu.bme.mit.trainbenchmark.generator;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public abstract class ModelGenerator {
 
 	protected final ModelSerializer<?> serializer;
-	protected GeneratorConfigWrapper generatorConfigWrapper;
+	protected GeneratorConfig generatorConfigWrapper;
 
-	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+	public ModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
 		this.serializer = serializer;
 		this.generatorConfigWrapper = generatorConfigWrapper;
 	}

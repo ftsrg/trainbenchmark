@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -25,7 +25,7 @@ public abstract class SwitchSetTest extends QueryTest {
 				RailwayOperation.SWITCHSET_REPAIR //
 		);
 		final String workload = "SwitchSetTest";
-		final BenchmarkConfigCore bcc = new BenchmarkConfigCore(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
+		final BenchmarkConfigBase bcc = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload);
 		final BenchmarkResult result = runTest(bcc);
 		System.out.println(result);
 		System.out.println(result.csvMatches());

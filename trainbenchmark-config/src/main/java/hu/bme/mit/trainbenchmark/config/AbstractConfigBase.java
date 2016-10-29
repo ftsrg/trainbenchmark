@@ -10,23 +10,35 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.emf.config;
+package hu.bme.mit.trainbenchmark.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigCore;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+public abstract class AbstractConfigBase {
 
-public class EmfGeneratorConfigWrapper extends GeneratorConfigWrapper {
+	protected String xms;
+	protected String xmx;
 
-	protected EmfGeneratorConfigWrapper() {
+	protected AbstractConfigBase() {
 	}
 	
-	public EmfGeneratorConfigWrapper(final GeneratorConfigCore generatorConfig) {
-		super(generatorConfig);
+	public AbstractConfigBase(final String xms, final String xmx) {
+		this.xms = xms;
+		this.xmx = xmx;
 	}
 
-	@Override
-	public String getProjectName() {
-		return "emf";
+	public String getWorkspaceDir() {
+		return "../";
 	}
 	
+	public String getModelDir() {
+		return getWorkspaceDir() + "models/";
+	}
+
+	public String getXms() {
+		return xms;
+	}
+	
+	public String getXmx() {
+		return xmx;
+	}
+
 }

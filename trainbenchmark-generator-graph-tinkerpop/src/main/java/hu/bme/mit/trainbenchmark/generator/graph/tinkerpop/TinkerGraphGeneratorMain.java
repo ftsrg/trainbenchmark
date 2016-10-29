@@ -14,12 +14,12 @@ package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop;
 
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfig;
 
 public class TinkerGraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final TinkerGraphGeneratorConfigWrapper rdfGeneratorConfigWrapper = TinkerGraphGeneratorConfigWrapper.fromFile(args[0], TinkerGraphGeneratorConfigWrapper.class);
+		final TinkerGraphGeneratorConfig rdfGeneratorConfigWrapper = TinkerGraphGeneratorConfig.fromFile(args[0], TinkerGraphGeneratorConfig.class);
 		final TinkerGraphSerializer rdfSerializer = new TinkerGraphSerializer(rdfGeneratorConfigWrapper);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, rdfGeneratorConfigWrapper);
 		generator.generateModel();

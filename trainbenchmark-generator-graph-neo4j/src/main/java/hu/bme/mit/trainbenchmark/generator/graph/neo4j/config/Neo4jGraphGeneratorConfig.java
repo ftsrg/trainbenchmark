@@ -10,28 +10,23 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sesame.config;
+package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
-public class SesameBenchmarkConfigWrapper extends RdfBenchmarkConfigWrapper {
+public class Neo4jGraphGeneratorConfig extends GeneratorConfig {
 
-	protected SesameBenchmarkConfigWrapper() {
+	protected Neo4jGraphGeneratorConfig() {
 	}
 	
-	public SesameBenchmarkConfigWrapper(final BenchmarkConfigCore benchmarkConfig, final boolean inferencing) {
-		super(benchmarkConfig, inferencing);
-	}
-	
-	@Override
-	public String getToolName() {
-		return "Sesame" + getToolNamePostfix();
+	public Neo4jGraphGeneratorConfig(final GeneratorConfigBase generatorConfig) {
+		super(generatorConfig);
 	}
 
 	@Override
 	public String getProjectName() {
-		return "sesame";
+		return "graph-neo4j";
 	}
 	
 }

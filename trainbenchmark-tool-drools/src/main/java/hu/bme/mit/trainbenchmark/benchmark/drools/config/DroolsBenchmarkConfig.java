@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.mysql.config;
+package hu.bme.mit.trainbenchmark.benchmark.drools.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public class MySqlBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class DroolsBenchmarkConfig extends BenchmarkConfig {
 
-	protected MySqlBenchmarkConfigWrapper() {
+	protected DroolsBenchmarkConfig() {
 	}
 	
-	public MySqlBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+	public DroolsBenchmarkConfig(final BenchmarkConfigBase bcc) {
 		super(bcc);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "MySQL";
+		return "Drools";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "mysql";
+		return "drools";
 	}
 	
 }

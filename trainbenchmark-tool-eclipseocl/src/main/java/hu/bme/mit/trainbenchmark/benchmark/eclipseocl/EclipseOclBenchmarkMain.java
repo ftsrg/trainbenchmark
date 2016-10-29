@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig;
 
 public class EclipseOclBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final EclipseOclBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], EclipseOclBenchmarkConfigWrapper.class);
-		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(bcw);
+		final EclipseOclBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], EclipseOclBenchmarkConfig.class);
+		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 }

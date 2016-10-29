@@ -15,10 +15,10 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 import java.util.Collection;
 import java.util.List;
 
-import hu.bme.mit.trainbenchmark.config.AbstractConfig;
+import hu.bme.mit.trainbenchmark.config.AbstractConfigBase;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public final class BenchmarkConfigCore extends AbstractConfig {
+public final class BenchmarkConfigBase extends AbstractConfigBase {
 
 	/**
 	 * The timeout for each measurement run in seconds.
@@ -53,10 +53,10 @@ public final class BenchmarkConfigCore extends AbstractConfig {
 	/**
 	 * Non-arg constructor for Kryo
 	 */
-	protected BenchmarkConfigCore() {
+	protected BenchmarkConfigBase() {
 	}
 
-	public BenchmarkConfigCore(final String xms, final String xmx, final long timeout, final int runs,
+	public BenchmarkConfigBase(final String xms, final String xmx, final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
 			final List<RailwayOperation> railwayOperations, final String workload) {
 		super(xms, xmx);

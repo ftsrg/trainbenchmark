@@ -19,9 +19,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
@@ -38,9 +38,9 @@ public class Neo4jTest extends TrainBenchmarkTest {
 	public Neo4jEngine engine;
 	
 	@Override
-	protected BenchmarkResult runTest(final BenchmarkConfigCore bcc) throws Exception {
-		final Neo4jBenchmarkConfigWrapper bcw = new Neo4jBenchmarkConfigWrapper(bcc, engine);
-		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bcw);
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcc) throws Exception {
+		final Neo4jBenchmarkConfig bc = new Neo4jBenchmarkConfig(bcc, engine);
+		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

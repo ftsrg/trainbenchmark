@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.mysql;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfig;
 
 public class MySqlBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final MySqlBenchmarkConfigWrapper bcw = BenchmarkConfigWrapper.fromFile(args[0], MySqlBenchmarkConfigWrapper.class);
-		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(bcw);
+		final MySqlBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], MySqlBenchmarkConfig.class);
+		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
 

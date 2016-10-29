@@ -2,37 +2,37 @@ package hu.bme.mit.trainbenchmark.benchmark.phases;
 
 import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkBundle;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 
-public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmarkConfigWrapper extends BenchmarkConfigWrapper> {
+public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmarkConfigWrapper extends BenchmarkConfig> {
 
 	protected final PhaseExecutor phaseExecutor = new PhaseExecutor();
 
 	protected final DriverFactory<TDriver> driverFactory;
 	protected final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory;
 	protected final Comparator<TPatternMatch> comparator;
-	protected final TBenchmarkConfigWrapper bcw;
+	protected final TBenchmarkConfigWrapper bc;
 	protected final BenchmarkResult benchmarkResult;
 
 	public BenchmarkScenario(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bcw) throws Exception {
+			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bc) throws Exception {
 		this.driverFactory = driverFactory;
 		this.modelOperationFactory = modelOperationFactory;
 		this.comparator = comparator;
-		this.bcw = bcw;
+		this.bc = bc;
 
-		final BenchmarkConfigCore bcc = bcw.getBenchmarkConfigCore();
-		this.benchmarkResult = new BenchmarkResult(bcw.getToolName(), bcc.getWorkload(), bcc.getWorkspaceDir(), bcc.getModelFilename(), bcw.getDescription());
+		final BenchmarkConfigBase bcc = bc.getConfigBase();
+		this.benchmarkResult = new BenchmarkResult(bc.getToolName(), bcc.getWorkload(), bcc.getWorkspaceDir(), bcc.getModelFilename(), bc.getDescription());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {
-		for (int i = 0; i < bcw.getBenchmarkConfigCore().getRuns(); i++) {
+		for (int i = 0; i < bc.getConfigBase().getRuns(); i++) {
 			performRun();
 		}
 
@@ -44,7 +44,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 		benchmarkResult.nextRun();
 
 		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkBundle = new BenchmarkBundle<>(driverFactory, modelOperationFactory,
-				comparator, bcw, benchmarkResult);
+				comparator, bc, benchmarkResult);
 
 		final InitializeOperationsPhase initializeOperationsPhase = new InitializeOperationsPhase(benchmarkBundle);
 		final ReadPhase readPhase = new ReadPhase(benchmarkBundle);
@@ -64,7 +64,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 			benchmarkResult.registerQueryTime(queryTime);
 
 			// transformation-recheck iterations
-			for (int i = 0; i < bcw.getBenchmarkConfigCore().getQueryTransformationCount(); i++) {
+			for (int i = 0; i < bc.getConfigBase().getQueryTransformationCount(); i++) {
 				final long transformationTime = phaseExecutor.execute(transformationPhase);
 				benchmarkResult.registerTransformationTime(transformationTime);
 

@@ -5,11 +5,11 @@ import java.io.IOException;
 
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public abstract class MinimalModelGenerator extends ModelGenerator {
 
-	public MinimalModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfigWrapper generatorConfigWrapper) {
+	public MinimalModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfigWrapper) {
 		super(serializer, generatorConfigWrapper);
 	}
 

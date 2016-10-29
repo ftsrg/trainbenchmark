@@ -10,28 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.sqlite.config;
+package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
-public class SQLiteBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class TinkerGraphBenchmarkConfig extends BenchmarkConfig {
 
-	protected SQLiteBenchmarkConfigWrapper() {
+	protected TinkerGraphBenchmarkConfig() {
 	}
 	
-	public SQLiteBenchmarkConfigWrapper(final BenchmarkConfigCore bcc) {
+	public TinkerGraphBenchmarkConfig(final BenchmarkConfigBase bcc) {
 		super(bcc);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "SQLite";
+		return "TinkerGraph";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "sqlite";
+		return "tinkergraph";
 	}
 	
 }

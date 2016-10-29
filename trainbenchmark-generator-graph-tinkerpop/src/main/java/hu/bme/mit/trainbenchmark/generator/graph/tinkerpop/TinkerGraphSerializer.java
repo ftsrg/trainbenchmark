@@ -25,14 +25,14 @@ import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat;
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfig;
 
-public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorConfigWrapper> {
+public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorConfig> {
 
-	protected TinkerGraphGeneratorConfigWrapper graphGeneratorConfig;
+	protected TinkerGraphGeneratorConfig graphGeneratorConfig;
 	protected TinkerGraph graph = TinkerGraph.open();
 
-	public TinkerGraphSerializer(final TinkerGraphGeneratorConfigWrapper generatorConfig) {
+	public TinkerGraphSerializer(final TinkerGraphGeneratorConfig generatorConfig) {
 		super(generatorConfig);
 	}
 

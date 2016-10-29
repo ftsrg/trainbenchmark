@@ -14,13 +14,13 @@ package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
 
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
-import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfig;
 
 public class Neo4jGraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
-		final Neo4jGraphGeneratorConfigWrapper generatorConfigWrapper = GeneratorConfigWrapper.fromFile(args[0], Neo4jGraphGeneratorConfigWrapper.class);
+		final Neo4jGraphGeneratorConfig generatorConfigWrapper = GeneratorConfig.fromFile(args[0], Neo4jGraphGeneratorConfig.class);
 		final Neo4jGraphSerializer rdfSerializer = new Neo4jGraphSerializer(generatorConfigWrapper);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, generatorConfigWrapper);
 		generator.generateModel();

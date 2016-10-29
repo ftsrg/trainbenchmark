@@ -25,15 +25,15 @@ import org.apache.commons.io.FileUtils;
 
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfig;
 import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
-public class RdfSerializer extends ModelSerializer<RdfGeneratorConfigWrapper> {
+public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
 	protected BufferedWriter file;
 	protected String RDF_METAMODEL_DIR = "/trainbenchmark-format-rdf/src/main/resources/metamodel/";
 
-	public RdfSerializer(final RdfGeneratorConfigWrapper generatorConfigWrapper) {
+	public RdfSerializer(final RdfGeneratorConfig generatorConfigWrapper) {
 		super(generatorConfigWrapper);
 	}
 

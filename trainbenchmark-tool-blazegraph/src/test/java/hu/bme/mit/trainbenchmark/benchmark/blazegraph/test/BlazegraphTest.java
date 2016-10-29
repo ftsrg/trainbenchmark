@@ -16,8 +16,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.BlazegraphBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfigWrapper;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
+import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.tests.RdfTest;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 
@@ -25,9 +25,9 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 public class BlazegraphTest extends RdfTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigCore bcc) throws Exception {
-		final BlazegraphBenchmarkConfigWrapper bcw = new BlazegraphBenchmarkConfigWrapper(bcc, inferencing);
-		final BlazegraphBenchmarkScenario scenario = new BlazegraphBenchmarkScenario(bcw);
+	protected BenchmarkResult runTest(BenchmarkConfigBase bcc) throws Exception {
+		final BlazegraphBenchmarkConfig bc = new BlazegraphBenchmarkConfig(bcc, inferencing);
+		final BlazegraphBenchmarkScenario scenario = new BlazegraphBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

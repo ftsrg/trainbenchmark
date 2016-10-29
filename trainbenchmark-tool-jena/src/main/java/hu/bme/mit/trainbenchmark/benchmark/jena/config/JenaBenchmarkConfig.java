@@ -10,35 +10,28 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
+package hu.bme.mit.trainbenchmark.benchmark.jena.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigCore;
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigWrapper;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
-public class Neo4jBenchmarkConfigWrapper extends BenchmarkConfigWrapper {
+public class JenaBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected Neo4jEngine engine;
-
-	protected Neo4jBenchmarkConfigWrapper() {
+	protected JenaBenchmarkConfig() {
 	}
 	
-	public Neo4jBenchmarkConfigWrapper(final BenchmarkConfigCore bcc, final Neo4jEngine engine) {
-		super(bcc);
-		this.engine = engine;
-	}
-	
-	public Neo4jEngine getEngine() {
-		return engine;
+	public JenaBenchmarkConfig(final BenchmarkConfigBase bcc, final boolean inferencing) {
+		super(bcc, inferencing);
 	}
 	
 	@Override
 	public String getToolName() {
-		return "Neo4j (" + getEngine().toString() + ")";
+		return "Jena" + getToolNamePostfix();
 	}
 
 	@Override
 	public String getProjectName() {
-		return "neo4j";
+		return "jena";
 	}
 	
 }

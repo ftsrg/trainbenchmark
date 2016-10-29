@@ -12,12 +12,12 @@
 
 package hu.bme.mit.trainbenchmark.generator;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigWrapper;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.scalable.ScalableModelGenerator;
 
 public class ScalableGeneratorFactory {
 
-	public static <TGeneratorConfigWrapper extends GeneratorConfigWrapper> ModelGenerator createGenerator(
+	public static <TGeneratorConfigWrapper extends GeneratorConfig> ModelGenerator createGenerator(
 			final ModelSerializer<TGeneratorConfigWrapper> serializer, final TGeneratorConfigWrapper generatorConfig) {
 		return new ScalableModelGenerator(serializer, generatorConfig);
 	}
