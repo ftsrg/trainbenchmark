@@ -28,4 +28,5 @@ ext {
 	commonsExecVersion = "1.3"
 	kryoVersion = "4.0.0"
 	junitVersion = "4.12"
+	slf4jVersion = "1.7.10"
 }
