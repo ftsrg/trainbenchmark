@@ -31,11 +31,11 @@ public class IngraphTransformationRepairConnectedSegments extends IngraphTransfo
 	public void activate(final Collection<IngraphConnectedSegmentsMatch> matches) throws IOException {
 		final Transaction transaction = driver.newTransaction();
 		for (final IngraphConnectedSegmentsMatch match : matches) {
-			transaction.remove(match.getSegment1(), CONNECTS_TO, match.getSegment2());
-			transaction.remove(match.getSegment2(), CONNECTS_TO, match.getSegment3());
-			transaction.add(match.getSegment1(), CONNECTS_TO, match.getSegment3());
-
-			transaction.remove(match.getSegment2(), "sensor", match.getSensor());
+//			transaction.remove(match.getSegment1(), CONNECTS_TO, match.getSegment2());
+//			transaction.remove(match.getSegment2(), CONNECTS_TO, match.getSegment3());
+//			transaction.add(match.getSegment1(), CONNECTS_TO, match.getSegment3());
+//
+//			transaction.remove(match.getSegment2(), "sensor", match.getSensor());
 		}
 	}
 }

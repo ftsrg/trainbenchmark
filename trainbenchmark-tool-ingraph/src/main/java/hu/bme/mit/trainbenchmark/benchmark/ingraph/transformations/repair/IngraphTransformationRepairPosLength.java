@@ -34,8 +34,8 @@ public class IngraphTransformationRepairPosLength extends IngraphTransformation<
 			final Long segment = match.getSegment();
 			final Integer length = match.getLength();
 			final Integer newLength = -length + 1;
-			transaction.remove(segment, LENGTH, length);
-			transaction.add(segment, LENGTH, newLength);
+//			transaction.remove(segment, LENGTH, length);
+//			transaction.add(segment, LENGTH, newLength);
 		}
 	}
 

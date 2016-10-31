@@ -16,32 +16,41 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import hu.bme.mit.incqueryds.TransactionFactory;
-import hu.bme.mit.incqueryds.trainbenchmark.TrainbenchmarkQuery;
+import hu.bme.mit.ire.TransactionFactory;
+import hu.bme.mit.ire.trainbenchmark.TrainbenchmarkQuery;
+import hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphUtils;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphMatch;
-import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+
+import ingraph.ire.IngraphAdapter;
+import relalg.RelalgContainer;
 import scala.collection.Iterator;
-import scala.collection.immutable.Vector;
+import scala.collection.immutable.Map;
 
-public class IngraphQuery<TPatternMatch extends IngraphMatch> extends RdfModelQuery<TPatternMatch, IngraphDriver> {
+public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery<TPatternMatch, IngraphDriver> {
 
-	private final TrainbenchmarkQuery queryEngine;
-	
-	public IngraphQuery(final IngraphDriver driver, final String workspaceDir, final RailwayQuery query, final TransactionFactory input)
+	private TrainbenchmarkQuery queryEngine;
+	public IngraphQuery(final IngraphDriver driver, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
-		super(driver, workspaceDir, query);
-		queryEngine = null;
-//		queryEngine = ConfigReader.parse(query.name(), new FileInputStream(yamlPath), false);
-//		input.subscribe(queryEngine.inputLookup());
-//		driver.setQuery(queryEngine);
+		super(query, driver);
+		try {
+			RelalgContainer plan = IngraphUtils.getQueryPlan(query.toString(), driver.getQueryVariant());
+			IngraphAdapter adapter = new IngraphAdapter(plan);
+			queryEngine = adapter.engine();
+			input.subscribe(queryEngine.inputLookup());
+			driver.setQuery(queryEngine);
+			driver.setReader(adapter.reader());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static <TPatternMatch extends IngraphMatch> IngraphQuery<TPatternMatch>
-		create(final IngraphDriver driver, final String queryDirectory, final RailwayQuery query, final TransactionFactory input)
+		create(final IngraphDriver driver, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
-		return new IngraphQuery<TPatternMatch>(driver, queryDirectory, query, input);
+		return new IngraphQuery<TPatternMatch>(driver, query, input);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -52,14 +61,13 @@ public class IngraphQuery<TPatternMatch extends IngraphMatch> extends RdfModelQu
 
 		final List<IngraphMatch> matches = new ArrayList<>();
 
-		final Iterator<Vector<Object>> resultIterator = queryEngine.getResults().iterator();
+		final Iterator<Map<Object, Object>> resultIterator = queryEngine.getResults().iterator();
 		while (resultIterator.hasNext()) {
-			final Vector<Object> qs = resultIterator.next();
+			final Map<Object, Object> qs = resultIterator.next();
 			final IngraphMatch match = IngraphMatch.createMatch(query, qs);
 			matches.add(match);
 		}
 		return (Collection<TPatternMatch>) matches;
-
 	}
 
 }
