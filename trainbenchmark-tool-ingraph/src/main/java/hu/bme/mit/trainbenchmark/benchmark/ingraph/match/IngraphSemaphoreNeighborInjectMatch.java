@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public class IngraphSemaphoreNeighborInjectMatch extends IngraphMatch implements SemaphoreNeighborInjectMatch {
 
-	public IngraphSemaphoreNeighborInjectMatch(final Vector<Object> qs) {
+	public IngraphSemaphoreNeighborInjectMatch(final Map<Object, Object> qs) {
 		super(qs);
 	}
 

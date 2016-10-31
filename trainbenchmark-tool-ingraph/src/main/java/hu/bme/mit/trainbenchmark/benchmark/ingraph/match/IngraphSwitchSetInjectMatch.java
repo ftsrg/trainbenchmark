@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetInjectMatch;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public class IngraphSwitchSetInjectMatch extends IngraphMatch implements SwitchSetInjectMatch {
 
-	public IngraphSwitchSetInjectMatch(final Vector<Object> qs) {
+	public IngraphSwitchSetInjectMatch(final Map<Object, Object> qs) {
 		super(qs);
 	}
 

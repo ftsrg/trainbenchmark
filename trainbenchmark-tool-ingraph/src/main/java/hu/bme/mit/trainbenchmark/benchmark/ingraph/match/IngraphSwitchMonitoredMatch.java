@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public class IngraphSwitchMonitoredMatch extends IngraphMatch implements SwitchMonitoredMatch {
 
-	public IngraphSwitchMonitoredMatch(final Vector<Object> qs) {
+	public IngraphSwitchMonitoredMatch(final Map<Object, Object> qs) {
 		super(qs);
 	}
 

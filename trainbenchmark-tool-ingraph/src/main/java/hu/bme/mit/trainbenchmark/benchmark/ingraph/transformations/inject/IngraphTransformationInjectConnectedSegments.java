@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.inject;
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incqueryds.Transaction;
+import hu.bme.mit.ire.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.IngraphTransformation;

@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthMatch;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public class IngraphPosLengthMatch extends IngraphMatch implements PosLengthMatch {
 
-	public IngraphPosLengthMatch(final Vector<Object> qs) {
+	public IngraphPosLengthMatch(final Map<Object, Object> qs) {
 		super(qs);
 	}
 

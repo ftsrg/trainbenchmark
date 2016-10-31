@@ -15,17 +15,18 @@ import com.google.common.base.Joiner;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public abstract class IngraphMatch implements Match {
 
-	protected Vector<Object> qs;
+	protected Map<Object, Object> qs;
 
-	public IngraphMatch(final Vector<Object> qs) {
+	public IngraphMatch(final Map<Object, Object> qs) {
 		this.qs = qs;
 	}
 
-	public static IngraphMatch createMatch(final RailwayQuery query, final Vector<Object> qs) {
+	public static IngraphMatch createMatch(final RailwayQuery query, final Map<Object, Object> qs) {
 		switch (query) {
 		case ACTIVEROUTE:
 			return new IngraphActiveRouteMatch(qs);

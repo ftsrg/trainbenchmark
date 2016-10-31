@@ -16,7 +16,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import java.io.IOException;
 import java.util.Collection;
 
-import hu.bme.mit.incqueryds.Transaction;
+import hu.bme.mit.ire.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.IngraphTransformation;
