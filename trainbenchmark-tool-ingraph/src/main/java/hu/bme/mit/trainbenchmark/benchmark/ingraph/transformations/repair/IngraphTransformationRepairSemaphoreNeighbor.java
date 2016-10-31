@@ -33,7 +33,7 @@ public class IngraphTransformationRepairSemaphoreNeighbor extends IngraphTransfo
 		for (final IngraphSemaphoreNeighborMatch match : matches) {
 			final Long route2 = match.getRoute2();
 			final Long semaphore = match.getSemaphore();
-			transaction.add(route2, ENTRY, semaphore);
+//			transaction.add(route2, ENTRY, semaphore);
 		}
 	}
 

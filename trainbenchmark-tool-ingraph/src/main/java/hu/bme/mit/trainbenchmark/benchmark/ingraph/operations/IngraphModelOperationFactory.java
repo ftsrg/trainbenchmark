@@ -49,24 +49,24 @@ public class IngraphModelOperationFactory extends ModelOperationFactory<IngraphM
 		switch (operationEnum) {
 		// ActiveRoute
 		case ACTIVEROUTE: {
-			final IngraphQuery<IngraphActiveRouteMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.ACTIVEROUTE, transactionFactory);
+			final IngraphQuery<IngraphActiveRouteMatch> query = IngraphQuery.create(driver, RailwayQuery.ACTIVEROUTE, transactionFactory);
 			final ModelOperation<IngraphActiveRouteMatch, IngraphDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 			// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
-			final IngraphQuery<IngraphConnectedSegmentsMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
+			final IngraphQuery<IngraphConnectedSegmentsMatch> query = IngraphQuery.create(driver, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
 			final ModelOperation<IngraphConnectedSegmentsMatch, IngraphDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_INJECT: {
-			final IngraphQuery<IngraphConnectedSegmentsInjectMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS_INJECT, transactionFactory);
+			final IngraphQuery<IngraphConnectedSegmentsInjectMatch> query = IngraphQuery.create(driver, RailwayQuery.CONNECTEDSEGMENTS_INJECT, transactionFactory);
 			final IngraphTransformation<IngraphConnectedSegmentsInjectMatch> transformation = new IngraphTransformationInjectConnectedSegments(driver);
 			final ModelOperation<IngraphConnectedSegmentsInjectMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case CONNECTEDSEGMENTS_REPAIR: {
-			final IngraphQuery<IngraphConnectedSegmentsMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
+			final IngraphQuery<IngraphConnectedSegmentsMatch> query = IngraphQuery.create(driver, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);
 			final IngraphTransformation<IngraphConnectedSegmentsMatch> transformation = new IngraphTransformationRepairConnectedSegments(driver);
 			final ModelOperation<IngraphConnectedSegmentsMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -74,18 +74,18 @@ public class IngraphModelOperationFactory extends ModelOperationFactory<IngraphM
 
 			// PosLength
 		case POSLENGTH: {
-			final IngraphQuery<IngraphPosLengthMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.POSLENGTH, transactionFactory);
+			final IngraphQuery<IngraphPosLengthMatch> query = IngraphQuery.create(driver, RailwayQuery.POSLENGTH, transactionFactory);
 			final ModelOperation<IngraphPosLengthMatch, IngraphDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case POSLENGTH_INJECT: {
-			final IngraphQuery<IngraphPosLengthInjectMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.POSLENGTH_INJECT, transactionFactory);
+			final IngraphQuery<IngraphPosLengthInjectMatch> query = IngraphQuery.create(driver, RailwayQuery.POSLENGTH_INJECT, transactionFactory);
 			final IngraphTransformation<IngraphPosLengthInjectMatch> transformation = new IngraphTransformationInjectPosLength(driver);
 			final ModelOperation<IngraphPosLengthInjectMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case POSLENGTH_REPAIR: {
-			final IngraphQuery<IngraphPosLengthMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.POSLENGTH, transactionFactory);
+			final IngraphQuery<IngraphPosLengthMatch> query = IngraphQuery.create(driver, RailwayQuery.POSLENGTH, transactionFactory);
 			final IngraphTransformation<IngraphPosLengthMatch> transformation = new IngraphTransformationRepairPosLength(driver);
 			final ModelOperation<IngraphPosLengthMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -93,18 +93,18 @@ public class IngraphModelOperationFactory extends ModelOperationFactory<IngraphM
 
 			// RouteSensor
 		case ROUTESENSOR: {
-			final IngraphQuery<IngraphRouteSensorMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR, transactionFactory);
+			final IngraphQuery<IngraphRouteSensorMatch> query = IngraphQuery.create(driver, RailwayQuery.ROUTESENSOR, transactionFactory);
 			final ModelOperation<IngraphRouteSensorMatch, IngraphDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case ROUTESENSOR_INJECT: {
-			final IngraphQuery<IngraphRouteSensorInjectMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR_INJECT, transactionFactory);
+			final IngraphQuery<IngraphRouteSensorInjectMatch> query = IngraphQuery.create(driver, RailwayQuery.ROUTESENSOR_INJECT, transactionFactory);
 			final IngraphTransformation<IngraphRouteSensorInjectMatch> transformation = new IngraphTransformationInjectRouteSensor(driver);
 			final ModelOperation<IngraphRouteSensorInjectMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case ROUTESENSOR_REPAIR: {
-			final IngraphQuery<IngraphRouteSensorMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.ROUTESENSOR, transactionFactory);
+			final IngraphQuery<IngraphRouteSensorMatch> query = IngraphQuery.create(driver, RailwayQuery.ROUTESENSOR, transactionFactory);
 			final IngraphTransformation<IngraphRouteSensorMatch> transformation = new IngraphTransformationRepairRouteSensor(driver);
 			final ModelOperation<IngraphRouteSensorMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -112,18 +112,18 @@ public class IngraphModelOperationFactory extends ModelOperationFactory<IngraphM
 
 			// SemaphoreNeighbor
 		case SEMAPHORENEIGHBOR: {
-			final IngraphQuery<IngraphSemaphoreNeighborMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
+			final IngraphQuery<IngraphSemaphoreNeighborMatch> query = IngraphQuery.create(driver, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
 			final ModelOperation<IngraphSemaphoreNeighborMatch, IngraphDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_INJECT: {
-			final IngraphQuery<IngraphSemaphoreNeighborInjectMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR_INJECT, transactionFactory);
+			final IngraphQuery<IngraphSemaphoreNeighborInjectMatch> query = IngraphQuery.create(driver, RailwayQuery.SEMAPHORENEIGHBOR_INJECT, transactionFactory);
 			final IngraphTransformation<IngraphSemaphoreNeighborInjectMatch> transformation = new IngraphTransformationInjectSemaphoreNeighbor(driver);
 			final ModelOperation<IngraphSemaphoreNeighborInjectMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case SEMAPHORENEIGHBOR_REPAIR: {
-			final IngraphQuery<IngraphSemaphoreNeighborMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
+			final IngraphQuery<IngraphSemaphoreNeighborMatch> query = IngraphQuery.create(driver, RailwayQuery.SEMAPHORENEIGHBOR, transactionFactory);
 			final IngraphTransformation<IngraphSemaphoreNeighborMatch> transformation = new IngraphTransformationRepairSemaphoreNeighbor(driver);
 			final ModelOperation<IngraphSemaphoreNeighborMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -131,18 +131,18 @@ public class IngraphModelOperationFactory extends ModelOperationFactory<IngraphM
 
 			// SwitchMonitored
 		case SWITCHMONITORED: {
-			final IngraphQuery<IngraphSwitchMonitoredMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, transactionFactory);
+			final IngraphQuery<IngraphSwitchMonitoredMatch> query = IngraphQuery.create(driver, RailwayQuery.SWITCHMONITORED, transactionFactory);
 			final ModelOperation<IngraphSwitchMonitoredMatch, IngraphDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case SWITCHMONITORED_INJECT: {
-			final IngraphQuery<IngraphSwitchMonitoredInjectMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED_INJECT, transactionFactory);
+			final IngraphQuery<IngraphSwitchMonitoredInjectMatch> query = IngraphQuery.create(driver, RailwayQuery.SWITCHMONITORED_INJECT, transactionFactory);
 			final IngraphTransformation<IngraphSwitchMonitoredInjectMatch> transformation = new IngraphTransformationInjectSwitchMonitored(driver);
 			final ModelOperation<IngraphSwitchMonitoredInjectMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case SWITCHMONITORED_REPAIR: {
-			final IngraphQuery<IngraphSwitchMonitoredMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SWITCHMONITORED, transactionFactory);
+			final IngraphQuery<IngraphSwitchMonitoredMatch> query = IngraphQuery.create(driver, RailwayQuery.SWITCHMONITORED, transactionFactory);
 			final IngraphTransformation<IngraphSwitchMonitoredMatch> transformation = new IngraphTransformationRepairSwitchMonitored(driver);
 			final ModelOperation<IngraphSwitchMonitoredMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
@@ -150,18 +150,18 @@ public class IngraphModelOperationFactory extends ModelOperationFactory<IngraphM
 
 			// SwitchSet
 		case SWITCHSET: {
-			final IngraphQuery<IngraphSwitchSetMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SWITCHSET, transactionFactory);
+			final IngraphQuery<IngraphSwitchSetMatch> query = IngraphQuery.create(driver, RailwayQuery.SWITCHSET, transactionFactory);
 			final ModelOperation<IngraphSwitchSetMatch, IngraphDriver> operation = ModelOperation.of(query);
 			return operation;
 		}
 		case SWITCHSET_INJECT: {
-			final IngraphQuery<IngraphSwitchSetInjectMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SWITCHSET_INJECT, transactionFactory);
+			final IngraphQuery<IngraphSwitchSetInjectMatch> query = IngraphQuery.create(driver, RailwayQuery.SWITCHSET_INJECT, transactionFactory);
 			final IngraphTransformation<IngraphSwitchSetInjectMatch> transformation = new IngraphTransformationInjectSwitchSet(driver);
 			final ModelOperation<IngraphSwitchSetInjectMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;
 		}
 		case SWITCHSET_REPAIR: {
-			final IngraphQuery<IngraphSwitchSetMatch> query = IngraphQuery.create(driver, workspaceDir, RailwayQuery.SWITCHSET, transactionFactory);
+			final IngraphQuery<IngraphSwitchSetMatch> query = IngraphQuery.create(driver, RailwayQuery.SWITCHSET, transactionFactory);
 			final IngraphTransformation<IngraphSwitchSetMatch> transformation = new IngraphTransformationRepairSwitchSet(driver);
 			final ModelOperation<IngraphSwitchSetMatch, IngraphDriver> operation = ModelOperation.of(query, transformation);
 			return operation;

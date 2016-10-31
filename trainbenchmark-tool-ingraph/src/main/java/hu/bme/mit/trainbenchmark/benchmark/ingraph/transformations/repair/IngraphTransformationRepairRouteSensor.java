@@ -33,7 +33,7 @@ public class IngraphTransformationRepairRouteSensor extends IngraphTransformatio
 		for (final IngraphRouteSensorMatch match : matches) {
 			final Long route = match.getRoute();
 			final Long sensor = match.getSensor();
-			transaction.add(route, GATHERS, sensor);
+//			transaction.add(route, GATHERS, sensor);
 		}
 	}
 

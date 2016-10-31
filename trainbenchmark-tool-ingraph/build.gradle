@@ -5,8 +5,14 @@ shadowJar {
 	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphBenchmarkMain' }
 }
 
+repositories {
+	mavenLocal()
+	maven { url "http://ftsrg.bintray.com/maven" }
+}
+
 dependencies {
 	compile project(':trainbenchmark-tool-tinkergraph')
 	compile group: 'ingraph', name: 'ingraph-trainbenchmark-query-plans', version: '0.0.1-SNAPSHOT'
+	compile group: 'ingraph', name: 'ingraph-ire', version: '0.0.1-SNAPSHOT'
 	compile 'com.github.jbellis:jamm:0.3.1'
 }

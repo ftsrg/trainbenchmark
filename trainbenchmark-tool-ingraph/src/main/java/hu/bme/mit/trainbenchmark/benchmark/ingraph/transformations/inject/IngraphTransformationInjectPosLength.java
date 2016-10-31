@@ -33,8 +33,8 @@ public class IngraphTransformationInjectPosLength extends IngraphTransformation<
 		for (final IngraphPosLengthInjectMatch match : matches) {
 			final Long segment = match.getSegment();
 			final Integer length = match.getLength();
-			transaction.remove(segment, LENGTH, length);
-			transaction.add(segment, LENGTH, 0);
+//			transaction.remove(segment, LENGTH, length);
+//			transaction.add(segment, LENGTH, 0);
 		}
 	}
 

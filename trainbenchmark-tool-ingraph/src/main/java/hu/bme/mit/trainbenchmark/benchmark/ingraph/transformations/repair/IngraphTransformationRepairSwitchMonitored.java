@@ -33,8 +33,8 @@ public class IngraphTransformationRepairSwitchMonitored extends IngraphTransform
 		for (final IngraphSwitchMonitoredMatch match : matches) {
 			final Long sw = match.getSw();
 			final Long sensorID = driver.newKey();
-			transaction.add(sensorID, "type", SENSOR);
-			transaction.add(sw, MONITORED_BY, sensorID);
+//			transaction.add(sensorID, "type", SENSOR);
+//			transaction.add(sw, MONITORED_BY, sensorID);
 		}
 	}
 }

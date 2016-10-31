@@ -33,7 +33,7 @@ public class IngraphTransformationInjectRouteSensor extends IngraphTransformatio
 		for (final IngraphRouteSensorInjectMatch match : matches) {
 			final Long route = match.getRoute();
 			final Long sensor = match.getSensor();
-			transaction.remove(route, GATHERS, sensor);
+//			transaction.remove(route, GATHERS, sensor);
 		}
 	}
 

@@ -33,8 +33,8 @@ public class IngraphTransformationRepairSwitchSet extends IngraphTransformation<
 		for (final IngraphSwitchSetMatch match : matches) {
 			final Long sw = match.getSw();
 
-			transaction.remove(sw, CURRENTPOSITION, match.getCurrentPosition());
-			transaction.add(sw, CURRENTPOSITION, match.getPosition());
+//			transaction.remove(sw, CURRENTPOSITION, match.getCurrentPosition());
+//			transaction.add(sw, CURRENTPOSITION, match.getPosition());
 		}
 	}
 
