@@ -16,7 +16,6 @@ import com.google.common.base.Joiner;
 import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.immutable.Map;
-import scala.collection.immutable.Vector;
 
 public abstract class IngraphMatch implements Match {
 
@@ -61,7 +60,7 @@ public abstract class IngraphMatch implements Match {
 
 	@Override
 	public String toString() {
-		Joiner joiner = Joiner.on(", ");
+		final Joiner joiner = Joiner.on(", ");
 		return "<" + joiner.join(toArray()) + ">";
 	}
 
