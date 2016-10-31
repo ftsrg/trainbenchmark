@@ -2,11 +2,9 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
-import com.esotericsoftware.kryo.io.Output;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 
@@ -36,7 +34,7 @@ public abstract class BenchmarkConfig extends AbstractConfig<BenchmarkConfigBase
 	public String getDescription() {
 		return "";
 	}
-
+	
 	public static <T extends BenchmarkConfig> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {

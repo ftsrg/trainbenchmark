@@ -11,8 +11,9 @@ public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 	protected TConfigBase configBase;
 
 	/**
-	 * Serialize the configuration to a file. This does not need to be redefined in subclasses (e.g.
-	 * {EmfGeneratorConfig}), hence the method is declared as final.
+	 * Serialize the configuration to a file. This does not need to be redefined
+	 * in subclasses (e.g. {EmfGeneratorConfig}), hence the method is declared
+	 * as final.
 	 * 
 	 * @param path
 	 * @throws FileNotFoundException
@@ -23,4 +24,5 @@ public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 			kryo.writeObject(output, this);
 		}
 	}
+
 }
