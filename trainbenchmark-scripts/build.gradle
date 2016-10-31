@@ -50,3 +50,8 @@ task generate(dependsOn: 'classes', type: JavaExec) {
 	main = 'GeneratorScript'
 	classpath = sourceSets.main.runtimeClasspath
 }
+
+task queryPlanTest(dependsOn: 'classes', type: JavaExec) {
+	main = 'QueryPlanTester'
+	classpath = sourceSets.main.runtimeClasspath
+}
