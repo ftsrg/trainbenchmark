@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ActiveRouteMatch;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public class IngraphActiveRouteMatch extends IngraphMatch implements ActiveRouteMatch {
 
-	public IngraphActiveRouteMatch(final Vector<Object> qs) {
+	public IngraphActiveRouteMatch(final Map<Object, Object> qs) {
 		super(qs);
 	}
 

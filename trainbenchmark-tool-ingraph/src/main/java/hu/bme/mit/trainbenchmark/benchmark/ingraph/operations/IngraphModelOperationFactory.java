@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.operations;
 
-import hu.bme.mit.incqueryds.TransactionFactory;
+import hu.bme.mit.ire.TransactionFactory;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphActiveRouteMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphConnectedSegmentsInjectMatch;

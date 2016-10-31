@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsInjectMatch;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public class IngraphConnectedSegmentsInjectMatch extends IngraphMatch implements ConnectedSegmentsInjectMatch {
 
-	public IngraphConnectedSegmentsInjectMatch(final Vector<Object> qs) {
+	public IngraphConnectedSegmentsInjectMatch(final Map<Object, Object> qs) {
 		super(qs);
 	}
 

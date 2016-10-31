@@ -12,11 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorInjectMatch;
+import scala.collection.immutable.Map;
 import scala.collection.immutable.Vector;
 
 public class IngraphRouteSensorInjectMatch extends IngraphMatch implements RouteSensorInjectMatch {
 
-	public IngraphRouteSensorInjectMatch(final Vector<Object> qs) {
+	public IngraphRouteSensorInjectMatch(final Map<Object, Object> qs) {
 		super(qs);
 	}
 

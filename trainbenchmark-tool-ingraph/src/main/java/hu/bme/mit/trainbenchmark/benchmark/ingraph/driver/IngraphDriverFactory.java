@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.driver;
 
-import hu.bme.mit.incqueryds.TransactionFactory;
+import hu.bme.mit.ire.TransactionFactory;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig;
 

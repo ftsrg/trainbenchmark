@@ -13,7 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.inject;
 
 import java.util.Collection;
 
-import hu.bme.mit.incqueryds.Transaction;
+import hu.bme.mit.ire.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.IngraphTransformation;
