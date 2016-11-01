@@ -20,6 +20,7 @@ import hu.bme.mit.ire.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.IngraphTransformation;
+import scala.collection.immutable.Map;
 
 public class IngraphTransformationRepairSemaphoreNeighbor extends IngraphTransformation<IngraphSemaphoreNeighborMatch> {
 
@@ -33,7 +34,7 @@ public class IngraphTransformationRepairSemaphoreNeighbor extends IngraphTransfo
 		for (final IngraphSemaphoreNeighborMatch match : matches) {
 			final Long route2 = match.getRoute2();
 			final Long semaphore = match.getSemaphore();
-//			transaction.add(route2, ENTRY, semaphore);
+			transaction.add(ENTRY, new Map.Map2<>("route2", route2, "semaphore", semaphore));
 		}
 	}
 
