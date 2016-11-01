@@ -11,15 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
-
-import java.io.IOException;
-import java.util.Collection;
-
 import hu.bme.mit.ire.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.IngraphTransformation;
+import scala.collection.immutable.Map;
+
+import java.io.IOException;
+import java.util.Collection;
 
 public class IngraphTransformationRepairRouteSensor extends IngraphTransformation<IngraphRouteSensorMatch> {
 
@@ -33,7 +32,8 @@ public class IngraphTransformationRepairRouteSensor extends IngraphTransformatio
 		for (final IngraphRouteSensorMatch match : matches) {
 			final Long route = match.getRoute();
 			final Long sensor = match.getSensor();
-//			transaction.add(route, GATHERS, sensor);
+
+			transaction.add("_e4", new Map.Map2("route", route, "sensor", sensor));
 		}
 	}
 
