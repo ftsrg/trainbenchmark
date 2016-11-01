@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchSetMatch;
 import scala.collection.immutable.Map;
-import scala.collection.immutable.Vector;
 
 public class IngraphSwitchSetMatch extends IngraphMatch implements SwitchSetMatch {
 

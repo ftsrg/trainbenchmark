@@ -1,15 +1,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
+import java.util.List;
+
+import org.hamcrest.Matchers;
+import org.junit.Test;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
-import java.util.List;
 
 public abstract class RouteSensorTest extends QueryTest {
 
@@ -35,7 +37,9 @@ public abstract class RouteSensorTest extends QueryTest {
 
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
+		System.out.println("check 1");
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(8));
+		System.out.println("check 2");
 	}
 
 }

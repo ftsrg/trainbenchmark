@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
-
 import java.io.IOException;
 import java.util.Collection;
 

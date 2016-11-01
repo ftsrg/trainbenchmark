@@ -36,8 +36,6 @@ public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery
 		super(query, driver);
 		try {
 			final RelalgContainer plan = IngraphUtils.getQueryPlan(query.toString(), driver.getQueryVariant());
-			
-			System.out.println(plan);
 			final IngraphAdapter adapter = new IngraphAdapter(plan);
 			queryEngine = adapter.engine();
 			input.subscribe(queryEngine.inputLookup());

@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.repair;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import hu.bme.mit.ire.Transaction;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.IngraphTransformation;
 import scala.collection.immutable.Map;
-
-import java.io.IOException;
-import java.util.Collection;
 
 public class IngraphTransformationRepairRouteSensor extends IngraphTransformation<IngraphRouteSensorMatch> {
 

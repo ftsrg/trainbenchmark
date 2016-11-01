@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-
 import java.util.Collection;
 
 import hu.bme.mit.ire.Transaction;

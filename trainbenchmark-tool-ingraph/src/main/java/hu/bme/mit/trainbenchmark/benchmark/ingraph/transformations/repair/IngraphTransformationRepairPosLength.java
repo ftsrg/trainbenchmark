@@ -11,8 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-
 import java.io.IOException;
 import java.util.Collection;
 
