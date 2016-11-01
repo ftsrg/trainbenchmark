@@ -23,7 +23,6 @@ import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphMatch;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-
 import ingraph.ire.IngraphAdapter;
 import relalg.RelalgContainer;
 import scala.collection.Iterator;
@@ -36,13 +35,15 @@ public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery
 			throws IOException {
 		super(query, driver);
 		try {
-			RelalgContainer plan = IngraphUtils.getQueryPlan(query.toString(), driver.getQueryVariant());
-			IngraphAdapter adapter = new IngraphAdapter(plan);
+			final RelalgContainer plan = IngraphUtils.getQueryPlan(query.toString(), driver.getQueryVariant());
+			
+			System.out.println(plan);
+			final IngraphAdapter adapter = new IngraphAdapter(plan);
 			queryEngine = adapter.engine();
 			input.subscribe(queryEngine.inputLookup());
 			driver.setQuery(queryEngine);
 			driver.setReader(adapter.reader());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

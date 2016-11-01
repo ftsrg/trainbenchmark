@@ -28,7 +28,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.RouteSensorTest;
 @RunWith(Parameterized.class)
 public class IngraphRouteSensorTest extends RouteSensorTest {
 
-	@Parameters
+	@Parameters(name="variant={0}")
 	public static Iterable<? extends Object> data() {
 		return Arrays.asList("A", "B", "C");
 	}
