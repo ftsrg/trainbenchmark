@@ -23,7 +23,7 @@ public class IngraphSemaphoreNeighborInjectMatch extends IngraphMatch implements
 
 	@Override
 	public Long getRoute() {
-		return (Long) qs.apply(0);
+		return (Long) qs.apply("route");
 	}
 
 }
