@@ -53,9 +53,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 		final CleanupPhase cleanupPhase = new CleanupPhase(benchmarkBundle);
 
 		try {
-			System.out.println("1");
 			phaseExecutor.execute(initializeOperationsPhase);
-			System.out.println("2");
 
 			// read
 			final long readTime = phaseExecutor.execute(readPhase);

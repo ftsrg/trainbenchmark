@@ -23,11 +23,11 @@ public class IngraphPosLengthInjectMatch extends IngraphMatch implements PosLeng
 
 	@Override
 	public Long getSegment() {
-		return (Long) qs.apply(0);
+		return (Long) qs.get(0);
 	}
 
 	public Integer getLength() {
-		return (Integer) qs.apply(1);
+		return (Integer) qs.get(1);
 	}
 
 }

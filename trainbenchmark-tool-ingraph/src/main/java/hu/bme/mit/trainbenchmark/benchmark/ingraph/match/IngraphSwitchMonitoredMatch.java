@@ -23,7 +23,7 @@ public class IngraphSwitchMonitoredMatch extends IngraphMatch implements SwitchM
 
 	@Override
 	public Long getSw() {
-		return (Long) qs.apply(0);
+		return (Long) qs.get(0);
 	}
 
 }

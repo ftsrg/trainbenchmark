@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ActiveRouteMatch;
 import scala.collection.immutable.Map;
-import scala.collection.immutable.Vector;
 
 public class IngraphActiveRouteMatch extends IngraphMatch implements ActiveRouteMatch {
 
@@ -23,7 +22,7 @@ public class IngraphActiveRouteMatch extends IngraphMatch implements ActiveRoute
 
 	@Override
 	public Long getRoute() {
-		return (Long) qs.apply(0);
+		return (Long) qs.get(0);
 	}
 
 	@Override

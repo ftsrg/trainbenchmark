@@ -23,7 +23,7 @@ public class IngraphSwitchMonitoredInjectMatch extends IngraphMatch implements S
 
 	@Override
 	public Long getSw() {
-		return (Long) qs.apply(0);
+		return (Long) qs.get(0);
 	}
 
 }
