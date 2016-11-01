@@ -10,7 +10,9 @@ public class CleanupPhase extends Phase {
 
 	@Override
 	public void initialize() throws Exception {
-		bundle.cleanup();
+		if (bundle != null) {
+			bundle.cleanup();
+		}
 	}
 
 	@Override
