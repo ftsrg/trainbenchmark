@@ -15,14 +15,16 @@ import com.google.common.base.Joiner;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import scala.collection.JavaConversions;
 import scala.collection.immutable.Map;
 
 public abstract class IngraphMatch implements Match {
 
-	protected Map<Object, Object> qs;
+	protected java.util.Map<Object, Object> qs;
 
-	public IngraphMatch(final Map<Object, Object> qs) {
-		this.qs = qs;
+	public IngraphMatch(final scala.collection.immutable.Map<Object, Object> qs) {
+		// TODO has a negative effect on performance
+		this.qs = JavaConversions.mapAsJavaMap(qs);
 	}
 
 	public static IngraphMatch createMatch(final RailwayQuery query, final Map<Object, Object> qs) {

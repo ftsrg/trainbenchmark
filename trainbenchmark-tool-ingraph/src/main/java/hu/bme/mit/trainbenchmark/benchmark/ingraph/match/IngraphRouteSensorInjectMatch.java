@@ -23,12 +23,12 @@ public class IngraphRouteSensorInjectMatch extends IngraphMatch implements Route
 
 	@Override
 	public Long getRoute() {
-		return (Long) qs.apply(0);
+		return (Long) qs.get(0);
 	}
 
 	@Override
 	public Long getSensor() {
-		return (Long) qs.apply(1);
+		return (Long) qs.get(1);
 	}
 
 }
