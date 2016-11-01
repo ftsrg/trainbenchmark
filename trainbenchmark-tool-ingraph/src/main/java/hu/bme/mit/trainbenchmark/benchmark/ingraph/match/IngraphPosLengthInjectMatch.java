@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.PosLengthInjectMatch;
 import scala.collection.immutable.Map;
-import scala.collection.immutable.Vector;
 
 public class IngraphPosLengthInjectMatch extends IngraphMatch implements PosLengthInjectMatch {
 

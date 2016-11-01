@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.match;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.ConnectedSegmentsInjectMatch;
 import scala.collection.immutable.Map;
-import scala.collection.immutable.Vector;
 
 public class IngraphConnectedSegmentsInjectMatch extends IngraphMatch implements ConnectedSegmentsInjectMatch {
 
