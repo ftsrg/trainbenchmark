@@ -38,7 +38,7 @@ public class IngraphDriver extends Driver {
 
 	@Override
 	public String getPostfix() {
-		return ".graphml";
+		return "-tinkerpop.graphml";
 	}
 
 	public void setQuery(final TrainbenchmarkQuery query) {

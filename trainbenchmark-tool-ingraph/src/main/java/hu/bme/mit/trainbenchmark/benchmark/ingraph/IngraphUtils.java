@@ -10,13 +10,11 @@ import java.lang.reflect.Method;
 public class IngraphUtils {
     public static RelalgContainer getQueryPlan(String name, String variant) throws
             Exception {
-
         String prefix = "ingraph.trainbenchmark.";
         Class factoryClass = Class.forName(prefix + name + "QueryPlanFactory");
         Method declaredMethod = factoryClass.getDeclaredMethod(decapitalize(name) + variant);
         Object factory = factoryClass.getConstructor().newInstance();
-//        return (RelalgContainer) declaredMethod.invoke(factory);
-        return TrainBenchmarkUtil.routeSensor();
+        return (RelalgContainer) declaredMethod.invoke(factory);
     }
 
     private static String decapitalize(String string) {
