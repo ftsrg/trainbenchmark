@@ -1,25 +1,21 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph;
 
-import ingraph.trainbenchmark.TrainBenchmarkUtil;
-import relalg.RelalgContainer;
-import scala.collection.immutable.Map;
-
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import relalg.RelalgContainer;
+
 public class IngraphUtils {
-    public static RelalgContainer getQueryPlan(String name, String variant) throws
+    public static RelalgContainer getQueryPlan(final String name, final String variant) throws
             Exception {
 
-        String prefix = "ingraph.trainbenchmark.";
-        Class factoryClass = Class.forName(prefix + name + "QueryPlanFactory");
-        Method declaredMethod = factoryClass.getDeclaredMethod(decapitalize(name) + variant);
-        Object factory = factoryClass.getConstructor().newInstance();
-//        return (RelalgContainer) declaredMethod.invoke(factory);
-        return TrainBenchmarkUtil.routeSensor();
+        final String prefix = "ingraph.trainbenchmark.";
+        final Class<?> factoryClass = Class.forName(prefix + name + "QueryPlanFactory");
+        final Method declaredMethod = factoryClass.getDeclaredMethod(decapitalize(name) + variant);
+        final Object factory = factoryClass.getConstructor().newInstance();
+        return (RelalgContainer) declaredMethod.invoke(factory);
     }
 
-    private static String decapitalize(String string) {
+    private static String decapitalize(final String string) {
         return Character.toLowerCase(string.charAt(0)) + string.substring(1);
     }
 

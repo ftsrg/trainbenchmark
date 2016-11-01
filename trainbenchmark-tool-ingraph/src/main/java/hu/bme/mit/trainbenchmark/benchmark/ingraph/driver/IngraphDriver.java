@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import ingraph.ire.EngineFactory;
-import ingraph.ire.IngraphGraphChangedListener;
 import org.apache.commons.io.FileUtils;
 import org.apache.tinkerpop.gremlin.structure.io.graphml.GraphMLIo;
 import org.github.jamm.MemoryMeter;
@@ -47,7 +45,9 @@ public class IngraphDriver extends Driver {
 
 	@Override
 	public void destroy() {
-		query.shutdown();
+		if (query != null) {
+			query.shutdown();
+		}
 	}
 
 	public Transaction newTransaction() {
@@ -86,7 +86,7 @@ public class IngraphDriver extends Driver {
 		}
 	}
 
-	public void setReader(GraphMLIo reader) {
+	public void setReader(final GraphMLIo reader) {
 		this.reader = reader;
 	}
 }

@@ -14,7 +14,8 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 
 public class IngraphBenchmarkScenario extends BenchmarkScenario<IngraphMatch, IngraphDriver, IngraphBenchmarkConfig> {
 
-	protected IngraphBenchmarkScenario(final IngraphDriverFactory driverFactory, final ModelOperationFactory<IngraphMatch, IngraphDriver> modelOperationFactory,
+	protected IngraphBenchmarkScenario(final IngraphDriverFactory driverFactory,
+			final ModelOperationFactory<IngraphMatch, IngraphDriver> modelOperationFactory,
 			final Comparator<IngraphMatch> comparator, final IngraphBenchmarkConfig bc) throws Exception {
 		super(driverFactory, modelOperationFactory, comparator, bc);
 	}
