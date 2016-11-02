@@ -49,3 +49,5 @@ replay_*.log
 ~*.*
 *.~*
 
+xtend-gen/
+
