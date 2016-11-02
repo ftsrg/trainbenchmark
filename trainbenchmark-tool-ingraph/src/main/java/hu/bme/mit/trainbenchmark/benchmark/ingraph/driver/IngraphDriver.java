@@ -4,16 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import ingraph.ire.IngraphAdapter;
 import org.apache.commons.io.FileUtils;
-import org.apache.tinkerpop.gremlin.structure.io.graphml.GraphMLIo;
 import org.github.jamm.MemoryMeter;
 
 import hu.bme.mit.ire.Transaction;
 import hu.bme.mit.ire.TransactionFactory;
-import hu.bme.mit.ire.trainbenchmark.TrainbenchmarkQuery;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig;
+import ingraph.ire.IngraphAdapter;
 
 public class IngraphDriver extends Driver {
 
@@ -82,7 +80,7 @@ public class IngraphDriver extends Driver {
 		}
 	}
 
-	public void setAdapter(IngraphAdapter adapter) {
+	public void setAdapter(final IngraphAdapter adapter) {
 		this.adapter = adapter;
 	}
 }
