@@ -31,6 +31,7 @@ import scala.collection.immutable.Map;
 public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery<TPatternMatch, IngraphDriver> {
 
 	private TrainbenchmarkQuery queryEngine;
+	
 	public IngraphQuery(final IngraphDriver driver, final RailwayQuery query, final TransactionFactory input)
 			throws IOException {
 		super(query, driver);
@@ -43,12 +44,6 @@ public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static <TPatternMatch extends IngraphMatch> IngraphQuery<TPatternMatch>
-		create(final IngraphDriver driver, final RailwayQuery query, final TransactionFactory input)
-			throws IOException {
-		return new IngraphQuery<TPatternMatch>(driver, query, input);
 	}
 
 	@SuppressWarnings("unchecked")

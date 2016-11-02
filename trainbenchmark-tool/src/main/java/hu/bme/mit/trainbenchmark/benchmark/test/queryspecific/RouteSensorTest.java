@@ -17,12 +17,6 @@ public abstract class RouteSensorTest extends QueryTest {
 
 	@Test
 	public void testRouteSensor() throws Exception {
-		final String xms = "1G";
-		final String xmx = "1G";
-		final long timeout = 120;
-		final int runs = 2;
-		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ROUTESENSOR_REPAIR //
 		);
