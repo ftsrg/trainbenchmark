@@ -1,4 +1,4 @@
-package ingraph.relalg2tex.trainbenchmark
+package ingraph.trainbenchmark
 
 import ingraph.optimization.transformations.relalg2rete.Relalg2ReteTransformation
 import ingraph.relalg2tex.RelalgTreeSerializer
