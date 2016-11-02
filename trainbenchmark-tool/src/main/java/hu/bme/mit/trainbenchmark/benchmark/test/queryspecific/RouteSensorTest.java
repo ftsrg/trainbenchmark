@@ -37,9 +37,7 @@ public abstract class RouteSensorTest extends QueryTest {
 
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
-		System.out.println("check 1");
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(8));
-		System.out.println("check 2");
 	}
 
 }

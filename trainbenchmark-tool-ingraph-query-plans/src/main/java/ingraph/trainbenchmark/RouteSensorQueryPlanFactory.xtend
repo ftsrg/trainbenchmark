@@ -143,7 +143,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 		]
 		val expand2 = createExpandOperator => [
 			input = getSws
-			direction = Direction.IN
+			direction = Direction.OUT
 			sourceVertexVariable = sw
 			targetVertexVariable = sensor
 			edgeVariable = monitoredBy
@@ -159,7 +159,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 		]
 		val expand4 = createExpandOperator => [
 			input = getSwPs
-			direction = Direction.IN
+			direction = Direction.OUT
 			sourceVertexVariable = swP
 			targetVertexVariable = sw
 			edgeVariable = target
