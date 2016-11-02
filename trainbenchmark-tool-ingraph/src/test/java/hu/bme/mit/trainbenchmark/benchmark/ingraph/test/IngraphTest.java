@@ -10,37 +10,21 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test.queryspecific;
-
-import java.util.Arrays;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+package hu.bme.mit.trainbenchmark.benchmark.ingraph.test;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IqdCoreBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.ActiveRouteTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
-@RunWith(Parameterized.class)
-public class IqdCoreActiveRouteTest extends ActiveRouteTest {
-
-	@Parameters
-	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B", "C", "D", "E");
-	}
-
-	@Parameter
-	public String variant;
+public class IngraphTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
-		final IqdCoreBenchmarkConfig bc = new IqdCoreBenchmarkConfig(bcb, messageSize, variant, null);
-		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bc);
+		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfig(bcb, messageSize, "", null);
+		final IngraphBenchmarkScenario scenario = IngraphBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}

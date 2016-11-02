@@ -1,0 +1,22 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+// see this issue: https://bugs.eclipse.org/bugs/show_bug.cgi?id=468276
+//sourceCompatibility = 1.7
+//targetCompatibility = 1.7
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphBenchmarkMain' }
+}
+
+repositories {
+	mavenLocal()
+	maven { url "http://ftsrg.bintray.com/maven" }
+}
+
+dependencies {
+	compile project(':trainbenchmark-tool-tinkergraph')
+	compile project(':trainbenchmark-tool-ingraph-query-plans')
+	compile group: 'ingraph', name: 'ingraph-ire', version: ingraphVersion
+	compile 'com.github.jbellis:jamm:0.3.1'
+}

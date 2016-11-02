@@ -2,8 +2,8 @@ package hu.bme.mit.trainbenchmark.benchmark.phases;
 
 import java.util.Comparator;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
@@ -71,6 +71,8 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 				final long recheckTime = phaseExecutor.execute(queryPhase);
 				benchmarkResult.registerQueryTime(recheckTime);
 			}
+		} catch (final Exception e) {
+			e.printStackTrace();
 		} finally {
 			phaseExecutor.execute(cleanupPhase);
 		}

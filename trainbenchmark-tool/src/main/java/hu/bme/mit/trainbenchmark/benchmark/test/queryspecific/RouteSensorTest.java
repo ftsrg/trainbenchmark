@@ -1,26 +1,22 @@
 package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
+import java.util.List;
+
+import org.hamcrest.Matchers;
+import org.junit.Test;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
-import java.util.List;
 
 public abstract class RouteSensorTest extends QueryTest {
 
 	@Test
 	public void testRouteSensor() throws Exception {
-		final String xms = "1G";
-		final String xmx = "1G";
-		final long timeout = 120;
-		final int runs = 2;
-		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ROUTESENSOR_REPAIR //
 		);
