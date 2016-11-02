@@ -3,7 +3,6 @@ package ingraph.trainbenchmark
 import java.util.Arrays
 import relalg.ArithmeticComparisonOperator
 import relalg.Direction
-import ingraph.emf.util.PrettyPrinter
 
 class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
@@ -641,7 +640,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborF() {
 		val expand1 = createExpandOperator => [
-		    minHops = 1	
 			input = te1s
 			direction = Direction.OUT
 			sourceVertexVariable = te1
@@ -650,7 +648,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 		val expand2 = createExpandOperator => [
-		  	minHops = 2
 			input = te2s
 			direction = Direction.OUT
 			sourceVertexVariable = te2
@@ -666,7 +663,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		]
 
 		val expand3 = createExpandOperator => [
-		  	minHops = 3
 			input = join1
 			direction = Direction.IN
 			sourceVertexVariable = sensor1
@@ -675,7 +671,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 		val expand4 = createExpandOperator => [
-			minHops = 4
 			input = expand3
 			direction = Direction.IN
 			sourceVertexVariable = sensor2
@@ -691,7 +686,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		]
 
 		val expand5 = createExpandOperator => [
-		  	minHops = 5
 			input = filter
 			direction = Direction.OUT
 			sourceVertexVariable = route1
@@ -701,13 +695,12 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		]
 
 		val expand6 = createExpandOperator => [
-		  minHops = 6
-		  input = te1s
-		  direction = Direction.OUT
-		  sourceVertexVariable = te1
-		  targetVertexVariable = te2
-		  edgeVariable = connectsTo
-		  container = semaphoreNeighbor
+			input = te1s
+			direction = Direction.OUT
+			sourceVertexVariable = te1
+			targetVertexVariable = te2
+			edgeVariable = connectsTo
+			container = semaphoreNeighbor
 		]
 
 		val join2 = createJoinOperator => [
@@ -715,17 +708,16 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			rightInput = expand6
 			container = semaphoreNeighbor
 		]
-		
+
 		val expand7 = createExpandOperator => [
-		  minHops = 7
-		  input = route2s
-		  direction = Direction.OUT
-		  sourceVertexVariable = route2
-		  targetVertexVariable = semaphore
-		  edgeVariable = entry
-		  container = semaphoreNeighbor
+			input = route2s
+			direction = Direction.OUT
+			sourceVertexVariable = route2
+			targetVertexVariable = semaphore
+			edgeVariable = entry
+			container = semaphoreNeighbor
 		]
-				
+
 		val antiJoin = createAntiJoinOperator => [
 			leftInput = join2
 			rightInput = expand7
@@ -741,7 +733,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			input = trimmer
 			container = semaphoreNeighbor
 		]
-		semaphoreNeighbor.rootExpression = production		
+		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
 	}
 

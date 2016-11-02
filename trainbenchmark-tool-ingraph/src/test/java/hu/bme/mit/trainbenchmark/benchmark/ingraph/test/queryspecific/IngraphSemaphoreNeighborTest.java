@@ -30,7 +30,8 @@ public class IngraphSemaphoreNeighborTest extends SemaphoreNeighborTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B", "C", "D", "E", "F");
+//		return Arrays.asList("A", "B", "C", "D", "E", "F");
+		return Arrays.asList("F");
 	}
 
 	@Parameter
