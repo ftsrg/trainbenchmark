@@ -6,7 +6,7 @@ import relalg.RelalgContainer;
 
 public class IngraphUtils {
     public static RelalgContainer getQueryPlan(final String name, final String variant) throws
-            Exception {
+            Exception {    	
         final String prefix = "ingraph.trainbenchmark.";
         final Class<?> factoryClass = Class.forName(prefix + name + "QueryPlanFactory");
         final Method declaredMethod = factoryClass.getDeclaredMethod(decapitalize(name) + variant);

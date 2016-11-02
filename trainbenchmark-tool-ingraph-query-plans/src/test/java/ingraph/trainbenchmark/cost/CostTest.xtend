@@ -1,4 +1,4 @@
-package ingraph.relalg2tex.trainbenchmark.cost
+package ingraph.trainbenchmark.cost
 
 import ingraph.optimization.transformations.cost.ReteCostFunction
 import ingraph.optimization.transformations.relalg2rete.Relalg2ReteTransformation

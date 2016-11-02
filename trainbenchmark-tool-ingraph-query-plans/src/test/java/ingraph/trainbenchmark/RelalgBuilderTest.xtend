@@ -1,4 +1,4 @@
-package ingraph.relalg2tex.trainbenchmark
+package ingraph.trainbenchmark
 
 import ingraph.cypher2relalg.Cypher2Relalg
 import ingraph.cypherparser.CypherParser
