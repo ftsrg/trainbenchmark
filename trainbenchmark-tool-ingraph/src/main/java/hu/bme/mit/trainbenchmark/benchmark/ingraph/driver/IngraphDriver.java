@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.driver;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 
 import org.apache.commons.io.FileUtils;
@@ -73,7 +74,7 @@ public class IngraphDriver extends Driver {
 			final String line = String.join(",",
 					Arrays.asList(bc.getToolName(), bc.getQueryVariant(), bc.getFileName(), String.format("%.02f", memoryMB))) + "\n";
 			try {
-				FileUtils.write(new File(memPath), line, true);
+				FileUtils.write(new File(memPath), line, Charset.defaultCharset(), true);
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
