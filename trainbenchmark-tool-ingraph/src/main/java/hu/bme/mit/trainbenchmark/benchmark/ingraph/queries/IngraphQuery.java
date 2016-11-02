@@ -39,8 +39,7 @@ public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery
 			final IngraphAdapter adapter = new IngraphAdapter(plan);
 			queryEngine = adapter.engine();
 			input.subscribe(queryEngine.inputLookup());
-			driver.setQuery(queryEngine);
-			driver.setReader(adapter.reader());
+			driver.setAdapter(adapter);
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import ingraph.ire.IngraphAdapter;
 import org.apache.commons.io.FileUtils;
 import org.apache.tinkerpop.gremlin.structure.io.graphml.GraphMLIo;
 import org.github.jamm.MemoryMeter;
@@ -18,9 +19,8 @@ public class IngraphDriver extends Driver {
 
 	protected final IngraphBenchmarkConfig bc;
 	protected final TransactionFactory transactionFactory;
-	protected TrainbenchmarkQuery query;
 	protected Transaction lastTransaction;
-	private GraphMLIo reader;
+	private IngraphAdapter adapter;
 
 	public IngraphDriver(final IngraphBenchmarkConfig bc, final TransactionFactory transactionFactory) {
 		super();
@@ -30,8 +30,7 @@ public class IngraphDriver extends Driver {
 
 	@Override
 	public void read(final String modelPath) throws Exception {
-		// TODO use transactions
-		reader.readGraph(modelPath);
+		adapter.readGraph(modelPath, newTransaction());
 	}
 
 	@Override
@@ -39,14 +38,11 @@ public class IngraphDriver extends Driver {
 		return "-tinkerpop.graphml";
 	}
 
-	public void setQuery(final TrainbenchmarkQuery query) {
-		this.query = query;
-	}
 
 	@Override
 	public void destroy() {
-		if (query != null) {
-			query.shutdown();
+		if (adapter != null) {
+			adapter.engine().shutdown();
 		}
 	}
 
@@ -74,7 +70,7 @@ public class IngraphDriver extends Driver {
 		final String memPath = bc.getMemoryMeasurementPath();
 		if (memPath != null) {
 			final MemoryMeter meter = new MemoryMeter();
-			final long memoryB = meter.measureDeep(query);
+			final long memoryB = meter.measureDeep(adapter.engine());
 			final double memoryMB = memoryB / Math.pow(10, 6);
 			final String line = String.join(",",
 					Arrays.asList(bc.getToolName(), bc.getQueryVariant(), bc.getFileName(), String.format("%.02f", memoryMB))) + "\n";
@@ -86,7 +82,7 @@ public class IngraphDriver extends Driver {
 		}
 	}
 
-	public void setReader(final GraphMLIo reader) {
-		this.reader = reader;
+	public void setAdapter(IngraphAdapter adapter) {
+		this.adapter = adapter;
 	}
 }
