@@ -46,8 +46,8 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 	}
 
 	// SQL
-//	def sgc = new SqlGeneratorConfig(gc)
-//	GeneratorRunner.run(sgc)
+	def sgc = new SqlGeneratorConfig(gc)
+	GeneratorRunner.run(sgc)
 }
 
 for (scenario in scenarios) {
