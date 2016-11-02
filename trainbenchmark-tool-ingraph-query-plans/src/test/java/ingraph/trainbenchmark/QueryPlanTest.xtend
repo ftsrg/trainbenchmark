@@ -5,6 +5,7 @@ import ingraph.relalg2tex.RelalgTreeSerializer
 import ingraph.trainbenchmark.RouteSensorQueryPlanFactory
 import ingraph.trainbenchmark.SemaphoreNeighborQueryPlanFactory
 import org.junit.Test
+import ingraph.emf.util.PrettyPrinter
 
 class QueryPlanTest {
 
