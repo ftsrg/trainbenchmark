@@ -26,7 +26,8 @@ public abstract class GeneratorConfig extends AbstractConfig<GeneratorConfigBase
 		return configBase;
 	}
 
-	public static <T extends GeneratorConfig> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
+	public static <T extends GeneratorConfig> T fromFile(final String path, final Class<T> clazz)
+			throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
 		try (final Input input = new Input(new FileInputStream(path))) {
 			final T gc = kryo.readObject(input, clazz);

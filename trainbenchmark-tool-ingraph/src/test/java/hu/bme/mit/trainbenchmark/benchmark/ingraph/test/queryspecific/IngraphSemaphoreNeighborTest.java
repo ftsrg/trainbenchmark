@@ -10,7 +10,7 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.iqdcore.test.queryspecific;
+package hu.bme.mit.trainbenchmark.benchmark.ingraph.test.queryspecific;
 
 import java.util.Arrays;
 
@@ -20,17 +20,17 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.IqdCoreBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphBenchmarkScenario;
+import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
-import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.SwitchSetTest;
+import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.SemaphoreNeighborTest;
 
 @RunWith(Parameterized.class)
-public class IqdCoreSwitchSetTest extends SwitchSetTest {
+public class IngraphSemaphoreNeighborTest extends SemaphoreNeighborTest {
 
 	@Parameters
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList("A", "B");
+		return Arrays.asList("A", "B", "C", "D", "E", "F");
 	}
 
 	@Parameter
@@ -39,8 +39,8 @@ public class IqdCoreSwitchSetTest extends SwitchSetTest {
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
-		final IqdCoreBenchmarkConfig bc = new IqdCoreBenchmarkConfig(bcb, messageSize, variant, null);
-		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bc);
+		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfig(bcb, messageSize, variant, null);
+		final IngraphBenchmarkScenario scenario = IngraphBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
 	}
