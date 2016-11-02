@@ -41,7 +41,7 @@ Provided that you start with a fresh Ubuntu server installation, you can run the
 
 ```bash
 scripts/install-jdk.sh && \
-scripts/install-gradle.sh ** \
+scripts/install-gradle.sh && \
 gradle initScripts
 ```
 
