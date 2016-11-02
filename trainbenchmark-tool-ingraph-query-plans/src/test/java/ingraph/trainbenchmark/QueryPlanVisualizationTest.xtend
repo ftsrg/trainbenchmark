@@ -4,7 +4,7 @@ import ingraph.optimization.transformations.relalg2rete.Relalg2ReteTransformatio
 import ingraph.relalg2tex.RelalgTreeSerializer
 import org.junit.Test
 
-class QueryPlanTest {
+class QueryPlanVisualizationTest {
 
 	val extension RelalgTreeSerializer drawer = new RelalgTreeSerializer
 	val extension Relalg2ReteTransformation transformation = new Relalg2ReteTransformation

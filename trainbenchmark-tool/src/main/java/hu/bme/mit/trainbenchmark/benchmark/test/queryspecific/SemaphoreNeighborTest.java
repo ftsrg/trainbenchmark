@@ -23,11 +23,8 @@ public abstract class SemaphoreNeighborTest extends QueryTest {
 		final String workload = "SemaphoreNeighborTest";
 		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload);
-
-		final BenchmarkResult result = runTest(bcb);
-		System.out.println(result);
-		System.out.println(result.csvMatches());
-		System.out.println(result.csvTimes());
+		
+		final BenchmarkResult result = performBenchmark(bcb);
 
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(3));

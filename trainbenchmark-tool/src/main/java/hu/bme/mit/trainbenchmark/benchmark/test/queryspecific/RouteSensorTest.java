@@ -24,11 +24,8 @@ public abstract class RouteSensorTest extends QueryTest {
 		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload);
 
-		final BenchmarkResult result = runTest(bcb);
-		System.out.println(result);
-		System.out.println(result.csvMatches());
-		System.out.println(result.csvTimes());
-
+		final BenchmarkResult result = performBenchmark(bcb);
+		
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(18));
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(8));
