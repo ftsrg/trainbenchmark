@@ -30,16 +30,14 @@ public class BenchmarkResult {
 	protected final String workspaceDir;
 	protected final String model;
 	protected final String description;
-	protected final Integer memoryLimit;
 
 	public BenchmarkResult(final String tool, final String workload, final String workspaceDir, final String model,
-			final String description, final Integer memoryLimit) {
+			final String description) {
 		this.tool = tool;
 		this.workload = workload;
 		this.workspaceDir = workspaceDir;
 		this.model = model;
 		this.description = description;
-		this.memoryLimit = memoryLimit;
 	}
 
 	public void nextRun() {
@@ -80,24 +78,24 @@ public class BenchmarkResult {
 		return s;
 	}
 
-	public String csvMemory() {
-		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
-				"Memory");
-		final String header = separatorJoiner.join(headerAttributes);
-
-		final List<String> rows = Lists.newArrayList(header);
-
-		for (Integer run = 1; run <= runResults.size(); run++) {
-			final List<String> memoryRecordAttributes = ImmutableList.of(tool, workload, description, model,
-					run.toString(), memoryLimit.toString());
-			final String timeRecord = separatorJoiner.join(memoryRecordAttributes);
-			rows.add(timeRecord);
-		}
-
-		rows.add(LAST_LINE);
-		final String csv = newlineJoiner.join(rows);
-		return csv;
-	}
+//	public String csvMemory() {
+//		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
+//				"Memory");
+//		final String header = separatorJoiner.join(headerAttributes);
+//
+//		final List<String> rows = Lists.newArrayList(header);
+//
+//		for (Integer run = 1; run <= runResults.size(); run++) {
+//			final List<String> memoryRecordAttributes = ImmutableList.of(tool, workload, description, model,
+//					run.toString(), memoryLimit.toString());
+//			final String timeRecord = separatorJoiner.join(memoryRecordAttributes);
+//			rows.add(timeRecord);
+//		}
+//
+//		rows.add(LAST_LINE);
+//		final String csv = newlineJoiner.join(rows);
+//		return csv;
+//	}
 
 	public String csvTimes() {
 		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
@@ -173,7 +171,7 @@ public class BenchmarkResult {
 	}
 
 	public void serialize() throws IOException {
-		serializeCsv(csvMemory(), "memory");
+//		serializeCsv(csvMemory(), "memory");
 		serializeCsv(csvTimes(), "times");
 		serializeCsv(csvMatches(), "matches");
 	}
