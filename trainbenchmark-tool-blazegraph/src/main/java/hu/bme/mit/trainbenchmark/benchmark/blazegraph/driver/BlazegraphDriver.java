@@ -36,6 +36,8 @@ public class BlazegraphDriver extends SesameDriver {
 
 		// remove Blazegraph banner text
 		System.getProperties().setProperty("com.bigdata.Banner.quiet", "true");
+		System.getProperties().setProperty("com.bigdata.util.config.LogUtil.quiet", "true");
+		
 		// load journal properties from resources
 		final Properties props = loadProperties("/blazegraph.properties");
 		// instantiate a sail
