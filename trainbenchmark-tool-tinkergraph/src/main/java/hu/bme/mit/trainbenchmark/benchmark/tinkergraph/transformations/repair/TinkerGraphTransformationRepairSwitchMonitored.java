@@ -33,6 +33,7 @@ public class TinkerGraphTransformationRepairSwitchMonitored<TTinkerGraphDriver e
 	public void activate(final Collection<TinkerGraphSwitchMonitoredMatch> matches) {
 		for (final TinkerGraphSwitchMonitoredMatch ssnm : matches) {
 			final Vertex sw = ssnm.getSw();
+			// TODO note that this vertex has a long id instead of a string
 			final Vertex sensor = driver.getGraph().addVertex(SENSOR);
 			sw.addEdge(MONITORED_BY, sensor);
 		}

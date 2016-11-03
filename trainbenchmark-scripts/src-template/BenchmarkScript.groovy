@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 
-def ec = new ExecutionConfig(12800, 12800)
+def ec = new ExecutionConfig(1000, 1000)
 
 def minSize = 1
 def maxSize = 8
@@ -31,8 +31,8 @@ def operations = [
 	RailwayOperation.POSLENGTH_REPAIR,
 	RailwayOperation.ROUTESENSOR_REPAIR,
 	RailwayOperation.SEMAPHORENEIGHBOR_REPAIR,
-	RailwayOperation.SWITCHSET_REPAIR,
 	RailwayOperation.SWITCHMONITORED_REPAIR,
+	RailwayOperation.SWITCHSET_REPAIR,
 ]
 
 def workload = "Repair"
