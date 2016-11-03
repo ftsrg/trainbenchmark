@@ -20,8 +20,8 @@ def scenarios = [
 	Scenario.REPAIR,
 ]
 
-def generate(String xms, String xmx, Scenario scenario, int size) {
-	def gc = new GeneratorConfigBase(xms, xmx, scenario, size)
+def generate(ExecutionConfig ec, Scenario scenario, int size) {
+	def gc = new GeneratorConfigBase(scenario, size)
 
 	// EMF
 	def egc = new EmfGeneratorConfig(gc, ec)
@@ -53,6 +53,6 @@ def generate(String xms, String xmx, Scenario scenario, int size) {
 for (scenario in scenarios) {
 	for (size = minSize; size <= maxSize; size *= 2) {
 		println("Scenario: ${scenario}, size: ${size}")
-		generate(xms, xmx, scenario, size)
+		generate(ec, scenario, size)
 	}
 }

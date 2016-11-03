@@ -14,7 +14,7 @@ dependencies {
 	compile project(':trainbenchmark-tool-drools')
 	compile project(':trainbenchmark-tool-eclipseocl')
 	compile project(':trainbenchmark-tool-emfapi')
-//	compile project(':trainbenchmark-tool-epsilon')
+	//	compile project(':trainbenchmark-tool-epsilon')
 	compile project(':trainbenchmark-tool-iqdcore')
 	compile project(':trainbenchmark-tool-jena')
 	compile project(':trainbenchmark-tool-mysql')
@@ -27,13 +27,27 @@ dependencies {
 
 sourceSets {
 	main {
-		groovy { srcDirs = ['src'] }
+		groovy { srcDirs = ['src']}
 	}
 }
 
+/**
+ * Initialize the generator, benchmark, etc. scripts in src directory,
+ * based on the template script in the src-template directory.
+ */
 task initScripts(type: Copy) {
 	from 'src-template'
 	into 'src'
+	include '*.groovy'
+}
+
+/**
+ * Save the current scripts from the src directory to the src-template directory.
+ * Use with caution and double check the diffs before committing the changes.
+ */
+task saveScripts(type: Copy) {
+	from 'src'
+	into 'src-template'
 	include '*.groovy'
 }
 
@@ -48,6 +62,11 @@ task benchmark(dependsOn: 'classes', type: JavaExec) {
 
 task generate(dependsOn: 'classes', type: JavaExec) {
 	main = 'GeneratorScript'
+	classpath = sourceSets.main.runtimeClasspath
+}
+
+task memory(dependsOn: 'classes', type: JavaExec) {
+	main = 'MemoryScript'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
