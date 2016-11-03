@@ -30,7 +30,7 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 
 		final BenchmarkConfigBase bcb = bc.getConfigBase();
 		this.benchmarkResult = new BenchmarkResult(bc.getToolName(), bcb.getWorkload(), bcb.getWorkspaceDir(),
-				bcb.getModelFilename(), bc.getDescription(), bc.getExecutionConfig().getMaxMemory());
+				bcb.getModelFilename(), bc.getDescription());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {
