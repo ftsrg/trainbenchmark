@@ -14,28 +14,52 @@ package hu.bme.mit.trainbenchmark.config;
 
 public abstract class AbstractConfigBase {
 
-	protected final String xms;
-	protected final String xmx;
-
-	public AbstractConfigBase(final String xms, final String xmx) {
-		this.xms = xms;
-		this.xmx = xmx;
+	protected final Integer initialMemory;
+	protected final Integer maxMemory;
+	
+	public AbstractConfigBase(final Integer initialMemory, final Integer maxMemory) {
+		this.initialMemory = initialMemory;
+		this.maxMemory = maxMemory;
 	}
 
 	public String getWorkspaceDir() {
 		return "../";
 	}
-	
+
 	public String getModelDir() {
 		return getWorkspaceDir() + "models/";
 	}
 
-	public String getXms() {
-		return xms;
+	/**
+	 * 
+	 * @return The initial memory for the benchmark JVM in MBs.
+	 */
+	public Integer getInitialMemory() {
+		return initialMemory;
 	}
 	
+	/**
+	 * 
+	 * @return The maximum memory for the benchmark JVM in MBs.
+	 */
+	public Integer getMaxMemory() {
+		return maxMemory;
+	}
+
+	/**
+	 * 
+	 * @return The string required to parameterize the JVM's -Xms option, e.g. "12800M"
+	 */
+	public String getXms() {
+		return initialMemory + "M";
+	}
+
+	/**
+	 * 
+	 * @return The string required to parameterize the JVM's -Xmx option, e.g. "12800M"
+	 */
 	public String getXmx() {
-		return xmx;
+		return maxMemory + "M";
 	}
 
 }

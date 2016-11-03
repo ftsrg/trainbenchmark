@@ -60,11 +60,11 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	 */
 	protected final int transformationConstant;
 	
-	public BenchmarkConfigBase(final String xms, final String xmx, final long timeout, final int runs,
+	public BenchmarkConfigBase(final Integer initialMemory, final Integer maxMemory, final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
 			final List<RailwayOperation> railwayOperations, final String workload,
 			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
-		super(xms, xmx);
+		super(initialMemory, maxMemory);
 		this.timeout = timeout;
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformationCount;

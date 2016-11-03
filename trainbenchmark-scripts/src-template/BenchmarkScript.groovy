@@ -18,8 +18,8 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 
-def xms = "12G"
-def xmx = "12G"
+def initialMemory = 12800
+def maxMemory = 12800
 def minSize = 1
 def maxSize = 8
 def timeout = 900
@@ -37,7 +37,7 @@ def workload = "Repair"
 for (size = minSize; size <= maxSize; size *= 2) {
     def modelFilename = "railway-repair-${size}"
 
-    def bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10)
+    def bcb = new BenchmarkConfigBase(initialMemory, maxMemory, timeout, runs, queryTransformationCount, modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10)
 
     BenchmarkRunner.run(new BlazegraphBenchmarkConfig(bcb, false))
     BenchmarkRunner.run(new BlazegraphBenchmarkConfig(bcb, true))
