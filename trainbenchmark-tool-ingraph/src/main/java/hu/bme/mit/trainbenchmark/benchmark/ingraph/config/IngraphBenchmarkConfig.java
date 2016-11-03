@@ -5,12 +5,9 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class IngraphBenchmarkConfig extends BenchmarkConfig {
 
-	protected int messageSize;
-	protected String queryVariant;
-	protected String memoryMeasurementPath;
-
-	protected IngraphBenchmarkConfig() {
-	}
+	protected final int messageSize;
+	protected final String queryVariant;
+	protected final String memoryMeasurementPath;
 
 	public IngraphBenchmarkConfig(final BenchmarkConfigBase bcb, final int messageSize, final String queryVariant,
 			final String memoryMeasurementPath) {

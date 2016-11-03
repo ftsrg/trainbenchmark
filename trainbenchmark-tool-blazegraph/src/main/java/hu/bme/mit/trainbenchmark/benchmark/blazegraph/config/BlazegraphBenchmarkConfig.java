@@ -16,9 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
-
-	protected BlazegraphBenchmarkConfig() {
-	}
 	
 	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
 		super(bcb, inferencing);

@@ -12,14 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.sqlite.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class SQLiteBenchmarkConfig extends BenchmarkConfig {
 
-	protected SQLiteBenchmarkConfig() {
-	}
-	
 	public SQLiteBenchmarkConfig(final BenchmarkConfigBase bcb) {
 		super(bcb);
 	}

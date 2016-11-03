@@ -12,13 +12,10 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class EmfGeneratorConfig extends GeneratorConfig {
-
-	protected EmfGeneratorConfig() {
-	}
 	
 	public EmfGeneratorConfig(final GeneratorConfigBase generatorConfig) {
 		super(generatorConfig);

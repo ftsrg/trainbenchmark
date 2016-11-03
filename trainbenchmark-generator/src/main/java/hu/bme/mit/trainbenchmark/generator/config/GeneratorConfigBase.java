@@ -17,12 +17,8 @@ import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public final class GeneratorConfigBase extends AbstractConfigBase {
 
-	protected Scenario scenario;
-	protected int size;
-
-	protected GeneratorConfigBase() {
-		super();
-	}
+	protected final Scenario scenario;
+	protected final int size;
 	
 	public GeneratorConfigBase(final String xms, final String xmx, final Scenario scenario, final int size) {
 		super(xms, xmx);

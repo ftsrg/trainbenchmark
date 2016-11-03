@@ -4,9 +4,6 @@ import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 
 public abstract class GeneratorConfig extends AbstractConfig<GeneratorConfigBase> {
 
-	protected GeneratorConfig() {
-	}
-
 	public GeneratorConfig(final GeneratorConfigBase configBase) {
 		this.configBase = configBase;
 	}
