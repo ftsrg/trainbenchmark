@@ -1,9 +1,11 @@
 package hu.bme.mit.trainbenchmark.config;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
 public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
@@ -22,6 +24,14 @@ public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 		final Kryo kryo = new Kryo();
 		try (final Output output = new Output(new FileOutputStream(path))) {
 			kryo.writeObject(output, this);
+		}
+	}
+	
+	public static <T extends AbstractConfig<?>> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
+		final Kryo kryo = new Kryo();
+		try (final Input input = new Input(new FileInputStream(path))) {
+			final T bc = kryo.readObject(input, clazz);
+			return bc;
 		}
 	}
 
