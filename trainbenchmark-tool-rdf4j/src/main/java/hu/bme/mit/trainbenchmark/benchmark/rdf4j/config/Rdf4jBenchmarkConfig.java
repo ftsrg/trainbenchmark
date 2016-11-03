@@ -16,9 +16,6 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class Rdf4jBenchmarkConfig extends RdfBenchmarkConfig {
-
-	protected Rdf4jBenchmarkConfig() {
-	}
 	
 	public Rdf4jBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
 		super(bcb, inferencing);

@@ -14,12 +14,9 @@ package hu.bme.mit.trainbenchmark.config;
 
 public abstract class AbstractConfigBase {
 
-	protected String xms;
-	protected String xmx;
+	protected final String xms;
+	protected final String xmx;
 
-	protected AbstractConfigBase() {
-	}
-	
 	public AbstractConfigBase(final String xms, final String xmx) {
 		this.xms = xms;
 		this.xmx = xmx;

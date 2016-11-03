@@ -4,9 +4,6 @@ import hu.bme.mit.trainbenchmark.config.AbstractConfig;
 
 public abstract class BenchmarkConfig extends AbstractConfig<BenchmarkConfigBase> {
 
-	protected BenchmarkConfig() {
-	}
-
 	public BenchmarkConfig(final BenchmarkConfigBase configBase) {
 		this.configBase = configBase;
 	}

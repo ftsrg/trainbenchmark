@@ -23,38 +23,32 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	/**
 	 * The timeout for each measurement run in seconds.
 	 */
-	protected long timeout;
+	protected final long timeout;
 
 	/**
 	 * The number of measurement runs.
 	 */
-	protected int runs;
+	protected final int runs;
 
 	/**
 	 * The number of Transformation-Recheck loops.
 	 */
-	protected int queryTransformationCount;
+	protected final int queryTransformationCount;
 
 	/**
 	 * The name of the model file (without extension).
 	 */
-	protected String modelFilename;
+	protected final String modelFilename;
 
 	/**
 	 * The sequence of operations to perform.
 	 */
-	protected List<RailwayOperation> railwayOperations;
+	protected final List<RailwayOperation> railwayOperations;
 
 	/**
 	 * A short description of the workload.
 	 */
-	protected String workload;
-
-	/**
-	 * Non-arg constructor for Kryo
-	 */
-	protected BenchmarkConfigBase() {
-	}
+	protected final String workload;
 
 	public BenchmarkConfigBase(final String xms, final String xmx, final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,

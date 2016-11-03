@@ -4,7 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import org.objenesis.strategy.StdInstantiatorStrategy;
+
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.Kryo.DefaultInstantiatorStrategy;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
@@ -29,7 +32,8 @@ public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 	
 	public static <T extends AbstractConfig<?>> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
 		final Kryo kryo = new Kryo();
-		try (final Input input = new Input(new FileInputStream(path))) {
+		kryo.setInstantiatorStrategy(new DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
+	    try (final Input input = new Input(new FileInputStream(path))) {
 			final T bc = kryo.readObject(input, clazz);
 			return bc;
 		}
