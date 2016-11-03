@@ -21,9 +21,9 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class IngraphTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
-		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfig(bcb, messageSize, "", null);
+		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfig(bcb, executionConfig, messageSize, "", null);
 		final IngraphBenchmarkScenario scenario = IngraphBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

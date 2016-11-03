@@ -12,13 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql.config;
 
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class SqlGeneratorConfig extends GeneratorConfig {
 
-	public SqlGeneratorConfig(final GeneratorConfigBase generatorConfig) {
-		super(generatorConfig);
+	public SqlGeneratorConfig(final GeneratorConfigBase configBase, final ExecutionConfig executionConfig) {
+		super(configBase, executionConfig);
 	}
 
 	@Override

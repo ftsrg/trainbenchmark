@@ -13,20 +13,22 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class ViatraBenchmarkConfig extends BenchmarkConfig {
 
 	protected ViatraBackend backend;
 
-	public ViatraBenchmarkConfig(final BenchmarkConfigBase bcb, final ViatraBackend backend) {
-		super(bcb);
+	public ViatraBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
+			final ViatraBackend backend) {
+		super(configBase, executionConfig);
 		this.backend = backend;
-	}	
-	
+	}
+
 	public ViatraBackend getBackend() {
 		return backend;
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "VIATRA (" + getBackend().toString() + ")";

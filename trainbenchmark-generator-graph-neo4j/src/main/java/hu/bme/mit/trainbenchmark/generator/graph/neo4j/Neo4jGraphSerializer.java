@@ -21,7 +21,11 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
-import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.RelationshipType;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
@@ -40,8 +44,8 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 
 	public Neo4jGraphSerializer(final Neo4jGraphGeneratorConfig generatorConfig) {
 		super(generatorConfig);
-		databaseDirectory = new File(generatorConfig.getGeneratorConfig().getModelDir() + "neo4j-gen/"
-				+ generatorConfig.getGeneratorConfig().getModelFileNameWithoutExtension() + ".neo4j");
+		databaseDirectory = new File(generatorConfig.getConfigBase().getModelDir() + "neo4j-gen/"
+				+ generatorConfig.getConfigBase().getModelFileNameWithoutExtension() + ".neo4j");
 	}
 
 	@Override
@@ -144,7 +148,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
 			tx.success();
 
-			final String fileName = gc.getGeneratorConfig().getModelPathWithoutExtension() + "." + Neo4jConstants.MODEL_EXTENSION;
+			final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "." + Neo4jConstants.MODEL_EXTENSION;
 
 			final String graphmlContent = writer.toString();
 			// this is required to be compatibile with OrientDB

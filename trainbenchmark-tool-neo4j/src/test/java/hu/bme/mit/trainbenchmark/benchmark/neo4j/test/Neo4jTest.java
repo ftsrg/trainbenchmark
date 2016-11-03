@@ -39,7 +39,7 @@ public class Neo4jTest extends TrainBenchmarkTest {
 	
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final Neo4jBenchmarkConfig bc = new Neo4jBenchmarkConfig(bcb, engine);
+		final Neo4jBenchmarkConfig bc = new Neo4jBenchmarkConfig(bcb, executionConfig, engine);
 		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

@@ -14,6 +14,20 @@ import com.esotericsoftware.kryo.io.Output;
 public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 
 	protected TConfigBase configBase;
+	protected ExecutionConfig executionConfig;
+	
+	public AbstractConfig(final TConfigBase configBase, final ExecutionConfig executionConfig) {
+		this.configBase = configBase;
+		this.executionConfig = executionConfig;
+	}
+
+	public TConfigBase getConfigBase() {
+		return configBase;
+	}
+	
+	public ExecutionConfig getExecutionConfig() {
+		return executionConfig;
+	}
 
 	/**
 	 * Serialize the configuration to a file. This does not need to be redefined

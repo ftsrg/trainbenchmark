@@ -19,7 +19,7 @@ public class GeneratorRunner {
 		final String projectName = String.format("trainbenchmark-generator-%s", gc.getProjectName());
 		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar", projectName, projectName);
 		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s",
-				gc.getGeneratorConfig().getXms(), gc.getGeneratorConfig().getXmx(), jarPath, configPath);
+				gc.getExecutionConfig().getXms(), gc.getExecutionConfig().getXmx(), jarPath, configPath);
 		
 		final CommandLine cmdLine = CommandLine.parse(javaCommand);
 		final DefaultExecutor executor = new DefaultExecutor();

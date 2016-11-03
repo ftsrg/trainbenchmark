@@ -12,21 +12,23 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf.config;
 
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
 public class RdfGeneratorConfig extends GeneratorConfig {
-	
+
 	protected boolean inferred;
-	protected RdfFormat format; 
-	
-	public RdfGeneratorConfig(final GeneratorConfigBase generatorConfig, final boolean inferred, final RdfFormat format) {
-		super(generatorConfig);
+	protected RdfFormat format;
+
+	public RdfGeneratorConfig(final GeneratorConfigBase configBase, final ExecutionConfig executionConfig,
+			final boolean inferred, final RdfFormat format) {
+		super(configBase, executionConfig);
 		this.inferred = inferred;
 		this.format = format;
 	}
-	
+
 	public boolean isInferred() {
 		return inferred;
 	}
@@ -34,7 +36,7 @@ public class RdfGeneratorConfig extends GeneratorConfig {
 	public RdfFormat getFormat() {
 		return format;
 	}
-	
+
 	public String getModelFlavor() {
 		return isInferred() ? "-inferred" : "-metamodel";
 	}
@@ -47,5 +49,5 @@ public class RdfGeneratorConfig extends GeneratorConfig {
 	public String getProjectName() {
 		return "rdf";
 	}
-	
+
 }

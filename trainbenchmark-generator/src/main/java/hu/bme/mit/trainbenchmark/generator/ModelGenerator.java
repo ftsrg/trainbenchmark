@@ -25,7 +25,7 @@ public abstract class ModelGenerator {
 		// messageBuilder.append("query: " +
 		// generatorConfig.getQueries().get(0));
 		// } else {
-		messageBuilder.append("size: " + gc.getGeneratorConfig().getSize());
+		messageBuilder.append("size: " + gc.getConfigBase().getSize());
 		// }
 		messageBuilder.append("... ");
 		System.out.print(messageBuilder.toString());

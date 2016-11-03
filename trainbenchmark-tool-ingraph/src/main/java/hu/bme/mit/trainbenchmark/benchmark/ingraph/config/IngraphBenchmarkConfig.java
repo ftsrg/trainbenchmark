@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class IngraphBenchmarkConfig extends BenchmarkConfig {
 
@@ -9,9 +10,9 @@ public class IngraphBenchmarkConfig extends BenchmarkConfig {
 	protected final String queryVariant;
 	protected final String memoryMeasurementPath;
 
-	public IngraphBenchmarkConfig(final BenchmarkConfigBase bcb, final int messageSize, final String queryVariant,
+	public IngraphBenchmarkConfig(final BenchmarkConfigBase bcb, final ExecutionConfig executionConfig, final int messageSize, final String queryVariant,
 			final String memoryMeasurementPath) {
-		super(bcb);
+		super(bcb, executionConfig);
 		this.messageSize = messageSize;
 		this.queryVariant = queryVariant;
 		this.memoryMeasurementPath = memoryMeasurementPath;

@@ -21,9 +21,9 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class IqdCoreTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
-		final IqdCoreBenchmarkConfig bc = new IqdCoreBenchmarkConfig(bcb, messageSize, "", null);
+		final IqdCoreBenchmarkConfig bc = new IqdCoreBenchmarkConfig(bcb, executionConfig, messageSize, "", null);
 		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
