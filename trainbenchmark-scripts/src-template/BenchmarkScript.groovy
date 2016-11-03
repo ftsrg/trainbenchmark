@@ -1,5 +1,6 @@
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase
+import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy;
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfig
@@ -36,7 +37,7 @@ def workload = "Repair"
 for (size = minSize; size <= maxSize; size *= 2) {
     def modelFilename = "railway-repair-${size}"
 
-    def bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload)
+    def bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10)
 
     BenchmarkRunner.run(new BlazegraphBenchmarkConfig(bcb, false))
     BenchmarkRunner.run(new BlazegraphBenchmarkConfig(bcb, true))

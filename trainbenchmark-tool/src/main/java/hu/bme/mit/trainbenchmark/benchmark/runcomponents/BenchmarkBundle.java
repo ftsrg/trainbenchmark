@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
@@ -24,8 +25,9 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 
 	protected Collection<QueryShuffleTransformation<? extends TPatternMatch, TDriver>> qsts = new LinkedList<>();
 
-	public BenchmarkBundle(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> factory,
-			final Comparator<TPatternMatch> comparator, final TBenchmarkConfig bc, final BenchmarkResult benchmarkResults) throws Exception {
+	public BenchmarkBundle(final DriverFactory<TDriver> driverFactory,
+			final ModelOperationFactory<TPatternMatch, TDriver> factory, final Comparator<TPatternMatch> comparator,
+			final TBenchmarkConfig bc, final BenchmarkResult benchmarkResults) throws Exception {
 		this.driver = driverFactory.createInstance();
 		this.factory = factory;
 		this.comparator = comparator;
@@ -45,11 +47,12 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 
 	public void initializeOperations() throws Exception {
 		for (final RailwayOperation railwayOperation : bc.getConfigBase().getRailwayOperations()) {
-
 			final String workspaceDir = bc.getConfigBase().getWorkspaceDir();
 
-			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation, workspaceDir, driver);
-			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation.of(operation, comparator, random);
+			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
+					workspaceDir, driver);
+			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation
+					.of(operation, comparator, random);
 			qsts.add(qst);
 		}
 	}
@@ -64,7 +67,9 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	public void shuffle() {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
 			if (qst.isTransformation()) {
-				qst.shuffle(10);
+				final int changeSetSize = determineChangeSet(qst, bc.getConfigBase().getTransformationChangeSetStrategy(),
+						bc.getConfigBase().getTransformationConstant());
+				qst.shuffle(changeSetSize);
 			}
 		}
 	}
@@ -79,6 +84,18 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 
 	public void cleanup() throws Exception {
 		driver.destroy();
+	}
+
+	public int determineChangeSet(final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst,
+			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
+		switch (transformationChangeSetStrategy) {
+		case FIXED:
+			return transformationConstant;
+		case PROPORTIONAL:
+			return qst.getMatches().size() * transformationConstant / 100;
+		default:
+			throw new UnsupportedOperationException("Transformation change set strategy " + transformationChangeSetStrategy + " not supported.");
+		}
 	}
 
 }

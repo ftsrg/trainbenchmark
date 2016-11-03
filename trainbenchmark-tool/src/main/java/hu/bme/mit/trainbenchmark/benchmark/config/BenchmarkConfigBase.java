@@ -50,9 +50,20 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	 */
 	protected final String workload;
 
+	/**
+	 * Transformation strategy to pick matches for transformation, e.g. "a fixed number" or "a proportional amount" of matches
+	 */
+	protected final TransformationChangeSetStrategy transformationChangeSetStrategy;
+	
+	/**
+	 * Transformation constrant to pick matches for transformations, e.g. "10 matches" or "10% of the matches"
+	 */
+	protected final int transformationConstant;
+	
 	public BenchmarkConfigBase(final String xms, final String xmx, final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
-			final List<RailwayOperation> railwayOperations, final String workload) {
+			final List<RailwayOperation> railwayOperations, final String workload,
+			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
 		super(xms, xmx);
 		this.timeout = timeout;
 		this.runs = runs;
@@ -60,6 +71,8 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 		this.modelFilename = modelFilename;
 		this.railwayOperations = railwayOperations;
 		this.workload = workload;
+		this.transformationChangeSetStrategy = transformationChangeSetStrategy;
+		this.transformationConstant = transformationConstant;
 	}
 
 	public long getTimeout() {
@@ -91,6 +104,14 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	
 	public String getModelFilename() {
 		return modelFilename;
+	}
+	
+	public TransformationChangeSetStrategy getTransformationChangeSetStrategy() {
+		return transformationChangeSetStrategy;
+	}
+	
+	public int getTransformationConstant() {
+		return transformationConstant;
 	}
 
 }

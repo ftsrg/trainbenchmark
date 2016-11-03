@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -22,7 +23,7 @@ public abstract class SemaphoreNeighborTest extends QueryTest {
 		);
 		final String workload = "SemaphoreNeighborTest";
 		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
-				workload);
+				workload, TransformationChangeSetStrategy.FIXED, 10);
 		
 		final BenchmarkResult result = performBenchmark(bcb);
 
