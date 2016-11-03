@@ -14,20 +14,22 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	protected Neo4jEngine engine;
 
-	public Neo4jBenchmarkConfig(final BenchmarkConfigBase bcb, final Neo4jEngine engine) {
-		super(bcb);
+	public Neo4jBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
+			final Neo4jEngine engine) {
+		super(configBase, executionConfig);
 		this.engine = engine;
 	}
-	
+
 	public Neo4jEngine getEngine() {
 		return engine;
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "Neo4j (" + getEngine().toString() + ")";
@@ -37,5 +39,5 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 	public String getProjectName() {
 		return "neo4j";
 	}
-	
+
 }

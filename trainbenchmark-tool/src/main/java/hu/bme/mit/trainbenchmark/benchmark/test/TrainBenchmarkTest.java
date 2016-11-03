@@ -13,6 +13,7 @@ import com.google.common.collect.ListMultimap;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
@@ -21,12 +22,12 @@ public abstract class TrainBenchmarkTest {
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
 
-	protected abstract BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception;
-
-	protected final int memory = 1000;
+	protected ExecutionConfig executionConfig = ExecutionConfig.defaultExecutionConfig();
 	protected final long timeout = 120;
 	protected final int runs = 1;
 
+	protected abstract BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception;
+	
 	// batch
 
 	@Test
@@ -43,7 +44,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHMONITORED, //
 				RailwayOperation.SWITCHSET //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -75,7 +76,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHMONITORED_REPAIR, //
 				RailwayOperation.SWITCHSET_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -106,7 +107,7 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -127,7 +128,7 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.POSLENGTH_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -148,7 +149,7 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ROUTESENSOR_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -169,7 +170,7 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -190,7 +191,7 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHMONITORED_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -211,7 +212,7 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHSET_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -234,7 +235,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.CONNECTEDSEGMENTS, //
 				RailwayOperation.CONNECTEDSEGMENTS_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -256,7 +257,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.POSLENGTH, //
 				RailwayOperation.POSLENGTH_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -278,7 +279,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.ROUTESENSOR, //
 				RailwayOperation.ROUTESENSOR_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -300,7 +301,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SEMAPHORENEIGHBOR, //
 				RailwayOperation.SEMAPHORENEIGHBOR_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -322,7 +323,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHMONITORED, //
 				RailwayOperation.SWITCHMONITORED_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act
@@ -344,7 +345,7 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHSET, //
 				RailwayOperation.SWITCHSET_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		// Act

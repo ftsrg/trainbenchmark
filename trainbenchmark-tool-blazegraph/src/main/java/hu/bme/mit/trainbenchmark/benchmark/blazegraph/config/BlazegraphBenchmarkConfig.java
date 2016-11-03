@@ -14,13 +14,15 @@ package hu.bme.mit.trainbenchmark.benchmark.blazegraph.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
-	
-	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
-		super(bcb, inferencing);
+
+	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
+			final boolean inferencing) {
+		super(configBase, executionConfig, inferencing);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "Blazegraph" + getToolNamePostfix();
@@ -30,5 +32,5 @@ public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
 	public String getProjectName() {
 		return "blazegraph";
 	}
-	
+
 }

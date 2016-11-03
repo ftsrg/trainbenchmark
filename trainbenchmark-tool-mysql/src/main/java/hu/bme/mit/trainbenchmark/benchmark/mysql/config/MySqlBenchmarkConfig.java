@@ -14,11 +14,12 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class MySqlBenchmarkConfig extends BenchmarkConfig {
 
-	public MySqlBenchmarkConfig(final BenchmarkConfigBase bcb) {
-		super(bcb);
+	public MySqlBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig) {
+		super(configBase, executionConfig);
 	}
 	
 	@Override

@@ -81,7 +81,8 @@ public class BenchmarkResult {
 	}
 
 	public String csvMemory() {
-		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run", "Memory");
+		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
+				"Memory");
 		final String header = separatorJoiner.join(headerAttributes);
 
 		final List<String> rows = Lists.newArrayList(header);
@@ -92,7 +93,7 @@ public class BenchmarkResult {
 			final String timeRecord = separatorJoiner.join(memoryRecordAttributes);
 			rows.add(timeRecord);
 		}
-		
+
 		rows.add(LAST_LINE);
 		final String csv = newlineJoiner.join(rows);
 		return csv;
@@ -172,18 +173,17 @@ public class BenchmarkResult {
 	}
 
 	public void serialize() throws IOException {
-		final String timesCsvPath = String.format("%sresults/times-%s-%s-%s-[%s].csv", workspaceDir, tool, workload,
-				model, description);
-		// System.out.println("Saving execution times to: " + timesCsvPath);
-		FileUtils.write(new File(timesCsvPath), csvTimes());
-
-		final String matchesCsvPath = String.format("%sresults/matches-%s-%s-%s-[%s].csv", workspaceDir, tool, workload,
-				model, description);
-		// System.out.println("Saving results to: " + matchesCsvPath);
-		FileUtils.write(new File(matchesCsvPath), csvMatches());
-
+		serializeCsv(csvMemory(), "memory");
+		serializeCsv(csvTimes(), "times");
+		serializeCsv(csvMatches(), "matches");
 	}
-	
+
+	private void serializeCsv(final String csv, final String filePrefix) throws IOException {
+		final String matchesCsvPath = String.format("%sresults/%s-%s-%s-%s-[%s].csv", workspaceDir, filePrefix, tool, workload,
+				model, description);
+		FileUtils.write(new File(matchesCsvPath), csv);
+	}
+
 	protected RunResult getCurrentResult() {
 		return Iterables.getLast(runResults);
 	}

@@ -22,7 +22,7 @@ public abstract class RouteSensorTest extends QueryTest {
 				RailwayOperation.ROUTESENSOR_REPAIR //
 		);
 		final String workload = "RouteSensorTest";
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount, modelFilename, operations,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload, TransformationChangeSetStrategy.FIXED, 10);
 
 		final BenchmarkResult result = performBenchmark(bcb);

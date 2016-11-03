@@ -14,11 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class Rdf4jBenchmarkConfig extends RdfBenchmarkConfig {
 	
-	public Rdf4jBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
-		super(bcb, inferencing);
+	public Rdf4jBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
+			final boolean inferencing) {
+		super(configBase, executionConfig, inferencing);
 	}
 	
 	@Override

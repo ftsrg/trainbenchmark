@@ -64,8 +64,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		super(serializer, generatorConfig);
-		maxRoutes = 5 * generatorConfig.getGeneratorConfig().getSize();
-		switch (generatorConfig.getGeneratorConfig().getScenario()) {
+		maxRoutes = 5 * generatorConfig.getConfigBase().getSize();
+		switch (generatorConfig.getConfigBase().getScenario()) {
 		case BATCH:
 			// set all error percents to 0
 			break;

@@ -65,11 +65,11 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 	@Override
 	public void initModel() throws IOException {
 		// header file (DDL operations)
-		final String headerFilePath = gc.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR + "railway-header.sql";
+		final String headerFilePath = gc.getConfigBase().getWorkspaceDir() + SQL_METAMODEL_DIR + "railway-header.sql";
 		final File headerFile = new File(headerFilePath);
 
 		// destination file
-		sqlRawPath = gc.getGeneratorConfig().getModelPathWithoutExtension() + "-raw.sql";
+		sqlRawPath = gc.getConfigBase().getModelPathWithoutExtension() + "-raw.sql";
 		final File sqlRawFile = new File(sqlRawPath);
 
 		// this overwrites the destination file if it exists
@@ -80,7 +80,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-		final String footerFilePath = gc.getGeneratorConfig().getWorkspaceDir() + SQL_METAMODEL_DIR + "railway-footer.sql";
+		final String footerFilePath = gc.getConfigBase().getWorkspaceDir() + SQL_METAMODEL_DIR + "railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
 		final List<String> lines = FileUtils.readLines(footerFile);
@@ -106,12 +106,12 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		System.out.println("Loading the raw model");
 		MySqlProcess.runShell(String.format("mysql -u %s < %s", SqlConstants.USER, sqlRawPath));
 
-		final String mysqlDumpPath = gc.getGeneratorConfig().getModelPathWithoutExtension() + "-mysql.sql";
+		final String mysqlDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-mysql.sql";
 		final String commandDump = "mysqldump -u " + SqlConstants.USER + " --databases trainbenchmark --skip-dump-date --skip-comments > " + mysqlDumpPath;
 		MySqlProcess.runShell(commandDump);
 
-		final String sqliteDumpPath = gc.getGeneratorConfig().getModelPathWithoutExtension() + "-sqlite.sql";
-		final String sqliteDump = gc.getGeneratorConfig().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath;
+		final String sqliteDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-sqlite.sql";
+		final String sqliteDump = gc.getConfigBase().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath;
 		MySqlProcess.runShell(sqliteDump);
 	}
 

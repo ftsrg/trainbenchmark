@@ -14,11 +14,12 @@ package hu.bme.mit.trainbenchmark.benchmark.emfapi.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class EmfApiBenchmarkConfig extends BenchmarkConfig {
 
-	public EmfApiBenchmarkConfig(final BenchmarkConfigBase bcb) {
-		super(bcb);
+	public EmfApiBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig) {
+		super(configBase, executionConfig);
 	}
 	
 	@Override

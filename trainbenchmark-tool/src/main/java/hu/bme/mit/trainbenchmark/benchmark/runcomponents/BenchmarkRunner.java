@@ -26,7 +26,7 @@ public class BenchmarkRunner {
 		final String projectName = String.format("trainbenchmark-tool-%s", bc.getProjectName());
 		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar %s", projectName, projectName, configPath);
 
-		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s", bc.getConfigBase().getXms(), bc.getConfigBase().getXmx(),
+		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s", bc.getExecutionConfig().getXms(), bc.getExecutionConfig().getXmx(),
 				jarPath, configPath);
 		final CommandLine cmdLine = CommandLine.parse(javaCommand);
 
