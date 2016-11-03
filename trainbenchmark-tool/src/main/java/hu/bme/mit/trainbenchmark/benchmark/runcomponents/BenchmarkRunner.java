@@ -49,7 +49,7 @@ public class BenchmarkRunner {
 		}
 	}
 
-	public static int runMemoryBenchmark(final BenchmarkConfig bc, final int maxLevels)
+	public static int runMemoryBenchmark(final BenchmarkConfig bc, final int numberOfSteps)
 			throws IOException, InterruptedException {
 		final ExecutionConfig defaultEc = bc.getExecutionConfig();
 
@@ -58,31 +58,33 @@ public class BenchmarkRunner {
 		// the memoryQuantum is halved on the start of each loop, so this starts
 		// from 12800 as well (and will go down to 6400)
 		final int initialMaxMemory = defaultEc.getMaxMemory();
-		int maxMemory = initialMaxMemory;
+		int currentMaxMemory = initialMaxMemory;
 		int memoryQuantum = initialMaxMemory;
-		int level = 0;
+		int step = 0;
 
-		while (level < maxLevels && maxMemory <= initialMaxMemory) {
-			level++;
+		while (step < numberOfSteps && currentMaxMemory <= initialMaxMemory) {
+			step++;
 			memoryQuantum /= 2;
 
-			final ExecutionConfig ec = new ExecutionConfig(maxMemory, maxMemory);
+			final ExecutionConfig ec = new ExecutionConfig(currentMaxMemory, currentMaxMemory);
 			bc.setExecutionConfig(ec);
 			
 			if (runPerformanceBenchmark(bc) == 0) {
 				System.out.println("Execution finished, testing with less memory.");
-				maxMemory -= memoryQuantum;
+				System.out.println();
+				currentMaxMemory -= memoryQuantum;
 			} else {
 				System.out.println("Execution failed, testing with more memory.");
-				maxMemory += memoryQuantum;
+				System.out.println();
+				currentMaxMemory += memoryQuantum;
 			}
 		}
 		
-		if (maxMemory > initialMaxMemory) {
+		if (currentMaxMemory > initialMaxMemory) {
 			System.out.println("The first execution timed out or errored. Skipping larger sizes for this tool, scenario and query mix.");
 			return -1;
 		}
-		System.out.println("Execution succeeded.");
+		System.out.println("Execution succeeded, estimated memory requirement: " + currentMaxMemory);
 		System.out.println();
 		
 		return 0;
