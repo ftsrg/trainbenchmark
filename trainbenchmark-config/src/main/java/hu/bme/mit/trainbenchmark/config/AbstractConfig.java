@@ -13,7 +13,7 @@ import com.esotericsoftware.kryo.io.Output;
 
 public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 
-	protected TConfigBase configBase;
+	protected final TConfigBase configBase;
 	protected ExecutionConfig executionConfig;
 	
 	public AbstractConfig(final TConfigBase configBase, final ExecutionConfig executionConfig) {
@@ -27,6 +27,14 @@ public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 	
 	public ExecutionConfig getExecutionConfig() {
 		return executionConfig;
+	}
+	
+	/**
+	 * We allow the benchmark framework to swap the executionConfig
+	 * @param executionConfig
+	 */
+	public void setExecutionConfig(final ExecutionConfig executionConfig) {
+		this.executionConfig = executionConfig;
 	}
 
 	/**

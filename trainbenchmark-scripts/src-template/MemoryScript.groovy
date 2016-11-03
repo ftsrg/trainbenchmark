@@ -18,13 +18,14 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 
-def ec = new ExecutionConfig(1000, 1000)
+def ec = new ExecutionConfig(12800, 12800)
 
 def minSize = 1
 def maxSize = 2
 def timeout = 900
 def runs = 3
 def queryTransformationCount = 5
+def maxLevels = 5
 
 def operations = [
 	RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
@@ -42,22 +43,22 @@ for (size = minSize; size <= maxSize; size *= 2) {
 
 	def bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10)
 
-	BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, false))
-	BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, true))
-	BenchmarkRunner.runPerformanceBenchmark(new EclipseOclBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new DroolsBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new EmfApiBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new IqdCoreBenchmarkConfig(bcb, ec, 16, "", null))
-	BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, ec, false))
-	BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, ec, true))
-	BenchmarkRunner.runPerformanceBenchmark(new MySqlBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.COREAPI))
-	BenchmarkRunner.runPerformanceBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.CYPHER))
-	BenchmarkRunner.runPerformanceBenchmark(new Rdf4jBenchmarkConfig(bcb, ec, false))
-	BenchmarkRunner.runPerformanceBenchmark(new SQLiteBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new TinkerGraphBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.INCREMENTAL))
-	BenchmarkRunner.runPerformanceBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.LOCAL_SEARCH))
+	BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, false), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, true), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new EclipseOclBenchmarkConfig(bcb, ec), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new DroolsBenchmarkConfig(bcb, ec), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new EmfApiBenchmarkConfig(bcb, ec), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new IqdCoreBenchmarkConfig(bcb, ec, 16, "", null), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, ec, false), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, ec, true), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new MySqlBenchmarkConfig(bcb, ec), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.COREAPI), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.CYPHER), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new Rdf4jBenchmarkConfig(bcb, ec, false), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new SQLiteBenchmarkConfig(bcb, ec), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new TinkerGraphBenchmarkConfig(bcb, ec), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.INCREMENTAL), maxLevels)
+	BenchmarkRunner.runMemoryBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.LOCAL_SEARCH), maxLevels)
 }
 
 //BenchmarkReporter.reportReady()

@@ -46,4 +46,9 @@ public class ExecutionConfig {
 		return new ExecutionConfig(1000, 1000);
 	}
 
+	@Override
+	public String toString() {
+		return "initialMemory=" + initialMemory + ", maxMemory=" + maxMemory + "";
+	}
+
 }
