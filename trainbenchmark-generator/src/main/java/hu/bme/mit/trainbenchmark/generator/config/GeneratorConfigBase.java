@@ -20,8 +20,8 @@ public final class GeneratorConfigBase extends AbstractConfigBase {
 	protected final Scenario scenario;
 	protected final int size;
 	
-	public GeneratorConfigBase(final String xms, final String xmx, final Scenario scenario, final int size) {
-		super(xms, xmx);
+	public GeneratorConfigBase(final Integer initialMemory, final Integer maxMemory, final Scenario scenario, final int size) {
+		super(initialMemory, maxMemory);
 		this.scenario = scenario;
 		this.size = size;
 	}

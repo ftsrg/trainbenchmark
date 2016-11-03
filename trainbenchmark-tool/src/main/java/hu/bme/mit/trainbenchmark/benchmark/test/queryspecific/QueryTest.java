@@ -8,8 +8,7 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 
 public abstract class QueryTest {
 
-	protected final String xms = "1G";
-	protected final String xmx = "1G";
+	protected final int memory = 1000;
 	protected final long timeout = 120;
 	protected final int runs = 1;
 	protected final int queryTransformationCount = 1;

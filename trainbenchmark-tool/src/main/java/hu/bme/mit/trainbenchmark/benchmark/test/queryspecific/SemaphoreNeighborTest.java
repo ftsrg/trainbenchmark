@@ -22,7 +22,7 @@ public abstract class SemaphoreNeighborTest extends QueryTest {
 				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
 		);
 		final String workload = "SemaphoreNeighborTest";
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(xms, xmx, timeout, runs, queryTransformationCount, modelFilename, operations,
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(memory, memory, timeout, runs, queryTransformationCount, modelFilename, operations,
 				workload, TransformationChangeSetStrategy.FIXED, 10);
 		
 		final BenchmarkResult result = performBenchmark(bcb);
