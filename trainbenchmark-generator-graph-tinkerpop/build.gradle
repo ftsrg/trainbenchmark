@@ -11,5 +11,6 @@ shadowJar {
 
 dependencies {
   compile project(':trainbenchmark-generator')
-  compile group: 'org.apache.tinkerpop', name: 'tinkergraph-gremlin', version:'3.2.0-incubating'
+  compile group: 'org.apache.tinkerpop', name: 'tinkergraph-gremlin', version: tinkerGraphVersion
+  compile group: 'org.slf4j', name: 'slf4j-nop', version: slf4jVersion
 }

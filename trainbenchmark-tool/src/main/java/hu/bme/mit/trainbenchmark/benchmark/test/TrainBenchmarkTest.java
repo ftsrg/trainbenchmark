@@ -24,7 +24,8 @@ public abstract class TrainBenchmarkTest {
 
 	protected ExecutionConfig executionConfig = ExecutionConfig.defaultExecutionConfig();
 	protected final long timeout = 120;
-	protected final int runs = 1;
+	protected final int runs = 2;
+	protected final int size = 1;
 
 	protected abstract BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception;
 	
@@ -35,14 +36,14 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final String workload = "BatchModelTest";
 		final int queryTransformationCount = 0;
-		final String modelFilename = "railway-batch-1";
+		final String modelFilename = "railway-batch-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS, //
 				RailwayOperation.POSLENGTH, //
 				RailwayOperation.ROUTESENSOR, //
 				RailwayOperation.SEMAPHORENEIGHBOR, //
-				RailwayOperation.SWITCHMONITORED, //
-				RailwayOperation.SWITCHSET //
+				RailwayOperation.SWITCHSET, //
+				RailwayOperation.SWITCHMONITORED //
 		);
 		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
@@ -66,15 +67,15 @@ public abstract class TrainBenchmarkTest {
 	public void repairTest() throws Exception {
 		// Arrange
 		final String workload = "RepairTest";
-		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
+		final int queryTransformationCount = 5;
+		final String modelFilename = "railway-repair-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS_REPAIR, //
 				RailwayOperation.POSLENGTH_REPAIR, //
 				RailwayOperation.ROUTESENSOR_REPAIR, //
 				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR, //
-				RailwayOperation.SWITCHMONITORED_REPAIR, //
-				RailwayOperation.SWITCHSET_REPAIR //
+				RailwayOperation.SWITCHSET_REPAIR, //
+				RailwayOperation.SWITCHMONITORED_REPAIR //
 		);
 		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount,
 				modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10);
@@ -103,7 +104,7 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final String workload = "ConnectedSegmentsRepairTest";
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
+		final String modelFilename = "railway-repair-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS_REPAIR //
 		);
@@ -124,7 +125,7 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final String workload = "PosLengthRepairTest";
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
+		final String modelFilename = "railway-repair-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.POSLENGTH_REPAIR //
 		);
@@ -145,7 +146,7 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final String workload = "RouteSensorRepairTest";
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
+		final String modelFilename = "railway-repair-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ROUTESENSOR_REPAIR //
 		);
@@ -166,7 +167,7 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final String workload = "SemaphoreNeighborRepairTest";
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
+		final String modelFilename = "railway-repair-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
 		);
@@ -187,7 +188,7 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final String workload = "SwitchMonitoredRepairTest";
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
+		final String modelFilename = "railway-repair-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHMONITORED_REPAIR //
 		);
@@ -208,7 +209,7 @@ public abstract class TrainBenchmarkTest {
 		// Arrange
 		final String workload = "SwitchSetRepairTest";
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-repair-1";
+		final String modelFilename = "railway-repair-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHSET_REPAIR //
 		);
@@ -229,7 +230,7 @@ public abstract class TrainBenchmarkTest {
 	public void connectedSegmentsInjectTest() throws Exception {
 		// Arrange
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-inject-1";
+		final String modelFilename = "railway-inject-" + size;
 		final String workload = "ConnectedSegmentsInjectTest";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS, //
@@ -251,7 +252,7 @@ public abstract class TrainBenchmarkTest {
 	public void posLengthInjectTest() throws Exception {
 		// Arrange
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-inject-1";
+		final String modelFilename = "railway-inject-" + size;
 		final String workload = "PosLengthInjectTest";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.POSLENGTH, //
@@ -273,7 +274,7 @@ public abstract class TrainBenchmarkTest {
 	public void routeSensorInjectTest() throws Exception {
 		// Arrange
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-inject-1";
+		final String modelFilename = "railway-inject-" + size;
 		final String workload = "RouteSensorInjectTest";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ROUTESENSOR, //
@@ -295,7 +296,7 @@ public abstract class TrainBenchmarkTest {
 	public void semaphoreNeighborInjectTest() throws Exception {
 		// Arrange
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-inject-1";
+		final String modelFilename = "railway-inject-" + size;
 		final String workload = "SemaphoreNeighborInjectTest";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SEMAPHORENEIGHBOR, //
@@ -317,7 +318,7 @@ public abstract class TrainBenchmarkTest {
 	public void switchMonitoredInjectTest() throws Exception {
 		// Arrange
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-inject-1";
+		final String modelFilename = "railway-inject-" + size;
 		final String workload = "SwitchMonitoredInjectTest";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHMONITORED, //
@@ -339,7 +340,7 @@ public abstract class TrainBenchmarkTest {
 	public void switchSetInjectTest() throws Exception {
 		// Arrange
 		final int queryTransformationCount = 1;
-		final String modelFilename = "railway-inject-1";
+		final String modelFilename = "railway-inject-" + size;
 		final String workload = "SwitchSetInjectTest";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHSET, //
