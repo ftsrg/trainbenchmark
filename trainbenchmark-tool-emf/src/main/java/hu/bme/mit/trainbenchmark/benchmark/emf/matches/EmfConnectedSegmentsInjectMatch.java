@@ -17,6 +17,43 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EmfConnectedSegmentsInjectMatch extends EmfMatch implements ConnectedSegmentsInjectMatch {
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((segment1 == null) ? 0 : segment1.hashCode());
+		result = prime * result + ((segment3 == null) ? 0 : segment3.hashCode());
+		result = prime * result + ((sensor == null) ? 0 : sensor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final EmfConnectedSegmentsInjectMatch other = (EmfConnectedSegmentsInjectMatch) obj;
+		if (segment1 == null) {
+			if (other.segment1 != null)
+				return false;
+		} else if (!segment1.equals(other.segment1))
+			return false;
+		if (segment3 == null) {
+			if (other.segment3 != null)
+				return false;
+		} else if (!segment3.equals(other.segment3))
+			return false;
+		if (sensor == null) {
+			if (other.sensor != null)
+				return false;
+		} else if (!sensor.equals(other.sensor))
+			return false;
+		return true;
+	}
+
 	protected final Sensor sensor;
 	protected final Segment segment1;
 	protected final Segment segment3;

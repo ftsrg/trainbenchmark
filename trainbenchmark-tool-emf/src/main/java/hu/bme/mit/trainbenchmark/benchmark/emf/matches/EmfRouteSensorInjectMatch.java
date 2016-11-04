@@ -35,6 +35,37 @@ public class EmfRouteSensorInjectMatch extends EmfMatch implements RouteSensorIn
 	@Override
 	public Sensor getSensor() {
 		return sensor;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((route == null) ? 0 : route.hashCode());
+		result = prime * result + ((sensor == null) ? 0 : sensor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final EmfRouteSensorInjectMatch other = (EmfRouteSensorInjectMatch) obj;
+		if (route == null) {
+			if (other.route != null)
+				return false;
+		} else if (!route.equals(other.route))
+			return false;
+		if (sensor == null) {
+			if (other.sensor != null)
+				return false;
+		} else if (!sensor.equals(other.sensor))
+			return false;
+		return true;
 	};
 
 }

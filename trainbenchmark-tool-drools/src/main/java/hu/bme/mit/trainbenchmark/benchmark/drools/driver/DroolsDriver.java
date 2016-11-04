@@ -26,24 +26,20 @@ import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 
 public class DroolsDriver extends EmfDriver {
 
-	protected KieServices kieServices;
-	protected KieFileSystem kfs;
-	protected KieSession kSession;
+	protected final KieServices kServices = KieServices.Factory.get();
+	protected final KieFileSystem kfs = kServices.newKieFileSystem();
+	protected final KieContainer kContainer = kServices.getKieClasspathContainer();
+	protected final String kSessionName = "TrainBenchmarkKieSession";
+	protected final KieSession kSession = kContainer.newKieSession(kSessionName);
 
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-
-		kieServices = KieServices.Factory.get();
-		kfs = kieServices.newKieFileSystem();
 	}
 
 	@Override
 	public void read(final String modelPathWithoutExtension) throws Exception {
 		super.read(modelPathWithoutExtension);
-
-		final KieContainer kContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
-		kSession = kContainer.newKieSession();
 
 		for (final TreeIterator<EObject> tIterator = resource.getAllContents(); tIterator.hasNext();) {
 			final EObject eObject = tIterator.next();
@@ -102,7 +98,7 @@ public class DroolsDriver extends EmfDriver {
 	}
 
 	public KieServices getKieServices() {
-		return kieServices;
+		return kServices;
 	}
 
 }

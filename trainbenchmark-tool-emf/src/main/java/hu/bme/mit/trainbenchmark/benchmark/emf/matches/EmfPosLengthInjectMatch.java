@@ -28,4 +28,29 @@ public class EmfPosLengthInjectMatch extends EmfMatch implements PosLengthMatch 
 		return segment;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((segment == null) ? 0 : segment.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final EmfPosLengthInjectMatch other = (EmfPosLengthInjectMatch) obj;
+		if (segment == null) {
+			if (other.segment != null)
+				return false;
+		} else if (!segment.equals(other.segment))
+			return false;
+		return true;
+	}
+
 }

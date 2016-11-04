@@ -11,13 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.drools.queries;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.kie.api.builder.KieBuilder;
-import org.kie.api.builder.Message.Level;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.rule.LiveQuery;
+import org.kie.internal.builder.KnowledgeBuilder;
+import org.kie.internal.builder.KnowledgeBuilderFactory;
+import org.kie.internal.io.ResourceFactory;
 
 import hu.bme.mit.trainbenchmark.benchmark.drools.driver.DroolsDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfMatch;
@@ -30,25 +31,17 @@ public class DroolsQuery<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dro
 	protected DroolsResultListener listener;
 	protected LiveQuery liveQuery;
 
-	protected DroolsQuery(final DroolsDriver driver, final String workspaceDir, final RailwayQuery query) throws IOException {
+	protected DroolsQuery(final DroolsDriver driver, final String workspaceDir, final RailwayQuery query)
+			throws IOException {
 		super(query, driver);
 
-		final String queryFile = workspaceDir + "/trainbenchmark-tool-drools/src/main/resources/queries/" + query + ".drl";
-		final File file = new File(queryFile);
-		if (!file.exists()) {
-			throw new IOException("Query file not found: " + queryFile);
-		}
-		driver.getKfs().write("src/main/resources/" + query + ".drl", driver.getKieServices().getResources().newFileSystemResource(queryFile));
-
-		final KieBuilder kieBuilder = driver.getKieServices().newKieBuilder(driver.getKfs());
-		kieBuilder.buildAll();
-		if (kieBuilder.getResults().hasMessages(Level.ERROR)) {
-			throw new RuntimeException("Build Errors:\n" + kieBuilder.getResults().toString());
-		}
+		final String queryFile = query + ".drl";
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory.newClassPathResource(queryFile, DroolsQuery.class), ResourceType.DRL);
 	}
 
-	public static <TMatch extends EmfMatch> DroolsQuery<TMatch> create(final DroolsDriver driver, final String workspaceDir, final RailwayQuery query)
-			throws IOException {
+	public static <TMatch extends EmfMatch> DroolsQuery<TMatch> create(final DroolsDriver driver,
+			final String workspaceDir, final RailwayQuery query) throws IOException {
 		return new DroolsQuery<TMatch>(driver, workspaceDir, query);
 	}
 
@@ -59,7 +52,6 @@ public class DroolsQuery<TMatch extends EmfMatch> extends ModelQuery<TMatch, Dro
 			listener = new DroolsResultListener(query);
 			liveQuery = driver.getKsession().openLiveQuery(query.toString(), new Object[] {}, listener);
 		} else {
-			// activate lazy PHREAK evaluation
 			driver.getKsession().fireAllRules();
 		}
 		matches = (Collection<TMatch>) listener.getMatches();
