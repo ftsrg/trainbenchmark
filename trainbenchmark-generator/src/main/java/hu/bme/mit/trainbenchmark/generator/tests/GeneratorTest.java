@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.generator.tests;
 
 import org.junit.Test;
 
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
@@ -9,36 +10,27 @@ public abstract class GeneratorTest {
 
 	public abstract void generate(final GeneratorConfigBase gcb) throws Exception;
 
+	protected final int size = 1;
+	protected final ExecutionConfig executionConfig = ExecutionConfig.defaultExecutionConfig();
+	
 	@Test
 	public void generateBatch() throws Exception {
-		final String xms = "1G";
-		final String xmx = "1G";
 		final Scenario scenario = Scenario.BATCH;
-		final int size = 1;
-
-		final GeneratorConfigBase gcb = new GeneratorConfigBase(xms, xmx, scenario, size);
+		final GeneratorConfigBase gcb = new GeneratorConfigBase(scenario, size);
 		generate(gcb);
 	}
 
 	@Test
 	public void generateInject() throws Exception {
-		final String xms = "1G";
-		final String xmx = "1G";
 		final Scenario scenario = Scenario.INJECT;
-		final int size = 1;
-
-		final GeneratorConfigBase gcb = new GeneratorConfigBase(xms, xmx, scenario, size);
+		final GeneratorConfigBase gcb = new GeneratorConfigBase(scenario, size);
 		generate(gcb);
 	}
 
 	@Test
 	public void generateRepair() throws Exception {
-		final String xms = "1G";
-		final String xmx = "1G";
 		final Scenario scenario = Scenario.REPAIR;
-		final int size = 1;
-
-		final GeneratorConfigBase gcb = new GeneratorConfigBase(xms, xmx, scenario, size);
+		final GeneratorConfigBase gcb = new GeneratorConfigBase(scenario, size);
 		generate(gcb);
 	}
 

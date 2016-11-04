@@ -34,6 +34,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * <code><pre>
  * pattern switchSet(semaphore, route, swP, sw)
  * {
+ * //	Route.active(route, true);
  * 	Route.entry(route, semaphore);
  * 	Route.follows(route, swP);
  * 	SwitchPosition.target(swP, sw);
@@ -65,10 +66,19 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
     // check if matcher already exists
     SwitchSetMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new SwitchSetMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (SwitchSetMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static SwitchSetMatcher create() throws ViatraQueryException {
+    return new SwitchSetMatcher();
   }
   
   private final static int POSITION_SEMAPHORE = 0;
@@ -89,8 +99,8 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private SwitchSetMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private SwitchSetMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

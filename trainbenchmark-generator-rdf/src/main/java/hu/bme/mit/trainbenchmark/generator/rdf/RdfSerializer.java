@@ -50,13 +50,13 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
 		final String postfix = modelFlavor + "." + extension;
 
-		final String srcFilePath = gc.getGeneratorConfig().getWorkspaceDir() + RDF_METAMODEL_DIR
+		final String srcFilePath = gc.getConfigBase().getWorkspaceDir() + RDF_METAMODEL_DIR
 				+ "railway" + postfix;
 
 		final File srcFile = new File(srcFilePath);
 
 		// destination file
-		final String destFilePath = gc.getGeneratorConfig().getModelPathWithoutExtension()
+		final String destFilePath = gc.getConfigBase().getModelPathWithoutExtension()
 				+ postfix;
 		final File destFile = new File(destFilePath);
 
@@ -164,6 +164,9 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 	}
 
 	protected String stringValue(final Object value) {
+		if (value instanceof Boolean) {
+			return Boolean.toString((Boolean) value);
+		}
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^xsd:int", value);
 		}

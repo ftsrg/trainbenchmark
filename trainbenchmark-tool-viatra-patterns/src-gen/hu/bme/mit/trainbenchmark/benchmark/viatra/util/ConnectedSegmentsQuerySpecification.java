@@ -16,12 +16,16 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
@@ -54,6 +58,11 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
   @Override
   protected ConnectedSegmentsMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
     return ConnectedSegmentsMatcher.on(engine);
+  }
+  
+  @Override
+  public ConnectedSegmentsMatcher instantiate() throws ViatraQueryException {
+    return ConnectedSegmentsMatcher.create();
   }
   
   @Override
@@ -95,25 +104,25 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static ConnectedSegmentsQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSegment1 = new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment");
+    private final PParameter parameter_pSegment1 = new PParameter("segment1", "hu.bme.mit.trainbenchmark.railway.Segment", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSegment2 = new PParameter("segment2", "hu.bme.mit.trainbenchmark.railway.Segment");
+    private final PParameter parameter_pSegment2 = new PParameter("segment2", "hu.bme.mit.trainbenchmark.railway.Segment", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSegment3 = new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment");
+    private final PParameter parameter_pSegment3 = new PParameter("segment3", "hu.bme.mit.trainbenchmark.railway.Segment", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSegment4 = new PParameter("segment4", "hu.bme.mit.trainbenchmark.railway.Segment");
+    private final PParameter parameter_pSegment4 = new PParameter("segment4", "hu.bme.mit.trainbenchmark.railway.Segment", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSegment5 = new PParameter("segment5", "hu.bme.mit.trainbenchmark.railway.Segment");
+    private final PParameter parameter_pSegment5 = new PParameter("segment5", "hu.bme.mit.trainbenchmark.railway.Segment", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSegment6 = new PParameter("segment6", "hu.bme.mit.trainbenchmark.railway.Segment");
+    private final PParameter parameter_pSegment6 = new PParameter("segment6", "hu.bme.mit.trainbenchmark.railway.Segment", (IInputKey)null, PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pSensor, parameter_pSegment1, parameter_pSegment2, parameter_pSegment3, parameter_pSegment4, parameter_pSegment5, parameter_pSegment6);
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments";
+      return "hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegments";
     }
     
     @Override
@@ -128,6 +137,7 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
+      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{

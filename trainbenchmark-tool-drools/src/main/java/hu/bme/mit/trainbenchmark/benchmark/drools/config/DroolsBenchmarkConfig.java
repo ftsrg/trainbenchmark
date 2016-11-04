@@ -12,16 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.drools.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class DroolsBenchmarkConfig extends BenchmarkConfig {
 
-	protected DroolsBenchmarkConfig() {
-	}
-	
-	public DroolsBenchmarkConfig(final BenchmarkConfigBase bcb) {
-		super(bcb);
+	public DroolsBenchmarkConfig(final BenchmarkConfigBase configBase) {
+		super(configBase);
 	}
 	
 	@Override

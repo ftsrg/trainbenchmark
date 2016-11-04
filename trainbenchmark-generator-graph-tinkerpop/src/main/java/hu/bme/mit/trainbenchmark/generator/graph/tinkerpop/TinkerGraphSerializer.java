@@ -127,7 +127,7 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 		}
 
 		final String extension = "-tinkerpop." + format.toString().toLowerCase();
-		final String fileName = gc.getGeneratorConfig().getModelPathWithoutExtension() + extension;
+		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + extension;
 		graph.io(builder).writeGraph(fileName);
 		graph.close();
 	}

@@ -140,8 +140,8 @@ aInc == 1 && /PRIMARY KEY|primary key/ { next }
   print ");"
   next
 }
-# `KEY` lines are extracted from the `CREATE` block and stored in array for later print 
-# in a separate `CREATE KEY` command. The index name is prefixed by the table name to 
+# `KEY` lines are extracted from the `CREATE` block and stored in array for later print
+# in a separate `CREATE KEY` command. The index name is prefixed by the table name to
 # avoid a sqlite error for duplicate index name.
 /^(  (KEY|key)|\);)/ {
   if (prev) {

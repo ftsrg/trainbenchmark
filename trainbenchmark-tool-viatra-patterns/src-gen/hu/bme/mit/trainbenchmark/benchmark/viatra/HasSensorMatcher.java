@@ -54,10 +54,19 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
     // check if matcher already exists
     HasSensorMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new HasSensorMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (HasSensorMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static HasSensorMatcher create() throws ViatraQueryException {
+    return new HasSensorMatcher();
   }
   
   private final static int POSITION_SW = 0;
@@ -72,8 +81,8 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private HasSensorMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private HasSensorMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

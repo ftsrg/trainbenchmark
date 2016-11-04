@@ -17,13 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected BlazegraphBenchmarkConfig() {
+	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+		super(configBase, inferencing);
 	}
-	
-	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
-		super(bcb, inferencing);
-	}
-	
+
 	@Override
 	public String getToolName() {
 		return "Blazegraph" + getToolNamePostfix();
@@ -33,5 +30,5 @@ public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
 	public String getProjectName() {
 		return "blazegraph";
 	}
-	
+
 }

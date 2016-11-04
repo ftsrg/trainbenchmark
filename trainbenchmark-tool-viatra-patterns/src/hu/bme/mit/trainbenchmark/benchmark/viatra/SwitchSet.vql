@@ -4,6 +4,7 @@ import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 
 pattern switchSet(semaphore, route, swP, sw)
 {
+//	Route.active(route, true);
 	Route.entry(route, semaphore);
 	Route.follows(route, swP);
 	SwitchPosition.target(swP, sw);

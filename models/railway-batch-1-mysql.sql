@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS `Route`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Route` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `active` int(11) DEFAULT NULL,
   `entry` int(11) DEFAULT NULL,
   `exit` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -40,7 +41,7 @@ CREATE TABLE `Route` (
 
 LOCK TABLES `Route` WRITE;
 /*!40000 ALTER TABLE `Route` DISABLE KEYS */;
-INSERT INTO `Route` VALUES (3,1,2),(50,2,49),(159,49,158),(290,158,289),(348,289,1);
+INSERT INTO `Route` VALUES (3,1,1,2),(50,1,2,49),(159,1,49,158),(290,1,158,289),(348,1,289,1);
 /*!40000 ALTER TABLE `Route` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `Segment`;

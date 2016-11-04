@@ -17,13 +17,11 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class SesameBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected SesameBenchmarkConfig() {
+	public SesameBenchmarkConfig(final BenchmarkConfigBase configBase,
+			final boolean inferencing) {
+		super(configBase, inferencing);
 	}
-	
-	public SesameBenchmarkConfig(final BenchmarkConfigBase benchmarkConfig, final boolean inferencing) {
-		super(benchmarkConfig, inferencing);
-	}
-	
+
 	@Override
 	public String getToolName() {
 		return "Sesame" + getToolNamePostfix();
@@ -33,5 +31,5 @@ public class SesameBenchmarkConfig extends RdfBenchmarkConfig {
 	public String getProjectName() {
 		return "sesame";
 	}
-	
+
 }

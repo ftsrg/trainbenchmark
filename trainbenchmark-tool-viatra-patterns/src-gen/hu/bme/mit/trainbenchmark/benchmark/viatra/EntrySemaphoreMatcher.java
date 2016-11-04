@@ -55,10 +55,19 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
     // check if matcher already exists
     EntrySemaphoreMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new EntrySemaphoreMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (EntrySemaphoreMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static EntrySemaphoreMatcher create() throws ViatraQueryException {
+    return new EntrySemaphoreMatcher();
   }
   
   private final static int POSITION_ROUTE = 0;
@@ -75,8 +84,8 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private EntrySemaphoreMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private EntrySemaphoreMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

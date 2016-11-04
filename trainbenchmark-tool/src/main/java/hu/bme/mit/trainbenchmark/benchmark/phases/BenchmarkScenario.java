@@ -20,7 +20,8 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 	protected final TBenchmarkConfigWrapper bc;
 	protected final BenchmarkResult benchmarkResult;
 
-	public BenchmarkScenario(final DriverFactory<TDriver> driverFactory, final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory,
+	public BenchmarkScenario(final DriverFactory<TDriver> driverFactory,
+			final ModelOperationFactory<TPatternMatch, TDriver> modelOperationFactory,
 			final Comparator<TPatternMatch> comparator, final TBenchmarkConfigWrapper bc) throws Exception {
 		this.driverFactory = driverFactory;
 		this.modelOperationFactory = modelOperationFactory;
@@ -28,7 +29,8 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 		this.bc = bc;
 
 		final BenchmarkConfigBase bcb = bc.getConfigBase();
-		this.benchmarkResult = new BenchmarkResult(bc.getToolName(), bcb.getWorkload(), bcb.getWorkspaceDir(), bcb.getModelFilename(), bc.getDescription());
+		this.benchmarkResult = new BenchmarkResult(bc.getToolName(), bcb.getWorkload(), bcb.getWorkspaceDir(),
+				bcb.getModelFilename(), bc.getDescription());
 	}
 
 	public BenchmarkResult performBenchmark() throws Exception {
@@ -43,8 +45,8 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 	protected void performRun() throws Exception {
 		benchmarkResult.nextRun();
 
-		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkBundle = new BenchmarkBundle<>(driverFactory, modelOperationFactory,
-				comparator, bc, benchmarkResult);
+		final BenchmarkBundle<TPatternMatch, TDriver, TBenchmarkConfigWrapper> benchmarkBundle = new BenchmarkBundle<>(
+				driverFactory, modelOperationFactory, comparator, bc, benchmarkResult);
 
 		final InitializeOperationsPhase initializeOperationsPhase = new InitializeOperationsPhase(benchmarkBundle);
 		final ReadPhase readPhase = new ReadPhase(benchmarkBundle);

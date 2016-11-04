@@ -68,5 +68,17 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver> {
 	public ModelQuery<TPatternMatch, TDriver> getQuery() {
 		return operation.getQuery();
 	}
+	
+	public Collection<TPatternMatch> getMatches() {
+		return matches;
+	}
+	
+	public List<TPatternMatch> getSortedMatches() {
+		return sortedMatches;
+	}
+	
+	public List<TPatternMatch> getCandidates() {
+		return candidates;
+	}
 
 }

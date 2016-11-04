@@ -19,6 +19,7 @@ START TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS "Route" (
   "id" int NOT NULL AUTO_INCREMENT,
+  "active" int,
   "entry" int,
   "exit" int,
   PRIMARY KEY  ("id")
@@ -136,7 +137,7 @@ CREATE TABLE IF NOT EXISTS "monitoredBy" (
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 INSERT INTO "Semaphore" ("id", "signal") VALUES (1, 2);
 INSERT INTO "Semaphore" ("id", "signal") VALUES (2, 2);
-INSERT INTO "Route" ("id", "entry", "exit") VALUES (3, NULL, 2);
+INSERT INTO "Route" ("id", "active", "entry", "exit") VALUES (3, 1, NULL, 2);
 INSERT INTO "Region" ("id") VALUES (4);
 INSERT INTO "TrackElement" ("id") VALUES (5);
 INSERT INTO "Switch" ("id") VALUES (5);
@@ -348,7 +349,7 @@ INSERT INTO "connectsTo" VALUES (44, 45);
 INSERT INTO "connectsTo" VALUES (45, 46);
 INSERT INTO "connectsTo" VALUES (46, 47);
 INSERT INTO "Semaphore" ("id", "signal") VALUES (49, 2);
-INSERT INTO "Route" ("id", "entry", "exit") VALUES (50, 2, 49);
+INSERT INTO "Route" ("id", "active", "entry", "exit") VALUES (50, 1, 2, 49);
 INSERT INTO "Region" ("id") VALUES (51);
 INSERT INTO "TrackElement" ("id") VALUES (52);
 INSERT INTO "Switch" ("id") VALUES (52);
@@ -857,7 +858,7 @@ INSERT INTO "connectsTo" VALUES (154, 155);
 INSERT INTO "connectsTo" VALUES (155, 156);
 INSERT INTO "connectsTo" VALUES (47, 52);
 INSERT INTO "Semaphore" ("id", "signal") VALUES (158, 2);
-INSERT INTO "Route" ("id", "entry", "exit") VALUES (159, 49, 158);
+INSERT INTO "Route" ("id", "active", "entry", "exit") VALUES (159, 1, 49, 158);
 INSERT INTO "Region" ("id") VALUES (160);
 INSERT INTO "TrackElement" ("id") VALUES (161);
 INSERT INTO "Switch" ("id") VALUES (161);
@@ -955,7 +956,7 @@ INSERT INTO "connectsTo" VALUES (177, 178);
 INSERT INTO "connectsTo" VALUES (178, 179);
 INSERT INTO "connectsTo" VALUES (156, 161);
 INSERT INTO "Semaphore" ("id", "signal") VALUES (181, 2);
-INSERT INTO "Route" ("id", "entry", "exit") VALUES (182, NULL, 181);
+INSERT INTO "Route" ("id", "active", "entry", "exit") VALUES (182, 1, NULL, 181);
 INSERT INTO "Region" ("id") VALUES (183);
 INSERT INTO "TrackElement" ("id") VALUES (184);
 INSERT INTO "Switch" ("id") VALUES (184);
@@ -1903,7 +1904,7 @@ INSERT INTO "connectsTo" VALUES (379, 380);
 INSERT INTO "connectsTo" VALUES (380, 381);
 INSERT INTO "connectsTo" VALUES (381, 382);
 INSERT INTO "connectsTo" VALUES (179, 184);
-INSERT INTO "Route" ("id", "entry", "exit") VALUES (384, 181, 1);
+INSERT INTO "Route" ("id", "active", "entry", "exit") VALUES (384, 1, 181, 1);
 INSERT INTO "Region" ("id") VALUES (385);
 INSERT INTO "TrackElement" ("id") VALUES (386);
 INSERT INTO "Switch" ("id") VALUES (386);

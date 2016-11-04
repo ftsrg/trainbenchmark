@@ -16,6 +16,9 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.IExpressionEvaluator;
 import org.eclipse.viatra.query.runtime.matchers.psystem.IValueProvider;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
@@ -25,6 +28,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedP
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
@@ -57,6 +61,11 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
   @Override
   protected PosLengthMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
     return PosLengthMatcher.on(engine);
+  }
+  
+  @Override
+  public PosLengthMatcher instantiate() throws ViatraQueryException {
+    return PosLengthMatcher.create();
   }
   
   @Override
@@ -98,13 +107,13 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static PosLengthQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pSegment = new PParameter("segment", "hu.bme.mit.trainbenchmark.railway.Segment");
+    private final PParameter parameter_pSegment = new PParameter("segment", "hu.bme.mit.trainbenchmark.railway.Segment", (IInputKey)null, PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pSegment);
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength";
+      return "hu.bme.mit.trainbenchmark.benchmark.viatra.posLength";
     }
     
     @Override
@@ -119,6 +128,7 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
+      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{
@@ -135,24 +145,22 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
       		new Equality(body, var__virtual_0_, var_length);
       		// 	check(length <= 0)
       		new ExpressionEvaluation(body, new IExpressionEvaluator() {
-      		                            
-      		                            @Override
-      		                            public String getShortDescription() {
-      		                                return "Expression evaluation from pattern PosLength";
-      		                            }
       		
-      		                            @Override
-      		                            public Iterable<String> getInputParameterNames() {
-      		                                return Arrays.asList("length");
-      		                            }
+      		    @Override
+      		    public String getShortDescription() {
+      		        return "Expression evaluation from pattern posLength";
+      		    }
+      		    
+      		    @Override
+      		    public Iterable<String> getInputParameterNames() {
+      		        return Arrays.asList("length");}
       		
-      		                            @Override
-      		                            public Object evaluateExpression(IValueProvider provider) throws Exception {
-      		                                    java.lang.Integer length = (java.lang.Integer) provider.getValue("length");
-      		                                    return evaluateExpression_1_1(length);
-      		                                }
-      		
-      		                        },  null); 
+      		    @Override
+      		    public Object evaluateExpression(IValueProvider provider) throws Exception {
+      		        Integer length = (Integer) provider.getValue("length");
+      		        return evaluateExpression_1_1(length);
+      		    }
+      		},  null); 
       		bodies.add(body);
       	}
       	// to silence compiler error

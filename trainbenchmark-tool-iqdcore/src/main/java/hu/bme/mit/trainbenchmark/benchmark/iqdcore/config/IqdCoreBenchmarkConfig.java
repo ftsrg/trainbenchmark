@@ -9,12 +9,9 @@ public class IqdCoreBenchmarkConfig extends BenchmarkConfig {
 	protected String queryVariant;
 	protected String memoryMeasurementPath;
 
-	protected IqdCoreBenchmarkConfig() {
-	}
-
-	public IqdCoreBenchmarkConfig(final BenchmarkConfigBase bcb, final int messageSize, final String queryVariant,
-			final String memoryMeasurementPath) {
-		super(bcb);
+	public IqdCoreBenchmarkConfig(final BenchmarkConfigBase configBase,
+			final int messageSize, final String queryVariant, final String memoryMeasurementPath) {
+		super(configBase);
 		this.messageSize = messageSize;
 		this.queryVariant = queryVariant;
 		this.memoryMeasurementPath = memoryMeasurementPath;

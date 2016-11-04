@@ -12,18 +12,15 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class TinkerGraphGeneratorConfig extends GeneratorConfig {
 
 	protected TinkerGraphFormat graphFormat;
 	
-	protected TinkerGraphGeneratorConfig() {
-	}
-	
-	public TinkerGraphGeneratorConfig(final GeneratorConfigBase generatorConfig, final TinkerGraphFormat graphFormat) {
-		super(generatorConfig);
+	public TinkerGraphGeneratorConfig(final GeneratorConfigBase configBase, final TinkerGraphFormat graphFormat) {
+		super(configBase);
 		this.graphFormat = graphFormat;
 	}
 	

@@ -55,10 +55,19 @@ public class InverseGathersMatcher extends BaseMatcher<InverseGathersMatch> {
     // check if matcher already exists
     InverseGathersMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new InverseGathersMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (InverseGathersMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static InverseGathersMatcher create() throws ViatraQueryException {
+    return new InverseGathersMatcher();
   }
   
   private final static int POSITION_SENSOR = 0;
@@ -75,8 +84,8 @@ public class InverseGathersMatcher extends BaseMatcher<InverseGathersMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private InverseGathersMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private InverseGathersMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

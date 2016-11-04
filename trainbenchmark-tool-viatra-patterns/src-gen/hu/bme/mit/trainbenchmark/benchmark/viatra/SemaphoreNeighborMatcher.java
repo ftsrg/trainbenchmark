@@ -66,10 +66,19 @@ public class SemaphoreNeighborMatcher extends BaseMatcher<SemaphoreNeighborMatch
     // check if matcher already exists
     SemaphoreNeighborMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new SemaphoreNeighborMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (SemaphoreNeighborMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static SemaphoreNeighborMatcher create() throws ViatraQueryException {
+    return new SemaphoreNeighborMatcher();
   }
   
   private final static int POSITION_SEMAPHORE = 0;
@@ -96,8 +105,8 @@ public class SemaphoreNeighborMatcher extends BaseMatcher<SemaphoreNeighborMatch
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private SemaphoreNeighborMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private SemaphoreNeighborMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

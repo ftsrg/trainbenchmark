@@ -1,12 +1,9 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra.operations;
 
-import java.util.Optional;
-
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.ActiveRouteMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInjectMatch;
@@ -21,7 +18,6 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQuery;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryActiveRoute;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryConnectedSegmentsInject;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.queries.ViatraQueryPosLength;
@@ -56,13 +52,6 @@ public class ViatraModelOperationFactory extends ModelOperationFactory<BasePatte
 			final ViatraDriver driver) throws Exception {
 
 		switch (operationEnum) {
-		// ActiveRoute
-		case ACTIVEROUTE: {
-			final ViatraQuery<ActiveRouteMatch> query = new ViatraQueryActiveRoute(driver);
-			final ModelOperation<ActiveRouteMatch, ViatraDriver> operation = ModelOperation.of(query);
-			return operation;
-		}
-
 			// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
 			final ViatraQuery<ConnectedSegmentsMatch> query = new ViatraQueryConnectedSegments(driver);

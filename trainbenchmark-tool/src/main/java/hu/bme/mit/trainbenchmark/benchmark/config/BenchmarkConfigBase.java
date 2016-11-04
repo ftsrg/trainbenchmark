@@ -23,49 +23,56 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	/**
 	 * The timeout for each measurement run in seconds.
 	 */
-	protected long timeout;
+	protected final long timeout;
 
 	/**
 	 * The number of measurement runs.
 	 */
-	protected int runs;
+	protected final int runs;
 
 	/**
 	 * The number of Transformation-Recheck loops.
 	 */
-	protected int queryTransformationCount;
+	protected final int queryTransformationCount;
 
 	/**
 	 * The name of the model file (without extension).
 	 */
-	protected String modelFilename;
+	protected final String modelFilename;
 
 	/**
 	 * The sequence of operations to perform.
 	 */
-	protected List<RailwayOperation> railwayOperations;
+	protected final List<RailwayOperation> railwayOperations;
 
 	/**
 	 * A short description of the workload.
 	 */
-	protected String workload;
+	protected final String workload;
 
 	/**
-	 * Non-arg constructor for Kryo
+	 * Transformation strategy to pick matches for transformation, e.g. "a fixed number" or "a proportional amount" of matches
 	 */
-	protected BenchmarkConfigBase() {
-	}
-
-	public BenchmarkConfigBase(final String xms, final String xmx, final long timeout, final int runs,
+	protected final TransformationChangeSetStrategy transformationChangeSetStrategy;
+	
+	/**
+	 * Transformation constrant to pick matches for transformations, e.g. "10 matches" or "10% of the matches"
+	 */
+	protected final int transformationConstant;
+	
+	public BenchmarkConfigBase(final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
-			final List<RailwayOperation> railwayOperations, final String workload) {
-		super(xms, xmx);
+			final List<RailwayOperation> railwayOperations, final String workload,
+			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
+		super();
 		this.timeout = timeout;
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformationCount;
 		this.modelFilename = modelFilename;
 		this.railwayOperations = railwayOperations;
 		this.workload = workload;
+		this.transformationChangeSetStrategy = transformationChangeSetStrategy;
+		this.transformationConstant = transformationConstant;
 	}
 
 	public long getTimeout() {
@@ -97,6 +104,14 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	
 	public String getModelFilename() {
 		return modelFilename;
+	}
+	
+	public TransformationChangeSetStrategy getTransformationChangeSetStrategy() {
+		return transformationChangeSetStrategy;
+	}
+	
+	public int getTransformationConstant() {
+		return transformationConstant;
 	}
 
 }
