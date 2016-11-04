@@ -2,7 +2,6 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.operations;
 
 import hu.bme.mit.incqueryds.TransactionFactory;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.driver.IqdCoreDriver;
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreActiveRouteMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.iqdcore.match.IqdCoreMatch;
@@ -47,12 +46,6 @@ public class IqdCoreModelOperationFactory extends ModelOperationFactory<IqdCoreM
 	public ModelOperation<? extends IqdCoreMatch, IqdCoreDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final IqdCoreDriver driver) throws Exception {
 		switch (operationEnum) {
-		// ActiveRoute
-		case ACTIVEROUTE: {
-			final IqdCoreQuery<IqdCoreActiveRouteMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.ACTIVEROUTE, transactionFactory);
-			final ModelOperation<IqdCoreActiveRouteMatch, IqdCoreDriver> operation = ModelOperation.of(query);
-			return operation;
-		}
 			// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
 			final IqdCoreQuery<IqdCoreConnectedSegmentsMatch> query = IqdCoreQuery.create(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);

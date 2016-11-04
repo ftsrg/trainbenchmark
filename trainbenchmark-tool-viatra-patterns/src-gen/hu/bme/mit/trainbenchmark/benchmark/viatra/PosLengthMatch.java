@@ -12,7 +12,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength pattern,
+ * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.posLength pattern,
  * to be used in conjunction with {@link PosLengthMatcher}.
  * 
  * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -61,7 +61,7 @@ public abstract class PosLengthMatch extends BasePatternMatch {
   
   @Override
   public String patternName() {
-    return "hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength";
+    return "hu.bme.mit.trainbenchmark.benchmark.viatra.posLength";
   }
   
   @Override

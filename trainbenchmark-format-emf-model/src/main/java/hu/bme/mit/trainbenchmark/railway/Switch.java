@@ -15,9 +15,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getCurrentPosition <em>Current Position</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getPositions <em>Positions</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getLeft <em>Left</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getRight <em>Right</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.Switch#getFrom <em>From</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitch()
@@ -71,83 +68,5 @@ public interface Switch extends TrackElement {
 	 * @generated
 	 */
 	EList<SwitchPosition> getPositions();
-
-	/**
-	 * Returns the value of the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Left</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Left</em>' reference.
-	 * @see #setLeft(TrackElement)
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitch_Left()
-	 * @model required="true"
-	 * @generated
-	 */
-	TrackElement getLeft();
-
-	/**
-	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.Switch#getLeft <em>Left</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Left</em>' reference.
-	 * @see #getLeft()
-	 * @generated
-	 */
-	void setLeft(TrackElement value);
-
-	/**
-	 * Returns the value of the '<em><b>Right</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Right</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Right</em>' reference.
-	 * @see #setRight(TrackElement)
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitch_Right()
-	 * @model required="true"
-	 * @generated
-	 */
-	TrackElement getRight();
-
-	/**
-	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.Switch#getRight <em>Right</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Right</em>' reference.
-	 * @see #getRight()
-	 * @generated
-	 */
-	void setRight(TrackElement value);
-
-	/**
-	 * Returns the value of the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>From</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>From</em>' reference.
-	 * @see #setFrom(TrackElement)
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSwitch_From()
-	 * @model required="true"
-	 * @generated
-	 */
-	TrackElement getFrom();
-
-	/**
-	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.Switch#getFrom <em>From</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>From</em>' reference.
-	 * @see #getFrom()
-	 * @generated
-	 */
-	void setFrom(TrackElement value);
 
 } // Switch

@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getFollows <em>Follows</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getExit <em>Exit</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#getGathers <em>Gathers</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.Route#isActive <em>Active</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getRoute()
@@ -109,5 +110,32 @@ public interface Route extends RailwayElement {
 	 * @generated
 	 */
 	EList<Sensor> getGathers();
+
+	/**
+	 * Returns the value of the '<em><b>Active</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Active</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Active</em>' attribute.
+	 * @see #setActive(boolean)
+	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getRoute_Active()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isActive();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.trainbenchmark.railway.Route#isActive <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Active</em>' attribute.
+	 * @see #isActive()
+	 * @generated
+	 */
+	void setActive(boolean value);
 
 } // Route

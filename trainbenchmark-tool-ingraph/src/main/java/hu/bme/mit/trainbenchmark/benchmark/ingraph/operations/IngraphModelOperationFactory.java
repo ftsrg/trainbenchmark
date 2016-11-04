@@ -2,7 +2,6 @@ package hu.bme.mit.trainbenchmark.benchmark.ingraph.operations;
 
 import hu.bme.mit.ire.TransactionFactory;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.driver.IngraphDriver;
-import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphActiveRouteMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.match.IngraphMatch;
@@ -47,12 +46,6 @@ public class IngraphModelOperationFactory extends ModelOperationFactory<IngraphM
 	public ModelOperation<? extends IngraphMatch, IngraphDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
 			final IngraphDriver driver) throws Exception {
 		switch (operationEnum) {
-		// ActiveRoute
-		case ACTIVEROUTE: {
-			final IngraphQuery<IngraphActiveRouteMatch> query = new IngraphQuery<>(driver, RailwayQuery.ACTIVEROUTE, transactionFactory);
-			final ModelOperation<IngraphActiveRouteMatch, IngraphDriver> operation = ModelOperation.of(query);
-			return operation;
-		}
 			// ConnectedSegments
 		case CONNECTEDSEGMENTS: {
 			final IngraphQuery<IngraphConnectedSegmentsMatch> query = new IngraphQuery<>(driver, RailwayQuery.CONNECTEDSEGMENTS, transactionFactory);

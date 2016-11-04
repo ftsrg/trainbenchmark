@@ -16,6 +16,9 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
@@ -24,6 +27,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequalit
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
@@ -56,6 +60,11 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
   @Override
   protected SwitchSetMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
     return SwitchSetMatcher.on(engine);
+  }
+  
+  @Override
+  public SwitchSetMatcher instantiate() throws ViatraQueryException {
+    return SwitchSetMatcher.create();
   }
   
   @Override
@@ -97,13 +106,13 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static SwitchSetQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore");
+    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSwP = new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition");
+    private final PParameter parameter_pSwP = new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch");
+    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch", (IInputKey)null, PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pSemaphore, parameter_pRoute, parameter_pSwP, parameter_pSw);
     
@@ -124,6 +133,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
+      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{
@@ -140,7 +150,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       		   new ExportedParameter(body, var_swP, parameter_pSwP),
       		   new ExportedParameter(body, var_sw, parameter_pSw)
       		));
-      		// 	Route.entry(route, semaphore)
+      		// //	Route.active(route, true);	Route.entry(route, semaphore)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
       		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
       		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "entry")));
@@ -157,7 +167,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       		new Equality(body, var__virtual_2_, var_sw);
       		// 		Semaphore.signal(semaphore, ::GO)
       		PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-      		new ConstantValue(body, var__virtual_3_, hu.bme.mit.trainbenchmark.railway.Signal.get("GO"));
+      		new ConstantValue(body, var__virtual_3_, getEnumLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Signal", "GO").getInstance());
       		new TypeConstraint(body, new FlatTuple(var_semaphore), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore")));
       		PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
       		new TypeConstraint(body, new FlatTuple(var_semaphore, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore", "signal")));

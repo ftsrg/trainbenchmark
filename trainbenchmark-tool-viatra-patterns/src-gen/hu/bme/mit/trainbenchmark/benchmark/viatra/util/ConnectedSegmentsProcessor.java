@@ -9,7 +9,7 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 
 /**
- * A match processor tailored for the hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments pattern.
+ * A match processor tailored for the hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegments pattern.
  * 
  * Clients should derive an (anonymous) class that implements the abstract process().
  * 

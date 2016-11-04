@@ -16,12 +16,16 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
@@ -54,6 +58,11 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
   @Override
   protected HasSensorMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
     return HasSensorMatcher.on(engine);
+  }
+  
+  @Override
+  public HasSensorMatcher instantiate() throws ViatraQueryException {
+    return HasSensorMatcher.create();
   }
   
   @Override
@@ -95,7 +104,7 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static HasSensorQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.TrackElement");
+    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.TrackElement", (IInputKey)null, PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pSw);
     
@@ -116,6 +125,7 @@ public final class HasSensorQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
+      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{

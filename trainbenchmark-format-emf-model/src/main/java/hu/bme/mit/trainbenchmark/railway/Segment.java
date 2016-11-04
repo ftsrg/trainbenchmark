@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Segment#getLength <em>Length</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.Segment#getSemaphores <em>Semaphores</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.Segment#getNeighbors <em>Neighbors</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSegment()
@@ -64,21 +63,5 @@ public interface Segment extends TrackElement {
 	 * @generated
 	 */
 	EList<Semaphore> getSemaphores();
-
-	/**
-	 * Returns the value of the '<em><b>Neighbors</b></em>' reference list.
-	 * The list contents are of type {@link hu.bme.mit.trainbenchmark.railway.TrackElement}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Neighbors</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Neighbors</em>' reference list.
-	 * @see hu.bme.mit.trainbenchmark.railway.RailwayPackage#getSegment_Neighbors()
-	 * @model lower="2" upper="2"
-	 * @generated
-	 */
-	EList<TrackElement> getNeighbors();
 
 } // Segment

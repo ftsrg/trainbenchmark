@@ -164,6 +164,9 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 	}
 
 	protected String stringValue(final Object value) {
+		if (value instanceof Boolean) {
+			return Boolean.toString((Boolean) value);
+		}
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^xsd:int", value);
 		}

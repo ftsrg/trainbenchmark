@@ -17,7 +17,7 @@ import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package hu.bme.mit.trainbenchmark.benchmark.viatra, the group contains the definition of the following patterns: <ul>
- * <li>PosLength</li>
+ * <li>posLength</li>
  * </ul>
  * 
  * @see IPatternGroup

@@ -16,12 +16,16 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
@@ -54,6 +58,11 @@ public final class SemaphoreNeighborInjectQuerySpecification extends BaseGenerat
   @Override
   protected SemaphoreNeighborInjectMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
     return SemaphoreNeighborInjectMatcher.on(engine);
+  }
+  
+  @Override
+  public SemaphoreNeighborInjectMatcher instantiate() throws ViatraQueryException {
+    return SemaphoreNeighborInjectMatcher.create();
   }
   
   @Override
@@ -95,15 +104,15 @@ public final class SemaphoreNeighborInjectQuerySpecification extends BaseGenerat
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static SemaphoreNeighborInjectQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore");
+    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore", (IInputKey)null, PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pRoute, parameter_pSemaphore);
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborInject";
+      return "hu.bme.mit.trainbenchmark.benchmark.viatra.semaphoreNeighborInject";
     }
     
     @Override
@@ -118,6 +127,7 @@ public final class SemaphoreNeighborInjectQuerySpecification extends BaseGenerat
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
+      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{

@@ -8,6 +8,7 @@
 	:signal :SIGNAL_GO .
 
 :_3 a :Route ;
+	:active true ;
 	:exit :_2 .
 
 :_4 a :Region .
@@ -435,6 +436,7 @@
 	:signal :SIGNAL_GO .
 
 :_50 a :Route ;
+	:active true ;
 	:entry :_2 ;
 	:exit :_49 .
 
@@ -1458,6 +1460,7 @@
 	:signal :SIGNAL_GO .
 
 :_159 a :Route ;
+	:active true ;
 	:entry :_49 ;
 	:exit :_158 .
 
@@ -1658,6 +1661,7 @@
 	:signal :SIGNAL_GO .
 
 :_182 a :Route ;
+	:active true ;
 	:exit :_181 .
 
 :_183 a :Region .
@@ -3562,6 +3566,7 @@
 :_179 :connectsTo :_184 .
 
 :_384 a :Route ;
+	:active true ;
 	:entry :_181 ;
 	:exit :_1 .
 

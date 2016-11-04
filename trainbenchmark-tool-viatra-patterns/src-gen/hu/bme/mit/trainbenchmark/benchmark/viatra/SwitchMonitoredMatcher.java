@@ -19,7 +19,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 /**
- * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored pattern,
+ * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.switchMonitored pattern,
  * providing pattern-specific query methods.
  * 
  * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -29,10 +29,10 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern SwitchMonitored(sw)
+ * pattern switchMonitored(sw)
  * {
  * 	Switch(sw);
- * 	neg find hasSensor(sw);	
+ * 	neg find hasSensor(sw);
  * }
  * </pre></code>
  * 
@@ -55,10 +55,19 @@ public class SwitchMonitoredMatcher extends BaseMatcher<SwitchMonitoredMatch> {
     // check if matcher already exists
     SwitchMonitoredMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new SwitchMonitoredMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (SwitchMonitoredMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static SwitchMonitoredMatcher create() throws ViatraQueryException {
+    return new SwitchMonitoredMatcher();
   }
   
   private final static int POSITION_SW = 0;
@@ -73,8 +82,8 @@ public class SwitchMonitoredMatcher extends BaseMatcher<SwitchMonitoredMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private SwitchMonitoredMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private SwitchMonitoredMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**
