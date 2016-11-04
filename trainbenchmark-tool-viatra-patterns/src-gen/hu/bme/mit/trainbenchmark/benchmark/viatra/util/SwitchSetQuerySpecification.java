@@ -7,6 +7,7 @@ import com.google.common.collect.Sets;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetMatcher;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
@@ -16,7 +17,6 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
-import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
@@ -133,7 +133,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
-      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
+      setEvaluationHints(new QueryEvaluationHint(null, Collections.<String,Object>emptyMap()));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{
@@ -152,7 +152,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       		));
       		// 	Route.active(route, true)
       		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		new ConstantValue(body, var__virtual_0_, false);
+      		new ConstantValue(body, var__virtual_0_, true);
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
       		PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
       		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "active")));
@@ -200,9 +200,5 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       }
       return bodies;
     }
-  }
-  
-  private static boolean evaluateExpression_1_1() {
-    return false;
   }
 }
