@@ -3,11 +3,12 @@
 <graph id="G" edgedefault="directed">
 <key id="currentPosition" for="node" attr.name="currentPosition" attr.type="string"/>
 <key id="length" for="node" attr.name="length" attr.type="int"/>
+<key id="active" for="node" attr.name="active" attr.type="boolean"/>
 <key id="position" for="node" attr.name="position" attr.type="string"/>
 <key id="signal" for="node" attr.name="signal" attr.type="string"/>
 <node id="n1" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
 <node id="n2" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
-<node id="n3" labels=":Route"><data key="labels">:Route</data></node>
+<node id="n3" labels=":Route"><data key="labels">:Route</data><data key="active">true</data></node>
 <node id="n4" labels=":Region"><data key="labels">:Region</data></node>
 <node id="n5" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n6" labels=":Sensor"><data key="labels">:Sensor</data></node>
@@ -54,7 +55,7 @@
 <node id="n47" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="length">872</data></node>
 <node id="n48" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="position">DIVERGING</data></node>
 <node id="n49" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
-<node id="n50" labels=":Route"><data key="labels">:Route</data></node>
+<node id="n50" labels=":Route"><data key="labels">:Route</data><data key="active">true</data></node>
 <node id="n51" labels=":Region"><data key="labels">:Region</data></node>
 <node id="n52" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n53" labels=":Sensor"><data key="labels">:Sensor</data></node>
@@ -163,7 +164,7 @@
 <node id="n156" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="length">684</data></node>
 <node id="n157" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="position">FAILURE</data></node>
 <node id="n158" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
-<node id="n159" labels=":Route"><data key="labels">:Route</data></node>
+<node id="n159" labels=":Route"><data key="labels">:Route</data><data key="active">true</data></node>
 <node id="n160" labels=":Region"><data key="labels">:Region</data></node>
 <node id="n161" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n162" labels=":Sensor"><data key="labels">:Sensor</data></node>
@@ -186,7 +187,7 @@
 <node id="n179" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="length">519</data></node>
 <node id="n180" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="position">STRAIGHT</data></node>
 <node id="n181" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="signal">GO</data></node>
-<node id="n182" labels=":Route"><data key="labels">:Route</data></node>
+<node id="n182" labels=":Route"><data key="labels">:Route</data><data key="active">true</data></node>
 <node id="n183" labels=":Region"><data key="labels">:Region</data></node>
 <node id="n184" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="currentPosition">FAILURE</data></node>
 <node id="n185" labels=":Sensor"><data key="labels">:Sensor</data></node>
@@ -388,7 +389,7 @@
 <node id="n381" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="length">107</data></node>
 <node id="n382" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="length">360</data></node>
 <node id="n383" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="position">FAILURE</data></node>
-<node id="n384" labels=":Route"><data key="labels">:Route</data></node>
+<node id="n384" labels=":Route"><data key="labels">:Route</data><data key="active">true</data></node>
 <node id="n385" labels=":Region"><data key="labels">:Region</data></node>
 <node id="n386" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n387" labels=":Sensor"><data key="labels">:Sensor</data></node>

@@ -13,7 +13,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments pattern,
+ * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegments pattern,
  * to be used in conjunction with {@link ConnectedSegmentsMatcher}.
  * 
  * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -164,7 +164,7 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   
   @Override
   public String patternName() {
-    return "hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments";
+    return "hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegments";
   }
   
   @Override

@@ -15,7 +15,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor pattern,
+ * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensor pattern,
  * to be used in conjunction with {@link RouteSensorMatcher}.
  * 
  * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -115,7 +115,7 @@ public abstract class RouteSensorMatch extends BasePatternMatch {
   
   @Override
   public String patternName() {
-    return "hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor";
+    return "hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensor";
   }
   
   @Override

@@ -4,10 +4,12 @@ Bundle-Name: Railway EMF Model
 Bundle-SymbolicName: trainbenchmark-format-emf-model;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: hu.bme.mit.trainbenchmark.railway,
  hu.bme.mit.trainbenchmark.railway.impl,
  hu.bme.mit.trainbenchmark.railway.util
-Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

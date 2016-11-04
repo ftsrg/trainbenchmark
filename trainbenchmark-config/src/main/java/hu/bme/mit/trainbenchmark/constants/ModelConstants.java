@@ -31,6 +31,7 @@ public class ModelConstants {
 	public static final String TRACKELEMENT = "TrackElement";
 
 	// attributes
+	public static final String ACTIVE = "active";
 	public static final String LENGTH = "length";
 	public static final String SIGNAL = "signal";
 	public static final String CURRENTPOSITION = "currentPosition";

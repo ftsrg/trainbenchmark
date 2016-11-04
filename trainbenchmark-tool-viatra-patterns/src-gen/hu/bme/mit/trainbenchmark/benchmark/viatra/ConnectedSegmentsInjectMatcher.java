@@ -20,7 +20,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 /**
- * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInject pattern,
+ * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegmentsInject pattern,
  * providing pattern-specific query methods.
  * 
  * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -30,7 +30,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern ConnectedSegmentsInject(sensor, segment1, segment3)
+ * pattern connectedSegmentsInject(sensor, segment1, segment3)
  * {
  * 	Segment.connectsTo(segment1, segment3);
  * 	Segment.monitoredBy(segment1, sensor);
@@ -57,10 +57,19 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
     // check if matcher already exists
     ConnectedSegmentsInjectMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new ConnectedSegmentsInjectMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (ConnectedSegmentsInjectMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static ConnectedSegmentsInjectMatcher create() throws ViatraQueryException {
+    return new ConnectedSegmentsInjectMatcher();
   }
   
   private final static int POSITION_SENSOR = 0;
@@ -79,8 +88,8 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private ConnectedSegmentsInjectMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private ConnectedSegmentsInjectMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

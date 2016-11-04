@@ -19,7 +19,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 /**
- * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength pattern,
+ * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.posLength pattern,
  * providing pattern-specific query methods.
  * 
  * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -29,7 +29,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern PosLength(segment)
+ * pattern posLength(segment)
  * {
  * 	Segment.length(segment, length);
  * 	check(length {@literal <}= 0);
@@ -55,10 +55,19 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
     // check if matcher already exists
     PosLengthMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new PosLengthMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (PosLengthMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static PosLengthMatcher create() throws ViatraQueryException {
+    return new PosLengthMatcher();
   }
   
   private final static int POSITION_SEGMENT = 0;
@@ -73,8 +82,8 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private PosLengthMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private PosLengthMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

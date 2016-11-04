@@ -27,8 +27,6 @@ public abstract class IqdCoreMatch implements Match {
 
 	public static IqdCoreMatch createMatch(final RailwayQuery query, final Vector<Object> qs) {
 		switch (query) {
-		case ACTIVEROUTE:
-			return new IqdCoreActiveRouteMatch(qs);
 		case CONNECTEDSEGMENTS:
 			return new IqdCoreConnectedSegmentsMatch(qs);
 		case CONNECTEDSEGMENTS_INJECT:
@@ -60,7 +58,7 @@ public abstract class IqdCoreMatch implements Match {
 
 	@Override
 	public String toString() {
-		Joiner joiner = Joiner.on(", ");
+		final Joiner joiner = Joiner.on(", ");
 		return "<" + joiner.join(toArray()) + ">";
 	}
 

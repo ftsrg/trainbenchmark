@@ -202,7 +202,9 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 
 	private String valueToString(final Object value) {
 		String stringValue;
-		if (value instanceof String) {
+		if (value instanceof Boolean) {
+			stringValue = (Boolean) value ? "1" : "0";
+		} else if (value instanceof String) {
 			// escape string
 			stringValue = "\"" + value + "\"";
 		} else if (value instanceof Enum) {

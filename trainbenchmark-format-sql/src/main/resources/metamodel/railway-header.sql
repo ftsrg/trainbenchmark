@@ -19,6 +19,7 @@ START TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS "Route" (
   "id" int NOT NULL AUTO_INCREMENT,
+  "active" int,
   "entry" int,
   "exit" int,
   PRIMARY KEY  ("id")

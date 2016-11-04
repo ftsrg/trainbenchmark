@@ -19,7 +19,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 /**
- * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject pattern,
+ * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.posLengthInject pattern,
  * providing pattern-specific query methods.
  * 
  * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -29,7 +29,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern PosLengthInject(segment)
+ * pattern posLengthInject(segment)
  * {
  * 	Segment(segment);
  * }
@@ -54,10 +54,19 @@ public class PosLengthInjectMatcher extends BaseMatcher<PosLengthInjectMatch> {
     // check if matcher already exists
     PosLengthInjectMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new PosLengthInjectMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (PosLengthInjectMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static PosLengthInjectMatcher create() throws ViatraQueryException {
+    return new PosLengthInjectMatcher();
   }
   
   private final static int POSITION_SEGMENT = 0;
@@ -72,8 +81,8 @@ public class PosLengthInjectMatcher extends BaseMatcher<PosLengthInjectMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private PosLengthInjectMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private PosLengthInjectMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

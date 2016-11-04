@@ -20,7 +20,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 /**
- * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments pattern,
+ * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegments pattern,
  * providing pattern-specific query methods.
  * 
  * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -30,7 +30,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern ConnectedSegments(sensor, segment1, segment2, segment3, segment4, segment5, segment6)
+ * pattern connectedSegments(sensor, segment1, segment2, segment3, segment4, segment5, segment6)
  * {
  * 	Segment.connectsTo(segment1, segment2);
  * 	Segment.connectsTo(segment2, segment3);
@@ -65,10 +65,19 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
     // check if matcher already exists
     ConnectedSegmentsMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new ConnectedSegmentsMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (ConnectedSegmentsMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static ConnectedSegmentsMatcher create() throws ViatraQueryException {
+    return new ConnectedSegmentsMatcher();
   }
   
   private final static int POSITION_SENSOR = 0;
@@ -95,8 +104,8 @@ public class ConnectedSegmentsMatcher extends BaseMatcher<ConnectedSegmentsMatch
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private ConnectedSegmentsMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private ConnectedSegmentsMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**
