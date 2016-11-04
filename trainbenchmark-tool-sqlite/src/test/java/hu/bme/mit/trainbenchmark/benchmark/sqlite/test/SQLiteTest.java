@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class SQLiteTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final SQLiteBenchmarkConfig bc = new SQLiteBenchmarkConfig(bcb);
 		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();

@@ -8,6 +8,7 @@ WHERE
 {
 	?route base:entry ?semaphore .
 	?route rdf:type base:Route .
+	?route base:active true .
 	?semaphore rdf:type base:Semaphore .
 
 	?route base:follows ?swP .

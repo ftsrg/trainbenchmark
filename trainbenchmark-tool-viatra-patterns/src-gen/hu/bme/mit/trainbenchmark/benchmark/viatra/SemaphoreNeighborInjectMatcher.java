@@ -20,7 +20,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 /**
- * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborInject pattern,
+ * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.semaphoreNeighborInject pattern,
  * providing pattern-specific query methods.
  * 
  * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -30,7 +30,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern SemaphoreNeighborInject(route, semaphore)
+ * pattern semaphoreNeighborInject(route, semaphore)
  * {
  * 	Route.entry(route, semaphore);
  * }
@@ -55,10 +55,19 @@ public class SemaphoreNeighborInjectMatcher extends BaseMatcher<SemaphoreNeighbo
     // check if matcher already exists
     SemaphoreNeighborInjectMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new SemaphoreNeighborInjectMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (SemaphoreNeighborInjectMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static SemaphoreNeighborInjectMatcher create() throws ViatraQueryException {
+    return new SemaphoreNeighborInjectMatcher();
   }
   
   private final static int POSITION_ROUTE = 0;
@@ -75,8 +84,8 @@ public class SemaphoreNeighborInjectMatcher extends BaseMatcher<SemaphoreNeighbo
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private SemaphoreNeighborInjectMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private SemaphoreNeighborInjectMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

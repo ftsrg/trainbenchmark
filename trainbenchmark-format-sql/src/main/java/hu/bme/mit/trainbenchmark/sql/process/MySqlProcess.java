@@ -23,19 +23,17 @@ import org.apache.commons.exec.Executor;
 public class MySqlProcess {
 
 	// It is generally considered good practice to use Apache Commmons Exec.
-	// However, it does not work with MySQL start/stop properly, with frequent hangs. Therefore, we recommend using the
-	// simple process builder instead.
+	// However, it does not work with MySQL start/stop properly, with frequent
+	// hangs. Therefore, we recommend using the simple ProcessBuilder instead.
 
 	private static final String SCRIPT_DIRECTORY = "../trainbenchmark-format-sql/scripts/";
 
-	private static String getInputAsString(final InputStream is)
-	{
-	   try(java.util.Scanner s = new java.util.Scanner(is)) 
-	   { 
-	       return s.useDelimiter("\\A").hasNext() ? s.next() : ""; 
-	   }
+	private static String getInputAsString(final InputStream is) {
+		try (java.util.Scanner s = new java.util.Scanner(is)) {
+			return s.useDelimiter("\\A").hasNext() ? s.next() : "";
+		}
 	}
-	
+
 	public static void stopServer() throws ExecuteException, IOException, InterruptedException {
 		run(new String[] { SCRIPT_DIRECTORY + "stop-mysql.sh" });
 	}
@@ -52,11 +50,11 @@ public class MySqlProcess {
 		final ProcessBuilder pb = new ProcessBuilder(command);
 		final Process p = pb.start();
 		p.waitFor();
-		
+
 		final String stdOut = getInputAsString(p.getInputStream());
 		final String stdErr = getInputAsString(p.getErrorStream());
-		System.out.println(stdOut);
-		System.out.println(stdErr);
+		// System.out.println(stdOut);
+		// System.out.println(stdErr);
 	}
 
 	public static void runShell(final String shellCommand) throws ExecuteException, IOException {

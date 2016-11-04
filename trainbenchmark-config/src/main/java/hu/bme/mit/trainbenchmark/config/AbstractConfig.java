@@ -1,14 +1,27 @@
 package hu.bme.mit.trainbenchmark.config;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import org.objenesis.strategy.StdInstantiatorStrategy;
+
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.Kryo.DefaultInstantiatorStrategy;
+import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
 public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 
-	protected TConfigBase configBase;
+	protected final TConfigBase configBase;
+	
+	public AbstractConfig(final TConfigBase configBase) {
+		this.configBase = configBase;
+	}
+
+	public TConfigBase getConfigBase() {
+		return configBase;
+	}
 
 	/**
 	 * Serialize the configuration to a file. This does not need to be redefined
@@ -22,6 +35,15 @@ public class AbstractConfig<TConfigBase extends AbstractConfigBase> {
 		final Kryo kryo = new Kryo();
 		try (final Output output = new Output(new FileOutputStream(path))) {
 			kryo.writeObject(output, this);
+		}
+	}
+	
+	public static <T extends AbstractConfig<?>> T fromFile(final String path, final Class<T> clazz) throws FileNotFoundException {
+		final Kryo kryo = new Kryo();
+		kryo.setInstantiatorStrategy(new DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
+	    try (final Input input = new Input(new FileInputStream(path))) {
+			final T bc = kryo.readObject(input, clazz);
+			return bc;
 		}
 	}
 

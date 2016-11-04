@@ -29,8 +29,6 @@ public abstract class IngraphMatch implements Match {
 
 	public static IngraphMatch createMatch(final RailwayQuery query, final Map<Object, Object> qs) {
 		switch (query) {
-		case ACTIVEROUTE:
-			return new IngraphActiveRouteMatch(qs);
 		case CONNECTEDSEGMENTS:
 			return new IngraphConnectedSegmentsMatch(qs);
 		case CONNECTEDSEGMENTS_INJECT:

@@ -22,7 +22,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 /**
- * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor pattern,
+ * Generated pattern matcher API of the hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensor pattern,
  * providing pattern-specific query methods.
  * 
  * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -32,13 +32,13 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  * <code><pre>
- * pattern RouteSensor(route, sensor, swP, sw)
+ * pattern routeSensor(route, sensor, swP, sw)
  * {
  * 	Route.follows(route, swP);
  * 	SwitchPosition.target(swP, sw);
  * 	TrackElement.monitoredBy(sw, sensor);
- * 	
- * 	neg find inverseGathers(sensor, route);	
+ * 
+ * 	neg find inverseGathers(sensor, route);
  * }
  * </pre></code>
  * 
@@ -61,10 +61,19 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
     // check if matcher already exists
     RouteSensorMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = new RouteSensorMatcher(engine);
-    	// do not have to "put" it into engine.matchers, reportMatcherInitialized() will take care of it
+    	matcher = (RouteSensorMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static RouteSensorMatcher create() throws ViatraQueryException {
+    return new RouteSensorMatcher();
   }
   
   private final static int POSITION_ROUTE = 0;
@@ -85,8 +94,8 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
    * @throws ViatraQueryException if an error occurs during pattern matcher creation
    * 
    */
-  private RouteSensorMatcher(final ViatraQueryEngine engine) throws ViatraQueryException {
-    super(engine, querySpecification());
+  private RouteSensorMatcher() throws ViatraQueryException {
+    super(querySpecification());
   }
   
   /**

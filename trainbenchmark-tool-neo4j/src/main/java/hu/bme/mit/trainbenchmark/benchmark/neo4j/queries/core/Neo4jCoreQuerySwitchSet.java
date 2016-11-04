@@ -44,17 +44,22 @@ public class Neo4jCoreQuerySwitchSet extends Neo4jCoreQuery<Neo4jSwitchSetMatch>
 		final Collection<Neo4jSwitchSetMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
-		try (Transaction tx = graphDb.beginTx()) {
+		try (final Transaction tx = graphDb.beginTx()) {
 			// (route:Route)
 			final Iterable<Node> routes = () -> graphDb.findNodes(Neo4jConstants.labelRoute);
 			for (final Node route : routes) {
+				final boolean active = (boolean) route.getProperty(ModelConstants.ACTIVE);
+				if (!active) {
+					continue;
+				}
+				
 				// (route:Route)-[:entry]->(semaphore:Semaphore)
 				final Iterable<Node> semaphores = Neo4jUtil.getAdjacentNodes(route, Neo4jConstants.relationshipTypeEntry, Direction.OUTGOING,
 						Neo4jConstants.labelSemaphore);
 				for (final Node semaphore : semaphores) {
 
 					// semaphore.signal = "GO"
-					final Object signal = semaphore.getProperty(SIGNAL);
+					final String signal = (String) semaphore.getProperty(SIGNAL);
 					if (!Signal.GO.toString().equals(signal)) {
 						continue;
 					}

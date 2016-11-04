@@ -59,7 +59,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 	@Override
 	public void initModel() {
 		EmfUtil.registerExtension();
-		final String modelPath = gc.getGeneratorConfig().getModelPathWithoutExtension() + "."
+		final String modelPath = gc.getConfigBase().getModelPathWithoutExtension() + "."
 				+ EmfConstants.MODEL_EXTENSION;
 		final URI resourceURI = URI.createFileURI(modelPath);
 

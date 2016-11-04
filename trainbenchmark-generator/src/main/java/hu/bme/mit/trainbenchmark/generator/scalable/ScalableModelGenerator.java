@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.generator.scalable;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ACTIVE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
@@ -64,8 +65,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		super(serializer, generatorConfig);
-		maxRoutes = 5 * generatorConfig.getGeneratorConfig().getSize();
-		switch (generatorConfig.getGeneratorConfig().getScenario()) {
+		maxRoutes = 5 * generatorConfig.getConfigBase().getSize();
+		switch (generatorConfig.getConfigBase().getScenario()) {
 		case BATCH:
 			// set all error percents to 0
 			break;
@@ -130,7 +131,10 @@ public class ScalableModelGenerator extends ModelGenerator {
 			routeOutgoingEdges.put(ENTRY, entry);
 			routeOutgoingEdges.put(EXIT, exit);
 
-			final Object route = serializer.createVertex(ROUTE, EMPTY_MAP, routeOutgoingEdges);
+			final Map<String, Object> routeAttributes = new HashMap<>();
+			routeAttributes.put(ACTIVE, true);
+			
+			final Object route = serializer.createVertex(ROUTE, routeAttributes, routeOutgoingEdges);
 			final Object region = serializer.createVertex(REGION);
 
 			final int swPs = random.nextInt(maxSwitchPositions - 1) + 1;

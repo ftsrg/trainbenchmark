@@ -12,16 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class TinkerGraphBenchmarkConfig extends BenchmarkConfig {
 
-	protected TinkerGraphBenchmarkConfig() {
-	}
-	
-	public TinkerGraphBenchmarkConfig(final BenchmarkConfigBase bcb) {
-		super(bcb);
+	public TinkerGraphBenchmarkConfig(final BenchmarkConfigBase configBase) {
+		super(configBase);
 	}
 	
 	@Override

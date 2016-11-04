@@ -27,6 +27,7 @@ subprojects {
 
 ext {
 	commonsExecVersion = "1.3"
+	tinkerGraphVersion = "3.2.3"
 	ingraphVersion = "0.0.1-SNAPSHOT"
 	junitVersion = "4.12"
 	kryoVersion = "4.0.0"

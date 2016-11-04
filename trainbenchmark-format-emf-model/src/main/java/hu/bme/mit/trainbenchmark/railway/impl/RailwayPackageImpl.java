@@ -209,15 +209,6 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSegment_Neighbors() {
-		return (EReference)segmentEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTrackElement() {
 		return trackElementEClass;
 	}
@@ -272,33 +263,6 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSwitch_Left() {
-		return (EReference)switchEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSwitch_Right() {
-		return (EReference)switchEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSwitch_From() {
-		return (EReference)switchEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getRoute() {
 		return routeEClass;
 	}
@@ -337,6 +301,15 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 */
 	public EReference getRoute_Gathers() {
 		return (EReference)routeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRoute_Active() {
+		return (EAttribute)routeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -532,7 +505,6 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		segmentEClass = createEClass(SEGMENT);
 		createEAttribute(segmentEClass, SEGMENT__LENGTH);
 		createEReference(segmentEClass, SEGMENT__SEMAPHORES);
-		createEReference(segmentEClass, SEGMENT__NEIGHBORS);
 
 		trackElementEClass = createEClass(TRACK_ELEMENT);
 		createEReference(trackElementEClass, TRACK_ELEMENT__MONITORED_BY);
@@ -541,15 +513,13 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		switchEClass = createEClass(SWITCH);
 		createEAttribute(switchEClass, SWITCH__CURRENT_POSITION);
 		createEReference(switchEClass, SWITCH__POSITIONS);
-		createEReference(switchEClass, SWITCH__LEFT);
-		createEReference(switchEClass, SWITCH__RIGHT);
-		createEReference(switchEClass, SWITCH__FROM);
 
 		routeEClass = createEClass(ROUTE);
 		createEReference(routeEClass, ROUTE__ENTRY);
 		createEReference(routeEClass, ROUTE__FOLLOWS);
 		createEReference(routeEClass, ROUTE__EXIT);
 		createEReference(routeEClass, ROUTE__GATHERS);
+		createEAttribute(routeEClass, ROUTE__ACTIVE);
 
 		semaphoreEClass = createEClass(SEMAPHORE);
 		createEAttribute(semaphoreEClass, SEMAPHORE__SIGNAL);
@@ -619,7 +589,6 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEClass(segmentEClass, Segment.class, "Segment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSegment_Length(), ecorePackage.getEInt(), "length", null, 1, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSegment_Semaphores(), this.getSemaphore(), null, "semaphores", null, 0, -1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSegment_Neighbors(), this.getTrackElement(), null, "neighbors", null, 2, 2, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(trackElementEClass, TrackElement.class, "TrackElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTrackElement_MonitoredBy(), this.getSensor(), this.getSensor_Monitors(), "monitoredBy", null, 0, -1, TrackElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -628,15 +597,13 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEClass(switchEClass, Switch.class, "Switch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwitch_CurrentPosition(), this.getPosition(), "currentPosition", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitch_Positions(), this.getSwitchPosition(), this.getSwitchPosition_Target(), "positions", null, 0, -1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSwitch_Left(), this.getTrackElement(), null, "left", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSwitch_Right(), this.getTrackElement(), null, "right", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSwitch_From(), this.getTrackElement(), null, "from", null, 1, 1, Switch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoute_Entry(), this.getSemaphore(), null, "entry", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoute_Follows(), this.getSwitchPosition(), this.getSwitchPosition_Route(), "follows", null, 0, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoute_Exit(), this.getSemaphore(), null, "exit", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoute_Gathers(), this.getSensor(), null, "gathers", null, 2, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRoute_Active(), ecorePackage.getEBoolean(), "active", "false", 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semaphoreEClass, Semaphore.class, "Semaphore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSemaphore_Signal(), this.getSignal(), "signal", null, 1, 1, Semaphore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

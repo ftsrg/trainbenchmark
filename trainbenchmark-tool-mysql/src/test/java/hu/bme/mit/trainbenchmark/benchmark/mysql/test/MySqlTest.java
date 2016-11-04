@@ -21,7 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 public class MySqlTest extends TrainBenchmarkTest {
 
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final MySqlBenchmarkConfig bc = new MySqlBenchmarkConfig(bcb);
 		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();

@@ -205,22 +205,13 @@ public interface RailwayPackage extends EPackage {
 	int SEGMENT__SEMAPHORES = TRACK_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Neighbors</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT__NEIGHBORS = TRACK_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Segment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEGMENT_FEATURE_COUNT = TRACK_ELEMENT_FEATURE_COUNT + 3;
+	int SEGMENT_FEATURE_COUNT = TRACK_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Segment</em>' class.
@@ -287,40 +278,13 @@ public interface RailwayPackage extends EPackage {
 	int SWITCH__POSITIONS = TRACK_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH__LEFT = TRACK_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Right</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH__RIGHT = TRACK_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH__FROM = TRACK_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Switch</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_FEATURE_COUNT = TRACK_ELEMENT_FEATURE_COUNT + 5;
+	int SWITCH_FEATURE_COUNT = TRACK_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Switch</em>' class.
@@ -387,13 +351,22 @@ public interface RailwayPackage extends EPackage {
 	int ROUTE__GATHERS = RAILWAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUTE__ACTIVE = RAILWAY_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Route</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 4;
+	int ROUTE_FEATURE_COUNT = RAILWAY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Route</em>' class.
@@ -715,17 +688,6 @@ public interface RailwayPackage extends EPackage {
 	EReference getSegment_Semaphores();
 
 	/**
-	 * Returns the meta object for the reference list '{@link hu.bme.mit.trainbenchmark.railway.Segment#getNeighbors <em>Neighbors</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Neighbors</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Segment#getNeighbors()
-	 * @see #getSegment()
-	 * @generated
-	 */
-	EReference getSegment_Neighbors();
-
-	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.TrackElement <em>Track Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -790,39 +752,6 @@ public interface RailwayPackage extends EPackage {
 	EReference getSwitch_Positions();
 
 	/**
-	 * Returns the meta object for the reference '{@link hu.bme.mit.trainbenchmark.railway.Switch#getLeft <em>Left</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Left</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Switch#getLeft()
-	 * @see #getSwitch()
-	 * @generated
-	 */
-	EReference getSwitch_Left();
-
-	/**
-	 * Returns the meta object for the reference '{@link hu.bme.mit.trainbenchmark.railway.Switch#getRight <em>Right</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Right</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Switch#getRight()
-	 * @see #getSwitch()
-	 * @generated
-	 */
-	EReference getSwitch_Right();
-
-	/**
-	 * Returns the meta object for the reference '{@link hu.bme.mit.trainbenchmark.railway.Switch#getFrom <em>From</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>From</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Switch#getFrom()
-	 * @see #getSwitch()
-	 * @generated
-	 */
-	EReference getSwitch_From();
-
-	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.Route <em>Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -875,6 +804,17 @@ public interface RailwayPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoute_Gathers();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.trainbenchmark.railway.Route#isActive <em>Active</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.Route#isActive()
+	 * @see #getRoute()
+	 * @generated
+	 */
+	EAttribute getRoute_Active();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.trainbenchmark.railway.Semaphore <em>Semaphore</em>}'.
@@ -1116,14 +1056,6 @@ public interface RailwayPackage extends EPackage {
 		EReference SEGMENT__SEMAPHORES = eINSTANCE.getSegment_Semaphores();
 
 		/**
-		 * The meta object literal for the '<em><b>Neighbors</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SEGMENT__NEIGHBORS = eINSTANCE.getSegment_Neighbors();
-
-		/**
 		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.TrackElementImpl <em>Track Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1176,30 +1108,6 @@ public interface RailwayPackage extends EPackage {
 		EReference SWITCH__POSITIONS = eINSTANCE.getSwitch_Positions();
 
 		/**
-		 * The meta object literal for the '<em><b>Left</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SWITCH__LEFT = eINSTANCE.getSwitch_Left();
-
-		/**
-		 * The meta object literal for the '<em><b>Right</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SWITCH__RIGHT = eINSTANCE.getSwitch_Right();
-
-		/**
-		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SWITCH__FROM = eINSTANCE.getSwitch_From();
-
-		/**
 		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl <em>Route</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1240,6 +1148,14 @@ public interface RailwayPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROUTE__GATHERS = eINSTANCE.getRoute_Gathers();
+
+		/**
+		 * The meta object literal for the '<em><b>Active</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROUTE__ACTIVE = eINSTANCE.getRoute_Active();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.trainbenchmark.railway.impl.SemaphoreImpl <em>Semaphore</em>}' class.

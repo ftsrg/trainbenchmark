@@ -40,6 +40,10 @@ public class EmfApiQuerySwitchSet<TDriver extends EmfDriver> extends EmfApiQuery
 
 		final EList<Route> routes = driver.getContainer().getRoutes();
 		for (final Route route : routes) {
+			if (!route.isActive()) {
+				continue;
+			}
+			
 			// (route:Route)-[:entry]->(semaphore:Semaphore)
 			final Semaphore semaphore = route.getEntry();
 			if (semaphore == null) {

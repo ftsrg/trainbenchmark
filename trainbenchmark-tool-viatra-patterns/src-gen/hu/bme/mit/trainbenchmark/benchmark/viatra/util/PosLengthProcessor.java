@@ -8,7 +8,7 @@ import hu.bme.mit.trainbenchmark.railway.Segment;
 import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 
 /**
- * A match processor tailored for the hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength pattern.
+ * A match processor tailored for the hu.bme.mit.trainbenchmark.benchmark.viatra.posLength pattern.
  * 
  * Clients should derive an (anonymous) class that implements the abstract process().
  * 

@@ -17,6 +17,9 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
@@ -25,6 +28,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequalit
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
@@ -57,6 +61,11 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
   @Override
   protected SemaphoreNeighborMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
     return SemaphoreNeighborMatcher.on(engine);
+  }
+  
+  @Override
+  public SemaphoreNeighborMatcher instantiate() throws ViatraQueryException {
+    return SemaphoreNeighborMatcher.create();
   }
   
   @Override
@@ -98,19 +107,19 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static SemaphoreNeighborQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore");
+    private final PParameter parameter_pSemaphore = new PParameter("semaphore", "hu.bme.mit.trainbenchmark.railway.Semaphore", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pRoute1 = new PParameter("route1", "hu.bme.mit.trainbenchmark.railway.Route");
+    private final PParameter parameter_pRoute1 = new PParameter("route1", "hu.bme.mit.trainbenchmark.railway.Route", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pRoute2 = new PParameter("route2", "hu.bme.mit.trainbenchmark.railway.Route");
+    private final PParameter parameter_pRoute2 = new PParameter("route2", "hu.bme.mit.trainbenchmark.railway.Route", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSensor1 = new PParameter("sensor1", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    private final PParameter parameter_pSensor1 = new PParameter("sensor1", "hu.bme.mit.trainbenchmark.railway.Sensor", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSensor2 = new PParameter("sensor2", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    private final PParameter parameter_pSensor2 = new PParameter("sensor2", "hu.bme.mit.trainbenchmark.railway.Sensor", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pTe1 = new PParameter("te1", "hu.bme.mit.trainbenchmark.railway.TrackElement");
+    private final PParameter parameter_pTe1 = new PParameter("te1", "hu.bme.mit.trainbenchmark.railway.TrackElement", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pTe2 = new PParameter("te2", "hu.bme.mit.trainbenchmark.railway.TrackElement");
+    private final PParameter parameter_pTe2 = new PParameter("te2", "hu.bme.mit.trainbenchmark.railway.TrackElement", (IInputKey)null, PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pSemaphore, parameter_pRoute1, parameter_pRoute2, parameter_pSensor1, parameter_pSensor2, parameter_pTe1, parameter_pTe2);
     
@@ -131,6 +140,7 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
+      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{

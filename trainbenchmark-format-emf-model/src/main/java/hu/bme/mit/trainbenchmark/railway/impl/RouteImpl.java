@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getFollows <em>Follows</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getExit <em>Exit</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getGathers <em>Gathers</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#isActive <em>Active</em>}</li>
  * </ul>
  *
  * @generated
@@ -80,6 +81,26 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 	 * @ordered
 	 */
 	protected EList<Sensor> gathers;
+
+	/**
+	 * The default value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ACTIVE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean active = ACTIVE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,6 +226,27 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActive(boolean newActive) {
+		boolean oldActive = active;
+		active = newActive;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RailwayPackage.ROUTE__ACTIVE, oldActive, active));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -247,6 +289,8 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 				return basicGetExit();
 			case RailwayPackage.ROUTE__GATHERS:
 				return getGathers();
+			case RailwayPackage.ROUTE__ACTIVE:
+				return isActive();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -274,6 +318,9 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 				getGathers().clear();
 				getGathers().addAll((Collection<? extends Sensor>)newValue);
 				return;
+			case RailwayPackage.ROUTE__ACTIVE:
+				setActive((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -298,6 +345,9 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 			case RailwayPackage.ROUTE__GATHERS:
 				getGathers().clear();
 				return;
+			case RailwayPackage.ROUTE__ACTIVE:
+				setActive(ACTIVE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -318,8 +368,26 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 				return exit != null;
 			case RailwayPackage.ROUTE__GATHERS:
 				return gathers != null && !gathers.isEmpty();
+			case RailwayPackage.ROUTE__ACTIVE:
+				return active != ACTIVE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (active: ");
+		result.append(active);
+		result.append(')');
+		return result.toString();
 	}
 
 } //RouteImpl

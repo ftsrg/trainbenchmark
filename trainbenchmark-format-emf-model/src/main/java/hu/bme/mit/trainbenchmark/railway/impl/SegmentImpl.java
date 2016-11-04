@@ -5,8 +5,6 @@ package hu.bme.mit.trainbenchmark.railway.impl;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
-import hu.bme.mit.trainbenchmark.railway.TrackElement;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -20,7 +18,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -33,7 +30,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SegmentImpl#getLength <em>Length</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SegmentImpl#getSemaphores <em>Semaphores</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.SegmentImpl#getNeighbors <em>Neighbors</em>}</li>
  * </ul>
  *
  * @generated
@@ -68,16 +64,6 @@ public class SegmentImpl extends TrackElementImpl implements Segment {
 	 * @ordered
 	 */
 	protected EList<Semaphore> semaphores;
-
-	/**
-	 * The cached value of the '{@link #getNeighbors() <em>Neighbors</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNeighbors()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TrackElement> neighbors;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,18 +122,6 @@ public class SegmentImpl extends TrackElementImpl implements Segment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TrackElement> getNeighbors() {
-		if (neighbors == null) {
-			neighbors = new EObjectResolvingEList<TrackElement>(TrackElement.class, this, RailwayPackage.SEGMENT__NEIGHBORS);
-		}
-		return neighbors;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -169,8 +143,6 @@ public class SegmentImpl extends TrackElementImpl implements Segment {
 				return getLength();
 			case RailwayPackage.SEGMENT__SEMAPHORES:
 				return getSemaphores();
-			case RailwayPackage.SEGMENT__NEIGHBORS:
-				return getNeighbors();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,10 +163,6 @@ public class SegmentImpl extends TrackElementImpl implements Segment {
 				getSemaphores().clear();
 				getSemaphores().addAll((Collection<? extends Semaphore>)newValue);
 				return;
-			case RailwayPackage.SEGMENT__NEIGHBORS:
-				getNeighbors().clear();
-				getNeighbors().addAll((Collection<? extends TrackElement>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -213,9 +181,6 @@ public class SegmentImpl extends TrackElementImpl implements Segment {
 			case RailwayPackage.SEGMENT__SEMAPHORES:
 				getSemaphores().clear();
 				return;
-			case RailwayPackage.SEGMENT__NEIGHBORS:
-				getNeighbors().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -232,8 +197,6 @@ public class SegmentImpl extends TrackElementImpl implements Segment {
 				return length != LENGTH_EDEFAULT;
 			case RailwayPackage.SEGMENT__SEMAPHORES:
 				return semaphores != null && !semaphores.isEmpty();
-			case RailwayPackage.SEGMENT__NEIGHBORS:
-				return neighbors != null && !neighbors.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

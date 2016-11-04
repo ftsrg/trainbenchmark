@@ -159,13 +159,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 
-		val trimmer = createProjectionOperator => [
+		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
 			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
-			input = trimmer
+			input = projection
 			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
@@ -284,13 +284,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 
-		val trimmer = createProjectionOperator => [
+		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
 			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
-			input = trimmer
+			input = projection
 			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
@@ -387,13 +387,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 
-		val trimmer = createProjectionOperator => [
+		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
 			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
-			input = trimmer
+			input = projection
 			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
@@ -498,13 +498,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 
-		val trimmer = createProjectionOperator => [
+		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
 			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
-			input = trimmer
+			input = projection
 			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
@@ -624,13 +624,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 
-		val trimmer = createProjectionOperator => [
+		val projection = createProjectionOperator => [
 			input = join5
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
 			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
-			input = trimmer
+			input = projection
 			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
@@ -724,13 +724,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			container = semaphoreNeighbor
 		]
 
-		val trimmer = createProjectionOperator => [
+		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
 			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
-			input = trimmer
+			input = projection
 			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production

@@ -12,16 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class Neo4jGraphGeneratorConfig extends GeneratorConfig {
-
-	protected Neo4jGraphGeneratorConfig() {
-	}
 	
-	public Neo4jGraphGeneratorConfig(final GeneratorConfigBase generatorConfig) {
-		super(generatorConfig);
+	public Neo4jGraphGeneratorConfig(final GeneratorConfigBase configBase) {
+		super(configBase);
 	}
 
 	@Override

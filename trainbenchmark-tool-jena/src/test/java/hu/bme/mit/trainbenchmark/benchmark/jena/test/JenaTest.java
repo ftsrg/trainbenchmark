@@ -25,7 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 public class JenaTest extends RdfTest {
 	
 	@Override
-	protected BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception {
+	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final JenaBenchmarkConfig bc = new JenaBenchmarkConfig(bcb, inferencing);
 		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();

@@ -7,10 +7,11 @@ CREATE TABLE `Region` (
 INSERT INTO `Region` VALUES (4),(51),(160),(291),(349);
 CREATE TABLE `Route` (
   `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT
+,  `active` integer DEFAULT NULL
 ,  `entry` integer DEFAULT NULL
 ,  `exit` integer DEFAULT NULL
 );
-INSERT INTO `Route` VALUES (3,1,2),(50,2,49),(159,49,158),(290,158,289),(348,289,1);
+INSERT INTO `Route` VALUES (3,1,1,2),(50,1,2,49),(159,1,49,158),(290,1,158,289),(348,1,289,1);
 CREATE TABLE `Segment` (
   `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT
 ,  `length` integer NOT NULL DEFAULT '1'

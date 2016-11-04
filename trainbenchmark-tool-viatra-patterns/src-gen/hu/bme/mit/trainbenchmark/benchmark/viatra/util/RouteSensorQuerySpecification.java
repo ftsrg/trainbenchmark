@@ -17,6 +17,9 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
@@ -24,6 +27,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedP
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializationException;
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
@@ -56,6 +60,11 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
   @Override
   protected RouteSensorMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
     return RouteSensorMatcher.on(engine);
+  }
+  
+  @Override
+  public RouteSensorMatcher instantiate() throws ViatraQueryException {
+    return RouteSensorMatcher.create();
   }
   
   @Override
@@ -97,19 +106,19 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static RouteSensorQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route");
+    private final PParameter parameter_pRoute = new PParameter("route", "hu.bme.mit.trainbenchmark.railway.Route", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor");
+    private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSwP = new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition");
+    private final PParameter parameter_pSwP = new PParameter("swP", "hu.bme.mit.trainbenchmark.railway.SwitchPosition", (IInputKey)null, PParameterDirection.INOUT);
     
-    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch");
+    private final PParameter parameter_pSw = new PParameter("sw", "hu.bme.mit.trainbenchmark.railway.Switch", (IInputKey)null, PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pRoute, parameter_pSensor, parameter_pSwP, parameter_pSw);
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor";
+      return "hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensor";
     }
     
     @Override
@@ -124,6 +133,7 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
     
     @Override
     public Set<PBody> doGetContainedBodies() throws QueryInitializationException {
+      setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
       	{
@@ -153,7 +163,7 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
       		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
       		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
       		new Equality(body, var__virtual_2_, var_sensor);
-      		// 		neg find inverseGathers(sensor, route)
+      		// 	neg find inverseGathers(sensor, route)
       		new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseGathersQuerySpecification.instance().getInternalQueryRepresentation());
       		bodies.add(body);
       	}

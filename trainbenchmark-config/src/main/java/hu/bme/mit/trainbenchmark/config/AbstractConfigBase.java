@@ -13,32 +13,16 @@
 package hu.bme.mit.trainbenchmark.config;
 
 public abstract class AbstractConfigBase {
-
-	protected String xms;
-	protected String xmx;
-
-	protected AbstractConfigBase() {
-	}
 	
-	public AbstractConfigBase(final String xms, final String xmx) {
-		this.xms = xms;
-		this.xmx = xmx;
+	public AbstractConfigBase() {
 	}
 
 	public String getWorkspaceDir() {
 		return "../";
 	}
-	
+
 	public String getModelDir() {
 		return getWorkspaceDir() + "models/";
-	}
-
-	public String getXms() {
-		return xms;
-	}
-	
-	public String getXmx() {
-		return xmx;
 	}
 
 }

@@ -16,12 +16,9 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class JenaBenchmarkConfig extends RdfBenchmarkConfig {
-
-	protected JenaBenchmarkConfig() {
-	}
 	
-	public JenaBenchmarkConfig(final BenchmarkConfigBase bcb, final boolean inferencing) {
-		super(bcb, inferencing);
+	public JenaBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+		super(configBase, inferencing);
 	}
 	
 	@Override

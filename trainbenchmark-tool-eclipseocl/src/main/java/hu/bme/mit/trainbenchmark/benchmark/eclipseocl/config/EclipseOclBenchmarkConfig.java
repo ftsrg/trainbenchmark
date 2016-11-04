@@ -12,16 +12,13 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config;
 
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class EclipseOclBenchmarkConfig extends BenchmarkConfig {
 
-	protected EclipseOclBenchmarkConfig() {
-	}
-	
-	public EclipseOclBenchmarkConfig(final BenchmarkConfigBase bcb) {
-		super(bcb);
+	public EclipseOclBenchmarkConfig(final BenchmarkConfigBase configBase) {
+		super(configBase);
 	}
 	
 	@Override
