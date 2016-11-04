@@ -17,6 +17,67 @@ import hu.bme.mit.trainbenchmark.railway.Sensor;
 
 public class EmfConnectedSegmentsMatch extends EmfMatch implements ConnectedSegmentsMatch {
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((segment1 == null) ? 0 : segment1.hashCode());
+		result = prime * result + ((segment2 == null) ? 0 : segment2.hashCode());
+		result = prime * result + ((segment3 == null) ? 0 : segment3.hashCode());
+		result = prime * result + ((segment4 == null) ? 0 : segment4.hashCode());
+		result = prime * result + ((segment5 == null) ? 0 : segment5.hashCode());
+		result = prime * result + ((segment6 == null) ? 0 : segment6.hashCode());
+		result = prime * result + ((sensor == null) ? 0 : sensor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final EmfConnectedSegmentsMatch other = (EmfConnectedSegmentsMatch) obj;
+		if (segment1 == null) {
+			if (other.segment1 != null)
+				return false;
+		} else if (!segment1.equals(other.segment1))
+			return false;
+		if (segment2 == null) {
+			if (other.segment2 != null)
+				return false;
+		} else if (!segment2.equals(other.segment2))
+			return false;
+		if (segment3 == null) {
+			if (other.segment3 != null)
+				return false;
+		} else if (!segment3.equals(other.segment3))
+			return false;
+		if (segment4 == null) {
+			if (other.segment4 != null)
+				return false;
+		} else if (!segment4.equals(other.segment4))
+			return false;
+		if (segment5 == null) {
+			if (other.segment5 != null)
+				return false;
+		} else if (!segment5.equals(other.segment5))
+			return false;
+		if (segment6 == null) {
+			if (other.segment6 != null)
+				return false;
+		} else if (!segment6.equals(other.segment6))
+			return false;
+		if (sensor == null) {
+			if (other.sensor != null)
+				return false;
+		} else if (!sensor.equals(other.sensor))
+			return false;
+		return true;
+	}
+
 	protected final Sensor sensor;
 	protected final Segment segment1;
 	protected final Segment segment2;
