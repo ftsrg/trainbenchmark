@@ -23,7 +23,7 @@ public class Neo4jGraphGeneratorTest extends GeneratorTest {
 
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		final Neo4jGraphGeneratorConfig gc = new Neo4jGraphGeneratorConfig(gcb, executionConfig);
+		final Neo4jGraphGeneratorConfig gc = new Neo4jGraphGeneratorConfig(gcb);
 		final Neo4jGraphSerializer serializer = new Neo4jGraphSerializer(gc);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();

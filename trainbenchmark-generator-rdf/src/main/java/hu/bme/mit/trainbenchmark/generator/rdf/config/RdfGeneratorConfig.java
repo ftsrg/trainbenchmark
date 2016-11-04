@@ -12,7 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf.config;
 
-import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
@@ -22,9 +21,9 @@ public class RdfGeneratorConfig extends GeneratorConfig {
 	protected boolean inferred;
 	protected RdfFormat format;
 
-	public RdfGeneratorConfig(final GeneratorConfigBase configBase, final ExecutionConfig executionConfig,
+	public RdfGeneratorConfig(final GeneratorConfigBase configBase,
 			final boolean inferred, final RdfFormat format) {
-		super(configBase, executionConfig);
+		super(configBase);
 		this.inferred = inferred;
 		this.format = format;
 	}

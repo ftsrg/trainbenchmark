@@ -1,12 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfig;
-import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public abstract class BenchmarkConfig extends AbstractConfig<BenchmarkConfigBase> {
 
-	public BenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig) {
-		super(configBase, executionConfig);
+	public BenchmarkConfig(final BenchmarkConfigBase configBase) {
+		super(configBase);
 	}
 
 	/**

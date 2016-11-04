@@ -39,7 +39,7 @@ public class IngraphRouteSensorTest extends RouteSensorTest {
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
-		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfig(bcb, executionConfig, messageSize, variant, null);
+		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfig(bcb, messageSize, variant, null);
 		final IngraphBenchmarkScenario scenario = IngraphBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

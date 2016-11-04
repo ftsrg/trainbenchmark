@@ -14,13 +14,11 @@ package hu.bme.mit.trainbenchmark.benchmark.blazegraph.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
 
-	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
-			final boolean inferencing) {
-		super(configBase, executionConfig, inferencing);
+	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+		super(configBase, inferencing);
 	}
 
 	@Override

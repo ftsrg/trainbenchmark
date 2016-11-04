@@ -12,7 +12,7 @@ public class RdfWithoutInfererredGeneratorTest extends GeneratorTest {
 	
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		final RdfGeneratorConfig gc = new RdfGeneratorConfig(gcb, executionConfig, false, RdfFormat.TURTLE);
+		final RdfGeneratorConfig gc = new RdfGeneratorConfig(gcb, false, RdfFormat.TURTLE);
 		final RdfSerializer serializer = new RdfSerializer(gc);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();
