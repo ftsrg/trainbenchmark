@@ -94,16 +94,16 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 	}
 
 	public void compact() throws IOException, InterruptedException {
-		System.out.println("Stopping server");
+		log("Stopping server");
 		MySqlProcess.stopServer();
 
-		System.out.println("Cleaning data");
+		log("Cleaning data");
 		MySqlProcess.cleanServer();
 
-		System.out.println("Starting server");
+		log("Starting server");
 		MySqlProcess.startServer();
 
-		System.out.println("Loading the raw model");
+		log("Loading the raw model");
 		MySqlProcess.runShell(String.format("mysql -u %s < %s", SqlConstants.USER, sqlRawPath));
 
 		final String mysqlDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-mysql.sql";
@@ -113,6 +113,10 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		final String sqliteDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-sqlite.sql";
 		final String sqliteDump = gc.getConfigBase().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mysqlDumpPath + " > " + sqliteDumpPath;
 		MySqlProcess.runShell(sqliteDump);
+	}
+
+	protected void log(final String message) {
+		//System.out.println(message);
 	}
 
 	@Override

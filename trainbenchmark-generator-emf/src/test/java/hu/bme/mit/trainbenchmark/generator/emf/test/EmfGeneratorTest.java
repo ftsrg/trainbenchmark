@@ -11,7 +11,7 @@ public class EmfGeneratorTest extends GeneratorTest {
 	
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		final EmfGeneratorConfig gc = new EmfGeneratorConfig(gcb, executionConfig);
+		final EmfGeneratorConfig gc = new EmfGeneratorConfig(gcb);
 		final EmfSerializer serializer = new EmfSerializer(gc);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();

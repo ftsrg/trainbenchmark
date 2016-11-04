@@ -10,7 +10,7 @@ public class SqlGeneratorTest extends GeneratorTest {
 
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		final SqlGeneratorConfig gc = new SqlGeneratorConfig(gcb, executionConfig);
+		final SqlGeneratorConfig gc = new SqlGeneratorConfig(gcb);
 		final SqlSerializer serializer = new SqlSerializer(gc);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();

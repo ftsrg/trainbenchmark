@@ -12,7 +12,7 @@ public class TinkerGraphGeneratorTest extends GeneratorTest {
 
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		final TinkerGraphGeneratorConfig gc = new TinkerGraphGeneratorConfig(gcb, executionConfig, TinkerGraphFormat.GRAPHML);
+		final TinkerGraphGeneratorConfig gc = new TinkerGraphGeneratorConfig(gcb, TinkerGraphFormat.GRAPHML);
 		final TinkerGraphSerializer serializer = new TinkerGraphSerializer(gc);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 		generator.generateModel();

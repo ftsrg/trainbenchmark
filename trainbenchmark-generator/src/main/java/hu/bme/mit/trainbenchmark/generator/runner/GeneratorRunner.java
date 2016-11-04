@@ -6,11 +6,12 @@ import java.io.IOException;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class GeneratorRunner {
 
-	public static int run(final GeneratorConfig gc)
+	public static int run(final GeneratorConfig gc, final ExecutionConfig ec)
 			throws IOException, InterruptedException {
 		final File configFile = File.createTempFile("trainbenchmark-generator-", ".conf");
 		final String configPath = configFile.getAbsolutePath();
@@ -19,7 +20,7 @@ public class GeneratorRunner {
 		final String projectName = String.format("trainbenchmark-generator-%s", gc.getProjectName());
 		final String jarPath = String.format("../%s/build/libs/%s-1.0.0-SNAPSHOT-fat.jar", projectName, projectName);
 		final String javaCommand = String.format("java -Xms%s -Xmx%s -server -jar %s %s",
-				gc.getExecutionConfig().getXms(), gc.getExecutionConfig().getXmx(), jarPath, configPath);
+				ec.getXms(), ec.getXmx(), jarPath, configPath);
 		
 		final CommandLine cmdLine = CommandLine.parse(javaCommand);
 		final DefaultExecutor executor = new DefaultExecutor();

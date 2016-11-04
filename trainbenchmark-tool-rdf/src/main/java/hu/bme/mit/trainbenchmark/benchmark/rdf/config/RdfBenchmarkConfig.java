@@ -14,15 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
-import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public abstract class RdfBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
 
-	public RdfBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
-			final boolean inferencing) {
-		super(configBase, executionConfig);
+	public RdfBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+		super(configBase);
 		this.inferencing = inferencing;
 	}
 

@@ -39,7 +39,7 @@ public class IqdCoreSemaphoreNeighborTest extends SemaphoreNeighborTest {
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
-		final IqdCoreBenchmarkConfig bc = new IqdCoreBenchmarkConfig(bcb, executionConfig, messageSize, variant, null);
+		final IqdCoreBenchmarkConfig bc = new IqdCoreBenchmarkConfig(bcb, messageSize, variant, null);
 		final IqdCoreBenchmarkScenario scenario = IqdCoreBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

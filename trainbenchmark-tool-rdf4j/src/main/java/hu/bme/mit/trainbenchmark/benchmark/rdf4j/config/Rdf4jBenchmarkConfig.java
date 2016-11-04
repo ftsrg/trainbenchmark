@@ -14,15 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class Rdf4jBenchmarkConfig extends RdfBenchmarkConfig {
-	
-	public Rdf4jBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
-			final boolean inferencing) {
-		super(configBase, executionConfig, inferencing);
+
+	public Rdf4jBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+		super(configBase, inferencing);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "RDF4J" + getToolNamePostfix();
@@ -32,5 +30,5 @@ public class Rdf4jBenchmarkConfig extends RdfBenchmarkConfig {
 	public String getProjectName() {
 		return "rdf4j";
 	}
-	
+
 }

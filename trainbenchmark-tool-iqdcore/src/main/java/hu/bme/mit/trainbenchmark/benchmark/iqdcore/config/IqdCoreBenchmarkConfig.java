@@ -2,7 +2,6 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
-import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class IqdCoreBenchmarkConfig extends BenchmarkConfig {
 
@@ -10,9 +9,9 @@ public class IqdCoreBenchmarkConfig extends BenchmarkConfig {
 	protected String queryVariant;
 	protected String memoryMeasurementPath;
 
-	public IqdCoreBenchmarkConfig(final BenchmarkConfigBase configBase, final ExecutionConfig executionConfig,
+	public IqdCoreBenchmarkConfig(final BenchmarkConfigBase configBase,
 			final int messageSize, final String queryVariant, final String memoryMeasurementPath) {
-		super(configBase, executionConfig);
+		super(configBase);
 		this.messageSize = messageSize;
 		this.queryVariant = queryVariant;
 		this.memoryMeasurementPath = memoryMeasurementPath;
