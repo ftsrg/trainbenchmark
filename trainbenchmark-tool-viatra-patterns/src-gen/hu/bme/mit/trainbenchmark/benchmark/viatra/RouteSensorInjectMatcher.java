@@ -32,7 +32,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * <code><pre>
  * pattern routeSensorInject(route, sensor)
  * {
- * 	Route.gathers(route, sensor);
+ * 	Route.requires(route, sensor);
  * }
  * </pre></code>
  * 

@@ -40,9 +40,9 @@ public class SesameTransformationInjectRouteSensor<TSesameDriver extends SesameD
 		final ValueFactory vf = connection.getValueFactory();
 		
 		final List<Statement> statementsToRemove = new ArrayList<>(matches.size());
-		final URI gathers = vf.createURI(BASE_PREFIX + ModelConstants.GATHERS);				
+		final URI requires = vf.createURI(BASE_PREFIX + ModelConstants.REQUIRES);				
 		for (final SesameRouteSensorInjectMatch m : matches) {
-			final Statement statement = vf.createStatement(m.getRoute(), gathers, m.getSensor());
+			final Statement statement = vf.createStatement(m.getRoute(), requires, m.getSensor());
 			statementsToRemove.add(statement);
 		}
 		connection.remove(statementsToRemove);

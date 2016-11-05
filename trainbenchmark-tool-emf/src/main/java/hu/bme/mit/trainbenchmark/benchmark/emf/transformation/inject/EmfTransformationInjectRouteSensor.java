@@ -28,7 +28,7 @@ public class EmfTransformationInjectRouteSensor<TDriver extends EmfDriver, TRout
 	@Override
 	public void activate(final Collection<TRouteSensorInjectMatch> matches) throws IOException {
 		for (final TRouteSensorInjectMatch match : matches) {
-			match.getRoute().getGathers().remove(match.getSensor());
+			match.getRoute().getRequires().remove(match.getSensor());
 		}
 	}
 

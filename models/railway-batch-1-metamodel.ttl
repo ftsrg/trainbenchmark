@@ -374,7 +374,7 @@
 
 :_5 :monitoredBy :_6 .
 
-:_3 :gathers :_6 .
+:_3 :requires :_6 .
 
 :_7 a :Segment ;
 	:length "335"^^xsd:int .
@@ -419,7 +419,7 @@
 
 :_5 :monitoredBy :_12 .
 
-:_3 :gathers :_12 .
+:_3 :requires :_12 .
 
 :_13 a :Segment ;
 	:length "137"^^xsd:int .
@@ -462,7 +462,7 @@
 
 :_5 :monitoredBy :_18 .
 
-:_3 :gathers :_18 .
+:_3 :requires :_18 .
 
 :_19 a :Segment ;
 	:length "968"^^xsd:int .
@@ -505,7 +505,7 @@
 
 :_5 :monitoredBy :_24 .
 
-:_3 :gathers :_24 .
+:_3 :requires :_24 .
 
 :_25 a :Segment ;
 	:length "212"^^xsd:int .
@@ -548,7 +548,7 @@
 
 :_5 :monitoredBy :_30 .
 
-:_3 :gathers :_30 .
+:_3 :requires :_30 .
 
 :_31 a :Segment ;
 	:length "542"^^xsd:int .
@@ -591,7 +591,7 @@
 
 :_5 :monitoredBy :_36 .
 
-:_3 :gathers :_36 .
+:_3 :requires :_36 .
 
 :_37 a :Segment ;
 	:length "429"^^xsd:int .
@@ -634,7 +634,7 @@
 
 :_5 :monitoredBy :_42 .
 
-:_3 :gathers :_42 .
+:_3 :requires :_42 .
 
 :_43 a :Segment ;
 	:length "853"^^xsd:int .
@@ -769,7 +769,7 @@
 
 :_52 :monitoredBy :_53 .
 
-:_50 :gathers :_53 .
+:_50 :requires :_53 .
 
 :_54 a :Segment ;
 	:length "232"^^xsd:int .
@@ -814,7 +814,7 @@
 
 :_52 :monitoredBy :_59 .
 
-:_50 :gathers :_59 .
+:_50 :requires :_59 .
 
 :_60 a :Segment ;
 	:length "975"^^xsd:int .
@@ -857,7 +857,7 @@
 
 :_52 :monitoredBy :_65 .
 
-:_50 :gathers :_65 .
+:_50 :requires :_65 .
 
 :_66 a :Segment ;
 	:length "246"^^xsd:int .
@@ -900,7 +900,7 @@
 
 :_52 :monitoredBy :_71 .
 
-:_50 :gathers :_71 .
+:_50 :requires :_71 .
 
 :_72 a :Segment ;
 	:length "301"^^xsd:int .
@@ -943,7 +943,7 @@
 
 :_52 :monitoredBy :_77 .
 
-:_50 :gathers :_77 .
+:_50 :requires :_77 .
 
 :_78 a :Segment ;
 	:length "227"^^xsd:int .
@@ -986,7 +986,7 @@
 
 :_52 :monitoredBy :_83 .
 
-:_50 :gathers :_83 .
+:_50 :requires :_83 .
 
 :_84 a :Segment ;
 	:length "824"^^xsd:int .
@@ -1029,7 +1029,7 @@
 
 :_52 :monitoredBy :_89 .
 
-:_50 :gathers :_89 .
+:_50 :requires :_89 .
 
 :_90 a :Segment ;
 	:length "921"^^xsd:int .
@@ -1072,7 +1072,7 @@
 
 :_52 :monitoredBy :_95 .
 
-:_50 :gathers :_95 .
+:_50 :requires :_95 .
 
 :_96 a :Segment ;
 	:length "257"^^xsd:int .
@@ -1127,7 +1127,7 @@
 
 :_102 :monitoredBy :_103 .
 
-:_50 :gathers :_103 .
+:_50 :requires :_103 .
 
 :_104 a :Segment ;
 	:length "386"^^xsd:int .
@@ -1170,7 +1170,7 @@
 
 :_102 :monitoredBy :_109 .
 
-:_50 :gathers :_109 .
+:_50 :requires :_109 .
 
 :_110 a :Segment ;
 	:length "392"^^xsd:int .
@@ -1213,7 +1213,7 @@
 
 :_102 :monitoredBy :_115 .
 
-:_50 :gathers :_115 .
+:_50 :requires :_115 .
 
 :_116 a :Segment ;
 	:length "186"^^xsd:int .
@@ -1256,7 +1256,7 @@
 
 :_102 :monitoredBy :_121 .
 
-:_50 :gathers :_121 .
+:_50 :requires :_121 .
 
 :_122 a :Segment ;
 	:length "250"^^xsd:int .
@@ -1299,7 +1299,7 @@
 
 :_102 :monitoredBy :_127 .
 
-:_50 :gathers :_127 .
+:_50 :requires :_127 .
 
 :_128 a :Segment ;
 	:length "718"^^xsd:int .
@@ -1342,7 +1342,7 @@
 
 :_102 :monitoredBy :_133 .
 
-:_50 :gathers :_133 .
+:_50 :requires :_133 .
 
 :_134 a :Segment ;
 	:length "870"^^xsd:int .
@@ -1385,7 +1385,7 @@
 
 :_102 :monitoredBy :_139 .
 
-:_50 :gathers :_139 .
+:_50 :requires :_139 .
 
 :_140 a :Segment ;
 	:length "465"^^xsd:int .
@@ -1428,7 +1428,7 @@
 
 :_102 :monitoredBy :_145 .
 
-:_50 :gathers :_145 .
+:_50 :requires :_145 .
 
 :_146 a :Segment ;
 	:length "167"^^xsd:int .
@@ -1471,7 +1471,7 @@
 
 :_102 :monitoredBy :_151 .
 
-:_50 :gathers :_151 .
+:_50 :requires :_151 .
 
 :_152 a :Segment ;
 	:length "36"^^xsd:int .
@@ -1710,7 +1710,7 @@
 
 :_161 :monitoredBy :_162 .
 
-:_159 :gathers :_162 .
+:_159 :requires :_162 .
 
 :_163 a :Segment ;
 	:length "369"^^xsd:int .
@@ -1755,7 +1755,7 @@
 
 :_161 :monitoredBy :_168 .
 
-:_159 :gathers :_168 .
+:_159 :requires :_168 .
 
 :_169 a :Segment ;
 	:length "70"^^xsd:int .
@@ -1798,7 +1798,7 @@
 
 :_161 :monitoredBy :_174 .
 
-:_159 :gathers :_174 .
+:_159 :requires :_174 .
 
 :_175 a :Segment ;
 	:length "94"^^xsd:int .
@@ -1841,7 +1841,7 @@
 
 :_161 :monitoredBy :_180 .
 
-:_159 :gathers :_180 .
+:_159 :requires :_180 .
 
 :_181 a :Segment ;
 	:length "157"^^xsd:int .
@@ -1896,7 +1896,7 @@
 
 :_187 :monitoredBy :_188 .
 
-:_159 :gathers :_188 .
+:_159 :requires :_188 .
 
 :_189 a :Segment ;
 	:length "263"^^xsd:int .
@@ -1939,7 +1939,7 @@
 
 :_187 :monitoredBy :_194 .
 
-:_159 :gathers :_194 .
+:_159 :requires :_194 .
 
 :_195 a :Segment ;
 	:length "546"^^xsd:int .
@@ -1982,7 +1982,7 @@
 
 :_187 :monitoredBy :_200 .
 
-:_159 :gathers :_200 .
+:_159 :requires :_200 .
 
 :_201 a :Segment ;
 	:length "781"^^xsd:int .
@@ -2025,7 +2025,7 @@
 
 :_187 :monitoredBy :_206 .
 
-:_159 :gathers :_206 .
+:_159 :requires :_206 .
 
 :_207 a :Segment ;
 	:length "847"^^xsd:int .
@@ -2068,7 +2068,7 @@
 
 :_187 :monitoredBy :_212 .
 
-:_159 :gathers :_212 .
+:_159 :requires :_212 .
 
 :_213 a :Segment ;
 	:length "423"^^xsd:int .
@@ -2123,7 +2123,7 @@
 
 :_219 :monitoredBy :_220 .
 
-:_159 :gathers :_220 .
+:_159 :requires :_220 .
 
 :_221 a :Segment ;
 	:length "176"^^xsd:int .
@@ -2166,7 +2166,7 @@
 
 :_219 :monitoredBy :_226 .
 
-:_159 :gathers :_226 .
+:_159 :requires :_226 .
 
 :_227 a :Segment ;
 	:length "571"^^xsd:int .
@@ -2209,7 +2209,7 @@
 
 :_219 :monitoredBy :_232 .
 
-:_159 :gathers :_232 .
+:_159 :requires :_232 .
 
 :_233 a :Segment ;
 	:length "686"^^xsd:int .
@@ -2264,7 +2264,7 @@
 
 :_239 :monitoredBy :_240 .
 
-:_159 :gathers :_240 .
+:_159 :requires :_240 .
 
 :_241 a :Segment ;
 	:length "943"^^xsd:int .
@@ -2307,7 +2307,7 @@
 
 :_239 :monitoredBy :_246 .
 
-:_159 :gathers :_246 .
+:_159 :requires :_246 .
 
 :_247 a :Segment ;
 	:length "29"^^xsd:int .
@@ -2350,7 +2350,7 @@
 
 :_239 :monitoredBy :_252 .
 
-:_159 :gathers :_252 .
+:_159 :requires :_252 .
 
 :_253 a :Segment ;
 	:length "53"^^xsd:int .
@@ -2393,7 +2393,7 @@
 
 :_239 :monitoredBy :_258 .
 
-:_159 :gathers :_258 .
+:_159 :requires :_258 .
 
 :_259 a :Segment ;
 	:length "51"^^xsd:int .
@@ -2436,7 +2436,7 @@
 
 :_239 :monitoredBy :_264 .
 
-:_159 :gathers :_264 .
+:_159 :requires :_264 .
 
 :_265 a :Segment ;
 	:length "596"^^xsd:int .
@@ -2479,7 +2479,7 @@
 
 :_239 :monitoredBy :_270 .
 
-:_159 :gathers :_270 .
+:_159 :requires :_270 .
 
 :_271 a :Segment ;
 	:length "836"^^xsd:int .
@@ -2522,7 +2522,7 @@
 
 :_239 :monitoredBy :_276 .
 
-:_159 :gathers :_276 .
+:_159 :requires :_276 .
 
 :_277 a :Segment ;
 	:length "997"^^xsd:int .
@@ -2565,7 +2565,7 @@
 
 :_239 :monitoredBy :_282 .
 
-:_159 :gathers :_282 .
+:_159 :requires :_282 .
 
 :_283 a :Segment ;
 	:length "915"^^xsd:int .
@@ -2838,7 +2838,7 @@
 
 :_292 :monitoredBy :_293 .
 
-:_290 :gathers :_293 .
+:_290 :requires :_293 .
 
 :_294 a :Segment ;
 	:length "236"^^xsd:int .
@@ -2883,7 +2883,7 @@
 
 :_292 :monitoredBy :_299 .
 
-:_290 :gathers :_299 .
+:_290 :requires :_299 .
 
 :_300 a :Segment ;
 	:length "236"^^xsd:int .
@@ -2926,7 +2926,7 @@
 
 :_292 :monitoredBy :_305 .
 
-:_290 :gathers :_305 .
+:_290 :requires :_305 .
 
 :_306 a :Segment ;
 	:length "118"^^xsd:int .
@@ -2969,7 +2969,7 @@
 
 :_292 :monitoredBy :_311 .
 
-:_290 :gathers :_311 .
+:_290 :requires :_311 .
 
 :_312 a :Segment ;
 	:length "827"^^xsd:int .
@@ -3012,7 +3012,7 @@
 
 :_292 :monitoredBy :_317 .
 
-:_290 :gathers :_317 .
+:_290 :requires :_317 .
 
 :_318 a :Segment ;
 	:length "587"^^xsd:int .
@@ -3055,7 +3055,7 @@
 
 :_292 :monitoredBy :_323 .
 
-:_290 :gathers :_323 .
+:_290 :requires :_323 .
 
 :_324 a :Segment ;
 	:length "611"^^xsd:int .
@@ -3098,7 +3098,7 @@
 
 :_292 :monitoredBy :_329 .
 
-:_290 :gathers :_329 .
+:_290 :requires :_329 .
 
 :_330 a :Segment ;
 	:length "307"^^xsd:int .
@@ -3141,7 +3141,7 @@
 
 :_292 :monitoredBy :_335 .
 
-:_290 :gathers :_335 .
+:_290 :requires :_335 .
 
 :_336 a :Segment ;
 	:length "62"^^xsd:int .
@@ -3184,7 +3184,7 @@
 
 :_292 :monitoredBy :_341 .
 
-:_290 :gathers :_341 .
+:_290 :requires :_341 .
 
 :_342 a :Segment ;
 	:length "795"^^xsd:int .
@@ -3338,7 +3338,7 @@
 
 :_350 :monitoredBy :_351 .
 
-:_348 :gathers :_351 .
+:_348 :requires :_351 .
 
 :_352 a :Segment ;
 	:length "557"^^xsd:int .
@@ -3383,7 +3383,7 @@
 
 :_350 :monitoredBy :_357 .
 
-:_348 :gathers :_357 .
+:_348 :requires :_357 .
 
 :_358 a :Segment ;
 	:length "5"^^xsd:int .
@@ -3426,7 +3426,7 @@
 
 :_350 :monitoredBy :_363 .
 
-:_348 :gathers :_363 .
+:_348 :requires :_363 .
 
 :_364 a :Segment ;
 	:length "726"^^xsd:int .
@@ -3469,7 +3469,7 @@
 
 :_350 :monitoredBy :_369 .
 
-:_348 :gathers :_369 .
+:_348 :requires :_369 .
 
 :_370 a :Segment ;
 	:length "531"^^xsd:int .
@@ -3512,7 +3512,7 @@
 
 :_350 :monitoredBy :_375 .
 
-:_348 :gathers :_375 .
+:_348 :requires :_375 .
 
 :_376 a :Segment ;
 	:length "252"^^xsd:int .
@@ -3555,7 +3555,7 @@
 
 :_350 :monitoredBy :_381 .
 
-:_348 :gathers :_381 .
+:_348 :requires :_381 .
 
 :_382 a :Segment ;
 	:length "387"^^xsd:int .
@@ -3598,7 +3598,7 @@
 
 :_350 :monitoredBy :_387 .
 
-:_348 :gathers :_387 .
+:_348 :requires :_387 .
 
 :_388 a :Segment ;
 	:length "686"^^xsd:int .
@@ -3641,7 +3641,7 @@
 
 :_350 :monitoredBy :_393 .
 
-:_348 :gathers :_393 .
+:_348 :requires :_393 .
 
 :_394 a :Segment ;
 	:length "501"^^xsd:int .
@@ -3684,7 +3684,7 @@
 
 :_350 :monitoredBy :_399 .
 
-:_348 :gathers :_399 .
+:_348 :requires :_399 .
 
 :_400 a :Segment ;
 	:length "585"^^xsd:int .
@@ -3739,7 +3739,7 @@
 
 :_406 :monitoredBy :_407 .
 
-:_348 :gathers :_407 .
+:_348 :requires :_407 .
 
 :_408 a :Segment ;
 	:length "301"^^xsd:int .
@@ -3782,7 +3782,7 @@
 
 :_406 :monitoredBy :_413 .
 
-:_348 :gathers :_413 .
+:_348 :requires :_413 .
 
 :_414 a :Segment ;
 	:length "710"^^xsd:int .
@@ -3825,7 +3825,7 @@
 
 :_406 :monitoredBy :_419 .
 
-:_348 :gathers :_419 .
+:_348 :requires :_419 .
 
 :_420 a :Segment ;
 	:length "409"^^xsd:int .
@@ -3868,7 +3868,7 @@
 
 :_406 :monitoredBy :_425 .
 
-:_348 :gathers :_425 .
+:_348 :requires :_425 .
 
 :_426 a :Segment ;
 	:length "851"^^xsd:int .
@@ -3911,7 +3911,7 @@
 
 :_406 :monitoredBy :_431 .
 
-:_348 :gathers :_431 .
+:_348 :requires :_431 .
 
 :_432 a :Segment ;
 	:length "113"^^xsd:int .
@@ -3954,7 +3954,7 @@
 
 :_406 :monitoredBy :_437 .
 
-:_348 :gathers :_437 .
+:_348 :requires :_437 .
 
 :_438 a :Segment ;
 	:length "290"^^xsd:int .
@@ -3997,7 +3997,7 @@
 
 :_406 :monitoredBy :_443 .
 
-:_348 :gathers :_443 .
+:_348 :requires :_443 .
 
 :_444 a :Segment ;
 	:length "598"^^xsd:int .
@@ -4040,7 +4040,7 @@
 
 :_406 :monitoredBy :_449 .
 
-:_348 :gathers :_449 .
+:_348 :requires :_449 .
 
 :_450 a :Segment ;
 	:length "421"^^xsd:int .
@@ -4083,7 +4083,7 @@
 
 :_406 :monitoredBy :_455 .
 
-:_348 :gathers :_455 .
+:_348 :requires :_455 .
 
 :_456 a :Segment ;
 	:length "542"^^xsd:int .
@@ -4138,7 +4138,7 @@
 
 :_462 :monitoredBy :_463 .
 
-:_348 :gathers :_463 .
+:_348 :requires :_463 .
 
 :_464 a :Segment ;
 	:length "524"^^xsd:int .
@@ -4193,7 +4193,7 @@
 
 :_470 :monitoredBy :_471 .
 
-:_348 :gathers :_471 .
+:_348 :requires :_471 .
 
 :_472 a :Segment ;
 	:length "152"^^xsd:int .
@@ -4236,7 +4236,7 @@
 
 :_470 :monitoredBy :_477 .
 
-:_348 :gathers :_477 .
+:_348 :requires :_477 .
 
 :_478 a :Segment ;
 	:length "948"^^xsd:int .
@@ -4279,7 +4279,7 @@
 
 :_470 :monitoredBy :_483 .
 
-:_348 :gathers :_483 .
+:_348 :requires :_483 .
 
 :_484 a :Segment ;
 	:length "606"^^xsd:int .
@@ -4322,7 +4322,7 @@
 
 :_470 :monitoredBy :_489 .
 
-:_348 :gathers :_489 .
+:_348 :requires :_489 .
 
 :_490 a :Segment ;
 	:length "711"^^xsd:int .
@@ -4365,7 +4365,7 @@
 
 :_470 :monitoredBy :_495 .
 
-:_348 :gathers :_495 .
+:_348 :requires :_495 .
 
 :_496 a :Segment ;
 	:length "28"^^xsd:int .
@@ -4408,7 +4408,7 @@
 
 :_470 :monitoredBy :_501 .
 
-:_348 :gathers :_501 .
+:_348 :requires :_501 .
 
 :_502 a :Segment ;
 	:length "429"^^xsd:int .
@@ -4451,7 +4451,7 @@
 
 :_470 :monitoredBy :_507 .
 
-:_348 :gathers :_507 .
+:_348 :requires :_507 .
 
 :_508 a :Segment ;
 	:length "706"^^xsd:int .
@@ -4494,7 +4494,7 @@
 
 :_470 :monitoredBy :_513 .
 
-:_348 :gathers :_513 .
+:_348 :requires :_513 .
 
 :_514 a :Segment ;
 	:length "630"^^xsd:int .
@@ -4537,7 +4537,7 @@
 
 :_470 :monitoredBy :_519 .
 
-:_348 :gathers :_519 .
+:_348 :requires :_519 .
 
 :_520 a :Segment ;
 	:length "798"^^xsd:int .
@@ -4592,7 +4592,7 @@
 
 :_526 :monitoredBy :_527 .
 
-:_348 :gathers :_527 .
+:_348 :requires :_527 .
 
 :_528 a :Segment ;
 	:length "868"^^xsd:int .
@@ -4635,7 +4635,7 @@
 
 :_526 :monitoredBy :_533 .
 
-:_348 :gathers :_533 .
+:_348 :requires :_533 .
 
 :_534 a :Segment ;
 	:length "665"^^xsd:int .
@@ -4678,7 +4678,7 @@
 
 :_526 :monitoredBy :_539 .
 
-:_348 :gathers :_539 .
+:_348 :requires :_539 .
 
 :_540 a :Segment ;
 	:length "417"^^xsd:int .
@@ -4721,7 +4721,7 @@
 
 :_526 :monitoredBy :_545 .
 
-:_348 :gathers :_545 .
+:_348 :requires :_545 .
 
 :_546 a :Segment ;
 	:length "135"^^xsd:int .
@@ -4764,7 +4764,7 @@
 
 :_526 :monitoredBy :_551 .
 
-:_348 :gathers :_551 .
+:_348 :requires :_551 .
 
 :_552 a :Segment ;
 	:length "744"^^xsd:int .
@@ -4807,7 +4807,7 @@
 
 :_526 :monitoredBy :_557 .
 
-:_348 :gathers :_557 .
+:_348 :requires :_557 .
 
 :_558 a :Segment ;
 	:length "551"^^xsd:int .
@@ -4850,7 +4850,7 @@
 
 :_526 :monitoredBy :_563 .
 
-:_348 :gathers :_563 .
+:_348 :requires :_563 .
 
 :_564 a :Segment ;
 	:length "77"^^xsd:int .
@@ -4893,7 +4893,7 @@
 
 :_526 :monitoredBy :_569 .
 
-:_348 :gathers :_569 .
+:_348 :requires :_569 .
 
 :_570 a :Segment ;
 	:length "686"^^xsd:int .
@@ -4936,7 +4936,7 @@
 
 :_526 :monitoredBy :_575 .
 
-:_348 :gathers :_575 .
+:_348 :requires :_575 .
 
 :_576 a :Segment ;
 	:length "911"^^xsd:int .
@@ -4991,7 +4991,7 @@
 
 :_582 :monitoredBy :_583 .
 
-:_348 :gathers :_583 .
+:_348 :requires :_583 .
 
 :_584 a :Segment ;
 	:length "666"^^xsd:int .
@@ -5034,7 +5034,7 @@
 
 :_582 :monitoredBy :_589 .
 
-:_348 :gathers :_589 .
+:_348 :requires :_589 .
 
 :_590 a :Segment ;
 	:length "236"^^xsd:int .
@@ -5077,7 +5077,7 @@
 
 :_582 :monitoredBy :_595 .
 
-:_348 :gathers :_595 .
+:_348 :requires :_595 .
 
 :_596 a :Segment ;
 	:length "78"^^xsd:int .
@@ -5120,7 +5120,7 @@
 
 :_582 :monitoredBy :_601 .
 
-:_348 :gathers :_601 .
+:_348 :requires :_601 .
 
 :_602 a :Segment ;
 	:length "830"^^xsd:int .
@@ -5163,7 +5163,7 @@
 
 :_582 :monitoredBy :_607 .
 
-:_348 :gathers :_607 .
+:_348 :requires :_607 .
 
 :_608 a :Segment ;
 	:length "142"^^xsd:int .
@@ -5218,7 +5218,7 @@
 
 :_614 :monitoredBy :_615 .
 
-:_348 :gathers :_615 .
+:_348 :requires :_615 .
 
 :_616 a :Segment ;
 	:length "205"^^xsd:int .
@@ -5273,7 +5273,7 @@
 
 :_622 :monitoredBy :_623 .
 
-:_348 :gathers :_623 .
+:_348 :requires :_623 .
 
 :_624 a :Segment ;
 	:length "452"^^xsd:int .
@@ -5316,7 +5316,7 @@
 
 :_622 :monitoredBy :_629 .
 
-:_348 :gathers :_629 .
+:_348 :requires :_629 .
 
 :_630 a :Segment ;
 	:length "453"^^xsd:int .
@@ -5359,7 +5359,7 @@
 
 :_622 :monitoredBy :_635 .
 
-:_348 :gathers :_635 .
+:_348 :requires :_635 .
 
 :_636 a :Segment ;
 	:length "357"^^xsd:int .
@@ -5402,7 +5402,7 @@
 
 :_622 :monitoredBy :_641 .
 
-:_348 :gathers :_641 .
+:_348 :requires :_641 .
 
 :_642 a :Segment ;
 	:length "881"^^xsd:int .
@@ -5445,7 +5445,7 @@
 
 :_622 :monitoredBy :_647 .
 
-:_348 :gathers :_647 .
+:_348 :requires :_647 .
 
 :_648 a :Segment ;
 	:length "942"^^xsd:int .
@@ -5488,7 +5488,7 @@
 
 :_622 :monitoredBy :_653 .
 
-:_348 :gathers :_653 .
+:_348 :requires :_653 .
 
 :_654 a :Segment ;
 	:length "285"^^xsd:int .
@@ -5531,7 +5531,7 @@
 
 :_622 :monitoredBy :_659 .
 
-:_348 :gathers :_659 .
+:_348 :requires :_659 .
 
 :_660 a :Segment ;
 	:length "11"^^xsd:int .
@@ -5574,7 +5574,7 @@
 
 :_622 :monitoredBy :_665 .
 
-:_348 :gathers :_665 .
+:_348 :requires :_665 .
 
 :_666 a :Segment ;
 	:length "229"^^xsd:int .
@@ -5617,7 +5617,7 @@
 
 :_622 :monitoredBy :_671 .
 
-:_348 :gathers :_671 .
+:_348 :requires :_671 .
 
 :_672 a :Segment ;
 	:length "66"^^xsd:int .
@@ -5672,7 +5672,7 @@
 
 :_678 :monitoredBy :_679 .
 
-:_348 :gathers :_679 .
+:_348 :requires :_679 .
 
 :_680 a :Segment ;
 	:length "734"^^xsd:int .
@@ -5715,7 +5715,7 @@
 
 :_678 :monitoredBy :_685 .
 
-:_348 :gathers :_685 .
+:_348 :requires :_685 .
 
 :_686 a :Segment ;
 	:length "618"^^xsd:int .
@@ -5758,7 +5758,7 @@
 
 :_678 :monitoredBy :_691 .
 
-:_348 :gathers :_691 .
+:_348 :requires :_691 .
 
 :_692 a :Segment ;
 	:length "81"^^xsd:int .
@@ -5801,7 +5801,7 @@
 
 :_678 :monitoredBy :_697 .
 
-:_348 :gathers :_697 .
+:_348 :requires :_697 .
 
 :_698 a :Segment ;
 	:length "354"^^xsd:int .
@@ -5844,7 +5844,7 @@
 
 :_678 :monitoredBy :_703 .
 
-:_348 :gathers :_703 .
+:_348 :requires :_703 .
 
 :_704 a :Segment ;
 	:length "867"^^xsd:int .
@@ -5887,7 +5887,7 @@
 
 :_678 :monitoredBy :_709 .
 
-:_348 :gathers :_709 .
+:_348 :requires :_709 .
 
 :_710 a :Segment ;
 	:length "645"^^xsd:int .
@@ -5930,7 +5930,7 @@
 
 :_678 :monitoredBy :_715 .
 
-:_348 :gathers :_715 .
+:_348 :requires :_715 .
 
 :_716 a :Segment ;
 	:length "643"^^xsd:int .
@@ -5985,7 +5985,7 @@
 
 :_722 :monitoredBy :_723 .
 
-:_348 :gathers :_723 .
+:_348 :requires :_723 .
 
 :_724 a :Segment ;
 	:length "27"^^xsd:int .
@@ -6028,7 +6028,7 @@
 
 :_722 :monitoredBy :_729 .
 
-:_348 :gathers :_729 .
+:_348 :requires :_729 .
 
 :_730 a :Segment ;
 	:length "748"^^xsd:int .
@@ -6071,7 +6071,7 @@
 
 :_722 :monitoredBy :_735 .
 
-:_348 :gathers :_735 .
+:_348 :requires :_735 .
 
 :_736 a :Segment ;
 	:length "281"^^xsd:int .
@@ -6114,7 +6114,7 @@
 
 :_722 :monitoredBy :_741 .
 
-:_348 :gathers :_741 .
+:_348 :requires :_741 .
 
 :_742 a :Segment ;
 	:length "145"^^xsd:int .
@@ -6157,7 +6157,7 @@
 
 :_722 :monitoredBy :_747 .
 
-:_348 :gathers :_747 .
+:_348 :requires :_747 .
 
 :_748 a :Segment ;
 	:length "464"^^xsd:int .

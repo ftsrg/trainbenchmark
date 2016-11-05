@@ -38,7 +38,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 	SwitchPosition.target(swP, sw);
  * 	TrackElement.monitoredBy(sw, sensor);
  * 
- * 	neg find inverseGathers(sensor, route);
+ * 	neg find required(sensor, route);
  * }
  * </pre></code>
  * 

@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.iqdcore.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class IqdCoreTransformationInjectRouteSensor extends IqdCoreTransformatio
 		for (final IqdCoreRouteSensorInjectMatch match : matches) {
 			final Long route = match.getRoute();
 			final Long sensor = match.getSensor();
-			transaction.remove(route, GATHERS, sensor);
+			transaction.remove(route, REQUIRES, sensor);
 		}
 	}
 

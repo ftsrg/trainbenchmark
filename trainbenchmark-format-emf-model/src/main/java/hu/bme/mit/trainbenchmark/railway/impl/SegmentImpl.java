@@ -5,6 +5,7 @@ package hu.bme.mit.trainbenchmark.railway.impl;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Segment;
 import hu.bme.mit.trainbenchmark.railway.Semaphore;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

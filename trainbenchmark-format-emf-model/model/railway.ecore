@@ -25,7 +25,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="follows" upperBound="-1"
         eType="#//SwitchPosition" containment="true" eOpposite="#//SwitchPosition/route"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exit" lowerBound="1" eType="#//Semaphore"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="gathers" lowerBound="2"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requires" lowerBound="2"
         upperBound="-1" eType="#//Sensor"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="active" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>

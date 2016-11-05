@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS "Segment" (
 
 CREATE TABLE IF NOT EXISTS "Sensor" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "route" int, -- inverse of the "gathers" edge
+  "route" int, -- inverse of the "requires" edge
   "region" int NOT NULL, -- inverse of the "sensors" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;

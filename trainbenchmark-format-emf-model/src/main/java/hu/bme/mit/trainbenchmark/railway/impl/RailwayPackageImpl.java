@@ -299,7 +299,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoute_Gathers() {
+	public EReference getRoute_Requires() {
 		return (EReference)routeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -518,7 +518,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		createEReference(routeEClass, ROUTE__ENTRY);
 		createEReference(routeEClass, ROUTE__FOLLOWS);
 		createEReference(routeEClass, ROUTE__EXIT);
-		createEReference(routeEClass, ROUTE__GATHERS);
+		createEReference(routeEClass, ROUTE__REQUIRES);
 		createEAttribute(routeEClass, ROUTE__ACTIVE);
 
 		semaphoreEClass = createEClass(SEMAPHORE);
@@ -602,7 +602,7 @@ public class RailwayPackageImpl extends EPackageImpl implements RailwayPackage {
 		initEReference(getRoute_Entry(), this.getSemaphore(), null, "entry", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoute_Follows(), this.getSwitchPosition(), this.getSwitchPosition_Route(), "follows", null, 0, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoute_Exit(), this.getSemaphore(), null, "exit", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoute_Gathers(), this.getSensor(), null, "gathers", null, 2, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoute_Requires(), this.getSensor(), null, "requires", null, 2, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRoute_Active(), ecorePackage.getEBoolean(), "active", "false", 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semaphoreEClass, Semaphore.class, "Semaphore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

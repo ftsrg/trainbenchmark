@@ -33,7 +33,7 @@ public class EmfApiQueryRouteSensorInject<TDriver extends EmfDriver> extends Emf
 		final List<EmfRouteSensorInjectMatch> matches = new ArrayList<>();
 
 		for (final Route route : driver.getContainer().getRoutes()) {
-			for (final Sensor sensor : route.getGathers()) {
+			for (final Sensor sensor : route.getRequires()) {
 				matches.add(new EmfRouteSensorInjectMatch(route, sensor));				
 			}
 		}

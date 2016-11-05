@@ -39,9 +39,9 @@ public class Rdf4jTransformationInjectRouteSensor<TRdf4jDriver extends Rdf4jDriv
 		final ValueFactory vf = connection.getValueFactory();
 		
 		final List<Statement> statementsToRemove = new ArrayList<>(matches.size());
-		final IRI gathers = vf.createIRI(BASE_PREFIX + ModelConstants.GATHERS);				
+		final IRI requires = vf.createIRI(BASE_PREFIX + ModelConstants.REQUIRES);				
 		for (final Rdf4jRouteSensorInjectMatch m : matches) {
-			final Statement statement = vf.createStatement(m.getRoute(), gathers, m.getSensor());
+			final Statement statement = vf.createStatement(m.getRoute(), requires, m.getSensor());
 			statementsToRemove.add(statement);
 		}
 		connection.remove(statementsToRemove);

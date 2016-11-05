@@ -15,7 +15,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 
 	// edge labels
 	val followsLabel = createEdgeLabel => [name = "follows"; container = routeSensor]
-	val gathersLabel = createEdgeLabel => [name = "gathers"; container = routeSensor]
+	val requiresLabel = createEdgeLabel => [name = "requires"; container = routeSensor]
 	val monitoredByLabel = createEdgeLabel => [name = "monitoredBy"; container = routeSensor]
 	val targetLabel = createEdgeLabel => [name = "target"; container = routeSensor]
 
@@ -29,7 +29,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 	val target = createEdgeVariable => [name = "_e1"; edgeLabels.add(targetLabel); container = routeSensor]
 	val monitoredBy = createEdgeVariable => [name = "_e2"; edgeLabels.add(monitoredByLabel); container = routeSensor]
 	val follows = createEdgeVariable => [name = "_e3"; edgeLabels.add(followsLabel); container = routeSensor]
-	val gathers = createEdgeVariable => [name = "_e4"; edgeLabels.add(gathersLabel); container = routeSensor]
+	val requires = createEdgeVariable => [name = "_e4"; edgeLabels.add(requiresLabel); container = routeSensor]
 
 	// inputs
 	val getRoutes = createGetVerticesOperator => [vertexVariable = route; container = routeSensor]
@@ -66,7 +66,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 			direction = Direction.OUT
 			sourceVertexVariable = route
 			targetVertexVariable = sensor
-			edgeVariable = gathers
+			edgeVariable = requires
 			container = routeSensor
 		]
 
@@ -114,7 +114,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 			direction = Direction.OUT
 			sourceVertexVariable = route
 			targetVertexVariable = sensor
-			edgeVariable = gathers
+			edgeVariable = requires
 			container = routeSensor
 		]
 
@@ -154,7 +154,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 			direction = Direction.OUT
 			sourceVertexVariable = route
 			targetVertexVariable = sensor
-			edgeVariable = gathers
+			edgeVariable = requires
 			container = routeSensor
 		]
 		val expand4 = createExpandOperator => [

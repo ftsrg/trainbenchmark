@@ -3,7 +3,7 @@ package hu.bme.mit.trainbenchmark.generator.minimal;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REGION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
@@ -51,8 +51,8 @@ public class MinimalSemaphoreNeighborGenerator extends MinimalModelGenerator {
 		
 		serializer.createEdge(ModelConstants.SEMAPHORES, te1, semaphore);
 
-		serializer.createEdge(GATHERS, route1, sensor1);
-		serializer.createEdge(GATHERS, route2, sensor2);
+		serializer.createEdge(REQUIRES, route1, sensor1);
+		serializer.createEdge(REQUIRES, route2, sensor2);
 		serializer.createEdge(MONITORED_BY, te1, sensor1);
 		serializer.createEdge(MONITORED_BY, te2, sensor2);
 		serializer.createEdge(CONNECTS_TO, te1, te2);

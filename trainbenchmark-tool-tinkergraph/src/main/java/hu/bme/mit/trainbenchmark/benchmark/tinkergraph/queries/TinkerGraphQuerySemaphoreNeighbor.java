@@ -40,8 +40,8 @@ public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends Tinker
 			final Iterable<Vertex> semaphores = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.EXIT, Direction.OUT,
 					ModelConstants.SEMAPHORE);
 			for (final Vertex semaphore : semaphores) {
-				// (route1:Route)-[:gathers]->(sensor1:Sensor)
-				final Iterable<Vertex> sensor1s = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.GATHERS, Direction.OUT,
+				// (route1:Route)-[:requires]->(sensor1:Sensor)
+				final Iterable<Vertex> sensor1s = TinkerGraphUtil.getAdjacentNodes(route1, ModelConstants.REQUIRES, Direction.OUT,
 						ModelConstants.SENSOR);
 				for (final Vertex sensor1 : sensor1s) {
 					// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
@@ -55,8 +55,8 @@ public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends Tinker
 							// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
 							final Iterable<Vertex> sensor2s = TinkerGraphUtil.getAdjacentNodes(te2, ModelConstants.MONITORED_BY, Direction.OUT, ModelConstants.SENSOR);
 							for (final Vertex sensor2 : sensor2s) {
-								// (sensor2:Sensor)<-[:gathers]-(route2:Route),
-								final Iterable<Vertex> route2s = TinkerGraphUtil.getAdjacentNodes(sensor2, ModelConstants.GATHERS, Direction.IN, ModelConstants.ROUTE);
+								// (sensor2:Sensor)<-[:requires]-(route2:Route),
+								final Iterable<Vertex> route2s = TinkerGraphUtil.getAdjacentNodes(sensor2, ModelConstants.REQUIRES, Direction.IN, ModelConstants.ROUTE);
 								for (final Vertex route2 : route2s) {
 									// route1 != route2 --> if (route1 == route2), continue
 									if (route1.equals(route2)) {
