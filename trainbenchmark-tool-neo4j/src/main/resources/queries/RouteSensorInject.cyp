@@ -1,2 +1,2 @@
-MATCH (route)-[:gathers]->(sensor)
+MATCH (route)-[:requires]->(sensor)
 RETURN DISTINCT route, sensor

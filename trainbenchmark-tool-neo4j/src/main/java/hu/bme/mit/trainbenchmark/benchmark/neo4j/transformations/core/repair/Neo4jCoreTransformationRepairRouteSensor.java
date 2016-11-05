@@ -31,7 +31,7 @@ public class Neo4jCoreTransformationRepairRouteSensor extends Neo4jCoreTransform
 		for (final Neo4jRouteSensorMatch rsm : matches) {
 			final Node route = rsm.getRoute();
 			final Node sensor = rsm.getSensor();
-			route.createRelationshipTo(sensor, Neo4jConstants.relationshipTypeGathers);
+			route.createRelationshipTo(sensor, Neo4jConstants.relationshipTypeRequires);
 		}
 	}
 

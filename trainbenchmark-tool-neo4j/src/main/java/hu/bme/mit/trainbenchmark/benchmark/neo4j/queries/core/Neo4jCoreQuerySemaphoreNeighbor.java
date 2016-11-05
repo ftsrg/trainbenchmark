@@ -54,8 +54,8 @@ public class Neo4jCoreQuerySemaphoreNeighbor extends Neo4jCoreQuery<Neo4jSemapho
 						Direction.OUTGOING, Neo4jConstants.labelSemaphore);
 				for (final Node semaphore : semaphores) {
 
-					// (route1:Route)-[:gathers]->(sensor1:Sensor)
-					final Iterable<Node> sensor1s = Neo4jUtil.getAdjacentNodes(route1, Neo4jConstants.relationshipTypeGathers,
+					// (route1:Route)-[:requires]->(sensor1:Sensor)
+					final Iterable<Node> sensor1s = Neo4jUtil.getAdjacentNodes(route1, Neo4jConstants.relationshipTypeRequires,
 							Direction.OUTGOING, Neo4jConstants.labelSensor);
 					for (final Node sensor1 : sensor1s) {
 						// (sensor1:Sensor)<-[:sensor]-(te1:TrackElement)
@@ -67,8 +67,8 @@ public class Neo4jCoreQuerySemaphoreNeighbor extends Neo4jCoreQuery<Neo4jSemapho
 								// (te2:TrackElement)-[:sensor]->(sensor2:Sensor)
 								final Iterable<Node> sensor2s = Neo4jUtil.getAdjacentNodes(te2, Neo4jConstants.relationshipTypeMonitoredBy, Direction.OUTGOING, Neo4jConstants.labelSensor);								
 								for (final Node sensor2 : sensor2s) {
-									// (sensor2:Sensor)<-[:gathers]-(route2:Route),								
-									final Iterable<Node> route2s = Neo4jUtil.getAdjacentNodes(sensor2, Neo4jConstants.relationshipTypeGathers, Direction.INCOMING, Neo4jConstants.labelRoute);
+									// (sensor2:Sensor)<-[:requires]-(route2:Route),								
+									final Iterable<Node> route2s = Neo4jUtil.getAdjacentNodes(sensor2, Neo4jConstants.relationshipTypeRequires, Direction.INCOMING, Neo4jConstants.labelRoute);
 									for (final Node route2 : route2s) {
 										// route1 != route2 --> if (route1 == route2), continue
 										if (route1.equals(route2)) {

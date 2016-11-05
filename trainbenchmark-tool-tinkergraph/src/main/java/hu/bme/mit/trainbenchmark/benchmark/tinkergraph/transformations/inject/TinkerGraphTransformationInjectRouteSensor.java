@@ -31,11 +31,11 @@ public class TinkerGraphTransformationInjectRouteSensor<TTinkerGraphDriver exten
 	@Override
 	public void activate(final Collection<TinkerGraphRouteSensorInjectMatch> matches) {
 		for (final TinkerGraphRouteSensorInjectMatch match : matches) {
-			final Iterable<Edge> gatherss = () -> match.getRoute().edges(Direction.OUT, ModelConstants.GATHERS);
+			final Iterable<Edge> requiress = () -> match.getRoute().edges(Direction.OUT, ModelConstants.REQUIRES);
 
-			for (final Edge gathers : gatherss) {
-				if (gathers.inVertex().equals(match.getSensor())) {
-					gathers.remove();
+			for (final Edge requires : requiress) {
+				if (requires.inVertex().equals(match.getSensor())) {
+					requires.remove();
 				}
 			}
 		}

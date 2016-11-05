@@ -33,10 +33,10 @@ public class JenaTransformationInjectRouteSensor extends JenaTransformation<Jena
 	@Override
 	public void activate(final Collection<JenaRouteSensorInjectMatch> routeSensorInjectMatchsMatches) throws IOException {
 		final Model model = driver.getModel();
-		final Property gathers = model.getProperty(BASE_PREFIX + ModelConstants.GATHERS);
+		final Property requires = model.getProperty(BASE_PREFIX + ModelConstants.REQUIRES);
 		
 		for (final JenaRouteSensorInjectMatch rsim : routeSensorInjectMatchsMatches) {
-			model.remove(rsim.getRoute(), gathers, rsim.getSensor()); 
+			model.remove(rsim.getRoute(), requires, rsim.getSensor()); 
 		}
 	
 	}

@@ -342,13 +342,13 @@ public interface RailwayPackage extends EPackage {
 	int ROUTE__EXIT = RAILWAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Gathers</b></em>' reference list.
+	 * The feature id for the '<em><b>Requires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__GATHERS = RAILWAY_ELEMENT_FEATURE_COUNT + 3;
+	int ROUTE__REQUIRES = RAILWAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Active</b></em>' attribute.
@@ -795,15 +795,15 @@ public interface RailwayPackage extends EPackage {
 	EReference getRoute_Exit();
 
 	/**
-	 * Returns the meta object for the reference list '{@link hu.bme.mit.trainbenchmark.railway.Route#getGathers <em>Gathers</em>}'.
+	 * Returns the meta object for the reference list '{@link hu.bme.mit.trainbenchmark.railway.Route#getRequires <em>Requires</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Gathers</em>'.
-	 * @see hu.bme.mit.trainbenchmark.railway.Route#getGathers()
+	 * @return the meta object for the reference list '<em>Requires</em>'.
+	 * @see hu.bme.mit.trainbenchmark.railway.Route#getRequires()
 	 * @see #getRoute()
 	 * @generated
 	 */
-	EReference getRoute_Gathers();
+	EReference getRoute_Requires();
 
 	/**
 	 * Returns the meta object for the attribute '{@link hu.bme.mit.trainbenchmark.railway.Route#isActive <em>Active</em>}'.
@@ -1142,12 +1142,12 @@ public interface RailwayPackage extends EPackage {
 		EReference ROUTE__EXIT = eINSTANCE.getRoute_Exit();
 
 		/**
-		 * The meta object literal for the '<em><b>Gathers</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Requires</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROUTE__GATHERS = eINSTANCE.getRoute_Gathers();
+		EReference ROUTE__REQUIRES = eINSTANCE.getRoute_Requires();
 
 		/**
 		 * The meta object literal for the '<em><b>Active</b></em>' attribute feature.

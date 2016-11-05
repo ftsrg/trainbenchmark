@@ -27,7 +27,7 @@ public class EmfTransformationRepairRouteSensor<TDriver extends EmfDriver, TRout
 	@Override
 	public void activate(final Collection<TRouteSensorMatch> matches) {
 		for (final EmfRouteSensorMatch rsm : matches) {
-			rsm.getRoute().getGathers().add(rsm.getSensor());
+			rsm.getRoute().getRequires().add(rsm.getSensor());
 		}
 	}
 

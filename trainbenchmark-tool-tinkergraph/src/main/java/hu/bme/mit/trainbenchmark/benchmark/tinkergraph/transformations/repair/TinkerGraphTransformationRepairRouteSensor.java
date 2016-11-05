@@ -32,7 +32,7 @@ public class TinkerGraphTransformationRepairRouteSensor<TTinkerGraphDriver exten
 		for (final TinkerGraphRouteSensorMatch rsm : matches) {
 			final Vertex route = rsm.getRoute();
 			final Vertex sensor = rsm.getSensor();
-			route.addEdge(ModelConstants.GATHERS, sensor);
+			route.addEdge(ModelConstants.REQUIRES, sensor);
 		}
 	}
 

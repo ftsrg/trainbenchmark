@@ -4,5 +4,5 @@ import "http://www.semanticweb.org/ontologies/2015/trainbenchmark"
 
 pattern routeSensorInject(route, sensor)
 {
-	Route.gathers(route, sensor);
+	Route.requires(route, sensor);
 }

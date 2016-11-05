@@ -8,7 +8,7 @@ WHERE
 	?route1 rdf:type base:Route .
 	?semaphore rdf:type base:Semaphore .
 
-	?route1 base:gathers ?sensor1 .
+	?route1 base:requires ?sensor1 .
 	?sensor1 rdf:type base:Sensor .
 
 	?te1 base:monitoredBy ?sensor1 .
@@ -20,7 +20,7 @@ WHERE
 	?te2 base:monitoredBy ?sensor2 .
 	?sensor2 rdf:type base:Sensor .
 
-	?route2 base:gathers ?sensor2 .
+	?route2 base:requires ?sensor2 .
 
 	FILTER (?route1 != ?route2) .
 

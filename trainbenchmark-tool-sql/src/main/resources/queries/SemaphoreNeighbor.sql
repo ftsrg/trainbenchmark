@@ -10,7 +10,7 @@ SELECT DISTINCT
 -- (route1)
 FROM Route AS Route1
 
--- (route1)-[:gathers]->(sensor1)
+-- (route1)-[:requires]->(sensor1)
 INNER JOIN Sensor AS Sensor1
 ON Route1.id = Sensor1.route
 
@@ -30,7 +30,7 @@ ON ct.TrackElement2_id = mb2.TrackElement_id
 INNER JOIN Sensor AS Sensor2
 ON mb2.Sensor_id = Sensor2.id
 
--- (sensor2)<-[:gathers]-(route2)
+-- (sensor2)<-[:requires]-(route2)
 INNER JOIN Route AS Route2
 ON Sensor2.route = Route2.id
 

@@ -3,7 +3,7 @@
  */
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.InverseGathersQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RequiredQuerySpecification;
 import hu.bme.mit.trainbenchmark.railway.Route;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import java.util.Arrays;
@@ -13,27 +13,27 @@ import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.inverseGathers pattern,
- * to be used in conjunction with {@link InverseGathersMatcher}.
+ * Pattern-specific match representation of the hu.bme.mit.trainbenchmark.benchmark.viatra.required pattern,
+ * to be used in conjunction with {@link RequiredMatcher}.
  * 
  * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
  * Each instance is a (possibly partial) substitution of pattern parameters,
  * usable to represent a match of the pattern in the result of a query,
  * or to specify the bound (fixed) input parameters when issuing a query.
  * 
- * @see InverseGathersMatcher
- * @see InverseGathersProcessor
+ * @see RequiredMatcher
+ * @see RequiredProcessor
  * 
  */
 @SuppressWarnings("all")
-public abstract class InverseGathersMatch extends BasePatternMatch {
+public abstract class RequiredMatch extends BasePatternMatch {
   private Sensor fSensor;
   
   private Route fRoute;
   
   private static List<String> parameterNames = makeImmutableList("sensor", "route");
   
-  private InverseGathersMatch(final Sensor pSensor, final Route pRoute) {
+  private RequiredMatch(final Sensor pSensor, final Route pRoute) {
     this.fSensor = pSensor;
     this.fRoute = pRoute;
   }
@@ -79,12 +79,12 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
   
   @Override
   public String patternName() {
-    return "hu.bme.mit.trainbenchmark.benchmark.viatra.inverseGathers";
+    return "hu.bme.mit.trainbenchmark.benchmark.viatra.required";
   }
   
   @Override
   public List<String> parameterNames() {
-    return InverseGathersMatch.parameterNames;
+    return RequiredMatch.parameterNames;
   }
   
   @Override
@@ -93,7 +93,7 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
   }
   
   @Override
-  public InverseGathersMatch toImmutable() {
+  public RequiredMatch toImmutable() {
     return isMutable() ? newMatch(fSensor, fRoute) : this;
   }
   
@@ -120,7 +120,7 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
   public boolean equals(final Object obj) {
     if (this == obj)
     	return true;
-    if (!(obj instanceof InverseGathersMatch)) { // this should be infrequent
+    if (!(obj instanceof RequiredMatch)) { // this should be infrequent
     	if (obj == null) {
     		return false;
     	}
@@ -132,7 +132,7 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
     		return false;
     	return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
-    InverseGathersMatch other = (InverseGathersMatch) obj;
+    RequiredMatch other = (RequiredMatch) obj;
     if (fSensor == null) {if (other.fSensor != null) return false;}
     else if (!fSensor.equals(other.fSensor)) return false;
     if (fRoute == null) {if (other.fRoute != null) return false;}
@@ -141,9 +141,9 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
   }
   
   @Override
-  public InverseGathersQuerySpecification specification() {
+  public RequiredQuerySpecification specification() {
     try {
-    	return InverseGathersQuerySpecification.instance();
+    	return RequiredQuerySpecification.instance();
     } catch (ViatraQueryException ex) {
      	// This cannot happen, as the match object can only be instantiated if the query specification exists
      	throw new IllegalStateException (ex);
@@ -157,7 +157,7 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
    * @return the empty match.
    * 
    */
-  public static InverseGathersMatch newEmptyMatch() {
+  public static RequiredMatch newEmptyMatch() {
     return new Mutable(null, null);
   }
   
@@ -170,7 +170,7 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
    * @return the new, mutable (partial) match object.
    * 
    */
-  public static InverseGathersMatch newMutableMatch(final Sensor pSensor, final Route pRoute) {
+  public static RequiredMatch newMutableMatch(final Sensor pSensor, final Route pRoute) {
     return new Mutable(pSensor, pRoute);
   }
   
@@ -183,11 +183,11 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
    * @return the (partial) match object.
    * 
    */
-  public static InverseGathersMatch newMatch(final Sensor pSensor, final Route pRoute) {
+  public static RequiredMatch newMatch(final Sensor pSensor, final Route pRoute) {
     return new Immutable(pSensor, pRoute);
   }
   
-  private static final class Mutable extends InverseGathersMatch {
+  private static final class Mutable extends RequiredMatch {
     Mutable(final Sensor pSensor, final Route pRoute) {
       super(pSensor, pRoute);
     }
@@ -198,7 +198,7 @@ public abstract class InverseGathersMatch extends BasePatternMatch {
     }
   }
   
-  private static final class Immutable extends InverseGathersMatch {
+  private static final class Immutable extends RequiredMatch {
     Immutable(final Sensor pSensor, final Route pRoute) {
       super(pSensor, pRoute);
     }

@@ -6,6 +6,7 @@ import hu.bme.mit.trainbenchmark.railway.Position;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

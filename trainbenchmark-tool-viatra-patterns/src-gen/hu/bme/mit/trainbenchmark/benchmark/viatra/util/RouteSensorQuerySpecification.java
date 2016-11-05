@@ -6,7 +6,7 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 import com.google.common.collect.Sets;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.InverseGathersQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RequiredQuerySpecification;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -163,8 +163,8 @@ public final class RouteSensorQuerySpecification extends BaseGeneratedEMFQuerySp
       		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
       		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
       		new Equality(body, var__virtual_2_, var_sensor);
-      		// 	neg find inverseGathers(sensor, route)
-      		new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), InverseGathersQuerySpecification.instance().getInternalQueryRepresentation());
+      		// 	neg find required(sensor, route)
+      		new NegativePatternCall(body, new FlatTuple(var_sensor, var_route), RequiredQuerySpecification.instance().getInternalQueryRepresentation());
       		bodies.add(body);
       	}
       	// to silence compiler error

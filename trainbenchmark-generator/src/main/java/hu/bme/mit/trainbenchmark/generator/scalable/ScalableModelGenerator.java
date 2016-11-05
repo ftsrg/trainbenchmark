@@ -7,7 +7,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
@@ -159,10 +159,10 @@ public class ScalableModelGenerator extends ModelGenerator {
 					if (!switchSensorError) {
 						serializer.createEdge(MONITORED_BY, sw, sensor);
 
-						// add "gathers" edge from route to sensor
+						// add "requires" edge from route to sensor
 						final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
 						if (!routeSensorError) {
-							serializer.createEdge(GATHERS, route, sensor);
+							serializer.createEdge(REQUIRES, route, sensor);
 						}
 					}
 
