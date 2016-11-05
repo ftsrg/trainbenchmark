@@ -3,7 +3,7 @@ input:
     target: [FollowsJoin.primary]
     follows: [FollowsJoin.secondary]
     monitoredBy: [SensorJoin.secondary]
-    gathers: [AntiJoin.secondary]
+    requires: [AntiJoin.secondary]
 
 nodes:
   - FollowsJoin:

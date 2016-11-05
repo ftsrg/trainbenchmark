@@ -1,4 +1,4 @@
--- the "Sensor.route" attribute is the inverse of the "Route.gathers" edge
+-- the "Sensor.route" attribute is the inverse of the "Route.requires" edge
 UPDATE Sensor
 SET route = NULL
 WHERE id = (SELECT Value FROM Variables WHERE Name = 'sensor')

@@ -5,7 +5,7 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
@@ -35,7 +35,7 @@ public class Neo4jConstants {
 	public static final RelationshipType relationshipTypeEntry = RelationshipType.withName(ENTRY);
 	public static final RelationshipType relationshipTypeExit = RelationshipType.withName(EXIT);
 	public static final RelationshipType relationshipTypeFollows = RelationshipType.withName(FOLLOWS);
-	public static final RelationshipType relationshipTypeGathers = RelationshipType.withName(GATHERS);
+	public static final RelationshipType relationshipTypeRequires = RelationshipType.withName(REQUIRES);
 	public static final RelationshipType relationshipTypeMonitoredBy = RelationshipType.withName(MONITORED_BY);
 	public static final RelationshipType relationshipTypeTarget = RelationshipType.withName(TARGET);
 

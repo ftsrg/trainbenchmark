@@ -3,7 +3,7 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT DISTINCT ?route ?sensor
 WHERE { 
-	?route base:gathers ?sensor .
+	?route base:requires ?sensor .
 	?route rdf:type base:Route .
 	?sensor rdf:type base:Sensor .
 }

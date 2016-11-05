@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
 import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 import java.util.Collection;
@@ -36,13 +36,13 @@ public class Rdf4jTransformationRepairRouteSensor<TRdf4jDriver extends Rdf4jDriv
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
-		final IRI gathers = vf.createIRI(BASE_PREFIX + GATHERS);
+		final IRI requires = vf.createIRI(BASE_PREFIX + REQUIRES);
 
 		for (final Rdf4jRouteSensorMatch match : matches) {
 			final Resource route = match.getRoute();
 			final Resource sensor = match.getSensor();
 
-			con.add(route, gathers, sensor);
+			con.add(route, requires, sensor);
 		}
 	}
 

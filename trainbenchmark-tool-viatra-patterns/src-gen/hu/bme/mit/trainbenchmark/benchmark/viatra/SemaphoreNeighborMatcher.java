@@ -35,11 +35,11 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * pattern semaphoreNeighbor(semaphore, route1, route2, sensor1, sensor2, te1, te2)
  * {
  * 	Route.exit(route1, semaphore);
- * 	Route.gathers(route1, sensor1);
+ * 	Route.requires(route1, sensor1);
  * 	TrackElement.monitoredBy(te1, sensor1);
  * 	TrackElement.connectsTo(te1, te2);
  * 	TrackElement.monitoredBy(te2, sensor2);
- * 	Route.gathers(route2, sensor2);
+ * 	Route.requires(route2, sensor2);
  * 	
  * 	neg find entrySemaphore(route2, semaphore);
  * 

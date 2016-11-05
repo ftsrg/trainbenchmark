@@ -3,7 +3,7 @@ input:
     follows: [Join2.primary]
     target: [Join1.primary]
     monitoredBy: [Join1.secondary]
-    gathers: [AntiJoin.secondary]
+    requires: [AntiJoin.secondary]
 
 nodes:
   - Join1:

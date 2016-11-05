@@ -56,8 +56,8 @@ public class Neo4jCoreQueryRouteSensor extends Neo4jCoreQuery<Neo4jRouteSensorMa
 						// (sw:Switch)-[:sensor]->(sensor:Sensor)
 						final Iterable<Node> sensors = Neo4jUtil.getAdjacentNodes(sw, Neo4jConstants.relationshipTypeMonitoredBy, Direction.OUTGOING, Neo4jConstants.labelSensor);
 						for (final Node sensor : sensors) {
-							// (sensor:Sensor)<-[:gathers]-(route:Route) NAC
-							if (!Neo4jUtil.isConnected(route, sensor, Neo4jConstants.relationshipTypeGathers)) {
+							// (sensor:Sensor)<-[:requires]-(route:Route) NAC
+							if (!Neo4jUtil.isConnected(route, sensor, Neo4jConstants.relationshipTypeRequires)) {
 								final Map<String, Object> match = new HashMap<>();
 								match.put(VAR_ROUTE, route);
 								match.put(VAR_SENSOR, sensor);

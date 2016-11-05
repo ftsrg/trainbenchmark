@@ -138,10 +138,10 @@ public final class RouteSensorInjectQuerySpecification extends BaseGeneratedEMFQ
       		   new ExportedParameter(body, var_route, parameter_pRoute),
       		   new ExportedParameter(body, var_sensor, parameter_pSensor)
       		));
-      		// 	Route.gathers(route, sensor)
+      		// 	Route.requires(route, sensor)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
       		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "gathers")));
+      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "requires")));
       		new Equality(body, var__virtual_0_, var_sensor);
       		bodies.add(body);
       	}

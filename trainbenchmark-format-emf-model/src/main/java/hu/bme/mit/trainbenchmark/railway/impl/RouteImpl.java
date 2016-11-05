@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getEntry <em>Entry</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getFollows <em>Follows</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getExit <em>Exit</em>}</li>
- *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getGathers <em>Gathers</em>}</li>
+ *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#getRequires <em>Requires</em>}</li>
  *   <li>{@link hu.bme.mit.trainbenchmark.railway.impl.RouteImpl#isActive <em>Active</em>}</li>
  * </ul>
  *
@@ -73,14 +73,14 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 	protected Semaphore exit;
 
 	/**
-	 * The cached value of the '{@link #getGathers() <em>Gathers</em>}' reference list.
+	 * The cached value of the '{@link #getRequires() <em>Requires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGathers()
+	 * @see #getRequires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Sensor> gathers;
+	protected EList<Sensor> requires;
 
 	/**
 	 * The default value of the '{@link #isActive() <em>Active</em>}' attribute.
@@ -214,11 +214,11 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Sensor> getGathers() {
-		if (gathers == null) {
-			gathers = new EObjectResolvingEList<Sensor>(Sensor.class, this, RailwayPackage.ROUTE__GATHERS);
+	public EList<Sensor> getRequires() {
+		if (requires == null) {
+			requires = new EObjectResolvingEList<Sensor>(Sensor.class, this, RailwayPackage.ROUTE__REQUIRES);
 		}
-		return gathers;
+		return requires;
 	}
 
 	/**
@@ -287,8 +287,8 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 			case RailwayPackage.ROUTE__EXIT:
 				if (resolve) return getExit();
 				return basicGetExit();
-			case RailwayPackage.ROUTE__GATHERS:
-				return getGathers();
+			case RailwayPackage.ROUTE__REQUIRES:
+				return getRequires();
 			case RailwayPackage.ROUTE__ACTIVE:
 				return isActive();
 		}
@@ -314,9 +314,9 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 			case RailwayPackage.ROUTE__EXIT:
 				setExit((Semaphore)newValue);
 				return;
-			case RailwayPackage.ROUTE__GATHERS:
-				getGathers().clear();
-				getGathers().addAll((Collection<? extends Sensor>)newValue);
+			case RailwayPackage.ROUTE__REQUIRES:
+				getRequires().clear();
+				getRequires().addAll((Collection<? extends Sensor>)newValue);
 				return;
 			case RailwayPackage.ROUTE__ACTIVE:
 				setActive((Boolean)newValue);
@@ -342,8 +342,8 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 			case RailwayPackage.ROUTE__EXIT:
 				setExit((Semaphore)null);
 				return;
-			case RailwayPackage.ROUTE__GATHERS:
-				getGathers().clear();
+			case RailwayPackage.ROUTE__REQUIRES:
+				getRequires().clear();
 				return;
 			case RailwayPackage.ROUTE__ACTIVE:
 				setActive(ACTIVE_EDEFAULT);
@@ -366,8 +366,8 @@ public class RouteImpl extends RailwayElementImpl implements Route {
 				return follows != null && !follows.isEmpty();
 			case RailwayPackage.ROUTE__EXIT:
 				return exit != null;
-			case RailwayPackage.ROUTE__GATHERS:
-				return gathers != null && !gathers.isEmpty();
+			case RailwayPackage.ROUTE__REQUIRES:
+				return requires != null && !requires.isEmpty();
 			case RailwayPackage.ROUTE__ACTIVE:
 				return active != ACTIVE_EDEFAULT;
 		}

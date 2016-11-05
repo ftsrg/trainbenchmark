@@ -8,10 +8,10 @@ pattern routeSensor(route, sensor, swP, sw)
 	SwitchPosition.target(swP, sw);
 	TrackElement.monitoredBy(sw, sensor);
 
-	neg find inverseGathers(sensor, route);
+	neg find required(sensor, route);
 }
 
-pattern inverseGathers(sensor, route)
+pattern required(sensor, route)
 {
-	Route.gathers(route, sensor);
+	Route.requires(route, sensor);
 }

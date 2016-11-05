@@ -53,8 +53,8 @@ public class EmfApiQueryRouteSensor<TDriver extends EmfDriver> extends EmfApiQue
 
 				// TODO check n-m edge
 				for (final Sensor sensor2 : sensors) {
-					// (route)-[:gathers]->(sensor) NAC
-					if (!route.getGathers().contains(sensor2)) {
+					// (route)-[:requires]->(sensor) NAC
+					if (!route.getRequires().contains(sensor2)) {
 						final EmfRouteSensorMatch match = new EmfRouteSensorMatch(route, sensor2, swP, sw);
 						matches.add(match);
 					}

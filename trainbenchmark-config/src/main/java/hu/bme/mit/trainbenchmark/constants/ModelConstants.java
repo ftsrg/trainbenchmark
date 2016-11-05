@@ -43,7 +43,7 @@ public class ModelConstants {
 	public static final String EXIT = "exit";
 	public static final String ENTRY = "entry";
 	public static final String FOLLOWS = "follows";
-	public static final String GATHERS = "gathers";
+	public static final String REQUIRES = "requires";
 	public static final String MONITORED_BY = "monitoredBy";
 	public static final String SEMAPHORES = "semaphores";
 	public static final String SENSORS = "sensors";

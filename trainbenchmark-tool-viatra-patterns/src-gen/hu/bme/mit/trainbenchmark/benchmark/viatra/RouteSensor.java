@@ -3,9 +3,9 @@
  */
 package hu.bme.mit.trainbenchmark.benchmark.viatra;
 
-import hu.bme.mit.trainbenchmark.benchmark.viatra.InverseGathersMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.RequiredMatcher;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorMatcher;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.util.InverseGathersQuerySpecification;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RequiredQuerySpecification;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.util.RouteSensorQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
@@ -20,7 +20,7 @@ import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
  * 
  * <p> From package hu.bme.mit.trainbenchmark.benchmark.viatra, the group contains the definition of the following patterns: <ul>
  * <li>routeSensor</li>
- * <li>inverseGathers</li>
+ * <li>required</li>
  * </ul>
  * 
  * @see IPatternGroup
@@ -46,7 +46,7 @@ public final class RouteSensor extends BaseGeneratedPatternGroup {
   
   private RouteSensor() throws ViatraQueryException {
     querySpecifications.add(RouteSensorQuerySpecification.instance());
-    querySpecifications.add(InverseGathersQuerySpecification.instance());
+    querySpecifications.add(RequiredQuerySpecification.instance());
   }
   
   public RouteSensorQuerySpecification getRouteSensor() throws ViatraQueryException {
@@ -57,11 +57,11 @@ public final class RouteSensor extends BaseGeneratedPatternGroup {
     return RouteSensorMatcher.on(engine);
   }
   
-  public InverseGathersQuerySpecification getInverseGathers() throws ViatraQueryException {
-    return InverseGathersQuerySpecification.instance();
+  public RequiredQuerySpecification getRequired() throws ViatraQueryException {
+    return RequiredQuerySpecification.instance();
   }
   
-  public InverseGathersMatcher getInverseGathers(final ViatraQueryEngine engine) throws ViatraQueryException {
-    return InverseGathersMatcher.on(engine);
+  public RequiredMatcher getRequired(final ViatraQueryEngine engine) throws ViatraQueryException {
+    return RequiredMatcher.on(engine);
   }
 }

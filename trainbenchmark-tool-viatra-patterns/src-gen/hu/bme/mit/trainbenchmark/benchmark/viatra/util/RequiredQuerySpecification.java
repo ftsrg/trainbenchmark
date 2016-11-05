@@ -4,8 +4,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra.util;
 
 import com.google.common.collect.Sets;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.InverseGathersMatch;
-import hu.bme.mit.trainbenchmark.benchmark.viatra.InverseGathersMatcher;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.RequiredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.RequiredMatcher;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -30,15 +30,15 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.QueryInitializa
 import org.eclipse.viatra.query.runtime.matchers.tuple.FlatTuple;
 
 /**
- * A pattern-specific query specification that can instantiate InverseGathersMatcher in a type-safe way.
+ * A pattern-specific query specification that can instantiate RequiredMatcher in a type-safe way.
  * 
- * @see InverseGathersMatcher
- * @see InverseGathersMatch
+ * @see RequiredMatcher
+ * @see RequiredMatch
  * 
  */
 @SuppressWarnings("all")
-public final class InverseGathersQuerySpecification extends BaseGeneratedEMFQuerySpecification<InverseGathersMatcher> {
-  private InverseGathersQuerySpecification() {
+public final class RequiredQuerySpecification extends BaseGeneratedEMFQuerySpecification<RequiredMatcher> {
+  private RequiredQuerySpecification() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -47,7 +47,7 @@ public final class InverseGathersQuerySpecification extends BaseGeneratedEMFQuer
    * @throws ViatraQueryException if the pattern definition could not be loaded
    * 
    */
-  public static InverseGathersQuerySpecification instance() throws ViatraQueryException {
+  public static RequiredQuerySpecification instance() throws ViatraQueryException {
     try{
     	return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -56,35 +56,35 @@ public final class InverseGathersQuerySpecification extends BaseGeneratedEMFQuer
   }
   
   @Override
-  protected InverseGathersMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
-    return InverseGathersMatcher.on(engine);
+  protected RequiredMatcher instantiate(final ViatraQueryEngine engine) throws ViatraQueryException {
+    return RequiredMatcher.on(engine);
   }
   
   @Override
-  public InverseGathersMatcher instantiate() throws ViatraQueryException {
-    return InverseGathersMatcher.create();
+  public RequiredMatcher instantiate() throws ViatraQueryException {
+    return RequiredMatcher.create();
   }
   
   @Override
-  public InverseGathersMatch newEmptyMatch() {
-    return InverseGathersMatch.newEmptyMatch();
+  public RequiredMatch newEmptyMatch() {
+    return RequiredMatch.newEmptyMatch();
   }
   
   @Override
-  public InverseGathersMatch newMatch(final Object... parameters) {
-    return InverseGathersMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Route) parameters[1]);
+  public RequiredMatch newMatch(final Object... parameters) {
+    return RequiredMatch.newMatch((hu.bme.mit.trainbenchmark.railway.Sensor) parameters[0], (hu.bme.mit.trainbenchmark.railway.Route) parameters[1]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link InverseGathersQuerySpecification} to be created 
+   * Inner class allowing the singleton instance of {@link RequiredQuerySpecification} to be created 
    * 	<b>not</b> at the class load time of the outer class, 
-   * 	but rather at the first call to {@link InverseGathersQuerySpecification#instance()}.
+   * 	but rather at the first call to {@link RequiredQuerySpecification#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private final static InverseGathersQuerySpecification INSTANCE = new InverseGathersQuerySpecification();
+    private final static RequiredQuerySpecification INSTANCE = new RequiredQuerySpecification();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -102,7 +102,7 @@ public final class InverseGathersQuerySpecification extends BaseGeneratedEMFQuer
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static InverseGathersQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private final static RequiredQuerySpecification.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
     private final PParameter parameter_pSensor = new PParameter("sensor", "hu.bme.mit.trainbenchmark.railway.Sensor", (IInputKey)null, PParameterDirection.INOUT);
     
@@ -112,7 +112,7 @@ public final class InverseGathersQuerySpecification extends BaseGeneratedEMFQuer
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.trainbenchmark.benchmark.viatra.inverseGathers";
+      return "hu.bme.mit.trainbenchmark.benchmark.viatra.required";
     }
     
     @Override
@@ -138,10 +138,10 @@ public final class InverseGathersQuerySpecification extends BaseGeneratedEMFQuer
       		   new ExportedParameter(body, var_sensor, parameter_pSensor),
       		   new ExportedParameter(body, var_route, parameter_pRoute)
       		));
-      		// 	Route.gathers(route, sensor)
+      		// 	Route.requires(route, sensor)
       		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
       		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "gathers")));
+      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "requires")));
       		new Equality(body, var__virtual_0_, var_sensor);
       		bodies.add(body);
       	}

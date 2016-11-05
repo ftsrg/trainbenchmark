@@ -11,7 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
 import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 import java.util.Collection;
@@ -37,13 +37,13 @@ public class SesameTransformationRepairRouteSensor<TSesameDriver extends SesameD
 		final RepositoryConnection con = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
-		final URI gathers = vf.createURI(BASE_PREFIX + GATHERS);
+		final URI requires = vf.createURI(BASE_PREFIX + REQUIRES);
 
 		for (final SesameRouteSensorMatch match : matches) {
 			final Resource route = match.getRoute();
 			final Resource sensor = match.getSensor();
 
-			con.add(route, gathers, sensor);
+			con.add(route, requires, sensor);
 		}
 	}
 

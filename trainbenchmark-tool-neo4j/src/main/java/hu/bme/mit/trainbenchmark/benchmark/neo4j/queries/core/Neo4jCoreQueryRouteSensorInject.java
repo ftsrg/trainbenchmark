@@ -45,7 +45,7 @@ public class Neo4jCoreQueryRouteSensorInject extends Neo4jCoreQuery<Neo4jRouteSe
 			final Iterable<Node> routes = () -> graphDb.findNodes(Neo4jConstants.labelRoute);
 			for (final Node route : routes) {
 	
-				final Iterable<Node> sensors = Neo4jUtil.getAdjacentNodes(route, Neo4jConstants.relationshipTypeGathers,
+				final Iterable<Node> sensors = Neo4jUtil.getAdjacentNodes(route, Neo4jConstants.relationshipTypeRequires,
 						Direction.OUTGOING, Neo4jConstants.labelSensor);
 
 				for (final Node sensor : sensors) {

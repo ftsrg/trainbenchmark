@@ -15,6 +15,6 @@ WHERE
 	?sensor rdf:type base:Sensor .
 
 	FILTER NOT EXISTS {
-		?route base:gathers ?sensor .
+		?route base:requires ?sensor .
 	}
 }
