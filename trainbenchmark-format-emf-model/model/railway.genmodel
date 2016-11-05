@@ -37,7 +37,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/entry"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference railway.ecore#//Route/follows"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/exit"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/gathers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference railway.ecore#//Route/requires"/>
     </genClasses>
     <genClasses ecoreClass="railway.ecore#//Semaphore">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute railway.ecore#//Semaphore/signal"/>

@@ -45,8 +45,8 @@ public class TinkerGraphQueryRouteSensor<TTinkerGraphDriver extends TinkerGraphD
 					// (sw:Switch)-[:sensor]->(sensor:Sensor)
 					final Iterable<Vertex> sensors = TinkerGraphUtil.getAdjacentNodes(sw, ModelConstants.MONITORED_BY, Direction.OUT, ModelConstants.SENSOR);
 					for (final Vertex sensor : sensors) {
-						// (sensor:Sensor)<-[:gathers]-(route:Route) NAC
-						if (!TinkerGraphUtil.isConnected(route, sensor, ModelConstants.GATHERS)) {
+						// (sensor:Sensor)<-[:requires]-(route:Route) NAC
+						if (!TinkerGraphUtil.isConnected(route, sensor, ModelConstants.REQUIRES)) {
 							matches.add(new TinkerGraphRouteSensorMatch(route, sensor, swP, sw));
 						}
 					}

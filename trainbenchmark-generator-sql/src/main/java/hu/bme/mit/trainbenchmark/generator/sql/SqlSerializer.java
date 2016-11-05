@@ -15,7 +15,7 @@ package hu.bme.mit.trainbenchmark.generator.sql;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.GATHERS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
@@ -161,7 +161,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		case FOLLOWS:
 			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);
 			break;
-		case GATHERS:
+		case REQUIRES:
 			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);
 			break;
 		case SENSORS:

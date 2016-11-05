@@ -37,9 +37,9 @@ public class TinkerGraphQueryRouteSensorInject<TTinkerGraphDriver extends Tinker
 
 		final Collection<Vertex> routes = driver.getVertices(ModelConstants.ROUTE);
 		for (final Vertex route : routes) {
-			final Iterable<Edge> edges = () -> route.edges(Direction.OUT, ModelConstants.GATHERS);
-			for (final Edge gathers : edges) {
-				final Vertex sensor = gathers.inVertex();
+			final Iterable<Edge> edges = () -> route.edges(Direction.OUT, ModelConstants.REQUIRES);
+			for (final Edge requires : edges) {
+				final Vertex sensor = requires.inVertex();
 				matches.add(new TinkerGraphRouteSensorInjectMatch(route, sensor));
 			}
 		}

@@ -54,7 +54,7 @@ class TrainBenchmarkUtil {
 		val switchPositionLabel = createVertexLabel => [name = "SwitchPosition"; container = routeSensor]
 
 		val followsLabel = createEdgeLabel => [name = "follows"; container = routeSensor]
-		val gathersLabel = createEdgeLabel => [name = "gathers"; container = routeSensor]
+		val requiresLabel = createEdgeLabel => [name = "requires"; container = routeSensor]
 		val monitoredByLabel = createEdgeLabel => [name = "monitoredBy"; container = routeSensor]
 		val targetLabel = createEdgeLabel => [name = "target"; container = routeSensor]
 
@@ -83,7 +83,7 @@ class TrainBenchmarkUtil {
 		]
 		val _e4 = createEdgeVariable => [
 			name = "_e4"
-			edgeLabels.add(gathersLabel)
+			edgeLabels.add(requiresLabel)
 			dontCare = true
 			container = routeSensor
 		]
@@ -163,7 +163,7 @@ class TrainBenchmarkUtil {
 		val connectsToLabel = createEdgeLabel => [name = "connectsTo"; container = semaphoreNeighbor]
 		val entryLabel = createEdgeLabel => [name = "entry"; container = semaphoreNeighbor]
 		val exitLabel = createEdgeLabel => [name = "exit"; container = semaphoreNeighbor]
-		val gathersLabel = createEdgeLabel => [name = "gathers"; container = semaphoreNeighbor]
+		val requiresLabel = createEdgeLabel => [name = "requires"; container = semaphoreNeighbor]
 		val monitoredByLabel = createEdgeLabel => [name = "monitoredBy"; container = semaphoreNeighbor]
 
 		val route1 = createVertexVariable => [
@@ -202,7 +202,7 @@ class TrainBenchmarkUtil {
 		]
 		val _e2 = createEdgeVariable => [
 			name = "_e2"
-			edgeLabels.add(gathersLabel)
+			edgeLabels.add(requiresLabel)
 			dontCare = true
 			container = semaphoreNeighbor
 		]
@@ -226,7 +226,7 @@ class TrainBenchmarkUtil {
 		]
 		val _e6 = createEdgeVariable => [
 			name = "_e6"
-			edgeLabels.add(gathersLabel)
+			edgeLabels.add(requiresLabel)
 			dontCare = true
 			container = semaphoreNeighbor
 		]

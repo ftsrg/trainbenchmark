@@ -27,7 +27,7 @@ public class ViatraTransformationInjectRouteSensor extends ViatraTransformation<
 	@Override
 	public void activate(final Collection<RouteSensorInjectMatch> matches) throws IOException {
 		for (final RouteSensorInjectMatch match : matches) {
-			match.getRoute().getGathers().remove(match.getSensor());
+			match.getRoute().getRequires().remove(match.getSensor());
 		}
 	}
 

@@ -3,7 +3,7 @@ input:
     connectsTo: [Join5.primary]
     monitoredBy: [Join1.primary, Join1.secondary]
     exit: [Join4.secondary]
-    gathers: [Join2.secondary, Join3.secondary]
+    requires: [Join2.secondary, Join3.secondary]
     entry: [AntiJoin.secondary]
 
 nodes:

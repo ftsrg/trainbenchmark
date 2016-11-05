@@ -233,7 +233,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_YJFANVPbEeCLuajbZvk0sQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_YJFANlPbEeCLuajbZvk0sQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="railway.ecore#//Route/gathers"/>
+    <element xmi:type="ecore:EReference" href="railway.ecore#//Route/requires"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_YJFAN1PbEeCLuajbZvk0sQ" points="[11, 5, -209, 0]$[211, 5, -9, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YLXfMFPbEeCLuajbZvk0sQ" id="(0.9607843137254902,0.45)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YLXfMVPbEeCLuajbZvk0sQ" id="(0.0392156862745098,0.5)"/>

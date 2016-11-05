@@ -45,17 +45,17 @@ public class EmfApiQuerySemaphoreNeighbor<TDriver extends EmfDriver> extends Emf
 				continue;
 			}
 
-			// (route1:Route)-[:gathers]->(sensor1:Sensor)
-			for (final Sensor sensor1 : route1.getGathers()) {
+			// (route1:Route)-[:requires]->(sensor1:Sensor)
+			for (final Sensor sensor1 : route1.getRequires()) {
 				// (sensor1:Sensor)<-[:monitoredBy]-(te1:TrackElement)
 				for (final TrackElement te1 : sensor1.getMonitors()) {
 					// (te1:TrackElement)-[:connectsTo]->(te2:TrackElement)
 					for (final TrackElement te2 : te1.getConnectsTo()) {
 						// (te2:TrackElement)<-[:monitoredBy]-(sensor2:Sensor)
 						for (final Sensor sensor2 : te2.getMonitoredBy()) {
-							// (route2:Route)-[:gathers]->(sensor2:Sensor)
+							// (route2:Route)-[:requires]->(sensor2:Sensor)
 							for (final Route route2 : routes) {
-								if (!route2.getGathers().contains(sensor2)) {
+								if (!route2.getRequires().contains(sensor2)) {
 									continue;
 								}
 								

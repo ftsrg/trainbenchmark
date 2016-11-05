@@ -29,10 +29,10 @@ public class Neo4jCoreTransformationInjectRouteSensor extends Neo4jCoreTransform
 	@Override
 	public void activate(final Collection<Neo4jRouteSensorInjectMatch> matches) {
 		for (final Neo4jRouteSensorInjectMatch match : matches) {
-			final Iterable<Relationship> gatherss = match.getRoute().getRelationships(Neo4jConstants.relationshipTypeGathers);
-			for (final Relationship gathers : gatherss) {
-				if (gathers.getEndNode().equals(match.getSensor())) {
-					gathers.delete();
+			final Iterable<Relationship> requiress = match.getRoute().getRelationships(Neo4jConstants.relationshipTypeRequires);
+			for (final Relationship requires : requiress) {
+				if (requires.getEndNode().equals(match.getSensor())) {
+					requires.delete();
 				}
 			}
 		}
