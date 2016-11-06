@@ -4,9 +4,20 @@
       <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegmentsInject"/>
     </group>
   </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor">
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.semaphoreNeighbor"/>
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.entrySemaphore"/>
+    </group>
+  </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments" id="hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegments">
       <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.connectedSegments"/>
+    </group>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject">
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.posLengthInject"/>
     </group>
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLength" point="org.eclipse.viatra.query.runtime.queryspecification">
@@ -14,9 +25,15 @@
       <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.posLength"/>
     </group>
   </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.PosLengthInject">
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.posLengthInject"/>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor">
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensor"/>
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.required"/>
+    </group>
+  </extension>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject">
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensorInject"/>
     </group>
   </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighborInject" point="org.eclipse.viatra.query.runtime.queryspecification">
@@ -34,32 +51,15 @@
       <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.switchSet"/>
     </group>
   </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored">
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.switchMonitored"/>
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.hasSensor"/>
-    </group>
-  </extension>
   <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInject" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchSetInject">
       <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.switchSetInject"/>
     </group>
   </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor" id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensor">
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensor"/>
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.required"/>
-    </group>
-  </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject" id="hu.bme.mit.trainbenchmark.benchmark.viatra.RouteSensorInject">
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.routeSensorInject"/>
-    </group>
-  </extension>
-  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SemaphoreNeighbor">
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.semaphoreNeighbor"/>
-      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.entrySemaphore"/>
+  <extension id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored" id="hu.bme.mit.trainbenchmark.benchmark.viatra.SwitchMonitored">
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.switchMonitored"/>
+      <query-specification fqn="hu.bme.mit.trainbenchmark.benchmark.viatra.hasSensor"/>
     </group>
   </extension>
 </plugin>

@@ -53,47 +53,4 @@ public class EmfRouteSensorMatch extends EmfMatch implements RouteSensorMatch {
 		return sw;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((route == null) ? 0 : route.hashCode());
-		result = prime * result + ((sensor == null) ? 0 : sensor.hashCode());
-		result = prime * result + ((sw == null) ? 0 : sw.hashCode());
-		result = prime * result + ((swP == null) ? 0 : swP.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final EmfRouteSensorMatch other = (EmfRouteSensorMatch) obj;
-		if (route == null) {
-			if (other.route != null)
-				return false;
-		} else if (!route.equals(other.route))
-			return false;
-		if (sensor == null) {
-			if (other.sensor != null)
-				return false;
-		} else if (!sensor.equals(other.sensor))
-			return false;
-		if (sw == null) {
-			if (other.sw != null)
-				return false;
-		} else if (!sw.equals(other.sw))
-			return false;
-		if (swP == null) {
-			if (other.swP != null)
-				return false;
-		} else if (!swP.equals(other.swP))
-			return false;
-		return true;
-	}
-
 }

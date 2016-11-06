@@ -14,10 +14,10 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.matches;
 import org.apache.jena.ext.com.google.common.base.Joiner;
 import org.apache.jena.query.QuerySolution;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
+import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class JenaMatch implements Match {
+public abstract class JenaMatch extends BaseMatch {
 
 	protected QuerySolution qs;
 

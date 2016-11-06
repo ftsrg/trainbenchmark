@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches;
 
 import org.eclipse.rdf4j.query.BindingSet;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
+import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class Rdf4jMatch implements Match {
+public abstract class Rdf4jMatch extends BaseMatch {
 
 	protected BindingSet bs;
 
