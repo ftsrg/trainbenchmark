@@ -67,7 +67,7 @@ Currently, the following formats and tools are supported.
 
 ### Importing to Eclipse
 
-The projects are developed and tested with **Eclipse Mars**.
+The projects are developed and tested with **Eclipse Neon**.
 
 To develop the Train Benchmark, you a Gradle Eclipse plugin from the **Eclipse Marketplace**, e.g. the **Buildship: Eclipse Plug-ins for Gradle**. We also recommend to install the Eclipse Groovy tooling from <https://github.com/groovy/groovy-eclipse/wiki>.
 
