@@ -69,7 +69,7 @@ Currently, the following formats and tools are supported.
 
 The projects are developed and tested with **Eclipse Neon**.
 
-To develop the Train Benchmark, you need a Gradle Eclipse plugin from the **Eclipse Marketplace**, e.g. the **Buildship: Eclipse Plug-ins for Gradle**. We also recommend to install the Eclipse Groovy tooling from <https://github.com/groovy/groovy-eclipse/wiki>.
+To develop the Train Benchmark, you need a Gradle Eclipse plugin from the **Eclipse Marketplace**, e.g. the **Buildship: Eclipse Plug-ins for Gradle**. We also recommend installing the Eclipse Groovy tooling from <https://github.com/groovy/groovy-eclipse/wiki>.
 
 To import the projects, choose **Import...** | **Gradle Project**, specify the root directory as the repository directory and import them with the default **Gradle distribution** (**Gradle wrapper (recommended)**). If Eclipse prompts you if you would like to overwrite existing Eclipse project descriptors, choose **Keep**.
 
