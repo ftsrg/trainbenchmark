@@ -13,9 +13,9 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 
 import java.util.Arrays;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
+import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 
-public abstract class TinkerGraphMatch implements Match {
+public abstract class TinkerGraphMatch extends BaseMatch {
 
 	@Override
 	public String toString() {

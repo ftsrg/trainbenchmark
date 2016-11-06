@@ -13,9 +13,9 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.matches;
 
 import java.util.Arrays;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
+import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 
-public abstract class EmfMatch implements Match {
+public abstract class EmfMatch extends BaseMatch {
 
 	@Override
 	public String toString() {

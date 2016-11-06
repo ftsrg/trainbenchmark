@@ -13,11 +13,11 @@ package hu.bme.mit.trainbenchmark.benchmark.iqdcore.match;
 
 import com.google.common.base.Joiner;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
+import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import scala.collection.immutable.Vector;
 
-public abstract class IqdCoreMatch implements Match {
+public abstract class IqdCoreMatch extends BaseMatch {
 
 	protected Vector<Object> qs;
 

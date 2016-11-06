@@ -13,10 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.matches;
 
 import org.openrdf.query.BindingSet;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
+import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class SesameMatch implements Match {
+public abstract class SesameMatch extends BaseMatch {
 
 	protected BindingSet bs;
 

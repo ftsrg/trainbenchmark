@@ -14,10 +14,10 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 import java.util.Arrays;
 import java.util.Map;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.Match;
+import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class Neo4jMatch implements Match {
+public abstract class Neo4jMatch extends BaseMatch {
 
 	protected Map<String, Object> match;
 

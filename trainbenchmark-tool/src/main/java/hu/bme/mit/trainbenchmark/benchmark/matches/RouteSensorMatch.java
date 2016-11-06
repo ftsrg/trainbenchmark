@@ -21,6 +21,7 @@ public interface RouteSensorMatch extends Match {
 
 	public Object getSw();
 
+	@Override
 	public default Object[] toArray() {
 		return new Object[] { getRoute(), getSensor(), getSwP(), getSw() };
 	}
