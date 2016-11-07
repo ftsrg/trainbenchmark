@@ -24,30 +24,30 @@ def generate(ExecutionConfig ec, Scenario scenario, int size) {
 	def gc = new GeneratorConfigBase(scenario, size)
 
 	// EMF
-	def egc = new EmfGeneratorConfig(gc, ec)
-	GeneratorRunner.run(egc)
+	def egc = new EmfGeneratorConfig(gc)
+	GeneratorRunner.run(egc, ec)
 
 	// graph / Neo4j
-	def ngc = new Neo4jGraphGeneratorConfig(gc, ec)
-	GeneratorRunner.run(ngc)
+	def ngc = new Neo4jGraphGeneratorConfig(gc)
+	GeneratorRunner.run(ngc, ec)
 
 	// graph / TinkerPop
-	def tgc = new TinkerGraphGeneratorConfig(gc, ec, TinkerGraphFormat.GRAPHML)
-	GeneratorRunner.run(tgc)
+	def tgc = new TinkerGraphGeneratorConfig(gc, TinkerGraphFormat.GRAPHML)
+	GeneratorRunner.run(tgc, ec)
 
 	// RDF
 	def rdfFormats = [RdfFormat.TURTLE]
 	def includeInferredOptions = [true, false]
 	for (rdfFormat in rdfFormats) {
 		for (includeInferredOption in includeInferredOptions) {
-			def rgc = new RdfGeneratorConfig(gc, ec, includeInferredOption, rdfFormat)
-			GeneratorRunner.run(rgc)
+			def rgc = new RdfGeneratorConfig(gc, includeInferredOption, rdfFormat)
+			GeneratorRunner.run(rgc, ec)
 		}
 	}
 
 	// SQL
-	def sgc = new SqlGeneratorConfig(gc, ec)
-	GeneratorRunner.run(sgc)
+	def sgc = new SqlGeneratorConfig(gc)
+	GeneratorRunner.run(sgc, ec)
 }
 
 for (scenario in scenarios) {
