@@ -4,7 +4,6 @@ import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrateg
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfig
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig
@@ -47,7 +46,6 @@ for (size = minSize; size <= maxSize; size *= 2) {
 	BenchmarkRunner.runPerformanceBenchmark(new EclipseOclBenchmarkConfig(bcb, ec))
 	BenchmarkRunner.runPerformanceBenchmark(new DroolsBenchmarkConfig(bcb, ec))
 	BenchmarkRunner.runPerformanceBenchmark(new EmfApiBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new IqdCoreBenchmarkConfig(bcb, ec, 16, "", null))
 	BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, ec, false))
 	BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, ec, true))
 	BenchmarkRunner.runPerformanceBenchmark(new MySqlBenchmarkConfig(bcb, ec))
