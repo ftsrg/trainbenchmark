@@ -4,7 +4,6 @@ import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrateg
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfig
-import hu.bme.mit.trainbenchmark.benchmark.iqdcore.config.IqdCoreBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig
@@ -48,7 +47,6 @@ for (size = minSize; size <= maxSize; size *= 2) {
 	BenchmarkRunner.runMemoryBenchmark(new EclipseOclBenchmarkConfig(bcb, ec), numberOfSteps)
 	BenchmarkRunner.runMemoryBenchmark(new DroolsBenchmarkConfig(bcb, ec), numberOfSteps)
 	BenchmarkRunner.runMemoryBenchmark(new EmfApiBenchmarkConfig(bcb, ec), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new IqdCoreBenchmarkConfig(bcb, ec, 16, "", null), numberOfSteps)
 	BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, ec, false), numberOfSteps)
 	BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, ec, true), numberOfSteps)
 	BenchmarkRunner.runMemoryBenchmark(new MySqlBenchmarkConfig(bcb, ec), numberOfSteps)
