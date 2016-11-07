@@ -6,7 +6,7 @@
 
 **Technologies.** The framework is implemented in Java 8 (for the main components) and [Groovy](http://www.groovy-lang.org/) (for the scripts). The visualization is handled by [R scripts](https://www.r-project.org/). Both the build and the benchmark process in governed by [Gradle](https://gradle.org/).
 
-**Contributions welcome.** If you would like to implement the benchmark on your tool, do not hesitate to [get it contact](https://github.com/szarnyasg)!
+**Contributions welcome.** If you would like to implement the benchmark on your tool, do not hesitate to [get in contact](https://github.com/szarnyasg)!
 
 **Warning.** :warning: The Train Benchmark is designed to run in an isolated server environment, e.g. virtual machines in the cloud. Some implementations may shut down or delete existing databases, so only run it on your developer workstation if you understand the consequences.
 
