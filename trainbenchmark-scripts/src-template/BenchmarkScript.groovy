@@ -25,7 +25,7 @@ def timeout = 900
 def runs = 3
 def queryTransformationCount = 5
 
-def operations = [
+def injectOperations = [
 	RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
 	RailwayOperation.POSLENGTH_REPAIR,
 	RailwayOperation.ROUTESENSOR_REPAIR,
@@ -33,29 +33,56 @@ def operations = [
 	RailwayOperation.SWITCHSET_REPAIR,
 	RailwayOperation.SWITCHMONITORED_REPAIR,
 ]
+def repairOperations = [
+	RailwayOperation.CONNECTEDSEGMENTS_INJECT,
+	RailwayOperation.POSLENGTH_INJECT,
+	RailwayOperation.ROUTESENSOR_INJECT,
+	RailwayOperation.SEMAPHORENEIGHBOR_INJECT,
+	RailwayOperation.SWITCHSET_INJECT,
+	RailwayOperation.SWITCHMONITORED_INJECT,
+]
 
-def workload = "Repair"
+def workloads = [
+	Inject: injectOperations,
+	Repair: repairOperations,
+]
 
-for (size = minSize; size <= maxSize; size *= 2) {
-	def modelFilename = "railway-repair-${size}"
+println()
 
-	def bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10)
+workloads.each { workload ->
+	def workloadName = workload.key
+	def modelVariant = workloadName.toLowerCase()
+	def operations = workload.value
 
-	BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, false))
-	BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, true))
-	BenchmarkRunner.runPerformanceBenchmark(new EclipseOclBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new DroolsBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new EmfApiBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, ec, false))
-	BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, ec, true))
-	BenchmarkRunner.runPerformanceBenchmark(new MySqlBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.COREAPI))
-	BenchmarkRunner.runPerformanceBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.CYPHER))
-	BenchmarkRunner.runPerformanceBenchmark(new Rdf4jBenchmarkConfig(bcb, ec, false))
-	BenchmarkRunner.runPerformanceBenchmark(new SQLiteBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new TinkerGraphBenchmarkConfig(bcb, ec))
-	BenchmarkRunner.runPerformanceBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.INCREMENTAL))
-	BenchmarkRunner.runPerformanceBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.LOCAL_SEARCH))
+	println("============================================================")
+	println("Workload: $workloadName")
+	println("============================================================")
+
+	for (size = minSize; size <= maxSize; size *= 2) {
+		def modelFilename = "railway-$modelVariant-$size"
+
+		println("------------------------------------------------------------")
+		println("Model: $modelFilename")
+		println("------------------------------------------------------------")
+
+		def bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, operations, workloadName, TransformationChangeSetStrategy.FIXED, 10)
+
+		BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, false), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, true), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new EclipseOclBenchmarkConfig(bcb), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new DroolsBenchmarkConfig(bcb), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new EmfApiBenchmarkConfig(bcb), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, false), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new JenaBenchmarkConfig(bcb, true), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new MySqlBenchmarkConfig(bcb), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new Neo4jBenchmarkConfig(bcb, Neo4jEngine.COREAPI), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new Neo4jBenchmarkConfig(bcb, Neo4jEngine.CYPHER), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new Rdf4jBenchmarkConfig(bcb, false), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new SQLiteBenchmarkConfig(bcb), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new TinkerGraphBenchmarkConfig(bcb), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new ViatraBenchmarkConfig(bcb, ViatraBackend.INCREMENTAL), ec)
+		BenchmarkRunner.runPerformanceBenchmark(new ViatraBenchmarkConfig(bcb, ViatraBackend.LOCAL_SEARCH), ec)
+	}
 }
 
 //BenchmarkReporter.reportReady()

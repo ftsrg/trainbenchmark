@@ -2,7 +2,8 @@
 
 cd "$( cd "$( dirname "$0" )" && pwd )/../models"
 
-for variant in inferred metamodel; do
+#for variant in inferred metamodel; do
+for variant in inferred; do
 	echo $variant
 	for scenario in batch inject repair; do
 		echo $scenario

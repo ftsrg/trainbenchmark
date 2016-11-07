@@ -21,6 +21,7 @@ public class BenchmarkRunner {
 		System.out.println("Model: " + bc.getConfigBase().getModelPath());
 		System.out.println("Description: " + bc.getDescription());
 		System.out.println("Execution configuration: " + ec);
+		System.out.println("Runs: " + bc.getConfigBase().getRuns());
 
 		final File configFile = File.createTempFile("trainbenchmark-benchmark-", ".conf");
 		final String configPath = configFile.getAbsolutePath();
