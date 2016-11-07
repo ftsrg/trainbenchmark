@@ -52,16 +52,17 @@ times.derived$Transformation.and.Recheck = times.derived$Transformation + times.
 
 phases = c("Read", "Check", "Read.and.Check", "Transformation", "Recheck", "Transformation.and.Recheck")
 
+# calculate the median value of runs
 times.aggregated.runs = ddply(
   .data = times.derived,
   .variables = c("Tool", "Workload", "Description", "Model"),
-  .fun = colwise(min),
+  .fun = colwise(median),
   .progress = "text"
 )
+# drop the "Run" column
+times.aggregated.runs = subset(df, select = -c(Run))
 
-times.aggregated.runs
-
-times.plot = melt(
+times.processed = melt(
   data = times.aggregated.runs,
   id.vars = c("Tool", "Workload", "Description", "Model", "Run"),
   measure.vars = phases,
@@ -69,18 +70,23 @@ times.plot = melt(
   value.name = "Time"
 )
 
-workloads = c("Repair")
-#workloads = c("SemaphoreNeighbor", "RouteSensor")
+workloads = c("Inject", "Repair")
 
+sizes = list()
+sizes[["Inject"]] = c("5k", "19k", "31k", "67k", "138k", "283k", "573k", "1.2M", "2.3M", "4.6M", "9.2M", "18M", "37M")
+sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M", "2.2M", "4.6M", "9.3M", "18M", "37M")
+
+times.plot = times.processed
 times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Check", "Read and Check", "Transformation", "Recheck", "Transformation and Recheck"))
-phases = gsub('\\.', ' ', phases)
-
-# we only keep every second artifact for the x axis
-artifacts = c("8k", "15k", "33k", "67k") #, "136k", "272k", "0.5M", "1.1M", "2.2M", "4.5M", "9.3M", "18.5M") #, "37M")
 
 for (workload in workloads) {
-  print(workload)
+  workload = "Inject"
+  
+  workloadSizes = sizes[[workload]]
+  summary(workloadSizes)
+  
+  # filter the dataframe to the current workload
   df = times.plot[times.plot$Workload == workload, ]
   
   # do not visualize empty data sets
@@ -88,55 +94,27 @@ for (workload in workloads) {
     print(paste("No rows to visualize for workload", workload))
     next
   }
-  
+
   # x axis labels
   xbreaks = unique(df$Model)
-  xlabels = paste(xbreaks, "\n", artifacts, sep = "")
-  evens = c(seq(1, length(xlabels), by=2))
-  xlabels[evens] = ""
-  
+  currentWorkloadSizes = head(workloadSizes, n=length(xbreaks))
+  xlabels = paste(xbreaks, "\n", currentWorkloadSizes, sep = "")
+
   # y axis labels
   yaxis = myyaxis()
   ybreaks = yaxis$ybreaks
   ylabels = yaxis$ylabels
-  
-  ncol=3
-  
-#   if (workload == "RouteSensor") {
-#     maxs <- data.frame(
-#       Model = rep(1,ncol*2), 
-#       Phase = phases,
-#       Time = c(rep(100000,ncol), rep(80,ncol))
-#     )
-#     mins <- data.frame(
-#       Model = rep(1,6), 
-#       Phase = phases,
-#       Time = c(rep(5,ncol), rep(0.002,ncol))
-#     )
-#   }
-#   if (workload == "SemaphoreNeighbor") {
-#     maxs <- data.frame(
-#       Model = rep(1,ncol*2), 
-#       Phase = phases,
-#       Time = c(rep(100000,ncol), rep(5,ncol))
-#     )
-#     mins <- data.frame(
-#       Model = rep(1,6), 
-#       Phase = phases,
-#       Time = c(rep(10,ncol), rep(0.002,ncol))
-#     )
-#   }
-  
+
   p = ggplot(df) + #na.omit(df)) +
     aes(x = as.factor(Model), y = Time) +
     labs(title = workload, x = "Model size\n#Elements", y = "Execution times [ms]") +
-    #     geom_point(data = mins, color = "transparent") +
-    #     geom_point(data = maxs, color = "transparent") +
+    #geom_point(data = mins, color = "transparent") +
+    #geom_point(data = maxs, color = "transparent") +
     geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(~ Phase, ncol = ncol, scale = "free_y") +
+    facet_wrap(~ Phase, ncol = 3, scale = "free_y") +
     guides(color = guide_legend(ncol = 4)) +
     theme_bw() +
     theme(
@@ -148,5 +126,9 @@ for (workload in workloads) {
     )
   print(p)
   
-  ggsave(plot = p, filename = paste("../diagrams/times-", workload, ".pdf", sep=""))
+  ggsave(
+    plot = p,
+    filename = paste("../diagrams/times-", workload, ".pdf", sep=""),
+    width = 210, height = 297, units = "mm"
+  )
 }

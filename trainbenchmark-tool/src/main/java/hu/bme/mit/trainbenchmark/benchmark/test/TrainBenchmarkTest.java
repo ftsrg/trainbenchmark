@@ -24,13 +24,13 @@ public abstract class TrainBenchmarkTest {
 
 	protected ExecutionConfig executionConfig = ExecutionConfig.defaultExecutionConfig();
 	protected final long timeout = 120;
-	protected final int runs = 1;
+	protected final int runs = 2;
 	protected final int size = 1;
 	protected final TransformationChangeSetStrategy strategy = TransformationChangeSetStrategy.FIXED;
 	protected final int transformationConstant = 10;
 
 	protected abstract BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception;
-	
+
 	// batch
 
 	@Test
