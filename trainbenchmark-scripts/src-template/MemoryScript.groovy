@@ -22,9 +22,10 @@ def ec = new ExecutionConfig(12800, 12800)
 def minSize = 1
 def maxSize = 2
 def timeout = 900
-def runs = 3
-def queryTransformationCount = 5
-def numberOfSteps = 5
+def queryTransformationCount = 0
+
+// number of steps for memory measurement
+def numberOfSteps = 9
 
 def batchOperations = [
 	RailwayOperation.CONNECTEDSEGMENTS,
@@ -56,7 +57,7 @@ workloads.each { workload ->
 		println("------------------------------------------------------------")
 
 		def bcb = new BenchmarkConfigBase(
-			timeout, runs, queryTransformationCount, modelFilename, operations, workloadName, TransformationChangeSetStrategy.FIXED, 10)
+			timeout, 1, queryTransformationCount, modelFilename, operations, workloadName, TransformationChangeSetStrategy.FIXED, 10)
 
 		BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, false), ec, numberOfSteps)
 		BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, true), ec, numberOfSteps)
