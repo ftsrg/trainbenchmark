@@ -1,43 +1,27 @@
 package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.result.AbstractResult;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class BenchmarkResult {
+public class BenchmarkResult extends AbstractResult {
 
-	protected final String SEP = ",";
-	protected final String NL = "\n";
-	protected final String NA = "";
-	protected final String LAST_LINE = "";
-	protected final Joiner separatorJoiner = Joiner.on(SEP);
-	protected final Joiner newlineJoiner = Joiner.on(NL);
+	protected final String PHASE = "Phase";
+	protected final String ITERATION = "Iteration";
+	protected final String TIME = "Time";
 
 	protected final List<RunResult> runResults = new LinkedList<>();
 
-	protected final String tool;
-	protected final String workload;
-	protected final String workspaceDir;
-	protected final String model;
-	protected final String description;
-
-	public BenchmarkResult(final String tool, final String workload, final String workspaceDir, final String model,
-			final String description) {
-		this.tool = tool;
-		this.workload = workload;
-		this.workspaceDir = workspaceDir;
-		this.model = model;
-		this.description = description;
+	public BenchmarkResult(final BenchmarkConfig bc) {
+		super(bc);
 	}
 
 	public void nextRun() {
@@ -78,28 +62,8 @@ public class BenchmarkResult {
 		return s;
 	}
 
-//	public String csvMemory() {
-//		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
-//				"Memory");
-//		final String header = separatorJoiner.join(headerAttributes);
-//
-//		final List<String> rows = Lists.newArrayList(header);
-//
-//		for (Integer run = 1; run <= runResults.size(); run++) {
-//			final List<String> memoryRecordAttributes = ImmutableList.of(tool, workload, description, model,
-//					run.toString(), memoryLimit.toString());
-//			final String timeRecord = separatorJoiner.join(memoryRecordAttributes);
-//			rows.add(timeRecord);
-//		}
-//
-//		rows.add(LAST_LINE);
-//		final String csv = newlineJoiner.join(rows);
-//		return csv;
-//	}
-
 	public String csvTimes() {
-		final List<String> headerAttributes = ImmutableList.of("Tool", "Workload", "Description", "Model", "Run",
-				"Phase", "Iteration", "Time");
+		final List<String> headerAttributes = ImmutableList.of(TOOL, WORKLOAD, DESCRIPTION, MODEL, RUN, PHASE, ITERATION, TIME);
 		final String header = separatorJoiner.join(headerAttributes);
 
 		final List<String> rows = Lists.newArrayList(header);
@@ -108,13 +72,13 @@ public class BenchmarkResult {
 			final RunResult runResult = runResults.get(run - 1);
 
 			// Read
-			final List<String> timeRecordAttributes = ImmutableList.of(tool, workload, description, model,
+			final List<String> timeRecordAttributes = ImmutableList.of(toolName, workload, description, model,
 					run.toString(), "Read", NA, runResult.getReadTime().toString());
 			final String timeRecord = separatorJoiner.join(timeRecordAttributes);
 			rows.add(timeRecord);
 
 			// Check
-			final List<String> queryRecordAttributes = ImmutableList.of(tool, workload, description, model,
+			final List<String> queryRecordAttributes = ImmutableList.of(toolName, workload, description, model,
 					run.toString(), "Check", NA, runResult.getQueryTimes().get(0).toString());
 			final String queryRecord = separatorJoiner.join(queryRecordAttributes);
 			rows.add(queryRecord);
@@ -126,12 +90,12 @@ public class BenchmarkResult {
 				final Long transformationTime = transformationTimes.get(iteration - 1);
 				final Long recheckTime = queryTimes.get(iteration);
 
-				final List<String> recheckRecordAttributes = ImmutableList.of(tool, workload, description, model,
+				final List<String> recheckRecordAttributes = ImmutableList.of(toolName, workload, description, model,
 						run.toString(), "Transformation", iteration.toString(), recheckTime.toString());
 				final String recheckRecord = separatorJoiner.join(recheckRecordAttributes);
 				rows.add(recheckRecord);
 
-				final List<String> transformationRecordAttributes = ImmutableList.of(tool, workload, description, model,
+				final List<String> transformationRecordAttributes = ImmutableList.of(toolName, workload, description, model,
 						run.toString(), "Recheck", iteration.toString(), transformationTime.toString());
 				final String transformationRecord = separatorJoiner.join(transformationRecordAttributes);
 				rows.add(transformationRecord);
@@ -157,7 +121,7 @@ public class BenchmarkResult {
 				for (Integer iteration = 1; iteration <= queryMatches.size(); iteration++) {
 					final Integer matches = queryMatches.get(iteration - 1);
 
-					final List<String> recordAttributes = ImmutableList.of(tool, workload, description, model,
+					final List<String> recordAttributes = ImmutableList.of(toolName, workload, description, model,
 							run.toString(), query.toString(), iteration.toString(), matches.toString());
 					final String record = separatorJoiner.join(recordAttributes);
 					rows.add(record);
@@ -171,15 +135,8 @@ public class BenchmarkResult {
 	}
 
 	public void serialize() throws IOException {
-//		serializeCsv(csvMemory(), "memory");
 		serializeCsv(csvTimes(), "times");
 		serializeCsv(csvMatches(), "matches");
-	}
-
-	private void serializeCsv(final String csv, final String filePrefix) throws IOException {
-		final String matchesCsvPath = String.format("%sresults/%s-%s-%s-%s-[%s].csv", workspaceDir, filePrefix, tool, workload,
-				model, description);
-		FileUtils.write(new File(matchesCsvPath), csv);
 	}
 
 	protected RunResult getCurrentResult() {

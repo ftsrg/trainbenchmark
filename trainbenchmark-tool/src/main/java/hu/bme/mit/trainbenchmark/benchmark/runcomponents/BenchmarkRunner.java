@@ -11,6 +11,7 @@ import org.apache.commons.exec.Executor;
 import org.apache.commons.exec.PumpStreamHandler;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.memory.MemoryResult;
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 
 public class BenchmarkRunner {
@@ -53,7 +54,7 @@ public class BenchmarkRunner {
 
 	public static int runMemoryBenchmark(final BenchmarkConfig bc, final ExecutionConfig defaultEc,
 			final int numberOfSteps) throws IOException, InterruptedException {
-		// e.g. initalMaxMemory = 12800, we save this (as a final variable), so
+		// e.g. initialMaxMemory = 12800, we save this (as a final variable), so
 		// that we will not exceed it
 		//
 		// the memoryQuantum is halved on the start of each loop, so this starts
@@ -86,6 +87,10 @@ public class BenchmarkRunner {
 		}
 		System.out.println("Execution succeeded, estimated memory requirement: " + currentMaxMemory);
 		System.out.println();
+
+		final MemoryResult result = new MemoryResult(bc);
+		final String memoryResultCsv = result.csvMemory(currentMaxMemory);
+		result.serializeCsv(memoryResultCsv, "memory");
 
 		return 0;
 	}

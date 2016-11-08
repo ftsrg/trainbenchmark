@@ -20,9 +20,9 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 def ec = new ExecutionConfig(1000, 1000)
 
 def minSize = 1
-def maxSize = 2
+def maxSize = 32
 def timeout = 900
-def runs = 3
+def runs = 2
 def queryTransformationCount = 5
 
 def injectOperations = [
@@ -65,7 +65,8 @@ workloads.each { workload ->
 		println("Model: $modelFilename")
 		println("------------------------------------------------------------")
 
-		def bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, operations, workloadName, TransformationChangeSetStrategy.FIXED, 10)
+		def bcb = new BenchmarkConfigBase(
+			timeout, runs, queryTransformationCount, modelFilename, operations, workloadName, TransformationChangeSetStrategy.FIXED, 10)
 
 		BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, false), ec)
 		BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, true), ec)
