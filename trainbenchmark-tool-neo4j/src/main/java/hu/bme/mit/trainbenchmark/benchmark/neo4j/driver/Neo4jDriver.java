@@ -61,7 +61,9 @@ public class Neo4jDriver extends Driver {
 
 	@Override
 	public void destroy() {
-		graphDb.shutdown();
+		if (graphDb != null) {
+			graphDb.shutdown();
+		}
 	}
 
 	@Override
