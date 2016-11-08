@@ -26,37 +26,54 @@ def runs = 3
 def queryTransformationCount = 5
 def numberOfSteps = 5
 
-def operations = [
-	RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
-	RailwayOperation.POSLENGTH_REPAIR,
-	RailwayOperation.ROUTESENSOR_REPAIR,
-	RailwayOperation.SEMAPHORENEIGHBOR_REPAIR,
-	RailwayOperation.SWITCHSET_REPAIR,
-	RailwayOperation.SWITCHMONITORED_REPAIR,
+def batchOperations = [
+	RailwayOperation.CONNECTEDSEGMENTS,
+	RailwayOperation.POSLENGTH,
+	RailwayOperation.ROUTESENSOR,
+	RailwayOperation.SEMAPHORENEIGHBOR,
+	RailwayOperation.SWITCHSET,
+	RailwayOperation.SWITCHMONITORED,
 ]
 
-def workload = "Repair"
+def workloads = [
+	Batch: batchOperations
+]
 
-for (size = minSize; size <= maxSize; size *= 2) {
-	def modelFilename = "railway-repair-${size}"
+workloads.each { workload ->
+	def workloadName = workload.key
+	def modelVariant = workloadName.toLowerCase()
+	def operations = workload.value
 
-	def bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, operations, workload, TransformationChangeSetStrategy.FIXED, 10)
+	println("============================================================")
+	println("Workload: $workloadName")
+	println("============================================================")
 
-	BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, false), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, ec, true), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new EclipseOclBenchmarkConfig(bcb, ec), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new DroolsBenchmarkConfig(bcb, ec), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new EmfApiBenchmarkConfig(bcb, ec), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, ec, false), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, ec, true), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new MySqlBenchmarkConfig(bcb, ec), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.COREAPI), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new Neo4jBenchmarkConfig(bcb, ec, Neo4jEngine.CYPHER), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new Rdf4jBenchmarkConfig(bcb, ec, false), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new SQLiteBenchmarkConfig(bcb, ec), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new TinkerGraphBenchmarkConfig(bcb, ec), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.INCREMENTAL), numberOfSteps)
-	BenchmarkRunner.runMemoryBenchmark(new ViatraBenchmarkConfig(bcb, ec, ViatraBackend.LOCAL_SEARCH), numberOfSteps)
+	for (size = minSize; size <= maxSize; size *= 2) {
+		def modelFilename = "railway-$modelVariant-$size"
+
+		println("------------------------------------------------------------")
+		println("Model: $modelFilename")
+		println("------------------------------------------------------------")
+
+		def bcb = new BenchmarkConfigBase(
+			timeout, runs, queryTransformationCount, modelFilename, operations, workloadName, TransformationChangeSetStrategy.FIXED, 10)
+
+		BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, false), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new BlazegraphBenchmarkConfig(bcb, true), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new EclipseOclBenchmarkConfig(bcb), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new DroolsBenchmarkConfig(bcb), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new EmfApiBenchmarkConfig(bcb), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, false), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new JenaBenchmarkConfig(bcb, true), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new MySqlBenchmarkConfig(bcb), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new Neo4jBenchmarkConfig(bcb, Neo4jEngine.COREAPI), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new Neo4jBenchmarkConfig(bcb, Neo4jEngine.CYPHER), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new Rdf4jBenchmarkConfig(bcb, false), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new SQLiteBenchmarkConfig(bcb), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new TinkerGraphBenchmarkConfig(bcb), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new ViatraBenchmarkConfig(bcb, ViatraBackend.INCREMENTAL), ec, numberOfSteps)
+		BenchmarkRunner.runMemoryBenchmark(new ViatraBenchmarkConfig(bcb, ViatraBackend.LOCAL_SEARCH), ec, numberOfSteps)
+	}
 }
 
 //BenchmarkReporter.reportReady()
