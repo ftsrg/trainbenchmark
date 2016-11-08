@@ -111,6 +111,7 @@ for (workload in workloads) {
     #geom_point(data = mins, color = "transparent") +
     #geom_point(data = maxs, color = "transparent") +
     geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
+    scale_shape_manual(values = seq(0, 15)) +
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
