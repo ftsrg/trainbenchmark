@@ -33,3 +33,18 @@ create_extremes_for_facets = function(extremes, phases) {
   }
   facet.extremes
 }
+
+# this is required for some descriptions, because F will become False :-)
+keep_descriptions_first_char = function(data) {
+  data$Description = sapply(
+    data$Description,
+    function(i) substr(as.character(i),1,1)
+  )
+  data
+}
+
+model_filenames_to_sizes = function(data) {
+  data$Model = gsub("\\D+", "", data$Model)
+  data$Model = as.numeric(data$Model)
+  data
+}

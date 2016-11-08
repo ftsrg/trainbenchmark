@@ -19,11 +19,7 @@ tsvs = list.files("../results/", pattern = "times-.*\\.csv", full.names = T, rec
 l = lapply(tsvs, read.csv)
 times = rbindlist(l)
 
-# this is required because F will become False :-)
-times$Description = sapply(
-  times$Description,
-  function(i) substr(as.character(i),1,1)
-)
+keep_descriptions_first_char(times)
 
 # preprocess the data
 times$Model = gsub("\\D+", "", times$Model)
@@ -76,10 +72,7 @@ times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Check", "Read and Check", "Transformation", "Recheck", "Transformation and Recheck"))
 
 for (workload in workloads) {
-  #workload = "Inject"
-  
   workloadSizes = sizes[[workload]]
-  summary(workloadSizes)
   
   # filter the dataframe to the current workload
   df = times.plot[times.plot$Workload == workload, ]
@@ -104,7 +97,6 @@ for (workload in workloads) {
   # - upper (Read, Check, Read and Check),
   # - lower (Transformation, Recheck, Transformation and Recheck),
   # we calculate minimum and maximum values
-  
   
   read.and.check.extremes = get_extremes(df, "Read and Check")
   read.and.check.extremes = create_extremes_for_facets(read.and.check.extremes, c("Read", "Check"))

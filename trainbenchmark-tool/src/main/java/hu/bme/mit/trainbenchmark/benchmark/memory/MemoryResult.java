@@ -23,7 +23,7 @@ public class MemoryResult extends AbstractResult {
 	 * @return
 	 */
 	public String csvMemory(final Integer memoryLimit) {
-		final List<String> headerAttributes = ImmutableList.of(TOOL, WORKLOAD, DESCRIPTION, MODEL, RUN, MEMORY);
+		final List<String> headerAttributes = ImmutableList.of(TOOL, WORKLOAD, DESCRIPTION, MODEL, MEMORY);
 		final String header = separatorJoiner.join(headerAttributes);
 
 		final List<String> rows = Lists.newArrayList(header);
