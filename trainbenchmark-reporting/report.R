@@ -4,39 +4,39 @@ library(plyr)
 library(ggplot2)
 library(ggrepel)
 
-myyaxis = function() {
-  # y axis labels
-  longticks = c(T, F, F, T, F, F, F, F, T)
-  shortticks = 2:10
-  range = -6:4
-  
-  ooms = 10^range
-  
-  ybreaks = as.vector(shortticks %o% ooms)
-  ylabels = as.character(ybreaks * longticks)
-  ylabels = gsub("^0$", "", ylabels)
-  
-  list(ybreaks = ybreaks, ylabels = ylabels)
-}
+source('util.R')
 
-options(scipen=999)
+# constants
+workloads = c("Inject", "Repair")
+phases = c("Read", "Check", "Read.and.Check", "Transformation", "Recheck", "Transformation.and.Recheck")
 
-tsvs <- list.files("../results/", pattern = "times-.*\\.csv", full.names = T, recursive = T)
-l <- lapply(tsvs, read.csv)
-times <- rbindlist(l)
+sizes = list()
+sizes[["Inject"]] = c("5k", "19k", "31k", "67k", "138k", "283k", "573k", "1.2M", "2.3M", "4.6M", "9.2M", "18M", "37M")
+sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M", "2.2M", "4.6M", "9.3M", "18M", "37M")
 
+# load the data
+tsvs = list.files("../results/", pattern = "times-.*\\.csv", full.names = T, recursive = T)
+l = lapply(tsvs, read.csv)
+times = rbindlist(l)
+
+# this is required because F will become False :-)
 times$Description = sapply(
   times$Description,
   function(i) substr(as.character(i),1,1)
 )
 
-# preprocessing
+# preprocess the data
 times$Model = gsub("\\D+", "", times$Model)
 times$Model = as.numeric(times$Model)
 times$Time = times$Time / 10^6
 # make the phases a factor with a fixed set of values to help dcasting
-# (e.g. Batch measurements do not have Transformation and Recheck attributes, hence accessing the "Transformation" attribute would throw an error)
+# (e.g. Batch measurements do not have Transformation and Recheck attributes, 
+# hence accessing the "Transformation" attribute would throw an error)
 times$Phase = factor(times$Phase, levels = c("Read", "Check", "Transformation", "Recheck"))
+
+if (nrow(times[times$Phase == "Transformation"]) == 0) {
+  stop("There are no records on the 'Transformation' phase in the dataset. Cannot generate report.")
+}
 
 times.wide = dcast(data = times,
                    formula = Tool + Workload + Description + Model + Run ~ Phase,
@@ -50,8 +50,6 @@ times.derived = times.wide
 times.derived$Read.and.Check = times.derived$Read + times.derived$Check
 times.derived$Transformation.and.Recheck = times.derived$Transformation + times.derived$Recheck
 
-phases = c("Read", "Check", "Read.and.Check", "Transformation", "Recheck", "Transformation.and.Recheck")
-
 # calculate the median value of runs
 times.aggregated.runs = ddply(
   .data = times.derived,
@@ -60,28 +58,25 @@ times.aggregated.runs = ddply(
   .progress = "text"
 )
 # drop the "Run" column
-times.aggregated.runs = subset(df, select = -c(Run))
+times.aggregated.runs = subset(times.aggregated.runs, select = -c(Run))
 
 times.processed = melt(
   data = times.aggregated.runs,
-  id.vars = c("Tool", "Workload", "Description", "Model", "Run"),
+  id.vars = c("Tool", "Workload", "Description", "Model"),
   measure.vars = phases,
   variable.name = "Phase",
   value.name = "Time"
 )
 
-workloads = c("Inject", "Repair")
-
-sizes = list()
-sizes[["Inject"]] = c("5k", "19k", "31k", "67k", "138k", "283k", "573k", "1.2M", "2.3M", "4.6M", "9.2M", "18M", "37M")
-sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M", "2.2M", "4.6M", "9.3M", "18M", "37M")
-
+# beautify plotted record:
+# 1. change dots to spaces
+# 2. make sure that the phases are still factors
 times.plot = times.processed
 times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Check", "Read and Check", "Transformation", "Recheck", "Transformation and Recheck"))
 
 for (workload in workloads) {
-  workload = "Inject"
+  #workload = "Inject"
   
   workloadSizes = sizes[[workload]]
   summary(workloadSizes)
@@ -101,15 +96,29 @@ for (workload in workloads) {
   xlabels = paste(xbreaks, "\n", currentWorkloadSizes, sep = "")
 
   # y axis labels
-  yaxis = myyaxis()
+  yaxis = nice_y_axis()
   ybreaks = yaxis$ybreaks
   ylabels = yaxis$ylabels
+  
+  # another ugly hack - for both facet sets:
+  # - upper (Read, Check, Read and Check),
+  # - lower (Transformation, Recheck, Transformation and Recheck),
+  # we calculate minimum and maximum values
+  
+  
+  read.and.check.extremes = get_extremes(df, "Read and Check")
+  read.and.check.extremes = create_extremes_for_facets(read.and.check.extremes, c("Read", "Check"))
+  transformation.and.recheck.extremes = get_extremes(df, "Transformation and Recheck")
+  transformation.and.recheck.extremes = create_extremes_for_facets(transformation.and.recheck.extremes, c("Transformation", "Recheck"))
 
+  extremes = NULL
+  extremes = rbind(extremes, read.and.check.extremes)
+  extremes = rbind(extremes, transformation.and.recheck.extremes)
+  
   p = ggplot(df) + #na.omit(df)) +
     aes(x = as.factor(Model), y = Time) +
     labs(title = workload, x = "Model size\n#Elements", y = "Execution times [ms]") +
-    #geom_point(data = mins, color = "transparent") +
-    #geom_point(data = maxs, color = "transparent") +
+    geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
     geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
     scale_shape_manual(values = seq(0, 15)) +
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
