@@ -26,6 +26,24 @@ def maxSize = 256
 def timeout = 900
 def runs = 5
 
+def tools = [
+	new BlazegraphBenchmarkConfigBuilder().setInferencing(false),
+	new BlazegraphBenchmarkConfigBuilder().setInferencing(true),
+	new EclipseOclBenchmarkConfig(),
+	new DroolsBenchmarkConfigBuilder(),
+	new EmfApiBenchmarkConfigBuilder(),
+	new JenaBenchmarkConfigBuilder().setInferencing(false),
+	new JenaBenchmarkConfigBuilder().setInferencing(true),
+	new MySqlBenchmarkConfigBuilder(),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER),
+	new Rdf4jBenchmarkConfigBuilder().setInferencing(false),
+	new SQLiteBenchmarkConfigBuilder(),
+	new TinkerGraphBenchmarkConfigBuilder(),
+	new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.INCREMENTAL),
+	new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.LOCAL_SEARCH),
+]
+
 def workloads = [
 	Inject: [
 		operations: [
@@ -97,21 +115,7 @@ workloads.each { workload ->
 			.setRailwayOperations(operations).setWorkload(workloadName).setTransformationChangeSetStrategy(strategy)
 			.setTransformationConstant(constant);
 
-	runBenchmarkSeries(bcbb, new BlazegraphBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new BlazegraphBenchmarkConfigBuilder().setInferencing(true), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new EclipseOclBenchmarkConfig(), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new DroolsBenchmarkConfigBuilder(), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new EmfApiBenchmarkConfigBuilder(), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new JenaBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new JenaBenchmarkConfigBuilder().setInferencing(true), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new MySqlBenchmarkConfigBuilder(), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new Rdf4jBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new SQLiteBenchmarkConfigBuilder(), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new TinkerGraphBenchmarkConfigBuilder(), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.INCREMENTAL), ec, modelSetConfig)
-	runBenchmarkSeries(bcbb, new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.LOCAL_SEARCH), ec, modelSetConfig)
+	tools.each{ bcb -> runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig) }
 }
 
 //BenchmarkReporter.reportReady()
