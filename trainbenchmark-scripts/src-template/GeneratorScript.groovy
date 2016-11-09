@@ -12,7 +12,7 @@ import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 
 def ec = new ExecutionConfig(4000, 8000)
 def minSize = 1
-def maxSize = 16
+def maxSize = 256
 
 def scenarios = [
 	Scenario.BATCH,

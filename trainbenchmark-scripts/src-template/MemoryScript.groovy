@@ -24,22 +24,22 @@ def ec = new ExecutionConfig(12800, 12800)
 def minSize = 1
 def maxSize = 2
 def timeout = 900
-def queryTransformationCount = 0
-
-// number of steps for memory measurement
-def numberOfSteps = 9
-
-def batchOperations = [
-	RailwayOperation.CONNECTEDSEGMENTS,
-	RailwayOperation.POSLENGTH,
-	RailwayOperation.ROUTESENSOR,
-	RailwayOperation.SEMAPHORENEIGHBOR,
-	RailwayOperation.SWITCHSET,
-	RailwayOperation.SWITCHMONITORED,
-]
 
 def workloads = [
-	Batch: batchOperations
+	Batch: [
+		operations: [
+			RailwayOperation.CONNECTEDSEGMENTS,
+			RailwayOperation.POSLENGTH,
+			RailwayOperation.ROUTESENSOR,
+			RailwayOperation.SEMAPHORENEIGHBOR,
+			RailwayOperation.SWITCHSET,
+			RailwayOperation.SWITCHMONITORED,
+		],
+		strategy: TransformationChangeSetStrategy.FIXED,
+		constant: 0,
+		queryTransformationCount: 0,
+		numberOfSteps: 9,
+	]
 ]
 
 def runMemoryBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkConfigBuilder configBuilder,
@@ -66,7 +66,13 @@ def runMemoryBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, Bench
 workloads.each { workload ->
 	def workloadName = workload.key
 	def modelVariant = workloadName.toLowerCase()
-	def operations = workload.value
+	def workloadConfiguration = workload.value
+
+	def operations = workloadConfiguration["operations"]
+	def strategy = workloadConfiguration["strategy"]
+	def constant = workloadConfiguration["constant"]
+	def queryTransformationCount = workloadConfiguration["queryTransformationCount"]
+	def numberOfSteps = workloadConfiguration["numberOfSteps"]
 
 	println("============================================================")
 	println("Workload: $workloadName")

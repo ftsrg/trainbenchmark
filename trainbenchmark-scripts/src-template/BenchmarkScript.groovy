@@ -19,41 +19,39 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigBu
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 
-def ec = new ExecutionConfig(1000, 1000)
+def ec = new ExecutionConfig(8000, 8000)
 
 def minSize = 1
-def maxSize = 32
+def maxSize = 256
 def timeout = 900
-def runs = 2
-def queryTransformationCount = 5
-
-def repairOperations = [
-	RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
-	RailwayOperation.POSLENGTH_REPAIR,
-	RailwayOperation.ROUTESENSOR_REPAIR,
-	RailwayOperation.SEMAPHORENEIGHBOR_REPAIR,
-	RailwayOperation.SWITCHSET_REPAIR,
-	RailwayOperation.SWITCHMONITORED_REPAIR,
-]
-def injectOperations = [
-	RailwayOperation.CONNECTEDSEGMENTS_INJECT,
-	RailwayOperation.POSLENGTH_INJECT,
-	RailwayOperation.ROUTESENSOR_INJECT,
-	RailwayOperation.SEMAPHORENEIGHBOR_INJECT,
-	RailwayOperation.SWITCHSET_INJECT,
-	RailwayOperation.SWITCHMONITORED_INJECT,
-]
+def runs = 5
 
 def workloads = [
 	Inject: [
-		operations: injectOperations,
+		operations: [
+			RailwayOperation.CONNECTEDSEGMENTS_INJECT,
+			RailwayOperation.POSLENGTH_INJECT,
+			RailwayOperation.ROUTESENSOR_INJECT,
+			RailwayOperation.SEMAPHORENEIGHBOR_INJECT,
+			RailwayOperation.SWITCHSET_INJECT,
+			RailwayOperation.SWITCHMONITORED_INJECT,
+		],
 		strategy: TransformationChangeSetStrategy.FIXED,
 		constant: 10,
+		queryTransformationCount: 5,
 	],
 	Repair: [
-		operations: repairOperations,
+		operations: [
+			RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
+			RailwayOperation.POSLENGTH_REPAIR,
+			RailwayOperation.ROUTESENSOR_REPAIR,
+			RailwayOperation.SEMAPHORENEIGHBOR_REPAIR,
+			RailwayOperation.SWITCHSET_REPAIR,
+			RailwayOperation.SWITCHMONITORED_REPAIR,
+		],
 		strategy: TransformationChangeSetStrategy.PROPORTIONAL,
 		constant: 10,
+		queryTransformationCount: 5,
 	]
 ]
 
@@ -86,6 +84,7 @@ workloads.each { workload ->
 	def operations = workloadConfiguration["operations"]
 	def strategy = workloadConfiguration["strategy"]
 	def constant = workloadConfiguration["constant"]
+	def queryTransformationCount = workloadConfiguration["queryTransformationCount"]
 
 	println("============================================================")
 	println("Workload: $workloadName")
@@ -94,9 +93,8 @@ workloads.each { workload ->
 	def modelSetConfig = new ModelSetConfig(modelVariant, minSize, maxSize)
 
 	def bcbb = new BenchmarkConfigBaseBuilder()
-			.setTimeout(timeout).setRuns(runs)
-			.setQueryTransformationCount(queryTransformationCount).setRailwayOperations(operations)
-			.setWorkload(workloadName).setTransformationChangeSetStrategy(strategy)
+			.setTimeout(timeout).setRuns(runs).setQueryTransformationCount(queryTransformationCount)
+			.setRailwayOperations(operations).setWorkload(workloadName).setTransformationChangeSetStrategy(strategy)
 			.setTransformationConstant(constant);
 
 	runBenchmarkSeries(bcbb, new BlazegraphBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig)
