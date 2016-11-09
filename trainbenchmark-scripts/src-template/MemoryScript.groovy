@@ -4,7 +4,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.ModelSetConfig
 import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigBuilder
-import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigBuilder
@@ -88,7 +88,7 @@ workloads.each { workload ->
 
 	runMemoryBenchmarkSeries(bcbb, new BlazegraphBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig, numberOfSteps)
 	runMemoryBenchmarkSeries(bcbb, new BlazegraphBenchmarkConfigBuilder().setInferencing(true), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new EclipseOclBenchmarkConfig(), ec, modelSetConfig, numberOfSteps)
+	runMemoryBenchmarkSeries(bcbb, new EclipseOclBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
 	runMemoryBenchmarkSeries(bcbb, new DroolsBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
 	runMemoryBenchmarkSeries(bcbb, new EmfApiBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
 	runMemoryBenchmarkSeries(bcbb, new JenaBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig, numberOfSteps)
