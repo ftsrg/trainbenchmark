@@ -19,13 +19,13 @@ public final class GeneratorConfigBase extends AbstractConfigBase {
 
 	protected final Scenario scenario;
 	protected final int size;
-	
-	public GeneratorConfigBase(final Scenario scenario, final int size) {
+
+	protected GeneratorConfigBase(final Scenario scenario, final int size) {
 		super();
 		this.scenario = scenario;
 		this.size = size;
 	}
-	
+
 	public Scenario getScenario() {
 		return scenario;
 	}

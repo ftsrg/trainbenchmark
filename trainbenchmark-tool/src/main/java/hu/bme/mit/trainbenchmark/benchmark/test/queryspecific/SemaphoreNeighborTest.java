@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test.queryspecific;
 
 import java.util.List;
 
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBaseBuilder;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
@@ -22,9 +23,8 @@ public abstract class SemaphoreNeighborTest extends QueryTest {
 				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
 		);
 		final String workload = "SemaphoreNeighborTest";
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, operations,
-				workload, TransformationChangeSetStrategy.FIXED, 10);
-		
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs).setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED).setTransformationConstant(10).createBenchmarkConfigBase();
+
 		final BenchmarkResult result = performBenchmark(bcb);
 
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();

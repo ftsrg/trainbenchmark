@@ -1,5 +1,5 @@
 import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfig
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBaseBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig
@@ -25,7 +25,7 @@ def timeout = 900
 def runs = 2
 def queryTransformationCount = 5
 
-def injectOperations = [
+def repairOperations = [
 	RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
 	RailwayOperation.POSLENGTH_REPAIR,
 	RailwayOperation.ROUTESENSOR_REPAIR,
@@ -33,7 +33,7 @@ def injectOperations = [
 	RailwayOperation.SWITCHSET_REPAIR,
 	RailwayOperation.SWITCHMONITORED_REPAIR,
 ]
-def repairOperations = [
+def injectOperations = [
 	RailwayOperation.CONNECTEDSEGMENTS_INJECT,
 	RailwayOperation.POSLENGTH_INJECT,
 	RailwayOperation.ROUTESENSOR_INJECT,
@@ -43,16 +43,26 @@ def repairOperations = [
 ]
 
 def workloads = [
-	Inject: injectOperations,
-	Repair: repairOperations,
+	Inject: [
+		operations: injectOperations,
+		strategy: TransformationChangeSetStrategy.FIXED,
+		constant: 10,
+	],
+	Repair: [
+		operations: repairOperations,
+		strategy: TransformationChangeSetStrategy.PROPORTIONAL,
+		constant: 10,
+	]
 ]
-
-println()
 
 workloads.each { workload ->
 	def workloadName = workload.key
 	def modelVariant = workloadName.toLowerCase()
-	def operations = workload.value
+
+	def workloadConfiguration = workload.value
+	def operations = workloadConfiguration["operations"]
+	def strategy = workloadConfiguration["strategy"]
+	def constant = workloadConfiguration["constant"]
 
 	println("============================================================")
 	println("Workload: $workloadName")
@@ -65,8 +75,12 @@ workloads.each { workload ->
 		println("Model: $modelFilename")
 		println("------------------------------------------------------------")
 
-		def bcb = new BenchmarkConfigBase(
-			timeout, runs, queryTransformationCount, modelFilename, operations, workloadName, TransformationChangeSetStrategy.FIXED, 10)
+		def bcbb = new BenchmarkConfigBaseBuilder()
+			.setTimeout(timeout).setRuns(runs)
+			.setQueryTransformationCount(queryTransformationCount).setRailwayOperations(operations)
+			.setWorkload(workloadName).setTransformationChangeSetStrategy(strategy)
+			.setTransformationConstant(constant);
+		def bcb = bcbb.createBenchmarkConfigBase();
 
 		BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, false), ec)
 		BenchmarkRunner.runPerformanceBenchmark(new BlazegraphBenchmarkConfig(bcb, true), ec)
