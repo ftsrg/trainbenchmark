@@ -1,6 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
-import com.google.api.client.repackaged.com.google.common.base.Preconditions;
+import com.google.api.client.util.Preconditions;
 
 /**
  * This class uses the Curiously-Recurring Generic Pattern,
