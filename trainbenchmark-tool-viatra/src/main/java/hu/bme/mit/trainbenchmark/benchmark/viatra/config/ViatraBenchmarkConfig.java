@@ -30,7 +30,7 @@ public class ViatraBenchmarkConfig extends BenchmarkConfig {
 
 	@Override
 	public String getToolName() {
-		return "VIATRA (" + getBackend().toString() + ")";
+		return String.format("VIATRA (%s)", getBackend().toString());
 	}
 
 	@Override

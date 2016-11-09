@@ -17,10 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class EmfApiBenchmarkConfig extends BenchmarkConfig {
 
-	public EmfApiBenchmarkConfig(final BenchmarkConfigBase configBase) {
+	protected EmfApiBenchmarkConfig(final BenchmarkConfigBase configBase) {
 		super(configBase);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "EMF API";
@@ -30,5 +30,5 @@ public class EmfApiBenchmarkConfig extends BenchmarkConfig {
 	public String getProjectName() {
 		return "emfapi";
 	}
-	
+
 }

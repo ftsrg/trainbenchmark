@@ -19,7 +19,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	protected Neo4jEngine engine;
 
-	public Neo4jBenchmarkConfig(final BenchmarkConfigBase configBase, final Neo4jEngine engine) {
+	protected Neo4jBenchmarkConfig(final BenchmarkConfigBase configBase, final Neo4jEngine engine) {
 		super(configBase);
 		this.engine = engine;
 	}
@@ -30,7 +30,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	@Override
 	public String getToolName() {
-		return "Neo4j (" + getEngine().toString() + ")";
+		return String.format("Neo4j (%s)", getEngine());
 	}
 
 	@Override

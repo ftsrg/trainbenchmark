@@ -1,11 +1,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
-import com.google.api.client.repackaged.com.google.common.base.Preconditions;
-import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
-
 import java.util.List;
 
-public class BenchmarkConfigBaseBuilder {
+import com.google.common.base.Preconditions;
+
+import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+
+public final class BenchmarkConfigBaseBuilder {
 	private Long timeout;
 	private Integer runs;
 	private Integer queryTransformationCount;
@@ -15,42 +16,42 @@ public class BenchmarkConfigBaseBuilder {
 	private TransformationChangeSetStrategy transformationChangeSetStrategy;
 	private Integer transformationConstant;
 
-	public BenchmarkConfigBaseBuilder setTimeout(long timeout) {
+	public BenchmarkConfigBaseBuilder setTimeout(final long timeout) {
 		this.timeout = timeout;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setRuns(int runs) {
+	public BenchmarkConfigBaseBuilder setRuns(final int runs) {
 		this.runs = runs;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setQueryTransformationCount(int queryTransformationCount) {
+	public BenchmarkConfigBaseBuilder setQueryTransformationCount(final int queryTransformationCount) {
 		this.queryTransformationCount = queryTransformationCount;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setModelFilename(String modelFilename) {
+	public BenchmarkConfigBaseBuilder setModelFilename(final String modelFilename) {
 		this.modelFilename = modelFilename;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setRailwayOperations(List<RailwayOperation> railwayOperations) {
+	public BenchmarkConfigBaseBuilder setRailwayOperations(final List<RailwayOperation> railwayOperations) {
 		this.railwayOperations = railwayOperations;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setWorkload(String workload) {
+	public BenchmarkConfigBaseBuilder setWorkload(final String workload) {
 		this.workload = workload;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setTransformationChangeSetStrategy(TransformationChangeSetStrategy transformationChangeSetStrategy) {
+	public BenchmarkConfigBaseBuilder setTransformationChangeSetStrategy(final TransformationChangeSetStrategy transformationChangeSetStrategy) {
 		this.transformationChangeSetStrategy = transformationChangeSetStrategy;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setTransformationConstant(int transformationConstant) {
+	public BenchmarkConfigBaseBuilder setTransformationConstant(final int transformationConstant) {
 		this.transformationConstant = transformationConstant;
 		return this;
 	}

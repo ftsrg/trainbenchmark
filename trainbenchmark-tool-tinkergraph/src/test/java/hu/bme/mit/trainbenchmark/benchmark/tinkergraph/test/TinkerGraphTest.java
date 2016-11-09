@@ -17,12 +17,14 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.TinkerGraphBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigBuilder;
 
 public class TinkerGraphTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final TinkerGraphBenchmarkConfig bc = new TinkerGraphBenchmarkConfig(bcb);
+		final TinkerGraphBenchmarkConfig bc = new TinkerGraphBenchmarkConfigBuilder().setConfigBase(bcb)
+				.createBenchmarkConfig();
 		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

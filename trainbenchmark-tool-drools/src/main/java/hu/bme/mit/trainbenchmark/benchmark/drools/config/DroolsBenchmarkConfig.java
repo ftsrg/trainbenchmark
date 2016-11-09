@@ -17,10 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class DroolsBenchmarkConfig extends BenchmarkConfig {
 
-	public DroolsBenchmarkConfig(final BenchmarkConfigBase configBase) {
+	protected DroolsBenchmarkConfig(final BenchmarkConfigBase configBase) {
 		super(configBase);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "Drools";
@@ -30,5 +30,5 @@ public class DroolsBenchmarkConfig extends BenchmarkConfig {
 	public String getProjectName() {
 		return "drools";
 	}
-	
+
 }

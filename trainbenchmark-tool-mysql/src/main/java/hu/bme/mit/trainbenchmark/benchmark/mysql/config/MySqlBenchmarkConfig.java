@@ -17,10 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class MySqlBenchmarkConfig extends BenchmarkConfig {
 
-	public MySqlBenchmarkConfig(final BenchmarkConfigBase configBase) {
+	protected MySqlBenchmarkConfig(final BenchmarkConfigBase configBase) {
 		super(configBase);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "MySQL";
@@ -30,5 +30,5 @@ public class MySqlBenchmarkConfig extends BenchmarkConfig {
 	public String getProjectName() {
 		return "mysql";
 	}
-	
+
 }

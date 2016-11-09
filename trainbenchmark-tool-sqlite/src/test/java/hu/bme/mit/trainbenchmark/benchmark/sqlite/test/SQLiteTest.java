@@ -16,13 +16,14 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.SQLiteBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
 public class SQLiteTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final SQLiteBenchmarkConfig bc = new SQLiteBenchmarkConfig(bcb);
+		final SQLiteBenchmarkConfig bc = new SQLiteBenchmarkConfigBuilder().setConfigBase(bcb).createBenchmarkConfig();
 		final SQLiteBenchmarkScenario scenario = new SQLiteBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

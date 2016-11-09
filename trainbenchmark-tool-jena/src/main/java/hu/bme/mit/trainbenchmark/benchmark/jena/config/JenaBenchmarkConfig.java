@@ -16,11 +16,11 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class JenaBenchmarkConfig extends RdfBenchmarkConfig {
-	
-	public JenaBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+
+	protected JenaBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
 		super(configBase, inferencing);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "Jena" + getToolNamePostfix();
@@ -30,5 +30,5 @@ public class JenaBenchmarkConfig extends RdfBenchmarkConfig {
 	public String getProjectName() {
 		return "jena";
 	}
-	
+
 }
