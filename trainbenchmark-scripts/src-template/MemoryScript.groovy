@@ -4,7 +4,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.ModelSetConfig
 import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigBuilder
-import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfigBuilder
+import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigBuilder
@@ -24,6 +24,24 @@ def ec = new ExecutionConfig(12800, 12800)
 def minSize = 1
 def maxSize = 2
 def timeout = 900
+
+def tools = [
+	new BlazegraphBenchmarkConfigBuilder().setInferencing(false),
+	new BlazegraphBenchmarkConfigBuilder().setInferencing(true),
+	new EclipseOclBenchmarkConfig(),
+	new DroolsBenchmarkConfigBuilder(),
+	new EmfApiBenchmarkConfigBuilder(),
+	new JenaBenchmarkConfigBuilder().setInferencing(false),
+	new JenaBenchmarkConfigBuilder().setInferencing(true),
+	new MySqlBenchmarkConfigBuilder(),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER),
+	new Rdf4jBenchmarkConfigBuilder().setInferencing(false),
+	new SQLiteBenchmarkConfigBuilder(),
+	new TinkerGraphBenchmarkConfigBuilder(),
+	new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.INCREMENTAL),
+	new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.LOCAL_SEARCH),
+]
 
 def workloads = [
 	Batch: [
@@ -86,21 +104,7 @@ workloads.each { workload ->
 			.setWorkload(workloadName).setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED)
 			.setTransformationConstant(0);
 
-	runMemoryBenchmarkSeries(bcbb, new BlazegraphBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new BlazegraphBenchmarkConfigBuilder().setInferencing(true), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new EclipseOclBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new DroolsBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new EmfApiBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new JenaBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new JenaBenchmarkConfigBuilder().setInferencing(true), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new MySqlBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new Rdf4jBenchmarkConfigBuilder().setInferencing(false), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new SQLiteBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new TinkerGraphBenchmarkConfigBuilder(), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.INCREMENTAL), ec, modelSetConfig, numberOfSteps)
-	runMemoryBenchmarkSeries(bcbb, new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.LOCAL_SEARCH), ec, modelSetConfig, numberOfSteps)
+	tools.each{ bcb -> runMemoryBenchmarkSeries(bcbb, bcb, ec, modelSetConfig, numberOfSteps) }
 }
 
 //BenchmarkReporter.reportReady()
