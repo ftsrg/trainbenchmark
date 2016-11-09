@@ -21,18 +21,18 @@ def scenarios = [
 ]
 
 def generate(ExecutionConfig ec, Scenario scenario, int size) {
-	def gc = new GeneratorConfigBase(scenario, size)
+	def gcb = new GeneratorConfigBase(scenario, size)
 
 	// EMF
-	def egc = new EmfGeneratorConfig(gc)
+	def egc = new EmfGeneratorConfig(gcb)
 	GeneratorRunner.run(egc, ec)
 
 	// graph / Neo4j
-	def ngc = new Neo4jGraphGeneratorConfig(gc)
+	def ngc = new Neo4jGraphGeneratorConfig(gcb)
 	GeneratorRunner.run(ngc, ec)
 
 	// graph / TinkerPop
-	def tgc = new TinkerGraphGeneratorConfig(gc, TinkerGraphFormat.GRAPHML)
+	def tgc = new TinkerGraphGeneratorConfig(gcb, TinkerGraphFormat.GRAPHML)
 	GeneratorRunner.run(tgc, ec)
 
 	// RDF
@@ -40,13 +40,13 @@ def generate(ExecutionConfig ec, Scenario scenario, int size) {
 	def includeInferredOptions = [true, false]
 	for (rdfFormat in rdfFormats) {
 		for (includeInferredOption in includeInferredOptions) {
-			def rgc = new RdfGeneratorConfig(gc, includeInferredOption, rdfFormat)
+			def rgc = new RdfGeneratorConfig(gcb, includeInferredOption, rdfFormat)
 			GeneratorRunner.run(rgc, ec)
 		}
 	}
 
 	// SQL
-	def sgc = new SqlGeneratorConfig(gc)
+	def sgc = new SqlGeneratorConfig(gcb)
 	GeneratorRunner.run(sgc, ec)
 }
 

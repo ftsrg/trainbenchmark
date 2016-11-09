@@ -54,13 +54,13 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	 * Transformation strategy to pick matches for transformation, e.g. "a fixed number" or "a proportional amount" of matches
 	 */
 	protected final TransformationChangeSetStrategy transformationChangeSetStrategy;
-	
+
 	/**
-	 * Transformation constrant to pick matches for transformations, e.g. "10 matches" or "10% of the matches"
+	 * Transformation constant to pick matches for transformations, e.g. "10 matches" or "10% of the matches"
 	 */
 	protected final int transformationConstant;
-	
-	public BenchmarkConfigBase(final long timeout, final int runs,
+
+	protected BenchmarkConfigBase(final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
 			final List<RailwayOperation> railwayOperations, final String workload,
 			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
@@ -101,15 +101,15 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	public String getWorkload() {
 		return workload;
 	}
-	
+
 	public String getModelFilename() {
 		return modelFilename;
 	}
-	
+
 	public TransformationChangeSetStrategy getTransformationChangeSetStrategy() {
 		return transformationChangeSetStrategy;
 	}
-	
+
 	public int getTransformationConstant() {
 		return transformationConstant;
 	}
