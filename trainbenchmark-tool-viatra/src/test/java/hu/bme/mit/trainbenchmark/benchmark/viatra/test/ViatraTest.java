@@ -25,21 +25,23 @@ import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ViatraBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigBuilder;
 
 @RunWith(Parameterized.class)
 public class ViatraTest extends TrainBenchmarkTest {
 
-	@Parameters(name="backend={0}")
+	@Parameters(name = "backend={0}")
 	public static Iterable<? extends Object> data() {
 		return Arrays.asList(ViatraBackend.INCREMENTAL, ViatraBackend.LOCAL_SEARCH);
 	}
 
 	@Parameter
 	public ViatraBackend backend;
-	
+
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final ViatraBenchmarkConfig bc = new ViatraBenchmarkConfig(bcb, backend);
+		final ViatraBenchmarkConfig bc = new ViatraBenchmarkConfigBuilder().setConfigBase(bcb).setBackend(backend)
+				.createBenchmarkConfig();
 		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

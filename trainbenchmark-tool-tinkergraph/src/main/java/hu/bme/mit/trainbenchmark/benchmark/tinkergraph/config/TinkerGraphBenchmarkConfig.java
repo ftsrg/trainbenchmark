@@ -17,10 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class TinkerGraphBenchmarkConfig extends BenchmarkConfig {
 
-	public TinkerGraphBenchmarkConfig(final BenchmarkConfigBase configBase) {
+	protected TinkerGraphBenchmarkConfig(final BenchmarkConfigBase configBase) {
 		super(configBase);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "TinkerGraph";
@@ -30,5 +30,5 @@ public class TinkerGraphBenchmarkConfig extends BenchmarkConfig {
 	public String getProjectName() {
 		return "tinkergraph";
 	}
-	
+
 }

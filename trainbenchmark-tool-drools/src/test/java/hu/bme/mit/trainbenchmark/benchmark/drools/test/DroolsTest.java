@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.drools.test;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.drools.DroolsBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.drools.config.DroolsBenchmarkConfigBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
@@ -22,7 +23,7 @@ public class DroolsTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final DroolsBenchmarkConfig bc = new DroolsBenchmarkConfig(bcb);
+		final DroolsBenchmarkConfig bc = new DroolsBenchmarkConfigBuilder().setConfigBase(bcb).createBenchmarkConfig();
 		final DroolsBenchmarkScenario scenario = new DroolsBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

@@ -18,15 +18,16 @@ import org.junit.runners.Parameterized;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.jena.JenaBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.tests.RdfTest;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 
 @RunWith(Parameterized.class)
 public class JenaTest extends RdfTest {
-	
+
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final JenaBenchmarkConfig bc = new JenaBenchmarkConfig(bcb, inferencing);
+		final JenaBenchmarkConfig bc = new JenaBenchmarkConfigBuilder().setConfigBase(bcb).setInferencing(inferencing).createBenchmarkConfig();
 		final JenaBenchmarkScenario scenario = new JenaBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

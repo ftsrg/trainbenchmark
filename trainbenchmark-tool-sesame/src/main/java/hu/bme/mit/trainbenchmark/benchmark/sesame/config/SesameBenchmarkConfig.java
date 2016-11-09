@@ -17,8 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class SesameBenchmarkConfig extends RdfBenchmarkConfig {
 
-	public SesameBenchmarkConfig(final BenchmarkConfigBase configBase,
-			final boolean inferencing) {
+	protected SesameBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
 		super(configBase, inferencing);
 	}
 

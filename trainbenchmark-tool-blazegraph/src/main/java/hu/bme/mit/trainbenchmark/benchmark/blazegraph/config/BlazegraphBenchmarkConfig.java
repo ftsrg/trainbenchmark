@@ -17,7 +17,7 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
 
 public class BlazegraphBenchmarkConfig extends RdfBenchmarkConfig {
 
-	public BlazegraphBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+	protected BlazegraphBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
 		super(configBase, inferencing);
 	}
 

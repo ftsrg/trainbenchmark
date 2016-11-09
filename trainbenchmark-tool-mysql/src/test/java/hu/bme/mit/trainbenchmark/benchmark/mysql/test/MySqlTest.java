@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.benchmark.mysql.test;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.MySqlBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
@@ -22,7 +23,7 @@ public class MySqlTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final MySqlBenchmarkConfig bc = new MySqlBenchmarkConfig(bcb);
+		final MySqlBenchmarkConfig bc = new MySqlBenchmarkConfigBuilder().setConfigBase(bcb).createBenchmarkConfig();
 		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

@@ -17,10 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class SQLiteBenchmarkConfig extends BenchmarkConfig {
 
-	public SQLiteBenchmarkConfig(final BenchmarkConfigBase configBase) {
+	protected SQLiteBenchmarkConfig(final BenchmarkConfigBase configBase) {
 		super(configBase);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "SQLite";
@@ -30,5 +30,5 @@ public class SQLiteBenchmarkConfig extends BenchmarkConfig {
 	public String getProjectName() {
 		return "sqlite";
 	}
-	
+
 }

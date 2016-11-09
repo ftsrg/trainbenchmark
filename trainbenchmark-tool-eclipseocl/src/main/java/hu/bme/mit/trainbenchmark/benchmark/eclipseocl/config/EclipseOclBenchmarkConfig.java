@@ -17,10 +17,10 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class EclipseOclBenchmarkConfig extends BenchmarkConfig {
 
-	public EclipseOclBenchmarkConfig(final BenchmarkConfigBase configBase) {
+	protected EclipseOclBenchmarkConfig(final BenchmarkConfigBase configBase) {
 		super(configBase);
 	}
-	
+
 	@Override
 	public String getToolName() {
 		return "Eclipse OCL";
@@ -30,5 +30,5 @@ public class EclipseOclBenchmarkConfig extends BenchmarkConfig {
 	public String getProjectName() {
 		return "eclipseocl";
 	}
-	
+
 }
