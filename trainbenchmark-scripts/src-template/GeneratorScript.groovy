@@ -10,44 +10,23 @@ import hu.bme.mit.trainbenchmark.generator.runner.GeneratorRunner
 import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfig
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 
-def ec = new ExecutionConfig(4000, 8000)
+def ec = new ExecutionConfig(4000, 12000)
 def minSize = 1
-def maxSize = 256
+def maxSize = 1024
 
 def scenarios = [
-	Scenario.BATCH,
-	Scenario.INJECT,
 	Scenario.REPAIR,
 ]
 
 def generate(ExecutionConfig ec, Scenario scenario, int size) {
 	def gcb = new GeneratorConfigBase(scenario, size)
 
-	// EMF
-	def egc = new EmfGeneratorConfig(gcb)
-	GeneratorRunner.run(egc, ec)
 
-	// graph / Neo4j
-	def ngc = new Neo4jGraphGeneratorConfig(gcb)
-	GeneratorRunner.run(ngc, ec)
 
 	// graph / TinkerPop
 	def tgc = new TinkerGraphGeneratorConfig(gcb, TinkerGraphFormat.GRAPHML)
 	GeneratorRunner.run(tgc, ec)
 
-	// RDF
-	def rdfFormats = [RdfFormat.TURTLE]
-	def includeInferredOptions = [true, false]
-	for (rdfFormat in rdfFormats) {
-		for (includeInferredOption in includeInferredOptions) {
-			def rgc = new RdfGeneratorConfig(gcb, includeInferredOption, rdfFormat)
-			GeneratorRunner.run(rgc, ec)
-		}
-	}
-
-	// SQL
-	def sgc = new SqlGeneratorConfig(gcb)
-	GeneratorRunner.run(sgc, ec)
 }
 
 for (scenario in scenarios) {

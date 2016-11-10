@@ -88,7 +88,7 @@ def runBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkCo
 
 		def exitValue = BenchmarkRunner.runPerformanceBenchmark(config, ec)
 		if (exitValue != 0) {
-			println "Timeout or error occured, skipping models for larger sizes. Error code: {$exitValue}"
+			println "Timeout or error occured, skipping models for larger sizes. Error code: ${exitValue}"
 			break
 		}
 	}
