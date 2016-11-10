@@ -7,14 +7,15 @@ public class IngraphBenchmarkConfig extends BenchmarkConfig {
 
 	protected final int messageSize;
 	protected final String queryVariant;
-	protected final String memoryMeasurementPath;
+	// protected final String memoryMeasurementPath;
 
-	public IngraphBenchmarkConfig(final BenchmarkConfigBase bcb, final int messageSize, final String queryVariant,
-			final String memoryMeasurementPath) {
+	protected IngraphBenchmarkConfig(final BenchmarkConfigBase bcb, final int messageSize, final String queryVariant
+//			, final String memoryMeasurementPath
+		) {
 		super(bcb);
 		this.messageSize = messageSize;
 		this.queryVariant = queryVariant;
-		this.memoryMeasurementPath = memoryMeasurementPath;
+//		this.memoryMeasurementPath = memoryMeasurementPath;
 	}
 
 	public String getFileName() {
@@ -39,9 +40,9 @@ public class IngraphBenchmarkConfig extends BenchmarkConfig {
 		return queryVariant;
 	}
 
-	public String getMemoryMeasurementPath() {
-		return memoryMeasurementPath;
-	}
+	// public String getMemoryMeasurementPath() {
+	// return memoryMeasurementPath;
+	// }
 
 	@Override
 	public String getDescription() {

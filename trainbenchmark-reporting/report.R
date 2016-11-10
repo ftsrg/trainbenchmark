@@ -7,10 +7,12 @@ library(ggrepel)
 source('util.R')
 
 # constants
-workloads = c("Inject", "Repair")
+#workloads = c("Inject", "Repair")
+workloads = c("RouteSensor", "SemaphoreNeighbor")
 phases = c("Read", "Check", "Read.and.Check", "Transformation", "Recheck", "Transformation.and.Recheck")
 
 sizes = list()
+#                     1     2      4      8      16      32      64      128     256     512     1024    2048   4096
 sizes[["Inject"]] = c("5k", "19k", "31k", "67k", "138k", "283k", "573k", "1.2M", "2.3M", "4.6M", "9.2M", "18M", "37M")
 sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M", "2.2M", "4.6M", "9.3M", "18M", "37M")
 
@@ -19,7 +21,7 @@ tsvs = list.files("../results/", pattern = "times-.*\\.csv", full.names = T, rec
 l = lapply(tsvs, read.csv)
 times = rbindlist(l)
 
-keep_descriptions_first_char(times)
+times = keep_descriptions_first_char(times)
 
 # preprocess the data
 times$Model = gsub("\\D+", "", times$Model)
@@ -84,20 +86,22 @@ for (workload in workloads) {
   }
 
   # x axis labels
-  xbreaks = unique(df$Model)
+  xbreaks = as.factor(unique(df$Model))
   currentWorkloadSizes = head(workloadSizes, n=length(xbreaks))
   xlabels = paste(xbreaks, "\n", currentWorkloadSizes, sep = "")
-
+  
   # y axis labels
   yaxis = nice_y_axis()
   ybreaks = yaxis$ybreaks
   ylabels = yaxis$ylabels
   
+  xbreaks
+  xlabels
+  
   # another ugly hack - for both facet sets:
   # - upper (Read, Check, Read and Check),
   # - lower (Transformation, Recheck, Transformation and Recheck),
   # we calculate minimum and maximum values
-  
   read.and.check.extremes = get_extremes(df, "Read and Check")
   read.and.check.extremes = create_extremes_for_facets(read.and.check.extremes, c("Read", "Check"))
   transformation.and.recheck.extremes = get_extremes(df, "Transformation and Recheck")
@@ -107,16 +111,25 @@ for (workload in workloads) {
   extremes = rbind(extremes, read.and.check.extremes)
   extremes = rbind(extremes, transformation.and.recheck.extremes)
   
-  p = ggplot(df) + #na.omit(df)) +
+  xbreaks
+  length(xbreaks)
+  
+  xlabels
+  length(xlabels)
+  
+  p = ggplot(df) + 
+    #ggplot(na.omit(df)) +
     aes(x = as.factor(Model), y = Time) +
     labs(title = workload, x = "Model size\n#Elements", y = "Execution times [ms]") +
-    geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
-    geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
-    scale_shape_manual(values = seq(0, 15)) +
-    geom_line(aes(col = Tool, group = Tool), size = 0.5) +
-    scale_x_discrete(breaks = xbreaks, labels = xlabels) +
+    #geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
+    geom_point(aes(col = Description, shape = Description), size = 2.0) +
+    # scale_shape_manual(values = seq(0, 15)) +
+    #geom_line(aes(col = Tool, group = Tool), size = 0.5) +
+    geom_line(aes(col = Description, group = Description), size = 0.5) +
+    scale_x_discrete(breaks = as.factor(xbreaks), labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
     facet_wrap(~ Phase, ncol = 3, scale = "free_y") +
+    geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
     guides(color = guide_legend(ncol = 4)) +
     theme_bw() +
     theme(

@@ -22,13 +22,14 @@ import org.junit.runners.Parameterized.Parameters;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfigBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.RouteSensorTest;
 
 @RunWith(Parameterized.class)
 public class IngraphRouteSensorTest extends RouteSensorTest {
 
-	@Parameters(name="variant={0}")
+	@Parameters(name = "variant={0}")
 	public static Iterable<? extends Object> data() {
 		return Arrays.asList("A", "B", "C");
 	}
@@ -39,7 +40,8 @@ public class IngraphRouteSensorTest extends RouteSensorTest {
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
-		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfig(bcb, messageSize, variant, null);
+		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfigBuilder().setConfigBase(bcb)
+				.setMessageSize(messageSize).setQueryVariant(variant).createBenchmarkConfig();
 		final IngraphBenchmarkScenario scenario = IngraphBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
