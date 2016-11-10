@@ -73,6 +73,16 @@ To develop the Train Benchmark, you need a Gradle Eclipse plugin from the **Ecli
 
 To import the projects, choose **Import...** | **Gradle Project**, specify the root directory as the repository directory and import them with the default **Gradle distribution** (**Gradle wrapper (recommended)**). If Eclipse prompts you if you would like to overwrite existing Eclipse project descriptors, choose **Keep**.
 
+### Running the benchmark
+
+To run the benchmark, set the appropriate formats and tools in the `trainbenchmark-scripts/src` directory's `GeneratorScript.groovy` and `BenchmarkScript.groovy` scripts, respectively. Then run the following command:
+
+```
+./gradlew generate benchmark
+```
+
+:warning: Note that if you "cancel" the benchmark with the <kbd>Ctrl</kbd> + <kbd>C</kbd> keys, it will only stop the Gradle process running the benchmark. The JVM under benchmark will continue to run until completion (and will not timeout, as the timeout is governed by the benchmark script). Hence, in these cases, you should check for running `java` processes manually.
+
 ### Naming conventions
 
 **Note.** :notebook_with_decorative_cover: To avoid confusion between the different implementations, we decided to naming similar to the [Smurf Naming convention](http://blog.codinghorror.com/new-programming-jargon/) (see #21). For example, the classes in the EMF API implementation are named `EmfApiQueryPosLength`, `EmfApiQueryRouteSensor`, etc., while the classes in the VIATRA implementation are named `ViatraQueryPosLength`, `ViatraQueryRouteSensor`, etc. We found that relying on the package names to differentiate class names is error-prone and should be avoided.
