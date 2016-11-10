@@ -74,7 +74,7 @@ times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
 times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Check", "Read and Check", "Transformation", "Recheck", "Transformation and Recheck"))
 
 for (workload in workloads) {
-  workloadSizes = sizes[[workload]]
+  workloadSizes = sizes[["Repair"]]
   
   # filter the dataframe to the current workload
   df = times.plot[times.plot$Workload == workload, ]
@@ -95,9 +95,6 @@ for (workload in workloads) {
   ybreaks = yaxis$ybreaks
   ylabels = yaxis$ylabels
   
-  xbreaks
-  xlabels
-  
   # another ugly hack - for both facet sets:
   # - upper (Read, Check, Read and Check),
   # - lower (Transformation, Recheck, Transformation and Recheck),
@@ -110,12 +107,6 @@ for (workload in workloads) {
   extremes = NULL
   extremes = rbind(extremes, read.and.check.extremes)
   extremes = rbind(extremes, transformation.and.recheck.extremes)
-  
-  xbreaks
-  length(xbreaks)
-  
-  xlabels
-  length(xlabels)
   
   p = ggplot(df) + 
     #ggplot(na.omit(df)) +
@@ -130,7 +121,7 @@ for (workload in workloads) {
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
     facet_wrap(~ Phase, ncol = 3, scale = "free_y") +
     geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
-    guides(color = guide_legend(ncol = 4)) +
+    guides(color = guide_legend(nrow = 1)) +
     theme_bw() +
     theme(
       text = element_text(size = 10),
@@ -144,6 +135,6 @@ for (workload in workloads) {
   ggsave(
     plot = p,
     filename = paste("../diagrams/times-", workload, ".pdf", sep=""),
-    width = 210, height = 297, units = "mm"
+    width = 210, height = 150, units = "mm"
   )
 }
