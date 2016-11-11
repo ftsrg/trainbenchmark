@@ -23,7 +23,7 @@ public class DroolsTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final DroolsBenchmarkConfig bc = new DroolsBenchmarkConfigBuilder().setConfigBase(bcb).createBenchmarkConfig();
+		final DroolsBenchmarkConfig bc = new DroolsBenchmarkConfigBuilder().setConfigBase(bcb).createConfig();
 		final DroolsBenchmarkScenario scenario = new DroolsBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

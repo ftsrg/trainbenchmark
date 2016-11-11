@@ -9,7 +9,7 @@ public class IngraphBenchmarkConfig extends BenchmarkConfig {
 	protected final String queryVariant;
 	protected final String memoryMeasurementPath;
 
-	public IngraphBenchmarkConfig(final BenchmarkConfigBase bcb, final int messageSize, final String queryVariant,
+	protected IngraphBenchmarkConfig(final BenchmarkConfigBase bcb, final int messageSize, final String queryVariant,
 			final String memoryMeasurementPath) {
 		super(bcb);
 		this.messageSize = messageSize;

@@ -12,18 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.generator.sql.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBuilder;
 
-public class SqlGeneratorConfig extends GeneratorConfig {
-
-	protected SqlGeneratorConfig(final GeneratorConfigBase configBase) {
-		super(configBase);
-	}
+public class SqlGeneratorConfigBuilder extends GeneratorConfigBuilder<SqlGeneratorConfig, SqlGeneratorConfigBuilder> {
 
 	@Override
-	public String getProjectName() {
-		return "sql";
+	public SqlGeneratorConfig createConfig() {
+		checkNotNulls();
+		return new SqlGeneratorConfig(configBase);
 	}
 
 }

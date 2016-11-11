@@ -23,7 +23,7 @@ public abstract class SemaphoreNeighborTest extends QueryTest {
 				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
 		);
 		final String workload = "SemaphoreNeighborTest";
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs).setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED).setTransformationConstant(10).createBenchmarkConfigBase();
+		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs).setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED).setTransformationConstant(10).createConfigBase();
 
 		final BenchmarkResult result = performBenchmark(bcb);
 

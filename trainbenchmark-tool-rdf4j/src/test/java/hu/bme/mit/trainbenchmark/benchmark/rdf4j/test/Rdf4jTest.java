@@ -16,7 +16,7 @@ public class Rdf4jTest extends RdfTest {
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final Rdf4jBenchmarkConfig bc = new Rdf4jBenchmarkConfigBuilder().setConfigBase(bcb).setInferencing(inferencing)
-				.createBenchmarkConfig();
+				.createConfig();
 		final Rdf4jBenchmarkScenario scenario = new Rdf4jBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

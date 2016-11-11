@@ -16,8 +16,8 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class Neo4jGraphGeneratorConfig extends GeneratorConfig {
-	
-	public Neo4jGraphGeneratorConfig(final GeneratorConfigBase configBase) {
+
+	protected Neo4jGraphGeneratorConfig(final GeneratorConfigBase configBase) {
 		super(configBase);
 	}
 
@@ -25,5 +25,5 @@ public class Neo4jGraphGeneratorConfig extends GeneratorConfig {
 	public String getProjectName() {
 		return "graph-neo4j";
 	}
-	
+
 }

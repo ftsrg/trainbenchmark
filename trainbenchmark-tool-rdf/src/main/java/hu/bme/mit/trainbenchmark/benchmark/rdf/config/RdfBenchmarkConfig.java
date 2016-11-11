@@ -19,7 +19,7 @@ public abstract class RdfBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
 
-	public RdfBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+	protected RdfBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
 		super(configBase);
 		this.inferencing = inferencing;
 	}
