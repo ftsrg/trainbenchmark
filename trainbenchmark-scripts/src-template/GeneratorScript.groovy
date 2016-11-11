@@ -29,13 +29,18 @@ def formats = [
 ]
 
 for (scenario in scenarios) {
-	for (size = minSize; size <= maxSize; size *= 2) {
-		println("Scenario: ${scenario}, size: ${size}")
+	formats.each { generatorConfigBuilder ->
+		for (def size = minSize; size <= maxSize; size *= 2) {
+			println("Scenario: ${scenario}, size: ${size}")
 
-		def configBase = new GeneratorConfigBase(scenario, size)
-		formats.each { generatorConfigBuilder ->
-			def gc = generatorConfigBuilder.setConfigBase(configBase).createConfig()
-			GeneratorRunner.run(gc, ec)
+			def configBase = new GeneratorConfigBase(scenario, size)
+			def config = generatorConfigBuilder.setConfigBase(configBase).createConfig()
+
+			def exitValue = GeneratorRunner.run(config, ec)
+			if (exitValue != 0) {
+				println "Timeout or error occured, skipping models for larger sizes. Error code: {$exitValue}"
+				break
+			}
 		}
 	}
 }
