@@ -29,7 +29,7 @@ public class GeneratorRunner {
 			System.out.println();
 			return exitValue;
 		} catch (final ExecuteException e) {
-			e.printStackTrace();
+			e.printStackTrace(System.out);
 			return 143;
 		}
 	}

@@ -39,7 +39,7 @@ for (scenario in scenarios) {
 
 			def exitValue = GeneratorRunner.run(config, ec)
 			if (exitValue != 0) {
-				println "Timeout or error occured, skipping models for larger sizes. Error code: {$exitValue}"
+				println "Timeout or error occured, skipping models for larger sizes. Error code: ${exitValue}"
 				break
 			}
 		}
