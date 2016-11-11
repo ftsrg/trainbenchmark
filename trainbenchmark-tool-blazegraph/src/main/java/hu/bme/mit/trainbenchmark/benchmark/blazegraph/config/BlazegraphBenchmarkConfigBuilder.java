@@ -3,10 +3,10 @@ package hu.bme.mit.trainbenchmark.benchmark.blazegraph.config;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfigBuilder;
 
 public class BlazegraphBenchmarkConfigBuilder
-		extends RdfBenchmarkConfigBuilder<BlazegraphBenchmarkConfigBuilder, BlazegraphBenchmarkConfig> {
+		extends RdfBenchmarkConfigBuilder<BlazegraphBenchmarkConfig, BlazegraphBenchmarkConfigBuilder> {
 
 	@Override
-	public BlazegraphBenchmarkConfig createBenchmarkConfig() {
+	public BlazegraphBenchmarkConfig createConfig() {
 		checkNotNulls();
 		return new BlazegraphBenchmarkConfig(configBase, inferencing);
 	}

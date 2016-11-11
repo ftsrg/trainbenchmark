@@ -5,7 +5,7 @@ import com.google.common.base.Preconditions;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder;
 
 public class ViatraBenchmarkConfigBuilder
-		extends BenchmarkConfigBuilder<ViatraBenchmarkConfigBuilder, ViatraBenchmarkConfig> {
+		extends BenchmarkConfigBuilder<ViatraBenchmarkConfig, ViatraBenchmarkConfigBuilder> {
 
 	private ViatraBackend backend;
 
@@ -21,7 +21,7 @@ public class ViatraBenchmarkConfigBuilder
 	}
 
 	@Override
-	public ViatraBenchmarkConfig createBenchmarkConfig() {
+	public ViatraBenchmarkConfig createConfig() {
 		checkNotNulls();
 		return new ViatraBenchmarkConfig(configBase, backend);
 	}

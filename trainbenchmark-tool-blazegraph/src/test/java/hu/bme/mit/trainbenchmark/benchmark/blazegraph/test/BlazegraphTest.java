@@ -27,7 +27,7 @@ public class BlazegraphTest extends RdfTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final BlazegraphBenchmarkConfig bc = new BlazegraphBenchmarkConfigBuilder().setConfigBase(bcb).setInferencing(inferencing).createBenchmarkConfig();
+		final BlazegraphBenchmarkConfig bc = new BlazegraphBenchmarkConfigBuilder().setConfigBase(bcb).setInferencing(inferencing).createConfig();
 		final BlazegraphBenchmarkScenario scenario = new BlazegraphBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

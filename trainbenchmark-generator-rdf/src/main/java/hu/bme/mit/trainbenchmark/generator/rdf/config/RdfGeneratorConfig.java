@@ -21,7 +21,7 @@ public class RdfGeneratorConfig extends GeneratorConfig {
 	protected boolean inferred;
 	protected RdfFormat format;
 
-	public RdfGeneratorConfig(final GeneratorConfigBase configBase,
+	protected RdfGeneratorConfig(final GeneratorConfigBase configBase,
 			final boolean inferred, final RdfFormat format) {
 		super(configBase);
 		this.inferred = inferred;

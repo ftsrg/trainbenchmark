@@ -4,7 +4,8 @@ import com.google.common.base.Preconditions;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder;
 
-public class Neo4jBenchmarkConfigBuilder extends BenchmarkConfigBuilder<Neo4jBenchmarkConfigBuilder, Neo4jBenchmarkConfig> {
+public class Neo4jBenchmarkConfigBuilder
+		extends BenchmarkConfigBuilder<Neo4jBenchmarkConfig, Neo4jBenchmarkConfigBuilder> {
 
 	private Neo4jEngine engine;
 
@@ -20,7 +21,7 @@ public class Neo4jBenchmarkConfigBuilder extends BenchmarkConfigBuilder<Neo4jBen
 	}
 
 	@Override
-	public Neo4jBenchmarkConfig createBenchmarkConfig() {
+	public Neo4jBenchmarkConfig createConfig() {
 		checkNotNulls();
 		return new Neo4jBenchmarkConfig(configBase, engine);
 	}

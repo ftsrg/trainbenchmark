@@ -16,8 +16,8 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class EmfGeneratorConfig extends GeneratorConfig {
-	
-	public EmfGeneratorConfig(final GeneratorConfigBase configBase) {
+
+	protected EmfGeneratorConfig(final GeneratorConfigBase configBase) {
 		super(configBase);
 	}
 
@@ -25,5 +25,5 @@ public class EmfGeneratorConfig extends GeneratorConfig {
 	public String getProjectName() {
 		return "emf";
 	}
-	
+
 }

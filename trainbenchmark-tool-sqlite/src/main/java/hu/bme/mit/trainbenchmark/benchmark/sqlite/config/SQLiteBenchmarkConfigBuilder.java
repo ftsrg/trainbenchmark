@@ -3,10 +3,10 @@ package hu.bme.mit.trainbenchmark.benchmark.sqlite.config;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder;
 
 public class SQLiteBenchmarkConfigBuilder
-		extends BenchmarkConfigBuilder<SQLiteBenchmarkConfigBuilder, SQLiteBenchmarkConfig> {
+		extends BenchmarkConfigBuilder<SQLiteBenchmarkConfig, SQLiteBenchmarkConfigBuilder> {
 
 	@Override
-	public SQLiteBenchmarkConfig createBenchmarkConfig() {
+	public SQLiteBenchmarkConfig createConfig() {
 		checkNotNulls();
 		return new SQLiteBenchmarkConfig(configBase);
 	}

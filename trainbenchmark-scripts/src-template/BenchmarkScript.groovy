@@ -83,8 +83,8 @@ def runBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkCo
 		println("------------------------------------------------------------")
 
 		configBaseBuilder.setModelFilename(modelFilename)
-		def configBase = configBaseBuilder.createBenchmarkConfigBase()
-		def config = configBuilder.setConfigBase(configBase).createBenchmarkConfig()
+		def configBase = configBaseBuilder.createConfigBase()
+		def config = configBuilder.setConfigBase(configBase).createConfig()
 
 		def exitValue = BenchmarkRunner.runPerformanceBenchmark(config, ec)
 		if (exitValue != 0) {

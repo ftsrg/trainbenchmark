@@ -4,8 +4,8 @@ import com.google.common.base.Preconditions;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder;
 
-public abstract class RdfBenchmarkConfigBuilder<B extends RdfBenchmarkConfigBuilder<?, ?>, T extends RdfBenchmarkConfig>
-		extends BenchmarkConfigBuilder<B, T> {
+public abstract class RdfBenchmarkConfigBuilder<T extends RdfBenchmarkConfig, B extends RdfBenchmarkConfigBuilder<T, ?>>
+		extends BenchmarkConfigBuilder<T, B> {
 
 	protected Boolean inferencing;
 

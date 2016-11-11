@@ -70,8 +70,8 @@ def runMemoryBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, Bench
 		println("------------------------------------------------------------")
 
 		configBaseBuilder.setModelFilename(modelFilename)
-		def configBase = configBaseBuilder.createBenchmarkConfigBase()
-		def config = configBuilder.setConfigBase(configBase).createBenchmarkConfig()
+		def configBase = configBaseBuilder.createConfigBase()
+		def config = configBuilder.setConfigBase(configBase).createConfig()
 
 		def exitValue = BenchmarkRunner.runMemoryBenchmark(config, ec, numberOfSteps)
 		if (exitValue != 0) {

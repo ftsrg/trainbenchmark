@@ -56,7 +56,7 @@ public final class BenchmarkConfigBaseBuilder {
 		return this;
 	}
 
-	public BenchmarkConfigBase createBenchmarkConfigBase() {
+	public BenchmarkConfigBase createConfigBase() {
 		Preconditions.checkNotNull(timeout);
 		Preconditions.checkNotNull(runs);
 		Preconditions.checkNotNull(queryTransformationCount);
