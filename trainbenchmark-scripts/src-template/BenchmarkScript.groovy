@@ -19,10 +19,10 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigBu
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 
-def ec = new ExecutionConfig(8000, 8000)
+def ec = new ExecutionConfig(2000, 4000)
 
 def minSize = 1
-def maxSize = 256
+def maxSize = 2
 def timeout = 900
 def runs = 5
 
@@ -75,22 +75,26 @@ def workloads = [
 
 def runBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkConfigBuilder configBuilder,
 		ExecutionConfig ec, ModelSetConfig modelSetConfig) {
-	for (def size = modelSetConfig.minSize; size <= modelSetConfig.maxSize; size *= 2) {
-		def modelFilename = "railway-${modelSetConfig.modelVariant}-${size}"
+	try {
+		for (def size = modelSetConfig.minSize; size <= modelSetConfig.maxSize; size *= 2) {
+			def modelFilename = "railway-${modelSetConfig.modelVariant}-${size}"
 
-		println("------------------------------------------------------------")
-		println("Model: $modelFilename")
-		println("------------------------------------------------------------")
+			println("------------------------------------------------------------")
+			println("Model: $modelFilename")
+			println("------------------------------------------------------------")
 
-		configBaseBuilder.setModelFilename(modelFilename)
-		def configBase = configBaseBuilder.createConfigBase()
-		def config = configBuilder.setConfigBase(configBase).createConfig()
+			configBaseBuilder.setModelFilename(modelFilename)
+			def configBase = configBaseBuilder.createConfigBase()
+			def config = configBuilder.setConfigBase(configBase).createConfig()
 
-		def exitValue = BenchmarkRunner.runPerformanceBenchmark(config, ec)
-		if (exitValue != 0) {
-			println "Timeout or error occured, skipping models for larger sizes. Error code: ${exitValue}"
-			break
+			def exitValue = BenchmarkRunner.runPerformanceBenchmark(config, ec)
+			if (exitValue != 0) {
+				println "Timeout or error occured, skipping models for larger sizes. Error code: ${exitValue}"
+				break
+			}
 		}
+	} catch (all) {
+		println "Exception occured during execution."
 	}
 }
 
