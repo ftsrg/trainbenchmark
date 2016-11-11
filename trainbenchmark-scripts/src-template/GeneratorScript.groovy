@@ -3,6 +3,7 @@ import hu.bme.mit.trainbenchmark.constants.Scenario
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase
 import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfigBuilder
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigBuilder
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfigBuilder
 import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigBuilder
 import hu.bme.mit.trainbenchmark.generator.runner.GeneratorRunner
@@ -22,7 +23,7 @@ def scenarios = [
 def formats = [
 	new EmfGeneratorConfigBuilder(),
 	new Neo4jGraphGeneratorConfigBuilder(),
-	new TinkerGraphGeneratorConfigBuilder(),
+	new TinkerGraphGeneratorConfigBuilder().setGraphFormat(TinkerGraphFormat.GRAPHML),
 	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferencing(true),
 	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferencing(false),
 	new SqlGeneratorConfigBuilder(),
