@@ -47,8 +47,12 @@ public class BenchmarkRunner {
 			System.out.println();
 			return exitValue;
 		} catch (final ExecuteException e) {
-			e.printStackTrace(System.out);
-			return 143;
+			if (watchdog.killedProcess()) {
+				System.out.println("Process timed out.");
+			} else {
+				e.printStackTrace(System.out);
+			}
+			return e.getExitValue();
 		}
 	}
 
