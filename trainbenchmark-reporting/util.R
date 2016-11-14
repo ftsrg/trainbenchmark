@@ -4,7 +4,7 @@ nice_y_axis = function() {
   # y axis labels
   longticks = c(T, F, F, T, F, F, F, F, T)
   shortticks = 2:10
-  range = -6:4
+  range = -6:6
   
   ooms = 10^range
   
@@ -15,9 +15,13 @@ nice_y_axis = function() {
   list(ybreaks = ybreaks, ylabels = ylabels)
 }
 
-get_extremes = function(df, phase) {
-  phase.rows = df[df$Phase == phase, ]
-  phase.rows.extremes = phase.rows[phase.rows$Time == min(phase.rows$Time) | phase.rows$Time == max(phase.rows$Time), ]
+get_extremes = function(df, phases) {
+  phase.rows.extremes = NULL
+  for (phase in phases) {
+    phase.rows = df[df$Phase == phase, ]
+    phase.rows.current.extremes = phase.rows[phase.rows$Time == min(phase.rows$Time) | phase.rows$Time == max(phase.rows$Time), ]
+    phase.rows.extremes = rbind(phase.rows.extremes, phase.rows.current.extremes)
+  }
   phase.rows.extremes
 }
 
