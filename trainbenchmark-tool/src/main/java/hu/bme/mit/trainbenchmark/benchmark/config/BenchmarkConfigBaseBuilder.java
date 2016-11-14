@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
 public final class BenchmarkConfigBaseBuilder {
+	private Integer benchmarkId;
 	private Long timeout;
 	private Integer runs;
 	private Integer queryTransformationCount;
@@ -16,17 +17,17 @@ public final class BenchmarkConfigBaseBuilder {
 	private TransformationChangeSetStrategy transformationChangeSetStrategy;
 	private Integer transformationConstant;
 
-	public BenchmarkConfigBaseBuilder setTimeout(final long timeout) {
+	public BenchmarkConfigBaseBuilder setTimeout(final Long timeout) {
 		this.timeout = timeout;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setRuns(final int runs) {
+	public BenchmarkConfigBaseBuilder setRuns(final Integer runs) {
 		this.runs = runs;
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setQueryTransformationCount(final int queryTransformationCount) {
+	public BenchmarkConfigBaseBuilder setQueryTransformationCount(final Integer queryTransformationCount) {
 		this.queryTransformationCount = queryTransformationCount;
 		return this;
 	}
@@ -51,12 +52,18 @@ public final class BenchmarkConfigBaseBuilder {
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setTransformationConstant(final int transformationConstant) {
+	public BenchmarkConfigBaseBuilder setTransformationConstant(final Integer transformationConstant) {
 		this.transformationConstant = transformationConstant;
 		return this;
 	}
 
+	public BenchmarkConfigBaseBuilder setBenchmarkId(final Integer benchmarkId) {
+		this.benchmarkId = benchmarkId;
+		return this;
+	}
+
 	public BenchmarkConfigBase createConfigBase() {
+		Preconditions.checkNotNull(benchmarkId);
 		Preconditions.checkNotNull(timeout);
 		Preconditions.checkNotNull(runs);
 		Preconditions.checkNotNull(queryTransformationCount);
@@ -65,6 +72,6 @@ public final class BenchmarkConfigBaseBuilder {
 		Preconditions.checkNotNull(workload);
 		Preconditions.checkNotNull(transformationChangeSetStrategy);
 		Preconditions.checkNotNull(transformationConstant);
-		return new BenchmarkConfigBase(timeout, runs, queryTransformationCount, modelFilename, railwayOperations, workload, transformationChangeSetStrategy, transformationConstant);
+		return new BenchmarkConfigBase(benchmarkId, timeout, runs, queryTransformationCount, modelFilename, railwayOperations, workload, transformationChangeSetStrategy, transformationConstant);
 	}
 }
