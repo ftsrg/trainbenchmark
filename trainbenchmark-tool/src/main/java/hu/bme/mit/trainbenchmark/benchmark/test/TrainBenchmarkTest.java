@@ -23,12 +23,17 @@ public abstract class TrainBenchmarkTest {
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
 
+	protected final int benchmarkId = 0;
 	protected ExecutionConfig executionConfig = ExecutionConfig.defaultExecutionConfig();
 	protected final long timeout = 120;
 	protected final int runs = 2;
 	protected final int size = 1;
 	protected final TransformationChangeSetStrategy strategy = TransformationChangeSetStrategy.FIXED;
 	protected final int transformationConstant = 10;
+
+	final BenchmarkConfigBaseBuilder bcbb = new BenchmarkConfigBaseBuilder().setBenchmarkId(benchmarkId)
+			.setTimeout(timeout).setRuns(runs).setTransformationChangeSetStrategy(strategy)
+			.setTransformationConstant(transformationConstant);
 
 	protected abstract BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception;
 
@@ -48,10 +53,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHSET, //
 				RailwayOperation.SWITCHMONITORED //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setRuns(runs).setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -82,10 +86,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHSET_REPAIR, //
 				RailwayOperation.SWITCHMONITORED_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -115,10 +118,9 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -138,10 +140,9 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.POSLENGTH_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -161,10 +162,9 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.ROUTESENSOR_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -184,10 +184,9 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SEMAPHORENEIGHBOR_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -207,10 +206,9 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHMONITORED_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -230,10 +228,9 @@ public abstract class TrainBenchmarkTest {
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.SWITCHSET_REPAIR //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -255,10 +252,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.CONNECTEDSEGMENTS, //
 				RailwayOperation.CONNECTEDSEGMENTS_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -279,10 +275,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.POSLENGTH, //
 				RailwayOperation.POSLENGTH_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -303,10 +298,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.ROUTESENSOR, //
 				RailwayOperation.ROUTESENSOR_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -327,10 +321,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SEMAPHORENEIGHBOR, //
 				RailwayOperation.SEMAPHORENEIGHBOR_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -351,10 +344,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHMONITORED, //
 				RailwayOperation.SWITCHMONITORED_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
@@ -376,10 +368,9 @@ public abstract class TrainBenchmarkTest {
 				RailwayOperation.SWITCHSET, //
 				RailwayOperation.SWITCHSET_INJECT //
 		);
-		final BenchmarkConfigBase bcb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-				.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-				.setRailwayOperations(operations).setWorkload(workload).setTransformationChangeSetStrategy(strategy)
-				.setTransformationConstant(transformationConstant).createConfigBase();
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setRailwayOperations(operations).setWorkload(workload)
+				.createConfigBase();
 
 		// Act
 		final BenchmarkResult result = runTest(bcb);
