@@ -6,10 +6,9 @@ script:
   - ./gradlew build --exclude-task test
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
-branches:
-  except:
-  - ingraph
-notifications:
   email: false
   on_success: change
   on_failure: always
+branches:
+  except:
+  - ingraph
