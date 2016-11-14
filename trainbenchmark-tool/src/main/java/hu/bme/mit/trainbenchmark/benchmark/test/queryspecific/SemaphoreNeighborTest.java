@@ -15,7 +15,7 @@ public abstract class SemaphoreNeighborTest extends QueryTest {
 
 	@Test
 	public void testSemaphoreNeighbor() throws Exception {
-		bcbb.setWorkload("SemaphoreNeighborTest").setRailwayOperations(ImmutableList.of(RailwayOperation.SEMAPHORENEIGHBOR_REPAIR));
+		bcbb.setWorkload("SemaphoreNeighborTest").setOperations(ImmutableList.of(RailwayOperation.SEMAPHORENEIGHBOR_REPAIR));
 		final BenchmarkConfigBase bcb = bcbb.createConfigBase();
 		final BenchmarkResult result = performBenchmark(bcb);
 

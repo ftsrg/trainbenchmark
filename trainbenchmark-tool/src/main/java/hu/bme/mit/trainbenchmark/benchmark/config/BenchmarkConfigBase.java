@@ -48,7 +48,7 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	/**
 	 * The sequence of operations to perform.
 	 */
-	protected final List<RailwayOperation> railwayOperations;
+	protected final List<RailwayOperation> operations;
 
 	/**
 	 * A short description of the workload.
@@ -67,7 +67,7 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 
 	protected BenchmarkConfigBase(final int benchmarkId, final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
-			final List<RailwayOperation> railwayOperations, final String workload,
+			final List<RailwayOperation> operations, final String workload,
 			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
 		super();
 		this.benchmarkId = benchmarkId;
@@ -75,7 +75,7 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformationCount;
 		this.modelFilename = modelFilename;
-		this.railwayOperations = railwayOperations;
+		this.operations = operations;
 		this.workload = workload;
 		this.transformationChangeSetStrategy = transformationChangeSetStrategy;
 		this.transformationConstant = transformationConstant;
@@ -101,8 +101,8 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 		return getModelDir() + modelFilename;
 	}
 
-	public Collection<RailwayOperation> getRailwayOperations() {
-		return railwayOperations;
+	public Collection<RailwayOperation> getOperations() {
+		return operations;
 	}
 
 	/**

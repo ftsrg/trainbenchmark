@@ -12,7 +12,7 @@ public final class BenchmarkConfigBaseBuilder {
 	private Integer runs;
 	private Integer queryTransformationCount;
 	private String modelFilename;
-	private List<RailwayOperation> railwayOperations;
+	private List<RailwayOperation> operations;
 	private String workload;
 	private TransformationChangeSetStrategy transformationChangeSetStrategy;
 	private Integer transformationConstant;
@@ -37,8 +37,8 @@ public final class BenchmarkConfigBaseBuilder {
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setRailwayOperations(final List<RailwayOperation> railwayOperations) {
-		this.railwayOperations = railwayOperations;
+	public BenchmarkConfigBaseBuilder setOperations(final List<RailwayOperation> operations) {
+		this.operations = operations;
 		return this;
 	}
 
@@ -68,10 +68,10 @@ public final class BenchmarkConfigBaseBuilder {
 		Preconditions.checkNotNull(runs);
 		Preconditions.checkNotNull(queryTransformationCount);
 		Preconditions.checkNotNull(modelFilename);
-		Preconditions.checkNotNull(railwayOperations);
+		Preconditions.checkNotNull(operations);
 		Preconditions.checkNotNull(workload);
 		Preconditions.checkNotNull(transformationChangeSetStrategy);
 		Preconditions.checkNotNull(transformationConstant);
-		return new BenchmarkConfigBase(benchmarkId, timeout, runs, queryTransformationCount, modelFilename, railwayOperations, workload, transformationChangeSetStrategy, transformationConstant);
+		return new BenchmarkConfigBase(benchmarkId, timeout, runs, queryTransformationCount, modelFilename, operations, workload, transformationChangeSetStrategy, transformationConstant);
 	}
 }

@@ -46,13 +46,13 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	}
 
 	public void initializeOperations() throws Exception {
-		for (final RailwayOperation railwayOperation : bc.getConfigBase().getRailwayOperations()) {
+		for (final RailwayOperation railwayOperation : bc.getConfigBase().getOperations()) {
 			final String workspaceDir = bc.getConfigBase().getWorkspaceDir();
 
-			final ModelOperation<? extends TPatternMatch, TDriver> operation = factory.createOperation(railwayOperation,
+			final ModelOperation<? extends TPatternMatch, TDriver> modelOperation = factory.createOperation(railwayOperation,
 					workspaceDir, driver);
 			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation
-					.of(operation, comparator, random);
+					.of(modelOperation, comparator, random);
 			qsts.add(qst);
 		}
 	}
