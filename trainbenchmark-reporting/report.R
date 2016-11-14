@@ -98,20 +98,25 @@ for (workload in workloads) {
   # - lower (Transformation, Recheck, Transformation and Recheck),
   # we calculate minimum and maximum values
   
-  read.and.check.extremes = get_extremes(df, "Read and Check")
-  read.and.check.extremes = create_extremes_for_facets(read.and.check.extremes, c("Read", "Check"))
-  transformation.and.recheck.extremes = get_extremes(df, "Transformation and Recheck")
-  transformation.and.recheck.extremes = create_extremes_for_facets(transformation.and.recheck.extremes, c("Transformation", "Recheck"))
+  validation.facets = c("Read", "Check", "Read and Check")
+  read.and.check.extremes = get_extremes(df, validation.facets)
+  read.and.check.extremes = create_extremes_for_facets(read.and.check.extremes, validation.facets)
+  
+  revalidation.facets = c("Transformation", "Recheck", "Transformation and Recheck")
+  transformation.and.recheck.extremes = get_extremes(df, revalidation.facets)
+  transformation.and.recheck.extremes = create_extremes_for_facets(transformation.and.recheck.extremes, revalidation.facets)
 
   extremes = NULL
   extremes = rbind(extremes, read.and.check.extremes)
   extremes = rbind(extremes, transformation.and.recheck.extremes)
   
+  print(extremes)
+  
   p = ggplot(df) + #na.omit(df)) +
     aes(x = as.factor(Model), y = Time) +
     labs(title = workload, x = "Model size\n#Elements", y = "Execution times [ms]") +
-    geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
     geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
+    geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
     scale_shape_manual(values = seq(0, 15)) +
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
