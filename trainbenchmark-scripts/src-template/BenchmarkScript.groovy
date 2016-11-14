@@ -118,7 +118,7 @@ workloads.each { workload ->
 
 	def bcbb = new BenchmarkConfigBaseBuilder()
 			.setBenchmarkId(benchmarkId).setTimeout(timeout).setRuns(runs)
-			.setRailwayOperations(operations).setWorkload(workloadName)
+			.setOperations(operations).setWorkload(workloadName)
 			.setQueryTransformationCount(queryTransformationCount).setTransformationConstant(constant)
 			.setTransformationChangeSetStrategy(strategy)
 

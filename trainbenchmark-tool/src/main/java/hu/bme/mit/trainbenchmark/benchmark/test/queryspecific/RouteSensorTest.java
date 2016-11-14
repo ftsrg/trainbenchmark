@@ -15,7 +15,7 @@ public abstract class RouteSensorTest extends QueryTest {
 
 	@Test
 	public void testRouteSensor() throws Exception {
-		bcbb.setWorkload("RouteSensorTest").setRailwayOperations(ImmutableList.of(RailwayOperation.ROUTESENSOR_REPAIR));
+		bcbb.setWorkload("RouteSensorTest").setOperations(ImmutableList.of(RailwayOperation.ROUTESENSOR_REPAIR));
 		final BenchmarkConfigBase bcb = bcbb.createConfigBase();
 		final BenchmarkResult result = performBenchmark(bcb);
 
