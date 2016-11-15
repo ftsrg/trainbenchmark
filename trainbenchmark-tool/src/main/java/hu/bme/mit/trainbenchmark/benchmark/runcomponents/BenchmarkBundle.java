@@ -11,6 +11,7 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.driver.DriverFactory;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
+import hu.bme.mit.trainbenchmark.constants.ExecutionPhase;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
@@ -49,8 +50,8 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 		for (final RailwayOperation railwayOperation : bc.getConfigBase().getOperations()) {
 			final String workspaceDir = bc.getConfigBase().getWorkspaceDir();
 
-			final ModelOperation<? extends TPatternMatch, TDriver> modelOperation = factory.createOperation(railwayOperation,
-					workspaceDir, driver);
+			final ModelOperation<? extends TPatternMatch, TDriver> modelOperation = factory
+					.createOperation(railwayOperation, workspaceDir, driver);
 			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation
 					.of(modelOperation, comparator, random);
 			qsts.add(qst);
@@ -59,15 +60,22 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 
 	public void query() throws Exception {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
-			final Collection<?> matches = qst.evaluateQuery();
-			benchmarkResults.registerMatches(qst.getQuery().getQuery(), matches.size());
+			if (qst.getQueryExecutionPhase() == ExecutionPhase.CHECK) {
+				final Collection<?> matches = qst.query();
+				benchmarkResults.registerMatches(qst.getQuery().getQuery(), matches.size());
+			}
 		}
 	}
 
-	public void shuffle() {
+	public void shuffle() throws Exception {
 		for (final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst : qsts) {
+			if (qst.getQueryExecutionPhase() == ExecutionPhase.TRANSFORMATION) {
+				qst.query();
+			}
+
 			if (qst.isTransformation()) {
-				final int changeSetSize = determineChangeSet(qst, bc.getConfigBase().getTransformationChangeSetStrategy(),
+				final int changeSetSize = determineChangeSet(qst,
+						bc.getConfigBase().getTransformationChangeSetStrategy(),
 						bc.getConfigBase().getTransformationConstant());
 				qst.shuffle(changeSetSize);
 			}
@@ -94,7 +102,8 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 		case PROPORTIONAL:
 			return qst.getMatches().size() * transformationConstant / 100;
 		default:
-			throw new UnsupportedOperationException("Transformation change set strategy " + transformationChangeSetStrategy + " not supported.");
+			throw new UnsupportedOperationException(
+					"Transformation change set strategy " + transformationChangeSetStrategy + " not supported.");
 		}
 	}
 

@@ -12,6 +12,7 @@ import com.google.common.collect.Ordering;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.constants.ExecutionPhase;
 
 public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver> {
 
@@ -34,7 +35,7 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver> {
 		return new QueryShuffleTransformation<>(operation, comparator, random);
 	}
 
-	public Collection<? extends TPatternMatch> evaluateQuery() throws Exception {
+	public Collection<? extends TPatternMatch> query() throws Exception {
 		matches = operation.getQuery().evaluate();
 		return matches;
 	}
@@ -68,17 +69,22 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver> {
 	public ModelQuery<TPatternMatch, TDriver> getQuery() {
 		return operation.getQuery();
 	}
-	
+
 	public Collection<TPatternMatch> getMatches() {
 		return matches;
 	}
-	
+
 	public List<TPatternMatch> getSortedMatches() {
 		return sortedMatches;
 	}
-	
+
 	public List<TPatternMatch> getCandidates() {
 		return candidates;
 	}
+
+	public ExecutionPhase getQueryExecutionPhase() {
+		return getQuery().getQuery().getExecutionPhase();
+	}
+
 
 }
