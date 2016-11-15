@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.result.AbstractResult;
+import hu.bme.mit.trainbenchmark.constants.ExecutionPhase;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
 public class BenchmarkResult extends AbstractResult {
@@ -63,7 +64,8 @@ public class BenchmarkResult extends AbstractResult {
 	}
 
 	public String csvTimes() {
-		final List<String> headerAttributes = ImmutableList.of(TOOL, WORKLOAD, DESCRIPTION, MODEL, RUN, PHASE, ITERATION, TIME);
+		final List<String> headerAttributes = ImmutableList.of(TOOL, WORKLOAD, DESCRIPTION, MODEL, RUN, PHASE,
+				ITERATION, TIME);
 		final String header = separatorJoiner.join(headerAttributes);
 
 		final List<String> rows = Lists.newArrayList(header);
@@ -73,13 +75,13 @@ public class BenchmarkResult extends AbstractResult {
 
 			// Read
 			final List<String> timeRecordAttributes = ImmutableList.of(toolName, workload, description, model,
-					run.toString(), "Read", NA, runResult.getReadTime().toString());
+					run.toString(), ExecutionPhase.READ.toString(), NA, runResult.getReadTime().toString());
 			final String timeRecord = separatorJoiner.join(timeRecordAttributes);
 			rows.add(timeRecord);
 
 			// Check
 			final List<String> queryRecordAttributes = ImmutableList.of(toolName, workload, description, model,
-					run.toString(), "Check", NA, runResult.getQueryTimes().get(0).toString());
+					run.toString(), ExecutionPhase.CHECK.toString(), NA, runResult.getQueryTimes().get(0).toString());
 			final String queryRecord = separatorJoiner.join(queryRecordAttributes);
 			rows.add(queryRecord);
 
@@ -90,15 +92,17 @@ public class BenchmarkResult extends AbstractResult {
 				final Long transformationTime = transformationTimes.get(iteration - 1);
 				final Long recheckTime = queryTimes.get(iteration);
 
-				final List<String> recheckRecordAttributes = ImmutableList.of(toolName, workload, description, model,
-						run.toString(), "Transformation", iteration.toString(), recheckTime.toString());
-				final String recheckRecord = separatorJoiner.join(recheckRecordAttributes);
-				rows.add(recheckRecord);
-
-				final List<String> transformationRecordAttributes = ImmutableList.of(toolName, workload, description, model,
-						run.toString(), "Recheck", iteration.toString(), transformationTime.toString());
+				final List<String> transformationRecordAttributes = ImmutableList.of(toolName, workload, description,
+						model, run.toString(), ExecutionPhase.TRANSFORMATION.toString(), iteration.toString(),
+						transformationTime.toString());
 				final String transformationRecord = separatorJoiner.join(transformationRecordAttributes);
 				rows.add(transformationRecord);
+
+				final List<String> recheckRecordAttributes = ImmutableList.of(toolName, workload, description, model,
+						run.toString(), ExecutionPhase.RECHECK.toString(), iteration.toString(),
+						recheckTime.toString());
+				final String recheckRecord = separatorJoiner.join(recheckRecordAttributes);
+				rows.add(recheckRecord);
 			}
 		}
 
