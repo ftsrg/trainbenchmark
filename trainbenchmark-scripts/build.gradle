@@ -53,7 +53,10 @@ task saveScripts(type: Copy) {
 }
 
 task cleanResults(type: Delete) {
-	delete fileTree(dir: '../results', include: '*.csv')
+	def resultDir = "../results"
+	file(resultDir).eachDir{ dir ->
+		delete "${dir}"
+	}
 }
 
 task benchmark(dependsOn: 'classes', type: JavaExec) {
