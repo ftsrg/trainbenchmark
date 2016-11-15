@@ -1,24 +1,28 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum RailwayOperation {
-	ACTIVEROUTE("ActiveRoute"), //
+	// well-formedness constraint operations (query only)
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
-	CONNECTEDSEGMENTS_INJECT("ConnectedSegmentsInject"), //
-	CONNECTEDSEGMENTS_REPAIR("ConnectedSegmentsRepair"), //
 	POSLENGTH("PosLength"), //
-	POSLENGTH_INJECT("PosLengthInject"), //
-	POSLENGTH_REPAIR("PosLengthRepair"), //
 	ROUTESENSOR("RouteSensor"), //
-	ROUTESENSOR_INJECT("RouteSensorInject"), //
-	ROUTESENSOR_REPAIR("RouteSensorRepair"), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
-	SEMAPHORENEIGHBOR_INJECT("SemaphoreNeighborInject"), //
-	SEMAPHORENEIGHBOR_REPAIR("SemaphoreNeighborRepair"), //
 	SWITCHMONITORED("SwitchMonitored"), //
-	SWITCHMONITORED_INJECT("SwitchMonitoredInject"), //
-	SWITCHMONITORED_REPAIR("SwitchMonitoredRepair"), //
 	SWITCHSET("SwitchSet"), //
+
+	// fault injection operations
+	CONNECTEDSEGMENTS_INJECT("ConnectedSegmentsInject"), //
+	POSLENGTH_INJECT("PosLengthInject"), //
+	ROUTESENSOR_INJECT("RouteSensorInject"), //
+	SEMAPHORENEIGHBOR_INJECT("SemaphoreNeighborInject"), //
+	SWITCHMONITORED_INJECT("SwitchMonitoredInject"), //
 	SWITCHSET_INJECT("SwitchSetInject"), //
+
+	// repair operations
+	CONNECTEDSEGMENTS_REPAIR("ConnectedSegmentsRepair"), //
+	POSLENGTH_REPAIR("PosLengthRepair"), //
+	ROUTESENSOR_REPAIR("RouteSensorRepair"), //
+	SEMAPHORENEIGHBOR_REPAIR("SemaphoreNeighborRepair"), //
+	SWITCHMONITORED_REPAIR("SwitchMonitoredRepair"), //
 	SWITCHSET_REPAIR("SwitchSetRepair"), //
 	;
 
