@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
 
-:information_source: **Summary.** The Train Benchmark is a framework for measuring the performance of continuous model transformations, with a particular emphasis on the performance of incremental query reevaluation. The benchmark is actively developed since 2011.
+:steam_locomotive: **Summary.** The Train Benchmark is a framework for measuring the performance of continuous model transformations, with a particular emphasis on the performance of incremental query reevaluation. The benchmark is actively developed since 2011.
 
 :computer: **Technologies.** The framework is implemented in Java 8 (for the main components) and [Groovy](http://www.groovy-lang.org/) (for the scripts). The visualization is handled by [R scripts](https://www.r-project.org/). Both the build and the benchmark process in governed by [Gradle](https://gradle.org/).
 
@@ -14,4 +14,4 @@
 
 :book: **Details.** If you are interested in getting the benchmark working or contributing, visit the [documentation](docs/).
 
-:books: For theoretical foundations, check out our [related publications](http://incquery.net/publications/trainbenchmark)
+:books: **Publications.** For theoretical foundations, check out our [related publications](http://incquery.net/publications/trainbenchmark)

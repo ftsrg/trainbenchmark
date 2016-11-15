@@ -49,6 +49,12 @@ def tools = [
 def workloads = [
 	Inject: [
 		operations: [
+			RailwayOperation.CONNECTEDSEGMENTS,
+			RailwayOperation.POSLENGTH,
+			RailwayOperation.ROUTESENSOR,
+			RailwayOperation.SEMAPHORENEIGHBOR,
+			RailwayOperation.SWITCHSET,
+			RailwayOperation.SWITCHMONITORED,
 			RailwayOperation.CONNECTEDSEGMENTS_INJECT,
 			RailwayOperation.POSLENGTH_INJECT,
 			RailwayOperation.ROUTESENSOR_INJECT,
