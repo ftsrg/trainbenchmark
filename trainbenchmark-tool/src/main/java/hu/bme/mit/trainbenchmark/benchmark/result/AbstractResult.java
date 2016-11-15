@@ -2,18 +2,14 @@ package hu.bme.mit.trainbenchmark.benchmark.result;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Joiner;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 
 public abstract class AbstractResult {
-
-	public static final String RESULT_DIR = "results/";
 
 	protected final String SEP = ",";
 	protected final String NL = "\n";
@@ -51,25 +47,7 @@ public abstract class AbstractResult {
 	}
 
 	public String getResultDir() {
-		return workspaceDir + RESULT_DIR + String.format("%04d", benchmarkId) + "/";
-	}
-
-	/**
-	 * Note that this method should be called from the workspace directory.
-	 *
-	 * @return
-	 */
-
-	public static int getNextId() {
-		final File[] resultDirs = new File("../" + RESULT_DIR).listFiles(File::isDirectory);
-		final Integer lastId = Arrays.stream(resultDirs) //
-				.map(dir -> dir.getName()) //
-				.filter(name -> StringUtils.isNumeric(name)) //
-				.map(name -> Integer.parseInt(name)) //
-				.max(Integer::compare) //
-				.orElse(0);
-		final Integer newId = lastId + 1;
-		return newId;
+		return workspaceDir + ResultHelper.getResultDirForId(benchmarkId);
 	}
 
 }
