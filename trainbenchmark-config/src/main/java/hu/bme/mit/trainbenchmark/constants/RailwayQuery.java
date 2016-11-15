@@ -11,31 +11,42 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.constants;
 
+import static hu.bme.mit.trainbenchmark.constants.ExecutionPhase.CHECK;
+import static hu.bme.mit.trainbenchmark.constants.ExecutionPhase.TRANSFORMATION;
+
 public enum RailwayQuery {
 	// well-formedness constraint queries (LHS for the Repair scenario)
-	CONNECTEDSEGMENTS("ConnectedSegments"), //
-	POSLENGTH("PosLength"), //
-	ROUTESENSOR("RouteSensor"), //
-	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
-	SWITCHMONITORED("SwitchMonitored"), //
-	SWITCHSET("SwitchSet"), //
+	CONNECTEDSEGMENTS("ConnectedSegments", CHECK), //
+	POSLENGTH("PosLength", CHECK), //
+	ROUTESENSOR("RouteSensor", CHECK), //
+	SEMAPHORENEIGHBOR("SemaphoreNeighbor", CHECK), //
+	SWITCHMONITORED("SwitchMonitored", CHECK), //
+	SWITCHSET("SwitchSet", CHECK), //
+
 	// LHS queries for the Inject scenario
-	CONNECTEDSEGMENTS_INJECT("ConnectedSegmentsInject"), //
-	POSLENGTH_INJECT("PosLengthInject"), //
-	ROUTESENSOR_INJECT("RouteSensorInject"), //
-	SEMAPHORENEIGHBOR_INJECT("SemaphoreNeighborInject"), //
-	SWITCHMONITORED_INJECT("SwitchMonitoredInject"), //
-	SWITCHSET_INJECT("SwitchSetInject"), //
+	CONNECTEDSEGMENTS_INJECT("ConnectedSegmentsInject", TRANSFORMATION), //
+	POSLENGTH_INJECT("PosLengthInject", TRANSFORMATION), //
+	ROUTESENSOR_INJECT("RouteSensorInject", TRANSFORMATION), //
+	SEMAPHORENEIGHBOR_INJECT("SemaphoreNeighborInject", TRANSFORMATION), //
+	SWITCHMONITORED_INJECT("SwitchMonitoredInject", TRANSFORMATION), //
+	SWITCHSET_INJECT("SwitchSetInject", TRANSFORMATION), //
 	;
 
 	private String name;
+	private ExecutionPhase executionPhase;
 
-	RailwayQuery(final String name) {
+	RailwayQuery(final String name, final ExecutionPhase executionPhase) {
 		this.name = name;
+		this.executionPhase = executionPhase;
 	}
 
 	@Override
 	public String toString() {
 		return name;
 	}
+
+	public ExecutionPhase getExecutionPhase() {
+		return executionPhase;
+	}
+
 }
