@@ -67,7 +67,7 @@ public abstract class AbstractResult {
 				.filter(name -> StringUtils.isNumeric(name)) //
 				.map(name -> Integer.parseInt(name)) //
 				.max(Integer::compare) //
-				.get();
+				.orElse(0);
 		final Integer newId = lastId + 1;
 		return newId;
 	}
