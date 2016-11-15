@@ -14,7 +14,10 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.driver;
 import org.apache.log4j.Level;
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions;
 import org.eclipse.viatra.query.runtime.emf.EMFScope;
+import org.eclipse.viatra.query.runtime.localsearch.matcher.integration.LocalSearchHints;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
@@ -39,22 +42,22 @@ public class ViatraDriver extends EmfDriver {
 
 		final ViatraQueryEngine vqe;
 
-//		switch (backend) {
-//		case INCREMENTAL:
-//			vqe = ViatraQueryEngine.on(scope);
-//			break;
-//		case LOCAL_SEARCH:
-//			// see https://wiki.eclipse.org/VIATRA/Query/UserDocumentation/API/LocalSearch
-//			final QueryEvaluationHint localSearchHint = LocalSearchHints.getDefault().build();
-//			final ViatraQueryEngineOptions options = ViatraQueryEngineOptions.defineOptions(). //
-//					withDefaultHint(localSearchHint).build();
-//			vqe = ViatraQueryEngine.on(scope, options);
-//			break;
-//		default:
-//			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
-//		}
+		switch (backend) {
+		case INCREMENTAL:
+			vqe = ViatraQueryEngine.on(scope);
+			break;
+		case LOCAL_SEARCH:
+			// see https://wiki.eclipse.org/VIATRA/Query/UserDocumentation/API/LocalSearch
+			final QueryEvaluationHint localSearchHint = LocalSearchHints.getDefault().build();
+			final ViatraQueryEngineOptions options = ViatraQueryEngineOptions.defineOptions(). //
+					withDefaultHint(localSearchHint).build();
+			vqe = ViatraQueryEngine.on(scope, options);
+			break;
+		default:
+			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
+		}
 
-		engine = AdvancedViatraQueryEngine.from(ViatraQueryEngine.on(scope));
+//		engine = AdvancedViatraQueryEngine.from(ViatraQueryEngine.on(scope));
 	}
 
 	@Override
