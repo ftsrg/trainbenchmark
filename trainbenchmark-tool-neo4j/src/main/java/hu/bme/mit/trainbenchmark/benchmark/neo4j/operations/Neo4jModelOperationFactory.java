@@ -75,13 +75,6 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 		switch (neo4jEngine) {
 		case COREAPI:
 			switch (operationEnum) {
-			// ActiveRoute
-			case ACTIVEROUTE: {
-				// final ModelQuery<Neo4jActiveRouteMatch, Neo4jDriver> query = new ... // TODO
-				// final ModelOperation<Neo4jActiveRouteMatch, Neo4jDriver> operation = ModelOperation.of(query);
-				// return operation;
-			}
-
 				// ConnectedSegments
 			case CONNECTEDSEGMENTS: {
 				final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = new Neo4jCoreQueryConnectedSegments(driver);
@@ -201,13 +194,6 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 			}
 		case CYPHER:
 			switch (operationEnum) {
-			// ActiveRoute
-			case ACTIVEROUTE: {
-				// final ModelQuery<Neo4jActiveRouteMatch, Neo4jDriver> query = new ... // TODO
-				// final ModelOperation<Neo4jActiveRouteMatch, Neo4jDriver> operation = ModelOperation.of(query);
-				// return operation;
-			}
-
 				// ConnectedSegments
 			case CONNECTEDSEGMENTS: {
 				final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);

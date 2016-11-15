@@ -12,8 +12,6 @@
 package hu.bme.mit.trainbenchmark.constants;
 
 public enum RailwayQuery {
-	// simulation queries
-	ACTIVEROUTE("ActiveRoute"), //
 	// well-formedness constraint queries (LHS for the Repair scenario)
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
 	POSLENGTH("PosLength"), //
