@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-	compile project(':trainbenchmark-tool-tinkergraph')
+	compile project(':trainbenchmark-tool')
 	compile project(':trainbenchmark-tool-ingraph-query-plans')
 	compile group: 'ingraph', name: 'ingraph-ire', version: ingraphVersion
 	compile 'com.github.jbellis:jamm:0.3.1'
