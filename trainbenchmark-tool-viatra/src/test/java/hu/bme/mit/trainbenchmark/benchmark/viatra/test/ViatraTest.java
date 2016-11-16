@@ -41,7 +41,7 @@ public class ViatraTest extends TrainBenchmarkTest {
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final ViatraBenchmarkConfig bc = new ViatraBenchmarkConfigBuilder().setConfigBase(bcb).setBackend(backend)
-				.createBenchmarkConfig();
+				.createConfig();
 		final ViatraBenchmarkScenario scenario = new ViatraBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

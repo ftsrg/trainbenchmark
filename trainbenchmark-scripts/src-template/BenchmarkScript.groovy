@@ -75,22 +75,26 @@ def workloads = [
 
 def runBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkConfigBuilder configBuilder,
 		ExecutionConfig ec, ModelSetConfig modelSetConfig) {
-	for (def size = modelSetConfig.minSize; size <= modelSetConfig.maxSize; size *= 2) {
-		def modelFilename = "railway-${modelSetConfig.modelVariant}-${size}"
+	try {
+		for (def size = modelSetConfig.minSize; size <= modelSetConfig.maxSize; size *= 2) {
+			def modelFilename = "railway-${modelSetConfig.modelVariant}-${size}"
 
-		println("------------------------------------------------------------")
-		println("Model: $modelFilename")
-		println("------------------------------------------------------------")
+			println("------------------------------------------------------------")
+			println("Model: $modelFilename")
+			println("------------------------------------------------------------")
 
-		configBaseBuilder.setModelFilename(modelFilename)
-		def configBase = configBaseBuilder.createBenchmarkConfigBase()
-		def config = configBuilder.setConfigBase(configBase).createBenchmarkConfig()
+			configBaseBuilder.setModelFilename(modelFilename)
+			def configBase = configBaseBuilder.createConfigBase()
+			def config = configBuilder.setConfigBase(configBase).createConfig()
 
-		def exitValue = BenchmarkRunner.runPerformanceBenchmark(config, ec)
-		if (exitValue != 0) {
-			println "Timeout or error occured, skipping models for larger sizes. Error code: ${exitValue}"
-			break
+			def exitValue = BenchmarkRunner.runPerformanceBenchmark(config, ec)
+			if (exitValue != 0) {
+				println "Timeout or error occured, skipping models for larger sizes. Error code: ${exitValue}"
+				break
+			}
 		}
+	} catch (all) {
+		println "Exception occured during execution."
 	}
 }
 

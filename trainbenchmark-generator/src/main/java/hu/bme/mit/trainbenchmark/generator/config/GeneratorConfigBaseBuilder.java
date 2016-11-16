@@ -1,9 +1,10 @@
 package hu.bme.mit.trainbenchmark.generator.config;
 
 import com.google.common.base.Preconditions;
+
 import hu.bme.mit.trainbenchmark.constants.Scenario;
 
-public class GeneratorConfigBaseBuilder {
+public final class GeneratorConfigBaseBuilder {
 	private Scenario scenario;
 	private Integer size;
 

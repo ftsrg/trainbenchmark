@@ -23,7 +23,7 @@ public class MySqlTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final MySqlBenchmarkConfig bc = new MySqlBenchmarkConfigBuilder().setConfigBase(bcb).createBenchmarkConfig();
+		final MySqlBenchmarkConfig bc = new MySqlBenchmarkConfigBuilder().setConfigBase(bcb).createConfig();
 		final MySqlBenchmarkScenario scenario = new MySqlBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

@@ -10,28 +10,42 @@ import hu.bme.mit.trainbenchmark.generator.runner.GeneratorRunner
 import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfig
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 
-def ec = new ExecutionConfig(4000, 12000)
+def ec = new ExecutionConfig(2000, 4000)
 def minSize = 1
-def maxSize = 1024
+def maxSize = 2
 
 def scenarios = [
+	Scenario.BATCH,
+	Scenario.INJECT,
 	Scenario.REPAIR,
 ]
 
-def generate(ExecutionConfig ec, Scenario scenario, int size) {
-	def gcb = new GeneratorConfigBase(scenario, size)
-
-
-
-	// graph / TinkerPop
-	def tgc = new TinkerGraphGeneratorConfig(gcb, TinkerGraphFormat.GRAPHML)
-	GeneratorRunner.run(tgc, ec)
-
-}
+def formats = [
+	new EmfGeneratorConfigBuilder(),
+	new Neo4jGraphGeneratorConfigBuilder(),
+	new TinkerGraphGeneratorConfigBuilder().setGraphFormat(TinkerGraphFormat.GRAPHML),
+	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferencing(true),
+	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferencing(false),
+	new SqlGeneratorConfigBuilder(),
+]
 
 for (scenario in scenarios) {
-	for (size = minSize; size <= maxSize; size *= 2) {
-		println("Scenario: ${scenario}, size: ${size}")
-		generate(ec, scenario, size)
+	formats.each { generatorConfigBuilder ->
+		try {
+			for (def size = minSize; size <= maxSize; size *= 2) {
+				println("Scenario: ${scenario}, size: ${size}")
+
+				def configBase = new GeneratorConfigBase(scenario, size)
+				def config = generatorConfigBuilder.setConfigBase(configBase).createConfig()
+
+				def exitValue = GeneratorRunner.run(config, ec)
+				if (exitValue != 0) {
+					println "Timeout or error occured, skipping models for larger sizes. Error code: ${exitValue}"
+					break
+				}
+			}
+		} catch (all) {
+			println "Exception occured during execution."
+		}
 	}
 }

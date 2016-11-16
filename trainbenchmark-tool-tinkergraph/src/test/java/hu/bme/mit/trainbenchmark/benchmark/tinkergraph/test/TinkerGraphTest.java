@@ -24,7 +24,7 @@ public class TinkerGraphTest extends TrainBenchmarkTest {
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final TinkerGraphBenchmarkConfig bc = new TinkerGraphBenchmarkConfigBuilder().setConfigBase(bcb)
-				.createBenchmarkConfig();
+				.createConfig();
 		final TinkerGraphBenchmarkScenario scenario = new TinkerGraphBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

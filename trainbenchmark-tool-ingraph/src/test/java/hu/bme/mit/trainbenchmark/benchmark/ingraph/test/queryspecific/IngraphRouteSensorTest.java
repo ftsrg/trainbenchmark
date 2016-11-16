@@ -22,7 +22,6 @@ import org.junit.runners.Parameterized.Parameters;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfigBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.queryspecific.RouteSensorTest;
 
@@ -41,7 +40,7 @@ public class IngraphRouteSensorTest extends RouteSensorTest {
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
 		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfigBuilder().setConfigBase(bcb)
-				.setMessageSize(messageSize).setQueryVariant(variant).createBenchmarkConfig();
+				.setMessageSize(messageSize).setQueryVariant(variant).createConfig();
 		final IngraphBenchmarkScenario scenario = IngraphBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

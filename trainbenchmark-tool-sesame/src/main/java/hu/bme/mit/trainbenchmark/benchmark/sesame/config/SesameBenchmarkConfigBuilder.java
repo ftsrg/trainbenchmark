@@ -3,10 +3,10 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.config;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfigBuilder;
 
 public class SesameBenchmarkConfigBuilder
-		extends RdfBenchmarkConfigBuilder<SesameBenchmarkConfigBuilder, SesameBenchmarkConfig> {
+		extends RdfBenchmarkConfigBuilder<SesameBenchmarkConfig, SesameBenchmarkConfigBuilder> {
 
 	@Override
-	public SesameBenchmarkConfig createBenchmarkConfig() {
+	public SesameBenchmarkConfig createConfig() {
 		checkNotNulls();
 		return new SesameBenchmarkConfig(configBase, inferencing);
 	}

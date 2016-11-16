@@ -23,7 +23,7 @@ public class EclipseOclTest extends TrainBenchmarkTest {
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final EclipseOclBenchmarkConfig bc = new EclipseOclBenchmarkConfigBuilder().setConfigBase(bcb).createBenchmarkConfig();
+		final EclipseOclBenchmarkConfig bc = new EclipseOclBenchmarkConfigBuilder().setConfigBase(bcb).createConfig();
 		final EclipseOclBenchmarkScenario scenario = new EclipseOclBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

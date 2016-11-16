@@ -1,11 +1,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.config;
 
-import com.google.api.client.util.Preconditions;
+import com.google.common.base.Preconditions;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder;
 
 public class IngraphBenchmarkConfigBuilder
-		extends BenchmarkConfigBuilder<IngraphBenchmarkConfigBuilder, IngraphBenchmarkConfig> {
+		extends BenchmarkConfigBuilder<IngraphBenchmarkConfig, IngraphBenchmarkConfigBuilder> {
 
 	protected Integer messageSize;
 	protected String queryVariant;
@@ -27,9 +27,9 @@ public class IngraphBenchmarkConfigBuilder
 	}
 
 	@Override
-	public IngraphBenchmarkConfig createBenchmarkConfig() {
+	public IngraphBenchmarkConfig createConfig() {
 		checkNotNulls();
-		return new IngraphBenchmarkConfig(configBase, messageSize, queryVariant);
+		return new IngraphBenchmarkConfig(configBase, messageSize, queryVariant, null);
 	}
 
 }

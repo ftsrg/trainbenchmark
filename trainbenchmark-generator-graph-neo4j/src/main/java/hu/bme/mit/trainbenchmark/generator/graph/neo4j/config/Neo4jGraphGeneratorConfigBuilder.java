@@ -10,20 +10,16 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.generator.sql.config;
+package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBuilder;
 
-public class SqlGeneratorConfig extends GeneratorConfig {
-
-	protected SqlGeneratorConfig(final GeneratorConfigBase configBase) {
-		super(configBase);
-	}
+public class Neo4jGraphGeneratorConfigBuilder extends GeneratorConfigBuilder<Neo4jGraphGeneratorConfig, Neo4jGraphGeneratorConfigBuilder> {
 
 	@Override
-	public String getProjectName() {
-		return "sql";
+	public Neo4jGraphGeneratorConfig createConfig() {
+		checkNotNulls();
+		return new Neo4jGraphGeneratorConfig(configBase);
 	}
 
 }

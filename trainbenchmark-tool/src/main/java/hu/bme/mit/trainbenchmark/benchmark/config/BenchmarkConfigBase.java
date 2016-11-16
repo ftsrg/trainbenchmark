@@ -21,6 +21,11 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 public final class BenchmarkConfigBase extends AbstractConfigBase {
 
 	/**
+	 * The id for the benchmark, used for determining the result directory.
+	 */
+	protected final int benchmarkId;
+
+	/**
 	 * The timeout for each measurement run in seconds.
 	 */
 	protected final long timeout;
@@ -60,11 +65,12 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	 */
 	protected final int transformationConstant;
 
-	protected BenchmarkConfigBase(final long timeout, final int runs,
+	protected BenchmarkConfigBase(final int benchmarkId, final long timeout, final int runs,
 			final int queryTransformationCount, final String modelFilename,
 			final List<RailwayOperation> railwayOperations, final String workload,
 			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
 		super();
+		this.benchmarkId = benchmarkId;
 		this.timeout = timeout;
 		this.runs = runs;
 		this.queryTransformationCount = queryTransformationCount;
@@ -73,6 +79,10 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 		this.workload = workload;
 		this.transformationChangeSetStrategy = transformationChangeSetStrategy;
 		this.transformationConstant = transformationConstant;
+	}
+
+	public int getBenchmarkId() {
+		return benchmarkId;
 	}
 
 	public long getTimeout() {

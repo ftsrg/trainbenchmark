@@ -41,7 +41,7 @@ public class IngraphSemaphoreNeighborTest extends SemaphoreNeighborTest {
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final int messageSize = 16;
 		final IngraphBenchmarkConfig bc = new IngraphBenchmarkConfigBuilder().setConfigBase(bcb)
-				.setMessageSize(messageSize).setQueryVariant(variant).createBenchmarkConfig();
+				.setMessageSize(messageSize).setQueryVariant(variant).createConfig();
 		final IngraphBenchmarkScenario scenario = IngraphBenchmarkScenario.create(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;
