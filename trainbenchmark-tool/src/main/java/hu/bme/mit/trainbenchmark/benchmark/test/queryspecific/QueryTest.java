@@ -18,9 +18,10 @@ public abstract class QueryTest {
 	protected final String modelFilename = "railway-repair-1";
 	protected final int queryTransformationCount = 1;
 
-	protected final BenchmarkConfigBaseBuilder bcbb = new BenchmarkConfigBaseBuilder().setTimeout(timeout).setRuns(runs)
-			.setQueryTransformationCount(queryTransformationCount).setModelFilename(modelFilename)
-			.setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED).setTransformationConstant(10);
+	protected final BenchmarkConfigBaseBuilder bcbb = new BenchmarkConfigBaseBuilder().setBenchmarkId(benchmarkId)
+			.setTimeout(timeout).setRuns(runs).setQueryTransformationCount(queryTransformationCount)
+			.setModelFilename(modelFilename).setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED)
+			.setTransformationConstant(10);
 
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
