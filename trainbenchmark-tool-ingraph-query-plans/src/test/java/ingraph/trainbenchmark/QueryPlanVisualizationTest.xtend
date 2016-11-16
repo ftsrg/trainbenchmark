@@ -10,8 +10,9 @@ import relalg.RelalgContainer
 
 class QueryPlanVisualizationTest {
 
-	val extension RelalgTreeSerializer relalgTreeDrawer = new RelalgTreeSerializer
+	val extension RelalgTreeSerializer relalgTreeDrawer = new RelalgTreeSerializer(true, true)
 	val extension RelalgExpressionSerializer expressionSerializer = new RelalgExpressionSerializer(false, false, false)
+	
 	val extension Relalg2ReteTransformation transformation = new Relalg2ReteTransformation
 	val extension RouteSensorQueryPlanFactory routeSensorFactory = new RouteSensorQueryPlanFactory
 	val extension SemaphoreNeighborQueryPlanFactory semaphoreNeighborFactory = new SemaphoreNeighborQueryPlanFactory()
@@ -31,6 +32,8 @@ class QueryPlanVisualizationTest {
 	@Test
 	def void serialize() {
 		queryPlans.forEach [ name, plan |
+			
+//			println(plan.rootExpression as ProductionOperator)
 			relalgTreeDrawer.serialize(plan, '''query-plans/«name»-Relalg''')
 			relalgTreeDrawer.serialize(plan.transformToRete, '''query-plans/«name»-Rete''')
 			expressionSerializer.serialize(plan.transformToRete, '''query-plans/«name»-ReteExpression''')
