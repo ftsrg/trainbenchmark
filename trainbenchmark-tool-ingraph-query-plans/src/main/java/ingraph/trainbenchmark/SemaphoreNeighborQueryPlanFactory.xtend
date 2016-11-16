@@ -10,21 +10,21 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 	val semaphoreNeighbor = createRelalgContainer
 
 	// vertex labels
-	val routeLabel = createVertexLabel => [name = "Route"; container = semaphoreNeighbor]
-	val semaphoreLabel = createVertexLabel => [name = "Semaphore"; container = semaphoreNeighbor]
-	val sensorLabel = createVertexLabel => [name = "Sensor"; container = semaphoreNeighbor]
-	val teLabel = createVertexLabel => [name = "TrackElement"; container = semaphoreNeighbor]
+	val routeLabel = createVertexLabel => [name = "Route"]
+	val semaphoreLabel = createVertexLabel => [name = "Semaphore"]
+	val sensorLabel = createVertexLabel => [name = "Sensor"]
+	val teLabel = createVertexLabel => [name = "TrackElement"]
 
 	// edge labels
-	val connectsToLabel = createEdgeLabel => [name = "connectsTo"; container = semaphoreNeighbor]
-	val entryLabel = createEdgeLabel => [name = "entry"; container = semaphoreNeighbor]
-	val exitLabel = createEdgeLabel => [name = "exit"; container = semaphoreNeighbor]
-	val requiresLabel = createEdgeLabel => [name = "requires"; container = semaphoreNeighbor]
-	val monitoredByLabel = createEdgeLabel => [name = "monitoredBy"; container = semaphoreNeighbor]
+	val connectsToLabel = createEdgeLabel => [name = "connectsTo"]
+	val entryLabel = createEdgeLabel => [name = "entry"]
+	val exitLabel = createEdgeLabel => [name = "exit"]
+	val requiresLabel = createEdgeLabel => [name = "requires"]
+	val monitoredByLabel = createEdgeLabel => [name = "monitoredBy"]
 
 	// vertex variables
-	val route1 = createVertexVariable => [name = "route1"; vertexLabels.add(routeLabel); container = semaphoreNeighbor]
-	val route2 = createVertexVariable => [name = "route2"; vertexLabels.add(routeLabel); container = semaphoreNeighbor]
+	val route1 = createVertexVariable => [name = "route1"; vertexLabels.add(routeLabel)]
+	val route2 = createVertexVariable => [name = "route2"; vertexLabels.add(routeLabel)]
 	val semaphore = createVertexVariable => [
 		name = "semaphore";
 		vertexLabels.add(semaphoreLabel);
@@ -40,12 +40,12 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		vertexLabels.add(sensorLabel);
 		container = semaphoreNeighbor
 	]
-	val te1 = createVertexVariable => [name = "te1"; container = semaphoreNeighbor; vertexLabels.add(teLabel)]
-	val te2 = createVertexVariable => [name = "te2"; container = semaphoreNeighbor; vertexLabels.add(teLabel)]
+	val te1 = createVertexVariable => [name = "te1"; vertexLabels.add(teLabel)]
+	val te2 = createVertexVariable => [name = "te2"; vertexLabels.add(teLabel)]
 
 	// edge variables
-	val requires1 = createEdgeVariable => [name = "g1"; edgeLabels.add(requiresLabel); container = semaphoreNeighbor]
-	val requires2 = createEdgeVariable => [name = "g2"; edgeLabels.add(requiresLabel); container = semaphoreNeighbor]
+	val requires1 = createEdgeVariable => [name = "g1"; edgeLabels.add(requiresLabel)]
+	val requires2 = createEdgeVariable => [name = "g2"; edgeLabels.add(requiresLabel)]
 	val monitoredBy1 = createEdgeVariable => [
 		name = "mb1";
 		edgeLabels.add(monitoredByLabel);
@@ -56,22 +56,27 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		edgeLabels.add(monitoredByLabel);
 		container = semaphoreNeighbor
 	]
-	val connectsTo = createEdgeVariable => [name = "ct"; edgeLabels.add(connectsToLabel); container = semaphoreNeighbor]
-	val entry = createEdgeVariable => [name = "entry"; edgeLabels.add(entryLabel); container = semaphoreNeighbor]
-	val exit = createEdgeVariable => [name = "exit"; edgeLabels.add(exitLabel); container = semaphoreNeighbor]
+	val connectsTo = createEdgeVariable => [name = "ct"; edgeLabels.add(connectsToLabel)]
+	val entry = createEdgeVariable => [name = "entry"; edgeLabels.add(entryLabel)]
+	val exit = createEdgeVariable => [name = "exit"; edgeLabels.add(exitLabel)]
 
 	// inputs
-	val route1s = createGetVerticesOperator => [vertexVariable = route1; container = semaphoreNeighbor]
-	val route2s = createGetVerticesOperator => [vertexVariable = route2; container = semaphoreNeighbor]
-	val te1s = createGetVerticesOperator => [vertexVariable = te1; container = semaphoreNeighbor]
-	val te2s = createGetVerticesOperator => [vertexVariable = te2; container = semaphoreNeighbor]
+	val route1s = createGetVerticesOperator => [vertexVariable = route1]
+	val route1sA = createGetVerticesOperator => [vertexVariable = route1]
+	val route1sB = createGetVerticesOperator => [vertexVariable = route1]
+	val route2sA = createGetVerticesOperator => [vertexVariable = route2]
+	val route2sB = createGetVerticesOperator => [vertexVariable = route2]
+	val route2sC = createGetVerticesOperator => [vertexVariable = route2]
+	val te1s = createGetVerticesOperator => [vertexVariable = te1]
+	val te1sA = createGetVerticesOperator => [vertexVariable = te1]
+	val te1sB = createGetVerticesOperator => [vertexVariable = te1]
+	val te2s = createGetVerticesOperator => [vertexVariable = te2]
 
 	// conditions
 	val filterCondition = createArithmeticComparisonExpression => [
 		operator = ArithmeticComparisonOperator.NOT_EQUAL_TO
 		leftOperand = route1
 		rightOperand = route2
-		container = semaphoreNeighbor
 	]
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +88,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te1
 			targetVertexVariable = te2
 			edgeVariable = connectsTo
-			container = semaphoreNeighbor
 		]
 		val expand2 = createExpandOperator => [
 			input = expand1
@@ -91,7 +95,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te1
 			targetVertexVariable = sensor1
 			edgeVariable = monitoredBy1
-			container = semaphoreNeighbor
 		]
 		val expand3 = createExpandOperator => [
 			input = expand2
@@ -99,7 +102,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te2
 			targetVertexVariable = sensor2
 			edgeVariable = monitoredBy2
-			container = semaphoreNeighbor
 		]
 
 		val expand4 = createExpandOperator => [
@@ -108,7 +110,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = semaphore
 			edgeVariable = exit
-			container = semaphoreNeighbor
 		]
 		val expand5 = createExpandOperator => [
 			input = expand4
@@ -119,58 +120,49 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		]
 
 		val expand6 = createExpandOperator => [
-			input = route2s
+			input = route2sA
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = sensor2
 			edgeVariable = requires2
-			container = semaphoreNeighbor
 		]
 
 		val expand7 = createExpandOperator => [
-			input = route2s
+			input = route2sB
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = semaphore
 			edgeVariable = entry
-			container = semaphoreNeighbor
 		]
 
 		val join1 = createJoinOperator => [
 			leftInput = expand3
 			rightInput = expand5
-			container = semaphoreNeighbor
 		]
 		val join2 = createJoinOperator => [
 			leftInput = join1
 			rightInput = expand6
-			container = semaphoreNeighbor
 		]
 
 		val filter = createSelectionOperator => [
 			input = join2
 			condition = filterCondition
-			container = semaphoreNeighbor
 		]
 
 		val antiJoin = createAntiJoinOperator => [
 			leftInput = filter
 			rightInput = expand7
-			container = semaphoreNeighbor
 		]
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
-			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
 			input = projection
-			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
-
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +174,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te1
 			targetVertexVariable = te2
 			edgeVariable = connectsTo
-			container = semaphoreNeighbor
 		]
 
 		// (te1:TrackElement)-[:MONITORED_BY]->(sensor1:Sensor)<-[:REQUIRES]-(route1:Route)
@@ -192,7 +183,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te1
 			targetVertexVariable = sensor1
 			edgeVariable = monitoredBy1
-			container = semaphoreNeighbor
 		]
 		val expand3 = createExpandOperator => [
 			input = route1s
@@ -200,12 +190,10 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = sensor1
 			edgeVariable = requires1
-			container = semaphoreNeighbor
 		]
 		val join1 = createJoinOperator => [
 			leftInput = expand2
 			rightInput = expand3
-			container = semaphoreNeighbor
 		]
 
 		// (te2:TrackElement)-[:MONITORED_BY]->(sensor2:Sensor)<-[:REQUIRES]-(route2:Route)
@@ -215,30 +203,23 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te2
 			targetVertexVariable = sensor2
 			edgeVariable = monitoredBy2
-			container = semaphoreNeighbor
 		]
 		val expand5 = createExpandOperator => [
-			input = route2s
+			input = route2sA
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = sensor2
 			edgeVariable = requires2
-			container = semaphoreNeighbor
 		]
 		val join2 = createJoinOperator => [
 			leftInput = expand4
 			rightInput = expand5
-			container = semaphoreNeighbor
 		]
 
 		// (route2:Route)-[:REQUIRES]->(sensor2:Sensor)<-[:MONITORED_BY]-(te1:TrackElement)
 		// -[:CONNECTS_TO]->
 		// (te2:TrackElement)-[:MONITORED_BY]->(sensor2:Sensor)<-[:REQUIRES]-(route2:Route)
-		val join3 = createJoinOperator => [
-			leftInput = expand1
-			rightInput = join1
-			container = semaphoreNeighbor
-		]
+		val join3 = createJoinOperator => [leftInput = expand1 rightInput = join1]
 
 		// (route1:Route)-[:EXIT]->(semaphore:Semaphore)
 		val expand6 = createExpandOperator => [
@@ -247,51 +228,43 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = semaphore
 			edgeVariable = exit
-			container = semaphoreNeighbor
 		]
 
 		// (route2:Route)-[:EXIT]->(semaphore:Semaphore)
 		val expand7 = createExpandOperator => [
-			input = route2s
+			input = route2sB
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = semaphore
 			edgeVariable = entry
-			container = semaphoreNeighbor
 		]
 
 		val join4 = createJoinOperator => [
 			leftInput = join3
 			rightInput = join2
-			container = semaphoreNeighbor
 		]
 
 		val filter = createSelectionOperator => [
 			input = join4
 			condition = filterCondition
-			container = semaphoreNeighbor
 		]
 
 		val join5 = createJoinOperator => [
 			leftInput = filter
 			rightInput = expand6
-			container = semaphoreNeighbor
 		]
 
 		val antiJoin = createAntiJoinOperator => [
 			leftInput = join5
 			rightInput = expand7
-			container = semaphoreNeighbor
 		]
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
-			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
 			input = projection
-			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -306,7 +279,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te1
 			targetVertexVariable = te2
 			edgeVariable = connectsTo
-			container = semaphoreNeighbor
 		]
 		val expand2 = createExpandOperator => [
 			input = expand1
@@ -314,7 +286,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te1
 			targetVertexVariable = sensor1
 			edgeVariable = monitoredBy1
-			container = semaphoreNeighbor
 		]
 		val expand3 = createExpandOperator => [
 			input = expand2
@@ -322,7 +293,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te2
 			targetVertexVariable = sensor2
 			edgeVariable = monitoredBy2
-			container = semaphoreNeighbor
 		]
 
 		// (semaphore:Semaphore)<-[:EXIT]-(route1:Route)-[:REQUIRES]->(sensor1:Sensor)
@@ -332,7 +302,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = sensor1
 			edgeVariable = requires1
-			container = semaphoreNeighbor
 		]
 		val expand5 = createExpandOperator => [
 			input = expand4
@@ -340,61 +309,52 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = semaphore
 			edgeVariable = exit
-			container = semaphoreNeighbor
 		]
 
 		val join1 = createJoinOperator => [
 			leftInput = expand3
 			rightInput = expand5
-			container = semaphoreNeighbor
 		]
 
 		// (route2:Route)-[:REQUIRES]->(sensor2:Sensor)
 		val expand6 = createExpandOperator => [
-			input = route2s
+			input = route2sA
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = sensor2
 			edgeVariable = requires2
-			container = semaphoreNeighbor
 		]
 
 		val join2 = createJoinOperator => [
 			leftInput = join1
 			rightInput = expand6
-			container = semaphoreNeighbor
 		]
 
 		// (route2:Route)-[:EXIT]->(semaphore:Semaphore)
 		val expand7 = createExpandOperator => [
-			input = route2s
+			input = route2sB
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = semaphore
 			edgeVariable = entry
-			container = semaphoreNeighbor
 		]
 
 		val filter = createSelectionOperator => [
 			input = join2
 			condition = filterCondition
-			container = semaphoreNeighbor
 		]
 
 		val antiJoin = createAntiJoinOperator => [
 			leftInput = filter
 			rightInput = expand7
-			container = semaphoreNeighbor
 		]
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
-			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
 			input = projection
-			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -409,7 +369,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te1
 			targetVertexVariable = te2
 			edgeVariable = connectsTo
-			container = semaphoreNeighbor
 		]
 
 		// (semaphore:Semaphore)<-[:EXIT]-(route1:Route)-[:REQUIRES]->(sensor1:Sensor)<-[:MONITORED_BY]-(te1:TrackElement)
@@ -419,7 +378,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = semaphore
 			edgeVariable = exit
-			container = semaphoreNeighbor
 		]
 		val expand3 = createExpandOperator => [
 			input = expand2
@@ -427,7 +385,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = sensor1
 			edgeVariable = requires1
-			container = semaphoreNeighbor
 		]
 		val expand4 = createExpandOperator => [
 			input = expand3
@@ -435,7 +392,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = sensor1
 			targetVertexVariable = te1
 			edgeVariable = monitoredBy1
-			container = semaphoreNeighbor
 		]
 
 		// (semaphore:Semaphore)<-[:EXIT]-(route1:Route)-[:REQUIRES]->(sensor1:Sensor)
@@ -445,67 +401,57 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te2
 			targetVertexVariable = sensor2
 			edgeVariable = monitoredBy2
-			container = semaphoreNeighbor
 		]
 
 		// (route2:Route)-[:REQUIRES]->(sensor2:Sensor)
 		val expand6 = createExpandOperator => [
-			input = route2s
+			input = route2sA
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = sensor2
 			edgeVariable = requires2
-			container = semaphoreNeighbor
 		]
 
 		val join1 = createJoinOperator => [
 			leftInput = expand1
 			rightInput = expand4
-			container = semaphoreNeighbor
 		]
 
 		val join2 = createJoinOperator => [
 			leftInput = join1
 			rightInput = expand5
-			container = semaphoreNeighbor
 		]
 
 		val join3 = createJoinOperator => [
 			leftInput = join2
 			rightInput = expand6
-			container = semaphoreNeighbor
 		]
 
 		val filter = createSelectionOperator => [
 			input = join3
 			condition = filterCondition
-			container = semaphoreNeighbor
 		]
 
 		// (route2:Route)-[:EXIT]->(semaphore:Semaphore)
 		val expand7 = createExpandOperator => [
-			input = route2s
+			input = route2sB
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = semaphore
 			edgeVariable = entry
-			container = semaphoreNeighbor
 		]
 
 		val antiJoin = createAntiJoinOperator => [
 			leftInput = filter
 			rightInput = expand7
-			container = semaphoreNeighbor
 		]
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
-			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
 			input = projection
-			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -515,123 +461,107 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 	def semaphoreNeighborE() {
 		// (route1:Route)-[:EXIT]->(semaphore:Semaphore)
 		val expand1 = createExpandOperator => [
-			input = route1s
+			input = route1sA
 			direction = Direction.OUT
 			sourceVertexVariable = route1
 			targetVertexVariable = semaphore
 			edgeVariable = exit
-			container = semaphoreNeighbor
 		]
 
 		// (route1:Route)-[:REQUIRES]->(sensor1:Sensor)
 		val expand2 = createExpandOperator => [
-			input = route2s
+			input = route2sA
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = sensor2
 			edgeVariable = requires2
-			container = semaphoreNeighbor
 		]
 
 		val join1 = createJoinOperator => [
 			leftInput = expand1
 			rightInput = expand2
-			container = semaphoreNeighbor
 		]
 
 		val filter = createSelectionOperator => [
 			input = join1
 			condition = filterCondition
-			container = semaphoreNeighbor
 		]
 
 		// (route2:Route)-[:ENTRY]->(semaphore:Semaphore)
 		val expand3 = createExpandOperator => [
-			input = route2s
+			input = route2sB
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = semaphore
 			edgeVariable = entry
-			container = semaphoreNeighbor
 		]
 
 		val antiJoin = createAntiJoinOperator => [
 			leftInput = filter
 			rightInput = expand3
-			container = semaphoreNeighbor
 		]
 
 		val expand4 = createExpandOperator => [
-			input = route1s
+			input = route1sB
 			direction = Direction.OUT
 			sourceVertexVariable = route1
 			targetVertexVariable = sensor1
 			edgeVariable = requires1
-			container = semaphoreNeighbor
 		]
 
 		val join2 = createJoinOperator => [
 			leftInput = antiJoin
 			rightInput = expand4
-			container = semaphoreNeighbor
 		]
 
 		// (te1:TrackElement)-[:MONITORED_BY]->(sensor1:Sensor)
 		val expand5 = createExpandOperator => [
-			input = te1s
+			input = te1sA
 			direction = Direction.OUT
 			sourceVertexVariable = te1
 			targetVertexVariable = sensor1
 			edgeVariable = monitoredBy1
-			container = semaphoreNeighbor
 		]
 
 		val join3 = createJoinOperator => [
 			leftInput = join2
 			rightInput = expand5
-			container = semaphoreNeighbor
 		]
 
 		// (te1:TrackElement)-[:CONNECTS_TO]->(te2:TrackElement)
 		val expand6 = createExpandOperator => [
-			input = te1s
+			input = te1sB
 			direction = Direction.OUT
 			sourceVertexVariable = te1
 			targetVertexVariable = te2
 			edgeVariable = connectsTo
-			container = semaphoreNeighbor
 		]
 
 		val join4 = createJoinOperator => [
 			leftInput = join3
 			rightInput = expand6
-			container = semaphoreNeighbor
 		]
 
 		// (te2:TrackElement)-[:MONITORED_BY]->(sensor2:Sensor)
 		val expand7 = createExpandOperator => [
-			input = route2s
+			input = route2sC
 			direction = Direction.OUT
 			sourceVertexVariable = te2
 			targetVertexVariable = sensor2
 			edgeVariable = monitoredBy2
-			container = semaphoreNeighbor
 		]
 
 		val join5 = createJoinOperator => [
 			leftInput = join4
 			rightInput = expand7
-			container = semaphoreNeighbor
 		]
 
 		val projection = createProjectionOperator => [
 			input = join5
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
-			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
 			input = projection
-			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -640,12 +570,11 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborF() {
 		val expand1 = createExpandOperator => [
-			input = te1s
+			input = te1sA
 			direction = Direction.OUT
 			sourceVertexVariable = te1
 			targetVertexVariable = sensor1
 			edgeVariable = monitoredBy1
-			container = semaphoreNeighbor
 		]
 		val expand2 = createExpandOperator => [
 			input = te2s
@@ -653,13 +582,11 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = te2
 			targetVertexVariable = sensor2
 			edgeVariable = monitoredBy2
-			container = semaphoreNeighbor
 		]
 
 		val join1 = createJoinOperator => [
 			leftInput = expand1
 			rightInput = expand2
-			container = semaphoreNeighbor
 		]
 
 		val expand3 = createExpandOperator => [
@@ -668,7 +595,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = sensor1
 			targetVertexVariable = route1
 			edgeVariable = requires1
-			container = semaphoreNeighbor
 		]
 		val expand4 = createExpandOperator => [
 			input = expand3
@@ -676,13 +602,11 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = sensor2
 			targetVertexVariable = route2
 			edgeVariable = requires2
-			container = semaphoreNeighbor
 		]
 
 		val filter = createSelectionOperator => [
 			input = expand4
 			condition = filterCondition
-			container = semaphoreNeighbor
 		]
 
 		val expand5 = createExpandOperator => [
@@ -691,47 +615,40 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			sourceVertexVariable = route1
 			targetVertexVariable = semaphore
 			edgeVariable = exit
-			container = semaphoreNeighbor
 		]
 
 		val expand6 = createExpandOperator => [
-			input = te1s
+			input = te1sB
 			direction = Direction.OUT
 			sourceVertexVariable = te1
 			targetVertexVariable = te2
 			edgeVariable = connectsTo
-			container = semaphoreNeighbor
 		]
 
 		val join2 = createJoinOperator => [
 			leftInput = expand5
 			rightInput = expand6
-			container = semaphoreNeighbor
 		]
 
 		val expand7 = createExpandOperator => [
-			input = route2s
+			input = route2sA
 			direction = Direction.OUT
 			sourceVertexVariable = route2
 			targetVertexVariable = semaphore
 			edgeVariable = entry
-			container = semaphoreNeighbor
 		]
 
 		val antiJoin = createAntiJoinOperator => [
 			leftInput = join2
 			rightInput = expand7
-			container = semaphoreNeighbor
 		]
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
 			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
-			container = semaphoreNeighbor
 		]
 		val production = createProductionOperator => [
 			input = projection
-			container = semaphoreNeighbor
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor

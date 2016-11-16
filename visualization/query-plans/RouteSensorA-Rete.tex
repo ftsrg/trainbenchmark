@@ -8,31 +8,31 @@
 \begin{preview}
 \begin{forest} for tree={align=center}
 [
-{$\antijoin \{\var{route}, \var{sensor}\}$ \\
-\footnotesize $\color{gray} \langle \var{route, swP, sw, sensor} \rangle$
+{$\antijoin\{\var{sensor}, \var{route}\}$ \\
+\footnotesize $\color{gray} \langle \var{swP, sw, sensor, route} \rangle$
 }
 [
-{$\join \{\var{sw}\}$ \\
-\footnotesize $\color{gray} \langle \var{route, swP, sw, sensor} \rangle$
+{$\join\{\var{swP}\}$ \\
+\footnotesize $\color{gray} \langle \var{swP, sw, sensor, route} \rangle$
 }
 [
-{$\join \{\var{swP}\}$ \\
-\footnotesize $\color{gray} \langle \var{route, swP, sw} \rangle$
+{$\join\{\var{sw}\}$ \\
+\footnotesize $\color{gray} \langle \var{swP, sw, sensor} \rangle$
 }
-[
-{$\getedgesi{route}{Route}{swP}{SwitchPosition}$ \\ $\getedgesii{\_e3}{follows}$ \\
-\footnotesize $\color{gray} \langle \var{route, swP} \rangle$
-},tier=input,for tree={blue,densely dashed}
-]
 [
 {$\getedgesi{swP}{SwitchPosition}{sw}{Switch}$ \\ $\getedgesii{\_e1}{target}$ \\
 \footnotesize $\color{gray} \langle \var{swP, sw} \rangle$
 },tier=input,for tree={blue,densely dashed}
 ]
-]
 [
 {$\getedgesi{sw}{Switch}{sensor}{Sensor}$ \\ $\getedgesii{\_e2}{monitoredBy}$ \\
 \footnotesize $\color{gray} \langle \var{sw, sensor} \rangle$
+},tier=input,for tree={blue,densely dashed}
+]
+]
+[
+{$\getedgesi{route}{Route}{swP}{SwitchPosition}$ \\ $\getedgesii{\_e3}{follows}$ \\
+\footnotesize $\color{gray} \langle \var{route, swP} \rangle$
 },tier=input,for tree={blue,densely dashed}
 ]
 ]
