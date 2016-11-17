@@ -57,7 +57,7 @@ public class ViatraDriver extends EmfDriver {
 			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
 		}
 
-//		engine = AdvancedViatraQueryEngine.from(ViatraQueryEngine.on(scope));
+		engine = AdvancedViatraQueryEngine.from(ViatraQueryEngine.on(scope));
 	}
 
 	@Override
