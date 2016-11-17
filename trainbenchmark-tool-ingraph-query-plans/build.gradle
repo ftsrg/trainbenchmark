@@ -18,6 +18,7 @@ ext {
 dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 	compile group: 'ingraph', name: 'ingraph-optimization-transformations', version: ingraphVersion
+	compile group: 'ingraph', name: 'ingraph-cypher2relalg', version: ingraphVersion
 	compile group: 'ingraph', name: 'ingraph-relalg2tex', version: ingraphVersion
 	compile group: 'org.eclipse.xtend', name: 'org.eclipse.xtend.lib', version: xtendVersion
 	compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.xbase.lib', version: xtendVersion

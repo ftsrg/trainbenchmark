@@ -10,8 +10,8 @@ import relalg.RelalgContainer
 
 class QueryPlanVisualizationTest {
 
-	val extension RelalgTreeSerializer relalgTreeDrawer = new RelalgTreeSerializer(true, true)
-	val extension RelalgExpressionSerializer expressionSerializer = new RelalgExpressionSerializer(false, false, false)
+	val extension RelalgTreeSerializer relalgTreeDrawer = new RelalgTreeSerializer
+	val extension RelalgExpressionSerializer expressionSerializer = new RelalgExpressionSerializer
 	
 	val extension Relalg2ReteTransformation transformation = new Relalg2ReteTransformation
 	val extension RouteSensorQueryPlanFactory routeSensorFactory = new RouteSensorQueryPlanFactory
