@@ -33,12 +33,15 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 
 	// inputs
 	val getRoutes = createGetVerticesOperator => [vertexVariable = route]
+	val getRoutesA = createGetVerticesOperator => [vertexVariable = route]
+	val getRoutesB = createGetVerticesOperator => [vertexVariable = route]
 	val getSws = createGetVerticesOperator => [vertexVariable = sw]
 	val getSwPs = createGetVerticesOperator => [vertexVariable = swP]
 
 	def routeSensorA() {
+		routeSensor.name = "RouteSensorA"
 		val expand1 = createExpandOperator => [
-			input = getRoutes
+			input = getRoutesA
 			direction = Direction.OUT
 			sourceVertexVariable = route
 			targetVertexVariable = swP
@@ -59,7 +62,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 			edgeVariable = monitoredBy
 		]
 		val expand4 = createExpandOperator => [
-			input = getRoutes
+			input = getRoutesB
 			direction = Direction.OUT
 			sourceVertexVariable = route
 			targetVertexVariable = sensor
@@ -79,6 +82,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 	}
 
 	def routeSensorB() {
+		routeSensor.name = "RouteSensorB"
 		val expand1 = createExpandOperator => [
 			input = getSwPs
 			direction = Direction.OUT
@@ -121,8 +125,9 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 	}
 
 	def routeSensorC() {
+		routeSensor.name = "RouteSensorC"
 		val expand1 = createExpandOperator => [
-			input = getRoutes
+			input = getRoutesA
 			direction = Direction.OUT
 			sourceVertexVariable = route
 			targetVertexVariable = swP
@@ -136,7 +141,7 @@ class RouteSensorQueryPlanFactory extends QueryPlanFactory {
 			edgeVariable = monitoredBy
 		]
 		val expand3 = createExpandOperator => [
-			input = getRoutes
+			input = getRoutesB
 			direction = Direction.OUT
 			sourceVertexVariable = route
 			targetVertexVariable = sensor

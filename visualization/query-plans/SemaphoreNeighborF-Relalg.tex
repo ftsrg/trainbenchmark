@@ -14,19 +14,19 @@
 			$\color{gray} \langle \var{semaphore, route1, route2, sensor1, sensor2, te1, te2} \rangle$
 			}
 [
-	{$\antijoin\{\var{route2}, \var{semaphore}\}$
+	{$\antijoin$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, sensor1, te2, sensor2, route1, route2, semaphore} \rangle$
 			}
 [
-	{$\join\{\var{te1}, \var{te2}\}$
+	{$\join$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, sensor1, te2, sensor2, route1, route2, semaphore} \rangle$
 			}
 [
-	{$\join\{\var{route1}\}$
+	{$\expandout{route1}{semaphore}{Semaphore}{exit}{exit}$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, sensor1, te2, sensor2, route1, route2, semaphore} \rangle$
@@ -38,77 +38,84 @@
 			$\color{gray} \langle \var{te1, sensor1, te2, sensor2, route1, route2} \rangle$
 			}
 [
-	{$\join\{\var{sensor2}\}$
+	{$\expandin{sensor2}{route2}{Route}{g2}{requires}$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, sensor1, te2, sensor2, route1, route2} \rangle$
 			}
 [
-	{$\join\{\var{sensor1}\}$
+	{$\expandin{sensor1}{route1}{Route}{g1}{requires}$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, sensor1, te2, sensor2, route1} \rangle$
 			}
 [
-	{$\join\{\}$
+	{$\join$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, sensor1, te2, sensor2} \rangle$
 			}
 [
-	{$\getedgesi{te1}{TrackElement}{sensor1}{Sensor}$\\$\getedgesii{mb1}{monitoredBy}$
+	{$\expandout{te1}{sensor1}{Sensor}{mb1}{monitoredBy}$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, sensor1} \rangle$
+			}
+[
+	{$\getvertices{te1}{TrackElement}$
+			\\
+			\footnotesize
+			$\color{gray} \langle \var{te1} \rangle$
 			},tier=input,for tree={blue,densely dashed}
 ]
+]
 [
-	{$\getedgesi{te2}{TrackElement}{sensor2}{Sensor}$\\$\getedgesii{mb2}{monitoredBy}$
+	{$\expandout{te2}{sensor2}{Sensor}{mb2}{monitoredBy}$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te2, sensor2} \rangle$
-			},tier=input,for tree={blue,densely dashed}
-]
-]
+			}
 [
-	{$\getedgesi{route1}{Route}{sensor1}{Sensor}$\\$\getedgesii{g1}{requires}$
+	{$\getvertices{te2}{TrackElement}$
 			\\
 			\footnotesize
-			$\color{gray} \langle \var{route1, sensor1} \rangle$
-			},tier=input,for tree={blue,densely dashed}
-]
-]
-[
-	{$\getedgesi{route2}{Route}{sensor2}{Sensor}$\\$\getedgesii{g2}{requires}$
-			\\
-			\footnotesize
-			$\color{gray} \langle \var{route2, sensor2} \rangle$
+			$\color{gray} \langle \var{te2} \rangle$
 			},tier=input,for tree={blue,densely dashed}
 ]
 ]
 ]
-[
-	{$\getedgesi{route1}{Route}{semaphore}{Semaphore}$\\$\getedgesii{exit}{exit}$
-			\\
-			\footnotesize
-			$\color{gray} \langle \var{route1, semaphore} \rangle$
-			},tier=input,for tree={blue,densely dashed}
+]
+]
 ]
 ]
 [
-	{$\getedgesi{te1}{TrackElement}{te2}{TrackElement}$\\$\getedgesii{ct}{connectsTo}$
+	{$\expandout{te1}{te2}{TrackElement}{ct}{connectsTo}$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{te1, te2} \rangle$
+			}
+[
+	{$\getvertices{te1}{TrackElement}$
+			\\
+			\footnotesize
+			$\color{gray} \langle \var{te1} \rangle$
 			},tier=input,for tree={blue,densely dashed}
+]
 ]
 ]
 [
-	{$\getedgesi{route2}{Route}{semaphore}{Semaphore}$\\$\getedgesii{entry}{entry}$
+	{$\expandout{route2}{semaphore}{Semaphore}{entry}{entry}$
 			\\
 			\footnotesize
 			$\color{gray} \langle \var{route2, semaphore} \rangle$
+			}
+[
+	{$\getvertices{route2}{Route}$
+			\\
+			\footnotesize
+			$\color{gray} \langle \var{route2} \rangle$
 			},tier=input,for tree={blue,densely dashed}
+]
 ]
 ]
 ]

@@ -1,6 +1,5 @@
 package ingraph.trainbenchmark
 
-import java.util.Arrays
 import relalg.ArithmeticComparisonOperator
 import relalg.Direction
 
@@ -78,9 +77,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		leftOperand = route1
 		rightOperand = route2
 	]
+	
+	// projectionVariables
+	val projectionVariables = #[semaphore, route1, route2, sensor1, sensor2, te1, te2]
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborA() {
+		semaphoreNeighbor.name = "SemaphoreNeighborA"
 		// (sensor1:Sensor)<-[:MONITORED_BY]-(te1:TrackElement)-[:CONNECTS_TO]->(te2:TrackElement)-[:MONITORED_BY]->(sensor2:Sensor)
 		val expand1 = createExpandOperator => [
 			input = te1s
@@ -156,7 +159,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
-			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
+			variables.addAll(projectionVariables)
 		]
 		val production = createProductionOperator => [
 			input = projection
@@ -167,9 +170,10 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborB() {
+		semaphoreNeighbor.name = "SemaphoreNeighborB"
 		// (te1:TrackElement)-[:CONNECTS_TO]->(te2:TrackElement)
 		val expand1 = createExpandOperator => [
-			input = te1s
+			input = te1sA
 			direction = Direction.OUT
 			sourceVertexVariable = te1
 			targetVertexVariable = te2
@@ -178,14 +182,14 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		// (te1:TrackElement)-[:MONITORED_BY]->(sensor1:Sensor)<-[:REQUIRES]-(route1:Route)
 		val expand2 = createExpandOperator => [
-			input = te1s
+			input = te1sB
 			direction = Direction.OUT
 			sourceVertexVariable = te1
 			targetVertexVariable = sensor1
 			edgeVariable = monitoredBy1
 		]
 		val expand3 = createExpandOperator => [
-			input = route1s
+			input = route1sA
 			direction = Direction.OUT
 			sourceVertexVariable = route1
 			targetVertexVariable = sensor1
@@ -223,7 +227,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		// (route1:Route)-[:EXIT]->(semaphore:Semaphore)
 		val expand6 = createExpandOperator => [
-			input = route1s
+			input = route1sB
 			direction = Direction.OUT
 			sourceVertexVariable = route1
 			targetVertexVariable = semaphore
@@ -261,7 +265,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
-			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
+			variables.addAll(projectionVariables)
 		]
 		val production = createProductionOperator => [
 			input = projection
@@ -272,6 +276,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborC() {
+		semaphoreNeighbor.name = "SemaphoreNeighborC"
 		// (sensor1:Sensor)<-[:MONITORED_BY]-(te1:TrackElement)-[:CONNECTS_TO]->(te2:TrackElement)-[:MONITORED_BY]->(sensor2:Sensors)
 		val expand1 = createExpandOperator => [
 			input = te1s
@@ -351,7 +356,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
-			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
+			variables.addAll(projectionVariables)
 		]
 		val production = createProductionOperator => [
 			input = projection
@@ -362,6 +367,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborD() {
+		semaphoreNeighbor.name = "SemaphoreNeighborD"
 		// (te1:TrackElement)-[:CONNECTS_TO]->(te2:TrackElement)
 		val expand1 = createExpandOperator => [
 			input = te1s
@@ -448,7 +454,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
-			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
+			variables.addAll(projectionVariables)
 		]
 		val production = createProductionOperator => [
 			input = projection
@@ -459,6 +465,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborE() {
+		semaphoreNeighbor.name = "SemaphoreNeighborE"
 		// (route1:Route)-[:EXIT]->(semaphore:Semaphore)
 		val expand1 = createExpandOperator => [
 			input = route1sA
@@ -558,7 +565,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		val projection = createProjectionOperator => [
 			input = join5
-			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
+			variables.addAll(projectionVariables)
 		]
 		val production = createProductionOperator => [
 			input = projection
@@ -569,6 +576,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborF() {
+		semaphoreNeighbor.name = "SemaphoreNeighborF"
 		val expand1 = createExpandOperator => [
 			input = te1sA
 			direction = Direction.OUT
@@ -645,7 +653,7 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 
 		val projection = createProjectionOperator => [
 			input = antiJoin
-			variables.addAll(Arrays.asList(semaphore, route1, route2, sensor1, sensor2, te1, te2))
+			variables.addAll(projectionVariables)
 		]
 		val production = createProductionOperator => [
 			input = projection
