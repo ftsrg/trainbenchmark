@@ -25,18 +25,18 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 	val route1 = createVertexVariable => [name = "route1"; vertexLabels.add(routeLabel)]
 	val route2 = createVertexVariable => [name = "route2"; vertexLabels.add(routeLabel)]
 	val semaphore = createVertexVariable => [
-		name = "semaphore";
-		vertexLabels.add(semaphoreLabel);
+		name = "semaphore"
+		vertexLabels.add(semaphoreLabel)
 		container = semaphoreNeighbor
 	]
 	val sensor1 = createVertexVariable => [
-		name = "sensor1";
-		vertexLabels.add(sensorLabel);
+		name = "sensor1"
+		vertexLabels.add(sensorLabel)
 		container = semaphoreNeighbor
 	]
 	val sensor2 = createVertexVariable => [
-		name = "sensor2";
-		vertexLabels.add(sensorLabel);
+		name = "sensor2"
+		vertexLabels.add(sensorLabel)
 		container = semaphoreNeighbor
 	]
 	val te1 = createVertexVariable => [name = "te1"; vertexLabels.add(teLabel)]
@@ -46,13 +46,13 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 	val requires1 = createEdgeVariable => [name = "g1"; edgeLabels.add(requiresLabel)]
 	val requires2 = createEdgeVariable => [name = "g2"; edgeLabels.add(requiresLabel)]
 	val monitoredBy1 = createEdgeVariable => [
-		name = "mb1";
-		edgeLabels.add(monitoredByLabel);
+		name = "mb1"
+		edgeLabels.add(monitoredByLabel)
 		container = semaphoreNeighbor
 	]
 	val monitoredBy2 = createEdgeVariable => [
-		name = "mb2";
-		edgeLabels.add(monitoredByLabel);
+		name = "mb2"
+		edgeLabels.add(monitoredByLabel)
 		container = semaphoreNeighbor
 	]
 	val connectsTo = createEdgeVariable => [name = "ct"; edgeLabels.add(connectsToLabel)]
@@ -78,9 +78,6 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 		rightOperand = route2
 	]
 	
-	// projectionVariables
-	val projectionVariables = #[semaphore, route1, route2, sensor1, sensor2, te1, te2]
-
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	def semaphoreNeighborA() {
 		semaphoreNeighbor.name = "SemaphoreNeighborA"
@@ -157,12 +154,8 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			rightInput = expand7
 		]
 
-		val projection = createProjectionOperator => [
-			input = antiJoin
-			variables.addAll(projectionVariables)
-		]
 		val production = createProductionOperator => [
-			input = projection
+			input = antiJoin
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -263,12 +256,8 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			rightInput = expand7
 		]
 
-		val projection = createProjectionOperator => [
-			input = antiJoin
-			variables.addAll(projectionVariables)
-		]
 		val production = createProductionOperator => [
-			input = projection
+			input = antiJoin
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -354,12 +343,8 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			rightInput = expand7
 		]
 
-		val projection = createProjectionOperator => [
-			input = antiJoin
-			variables.addAll(projectionVariables)
-		]
 		val production = createProductionOperator => [
-			input = projection
+			input = antiJoin
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -452,12 +437,8 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			rightInput = expand7
 		]
 
-		val projection = createProjectionOperator => [
-			input = antiJoin
-			variables.addAll(projectionVariables)
-		]
 		val production = createProductionOperator => [
-			input = projection
+			input = antiJoin
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -563,12 +544,8 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			rightInput = expand7
 		]
 
-		val projection = createProjectionOperator => [
-			input = join5
-			variables.addAll(projectionVariables)
-		]
 		val production = createProductionOperator => [
-			input = projection
+			input = join5
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor
@@ -651,12 +628,8 @@ class SemaphoreNeighborQueryPlanFactory extends QueryPlanFactory {
 			rightInput = expand7
 		]
 
-		val projection = createProjectionOperator => [
-			input = antiJoin
-			variables.addAll(projectionVariables)
-		]
 		val production = createProductionOperator => [
-			input = projection
+			input = antiJoin
 		]
 		semaphoreNeighbor.rootExpression = production
 		return semaphoreNeighbor

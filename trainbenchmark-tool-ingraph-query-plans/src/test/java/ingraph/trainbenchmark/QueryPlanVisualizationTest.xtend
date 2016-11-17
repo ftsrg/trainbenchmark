@@ -45,7 +45,12 @@ class QueryPlanVisualizationTest {
 		val name = plan.name
 		treeSerializer.serialize(plan, '''query-plans/«name»-Relalg''')
 		treeSerializer.serialize(plan.transformToRete, '''query-plans/«name»-Rete''')
-		println(expressionSerializer.serialize(plan.transformToRete, '''query-plans/«name»-ReteExpression'''))
+		println('''
+			\begin{align*}
+			\uline{«name.substring(name.length - 1)»:}
+			«expressionSerializer.serialize(plan.transformToRete, '''query-plans/«name»-ReteExpression''')»
+			\end{align*}
+		''')
 	}
 
 }
