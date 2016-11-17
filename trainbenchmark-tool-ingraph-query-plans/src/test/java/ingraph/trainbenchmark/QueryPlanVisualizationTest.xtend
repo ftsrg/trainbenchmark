@@ -1,43 +1,51 @@
 package ingraph.trainbenchmark
 
-import com.google.common.collect.ImmutableMap
 import ingraph.optimization.transformations.relalg2rete.Relalg2ReteTransformation
 import ingraph.relalg2tex.RelalgExpressionSerializer
+import ingraph.relalg2tex.RelalgSerializerConfig
 import ingraph.relalg2tex.RelalgTreeSerializer
-import java.util.Map
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+import org.junit.runners.Parameterized.Parameter
+import org.junit.runners.Parameterized.Parameters
 import relalg.RelalgContainer
 
+@RunWith(Parameterized)
 class QueryPlanVisualizationTest {
 
-	val extension RelalgTreeSerializer relalgTreeDrawer = new RelalgTreeSerializer
-	val extension RelalgExpressionSerializer expressionSerializer = new RelalgExpressionSerializer
-	
-	val extension Relalg2ReteTransformation transformation = new Relalg2ReteTransformation
-	val extension RouteSensorQueryPlanFactory routeSensorFactory = new RouteSensorQueryPlanFactory
-	val extension SemaphoreNeighborQueryPlanFactory semaphoreNeighborFactory = new SemaphoreNeighborQueryPlanFactory()
+	@Parameters(name="plan={0}")
+	static def Iterable<? extends Object> data() {
+		#[
+			new RouteSensorQueryPlanFactory().routeSensorA,
+			new RouteSensorQueryPlanFactory().routeSensorB,
+			new RouteSensorQueryPlanFactory().routeSensorC,
+			new SemaphoreNeighborQueryPlanFactory().semaphoreNeighborA,
+			new SemaphoreNeighborQueryPlanFactory().semaphoreNeighborB,
+			new SemaphoreNeighborQueryPlanFactory().semaphoreNeighborC,
+			new SemaphoreNeighborQueryPlanFactory().semaphoreNeighborD,
+			new SemaphoreNeighborQueryPlanFactory().semaphoreNeighborE,
+			new SemaphoreNeighborQueryPlanFactory().semaphoreNeighborF
+		];
+	}
 
-	val Map<String, RelalgContainer> queryPlans = ImmutableMap.builder //
-		.put("RouteSensorA", routeSensorA) //
-		.put("RouteSensorB", routeSensorB) //
-		.put("RouteSensorC", routeSensorB) //
-		.put("SemaphoreNeighborA", semaphoreNeighborA) //
-		.put("SemaphoreNeighborB", semaphoreNeighborB) //
-		.put("SemaphoreNeighborC", semaphoreNeighborC) //
-		.put("SemaphoreNeighborD", semaphoreNeighborD) //
-		.put("SemaphoreNeighborE", semaphoreNeighborE) //
-		.put("SemaphoreNeighborF", semaphoreNeighborF) //
-		.build
+	@Parameter
+	public RelalgContainer plan
+
+	val treeConfig = new RelalgSerializerConfig => [standaloneDocument = true]
+	val expressionConfig = new RelalgSerializerConfig => [standaloneDocument = false]
+
+	val extension RelalgTreeSerializer treeSerializer = new RelalgTreeSerializer(treeConfig)
+	val extension RelalgExpressionSerializer expressionSerializer = new RelalgExpressionSerializer(expressionConfig)
+
+	val extension Relalg2ReteTransformation transformation = new Relalg2ReteTransformation
 
 	@Test
 	def void serialize() {
-		queryPlans.forEach [ name, plan |
-			
-//			println(plan.rootExpression as ProductionOperator)
-			relalgTreeDrawer.serialize(plan, '''query-plans/«name»-Relalg''')
-			relalgTreeDrawer.serialize(plan.transformToRete, '''query-plans/«name»-Rete''')
-			expressionSerializer.serialize(plan.transformToRete, '''query-plans/«name»-ReteExpression''')
-		]
+		val name = plan.name
+		treeSerializer.serialize(plan, '''query-plans/«name»-Relalg''')
+		treeSerializer.serialize(plan.transformToRete, '''query-plans/«name»-Rete''')
+		println(expressionSerializer.serialize(plan.transformToRete, '''query-plans/«name»-ReteExpression'''))
 	}
 
 }

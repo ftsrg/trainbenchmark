@@ -1,0 +1,13 @@
+\documentclass[varwidth=100cm,convert={density=120}]{standalone}
+\usepackage[active,tightpage]{preview}
+
+\input{../../../ingraph/visualization/inputs/relalg-packages}
+\input{../../../ingraph/visualization/inputs/relalg-commands}
+
+\begin{document}
+\begin{preview}
+$$
+\getedges{swP}{SwitchPosition}{sw}{Switch}{\_e1}{target} \join \getedges{sw}{Switch}{sensor}{Sensor}{\_e2}{monitoredBy} \join \getedges{route}{Route}{swP}{SwitchPosition}{\_e3}{follows} \antijoin \getedges{route}{Route}{sensor}{Sensor}{\_e4}{requires}
+$$
+\end{preview}
+\end{document}
