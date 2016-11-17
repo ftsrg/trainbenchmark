@@ -7,11 +7,11 @@ import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
 public class RdfGeneratorConfigBuilder extends GeneratorConfigBuilder<RdfGeneratorConfig, RdfGeneratorConfigBuilder> {
 
-	protected Boolean inferencing;
+	protected Boolean inferred;
 	protected RdfFormat format;
 
-	public RdfGeneratorConfigBuilder setInferencing(Boolean inferencing) {
-		this.inferencing = inferencing;
+	public RdfGeneratorConfigBuilder setInferred(Boolean inferred) {
+		this.inferred = inferred;
 		return this;
 	}
 
@@ -23,14 +23,14 @@ public class RdfGeneratorConfigBuilder extends GeneratorConfigBuilder<RdfGenerat
 	@Override
 	public void checkNotNulls() {
 		super.checkNotNulls();
-		Preconditions.checkNotNull(inferencing);
+		Preconditions.checkNotNull(inferred);
 		Preconditions.checkNotNull(format);
 	}
 
 	@Override
 	public RdfGeneratorConfig createConfig() {
 		checkNotNulls();
-		return new RdfGeneratorConfig(configBase, inferencing, format);
+		return new RdfGeneratorConfig(configBase, inferred, format);
 	}
 
 }

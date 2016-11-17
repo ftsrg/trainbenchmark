@@ -24,8 +24,8 @@ def formats = [
 	new EmfGeneratorConfigBuilder(),
 	new Neo4jGraphGeneratorConfigBuilder(),
 	new TinkerGraphGeneratorConfigBuilder().setGraphFormat(TinkerGraphFormat.GRAPHML),
-	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferencing(true),
-	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferencing(false),
+	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferred(true),
+	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferred(false),
 	new SqlGeneratorConfigBuilder(),
 ]
 

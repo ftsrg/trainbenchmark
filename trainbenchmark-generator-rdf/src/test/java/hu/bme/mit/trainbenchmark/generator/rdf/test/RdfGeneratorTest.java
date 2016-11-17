@@ -19,17 +19,17 @@ import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 @RunWith(Parameterized.class)
 public class RdfGeneratorTest extends GeneratorTest {
 
-	@Parameters(name="inferencing={0}")
+	@Parameters(name="inferred={0}")
 	public static Iterable<? extends Object> data() {
 		return Arrays.asList(false, true);
 	}
 
 	@Parameter
-	public boolean inferencing;
+	public boolean inferred;
 
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		final RdfGeneratorConfig gc = new RdfGeneratorConfigBuilder().setConfigBase(gcb).setInferencing(inferencing)
+		final RdfGeneratorConfig gc = new RdfGeneratorConfigBuilder().setConfigBase(gcb).setInferred(inferred)
 				.setFormat(RdfFormat.TURTLE).createConfig();
 		final RdfSerializer serializer = new RdfSerializer(gc);
 		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
