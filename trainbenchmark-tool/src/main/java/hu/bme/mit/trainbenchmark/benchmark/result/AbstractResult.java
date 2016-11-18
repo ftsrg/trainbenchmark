@@ -41,7 +41,7 @@ public abstract class AbstractResult {
 	}
 
 	public void serializeCsv(final String csv, final String filePrefix) throws IOException {
-		final String matchesCsvPath = String.format("%s/%s-%s-%s-%s-[%s].csv", getResultDir(), filePrefix, toolName,
+		final String matchesCsvPath = String.format("%s/%s-%s-%s-%s-%s.csv", getResultDir(), filePrefix, toolName,
 				workload, model, description);
 		FileUtils.write(new File(matchesCsvPath), csv);
 	}
