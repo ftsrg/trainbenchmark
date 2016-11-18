@@ -59,10 +59,6 @@ public abstract class ViatraQuery<TMatch extends BasePatternMatch> extends Model
 		return matches;
 	}
 
-	public void setMatches(final Collection<TMatch> matches) {
-		this.matches = matches;
-	}
-
 	public abstract ViatraQueryMatcher<TMatch> getMatcher() throws ViatraQueryException;
 
 }
