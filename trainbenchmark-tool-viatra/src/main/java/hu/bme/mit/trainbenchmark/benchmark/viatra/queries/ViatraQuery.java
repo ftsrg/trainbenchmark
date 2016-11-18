@@ -19,43 +19,55 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
+import com.google.common.base.Preconditions;
+
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 
 public abstract class ViatraQuery<TMatch extends BasePatternMatch> extends ModelQuery<TMatch, ViatraDriver> {
 
+	protected final AdvancedViatraQueryEngine engine;
+	protected final ViatraBackend backend;
 	protected Collection<TMatch> matches;
-	protected AdvancedViatraQueryEngine engine;
 
 	public ViatraQuery(final RailwayQuery query, final ViatraDriver driver) {
 		super(query, driver);
 
 		RailwayPackage.eINSTANCE.eClass();
 
-		try {
-			engine = AdvancedViatraQueryEngine.from(driver.getEngine());
-			matches = getMatcher().getAllMatches();
-			driver.getEngine().addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<TMatch>() {
-				@Override
-				public void notifyAppearance(final TMatch match) {
-					matches.add(match);
-				}
+		engine = driver.getEngine();
+		backend = driver.getBackend();
+		Preconditions.checkArgument(backend == ViatraBackend.INCREMENTAL || backend == ViatraBackend.LOCAL_SEARCH,
+				String.format("Backend %s not supported.", backend));
 
-				@Override
-				public void notifyDisappearance(final TMatch match) {
-					matches.remove(match);
-				}
-			}, false);
-		} catch (final ViatraQueryException e) {
-			throw new RuntimeException(e);
+		if (backend == ViatraBackend.INCREMENTAL) {
+			try {
+				matches = getMatcher().getAllMatches();
+				driver.getEngine().addMatchUpdateListener(getMatcher(), new IMatchUpdateListener<TMatch>() {
+					@Override
+					public void notifyAppearance(final TMatch match) {
+						matches.add(match);
+					}
+
+					@Override
+					public void notifyDisappearance(final TMatch match) {
+						matches.remove(match);
+					}
+				}, false);
+			} catch (final ViatraQueryException e) {
+				throw new RuntimeException(e);
+			}
 		}
-
 	}
 
 	@Override
 	public Collection<TMatch> evaluate() throws ViatraQueryException {
+		if (backend == ViatraBackend.LOCAL_SEARCH) {
+			matches = getMatcher().getAllMatches();
+		}
 		return matches;
 	}
 

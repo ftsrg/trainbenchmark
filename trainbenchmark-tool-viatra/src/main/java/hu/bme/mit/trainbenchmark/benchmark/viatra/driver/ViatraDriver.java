@@ -47,22 +47,28 @@ public class ViatraDriver extends EmfDriver {
 			vqe = ViatraQueryEngine.on(scope);
 			break;
 		case LOCAL_SEARCH:
-			// see https://wiki.eclipse.org/VIATRA/Query/UserDocumentation/API/LocalSearch
+			// https://wiki.eclipse.org/VIATRA/Query/UserDocumentation/API/LocalSearch
 			final QueryEvaluationHint localSearchHint = LocalSearchHints.getDefault().build();
-			final ViatraQueryEngineOptions options = ViatraQueryEngineOptions.defineOptions(). //
-					withDefaultHint(localSearchHint).build();
+			final ViatraQueryEngineOptions options = ViatraQueryEngineOptions.defineOptions() //
+					.withDefaultHint(localSearchHint) //
+					.withDefaultBackend(localSearchHint.getQueryBackendFactory()) //
+					.build();
 			vqe = ViatraQueryEngine.on(scope, options);
 			break;
 		default:
-			throw new UnsupportedOperationException("Backend: " + backend + " not supported");
+			throw new UnsupportedOperationException(String.format("Backend %s not supported", backend));
 		}
 
-		engine = AdvancedViatraQueryEngine.from(ViatraQueryEngine.on(scope));
+		engine = AdvancedViatraQueryEngine.from(vqe);
 	}
 
 	@Override
 	public void read(final String modelPath) throws Exception {
 		super.read(modelPath);
+	}
+
+	public ViatraBackend getBackend() {
+		return backend;
 	}
 
 	public AdvancedViatraQueryEngine getEngine() {
