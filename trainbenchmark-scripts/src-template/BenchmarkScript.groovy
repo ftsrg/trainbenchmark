@@ -48,6 +48,7 @@ def tools = [
 
 def workloads = [
 	Inject: [
+      modelVariant: "inject",
 		operations: [
 			RailwayOperation.CONNECTEDSEGMENTS,
 			RailwayOperation.POSLENGTH,
@@ -67,6 +68,7 @@ def workloads = [
 		queryTransformationCount: 5,
 	],
 	Repair: [
+      modelVariant: "repair",
 		operations: [
 			RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
 			RailwayOperation.POSLENGTH_REPAIR,
@@ -108,10 +110,10 @@ def runBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkCo
 
 workloads.each { workload ->
 	def workloadName = workload.key
-	def modelVariant = workloadName.toLowerCase()
 
 	def workloadConfiguration = workload.value
-	def operations = workloadConfiguration["operations"]
+	def modelVariant = workloadConfiguration["modelVariant"]
+    def operations = workloadConfiguration["operations"]
 	def strategy = workloadConfiguration["strategy"]
 	def constant = workloadConfiguration["constant"]
 	def queryTransformationCount = workloadConfiguration["queryTransformationCount"]
