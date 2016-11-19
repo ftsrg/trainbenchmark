@@ -78,7 +78,7 @@ def workloads = [
 		strategy: TransformationChangeSetStrategy.PROPORTIONAL,
 		constant: 10,
 		queryTransformationCount: 5,
-	]
+	],
 ]
 
 def runBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkConfigBuilder configBuilder,
