@@ -13,7 +13,6 @@ package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.Tuple;

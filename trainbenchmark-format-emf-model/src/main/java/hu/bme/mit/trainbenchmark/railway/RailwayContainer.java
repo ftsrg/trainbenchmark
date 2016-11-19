@@ -3,7 +3,6 @@
 package hu.bme.mit.trainbenchmark.railway;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

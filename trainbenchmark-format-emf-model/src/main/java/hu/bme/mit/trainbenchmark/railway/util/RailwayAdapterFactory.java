@@ -2,14 +2,22 @@
  */
 package hu.bme.mit.trainbenchmark.railway.util;
 
-import hu.bme.mit.trainbenchmark.railway.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Region;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+import hu.bme.mit.trainbenchmark.railway.TrackElement;
 
 /**
  * <!-- begin-user-doc -->

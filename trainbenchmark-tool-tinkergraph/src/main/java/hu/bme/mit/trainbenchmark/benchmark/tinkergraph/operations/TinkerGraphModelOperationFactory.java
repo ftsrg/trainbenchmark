@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;

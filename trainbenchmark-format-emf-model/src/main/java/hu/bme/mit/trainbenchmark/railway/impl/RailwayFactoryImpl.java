@@ -2,16 +2,25 @@
  */
 package hu.bme.mit.trainbenchmark.railway.impl;
 
-import hu.bme.mit.trainbenchmark.railway.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import hu.bme.mit.trainbenchmark.railway.Position;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Region;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Signal;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
 
 /**
  * <!-- begin-user-doc -->
