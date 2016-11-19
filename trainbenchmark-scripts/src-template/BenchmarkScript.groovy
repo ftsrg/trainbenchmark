@@ -48,7 +48,7 @@ def tools = [
 
 def workloads = [
 	Inject: [
-      modelVariant: "inject",
+		modelVariant: "inject",
 		operations: [
 			RailwayOperation.CONNECTEDSEGMENTS,
 			RailwayOperation.POSLENGTH,
@@ -68,7 +68,7 @@ def workloads = [
 		queryTransformationCount: 5,
 	],
 	Repair: [
-      modelVariant: "repair",
+		modelVariant: "repair",
 		operations: [
 			RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
 			RailwayOperation.POSLENGTH_REPAIR,
@@ -113,7 +113,7 @@ workloads.each { workload ->
 
 	def workloadConfiguration = workload.value
 	def modelVariant = workloadConfiguration["modelVariant"]
-    def operations = workloadConfiguration["operations"]
+	def operations = workloadConfiguration["operations"]
 	def strategy = workloadConfiguration["strategy"]
 	def constant = workloadConfiguration["constant"]
 	def queryTransformationCount = workloadConfiguration["queryTransformationCount"]

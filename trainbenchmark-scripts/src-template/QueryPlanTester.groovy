@@ -48,24 +48,27 @@ for (scenario in scenarios) {
 	def modelVariant = scenarioName.toLowerCase()
 
 	def bcbb = new BenchmarkConfigBaseBuilder().setBenchmarkId(benchmarkId)
-		.setTimeout(timeout).setRuns(runs).setQueryTransformationCount(queryTransformationCount)
-		.setTransformationChangeSetStrategy(transformationChangeSetStrategy)
-		.setTransformationConstant(transformationConstant);
+			.setTimeout(timeout).setRuns(runs).setQueryTransformationCount(queryTransformationCount)
+			.setTransformationChangeSetStrategy(transformationChangeSetStrategy)
+			.setTransformationConstant(transformationConstant);
 
 	def modelSetConfig = new ModelSetConfig(modelVariant, minSize, maxSize)
 
 	for (variant in 'A'..'C') {
 		bcbb.setWorkload("RouteSensor")
-		bcbb.setOperations([RailwayOperation.ROUTESENSOR_REPAIR])
+		bcbb.setOperations([
+			RailwayOperation.ROUTESENSOR_REPAIR
+		])
 
 		def bcb = new IngraphBenchmarkConfigBuilder().setMessageSize(messageSize).setQueryVariant(variant)
 		runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig)
-
 	}
 
 	for (variant in 'A'..'F') {
 		bcbb.setWorkload("SemaphoreNeighbor")
-		bcbb.setOperations([RailwayOperation.SEMAPHORENEIGHBOR_REPAIR])
+		bcbb.setOperations([
+			RailwayOperation.SEMAPHORENEIGHBOR_REPAIR
+		])
 
 		def bcb = new IngraphBenchmarkConfigBuilder().setMessageSize(messageSize).setQueryVariant(variant)
 		runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig)
