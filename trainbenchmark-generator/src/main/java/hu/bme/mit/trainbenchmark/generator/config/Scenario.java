@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.constants;
+package hu.bme.mit.trainbenchmark.generator.config;
 
 public enum Scenario {
 	BATCH("Batch"), //

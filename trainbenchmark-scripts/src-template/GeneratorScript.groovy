@@ -1,6 +1,6 @@
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
-import hu.bme.mit.trainbenchmark.constants.Scenario
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase
+import hu.bme.mit.trainbenchmark.generator.config.Scenario
 import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfigBuilder
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigBuilder
 import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat

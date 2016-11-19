@@ -13,7 +13,6 @@
 package hu.bme.mit.trainbenchmark.generator.config;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfigBase;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public final class GeneratorConfigBase extends AbstractConfigBase {
 
