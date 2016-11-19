@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.mysql.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.mysql.driver.MySqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;

@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsMatch;

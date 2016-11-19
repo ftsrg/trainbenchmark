@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 

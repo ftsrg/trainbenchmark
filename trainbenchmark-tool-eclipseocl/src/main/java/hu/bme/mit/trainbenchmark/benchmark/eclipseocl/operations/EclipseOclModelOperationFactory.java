@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.eclipseocl.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries.EclipseOclQuery;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries.EclipseOclQueryConnectedSegments;
 import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.queries.EclipseOclQueryPosLength;

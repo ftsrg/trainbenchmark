@@ -12,10 +12,11 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SW;
-import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import hu.bme.mit.trainbenchmark.benchmark.matches.SwitchMonitoredMatch;
 
 public class SqlSwitchMonitoredMatch extends SqlMatch implements SwitchMonitoredMatch {
 

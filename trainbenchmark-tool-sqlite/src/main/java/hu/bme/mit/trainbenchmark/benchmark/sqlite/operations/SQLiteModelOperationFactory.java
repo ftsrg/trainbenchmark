@@ -1,7 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.sqlite.operations;
 
-import java.util.Optional;
-
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsInjectMatch;
