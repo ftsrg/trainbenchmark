@@ -1,10 +1,11 @@
 package hu.bme.mit.trainbenchmark.generator.tests;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBaseBuilder;
+import hu.bme.mit.trainbenchmark.generator.config.Scenario;
+
 import org.junit.Test;
 
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public abstract class GeneratorTest {
