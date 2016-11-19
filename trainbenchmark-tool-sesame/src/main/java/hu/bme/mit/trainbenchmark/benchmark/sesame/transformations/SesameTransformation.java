@@ -14,20 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchMonitored;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject.SesameTransformationInjectSwitchSet;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairConnectedSegments;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairPosLength;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairRouteSensor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSemaphoreNeighbor;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchMonitored;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.repair.SesameTransformationRepairSwitchSet;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.constants.Scenario;
 
 public abstract class SesameTransformation<TSesameMatch extends SesameMatch, TSesameDriver extends SesameDriver>
 		extends ModelTransformation<TSesameMatch, TSesameDriver> {
@@ -36,46 +22,4 @@ public abstract class SesameTransformation<TSesameMatch extends SesameMatch, TSe
 		super(driver);
 	}
 
-	public static <TSesameDriver extends SesameDriver> ModelTransformation<?, ?> newInstance(final TSesameDriver driver, final RailwayQuery query,
-			final Scenario scenario) {
-		switch (scenario) {
-		case REPAIR:
-			switch (query) {
-			case CONNECTEDSEGMENTS:
-				return new SesameTransformationRepairConnectedSegments<>(driver);
-			case POSLENGTH:
-				return new SesameTransformationRepairPosLength<>(driver);
-			case ROUTESENSOR:
-				return new SesameTransformationRepairRouteSensor<>(driver);
-			case SEMAPHORENEIGHBOR:
-				return new SesameTransformationRepairSemaphoreNeighbor<>(driver);
-			case SWITCHMONITORED:
-				return new SesameTransformationRepairSwitchMonitored<>(driver);
-			case SWITCHSET:
-				return new SesameTransformationRepairSwitchSet<>(driver);
-			default:
-				break;
-			}
-		case INJECT:
-			switch (query) {
-			case CONNECTEDSEGMENTS:
-				return new SesameTransformationInjectConnectedSegments<>(driver);
-			case POSLENGTH:
-				return new SesameTransformationInjectPosLength<>(driver);
-			case ROUTESENSOR:
-				return new SesameTransformationInjectRouteSensor<>(driver);
-			case SEMAPHORENEIGHBOR:
-				return new SesameTransformationInjectSemaphoreNeighbor<>(driver);
-			case SWITCHMONITORED:
-				return new SesameTransformationInjectSwitchMonitored<>(driver);
-			case SWITCHSET:
-				return new SesameTransformationInjectSwitchSet<>(driver);
-			default:
-				break;
-			}
-		default:
-			break;
-		}
-		throw new UnsupportedOperationException("Query: " + query.toString() + ", scenario: " + scenario);
-	}
 }
