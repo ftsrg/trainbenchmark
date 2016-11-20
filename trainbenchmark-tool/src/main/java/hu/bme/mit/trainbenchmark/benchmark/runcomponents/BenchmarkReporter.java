@@ -9,14 +9,9 @@ import in.ashwanthkumar.slack.webhook.Slack;
 import in.ashwanthkumar.slack.webhook.SlackMessage;
 
 public class BenchmarkReporter {
-	static Slack slack;
 
-	static {
-		String url = "https://hooks.slack.com/services/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";
-		slack = new Slack(url).icon(":doomhappy:").sendToChannel("benchmark-notifs").displayName("Benchmark Reporter");
-	}
-
-	public static void reportReady() throws SocketException, IOException {
+	public static void reportReady(final String url) throws SocketException, IOException {
+		final Slack slack = new Slack(url).icon(":doomhappy:").sendToChannel("benchmark-notifs").displayName("Benchmark Reporter");
 		slack.push(new SlackMessage("Benchmark Ready: " + getURL()));
 	}
 
@@ -25,7 +20,7 @@ public class BenchmarkReporter {
 	}
 
 	static String getIpAddress(){
-		String url = "http://bot.whatismyipaddress.com";
+		final String url = "http://bot.whatismyipaddress.com";
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()))){
 			return reader.readLine().trim();
 		} catch (IOException e) {
@@ -34,4 +29,3 @@ public class BenchmarkReporter {
 		}
 	}
 }
-	

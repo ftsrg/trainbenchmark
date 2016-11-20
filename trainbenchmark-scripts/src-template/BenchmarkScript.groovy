@@ -12,6 +12,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigBuil
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.result.ResultHelper
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkReporter
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigBuilder
@@ -27,6 +28,10 @@ def minSize = 1
 def maxSize = 2
 def timeout = 900
 def runs = 5
+
+// Set the reportUrl if you would like to receive a Slack notification when the benchmark finished.
+// The default configuration points to our research group's Slack.
+//def reportUrl = "https://hooks.slack.com/services/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"
 
 def tools = [
 	new BlazegraphBenchmarkConfigBuilder().setInferencing(false),
@@ -133,4 +138,6 @@ workloads.each { workload ->
 	tools.each{ bcb -> runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig) }
 }
 
-//BenchmarkReporter.reportReady()
+if (hasProperty("reportUrl")) {
+	BenchmarkReporter.reportReady(reportUrl)
+}
