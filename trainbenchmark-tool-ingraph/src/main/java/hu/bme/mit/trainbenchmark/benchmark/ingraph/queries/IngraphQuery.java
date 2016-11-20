@@ -11,10 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.queries;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import hu.bme.mit.ire.TransactionFactory;
 import hu.bme.mit.ire.trainbenchmark.TrainbenchmarkQuery;
@@ -25,15 +22,13 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import ingraph.ire.IngraphAdapter;
 import relalg.RelalgContainer;
-import scala.collection.Iterator;
-import scala.collection.immutable.Map;
 
 public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery<TPatternMatch, IngraphDriver> {
 
 	private TrainbenchmarkQuery queryEngine;
 	private IngraphChangeListener listener;
 	public IngraphQuery(final IngraphDriver driver, final RailwayQuery query, final TransactionFactory input)
-			throws IOException {
+			throws Exception {
 		super(query, driver);
 		try {
 			final RelalgContainer plan = IngraphUtils.getQueryPlan(query.toString(), driver.getQueryVariant());
@@ -51,10 +46,6 @@ public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TPatternMatch> evaluate() {
-		driver.flushLastTransaction();
-		driver.maybeMeasureMemory();
-
-		final List<IngraphMatch> matches = new ArrayList<>();
 		queryEngine.getResults();
 		return (Collection<TPatternMatch>) listener.results;
 	}

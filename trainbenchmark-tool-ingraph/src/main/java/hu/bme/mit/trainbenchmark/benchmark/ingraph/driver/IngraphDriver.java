@@ -18,8 +18,8 @@ public class IngraphDriver extends Driver {
 
 	protected final IngraphBenchmarkConfig bc;
 	protected final TransactionFactory transactionFactory;
-	protected Transaction lastTransaction;
-	private IngraphAdapter adapter;
+	protected Transaction tx;
+	protected IngraphAdapter adapter;
 
 	public IngraphDriver(final IngraphBenchmarkConfig bc, final TransactionFactory transactionFactory) {
 		super();
@@ -29,7 +29,9 @@ public class IngraphDriver extends Driver {
 
 	@Override
 	public void read(final String modelPath) throws Exception {
-		adapter.readGraph(modelPath, newTransaction());
+		beginTransaction();
+		adapter.readGraph(modelPath, tx);
+		finishTransaction();
 	}
 
 	@Override
@@ -46,8 +48,21 @@ public class IngraphDriver extends Driver {
 	}
 
 	public Transaction newTransaction() {
-		lastTransaction = transactionFactory.newBatchTransaction();
-		return lastTransaction;
+		tx = transactionFactory.newBatchTransaction();
+		return tx;
+	}
+
+	@Override
+	public void beginTransaction() {
+		newTransaction();
+	}
+
+	@Override
+	public void finishTransaction() throws Exception {
+		if (tx != null) {
+			tx.close();
+			tx = null;
+		}
 	}
 
 	public long newKey() {
@@ -56,13 +71,6 @@ public class IngraphDriver extends Driver {
 
 	public String getQueryVariant() {
 		return bc.getQueryVariant();
-	}
-
-	public void flushLastTransaction() {
-		if (this.lastTransaction != null) {
-			this.lastTransaction.close();
-			this.lastTransaction = null;
-		}
 	}
 
 	public void maybeMeasureMemory() {
