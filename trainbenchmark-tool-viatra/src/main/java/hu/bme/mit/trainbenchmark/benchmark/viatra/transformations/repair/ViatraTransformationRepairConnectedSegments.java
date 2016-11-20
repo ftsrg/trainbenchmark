@@ -14,8 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.repair;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
@@ -36,7 +34,8 @@ public class ViatraTransformationRepairConnectedSegments extends ViatraTransform
 
 			segment1.getConnectsTo().remove(segment2);
 			segment1.getConnectsTo().add(segment3);
-			EcoreUtil.delete(segment2);
+			segment2.getConnectsTo().clear();
+			segment2.getMonitoredBy().clear();
 		}
 	}
 }

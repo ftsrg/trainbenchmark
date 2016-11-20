@@ -13,11 +13,10 @@ package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair;
 
 import java.util.Collection;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+import hu.bme.mit.trainbenchmark.railway.Segment;
 
 public class EmfTransformationRepairConnectedSegments<TDriver extends EmfDriver, TConnectedSegmentsMatch extends EmfConnectedSegmentsMatch>
 		extends EmfTransformation<TConnectedSegmentsMatch, TDriver> {
@@ -28,9 +27,15 @@ public class EmfTransformationRepairConnectedSegments<TDriver extends EmfDriver,
 
 	@Override
 	public void activate(final Collection<TConnectedSegmentsMatch> matches) {
-		for (final EmfConnectedSegmentsMatch csm : matches) {
-			EcoreUtil.delete(csm.getSegment2());
-			csm.getSegment1().getConnectsTo().add(csm.getSegment3());
+		for (final EmfConnectedSegmentsMatch match : matches) {
+			final Segment segment1 = match.getSegment1();
+			final Segment segment2 = match.getSegment2();
+			final Segment segment3 = match.getSegment3();
+
+			segment1.getConnectsTo().remove(segment2);
+			segment1.getConnectsTo().add(segment3);
+			segment2.getConnectsTo().clear();
+			segment2.getMonitoredBy().clear();
 		}
 	}
 }
