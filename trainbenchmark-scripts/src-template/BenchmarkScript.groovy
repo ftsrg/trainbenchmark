@@ -138,6 +138,6 @@ workloads.each { workload ->
 	tools.each{ bcb -> runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig) }
 }
 
-if (hasProperty("reportUrl")) {
+if (binding.variables.get("reportUrl")) {
 	BenchmarkReporter.reportReady(reportUrl)
 }
