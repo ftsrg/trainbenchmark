@@ -7,8 +7,6 @@ library(ggrepel)
 source('util.R')
 
 # constants
-#workloads = c("Inject", "Repair")
-workloads = c("RouteSensor", "SemaphoreNeighbor")
 phases = c("Read", "Check", "Read.and.Check", "Transformation", "Recheck", "Transformation.and.Recheck")
 
 sizes = list()
@@ -19,10 +17,14 @@ sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M",
 # load the data
 tsvs = list.files("../results/", pattern = "times-.*\\.csv", full.names = T, recursive = T)
 tsvs
-l = lapply(tsvs, read.csv)
+l = lapply(tsvs, read.csv, colClasses = c("character", "character", "character", "character", "numeric", "character", "numeric", "numeric"))
 times = rbindlist(l)
 
-times = keep_descriptions_first_char(times)
+# determine the workloads in the results files
+workloads = unique(times$Workload)
+
+#times = keep_descriptions_first_char(times)
+times$Description = paste(times$Tool, times$Description)
 
 # preprocess the data
 times$Model = gsub("\\D+", "", times$Model)
@@ -115,7 +117,7 @@ for (workload in workloads) {
     labs(title = workload, x = "Model size\n#Elements", y = "Execution times [ms]") +
     #geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
     geom_point(aes(col = Description, shape = Description), size = 2.0) +
-    # scale_shape_manual(values = seq(0, 15)) +
+    scale_shape_manual(values = seq(0, 15)) +
     #geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     geom_line(aes(col = Description, group = Description), size = 0.5) +
     scale_x_discrete(breaks = as.factor(xbreaks), labels = xlabels) +
