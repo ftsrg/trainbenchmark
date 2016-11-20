@@ -64,4 +64,16 @@ public abstract class IngraphMatch extends BaseMatch {
 		return "<" + joiner.join(toArray()) + ">";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof IngraphMatch) {
+			return ((IngraphMatch)obj).qs.equals(this.qs);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return qs.hashCode();
+	}
 }
