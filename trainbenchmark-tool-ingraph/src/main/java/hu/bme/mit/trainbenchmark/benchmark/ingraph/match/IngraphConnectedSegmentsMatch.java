@@ -22,37 +22,37 @@ public class IngraphConnectedSegmentsMatch extends IngraphMatch implements Conne
 
 	@Override
 	public Long getSegment1() {
-		return (Long) qs.get(0);
+		return (Long) qs.get(0).get();
 	}
 
 	@Override
 	public Long getSegment2() {
-		return (Long) qs.get(1);
+		return (Long) qs.get(1).get();
 	}
 
 	@Override
 	public Long getSegment3() {
-		return (Long) qs.get(2);
+		return (Long) qs.get(2).get();
 	}
 
 	@Override
 	public Long getSegment4() {
-		return (Long) qs.get(3);
+		return (Long) qs.get(3).get();
 	}
 
 	@Override
 	public Long getSegment5() {
-		return (Long) qs.get(4);
+		return (Long) qs.get(4).get();
 	}
 
 	@Override
 	public Long getSegment6() {
-		return (Long) qs.get(5);
+		return (Long) qs.get(5).get();
 	}
 
 	@Override
 	public Long getSensor() {
-		return (Long) qs.get(6);
+		return (Long) qs.get(6).get();
 	}
 
 }

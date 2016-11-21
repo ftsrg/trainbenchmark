@@ -22,17 +22,17 @@ public class IngraphConnectedSegmentsInjectMatch extends IngraphMatch implements
 
 	@Override
 	public Long getSensor() {
-		return (Long) qs.get(0);
+		return (Long) qs.get(0).get();
 	}
 
 	@Override
 	public Long getSegment1() {
-		return (Long) qs.get(1);
+		return (Long) qs.get(1).get();
 	}
 
 	@Override
 	public Long getSegment3() {
-		return (Long) qs.get(2);
+		return (Long) qs.get(2).get();
 	}
 
 }
