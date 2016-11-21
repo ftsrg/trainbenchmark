@@ -31,7 +31,9 @@ public class Neo4jCoreTransformationInjectSemaphoreNeighbor extends Neo4jCoreTra
 		for (final Neo4jSemaphoreNeighborInjectMatch match : matches) {
 			final Iterable<Relationship> entries = match.getRoute().getRelationships(Neo4jConstants.relationshipTypeEntry);
 			for (final Relationship entry : entries) {
-				entry.delete();
+				if (entry.getEndNode().equals(match.getSemaphore())) {
+					entry.delete();
+				}
 			}
 		}
 	}

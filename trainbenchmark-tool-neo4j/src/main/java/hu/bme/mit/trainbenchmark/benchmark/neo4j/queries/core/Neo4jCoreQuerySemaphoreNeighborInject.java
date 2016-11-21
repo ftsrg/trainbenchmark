@@ -16,8 +16,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
@@ -41,9 +43,16 @@ public class Neo4jCoreQuerySemaphoreNeighborInject extends Neo4jCoreQuery<Neo4jS
 			// (route:Route)
 			final Iterable<Node> routes = () -> graphDb.findNodes(Neo4jConstants.labelRoute);
 			for (final Node route : routes) {
-				final Map<String, Object> match = new HashMap<>();
-				match.put(QueryConstants.VAR_ROUTE, route);
-				matches.add(new Neo4jSemaphoreNeighborInjectMatch(match));
+				Iterable<Relationship> entries = route.getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeEntry);
+
+				for (Relationship entry : entries) {
+					final Node semaphore = entry.getEndNode();
+
+					final Map<String, Object> match = new HashMap<>();
+					match.put(QueryConstants.VAR_ROUTE, route);
+					match.put(QueryConstants.VAR_SEMAPHORE, semaphore);
+					matches.add(new Neo4jSemaphoreNeighborInjectMatch(match));
+				}
 			}
 		}
 

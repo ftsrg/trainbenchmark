@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sql.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,12 +22,17 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
 public class SqlSemaphoreNeighborInjectMatch extends SqlMatch implements SemaphoreNeighborInjectMatch {
 
 	public SqlSemaphoreNeighborInjectMatch(final ResultSet rs) throws SQLException {
-		match = new Long[] { rs.getLong(VAR_ROUTE) };
+		match = new Long[] { rs.getLong(VAR_ROUTE), rs.getLong(VAR_SEMAPHORE) };
 	}
 
 	@Override
 	public Long getRoute() {
 		return match[0];
+	}
+
+	@Override
+	public Long getSemaphore() {
+		return match[1];
 	}
 
 }

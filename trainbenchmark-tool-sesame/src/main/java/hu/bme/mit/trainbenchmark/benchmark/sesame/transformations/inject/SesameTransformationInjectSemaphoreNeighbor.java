@@ -12,8 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.openrdf.model.URI;
 import org.openrdf.repository.RepositoryException;
@@ -22,6 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 
 public class SesameTransformationInjectSemaphoreNeighbor<TSesameDriver extends SesameDriver> extends SesameTransformation<SesameSemaphoreNeighborInjectMatch, TSesameDriver> {
 
@@ -31,8 +30,11 @@ public class SesameTransformationInjectSemaphoreNeighbor<TSesameDriver extends S
 
 	@Override
 	public void activate(final Collection<SesameSemaphoreNeighborInjectMatch> matches) throws RepositoryException {
-		final List<URI> routes = matches.stream().map(it -> it.getRoute()).collect(Collectors.toList());
-		driver.deleteSingleOutgoingEdge(routes, ModelConstants.ROUTE, ModelConstants.ENTRY);
+		final URI entry = driver.getValueFactory().createURI(RdfConstants.BASE_PREFIX + ModelConstants.ENTRY);
+
+		for (SesameSemaphoreNeighborInjectMatch match : matches) {
+			driver.getConnection().remove(match.getRoute(), entry, match.getSemaphore());
+		}
 	}
 
 }

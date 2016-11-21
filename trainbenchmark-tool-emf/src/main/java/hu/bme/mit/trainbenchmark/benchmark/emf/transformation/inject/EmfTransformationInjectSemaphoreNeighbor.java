@@ -17,6 +17,8 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
 
 public class EmfTransformationInjectSemaphoreNeighbor<TDriver extends EmfDriver, TSemaphoreNeighborInjectMatch extends EmfSemaphoreNeighborInjectMatch>
 		extends EmfTransformation<TSemaphoreNeighborInjectMatch, TDriver> {
@@ -28,7 +30,11 @@ public class EmfTransformationInjectSemaphoreNeighbor<TDriver extends EmfDriver,
 	@Override
 	public void activate(final Collection<TSemaphoreNeighborInjectMatch> matches) throws IOException {
 		for (final TSemaphoreNeighborInjectMatch match : matches) {
-			match.getRoute().setEntry(null);
+			final Route route = match.getRoute();
+			final Semaphore semaphore = match.getSemaphore();
+			if (route.getEntry().equals(semaphore)) {
+				route.setEntry(null);
+			}
 		}
 	}
 }

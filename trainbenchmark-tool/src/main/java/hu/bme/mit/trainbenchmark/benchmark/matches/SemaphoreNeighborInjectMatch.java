@@ -15,8 +15,11 @@ public interface SemaphoreNeighborInjectMatch extends Match {
 
 	public Object getRoute();
 
+	public Object getSemaphore();
+
+	@Override
 	public default Object[] toArray() {
-		return new Object[] { getRoute() };
+		return new Object[] { getRoute(), getSemaphore() };
 	}
 
 }

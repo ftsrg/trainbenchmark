@@ -30,7 +30,7 @@ public abstract class RdfDriver extends Driver {
 		this.inferencing = inferencing;
 	}
 
-	protected Long determineNewVertexId() throws Exception {
+	protected Long determineInitialNewVertexId() throws Exception {
 		Long id = 5000L;
 
 		// safety measure to avoid infinite loop in case of a driver bug
@@ -46,13 +46,14 @@ public abstract class RdfDriver extends Driver {
 		if (iterationCount > 20) {
 			throw new IOException("Could not generate new unique id.");
 		}
+		System.out.println(id);
 
 		return id;
 	}
 
-	public Long getNewVertexId() throws Exception {
+	public Long generateNewVertexId() throws Exception {
 		if (newVertexId == null) {
-			newVertexId = determineNewVertexId();
+			newVertexId = determineInitialNewVertexId();
 		}
 		newVertexId++;
 		return newVertexId;

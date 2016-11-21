@@ -41,7 +41,7 @@ public class JenaTransformationRepairSwitchMonitored extends JenaTransformation<
 
 		for (final JenaSwitchMonitoredMatch match : matches) {
 			final Resource sw = match.getSw();
-			final Long newVertexId = driver.getNewVertexId();
+			final Long newVertexId = driver.generateNewVertexId();
 			final Resource sensor = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
 
 			model.add(model.createStatement(sw, sensorEdge, sensor));

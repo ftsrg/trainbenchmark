@@ -47,7 +47,7 @@ public class SesameTransformationRepairSwitchMonitored<TSesameDriver extends Ses
 		for (final SesameSwitchMonitoredMatch match : matches) {
 			final Resource sw = match.getSw();
 
-			final URI sensor = vf.createURI(BASE_PREFIX + ID_PREFIX + driver.getNewVertexId());
+			final URI sensor = vf.createURI(BASE_PREFIX + ID_PREFIX + driver.generateNewVertexId());
 
 			// set vertex type
 			con.add(sensor, RDF.TYPE, sensorType);

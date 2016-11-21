@@ -47,7 +47,7 @@ public class Rdf4jTransformationRepairSwitchMonitored<TRdf4jDriver extends Rdf4j
 		for (final Rdf4jSwitchMonitoredMatch match : matches) {
 			final Resource sw = match.getSw();
 
-			final IRI sensor = vf.createIRI(BASE_PREFIX + ID_PREFIX + driver.getNewVertexId());
+			final IRI sensor = vf.createIRI(BASE_PREFIX + ID_PREFIX + driver.generateNewVertexId());
 
 			// set vertex type
 			con.add(sensor, RDF.TYPE, sensorType);

@@ -12,8 +12,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.inject;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.eclipse.rdf4j.model.IRI;
 
@@ -21,8 +19,10 @@ import hu.bme.mit.trainbenchmark.benchmark.rdf4j.driver.Rdf4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches.Rdf4jSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.transformations.Rdf4jTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 
-public class Rdf4jTransformationInjectSemaphoreNeighbor<TRdf4jDriver extends Rdf4jDriver> extends Rdf4jTransformation<Rdf4jSemaphoreNeighborInjectMatch, TRdf4jDriver> {
+public class Rdf4jTransformationInjectSemaphoreNeighbor<TRdf4jDriver extends Rdf4jDriver>
+		extends Rdf4jTransformation<Rdf4jSemaphoreNeighborInjectMatch, TRdf4jDriver> {
 
 	public Rdf4jTransformationInjectSemaphoreNeighbor(final TRdf4jDriver driver) {
 		super(driver);
@@ -30,8 +30,11 @@ public class Rdf4jTransformationInjectSemaphoreNeighbor<TRdf4jDriver extends Rdf
 
 	@Override
 	public void activate(final Collection<Rdf4jSemaphoreNeighborInjectMatch> matches) {
-		final List<IRI> routes = matches.stream().map(it -> it.getRoute()).collect(Collectors.toList());
-		driver.deleteSingleOutgoingEdge(routes, ModelConstants.ENTRY);
+		final IRI entry = driver.getValueFactory().createIRI(RdfConstants.BASE_PREFIX + ModelConstants.ENTRY);
+
+		for (Rdf4jSemaphoreNeighborInjectMatch match : matches) {
+			driver.getConnection().remove(match.getRoute(), entry, match.getSemaphore());
+		}
 	}
 
 }

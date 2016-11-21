@@ -23,15 +23,19 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTran
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class Neo4jCypherTransformationInjectSwitchMonitored extends Neo4jCypherTransformation<Neo4jSwitchMonitoredInjectMatch> {
+public class Neo4jCypherTransformationInjectSwitchMonitored
+		extends Neo4jCypherTransformation<Neo4jSwitchMonitoredInjectMatch> {
 
-	public Neo4jCypherTransformationInjectSwitchMonitored(final Neo4jDriver driver, final String workspaceDir) throws IOException {
+	public Neo4jCypherTransformationInjectSwitchMonitored(final Neo4jDriver driver, final String workspaceDir)
+			throws IOException {
 		super(driver, workspaceDir, RailwayOperation.SWITCHMONITORED_INJECT);
 	}
 
 	@Override
 	public void activate(final Collection<Neo4jSwitchMonitoredInjectMatch> matches) throws IOException {
+		System.out.println(matches.size());
 		for (final Neo4jSwitchMonitoredInjectMatch match : matches) {
+			System.out.println(match);
 			final Map<String, Object> parameters = ImmutableMap.of( //
 					QueryConstants.VAR_SW, match.getSw().getId() //
 			);
