@@ -32,8 +32,8 @@ public enum RailwayQuery {
 	SWITCHSET_INJECT("SwitchSetInject", TRANSFORMATION), //
 	;
 
-	private String name;
-	private ExecutionPhase executionPhase;
+	private final String name;
+	private final ExecutionPhase executionPhase;
 
 	RailwayQuery(final String name, final ExecutionPhase executionPhase) {
 		this.name = name;
