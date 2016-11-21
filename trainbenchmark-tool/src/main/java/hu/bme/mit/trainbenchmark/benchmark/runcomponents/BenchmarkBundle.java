@@ -37,7 +37,6 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 	}
 
 	public void initializeDriver() throws Exception {
-
 		driver.initialize();
 	}
 
