@@ -102,14 +102,19 @@ for (workload in workloads) {
   # - upper (Read, Check, Read and Check),
   # - lower (Transformation, Recheck, Transformation and Recheck),
   # we calculate minimum and maximum values
-  read.and.check.extremes = get_extremes(df, "Read and Check")
-  read.and.check.extremes = create_extremes_for_facets(read.and.check.extremes, c("Read", "Check"))
-  transformation.and.recheck.extremes = get_extremes(df, "Transformation and Recheck")
-  transformation.and.recheck.extremes = create_extremes_for_facets(transformation.and.recheck.extremes, c("Transformation", "Recheck"))
+  validation.facets = c("Read", "Check", "Read and Check")
+  read.and.check.extremes = get_extremes(df, validation.facets)
+  read.and.check.extremes = create_extremes_for_facets(read.and.check.extremes, validation.facets)
+  
+  revalidation.facets = c("Transformation", "Recheck", "Transformation and Recheck")
+  transformation.and.recheck.extremes = get_extremes(df, revalidation.facets)
+  transformation.and.recheck.extremes = create_extremes_for_facets(transformation.and.recheck.extremes, revalidation.facets)
   
   extremes = NULL
   extremes = rbind(extremes, read.and.check.extremes)
   extremes = rbind(extremes, transformation.and.recheck.extremes)
+  
+  extremes
   
   p = ggplot(df) + 
     #ggplot(na.omit(df)) +
@@ -124,14 +129,14 @@ for (workload in workloads) {
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
     facet_wrap(~ Phase, ncol = 3, scale = "free_y") +
     geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
-    guides(color = guide_legend(nrow = 1)) +
+    guides(color = guide_legend()) + #nrow = 1)) +
     theme_bw() +
     theme(
       text = element_text(size = 10),
       legend.key = element_blank(), 
       legend.title = element_blank(), 
       legend.position = "bottom",
-      axis.text = element_text(size = 7)
+      axis.text = element_text(size = 5.5)
     )
   print(p)
   
