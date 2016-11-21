@@ -45,8 +45,11 @@ public class Neo4jCoreQueryPosLength extends Neo4jCoreQuery<Neo4jPosLengthMatch>
 			// (segment:Segment)
 			final Iterable<Node> segments = () -> graphDb.findNodes(Neo4jConstants.labelSegment);
 			for (final Node segment : segments) {
+				if (!segment.hasProperty(LENGTH)) {
+					continue;
+				}
 				final Integer length = (Integer) segment.getProperty(LENGTH);
-				
+
 				// segment.length <= 0
 				if (length <= 0) {
 					final Map<String, Object> match = new HashMap<>();
