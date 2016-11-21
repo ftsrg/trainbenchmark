@@ -15,16 +15,14 @@ import com.google.common.base.Joiner;
 
 import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import scala.collection.JavaConversions;
 import scala.collection.immutable.Map;
 
 public abstract class IngraphMatch extends BaseMatch {
 
-	protected java.util.Map<Object, Object> qs;
+	protected Map<Object, Object> qs;
 
-	public IngraphMatch(final scala.collection.immutable.Map<Object, Object> qs) {
-		// TODO has a negative effect on performance
-		this.qs = JavaConversions.mapAsJavaMap(qs);
+	public IngraphMatch(final Map<Object, Object> qs) {
+		this.qs = qs;
 	}
 
 	public static IngraphMatch createMatch(final RailwayQuery query, final Map<Object, Object> qs) {
@@ -64,16 +62,4 @@ public abstract class IngraphMatch extends BaseMatch {
 		return "<" + joiner.join(toArray()) + ">";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof IngraphMatch) {
-			return ((IngraphMatch)obj).qs.equals(this.qs);
-		}
-		return false;
-	}
-
-	@Override
-	public int hashCode() {
-		return qs.hashCode();
-	}
 }

@@ -22,30 +22,30 @@ public class IngraphSwitchSetMatch extends IngraphMatch implements SwitchSetMatc
 
 	@Override
 	public Long getSemaphore() {
-		return (Long) qs.get(0);
+		return (Long) qs.get(0).get();
 	}
 
 	@Override
 	public Long getRoute() {
-		return (Long) qs.get(1);
+		return (Long) qs.get(1).get();
 	}
 
 	@Override
 	public Long getSwP() {
-		return (Long) qs.get(2);
+		return (Long) qs.get(2).get();
 	}
 
 	@Override
 	public Long getSw() {
-		return (Long) qs.get(3);
+		return (Long) qs.get(3).get();
 	}
 
 	public String getPosition() {
-		return (String) qs.get(4);
+		return (String) qs.get(4).get();
 	}
 
 	public String getCurrentPosition() {
-		return (String) qs.get(5);
+		return (String) qs.get(5).get();
 	}
 
 }

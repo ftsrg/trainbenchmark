@@ -22,37 +22,37 @@ public class IngraphSemaphoreNeighborMatch extends IngraphMatch implements Semap
 
 	@Override
 	public Long getSemaphore() {
-		return (Long) qs.get("semaphore");
+		return (Long) qs.get("semaphore").get();
 	}
 
 	@Override
 	public Long getRoute1() {
-		return (Long) qs.get("route1");
+		return (Long) qs.get("route1").get();
 	}
 
 	@Override
 	public Long getRoute2() {
-		return (Long) qs.get("route2");
+		return (Long) qs.get("route2").get();
 	}
 
 	@Override
 	public Long getSensor1() {
-		return (Long) qs.get("sensor1");
+		return (Long) qs.get("sensor1").get();
 	}
 
 	@Override
 	public Long getSensor2() {
-		return (Long) qs.get("sensor2");
+		return (Long) qs.get("sensor2").get();
 	}
 
 	@Override
 	public Long getTe1() {
-		return (Long) qs.get("te1");
+		return (Long) qs.get("te1").get();
 	}
 
 	@Override
 	public Long getTe2() {
-		return (Long) qs.get("te2");
+		return (Long) qs.get("te2").get();
 	}
 
 }
