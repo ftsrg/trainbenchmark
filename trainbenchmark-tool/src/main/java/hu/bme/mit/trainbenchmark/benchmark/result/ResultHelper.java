@@ -36,12 +36,14 @@ public final class ResultHelper {
 		return RESULT_DIR + String.format("%04d/", id);
 	}
 
-	public static String getResultPathForId(int id) {
+	public static String getRelativeResultPathForId(int id) {
 		return WORKSPACE_DIR + getResultDirForId(id);
 	}
 
 	public static void createResultDir(int id) {
-		new File(getResultDirForId(id)).mkdir();
+		final String dir = WORKSPACE_DIR + getResultDirForId(id);
+		System.out.println("Creating dir: " + dir);
+		new File(dir).mkdir();
 	}
 
 	public static int createNewResultDir() {
@@ -52,7 +54,7 @@ public final class ResultHelper {
 
 	public static void saveConfiguration(int id) throws IOException {
 		final File srcFile = new File(SCRIPT_PATH + BENCHMARK_SCRIPT);
-		final File destFile = new File(getResultPathForId(id) + BENCHMARK_SCRIPT);
+		final File destFile = new File(getRelativeResultPathForId(id) + BENCHMARK_SCRIPT);
 		FileUtils.copyFile(srcFile, destFile);
 	}
 
