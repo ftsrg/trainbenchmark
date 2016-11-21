@@ -5,7 +5,9 @@ import ingraph.cypherparser.CypherParser
 import ingraph.relalg2tex.RelalgTreeSerializer
 import java.io.IOException
 import org.junit.Test
+import org.junit.Ignore
 
+@Ignore
 class RelalgBuilderTest {
 	
 	val static RelalgTreeSerializer drawer = new RelalgTreeSerializer

@@ -21,9 +21,10 @@ INSERT OR REPLACE INTO Variables VALUES ('segment2',
   );
 
 -- insert (segment2) node as a Segment
-INSERT INTO Segment (id)
+INSERT INTO Segment (id, length)
 VALUES (
-  (SELECT Value FROM Variables WHERE Name = 'segment2')
+  (SELECT Value FROM Variables WHERE Name = 'segment2'),
+  (SELECT Value FROM Variables WHERE Name = 'length')
 );
 
 -- insert (segment1)-[:connectsTo]->(segment2) edge

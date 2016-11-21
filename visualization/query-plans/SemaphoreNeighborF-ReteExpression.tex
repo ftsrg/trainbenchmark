@@ -1,13 +1,1 @@
-\documentclass[varwidth=100cm,convert={density=120}]{standalone}
-\usepackage[active,tightpage]{preview}
-
-\input{../../../ingraph/visualization/inputs/relalg-packages}
-\input{../../../ingraph/visualization/inputs/relalg-commands}
-
-\begin{document}
-\begin{preview}
-$$
-\projection{\var{semaphore},~\var{route1},~\var{route2},~\var{sensor1},~\var{sensor2},~\var{te1},~\var{te2}} \Big(\selection{\var{route1} \neq \var{route2}} \Big(\getedges{te1}{TrackElement}{sensor1}{Sensor}{mb1}{monitoredBy} \join \getedges{te2}{TrackElement}{sensor2}{Sensor}{mb2}{monitoredBy} \join \getedges{route1}{Route}{sensor1}{Sensor}{g1}{requires} \join \getedges{route2}{Route}{sensor2}{Sensor}{g2}{requires}\Big) \join \getedges{route1}{Route}{semaphore}{Semaphore}{exit}{exit} \join \getedges{te1}{TrackElement}{te2}{TrackElement}{ct}{connectsTo} \antijoin \getedges{route2}{Route}{semaphore}{Semaphore}{entry}{entry}\Big)
-$$
-\end{preview}
-\end{document}
+\selection{\var{route1} \neq \var{route2}} \Big(\getedges{te1}{TrackElement}{sensor1}{Sensor}{mb1}{monitoredBy} \join \getedges{te2}{TrackElement}{sensor2}{Sensor}{mb2}{monitoredBy} \join \getedges{route1}{Route}{sensor1}{Sensor}{g1}{requires} \join \getedges{route2}{Route}{sensor2}{Sensor}{g2}{requires}\Big) \join \getedges{route1}{Route}{semaphore}{Semaphore}{exit}{exit} \join \getedges{te1}{TrackElement}{te2}{TrackElement}{ct}{connectsTo} \antijoin \getedges{route2}{Route}{semaphore}{Semaphore}{entry}{entry}

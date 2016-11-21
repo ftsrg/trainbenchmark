@@ -17,6 +17,7 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;
@@ -32,6 +33,7 @@ public class EmfTransformationInjectConnectedSegments<TDriver extends EmfDriver,
 	public void activate(final Collection<TConnectedSegmentsInjectMatch> matches) throws IOException {
 		for (final EmfConnectedSegmentsInjectMatch match : matches) {
 			final Segment segment2 = RailwayFactory.eINSTANCE.createSegment();
+			segment2.setLength(TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 
 			// delete (segment1)-[:connectsTo]->(segment3)
 			match.getSegment1().getConnectsTo().remove(match.getSegment3());

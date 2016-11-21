@@ -30,6 +30,7 @@ public class EmfTransformationInjectPosLength<TDriver extends EmfDriver, TPosLen
 		for (final TPosLengthInjectMatch match : matches) {
 			match.getSegment().setLength(0);
 		}
+		System.out.println(matches.size());
 	}
 
 }

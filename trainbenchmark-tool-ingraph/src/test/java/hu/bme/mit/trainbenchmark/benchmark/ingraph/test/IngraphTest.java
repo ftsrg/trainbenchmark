@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.ingraph.test;
 
+import org.junit.Ignore;
+
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.IngraphBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig;
@@ -19,6 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfig
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 
+@Ignore
 public class IngraphTest extends TrainBenchmarkTest {
 
 	@Override

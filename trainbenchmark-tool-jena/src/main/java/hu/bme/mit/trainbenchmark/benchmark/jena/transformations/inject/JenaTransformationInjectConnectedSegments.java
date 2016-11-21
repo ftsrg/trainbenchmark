@@ -25,6 +25,7 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public class JenaTransformationInjectConnectedSegments extends JenaTransformation<JenaConnectedSegmentsInjectMatch> {
 
@@ -35,7 +36,8 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 	@Override
 	public void activate(final Collection<JenaConnectedSegmentsInjectMatch> matches) throws Exception {
 		final Model model = driver.getModel();
-		
+
+		final Property length = model.getProperty(BASE_PREFIX + ModelConstants.LENGTH);
 		final Property connectsTo = model.getProperty(BASE_PREFIX + ModelConstants.CONNECTS_TO);
 		final Property monitoredBy = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);
 		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
@@ -45,6 +47,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 			final Long newVertexId = driver.getNewVertexId();
 			final Resource segment2 = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
 			model.add(model.createStatement(segment2, RDF.type, segmentType));
+			model.add(model.createLiteralStatement(segment2, length, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH));
 
 			// (segment1)-[:connectsTo]->(segment2)
 			model.add(csim.getSegment1(), connectsTo, segment2);
@@ -52,7 +55,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 			model.add(segment2, connectsTo, csim.getSegment3());
 			// (segment2)-[:monitoredBy]->(sensor)
 			model.add(segment2, monitoredBy, csim.getSensor());
-			
+
 			// remove (segment1)-[:connectsTo]->(segment3)
 			model.remove(csim.getSegment1(), connectsTo, csim.getSegment3());
 		}
