@@ -73,7 +73,7 @@ public class IngraphDriver extends Driver {
 		return bc.getQueryVariant();
 	}
 
-	public void maybeMeasureMemory() {
+	public void maybeMeasureMemory() throws IOException {
 		final String memPath = bc.getMemoryMeasurementPath();
 		if (memPath != null) {
 			final MemoryMeter meter = new MemoryMeter();
@@ -81,11 +81,8 @@ public class IngraphDriver extends Driver {
 			final double memoryMB = memoryB / Math.pow(10, 6);
 			final String line = String.join(",",
 					Arrays.asList(bc.getToolName(), bc.getQueryVariant(), bc.getFileName(), String.format("%.02f", memoryMB))) + "\n";
-			try {
-				FileUtils.write(new File(memPath), line, Charset.defaultCharset(), true);
-			} catch (final IOException e) {
-				e.printStackTrace();
-			}
+
+			FileUtils.write(new File(memPath), line, Charset.defaultCharset(), true);
 		}
 	}
 
