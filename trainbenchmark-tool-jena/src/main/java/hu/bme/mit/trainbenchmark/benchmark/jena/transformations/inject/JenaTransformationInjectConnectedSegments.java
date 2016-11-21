@@ -44,7 +44,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 
 		for (final JenaConnectedSegmentsInjectMatch csim : matches) {
 			// create (segment2) node
-			final Long newVertexId = driver.getNewVertexId();
+			final Long newVertexId = driver.generateNewVertexId();
 			final Resource segment2 = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
 			model.add(model.createStatement(segment2, RDF.type, segmentType));
 			model.add(model.createLiteralStatement(segment2, length, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH));

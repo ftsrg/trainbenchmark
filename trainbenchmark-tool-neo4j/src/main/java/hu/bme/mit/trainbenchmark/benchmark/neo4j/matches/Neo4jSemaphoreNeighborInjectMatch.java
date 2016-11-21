@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 
 import java.util.Map;
 
@@ -28,6 +29,11 @@ public class Neo4jSemaphoreNeighborInjectMatch extends Neo4jMatch implements Sem
 	@Override
 	public Node getRoute() {
 		return (Node) match.get(VAR_ROUTE);
+	}
+
+	@Override
+	public Node getSemaphore() {
+		return (Node) match.get(VAR_SEMAPHORE);
 	}
 
 }

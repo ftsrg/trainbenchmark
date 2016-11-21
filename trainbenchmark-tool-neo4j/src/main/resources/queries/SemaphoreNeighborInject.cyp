@@ -1,2 +1,2 @@
-MATCH (route:Route)
-RETURN DISTINCT route
+MATCH (route:Route)-[:entry]->(semaphore:Semaphore)
+RETURN DISTINCT route, semaphore

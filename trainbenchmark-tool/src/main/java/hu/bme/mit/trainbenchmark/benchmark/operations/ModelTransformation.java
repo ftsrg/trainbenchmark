@@ -18,7 +18,7 @@ import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 public abstract class ModelTransformation<PatternMatch, TDriver extends Driver> {
 
 	protected TDriver driver;
-	
+
 	public ModelTransformation(final TDriver driver) {
 		this.driver = driver;
 	}
@@ -28,7 +28,7 @@ public abstract class ModelTransformation<PatternMatch, TDriver extends Driver> 
 		activate(matches);
 		driver.finishTransaction();
 	}
-	
+
 	// As the transformations are implemented on a wide range of technologies, they may throw any exception.
 	// Using "throws Exception" is generally considered bad practice in production systems.
 	// However, it allows us to throw all exceptions similar to unchecked exceptions,

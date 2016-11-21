@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.jena.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.rdf.model.Resource;
@@ -27,6 +28,11 @@ public class JenaSemaphoreNeighborInjectMatch extends JenaMatch implements Semap
 	@Override
 	public Resource getRoute() {
 		return qs.getResource(VAR_ROUTE);
+	}
+
+	@Override
+	public Resource getSemaphore() {
+		return qs.getResource(VAR_SEMAPHORE);
 	}
 
 }

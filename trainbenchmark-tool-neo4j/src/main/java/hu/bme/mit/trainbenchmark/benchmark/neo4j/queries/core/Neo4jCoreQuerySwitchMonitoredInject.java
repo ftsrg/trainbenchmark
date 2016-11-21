@@ -38,7 +38,7 @@ public class Neo4jCoreQuerySwitchMonitoredInject extends Neo4jCoreQuery<Neo4jSwi
 		final Collection<Neo4jSwitchMonitoredInjectMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
-		try (Transaction tx = graphDb.beginTx()) {
+		try (final Transaction tx = graphDb.beginTx()) {
 			// (sw:Switch)
 			final Iterable<Node> sws = () -> graphDb.findNodes(Neo4jConstants.labelSwitch);
 			for (final Node sw : sws) {

@@ -23,9 +23,11 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTran
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class Neo4jCypherTransformationInjectSemaphoreNeighbor extends Neo4jCypherTransformation<Neo4jSemaphoreNeighborInjectMatch> {
+public class Neo4jCypherTransformationInjectSemaphoreNeighbor
+		extends Neo4jCypherTransformation<Neo4jSemaphoreNeighborInjectMatch> {
 
-	public Neo4jCypherTransformationInjectSemaphoreNeighbor(final Neo4jDriver driver, final String workspaceDir) throws IOException {
+	public Neo4jCypherTransformationInjectSemaphoreNeighbor(final Neo4jDriver driver, final String workspaceDir)
+			throws IOException {
 		super(driver, workspaceDir, RailwayOperation.SEMAPHORENEIGHBOR_INJECT);
 	}
 
@@ -33,7 +35,8 @@ public class Neo4jCypherTransformationInjectSemaphoreNeighbor extends Neo4jCyphe
 	public void activate(final Collection<Neo4jSemaphoreNeighborInjectMatch> matches) throws IOException {
 		for (final Neo4jSemaphoreNeighborInjectMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_ROUTE, match.getRoute().getId() //
+					QueryConstants.VAR_ROUTE, match.getRoute().getId(), //
+					QueryConstants.VAR_SEMAPHORE, match.getSemaphore().getId() //
 			);
 
 			driver.runTransformation(transformationDefinition, parameters);

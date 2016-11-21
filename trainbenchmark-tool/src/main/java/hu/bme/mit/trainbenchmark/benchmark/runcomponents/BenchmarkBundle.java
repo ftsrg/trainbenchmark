@@ -3,6 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
@@ -76,7 +77,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 				final int changeSetSize = determineChangeSet(qst,
 						bc.getConfigBase().getTransformationChangeSetStrategy(),
 						bc.getConfigBase().getTransformationConstant());
-				qst.shuffle(changeSetSize);
+				List<? extends TPatternMatch> matches = qst.shuffle(changeSetSize);
 			}
 		}
 	}

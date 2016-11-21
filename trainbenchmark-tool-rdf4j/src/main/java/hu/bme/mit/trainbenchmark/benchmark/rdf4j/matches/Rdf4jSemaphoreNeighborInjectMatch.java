@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.rdf4j.matches;
 
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEMAPHORE;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.query.BindingSet;
@@ -27,6 +28,11 @@ public class Rdf4jSemaphoreNeighborInjectMatch extends Rdf4jMatch implements Sem
 	@Override
 	public IRI getRoute() {
 		return (IRI) bs.getValue(VAR_ROUTE);
+	}
+
+	@Override
+	public IRI getSemaphore() {
+		return (IRI) bs.getValue(VAR_SEMAPHORE);
 	}
 
 }

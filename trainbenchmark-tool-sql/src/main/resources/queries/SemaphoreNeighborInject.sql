@@ -1,2 +1,3 @@
-SELECT DISTINCT id AS route
-FROM Route;
+SELECT DISTINCT id AS route, entry AS semaphore
+FROM Route
+WHERE entry != 0;

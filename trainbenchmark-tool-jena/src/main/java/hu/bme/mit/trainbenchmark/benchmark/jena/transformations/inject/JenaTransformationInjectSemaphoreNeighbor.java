@@ -11,18 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
 
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 
 public class JenaTransformationInjectSemaphoreNeighbor extends JenaTransformation<JenaSemaphoreNeighborInjectMatch> {
 
@@ -32,8 +31,11 @@ public class JenaTransformationInjectSemaphoreNeighbor extends JenaTransformatio
 
 	@Override
 	public void activate(final Collection<JenaSemaphoreNeighborInjectMatch> matches) throws IOException {
-		final List<Resource> routes = matches.stream().map(it -> it.getRoute()).collect(Collectors.toList());
-		driver.deleteOutgoingEdges(routes, ENTRY);
+		final Model model = driver.getModel();
+		final Property entry = model.getProperty(RdfConstants.BASE_PREFIX + ModelConstants.ENTRY);
+		for (JenaSemaphoreNeighborInjectMatch match : matches) {
+			model.remove(match.getRoute(), entry, match.getSemaphore());
+		}
 	}
 
 }

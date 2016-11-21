@@ -14,6 +14,8 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
@@ -32,11 +34,17 @@ public class TinkerGraphQuerySemaphoreNeighborInject<TTinkerGraphDriver extends 
 	public Collection<TinkerGraphSemaphoreNeighborInjectMatch> evaluate() {
 		final Collection<TinkerGraphSemaphoreNeighborInjectMatch> matches = new ArrayList<>();
 
-		Collection<Vertex> routes = driver.getVertices(ModelConstants.ROUTE);
-		for (Vertex route : routes) {
-			matches.add(new TinkerGraphSemaphoreNeighborInjectMatch(route));
+		final Collection<Vertex> routes = driver.getVertices(ModelConstants.ROUTE);
+		for (final Vertex route : routes) {
+			final Iterable<Edge> entries = () -> route.edges(Direction.OUT, ModelConstants.ENTRY);
+			for (final Edge edge : entries) {
+				final Vertex semaphore = edge.inVertex();
+				System.out.println(route);
+				System.out.println(semaphore);
+				matches.add(new TinkerGraphSemaphoreNeighborInjectMatch(route, semaphore));
+			}
 		}
-		
+
 		return matches;
 	}
 }

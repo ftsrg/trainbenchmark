@@ -18,15 +18,22 @@ import hu.bme.mit.trainbenchmark.benchmark.matches.SemaphoreNeighborInjectMatch;
 public class TinkerGraphSemaphoreNeighborInjectMatch extends TinkerGraphMatch implements SemaphoreNeighborInjectMatch {
 
 	protected final Vertex route;
-	
-	public TinkerGraphSemaphoreNeighborInjectMatch(final Vertex route) {
+	protected final Vertex semaphore;
+
+	public TinkerGraphSemaphoreNeighborInjectMatch(final Vertex route, final Vertex semaphore) {
 		super();
 		this.route = route;
+		this.semaphore = semaphore;
 	}
 
 	@Override
 	public Vertex getRoute() {
 		return route;
+	}
+
+	@Override
+	public Vertex getSemaphore() {
+		return semaphore;
 	}
 
 }

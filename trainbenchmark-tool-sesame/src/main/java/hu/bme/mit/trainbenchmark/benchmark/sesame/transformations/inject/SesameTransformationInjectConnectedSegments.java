@@ -50,7 +50,7 @@ public class SesameTransformationInjectConnectedSegments<TSesameDriver extends S
 
 		for (final SesameConnectedSegmentsInjectMatch csim : matches) {
 			// create (segment2) node
-			final Long newVertexId = driver.getNewVertexId();
+			final Long newVertexId = driver.generateNewVertexId();
 			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
 			connection.add(segment2, RDF.TYPE, segmentType);
 			connection.add(segment2, length, lengthLiteral);

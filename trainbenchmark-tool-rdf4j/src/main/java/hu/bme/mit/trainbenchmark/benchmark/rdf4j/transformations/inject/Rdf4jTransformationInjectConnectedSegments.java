@@ -50,7 +50,7 @@ public class Rdf4jTransformationInjectConnectedSegments<TRdf4jDriver extends Rdf
 
 		for (final Rdf4jConnectedSegmentsInjectMatch csim : matches) {
 			// create (segment2) node
-			final Long newVertexId = driver.getNewVertexId();
+			final Long newVertexId = driver.generateNewVertexId();
 			final IRI segment2 = vf.createIRI(BASE_PREFIX + ID_PREFIX + newVertexId);
 			connection.add(segment2, RDF.TYPE, segmentType);
 

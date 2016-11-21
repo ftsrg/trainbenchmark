@@ -25,4 +25,9 @@ public class IngraphSemaphoreNeighborInjectMatch extends IngraphMatch implements
 		return (Long) qs.get("route").get();
 	}
 
+	@Override
+	public Object getSemaphore() {
+		return (Long) qs.get("semaphore").get();
+	}
+
 }
