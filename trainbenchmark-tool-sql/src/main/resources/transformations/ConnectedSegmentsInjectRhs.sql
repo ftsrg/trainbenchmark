@@ -1,6 +1,7 @@
 SET @sensor := ?;
 SET @segment1 := ?;
 SET @segment3 := ?;
+SET @length := ?;
 
 -- get (region) node
 SET @region :=
@@ -18,8 +19,8 @@ INSERT INTO TrackElement (region) VALUES (@region);
 SET @segment2 := (SELECT LAST_INSERT_ID());
 
 -- insert (segment2) node as a Segment
-INSERT INTO Segment (id)
-VALUES (@segment2);
+INSERT INTO Segment (id, length)
+VALUES (@segment2, @length);
 
 -- insert (segment1)-[:connectsTo]->(segment2) edge
 INSERT INTO connectsTo

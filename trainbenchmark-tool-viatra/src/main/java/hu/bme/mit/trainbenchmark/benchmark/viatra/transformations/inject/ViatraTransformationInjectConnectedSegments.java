@@ -17,6 +17,7 @@ import java.util.Collection;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;
@@ -32,9 +33,10 @@ public class ViatraTransformationInjectConnectedSegments extends ViatraTransform
 		for (final ConnectedSegmentsInjectMatch csim : matches) {
 			// create (segment2) node
 			final Segment segment2 = RailwayFactory.eINSTANCE.createSegment();
+			segment2.setLength(TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 			final Region region = (Region) csim.getSegment1().eContainer();
 			region.getElements().add(segment2);
-			
+
 			// (segment1)-[:connectsTo]->(segment2)
 			csim.getSegment1().getConnectsTo().add(segment2);
 			// (segment2)-[:connectsTo]->(segment3)

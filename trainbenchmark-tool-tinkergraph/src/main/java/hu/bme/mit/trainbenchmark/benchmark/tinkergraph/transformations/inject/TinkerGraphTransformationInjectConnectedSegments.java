@@ -21,6 +21,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public class TinkerGraphTransformationInjectConnectedSegments<TTinkerGraphDriver extends TinkerGraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphConnectedSegmentsInjectMatch, TTinkerGraphDriver> {
@@ -34,6 +35,7 @@ public class TinkerGraphTransformationInjectConnectedSegments<TTinkerGraphDriver
 		for (final TinkerGraphConnectedSegmentsInjectMatch match : matches) {
 			// create (segment2) node
 			final Vertex segment2 = driver.getGraph().addVertex(ModelConstants.SEGMENT);
+			segment2.property(ModelConstants.LENGTH, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 
 			// (segment2)-[:monitoredBy]->(sensor)
 			segment2.addEdge(ModelConstants.MONITORED_BY, match.getSensor());

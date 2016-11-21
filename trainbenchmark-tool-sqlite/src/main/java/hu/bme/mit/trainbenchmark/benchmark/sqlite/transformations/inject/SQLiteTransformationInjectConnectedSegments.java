@@ -19,12 +19,14 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsInjec
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.driver.SQLiteDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.transformation.SQLiteTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public class SQLiteTransformationInjectConnectedSegments extends SQLiteTransformation<SqlConnectedSegmentsInjectMatch> {
 
-	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('sensor', ?), ('segment1', ?), ('segment3', ?);";
-	
-	public SQLiteTransformationInjectConnectedSegments(final SQLiteDriver driver, final String workspaceDir) throws IOException {
+	final String setBindings = "INSERT OR REPLACE INTO Variables VALUES ('sensor', ?), ('segment1', ?), ('segment3', ?), ('length', ?);";
+
+	public SQLiteTransformationInjectConnectedSegments(final SQLiteDriver driver, final String workspaceDir)
+			throws IOException {
 		super(driver, workspaceDir, RailwayOperation.CONNECTEDSEGMENTS_INJECT);
 	}
 
@@ -38,10 +40,11 @@ public class SQLiteTransformationInjectConnectedSegments extends SQLiteTransform
 			preparedUpdateStatement.setLong(1, match.getSensor());
 			preparedUpdateStatement.setLong(2, match.getSegment1());
 			preparedUpdateStatement.setLong(3, match.getSegment3());
+			preparedUpdateStatement.setLong(4, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 			preparedUpdateStatement.executeUpdate();
 
 			driver.getConnection().createStatement().executeUpdate(updateQuery);
 		}
 	}
-	
+
 }

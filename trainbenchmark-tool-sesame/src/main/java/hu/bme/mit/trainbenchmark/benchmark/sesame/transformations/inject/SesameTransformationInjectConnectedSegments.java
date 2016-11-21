@@ -12,6 +12,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
 import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
@@ -19,6 +20,7 @@ import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
 import java.util.Collection;
 
+import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
@@ -27,6 +29,7 @@ import org.openrdf.repository.RepositoryConnection;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public class SesameTransformationInjectConnectedSegments<TSesameDriver extends SesameDriver> extends SesameTransformation<SesameConnectedSegmentsInjectMatch, TSesameDriver> {
 
@@ -39,15 +42,18 @@ public class SesameTransformationInjectConnectedSegments<TSesameDriver extends S
 		final RepositoryConnection connection = driver.getConnection();
 		final ValueFactory vf = driver.getValueFactory();
 
+		final URI length = vf.createURI(BASE_PREFIX + LENGTH);
 		final URI connectsTo = vf.createURI(BASE_PREFIX + CONNECTS_TO);
 		final URI monitoredBy = vf.createURI(BASE_PREFIX + MONITORED_BY);
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
+		final Literal lengthLiteral = vf.createLiteral(TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 
-		for (final SesameConnectedSegmentsInjectMatch csim : matches) {			
+		for (final SesameConnectedSegmentsInjectMatch csim : matches) {
 			// create (segment2) node
 			final Long newVertexId = driver.getNewVertexId();
 			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
 			connection.add(segment2, RDF.TYPE, segmentType);
+			connection.add(segment2, length, lengthLiteral);
 
 			// (segment1)-[:connectsTo]->(segment2)
 			connection.add(csim.getSegment1(), connectsTo, segment2);
@@ -56,8 +62,8 @@ public class SesameTransformationInjectConnectedSegments<TSesameDriver extends S
 
 			// (segment2)-[:monitoredBy]->(sensor)
 			connection.add(segment2, monitoredBy, csim.getSensor());
-			
-			// remove (segment1)-[:connectsTo]->(segment3) 
+
+			// remove (segment1)-[:connectsTo]->(segment3)
 			connection.remove(csim.getSegment1(), connectsTo, csim.getSegment3());
 		}
 	}

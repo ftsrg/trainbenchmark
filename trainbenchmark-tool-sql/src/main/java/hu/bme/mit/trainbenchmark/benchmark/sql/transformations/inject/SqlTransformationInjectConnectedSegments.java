@@ -19,6 +19,7 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 
 public class SqlTransformationInjectConnectedSegments<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlConnectedSegmentsInjectMatch, TSqlDriver> {
 
@@ -36,6 +37,7 @@ public class SqlTransformationInjectConnectedSegments<TSqlDriver extends SqlDriv
 			preparedUpdateStatement.setLong(1, match.getSensor());
 			preparedUpdateStatement.setLong(2, match.getSegment1());
 			preparedUpdateStatement.setLong(3, match.getSegment3());
+			preparedUpdateStatement.setLong(4, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 			preparedUpdateStatement.executeUpdate();
 		}
 	}

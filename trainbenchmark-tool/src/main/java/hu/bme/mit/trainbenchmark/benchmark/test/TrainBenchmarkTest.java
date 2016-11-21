@@ -26,7 +26,7 @@ public abstract class TrainBenchmarkTest {
 	protected final int benchmarkId = 0;
 	protected ExecutionConfig executionConfig = ExecutionConfig.defaultExecutionConfig();
 	protected final long timeout = 120;
-	protected final int runs = 2;
+	protected final int runs = 1;
 	protected final int size = 1;
 	protected final TransformationChangeSetStrategy strategy = TransformationChangeSetStrategy.FIXED;
 	protected final int transformationConstant = 10;
@@ -68,6 +68,51 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(0));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(0));
+	}
+
+	// inject
+
+	@Test
+	public void injectTest() throws Exception {
+		// Arrange
+		final String workload = "InjectTest";
+		final int queryTransformationCount = 1;
+		final String modelFilename = "railway-inject-" + size;
+		final List<RailwayOperation> operations = ImmutableList.of(//
+				RailwayOperation.CONNECTEDSEGMENTS, //
+				RailwayOperation.POSLENGTH, //
+				RailwayOperation.ROUTESENSOR, //
+				RailwayOperation.SEMAPHORENEIGHBOR, //
+				RailwayOperation.SWITCHSET, //
+				RailwayOperation.SWITCHMONITORED, //
+				RailwayOperation.CONNECTEDSEGMENTS_INJECT, //
+				RailwayOperation.POSLENGTH_INJECT, //
+				RailwayOperation.ROUTESENSOR_INJECT, //
+				RailwayOperation.SEMAPHORENEIGHBOR_INJECT, //
+				RailwayOperation.SWITCHSET_INJECT, //
+				RailwayOperation.SWITCHMONITORED_INJECT //
+		);
+		final BenchmarkConfigBase bcb = bcbb.setQueryTransformationCount(queryTransformationCount)
+				.setModelFilename(modelFilename).setOperations(operations).setWorkload(workload)
+				.createConfigBase();
+
+		// Act
+		final BenchmarkResult result = runTest(bcb);
+
+		// Assert
+		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(3));
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(13));
+		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(0), Matchers.equalTo(11));
+		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(1), Matchers.equalTo(21));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(0), Matchers.equalTo(9));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(13));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(12));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(22));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(0), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(1), Matchers.equalTo(10));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(0), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(0));
 	}
 
 	// repair

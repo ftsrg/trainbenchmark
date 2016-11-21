@@ -15,5 +15,6 @@ package hu.bme.mit.trainbenchmark.constants;
 public class TrainBenchmarkConstants {
 
 	public static final long RANDOM_SEED = 19871053l;
+	public static final int DEFAULT_SEGMENT_LENGTH = 500;
 
 }
