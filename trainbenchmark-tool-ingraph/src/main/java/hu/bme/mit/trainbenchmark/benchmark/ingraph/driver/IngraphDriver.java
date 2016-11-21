@@ -62,6 +62,7 @@ public class IngraphDriver extends Driver {
 		if (tx != null) {
 			tx.close();
 			tx = null;
+			adapter.engine().getResults();
 		}
 	}
 

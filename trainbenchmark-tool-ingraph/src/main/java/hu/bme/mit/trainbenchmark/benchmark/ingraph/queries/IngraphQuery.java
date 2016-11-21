@@ -42,7 +42,6 @@ public class IngraphQuery<TPatternMatch extends IngraphMatch> extends ModelQuery
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<TPatternMatch> evaluate() {
-		queryEngine.getResults();
 		return (Collection<TPatternMatch>) listener.results;
 	}
 
