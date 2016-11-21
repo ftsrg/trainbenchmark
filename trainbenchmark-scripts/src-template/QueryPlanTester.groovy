@@ -7,17 +7,18 @@ import hu.bme.mit.trainbenchmark.benchmark.result.ResultHelper
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
-import hu.bme.mit.trainbenchmark.generator.config.Scenario;;
+import hu.bme.mit.trainbenchmark.generator.config.Scenario
 
 def benchmarkId = ResultHelper.createNewResultDir()
-def ec = new ExecutionConfig(8000, 8000)
+ResultHelper.saveConfiguration(benchmarkId)
+def ec = new ExecutionConfig(12000, 12000)
 
 def scenarios = [Scenario.REPAIR]
 def minSize = 1
 def maxSize = 2048
-def timeout = 300
-def runs = 5
-def queryTransformationCount = 10
+def timeout = 900
+def runs = 10
+def queryTransformationCount = 100
 def transformationConstant = 10
 def transformationChangeSetStrategy = TransformationChangeSetStrategy.FIXED
 def messageSize = 2048
