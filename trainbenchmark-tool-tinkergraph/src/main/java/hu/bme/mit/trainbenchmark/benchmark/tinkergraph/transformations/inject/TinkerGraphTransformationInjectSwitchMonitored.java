@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 import java.util.Collection;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
+import org.apache.tinkerpop.gremlin.structure.Edge;
 
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredInjectMatch;
@@ -31,9 +31,9 @@ public class TinkerGraphTransformationInjectSwitchMonitored<TTinkerGraphDriver e
 	@Override
 	public void activate(final Collection<TinkerGraphSwitchMonitoredInjectMatch> matches) {
 		for (final TinkerGraphSwitchMonitoredInjectMatch match : matches) {
-			final Iterable<Vertex> sensors = () -> match.getSw().vertices(Direction.OUT, ModelConstants.MONITORED_BY);
-			for (final Vertex sensor : sensors) {
-				sensor.remove();
+			final Iterable<Edge> monitoredBys = () -> match.getSw().edges(Direction.OUT, ModelConstants.MONITORED_BY);
+			for (final Edge monitoredBy : monitoredBys) {
+				monitoredBy.remove();
 			}
 		}
 	}
