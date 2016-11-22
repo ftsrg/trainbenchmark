@@ -44,8 +44,6 @@ public class QueryShuffleTransformation<TPatternMatch, TDriver extends Driver> {
 		final Ordering<? super TPatternMatch> ordering = Ordering.from(comparator);
 		sortedMatches = ordering.sortedCopy(matches);
 
-		System.out.println("qst: " + operation.getQuery().getQuery() + " " + sortedMatches.size());
-
 		final int size = sortedMatches.size();
 		if (size < nMatchesToModify) {
 			nMatchesToModify = size;

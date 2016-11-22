@@ -28,9 +28,7 @@ public class Neo4jCoreTransformationInjectSwitchMonitored extends Neo4jCoreTrans
 
 	@Override
 	public void activate(final Collection<Neo4jSwitchMonitoredInjectMatch> matches) {
-		System.out.println(matches.size());
 		for (final Neo4jSwitchMonitoredInjectMatch match : matches) {
-			System.out.println(match);
 			final Iterable<Relationship> monitoredBys = match.getSw().getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
 			for (final Relationship monitoredBy : monitoredBys) {
 				monitoredBy.delete();

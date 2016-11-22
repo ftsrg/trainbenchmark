@@ -33,9 +33,7 @@ public class Neo4jCypherTransformationInjectSwitchMonitored
 
 	@Override
 	public void activate(final Collection<Neo4jSwitchMonitoredInjectMatch> matches) throws IOException {
-		System.out.println(matches.size());
 		for (final Neo4jSwitchMonitoredInjectMatch match : matches) {
-			System.out.println(match);
 			final Map<String, Object> parameters = ImmutableMap.of( //
 					QueryConstants.VAR_SW, match.getSw().getId() //
 			);
