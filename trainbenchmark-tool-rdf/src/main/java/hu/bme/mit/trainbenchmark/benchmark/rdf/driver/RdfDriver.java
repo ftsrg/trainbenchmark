@@ -46,7 +46,6 @@ public abstract class RdfDriver extends Driver {
 		if (iterationCount > 20) {
 			throw new IOException("Could not generate new unique id.");
 		}
-		System.out.println(id);
 
 		return id;
 	}

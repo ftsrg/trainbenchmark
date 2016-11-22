@@ -20,7 +20,8 @@ import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlRouteSensorInjectMatch
 import hu.bme.mit.trainbenchmark.benchmark.sql.transformations.SqlTransformation;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class SqlTransformationInjectRouteSensor<TSqlDriver extends SqlDriver> extends SqlTransformation<SqlRouteSensorInjectMatch, TSqlDriver> {
+public class SqlTransformationInjectRouteSensor<TSqlDriver extends SqlDriver>
+		extends SqlTransformation<SqlRouteSensorInjectMatch, TSqlDriver> {
 
 	public SqlTransformationInjectRouteSensor(final TSqlDriver driver, final String workspaceDir) throws IOException {
 		super(driver, workspaceDir, RailwayOperation.ROUTESENSOR_INJECT);
