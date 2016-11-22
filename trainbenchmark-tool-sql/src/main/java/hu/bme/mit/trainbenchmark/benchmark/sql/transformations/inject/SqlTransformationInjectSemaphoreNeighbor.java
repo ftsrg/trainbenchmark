@@ -33,8 +33,6 @@ public class SqlTransformationInjectSemaphoreNeighbor<TSqlDriver extends SqlDriv
 		}
 
 		for (final SqlSemaphoreNeighborInjectMatch match : matches) {
-			System.out.println(match);
-
 			preparedUpdateStatement.setLong(1, match.getRoute());
 			preparedUpdateStatement.setLong(2, match.getSemaphore());
 			preparedUpdateStatement.executeUpdate();
