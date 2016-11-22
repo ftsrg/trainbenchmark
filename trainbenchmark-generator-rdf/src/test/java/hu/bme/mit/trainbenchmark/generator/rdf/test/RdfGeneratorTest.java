@@ -1,11 +1,8 @@
 package hu.bme.mit.trainbenchmark.generator.rdf.test;
 
-import java.util.Arrays;
+import java.util.List;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import com.google.common.collect.ImmutableList;
 
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
@@ -16,24 +13,20 @@ import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfigBuilder;
 import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
-@RunWith(Parameterized.class)
 public class RdfGeneratorTest extends GeneratorTest {
-
-	@Parameters(name="inferred={0}")
-	public static Iterable<? extends Object> data() {
-		return Arrays.asList(false, true);
-	}
-
-	@Parameter
-	public boolean inferred;
 
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		final RdfGeneratorConfig gc = new RdfGeneratorConfigBuilder().setConfigBase(gcb).setInferred(inferred)
-				.setFormat(RdfFormat.TURTLE).createConfig();
-		final RdfSerializer serializer = new RdfSerializer(gc);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
-		generator.generateModel();
+		final RdfGeneratorConfigBuilder builder = new RdfGeneratorConfigBuilder().setConfigBase(gcb)
+				.setFormat(RdfFormat.TURTLE);
+
+		final List<Boolean> inferredConfigs = ImmutableList.of(true, false);
+		for (Boolean inferredConfig : inferredConfigs) {
+			final RdfGeneratorConfig gc = builder.setInferred(inferredConfig).createConfig();
+			final RdfSerializer serializer = new RdfSerializer(gc);
+			final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
+			generator.generateModel();
+		}
 	}
 
 }
