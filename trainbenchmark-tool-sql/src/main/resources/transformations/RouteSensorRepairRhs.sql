@@ -1,4 +1,2 @@
--- the "Sensor.route" attribute is the inverse of the "Route.requires" edge
-UPDATE Sensor
-SET route = ?
-WHERE id = ?;
+INSERT INTO requires (Route_id, Sensor_id) 
+VALUES (?, ?);

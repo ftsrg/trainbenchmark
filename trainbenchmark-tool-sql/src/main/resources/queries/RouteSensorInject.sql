@@ -1,5 +1,4 @@
 SELECT DISTINCT
-	route AS route,
-	id AS sensor
-FROM Sensor
-WHERE route != 0
+  Route_id AS route,
+  Sensor_id AS sensor
+FROM requires

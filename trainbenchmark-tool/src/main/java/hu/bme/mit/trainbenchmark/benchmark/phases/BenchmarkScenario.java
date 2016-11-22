@@ -70,8 +70,6 @@ public class BenchmarkScenario<TPatternMatch, TDriver extends Driver, TBenchmark
 				final long recheckTime = phaseExecutor.execute(queryPhase);
 				benchmarkResult.registerQueryTime(recheckTime);
 			}
-		} catch (final Exception e) {
-			e.printStackTrace();
 		} finally {
 			phaseExecutor.execute(cleanupPhase);
 		}
