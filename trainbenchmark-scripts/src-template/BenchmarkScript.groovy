@@ -45,6 +45,7 @@ def tools = [
 	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI),
 	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER),
 	new Rdf4jBenchmarkConfigBuilder().setInferencing(false),
+	new Rdf4jBenchmarkConfigBuilder().setInferencing(true),
 	new SQLiteBenchmarkConfigBuilder(),
 	new TinkerGraphBenchmarkConfigBuilder(),
 	new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.INCREMENTAL),
