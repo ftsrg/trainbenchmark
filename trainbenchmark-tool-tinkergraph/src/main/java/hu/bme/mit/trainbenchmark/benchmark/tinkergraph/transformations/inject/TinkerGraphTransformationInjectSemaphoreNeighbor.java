@@ -34,7 +34,6 @@ public class TinkerGraphTransformationInjectSemaphoreNeighbor<TTinkerGraphDriver
 			final Iterable<Edge> entries = () -> match.getRoute().edges(Direction.OUT, ModelConstants.ENTRY);
 			for (final Edge entry : entries) {
 				if (entry.inVertex().equals(match.getSemaphore())) {
-					System.out.println("r");
 					entry.remove();
 				}
 			}

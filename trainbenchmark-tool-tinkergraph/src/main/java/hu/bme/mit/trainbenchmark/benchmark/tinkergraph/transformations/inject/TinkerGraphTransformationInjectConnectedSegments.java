@@ -46,9 +46,10 @@ public class TinkerGraphTransformationInjectConnectedSegments<TTinkerGraphDriver
 			segment2.addEdge(ModelConstants.CONNECTS_TO, match.getSegment3());
 
 			// remove (segment1)-[:connectsTo]->(segment3)
-			final Iterable<Edge> connectsToEdges = () -> match.getSegment1().edges(Direction.OUT, ModelConstants.CONNECTS_TO);
+			final Iterable<Edge> connectsToEdges = () -> match.getSegment1().edges(Direction.OUT,
+					ModelConstants.CONNECTS_TO);
 			for (final Edge connectsToEdge : connectsToEdges) {
-				if (connectsToEdge.outVertex().equals(match.getSegment3())) {
+				if (connectsToEdge.inVertex().equals(match.getSegment3())) {
 					connectsToEdge.remove();
 				}
 			}

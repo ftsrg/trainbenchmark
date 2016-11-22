@@ -24,7 +24,8 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jCoreTransformationInjectConnectedSegments extends Neo4jCoreTransformation<Neo4jConnectedSegmentsInjectMatch> {
+public class Neo4jCoreTransformationInjectConnectedSegments
+		extends Neo4jCoreTransformation<Neo4jConnectedSegmentsInjectMatch> {
 
 	public Neo4jCoreTransformationInjectConnectedSegments(final Neo4jDriver driver) {
 		super(driver);
@@ -46,7 +47,8 @@ public class Neo4jCoreTransformationInjectConnectedSegments extends Neo4jCoreTra
 			segment2.createRelationshipTo(match.getSegment3(), Neo4jConstants.relationshipTypeConnectsTo);
 
 			// remove (segment1)-[:connectsTo]->(segment3)
-			final Iterable<Relationship> connectsToEdges = match.getSegment1().getRelationships(Direction.OUTGOING, Neo4jConstants.relationshipTypeConnectsTo);
+			final Iterable<Relationship> connectsToEdges = match.getSegment1().getRelationships(Direction.OUTGOING,
+					Neo4jConstants.relationshipTypeConnectsTo);
 			for (final Relationship connectsToEdge : connectsToEdges) {
 				if (connectsToEdge.getEndNode().equals(match.getSegment3())) {
 					connectsToEdge.delete();

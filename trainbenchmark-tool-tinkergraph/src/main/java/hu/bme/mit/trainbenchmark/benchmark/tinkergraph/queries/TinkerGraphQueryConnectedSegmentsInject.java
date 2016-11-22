@@ -60,9 +60,7 @@ public class TinkerGraphQueryConnectedSegmentsInject<TTinkerGraphDriver extends 
 				}
 			}
 		}
-
 		return matches;
-
 	}
 
 }
