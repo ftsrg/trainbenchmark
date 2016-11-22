@@ -1,18 +1,33 @@
 package hu.bme.mit.trainbenchmark.generator.tests;
 
+import java.util.Arrays;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBaseBuilder;
 import hu.bme.mit.trainbenchmark.generator.config.Scenario;
 
+@RunWith(Parameterized.class)
 public abstract class GeneratorTest {
 
-	public abstract void generate(final GeneratorConfigBase gcb) throws Exception;
+	@Parameters(name = "size={0}")
+	public static Iterable<? extends Object> data() {
+		return Arrays.asList(1, 2);
+	}
 
-	protected final int size = 1;
+
+	@Parameter
+	public int size;
+
 	protected final ExecutionConfig executionConfig = ExecutionConfig.defaultExecutionConfig();
+
+	public abstract void generate(final GeneratorConfigBase gcb) throws Exception;
 
 	@Test
 	public void generateBatch() throws Exception {

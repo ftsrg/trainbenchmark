@@ -155,14 +155,12 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		// n:m edges
 		case MONITORED_BY:
 		case CONNECTS_TO:
+		case REQUIRES:
 			insertQuery = String.format("INSERT INTO \"%s\" VALUES (%s, %s);", label, from, to);
 			break;
 		// n:1 edges
 		case FOLLOWS:
 			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);
-			break;
-		case REQUIRES:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "route", from, ID, to);
 			break;
 		case SENSORS:
 			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID, to);

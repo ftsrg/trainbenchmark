@@ -14,7 +14,7 @@ START TRANSACTION;
 -- --------------------------------------------------------
 
 --
--- Table structure: "Route"
+-- Nodes
 --
 
 CREATE TABLE IF NOT EXISTS "Route" (
@@ -25,22 +25,10 @@ CREATE TABLE IF NOT EXISTS "Route" (
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
--- --------------------------------------------------------
-
---
--- Table structure: "Region"
---
-
 CREATE TABLE IF NOT EXISTS "Region" (
   "id" int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
-
--- --------------------------------------------------------
-
---
--- Table structure: "Segment"
---
 
 CREATE TABLE IF NOT EXISTS "Segment" (
   "id" int NOT NULL AUTO_INCREMENT,
@@ -48,23 +36,11 @@ CREATE TABLE IF NOT EXISTS "Segment" (
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
--- --------------------------------------------------------
---
--- Table structure: "Sensor"
---
-
 CREATE TABLE IF NOT EXISTS "Sensor" (
   "id" int NOT NULL AUTO_INCREMENT,
-  "route" int, -- inverse of the "requires" edge
   "region" int NOT NULL, -- inverse of the "sensors" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
-
--- --------------------------------------------------------
-
---
--- Table structure: "Semaphore"
---
 
 CREATE TABLE IF NOT EXISTS "Semaphore" (
   "id" int NOT NULL AUTO_INCREMENT,
@@ -73,24 +49,11 @@ CREATE TABLE IF NOT EXISTS "Semaphore" (
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
--- --------------------------------------------------------
-
-
---
--- Table structure: "Switch"
---
-
 CREATE TABLE IF NOT EXISTS "Switch" (
   "id" int NOT NULL AUTO_INCREMENT,
   "currentPosition" int NOT NULL,
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
-
--- --------------------------------------------------------
-
---
--- Table structure: "SwitchPosition"
---
 
 CREATE TABLE IF NOT EXISTS "SwitchPosition" (
   "id" int NOT NULL AUTO_INCREMENT,
@@ -100,22 +63,14 @@ CREATE TABLE IF NOT EXISTS "SwitchPosition" (
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
--- --------------------------------------------------------
-
---
--- Table structure: "TrackElement"
---
-
 CREATE TABLE IF NOT EXISTS "TrackElement" (
   "id" int NOT NULL AUTO_INCREMENT,
   "region" int NOT NULL, -- inverse of the "elements" edge
   PRIMARY KEY  ("id")
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ENGINE=MEMORY;
 
--- --------------------------------------------------------
-
 --
--- Table structure: "TrackElement_connectsTo"
+-- Edges
 --
 
 CREATE TABLE IF NOT EXISTS "connectsTo" (
@@ -124,14 +79,14 @@ CREATE TABLE IF NOT EXISTS "connectsTo" (
   PRIMARY KEY  ("TrackElement1_id", "TrackElement2_id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
 
--- --------------------------------------------------------
-
---
--- Table structure: "TrackElement_monitoredBy"
---
-
 CREATE TABLE IF NOT EXISTS "monitoredBy" (
   "TrackElement_id" int NOT NULL,
   "Sensor_id" int NOT NULL,
   PRIMARY KEY  ("TrackElement_id", "Sensor_id")
+) DEFAULT CHARSET=utf8 ENGINE=MEMORY;
+
+CREATE TABLE IF NOT EXISTS "requires" (
+  "Route_id" int NOT NULL,
+  "Sensor_id" int NOT NULL,
+  PRIMARY KEY  ("Route_id", "Sensor_id")
 ) DEFAULT CHARSET=utf8 ENGINE=MEMORY;

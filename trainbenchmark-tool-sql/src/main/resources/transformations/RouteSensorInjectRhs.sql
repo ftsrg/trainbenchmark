@@ -1,8 +1,6 @@
 SET @route  := ?;
 SET @sensor := ?;
 
--- the "Sensor.route" attribute is the inverse of the "Route.requires" edge
-UPDATE Sensor
-SET route = NULL
-WHERE id    = @sensor
-  AND route = @route;
+DELETE FROM requires
+WHERE Route_id  = @route
+  AND Sensor_id = @sensor;
