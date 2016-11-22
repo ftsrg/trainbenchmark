@@ -20,7 +20,8 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredInj
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jCoreTransformationInjectSwitchMonitored extends Neo4jCoreTransformation<Neo4jSwitchMonitoredInjectMatch> {
+public class Neo4jCoreTransformationInjectSwitchMonitored
+		extends Neo4jCoreTransformation<Neo4jSwitchMonitoredInjectMatch> {
 
 	public Neo4jCoreTransformationInjectSwitchMonitored(final Neo4jDriver driver) {
 		super(driver);
@@ -29,7 +30,8 @@ public class Neo4jCoreTransformationInjectSwitchMonitored extends Neo4jCoreTrans
 	@Override
 	public void activate(final Collection<Neo4jSwitchMonitoredInjectMatch> matches) {
 		for (final Neo4jSwitchMonitoredInjectMatch match : matches) {
-			final Iterable<Relationship> monitoredBys = match.getSw().getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
+			final Iterable<Relationship> monitoredBys = match.getSw()
+					.getRelationships(Neo4jConstants.relationshipTypeMonitoredBy);
 			for (final Relationship monitoredBy : monitoredBys) {
 				monitoredBy.delete();
 			}

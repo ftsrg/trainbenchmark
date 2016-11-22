@@ -32,7 +32,6 @@ public class TinkerGraphTransformationInjectRouteSensor<TTinkerGraphDriver exten
 	public void activate(final Collection<TinkerGraphRouteSensorInjectMatch> matches) {
 		for (final TinkerGraphRouteSensorInjectMatch match : matches) {
 			final Iterable<Edge> requiress = () -> match.getRoute().edges(Direction.OUT, ModelConstants.REQUIRES);
-
 			for (final Edge requires : requiress) {
 				if (requires.inVertex().equals(match.getSensor())) {
 					requires.remove();

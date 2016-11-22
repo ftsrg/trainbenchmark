@@ -39,8 +39,6 @@ public class TinkerGraphQuerySemaphoreNeighborInject<TTinkerGraphDriver extends 
 			final Iterable<Edge> entries = () -> route.edges(Direction.OUT, ModelConstants.ENTRY);
 			for (final Edge edge : entries) {
 				final Vertex semaphore = edge.inVertex();
-				System.out.println(route);
-				System.out.println(semaphore);
 				matches.add(new TinkerGraphSemaphoreNeighborInjectMatch(route, semaphore));
 			}
 		}
