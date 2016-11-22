@@ -30,9 +30,6 @@ public abstract class QueryTest {
 
 	protected BenchmarkResult performBenchmark(final BenchmarkConfigBase bcb) throws Exception {
 		final BenchmarkResult result = runTest(bcb);
-		// System.out.println(result);
-		// System.out.println(result.csvMatches());
-		// System.out.println(result.csvTimes());
 		return result;
 	}
 
