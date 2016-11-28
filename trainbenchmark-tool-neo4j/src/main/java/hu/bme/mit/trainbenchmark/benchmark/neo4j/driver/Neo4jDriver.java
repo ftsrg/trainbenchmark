@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -29,13 +30,16 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.schema.Schema;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
 
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators.NodeComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 public class Neo4jDriver extends Driver {
 
@@ -82,11 +86,22 @@ public class Neo4jDriver extends Driver {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
 
 		try (Transaction tx = graphDb.beginTx()) {
+			final Schema schema = graphDb.schema();
+			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.LENGTH);
+			schema.indexFor(Neo4jConstants.labelSemaphore).on(ModelConstants.SIGNAL);
+			schema.indexFor(Neo4jConstants.labelRoute).on(ModelConstants.ACTIVE);
+			schema.awaitIndexesOnline(5, TimeUnit.MINUTES);
+
+			tx.success();
+		}
+
+		try (Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 			xmlGraphMLReader.nodeLabels(true);
 			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(modelPath)), MapNodeCache.usingHashMap());
 			tx.success();
 		}
+
 	}
 
 	@Override
@@ -106,7 +121,8 @@ public class Neo4jDriver extends Driver {
 		return results;
 	}
 
-	public void runTransformation(final String transformationDefinition, final Map<String, Object> parameters) throws IOException {
+	public void runTransformation(final String transformationDefinition, final Map<String, Object> parameters)
+			throws IOException {
 		graphDb.execute(transformationDefinition, parameters);
 	}
 
