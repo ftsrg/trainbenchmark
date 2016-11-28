@@ -1,3 +1,3 @@
 MATCH (sw:Switch)
-WHERE NOT (sw)-[:monitoredBy]->(:Sensor)
+WHERE NOT EXISTS ((sw)-[:monitoredBy]->())
 RETURN sw
