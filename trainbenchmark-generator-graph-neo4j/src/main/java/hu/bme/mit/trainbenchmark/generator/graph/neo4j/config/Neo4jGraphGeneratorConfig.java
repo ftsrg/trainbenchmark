@@ -17,8 +17,15 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class Neo4jGraphGeneratorConfig extends GeneratorConfig {
 
-	protected Neo4jGraphGeneratorConfig(final GeneratorConfigBase configBase) {
+	protected Neo4jGraphFormat graphFormat;
+
+	protected Neo4jGraphGeneratorConfig(final GeneratorConfigBase configBase, final Neo4jGraphFormat graphFormat) {
 		super(configBase);
+		this.graphFormat = graphFormat;
+	}
+
+	public Neo4jGraphFormat getGraphFormat() {
+		return graphFormat;
 	}
 
 	@Override

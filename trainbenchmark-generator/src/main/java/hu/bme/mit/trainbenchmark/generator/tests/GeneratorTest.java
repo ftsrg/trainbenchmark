@@ -21,7 +21,6 @@ public abstract class GeneratorTest {
 		return Arrays.asList(1, 2);
 	}
 
-
 	@Parameter
 	public int size;
 

@@ -12,14 +12,28 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 
+import com.google.common.base.Preconditions;
+
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBuilder;
 
 public class Neo4jGraphGeneratorConfigBuilder extends GeneratorConfigBuilder<Neo4jGraphGeneratorConfig, Neo4jGraphGeneratorConfigBuilder> {
 
+	protected Neo4jGraphFormat graphFormat;
+
+	public Neo4jGraphGeneratorConfigBuilder setGraphFormat(Neo4jGraphFormat graphFormat) {
+		this.graphFormat = graphFormat;
+		return this;
+	}
+
 	@Override
 	public Neo4jGraphGeneratorConfig createConfig() {
-		checkNotNulls();
-		return new Neo4jGraphGeneratorConfig(configBase);
+		return new Neo4jGraphGeneratorConfig(configBase, graphFormat);
+	}
+
+	@Override
+	public void checkNotNulls() {
+		super.checkNotNulls();
+		Preconditions.checkNotNull(graphFormat);
 	}
 
 }
