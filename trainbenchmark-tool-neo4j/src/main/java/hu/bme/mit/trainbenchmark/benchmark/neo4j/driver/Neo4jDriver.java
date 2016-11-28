@@ -91,7 +91,6 @@ public class Neo4jDriver extends Driver {
 			schema.indexFor(Neo4jConstants.labelSemaphore).on(ModelConstants.SIGNAL);
 			schema.indexFor(Neo4jConstants.labelRoute).on(ModelConstants.ACTIVE);
 			schema.awaitIndexesOnline(5, TimeUnit.MINUTES);
-
 			tx.success();
 		}
 
@@ -101,7 +100,6 @@ public class Neo4jDriver extends Driver {
 			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(modelPath)), MapNodeCache.usingHashMap());
 			tx.success();
 		}
-
 	}
 
 	@Override
