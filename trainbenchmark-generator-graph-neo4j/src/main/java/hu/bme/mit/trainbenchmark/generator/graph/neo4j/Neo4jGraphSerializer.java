@@ -33,7 +33,7 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 import org.neo4j.shell.InterruptSignalHandler;
 import org.neo4j.shell.ShellException;
-import org.neo4j.shell.impl.CollectingOutput;
+import org.neo4j.shell.SilentLocalOutput;
 import org.neo4j.shell.impl.SameJvmClient;
 import org.neo4j.shell.kernel.GraphDatabaseShellServer;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
@@ -181,7 +181,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 				InterruptSignalHandler.getHandler());
 
         final String exportCommand = String.format("export-binary -o %s", fileName);
-        client.evaluate(exportCommand, new CollectingOutput());
+        client.evaluate(exportCommand, new SilentLocalOutput());
 	}
 
 	private void saveToGraphMl() throws IOException, XMLStreamException {

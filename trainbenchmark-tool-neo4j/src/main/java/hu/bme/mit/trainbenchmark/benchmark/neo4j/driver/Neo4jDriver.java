@@ -37,7 +37,7 @@ import org.neo4j.graphdb.schema.Schema;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 import org.neo4j.shell.InterruptSignalHandler;
 import org.neo4j.shell.ShellException;
-import org.neo4j.shell.impl.CollectingOutput;
+import org.neo4j.shell.SilentLocalOutput;
 import org.neo4j.shell.impl.SameJvmClient;
 import org.neo4j.shell.kernel.GraphDatabaseShellServer;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
@@ -103,13 +103,18 @@ public class Neo4jDriver extends Driver {
 			readBinary(modelPath);
 			break;
 		case CSV:
+			readCsv(modelPath);
 			break;
 		case GRAPHML:
 			readGraphMl(modelPath);
 			break;
 		default:
-			break;
+			throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
 		}
+	}
+
+	private void readCsv(String modelPath) {
+		throw new UnsupportedOperationException("CSV not supported");
 	}
 
 	private void readBinary(String modelPath) throws RemoteException, ShellException {
@@ -118,7 +123,7 @@ public class Neo4jDriver extends Driver {
 
 		final String importCommand = String.format("import-binary -i %s", modelPath);
 		System.out.println(importCommand);
-		client.evaluate(importCommand, new CollectingOutput());
+		client.evaluate(importCommand, new SilentLocalOutput());
 	}
 
 	private void readGraphMl(String modelPath) throws FileNotFoundException, XMLStreamException {

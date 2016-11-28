@@ -3,4 +3,5 @@ ext { neo4jVersion = '3.0.3' }
 dependencies {
 	compile project(':trainbenchmark-config')
 	compile group: 'org.neo4j.shell', name: 'import-tools', version: neo4jVersion
+	compile group: 'org.neo4j', name: 'neo4j-shell', version: neo4jVersion, classifier: 'tests'
 }
