@@ -21,8 +21,8 @@ public class Neo4jGraphGeneratorMain {
 
 	public static void main(final String[] args) throws Exception {
 		final Neo4jGraphGeneratorConfig gc = GeneratorConfig.fromFile(args[0], Neo4jGraphGeneratorConfig.class);
-		final Neo4jGraphSerializer rdfSerializer = new Neo4jGraphSerializer(gc);
-		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(rdfSerializer, gc);
+		final Neo4jGraphSerializer graphSerializer = new Neo4jGraphSerializer(gc);
+		final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(graphSerializer, gc);
 		generator.generateModel();
 	}
 
