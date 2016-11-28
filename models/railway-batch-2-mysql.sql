@@ -35,7 +35,8 @@ CREATE TABLE `Route` (
   `active` int(11) DEFAULT NULL,
   `entry` int(11) DEFAULT NULL,
   `exit` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `route_active_idx` (`active`)
 ) ENGINE=MEMORY AUTO_INCREMENT=2134 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,7 +68,8 @@ CREATE TABLE `Semaphore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `segment` int(11) NOT NULL,
   `signal` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `semaphore_signal_idx` (`signal`)
 ) ENGINE=MEMORY AUTO_INCREMENT=1767 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

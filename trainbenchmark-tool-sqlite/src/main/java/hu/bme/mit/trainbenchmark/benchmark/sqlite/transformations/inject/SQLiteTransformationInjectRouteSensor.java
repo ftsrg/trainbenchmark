@@ -42,7 +42,6 @@ public class SQLiteTransformationInjectRouteSensor extends SQLiteTransformation<
 
 			driver.getConnection().createStatement().executeUpdate(updateQuery);
 		}
-		System.out.println("---");
 	}
 
 }
