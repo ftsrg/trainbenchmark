@@ -20,10 +20,10 @@ import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.Neo4jGraphSerializer;
-import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphFormat;
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfigBuilder;
 import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 public class Neo4jGraphGeneratorTest extends GeneratorTest {
 

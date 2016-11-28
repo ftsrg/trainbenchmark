@@ -14,23 +14,30 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	protected Neo4jEngine engine;
+	protected Neo4jGraphFormat graphFormat;
 
-	protected Neo4jBenchmarkConfig(final BenchmarkConfigBase configBase, final Neo4jEngine engine) {
+	protected Neo4jBenchmarkConfig(final BenchmarkConfigBase configBase, final Neo4jEngine engine, final Neo4jGraphFormat graphFormat) {
 		super(configBase);
 		this.engine = engine;
+		this.graphFormat = graphFormat;
 	}
 
 	public Neo4jEngine getEngine() {
 		return engine;
 	}
 
+	public Neo4jGraphFormat getGraphFormat() {
+		return graphFormat;
+	}
+
 	@Override
 	public String getToolName() {
-		return String.format("Neo4j (%s)", getEngine());
+		return String.format("Neo4j (%s-%s)", getEngine(), getGraphFormat());
 	}
 
 	@Override

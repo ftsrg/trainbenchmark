@@ -16,8 +16,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +34,12 @@ import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.Schema;
+import org.neo4j.kernel.internal.GraphDatabaseAPI;
+import org.neo4j.shell.InterruptSignalHandler;
+import org.neo4j.shell.ShellException;
+import org.neo4j.shell.impl.CollectingOutput;
+import org.neo4j.shell.impl.SameJvmClient;
+import org.neo4j.shell.kernel.GraphDatabaseShellServer;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLReader;
 import org.neo4j.shell.tools.imp.util.MapNodeCache;
 
@@ -40,6 +49,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 public class Neo4jDriver extends Driver {
 
@@ -47,9 +57,11 @@ public class Neo4jDriver extends Driver {
 	protected GraphDatabaseService graphDb;
 	protected final Comparator<Node> nodeComparator = new NodeComparator();
 	protected final File databaseDirectory;
+	protected final Neo4jGraphFormat graphFormat;
 
-	public Neo4jDriver(final String modelDir) throws IOException {
+	public Neo4jDriver(final String modelDir, final Neo4jGraphFormat graphFormat) throws IOException {
 		super();
+		this.graphFormat = graphFormat;
 		this.databaseDirectory = new File(modelDir + "/neo4j-dbs/railway-database");
 	}
 
@@ -82,9 +94,34 @@ public class Neo4jDriver extends Driver {
 	}
 
 	@Override
-	public void read(final String modelPath) throws FileNotFoundException, XMLStreamException {
+	public void read(final String modelPath)
+			throws FileNotFoundException, XMLStreamException, RemoteException, ShellException {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
 
+		switch (graphFormat) {
+		case BINARY:
+			readBinary(modelPath);
+			break;
+		case CSV:
+			break;
+		case GRAPHML:
+			readGraphMl(modelPath);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void readBinary(String modelPath) throws RemoteException, ShellException {
+		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(),
+				new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb), InterruptSignalHandler.getHandler());
+
+		final String importCommand = String.format("import-binary -i %s", modelPath);
+		System.out.println(importCommand);
+		client.evaluate(importCommand, new CollectingOutput());
+	}
+
+	private void readGraphMl(String modelPath) throws FileNotFoundException, XMLStreamException {
 		try (Transaction tx = graphDb.beginTx()) {
 			final Schema schema = graphDb.schema();
 			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.LENGTH);
@@ -104,7 +141,16 @@ public class Neo4jDriver extends Driver {
 
 	@Override
 	public String getPostfix() {
-		return ".graphml";
+		switch (graphFormat) {
+		case BINARY:
+			return ".bin";
+		case CSV:
+			return ".csv";
+		case GRAPHML:
+			return ".graphml";
+		default:
+			throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
+		}
 	}
 
 	public Collection<Neo4jMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws IOException {

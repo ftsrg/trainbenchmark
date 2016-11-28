@@ -21,7 +21,9 @@ import org.neo4j.graphdb.RelationshipType;
 
 public class Neo4jConstants {
 
-	public static final String MODEL_EXTENSION = "graphml";
+	public static final String BINARY_EXTENSION = "bin";
+	public static final String CSV_EXTENSION = "csv";
+	public static final String GRAPHML_EXTENSION = "graphml";
 
 	public static final Label labelRoute = Label.label(ROUTE);
 	public static final Label labelSegment = Label.label(SEGMENT);
@@ -40,5 +42,5 @@ public class Neo4jConstants {
 	public static final RelationshipType relationshipTypeTarget = RelationshipType.withName(TARGET);
 
 	public static final String CYPHER_DIR = "/trainbenchmark-tool-neo4j/src/main/resources/";
-	
+
 }

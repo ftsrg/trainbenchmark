@@ -20,6 +20,7 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 def benchmarkId = ResultHelper.createNewResultDir()
 def ec = new ExecutionConfig(2000, 4000)
@@ -42,8 +43,10 @@ def tools = [
 	new JenaBenchmarkConfigBuilder().setInferencing(false),
 	new JenaBenchmarkConfigBuilder().setInferencing(true),
 	new MySqlBenchmarkConfigBuilder(),
-	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI),
-	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI, Neo4jGraphFormat.BINARY),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER, Neo4jGraphFormat.BINARY),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI, Neo4jGraphFormat.GRAPHML),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER, Neo4jGraphFormat.GRAPHML),
 	new Rdf4jBenchmarkConfigBuilder().setInferencing(false),
 	new Rdf4jBenchmarkConfigBuilder().setInferencing(true),
 	new SQLiteBenchmarkConfigBuilder(),
