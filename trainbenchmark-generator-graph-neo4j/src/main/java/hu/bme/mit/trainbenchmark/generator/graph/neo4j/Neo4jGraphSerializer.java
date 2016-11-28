@@ -13,7 +13,10 @@ package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.StringWriter;
+import java.rmi.RemoteException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -27,6 +30,12 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.kernel.internal.GraphDatabaseAPI;
+import org.neo4j.shell.InterruptSignalHandler;
+import org.neo4j.shell.ShellException;
+import org.neo4j.shell.impl.CollectingOutput;
+import org.neo4j.shell.impl.SameJvmClient;
+import org.neo4j.shell.kernel.GraphDatabaseShellServer;
 import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
@@ -138,16 +147,16 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	}
 
 	@Override
-	public void persistModel() throws IOException, XMLStreamException {
-		try (Transaction tx = graphDb.beginTx()) {
+	public void persistModel() throws IOException, XMLStreamException, ShellException {
+		try {
 			switch (gc.getGraphFormat()) {
 			case BINARY:
-				saveToBinary(tx);
+				saveToBinary();
 				break;
 			case CSV:
 				break;
 			case GRAPHML:
-				saveToGraphMl(tx);
+				saveToGraphMl();
 				break;
 			default:
 				throw new UnsupportedOperationException("Graph format " + gc.getGraphFormat() + " not supported.");
@@ -160,28 +169,44 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		}
 	}
 
-	private void saveToBinary(Transaction tx) {
-
+	private void saveToCsv(Transaction tx) {
+		throw new UnsupportedOperationException("CSV serialization not yet implemented.");
 	}
 
-	private void saveToGraphMl(Transaction tx) throws IOException, XMLStreamException {
-		final ProgressReporter reporter = new ProgressReporter(null, null);
+	private void saveToBinary() throws RemoteException, ShellException {
+		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "."
+				+ Neo4jConstants.BINARY_EXTENSION;
 
-		final StringWriter writer = new StringWriter();
-		final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
-		final Config config = Config.config();
-		xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
-		tx.success();
+		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(), new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb),
+				InterruptSignalHandler.getHandler());
 
-		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "." + Neo4jConstants.MODEL_EXTENSION;
+        final String exportCommand = String.format("export-binary -o %s", fileName);
+        client.evaluate(exportCommand, new CollectingOutput());
+	}
 
-		final String graphmlContent = writer.toString();
-		// this is required to be compatibile with OrientDB
-		// graphmlContent = graphmlContent.replaceAll("<graph id=\"G\" edgedefault=\"directed\">",
-		// "<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\" for=\"node\" attr.name=\"labels\"
-		// attr.type=\"string\"/>");
+	private void saveToGraphMl() throws IOException, XMLStreamException {
+		try (final Transaction tx = graphDb.beginTx()) {
+			final ProgressReporter reporter = new ProgressReporter(null, null);
 
-		FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
+			final StringWriter writer = new StringWriter();
+			final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
+			final Config config = Config.config();
+			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
+			tx.success();
+
+			final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "."
+					+ Neo4jConstants.GRAPHML_EXTENSION;
+
+			final String graphmlContent = writer.toString();
+			// this is required to be compatibile with OrientDB
+			// graphmlContent = graphmlContent.replaceAll("<graph id=\"G\"
+			// edgedefault=\"directed\">",
+			// "<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\"
+			// for=\"node\" attr.name=\"labels\"
+			// attr.type=\"string\"/>");
+
+			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
+		}
 	}
 
 	private void cleanupDatabaseDirectory() throws IOException {

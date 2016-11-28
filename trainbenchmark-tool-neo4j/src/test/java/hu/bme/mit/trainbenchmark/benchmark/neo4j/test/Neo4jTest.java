@@ -26,22 +26,30 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigBuil
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 @RunWith(Parameterized.class)
 public class Neo4jTest extends TrainBenchmarkTest {
 
-	@Parameters(name = "engine={0}")
-	public static Iterable<? extends Object> data() {
-		return Arrays.asList(Neo4jEngine.CYPHER, Neo4jEngine.COREAPI);
+	@Parameters(name = "engine={0}, format={1}")
+	public static Iterable<? extends Object[]> data() {
+		return Arrays.asList(new Object[][] { //
+				{ Neo4jEngine.CYPHER, Neo4jGraphFormat.BINARY }, //
+				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.BINARY }, //
+				{ Neo4jEngine.CYPHER, Neo4jGraphFormat.GRAPHML }, //
+				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.GRAPHML } });
 	}
 
-	@Parameter
+	@Parameter(value = 0)
 	public Neo4jEngine engine;
+
+	@Parameter(value = 1)
+	public Neo4jGraphFormat graphFormat;
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
 		final Neo4jBenchmarkConfig bc = new Neo4jBenchmarkConfigBuilder().setConfigBase(bcb).setEngine(engine)
-				.createConfig();
+				.setGraphFormat(graphFormat).createConfig();
 		final Neo4jBenchmarkScenario scenario = new Neo4jBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

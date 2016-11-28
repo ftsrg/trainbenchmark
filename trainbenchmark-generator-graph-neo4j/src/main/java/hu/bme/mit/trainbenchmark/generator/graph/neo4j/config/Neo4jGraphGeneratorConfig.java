@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.generator.graph.neo4j.config;
 
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 public class Neo4jGraphGeneratorConfig extends GeneratorConfig {
 
