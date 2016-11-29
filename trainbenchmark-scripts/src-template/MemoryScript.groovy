@@ -11,6 +11,7 @@ import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigBuil
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfigBuilder
+import hu.bme.mit.trainbenchmark.benchmark.result.ResultHelper
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigBuilder
@@ -18,8 +19,10 @@ import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
-import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat
 
+def benchmarkId = ResultHelper.createNewResultDir()
+ResultHelper.saveConfiguration(benchmarkId)
 def ec = new ExecutionConfig(12800, 12800)
 
 def minSize = 1
