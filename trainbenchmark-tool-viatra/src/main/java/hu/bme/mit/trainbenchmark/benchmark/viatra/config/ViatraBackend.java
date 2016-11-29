@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.viatra.config;
 
 public enum ViatraBackend {
-	INCREMENTAL("Incremental"), 
-	LOCAL_SEARCH("Local search");
+	INCREMENTAL("Incremental"),
+	LOCAL_SEARCH("Local Search");
 
 	private String name;
 
