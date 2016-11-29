@@ -131,7 +131,7 @@ for (workload in workloads) {
       legend.key = element_blank(), 
       legend.title = element_blank(), 
       legend.position = "bottom",
-      axis.text = element_text(size = 5.5)
+      axis.text = element_text(size = 5)
     )
   print(p)
   
