@@ -45,7 +45,7 @@ def timeout = 900
 def tools = [
 	new BlazegraphBenchmarkConfigBuilder().setInferencing(false),
 	new BlazegraphBenchmarkConfigBuilder().setInferencing(true),
-	new EclipseOclBenchmarkConfig(),
+	new EclipseOclBenchmarkConfigBuilder(),
 	new DroolsBenchmarkConfigBuilder(),
 	new EmfApiBenchmarkConfigBuilder(),
 	new JenaBenchmarkConfigBuilder().setInferencing(false),
