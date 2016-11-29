@@ -51,7 +51,7 @@ task saveScripts(type: Copy) {
 	include '*.groovy'
 }
 
-task cleanResult(type: Delete) << {
+task cleanResults(type: Delete) << {
 	def resultDir = "../results"
 	file(resultDir).eachDir{ dir ->
 		delete "${dir}"
