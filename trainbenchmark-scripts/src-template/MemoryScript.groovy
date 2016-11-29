@@ -12,6 +12,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigBuil
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.result.ResultHelper
+import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkReporter
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigBuilder
@@ -36,6 +37,10 @@ def ec = new ExecutionConfig(12800, 12800)
 def minSize = 1
 def maxSize = 2048
 def timeout = 900
+
+// Set the reportUrl if you would like to receive a Slack notification when the benchmark finished.
+// The default configuration points to our research group's Slack.
+//def reportUrl = "https://hooks.slack.com/services/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"
 
 def tools = [
 	new BlazegraphBenchmarkConfigBuilder().setInferencing(false),
@@ -114,11 +119,13 @@ workloads.each { workload ->
 
 	def bcbb = new BenchmarkConfigBaseBuilder()
 			.setTimeout(timeout).setRuns(1)
-			.setQueryTransformationCount(queryTransformationCount).setRailwayOperations(operations)
+			.setQueryTransformationCount(queryTransformationCount).setOperations(operations)
 			.setWorkload(workloadName).setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED)
 			.setTransformationConstant(0);
 
 	tools.each{ bcb -> runMemoryBenchmarkSeries(bcbb, bcb, ec, modelSetConfig, numberOfSteps) }
 }
 
-//BenchmarkReporter.reportReady()
+if (binding.variables.get("reportUrl")) {
+	BenchmarkReporter.reportReady(reportUrl)
+}
