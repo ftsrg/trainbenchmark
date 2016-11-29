@@ -118,7 +118,7 @@ workloads.each { workload ->
 	def modelSetConfig = new ModelSetConfig(modelVariant, minSize, maxSize)
 
 	def bcbb = new BenchmarkConfigBaseBuilder()
-			.setTimeout(timeout).setRuns(1)
+			.setBenchmarkId(benchmarkId).setTimeout(timeout).setRuns(1)
 			.setQueryTransformationCount(queryTransformationCount).setOperations(operations)
 			.setWorkload(workloadName).setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED)
 			.setTransformationConstant(0);
