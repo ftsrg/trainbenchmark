@@ -98,6 +98,15 @@ public class Neo4jDriver extends Driver {
 			throws FileNotFoundException, XMLStreamException, RemoteException, ShellException {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
 
+		try (final Transaction tx = graphDb.beginTx()) {
+			final Schema schema = graphDb.schema();
+			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.LENGTH);
+			schema.indexFor(Neo4jConstants.labelSemaphore).on(ModelConstants.SIGNAL);
+			schema.indexFor(Neo4jConstants.labelRoute).on(ModelConstants.ACTIVE);
+			schema.awaitIndexesOnline(5, TimeUnit.MINUTES);
+			tx.success();
+		}
+
 		switch (graphFormat) {
 		case BINARY:
 			readBinary(modelPath);
@@ -127,16 +136,7 @@ public class Neo4jDriver extends Driver {
 	}
 
 	private void readGraphMl(String modelPath) throws FileNotFoundException, XMLStreamException {
-		try (Transaction tx = graphDb.beginTx()) {
-			final Schema schema = graphDb.schema();
-			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.LENGTH);
-			schema.indexFor(Neo4jConstants.labelSemaphore).on(ModelConstants.SIGNAL);
-			schema.indexFor(Neo4jConstants.labelRoute).on(ModelConstants.ACTIVE);
-			schema.awaitIndexesOnline(5, TimeUnit.MINUTES);
-			tx.success();
-		}
-
-		try (Transaction tx = graphDb.beginTx()) {
+		try (final Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 			xmlGraphMLReader.nodeLabels(true);
 			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(modelPath)), MapNodeCache.usingHashMap());
