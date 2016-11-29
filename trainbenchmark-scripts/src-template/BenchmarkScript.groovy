@@ -27,7 +27,7 @@ ResultHelper.saveConfiguration(benchmarkId)
 def ec = new ExecutionConfig(2000, 4000)
 
 def minSize = 1
-def maxSize = 2
+def maxSize = 2048
 def timeout = 900
 def runs = 5
 

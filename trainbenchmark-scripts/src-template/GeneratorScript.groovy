@@ -11,9 +11,9 @@ import hu.bme.mit.trainbenchmark.generator.sql.config.SqlGeneratorConfigBuilder
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 import hu.bme.mit.trainbenchmark.rdf.RdfFormat
 
-def ec = new ExecutionConfig(2000, 4000)
+def ec = new ExecutionConfig(4000, 6000)
 def minSize = 1
-def maxSize = 2
+def maxSize = 2048
 
 def scenarios = [
 	Scenario.BATCH,
