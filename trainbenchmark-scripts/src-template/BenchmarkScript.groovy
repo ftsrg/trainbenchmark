@@ -22,6 +22,14 @@ import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
+println('Please remember to stop all other Java processes.')
+println()
+println('If in doubt, check with this command:')
+println('$ ps auxw | grep jav[a]')
+println()
+println('If there are other Java processes, use:')
+println('$ killall -9 java')
+
 def benchmarkId = ResultHelper.createNewResultDir()
 ResultHelper.saveConfiguration(benchmarkId)
 def ec = new ExecutionConfig(2000, 4000)
