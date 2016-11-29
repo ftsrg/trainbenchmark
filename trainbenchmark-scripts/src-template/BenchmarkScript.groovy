@@ -23,6 +23,7 @@ import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 def benchmarkId = ResultHelper.createNewResultDir()
+ResultHelper.saveConfiguration(benchmarkId)
 def ec = new ExecutionConfig(2000, 4000)
 
 def minSize = 1
