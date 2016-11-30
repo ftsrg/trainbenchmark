@@ -123,7 +123,7 @@ for (workload in workloads) {
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(~ Phase, ncol = 3, scale = "free_y") +
+    facet_wrap(~ Phase, ncol = 3, scale = "free") +
     guides(color = guide_legend(ncol = 4)) +
     theme_bw() +
     theme(
