@@ -127,6 +127,7 @@ for (workload in workloads) {
     guides(color = guide_legend(ncol = 4)) +
     theme_bw() +
     theme(
+      plot.title = element_text(hjust = 0.5),
       text = element_text(size = 10),
       legend.key = element_blank(), 
       legend.title = element_blank(), 
@@ -148,13 +149,13 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filena
   df$Model = discretize(
     df$Model,
     "fixed",
-    categories = c(-Inf,16,256,Inf),
+    categories = c(-Inf, 16, 256, Inf),
     labels = c("small", "medium", "large"))
   
   df$Time = discretize(
     df$Time,
     "fixed",
-    categories = c(-Inf,200000,1000000,5000000,Inf),
+    categories = c(-Inf, 200, 1000, 5000, Inf),
     labels = c("instantaneous", "fast", "acceptable", "slow"))
   
   if (!is.null(map.from)) {
@@ -168,8 +169,8 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filena
   frequencies$Freq = frequencies$Freq / frequencies$Total
   
   p = ggplot(na.omit(frequencies)) +
-    geom_tile(aes(x = Model, y = Time, fill = Freq)) +
     labs(title = title, x = "Model size", y = "Execution time") +
+    geom_tile(aes(x = Model, y = Time, fill = Freq)) +
     scale_fill_gradient(low = "white", high = "darkred")
   
   if (length(attributes) == 1) {
@@ -181,6 +182,7 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filena
   p = p +
     theme_bw() +
     theme(
+      plot.title = element_text(hjust = 0.5),
       legend.key = element_blank(), 
       legend.title = element_blank(), 
       legend.position = legend.position,
