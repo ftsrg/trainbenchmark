@@ -116,7 +116,7 @@ for (workload in workloads) {
   
   p = ggplot(df) + #na.omit(df)) +
     aes(x = as.factor(Model), y = Time) +
-    labs(title = workload, x = "Model size\n#Elements", y = "Execution times [ms]") +
+    labs(title = paste(workload, "scenario, execution time"), x = "Model size\n#Elements", y = "Execution times [ms]") +
     geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
     geom_point(data = extremes, color = "transparent") + # add extremes for minimum and maximum values
     scale_shape_manual(values = seq(0, 15)) +

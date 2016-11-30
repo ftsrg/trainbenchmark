@@ -56,7 +56,7 @@ for (workload in workloads) {
   
   p = ggplot(df) + #na.omit(df)) +
     aes(x = as.factor(Model), y = Memory) +
-    labs(title = workload, x = "Model size\n#Elements", y = "Execution times [MB]") +
+    labs(title = paste(workload, "scenario, memory consumption"), x = "Model size\n#Elements", y = "Memory consumption [MB]") +
     geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
     scale_shape_manual(values = seq(0, 15)) +
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
@@ -65,16 +65,17 @@ for (workload in workloads) {
     guides(color = guide_legend(ncol = 4)) +
     theme_bw() +
     theme(
+      plot.title = element_text(hjust = 0.5),
       text = element_text(size = 10),
       legend.key = element_blank(), 
       legend.title = element_blank(), 
       legend.position = "bottom",
-      axis.text = element_text(size = 7)
+      axis.text = element_text(size = 10)
     ) +
     geom_label_repel(
       data = plot_labels, 
       aes(x = as.factor(Model), y = Memory, label = Tool,  col = Tool),
-      size = 1.6, 
+      size = 2.4, 
       show.legend = F, 
       label.padding = unit(0.12, "lines")
     )

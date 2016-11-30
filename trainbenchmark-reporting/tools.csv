@@ -4,6 +4,8 @@ Eclipse OCL,EMF,in-memory
 EMF API,EMF,in-memory
 VIATRA (Incremental),EMF,in-memory
 VIATRA (Local Search),EMF,in-memory
+Neo4j (Core API-CSV),property graph,disk-resident
+Neo4j (Cypher-CSV),property graph,disk-resident
 Neo4j (Core API-GraphML),property graph,disk-resident
 Neo4j (Cypher-GraphML),property graph,disk-resident
 Neo4j (Core API-Binary),property graph,disk-resident
