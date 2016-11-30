@@ -176,7 +176,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(),
 				new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb), InterruptSignalHandler.getHandler());
 
-		Map<String, String> exportCommands = ImmutableMap.<String, String>builder()
+		final Map<String, String> exportCommands = ImmutableMap.<String, String>builder()
 				// nodes
 				.put(ModelConstants.REGION, "MATCH (n:Region) RETURN ID(n) AS `:ID`") //
 				.put(ModelConstants.ROUTE, "MATCH (n:Route) RETURN ID(n) AS `:ID`, n.active AS `active:BOOLEAN`") //
