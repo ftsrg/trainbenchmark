@@ -15,3 +15,8 @@
 :book: **Details.** If you are interested in getting the benchmark working or contributing, visit the [documentation](docs/).
 
 :books: **Publications.** For theoretical foundations, check out our [related publications](http://incquery.net/publications/trainbenchmark)
+
+## License
+
+The project uses the Apache 2.0 license and was supported by the MONDO EU FP-7 project.
+It is currently developed by the MTA-BME Lendület Research Group on Cyber-Physical Systems.
