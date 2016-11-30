@@ -27,6 +27,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.xml.stream.XMLStreamException;
 
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -95,18 +97,7 @@ public class Neo4jDriver extends Driver {
 
 	@Override
 	public void read(final String modelPath)
-			throws FileNotFoundException, XMLStreamException, RemoteException, ShellException {
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
-
-		try (final Transaction tx = graphDb.beginTx()) {
-			final Schema schema = graphDb.schema();
-			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.LENGTH);
-			schema.indexFor(Neo4jConstants.labelSemaphore).on(ModelConstants.SIGNAL);
-			schema.indexFor(Neo4jConstants.labelRoute).on(ModelConstants.ACTIVE);
-			schema.awaitIndexesOnline(5, TimeUnit.MINUTES);
-			tx.success();
-		}
-
+			throws XMLStreamException, ShellException, IOException {
 		switch (graphFormat) {
 		case BINARY:
 			readBinary(modelPath);
@@ -122,11 +113,58 @@ public class Neo4jDriver extends Driver {
 		}
 	}
 
-	private void readCsv(String modelPath) {
-		throw new UnsupportedOperationException("CSV not supported");
+	private void startDb() {
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
+
+		try (final Transaction tx = graphDb.beginTx()) {
+			final Schema schema = graphDb.schema();
+			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.LENGTH);
+			schema.indexFor(Neo4jConstants.labelSemaphore).on(ModelConstants.SIGNAL);
+			schema.indexFor(Neo4jConstants.labelRoute).on(ModelConstants.ACTIVE);
+			schema.awaitIndexesOnline(5, TimeUnit.MINUTES);
+			tx.success();
+		}
+	}
+
+	private void readCsv(String modelPath) throws IOException {
+		final String neo4jHome =   "../neo4j-server/";
+		final String dbPath =      "../models/neo4j-dbs/railway-database";
+		final File databaseDirectory = new File(dbPath);
+
+		if (databaseDirectory.exists()) {
+		  FileUtils.deleteDirectory(databaseDirectory);
+		}
+
+		final String rawImportCommand = "%NEO4J_HOME%/bin/neo4j-import --into %DB_PATH% " //
+		    + "--nodes:Region %MODEL_PREFIX%-Region.csv " //
+		    + "--nodes:Route %MODEL_PREFIX%-Route.csv " //
+		    + "--nodes:Segment:TrackElement %MODEL_PREFIX%-Segment.csv " //
+		    + "--nodes:Semaphore %MODEL_PREFIX%-Semaphore.csv " //
+		    + "--nodes:Sensor %MODEL_PREFIX%-Sensor.csv " //
+		    + "--nodes:Switch:TrackElement %MODEL_PREFIX%-Switch.csv " //
+		    + "--nodes:SwitchPosition %MODEL_PREFIX%-SwitchPosition.csv " //
+		    + "--relationships:connectsTo %MODEL_PREFIX%-connectsTo.csv " //
+		    + "--relationships:entry %MODEL_PREFIX%-entry.csv " //
+		    + "--relationships:exit %MODEL_PREFIX%-exit.csv "//
+		    + "--relationships:follows %MODEL_PREFIX%-follows.csv "//
+		    + "--relationships:monitoredBy %MODEL_PREFIX%-monitoredBy.csv "//
+		    + "--relationships:requires %MODEL_PREFIX%-requires.csv "//
+		    + "--relationships:target %MODEL_PREFIX%-target.csv";
+		final String importCommand = rawImportCommand //
+		    .replaceAll("%NEO4J_HOME%", neo4jHome) //
+		    .replaceAll("%DB_PATH%", dbPath) //
+		    .replaceAll("%MODEL_PREFIX%", modelPath);
+		final CommandLine cmdLine = CommandLine.parse(importCommand);
+		final DefaultExecutor executor = new DefaultExecutor();
+		final int exitValue = executor.execute(cmdLine);
+		if (exitValue != 0) {
+		  throw new IOException("Neo4j import failed");
+		}
+		startDb();
 	}
 
 	private void readBinary(String modelPath) throws RemoteException, ShellException {
+		startDb();
 		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(),
 				new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb), InterruptSignalHandler.getHandler());
 
@@ -136,6 +174,7 @@ public class Neo4jDriver extends Driver {
 	}
 
 	private void readGraphMl(String modelPath) throws FileNotFoundException, XMLStreamException {
+		startDb();
 		try (final Transaction tx = graphDb.beginTx()) {
 			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
 			xmlGraphMLReader.nodeLabels(true);
@@ -150,7 +189,7 @@ public class Neo4jDriver extends Driver {
 		case BINARY:
 			return ".bin";
 		case CSV:
-			return ".csv";
+			return ""; // hack as we have multiple CSVs
 		case GRAPHML:
 			return ".graphml";
 		default:

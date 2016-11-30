@@ -179,8 +179,8 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		Map<String, String> exportCommands = ImmutableMap.<String, String>builder()
 				// nodes
 				.put(ModelConstants.REGION, "MATCH (n:Region) RETURN ID(n) AS `:ID`") //
-				.put(ModelConstants.ROUTE, "MATCH (n:Route) RETURN ID(n) AS `:ID`, n.active AS `active`") //
-				.put(ModelConstants.SEGMENT, "MATCH (n:Segment) RETURN ID(n) AS `:ID`, n.length AS `length`") //
+				.put(ModelConstants.ROUTE, "MATCH (n:Route) RETURN ID(n) AS `:ID`, n.active AS `active:BOOLEAN`") //
+				.put(ModelConstants.SEGMENT, "MATCH (n:Segment) RETURN ID(n) AS `:ID`, n.length AS `length:INT`") //
 				.put(ModelConstants.SEMAPHORE, "MATCH (n:Semaphore) RETURN ID(n) AS `:ID`, n.signal AS signal") //
 				.put(ModelConstants.SENSOR, "MATCH (n:Sensor) RETURN ID(n) AS `:ID`") //
 				.put(ModelConstants.SWITCH, "MATCH (n:Switch) RETURN ID(n) AS `:ID`, n.currentPosition AS currentPosition") //
