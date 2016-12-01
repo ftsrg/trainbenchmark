@@ -23,8 +23,8 @@ def scenarios = [
 
 def formats = [
 	new EmfGeneratorConfigBuilder(),
+	new Neo4jGraphGeneratorConfigBuilder().setGraphFormat(Neo4jGraphFormat.CSV),
 	new Neo4jGraphGeneratorConfigBuilder().setGraphFormat(Neo4jGraphFormat.GRAPHML),
-	new Neo4jGraphGeneratorConfigBuilder().setGraphFormat(Neo4jGraphFormat.BINARY),
 	new TinkerGraphGeneratorConfigBuilder().setGraphFormat(TinkerGraphFormat.GRAPHML),
 	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferred(true),
 	new RdfGeneratorConfigBuilder().setFormat(RdfFormat.TURTLE).setInferred(false),
