@@ -23,7 +23,8 @@ memories.raw = rbindlist(l)
 
 # preprocess the data
 memories = memories.raw
-levels(memories$Tool) = toolList$Tool
+
+memories$Tool = factor(memories$Tool, levels = toolList$Tool)
 memories = model_filenames_to_sizes(memories)
 memories = subset(memories, select = -c(Description))
 
