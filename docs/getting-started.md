@@ -23,17 +23,25 @@ scripts/install-jdk.sh && \
 
 Some tools require dependencies, e.g. installing a database manager or adding artifacts to your local Maven repository
 
-* [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with `sudo apt-get install -y mysql-server` and set the root password to empty. This might be tricky on latest Ubuntu systems, see the [MySQL README](trainbenchmark-tool-mysql/README.md) for details.
-* [SQLite](hu.bme.mit.trainbenchmark.benchmark.sqlite): install with `sudo apt-get install -y sqlite3`.
+* [MySQL](hu.bme.mit.trainbenchmark.benchmark.mysql): install with
+
+  ```
+  sudo apt-get install -y mysql-server
+  ```
+  and set the root password to empty. This might be tricky on latest Ubuntu systems, see the [MySQL README](../trainbenchmark-tool-mysql/README.md) for details.
+* [SQLite](hu.bme.mit.trainbenchmark.benchmark.sqlite): install with
+
+  ```
+  sudo apt-get install -y sqlite3
+  ```
 
 ### Usage
 
 The benchmark configuration is defined in the `trainbenchmark-scripts/src/BenchmarkScript.groovy` file.
 
-* Use `./gradlew shadowJar generate benchmark` to run the benchmark and generate the plots.
-* `plot`: generate the plots.
-* `page`: run a Jetty server showing the plots.
-* `cleanResults`: remove the previous benchmark results
+* Use `./gradlew shadowjar generate benchmark plot page` to run the benchmark and generate the plots.
+
+To remove **all** previous results, add the `cleanResults` task befor the other tasks.
 
 ### Importing to Eclipse
 
