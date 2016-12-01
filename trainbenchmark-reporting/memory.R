@@ -12,13 +12,18 @@ workloads = c("Batch")
 sizes = list()
 sizes[["Batch"]] = c("4k", "13k", "34k", "67k", "138k", "278k", "579k", "1.2M", "2.3M", "4.7M", "9.3M", "18.6M", "36.9M")
 
+
+toolList = read.csv("tool-list.csv", colClasses=c(rep("character",1)))
+
 # load the data
-tsvs = list.files("../results/", pattern = "memory-.*\\.csv", full.names = T, recursive = T)
+tsvs = list.files("../results-memory/", pattern = "memory-.*\\.csv", full.names = T, recursive = T)
 l = lapply(tsvs, read.csv)
+
 memories.raw = rbindlist(l)
 
 # preprocess the data
 memories = memories.raw
+levels(memories$Tool) = toolList$Tool
 memories = model_filenames_to_sizes(memories)
 memories = subset(memories, select = -c(Description))
 
@@ -58,7 +63,8 @@ for (workload in workloads) {
     aes(x = as.factor(Model), y = Memory) +
     labs(title = paste(workload, "scenario, memory consumption"), x = "Model size\n#Elements", y = "Memory consumption [MB]") +
     geom_point(aes(col = Tool, shape = Tool), size = 2.0) +
-    scale_shape_manual(values = seq(0, 15)) +
+    scale_color_discrete(drop = F) +
+    scale_shape_manual(values = seq(0, 15), drop = F) +
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +

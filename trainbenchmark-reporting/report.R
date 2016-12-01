@@ -15,14 +15,17 @@ sizes = list()
 sizes[["Inject"]] = c("5k", "19k", "31k", "67k", "138k", "283k", "573k", "1.2M", "2.3M", "4.6M", "9.2M", "18M", "37M")
 sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M", "2.2M", "4.6M", "9.3M", "18M", "37M")
 
+toolList = read.csv("tool-list.csv", colClasses=c(rep("character",1)))
+
 # load the data
 tsvs = list.files("../results/", pattern = "times-.*\\.csv", full.names = T, recursive = T)
 l = lapply(tsvs, read.csv)
 times = rbindlist(l)
 
+# preprocess the data
+levels(times$Tool) = toolList$Tool
 keep_descriptions_first_char(times)
 
-# preprocess the data
 times$Model = gsub("\\D+", "", times$Model)
 times$Model = as.numeric(times$Model)
 times$Time = times$Time / 10^6
