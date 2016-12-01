@@ -51,3 +51,4 @@ replay_*.log
 
 xtend-gen/
 neo4j-server/
+results-*/

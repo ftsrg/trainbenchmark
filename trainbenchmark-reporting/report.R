@@ -11,7 +11,7 @@ source('util.R')
 workloads = c("Inject", "Repair")
 phases = c("Read", "Check", "Read.and.Check", "Transformation", "Recheck", "Transformation.and.Recheck")
 
-sizes = list()
+sizes = list()      # 1     2      4      8      16      32      64      128     256     512     1024    2048   4096
 sizes[["Inject"]] = c("5k", "19k", "31k", "67k", "138k", "283k", "573k", "1.2M", "2.3M", "4.6M", "9.2M", "18M", "37M")
 sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M", "2.2M", "4.6M", "9.3M", "18M", "37M")
 
@@ -93,6 +93,10 @@ for (workload in workloads) {
   currentWorkloadSizes = head(workloadSizes, n=length(xbreaks))
   xlabels = paste(xbreaks, "\n", currentWorkloadSizes, sep = "")
 
+  # drop every other models size
+  evens = seq(2, log2(max(df$Model)), by=2)
+  xlabels[evens] = ""
+
   # y axis labels
   yaxis = nice_y_axis()
   ybreaks = yaxis$ybreaks
@@ -135,7 +139,7 @@ for (workload in workloads) {
       legend.key = element_blank(), 
       legend.title = element_blank(), 
       legend.position = "bottom",
-      axis.text = element_text(size = 5)
+      axis.text = element_text(size = 9)
     )
   print(p)
   
