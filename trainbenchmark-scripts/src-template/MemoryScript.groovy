@@ -40,7 +40,7 @@ def timeout = 900
 
 // Set the reportUrl if you would like to receive a Slack notification when the benchmark finished.
 // The default configuration points to our research group's Slack.
-//def reportUrl = "https://hooks.slack.com/services/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"
+//reportUrl = "https://hooks.slack.com/services/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"
 
 def tools = [
 	new BlazegraphBenchmarkConfigBuilder().setInferencing(false),

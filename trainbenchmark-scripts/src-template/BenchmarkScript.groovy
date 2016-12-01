@@ -41,23 +41,18 @@ def runs = 5
 
 // Set the reportUrl if you would like to receive a Slack notification when the benchmark finished.
 // The default configuration points to our research group's Slack.
-//def reportUrl = "https://hooks.slack.com/services/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"
+//reportUrl = "https://hooks.slack.com/services/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"
 
 def tools = [
-	new BlazegraphBenchmarkConfigBuilder().setInferencing(false),
-	new BlazegraphBenchmarkConfigBuilder().setInferencing(true),
 	new EclipseOclBenchmarkConfigBuilder(),
 	new DroolsBenchmarkConfigBuilder(),
 	new EmfApiBenchmarkConfigBuilder(),
 	new JenaBenchmarkConfigBuilder().setInferencing(false),
 	new JenaBenchmarkConfigBuilder().setInferencing(true),
 	new MySqlBenchmarkConfigBuilder(),
-	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI).setGraphFormat(Neo4jGraphFormat.BINARY ),
-	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER ).setGraphFormat(Neo4jGraphFormat.BINARY ),
-	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI).setGraphFormat(Neo4jGraphFormat.GRAPHML),
+	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI).setGraphFormat(Neo4jGraphFormat.CSV    ),
 	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER ).setGraphFormat(Neo4jGraphFormat.GRAPHML),
 	new Rdf4jBenchmarkConfigBuilder().setInferencing(false),
-	new Rdf4jBenchmarkConfigBuilder().setInferencing(true),
 	new SQLiteBenchmarkConfigBuilder(),
 	new TinkerGraphBenchmarkConfigBuilder(),
 	new ViatraBenchmarkConfigBuilder().setBackend(ViatraBackend.INCREMENTAL),
@@ -82,8 +77,8 @@ def workloads = [
 			RailwayOperation.SWITCHMONITORED_INJECT,
 		],
 		strategy: TransformationChangeSetStrategy.FIXED,
-		constant: 10,
-		queryTransformationCount: 5,
+		constant: 10, // elements
+		queryTransformationCount: 12, // iterations
 	],
 	Repair: [
 		modelVariant: "repair",
@@ -96,8 +91,8 @@ def workloads = [
 			RailwayOperation.SWITCHMONITORED_REPAIR,
 		],
 		strategy: TransformationChangeSetStrategy.PROPORTIONAL,
-		constant: 10,
-		queryTransformationCount: 5,
+		constant: 5, // percent
+		queryTransformationCount: 8, // iterations
 	],
 ]
 
