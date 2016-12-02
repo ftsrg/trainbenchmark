@@ -60,6 +60,13 @@ def tools = [
 ]
 
 def workloads = [
+	ConnectedSegments: [ modelVariant: "repair", operations: [RailwayOperation.CONNECTEDSEGMENTS], ],
+	PosLength:         [ modelVariant: "repair", operations: [RailwayOperation.POSLENGTH        ], ],
+	RouteSensor:       [ modelVariant: "repair", operations: [RailwayOperation.ROUTESENSOR      ], ],
+	SemaphoreNeighbor: [ modelVariant: "repair", operations: [RailwayOperation.SEMAPHORENEIGHBOR], ],
+	SwitchSet:         [ modelVariant: "repair", operations: [RailwayOperation.SWITCHSET        ], ],
+	SwitchMonitored:   [ modelVariant: "repair", operations: [RailwayOperation.SWITCHMONITORED  ], ],
+
 	Inject: [
 		modelVariant: "inject",
 		operations: [

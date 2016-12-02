@@ -14,6 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import hu.bme.mit.trainbenchmark.config.AbstractConfigBase;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
@@ -38,7 +39,7 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	/**
 	 * The number of Transformation-Recheck loops.
 	 */
-	protected final int queryTransformationCount;
+	protected final Optional<Integer> queryTransformationCount;
 
 	/**
 	 * The name of the model file (without extension).
@@ -56,28 +57,30 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	protected final String workload;
 
 	/**
-	 * Transformation strategy to pick matches for transformation, e.g. "a fixed number" or "a proportional amount" of matches
+	 * Transformation strategy to pick matches for transformation, e.g. "a fixed
+	 * number" or "a proportional amount" of matches
 	 */
 	protected final TransformationChangeSetStrategy transformationChangeSetStrategy;
 
 	/**
-	 * Transformation constant to pick matches for transformations, e.g. "10 matches" or "10% of the matches"
+	 * Transformation constant to pick matches for transformations, e.g. "10
+	 * matches" or "10% of the matches"
 	 */
-	protected final int transformationConstant;
+	protected final Optional<Integer> transformationConstant;
 
-	protected BenchmarkConfigBase(final int benchmarkId, final long timeout, final int runs,
-			final int queryTransformationCount, final String modelFilename,
+	protected BenchmarkConfigBase(final int benchmarkId, final long timeout, final int runs, final String modelFilename,
 			final List<RailwayOperation> operations, final String workload,
-			final TransformationChangeSetStrategy transformationChangeSetStrategy, final int transformationConstant) {
+			final TransformationChangeSetStrategy transformationChangeSetStrategy,
+			final Optional<Integer> queryTransformationCount, final Optional<Integer> transformationConstant) {
 		super();
 		this.benchmarkId = benchmarkId;
 		this.timeout = timeout;
 		this.runs = runs;
-		this.queryTransformationCount = queryTransformationCount;
 		this.modelFilename = modelFilename;
 		this.operations = operations;
 		this.workload = workload;
 		this.transformationChangeSetStrategy = transformationChangeSetStrategy;
+		this.queryTransformationCount = queryTransformationCount;
 		this.transformationConstant = transformationConstant;
 	}
 
@@ -93,10 +96,6 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 		return runs;
 	}
 
-	public int getQueryTransformationCount() {
-		return queryTransformationCount;
-	}
-
 	public String getModelPath() {
 		return getModelDir() + modelFilename;
 	}
@@ -106,7 +105,8 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 	}
 
 	/**
-	 * @return An identifier for the workload. Example: "Query mix, Repair transformation"
+	 * @return An identifier for the workload. Example: "Query mix, Repair
+	 *         transformation"
 	 */
 	public String getWorkload() {
 		return workload;
@@ -120,8 +120,12 @@ public final class BenchmarkConfigBase extends AbstractConfigBase {
 		return transformationChangeSetStrategy;
 	}
 
+	public int getQueryTransformationCount() {
+		return queryTransformationCount.orElse(0);
+	}
+
 	public int getTransformationConstant() {
-		return transformationConstant;
+		return transformationConstant.orElse(0);
 	}
 
 }

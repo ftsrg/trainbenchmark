@@ -19,14 +19,7 @@ public abstract class ModelGenerator {
 		final StringBuilder messageBuilder = new StringBuilder();
 		messageBuilder.append("Generating instance model, ");
 		messageBuilder.append("generator: " + serializer.syntax() + ", ");
-		// messageBuilder.append("scenario: " +
-		// generatorConfig.getScenarioName() + ", ");
-		// if (generatorConfig.getScenario() == MINIMAL) {
-		// messageBuilder.append("query: " +
-		// generatorConfig.getQueries().get(0));
-		// } else {
 		messageBuilder.append("size: " + gc.getConfigBase().getSize());
-		// }
 		messageBuilder.append("... ");
 		System.out.print(messageBuilder.toString());
 		serializer.initModel();

@@ -21,12 +21,14 @@ public class BenchmarkRunner {
 	public static int runPerformanceBenchmark(final BenchmarkConfig bc, final ExecutionConfig ec)
 			throws IOException, InterruptedException {
 		final Joiner joiner = Joiner.on(", ");
-		System.out.println("Running benchmark: " + bc.getToolName());
+		System.out.println("Running benchmark.");
+		System.out.println("Workload: " + bc.getConfigBase().getWorkload());
+		System.out.println("Tool: " + bc.getToolName());
 		System.out.println("Model: " + bc.getConfigBase().getModelPath());
 		System.out.println("Description: " + bc.getDescription());
+		System.out.println("Operations: [" + joiner.join(bc.getConfigBase().getOperations()) + "]");
 		System.out.println("Execution configuration: " + ec);
 		System.out.println("Runs: " + bc.getConfigBase().getRuns());
-		System.out.println("Operations: [" + joiner.join(bc.getConfigBase().getOperations()) + "]");
 
 		final File configFile = File.createTempFile("trainbenchmark-benchmark-", ".conf");
 		final String configPath = configFile.getAbsolutePath();

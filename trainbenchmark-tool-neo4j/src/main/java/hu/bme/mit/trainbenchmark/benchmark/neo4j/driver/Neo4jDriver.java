@@ -127,7 +127,7 @@ public class Neo4jDriver extends Driver {
 	}
 
 	private void readCsv(String modelPath) throws IOException {
-		final String neo4jHome =   "../neo4j-server/";
+		final String neo4jHome =   "../neo4j-server";
 		final String dbPath =      "../models/neo4j-dbs/railway-database";
 		final File databaseDirectory = new File(dbPath);
 

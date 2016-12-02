@@ -1,6 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.config;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.google.common.base.Preconditions;
 
@@ -10,12 +11,12 @@ public final class BenchmarkConfigBaseBuilder {
 	private Integer benchmarkId;
 	private Long timeout;
 	private Integer runs;
-	private Integer queryTransformationCount;
 	private String modelFilename;
 	private List<RailwayOperation> operations;
 	private String workload;
-	private TransformationChangeSetStrategy transformationChangeSetStrategy;
-	private Integer transformationConstant;
+	private TransformationChangeSetStrategy transformationChangeSetStrategy = TransformationChangeSetStrategy.NONE;
+	private Optional<Integer> queryTransformationCount = Optional.empty();
+	private Optional<Integer> transformationConstant = Optional.empty();
 
 	public BenchmarkConfigBaseBuilder setTimeout(final Long timeout) {
 		this.timeout = timeout;
@@ -24,11 +25,6 @@ public final class BenchmarkConfigBaseBuilder {
 
 	public BenchmarkConfigBaseBuilder setRuns(final Integer runs) {
 		this.runs = runs;
-		return this;
-	}
-
-	public BenchmarkConfigBaseBuilder setQueryTransformationCount(final Integer queryTransformationCount) {
-		this.queryTransformationCount = queryTransformationCount;
 		return this;
 	}
 
@@ -47,13 +43,25 @@ public final class BenchmarkConfigBaseBuilder {
 		return this;
 	}
 
-	public BenchmarkConfigBaseBuilder setTransformationChangeSetStrategy(final TransformationChangeSetStrategy transformationChangeSetStrategy) {
-		this.transformationChangeSetStrategy = transformationChangeSetStrategy;
+	public BenchmarkConfigBaseBuilder setTransformationChangeSetStrategy(
+			final TransformationChangeSetStrategy transformationChangeSetStrategy) {
+		if (transformationChangeSetStrategy != null) {
+			this.transformationChangeSetStrategy = transformationChangeSetStrategy;
+		}
+		return this;
+	}
+
+	public BenchmarkConfigBaseBuilder setQueryTransformationCount(final Integer queryTransformationCount) {
+		if (queryTransformationCount != null) {
+			this.queryTransformationCount = Optional.of(queryTransformationCount);
+		}
 		return this;
 	}
 
 	public BenchmarkConfigBaseBuilder setTransformationConstant(final Integer transformationConstant) {
-		this.transformationConstant = transformationConstant;
+		if (transformationConstant != null) {
+			this.transformationConstant = Optional.of(transformationConstant);
+		}
 		return this;
 	}
 
@@ -66,12 +74,13 @@ public final class BenchmarkConfigBaseBuilder {
 		Preconditions.checkNotNull(benchmarkId);
 		Preconditions.checkNotNull(timeout);
 		Preconditions.checkNotNull(runs);
-		Preconditions.checkNotNull(queryTransformationCount);
 		Preconditions.checkNotNull(modelFilename);
 		Preconditions.checkNotNull(operations);
 		Preconditions.checkNotNull(workload);
 		Preconditions.checkNotNull(transformationChangeSetStrategy);
+		Preconditions.checkNotNull(queryTransformationCount);
 		Preconditions.checkNotNull(transformationConstant);
-		return new BenchmarkConfigBase(benchmarkId, timeout, runs, queryTransformationCount, modelFilename, operations, workload, transformationChangeSetStrategy, transformationConstant);
+		return new BenchmarkConfigBase(benchmarkId, timeout, runs, modelFilename, operations, workload,
+				transformationChangeSetStrategy, queryTransformationCount, transformationConstant);
 	}
 }
