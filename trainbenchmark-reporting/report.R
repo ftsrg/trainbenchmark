@@ -23,7 +23,7 @@ l = lapply(tsvs, read.csv)
 times = rbindlist(l)
 
 # preprocess the data
-memories$Tool = factor(memories$Tool, levels = toolList$Tool)
+times$Tool = factor(times$Tool, levels = toolList$Tool)
 keep_descriptions_first_char(times)
 
 times$Model = gsub("\\D+", "", times$Model)
