@@ -54,8 +54,8 @@ println()
 //reportUrl = "https://hooks.slack.com/services/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"
 
 def tools = [
-	new EclipseOclBenchmarkConfigBuilder(),
 	new DroolsBenchmarkConfigBuilder(),
+	new EclipseOclBenchmarkConfigBuilder(),
 	new EmfApiBenchmarkConfigBuilder(),
 	new JenaBenchmarkConfigBuilder().setInferencing(false),
 	new JenaBenchmarkConfigBuilder().setInferencing(true),
