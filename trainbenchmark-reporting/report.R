@@ -118,9 +118,7 @@ for (workload in workloads) {
   extremes = NULL
   extremes = rbind(extremes, read.and.check.extremes)
   extremes = rbind(extremes, transformation.and.recheck.extremes)
-  
-  print(extremes)
-  
+
   p = ggplot(df) + #na.omit(df)) +
     aes(x = as.factor(Model), y = Time) +
     labs(title = paste(workload, "scenario, execution time"), x = "Model size\n#Elements", y = "Execution times [ms]") +
