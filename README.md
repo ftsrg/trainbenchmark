@@ -16,6 +16,23 @@
 
 :books: **Publications.** For theoretical foundations, check out our [related publications](http://incquery.net/publications/trainbenchmark)
 
+**Citing the benchmark.** For citing the benchmark, use the following BibTeX snippet.
+
+```
+@article{ ,
+   author      = {G{\'a}bor Sz{\'a}rnyas and Benedek Izs{\'o} and Istv{\'a}n R{\'a}th and D{\'a}niel Varr{\'o}},
+   title       = {The {T}rain {B}enchmark: Cross-Technology Performance Evaluation of Continuous Model Validation},
+   journal     = {Software and Systems Modeling},
+   volume      = {},  
+   number      = {},
+   year        = {2016},
+   issn        = {},
+   pages       = {},
+   doi         = {}, 
+   publisher   = {Springer},
+}
+```
+
 ## License
 
 The project uses the Eclipse Public License 1.0 and was supported by the MONDO EU FP7 (EU ICT-611125) project.
