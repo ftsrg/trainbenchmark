@@ -8,7 +8,11 @@ library(arules)
 source('util.R')
 
 # constants
-workloads = c("ConnectedSegments", "PosLength", "RouteSensor", "SemaphoreNeighbor", "SwitchMonitored", "SwitchSet")
+workloads = c(
+  "PosLength",  "SwitchMonitored",
+  "RouteSensor", "SwitchSet",
+  "ConnectedSegments", "SemaphoreNeighbor"
+)
 phases = c("Read", "Check", "Read.and.Check")
 phasesPrettified = c("Read", "Check", "Read and Check")
 
@@ -23,7 +27,7 @@ l = lapply(tsvs, read.csv)
 times = rbindlist(l)
 
 # preprocess the data
-memories$Tool = factor(memories$Tool, levels = toolList$Tool)
+times$Tool = factor(times$Tool, levels = toolList$Tool)
 keep_descriptions_first_char(times)
 
 times$Model = gsub("\\D+", "", times$Model)
@@ -69,9 +73,13 @@ times.processed = melt(
 times.plot = times.processed
 times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
 times.plot$Phase = factor(times.plot$Phase, levels = phasesPrettified)
+times.plot$Workload = factor(times.plot$Workload, levels = workloads)
 
 ### line charts
 for (phase in phasesPrettified) {
+  phase.filename = gsub(' ', '-', phase)
+  workloadSizes = sizes[["Repair"]]
+  
   # filter the dataframe to the current phase
   df = times.plot[times.plot$Phase == phase, ]
   
@@ -87,8 +95,15 @@ for (phase in phasesPrettified) {
   xlabels = paste(xbreaks, "\n", currentWorkloadSizes, sep = "")
   
   # drop every other models size
-  evens = seq(2, max(log2(max(df$Model)), 2), by=2)
-  xlabels[evens] = ""
+  maxLabel = max(log2(max(df$Model)), 2)
+  if (maxLabel %% 2) {
+    start = 3
+  } else {
+    start = 2
+  }
+  filter = seq(start, maxLabel, by=2)
+  
+  xlabels[filter] = ""
   
   # y axis labels
   yaxis = nice_y_axis()
@@ -103,7 +118,7 @@ for (phase in phasesPrettified) {
     geom_line(aes(col = Tool, group = Tool), size = 0.5) +
     scale_x_discrete(breaks = xbreaks, labels = xlabels) +
     scale_y_log10(breaks = ybreaks, labels = ylabels) +
-    facet_wrap(~ Workload, ncol = 2, scale = "fixed") +
+    facet_wrap(~ Workload, ncol = 2, scale = "free") +
     guides(color = guide_legend(ncol = 4)) +
     theme_bw() +
     theme(
@@ -118,7 +133,7 @@ for (phase in phasesPrettified) {
   
   ggsave(
     plot = p,
-    filename = paste("../diagrams/individual-", phase, ".pdf", sep=""),
+    filename = paste("../diagrams/individual-", phase.filename, ".pdf", sep=""),
     width = 210, height = 297, units = "mm"
   )
 }
