@@ -150,7 +150,7 @@ for (workload in workloads) {
 
 ### heatmaps
 
-heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filename, width = 210, height = 100, ncol = 3, legend.position = "bottom") {
+heatmap = function(df, attributes, map.from = NULL, map.to = NULL, levels, title, filename, width = 210, height = 100, ncol = 3, legend.position = "bottom") {
   df$Model = discretize(
     df$Model,
     "fixed",
@@ -167,6 +167,7 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filena
     attribute = attributes[1];
     df[[attribute]] = mapvalues(df[[attribute]], from = map.from, to = map.to, warn_missing = FALSE)
   }
+  df[[attributes]] = factor(df[[attributes]], levels = levels)
   
   frequencies = as.data.frame(table(df[, c("Model", "Time", attributes)]))
   total.frequencies = ddply(frequencies, attributes, summarize, Total = sum(Freq))
@@ -209,6 +210,7 @@ heatmap(df = times.plot.read.and.check.only,
         attributes = c("Tool"),
         map.from = tools$tool,
         map.to = tools$storage,
+        levels = c("in-memory", "disk-resident"),
         title = "Comparison of performance by storage\n(read and check)",
         filename = "storage",
         height = 74,
@@ -220,6 +222,7 @@ heatmap(df = times.plot,
         attributes = c("Tool"),
         map.from = tools$tool,
         map.to = tools$format,
+        levels = c("EMF", "property graph", "RDF", "SQL"),
         title = "Comparison of performance by formats\n(total execution time)",
         filename = "formats",
         height = 115,
