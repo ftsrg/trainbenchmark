@@ -28,11 +28,13 @@ public class Neo4jCypherQuery<TNeo4jMatch extends Neo4jMatch> extends Neo4jQuery
 	protected final RailwayQuery query;
 	protected final String queryDefinition;
 
-	public Neo4jCypherQuery(final Neo4jDriver driver, final String workspaceDir, final RailwayQuery query) throws IOException {
+	public Neo4jCypherQuery(final Neo4jDriver driver, final String workspaceDir, final RailwayQuery query)
+			throws IOException {
 		super(query, driver);
 
 		this.query = query;
-		this.queryDefinition = FileUtils.readFileToString(new File(workspaceDir + Neo4jConstants.CYPHER_DIR + "queries/" + query + ".cyp"));
+		this.queryDefinition = FileUtils.readFileToString(new File(
+				workspaceDir + Neo4jConstants.CYPHER_DIR + "queries/" + query + "." + Neo4jConstants.QUERY_EXTENSION));
 	}
 
 	@SuppressWarnings("unchecked")

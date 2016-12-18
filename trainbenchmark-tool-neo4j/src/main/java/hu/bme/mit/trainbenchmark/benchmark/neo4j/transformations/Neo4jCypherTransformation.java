@@ -10,13 +10,16 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public abstract class Neo4jCypherTransformation<TNeo4jMatch extends Neo4jMatch> extends Neo4jTransformation<TNeo4jMatch> {
+public abstract class Neo4jCypherTransformation<TNeo4jMatch extends Neo4jMatch>
+		extends Neo4jTransformation<TNeo4jMatch> {
 
 	protected final String transformationDefinition;
 
-	public Neo4jCypherTransformation(final Neo4jDriver driver, final String workspaceDir, final RailwayOperation operation) throws IOException {
+	public Neo4jCypherTransformation(final Neo4jDriver driver, final String workspaceDir,
+			final RailwayOperation operation) throws IOException {
 		super(driver);
-		this.transformationDefinition = FileUtils.readFileToString(new File(workspaceDir + Neo4jConstants.CYPHER_DIR + "transformations/" + operation + "Rhs.cyp"));
+		this.transformationDefinition = FileUtils.readFileToString(new File(workspaceDir + Neo4jConstants.CYPHER_DIR
+				+ "transformations/" + operation + "Rhs." + Neo4jConstants.QUERY_EXTENSION));
 	}
 
 }
