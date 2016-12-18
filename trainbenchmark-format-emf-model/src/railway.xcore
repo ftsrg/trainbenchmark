@@ -1,0 +1,68 @@
+@Ecore(nsURI="http://www.semanticweb.org/ontologies/2015/trainbenchmark")
+@GenModel(bundleManifest="false",
+    modelDirectory="trainbenchmark-format-emf-model/build/xcore/main",
+    complianceLevel="8.0")
+package hu.bme.mit.trainbenchmark.railway
+
+abstract class RailwayElement {
+	int ^id
+}
+
+class RailwayContainer {
+	contains Route[] routes
+	contains Region[] regions
+}
+
+class Region extends RailwayElement {
+	contains Sensor[] sensors
+	contains TrackElement[] elements
+}
+
+class Route extends RailwayElement {
+	boolean active
+	contains SwitchPosition[] follows opposite route
+	refers Sensor[2..*] requires
+	refers Semaphore entry
+	refers Semaphore exit
+}
+
+class Sensor extends RailwayElement {
+	refers TrackElement[] monitors opposite monitoredBy
+}
+
+abstract class TrackElement extends RailwayElement {
+	refers Sensor[] monitoredBy opposite monitors
+	refers TrackElement[] connectsTo
+}
+
+class Segment extends TrackElement {
+	Integer length
+	contains Semaphore[] semaphores
+}
+
+class Switch extends TrackElement {
+	Position currentPosition
+	refers SwitchPosition[] positions opposite target
+}
+
+class SwitchPosition extends RailwayElement {
+	Position position
+	refers Route route opposite follows
+	refers Switch target opposite positions 
+}
+
+class Semaphore extends RailwayElement {
+	Signal signal
+}
+
+enum Position {
+	FAILURE = 0
+	STRAIGHT = 1
+	DIVERGING = 2
+}
+
+enum Signal {
+	FAILURE = 0
+	STOP = 1
+	GO = 2
+}

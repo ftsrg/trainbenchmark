@@ -11,7 +11,7 @@
       <package
             uri="http://www.semanticweb.org/ontologies/2015/trainbenchmark"
             class="hu.bme.mit.trainbenchmark.railway.RailwayPackage"
-            genModel="model/railway.genmodel"/>
+            genModel="src/railway.xcore"/>
    </extension>
 
 </plugin>

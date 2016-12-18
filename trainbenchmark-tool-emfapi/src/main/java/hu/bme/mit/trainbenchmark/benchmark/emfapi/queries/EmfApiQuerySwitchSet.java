@@ -43,7 +43,7 @@ public class EmfApiQuerySwitchSet<TDriver extends EmfDriver> extends EmfApiQuery
 			if (!route.isActive()) {
 				continue;
 			}
-			
+
 			// (route:Route)-[:entry]->(semaphore:Semaphore)
 			final Semaphore semaphore = route.getEntry();
 			if (semaphore == null) {
