@@ -14,7 +14,7 @@
 
 :book: **Details.** If you are interested in getting the benchmark working or contributing, visit the [documentation](docs/).
 
-:books: **Publications.** For theoretical foundations, check out our [related publications](http://incquery.net/publications/trainbenchmark)
+:books: **Publications.** For theoretical foundations, check out our [related publications](http://incquery.net/publications/trainbenchmark).
 
 **Citing the benchmark.** For citing the benchmark, use the following BibTeX snippet.
 
