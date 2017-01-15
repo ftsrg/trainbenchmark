@@ -2,7 +2,7 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBaseBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.ModelSetConfig
 import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy
-import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfigBuilder
+//import hu.bme.mit.trainbenchmark.benchmark.ingraph.config.IngraphBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.result.ResultHelper
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
@@ -61,8 +61,8 @@ for (scenario in scenarios) {
 			RailwayOperation.ROUTESENSOR_REPAIR
 		])
 
-		def bcb = new IngraphBenchmarkConfigBuilder().setMessageSize(messageSize).setQueryVariant(variant)
-		runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig)
+//		def bcb = new IngraphBenchmarkConfigBuilder().setMessageSize(messageSize).setQueryVariant(variant)
+//		runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig)
 	}
 
 	for (variant in 'A'..'F') {
@@ -71,7 +71,7 @@ for (scenario in scenarios) {
 			RailwayOperation.SEMAPHORENEIGHBOR_REPAIR
 		])
 
-		def bcb = new IngraphBenchmarkConfigBuilder().setMessageSize(messageSize).setQueryVariant(variant)
-		runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig)
+//		def bcb = new IngraphBenchmarkConfigBuilder().setMessageSize(messageSize).setQueryVariant(variant)
+//		runBenchmarkSeries(bcbb, bcb, ec, modelSetConfig)
 	}
 }
