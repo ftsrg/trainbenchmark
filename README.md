@@ -14,22 +14,21 @@
 
 :book: **Details.** If you are interested in getting the benchmark working or contributing, visit the [documentation](docs/).
 
-:books: **Publications.** For theoretical foundations, check out our [related publications](http://incquery.net/publications/trainbenchmark).
+:books: **Publications.** the definitive publication on the benchmark is our journal paper
+[The Train Benchmark: cross-technology performance evaluation of continuous model queries](http://link.springer.com/article/10.1007/s10270-016-0571-8). For use cases, also check out the [related publications](https://github.com/FTSRG/publication-pages/wiki/Benchmarking-query-technologies-in-model-driven-scenarios).
 
 **Citing the benchmark.** For citing the benchmark, use the following BibTeX snippet.
 
 ```
-@article{ ,
-   author      = {G{\'a}bor Sz{\'a}rnyas and Benedek Izs{\'o} and Istv{\'a}n R{\'a}th and D{\'a}niel Varr{\'o}},
-   title       = {The {T}rain {B}enchmark: Cross-Technology Performance Evaluation of Continuous Model Validation},
-   journal     = {Software and Systems Modeling},
-   volume      = {},  
-   number      = {},
-   year        = {2016},
-   issn        = {},
-   pages       = {},
-   doi         = {}, 
-   publisher   = {Springer},
+@article{TrainBenchmark2017,
+  author="Sz{\'a}rnyas, G{\'a}bor and Izs{\'o}, Benedek and R{\'a}th, Istv{\'a}n and Varr{\'o}, D{\'a}niel",
+  title="The Train Benchmark: cross-technology performance evaluation of continuous model queries",
+  journal="Software {\&} Systems Modeling",
+  year="2017",
+  pages="1--29",
+  issn="1619-1374",
+  doi="10.1007/s10270-016-0571-8",
+  url="http://dx.doi.org/10.1007/s10270-016-0571-8"
 }
 ```
 
