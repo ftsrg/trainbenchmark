@@ -46,7 +46,7 @@ Install the required R packages (`scripts/install-R-packages.sh`).
 You can run a web page by issuing the following command.
 
 ```bash
-./gradlew plot
+./gradlew page
 ```
 
 ## Summary
