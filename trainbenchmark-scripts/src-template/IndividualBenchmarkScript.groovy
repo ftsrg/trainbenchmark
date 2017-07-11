@@ -1,4 +1,3 @@
-import hu.bme.mit.trainbenchmark.benchmark.blazegraph.config.BlazegraphBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBaseBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.config.ModelSetConfig
@@ -15,9 +14,9 @@ import hu.bme.mit.trainbenchmark.benchmark.result.ResultHelper
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkReporter
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkRunner
 import hu.bme.mit.trainbenchmark.benchmark.sqlite.config.SQLiteBenchmarkConfigBuilder
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBackend
 import hu.bme.mit.trainbenchmark.benchmark.viatra.config.ViatraBenchmarkConfigBuilder
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
@@ -35,7 +34,7 @@ ResultHelper.saveConfiguration(benchmarkId)
 def ec = new ExecutionConfig(2000, 4000)
 
 def minSize = 1
-def maxSize = 2048
+def maxSize = 4
 def timeout = 900
 def runs = 5
 
@@ -70,47 +69,12 @@ def tools = [
 ]
 
 def workloads = [
-//	ConnectedSegments: [ modelVariant: "repair", operations: [RailwayOperation.CONNECTEDSEGMENTS], ],
-//	PosLength:         [ modelVariant: "repair", operations: [RailwayOperation.POSLENGTH        ], ],
-//	RouteSensor:       [ modelVariant: "repair", operations: [RailwayOperation.ROUTESENSOR      ], ],
-//	SemaphoreNeighbor: [ modelVariant: "repair", operations: [RailwayOperation.SEMAPHORENEIGHBOR], ],
-//	SwitchMonitored:   [ modelVariant: "repair", operations: [RailwayOperation.SWITCHMONITORED  ], ],
-//	SwitchSet:         [ modelVariant: "repair", operations: [RailwayOperation.SWITCHSET        ], ],
-
-	Inject: [
-		modelVariant: "inject",
-		operations: [
-			RailwayOperation.CONNECTEDSEGMENTS,
-			RailwayOperation.POSLENGTH,
-			RailwayOperation.ROUTESENSOR,
-			RailwayOperation.SEMAPHORENEIGHBOR,
-			RailwayOperation.SWITCHSET,
-			RailwayOperation.SWITCHMONITORED,
-			RailwayOperation.CONNECTEDSEGMENTS_INJECT,
-			RailwayOperation.POSLENGTH_INJECT,
-			RailwayOperation.ROUTESENSOR_INJECT,
-			RailwayOperation.SEMAPHORENEIGHBOR_INJECT,
-			RailwayOperation.SWITCHSET_INJECT,
-			RailwayOperation.SWITCHMONITORED_INJECT,
-		],
-		strategy: TransformationChangeSetStrategy.FIXED,
-		constant: 10, // elements
-		queryTransformationCount: 12, // iterations
-	],
-	Repair: [
-		modelVariant: "repair",
-		operations: [
-			RailwayOperation.CONNECTEDSEGMENTS_REPAIR,
-			RailwayOperation.POSLENGTH_REPAIR,
-			RailwayOperation.ROUTESENSOR_REPAIR,
-			RailwayOperation.SEMAPHORENEIGHBOR_REPAIR,
-			RailwayOperation.SWITCHSET_REPAIR,
-			RailwayOperation.SWITCHMONITORED_REPAIR,
-		],
-		strategy: TransformationChangeSetStrategy.PROPORTIONAL,
-		constant: 5, // percent
-		queryTransformationCount: 8, // iterations
-	],
+	ConnectedSegments: [ modelVariant: "repair", operations: [RailwayOperation.CONNECTEDSEGMENTS], ],
+	PosLength:         [ modelVariant: "repair", operations: [RailwayOperation.POSLENGTH        ], ],
+	RouteSensor:       [ modelVariant: "repair", operations: [RailwayOperation.ROUTESENSOR      ], ],
+	SemaphoreNeighbor: [ modelVariant: "repair", operations: [RailwayOperation.SEMAPHORENEIGHBOR], ],
+	SwitchMonitored:   [ modelVariant: "repair", operations: [RailwayOperation.SWITCHMONITORED  ], ],
+	SwitchSet:         [ modelVariant: "repair", operations: [RailwayOperation.SWITCHSET        ], ],
 ]
 
 def runBenchmarkSeries(BenchmarkConfigBaseBuilder configBaseBuilder, BenchmarkConfigBuilder configBuilder,

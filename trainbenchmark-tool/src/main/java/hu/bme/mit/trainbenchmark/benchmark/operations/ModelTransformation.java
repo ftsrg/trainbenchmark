@@ -35,4 +35,7 @@ public abstract class ModelTransformation<PatternMatch, TDriver extends Driver> 
 	// hence we found it acceptible in benchmark code.
 	public abstract void activate(Collection<PatternMatch> matches) throws Exception;
 
+	public TDriver getDriver() {
+		return driver;
+	}
 }

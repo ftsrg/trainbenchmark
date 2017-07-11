@@ -1,3 +1,7 @@
 task plot(type: Exec) {
   commandLine 'Rscript', 'report.R'
 }
+
+task plotIndividual(type: Exec) {
+  commandLine 'Rscript', 'individual.R'
+}
