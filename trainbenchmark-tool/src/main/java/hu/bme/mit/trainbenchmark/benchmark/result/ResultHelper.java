@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.result;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.*;
 import java.util.Arrays;
 
 import org.apache.commons.io.FileUtils;
@@ -43,7 +44,18 @@ public final class ResultHelper {
 	public static void createResultDir(int id) {
 		final String dir = WORKSPACE_DIR + getResultDirForId(id);
 		System.out.println("Creating dir: " + dir);
-		new File(dir).mkdir();
+		if (new File(dir).mkdir()) {
+			// change/create symlink for recent
+			Path recent = Paths.get(WORKSPACE_DIR, RESULT_DIR, "recent");
+			try {
+				Files.deleteIfExists(recent);
+				Files.createSymbolicLink(recent, Paths.get(dir));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.err.println("Could not create dir " + dir);
+		}
 	}
 
 	public static int createNewResultDir() {

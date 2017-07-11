@@ -63,6 +63,11 @@ task benchmark(dependsOn: 'classes', type: JavaExec) {
 	classpath = sourceSets.main.runtimeClasspath
 }
 
+task individualBenchmark(dependsOn: 'classes', type: JavaExec) {
+	main = 'IndividualBenchmarkScript'
+	classpath = sourceSets.main.runtimeClasspath
+}
+
 task generate(dependsOn: 'classes', type: JavaExec) {
 	main = 'GeneratorScript'
 	classpath = sourceSets.main.runtimeClasspath
