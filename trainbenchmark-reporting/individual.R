@@ -22,7 +22,7 @@ sizes[["Repair"]] = c("8k", "15k", "33k", "66k", "135k", "271k", "566k", "1.1M",
 toolList = read.csv("tool-list.csv", colClasses=c(rep("character",1)))
 
 # load the data
-tsvs = list.files("../results/", pattern = "recent/times-.*\\.csv", full.names = T, recursive = T)
+tsvs = list.files("../results/recent/", pattern = "times-.*\\.csv", full.names = T, recursive = T)
 l = lapply(tsvs, read.csv)
 times = rbindlist(l)
 
