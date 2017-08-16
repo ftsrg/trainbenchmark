@@ -15,6 +15,9 @@ package hu.bme.mit.trainbenchmark.generator.cypher;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.cypher.config.CypherGeneratorConfig;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,6 +38,8 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 
 public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 
+	protected BufferedWriter writer;
+
 	public CypherSerializer(final CypherGeneratorConfig gc) {
 		super(gc);
 	}
@@ -44,18 +49,22 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 		return "Cypher";
 	}
 
+	public void write(final String s) throws IOException {
+		writer.write(s + "\n");
+	}
+
 	@Override
 	public void initModel() throws IOException {
+		final String cypherPath = gc.getConfigBase().getModelPathWithoutExtension() + ".cypher";
+		final File cypherFile = new File(cypherPath);
 
+		writer = new BufferedWriter(new FileWriter(cypherFile, true));
 	}
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
 
-	}
-
-	private void write(String format) {
-
+		writer.close();
 	}
 
 	@Override
