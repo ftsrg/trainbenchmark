@@ -1,6 +1,6 @@
 dependencies {
 	compile project(':trainbenchmark-config')
-	compile group: 'commons-io', name: 'commons-io', version: '2.4'
+	compile group: 'commons-io', name: 'commons-io', version: commonsIoVersion
 	compile group: 'org.apache.commons', name: 'commons-exec', version: commonsExecVersion
 	compile group: 'junit', name: 'junit', version: junitVersion
 	compile group: 'org.hamcrest', name: 'hamcrest-junit', version: '1.0.0.0'

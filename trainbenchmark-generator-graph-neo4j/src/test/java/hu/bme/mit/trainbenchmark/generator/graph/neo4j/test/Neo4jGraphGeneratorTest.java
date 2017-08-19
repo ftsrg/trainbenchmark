@@ -12,10 +12,7 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph.neo4j.test;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
@@ -25,12 +22,15 @@ import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGenerato
 import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
+import java.util.List;
+
 public class Neo4jGraphGeneratorTest extends GeneratorTest {
 
 	protected final List<Neo4jGraphFormat> graphFormats = ImmutableList.of(
-			Neo4jGraphFormat.BINARY, //
-			Neo4jGraphFormat.CSV, //
-			Neo4jGraphFormat.GRAPHML);
+//			Neo4jGraphFormat.BINARY, //
+//			Neo4jGraphFormat.CSV, //
+			Neo4jGraphFormat.GRAPHML //
+		);
 
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {

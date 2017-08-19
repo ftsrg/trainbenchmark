@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
-<graph id="G" edgedefault="directed">
 <key id="currentPosition" for="node" attr.name="currentPosition" attr.type="string"/>
 <key id="length" for="node" attr.name="length" attr.type="int"/>
 <key id="active" for="node" attr.name="active" attr.type="boolean"/>
 <key id="id" for="node" attr.name="id" attr.type="int"/>
 <key id="position" for="node" attr.name="position" attr.type="string"/>
 <key id="signal" for="node" attr.name="signal" attr.type="string"/>
+<graph id="G" edgedefault="directed">
 <node id="n0" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="id">1</data><data key="signal">GO</data></node>
 <node id="n1" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="id">2</data><data key="signal">GO</data></node>
 <node id="n2" labels=":Route"><data key="labels">:Route</data><data key="id">3</data><data key="active">true</data></node>
 <node id="n3" labels=":Region"><data key="labels">:Region</data><data key="id">4</data></node>
-<node id="n4" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">5</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n4" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">5</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n5" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">6</data></node>
 <node id="n6" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">7</data><data key="length">335</data></node>
 <node id="n7" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">8</data><data key="length">439</data></node>
@@ -58,7 +58,7 @@
 <node id="n48" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="id">49</data><data key="signal">GO</data></node>
 <node id="n49" labels=":Route"><data key="labels">:Route</data><data key="id">50</data><data key="active">true</data></node>
 <node id="n50" labels=":Region"><data key="labels">:Region</data><data key="id">51</data></node>
-<node id="n51" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">52</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n51" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">52</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n52" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">53</data></node>
 <node id="n53" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">54</data><data key="length">232</data></node>
 <node id="n54" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">55</data><data key="length">901</data></node>
@@ -108,7 +108,7 @@
 <node id="n98" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">99</data><data key="length">638</data></node>
 <node id="n99" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">100</data><data key="length">102</data></node>
 <node id="n100" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">101</data><data key="position">STRAIGHT</data></node>
-<node id="n101" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">102</data><data key="currentPosition">FAILURE</data></node>
+<node id="n101" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">102</data><data key="currentPosition">FAILURE</data></node>
 <node id="n102" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">103</data></node>
 <node id="n103" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">104</data><data key="length">386</data></node>
 <node id="n104" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">105</data><data key="length">462</data></node>
@@ -167,7 +167,7 @@
 <node id="n157" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="id">158</data><data key="signal">GO</data></node>
 <node id="n158" labels=":Route"><data key="labels">:Route</data><data key="id">159</data><data key="active">true</data></node>
 <node id="n159" labels=":Region"><data key="labels">:Region</data><data key="id">160</data></node>
-<node id="n160" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">161</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n160" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">161</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n161" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">162</data></node>
 <node id="n162" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">163</data><data key="length">917</data></node>
 <node id="n163" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">164</data><data key="length">373</data></node>
@@ -190,7 +190,7 @@
 <node id="n180" labels=":Semaphore"><data key="labels">:Semaphore</data><data key="id">181</data><data key="signal">GO</data></node>
 <node id="n181" labels=":Route"><data key="labels">:Route</data><data key="id">182</data><data key="active">true</data></node>
 <node id="n182" labels=":Region"><data key="labels">:Region</data><data key="id">183</data></node>
-<node id="n183" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">184</data><data key="currentPosition">FAILURE</data></node>
+<node id="n183" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">184</data><data key="currentPosition">FAILURE</data></node>
 <node id="n184" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">185</data></node>
 <node id="n185" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">186</data><data key="length">905</data></node>
 <node id="n186" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">187</data><data key="length">453</data></node>
@@ -234,7 +234,7 @@
 <node id="n224" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">225</data><data key="length">61</data></node>
 <node id="n225" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">226</data><data key="length">917</data></node>
 <node id="n226" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">227</data><data key="position">FAILURE</data></node>
-<node id="n227" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">228</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n227" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">228</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n228" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">229</data></node>
 <node id="n229" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">230</data><data key="length">358</data></node>
 <node id="n230" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">231</data><data key="length">673</data></node>
@@ -242,7 +242,7 @@
 <node id="n232" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">233</data><data key="length">421</data></node>
 <node id="n233" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">234</data><data key="length">514</data></node>
 <node id="n234" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">235</data><data key="position">STRAIGHT</data></node>
-<node id="n235" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">236</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n235" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">236</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n236" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">237</data></node>
 <node id="n237" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">238</data><data key="length">909</data></node>
 <node id="n238" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">239</data><data key="length">750</data></node>
@@ -268,7 +268,7 @@
 <node id="n258" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">259</data><data key="length">940</data></node>
 <node id="n259" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">260</data><data key="length">900</data></node>
 <node id="n260" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">261</data><data key="position">DIVERGING</data></node>
-<node id="n261" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">262</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n261" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">262</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n262" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">263</data></node>
 <node id="n263" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">264</data><data key="length">282</data></node>
 <node id="n264" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">265</data><data key="length">983</data></node>
@@ -288,7 +288,7 @@
 <node id="n278" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">279</data><data key="length">65</data></node>
 <node id="n279" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">280</data><data key="length">707</data></node>
 <node id="n280" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">281</data><data key="position">DIVERGING</data></node>
-<node id="n281" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">282</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n281" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">282</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n282" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">283</data></node>
 <node id="n283" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">284</data><data key="length">507</data></node>
 <node id="n284" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">285</data><data key="length">83</data></node>
@@ -320,7 +320,7 @@
 <node id="n310" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">311</data><data key="length">912</data></node>
 <node id="n311" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">312</data><data key="length">-451</data></node>
 <node id="n312" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">313</data><data key="position">DIVERGING</data></node>
-<node id="n313" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">314</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n313" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">314</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n314" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">315</data></node>
 <node id="n315" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">316</data><data key="length">998</data></node>
 <node id="n316" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">317</data><data key="length">638</data></node>
@@ -364,7 +364,7 @@
 <node id="n354" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">355</data><data key="length">196</data></node>
 <node id="n355" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">356</data><data key="length">675</data></node>
 <node id="n356" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">357</data><data key="position">DIVERGING</data></node>
-<node id="n357" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">358</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n357" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">358</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n358" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">359</data></node>
 <node id="n359" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">360</data><data key="length">5</data></node>
 <node id="n360" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">361</data><data key="length">682</data></node>
@@ -392,7 +392,7 @@
 <node id="n382" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">383</data><data key="position">FAILURE</data></node>
 <node id="n383" labels=":Route"><data key="labels">:Route</data><data key="id">384</data><data key="active">true</data></node>
 <node id="n384" labels=":Region"><data key="labels">:Region</data><data key="id">385</data></node>
-<node id="n385" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">386</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n385" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">386</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n386" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">387</data></node>
 <node id="n387" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">388</data><data key="length">296</data></node>
 <node id="n388" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">389</data><data key="length">-684</data></node>
@@ -448,7 +448,7 @@
 <node id="n438" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">439</data><data key="length">992</data></node>
 <node id="n439" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">440</data><data key="length">149</data></node>
 <node id="n440" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">441</data><data key="position">DIVERGING</data></node>
-<node id="n441" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">442</data><data key="currentPosition">FAILURE</data></node>
+<node id="n441" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">442</data><data key="currentPosition">FAILURE</data></node>
 <node id="n442" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">443</data></node>
 <node id="n443" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">444</data><data key="length">38</data></node>
 <node id="n444" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">445</data><data key="length">598</data></node>
@@ -456,7 +456,7 @@
 <node id="n446" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">447</data><data key="length">263</data></node>
 <node id="n447" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">448</data><data key="length">411</data></node>
 <node id="n448" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">449</data><data key="position">FAILURE</data></node>
-<node id="n449" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">450</data><data key="currentPosition">FAILURE</data></node>
+<node id="n449" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">450</data><data key="currentPosition">FAILURE</data></node>
 <node id="n450" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">451</data></node>
 <node id="n451" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">452</data><data key="length">298</data></node>
 <node id="n452" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">453</data><data key="length">486</data></node>
@@ -464,7 +464,7 @@
 <node id="n454" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">455</data><data key="length">553</data></node>
 <node id="n455" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">456</data><data key="length">393</data></node>
 <node id="n456" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">457</data><data key="position">FAILURE</data></node>
-<node id="n457" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">458</data><data key="currentPosition">FAILURE</data></node>
+<node id="n457" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">458</data><data key="currentPosition">FAILURE</data></node>
 <node id="n458" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">459</data></node>
 <node id="n459" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">460</data><data key="length">147</data></node>
 <node id="n460" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">461</data><data key="length">170</data></node>
@@ -478,7 +478,7 @@
 <node id="n468" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">469</data><data key="length">558</data></node>
 <node id="n469" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">470</data><data key="length">220</data></node>
 <node id="n470" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">471</data><data key="position">FAILURE</data></node>
-<node id="n471" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">472</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n471" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">472</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n472" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">473</data></node>
 <node id="n473" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">474</data><data key="length">609</data></node>
 <node id="n474" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">475</data><data key="length">857</data></node>
@@ -534,7 +534,7 @@
 <node id="n524" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">525</data><data key="length">752</data></node>
 <node id="n525" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">526</data><data key="length">100</data></node>
 <node id="n526" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">527</data><data key="position">STRAIGHT</data></node>
-<node id="n527" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">528</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n527" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">528</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n528" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">529</data></node>
 <node id="n529" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">530</data><data key="length">986</data></node>
 <node id="n530" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">531</data><data key="length">487</data></node>
@@ -591,7 +591,7 @@
 <node id="n581" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">582</data><data key="length">761</data></node>
 <node id="n582" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">583</data><data key="length">98</data></node>
 <node id="n583" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">584</data><data key="position">STRAIGHT</data></node>
-<node id="n584" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">585</data><data key="currentPosition">FAILURE</data></node>
+<node id="n584" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">585</data><data key="currentPosition">FAILURE</data></node>
 <node id="n585" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">586</data></node>
 <node id="n586" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">587</data><data key="length">78</data></node>
 <node id="n587" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">588</data><data key="length">573</data></node>
@@ -611,7 +611,7 @@
 <node id="n601" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">602</data><data key="length">166</data></node>
 <node id="n602" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">603</data><data key="length">379</data></node>
 <node id="n603" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">604</data><data key="position">FAILURE</data></node>
-<node id="n604" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">605</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n604" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">605</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n605" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">606</data></node>
 <node id="n606" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">607</data><data key="length">945</data></node>
 <node id="n607" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">608</data><data key="length">997</data></node>
@@ -625,7 +625,7 @@
 <node id="n615" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">616</data><data key="length">691</data></node>
 <node id="n616" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">617</data><data key="length">804</data></node>
 <node id="n617" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">618</data><data key="position">DIVERGING</data></node>
-<node id="n618" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">619</data><data key="currentPosition">FAILURE</data></node>
+<node id="n618" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">619</data><data key="currentPosition">FAILURE</data></node>
 <node id="n619" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">620</data></node>
 <node id="n620" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">621</data><data key="length">113</data></node>
 <node id="n621" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">622</data><data key="length">575</data></node>
@@ -664,7 +664,7 @@
 <node id="n654" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">655</data><data key="length">667</data></node>
 <node id="n655" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">656</data><data key="length">285</data></node>
 <node id="n656" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">657</data><data key="position">FAILURE</data></node>
-<node id="n657" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">658</data><data key="currentPosition">FAILURE</data></node>
+<node id="n657" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">658</data><data key="currentPosition">FAILURE</data></node>
 <node id="n658" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">659</data></node>
 <node id="n659" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">660</data><data key="length">432</data></node>
 <node id="n660" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">661</data><data key="length">232</data></node>
@@ -714,7 +714,7 @@
 <node id="n704" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">705</data><data key="length">320</data></node>
 <node id="n705" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">706</data><data key="length">867</data></node>
 <node id="n706" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">707</data><data key="position">FAILURE</data></node>
-<node id="n707" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">708</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n707" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">708</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n708" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">709</data></node>
 <node id="n709" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">710</data><data key="length">399</data></node>
 <node id="n710" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">711</data><data key="length">248</data></node>
@@ -728,7 +728,7 @@
 <node id="n718" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">719</data><data key="length">957</data></node>
 <node id="n719" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">720</data><data key="length">481</data></node>
 <node id="n720" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">721</data><data key="position">DIVERGING</data></node>
-<node id="n721" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">722</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n721" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">722</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n722" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">723</data></node>
 <node id="n723" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">724</data><data key="length">242</data></node>
 <node id="n724" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">725</data><data key="length">263</data></node>
@@ -784,7 +784,7 @@
 <node id="n774" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">775</data><data key="length">649</data></node>
 <node id="n775" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">776</data><data key="length">772</data></node>
 <node id="n776" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">777</data><data key="position">STRAIGHT</data></node>
-<node id="n777" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">778</data><data key="currentPosition">FAILURE</data></node>
+<node id="n777" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">778</data><data key="currentPosition">FAILURE</data></node>
 <node id="n778" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">779</data></node>
 <node id="n779" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">780</data><data key="length">824</data></node>
 <node id="n780" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">781</data><data key="length">726</data></node>
@@ -834,7 +834,7 @@
 <node id="n824" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">825</data><data key="length">84</data></node>
 <node id="n825" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">826</data><data key="length">13</data></node>
 <node id="n826" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">827</data><data key="position">FAILURE</data></node>
-<node id="n827" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">828</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n827" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">828</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n828" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">829</data></node>
 <node id="n829" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">830</data><data key="length">540</data></node>
 <node id="n830" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">831</data><data key="length">775</data></node>
@@ -860,7 +860,7 @@
 <node id="n850" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">851</data><data key="length">445</data></node>
 <node id="n851" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">852</data><data key="length">734</data></node>
 <node id="n852" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">853</data><data key="position">STRAIGHT</data></node>
-<node id="n853" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">854</data><data key="currentPosition">STRAIGHT</data></node>
+<node id="n853" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">854</data><data key="currentPosition">STRAIGHT</data></node>
 <node id="n854" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">855</data></node>
 <node id="n855" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">856</data><data key="length">751</data></node>
 <node id="n856" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">857</data><data key="length">276</data></node>
@@ -905,7 +905,7 @@
 <node id="n895" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">896</data><data key="length">52</data></node>
 <node id="n896" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">897</data><data key="length">-936</data></node>
 <node id="n897" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">898</data><data key="position">STRAIGHT</data></node>
-<node id="n898" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">899</data><data key="currentPosition">DIVERGING</data></node>
+<node id="n898" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">899</data><data key="currentPosition">DIVERGING</data></node>
 <node id="n899" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">900</data></node>
 <node id="n900" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">901</data><data key="length">782</data></node>
 <node id="n901" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">902</data><data key="length">968</data></node>
@@ -925,7 +925,7 @@
 <node id="n915" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">916</data><data key="length">115</data></node>
 <node id="n916" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">917</data><data key="length">517</data></node>
 <node id="n917" labels=":SwitchPosition"><data key="labels">:SwitchPosition</data><data key="id">918</data><data key="position">DIVERGING</data></node>
-<node id="n918" labels=":Switch:TrackElement"><data key="labels">:Switch:TrackElement</data><data key="id">919</data><data key="currentPosition">FAILURE</data></node>
+<node id="n918" labels=":TrackElement:Switch"><data key="labels">:TrackElement:Switch</data><data key="id">919</data><data key="currentPosition">FAILURE</data></node>
 <node id="n919" labels=":Sensor"><data key="labels">:Sensor</data><data key="id">920</data></node>
 <node id="n920" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">921</data><data key="length">578</data></node>
 <node id="n921" labels=":TrackElement:Segment"><data key="labels">:TrackElement:Segment</data><data key="id">922</data><data key="length">982</data></node>
