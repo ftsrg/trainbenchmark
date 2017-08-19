@@ -1,4 +1,4 @@
 MATCH (sw), (swP)
-WHERE id(sw) = { sw }
-  AND id(swP) = { swP }
+WHERE sw.id = { sw }
+  AND swP.id = { swP }
 SET sw.currentPosition = swP.position

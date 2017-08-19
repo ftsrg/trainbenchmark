@@ -11,14 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators;
 
-import java.util.Comparator;
-
 import org.neo4j.graphdb.Node;
+
+import java.util.Comparator;
 
 public class NodeComparator implements Comparator<Node> {
 
 	@Override
 	public int compare(final Node node1, final Node node2) {
+//		final long id1 = node1.getProperty(Neo4jConstants.ID);
+//		final long id2 = node2.getProperty(Neo4jConstants.ID);
 		final long id1 = node1.getId();
 		final long id2 = node2.getId();
 		return Long.compare(id1, id2);

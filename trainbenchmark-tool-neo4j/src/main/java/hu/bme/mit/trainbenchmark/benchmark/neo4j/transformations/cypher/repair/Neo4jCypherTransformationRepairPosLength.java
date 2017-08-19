@@ -11,17 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import org.neo4j.graphdb.NotFoundException;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 public class Neo4jCypherTransformationRepairPosLength extends Neo4jCypherTransformation<Neo4jPosLengthMatch> {
 
@@ -32,10 +33,14 @@ public class Neo4jCypherTransformationRepairPosLength extends Neo4jCypherTransfo
 	@Override
 	public void activate(final Collection<Neo4jPosLengthMatch> matches) throws IOException {
 		for (final Neo4jPosLengthMatch match : matches) {
-			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SEGMENT, match.getSegment().getId() //
-			);
-			driver.runTransformation(transformationDefinition, parameters);
+			try {
+				final Map<String, Object> parameters = ImmutableMap.of( //
+					QueryConstants.VAR_SEGMENT, match.getSegment().getProperty(Neo4jConstants.ID) //
+				);
+				driver.runTransformation(transformationDefinition, parameters);
+			} catch (final NotFoundException e) {
+				// do nothing (node has been removed)
+			}
 		}
 	}
 

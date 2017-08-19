@@ -1,4 +1,4 @@
 MATCH (route)-[e:entry]->(semaphore)
-WHERE id(route) = { route }
-  AND id(semaphore) = { semaphore } 
+WHERE route.id = { route }
+  AND semaphore.id = { semaphore } 
 DELETE e

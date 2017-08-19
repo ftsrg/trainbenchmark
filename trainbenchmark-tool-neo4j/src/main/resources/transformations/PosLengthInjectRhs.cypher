@@ -1,3 +1,3 @@
 MATCH (segment)
-WHERE id(segment) = { segment }
+WHERE segment.id = { segment }
 SET segment.length = 0

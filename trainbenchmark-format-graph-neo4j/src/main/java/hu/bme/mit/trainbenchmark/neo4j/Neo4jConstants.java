@@ -1,6 +1,9 @@
 
 package hu.bme.mit.trainbenchmark.neo4j;
 
+import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.RelationshipType;
+
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
@@ -16,9 +19,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.RelationshipType;
-
 public class Neo4jConstants {
 
 	public static final String QUERY_EXTENSION = "cypher";
@@ -26,6 +26,8 @@ public class Neo4jConstants {
 	public static final String BINARY_EXTENSION = "bin";
 	public static final String CSV_EXTENSION = "csv";
 	public static final String GRAPHML_EXTENSION = "graphml";
+
+	public static final String ID = "id";
 
 	public static final Label labelRoute = Label.label(ROUTE);
 	public static final Label labelSegment = Label.label(SEGMENT);

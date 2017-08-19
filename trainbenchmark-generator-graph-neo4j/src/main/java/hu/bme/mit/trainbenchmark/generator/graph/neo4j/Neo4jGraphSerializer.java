@@ -11,17 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.io.StringWriter;
-import java.rmi.RemoteException;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.xml.stream.XMLStreamException;
-
+import com.google.common.collect.ImmutableMap;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfig;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.cypher.export.DatabaseSubGraph;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -40,12 +34,15 @@ import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
 import org.neo4j.shell.tools.imp.util.Config;
 import org.neo4j.shell.tools.imp.util.ProgressReporter;
 
-import com.google.common.collect.ImmutableMap;
-
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfig;
-import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import javax.xml.stream.XMLStreamException;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.StringWriter;
+import java.rmi.RemoteException;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorConfig> {
 
@@ -68,12 +65,6 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	public void initModel() throws IOException {
 		cleanupDatabaseDirectory();
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
-
-		try (Transaction tx = graphDb.beginTx()) {
-			// bump the initial id from 0 to 1
-			graphDb.createNode().delete();
-			tx.success();
-		}
 	}
 
 	@Override
@@ -87,6 +78,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 			node.addLabel(Label.label(ancestor));
 		}
 
+		node.setProperty(Neo4jConstants.ID, id);
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String key = attribute.getKey();
 			Object value = attribute.getValue();
