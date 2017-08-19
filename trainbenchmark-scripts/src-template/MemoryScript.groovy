@@ -51,8 +51,6 @@ def tools = [
 	new JenaBenchmarkConfigBuilder().setInferencing(false),
 	new JenaBenchmarkConfigBuilder().setInferencing(true),
 	new MySqlBenchmarkConfigBuilder(),
-	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI).setGraphFormat(Neo4jGraphFormat.BINARY ),
-	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER ).setGraphFormat(Neo4jGraphFormat.BINARY ),
 	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.COREAPI).setGraphFormat(Neo4jGraphFormat.GRAPHML),
 	new Neo4jBenchmarkConfigBuilder().setEngine(Neo4jEngine.CYPHER ).setGraphFormat(Neo4jGraphFormat.GRAPHML),
 	new Rdf4jBenchmarkConfigBuilder().setInferencing(false),

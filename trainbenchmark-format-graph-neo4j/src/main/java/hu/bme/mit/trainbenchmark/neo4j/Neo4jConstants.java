@@ -23,7 +23,6 @@ public class Neo4jConstants {
 
 	public static final String QUERY_EXTENSION = "cypher";
 
-	public static final String BINARY_EXTENSION = "bin";
 	public static final String CSV_EXTENSION = "csv";
 	public static final String GRAPHML_EXTENSION = "graphml";
 

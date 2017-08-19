@@ -27,7 +27,6 @@ import java.util.List;
 public class Neo4jGraphGeneratorTest extends GeneratorTest {
 
 	protected final List<Neo4jGraphFormat> graphFormats = ImmutableList.of(
-//			Neo4jGraphFormat.BINARY, //
 //			Neo4jGraphFormat.CSV, //
 			Neo4jGraphFormat.GRAPHML //
 		);

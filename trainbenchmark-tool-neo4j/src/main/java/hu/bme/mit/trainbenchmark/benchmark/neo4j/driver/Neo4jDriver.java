@@ -36,7 +36,6 @@ import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -89,9 +88,6 @@ public class Neo4jDriver extends Driver {
 	public void read(final String modelPath)
 		throws XMLStreamException, IOException, KernelException {
 		switch (graphFormat) {
-		case BINARY:
-			readBinary(modelPath);
-			break;
 		case CSV:
 			readCsv(modelPath);
 			break;
@@ -154,16 +150,6 @@ public class Neo4jDriver extends Driver {
 		startDb();
 	}
 
-	private void readBinary(String modelPath) throws RemoteException {
-//		startDb();
-//		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(),
-//				new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb), InterruptSignalHandler.getHandler());
-//
-//		final String importCommand = String.format("import-binary -i %s", modelPath);
-//		System.out.println(importCommand);
-//		client.evaluate(importCommand, new SilentLocalOutput());
-	}
-
 	private void readGraphMl(String modelPath) throws FileNotFoundException, XMLStreamException, KernelException {
 		startDb();
 //		try (final Transaction tx = graphDb.beginTx()) {
@@ -186,8 +172,6 @@ public class Neo4jDriver extends Driver {
 	@Override
 	public String getPostfix() {
 		switch (graphFormat) {
-		case BINARY:
-			return ".bin";
 		case CSV:
 			return ""; // hack as we have multiple CSVs
 		case GRAPHML:

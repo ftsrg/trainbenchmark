@@ -35,8 +35,6 @@ public class Neo4jTest extends TrainBenchmarkTest {
 		return Arrays.asList(new Object[][]{ //
 //				{Neo4jEngine.CYPHER, Neo4jGraphFormat.CSV}, //
 //				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.CSV }, //
-//				{ Neo4jEngine.CYPHER, Neo4jGraphFormat.BINARY }, //
-//				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.BINARY }, //
 				{ Neo4jEngine.CYPHER, Neo4jGraphFormat.GRAPHML }, //
 //				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.GRAPHML }, //
 // 				}

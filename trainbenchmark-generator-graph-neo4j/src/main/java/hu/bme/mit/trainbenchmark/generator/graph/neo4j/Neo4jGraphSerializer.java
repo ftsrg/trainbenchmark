@@ -134,9 +134,6 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	public void persistModel() throws IOException, XMLStreamException, KernelException {
 		try {
 			switch (gc.getGraphFormat()) {
-			case BINARY:
-				saveToBinary();
-				break;
 			case CSV:
 				saveToCsv();
 				break;
@@ -187,17 +184,6 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 //			final String importCommand = String.format("import-cypher -o %s %s", absoluteFilePath, query);
 //			client.evaluate(importCommand, new SilentLocalOutput());
 //		}
-	}
-
-	private void saveToBinary() throws RemoteException {
-//		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "."
-//				+ Neo4jConstants.BINARY_EXTENSION;
-//
-//		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(), new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb),
-//				InterruptSignalHandler.getHandler());
-//
-//        final String exportCommand = String.format("export-binary -o %s", fileName);
-//        client.evaluate(exportCommand, new SilentLocalOutput());
 	}
 
 	private void saveToGraphMl() throws KernelException {
