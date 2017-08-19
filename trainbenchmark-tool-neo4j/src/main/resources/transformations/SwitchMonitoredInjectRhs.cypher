@@ -1,3 +1,3 @@
 MATCH (sw)-[m:monitoredBy]->(:Sensor)
-WHERE sw.id = { sw } 
+WHERE sw.id = $sw
 DELETE m
