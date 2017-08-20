@@ -28,7 +28,6 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.api.exceptions.KernelException;
-import org.neo4j.shell.ShellException;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -134,7 +133,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	}
 
 	@Override
-	public void persistModel() throws IOException, XMLStreamException, KernelException, ShellException {
+	public void persistModel() throws IOException, XMLStreamException, KernelException {
 		try {
 			switch (gc.getGraphFormat()) {
 			case CSV:
@@ -154,7 +153,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		}
 	}
 
-	private void saveToCsv() throws RemoteException, ShellException, KernelException {
+	private void saveToCsv() throws RemoteException, KernelException {
 		ApocHelper.registerProcedure(graphDb, ExportCSV.class, Graphs.class);
 
 		final Map<String, String> exportCommands = ImmutableMap.<String, String>builder()
