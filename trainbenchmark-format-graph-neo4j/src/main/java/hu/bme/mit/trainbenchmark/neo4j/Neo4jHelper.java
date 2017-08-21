@@ -1,4 +1,4 @@
-package hu.bme.mit.trainbenchmark.neo4j.apoc;
+package hu.bme.mit.trainbenchmark.neo4j;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;

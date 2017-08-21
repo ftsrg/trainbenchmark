@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.neo4j.apoc.ApocHelper;
-import hu.bme.mit.trainbenchmark.neo4j.apoc.Neo4jHelper;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;

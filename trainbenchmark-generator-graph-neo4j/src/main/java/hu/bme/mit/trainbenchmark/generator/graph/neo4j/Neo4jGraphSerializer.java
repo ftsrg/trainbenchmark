@@ -20,7 +20,7 @@ import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfig;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.neo4j.apoc.ApocHelper;
-import hu.bme.mit.trainbenchmark.neo4j.apoc.Neo4jHelper;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
