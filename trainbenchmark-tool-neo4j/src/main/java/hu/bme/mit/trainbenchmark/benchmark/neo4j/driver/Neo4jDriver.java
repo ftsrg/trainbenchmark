@@ -152,12 +152,6 @@ public class Neo4jDriver extends Driver {
 
 	private void readGraphMl(String modelPath) throws FileNotFoundException, XMLStreamException, KernelException {
 		startDb();
-//		try (final Transaction tx = graphDb.beginTx()) {
-//			final XmlGraphMLReader xmlGraphMLReader = new XmlGraphMLReader(graphDb);
-//			xmlGraphMLReader.nodeLabels(true);
-//			xmlGraphMLReader.parseXML(new BufferedReader(new FileReader(modelPath)), MapNodeCache.usingHashMap());
-//			tx.success();
-//		}
 
 		ApocHelper.registerProcedure(graphDb, ExportGraphML.class, Graphs.class);
 		try (final Transaction tx = graphDb.beginTx()) {
