@@ -14,11 +14,14 @@ package hu.bme.mit.trainbenchmark.generator.cypher;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.cypher.config.CypherGeneratorConfig;
+import org.neo4j.cypher.internal.frontend.v2_3.ast.functions.Str;
+import org.neo4j.shell.impl.SystemOutput;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -70,23 +73,52 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 	@Override
 	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes, final Map<String, Object> outgoingEdges,
 			final Map<String, Object> incomingEdges) throws IOException {
-		final StringBuilder columns = new StringBuilder();
-		final StringBuilder values = new StringBuilder();
 
-		columns.append("\"" + ID + "\"");
-		values.append(id);
+		StringBuilder query = new StringBuilder("CREATE (node");
 
-		structuralFeaturesToSQL(attributes, columns, values);
-		structuralFeaturesToSQL(outgoingEdges, columns, values);
-		structuralFeaturesToSQL(incomingEdges, columns, values);
-
-		if (SUPERTYPES.containsKey(type)) {
+		//If we have supertypes, we add them first
+		if (SUPERTYPES.containsKey(type)){
 			final String ancestorType = SUPERTYPES.get(type);
-			write(String.format("INSERT INTO \"%s\" (\"%s\") VALUES (%s);", ancestorType, ID, id));
-			write(String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString()));
+			query .append(":" + ancestorType);
+		}
+
+		//Then we add the type
+		query.append(":" + type);
+
+		//Setting the attributes
+		query.append("{id:" + id);
+		if (!attributes.isEmpty()){
+			query.append(",");
+
+			//Using an iterator in a while loop because hasNext method is needed
+			Iterator<? extends Entry<String, ?>> iterator = attributes.entrySet().iterator();
+			while (iterator.hasNext()){
+				final Entry<String, ? extends Object> entry = iterator.next();
+
+				final String key = entry.getKey();
+				final Object value = entry.getValue();
+
+				query.append(key + ":\"" + value + "\"");
+
+				if (iterator.hasNext()){
+					query.append(",");
+				}
+			}
+
+			query.append("});");
 		} else {
-			final String insertQuery = String.format("INSERT INTO \"%s\" (%s) VALUES (%s);", type, columns.toString(), values.toString());
-			write(insertQuery.toString());
+			query.append("});");
+		}
+
+		write(query.toString());
+
+		//Addig relationships
+		for(Entry<String, Object> entry : outgoingEdges.entrySet()){
+			write("MATCH (from{id:" + id + "}), (to{id:" + entry.getValue() + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
+		}
+
+		for (Entry<String, Object> entry : incomingEdges.entrySet()){
+			write("MATCH (from{id:" + entry.getValue() + "}), (to{id:" + id + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
 		}
 
 		return id;
@@ -98,52 +130,14 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 			return;
 		}
 
-		String insertQuery;
-		switch (label) {
-		// n:m edges
-		case MONITORED_BY:
-		case CONNECTS_TO:
-		case REQUIRES:
-			insertQuery = String.format("INSERT INTO \"%s\" VALUES (%s, %s);", label, from, to);
-			break;
-		// n:1 edges
-		case FOLLOWS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SWITCHPOSITION, "route", from, ID, to);
-			break;
-		case SENSORS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SENSOR, "region", from, ID, to);
-			break;
-		case ELEMENTS:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", TRACKELEMENT, "region", from, ID, to);
-			break;
-		case SEMAPHORES:
-			insertQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", SEMAPHORE, "segment", from, ID, to);
-			break;
-		default:
-			throw new UnsupportedOperationException("Label '" + label + "' not supported.");
-		}
-
-		write(insertQuery);
+		write("MATCH (from{id:" + from + "}), (to{id:" + to + "}) CREATE (from)-[:" + label + "]->(to);");
 	}
 
 	@Override
 	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key, stringValue, ID, node);
-		write(updateQuery);
-	}
 
-	protected void structuralFeaturesToSQL(final Map<String, ? extends Object> attributes, final StringBuilder columns, final StringBuilder values) {
-		for (final Entry<String, ? extends Object> entry : attributes.entrySet()) {
-			final String key = entry.getKey();
-			final Object value = entry.getValue();
-
-			columns.append(", \"" + key + "\"");
-			values.append(", ");
-
-			final String stringValue = (value == null ? "NULL" : valueToString(value));
-			values.append(stringValue);
-		}
+		write("MATCH (node{id:" + node + "}) SET node." + type + "=" + stringValue + ";");
 	}
 
 	private String valueToString(final Object value) {
