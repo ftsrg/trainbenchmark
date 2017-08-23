@@ -8,8 +8,8 @@ import hu.bme.mit.trainbenchmark.benchmark.eclipseocl.config.EclipseOclBenchmark
 import hu.bme.mit.trainbenchmark.benchmark.emfapi.config.EmfApiBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.mysql.config.MySqlBenchmarkConfigBuilder
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfigBuilder
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine
+import hu.bme.mit.trainbenchmark.benchmark.graphflow.config.Neo4jBenchmarkConfigBuilder
+import hu.bme.mit.trainbenchmark.benchmark.graphflow.config.Neo4jEngine
 import hu.bme.mit.trainbenchmark.benchmark.rdf4j.config.Rdf4jBenchmarkConfigBuilder
 import hu.bme.mit.trainbenchmark.benchmark.result.ResultHelper
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkReporter

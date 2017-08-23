@@ -3,6 +3,10 @@ jdk:
   - oraclejdk8
 install: true
 script:
+  - git clone https://github.com/szarnyasg/graphflow
+  - cd graphflow
+  - ./gradlew publishT
+  - cd ..
   - ./gradlew inits build --exclude-task test
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
