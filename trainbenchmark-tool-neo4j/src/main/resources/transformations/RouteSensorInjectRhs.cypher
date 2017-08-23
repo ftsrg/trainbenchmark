@@ -1,4 +1,4 @@
 MATCH (route)-[g:requires]->(sensor)
-WHERE id(route) = { route }
-  AND id(sensor) = { sensor } 
+WHERE route.id = $route
+  AND sensor.id = $sensor
 DELETE g

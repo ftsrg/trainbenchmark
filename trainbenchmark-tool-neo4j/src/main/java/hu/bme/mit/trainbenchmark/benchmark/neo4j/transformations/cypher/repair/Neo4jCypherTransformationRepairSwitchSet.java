@@ -11,17 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.repair;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 public class Neo4jCypherTransformationRepairSwitchSet extends Neo4jCypherTransformation<Neo4jSwitchSetMatch> {
 
@@ -33,8 +33,8 @@ public class Neo4jCypherTransformationRepairSwitchSet extends Neo4jCypherTransfo
 	public void activate(final Collection<Neo4jSwitchSetMatch> matches) throws IOException {
 		for (final Neo4jSwitchSetMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SW, match.getSw().getId(), //
-					QueryConstants.VAR_SWP, match.getSwP().getId() //
+					QueryConstants.VAR_SW, match.getSw().getProperty(Neo4jConstants.ID), //
+					QueryConstants.VAR_SWP, match.getSwP().getProperty(Neo4jConstants.ID) //
 			);
 			driver.runTransformation(transformationDefinition, parameters);
 		}

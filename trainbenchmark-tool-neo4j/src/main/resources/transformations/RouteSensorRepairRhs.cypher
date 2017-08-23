@@ -1,4 +1,4 @@
 MATCH (route), (sensor)
-WHERE id(route) = { route }
-  AND id(sensor) = { sensor }
+WHERE route.id = $route
+  AND sensor.id = $sensor
 CREATE (route)-[:requires]->(sensor)

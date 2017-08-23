@@ -12,13 +12,6 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.test;
 
-import java.util.Arrays;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.Neo4jBenchmarkScenario;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jBenchmarkConfig;
@@ -27,19 +20,25 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
 
 @RunWith(Parameterized.class)
 public class Neo4jTest extends TrainBenchmarkTest {
 
 	@Parameters(name = "engine={0}, format={1}")
 	public static Iterable<? extends Object[]> data() {
-		return Arrays.asList(new Object[][] { //
-				{ Neo4jEngine.CYPHER, Neo4jGraphFormat.CSV }, //
-				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.CSV }, //
-				{ Neo4jEngine.CYPHER, Neo4jGraphFormat.BINARY }, //
-				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.BINARY }, //
+		return Arrays.asList(new Object[][]{ //
+				{Neo4jEngine.CYPHER, Neo4jGraphFormat.CSV}, //
+//				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.CSV }, //
 				{ Neo4jEngine.CYPHER, Neo4jGraphFormat.GRAPHML }, //
-				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.GRAPHML } });
+//				{ Neo4jEngine.COREAPI, Neo4jGraphFormat.GRAPHML }, //
+// 				}
+		});
 	}
 
 	@Parameter(value = 0)

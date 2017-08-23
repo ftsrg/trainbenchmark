@@ -3,7 +3,7 @@ package hu.bme.mit.trainbenchmark.neo4j.config;
 public enum Neo4jGraphFormat {
 	CSV("CSV"), //
 	GRAPHML("GraphML"), //
-	BINARY("Binary");
+	;
 
 	private String name;
 

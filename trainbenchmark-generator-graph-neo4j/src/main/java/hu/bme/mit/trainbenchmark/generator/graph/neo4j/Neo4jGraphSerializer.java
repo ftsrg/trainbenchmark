@@ -11,41 +11,30 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.generator.graph.neo4j;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.io.StringWriter;
-import java.rmi.RemoteException;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.xml.stream.XMLStreamException;
-
+import apoc.export.csv.ExportCSV;
+import apoc.export.graphml.ExportGraphML;
+import apoc.graph.Graphs;
+import com.google.common.collect.ImmutableMap;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfig;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import hu.bme.mit.trainbenchmark.neo4j.apoc.ApocHelper;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
 import org.apache.commons.io.FileUtils;
-import org.neo4j.cypher.export.DatabaseSubGraph;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.kernel.internal.GraphDatabaseAPI;
-import org.neo4j.shell.InterruptSignalHandler;
-import org.neo4j.shell.ShellException;
-import org.neo4j.shell.SilentLocalOutput;
-import org.neo4j.shell.impl.SameJvmClient;
-import org.neo4j.shell.kernel.GraphDatabaseShellServer;
-import org.neo4j.shell.tools.imp.format.graphml.XmlGraphMLWriter;
-import org.neo4j.shell.tools.imp.util.Config;
-import org.neo4j.shell.tools.imp.util.ProgressReporter;
+import org.neo4j.kernel.api.exceptions.KernelException;
 
-import com.google.common.collect.ImmutableMap;
-
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGeneratorConfig;
-import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import javax.xml.stream.XMLStreamException;
+import java.io.File;
+import java.io.IOException;
+import java.rmi.RemoteException;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorConfig> {
 
@@ -67,13 +56,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	@Override
 	public void initModel() throws IOException {
 		cleanupDatabaseDirectory();
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(databaseDirectory);
-
-		try (Transaction tx = graphDb.beginTx()) {
-			// bump the initial id from 0 to 1
-			graphDb.createNode().delete();
-			tx.success();
-		}
+		graphDb = Neo4jHelper.startGraphDatabase(databaseDirectory);
 	}
 
 	@Override
@@ -87,6 +70,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 			node.addLabel(Label.label(ancestor));
 		}
 
+		node.setProperty(Neo4jConstants.ID, id);
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String key = attribute.getKey();
 			Object value = attribute.getValue();
@@ -149,12 +133,9 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	}
 
 	@Override
-	public void persistModel() throws IOException, XMLStreamException, ShellException {
+	public void persistModel() throws IOException, XMLStreamException, KernelException {
 		try {
 			switch (gc.getGraphFormat()) {
-			case BINARY:
-				saveToBinary();
-				break;
 			case CSV:
 				saveToCsv();
 				break;
@@ -172,27 +153,26 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		}
 	}
 
-	private void saveToCsv() throws ShellException, RemoteException {
-		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(),
-				new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb), InterruptSignalHandler.getHandler());
+	private void saveToCsv() throws RemoteException, KernelException {
+		ApocHelper.registerProcedure(graphDb, ExportCSV.class, Graphs.class);
 
 		final Map<String, String> exportCommands = ImmutableMap.<String, String>builder()
 				// nodes
-				.put(ModelConstants.REGION, "MATCH (n:Region) RETURN ID(n) AS `:ID`") //
-				.put(ModelConstants.ROUTE, "MATCH (n:Route) RETURN ID(n) AS `:ID`, n.active AS `active:BOOLEAN`") //
-				.put(ModelConstants.SEGMENT, "MATCH (n:Segment) RETURN ID(n) AS `:ID`, n.length AS `length:INT`") //
-				.put(ModelConstants.SEMAPHORE, "MATCH (n:Semaphore) RETURN ID(n) AS `:ID`, n.signal AS signal") //
-				.put(ModelConstants.SENSOR, "MATCH (n:Sensor) RETURN ID(n) AS `:ID`") //
-				.put(ModelConstants.SWITCH, "MATCH (n:Switch) RETURN ID(n) AS `:ID`, n.currentPosition AS currentPosition") //
-				.put(ModelConstants.SWITCHPOSITION, "MATCH (n:SwitchPosition) RETURN ID(n) AS `:ID`, n.position AS position") //
+				.put(ModelConstants.REGION,         "MATCH (n:Region)              RETURN n.id AS `id:ID`") //
+				.put(ModelConstants.ROUTE,          "MATCH (n:Route)               RETURN n.id AS `id:ID`, n.active AS `active:BOOLEAN`") //
+				.put(ModelConstants.SEGMENT,        "MATCH (n:Segment)             RETURN n.id AS `id:ID`, n.length AS `length:INT`") //
+				.put(ModelConstants.SEMAPHORE,      "MATCH (n:Semaphore)           RETURN n.id AS `id:ID`, n.signal AS signal") //
+				.put(ModelConstants.SENSOR,         "MATCH (n:Sensor)              RETURN n.id AS `id:ID`") //
+				.put(ModelConstants.SWITCH,         "MATCH (n:Switch)              RETURN n.id AS `id:ID`, n.currentPosition AS currentPosition") //
+				.put(ModelConstants.SWITCHPOSITION, "MATCH (n:SwitchPosition)      RETURN n.id AS `id:ID`, n.position AS position") //
 				// relationships
-				.put(ModelConstants.CONNECTS_TO, "MATCH (n)-[:connectsTo]->(m) RETURN ID(n) AS `:START_ID`, ID(m) AS `:END_ID`") //
-				.put(ModelConstants.ENTRY, "MATCH (n)-[:entry]->(m) RETURN ID(n) AS `:START_ID`, ID(m) AS `:END_ID`") //
-				.put(ModelConstants.EXIT, "MATCH (n)-[:exit]->(m) RETURN ID(n) AS `:START_ID`, ID(m) AS `:END_ID`") //
-				.put(ModelConstants.FOLLOWS, "MATCH (n)-[:follows]->(m) RETURN ID(n) AS `:START_ID`, ID(m) AS `:END_ID`") //
-				.put(ModelConstants.MONITORED_BY, "MATCH (n)-[:monitoredBy]->(m) RETURN ID(n) AS `:START_ID`, ID(m) AS `:END_ID`") //
-				.put(ModelConstants.REQUIRES, "MATCH (n)-[:requires]->(m) RETURN ID(n) AS `:START_ID`, ID(m) AS `:END_ID`") //
-				.put(ModelConstants.TARGET, "MATCH (n)-[:target]->(m) RETURN ID(n) AS `:START_ID`, ID(m) AS `:END_ID`") //
+				.put(ModelConstants.CONNECTS_TO,    "MATCH (n)-[:connectsTo]->(m)  RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
+				.put(ModelConstants.ENTRY,          "MATCH (n)-[:entry]->(m)       RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
+				.put(ModelConstants.EXIT,           "MATCH (n)-[:exit]->(m)        RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
+				.put(ModelConstants.FOLLOWS,        "MATCH (n)-[:follows]->(m)     RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
+				.put(ModelConstants.MONITORED_BY,   "MATCH (n)-[:monitoredBy]->(m) RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
+				.put(ModelConstants.REQUIRES,       "MATCH (n)-[:requires]->(m)    RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
+				.put(ModelConstants.TARGET,         "MATCH (n)-[:target]->(m)      RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
 				.build();
 
 		for (Entry<String, String> entry : exportCommands.entrySet()) {
@@ -201,45 +181,28 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 
 			final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "-" + type + "."
 					+ Neo4jConstants.CSV_EXTENSION;
-			final String absoluteFilePath = new File(fileName).getAbsolutePath();
-			final String importCommand = String.format("import-cypher -o %s %s", absoluteFilePath, query);
-			client.evaluate(importCommand, new SilentLocalOutput());
+
+			try (final Transaction tx = graphDb.beginTx()) {
+				graphDb.execute(String.format( //
+					"CALL apoc.export.csv.query('%s', '%s', null)", //
+					query,
+					fileName //
+				));
+			}
 		}
 	}
 
-	private void saveToBinary() throws RemoteException, ShellException {
+	private void saveToGraphMl() throws KernelException {
+		ApocHelper.registerProcedure(graphDb, ExportGraphML.class, Graphs.class);
+
 		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "."
-				+ Neo4jConstants.BINARY_EXTENSION;
+			+ Neo4jConstants.GRAPHML_EXTENSION;
 
-		final SameJvmClient client = new SameJvmClient(Collections.<String, Serializable>emptyMap(), new GraphDatabaseShellServer((GraphDatabaseAPI) graphDb),
-				InterruptSignalHandler.getHandler());
-
-        final String exportCommand = String.format("export-binary -o %s", fileName);
-        client.evaluate(exportCommand, new SilentLocalOutput());
-	}
-
-	private void saveToGraphMl() throws IOException, XMLStreamException {
 		try (final Transaction tx = graphDb.beginTx()) {
-			final ProgressReporter reporter = new ProgressReporter(null, null);
-
-			final StringWriter writer = new StringWriter();
-			final XmlGraphMLWriter xmlGraphMLWriter = new XmlGraphMLWriter();
-			final Config config = Config.config();
-			xmlGraphMLWriter.write(new DatabaseSubGraph(graphDb), writer, reporter, config.withTypes());
-			tx.success();
-
-			final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "."
-					+ Neo4jConstants.GRAPHML_EXTENSION;
-
-			final String graphmlContent = writer.toString();
-			// this is required to be compatibile with OrientDB
-			// graphmlContent = graphmlContent.replaceAll("<graph id=\"G\"
-			// edgedefault=\"directed\">",
-			// "<graph id=\"G\" edgedefault=\"directed\">\n<key id=\"labels\"
-			// for=\"node\" attr.name=\"labels\"
-			// attr.type=\"string\"/>");
-
-			FileUtils.writeStringToFile(new File(fileName), graphmlContent.trim());
+			graphDb.execute(String.format( //
+				"CALL apoc.export.graphml.all('%s', {useTypes: true})", //
+				fileName //
+			));
 		}
 	}
 

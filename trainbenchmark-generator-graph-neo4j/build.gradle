@@ -7,6 +7,7 @@ shadowJar {
 }
 
 dependencies {
+    compile group: 'commons-io', name: 'commons-io', version: commonsIoVersion
     compile project(':trainbenchmark-generator')
     compile project(':trainbenchmark-format-graph-neo4j')
 }

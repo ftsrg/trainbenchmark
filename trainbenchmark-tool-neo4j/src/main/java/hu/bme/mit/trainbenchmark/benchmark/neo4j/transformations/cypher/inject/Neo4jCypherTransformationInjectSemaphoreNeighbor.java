@@ -11,17 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.cypher.inject;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 public class Neo4jCypherTransformationInjectSemaphoreNeighbor
 		extends Neo4jCypherTransformation<Neo4jSemaphoreNeighborInjectMatch> {
@@ -35,8 +35,8 @@ public class Neo4jCypherTransformationInjectSemaphoreNeighbor
 	public void activate(final Collection<Neo4jSemaphoreNeighborInjectMatch> matches) throws IOException {
 		for (final Neo4jSemaphoreNeighborInjectMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_ROUTE, match.getRoute().getId(), //
-					QueryConstants.VAR_SEMAPHORE, match.getSemaphore().getId() //
+					QueryConstants.VAR_ROUTE, match.getRoute().getProperty(Neo4jConstants.ID), //
+					QueryConstants.VAR_SEMAPHORE, match.getSemaphore().getProperty(Neo4jConstants.ID) //
 			);
 
 			driver.runTransformation(transformationDefinition, parameters);

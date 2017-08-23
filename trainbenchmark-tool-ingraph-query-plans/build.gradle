@@ -16,7 +16,6 @@ ext {
 }
 
 dependencies {
-	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 	compile group: 'ingraph', name: 'ingraph-optimization-transformations', version: ingraphVersion
 	compile group: 'ingraph', name: 'ingraph-cypher2relalg', version: ingraphVersion
 	compile group: 'ingraph', name: 'ingraph-relalg2tex', version: ingraphVersion
