@@ -14,8 +14,6 @@ package hu.bme.mit.trainbenchmark.generator.cypher;
 
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.cypher.config.CypherGeneratorConfig;
-import org.neo4j.cypher.internal.frontend.v2_3.ast.functions.Str;
-import org.neo4j.shell.impl.SystemOutput;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,19 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ID;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORES;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSORS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TRACKELEMENT;
 
 public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 
