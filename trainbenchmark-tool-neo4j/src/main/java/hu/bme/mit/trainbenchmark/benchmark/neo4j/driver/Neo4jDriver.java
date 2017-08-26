@@ -33,9 +33,7 @@ import org.neo4j.graphdb.schema.Schema;
 import org.neo4j.kernel.api.exceptions.KernelException;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -94,6 +92,9 @@ public class Neo4jDriver extends Driver {
 		case GRAPHML:
 			readGraphMl(modelPath);
 			break;
+		case CYPHER:
+			readCypher(modelPath);
+			break;
 		default:
 			throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
 		}
@@ -150,6 +151,19 @@ public class Neo4jDriver extends Driver {
 		startDb();
 	}
 
+	private void readCypher(String modelPath) throws IOException {
+		startDb();
+		final File cypherFile = new File(modelPath);
+		try(final Transaction tx = graphDb.beginTx()) {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(cypherFile));
+			String line = null;
+			while ((line = bufferedReader.readLine()) != null){
+				graphDb.execute(line);
+			}
+			tx.success();
+		}
+	}
+
 	private void readGraphMl(String modelPath) throws FileNotFoundException, XMLStreamException, KernelException {
 		startDb();
 
@@ -170,6 +184,8 @@ public class Neo4jDriver extends Driver {
 			return ""; // hack as we have multiple CSVs
 		case GRAPHML:
 			return ".graphml";
+		case CYPHER:
+			return ".cypher";
 		default:
 			throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
 		}
