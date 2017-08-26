@@ -1,9 +1,8 @@
-package hu.bme.mit.trainbenchmark.generator.sql;
+package hu.bme.mit.trainbenchmark.generator.cypher;
 
 import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
 import hu.bme.mit.trainbenchmark.generator.ScalableGeneratorFactory;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
-import hu.bme.mit.trainbenchmark.generator.cypher.CypherSerializer;
 import hu.bme.mit.trainbenchmark.generator.cypher.config.CypherGeneratorConfig;
 import hu.bme.mit.trainbenchmark.generator.cypher.config.CypherGeneratorConfigBuilder;
 import hu.bme.mit.trainbenchmark.generator.tests.GeneratorTest;
