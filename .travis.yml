@@ -1,7 +1,13 @@
 language: java
 jdk:
   - oraclejdk8
-install: true
+#install: true
+install:
+  - git clone https://github.com/szarnyasg/neo4j-apoc-procedures
+  - cd neo4j-apoc-procedures
+  - git checkout 3.2-load-csv
+  - ./gradlew build -x test publishT
+  - cd ..
 script:
   - ./gradlew inits build --exclude-task test
 notifications:
