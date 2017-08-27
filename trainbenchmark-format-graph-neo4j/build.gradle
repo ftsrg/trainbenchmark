@@ -1,5 +1,5 @@
 ext {
-	apocVersion = '3.2.0.4'
+	apocVersion = '3.2.0.4-CSV'
 	neo4jVersion = '3.2.3'
 }
 

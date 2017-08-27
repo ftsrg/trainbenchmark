@@ -11,16 +11,19 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 
+import apoc.export.csv.ImportCSV;
 import apoc.export.graphml.ExportGraphML;
 import apoc.graph.Graphs;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators.NodeComparator;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
-import hu.bme.mit.trainbenchmark.neo4j.apoc.ApocHelper;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
+import hu.bme.mit.trainbenchmark.neo4j.apoc.ApocHelper;
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -33,10 +36,15 @@ import org.neo4j.graphdb.schema.Schema;
 import org.neo4j.kernel.api.exceptions.KernelException;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -47,9 +55,11 @@ public class Neo4jDriver extends Driver {
 	protected final Comparator<Node> nodeComparator = new NodeComparator();
 	protected final File databaseDirectory;
 	protected final Neo4jGraphFormat graphFormat;
+	protected final String modelDir;
 
 	public Neo4jDriver(final String modelDir, final Neo4jGraphFormat graphFormat) throws IOException {
 		super();
+		this.modelDir = modelDir;
 		this.graphFormat = graphFormat;
 		this.databaseDirectory = new File(modelDir + "/neo4j-dbs/railway-database");
 	}
@@ -87,7 +97,8 @@ public class Neo4jDriver extends Driver {
 		throws XMLStreamException, IOException, KernelException {
 		switch (graphFormat) {
 		case CSV:
-			readCsv(modelPath);
+			//readCsv(modelPath);
+			readCsvApoc(modelPath);
 			break;
 		case GRAPHML:
 			readGraphMl(modelPath);
@@ -101,7 +112,7 @@ public class Neo4jDriver extends Driver {
 	}
 
 	private void startDb() {
-		graphDb = Neo4jHelper.startGraphDatabase(databaseDirectory);
+		graphDb = Neo4jHelper.startGraphDatabase(databaseDirectory, modelDir);
 
 		try (final Transaction tx = graphDb.beginTx()) {
 			final Schema schema = graphDb.schema();
@@ -114,9 +125,70 @@ public class Neo4jDriver extends Driver {
 		}
 	}
 
+	private void readCsvApoc(String modelPath) throws KernelException {
+		startDb();
+		ApocHelper.registerProcedure(graphDb, ImportCSV.class, Graphs.class);
+
+		ImmutableMap.Builder<String, List<String>> nodeBuilder = new ImmutableMap.Builder<>();
+		nodeBuilder.put("%s-Region.csv", ImmutableList.of("Region"));
+		nodeBuilder.put("%s-Route.csv", ImmutableList.of("Route"));
+		nodeBuilder.put("%s-Segment.csv", ImmutableList.of("Segment", "TrackElement"));
+		nodeBuilder.put("%s-Semaphore.csv", ImmutableList.of("Semaphore"));
+		nodeBuilder.put("%s-Sensor.csv", ImmutableList.of("Sensor"));
+		nodeBuilder.put("%s-Switch.csv", ImmutableList.of("Switch", "TrackElement"));
+		nodeBuilder.put("%s-SwitchPosition.csv", ImmutableList.of("SwitchPosition"));
+		Map<String, List<String>> nodes = nodeBuilder.build();
+
+		ImmutableMap.Builder<String, String> relBuilder = new ImmutableMap.Builder<>();
+		relBuilder.put("%s-connectsTo.csv", "connectsTo");
+		relBuilder.put("%s-entry.csv", "entry");
+		relBuilder.put("%s-exit.csv", "exit");
+		relBuilder.put("%s-follows.csv", "follows");
+		relBuilder.put("%s-monitoredBy.csv", "monitoredBy");
+		relBuilder.put("%s-requires.csv", "requires");
+		relBuilder.put("%s-target.csv", "target");
+		Map<String, String> rels = relBuilder.build();
+
+		for (Map.Entry<String, List<String>> node : nodes.entrySet()) {
+			String filename = node.getKey();
+			List<String> labels = node.getValue();
+
+			String uri = String.format(filename, modelPath);
+			Map<String, Object> params = ImmutableMap.of(
+				"filename", uri,
+				"labels", labels,
+				"config", ImmutableMap.of()
+			);
+
+			System.out.println(uri);
+			System.out.println(labels);
+
+			graphDb.execute("CALL apoc.import.csv.node({filename}, {labels}, {config})", params);
+		}
+
+
+		for (Map.Entry<String, String> rel : rels.entrySet()) {
+			String filename = rel.getKey();
+			String type = rel.getValue();
+
+			String uri = String.format(filename, modelPath);
+			Map<String, Object> params = ImmutableMap.of(
+				"filename", uri,
+				"type", type,
+				"config", ImmutableMap.of()
+			);
+
+			System.out.println(uri);
+			System.out.println(type);
+
+			graphDb.execute("CALL apoc.import.csv.relationship({filename}, {type}, {config})", params);
+		}
+
+	}
+
 	private void readCsv(String modelPath) throws IOException {
 		final String neo4jHome =   "../neo4j-server";
-		final String dbPath =      "../models/neo4j-dbs/railway-database";
+		final String dbPath = "../models/neo4j-dbs/railway-database";
 		final File databaseDirectory = new File(dbPath);
 
 		if (databaseDirectory.exists()) {

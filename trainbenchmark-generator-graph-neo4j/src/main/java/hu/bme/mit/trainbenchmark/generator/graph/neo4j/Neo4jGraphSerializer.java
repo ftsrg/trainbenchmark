@@ -56,7 +56,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	@Override
 	public void initModel() throws IOException {
 		cleanupDatabaseDirectory();
-		graphDb = Neo4jHelper.startGraphDatabase(databaseDirectory);
+		graphDb = Neo4jHelper.startGraphDatabase(databaseDirectory, "../models");
 	}
 
 	@Override
@@ -161,10 +161,10 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 				.put(ModelConstants.REGION,         "MATCH (n:Region)              RETURN n.id AS `id:ID`") //
 				.put(ModelConstants.ROUTE,          "MATCH (n:Route)               RETURN n.id AS `id:ID`, n.active AS `active:BOOLEAN`") //
 				.put(ModelConstants.SEGMENT,        "MATCH (n:Segment)             RETURN n.id AS `id:ID`, n.length AS `length:INT`") //
-				.put(ModelConstants.SEMAPHORE,      "MATCH (n:Semaphore)           RETURN n.id AS `id:ID`, n.signal AS signal") //
+				.put(ModelConstants.SEMAPHORE,      "MATCH (n:Semaphore)           RETURN n.id AS `id:ID`, n.signal AS `signal:STRING`") //
 				.put(ModelConstants.SENSOR,         "MATCH (n:Sensor)              RETURN n.id AS `id:ID`") //
-				.put(ModelConstants.SWITCH,         "MATCH (n:Switch)              RETURN n.id AS `id:ID`, n.currentPosition AS currentPosition") //
-				.put(ModelConstants.SWITCHPOSITION, "MATCH (n:SwitchPosition)      RETURN n.id AS `id:ID`, n.position AS position") //
+				.put(ModelConstants.SWITCH,         "MATCH (n:Switch)              RETURN n.id AS `id:ID`, n.currentPosition AS `currentPosition:STRING`") //
+				.put(ModelConstants.SWITCHPOSITION, "MATCH (n:SwitchPosition)      RETURN n.id AS `id:ID`, n.position AS `position:STRING`") //
 				// relationships
 				.put(ModelConstants.CONNECTS_TO,    "MATCH (n)-[:connectsTo]->(m)  RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
 				.put(ModelConstants.ENTRY,          "MATCH (n)-[:entry]->(m)       RETURN n.id AS `id:START_ID`, m.id AS `id:END_ID`") //
