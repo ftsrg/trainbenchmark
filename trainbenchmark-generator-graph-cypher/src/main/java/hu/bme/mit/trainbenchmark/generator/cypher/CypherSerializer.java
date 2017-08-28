@@ -47,7 +47,7 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 		final String cypherPath = gc.getConfigBase().getModelPathWithoutExtension() + ".cypher";
 		final File cypherFile = new File(cypherPath);
 
-		writer = new BufferedWriter(new FileWriter(cypherFile, true));
+		writer = new BufferedWriter(new FileWriter(cypherFile));
 	}
 
 	@Override
@@ -84,7 +84,8 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 				final String key = entry.getKey();
 				final Object value = entry.getValue();
 
-				query.append(key + ":\"" + value + "\"");
+
+				query.append(key + ":" + valueToString(value));
 
 				if (iterator.hasNext()){
 					query.append(",");
@@ -123,24 +124,17 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
 
-		write("MATCH ( {id: " + node + "} ) SET node." + type + "=" + stringValue + ";");
+		write("MATCH ( node:" + type +" {id: " + node + "} ) SET node." + key + "=" + stringValue + ";");
 	}
 
 	private String valueToString(final Object value) {
-		String stringValue;
-		if (value instanceof Boolean) {
-			stringValue = (Boolean) value ? "1" : "0";
-		} else if (value instanceof String) {
-			// escape string
-			stringValue = "\"" + value + "\"";
-		} else if (value instanceof Enum) {
-			// change enum to ordinal value
-			final Enum<?> enumeration = (Enum<?>) value;
-			stringValue = Integer.toString(enumeration.ordinal());
-		} else {
-			stringValue = value.toString();
+		try {
+			Integer.parseInt(value.toString());
+			return value.toString();
+		} catch (NumberFormatException e){
+			if (value.toString().equals("true") || value.toString().equals("false")) return value.toString();
+			else return "\"" + value +"\"";
 		}
-		return stringValue;
 	}
 
 }
