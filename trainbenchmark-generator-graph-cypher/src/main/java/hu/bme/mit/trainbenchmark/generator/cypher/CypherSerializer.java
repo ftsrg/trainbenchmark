@@ -46,13 +46,11 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 	public void initModel() throws IOException {
 		final String cypherPath = gc.getConfigBase().getModelPathWithoutExtension() + ".cypher";
 		final File cypherFile = new File(cypherPath);
-
 		writer = new BufferedWriter(new FileWriter(cypherFile));
 	}
 
 	@Override
 	public void persistModel() throws IOException, InterruptedException {
-
 		writer.close();
 	}
 
@@ -65,14 +63,14 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 		//If we have supertypes, we add them first
 		if (SUPERTYPES.containsKey(type)){
 			final String ancestorType = SUPERTYPES.get(type);
-			query .append(": " + ancestorType);
+			query.append(":" + ancestorType);
 		}
 
 		//Then we add the type
-		query.append(": " + type);
+		query.append(":" + type);
 
 		//Setting the attributes
-		query.append("{ id: " + id);
+		query.append(" {id: " + id);
 		if (!attributes.isEmpty()){
 			query.append(", ");
 			query.append(
@@ -85,12 +83,12 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 
 		write(query.toString());
 
-		//Addig relationships
-		for(Entry<String, Object> entry : outgoingEdges.entrySet()){
-			write("MATCH (from {id: " + id + "}), (to{id:" + entry.getValue() + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
+		//Adding relationships
+		for(Entry<String, Object> entry : outgoingEdges.entrySet()) {
+			write("MATCH (from {id: " + id + "}), (to {id: " + entry.getValue() + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
 		}
 
-		for (Entry<String, Object> entry : incomingEdges.entrySet()){
+		for (Entry<String, Object> entry : incomingEdges.entrySet()) {
 			write("MATCH (from {id: " + entry.getValue() + "}), (to {id: " + id + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
 		}
 
@@ -103,23 +101,23 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 			return;
 		}
 
-		write("MATCH (from { id: " + from + " }), (to { id: " + to + " } ) CREATE (from)-[:" + label + "]->(to);");
+		write("MATCH (from {id: " + from + "}), (to {id: " + to + "}) CREATE (from)-[:" + label + "]->(to);");
 	}
 
 	@Override
 	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
 
-		write("MATCH (node:" + type + " { id: " + node + " } ) SET node." + key + "=" + stringValue + ";");
+		write("MATCH (node:" + type + " {id: " + node + "}) SET node." + key + "=" + stringValue + ";");
 	}
 
 	private String valueToString(final Object value) {
+		if (value.toString().equals("true") || value.toString().equals("false")) return value.toString();
 		try {
 			Integer.parseInt(value.toString());
 			return value.toString();
 		} catch (NumberFormatException e){
-			if (value.toString().equals("true") || value.toString().equals("false")) return value.toString();
-			else return "\"" + value +"\"";
+			return "'" + value + "'";
 		}
 	}
 
