@@ -12,14 +12,27 @@
 
 package hu.bme.mit.trainbenchmark.generator.cypher.config;
 
+import com.google.common.base.Preconditions;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBuilder;
 
 public class CypherGeneratorConfigBuilder extends GeneratorConfigBuilder<CypherGeneratorConfig, CypherGeneratorConfigBuilder> {
 
+	protected CypherFormat cypherFormat;
+
+	public CypherGeneratorConfigBuilder setGraphFormat(CypherFormat cypherFormat) {
+		this.cypherFormat = cypherFormat;
+		return this;
+	}
+
 	@Override
 	public CypherGeneratorConfig createConfig() {
-		checkNotNulls();
-		return new CypherGeneratorConfig(configBase);
+		return new CypherGeneratorConfig(configBase, cypherFormat);
+	}
+
+	@Override
+	public void checkNotNulls() {
+		super.checkNotNulls();
+		Preconditions.checkNotNull(cypherFormat);
 	}
 
 }

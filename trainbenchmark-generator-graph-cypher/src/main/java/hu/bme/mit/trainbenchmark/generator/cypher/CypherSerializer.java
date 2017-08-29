@@ -65,14 +65,14 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 		//If we have supertypes, we add them first
 		if (SUPERTYPES.containsKey(type)){
 			final String ancestorType = SUPERTYPES.get(type);
-			query .append(":" + ancestorType);
+			query .append(": " + ancestorType);
 		}
 
 		//Then we add the type
-		query.append(":" + type);
+		query.append(": " + type);
 
 		//Setting the attributes
-		query.append("{id:" + id);
+		query.append("{ id: " + id);
 		if (!attributes.isEmpty()){
 			query.append(",");
 
@@ -85,7 +85,7 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 				final Object value = entry.getValue();
 
 
-				query.append(key + ":" + valueToString(value));
+				query.append(key + ": " + valueToString(value));
 
 				if (iterator.hasNext()){
 					query.append(",");
@@ -101,11 +101,11 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 
 		//Addig relationships
 		for(Entry<String, Object> entry : outgoingEdges.entrySet()){
-			write("MATCH (from{id:" + id + "}), (to{id:" + entry.getValue() + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
+			write("MATCH (from {id: " + id + "}), (to{id:" + entry.getValue() + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
 		}
 
 		for (Entry<String, Object> entry : incomingEdges.entrySet()){
-			write("MATCH (from{id:" + entry.getValue() + "}), (to{id:" + id + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
+			write("MATCH (from {id: " + entry.getValue() + "}), (to {id: " + id + "}) CREATE (from)-[:" + entry.getKey() + "]->(to);");
 		}
 
 		return id;
@@ -117,14 +117,14 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 			return;
 		}
 
-		write("MATCH (from { id: " + from + " }), (to { id: " + to + "} ) CREATE (from)-[:" + label + "]->(to);");
+		write("MATCH (from { id: " + from + " }), (to { id: " + to + " } ) CREATE (from)-[:" + label + "]->(to);");
 	}
 
 	@Override
 	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
 		final String stringValue = valueToString(value);
 
-		write("MATCH ( node:" + type +" {id: " + node + "} ) SET node." + key + "=" + stringValue + ";");
+		write("MATCH (node:" + type + " { id: " + node + " } ) SET node." + key + "=" + stringValue + ";");
 	}
 
 	private String valueToString(final Object value) {

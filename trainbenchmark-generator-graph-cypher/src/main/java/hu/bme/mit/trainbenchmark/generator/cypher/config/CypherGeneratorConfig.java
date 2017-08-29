@@ -17,13 +17,20 @@ import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfigBase;
 
 public class CypherGeneratorConfig extends GeneratorConfig {
 
-	protected CypherGeneratorConfig(final GeneratorConfigBase configBase) {
+	protected CypherFormat cypherFormat;
+
+	protected CypherGeneratorConfig(final GeneratorConfigBase configBase, final CypherFormat cypherFormat) {
 		super(configBase);
+		this.cypherFormat = cypherFormat;
+	}
+
+	public CypherFormat getCypherFormat() {
+		return cypherFormat;
 	}
 
 	@Override
 	public String getProjectName() {
-		return "cypher";
+		return "graph-cypher";
 	}
 
 }

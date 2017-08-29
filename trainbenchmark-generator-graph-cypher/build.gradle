@@ -11,5 +11,5 @@ shadowJar {
 
 dependencies {
   compile project(':trainbenchmark-generator')
-  compile project(':trainbenchmark-format-graph-neo4j')
+  //compile project(':trainbenchmark-format-graph-neo4j')
 }
