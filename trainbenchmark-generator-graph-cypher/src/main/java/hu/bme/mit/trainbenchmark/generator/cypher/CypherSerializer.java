@@ -19,9 +19,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SUPERTYPES;
 
@@ -74,28 +74,14 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 		//Setting the attributes
 		query.append("{ id: " + id);
 		if (!attributes.isEmpty()){
-			query.append(",");
-
-			//Using an iterator in a while loop because hasNext method is needed
-			Iterator<? extends Entry<String, ?>> iterator = attributes.entrySet().iterator();
-			while (iterator.hasNext()){
-				final Entry<String, ? extends Object> entry = iterator.next();
-
-				final String key = entry.getKey();
-				final Object value = entry.getValue();
-
-
-				query.append(key + ": " + valueToString(value));
-
-				if (iterator.hasNext()){
-					query.append(",");
-				}
-			}
-
-			query.append("});");
-		} else {
-			query.append("});");
+			query.append(", ");
+			query.append(
+				attributes.entrySet().stream().map(
+					e -> (e.getKey() + ": " + valueToString(e.getValue()))
+				).collect(Collectors.joining(", "))
+			);
 		}
+		query.append("});");
 
 		write(query.toString());
 
