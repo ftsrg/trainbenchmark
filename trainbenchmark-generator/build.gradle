@@ -1,6 +1,5 @@
 dependencies {
 	compile project(':trainbenchmark-config')
 	compile group: 'org.apache.commons', name: 'commons-exec', version: commonsExecVersion
-	compile group: 'com.esotericsoftware', name: 'kryo', version: kryoVersion
 	compile group: 'junit', name: 'junit', version: junitVersion
 }
