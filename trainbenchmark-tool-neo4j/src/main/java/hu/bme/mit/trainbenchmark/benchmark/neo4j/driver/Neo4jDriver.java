@@ -25,14 +25,7 @@ import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.io.FileUtils;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Result;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.schema.Schema;
-import org.neo4j.kernel.api.exceptions.KernelException;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,6 +36,14 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import javax.xml.stream.XMLStreamException;
+
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Result;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.schema.Schema;
+import org.neo4j.kernel.api.exceptions.KernelException;
 
 public class Neo4jDriver extends Driver {
 
@@ -130,6 +131,9 @@ public class Neo4jDriver extends Driver {
 		  FileUtils.deleteDirectory(databaseDirectory);
 		}
 
+		// TODO neo4j-import is deprecated and should be changes to neo4j-admin import
+		// however, it's not trivial as neo4j-admin-import does not take an `--into` argument
+		// but a `--database`
 		final String rawImportCommand = "%NEO4J_HOME%/bin/neo4j-import --into %DB_PATH% " //
 		    + "--nodes:Region %MODEL_PREFIX%-Region.csv " //
 		    + "--nodes:Route %MODEL_PREFIX%-Route.csv " //

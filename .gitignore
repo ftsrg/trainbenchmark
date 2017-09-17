@@ -52,3 +52,5 @@ replay_*.log
 xtend-gen/
 neo4j-server/
 out/
+*.swp
+*.report
