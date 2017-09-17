@@ -1,3 +1,2 @@
-MATCH (segment)
-WHERE segment.id = $segment
+MATCH (segment {id: $segment})
 SET segment.length = 0

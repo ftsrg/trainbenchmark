@@ -1,3 +1,2 @@
-MATCH (sw)
-WHERE sw.id = $sw
+MATCH (sw {id: $sw})
 SET sw.currentPosition = $currentPosition
