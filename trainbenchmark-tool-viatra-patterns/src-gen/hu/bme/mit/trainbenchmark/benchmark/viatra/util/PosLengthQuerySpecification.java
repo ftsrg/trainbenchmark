@@ -144,7 +144,7 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
               new TypeConstraint(body, new FlatTuple(var_segment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
               PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
               new TypeConstraint(body, new FlatTuple(var_segment, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment", "length")));
-              new TypeConstraint(body, new FlatTuple(var__virtual_0_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EIntegerObject")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_0_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EInt")));
               new Equality(body, var__virtual_0_, var_length);
               // 	check(length <= 0)
               new ExpressionEvaluation(body, new IExpressionEvaluator() {
