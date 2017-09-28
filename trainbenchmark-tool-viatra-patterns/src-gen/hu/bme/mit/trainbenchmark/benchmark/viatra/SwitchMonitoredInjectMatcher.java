@@ -54,7 +54,7 @@ public class SwitchMonitoredInjectMatcher extends BaseMatcher<SwitchMonitoredInj
     // check if matcher already exists
     SwitchMonitoredInjectMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (SwitchMonitoredInjectMatcher)engine.getMatcher(querySpecification());
+        matcher = (SwitchMonitoredInjectMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -163,7 +163,7 @@ public class SwitchMonitoredInjectMatcher extends BaseMatcher<SwitchMonitoredInj
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Switch> rawAccumulateAllValuesOfsw(final Object[] parameters) {
@@ -174,7 +174,7 @@ public class SwitchMonitoredInjectMatcher extends BaseMatcher<SwitchMonitoredInj
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw() {
@@ -184,30 +184,30 @@ public class SwitchMonitoredInjectMatcher extends BaseMatcher<SwitchMonitoredInj
   @Override
   protected SwitchMonitoredInjectMatch tupleToMatch(final Tuple t) {
     try {
-    	return SwitchMonitoredInjectMatch.newMatch((Switch) t.get(POSITION_SW));
+        return SwitchMonitoredInjectMatch.newMatch((Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected SwitchMonitoredInjectMatch arrayToMatch(final Object[] match) {
     try {
-    	return SwitchMonitoredInjectMatch.newMatch((Switch) match[POSITION_SW]);
+        return SwitchMonitoredInjectMatch.newMatch((Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected SwitchMonitoredInjectMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SwitchMonitoredInjectMatch.newMutableMatch((Switch) match[POSITION_SW]);
+        return SwitchMonitoredInjectMatch.newMutableMatch((Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

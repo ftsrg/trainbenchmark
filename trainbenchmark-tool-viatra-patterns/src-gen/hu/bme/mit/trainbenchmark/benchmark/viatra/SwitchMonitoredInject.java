@@ -10,7 +10,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * A pattern group formed of all patterns defined in SwitchMonitoredInject.vql.
+ * A pattern group formed of all public patterns defined in SwitchMonitoredInject.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
  * a VIATRA Query engine for matching all patterns originally defined in file SwitchMonitoredInject.vql,
@@ -34,7 +34,7 @@ public final class SwitchMonitoredInject extends BaseGeneratedPatternGroup {
    */
   public static SwitchMonitoredInject instance() throws ViatraQueryException {
     if (INSTANCE == null) {
-    	INSTANCE = new SwitchMonitoredInject();
+        INSTANCE = new SwitchMonitoredInject();
     }
     return INSTANCE;
   }

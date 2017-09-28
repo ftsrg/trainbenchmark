@@ -54,7 +54,7 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
     // check if matcher already exists
     HasSensorMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (HasSensorMatcher)engine.getMatcher(querySpecification());
+        matcher = (HasSensorMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -163,7 +163,7 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<TrackElement> rawAccumulateAllValuesOfsw(final Object[] parameters) {
@@ -174,7 +174,7 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<TrackElement> getAllValuesOfsw() {
@@ -184,30 +184,30 @@ public class HasSensorMatcher extends BaseMatcher<HasSensorMatch> {
   @Override
   protected HasSensorMatch tupleToMatch(final Tuple t) {
     try {
-    	return HasSensorMatch.newMatch((TrackElement) t.get(POSITION_SW));
+        return HasSensorMatch.newMatch((TrackElement) t.get(POSITION_SW));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected HasSensorMatch arrayToMatch(final Object[] match) {
     try {
-    	return HasSensorMatch.newMatch((TrackElement) match[POSITION_SW]);
+        return HasSensorMatch.newMatch((TrackElement) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected HasSensorMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return HasSensorMatch.newMutableMatch((TrackElement) match[POSITION_SW]);
+        return HasSensorMatch.newMutableMatch((TrackElement) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

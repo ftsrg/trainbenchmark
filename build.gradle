@@ -28,7 +28,7 @@ ext {
 	emfVersion = '2.10.0-v20140514-1158'
 	tinkerGraphVersion = '3.2.5'
 	ingraphVersion = '0.1.0'
-	viatraVersion = '1.6.0'
+	viatraVersion = '1.6.1'
 	junitVersion = '4.12'
 	kryoVersion = '4.0.0'
 	slf4jVersion = '1.7.10'

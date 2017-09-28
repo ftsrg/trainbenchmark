@@ -57,7 +57,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
     // check if matcher already exists
     ConnectedSegmentsInjectMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (ConnectedSegmentsInjectMatcher)engine.getMatcher(querySpecification());
+        matcher = (ConnectedSegmentsInjectMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -184,7 +184,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Sensor> rawAccumulateAllValuesOfsensor(final Object[] parameters) {
@@ -195,7 +195,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor() {
@@ -204,7 +204,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final ConnectedSegmentsInjectMatch partialMatch) {
@@ -213,7 +213,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final Segment pSegment1, final Segment pSegment3) {
@@ -226,7 +226,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment1.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Segment> rawAccumulateAllValuesOfsegment1(final Object[] parameters) {
@@ -237,7 +237,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment1.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment1() {
@@ -246,7 +246,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment1.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment1(final ConnectedSegmentsInjectMatch partialMatch) {
@@ -255,7 +255,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment1.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment1(final Sensor pSensor, final Segment pSegment3) {
@@ -268,7 +268,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment3.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Segment> rawAccumulateAllValuesOfsegment3(final Object[] parameters) {
@@ -279,7 +279,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment3.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment3() {
@@ -288,7 +288,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment3.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment3(final ConnectedSegmentsInjectMatch partialMatch) {
@@ -297,7 +297,7 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   
   /**
    * Retrieve the set of values that occur in matches for segment3.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment3(final Sensor pSensor, final Segment pSegment1) {
@@ -311,30 +311,30 @@ public class ConnectedSegmentsInjectMatcher extends BaseMatcher<ConnectedSegment
   @Override
   protected ConnectedSegmentsInjectMatch tupleToMatch(final Tuple t) {
     try {
-    	return ConnectedSegmentsInjectMatch.newMatch((Sensor) t.get(POSITION_SENSOR), (Segment) t.get(POSITION_SEGMENT1), (Segment) t.get(POSITION_SEGMENT3));
+        return ConnectedSegmentsInjectMatch.newMatch((Sensor) t.get(POSITION_SENSOR), (Segment) t.get(POSITION_SEGMENT1), (Segment) t.get(POSITION_SEGMENT3));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected ConnectedSegmentsInjectMatch arrayToMatch(final Object[] match) {
     try {
-    	return ConnectedSegmentsInjectMatch.newMatch((Sensor) match[POSITION_SENSOR], (Segment) match[POSITION_SEGMENT1], (Segment) match[POSITION_SEGMENT3]);
+        return ConnectedSegmentsInjectMatch.newMatch((Sensor) match[POSITION_SENSOR], (Segment) match[POSITION_SEGMENT1], (Segment) match[POSITION_SEGMENT3]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected ConnectedSegmentsInjectMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return ConnectedSegmentsInjectMatch.newMutableMatch((Sensor) match[POSITION_SENSOR], (Segment) match[POSITION_SEGMENT1], (Segment) match[POSITION_SEGMENT3]);
+        return ConnectedSegmentsInjectMatch.newMutableMatch((Sensor) match[POSITION_SENSOR], (Segment) match[POSITION_SEGMENT1], (Segment) match[POSITION_SEGMENT3]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

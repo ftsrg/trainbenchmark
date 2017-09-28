@@ -10,10 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecification;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
@@ -51,9 +53,9 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
    */
   public static SwitchSetQuerySpecification instance() throws ViatraQueryException {
     try{
-    	return LazyHolder.INSTANCE;
+        return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
-    	throw processInitializerError(err);
+        throw processInitializerError(err);
     }
   }
   
@@ -79,8 +81,8 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
   
   /**
    * Inner class allowing the singleton instance of {@link SwitchSetQuerySpecification} to be created 
-   * 	<b>not</b> at the class load time of the outer class, 
-   * 	but rather at the first call to {@link SwitchSetQuerySpecification#instance()}.
+   *     <b>not</b> at the class load time of the outer class, 
+   *     but rather at the first call to {@link SwitchSetQuerySpecification#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
@@ -136,67 +138,74 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
       setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      	{
-      		PBody body = new PBody(this);
-      		PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
-      		PVariable var_route = body.getOrCreateVariableByName("route");
-      		PVariable var_swP = body.getOrCreateVariableByName("swP");
-      		PVariable var_sw = body.getOrCreateVariableByName("sw");
-      		PVariable var_swpPosition = body.getOrCreateVariableByName("swpPosition");
-      		PVariable var_swCurrentPosition = body.getOrCreateVariableByName("swCurrentPosition");
-      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_semaphore, parameter_pSemaphore),
-      		   new ExportedParameter(body, var_route, parameter_pRoute),
-      		   new ExportedParameter(body, var_swP, parameter_pSwP),
-      		   new ExportedParameter(body, var_sw, parameter_pSw)
-      		));
-      		// 	Route.active(route, true)
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		new ConstantValue(body, var__virtual_0_, true);
-      		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      		PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "active")));
-      		new Equality(body, var__virtual_1_, var__virtual_0_);
-      		// 	Route.entry(route, semaphore)
-      		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "entry")));
-      		new Equality(body, var__virtual_2_, var_semaphore);
-      		// 	Route.follows(route, swP)
-      		new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      		PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-      		new TypeConstraint(body, new FlatTuple(var_route, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows")));
-      		new Equality(body, var__virtual_3_, var_swP);
-      		// 	SwitchPosition.target(swP, sw)
-      		new TypeConstraint(body, new FlatTuple(var_swP), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
-      		PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
-      		new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "target")));
-      		new Equality(body, var__virtual_4_, var_sw);
-      		// 		Semaphore.signal(semaphore, ::GO)
-      		PVariable var__virtual_5_ = body.getOrCreateVariableByName(".virtual{5}");
-      		new ConstantValue(body, var__virtual_5_, getEnumLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Signal", "GO").getInstance());
-      		new TypeConstraint(body, new FlatTuple(var_semaphore), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore")));
-      		PVariable var__virtual_6_ = body.getOrCreateVariableByName(".virtual{6}");
-      		new TypeConstraint(body, new FlatTuple(var_semaphore, var__virtual_6_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore", "signal")));
-      		new Equality(body, var__virtual_6_, var__virtual_5_);
-      		// 	SwitchPosition.position(swP, swpPosition)
-      		new TypeConstraint(body, new FlatTuple(var_swP), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
-      		PVariable var__virtual_7_ = body.getOrCreateVariableByName(".virtual{7}");
-      		new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_7_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "position")));
-      		new Equality(body, var__virtual_7_, var_swpPosition);
-      		// 	Switch.currentPosition(sw, swCurrentPosition)
-      		new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch")));
-      		PVariable var__virtual_8_ = body.getOrCreateVariableByName(".virtual{8}");
-      		new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_8_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch", "currentPosition")));
-      		new Equality(body, var__virtual_8_, var_swCurrentPosition);
-      		// 	swpPosition != swCurrentPosition
-      		new Inequality(body, var_swpPosition, var_swCurrentPosition);
-      		bodies.add(body);
-      	}
-      	// to silence compiler error
-      	if (false) throw new ViatraQueryException("Never", "happens");
+          {
+              PBody body = new PBody(this);
+              PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
+              PVariable var_route = body.getOrCreateVariableByName("route");
+              PVariable var_swP = body.getOrCreateVariableByName("swP");
+              PVariable var_sw = body.getOrCreateVariableByName("sw");
+              PVariable var_swpPosition = body.getOrCreateVariableByName("swpPosition");
+              PVariable var_swCurrentPosition = body.getOrCreateVariableByName("swCurrentPosition");
+              body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+                 new ExportedParameter(body, var_semaphore, parameter_pSemaphore),
+                 new ExportedParameter(body, var_route, parameter_pRoute),
+                 new ExportedParameter(body, var_swP, parameter_pSwP),
+                 new ExportedParameter(body, var_sw, parameter_pSw)
+              ));
+              // 	Route.active(route, true)
+              PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+              new ConstantValue(body, var__virtual_0_, true);
+              new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+              PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+              new TypeConstraint(body, new FlatTuple(var_route, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "active")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EBoolean")));
+              new Equality(body, var__virtual_1_, var__virtual_0_);
+              // 	Route.entry(route, semaphore)
+              new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+              PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+              new TypeConstraint(body, new FlatTuple(var_route, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "entry")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore")));
+              new Equality(body, var__virtual_2_, var_semaphore);
+              // 	Route.follows(route, swP)
+              new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+              PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
+              new TypeConstraint(body, new FlatTuple(var_route, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "follows")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_3_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
+              new Equality(body, var__virtual_3_, var_swP);
+              // 	SwitchPosition.target(swP, sw)
+              new TypeConstraint(body, new FlatTuple(var_swP), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
+              PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
+              new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "target")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_4_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch")));
+              new Equality(body, var__virtual_4_, var_sw);
+              // 		Semaphore.signal(semaphore, ::GO)
+              PVariable var__virtual_5_ = body.getOrCreateVariableByName(".virtual{5}");
+              new ConstantValue(body, var__virtual_5_, getEnumLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Signal", "GO").getInstance());
+              new TypeConstraint(body, new FlatTuple(var_semaphore), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore")));
+              PVariable var__virtual_6_ = body.getOrCreateVariableByName(".virtual{6}");
+              new TypeConstraint(body, new FlatTuple(var_semaphore, var__virtual_6_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore", "signal")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_6_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Signal")));
+              new Equality(body, var__virtual_6_, var__virtual_5_);
+              // 	SwitchPosition.position(swP, swpPosition)
+              new TypeConstraint(body, new FlatTuple(var_swP), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition")));
+              PVariable var__virtual_7_ = body.getOrCreateVariableByName(".virtual{7}");
+              new TypeConstraint(body, new FlatTuple(var_swP, var__virtual_7_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "SwitchPosition", "position")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_7_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Position")));
+              new Equality(body, var__virtual_7_, var_swpPosition);
+              // 	Switch.currentPosition(sw, swCurrentPosition)
+              new TypeConstraint(body, new FlatTuple(var_sw), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch")));
+              PVariable var__virtual_8_ = body.getOrCreateVariableByName(".virtual{8}");
+              new TypeConstraint(body, new FlatTuple(var_sw, var__virtual_8_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Switch", "currentPosition")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_8_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Position")));
+              new Equality(body, var__virtual_8_, var_swCurrentPosition);
+              // 	swpPosition != swCurrentPosition
+              new Inequality(body, var_swpPosition, var_swCurrentPosition);
+              bodies.add(body);
+          }
+          // to silence compiler error
+          if (false) throw new ViatraQueryException("Never", "happens");
       } catch (ViatraQueryException ex) {
-      	throw processDependencyException(ex);
+          throw processDependencyException(ex);
       }
       return bodies;
     }

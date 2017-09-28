@@ -55,7 +55,7 @@ public class SwitchMonitoredMatcher extends BaseMatcher<SwitchMonitoredMatch> {
     // check if matcher already exists
     SwitchMonitoredMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (SwitchMonitoredMatcher)engine.getMatcher(querySpecification());
+        matcher = (SwitchMonitoredMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -164,7 +164,7 @@ public class SwitchMonitoredMatcher extends BaseMatcher<SwitchMonitoredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Switch> rawAccumulateAllValuesOfsw(final Object[] parameters) {
@@ -175,7 +175,7 @@ public class SwitchMonitoredMatcher extends BaseMatcher<SwitchMonitoredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw() {
@@ -185,30 +185,30 @@ public class SwitchMonitoredMatcher extends BaseMatcher<SwitchMonitoredMatch> {
   @Override
   protected SwitchMonitoredMatch tupleToMatch(final Tuple t) {
     try {
-    	return SwitchMonitoredMatch.newMatch((Switch) t.get(POSITION_SW));
+        return SwitchMonitoredMatch.newMatch((Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected SwitchMonitoredMatch arrayToMatch(final Object[] match) {
     try {
-    	return SwitchMonitoredMatch.newMatch((Switch) match[POSITION_SW]);
+        return SwitchMonitoredMatch.newMatch((Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected SwitchMonitoredMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SwitchMonitoredMatch.newMutableMatch((Switch) match[POSITION_SW]);
+        return SwitchMonitoredMatch.newMutableMatch((Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

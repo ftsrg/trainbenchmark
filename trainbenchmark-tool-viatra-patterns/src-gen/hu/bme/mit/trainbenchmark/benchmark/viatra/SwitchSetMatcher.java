@@ -66,7 +66,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
     // check if matcher already exists
     SwitchSetMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (SwitchSetMatcher)engine.getMatcher(querySpecification());
+        matcher = (SwitchSetMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -202,7 +202,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Semaphore> rawAccumulateAllValuesOfsemaphore(final Object[] parameters) {
@@ -213,7 +213,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Semaphore> getAllValuesOfsemaphore() {
@@ -222,7 +222,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Semaphore> getAllValuesOfsemaphore(final SwitchSetMatch partialMatch) {
@@ -231,7 +231,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Semaphore> getAllValuesOfsemaphore(final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
@@ -245,7 +245,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Route> rawAccumulateAllValuesOfroute(final Object[] parameters) {
@@ -256,7 +256,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute() {
@@ -265,7 +265,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final SwitchSetMatch partialMatch) {
@@ -274,7 +274,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final Semaphore pSemaphore, final SwitchPosition pSwP, final Switch pSw) {
@@ -288,7 +288,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<SwitchPosition> rawAccumulateAllValuesOfswP(final Object[] parameters) {
@@ -299,7 +299,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<SwitchPosition> getAllValuesOfswP() {
@@ -308,7 +308,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<SwitchPosition> getAllValuesOfswP(final SwitchSetMatch partialMatch) {
@@ -317,7 +317,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<SwitchPosition> getAllValuesOfswP(final Semaphore pSemaphore, final Route pRoute, final Switch pSw) {
@@ -331,7 +331,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Switch> rawAccumulateAllValuesOfsw(final Object[] parameters) {
@@ -342,7 +342,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw() {
@@ -351,7 +351,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw(final SwitchSetMatch partialMatch) {
@@ -360,7 +360,7 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw(final Semaphore pSemaphore, final Route pRoute, final SwitchPosition pSwP) {
@@ -375,30 +375,30 @@ public class SwitchSetMatcher extends BaseMatcher<SwitchSetMatch> {
   @Override
   protected SwitchSetMatch tupleToMatch(final Tuple t) {
     try {
-    	return SwitchSetMatch.newMatch((Semaphore) t.get(POSITION_SEMAPHORE), (Route) t.get(POSITION_ROUTE), (SwitchPosition) t.get(POSITION_SWP), (Switch) t.get(POSITION_SW));
+        return SwitchSetMatch.newMatch((Semaphore) t.get(POSITION_SEMAPHORE), (Route) t.get(POSITION_ROUTE), (SwitchPosition) t.get(POSITION_SWP), (Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected SwitchSetMatch arrayToMatch(final Object[] match) {
     try {
-    	return SwitchSetMatch.newMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
+        return SwitchSetMatch.newMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected SwitchSetMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return SwitchSetMatch.newMutableMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
+        return SwitchSetMatch.newMutableMatch((Semaphore) match[POSITION_SEMAPHORE], (Route) match[POSITION_ROUTE], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

@@ -55,7 +55,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
     // check if matcher already exists
     RequiredMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (RequiredMatcher)engine.getMatcher(querySpecification());
+        matcher = (RequiredMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -173,7 +173,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Sensor> rawAccumulateAllValuesOfsensor(final Object[] parameters) {
@@ -184,7 +184,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor() {
@@ -193,7 +193,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final RequiredMatch partialMatch) {
@@ -202,7 +202,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final Route pRoute) {
@@ -214,7 +214,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Route> rawAccumulateAllValuesOfroute(final Object[] parameters) {
@@ -225,7 +225,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute() {
@@ -234,7 +234,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final RequiredMatch partialMatch) {
@@ -243,7 +243,7 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final Sensor pSensor) {
@@ -256,30 +256,30 @@ public class RequiredMatcher extends BaseMatcher<RequiredMatch> {
   @Override
   protected RequiredMatch tupleToMatch(final Tuple t) {
     try {
-    	return RequiredMatch.newMatch((Sensor) t.get(POSITION_SENSOR), (Route) t.get(POSITION_ROUTE));
+        return RequiredMatch.newMatch((Sensor) t.get(POSITION_SENSOR), (Route) t.get(POSITION_ROUTE));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected RequiredMatch arrayToMatch(final Object[] match) {
     try {
-    	return RequiredMatch.newMatch((Sensor) match[POSITION_SENSOR], (Route) match[POSITION_ROUTE]);
+        return RequiredMatch.newMatch((Sensor) match[POSITION_SENSOR], (Route) match[POSITION_ROUTE]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected RequiredMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return RequiredMatch.newMutableMatch((Sensor) match[POSITION_SENSOR], (Route) match[POSITION_ROUTE]);
+        return RequiredMatch.newMutableMatch((Sensor) match[POSITION_SENSOR], (Route) match[POSITION_ROUTE]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

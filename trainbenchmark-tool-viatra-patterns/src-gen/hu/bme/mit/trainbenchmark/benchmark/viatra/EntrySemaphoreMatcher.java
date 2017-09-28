@@ -55,7 +55,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
     // check if matcher already exists
     EntrySemaphoreMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (EntrySemaphoreMatcher)engine.getMatcher(querySpecification());
+        matcher = (EntrySemaphoreMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -173,7 +173,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Route> rawAccumulateAllValuesOfroute(final Object[] parameters) {
@@ -184,7 +184,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute() {
@@ -193,7 +193,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final EntrySemaphoreMatch partialMatch) {
@@ -202,7 +202,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final Semaphore pSemaphore) {
@@ -214,7 +214,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Semaphore> rawAccumulateAllValuesOfsemaphore(final Object[] parameters) {
@@ -225,7 +225,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Semaphore> getAllValuesOfsemaphore() {
@@ -234,7 +234,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Semaphore> getAllValuesOfsemaphore(final EntrySemaphoreMatch partialMatch) {
@@ -243,7 +243,7 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for semaphore.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Semaphore> getAllValuesOfsemaphore(final Route pRoute) {
@@ -256,30 +256,30 @@ public class EntrySemaphoreMatcher extends BaseMatcher<EntrySemaphoreMatch> {
   @Override
   protected EntrySemaphoreMatch tupleToMatch(final Tuple t) {
     try {
-    	return EntrySemaphoreMatch.newMatch((Route) t.get(POSITION_ROUTE), (Semaphore) t.get(POSITION_SEMAPHORE));
+        return EntrySemaphoreMatch.newMatch((Route) t.get(POSITION_ROUTE), (Semaphore) t.get(POSITION_SEMAPHORE));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected EntrySemaphoreMatch arrayToMatch(final Object[] match) {
     try {
-    	return EntrySemaphoreMatch.newMatch((Route) match[POSITION_ROUTE], (Semaphore) match[POSITION_SEMAPHORE]);
+        return EntrySemaphoreMatch.newMatch((Route) match[POSITION_ROUTE], (Semaphore) match[POSITION_SEMAPHORE]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected EntrySemaphoreMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return EntrySemaphoreMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Semaphore) match[POSITION_SEMAPHORE]);
+        return EntrySemaphoreMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Semaphore) match[POSITION_SEMAPHORE]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

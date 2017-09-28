@@ -55,7 +55,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
     // check if matcher already exists
     RouteSensorInjectMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (RouteSensorInjectMatcher)engine.getMatcher(querySpecification());
+        matcher = (RouteSensorInjectMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -173,7 +173,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Route> rawAccumulateAllValuesOfroute(final Object[] parameters) {
@@ -184,7 +184,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute() {
@@ -193,7 +193,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final RouteSensorInjectMatch partialMatch) {
@@ -202,7 +202,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final Sensor pSensor) {
@@ -214,7 +214,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Sensor> rawAccumulateAllValuesOfsensor(final Object[] parameters) {
@@ -225,7 +225,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor() {
@@ -234,7 +234,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final RouteSensorInjectMatch partialMatch) {
@@ -243,7 +243,7 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final Route pRoute) {
@@ -256,30 +256,30 @@ public class RouteSensorInjectMatcher extends BaseMatcher<RouteSensorInjectMatch
   @Override
   protected RouteSensorInjectMatch tupleToMatch(final Tuple t) {
     try {
-    	return RouteSensorInjectMatch.newMatch((Route) t.get(POSITION_ROUTE), (Sensor) t.get(POSITION_SENSOR));
+        return RouteSensorInjectMatch.newMatch((Route) t.get(POSITION_ROUTE), (Sensor) t.get(POSITION_SENSOR));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected RouteSensorInjectMatch arrayToMatch(final Object[] match) {
     try {
-    	return RouteSensorInjectMatch.newMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR]);
+        return RouteSensorInjectMatch.newMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected RouteSensorInjectMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return RouteSensorInjectMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR]);
+        return RouteSensorInjectMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

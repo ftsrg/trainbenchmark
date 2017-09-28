@@ -10,7 +10,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * A pattern group formed of all patterns defined in ConnectedSegmentsInject.vql.
+ * A pattern group formed of all public patterns defined in ConnectedSegmentsInject.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
  * a VIATRA Query engine for matching all patterns originally defined in file ConnectedSegmentsInject.vql,
@@ -34,7 +34,7 @@ public final class ConnectedSegmentsInject extends BaseGeneratedPatternGroup {
    */
   public static ConnectedSegmentsInject instance() throws ViatraQueryException {
     if (INSTANCE == null) {
-    	INSTANCE = new ConnectedSegmentsInject();
+        INSTANCE = new ConnectedSegmentsInject();
     }
     return INSTANCE;
   }

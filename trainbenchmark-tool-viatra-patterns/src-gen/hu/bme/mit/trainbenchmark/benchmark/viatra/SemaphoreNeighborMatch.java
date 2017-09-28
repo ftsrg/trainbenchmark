@@ -99,32 +99,32 @@ public abstract class SemaphoreNeighborMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("semaphore".equals(parameterName) ) {
-    	this.fSemaphore = (Semaphore) newValue;
-    	return true;
+        this.fSemaphore = (Semaphore) newValue;
+        return true;
     }
     if ("route1".equals(parameterName) ) {
-    	this.fRoute1 = (Route) newValue;
-    	return true;
+        this.fRoute1 = (Route) newValue;
+        return true;
     }
     if ("route2".equals(parameterName) ) {
-    	this.fRoute2 = (Route) newValue;
-    	return true;
+        this.fRoute2 = (Route) newValue;
+        return true;
     }
     if ("sensor1".equals(parameterName) ) {
-    	this.fSensor1 = (Sensor) newValue;
-    	return true;
+        this.fSensor1 = (Sensor) newValue;
+        return true;
     }
     if ("sensor2".equals(parameterName) ) {
-    	this.fSensor2 = (Sensor) newValue;
-    	return true;
+        this.fSensor2 = (Sensor) newValue;
+        return true;
     }
     if ("te1".equals(parameterName) ) {
-    	this.fTe1 = (TrackElement) newValue;
-    	return true;
+        this.fTe1 = (TrackElement) newValue;
+        return true;
     }
     if ("te2".equals(parameterName) ) {
-    	this.fTe2 = (TrackElement) newValue;
-    	return true;
+        this.fTe2 = (TrackElement) newValue;
+        return true;
     }
     return false;
   }
@@ -221,18 +221,18 @@ public abstract class SemaphoreNeighborMatch extends BasePatternMatch {
   @Override
   public boolean equals(final Object obj) {
     if (this == obj)
-    	return true;
+        return true;
     if (!(obj instanceof SemaphoreNeighborMatch)) { // this should be infrequent
-    	if (obj == null) {
-    		return false;
-    	}
-    	if (!(obj instanceof IPatternMatch)) {
-    		return false;
-    	}
-    	IPatternMatch otherSig  = (IPatternMatch) obj;
-    	if (!specification().equals(otherSig.specification()))
-    		return false;
-    	return Arrays.deepEquals(toArray(), otherSig.toArray());
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof IPatternMatch)) {
+            return false;
+        }
+        IPatternMatch otherSig  = (IPatternMatch) obj;
+        if (!specification().equals(otherSig.specification()))
+            return false;
+        return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     SemaphoreNeighborMatch other = (SemaphoreNeighborMatch) obj;
     if (fSemaphore == null) {if (other.fSemaphore != null) return false;}
@@ -255,10 +255,10 @@ public abstract class SemaphoreNeighborMatch extends BasePatternMatch {
   @Override
   public SemaphoreNeighborQuerySpecification specification() {
     try {
-    	return SemaphoreNeighborQuerySpecification.instance();
+        return SemaphoreNeighborQuerySpecification.instance();
     } catch (ViatraQueryException ex) {
-     	// This cannot happen, as the match object can only be instantiated if the query specification exists
-     	throw new IllegalStateException (ex);
+         // This cannot happen, as the match object can only be instantiated if the query specification exists
+         throw new IllegalStateException (ex);
     }
   }
   

@@ -10,10 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecification;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactory;
@@ -52,9 +54,9 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
    */
   public static PosLengthQuerySpecification instance() throws ViatraQueryException {
     try{
-    	return LazyHolder.INSTANCE;
+        return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
-    	throw processInitializerError(err);
+        throw processInitializerError(err);
     }
   }
   
@@ -80,8 +82,8 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
   
   /**
    * Inner class allowing the singleton instance of {@link PosLengthQuerySpecification} to be created 
-   * 	<b>not</b> at the class load time of the outer class, 
-   * 	but rather at the first call to {@link PosLengthQuerySpecification#instance()}.
+   *     <b>not</b> at the class load time of the outer class, 
+   *     but rather at the first call to {@link PosLengthQuerySpecification#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
@@ -131,42 +133,43 @@ public final class PosLengthQuerySpecification extends BaseGeneratedEMFQuerySpec
       setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      	{
-      		PBody body = new PBody(this);
-      		PVariable var_segment = body.getOrCreateVariableByName("segment");
-      		PVariable var_length = body.getOrCreateVariableByName("length");
-      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_segment, parameter_pSegment)
-      		));
-      		// 	Segment.length(segment, length)
-      		new TypeConstraint(body, new FlatTuple(var_segment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		new TypeConstraint(body, new FlatTuple(var_segment, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment", "length")));
-      		new Equality(body, var__virtual_0_, var_length);
-      		// 	check(length <= 0)
-      		new ExpressionEvaluation(body, new IExpressionEvaluator() {
-      		
-      		    @Override
-      		    public String getShortDescription() {
-      		        return "Expression evaluation from pattern posLength";
-      		    }
-      		    
-      		    @Override
-      		    public Iterable<String> getInputParameterNames() {
-      		        return Arrays.asList("length");}
-      		
-      		    @Override
-      		    public Object evaluateExpression(IValueProvider provider) throws Exception {
-      		        Integer length = (Integer) provider.getValue("length");
-      		        return evaluateExpression_1_1(length);
-      		    }
-      		},  null); 
-      		bodies.add(body);
-      	}
-      	// to silence compiler error
-      	if (false) throw new ViatraQueryException("Never", "happens");
+          {
+              PBody body = new PBody(this);
+              PVariable var_segment = body.getOrCreateVariableByName("segment");
+              PVariable var_length = body.getOrCreateVariableByName("length");
+              body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+                 new ExportedParameter(body, var_segment, parameter_pSegment)
+              ));
+              // 	Segment.length(segment, length)
+              new TypeConstraint(body, new FlatTuple(var_segment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+              new TypeConstraint(body, new FlatTuple(var_segment, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment", "length")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_0_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EIntegerObject")));
+              new Equality(body, var__virtual_0_, var_length);
+              // 	check(length <= 0)
+              new ExpressionEvaluation(body, new IExpressionEvaluator() {
+              
+                  @Override
+                  public String getShortDescription() {
+                      return "Expression evaluation from pattern posLength";
+                  }
+                  
+                  @Override
+                  public Iterable<String> getInputParameterNames() {
+                      return Arrays.asList("length");}
+              
+                  @Override
+                  public Object evaluateExpression(IValueProvider provider) throws Exception {
+                      Integer length = (Integer) provider.getValue("length");
+                      return evaluateExpression_1_1(length);
+                  }
+              },  null); 
+              bodies.add(body);
+          }
+          // to silence compiler error
+          if (false) throw new ViatraQueryException("Never", "happens");
       } catch (ViatraQueryException ex) {
-      	throw processDependencyException(ex);
+          throw processDependencyException(ex);
       }
       return bodies;
     }

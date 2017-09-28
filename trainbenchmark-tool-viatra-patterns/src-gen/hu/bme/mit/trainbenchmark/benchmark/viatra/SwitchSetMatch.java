@@ -75,20 +75,20 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("semaphore".equals(parameterName) ) {
-    	this.fSemaphore = (Semaphore) newValue;
-    	return true;
+        this.fSemaphore = (Semaphore) newValue;
+        return true;
     }
     if ("route".equals(parameterName) ) {
-    	this.fRoute = (Route) newValue;
-    	return true;
+        this.fRoute = (Route) newValue;
+        return true;
     }
     if ("swP".equals(parameterName) ) {
-    	this.fSwP = (SwitchPosition) newValue;
-    	return true;
+        this.fSwP = (SwitchPosition) newValue;
+        return true;
     }
     if ("sw".equals(parameterName) ) {
-    	this.fSw = (Switch) newValue;
-    	return true;
+        this.fSw = (Switch) newValue;
+        return true;
     }
     return false;
   }
@@ -161,18 +161,18 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
   @Override
   public boolean equals(final Object obj) {
     if (this == obj)
-    	return true;
+        return true;
     if (!(obj instanceof SwitchSetMatch)) { // this should be infrequent
-    	if (obj == null) {
-    		return false;
-    	}
-    	if (!(obj instanceof IPatternMatch)) {
-    		return false;
-    	}
-    	IPatternMatch otherSig  = (IPatternMatch) obj;
-    	if (!specification().equals(otherSig.specification()))
-    		return false;
-    	return Arrays.deepEquals(toArray(), otherSig.toArray());
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof IPatternMatch)) {
+            return false;
+        }
+        IPatternMatch otherSig  = (IPatternMatch) obj;
+        if (!specification().equals(otherSig.specification()))
+            return false;
+        return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     SwitchSetMatch other = (SwitchSetMatch) obj;
     if (fSemaphore == null) {if (other.fSemaphore != null) return false;}
@@ -189,10 +189,10 @@ public abstract class SwitchSetMatch extends BasePatternMatch {
   @Override
   public SwitchSetQuerySpecification specification() {
     try {
-    	return SwitchSetQuerySpecification.instance();
+        return SwitchSetQuerySpecification.instance();
     } catch (ViatraQueryException ex) {
-     	// This cannot happen, as the match object can only be instantiated if the query specification exists
-     	throw new IllegalStateException (ex);
+         // This cannot happen, as the match object can only be instantiated if the query specification exists
+         throw new IllegalStateException (ex);
     }
   }
   

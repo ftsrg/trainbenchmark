@@ -97,32 +97,32 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("sensor".equals(parameterName) ) {
-    	this.fSensor = (Sensor) newValue;
-    	return true;
+        this.fSensor = (Sensor) newValue;
+        return true;
     }
     if ("segment1".equals(parameterName) ) {
-    	this.fSegment1 = (Segment) newValue;
-    	return true;
+        this.fSegment1 = (Segment) newValue;
+        return true;
     }
     if ("segment2".equals(parameterName) ) {
-    	this.fSegment2 = (Segment) newValue;
-    	return true;
+        this.fSegment2 = (Segment) newValue;
+        return true;
     }
     if ("segment3".equals(parameterName) ) {
-    	this.fSegment3 = (Segment) newValue;
-    	return true;
+        this.fSegment3 = (Segment) newValue;
+        return true;
     }
     if ("segment4".equals(parameterName) ) {
-    	this.fSegment4 = (Segment) newValue;
-    	return true;
+        this.fSegment4 = (Segment) newValue;
+        return true;
     }
     if ("segment5".equals(parameterName) ) {
-    	this.fSegment5 = (Segment) newValue;
-    	return true;
+        this.fSegment5 = (Segment) newValue;
+        return true;
     }
     if ("segment6".equals(parameterName) ) {
-    	this.fSegment6 = (Segment) newValue;
-    	return true;
+        this.fSegment6 = (Segment) newValue;
+        return true;
     }
     return false;
   }
@@ -219,18 +219,18 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   @Override
   public boolean equals(final Object obj) {
     if (this == obj)
-    	return true;
+        return true;
     if (!(obj instanceof ConnectedSegmentsMatch)) { // this should be infrequent
-    	if (obj == null) {
-    		return false;
-    	}
-    	if (!(obj instanceof IPatternMatch)) {
-    		return false;
-    	}
-    	IPatternMatch otherSig  = (IPatternMatch) obj;
-    	if (!specification().equals(otherSig.specification()))
-    		return false;
-    	return Arrays.deepEquals(toArray(), otherSig.toArray());
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof IPatternMatch)) {
+            return false;
+        }
+        IPatternMatch otherSig  = (IPatternMatch) obj;
+        if (!specification().equals(otherSig.specification()))
+            return false;
+        return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     ConnectedSegmentsMatch other = (ConnectedSegmentsMatch) obj;
     if (fSensor == null) {if (other.fSensor != null) return false;}
@@ -253,10 +253,10 @@ public abstract class ConnectedSegmentsMatch extends BasePatternMatch {
   @Override
   public ConnectedSegmentsQuerySpecification specification() {
     try {
-    	return ConnectedSegmentsQuerySpecification.instance();
+        return ConnectedSegmentsQuerySpecification.instance();
     } catch (ViatraQueryException ex) {
-     	// This cannot happen, as the match object can only be instantiated if the query specification exists
-     	throw new IllegalStateException (ex);
+         // This cannot happen, as the match object can only be instantiated if the query specification exists
+         throw new IllegalStateException (ex);
     }
   }
   

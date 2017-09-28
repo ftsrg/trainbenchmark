@@ -54,7 +54,7 @@ public class PosLengthInjectMatcher extends BaseMatcher<PosLengthInjectMatch> {
     // check if matcher already exists
     PosLengthInjectMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (PosLengthInjectMatcher)engine.getMatcher(querySpecification());
+        matcher = (PosLengthInjectMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -163,7 +163,7 @@ public class PosLengthInjectMatcher extends BaseMatcher<PosLengthInjectMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for segment.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Segment> rawAccumulateAllValuesOfsegment(final Object[] parameters) {
@@ -174,7 +174,7 @@ public class PosLengthInjectMatcher extends BaseMatcher<PosLengthInjectMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for segment.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment() {
@@ -184,30 +184,30 @@ public class PosLengthInjectMatcher extends BaseMatcher<PosLengthInjectMatch> {
   @Override
   protected PosLengthInjectMatch tupleToMatch(final Tuple t) {
     try {
-    	return PosLengthInjectMatch.newMatch((Segment) t.get(POSITION_SEGMENT));
+        return PosLengthInjectMatch.newMatch((Segment) t.get(POSITION_SEGMENT));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected PosLengthInjectMatch arrayToMatch(final Object[] match) {
     try {
-    	return PosLengthInjectMatch.newMatch((Segment) match[POSITION_SEGMENT]);
+        return PosLengthInjectMatch.newMatch((Segment) match[POSITION_SEGMENT]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected PosLengthInjectMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return PosLengthInjectMatch.newMutableMatch((Segment) match[POSITION_SEGMENT]);
+        return PosLengthInjectMatch.newMutableMatch((Segment) match[POSITION_SEGMENT]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

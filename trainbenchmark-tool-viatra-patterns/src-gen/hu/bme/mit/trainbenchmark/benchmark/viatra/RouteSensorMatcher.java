@@ -61,7 +61,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
     // check if matcher already exists
     RouteSensorMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (RouteSensorMatcher)engine.getMatcher(querySpecification());
+        matcher = (RouteSensorMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -197,7 +197,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Route> rawAccumulateAllValuesOfroute(final Object[] parameters) {
@@ -208,7 +208,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute() {
@@ -217,7 +217,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final RouteSensorMatch partialMatch) {
@@ -226,7 +226,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for route.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Route> getAllValuesOfroute(final Sensor pSensor, final SwitchPosition pSwP, final Switch pSw) {
@@ -240,7 +240,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Sensor> rawAccumulateAllValuesOfsensor(final Object[] parameters) {
@@ -251,7 +251,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor() {
@@ -260,7 +260,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final RouteSensorMatch partialMatch) {
@@ -269,7 +269,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sensor.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Sensor> getAllValuesOfsensor(final Route pRoute, final SwitchPosition pSwP, final Switch pSw) {
@@ -283,7 +283,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<SwitchPosition> rawAccumulateAllValuesOfswP(final Object[] parameters) {
@@ -294,7 +294,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<SwitchPosition> getAllValuesOfswP() {
@@ -303,7 +303,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<SwitchPosition> getAllValuesOfswP(final RouteSensorMatch partialMatch) {
@@ -312,7 +312,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for swP.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<SwitchPosition> getAllValuesOfswP(final Route pRoute, final Sensor pSensor, final Switch pSw) {
@@ -326,7 +326,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Switch> rawAccumulateAllValuesOfsw(final Object[] parameters) {
@@ -337,7 +337,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw() {
@@ -346,7 +346,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw(final RouteSensorMatch partialMatch) {
@@ -355,7 +355,7 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for sw.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Switch> getAllValuesOfsw(final Route pRoute, final Sensor pSensor, final SwitchPosition pSwP) {
@@ -370,30 +370,30 @@ public class RouteSensorMatcher extends BaseMatcher<RouteSensorMatch> {
   @Override
   protected RouteSensorMatch tupleToMatch(final Tuple t) {
     try {
-    	return RouteSensorMatch.newMatch((Route) t.get(POSITION_ROUTE), (Sensor) t.get(POSITION_SENSOR), (SwitchPosition) t.get(POSITION_SWP), (Switch) t.get(POSITION_SW));
+        return RouteSensorMatch.newMatch((Route) t.get(POSITION_ROUTE), (Sensor) t.get(POSITION_SENSOR), (SwitchPosition) t.get(POSITION_SWP), (Switch) t.get(POSITION_SW));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected RouteSensorMatch arrayToMatch(final Object[] match) {
     try {
-    	return RouteSensorMatch.newMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
+        return RouteSensorMatch.newMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected RouteSensorMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return RouteSensorMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
+        return RouteSensorMatch.newMutableMatch((Route) match[POSITION_ROUTE], (Sensor) match[POSITION_SENSOR], (SwitchPosition) match[POSITION_SWP], (Switch) match[POSITION_SW]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

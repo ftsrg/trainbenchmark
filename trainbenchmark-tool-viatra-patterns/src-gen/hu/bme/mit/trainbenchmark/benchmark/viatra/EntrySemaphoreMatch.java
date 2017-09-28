@@ -57,12 +57,12 @@ public abstract class EntrySemaphoreMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("route".equals(parameterName) ) {
-    	this.fRoute = (Route) newValue;
-    	return true;
+        this.fRoute = (Route) newValue;
+        return true;
     }
     if ("semaphore".equals(parameterName) ) {
-    	this.fSemaphore = (Semaphore) newValue;
-    	return true;
+        this.fSemaphore = (Semaphore) newValue;
+        return true;
     }
     return false;
   }
@@ -119,18 +119,18 @@ public abstract class EntrySemaphoreMatch extends BasePatternMatch {
   @Override
   public boolean equals(final Object obj) {
     if (this == obj)
-    	return true;
+        return true;
     if (!(obj instanceof EntrySemaphoreMatch)) { // this should be infrequent
-    	if (obj == null) {
-    		return false;
-    	}
-    	if (!(obj instanceof IPatternMatch)) {
-    		return false;
-    	}
-    	IPatternMatch otherSig  = (IPatternMatch) obj;
-    	if (!specification().equals(otherSig.specification()))
-    		return false;
-    	return Arrays.deepEquals(toArray(), otherSig.toArray());
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof IPatternMatch)) {
+            return false;
+        }
+        IPatternMatch otherSig  = (IPatternMatch) obj;
+        if (!specification().equals(otherSig.specification()))
+            return false;
+        return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     EntrySemaphoreMatch other = (EntrySemaphoreMatch) obj;
     if (fRoute == null) {if (other.fRoute != null) return false;}
@@ -143,10 +143,10 @@ public abstract class EntrySemaphoreMatch extends BasePatternMatch {
   @Override
   public EntrySemaphoreQuerySpecification specification() {
     try {
-    	return EntrySemaphoreQuerySpecification.instance();
+        return EntrySemaphoreQuerySpecification.instance();
     } catch (ViatraQueryException ex) {
-     	// This cannot happen, as the match object can only be instantiated if the query specification exists
-     	throw new IllegalStateException (ex);
+         // This cannot happen, as the match object can only be instantiated if the query specification exists
+         throw new IllegalStateException (ex);
     }
   }
   

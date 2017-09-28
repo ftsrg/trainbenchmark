@@ -55,7 +55,7 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
     // check if matcher already exists
     PosLengthMatcher matcher = engine.getExistingMatcher(querySpecification());
     if (matcher == null) {
-    	matcher = (PosLengthMatcher)engine.getMatcher(querySpecification());
+        matcher = (PosLengthMatcher)engine.getMatcher(querySpecification());
     }
     return matcher;
   }
@@ -164,7 +164,7 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for segment.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   protected Set<Segment> rawAccumulateAllValuesOfsegment(final Object[] parameters) {
@@ -175,7 +175,7 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
   
   /**
    * Retrieve the set of values that occur in matches for segment.
-   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * @return the Set of all values or empty set if there are no matches
    * 
    */
   public Set<Segment> getAllValuesOfsegment() {
@@ -185,30 +185,30 @@ public class PosLengthMatcher extends BaseMatcher<PosLengthMatch> {
   @Override
   protected PosLengthMatch tupleToMatch(final Tuple t) {
     try {
-    	return PosLengthMatch.newMatch((Segment) t.get(POSITION_SEGMENT));
+        return PosLengthMatch.newMatch((Segment) t.get(POSITION_SEGMENT));
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in tuple not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in tuple not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected PosLengthMatch arrayToMatch(final Object[] match) {
     try {
-    	return PosLengthMatch.newMatch((Segment) match[POSITION_SEGMENT]);
+        return PosLengthMatch.newMatch((Segment) match[POSITION_SEGMENT]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   
   @Override
   protected PosLengthMatch arrayToMatchMutable(final Object[] match) {
     try {
-    	return PosLengthMatch.newMutableMatch((Segment) match[POSITION_SEGMENT]);
+        return PosLengthMatch.newMutableMatch((Segment) match[POSITION_SEGMENT]);
     } catch(ClassCastException e) {
-    	LOGGER.error("Element(s) in array not properly typed!",e);
-    	return null;
+        LOGGER.error("Element(s) in array not properly typed!",e);
+        return null;
     }
   }
   

@@ -52,9 +52,9 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
    */
   public static SemaphoreNeighborQuerySpecification instance() throws ViatraQueryException {
     try{
-    	return LazyHolder.INSTANCE;
+        return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
-    	throw processInitializerError(err);
+        throw processInitializerError(err);
     }
   }
   
@@ -80,8 +80,8 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
   
   /**
    * Inner class allowing the singleton instance of {@link SemaphoreNeighborQuerySpecification} to be created 
-   * 	<b>not</b> at the class load time of the outer class, 
-   * 	but rather at the first call to {@link SemaphoreNeighborQuerySpecification#instance()}.
+   *     <b>not</b> at the class load time of the outer class, 
+   *     but rather at the first call to {@link SemaphoreNeighborQuerySpecification#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
@@ -143,64 +143,70 @@ public final class SemaphoreNeighborQuerySpecification extends BaseGeneratedEMFQ
       setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      	{
-      		PBody body = new PBody(this);
-      		PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
-      		PVariable var_route1 = body.getOrCreateVariableByName("route1");
-      		PVariable var_route2 = body.getOrCreateVariableByName("route2");
-      		PVariable var_sensor1 = body.getOrCreateVariableByName("sensor1");
-      		PVariable var_sensor2 = body.getOrCreateVariableByName("sensor2");
-      		PVariable var_te1 = body.getOrCreateVariableByName("te1");
-      		PVariable var_te2 = body.getOrCreateVariableByName("te2");
-      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_semaphore, parameter_pSemaphore),
-      		   new ExportedParameter(body, var_route1, parameter_pRoute1),
-      		   new ExportedParameter(body, var_route2, parameter_pRoute2),
-      		   new ExportedParameter(body, var_sensor1, parameter_pSensor1),
-      		   new ExportedParameter(body, var_sensor2, parameter_pSensor2),
-      		   new ExportedParameter(body, var_te1, parameter_pTe1),
-      		   new ExportedParameter(body, var_te2, parameter_pTe2)
-      		));
-      		// 	Route.exit(route1, semaphore)
-      		new TypeConstraint(body, new FlatTuple(var_route1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		new TypeConstraint(body, new FlatTuple(var_route1, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "exit")));
-      		new Equality(body, var__virtual_0_, var_semaphore);
-      		// 	Route.requires(route1, sensor1)
-      		new TypeConstraint(body, new FlatTuple(var_route1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      		PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-      		new TypeConstraint(body, new FlatTuple(var_route1, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "requires")));
-      		new Equality(body, var__virtual_1_, var_sensor1);
-      		// 	TrackElement.monitoredBy(te1, sensor1)
-      		new TypeConstraint(body, new FlatTuple(var_te1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
-      		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-      		new TypeConstraint(body, new FlatTuple(var_te1, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_2_, var_sensor1);
-      		// 	TrackElement.connectsTo(te1, te2)
-      		new TypeConstraint(body, new FlatTuple(var_te1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
-      		PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-      		new TypeConstraint(body, new FlatTuple(var_te1, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
-      		new Equality(body, var__virtual_3_, var_te2);
-      		// 	TrackElement.monitoredBy(te2, sensor2)
-      		new TypeConstraint(body, new FlatTuple(var_te2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
-      		PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
-      		new TypeConstraint(body, new FlatTuple(var_te2, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_4_, var_sensor2);
-      		// 	Route.requires(route2, sensor2)
-      		new TypeConstraint(body, new FlatTuple(var_route2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
-      		PVariable var__virtual_5_ = body.getOrCreateVariableByName(".virtual{5}");
-      		new TypeConstraint(body, new FlatTuple(var_route2, var__virtual_5_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "requires")));
-      		new Equality(body, var__virtual_5_, var_sensor2);
-      		// 		neg find entrySemaphore(route2, semaphore)
-      		new NegativePatternCall(body, new FlatTuple(var_route2, var_semaphore), EntrySemaphoreQuerySpecification.instance().getInternalQueryRepresentation());
-      		// 	route1 != route2
-      		new Inequality(body, var_route1, var_route2);
-      		bodies.add(body);
-      	}
-      	// to silence compiler error
-      	if (false) throw new ViatraQueryException("Never", "happens");
+          {
+              PBody body = new PBody(this);
+              PVariable var_semaphore = body.getOrCreateVariableByName("semaphore");
+              PVariable var_route1 = body.getOrCreateVariableByName("route1");
+              PVariable var_route2 = body.getOrCreateVariableByName("route2");
+              PVariable var_sensor1 = body.getOrCreateVariableByName("sensor1");
+              PVariable var_sensor2 = body.getOrCreateVariableByName("sensor2");
+              PVariable var_te1 = body.getOrCreateVariableByName("te1");
+              PVariable var_te2 = body.getOrCreateVariableByName("te2");
+              body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+                 new ExportedParameter(body, var_semaphore, parameter_pSemaphore),
+                 new ExportedParameter(body, var_route1, parameter_pRoute1),
+                 new ExportedParameter(body, var_route2, parameter_pRoute2),
+                 new ExportedParameter(body, var_sensor1, parameter_pSensor1),
+                 new ExportedParameter(body, var_sensor2, parameter_pSensor2),
+                 new ExportedParameter(body, var_te1, parameter_pTe1),
+                 new ExportedParameter(body, var_te2, parameter_pTe2)
+              ));
+              // 	Route.exit(route1, semaphore)
+              new TypeConstraint(body, new FlatTuple(var_route1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+              PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+              new TypeConstraint(body, new FlatTuple(var_route1, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "exit")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Semaphore")));
+              new Equality(body, var__virtual_0_, var_semaphore);
+              // 	Route.requires(route1, sensor1)
+              new TypeConstraint(body, new FlatTuple(var_route1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+              PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+              new TypeConstraint(body, new FlatTuple(var_route1, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "requires")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_1_, var_sensor1);
+              // 	TrackElement.monitoredBy(te1, sensor1)
+              new TypeConstraint(body, new FlatTuple(var_te1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+              new TypeConstraint(body, new FlatTuple(var_te1, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_2_, var_sensor1);
+              // 	TrackElement.connectsTo(te1, te2)
+              new TypeConstraint(body, new FlatTuple(var_te1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
+              new TypeConstraint(body, new FlatTuple(var_te1, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_3_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              new Equality(body, var__virtual_3_, var_te2);
+              // 	TrackElement.monitoredBy(te2, sensor2)
+              new TypeConstraint(body, new FlatTuple(var_te2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
+              new TypeConstraint(body, new FlatTuple(var_te2, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_4_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_4_, var_sensor2);
+              // 	Route.requires(route2, sensor2)
+              new TypeConstraint(body, new FlatTuple(var_route2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
+              PVariable var__virtual_5_ = body.getOrCreateVariableByName(".virtual{5}");
+              new TypeConstraint(body, new FlatTuple(var_route2, var__virtual_5_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "requires")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_5_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_5_, var_sensor2);
+              // 		neg find entrySemaphore(route2, semaphore)
+              new NegativePatternCall(body, new FlatTuple(var_route2, var_semaphore), EntrySemaphoreQuerySpecification.instance().getInternalQueryRepresentation());
+              // 	route1 != route2
+              new Inequality(body, var_route1, var_route2);
+              bodies.add(body);
+          }
+          // to silence compiler error
+          if (false) throw new ViatraQueryException("Never", "happens");
       } catch (ViatraQueryException ex) {
-      	throw processDependencyException(ex);
+          throw processDependencyException(ex);
       }
       return bodies;
     }

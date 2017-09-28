@@ -10,7 +10,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * A pattern group formed of all patterns defined in PosLengthInject.vql.
+ * A pattern group formed of all public patterns defined in PosLengthInject.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
  * a VIATRA Query engine for matching all patterns originally defined in file PosLengthInject.vql,
@@ -34,7 +34,7 @@ public final class PosLengthInject extends BaseGeneratedPatternGroup {
    */
   public static PosLengthInject instance() throws ViatraQueryException {
     if (INSTANCE == null) {
-    	INSTANCE = new PosLengthInject();
+        INSTANCE = new PosLengthInject();
     }
     return INSTANCE;
   }

@@ -12,7 +12,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
- * A pattern group formed of all patterns defined in RouteSensor.vql.
+ * A pattern group formed of all public patterns defined in RouteSensor.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
  * a VIATRA Query engine for matching all patterns originally defined in file RouteSensor.vql,
@@ -37,7 +37,7 @@ public final class RouteSensor extends BaseGeneratedPatternGroup {
    */
   public static RouteSensor instance() throws ViatraQueryException {
     if (INSTANCE == null) {
-    	INSTANCE = new RouteSensor();
+        INSTANCE = new RouteSensor();
     }
     return INSTANCE;
   }

@@ -48,8 +48,8 @@ public abstract class HasSensorMatch extends BasePatternMatch {
   public boolean set(final String parameterName, final Object newValue) {
     if (!isMutable()) throw new java.lang.UnsupportedOperationException();
     if ("sw".equals(parameterName) ) {
-    	this.fSw = (TrackElement) newValue;
-    	return true;
+        this.fSw = (TrackElement) newValue;
+        return true;
     }
     return false;
   }
@@ -98,18 +98,18 @@ public abstract class HasSensorMatch extends BasePatternMatch {
   @Override
   public boolean equals(final Object obj) {
     if (this == obj)
-    	return true;
+        return true;
     if (!(obj instanceof HasSensorMatch)) { // this should be infrequent
-    	if (obj == null) {
-    		return false;
-    	}
-    	if (!(obj instanceof IPatternMatch)) {
-    		return false;
-    	}
-    	IPatternMatch otherSig  = (IPatternMatch) obj;
-    	if (!specification().equals(otherSig.specification()))
-    		return false;
-    	return Arrays.deepEquals(toArray(), otherSig.toArray());
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof IPatternMatch)) {
+            return false;
+        }
+        IPatternMatch otherSig  = (IPatternMatch) obj;
+        if (!specification().equals(otherSig.specification()))
+            return false;
+        return Arrays.deepEquals(toArray(), otherSig.toArray());
     }
     HasSensorMatch other = (HasSensorMatch) obj;
     if (fSw == null) {if (other.fSw != null) return false;}
@@ -120,10 +120,10 @@ public abstract class HasSensorMatch extends BasePatternMatch {
   @Override
   public HasSensorQuerySpecification specification() {
     try {
-    	return HasSensorQuerySpecification.instance();
+        return HasSensorQuerySpecification.instance();
     } catch (ViatraQueryException ex) {
-     	// This cannot happen, as the match object can only be instantiated if the query specification exists
-     	throw new IllegalStateException (ex);
+         // This cannot happen, as the match object can only be instantiated if the query specification exists
+         throw new IllegalStateException (ex);
     }
   }
   

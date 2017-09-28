@@ -49,9 +49,9 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
    */
   public static ConnectedSegmentsQuerySpecification instance() throws ViatraQueryException {
     try{
-    	return LazyHolder.INSTANCE;
+        return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
-    	throw processInitializerError(err);
+        throw processInitializerError(err);
     }
   }
   
@@ -77,8 +77,8 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
   
   /**
    * Inner class allowing the singleton instance of {@link ConnectedSegmentsQuerySpecification} to be created 
-   * 	<b>not</b> at the class load time of the outer class, 
-   * 	but rather at the first call to {@link ConnectedSegmentsQuerySpecification#instance()}.
+   *     <b>not</b> at the class load time of the outer class, 
+   *     but rather at the first call to {@link ConnectedSegmentsQuerySpecification#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
@@ -140,85 +140,96 @@ public final class ConnectedSegmentsQuerySpecification extends BaseGeneratedEMFQ
       setEvaluationHints(new QueryEvaluationHint(null, (IQueryBackendFactory)null));
       Set<PBody> bodies = Sets.newLinkedHashSet();
       try {
-      	{
-      		PBody body = new PBody(this);
-      		PVariable var_sensor = body.getOrCreateVariableByName("sensor");
-      		PVariable var_segment1 = body.getOrCreateVariableByName("segment1");
-      		PVariable var_segment2 = body.getOrCreateVariableByName("segment2");
-      		PVariable var_segment3 = body.getOrCreateVariableByName("segment3");
-      		PVariable var_segment4 = body.getOrCreateVariableByName("segment4");
-      		PVariable var_segment5 = body.getOrCreateVariableByName("segment5");
-      		PVariable var_segment6 = body.getOrCreateVariableByName("segment6");
-      		body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-      		   new ExportedParameter(body, var_sensor, parameter_pSensor),
-      		   new ExportedParameter(body, var_segment1, parameter_pSegment1),
-      		   new ExportedParameter(body, var_segment2, parameter_pSegment2),
-      		   new ExportedParameter(body, var_segment3, parameter_pSegment3),
-      		   new ExportedParameter(body, var_segment4, parameter_pSegment4),
-      		   new ExportedParameter(body, var_segment5, parameter_pSegment5),
-      		   new ExportedParameter(body, var_segment6, parameter_pSegment6)
-      		));
-      		// 	Segment.connectsTo(segment1, segment2)
-      		new TypeConstraint(body, new FlatTuple(var_segment1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-      		new TypeConstraint(body, new FlatTuple(var_segment1, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
-      		new Equality(body, var__virtual_0_, var_segment2);
-      		// 	Segment.connectsTo(segment2, segment3)
-      		new TypeConstraint(body, new FlatTuple(var_segment2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-      		new TypeConstraint(body, new FlatTuple(var_segment2, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
-      		new Equality(body, var__virtual_1_, var_segment3);
-      		// 	Segment.connectsTo(segment3, segment4)
-      		new TypeConstraint(body, new FlatTuple(var_segment3), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-      		new TypeConstraint(body, new FlatTuple(var_segment3, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
-      		new Equality(body, var__virtual_2_, var_segment4);
-      		// 	Segment.connectsTo(segment4, segment5)
-      		new TypeConstraint(body, new FlatTuple(var_segment4), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-      		new TypeConstraint(body, new FlatTuple(var_segment4, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
-      		new Equality(body, var__virtual_3_, var_segment5);
-      		// 	Segment.connectsTo(segment5, segment6)
-      		new TypeConstraint(body, new FlatTuple(var_segment5), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
-      		new TypeConstraint(body, new FlatTuple(var_segment5, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
-      		new Equality(body, var__virtual_4_, var_segment6);
-      		// 	Segment.monitoredBy(segment1, sensor)
-      		new TypeConstraint(body, new FlatTuple(var_segment1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_5_ = body.getOrCreateVariableByName(".virtual{5}");
-      		new TypeConstraint(body, new FlatTuple(var_segment1, var__virtual_5_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_5_, var_sensor);
-      		// 	Segment.monitoredBy(segment2, sensor)
-      		new TypeConstraint(body, new FlatTuple(var_segment2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_6_ = body.getOrCreateVariableByName(".virtual{6}");
-      		new TypeConstraint(body, new FlatTuple(var_segment2, var__virtual_6_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_6_, var_sensor);
-      		// 	Segment.monitoredBy(segment3, sensor)
-      		new TypeConstraint(body, new FlatTuple(var_segment3), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_7_ = body.getOrCreateVariableByName(".virtual{7}");
-      		new TypeConstraint(body, new FlatTuple(var_segment3, var__virtual_7_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_7_, var_sensor);
-      		// 	Segment.monitoredBy(segment4, sensor)
-      		new TypeConstraint(body, new FlatTuple(var_segment4), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_8_ = body.getOrCreateVariableByName(".virtual{8}");
-      		new TypeConstraint(body, new FlatTuple(var_segment4, var__virtual_8_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_8_, var_sensor);
-      		// 	Segment.monitoredBy(segment5, sensor)
-      		new TypeConstraint(body, new FlatTuple(var_segment5), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_9_ = body.getOrCreateVariableByName(".virtual{9}");
-      		new TypeConstraint(body, new FlatTuple(var_segment5, var__virtual_9_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_9_, var_sensor);
-      		// 	Segment.monitoredBy(segment6, sensor)
-      		new TypeConstraint(body, new FlatTuple(var_segment6), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
-      		PVariable var__virtual_10_ = body.getOrCreateVariableByName(".virtual{10}");
-      		new TypeConstraint(body, new FlatTuple(var_segment6, var__virtual_10_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
-      		new Equality(body, var__virtual_10_, var_sensor);
-      		bodies.add(body);
-      	}
-      	// to silence compiler error
-      	if (false) throw new ViatraQueryException("Never", "happens");
+          {
+              PBody body = new PBody(this);
+              PVariable var_sensor = body.getOrCreateVariableByName("sensor");
+              PVariable var_segment1 = body.getOrCreateVariableByName("segment1");
+              PVariable var_segment2 = body.getOrCreateVariableByName("segment2");
+              PVariable var_segment3 = body.getOrCreateVariableByName("segment3");
+              PVariable var_segment4 = body.getOrCreateVariableByName("segment4");
+              PVariable var_segment5 = body.getOrCreateVariableByName("segment5");
+              PVariable var_segment6 = body.getOrCreateVariableByName("segment6");
+              body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+                 new ExportedParameter(body, var_sensor, parameter_pSensor),
+                 new ExportedParameter(body, var_segment1, parameter_pSegment1),
+                 new ExportedParameter(body, var_segment2, parameter_pSegment2),
+                 new ExportedParameter(body, var_segment3, parameter_pSegment3),
+                 new ExportedParameter(body, var_segment4, parameter_pSegment4),
+                 new ExportedParameter(body, var_segment5, parameter_pSegment5),
+                 new ExportedParameter(body, var_segment6, parameter_pSegment6)
+              ));
+              // 	Segment.connectsTo(segment1, segment2)
+              new TypeConstraint(body, new FlatTuple(var_segment1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+              new TypeConstraint(body, new FlatTuple(var_segment1, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              new Equality(body, var__virtual_0_, var_segment2);
+              // 	Segment.connectsTo(segment2, segment3)
+              new TypeConstraint(body, new FlatTuple(var_segment2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+              new TypeConstraint(body, new FlatTuple(var_segment2, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              new Equality(body, var__virtual_1_, var_segment3);
+              // 	Segment.connectsTo(segment3, segment4)
+              new TypeConstraint(body, new FlatTuple(var_segment3), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+              new TypeConstraint(body, new FlatTuple(var_segment3, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              new Equality(body, var__virtual_2_, var_segment4);
+              // 	Segment.connectsTo(segment4, segment5)
+              new TypeConstraint(body, new FlatTuple(var_segment4), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
+              new TypeConstraint(body, new FlatTuple(var_segment4, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_3_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              new Equality(body, var__virtual_3_, var_segment5);
+              // 	Segment.connectsTo(segment5, segment6)
+              new TypeConstraint(body, new FlatTuple(var_segment5), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
+              new TypeConstraint(body, new FlatTuple(var_segment5, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "connectsTo")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_4_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement")));
+              new Equality(body, var__virtual_4_, var_segment6);
+              // 	Segment.monitoredBy(segment1, sensor)
+              new TypeConstraint(body, new FlatTuple(var_segment1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_5_ = body.getOrCreateVariableByName(".virtual{5}");
+              new TypeConstraint(body, new FlatTuple(var_segment1, var__virtual_5_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_5_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_5_, var_sensor);
+              // 	Segment.monitoredBy(segment2, sensor)
+              new TypeConstraint(body, new FlatTuple(var_segment2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_6_ = body.getOrCreateVariableByName(".virtual{6}");
+              new TypeConstraint(body, new FlatTuple(var_segment2, var__virtual_6_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_6_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_6_, var_sensor);
+              // 	Segment.monitoredBy(segment3, sensor)
+              new TypeConstraint(body, new FlatTuple(var_segment3), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_7_ = body.getOrCreateVariableByName(".virtual{7}");
+              new TypeConstraint(body, new FlatTuple(var_segment3, var__virtual_7_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_7_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_7_, var_sensor);
+              // 	Segment.monitoredBy(segment4, sensor)
+              new TypeConstraint(body, new FlatTuple(var_segment4), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_8_ = body.getOrCreateVariableByName(".virtual{8}");
+              new TypeConstraint(body, new FlatTuple(var_segment4, var__virtual_8_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_8_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_8_, var_sensor);
+              // 	Segment.monitoredBy(segment5, sensor)
+              new TypeConstraint(body, new FlatTuple(var_segment5), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_9_ = body.getOrCreateVariableByName(".virtual{9}");
+              new TypeConstraint(body, new FlatTuple(var_segment5, var__virtual_9_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_9_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_9_, var_sensor);
+              // 	Segment.monitoredBy(segment6, sensor)
+              new TypeConstraint(body, new FlatTuple(var_segment6), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Segment")));
+              PVariable var__virtual_10_ = body.getOrCreateVariableByName(".virtual{10}");
+              new TypeConstraint(body, new FlatTuple(var_segment6, var__virtual_10_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "TrackElement", "monitoredBy")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_10_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Sensor")));
+              new Equality(body, var__virtual_10_, var_sensor);
+              bodies.add(body);
+          }
+          // to silence compiler error
+          if (false) throw new ViatraQueryException("Never", "happens");
       } catch (ViatraQueryException ex) {
-      	throw processDependencyException(ex);
+          throw processDependencyException(ex);
       }
       return bodies;
     }
