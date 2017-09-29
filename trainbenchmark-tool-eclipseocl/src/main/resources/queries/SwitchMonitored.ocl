@@ -1,5 +1,0 @@
-Switch.allInstances()->select(
-	sw | sw.monitoredBy->isEmpty()
-)->collect(
-	sw | Tuple{sw = sw}
-)

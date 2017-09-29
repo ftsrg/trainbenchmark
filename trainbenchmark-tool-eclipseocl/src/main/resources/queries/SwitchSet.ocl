@@ -1,9 +1,0 @@
-Route.allInstances()->select(active = true)->collect(
-	route | route.entry->select(signal = Signal::GO)->collect(
-		semaphore | route.follows->collect(
-			swP | swP.target->select(currentPosition <> swP.position)->collect(
-				sw | Tuple{route = route, semaphore = semaphore, swP = swP, sw = sw}
-			)
-		)
-	)
-)
