@@ -30,6 +30,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -83,7 +84,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		final String footerFilePath = gc.getConfigBase().getWorkspaceDir() + SQL_METAMODEL_DIR + "railway-footer.sql";
 		final File footerFile = new File(footerFilePath);
 
-		final List<String> lines = FileUtils.readLines(footerFile);
+		final List<String> lines = FileUtils.readLines(footerFile, StandardCharsets.UTF_8);
 		for (final String line : lines) {
 			write(line);
 		}
@@ -176,13 +177,6 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		}
 
 		write(insertQuery);
-	}
-
-	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
-		final String stringValue = valueToString(value);
-		final String updateQuery = String.format("UPDATE \"%s\" SET \"%s\" = %s WHERE \"%s\" = %s;", type, key, stringValue, ID, node);
-		write(updateQuery);
 	}
 
 	protected void structuralFeaturesToSQL(final Map<String, ? extends Object> attributes, final StringBuilder columns, final StringBuilder values) {

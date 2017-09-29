@@ -26,7 +26,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -44,8 +43,6 @@ import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class ScalableModelGenerator extends ModelGenerator {
-
-	private static final Map<String, Object> EMPTY_MAP = Collections.<String, Object> emptyMap();
 
 	public static final int MAX_SEGMENT_LENGTH = 1000;
 
@@ -141,7 +138,11 @@ public class ScalableModelGenerator extends ModelGenerator {
 			final List<Object> currentTrack = new ArrayList<>();
 			final Set<Object> switches = new HashSet<>();
 			for (int j = 0; j < swPs; j++) {
-				final Object sw = serializer.createVertex(SWITCH);
+				final int numberOfPositions = Position.values().length;
+				final int positionOrdinal = random.nextInt(numberOfPositions);
+				final Position position = Position.values()[positionOrdinal];
+				final Map<String, ? extends Object> swAttributes = ImmutableMap.of(CURRENTPOSITION, position);
+				final Object sw = serializer.createVertex(SWITCH, swAttributes);
 				currentTrack.add(sw);
 				switches.add(sw);
 
@@ -181,11 +182,6 @@ public class ScalableModelGenerator extends ModelGenerator {
 						createSegment(currentTrack, sensor, region);
 					}
 				}
-
-				final int numberOfPositions = Position.values().length;
-				final int positionOrdinal = random.nextInt(numberOfPositions);
-				final Position position = Position.values()[positionOrdinal];
-				serializer.setAttribute(SWITCH, sw, CURRENTPOSITION, position);
 
 				// the errorInjectedState may contain a bad value
 				final boolean switchSetError = nextRandom() < switchSetErrorPercent;

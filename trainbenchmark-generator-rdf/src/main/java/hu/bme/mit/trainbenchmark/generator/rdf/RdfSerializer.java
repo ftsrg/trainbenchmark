@@ -141,14 +141,6 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 		write(triple);
 	}
 
-	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value)
-			throws IOException {
-		final String triple = String.format(":%s%s :%s %s", ID_PREFIX, node, key, stringValue(value));
-		write(triple + " .");
-
-	}
-
 	protected void write(final String s) throws IOException {
 		switch (gc.getFormat()) {
 		case NTRIPLES:
