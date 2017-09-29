@@ -6,6 +6,7 @@ package hu.bme.mit.trainbenchmark.railway
 
 abstract class RailwayElement {
 	int ^id
+	refers Node node
 }
 
 class RailwayContainer {
@@ -65,4 +66,30 @@ enum Signal {
 	FAILURE = 0
 	STOP = 1
 	GO = 2
+}
+
+// deployment-related
+
+class Node {
+	String name
+	String lip
+	String ip
+	int port
+	int IDGenStart
+	int IDGenMod
+}
+
+class ComputingModule {
+	int memoryMB
+	int cpuMHZ
+	int replyTimeMaxMS
+    int hostId	
+	refers ComputingModule[] communicatesWith
+}
+
+class Allocation {
+	long ^id
+	refers Allocation allocation
+	refers ComputingModule computingModule
+    refers RailwayElement[] domainElements	
 }
