@@ -27,8 +27,7 @@ public class ViatraTransformationInjectPosLength extends ViatraTransformation<Po
 	@Override
 	public void activate(final Collection<PosLengthInjectMatch> matches) throws IOException {
 		for (final PosLengthInjectMatch match : matches) {
-			final int newLength = -match.getSegment().getLength() + 1;
-			match.getSegment().setLength(newLength);
+			match.getSegment().setLength(0);
 		}
 	}
 
