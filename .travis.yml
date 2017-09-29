@@ -3,7 +3,7 @@ jdk:
   - oraclejdk8
 install: true
 script:
-  - ./gradlew inits build --exclude-task test
+  - ./gradlew inits build -x :trainbenchmark-generator-sql:test -x :trainbenchmark-tool-mysql:test
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
   email: false
