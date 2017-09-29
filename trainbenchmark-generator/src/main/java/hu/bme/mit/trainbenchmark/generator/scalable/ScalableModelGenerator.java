@@ -141,7 +141,12 @@ public class ScalableModelGenerator extends ModelGenerator {
 			final List<Object> currentTrack = new ArrayList<>();
 			final Set<Object> switches = new HashSet<>();
 			for (int j = 0; j < swPs; j++) {
-				final Object sw = serializer.createVertex(SWITCH);
+				final int numberOfPositions = Position.values().length;
+				final int positionOrdinal = random.nextInt(numberOfPositions);
+				final Position position = Position.values()[positionOrdinal];
+
+				final Map<String, Object> swAttributes = ImmutableMap.of(CURRENTPOSITION, position);
+				final Object sw = serializer.createVertex(SWITCH, swAttributes);
 				currentTrack.add(sw);
 				switches.add(sw);
 
@@ -181,11 +186,6 @@ public class ScalableModelGenerator extends ModelGenerator {
 						createSegment(currentTrack, sensor, region);
 					}
 				}
-
-				final int numberOfPositions = Position.values().length;
-				final int positionOrdinal = random.nextInt(numberOfPositions);
-				final Position position = Position.values()[positionOrdinal];
-				serializer.setAttribute(SWITCH, sw, CURRENTPOSITION, position);
 
 				// the errorInjectedState may contain a bad value
 				final boolean switchSetError = nextRandom() < switchSetErrorPercent;
