@@ -100,14 +100,6 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 	}
 
 	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value) {
-		final Vertex v = (Vertex) node;
-
-		final Object attributeValue = enumsToString(value);
-		v.property(key, attributeValue);
-	}
-
-	@Override
 	public void persistModel() throws IOException, XMLStreamException, ClassNotFoundException, IllegalAccessException,
 			InstantiationException {
 		final TinkerGraphFormat format = gc.getGraphFormat();

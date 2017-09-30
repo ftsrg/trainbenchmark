@@ -1,9 +1,0 @@
-package hu.bme.mit.trainbenchmark.railway
-
-query "RouteSensor"
-    route : Route()
-    swP : SwitchPosition( ) from route.follows
-    sw : Switch( this == swP.target )
-    sensor : Sensor( ) from sw.monitoredBy
-    not Sensor( this == sensor, this memberOf route.requires )
-end

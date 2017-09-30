@@ -1,8 +1,0 @@
-package hu.bme.mit.trainbenchmark.railway
-
-query "SwitchSet"
-    route : Route( active, $follows : follows )
-    semaphore : Semaphore( this == route.entry )
-    swP : SwitchPosition( this memberOf $follows )
-    sw: Switch( this == swP.target, currentPosition.value != swP.position.value )
-end

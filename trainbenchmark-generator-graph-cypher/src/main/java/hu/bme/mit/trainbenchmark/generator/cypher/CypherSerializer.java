@@ -104,13 +104,6 @@ public class CypherSerializer extends ModelSerializer<CypherGeneratorConfig> {
 		write("MATCH (from {id: " + from + "}), (to {id: " + to + "}) CREATE (from)-[:" + label + "]->(to);");
 	}
 
-	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value) throws IOException {
-		final String stringValue = valueToString(value);
-
-		write("MATCH (node:" + type + " {id: " + node + "}) SET node." + key + "=" + stringValue + ";");
-	}
-
 	private String valueToString(final Object value) {
 		if (value.toString().equals("true") || value.toString().equals("false")) return value.toString();
 		try {

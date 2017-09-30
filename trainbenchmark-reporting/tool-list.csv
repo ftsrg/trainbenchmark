@@ -1,13 +1,10 @@
 Tool
-Drools
-Eclipse OCL
 EMF API
 Jena (Inferencing)
 Jena (No Inferencing)
 MySQL
 Neo4j (Core API-CSV)
 Neo4j (Cypher-GraphML)
-RDF4J (No Inferencing)
 SQLite
 TinkerGraph
 VIATRA (Incremental)

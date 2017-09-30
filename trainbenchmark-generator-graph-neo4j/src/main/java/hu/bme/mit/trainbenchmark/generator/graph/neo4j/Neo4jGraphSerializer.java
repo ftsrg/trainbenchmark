@@ -120,14 +120,6 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		source.createRelationshipTo(target, relationshipType);
 	}
 
-	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value) {
-		final Node n = (Node) node;
-
-		final Object attributeValue = enumsToString(value);
-		n.setProperty(key, attributeValue);
-	}
-
 	public RelationshipType relationship(final String label) {
 		return RelationshipType.withName(label);
 	}

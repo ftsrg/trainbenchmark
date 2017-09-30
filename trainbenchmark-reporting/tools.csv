@@ -1,6 +1,4 @@
 tool,format,storage
-Drools,EMF,in-memory
-Eclipse OCL,EMF,in-memory
 EMF API,EMF,in-memory
 VIATRA (Incremental),EMF,in-memory
 VIATRA (Local Search),EMF,in-memory
@@ -11,11 +9,7 @@ Neo4j (Cypher-GraphML),property graph,disk-resident
 Neo4j (Core API-Binary),property graph,disk-resident
 Neo4j (Cypher-Binary),property graph,disk-resident
 TinkerGraph,property graph,in-memory
-Blazegraph (No Inferencing),RDF,disk-resident
-Blazegraph (Inferencing),RDF,disk-resident
 Jena (Inferencing),RDF,in-memory
 Jena (No Inferencing),RDF,in-memory
-RDF4J (Inferencing),RDF,in-memory
-RDF4J (No Inferencing),RDF,in-memory
 MySQL,SQL,disk-resident
 SQLite,SQL,in-memory

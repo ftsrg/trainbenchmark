@@ -49,8 +49,6 @@ public abstract class ModelSerializer<TGeneratorConfig extends GeneratorConfig> 
 
 	public abstract void createEdge(String label, Object from, Object to) throws IOException;
 
-	public abstract void setAttribute(String type, Object node, String key, Object value) throws IOException;
-
 	public void beginTransaction() throws IOException {
 	};
 

@@ -5,10 +5,6 @@ plugins {
 apply plugin: 'org.xtext.xtend'
 apply from: "${rootDir}/gradle/source-layout-xcore.gradle"
 
-ext {
-	xtextVersion = '2.10.0'
-}
-
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
 	compile 'org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:+'

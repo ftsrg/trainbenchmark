@@ -85,7 +85,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
 		railwayElement.setId(id);
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
-			setAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
+			setEmfAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
 		}
 
 		switch (type) {
@@ -124,14 +124,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 		}
 	}
 
-	@Override
-	public void setAttribute(final String type, final Object node, final String key, final Object value)
-			throws IOException {
-		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		setAttribute(clazz, (RailwayElement) node, key, value);
-	}
-
-	protected void setAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
+	protected void setEmfAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
 		// change the enum value from the
 		// hu.bme.mit.trainbenchmark.constants.Signal enum to the
 		// hu.bme.mit.trainbenchmark.railway.Signal enum

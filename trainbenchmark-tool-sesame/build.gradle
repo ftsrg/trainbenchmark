@@ -7,7 +7,6 @@ shadowJar {
 }
 
 dependencies {
-	def sesameVersion = '2.7.10'
 	compile project(':trainbenchmark-tool-rdf')
 	compile group: 'org.openrdf.sesame', name: 'sesame-model', version: sesameVersion
 	compile group: 'org.openrdf.sesame', name: 'sesame-repository-sail', version: sesameVersion
