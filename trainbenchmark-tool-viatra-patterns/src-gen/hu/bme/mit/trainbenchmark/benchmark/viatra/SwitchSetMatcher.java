@@ -34,7 +34,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * <code><pre>
  * pattern switchSet(semaphore, route, swP, sw)
  * {
- * 	Route.active(route, true);
+ * 	Route.active(route, 1);
  * 	Route.entry(route, semaphore);
  * 	Route.follows(route, swP);
  * 	SwitchPosition.target(swP, sw);
