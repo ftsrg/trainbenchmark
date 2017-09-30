@@ -98,7 +98,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 		Object firstSemaphore = null;
 		List<Object> firstTracks = null;
 		List<Object> prevTracks = null;
-		for (long i = 0; i < maxRoutes; i++) {
+		for (int i = 0; i < maxRoutes; i++) {
 			boolean firstSegment = true;
 
 			serializer.beginTransaction();
@@ -130,7 +130,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 			final Map<String, Object> routeAttributes = new HashMap<>();
 			routeAttributes.put(ACTIVE, true);
-			
+
 			final Object route = serializer.createVertex(ROUTE, routeAttributes, routeOutgoingEdges);
 			final Object region = serializer.createVertex(REGION);
 
