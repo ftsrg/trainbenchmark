@@ -20,7 +20,7 @@ class Region extends RailwayElement {
 }
 
 class Route extends RailwayElement {
-	int active
+	Integer active
 	contains SwitchPosition[] follows opposite route
 	refers Sensor[2..*] requires
 	refers Semaphore entry
