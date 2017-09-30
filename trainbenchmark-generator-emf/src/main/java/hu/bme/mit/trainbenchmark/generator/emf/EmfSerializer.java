@@ -146,6 +146,10 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 		return SEP + quote(key) + ": \"" + value + "\"";
 	}
 
+	private String keyValue(String key, Boolean value) {
+		return SEP + quote(key) + ": \"" + value.toString() + "\"";
+	}
+
 	private String keyValue(String key, int value) {
 		return SEP + quote(key) + ": " + value;
 	}
@@ -201,7 +205,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 		switch (type) {
 		case ModelConstants.ROUTE:
 			Route route = (Route) o;
-			props += keyValue("active", route.getActive());
+			props += keyValue("active", route.isActive());
 			props += keyValue(FOLLOWS,  route.getFollows());
 			props += keyValue(ENTRY,    route.getEntry());
 			props += keyValue(EXIT,     route.getExit());

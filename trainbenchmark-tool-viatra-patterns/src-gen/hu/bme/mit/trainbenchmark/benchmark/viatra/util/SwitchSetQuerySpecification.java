@@ -152,13 +152,13 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
                  new ExportedParameter(body, var_swP, parameter_pSwP),
                  new ExportedParameter(body, var_sw, parameter_pSw)
               ));
-              // 	Route.active(route, 1)
+              // 	Route.active(route, true)
               PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-              new ConstantValue(body, var__virtual_0_, 1);
+              new ConstantValue(body, var__virtual_0_, true);
               new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
               PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
               new TypeConstraint(body, new FlatTuple(var_route, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route", "active")));
-              new TypeConstraint(body, new FlatTuple(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EInt")));
+              new TypeConstraint(body, new FlatTuple(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EBoolean")));
               new Equality(body, var__virtual_1_, var__virtual_0_);
               // 	Route.entry(route, semaphore)
               new TypeConstraint(body, new FlatTuple(var_route), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.semanticweb.org/ontologies/2015/trainbenchmark", "Route")));
@@ -211,7 +211,7 @@ public final class SwitchSetQuerySpecification extends BaseGeneratedEMFQuerySpec
     }
   }
   
-  private static int evaluateExpression_1_1() {
-    return 1;
+  private static boolean evaluateExpression_1_1() {
+    return true;
   }
 }
