@@ -29,6 +29,7 @@ public class EmfTransformationInjectSwitchSet<TDriver extends EmfDriver, TSwitch
 	@Override
 	public void activate(final Collection<TSwitchSetInjectMatch> matches) throws IOException {
 		for (final TSwitchSetInjectMatch match : matches) {
+			System.out.println(match);
 			final Position currentPosition = match.getSw().getCurrentPosition();
 			final Position newCurrentPosition = Position.get((currentPosition.ordinal() + 1) % Position.VALUES.size());
 			match.getSw().setCurrentPosition(newCurrentPosition);

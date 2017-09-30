@@ -129,7 +129,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			routeOutgoingEdges.put(EXIT, exit);
 
 			final Map<String, Object> routeAttributes = new HashMap<>();
-			routeAttributes.put(ACTIVE, 1);
+			routeAttributes.put(ACTIVE, true);
 			
 			final Object route = serializer.createVertex(ROUTE, routeAttributes, routeOutgoingEdges);
 			final Object region = serializer.createVertex(REGION);
