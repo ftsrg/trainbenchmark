@@ -3,6 +3,7 @@ package hu.bme.mit.trainbenchmark.generator.scalable;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ACTIVE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.DOMAIN_ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
@@ -35,6 +36,7 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -62,7 +64,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		super(serializer, generatorConfig);
-		maxRoutes = 5 * generatorConfig.getConfigBase().getSize();
+		maxRoutes = 6 * generatorConfig.getConfigBase().getSize();
 		switch (generatorConfig.getConfigBase().getScenario()) {
 		case BATCH:
 			// set all error percents to 0
@@ -94,19 +96,68 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	@Override
 	protected void constructModel() throws FileNotFoundException, IOException {
+		final int moduleCount = 6;
+
+		// computingmodule
+//		{":id": 101,	":node": "BBB1",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1001,	"communicatesWith": []},
+//		{":id": 102,	":node": "BBB2",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1002,	"communicatesWith": []},
+//		{":id": 103,	":node": "BBB3",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1003,	"communicatesWith": []},
+//		{":id": 104,	":node": "BBB4",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1004,	"communicatesWith": []},
+//		{":id": 105,	":node": "BBB5",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1005,	"communicatesWith": []},
+//		{":id": 106,	":node": "BBB6",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1006,	"communicatesWith": []},
+
+		// computing module ids start from 10 million
+		List<Object> computingModules = new ArrayList<>();
+		for (int i = 1; i <= moduleCount; i++) {
+			Map<String, Object> attributes = new ImmutableMap.Builder<String, Object>() //
+					.put("id", 10*1000*1000 + i) //
+					.put("node", "BBB") //
+					.put("memoryMB", 1024) //
+					.put("cpuMHZ", 1000) //
+					.put("replyTimeMaxMS", 2000) //
+					.put("hostID", 1000 + i) //
+					.build();
+			Object computingModule = serializer.createVertex(ModelConstants.COMPUTING_MODULE, attributes);
+			computingModules.add(computingModule);
+		}
+		
+		// allocation
+//		{":id": 201,	":node": "BBB1",	":type": "Allocation",	"computingModule": 101,	"domainElements": [15,16,17,19]},
+//		{":id": 202,	":node": "BBB2",	":type": "Allocation",	"computingModule": 102,	"domainElements": [22,23,24,25,26,27,28,30]},
+//		{":id": 203,	":node": "BBB3",	":type": "Allocation",	"computingModule": 103,	"domainElements": [1,12,18,20]},
+//		{":id": 204,	":node": "BBB4",	":type": "Allocation",	"computingModule": 104,	"domainElements": [2,10,13,14,21]},
+//		{":id": 205,	":node": "BBB5",	":type": "Allocation",	"computingModule": 105,	"domainElements": [4,5,6,7,8,9]},
+//		{":id": 206,	":node": "BBB6",	":type": "Allocation",	"computingModule": 106,	"domainElements": [3,11,29]},
+
+		// allocation ids start from 20 million
+		List<Object> allocations = new ArrayList<>();
+		for (int i = 1; i <= moduleCount; i++) {
+			Map<String, Object> attributes = new ImmutableMap.Builder<String, Object>() //
+					.put("id", 20*1000*1000 + i) //
+					.put("node", "BBB" + i) //
+					.build();
+			Map<String, Object> edges = ImmutableMap.of(ModelConstants.COMPUTING_MODULE_EDGE, computingModules.get(i - 1));
+			Object allocation = serializer.createVertex(ModelConstants.ALLOCATION, attributes, edges);
+			allocations.add(allocation);
+		}		
+		
 		Object prevSemaphore = null;
 		Object firstSemaphore = null;
 		List<Object> firstTracks = null;
 		List<Object> prevTracks = null;
-		for (long i = 0; i < maxRoutes; i++) {
+		
+		for (int i = 0; i < maxRoutes; i++) {
+			Object allocation = allocations.get(i % moduleCount);
+		
 			boolean firstSegment = true;
-
 			serializer.beginTransaction();
 
 			if (prevSemaphore == null) {
 				final Map<String, Object> semaphoreAttributes = ImmutableMap.of(SIGNAL, Signal.GO);
 
 				prevSemaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
+				serializer.createEdge(DOMAIN_ELEMENTS, allocation, prevSemaphore);
+				
 				firstSemaphore = prevSemaphore;
 			}
 
@@ -114,6 +165,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			if (i != maxRoutes - 1) {
 				final Map<String, Object> semaphoreAttributes = ImmutableMap.of(SIGNAL, Signal.GO);
 				semaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
+				serializer.createEdge(DOMAIN_ELEMENTS, allocation, semaphore);
 			} else {
 				semaphore = firstSemaphore;
 			}
@@ -132,7 +184,10 @@ public class ScalableModelGenerator extends ModelGenerator {
 			routeAttributes.put(ACTIVE, true);
 			
 			final Object route = serializer.createVertex(ROUTE, routeAttributes, routeOutgoingEdges);
+			serializer.createEdge(DOMAIN_ELEMENTS, allocation, route);
+
 			final Object region = serializer.createVertex(REGION);
+			serializer.createEdge(DOMAIN_ELEMENTS, allocation, region);
 
 			final int swPs = random.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
@@ -143,6 +198,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 				final Position position = Position.values()[positionOrdinal];
 				final Map<String, ? extends Object> swAttributes = ImmutableMap.of(CURRENTPOSITION, position);
 				final Object sw = serializer.createVertex(SWITCH, swAttributes);
+				serializer.createEdge(DOMAIN_ELEMENTS, allocation, sw);
+
 				currentTrack.add(sw);
 				switches.add(sw);
 
@@ -153,6 +210,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 				for (int k = 0; k < sensors; k++) {
 					final Object sensor = serializer.createVertex(SENSOR);
+					serializer.createEdge(DOMAIN_ELEMENTS, allocation, sensor);
+
 					serializer.createEdge(SENSORS, region, sensor);
 
 					// add "monitored by" edge from switch to sensor
@@ -169,7 +228,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 					// generate segments
 					for (int m = 0; m < maxSegments; m++) {
-						final Object segment = createSegment(currentTrack, sensor, region);
+						final Object segment = createSegment(currentTrack, sensor, region, allocation);
 
 						if (firstSegment) {
 							serializer.createEdge(SEMAPHORES, segment, semaphore);
@@ -179,7 +238,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 					// create another extra segment
 					if (nextRandom() < connectedSegmentsErrorPercent) {
-						createSegment(currentTrack, sensor, region);
+						createSegment(currentTrack, sensor, region, allocation);
 					}
 				}
 
@@ -191,6 +250,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 				final Map<String, Object> swPAttributes = ImmutableMap.of(POSITION, invalidPosition);
 				final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
 				final Object swP = serializer.createVertex(SWITCHPOSITION, swPAttributes, swPOutgoingEdges);
+				serializer.createEdge(DOMAIN_ELEMENTS, allocation, swP);
+
 
 				// (route)-[:follows]->(swP)
 				serializer.createEdge(FOLLOWS, route, swP);
@@ -237,12 +298,14 @@ public class ScalableModelGenerator extends ModelGenerator {
 		}
 	}
 
-	private Object createSegment(final List<Object> currTracks, final Object sensor, final Object region) throws IOException {
+	private Object createSegment(final List<Object> currTracks, final Object sensor, final Object region, final Object allocation) throws IOException {
 		final boolean posLengthError = nextRandom() < posLengthErrorPercent;
 		final int segmentLength = ((posLengthError ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH)) + 1;
 
 		final Map<String, Object> segmentAttributes = ImmutableMap.of(LENGTH, segmentLength);
 		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
+		serializer.createEdge(DOMAIN_ELEMENTS, allocation, segment);
+
 
 		// (region)-[:elements]->(segment)
 		serializer.createEdge(ELEMENTS, region, segment);

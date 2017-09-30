@@ -7,11 +7,14 @@ package hu.bme.mit.trainbenchmark.railway
 abstract class RailwayElement {
 	int ^id
 	refers Node node
+	refers Allocation allocation opposite domainElements
 }
 
 class RailwayContainer {
 	contains Route[] routes
 	contains Region[] regions
+	contains ComputingModule[] computingModules
+	contains Allocation[] allocations
 }
 
 class Region extends RailwayElement {
@@ -80,16 +83,19 @@ class Node {
 }
 
 class ComputingModule {
+	int ^id
+	String node
 	int memoryMB
 	int cpuMHZ
 	int replyTimeMaxMS
-    int hostId	
+    int hostID
 	refers ComputingModule[] communicatesWith
 }
 
 class Allocation {
-	long ^id
+	int ^id
+	String node
 	refers Allocation allocation
 	refers ComputingModule computingModule
-    refers RailwayElement[] domainElements	
+    refers RailwayElement[] domainElements opposite allocation
 }

@@ -51,5 +51,11 @@ public class ModelConstants {
 
 	// inheritance
 	public static final Map<String, String> SUPERTYPES = ImmutableMap.of(SEGMENT, TRACKELEMENT, SWITCH, TRACKELEMENT);
+	
+	// deployment
+	public static final String COMPUTING_MODULE = "ComputingModule";
+	public static final String COMPUTING_MODULE_EDGE = "computingModule";
+	public static final String ALLOCATION = "Allocation";
+	public static final String DOMAIN_ELEMENTS = "domainElements";
 
 }

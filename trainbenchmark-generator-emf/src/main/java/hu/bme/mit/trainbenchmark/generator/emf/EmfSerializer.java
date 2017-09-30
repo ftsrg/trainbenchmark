@@ -12,6 +12,8 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ALLOCATION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.COMPUTING_MODULE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
@@ -43,7 +45,6 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -52,11 +53,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import com.google.common.collect.ImmutableList;
+
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfUtil;
 import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
 import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfig;
+import hu.bme.mit.trainbenchmark.railway.Allocation;
+import hu.bme.mit.trainbenchmark.railway.ComputingModule;
 import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
 import hu.bme.mit.trainbenchmark.railway.RailwayElement;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
@@ -117,10 +122,24 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 
 		try (final BufferedWriter w = new BufferedWriter(new FileWriter(destFile, true))) {
 			// model
-			Iterable<EObject> iterator = () -> resource.getAllContents();
+			Iterable<EObject> iterable1 = () -> resource.getAllContents();
 
-			for (EObject eObject : iterator) {
-				if (eObject instanceof RailwayContainer)
+			for (EObject eObject : iterable1) {
+				if (eObject instanceof RailwayContainer ||
+					eObject instanceof RailwayElement)
+					continue;
+
+				final String line = toLine(eObject);
+				w.write("\t\t{\t" + line + "}\n");
+			}
+
+			w.write("\n");
+			
+			Iterable<EObject> iterable2 = () -> resource.getAllContents();			
+			for (EObject eObject : iterable2) {
+				if (eObject instanceof RailwayContainer ||
+					eObject instanceof Allocation ||
+					eObject instanceof ComputingModule)
 					continue;
 
 				final String line = toLine(eObject);
@@ -162,7 +181,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 		}
 	}
 	
-	private String keyValue(String key, EList<? extends RailwayElement> value) {
+	private String keyValue(String key, List<? extends RailwayElement> value) {
 		return SEP + quote(key) + ": " +  
 			"[" + 
 			value
@@ -173,6 +192,10 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 	}
 
 	private String getType(EObject o) {
+		if (o instanceof Allocation)
+			return ALLOCATION;
+		if (o instanceof ComputingModule)
+			return COMPUTING_MODULE;
 		if (o instanceof Route)
 			return ROUTE;
 		if (o instanceof Region)
@@ -194,84 +217,130 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 	final String SEP = ",\t";
 
 	private String toLine(EObject o) {
-		String props = "";
-		// add type information
+		if (o instanceof ComputingModule) {
+			ComputingModule cm = (ComputingModule) o;
+			String props = "\":id\": " + cm.getId();
+			props += keyValue(":node", cm.getNode());
+			props += keyValue(":type", "ComputingModule");
 
-		props += " \"allocation data\": 0";
-		
-		String type = getType(o);
-		props += keyValue(":type", type);
-
-		switch (type) {
-		case ModelConstants.ROUTE:
-			Route route = (Route) o;
-			props += keyValue("active", route.isActive());
-			props += keyValue(FOLLOWS,  route.getFollows());
-			props += keyValue(ENTRY,    route.getEntry());
-			props += keyValue(EXIT,     route.getExit());
-			props += keyValue(REQUIRES, route.getRequires());
-			break;
-		case ModelConstants.SEGMENT:
-			Segment segment = (Segment) o;
-			props += keyValue(LENGTH, segment.getLength());
-			props += keyValue(CONNECTS_TO, segment.getConnectsTo());
-			props += keyValue(MONITORED_BY, segment.getMonitoredBy());			
-			break;
-		case ModelConstants.SEMAPHORE:
-			Semaphore semaphore = (Semaphore) o;
-			props += keyValue(SIGNAL, semaphore.getSignal().toString());
-			break;
-		case ModelConstants.SENSOR:
-			Sensor sensor = (Sensor) o;
-			props += keyValue(ELEMENTS, sensor.getMonitors());
-			break;
-		case ModelConstants.SWITCH:
-			Switch sw = (Switch) o;
-			props += keyValue(CURRENTPOSITION, sw.getCurrentPosition().toString());
-			props += keyValue(CONNECTS_TO, sw.getConnectsTo());
-			props += keyValue(MONITORED_BY, sw.getMonitoredBy());
-			props += keyValue("POSITIONS", sw.getPositions());
-			break;
-		case ModelConstants.SWITCHPOSITION:
-			SwitchPosition swP = (SwitchPosition) o;
-			props += keyValue(ROUTE, swP.getRoute());
-			props += keyValue(TARGET, swP.getTarget());
-			props += keyValue(POSITION, swP.getPosition().toString());
-			break;
+			// run-of-the-mill props
+			props += keyValue("memoryMB", cm.getMemoryMB());
+			props += keyValue("cpuMHZ", cm.getCpuMHZ());
+			props += keyValue("replyTimeMaxMS", cm.getReplyTimeMaxMS());
+			props += keyValue("hostID", cm.getHostID());
+			props += keyValue("communicatesWith", ImmutableList.<RailwayElement>of());
+			
+			return props;
 		}
-		return props;
+		if (o instanceof Allocation) {
+			Allocation a = (Allocation) o;
+			String props = "\":id\": " + a.getId();
+			props += keyValue(":node", a.getNode());
+			props += keyValue(":type", "Allocation");
+			
+			// run-of-the-mill props
+			props += keyValue("computingModule", a.getComputingModule().getId());
+			props += keyValue("domainElements", a.getDomainElements());
+			
+			
+			return props;
+		}
+		if (o instanceof RailwayElement) {
+			RailwayElement re = (RailwayElement) o;
+			
+			String props = "\":id\": " + re.getId();
+			// add type information
+	
+			props += keyValue("allocation", re.getAllocation().getId());
+			props += keyValue(":node", re.getAllocation().getNode());
+					
+			String type = getType(o);
+			props += keyValue(":type", type);
+	
+			switch (type) {
+			case ModelConstants.ROUTE:
+				Route route = (Route) o;
+				props += keyValue("active", route.isActive());
+				props += keyValue(FOLLOWS,  route.getFollows());
+				props += keyValue(ENTRY,    route.getEntry());
+				props += keyValue(EXIT,     route.getExit());
+				props += keyValue(REQUIRES, route.getRequires());
+				break;
+			case ModelConstants.SEGMENT:
+				Segment segment = (Segment) o;
+				props += keyValue(LENGTH, segment.getLength());
+				props += keyValue(CONNECTS_TO, segment.getConnectsTo());
+				props += keyValue(MONITORED_BY, segment.getMonitoredBy());			
+				break;
+			case ModelConstants.SEMAPHORE:
+				Semaphore semaphore = (Semaphore) o;
+				props += keyValue(SIGNAL, semaphore.getSignal().toString());
+				break;
+			case ModelConstants.SENSOR:
+				Sensor sensor = (Sensor) o;
+				props += keyValue(ELEMENTS, sensor.getMonitors());
+				break;
+			case ModelConstants.SWITCH:
+				Switch sw = (Switch) o;
+				props += keyValue(CURRENTPOSITION, sw.getCurrentPosition().toString());
+				props += keyValue(CONNECTS_TO, sw.getConnectsTo());
+				props += keyValue(MONITORED_BY, sw.getMonitoredBy());
+				props += keyValue("positions", sw.getPositions());
+				break;
+			case ModelConstants.SWITCHPOSITION:
+				SwitchPosition swP = (SwitchPosition) o;
+				props += keyValue("route", swP.getRoute());
+				props += keyValue(TARGET, swP.getTarget());
+				props += keyValue(POSITION, swP.getPosition().toString());
+				break;
+			}
+			return props;
+		}
+		throw new IllegalStateException();
 	}
 
 	@Override
 	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		final RailwayElement railwayElement = (RailwayElement) RailwayFactory.eINSTANCE.create(clazz);
-		railwayElement.setId(id);
+		
+		final EObject eo = RailwayFactory.eINSTANCE.create(clazz);
+		if (eo instanceof RailwayElement) {
+			RailwayElement re = (RailwayElement) eo;
+			re.setId(id);
+		}
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
-			setEmfAttribute(clazz, railwayElement, attribute.getKey(), attribute.getValue());
+			setEmfAttribute(clazz, eo, attribute.getKey(), attribute.getValue());
 		}
 
 		switch (type) {
 		case ModelConstants.REGION:
-			container.getRegions().add((Region) railwayElement);
+			container.getRegions().add((Region) eo);
 			break;
 		case ModelConstants.ROUTE:
-			container.getRoutes().add((Route) railwayElement);
+			container.getRoutes().add((Route) eo);
 			break;
+		// <deployment>
+		case ModelConstants.ALLOCATION:
+			container.getAllocations().add((Allocation) eo);
+			break;
+		case ModelConstants.COMPUTING_MODULE:
+			container.getComputingModules().add((ComputingModule) eo);
+			break;
+		// </deplyoment>
 		default:
 			break;
 		}
 
 		for (final Entry<String, Object> outgoingEdge : outgoingEdges.entrySet()) {
-			createEdge(outgoingEdge.getKey(), railwayElement, outgoingEdge.getValue());
+			createEdge(outgoingEdge.getKey(), eo, outgoingEdge.getValue());
 		}
 
 		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {
-			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), railwayElement);
+			createEdge(incomingEdge.getKey(), incomingEdge.getValue(), eo);
 		}
 
-		return railwayElement;
+		return eo;
 	}
 
 	@Override
@@ -288,7 +357,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 		}
 	}
 
-	protected void setEmfAttribute(final EClass clazz, final RailwayElement node, final String key, Object value) {
+	protected void setEmfAttribute(final EClass clazz, final EObject node, final String key, Object value) {
 		// change the enum value from the
 		// hu.bme.mit.trainbenchmark.constants.Signal enum to the
 		// hu.bme.mit.trainbenchmark.railway.Signal enum
