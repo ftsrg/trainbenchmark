@@ -94,10 +94,26 @@ public class ScalableModelGenerator extends ModelGenerator {
 		return random.nextInt(100);
 	}
 
+	final int moduleCount = 6;
+	protected Random allocationRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	final boolean randomAllocation = false;
+	
+	private void setAllocation(List<Object> allocations, int i, Object o) throws IOException {
+		Object allocation;
+		if (randomAllocation) {
+			// select randomly
+			allocation = allocations.get(random.nextInt(moduleCount));
+		} else {
+			// select based on route/region
+			allocation = allocations.get(i % moduleCount);
+		}
+		
+		// add edge
+		serializer.createEdge(DOMAIN_ELEMENTS, allocation, o);
+	}
+	
 	@Override
 	protected void constructModel() throws FileNotFoundException, IOException {
-		final int moduleCount = 6;
-
 		// computingmodule
 //		{":id": 101,	":node": "BBB1",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1001,	"communicatesWith": []},
 //		{":id": 102,	":node": "BBB2",	":type": "ComputingModule",	"memoryMB": 1024,	"cpuMZH": 1000,	"replyTimeMaxMS": 2000,	"hostID": 1002,	"communicatesWith": []},
@@ -111,7 +127,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 		for (int i = 1; i <= moduleCount; i++) {
 			Map<String, Object> attributes = new ImmutableMap.Builder<String, Object>() //
 					.put("id", 10*1000*1000 + i) //
-					.put("node", "BBB") //
+					.put("node", "BBB" + i) //
 					.put("memoryMB", 1024) //
 					.put("cpuMHZ", 1000) //
 					.put("replyTimeMaxMS", 2000) //
@@ -147,8 +163,6 @@ public class ScalableModelGenerator extends ModelGenerator {
 		List<Object> prevTracks = null;
 		
 		for (int i = 0; i < maxRoutes; i++) {
-			Object allocation = allocations.get(i % moduleCount);
-		
 			boolean firstSegment = true;
 			serializer.beginTransaction();
 
@@ -156,7 +170,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 				final Map<String, Object> semaphoreAttributes = ImmutableMap.of(SIGNAL, Signal.GO);
 
 				prevSemaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
-				serializer.createEdge(DOMAIN_ELEMENTS, allocation, prevSemaphore);
+				setAllocation(allocations, i, prevSemaphore);
 				
 				firstSemaphore = prevSemaphore;
 			}
@@ -165,7 +179,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			if (i != maxRoutes - 1) {
 				final Map<String, Object> semaphoreAttributes = ImmutableMap.of(SIGNAL, Signal.GO);
 				semaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
-				serializer.createEdge(DOMAIN_ELEMENTS, allocation, semaphore);
+				setAllocation(allocations, i, semaphore);
 			} else {
 				semaphore = firstSemaphore;
 			}
@@ -184,10 +198,10 @@ public class ScalableModelGenerator extends ModelGenerator {
 			routeAttributes.put(ACTIVE, true);
 			
 			final Object route = serializer.createVertex(ROUTE, routeAttributes, routeOutgoingEdges);
-			serializer.createEdge(DOMAIN_ELEMENTS, allocation, route);
+			setAllocation(allocations, i, route);
 
 			final Object region = serializer.createVertex(REGION);
-			serializer.createEdge(DOMAIN_ELEMENTS, allocation, region);
+			setAllocation(allocations, i, region);
 
 			final int swPs = random.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
@@ -198,7 +212,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 				final Position position = Position.values()[positionOrdinal];
 				final Map<String, ? extends Object> swAttributes = ImmutableMap.of(CURRENTPOSITION, position);
 				final Object sw = serializer.createVertex(SWITCH, swAttributes);
-				serializer.createEdge(DOMAIN_ELEMENTS, allocation, sw);
+				setAllocation(allocations, i, sw);
 
 				currentTrack.add(sw);
 				switches.add(sw);
@@ -210,7 +224,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 				for (int k = 0; k < sensors; k++) {
 					final Object sensor = serializer.createVertex(SENSOR);
-					serializer.createEdge(DOMAIN_ELEMENTS, allocation, sensor);
+					setAllocation(allocations, i, sensor);
 
 					serializer.createEdge(SENSORS, region, sensor);
 
@@ -228,7 +242,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 					// generate segments
 					for (int m = 0; m < maxSegments; m++) {
-						final Object segment = createSegment(currentTrack, sensor, region, allocation);
+						final Object segment = createSegment(currentTrack, sensor, region, allocations, i);
 
 						if (firstSegment) {
 							serializer.createEdge(SEMAPHORES, segment, semaphore);
@@ -238,7 +252,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 					// create another extra segment
 					if (nextRandom() < connectedSegmentsErrorPercent) {
-						createSegment(currentTrack, sensor, region, allocation);
+						createSegment(currentTrack, sensor, region, allocations, i);
 					}
 				}
 
@@ -250,7 +264,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 				final Map<String, Object> swPAttributes = ImmutableMap.of(POSITION, invalidPosition);
 				final Map<String, Object> swPOutgoingEdges = ImmutableMap.of(TARGET, sw);
 				final Object swP = serializer.createVertex(SWITCHPOSITION, swPAttributes, swPOutgoingEdges);
-				serializer.createEdge(DOMAIN_ELEMENTS, allocation, swP);
+				setAllocation(allocations, i, swP);
 
 
 				// (route)-[:follows]->(swP)
@@ -298,13 +312,13 @@ public class ScalableModelGenerator extends ModelGenerator {
 		}
 	}
 
-	private Object createSegment(final List<Object> currTracks, final Object sensor, final Object region, final Object allocation) throws IOException {
+	private Object createSegment(final List<Object> currTracks, final Object sensor, final Object region, final List<Object> allocations, final int i) throws IOException {
 		final boolean posLengthError = nextRandom() < posLengthErrorPercent;
 		final int segmentLength = ((posLengthError ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH)) + 1;
 
 		final Map<String, Object> segmentAttributes = ImmutableMap.of(LENGTH, segmentLength);
 		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
-		serializer.createEdge(DOMAIN_ELEMENTS, allocation, segment);
+		setAllocation(allocations, i, segment);
 
 
 		// (region)-[:elements]->(segment)
