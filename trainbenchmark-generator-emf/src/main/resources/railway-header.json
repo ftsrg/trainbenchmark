@@ -1,0 +1,10 @@
+{
+	"nodes" : [
+		{	"name": "BBB1",	"lip":"localhost",	"ip": "192.168.1.101",	"port": 54321,	"IDGenStart": 0,	"IDGenMod": 10},
+		{	"name": "BBB2",	"lip":"localhost",	"ip": "192.168.1.102",	"port": 54322,	"IDGenStart": 1,	"IDGenMod": 10},
+		{	"name": "BBB3",	"lip":"localhost",	"ip": "192.168.1.103",	"port": 54323,	"IDGenStart": 2,	"IDGenMod": 10},
+		{	"name": "BBB4",	"lip":"localhost",	"ip": "192.168.1.104",	"port": 54324,	"IDGenStart": 3,	"IDGenMod": 10},
+		{	"name": "BBB5",	"lip":"localhost",	"ip": "192.168.1.105",	"port": 54325,	"IDGenStart": 4,	"IDGenMod": 10},
+		{	"name": "BBB6",	"lip":"localhost",	"ip": "192.168.1.106",	"port": 54326,	"IDGenStart": 5,	"IDGenMod": 10}
+	],
+	"model" : [

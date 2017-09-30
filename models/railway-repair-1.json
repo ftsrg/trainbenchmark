@@ -1,0 +1,1237 @@
+{
+	"nodes" : [
+		{	"name": "BBB1",	"lip":"localhost",	"ip": "192.168.1.101",	"port": 54321,	"IDGenStart": 0,	"IDGenMod": 10},
+		{	"name": "BBB2",	"lip":"localhost",	"ip": "192.168.1.102",	"port": 54322,	"IDGenStart": 1,	"IDGenMod": 10},
+		{	"name": "BBB3",	"lip":"localhost",	"ip": "192.168.1.103",	"port": 54323,	"IDGenStart": 2,	"IDGenMod": 10},
+		{	"name": "BBB4",	"lip":"localhost",	"ip": "192.168.1.104",	"port": 54324,	"IDGenStart": 3,	"IDGenMod": 10},
+		{	"name": "BBB5",	"lip":"localhost",	"ip": "192.168.1.105",	"port": 54325,	"IDGenStart": 4,	"IDGenMod": 10},
+		{	"name": "BBB6",	"lip":"localhost",	"ip": "192.168.1.106",	"port": 54326,	"IDGenStart": 5,	"IDGenMod": 10}
+	],
+	"model" : [
+		{	 "allocation data": 0,	":type": "Route",	"active": 1,	"follows": [24],	"entry": null,	"exit": 2,	"requires": [6, 18]}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 3,	"target": 5,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "Route",	"active": 1,	"follows": [41, 97, 117, 125],	"entry": 2,	"exit": 25,	"requires": [29, 35, 49, 55, 61, 67, 91, 99, 105, 111, 119]}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 26,	"target": 28,	"position": "DIVERGING"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 26,	"target": 42,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 26,	"target": 98,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 26,	"target": 118,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "Route",	"active": 1,	"follows": [148, 186, 242, 268, 318, 345, 353, 373, 405, 443, 469, 489, 497, 553, 604, 642, 693],	"entry": null,	"exit": 126,	"requires": [142, 150, 162, 168, 180, 188, 194, 206, 212, 218, 224, 230, 236, 244, 250, 256, 262, 270, 276, 282, 288, 300, 306, 320, 339, 347, 367, 375, 387, 419, 425, 437, 445, 457, 463, 471, 483, 491, 505, 511, 523, 529, 547, 555, 561, 567, 580, 586, 592, 598, 606, 618, 630, 636, 644, 662, 681, 687]}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 129,	"position": "DIVERGING"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 149,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 187,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 243,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 269,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 319,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 346,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 354,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 374,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 406,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 444,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 470,	"position": "DIVERGING"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 490,	"position": "DIVERGING"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 498,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 554,	"position": "DIVERGING"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 605,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 127,	"target": 643,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "Route",	"active": 1,	"follows": [752, 790, 810, 830],	"entry": 126,	"exit": 694,	"requires": [698, 704, 710, 716, 722, 728, 740, 754, 760, 766, 772, 778, 784, 792, 804, 812, 818, 824]}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 695,	"target": 697,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 695,	"target": 753,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 695,	"target": 791,	"position": "DIVERGING"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 695,	"target": 811,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "Route",	"active": 1,	"follows": [870, 908, 959, 1009, 1053, 1091, 1111, 1137, 1193, 1225],	"entry": 694,	"exit": 1,	"requires": [834, 840, 846, 852, 858, 872, 878, 884, 890, 896, 902, 910, 916, 922, 928, 935, 947, 953, 961, 967, 979, 985, 991, 997, 1003, 1017, 1023, 1035, 1047, 1067, 1073, 1079, 1085, 1093, 1099, 1105, 1113, 1139, 1145, 1151, 1163, 1169, 1175, 1181, 1187, 1195, 1201, 1207]}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 833,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 871,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 909,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 960,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 1010,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 1054,	"position": "FAILURE"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 1092,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 1112,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 1138,	"position": "STRAIGHT"}
+		{	 "allocation data": 0,	":type": "SwitchPosition",	"Route": 831,	"target": 1194,	"position": "DIVERGING"}
+		{	 "allocation data": 0,	":type": "Region"}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [5, 7, 8, 9, 10, 11]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [13, 14, 15, 16, 17]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [5, 19, 20, 21, 22, 23]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [7],	"monitoredBy": [6, 18],	"POSITIONS": [24]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 461,	"connectsTo": [8],	"monitoredBy": [6]}
+		{	 "allocation data": 0,	":type": "Semaphore",	"signal": "GO"}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 879,	"connectsTo": [9],	"monitoredBy": [6]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 829,	"connectsTo": [10],	"monitoredBy": [6]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 732,	"connectsTo": [11],	"monitoredBy": [6]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 857,	"connectsTo": [13],	"monitoredBy": [6]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -135,	"connectsTo": [14],	"monitoredBy": [12]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 494,	"connectsTo": [15],	"monitoredBy": [12]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -977,	"connectsTo": [16],	"monitoredBy": [12]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 815,	"connectsTo": [17],	"monitoredBy": [12]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 813,	"connectsTo": [19],	"monitoredBy": [12]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 968,	"connectsTo": [20],	"monitoredBy": [18]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 197,	"connectsTo": [21],	"monitoredBy": [18]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 324,	"connectsTo": [22],	"monitoredBy": [18]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 645,	"connectsTo": [23],	"monitoredBy": [18]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 517,	"connectsTo": [28],	"monitoredBy": [18]}
+		{	 "allocation data": 0,	":type": "Region"}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [28, 30, 31, 32, 33, 34]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [28, 36, 37, 38, 39, 40]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [44, 45, 46, 47, 48]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [42, 50, 51, 52, 53, 54]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [42, 56, 57, 58, 59, 60]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [42, 62, 63, 64, 65, 66]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [42, 68, 69, 70, 71, 72]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [42, 74, 75, 76, 77, 78]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [80, 81, 82, 83, 84]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [42, 86, 87, 88, 89, 90]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [42, 92, 93, 94, 95, 96]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [98, 100, 101, 102, 103, 104]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [98, 106, 107, 108, 109, 110]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [98, 112, 113, 114, 115, 116]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [118, 120, 121, 122, 123, 124]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [30],	"monitoredBy": [29, 35],	"POSITIONS": [41]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 367,	"connectsTo": [31],	"monitoredBy": [29]}
+		{	 "allocation data": 0,	":type": "Semaphore",	"signal": "GO"}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 180,	"connectsTo": [32],	"monitoredBy": [29]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 629,	"connectsTo": [33],	"monitoredBy": [29]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 633,	"connectsTo": [34],	"monitoredBy": [29]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 542,	"connectsTo": [36],	"monitoredBy": [29]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 567,	"connectsTo": [37],	"monitoredBy": [35]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 234,	"connectsTo": [38],	"monitoredBy": [35]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 132,	"connectsTo": [39],	"monitoredBy": [35]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 421,	"connectsTo": [40],	"monitoredBy": [35]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 429,	"connectsTo": [42],	"monitoredBy": [35]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [44],	"monitoredBy": [49, 55, 61, 67, 73, 85, 91],	"POSITIONS": [97]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -812,	"connectsTo": [45],	"monitoredBy": [43]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 26,	"connectsTo": [46],	"monitoredBy": [43]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 99,	"connectsTo": [47],	"monitoredBy": [43]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 853,	"connectsTo": [48],	"monitoredBy": [43]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 560,	"connectsTo": [50],	"monitoredBy": [43]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 35,	"connectsTo": [51],	"monitoredBy": [49]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 193,	"connectsTo": [52],	"monitoredBy": [49]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 141,	"connectsTo": [53],	"monitoredBy": [49]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 288,	"connectsTo": [54],	"monitoredBy": [49]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 852,	"connectsTo": [56],	"monitoredBy": [49]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 901,	"connectsTo": [57],	"monitoredBy": [55]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 530,	"connectsTo": [58],	"monitoredBy": [55]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 494,	"connectsTo": [59],	"monitoredBy": [55]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 273,	"connectsTo": [60],	"monitoredBy": [55]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 137,	"connectsTo": [62],	"monitoredBy": [55]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 386,	"connectsTo": [63],	"monitoredBy": [61]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 220,	"connectsTo": [64],	"monitoredBy": [61]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 929,	"connectsTo": [65],	"monitoredBy": [61]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 152,	"connectsTo": [66],	"monitoredBy": [61]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 886,	"connectsTo": [68],	"monitoredBy": [61]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 246,	"connectsTo": [69],	"monitoredBy": [67]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 437,	"connectsTo": [70],	"monitoredBy": [67]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 375,	"connectsTo": [71],	"monitoredBy": [67]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 942,	"connectsTo": [72],	"monitoredBy": [67]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 18,	"connectsTo": [74],	"monitoredBy": [67]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 437,	"connectsTo": [75],	"monitoredBy": [73]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 511,	"connectsTo": [76],	"monitoredBy": [73]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 625,	"connectsTo": [77],	"monitoredBy": [73]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 111,	"connectsTo": [78],	"monitoredBy": [73]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 757,	"connectsTo": [80],	"monitoredBy": [73]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 740,	"connectsTo": [81],	"monitoredBy": [79]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 242,	"connectsTo": [82],	"monitoredBy": [79]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 840,	"connectsTo": [83],	"monitoredBy": [79]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 284,	"connectsTo": [84],	"monitoredBy": [79]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 546,	"connectsTo": [86],	"monitoredBy": [79]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 386,	"connectsTo": [87],	"monitoredBy": [85]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 769,	"connectsTo": [88],	"monitoredBy": [85]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -378,	"connectsTo": [89],	"monitoredBy": [85]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 230,	"connectsTo": [90],	"monitoredBy": [85]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 609,	"connectsTo": [92],	"monitoredBy": [85]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 54,	"connectsTo": [93],	"monitoredBy": [91]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 745,	"connectsTo": [94],	"monitoredBy": [91]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -320,	"connectsTo": [95],	"monitoredBy": [91]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 369,	"connectsTo": [96],	"monitoredBy": [91]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 591,	"connectsTo": [98],	"monitoredBy": [91]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [100],	"monitoredBy": [99, 105, 111],	"POSITIONS": [117]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 366,	"connectsTo": [101],	"monitoredBy": [99]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 638,	"connectsTo": [102],	"monitoredBy": [99]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 102,	"connectsTo": [103],	"monitoredBy": [99]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 517,	"connectsTo": [104],	"monitoredBy": [99]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -783,	"connectsTo": [106],	"monitoredBy": [99]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 949,	"connectsTo": [107],	"monitoredBy": [105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 158,	"connectsTo": [108],	"monitoredBy": [105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 697,	"connectsTo": [109],	"monitoredBy": [105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 225,	"connectsTo": [110],	"monitoredBy": [105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 999,	"connectsTo": [112],	"monitoredBy": [105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 798,	"connectsTo": [113],	"monitoredBy": [111]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 480,	"connectsTo": [114],	"monitoredBy": [111]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 214,	"connectsTo": [115],	"monitoredBy": [111]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -615,	"connectsTo": [116],	"monitoredBy": [111]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 772,	"connectsTo": [118],	"monitoredBy": [111]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [120],	"monitoredBy": [119],	"POSITIONS": [125]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 881,	"connectsTo": [121],	"monitoredBy": [119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 740,	"connectsTo": [122],	"monitoredBy": [119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 897,	"connectsTo": [123],	"monitoredBy": [119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 685,	"connectsTo": [124],	"monitoredBy": [119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 630,	"connectsTo": [129],	"monitoredBy": [119]}
+		{	 "allocation data": 0,	":type": "Region"}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [129, 131, 132, 133, 134, 135]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [137, 138, 139, 140, 141]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [129, 143, 144, 145, 146, 147]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [149, 151, 152, 153, 154, 155]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [149, 157, 158, 159, 160, 161]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [149, 163, 164, 165, 166, 167]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [149, 169, 170, 171, 172, 173]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [175, 176, 177, 178, 179]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [149, 181, 182, 183, 184, 185]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 189, 190, 191, 192, 193]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 195, 196, 197, 198, 199]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 201, 202, 203, 204, 205]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 207, 208, 209, 210, 211]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 213, 214, 215, 216, 217]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 219, 220, 221, 222, 223]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 225, 226, 227, 228, 229]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 231, 232, 233, 234, 235]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [187, 237, 238, 239, 240, 241]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [243, 245, 246, 247, 248, 249]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [243, 251, 252, 253, 254, 255]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [243, 257, 258, 259, 260, 261]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [243, 263, 264, 265, 266, 267]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [269, 271, 272, 273, 274, 275]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [269, 277, 278, 279, 280, 281]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [269, 283, 284, 285, 286, 287]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [269, 289, 290, 291, 292, 293]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [269, 295, 296, 297, 298, 299]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [269, 301, 302, 303, 304, 305]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [269, 307, 308, 309, 310, 311]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [313, 314, 315, 316, 317]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [319, 321, 322, 323, 324, 325, 326]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [328, 329, 330, 331, 332]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [319, 334, 335, 336, 337, 338]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [319, 340, 341, 342, 343, 344]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [346, 348, 349, 350, 351, 352]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [354, 356, 357, 358, 359, 360]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [362, 363, 364, 365, 366]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [354, 368, 369, 370, 371, 372]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [374, 376, 377, 378, 379, 380]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [382, 383, 384, 385, 386]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [374, 388, 389, 390, 391, 392]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [394, 395, 396, 397, 398]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [400, 401, 402, 403, 404]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [408, 409, 410, 411, 412]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [414, 415, 416, 417, 418]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [406, 420, 421, 422, 423, 424]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [406, 426, 427, 428, 429, 430]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [432, 433, 434, 435, 436]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [406, 438, 439, 440, 441, 442]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [444, 446, 447, 448, 449, 450]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [452, 453, 454, 455, 456]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [444, 458, 459, 460, 461, 462]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [444, 464, 465, 466, 467, 468]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [470, 472, 473, 474, 475, 476]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [478, 479, 480, 481, 482]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [470, 484, 485, 486, 487, 488]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [490, 492, 493, 494, 495, 496]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [500, 501, 502, 503, 504]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 506, 507, 508, 509, 510]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 512, 513, 514, 515, 516]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 518, 519, 520, 521, 522]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 524, 525, 526, 527, 528]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 530, 531, 532, 533, 534]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 536, 537, 538, 539, 540]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 542, 543, 544, 545, 546]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [498, 548, 549, 550, 551, 552]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 556, 557, 558, 559, 560]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 562, 563, 564, 565, 566]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 568, 569, 570, 571, 572, 573]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 575, 576, 577, 578, 579]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 581, 582, 583, 584, 585]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 587, 588, 589, 590, 591]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 593, 594, 595, 596, 597]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [554, 599, 600, 601, 602, 603]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [605, 607, 608, 609, 610, 611]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [613, 614, 615, 616, 617]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [605, 619, 620, 621, 622, 623]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [605, 625, 626, 627, 628, 629]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [605, 631, 632, 633, 634, 635]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [605, 637, 638, 639, 640, 641]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [643, 645, 646, 647, 648, 649]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [643, 651, 652, 653, 654, 655]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [657, 658, 659, 660, 661]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [643, 663, 664, 665, 666, 667]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [669, 670, 671, 672, 673]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [675, 676, 677, 678, 679, 680]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [643, 682, 683, 684, 685, 686]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [643, 688, 689, 690, 691, 692]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [131],	"monitoredBy": [130, 142],	"POSITIONS": [148]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 402,	"connectsTo": [132],	"monitoredBy": [130]}
+		{	 "allocation data": 0,	":type": "Semaphore",	"signal": "GO"}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 337,	"connectsTo": [133],	"monitoredBy": [130]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 59,	"connectsTo": [134],	"monitoredBy": [130]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 686,	"connectsTo": [135],	"monitoredBy": [130]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 212,	"connectsTo": [137],	"monitoredBy": [130]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 616,	"connectsTo": [138],	"monitoredBy": [136]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 870,	"connectsTo": [139],	"monitoredBy": [136]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -342,	"connectsTo": [140],	"monitoredBy": [136]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 333,	"connectsTo": [141],	"monitoredBy": [136]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 923,	"connectsTo": [143],	"monitoredBy": [136]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 889,	"connectsTo": [144],	"monitoredBy": [142]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 465,	"connectsTo": [145],	"monitoredBy": [142]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 470,	"connectsTo": [146],	"monitoredBy": [142]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 343,	"connectsTo": [147],	"monitoredBy": [142]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -769,	"connectsTo": [149],	"monitoredBy": [142]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [151],	"monitoredBy": [150, 156, 162, 168, 180],	"POSITIONS": [186]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 90,	"connectsTo": [152],	"monitoredBy": [150]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 52,	"connectsTo": [153],	"monitoredBy": [150]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 685,	"connectsTo": [154],	"monitoredBy": [150]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 404,	"connectsTo": [155],	"monitoredBy": [150]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 111,	"connectsTo": [157],	"monitoredBy": [150]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 514,	"connectsTo": [158],	"monitoredBy": [156]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 883,	"connectsTo": [159],	"monitoredBy": [156]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 270,	"connectsTo": [160],	"monitoredBy": [156]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 684,	"connectsTo": [161],	"monitoredBy": [156]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 156,	"connectsTo": [163],	"monitoredBy": [156]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -733,	"connectsTo": [164],	"monitoredBy": [162]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 372,	"connectsTo": [165],	"monitoredBy": [162]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 917,	"connectsTo": [166],	"monitoredBy": [162]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 373,	"connectsTo": [167],	"monitoredBy": [162]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 507,	"connectsTo": [169],	"monitoredBy": [162]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 149,	"connectsTo": [170],	"monitoredBy": [168]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 773,	"connectsTo": [171],	"monitoredBy": [168]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 75,	"connectsTo": [172],	"monitoredBy": [168]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 565,	"connectsTo": [173],	"monitoredBy": [168]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -881,	"connectsTo": [175],	"monitoredBy": [168]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 136,	"connectsTo": [176],	"monitoredBy": [174]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 640,	"connectsTo": [177],	"monitoredBy": [174]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 267,	"connectsTo": [178],	"monitoredBy": [174]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 94,	"connectsTo": [179],	"monitoredBy": [174]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 627,	"connectsTo": [181],	"monitoredBy": [174]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 519,	"connectsTo": [182],	"monitoredBy": [180]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 643,	"connectsTo": [183],	"monitoredBy": [180]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 207,	"connectsTo": [184],	"monitoredBy": [180]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 157,	"connectsTo": [185],	"monitoredBy": [180]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 620,	"connectsTo": [187],	"monitoredBy": [180]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [189],	"monitoredBy": [188, 194, 200, 206, 212, 218, 224, 230, 236],	"POSITIONS": [242]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 524,	"connectsTo": [190],	"monitoredBy": [188]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 82,	"connectsTo": [191],	"monitoredBy": [188]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 36,	"connectsTo": [192],	"monitoredBy": [188]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 263,	"connectsTo": [193],	"monitoredBy": [188]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 970,	"connectsTo": [195],	"monitoredBy": [188]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 683,	"connectsTo": [196],	"monitoredBy": [194]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 806,	"connectsTo": [197],	"monitoredBy": [194]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 777,	"connectsTo": [198],	"monitoredBy": [194]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -544,	"connectsTo": [199],	"monitoredBy": [194]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 352,	"connectsTo": [201],	"monitoredBy": [194]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 611,	"connectsTo": [202],	"monitoredBy": [200]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 605,	"connectsTo": [203],	"monitoredBy": [200]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 386,	"connectsTo": [204],	"monitoredBy": [200]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 781,	"connectsTo": [205],	"monitoredBy": [200]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 83,	"connectsTo": [207],	"monitoredBy": [200]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 772,	"connectsTo": [208],	"monitoredBy": [206]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 817,	"connectsTo": [209],	"monitoredBy": [206]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 503,	"connectsTo": [210],	"monitoredBy": [206]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 847,	"connectsTo": [211],	"monitoredBy": [206]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 121,	"connectsTo": [213],	"monitoredBy": [206]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 195,	"connectsTo": [214],	"monitoredBy": [212]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 899,	"connectsTo": [215],	"monitoredBy": [212]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 373,	"connectsTo": [216],	"monitoredBy": [212]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 423,	"connectsTo": [217],	"monitoredBy": [212]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 450,	"connectsTo": [219],	"monitoredBy": [212]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 95,	"connectsTo": [220],	"monitoredBy": [218]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 522,	"connectsTo": [221],	"monitoredBy": [218]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 984,	"connectsTo": [222],	"monitoredBy": [218]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 460,	"connectsTo": [223],	"monitoredBy": [218]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -689,	"connectsTo": [225],	"monitoredBy": [218]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 61,	"connectsTo": [226],	"monitoredBy": [224]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 917,	"connectsTo": [227],	"monitoredBy": [224]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 569,	"connectsTo": [228],	"monitoredBy": [224]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 971,	"connectsTo": [229],	"monitoredBy": [224]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -591,	"connectsTo": [231],	"monitoredBy": [224]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 35,	"connectsTo": [232],	"monitoredBy": [230]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 718,	"connectsTo": [233],	"monitoredBy": [230]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 307,	"connectsTo": [234],	"monitoredBy": [230]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 161,	"connectsTo": [235],	"monitoredBy": [230]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 1000,	"connectsTo": [237],	"monitoredBy": [230]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 909,	"connectsTo": [238],	"monitoredBy": [236]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 750,	"connectsTo": [239],	"monitoredBy": [236]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 200,	"connectsTo": [240],	"monitoredBy": [236]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 79,	"connectsTo": [241],	"monitoredBy": [236]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 135,	"connectsTo": [243],	"monitoredBy": [236]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [245],	"monitoredBy": [244, 250, 256, 262],	"POSITIONS": [268]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 432,	"connectsTo": [246],	"monitoredBy": [244]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 589,	"connectsTo": [247],	"monitoredBy": [244]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 533,	"connectsTo": [248],	"monitoredBy": [244]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 632,	"connectsTo": [249],	"monitoredBy": [244]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 469,	"connectsTo": [251],	"monitoredBy": [244]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 225,	"connectsTo": [252],	"monitoredBy": [250]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 966,	"connectsTo": [253],	"monitoredBy": [250]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 517,	"connectsTo": [254],	"monitoredBy": [250]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 778,	"connectsTo": [255],	"monitoredBy": [250]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -465,	"connectsTo": [257],	"monitoredBy": [250]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 182,	"connectsTo": [258],	"monitoredBy": [256]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 972,	"connectsTo": [259],	"monitoredBy": [256]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 349,	"connectsTo": [260],	"monitoredBy": [256]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 695,	"connectsTo": [261],	"monitoredBy": [256]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 223,	"connectsTo": [263],	"monitoredBy": [256]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 282,	"connectsTo": [264],	"monitoredBy": [262]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -981,	"connectsTo": [265],	"monitoredBy": [262]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 78,	"connectsTo": [266],	"monitoredBy": [262]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 229,	"connectsTo": [267],	"monitoredBy": [262]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 137,	"connectsTo": [269],	"monitoredBy": [262]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [271],	"monitoredBy": [270, 276, 282, 288, 294, 300, 306],	"POSITIONS": [318]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 50,	"connectsTo": [272],	"monitoredBy": [270]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 578,	"connectsTo": [273],	"monitoredBy": [270]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 596,	"connectsTo": [274],	"monitoredBy": [270]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 836,	"connectsTo": [275],	"monitoredBy": [270]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 120,	"connectsTo": [277],	"monitoredBy": [270]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 341,	"connectsTo": [278],	"monitoredBy": [276]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 654,	"connectsTo": [279],	"monitoredBy": [276]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 96,	"connectsTo": [280],	"monitoredBy": [276]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -995,	"connectsTo": [281],	"monitoredBy": [276]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 809,	"connectsTo": [283],	"monitoredBy": [276]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 507,	"connectsTo": [284],	"monitoredBy": [282]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 83,	"connectsTo": [285],	"monitoredBy": [282]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 186,	"connectsTo": [286],	"monitoredBy": [282]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -913,	"connectsTo": [287],	"monitoredBy": [282]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 303,	"connectsTo": [289],	"monitoredBy": [282]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 31,	"connectsTo": [290],	"monitoredBy": [288]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 100,	"connectsTo": [291],	"monitoredBy": [288]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 741,	"connectsTo": [292],	"monitoredBy": [288]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -567,	"connectsTo": [293],	"monitoredBy": [288]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 881,	"connectsTo": [295],	"monitoredBy": [288]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 838,	"connectsTo": [296],	"monitoredBy": [294]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 215,	"connectsTo": [297],	"monitoredBy": [294]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 845,	"connectsTo": [298],	"monitoredBy": [294]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 573,	"connectsTo": [299],	"monitoredBy": [294]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 475,	"connectsTo": [301],	"monitoredBy": [294]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 723,	"connectsTo": [302],	"monitoredBy": [300]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 495,	"connectsTo": [303],	"monitoredBy": [300]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 123,	"connectsTo": [304],	"monitoredBy": [300]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 772,	"connectsTo": [305],	"monitoredBy": [300]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 769,	"connectsTo": [307],	"monitoredBy": [300]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 456,	"connectsTo": [308],	"monitoredBy": [306]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 148,	"connectsTo": [309],	"monitoredBy": [306]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -920,	"connectsTo": [310],	"monitoredBy": [306]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 912,	"connectsTo": [311],	"monitoredBy": [306]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -451,	"connectsTo": [313],	"monitoredBy": [306]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 30,	"connectsTo": [314],	"monitoredBy": [312]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 827,	"connectsTo": [315],	"monitoredBy": [312]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 998,	"connectsTo": [316],	"monitoredBy": [312]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 638,	"connectsTo": [317],	"monitoredBy": [312]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 669,	"connectsTo": [319],	"monitoredBy": [312]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [321],	"monitoredBy": [320, 333, 339],	"POSITIONS": [345]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 211,	"connectsTo": [322],	"monitoredBy": [320]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 773,	"connectsTo": [323],	"monitoredBy": [320]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 220,	"connectsTo": [324],	"monitoredBy": [320]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 431,	"connectsTo": [325],	"monitoredBy": [320]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 884,	"connectsTo": [326],	"monitoredBy": [320]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 625,	"connectsTo": [328],	"monitoredBy": [320]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 236,	"connectsTo": [329],	"monitoredBy": [327]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 994,	"connectsTo": [330],	"monitoredBy": [327]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 837,	"connectsTo": [331],	"monitoredBy": [327]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 479,	"connectsTo": [332],	"monitoredBy": [327]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 297,	"connectsTo": [334],	"monitoredBy": [327]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 283,	"connectsTo": [335],	"monitoredBy": [333]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 52,	"connectsTo": [336],	"monitoredBy": [333]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 694,	"connectsTo": [337],	"monitoredBy": [333]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 895,	"connectsTo": [338],	"monitoredBy": [333]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 140,	"connectsTo": [340],	"monitoredBy": [333]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 57,	"connectsTo": [341],	"monitoredBy": [339]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -248,	"connectsTo": [342],	"monitoredBy": [339]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -933,	"connectsTo": [343],	"monitoredBy": [339]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -233,	"connectsTo": [344],	"monitoredBy": [339]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 326,	"connectsTo": [346],	"monitoredBy": [339]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [348],	"monitoredBy": [347],	"POSITIONS": [353]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 164,	"connectsTo": [349],	"monitoredBy": [347]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 764,	"connectsTo": [350],	"monitoredBy": [347]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -228,	"connectsTo": [351],	"monitoredBy": [347]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 83,	"connectsTo": [352],	"monitoredBy": [347]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 102,	"connectsTo": [354],	"monitoredBy": [347]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [356],	"monitoredBy": [355, 367],	"POSITIONS": [373]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 196,	"connectsTo": [357],	"monitoredBy": [355]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 675,	"connectsTo": [358],	"monitoredBy": [355]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 299,	"connectsTo": [359],	"monitoredBy": [355]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 824,	"connectsTo": [360],	"monitoredBy": [355]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 452,	"connectsTo": [362],	"monitoredBy": [355]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -680,	"connectsTo": [363],	"monitoredBy": [361]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -74,	"connectsTo": [364],	"monitoredBy": [361]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 169,	"connectsTo": [365],	"monitoredBy": [361]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 171,	"connectsTo": [366],	"monitoredBy": [361]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 26,	"connectsTo": [368],	"monitoredBy": [361]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 421,	"connectsTo": [369],	"monitoredBy": [367]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 188,	"connectsTo": [370],	"monitoredBy": [367]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 149,	"connectsTo": [371],	"monitoredBy": [367]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 413,	"connectsTo": [372],	"monitoredBy": [367]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 709,	"connectsTo": [374],	"monitoredBy": [367]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [376],	"monitoredBy": [375, 387],	"POSITIONS": [405]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 718,	"connectsTo": [377],	"monitoredBy": [375]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 544,	"connectsTo": [378],	"monitoredBy": [375]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 287,	"connectsTo": [379],	"monitoredBy": [375]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 632,	"connectsTo": [380],	"monitoredBy": [375]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 252,	"connectsTo": [382],	"monitoredBy": [375]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 98,	"connectsTo": [383],	"monitoredBy": [381]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 107,	"connectsTo": [384],	"monitoredBy": [381]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 360,	"connectsTo": [385],	"monitoredBy": [381]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 499,	"connectsTo": [386],	"monitoredBy": [381]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -985,	"connectsTo": [388],	"monitoredBy": [381]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 480,	"connectsTo": [389],	"monitoredBy": [387]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 148,	"connectsTo": [390],	"monitoredBy": [387]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 94,	"connectsTo": [391],	"monitoredBy": [387]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 299,	"connectsTo": [392],	"monitoredBy": [387]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 2,	"connectsTo": [394],	"monitoredBy": [387]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -588,	"connectsTo": [395],	"monitoredBy": [393]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 613,	"connectsTo": [396],	"monitoredBy": [393]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 83,	"connectsTo": [397],	"monitoredBy": [393]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -623,	"connectsTo": [398],	"monitoredBy": [393]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 605,	"connectsTo": [400],	"monitoredBy": [393]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 555,	"connectsTo": [401],	"monitoredBy": [399]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 368,	"connectsTo": [402],	"monitoredBy": [399]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 777,	"connectsTo": [403],	"monitoredBy": [399]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 906,	"connectsTo": [404],	"monitoredBy": [399]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 244,	"connectsTo": [406],	"monitoredBy": [399]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [408],	"monitoredBy": [419, 425, 437],	"POSITIONS": [443]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 287,	"connectsTo": [409],	"monitoredBy": [407]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 947,	"connectsTo": [410],	"monitoredBy": [407]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 106,	"connectsTo": [411],	"monitoredBy": [407]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 722,	"connectsTo": [412],	"monitoredBy": [407]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 262,	"connectsTo": [414],	"monitoredBy": [407]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 301,	"connectsTo": [415],	"monitoredBy": [413]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 836,	"connectsTo": [416],	"monitoredBy": [413]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 254,	"connectsTo": [417],	"monitoredBy": [413]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 422,	"connectsTo": [418],	"monitoredBy": [413]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -144,	"connectsTo": [420],	"monitoredBy": [413]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 710,	"connectsTo": [421],	"monitoredBy": [419]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 576,	"connectsTo": [422],	"monitoredBy": [419]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 481,	"connectsTo": [423],	"monitoredBy": [419]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 638,	"connectsTo": [424],	"monitoredBy": [419]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 781,	"connectsTo": [426],	"monitoredBy": [419]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 409,	"connectsTo": [427],	"monitoredBy": [425]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 78,	"connectsTo": [428],	"monitoredBy": [425]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 34,	"connectsTo": [429],	"monitoredBy": [425]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -508,	"connectsTo": [430],	"monitoredBy": [425]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 536,	"connectsTo": [432],	"monitoredBy": [425]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -376,	"connectsTo": [433],	"monitoredBy": [431]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 68,	"connectsTo": [434],	"monitoredBy": [431]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 124,	"connectsTo": [435],	"monitoredBy": [431]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 629,	"connectsTo": [436],	"monitoredBy": [431]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 320,	"connectsTo": [438],	"monitoredBy": [431]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 697,	"connectsTo": [439],	"monitoredBy": [437]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 1000,	"connectsTo": [440],	"monitoredBy": [437]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -825,	"connectsTo": [441],	"monitoredBy": [437]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 856,	"connectsTo": [442],	"monitoredBy": [437]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 835,	"connectsTo": [444],	"monitoredBy": [437]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [446],	"monitoredBy": [445, 457, 463],	"POSITIONS": [469]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 126,	"connectsTo": [447],	"monitoredBy": [445]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 620,	"connectsTo": [448],	"monitoredBy": [445]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 323,	"connectsTo": [449],	"monitoredBy": [445]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 333,	"connectsTo": [450],	"monitoredBy": [445]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -797,	"connectsTo": [452],	"monitoredBy": [445]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 7,	"connectsTo": [453],	"monitoredBy": [451]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 887,	"connectsTo": [454],	"monitoredBy": [451]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 78,	"connectsTo": [455],	"monitoredBy": [451]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 30,	"connectsTo": [456],	"monitoredBy": [451]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 217,	"connectsTo": [458],	"monitoredBy": [451]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 298,	"connectsTo": [459],	"monitoredBy": [457]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 486,	"connectsTo": [460],	"monitoredBy": [457]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 942,	"connectsTo": [461],	"monitoredBy": [457]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 553,	"connectsTo": [462],	"monitoredBy": [457]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -391,	"connectsTo": [464],	"monitoredBy": [457]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 843,	"connectsTo": [465],	"monitoredBy": [463]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 989,	"connectsTo": [466],	"monitoredBy": [463]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 724,	"connectsTo": [467],	"monitoredBy": [463]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 480,	"connectsTo": [468],	"monitoredBy": [463]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 333,	"connectsTo": [470],	"monitoredBy": [463]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [472],	"monitoredBy": [471, 483],	"POSITIONS": [489]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 490,	"connectsTo": [473],	"monitoredBy": [471]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -778,	"connectsTo": [474],	"monitoredBy": [471]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 931,	"connectsTo": [475],	"monitoredBy": [471]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 558,	"connectsTo": [476],	"monitoredBy": [471]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 220,	"connectsTo": [478],	"monitoredBy": [471]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 268,	"connectsTo": [479],	"monitoredBy": [477]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 280,	"connectsTo": [480],	"monitoredBy": [477]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 609,	"connectsTo": [481],	"monitoredBy": [477]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -855,	"connectsTo": [482],	"monitoredBy": [477]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 400,	"connectsTo": [484],	"monitoredBy": [477]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 316,	"connectsTo": [485],	"monitoredBy": [483]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 9,	"connectsTo": [486],	"monitoredBy": [483]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 941,	"connectsTo": [487],	"monitoredBy": [483]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 134,	"connectsTo": [488],	"monitoredBy": [483]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 947,	"connectsTo": [490],	"monitoredBy": [483]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [492],	"monitoredBy": [491],	"POSITIONS": [497]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 606,	"connectsTo": [493],	"monitoredBy": [491]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 672,	"connectsTo": [494],	"monitoredBy": [491]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 316,	"connectsTo": [495],	"monitoredBy": [491]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 915,	"connectsTo": [496],	"monitoredBy": [491]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 831,	"connectsTo": [498],	"monitoredBy": [491]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [500],	"monitoredBy": [505, 511, 517, 523, 529, 535, 541, 547],	"POSITIONS": [553]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 773,	"connectsTo": [501],	"monitoredBy": [499]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 386,	"connectsTo": [502],	"monitoredBy": [499]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 340,	"connectsTo": [503],	"monitoredBy": [499]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 597,	"connectsTo": [504],	"monitoredBy": [499]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 995,	"connectsTo": [506],	"monitoredBy": [499]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 196,	"connectsTo": [507],	"monitoredBy": [505]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 953,	"connectsTo": [508],	"monitoredBy": [505]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 473,	"connectsTo": [509],	"monitoredBy": [505]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 514,	"connectsTo": [510],	"monitoredBy": [505]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 214,	"connectsTo": [512],	"monitoredBy": [505]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 972,	"connectsTo": [513],	"monitoredBy": [511]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 708,	"connectsTo": [514],	"monitoredBy": [511]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 669,	"connectsTo": [515],	"monitoredBy": [511]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 974,	"connectsTo": [516],	"monitoredBy": [511]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 44,	"connectsTo": [518],	"monitoredBy": [511]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 35,	"connectsTo": [519],	"monitoredBy": [517]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 383,	"connectsTo": [520],	"monitoredBy": [517]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 902,	"connectsTo": [521],	"monitoredBy": [517]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 578,	"connectsTo": [522],	"monitoredBy": [517]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 832,	"connectsTo": [524],	"monitoredBy": [517]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 154,	"connectsTo": [525],	"monitoredBy": [523]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 882,	"connectsTo": [526],	"monitoredBy": [523]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 579,	"connectsTo": [527],	"monitoredBy": [523]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 19,	"connectsTo": [528],	"monitoredBy": [523]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -921,	"connectsTo": [530],	"monitoredBy": [523]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -212,	"connectsTo": [531],	"monitoredBy": [529]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 566,	"connectsTo": [532],	"monitoredBy": [529]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 441,	"connectsTo": [533],	"monitoredBy": [529]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 823,	"connectsTo": [534],	"monitoredBy": [529]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 588,	"connectsTo": [536],	"monitoredBy": [529]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -984,	"connectsTo": [537],	"monitoredBy": [535]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 986,	"connectsTo": [538],	"monitoredBy": [535]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 487,	"connectsTo": [539],	"monitoredBy": [535]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 461,	"connectsTo": [540],	"monitoredBy": [535]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 997,	"connectsTo": [542],	"monitoredBy": [535]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 723,	"connectsTo": [543],	"monitoredBy": [541]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 880,	"connectsTo": [544],	"monitoredBy": [541]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 375,	"connectsTo": [545],	"monitoredBy": [541]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 727,	"connectsTo": [546],	"monitoredBy": [541]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 77,	"connectsTo": [548],	"monitoredBy": [541]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 309,	"connectsTo": [549],	"monitoredBy": [547]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 383,	"connectsTo": [550],	"monitoredBy": [547]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 53,	"connectsTo": [551],	"monitoredBy": [547]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -571,	"connectsTo": [552],	"monitoredBy": [547]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 447,	"connectsTo": [554],	"monitoredBy": [547]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [556],	"monitoredBy": [555, 561, 567, 574, 580, 586, 592, 598],	"POSITIONS": [604]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 395,	"connectsTo": [557],	"monitoredBy": [555]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 950,	"connectsTo": [558],	"monitoredBy": [555]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 569,	"connectsTo": [559],	"monitoredBy": [555]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 452,	"connectsTo": [560],	"monitoredBy": [555]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 887,	"connectsTo": [562],	"monitoredBy": [555]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 702,	"connectsTo": [563],	"monitoredBy": [561]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 68,	"connectsTo": [564],	"monitoredBy": [561]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 634,	"connectsTo": [565],	"monitoredBy": [561]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 852,	"connectsTo": [566],	"monitoredBy": [561]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 364,	"connectsTo": [568],	"monitoredBy": [561]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 875,	"connectsTo": [569],	"monitoredBy": [567]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 989,	"connectsTo": [570],	"monitoredBy": [567]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 837,	"connectsTo": [571],	"monitoredBy": [567]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -250,	"connectsTo": [572],	"monitoredBy": [567]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 147,	"connectsTo": [573],	"monitoredBy": [567]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 77,	"connectsTo": [575],	"monitoredBy": [567]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -843,	"connectsTo": [576],	"monitoredBy": [574]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 835,	"connectsTo": [577],	"monitoredBy": [574]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 27,	"connectsTo": [578],	"monitoredBy": [574]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 149,	"connectsTo": [579],	"monitoredBy": [574]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 723,	"connectsTo": [581],	"monitoredBy": [574]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 348,	"connectsTo": [582],	"monitoredBy": [580]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -204,	"connectsTo": [583],	"monitoredBy": [580]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 391,	"connectsTo": [584],	"monitoredBy": [580]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 564,	"connectsTo": [585],	"monitoredBy": [580]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -169,	"connectsTo": [587],	"monitoredBy": [580]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 268,	"connectsTo": [588],	"monitoredBy": [586]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 468,	"connectsTo": [589],	"monitoredBy": [586]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 781,	"connectsTo": [590],	"monitoredBy": [586]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 82,	"connectsTo": [591],	"monitoredBy": [586]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 963,	"connectsTo": [593],	"monitoredBy": [586]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 668,	"connectsTo": [594],	"monitoredBy": [592]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 78,	"connectsTo": [595],	"monitoredBy": [592]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 573,	"connectsTo": [596],	"monitoredBy": [592]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 808,	"connectsTo": [597],	"monitoredBy": [592]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 631,	"connectsTo": [599],	"monitoredBy": [592]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 44,	"connectsTo": [600],	"monitoredBy": [598]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 700,	"connectsTo": [601],	"monitoredBy": [598]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 918,	"connectsTo": [602],	"monitoredBy": [598]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 648,	"connectsTo": [603],	"monitoredBy": [598]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 300,	"connectsTo": [605],	"monitoredBy": [598]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [607],	"monitoredBy": [606, 618, 624, 630, 636],	"POSITIONS": [642]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -957,	"connectsTo": [608],	"monitoredBy": [606]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 633,	"connectsTo": [609],	"monitoredBy": [606]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 244,	"connectsTo": [610],	"monitoredBy": [606]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 891,	"connectsTo": [611],	"monitoredBy": [606]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 820,	"connectsTo": [613],	"monitoredBy": [606]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 871,	"connectsTo": [614],	"monitoredBy": [612]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 653,	"connectsTo": [615],	"monitoredBy": [612]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 319,	"connectsTo": [616],	"monitoredBy": [612]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 364,	"connectsTo": [617],	"monitoredBy": [612]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 923,	"connectsTo": [619],	"monitoredBy": [612]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 492,	"connectsTo": [620],	"monitoredBy": [618]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 727,	"connectsTo": [621],	"monitoredBy": [618]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 667,	"connectsTo": [622],	"monitoredBy": [618]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 753,	"connectsTo": [623],	"monitoredBy": [618]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 745,	"connectsTo": [625],	"monitoredBy": [618]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 205,	"connectsTo": [626],	"monitoredBy": [624]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 144,	"connectsTo": [627],	"monitoredBy": [624]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 770,	"connectsTo": [628],	"monitoredBy": [624]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 113,	"connectsTo": [629],	"monitoredBy": [624]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 575,	"connectsTo": [631],	"monitoredBy": [624]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 290,	"connectsTo": [632],	"monitoredBy": [630]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 349,	"connectsTo": [633],	"monitoredBy": [630]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 602,	"connectsTo": [634],	"monitoredBy": [630]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 248,	"connectsTo": [635],	"monitoredBy": [630]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 351,	"connectsTo": [637],	"monitoredBy": [630]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 192,	"connectsTo": [638],	"monitoredBy": [636]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 759,	"connectsTo": [639],	"monitoredBy": [636]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 180,	"connectsTo": [640],	"monitoredBy": [636]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 504,	"connectsTo": [641],	"monitoredBy": [636]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 471,	"connectsTo": [643],	"monitoredBy": [636]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [645],	"monitoredBy": [644, 650, 662, 681, 687],	"POSITIONS": [693]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 357,	"connectsTo": [646],	"monitoredBy": [644]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 604,	"connectsTo": [647],	"monitoredBy": [644]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 492,	"connectsTo": [648],	"monitoredBy": [644]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 37,	"connectsTo": [649],	"monitoredBy": [644]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 427,	"connectsTo": [651],	"monitoredBy": [644]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 881,	"connectsTo": [652],	"monitoredBy": [650]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 902,	"connectsTo": [653],	"monitoredBy": [650]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 47,	"connectsTo": [654],	"monitoredBy": [650]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 195,	"connectsTo": [655],	"monitoredBy": [650]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 735,	"connectsTo": [657],	"monitoredBy": [650]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 104,	"connectsTo": [658],	"monitoredBy": [656]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 763,	"connectsTo": [659],	"monitoredBy": [656]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -97,	"connectsTo": [660],	"monitoredBy": [656]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 929,	"connectsTo": [661],	"monitoredBy": [656]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 710,	"connectsTo": [663],	"monitoredBy": [656]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 317,	"connectsTo": [664],	"monitoredBy": [662]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 813,	"connectsTo": [665],	"monitoredBy": [662]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 914,	"connectsTo": [666],	"monitoredBy": [662]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 258,	"connectsTo": [667],	"monitoredBy": [662]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 655,	"connectsTo": [669],	"monitoredBy": [662]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 511,	"connectsTo": [670],	"monitoredBy": [668]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -9,	"connectsTo": [671],	"monitoredBy": [668]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 153,	"connectsTo": [672],	"monitoredBy": [668]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 444,	"connectsTo": [673],	"monitoredBy": [668]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 576,	"connectsTo": [675],	"monitoredBy": [668]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 324,	"connectsTo": [676],	"monitoredBy": [674]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 15,	"connectsTo": [677],	"monitoredBy": [674]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 309,	"connectsTo": [678],	"monitoredBy": [674]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 596,	"connectsTo": [679],	"monitoredBy": [674]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 584,	"connectsTo": [680],	"monitoredBy": [674]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 887,	"connectsTo": [682],	"monitoredBy": [674]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 380,	"connectsTo": [683],	"monitoredBy": [681]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 625,	"connectsTo": [684],	"monitoredBy": [681]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 883,	"connectsTo": [685],	"monitoredBy": [681]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 378,	"connectsTo": [686],	"monitoredBy": [681]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 805,	"connectsTo": [688],	"monitoredBy": [681]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 367,	"connectsTo": [689],	"monitoredBy": [687]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 576,	"connectsTo": [690],	"monitoredBy": [687]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 734,	"connectsTo": [691],	"monitoredBy": [687]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 720,	"connectsTo": [692],	"monitoredBy": [687]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 382,	"connectsTo": [697],	"monitoredBy": [687]}
+		{	 "allocation data": 0,	":type": "Region"}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 699, 700, 701, 702, 703]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 705, 706, 707, 708, 709]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 711, 712, 713, 714, 715]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 717, 718, 719, 720, 721]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 723, 724, 725, 726, 727]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 729, 730, 731, 732, 733]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 735, 736, 737, 738, 739]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [697, 741, 742, 743, 744, 745]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [747, 748, 749, 750, 751]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [753, 755, 756, 757, 758, 759]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [753, 761, 762, 763, 764, 765]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [753, 767, 768, 769, 770, 771]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [753, 773, 774, 775, 776, 777]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [753, 779, 780, 781, 782, 783]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [753, 785, 786, 787, 788, 789]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [791, 793, 794, 795, 796, 797]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [799, 800, 801, 802, 803]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [791, 805, 806, 807, 808, 809]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [811, 813, 814, 815, 816, 817]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [811, 819, 820, 821, 822, 823]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [811, 825, 826, 827, 828, 829]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [699],	"monitoredBy": [698, 704, 710, 716, 722, 728, 734, 740],	"POSITIONS": [752]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 45,	"connectsTo": [700],	"monitoredBy": [698]}
+		{	 "allocation data": 0,	":type": "Semaphore",	"signal": "GO"}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 843,	"connectsTo": [701],	"monitoredBy": [698]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 943,	"connectsTo": [702],	"monitoredBy": [698]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 593,	"connectsTo": [703],	"monitoredBy": [698]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 371,	"connectsTo": [705],	"monitoredBy": [698]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 272,	"connectsTo": [706],	"monitoredBy": [704]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 655,	"connectsTo": [707],	"monitoredBy": [704]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 411,	"connectsTo": [708],	"monitoredBy": [704]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 793,	"connectsTo": [709],	"monitoredBy": [704]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 286,	"connectsTo": [711],	"monitoredBy": [704]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 546,	"connectsTo": [712],	"monitoredBy": [710]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 570,	"connectsTo": [713],	"monitoredBy": [710]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 399,	"connectsTo": [714],	"monitoredBy": [710]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 248,	"connectsTo": [715],	"monitoredBy": [710]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 390,	"connectsTo": [717],	"monitoredBy": [710]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 344,	"connectsTo": [718],	"monitoredBy": [716]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 553,	"connectsTo": [719],	"monitoredBy": [716]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 17,	"connectsTo": [720],	"monitoredBy": [716]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 556,	"connectsTo": [721],	"monitoredBy": [716]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 225,	"connectsTo": [723],	"monitoredBy": [716]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 458,	"connectsTo": [724],	"monitoredBy": [722]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 261,	"connectsTo": [725],	"monitoredBy": [722]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 319,	"connectsTo": [726],	"monitoredBy": [722]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -541,	"connectsTo": [727],	"monitoredBy": [722]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 919,	"connectsTo": [729],	"monitoredBy": [722]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 633,	"connectsTo": [730],	"monitoredBy": [728]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 310,	"connectsTo": [731],	"monitoredBy": [728]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 704,	"connectsTo": [732],	"monitoredBy": [728]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 208,	"connectsTo": [733],	"monitoredBy": [728]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 770,	"connectsTo": [735],	"monitoredBy": [728]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 39,	"connectsTo": [736],	"monitoredBy": [734]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 232,	"connectsTo": [737],	"monitoredBy": [734]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 992,	"connectsTo": [738],	"monitoredBy": [734]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -209,	"connectsTo": [739],	"monitoredBy": [734]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 940,	"connectsTo": [741],	"monitoredBy": [734]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 56,	"connectsTo": [742],	"monitoredBy": [740]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 177,	"connectsTo": [743],	"monitoredBy": [740]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 263,	"connectsTo": [744],	"monitoredBy": [740]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 885,	"connectsTo": [745],	"monitoredBy": [740]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -814,	"connectsTo": [747],	"monitoredBy": [740]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 145,	"connectsTo": [748],	"monitoredBy": [746]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 841,	"connectsTo": [749],	"monitoredBy": [746]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 410,	"connectsTo": [750],	"monitoredBy": [746]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 653,	"connectsTo": [751],	"monitoredBy": [746]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 123,	"connectsTo": [753],	"monitoredBy": [746]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [755],	"monitoredBy": [754, 760, 766, 772, 778, 784],	"POSITIONS": [790]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 159,	"connectsTo": [756],	"monitoredBy": [754]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 983,	"connectsTo": [757],	"monitoredBy": [754]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 302,	"connectsTo": [758],	"monitoredBy": [754]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 334,	"connectsTo": [759],	"monitoredBy": [754]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 441,	"connectsTo": [761],	"monitoredBy": [754]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 710,	"connectsTo": [762],	"monitoredBy": [760]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 407,	"connectsTo": [763],	"monitoredBy": [760]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 183,	"connectsTo": [764],	"monitoredBy": [760]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 305,	"connectsTo": [765],	"monitoredBy": [760]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 8,	"connectsTo": [767],	"monitoredBy": [760]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 767,	"connectsTo": [768],	"monitoredBy": [766]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -913,	"connectsTo": [769],	"monitoredBy": [766]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 191,	"connectsTo": [770],	"monitoredBy": [766]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 989,	"connectsTo": [771],	"monitoredBy": [766]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 873,	"connectsTo": [773],	"monitoredBy": [766]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -103,	"connectsTo": [774],	"monitoredBy": [772]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 481,	"connectsTo": [775],	"monitoredBy": [772]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 830,	"connectsTo": [776],	"monitoredBy": [772]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 843,	"connectsTo": [777],	"monitoredBy": [772]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 403,	"connectsTo": [779],	"monitoredBy": [772]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 772,	"connectsTo": [780],	"monitoredBy": [778]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 769,	"connectsTo": [781],	"monitoredBy": [778]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -855,	"connectsTo": [782],	"monitoredBy": [778]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 350,	"connectsTo": [783],	"monitoredBy": [778]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 824,	"connectsTo": [785],	"monitoredBy": [778]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 415,	"connectsTo": [786],	"monitoredBy": [784]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 517,	"connectsTo": [787],	"monitoredBy": [784]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 200,	"connectsTo": [788],	"monitoredBy": [784]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 399,	"connectsTo": [789],	"monitoredBy": [784]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 991,	"connectsTo": [791],	"monitoredBy": [784]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [793],	"monitoredBy": [792, 804],	"POSITIONS": [810]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 155,	"connectsTo": [794],	"monitoredBy": [792]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 557,	"connectsTo": [795],	"monitoredBy": [792]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 22,	"connectsTo": [796],	"monitoredBy": [792]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 964,	"connectsTo": [797],	"monitoredBy": [792]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 528,	"connectsTo": [799],	"monitoredBy": [792]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 153,	"connectsTo": [800],	"monitoredBy": [798]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 910,	"connectsTo": [801],	"monitoredBy": [798]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 997,	"connectsTo": [802],	"monitoredBy": [798]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -938,	"connectsTo": [803],	"monitoredBy": [798]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 255,	"connectsTo": [805],	"monitoredBy": [798]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 795,	"connectsTo": [806],	"monitoredBy": [804]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 166,	"connectsTo": [807],	"monitoredBy": [804]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 742,	"connectsTo": [808],	"monitoredBy": [804]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 962,	"connectsTo": [809],	"monitoredBy": [804]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 666,	"connectsTo": [811],	"monitoredBy": [804]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [813],	"monitoredBy": [812, 818, 824],	"POSITIONS": [830]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 782,	"connectsTo": [814],	"monitoredBy": [812]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 316,	"connectsTo": [815],	"monitoredBy": [812]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 772,	"connectsTo": [816],	"monitoredBy": [812]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 802,	"connectsTo": [817],	"monitoredBy": [812]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 335,	"connectsTo": [819],	"monitoredBy": [812]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 417,	"connectsTo": [820],	"monitoredBy": [818]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 118,	"connectsTo": [821],	"monitoredBy": [818]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 243,	"connectsTo": [822],	"monitoredBy": [818]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 665,	"connectsTo": [823],	"monitoredBy": [818]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 557,	"connectsTo": [825],	"monitoredBy": [818]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 439,	"connectsTo": [826],	"monitoredBy": [824]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 567,	"connectsTo": [827],	"monitoredBy": [824]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 983,	"connectsTo": [828],	"monitoredBy": [824]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 830,	"connectsTo": [829],	"monitoredBy": [824]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 179,	"connectsTo": [833],	"monitoredBy": [824]}
+		{	 "allocation data": 0,	":type": "Region"}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [833, 835, 836, 837, 838, 839]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [833, 841, 842, 843, 844, 845]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [833, 847, 848, 849, 850, 851]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [833, 853, 854, 855, 856, 857]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [833, 859, 860, 861, 862, 863]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [865, 866, 867, 868, 869]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [871, 873, 874, 875, 876, 877]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [871, 879, 880, 881, 882, 883]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [871, 885, 886, 887, 888, 889]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [871, 891, 892, 893, 894, 895]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [871, 897, 898, 899, 900, 901]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [871, 903, 904, 905, 906, 907]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [909, 911, 912, 913, 914, 915]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [909, 917, 918, 919, 920, 921]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [909, 923, 924, 925, 926, 927]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [909, 929, 930, 931, 932, 933, 934]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [909, 936, 937, 938, 939, 940]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [942, 943, 944, 945, 946]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [909, 948, 949, 950, 951, 952]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [909, 954, 955, 956, 957, 958]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [960, 962, 963, 964, 965, 966]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [960, 968, 969, 970, 971, 972]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [974, 975, 976, 977, 978]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [960, 980, 981, 982, 983, 984]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [960, 986, 987, 988, 989, 990]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [960, 992, 993, 994, 995, 996]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [960, 998, 999, 1000, 1001, 1002]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [960, 1004, 1005, 1006, 1007, 1008]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1010, 1012, 1013, 1014, 1015, 1016]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1010, 1018, 1019, 1020, 1021, 1022]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1010, 1024, 1025, 1026, 1027, 1028]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1030, 1031, 1032, 1033, 1034]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1010, 1036, 1037, 1038, 1039, 1040]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1042, 1043, 1044, 1045, 1046]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1010, 1048, 1049, 1050, 1051, 1052]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1056, 1057, 1058, 1059, 1060]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1062, 1063, 1064, 1065, 1066]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1054, 1068, 1069, 1070, 1071, 1072]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1054, 1074, 1075, 1076, 1077, 1078]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1054, 1080, 1081, 1082, 1083, 1084]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1054, 1086, 1087, 1088, 1089, 1090]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1092, 1094, 1095, 1096, 1097, 1098]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1092, 1100, 1101, 1102, 1103, 1104]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1092, 1106, 1107, 1108, 1109, 1110]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1112, 1114, 1115, 1116, 1117, 1118]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1120, 1121, 1122, 1123, 1124]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1112, 1126, 1127, 1128, 1129, 1130]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1132, 1133, 1134, 1135, 1136]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1140, 1141, 1142, 1143, 1144]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1146, 1147, 1148, 1149, 1150]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1152, 1153, 1154, 1155, 1156]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1158, 1159, 1160, 1161, 1162]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1164, 1165, 1166, 1167, 1168]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1170, 1171, 1172, 1173, 1174]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1176, 1177, 1178, 1179, 1180]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1182, 1183, 1184, 1185, 1186]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1138, 1188, 1189, 1190, 1191, 1192]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1194, 1196, 1197, 1198, 1199, 1200]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1194, 1202, 1203, 1204, 1205, 1206]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1194, 1208, 1209, 1210, 1211, 1212]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1214, 1215, 1216, 1217, 1218]}
+		{	 "allocation data": 0,	":type": "Sensor",	"elements": [1220, 1221, 1222, 1223, 1224]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [835],	"monitoredBy": [834, 840, 846, 852, 858],	"POSITIONS": [870]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 775,	"connectsTo": [836],	"monitoredBy": [834]}
+		{	 "allocation data": 0,	":type": "Semaphore",	"signal": "GO"}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 430,	"connectsTo": [837],	"monitoredBy": [834]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 995,	"connectsTo": [838],	"monitoredBy": [834]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 899,	"connectsTo": [839],	"monitoredBy": [834]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 487,	"connectsTo": [841],	"monitoredBy": [834]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -382,	"connectsTo": [842],	"monitoredBy": [840]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 200,	"connectsTo": [843],	"monitoredBy": [840]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -504,	"connectsTo": [844],	"monitoredBy": [840]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 846,	"connectsTo": [845],	"monitoredBy": [840]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -455,	"connectsTo": [847],	"monitoredBy": [840]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 756,	"connectsTo": [848],	"monitoredBy": [846]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 53,	"connectsTo": [849],	"monitoredBy": [846]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 208,	"connectsTo": [850],	"monitoredBy": [846]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 632,	"connectsTo": [851],	"monitoredBy": [846]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 948,	"connectsTo": [853],	"monitoredBy": [846]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 954,	"connectsTo": [854],	"monitoredBy": [852]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 470,	"connectsTo": [855],	"monitoredBy": [852]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 445,	"connectsTo": [856],	"monitoredBy": [852]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -732,	"connectsTo": [857],	"monitoredBy": [852]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 626,	"connectsTo": [859],	"monitoredBy": [852]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -9,	"connectsTo": [860],	"monitoredBy": [858]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 663,	"connectsTo": [861],	"monitoredBy": [858]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 793,	"connectsTo": [862],	"monitoredBy": [858]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 551,	"connectsTo": [863],	"monitoredBy": [858]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 852,	"connectsTo": [865],	"monitoredBy": [858]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 631,	"connectsTo": [866],	"monitoredBy": [864]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 31,	"connectsTo": [867],	"monitoredBy": [864]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 131,	"connectsTo": [868],	"monitoredBy": [864]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 163,	"connectsTo": [869],	"monitoredBy": [864]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 266,	"connectsTo": [871],	"monitoredBy": [864]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [873],	"monitoredBy": [872, 878, 884, 890, 896, 902],	"POSITIONS": [908]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -885,	"connectsTo": [874],	"monitoredBy": [872]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 424,	"connectsTo": [875],	"monitoredBy": [872]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 234,	"connectsTo": [876],	"monitoredBy": [872]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 283,	"connectsTo": [877],	"monitoredBy": [872]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 781,	"connectsTo": [879],	"monitoredBy": [872]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 443,	"connectsTo": [880],	"monitoredBy": [878]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 134,	"connectsTo": [881],	"monitoredBy": [878]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 519,	"connectsTo": [882],	"monitoredBy": [878]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 268,	"connectsTo": [883],	"monitoredBy": [878]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 499,	"connectsTo": [885],	"monitoredBy": [878]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 343,	"connectsTo": [886],	"monitoredBy": [884]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 431,	"connectsTo": [887],	"monitoredBy": [884]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 954,	"connectsTo": [888],	"monitoredBy": [884]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 196,	"connectsTo": [889],	"monitoredBy": [884]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 704,	"connectsTo": [891],	"monitoredBy": [884]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 177,	"connectsTo": [892],	"monitoredBy": [890]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 84,	"connectsTo": [893],	"monitoredBy": [890]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 931,	"connectsTo": [894],	"monitoredBy": [890]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 484,	"connectsTo": [895],	"monitoredBy": [890]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -16,	"connectsTo": [897],	"monitoredBy": [890]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -486,	"connectsTo": [898],	"monitoredBy": [896]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 988,	"connectsTo": [899],	"monitoredBy": [896]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 251,	"connectsTo": [900],	"monitoredBy": [896]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 224,	"connectsTo": [901],	"monitoredBy": [896]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 301,	"connectsTo": [903],	"monitoredBy": [896]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 39,	"connectsTo": [904],	"monitoredBy": [902]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 66,	"connectsTo": [905],	"monitoredBy": [902]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 782,	"connectsTo": [906],	"monitoredBy": [902]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -966,	"connectsTo": [907],	"monitoredBy": [902]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 687,	"connectsTo": [909],	"monitoredBy": [902]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [911],	"monitoredBy": [910, 916, 922, 928, 935, 947, 953],	"POSITIONS": [959]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 220,	"connectsTo": [912],	"monitoredBy": [910]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 434,	"connectsTo": [913],	"monitoredBy": [910]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 216,	"connectsTo": [914],	"monitoredBy": [910]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 160,	"connectsTo": [915],	"monitoredBy": [910]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 268,	"connectsTo": [917],	"monitoredBy": [910]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 488,	"connectsTo": [918],	"monitoredBy": [916]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -892,	"connectsTo": [919],	"monitoredBy": [916]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 691,	"connectsTo": [920],	"monitoredBy": [916]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 546,	"connectsTo": [921],	"monitoredBy": [916]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 610,	"connectsTo": [923],	"monitoredBy": [916]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 132,	"connectsTo": [924],	"monitoredBy": [922]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 193,	"connectsTo": [925],	"monitoredBy": [922]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 578,	"connectsTo": [926],	"monitoredBy": [922]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -980,	"connectsTo": [927],	"monitoredBy": [922]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -803,	"connectsTo": [929],	"monitoredBy": [922]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 340,	"connectsTo": [930],	"monitoredBy": [928]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 366,	"connectsTo": [931],	"monitoredBy": [928]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 128,	"connectsTo": [932],	"monitoredBy": [928]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 833,	"connectsTo": [933],	"monitoredBy": [928]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 475,	"connectsTo": [934],	"monitoredBy": [928]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 197,	"connectsTo": [936],	"monitoredBy": [928]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 388,	"connectsTo": [937],	"monitoredBy": [935]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 246,	"connectsTo": [938],	"monitoredBy": [935]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 175,	"connectsTo": [939],	"monitoredBy": [935]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 446,	"connectsTo": [940],	"monitoredBy": [935]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 214,	"connectsTo": [942],	"monitoredBy": [935]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 541,	"connectsTo": [943],	"monitoredBy": [941]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 491,	"connectsTo": [944],	"monitoredBy": [941]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 555,	"connectsTo": [945],	"monitoredBy": [941]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 720,	"connectsTo": [946],	"monitoredBy": [941]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 681,	"connectsTo": [948],	"monitoredBy": [941]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 99,	"connectsTo": [949],	"monitoredBy": [947]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 175,	"connectsTo": [950],	"monitoredBy": [947]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 425,	"connectsTo": [951],	"monitoredBy": [947]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 186,	"connectsTo": [952],	"monitoredBy": [947]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 148,	"connectsTo": [954],	"monitoredBy": [947]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -431,	"connectsTo": [955],	"monitoredBy": [953]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 646,	"connectsTo": [956],	"monitoredBy": [953]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 535,	"connectsTo": [957],	"monitoredBy": [953]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -524,	"connectsTo": [958],	"monitoredBy": [953]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 84,	"connectsTo": [960],	"monitoredBy": [953]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [962],	"monitoredBy": [961, 967, 979, 985, 991, 997, 1003],	"POSITIONS": [1009]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 343,	"connectsTo": [963],	"monitoredBy": [961]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 881,	"connectsTo": [964],	"monitoredBy": [961]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 296,	"connectsTo": [965],	"monitoredBy": [961]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 997,	"connectsTo": [966],	"monitoredBy": [961]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 109,	"connectsTo": [968],	"monitoredBy": [961]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 172,	"connectsTo": [969],	"monitoredBy": [967]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 756,	"connectsTo": [970],	"monitoredBy": [967]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 203,	"connectsTo": [971],	"monitoredBy": [967]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 360,	"connectsTo": [972],	"monitoredBy": [967]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 430,	"connectsTo": [974],	"monitoredBy": [967]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 51,	"connectsTo": [975],	"monitoredBy": [973]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 676,	"connectsTo": [976],	"monitoredBy": [973]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 711,	"connectsTo": [977],	"monitoredBy": [973]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 649,	"connectsTo": [978],	"monitoredBy": [973]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 135,	"connectsTo": [980],	"monitoredBy": [973]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 450,	"connectsTo": [981],	"monitoredBy": [979]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 145,	"connectsTo": [982],	"monitoredBy": [979]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 211,	"connectsTo": [983],	"monitoredBy": [979]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 85,	"connectsTo": [984],	"monitoredBy": [979]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -872,	"connectsTo": [986],	"monitoredBy": [979]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -523,	"connectsTo": [987],	"monitoredBy": [985]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 674,	"connectsTo": [988],	"monitoredBy": [985]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 478,	"connectsTo": [989],	"monitoredBy": [985]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 86,	"connectsTo": [990],	"monitoredBy": [985]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 898,	"connectsTo": [992],	"monitoredBy": [985]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 301,	"connectsTo": [993],	"monitoredBy": [991]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 608,	"connectsTo": [994],	"monitoredBy": [991]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 123,	"connectsTo": [995],	"monitoredBy": [991]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 251,	"connectsTo": [996],	"monitoredBy": [991]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -521,	"connectsTo": [998],	"monitoredBy": [991]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 282,	"connectsTo": [999],	"monitoredBy": [997]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 548,	"connectsTo": [1000],	"monitoredBy": [997]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 129,	"connectsTo": [1001],	"monitoredBy": [997]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -888,	"connectsTo": [1002],	"monitoredBy": [997]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 599,	"connectsTo": [1004],	"monitoredBy": [997]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 647,	"connectsTo": [1005],	"monitoredBy": [1003]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 681,	"connectsTo": [1006],	"monitoredBy": [1003]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 732,	"connectsTo": [1007],	"monitoredBy": [1003]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 309,	"connectsTo": [1008],	"monitoredBy": [1003]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -181,	"connectsTo": [1010],	"monitoredBy": [1003]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [1012],	"monitoredBy": [1011, 1017, 1023, 1035, 1047],	"POSITIONS": [1053]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 22,	"connectsTo": [1013],	"monitoredBy": [1011]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 425,	"connectsTo": [1014],	"monitoredBy": [1011]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 704,	"connectsTo": [1015],	"monitoredBy": [1011]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 209,	"connectsTo": [1016],	"monitoredBy": [1011]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 240,	"connectsTo": [1018],	"monitoredBy": [1011]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 935,	"connectsTo": [1019],	"monitoredBy": [1017]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 640,	"connectsTo": [1020],	"monitoredBy": [1017]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 760,	"connectsTo": [1021],	"monitoredBy": [1017]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 488,	"connectsTo": [1022],	"monitoredBy": [1017]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 912,	"connectsTo": [1024],	"monitoredBy": [1017]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -585,	"connectsTo": [1025],	"monitoredBy": [1023]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 222,	"connectsTo": [1026],	"monitoredBy": [1023]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 263,	"connectsTo": [1027],	"monitoredBy": [1023]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 389,	"connectsTo": [1028],	"monitoredBy": [1023]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -692,	"connectsTo": [1030],	"monitoredBy": [1023]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 657,	"connectsTo": [1031],	"monitoredBy": [1029]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -680,	"connectsTo": [1032],	"monitoredBy": [1029]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -390,	"connectsTo": [1033],	"monitoredBy": [1029]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 800,	"connectsTo": [1034],	"monitoredBy": [1029]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -282,	"connectsTo": [1036],	"monitoredBy": [1029]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 68,	"connectsTo": [1037],	"monitoredBy": [1035]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 878,	"connectsTo": [1038],	"monitoredBy": [1035]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 190,	"connectsTo": [1039],	"monitoredBy": [1035]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 214,	"connectsTo": [1040],	"monitoredBy": [1035]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 867,	"connectsTo": [1042],	"monitoredBy": [1035]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 479,	"connectsTo": [1043],	"monitoredBy": [1041]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 127,	"connectsTo": [1044],	"monitoredBy": [1041]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 547,	"connectsTo": [1045],	"monitoredBy": [1041]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 857,	"connectsTo": [1046],	"monitoredBy": [1041]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -391,	"connectsTo": [1048],	"monitoredBy": [1041]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 982,	"connectsTo": [1049],	"monitoredBy": [1047]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 55,	"connectsTo": [1050],	"monitoredBy": [1047]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 879,	"connectsTo": [1051],	"monitoredBy": [1047]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 9,	"connectsTo": [1052],	"monitoredBy": [1047]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 279,	"connectsTo": [1054],	"monitoredBy": [1047]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "FAILURE",	"connectsTo": [1056],	"monitoredBy": [1067, 1073, 1079, 1085],	"POSITIONS": [1091]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 663,	"connectsTo": [1057],	"monitoredBy": [1055]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -265,	"connectsTo": [1058],	"monitoredBy": [1055]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 618,	"connectsTo": [1059],	"monitoredBy": [1055]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 961,	"connectsTo": [1060],	"monitoredBy": [1055]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 731,	"connectsTo": [1062],	"monitoredBy": [1055]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 807,	"connectsTo": [1063],	"monitoredBy": [1061]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 183,	"connectsTo": [1064],	"monitoredBy": [1061]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 433,	"connectsTo": [1065],	"monitoredBy": [1061]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 35,	"connectsTo": [1066],	"monitoredBy": [1061]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 996,	"connectsTo": [1068],	"monitoredBy": [1061]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 205,	"connectsTo": [1069],	"monitoredBy": [1067]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 508,	"connectsTo": [1070],	"monitoredBy": [1067]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 564,	"connectsTo": [1071],	"monitoredBy": [1067]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 178,	"connectsTo": [1072],	"monitoredBy": [1067]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 181,	"connectsTo": [1074],	"monitoredBy": [1067]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -429,	"connectsTo": [1075],	"monitoredBy": [1073]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 304,	"connectsTo": [1076],	"monitoredBy": [1073]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -479,	"connectsTo": [1077],	"monitoredBy": [1073]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 155,	"connectsTo": [1078],	"monitoredBy": [1073]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 572,	"connectsTo": [1080],	"monitoredBy": [1073]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 992,	"connectsTo": [1081],	"monitoredBy": [1079]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 892,	"connectsTo": [1082],	"monitoredBy": [1079]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 576,	"connectsTo": [1083],	"monitoredBy": [1079]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 337,	"connectsTo": [1084],	"monitoredBy": [1079]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 863,	"connectsTo": [1086],	"monitoredBy": [1079]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 303,	"connectsTo": [1087],	"monitoredBy": [1085]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 857,	"connectsTo": [1088],	"monitoredBy": [1085]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -525,	"connectsTo": [1089],	"monitoredBy": [1085]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 492,	"connectsTo": [1090],	"monitoredBy": [1085]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 69,	"connectsTo": [1092],	"monitoredBy": [1085]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [1094],	"monitoredBy": [1093, 1099, 1105],	"POSITIONS": [1111]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 627,	"connectsTo": [1095],	"monitoredBy": [1093]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 94,	"connectsTo": [1096],	"monitoredBy": [1093]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 180,	"connectsTo": [1097],	"monitoredBy": [1093]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 848,	"connectsTo": [1098],	"monitoredBy": [1093]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 153,	"connectsTo": [1100],	"monitoredBy": [1093]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 972,	"connectsTo": [1101],	"monitoredBy": [1099]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 533,	"connectsTo": [1102],	"monitoredBy": [1099]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 895,	"connectsTo": [1103],	"monitoredBy": [1099]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 317,	"connectsTo": [1104],	"monitoredBy": [1099]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 845,	"connectsTo": [1106],	"monitoredBy": [1099]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 953,	"connectsTo": [1107],	"monitoredBy": [1105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 322,	"connectsTo": [1108],	"monitoredBy": [1105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 372,	"connectsTo": [1109],	"monitoredBy": [1105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 718,	"connectsTo": [1110],	"monitoredBy": [1105]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 907,	"connectsTo": [1112],	"monitoredBy": [1105]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [1114],	"monitoredBy": [1113, 1125],	"POSITIONS": [1137]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 634,	"connectsTo": [1115],	"monitoredBy": [1113]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 281,	"connectsTo": [1116],	"monitoredBy": [1113]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 843,	"connectsTo": [1117],	"monitoredBy": [1113]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 304,	"connectsTo": [1118],	"monitoredBy": [1113]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 780,	"connectsTo": [1120],	"monitoredBy": [1113]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 774,	"connectsTo": [1121],	"monitoredBy": [1119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 68,	"connectsTo": [1122],	"monitoredBy": [1119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 2,	"connectsTo": [1123],	"monitoredBy": [1119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 686,	"connectsTo": [1124],	"monitoredBy": [1119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 560,	"connectsTo": [1126],	"monitoredBy": [1119]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 721,	"connectsTo": [1127],	"monitoredBy": [1125]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 707,	"connectsTo": [1128],	"monitoredBy": [1125]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 140,	"connectsTo": [1129],	"monitoredBy": [1125]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -619,	"connectsTo": [1130],	"monitoredBy": [1125]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 125,	"connectsTo": [1132],	"monitoredBy": [1125]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 357,	"connectsTo": [1133],	"monitoredBy": [1131]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 766,	"connectsTo": [1134],	"monitoredBy": [1131]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 29,	"connectsTo": [1135],	"monitoredBy": [1131]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -172,	"connectsTo": [1136],	"monitoredBy": [1131]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 369,	"connectsTo": [1138],	"monitoredBy": [1131]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "STRAIGHT",	"connectsTo": [1140],	"monitoredBy": [1139, 1145, 1151, 1163, 1169, 1175, 1181, 1187],	"POSITIONS": [1193]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 674,	"connectsTo": [1141],	"monitoredBy": [1139]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 200,	"connectsTo": [1142],	"monitoredBy": [1139]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 910,	"connectsTo": [1143],	"monitoredBy": [1139]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 781,	"connectsTo": [1144],	"monitoredBy": [1139]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 831,	"connectsTo": [1146],	"monitoredBy": [1139]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 245,	"connectsTo": [1147],	"monitoredBy": [1145]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 108,	"connectsTo": [1148],	"monitoredBy": [1145]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 424,	"connectsTo": [1149],	"monitoredBy": [1145]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 836,	"connectsTo": [1150],	"monitoredBy": [1145]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 314,	"connectsTo": [1152],	"monitoredBy": [1145]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 315,	"connectsTo": [1153],	"monitoredBy": [1151]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 757,	"connectsTo": [1154],	"monitoredBy": [1151]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 722,	"connectsTo": [1155],	"monitoredBy": [1151]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 638,	"connectsTo": [1156],	"monitoredBy": [1151]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -621,	"connectsTo": [1158],	"monitoredBy": [1151]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -465,	"connectsTo": [1159],	"monitoredBy": [1157]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 892,	"connectsTo": [1160],	"monitoredBy": [1157]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 515,	"connectsTo": [1161],	"monitoredBy": [1157]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 749,	"connectsTo": [1162],	"monitoredBy": [1157]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -653,	"connectsTo": [1164],	"monitoredBy": [1157]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 49,	"connectsTo": [1165],	"monitoredBy": [1163]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 815,	"connectsTo": [1166],	"monitoredBy": [1163]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 152,	"connectsTo": [1167],	"monitoredBy": [1163]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 718,	"connectsTo": [1168],	"monitoredBy": [1163]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -443,	"connectsTo": [1170],	"monitoredBy": [1163]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 75,	"connectsTo": [1171],	"monitoredBy": [1169]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 305,	"connectsTo": [1172],	"monitoredBy": [1169]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -569,	"connectsTo": [1173],	"monitoredBy": [1169]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 817,	"connectsTo": [1174],	"monitoredBy": [1169]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 768,	"connectsTo": [1176],	"monitoredBy": [1169]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 359,	"connectsTo": [1177],	"monitoredBy": [1175]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 145,	"connectsTo": [1178],	"monitoredBy": [1175]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 201,	"connectsTo": [1179],	"monitoredBy": [1175]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 354,	"connectsTo": [1180],	"monitoredBy": [1175]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 750,	"connectsTo": [1182],	"monitoredBy": [1175]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 262,	"connectsTo": [1183],	"monitoredBy": [1181]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 417,	"connectsTo": [1184],	"monitoredBy": [1181]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 729,	"connectsTo": [1185],	"monitoredBy": [1181]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 613,	"connectsTo": [1186],	"monitoredBy": [1181]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 807,	"connectsTo": [1188],	"monitoredBy": [1181]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 214,	"connectsTo": [1189],	"monitoredBy": [1187]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 687,	"connectsTo": [1190],	"monitoredBy": [1187]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -312,	"connectsTo": [1191],	"monitoredBy": [1187]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 947,	"connectsTo": [1192],	"monitoredBy": [1187]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 710,	"connectsTo": [1194],	"monitoredBy": [1187]}
+		{	 "allocation data": 0,	":type": "Switch",	"currentPosition": "DIVERGING",	"connectsTo": [1196],	"monitoredBy": [1195, 1201, 1207],	"POSITIONS": [1225]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 252,	"connectsTo": [1197],	"monitoredBy": [1195]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 835,	"connectsTo": [1198],	"monitoredBy": [1195]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -335,	"connectsTo": [1199],	"monitoredBy": [1195]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 757,	"connectsTo": [1200],	"monitoredBy": [1195]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 729,	"connectsTo": [1202],	"monitoredBy": [1195]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 398,	"connectsTo": [1203],	"monitoredBy": [1201]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -995,	"connectsTo": [1204],	"monitoredBy": [1201]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 457,	"connectsTo": [1205],	"monitoredBy": [1201]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 779,	"connectsTo": [1206],	"monitoredBy": [1201]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -535,	"connectsTo": [1208],	"monitoredBy": [1201]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 450,	"connectsTo": [1209],	"monitoredBy": [1207]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 748,	"connectsTo": [1210],	"monitoredBy": [1207]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 756,	"connectsTo": [1211],	"monitoredBy": [1207]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 567,	"connectsTo": [1212],	"monitoredBy": [1207]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 777,	"connectsTo": [1214],	"monitoredBy": [1207]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 558,	"connectsTo": [1215],	"monitoredBy": [1213]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 37,	"connectsTo": [1216],	"monitoredBy": [1213]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 41,	"connectsTo": [1217],	"monitoredBy": [1213]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 26,	"connectsTo": [1218],	"monitoredBy": [1213]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 670,	"connectsTo": [1220],	"monitoredBy": [1213]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 749,	"connectsTo": [1221],	"monitoredBy": [1219]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": -870,	"connectsTo": [1222],	"monitoredBy": [1219]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 711,	"connectsTo": [1223],	"monitoredBy": [1219]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 903,	"connectsTo": [1224],	"monitoredBy": [1219]}
+		{	 "allocation data": 0,	":type": "Segment",	"length": 86,	"connectsTo": [5],	"monitoredBy": [1219]}
+	]
+}
