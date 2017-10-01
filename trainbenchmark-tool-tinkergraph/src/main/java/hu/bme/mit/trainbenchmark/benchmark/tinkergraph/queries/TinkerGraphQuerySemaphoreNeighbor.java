@@ -17,13 +17,13 @@ import java.util.Collection;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, TTinkerGraphDriver> {
+public class TinkerGraphQuerySemaphoreNeighbor<TTinkerGraphDriver extends GraphDriver> extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySemaphoreNeighbor(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.SEMAPHORENEIGHBOR, driver);

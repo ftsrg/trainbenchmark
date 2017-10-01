@@ -18,12 +18,12 @@ import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQuerySemaphoreNeighborInject<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphQuerySemaphoreNeighborInject<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphQuery<TinkerGraphSemaphoreNeighborInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySemaphoreNeighborInject(final TTinkerGraphDriver driver) {

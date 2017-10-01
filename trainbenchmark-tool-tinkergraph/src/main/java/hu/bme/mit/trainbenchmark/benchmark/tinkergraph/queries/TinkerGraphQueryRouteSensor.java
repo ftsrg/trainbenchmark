@@ -18,13 +18,13 @@ import java.util.Collection;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphRouteSensorMatch, TTinkerGraphDriver> {
+public class TinkerGraphQueryRouteSensor<TTinkerGraphDriver extends GraphDriver> extends TinkerGraphQuery<TinkerGraphRouteSensorMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryRouteSensor(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.ROUTESENSOR, driver);

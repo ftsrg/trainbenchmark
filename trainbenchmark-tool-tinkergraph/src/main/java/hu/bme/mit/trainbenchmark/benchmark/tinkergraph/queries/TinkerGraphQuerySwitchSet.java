@@ -25,14 +25,14 @@ import java.util.Collection;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Signal;
 
-public class TinkerGraphQuerySwitchSet<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSwitchSetMatch, TTinkerGraphDriver> {
+public class TinkerGraphQuerySwitchSet<TTinkerGraphDriver extends GraphDriver> extends TinkerGraphQuery<TinkerGraphSwitchSetMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySwitchSet(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.SWITCHSET, driver);

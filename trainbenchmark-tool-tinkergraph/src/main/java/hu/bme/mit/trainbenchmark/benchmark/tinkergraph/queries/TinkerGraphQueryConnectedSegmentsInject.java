@@ -20,14 +20,14 @@ import java.util.Map;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryConnectedSegmentsInject<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphQueryConnectedSegmentsInject<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphQuery<TinkerGraphConnectedSegmentsInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryConnectedSegmentsInject(final TTinkerGraphDriver driver) {

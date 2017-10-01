@@ -13,12 +13,12 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationInjectPosLength<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphTransformationInjectPosLength<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphPosLengthInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationInjectPosLength(final TTinkerGraphDriver driver) {
@@ -26,7 +26,7 @@ public class TinkerGraphTransformationInjectPosLength<TTinkerGraphDriver extends
 	}
 
 	@Override
-	public void activate(final Collection<TinkerGraphPosLengthInjectMatch> matches) { 
+	public void activate(final Collection<TinkerGraphPosLengthInjectMatch> matches) {
 		for (final TinkerGraphPosLengthInjectMatch match : matches) {
 			match.getSegment().property(ModelConstants.LENGTH, 0);
 		}

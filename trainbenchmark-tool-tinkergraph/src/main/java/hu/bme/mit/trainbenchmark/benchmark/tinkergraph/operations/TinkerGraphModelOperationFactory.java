@@ -2,7 +2,7 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.operations;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
@@ -44,7 +44,7 @@ import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.Ti
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.TinkerGraphTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
-public class TinkerGraphModelOperationFactory<TDriver extends TinkerGraphDriver> extends ModelOperationFactory<TinkerGraphMatch, TDriver> {
+public class TinkerGraphModelOperationFactory<TDriver extends GraphDriver> extends ModelOperationFactory<TinkerGraphMatch, TDriver> {
 
 	@Override
 	public ModelOperation<? extends TinkerGraphMatch, TDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,

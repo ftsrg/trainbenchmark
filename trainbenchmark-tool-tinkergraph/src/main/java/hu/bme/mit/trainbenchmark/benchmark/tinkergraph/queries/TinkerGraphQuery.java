@@ -12,17 +12,17 @@
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class TinkerGraphQuery<TMatch extends TinkerGraphMatch, TTinkerGraphDriver extends TinkerGraphDriver> extends ModelQuery<TMatch, TTinkerGraphDriver> {
+public abstract class TinkerGraphQuery<TMatch extends TinkerGraphMatch, TTinkerGraphDriver extends GraphDriver> extends ModelQuery<TMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuery(final RailwayQuery query, final TTinkerGraphDriver driver) {
 		super(query, driver);
 	}
 
-	public static <TTinkerGraphDriver extends TinkerGraphDriver> TinkerGraphQuery<?, TTinkerGraphDriver> newInstance(final RailwayQuery query, final TTinkerGraphDriver driver) {
+	public static <TTinkerGraphDriver extends GraphDriver> TinkerGraphQuery<?, TTinkerGraphDriver> newInstance(final RailwayQuery query, final TTinkerGraphDriver driver) {
 		switch (query) {
 		case CONNECTEDSEGMENTS:
 			return new TinkerGraphQueryConnectedSegments<>(driver);

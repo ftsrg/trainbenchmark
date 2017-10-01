@@ -17,12 +17,12 @@ import java.util.Collection;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryPosLengthInject<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphQueryPosLengthInject<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphQuery<TinkerGraphPosLengthInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryPosLengthInject(final TTinkerGraphDriver driver) {
@@ -37,7 +37,7 @@ public class TinkerGraphQueryPosLengthInject<TTinkerGraphDriver extends TinkerGr
 		for (Vertex segment : segments) {
 			matches.add(new TinkerGraphPosLengthInjectMatch(segment));
 		}
-		
+
 		return matches;
 	}
 }

@@ -1,0 +1,19 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.janusgraph.JanusGraphBenchmarkMain' }
+}
+
+ext {
+	janusGraph = '0.2.0-SNAPSHOT'
+}
+
+dependencies {
+	compile project(':trainbenchmark-tool-tinkergraph')
+	compile group: 'org.apache.tinkerpop', name: 'gremlin-server', version: tinkerGraphVersion
+	//runtime group: 'org.apache.tinkerpop', name: 'gremlin-server', version: tinkerGraphVersion
+	compile group: 'org.janusgraph', name: 'janusgraph-core', version: janusGraph
+	runtime group: 'org.janusgraph', name: 'janusgraph-berkeleyje', version: janusGraph
+	//testRuntime group: 'org.janusgraph', name: 'janusgraph-berkeleyje', version: janusGraph
+}

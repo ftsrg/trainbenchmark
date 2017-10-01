@@ -22,11 +22,11 @@ import java.util.Collection;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQuerySwitchMonitored<TTinkerGraphDriver extends TinkerGraphDriver> extends TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, TTinkerGraphDriver> {
+public class TinkerGraphQuerySwitchMonitored<TTinkerGraphDriver extends GraphDriver> extends TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQuerySwitchMonitored(final TTinkerGraphDriver driver) {
 		super(RailwayQuery.SWITCHMONITORED, driver);
@@ -37,7 +37,7 @@ public class TinkerGraphQuerySwitchMonitored<TTinkerGraphDriver extends TinkerGr
 		final Collection<TinkerGraphSwitchMonitoredMatch> matches = new ArrayList<>();
 
 		final Collection<Vertex> switches = driver.getVertices(SWITCH);
-		
+
 		// (sw:Switch)
 		for (final Vertex sw : switches) {
 			final Iterable<Vertex> monitoredByVertices = () -> sw.vertices(Direction.OUT, MONITORED_BY);

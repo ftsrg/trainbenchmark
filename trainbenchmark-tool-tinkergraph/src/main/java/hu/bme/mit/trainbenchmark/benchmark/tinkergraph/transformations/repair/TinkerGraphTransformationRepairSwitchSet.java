@@ -17,11 +17,11 @@ import java.util.Collection;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 
-public class TinkerGraphTransformationRepairSwitchSet<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphTransformationRepairSwitchSet<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphSwitchSetMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationRepairSwitchSet(final TTinkerGraphDriver driver) {

@@ -15,12 +15,12 @@ import java.util.Collection;
 
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationRepairConnectedSegments<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphTransformationRepairConnectedSegments<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphConnectedSegmentsMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationRepairConnectedSegments(final TTinkerGraphDriver driver) {

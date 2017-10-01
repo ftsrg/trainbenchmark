@@ -19,12 +19,12 @@ import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class TinkerGraphQueryRouteSensorInject<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphQueryRouteSensorInject<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphQuery<TinkerGraphRouteSensorInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphQueryRouteSensorInject(final TTinkerGraphDriver driver) {
