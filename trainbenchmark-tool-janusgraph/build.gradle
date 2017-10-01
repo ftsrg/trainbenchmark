@@ -12,8 +12,6 @@ ext {
 dependencies {
 	compile project(':trainbenchmark-tool-tinkergraph')
 	compile group: 'org.apache.tinkerpop', name: 'gremlin-server', version: tinkerGraphVersion
-	//runtime group: 'org.apache.tinkerpop', name: 'gremlin-server', version: tinkerGraphVersion
-	compile group: 'org.janusgraph', name: 'janusgraph-core', version: janusGraph
-	runtime group: 'org.janusgraph', name: 'janusgraph-berkeleyje', version: janusGraph
-	//testRuntime group: 'org.janusgraph', name: 'janusgraph-berkeleyje', version: janusGraph
+	//compile group: 'org.janusgraph', name: 'janusgraph-core', version: janusGraph
+	compile group: 'org.janusgraph', name: 'janusgraph-berkeleyje', version: janusGraph
 }

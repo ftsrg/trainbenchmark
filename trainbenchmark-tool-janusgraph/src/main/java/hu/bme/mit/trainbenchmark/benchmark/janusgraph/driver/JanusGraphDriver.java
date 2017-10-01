@@ -32,9 +32,6 @@ public class JanusGraphDriver extends GraphDriver<Graph> {
 		//final PropertiesConfiguration conf = new PropertiesConfiguration("conf/jgex-berkeleyje.properties");
 		final PropertiesConfiguration conf = new PropertiesConfiguration("conf/jgex-inmemory.properties");
 		graph = GraphFactory.open(conf);
-
-//		graph = TinkerGraph.open();
-//		graph.createIndex(LABEL, Vertex.class);
 		graph.io(IoCore.graphml()).readGraph(modelPath);
 	}
 

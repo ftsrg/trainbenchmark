@@ -12,25 +12,24 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.util.TinkerGraphUtil;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.constants.Signal;
+import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 
 public class TinkerGraphQuerySwitchSet<TTinkerGraphDriver extends GraphDriver> extends TinkerGraphQuery<TinkerGraphSwitchSetMatch, TTinkerGraphDriver> {
 
@@ -72,7 +71,6 @@ public class TinkerGraphQuerySwitchSet<TTinkerGraphDriver extends GraphDriver> e
 				}
 			}
 		}
-
 		return matches;
 	}
 }
