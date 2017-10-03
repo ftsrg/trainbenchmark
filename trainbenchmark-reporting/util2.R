@@ -1,7 +1,7 @@
 # Sample script for processing and visualizing the benchmark results.
-# 
+#
 # The script aggregates the data and transforms it to a wide table suited for visualization.
-# The aggregration takes the **average** time required by the individual steps in the phases. 
+# The aggregration takes the **average** time required by the individual steps in the phases.
 # For multiple runs, the script takes the **minimum** value.
 #
 # The basic workflow for the script is the following:
@@ -30,20 +30,20 @@ modelsizes = do.call(rbind, list(modelsize.batch, modelsize.inject, modelsize.re
 
 load = function(results.file, cases) {
   #results.file = "../results/results-mix.csv"
-  
+
   results = read.csv(results.file, header = FALSE)
   colnames(results) = c("Scenario", "Tool", "Run", "Case", "Artifact", "Phase", "Iteration", "Metric", "Value")
-  
+
   # make the phases a factor with a fixed set of values to help dcasting
   # (e.g. Batch measurements do not have Transformation and Recheck attributes which would cause df$Transformation to throw an error)
   results$Phase = factor(results$Phase, levels = c("Read", "Check", "Transformation", "Recheck"))
-    
+
   # order queries according to their complexity
   results$Case = factor(results$Case, levels = cases)
 
   # replace underscore with space in tool names
   results$Tool = gsub('_', ' ', results$Tool)
-  
+
   return(results)
 }
 
@@ -57,7 +57,7 @@ process.times = function(results, drop) {
 
   # convert nanoseconds to seconds
   times$Value = times$Value / 10^9
-  
+
   # transform long table to wide table
   times.wide = dcast(times,
                      Scenario + Tool + Run + Case + Artifact ~ Phase,
@@ -65,12 +65,12 @@ process.times = function(results, drop) {
                      drop = drop,
                      fun.aggregate = mean
                     )
-  
+
   # calculate aggregated values
   times.derived = times.wide
   times.derived$Read.and.Check = times.derived$Read + times.derived$Check
   times.derived$Transformation.and.Recheck = times.derived$Transformation + times.derived$Recheck
-  
+
   # summarize for each value (along the **Iteration** attribute) using a columnwise function
   # there might be NAs as some phases (e.g. Read) are not executed repeatedly
   #times.aggregated.iterations = ddply(
@@ -79,10 +79,10 @@ process.times = function(results, drop) {
     #.fun = colwise(mean, na.rm = TRUE),
     #.progress = "text"
   #)
-  
+
   # drop the **Iteration** attribute
   #times.aggregated.iterations = subset(times.aggregated.iterations, select = -c(Iteration))
-  
+
   # summarize for each value (along the **Run** attribute) using a columnwise function
   times.aggregated.runs = ddply(
     .data = times.derived,
@@ -94,7 +94,7 @@ process.times = function(results, drop) {
   # the **Run** attribute
   times.aggregated.finished = times.aggregated.runs[times.aggregated.runs$Run == 3, ]
   times.aggregated.finished = subset(times.aggregated.finished, select=-c(Run))
-  
+
   # melt data to a wide table
   times.plot = melt(
     data = times.aggregated.finished,
@@ -103,51 +103,13 @@ process.times = function(results, drop) {
     variable.name = "Phase",
     value.name = "Time"
   )
-  
+
   # remove the . characters from the phasename
   #times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read.and.Check", "Transformation.and.Recheck"))
   times.plot$Phase = gsub('\\.', ' ', times.plot$Phase)
   times.plot$Phase = factor(times.plot$Phase, levels = c("Read", "Transformation", "Check", "Recheck", "Read and Check", "Transformation and Recheck"))
-  
+
   return(times.plot)
-}
-
-####################################################################################################
-
-process.memories = function(results) {
-  # filter on the MaxMemory metric, throw away unused columns
-  memories = subset(results, Metric == "MaxMemory")
-  memories = subset(memories, select = -c(Phase, Iteration, Metric))
-  memories = unique(memories)
-  
-  memories = rename(memories, c("Value"="Memory"))
-  
-  # get the minimum values for the memory consumption
-  minimum.memories = ddply(
-    .data = memories,
-    .variables = c("Scenario", "Tool", "Case", "Artifact", "Run"),
-    .fun = colwise(min),
-    .progress = "text"
-  )
-  
-  # drop results from less than 5 runs
-  #memories.runs = ddply(
-  #  .data = minimum.memories,
-  #  .variables = c("Scenario", "Tool", "Case", "Artifact", "Memory"),
-  #  .fun = colwise(length),
-  #  .progress = "text"
-  #)
-  #memories.finished = subset(memories.runs, Run == 1)
-  memories.finished = subset(minimum.memories, select = -c(Run))
-  
-  # extract the tool names for the plots labels
-  toolnames = ddply(
-    .data = memories.finished,
-    .variables = c("Scenario", "Tool", "Case"),
-    .fun = colwise(max),
-    .progress = "text"
-  )
-  list(memories = memories.finished, toolnames = toolnames)
 }
 
 ####################################################################################################
@@ -157,13 +119,13 @@ yaxis = function() {
   longticks = c(F, F, F, T, F, F, F, F, T)
   shortticks = 2:10
   range = -6:4
-  
+
   ooms = 10^range
-  
+
   ybreaks = as.vector(shortticks %o% ooms)
   ylabels = as.character(ybreaks * longticks)
   ylabels = gsub("^0$", "", ylabels)
-  
+
   list(ybreaks = ybreaks, ylabels = ylabels)
 }
 
@@ -175,27 +137,22 @@ benchmark.plot = function(df, scenario, artifacts, title, filename, facet = NULL
     evens = c(seq(4, nrow(artifacts), by=2))
     artifacts = artifacts[-evens, ]
   }
-  
+
   # only keep the records for the current scenario
   df = df[df$Scenario == scenario, ]
-  
+
   # x axis labels
   artifacts.scenario = artifacts[artifacts$Scenario == scenario, "Triples"]
-  
+
   xbreaks = artifacts[artifacts$Scenario == scenario, "Artifact"]
   xlabels = paste(xbreaks, "\n", artifacts.scenario, sep = "")
-  
+
   # y axis labels
   yaxis = yaxis()
   ybreaks = yaxis$ybreaks
   ylabels = yaxis$ylabels
+  ycaption = "Execution time [s]"
 
-  if (metric == "Time") {
-    ycaption = "Execution time [s]"
-  }  else {
-    ycaption = "Memory [MB]"
-  }
-  
   p = ggplot(df) +
     aes(x = as.factor(Artifact)) +
     labs(title = paste(title, sep = ""), x = "Model size\n#Triples", y = ycaption) +
@@ -233,46 +190,46 @@ heatmap = function(df, attributes, map.from = NULL, map.to = NULL, title, filena
     "fixed",
     categories = c(-Inf,16,256,Inf),
     labels = c("small", "medium", "large"))
-  
+
   df$Time = discretize(
     df$Time,
     "fixed",
     categories = c(-Inf,0.2,1,5,Inf),
     labels = c("instantaneous", "fast", "acceptable", "slow"))
-  
+
   if (!is.null(map.from)) {
     attribute = attributes[1];
     df[[attribute]] = mapvalues(df[[attribute]], from = map.from, to = map.to)
   }
-  
+
   frequencies = as.data.frame(table(df[, c("Artifact", "Time", attributes)]))
   total.frequencies = ddply(frequencies, attributes, summarize, Total = sum(Freq))
   frequencies = merge(frequencies, total.frequencies)
   frequencies$Freq = frequencies$Freq / frequencies$Total
-  
+
   p = ggplot(na.omit(frequencies)) +
     geom_tile(aes(x = Artifact, y = Time, fill = Freq)) +
     labs(title = title, x = "Model size", y = "Execution time") +
     scale_fill_gradient(low = "white", high = "darkred")
-  
+
   if (length(attributes) == 1) {
     p = p + facet_wrap(as.formula(paste("~" ,attributes[1])), ncol = ncol)
   } else {
     p = p + facet_grid(as.formula(paste(attributes[1], "~" ,attributes[2])))
   }
-  
+
   p = p +
     theme_bw() +
     theme(
-      legend.key = element_blank(), 
-      legend.title = element_blank(), 
+      legend.key = element_blank(),
+      legend.title = element_blank(),
       legend.position = legend.position,
       axis.text.x = element_text(angle = 90, hjust = 1),
       strip.text.x = element_text(size = 7),
       strip.text.y = element_text(size = 7)
     )
   print(p)
-  
+
   ggsave(file = paste("../diagrams/heatmap-", filename, ".pdf", sep = ""), width = width, height = height, units = "mm")
 }
 

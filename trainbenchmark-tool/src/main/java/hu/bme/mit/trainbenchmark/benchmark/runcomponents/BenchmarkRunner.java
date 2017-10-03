@@ -1,8 +1,8 @@
 package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 
-import java.io.File;
-import java.io.IOException;
-
+import com.google.common.base.Joiner;
+import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
+import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
@@ -10,11 +10,8 @@ import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.Executor;
 import org.apache.commons.exec.PumpStreamHandler;
 
-import com.google.common.base.Joiner;
-
-import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.memory.MemoryResult;
-import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
+import java.io.File;
+import java.io.IOException;
 
 public class BenchmarkRunner {
 
@@ -60,49 +57,6 @@ public class BenchmarkRunner {
 			}
 			return e.getExitValue();
 		}
-	}
-
-	public static int runMemoryBenchmark(final BenchmarkConfig bc, final ExecutionConfig defaultEc,
-			final int numberOfSteps) throws IOException, InterruptedException {
-		// e.g. initialMaxMemory = 12800, we save this (as a final variable), so
-		// that we will not exceed it
-		//
-		// the memoryQuantum is halved on the start of each loop, so this starts
-		// from 12800 as well (and will go down to 6400)
-		final int initialMaxMemory = defaultEc.getMaxMemory();
-		int currentMaxMemory = initialMaxMemory;
-		int memoryQuantum = initialMaxMemory;
-		int step = 0;
-
-		while (step < numberOfSteps && currentMaxMemory <= initialMaxMemory) {
-			step++;
-			memoryQuantum /= 2;
-
-			final ExecutionConfig ec = new ExecutionConfig(currentMaxMemory, currentMaxMemory);
-			if (runPerformanceBenchmark(bc, ec) == 0) {
-				System.out.println("Execution finished, testing with less memory.");
-				System.out.println();
-				currentMaxMemory -= memoryQuantum;
-			} else {
-				System.out.println("Execution failed, testing with more memory.");
-				System.out.println();
-				currentMaxMemory += memoryQuantum;
-			}
-		}
-
-		if (currentMaxMemory > initialMaxMemory) {
-			System.out.println(
-					"The first execution timed out or errored. Skipping larger sizes for this tool, scenario and query mix.");
-			return -1;
-		}
-		System.out.println("Execution succeeded, estimated memory requirement: " + currentMaxMemory);
-		System.out.println();
-
-		final MemoryResult result = new MemoryResult(bc);
-		final String memoryResultCsv = result.csvMemory(currentMaxMemory);
-		result.serializeCsv(memoryResultCsv, "memory");
-
-		return 0;
 	}
 
 }
