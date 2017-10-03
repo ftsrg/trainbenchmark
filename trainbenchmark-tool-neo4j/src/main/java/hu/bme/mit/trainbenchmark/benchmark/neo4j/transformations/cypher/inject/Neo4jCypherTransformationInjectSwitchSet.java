@@ -39,7 +39,7 @@ public class Neo4jCypherTransformationInjectSwitchSet extends Neo4jCypherTransfo
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
 
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SW, match.getSw().getProperty(Neo4jConstants.ID), //
+					QueryConstants.VAR_SW, match.getSw().getProperty(ModelConstants.ID), //
 					QueryConstants.VAR_CURRENTPOSITION, newCurrentPosition.toString()
 			);
 			driver.runTransformation(transformationDefinition, parameters);

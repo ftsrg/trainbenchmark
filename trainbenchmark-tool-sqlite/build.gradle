@@ -8,5 +8,5 @@ shadowJar {
 dependencies {
 	compile project(':trainbenchmark-tool')
 	compile project(':trainbenchmark-tool-sql')
-	compile group: 'org.xerial', name: 'sqlite-jdbc', version:'3.8.11.2'
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: sqliteVersion
 }

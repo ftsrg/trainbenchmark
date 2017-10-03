@@ -1,0 +1,1 @@
+g.V('labels', ':Route').as('route').store(routes).out('follows').as('swp').out('switch').as('sw').out('sensor').as('sensor').or(_().filter{!it.inE('definedBy').hasNext()},_().in('definedBy').except(routes)).

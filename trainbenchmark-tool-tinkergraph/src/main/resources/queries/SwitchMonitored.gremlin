@@ -1,0 +1,4 @@
+g.V()
+    .filter { it.get().label() == 'Switch' }
+    .filter { !it.outE('monitoredBy').hasNext() }
+    .as('sw')

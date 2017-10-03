@@ -1,0 +1,7 @@
+g.V()
+    .filter { it.get().label() == 'SwitchPosition' }.as('swP')
+    .in('follows').as('route')
+    .out('entry').has('signal', T.eq, 'GO')
+    .as('semaphore').back('swp')
+    .sideEffect{position = it.position}
+    .out('switch').filter{it.currentPosition != position}.as('sw').table(SwitchSet)

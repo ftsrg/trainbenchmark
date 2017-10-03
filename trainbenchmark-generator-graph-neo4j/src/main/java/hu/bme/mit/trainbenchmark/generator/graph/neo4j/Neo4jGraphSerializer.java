@@ -50,7 +50,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 
 	@Override
 	public String syntax() {
-		return "graph-" + gc.getGraphFormat();
+		return "Neo4j graph " + gc.getGraphFormat();
 	}
 
 	@Override

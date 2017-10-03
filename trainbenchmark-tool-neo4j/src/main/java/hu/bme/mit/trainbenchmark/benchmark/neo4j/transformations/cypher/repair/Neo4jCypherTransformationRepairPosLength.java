@@ -15,9 +15,9 @@ import com.google.common.collect.ImmutableMap;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
-import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import org.neo4j.graphdb.NotFoundException;
 
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class Neo4jCypherTransformationRepairPosLength extends Neo4jCypherTransfo
 		for (final Neo4jPosLengthMatch match : matches) {
 			try {
 				final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SEGMENT, match.getSegment().getProperty(Neo4jConstants.ID) //
+					QueryConstants.VAR_SEGMENT, match.getSegment().getProperty(ModelConstants.ID) //
 				);
 				driver.runTransformation(transformationDefinition, parameters);
 			} catch (final NotFoundException e) {

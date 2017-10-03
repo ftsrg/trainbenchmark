@@ -23,12 +23,12 @@ public class JanusGraphBenchmarkConfig extends BenchmarkConfig {
 
 	@Override
 	public String getToolName() {
-		return "TinkerGraph";
+		return "JanusGraph";
 	}
 
 	@Override
 	public String getProjectName() {
-		return "tinkergraph";
+		return "janusgraph";
 	}
 
 }

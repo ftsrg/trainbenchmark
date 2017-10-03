@@ -1,0 +1,7 @@
+g.V()
+    .filter { it.get().label() == 'Route' }.as('route')
+    .store(routes).out('follows').as('swP')
+    .out('switch').as('sw')
+    .out('sensor').as('sensor')
+    .or( _().filter { !it.inE('definedBy').hasNext() }, _().in('definedBy').except(routes))
+    .select('route', 'sensor')

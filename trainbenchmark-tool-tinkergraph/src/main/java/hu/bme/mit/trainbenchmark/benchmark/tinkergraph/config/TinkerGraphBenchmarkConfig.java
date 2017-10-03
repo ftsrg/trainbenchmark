@@ -17,13 +17,20 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 
 public class TinkerGraphBenchmarkConfig extends BenchmarkConfig {
 
-	protected TinkerGraphBenchmarkConfig(final BenchmarkConfigBase configBase) {
+	protected TinkerGraphEngine engine;
+
+	protected TinkerGraphBenchmarkConfig(final BenchmarkConfigBase configBase, final TinkerGraphEngine engine) {
 		super(configBase);
+		this.engine = engine;
+	}
+
+	public TinkerGraphEngine getEngine() {
+		return engine;
 	}
 
 	@Override
 	public String getToolName() {
-		return "TinkerGraph";
+		return String.format("TinkerGraph (%s)", getEngine());
 	}
 
 	@Override

@@ -15,9 +15,9 @@ import com.google.common.collect.ImmutableMap;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
-import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class Neo4jCypherTransformationRepairSwitchMonitored extends Neo4jCypherT
 	public void activate(final Collection<Neo4jSwitchMonitoredMatch> matches) throws IOException {
 		for (final Neo4jSwitchMonitoredMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SW, match.getSw().getProperty(Neo4jConstants.ID) //
+					QueryConstants.VAR_SW, match.getSw().getProperty(ModelConstants.ID) //
 			);
 			driver.runTransformation(transformationDefinition, parameters);
 		}

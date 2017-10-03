@@ -5,10 +5,6 @@ shadowJar {
 	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.janusgraph.JanusGraphBenchmarkMain' }
 }
 
-ext {
-	janusGraph = '0.2.0-SNAPSHOT'
-}
-
 dependencies {
 	compile project(':trainbenchmark-tool-tinkergraph')
 	compile group: 'org.apache.tinkerpop', name: 'gremlin-server', version: tinkerGraphVersion

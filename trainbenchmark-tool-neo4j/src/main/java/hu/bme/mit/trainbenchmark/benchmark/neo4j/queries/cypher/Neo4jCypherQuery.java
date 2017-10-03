@@ -11,17 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.cypher;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-
-import org.apache.commons.io.FileUtils;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.Neo4jQuery;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 
 public class Neo4jCypherQuery<TNeo4jMatch extends Neo4jMatch> extends Neo4jQuery<TNeo4jMatch> {
 
@@ -33,8 +33,11 @@ public class Neo4jCypherQuery<TNeo4jMatch extends Neo4jMatch> extends Neo4jQuery
 		super(query, driver);
 
 		this.query = query;
-		this.queryDefinition = FileUtils.readFileToString(new File(
-				workspaceDir + Neo4jConstants.CYPHER_DIR + "queries/" + query + "." + Neo4jConstants.QUERY_EXTENSION));
+		this.queryDefinition =
+			FileUtils.readFileToString(
+				new File(workspaceDir + Neo4jConstants.CYPHER_DIR + "queries/" + query + "." + Neo4jConstants.QUERY_EXTENSION),
+				StandardCharsets.UTF_8
+			);
 	}
 
 	@SuppressWarnings("unchecked")

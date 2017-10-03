@@ -28,7 +28,6 @@ import java.util.Map.Entry;
 
 public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorConfig> {
 
-	protected TinkerGraphGeneratorConfig graphGeneratorConfig;
 	protected TinkerGraph graph = TinkerGraph.open();
 
 	public TinkerGraphSerializer(final TinkerGraphGeneratorConfig generatorConfig) {
@@ -37,7 +36,7 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 
 	@Override
 	public String syntax() {
-		return "tinkergraph";
+		return "TinkerGraph (" + gc.getGraphFormat().toString() + ")";
 	}
 
 	@Override
@@ -118,8 +117,8 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 			throw new UnsupportedOperationException("Format " + format + " is not supported.");
 		}
 
-		final String extension = "-tinkerpop." + format.toString().toLowerCase();
-		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + extension;
+		final String postfix = "-tinkerpop." + format.toString().toLowerCase();
+		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + postfix;
 		graph.io(builder).writeGraph(fileName);
 		graph.close();
 	}

@@ -1,0 +1,1 @@
+g.V().filter { it.get().label() == 'Switch' }.as('sw')

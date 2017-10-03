@@ -12,7 +12,7 @@ public class TinkerGraphBenchmarkScenario
 		extends BenchmarkScenario<TinkerGraphMatch, GraphDriver, TinkerGraphBenchmarkConfig> {
 
 	public TinkerGraphBenchmarkScenario(final TinkerGraphBenchmarkConfig bc) throws Exception {
-		super(new TinkerGraphDriverFactory(), new TinkerGraphModelOperationFactory<GraphDriver>(), new TinkerGraphMatchComparator(), bc);
+		super(new TinkerGraphDriverFactory(), new TinkerGraphModelOperationFactory<>(bc.getEngine()), new TinkerGraphMatchComparator(), bc);
 	}
 
 }
