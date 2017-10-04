@@ -20,9 +20,20 @@ public class NodeComparator implements Comparator<Node> {
 
 	@Override
 	public int compare(final Node node1, final Node node2) {
-		final long id1 = (Long) node1.getProperty(ModelConstants.ID);
-		final long id2 = (Long) node2.getProperty(ModelConstants.ID);
+		final long id1 = getLongId(node1);
+		final long id2 = getLongId(node2);
 		return Long.compare(id1, id2);
+	}
+
+	private long getLongId(Node node) {
+		Object o = node.getProperty(ModelConstants.ID);
+		if (o instanceof Long) {
+			return (Long) o;
+		}
+		if (o instanceof Integer) {
+			return Long.valueOf((Integer) o);
+		}
+		throw new IllegalStateException("ID should be int or long");
 	}
 
 }
