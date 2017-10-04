@@ -1,4 +1,4 @@
-g.V()
-    .filter { it.get().label() == 'Segment' && it.get().value('length') <= 0 }.as('segment')
-    .properties('length').as('length')
-    .select('segment', 'length')
+g.V() \
+  .hasLabel('Segment').has('length', lte(0)).as('segment') \
+  .values('length').as('length') \
+  .select('segment', 'length')

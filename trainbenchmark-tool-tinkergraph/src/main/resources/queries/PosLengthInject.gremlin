@@ -1,1 +1,1 @@
-g.V().filter { it.get().label() == 'Segment' }.as('segment')
+g.V().hasLabel('Segment').as('segment')

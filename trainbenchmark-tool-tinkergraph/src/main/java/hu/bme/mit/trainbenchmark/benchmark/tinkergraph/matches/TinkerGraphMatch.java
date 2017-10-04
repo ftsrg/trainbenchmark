@@ -14,7 +14,6 @@ package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches;
 import hu.bme.mit.trainbenchmark.benchmark.matches.BaseMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
-import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -72,7 +71,7 @@ public abstract class TinkerGraphMatch extends BaseMatch {
 				final Map<String, Object> pl = (Map<String, Object>) match;
 				return new TinkerGraphPosLengthMatch(
 					(Vertex) pl.get(VAR_SEGMENT),
-					(int) ((VertexProperty) pl.get(VAR_LENGTH)).value()
+					(int) pl.get(VAR_LENGTH)
 				);
 			case POSLENGTH_INJECT:
 				final Vertex pli = (Vertex) match;

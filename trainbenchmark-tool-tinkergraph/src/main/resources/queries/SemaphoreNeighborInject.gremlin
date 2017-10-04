@@ -1,0 +1,4 @@
+g.V() \
+  .hasLabel('Route').as('route') \
+  .out('entry').hasLabel('Semaphore').as('semaphore') \
+  .select('route', 'semaphore')

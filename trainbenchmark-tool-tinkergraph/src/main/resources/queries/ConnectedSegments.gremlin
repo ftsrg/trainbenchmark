@@ -1,10 +1,10 @@
-g.V()
-    .filter { it.get().label() == 'Segment' }.as('segment1')
-    .out('sensor').as('sensor')
-    .back('segment1').out('connectsTo').as('segment2')
-    .out('connectsTo').as('segment3')
-    .out('connectsTo').as('segment4')
-    .out('connectsTo').as('segment5')
-    .out('connectsTo').as('segment6')
-    .out('sensor').retain('sensor')
-    .select('sensor', 'segment1', 'segment2', 'segment3', 'segment4', 'segment5', 'segment6')
+g.V() \
+  .hasLabel('Sensor').as('sensor') \
+  .in('monitoredBy').hasLabel('Segment').as('segment1') \
+  .out('connectsTo').hasLabel('Segment').as('segment2') \
+  .out('connectsTo').hasLabel('Segment').as('segment3') \
+  .out('connectsTo').hasLabel('Segment').as('segment4') \
+  .out('connectsTo').hasLabel('Segment').as('segment5') \
+  .out('connectsTo').hasLabel('Segment').as('segment6') \
+  .out('monitoredBy').as('sensor2').where('sensor', eq('sensor2')) \
+  .select('sensor', 'segment1', 'segment2', 'segment3', 'segment4', 'segment5', 'segment6')

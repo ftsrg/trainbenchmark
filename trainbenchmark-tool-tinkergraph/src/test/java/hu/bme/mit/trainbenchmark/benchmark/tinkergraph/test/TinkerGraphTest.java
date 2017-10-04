@@ -30,7 +30,7 @@ public class TinkerGraphTest extends TrainBenchmarkTest {
 	@Parameterized.Parameters(name = "engine={0}")
 	public static Iterable<? extends Object> data() {
 		return Arrays.asList(
-			//TinkerGraphEngine.CORE_API,
+			TinkerGraphEngine.CORE_API,
 			TinkerGraphEngine.GREMLIN
 		);
 	}
