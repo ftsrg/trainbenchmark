@@ -15,7 +15,7 @@ subprojects {
 
 	artifacts.archives packageSources
 	repositories {
-		jcenter()
+		mavenCentral()
 		maven { url "https://repo.eclipse.org/content/groups/acceleo" }
 		maven { url "https://repo.eclipse.org/content/groups/viatra2" }
 		maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
@@ -33,7 +33,7 @@ ext {
 	jenaVersion = '3.4.0'
 	junitVersion = '4.12'
 	kryoVersion = '4.0.1'
-	mySqlConnectorVersion = '6.0.6'
+	mySqlConnectorVersion = '5.1.44'
 	neo4jVersion = '3.2.5'
 	neo4jApocVersion = '3.2.0.4'
 	orientDbVersion = '3.0.0m2'
