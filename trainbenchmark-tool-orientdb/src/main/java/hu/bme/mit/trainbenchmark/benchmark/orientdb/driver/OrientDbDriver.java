@@ -12,14 +12,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.driver;
 
 import com.orientechnologies.common.log.OLogManager;
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import org.apache.tinkerpop.gremlin.orientdb.OrientGraph;
 
 import java.io.IOException;
 
-public class OrientDbDriver extends TinkerGraphDriver {
-
-	protected final OrientGraph graphDb;
+public class OrientDbDriver extends GraphDriver<OrientGraph> {
 
 	protected OrientDbDriver() throws IOException {
 		super();
@@ -27,12 +25,7 @@ public class OrientDbDriver extends TinkerGraphDriver {
 		OLogManager.instance().setWarnEnabled(false);
 		OLogManager.instance().setInfoEnabled(false);
 		OLogManager.instance().setDebugEnabled(false);
-		graphDb = OrientGraph.open();
-	}
-
-	@Override
-	public String getPostfix() {
-		return "-tinkerpop-orientdb.graphml";
+		graph = OrientGraph.open();
 	}
 
 }

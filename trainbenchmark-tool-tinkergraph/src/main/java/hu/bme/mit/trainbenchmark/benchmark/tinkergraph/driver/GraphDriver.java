@@ -19,6 +19,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
+import org.apache.tinkerpop.gremlin.structure.io.IoCore;
 
 import javax.script.Bindings;
 import javax.script.ScriptException;
@@ -58,6 +59,11 @@ public abstract class GraphDriver<TGraph extends Graph> extends Driver {
 		return "-tinkerpop.graphml";
 	}
 
+	@Override
+	public void read(String modelPath) throws Exception {
+		graph.io(IoCore.graphml()).readGraph(modelPath);
+	}
+
 	public Collection<TinkerGraphMatch> runQuery(final RailwayQuery query, final String queryDefinition) throws ScriptException {
 		final GremlinGroovyScriptEngine engine = new GremlinGroovyScriptEngine();
 		final GraphTraversalSource g = graph.traversal();
@@ -79,4 +85,5 @@ public abstract class GraphDriver<TGraph extends Graph> extends Driver {
 		}
 		return results;
 	}
+
 }
