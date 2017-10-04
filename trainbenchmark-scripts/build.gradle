@@ -67,13 +67,3 @@ task generate(dependsOn: 'classes', type: JavaExec) {
 	main = 'GeneratorScript'
 	classpath = sourceSets.main.runtimeClasspath
 }
-
-task memory(dependsOn: 'classes', type: JavaExec) {
-	main = 'MemoryScript'
-	classpath = sourceSets.main.runtimeClasspath
-}
-
-task qpt(dependsOn: 'classes', type: JavaExec) {
-	main = 'QueryPlanTester'
-	classpath = sourceSets.main.runtimeClasspath
-}
