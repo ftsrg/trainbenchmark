@@ -13,11 +13,7 @@ package hu.bme.mit.trainbenchmark.benchmark.driver;
 
 /**
  * Superclass for the drivers used in the benchmark.
- * 
- * @author szarnyasg
  *
- * @param <TElement>
- *            the type of the individual model elements
  */
 public abstract class Driver {
 
@@ -48,7 +44,7 @@ public abstract class Driver {
 	/**
 	 * Reads the model form a textual format. For disk-resident databases, it persists the loaded data; for in-memory
 	 * databases, it load the model to the memory.
-	 * 
+	 *
 	 * @param modelPath
 	 *            path of the model (with the appropriate postfix)
 	 */

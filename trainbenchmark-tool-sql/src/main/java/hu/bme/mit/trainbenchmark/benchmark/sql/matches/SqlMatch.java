@@ -11,18 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.matches;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import hu.bme.mit.trainbenchmark.benchmark.matches.LongMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Due to the iterator-like nature of the java.sql.ResultSet interface, we cannot store the ResultSet and have to copy its contents. This is
  * implemented for each match in the subclasses of the SqlMatch class.
- * 
- * @author szarnyasg
- * 
+ *
  */
 public abstract class SqlMatch extends LongMatch {
 

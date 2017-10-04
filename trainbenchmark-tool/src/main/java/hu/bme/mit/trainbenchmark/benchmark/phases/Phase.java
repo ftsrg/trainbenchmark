@@ -11,8 +11,6 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkBundle;
  * <li>Cleanup</li>
  * </ul>
  *
- * @author szarnyasg
- *
  */
 public abstract class Phase {
 
