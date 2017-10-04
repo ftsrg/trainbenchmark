@@ -11,26 +11,22 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.mysql.driver;
 
-import static hu.bme.mit.trainbenchmark.sql.constants.SqlConstants.PASSWORD;
-import static hu.bme.mit.trainbenchmark.sql.constants.SqlConstants.USER;
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
+import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
-import hu.bme.mit.trainbenchmark.sql.process.MySqlProcess;
+import static hu.bme.mit.trainbenchmark.sql.constants.SqlConstants.PASSWORD;
+import static hu.bme.mit.trainbenchmark.sql.constants.SqlConstants.USER;
 
 public class MySqlDriver extends SqlDriver {
 
 	protected MySqlDriver() {
 	}
-	
-	public static MySqlDriver create() {
-		return new MySqlDriver();
-	}
-	
+
 	protected final String url = "jdbc:mysql://localhost:3306/trainbenchmark?allowMultiQueries=true&useSSL=false";
 
 	@Override
@@ -69,7 +65,7 @@ public class MySqlDriver extends SqlDriver {
 
 		MySqlProcess.stopServer();
 	}
-	
+
 
 	@Override
 	public String getPostfix() {

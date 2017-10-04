@@ -1,0 +1,1 @@
+g.V().hasLabel('Switch').not(outE('monitoredBy')).as('sw')

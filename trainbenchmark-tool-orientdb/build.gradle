@@ -1,0 +1,11 @@
+plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+
+shadowJar {
+	classifier = 'fat'
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.benchmark.orientdb.OrientDbGraphBenchmarkMain' }
+}
+
+dependencies {
+	compile project(':trainbenchmark-tool-tinkergraph')
+	compile group: 'com.orientechnologies', name: 'orientdb-gremlin', version: orientDbVersion
+}

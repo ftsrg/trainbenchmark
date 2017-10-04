@@ -1,0 +1,10 @@
+g.V() \
+  .hasLabel('Route').as('route1') \
+  .out('exit').hasLabel('Semaphore').as('semaphore') \
+  .select('route1').out('requires').hasLabel('Sensor').as('sensor1') \
+  .in('monitoredBy').as('te1').out('connectsTo').as('te2') \
+  .out('monitoredBy').hasLabel('Sensor').as('sensor2') \
+  .in('requires').hasLabel('Route').as('route2') \
+  .where('route2', neq('route1')) \
+  .select('route2').not(out('entry').as('semaphore2').where('semaphore2', eq('semaphore'))) \
+  .select('semaphore', 'route1', 'route2', 'sensor1', 'sensor2', 'te1', 'te2')

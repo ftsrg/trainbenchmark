@@ -1,0 +1,8 @@
+g.V() \
+  .hasLabel('Sensor').as('sensor') \
+  .in('monitoredBy').hasLabel('Segment').as('segment1') \
+  .select('sensor') \
+  .in('monitoredBy').hasLabel('Segment').as('segment3') \
+  .select('segment1') \
+  .out('connectsTo').as('segment32').where('segment3', eq('segment32')) \
+  .select('sensor', 'segment1', 'segment3')

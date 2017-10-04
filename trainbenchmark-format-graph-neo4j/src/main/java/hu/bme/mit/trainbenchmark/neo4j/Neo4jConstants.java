@@ -26,8 +26,6 @@ public class Neo4jConstants {
 	public static final String CSV_EXTENSION = "csv";
 	public static final String GRAPHML_EXTENSION = "graphml";
 
-	public static final String ID = "id";
-
 	public static final Label labelRoute = Label.label(ROUTE);
 	public static final Label labelSegment = Label.label(SEGMENT);
 	public static final Label labelSemaphore = Label.label(SEMAPHORE);

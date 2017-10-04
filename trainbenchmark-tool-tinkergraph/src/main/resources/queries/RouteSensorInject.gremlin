@@ -1,0 +1,4 @@
+g.V() \
+  .hasLabel('Route').as('route') \
+  .out('requires').hasLabel('Sensor').as('sensor') \
+  .select('route', 'sensor')

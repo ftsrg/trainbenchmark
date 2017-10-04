@@ -16,12 +16,12 @@ import java.util.Collection;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 
-import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class TinkerGraphTransformationInjectRouteSensor<TTinkerGraphDriver extends TinkerGraphDriver>
+public class TinkerGraphTransformationInjectRouteSensor<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphRouteSensorInjectMatch, TTinkerGraphDriver> {
 
 	public TinkerGraphTransformationInjectRouteSensor(final TTinkerGraphDriver driver) {

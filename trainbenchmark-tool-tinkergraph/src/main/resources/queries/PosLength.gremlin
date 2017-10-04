@@ -1,0 +1,4 @@
+g.V() \
+  .hasLabel('Segment').has('length', lte(0)).as('segment') \
+  .values('length').as('length') \
+  .select('segment', 'length')

@@ -1,0 +1,7 @@
+g.V() \
+  .hasLabel('Route').as('route') \
+  .out('follows').hasLabel('SwitchPosition').as('swP') \
+  .out('target').hasLabel('Switch').as('sw') \
+  .out('monitoredBy').hasLabel('Sensor').as('sensor') \
+  .not(inE('requires').outV().as('route2').where('route2', eq('route'))) \
+  .select('route', 'sensor', 'swP', 'sw')

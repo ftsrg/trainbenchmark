@@ -1,11 +1,5 @@
 package hu.bme.mit.trainbenchmark.benchmark.runcomponents;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
@@ -15,6 +9,12 @@ import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
 import hu.bme.mit.trainbenchmark.constants.ExecutionPhase;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkConfig extends BenchmarkConfig> {
 
@@ -53,7 +53,7 @@ public class BenchmarkBundle<TPatternMatch, TDriver extends Driver, TBenchmarkCo
 			final ModelOperation<? extends TPatternMatch, TDriver> modelOperation = factory
 					.createOperation(railwayOperation, workspaceDir, driver);
 			final QueryShuffleTransformation<? extends TPatternMatch, TDriver> qst = QueryShuffleTransformation
-					.of(modelOperation, comparator, random);
+					.of(modelOperation, comparator, random, driver);
 			qsts.add(qst);
 		}
 	}

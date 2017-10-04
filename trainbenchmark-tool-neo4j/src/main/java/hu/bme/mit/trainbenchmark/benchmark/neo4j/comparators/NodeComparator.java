@@ -11,6 +11,7 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators;
 
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import org.neo4j.graphdb.Node;
 
 import java.util.Comparator;
@@ -19,11 +20,20 @@ public class NodeComparator implements Comparator<Node> {
 
 	@Override
 	public int compare(final Node node1, final Node node2) {
-//		final long id1 = node1.getProperty(Neo4jConstants.ID);
-//		final long id2 = node2.getProperty(Neo4jConstants.ID);
-		final long id1 = node1.getId();
-		final long id2 = node2.getId();
+		final long id1 = getLongId(node1);
+		final long id2 = getLongId(node2);
 		return Long.compare(id1, id2);
+	}
+
+	private long getLongId(Node node) {
+		Object o = node.getProperty(ModelConstants.ID);
+		if (o instanceof Long) {
+			return (Long) o;
+		}
+		if (o instanceof Integer) {
+			return Long.valueOf((Integer) o);
+		}
+		throw new IllegalStateException("ID should be int or long");
 	}
 
 }

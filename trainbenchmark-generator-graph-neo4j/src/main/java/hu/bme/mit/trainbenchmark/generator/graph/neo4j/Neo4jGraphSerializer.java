@@ -50,7 +50,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 
 	@Override
 	public String syntax() {
-		return "graph-" + gc.getGraphFormat();
+		return "Neo4j graph " + gc.getGraphFormat();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 			node.addLabel(Label.label(ancestor));
 		}
 
-		node.setProperty(Neo4jConstants.ID, id);
+		node.setProperty(ModelConstants.ID, id);
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String key = attribute.getKey();
 			Object value = attribute.getValue();

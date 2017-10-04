@@ -12,24 +12,22 @@
 
 package hu.bme.mit.trainbenchmark.generator.graph.tinkerpop;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.xml.stream.XMLStreamException;
-
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat;
+import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfig;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.io.Io.Builder;
 import org.apache.tinkerpop.gremlin.structure.io.IoCore;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphFormat;
-import hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.config.TinkerGraphGeneratorConfig;
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorConfig> {
 
-	protected TinkerGraphGeneratorConfig graphGeneratorConfig;
 	protected TinkerGraph graph = TinkerGraph.open();
 
 	public TinkerGraphSerializer(final TinkerGraphGeneratorConfig generatorConfig) {
@@ -38,7 +36,7 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 
 	@Override
 	public String syntax() {
-		return "tinkergraph";
+		return "TinkerGraph (" + gc.getGraphFormat().toString() + ")";
 	}
 
 	@Override
@@ -50,7 +48,8 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) {
 		// NOTE: multiple inheritance is not supported
 		final Vertex vertex = graph.addVertex(type);
-		
+
+		vertex.property(ModelConstants.ID, id);
 		for (final Entry<String, ? extends Object> attribute : attributes.entrySet()) {
 			final String key = attribute.getKey();
 			Object value = attribute.getValue();
@@ -118,8 +117,8 @@ public class TinkerGraphSerializer extends ModelSerializer<TinkerGraphGeneratorC
 			throw new UnsupportedOperationException("Format " + format + " is not supported.");
 		}
 
-		final String extension = "-tinkerpop." + format.toString().toLowerCase();
-		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + extension;
+		final String postfix = "-tinkerpop." + format.toString().toLowerCase();
+		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + postfix;
 		graph.io(builder).writeGraph(fileName);
 		graph.close();
 	}

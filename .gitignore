@@ -54,3 +54,4 @@ neo4j-server/
 out/
 *.swp
 *.report
+classes/

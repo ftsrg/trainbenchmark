@@ -8,5 +8,5 @@ shadowJar {
 dependencies {
 	compile project(':trainbenchmark-tool')
 	compile project(':trainbenchmark-tool-rdf')
-	compile group: 'org.apache.jena', name: 'jena-querybuilder', version:'3.0.0'
+	compile group: 'org.apache.jena', name: 'jena-querybuilder', version: jenaVersion
 }

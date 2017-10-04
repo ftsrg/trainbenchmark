@@ -1,0 +1,9 @@
+g.V() \
+  .hasLabel('Route').has('active', true) \
+  .as('route').out('entry').hasLabel('Semaphore') \
+  .as('semaphore').select('route').out('follows').hasLabel('SwitchPosition') \
+  .as('swP').values('position') \
+  .as('position').select('swP').out('target').hasLabel('Switch') \
+  .as('sw').values('currentPosition').as('currentPosition') \
+  .where('position', neq('currentPosition')) \
+  .select('semaphore', 'route', 'swP', 'sw', 'currentPosition', 'position')

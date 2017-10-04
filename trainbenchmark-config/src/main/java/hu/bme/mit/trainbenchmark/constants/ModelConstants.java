@@ -12,14 +12,14 @@
 
 package hu.bme.mit.trainbenchmark.constants;
 
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
+
+import java.util.Map;
 
 public class ModelConstants {
 
 	public static final String ID = "id";
-	
+
 	// node types
 	public static final String REGION = "Region";
 	public static final String ROUTE = "Route";
