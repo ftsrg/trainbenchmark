@@ -16,15 +16,34 @@ import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.benchmark.test.TrainBenchmarkTest;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.OrientDbBenchmarkScenario;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.config.OrientDbConfig;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.config.OrientDbBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.config.OrientDbBenchmarkConfigBuilder;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphEngine;
+import org.junit.Ignore;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
+
+@Ignore
+@RunWith(Parameterized.class)
 public class OrientDbTest extends TrainBenchmarkTest {
+
+	@Parameterized.Parameters(name = "engine={0}")
+	public static Iterable<? extends Object> data() {
+		return Arrays.asList(
+			TinkerGraphEngine.CORE_API,
+			TinkerGraphEngine.GREMLIN
+		);
+	}
+
+	@Parameterized.Parameter(value = 0)
+	public TinkerGraphEngine engine;
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {
-		final OrientDbConfig bc = new OrientDbBenchmarkConfigBuilder().setConfigBase(bcb)
-				.createConfig();
+		final OrientDbBenchmarkConfig bc = new OrientDbBenchmarkConfigBuilder().setConfigBase(bcb)
+			.setEngine(engine).createConfig();
 		final OrientDbBenchmarkScenario scenario = new OrientDbBenchmarkScenario(bc);
 		final BenchmarkResult result = scenario.performBenchmark();
 		return result;

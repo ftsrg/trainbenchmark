@@ -2,149 +2,311 @@ package hu.bme.mit.trainbenchmark.benchmark.orientdb.operations;
 
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperation;
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelOperationFactory;
-import hu.bme.mit.trainbenchmark.benchmark.operations.ModelQuery;
 import hu.bme.mit.trainbenchmark.benchmark.orientdb.driver.OrientDbDriver;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbMatch;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.matches.OrientDbPosLengthMatch;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.queries.OrientDbQuery;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphEngine;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.TinkerGraphQuery;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQueryConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQueryConnectedSegmentsInject;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQueryPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQueryPosLengthInject;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQueryRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQueryRouteSensorInject;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQuerySemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQuerySemaphoreNeighborInject;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQuerySwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQuerySwitchMonitoredInject;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQuerySwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.api.TinkerGraphQuerySwitchSetInject;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.queries.gremlin.TinkerGraphGremlinQuery;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject.TinkerGraphTransformationInjectSwitchSet;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.TinkerGraphTransformationRepairConnectedSegments;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.TinkerGraphTransformationRepairPosLength;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.TinkerGraphTransformationRepairRouteSensor;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.TinkerGraphTransformationRepairSemaphoreNeighbor;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.TinkerGraphTransformationRepairSwitchMonitored;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair.TinkerGraphTransformationRepairSwitchSet;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public class OrientDbModelOperationFactory extends ModelOperationFactory<OrientDbMatch, OrientDbDriver> {
+public class OrientDbModelOperationFactory extends ModelOperationFactory<TinkerGraphMatch, OrientDbDriver> {
+
+	protected final TinkerGraphEngine engine;
+
+	public OrientDbModelOperationFactory(final TinkerGraphEngine engine) {
+		this.engine = engine;
+	}
 
 	@Override
-	public ModelOperation<? extends OrientDbMatch, OrientDbDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
-			final OrientDbDriver driver) throws Exception {
+	public ModelOperation<? extends TinkerGraphMatch, OrientDbDriver> createOperation(final RailwayOperation operationEnum, final String workspaceDir,
+																					  final OrientDbDriver driver) throws Exception {
+		switch (engine) {
+		case CORE_API:
 		switch (operationEnum) {
-//			// ConnectedSegments
-//		case CONNECTEDSEGMENTS: {
-//			final ModelQuery<OrientDbConnectedSegmentsMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
-//			final ModelOperation<OrientDbConnectedSegmentsMatch, OrientDbDriver> operation = ModelOperation.of(query);
-//			return operation;
-//		}
-//		case CONNECTEDSEGMENTS_INJECT: {
-//			final ModelQuery<OrientDbConnectedSegmentsInjectMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir,
-//					RailwayQuery.CONNECTEDSEGMENTS_INJECT);
-//			final OrientDbCypherTransformation<OrientDbConnectedSegmentsInjectMatch> transformation = new OrientDbCypherTransformationInjectConnectedSegments(driver,
-//					workspaceDir);
-//			final ModelOperation<OrientDbConnectedSegmentsInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//		case CONNECTEDSEGMENTS_REPAIR: {
-//			final ModelQuery<OrientDbConnectedSegmentsMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
-//			final OrientDbCypherTransformation<OrientDbConnectedSegmentsMatch> transformation = new OrientDbCypherTransformationRepairConnectedSegments(driver,
-//					workspaceDir);
-//			final ModelOperation<OrientDbConnectedSegmentsMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
+			// ConnectedSegments
+			case CONNECTEDSEGMENTS: {
+				final TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> query = new TinkerGraphQueryConnectedSegments<>(driver);
+				final ModelOperation<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case CONNECTEDSEGMENTS_INJECT: {
+				final TinkerGraphQuery<TinkerGraphConnectedSegmentsInjectMatch, OrientDbDriver> query = new TinkerGraphQueryConnectedSegmentsInject<>(driver);
+				final TinkerGraphTransformation<TinkerGraphConnectedSegmentsInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectConnectedSegments<>(
+					driver);
+				final ModelOperation<TinkerGraphConnectedSegmentsInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case CONNECTEDSEGMENTS_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> query = new TinkerGraphQueryConnectedSegments<>(driver);
+				final TinkerGraphTransformation<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairConnectedSegments<>(
+					driver);
+				final ModelOperation<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
 
 			// PosLength
-		case POSLENGTH: {
-			final ModelQuery<OrientDbPosLengthMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH);
-			final ModelOperation<OrientDbPosLengthMatch, OrientDbDriver> operation = ModelOperation.of(query);
-			return operation;
-		}
-//		case POSLENGTH_INJECT: {
-//			final ModelQuery<OrientDbPosLengthInjectMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH_INJECT);
-//			final OrientDbCypherTransformation<OrientDbPosLengthInjectMatch> transformation = new OrientDbCypherTransformationInjectPosLength(driver, workspaceDir);
-//			final ModelOperation<OrientDbPosLengthInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-		case POSLENGTH_REPAIR: {
-			final ModelQuery<OrientDbPosLengthMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH);
-//			final OrientDbCypherTransformation<OrientDbPosLengthMatch> transformation = new OrientDbCypherTransformationRepairPosLength(driver, workspaceDir);
-//			final ModelOperation<OrientDbPosLengthMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-			final ModelOperation<OrientDbPosLengthMatch, OrientDbDriver> operation = ModelOperation.of(query);
-			return operation;
-		}
-//
-//			// RouteSensor
-//		case ROUTESENSOR: {
-//			final ModelQuery<OrientDbRouteSensorMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
-//			final ModelOperation<OrientDbRouteSensorMatch, OrientDbDriver> operation = ModelOperation.of(query);
-//			return operation;
-//		}
-//		case ROUTESENSOR_INJECT: {
-//			final ModelQuery<OrientDbRouteSensorInjectMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir,
-//					RailwayQuery.ROUTESENSOR_INJECT);
-//			final OrientDbCypherTransformation<OrientDbRouteSensorInjectMatch> transformation = new OrientDbCypherTransformationInjectRouteSensor(driver,
-//					workspaceDir);
-//			final ModelOperation<OrientDbRouteSensorInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//		case ROUTESENSOR_REPAIR: {
-//			final ModelQuery<OrientDbRouteSensorMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
-//			final OrientDbCypherTransformation<OrientDbRouteSensorMatch> transformation = new OrientDbCypherTransformationRepairRouteSensor(driver, workspaceDir);
-//			final ModelOperation<OrientDbRouteSensorMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//
-//			// SemaphoreNeighbor
-//		case SEMAPHORENEIGHBOR: {
-//			final ModelQuery<OrientDbSemaphoreNeighborMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
-//			final ModelOperation<OrientDbSemaphoreNeighborMatch, OrientDbDriver> operation = ModelOperation.of(query);
-//			return operation;
-//		}
-//		case SEMAPHORENEIGHBOR_INJECT: {
-//			final ModelQuery<OrientDbSemaphoreNeighborInjectMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir,
-//					RailwayQuery.SEMAPHORENEIGHBOR_INJECT);
-//			final OrientDbCypherTransformation<OrientDbSemaphoreNeighborInjectMatch> transformation = new OrientDbCypherTransformationInjectSemaphoreNeighbor(driver,
-//					workspaceDir);
-//			final ModelOperation<OrientDbSemaphoreNeighborInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//		case SEMAPHORENEIGHBOR_REPAIR: {
-//			final ModelQuery<OrientDbSemaphoreNeighborMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
-//			final OrientDbCypherTransformation<OrientDbSemaphoreNeighborMatch> transformation = new OrientDbCypherTransformationRepairSemaphoreNeighbor(driver,
-//					workspaceDir);
-//			final ModelOperation<OrientDbSemaphoreNeighborMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//
-//			// SwitchMonitored
-//		case SWITCHMONITORED: {
-//			final ModelQuery<OrientDbSwitchMonitoredMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
-//			final ModelOperation<OrientDbSwitchMonitoredMatch, OrientDbDriver> operation = ModelOperation.of(query);
-//			return operation;
-//		}
-//		case SWITCHMONITORED_INJECT: {
-//			final ModelQuery<OrientDbSwitchMonitoredInjectMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir,
-//					RailwayQuery.SWITCHMONITORED_INJECT);
-//			final OrientDbCypherTransformation<OrientDbSwitchMonitoredInjectMatch> transformation = new OrientDbCypherTransformationInjectSwitchMonitored(driver,
-//					workspaceDir);
-//			final ModelOperation<OrientDbSwitchMonitoredInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//		case SWITCHMONITORED_REPAIR: {
-//			final ModelQuery<OrientDbSwitchMonitoredMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
-//			final OrientDbCypherTransformation<OrientDbSwitchMonitoredMatch> transformation = new OrientDbCypherTransformationRepairSwitchMonitored(driver,
-//					workspaceDir);
-//			final ModelOperation<OrientDbSwitchMonitoredMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//
-//			// SwitchSet
-//		case SWITCHSET: {
-//			final ModelQuery<OrientDbSwitchSetMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
-//			final ModelOperation<OrientDbSwitchSetMatch, OrientDbDriver> operation = ModelOperation.of(query);
-//			return operation;
-//		}
-//		case SWITCHSET_INJECT: {
-//			final ModelQuery<OrientDbSwitchSetInjectMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET_INJECT);
-//			final OrientDbCypherTransformation<OrientDbSwitchSetInjectMatch> transformation = new OrientDbCypherTransformationInjectSwitchSet(driver, workspaceDir);
-//			final ModelOperation<OrientDbSwitchSetInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
-//		case SWITCHSET_REPAIR: {
-//			final ModelQuery<OrientDbSwitchSetMatch, OrientDbDriver> query = new OrientDbQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
-//			final OrientDbCypherTransformation<OrientDbSwitchSetMatch> transformation = new OrientDbCypherTransformationRepairSwitchSet(driver, workspaceDir);
-//			final ModelOperation<OrientDbSwitchSetMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
-//			return operation;
-//		}
+			case POSLENGTH: {
+				final TinkerGraphQuery<TinkerGraphPosLengthMatch, OrientDbDriver> query = new TinkerGraphQueryPosLength<>(driver);
+				final ModelOperation<TinkerGraphPosLengthMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case POSLENGTH_INJECT: {
+				final TinkerGraphQuery<TinkerGraphPosLengthInjectMatch, OrientDbDriver> query = new TinkerGraphQueryPosLengthInject<>(driver);
+				final TinkerGraphTransformation<TinkerGraphPosLengthInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectPosLength<>(driver);
+				final ModelOperation<TinkerGraphPosLengthInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case POSLENGTH_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphPosLengthMatch, OrientDbDriver> query = new TinkerGraphQueryPosLength<>(driver);
+				final TinkerGraphTransformation<TinkerGraphPosLengthMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairPosLength<>(driver);
+				final ModelOperation<TinkerGraphPosLengthMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
 
-		default:
-			throw new UnsupportedOperationException("Operation " + operationEnum + " not supported for.");
+			// RouteSensor
+			case ROUTESENSOR: {
+				final TinkerGraphQuery<TinkerGraphRouteSensorMatch, OrientDbDriver> query = new TinkerGraphQueryRouteSensor<>(driver);
+				final ModelOperation<TinkerGraphRouteSensorMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case ROUTESENSOR_INJECT: {
+				final TinkerGraphQuery<TinkerGraphRouteSensorInjectMatch, OrientDbDriver> query = new TinkerGraphQueryRouteSensorInject<>(driver);
+				final TinkerGraphTransformation<TinkerGraphRouteSensorInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectRouteSensor<>(
+					driver);
+				final ModelOperation<TinkerGraphRouteSensorInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case ROUTESENSOR_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphRouteSensorMatch, OrientDbDriver> query = new TinkerGraphQueryRouteSensor<>(driver);
+				final TinkerGraphTransformation<TinkerGraphRouteSensorMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairRouteSensor<>(driver);
+				final ModelOperation<TinkerGraphRouteSensorMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// SemaphoreNeighbor
+			case SEMAPHORENEIGHBOR: {
+				final TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> query = new TinkerGraphQuerySemaphoreNeighbor<>(driver);
+				final ModelOperation<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case SEMAPHORENEIGHBOR_INJECT: {
+				final TinkerGraphQuery<TinkerGraphSemaphoreNeighborInjectMatch, OrientDbDriver> query = new TinkerGraphQuerySemaphoreNeighborInject<>(driver);
+				final TinkerGraphTransformation<TinkerGraphSemaphoreNeighborInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectSemaphoreNeighbor<>(
+					driver);
+				final ModelOperation<TinkerGraphSemaphoreNeighborInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case SEMAPHORENEIGHBOR_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> query = new TinkerGraphQuerySemaphoreNeighbor<>(driver);
+				final TinkerGraphTransformation<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairSemaphoreNeighbor<>(
+					driver);
+				final ModelOperation<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// SwitchMonitored
+			case SWITCHMONITORED: {
+				final TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> query = new TinkerGraphQuerySwitchMonitored<>(driver);
+				final ModelOperation<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case SWITCHMONITORED_INJECT: {
+				final TinkerGraphQuery<TinkerGraphSwitchMonitoredInjectMatch, OrientDbDriver> query = new TinkerGraphQuerySwitchMonitoredInject<>(driver);
+				final TinkerGraphTransformation<TinkerGraphSwitchMonitoredInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectSwitchMonitored<>(
+					driver);
+				final ModelOperation<TinkerGraphSwitchMonitoredInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case SWITCHMONITORED_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> query = new TinkerGraphQuerySwitchMonitored<>(driver);
+				final TinkerGraphTransformation<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairSwitchMonitored<>(
+					driver);
+				final ModelOperation<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// SwitchSet
+			case SWITCHSET: {
+				final TinkerGraphQuery<TinkerGraphSwitchSetMatch, OrientDbDriver> query = new TinkerGraphQuerySwitchSet<>(driver);
+				final ModelOperation<TinkerGraphSwitchSetMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case SWITCHSET_INJECT: {
+				final TinkerGraphQuery<TinkerGraphSwitchSetInjectMatch, OrientDbDriver> query = new TinkerGraphQuerySwitchSetInject<>(driver);
+				final TinkerGraphTransformation<TinkerGraphSwitchSetInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectSwitchSet<>(driver);
+				final ModelOperation<TinkerGraphSwitchSetInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case SWITCHSET_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphSwitchSetMatch, OrientDbDriver> query = new TinkerGraphQuerySwitchSet<>(driver);
+				final TinkerGraphTransformation<TinkerGraphSwitchSetMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairSwitchSet<>(driver);
+				final ModelOperation<TinkerGraphSwitchSetMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
 		}
+		case GREMLIN:
+		switch (operationEnum) {
+			// ConnectedSegments
+			case CONNECTEDSEGMENTS: {
+				final TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+				final ModelOperation<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case CONNECTEDSEGMENTS_INJECT: {
+				final TinkerGraphQuery<TinkerGraphConnectedSegmentsInjectMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS_INJECT);
+				final TinkerGraphTransformation<TinkerGraphConnectedSegmentsInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectConnectedSegments<>(
+					driver);
+				final ModelOperation<TinkerGraphConnectedSegmentsInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case CONNECTEDSEGMENTS_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
+				final TinkerGraphTransformation<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairConnectedSegments<>(
+					driver);
+				final ModelOperation<TinkerGraphConnectedSegmentsMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// PosLength
+			case POSLENGTH: {
+				final TinkerGraphQuery<TinkerGraphPosLengthMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH);
+				final ModelOperation<TinkerGraphPosLengthMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case POSLENGTH_INJECT: {
+				final TinkerGraphQuery<TinkerGraphPosLengthInjectMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH_INJECT);
+				final TinkerGraphTransformation<TinkerGraphPosLengthInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectPosLength<>(driver);
+				final ModelOperation<TinkerGraphPosLengthInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case POSLENGTH_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphPosLengthMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.POSLENGTH);
+				final TinkerGraphTransformation<TinkerGraphPosLengthMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairPosLength<>(driver);
+				final ModelOperation<TinkerGraphPosLengthMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// RouteSensor
+			case ROUTESENSOR: {
+				final TinkerGraphQuery<TinkerGraphRouteSensorMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
+				final ModelOperation<TinkerGraphRouteSensorMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case ROUTESENSOR_INJECT: {
+				final TinkerGraphQuery<TinkerGraphRouteSensorInjectMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR_INJECT);
+				final TinkerGraphTransformation<TinkerGraphRouteSensorInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectRouteSensor<>(
+					driver);
+				final ModelOperation<TinkerGraphRouteSensorInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case ROUTESENSOR_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphRouteSensorMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);
+				final TinkerGraphTransformation<TinkerGraphRouteSensorMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairRouteSensor<>(driver);
+				final ModelOperation<TinkerGraphRouteSensorMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// SemaphoreNeighbor
+			case SEMAPHORENEIGHBOR: {
+				final TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
+				final ModelOperation<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case SEMAPHORENEIGHBOR_INJECT: {
+				final TinkerGraphQuery<TinkerGraphSemaphoreNeighborInjectMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR_INJECT);
+				final TinkerGraphTransformation<TinkerGraphSemaphoreNeighborInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectSemaphoreNeighbor<>(
+					driver);
+				final ModelOperation<TinkerGraphSemaphoreNeighborInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case SEMAPHORENEIGHBOR_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SEMAPHORENEIGHBOR);
+				final TinkerGraphTransformation<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairSemaphoreNeighbor<>(
+					driver);
+				final ModelOperation<TinkerGraphSemaphoreNeighborMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// SwitchMonitored
+			case SWITCHMONITORED: {
+				final TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
+				final ModelOperation<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case SWITCHMONITORED_INJECT: {
+				final TinkerGraphQuery<TinkerGraphSwitchMonitoredInjectMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED_INJECT);
+				final TinkerGraphTransformation<TinkerGraphSwitchMonitoredInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectSwitchMonitored<>(
+					driver);
+				final ModelOperation<TinkerGraphSwitchMonitoredInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case SWITCHMONITORED_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SWITCHMONITORED);
+				final TinkerGraphTransformation<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairSwitchMonitored<>(
+					driver);
+				final ModelOperation<TinkerGraphSwitchMonitoredMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+
+			// SwitchSet
+			case SWITCHSET: {
+				final TinkerGraphQuery<TinkerGraphSwitchSetMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
+				final ModelOperation<TinkerGraphSwitchSetMatch, OrientDbDriver> operation = ModelOperation.of(query);
+				return operation;
+			}
+			case SWITCHSET_INJECT: {
+				final TinkerGraphQuery<TinkerGraphSwitchSetInjectMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET_INJECT);
+				final TinkerGraphTransformation<TinkerGraphSwitchSetInjectMatch, OrientDbDriver> transformation = new TinkerGraphTransformationInjectSwitchSet<>(driver);
+				final ModelOperation<TinkerGraphSwitchSetInjectMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+			case SWITCHSET_REPAIR: {
+				final TinkerGraphQuery<TinkerGraphSwitchSetMatch, OrientDbDriver> query = new TinkerGraphGremlinQuery<>(driver, workspaceDir, RailwayQuery.SWITCHSET);
+				final TinkerGraphTransformation<TinkerGraphSwitchSetMatch, OrientDbDriver> transformation = new TinkerGraphTransformationRepairSwitchSet<>(driver);
+				final ModelOperation<TinkerGraphSwitchSetMatch, OrientDbDriver> operation = ModelOperation.of(query, transformation);
+				return operation;
+			}
+		}
+	}
+		throw new UnsupportedOperationException("Operation " + operationEnum + " not supported.");
 	}
 
 }

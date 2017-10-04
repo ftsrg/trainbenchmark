@@ -6,9 +6,6 @@ shadowJar {
 }
 
 dependencies {
-//	compile project(':trainbenchmark-tool')
 	compile project(':trainbenchmark-tool-tinkergraph')
 	compile group: 'com.orientechnologies', name: 'orientdb-gremlin', version: orientDbVersion
-//	compile group: 'com.tinkerpop.blueprints', name: 'blueprints-core', version: '2.6.0'
-//	compile group: 'com.tinkerpop.blueprints', name: 'blueprints-gremlin', version: '2.6.0'
 }

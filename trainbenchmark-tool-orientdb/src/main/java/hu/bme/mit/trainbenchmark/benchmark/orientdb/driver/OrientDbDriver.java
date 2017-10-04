@@ -12,17 +12,10 @@
 package hu.bme.mit.trainbenchmark.benchmark.orientdb.driver;
 
 import com.orientechnologies.common.log.OLogManager;
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.TinkerGraphDriver;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import org.apache.commons.configuration.ConfigurationException;
 import org.apache.tinkerpop.gremlin.orientdb.OrientGraph;
-import org.apache.tinkerpop.gremlin.structure.io.graphml.GraphMLReader;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 
 public class OrientDbDriver extends TinkerGraphDriver {
 
@@ -34,24 +27,12 @@ public class OrientDbDriver extends TinkerGraphDriver {
 		OLogManager.instance().setWarnEnabled(false);
 		OLogManager.instance().setInfoEnabled(false);
 		OLogManager.instance().setDebugEnabled(false);
-		graphDb = new OrientGraph("plocal:" + "/tmp");
+		graphDb = OrientGraph.open();
 	}
 
 	@Override
 	public String getPostfix() {
 		return "-tinkerpop-orientdb.graphml";
 	}
-
-//	public Collection<OrientDbMatch> runQuery(final List<String> lines, RailwayQuery query) throws IOException {
-//		OGremlinHelper.global().create();
-//		final OCommandGremlin comm = new OCommandGremlin();
-//		Object result = null; // sorry (-:
-//		for (final String line : lines) {
-//			result = comm.setText(line).execute();
-//		}
-//		System.out.println(result);
-//		return null;
-//	}
-
 
 }

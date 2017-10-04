@@ -14,21 +14,29 @@ package hu.bme.mit.trainbenchmark.benchmark.orientdb.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.config.TinkerGraphEngine;
 
-public class OrientDbConfig extends BenchmarkConfig {
+public class OrientDbBenchmarkConfig extends BenchmarkConfig {
 
-	protected OrientDbConfig(final BenchmarkConfigBase configBase) {
+	protected TinkerGraphEngine engine;
+
+	protected OrientDbBenchmarkConfig(final BenchmarkConfigBase configBase, final TinkerGraphEngine engine) {
 		super(configBase);
+		this.engine = engine;
+	}
+
+	public TinkerGraphEngine getEngine() {
+		return engine;
 	}
 
 	@Override
 	public String getToolName() {
-		return "OrientDB";
+		return String.format("OrientDb (%s)", getEngine());
 	}
 
 	@Override
 	public String getProjectName() {
-		return "orientdb";
+		return "OrientDb";
 	}
 
 }

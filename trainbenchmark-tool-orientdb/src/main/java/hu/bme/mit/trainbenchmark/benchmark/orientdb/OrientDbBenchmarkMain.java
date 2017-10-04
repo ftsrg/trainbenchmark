@@ -13,12 +13,12 @@
 package hu.bme.mit.trainbenchmark.benchmark.orientdb;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
-import hu.bme.mit.trainbenchmark.benchmark.orientdb.config.OrientDbConfig;
+import hu.bme.mit.trainbenchmark.benchmark.orientdb.config.OrientDbBenchmarkConfig;
 
 public class OrientDbBenchmarkMain {
 
 	public static void main(final String[] args) throws Exception {
-		final OrientDbConfig bc = BenchmarkConfig.fromFile(args[0], OrientDbConfig.class);
+		final OrientDbBenchmarkConfig bc = BenchmarkConfig.fromFile(args[0], OrientDbBenchmarkConfig.class);
 		final OrientDbBenchmarkScenario scenario = new OrientDbBenchmarkScenario(bc);
 		scenario.performBenchmark();
 	}
