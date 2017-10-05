@@ -1,15 +1,7 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
-import java.util.List;
-
-import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
-
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBaseBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.config.TransformationChangeSetStrategy;
@@ -17,6 +9,12 @@ import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
 import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import org.hamcrest.Matchers;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ErrorCollector;
+
+import java.util.List;
 
 public abstract class TrainBenchmarkTest {
 
@@ -35,7 +33,7 @@ public abstract class TrainBenchmarkTest {
 
 	final BenchmarkConfigBaseBuilder bcbbTransformation = bcbb
 			.setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED).setTransformationConstant(10)
-			.setQueryTransformationCount(1);
+			.setQueryTransformationCount(2);
 
 	protected abstract BenchmarkResult runTest(BenchmarkConfigBase bcb) throws Exception;
 
