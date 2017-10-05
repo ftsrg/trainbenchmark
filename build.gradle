@@ -27,7 +27,7 @@ buildscript {
 		maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
-		classpath group: 'com.github.jengelman.gradle.plugins', name: 'shadow', version: '1.2.3'
+		classpath group: 'com.github.jengelman.gradle.plugins', name: 'shadow', version: '2.0.1'
 	}
 }
 
