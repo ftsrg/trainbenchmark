@@ -1,4 +1,4 @@
-plugins { id "com.github.johnrengelman.shadow" version "1.2.3" }
+apply plugin: 'com.github.johnrengelman.shadow'
 
 shadowJar {
 	classifier = 'fat'
