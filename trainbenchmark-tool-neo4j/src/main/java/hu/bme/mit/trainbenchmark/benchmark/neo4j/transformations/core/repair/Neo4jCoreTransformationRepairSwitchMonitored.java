@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
 
-import java.util.Collection;
-
-import org.neo4j.graphdb.Node;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import org.neo4j.graphdb.Node;
+
+import java.util.Collection;
 
 public class Neo4jCoreTransformationRepairSwitchMonitored extends Neo4jCoreTransformation<Neo4jSwitchMonitoredMatch> {
 
@@ -31,6 +31,7 @@ public class Neo4jCoreTransformationRepairSwitchMonitored extends Neo4jCoreTrans
 		for (final Neo4jSwitchMonitoredMatch ssnm : matches) {
 			final Node sw = ssnm.getSw();
 			final Node sensor = driver.getGraphDb().createNode(Neo4jConstants.labelSensor);
+			sw.setProperty(ModelConstants.ID, driver.generateNewVertexId());
 			sw.createRelationshipTo(sensor, Neo4jConstants.relationshipTypeMonitoredBy);
 		}
 	}

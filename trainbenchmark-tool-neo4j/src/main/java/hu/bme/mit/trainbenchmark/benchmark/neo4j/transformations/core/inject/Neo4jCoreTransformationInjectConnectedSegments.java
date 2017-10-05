@@ -11,18 +11,17 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.inject;
 
-import java.util.Collection;
-
-import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+
+import java.util.Collection;
 
 public class Neo4jCoreTransformationInjectConnectedSegments
 		extends Neo4jCoreTransformation<Neo4jConnectedSegmentsInjectMatch> {
@@ -36,6 +35,7 @@ public class Neo4jCoreTransformationInjectConnectedSegments
 		for (final Neo4jConnectedSegmentsInjectMatch match : matches) {
 			// create (segment2) node
 			final Node segment2 = driver.getGraphDb().createNode(Neo4jConstants.labelSegment);
+			segment2.setProperty(ModelConstants.ID, driver.generateNewVertexId());
 			segment2.setProperty(ModelConstants.LENGTH, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 
 			// (segment2)-[:monitoredBy]->(sensor)

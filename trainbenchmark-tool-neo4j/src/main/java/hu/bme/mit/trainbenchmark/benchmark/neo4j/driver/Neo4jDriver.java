@@ -122,15 +122,15 @@ public class Neo4jDriver extends Driver {
 	}
 
 	private void readCsv(String modelPath) throws IOException {
-		final String neo4jHome =   "../neo4j-server";
-		final String dbPath =      "../models/neo4j-dbs/railway-database";
+		final String neo4jHome = "../neo4j-server";
+		final String dbPath =    "../models/neo4j-dbs/railway-database";
 		final File databaseDirectory = new File(dbPath);
 
 		if (databaseDirectory.exists()) {
 		  FileUtils.deleteDirectory(databaseDirectory);
 		}
 
-		// TODO neo4j-import is deprecated and should be changes to neo4j-admin import
+		// TODO neo4j-import is deprecated and should be changed to neo4j-admin import
 		// however, it's not trivial as neo4j-admin-import does not take an `--into` argument
 		// but a `--database`
 		final String rawImportCommand = "%NEO4J_HOME%/bin/neo4j-import " //
@@ -158,7 +158,7 @@ public class Neo4jDriver extends Driver {
 		final DefaultExecutor executor = new DefaultExecutor();
 		final int exitValue = executor.execute(cmdLine);
 		if (exitValue != 0) {
-		  throw new IOException("Neo4j import failed");
+			throw new IOException("Neo4j import failed");
 		}
 		startDb();
 	}
@@ -224,6 +224,12 @@ public class Neo4jDriver extends Driver {
 
 	public GraphDatabaseService getGraphDb() {
 		return graphDb;
+	}
+
+	final String GET_MAX_ID_QUERY = "MATCH (n) RETURN max(n.id) AS max";
+
+	public Integer generateNewVertexId() {
+		return (Integer) graphDb.execute(GET_MAX_ID_QUERY).next().get("max");
 	}
 
 }

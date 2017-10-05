@@ -33,10 +33,10 @@ public class Neo4jTest extends TrainBenchmarkTest {
 	@Parameters(name = "engine={0}, format={1}")
 	public static Iterable<? extends Object[]> data() {
 		return Arrays.asList(new Object[][]{ //
-			{ Neo4jEngine.CYPHER,  Neo4jGraphFormat.CSV     }, //
+//			{ Neo4jEngine.CYPHER,  Neo4jGraphFormat.CSV     }, //
 //			{ Neo4jEngine.CORE_API, Neo4jGraphFormat.CSV     }, //
-			{ Neo4jEngine.CYPHER,  Neo4jGraphFormat.GRAPHML }, //
-//			{ Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
+//			{ Neo4jEngine.CYPHER,  Neo4jGraphFormat.GRAPHML }, //
+			{ Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
 //			{ Neo4jEngine.CYPHER,  Neo4jGraphFormat.CYPHER  }, //
 //			{ Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
 		});
