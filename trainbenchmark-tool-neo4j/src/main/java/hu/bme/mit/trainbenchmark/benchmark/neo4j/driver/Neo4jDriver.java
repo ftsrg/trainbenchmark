@@ -226,9 +226,8 @@ public class Neo4jDriver extends Driver {
 		return graphDb;
 	}
 
-	final String GET_MAX_ID_QUERY = "MATCH (n) RETURN max(n.id) AS max";
-
 	public Integer generateNewVertexId() {
+		final String GET_MAX_ID_QUERY = "MATCH (n) RETURN max(n.id) AS max";
 		return (Integer) graphDb.execute(GET_MAX_ID_QUERY).next().get("max");
 	}
 

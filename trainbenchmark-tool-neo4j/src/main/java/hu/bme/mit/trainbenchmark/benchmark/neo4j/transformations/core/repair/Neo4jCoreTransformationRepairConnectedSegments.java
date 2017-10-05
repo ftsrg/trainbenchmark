@@ -11,15 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
 
-import java.util.Collection;
-
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+
+import java.util.Collection;
 
 public class Neo4jCoreTransformationRepairConnectedSegments extends Neo4jCoreTransformation<Neo4jConnectedSegmentsMatch> {
 

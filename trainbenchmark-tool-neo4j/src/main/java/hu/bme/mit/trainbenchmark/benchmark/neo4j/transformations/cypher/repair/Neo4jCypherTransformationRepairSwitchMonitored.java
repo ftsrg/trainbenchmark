@@ -33,6 +33,7 @@ public class Neo4jCypherTransformationRepairSwitchMonitored extends Neo4jCypherT
 	public void activate(final Collection<Neo4jSwitchMonitoredMatch> matches) throws IOException {
 		for (final Neo4jSwitchMonitoredMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
+					QueryConstants.VAR_ID, driver.generateNewVertexId(), //
 					QueryConstants.VAR_SW, match.getSw().getProperty(ModelConstants.ID) //
 			);
 			driver.runTransformation(transformationDefinition, parameters);

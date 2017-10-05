@@ -34,6 +34,7 @@ public class Neo4jCypherTransformationInjectConnectedSegments extends Neo4jCyphe
 	public void activate(final Collection<Neo4jConnectedSegmentsInjectMatch> matches) throws IOException {
 		for (final Neo4jConnectedSegmentsInjectMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
+					QueryConstants.VAR_ID, driver.generateNewVertexId(), //
 					QueryConstants.VAR_SENSOR, match.getSensor().getProperty(ModelConstants.ID), //
 					QueryConstants.VAR_SEGMENT1, match.getSegment1().getProperty(ModelConstants.ID), //
 					QueryConstants.VAR_SEGMENT3, match.getSegment3().getProperty(ModelConstants.ID), //

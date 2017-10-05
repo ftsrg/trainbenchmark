@@ -15,6 +15,7 @@ package hu.bme.mit.trainbenchmark.constants;
 public class QueryConstants {
 
 	public static final String VAR_CURRENTPOSITION = "currentPosition";
+	public static final String VAR_ID = "id";
 	public static final String VAR_LENGTH = "length";
 	public static final String VAR_POSITION = "position";
 	public static final String VAR_ROUTE = "route";
