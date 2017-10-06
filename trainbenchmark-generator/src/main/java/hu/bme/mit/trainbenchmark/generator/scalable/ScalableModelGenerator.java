@@ -1,5 +1,24 @@
 package hu.bme.mit.trainbenchmark.generator.scalable;
 
+import com.google.common.collect.ImmutableMap;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Signal;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ACTIVE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
@@ -23,26 +42,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableMap;
-
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.constants.Signal;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
-import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class ScalableModelGenerator extends ModelGenerator {
 
@@ -96,22 +95,22 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	final int moduleCount = 6;
 	protected Random allocationRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED);
-	final boolean randomAllocation = false;
-	
+	final boolean randomAllocation = true;
+
 	private void setAllocation(List<Object> allocations, int i, Object o) throws IOException {
 		Object allocation;
 		if (randomAllocation) {
 			// select randomly
-			allocation = allocations.get(random.nextInt(moduleCount));
+			allocation = allocations.get(allocationRandom.nextInt(moduleCount));
 		} else {
 			// select based on route/region
 			allocation = allocations.get(i % moduleCount);
 		}
-		
+
 		// add edge
 		serializer.createEdge(DOMAIN_ELEMENTS, allocation, o);
 	}
-	
+
 	@Override
 	protected void constructModel() throws FileNotFoundException, IOException {
 		// computingmodule
@@ -136,7 +135,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			Object computingModule = serializer.createVertex(ModelConstants.COMPUTING_MODULE, attributes);
 			computingModules.add(computingModule);
 		}
-		
+
 		// allocation
 //		{":id": 201,	":node": "BBB1",	":type": "Allocation",	"computingModule": 101,	"domainElements": [15,16,17,19]},
 //		{":id": 202,	":node": "BBB2",	":type": "Allocation",	"computingModule": 102,	"domainElements": [22,23,24,25,26,27,28,30]},
@@ -155,13 +154,13 @@ public class ScalableModelGenerator extends ModelGenerator {
 			Map<String, Object> edges = ImmutableMap.of(ModelConstants.COMPUTING_MODULE_EDGE, computingModules.get(i - 1));
 			Object allocation = serializer.createVertex(ModelConstants.ALLOCATION, attributes, edges);
 			allocations.add(allocation);
-		}		
-		
+		}
+
 		Object prevSemaphore = null;
 		Object firstSemaphore = null;
 		List<Object> firstTracks = null;
 		List<Object> prevTracks = null;
-		
+
 		for (int i = 0; i < maxRoutes; i++) {
 			boolean firstSegment = true;
 			serializer.beginTransaction();
@@ -171,7 +170,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 				prevSemaphore = serializer.createVertex(SEMAPHORE, semaphoreAttributes);
 				setAllocation(allocations, i, prevSemaphore);
-				
+
 				firstSemaphore = prevSemaphore;
 			}
 
@@ -196,7 +195,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 			final Map<String, Object> routeAttributes = new HashMap<>();
 			routeAttributes.put(ACTIVE, true);
-			
+
 			final Object route = serializer.createVertex(ROUTE, routeAttributes, routeOutgoingEdges);
 			setAllocation(allocations, i, route);
 
