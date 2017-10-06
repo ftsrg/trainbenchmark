@@ -12,6 +12,44 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
+import com.google.common.collect.ImmutableList;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.emf.EmfConstants;
+import hu.bme.mit.trainbenchmark.emf.EmfUtil;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfig;
+import hu.bme.mit.trainbenchmark.railway.Allocation;
+import hu.bme.mit.trainbenchmark.railway.ComputingModule;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import hu.bme.mit.trainbenchmark.railway.Region;
+import hu.bme.mit.trainbenchmark.railway.Route;
+import hu.bme.mit.trainbenchmark.railway.Segment;
+import hu.bme.mit.trainbenchmark.railway.Semaphore;
+import hu.bme.mit.trainbenchmark.railway.Sensor;
+import hu.bme.mit.trainbenchmark.railway.Switch;
+import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
+import org.apache.commons.io.FileUtils;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ALLOCATION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.COMPUTING_MODULE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
@@ -34,46 +72,6 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import org.apache.commons.io.FileUtils;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import com.google.common.collect.ImmutableList;
-
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.emf.EmfConstants;
-import hu.bme.mit.trainbenchmark.emf.EmfUtil;
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.emf.config.EmfGeneratorConfig;
-import hu.bme.mit.trainbenchmark.railway.Allocation;
-import hu.bme.mit.trainbenchmark.railway.ComputingModule;
-import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
-import hu.bme.mit.trainbenchmark.railway.Region;
-import hu.bme.mit.trainbenchmark.railway.Route;
-import hu.bme.mit.trainbenchmark.railway.Segment;
-import hu.bme.mit.trainbenchmark.railway.Semaphore;
-import hu.bme.mit.trainbenchmark.railway.Sensor;
-import hu.bme.mit.trainbenchmark.railway.Switch;
-import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
-
 public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 
 	public EmfSerializer(final EmfGeneratorConfig generatorConfig) {
@@ -88,6 +86,8 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 	protected Resource resource;
 	protected RailwayFactory factory;
 	protected RailwayContainer container;
+
+	protected boolean first = true;
 
 	@Override
 	public void initModel() {
@@ -130,12 +130,17 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 					continue;
 
 				final String line = toLine(eObject);
-				w.write("\t\t{\t" + line + "}\n");
+				if (first) {
+					first = false;
+				} else {
+					w.write(",\n");
+				}
+				w.write("\t\t{\t" + line + "}");
 			}
 
-			w.write("\n");
-			
-			Iterable<EObject> iterable2 = () -> resource.getAllContents();			
+			//w.write("\n");
+
+			Iterable<EObject> iterable2 = () -> resource.getAllContents();
 			for (EObject eObject : iterable2) {
 				if (eObject instanceof RailwayContainer ||
 					eObject instanceof Allocation ||
@@ -143,8 +148,10 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 					continue;
 
 				final String line = toLine(eObject);
-				w.write("\t\t{\t" + line + "}\n");
+				w.write(",\n\t\t{\t" + line + "}");
 			}
+
+			w.write("\n");
 
 			// footer
 			final String footerFilePath = gc.getConfigBase().getWorkspaceDir() + EMF_RESOURCES_DIR
@@ -177,18 +184,18 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 		if (value == null) {
 			return SEP + quote(key) + ": null";
 		} else {
-			return keyValue(key, value.getId());	
+			return keyValue(key, value.getId());
 		}
 	}
-	
+
 	private String keyValue(String key, List<? extends RailwayElement> value) {
-		return SEP + quote(key) + ": " +  
-			"[" + 
+		return SEP + quote(key) + ": " +
+			"[" +
 			value
 				.stream()
 				.map(x -> Integer.toString(x.getId()))
-				.collect(Collectors.joining(", ")) + 
-			"]";					
+				.collect(Collectors.joining(", ")) +
+			"]";
 	}
 
 	private String getType(EObject o) {
@@ -229,7 +236,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 			props += keyValue("replyTimeMaxMS", cm.getReplyTimeMaxMS());
 			props += keyValue("hostID", cm.getHostID());
 			props += keyValue("communicatesWith", ImmutableList.<RailwayElement>of());
-			
+
 			return props;
 		}
 		if (o instanceof Allocation) {
@@ -237,26 +244,26 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 			String props = "\":id\": " + a.getId();
 			props += keyValue(":node", a.getNode());
 			props += keyValue(":type", "Allocation");
-			
+
 			// run-of-the-mill props
 			props += keyValue("computingModule", a.getComputingModule().getId());
 			props += keyValue("domainElements", a.getDomainElements());
-			
-			
+
+
 			return props;
 		}
 		if (o instanceof RailwayElement) {
 			RailwayElement re = (RailwayElement) o;
-			
+
 			String props = "\":id\": " + re.getId();
 			// add type information
-	
+
 			props += keyValue("allocation", re.getAllocation().getId());
 			props += keyValue(":node", re.getAllocation().getNode());
-					
+
 			String type = getType(o);
 			props += keyValue(":type", type);
-	
+
 			switch (type) {
 			case ModelConstants.ROUTE:
 				Route route = (Route) o;
@@ -270,7 +277,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 				Segment segment = (Segment) o;
 				props += keyValue(LENGTH, segment.getLength());
 				props += keyValue(CONNECTS_TO, segment.getConnectsTo());
-				props += keyValue(MONITORED_BY, segment.getMonitoredBy());			
+				props += keyValue(MONITORED_BY, segment.getMonitoredBy());
 				break;
 			case ModelConstants.SEMAPHORE:
 				Semaphore semaphore = (Semaphore) o;
@@ -303,7 +310,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
 			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
 		final EClass clazz = (EClass) RailwayPackage.eINSTANCE.getEClassifier(type);
-		
+
 		final EObject eo = RailwayFactory.eINSTANCE.create(clazz);
 		if (eo instanceof RailwayElement) {
 			RailwayElement re = (RailwayElement) eo;
