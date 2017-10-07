@@ -11,16 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-
-import java.util.Collection;
-
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
 
 public class TinkerGraphTransformationRepairSwitchMonitored<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphSwitchMonitoredMatch, TTinkerGraphDriver> {
@@ -30,11 +30,11 @@ public class TinkerGraphTransformationRepairSwitchMonitored<TTinkerGraphDriver e
 	}
 
 	@Override
-	public void activate(final Collection<TinkerGraphSwitchMonitoredMatch> matches) {
+	public void activate(final Collection<TinkerGraphSwitchMonitoredMatch> matches) throws Exception {
 		for (final TinkerGraphSwitchMonitoredMatch ssnm : matches) {
 			final Vertex sw = ssnm.getSw();
-			// TODO note that this vertex has a long id instead of a string
 			final Vertex sensor = driver.getGraph().addVertex(SENSOR);
+			sensor.property(ModelConstants.ID, driver.generateNewVertexId());
 			sw.addEdge(MONITORED_BY, sensor);
 		}
 	}

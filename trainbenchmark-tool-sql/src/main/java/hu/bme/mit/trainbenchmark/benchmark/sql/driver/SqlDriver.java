@@ -11,6 +11,10 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.driver;
 
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,14 +22,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-
 public abstract class SqlDriver extends Driver {
 
 	protected static final String COLLECT_VERTICES = "SELECT * FROM `%s`;";
-	
+
 	protected String queryDefinition;
 	protected Connection connection;
 	protected PreparedStatement preparedQuery;
@@ -55,4 +55,14 @@ public abstract class SqlDriver extends Driver {
 		return "/trainbenchmark-tool-sql/src/main/resources/";
 	}
 
+	/**
+	 * SQL tools can usually issue their own ids, so this method should never be invoked.
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public Long generateNewVertexId() throws Exception {
+		throw new UnsupportedOperationException();
+	}
 }

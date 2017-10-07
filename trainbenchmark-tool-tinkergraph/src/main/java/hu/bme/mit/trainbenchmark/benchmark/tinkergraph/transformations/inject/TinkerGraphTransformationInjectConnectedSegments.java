@@ -11,17 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.inject;
 
-import java.util.Collection;
-
-import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.apache.tinkerpop.gremlin.structure.Edge;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.apache.tinkerpop.gremlin.structure.Edge;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+import java.util.Collection;
 
 public class TinkerGraphTransformationInjectConnectedSegments<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphConnectedSegmentsInjectMatch, TTinkerGraphDriver> {
@@ -31,10 +30,11 @@ public class TinkerGraphTransformationInjectConnectedSegments<TTinkerGraphDriver
 	}
 
 	@Override
-	public void activate(final Collection<TinkerGraphConnectedSegmentsInjectMatch> matches) {
+	public void activate(final Collection<TinkerGraphConnectedSegmentsInjectMatch> matches) throws Exception {
 		for (final TinkerGraphConnectedSegmentsInjectMatch match : matches) {
 			// create (segment2) node
 			final Vertex segment2 = driver.getGraph().addVertex(ModelConstants.SEGMENT);
+			segment2.property(ModelConstants.ID, driver.generateNewVertexId());
 			segment2.property(ModelConstants.LENGTH, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 
 			// (segment2)-[:monitoredBy]->(sensor)

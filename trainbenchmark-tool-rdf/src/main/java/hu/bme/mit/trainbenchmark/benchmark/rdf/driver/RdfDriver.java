@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.rdf.driver;
 
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.RDF_TYPE;
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
 
 import java.io.IOException;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.RDF_TYPE;
 
 public abstract class RdfDriver extends Driver {
 
@@ -50,6 +50,7 @@ public abstract class RdfDriver extends Driver {
 		return id;
 	}
 
+	@Override
 	public Long generateNewVertexId() throws Exception {
 		if (newVertexId == null) {
 			newVertexId = determineInitialNewVertexId();

@@ -11,16 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sql.transformations;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.PreparedStatement;
-
-import org.apache.commons.io.FileUtils;
-
 import hu.bme.mit.trainbenchmark.benchmark.operations.ModelTransformation;
 import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sql.matches.SqlMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.sql.PreparedStatement;
 
 public abstract class SqlTransformation<TSqlMatch extends SqlMatch, TSqlDriver extends SqlDriver> extends ModelTransformation<TSqlMatch, TSqlDriver> {
 
@@ -31,7 +31,7 @@ public abstract class SqlTransformation<TSqlMatch extends SqlMatch, TSqlDriver e
 		super(driver);
 
 		final String updatePath = workspaceDir + driver.getResourceDirectory() + "transformations/" + operation + "Rhs.sql";
-		this.updateQuery = FileUtils.readFileToString(new File(updatePath));
+		this.updateQuery = FileUtils.readFileToString(new File(updatePath), StandardCharsets.UTF_8);
 	}
 
 }

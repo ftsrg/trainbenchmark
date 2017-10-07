@@ -11,18 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.queries;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-
+import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import org.apache.commons.io.FileUtils;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.repository.RepositoryException;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.queries.RdfModelQuery;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 
 public class SesameQuery<TPatternMatch, TSesameDriver extends SesameDriver>
 		extends RdfModelQuery<TPatternMatch, TSesameDriver> {
@@ -32,7 +32,7 @@ public class SesameQuery<TPatternMatch, TSesameDriver extends SesameDriver>
 	public SesameQuery(final TSesameDriver driver, final String workspaceDir, final RailwayQuery query)
 			throws IOException {
 		super(driver, workspaceDir, query);
-		this.queryDefinition = FileUtils.readFileToString(new File(queryPath));
+		this.queryDefinition = FileUtils.readFileToString(new File(queryPath), StandardCharsets.UTF_8);
 	}
 
 	public static <TPatternMatch, TSesameDriver extends SesameDriver> SesameQuery<TPatternMatch, TSesameDriver> create(

@@ -86,4 +86,9 @@ public abstract class GraphDriver<TGraph extends Graph> extends Driver {
 		return results;
 	}
 
+	@Override
+	public Number generateNewVertexId() throws Exception {
+		return 0;
+	}
+
 }

@@ -11,10 +11,12 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.driver;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-
+import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
+import hu.bme.mit.trainbenchmark.emf.EmfConstants;
+import hu.bme.mit.trainbenchmark.emf.EmfUtil;
+import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
+import hu.bme.mit.trainbenchmark.railway.RailwayElement;
+import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -23,12 +25,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.emf.EmfConstants;
-import hu.bme.mit.trainbenchmark.emf.EmfUtil;
-import hu.bme.mit.trainbenchmark.railway.RailwayContainer;
-import hu.bme.mit.trainbenchmark.railway.RailwayElement;
-import hu.bme.mit.trainbenchmark.railway.RailwayPackage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class EmfDriver extends Driver {
 
@@ -64,6 +63,11 @@ public class EmfDriver extends Driver {
 		return "." + EmfConstants.MODEL_EXTENSION;
 	}
 
+	@Override
+	public Number generateNewVertexId() throws Exception {
+		return 0;
+	}
+
 	public Collection<RailwayElement> collectVertices(final String type) throws Exception {
 		final Collection<RailwayElement> vertices = new ArrayList<>();
 
@@ -86,10 +90,6 @@ public class EmfDriver extends Driver {
 
 	public RailwayContainer getContainer() {
 		return container;
-	}
-
-	public Resource getResource() {
-		return resource;
 	}
 
 	public void persist() throws IOException {

@@ -56,4 +56,12 @@ public abstract class Driver {
 	 */
 	public abstract String getPostfix();
 
+	/**
+	 * Generates an id for freshly inserted vertices.
+	 *
+	 * @return Previously unassigned id value. Specified as a {@code Number}
+	 * as most tools either use integers or longs.
+	 */
+	public abstract Number generateNewVertexId() throws Exception;
+
 }
