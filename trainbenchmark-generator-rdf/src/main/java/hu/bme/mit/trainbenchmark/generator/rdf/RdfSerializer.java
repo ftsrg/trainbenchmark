@@ -12,7 +12,11 @@
 
 package hu.bme.mit.trainbenchmark.generator.rdf;
 
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfig;
+import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
+import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,12 +25,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.io.FileUtils;
-
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.rdf.config.RdfGeneratorConfig;
-import hu.bme.mit.trainbenchmark.rdf.RdfHelper;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
 public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
@@ -39,7 +38,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
 	@Override
 	public String syntax() {
-		return "RDF" + gc.getModelFlavor();
+		return "RDF-" + gc.getFormat().getExtension() + gc.getModelFlavor();
 	}
 
 	@Override
@@ -50,8 +49,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
 		final String postfix = modelFlavor + "." + extension;
 
-		final String srcFilePath = gc.getConfigBase().getWorkspaceDir() + RDF_METAMODEL_DIR
-				+ "railway" + postfix;
+		final String srcFilePath = gc.getConfigBase().getWorkspaceDir() + RDF_METAMODEL_DIR + "railway" + postfix;
 
 		final File srcFile = new File(srcFilePath);
 

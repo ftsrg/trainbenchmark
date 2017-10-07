@@ -26,16 +26,17 @@ import java.util.List;
 
 public class Neo4jGraphGeneratorTest extends GeneratorTest {
 
-	protected final List<Neo4jGraphFormat> graphFormats = ImmutableList.of(
+	protected final List<Neo4jGraphFormat> formats = ImmutableList.of(
 			Neo4jGraphFormat.CSV, //
 			Neo4jGraphFormat.GRAPHML //
 		);
 
 	@Override
 	public void generate(final GeneratorConfigBase gcb) throws Exception {
-		for (Neo4jGraphFormat graphFormat : graphFormats) {
-			final Neo4jGraphGeneratorConfig gc = new Neo4jGraphGeneratorConfigBuilder().setConfigBase(gcb)
-					.setGraphFormat(graphFormat).createConfig();
+		final Neo4jGraphGeneratorConfigBuilder builder = new Neo4jGraphGeneratorConfigBuilder().setConfigBase(gcb);
+
+		for (final Neo4jGraphFormat format : formats) {
+			final Neo4jGraphGeneratorConfig gc = builder.setGraphFormat(format).createConfig();
 			final Neo4jGraphSerializer serializer = new Neo4jGraphSerializer(gc);
 			final ModelGenerator generator = ScalableGeneratorFactory.createGenerator(serializer, gc);
 			generator.generateModel();
