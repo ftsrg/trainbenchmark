@@ -3,5 +3,8 @@ dependencies {
 	compile group: 'org.neo4j', name: 'neo4j-cypher', version: neo4jVersion
 	compile group: 'org.neo4j', name: 'neo4j-io', version: neo4jVersion
 	compile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion
+	compile group: 'org.neo4j', name: 'neo4j-io', version: neo4jVersion, classifier: 'tests'
+	compile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion, classifier: 'tests'
 	compile group: 'org.neo4j.procedure', name: 'apoc', version: neo4jApocVersion
 }
+

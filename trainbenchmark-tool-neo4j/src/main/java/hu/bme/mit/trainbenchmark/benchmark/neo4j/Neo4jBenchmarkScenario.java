@@ -11,7 +11,16 @@ import hu.bme.mit.trainbenchmark.benchmark.phases.BenchmarkScenario;
 public class Neo4jBenchmarkScenario extends BenchmarkScenario<Neo4jMatch, Neo4jDriver, Neo4jBenchmarkConfig> {
 
 	public Neo4jBenchmarkScenario(final Neo4jBenchmarkConfig bc) throws Exception {
-		super(new Neo4jDriverFactory(bc.getConfigBase().getModelDir(), bc.getGraphFormat()), new Neo4jModelOperationFactory(bc.getEngine()), new Neo4jMatchComparator(), bc);
+		super(
+			new Neo4jDriverFactory(
+				bc.getConfigBase().getModelDir(),
+				bc.getDeployment(),
+				bc.getGraphFormat()
+			),
+			new Neo4jModelOperationFactory(bc.getEngine()),
+			new Neo4jMatchComparator(),
+			bc
+		);
 	}
 
 }

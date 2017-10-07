@@ -21,6 +21,7 @@ import hu.bme.mit.trainbenchmark.generator.graph.neo4j.config.Neo4jGraphGenerato
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.neo4j.apoc.ApocHelper;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jDeployment;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
@@ -56,7 +57,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	@Override
 	public void initModel() throws IOException {
 		cleanupDatabaseDirectory();
-		graphDb = Neo4jHelper.startGraphDatabase(databaseDirectory);
+		graphDb = Neo4jHelper.startGraphDatabase(Neo4jDeployment.EMBEDDED, databaseDirectory);
 	}
 
 	@Override
@@ -174,7 +175,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 			final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "-" + type + "."
 					+ Neo4jConstants.CSV_EXTENSION;
 
-			try (final Transaction tx = graphDb.beginTx()) {
+			try (final Transaction t = graphDb.beginTx()) {
 				graphDb.execute(String.format( //
 					"CALL apoc.export.csv.query('%s', '%s', null)", //
 					query,
@@ -190,7 +191,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "."
 			+ Neo4jConstants.GRAPHML_EXTENSION;
 
-		try (final Transaction tx = graphDb.beginTx()) {
+		try (final Transaction t = graphDb.beginTx()) {
 			graphDb.execute(String.format( //
 				"CALL apoc.export.graphml.all('%s', {useTypes: true})", //
 				fileName //

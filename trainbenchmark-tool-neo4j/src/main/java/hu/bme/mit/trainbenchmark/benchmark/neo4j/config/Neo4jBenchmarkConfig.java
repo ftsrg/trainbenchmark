@@ -14,17 +14,24 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jDeployment;
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 
 public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
-	protected Neo4jEngine engine;
-	protected Neo4jGraphFormat graphFormat;
+	protected final Neo4jDeployment deployment;
+	protected final Neo4jEngine engine;
+	protected final Neo4jGraphFormat graphFormat;
 
-	protected Neo4jBenchmarkConfig(final BenchmarkConfigBase configBase, final Neo4jEngine engine, final Neo4jGraphFormat graphFormat) {
+	protected Neo4jBenchmarkConfig(final BenchmarkConfigBase configBase, final Neo4jDeployment deployment, final Neo4jEngine engine, final Neo4jGraphFormat graphFormat) {
 		super(configBase);
+		this.deployment = deployment;
 		this.engine = engine;
 		this.graphFormat = graphFormat;
+	}
+
+	public Neo4jDeployment getDeployment() {
+		return deployment;
 	}
 
 	public Neo4jEngine getEngine() {
@@ -37,7 +44,7 @@ public class Neo4jBenchmarkConfig extends BenchmarkConfig {
 
 	@Override
 	public String getToolName() {
-		return String.format("Neo4j (%s-%s)", getEngine(), getGraphFormat());
+		return String.format("Neo4j (%s-%s-%s)", getDeployment(), getEngine(), getGraphFormat());
 	}
 
 	@Override

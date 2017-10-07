@@ -14,7 +14,7 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 import apoc.export.graphml.ExportGraphML;
 import apoc.graph.Graphs;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.comparators.NodeComparator;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jDeployment;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
@@ -26,7 +26,6 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.schema.Schema;
@@ -40,7 +39,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -48,12 +46,13 @@ public class Neo4jDriver extends Driver {
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
-	protected final Comparator<Node> nodeComparator = new NodeComparator();
 	protected final File databaseDirectory;
+	protected final Neo4jDeployment deployment;
 	protected final Neo4jGraphFormat graphFormat;
 
-	public Neo4jDriver(final String modelDir, final Neo4jGraphFormat graphFormat) throws IOException {
+	public Neo4jDriver(final String modelDir, final Neo4jDeployment deployment, final Neo4jGraphFormat graphFormat) throws IOException {
 		super();
+		this.deployment = deployment;
 		this.graphFormat = graphFormat;
 		this.databaseDirectory = new File(modelDir + "/neo4j-dbs/railway-database");
 	}
@@ -62,9 +61,11 @@ public class Neo4jDriver extends Driver {
 	public void initialize() throws Exception {
 		super.initialize();
 
-		// delete old database directory
-		if (databaseDirectory.exists()) {
-			FileUtils.deleteDirectory(databaseDirectory);
+		if (deployment == Neo4jDeployment.EMBEDDED) {
+			// delete old database directory
+			if (databaseDirectory.exists()) {
+				FileUtils.deleteDirectory(databaseDirectory);
+			}
 		}
 	}
 
@@ -105,17 +106,17 @@ public class Neo4jDriver extends Driver {
 	}
 
 	private void startDb() {
-		graphDb = Neo4jHelper.startGraphDatabase(databaseDirectory);
+		graphDb = Neo4jHelper.startGraphDatabase(deployment, databaseDirectory);
 
-		try (final Transaction tx = graphDb.beginTx()) {
+		try (final Transaction t = graphDb.beginTx()) {
 			final Schema schema = graphDb.schema();
 			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.ID).create();
 			schema.indexFor(Neo4jConstants.labelSegment).on(ModelConstants.LENGTH).create();
 			schema.indexFor(Neo4jConstants.labelSemaphore).on(ModelConstants.SIGNAL).create();
 			schema.indexFor(Neo4jConstants.labelRoute).on(ModelConstants.ACTIVE).create();
-			tx.success();
+			t.success();
 		}
-		try (final Transaction tx = graphDb.beginTx()) {
+		try (final Transaction t = graphDb.beginTx()) {
 			final Schema schema = graphDb.schema();
 			schema.awaitIndexesOnline(5, TimeUnit.MINUTES);
 		}
@@ -166,13 +167,13 @@ public class Neo4jDriver extends Driver {
 	private void readCypher(String modelPath) throws IOException {
 		startDb();
 		final File cypherFile = new File(modelPath);
-		try(final Transaction tx = graphDb.beginTx()) {
+		try(final Transaction t = graphDb.beginTx()) {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(cypherFile));
 			String line = null;
 			while ((line = bufferedReader.readLine()) != null){
 				graphDb.execute(line);
 			}
-			tx.success();
+			t.success();
 		}
 	}
 
@@ -180,12 +181,12 @@ public class Neo4jDriver extends Driver {
 		startDb();
 
 		ApocHelper.registerProcedure(graphDb, ExportGraphML.class, Graphs.class);
-		try (final Transaction tx = graphDb.beginTx()) {
+		try (final Transaction t = graphDb.beginTx()) {
 			graphDb.execute(String.format( //
 				"CALL apoc.import.graphml('%s', {batchSize: 10000, readLabels: true})", //
 				modelPath //
 			));
-			tx.success();
+			t.success();
 		}
 	}
 
