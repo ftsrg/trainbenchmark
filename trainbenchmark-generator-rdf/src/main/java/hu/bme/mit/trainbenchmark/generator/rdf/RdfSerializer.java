@@ -177,7 +177,13 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
 	protected String stringValue(final Object value, final String xsdInteger) {
 		if (value instanceof Boolean) {
-			return Boolean.toString((Boolean) value);
+			final String boolString = Boolean.toString((Boolean) value);
+			switch (gc.getFormat()) {
+				case TURTLE:
+					return boolString;
+				case NTRIPLES:
+					return String.format("\"%s\"^^<xs:boolean>", boolString);
+			}
 		}
 		if (value instanceof Integer) {
 			return String.format("\"%d\"^^" + xsdInteger, value);
