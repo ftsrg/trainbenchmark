@@ -12,17 +12,18 @@
 
 package hu.bme.mit.trainbenchmark.rdf;
 
-public interface RdfConstants {
+public class RdfConstants {
 
-	static final String ONTOLOGYIRI = "http://www.semanticweb.org/ontologies/2015/trainbenchmark";
-	static final String BASE_PREFIX = ONTOLOGYIRI + "#";
-	static final String ID_PREFIX = "_";
+	public static final String ONTOLOGYIRI = "http://www.semanticweb.org/ontologies/2015/trainbenchmark";
+	public static final String BASE_PREFIX = ONTOLOGYIRI + "#";
 
-	static final String XSD_PREFIX = "http://www.w3.org/2001/XMLSchema#";
-	static final String RDF_PREFIX = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-	static final String RDF_TYPE = RDF_PREFIX + "type";
+	public static final String ID_PREFIX = "_";
 
-	static final String SPARQL_BASE_PREFIX = "PREFIX base: <" + BASE_PREFIX + "> ";
-	static final String SPARQL_RDF_PREFIX = "PREFIX rdf: <" + RDF_PREFIX + "> ";
+	public static final String XSD_PREFIX = "http://www.w3.org/2001/XMLSchema#";
+	public static final String RDF_PREFIX = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+	public static final String RDF_TYPE = RDF_PREFIX + "type";
+
+	public static final String SPARQL_BASE_PREFIX = "PREFIX base: <" + BASE_PREFIX + "> ";
+	public static final String SPARQL_RDF_PREFIX = "PREFIX rdf: <" + RDF_PREFIX + "> ";
 
 }

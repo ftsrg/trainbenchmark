@@ -14,11 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.jena.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
 public class JenaBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected JenaBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
-		super(configBase, inferencing);
+	protected JenaBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing,
+								  final RdfFormat format) {
+		super(configBase, inferencing, format);
 	}
 
 	@Override

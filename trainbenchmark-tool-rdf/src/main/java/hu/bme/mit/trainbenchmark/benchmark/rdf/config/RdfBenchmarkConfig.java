@@ -14,22 +14,34 @@ package hu.bme.mit.trainbenchmark.benchmark.rdf.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
+import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
 public abstract class RdfBenchmarkConfig extends BenchmarkConfig {
 
 	protected boolean inferencing;
+	protected RdfFormat format;
 
-	protected RdfBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
+	protected RdfBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing,
+								 final RdfFormat format) {
 		super(configBase);
 		this.inferencing = inferencing;
+		this.format = format;
 	}
 
 	public boolean isInferencing() {
 		return inferencing;
 	}
 
+	public RdfFormat getFormat() {
+		return format;
+	}
+
 	protected String getToolNamePostfix() {
-		return isInferencing() ? " (Inferencing)" : " (No Inferencing)";
+		return " (" +
+			(isInferencing() ? "Inferencing" : "No Inferencing") +
+			", " +
+			format.getExtension() +
+			")";
 	}
 
 }

@@ -8,7 +8,7 @@ public class SesameBenchmarkConfigBuilder
 	@Override
 	public SesameBenchmarkConfig createConfig() {
 		checkNotNulls();
-		return new SesameBenchmarkConfig(configBase, inferencing);
+		return new SesameBenchmarkConfig(configBase, inferencing, format);
 	}
 
 }

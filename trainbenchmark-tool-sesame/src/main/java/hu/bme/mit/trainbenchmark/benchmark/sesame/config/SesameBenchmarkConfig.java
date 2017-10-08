@@ -14,11 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.sesame.config;
 
 import hu.bme.mit.trainbenchmark.benchmark.config.BenchmarkConfigBase;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.config.RdfBenchmarkConfig;
+import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 
 public class SesameBenchmarkConfig extends RdfBenchmarkConfig {
 
-	protected SesameBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing) {
-		super(configBase, inferencing);
+	protected SesameBenchmarkConfig(final BenchmarkConfigBase configBase, final boolean inferencing,
+									final RdfFormat format) {
+		super(configBase, inferencing, format);
 	}
 
 	@Override

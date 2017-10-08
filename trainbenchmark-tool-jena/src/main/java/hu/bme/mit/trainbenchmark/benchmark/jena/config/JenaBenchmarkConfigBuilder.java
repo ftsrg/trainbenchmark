@@ -8,7 +8,7 @@ public class JenaBenchmarkConfigBuilder
 	@Override
 	public JenaBenchmarkConfig createConfig() {
 		checkNotNulls();
-		return new JenaBenchmarkConfig(configBase, inferencing);
+		return new JenaBenchmarkConfig(configBase, inferencing, format);
 	}
 
 }
