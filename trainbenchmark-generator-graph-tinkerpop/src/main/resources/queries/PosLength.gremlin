@@ -1,3 +1,0 @@
-PosLength = new Table()
-g.V.has('length', T.lte, 0).as('segment').table(PosLength)
-PosLength
