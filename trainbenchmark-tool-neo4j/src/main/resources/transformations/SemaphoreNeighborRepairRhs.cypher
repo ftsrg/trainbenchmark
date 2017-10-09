@@ -1,2 +1,2 @@
-MATCH (route2 {id: $route2}), (semaphore {id: $semaphore})
+WITH $route2 AS route2, $semaphore AS semaphore
 CREATE (route2)-[:entry]->(semaphore)

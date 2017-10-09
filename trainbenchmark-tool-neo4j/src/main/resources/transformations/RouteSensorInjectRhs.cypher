@@ -1,2 +1,3 @@
-MATCH (route {id: $route})-[g:requires]->(sensor {id: $sensor})
+WITH $route AS route, $sensor AS sensor
+MATCH (route)-[g:requires]->(sensor)
 DELETE g

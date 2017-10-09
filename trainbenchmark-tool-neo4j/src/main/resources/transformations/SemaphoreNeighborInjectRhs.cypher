@@ -1,2 +1,3 @@
-MATCH (route {id: $route})-[e:entry]->(semaphore {id: $semaphore})
+WITH $route AS route, $semaphore AS semaphore
+MATCH (route)-[e:entry]->(semaphore)
 DELETE e

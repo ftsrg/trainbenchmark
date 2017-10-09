@@ -1,2 +1,2 @@
-MATCH (sw {id: $sw})
+WITH $sw AS sw
 CREATE (sw)-[:monitoredBy]->(:Sensor {id: $id})

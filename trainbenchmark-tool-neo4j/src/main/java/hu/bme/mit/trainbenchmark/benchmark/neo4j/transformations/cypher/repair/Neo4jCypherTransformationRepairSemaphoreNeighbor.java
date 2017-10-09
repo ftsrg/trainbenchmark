@@ -15,7 +15,6 @@ import com.google.common.collect.ImmutableMap;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 
@@ -33,8 +32,8 @@ public class Neo4jCypherTransformationRepairSemaphoreNeighbor extends Neo4jCyphe
 	public void activate(final Collection<Neo4jSemaphoreNeighborMatch> matches) throws IOException {
 		for (final Neo4jSemaphoreNeighborMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of(//
-					QueryConstants.VAR_ROUTE2, match.getRoute2().getProperty(ModelConstants.ID), //
-					QueryConstants.VAR_SEMAPHORE, match.getSemaphore().getProperty(ModelConstants.ID) //
+					QueryConstants.VAR_ROUTE2, match.getRoute2(), //
+					QueryConstants.VAR_SEMAPHORE, match.getSemaphore() //
 			);
 			driver.runTransformation(transformationDefinition, parameters);
 		}

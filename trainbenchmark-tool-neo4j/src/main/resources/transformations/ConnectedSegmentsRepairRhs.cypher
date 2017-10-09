@@ -1,2 +1,2 @@
-MATCH (segment2 {id: $segment2})
+WITH $segment2 AS segment2
 DETACH DELETE segment2

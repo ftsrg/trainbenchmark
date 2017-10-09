@@ -15,7 +15,6 @@ import com.google.common.collect.ImmutableMap;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCypherTransformation;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
@@ -35,9 +34,9 @@ public class Neo4jCypherTransformationInjectConnectedSegments extends Neo4jCyphe
 		for (final Neo4jConnectedSegmentsInjectMatch match : matches) {
 			final Map<String, Object> parameters = ImmutableMap.of( //
 					QueryConstants.VAR_ID, driver.generateNewVertexId(), //
-					QueryConstants.VAR_SENSOR, match.getSensor().getProperty(ModelConstants.ID), //
-					QueryConstants.VAR_SEGMENT1, match.getSegment1().getProperty(ModelConstants.ID), //
-					QueryConstants.VAR_SEGMENT3, match.getSegment3().getProperty(ModelConstants.ID), //
+					QueryConstants.VAR_SENSOR, match.getSensor(), //
+					QueryConstants.VAR_SEGMENT1, match.getSegment1(), //
+					QueryConstants.VAR_SEGMENT3, match.getSegment3(), //
 					QueryConstants.VAR_LENGTH, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH //
 			);
 			driver.runTransformation(transformationDefinition, parameters);

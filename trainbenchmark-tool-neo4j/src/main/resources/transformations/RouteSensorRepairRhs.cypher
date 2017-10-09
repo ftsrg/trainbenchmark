@@ -1,2 +1,2 @@
-MATCH (route {id: $route}), (sensor {id: $sensor})
+WITH $route AS route, $sensor AS sensor
 CREATE (route)-[:requires]->(sensor)

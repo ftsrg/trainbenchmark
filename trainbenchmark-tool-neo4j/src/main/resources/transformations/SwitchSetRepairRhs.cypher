@@ -1,2 +1,2 @@
-MATCH (sw {id: $sw}), (swP {id: $swP})
+WITH $sw AS sw, $swP AS swP
 SET sw.currentPosition = swP.position

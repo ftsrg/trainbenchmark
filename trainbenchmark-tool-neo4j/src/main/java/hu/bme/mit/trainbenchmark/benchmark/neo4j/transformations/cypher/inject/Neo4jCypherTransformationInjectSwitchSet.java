@@ -19,7 +19,6 @@ import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.Position;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
-import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -39,7 +38,7 @@ public class Neo4jCypherTransformationInjectSwitchSet extends Neo4jCypherTransfo
 			final Position newCurrentPosition = Position.values()[(currentPosition.ordinal() + 1) % Position.values().length];
 
 			final Map<String, Object> parameters = ImmutableMap.of( //
-					QueryConstants.VAR_SW, match.getSw().getProperty(ModelConstants.ID), //
+					QueryConstants.VAR_SW, match.getSw(), //
 					QueryConstants.VAR_CURRENTPOSITION, newCurrentPosition.toString()
 			);
 			driver.runTransformation(transformationDefinition, parameters);
