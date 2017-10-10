@@ -1,5 +1,22 @@
 package hu.bme.mit.trainbenchmark.generator.scalable;
 
+import com.google.common.collect.ImmutableMap;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Signal;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ACTIVE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
@@ -23,42 +40,34 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableMap;
-
-import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.constants.Signal;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
-import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-
 public class ScalableModelGenerator extends ModelGenerator {
 
-	public static final int MAX_SEGMENT_LENGTH = 1000;
+	protected static final int MAX_SEGMENT_LENGTH = 1000;
+	protected static final int PERCENTAGE = 100;
 
 	protected int maxSegments = 5;
 	protected int maxRoutes;
 	protected int maxSwitchPositions = 20;
 	protected int maxSensors = 10;
 
-	protected int posLengthErrorPercent = 0;
-	protected int switchSensorErrorPercent = 0;
-	protected int routeSensorErrorPercent = 0;
-	protected int semaphoreNeighborErrorPercent = 0;
-	protected int switchSetErrorPercent = 0;
 	protected int connectedSegmentsErrorPercent = 0;
+	protected int posLengthErrorPercent         = 0;
+	protected int routeSensorErrorPercent       = 0;
+	protected int semaphoreNeighborErrorPercent = 0;
+	protected int switchMonitoredErrorPercent   = 0;
+	protected int switchSetErrorPercent         = 0;
 
-	protected Random random = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	protected final Random connectedSegmentRandom  = new Random(TrainBenchmarkConstants.RANDOM_SEED + 0);
+	protected final Random posLengthRandom         = new Random(TrainBenchmarkConstants.RANDOM_SEED + 1);
+	protected final Random routeSensorRandom       = new Random(TrainBenchmarkConstants.RANDOM_SEED + 2);
+	protected final Random semaphoreNeighborRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED + 3);
+	protected final Random switchMonitoredRandom   = new Random(TrainBenchmarkConstants.RANDOM_SEED + 4);
+	protected final Random switchSetRandom         = new Random(TrainBenchmarkConstants.RANDOM_SEED + 5);
+
+	protected final Random lengthRandom    = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	protected final Random positionsRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	protected final Random sensorsRandom   = new Random(TrainBenchmarkConstants.RANDOM_SEED);
+	protected final Random swpsRandom      = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 
 	public ScalableModelGenerator(final ModelSerializer<?> serializer, final GeneratorConfig generatorConfig) {
 		super(serializer, generatorConfig);
@@ -69,31 +78,27 @@ public class ScalableModelGenerator extends ModelGenerator {
 			break;
 		case INJECT:
 			connectedSegmentsErrorPercent = 5;
-			posLengthErrorPercent = 2;
-			routeSensorErrorPercent = 4;
+			posLengthErrorPercent         = 2;
+			routeSensorErrorPercent       = 4;
 			semaphoreNeighborErrorPercent = 7;
-			switchSensorErrorPercent = 2;
-			switchSetErrorPercent = 8;
+			switchMonitoredErrorPercent   = 2;
+			switchSetErrorPercent         = 8;
 			break;
 		case REPAIR:
 			connectedSegmentsErrorPercent = 5;
-			posLengthErrorPercent = 10;
-			routeSensorErrorPercent = 10;
+			posLengthErrorPercent         = 10;
+			routeSensorErrorPercent       = 10;
 			semaphoreNeighborErrorPercent = 25;
-			switchSensorErrorPercent = 18;
-			switchSetErrorPercent = 15;
+			switchMonitoredErrorPercent   = 18;
+			switchSetErrorPercent         = 15;
 			break;
 		default:
 			throw new UnsupportedOperationException("Scenario not supported.");
 		}
 	}
 
-	protected int nextRandom() {
-		return random.nextInt(100);
-	}
-
 	@Override
-	protected void constructModel() throws FileNotFoundException, IOException {
+	protected void constructModel() throws IOException {
 		Object prevSemaphore = null;
 		Object firstSemaphore = null;
 		List<Object> firstTracks = null;
@@ -119,7 +124,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 			}
 
 			// the semaphoreNeighborErrorPercent
-			final boolean semaphoreNeighborError1 = nextRandom() < semaphoreNeighborErrorPercent;
+			final boolean semaphoreNeighborError1 = semaphoreNeighborRandom.nextInt(PERCENTAGE) < semaphoreNeighborErrorPercent;
 			final Object entry = semaphoreNeighborError1 ? null : prevSemaphore;
 			final Object exit = semaphore;
 
@@ -134,12 +139,12 @@ public class ScalableModelGenerator extends ModelGenerator {
 			final Object route = serializer.createVertex(ROUTE, routeAttributes, routeOutgoingEdges);
 			final Object region = serializer.createVertex(REGION);
 
-			final int swPs = random.nextInt(maxSwitchPositions - 1) + 1;
+			final int swPs = swpsRandom.nextInt(maxSwitchPositions - 1) + 1;
 			final List<Object> currentTrack = new ArrayList<>();
 			final Set<Object> switches = new HashSet<>();
 			for (int j = 0; j < swPs; j++) {
 				final int numberOfPositions = Position.values().length;
-				final int positionOrdinal = random.nextInt(numberOfPositions);
+				final int positionOrdinal = positionsRandom.nextInt(numberOfPositions);
 				final Position position = Position.values()[positionOrdinal];
 				final Map<String, ? extends Object> swAttributes = ImmutableMap.of(CURRENTPOSITION, position);
 				final Object sw = serializer.createVertex(SWITCH, swAttributes);
@@ -149,19 +154,19 @@ public class ScalableModelGenerator extends ModelGenerator {
 				// (region)-[:elements]->(sw)
 				serializer.createEdge(ELEMENTS, region, sw);
 
-				final int sensors = random.nextInt(maxSensors - 1) + 1;
+				final int sensors = sensorsRandom.nextInt(maxSensors - 1) + 1;
 
 				for (int k = 0; k < sensors; k++) {
 					final Object sensor = serializer.createVertex(SENSOR);
 					serializer.createEdge(SENSORS, region, sensor);
 
 					// add "monitored by" edge from switch to sensor
-					final boolean switchSensorError = nextRandom() < switchSensorErrorPercent;
-					if (!switchSensorError) {
+					final boolean switchMonitoredError = switchMonitoredRandom.nextInt(PERCENTAGE) < switchMonitoredErrorPercent;
+					if (!switchMonitoredError) {
 						serializer.createEdge(MONITORED_BY, sw, sensor);
 
 						// add "requires" edge from route to sensor
-						final boolean routeSensorError = nextRandom() < routeSensorErrorPercent;
+						final boolean routeSensorError = routeSensorRandom.nextInt(PERCENTAGE) < routeSensorErrorPercent;
 						if (!routeSensorError) {
 							serializer.createEdge(REQUIRES, route, sensor);
 						}
@@ -178,13 +183,13 @@ public class ScalableModelGenerator extends ModelGenerator {
 					}
 
 					// create another extra segment
-					if (nextRandom() < connectedSegmentsErrorPercent) {
+					if (connectedSegmentRandom.nextInt(PERCENTAGE) < connectedSegmentsErrorPercent) {
 						createSegment(currentTrack, sensor, region);
 					}
 				}
 
 				// the errorInjectedState may contain a bad value
-				final boolean switchSetError = nextRandom() < switchSetErrorPercent;
+				final boolean switchSetError = switchSetRandom.nextInt(PERCENTAGE) < switchSetErrorPercent;
 				final int invalidPositionOrdinal = switchSetError ? (numberOfPositions - 1) - positionOrdinal : positionOrdinal;
 				final Position invalidPosition = Position.values()[invalidPositionOrdinal];
 
@@ -196,23 +201,23 @@ public class ScalableModelGenerator extends ModelGenerator {
 				serializer.createEdge(FOLLOWS, route, swP);
 			}
 
-			final Set<Integer> usedTracks = new HashSet<>();
-			// create connectsTo (n:m) edges
+//			final Set<Integer> usedTracks = new HashSet<>();
+			// (trackElement)-[:connectsTo]-(trackElement)
 			for (int j = 1; j < currentTrack.size(); ++j) {
 				final Object current = currentTrack.get(j);
-				if (usedTracks.contains(current))
-					continue;
+//				if (usedTracks.contains(current))
+//					continue;
 
 				serializer.createEdge(CONNECTS_TO, currentTrack.get(j - 1), current);
 
-				if (switches.contains(current)) {
-					final int segmentID = j + random.nextInt(currentTrack.size() - j);
-					if (!usedTracks.contains(segmentID)) {
-						// TODO check why this causes double edges
-						// serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
-						usedTracks.add(segmentID);
-					}
-				}
+//				if (switches.contains(current)) {
+//					final int segmentID = j + random.nextInt(currentTrack.size() - j);
+//					if (!usedTracks.contains(segmentID)) {
+//						// TODO check why this causes double edges
+//						// serializer.createEdge(CONNECTS_TO, current, currentTrack.get(segmentID));
+//						usedTracks.add(segmentID);
+//					}
+//				}
 			}
 
 			if (prevTracks != null && prevTracks.size() > 0 && currentTrack.size() > 0) {
@@ -238,8 +243,8 @@ public class ScalableModelGenerator extends ModelGenerator {
 	}
 
 	private Object createSegment(final List<Object> currTracks, final Object sensor, final Object region) throws IOException {
-		final boolean posLengthError = nextRandom() < posLengthErrorPercent;
-		final int segmentLength = ((posLengthError ? -1 : 1) * random.nextInt(MAX_SEGMENT_LENGTH)) + 1;
+		final boolean posLengthError = posLengthRandom.nextInt(PERCENTAGE) < posLengthErrorPercent;
+		final int segmentLength = (posLengthError ? -1 : 1) * lengthRandom.nextInt(MAX_SEGMENT_LENGTH) + 1;
 
 		final Map<String, Object> segmentAttributes = ImmutableMap.of(LENGTH, segmentLength);
 		final Object segment = serializer.createVertex(SEGMENT, segmentAttributes);
