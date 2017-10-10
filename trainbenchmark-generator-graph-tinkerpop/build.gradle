@@ -2,9 +2,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 shadowJar {
 	classifier = 'fat'
-	manifest {
-		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.TinkerGraphGeneratorMain'
-	}
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.graph.tinkerpop.TinkerGraphGeneratorMain' }
 }
 
 dependencies {

@@ -2,9 +2,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 shadowJar {
 	classifier = 'fat'
-	manifest {
-		attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.cypher.CypherGeneratorMain'
-	}
+	manifest { attributes 'Main-Class': 'hu.bme.mit.trainbenchmark.generator.cypher.CypherGeneratorMain' }
 }
 
 dependencies {
