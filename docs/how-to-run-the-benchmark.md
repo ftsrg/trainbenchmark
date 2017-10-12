@@ -16,7 +16,7 @@ Initialize the scripts with:
 ./gradlew initScripts
 ```
 
-This initializes the script files in `trainbenchmark-scripts/src` based on the templates stored in `trainbenchmark-scripts/src-templates`. Note that these files are in Gitignore, so they will *not* be committed to your version control system.
+This initializes the script files in `trainbenchmark-scripts/src` based on the templates stored in `trainbenchmark-scripts/src-templates`. Note that these files are in Gitignore, so they will *not* be committed to your version control system. However, the scripts are saved along the benchmark results to help reproducibility.
 
 ## Generating the models
 
@@ -51,6 +51,8 @@ Once you set the `BenchmarkScript.groovy` file to match your requirements, run:
 
 :warning: Note that if you cancel the benchmark by killing the Gradle process with the <kbd>Ctrl</kbd> + <kbd>C</kbd> keys, it will *only stop the Gradle process running the benchmark*. The JVM under benchmark will continue to run until completion (and will never timeout, as the timeout is governed by the benchmark script that was killed). Hence, in these cases, you should check for running `java` processes manually.
 
+:bulb: Benchmark results and configurations are placed in the `results` directory, in separate directories starting from `0001`.
+
 ## Plotting the results
 
 Install the required R packages (`scripts/install-R-packages.sh`).
@@ -66,6 +68,10 @@ You can run a web page by issuing the following command.
 ```bash
 ./gradlew page
 ```
+
+## Cleanup
+
+To remove **all** previous results, add the `cleanResults` task before the other tasks.
 
 ## Summary
 
