@@ -4,13 +4,15 @@ The framework provides a set of scripts for building the projects, generating th
 
 ### Installation guide
 
-The benchmark requires a 64-bit operating system. We recommend Ubuntu-based Linux systems.
+The benchmark requires a 64-bit operating system and JDK 8. For development, we recommend Ubuntu-based Linux systems.
+
+The projects are built using Gradle, but this is is handled by the Gradle wrapper scripts, so there it's not required to install Gradle on your machine.
 
 ### Setup
 
 * Initialization
-    * [`install-jdk.sh`](scripts/install-jdk.sh): installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
-    * [`./gradlew initScripts`](trainbenchmark-scripts/build.gradle): intializes the Groovy scripts for the [generate](trainbenchmark-scripts/src-template/GeneratorScript.groovy) and the [benchmark](trainbenchmark-scripts/src-template/BenchmarkScript.groovy) goals.
+  * [`install-jdk.sh`](scripts/install-jdk.sh): installs [Oracle JDK 8](https://github.com/FTSRG/cheat-sheets/wiki/Linux-packages#oracle-jdk)
+  * [`./gradlew initScripts`](trainbenchmark-scripts/build.gradle): intializes the Groovy scripts for the [generate](trainbenchmark-scripts/src-template/GeneratorScript.groovy) and the [benchmark](trainbenchmark-scripts/src-template/BenchmarkScript.groovy) goals.
 
 Provided that you start with a fresh Ubuntu server installation, you can run the provided install scripts like this:
 
