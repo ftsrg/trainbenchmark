@@ -44,10 +44,12 @@ task saveScripts(type: Copy) {
 	include '*.groovy'
 }
 
-task cleanResults(type: Delete) << {
-	def resultDir = "../results"
-	file(resultDir).eachDir{ dir ->
-		delete "${dir}"
+task cleanResults(type: Delete) {
+	doFirst {
+		def resultDir = "../results"
+		file(resultDir).eachDir { dir ->
+			delete "${dir}"
+		}
 	}
 }
 
