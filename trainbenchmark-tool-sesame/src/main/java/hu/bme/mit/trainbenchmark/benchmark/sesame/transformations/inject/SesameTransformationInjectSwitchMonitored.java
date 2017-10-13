@@ -11,17 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.openrdf.model.URI;
-import org.openrdf.repository.RepositoryException;
-
 import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameSwitchMonitoredInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import org.openrdf.model.URI;
+import org.openrdf.repository.RepositoryException;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SesameTransformationInjectSwitchMonitored<TSesameDriver extends SesameDriver> extends SesameTransformation<SesameSwitchMonitoredInjectMatch, TSesameDriver> {
 
@@ -32,7 +31,7 @@ public class SesameTransformationInjectSwitchMonitored<TSesameDriver extends Ses
 	@Override
 	public void activate(final Collection<SesameSwitchMonitoredInjectMatch> matches) throws RepositoryException {
 		final List<URI> switches = matches.stream().map(it -> it.getSw()).collect(Collectors.toList());
-		driver.deleteOutgoingEdges(switches, ModelConstants.SWITCH, ModelConstants.MONITORED_BY);
+		driver.deleteOutgoingEdges(switches, ModelConstants.MONITORED_BY);
 	}
 
 }

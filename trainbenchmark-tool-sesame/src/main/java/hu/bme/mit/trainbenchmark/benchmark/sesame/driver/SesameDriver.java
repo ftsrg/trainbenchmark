@@ -11,15 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.driver;
 
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-
+import hu.bme.mit.trainbenchmark.benchmark.rdf.driver.RdfDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.UriComparator;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
 import org.openrdf.OpenRDFException;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -37,15 +33,17 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
-import hu.bme.mit.trainbenchmark.benchmark.rdf.driver.RdfDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.comparators.UriComparator;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameMatch;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.rdf.RdfConstants;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 public class SesameDriver extends RdfDriver {
 
@@ -58,7 +56,7 @@ public class SesameDriver extends RdfDriver {
 	public SesameDriver(final boolean inferencing) {
 		super(inferencing);
 	}
-	
+
 	@Override
 	public void beginTransaction() {
 	}
@@ -69,22 +67,21 @@ public class SesameDriver extends RdfDriver {
 	}
 
 	@Override
-	public void read(final String modelPath)
-			throws RepositoryException, RDFParseException, IOException, OpenRDFException {
+	public void read(final String modelPath) throws IOException, OpenRDFException {
 		if (inferencing) {
 			repository = new SailRepository(new ForwardChainingRDFSInferencer(new MemoryStore()));
 		} else {
 			repository = new SailRepository(new MemoryStore());
 		}
-		
+
 		final File modelFile = new File(modelPath);
-		
+
 		repository.initialize();
 		vf = repository.getValueFactory();
 		connection = repository.getConnection();
 		connection.add(modelFile, RdfConstants.BASE_PREFIX, RDFFormat.TURTLE);
 	}
-	
+
 	public Collection<? extends SesameMatch> runQuery(final RailwayQuery query, final String queryDefinition)
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		final Collection<SesameMatch> results = new ArrayList<>();
@@ -114,12 +111,7 @@ public class SesameDriver extends RdfDriver {
 
 	// delete
 
-	public void deleteSingleOutgoingEdge(final Collection<URI> vertices, final String vertexType, final String edgeType)
-			throws RepositoryException {
-		deleteEdges(vertices, edgeType, true, false);
-	}
-	
-	public void deleteOutgoingEdges(final Collection<URI> vertices, final String vertexType, final String edgeType)
+	public void deleteOutgoingEdges(final Collection<URI> vertices, final String edgeType)
 			throws RepositoryException {
 		deleteEdges(vertices, edgeType, true, true);
 	}
