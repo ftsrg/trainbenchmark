@@ -29,9 +29,9 @@ public class Neo4jCoreTransformationRepairSwitchSet extends Neo4jCoreTransformat
 
 	@Override
 	public void activate(final Collection<Neo4jSwitchSetMatch> matches) throws KernelException {
-		for (final Neo4jSwitchSetMatch sstm : matches) {
-			final Node sw = sstm.getSw();
-			final String position = sstm.getPosition();
+		for (final Neo4jSwitchSetMatch match : matches) {
+			final Node sw = match.getSw();
+			final String position = match.getPosition();
 			sw.setProperty(CURRENTPOSITION, position);
 		}
 	}

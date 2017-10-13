@@ -26,8 +26,8 @@ public class EmfTransformationRepairSwitchSet<TDriver extends EmfDriver, TSwitch
 
 	@Override
 	public void activate(final Collection<TSwitchSetMatch> matches) {
-		for (final EmfSwitchSetMatch sstm : matches) {
-			sstm.getSw().setCurrentPosition(sstm.getSwP().getPosition());
+		for (final EmfSwitchSetMatch match : matches) {
+			match.getSw().setCurrentPosition(match.getSwP().getPosition());
 		}
 	}
 

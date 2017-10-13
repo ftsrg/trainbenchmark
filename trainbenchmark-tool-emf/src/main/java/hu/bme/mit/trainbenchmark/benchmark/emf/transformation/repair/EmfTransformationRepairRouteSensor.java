@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair;
 
-import java.util.Collection;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+
+import java.util.Collection;
 
 public class EmfTransformationRepairRouteSensor<TDriver extends EmfDriver, TRouteSensorMatch extends EmfRouteSensorMatch>
 		extends EmfTransformation<TRouteSensorMatch, TDriver> {
@@ -26,8 +26,8 @@ public class EmfTransformationRepairRouteSensor<TDriver extends EmfDriver, TRout
 
 	@Override
 	public void activate(final Collection<TRouteSensorMatch> matches) {
-		for (final EmfRouteSensorMatch rsm : matches) {
-			rsm.getRoute().getRequires().add(rsm.getSensor());
+		for (final EmfRouteSensorMatch match : matches) {
+			match.getRoute().getRequires().add(match.getSensor());
 		}
 	}
 

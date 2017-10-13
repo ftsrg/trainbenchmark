@@ -11,14 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair;
 
-import java.util.Collection;
-
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+import java.util.Collection;
 
 public class TinkerGraphTransformationRepairConnectedSegments<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphConnectedSegmentsMatch, TTinkerGraphDriver> {
@@ -29,13 +28,13 @@ public class TinkerGraphTransformationRepairConnectedSegments<TTinkerGraphDriver
 
 	@Override
 	public void activate(final Collection<TinkerGraphConnectedSegmentsMatch> matches) {
-		for (final TinkerGraphConnectedSegmentsMatch csm : matches) {
+		for (final TinkerGraphConnectedSegmentsMatch match : matches) {
 			// delete segment2 with all its relationships
-			final Vertex segment2 = csm.getSegment2();
+			final Vertex segment2 = match.getSegment2();
 			segment2.remove();
 
 			// (segment1)-[:connectsTo]->(segment3)
-			csm.getSegment1().addEdge(ModelConstants.CONNECTS_TO, csm.getSegment3());
+			match.getSegment1().addEdge(ModelConstants.CONNECTS_TO, match.getSegment3());
 		}
 	}
 

@@ -30,9 +30,9 @@ public class TinkerGraphTransformationRepairSemaphoreNeighbor<TTinkerGraphDriver
 
 	@Override
 	public void activate(final Collection<TinkerGraphSemaphoreNeighborMatch> matches) {
-		for (final TinkerGraphSemaphoreNeighborMatch snm : matches) {
-			final Vertex semaphore = snm.getSemaphore();
-			final Vertex route2 = snm.getRoute2();
+		for (final TinkerGraphSemaphoreNeighborMatch match : matches) {
+			final Vertex semaphore = match.getSemaphore();
+			final Vertex route2 = match.getRoute2();
 			if (!route2.edges(Direction.OUT, ENTRY).hasNext()) {
 				route2.addEdge(ENTRY, semaphore);
 			}

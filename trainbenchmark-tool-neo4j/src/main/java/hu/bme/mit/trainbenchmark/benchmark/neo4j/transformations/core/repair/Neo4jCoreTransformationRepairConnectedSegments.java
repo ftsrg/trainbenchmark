@@ -28,15 +28,15 @@ public class Neo4jCoreTransformationRepairConnectedSegments extends Neo4jCoreTra
 
 	@Override
 	public void activate(final Collection<Neo4jConnectedSegmentsMatch> matches) {
-		for (final Neo4jConnectedSegmentsMatch csm : matches) {
+		for (final Neo4jConnectedSegmentsMatch match : matches) {
 			// delete segment2 with all its relationships
-			final Node segment2 = csm.getSegment2();
+			final Node segment2 = match.getSegment2();
 			for (final Relationship relationship : segment2.getRelationships()) {
 				relationship.delete();
 			}
 			segment2.delete();
 			// (segment1)-[:connectsTo]->(segment3)
-			csm.getSegment1().createRelationshipTo(csm.getSegment3(), Neo4jConstants.relationshipTypeConnectsTo);
+			match.getSegment1().createRelationshipTo(match.getSegment3(), Neo4jConstants.relationshipTypeConnectsTo);
 		}
 	}
 

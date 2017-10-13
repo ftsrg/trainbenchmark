@@ -28,8 +28,8 @@ public class Neo4jCoreTransformationRepairSwitchMonitored extends Neo4jCoreTrans
 
 	@Override
 	public void activate(final Collection<Neo4jSwitchMonitoredMatch> matches) {
-		for (final Neo4jSwitchMonitoredMatch ssnm : matches) {
-			final Node sw = ssnm.getSw();
+		for (final Neo4jSwitchMonitoredMatch match : matches) {
+			final Node sw = match.getSw();
 			final Node sensor = driver.getGraphDb().createNode(Neo4jConstants.labelSensor);
 			sensor.setProperty(ModelConstants.ID, driver.generateNewVertexId());
 			sw.createRelationshipTo(sensor, Neo4jConstants.relationshipTypeMonitoredBy);

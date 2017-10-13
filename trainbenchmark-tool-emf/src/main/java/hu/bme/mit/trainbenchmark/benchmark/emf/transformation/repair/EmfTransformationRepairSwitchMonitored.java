@@ -11,13 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair;
 
-import java.util.Collection;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSwitchMonitoredMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
+
+import java.util.Collection;
 
 public class EmfTransformationRepairSwitchMonitored<TDriver extends EmfDriver, TSwitchMonitoredMatch extends EmfSwitchMonitoredMatch>
 		extends EmfTransformation<TSwitchMonitoredMatch, TDriver> {
@@ -28,9 +28,9 @@ public class EmfTransformationRepairSwitchMonitored<TDriver extends EmfDriver, T
 
 	@Override
 	public void activate(final Collection<TSwitchMonitoredMatch> matches) {
-		for (final EmfSwitchMonitoredMatch ssnm : matches) {
+		for (final EmfSwitchMonitoredMatch match : matches) {
 			final Sensor sensor = RailwayFactory.eINSTANCE.createSensor();
-			ssnm.getSw().getMonitoredBy().add(sensor);
+			match.getSw().getMonitoredBy().add(sensor);
 		}
 	}
 

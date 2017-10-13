@@ -11,15 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-
-import java.util.Collection;
-
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
 
 public class TinkerGraphTransformationRepairPosLength<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphPosLengthMatch, TTinkerGraphDriver> {
@@ -30,9 +29,9 @@ public class TinkerGraphTransformationRepairPosLength<TTinkerGraphDriver extends
 
 	@Override
 	public void activate(final Collection<TinkerGraphPosLengthMatch> matches) {
-		for (final TinkerGraphPosLengthMatch plm : matches) {
-			final Vertex segment = plm.getSegment();
-			final Integer length = plm.getLength();
+		for (final TinkerGraphPosLengthMatch match : matches) {
+			final Vertex segment = match.getSegment();
+			final Integer length = match.getLength();
 			try {
 				segment.property(LENGTH, -length + 1);
 			} catch (final IllegalStateException e) {

@@ -11,21 +11,20 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
-
-import java.util.Collection;
-
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.vocabulary.RDF;
-
 import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
 import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
+
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
 public class JenaTransformationInjectConnectedSegments extends JenaTransformation<JenaConnectedSegmentsInjectMatch> {
 
@@ -42,7 +41,7 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 		final Property monitoredBy = model.getProperty(BASE_PREFIX + ModelConstants.MONITORED_BY);
 		final Property segmentType = model.getProperty(BASE_PREFIX + ModelConstants.SEGMENT);
 
-		for (final JenaConnectedSegmentsInjectMatch csim : matches) {
+		for (final JenaConnectedSegmentsInjectMatch match : matches) {
 			// create (segment2) node
 			final Long newVertexId = driver.generateNewVertexId();
 			final Resource segment2 = model.createResource(BASE_PREFIX + ID_PREFIX + newVertexId);
@@ -50,14 +49,14 @@ public class JenaTransformationInjectConnectedSegments extends JenaTransformatio
 			model.add(model.createLiteralStatement(segment2, length, TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH));
 
 			// (segment1)-[:connectsTo]->(segment2)
-			model.add(csim.getSegment1(), connectsTo, segment2);
+			model.add(match.getSegment1(), connectsTo, segment2);
 			// (segment2)-[:connectsTo]->(segment3)
-			model.add(segment2, connectsTo, csim.getSegment3());
+			model.add(segment2, connectsTo, match.getSegment3());
 			// (segment2)-[:monitoredBy]->(sensor)
-			model.add(segment2, monitoredBy, csim.getSensor());
+			model.add(segment2, monitoredBy, match.getSensor());
 
 			// remove (segment1)-[:connectsTo]->(segment3)
-			model.remove(csim.getSegment1(), connectsTo, csim.getSegment3());
+			model.remove(match.getSegment1(), connectsTo, match.getSegment3());
 		}
 	}
 

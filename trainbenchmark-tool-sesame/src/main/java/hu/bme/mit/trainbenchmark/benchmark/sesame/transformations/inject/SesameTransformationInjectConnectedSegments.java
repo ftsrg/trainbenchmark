@@ -11,25 +11,24 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.inject;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
-
-import java.util.Collection;
-
+import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.repository.RepositoryConnection;
 
-import hu.bme.mit.trainbenchmark.benchmark.sesame.driver.SesameDriver;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.matches.SesameConnectedSegmentsInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.sesame.transformations.SesameTransformation;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.ID_PREFIX;
 
 public class SesameTransformationInjectConnectedSegments<TSesameDriver extends SesameDriver> extends SesameTransformation<SesameConnectedSegmentsInjectMatch, TSesameDriver> {
 
@@ -48,7 +47,7 @@ public class SesameTransformationInjectConnectedSegments<TSesameDriver extends S
 		final URI segmentType = vf.createURI(BASE_PREFIX + SEGMENT);
 		final Literal lengthLiteral = vf.createLiteral(TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
 
-		for (final SesameConnectedSegmentsInjectMatch csim : matches) {
+		for (final SesameConnectedSegmentsInjectMatch match : matches) {
 			// create (segment2) node
 			final Long newVertexId = driver.generateNewVertexId();
 			final URI segment2 = vf.createURI(BASE_PREFIX + ID_PREFIX + newVertexId);
@@ -56,15 +55,15 @@ public class SesameTransformationInjectConnectedSegments<TSesameDriver extends S
 			connection.add(segment2, length, lengthLiteral);
 
 			// (segment1)-[:connectsTo]->(segment2)
-			connection.add(csim.getSegment1(), connectsTo, segment2);
+			connection.add(match.getSegment1(), connectsTo, segment2);
 			// (segment2)-[:connectsTo]->(segment3)
-			connection.add(segment2, connectsTo, csim.getSegment3());
+			connection.add(segment2, connectsTo, match.getSegment3());
 
 			// (segment2)-[:monitoredBy]->(sensor)
-			connection.add(segment2, monitoredBy, csim.getSensor());
+			connection.add(segment2, monitoredBy, match.getSensor());
 
 			// remove (segment1)-[:connectsTo]->(segment3)
-			connection.remove(csim.getSegment1(), connectsTo, csim.getSegment3());
+			connection.remove(match.getSegment1(), connectsTo, match.getSegment3());
 		}
 	}
 

@@ -11,11 +11,11 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.emf.transformation.repair;
 
-import java.util.Collection;
-
 import hu.bme.mit.trainbenchmark.benchmark.emf.driver.EmfDriver;
 import hu.bme.mit.trainbenchmark.benchmark.emf.matches.EmfSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.emf.transformation.EmfTransformation;
+
+import java.util.Collection;
 
 public class EmfTransformationRepairSemaphoreNeighbor<TDriver extends EmfDriver, TSemaphoreNeighborMatch extends EmfSemaphoreNeighborMatch>
 		extends EmfTransformation<TSemaphoreNeighborMatch, TDriver> {
@@ -26,8 +26,8 @@ public class EmfTransformationRepairSemaphoreNeighbor<TDriver extends EmfDriver,
 
 	@Override
 	public void activate(final Collection<TSemaphoreNeighborMatch> matches) {
-		for (final EmfSemaphoreNeighborMatch snm : matches) {
-			snm.getRoute2().setEntry(snm.getSemaphore());
+		for (final EmfSemaphoreNeighborMatch match : matches) {
+			match.getRoute2().setEntry(match.getSemaphore());
 		}
 	}
 

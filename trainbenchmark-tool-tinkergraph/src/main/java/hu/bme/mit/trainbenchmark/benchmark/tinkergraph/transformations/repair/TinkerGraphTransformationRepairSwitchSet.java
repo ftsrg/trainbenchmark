@@ -29,9 +29,9 @@ public class TinkerGraphTransformationRepairSwitchSet<TTinkerGraphDriver extends
 
 	@Override
 	public void activate(final Collection<TinkerGraphSwitchSetMatch> matches) {
-		for (final TinkerGraphSwitchSetMatch sstm : matches) {
-			final Vertex sw = sstm.getSw();
-			final String position = sstm.getPosition();
+		for (final TinkerGraphSwitchSetMatch match : matches) {
+			final Vertex sw = match.getSw();
+			final String position = match.getPosition();
 			sw.property(CURRENTPOSITION, position);
 		}
 	}

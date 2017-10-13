@@ -31,8 +31,8 @@ public class TinkerGraphTransformationRepairSwitchMonitored<TTinkerGraphDriver e
 
 	@Override
 	public void activate(final Collection<TinkerGraphSwitchMonitoredMatch> matches) throws Exception {
-		for (final TinkerGraphSwitchMonitoredMatch ssnm : matches) {
-			final Vertex sw = ssnm.getSw();
+		for (final TinkerGraphSwitchMonitoredMatch match : matches) {
+			final Vertex sw = match.getSw();
 			final Vertex sensor = driver.getGraph().addVertex(SENSOR);
 			sensor.property(ModelConstants.ID, driver.generateNewVertexId());
 			sw.addEdge(MONITORED_BY, sensor);

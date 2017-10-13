@@ -11,14 +11,13 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair;
 
-import java.util.Collection;
-
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+import java.util.Collection;
 
 public class TinkerGraphTransformationRepairRouteSensor<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphRouteSensorMatch, TTinkerGraphDriver> {
@@ -29,9 +28,9 @@ public class TinkerGraphTransformationRepairRouteSensor<TTinkerGraphDriver exten
 
 	@Override
 	public void activate(final Collection<TinkerGraphRouteSensorMatch> matches) {
-		for (final TinkerGraphRouteSensorMatch rsm : matches) {
-			final Vertex route = rsm.getRoute();
-			final Vertex sensor = rsm.getSensor();
+		for (final TinkerGraphRouteSensorMatch match : matches) {
+			final Vertex route = match.getRoute();
+			final Vertex sensor = match.getSensor();
 			route.addEdge(ModelConstants.REQUIRES, sensor);
 		}
 	}

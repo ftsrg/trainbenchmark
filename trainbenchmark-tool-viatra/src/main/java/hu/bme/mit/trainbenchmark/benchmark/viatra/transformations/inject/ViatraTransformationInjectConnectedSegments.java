@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.inject;
 
-import java.io.IOException;
-import java.util.Collection;
-
 import hu.bme.mit.trainbenchmark.benchmark.viatra.ConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.driver.ViatraDriver;
 import hu.bme.mit.trainbenchmark.benchmark.viatra.transformations.ViatraTransformation;
@@ -21,6 +18,9 @@ import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
 import hu.bme.mit.trainbenchmark.railway.RailwayFactory;
 import hu.bme.mit.trainbenchmark.railway.Region;
 import hu.bme.mit.trainbenchmark.railway.Segment;
+
+import java.io.IOException;
+import java.util.Collection;
 
 public class ViatraTransformationInjectConnectedSegments extends ViatraTransformation<ConnectedSegmentsInjectMatch> {
 
@@ -30,22 +30,22 @@ public class ViatraTransformationInjectConnectedSegments extends ViatraTransform
 
 	@Override
 	public void activate(final Collection<ConnectedSegmentsInjectMatch> matches) throws IOException {
-		for (final ConnectedSegmentsInjectMatch csim : matches) {
+		for (final ConnectedSegmentsInjectMatch match : matches) {
 			// create (segment2) node
 			final Segment segment2 = RailwayFactory.eINSTANCE.createSegment();
 			segment2.setLength(TrainBenchmarkConstants.DEFAULT_SEGMENT_LENGTH);
-			final Region region = (Region) csim.getSegment1().eContainer();
+			final Region region = (Region) match.getSegment1().eContainer();
 			region.getElements().add(segment2);
 
 			// (segment1)-[:connectsTo]->(segment2)
-			csim.getSegment1().getConnectsTo().add(segment2);
+			match.getSegment1().getConnectsTo().add(segment2);
 			// (segment2)-[:connectsTo]->(segment3)
-			segment2.getConnectsTo().add(csim.getSegment3());
+			segment2.getConnectsTo().add(match.getSegment3());
 			// (segment2)-[:monitoredBy]->(sensor)
-			segment2.getMonitoredBy().add(csim.getSensor());
+			segment2.getMonitoredBy().add(match.getSensor());
 
 			// remove (segment1)-[:connectsTo]->(segment3)
-			csim.getSegment1().getConnectsTo().remove(csim.getSegment3());
+			match.getSegment1().getConnectsTo().remove(match.getSegment3());
 		}
 	}
 

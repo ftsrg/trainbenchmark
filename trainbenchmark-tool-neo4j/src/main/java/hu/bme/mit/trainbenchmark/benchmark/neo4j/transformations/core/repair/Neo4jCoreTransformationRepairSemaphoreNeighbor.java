@@ -28,9 +28,9 @@ public class Neo4jCoreTransformationRepairSemaphoreNeighbor extends Neo4jCoreTra
 
 	@Override
 	public void activate(final Collection<Neo4jSemaphoreNeighborMatch> matches) {
-		for (final Neo4jSemaphoreNeighborMatch snm : matches) {
-			final Node semaphore = snm.getSemaphore();
-			final Node route2 = snm.getRoute2();
+		for (final Neo4jSemaphoreNeighborMatch match : matches) {
+			final Node semaphore = match.getSemaphore();
+			final Node route2 = match.getRoute2();
 			if (!route2.hasRelationship(Direction.OUTGOING, Neo4jConstants.relationshipTypeEntry)) {
 				route2.createRelationshipTo(semaphore, Neo4jConstants.relationshipTypeEntry);
 			}
