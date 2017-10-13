@@ -16,9 +16,11 @@ import static hu.bme.mit.trainbenchmark.constants.ExecutionPhase.TRANSFORMATION;
 
 public enum RailwayQuery {
 	// well-formedness constraint queries (LHS for the Repair scenario)
+	ACTIVEROUTE("ActiveRoute", CHECK), //
 	CONNECTEDSEGMENTS("ConnectedSegments", CHECK), //
 	POSLENGTH("PosLength", CHECK), //
 	ROUTEREACHABILITY("RouteReachability", CHECK), //
+	ROUTELENGTH("RouteLength", CHECK), //
 	ROUTESENSOR("RouteSensor", CHECK), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor", CHECK), //
 	SWITCHMONITORED("SwitchMonitored", CHECK), //

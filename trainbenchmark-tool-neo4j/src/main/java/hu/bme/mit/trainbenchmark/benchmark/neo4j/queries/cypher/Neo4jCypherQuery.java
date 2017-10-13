@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 public class Neo4jCypherQuery<TNeo4jMatch extends Neo4jMatch> extends Neo4jQuery<TNeo4jMatch> {
-
+	
 	protected final RailwayQuery query;
 	protected final String queryDefinition;
 

@@ -2,11 +2,14 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.operations;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.config.Neo4jEngine;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jActiveRouteMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteReachabilityMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorInjectMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborInjectMatch;
@@ -191,6 +194,13 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 			}
 			case CYPHER:
 				switch (operationEnum) {
+					// ActiveRoute
+				case ACTIVEROUTE: {
+					final ModelQuery<Neo4jActiveRouteMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ACTIVEROUTE);
+					final ModelOperation<Neo4jActiveRouteMatch, Neo4jDriver> operation = ModelOperation.of(query);
+					return operation;
+				}
+
 					// ConnectedSegments
 				case CONNECTEDSEGMENTS: {
 					final ModelQuery<Neo4jConnectedSegmentsMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.CONNECTEDSEGMENTS);
@@ -232,10 +242,17 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 					return operation;
 				}
 
-				// RouteReachability
+					// RouteReachability
+				case ROUTELENGTH: {
+					final ModelQuery<Neo4jRouteLengthMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ROUTELENGTH);
+					final ModelOperation<Neo4jRouteLengthMatch, Neo4jDriver> operation = ModelOperation.of(query);
+					return operation;
+				}
+
+					// RouteReachability
 				case ROUTEREACHABILITY: {
-					final ModelQuery<Neo4jRouteSensorMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ROUTEREACHABILITY);
-					final ModelOperation<Neo4jRouteSensorMatch, Neo4jDriver> operation = ModelOperation.of(query);
+					final ModelQuery<Neo4jRouteReachabilityMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ROUTEREACHABILITY);
+					final ModelOperation<Neo4jRouteReachabilityMatch, Neo4jDriver> operation = ModelOperation.of(query);
 					return operation;
 				}
 

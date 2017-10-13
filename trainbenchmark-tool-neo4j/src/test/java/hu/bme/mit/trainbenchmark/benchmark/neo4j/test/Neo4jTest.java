@@ -38,7 +38,7 @@ public class Neo4jTest extends TrainBenchmarkTest {
 			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CSV     }, //
 			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
 			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngöine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
+//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
 //			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
 //			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
 //			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
