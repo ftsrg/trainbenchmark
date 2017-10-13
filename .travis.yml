@@ -1,11 +1,16 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
+env:
+  global:
+    - GH_REF: github.com/FTSRG/trainbenchmark.git
+    - secure: dVBQFFLIQ9TMySqOGLCGUQ9IREAw9F3LgfLQyyvzg4s+xeVdPxBciOLfV3+FtXrC6A4VM3oKTuvpMbkEjas8G3iiQELiZrtDP+uHhNWejyRnJ7AFBUppDjbPiIlAvjGT1wjdV0zf7RjdEl/TjAp0/xR0Ktesevtt8kMSV+buSgk=
 install: true
 script:
-  - scripts/get-neo4j.sh
-  # excluding tests for the SQL generator as they require full control over a MySQL instance
-  - ./gradlew inits build -x :trainbenchmark-generator-sql:test -x :trainbenchmark-tool-mysql:test --stacktrace --continue
+- scripts/get-neo4j.sh
+- "./gradlew inits build -x :trainbenchmark-generator-sql:test -x :trainbenchmark-tool-mysql:test
+  --stacktrace --continue"
+- scripts/deploy.sh
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
   email: false
