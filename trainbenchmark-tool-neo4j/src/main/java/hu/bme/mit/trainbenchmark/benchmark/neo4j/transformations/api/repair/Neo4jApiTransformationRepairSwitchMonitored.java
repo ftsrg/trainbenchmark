@@ -9,20 +9,20 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.api.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jApiTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import org.neo4j.graphdb.Node;
 
 import java.util.Collection;
 
-public class Neo4jCoreTransformationRepairSwitchMonitored extends Neo4jCoreTransformation<Neo4jSwitchMonitoredMatch> {
+public class Neo4jApiTransformationRepairSwitchMonitored extends Neo4jApiTransformation<Neo4jSwitchMonitoredMatch> {
 
-	public Neo4jCoreTransformationRepairSwitchMonitored(final Neo4jDriver driver) {
+	public Neo4jApiTransformationRepairSwitchMonitored(final Neo4jDriver driver) {
 		super(driver);
 	}
 

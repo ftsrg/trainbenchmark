@@ -9,20 +9,20 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.api.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jConnectedSegmentsMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jApiTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
 import java.util.Collection;
 
-public class Neo4jCoreTransformationRepairConnectedSegments extends Neo4jCoreTransformation<Neo4jConnectedSegmentsMatch> {
+public class Neo4jApiTransformationRepairConnectedSegments extends Neo4jApiTransformation<Neo4jConnectedSegmentsMatch> {
 
-	public Neo4jCoreTransformationRepairConnectedSegments(final Neo4jDriver driver) {
+	public Neo4jApiTransformationRepairConnectedSegments(final Neo4jDriver driver) {
 		super(driver);
 	}
 

@@ -9,18 +9,18 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.inject;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.api.inject;
 
 import java.util.Collection;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jApiTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 
-public class Neo4jCoreTransformationInjectPosLength extends Neo4jCoreTransformation<Neo4jPosLengthInjectMatch> {
+public class Neo4jApiTransformationInjectPosLength extends Neo4jApiTransformation<Neo4jPosLengthInjectMatch> {
 
-	public Neo4jCoreTransformationInjectPosLength(final Neo4jDriver driver) {
+	public Neo4jApiTransformationInjectPosLength(final Neo4jDriver driver) {
 		super(driver);
 	}
 

@@ -10,50 +10,41 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.api;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetInjectMatch;
 import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4JApiQueryRouteSensorInject extends Neo4jApiQuery<Neo4jRouteSensorInjectMatch> {
+public class Neo4JApiQuerySwitchSetInject extends Neo4jApiQuery<Neo4jSwitchSetInjectMatch> {
 
-	public Neo4JApiQueryRouteSensorInject(final Neo4jDriver driver) {
-		super(RailwayQuery.ROUTESENSOR_INJECT, driver);
+	public Neo4JApiQuerySwitchSetInject(final Neo4jDriver driver) {
+		super(RailwayQuery.SWITCHSET_INJECT, driver);
 	}
 
 	@Override
-	public Collection<Neo4jRouteSensorInjectMatch> evaluate() {
-		final Collection<Neo4jRouteSensorInjectMatch> matches = new ArrayList<>();
+	public Collection<Neo4jSwitchSetInjectMatch> evaluate() {
+		final Collection<Neo4jSwitchSetInjectMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			// (route:Route)
-			final Iterable<Node> routes = () -> graphDb.findNodes(Neo4jConstants.labelRoute);
-			for (final Node route : routes) {
-
-				final Iterable<Node> sensors = Neo4jUtil.getAdjacentNodes(route, Neo4jConstants.relationshipTypeRequires,
-						Direction.OUTGOING, Neo4jConstants.labelSensor);
-
-				for (final Node sensor : sensors) {
-					final Map<String, Object> match = new HashMap<>();
-					match.put(QueryConstants.VAR_ROUTE, route);
-					match.put(QueryConstants.VAR_SENSOR, sensor);
-					matches.add(new Neo4jRouteSensorInjectMatch(match));
-				}
+			// (sw:Switch)
+			final Iterable<Node> sws = () -> graphDb.findNodes(Neo4jConstants.labelSwitch);
+			for (final Node sw : sws) {
+				final Map<String, Object> match = new HashMap<>();
+				match.put(QueryConstants.VAR_SW, sw);
+				matches.add(new Neo4jSwitchSetInjectMatch(match));
 			}
 		}
 

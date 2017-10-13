@@ -9,19 +9,19 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.api.repair;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jApiTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import org.neo4j.graphdb.Node;
 
 import java.util.Collection;
 
-public class Neo4jCoreTransformationRepairRouteSensor extends Neo4jCoreTransformation<Neo4jRouteSensorMatch> {
+public class Neo4jApiTransformationRepairRouteSensor extends Neo4jApiTransformation<Neo4jRouteSensorMatch> {
 
-	public Neo4jCoreTransformationRepairRouteSensor(final Neo4jDriver driver) {
+	public Neo4jApiTransformationRepairRouteSensor(final Neo4jDriver driver) {
 		super(driver);
 	}
 

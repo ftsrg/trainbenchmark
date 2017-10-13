@@ -10,49 +10,49 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
-
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.api;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jRouteSensorInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.util.Neo4jUtil;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4JApiQueryPosLength extends Neo4jApiQuery<Neo4jPosLengthMatch> {
+public class Neo4JApiQueryRouteSensorInject extends Neo4jApiQuery<Neo4jRouteSensorInjectMatch> {
 
-	public Neo4JApiQueryPosLength(final Neo4jDriver driver) {
-		super(RailwayQuery.POSLENGTH, driver);
+	public Neo4JApiQueryRouteSensorInject(final Neo4jDriver driver) {
+		super(RailwayQuery.ROUTESENSOR_INJECT, driver);
 	}
 
 	@Override
-	public Collection<Neo4jPosLengthMatch> evaluate() {
-		final Collection<Neo4jPosLengthMatch> matches = new ArrayList<>();
+	public Collection<Neo4jRouteSensorInjectMatch> evaluate() {
+		final Collection<Neo4jRouteSensorInjectMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
-			// (segment:Segment)
-			final Iterable<Node> segments = () -> graphDb.findNodes(Neo4jConstants.labelSegment);
-			for (final Node segment : segments) {
-				final Integer length = (Integer) segment.getProperty(LENGTH);
+			// (route:Route)
+			final Iterable<Node> routes = () -> graphDb.findNodes(Neo4jConstants.labelRoute);
+			for (final Node route : routes) {
 
-				// segment.length <= 0
-				if (length <= 0) {
+				final Iterable<Node> sensors = Neo4jUtil.getAdjacentNodes(route, Neo4jConstants.relationshipTypeRequires,
+						Direction.OUTGOING, Neo4jConstants.labelSensor);
+
+				for (final Node sensor : sensors) {
 					final Map<String, Object> match = new HashMap<>();
-					match.put(VAR_SEGMENT, segment);
-					match.put(VAR_LENGTH, length);
-					matches.add(new Neo4jPosLengthMatch(match));
+					match.put(QueryConstants.VAR_ROUTE, route);
+					match.put(QueryConstants.VAR_SENSOR, sensor);
+					matches.add(new Neo4jRouteSensorInjectMatch(match));
 				}
 			}
 		}

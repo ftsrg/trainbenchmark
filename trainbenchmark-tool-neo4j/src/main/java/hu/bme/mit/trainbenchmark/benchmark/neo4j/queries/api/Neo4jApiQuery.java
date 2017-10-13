@@ -9,15 +9,17 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.api;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.Neo4jQuery;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
-public abstract class Neo4jCoreTransformation<TNeo4jMatch extends Neo4jMatch> extends Neo4jTransformation<TNeo4jMatch> {
-	
-	protected Neo4jCoreTransformation(final Neo4jDriver driver) {
-		super(driver);
+public abstract class Neo4jApiQuery<TNeo4jMatch extends Neo4jMatch> extends Neo4jQuery<TNeo4jMatch> {
+
+	public Neo4jApiQuery(final RailwayQuery query, final Neo4jDriver driver) {
+		super(query, driver);
 	}
 
 }

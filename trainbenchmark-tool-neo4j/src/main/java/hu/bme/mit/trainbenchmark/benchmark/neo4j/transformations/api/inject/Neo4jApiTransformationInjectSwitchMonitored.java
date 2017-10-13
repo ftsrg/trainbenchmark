@@ -9,7 +9,7 @@
  *   Benedek Izso - initial API and implementation
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.inject;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.api.inject;
 
 import java.util.Collection;
 
@@ -17,13 +17,13 @@ import org.neo4j.graphdb.Relationship;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchMonitoredInjectMatch;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jApiTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4jCoreTransformationInjectSwitchMonitored
-		extends Neo4jCoreTransformation<Neo4jSwitchMonitoredInjectMatch> {
+public class Neo4jApiTransformationInjectSwitchMonitored
+		extends Neo4jApiTransformation<Neo4jSwitchMonitoredInjectMatch> {
 
-	public Neo4jCoreTransformationInjectSwitchMonitored(final Neo4jDriver driver) {
+	public Neo4jApiTransformationInjectSwitchMonitored(final Neo4jDriver driver) {
 		super(driver);
 	}
 

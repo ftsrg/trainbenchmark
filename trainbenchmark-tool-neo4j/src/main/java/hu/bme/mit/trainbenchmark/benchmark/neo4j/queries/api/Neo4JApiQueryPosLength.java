@@ -10,8 +10,10 @@
  *   Gabor Szarnyas - initial API and implementation
  *******************************************************************************/
 
-package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.core;
+package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.api;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
 import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
 import java.util.ArrayList;
@@ -24,28 +26,34 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthInjectMatch;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 
-public class Neo4JApiQueryPosLengthInject extends Neo4jApiQuery<Neo4jPosLengthInjectMatch> {
+public class Neo4JApiQueryPosLength extends Neo4jApiQuery<Neo4jPosLengthMatch> {
 
-	public Neo4JApiQueryPosLengthInject(final Neo4jDriver driver) {
-		super(RailwayQuery.POSLENGTH_INJECT, driver);
+	public Neo4JApiQueryPosLength(final Neo4jDriver driver) {
+		super(RailwayQuery.POSLENGTH, driver);
 	}
 
 	@Override
-	public Collection<Neo4jPosLengthInjectMatch> evaluate() {
-		final Collection<Neo4jPosLengthInjectMatch> matches = new ArrayList<>();
+	public Collection<Neo4jPosLengthMatch> evaluate() {
+		final Collection<Neo4jPosLengthMatch> matches = new ArrayList<>();
 
 		final GraphDatabaseService graphDb = driver.getGraphDb();
 		try (Transaction tx = graphDb.beginTx()) {
 			// (segment:Segment)
 			final Iterable<Node> segments = () -> graphDb.findNodes(Neo4jConstants.labelSegment);
 			for (final Node segment : segments) {
-				final Map<String, Object> match = new HashMap<>();
-				match.put(VAR_SEGMENT, segment);
-				matches.add(new Neo4jPosLengthInjectMatch(match));
+				final Integer length = (Integer) segment.getProperty(LENGTH);
+
+				// segment.length <= 0
+				if (length <= 0) {
+					final Map<String, Object> match = new HashMap<>();
+					match.put(VAR_SEGMENT, segment);
+					match.put(VAR_LENGTH, length);
+					matches.add(new Neo4jPosLengthMatch(match));
+				}
 			}
 		}
 
