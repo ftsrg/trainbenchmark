@@ -13,21 +13,21 @@ package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 public interface SemaphoreNeighborMatch extends Match {
 
-	public Object getSemaphore();
+	Object getSemaphore();
 
-	public Object getRoute1();
+	Object getRoute1();
 
-	public Object getRoute2();
+	Object getRoute2();
 
-	public Object getSensor1();
+	Object getSensor1();
 
-	public Object getSensor2();
+	Object getSensor2();
 
-	public Object getTe1();
+	Object getTe1();
 
-	public Object getTe2();
+	Object getTe2();
 
-	public default Object[] toArray() {
+	default Object[] toArray() {
 		return new Object[] { getSemaphore(), getRoute1(), getRoute2(), getSensor1(), getSensor2(), getTe1(), getTe2() };
 	}
 

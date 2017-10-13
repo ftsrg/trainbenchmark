@@ -13,16 +13,16 @@ package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 public interface RouteSensorMatch extends Match {
 
-	public Object getRoute();
+	Object getRoute();
 
-	public Object getSensor();
+	Object getSensor();
 
-	public Object getSwP();
+	Object getSwP();
 
-	public Object getSw();
+	Object getSw();
 
 	@Override
-	public default Object[] toArray() {
+	default Object[] toArray() {
 		return new Object[] { getRoute(), getSensor(), getSwP(), getSw() };
 	}
 

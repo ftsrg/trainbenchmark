@@ -13,11 +13,11 @@ package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 public interface RouteSensorInjectMatch extends Match {
 
-	public Object getRoute();
+	Object getRoute();
 
-	public Object getSensor();
-	
-	public default Object[] toArray() {
+	Object getSensor();
+
+	default Object[] toArray() {
 		return new Object[] { getRoute(), getSensor() };
 	}
 

@@ -13,14 +13,14 @@ package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 public interface SwitchSetMatch extends Match {
 
-	public Object getSemaphore();
+	Object getSemaphore();
 
-	public Object getRoute();
+	Object getRoute();
 
-	public Object getSwP();
+	Object getSwP();
 
-	public Object getSw();
-	
+	Object getSw();
+
 	default Object[] toArray() {
 		return new Object[] { getSemaphore(), getRoute(), getSwP(), getSw() };
 	}

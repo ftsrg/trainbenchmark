@@ -13,8 +13,8 @@ package hu.bme.mit.trainbenchmark.benchmark.matches;
 
 public interface SwitchSetInjectMatch extends Match {
 
-	public Object getSw();
-	
+	Object getSw();
+
 	default Object[] toArray() {
 		return new Object[] { getSw() };
 	}
