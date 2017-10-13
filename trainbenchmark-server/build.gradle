@@ -1,20 +1,30 @@
-apply plugin: 'jetty'
+buildscript {
+  dependencies {
+    classpath group: 'org.akhikhl.gretty', name: 'gretty', version: '1.4.1'
+  }
+  repositories {
+    jcenter()
+  }
+}
+
+apply plugin: 'org.akhikhl.gretty'
 
 task page() {
-    doLast {
-        copy {
-            from '../trainbenchmark-reporting'
-            into 'src/main/webapp/diagrams'
-            include '*.pdf'
-        }
-
-        copy {
-            from '../diagrams'
-            into 'src/main/webapp/diagrams'
-            include '*.pdf'
-        }
-
-        jettyRun.contextPath = ''
-        jettyRun.execute()
+  doLast {
+    copy {
+      from '../trainbenchmark-reporting'
+      into 'src/main/webapp/diagrams'
+      include '*.pdf'
     }
+
+    copy {
+      from '../diagrams'
+      into 'src/main/webapp/diagrams'
+      include '*.pdf'
+    }
+
+    appRun.contextPath = ''
+		appRun.inplaceMode = 'hard'
+    appRun.execute()
+  }
 }
