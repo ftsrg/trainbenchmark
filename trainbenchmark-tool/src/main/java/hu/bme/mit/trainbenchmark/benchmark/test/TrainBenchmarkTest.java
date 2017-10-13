@@ -100,9 +100,9 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH        ).get(0), Matchers.equalTo(12));
 		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH        ).get(1), Matchers.equalTo(22));
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR      ).get(0), Matchers.equalTo(7));
-		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR      ).get(1), Matchers.equalTo(8));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR      ).get(1), Matchers.equalTo(12));
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0), Matchers.equalTo(0));
-		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(2));
+		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(13));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED  ).get(0), Matchers.equalTo(0));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED  ).get(1), Matchers.equalTo(10));
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET        ).get(0), Matchers.equalTo(1));
@@ -285,8 +285,8 @@ public abstract class TrainBenchmarkTest {
 
 		// Assert
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
-		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(14));
-		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(24));
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(13));
+		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(22));
 	}
 
 	@Test

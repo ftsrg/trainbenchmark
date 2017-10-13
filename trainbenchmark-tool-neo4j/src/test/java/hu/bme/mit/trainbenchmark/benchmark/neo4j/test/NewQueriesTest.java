@@ -47,9 +47,7 @@ public class NewQueriesTest {
 	public static Iterable<? extends Object[]> data() {
 		return Arrays.asList(new Object[][]{ //
 			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
 //			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
 //			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
 		});
 	}
@@ -125,6 +123,6 @@ public class NewQueriesTest {
 
 		// Assert
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
-		collector.checkThat(allMatches.get(RailwayQuery.ROUTEREACHABILITY).get(0), Matchers.equalTo(0));
+		collector.checkThat(allMatches.get(RailwayQuery.ROUTEREACHABILITY).get(0), Matchers.equalTo(26));
 	}
 }

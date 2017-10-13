@@ -52,7 +52,7 @@
     <elements xsi:type="railway:Segment" id="10" monitoredBy="//@regions.0/@sensors.0" connectsTo="//@regions.0/@elements.5" length="808"/>
     <elements xsi:type="railway:Segment" id="11" monitoredBy="//@regions.0/@sensors.0" connectsTo="//@regions.0/@elements.6" length="576"/>
     <elements xsi:type="railway:Segment" id="12" monitoredBy="//@regions.0/@sensors.0" connectsTo="//@regions.0/@elements.7" length="358"/>
-    <elements xsi:type="railway:Segment" id="14" monitoredBy="//@regions.0/@sensors.1" connectsTo="//@regions.0/@elements.8" length="335"/>
+    <elements xsi:type="railway:Segment" id="14" monitoredBy="//@regions.0/@sensors.1" length="335"/>
     <elements xsi:type="railway:Segment" id="15" monitoredBy="//@regions.0/@sensors.1" connectsTo="//@regions.0/@elements.9" length="461"/>
     <elements xsi:type="railway:Segment" id="16" monitoredBy="//@regions.0/@sensors.1" connectsTo="//@regions.0/@elements.10" length="439"/>
     <elements xsi:type="railway:Segment" id="17" monitoredBy="//@regions.0/@sensors.1" connectsTo="//@regions.0/@elements.11" length="879"/>
@@ -450,7 +450,7 @@
     <elements xsi:type="railway:Segment" id="387" monitoredBy="//@regions.3/@sensors.26" connectsTo="//@regions.3/@elements.140" length="232"/>
     <elements xsi:type="railway:Segment" id="388" monitoredBy="//@regions.3/@sensors.26" connectsTo="//@regions.3/@elements.141" length="343"/>
     <elements xsi:type="railway:Segment" id="389" monitoredBy="//@regions.3/@sensors.26" connectsTo="//@regions.3/@elements.142" length="605"/>
-    <elements xsi:type="railway:Segment" id="391" monitoredBy="//@regions.3/@sensors.27" connectsTo="//@regions.3/@elements.143" length="771"/>
+    <elements xsi:type="railway:Segment" id="391" monitoredBy="//@regions.3/@sensors.27" length="771"/>
     <elements xsi:type="railway:Segment" id="392" monitoredBy="//@regions.3/@sensors.27" connectsTo="//@regions.3/@elements.144" length="799"/>
     <elements xsi:type="railway:Segment" id="393" monitoredBy="//@regions.3/@sensors.27" connectsTo="//@regions.3/@elements.145" length="288"/>
     <elements xsi:type="railway:Segment" id="394" monitoredBy="//@regions.3/@sensors.27" connectsTo="//@regions.3/@elements.146" length="333"/>
@@ -467,7 +467,7 @@
     <elements xsi:type="railway:Segment" id="408" monitoredBy="//@regions.3/@sensors.29" connectsTo="//@regions.3/@elements.157" length="248"/>
     <elements xsi:type="railway:Segment" id="409" monitoredBy="//@regions.3/@sensors.29" connectsTo="//@regions.3/@elements.158" length="404"/>
     <elements xsi:type="railway:Segment" id="411" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.159" length="261"/>
-    <elements xsi:type="railway:Segment" id="412" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.160" length="111"/>
+    <elements xsi:type="railway:Segment" id="412" monitoredBy="//@regions.3/@sensors.30" length="111"/>
     <elements xsi:type="railway:Segment" id="413" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.161" length="408"/>
     <elements xsi:type="railway:Segment" id="414" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.162" length="852"/>
     <elements xsi:type="railway:Segment" id="415" monitoredBy="//@regions.3/@sensors.30" connectsTo="//@regions.3/@elements.163" length="610"/>
@@ -487,7 +487,7 @@
     <elements xsi:type="railway:Segment" id="432" monitoredBy="//@regions.3/@sensors.33" connectsTo="//@regions.3/@elements.177" length="901"/>
     <elements xsi:type="railway:Segment" id="433" monitoredBy="//@regions.3/@sensors.33" connectsTo="//@regions.3/@elements.178" length="735"/>
     <elements xsi:type="railway:Segment" id="435" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.179" length="534"/>
-    <elements xsi:type="railway:Segment" id="436" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.180" length="372"/>
+    <elements xsi:type="railway:Segment" id="436" monitoredBy="//@regions.3/@sensors.34" length="372"/>
     <elements xsi:type="railway:Segment" id="437" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.181" length="49"/>
     <elements xsi:type="railway:Segment" id="438" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.182" length="917"/>
     <elements xsi:type="railway:Segment" id="439" monitoredBy="//@regions.3/@sensors.34" connectsTo="//@regions.3/@elements.183" length="369"/>
@@ -550,7 +550,7 @@
     <elements xsi:type="railway:Switch" id="509" monitoredBy="//@regions.3/@sensors.46 //@regions.3/@sensors.47 //@regions.3/@sensors.48 //@regions.3/@sensors.49" connectsTo="//@regions.3/@elements.240" positions="//@routes.3/@follows.9"/>
     <elements xsi:type="railway:Segment" id="511" monitoredBy="//@regions.3/@sensors.46" connectsTo="//@regions.3/@elements.241" length="717"/>
     <elements xsi:type="railway:Segment" id="512" monitoredBy="//@regions.3/@sensors.46" connectsTo="//@regions.3/@elements.242" length="970"/>
-    <elements xsi:type="railway:Segment" id="513" monitoredBy="//@regions.3/@sensors.46" connectsTo="//@regions.3/@elements.243" length="150"/>
+    <elements xsi:type="railway:Segment" id="513" monitoredBy="//@regions.3/@sensors.46" length="150"/>
     <elements xsi:type="railway:Segment" id="514" monitoredBy="//@regions.3/@sensors.46" connectsTo="//@regions.3/@elements.244" length="39"/>
     <elements xsi:type="railway:Segment" id="515" monitoredBy="//@regions.3/@sensors.46" connectsTo="//@regions.3/@elements.245" length="159"/>
     <elements xsi:type="railway:Segment" id="517" monitoredBy="//@regions.3/@sensors.47" connectsTo="//@regions.3/@elements.246" length="83"/>
@@ -627,7 +627,7 @@
     <elements xsi:type="railway:Segment" id="605" monitoredBy="//@regions.3/@sensors.60" connectsTo="//@regions.3/@elements.317" length="-825"/>
     <elements xsi:type="railway:Segment" id="606" monitoredBy="//@regions.3/@sensors.60" connectsTo="//@regions.3/@elements.318" length="917"/>
     <elements xsi:type="railway:Segment" id="607" monitoredBy="//@regions.3/@sensors.60" connectsTo="//@regions.3/@elements.319" length="749"/>
-    <elements xsi:type="railway:Segment" id="609" monitoredBy="//@regions.3/@sensors.61" connectsTo="//@regions.3/@elements.320" length="569"/>
+    <elements xsi:type="railway:Segment" id="609" monitoredBy="//@regions.3/@sensors.61" length="569"/>
     <elements xsi:type="railway:Segment" id="610" monitoredBy="//@regions.3/@sensors.61" connectsTo="//@regions.3/@elements.321" length="934"/>
     <elements xsi:type="railway:Segment" id="611" monitoredBy="//@regions.3/@sensors.61" connectsTo="//@regions.3/@elements.322" length="971"/>
     <elements xsi:type="railway:Segment" id="612" monitoredBy="//@regions.3/@sensors.61" connectsTo="//@regions.3/@elements.323" length="-902"/>
@@ -684,7 +684,7 @@
     <elements xsi:type="railway:Segment" id="651" monitoredBy="//@regions.4/@sensors.4" connectsTo="//@regions.4/@elements.23" length="135"/>
     <elements xsi:type="railway:Segment" id="652" monitoredBy="//@regions.4/@sensors.4" connectsTo="//@regions.4/@elements.24" length="345"/>
     <elements xsi:type="railway:Segment" id="653" monitoredBy="//@regions.4/@sensors.4" connectsTo="//@regions.4/@elements.25" length="493"/>
-    <elements xsi:type="railway:Segment" id="654" monitoredBy="//@regions.4/@sensors.4" connectsTo="//@regions.4/@elements.26" length="922"/>
+    <elements xsi:type="railway:Segment" id="654" monitoredBy="//@regions.4/@sensors.4" length="922"/>
     <elements xsi:type="railway:Segment" id="655" monitoredBy="//@regions.4/@sensors.4" connectsTo="//@regions.4/@elements.27" length="943"/>
     <elements xsi:type="railway:Segment" id="657" monitoredBy="//@regions.4/@sensors.5" connectsTo="//@regions.4/@elements.28" length="639"/>
     <elements xsi:type="railway:Segment" id="658" monitoredBy="//@regions.4/@sensors.5" connectsTo="//@regions.4/@elements.29" length="168"/>
@@ -744,7 +744,7 @@
     <elements xsi:type="railway:Segment" id="724" monitoredBy="//@regions.4/@sensors.15" connectsTo="//@regions.4/@elements.83" length="331"/>
     <elements xsi:type="railway:Segment" id="725" monitoredBy="//@regions.4/@sensors.15" connectsTo="//@regions.4/@elements.84" length="407"/>
     <elements xsi:type="railway:Segment" id="726" monitoredBy="//@regions.4/@sensors.15" connectsTo="//@regions.4/@elements.85" length="500"/>
-    <elements xsi:type="railway:Segment" id="728" monitoredBy="//@regions.4/@sensors.16" connectsTo="//@regions.4/@elements.86" length="54"/>
+    <elements xsi:type="railway:Segment" id="728" monitoredBy="//@regions.4/@sensors.16" length="54"/>
     <elements xsi:type="railway:Segment" id="729" monitoredBy="//@regions.4/@sensors.16" connectsTo="//@regions.4/@elements.87" length="683"/>
     <elements xsi:type="railway:Segment" id="730" monitoredBy="//@regions.4/@sensors.16" connectsTo="//@regions.4/@elements.88" length="50"/>
     <elements xsi:type="railway:Segment" id="731" monitoredBy="//@regions.4/@sensors.16" connectsTo="//@regions.4/@elements.89" length="633"/>
