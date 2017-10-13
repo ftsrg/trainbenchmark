@@ -18,11 +18,23 @@ import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfig;
 import hu.bme.mit.trainbenchmark.benchmark.jena.config.JenaBenchmarkConfigBuilder;
 import hu.bme.mit.trainbenchmark.benchmark.rdf.tests.RdfTest;
 import hu.bme.mit.trainbenchmark.benchmark.runcomponents.BenchmarkResult;
+import hu.bme.mit.trainbenchmark.rdf.RdfFormat;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
+
 @RunWith(Parameterized.class)
 public class JenaTest extends RdfTest {
+
+	@Parameterized.Parameters(name="inferencing={0}, format={1}")
+	public static Iterable<? extends Object[]> data() {
+		return Arrays.asList(new Object[][]{ //
+			{ true,  RdfFormat.TURTLE   }, //
+			{ false, RdfFormat.TURTLE   }, //
+			{ false, RdfFormat.NTRIPLES }, //
+		});
+	}
 
 	@Override
 	protected BenchmarkResult runTest(final BenchmarkConfigBase bcb) throws Exception {

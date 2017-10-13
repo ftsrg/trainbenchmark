@@ -11,19 +11,18 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.jena.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
-
-import java.io.IOException;
-import java.util.Collection;
-
+import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
+import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchSetMatch;
+import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
-import hu.bme.mit.trainbenchmark.benchmark.jena.driver.JenaDriver;
-import hu.bme.mit.trainbenchmark.benchmark.jena.matches.JenaSwitchSetMatch;
-import hu.bme.mit.trainbenchmark.benchmark.jena.transformations.JenaTransformation;
+import java.io.IOException;
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.rdf.RdfConstants.BASE_PREFIX;
 
 public class JenaTransformationRepairSwitchSet extends JenaTransformation<JenaSwitchSetMatch> {
 
