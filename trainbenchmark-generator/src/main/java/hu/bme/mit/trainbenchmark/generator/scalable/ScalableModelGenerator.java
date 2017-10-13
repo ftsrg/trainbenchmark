@@ -44,7 +44,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 
 	protected static final int MAX_SEGMENT_LENGTH = 1000;
 	protected static final int PERCENTAGE_BASE = 100;
-	protected static final int THOUSANDTH_BASE = 100;
+	protected static final int THOUSANDTH_BASE = 1000;
 
 	protected int maxSegments = 5;
 	protected int maxRoutes;
