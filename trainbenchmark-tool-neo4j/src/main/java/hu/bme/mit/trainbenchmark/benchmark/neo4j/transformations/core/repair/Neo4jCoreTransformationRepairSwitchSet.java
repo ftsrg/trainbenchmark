@@ -11,15 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-
-import java.util.Collection;
-
-import org.neo4j.graphdb.Node;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSwitchSetMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
+import org.neo4j.graphdb.Node;
+import org.neo4j.kernel.api.exceptions.KernelException;
+
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
 
 public class Neo4jCoreTransformationRepairSwitchSet extends Neo4jCoreTransformation<Neo4jSwitchSetMatch> {
 
@@ -28,7 +28,7 @@ public class Neo4jCoreTransformationRepairSwitchSet extends Neo4jCoreTransformat
 	}
 
 	@Override
-	public void activate(final Collection<Neo4jSwitchSetMatch> matches) {
+	public void activate(final Collection<Neo4jSwitchSetMatch> matches) throws KernelException {
 		for (final Neo4jSwitchSetMatch sstm : matches) {
 			final Node sw = sstm.getSw();
 			final String position = sstm.getPosition();

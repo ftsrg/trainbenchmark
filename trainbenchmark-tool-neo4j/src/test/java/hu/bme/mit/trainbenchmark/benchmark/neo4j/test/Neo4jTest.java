@@ -34,14 +34,14 @@ public class Neo4jTest extends TrainBenchmarkTest {
 	@Parameters(name = "deployment={0}, engine={1}, format={2}")
 	public static Iterable<? extends Object[]> data() {
 		return Arrays.asList(new Object[][]{ //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CSV     }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CSV     }, //
+			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CSV     }, //
+			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CSV     }, //
 			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
 			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
-			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
-			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
+//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngöine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
+//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
 //			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
+//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
 		});
 	}
 

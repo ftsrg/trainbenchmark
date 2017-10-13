@@ -14,13 +14,13 @@ package hu.bme.mit.trainbenchmark.benchmark.neo4j.driver;
 import apoc.export.graphml.ExportGraphML;
 import apoc.graph.Graphs;
 import hu.bme.mit.trainbenchmark.benchmark.driver.Driver;
-import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jDeployment;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jMatch;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
 import hu.bme.mit.trainbenchmark.neo4j.apoc.ApocHelper;
+import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jDeployment;
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jGraphFormat;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -227,9 +227,10 @@ public class Neo4jDriver extends Driver {
 		return graphDb;
 	}
 
-	public Integer generateNewVertexId() {
-		final String GET_MAX_ID_QUERY = "MATCH (n) RETURN max(n.id) AS max";
-		return (Integer) graphDb.execute(GET_MAX_ID_QUERY).next().get("max");
+	public Long generateNewVertexId() {
+		// Cypher's toInteger returns a Long
+		final String GET_MAX_ID_QUERY = "MATCH (n) RETURN toInteger(max(n.id)) AS max";
+		return (Long) graphDb.execute(GET_MAX_ID_QUERY).next().get("max");
 	}
 
 }

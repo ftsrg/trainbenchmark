@@ -11,14 +11,14 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.core.repair;
 
-import java.util.Collection;
-
-import org.neo4j.graphdb.Node;
-
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jCoreTransformation;
 import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.Node;
+
+import java.util.Collection;
 
 public class Neo4jCoreTransformationRepairSemaphoreNeighbor extends Neo4jCoreTransformation<Neo4jSemaphoreNeighborMatch> {
 
@@ -31,7 +31,9 @@ public class Neo4jCoreTransformationRepairSemaphoreNeighbor extends Neo4jCoreTra
 		for (final Neo4jSemaphoreNeighborMatch snm : matches) {
 			final Node semaphore = snm.getSemaphore();
 			final Node route2 = snm.getRoute2();
-			route2.createRelationshipTo(semaphore, Neo4jConstants.relationshipTypeEntry);
+			if (!route2.hasRelationship(Direction.OUTGOING, Neo4jConstants.relationshipTypeEntry)) {
+				route2.createRelationshipTo(semaphore, Neo4jConstants.relationshipTypeEntry);
+			}
 		}
 	}
 

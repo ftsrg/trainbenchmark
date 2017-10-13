@@ -11,15 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.repair;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-
-import java.util.Collection;
-
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.driver.GraphDriver;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.matches.TinkerGraphSemaphoreNeighborMatch;
 import hu.bme.mit.trainbenchmark.benchmark.tinkergraph.transformations.TinkerGraphTransformation;
+import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+import java.util.Collection;
+
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
 
 public class TinkerGraphTransformationRepairSemaphoreNeighbor<TTinkerGraphDriver extends GraphDriver>
 		extends TinkerGraphTransformation<TinkerGraphSemaphoreNeighborMatch, TTinkerGraphDriver> {
@@ -33,7 +33,9 @@ public class TinkerGraphTransformationRepairSemaphoreNeighbor<TTinkerGraphDriver
 		for (final TinkerGraphSemaphoreNeighborMatch snm : matches) {
 			final Vertex semaphore = snm.getSemaphore();
 			final Vertex route2 = snm.getRoute2();
-			route2.addEdge(ENTRY, semaphore);
+			if (!route2.edges(Direction.OUT, ENTRY).hasNext()) {
+				route2.addEdge(ENTRY, semaphore);
+			}
 		}
 	}
 
