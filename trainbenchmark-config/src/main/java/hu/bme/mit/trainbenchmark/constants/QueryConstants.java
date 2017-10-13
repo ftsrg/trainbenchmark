@@ -33,7 +33,11 @@ public class QueryConstants {
 	public static final String VAR_SENSOR1 = "sensor1";
 	public static final String VAR_SENSOR2 = "sensor2";
 	public static final String VAR_SW = "sw";
+	public static final String VAR_SW1 = "sw1";
+	public static final String VAR_SW2 = "sw2";
 	public static final String VAR_SWP = "swP";
+	public static final String VAR_SWP1 = "swP1";
+	public static final String VAR_SWP2 = "swP2";
 	public static final String VAR_TE1 = "te1";
 	public static final String VAR_TE2 = "te2";
 

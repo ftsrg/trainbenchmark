@@ -4,6 +4,7 @@ public enum RailwayOperation {
 	// well-formedness constraint operations (query only)
 	CONNECTEDSEGMENTS("ConnectedSegments"), //
 	POSLENGTH("PosLength"), //
+	ROUTEREACHABILITY("RouteReachability"), //
 	ROUTESENSOR("RouteSensor"), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor"), //
 	SWITCHMONITORED("SwitchMonitored"), //

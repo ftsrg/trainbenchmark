@@ -18,6 +18,7 @@ public enum RailwayQuery {
 	// well-formedness constraint queries (LHS for the Repair scenario)
 	CONNECTEDSEGMENTS("ConnectedSegments", CHECK), //
 	POSLENGTH("PosLength", CHECK), //
+	ROUTEREACHABILITY("RouteReachability", CHECK), //
 	ROUTESENSOR("RouteSensor", CHECK), //
 	SEMAPHORENEIGHBOR("SemaphoreNeighbor", CHECK), //
 	SWITCHMONITORED("SwitchMonitored", CHECK), //

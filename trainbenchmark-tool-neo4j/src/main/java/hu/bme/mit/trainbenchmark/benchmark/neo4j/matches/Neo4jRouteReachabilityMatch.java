@@ -11,16 +11,15 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.matches;
 
-import java.util.Map;
-
+import hu.bme.mit.trainbenchmark.benchmark.matches.RouteReachabilityMatch;
+import hu.bme.mit.trainbenchmark.constants.QueryConstants;
 import org.neo4j.graphdb.Node;
 
-import hu.bme.mit.trainbenchmark.benchmark.matches.RouteSensorMatch;
-import hu.bme.mit.trainbenchmark.constants.QueryConstants;
+import java.util.Map;
 
-public class Neo4jRouteSensorMatch extends Neo4jMatch implements RouteSensorMatch {
+public class Neo4jRouteReachabilityMatch extends Neo4jMatch implements RouteReachabilityMatch {
 
-	public Neo4jRouteSensorMatch(final Map<String, Object> match) {
+	public Neo4jRouteReachabilityMatch(final Map<String, Object> match) {
 		super(match);
 	}
 
@@ -30,18 +29,24 @@ public class Neo4jRouteSensorMatch extends Neo4jMatch implements RouteSensorMatc
 	}
 
 	@Override
-	public Node getSensor() {
-		return (Node) match.get(QueryConstants.VAR_SENSOR);
+	public Node getSwP1() {
+		return (Node) match.get(QueryConstants.VAR_SWP1);
 	}
 
 	@Override
-	public Node getSwP() {
-		return (Node) match.get(QueryConstants.VAR_SWP);
+	public Node getSwP2() {
+		return (Node) match.get(QueryConstants.VAR_SWP2);
 	}
 
 	@Override
-	public Node getSw() {
-		return (Node) match.get(QueryConstants.VAR_SW);
+	public Node getSw1() {
+		return (Node) match.get(QueryConstants.VAR_SW1);
 	}
+
+	@Override
+	public Node getSw2() {
+		return (Node) match.get(QueryConstants.VAR_SW2);
+	}
+
 
 }

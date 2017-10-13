@@ -232,6 +232,13 @@ public class Neo4jModelOperationFactory extends ModelOperationFactory<Neo4jMatch
 					return operation;
 				}
 
+				// RouteReachability
+				case ROUTEREACHABILITY: {
+					final ModelQuery<Neo4jRouteSensorMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ROUTEREACHABILITY);
+					final ModelOperation<Neo4jRouteSensorMatch, Neo4jDriver> operation = ModelOperation.of(query);
+					return operation;
+				}
+
 					// RouteSensor
 				case ROUTESENSOR: {
 					final ModelQuery<Neo4jRouteSensorMatch, Neo4jDriver> query = new Neo4jCypherQuery<>(driver, workspaceDir, RailwayQuery.ROUTESENSOR);

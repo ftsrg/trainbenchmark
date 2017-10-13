@@ -26,10 +26,10 @@ public abstract class TrainBenchmarkTest {
 	protected final int smallSize = 1;
 	protected final int largeSize = 2;
 
-	final BenchmarkConfigBaseBuilder bcbb = new BenchmarkConfigBaseBuilder().setBenchmarkId(benchmarkId)
+	protected final BenchmarkConfigBaseBuilder bcbb = new BenchmarkConfigBaseBuilder().setBenchmarkId(benchmarkId)
 			.setTimeout(timeout).setRuns(runs);
 
-	final BenchmarkConfigBaseBuilder bcbbTransformation = bcbb
+	protected final BenchmarkConfigBaseBuilder bcbbTransformation = bcbb
 			.setTransformationChangeSetStrategy(TransformationChangeSetStrategy.FIXED).setTransformationConstant(10)
 			.setQueryTransformationCount(2);
 
