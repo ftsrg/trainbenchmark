@@ -11,16 +11,16 @@
  *******************************************************************************/
 package hu.bme.mit.trainbenchmark.benchmark.sqlite.driver;
 
+import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import org.apache.commons.io.FileUtils;
-
-import hu.bme.mit.trainbenchmark.benchmark.sql.driver.SqlDriver;
 
 public class SQLiteDriver extends SqlDriver {
 
@@ -35,7 +35,7 @@ public class SQLiteDriver extends SqlDriver {
 		final Statement statement = connection.createStatement();
 		statement.setQueryTimeout(3600);
 
-		final String sql = FileUtils.readFileToString(new File(modelPath));
+		final String sql = FileUtils.readFileToString(new File(modelPath), StandardCharsets.UTF_8);
 		statement.executeUpdate(sql);
 
 		// create temporary table (used by the transformations)
