@@ -8,8 +8,7 @@ env:
 install: true
 script:
 - scripts/get-neo4j.sh
-- "./gradlew inits build -x :trainbenchmark-generator-sql:test -x :trainbenchmark-tool-mysql:test
-  --stacktrace --continue"
+- ./gradlew inits build -x :trainbenchmark-generator-sql:test -x :trainbenchmark-tool-mysql:test -x :trainbenchmark-tool-sqlite:test --stacktrace --continue
 - scripts/deploy.sh
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
