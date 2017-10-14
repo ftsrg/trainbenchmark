@@ -7,8 +7,8 @@ rm -rf deployed-content || exit 0
 mkdir deployed-content
 
 # copy model files (*.*), but not directories
-cp -r site/* deployed/content
-cp -r models/*.* deployed-content/models
+cp -r site/* deployed-content
+cp -r models/*.* deployed-content/models || true
 
 # go to the out directory and create a *new* Git repo
 cd deployed-content
