@@ -6,8 +6,9 @@ set -e # exit with nonzero exit code if anything fails
 rm -rf deployed-content || exit 0
 mkdir deployed-content
 
-# run our compile script, discussed above
-cp -r models/* deployed-content/ || true
+# copy model files (*.*), but not directories
+cp -r site/* deployed/content
+cp -r models/*.* deployed-content/models
 
 # go to the out directory and create a *new* Git repo
 cd deployed-content
