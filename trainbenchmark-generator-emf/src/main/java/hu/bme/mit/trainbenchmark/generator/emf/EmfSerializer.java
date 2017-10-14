@@ -173,7 +173,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 	}
 
 	private String keyValue(String key, Boolean value) {
-		return SEP + quote(key) + ": \"" + value.toString() + "\"";
+		return SEP + quote(key) + ": " + value.toString() + "";
 	}
 
 	private String keyValue(String key, int value) {
