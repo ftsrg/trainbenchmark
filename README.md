@@ -37,4 +37,4 @@
 ## License
 
 The project uses the Eclipse Public License 1.0 and was supported by the MONDO EU FP7 (EU ICT-611125) project.
-It is currently developed by the MTA-BME Lendület Research Group on Cyber-Physical Systems.
+It is primarily maintained by the MTA-BME Lendület Research Group on Cyber-Physical Systems.
