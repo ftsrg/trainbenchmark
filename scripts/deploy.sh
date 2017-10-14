@@ -4,11 +4,11 @@ set -e # exit with nonzero exit code if anything fails
 
 # clear and re-create the deployed-content directory
 rm -rf deployed-content || exit 0
-mkdir deployed-content
+mkdir -p deployed-content/models
 
 # copy model files (*.*), but not directories
 cp -r site/* deployed-content
-cp -r models/*.* deployed-content/models || true
+cp -r models/*.* deployed-content/models
 
 # go to the out directory and create a *new* Git repo
 cd deployed-content
