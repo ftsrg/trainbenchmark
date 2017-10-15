@@ -188,8 +188,7 @@ public class Neo4jGraphSerializer extends ModelSerializer<Neo4jGraphGeneratorCon
 	private void saveToGraphMl() throws KernelException {
 		ApocHelper.registerProcedure(graphDb, ExportGraphML.class, Graphs.class);
 
-		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + "."
-			+ Neo4jConstants.GRAPHML_EXTENSION;
+		final String fileName = gc.getConfigBase().getModelPathWithoutExtension() + Neo4jConstants.GRAPHML_POSTFIX;
 
 		try (final Transaction t = graphDb.beginTx()) {
 			graphDb.execute(String.format( //

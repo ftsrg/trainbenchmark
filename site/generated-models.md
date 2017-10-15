@@ -19,8 +19,8 @@ layout: default
 
 #### GraphML (Neo4j)
 
-{% for file in site.static_files %}{% if file.name contains ".graphml" %}{% unless file.name contains "-tinkerpop.graphml" %}* [{{ file.path | remove: "/models/railway-" }}]({{ site.baseurl }}{{ file.path }})
-{% endunless %}{% endif %}{% endfor %}
+{% for file in site.static_files %}{% if file.name contains "-neo4j.graphml" %}* [{{ file.path | remove: "/models/railway-" }}]({{ site.baseurl }}{{ file.path }})
+{% endif %}{% endfor %}
 
 #### GraphML (TinkerPop)
 

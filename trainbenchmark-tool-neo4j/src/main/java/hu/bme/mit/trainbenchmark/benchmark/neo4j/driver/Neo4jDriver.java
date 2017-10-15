@@ -196,7 +196,7 @@ public class Neo4jDriver extends Driver {
 		case CSV:
 			return ""; // hack as we have multiple CSVs
 		case GRAPHML:
-			return ".graphml";
+			return Neo4jConstants.GRAPHML_POSTFIX;
 		case CYPHER:
 			return ".cypher";
 		default:
