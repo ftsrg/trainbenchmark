@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.neo4j;
 
+import com.google.common.primitives.Ints;
 import hu.bme.mit.trainbenchmark.neo4j.config.Neo4jDeployment;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseBuilder;
@@ -25,6 +26,16 @@ public class Neo4jHelper {
 			.setConfig("apoc.export.file.enabled", "true")
 			.setConfig("apoc.import.file.enabled", "true")
 			.newGraphDatabase();
+	}
+
+	public static int numberToInt(Number n) {
+		if (n instanceof Integer) {
+			return (Integer) n;
+		} else if (n instanceof Long) {
+			return Ints.checkedCast((Long) n);
+		} else {
+			throw new IllegalStateException("Length should be int or long");
+		}
 	}
 
 }

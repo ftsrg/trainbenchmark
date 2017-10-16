@@ -36,14 +36,14 @@ public class Neo4jTest extends TrainBenchmarkTest {
 		return Arrays.asList(new Object[][]{ //
 			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CSV     }, //
 			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CSV     }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
-//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
-//			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
-//			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
+			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
+			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
 			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CORE_API, Neo4jGraphFormat.GRAPHML }, //
 			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CYPHER,   Neo4jGraphFormat.GRAPHML }, //
+//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
+//			{ Neo4jDeployment.EMBEDDED,  Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
+//			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CORE_API, Neo4jGraphFormat.CYPHER  }, //
+//			{ Neo4jDeployment.IN_MEMORY, Neo4jEngine.CYPHER,   Neo4jGraphFormat.CYPHER  }, //
 		});
 	}
 

@@ -12,23 +12,23 @@
 
 package hu.bme.mit.trainbenchmark.benchmark.neo4j.queries.api;
 
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
+import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
+import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Transaction;
-
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
-import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
-import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
-import hu.bme.mit.trainbenchmark.neo4j.Neo4jConstants;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.QueryConstants.VAR_SEGMENT;
 
 public class Neo4JApiQueryPosLength extends Neo4jApiQuery<Neo4jPosLengthMatch> {
 
@@ -45,7 +45,8 @@ public class Neo4JApiQueryPosLength extends Neo4jApiQuery<Neo4jPosLengthMatch> {
 			// (segment:Segment)
 			final Iterable<Node> segments = () -> graphDb.findNodes(Neo4jConstants.labelSegment);
 			for (final Node segment : segments) {
-				final Integer length = (Integer) segment.getProperty(LENGTH);
+				final Number lengthNumber = (Number) segment.getProperty(LENGTH);
+				final int length = Neo4jHelper.numberToInt(lengthNumber);
 
 				// segment.length <= 0
 				if (length <= 0) {

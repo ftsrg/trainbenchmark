@@ -15,6 +15,7 @@ import hu.bme.mit.trainbenchmark.benchmark.neo4j.driver.Neo4jDriver;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.matches.Neo4jPosLengthMatch;
 import hu.bme.mit.trainbenchmark.benchmark.neo4j.transformations.Neo4jApiTransformation;
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.neo4j.Neo4jHelper;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.NotFoundException;
 
@@ -31,7 +32,9 @@ public class Neo4jApiTransformationRepairPosLength extends Neo4jApiTransformatio
 		for (final Neo4jPosLengthMatch match : matches) {
 			final Node segment = match.getSegment();
 			try {
-				final Integer length = (Integer) segment.getProperty(ModelConstants.LENGTH);
+				final Number lengthNumber = (Number) segment.getProperty(ModelConstants.LENGTH);
+				final int length = Neo4jHelper.numberToInt(lengthNumber);
+
 				segment.setProperty(ModelConstants.LENGTH, -length + 1);
 			} catch (final NotFoundException e) {
 				// do nothing (node has been removed)
