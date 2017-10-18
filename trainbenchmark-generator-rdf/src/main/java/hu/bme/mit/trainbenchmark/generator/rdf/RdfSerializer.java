@@ -73,8 +73,7 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 
 	@Override
 	public Object createVertex(final int id, final String type, final Map<String, ? extends Object> attributes,
-			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {
-
+			final Map<String, Object> outgoingEdges, final Map<String, Object> incomingEdges) throws IOException {	
 		// vertex id and type
 		final String triple = String.format(":%s%d a :%s", ID_PREFIX, id, type);
 		final StringBuilder vertex = new StringBuilder(triple);
@@ -122,7 +121,11 @@ public class RdfSerializer extends ModelSerializer<RdfGeneratorConfig> {
 		}
 
 		vertex.append(" .");
-		write(vertex.toString());
+		if ("Allocation".equals(type) || "ComputingModule".equals(type)) {
+			// dont print
+		} else {
+			write(vertex.toString());
+		}
 
 		// ()-[]->(id) edges
 		for (final Entry<String, Object> incomingEdge : incomingEdges.entrySet()) {

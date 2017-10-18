@@ -18,7 +18,7 @@ public abstract class GeneratorTest {
 
 	@Parameters(name = "size={0}")
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList(1, 2);
+		return Arrays.asList(1, 2, 4, 8, 16, 32, 64, 128);
 	}
 
 	@Parameter

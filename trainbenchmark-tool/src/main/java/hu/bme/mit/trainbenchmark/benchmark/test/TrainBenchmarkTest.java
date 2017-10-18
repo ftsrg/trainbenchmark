@@ -3,6 +3,7 @@ package hu.bme.mit.trainbenchmark.benchmark.test;
 import java.util.List;
 
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -41,7 +42,7 @@ public abstract class TrainBenchmarkTest {
 
 	// batch
 
-	@Test
+	@Ignore@Test
 	public void batchTest() throws Exception {
 		// Arrange
 		final String workload = "BatchModelTest";
@@ -76,7 +77,7 @@ public abstract class TrainBenchmarkTest {
 	public void injectTest() throws Exception {
 		// Arrange
 		final String workload = "InjectTest";
-		final String modelFilename = "railway-inject-" + smallSize;
+		final String modelFilename = "railway-inject-8";
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS, //
 				RailwayOperation.POSLENGTH, //
@@ -123,7 +124,7 @@ public abstract class TrainBenchmarkTest {
 
 	// repair
 
-	@Test
+	@Ignore@Test
 	public void repairTest() throws Exception {
 		// Arrange
 		final String workload = "RepairTest";
@@ -158,7 +159,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHSET).get(1), Matchers.equalTo(3));
 	}
 
-	@Test
+	@Ignore@Test
 	public void connectedSegmentsRepairTest() throws Exception {
 		// Arrange
 		final String workload = "ConnectedSegmentsRepairTest";
@@ -178,7 +179,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(1));
 	}
 
-	@Test
+	@Ignore@Test
 	public void posLengthRepairTest() throws Exception {
 		// Arrange
 		final String workload = "PosLengthRepairTest";
@@ -198,7 +199,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(1), Matchers.equalTo(228));
 	}
 
-	@Test
+	@Ignore@Test
 	public void routeSensorRepairTest() throws Exception {
 		// Arrange
 		final String workload = "RouteSensorRepairTest";
@@ -218,7 +219,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(41));
 	}
 
-	@Test
+	@Ignore@Test
 	public void semaphoreNeighborRepairTest() throws Exception {
 		// Arrange
 		final String workload = "SemaphoreNeighborRepairTest";
@@ -238,7 +239,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(0));
 	}
 
-	@Test
+	@Ignore@Test
 	public void switchMonitoredRepairTest() throws Exception {
 		// Arrange
 		final String workload = "SwitchMonitoredRepairTest";
@@ -258,7 +259,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(1), Matchers.equalTo(0));
 	}
 
-	@Test
+	@Ignore@Test
 	public void switchSetRepairTest() throws Exception {
 		// Arrange
 		final String workload = "SwitchSetRepairTest";
@@ -280,7 +281,7 @@ public abstract class TrainBenchmarkTest {
 
 	// inject
 
-	@Test
+	@Ignore@Test
 	public void connectedSegmentsInjectTest() throws Exception {
 		// Arrange
 		final String modelFilename = "railway-inject-" + largeSize;
@@ -301,7 +302,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(28));
 	}
 
-	@Test
+	@Ignore@Test
 	public void posLengthInjectTest() throws Exception {
 		// Arrange
 		final String modelFilename = "railway-inject-" + largeSize;
@@ -322,7 +323,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.POSLENGTH).get(1), Matchers.equalTo(54));
 	}
 
-	@Test
+	@Ignore@Test
 	public void routeSensorInjectTest() throws Exception {
 		// Arrange
 		final String modelFilename = "railway-inject-" + largeSize;
@@ -343,7 +344,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.ROUTESENSOR).get(1), Matchers.equalTo(26));
 	}
 
-	@Test
+	@Ignore@Test
 	public void semaphoreNeighborInjectTest() throws Exception {
 		// Arrange
 		final String modelFilename = "railway-inject-" + largeSize;
@@ -364,7 +365,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(1), Matchers.equalTo(45));
 	}
 
-	@Test
+	@Ignore@Test
 	public void switchMonitoredInjectTest() throws Exception {
 		// Arrange
 		final String modelFilename = "railway-inject-" + largeSize;
@@ -385,7 +386,7 @@ public abstract class TrainBenchmarkTest {
 		collector.checkThat(allMatches.get(RailwayQuery.SWITCHMONITORED).get(1), Matchers.equalTo(10));
 	}
 
-	@Test
+	@Ignore@Test
 	public void switchSetInjectTest() throws Exception {
 		// Arrange
 		final String modelFilename = "railway-inject-" + largeSize;

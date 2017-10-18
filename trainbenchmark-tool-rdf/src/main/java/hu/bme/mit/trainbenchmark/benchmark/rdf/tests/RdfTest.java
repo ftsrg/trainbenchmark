@@ -14,7 +14,7 @@ public abstract class RdfTest extends TrainBenchmarkTest {
 
 	@Parameters(name="inferencing={0}")
 	public static Iterable<? extends Object> data() {
-		return Arrays.asList(false, true);
+		return Arrays.asList(false);
 	}
 
 	@Parameter
