@@ -4,9 +4,9 @@ To try out new queries, it is recommended to use an interactive UI, such as Neo4
 
 ## Experimenting using the Neo4j database
 
-Download and unzip [Neo4j](http://neo4j.com/).
+Download, unzip [Neo4j](http://neo4j.com/), start and visit <http://localhost:7474/>.
 
-To conveniently load models, use the APOC library. Get the latest JAR from the [APOC releases](https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases) and copy it to the `neo4j/plugins` directory.
+To load models conveniently, use the APOC library. Get the latest JAR from the [APOC releases](https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases) and copy it to the `neo4j/plugins` directory.
 
 Edit the `neo4j/conf/neo4j.conf` file and add the following lines:
 
@@ -32,3 +32,5 @@ MATCH (n)
 RETURN n
 LIMIT 25
 ```
+
+It's possible to provide parameters on the Neo4j browser's web UI. To see how, type `:help param`.
