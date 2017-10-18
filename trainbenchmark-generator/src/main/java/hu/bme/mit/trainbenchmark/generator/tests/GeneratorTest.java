@@ -2,6 +2,7 @@ package hu.bme.mit.trainbenchmark.generator.tests;
 
 import java.util.Arrays;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -28,7 +29,7 @@ public abstract class GeneratorTest {
 
 	public abstract void generate(final GeneratorConfigBase gcb) throws Exception;
 
-	@Test
+	@Ignore@Test
 	public void generateBatch() throws Exception {
 		final Scenario scenario = Scenario.BATCH;
 		final GeneratorConfigBase gcb = new GeneratorConfigBaseBuilder().setScenario(scenario).setSize(size).createGeneratorConfigBase();
@@ -42,7 +43,7 @@ public abstract class GeneratorTest {
 		generate(gcb);
 	}
 
-	@Test
+	@Ignore@Test
 	public void generateRepair() throws Exception {
 		final Scenario scenario = Scenario.REPAIR;
 		final GeneratorConfigBase gcb = new GeneratorConfigBaseBuilder().setScenario(scenario).setSize(size).createGeneratorConfigBase();

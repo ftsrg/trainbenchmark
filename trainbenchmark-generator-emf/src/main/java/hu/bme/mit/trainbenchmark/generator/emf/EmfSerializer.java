@@ -12,7 +12,48 @@
 
 package hu.bme.mit.trainbenchmark.generator.emf;
 
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ALLOCATION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.COMPUTING_MODULE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REGION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
+import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import org.apache.commons.io.FileUtils;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
 import com.google.common.collect.ImmutableList;
+
 import hu.bme.mit.trainbenchmark.constants.ModelConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfConstants;
 import hu.bme.mit.trainbenchmark.emf.EmfUtil;
@@ -31,46 +72,6 @@ import hu.bme.mit.trainbenchmark.railway.Semaphore;
 import hu.bme.mit.trainbenchmark.railway.Sensor;
 import hu.bme.mit.trainbenchmark.railway.Switch;
 import hu.bme.mit.trainbenchmark.railway.SwitchPosition;
-import org.apache.commons.io.FileUtils;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ALLOCATION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.COMPUTING_MODULE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ELEMENTS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ENTRY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.EXIT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.FOLLOWS;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.LENGTH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.MONITORED_BY;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.POSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REGION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.REQUIRES;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ROUTE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEGMENT;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SEMAPHORE;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SENSOR;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
-import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
 
 public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 
@@ -285,7 +286,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 				break;
 			case ModelConstants.SENSOR:
 				Sensor sensor = (Sensor) o;
-				props += keyValue(ELEMENTS, sensor.getMonitors());
+				props += keyValue("monitors", sensor.getMonitors());
 				break;
 			case ModelConstants.SWITCH:
 				Switch sw = (Switch) o;

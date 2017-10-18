@@ -94,7 +94,7 @@ public class ScalableModelGenerator extends ModelGenerator {
 		return random.nextInt(100);
 	}
 
-	final int moduleCount = 6;
+	final int moduleCount = 1;
 	protected Random allocationRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED);
 	final boolean randomAllocation = false;
 
