@@ -1,5 +1,6 @@
 package hu.bme.mit.trainbenchmark.benchmark.test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -7,6 +8,10 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
@@ -19,7 +24,16 @@ import hu.bme.mit.trainbenchmark.config.ExecutionConfig;
 import hu.bme.mit.trainbenchmark.constants.RailwayOperation;
 import hu.bme.mit.trainbenchmark.constants.RailwayQuery;
 
+@RunWith(Parameterized.class)
 public abstract class TrainBenchmarkTest {
+
+	@Parameters(name="size={0}")
+	public static Iterable<? extends Object> data() {
+		return Arrays.asList(1, 2, 4, 8, 16, 32, 64, 128);
+	}
+
+	@Parameter
+	public int size;
 
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
@@ -77,7 +91,7 @@ public abstract class TrainBenchmarkTest {
 	public void injectTest() throws Exception {
 		// Arrange
 		final String workload = "InjectTest";
-		final String modelFilename = "railway-inject-8";
+		final String modelFilename = "railway-inject-" + size;
 		final List<RailwayOperation> operations = ImmutableList.of(//
 				RailwayOperation.CONNECTEDSEGMENTS, //
 				RailwayOperation.POSLENGTH, //
@@ -101,12 +115,14 @@ public abstract class TrainBenchmarkTest {
 		// Assert
 		final ListMultimap<RailwayQuery, Integer> allMatches = result.getLastRunResult().getMatches();
 		
+		System.out.println("===== " + size + " =====");
 		System.out.println(RailwayQuery.CONNECTEDSEGMENTS + ": " + allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0));
 		System.out.println(RailwayQuery.POSLENGTH         + ": " + allMatches.get(RailwayQuery.POSLENGTH).get(0));
 		System.out.println(RailwayQuery.ROUTESENSOR       + ": " + allMatches.get(RailwayQuery.ROUTESENSOR).get(0));
 		System.out.println(RailwayQuery.SEMAPHORENEIGHBOR + ": " + allMatches.get(RailwayQuery.SEMAPHORENEIGHBOR).get(0));
 		System.out.println(RailwayQuery.SWITCHMONITORED   + ": " + allMatches.get(RailwayQuery.SWITCHMONITORED).get(0));
 		System.out.println(RailwayQuery.SWITCHSET         + ": " + allMatches.get(RailwayQuery.SWITCHSET).get(0));
+		System.out.println();
 		
 //		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(0), Matchers.equalTo(8));
 //		collector.checkThat(allMatches.get(RailwayQuery.CONNECTEDSEGMENTS).get(1), Matchers.equalTo(18));

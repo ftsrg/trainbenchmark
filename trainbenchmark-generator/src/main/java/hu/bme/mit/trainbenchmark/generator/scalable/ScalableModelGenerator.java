@@ -1,24 +1,5 @@
 package hu.bme.mit.trainbenchmark.generator.scalable;
 
-import com.google.common.collect.ImmutableMap;
-import hu.bme.mit.trainbenchmark.constants.ModelConstants;
-import hu.bme.mit.trainbenchmark.constants.Position;
-import hu.bme.mit.trainbenchmark.constants.Signal;
-import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
-import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
-import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
-import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.ACTIVE;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CONNECTS_TO;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.CURRENTPOSITION;
@@ -42,6 +23,26 @@ import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SIGNAL;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCH;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.SWITCHPOSITION;
 import static hu.bme.mit.trainbenchmark.constants.ModelConstants.TARGET;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableMap;
+
+import hu.bme.mit.trainbenchmark.constants.ModelConstants;
+import hu.bme.mit.trainbenchmark.constants.Position;
+import hu.bme.mit.trainbenchmark.constants.Signal;
+import hu.bme.mit.trainbenchmark.constants.TrainBenchmarkConstants;
+import hu.bme.mit.trainbenchmark.generator.ModelGenerator;
+import hu.bme.mit.trainbenchmark.generator.ModelSerializer;
+import hu.bme.mit.trainbenchmark.generator.config.GeneratorConfig;
 
 public class ScalableModelGenerator extends ModelGenerator {
 
@@ -93,9 +94,9 @@ public class ScalableModelGenerator extends ModelGenerator {
 		return random.nextInt(100);
 	}
 
-	final int moduleCount = 1;
+	final int moduleCount = 6;
 	protected Random allocationRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED);
-	final boolean randomAllocation = false;
+	final boolean randomAllocation = true;
 
 	private void setAllocation(List<Object> allocations, int i, Object o) throws IOException {
 		Object allocation;
