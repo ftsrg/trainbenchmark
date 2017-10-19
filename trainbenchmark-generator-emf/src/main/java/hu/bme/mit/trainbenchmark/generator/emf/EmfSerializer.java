@@ -287,6 +287,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 			case ModelConstants.SENSOR:
 				Sensor sensor = (Sensor) o;
 				props += keyValue("monitors", sensor.getMonitors());
+				props += keyValue("requiredBy", sensor.getRequiredBy());
 				break;
 			case ModelConstants.SWITCH:
 				Switch sw = (Switch) o;
