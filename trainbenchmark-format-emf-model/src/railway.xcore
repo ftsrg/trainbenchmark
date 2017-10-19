@@ -25,13 +25,14 @@ class Region extends RailwayElement {
 class Route extends RailwayElement {
 	boolean active
 	contains SwitchPosition[] follows opposite route
-	refers Sensor[2..*] requires
+	refers Sensor[2..*] requires opposite requiredBy
 	refers Semaphore entry
 	refers Semaphore exit
 }
 
 class Sensor extends RailwayElement {
 	refers TrackElement[] monitors opposite monitoredBy
+	refers Route[] requiredBy opposite requires
 }
 
 abstract class TrackElement extends RailwayElement {
