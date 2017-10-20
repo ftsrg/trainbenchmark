@@ -94,18 +94,22 @@ public class ScalableModelGenerator extends ModelGenerator {
 		return random.nextInt(100);
 	}
 
-	final int moduleCount = 1;
-	protected Random allocationRandom = new Random(TrainBenchmarkConstants.RANDOM_SEED);
-	final boolean randomAllocation = false;
+	final int moduleCount = 6;
+	final int regionsAndRoutes = 1;
+	final boolean alternateAllocation = true;
 
 	private void setAllocation(List<Object> allocations, int i, Object o) throws IOException {
 		Object allocation;
-		if (randomAllocation) {
-			// select randomly
-			allocation = allocations.get(allocationRandom.nextInt(moduleCount));
+		if (alternateAllocation) {
+			// select based on type
+			if(o.getClass().getSimpleName().contains("Route") || o.getClass().getSimpleName().contains("Semaphore") || o.getClass().getSimpleName().contains("Region") ) {
+				allocation = allocations.get(i % regionsAndRoutes);				
+			} else {
+				allocation = allocations.get(i % (moduleCount-regionsAndRoutes) + regionsAndRoutes);								
+			}
 		} else {
 			// select based on route/region
-			allocation = allocations.get(i % moduleCount);
+			allocation = allocations.get((i % moduleCount-3) + 3);
 		}
 
 		// add edge
