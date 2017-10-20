@@ -162,6 +162,7 @@ public class EmfSerializer extends ModelSerializer<EmfGeneratorConfig> {
 			for (final String line : lines) {
 				w.write(line + "\n");
 			}
+			w.close();
 		}
 	}
 
