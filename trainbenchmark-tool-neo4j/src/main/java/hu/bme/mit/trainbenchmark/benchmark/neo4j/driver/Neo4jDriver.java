@@ -46,15 +46,30 @@ public class Neo4jDriver extends Driver {
 
 	protected Transaction tx;
 	protected GraphDatabaseService graphDb;
-	protected final File databaseDirectory;
 	protected final Neo4jDeployment deployment;
 	protected final Neo4jGraphFormat graphFormat;
+	protected final String NEO4J_HOME = "../neo4j-server/";
+	protected final File databaseDirectory;
+
 
 	public Neo4jDriver(final String modelDir, final Neo4jDeployment deployment, final Neo4jGraphFormat graphFormat) throws IOException {
 		super();
 		this.deployment = deployment;
 		this.graphFormat = graphFormat;
-		this.databaseDirectory = new File(modelDir + "/neo4j-dbs/railway-database");
+
+		final String dbPath;
+		switch (graphFormat) {
+			case CSV:
+				dbPath = NEO4J_HOME + "data/databases/railway-database";
+				break;
+			case GRAPHML:
+			case CYPHER:
+				dbPath = modelDir + "/neo4j-dbs/railway-database";
+				break;
+			default:
+				throw new IllegalStateException("Graph format " + graphFormat + " not supported.");
+		}
+		this.databaseDirectory = new File(dbPath);
 	}
 
 	@Override
@@ -123,20 +138,14 @@ public class Neo4jDriver extends Driver {
 	}
 
 	private void readCsv(String modelPath) throws IOException {
-		final String neo4jHome = "../neo4j-server";
-		final String dbPath =    "../models/neo4j-dbs/railway-database";
-		final File databaseDirectory = new File(dbPath);
-
 		if (databaseDirectory.exists()) {
 		  FileUtils.deleteDirectory(databaseDirectory);
 		}
 
-		// TODO neo4j-import is deprecated and should be changed to neo4j-admin import
-		// however, it's not trivial as neo4j-admin-import does not take an `--into` argument
-		// but a `--database`
-		final String rawImportCommand = "%NEO4J_HOME%/bin/neo4j-import " //
-			+ "--into %DB_PATH% " //
-			+ "--id-type INTEGER " //
+		final String rawImportCommand = "%NEO4J_HOME%/bin/neo4j-admin import " //
+			+ "--mode=csv " //
+			+ "--database=railway-database " //
+			+ "--id-type=INTEGER " //
 		    + "--nodes:Region %MODEL_PREFIX%-Region.csv " //
 		    + "--nodes:Route %MODEL_PREFIX%-Route.csv " //
 		    + "--nodes:Segment:TrackElement %MODEL_PREFIX%-Segment.csv " //
@@ -152,8 +161,8 @@ public class Neo4jDriver extends Driver {
 		    + "--relationships:requires %MODEL_PREFIX%-requires.csv "//
 		    + "--relationships:target %MODEL_PREFIX%-target.csv";
 		final String importCommand = rawImportCommand //
-		    .replaceAll("%NEO4J_HOME%", neo4jHome) //
-		    .replaceAll("%DB_PATH%", dbPath) //
+		    .replaceAll("%NEO4J_HOME%", NEO4J_HOME) //
+		    .replaceAll("%DB_PATH%", databaseDirectory.getPath()) //
 		    .replaceAll("%MODEL_PREFIX%", modelPath);
 		final CommandLine cmdLine = CommandLine.parse(importCommand);
 		final DefaultExecutor executor = new DefaultExecutor();
