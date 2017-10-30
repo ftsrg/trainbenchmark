@@ -38,7 +38,7 @@
    id="svg7626"
    inkscape:version="0.91 r13725"
    sodipodi:docname="railway-containments.svg"
-   inkscape:export-filename="/home/szarnyasg/git/trainbenchmark/docs/railway-containments.svg.png"
+   inkscape:export-filename="/home/szarnyasg/git/trainbenchmark/docs/railway-containments.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <metadata
@@ -66,9 +66,9 @@
      inkscape:window-height="973"
      id="namedview8262"
      showgrid="false"
-     inkscape:zoom="1.0488127"
-     inkscape:cx="379"
-     inkscape:cy="252.2466"
+     inkscape:zoom="1"
+     inkscape:cx="379.17486"
+     inkscape:cy="159.21209"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -974,7 +974,7 @@
      clip-path="url(#clipPath5)"
      xml:space="preserve"
      id="text7950"
-     style="font-size:medium;fill:#404040;stroke:none;stroke-width:1.10000002;stroke-linecap:butt">length : EInt</text>
+     style="font-size:medium;fill:#404040;stroke:none;stroke-width:1.10000002;stroke-linecap:butt">length : Int</text>
   <line
      clip-path="url(#clipPath6)"
      x1="559"
@@ -2188,7 +2188,7 @@
      clip-path="url(#clipPath24-3)"
      xml:space="preserve"
      id="text8014-1"
-     style="font-size:medium;fill:#404040;stroke:none;stroke-width:1.10000002;stroke-linecap:butt">active : EBoolean</text>
+     style="font-size:medium;fill:#404040;stroke:none;stroke-width:1.10000002;stroke-linecap:butt">active : Boolean</text>
   <line
      transform="matrix(0.72192206,0,0,1,38.857722,-180.07213)"
      clip-path="url(#clipPath25-7)"
