@@ -4,3 +4,4 @@
 * [How to run the benchmark](how-to-run-the-benchmark.md)
 * [Developer Guide](developer-guide.md)
 * [Experimenting](experimenting.md)
+* [Schema](schema.md)

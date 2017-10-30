@@ -37,7 +37,10 @@
    stroke-opacity="1"
    id="svg7626"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="railway-containments.svg">
+   sodipodi:docname="railway-containments.svg"
+   inkscape:export-filename="/home/szarnyasg/git/trainbenchmark/docs/railway-containments.svg.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <metadata
      id="metadata8264">
     <rdf:RDF>
@@ -46,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
