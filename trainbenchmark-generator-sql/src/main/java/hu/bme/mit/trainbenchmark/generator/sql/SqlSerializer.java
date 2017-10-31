@@ -107,11 +107,12 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		MySqlProcess.runShell(String.format("mysql -u %s < %s", SqlConstants.USER, sqlRawPath));
 
 		final String mySqlDumpCommandBase = //
-			"mysqldump -u " + SqlConstants.USER + " trainbenchmark --skip-dump-date --skip-comments --default-character-set=utf8";
+			"mysqldump -u " + SqlConstants.USER + " --skip-dump-date --skip-comments --default-character-set=utf8";
 
 		// dump to standard MySQL format
 		final String mySqlDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-mysql.sql";
-		final String mySqlDumpCommand = mySqlDumpCommandBase + " > " + mySqlDumpPath;
+		final String mySqlDumpCommand = mySqlDumpCommandBase + //
+			" --database trainbenchmark > " + mySqlDumpPath;
 		MySqlProcess.runShell(mySqlDumpCommand);
 
 		// dump to CSV format
@@ -122,7 +123,8 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		csvDumpDirectory.setReadable(true, false);
 		csvDumpDirectory.setWritable(true, false);
 
-		final String csvDumpCommand = mySqlDumpCommandBase + " --fields-terminated-by=, --tab=\"" + csvDumpPath + "\"";
+		final String csvDumpCommand = mySqlDumpCommandBase + //
+			" --fields-terminated-by=, --tab=\"" + csvDumpPath + "\" trainbenchmark";
 		MySqlProcess.runShell(csvDumpCommand);
 
 		// convert MySQL dump to SQLite-compatible format
