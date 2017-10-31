@@ -106,14 +106,28 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		log("Loading the raw model");
 		MySqlProcess.runShell(String.format("mysql -u %s < %s", SqlConstants.USER, sqlRawPath));
 
+		final String mySqlDumpCommandBase = //
+			"mysqldump -u " + SqlConstants.USER + " trainbenchmark --skip-dump-date --skip-comments --default-character-set=utf8";
+
 		// dump to standard MySQL format
 		final String mySqlDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-mysql.sql";
-		final String mySqlCommandDump = "mysqldump -u " + SqlConstants.USER + " --databases trainbenchmark --skip-dump-date --skip-comments > " + mySqlDumpPath;
-		MySqlProcess.runShell(mySqlCommandDump);
+		final String mySqlDumpCommand = mySqlDumpCommandBase + " > " + mySqlDumpPath;
+		MySqlProcess.runShell(mySqlDumpCommand);
+
+		// dump to CSV format
+		final String csvDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-csv/";
+		final File csvDumpDirectory = new File(csvDumpPath);
+		csvDumpDirectory.mkdir();
+		csvDumpDirectory.setExecutable(true, false);
+		csvDumpDirectory.setReadable(true, false);
+		csvDumpDirectory.setWritable(true, false);
+
+		final String csvDumpCommand = mySqlDumpCommandBase + " --fields-terminated-by=, --tab=\"" + csvDumpPath + "\"";
+		MySqlProcess.runShell(csvDumpCommand);
 
 		// convert MySQL dump to SQLite-compatible format
 		final String sqliteDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-sqlite.sql";
-		final String sqliteDump = gc.getConfigBase().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mySqlDumpPath + " > " + sqliteDumpPath;
+		final String sqliteDump = gc.getConfigBase().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + csvDumpPath + " > " + sqliteDumpPath;
 		MySqlProcess.runShell(sqliteDump);
 	}
 
