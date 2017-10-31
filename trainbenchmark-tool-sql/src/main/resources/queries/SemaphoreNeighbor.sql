@@ -1,4 +1,4 @@
-SELECT DISTINCT
+SELECT
     Route1.exit AS semaphore,
     Route1.id AS route1,
     Route2.id AS route2,

@@ -1,4 +1,4 @@
-SELECT DISTINCT
+SELECT
     mb1.Sensor_id AS sensor,
     ct1.TrackElement1_id AS segment1,
     ct2.TrackElement1_id AS segment2,

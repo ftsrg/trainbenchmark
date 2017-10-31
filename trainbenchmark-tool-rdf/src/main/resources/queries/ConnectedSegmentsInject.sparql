@@ -1,12 +1,12 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?sensor ?segment1 ?segment3
-WHERE { 
+SELECT ?sensor ?segment1 ?segment3
+WHERE {
 	?segment1 base:connectsTo ?segment3 .
 	?segment1 base:monitoredBy ?sensor .
 	?segment3 base:monitoredBy ?sensor .
-	
+
 	?sensor rdf:type base:Sensor .
 	?segment1 rdf:type base:Segment .
 	?segment3 rdf:type base:Segment .

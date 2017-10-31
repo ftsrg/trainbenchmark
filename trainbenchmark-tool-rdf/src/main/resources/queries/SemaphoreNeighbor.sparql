@@ -1,7 +1,7 @@
 PREFIX base: <http://www.semanticweb.org/ontologies/2015/trainbenchmark#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT DISTINCT ?semaphore ?route1 ?route2 ?sensor1 ?sensor2 ?te1 ?te2
+SELECT ?semaphore ?route1 ?route2 ?sensor1 ?sensor2 ?te1 ?te2
 WHERE
 {
 	?route1 base:exit ?semaphore .

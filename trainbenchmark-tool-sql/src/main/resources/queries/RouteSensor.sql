@@ -1,4 +1,4 @@
-SELECT DISTINCT
+SELECT
 	Route.id AS route,
 	Sensor.id AS sensor,
 	SwitchPosition.id AS swP,
