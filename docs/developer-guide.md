@@ -3,7 +3,7 @@
 ## Projects
 
 * The **generator projects** are responsible for generating instance models. For each format, there is a separate generator project, named `trainbenchmark-generator-*`.
-* The **benchmark projects** are responsible for implementing the benchmarks to a specific tool (a database or a query engine). For each tool, there is a separate benchmark project, named `trainbenchmark-tool-*``
+* The **benchmark projects** are responsible for implementing the benchmarks to a specific tool (a database or a query engine). For each tool, there is a separate benchmark project, named `trainbenchmark-tool-*`
 
 Currently, the following formats and tools are supported.
 
