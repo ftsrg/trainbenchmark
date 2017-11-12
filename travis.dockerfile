@@ -8,5 +8,3 @@ COPY trainbenchmark-reporting/install.R /install.R
 
 RUN Rscript /install.R
 
-CMD ["gradle", "initScript", "build", "-x", ":trainbenchmark-generator-sql:test", "-x", ":trainbenchmark-tool-mysql:test", "-x", ":trainbenchmark-tool-sqlite:test", "--stacktrace", "--continue"]
-
