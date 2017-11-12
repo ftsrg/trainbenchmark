@@ -8,3 +8,7 @@ COPY trainbenchmark-reporting/install.R /install.R
 
 RUN Rscript /install.R
 
+COPY scripts/get-neo4j.sh /get-neo4j.sh
+
+RUN /get-neo4j.sh
+
