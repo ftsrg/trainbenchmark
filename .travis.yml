@@ -14,8 +14,6 @@ env:
     - secure: dVBQFFLIQ9TMySqOGLCGUQ9IREAw9F3LgfLQyyvzg4s+xeVdPxBciOLfV3+FtXrC6A4VM3oKTuvpMbkEjas8G3iiQELiZrtDP+uHhNWejyRnJ7AFBUppDjbPiIlAvjGT1wjdV0zf7RjdEl/TjAp0/xR0Ktesevtt8kMSV+buSgk=
 install: true
 script:
-- scripts/get-neo4j.sh
-- ./gradlew inits build -x :trainbenchmark-generator-sql:test -x :trainbenchmark-tool-mysql:test -x :trainbenchmark-tool-sqlite:test --stacktrace --continue
 - scripts/deploy.sh
 notifications:
   slack: ftsrg:YMFDeJB1YkOli9BXOKvtoB1Y
