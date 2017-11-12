@@ -3,7 +3,9 @@ language: java
 services: 
 - docker
 before_install:
--docker build --no-cache=true -f travis.dockerfile .
+- docker build --no-cache=true -f travis.dockerfile . -t trainbenchmark
+- docker ps -a
+- docker run -d trainbenchmark /bin/sh -c "./gradlew inits build -x :trainbenchmark-generator-sql:test -x :trainbenchmark-tool-mysql:test -x :trainbenchmark-tool-sqlite:test --stacktrace --continue"
 jdk:
 - oraclejdk8
 env:
