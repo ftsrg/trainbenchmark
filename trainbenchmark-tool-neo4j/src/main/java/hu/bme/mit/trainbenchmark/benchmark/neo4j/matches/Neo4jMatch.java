@@ -19,7 +19,7 @@ import java.util.Map;
 
 public abstract class Neo4jMatch extends BaseMatch {
 
-	protected Map<String, Object> match;
+	protected final Map<String, Object> match;
 
 	public Neo4jMatch(final Map<String, Object> match) {
 		this.match = match;
