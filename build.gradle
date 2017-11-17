@@ -44,7 +44,7 @@ ext {
 	kryoVersion = '4.0.1'
 	mySqlConnectorVersion = '5.1.44'
 	neo4jVersion = '3.2.7'
-	neo4jApocVersion = '3.2.0.4'
+	neo4jApocVersion = '3.2.3.5'
 	orientDbVersion = '3.0.0m2'
 	sesameVersion = '2.9.0'
 	slf4jVersion = '1.7.10'
