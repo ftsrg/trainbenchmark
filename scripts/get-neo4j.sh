@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NEO4J_VERSION=3.2.7
+NEO4J_VERSION=3.3.0
 
 cd "$( cd "$( dirname "$0" )" && pwd )/../"
 rm -rf neo4j-server
