@@ -51,7 +51,6 @@ public class Neo4jDriver extends Driver {
 	protected final String NEO4J_HOME = "../neo4j-server/";
 	protected final File databaseDirectory;
 
-
 	public Neo4jDriver(final String modelDir, final Neo4jDeployment deployment, final Neo4jGraphFormat graphFormat) throws IOException {
 		super();
 		this.deployment = deployment;
@@ -106,17 +105,17 @@ public class Neo4jDriver extends Driver {
 	public void read(final String modelPath)
 		throws XMLStreamException, IOException, KernelException {
 		switch (graphFormat) {
-		case CSV:
-			readCsv(modelPath);
-			break;
-		case GRAPHML:
-			readGraphMl(modelPath);
-			break;
-		case CYPHER:
-			readCypher(modelPath);
-			break;
-		default:
-			throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
+			case CSV:
+				readCsv(modelPath);
+				break;
+			case GRAPHML:
+				readGraphMl(modelPath);
+				break;
+			case CYPHER:
+				readCypher(modelPath);
+				break;
+			default:
+				throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
 		}
 	}
 
@@ -139,31 +138,31 @@ public class Neo4jDriver extends Driver {
 
 	private void readCsv(String modelPath) throws IOException {
 		if (databaseDirectory.exists()) {
-		  FileUtils.deleteDirectory(databaseDirectory);
+			FileUtils.deleteDirectory(databaseDirectory);
 		}
 
 		final String rawImportCommand = "%NEO4J_HOME%/bin/neo4j-admin import " //
 			+ "--mode=csv " //
 			+ "--database=railway-database " //
 			+ "--id-type=INTEGER " //
-		    + "--nodes:Region %MODEL_PREFIX%-Region.csv " //
-		    + "--nodes:Route %MODEL_PREFIX%-Route.csv " //
-		    + "--nodes:Segment:TrackElement %MODEL_PREFIX%-Segment.csv " //
-		    + "--nodes:Semaphore %MODEL_PREFIX%-Semaphore.csv " //
-		    + "--nodes:Sensor %MODEL_PREFIX%-Sensor.csv " //
-		    + "--nodes:Switch:TrackElement %MODEL_PREFIX%-Switch.csv " //
-		    + "--nodes:SwitchPosition %MODEL_PREFIX%-SwitchPosition.csv " //
-		    + "--relationships:connectsTo %MODEL_PREFIX%-connectsTo.csv " //
-		    + "--relationships:entry %MODEL_PREFIX%-entry.csv " //
-		    + "--relationships:exit %MODEL_PREFIX%-exit.csv "//
-		    + "--relationships:follows %MODEL_PREFIX%-follows.csv "//
-		    + "--relationships:monitoredBy %MODEL_PREFIX%-monitoredBy.csv "//
-		    + "--relationships:requires %MODEL_PREFIX%-requires.csv "//
-		    + "--relationships:target %MODEL_PREFIX%-target.csv";
+			+ "--nodes:Region %MODEL_PREFIX%-Region.csv " //
+			+ "--nodes:Route %MODEL_PREFIX%-Route.csv " //
+			+ "--nodes:Segment:TrackElement %MODEL_PREFIX%-Segment.csv " //
+			+ "--nodes:Semaphore %MODEL_PREFIX%-Semaphore.csv " //
+			+ "--nodes:Sensor %MODEL_PREFIX%-Sensor.csv " //
+			+ "--nodes:Switch:TrackElement %MODEL_PREFIX%-Switch.csv " //
+			+ "--nodes:SwitchPosition %MODEL_PREFIX%-SwitchPosition.csv " //
+			+ "--relationships:connectsTo %MODEL_PREFIX%-connectsTo.csv " //
+			+ "--relationships:entry %MODEL_PREFIX%-entry.csv " //
+			+ "--relationships:exit %MODEL_PREFIX%-exit.csv "//
+			+ "--relationships:follows %MODEL_PREFIX%-follows.csv "//
+			+ "--relationships:monitoredBy %MODEL_PREFIX%-monitoredBy.csv "//
+			+ "--relationships:requires %MODEL_PREFIX%-requires.csv "//
+			+ "--relationships:target %MODEL_PREFIX%-target.csv";
 		final String importCommand = rawImportCommand //
-		    .replaceAll("%NEO4J_HOME%", NEO4J_HOME) //
-		    .replaceAll("%DB_PATH%", databaseDirectory.getPath()) //
-		    .replaceAll("%MODEL_PREFIX%", modelPath);
+			.replaceAll("%NEO4J_HOME%", NEO4J_HOME) //
+			.replaceAll("%DB_PATH%", databaseDirectory.getPath()) //
+			.replaceAll("%MODEL_PREFIX%", modelPath);
 		final CommandLine cmdLine = CommandLine.parse(importCommand);
 		final DefaultExecutor executor = new DefaultExecutor();
 		final int exitValue = executor.execute(cmdLine);
@@ -176,10 +175,10 @@ public class Neo4jDriver extends Driver {
 	private void readCypher(String modelPath) throws IOException {
 		startDb();
 		final File cypherFile = new File(modelPath);
-		try(final Transaction t = graphDb.beginTx()) {
+		try (final Transaction t = graphDb.beginTx()) {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(cypherFile));
 			String line = null;
-			while ((line = bufferedReader.readLine()) != null){
+			while ((line = bufferedReader.readLine()) != null) {
 				graphDb.execute(line);
 			}
 			t.success();
@@ -202,14 +201,14 @@ public class Neo4jDriver extends Driver {
 	@Override
 	public String getPostfix() {
 		switch (graphFormat) {
-		case CSV:
-			return ""; // hack as we have multiple CSVs
-		case GRAPHML:
-			return Neo4jConstants.GRAPHML_POSTFIX;
-		case CYPHER:
-			return ".cypher";
-		default:
-			throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
+			case CSV:
+				return ""; // hack as we have multiple CSVs
+			case GRAPHML:
+				return Neo4jConstants.GRAPHML_POSTFIX;
+			case CYPHER:
+				return ".cypher";
+			default:
+				throw new UnsupportedOperationException("Format " + graphFormat + " not supported");
 		}
 	}
 
@@ -226,7 +225,7 @@ public class Neo4jDriver extends Driver {
 	}
 
 	public void runTransformation(final String transformationDefinition, final Map<String, Object> parameters)
-			throws IOException {
+		throws IOException {
 		graphDb.execute(transformationDefinition, parameters);
 	}
 
