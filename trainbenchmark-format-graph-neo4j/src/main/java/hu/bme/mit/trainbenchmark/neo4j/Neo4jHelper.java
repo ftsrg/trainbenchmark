@@ -14,7 +14,7 @@ public class Neo4jHelper {
 	public static GraphDatabaseBuilder getBuilder(final Neo4jDeployment deployment, final File graphDatabaseDirectory) {
 		switch (deployment) {
 			case EMBEDDED:
-				return new GraphDatabaseFactory() .newEmbeddedDatabaseBuilder(graphDatabaseDirectory);
+				return new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(graphDatabaseDirectory);
 			case IN_MEMORY:
 				return new TestGraphDatabaseFactory().newImpermanentDatabaseBuilder();
 		}
