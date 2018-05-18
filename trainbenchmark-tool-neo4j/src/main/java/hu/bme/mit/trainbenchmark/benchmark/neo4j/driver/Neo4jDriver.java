@@ -26,8 +26,11 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.io.FileUtils;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.event.TransactionData;
+import org.neo4j.graphdb.event.TransactionEventHandler;
 import org.neo4j.graphdb.schema.Schema;
 import org.neo4j.kernel.api.exceptions.KernelException;
 
@@ -39,6 +42,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -121,6 +125,29 @@ public class Neo4jDriver extends Driver {
 
 	private void startDb() {
 		graphDb = Neo4jHelper.startGraphDatabase(deployment, databaseDirectory);
+
+		graphDb.registerTransactionEventHandler(
+			new TransactionEventHandler<Void>() {
+				@Override
+				public Void beforeCommit(TransactionData data) throws Exception {
+					System.out.println("Committing transaction");
+					return null;
+				}
+
+				@Override
+				public void afterCommit(TransactionData data, Void state) {
+					System.out.println("Committed transaction");
+					final Iterator<Relationship> iterator = data.deletedRelationships().iterator();
+					while (iterator.hasNext()) {
+						System.out.println(iterator.next());
+					}
+				}
+
+				@Override
+				public void afterRollback(TransactionData data, Void state) {
+					System.out.println("Transaction rolled back");
+				}
+			});
 
 		try (final Transaction t = graphDb.beginTx()) {
 			final Schema schema = graphDb.schema();
@@ -226,6 +253,7 @@ public class Neo4jDriver extends Driver {
 
 	public void runTransformation(final String transformationDefinition, final Map<String, Object> parameters)
 		throws IOException {
+
 		graphDb.execute(transformationDefinition, parameters);
 	}
 

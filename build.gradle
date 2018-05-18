@@ -45,6 +45,7 @@ ext {
 	mySqlConnectorVersion = '5.1.44'
 	neo4jVersion = '3.3.0'
 	neo4jApocVersion = '3.3.0.1'
+	graphawareVersion = '3.3.5.52'
 	orientDbVersion = '3.0.0m2'
 	sesameVersion = '2.9.0'
 	slf4jVersion = '1.7.10'
