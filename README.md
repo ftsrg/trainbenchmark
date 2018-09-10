@@ -22,15 +22,23 @@
 :page_facing_up: **Citing the benchmark.** For referencing the benchmark, please cite the paper in [Software and Systems Modeling](http://link.springer.com/article/10.1007/s10270-016-0571-8) with the following BibTeX snippet.
 
 ```
-@article{TrainBenchmark2017,
-  author="Sz{\'a}rnyas, G{\'a}bor and Izs{\'o}, Benedek and R{\'a}th, Istv{\'a}n and Varr{\'o}, D{\'a}niel",
-  title="The Train Benchmark: cross-technology performance evaluation of continuous model queries",
-  journal="Software {\&} Systems Modeling",
-  year="2017",
-  pages="1--29",
-  issn="1619-1374",
-  doi="10.1007/s10270-016-0571-8",
-  url="http://dx.doi.org/10.1007/s10270-016-0571-8"
+@article{DBLP:journals/sosym/SzarnyasIRV18,
+  author    = {G{\'{a}}bor Sz{\'{a}}rnyas and
+               Benedek Izs{\'{o}} and
+               Istv{\'{a}}n R{\'{a}}th and
+               D{\'{a}}niel Varr{\'{o}}},
+  title     = {The Train Benchmark: cross-technology performance evaluation of continuous
+               model queries},
+  journal   = {Software and System Modeling},
+  volume    = {17},
+  number    = {4},
+  pages     = {1365--1393},
+  year      = {2018},
+  url       = {https://doi.org/10.1007/s10270-016-0571-8},
+  doi       = {10.1007/s10270-016-0571-8},
+  timestamp = {Fri, 07 Sep 2018 14:25:47 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/sosym/SzarnyasIRV18},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
 
