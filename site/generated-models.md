@@ -43,15 +43,3 @@ layout: default
 
 {% for file in site.static_files %}{% if file.name contains "-metamodel.ttl" %}* [{{ file.path | remove: "/models/railway-" }}]({{ site.baseurl }}{{ file.path }})
 {% endif %}{% endfor %}
-
-### SQL
-
-#### Raw
-
-{% for file in site.static_files %}{% if file.name contains "-raw.sql" %}* [{{ file.path | remove: "/models/railway-" }}]({{ site.baseurl }}{{ file.path }})
-{% endif %}{% endfor %}
-
-#### MySQL
-
-{% for file in site.static_files %}{% if file.name contains "-mysql.sql" %}* [{{ file.path | remove: "/models/railway-" }}]({{ site.baseurl }}{{ file.path }})
-{% endif %}{% endfor %}
