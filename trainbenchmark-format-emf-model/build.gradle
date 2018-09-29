@@ -25,6 +25,10 @@ sourceSets {
 	}
 }
 
+configurations.all {
+	resolutionStrategy.force 'org.antlr:antlr-runtime:3.2'
+}
+
 xtext {
 	version = "${xtextVersion}"
 	languages {
