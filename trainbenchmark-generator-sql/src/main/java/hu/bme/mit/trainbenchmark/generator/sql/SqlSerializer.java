@@ -112,7 +112,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 		// dump to standard MySQL format
 		final String mySqlDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-mysql.sql";
 		final String mySqlDumpCommand = mySqlDumpCommandBase + //
-			" --database trainbenchmark > " + mySqlDumpPath;
+			" --databases trainbenchmark > " + mySqlDumpPath;
 		MySqlProcess.runShell(mySqlDumpCommand);
 
 		// dump to CSV format
