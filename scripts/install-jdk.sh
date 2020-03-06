@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo apt install -y openjdk8-jdk
+sudo apt install -y openjdk-8-jdk
