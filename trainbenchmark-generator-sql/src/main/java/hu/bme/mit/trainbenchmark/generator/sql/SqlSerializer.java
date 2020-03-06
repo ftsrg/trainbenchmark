@@ -129,7 +129,7 @@ public class SqlSerializer extends ModelSerializer<SqlGeneratorConfig> {
 
 		// convert MySQL dump to SQLite-compatible format
 		final String sqliteDumpPath = gc.getConfigBase().getModelPathWithoutExtension() + "-sqlite.sql";
-		final String sqliteDump = gc.getConfigBase().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + csvDumpPath + " > " + sqliteDumpPath;
+		final String sqliteDump = gc.getConfigBase().getWorkspaceDir() + SQL_SCRIPT_DIR + "mysql2sqlite.sh " + mySqlDumpPath + " > " + sqliteDumpPath;
 		MySqlProcess.runShell(sqliteDump);
 	}
 
