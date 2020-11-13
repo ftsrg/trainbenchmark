@@ -1,5 +1,5 @@
 plugins {
-    id "org.xtext.builder" version "1.0.0"
+    id "org.xtext.builder" version "2.0.8"
 }
 
 apply plugin: 'org.xtext.xtend'
