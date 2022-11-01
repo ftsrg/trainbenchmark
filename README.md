@@ -21,6 +21,8 @@
 
 :page_facing_up: **Citing the benchmark.** For referencing the benchmark, please cite the paper in [Software and Systems Modeling](http://link.springer.com/article/10.1007/s10270-016-0571-8) with the following BibTeX snippet.
 
+:triangular_ruler: **Models.** Pre-generated models for scale factors 1 to 4096 are available as a [`tar.zst` package](https://surfdrive.surf.nl/files/index.php/s/QBXOSE38sbSw1yX).
+
 ```
 @article{DBLP:journals/sosym/SzarnyasIRV18,
   author    = {G{\'{a}}bor Sz{\'{a}}rnyas and
