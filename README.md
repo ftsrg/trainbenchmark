@@ -1,7 +1,5 @@
 # Train Benchmark
 
-[![Build Status](https://travis-ci.org/FTSRG/trainbenchmark.svg?branch=master)](https://travis-ci.org/FTSRG/trainbenchmark)
-
 :steam_locomotive: **Summary.** The Train Benchmark is a framework for measuring the performance of continuous model transformations, with a particular emphasis on the performance of incremental query reevaluation. The benchmark is actively developed since 2011.
 
 :book: **Documentation.** If you are interested in implementing the benchmark on your tool, please visit the [documentation](docs/).
