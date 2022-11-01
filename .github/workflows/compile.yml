@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '11'
       - name: Build and test
         run: |
           scripts/get-neo4j.sh
